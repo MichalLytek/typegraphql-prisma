@@ -1,8 +1,8 @@
-![integration logo](https://raw.githubusercontent.com/MichalLytek/type-graphql/prisma/img/integration.png)
+![integration logo](https://raw.githubusercontent.com/MichalLytek/typegraphql-prisma/main/img/integration.png)
 
 # TypeGraphQL & Prisma 2 integration
 
-Prisma 2 generator to emit TypeGraphQL type classes and resolvers
+Prisma 2 generator to emit TypeGraphQL types and CRUD resolvers from your Prisma 2 schema
 
 ## Installation
 
@@ -12,14 +12,14 @@ Fist of all, you have to install the generator, as a dev dependency:
 npm i -D typegraphql-prisma
 ```
 
-Futhermore, `typegraphql-prisma` to work properly requires `prisma` to be, so please install prisma dependencies if you don't have it already installed:
+Futhermore, `typegraphql-prisma`  requires Prisma 2 to work properly, so please install Prisma dependencies if you don't have it already installed:
 
 ```sh
 npm i -D @prisma/cli
 npm i @prisma/client
 ```
 
-> `typegraphql-prisma` is designed to work with a selected version of `prisma` (or newer), so please make sure you use `@prisma/cli` and `@prisma/client` of version `~2.7.1`!
+> `typegraphql-prisma` is designed to work with a selected version of `prisma` (or newer), so please make sure you use `@prisma/cli` and `@prisma/client` of version `2.9.0-dev.36`!
 
 You also need to install the GraphQL JSON scalar library (to support the Prisma `Json` scalar):
 
@@ -176,7 +176,7 @@ const server = new ApolloServer({
 
 ### Nest JS
 
-In order to use generated types and resolvers classes in NestJS, you need to use the [official `typegraphql-nestjs` package](https://github.com/MichalLytek/typegraphql-nestjs). This module allows for basic integration of TypeGraphQL with NestJS. You can find an example in the [`examples/3-nest-js` folder](https://github.com/MichalLytek/type-graphql/tree/prisma/examples/3-nest-js).
+In order to use generated types and resolvers classes in NestJS, you need to use the [official `typegraphql-nestjs` package](https://github.com/MichalLytek/typegraphql-nestjs). This module allows for basic integration of TypeGraphQL with NestJS. You can find an example in the [`examples/3-nest-js` folder](https://github.com/MichalLytek/typegraphql-prisma/tree/main/examples/3-nest-js).
 
 Due to difference between TypeGraphQL and NestJS decorators, `typegraphql-prisma` doesn't work anymore with `@nestjs/graphql` from version 7.0.
 
@@ -343,7 +343,7 @@ This behavior is temporary and will be improved soon by introducing `input: true
 
 You can check out some integration examples on this repo:
 
-https://github.com/MichalLytek/type-graphql/tree/prisma/examples/Readme.md
+https://github.com/MichalLytek/typegraphql-prisma/blob/main/examples/Readme.md
 
 ## Feedback
 

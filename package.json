@@ -63,10 +63,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MichalLytek/type-graphql.git"
+    "url": "https://github.com/MichalLytek/typegraphql-prisma.git"
   },
   "bugs": {
-    "url": "https://github.com/MichalLytek/type-graphql/issues"
+    "url": "https://github.com/MichalLytek/typegraphql-prisma/issues"
   },
   "keywords": [
     "type-graphql",
