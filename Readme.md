@@ -12,7 +12,7 @@ Fist of all, you have to install the generator, as a dev dependency:
 npm i -D typegraphql-prisma
 ```
 
-Futhermore, `typegraphql-prisma`  requires Prisma 2 to work properly, so please install Prisma dependencies if you don't have it already installed:
+Furthermore, `typegraphql-prisma`  requires Prisma 2 to work properly, so please install Prisma dependencies if you don't have it already installed:
 
 ```sh
 npm i -D @prisma/cli
