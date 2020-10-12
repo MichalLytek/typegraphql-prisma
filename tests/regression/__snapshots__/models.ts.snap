@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`models should properly generate object type class for prisma model when simpleResolvers option is enabled: User 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  description: undefined,
+  simpleResolvers: true,
+})
+export class User {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false,
+    description: undefined,
+  })
+  id!: number;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false,
+    description: undefined,
+  })
+  dateOfBirth!: Date;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true,
+    description: undefined,
+  })
+  balance?: number | null;
+}
+"
+`;
+
 exports[`models should properly generate object type class for prisma model with descriptions: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
@@ -10,6 +42,7 @@ import { Post } from \\"../models/Post\\";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: \\"User model doc\\",
+  simpleResolvers: undefined,
 })
 export class User {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -45,6 +78,7 @@ import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class User {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -107,6 +141,7 @@ import { Sample } from \\"../enums/Sample\\";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class User {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -138,6 +173,7 @@ import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class User {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -172,6 +208,7 @@ import { Post } from \\"../models/Post\\";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class User {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -222,6 +259,7 @@ import { Client } from \\"../models/Client\\";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class Article {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -250,6 +288,7 @@ import { Article } from \\"../models/Article\\";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class Client {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -272,6 +311,7 @@ import { User } from \\"../models/User\\";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class Post {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -300,6 +340,7 @@ import { Post } from \\"../models/Post\\";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class User {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -321,6 +362,7 @@ import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class Service {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

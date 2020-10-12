@@ -5,6 +5,7 @@ import { JsonValue, InputJsonValue } from "../../../client";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: true,
 })
 export class PostMinAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

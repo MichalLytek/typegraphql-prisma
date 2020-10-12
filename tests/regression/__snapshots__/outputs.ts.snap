@@ -12,6 +12,7 @@ import { ExampleSumAggregateOutputType } from \\"../outputs/ExampleSumAggregateO
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class AggregateExample {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -55,6 +56,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class ExampleAvgAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
@@ -80,6 +82,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class ExampleMaxAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -105,6 +108,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class ExampleMinAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -130,6 +134,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class ExampleSumAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -169,6 +174,7 @@ import { ExampleSumAggregateOutputType } from \\"../outputs/ExampleSumAggregateO
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class AggregateExample {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -212,6 +218,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class ExampleAvgAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
@@ -237,6 +244,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class ExampleMaxAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -262,6 +270,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class ExampleMinAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -287,6 +296,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class ExampleSumAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -314,6 +324,100 @@ export { ExampleSumAggregateOutputType } from \\"./ExampleSumAggregateOutputType
 "
 `;
 
+exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: AggregateSample 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { SampleAvgAggregateOutputType } from \\"../outputs/SampleAvgAggregateOutputType\\";
+import { SampleMaxAggregateOutputType } from \\"../outputs/SampleMaxAggregateOutputType\\";
+import { SampleMinAggregateOutputType } from \\"../outputs/SampleMinAggregateOutputType\\";
+import { SampleSumAggregateOutputType } from \\"../outputs/SampleSumAggregateOutputType\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  description: undefined,
+  simpleResolvers: true,
+})
+export class AggregateSample {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false,
+    description: undefined
+  })
+  count!: number;
+
+  @TypeGraphQL.Field(_type => SampleAvgAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  avg!: SampleAvgAggregateOutputType | null;
+
+  @TypeGraphQL.Field(_type => SampleSumAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  sum!: SampleSumAggregateOutputType | null;
+
+  @TypeGraphQL.Field(_type => SampleMinAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  min!: SampleMinAggregateOutputType | null;
+
+  @TypeGraphQL.Field(_type => SampleMaxAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  max!: SampleMaxAggregateOutputType | null;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: BatchPayload 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  description: undefined,
+  simpleResolvers: true,
+})
+export class BatchPayload {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false,
+    description: undefined
+  })
+  count!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: SampleAvgAggregateOutputType 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  description: undefined,
+  simpleResolvers: true,
+})
+export class SampleAvgAggregateOutputType {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
 exports[`outputs should properly generate output type classes: AggregateSample 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
@@ -326,6 +430,7 @@ import { SampleSumAggregateOutputType } from \\"../outputs/SampleSumAggregateOut
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class AggregateSample {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -369,6 +474,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class BatchPayload {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -388,6 +494,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class SampleAvgAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
@@ -413,6 +520,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class SampleMaxAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -438,6 +546,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class SampleMinAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -463,6 +572,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class SampleSumAggregateOutputType {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

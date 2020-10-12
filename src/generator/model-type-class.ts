@@ -60,6 +60,9 @@ export default function generateObjectTypeClassFromModel(
           `{
             isAbstract: true,
             description: ${model.docs ? `"${model.docs}"` : "undefined"},
+            simpleResolvers: ${
+              dmmfDocument.options.simpleResolvers ? "true" : "undefined"
+            },
           }`,
         ],
       },

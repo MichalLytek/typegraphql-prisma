@@ -9,6 +9,7 @@ import { ProblemSumAggregateOutputType } from "../outputs/ProblemSumAggregateOut
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: true,
 })
 export class AggregateProblem {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

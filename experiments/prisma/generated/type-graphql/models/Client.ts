@@ -8,6 +8,7 @@ import { Role } from "../enums/Role";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: "User model doc",
+  simpleResolvers: true,
 })
 export class Client {
   /** User model field doc */

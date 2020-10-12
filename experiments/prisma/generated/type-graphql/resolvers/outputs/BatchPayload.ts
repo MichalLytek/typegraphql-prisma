@@ -5,6 +5,7 @@ import { JsonValue, InputJsonValue } from "../../../client";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: true,
 })
 export class BatchPayload {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

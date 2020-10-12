@@ -16,6 +16,7 @@ generator typegraphql {
   provider = "node ../src/cli/dev.ts"
   output   = "../prisma/generated/type-graphql"
   emitDMMF = true
+  simpleResolvers = true
 }
 
 // Role enum comment

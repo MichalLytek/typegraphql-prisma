@@ -152,4 +152,39 @@ describe("outputs", () => {
     expect(maxAggregateTSFile).toMatchSnapshot("ExampleMaxAggregateOutputType");
     expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
   });
+
+  it("should properly generate output type classes when simpleResolvers option is enabled", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model Sample {
+        intIdField    Int       @id @default(autoincrement())
+        stringField   String
+        floatField    Float
+        booleanField  Boolean
+        dateField     DateTime
+      }
+    `;
+
+    await generateCodeFromSchema(schema, {
+      outputDirPath,
+      simpleResolvers: true,
+    });
+    const aggregateSampleTSFile = await readGeneratedFile(
+      "/resolvers/outputs/AggregateSample.ts",
+    );
+    const avgAggregateTSFile = await readGeneratedFile(
+      "/resolvers/outputs/SampleAvgAggregateOutputType.ts",
+    );
+    const batchPayloadTSFile = await readGeneratedFile(
+      "/resolvers/outputs/BatchPayload.ts",
+    );
+
+    expect(aggregateSampleTSFile).toMatchSnapshot("AggregateSample");
+    expect(avgAggregateTSFile).toMatchSnapshot("SampleAvgAggregateOutputType");
+    expect(batchPayloadTSFile).toMatchSnapshot("BatchPayload");
+  });
 });

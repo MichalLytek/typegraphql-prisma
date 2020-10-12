@@ -59,6 +59,9 @@ export function generateOutputTypeClassFromType(
           `{
             isAbstract: true,
             description: undefined,
+            simpleResolvers: ${
+              dmmfDocument.options.simpleResolvers ? "true" : "undefined"
+            },
           }`,
         ],
       },

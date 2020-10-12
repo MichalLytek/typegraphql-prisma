@@ -223,4 +223,27 @@ describe("models", () => {
 
     expect(userModelTSFile).toMatchSnapshot("User");
   });
+
+  it("should properly generate object type class for prisma model when simpleResolvers option is enabled", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model User {
+        id           Int       @id @default(autoincrement())
+        dateOfBirth  DateTime
+        balance      Float?
+      }
+    `;
+
+    await generateCodeFromSchema(schema, {
+      outputDirPath,
+      simpleResolvers: true,
+    });
+    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+
+    expect(userModelTSFile).toMatchSnapshot("User");
+  });
 });

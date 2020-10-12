@@ -5,4 +5,5 @@ export interface GenerateCodeOptions {
   useOriginalMapping?: boolean;
   relativePrismaOutputPath: string;
   absolutePrismaOutputPath?: string;
+  simpleResolvers?: boolean;
 }

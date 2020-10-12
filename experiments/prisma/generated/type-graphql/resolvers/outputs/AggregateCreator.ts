@@ -9,6 +9,7 @@ import { CreatorSumAggregateOutputType } from "../outputs/CreatorSumAggregateOut
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: true,
 })
 export class AggregateCreator {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
