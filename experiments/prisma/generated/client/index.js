@@ -20,12 +20,12 @@ const path = require('path')
 const debug = debugLib('prisma-client')
 
 /**
- * Prisma Client JS version: 2.9.0-dev.36
- * Query Engine version: 075eb432c5e4c5e21e8a6e487df82813b7b40b22
+ * Prisma Client JS version: 2.8.1
+ * Query Engine version: 439da16b2f8314c6faca7d2dad2cdcf0732e8a9c
  */
 exports.prismaVersion = {
-  client: "2.9.0-dev.36",
-  engine: "075eb432c5e4c5e21e8a6e487df82813b7b40b22"
+  client: "2.8.1",
+  engine: "439da16b2f8314c6faca7d2dad2cdcf0732e8a9c"
 }
 
 exports.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -175,8 +175,8 @@ const config = {
   },
   "sqliteDatasourceOverrides": [],
   "relativePath": "../..",
-  "clientVersion": "2.9.0-dev.36",
-  "engineVersion": "075eb432c5e4c5e21e8a6e487df82813b7b40b22"
+  "clientVersion": "2.8.1",
+  "engineVersion": "439da16b2f8314c6faca7d2dad2cdcf0732e8a9c"
 }
 config.document = dmmf
 config.dirname = __dirname

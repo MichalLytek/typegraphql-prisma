@@ -118,3 +118,17 @@ model Creator {
   likes    Problem[]
   problems Problem[] @relation("creator")
 }
+
+// model Catalog {
+//   id                       Int          @id @default(autoincrement())
+//   productName              String?
+//   status                   curatestatus @default(unreviewed)
+//   createdAt                DateTime     @default(now())
+// }
+
+// enum curatestatus {
+//   accepted
+//   declined
+//   pending
+//   unreviewed
+// }

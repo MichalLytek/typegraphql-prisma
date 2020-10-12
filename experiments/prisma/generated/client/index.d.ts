@@ -11,7 +11,6 @@ import {
   empty,
   join,
   raw,
-  Sql,
 } from './runtime';
 
 export { PrismaClientKnownRequestError }
@@ -23,11 +22,11 @@ export { PrismaClientValidationError }
 /**
  * Re-export of sql-template-tag
  */
-export { sql, empty, join, raw, Sql }
+export { sql, empty, join, raw }
 
 /**
- * Prisma Client JS version: 2.9.0-dev.36
- * Query Engine version: 075eb432c5e4c5e21e8a6e487df82813b7b40b22
+ * Prisma Client JS version: 2.8.1
+ * Query Engine version: 439da16b2f8314c6faca7d2dad2cdcf0732e8a9c
  */
 export declare type PrismaVersion = {
   client: string
@@ -755,8 +754,8 @@ export interface UserDelegate {
    * })
   **/
   findFirst<T extends FindFirstUserArgs>(
-    args: Subset<T, FindFirstUserArgs>
-  ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+    args?: Subset<T, FindFirstUserArgs>
+  ): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>
   /**
    * Find zero or more Users that matches the filter.
    * @param {FindManyUserArgs=} args - Arguments to filter and select certain fields only.
@@ -1306,8 +1305,8 @@ export interface postDelegate {
    * })
   **/
   findFirst<T extends FindFirstpostArgs>(
-    args: Subset<T, FindFirstpostArgs>
-  ): CheckSelect<T, Prisma__postClient<post>, Prisma__postClient<postGetPayload<T>>>
+    args?: Subset<T, FindFirstpostArgs>
+  ): CheckSelect<T, Prisma__postClient<post | null>, Prisma__postClient<postGetPayload<T> | null>>
   /**
    * Find zero or more Posts that matches the filter.
    * @param {FindManypostArgs=} args - Arguments to filter and select certain fields only.
@@ -1817,8 +1816,8 @@ export interface CategoryDelegate {
    * })
   **/
   findFirst<T extends FindFirstCategoryArgs>(
-    args: Subset<T, FindFirstCategoryArgs>
-  ): CheckSelect<T, Prisma__CategoryClient<Category>, Prisma__CategoryClient<CategoryGetPayload<T>>>
+    args?: Subset<T, FindFirstCategoryArgs>
+  ): CheckSelect<T, Prisma__CategoryClient<Category | null>, Prisma__CategoryClient<CategoryGetPayload<T> | null>>
   /**
    * Find zero or more Categories that matches the filter.
    * @param {FindManyCategoryArgs=} args - Arguments to filter and select certain fields only.
@@ -2252,8 +2251,8 @@ export interface PatientDelegate {
    * })
   **/
   findFirst<T extends FindFirstPatientArgs>(
-    args: Subset<T, FindFirstPatientArgs>
-  ): CheckSelect<T, Prisma__PatientClient<Patient>, Prisma__PatientClient<PatientGetPayload<T>>>
+    args?: Subset<T, FindFirstPatientArgs>
+  ): CheckSelect<T, Prisma__PatientClient<Patient | null>, Prisma__PatientClient<PatientGetPayload<T> | null>>
   /**
    * Find zero or more Patients that matches the filter.
    * @param {FindManyPatientArgs=} args - Arguments to filter and select certain fields only.
@@ -2697,8 +2696,8 @@ export interface MovieDelegate {
    * })
   **/
   findFirst<T extends FindFirstMovieArgs>(
-    args: Subset<T, FindFirstMovieArgs>
-  ): CheckSelect<T, Prisma__MovieClient<Movie>, Prisma__MovieClient<MovieGetPayload<T>>>
+    args?: Subset<T, FindFirstMovieArgs>
+  ): CheckSelect<T, Prisma__MovieClient<Movie | null>, Prisma__MovieClient<MovieGetPayload<T> | null>>
   /**
    * Find zero or more Movies that matches the filter.
    * @param {FindManyMovieArgs=} args - Arguments to filter and select certain fields only.
@@ -3173,8 +3172,8 @@ export interface DirectorDelegate {
    * })
   **/
   findFirst<T extends FindFirstDirectorArgs>(
-    args: Subset<T, FindFirstDirectorArgs>
-  ): CheckSelect<T, Prisma__DirectorClient<Director>, Prisma__DirectorClient<DirectorGetPayload<T>>>
+    args?: Subset<T, FindFirstDirectorArgs>
+  ): CheckSelect<T, Prisma__DirectorClient<Director | null>, Prisma__DirectorClient<DirectorGetPayload<T> | null>>
   /**
    * Find zero or more Directors that matches the filter.
    * @param {FindManyDirectorArgs=} args - Arguments to filter and select certain fields only.
@@ -3706,8 +3705,8 @@ export interface ProblemDelegate {
    * })
   **/
   findFirst<T extends FindFirstProblemArgs>(
-    args: Subset<T, FindFirstProblemArgs>
-  ): CheckSelect<T, Prisma__ProblemClient<Problem>, Prisma__ProblemClient<ProblemGetPayload<T>>>
+    args?: Subset<T, FindFirstProblemArgs>
+  ): CheckSelect<T, Prisma__ProblemClient<Problem | null>, Prisma__ProblemClient<ProblemGetPayload<T> | null>>
   /**
    * Find zero or more Problems that matches the filter.
    * @param {FindManyProblemArgs=} args - Arguments to filter and select certain fields only.
@@ -4231,8 +4230,8 @@ export interface CreatorDelegate {
    * })
   **/
   findFirst<T extends FindFirstCreatorArgs>(
-    args: Subset<T, FindFirstCreatorArgs>
-  ): CheckSelect<T, Prisma__CreatorClient<Creator>, Prisma__CreatorClient<CreatorGetPayload<T>>>
+    args?: Subset<T, FindFirstCreatorArgs>
+  ): CheckSelect<T, Prisma__CreatorClient<Creator | null>, Prisma__CreatorClient<CreatorGetPayload<T> | null>>
   /**
    * Find zero or more Creators that matches the filter.
    * @param {FindManyCreatorArgs=} args - Arguments to filter and select certain fields only.
