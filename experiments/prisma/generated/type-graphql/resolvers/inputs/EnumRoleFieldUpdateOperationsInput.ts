@@ -12,5 +12,5 @@ export class EnumRoleFieldUpdateOperationsInput {
     nullable: true,
     description: undefined
   })
-  set?: typeof Role[keyof typeof Role] | undefined;
+  set?: "USER" | "ADMIN" | undefined;
 }

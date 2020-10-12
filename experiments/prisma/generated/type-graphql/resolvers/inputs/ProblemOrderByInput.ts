@@ -12,17 +12,17 @@ export class ProblemOrderByInput {
     nullable: true,
     description: undefined
   })
-  id?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  id?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  problemText?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  problemText?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  creatorId?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  creatorId?: "asc" | "desc" | undefined;
 }

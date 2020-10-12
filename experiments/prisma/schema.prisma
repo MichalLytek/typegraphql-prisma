@@ -31,7 +31,7 @@ enum Role {
 model User {
   // User model field comment
   /// User model field doc
-  id          Int     @default(autoincrement()) @id
+  id          Int     @id @default(autoincrement())
   email       String  @unique
   /// renamed field doc
   /// @TypeGraphQL.field(name: "firstName")
@@ -53,7 +53,7 @@ enum PostKind {
 }
 
 model post {
-  uuid      String    @default(uuid()) @id
+  uuid      String    @id @default(uuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   published Boolean
@@ -64,7 +64,7 @@ model post {
   author    User      @relation(fields: [authorId], references: [id], name: "posts")
   authorId  Int
   /// @TypeGraphQL.omit(output: true)
-  editor    User?      @relation(fields: [editorId], references: [id], name: "editorPosts")
+  editor    User?     @relation(fields: [editorId], references: [id], name: "editorPosts")
   /// @TypeGraphQL.omit(output: true)
   editorId  Int?
   kind      PostKind?
@@ -105,7 +105,7 @@ model Director {
 }
 
 model Problem {
-  id          Int       @default(autoincrement()) @id
+  id          Int       @id @default(autoincrement())
   problemText String
   likedBy     Creator[]
   creator     Creator?  @relation(name: "creator", fields: [creatorId], references: [id])
@@ -113,8 +113,22 @@ model Problem {
 }
 
 model Creator {
-  id       Int       @default(autoincrement()) @id
+  id       Int       @id @default(autoincrement())
   name     String
   likes    Problem[]
   problems Problem[] @relation("creator")
 }
+
+// model Catalog {
+//   id                       Int          @id @default(autoincrement())
+//   productName              String?
+//   status                   curatestatus @default(unreviewed)
+//   createdAt                DateTime     @default(now())
+// }
+
+// enum curatestatus {
+//   accepted
+//   declined
+//   pending
+//   unreviewed
+// }

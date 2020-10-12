@@ -23,5 +23,5 @@ export class FindFirstPostArgs {
   skip?: number | undefined;
 
   @TypeGraphQL.Field(_type => [PostDistinctFieldEnum], { nullable: true })
-  distinct?: Array<typeof PostDistinctFieldEnum[keyof typeof PostDistinctFieldEnum]> | undefined;
+  distinct?: Array<"uuid" | "createdAt" | "updatedAt" | "published" | "title" | "subtitle" | "content" | "authorId" | "editorId" | "kind" | "metadata"> | undefined;
 }

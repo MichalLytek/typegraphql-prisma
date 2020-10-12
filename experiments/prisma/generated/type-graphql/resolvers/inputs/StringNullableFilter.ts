@@ -73,7 +73,7 @@ export class StringNullableFilter {
     nullable: true,
     description: undefined
   })
-  mode?: typeof QueryMode[keyof typeof QueryMode] | undefined;
+  mode?: "default" | "insensitive" | undefined;
 
   @TypeGraphQL.Field(_type => NestedStringNullableFilter, {
     nullable: true,

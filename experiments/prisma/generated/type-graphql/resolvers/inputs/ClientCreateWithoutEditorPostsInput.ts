@@ -35,7 +35,7 @@ export class ClientCreateWithoutEditorPostsInput {
     nullable: false,
     description: undefined
   })
-  role!: typeof Role[keyof typeof Role];
+  role!: "USER" | "ADMIN";
 
   posts?: PostCreateManyWithoutAuthorInput | undefined;
 

@@ -125,7 +125,7 @@ export class User {
     nullable: false,
     description: undefined,
   })
-  enumField!: typeof Sample[keyof typeof Sample];
+  enumField!: \\"SAMPLE\\";
 }
 "
 `;

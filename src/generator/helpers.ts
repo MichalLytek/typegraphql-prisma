@@ -25,7 +25,10 @@ export function getFieldTSType(
           : typeInfo.type.replace(modelName, typeName);
     }
   } else if (typeInfo.kind === "enum") {
-    TSType = `typeof ${typeInfo.type}[keyof typeof ${typeInfo.type}]`;
+    const enumDef = dmmfDocument.enums.find(
+      it => it.typeName == typeInfo.type,
+    )!;
+    TSType = enumDef.valuesMap.map(({ value }) => `"${value}"`).join(" | ");
   } else {
     throw new Error(`Unsupported field type kind: ${typeInfo.kind}`);
   }

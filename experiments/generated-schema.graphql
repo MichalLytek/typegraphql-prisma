@@ -814,6 +814,7 @@ type Mutation {
   createPatient(data: PatientCreateInput!): Patient!
   createPost(data: PostCreateInput!): Post!
   createProblem(data: ProblemCreateInput!): Problem!
+  customCreatePost(data: PostCreateInput!): Post!
   deleteCategory(where: CategoryWhereUniqueInput!): Category
   deleteClient(where: ClientWhereUniqueInput!): Client
   deleteCreator(where: CreatorWhereUniqueInput!): Creator

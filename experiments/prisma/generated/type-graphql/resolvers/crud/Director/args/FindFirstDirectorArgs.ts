@@ -23,5 +23,5 @@ export class FindFirstDirectorArgs {
   skip?: number | undefined;
 
   @TypeGraphQL.Field(_type => [DirectorDistinctFieldEnum], { nullable: true })
-  distinct?: Array<typeof DirectorDistinctFieldEnum[keyof typeof DirectorDistinctFieldEnum]> | undefined;
+  distinct?: Array<"firstName" | "lastName"> | undefined;
 }

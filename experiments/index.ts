@@ -7,6 +7,7 @@ import {
   FieldResolver,
   Ctx,
   Args,
+  Mutation,
 } from "type-graphql";
 import { ApolloServer } from "apollo-server";
 import path from "path";
@@ -32,6 +33,7 @@ import {
   FindManyClientArgs,
   ProblemRelationsResolver,
   CreatorRelationsResolver,
+  CreatePostArgs,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
@@ -68,6 +70,14 @@ class PostResolver {
   @Query(returns => [Post])
   async allPosts(@Ctx() { prisma }: Context): Promise<Post[]> {
     return (await prisma.post.findMany()) as Post[];
+  }
+
+  @Mutation(returns => Post)
+  async customCreatePost(
+    @Ctx() { prisma }: Context,
+    @Args() args: CreatePostArgs,
+  ): Promise<Post> {
+    return await prisma.post.create(args);
   }
 }
 

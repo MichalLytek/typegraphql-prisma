@@ -12,17 +12,17 @@ export class CategoryOrderByInput {
     nullable: true,
     description: undefined
   })
-  name?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  name?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  slug?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  slug?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  number?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  number?: "asc" | "desc" | undefined;
 }

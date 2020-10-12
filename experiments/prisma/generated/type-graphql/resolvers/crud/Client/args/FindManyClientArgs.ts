@@ -23,5 +23,5 @@ export class FindManyClientArgs {
   skip?: number | undefined;
 
   @TypeGraphQL.Field(_type => [ClientDistinctFieldEnum], { nullable: true })
-  distinct?: Array<typeof ClientDistinctFieldEnum[keyof typeof ClientDistinctFieldEnum]> | undefined;
+  distinct?: Array<"id" | "email" | "name" | "age" | "balance" | "amount" | "role"> | undefined;
 }

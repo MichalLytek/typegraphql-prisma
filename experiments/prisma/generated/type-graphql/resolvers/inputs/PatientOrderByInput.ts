@@ -12,17 +12,17 @@ export class PatientOrderByInput {
     nullable: true,
     description: undefined
   })
-  firstName?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  firstName?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  lastName?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  lastName?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  email?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  email?: "asc" | "desc" | undefined;
 }

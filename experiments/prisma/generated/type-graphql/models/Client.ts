@@ -46,7 +46,7 @@ export class Client {
     nullable: false,
     description: undefined,
   })
-  role!: typeof Role[keyof typeof Role];
+  role!: "USER" | "ADMIN";
 
   editorPosts?: Post[] | null;
 

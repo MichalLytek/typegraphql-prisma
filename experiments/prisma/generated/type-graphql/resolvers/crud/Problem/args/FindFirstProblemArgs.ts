@@ -23,5 +23,5 @@ export class FindFirstProblemArgs {
   skip?: number | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemDistinctFieldEnum], { nullable: true })
-  distinct?: Array<typeof ProblemDistinctFieldEnum[keyof typeof ProblemDistinctFieldEnum]> | undefined;
+  distinct?: Array<"id" | "problemText" | "creatorId"> | undefined;
 }

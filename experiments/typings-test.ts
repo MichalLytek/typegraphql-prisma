@@ -8,8 +8,18 @@ process.exit(1);
 declare const findManyClientArgs: TypeGraphQLPrisma.FindManyClientArgs;
 const prismaFindManyUserArgs: Prisma.FindManyUserArgs = findManyClientArgs;
 
-declare const client: TypeGraphQLPrisma.Client;
-const prismaUser: Prisma.User = client;
+declare const clientInput: TypeGraphQLPrisma.Client;
+const prismaUserOutput: Prisma.User = clientInput;
+
+// TODO: fix renamed fields - getters
+// declare const prismaUserInput: Prisma.User;
+// const clientOutput: TypeGraphQLPrisma.Client = prismaUserInput;
+
+declare const prismaPostInput: Prisma.post;
+const postOutput: TypeGraphQLPrisma.Post = prismaPostInput;
+
+declare const postCreateInput: TypeGraphQLPrisma.PostCreateInput;
+const prismaPostCreateInput: Prisma.postCreateInput = postCreateInput;
 
 declare const createClientArgs: TypeGraphQLPrisma.CreateClientArgs;
 const prismaUserCreateArgs: Prisma.UserCreateArgs = createClientArgs;

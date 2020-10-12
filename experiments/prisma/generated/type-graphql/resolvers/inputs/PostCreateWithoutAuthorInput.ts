@@ -55,7 +55,7 @@ export class PostCreateWithoutAuthorInput {
     nullable: true,
     description: undefined
   })
-  kind?: typeof PostKind[keyof typeof PostKind] | undefined;
+  kind?: "BLOG" | "ADVERT" | undefined;
 
   @TypeGraphQL.Field(_type => GraphQLJSON, {
     nullable: false,

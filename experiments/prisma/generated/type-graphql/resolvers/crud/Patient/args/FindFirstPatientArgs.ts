@@ -23,5 +23,5 @@ export class FindFirstPatientArgs {
   skip?: number | undefined;
 
   @TypeGraphQL.Field(_type => [PatientDistinctFieldEnum], { nullable: true })
-  distinct?: Array<typeof PatientDistinctFieldEnum[keyof typeof PatientDistinctFieldEnum]> | undefined;
+  distinct?: Array<"firstName" | "lastName" | "email"> | undefined;
 }

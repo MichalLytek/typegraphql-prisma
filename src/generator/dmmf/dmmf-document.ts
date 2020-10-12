@@ -24,14 +24,17 @@ export class DmmfDocument implements DMMF.Document {
   ) {
     // transform bare model without fields
     this.models = datamodel.models.map(transformBareModel);
+    // transform enums before model fields to map enum types to enum values string union
+    this.enums = schema.enums.map(transformEnums(this));
     // then transform once again to map the fields (it requires mapped model type names)
     this.models = datamodel.models.map(transformModelWithFields(this));
+    // transform enums again to map renamed fields
+    this.enums = schema.enums.map(transformEnums(this));
 
     this.datamodel = {
       models: this.models,
       enums: datamodel.enums.map(transformEnums(this)),
     };
-    this.enums = schema.enums.map(transformEnums(this));
     this.schema = {
       ...transformSchema(schema, this),
       enums: this.enums,

@@ -12,19 +12,19 @@ export class NestedEnumPostKindNullableFilter {
     nullable: true,
     description: undefined
   })
-  equals?: typeof PostKind[keyof typeof PostKind] | undefined;
+  equals?: "BLOG" | "ADVERT" | undefined;
 
   @TypeGraphQL.Field(_type => [PostKind], {
     nullable: true,
     description: undefined
   })
-  in?: Array<typeof PostKind[keyof typeof PostKind]> | undefined;
+  in?: Array<"BLOG" | "ADVERT"> | undefined;
 
   @TypeGraphQL.Field(_type => [PostKind], {
     nullable: true,
     description: undefined
   })
-  notIn?: Array<typeof PostKind[keyof typeof PostKind]> | undefined;
+  notIn?: Array<"BLOG" | "ADVERT"> | undefined;
 
   @TypeGraphQL.Field(_type => NestedEnumPostKindNullableFilter, {
     nullable: true,

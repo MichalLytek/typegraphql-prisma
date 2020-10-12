@@ -23,5 +23,5 @@ export class FindManyCreatorArgs {
   skip?: number | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorDistinctFieldEnum], { nullable: true })
-  distinct?: Array<typeof CreatorDistinctFieldEnum[keyof typeof CreatorDistinctFieldEnum]> | undefined;
+  distinct?: Array<"id" | "name"> | undefined;
 }

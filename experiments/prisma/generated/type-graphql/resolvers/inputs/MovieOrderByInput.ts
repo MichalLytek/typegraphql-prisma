@@ -12,17 +12,17 @@ export class MovieOrderByInput {
     nullable: true,
     description: undefined
   })
-  directorFirstName?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  directorFirstName?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  directorLastName?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  directorLastName?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  title?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  title?: "asc" | "desc" | undefined;
 }
