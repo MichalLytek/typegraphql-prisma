@@ -7,28 +7,16 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
   simpleResolvers: true,
 })
-export class ClientMinAggregateOutputType {
+export class PostSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
     description: undefined
   })
-  id!: number;
+  authorId!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  age!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
-  })
-  balance!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
-  })
-  amount!: number;
+  editorId!: number | null;
 }

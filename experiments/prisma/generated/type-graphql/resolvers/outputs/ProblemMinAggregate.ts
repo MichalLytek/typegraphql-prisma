@@ -7,7 +7,7 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
   simpleResolvers: true,
 })
-export class ProblemMinAggregateOutputType {
+export class ProblemMinAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
     description: undefined

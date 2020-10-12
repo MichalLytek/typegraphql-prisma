@@ -7,10 +7,16 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
   simpleResolvers: true,
 })
-export class CategoryMaxAggregateOutputType {
+export class ProblemMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
     description: undefined
   })
-  number!: number;
+  id!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true,
+    description: undefined
+  })
+  creatorId!: number | null;
 }

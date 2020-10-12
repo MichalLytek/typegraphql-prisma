@@ -209,22 +209,22 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       AggregateUser.js
       BatchPayload.d.ts
       BatchPayload.js
-      PostAvgAggregateOutputType.d.ts
-      PostAvgAggregateOutputType.js
-      PostMaxAggregateOutputType.d.ts
-      PostMaxAggregateOutputType.js
-      PostMinAggregateOutputType.d.ts
-      PostMinAggregateOutputType.js
-      PostSumAggregateOutputType.d.ts
-      PostSumAggregateOutputType.js
-      UserAvgAggregateOutputType.d.ts
-      UserAvgAggregateOutputType.js
-      UserMaxAggregateOutputType.d.ts
-      UserMaxAggregateOutputType.js
-      UserMinAggregateOutputType.d.ts
-      UserMinAggregateOutputType.js
-      UserSumAggregateOutputType.d.ts
-      UserSumAggregateOutputType.js
+      PostAvgAggregate.d.ts
+      PostAvgAggregate.js
+      PostMaxAggregate.d.ts
+      PostMaxAggregate.js
+      PostMinAggregate.d.ts
+      PostMinAggregate.js
+      PostSumAggregate.d.ts
+      PostSumAggregate.js
+      UserAvgAggregate.d.ts
+      UserAvgAggregate.js
+      UserMaxAggregate.d.ts
+      UserMaxAggregate.js
+      UserMinAggregate.d.ts
+      UserMinAggregate.js
+      UserSumAggregate.d.ts
+      UserSumAggregate.js
       index.d.ts
       index.js
     [relations]
@@ -355,14 +355,14 @@ exports[`structure should generate proper folders and file names when model is r
       AggregateRenamedPost.ts
       AggregateRenamedUser.ts
       BatchPayload.ts
-      RenamedPostAvgAggregateOutputType.ts
-      RenamedPostMaxAggregateOutputType.ts
-      RenamedPostMinAggregateOutputType.ts
-      RenamedPostSumAggregateOutputType.ts
-      RenamedUserAvgAggregateOutputType.ts
-      RenamedUserMaxAggregateOutputType.ts
-      RenamedUserMinAggregateOutputType.ts
-      RenamedUserSumAggregateOutputType.ts
+      RenamedPostAvgAggregate.ts
+      RenamedPostMaxAggregate.ts
+      RenamedPostMinAggregate.ts
+      RenamedPostSumAggregate.ts
+      RenamedUserAvgAggregate.ts
+      RenamedUserMaxAggregate.ts
+      RenamedUserMinAggregate.ts
+      RenamedUserSumAggregate.ts
       index.ts
     [relations]
       [RenamedPost]
@@ -487,14 +487,14 @@ exports[`structure should generate proper folders structure and file names for c
       AggregatePost.ts
       AggregateUser.ts
       BatchPayload.ts
-      PostAvgAggregateOutputType.ts
-      PostMaxAggregateOutputType.ts
-      PostMinAggregateOutputType.ts
-      PostSumAggregateOutputType.ts
-      UserAvgAggregateOutputType.ts
-      UserMaxAggregateOutputType.ts
-      UserMinAggregateOutputType.ts
-      UserSumAggregateOutputType.ts
+      PostAvgAggregate.ts
+      PostMaxAggregate.ts
+      PostMinAggregate.ts
+      PostSumAggregate.ts
+      UserAvgAggregate.ts
+      UserMaxAggregate.ts
+      UserMinAggregate.ts
+      UserSumAggregate.ts
       index.ts
     [relations]
       [Post]

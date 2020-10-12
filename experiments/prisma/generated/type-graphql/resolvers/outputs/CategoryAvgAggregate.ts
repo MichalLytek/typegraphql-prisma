@@ -7,16 +7,10 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
   simpleResolvers: true,
 })
-export class ProblemAvgAggregateOutputType {
+export class CategoryAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: false,
     description: undefined
   })
-  id!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: true,
-    description: undefined
-  })
-  creatorId!: number | null;
+  number!: number;
 }

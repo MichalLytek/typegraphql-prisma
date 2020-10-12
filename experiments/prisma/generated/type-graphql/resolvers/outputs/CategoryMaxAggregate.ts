@@ -7,8 +7,8 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
   simpleResolvers: true,
 })
-export class CategoryAvgAggregateOutputType {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+export class CategoryMaxAggregate {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
     description: undefined
   })

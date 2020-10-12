@@ -7,10 +7,10 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
   simpleResolvers: true,
 })
-export class CategoryMinAggregateOutputType {
+export class CreatorSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
     description: undefined
   })
-  number!: number;
+  id!: number;
 }

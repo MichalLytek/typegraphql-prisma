@@ -1,10 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { ProblemAvgAggregateOutputType } from "../outputs/ProblemAvgAggregateOutputType";
-import { ProblemMaxAggregateOutputType } from "../outputs/ProblemMaxAggregateOutputType";
-import { ProblemMinAggregateOutputType } from "../outputs/ProblemMinAggregateOutputType";
-import { ProblemSumAggregateOutputType } from "../outputs/ProblemSumAggregateOutputType";
+import { ProblemAvgAggregate } from "../outputs/ProblemAvgAggregate";
+import { ProblemMaxAggregate } from "../outputs/ProblemMaxAggregate";
+import { ProblemMinAggregate } from "../outputs/ProblemMinAggregate";
+import { ProblemSumAggregate } from "../outputs/ProblemSumAggregate";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -18,27 +18,27 @@ export class AggregateProblem {
   })
   count!: number;
 
-  @TypeGraphQL.Field(_type => ProblemAvgAggregateOutputType, {
+  @TypeGraphQL.Field(_type => ProblemAvgAggregate, {
     nullable: true,
     description: undefined
   })
-  avg!: ProblemAvgAggregateOutputType | null;
+  avg!: ProblemAvgAggregate | null;
 
-  @TypeGraphQL.Field(_type => ProblemSumAggregateOutputType, {
+  @TypeGraphQL.Field(_type => ProblemSumAggregate, {
     nullable: true,
     description: undefined
   })
-  sum!: ProblemSumAggregateOutputType | null;
+  sum!: ProblemSumAggregate | null;
 
-  @TypeGraphQL.Field(_type => ProblemMinAggregateOutputType, {
+  @TypeGraphQL.Field(_type => ProblemMinAggregate, {
     nullable: true,
     description: undefined
   })
-  min!: ProblemMinAggregateOutputType | null;
+  min!: ProblemMinAggregate | null;
 
-  @TypeGraphQL.Field(_type => ProblemMaxAggregateOutputType, {
+  @TypeGraphQL.Field(_type => ProblemMaxAggregate, {
     nullable: true,
     description: undefined
   })
-  max!: ProblemMaxAggregateOutputType | null;
+  max!: ProblemMaxAggregate | null;
 }

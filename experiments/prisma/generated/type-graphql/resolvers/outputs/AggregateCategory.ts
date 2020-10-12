@@ -1,10 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { CategoryAvgAggregateOutputType } from "../outputs/CategoryAvgAggregateOutputType";
-import { CategoryMaxAggregateOutputType } from "../outputs/CategoryMaxAggregateOutputType";
-import { CategoryMinAggregateOutputType } from "../outputs/CategoryMinAggregateOutputType";
-import { CategorySumAggregateOutputType } from "../outputs/CategorySumAggregateOutputType";
+import { CategoryAvgAggregate } from "../outputs/CategoryAvgAggregate";
+import { CategoryMaxAggregate } from "../outputs/CategoryMaxAggregate";
+import { CategoryMinAggregate } from "../outputs/CategoryMinAggregate";
+import { CategorySumAggregate } from "../outputs/CategorySumAggregate";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -18,27 +18,27 @@ export class AggregateCategory {
   })
   count!: number;
 
-  @TypeGraphQL.Field(_type => CategoryAvgAggregateOutputType, {
+  @TypeGraphQL.Field(_type => CategoryAvgAggregate, {
     nullable: true,
     description: undefined
   })
-  avg!: CategoryAvgAggregateOutputType | null;
+  avg!: CategoryAvgAggregate | null;
 
-  @TypeGraphQL.Field(_type => CategorySumAggregateOutputType, {
+  @TypeGraphQL.Field(_type => CategorySumAggregate, {
     nullable: true,
     description: undefined
   })
-  sum!: CategorySumAggregateOutputType | null;
+  sum!: CategorySumAggregate | null;
 
-  @TypeGraphQL.Field(_type => CategoryMinAggregateOutputType, {
+  @TypeGraphQL.Field(_type => CategoryMinAggregate, {
     nullable: true,
     description: undefined
   })
-  min!: CategoryMinAggregateOutputType | null;
+  min!: CategoryMinAggregate | null;
 
-  @TypeGraphQL.Field(_type => CategoryMaxAggregateOutputType, {
+  @TypeGraphQL.Field(_type => CategoryMaxAggregate, {
     nullable: true,
     description: undefined
   })
-  max!: CategoryMaxAggregateOutputType | null;
+  max!: CategoryMaxAggregate | null;
 }

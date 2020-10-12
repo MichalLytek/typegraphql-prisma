@@ -211,7 +211,10 @@ function getMappedOutputTypeName(
   ].find(type => outputTypeName.includes(type));
   if (dedicatedTypeSuffix) {
     const modelName = outputTypeName.replace(dedicatedTypeSuffix, "");
-    return `${dmmfDocument.getModelTypeName(modelName)}${dedicatedTypeSuffix}`;
+    const operationName = outputTypeName
+      .replace(modelName, "")
+      .replace("OutputType", "");
+    return `${dmmfDocument.getModelTypeName(modelName)}${operationName}`;
   }
 
   return outputTypeName;

@@ -7,19 +7,19 @@ exports[`generator integration should be able to use generate TypeGraphQL classe
 # -----------------------------------------------
 
 type AggregatePost {
-  avg: PostAvgAggregateOutputType
+  avg: PostAvgAggregate
   count: Int!
-  max: PostMaxAggregateOutputType
-  min: PostMinAggregateOutputType
-  sum: PostSumAggregateOutputType
+  max: PostMaxAggregate
+  min: PostMinAggregate
+  sum: PostSumAggregate
 }
 
 type AggregateUser {
-  avg: UserAvgAggregateOutputType
+  avg: UserAvgAggregate
   count: Int!
-  max: UserMaxAggregateOutputType
-  min: UserMinAggregateOutputType
-  sum: UserSumAggregateOutputType
+  max: UserMaxAggregate
+  min: UserMinAggregate
+  sum: UserSumAggregate
 }
 
 type BatchPayload {
@@ -127,7 +127,7 @@ type Post {
   uuid: String!
 }
 
-type PostAvgAggregateOutputType {
+type PostAvgAggregate {
   authorId: Float!
 }
 
@@ -162,11 +162,11 @@ input PostListRelationFilter {
   some: PostWhereInput
 }
 
-type PostMaxAggregateOutputType {
+type PostMaxAggregate {
   authorId: Int!
 }
 
-type PostMinAggregateOutputType {
+type PostMinAggregate {
   authorId: Int!
 }
 
@@ -187,7 +187,7 @@ input PostScalarWhereInput {
   uuid: StringFilter
 }
 
-type PostSumAggregateOutputType {
+type PostSumAggregate {
   authorId: Int!
 }
 
@@ -320,7 +320,7 @@ type User {
   posts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]
 }
 
-type UserAvgAggregateOutputType {
+type UserAvgAggregate {
   id: Float!
 }
 
@@ -343,11 +343,11 @@ enum UserDistinctFieldEnum {
   name
 }
 
-type UserMaxAggregateOutputType {
+type UserMaxAggregate {
   id: Int!
 }
 
-type UserMinAggregateOutputType {
+type UserMinAggregate {
   id: Int!
 }
 
@@ -361,7 +361,7 @@ input UserRelationFilter {
   isNot: UserWhereInput
 }
 
-type UserSumAggregateOutputType {
+type UserSumAggregate {
   id: Int!
 }
 
@@ -516,14 +516,14 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       AggregatePost.ts
       AggregateUser.ts
       BatchPayload.ts
-      PostAvgAggregateOutputType.ts
-      PostMaxAggregateOutputType.ts
-      PostMinAggregateOutputType.ts
-      PostSumAggregateOutputType.ts
-      UserAvgAggregateOutputType.ts
-      UserMaxAggregateOutputType.ts
-      UserMinAggregateOutputType.ts
-      UserSumAggregateOutputType.ts
+      PostAvgAggregate.ts
+      PostMaxAggregate.ts
+      PostMinAggregate.ts
+      PostSumAggregate.ts
+      UserAvgAggregate.ts
+      UserMaxAggregate.ts
+      UserMinAggregate.ts
+      UserSumAggregate.ts
       index.ts
     [relations]
       [Post]

@@ -1,10 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { ClientAvgAggregateOutputType } from "../outputs/ClientAvgAggregateOutputType";
-import { ClientMaxAggregateOutputType } from "../outputs/ClientMaxAggregateOutputType";
-import { ClientMinAggregateOutputType } from "../outputs/ClientMinAggregateOutputType";
-import { ClientSumAggregateOutputType } from "../outputs/ClientSumAggregateOutputType";
+import { ClientAvgAggregate } from "../outputs/ClientAvgAggregate";
+import { ClientMaxAggregate } from "../outputs/ClientMaxAggregate";
+import { ClientMinAggregate } from "../outputs/ClientMinAggregate";
+import { ClientSumAggregate } from "../outputs/ClientSumAggregate";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -18,27 +18,27 @@ export class AggregateClient {
   })
   count!: number;
 
-  @TypeGraphQL.Field(_type => ClientAvgAggregateOutputType, {
+  @TypeGraphQL.Field(_type => ClientAvgAggregate, {
     nullable: true,
     description: undefined
   })
-  avg!: ClientAvgAggregateOutputType | null;
+  avg!: ClientAvgAggregate | null;
 
-  @TypeGraphQL.Field(_type => ClientSumAggregateOutputType, {
+  @TypeGraphQL.Field(_type => ClientSumAggregate, {
     nullable: true,
     description: undefined
   })
-  sum!: ClientSumAggregateOutputType | null;
+  sum!: ClientSumAggregate | null;
 
-  @TypeGraphQL.Field(_type => ClientMinAggregateOutputType, {
+  @TypeGraphQL.Field(_type => ClientMinAggregate, {
     nullable: true,
     description: undefined
   })
-  min!: ClientMinAggregateOutputType | null;
+  min!: ClientMinAggregate | null;
 
-  @TypeGraphQL.Field(_type => ClientMaxAggregateOutputType, {
+  @TypeGraphQL.Field(_type => ClientMaxAggregate, {
     nullable: true,
     description: undefined
   })
-  max!: ClientMaxAggregateOutputType | null;
+  max!: ClientMaxAggregate | null;
 }

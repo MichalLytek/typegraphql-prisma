@@ -4,27 +4,27 @@
 # -----------------------------------------------
 
 type AggregateCategory {
-  avg: CategoryAvgAggregateOutputType
+  avg: CategoryAvgAggregate
   count: Int!
-  max: CategoryMaxAggregateOutputType
-  min: CategoryMinAggregateOutputType
-  sum: CategorySumAggregateOutputType
+  max: CategoryMaxAggregate
+  min: CategoryMinAggregate
+  sum: CategorySumAggregate
 }
 
 type AggregateClient {
-  avg: ClientAvgAggregateOutputType
+  avg: ClientAvgAggregate
   count: Int!
-  max: ClientMaxAggregateOutputType
-  min: ClientMinAggregateOutputType
-  sum: ClientSumAggregateOutputType
+  max: ClientMaxAggregate
+  min: ClientMinAggregate
+  sum: ClientSumAggregate
 }
 
 type AggregateCreator {
-  avg: CreatorAvgAggregateOutputType
+  avg: CreatorAvgAggregate
   count: Int!
-  max: CreatorMaxAggregateOutputType
-  min: CreatorMinAggregateOutputType
-  sum: CreatorSumAggregateOutputType
+  max: CreatorMaxAggregate
+  min: CreatorMinAggregate
+  sum: CreatorSumAggregate
 }
 
 type AggregateDirector {
@@ -40,11 +40,11 @@ type AggregatePatient {
 }
 
 type AggregateProblem {
-  avg: ProblemAvgAggregateOutputType
+  avg: ProblemAvgAggregate
   count: Int!
-  max: ProblemMaxAggregateOutputType
-  min: ProblemMinAggregateOutputType
-  sum: ProblemSumAggregateOutputType
+  max: ProblemMaxAggregate
+  min: ProblemMinAggregate
+  sum: ProblemSumAggregate
 }
 
 type BatchPayload {
@@ -66,7 +66,7 @@ type Category {
   slug: String!
 }
 
-type CategoryAvgAggregateOutputType {
+type CategoryAvgAggregate {
   number: Float!
 }
 
@@ -82,11 +82,11 @@ enum CategoryDistinctFieldEnum {
   slug
 }
 
-type CategoryMaxAggregateOutputType {
+type CategoryMaxAggregate {
   number: Int!
 }
 
-type CategoryMinAggregateOutputType {
+type CategoryMinAggregate {
   number: Int!
 }
 
@@ -96,7 +96,7 @@ input CategoryOrderByInput {
   slug: SortOrder
 }
 
-type CategorySumAggregateOutputType {
+type CategorySumAggregate {
   number: Int!
 }
 
@@ -142,7 +142,7 @@ type Client {
   role: Role!
 }
 
-type ClientAvgAggregateOutputType {
+type ClientAvgAggregate {
   age: Float!
   amount: Float!
   balance: Float!
@@ -207,14 +207,14 @@ enum ClientDistinctFieldEnum {
   role
 }
 
-type ClientMaxAggregateOutputType {
+type ClientMaxAggregate {
   age: Int!
   amount: Float!
   balance: Float!
   id: Int!
 }
 
-type ClientMinAggregateOutputType {
+type ClientMinAggregate {
   age: Int!
   amount: Float!
   balance: Float!
@@ -236,7 +236,7 @@ input ClientRelationFilter {
   isNot: ClientWhereInput
 }
 
-type ClientSumAggregateOutputType {
+type ClientSumAggregate {
   age: Int!
   amount: Float!
   balance: Float!
@@ -338,7 +338,7 @@ type Creator {
   problems(cursor: ProblemWhereUniqueInput, distinct: [ProblemDistinctFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]
 }
 
-type CreatorAvgAggregateOutputType {
+type CreatorAvgAggregate {
   id: Float!
 }
 
@@ -386,11 +386,11 @@ input CreatorListRelationFilter {
   some: CreatorWhereInput
 }
 
-type CreatorMaxAggregateOutputType {
+type CreatorMaxAggregate {
   id: Int!
 }
 
-type CreatorMinAggregateOutputType {
+type CreatorMinAggregate {
   id: Int!
 }
 
@@ -412,7 +412,7 @@ input CreatorScalarWhereInput {
   OR: [CreatorScalarWhereInput!]
 }
 
-type CreatorSumAggregateOutputType {
+type CreatorSumAggregate {
   id: Int!
 }
 
@@ -1261,7 +1261,7 @@ type Problem {
   problemText: String!
 }
 
-type ProblemAvgAggregateOutputType {
+type ProblemAvgAggregate {
   creatorId: Float
   id: Float!
 }
@@ -1311,12 +1311,12 @@ input ProblemListRelationFilter {
   some: ProblemWhereInput
 }
 
-type ProblemMaxAggregateOutputType {
+type ProblemMaxAggregate {
   creatorId: Int
   id: Int!
 }
 
-type ProblemMinAggregateOutputType {
+type ProblemMinAggregate {
   creatorId: Int
   id: Int!
 }
@@ -1336,7 +1336,7 @@ input ProblemScalarWhereInput {
   problemText: StringFilter
 }
 
-type ProblemSumAggregateOutputType {
+type ProblemSumAggregate {
   creatorId: Int
   id: Int!
 }

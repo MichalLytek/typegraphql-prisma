@@ -1,10 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { PostAvgAggregateOutputType } from "../outputs/PostAvgAggregateOutputType";
-import { PostMaxAggregateOutputType } from "../outputs/PostMaxAggregateOutputType";
-import { PostMinAggregateOutputType } from "../outputs/PostMinAggregateOutputType";
-import { PostSumAggregateOutputType } from "../outputs/PostSumAggregateOutputType";
+import { PostAvgAggregate } from "../outputs/PostAvgAggregate";
+import { PostMaxAggregate } from "../outputs/PostMaxAggregate";
+import { PostMinAggregate } from "../outputs/PostMinAggregate";
+import { PostSumAggregate } from "../outputs/PostSumAggregate";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -18,27 +18,27 @@ export class AggregatePost {
   })
   count!: number;
 
-  @TypeGraphQL.Field(_type => PostAvgAggregateOutputType, {
+  @TypeGraphQL.Field(_type => PostAvgAggregate, {
     nullable: true,
     description: undefined
   })
-  avg!: PostAvgAggregateOutputType | null;
+  avg!: PostAvgAggregate | null;
 
-  @TypeGraphQL.Field(_type => PostSumAggregateOutputType, {
+  @TypeGraphQL.Field(_type => PostSumAggregate, {
     nullable: true,
     description: undefined
   })
-  sum!: PostSumAggregateOutputType | null;
+  sum!: PostSumAggregate | null;
 
-  @TypeGraphQL.Field(_type => PostMinAggregateOutputType, {
+  @TypeGraphQL.Field(_type => PostMinAggregate, {
     nullable: true,
     description: undefined
   })
-  min!: PostMinAggregateOutputType | null;
+  min!: PostMinAggregate | null;
 
-  @TypeGraphQL.Field(_type => PostMaxAggregateOutputType, {
+  @TypeGraphQL.Field(_type => PostMaxAggregate, {
     nullable: true,
     description: undefined
   })
-  max!: PostMaxAggregateOutputType | null;
+  max!: PostMaxAggregate | null;
 }

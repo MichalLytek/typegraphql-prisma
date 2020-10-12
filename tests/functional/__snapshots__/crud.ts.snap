@@ -5,23 +5,23 @@ Object {
   "aggregateUser": Object {
     "__typename": "AggregateUser",
     "avg": Object {
-      "__typename": "UserAvgAggregateOutputType",
+      "__typename": "UserAvgAggregate",
       "floatField": 5,
       "intField": 5,
     },
     "count": 2,
     "max": Object {
-      "__typename": "UserMaxAggregateOutputType",
+      "__typename": "UserMaxAggregate",
       "floatField": 10,
       "intField": 10,
     },
     "min": Object {
-      "__typename": "UserMinAggregateOutputType",
+      "__typename": "UserMinAggregate",
       "floatField": 0,
       "intField": 0,
     },
     "sum": Object {
-      "__typename": "UserSumAggregateOutputType",
+      "__typename": "UserSumAggregate",
       "floatField": 10,
       "intField": 10,
     },

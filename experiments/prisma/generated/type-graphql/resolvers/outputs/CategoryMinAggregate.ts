@@ -7,10 +7,10 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
   simpleResolvers: true,
 })
-export class CreatorAvgAggregateOutputType {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+export class CategoryMinAggregate {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
     description: undefined
   })
-  id!: number;
+  number!: number;
 }
