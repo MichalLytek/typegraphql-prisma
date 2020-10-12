@@ -34,6 +34,7 @@ import { GenerateCodeOptions } from "./options";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import generateArgsTypeClassFromArgs from "./args-class";
 import generateActionResolverClass from "./resolvers/separate-action";
+import { ensureInstalledCorrectPrismaPackage } from "../utils/prisma-version";
 
 const baseCompilerOptions: CompilerOptions = {
   target: ScriptTarget.ES2019,
@@ -47,6 +48,8 @@ export default async function generateCode(
   options: GenerateCodeOptions,
   log: (msg: string) => void = noop,
 ) {
+  ensureInstalledCorrectPrismaPackage();
+
   const baseDirPath = options.outputDirPath;
   const emitTranspiledCode =
     options.emitTranspiledCode ??
