@@ -5,6 +5,7 @@ import { AggregateUserArgs } from "./args/AggregateUserArgs";
 import { CreateUserArgs } from "./args/CreateUserArgs";
 import { DeleteManyUserArgs } from "./args/DeleteManyUserArgs";
 import { DeleteUserArgs } from "./args/DeleteUserArgs";
+import { FindFirstUserArgs } from "./args/FindFirstUserArgs";
 import { FindManyUserArgs } from "./args/FindManyUserArgs";
 import { FindOneUserArgs } from "./args/FindOneUserArgs";
 import { UpdateManyUserArgs } from "./args/UpdateManyUserArgs";
@@ -22,6 +23,14 @@ export class UserCrudResolver {
   })
   async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | null> {
     return ctx.prisma.user.findOne(args);
+  }
+
+  @TypeGraphQL.Query(_returns => User, {
+    nullable: true,
+    description: undefined
+  })
+  async findFirstUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstUserArgs): Promise<User | null> {
+    return ctx.prisma.user.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [User], {

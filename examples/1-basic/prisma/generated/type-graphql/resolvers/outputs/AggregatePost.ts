@@ -5,6 +5,7 @@ import { JsonValue, InputJsonValue } from "@prisma/client";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class AggregatePost {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

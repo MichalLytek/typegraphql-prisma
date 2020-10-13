@@ -1,5 +1,6 @@
 export { PostCrudResolver } from "./Post/PostCrudResolver";
 export { FindOnePostResolver } from "./Post/FindOnePostResolver";
+export { FindFirstPostResolver } from "./Post/FindFirstPostResolver";
 export { FindManyPostResolver } from "./Post/FindManyPostResolver";
 export { CreatePostResolver } from "./Post/CreatePostResolver";
 export { DeletePostResolver } from "./Post/DeletePostResolver";
@@ -11,6 +12,7 @@ export { AggregatePostResolver } from "./Post/AggregatePostResolver";
 export * from "./Post/args";
 export { UserCrudResolver } from "./User/UserCrudResolver";
 export { FindOneUserResolver } from "./User/FindOneUserResolver";
+export { FindFirstUserResolver } from "./User/FindFirstUserResolver";
 export { FindManyUserResolver } from "./User/FindManyUserResolver";
 export { CreateUserResolver } from "./User/CreateUserResolver";
 export { DeleteUserResolver } from "./User/DeleteUserResolver";

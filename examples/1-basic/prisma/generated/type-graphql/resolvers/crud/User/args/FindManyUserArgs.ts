@@ -23,5 +23,5 @@ export class FindManyUserArgs {
   skip?: number | undefined;
 
   @TypeGraphQL.Field(_type => [UserDistinctFieldEnum], { nullable: true })
-  distinct?: Array<typeof UserDistinctFieldEnum[keyof typeof UserDistinctFieldEnum]> | undefined;
+  distinct?: Array<"id" | "email" | "name"> | undefined;
 }

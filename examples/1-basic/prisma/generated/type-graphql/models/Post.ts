@@ -6,6 +6,7 @@ import { User } from "../models/User";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
+  simpleResolvers: undefined,
 })
 export class Post {
   @TypeGraphQL.Field(_type => String, {

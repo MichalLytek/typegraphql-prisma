@@ -43,7 +43,7 @@ query CustomResolversQuery {
 mutation UpdatePost {
   updatePost(
     where: { id: "cke2war9p0006f5tp1nb1bscu" }
-    data: { published: true }
+    data: { published: { set: true } }
   ) {
     ...PostData
   }

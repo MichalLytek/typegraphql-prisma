@@ -12,41 +12,41 @@ export class PostOrderByInput {
     nullable: true,
     description: undefined
   })
-  id?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  id?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  createdAt?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  createdAt?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  updatedAt?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  updatedAt?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  published?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  published?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  title?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  title?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  content?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  content?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true,
     description: undefined
   })
-  authorId?: typeof SortOrder[keyof typeof SortOrder] | undefined;
+  authorId?: "asc" | "desc" | undefined;
 }

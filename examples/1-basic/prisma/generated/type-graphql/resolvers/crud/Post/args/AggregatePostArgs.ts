@@ -23,5 +23,5 @@ export class AggregatePostArgs {
   skip?: number | undefined;
 
   @TypeGraphQL.Field(_type => [PostDistinctFieldEnum], { nullable: true })
-  distinct?: Array<typeof PostDistinctFieldEnum[keyof typeof PostDistinctFieldEnum]> | undefined;
+  distinct?: Array<"id" | "createdAt" | "updatedAt" | "published" | "title" | "content" | "authorId"> | undefined;
 }
