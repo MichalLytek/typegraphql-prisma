@@ -11,6 +11,7 @@ import {
   empty,
   join,
   raw,
+  Sql,
 } from './runtime';
 
 export { PrismaClientKnownRequestError }
@@ -22,11 +23,11 @@ export { PrismaClientValidationError }
 /**
  * Re-export of sql-template-tag
  */
-export { sql, empty, join, raw }
+export { sql, empty, join, raw, Sql }
 
 /**
- * Prisma Client JS version: 2.8.1
- * Query Engine version: 439da16b2f8314c6faca7d2dad2cdcf0732e8a9c
+ * Prisma Client JS version: 2.9.0
+ * Query Engine version: 369b3694b7edb869fad14827a33ad3f3f49bbc20
  */
 export declare type PrismaVersion = {
   client: string

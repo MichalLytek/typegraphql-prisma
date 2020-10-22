@@ -163,7 +163,7 @@ interface EnvValue {
     fromEnvVar: null | string;
     value: string;
 }
-declare type ConnectorType = 'mysql' | 'mongo' | 'sqlite' | 'postgresql';
+declare type ConnectorType = 'mysql' | 'mongo' | 'sqlite' | 'postgresql' | 'sqlserver';
 interface DataSource {
     name: string;
     activeProvider: ConnectorType;
@@ -472,16 +472,20 @@ declare type LogFields = {
 declare class PrismaClientKnownRequestError extends Error {
     code: string;
     meta?: object;
-    constructor(message: string, code: string, meta?: any);
+    clientVersion: string;
+    constructor(message: string, code: string, clientVersion: string, meta?: any);
 }
 declare class PrismaClientUnknownRequestError extends Error {
-    constructor(message: string);
+    clientVersion: string;
+    constructor(message: string, clientVersion: string);
 }
 declare class PrismaClientRustPanicError extends Error {
-    constructor(message: string);
+    clientVersion: string;
+    constructor(message: string, clientVersion: string);
 }
 declare class PrismaClientInitializationError extends Error {
-    constructor(message: string);
+    clientVersion: string;
+    constructor(message: string, clientVersion: string);
 }
 
 declare type Platform = 'native' | 'darwin' | 'debian-openssl-1.0.x' | 'debian-openssl-1.1.x' | 'rhel-openssl-1.0.x' | 'rhel-openssl-1.1.x' | 'linux-musl' | 'linux-nixos' | 'windows' | 'freebsd11' | 'freebsd12' | 'openbsd' | 'netbsd' | 'arm';
