@@ -16,6 +16,44 @@ describe("relations resolvers generation", () => {
     readGeneratedFile = createReadGeneratedFile(outputDirPath);
   });
 
+  it("should properly generate index files for relation resolvers", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model User {
+        id         Int      @id @default(autoincrement())
+        name       String
+        addresses  Address[]
+      }
+      model Address {
+        uuid      String  @id @default(cuid())
+        content   String
+        user      User    @relation(fields: [userId], references: [id])
+        userId    Int
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const indexTSFile = await readGeneratedFile(
+      "/resolvers/relations/index.ts",
+    );
+    const argsIndexTSFile = await readGeneratedFile(
+      "/resolvers/relations/args.index.ts",
+    );
+    const resolversIndexTSFile = await readGeneratedFile(
+      "/resolvers/relations/resolvers.index.ts",
+    );
+    const mainIndexTSFile = await readGeneratedFile("/index.ts");
+
+    expect(indexTSFile).toMatchSnapshot("index");
+    expect(argsIndexTSFile).toMatchSnapshot("argsIndex");
+    expect(resolversIndexTSFile).toMatchSnapshot("resolversIndex");
+    expect(mainIndexTSFile).toMatchSnapshot("mainIndex");
+  });
+
   it("should properly generate resolvers classes for prisma models with cyclic relations", async () => {
     const schema = /* prisma */ `
       datasource db {

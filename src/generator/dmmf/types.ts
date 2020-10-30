@@ -148,8 +148,8 @@ export namespace DMMF {
   export interface InputType {
     name: string;
     constraints: {
-        maxNumFields: number | null;
-        minNumFields: number | null;
+      maxNumFields: number | null;
+      minNumFields: number | null;
     };
     fields: SchemaArg[];
     // fieldMap?: Record<string, SchemaArg>;
@@ -173,6 +173,7 @@ export namespace DMMF {
     actions: Action[];
     collectionName: string;
     resolverName: string;
+    modelTypeName: string;
   }
   // additional type
   export interface Action {

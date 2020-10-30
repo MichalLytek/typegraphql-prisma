@@ -29,12 +29,16 @@ import {
   generateModelsBarrelFile,
   generateEnumsBarrelFile,
   generateArgsBarrelFile,
+  generateArgsIndexFile,
+  generateResolversIndexFile,
+  generateResolversActionsBarrelFile,
 } from "./imports";
 import { GenerateCodeOptions } from "./options";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import generateArgsTypeClassFromArgs from "./args-class";
 import generateActionResolverClass from "./resolvers/separate-action";
 import { ensureInstalledCorrectPrismaPackage } from "../utils/prisma-version";
+import { GenerateMappingData } from "./types";
 
 const baseCompilerOptions: CompilerOptions = {
   target: ScriptTarget.ES2019,
@@ -209,7 +213,7 @@ export default async function generateCode(
         baseDirPath,
         resolversFolderName,
         relationsResolversFolderName,
-        "index.ts",
+        "resolvers.index.ts",
       ),
       undefined,
       { overwrite: true },
@@ -217,47 +221,77 @@ export default async function generateCode(
     generateResolversBarrelFile(
       "relations",
       relationResolversBarrelExportSourceFile,
-      dmmfDocument.relationModels.map(relationModel => ({
+      dmmfDocument.relationModels.map<GenerateMappingData>(relationModel => ({
         resolverName: relationModel.resolverName,
         modelName: relationModel.model.typeName,
-        hasSomeArgs: relationModel.relationFields.some(
-          field => field.argsTypeName !== undefined,
-        ),
       })),
     );
 
-    log("Generating relation resolver args...");
-    dmmfDocument.relationModels.forEach(async relationModelData => {
-      const resolverDirPath = path.resolve(
+    if (dmmfDocument.relationModels.length > 0) {
+      log("Generating relation resolver args...");
+      dmmfDocument.relationModels.forEach(async relationModelData => {
+        const resolverDirPath = path.resolve(
+          baseDirPath,
+          resolversFolderName,
+          relationsResolversFolderName,
+          relationModelData.model.typeName,
+        );
+        relationModelData.relationFields
+          .filter(field => field.argsTypeName)
+          .forEach(async field => {
+            generateArgsTypeClassFromArgs(
+              project,
+              resolverDirPath,
+              field.outputTypeField.args,
+              field.argsTypeName!,
+              dmmfDocument,
+            );
+          });
+        const argTypeNames = relationModelData.relationFields
+          .filter(it => it.argsTypeName !== undefined)
+          .map(it => it.argsTypeName!);
+
+        if (argTypeNames.length) {
+          const barrelExportSourceFile = project.createSourceFile(
+            path.resolve(resolverDirPath, argsFolderName, "index.ts"),
+            undefined,
+            { overwrite: true },
+          );
+          generateArgsBarrelFile(barrelExportSourceFile, argTypeNames);
+        }
+      });
+    }
+    const relationResolversArgsIndexSourceFile = project.createSourceFile(
+      path.resolve(
         baseDirPath,
         resolversFolderName,
         relationsResolversFolderName,
-        relationModelData.model.typeName,
-      );
-      relationModelData.relationFields
-        .filter(field => field.argsTypeName)
-        .forEach(async field => {
-          generateArgsTypeClassFromArgs(
-            project,
-            resolverDirPath,
-            field.outputTypeField.args,
-            field.argsTypeName!,
-            dmmfDocument,
-          );
-        });
-      const argTypeNames = relationModelData.relationFields
-        .filter(it => it.argsTypeName !== undefined)
-        .map(it => it.argsTypeName!);
-
-      if (argTypeNames.length) {
-        const barrelExportSourceFile = project.createSourceFile(
-          path.resolve(resolverDirPath, argsFolderName, "index.ts"),
-          undefined,
-          { overwrite: true },
-        );
-        generateArgsBarrelFile(barrelExportSourceFile, argTypeNames);
-      }
-    });
+        "args.index.ts",
+      ),
+      undefined,
+      { overwrite: true },
+    );
+    generateArgsIndexFile(
+      relationResolversArgsIndexSourceFile,
+      dmmfDocument.relationModels
+        .filter(relationModelData =>
+          relationModelData.relationFields.some(
+            it => it.argsTypeName !== undefined,
+          ),
+        )
+        .map(relationModelData => relationModelData.model.typeName),
+    );
+    const relationResolversIndexSourceFile = project.createSourceFile(
+      path.resolve(
+        baseDirPath,
+        resolversFolderName,
+        relationsResolversFolderName,
+        "index.ts",
+      ),
+      undefined,
+      { overwrite: true },
+    );
+    generateResolversIndexFile(relationResolversIndexSourceFile, "relations");
   }
 
   log("Generating crud resolvers...");
@@ -286,7 +320,48 @@ export default async function generateCode(
       );
     });
   });
+  const generateMappingData = dmmfDocument.mappings.map<GenerateMappingData>(
+    mapping => {
+      const model = dmmfDocument.datamodel.models.find(
+        model => model.name === mapping.model,
+      )!;
+      return {
+        modelName: model.typeName,
+        resolverName: mapping.resolverName,
+        actionResolverNames: mapping.actions.map(it => it.actionResolverName),
+      };
+    },
+  );
   const crudResolversBarrelExportSourceFile = project.createSourceFile(
+    path.resolve(
+      baseDirPath,
+      resolversFolderName,
+      crudResolversFolderName,
+      "resolvers-crud.index.ts",
+    ),
+    undefined,
+    { overwrite: true },
+  );
+  generateResolversBarrelFile(
+    "crud",
+    crudResolversBarrelExportSourceFile,
+    generateMappingData,
+  );
+  const crudResolversActionsBarrelExportSourceFile = project.createSourceFile(
+    path.resolve(
+      baseDirPath,
+      resolversFolderName,
+      crudResolversFolderName,
+      "resolvers-actions.index.ts",
+    ),
+    undefined,
+    { overwrite: true },
+  );
+  generateResolversActionsBarrelFile(
+    crudResolversActionsBarrelExportSourceFile,
+    generateMappingData,
+  );
+  const crudResolversIndexSourceFile = project.createSourceFile(
     path.resolve(
       baseDirPath,
       resolversFolderName,
@@ -296,23 +371,7 @@ export default async function generateCode(
     undefined,
     { overwrite: true },
   );
-  generateResolversBarrelFile(
-    "crud",
-    crudResolversBarrelExportSourceFile,
-    dmmfDocument.mappings.map(mapping => {
-      const model = dmmfDocument.datamodel.models.find(
-        model => model.name === mapping.model,
-      )!;
-      return {
-        modelName: model.typeName,
-        resolverName: mapping.resolverName,
-        actionResolverNames: mapping.actions.map(it => it.actionResolverName),
-        hasSomeArgs: mapping.actions.some(
-          action => action.argsTypeName !== undefined,
-        ),
-      };
-    }),
-  );
+  generateResolversIndexFile(crudResolversIndexSourceFile, "crud");
 
   log("Generating crud resolvers args...");
   dmmfDocument.mappings.forEach(async mapping => {
@@ -350,6 +409,24 @@ export default async function generateCode(
       );
     }
   });
+  const crudResolversArgsIndexSourceFile = project.createSourceFile(
+    path.resolve(
+      baseDirPath,
+      resolversFolderName,
+      crudResolversFolderName,
+      "args.index.ts",
+    ),
+    undefined,
+    { overwrite: true },
+  );
+  generateArgsIndexFile(
+    crudResolversArgsIndexSourceFile,
+    dmmfDocument.mappings
+      .filter(mapping =>
+        mapping.actions.some(it => it.argsTypeName !== undefined),
+      )
+      .map(mapping => mapping.modelTypeName),
+  );
 
   log("Generating index file");
   const indexSourceFile = project.createSourceFile(

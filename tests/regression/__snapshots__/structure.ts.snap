@@ -119,8 +119,14 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           UpsertUserArgs.js
           index.d.ts
           index.js
+      args.index.d.ts
+      args.index.js
       index.d.ts
       index.js
+      resolvers-actions.index.d.ts
+      resolvers-actions.index.js
+      resolvers-crud.index.d.ts
+      resolvers-crud.index.js
     [inputs]
       EnumColorFieldUpdateOperationsInput.d.ts
       EnumColorFieldUpdateOperationsInput.js
@@ -239,8 +245,12 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           UserPostsArgs.js
           index.d.ts
           index.js
+      args.index.d.ts
+      args.index.js
       index.d.ts
       index.js
+      resolvers.index.d.ts
+      resolvers.index.js
 "
 `;
 
@@ -309,7 +319,10 @@ exports[`structure should generate proper folders and file names when model is r
           UpdateRenamedUserArgs.ts
           UpsertRenamedUserArgs.ts
           index.ts
+      args.index.ts
       index.ts
+      resolvers-actions.index.ts
+      resolvers-crud.index.ts
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
@@ -372,7 +385,9 @@ exports[`structure should generate proper folders and file names when model is r
         [args]
           RenamedUserPostsArgs.ts
           index.ts
+      args.index.ts
       index.ts
+      resolvers.index.ts
 "
 `;
 
@@ -441,7 +456,10 @@ exports[`structure should generate proper folders structure and file names for c
           UpdateUserArgs.ts
           UpsertUserArgs.ts
           index.ts
+      args.index.ts
       index.ts
+      resolvers-actions.index.ts
+      resolvers-crud.index.ts
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
@@ -504,6 +522,8 @@ exports[`structure should generate proper folders structure and file names for c
         [args]
           UserPostsArgs.ts
           index.ts
+      args.index.ts
       index.ts
+      resolvers.index.ts
 "
 `;

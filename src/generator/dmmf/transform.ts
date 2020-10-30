@@ -267,6 +267,7 @@ function transformMapping(
     const resolverName = `${modelTypeName}CrudResolver`;
     return {
       model,
+      modelTypeName,
       plural,
       actions,
       collectionName: camelCase(mapping.model),

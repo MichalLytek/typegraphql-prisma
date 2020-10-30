@@ -110,18 +110,9 @@ export class FindOneUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: Index 1`] = `
-"export { UserCrudResolver } from \\"./User/UserCrudResolver\\";
-export { FindOneUserResolver } from \\"./User/FindOneUserResolver\\";
-export { FindFirstUserResolver } from \\"./User/FindFirstUserResolver\\";
-export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
-export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
-export { DeleteUserResolver } from \\"./User/DeleteUserResolver\\";
-export { UpdateUserResolver } from \\"./User/UpdateUserResolver\\";
-export { DeleteManyUserResolver } from \\"./User/DeleteManyUserResolver\\";
-export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
-export { UpsertUserResolver } from \\"./User/UpsertUserResolver\\";
-export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
-export * from \\"./User/args\\";
+"export * from \\"./resolvers-actions.index\\";
+export * from \\"./resolvers-crud.index\\";
+export * from \\"./args.index\\";
 "
 `;
 
@@ -177,6 +168,30 @@ export class UpsertUserResolver {
     return ctx.prisma.user.upsert(args);
   }
 }
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: actionsIndex 1`] = `
+"export { FindOneUserResolver } from \\"./User/FindOneUserResolver\\";
+export { FindFirstUserResolver } from \\"./User/FindFirstUserResolver\\";
+export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
+export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
+export { DeleteUserResolver } from \\"./User/DeleteUserResolver\\";
+export { UpdateUserResolver } from \\"./User/UpdateUserResolver\\";
+export { DeleteManyUserResolver } from \\"./User/DeleteManyUserResolver\\";
+export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
+export { UpsertUserResolver } from \\"./User/UpsertUserResolver\\";
+export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: argsIndex 1`] = `
+"export * from \\"./User/args\\";
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: crudIndex 1`] = `
+"export { UserCrudResolver } from \\"./User/UserCrudResolver\\";
 "
 `;
 
@@ -394,6 +409,13 @@ export class UpsertUserArgs {
 "
 `;
 
+exports[`crud should properly generate resolver class for single prisma model: Index 1`] = `
+"export * from \\"./resolvers-actions.index\\";
+export * from \\"./resolvers-crud.index\\";
+export * from \\"./args.index\\";
+"
+`;
+
 exports[`crud should properly generate resolver class for single prisma model: UserCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import graphqlFields from \\"graphql-fields\\";
@@ -510,6 +532,46 @@ export class UserCrudResolver {
     });
   }
 }
+"
+`;
+
+exports[`crud should properly generate resolver class for single prisma model: actionsIndex 1`] = `
+"export { FindOneUserResolver } from \\"./User/FindOneUserResolver\\";
+export { FindFirstUserResolver } from \\"./User/FindFirstUserResolver\\";
+export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
+export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
+export { DeleteUserResolver } from \\"./User/DeleteUserResolver\\";
+export { UpdateUserResolver } from \\"./User/UpdateUserResolver\\";
+export { DeleteManyUserResolver } from \\"./User/DeleteManyUserResolver\\";
+export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
+export { UpsertUserResolver } from \\"./User/UpsertUserResolver\\";
+export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
+"
+`;
+
+exports[`crud should properly generate resolver class for single prisma model: argsIndex 1`] = `
+"export * from \\"./User/args\\";
+"
+`;
+
+exports[`crud should properly generate resolver class for single prisma model: crudIndex 1`] = `
+"export { UserCrudResolver } from \\"./User/UserCrudResolver\\";
+"
+`;
+
+exports[`crud should properly generate resolver class for single prisma model: mainIndex 1`] = `
+"import { NonEmptyArray } from \\"type-graphql\\";
+import * as crudResolvers from \\"./resolvers/crud/resolvers-crud.index\\";
+
+export * from \\"./enums\\";
+export * from \\"./models\\";
+export * from \\"./resolvers/crud\\";
+export * from \\"./resolvers/inputs\\";
+export * from \\"./resolvers/outputs\\";
+
+export const resolvers = [...Object.values(crudResolvers)] as unknown as NonEmptyArray<Function>;
+
+export { crudResolvers };
 "
 `;
 
@@ -875,22 +937,6 @@ export class FindOneClientResolver {
     return ctx.prisma.user.findOne(args);
   }
 }
-"
-`;
-
-exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: Index 1`] = `
-"export { ClientCrudResolver } from \\"./Client/ClientCrudResolver\\";
-export { FindOneClientResolver } from \\"./Client/FindOneClientResolver\\";
-export { FindFirstClientResolver } from \\"./Client/FindFirstClientResolver\\";
-export { FindManyClientResolver } from \\"./Client/FindManyClientResolver\\";
-export { CreateClientResolver } from \\"./Client/CreateClientResolver\\";
-export { DeleteClientResolver } from \\"./Client/DeleteClientResolver\\";
-export { UpdateClientResolver } from \\"./Client/UpdateClientResolver\\";
-export { DeleteManyClientResolver } from \\"./Client/DeleteManyClientResolver\\";
-export { UpdateManyClientResolver } from \\"./Client/UpdateManyClientResolver\\";
-export { UpsertClientResolver } from \\"./Client/UpsertClientResolver\\";
-export { AggregateClientResolver } from \\"./Client/AggregateClientResolver\\";
-export * from \\"./Client/args\\";
 "
 `;
 

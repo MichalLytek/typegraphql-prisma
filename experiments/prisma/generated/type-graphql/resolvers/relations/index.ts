@@ -1,10 +1,2 @@
-export { ClientRelationsResolver } from "./Client/ClientRelationsResolver";
-export * from "./Client/args";
-export { CreatorRelationsResolver } from "./Creator/CreatorRelationsResolver";
-export * from "./Creator/args";
-export { DirectorRelationsResolver } from "./Director/DirectorRelationsResolver";
-export * from "./Director/args";
-export { MovieRelationsResolver } from "./Movie/MovieRelationsResolver";
-export { PostRelationsResolver } from "./Post/PostRelationsResolver";
-export { ProblemRelationsResolver } from "./Problem/ProblemRelationsResolver";
-export * from "./Problem/args";
+export * from "./resolvers.index";
+export * from "./args.index";

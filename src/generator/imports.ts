@@ -1,4 +1,9 @@
-import { SourceFile, OptionalKind, ExportDeclarationStructure } from "ts-morph";
+import {
+  SourceFile,
+  OptionalKind,
+  ExportDeclarationStructure,
+  VariableDeclarationKind,
+} from "ts-morph";
 import path from "path";
 
 import {
@@ -66,6 +71,19 @@ export function generateArgsBarrelFile(
       .map<OptionalKind<ExportDeclarationStructure>>(argTypeName => ({
         moduleSpecifier: `./${argTypeName}`,
         namedExports: [argTypeName],
+      })),
+  );
+}
+
+export function generateArgsIndexFile(
+  sourceFile: SourceFile,
+  typeNames: string[],
+) {
+  sourceFile.addExportDeclarations(
+    typeNames
+      .sort()
+      .map<OptionalKind<ExportDeclarationStructure>>(typeName => ({
+        moduleSpecifier: `./${typeName}/args`,
       })),
   );
 }
@@ -148,6 +166,45 @@ export function generateIndexFile(
     { moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}` },
     { moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}` },
   ]);
+
+  sourceFile.addImportDeclarations([
+    {
+      moduleSpecifier: `type-graphql`,
+      namedImports: ["NonEmptyArray"],
+    },
+    {
+      moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index`,
+      namespaceImport: "crudResolvers",
+    },
+    ...(hasSomeRelations
+      ? [
+          {
+            moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index`,
+            namespaceImport: "relationResolvers",
+          },
+        ]
+      : []),
+  ]);
+
+  sourceFile.addVariableStatement({
+    isExported: true,
+    declarationKind: VariableDeclarationKind.Const,
+    declarations: [
+      {
+        name: "resolvers",
+        initializer: `[...Object.values(crudResolvers)${
+          hasSomeRelations ? ", ...Object.values(relationResolvers)" : ""
+        }] as unknown as NonEmptyArray<Function>`,
+      },
+    ],
+  });
+
+  sourceFile.addExportDeclaration({
+    namedExports: [
+      "crudResolvers",
+      ...(hasSomeRelations ? ["relationResolvers"] : []),
+    ],
+  });
 }
 
 export function generateResolversBarrelFile(
@@ -159,32 +216,48 @@ export function generateResolversBarrelFile(
     .sort((a, b) =>
       a.modelName > b.modelName ? 1 : a.modelName < b.modelName ? -1 : 0,
     )
-    .forEach(
-      ({
-        modelName,
-        resolverName,
-        actionResolverNames,
-        hasSomeArgs: hasArgs,
-      }) => {
-        sourceFile.addExportDeclaration({
-          moduleSpecifier: `./${modelName}/${resolverName}`,
-          namedExports: [resolverName],
-        });
-        if (actionResolverNames) {
-          actionResolverNames.forEach(actionResolverName => {
-            sourceFile.addExportDeclaration({
-              moduleSpecifier: `./${modelName}/${actionResolverName}`,
-              namedExports: [actionResolverName],
-            });
-          });
-        }
-        if (hasArgs) {
+    .forEach(({ modelName, resolverName }) => {
+      sourceFile.addExportDeclaration({
+        moduleSpecifier: `./${modelName}/${resolverName}`,
+        namedExports: [resolverName],
+      });
+    });
+}
+export function generateResolversActionsBarrelFile(
+  sourceFile: SourceFile,
+  resolversData: GenerateMappingData[],
+) {
+  resolversData
+    .sort((a, b) =>
+      a.modelName > b.modelName ? 1 : a.modelName < b.modelName ? -1 : 0,
+    )
+    .forEach(({ modelName, actionResolverNames }) => {
+      if (actionResolverNames) {
+        actionResolverNames.forEach(actionResolverName => {
           sourceFile.addExportDeclaration({
-            moduleSpecifier: `./${modelName}/args`,
+            moduleSpecifier: `./${modelName}/${actionResolverName}`,
+            namedExports: [actionResolverName],
           });
-        }
-      },
-    );
+        });
+      }
+    });
+}
+
+export function generateResolversIndexFile(
+  sourceFile: SourceFile,
+  type: "crud" | "relations",
+) {
+  if (type === "crud") {
+    sourceFile.addExportDeclarations([
+      { moduleSpecifier: `./resolvers-actions.index` },
+      { moduleSpecifier: `./resolvers-crud.index` },
+    ]);
+  } else {
+    sourceFile.addExportDeclarations([
+      { moduleSpecifier: `./resolvers.index` },
+    ]);
+  }
+  sourceFile.addExportDeclarations([{ moduleSpecifier: `./args.index` }]);
 }
 
 export const generateModelsImports = createImportGenerator(modelsFolderName);

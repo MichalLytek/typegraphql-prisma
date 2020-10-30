@@ -470,7 +470,10 @@ exports[`generator integration should generates TypeGraphQL classes files to out
           UpdateUserArgs.ts
           UpsertUserArgs.ts
           index.ts
+      args.index.ts
       index.ts
+      resolvers-actions.index.ts
+      resolvers-crud.index.ts
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
@@ -533,7 +536,9 @@ exports[`generator integration should generates TypeGraphQL classes files to out
         [args]
           UserPostsArgs.ts
           index.ts
+      args.index.ts
       index.ts
+      resolvers.index.ts
 "
 `;
 

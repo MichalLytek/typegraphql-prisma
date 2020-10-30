@@ -12,7 +12,7 @@ Fist of all, you have to install the generator, as a dev dependency:
 npm i -D typegraphql-prisma
 ```
 
-Furthermore, `typegraphql-prisma`  requires Prisma 2 to work properly, so please install Prisma dependencies if you don't have it already installed:
+Furthermore, `typegraphql-prisma` requires Prisma 2 to work properly, so please install Prisma dependencies if you don't have it already installed:
 
 ```sh
 npm i -D @prisma/cli
@@ -137,19 +137,77 @@ It will also generates a whole bunch of stuffs based on your `schema.prisma` fil
 
 CRUD resolvers supports this following methods with args that are 1:1 matching with the `PrismaClient` API:
 
-- findOne
 - create
 - update
 - delete
+- findOne
+- findFirst
 - findMany
 - updateMany
 - deleteMany
 - upsert
+- aggregate
 
-By default, the method names will be mapped to a GraphQL idiomatic ones (like `findManyUser` -> `users`).
-You can opt-in to use original names by providing `useOriginalMapping = true` generator option.
+> By default, the method names will be mapped to a GraphQL idiomatic ones (like `findManyUser` -> `users`).
+> You can opt-in to use original names by providing `useOriginalMapping = true` generator option.
 
-Also, if you want to have relations like `User -> posts` emitted in schema, you need to import the relations resolvers and register them in your `buildSchema` call:
+The fastest way to expose all Prisma CRUD actions is to import `resolvers` from the output folder:
+
+```ts
+import { resolvers } from "@generated/type-graphql";
+
+const schema = await buildSchema({
+  resolvers,
+  validate: false,
+});
+```
+
+This will emit all CRUD actions and model relations in the schema.
+
+If you need more control, you can import the `crudResolvers` and `relationResolvers` arrays separately to even transform them:
+
+```ts
+import { crudResolvers, relationResolvers } from "@generated/type-graphql";
+```
+
+When using the generated resolvers, you have to first provide the `PrismaClient` instance into the context under `prisma` key, to make it available for the crud and relations resolvers:
+
+```ts
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+const server = new ApolloServer({
+  schema, // from previous step
+  playground: true,
+  context: (): Context => ({ prisma }),
+});
+```
+
+### Nest JS
+
+In order to use generated types and resolvers classes in NestJS, you need to use the [official `typegraphql-nestjs` package](https://github.com/MichalLytek/typegraphql-nestjs). This module allows for basic integration of TypeGraphQL with NestJS. You can find an example in the [`examples/3-nest-js` folder](https://github.com/MichalLytek/typegraphql-prisma/tree/main/examples/3-nest-js).
+
+Due to difference between TypeGraphQL and NestJS decorators, `typegraphql-prisma` doesn't work anymore with `@nestjs/graphql` from version 7.0.
+
+### Advanced usage
+
+#### Exposing selected models Prisma CRUD actions
+
+If you want to expose only CRUD Prisma actions for selected models, you can import crud resolver classes only for that models, instead of the all-in-one `resolvers` object.
+
+Then you just have to put them into the `buildSchema`:
+
+```ts
+import { UserCrudResolver, PostCrudResolver } from "@generated/type-graphql";
+
+const schema = await buildSchema({
+  resolvers: [CustomUserResolver, UserCrudResolver, PostCrudResolver],
+  validate: false,
+});
+```
+
+However, if you also want to have relations like `User -> posts` emitted in schema, you need to import also the relations resolvers and register them in your `buildSchema` call:
 
 ```ts
 import {
@@ -164,26 +222,29 @@ const schema = await buildSchema({
 });
 ```
 
-When using the generated resolvers, you have to first provide the `PrismaClient` instance into the context under `prisma` key, to make it available for the crud and relations resolvers:
+#### Exposing selected Prisma actions only
+
+If you want to expose only certain Prisma actions, like `findManyUser` or `createOneUser`, you can import resolver classes only for them, instead of the whole model `XYZCrudResolver`.
+Then you just have to put them into the `buildSchema`:
 
 ```ts
-import { PrismaClient } from "@prisma/client";
+import {
+  User,
+  FindManyUserResolver,
+  CreateUserResolver,
+  UserRelationsResolver,
+} from "@generated/type-graphql";
 
-const prisma = new PrismaClient();
-const server = new ApolloServer({
-  schema,
-  playground: true,
-  context: (): Context => ({ prisma }),
+const schema = await buildSchema({
+  resolvers: [
+    CustomUserResolver,
+    FindManyUserResolver,
+    CreateUserResolver,
+    UserRelationsResolver,
+  ],
+  validate: false,
 });
 ```
-
-### Nest JS
-
-In order to use generated types and resolvers classes in NestJS, you need to use the [official `typegraphql-nestjs` package](https://github.com/MichalLytek/typegraphql-nestjs). This module allows for basic integration of TypeGraphQL with NestJS. You can find an example in the [`examples/3-nest-js` folder](https://github.com/MichalLytek/typegraphql-prisma/tree/main/examples/3-nest-js).
-
-Due to difference between TypeGraphQL and NestJS decorators, `typegraphql-prisma` doesn't work anymore with `@nestjs/graphql` from version 7.0.
-
-### Advanced usage
 
 #### Custom operations
 
@@ -220,30 +281,6 @@ export class CustomUserResolver {
     return favoritePost;
   }
 }
-```
-
-#### Exposing selected Prisma actions
-
-If you want to expose only certain Prisma actions, like `findManyUser` or `createOneUser`, you can import resolver classes only for them, instead of the whole model `CrudResolver`.
-Then you just have to put them into the `buildSchema`:
-
-```ts
-import {
-  User,
-  UserRelationsResolver,
-  FindManyUserResolver,
-  CreateUserResolver,
-} from "@generated/type-graphql";
-
-const schema = await buildSchema({
-  resolvers: [
-    CustomUserResolver,
-    UserRelationsResolver,
-    FindManyUserResolver,
-    CreateUserResolver,
-  ],
-  validate: false,
-});
 ```
 
 #### Changing exposed model type name
@@ -364,7 +401,7 @@ It will generate then all the output type and model type classes with `simpleRes
 export class BatchPayload {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
-    description: undefined
+    description: undefined,
   })
   count!: number;
 }

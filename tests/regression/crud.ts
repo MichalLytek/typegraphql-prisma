@@ -35,8 +35,24 @@ describe("crud", () => {
     const userCrudResolverTSFile = await readGeneratedFile(
       "/resolvers/crud/User/UserCrudResolver.ts",
     );
+    const indexTSFile = await readGeneratedFile("/resolvers/crud/index.ts");
+    const argsIndexTSFile = await readGeneratedFile(
+      "/resolvers/crud/args.index.ts",
+    );
+    const crudIndexTSFile = await readGeneratedFile(
+      "/resolvers/crud/resolvers-crud.index.ts",
+    );
+    const actionsIndexTSFile = await readGeneratedFile(
+      "/resolvers/crud/resolvers-actions.index.ts",
+    );
+    const mainIndexTSFile = await readGeneratedFile("/index.ts");
 
     expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+    expect(indexTSFile).toMatchSnapshot("Index");
+    expect(argsIndexTSFile).toMatchSnapshot("argsIndex");
+    expect(crudIndexTSFile).toMatchSnapshot("crudIndex");
+    expect(actionsIndexTSFile).toMatchSnapshot("actionsIndex");
+    expect(mainIndexTSFile).toMatchSnapshot("mainIndex");
   });
 
   it("should properly generate resolver class when useOriginalMapping is used", async () => {
@@ -201,6 +217,15 @@ describe("crud", () => {
       "/resolvers/crud/User/UpsertUserResolver.ts",
     );
     const indexTSFile = await readGeneratedFile("/resolvers/crud/index.ts");
+    const argsIndexTSFile = await readGeneratedFile(
+      "/resolvers/crud/args.index.ts",
+    );
+    const crudIndexTSFile = await readGeneratedFile(
+      "/resolvers/crud/resolvers-crud.index.ts",
+    );
+    const actionsIndexTSFile = await readGeneratedFile(
+      "/resolvers/crud/resolvers-actions.index.ts",
+    );
 
     expect(createUserResolverTSFile).toMatchSnapshot("CreateOneUserResolver");
     expect(deleteManyUserResolverTSFile).toMatchSnapshot(
@@ -218,6 +243,9 @@ describe("crud", () => {
     expect(updateUserResolverTSFile).toMatchSnapshot("UpdateUserResolver");
     expect(upsertUserResolverTSFile).toMatchSnapshot("UpsertUserResolver");
     expect(indexTSFile).toMatchSnapshot("Index");
+    expect(argsIndexTSFile).toMatchSnapshot("argsIndex");
+    expect(crudIndexTSFile).toMatchSnapshot("crudIndex");
+    expect(actionsIndexTSFile).toMatchSnapshot("actionsIndex");
   });
 
   describe("when model is renamed", () => {
@@ -360,7 +388,6 @@ describe("crud", () => {
       const upsertClientResolverTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/UpsertClientResolver.ts",
       );
-      const indexTSFile = await readGeneratedFile("/resolvers/crud/index.ts");
 
       expect(createClientResolverTSFile).toMatchSnapshot(
         "CreateOneClientResolver",
@@ -389,7 +416,6 @@ describe("crud", () => {
       expect(upsertClientResolverTSFile).toMatchSnapshot(
         "UpsertClientResolver",
       );
-      expect(indexTSFile).toMatchSnapshot("Index");
     });
   });
 });

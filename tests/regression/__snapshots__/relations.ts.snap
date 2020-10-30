@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`relations resolvers generation should properly generate index files for relation resolvers: argsIndex 1`] = `
+"export * from \\"./User/args\\";
+"
+`;
+
+exports[`relations resolvers generation should properly generate index files for relation resolvers: index 1`] = `
+"export * from \\"./resolvers.index\\";
+export * from \\"./args.index\\";
+"
+`;
+
+exports[`relations resolvers generation should properly generate index files for relation resolvers: mainIndex 1`] = `
+"import { NonEmptyArray } from \\"type-graphql\\";
+import * as crudResolvers from \\"./resolvers/crud/resolvers-crud.index\\";
+import * as relationResolvers from \\"./resolvers/relations/resolvers.index\\";
+
+export * from \\"./enums\\";
+export * from \\"./models\\";
+export * from \\"./resolvers/crud\\";
+export * from \\"./resolvers/relations\\";
+export * from \\"./resolvers/inputs\\";
+export * from \\"./resolvers/outputs\\";
+
+export const resolvers = [...Object.values(crudResolvers), ...Object.values(relationResolvers)] as unknown as NonEmptyArray<Function>;
+
+export { crudResolvers, relationResolvers };
+"
+`;
+
+exports[`relations resolvers generation should properly generate index files for relation resolvers: resolversIndex 1`] = `
+"export { AddressRelationsResolver } from \\"./Address/AddressRelationsResolver\\";
+export { UserRelationsResolver } from \\"./User/UserRelationsResolver\\";
+"
+`;
+
 exports[`relations resolvers generation should properly generate relation resolver class for model with multi id keys with relation: MovieRelationsResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Director } from \\"../../../models/Director\\";
