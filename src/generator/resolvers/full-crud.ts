@@ -16,7 +16,7 @@ import { DMMF } from "../dmmf/types";
 export default function generateCrudResolverClassFromMapping(
   project: Project,
   baseDirPath: string,
-  mapping: DMMF.Mapping,
+  mapping: DMMF.ModelMapping,
   model: DMMF.Model,
   dmmfDocument: DmmfDocument,
 ) {

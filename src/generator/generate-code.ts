@@ -295,7 +295,7 @@ export default async function generateCode(
   }
 
   log("Generating crud resolvers...");
-  dmmfDocument.mappings.forEach(async mapping => {
+  dmmfDocument.modelMappings.forEach(async mapping => {
     const model = dmmfDocument.datamodel.models.find(
       model => model.name === mapping.model,
     )!;
@@ -320,18 +320,18 @@ export default async function generateCode(
       );
     });
   });
-  const generateMappingData = dmmfDocument.mappings.map<GenerateMappingData>(
-    mapping => {
-      const model = dmmfDocument.datamodel.models.find(
-        model => model.name === mapping.model,
-      )!;
-      return {
-        modelName: model.typeName,
-        resolverName: mapping.resolverName,
-        actionResolverNames: mapping.actions.map(it => it.actionResolverName),
-      };
-    },
-  );
+  const generateMappingData = dmmfDocument.modelMappings.map<
+    GenerateMappingData
+  >(mapping => {
+    const model = dmmfDocument.datamodel.models.find(
+      model => model.name === mapping.model,
+    )!;
+    return {
+      modelName: model.typeName,
+      resolverName: mapping.resolverName,
+      actionResolverNames: mapping.actions.map(it => it.actionResolverName),
+    };
+  });
   const crudResolversBarrelExportSourceFile = project.createSourceFile(
     path.resolve(
       baseDirPath,
@@ -374,7 +374,7 @@ export default async function generateCode(
   generateResolversIndexFile(crudResolversIndexSourceFile, "crud");
 
   log("Generating crud resolvers args...");
-  dmmfDocument.mappings.forEach(async mapping => {
+  dmmfDocument.modelMappings.forEach(async mapping => {
     const actionsWithArgs = mapping.actions.filter(
       it => it.argsTypeName !== undefined,
     );
@@ -421,7 +421,7 @@ export default async function generateCode(
   );
   generateArgsIndexFile(
     crudResolversArgsIndexSourceFile,
-    dmmfDocument.mappings
+    dmmfDocument.modelMappings
       .filter(mapping =>
         mapping.actions.some(it => it.argsTypeName !== undefined),
       )

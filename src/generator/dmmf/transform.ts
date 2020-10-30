@@ -28,10 +28,10 @@ export function transformSchema(
 }
 
 export function transformMappings(
-  mapping: PrismaDMMF.Mapping[],
+  mapping: PrismaDMMF.ModelMapping[],
   dmmfDocument: DmmfDocument,
   options: GenerateCodeOptions,
-): DMMF.Mapping[] {
+): DMMF.ModelMapping[] {
   return mapping.map(transformMapping(dmmfDocument, options));
 }
 
@@ -224,7 +224,7 @@ function transformMapping(
   dmmfDocument: DmmfDocument,
   options: GenerateCodeOptions,
 ) {
-  return (mapping: PrismaDMMF.Mapping): DMMF.Mapping => {
+  return (mapping: PrismaDMMF.ModelMapping): DMMF.ModelMapping => {
     const { model, plural, ...availableActions } = mapping;
     const modelTypeName = dmmfDocument.getModelTypeName(model) ?? model;
     const actions = Object.entries(availableActions)

@@ -18,7 +18,7 @@ export default function generateActionResolverClass(
   baseDirPath: string,
   model: DMMF.Model,
   action: DMMF.Action,
-  mapping: DMMF.Mapping,
+  mapping: DMMF.ModelMapping,
   dmmfDocument: DmmfDocument,
 ) {
   const sourceFile = project.createSourceFile(

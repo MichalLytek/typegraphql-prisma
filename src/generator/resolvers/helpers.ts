@@ -8,7 +8,7 @@ export function generateCrudResolverClassMethodDeclaration(
   action: DMMF.Action,
   typeName: string,
   dmmfDocument: DmmfDocument,
-  mapping: DMMF.Mapping,
+  mapping: DMMF.ModelMapping,
 ): OptionalKind<MethodDeclarationStructure> {
   // TODO: move to DMMF transform step
   const returnTSType = getFieldTSType(

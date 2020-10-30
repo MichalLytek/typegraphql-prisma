@@ -15,7 +15,7 @@ export class DmmfDocument implements DMMF.Document {
   datamodel: DMMF.Datamodel;
   schema: DMMF.Schema;
   enums: DMMF.Enum[];
-  mappings: DMMF.Mapping[];
+  modelMappings: DMMF.ModelMapping[];
   relationModels: DMMF.RelationModel[];
 
   constructor(
@@ -39,7 +39,11 @@ export class DmmfDocument implements DMMF.Document {
       ...transformSchema(schema, this),
       enums: this.enums,
     };
-    this.mappings = transformMappings(mappings, this, options);
+    this.modelMappings = transformMappings(
+      mappings.modelOperations,
+      this,
+      options,
+    );
     this.relationModels = this.models
       .filter(model =>
         model.fields.some(

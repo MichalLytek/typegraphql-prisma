@@ -2,7 +2,7 @@ export namespace DMMF {
   export interface Document {
     datamodel: Datamodel;
     schema: Schema;
-    mappings: Mapping[];
+    modelMappings: ModelMapping[];
   }
   export interface Enum {
     name: string;
@@ -156,7 +156,7 @@ export namespace DMMF {
     // additional props
     typeName: string;
   }
-  export interface Mapping {
+  export interface ModelMapping {
     model: string;
     plural: string;
     // findOne?: string | null;

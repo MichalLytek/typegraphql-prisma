@@ -12,6 +12,7 @@ import {
   join,
   raw,
   Sql,
+  Decimal,
 } from './runtime';
 
 export { PrismaClientKnownRequestError }
@@ -19,6 +20,7 @@ export { PrismaClientUnknownRequestError }
 export { PrismaClientRustPanicError }
 export { PrismaClientInitializationError }
 export { PrismaClientValidationError }
+export { Decimal }
 
 /**
  * Re-export of sql-template-tag
@@ -26,8 +28,8 @@ export { PrismaClientValidationError }
 export { sql, empty, join, raw, Sql }
 
 /**
- * Prisma Client JS version: 2.9.0
- * Query Engine version: 369b3694b7edb869fad14827a33ad3f3f49bbc20
+ * Prisma Client JS version: 2.10.1
+ * Query Engine version: 7d0087eadc7265e12d4b8d8c3516b02c4c965111
  */
 export declare type PrismaVersion = {
   client: string
@@ -347,12 +349,12 @@ export declare class PrismaClient<
   * 
   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
   */
-  $executeRaw<T = any>(query: string | TemplateStringsArray, ...values: any[]): Promise<number>;
+  $executeRaw<T = any>(query: string | TemplateStringsArray | Sql, ...values: any[]): Promise<number>;
 
   /**
    * @deprecated renamed to `$executeRaw`
    */
-  executeRaw<T = any>(query: string | TemplateStringsArray, ...values: any[]): Promise<number>;
+  executeRaw<T = any>(query: string | TemplateStringsArray | Sql, ...values: any[]): Promise<number>;
 
   /**
    * Performs a raw query and returns the SELECT data
@@ -366,12 +368,12 @@ export declare class PrismaClient<
   * 
   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
   */
-  $queryRaw<T = any>(query: string | TemplateStringsArray, ...values: any[]): Promise<T>;
+  $queryRaw<T = any>(query: string | TemplateStringsArray | Sql, ...values: any[]): Promise<T>;
  
   /**
    * @deprecated renamed to `$queryRaw`
    */
-  queryRaw<T = any>(query: string | TemplateStringsArray, ...values: any[]): Promise<T>;
+  queryRaw<T = any>(query: string | TemplateStringsArray | Sql, ...values: any[]): Promise<T>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.

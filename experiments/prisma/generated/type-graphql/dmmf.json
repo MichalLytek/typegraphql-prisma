@@ -18162,110 +18162,119 @@
       }
     ]
   },
-  "mappings": [
-    {
-      "model": "User",
-      "aggregate": "aggregateUser",
-      "createOne": "createOneUser",
-      "deleteMany": "deleteManyUser",
-      "deleteOne": "deleteOneUser",
-      "findFirst": "findFirstUser",
-      "findMany": "findManyUser",
-      "findOne": "findOneUser",
-      "updateMany": "updateManyUser",
-      "updateOne": "updateOneUser",
-      "upsertOne": "upsertOneUser"
-    },
-    {
-      "model": "post",
-      "aggregate": "aggregatepost",
-      "createOne": "createOnepost",
-      "deleteMany": "deleteManypost",
-      "deleteOne": "deleteOnepost",
-      "findFirst": "findFirstpost",
-      "findMany": "findManypost",
-      "findOne": "findOnepost",
-      "updateMany": "updateManypost",
-      "updateOne": "updateOnepost",
-      "upsertOne": "upsertOnepost"
-    },
-    {
-      "model": "Category",
-      "aggregate": "aggregateCategory",
-      "createOne": "createOneCategory",
-      "deleteMany": "deleteManyCategory",
-      "deleteOne": "deleteOneCategory",
-      "findFirst": "findFirstCategory",
-      "findMany": "findManyCategory",
-      "findOne": "findOneCategory",
-      "updateMany": "updateManyCategory",
-      "updateOne": "updateOneCategory",
-      "upsertOne": "upsertOneCategory"
-    },
-    {
-      "model": "Patient",
-      "aggregate": "aggregatePatient",
-      "createOne": "createOnePatient",
-      "deleteMany": "deleteManyPatient",
-      "deleteOne": "deleteOnePatient",
-      "findFirst": "findFirstPatient",
-      "findMany": "findManyPatient",
-      "findOne": "findOnePatient",
-      "updateMany": "updateManyPatient",
-      "updateOne": "updateOnePatient",
-      "upsertOne": "upsertOnePatient"
-    },
-    {
-      "model": "Movie",
-      "aggregate": "aggregateMovie",
-      "createOne": "createOneMovie",
-      "deleteMany": "deleteManyMovie",
-      "deleteOne": "deleteOneMovie",
-      "findFirst": "findFirstMovie",
-      "findMany": "findManyMovie",
-      "findOne": "findOneMovie",
-      "updateMany": "updateManyMovie",
-      "updateOne": "updateOneMovie",
-      "upsertOne": "upsertOneMovie"
-    },
-    {
-      "model": "Director",
-      "aggregate": "aggregateDirector",
-      "createOne": "createOneDirector",
-      "deleteMany": "deleteManyDirector",
-      "deleteOne": "deleteOneDirector",
-      "findFirst": "findFirstDirector",
-      "findMany": "findManyDirector",
-      "findOne": "findOneDirector",
-      "updateMany": "updateManyDirector",
-      "updateOne": "updateOneDirector",
-      "upsertOne": "upsertOneDirector"
-    },
-    {
-      "model": "Problem",
-      "aggregate": "aggregateProblem",
-      "createOne": "createOneProblem",
-      "deleteMany": "deleteManyProblem",
-      "deleteOne": "deleteOneProblem",
-      "findFirst": "findFirstProblem",
-      "findMany": "findManyProblem",
-      "findOne": "findOneProblem",
-      "updateMany": "updateManyProblem",
-      "updateOne": "updateOneProblem",
-      "upsertOne": "upsertOneProblem"
-    },
-    {
-      "model": "Creator",
-      "aggregate": "aggregateCreator",
-      "createOne": "createOneCreator",
-      "deleteMany": "deleteManyCreator",
-      "deleteOne": "deleteOneCreator",
-      "findFirst": "findFirstCreator",
-      "findMany": "findManyCreator",
-      "findOne": "findOneCreator",
-      "updateMany": "updateManyCreator",
-      "updateOne": "updateOneCreator",
-      "upsertOne": "upsertOneCreator"
+  "mappings": {
+    "modelOperations": [
+      {
+        "model": "User",
+        "aggregate": "aggregateUser",
+        "createOne": "createOneUser",
+        "deleteMany": "deleteManyUser",
+        "deleteOne": "deleteOneUser",
+        "findFirst": "findFirstUser",
+        "findMany": "findManyUser",
+        "findOne": "findOneUser",
+        "updateMany": "updateManyUser",
+        "updateOne": "updateOneUser",
+        "upsertOne": "upsertOneUser"
+      },
+      {
+        "model": "post",
+        "aggregate": "aggregatepost",
+        "createOne": "createOnepost",
+        "deleteMany": "deleteManypost",
+        "deleteOne": "deleteOnepost",
+        "findFirst": "findFirstpost",
+        "findMany": "findManypost",
+        "findOne": "findOnepost",
+        "updateMany": "updateManypost",
+        "updateOne": "updateOnepost",
+        "upsertOne": "upsertOnepost"
+      },
+      {
+        "model": "Category",
+        "aggregate": "aggregateCategory",
+        "createOne": "createOneCategory",
+        "deleteMany": "deleteManyCategory",
+        "deleteOne": "deleteOneCategory",
+        "findFirst": "findFirstCategory",
+        "findMany": "findManyCategory",
+        "findOne": "findOneCategory",
+        "updateMany": "updateManyCategory",
+        "updateOne": "updateOneCategory",
+        "upsertOne": "upsertOneCategory"
+      },
+      {
+        "model": "Patient",
+        "aggregate": "aggregatePatient",
+        "createOne": "createOnePatient",
+        "deleteMany": "deleteManyPatient",
+        "deleteOne": "deleteOnePatient",
+        "findFirst": "findFirstPatient",
+        "findMany": "findManyPatient",
+        "findOne": "findOnePatient",
+        "updateMany": "updateManyPatient",
+        "updateOne": "updateOnePatient",
+        "upsertOne": "upsertOnePatient"
+      },
+      {
+        "model": "Movie",
+        "aggregate": "aggregateMovie",
+        "createOne": "createOneMovie",
+        "deleteMany": "deleteManyMovie",
+        "deleteOne": "deleteOneMovie",
+        "findFirst": "findFirstMovie",
+        "findMany": "findManyMovie",
+        "findOne": "findOneMovie",
+        "updateMany": "updateManyMovie",
+        "updateOne": "updateOneMovie",
+        "upsertOne": "upsertOneMovie"
+      },
+      {
+        "model": "Director",
+        "aggregate": "aggregateDirector",
+        "createOne": "createOneDirector",
+        "deleteMany": "deleteManyDirector",
+        "deleteOne": "deleteOneDirector",
+        "findFirst": "findFirstDirector",
+        "findMany": "findManyDirector",
+        "findOne": "findOneDirector",
+        "updateMany": "updateManyDirector",
+        "updateOne": "updateOneDirector",
+        "upsertOne": "upsertOneDirector"
+      },
+      {
+        "model": "Problem",
+        "aggregate": "aggregateProblem",
+        "createOne": "createOneProblem",
+        "deleteMany": "deleteManyProblem",
+        "deleteOne": "deleteOneProblem",
+        "findFirst": "findFirstProblem",
+        "findMany": "findManyProblem",
+        "findOne": "findOneProblem",
+        "updateMany": "updateManyProblem",
+        "updateOne": "updateOneProblem",
+        "upsertOne": "upsertOneProblem"
+      },
+      {
+        "model": "Creator",
+        "aggregate": "aggregateCreator",
+        "createOne": "createOneCreator",
+        "deleteMany": "deleteManyCreator",
+        "deleteOne": "deleteOneCreator",
+        "findFirst": "findFirstCreator",
+        "findMany": "findManyCreator",
+        "findOne": "findOneCreator",
+        "updateMany": "updateManyCreator",
+        "updateOne": "updateOneCreator",
+        "upsertOne": "upsertOneCreator"
+      }
+    ],
+    "otherOperations": {
+      "read": [],
+      "write": [
+        "executeRaw",
+        "queryRaw"
+      ]
     }
-  ]
+  }
 }
