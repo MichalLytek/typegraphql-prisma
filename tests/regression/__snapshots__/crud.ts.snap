@@ -561,17 +561,17 @@ exports[`crud should properly generate resolver class for single prisma model: c
 
 exports[`crud should properly generate resolver class for single prisma model: mainIndex 1`] = `
 "import { NonEmptyArray } from \\"type-graphql\\";
-import * as crudResolvers from \\"./resolvers/crud/resolvers-crud.index\\";
+import * as crudResolversImport from \\"./resolvers/crud/resolvers-crud.index\\";
 
 export * from \\"./enums\\";
 export * from \\"./models\\";
 export * from \\"./resolvers/crud\\";
 export * from \\"./resolvers/inputs\\";
 export * from \\"./resolvers/outputs\\";
+export * from \\"./enhance\\";
 
-export const resolvers = [...Object.values(crudResolvers)] as unknown as NonEmptyArray<Function>;
-
-export { crudResolvers };
+export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
+export const resolvers = [...crudResolvers] as unknown as NonEmptyArray<Function>;
 "
 `;
 

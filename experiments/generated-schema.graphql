@@ -3,14 +3,6 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type AggregateCategory {
-  avg: CategoryAvgAggregate
-  count: Int!
-  max: CategoryMaxAggregate
-  min: CategoryMinAggregate
-  sum: CategorySumAggregate
-}
-
 type AggregateClient {
   avg: ClientAvgAggregate
   count: Int!
@@ -66,50 +58,16 @@ type Category {
   slug: String!
 }
 
-type CategoryAvgAggregate {
-  number: Float!
-}
-
-input CategoryCreateInput {
-  name: String!
-  number: Int!
-  slug: String!
-}
-
 enum CategoryDistinctFieldEnum {
   name
   number
   slug
 }
 
-type CategoryMaxAggregate {
-  number: Int!
-}
-
-type CategoryMinAggregate {
-  number: Int!
-}
-
 input CategoryOrderByInput {
   name: SortOrder
   number: SortOrder
   slug: SortOrder
-}
-
-type CategorySumAggregate {
-  number: Int!
-}
-
-input CategoryUpdateInput {
-  name: StringFieldUpdateOperationsInput
-  number: IntFieldUpdateOperationsInput
-  slug: StringFieldUpdateOperationsInput
-}
-
-input CategoryUpdateManyMutationInput {
-  name: StringFieldUpdateOperationsInput
-  number: IntFieldUpdateOperationsInput
-  slug: StringFieldUpdateOperationsInput
 }
 
 input CategoryWhereInput {
@@ -806,7 +764,6 @@ input MovieWhereUniqueInput {
 }
 
 type Mutation {
-  createCategory(data: CategoryCreateInput!): Category!
   createClient(data: ClientCreateInput!): Client!
   createCreator(data: CreatorCreateInput!): Creator!
   createDirector(data: DirectorCreateInput!): Director!
@@ -815,11 +772,9 @@ type Mutation {
   createPost(data: PostCreateInput!): Post!
   createProblem(data: ProblemCreateInput!): Problem!
   customCreatePost(data: PostCreateInput!): Post!
-  deleteCategory(where: CategoryWhereUniqueInput!): Category
   deleteClient(where: ClientWhereUniqueInput!): Client
   deleteCreator(where: CreatorWhereUniqueInput!): Creator
   deleteDirector(where: DirectorWhereUniqueInput!): Director
-  deleteManyCategory(where: CategoryWhereInput): BatchPayload!
   deleteManyClient(where: ClientWhereInput): BatchPayload!
   deleteManyCreator(where: CreatorWhereInput): BatchPayload!
   deleteManyDirector(where: DirectorWhereInput): BatchPayload!
@@ -829,11 +784,9 @@ type Mutation {
   deleteMovie(where: MovieWhereUniqueInput!): Movie
   deletePatient(where: PatientWhereUniqueInput!): Patient
   deleteProblem(where: ProblemWhereUniqueInput!): Problem
-  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   updateClient(data: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client
   updateCreator(data: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator
   updateDirector(data: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director
-  updateManyCategory(data: CategoryUpdateManyMutationInput!, where: CategoryWhereInput): BatchPayload!
   updateManyClient(data: ClientUpdateManyMutationInput!, where: ClientWhereInput): BatchPayload!
   updateManyCreator(data: CreatorUpdateManyMutationInput!, where: CreatorWhereInput): BatchPayload!
   updateManyDirector(data: DirectorUpdateManyMutationInput!, where: DirectorWhereInput): BatchPayload!
@@ -844,7 +797,6 @@ type Mutation {
   updateMovie(data: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie
   updatePatient(data: PatientUpdateInput!, where: PatientWhereUniqueInput!): Patient
   updateProblem(data: ProblemUpdateInput!, where: ProblemWhereUniqueInput!): Problem
-  upsertCategory(create: CategoryCreateInput!, update: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category!
   upsertClient(create: ClientCreateInput!, update: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client!
   upsertCreator(create: CreatorCreateInput!, update: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator!
   upsertDirector(create: DirectorCreateInput!, update: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director!
@@ -1434,7 +1386,6 @@ input ProblemWhereUniqueInput {
 }
 
 type Query {
-  aggregateCategory(cursor: CategoryWhereUniqueInput, distinct: [CategoryDistinctFieldEnum!], orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): AggregateCategory!
   aggregateClient(cursor: ClientWhereUniqueInput, distinct: [ClientDistinctFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): AggregateClient!
   aggregateCreator(cursor: CreatorWhereUniqueInput, distinct: [CreatorDistinctFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): AggregateCreator!
   aggregateDirector(cursor: DirectorWhereUniqueInput, distinct: [DirectorDistinctFieldEnum!], orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): AggregateDirector!
@@ -1444,7 +1395,6 @@ type Query {
   allClients: [Client!]!
   allPosts: [Post!]!
   categories(cursor: CategoryWhereUniqueInput, distinct: [CategoryDistinctFieldEnum!], orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): [Category!]!
-  category(where: CategoryWhereUniqueInput!): Category
   client(where: ClientWhereUniqueInput!): Client
   clients(cursor: ClientWhereUniqueInput, distinct: [ClientDistinctFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): [Client!]!
   creator(where: CreatorWhereUniqueInput!): Creator
@@ -1452,7 +1402,6 @@ type Query {
   customFindClientsWithArgs(cursor: ClientWhereUniqueInput, distinct: [ClientDistinctFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): [Client!]!
   director(where: DirectorWhereUniqueInput!): Director
   directors(cursor: DirectorWhereUniqueInput, distinct: [DirectorDistinctFieldEnum!], orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): [Director!]!
-  findFirstCategory(cursor: CategoryWhereUniqueInput, distinct: [CategoryDistinctFieldEnum!], orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): Category
   findFirstClient(cursor: ClientWhereUniqueInput, distinct: [ClientDistinctFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): Client
   findFirstCreator(cursor: CreatorWhereUniqueInput, distinct: [CreatorDistinctFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): Creator
   findFirstDirector(cursor: DirectorWhereUniqueInput, distinct: [DirectorDistinctFieldEnum!], orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): Director

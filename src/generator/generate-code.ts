@@ -39,6 +39,7 @@ import generateArgsTypeClassFromArgs from "./args-class";
 import generateActionResolverClass from "./resolvers/separate-action";
 import { ensureInstalledCorrectPrismaPackage } from "../utils/prisma-version";
 import { GenerateMappingData } from "./types";
+import { generateEnhanceMap } from "./enhance";
 
 const baseCompilerOptions: CompilerOptions = {
   target: ScriptTarget.ES2019,
@@ -427,6 +428,14 @@ export default async function generateCode(
       )
       .map(mapping => mapping.modelTypeName),
   );
+
+  log("Generate enhance map");
+  const enhanceSourceFile = project.createSourceFile(
+    baseDirPath + "/enhance.ts",
+    undefined,
+    { overwrite: true },
+  );
+  generateEnhanceMap(enhanceSourceFile, dmmfDocument.modelMappings);
 
   log("Generating index file");
   const indexSourceFile = project.createSourceFile(

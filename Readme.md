@@ -262,6 +262,60 @@ export class CustomUserResolver {
 }
 ```
 
+#### Additional decorators for Prisma schema resolvers
+
+When you need to apply some decorators like `@Authorized`, `@UseMiddleware` or `@Extensions` on the generated resolvers methods, you don't need to modify the generated source files.
+
+To support this, `typegraphql-prisma` generates two things: `applyResolversEnhanceMap` function and a `ResolversEnhanceMap` type. All you need to do is to create a config object, where you put the decorator functions (without `@`) in an array, and then call that function with that config, eg.:
+
+```ts
+import {
+  ResolversEnhanceMap,
+  applyResolversEnhanceMap,
+} from "@generated/type-graphql";
+import { Authorized } from "type-graphql";
+
+const resolversEnhanceMap: ResolversEnhanceMap = {
+  Category: {
+    createCategory: [Authorized(Role.ADMIN)],
+  },
+};
+
+applyResolversEnhanceMap(resolversEnhanceMap);
+```
+
+This way, when you call `createCategory` GraphQL mutation, it will trigger the `type-graphql` `authChecker` function, providing a `Role.ADMIN` role, just like you would put the `@Authorized` on top of the resolver method.
+
+Also, if you have a large schema and you need to provide plenty of decorators, you can split the config definition into multiple smaller objects placed in different files.
+To accomplish this, just import the generic `ResolverActionsConfig` type and define the resolvers config separately for every Prisma schema model, e.g:
+
+```ts
+import {
+  ResolversEnhanceMap,
+  ResolverActionsConfig,
+  applyResolversEnhanceMap,
+} from "@generated/type-graphql";
+import { Authorized, Extensions } from "type-graphql";
+
+// define the decorators config using generic ResolverActionsConfig<TModelName> type
+const categoryActionsConfig: ResolverActionsConfig<"Category"> = {
+  deleteCategory: [
+    Authorized(Role.ADMIN),
+    Extensions({ logMessage: "Danger zone", logLevel: LogLevel.WARN }),
+  ],
+};
+const problemActionsConfig: ResolverActionsConfig<"Problem"> = {
+  createProblem: [Authorized()],
+};
+
+// join the actions config into a single resolvers enhance object
+const resolversEnhanceMap: ResolversEnhanceMap = {
+  Category: categoryActionsConfig,
+  Problem: problemActionsConfig,
+};
+applyResolversEnhanceMap(resolversEnhanceMap);
+```
+
 #### Adding fields to model type
 
 If you want to add a field to the generated type like `User`, you have to add a proper `@FieldResolver` for that:

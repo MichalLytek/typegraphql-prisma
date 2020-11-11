@@ -8,6 +8,7 @@ import {
   Ctx,
   Args,
   Mutation,
+  Authorized,
 } from "type-graphql";
 import { ApolloServer } from "apollo-server";
 import path from "path";
@@ -22,7 +23,6 @@ import {
   CreatePostResolver,
   UpdateManyPostResolver,
   // Category,
-  CategoryCrudResolver,
   // Patient,
   PatientCrudResolver,
   FindManyPostResolver,
@@ -34,11 +34,28 @@ import {
   ProblemRelationsResolver,
   CreatorRelationsResolver,
   CreatePostArgs,
+  ResolversEnhanceMap,
+  applyResolversEnhanceMap,
+  ResolverActionsConfig,
+  FindManyCategoryResolver,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
 import { ProblemCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Problem/ProblemCrudResolver";
 import { CreatorCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Creator/CreatorCrudResolver";
+
+const problemActionsConfig: ResolverActionsConfig<"Problem"> = {
+  createProblem: [Authorized()],
+};
+
+const resolversEnhanceMap: ResolversEnhanceMap = {
+  Category: {
+    categories: [Authorized()],
+  },
+  Problem: problemActionsConfig,
+};
+
+applyResolversEnhanceMap(resolversEnhanceMap);
 
 interface Context {
   prisma: PrismaClient;
@@ -92,7 +109,8 @@ async function main() {
       FindOnePostResolver,
       CreatePostResolver,
       UpdateManyPostResolver,
-      CategoryCrudResolver,
+      // CategoryCrudResolver,
+      FindManyCategoryResolver,
       PatientCrudResolver,
       FindManyPostResolver,
       MovieCrudResolver,
@@ -106,12 +124,20 @@ async function main() {
     ],
     validate: false,
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
+    authChecker: ({ info }) => {
+      console.log(
+        `${info.parentType.name}.${info.fieldName} requested, access prohibited`,
+      );
+      return false;
+    },
   });
 
   const prisma = new PrismaClient({
     // see dataloader for relations in action
     log: ["query"],
   });
+
+  await prisma.$connect();
 
   const server = new ApolloServer({
     schema,

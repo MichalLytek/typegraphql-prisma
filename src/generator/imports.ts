@@ -165,6 +165,7 @@ export function generateIndexFile(
       : []),
     { moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}` },
     { moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}` },
+    { moduleSpecifier: `./enhance` },
   ]);
 
   sourceFile.addImportDeclarations([
@@ -174,13 +175,13 @@ export function generateIndexFile(
     },
     {
       moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index`,
-      namespaceImport: "crudResolvers",
+      namespaceImport: "crudResolversImport",
     },
     ...(hasSomeRelations
       ? [
           {
             moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index`,
-            namespaceImport: "relationResolvers",
+            namespaceImport: "relationResolversImport",
           },
         ]
       : []),
@@ -191,18 +192,35 @@ export function generateIndexFile(
     declarationKind: VariableDeclarationKind.Const,
     declarations: [
       {
-        name: "resolvers",
-        initializer: `[...Object.values(crudResolvers)${
-          hasSomeRelations ? ", ...Object.values(relationResolvers)" : ""
-        }] as unknown as NonEmptyArray<Function>`,
+        name: "crudResolvers",
+        initializer: `Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>`,
       },
     ],
   });
 
-  sourceFile.addExportDeclaration({
-    namedExports: [
-      "crudResolvers",
-      ...(hasSomeRelations ? ["relationResolvers"] : []),
+  if (hasSomeRelations) {
+    sourceFile.addVariableStatement({
+      isExported: true,
+      declarationKind: VariableDeclarationKind.Const,
+      declarations: [
+        {
+          name: "relationResolvers",
+          initializer: `Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>`,
+        },
+      ],
+    });
+  }
+
+  sourceFile.addVariableStatement({
+    isExported: true,
+    declarationKind: VariableDeclarationKind.Const,
+    declarations: [
+      {
+        name: "resolvers",
+        initializer: `[...crudResolvers${
+          hasSomeRelations ? ", ...relationResolvers" : ""
+        }] as unknown as NonEmptyArray<Function>`,
+      },
     ],
   });
 }

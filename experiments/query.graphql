@@ -224,3 +224,11 @@ mutation AtomicNumberOperations {
     ...ClientData
   }
 }
+
+query ForbiddenCategories {
+  categories {
+    name
+    slug
+    number
+  }
+}

@@ -3,6 +3,8 @@
 exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode is set to true: structure 1`] = `
 "
 [type-graphql]
+  enhance.d.ts
+  enhance.js
   [enums]
     Color.d.ts
     Color.js
@@ -257,6 +259,7 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
 exports[`structure should generate proper folders and file names when model is renamed: structure 1`] = `
 "
 [type-graphql]
+  enhance.ts
   [enums]
     Color.ts
     QueryMode.ts
@@ -394,6 +397,7 @@ exports[`structure should generate proper folders and file names when model is r
 exports[`structure should generate proper folders structure and file names for complex datamodel: structure 1`] = `
 "
 [type-graphql]
+  enhance.ts
   [enums]
     Color.ts
     PostDistinctFieldEnum.ts

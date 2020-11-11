@@ -408,6 +408,7 @@ input UserWhereUniqueInput {
 exports[`generator integration should generates TypeGraphQL classes files to output folder by running \`prisma generate\`: files structure 1`] = `
 "
 [type-graphql]
+  enhance.ts
   [enums]
     Color.ts
     PostDistinctFieldEnum.ts
