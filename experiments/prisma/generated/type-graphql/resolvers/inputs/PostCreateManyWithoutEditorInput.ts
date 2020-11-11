@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { PostCreateOrConnectWithoutUserInput } from "../inputs/PostCreateOrConnectWithoutUserInput";
+import { PostCreateOrConnectWithouteditorInput } from "../inputs/PostCreateOrConnectWithouteditorInput";
 import { PostCreateWithoutEditorInput } from "../inputs/PostCreateWithoutEditorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
@@ -22,9 +22,9 @@ export class PostCreateManyWithoutEditorInput {
   })
   connect?: PostWhereUniqueInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithoutUserInput], {
+  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithouteditorInput], {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: PostCreateOrConnectWithoutUserInput[] | undefined;
+  connectOrCreate?: PostCreateOrConnectWithouteditorInput[] | undefined;
 }

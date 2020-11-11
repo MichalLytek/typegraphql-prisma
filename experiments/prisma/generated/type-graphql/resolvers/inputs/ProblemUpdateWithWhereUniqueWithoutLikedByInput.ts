@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { ProblemUpdateWithoutLikedByDataInput } from "../inputs/ProblemUpdateWithoutLikedByDataInput";
+import { ProblemUpdateWithoutLikedByInput } from "../inputs/ProblemUpdateWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -15,9 +15,9 @@ export class ProblemUpdateWithWhereUniqueWithoutLikedByInput {
   })
   where!: ProblemWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => ProblemUpdateWithoutLikedByDataInput, {
+  @TypeGraphQL.Field(_type => ProblemUpdateWithoutLikedByInput, {
     nullable: false,
     description: undefined
   })
-  data!: ProblemUpdateWithoutLikedByDataInput;
+  data!: ProblemUpdateWithoutLikedByInput;
 }

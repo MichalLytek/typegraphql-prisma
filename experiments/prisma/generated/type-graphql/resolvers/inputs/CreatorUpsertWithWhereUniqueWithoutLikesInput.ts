@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { CreatorCreateWithoutLikesInput } from "../inputs/CreatorCreateWithoutLikesInput";
-import { CreatorUpdateWithoutLikesDataInput } from "../inputs/CreatorUpdateWithoutLikesDataInput";
+import { CreatorUpdateWithoutLikesInput } from "../inputs/CreatorUpdateWithoutLikesInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -16,11 +16,11 @@ export class CreatorUpsertWithWhereUniqueWithoutLikesInput {
   })
   where!: CreatorWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => CreatorUpdateWithoutLikesDataInput, {
+  @TypeGraphQL.Field(_type => CreatorUpdateWithoutLikesInput, {
     nullable: false,
     description: undefined
   })
-  update!: CreatorUpdateWithoutLikesDataInput;
+  update!: CreatorUpdateWithoutLikesInput;
 
   @TypeGraphQL.Field(_type => CreatorCreateWithoutLikesInput, {
     nullable: false,

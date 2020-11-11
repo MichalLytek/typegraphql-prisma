@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { MovieUpdateWithoutDirectorDataInput } from "../inputs/MovieUpdateWithoutDirectorDataInput";
+import { MovieUpdateWithoutDirectorInput } from "../inputs/MovieUpdateWithoutDirectorInput";
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -15,9 +15,9 @@ export class MovieUpdateWithWhereUniqueWithoutDirectorInput {
   })
   where!: MovieWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => MovieUpdateWithoutDirectorDataInput, {
+  @TypeGraphQL.Field(_type => MovieUpdateWithoutDirectorInput, {
     nullable: false,
     description: undefined
   })
-  data!: MovieUpdateWithoutDirectorDataInput;
+  data!: MovieUpdateWithoutDirectorInput;
 }

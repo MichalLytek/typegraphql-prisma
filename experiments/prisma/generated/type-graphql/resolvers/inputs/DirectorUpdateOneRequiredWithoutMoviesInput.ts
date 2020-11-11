@@ -1,9 +1,9 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { DirectorCreateOrConnectWithoutMovieInput } from "../inputs/DirectorCreateOrConnectWithoutMovieInput";
+import { DirectorCreateOrConnectWithoutmoviesInput } from "../inputs/DirectorCreateOrConnectWithoutmoviesInput";
 import { DirectorCreateWithoutMoviesInput } from "../inputs/DirectorCreateWithoutMoviesInput";
-import { DirectorUpdateWithoutMoviesDataInput } from "../inputs/DirectorUpdateWithoutMoviesDataInput";
+import { DirectorUpdateWithoutMoviesInput } from "../inputs/DirectorUpdateWithoutMoviesInput";
 import { DirectorUpsertWithoutMoviesInput } from "../inputs/DirectorUpsertWithoutMoviesInput";
 import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 
@@ -24,11 +24,11 @@ export class DirectorUpdateOneRequiredWithoutMoviesInput {
   })
   connect?: DirectorWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorUpdateWithoutMoviesDataInput, {
+  @TypeGraphQL.Field(_type => DirectorUpdateWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })
-  update?: DirectorUpdateWithoutMoviesDataInput | undefined;
+  update?: DirectorUpdateWithoutMoviesInput | undefined;
 
   @TypeGraphQL.Field(_type => DirectorUpsertWithoutMoviesInput, {
     nullable: true,
@@ -36,9 +36,9 @@ export class DirectorUpdateOneRequiredWithoutMoviesInput {
   })
   upsert?: DirectorUpsertWithoutMoviesInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorCreateOrConnectWithoutMovieInput, {
+  @TypeGraphQL.Field(_type => DirectorCreateOrConnectWithoutmoviesInput, {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: DirectorCreateOrConnectWithoutMovieInput | undefined;
+  connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput | undefined;
 }

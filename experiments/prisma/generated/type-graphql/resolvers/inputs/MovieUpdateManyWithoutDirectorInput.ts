@@ -1,10 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { MovieCreateOrConnectWithoutDirectorInput } from "../inputs/MovieCreateOrConnectWithoutDirectorInput";
+import { MovieCreateOrConnectWithoutdirectorInput } from "../inputs/MovieCreateOrConnectWithoutdirectorInput";
 import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
 import { MovieScalarWhereInput } from "../inputs/MovieScalarWhereInput";
-import { MovieUpdateManyWithWhereNestedInput } from "../inputs/MovieUpdateManyWithWhereNestedInput";
+import { MovieUpdateManyWithWhereWithoutDirectorInput } from "../inputs/MovieUpdateManyWithWhereWithoutDirectorInput";
 import { MovieUpdateWithWhereUniqueWithoutDirectorInput } from "../inputs/MovieUpdateWithWhereUniqueWithoutDirectorInput";
 import { MovieUpsertWithWhereUniqueWithoutDirectorInput } from "../inputs/MovieUpsertWithWhereUniqueWithoutDirectorInput";
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
@@ -50,11 +50,11 @@ export class MovieUpdateManyWithoutDirectorInput {
   })
   update?: MovieUpdateWithWhereUniqueWithoutDirectorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [MovieUpdateManyWithWhereNestedInput], {
+  @TypeGraphQL.Field(_type => [MovieUpdateManyWithWhereWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
-  updateMany?: MovieUpdateManyWithWhereNestedInput[] | undefined;
+  updateMany?: MovieUpdateManyWithWhereWithoutDirectorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieScalarWhereInput], {
     nullable: true,
@@ -68,9 +68,9 @@ export class MovieUpdateManyWithoutDirectorInput {
   })
   upsert?: MovieUpsertWithWhereUniqueWithoutDirectorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [MovieCreateOrConnectWithoutDirectorInput], {
+  @TypeGraphQL.Field(_type => [MovieCreateOrConnectWithoutdirectorInput], {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: MovieCreateOrConnectWithoutDirectorInput[] | undefined;
+  connectOrCreate?: MovieCreateOrConnectWithoutdirectorInput[] | undefined;
 }

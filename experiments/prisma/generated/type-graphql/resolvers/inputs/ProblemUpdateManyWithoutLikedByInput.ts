@@ -1,10 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { ProblemCreateOrConnectWithoutCreatorInput } from "../inputs/ProblemCreateOrConnectWithoutCreatorInput";
+import { ProblemCreateOrConnectWithoutlikedByInput } from "../inputs/ProblemCreateOrConnectWithoutlikedByInput";
 import { ProblemCreateWithoutLikedByInput } from "../inputs/ProblemCreateWithoutLikedByInput";
 import { ProblemScalarWhereInput } from "../inputs/ProblemScalarWhereInput";
-import { ProblemUpdateManyWithWhereNestedInput } from "../inputs/ProblemUpdateManyWithWhereNestedInput";
+import { ProblemUpdateManyWithWhereWithoutLikedByInput } from "../inputs/ProblemUpdateManyWithWhereWithoutLikedByInput";
 import { ProblemUpdateWithWhereUniqueWithoutLikedByInput } from "../inputs/ProblemUpdateWithWhereUniqueWithoutLikedByInput";
 import { ProblemUpsertWithWhereUniqueWithoutLikedByInput } from "../inputs/ProblemUpsertWithWhereUniqueWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
@@ -50,11 +50,11 @@ export class ProblemUpdateManyWithoutLikedByInput {
   })
   update?: ProblemUpdateWithWhereUniqueWithoutLikedByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemUpdateManyWithWhereNestedInput], {
+  @TypeGraphQL.Field(_type => [ProblemUpdateManyWithWhereWithoutLikedByInput], {
     nullable: true,
     description: undefined
   })
-  updateMany?: ProblemUpdateManyWithWhereNestedInput[] | undefined;
+  updateMany?: ProblemUpdateManyWithWhereWithoutLikedByInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemScalarWhereInput], {
     nullable: true,
@@ -68,9 +68,9 @@ export class ProblemUpdateManyWithoutLikedByInput {
   })
   upsert?: ProblemUpsertWithWhereUniqueWithoutLikedByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutCreatorInput], {
+  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutlikedByInput], {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: ProblemCreateOrConnectWithoutCreatorInput[] | undefined;
+  connectOrCreate?: ProblemCreateOrConnectWithoutlikedByInput[] | undefined;
 }

@@ -2,7 +2,7 @@ import generateCode from "../../src/generator/generate-code";
 import getPrismaClientDmmfFromPrismaSchema from "./dmmf";
 import { GenerateCodeOptions } from "../../src/generator/options";
 
-type SupportedPreviewFeatures = "connectOrCreate";
+type SupportedPreviewFeatures = "";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<GenerateCodeOptions, "relativePrismaOutputPath"> {

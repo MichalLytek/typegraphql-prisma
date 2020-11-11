@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { PostUpdateWithoutEditorDataInput } from "../inputs/PostUpdateWithoutEditorDataInput";
+import { PostUpdateWithoutEditorInput } from "../inputs/PostUpdateWithoutEditorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -15,9 +15,9 @@ export class PostUpdateWithWhereUniqueWithoutEditorInput {
   })
   where!: PostWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => PostUpdateWithoutEditorDataInput, {
+  @TypeGraphQL.Field(_type => PostUpdateWithoutEditorInput, {
     nullable: false,
     description: undefined
   })
-  data!: PostUpdateWithoutEditorDataInput;
+  data!: PostUpdateWithoutEditorInput;
 }

@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { ClientCreateOrConnectWithoutpostInput } from "../inputs/ClientCreateOrConnectWithoutpostInput";
+import { ClientCreateOrConnectWithouteditorPostsInput } from "../inputs/ClientCreateOrConnectWithouteditorPostsInput";
 import { ClientCreateWithoutEditorPostsInput } from "../inputs/ClientCreateWithoutEditorPostsInput";
 import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
 
@@ -22,9 +22,9 @@ export class ClientCreateOneWithoutEditorPostsInput {
   })
   connect?: ClientWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientCreateOrConnectWithoutpostInput, {
+  @TypeGraphQL.Field(_type => ClientCreateOrConnectWithouteditorPostsInput, {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: ClientCreateOrConnectWithoutpostInput | undefined;
+  connectOrCreate?: ClientCreateOrConnectWithouteditorPostsInput | undefined;
 }

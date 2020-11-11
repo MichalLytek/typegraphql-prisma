@@ -92,6 +92,115 @@ export { SampleModelWhereUniqueInput } from \\"./SampleModelWhereUniqueInput\\";
 "
 `;
 
+exports[`inputs should properly generate input type classes for connectOrCreate: UserCreateOneWithoutPostsFieldInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { UserCreateOrConnectWithoutpostsFieldInput } from \\"../inputs/UserCreateOrConnectWithoutpostsFieldInput\\";
+import { UserCreateWithoutPostsFieldInput } from \\"../inputs/UserCreateWithoutPostsFieldInput\\";
+import { UserWhereUniqueInput } from \\"../inputs/UserWhereUniqueInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class UserCreateOneWithoutPostsFieldInput {
+  @TypeGraphQL.Field(_type => UserCreateWithoutPostsFieldInput, {
+    nullable: true,
+    description: undefined
+  })
+  create?: UserCreateWithoutPostsFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
+    nullable: true,
+    description: undefined
+  })
+  connect?: UserWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserCreateOrConnectWithoutpostsFieldInput, {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: UserCreateOrConnectWithoutpostsFieldInput | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for connectOrCreate: UserCreateOrConnectWithoutpostsFieldInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { UserCreateWithoutPostsFieldInput } from \\"../inputs/UserCreateWithoutPostsFieldInput\\";
+import { UserWhereUniqueInput } from \\"../inputs/UserWhereUniqueInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class UserCreateOrConnectWithoutpostsFieldInput {
+  @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
+    nullable: false,
+    description: undefined
+  })
+  where!: UserWhereUniqueInput;
+
+  @TypeGraphQL.Field(_type => UserCreateWithoutPostsFieldInput, {
+    nullable: false,
+    description: undefined
+  })
+  create!: UserCreateWithoutPostsFieldInput;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for connectOrCreate: UserUpdateOneRequiredWithoutPostsFieldInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { UserCreateOrConnectWithoutpostsFieldInput } from \\"../inputs/UserCreateOrConnectWithoutpostsFieldInput\\";
+import { UserCreateWithoutPostsFieldInput } from \\"../inputs/UserCreateWithoutPostsFieldInput\\";
+import { UserUpdateWithoutPostsFieldInput } from \\"../inputs/UserUpdateWithoutPostsFieldInput\\";
+import { UserUpsertWithoutPostsFieldInput } from \\"../inputs/UserUpsertWithoutPostsFieldInput\\";
+import { UserWhereUniqueInput } from \\"../inputs/UserWhereUniqueInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class UserUpdateOneRequiredWithoutPostsFieldInput {
+  @TypeGraphQL.Field(_type => UserCreateWithoutPostsFieldInput, {
+    nullable: true,
+    description: undefined
+  })
+  create?: UserCreateWithoutPostsFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
+    nullable: true,
+    description: undefined
+  })
+  connect?: UserWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserUpdateWithoutPostsFieldInput, {
+    nullable: true,
+    description: undefined
+  })
+  update?: UserUpdateWithoutPostsFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserUpsertWithoutPostsFieldInput, {
+    nullable: true,
+    description: undefined
+  })
+  upsert?: UserUpsertWithoutPostsFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserCreateOrConnectWithoutpostsFieldInput, {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: UserCreateOrConnectWithoutpostsFieldInput | undefined;
+}
+"
+`;
+
 exports[`inputs should properly generate input type classes for filtering models by fields: SampleModelWhereInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
@@ -403,17 +512,17 @@ export class FirstModelWhereUniqueInput {
 exports[`inputs should properly generate input type classes for filtering models by many to many relation fields: index 1`] = `
 "export { FirstModelCreateInput } from \\"./FirstModelCreateInput\\";
 export { FirstModelCreateManyWithoutSecondModelsFieldInput } from \\"./FirstModelCreateManyWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateOrConnectWithoutsecondModelsFieldInput } from \\"./FirstModelCreateOrConnectWithoutsecondModelsFieldInput\\";
 export { FirstModelCreateWithoutSecondModelsFieldInput } from \\"./FirstModelCreateWithoutSecondModelsFieldInput\\";
 export { FirstModelListRelationFilter } from \\"./FirstModelListRelationFilter\\";
 export { FirstModelOrderByInput } from \\"./FirstModelOrderByInput\\";
 export { FirstModelScalarWhereInput } from \\"./FirstModelScalarWhereInput\\";
 export { FirstModelUpdateInput } from \\"./FirstModelUpdateInput\\";
-export { FirstModelUpdateManyDataInput } from \\"./FirstModelUpdateManyDataInput\\";
 export { FirstModelUpdateManyMutationInput } from \\"./FirstModelUpdateManyMutationInput\\";
-export { FirstModelUpdateManyWithWhereNestedInput } from \\"./FirstModelUpdateManyWithWhereNestedInput\\";
+export { FirstModelUpdateManyWithWhereWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateManyWithWhereWithoutSecondModelsFieldInput\\";
 export { FirstModelUpdateManyWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateManyWithoutSecondModelsFieldInput\\";
 export { FirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput\\";
-export { FirstModelUpdateWithoutSecondModelsFieldDataInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldDataInput\\";
+export { FirstModelUpdateWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldInput\\";
 export { FirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./FirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput\\";
 export { FirstModelWhereInput } from \\"./FirstModelWhereInput\\";
 export { FirstModelWhereUniqueInput } from \\"./FirstModelWhereUniqueInput\\";
@@ -425,17 +534,17 @@ export { NestedIntFilter } from \\"./NestedIntFilter\\";
 export { NestedStringFilter } from \\"./NestedStringFilter\\";
 export { SecondModelCreateInput } from \\"./SecondModelCreateInput\\";
 export { SecondModelCreateManyWithoutFirstModelsFieldInput } from \\"./SecondModelCreateManyWithoutFirstModelsFieldInput\\";
+export { SecondModelCreateOrConnectWithoutfirstModelsFieldInput } from \\"./SecondModelCreateOrConnectWithoutfirstModelsFieldInput\\";
 export { SecondModelCreateWithoutFirstModelsFieldInput } from \\"./SecondModelCreateWithoutFirstModelsFieldInput\\";
 export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
 export { SecondModelOrderByInput } from \\"./SecondModelOrderByInput\\";
 export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
 export { SecondModelUpdateInput } from \\"./SecondModelUpdateInput\\";
-export { SecondModelUpdateManyDataInput } from \\"./SecondModelUpdateManyDataInput\\";
 export { SecondModelUpdateManyMutationInput } from \\"./SecondModelUpdateManyMutationInput\\";
-export { SecondModelUpdateManyWithWhereNestedInput } from \\"./SecondModelUpdateManyWithWhereNestedInput\\";
+export { SecondModelUpdateManyWithWhereWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateManyWithWhereWithoutFirstModelsFieldInput\\";
 export { SecondModelUpdateManyWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateManyWithoutFirstModelsFieldInput\\";
 export { SecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput\\";
-export { SecondModelUpdateWithoutFirstModelsFieldDataInput } from \\"./SecondModelUpdateWithoutFirstModelsFieldDataInput\\";
+export { SecondModelUpdateWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateWithoutFirstModelsFieldInput\\";
 export { SecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./SecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput\\";
 export { SecondModelWhereInput } from \\"./SecondModelWhereInput\\";
 export { SecondModelWhereUniqueInput } from \\"./SecondModelWhereUniqueInput\\";
@@ -807,13 +916,14 @@ export class SecondModelWhereUniqueInput {
 exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: index 1`] = `
 "export { FirstModelCreateInput } from \\"./FirstModelCreateInput\\";
 export { FirstModelCreateOneWithoutSecondModelsFieldInput } from \\"./FirstModelCreateOneWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateOrConnectWithoutsecondModelsFieldInput } from \\"./FirstModelCreateOrConnectWithoutsecondModelsFieldInput\\";
 export { FirstModelCreateWithoutSecondModelsFieldInput } from \\"./FirstModelCreateWithoutSecondModelsFieldInput\\";
 export { FirstModelOrderByInput } from \\"./FirstModelOrderByInput\\";
 export { FirstModelRelationFilter } from \\"./FirstModelRelationFilter\\";
 export { FirstModelUpdateInput } from \\"./FirstModelUpdateInput\\";
 export { FirstModelUpdateManyMutationInput } from \\"./FirstModelUpdateManyMutationInput\\";
 export { FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput\\";
-export { FirstModelUpdateWithoutSecondModelsFieldDataInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldDataInput\\";
+export { FirstModelUpdateWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldInput\\";
 export { FirstModelUpsertWithoutSecondModelsFieldInput } from \\"./FirstModelUpsertWithoutSecondModelsFieldInput\\";
 export { FirstModelWhereInput } from \\"./FirstModelWhereInput\\";
 export { FirstModelWhereUniqueInput } from \\"./FirstModelWhereUniqueInput\\";
@@ -825,17 +935,17 @@ export { NestedIntFilter } from \\"./NestedIntFilter\\";
 export { NestedStringFilter } from \\"./NestedStringFilter\\";
 export { SecondModelCreateInput } from \\"./SecondModelCreateInput\\";
 export { SecondModelCreateManyWithoutFirstModelFieldInput } from \\"./SecondModelCreateManyWithoutFirstModelFieldInput\\";
+export { SecondModelCreateOrConnectWithoutfirstModelFieldInput } from \\"./SecondModelCreateOrConnectWithoutfirstModelFieldInput\\";
 export { SecondModelCreateWithoutFirstModelFieldInput } from \\"./SecondModelCreateWithoutFirstModelFieldInput\\";
 export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
 export { SecondModelOrderByInput } from \\"./SecondModelOrderByInput\\";
 export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
 export { SecondModelUpdateInput } from \\"./SecondModelUpdateInput\\";
-export { SecondModelUpdateManyDataInput } from \\"./SecondModelUpdateManyDataInput\\";
 export { SecondModelUpdateManyMutationInput } from \\"./SecondModelUpdateManyMutationInput\\";
-export { SecondModelUpdateManyWithWhereNestedInput } from \\"./SecondModelUpdateManyWithWhereNestedInput\\";
+export { SecondModelUpdateManyWithWhereWithoutFirstModelFieldInput } from \\"./SecondModelUpdateManyWithWhereWithoutFirstModelFieldInput\\";
 export { SecondModelUpdateManyWithoutFirstModelFieldInput } from \\"./SecondModelUpdateManyWithoutFirstModelFieldInput\\";
 export { SecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput } from \\"./SecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput\\";
-export { SecondModelUpdateWithoutFirstModelFieldDataInput } from \\"./SecondModelUpdateWithoutFirstModelFieldDataInput\\";
+export { SecondModelUpdateWithoutFirstModelFieldInput } from \\"./SecondModelUpdateWithoutFirstModelFieldInput\\";
 export { SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput } from \\"./SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput\\";
 export { SecondModelWhereInput } from \\"./SecondModelWhereInput\\";
 export { SecondModelWhereUniqueInput } from \\"./SecondModelWhereUniqueInput\\";
@@ -1722,6 +1832,7 @@ export class FirstNameLastNameCompoundUniqueInput {
 exports[`inputs should properly generate input type classes for model with composite unique index: index 1`] = `
 "export { DirectorCreateInput } from \\"./DirectorCreateInput\\";
 export { DirectorCreateOneWithoutMoviesInput } from \\"./DirectorCreateOneWithoutMoviesInput\\";
+export { DirectorCreateOrConnectWithoutmoviesInput } from \\"./DirectorCreateOrConnectWithoutmoviesInput\\";
 export { DirectorCreateWithoutMoviesInput } from \\"./DirectorCreateWithoutMoviesInput\\";
 export { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"./DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
 export { DirectorOrderByInput } from \\"./DirectorOrderByInput\\";
@@ -1729,7 +1840,7 @@ export { DirectorRelationFilter } from \\"./DirectorRelationFilter\\";
 export { DirectorUpdateInput } from \\"./DirectorUpdateInput\\";
 export { DirectorUpdateManyMutationInput } from \\"./DirectorUpdateManyMutationInput\\";
 export { DirectorUpdateOneRequiredWithoutMoviesInput } from \\"./DirectorUpdateOneRequiredWithoutMoviesInput\\";
-export { DirectorUpdateWithoutMoviesDataInput } from \\"./DirectorUpdateWithoutMoviesDataInput\\";
+export { DirectorUpdateWithoutMoviesInput } from \\"./DirectorUpdateWithoutMoviesInput\\";
 export { DirectorUpsertWithoutMoviesInput } from \\"./DirectorUpsertWithoutMoviesInput\\";
 export { DirectorWhereInput } from \\"./DirectorWhereInput\\";
 export { DirectorWhereUniqueInput } from \\"./DirectorWhereUniqueInput\\";
@@ -1740,17 +1851,17 @@ export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput
 export { IntFilter } from \\"./IntFilter\\";
 export { MovieCreateInput } from \\"./MovieCreateInput\\";
 export { MovieCreateManyWithoutDirectorInput } from \\"./MovieCreateManyWithoutDirectorInput\\";
+export { MovieCreateOrConnectWithoutdirectorInput } from \\"./MovieCreateOrConnectWithoutdirectorInput\\";
 export { MovieCreateWithoutDirectorInput } from \\"./MovieCreateWithoutDirectorInput\\";
 export { MovieListRelationFilter } from \\"./MovieListRelationFilter\\";
 export { MovieOrderByInput } from \\"./MovieOrderByInput\\";
 export { MovieScalarWhereInput } from \\"./MovieScalarWhereInput\\";
 export { MovieUpdateInput } from \\"./MovieUpdateInput\\";
-export { MovieUpdateManyDataInput } from \\"./MovieUpdateManyDataInput\\";
 export { MovieUpdateManyMutationInput } from \\"./MovieUpdateManyMutationInput\\";
-export { MovieUpdateManyWithWhereNestedInput } from \\"./MovieUpdateManyWithWhereNestedInput\\";
+export { MovieUpdateManyWithWhereWithoutDirectorInput } from \\"./MovieUpdateManyWithWhereWithoutDirectorInput\\";
 export { MovieUpdateManyWithoutDirectorInput } from \\"./MovieUpdateManyWithoutDirectorInput\\";
 export { MovieUpdateWithWhereUniqueWithoutDirectorInput } from \\"./MovieUpdateWithWhereUniqueWithoutDirectorInput\\";
-export { MovieUpdateWithoutDirectorDataInput } from \\"./MovieUpdateWithoutDirectorDataInput\\";
+export { MovieUpdateWithoutDirectorInput } from \\"./MovieUpdateWithoutDirectorInput\\";
 export { MovieUpsertWithWhereUniqueWithoutDirectorInput } from \\"./MovieUpsertWithWhereUniqueWithoutDirectorInput\\";
 export { MovieWhereInput } from \\"./MovieWhereInput\\";
 export { MovieWhereUniqueInput } from \\"./MovieWhereUniqueInput\\";
@@ -1975,6 +2086,7 @@ export class MovieWhereUniqueInput {
 exports[`inputs should properly generate input type classes for model with id keys with relation: index 1`] = `
 "export { DirectorCreateInput } from \\"./DirectorCreateInput\\";
 export { DirectorCreateOneWithoutMoviesInput } from \\"./DirectorCreateOneWithoutMoviesInput\\";
+export { DirectorCreateOrConnectWithoutmoviesInput } from \\"./DirectorCreateOrConnectWithoutmoviesInput\\";
 export { DirectorCreateWithoutMoviesInput } from \\"./DirectorCreateWithoutMoviesInput\\";
 export { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"./DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
 export { DirectorOrderByInput } from \\"./DirectorOrderByInput\\";
@@ -1982,7 +2094,7 @@ export { DirectorRelationFilter } from \\"./DirectorRelationFilter\\";
 export { DirectorUpdateInput } from \\"./DirectorUpdateInput\\";
 export { DirectorUpdateManyMutationInput } from \\"./DirectorUpdateManyMutationInput\\";
 export { DirectorUpdateOneRequiredWithoutMoviesInput } from \\"./DirectorUpdateOneRequiredWithoutMoviesInput\\";
-export { DirectorUpdateWithoutMoviesDataInput } from \\"./DirectorUpdateWithoutMoviesDataInput\\";
+export { DirectorUpdateWithoutMoviesInput } from \\"./DirectorUpdateWithoutMoviesInput\\";
 export { DirectorUpsertWithoutMoviesInput } from \\"./DirectorUpsertWithoutMoviesInput\\";
 export { DirectorWhereInput } from \\"./DirectorWhereInput\\";
 export { DirectorWhereUniqueInput } from \\"./DirectorWhereUniqueInput\\";
@@ -1993,17 +2105,17 @@ export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput
 export { IntFilter } from \\"./IntFilter\\";
 export { MovieCreateInput } from \\"./MovieCreateInput\\";
 export { MovieCreateManyWithoutDirectorInput } from \\"./MovieCreateManyWithoutDirectorInput\\";
+export { MovieCreateOrConnectWithoutdirectorInput } from \\"./MovieCreateOrConnectWithoutdirectorInput\\";
 export { MovieCreateWithoutDirectorInput } from \\"./MovieCreateWithoutDirectorInput\\";
 export { MovieListRelationFilter } from \\"./MovieListRelationFilter\\";
 export { MovieOrderByInput } from \\"./MovieOrderByInput\\";
 export { MovieScalarWhereInput } from \\"./MovieScalarWhereInput\\";
 export { MovieUpdateInput } from \\"./MovieUpdateInput\\";
-export { MovieUpdateManyDataInput } from \\"./MovieUpdateManyDataInput\\";
 export { MovieUpdateManyMutationInput } from \\"./MovieUpdateManyMutationInput\\";
-export { MovieUpdateManyWithWhereNestedInput } from \\"./MovieUpdateManyWithWhereNestedInput\\";
+export { MovieUpdateManyWithWhereWithoutDirectorInput } from \\"./MovieUpdateManyWithWhereWithoutDirectorInput\\";
 export { MovieUpdateManyWithoutDirectorInput } from \\"./MovieUpdateManyWithoutDirectorInput\\";
 export { MovieUpdateWithWhereUniqueWithoutDirectorInput } from \\"./MovieUpdateWithWhereUniqueWithoutDirectorInput\\";
-export { MovieUpdateWithoutDirectorDataInput } from \\"./MovieUpdateWithoutDirectorDataInput\\";
+export { MovieUpdateWithoutDirectorInput } from \\"./MovieUpdateWithoutDirectorInput\\";
 export { MovieUpsertWithWhereUniqueWithoutDirectorInput } from \\"./MovieUpsertWithWhereUniqueWithoutDirectorInput\\";
 export { MovieWhereInput } from \\"./MovieWhereInput\\";
 export { MovieWhereUniqueInput } from \\"./MovieWhereUniqueInput\\";
@@ -2723,33 +2835,33 @@ export { NestedIntFilter } from \\"./NestedIntFilter\\";
 export { NestedStringFilter } from \\"./NestedStringFilter\\";
 export { RenamedFirstModelCreateInput } from \\"./RenamedFirstModelCreateInput\\";
 export { RenamedFirstModelCreateManyWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelCreateManyWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelCreateOrConnectWithoutsecondModelsFieldInput } from \\"./RenamedFirstModelCreateOrConnectWithoutsecondModelsFieldInput\\";
 export { RenamedFirstModelCreateWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelCreateWithoutSecondModelsFieldInput\\";
 export { RenamedFirstModelListRelationFilter } from \\"./RenamedFirstModelListRelationFilter\\";
 export { RenamedFirstModelOrderByInput } from \\"./RenamedFirstModelOrderByInput\\";
 export { RenamedFirstModelScalarWhereInput } from \\"./RenamedFirstModelScalarWhereInput\\";
 export { RenamedFirstModelUpdateInput } from \\"./RenamedFirstModelUpdateInput\\";
-export { RenamedFirstModelUpdateManyDataInput } from \\"./RenamedFirstModelUpdateManyDataInput\\";
 export { RenamedFirstModelUpdateManyMutationInput } from \\"./RenamedFirstModelUpdateManyMutationInput\\";
-export { RenamedFirstModelUpdateManyWithWhereNestedInput } from \\"./RenamedFirstModelUpdateManyWithWhereNestedInput\\";
+export { RenamedFirstModelUpdateManyWithWhereWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateManyWithWhereWithoutSecondModelsFieldInput\\";
 export { RenamedFirstModelUpdateManyWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateManyWithoutSecondModelsFieldInput\\";
 export { RenamedFirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput\\";
-export { RenamedFirstModelUpdateWithoutSecondModelsFieldDataInput } from \\"./RenamedFirstModelUpdateWithoutSecondModelsFieldDataInput\\";
+export { RenamedFirstModelUpdateWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateWithoutSecondModelsFieldInput\\";
 export { RenamedFirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput\\";
 export { RenamedFirstModelWhereInput } from \\"./RenamedFirstModelWhereInput\\";
 export { RenamedFirstModelWhereUniqueInput } from \\"./RenamedFirstModelWhereUniqueInput\\";
 export { RenamedSecondModelCreateInput } from \\"./RenamedSecondModelCreateInput\\";
 export { RenamedSecondModelCreateManyWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelCreateManyWithoutFirstModelsFieldInput\\";
+export { RenamedSecondModelCreateOrConnectWithoutfirstModelsFieldInput } from \\"./RenamedSecondModelCreateOrConnectWithoutfirstModelsFieldInput\\";
 export { RenamedSecondModelCreateWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelCreateWithoutFirstModelsFieldInput\\";
 export { RenamedSecondModelListRelationFilter } from \\"./RenamedSecondModelListRelationFilter\\";
 export { RenamedSecondModelOrderByInput } from \\"./RenamedSecondModelOrderByInput\\";
 export { RenamedSecondModelScalarWhereInput } from \\"./RenamedSecondModelScalarWhereInput\\";
 export { RenamedSecondModelUpdateInput } from \\"./RenamedSecondModelUpdateInput\\";
-export { RenamedSecondModelUpdateManyDataInput } from \\"./RenamedSecondModelUpdateManyDataInput\\";
 export { RenamedSecondModelUpdateManyMutationInput } from \\"./RenamedSecondModelUpdateManyMutationInput\\";
-export { RenamedSecondModelUpdateManyWithWhereNestedInput } from \\"./RenamedSecondModelUpdateManyWithWhereNestedInput\\";
+export { RenamedSecondModelUpdateManyWithWhereWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelUpdateManyWithWhereWithoutFirstModelsFieldInput\\";
 export { RenamedSecondModelUpdateManyWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelUpdateManyWithoutFirstModelsFieldInput\\";
 export { RenamedSecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput\\";
-export { RenamedSecondModelUpdateWithoutFirstModelsFieldDataInput } from \\"./RenamedSecondModelUpdateWithoutFirstModelsFieldDataInput\\";
+export { RenamedSecondModelUpdateWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelUpdateWithoutFirstModelsFieldInput\\";
 export { RenamedSecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput\\";
 export { RenamedSecondModelWhereInput } from \\"./RenamedSecondModelWhereInput\\";
 export { RenamedSecondModelWhereUniqueInput } from \\"./RenamedSecondModelWhereUniqueInput\\";
@@ -3127,29 +3239,30 @@ export { NestedIntFilter } from \\"./NestedIntFilter\\";
 export { NestedStringFilter } from \\"./NestedStringFilter\\";
 export { RenamedFirstModelCreateInput } from \\"./RenamedFirstModelCreateInput\\";
 export { RenamedFirstModelCreateOneWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelCreateOneWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelCreateOrConnectWithoutsecondModelsFieldInput } from \\"./RenamedFirstModelCreateOrConnectWithoutsecondModelsFieldInput\\";
 export { RenamedFirstModelCreateWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelCreateWithoutSecondModelsFieldInput\\";
 export { RenamedFirstModelOrderByInput } from \\"./RenamedFirstModelOrderByInput\\";
 export { RenamedFirstModelRelationFilter } from \\"./RenamedFirstModelRelationFilter\\";
 export { RenamedFirstModelUpdateInput } from \\"./RenamedFirstModelUpdateInput\\";
 export { RenamedFirstModelUpdateManyMutationInput } from \\"./RenamedFirstModelUpdateManyMutationInput\\";
 export { RenamedFirstModelUpdateOneRequiredWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateOneRequiredWithoutSecondModelsFieldInput\\";
-export { RenamedFirstModelUpdateWithoutSecondModelsFieldDataInput } from \\"./RenamedFirstModelUpdateWithoutSecondModelsFieldDataInput\\";
+export { RenamedFirstModelUpdateWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateWithoutSecondModelsFieldInput\\";
 export { RenamedFirstModelUpsertWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpsertWithoutSecondModelsFieldInput\\";
 export { RenamedFirstModelWhereInput } from \\"./RenamedFirstModelWhereInput\\";
 export { RenamedFirstModelWhereUniqueInput } from \\"./RenamedFirstModelWhereUniqueInput\\";
 export { RenamedSecondModelCreateInput } from \\"./RenamedSecondModelCreateInput\\";
 export { RenamedSecondModelCreateManyWithoutFirstModelFieldInput } from \\"./RenamedSecondModelCreateManyWithoutFirstModelFieldInput\\";
+export { RenamedSecondModelCreateOrConnectWithoutfirstModelFieldInput } from \\"./RenamedSecondModelCreateOrConnectWithoutfirstModelFieldInput\\";
 export { RenamedSecondModelCreateWithoutFirstModelFieldInput } from \\"./RenamedSecondModelCreateWithoutFirstModelFieldInput\\";
 export { RenamedSecondModelListRelationFilter } from \\"./RenamedSecondModelListRelationFilter\\";
 export { RenamedSecondModelOrderByInput } from \\"./RenamedSecondModelOrderByInput\\";
 export { RenamedSecondModelScalarWhereInput } from \\"./RenamedSecondModelScalarWhereInput\\";
 export { RenamedSecondModelUpdateInput } from \\"./RenamedSecondModelUpdateInput\\";
-export { RenamedSecondModelUpdateManyDataInput } from \\"./RenamedSecondModelUpdateManyDataInput\\";
 export { RenamedSecondModelUpdateManyMutationInput } from \\"./RenamedSecondModelUpdateManyMutationInput\\";
-export { RenamedSecondModelUpdateManyWithWhereNestedInput } from \\"./RenamedSecondModelUpdateManyWithWhereNestedInput\\";
+export { RenamedSecondModelUpdateManyWithWhereWithoutFirstModelFieldInput } from \\"./RenamedSecondModelUpdateManyWithWhereWithoutFirstModelFieldInput\\";
 export { RenamedSecondModelUpdateManyWithoutFirstModelFieldInput } from \\"./RenamedSecondModelUpdateManyWithoutFirstModelFieldInput\\";
 export { RenamedSecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput } from \\"./RenamedSecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput\\";
-export { RenamedSecondModelUpdateWithoutFirstModelFieldDataInput } from \\"./RenamedSecondModelUpdateWithoutFirstModelFieldDataInput\\";
+export { RenamedSecondModelUpdateWithoutFirstModelFieldInput } from \\"./RenamedSecondModelUpdateWithoutFirstModelFieldInput\\";
 export { RenamedSecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput } from \\"./RenamedSecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput\\";
 export { RenamedSecondModelWhereInput } from \\"./RenamedSecondModelWhereInput\\";
 export { RenamedSecondModelWhereUniqueInput } from \\"./RenamedSecondModelWhereUniqueInput\\";
@@ -3319,17 +3432,17 @@ export { DateTimeFieldUpdateOperationsInput } from \\"./DateTimeFieldUpdateOpera
 export { DateTimeFilter } from \\"./DateTimeFilter\\";
 export { ExampleCreateInput } from \\"./ExampleCreateInput\\";
 export { ExampleCreateManyWithoutOtherInput } from \\"./ExampleCreateManyWithoutOtherInput\\";
+export { ExampleCreateOrConnectWithoutotherInput } from \\"./ExampleCreateOrConnectWithoutotherInput\\";
 export { ExampleCreateWithoutOtherInput } from \\"./ExampleCreateWithoutOtherInput\\";
 export { ExampleListRelationFilter } from \\"./ExampleListRelationFilter\\";
 export { ExampleOrderByInput } from \\"./ExampleOrderByInput\\";
 export { ExampleScalarWhereInput } from \\"./ExampleScalarWhereInput\\";
 export { ExampleUpdateInput } from \\"./ExampleUpdateInput\\";
-export { ExampleUpdateManyDataInput } from \\"./ExampleUpdateManyDataInput\\";
 export { ExampleUpdateManyMutationInput } from \\"./ExampleUpdateManyMutationInput\\";
-export { ExampleUpdateManyWithWhereNestedInput } from \\"./ExampleUpdateManyWithWhereNestedInput\\";
+export { ExampleUpdateManyWithWhereWithoutOtherInput } from \\"./ExampleUpdateManyWithWhereWithoutOtherInput\\";
 export { ExampleUpdateManyWithoutOtherInput } from \\"./ExampleUpdateManyWithoutOtherInput\\";
 export { ExampleUpdateWithWhereUniqueWithoutOtherInput } from \\"./ExampleUpdateWithWhereUniqueWithoutOtherInput\\";
-export { ExampleUpdateWithoutOtherDataInput } from \\"./ExampleUpdateWithoutOtherDataInput\\";
+export { ExampleUpdateWithoutOtherInput } from \\"./ExampleUpdateWithoutOtherInput\\";
 export { ExampleUpsertWithWhereUniqueWithoutOtherInput } from \\"./ExampleUpsertWithWhereUniqueWithoutOtherInput\\";
 export { ExampleWhereInput } from \\"./ExampleWhereInput\\";
 export { ExampleWhereUniqueInput } from \\"./ExampleWhereUniqueInput\\";
@@ -3343,13 +3456,14 @@ export { NestedIntFilter } from \\"./NestedIntFilter\\";
 export { NestedStringFilter } from \\"./NestedStringFilter\\";
 export { OtherModelCreateInput } from \\"./OtherModelCreateInput\\";
 export { OtherModelCreateOneWithoutSampleModelInput } from \\"./OtherModelCreateOneWithoutSampleModelInput\\";
+export { OtherModelCreateOrConnectWithoutSampleModelInput } from \\"./OtherModelCreateOrConnectWithoutSampleModelInput\\";
 export { OtherModelCreateWithoutSampleModelInput } from \\"./OtherModelCreateWithoutSampleModelInput\\";
 export { OtherModelOrderByInput } from \\"./OtherModelOrderByInput\\";
 export { OtherModelRelationFilter } from \\"./OtherModelRelationFilter\\";
 export { OtherModelUpdateInput } from \\"./OtherModelUpdateInput\\";
 export { OtherModelUpdateManyMutationInput } from \\"./OtherModelUpdateManyMutationInput\\";
 export { OtherModelUpdateOneRequiredWithoutSampleModelInput } from \\"./OtherModelUpdateOneRequiredWithoutSampleModelInput\\";
-export { OtherModelUpdateWithoutSampleModelDataInput } from \\"./OtherModelUpdateWithoutSampleModelDataInput\\";
+export { OtherModelUpdateWithoutSampleModelInput } from \\"./OtherModelUpdateWithoutSampleModelInput\\";
 export { OtherModelUpsertWithoutSampleModelInput } from \\"./OtherModelUpsertWithoutSampleModelInput\\";
 export { OtherModelWhereInput } from \\"./OtherModelWhereInput\\";
 export { OtherModelWhereUniqueInput } from \\"./OtherModelWhereUniqueInput\\";

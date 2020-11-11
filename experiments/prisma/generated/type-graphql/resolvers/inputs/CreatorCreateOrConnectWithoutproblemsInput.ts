@@ -2,18 +2,18 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { CreatorCreateWithoutProblemsInput } from "../inputs/CreatorCreateWithoutProblemsInput";
-import { CreatorUpdateWithoutProblemsInput } from "../inputs/CreatorUpdateWithoutProblemsInput";
+import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
   description: undefined,
 })
-export class CreatorUpsertWithoutProblemsInput {
-  @TypeGraphQL.Field(_type => CreatorUpdateWithoutProblemsInput, {
+export class CreatorCreateOrConnectWithoutproblemsInput {
+  @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
-  update!: CreatorUpdateWithoutProblemsInput;
+  where!: CreatorWhereUniqueInput;
 
   @TypeGraphQL.Field(_type => CreatorCreateWithoutProblemsInput, {
     nullable: false,

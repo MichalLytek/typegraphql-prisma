@@ -12,7 +12,7 @@ import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOpe
   isAbstract: true,
   description: undefined,
 })
-export class ClientUpdateWithoutPostsDataInput {
+export class ClientUpdateWithoutPostsInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true,
     description: undefined

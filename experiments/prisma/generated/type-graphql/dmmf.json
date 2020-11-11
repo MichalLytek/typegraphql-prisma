@@ -5845,12 +5845,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postCreateOrConnectWithoutUserInput",
+                "type": "postCreateOrConnectWithoutauthorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "postCreateOrConnectWithoutUserInput",
+                "type": "postCreateOrConnectWithoutauthorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -5905,12 +5905,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postCreateOrConnectWithoutUserInput",
+                "type": "postCreateOrConnectWithouteditorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "postCreateOrConnectWithoutUserInput",
+                "type": "postCreateOrConnectWithouteditorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -6239,12 +6239,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postUpdateManyWithWhereNestedInput",
+                "type": "postUpdateManyWithWhereWithoutAuthorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "postUpdateManyWithWhereNestedInput",
+                "type": "postUpdateManyWithWhereWithoutAuthorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -6290,12 +6290,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postCreateOrConnectWithoutUserInput",
+                "type": "postCreateOrConnectWithoutauthorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "postCreateOrConnectWithoutUserInput",
+                "type": "postCreateOrConnectWithoutauthorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -6418,12 +6418,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postUpdateManyWithWhereNestedInput",
+                "type": "postUpdateManyWithWhereWithoutEditorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "postUpdateManyWithWhereNestedInput",
+                "type": "postUpdateManyWithWhereWithoutEditorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -6469,12 +6469,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postCreateOrConnectWithoutUserInput",
+                "type": "postCreateOrConnectWithouteditorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "postCreateOrConnectWithoutUserInput",
+                "type": "postCreateOrConnectWithouteditorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -6519,7 +6519,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "UserCreateOrConnectWithoutpostInput",
+                "type": "UserCreateOrConnectWithoutpostsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6564,7 +6564,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "UserCreateOrConnectWithoutpostInput",
+                "type": "UserCreateOrConnectWithouteditorPostsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6677,7 +6677,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "UserUpdateWithoutPostsDataInput",
+                "type": "UserUpdateWithoutPostsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6701,7 +6701,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "UserCreateOrConnectWithoutpostInput",
+                "type": "UserCreateOrConnectWithoutpostsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6770,7 +6770,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "UserUpdateWithoutEditorPostsDataInput",
+                "type": "UserUpdateWithoutEditorPostsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6794,7 +6794,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "UserCreateOrConnectWithoutpostInput",
+                "type": "UserCreateOrConnectWithouteditorPostsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6839,7 +6839,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "DirectorCreateOrConnectWithoutMovieInput",
+                "type": "DirectorCreateOrConnectWithoutmoviesInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6884,7 +6884,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "DirectorUpdateWithoutMoviesDataInput",
+                "type": "DirectorUpdateWithoutMoviesInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6908,7 +6908,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "DirectorCreateOrConnectWithoutMovieInput",
+                "type": "DirectorCreateOrConnectWithoutmoviesInput",
                 "kind": "object",
                 "isList": false
               }
@@ -6963,12 +6963,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "MovieCreateOrConnectWithoutDirectorInput",
+                "type": "MovieCreateOrConnectWithoutdirectorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "MovieCreateOrConnectWithoutDirectorInput",
+                "type": "MovieCreateOrConnectWithoutdirectorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7091,12 +7091,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "MovieUpdateManyWithWhereNestedInput",
+                "type": "MovieUpdateManyWithWhereWithoutDirectorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "MovieUpdateManyWithWhereNestedInput",
+                "type": "MovieUpdateManyWithWhereWithoutDirectorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7142,12 +7142,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "MovieCreateOrConnectWithoutDirectorInput",
+                "type": "MovieCreateOrConnectWithoutdirectorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "MovieCreateOrConnectWithoutDirectorInput",
+                "type": "MovieCreateOrConnectWithoutdirectorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7202,12 +7202,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorCreateOrConnectWithoutProblemInput",
+                "type": "CreatorCreateOrConnectWithoutlikesInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "CreatorCreateOrConnectWithoutProblemInput",
+                "type": "CreatorCreateOrConnectWithoutlikesInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7252,7 +7252,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorCreateOrConnectWithoutProblemInput",
+                "type": "CreatorCreateOrConnectWithoutproblemsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -7375,12 +7375,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorUpdateManyWithWhereNestedInput",
+                "type": "CreatorUpdateManyWithWhereWithoutLikesInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "CreatorUpdateManyWithWhereNestedInput",
+                "type": "CreatorUpdateManyWithWhereWithoutLikesInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7426,12 +7426,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorCreateOrConnectWithoutProblemInput",
+                "type": "CreatorCreateOrConnectWithoutlikesInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "CreatorCreateOrConnectWithoutProblemInput",
+                "type": "CreatorCreateOrConnectWithoutlikesInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7500,7 +7500,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorUpdateWithoutProblemsDataInput",
+                "type": "CreatorUpdateWithoutProblemsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -7524,7 +7524,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorCreateOrConnectWithoutProblemInput",
+                "type": "CreatorCreateOrConnectWithoutproblemsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -7579,12 +7579,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemCreateOrConnectWithoutCreatorInput",
+                "type": "ProblemCreateOrConnectWithoutlikedByInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "ProblemCreateOrConnectWithoutCreatorInput",
+                "type": "ProblemCreateOrConnectWithoutlikedByInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7639,12 +7639,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemCreateOrConnectWithoutCreatorInput",
+                "type": "ProblemCreateOrConnectWithoutcreatorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "ProblemCreateOrConnectWithoutCreatorInput",
+                "type": "ProblemCreateOrConnectWithoutcreatorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7767,12 +7767,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemUpdateManyWithWhereNestedInput",
+                "type": "ProblemUpdateManyWithWhereWithoutLikedByInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "ProblemUpdateManyWithWhereNestedInput",
+                "type": "ProblemUpdateManyWithWhereWithoutLikedByInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7818,12 +7818,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemCreateOrConnectWithoutCreatorInput",
+                "type": "ProblemCreateOrConnectWithoutlikedByInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "ProblemCreateOrConnectWithoutCreatorInput",
+                "type": "ProblemCreateOrConnectWithoutlikedByInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7946,12 +7946,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemUpdateManyWithWhereNestedInput",
+                "type": "ProblemUpdateManyWithWhereWithoutCreatorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "ProblemUpdateManyWithWhereNestedInput",
+                "type": "ProblemUpdateManyWithWhereWithoutCreatorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -7997,12 +7997,12 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemCreateOrConnectWithoutCreatorInput",
+                "type": "ProblemCreateOrConnectWithoutcreatorInput",
                 "kind": "object",
                 "isList": false
               },
               {
-                "type": "ProblemCreateOrConnectWithoutCreatorInput",
+                "type": "ProblemCreateOrConnectWithoutcreatorInput",
                 "kind": "object",
                 "isList": true
               }
@@ -9104,7 +9104,7 @@
         ]
       },
       {
-        "name": "postCreateOrConnectWithoutUserInput",
+        "name": "postCreateOrConnectWithoutauthorInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -9276,6 +9276,39 @@
         ]
       },
       {
+        "name": "postCreateOrConnectWithouteditorInput",
+        "constraints": {
+          "maxNumFields": null,
+          "minNumFields": null
+        },
+        "fields": [
+          {
+            "name": "where",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "postWhereUniqueInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          },
+          {
+            "name": "create",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "postCreateWithoutEditorInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "postUpdateWithWhereUniqueWithoutAuthorInput",
         "constraints": {
           "maxNumFields": null,
@@ -9300,7 +9333,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postUpdateWithoutAuthorDataInput",
+                "type": "postUpdateWithoutAuthorInput",
                 "kind": "object",
                 "isList": false
               }
@@ -9309,7 +9342,7 @@
         ]
       },
       {
-        "name": "postUpdateManyWithWhereNestedInput",
+        "name": "postUpdateManyWithWhereWithoutAuthorInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -9333,7 +9366,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postUpdateManyDataInput",
+                "type": "postUpdateManyMutationInput",
                 "kind": "object",
                 "isList": false
               }
@@ -9623,7 +9656,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postUpdateWithoutAuthorDataInput",
+                "type": "postUpdateWithoutAuthorInput",
                 "kind": "object",
                 "isList": false
               }
@@ -9668,7 +9701,40 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postUpdateWithoutEditorDataInput",
+                "type": "postUpdateWithoutEditorInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "postUpdateManyWithWhereWithoutEditorInput",
+        "constraints": {
+          "maxNumFields": null,
+          "minNumFields": null
+        },
+        "fields": [
+          {
+            "name": "where",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "postScalarWhereInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          },
+          {
+            "name": "data",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "postUpdateManyMutationInput",
                 "kind": "object",
                 "isList": false
               }
@@ -9701,7 +9767,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "postUpdateWithoutEditorDataInput",
+                "type": "postUpdateWithoutEditorInput",
                 "kind": "object",
                 "isList": false
               }
@@ -9820,7 +9886,7 @@
         ]
       },
       {
-        "name": "UserCreateOrConnectWithoutpostInput",
+        "name": "UserCreateOrConnectWithoutpostsInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -9951,7 +10017,40 @@
         ]
       },
       {
-        "name": "UserUpdateWithoutPostsDataInput",
+        "name": "UserCreateOrConnectWithouteditorPostsInput",
+        "constraints": {
+          "maxNumFields": null,
+          "minNumFields": null
+        },
+        "fields": [
+          {
+            "name": "where",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "UserWhereUniqueInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          },
+          {
+            "name": "create",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "UserCreateWithoutEditorPostsInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "UserUpdateWithoutPostsInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -10091,7 +10190,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "UserUpdateWithoutPostsDataInput",
+                "type": "UserUpdateWithoutPostsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10112,7 +10211,7 @@
         ]
       },
       {
-        "name": "UserUpdateWithoutEditorPostsDataInput",
+        "name": "UserUpdateWithoutEditorPostsInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -10252,7 +10351,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "UserUpdateWithoutEditorPostsDataInput",
+                "type": "UserUpdateWithoutEditorPostsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10306,7 +10405,7 @@
         ]
       },
       {
-        "name": "DirectorCreateOrConnectWithoutMovieInput",
+        "name": "DirectorCreateOrConnectWithoutmoviesInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -10339,7 +10438,7 @@
         ]
       },
       {
-        "name": "DirectorUpdateWithoutMoviesDataInput",
+        "name": "DirectorUpdateWithoutMoviesInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -10394,7 +10493,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "DirectorUpdateWithoutMoviesDataInput",
+                "type": "DirectorUpdateWithoutMoviesInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10436,7 +10535,7 @@
         ]
       },
       {
-        "name": "MovieCreateOrConnectWithoutDirectorInput",
+        "name": "MovieCreateOrConnectWithoutdirectorInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -10493,7 +10592,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "MovieUpdateWithoutDirectorDataInput",
+                "type": "MovieUpdateWithoutDirectorInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10502,7 +10601,7 @@
         ]
       },
       {
-        "name": "MovieUpdateManyWithWhereNestedInput",
+        "name": "MovieUpdateManyWithWhereWithoutDirectorInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -10526,7 +10625,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "MovieUpdateManyDataInput",
+                "type": "MovieUpdateManyMutationInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10670,7 +10769,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "MovieUpdateWithoutDirectorDataInput",
+                "type": "MovieUpdateWithoutDirectorInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10724,7 +10823,7 @@
         ]
       },
       {
-        "name": "CreatorCreateOrConnectWithoutProblemInput",
+        "name": "CreatorCreateOrConnectWithoutlikesInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -10790,6 +10889,39 @@
         ]
       },
       {
+        "name": "CreatorCreateOrConnectWithoutproblemsInput",
+        "constraints": {
+          "maxNumFields": null,
+          "minNumFields": null
+        },
+        "fields": [
+          {
+            "name": "where",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "CreatorWhereUniqueInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          },
+          {
+            "name": "create",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "CreatorCreateWithoutProblemsInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "CreatorUpdateWithWhereUniqueWithoutLikesInput",
         "constraints": {
           "maxNumFields": null,
@@ -10814,7 +10946,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorUpdateWithoutLikesDataInput",
+                "type": "CreatorUpdateWithoutLikesInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10823,7 +10955,7 @@
         ]
       },
       {
-        "name": "CreatorUpdateManyWithWhereNestedInput",
+        "name": "CreatorUpdateManyWithWhereWithoutLikesInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -10847,7 +10979,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorUpdateManyDataInput",
+                "type": "CreatorUpdateManyMutationInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10974,7 +11106,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorUpdateWithoutLikesDataInput",
+                "type": "CreatorUpdateWithoutLikesInput",
                 "kind": "object",
                 "isList": false
               }
@@ -10995,7 +11127,7 @@
         ]
       },
       {
-        "name": "CreatorUpdateWithoutProblemsDataInput",
+        "name": "CreatorUpdateWithoutProblemsInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -11045,7 +11177,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "CreatorUpdateWithoutProblemsDataInput",
+                "type": "CreatorUpdateWithoutProblemsInput",
                 "kind": "object",
                 "isList": false
               }
@@ -11099,7 +11231,7 @@
         ]
       },
       {
-        "name": "ProblemCreateOrConnectWithoutCreatorInput",
+        "name": "ProblemCreateOrConnectWithoutlikedByInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -11165,6 +11297,39 @@
         ]
       },
       {
+        "name": "ProblemCreateOrConnectWithoutcreatorInput",
+        "constraints": {
+          "maxNumFields": null,
+          "minNumFields": null
+        },
+        "fields": [
+          {
+            "name": "where",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "ProblemWhereUniqueInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          },
+          {
+            "name": "create",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "ProblemCreateWithoutCreatorInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "ProblemUpdateWithWhereUniqueWithoutLikedByInput",
         "constraints": {
           "maxNumFields": null,
@@ -11189,7 +11354,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemUpdateWithoutLikedByDataInput",
+                "type": "ProblemUpdateWithoutLikedByInput",
                 "kind": "object",
                 "isList": false
               }
@@ -11198,7 +11363,7 @@
         ]
       },
       {
-        "name": "ProblemUpdateManyWithWhereNestedInput",
+        "name": "ProblemUpdateManyWithWhereWithoutLikedByInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -11222,7 +11387,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemUpdateManyDataInput",
+                "type": "ProblemUpdateManyMutationInput",
                 "kind": "object",
                 "isList": false
               }
@@ -11371,7 +11536,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemUpdateWithoutLikedByDataInput",
+                "type": "ProblemUpdateWithoutLikedByInput",
                 "kind": "object",
                 "isList": false
               }
@@ -11416,7 +11581,40 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemUpdateWithoutCreatorDataInput",
+                "type": "ProblemUpdateWithoutCreatorInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ProblemUpdateManyWithWhereWithoutCreatorInput",
+        "constraints": {
+          "maxNumFields": null,
+          "minNumFields": null
+        },
+        "fields": [
+          {
+            "name": "where",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "ProblemScalarWhereInput",
+                "kind": "object",
+                "isList": false
+              }
+            ]
+          },
+          {
+            "name": "data",
+            "isRequired": true,
+            "isNullable": false,
+            "inputTypes": [
+              {
+                "type": "ProblemUpdateManyMutationInput",
                 "kind": "object",
                 "isList": false
               }
@@ -11449,7 +11647,7 @@
             "isNullable": false,
             "inputTypes": [
               {
-                "type": "ProblemUpdateWithoutCreatorDataInput",
+                "type": "ProblemUpdateWithoutCreatorInput",
                 "kind": "object",
                 "isList": false
               }
@@ -11470,7 +11668,7 @@
         ]
       },
       {
-        "name": "postUpdateWithoutAuthorDataInput",
+        "name": "postUpdateWithoutAuthorInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -11649,174 +11847,7 @@
         ]
       },
       {
-        "name": "postUpdateManyDataInput",
-        "constraints": {
-          "maxNumFields": null,
-          "minNumFields": null
-        },
-        "fields": [
-          {
-            "name": "uuid",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "String",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "StringFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          },
-          {
-            "name": "createdAt",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "DateTime",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "DateTimeFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          },
-          {
-            "name": "updatedAt",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "DateTime",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "DateTimeFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          },
-          {
-            "name": "published",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "Boolean",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "BoolFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          },
-          {
-            "name": "title",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "String",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "StringFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          },
-          {
-            "name": "subtitle",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "String",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "StringFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          },
-          {
-            "name": "content",
-            "isRequired": false,
-            "isNullable": true,
-            "inputTypes": [
-              {
-                "type": "String",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "NullableStringFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              },
-              {
-                "type": "Null",
-                "kind": "scalar",
-                "isList": false
-              }
-            ]
-          },
-          {
-            "name": "kind",
-            "isRequired": false,
-            "isNullable": true,
-            "inputTypes": [
-              {
-                "type": "PostKind",
-                "kind": "enum",
-                "isList": false
-              },
-              {
-                "type": "NullableEnumPostKindFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              },
-              {
-                "type": "Null",
-                "kind": "scalar",
-                "isList": false
-              }
-            ]
-          },
-          {
-            "name": "metadata",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "Json",
-                "kind": "scalar",
-                "isList": false
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "postUpdateWithoutEditorDataInput",
+        "name": "postUpdateWithoutEditorInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -11995,7 +12026,7 @@
         ]
       },
       {
-        "name": "MovieUpdateWithoutDirectorDataInput",
+        "name": "MovieUpdateWithoutDirectorInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -12021,33 +12052,7 @@
         ]
       },
       {
-        "name": "MovieUpdateManyDataInput",
-        "constraints": {
-          "maxNumFields": null,
-          "minNumFields": null
-        },
-        "fields": [
-          {
-            "name": "title",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "String",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "StringFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "CreatorUpdateWithoutLikesDataInput",
+        "name": "CreatorUpdateWithoutLikesInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -12085,33 +12090,7 @@
         ]
       },
       {
-        "name": "CreatorUpdateManyDataInput",
-        "constraints": {
-          "maxNumFields": null,
-          "minNumFields": null
-        },
-        "fields": [
-          {
-            "name": "name",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "String",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "StringFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "ProblemUpdateWithoutLikedByDataInput",
+        "name": "ProblemUpdateWithoutLikedByInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null
@@ -12149,33 +12128,7 @@
         ]
       },
       {
-        "name": "ProblemUpdateManyDataInput",
-        "constraints": {
-          "maxNumFields": null,
-          "minNumFields": null
-        },
-        "fields": [
-          {
-            "name": "problemText",
-            "isRequired": false,
-            "isNullable": false,
-            "inputTypes": [
-              {
-                "type": "String",
-                "kind": "scalar",
-                "isList": false
-              },
-              {
-                "type": "StringFieldUpdateOperationsInput",
-                "kind": "object",
-                "isList": false
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "ProblemUpdateWithoutCreatorDataInput",
+        "name": "ProblemUpdateWithoutCreatorInput",
         "constraints": {
           "maxNumFields": null,
           "minNumFields": null

@@ -28,8 +28,8 @@ export { Decimal }
 export { sql, empty, join, raw, Sql }
 
 /**
- * Prisma Client JS version: 2.10.1
- * Query Engine version: 7d0087eadc7265e12d4b8d8c3516b02c4c965111
+ * Prisma Client JS version: 2.11.0
+ * Query Engine version: 58369335532e47bdcec77a2f1e7c1fb83a463918
  */
 export declare type PrismaVersion = {
   client: string
@@ -120,6 +120,14 @@ export declare type TrueKeys<T> = TruthyKeys<Pick<T, RequiredKeys<T>>>
 export declare type Subset<T, U> = {
   [key in keyof T]: key extends keyof U ? T[key] : never;
 };
+
+type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+/**
+ * XOR is needed to have a real mutually exclusive union type
+ * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
+ */
+type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+
 declare class PrismaClientFetcher {
   private readonly prisma;
   private readonly debug;
@@ -221,11 +229,12 @@ export type PrismaAction =
   | 'queryRaw'
   | 'aggregate'
 
+
 /**
  * These options are being passed in to the middleware as "params"
  */
 export type MiddlewareParams = {
-  model?: string
+  model?: ModelName
   action: PrismaAction
   args: any
   dataPath: string[]
@@ -374,6 +383,22 @@ export declare class PrismaClient<
    * @deprecated renamed to `$queryRaw`
    */
   queryRaw<T = any>(query: string | TemplateStringsArray | Sql, ...values: any[]): Promise<T>;
+  /**
+   * Execute queries in a transaction
+   * @example
+   * ```
+   * const [george, bob, alice] = await prisma.transaction([
+   *   prisma.user.create({ data: { name: 'George' } }),
+   *   prisma.user.create({ data: { name: 'Bob' } }),
+   *   prisma.user.create({ data: { name: 'Alice' } }),
+   * ])
+   * ```
+   */
+  $transaction: PromiseConstructor['all']
+  /**
+   * @deprecated renamed to `$transaction`
+   */
+  transaction: PromiseConstructor['all']
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -464,6 +489,20 @@ export declare class PrismaClient<
 
 // Based on
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
+
+export declare const ModelName: {
+  User: 'User',
+  post: 'post',
+  Category: 'Category',
+  Patient: 'Patient',
+  Movie: 'Movie',
+  Director: 'Director',
+  Problem: 'Problem',
+  Creator: 'Creator'
+};
+
+export declare type ModelName = (typeof ModelName)[keyof typeof ModelName]
+
 
 export declare const UserDistinctFieldEnum: {
   id: 'id',
@@ -662,7 +701,7 @@ export type UserMaxAggregateInputType = {
 
 export type AggregateUserArgs = {
   where?: UserWhereInput
-  orderBy?: Enumerable<UserOrderByInput> | UserOrderByInput
+  orderBy?: XOR<Enumerable<UserOrderByInput>, UserOrderByInput>
   cursor?: UserWhereUniqueInput
   take?: number
   skip?: number
@@ -946,11 +985,11 @@ export type FindOneUserArgs = {
   /**
    * Select specific fields to fetch from the User
   **/
-  select?: UserSelect | null
+  select?: XOR<UserSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: UserInclude | null
+  include?: XOR<UserInclude, null>
   /**
    * Filter, which User to fetch.
   **/
@@ -965,16 +1004,16 @@ export type FindFirstUserArgs = {
   /**
    * Select specific fields to fetch from the User
   **/
-  select?: UserSelect | null
+  select?: XOR<UserSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: UserInclude | null
+  include?: XOR<UserInclude, null>
   /**
    * Filter, which User to fetch.
   **/
   where?: UserWhereInput
-  orderBy?: Enumerable<UserOrderByInput> | UserOrderByInput
+  orderBy?: XOR<Enumerable<UserOrderByInput>, UserOrderByInput>
   cursor?: UserWhereUniqueInput
   take?: number
   skip?: number
@@ -989,11 +1028,11 @@ export type FindManyUserArgs = {
   /**
    * Select specific fields to fetch from the User
   **/
-  select?: UserSelect | null
+  select?: XOR<UserSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: UserInclude | null
+  include?: XOR<UserInclude, null>
   /**
    * Filter, which Users to fetch.
   **/
@@ -1001,7 +1040,7 @@ export type FindManyUserArgs = {
   /**
    * Determine the order of the Users to fetch.
   **/
-  orderBy?: Enumerable<UserOrderByInput> | UserOrderByInput
+  orderBy?: XOR<Enumerable<UserOrderByInput>, UserOrderByInput>
   /**
    * Sets the position for listing Users.
   **/
@@ -1025,11 +1064,11 @@ export type UserCreateArgs = {
   /**
    * Select specific fields to fetch from the User
   **/
-  select?: UserSelect | null
+  select?: XOR<UserSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: UserInclude | null
+  include?: XOR<UserInclude, null>
   /**
    * The data needed to create a User.
   **/
@@ -1044,11 +1083,11 @@ export type UserUpdateArgs = {
   /**
    * Select specific fields to fetch from the User
   **/
-  select?: UserSelect | null
+  select?: XOR<UserSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: UserInclude | null
+  include?: XOR<UserInclude, null>
   /**
    * The data needed to update a User.
   **/
@@ -1076,11 +1115,11 @@ export type UserUpsertArgs = {
   /**
    * Select specific fields to fetch from the User
   **/
-  select?: UserSelect | null
+  select?: XOR<UserSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: UserInclude | null
+  include?: XOR<UserInclude, null>
   /**
    * The filter to search for the User to update in case it exists.
   **/
@@ -1103,11 +1142,11 @@ export type UserDeleteArgs = {
   /**
    * Select specific fields to fetch from the User
   **/
-  select?: UserSelect | null
+  select?: XOR<UserSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: UserInclude | null
+  include?: XOR<UserInclude, null>
   /**
    * Filter which User to delete.
   **/
@@ -1130,11 +1169,11 @@ export type UserArgs = {
   /**
    * Select specific fields to fetch from the User
   **/
-  select?: UserSelect | null
+  select?: XOR<UserSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: UserInclude | null
+  include?: XOR<UserInclude, null>
 }
 
 
@@ -1209,7 +1248,7 @@ export type PostMaxAggregateInputType = {
 
 export type AggregatePostArgs = {
   where?: postWhereInput
-  orderBy?: Enumerable<postOrderByInput> | postOrderByInput
+  orderBy?: XOR<Enumerable<postOrderByInput>, postOrderByInput>
   cursor?: postWhereUniqueInput
   take?: number
   skip?: number
@@ -1497,11 +1536,11 @@ export type FindOnepostArgs = {
   /**
    * Select specific fields to fetch from the post
   **/
-  select?: postSelect | null
+  select?: XOR<postSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: postInclude | null
+  include?: XOR<postInclude, null>
   /**
    * Filter, which post to fetch.
   **/
@@ -1516,16 +1555,16 @@ export type FindFirstpostArgs = {
   /**
    * Select specific fields to fetch from the post
   **/
-  select?: postSelect | null
+  select?: XOR<postSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: postInclude | null
+  include?: XOR<postInclude, null>
   /**
    * Filter, which post to fetch.
   **/
   where?: postWhereInput
-  orderBy?: Enumerable<postOrderByInput> | postOrderByInput
+  orderBy?: XOR<Enumerable<postOrderByInput>, postOrderByInput>
   cursor?: postWhereUniqueInput
   take?: number
   skip?: number
@@ -1540,11 +1579,11 @@ export type FindManypostArgs = {
   /**
    * Select specific fields to fetch from the post
   **/
-  select?: postSelect | null
+  select?: XOR<postSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: postInclude | null
+  include?: XOR<postInclude, null>
   /**
    * Filter, which posts to fetch.
   **/
@@ -1552,7 +1591,7 @@ export type FindManypostArgs = {
   /**
    * Determine the order of the posts to fetch.
   **/
-  orderBy?: Enumerable<postOrderByInput> | postOrderByInput
+  orderBy?: XOR<Enumerable<postOrderByInput>, postOrderByInput>
   /**
    * Sets the position for listing posts.
   **/
@@ -1576,11 +1615,11 @@ export type postCreateArgs = {
   /**
    * Select specific fields to fetch from the post
   **/
-  select?: postSelect | null
+  select?: XOR<postSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: postInclude | null
+  include?: XOR<postInclude, null>
   /**
    * The data needed to create a post.
   **/
@@ -1595,11 +1634,11 @@ export type postUpdateArgs = {
   /**
    * Select specific fields to fetch from the post
   **/
-  select?: postSelect | null
+  select?: XOR<postSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: postInclude | null
+  include?: XOR<postInclude, null>
   /**
    * The data needed to update a post.
   **/
@@ -1627,11 +1666,11 @@ export type postUpsertArgs = {
   /**
    * Select specific fields to fetch from the post
   **/
-  select?: postSelect | null
+  select?: XOR<postSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: postInclude | null
+  include?: XOR<postInclude, null>
   /**
    * The filter to search for the post to update in case it exists.
   **/
@@ -1654,11 +1693,11 @@ export type postDeleteArgs = {
   /**
    * Select specific fields to fetch from the post
   **/
-  select?: postSelect | null
+  select?: XOR<postSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: postInclude | null
+  include?: XOR<postInclude, null>
   /**
    * Filter which post to delete.
   **/
@@ -1681,11 +1720,11 @@ export type postArgs = {
   /**
    * Select specific fields to fetch from the post
   **/
-  select?: postSelect | null
+  select?: XOR<postSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: postInclude | null
+  include?: XOR<postInclude, null>
 }
 
 
@@ -1744,7 +1783,7 @@ export type CategoryMaxAggregateInputType = {
 
 export type AggregateCategoryArgs = {
   where?: CategoryWhereInput
-  orderBy?: Enumerable<CategoryOrderByInput> | CategoryOrderByInput
+  orderBy?: XOR<Enumerable<CategoryOrderByInput>, CategoryOrderByInput>
   cursor?: CategoryWhereUniqueInput
   take?: number
   skip?: number
@@ -2005,7 +2044,7 @@ export type FindOneCategoryArgs = {
   /**
    * Select specific fields to fetch from the Category
   **/
-  select?: CategorySelect | null
+  select?: XOR<CategorySelect, null>
   /**
    * Filter, which Category to fetch.
   **/
@@ -2020,12 +2059,12 @@ export type FindFirstCategoryArgs = {
   /**
    * Select specific fields to fetch from the Category
   **/
-  select?: CategorySelect | null
+  select?: XOR<CategorySelect, null>
   /**
    * Filter, which Category to fetch.
   **/
   where?: CategoryWhereInput
-  orderBy?: Enumerable<CategoryOrderByInput> | CategoryOrderByInput
+  orderBy?: XOR<Enumerable<CategoryOrderByInput>, CategoryOrderByInput>
   cursor?: CategoryWhereUniqueInput
   take?: number
   skip?: number
@@ -2040,7 +2079,7 @@ export type FindManyCategoryArgs = {
   /**
    * Select specific fields to fetch from the Category
   **/
-  select?: CategorySelect | null
+  select?: XOR<CategorySelect, null>
   /**
    * Filter, which Categories to fetch.
   **/
@@ -2048,7 +2087,7 @@ export type FindManyCategoryArgs = {
   /**
    * Determine the order of the Categories to fetch.
   **/
-  orderBy?: Enumerable<CategoryOrderByInput> | CategoryOrderByInput
+  orderBy?: XOR<Enumerable<CategoryOrderByInput>, CategoryOrderByInput>
   /**
    * Sets the position for listing Categories.
   **/
@@ -2072,7 +2111,7 @@ export type CategoryCreateArgs = {
   /**
    * Select specific fields to fetch from the Category
   **/
-  select?: CategorySelect | null
+  select?: XOR<CategorySelect, null>
   /**
    * The data needed to create a Category.
   **/
@@ -2087,7 +2126,7 @@ export type CategoryUpdateArgs = {
   /**
    * Select specific fields to fetch from the Category
   **/
-  select?: CategorySelect | null
+  select?: XOR<CategorySelect, null>
   /**
    * The data needed to update a Category.
   **/
@@ -2115,7 +2154,7 @@ export type CategoryUpsertArgs = {
   /**
    * Select specific fields to fetch from the Category
   **/
-  select?: CategorySelect | null
+  select?: XOR<CategorySelect, null>
   /**
    * The filter to search for the Category to update in case it exists.
   **/
@@ -2138,7 +2177,7 @@ export type CategoryDeleteArgs = {
   /**
    * Select specific fields to fetch from the Category
   **/
-  select?: CategorySelect | null
+  select?: XOR<CategorySelect, null>
   /**
    * Filter which Category to delete.
   **/
@@ -2161,7 +2200,7 @@ export type CategoryArgs = {
   /**
    * Select specific fields to fetch from the Category
   **/
-  select?: CategorySelect | null
+  select?: XOR<CategorySelect, null>
 }
 
 
@@ -2185,7 +2224,7 @@ export type AggregatePatient = {
 
 export type AggregatePatientArgs = {
   where?: PatientWhereInput
-  orderBy?: Enumerable<PatientOrderByInput> | PatientOrderByInput
+  orderBy?: XOR<Enumerable<PatientOrderByInput>, PatientOrderByInput>
   cursor?: PatientWhereUniqueInput
   take?: number
   skip?: number
@@ -2440,7 +2479,7 @@ export type FindOnePatientArgs = {
   /**
    * Select specific fields to fetch from the Patient
   **/
-  select?: PatientSelect | null
+  select?: XOR<PatientSelect, null>
   /**
    * Filter, which Patient to fetch.
   **/
@@ -2455,12 +2494,12 @@ export type FindFirstPatientArgs = {
   /**
    * Select specific fields to fetch from the Patient
   **/
-  select?: PatientSelect | null
+  select?: XOR<PatientSelect, null>
   /**
    * Filter, which Patient to fetch.
   **/
   where?: PatientWhereInput
-  orderBy?: Enumerable<PatientOrderByInput> | PatientOrderByInput
+  orderBy?: XOR<Enumerable<PatientOrderByInput>, PatientOrderByInput>
   cursor?: PatientWhereUniqueInput
   take?: number
   skip?: number
@@ -2475,7 +2514,7 @@ export type FindManyPatientArgs = {
   /**
    * Select specific fields to fetch from the Patient
   **/
-  select?: PatientSelect | null
+  select?: XOR<PatientSelect, null>
   /**
    * Filter, which Patients to fetch.
   **/
@@ -2483,7 +2522,7 @@ export type FindManyPatientArgs = {
   /**
    * Determine the order of the Patients to fetch.
   **/
-  orderBy?: Enumerable<PatientOrderByInput> | PatientOrderByInput
+  orderBy?: XOR<Enumerable<PatientOrderByInput>, PatientOrderByInput>
   /**
    * Sets the position for listing Patients.
   **/
@@ -2507,7 +2546,7 @@ export type PatientCreateArgs = {
   /**
    * Select specific fields to fetch from the Patient
   **/
-  select?: PatientSelect | null
+  select?: XOR<PatientSelect, null>
   /**
    * The data needed to create a Patient.
   **/
@@ -2522,7 +2561,7 @@ export type PatientUpdateArgs = {
   /**
    * Select specific fields to fetch from the Patient
   **/
-  select?: PatientSelect | null
+  select?: XOR<PatientSelect, null>
   /**
    * The data needed to update a Patient.
   **/
@@ -2550,7 +2589,7 @@ export type PatientUpsertArgs = {
   /**
    * Select specific fields to fetch from the Patient
   **/
-  select?: PatientSelect | null
+  select?: XOR<PatientSelect, null>
   /**
    * The filter to search for the Patient to update in case it exists.
   **/
@@ -2573,7 +2612,7 @@ export type PatientDeleteArgs = {
   /**
    * Select specific fields to fetch from the Patient
   **/
-  select?: PatientSelect | null
+  select?: XOR<PatientSelect, null>
   /**
    * Filter which Patient to delete.
   **/
@@ -2596,7 +2635,7 @@ export type PatientArgs = {
   /**
    * Select specific fields to fetch from the Patient
   **/
-  select?: PatientSelect | null
+  select?: XOR<PatientSelect, null>
 }
 
 
@@ -2620,7 +2659,7 @@ export type AggregateMovie = {
 
 export type AggregateMovieArgs = {
   where?: MovieWhereInput
-  orderBy?: Enumerable<MovieOrderByInput> | MovieOrderByInput
+  orderBy?: XOR<Enumerable<MovieOrderByInput>, MovieOrderByInput>
   cursor?: MovieWhereUniqueInput
   take?: number
   skip?: number
@@ -2886,11 +2925,11 @@ export type FindOneMovieArgs = {
   /**
    * Select specific fields to fetch from the Movie
   **/
-  select?: MovieSelect | null
+  select?: XOR<MovieSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: MovieInclude | null
+  include?: XOR<MovieInclude, null>
   /**
    * Filter, which Movie to fetch.
   **/
@@ -2905,16 +2944,16 @@ export type FindFirstMovieArgs = {
   /**
    * Select specific fields to fetch from the Movie
   **/
-  select?: MovieSelect | null
+  select?: XOR<MovieSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: MovieInclude | null
+  include?: XOR<MovieInclude, null>
   /**
    * Filter, which Movie to fetch.
   **/
   where?: MovieWhereInput
-  orderBy?: Enumerable<MovieOrderByInput> | MovieOrderByInput
+  orderBy?: XOR<Enumerable<MovieOrderByInput>, MovieOrderByInput>
   cursor?: MovieWhereUniqueInput
   take?: number
   skip?: number
@@ -2929,11 +2968,11 @@ export type FindManyMovieArgs = {
   /**
    * Select specific fields to fetch from the Movie
   **/
-  select?: MovieSelect | null
+  select?: XOR<MovieSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: MovieInclude | null
+  include?: XOR<MovieInclude, null>
   /**
    * Filter, which Movies to fetch.
   **/
@@ -2941,7 +2980,7 @@ export type FindManyMovieArgs = {
   /**
    * Determine the order of the Movies to fetch.
   **/
-  orderBy?: Enumerable<MovieOrderByInput> | MovieOrderByInput
+  orderBy?: XOR<Enumerable<MovieOrderByInput>, MovieOrderByInput>
   /**
    * Sets the position for listing Movies.
   **/
@@ -2965,11 +3004,11 @@ export type MovieCreateArgs = {
   /**
    * Select specific fields to fetch from the Movie
   **/
-  select?: MovieSelect | null
+  select?: XOR<MovieSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: MovieInclude | null
+  include?: XOR<MovieInclude, null>
   /**
    * The data needed to create a Movie.
   **/
@@ -2984,11 +3023,11 @@ export type MovieUpdateArgs = {
   /**
    * Select specific fields to fetch from the Movie
   **/
-  select?: MovieSelect | null
+  select?: XOR<MovieSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: MovieInclude | null
+  include?: XOR<MovieInclude, null>
   /**
    * The data needed to update a Movie.
   **/
@@ -3016,11 +3055,11 @@ export type MovieUpsertArgs = {
   /**
    * Select specific fields to fetch from the Movie
   **/
-  select?: MovieSelect | null
+  select?: XOR<MovieSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: MovieInclude | null
+  include?: XOR<MovieInclude, null>
   /**
    * The filter to search for the Movie to update in case it exists.
   **/
@@ -3043,11 +3082,11 @@ export type MovieDeleteArgs = {
   /**
    * Select specific fields to fetch from the Movie
   **/
-  select?: MovieSelect | null
+  select?: XOR<MovieSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: MovieInclude | null
+  include?: XOR<MovieInclude, null>
   /**
    * Filter which Movie to delete.
   **/
@@ -3070,11 +3109,11 @@ export type MovieArgs = {
   /**
    * Select specific fields to fetch from the Movie
   **/
-  select?: MovieSelect | null
+  select?: XOR<MovieSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: MovieInclude | null
+  include?: XOR<MovieInclude, null>
 }
 
 
@@ -3097,7 +3136,7 @@ export type AggregateDirector = {
 
 export type AggregateDirectorArgs = {
   where?: DirectorWhereInput
-  orderBy?: Enumerable<DirectorOrderByInput> | DirectorOrderByInput
+  orderBy?: XOR<Enumerable<DirectorOrderByInput>, DirectorOrderByInput>
   cursor?: DirectorWhereUniqueInput
   take?: number
   skip?: number
@@ -3362,11 +3401,11 @@ export type FindOneDirectorArgs = {
   /**
    * Select specific fields to fetch from the Director
   **/
-  select?: DirectorSelect | null
+  select?: XOR<DirectorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: DirectorInclude | null
+  include?: XOR<DirectorInclude, null>
   /**
    * Filter, which Director to fetch.
   **/
@@ -3381,16 +3420,16 @@ export type FindFirstDirectorArgs = {
   /**
    * Select specific fields to fetch from the Director
   **/
-  select?: DirectorSelect | null
+  select?: XOR<DirectorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: DirectorInclude | null
+  include?: XOR<DirectorInclude, null>
   /**
    * Filter, which Director to fetch.
   **/
   where?: DirectorWhereInput
-  orderBy?: Enumerable<DirectorOrderByInput> | DirectorOrderByInput
+  orderBy?: XOR<Enumerable<DirectorOrderByInput>, DirectorOrderByInput>
   cursor?: DirectorWhereUniqueInput
   take?: number
   skip?: number
@@ -3405,11 +3444,11 @@ export type FindManyDirectorArgs = {
   /**
    * Select specific fields to fetch from the Director
   **/
-  select?: DirectorSelect | null
+  select?: XOR<DirectorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: DirectorInclude | null
+  include?: XOR<DirectorInclude, null>
   /**
    * Filter, which Directors to fetch.
   **/
@@ -3417,7 +3456,7 @@ export type FindManyDirectorArgs = {
   /**
    * Determine the order of the Directors to fetch.
   **/
-  orderBy?: Enumerable<DirectorOrderByInput> | DirectorOrderByInput
+  orderBy?: XOR<Enumerable<DirectorOrderByInput>, DirectorOrderByInput>
   /**
    * Sets the position for listing Directors.
   **/
@@ -3441,11 +3480,11 @@ export type DirectorCreateArgs = {
   /**
    * Select specific fields to fetch from the Director
   **/
-  select?: DirectorSelect | null
+  select?: XOR<DirectorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: DirectorInclude | null
+  include?: XOR<DirectorInclude, null>
   /**
    * The data needed to create a Director.
   **/
@@ -3460,11 +3499,11 @@ export type DirectorUpdateArgs = {
   /**
    * Select specific fields to fetch from the Director
   **/
-  select?: DirectorSelect | null
+  select?: XOR<DirectorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: DirectorInclude | null
+  include?: XOR<DirectorInclude, null>
   /**
    * The data needed to update a Director.
   **/
@@ -3492,11 +3531,11 @@ export type DirectorUpsertArgs = {
   /**
    * Select specific fields to fetch from the Director
   **/
-  select?: DirectorSelect | null
+  select?: XOR<DirectorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: DirectorInclude | null
+  include?: XOR<DirectorInclude, null>
   /**
    * The filter to search for the Director to update in case it exists.
   **/
@@ -3519,11 +3558,11 @@ export type DirectorDeleteArgs = {
   /**
    * Select specific fields to fetch from the Director
   **/
-  select?: DirectorSelect | null
+  select?: XOR<DirectorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: DirectorInclude | null
+  include?: XOR<DirectorInclude, null>
   /**
    * Filter which Director to delete.
   **/
@@ -3546,11 +3585,11 @@ export type DirectorArgs = {
   /**
    * Select specific fields to fetch from the Director
   **/
-  select?: DirectorSelect | null
+  select?: XOR<DirectorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: DirectorInclude | null
+  include?: XOR<DirectorInclude, null>
 }
 
 
@@ -3617,7 +3656,7 @@ export type ProblemMaxAggregateInputType = {
 
 export type AggregateProblemArgs = {
   where?: ProblemWhereInput
-  orderBy?: Enumerable<ProblemOrderByInput> | ProblemOrderByInput
+  orderBy?: XOR<Enumerable<ProblemOrderByInput>, ProblemOrderByInput>
   cursor?: ProblemWhereUniqueInput
   take?: number
   skip?: number
@@ -3897,11 +3936,11 @@ export type FindOneProblemArgs = {
   /**
    * Select specific fields to fetch from the Problem
   **/
-  select?: ProblemSelect | null
+  select?: XOR<ProblemSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: ProblemInclude | null
+  include?: XOR<ProblemInclude, null>
   /**
    * Filter, which Problem to fetch.
   **/
@@ -3916,16 +3955,16 @@ export type FindFirstProblemArgs = {
   /**
    * Select specific fields to fetch from the Problem
   **/
-  select?: ProblemSelect | null
+  select?: XOR<ProblemSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: ProblemInclude | null
+  include?: XOR<ProblemInclude, null>
   /**
    * Filter, which Problem to fetch.
   **/
   where?: ProblemWhereInput
-  orderBy?: Enumerable<ProblemOrderByInput> | ProblemOrderByInput
+  orderBy?: XOR<Enumerable<ProblemOrderByInput>, ProblemOrderByInput>
   cursor?: ProblemWhereUniqueInput
   take?: number
   skip?: number
@@ -3940,11 +3979,11 @@ export type FindManyProblemArgs = {
   /**
    * Select specific fields to fetch from the Problem
   **/
-  select?: ProblemSelect | null
+  select?: XOR<ProblemSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: ProblemInclude | null
+  include?: XOR<ProblemInclude, null>
   /**
    * Filter, which Problems to fetch.
   **/
@@ -3952,7 +3991,7 @@ export type FindManyProblemArgs = {
   /**
    * Determine the order of the Problems to fetch.
   **/
-  orderBy?: Enumerable<ProblemOrderByInput> | ProblemOrderByInput
+  orderBy?: XOR<Enumerable<ProblemOrderByInput>, ProblemOrderByInput>
   /**
    * Sets the position for listing Problems.
   **/
@@ -3976,11 +4015,11 @@ export type ProblemCreateArgs = {
   /**
    * Select specific fields to fetch from the Problem
   **/
-  select?: ProblemSelect | null
+  select?: XOR<ProblemSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: ProblemInclude | null
+  include?: XOR<ProblemInclude, null>
   /**
    * The data needed to create a Problem.
   **/
@@ -3995,11 +4034,11 @@ export type ProblemUpdateArgs = {
   /**
    * Select specific fields to fetch from the Problem
   **/
-  select?: ProblemSelect | null
+  select?: XOR<ProblemSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: ProblemInclude | null
+  include?: XOR<ProblemInclude, null>
   /**
    * The data needed to update a Problem.
   **/
@@ -4027,11 +4066,11 @@ export type ProblemUpsertArgs = {
   /**
    * Select specific fields to fetch from the Problem
   **/
-  select?: ProblemSelect | null
+  select?: XOR<ProblemSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: ProblemInclude | null
+  include?: XOR<ProblemInclude, null>
   /**
    * The filter to search for the Problem to update in case it exists.
   **/
@@ -4054,11 +4093,11 @@ export type ProblemDeleteArgs = {
   /**
    * Select specific fields to fetch from the Problem
   **/
-  select?: ProblemSelect | null
+  select?: XOR<ProblemSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: ProblemInclude | null
+  include?: XOR<ProblemInclude, null>
   /**
    * Filter which Problem to delete.
   **/
@@ -4081,11 +4120,11 @@ export type ProblemArgs = {
   /**
    * Select specific fields to fetch from the Problem
   **/
-  select?: ProblemSelect | null
+  select?: XOR<ProblemSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: ProblemInclude | null
+  include?: XOR<ProblemInclude, null>
 }
 
 
@@ -4143,7 +4182,7 @@ export type CreatorMaxAggregateInputType = {
 
 export type AggregateCreatorArgs = {
   where?: CreatorWhereInput
-  orderBy?: Enumerable<CreatorOrderByInput> | CreatorOrderByInput
+  orderBy?: XOR<Enumerable<CreatorOrderByInput>, CreatorOrderByInput>
   cursor?: CreatorWhereUniqueInput
   take?: number
   skip?: number
@@ -4422,11 +4461,11 @@ export type FindOneCreatorArgs = {
   /**
    * Select specific fields to fetch from the Creator
   **/
-  select?: CreatorSelect | null
+  select?: XOR<CreatorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: CreatorInclude | null
+  include?: XOR<CreatorInclude, null>
   /**
    * Filter, which Creator to fetch.
   **/
@@ -4441,16 +4480,16 @@ export type FindFirstCreatorArgs = {
   /**
    * Select specific fields to fetch from the Creator
   **/
-  select?: CreatorSelect | null
+  select?: XOR<CreatorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: CreatorInclude | null
+  include?: XOR<CreatorInclude, null>
   /**
    * Filter, which Creator to fetch.
   **/
   where?: CreatorWhereInput
-  orderBy?: Enumerable<CreatorOrderByInput> | CreatorOrderByInput
+  orderBy?: XOR<Enumerable<CreatorOrderByInput>, CreatorOrderByInput>
   cursor?: CreatorWhereUniqueInput
   take?: number
   skip?: number
@@ -4465,11 +4504,11 @@ export type FindManyCreatorArgs = {
   /**
    * Select specific fields to fetch from the Creator
   **/
-  select?: CreatorSelect | null
+  select?: XOR<CreatorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: CreatorInclude | null
+  include?: XOR<CreatorInclude, null>
   /**
    * Filter, which Creators to fetch.
   **/
@@ -4477,7 +4516,7 @@ export type FindManyCreatorArgs = {
   /**
    * Determine the order of the Creators to fetch.
   **/
-  orderBy?: Enumerable<CreatorOrderByInput> | CreatorOrderByInput
+  orderBy?: XOR<Enumerable<CreatorOrderByInput>, CreatorOrderByInput>
   /**
    * Sets the position for listing Creators.
   **/
@@ -4501,11 +4540,11 @@ export type CreatorCreateArgs = {
   /**
    * Select specific fields to fetch from the Creator
   **/
-  select?: CreatorSelect | null
+  select?: XOR<CreatorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: CreatorInclude | null
+  include?: XOR<CreatorInclude, null>
   /**
    * The data needed to create a Creator.
   **/
@@ -4520,11 +4559,11 @@ export type CreatorUpdateArgs = {
   /**
    * Select specific fields to fetch from the Creator
   **/
-  select?: CreatorSelect | null
+  select?: XOR<CreatorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: CreatorInclude | null
+  include?: XOR<CreatorInclude, null>
   /**
    * The data needed to update a Creator.
   **/
@@ -4552,11 +4591,11 @@ export type CreatorUpsertArgs = {
   /**
    * Select specific fields to fetch from the Creator
   **/
-  select?: CreatorSelect | null
+  select?: XOR<CreatorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: CreatorInclude | null
+  include?: XOR<CreatorInclude, null>
   /**
    * The filter to search for the Creator to update in case it exists.
   **/
@@ -4579,11 +4618,11 @@ export type CreatorDeleteArgs = {
   /**
    * Select specific fields to fetch from the Creator
   **/
-  select?: CreatorSelect | null
+  select?: XOR<CreatorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: CreatorInclude | null
+  include?: XOR<CreatorInclude, null>
   /**
    * Filter which Creator to delete.
   **/
@@ -4606,11 +4645,11 @@ export type CreatorArgs = {
   /**
    * Select specific fields to fetch from the Creator
   **/
-  select?: CreatorSelect | null
+  select?: XOR<CreatorSelect, null>
   /**
    * Choose, which related nodes to fetch as well.
   **/
-  include?: CreatorInclude | null
+  include?: XOR<CreatorInclude, null>
 }
 
 
@@ -4621,17 +4660,17 @@ export type CreatorArgs = {
 
 
 export type UserWhereInput = {
-  AND?: UserWhereInput | Enumerable<UserWhereInput>
-  OR?: UserWhereInput | Enumerable<UserWhereInput>
-  NOT?: UserWhereInput | Enumerable<UserWhereInput>
-  id?: IntFilter | number
-  email?: StringFilter | string
+  AND?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
+  OR?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
+  NOT?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
+  id?: XOR<IntFilter, number>
+  email?: XOR<StringFilter, string>
   name?: StringNullableFilter | string | null
-  age?: IntFilter | number
-  balance?: FloatFilter | number
-  amount?: FloatFilter | number
+  age?: XOR<IntFilter, number>
+  balance?: XOR<FloatFilter, number>
+  amount?: XOR<FloatFilter, number>
   posts?: PostListRelationFilter
-  role?: EnumRoleFilter | Role
+  role?: XOR<EnumRoleFilter, Role>
   editorPosts?: PostListRelationFilter
 }
 
@@ -4651,18 +4690,18 @@ export type UserWhereUniqueInput = {
 }
 
 export type postWhereInput = {
-  AND?: postWhereInput | Enumerable<postWhereInput>
-  OR?: postWhereInput | Enumerable<postWhereInput>
-  NOT?: postWhereInput | Enumerable<postWhereInput>
-  uuid?: StringFilter | string
-  createdAt?: DateTimeFilter | Date | string
-  updatedAt?: DateTimeFilter | Date | string
-  published?: BoolFilter | boolean
-  title?: StringFilter | string
-  subtitle?: StringFilter | string
+  AND?: XOR<postWhereInput, Enumerable<postWhereInput>>
+  OR?: XOR<postWhereInput, Enumerable<postWhereInput>>
+  NOT?: XOR<postWhereInput, Enumerable<postWhereInput>>
+  uuid?: XOR<StringFilter, string>
+  createdAt?: XOR<DateTimeFilter, Date | string>
+  updatedAt?: XOR<DateTimeFilter, Date | string>
+  published?: XOR<BoolFilter, boolean>
+  title?: XOR<StringFilter, string>
+  subtitle?: XOR<StringFilter, string>
   content?: StringNullableFilter | string | null
-  author?: UserRelationFilter | UserWhereInput
-  authorId?: IntFilter | number
+  author?: XOR<UserRelationFilter, UserWhereInput>
+  authorId?: XOR<IntFilter, number>
   editor?: UserRelationFilter | UserWhereInput | null
   editorId?: IntNullableFilter | number | null
   kind?: EnumPostKindNullableFilter | PostKind | null
@@ -4688,12 +4727,12 @@ export type postWhereUniqueInput = {
 }
 
 export type CategoryWhereInput = {
-  AND?: CategoryWhereInput | Enumerable<CategoryWhereInput>
-  OR?: CategoryWhereInput | Enumerable<CategoryWhereInput>
-  NOT?: CategoryWhereInput | Enumerable<CategoryWhereInput>
-  name?: StringFilter | string
-  slug?: StringFilter | string
-  number?: IntFilter | number
+  AND?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
+  OR?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
+  NOT?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
+  name?: XOR<StringFilter, string>
+  slug?: XOR<StringFilter, string>
+  number?: XOR<IntFilter, number>
 }
 
 export type CategoryOrderByInput = {
@@ -4707,12 +4746,12 @@ export type CategoryWhereUniqueInput = {
 }
 
 export type PatientWhereInput = {
-  AND?: PatientWhereInput | Enumerable<PatientWhereInput>
-  OR?: PatientWhereInput | Enumerable<PatientWhereInput>
-  NOT?: PatientWhereInput | Enumerable<PatientWhereInput>
-  firstName?: StringFilter | string
-  lastName?: StringFilter | string
-  email?: StringFilter | string
+  AND?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
+  OR?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
+  NOT?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
+  firstName?: XOR<StringFilter, string>
+  lastName?: XOR<StringFilter, string>
+  email?: XOR<StringFilter, string>
 }
 
 export type PatientOrderByInput = {
@@ -4726,13 +4765,13 @@ export type PatientWhereUniqueInput = {
 }
 
 export type MovieWhereInput = {
-  AND?: MovieWhereInput | Enumerable<MovieWhereInput>
-  OR?: MovieWhereInput | Enumerable<MovieWhereInput>
-  NOT?: MovieWhereInput | Enumerable<MovieWhereInput>
-  directorFirstName?: StringFilter | string
-  directorLastName?: StringFilter | string
-  director?: DirectorRelationFilter | DirectorWhereInput
-  title?: StringFilter | string
+  AND?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
+  OR?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
+  NOT?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
+  directorFirstName?: XOR<StringFilter, string>
+  directorLastName?: XOR<StringFilter, string>
+  director?: XOR<DirectorRelationFilter, DirectorWhereInput>
+  title?: XOR<StringFilter, string>
 }
 
 export type MovieOrderByInput = {
@@ -4746,11 +4785,11 @@ export type MovieWhereUniqueInput = {
 }
 
 export type DirectorWhereInput = {
-  AND?: DirectorWhereInput | Enumerable<DirectorWhereInput>
-  OR?: DirectorWhereInput | Enumerable<DirectorWhereInput>
-  NOT?: DirectorWhereInput | Enumerable<DirectorWhereInput>
-  firstName?: StringFilter | string
-  lastName?: StringFilter | string
+  AND?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
+  OR?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
+  NOT?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
+  firstName?: XOR<StringFilter, string>
+  lastName?: XOR<StringFilter, string>
   movies?: MovieListRelationFilter
 }
 
@@ -4764,11 +4803,11 @@ export type DirectorWhereUniqueInput = {
 }
 
 export type ProblemWhereInput = {
-  AND?: ProblemWhereInput | Enumerable<ProblemWhereInput>
-  OR?: ProblemWhereInput | Enumerable<ProblemWhereInput>
-  NOT?: ProblemWhereInput | Enumerable<ProblemWhereInput>
-  id?: IntFilter | number
-  problemText?: StringFilter | string
+  AND?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
+  OR?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
+  NOT?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
+  id?: XOR<IntFilter, number>
+  problemText?: XOR<StringFilter, string>
   likedBy?: CreatorListRelationFilter
   creator?: CreatorRelationFilter | CreatorWhereInput | null
   creatorId?: IntNullableFilter | number | null
@@ -4785,11 +4824,11 @@ export type ProblemWhereUniqueInput = {
 }
 
 export type CreatorWhereInput = {
-  AND?: CreatorWhereInput | Enumerable<CreatorWhereInput>
-  OR?: CreatorWhereInput | Enumerable<CreatorWhereInput>
-  NOT?: CreatorWhereInput | Enumerable<CreatorWhereInput>
-  id?: IntFilter | number
-  name?: StringFilter | string
+  AND?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
+  OR?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
+  NOT?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
+  id?: XOR<IntFilter, number>
+  name?: XOR<StringFilter, string>
   likes?: ProblemListRelationFilter
   problems?: ProblemListRelationFilter
 }
@@ -4805,7 +4844,7 @@ export type CreatorWhereUniqueInput = {
 
 export type UserCreateInput = {
   email: string
-  name?: string | null
+  name?: XOR<string, null>
   age: number
   balance: number
   amount: number
@@ -4815,23 +4854,23 @@ export type UserCreateInput = {
 }
 
 export type UserUpdateInput = {
-  email?: string | StringFieldUpdateOperationsInput
+  email?: XOR<string, StringFieldUpdateOperationsInput>
   name?: string | NullableStringFieldUpdateOperationsInput | null
-  age?: number | IntFieldUpdateOperationsInput
-  balance?: number | FloatFieldUpdateOperationsInput
-  amount?: number | FloatFieldUpdateOperationsInput
-  role?: Role | EnumRoleFieldUpdateOperationsInput
+  age?: XOR<number, IntFieldUpdateOperationsInput>
+  balance?: XOR<number, FloatFieldUpdateOperationsInput>
+  amount?: XOR<number, FloatFieldUpdateOperationsInput>
+  role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
   posts?: postUpdateManyWithoutAuthorInput
   editorPosts?: postUpdateManyWithoutEditorInput
 }
 
 export type UserUpdateManyMutationInput = {
-  email?: string | StringFieldUpdateOperationsInput
+  email?: XOR<string, StringFieldUpdateOperationsInput>
   name?: string | NullableStringFieldUpdateOperationsInput | null
-  age?: number | IntFieldUpdateOperationsInput
-  balance?: number | FloatFieldUpdateOperationsInput
-  amount?: number | FloatFieldUpdateOperationsInput
-  role?: Role | EnumRoleFieldUpdateOperationsInput
+  age?: XOR<number, IntFieldUpdateOperationsInput>
+  balance?: XOR<number, FloatFieldUpdateOperationsInput>
+  amount?: XOR<number, FloatFieldUpdateOperationsInput>
+  role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
 }
 
 export type postCreateInput = {
@@ -4841,20 +4880,20 @@ export type postCreateInput = {
   published: boolean
   title: string
   subtitle: string
-  content?: string | null
-  kind?: PostKind | null
+  content?: XOR<string, null>
+  kind?: XOR<PostKind, null>
   metadata: InputJsonValue
   author: UserCreateOneWithoutPostsInput
   editor?: UserCreateOneWithoutEditorPostsInput
 }
 
 export type postUpdateInput = {
-  uuid?: string | StringFieldUpdateOperationsInput
-  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  published?: boolean | BoolFieldUpdateOperationsInput
-  title?: string | StringFieldUpdateOperationsInput
-  subtitle?: string | StringFieldUpdateOperationsInput
+  uuid?: XOR<string, StringFieldUpdateOperationsInput>
+  createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
+  updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
+  published?: XOR<boolean, BoolFieldUpdateOperationsInput>
+  title?: XOR<string, StringFieldUpdateOperationsInput>
+  subtitle?: XOR<string, StringFieldUpdateOperationsInput>
   content?: string | NullableStringFieldUpdateOperationsInput | null
   kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
   metadata?: InputJsonValue
@@ -4863,12 +4902,12 @@ export type postUpdateInput = {
 }
 
 export type postUpdateManyMutationInput = {
-  uuid?: string | StringFieldUpdateOperationsInput
-  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  published?: boolean | BoolFieldUpdateOperationsInput
-  title?: string | StringFieldUpdateOperationsInput
-  subtitle?: string | StringFieldUpdateOperationsInput
+  uuid?: XOR<string, StringFieldUpdateOperationsInput>
+  createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
+  updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
+  published?: XOR<boolean, BoolFieldUpdateOperationsInput>
+  title?: XOR<string, StringFieldUpdateOperationsInput>
+  subtitle?: XOR<string, StringFieldUpdateOperationsInput>
   content?: string | NullableStringFieldUpdateOperationsInput | null
   kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
   metadata?: InputJsonValue
@@ -4881,15 +4920,15 @@ export type CategoryCreateInput = {
 }
 
 export type CategoryUpdateInput = {
-  name?: string | StringFieldUpdateOperationsInput
-  slug?: string | StringFieldUpdateOperationsInput
-  number?: number | IntFieldUpdateOperationsInput
+  name?: XOR<string, StringFieldUpdateOperationsInput>
+  slug?: XOR<string, StringFieldUpdateOperationsInput>
+  number?: XOR<number, IntFieldUpdateOperationsInput>
 }
 
 export type CategoryUpdateManyMutationInput = {
-  name?: string | StringFieldUpdateOperationsInput
-  slug?: string | StringFieldUpdateOperationsInput
-  number?: number | IntFieldUpdateOperationsInput
+  name?: XOR<string, StringFieldUpdateOperationsInput>
+  slug?: XOR<string, StringFieldUpdateOperationsInput>
+  number?: XOR<number, IntFieldUpdateOperationsInput>
 }
 
 export type PatientCreateInput = {
@@ -4899,15 +4938,15 @@ export type PatientCreateInput = {
 }
 
 export type PatientUpdateInput = {
-  firstName?: string | StringFieldUpdateOperationsInput
-  lastName?: string | StringFieldUpdateOperationsInput
-  email?: string | StringFieldUpdateOperationsInput
+  firstName?: XOR<string, StringFieldUpdateOperationsInput>
+  lastName?: XOR<string, StringFieldUpdateOperationsInput>
+  email?: XOR<string, StringFieldUpdateOperationsInput>
 }
 
 export type PatientUpdateManyMutationInput = {
-  firstName?: string | StringFieldUpdateOperationsInput
-  lastName?: string | StringFieldUpdateOperationsInput
-  email?: string | StringFieldUpdateOperationsInput
+  firstName?: XOR<string, StringFieldUpdateOperationsInput>
+  lastName?: XOR<string, StringFieldUpdateOperationsInput>
+  email?: XOR<string, StringFieldUpdateOperationsInput>
 }
 
 export type MovieCreateInput = {
@@ -4916,12 +4955,12 @@ export type MovieCreateInput = {
 }
 
 export type MovieUpdateInput = {
-  title?: string | StringFieldUpdateOperationsInput
+  title?: XOR<string, StringFieldUpdateOperationsInput>
   director?: DirectorUpdateOneRequiredWithoutMoviesInput
 }
 
 export type MovieUpdateManyMutationInput = {
-  title?: string | StringFieldUpdateOperationsInput
+  title?: XOR<string, StringFieldUpdateOperationsInput>
 }
 
 export type DirectorCreateInput = {
@@ -4931,14 +4970,14 @@ export type DirectorCreateInput = {
 }
 
 export type DirectorUpdateInput = {
-  firstName?: string | StringFieldUpdateOperationsInput
-  lastName?: string | StringFieldUpdateOperationsInput
+  firstName?: XOR<string, StringFieldUpdateOperationsInput>
+  lastName?: XOR<string, StringFieldUpdateOperationsInput>
   movies?: MovieUpdateManyWithoutDirectorInput
 }
 
 export type DirectorUpdateManyMutationInput = {
-  firstName?: string | StringFieldUpdateOperationsInput
-  lastName?: string | StringFieldUpdateOperationsInput
+  firstName?: XOR<string, StringFieldUpdateOperationsInput>
+  lastName?: XOR<string, StringFieldUpdateOperationsInput>
 }
 
 export type ProblemCreateInput = {
@@ -4948,13 +4987,13 @@ export type ProblemCreateInput = {
 }
 
 export type ProblemUpdateInput = {
-  problemText?: string | StringFieldUpdateOperationsInput
+  problemText?: XOR<string, StringFieldUpdateOperationsInput>
   likedBy?: CreatorUpdateManyWithoutLikesInput
   creator?: CreatorUpdateOneWithoutProblemsInput
 }
 
 export type ProblemUpdateManyMutationInput = {
-  problemText?: string | StringFieldUpdateOperationsInput
+  problemText?: XOR<string, StringFieldUpdateOperationsInput>
 }
 
 export type CreatorCreateInput = {
@@ -4964,13 +5003,13 @@ export type CreatorCreateInput = {
 }
 
 export type CreatorUpdateInput = {
-  name?: string | StringFieldUpdateOperationsInput
+  name?: XOR<string, StringFieldUpdateOperationsInput>
   likes?: ProblemUpdateManyWithoutLikedByInput
   problems?: ProblemUpdateManyWithoutCreatorInput
 }
 
 export type CreatorUpdateManyMutationInput = {
-  name?: string | StringFieldUpdateOperationsInput
+  name?: XOR<string, StringFieldUpdateOperationsInput>
 }
 
 export type IntFilter = {
@@ -4981,7 +5020,7 @@ export type IntFilter = {
   lte?: number
   gt?: number
   gte?: number
-  not?: number | NestedIntFilter
+  not?: XOR<number, NestedIntFilter>
 }
 
 export type StringFilter = {
@@ -4996,13 +5035,13 @@ export type StringFilter = {
   startsWith?: string
   endsWith?: string
   mode?: QueryMode
-  not?: string | NestedStringFilter
+  not?: XOR<string, NestedStringFilter>
 }
 
 export type StringNullableFilter = {
-  equals?: string | null
-  in?: Enumerable<string> | null
-  notIn?: Enumerable<string> | null
+  equals?: XOR<string, null>
+  in?: XOR<Enumerable<string>, null>
+  notIn?: XOR<Enumerable<string>, null>
   lt?: string
   lte?: string
   gt?: string
@@ -5022,7 +5061,7 @@ export type FloatFilter = {
   lte?: number
   gt?: number
   gte?: number
-  not?: number | NestedFloatFilter
+  not?: XOR<number, NestedFloatFilter>
 }
 
 export type PostListRelationFilter = {
@@ -5035,7 +5074,7 @@ export type EnumRoleFilter = {
   equals?: Role
   in?: Enumerable<Role>
   notIn?: Enumerable<Role>
-  not?: Role | NestedEnumRoleFilter
+  not?: XOR<Role, NestedEnumRoleFilter>
 }
 
 export type DateTimeFilter = {
@@ -5046,12 +5085,12 @@ export type DateTimeFilter = {
   lte?: Date | string
   gt?: Date | string
   gte?: Date | string
-  not?: Date | string | NestedDateTimeFilter
+  not?: XOR<Date | string, NestedDateTimeFilter>
 }
 
 export type BoolFilter = {
   equals?: boolean
-  not?: boolean | NestedBoolFilter
+  not?: XOR<boolean, NestedBoolFilter>
 }
 
 export type UserRelationFilter = {
@@ -5060,9 +5099,9 @@ export type UserRelationFilter = {
 }
 
 export type IntNullableFilter = {
-  equals?: number | null
-  in?: Enumerable<number> | null
-  notIn?: Enumerable<number> | null
+  equals?: XOR<number, null>
+  in?: XOR<Enumerable<number>, null>
+  notIn?: XOR<Enumerable<number>, null>
   lt?: number
   lte?: number
   gt?: number
@@ -5071,9 +5110,9 @@ export type IntNullableFilter = {
 }
 
 export type EnumPostKindNullableFilter = {
-  equals?: PostKind | null
-  in?: Enumerable<PostKind> | null
-  notIn?: Enumerable<PostKind> | null
+  equals?: XOR<PostKind, null>
+  in?: XOR<Enumerable<PostKind>, null>
+  notIn?: XOR<Enumerable<PostKind>, null>
   not?: PostKind | NestedEnumPostKindNullableFilter | null
 }
 
@@ -5116,8 +5155,8 @@ export type CreatorListRelationFilter = {
 }
 
 export type CreatorRelationFilter = {
-  is?: CreatorWhereInput | null
-  isNot?: CreatorWhereInput | null
+  is?: XOR<CreatorWhereInput, null>
+  isNot?: XOR<CreatorWhereInput, null>
 }
 
 export type ProblemListRelationFilter = {
@@ -5127,15 +5166,15 @@ export type ProblemListRelationFilter = {
 }
 
 export type postCreateManyWithoutAuthorInput = {
-  create?: postCreateWithoutAuthorInput | Enumerable<postCreateWithoutAuthorInput>
-  connect?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  connectOrCreate?: postCreateOrConnectWithoutUserInput | Enumerable<postCreateOrConnectWithoutUserInput>
+  create?: XOR<postCreateWithoutAuthorInput, Enumerable<postCreateWithoutAuthorInput>>
+  connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  connectOrCreate?: XOR<postCreateOrConnectWithoutauthorInput, Enumerable<postCreateOrConnectWithoutauthorInput>>
 }
 
 export type postCreateManyWithoutEditorInput = {
-  create?: postCreateWithoutEditorInput | Enumerable<postCreateWithoutEditorInput>
-  connect?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  connectOrCreate?: postCreateOrConnectWithoutUserInput | Enumerable<postCreateOrConnectWithoutUserInput>
+  create?: XOR<postCreateWithoutEditorInput, Enumerable<postCreateWithoutEditorInput>>
+  connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  connectOrCreate?: XOR<postCreateOrConnectWithouteditorInput, Enumerable<postCreateOrConnectWithouteditorInput>>
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -5143,7 +5182,7 @@ export type StringFieldUpdateOperationsInput = {
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+  set?: XOR<string, null>
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -5167,41 +5206,41 @@ export type EnumRoleFieldUpdateOperationsInput = {
 }
 
 export type postUpdateManyWithoutAuthorInput = {
-  create?: postCreateWithoutAuthorInput | Enumerable<postCreateWithoutAuthorInput>
-  connect?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  set?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  disconnect?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  delete?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  update?: postUpdateWithWhereUniqueWithoutAuthorInput | Enumerable<postUpdateWithWhereUniqueWithoutAuthorInput>
-  updateMany?: postUpdateManyWithWhereNestedInput | Enumerable<postUpdateManyWithWhereNestedInput>
-  deleteMany?: postScalarWhereInput | Enumerable<postScalarWhereInput>
-  upsert?: postUpsertWithWhereUniqueWithoutAuthorInput | Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
-  connectOrCreate?: postCreateOrConnectWithoutUserInput | Enumerable<postCreateOrConnectWithoutUserInput>
+  create?: XOR<postCreateWithoutAuthorInput, Enumerable<postCreateWithoutAuthorInput>>
+  connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  set?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  disconnect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  delete?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  update?: XOR<postUpdateWithWhereUniqueWithoutAuthorInput, Enumerable<postUpdateWithWhereUniqueWithoutAuthorInput>>
+  updateMany?: XOR<postUpdateManyWithWhereWithoutAuthorInput, Enumerable<postUpdateManyWithWhereWithoutAuthorInput>>
+  deleteMany?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
+  upsert?: XOR<postUpsertWithWhereUniqueWithoutAuthorInput, Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>>
+  connectOrCreate?: XOR<postCreateOrConnectWithoutauthorInput, Enumerable<postCreateOrConnectWithoutauthorInput>>
 }
 
 export type postUpdateManyWithoutEditorInput = {
-  create?: postCreateWithoutEditorInput | Enumerable<postCreateWithoutEditorInput>
-  connect?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  set?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  disconnect?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  delete?: postWhereUniqueInput | Enumerable<postWhereUniqueInput>
-  update?: postUpdateWithWhereUniqueWithoutEditorInput | Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
-  updateMany?: postUpdateManyWithWhereNestedInput | Enumerable<postUpdateManyWithWhereNestedInput>
-  deleteMany?: postScalarWhereInput | Enumerable<postScalarWhereInput>
-  upsert?: postUpsertWithWhereUniqueWithoutEditorInput | Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
-  connectOrCreate?: postCreateOrConnectWithoutUserInput | Enumerable<postCreateOrConnectWithoutUserInput>
+  create?: XOR<postCreateWithoutEditorInput, Enumerable<postCreateWithoutEditorInput>>
+  connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  set?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  disconnect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  delete?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
+  update?: XOR<postUpdateWithWhereUniqueWithoutEditorInput, Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>>
+  updateMany?: XOR<postUpdateManyWithWhereWithoutEditorInput, Enumerable<postUpdateManyWithWhereWithoutEditorInput>>
+  deleteMany?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
+  upsert?: XOR<postUpsertWithWhereUniqueWithoutEditorInput, Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>>
+  connectOrCreate?: XOR<postCreateOrConnectWithouteditorInput, Enumerable<postCreateOrConnectWithouteditorInput>>
 }
 
 export type UserCreateOneWithoutPostsInput = {
   create?: UserCreateWithoutPostsInput
   connect?: UserWhereUniqueInput
-  connectOrCreate?: UserCreateOrConnectWithoutpostInput
+  connectOrCreate?: UserCreateOrConnectWithoutpostsInput
 }
 
 export type UserCreateOneWithoutEditorPostsInput = {
   create?: UserCreateWithoutEditorPostsInput
   connect?: UserWhereUniqueInput
-  connectOrCreate?: UserCreateOrConnectWithoutpostInput
+  connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -5213,15 +5252,15 @@ export type BoolFieldUpdateOperationsInput = {
 }
 
 export type NullableEnumPostKindFieldUpdateOperationsInput = {
-  set?: PostKind | null
+  set?: XOR<PostKind, null>
 }
 
 export type UserUpdateOneRequiredWithoutPostsInput = {
   create?: UserCreateWithoutPostsInput
   connect?: UserWhereUniqueInput
-  update?: UserUpdateWithoutPostsDataInput
+  update?: UserUpdateWithoutPostsInput
   upsert?: UserUpsertWithoutPostsInput
-  connectOrCreate?: UserCreateOrConnectWithoutpostInput
+  connectOrCreate?: UserCreateOrConnectWithoutpostsInput
 }
 
 export type UserUpdateOneWithoutEditorPostsInput = {
@@ -5229,67 +5268,67 @@ export type UserUpdateOneWithoutEditorPostsInput = {
   connect?: UserWhereUniqueInput
   disconnect?: boolean
   delete?: boolean
-  update?: UserUpdateWithoutEditorPostsDataInput
+  update?: UserUpdateWithoutEditorPostsInput
   upsert?: UserUpsertWithoutEditorPostsInput
-  connectOrCreate?: UserCreateOrConnectWithoutpostInput
+  connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
 }
 
 export type DirectorCreateOneWithoutMoviesInput = {
   create?: DirectorCreateWithoutMoviesInput
   connect?: DirectorWhereUniqueInput
-  connectOrCreate?: DirectorCreateOrConnectWithoutMovieInput
+  connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
 }
 
 export type DirectorUpdateOneRequiredWithoutMoviesInput = {
   create?: DirectorCreateWithoutMoviesInput
   connect?: DirectorWhereUniqueInput
-  update?: DirectorUpdateWithoutMoviesDataInput
+  update?: DirectorUpdateWithoutMoviesInput
   upsert?: DirectorUpsertWithoutMoviesInput
-  connectOrCreate?: DirectorCreateOrConnectWithoutMovieInput
+  connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
 }
 
 export type MovieCreateManyWithoutDirectorInput = {
-  create?: MovieCreateWithoutDirectorInput | Enumerable<MovieCreateWithoutDirectorInput>
-  connect?: MovieWhereUniqueInput | Enumerable<MovieWhereUniqueInput>
-  connectOrCreate?: MovieCreateOrConnectWithoutDirectorInput | Enumerable<MovieCreateOrConnectWithoutDirectorInput>
+  create?: XOR<MovieCreateWithoutDirectorInput, Enumerable<MovieCreateWithoutDirectorInput>>
+  connect?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
+  connectOrCreate?: XOR<MovieCreateOrConnectWithoutdirectorInput, Enumerable<MovieCreateOrConnectWithoutdirectorInput>>
 }
 
 export type MovieUpdateManyWithoutDirectorInput = {
-  create?: MovieCreateWithoutDirectorInput | Enumerable<MovieCreateWithoutDirectorInput>
-  connect?: MovieWhereUniqueInput | Enumerable<MovieWhereUniqueInput>
-  set?: MovieWhereUniqueInput | Enumerable<MovieWhereUniqueInput>
-  disconnect?: MovieWhereUniqueInput | Enumerable<MovieWhereUniqueInput>
-  delete?: MovieWhereUniqueInput | Enumerable<MovieWhereUniqueInput>
-  update?: MovieUpdateWithWhereUniqueWithoutDirectorInput | Enumerable<MovieUpdateWithWhereUniqueWithoutDirectorInput>
-  updateMany?: MovieUpdateManyWithWhereNestedInput | Enumerable<MovieUpdateManyWithWhereNestedInput>
-  deleteMany?: MovieScalarWhereInput | Enumerable<MovieScalarWhereInput>
-  upsert?: MovieUpsertWithWhereUniqueWithoutDirectorInput | Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
-  connectOrCreate?: MovieCreateOrConnectWithoutDirectorInput | Enumerable<MovieCreateOrConnectWithoutDirectorInput>
+  create?: XOR<MovieCreateWithoutDirectorInput, Enumerable<MovieCreateWithoutDirectorInput>>
+  connect?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
+  set?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
+  disconnect?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
+  delete?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
+  update?: XOR<MovieUpdateWithWhereUniqueWithoutDirectorInput, Enumerable<MovieUpdateWithWhereUniqueWithoutDirectorInput>>
+  updateMany?: XOR<MovieUpdateManyWithWhereWithoutDirectorInput, Enumerable<MovieUpdateManyWithWhereWithoutDirectorInput>>
+  deleteMany?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
+  upsert?: XOR<MovieUpsertWithWhereUniqueWithoutDirectorInput, Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>>
+  connectOrCreate?: XOR<MovieCreateOrConnectWithoutdirectorInput, Enumerable<MovieCreateOrConnectWithoutdirectorInput>>
 }
 
 export type CreatorCreateManyWithoutLikesInput = {
-  create?: CreatorCreateWithoutLikesInput | Enumerable<CreatorCreateWithoutLikesInput>
-  connect?: CreatorWhereUniqueInput | Enumerable<CreatorWhereUniqueInput>
-  connectOrCreate?: CreatorCreateOrConnectWithoutProblemInput | Enumerable<CreatorCreateOrConnectWithoutProblemInput>
+  create?: XOR<CreatorCreateWithoutLikesInput, Enumerable<CreatorCreateWithoutLikesInput>>
+  connect?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
+  connectOrCreate?: XOR<CreatorCreateOrConnectWithoutlikesInput, Enumerable<CreatorCreateOrConnectWithoutlikesInput>>
 }
 
 export type CreatorCreateOneWithoutProblemsInput = {
   create?: CreatorCreateWithoutProblemsInput
   connect?: CreatorWhereUniqueInput
-  connectOrCreate?: CreatorCreateOrConnectWithoutProblemInput
+  connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
 }
 
 export type CreatorUpdateManyWithoutLikesInput = {
-  create?: CreatorCreateWithoutLikesInput | Enumerable<CreatorCreateWithoutLikesInput>
-  connect?: CreatorWhereUniqueInput | Enumerable<CreatorWhereUniqueInput>
-  set?: CreatorWhereUniqueInput | Enumerable<CreatorWhereUniqueInput>
-  disconnect?: CreatorWhereUniqueInput | Enumerable<CreatorWhereUniqueInput>
-  delete?: CreatorWhereUniqueInput | Enumerable<CreatorWhereUniqueInput>
-  update?: CreatorUpdateWithWhereUniqueWithoutLikesInput | Enumerable<CreatorUpdateWithWhereUniqueWithoutLikesInput>
-  updateMany?: CreatorUpdateManyWithWhereNestedInput | Enumerable<CreatorUpdateManyWithWhereNestedInput>
-  deleteMany?: CreatorScalarWhereInput | Enumerable<CreatorScalarWhereInput>
-  upsert?: CreatorUpsertWithWhereUniqueWithoutLikesInput | Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>
-  connectOrCreate?: CreatorCreateOrConnectWithoutProblemInput | Enumerable<CreatorCreateOrConnectWithoutProblemInput>
+  create?: XOR<CreatorCreateWithoutLikesInput, Enumerable<CreatorCreateWithoutLikesInput>>
+  connect?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
+  set?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
+  disconnect?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
+  delete?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
+  update?: XOR<CreatorUpdateWithWhereUniqueWithoutLikesInput, Enumerable<CreatorUpdateWithWhereUniqueWithoutLikesInput>>
+  updateMany?: XOR<CreatorUpdateManyWithWhereWithoutLikesInput, Enumerable<CreatorUpdateManyWithWhereWithoutLikesInput>>
+  deleteMany?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
+  upsert?: XOR<CreatorUpsertWithWhereUniqueWithoutLikesInput, Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>>
+  connectOrCreate?: XOR<CreatorCreateOrConnectWithoutlikesInput, Enumerable<CreatorCreateOrConnectWithoutlikesInput>>
 }
 
 export type CreatorUpdateOneWithoutProblemsInput = {
@@ -5297,47 +5336,47 @@ export type CreatorUpdateOneWithoutProblemsInput = {
   connect?: CreatorWhereUniqueInput
   disconnect?: boolean
   delete?: boolean
-  update?: CreatorUpdateWithoutProblemsDataInput
+  update?: CreatorUpdateWithoutProblemsInput
   upsert?: CreatorUpsertWithoutProblemsInput
-  connectOrCreate?: CreatorCreateOrConnectWithoutProblemInput
+  connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
 }
 
 export type ProblemCreateManyWithoutLikedByInput = {
-  create?: ProblemCreateWithoutLikedByInput | Enumerable<ProblemCreateWithoutLikedByInput>
-  connect?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  connectOrCreate?: ProblemCreateOrConnectWithoutCreatorInput | Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
+  create?: XOR<ProblemCreateWithoutLikedByInput, Enumerable<ProblemCreateWithoutLikedByInput>>
+  connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  connectOrCreate?: XOR<ProblemCreateOrConnectWithoutlikedByInput, Enumerable<ProblemCreateOrConnectWithoutlikedByInput>>
 }
 
 export type ProblemCreateManyWithoutCreatorInput = {
-  create?: ProblemCreateWithoutCreatorInput | Enumerable<ProblemCreateWithoutCreatorInput>
-  connect?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  connectOrCreate?: ProblemCreateOrConnectWithoutCreatorInput | Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
+  create?: XOR<ProblemCreateWithoutCreatorInput, Enumerable<ProblemCreateWithoutCreatorInput>>
+  connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  connectOrCreate?: XOR<ProblemCreateOrConnectWithoutcreatorInput, Enumerable<ProblemCreateOrConnectWithoutcreatorInput>>
 }
 
 export type ProblemUpdateManyWithoutLikedByInput = {
-  create?: ProblemCreateWithoutLikedByInput | Enumerable<ProblemCreateWithoutLikedByInput>
-  connect?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  set?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  disconnect?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  delete?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  update?: ProblemUpdateWithWhereUniqueWithoutLikedByInput | Enumerable<ProblemUpdateWithWhereUniqueWithoutLikedByInput>
-  updateMany?: ProblemUpdateManyWithWhereNestedInput | Enumerable<ProblemUpdateManyWithWhereNestedInput>
-  deleteMany?: ProblemScalarWhereInput | Enumerable<ProblemScalarWhereInput>
-  upsert?: ProblemUpsertWithWhereUniqueWithoutLikedByInput | Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>
-  connectOrCreate?: ProblemCreateOrConnectWithoutCreatorInput | Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
+  create?: XOR<ProblemCreateWithoutLikedByInput, Enumerable<ProblemCreateWithoutLikedByInput>>
+  connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  set?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  disconnect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  delete?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  update?: XOR<ProblemUpdateWithWhereUniqueWithoutLikedByInput, Enumerable<ProblemUpdateWithWhereUniqueWithoutLikedByInput>>
+  updateMany?: XOR<ProblemUpdateManyWithWhereWithoutLikedByInput, Enumerable<ProblemUpdateManyWithWhereWithoutLikedByInput>>
+  deleteMany?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
+  upsert?: XOR<ProblemUpsertWithWhereUniqueWithoutLikedByInput, Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>>
+  connectOrCreate?: XOR<ProblemCreateOrConnectWithoutlikedByInput, Enumerable<ProblemCreateOrConnectWithoutlikedByInput>>
 }
 
 export type ProblemUpdateManyWithoutCreatorInput = {
-  create?: ProblemCreateWithoutCreatorInput | Enumerable<ProblemCreateWithoutCreatorInput>
-  connect?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  set?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  disconnect?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  delete?: ProblemWhereUniqueInput | Enumerable<ProblemWhereUniqueInput>
-  update?: ProblemUpdateWithWhereUniqueWithoutCreatorInput | Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>
-  updateMany?: ProblemUpdateManyWithWhereNestedInput | Enumerable<ProblemUpdateManyWithWhereNestedInput>
-  deleteMany?: ProblemScalarWhereInput | Enumerable<ProblemScalarWhereInput>
-  upsert?: ProblemUpsertWithWhereUniqueWithoutCreatorInput | Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
-  connectOrCreate?: ProblemCreateOrConnectWithoutCreatorInput | Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
+  create?: XOR<ProblemCreateWithoutCreatorInput, Enumerable<ProblemCreateWithoutCreatorInput>>
+  connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  set?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  disconnect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  delete?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
+  update?: XOR<ProblemUpdateWithWhereUniqueWithoutCreatorInput, Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>>
+  updateMany?: XOR<ProblemUpdateManyWithWhereWithoutCreatorInput, Enumerable<ProblemUpdateManyWithWhereWithoutCreatorInput>>
+  deleteMany?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
+  upsert?: XOR<ProblemUpsertWithWhereUniqueWithoutCreatorInput, Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>>
+  connectOrCreate?: XOR<ProblemCreateOrConnectWithoutcreatorInput, Enumerable<ProblemCreateOrConnectWithoutcreatorInput>>
 }
 
 export type NestedIntFilter = {
@@ -5348,7 +5387,7 @@ export type NestedIntFilter = {
   lte?: number
   gt?: number
   gte?: number
-  not?: number | NestedIntFilter
+  not?: XOR<number, NestedIntFilter>
 }
 
 export type NestedStringFilter = {
@@ -5362,13 +5401,13 @@ export type NestedStringFilter = {
   contains?: string
   startsWith?: string
   endsWith?: string
-  not?: string | NestedStringFilter
+  not?: XOR<string, NestedStringFilter>
 }
 
 export type NestedStringNullableFilter = {
-  equals?: string | null
-  in?: Enumerable<string> | null
-  notIn?: Enumerable<string> | null
+  equals?: XOR<string, null>
+  in?: XOR<Enumerable<string>, null>
+  notIn?: XOR<Enumerable<string>, null>
   lt?: string
   lte?: string
   gt?: string
@@ -5387,14 +5426,14 @@ export type NestedFloatFilter = {
   lte?: number
   gt?: number
   gte?: number
-  not?: number | NestedFloatFilter
+  not?: XOR<number, NestedFloatFilter>
 }
 
 export type NestedEnumRoleFilter = {
   equals?: Role
   in?: Enumerable<Role>
   notIn?: Enumerable<Role>
-  not?: Role | NestedEnumRoleFilter
+  not?: XOR<Role, NestedEnumRoleFilter>
 }
 
 export type NestedDateTimeFilter = {
@@ -5405,18 +5444,18 @@ export type NestedDateTimeFilter = {
   lte?: Date | string
   gt?: Date | string
   gte?: Date | string
-  not?: Date | string | NestedDateTimeFilter
+  not?: XOR<Date | string, NestedDateTimeFilter>
 }
 
 export type NestedBoolFilter = {
   equals?: boolean
-  not?: boolean | NestedBoolFilter
+  not?: XOR<boolean, NestedBoolFilter>
 }
 
 export type NestedIntNullableFilter = {
-  equals?: number | null
-  in?: Enumerable<number> | null
-  notIn?: Enumerable<number> | null
+  equals?: XOR<number, null>
+  in?: XOR<Enumerable<number>, null>
+  notIn?: XOR<Enumerable<number>, null>
   lt?: number
   lte?: number
   gt?: number
@@ -5425,9 +5464,9 @@ export type NestedIntNullableFilter = {
 }
 
 export type NestedEnumPostKindNullableFilter = {
-  equals?: PostKind | null
-  in?: Enumerable<PostKind> | null
-  notIn?: Enumerable<PostKind> | null
+  equals?: XOR<PostKind, null>
+  in?: XOR<Enumerable<PostKind>, null>
+  notIn?: XOR<Enumerable<PostKind>, null>
   not?: PostKind | NestedEnumPostKindNullableFilter | null
 }
 
@@ -5438,13 +5477,13 @@ export type postCreateWithoutAuthorInput = {
   published: boolean
   title: string
   subtitle: string
-  content?: string | null
-  kind?: PostKind | null
+  content?: XOR<string, null>
+  kind?: XOR<PostKind, null>
   metadata: InputJsonValue
   editor?: UserCreateOneWithoutEditorPostsInput
 }
 
-export type postCreateOrConnectWithoutUserInput = {
+export type postCreateOrConnectWithoutauthorInput = {
   where: postWhereUniqueInput
   create: postCreateWithoutAuthorInput
 }
@@ -5456,34 +5495,39 @@ export type postCreateWithoutEditorInput = {
   published: boolean
   title: string
   subtitle: string
-  content?: string | null
-  kind?: PostKind | null
+  content?: XOR<string, null>
+  kind?: XOR<PostKind, null>
   metadata: InputJsonValue
   author: UserCreateOneWithoutPostsInput
 }
 
-export type postUpdateWithWhereUniqueWithoutAuthorInput = {
+export type postCreateOrConnectWithouteditorInput = {
   where: postWhereUniqueInput
-  data: postUpdateWithoutAuthorDataInput
+  create: postCreateWithoutEditorInput
 }
 
-export type postUpdateManyWithWhereNestedInput = {
+export type postUpdateWithWhereUniqueWithoutAuthorInput = {
+  where: postWhereUniqueInput
+  data: postUpdateWithoutAuthorInput
+}
+
+export type postUpdateManyWithWhereWithoutAuthorInput = {
   where: postScalarWhereInput
-  data: postUpdateManyDataInput
+  data: postUpdateManyMutationInput
 }
 
 export type postScalarWhereInput = {
-  AND?: postScalarWhereInput | Enumerable<postScalarWhereInput>
-  OR?: postScalarWhereInput | Enumerable<postScalarWhereInput>
-  NOT?: postScalarWhereInput | Enumerable<postScalarWhereInput>
-  uuid?: StringFilter | string
-  createdAt?: DateTimeFilter | Date | string
-  updatedAt?: DateTimeFilter | Date | string
-  published?: BoolFilter | boolean
-  title?: StringFilter | string
-  subtitle?: StringFilter | string
+  AND?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
+  OR?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
+  NOT?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
+  uuid?: XOR<StringFilter, string>
+  createdAt?: XOR<DateTimeFilter, Date | string>
+  updatedAt?: XOR<DateTimeFilter, Date | string>
+  published?: XOR<BoolFilter, boolean>
+  title?: XOR<StringFilter, string>
+  subtitle?: XOR<StringFilter, string>
   content?: StringNullableFilter | string | null
-  authorId?: IntFilter | number
+  authorId?: XOR<IntFilter, number>
   editorId?: IntNullableFilter | number | null
   kind?: EnumPostKindNullableFilter | PostKind | null
   metadata?: JsonFilter
@@ -5491,24 +5535,29 @@ export type postScalarWhereInput = {
 
 export type postUpsertWithWhereUniqueWithoutAuthorInput = {
   where: postWhereUniqueInput
-  update: postUpdateWithoutAuthorDataInput
+  update: postUpdateWithoutAuthorInput
   create: postCreateWithoutAuthorInput
 }
 
 export type postUpdateWithWhereUniqueWithoutEditorInput = {
   where: postWhereUniqueInput
-  data: postUpdateWithoutEditorDataInput
+  data: postUpdateWithoutEditorInput
+}
+
+export type postUpdateManyWithWhereWithoutEditorInput = {
+  where: postScalarWhereInput
+  data: postUpdateManyMutationInput
 }
 
 export type postUpsertWithWhereUniqueWithoutEditorInput = {
   where: postWhereUniqueInput
-  update: postUpdateWithoutEditorDataInput
+  update: postUpdateWithoutEditorInput
   create: postCreateWithoutEditorInput
 }
 
 export type UserCreateWithoutPostsInput = {
   email: string
-  name?: string | null
+  name?: XOR<string, null>
   age: number
   balance: number
   amount: number
@@ -5516,14 +5565,14 @@ export type UserCreateWithoutPostsInput = {
   editorPosts?: postCreateManyWithoutEditorInput
 }
 
-export type UserCreateOrConnectWithoutpostInput = {
+export type UserCreateOrConnectWithoutpostsInput = {
   where: UserWhereUniqueInput
   create: UserCreateWithoutPostsInput
 }
 
 export type UserCreateWithoutEditorPostsInput = {
   email: string
-  name?: string | null
+  name?: XOR<string, null>
   age: number
   balance: number
   amount: number
@@ -5531,33 +5580,38 @@ export type UserCreateWithoutEditorPostsInput = {
   posts?: postCreateManyWithoutAuthorInput
 }
 
-export type UserUpdateWithoutPostsDataInput = {
-  email?: string | StringFieldUpdateOperationsInput
+export type UserCreateOrConnectWithouteditorPostsInput = {
+  where: UserWhereUniqueInput
+  create: UserCreateWithoutEditorPostsInput
+}
+
+export type UserUpdateWithoutPostsInput = {
+  email?: XOR<string, StringFieldUpdateOperationsInput>
   name?: string | NullableStringFieldUpdateOperationsInput | null
-  age?: number | IntFieldUpdateOperationsInput
-  balance?: number | FloatFieldUpdateOperationsInput
-  amount?: number | FloatFieldUpdateOperationsInput
-  role?: Role | EnumRoleFieldUpdateOperationsInput
+  age?: XOR<number, IntFieldUpdateOperationsInput>
+  balance?: XOR<number, FloatFieldUpdateOperationsInput>
+  amount?: XOR<number, FloatFieldUpdateOperationsInput>
+  role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
   editorPosts?: postUpdateManyWithoutEditorInput
 }
 
 export type UserUpsertWithoutPostsInput = {
-  update: UserUpdateWithoutPostsDataInput
+  update: UserUpdateWithoutPostsInput
   create: UserCreateWithoutPostsInput
 }
 
-export type UserUpdateWithoutEditorPostsDataInput = {
-  email?: string | StringFieldUpdateOperationsInput
+export type UserUpdateWithoutEditorPostsInput = {
+  email?: XOR<string, StringFieldUpdateOperationsInput>
   name?: string | NullableStringFieldUpdateOperationsInput | null
-  age?: number | IntFieldUpdateOperationsInput
-  balance?: number | FloatFieldUpdateOperationsInput
-  amount?: number | FloatFieldUpdateOperationsInput
-  role?: Role | EnumRoleFieldUpdateOperationsInput
+  age?: XOR<number, IntFieldUpdateOperationsInput>
+  balance?: XOR<number, FloatFieldUpdateOperationsInput>
+  amount?: XOR<number, FloatFieldUpdateOperationsInput>
+  role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
   posts?: postUpdateManyWithoutAuthorInput
 }
 
 export type UserUpsertWithoutEditorPostsInput = {
-  update: UserUpdateWithoutEditorPostsDataInput
+  update: UserUpdateWithoutEditorPostsInput
   create: UserCreateWithoutEditorPostsInput
 }
 
@@ -5566,18 +5620,18 @@ export type DirectorCreateWithoutMoviesInput = {
   lastName: string
 }
 
-export type DirectorCreateOrConnectWithoutMovieInput = {
+export type DirectorCreateOrConnectWithoutmoviesInput = {
   where: DirectorWhereUniqueInput
   create: DirectorCreateWithoutMoviesInput
 }
 
-export type DirectorUpdateWithoutMoviesDataInput = {
-  firstName?: string | StringFieldUpdateOperationsInput
-  lastName?: string | StringFieldUpdateOperationsInput
+export type DirectorUpdateWithoutMoviesInput = {
+  firstName?: XOR<string, StringFieldUpdateOperationsInput>
+  lastName?: XOR<string, StringFieldUpdateOperationsInput>
 }
 
 export type DirectorUpsertWithoutMoviesInput = {
-  update: DirectorUpdateWithoutMoviesDataInput
+  update: DirectorUpdateWithoutMoviesInput
   create: DirectorCreateWithoutMoviesInput
 }
 
@@ -5585,33 +5639,33 @@ export type MovieCreateWithoutDirectorInput = {
   title: string
 }
 
-export type MovieCreateOrConnectWithoutDirectorInput = {
+export type MovieCreateOrConnectWithoutdirectorInput = {
   where: MovieWhereUniqueInput
   create: MovieCreateWithoutDirectorInput
 }
 
 export type MovieUpdateWithWhereUniqueWithoutDirectorInput = {
   where: MovieWhereUniqueInput
-  data: MovieUpdateWithoutDirectorDataInput
+  data: MovieUpdateWithoutDirectorInput
 }
 
-export type MovieUpdateManyWithWhereNestedInput = {
+export type MovieUpdateManyWithWhereWithoutDirectorInput = {
   where: MovieScalarWhereInput
-  data: MovieUpdateManyDataInput
+  data: MovieUpdateManyMutationInput
 }
 
 export type MovieScalarWhereInput = {
-  AND?: MovieScalarWhereInput | Enumerable<MovieScalarWhereInput>
-  OR?: MovieScalarWhereInput | Enumerable<MovieScalarWhereInput>
-  NOT?: MovieScalarWhereInput | Enumerable<MovieScalarWhereInput>
-  directorFirstName?: StringFilter | string
-  directorLastName?: StringFilter | string
-  title?: StringFilter | string
+  AND?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
+  OR?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
+  NOT?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
+  directorFirstName?: XOR<StringFilter, string>
+  directorLastName?: XOR<StringFilter, string>
+  title?: XOR<StringFilter, string>
 }
 
 export type MovieUpsertWithWhereUniqueWithoutDirectorInput = {
   where: MovieWhereUniqueInput
-  update: MovieUpdateWithoutDirectorDataInput
+  update: MovieUpdateWithoutDirectorInput
   create: MovieCreateWithoutDirectorInput
 }
 
@@ -5620,7 +5674,7 @@ export type CreatorCreateWithoutLikesInput = {
   problems?: ProblemCreateManyWithoutCreatorInput
 }
 
-export type CreatorCreateOrConnectWithoutProblemInput = {
+export type CreatorCreateOrConnectWithoutlikesInput = {
   where: CreatorWhereUniqueInput
   create: CreatorCreateWithoutLikesInput
 }
@@ -5630,37 +5684,42 @@ export type CreatorCreateWithoutProblemsInput = {
   likes?: ProblemCreateManyWithoutLikedByInput
 }
 
-export type CreatorUpdateWithWhereUniqueWithoutLikesInput = {
+export type CreatorCreateOrConnectWithoutproblemsInput = {
   where: CreatorWhereUniqueInput
-  data: CreatorUpdateWithoutLikesDataInput
+  create: CreatorCreateWithoutProblemsInput
 }
 
-export type CreatorUpdateManyWithWhereNestedInput = {
+export type CreatorUpdateWithWhereUniqueWithoutLikesInput = {
+  where: CreatorWhereUniqueInput
+  data: CreatorUpdateWithoutLikesInput
+}
+
+export type CreatorUpdateManyWithWhereWithoutLikesInput = {
   where: CreatorScalarWhereInput
-  data: CreatorUpdateManyDataInput
+  data: CreatorUpdateManyMutationInput
 }
 
 export type CreatorScalarWhereInput = {
-  AND?: CreatorScalarWhereInput | Enumerable<CreatorScalarWhereInput>
-  OR?: CreatorScalarWhereInput | Enumerable<CreatorScalarWhereInput>
-  NOT?: CreatorScalarWhereInput | Enumerable<CreatorScalarWhereInput>
-  id?: IntFilter | number
-  name?: StringFilter | string
+  AND?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
+  OR?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
+  NOT?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
+  id?: XOR<IntFilter, number>
+  name?: XOR<StringFilter, string>
 }
 
 export type CreatorUpsertWithWhereUniqueWithoutLikesInput = {
   where: CreatorWhereUniqueInput
-  update: CreatorUpdateWithoutLikesDataInput
+  update: CreatorUpdateWithoutLikesInput
   create: CreatorCreateWithoutLikesInput
 }
 
-export type CreatorUpdateWithoutProblemsDataInput = {
-  name?: string | StringFieldUpdateOperationsInput
+export type CreatorUpdateWithoutProblemsInput = {
+  name?: XOR<string, StringFieldUpdateOperationsInput>
   likes?: ProblemUpdateManyWithoutLikedByInput
 }
 
 export type CreatorUpsertWithoutProblemsInput = {
-  update: CreatorUpdateWithoutProblemsDataInput
+  update: CreatorUpdateWithoutProblemsInput
   create: CreatorCreateWithoutProblemsInput
 }
 
@@ -5669,7 +5728,7 @@ export type ProblemCreateWithoutLikedByInput = {
   creator?: CreatorCreateOneWithoutProblemsInput
 }
 
-export type ProblemCreateOrConnectWithoutCreatorInput = {
+export type ProblemCreateOrConnectWithoutlikedByInput = {
   where: ProblemWhereUniqueInput
   create: ProblemCreateWithoutLikedByInput
 }
@@ -5679,108 +5738,94 @@ export type ProblemCreateWithoutCreatorInput = {
   likedBy?: CreatorCreateManyWithoutLikesInput
 }
 
-export type ProblemUpdateWithWhereUniqueWithoutLikedByInput = {
+export type ProblemCreateOrConnectWithoutcreatorInput = {
   where: ProblemWhereUniqueInput
-  data: ProblemUpdateWithoutLikedByDataInput
+  create: ProblemCreateWithoutCreatorInput
 }
 
-export type ProblemUpdateManyWithWhereNestedInput = {
+export type ProblemUpdateWithWhereUniqueWithoutLikedByInput = {
+  where: ProblemWhereUniqueInput
+  data: ProblemUpdateWithoutLikedByInput
+}
+
+export type ProblemUpdateManyWithWhereWithoutLikedByInput = {
   where: ProblemScalarWhereInput
-  data: ProblemUpdateManyDataInput
+  data: ProblemUpdateManyMutationInput
 }
 
 export type ProblemScalarWhereInput = {
-  AND?: ProblemScalarWhereInput | Enumerable<ProblemScalarWhereInput>
-  OR?: ProblemScalarWhereInput | Enumerable<ProblemScalarWhereInput>
-  NOT?: ProblemScalarWhereInput | Enumerable<ProblemScalarWhereInput>
-  id?: IntFilter | number
-  problemText?: StringFilter | string
+  AND?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
+  OR?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
+  NOT?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
+  id?: XOR<IntFilter, number>
+  problemText?: XOR<StringFilter, string>
   creatorId?: IntNullableFilter | number | null
 }
 
 export type ProblemUpsertWithWhereUniqueWithoutLikedByInput = {
   where: ProblemWhereUniqueInput
-  update: ProblemUpdateWithoutLikedByDataInput
+  update: ProblemUpdateWithoutLikedByInput
   create: ProblemCreateWithoutLikedByInput
 }
 
 export type ProblemUpdateWithWhereUniqueWithoutCreatorInput = {
   where: ProblemWhereUniqueInput
-  data: ProblemUpdateWithoutCreatorDataInput
+  data: ProblemUpdateWithoutCreatorInput
+}
+
+export type ProblemUpdateManyWithWhereWithoutCreatorInput = {
+  where: ProblemScalarWhereInput
+  data: ProblemUpdateManyMutationInput
 }
 
 export type ProblemUpsertWithWhereUniqueWithoutCreatorInput = {
   where: ProblemWhereUniqueInput
-  update: ProblemUpdateWithoutCreatorDataInput
+  update: ProblemUpdateWithoutCreatorInput
   create: ProblemCreateWithoutCreatorInput
 }
 
-export type postUpdateWithoutAuthorDataInput = {
-  uuid?: string | StringFieldUpdateOperationsInput
-  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  published?: boolean | BoolFieldUpdateOperationsInput
-  title?: string | StringFieldUpdateOperationsInput
-  subtitle?: string | StringFieldUpdateOperationsInput
+export type postUpdateWithoutAuthorInput = {
+  uuid?: XOR<string, StringFieldUpdateOperationsInput>
+  createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
+  updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
+  published?: XOR<boolean, BoolFieldUpdateOperationsInput>
+  title?: XOR<string, StringFieldUpdateOperationsInput>
+  subtitle?: XOR<string, StringFieldUpdateOperationsInput>
   content?: string | NullableStringFieldUpdateOperationsInput | null
   kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
   metadata?: InputJsonValue
   editor?: UserUpdateOneWithoutEditorPostsInput
 }
 
-export type postUpdateManyDataInput = {
-  uuid?: string | StringFieldUpdateOperationsInput
-  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  published?: boolean | BoolFieldUpdateOperationsInput
-  title?: string | StringFieldUpdateOperationsInput
-  subtitle?: string | StringFieldUpdateOperationsInput
-  content?: string | NullableStringFieldUpdateOperationsInput | null
-  kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
-  metadata?: InputJsonValue
-}
-
-export type postUpdateWithoutEditorDataInput = {
-  uuid?: string | StringFieldUpdateOperationsInput
-  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  published?: boolean | BoolFieldUpdateOperationsInput
-  title?: string | StringFieldUpdateOperationsInput
-  subtitle?: string | StringFieldUpdateOperationsInput
+export type postUpdateWithoutEditorInput = {
+  uuid?: XOR<string, StringFieldUpdateOperationsInput>
+  createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
+  updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
+  published?: XOR<boolean, BoolFieldUpdateOperationsInput>
+  title?: XOR<string, StringFieldUpdateOperationsInput>
+  subtitle?: XOR<string, StringFieldUpdateOperationsInput>
   content?: string | NullableStringFieldUpdateOperationsInput | null
   kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
   metadata?: InputJsonValue
   author?: UserUpdateOneRequiredWithoutPostsInput
 }
 
-export type MovieUpdateWithoutDirectorDataInput = {
-  title?: string | StringFieldUpdateOperationsInput
+export type MovieUpdateWithoutDirectorInput = {
+  title?: XOR<string, StringFieldUpdateOperationsInput>
 }
 
-export type MovieUpdateManyDataInput = {
-  title?: string | StringFieldUpdateOperationsInput
-}
-
-export type CreatorUpdateWithoutLikesDataInput = {
-  name?: string | StringFieldUpdateOperationsInput
+export type CreatorUpdateWithoutLikesInput = {
+  name?: XOR<string, StringFieldUpdateOperationsInput>
   problems?: ProblemUpdateManyWithoutCreatorInput
 }
 
-export type CreatorUpdateManyDataInput = {
-  name?: string | StringFieldUpdateOperationsInput
-}
-
-export type ProblemUpdateWithoutLikedByDataInput = {
-  problemText?: string | StringFieldUpdateOperationsInput
+export type ProblemUpdateWithoutLikedByInput = {
+  problemText?: XOR<string, StringFieldUpdateOperationsInput>
   creator?: CreatorUpdateOneWithoutProblemsInput
 }
 
-export type ProblemUpdateManyDataInput = {
-  problemText?: string | StringFieldUpdateOperationsInput
-}
-
-export type ProblemUpdateWithoutCreatorDataInput = {
-  problemText?: string | StringFieldUpdateOperationsInput
+export type ProblemUpdateWithoutCreatorInput = {
+  problemText?: XOR<string, StringFieldUpdateOperationsInput>
   likedBy?: CreatorUpdateManyWithoutLikesInput
 }
 

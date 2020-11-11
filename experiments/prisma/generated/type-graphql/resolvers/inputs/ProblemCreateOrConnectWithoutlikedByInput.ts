@@ -8,7 +8,7 @@ import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
   isAbstract: true,
   description: undefined,
 })
-export class ProblemCreateOrConnectWithoutCreatorInput {
+export class ProblemCreateOrConnectWithoutlikedByInput {
   @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, {
     nullable: false,
     description: undefined

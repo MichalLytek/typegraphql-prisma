@@ -694,10 +694,15 @@ interface GetPrismaClientOptions {
     document: DMMF.Document;
     generator?: GeneratorConfig;
     sqliteDatasourceOverrides?: DatasourceOverwrite[];
+    relativeEnvPaths: {
+        rootEnvPath?: string | null;
+        schemaEnvPath?: string | null;
+    };
     relativePath: string;
     dirname: string;
     clientVersion?: string;
     engineVersion?: string;
+    datasourceNames: string[];
 }
 declare function getPrismaClient(config: GetPrismaClientOptions): any;
 
@@ -734,6 +739,8 @@ declare const empty: Sql;
  * Create a SQL object from a template string.
  */
 declare function sqltag(strings: ReadonlyArray<string>, ...values: RawValue[]): Sql;
+
+declare function warnEnvConflicts(envPaths: any): void;
 
 declare namespace Decimal {
   export type Constructor = typeof Decimal;
@@ -998,4 +1005,4 @@ declare class Decimal {
   static readonly EUCLID: 9;
 }
 
-export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, Debug as debugLib, empty, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack };
+export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, Debug as debugLib, empty, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };

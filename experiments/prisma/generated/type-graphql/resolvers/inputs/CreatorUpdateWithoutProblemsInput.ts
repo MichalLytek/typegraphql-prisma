@@ -1,23 +1,23 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { CreatorUpdateOneWithoutProblemsInput } from "../inputs/CreatorUpdateOneWithoutProblemsInput";
+import { ProblemUpdateManyWithoutLikedByInput } from "../inputs/ProblemUpdateManyWithoutLikedByInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
   description: undefined,
 })
-export class ProblemUpdateWithoutLikedByDataInput {
+export class CreatorUpdateWithoutProblemsInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true,
     description: undefined
   })
-  problemText?: StringFieldUpdateOperationsInput | undefined;
+  name?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorUpdateOneWithoutProblemsInput, {
+  @TypeGraphQL.Field(_type => ProblemUpdateManyWithoutLikedByInput, {
     nullable: true,
     description: undefined
   })
-  creator?: CreatorUpdateOneWithoutProblemsInput | undefined;
+  likes?: ProblemUpdateManyWithoutLikedByInput | undefined;
 }

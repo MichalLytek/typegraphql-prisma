@@ -1,10 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { PostCreateOrConnectWithoutUserInput } from "../inputs/PostCreateOrConnectWithoutUserInput";
+import { PostCreateOrConnectWithouteditorInput } from "../inputs/PostCreateOrConnectWithouteditorInput";
 import { PostCreateWithoutEditorInput } from "../inputs/PostCreateWithoutEditorInput";
 import { PostScalarWhereInput } from "../inputs/PostScalarWhereInput";
-import { PostUpdateManyWithWhereNestedInput } from "../inputs/PostUpdateManyWithWhereNestedInput";
+import { PostUpdateManyWithWhereWithoutEditorInput } from "../inputs/PostUpdateManyWithWhereWithoutEditorInput";
 import { PostUpdateWithWhereUniqueWithoutEditorInput } from "../inputs/PostUpdateWithWhereUniqueWithoutEditorInput";
 import { PostUpsertWithWhereUniqueWithoutEditorInput } from "../inputs/PostUpsertWithWhereUniqueWithoutEditorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
@@ -50,11 +50,11 @@ export class PostUpdateManyWithoutEditorInput {
   })
   update?: PostUpdateWithWhereUniqueWithoutEditorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [PostUpdateManyWithWhereNestedInput], {
+  @TypeGraphQL.Field(_type => [PostUpdateManyWithWhereWithoutEditorInput], {
     nullable: true,
     description: undefined
   })
-  updateMany?: PostUpdateManyWithWhereNestedInput[] | undefined;
+  updateMany?: PostUpdateManyWithWhereWithoutEditorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostScalarWhereInput], {
     nullable: true,
@@ -68,9 +68,9 @@ export class PostUpdateManyWithoutEditorInput {
   })
   upsert?: PostUpsertWithWhereUniqueWithoutEditorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithoutUserInput], {
+  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithouteditorInput], {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: PostCreateOrConnectWithoutUserInput[] | undefined;
+  connectOrCreate?: PostCreateOrConnectWithouteditorInput[] | undefined;
 }

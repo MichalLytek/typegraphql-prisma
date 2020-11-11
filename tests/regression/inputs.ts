@@ -494,6 +494,48 @@ describe("inputs", () => {
     expect(indexTSFile).toMatchSnapshot("index");
   });
 
+  it("should properly generate input type classes for connectOrCreate", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model User {
+        id          Int     @id @default(autoincrement())
+        name        String
+        postsField  Post[]
+      }
+      model Post {
+        id        Int     @id @default(autoincrement())
+        title     String
+        authorId  Int
+        author    User    @relation(fields: [authorId], references: [id])
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const userUpdateOneRequiredWithoutPostsFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/UserUpdateOneRequiredWithoutPostsFieldInput.ts",
+    );
+    const userCreateOrConnectWithoutpostsFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/UserCreateOrConnectWithoutpostsFieldInput.ts",
+    );
+    const userCreateOneWithoutPostsFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/UserCreateOneWithoutPostsFieldInput.ts",
+    );
+
+    expect(userUpdateOneRequiredWithoutPostsFieldInputTSFile).toMatchSnapshot(
+      "UserUpdateOneRequiredWithoutPostsFieldInput",
+    );
+    expect(userCreateOrConnectWithoutpostsFieldInputTSFile).toMatchSnapshot(
+      "UserCreateOrConnectWithoutpostsFieldInput",
+    );
+    expect(userCreateOneWithoutPostsFieldInputTSFile).toMatchSnapshot(
+      "UserCreateOneWithoutPostsFieldInput",
+    );
+  });
+
   describe("when model is renamed", () => {
     it("should properly generate input type classes when model is renamed", async () => {
       const schema = /* prisma */ `

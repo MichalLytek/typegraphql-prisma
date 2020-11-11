@@ -140,7 +140,13 @@ input PostCreateInput {
 
 input PostCreateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
   create: [PostCreateWithoutAuthorInput!]
+}
+
+input PostCreateOrConnectWithoutauthorInput {
+  create: PostCreateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
 }
 
 input PostCreateWithoutAuthorInput {
@@ -198,12 +204,6 @@ input PostUpdateInput {
   uuid: StringFieldUpdateOperationsInput
 }
 
-input PostUpdateManyDataInput {
-  color: EnumColorFieldUpdateOperationsInput
-  content: StringFieldUpdateOperationsInput
-  uuid: StringFieldUpdateOperationsInput
-}
-
 input PostUpdateManyMutationInput {
   color: EnumColorFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
@@ -212,35 +212,36 @@ input PostUpdateManyMutationInput {
 
 input PostUpdateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
   create: [PostCreateWithoutAuthorInput!]
   delete: [PostWhereUniqueInput!]
   deleteMany: [PostScalarWhereInput!]
   disconnect: [PostWhereUniqueInput!]
   set: [PostWhereUniqueInput!]
   update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  updateMany: [PostUpdateManyWithWhereNestedInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
   upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
-input PostUpdateManyWithWhereNestedInput {
-  data: PostUpdateManyDataInput!
+input PostUpdateManyWithWhereWithoutAuthorInput {
+  data: PostUpdateManyMutationInput!
   where: PostScalarWhereInput!
 }
 
-input PostUpdateWithoutAuthorDataInput {
+input PostUpdateWithoutAuthorInput {
   color: EnumColorFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
   uuid: StringFieldUpdateOperationsInput
 }
 
 input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  data: PostUpdateWithoutAuthorDataInput!
+  data: PostUpdateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutAuthorInput {
   create: PostCreateWithoutAuthorInput!
-  update: PostUpdateWithoutAuthorDataInput!
+  update: PostUpdateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
 
@@ -331,7 +332,13 @@ input UserCreateInput {
 
 input UserCreateOneWithoutPostsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutpostsInput
   create: UserCreateWithoutPostsInput
+}
+
+input UserCreateOrConnectWithoutpostsInput {
+  create: UserCreateWithoutPostsInput!
+  where: UserWhereUniqueInput!
 }
 
 input UserCreateWithoutPostsInput {
@@ -376,18 +383,19 @@ input UserUpdateManyMutationInput {
 
 input UserUpdateOneRequiredWithoutPostsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutpostsInput
   create: UserCreateWithoutPostsInput
-  update: UserUpdateWithoutPostsDataInput
+  update: UserUpdateWithoutPostsInput
   upsert: UserUpsertWithoutPostsInput
 }
 
-input UserUpdateWithoutPostsDataInput {
+input UserUpdateWithoutPostsInput {
   name: NullableStringFieldUpdateOperationsInput
 }
 
 input UserUpsertWithoutPostsInput {
   create: UserCreateWithoutPostsInput!
-  update: UserUpdateWithoutPostsDataInput!
+  update: UserUpdateWithoutPostsInput!
 }
 
 input UserWhereInput {
@@ -486,17 +494,17 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       NullableStringFieldUpdateOperationsInput.ts
       PostCreateInput.ts
       PostCreateManyWithoutAuthorInput.ts
+      PostCreateOrConnectWithoutauthorInput.ts
       PostCreateWithoutAuthorInput.ts
       PostListRelationFilter.ts
       PostOrderByInput.ts
       PostScalarWhereInput.ts
       PostUpdateInput.ts
-      PostUpdateManyDataInput.ts
       PostUpdateManyMutationInput.ts
-      PostUpdateManyWithWhereNestedInput.ts
+      PostUpdateManyWithWhereWithoutAuthorInput.ts
       PostUpdateManyWithoutAuthorInput.ts
       PostUpdateWithWhereUniqueWithoutAuthorInput.ts
-      PostUpdateWithoutAuthorDataInput.ts
+      PostUpdateWithoutAuthorInput.ts
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
       PostWhereInput.ts
       PostWhereUniqueInput.ts
@@ -505,13 +513,14 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       StringNullableFilter.ts
       UserCreateInput.ts
       UserCreateOneWithoutPostsInput.ts
+      UserCreateOrConnectWithoutpostsInput.ts
       UserCreateWithoutPostsInput.ts
       UserOrderByInput.ts
       UserRelationFilter.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsInput.ts
-      UserUpdateWithoutPostsDataInput.ts
+      UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts
       UserWhereUniqueInput.ts

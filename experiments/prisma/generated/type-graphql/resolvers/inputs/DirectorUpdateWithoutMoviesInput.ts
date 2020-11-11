@@ -7,10 +7,16 @@ import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOpe
   isAbstract: true,
   description: undefined,
 })
-export class ProblemUpdateManyDataInput {
+export class DirectorUpdateWithoutMoviesInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true,
     description: undefined
   })
-  problemText?: StringFieldUpdateOperationsInput | undefined;
+  firstName?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true,
+    description: undefined
+  })
+  lastName?: StringFieldUpdateOperationsInput | undefined;
 }

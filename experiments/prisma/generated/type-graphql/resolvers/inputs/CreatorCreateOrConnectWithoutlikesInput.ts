@@ -8,7 +8,7 @@ import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
   isAbstract: true,
   description: undefined,
 })
-export class CreatorCreateOrConnectWithoutProblemInput {
+export class CreatorCreateOrConnectWithoutlikesInput {
   @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
     nullable: false,
     description: undefined

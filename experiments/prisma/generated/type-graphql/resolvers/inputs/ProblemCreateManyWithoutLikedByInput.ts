@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { ProblemCreateOrConnectWithoutCreatorInput } from "../inputs/ProblemCreateOrConnectWithoutCreatorInput";
+import { ProblemCreateOrConnectWithoutlikedByInput } from "../inputs/ProblemCreateOrConnectWithoutlikedByInput";
 import { ProblemCreateWithoutLikedByInput } from "../inputs/ProblemCreateWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
@@ -22,9 +22,9 @@ export class ProblemCreateManyWithoutLikedByInput {
   })
   connect?: ProblemWhereUniqueInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutCreatorInput], {
+  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutlikedByInput], {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: ProblemCreateOrConnectWithoutCreatorInput[] | undefined;
+  connectOrCreate?: ProblemCreateOrConnectWithoutlikedByInput[] | undefined;
 }

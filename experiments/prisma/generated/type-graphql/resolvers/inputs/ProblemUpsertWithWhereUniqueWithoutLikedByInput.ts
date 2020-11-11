@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { ProblemCreateWithoutLikedByInput } from "../inputs/ProblemCreateWithoutLikedByInput";
-import { ProblemUpdateWithoutLikedByDataInput } from "../inputs/ProblemUpdateWithoutLikedByDataInput";
+import { ProblemUpdateWithoutLikedByInput } from "../inputs/ProblemUpdateWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -16,11 +16,11 @@ export class ProblemUpsertWithWhereUniqueWithoutLikedByInput {
   })
   where!: ProblemWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => ProblemUpdateWithoutLikedByDataInput, {
+  @TypeGraphQL.Field(_type => ProblemUpdateWithoutLikedByInput, {
     nullable: false,
     description: undefined
   })
-  update!: ProblemUpdateWithoutLikedByDataInput;
+  update!: ProblemUpdateWithoutLikedByInput;
 
   @TypeGraphQL.Field(_type => ProblemCreateWithoutLikedByInput, {
     nullable: false,

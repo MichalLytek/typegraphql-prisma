@@ -1,9 +1,9 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { ClientCreateOrConnectWithoutpostInput } from "../inputs/ClientCreateOrConnectWithoutpostInput";
+import { ClientCreateOrConnectWithouteditorPostsInput } from "../inputs/ClientCreateOrConnectWithouteditorPostsInput";
 import { ClientCreateWithoutEditorPostsInput } from "../inputs/ClientCreateWithoutEditorPostsInput";
-import { ClientUpdateWithoutEditorPostsDataInput } from "../inputs/ClientUpdateWithoutEditorPostsDataInput";
+import { ClientUpdateWithoutEditorPostsInput } from "../inputs/ClientUpdateWithoutEditorPostsInput";
 import { ClientUpsertWithoutEditorPostsInput } from "../inputs/ClientUpsertWithoutEditorPostsInput";
 import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
 
@@ -36,11 +36,11 @@ export class ClientUpdateOneWithoutEditorPostsInput {
   })
   delete?: boolean | undefined;
 
-  @TypeGraphQL.Field(_type => ClientUpdateWithoutEditorPostsDataInput, {
+  @TypeGraphQL.Field(_type => ClientUpdateWithoutEditorPostsInput, {
     nullable: true,
     description: undefined
   })
-  update?: ClientUpdateWithoutEditorPostsDataInput | undefined;
+  update?: ClientUpdateWithoutEditorPostsInput | undefined;
 
   @TypeGraphQL.Field(_type => ClientUpsertWithoutEditorPostsInput, {
     nullable: true,
@@ -48,9 +48,9 @@ export class ClientUpdateOneWithoutEditorPostsInput {
   })
   upsert?: ClientUpsertWithoutEditorPostsInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientCreateOrConnectWithoutpostInput, {
+  @TypeGraphQL.Field(_type => ClientCreateOrConnectWithouteditorPostsInput, {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: ClientCreateOrConnectWithoutpostInput | undefined;
+  connectOrCreate?: ClientCreateOrConnectWithouteditorPostsInput | undefined;
 }

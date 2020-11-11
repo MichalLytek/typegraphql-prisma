@@ -1,10 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { CreatorCreateOrConnectWithoutProblemInput } from "../inputs/CreatorCreateOrConnectWithoutProblemInput";
+import { CreatorCreateOrConnectWithoutlikesInput } from "../inputs/CreatorCreateOrConnectWithoutlikesInput";
 import { CreatorCreateWithoutLikesInput } from "../inputs/CreatorCreateWithoutLikesInput";
 import { CreatorScalarWhereInput } from "../inputs/CreatorScalarWhereInput";
-import { CreatorUpdateManyWithWhereNestedInput } from "../inputs/CreatorUpdateManyWithWhereNestedInput";
+import { CreatorUpdateManyWithWhereWithoutLikesInput } from "../inputs/CreatorUpdateManyWithWhereWithoutLikesInput";
 import { CreatorUpdateWithWhereUniqueWithoutLikesInput } from "../inputs/CreatorUpdateWithWhereUniqueWithoutLikesInput";
 import { CreatorUpsertWithWhereUniqueWithoutLikesInput } from "../inputs/CreatorUpsertWithWhereUniqueWithoutLikesInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
@@ -50,11 +50,11 @@ export class CreatorUpdateManyWithoutLikesInput {
   })
   update?: CreatorUpdateWithWhereUniqueWithoutLikesInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [CreatorUpdateManyWithWhereNestedInput], {
+  @TypeGraphQL.Field(_type => [CreatorUpdateManyWithWhereWithoutLikesInput], {
     nullable: true,
     description: undefined
   })
-  updateMany?: CreatorUpdateManyWithWhereNestedInput[] | undefined;
+  updateMany?: CreatorUpdateManyWithWhereWithoutLikesInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorScalarWhereInput], {
     nullable: true,
@@ -68,9 +68,9 @@ export class CreatorUpdateManyWithoutLikesInput {
   })
   upsert?: CreatorUpsertWithWhereUniqueWithoutLikesInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [CreatorCreateOrConnectWithoutProblemInput], {
+  @TypeGraphQL.Field(_type => [CreatorCreateOrConnectWithoutlikesInput], {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: CreatorCreateOrConnectWithoutProblemInput[] | undefined;
+  connectOrCreate?: CreatorCreateOrConnectWithoutlikesInput[] | undefined;
 }

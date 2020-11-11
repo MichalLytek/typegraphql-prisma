@@ -1,9 +1,9 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { CreatorCreateOrConnectWithoutProblemInput } from "../inputs/CreatorCreateOrConnectWithoutProblemInput";
+import { CreatorCreateOrConnectWithoutproblemsInput } from "../inputs/CreatorCreateOrConnectWithoutproblemsInput";
 import { CreatorCreateWithoutProblemsInput } from "../inputs/CreatorCreateWithoutProblemsInput";
-import { CreatorUpdateWithoutProblemsDataInput } from "../inputs/CreatorUpdateWithoutProblemsDataInput";
+import { CreatorUpdateWithoutProblemsInput } from "../inputs/CreatorUpdateWithoutProblemsInput";
 import { CreatorUpsertWithoutProblemsInput } from "../inputs/CreatorUpsertWithoutProblemsInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
@@ -36,11 +36,11 @@ export class CreatorUpdateOneWithoutProblemsInput {
   })
   delete?: boolean | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorUpdateWithoutProblemsDataInput, {
+  @TypeGraphQL.Field(_type => CreatorUpdateWithoutProblemsInput, {
     nullable: true,
     description: undefined
   })
-  update?: CreatorUpdateWithoutProblemsDataInput | undefined;
+  update?: CreatorUpdateWithoutProblemsInput | undefined;
 
   @TypeGraphQL.Field(_type => CreatorUpsertWithoutProblemsInput, {
     nullable: true,
@@ -48,9 +48,9 @@ export class CreatorUpdateOneWithoutProblemsInput {
   })
   upsert?: CreatorUpsertWithoutProblemsInput | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorCreateOrConnectWithoutProblemInput, {
+  @TypeGraphQL.Field(_type => CreatorCreateOrConnectWithoutproblemsInput, {
     nullable: true,
     description: undefined
   })
-  connectOrCreate?: CreatorCreateOrConnectWithoutProblemInput | undefined;
+  connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput | undefined;
 }
