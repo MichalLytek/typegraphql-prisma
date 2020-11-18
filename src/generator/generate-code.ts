@@ -262,26 +262,30 @@ export default async function generateCode(
         }
       });
     }
-    const relationResolversArgsIndexSourceFile = project.createSourceFile(
-      path.resolve(
-        baseDirPath,
-        resolversFolderName,
-        relationsResolversFolderName,
-        "args.index.ts",
-      ),
-      undefined,
-      { overwrite: true },
+    const relationModelsWithArgs = dmmfDocument.relationModels.filter(
+      relationModelData =>
+        relationModelData.relationFields.some(
+          it => it.argsTypeName !== undefined,
+        ),
     );
-    generateArgsIndexFile(
-      relationResolversArgsIndexSourceFile,
-      dmmfDocument.relationModels
-        .filter(relationModelData =>
-          relationModelData.relationFields.some(
-            it => it.argsTypeName !== undefined,
-          ),
-        )
-        .map(relationModelData => relationModelData.model.typeName),
-    );
+    if (relationModelsWithArgs.length > 0) {
+      const relationResolversArgsIndexSourceFile = project.createSourceFile(
+        path.resolve(
+          baseDirPath,
+          resolversFolderName,
+          relationsResolversFolderName,
+          "args.index.ts",
+        ),
+        undefined,
+        { overwrite: true },
+      );
+      generateArgsIndexFile(
+        relationResolversArgsIndexSourceFile,
+        relationModelsWithArgs.map(
+          relationModelData => relationModelData.model.typeName,
+        ),
+      );
+    }
     const relationResolversIndexSourceFile = project.createSourceFile(
       path.resolve(
         baseDirPath,
@@ -292,7 +296,11 @@ export default async function generateCode(
       undefined,
       { overwrite: true },
     );
-    generateResolversIndexFile(relationResolversIndexSourceFile, "relations");
+    generateResolversIndexFile(
+      relationResolversIndexSourceFile,
+      "relations",
+      relationModelsWithArgs.length > 0,
+    );
   }
 
   log("Generating crud resolvers...");
@@ -372,7 +380,7 @@ export default async function generateCode(
     undefined,
     { overwrite: true },
   );
-  generateResolversIndexFile(crudResolversIndexSourceFile, "crud");
+  generateResolversIndexFile(crudResolversIndexSourceFile, "crud", true);
 
   log("Generating crud resolvers args...");
   dmmfDocument.modelMappings.forEach(async mapping => {

@@ -1,17 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`relations resolvers generation should properly generate index files for relation resolvers: argsIndex 1`] = `
-"export * from \\"./User/args\\";
-"
-`;
-
-exports[`relations resolvers generation should properly generate index files for relation resolvers: index 1`] = `
+exports[`relations resolvers generation should properly generate index files for 1-1 relation resolvers: index 1`] = `
 "export * from \\"./resolvers.index\\";
-export * from \\"./args.index\\";
 "
 `;
 
-exports[`relations resolvers generation should properly generate index files for relation resolvers: mainIndex 1`] = `
+exports[`relations resolvers generation should properly generate index files for 1-1 relation resolvers: mainIndex 1`] = `
 "import { NonEmptyArray } from \\"type-graphql\\";
 import * as crudResolversImport from \\"./resolvers/crud/resolvers-crud.index\\";
 import * as relationResolversImport from \\"./resolvers/relations/resolvers.index\\";
@@ -30,7 +24,43 @@ export const resolvers = [...crudResolvers, ...relationResolvers] as unknown as 
 "
 `;
 
-exports[`relations resolvers generation should properly generate index files for relation resolvers: resolversIndex 1`] = `
+exports[`relations resolvers generation should properly generate index files for 1-1 relation resolvers: resolversIndex 1`] = `
+"export { AdminUserRelationsResolver } from \\"./AdminUser/AdminUserRelationsResolver\\";
+export { UserRelationsResolver } from \\"./User/UserRelationsResolver\\";
+"
+`;
+
+exports[`relations resolvers generation should properly generate index files for 1-many relation resolvers: argsIndex 1`] = `
+"export * from \\"./User/args\\";
+"
+`;
+
+exports[`relations resolvers generation should properly generate index files for 1-many relation resolvers: index 1`] = `
+"export * from \\"./resolvers.index\\";
+export * from \\"./args.index\\";
+"
+`;
+
+exports[`relations resolvers generation should properly generate index files for 1-many relation resolvers: mainIndex 1`] = `
+"import { NonEmptyArray } from \\"type-graphql\\";
+import * as crudResolversImport from \\"./resolvers/crud/resolvers-crud.index\\";
+import * as relationResolversImport from \\"./resolvers/relations/resolvers.index\\";
+
+export * from \\"./enums\\";
+export * from \\"./models\\";
+export * from \\"./resolvers/crud\\";
+export * from \\"./resolvers/relations\\";
+export * from \\"./resolvers/inputs\\";
+export * from \\"./resolvers/outputs\\";
+export * from \\"./enhance\\";
+
+export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
+export const relationResolvers = Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>;
+export const resolvers = [...crudResolvers, ...relationResolvers] as unknown as NonEmptyArray<Function>;
+"
+`;
+
+exports[`relations resolvers generation should properly generate index files for 1-many relation resolvers: resolversIndex 1`] = `
 "export { AddressRelationsResolver } from \\"./Address/AddressRelationsResolver\\";
 export { UserRelationsResolver } from \\"./User/UserRelationsResolver\\";
 "

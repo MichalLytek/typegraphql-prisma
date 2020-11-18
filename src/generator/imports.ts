@@ -264,6 +264,7 @@ export function generateResolversActionsBarrelFile(
 export function generateResolversIndexFile(
   sourceFile: SourceFile,
   type: "crud" | "relations",
+  hasSomeArgs: boolean,
 ) {
   if (type === "crud") {
     sourceFile.addExportDeclarations([
@@ -275,7 +276,9 @@ export function generateResolversIndexFile(
       { moduleSpecifier: `./resolvers.index` },
     ]);
   }
-  sourceFile.addExportDeclarations([{ moduleSpecifier: `./args.index` }]);
+  if (hasSomeArgs) {
+    sourceFile.addExportDeclarations([{ moduleSpecifier: `./args.index` }]);
+  }
 }
 
 export const generateModelsImports = createImportGenerator(modelsFolderName);

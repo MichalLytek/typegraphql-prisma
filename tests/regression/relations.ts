@@ -16,7 +16,42 @@ describe("relations resolvers generation", () => {
     readGeneratedFile = createReadGeneratedFile(outputDirPath);
   });
 
-  it("should properly generate index files for relation resolvers", async () => {
+  it("should properly generate index files for 1-1 relation resolvers", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model User {
+        id        Int        @id @default(autoincrement())
+        name      String
+        adminInfo AdminUser?
+      }
+
+      model AdminUser {
+        id     Int    @id @default(autoincrement())
+        email  String
+        user   User   @relation(fields: [userId], references: [id])
+        userId Int
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const indexTSFile = await readGeneratedFile(
+      "/resolvers/relations/index.ts",
+    );
+    const resolversIndexTSFile = await readGeneratedFile(
+      "/resolvers/relations/resolvers.index.ts",
+    );
+    const mainIndexTSFile = await readGeneratedFile("/index.ts");
+
+    expect(indexTSFile).toMatchSnapshot("index");
+    expect(resolversIndexTSFile).toMatchSnapshot("resolversIndex");
+    expect(mainIndexTSFile).toMatchSnapshot("mainIndex");
+  });
+
+  it("should properly generate index files for 1-many relation resolvers", async () => {
     const schema = /* prisma */ `
       datasource db {
         provider = "postgresql"
