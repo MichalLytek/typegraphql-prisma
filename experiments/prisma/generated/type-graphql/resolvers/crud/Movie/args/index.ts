@@ -4,7 +4,7 @@ export { DeleteManyMovieArgs } from "./DeleteManyMovieArgs";
 export { DeleteMovieArgs } from "./DeleteMovieArgs";
 export { FindFirstMovieArgs } from "./FindFirstMovieArgs";
 export { FindManyMovieArgs } from "./FindManyMovieArgs";
-export { FindOneMovieArgs } from "./FindOneMovieArgs";
+export { FindUniqueMovieArgs } from "./FindUniqueMovieArgs";
 export { UpdateManyMovieArgs } from "./UpdateManyMovieArgs";
 export { UpdateMovieArgs } from "./UpdateMovieArgs";
 export { UpsertMovieArgs } from "./UpsertMovieArgs";

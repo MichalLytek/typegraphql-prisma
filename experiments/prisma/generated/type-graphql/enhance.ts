@@ -13,7 +13,7 @@ const crudResolversMap = {
 };
 const actionResolversMap = {
   Client: {
-    client: actionResolvers.FindOneClientResolver,
+    client: actionResolvers.FindUniqueClientResolver,
     findFirstClient: actionResolvers.FindFirstClientResolver,
     clients: actionResolvers.FindManyClientResolver,
     createClient: actionResolvers.CreateClientResolver,
@@ -25,7 +25,7 @@ const actionResolversMap = {
     aggregateClient: actionResolvers.AggregateClientResolver
   },
   Post: {
-    post: actionResolvers.FindOnePostResolver,
+    post: actionResolvers.FindUniquePostResolver,
     findFirstPost: actionResolvers.FindFirstPostResolver,
     posts: actionResolvers.FindManyPostResolver,
     createPost: actionResolvers.CreatePostResolver,
@@ -37,7 +37,7 @@ const actionResolversMap = {
     aggregatePost: actionResolvers.AggregatePostResolver
   },
   Category: {
-    category: actionResolvers.FindOneCategoryResolver,
+    category: actionResolvers.FindUniqueCategoryResolver,
     findFirstCategory: actionResolvers.FindFirstCategoryResolver,
     categories: actionResolvers.FindManyCategoryResolver,
     createCategory: actionResolvers.CreateCategoryResolver,
@@ -49,7 +49,7 @@ const actionResolversMap = {
     aggregateCategory: actionResolvers.AggregateCategoryResolver
   },
   Patient: {
-    patient: actionResolvers.FindOnePatientResolver,
+    patient: actionResolvers.FindUniquePatientResolver,
     findFirstPatient: actionResolvers.FindFirstPatientResolver,
     patients: actionResolvers.FindManyPatientResolver,
     createPatient: actionResolvers.CreatePatientResolver,
@@ -61,7 +61,7 @@ const actionResolversMap = {
     aggregatePatient: actionResolvers.AggregatePatientResolver
   },
   Movie: {
-    movie: actionResolvers.FindOneMovieResolver,
+    movie: actionResolvers.FindUniqueMovieResolver,
     findFirstMovie: actionResolvers.FindFirstMovieResolver,
     movies: actionResolvers.FindManyMovieResolver,
     createMovie: actionResolvers.CreateMovieResolver,
@@ -73,7 +73,7 @@ const actionResolversMap = {
     aggregateMovie: actionResolvers.AggregateMovieResolver
   },
   Director: {
-    director: actionResolvers.FindOneDirectorResolver,
+    director: actionResolvers.FindUniqueDirectorResolver,
     findFirstDirector: actionResolvers.FindFirstDirectorResolver,
     directors: actionResolvers.FindManyDirectorResolver,
     createDirector: actionResolvers.CreateDirectorResolver,
@@ -85,7 +85,7 @@ const actionResolversMap = {
     aggregateDirector: actionResolvers.AggregateDirectorResolver
   },
   Problem: {
-    problem: actionResolvers.FindOneProblemResolver,
+    problem: actionResolvers.FindUniqueProblemResolver,
     findFirstProblem: actionResolvers.FindFirstProblemResolver,
     problems: actionResolvers.FindManyProblemResolver,
     createProblem: actionResolvers.CreateProblemResolver,
@@ -97,7 +97,7 @@ const actionResolversMap = {
     aggregateProblem: actionResolvers.AggregateProblemResolver
   },
   Creator: {
-    creator: actionResolvers.FindOneCreatorResolver,
+    creator: actionResolvers.FindUniqueCreatorResolver,
     findFirstCreator: actionResolvers.FindFirstCreatorResolver,
     creators: actionResolvers.FindManyCreatorResolver,
     createCreator: actionResolvers.CreateCreatorResolver,

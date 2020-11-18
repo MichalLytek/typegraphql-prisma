@@ -99,16 +99,16 @@ describe("relations resolvers execution", () => {
           }
         }
       `;
-      const findOneUserMock = jest.fn();
+      const findUniqueUserMock = jest.fn();
       const prismaMock = {
         user: {
-          findOne: findOneUserMock,
+          findUnique: findUniqueUserMock,
         },
       };
-      findOneUserMock.mockReturnValueOnce({
+      findUniqueUserMock.mockReturnValueOnce({
         posts: jest.fn().mockResolvedValue(null),
       });
-      findOneUserMock.mockReturnValueOnce({
+      findUniqueUserMock.mockReturnValueOnce({
         posts: jest.fn().mockResolvedValue([
           {
             uuid: "b0c0d78e-4dff-4cdd-ba23-9b417dc684e2",
@@ -127,8 +127,8 @@ describe("relations resolvers execution", () => {
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot("users with posts mocked response");
-      expect(prismaMock.user.findOne.mock.calls).toMatchSnapshot(
-        "findOneUser relations call args",
+      expect(prismaMock.user.findUnique.mock.calls).toMatchSnapshot(
+        "findUniqueUser relations call args",
       );
     });
 
@@ -148,20 +148,20 @@ describe("relations resolvers execution", () => {
           }
         }
       `;
-      const findOneUserMock = jest.fn();
-      const findOneUserPostsMock = jest.fn();
+      const findUniqueUserMock = jest.fn();
+      const findUniqueUserPostsMock = jest.fn();
       const prismaMock = {
         user: {
-          findOne: findOneUserMock,
+          findUnique: findUniqueUserMock,
         },
       };
-      findOneUserMock.mockReturnValueOnce({
+      findUniqueUserMock.mockReturnValueOnce({
         posts: jest.fn().mockResolvedValue(null),
       });
-      findOneUserMock.mockReturnValueOnce({
-        posts: findOneUserPostsMock,
+      findUniqueUserMock.mockReturnValueOnce({
+        posts: findUniqueUserPostsMock,
       });
-      findOneUserPostsMock.mockResolvedValue([
+      findUniqueUserPostsMock.mockResolvedValue([
         {
           uuid: "b0c0d78e-4dff-4cdd-ba23-9b417dc684e2",
           color: "RED",
@@ -178,10 +178,10 @@ describe("relations resolvers execution", () => {
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot("users with posts mocked response");
-      expect(prismaMock.user.findOne.mock.calls).toMatchSnapshot(
-        "findOneUser relations call args",
+      expect(prismaMock.user.findUnique.mock.calls).toMatchSnapshot(
+        "findUniqueUser relations call args",
       );
-      expect(findOneUserPostsMock.mock.calls).toMatchSnapshot(
+      expect(findUniqueUserPostsMock.mock.calls).toMatchSnapshot(
         "posts() relations call args",
       );
     });
@@ -198,13 +198,13 @@ describe("relations resolvers execution", () => {
           }
         }
       `;
-      const findOnePostMock = jest.fn();
+      const findUniquePostMock = jest.fn();
       const prismaMock = {
         post: {
-          findOne: findOnePostMock,
+          findUnique: findUniquePostMock,
         },
       };
-      findOnePostMock.mockReturnValue({
+      findUniquePostMock.mockReturnValue({
         author: jest.fn().mockResolvedValue({
           id: 1,
           name: "Test 1",
@@ -217,8 +217,8 @@ describe("relations resolvers execution", () => {
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot("posts with authors mocked response");
-      expect(prismaMock.post.findOne.mock.calls).toMatchSnapshot(
-        "findOnePost relations call args",
+      expect(prismaMock.post.findUnique.mock.calls).toMatchSnapshot(
+        "findUniquePost relations call args",
       );
     });
   });
@@ -292,13 +292,13 @@ describe("relations resolvers execution", () => {
           }
         }
       `;
-      const findOnePostMock = jest.fn();
+      const findUniquePostMock = jest.fn();
       const prismaMock = {
         post: {
-          findOne: findOnePostMock,
+          findUnique: findUniquePostMock,
         },
       };
-      findOnePostMock.mockReturnValueOnce({
+      findUniquePostMock.mockReturnValueOnce({
         author: jest.fn().mockResolvedValue({
           id: 1,
           name: "User 1",
@@ -311,8 +311,8 @@ describe("relations resolvers execution", () => {
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot("post with author mocked response");
-      expect(prismaMock.post.findOne.mock.calls).toMatchSnapshot(
-        "findOnePost relations call args",
+      expect(prismaMock.post.findUnique.mock.calls).toMatchSnapshot(
+        "findUniquePost relations call args",
       );
     });
   });

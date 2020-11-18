@@ -31,7 +31,7 @@ export default function generateArgsTypeClassFromArgs(
     sourceFile,
     fields
       .map(arg => arg.selectedInputType)
-      .filter(argInputType => argInputType.kind === "object")
+      .filter(argInputType => argInputType.location === "inputObjectTypes")
       .map(argInputType => argInputType.type),
     inputImportsLevel,
   );
@@ -39,7 +39,7 @@ export default function generateArgsTypeClassFromArgs(
     sourceFile,
     fields
       .map(field => field.selectedInputType)
-      .filter(argType => argType.kind === "enum")
+      .filter(argType => argType.location === "enumTypes")
       .map(argType => argType.type as string),
     4,
   );

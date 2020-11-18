@@ -65,12 +65,7 @@ export default function generateActionResolverClass(
       },
     ],
     methods: [
-      generateCrudResolverClassMethodDeclaration(
-        action,
-        model.typeName,
-        dmmfDocument,
-        mapping,
-      ),
+      generateCrudResolverClassMethodDeclaration(action, mapping, dmmfDocument),
     ],
   });
 }

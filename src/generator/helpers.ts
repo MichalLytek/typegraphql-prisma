@@ -13,9 +13,12 @@ export function getFieldTSType(
   typeName?: string,
 ) {
   let TSType: string;
-  if (typeInfo.kind === "scalar") {
+  if (typeInfo.location === "scalar") {
     TSType = mapScalarToTSType(typeInfo.type, isInputType);
-  } else if (typeInfo.kind === "object") {
+  } else if (
+    typeInfo.location === "inputObjectTypes" ||
+    typeInfo.location === "outputObjectTypes"
+  ) {
     if (dmmfDocument.isModelName(typeInfo.type)) {
       TSType = dmmfDocument.getModelTypeName(typeInfo.type)!;
     } else {
@@ -24,13 +27,13 @@ export function getFieldTSType(
           ? getInputTypeName(typeInfo.type, dmmfDocument)
           : typeInfo.type.replace(modelName, typeName);
     }
-  } else if (typeInfo.kind === "enum") {
+  } else if (typeInfo.location === "enumTypes") {
     const enumDef = dmmfDocument.enums.find(
       it => it.typeName == typeInfo.type,
     )!;
     TSType = enumDef.valuesMap.map(({ value }) => `"${value}"`).join(" | ");
   } else {
-    throw new Error(`Unsupported field type kind: ${typeInfo.kind}`);
+    throw new Error(`Unsupported field type location: ${typeInfo.location}`);
   }
   if (typeInfo.isList) {
     if (TSType.includes(" ")) {
@@ -82,9 +85,12 @@ export function getTypeGraphQLType(
   typeName?: string,
 ) {
   let GraphQLType: string;
-  if (typeInfo.kind === "scalar") {
+  if (typeInfo.location === "scalar") {
     GraphQLType = mapScalarToTypeGraphQLType(typeInfo.type);
-  } else if (typeInfo.kind === "object") {
+  } else if (
+    typeInfo.location === "inputObjectTypes" ||
+    typeInfo.location === "outputObjectTypes"
+  ) {
     if (dmmfDocument.isModelName(typeInfo.type)) {
       GraphQLType = dmmfDocument.getModelTypeName(typeInfo.type)!;
     } else {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`relations resolvers execution composite unique key should properly call PrismaClient on fetching array relations: findOnePost relations call args 1`] = `
+exports[`relations resolvers execution composite unique key should properly call PrismaClient on fetching array relations: findUniquePost relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -29,7 +29,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations with args: findOneUser relations call args 1`] = `
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations with args: findUniqueUser relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -88,7 +88,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations: findOneUser relations call args 1`] = `
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations: findUniqueUser relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -131,7 +131,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching single relation: findOnePost relations call args 1`] = `
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching single relation: findUniquePost relations call args 1`] = `
 Array [
   Array [
     Object {

@@ -36,7 +36,7 @@ describe("crud resolvers execution", () => {
       });
     });
 
-    it("should properly call PrismaClient on `findOne` action", async () => {
+    it("should properly call PrismaClient on `findUnique` action", async () => {
       const document = /* graphql */ `
         query {
           user(where: { uniqueStringField: "uniqueValue" }) {
@@ -47,7 +47,7 @@ describe("crud resolvers execution", () => {
       `;
       const prismaMock = {
         user: {
-          findOne: jest.fn().mockResolvedValue({
+          findUnique: jest.fn().mockResolvedValue({
             intIdField: 1,
             dateField: new Date("2019-12-31T14:16:02.572Z"),
           }),
@@ -60,8 +60,8 @@ describe("crud resolvers execution", () => {
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot("user mocked response");
-      expect(prismaMock.user.findOne.mock.calls).toMatchSnapshot(
-        "findOneUser call args",
+      expect(prismaMock.user.findUnique.mock.calls).toMatchSnapshot(
+        "findUniqueUser call args",
       );
     });
 

@@ -66,9 +66,8 @@ export default function generateCrudResolverClassFromMapping(
       action =>
         generateCrudResolverClassMethodDeclaration(
           action,
-          model.typeName,
-          dmmfDocument,
           mapping,
+          dmmfDocument,
         ),
     ),
   });

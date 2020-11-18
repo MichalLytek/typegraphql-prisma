@@ -66,7 +66,6 @@ export default async function generateCode(
     },
   });
   const resolversDirPath = path.resolve(baseDirPath, resolversFolderName);
-  const modelNames = dmmf.datamodel.models.map(model => model.name);
 
   log("Transforming dmmfDocument...");
   const dmmfDocument = new DmmfDocument(dmmf, options);
@@ -113,6 +112,7 @@ export default async function generateCode(
   const rootTypes = dmmfDocument.schema.outputTypes.filter(type =>
     ["Query", "Mutation"].includes(type.name),
   );
+  const modelNames = dmmfDocument.datamodel.models.map(model => model.name);
   const outputTypesToGenerate = dmmfDocument.schema.outputTypes.filter(
     // skip generating models and root resolvers
     type => !modelNames.includes(type.name) && !rootTypes.includes(type),

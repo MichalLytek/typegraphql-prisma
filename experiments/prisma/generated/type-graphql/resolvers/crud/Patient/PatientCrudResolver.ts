@@ -7,7 +7,7 @@ import { DeleteManyPatientArgs } from "./args/DeleteManyPatientArgs";
 import { DeletePatientArgs } from "./args/DeletePatientArgs";
 import { FindFirstPatientArgs } from "./args/FindFirstPatientArgs";
 import { FindManyPatientArgs } from "./args/FindManyPatientArgs";
-import { FindOnePatientArgs } from "./args/FindOnePatientArgs";
+import { FindUniquePatientArgs } from "./args/FindUniquePatientArgs";
 import { UpdateManyPatientArgs } from "./args/UpdateManyPatientArgs";
 import { UpdatePatientArgs } from "./args/UpdatePatientArgs";
 import { UpsertPatientArgs } from "./args/UpsertPatientArgs";
@@ -21,8 +21,8 @@ export class PatientCrudResolver {
     nullable: true,
     description: undefined
   })
-  async patient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOnePatientArgs): Promise<Patient | null> {
-    return ctx.prisma.patient.findOne(args);
+  async patient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniquePatientArgs): Promise<Patient | null> {
+    return ctx.prisma.patient.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Patient, {

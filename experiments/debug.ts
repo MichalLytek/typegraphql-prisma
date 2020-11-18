@@ -1,8 +1,8 @@
 import generateCode from "../src/generator/generate-code";
-import { dmmf } from "./prisma/generated/client";
+import { Prisma } from "./prisma/generated/client";
 
 generateCode(
-  dmmf,
+  Prisma.dmmf,
   {
     outputDirPath: __dirname + "/prisma/generated/type-graphql",
     relativePrismaOutputPath: "../client",

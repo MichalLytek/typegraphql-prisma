@@ -91,19 +91,19 @@ export class FindManyUserResolver {
 "
 `;
 
-exports[`crud should properly generate actions resolver classes for prisma model: FindOneUserResolver 1`] = `
+exports[`crud should properly generate actions resolver classes for prisma model: FindUniqueUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
+import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
 @TypeGraphQL.Resolver(_of => User)
-export class FindOneUserResolver {
+export class FindUniqueUserResolver {
   @TypeGraphQL.Query(_returns => User, {
     nullable: true,
     description: undefined
   })
-  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | null> {
-    return ctx.prisma.user.findOne(args);
+  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
+    return ctx.prisma.user.findUnique(args);
   }
 }
 "
@@ -172,7 +172,7 @@ export class UpsertUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: actionsIndex 1`] = `
-"export { FindOneUserResolver } from \\"./User/FindOneUserResolver\\";
+"export { FindUniqueUserResolver } from \\"./User/FindUniqueUserResolver\\";
 export { FindFirstUserResolver } from \\"./User/FindFirstUserResolver\\";
 export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
 export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
@@ -327,13 +327,13 @@ export class FindManyUserArgs {
 "
 `;
 
-exports[`crud should properly generate args classes for every method of crud resolver: FindOneUserArgs 1`] = `
+exports[`crud should properly generate args classes for every method of crud resolver: FindUniqueUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
 @TypeGraphQL.ArgsType()
-export class FindOneUserArgs {
+export class FindUniqueUserArgs {
   @TypeGraphQL.Field(_type => UserWhereUniqueInput, { nullable: false })
   where!: UserWhereUniqueInput;
 }
@@ -347,7 +347,7 @@ export { DeleteManyUserArgs } from \\"./DeleteManyUserArgs\\";
 export { DeleteUserArgs } from \\"./DeleteUserArgs\\";
 export { FindFirstUserArgs } from \\"./FindFirstUserArgs\\";
 export { FindManyUserArgs } from \\"./FindManyUserArgs\\";
-export { FindOneUserArgs } from \\"./FindOneUserArgs\\";
+export { FindUniqueUserArgs } from \\"./FindUniqueUserArgs\\";
 export { UpdateManyUserArgs } from \\"./UpdateManyUserArgs\\";
 export { UpdateUserArgs } from \\"./UpdateUserArgs\\";
 export { UpsertUserArgs } from \\"./UpsertUserArgs\\";
@@ -426,7 +426,7 @@ import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
 import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
 import { FindFirstUserArgs } from \\"./args/FindFirstUserArgs\\";
 import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
-import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
+import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
@@ -440,8 +440,8 @@ export class UserCrudResolver {
     nullable: true,
     description: undefined
   })
-  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | null> {
-    return ctx.prisma.user.findOne(args);
+  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
+    return ctx.prisma.user.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => User, {
@@ -536,7 +536,7 @@ export class UserCrudResolver {
 `;
 
 exports[`crud should properly generate resolver class for single prisma model: actionsIndex 1`] = `
-"export { FindOneUserResolver } from \\"./User/FindOneUserResolver\\";
+"export { FindUniqueUserResolver } from \\"./User/FindUniqueUserResolver\\";
 export { FindFirstUserResolver } from \\"./User/FindFirstUserResolver\\";
 export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
 export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
@@ -585,7 +585,7 @@ import { DeleteManyStaffArgs } from \\"./args/DeleteManyStaffArgs\\";
 import { DeleteStaffArgs } from \\"./args/DeleteStaffArgs\\";
 import { FindFirstStaffArgs } from \\"./args/FindFirstStaffArgs\\";
 import { FindManyStaffArgs } from \\"./args/FindManyStaffArgs\\";
-import { FindOneStaffArgs } from \\"./args/FindOneStaffArgs\\";
+import { FindUniqueStaffArgs } from \\"./args/FindUniqueStaffArgs\\";
 import { UpdateManyStaffArgs } from \\"./args/UpdateManyStaffArgs\\";
 import { UpdateStaffArgs } from \\"./args/UpdateStaffArgs\\";
 import { UpsertStaffArgs } from \\"./args/UpsertStaffArgs\\";
@@ -599,8 +599,8 @@ export class StaffCrudResolver {
     nullable: true,
     description: undefined
   })
-  async findOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneStaffArgs): Promise<Staff | null> {
-    return ctx.prisma.staff.findOne(args);
+  async findUniqueStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueStaffArgs): Promise<Staff | null> {
+    return ctx.prisma.staff.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Staff, {
@@ -694,19 +694,19 @@ export class StaffCrudResolver {
 "
 `;
 
-exports[`crud should properly generate resolver class when useOriginalMapping is used: FindOneUserResolver 1`] = `
+exports[`crud should properly generate resolver class when useOriginalMapping is used: FindUniqueUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
+import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
 @TypeGraphQL.Resolver(_of => User)
-export class FindOneUserResolver {
+export class FindUniqueUserResolver {
   @TypeGraphQL.Query(_returns => User, {
     nullable: true,
     description: undefined
   })
-  async findOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | null> {
-    return ctx.prisma.user.findOne(args);
+  async findUniqueUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
+    return ctx.prisma.user.findUnique(args);
   }
 }
 "
@@ -722,7 +722,7 @@ import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
 import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
 import { FindFirstUserArgs } from \\"./args/FindFirstUserArgs\\";
 import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
-import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
+import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
@@ -736,8 +736,8 @@ export class UserCrudResolver {
     nullable: true,
     description: undefined
   })
-  async findOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | null> {
-    return ctx.prisma.user.findOne(args);
+  async findUniqueUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
+    return ctx.prisma.user.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => User, {
@@ -922,19 +922,19 @@ export class FindManyClientResolver {
 "
 `;
 
-exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindOneClientResolver 1`] = `
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindUniqueClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { FindOneClientArgs } from \\"./args/FindOneClientArgs\\";
+import { FindUniqueClientArgs } from \\"./args/FindUniqueClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 
 @TypeGraphQL.Resolver(_of => Client)
-export class FindOneClientResolver {
+export class FindUniqueClientResolver {
   @TypeGraphQL.Query(_returns => Client, {
     nullable: true,
     description: undefined
   })
-  async client(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneClientArgs): Promise<Client | null> {
-    return ctx.prisma.user.findOne(args);
+  async client(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueClientArgs): Promise<Client | null> {
+    return ctx.prisma.user.findUnique(args);
   }
 }
 "
@@ -1127,13 +1127,13 @@ export class FindManyClientArgs {
 "
 `;
 
-exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindOneClientArgs 1`] = `
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindUniqueClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
 @TypeGraphQL.ArgsType()
-export class FindOneClientArgs {
+export class FindUniqueClientArgs {
   @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 }
@@ -1147,7 +1147,7 @@ export { DeleteClientArgs } from \\"./DeleteClientArgs\\";
 export { DeleteManyClientArgs } from \\"./DeleteManyClientArgs\\";
 export { FindFirstClientArgs } from \\"./FindFirstClientArgs\\";
 export { FindManyClientArgs } from \\"./FindManyClientArgs\\";
-export { FindOneClientArgs } from \\"./FindOneClientArgs\\";
+export { FindUniqueClientArgs } from \\"./FindUniqueClientArgs\\";
 export { UpdateClientArgs } from \\"./UpdateClientArgs\\";
 export { UpdateManyClientArgs } from \\"./UpdateManyClientArgs\\";
 export { UpsertClientArgs } from \\"./UpsertClientArgs\\";
@@ -1219,7 +1219,7 @@ import { DeleteClientArgs } from \\"./args/DeleteClientArgs\\";
 import { DeleteManyClientArgs } from \\"./args/DeleteManyClientArgs\\";
 import { FindFirstClientArgs } from \\"./args/FindFirstClientArgs\\";
 import { FindManyClientArgs } from \\"./args/FindManyClientArgs\\";
-import { FindOneClientArgs } from \\"./args/FindOneClientArgs\\";
+import { FindUniqueClientArgs } from \\"./args/FindUniqueClientArgs\\";
 import { UpdateClientArgs } from \\"./args/UpdateClientArgs\\";
 import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
 import { UpsertClientArgs } from \\"./args/UpsertClientArgs\\";
@@ -1233,8 +1233,8 @@ export class ClientCrudResolver {
     nullable: true,
     description: undefined
   })
-  async findOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneClientArgs): Promise<Client | null> {
-    return ctx.prisma.user.findOne(args);
+  async findUniqueClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueClientArgs): Promise<Client | null> {
+    return ctx.prisma.user.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Client, {

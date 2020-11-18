@@ -3,7 +3,7 @@ import GraphQLJSON from "graphql-type-json";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
-export class FindOnePostArgs {
+export class FindUniquePostArgs {
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: false })
   where!: PostWhereUniqueInput;
 }

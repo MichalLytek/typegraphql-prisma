@@ -130,7 +130,7 @@ export default function generateRelationsResolverClassesFromModel(
           ],
           // TODO: refactor to AST
           statements: [
-            `return ctx.prisma.${camelCase(model.name)}.findOne({
+            `return ctx.prisma.${camelCase(model.name)}.findUnique({
               where: {${whereConditionString}},
             }).${field.name}(${field.argsTypeName ? "args" : "{}"});`,
           ],

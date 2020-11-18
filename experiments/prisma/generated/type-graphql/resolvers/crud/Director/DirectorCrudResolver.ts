@@ -7,7 +7,7 @@ import { DeleteDirectorArgs } from "./args/DeleteDirectorArgs";
 import { DeleteManyDirectorArgs } from "./args/DeleteManyDirectorArgs";
 import { FindFirstDirectorArgs } from "./args/FindFirstDirectorArgs";
 import { FindManyDirectorArgs } from "./args/FindManyDirectorArgs";
-import { FindOneDirectorArgs } from "./args/FindOneDirectorArgs";
+import { FindUniqueDirectorArgs } from "./args/FindUniqueDirectorArgs";
 import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { UpsertDirectorArgs } from "./args/UpsertDirectorArgs";
@@ -21,8 +21,8 @@ export class DirectorCrudResolver {
     nullable: true,
     description: undefined
   })
-  async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneDirectorArgs): Promise<Director | null> {
-    return ctx.prisma.director.findOne(args);
+  async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueDirectorArgs): Promise<Director | null> {
+    return ctx.prisma.director.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Director, {

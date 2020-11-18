@@ -10,7 +10,7 @@ const crudResolversMap = {
 };
 const actionResolversMap = {
   Client: {
-    client: actionResolvers.FindOneClientResolver,
+    client: actionResolvers.FindUniqueClientResolver,
     findFirstClient: actionResolvers.FindFirstClientResolver,
     clients: actionResolvers.FindManyClientResolver,
     createClient: actionResolvers.CreateClientResolver,
@@ -22,7 +22,7 @@ const actionResolversMap = {
     aggregateClient: actionResolvers.AggregateClientResolver
   },
   Post: {
-    post: actionResolvers.FindOnePostResolver,
+    post: actionResolvers.FindUniquePostResolver,
     findFirstPost: actionResolvers.FindFirstPostResolver,
     posts: actionResolvers.FindManyPostResolver,
     createPost: actionResolvers.CreatePostResolver,

@@ -7,7 +7,7 @@ import { DeleteManyProblemArgs } from "./args/DeleteManyProblemArgs";
 import { DeleteProblemArgs } from "./args/DeleteProblemArgs";
 import { FindFirstProblemArgs } from "./args/FindFirstProblemArgs";
 import { FindManyProblemArgs } from "./args/FindManyProblemArgs";
-import { FindOneProblemArgs } from "./args/FindOneProblemArgs";
+import { FindUniqueProblemArgs } from "./args/FindUniqueProblemArgs";
 import { UpdateManyProblemArgs } from "./args/UpdateManyProblemArgs";
 import { UpdateProblemArgs } from "./args/UpdateProblemArgs";
 import { UpsertProblemArgs } from "./args/UpsertProblemArgs";
@@ -21,8 +21,8 @@ export class ProblemCrudResolver {
     nullable: true,
     description: undefined
   })
-  async problem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneProblemArgs): Promise<Problem | null> {
-    return ctx.prisma.problem.findOne(args);
+  async problem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueProblemArgs): Promise<Problem | null> {
+    return ctx.prisma.problem.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Problem, {

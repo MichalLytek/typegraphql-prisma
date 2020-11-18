@@ -46,7 +46,7 @@ describe("crud resolvers execution", () => {
     `;
     const prismaMock = {
       user: {
-        findOne: jest.fn().mockResolvedValue({
+        findUnique: jest.fn().mockResolvedValue({
           id: 1,
           dateOfBirth: new Date("2019-12-31T14:16:02.572Z"),
           name: "John",

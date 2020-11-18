@@ -3,7 +3,7 @@ import GraphQLJSON from "graphql-type-json";
 import { ProblemWhereUniqueInput } from "../../../inputs/ProblemWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
-export class FindOneProblemArgs {
+export class FindUniqueProblemArgs {
   @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, { nullable: false })
   where!: ProblemWhereUniqueInput;
 }

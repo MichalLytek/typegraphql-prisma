@@ -77,12 +77,14 @@ describe("crud", () => {
     const userCrudResolverTSFile = await readGeneratedFile(
       "/resolvers/crud/User/UserCrudResolver.ts",
     );
-    const findOneUserResolverTSFile = await readGeneratedFile(
-      "/resolvers/crud/User/FindOneUserResolver.ts",
+    const findUniqueUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/FindUniqueUserResolver.ts",
     );
 
     expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
-    expect(findOneUserResolverTSFile).toMatchSnapshot("FindOneUserResolver");
+    expect(findUniqueUserResolverTSFile).toMatchSnapshot(
+      "FindUniqueUserResolver",
+    );
   });
 
   it("should properly generate resolver class when cannot pluralize model name", async () => {
@@ -144,8 +146,8 @@ describe("crud", () => {
     const findFirstUserArgsTSFile = await readGeneratedFile(
       "/resolvers/crud/User/args/FindFirstUserArgs.ts",
     );
-    const findOneUserArgsTSFile = await readGeneratedFile(
-      "/resolvers/crud/User/args/FindOneUserArgs.ts",
+    const findUniqueUserArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/args/FindUniqueUserArgs.ts",
     );
     const updateManyUserArgsTSFile = await readGeneratedFile(
       "/resolvers/crud/User/args/UpdateManyUserArgs.ts",
@@ -166,7 +168,7 @@ describe("crud", () => {
     expect(deleteUserArgsTSFile).toMatchSnapshot("DeleteUserArgs");
     expect(findManyUserArgsTSFile).toMatchSnapshot("FindManyUserArgs");
     expect(findFirstUserArgsTSFile).toMatchSnapshot("FindFirstUserArgs");
-    expect(findOneUserArgsTSFile).toMatchSnapshot("FindOneUserArgs");
+    expect(findUniqueUserArgsTSFile).toMatchSnapshot("FindUniqueUserArgs");
     expect(updateManyUserArgsTSFile).toMatchSnapshot("UpdateManyUserArgs");
     expect(updateUserArgsTSFile).toMatchSnapshot("UpdateUserArgs");
     expect(upsertUserArgsTSFile).toMatchSnapshot("UpsertUserArgs");
@@ -204,8 +206,8 @@ describe("crud", () => {
     const findFirstUserResolverTSFile = await readGeneratedFile(
       "/resolvers/crud/User/FindFirstUserResolver.ts",
     );
-    const findOneUserResolverTSFile = await readGeneratedFile(
-      "/resolvers/crud/User/FindOneUserResolver.ts",
+    const findUniqueUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/FindUniqueUserResolver.ts",
     );
     const updateManyUserResolverTSFile = await readGeneratedFile(
       "/resolvers/crud/User/UpdateManyUserResolver.ts",
@@ -236,7 +238,9 @@ describe("crud", () => {
     expect(findFirstUserResolverTSFile).toMatchSnapshot(
       "FindFirstUserResolver",
     );
-    expect(findOneUserResolverTSFile).toMatchSnapshot("FindOneUserResolver");
+    expect(findUniqueUserResolverTSFile).toMatchSnapshot(
+      "FindUniqueUserResolver",
+    );
     expect(updateManyUserResolverTSFile).toMatchSnapshot(
       "UpdateManyUserResolver",
     );
@@ -311,8 +315,8 @@ describe("crud", () => {
       const findFirstClientArgsTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/args/FindFirstClientArgs.ts",
       );
-      const findOneClientArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/Client/args/FindOneClientArgs.ts",
+      const findUniqueClientArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/Client/args/FindUniqueClientArgs.ts",
       );
       const updateManyClientArgsTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/args/UpdateManyClientArgs.ts",
@@ -335,7 +339,9 @@ describe("crud", () => {
       expect(deleteClientArgsTSFile).toMatchSnapshot("DeleteClientArgs");
       expect(findManyClientArgsTSFile).toMatchSnapshot("FindManyClientArgs");
       expect(findFirstClientArgsTSFile).toMatchSnapshot("FindFirstClientArgs");
-      expect(findOneClientArgsTSFile).toMatchSnapshot("FindOneClientArgs");
+      expect(findUniqueClientArgsTSFile).toMatchSnapshot(
+        "FindUniqueClientArgs",
+      );
       expect(updateManyClientArgsTSFile).toMatchSnapshot(
         "UpdateManyClientArgs",
       );
@@ -376,8 +382,8 @@ describe("crud", () => {
       const findFirstClientResolverTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/FindFirstClientResolver.ts",
       );
-      const findOneClientResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/Client/FindOneClientResolver.ts",
+      const findUniqueClientResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/Client/FindUniqueClientResolver.ts",
       );
       const updateManyClientResolverTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/UpdateManyClientResolver.ts",
@@ -404,8 +410,8 @@ describe("crud", () => {
       expect(findFirstClientResolverTSFile).toMatchSnapshot(
         "FindFirstClientResolver",
       );
-      expect(findOneClientResolverTSFile).toMatchSnapshot(
-        "FindOneClientResolver",
+      expect(findUniqueClientResolverTSFile).toMatchSnapshot(
+        "FindUniqueClientResolver",
       );
       expect(updateManyClientResolverTSFile).toMatchSnapshot(
         "UpdateManyClientResolver",

@@ -53,6 +53,8 @@ declare namespace DMMF {
         [key: string]: any;
     }
     type FieldKind = 'scalar' | 'object' | 'enum';
+    type FieldNamespace = 'model' | 'prisma';
+    type FieldLocation = 'scalar' | 'inputObjectTypes' | 'outputObjectTypes' | 'enumTypes';
     interface Field {
         kind: FieldKind;
         name: string;
@@ -78,9 +80,18 @@ declare namespace DMMF {
     interface Schema {
         rootQueryType?: string;
         rootMutationType?: string;
-        inputTypes: InputType[];
-        outputTypes: OutputType[];
-        enums: SchemaEnum[];
+        inputObjectTypes: {
+            model?: InputType[];
+            prisma: InputType[];
+        };
+        outputObjectTypes: {
+            model: OutputType[];
+            prisma: OutputType[];
+        };
+        enumTypes: {
+            model?: SchemaEnum[];
+            prisma: SchemaEnum[];
+        };
     }
     interface Query {
         name: string;
@@ -96,7 +107,8 @@ declare namespace DMMF {
     interface SchemaArgInputType {
         isList: boolean;
         type: ArgType;
-        kind: FieldKind;
+        location: FieldLocation;
+        namespace?: FieldNamespace;
     }
     interface SchemaArg {
         name: string;
@@ -118,7 +130,8 @@ declare namespace DMMF {
         outputType: {
             type: string | OutputType | SchemaEnum;
             isList: boolean;
-            kind: FieldKind;
+            location: FieldLocation;
+            namespace?: FieldNamespace;
         };
         args: SchemaArg[];
     }
@@ -134,7 +147,7 @@ declare namespace DMMF {
     interface ModelMapping {
         model: string;
         plural: string;
-        findOne?: string | null;
+        findUnique?: string | null;
         findFirst?: string | null;
         findMany?: string | null;
         create?: string | null;
@@ -146,7 +159,7 @@ declare namespace DMMF {
         aggregate?: string | null;
     }
     enum ModelAction {
-        findOne = "findOne",
+        findUnique = "findUnique",
         findFirst = "findFirst",
         findMany = "findMany",
         create = "create",
@@ -195,22 +208,33 @@ declare class DMMFClass implements DMMF.Document {
     mappings: DMMF.Mappings;
     queryType: DMMF.OutputType;
     mutationType: DMMF.OutputType;
-    outputTypes: DMMF.OutputType[];
+    outputTypes: {
+        model: DMMF.OutputType[];
+        prisma: DMMF.OutputType[];
+    };
     outputTypeMap: Dictionary$1<DMMF.OutputType>;
-    inputTypes: DMMF.InputType[];
+    inputObjectTypes: {
+        model?: DMMF.InputType[];
+        prisma: DMMF.InputType[];
+    };
     inputTypeMap: Dictionary$1<DMMF.InputType>;
     enumMap: Dictionary$1<DMMF.SchemaEnum>;
+    datamodelEnumMap: Dictionary$1<DMMF.DatamodelEnum>;
     modelMap: Dictionary$1<DMMF.Model>;
     mappingsMap: Dictionary$1<DMMF.ModelMapping>;
     rootFieldMap: Dictionary$1<DMMF.SchemaField>;
     constructor({ datamodel, schema, mappings }: DMMF.Document);
     protected outputTypeToMergedOutputType: (outputType: DMMF.OutputType) => DMMF.OutputType;
-    protected resolveOutputTypes(types: DMMF.OutputType[]): void;
-    protected resolveInputTypes(types: DMMF.InputType[]): void;
-    protected resolveFieldArgumentTypes(types: DMMF.OutputType[], inputTypeMap: Dictionary$1<DMMF.InputType>): void;
+    protected resolveOutputTypes(): void;
+    protected resolveInputTypes(): void;
+    protected resolveFieldArgumentTypes(): void;
     protected getQueryType(): DMMF.OutputType;
     protected getMutationType(): DMMF.OutputType;
-    protected getOutputTypes(): DMMF.OutputType[];
+    protected getOutputTypes(): {
+        model: DMMF.OutputType[];
+        prisma: DMMF.OutputType[];
+    };
+    protected getDatamodelEnumMap(): Dictionary$1<DMMF.DatamodelEnum>;
     protected getEnumMap(): Dictionary$1<DMMF.SchemaEnum>;
     protected getModelMap(): Dictionary$1<DMMF.Model>;
     protected getMergedOutputTypeMap(): Dictionary$1<DMMF.OutputType>;
@@ -523,7 +547,6 @@ interface EngineConfig {
     clientVersion?: string;
     enableExperimental?: string[];
     engineEndpoint?: string;
-    useUds?: boolean;
 }
 declare type GetConfigResult = {
     datasources: DataSource[];
@@ -590,7 +613,8 @@ declare class NodeEngine {
     engineStartDeferred?: Deferred;
     engineStopDeferred?: StopDeferred;
     undici: Undici;
-    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, useUds, }: EngineConfig);
+    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, }: EngineConfig);
+    private checkForTooManyEngines;
     private resolveCwd;
     on(event: 'query' | 'info' | 'warn' | 'error' | 'beforeExit', listener: (args?: any) => any): void;
     emitExit(): Promise<void>;
@@ -664,7 +688,6 @@ interface PrismaClientOptions {
     __internal?: {
         debug?: boolean;
         hooks?: Hooks;
-        useUds?: boolean;
         engine?: {
             cwd?: string;
             binaryPath?: string;

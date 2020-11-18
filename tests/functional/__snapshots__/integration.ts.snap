@@ -438,7 +438,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
         DeletePostResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
-        FindOnePostResolver.ts
+        FindUniquePostResolver.ts
         PostCrudResolver.ts
         UpdateManyPostResolver.ts
         UpdatePostResolver.ts
@@ -450,7 +450,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
           DeletePostArgs.ts
           FindFirstPostArgs.ts
           FindManyPostArgs.ts
-          FindOnePostArgs.ts
+          FindUniquePostArgs.ts
           UpdateManyPostArgs.ts
           UpdatePostArgs.ts
           UpsertPostArgs.ts
@@ -462,7 +462,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
         DeleteUserResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
-        FindOneUserResolver.ts
+        FindUniqueUserResolver.ts
         UpdateManyUserResolver.ts
         UpdateUserResolver.ts
         UpsertUserResolver.ts
@@ -474,7 +474,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
           DeleteUserArgs.ts
           FindFirstUserArgs.ts
           FindManyUserArgs.ts
-          FindOneUserArgs.ts
+          FindUniqueUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateUserArgs.ts
           UpsertUserArgs.ts

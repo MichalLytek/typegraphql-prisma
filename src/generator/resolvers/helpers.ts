@@ -1,39 +1,22 @@
 import { OptionalKind, MethodDeclarationStructure } from "ts-morph";
 
-import { getFieldTSType, getTypeGraphQLType } from "../helpers";
 import { DmmfDocument } from "../dmmf/dmmf-document";
 import { DMMF } from "../dmmf/types";
 
 export function generateCrudResolverClassMethodDeclaration(
   action: DMMF.Action,
-  typeName: string,
-  dmmfDocument: DmmfDocument,
   mapping: DMMF.ModelMapping,
+  dmmfDocument: DmmfDocument,
 ): OptionalKind<MethodDeclarationStructure> {
-  // TODO: move to DMMF transform step
-  const returnTSType = getFieldTSType(
-    dmmfDocument,
-    action.method.outputType,
-    action.method.isRequired,
-    false,
-    mapping.model,
-    typeName,
-  );
-
   return {
     name: action.name,
     isAsync: true,
-    returnType: `Promise<${returnTSType}>`,
+    returnType: `Promise<${action.returnTSType}>`,
     decorators: [
       {
         name: `TypeGraphQL.${action.operation}`,
         arguments: [
-          `_returns => ${getTypeGraphQLType(
-            action.method.outputType,
-            dmmfDocument,
-            mapping.model,
-            typeName,
-          )}`,
+          `_returns => ${action.typeGraphQLType}`,
           `{
             nullable: ${!action.method.isRequired},
             description: undefined

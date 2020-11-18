@@ -78,7 +78,7 @@ export class MovieRelationsResolver {
     description: undefined,
   })
   async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
-    return ctx.prisma.movie.findOne({
+    return ctx.prisma.movie.findUnique({
       where: {
         directorFirstName_directorLastName_title: {
           directorFirstName: movie.directorFirstName,
@@ -105,7 +105,7 @@ export class DirectorRelationsResolver {
     description: undefined,
   })
   async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[] | null> {
-    return ctx.prisma.director.findOne({
+    return ctx.prisma.director.findUnique({
       where: {
         firstName_lastName: {
           firstName: director.firstName,
@@ -130,7 +130,7 @@ export class PostRelationsResolver {
     description: undefined,
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
-    return ctx.prisma.post.findOne({
+    return ctx.prisma.post.findUnique({
       where: {
         uuid: post.uuid,
       },
@@ -153,7 +153,7 @@ export class UserRelationsResolver {
     description: undefined,
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
-    return ctx.prisma.user.findOne({
+    return ctx.prisma.user.findUnique({
       where: {
         id: user.id,
       },
@@ -175,7 +175,7 @@ export class PostRelationsResolver {
     description: \\"author field doc\\",
   })
   async postAuthor(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
-    return ctx.prisma.post.findOne({
+    return ctx.prisma.post.findUnique({
       where: {
         uuid: post.uuid,
       },
@@ -198,7 +198,7 @@ export class UserRelationsResolver {
     description: undefined,
   })
   async userPosts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
-    return ctx.prisma.user.findOne({
+    return ctx.prisma.user.findUnique({
       where: {
         id: user.id,
       },
@@ -252,7 +252,7 @@ export class UserRelationsResolver {
     description: undefined,
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
-    return ctx.prisma.user.findOne({
+    return ctx.prisma.user.findUnique({
       where: {
         id: user.id,
       },
@@ -274,7 +274,7 @@ export class UserRelationsResolver {
     description: undefined,
   })
   async address(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<Address | null> {
-    return ctx.prisma.user.findOne({
+    return ctx.prisma.user.findUnique({
       where: {
         id: user.id,
       },
@@ -296,7 +296,7 @@ export class PostRelationsResolver {
     description: \\"author field doc\\",
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
-    return ctx.prisma.post.findOne({
+    return ctx.prisma.post.findUnique({
       where: {
         uuid: post.uuid,
       },
@@ -319,7 +319,7 @@ export class UserRelationsResolver {
     description: undefined,
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
-    return ctx.prisma.user.findOne({
+    return ctx.prisma.user.findUnique({
       where: {
         id: user.id,
       },

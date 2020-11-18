@@ -4,7 +4,7 @@ export { DeleteManyPatientArgs } from "./DeleteManyPatientArgs";
 export { DeletePatientArgs } from "./DeletePatientArgs";
 export { FindFirstPatientArgs } from "./FindFirstPatientArgs";
 export { FindManyPatientArgs } from "./FindManyPatientArgs";
-export { FindOnePatientArgs } from "./FindOnePatientArgs";
+export { FindUniquePatientArgs } from "./FindUniquePatientArgs";
 export { UpdateManyPatientArgs } from "./UpdateManyPatientArgs";
 export { UpdatePatientArgs } from "./UpdatePatientArgs";
 export { UpsertPatientArgs } from "./UpsertPatientArgs";

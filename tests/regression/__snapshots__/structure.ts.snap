@@ -42,8 +42,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         FindFirstPostResolver.js
         FindManyPostResolver.d.ts
         FindManyPostResolver.js
-        FindOnePostResolver.d.ts
-        FindOnePostResolver.js
+        FindUniquePostResolver.d.ts
+        FindUniquePostResolver.js
         PostCrudResolver.d.ts
         PostCrudResolver.js
         UpdateManyPostResolver.d.ts
@@ -65,8 +65,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           FindFirstPostArgs.js
           FindManyPostArgs.d.ts
           FindManyPostArgs.js
-          FindOnePostArgs.d.ts
-          FindOnePostArgs.js
+          FindUniquePostArgs.d.ts
+          FindUniquePostArgs.js
           UpdateManyPostArgs.d.ts
           UpdateManyPostArgs.js
           UpdatePostArgs.d.ts
@@ -88,8 +88,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         FindFirstUserResolver.js
         FindManyUserResolver.d.ts
         FindManyUserResolver.js
-        FindOneUserResolver.d.ts
-        FindOneUserResolver.js
+        FindUniqueUserResolver.d.ts
+        FindUniqueUserResolver.js
         UpdateManyUserResolver.d.ts
         UpdateManyUserResolver.js
         UpdateUserResolver.d.ts
@@ -111,8 +111,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           FindFirstUserArgs.js
           FindManyUserArgs.d.ts
           FindManyUserArgs.js
-          FindOneUserArgs.d.ts
-          FindOneUserArgs.js
+          FindUniqueUserArgs.d.ts
+          FindUniqueUserArgs.js
           UpdateManyUserArgs.d.ts
           UpdateManyUserArgs.js
           UpdateUserArgs.d.ts
@@ -283,7 +283,7 @@ exports[`structure should generate proper folders and file names when model is r
         DeleteRenamedPostResolver.ts
         FindFirstRenamedPostResolver.ts
         FindManyRenamedPostResolver.ts
-        FindOneRenamedPostResolver.ts
+        FindUniqueRenamedPostResolver.ts
         RenamedPostCrudResolver.ts
         UpdateManyRenamedPostResolver.ts
         UpdateRenamedPostResolver.ts
@@ -295,7 +295,7 @@ exports[`structure should generate proper folders and file names when model is r
           DeleteRenamedPostArgs.ts
           FindFirstRenamedPostArgs.ts
           FindManyRenamedPostArgs.ts
-          FindOneRenamedPostArgs.ts
+          FindUniqueRenamedPostArgs.ts
           UpdateManyRenamedPostArgs.ts
           UpdateRenamedPostArgs.ts
           UpsertRenamedPostArgs.ts
@@ -307,7 +307,7 @@ exports[`structure should generate proper folders and file names when model is r
         DeleteRenamedUserResolver.ts
         FindFirstRenamedUserResolver.ts
         FindManyRenamedUserResolver.ts
-        FindOneRenamedUserResolver.ts
+        FindUniqueRenamedUserResolver.ts
         RenamedUserCrudResolver.ts
         UpdateManyRenamedUserResolver.ts
         UpdateRenamedUserResolver.ts
@@ -319,7 +319,7 @@ exports[`structure should generate proper folders and file names when model is r
           DeleteRenamedUserArgs.ts
           FindFirstRenamedUserArgs.ts
           FindManyRenamedUserArgs.ts
-          FindOneRenamedUserArgs.ts
+          FindUniqueRenamedUserArgs.ts
           UpdateManyRenamedUserArgs.ts
           UpdateRenamedUserArgs.ts
           UpsertRenamedUserArgs.ts
@@ -422,7 +422,7 @@ exports[`structure should generate proper folders structure and file names for c
         DeletePostResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
-        FindOnePostResolver.ts
+        FindUniquePostResolver.ts
         PostCrudResolver.ts
         UpdateManyPostResolver.ts
         UpdatePostResolver.ts
@@ -434,7 +434,7 @@ exports[`structure should generate proper folders structure and file names for c
           DeletePostArgs.ts
           FindFirstPostArgs.ts
           FindManyPostArgs.ts
-          FindOnePostArgs.ts
+          FindUniquePostArgs.ts
           UpdateManyPostArgs.ts
           UpdatePostArgs.ts
           UpsertPostArgs.ts
@@ -446,7 +446,7 @@ exports[`structure should generate proper folders structure and file names for c
         DeleteUserResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
-        FindOneUserResolver.ts
+        FindUniqueUserResolver.ts
         UpdateManyUserResolver.ts
         UpdateUserResolver.ts
         UpsertUserResolver.ts
@@ -458,7 +458,7 @@ exports[`structure should generate proper folders structure and file names for c
           DeleteUserArgs.ts
           FindFirstUserArgs.ts
           FindManyUserArgs.ts
-          FindOneUserArgs.ts
+          FindUniqueUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateUserArgs.ts
           UpsertUserArgs.ts

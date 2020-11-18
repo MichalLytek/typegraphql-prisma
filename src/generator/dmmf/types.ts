@@ -38,8 +38,14 @@ export namespace DMMF {
     docs: string | undefined;
   }
   export type FieldKind = "scalar" | "object" | "enum";
+  export type FieldNamespace = "model" | "prisma";
+  export type FieldLocation =
+    | "scalar"
+    | "inputObjectTypes"
+    | "outputObjectTypes"
+    | "enumTypes";
   export interface Field {
-    kind: FieldKind;
+    // kind: FieldKind;
     name: string;
     isRequired: boolean;
     isList: boolean;
@@ -56,6 +62,7 @@ export namespace DMMF {
     // documentation?: string;
     // [key: string]: any;
     // additional props
+    location: FieldLocation;
     typeFieldAlias?: string;
     typeGraphQLType: string;
     fieldTSType: string;
@@ -85,14 +92,13 @@ export namespace DMMF {
   }
   export type ArgType = string | InputType | Enum;
   export interface SchemaArgInputType {
-    // isRequired: boolean;
-    // isNullable: boolean;
     isList: boolean;
     // type: ArgType;
-    kind: FieldKind;
+    type: string;
+    location: FieldLocation;
+    namespace?: FieldNamespace;
     // additional props
     argType: ArgType;
-    type: string;
   }
   export interface SchemaArg {
     name: string;
@@ -138,8 +144,8 @@ export namespace DMMF {
     // type: string | OutputType | Enum;
     type: string;
     isList: boolean;
-    // isRequired: boolean;
-    kind: FieldKind;
+    location: FieldLocation;
+    namespace?: FieldNamespace;
   }
   // additional type
   export interface OutputSchemaField extends SchemaField {
@@ -159,7 +165,8 @@ export namespace DMMF {
   export interface ModelMapping {
     model: string;
     plural: string;
-    // findOne?: string | null;
+    // findUnique?: string | null;
+    // findFirst?: string | null;
     // findMany?: string | null;
     // create?: string | null;
     // update?: string | null;
@@ -185,9 +192,11 @@ export namespace DMMF {
     argsTypeName: string | undefined;
     outputTypeName: string;
     actionResolverName: string;
+    returnTSType: string;
+    typeGraphQLType: string;
   }
   export enum ModelAction {
-    findOne = "findOne",
+    findUnique = "findUnique",
     findFirst = "findFirst",
     findMany = "findMany",
     create = "create",
@@ -211,10 +220,4 @@ export namespace DMMF {
     outputTypeField: OutputSchemaField;
     argsTypeName: string | undefined;
   }
-}
-export interface BaseField {
-  name: string;
-  type: string | DMMF.Enum | DMMF.OutputType | DMMF.SchemaArg;
-  isList: boolean;
-  isRequired: boolean;
 }

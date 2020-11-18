@@ -7,7 +7,7 @@ import { DeleteClientArgs } from "./args/DeleteClientArgs";
 import { DeleteManyClientArgs } from "./args/DeleteManyClientArgs";
 import { FindFirstClientArgs } from "./args/FindFirstClientArgs";
 import { FindManyClientArgs } from "./args/FindManyClientArgs";
-import { FindOneClientArgs } from "./args/FindOneClientArgs";
+import { FindUniqueClientArgs } from "./args/FindUniqueClientArgs";
 import { UpdateClientArgs } from "./args/UpdateClientArgs";
 import { UpdateManyClientArgs } from "./args/UpdateManyClientArgs";
 import { UpsertClientArgs } from "./args/UpsertClientArgs";
@@ -21,8 +21,8 @@ export class ClientCrudResolver {
     nullable: true,
     description: undefined
   })
-  async client(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneClientArgs): Promise<Client | null> {
-    return ctx.prisma.user.findOne(args);
+  async client(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueClientArgs): Promise<Client | null> {
+    return ctx.prisma.user.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Client, {

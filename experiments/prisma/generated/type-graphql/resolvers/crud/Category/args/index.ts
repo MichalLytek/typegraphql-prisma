@@ -4,7 +4,7 @@ export { DeleteCategoryArgs } from "./DeleteCategoryArgs";
 export { DeleteManyCategoryArgs } from "./DeleteManyCategoryArgs";
 export { FindFirstCategoryArgs } from "./FindFirstCategoryArgs";
 export { FindManyCategoryArgs } from "./FindManyCategoryArgs";
-export { FindOneCategoryArgs } from "./FindOneCategoryArgs";
+export { FindUniqueCategoryArgs } from "./FindUniqueCategoryArgs";
 export { UpdateCategoryArgs } from "./UpdateCategoryArgs";
 export { UpdateManyCategoryArgs } from "./UpdateManyCategoryArgs";
 export { UpsertCategoryArgs } from "./UpsertCategoryArgs";

@@ -9,7 +9,7 @@ export class PostRelationsResolver {
     description: undefined,
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<Client> {
-    return ctx.prisma.post.findOne({
+    return ctx.prisma.post.findUnique({
       where: {
         uuid: post.uuid,
       },

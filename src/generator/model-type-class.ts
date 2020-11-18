@@ -35,7 +35,7 @@ export default function generateObjectTypeClassFromModel(
   generateModelsImports(
     sourceFile,
     model.fields
-      .filter(field => field.kind === "object")
+      .filter(field => field.location === "inputObjectTypes")
       .filter(field => field.type !== model.name)
       .map(field =>
         dmmfDocument.isModelName(field.type)
@@ -46,7 +46,7 @@ export default function generateObjectTypeClassFromModel(
   generateEnumsImports(
     sourceFile,
     model.fields
-      .filter(field => field.kind === "enum")
+      .filter(field => field.location === "enumTypes")
       .map(field => field.type),
   );
 

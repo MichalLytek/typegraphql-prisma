@@ -7,7 +7,7 @@ import { DeleteCreatorArgs } from "./args/DeleteCreatorArgs";
 import { DeleteManyCreatorArgs } from "./args/DeleteManyCreatorArgs";
 import { FindFirstCreatorArgs } from "./args/FindFirstCreatorArgs";
 import { FindManyCreatorArgs } from "./args/FindManyCreatorArgs";
-import { FindOneCreatorArgs } from "./args/FindOneCreatorArgs";
+import { FindUniqueCreatorArgs } from "./args/FindUniqueCreatorArgs";
 import { UpdateCreatorArgs } from "./args/UpdateCreatorArgs";
 import { UpdateManyCreatorArgs } from "./args/UpdateManyCreatorArgs";
 import { UpsertCreatorArgs } from "./args/UpsertCreatorArgs";
@@ -21,8 +21,8 @@ export class CreatorCrudResolver {
     nullable: true,
     description: undefined
   })
-  async creator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneCreatorArgs): Promise<Creator | null> {
-    return ctx.prisma.creator.findOne(args);
+  async creator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueCreatorArgs): Promise<Creator | null> {
+    return ctx.prisma.creator.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Creator, {

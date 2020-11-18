@@ -44,7 +44,7 @@ export function generateOutputTypeClassFromType(
   generateOutputsImports(
     sourceFile,
     type.fields
-      .filter(field => field.outputType.kind === "object")
+      .filter(field => field.outputType.location === "outputObjectTypes")
       .map(field => field.outputType.type),
     1,
   );
@@ -116,7 +116,7 @@ export function generateInputTypeClassFromType(
   generateInputsImports(
     sourceFile,
     inputType.fields
-      .filter(field => field.selectedInputType.kind === "object")
+      .filter(field => field.selectedInputType.location === "inputObjectTypes")
       .map(field => field.selectedInputType.type)
       .filter(fieldType => fieldType !== inputType.typeName),
   );
@@ -124,7 +124,7 @@ export function generateInputTypeClassFromType(
     sourceFile,
     inputType.fields
       .map(field => field.selectedInputType)
-      .filter(fieldType => fieldType.kind === "enum")
+      .filter(fieldType => fieldType.location === "enumTypes")
       .map(fieldType => fieldType.type as string),
     2,
   );

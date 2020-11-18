@@ -10,7 +10,7 @@ export class ProblemRelationsResolver {
     description: undefined,
   })
   async likedBy(@TypeGraphQL.Root() problem: Problem, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ProblemLikedByArgs): Promise<Creator[] | null> {
-    return ctx.prisma.problem.findOne({
+    return ctx.prisma.problem.findUnique({
       where: {
         id: problem.id,
       },
@@ -22,7 +22,7 @@ export class ProblemRelationsResolver {
     description: undefined,
   })
   async creator(@TypeGraphQL.Root() problem: Problem, @TypeGraphQL.Ctx() ctx: any): Promise<Creator | null> {
-    return ctx.prisma.problem.findOne({
+    return ctx.prisma.problem.findUnique({
       where: {
         id: problem.id,
       },

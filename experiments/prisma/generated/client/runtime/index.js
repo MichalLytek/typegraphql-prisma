@@ -19,7 +19,7 @@ var __export2 = (target, all) => {
 };
 var __exportStar2 = (target, module2, desc) => {
   __markAsModule2(target);
-  if (typeof module2 === "object" || typeof module2 === "function") {
+  if (module2 && typeof module2 === "object" || typeof module2 === "function") {
     for (let key of __getOwnPropNames(module2))
       if (!__hasOwnProp.call(target, key) && key !== "default")
         __defProp(target, key, {get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable});
@@ -29,7 +29,7 @@ var __exportStar2 = (target, module2, desc) => {
 var __toModule2 = (module2) => {
   if (module2 && module2.__esModule)
     return module2;
-  return __exportStar2(__defProp(__create(__getProtoOf(module2)), "default", {value: module2, enumerable: true}), module2);
+  return __exportStar2(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", {value: module2, enumerable: true}), module2);
 };
 
 // ../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/windows.js
@@ -2718,6 +2718,7 @@ var require_GeneratorProcess = __commonJS2((exports2) => {
   };
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.GeneratorProcess = exports2.GeneratorError = void 0;
+  const child_process_12 = require("child_process");
   const cross_spawn_1 = require_cross_spawn2();
   const byline_12 = __importDefault2(require_byline());
   const chalk_12 = __importDefault2(require_source2());
@@ -2733,8 +2734,9 @@ var require_GeneratorProcess = __commonJS2((exports2) => {
   }
   exports2.GeneratorError = GeneratorError;
   class GeneratorProcess {
-    constructor(executablePath) {
+    constructor(executablePath, isNode) {
       this.executablePath = executablePath;
+      this.isNode = isNode;
       this.listeners = {};
       this.exitCode = null;
       this.stderrLogs = "";
@@ -2748,14 +2750,25 @@ var require_GeneratorProcess = __commonJS2((exports2) => {
     initSingleton() {
       return new Promise((resolve, reject) => {
         try {
-          this.child = cross_spawn_1.spawn(this.executablePath, {
-            stdio: ["pipe", "inherit", "pipe"],
-            env: {
-              ...process.env,
-              PRISMA_GENERATOR_INVOCATION: "true"
-            },
-            shell: true
-          });
+          if (this.isNode) {
+            this.child = child_process_12.fork(this.executablePath, [], {
+              stdio: ["pipe", "inherit", "pipe", "ipc"],
+              env: {
+                ...process.env,
+                PRISMA_GENERATOR_INVOCATION: "true"
+              },
+              execArgv: ["--max-old-space-size=8096"]
+            });
+          } else {
+            this.child = cross_spawn_1.spawn(this.executablePath, {
+              stdio: ["pipe", "inherit", "pipe"],
+              env: {
+                ...process.env,
+                PRISMA_GENERATOR_INVOCATION: "true"
+              },
+              shell: true
+            });
+          }
           this.child.on("exit", (code) => {
             this.exitCode = code;
             if (code && code > 0 && this.currentGenerateDeferred) {
@@ -2961,7 +2974,7 @@ var require_dmmf = __commonJS2((exports2) => {
   (function(DMMF3) {
     let ModelAction;
     (function(ModelAction2) {
-      ModelAction2["findOne"] = "findOne";
+      ModelAction2["findUnique"] = "findUnique";
       ModelAction2["findFirst"] = "findFirst";
       ModelAction2["findMany"] = "findMany";
       ModelAction2["create"] = "create";
@@ -4280,7 +4293,7 @@ If you want the Prisma team to look into it, please open the link above \u{1F64F
   }
 });
 
-// ../../node_modules/.pnpm/@prisma/engines@2.11.0-10.58369335532e47bdcec77a2f1e7c1fb83a463918/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma/engines@2.12.0-10.a4ef806349a7b17c41f45735ce4a36322e01c250/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports) => {
   var __defineProperty = Object.defineProperty;
   var __hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -4316,13 +4329,13 @@ var require_dist9 = __commonJS2((exports) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.11.0-10.58369335532e47bdcec77a2f1e7c1fb83a463918",
+      version: "2.12.0-10.a4ef806349a7b17c41f45735ce4a36322e01c250",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "58369335532e47bdcec77a2f1e7c1fb83a463918"
+        enginesVersion: "a4ef806349a7b17c41f45735ce4a36322e01c250"
       },
       devDependencies: {
         "@types/node": "^14.11.8",
@@ -11902,7 +11915,7 @@ ${error.message}` : execaMessage;
                 throw new Error('Could not determine "servername"');
               }
               debug4("Upgrading socket connection to TLS");
-              return tls_1.default.connect(Object.assign(Object.assign({}, omit4(opts, "host", "hostname", "path", "port")), {
+              return tls_1.default.connect(Object.assign(Object.assign({}, omit3(opts, "host", "hostname", "path", "port")), {
                 socket,
                 servername
               }));
@@ -11932,7 +11945,7 @@ ${error.message}` : execaMessage;
     function isHTTPS(protocol) {
       return typeof protocol === "string" ? /^https:?$/i.test(protocol) : false;
     }
-    function omit4(obj, ...keys2) {
+    function omit3(obj, ...keys2) {
       const ret = {};
       let key;
       for (key in obj) {
@@ -12860,7 +12873,7 @@ ${error.message}` : execaMessage;
     "use strict";
     const util2 = require("util");
     const toRegexRange = require_to_regex_range();
-    const isObject = (val) => val !== null && typeof val === "object" && !Array.isArray(val);
+    const isObject3 = (val) => val !== null && typeof val === "object" && !Array.isArray(val);
     const transform = (toNumber) => {
       return (value) => toNumber === true ? Number(value) : String(value);
     };
@@ -13039,7 +13052,7 @@ ${error.message}` : execaMessage;
       if (typeof step === "function") {
         return fill(start, end, 1, {transform: step});
       }
-      if (isObject(step)) {
+      if (isObject3(step)) {
         return fill(start, end, 0, step);
       }
       let opts = {...options};
@@ -13047,7 +13060,7 @@ ${error.message}` : execaMessage;
         opts.wrap = true;
       step = step || opts.step || 1;
       if (!isNumber(step)) {
-        if (step != null && !isObject(step))
+        if (step != null && !isObject3(step))
           return invalidStep(step, opts);
         return fill(start, end, 1, step);
       }
@@ -14820,7 +14833,7 @@ ${error.message}` : execaMessage;
     const parse3 = require_parse3();
     const utils = require_utils2();
     const constants = require_constants2();
-    const isObject = (val) => val && typeof val === "object" && !Array.isArray(val);
+    const isObject3 = (val) => val && typeof val === "object" && !Array.isArray(val);
     const picomatch = (glob, options, returnState = false) => {
       if (Array.isArray(glob)) {
         const fns = glob.map((input) => picomatch(input, options, returnState));
@@ -14834,7 +14847,7 @@ ${error.message}` : execaMessage;
         };
         return arrayMatcher;
       }
-      const isState = isObject(glob) && glob.tokens && glob.input;
+      const isState = isObject3(glob) && glob.tokens && glob.input;
       if (glob === "" || typeof glob !== "string" && !isState) {
         throw new TypeError("Expected pattern to be a non-empty string");
       }
@@ -14977,7 +14990,7 @@ ${error.message}` : execaMessage;
     const micromatch = (list, patterns, options) => {
       patterns = [].concat(patterns);
       list = [].concat(list);
-      let omit4 = new Set();
+      let omit3 = new Set();
       let keep = new Set();
       let items = new Set();
       let negatives = 0;
@@ -14998,15 +15011,15 @@ ${error.message}` : execaMessage;
           if (!match)
             continue;
           if (negated) {
-            omit4.add(matched.output);
+            omit3.add(matched.output);
           } else {
-            omit4.delete(matched.output);
+            omit3.delete(matched.output);
             keep.add(matched.output);
           }
         }
       }
       let result = negatives === patterns.length ? [...items] : [...keep];
-      let matches = result.filter((item) => !omit4.has(item));
+      let matches = result.filter((item) => !omit3.has(item));
       if (options && matches.length === 0) {
         if (options.failglob === true) {
           throw new Error(`No matches found for "${patterns.join(", ")}"`);
@@ -24518,13 +24531,13 @@ var require_omit = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.omit = void 0;
-  function omit4(obj, keys2) {
+  function omit3(obj, keys2) {
     return Object.keys(obj).filter((key) => !keys2.includes(key)).reduce((result, key) => {
       result[key] = obj[key];
       return result;
     }, {});
   }
-  exports2.omit = omit4;
+  exports2.omit = omit3;
 });
 
 // ../engine-core/dist/printGeneratorConfig.js
@@ -24667,14 +24680,14 @@ var require_get_stream3 = __commonJS2((exports2, module2) => {
   module2.exports.MaxBufferError = MaxBufferError;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/node/http-parser.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/node/http-parser.js
 var require_http_parser = __commonJS2((exports2, module2) => {
   "use strict";
   const {HTTPParser} = process.binding("http_parser");
   module2.exports = HTTPParser;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/core/symbols.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/core/symbols.js
 var require_symbols = __commonJS2((exports2, module2) => {
   module2.exports = {
     kUrl: Symbol("url"),
@@ -24714,7 +24727,7 @@ var require_symbols = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/core/util.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/core/util.js
 var require_util5 = __commonJS2((exports2, module2) => {
   "use strict";
   const assert = require("assert");
@@ -24754,7 +24767,7 @@ var require_util5 = __commonJS2((exports2, module2) => {
       stream[kDestroyed] = true;
     }
   }
-  const KEEPALIVE_TIMEOUT_EXPR = /timeout=(\d+)s/;
+  const KEEPALIVE_TIMEOUT_EXPR = /timeout=(\d+)/;
   function parseKeepAliveTimeout(val) {
     const m2 = val.match(KEEPALIVE_TIMEOUT_EXPR);
     return m2 ? parseInt(m2[1]) * 1e3 : null;
@@ -24800,7 +24813,7 @@ var require_util5 = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/core/errors.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/core/errors.js
 var require_errors = __commonJS2((exports2, module2) => {
   "use strict";
   class UndiciError extends Error {
@@ -24945,7 +24958,7 @@ var require_errors = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/core/request.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/core/request.js
 var require_request = __commonJS2((exports2, module2) => {
   "use strict";
   const {
@@ -24959,6 +24972,7 @@ var require_request = __commonJS2((exports2, module2) => {
   const kRequestTimeout = Symbol("request timeout");
   const kTimeout = Symbol("timeout");
   const kHandler = Symbol("handler");
+  const REGEXP_ABSOLUTE_URL = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x00a1-\xffff0-9]+-?)*[a-z\x00a1-\xffff0-9]+)(?:\.(?:[a-z\x00a1-\xffff0-9]+-?)*[a-z\x00a1-\xffff0-9]+)*(?:\.(?:[a-z\x00a1-\xffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/ius;
   class Request {
     constructor({
       path: path4,
@@ -24969,8 +24983,10 @@ var require_request = __commonJS2((exports2, module2) => {
       upgrade,
       requestTimeout
     }, handler) {
-      if (typeof path4 !== "string" || path4[0] !== "/") {
-        throw new InvalidArgumentError("path must be a valid path");
+      if (typeof path4 !== "string") {
+        throw new InvalidArgumentError("path must be a string");
+      } else if (path4[0] !== "/" && !REGEXP_ABSOLUTE_URL.test(path4)) {
+        throw new InvalidArgumentError("path must be an absolute URL or start with a slash");
       }
       if (typeof method !== "string") {
         throw new InvalidArgumentError("method must be a string");
@@ -25104,7 +25120,7 @@ var require_request = __commonJS2((exports2, module2) => {
   module2.exports = Request;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/core/client.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/core/client.js
 var require_client = __commonJS2((exports2, module2) => {
   "use strict";
   const {URL: URL2} = require("url");
@@ -25516,7 +25532,7 @@ var require_client = __commonJS2((exports2, module2) => {
         client[kReset] = true;
       }
       try {
-        if (request.onHeaders(statusCode, headers, statusCode < 200 ? null : socket[kResume]) === false) {
+        if (request.onHeaders(statusCode, headers, socket[kResume]) === false) {
           socket[kPause]();
         }
       } catch (err) {
@@ -26007,7 +26023,7 @@ ${len.toString(16)}\r
   module2.exports = Client;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/node/fixed-queue.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/node/fixed-queue.js
 var require_fixed_queue = __commonJS2((exports2, module2) => {
   "use strict";
   const kSize = 2048;
@@ -26062,7 +26078,7 @@ var require_fixed_queue = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/pool.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/pool.js
 var require_pool = __commonJS2((exports2, module2) => {
   "use strict";
   const Client = require_client();
@@ -26182,7 +26198,7 @@ var require_pool = __commonJS2((exports2, module2) => {
   module2.exports = Pool;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/abort-signal.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/abort-signal.js
 var require_abort_signal = __commonJS2((exports2, module2) => {
   const {RequestAbortedError} = require_errors();
   const kListener = Symbol("kListener");
@@ -26224,7 +26240,7 @@ var require_abort_signal = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/client-request.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/client-request.js
 var require_client_request = __commonJS2((exports2, module2) => {
   "use strict";
   const {Readable} = require("stream");
@@ -26357,7 +26373,7 @@ var require_client_request = __commonJS2((exports2, module2) => {
   module2.exports = request;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/client-stream.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/client-stream.js
 var require_client_stream = __commonJS2((exports2, module2) => {
   "use strict";
   const {finished} = require("stream");
@@ -26494,7 +26510,7 @@ var require_client_stream = __commonJS2((exports2, module2) => {
   module2.exports = stream;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/client-pipeline.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/client-pipeline.js
 var require_client_pipeline = __commonJS2((exports2, module2) => {
   "use strict";
   const {
@@ -26696,7 +26712,7 @@ var require_client_pipeline = __commonJS2((exports2, module2) => {
   module2.exports = pipeline;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/client-upgrade.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/client-upgrade.js
 var require_client_upgrade = __commonJS2((exports2, module2) => {
   "use strict";
   const {InvalidArgumentError} = require_errors();
@@ -26784,7 +26800,7 @@ var require_client_upgrade = __commonJS2((exports2, module2) => {
   module2.exports = upgrade;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/lib/client-connect.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/lib/client-connect.js
 var require_client_connect = __commonJS2((exports2, module2) => {
   "use strict";
   const {InvalidArgumentError} = require_errors();
@@ -26870,7 +26886,7 @@ var require_client_connect = __commonJS2((exports2, module2) => {
   module2.exports = connect;
 });
 
-// ../../node_modules/.pnpm/undici@2.1.1/node_modules/undici/index.js
+// ../../node_modules/.pnpm/undici@2.2.0/node_modules/undici/index.js
 var require_undici = __commonJS2((exports2, module2) => {
   "use strict";
   const Client = require_client();
@@ -26990,7 +27006,6 @@ var require_NodeEngine = __commonJS2((exports) => {
   const util_2 = require_util4();
   const debug = debug_1.default("engine");
   const exists = util_1.promisify(fs_1.default.exists);
-  const readdir = util_1.promisify(fs_1.default.readdir);
   const knownPlatforms = [
     "native",
     "darwin",
@@ -27010,7 +27025,7 @@ var require_NodeEngine = __commonJS2((exports) => {
   const engines = [];
   const socketPaths = [];
   class NodeEngine {
-    constructor({cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env: env2, flags, clientVersion: clientVersion3, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, useUds}) {
+    constructor({cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env: env2, flags, clientVersion: clientVersion3, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode}) {
       var _a;
       this.restartCount = 0;
       this.queryEngineStarted = false;
@@ -27126,6 +27141,7 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
         }
         throw error;
       };
+      this.useUds = process.platform !== "win32";
       this.env = env2;
       this.cwd = this.resolveCwd(cwd);
       this.enableDebugLogs = enableDebugLogs !== null && enableDebugLogs !== void 0 ? enableDebugLogs : false;
@@ -27159,11 +27175,6 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
       }
       this.enableExperimental = this.enableExperimental.filter((e) => !removedFlags.includes(e) && !filteredFlags.includes(e));
       this.engineEndpoint = engineEndpoint;
-      if (useUds && process.platform !== "win32") {
-        this.socketPath = `/tmp/prisma-${util_2.getRandomString()}.sock`;
-        socketPaths.push(this.socketPath);
-        this.useUds = useUds;
-      }
       if (engineEndpoint) {
         const url = new URL(engineEndpoint);
         this.port = Number(url.port);
@@ -27193,6 +27204,15 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         debug_1.default.enable("*");
       }
       engines.push(this);
+      this.checkForTooManyEngines();
+    }
+    checkForTooManyEngines() {
+      if (engines.length >= 10) {
+        const runningEngines = engines.filter((e) => e.child);
+        if (runningEngines.length === 10) {
+          console.warn(`${chalk_1.default.yellow("warn(prisma-client)")} Already 10 Prisma Clients are actively running.`);
+        }
+      }
     }
     resolveCwd(cwd) {
       if (cwd && fs_1.default.existsSync(cwd) && fs_1.default.lstatSync(cwd).isDirectory()) {
@@ -27396,6 +27416,10 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
           this.lastPanic = void 0;
           this.queryEngineKilled = false;
           this.globalKillSignalReceived = void 0;
+          if (this.useUds) {
+            this.socketPath = `/tmp/prisma-${util_2.getRandomString()}.sock`;
+            socketPaths.push(this.socketPath);
+          }
           debug({cwd: this.cwd});
           const prismaPath = await this.getPrismaPath();
           const experimentalFlags = this.enableExperimental && Array.isArray(this.enableExperimental) && this.enableExperimental.length > 0 ? [`--enable-experimental=${this.enableExperimental.join(",")}`] : [];
@@ -27644,17 +27668,6 @@ ${this.lastErrorLog.fields.file}:${this.lastErrorLog.fields.line}:${this.lastErr
       await new Promise((r) => process.nextTick(r));
       this.startPromise = void 0;
       this.engineStopDeferred = void 0;
-      setTimeout(() => {
-        if (this.socketPath) {
-          try {
-            fs_1.default.unlinkSync(this.socketPath);
-          } catch (e) {
-            debug(e);
-          }
-          socketPaths.splice(socketPaths.indexOf(this.socketPath), 1);
-          this.socketPath = void 0;
-        }
-      });
     }
     async kill(signal) {
       var _a, _b;
@@ -28010,7 +28023,7 @@ var require_mapPreviewFeatures = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.11.0",
+    version: "2.12.0-dev.38",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -28032,7 +28045,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
     types: "index.d.ts",
     license: "Apache-2.0",
     engines: {
-      node: ">=10"
+      node: ">=10.4"
     },
     homepage: "https://github.com/prisma/prisma-client-js",
     repository: {
@@ -28064,35 +28077,35 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "index.d.ts"
     ],
     devDependencies: {
-      "@prisma/debug": "2.11.0",
-      "@prisma/engine-core": "2.11.0",
-      "@prisma/engines": "2.11.0-10.58369335532e47bdcec77a2f1e7c1fb83a463918",
-      "@prisma/fetch-engine": "2.11.0",
-      "@prisma/generator-helper": "2.11.0",
-      "@prisma/get-platform": "2.11.0",
-      "@prisma/migrate": "2.11.0",
-      "@prisma/sdk": "2.11.0",
+      "@prisma/debug": "2.12.0-dev.38",
+      "@prisma/engine-core": "2.12.0-dev.38",
+      "@prisma/engines": "2.12.0-10.a4ef806349a7b17c41f45735ce4a36322e01c250",
+      "@prisma/fetch-engine": "2.12.0-dev.38",
+      "@prisma/generator-helper": "2.12.0-dev.38",
+      "@prisma/get-platform": "2.12.0-dev.38",
+      "@prisma/migrate": "2.12.0-dev.38",
+      "@prisma/sdk": "2.12.0-dev.38",
       "@timsuchanek/copy": "1.4.5",
       "@types/debug": "4.1.5",
-      "@types/fs-extra": "9.0.3",
+      "@types/fs-extra": "9.0.4",
       "@types/jest": "26.0.15",
       "@types/js-levenshtein": "1.1.0",
-      "@types/node": "12.19.4",
+      "@types/node": "12.19.5",
       "@types/node-fetch": "2.5.7",
-      "@types/pg": "7.14.6",
-      "@typescript-eslint/eslint-plugin": "4.7.0",
-      "@typescript-eslint/parser": "4.7.0",
-      arg: "4.1.3",
+      "@types/pg": "7.14.7",
+      "@typescript-eslint/eslint-plugin": "4.8.1",
+      "@typescript-eslint/parser": "4.8.1",
+      arg: "5.0.0",
       benchmark: "2.1.4",
       chalk: "4.1.0",
       "decimal.js": "10.2.1",
       dotenv: "8.2.0",
-      esbuild: "0.8.5",
+      esbuild: "0.8.10",
       "escape-string-regexp": "4.0.0",
       eslint: "7.13.0",
       "eslint-config-prettier": "6.15.0",
       "eslint-plugin-eslint-comments": "3.2.0",
-      "eslint-plugin-jest": "24.1.0",
+      "eslint-plugin-jest": "24.1.3",
       "eslint-plugin-prettier": "3.1.4",
       execa: "4.1.0",
       "flat-map-polyfill": "0.3.8",
@@ -28113,15 +28126,15 @@ var require_package2 = __commonJS2((exports2, module2) => {
       mssql: "6.2.3",
       "node-fetch": "2.6.1",
       packwatch: "2.0.0",
-      pg: "8.4.2",
+      pg: "8.5.1",
       pidtree: "0.5.0",
       "pkg-up": "3.1.0",
       pluralize: "8.0.0",
       prettier: "2.1.2",
       "replace-string": "3.1.0",
       rimraf: "3.0.2",
-      rollup: "2.33.1",
-      "rollup-plugin-dts": "1.4.13",
+      rollup: "2.33.3",
+      "rollup-plugin-dts": "1.4.14",
       "set-value": "3.0.2",
       "source-map-support": "0.5.19",
       "sql-template-tag": "4.0.0",
@@ -28157,7 +28170,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       ]
     },
     dependencies: {
-      "@prisma/engines-version": "2.11.0-10.58369335532e47bdcec77a2f1e7c1fb83a463918"
+      "@prisma/engines-version": "2.12.0-10.a4ef806349a7b17c41f45735ce4a36322e01c250"
     }
   };
 });
@@ -30521,10 +30534,9 @@ var require_Generator = __commonJS2((exports2) => {
   exports2.Generator = void 0;
   const generator_helper_1 = require_dist7();
   class Generator {
-    constructor(executablePath) {
-      this.executablePath = executablePath;
+    constructor(executablePath, isNode) {
       this.manifest = null;
-      this.generatorProcess = new generator_helper_1.GeneratorProcess(this.executablePath);
+      this.generatorProcess = new generator_helper_1.GeneratorProcess(executablePath, isNode);
     }
     async init() {
       await this.generatorProcess.init();
@@ -32400,7 +32412,7 @@ var require_agent3 = __commonJS2((exports2) => {
               throw new Error('Could not determine "servername"');
             }
             debug4("Upgrading socket connection to TLS");
-            return tls_1.default.connect(Object.assign(Object.assign({}, omit4(opts, "host", "hostname", "path", "port")), {
+            return tls_1.default.connect(Object.assign(Object.assign({}, omit3(opts, "host", "hostname", "path", "port")), {
               socket,
               servername
             }));
@@ -32430,7 +32442,7 @@ var require_agent3 = __commonJS2((exports2) => {
   function isHTTPS(protocol) {
     return typeof protocol === "string" ? /^https:?$/i.test(protocol) : false;
   }
-  function omit4(obj, ...keys2) {
+  function omit3(obj, ...keys2) {
     const ret = {};
     let key;
     for (key in obj) {
@@ -33400,7 +33412,7 @@ var require_fill_range2 = __commonJS2((exports2, module2) => {
   "use strict";
   const util2 = require("util");
   const toRegexRange = require_to_regex_range2();
-  const isObject = (val) => val !== null && typeof val === "object" && !Array.isArray(val);
+  const isObject3 = (val) => val !== null && typeof val === "object" && !Array.isArray(val);
   const transform = (toNumber) => {
     return (value) => toNumber === true ? Number(value) : String(value);
   };
@@ -33579,7 +33591,7 @@ var require_fill_range2 = __commonJS2((exports2, module2) => {
     if (typeof step === "function") {
       return fill(start, end, 1, {transform: step});
     }
-    if (isObject(step)) {
+    if (isObject3(step)) {
       return fill(start, end, 0, step);
     }
     let opts = {...options};
@@ -33587,7 +33599,7 @@ var require_fill_range2 = __commonJS2((exports2, module2) => {
       opts.wrap = true;
     step = step || opts.step || 1;
     if (!isNumber(step)) {
-      if (step != null && !isObject(step))
+      if (step != null && !isObject3(step))
         return invalidStep(step, opts);
       return fill(start, end, 1, step);
     }
@@ -35380,7 +35392,7 @@ var require_picomatch3 = __commonJS2((exports2, module2) => {
   const parse3 = require_parse6();
   const utils = require_utils6();
   const constants = require_constants5();
-  const isObject = (val) => val && typeof val === "object" && !Array.isArray(val);
+  const isObject3 = (val) => val && typeof val === "object" && !Array.isArray(val);
   const picomatch = (glob, options, returnState = false) => {
     if (Array.isArray(glob)) {
       const fns = glob.map((input) => picomatch(input, options, returnState));
@@ -35394,7 +35406,7 @@ var require_picomatch3 = __commonJS2((exports2, module2) => {
       };
       return arrayMatcher;
     }
-    const isState = isObject(glob) && glob.tokens && glob.input;
+    const isState = isObject3(glob) && glob.tokens && glob.input;
     if (glob === "" || typeof glob !== "string" && !isState) {
       throw new TypeError("Expected pattern to be a non-empty string");
     }
@@ -35541,7 +35553,7 @@ var require_micromatch2 = __commonJS2((exports2, module2) => {
   const micromatch = (list, patterns, options) => {
     patterns = [].concat(patterns);
     list = [].concat(list);
-    let omit4 = new Set();
+    let omit3 = new Set();
     let keep = new Set();
     let items = new Set();
     let negatives = 0;
@@ -35562,15 +35574,15 @@ var require_micromatch2 = __commonJS2((exports2, module2) => {
         if (!match)
           continue;
         if (negated) {
-          omit4.add(matched.output);
+          omit3.add(matched.output);
         } else {
-          omit4.delete(matched.output);
+          omit3.delete(matched.output);
           keep.add(matched.output);
         }
       }
     }
     let result = negatives === patterns.length ? [...items] : [...keep];
-    let matches = result.filter((item) => !omit4.has(item));
+    let matches = result.filter((item) => !omit3.has(item));
     if (options && matches.length === 0) {
       if (options.failglob === true) {
         throw new Error(`No matches found for "${patterns.join(", ")}"`);
@@ -43777,7 +43789,8 @@ Please try to install it with ${chalk_12.default.bold.greenBright("npm install @
       }
       return {
         outputPath: prismaClientDir,
-        generatorPath: `node --max-old-space-size=8096 "${path_12.default.resolve(prismaClientDir, "generator-build/index.js")}"`
+        generatorPath: path_12.default.resolve(prismaClientDir, "generator-build/index.js"),
+        isNode: true
       };
     }
   };
@@ -45033,7 +45046,7 @@ var require_getGenerators = __commonJS2((exports) => {
           paths = await predefinedGeneratorResolvers_1.predefinedGeneratorResolvers[generator.provider](baseDir, cliVersion);
           generatorPath = paths.generatorPath;
         }
-        const generatorInstance = new Generator_1.Generator(generatorPath);
+        const generatorInstance = new Generator_1.Generator(generatorPath, paths === null || paths === void 0 ? void 0 : paths.isNode);
         await generatorInstance.init();
         if (generator.output) {
           generator.output = path_1.default.resolve(baseDir, generator.output);
@@ -56751,6 +56764,29 @@ var require_read_pkg_up = __commonJS2((exports2, module2) => {
   };
 });
 
+// ../sdk/dist/utils/hasYarn.js
+var require_hasYarn = __commonJS2((exports2) => {
+  "use strict";
+  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
+    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  };
+  Object.defineProperty(exports2, "__esModule", {value: true});
+  exports2.hasYarn = void 0;
+  const execa_12 = __importDefault2(require_execa2());
+  async function hasYarn(packageDir) {
+    try {
+      await execa_12.default.command("yarn --version", {
+        shell: true,
+        cwd: packageDir
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  exports2.hasYarn = hasYarn;
+});
+
 // ../sdk/dist/getPackedPackage.js
 var require_getPackedPackage = __commonJS2((exports2) => {
   "use strict";
@@ -56770,7 +56806,10 @@ var require_getPackedPackage = __commonJS2((exports2) => {
   const util_12 = require("util");
   const rimraf_1 = __importDefault2(require_rimraf2());
   const read_pkg_up_1 = __importDefault2(require_read_pkg_up());
+  const hasYarn_1 = require_hasYarn();
   const del = util_12.promisify(rimraf_1.default);
+  const readdir2 = util_12.promisify(fs_12.default.readdir);
+  const rename2 = util_12.promisify(fs_12.default.rename);
   async function getPackedPackage(name, target, packageDir) {
     packageDir = packageDir || resolve_pkg_1.default(name, {cwd: __dirname}) || resolve_pkg_1.default(name, {cwd: target});
     if (!packageDir) {
@@ -56789,10 +56828,16 @@ var require_getPackedPackage = __commonJS2((exports2) => {
     }
     const tmpDir = tempy_1.default.directory();
     const archivePath = path_12.default.join(tmpDir, `package.tgz`);
-    await execa_12.default.command(`yarn pack -f ${archivePath}`, {
+    const isYarn = await hasYarn_1.hasYarn(packageDir);
+    const packCMD = isYarn ? `yarn pack -f ${archivePath}` : `npm pack ${packageDir}`;
+    await execa_12.default.command(packCMD, {
       shell: true,
-      cwd: packageDir
+      cwd: isYarn ? packageDir : tmpDir
     });
+    if (!isYarn) {
+      const filename = (await readdir2(tmpDir))[0];
+      await rename2(path_12.default.join(tmpDir, filename), archivePath);
+    }
     await tar_1.default.extract({
       cwd: tmpDir,
       file: archivePath
@@ -57314,7 +57359,7 @@ var require_async12 = __commonJS2((exports2, module2) => {
         fn.call(this, args, callback);
       };
     };
-    function isObject(value) {
+    function isObject3(value) {
       var type = typeof value;
       return value != null && (type == "object" || type == "function");
     }
@@ -57348,7 +57393,7 @@ var require_async12 = __commonJS2((exports2, module2) => {
         } catch (e) {
           return callback(e);
         }
-        if (isObject(result) && typeof result.then === "function") {
+        if (isObject3(result) && typeof result.then === "function") {
           result.then(function(value) {
             invokeCallback(callback, null, value);
           }, function(err) {
@@ -57436,7 +57481,7 @@ var require_async12 = __commonJS2((exports2, module2) => {
     var genTag = "[object GeneratorFunction]";
     var proxyTag = "[object Proxy]";
     function isFunction(value) {
-      if (!isObject(value)) {
+      if (!isObject3(value)) {
         return false;
       }
       var tag = baseGetTag(value);
@@ -59362,10 +59407,10 @@ var require_util7 = __commonJS2((exports2) => {
     return objectToString(re) === "[object RegExp]";
   }
   exports2.isRegExp = isRegExp;
-  function isObject(arg) {
+  function isObject3(arg) {
     return typeof arg === "object" && arg !== null;
   }
-  exports2.isObject = isObject;
+  exports2.isObject = isObject3;
   function isDate(d2) {
     return objectToString(d2) === "[object Date]";
   }
@@ -61114,7 +61159,7 @@ var require_lodash = __commonJS2((exports2, module2) => {
     }
   }
   function baseKeysIn(object) {
-    if (!isObject(object)) {
+    if (!isObject3(object)) {
       return nativeKeysIn(object);
     }
     var isProto = isPrototype(object), result = [];
@@ -61174,7 +61219,7 @@ var require_lodash = __commonJS2((exports2, module2) => {
     return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
   }
   function isIterateeCall(value, index, object) {
-    if (!isObject(object)) {
+    if (!isObject3(object)) {
       return false;
     }
     var type = typeof index;
@@ -61210,13 +61255,13 @@ var require_lodash = __commonJS2((exports2, module2) => {
     return isObjectLike(value) && isArrayLike(value);
   }
   function isFunction(value) {
-    var tag = isObject(value) ? objectToString.call(value) : "";
+    var tag = isObject3(value) ? objectToString.call(value) : "";
     return tag == funcTag || tag == genTag;
   }
   function isLength(value) {
     return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER2;
   }
-  function isObject(value) {
+  function isObject3(value) {
     var type = typeof value;
     return !!value && (type == "object" || type == "function");
   }
@@ -61294,13 +61339,13 @@ var require_lodash2 = __commonJS2((exports2, module2) => {
     return isObjectLike(value) && isArrayLike(value);
   }
   function isFunction(value) {
-    var tag = isObject(value) ? objectToString.call(value) : "";
+    var tag = isObject3(value) ? objectToString.call(value) : "";
     return tag == funcTag || tag == genTag;
   }
   function isLength(value) {
     return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER2;
   }
-  function isObject(value) {
+  function isObject3(value) {
     var type = typeof value;
     return !!value && (type == "object" || type == "function");
   }
@@ -61619,7 +61664,7 @@ var require_lodash3 = __commonJS2((exports2, module2) => {
     return result;
   }
   function baseIsNative(value) {
-    if (!isObject(value) || isMasked(value)) {
+    if (!isObject3(value) || isMasked(value)) {
       return false;
     }
     var pattern = isFunction(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
@@ -61689,13 +61734,13 @@ var require_lodash3 = __commonJS2((exports2, module2) => {
     return isObjectLike(value) && isArrayLike(value);
   }
   function isFunction(value) {
-    var tag = isObject(value) ? objectToString.call(value) : "";
+    var tag = isObject3(value) ? objectToString.call(value) : "";
     return tag == funcTag || tag == genTag;
   }
   function isLength(value) {
     return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER2;
   }
-  function isObject(value) {
+  function isObject3(value) {
     var type = typeof value;
     return !!value && (type == "object" || type == "function");
   }
@@ -61977,7 +62022,7 @@ var require_lodash4 = __commonJS2((exports2, module2) => {
     return result;
   }
   function baseIsNative(value) {
-    if (!isObject(value) || isMasked(value)) {
+    if (!isObject3(value) || isMasked(value)) {
       return false;
     }
     var pattern = isFunction(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
@@ -62090,13 +62135,13 @@ var require_lodash4 = __commonJS2((exports2, module2) => {
     return isObjectLike(value) && isArrayLike(value);
   }
   function isFunction(value) {
-    var tag = isObject(value) ? objectToString.call(value) : "";
+    var tag = isObject3(value) ? objectToString.call(value) : "";
     return tag == funcTag || tag == genTag;
   }
   function isLength(value) {
     return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER2;
   }
-  function isObject(value) {
+  function isObject3(value) {
     var type = typeof value;
     return !!value && (type == "object" || type == "function");
   }
@@ -72110,25 +72155,33 @@ You can either provide it with ${chalk_12.default.greenBright("--schema")}, set 
   }
 });
 
-// ../../node_modules/.pnpm/arg@4.1.3/node_modules/arg/index.js
+// ../../node_modules/.pnpm/arg@5.0.0/node_modules/arg/index.js
 var require_arg = __commonJS2((exports2, module2) => {
   const flagSymbol = Symbol("arg flag");
+  class ArgError extends Error {
+    constructor(msg, code) {
+      super(msg);
+      this.name = "ArgError";
+      this.code = code;
+      Object.setPrototypeOf(this, ArgError.prototype);
+    }
+  }
   function arg(opts, {argv = process.argv.slice(2), permissive = false, stopAtPositional = false} = {}) {
     if (!opts) {
-      throw new Error("Argument specification object is required");
+      throw new ArgError("argument specification object is required", "ARG_CONFIG_NO_SPEC");
     }
     const result = {_: []};
     const aliases = {};
     const handlers = {};
     for (const key of Object.keys(opts)) {
       if (!key) {
-        throw new TypeError("Argument key cannot be an empty string");
+        throw new ArgError("argument key cannot be an empty string", "ARG_CONFIG_EMPTY_KEY");
       }
       if (key[0] !== "-") {
-        throw new TypeError(`Argument key must start with '-' but found: '${key}'`);
+        throw new ArgError(`argument key must start with '-' but found: '${key}'`, "ARG_CONFIG_NONOPT_KEY");
       }
       if (key.length === 1) {
-        throw new TypeError(`Argument key must have a name; singular '-' keys are not allowed: ${key}`);
+        throw new ArgError(`argument key must have a name; singular '-' keys are not allowed: ${key}`, "ARG_CONFIG_NONAME_KEY");
       }
       if (typeof opts[key] === "string") {
         aliases[key] = opts[key];
@@ -72146,10 +72199,10 @@ var require_arg = __commonJS2((exports2, module2) => {
       } else if (typeof type === "function") {
         isFlag = type === Boolean || type[flagSymbol] === true;
       } else {
-        throw new TypeError(`Type missing or not a function or valid array type: ${key}`);
+        throw new ArgError(`type missing or not a function or valid array type: ${key}`, "ARG_CONFIG_VAD_TYPE");
       }
       if (key[1] !== "-" && key.length > 2) {
-        throw new TypeError(`Short argument keys (with a single hyphen) must have only one character: ${key}`);
+        throw new ArgError(`short argument keys (with a single hyphen) must have only one character: ${key}`, "ARG_CONFIG_SHORTOPT_TOOLONG");
       }
       handlers[key] = [type, isFlag];
     }
@@ -72177,21 +72230,19 @@ var require_arg = __commonJS2((exports2, module2) => {
               result._.push(arg2);
               continue;
             } else {
-              const err = new Error(`Unknown or unexpected option: ${originalArgName}`);
-              err.code = "ARG_UNKNOWN_OPTION";
-              throw err;
+              throw new ArgError(`unknown or unexpected option: ${originalArgName}`, "ARG_UNKNOWN_OPTION");
             }
           }
           const [type, isFlag] = handlers[argName];
           if (!isFlag && j + 1 < separatedArguments.length) {
-            throw new TypeError(`Option requires argument (but was followed by another short argument): ${originalArgName}`);
+            throw new ArgError(`option requires argument (but was followed by another short argument): ${originalArgName}`, "ARG_MISSING_REQUIRED_SHORTARG");
           }
           if (isFlag) {
             result[argName] = type(true, argName, result[argName]);
           } else if (argStr === void 0) {
             if (argv.length < i + 2 || argv[i + 1].length > 1 && argv[i + 1][0] === "-" && !(argv[i + 1].match(/^-?\d*(\.(?=\d))?\d*$/) && (type === Number || typeof BigInt !== "undefined" && type === BigInt))) {
               const extended = originalArgName === argName ? "" : ` (alias for ${argName})`;
-              throw new Error(`Option requires argument: ${originalArgName}${extended}`);
+              throw new ArgError(`option requires argument: ${originalArgName}${extended}`, "ARG_MISSING_REQUIRED_LONGARG");
             }
             result[argName] = type(argv[i + 1], argName, result[argName]);
             ++i;
@@ -72210,6 +72261,7 @@ var require_arg = __commonJS2((exports2, module2) => {
     return fn;
   };
   arg.COUNT = arg.flag((v, name, existingCount) => (existingCount || 0) + 1);
+  arg.ArgError = ArgError;
   module2.exports = arg;
 });
 
@@ -75598,7 +75650,7 @@ function inputTypeToJson(input, isRequired, nameOnly = false) {
   const inputType = input;
   const showDeepType = isRequired && inputType.fields.every((arg) => {
     var _a;
-    return arg.inputTypes[0].kind === "object" || ((_a = arg.inputTypes[1]) == null ? void 0 : _a.kind) === "object";
+    return arg.inputTypes[0].location === "inputObjectTypes" || ((_a = arg.inputTypes[1]) == null ? void 0 : _a.location) === "inputObjectTypes";
   });
   if (nameOnly) {
     return getInputTypeName(input);
@@ -75634,7 +75686,6 @@ function lowerCase(name) {
 // src/runtime/dmmf.ts
 class DMMFClass {
   constructor({datamodel, schema, mappings}) {
-    this.outputTypeMap = {};
     this.outputTypeToMergedOutputType = (outputType) => {
       const model = this.modelMap[outputType.name];
       return {
@@ -75647,34 +75698,47 @@ class DMMFClass {
     this.schema = schema;
     this.mappings = mappings;
     this.enumMap = this.getEnumMap();
+    this.datamodelEnumMap = this.getDatamodelEnumMap();
     this.queryType = this.getQueryType();
     this.mutationType = this.getMutationType();
     this.modelMap = this.getModelMap();
     this.outputTypes = this.getOutputTypes();
     this.outputTypeMap = this.getMergedOutputTypeMap();
-    this.resolveOutputTypes(this.outputTypes);
-    this.inputTypes = this.schema.inputTypes;
+    this.resolveOutputTypes();
+    this.inputObjectTypes = this.schema.inputObjectTypes;
     this.inputTypeMap = this.getInputTypeMap();
-    this.resolveInputTypes(this.inputTypes);
-    this.resolveFieldArgumentTypes(this.outputTypes, this.inputTypeMap);
+    this.resolveInputTypes();
+    this.resolveFieldArgumentTypes();
     this.mappingsMap = this.getMappingsMap();
     this.queryType = this.outputTypeMap.Query;
     this.mutationType = this.outputTypeMap.Mutation;
     this.outputTypes = this.outputTypes;
     this.rootFieldMap = this.getRootFieldMap();
   }
-  resolveOutputTypes(types) {
-    for (const type of types) {
+  resolveOutputTypes() {
+    for (const type of this.outputTypes.model) {
       for (const field of type.fields) {
         if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
-          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
+          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
+        }
+      }
+      type.fieldMap = keyBy(type.fields, "name");
+    }
+    for (const type of this.outputTypes.prisma) {
+      for (const field of type.fields) {
+        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
+          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
         }
       }
       type.fieldMap = keyBy(type.fields, "name");
     }
   }
-  resolveInputTypes(types) {
-    for (const type of types) {
+  resolveInputTypes() {
+    const inputTypes = this.inputObjectTypes.prisma;
+    if (this.inputObjectTypes.model) {
+      inputTypes.push(...this.inputObjectTypes.model);
+    }
+    for (const type of inputTypes) {
       for (const field of type.fields) {
         const first = field.inputTypes[0].type;
         if (typeof first === "string" && !ScalarTypeTable[first] && (this.inputTypeMap[first] || this.enumMap[first])) {
@@ -75688,42 +75752,71 @@ class DMMFClass {
       type.fieldMap = keyBy(type.fields, "name");
     }
   }
-  resolveFieldArgumentTypes(types, inputTypeMap) {
-    for (const type of types) {
+  resolveFieldArgumentTypes() {
+    for (const type of this.outputTypes.prisma) {
       for (const field of type.fields) {
         for (const arg of field.args) {
           const first = arg.inputTypes[0].type;
           if (typeof first === "string" && !ScalarTypeTable[first]) {
-            arg.inputTypes[0].type = inputTypeMap[first] || this.enumMap[first] || arg.inputTypes[0].type;
+            arg.inputTypes[0].type = this.inputTypeMap[first] || this.enumMap[first] || arg.inputTypes[0].type;
           }
           const second = arg.inputTypes[1] && arg.inputTypes[1].type;
           if (second && typeof second === "string" && !ScalarTypeTable[second]) {
-            arg.inputTypes[1].type = inputTypeMap[second] || this.enumMap[second] || arg.inputTypes[1].type;
+            arg.inputTypes[1].type = this.inputTypeMap[second] || this.enumMap[second] || arg.inputTypes[1].type;
+          }
+        }
+      }
+    }
+    for (const type of this.outputTypes.model) {
+      for (const field of type.fields) {
+        for (const arg of field.args) {
+          const first = arg.inputTypes[0].type;
+          if (typeof first === "string" && !ScalarTypeTable[first]) {
+            arg.inputTypes[0].type = this.inputTypeMap[first] || this.enumMap[first] || arg.inputTypes[0].type;
+          }
+          const second = arg.inputTypes[1] && arg.inputTypes[1].type;
+          if (second && typeof second === "string" && !ScalarTypeTable[second]) {
+            arg.inputTypes[1].type = this.inputTypeMap[second] || this.enumMap[second] || arg.inputTypes[1].type;
           }
         }
       }
     }
   }
   getQueryType() {
-    return this.schema.outputTypes.find((t) => t.name === "Query");
+    return this.schema.outputObjectTypes.prisma.find((t) => t.name === "Query");
   }
   getMutationType() {
-    return this.schema.outputTypes.find((t) => t.name === "Mutation");
+    return this.schema.outputObjectTypes.prisma.find((t) => t.name === "Mutation");
   }
   getOutputTypes() {
-    return this.schema.outputTypes.map(this.outputTypeToMergedOutputType);
+    return {
+      model: this.schema.outputObjectTypes.model.map(this.outputTypeToMergedOutputType),
+      prisma: this.schema.outputObjectTypes.prisma.map(this.outputTypeToMergedOutputType)
+    };
+  }
+  getDatamodelEnumMap() {
+    return keyBy(this.datamodel.enums, "name");
   }
   getEnumMap() {
-    return keyBy(this.schema.enums, "name");
+    return {
+      ...keyBy(this.schema.enumTypes.prisma, "name"),
+      ...this.schema.enumTypes.model ? keyBy(this.schema.enumTypes.model, "name") : void 0
+    };
   }
   getModelMap() {
     return keyBy(this.datamodel.models, "name");
   }
   getMergedOutputTypeMap() {
-    return keyBy(this.outputTypes, "name");
+    return {
+      ...keyBy(this.outputTypes.model, "name"),
+      ...keyBy(this.outputTypes.prisma, "name")
+    };
   }
   getInputTypeMap() {
-    return keyBy(this.schema.inputTypes, "name");
+    return {
+      ...this.schema.inputObjectTypes.model ? keyBy(this.schema.inputObjectTypes.model, "name") : void 0,
+      ...keyBy(this.schema.inputObjectTypes.prisma, "name")
+    };
   }
   getMappingsMap() {
     return keyBy(this.mappings.modelOperations, "model");
@@ -76521,7 +76614,7 @@ function parseStack({callsite, renderPathRelative, originalMethod, onUs, showCol
       if (!theLine || theLine.trim() === "") {
         params.callsiteStr = ":";
       } else {
-        const prismaClientRegex = /(\S+(create|updateMany|deleteMany|update|delete|findMany|findOne)\()/;
+        const prismaClientRegex = /(\S+(create|updateMany|deleteMany|update|delete|findMany|findOne|findUnique)\()/;
         const match = theLine.match(prismaClientRegex);
         if (!match) {
           return params;
@@ -76562,6 +76655,17 @@ function flatten(array) {
 }
 function flatMap(array, callbackFn, thisArg) {
   return flatten(array.map(callbackFn, thisArg));
+}
+
+// src/runtime/utils/isObject.ts
+const notReallyObjects = {
+  "[object Date]": true,
+  "[object BitInt]": true,
+  "[object Uint8Array]": true,
+  "[object Function]": true
+};
+function isObject(value) {
+  return value && typeof value === "object" && !notReallyObjects[Object.prototype.toString.call(value)];
 }
 
 // src/runtime/query.ts
@@ -76639,8 +76743,8 @@ Note, that ${chalk9.default.bold("include")} statements only accept relation fie
 ${valueStr}
 `;
         }
-        if (error.requiredType.bestFittingType.kind === "enum") {
-          return `Argument ${chalk9.default.bold(error.argName)}: Provided value ${chalk9.default.redBright(valueStr)}${multilineValue ? "" : " "}of type ${chalk9.default.redBright(getGraphQLType(error.providedValue))} on ${chalk9.default.bold(`prisma.${this.children[0].name}`)} is not a ${chalk9.default.greenBright(wrapWithList(stringifyGraphQLType(error.requiredType.bestFittingType.kind), error.requiredType.bestFittingType.isList))}.
+        if (error.requiredType.bestFittingType.location === "enumTypes") {
+          return `Argument ${chalk9.default.bold(error.argName)}: Provided value ${chalk9.default.redBright(valueStr)}${multilineValue ? "" : " "}of type ${chalk9.default.redBright(getGraphQLType(error.providedValue))} on ${chalk9.default.bold(`prisma.${this.children[0].name}`)} is not a ${chalk9.default.greenBright(wrapWithList(stringifyGraphQLType(error.requiredType.bestFittingType.location), error.requiredType.bestFittingType.isList))}.
 \u2192 Possible values: ${error.requiredType.bestFittingType.type.values.map((v) => chalk9.default.greenBright(`${stringifyGraphQLType(error.requiredType.bestFittingType.type)}.${v}`)).join(", ")}`;
         }
         let typeStr = ".";
@@ -76715,7 +76819,7 @@ ${indent_string2.default(this.children.map(String).join("\n"), tab)}
         keyPaths.push(path4);
         const fieldType = fieldError.error.outputType;
         const {isInclude} = fieldError.error;
-        fieldType.fields.filter((field) => isInclude ? field.outputType.kind === "object" : true).forEach((field) => {
+        fieldType.fields.filter((field) => isInclude ? field.outputType.location === "outputObjectTypes" : true).forEach((field) => {
           const splittedPath = path4.split(".");
           missingItems.push({
             path: `${splittedPath.slice(0, splittedPath.length - 1).join(".")}.${field.name}`,
@@ -76733,7 +76837,7 @@ ${indent_string2.default(this.children.map(String).join("\n"), tab)}
         const selectPathArray = this.normalizePath(fieldError.path, select);
         const selectPath = selectPathArray.slice(0, selectPathArray.length - 1).join(".");
         const fieldType = fieldError.error.field.outputType.type;
-        fieldType.fields.filter((field) => fieldError.error.type === "emptyInclude" ? field.outputType.kind === "object" : true).forEach((field) => {
+        fieldType.fields.filter((field) => fieldError.error.type === "emptyInclude" ? field.outputType.location === "outputObjectTypes" : true).forEach((field) => {
           missingItems.push({
             path: `${selectPath}.${field.name}`,
             type: "true",
@@ -77062,7 +77166,7 @@ function makeDocument({
     outputType: {
       isList: false,
       type: rootType,
-      kind: "object"
+      location: "outputObjectTypes"
     },
     isRequired: true,
     name: rootTypeName
@@ -77091,7 +77195,7 @@ function selectionToFields(dmmf2, selection, schemaField, path4) {
       }));
       return acc;
     }
-    if (typeof value !== "boolean" && field.outputType.kind === "scalar" && field.name !== "executeRaw" && field.name !== "queryRaw" && outputType.name !== "Query" && !name.startsWith("aggregate") && field.name !== "count") {
+    if (typeof value !== "boolean" && field.outputType.location === "scalar" && field.name !== "executeRaw" && field.name !== "queryRaw" && outputType.name !== "Query" && !name.startsWith("aggregate") && field.name !== "count") {
       acc.push(new Field({
         name,
         children: [],
@@ -77117,7 +77221,7 @@ function selectionToFields(dmmf2, selection, schemaField, path4) {
     };
     const argsWithoutIncludeAndSelect = typeof value === "object" ? omit(value, ["include", "select"]) : void 0;
     const args = argsWithoutIncludeAndSelect ? objectToArgs(argsWithoutIncludeAndSelect, transformedField, [], typeof field === "string" ? void 0 : field.outputType.type) : void 0;
-    const isRelation = field.outputType.kind === "object";
+    const isRelation = field.outputType.location === "outputObjectTypes";
     if (value) {
       if (value.select && value.include) {
         acc.push(new Field({
@@ -77151,9 +77255,9 @@ function selectionToFields(dmmf2, selection, schemaField, path4) {
           }));
           return acc;
         }
-        if (field.outputType.kind === "object") {
+        if (field.outputType.location === "outputObjectTypes") {
           const fieldOutputType = field.outputType.type;
-          const allowedKeys = fieldOutputType.fields.filter((f) => f.outputType.kind === "object").map((f) => f.name);
+          const allowedKeys = fieldOutputType.fields.filter((f) => f.outputType.location === "outputObjectTypes").map((f) => f.name);
           const invalidKeys = keys2.filter((key) => !allowedKeys.includes(key));
           if (invalidKeys.length > 0) {
             acc.push(...invalidKeys.map((invalidKey) => new Field({
@@ -77230,7 +77334,7 @@ function selectionToFields(dmmf2, selection, schemaField, path4) {
 }
 function getDefaultSelection(outputType) {
   return outputType.fields.reduce((acc, f) => {
-    if (f.outputType.kind === "scalar" || f.outputType.kind === "enum") {
+    if (f.outputType.location === "scalar" || f.outputType.location === "enumTypes") {
       acc[f.name] = true;
     } else {
       if (f.outputType.type.isEmbedded) {
@@ -77246,7 +77350,7 @@ function getInvalidTypeArg(key, value, arg, bestFittingType) {
   const arrg = new Arg({
     key,
     value,
-    isEnum: bestFittingType.kind === "enum",
+    isEnum: bestFittingType.location === "enumTypes",
     argType: bestFittingType.type,
     error: {
       type: "invalidType",
@@ -77351,7 +77455,7 @@ function tryInferArgs(key, value, arg, inputType) {
     return new Arg({
       key,
       value,
-      isEnum: inputType.kind === "enum",
+      isEnum: inputType.location === "enumTypes",
       error: {
         type: "missingArg",
         missingName: key,
@@ -77368,7 +77472,7 @@ function tryInferArgs(key, value, arg, inputType) {
       return new Arg({
         key,
         value,
-        isEnum: inputType.kind === "enum",
+        isEnum: inputType.location === "enumTypes",
         error: {
           type: "invalidNullArg",
           name: key,
@@ -77381,7 +77485,7 @@ function tryInferArgs(key, value, arg, inputType) {
   }
   if (!inputType.isList) {
     if (isInputArgType(inputType.type)) {
-      if (typeof value !== "object") {
+      if (typeof value !== "object" || inputType.location === "inputObjectTypes" && !isObject(value)) {
         return getInvalidTypeArg(key, value, arg, inputType);
       } else {
         let val = cleanObject(value);
@@ -77405,7 +77509,7 @@ function tryInferArgs(key, value, arg, inputType) {
         return new Arg({
           key,
           value: val === null ? null : objectToArgs(val, inputType.type, arg.inputTypes),
-          isEnum: inputType.kind === "enum",
+          isEnum: inputType.location === "enumTypes",
           error,
           argType: inputType.type,
           schemaArg: arg
@@ -77420,7 +77524,7 @@ function tryInferArgs(key, value, arg, inputType) {
       value = [value];
     }
   }
-  if (inputType.kind === "enum" || inputType.kind === "scalar") {
+  if (inputType.location === "enumTypes" || inputType.location === "scalar") {
     return scalarToArg(key, value, arg, inputType);
   }
   const argInputType = inputType.type;
@@ -77480,7 +77584,7 @@ function scalarToArg(key, value, arg, inputType) {
     return new Arg({
       key,
       value,
-      isEnum: arg.inputTypes[0].kind === "enum",
+      isEnum: arg.inputTypes[0].location === "enumTypes",
       argType: inputType.type,
       schemaArg: arg
     });
@@ -77532,7 +77636,7 @@ function objectToArgs(initialObj, inputType, possibilities, outputType) {
       return new Arg({
         key: arg.name,
         value: void 0,
-        isEnum: argInputType.kind === "enum",
+        isEnum: argInputType.location === "enumTypes",
         error: {
           type: "missingArg",
           missingName: arg.name,
@@ -77596,7 +77700,7 @@ function mapScalars({field, data}) {
         }
       }
     }
-    if (child.schemaField && child.schemaField.outputType.kind === "object") {
+    if (child.schemaField && child.schemaField.outputType.location === "outputObjectTypes") {
       if (Array.isArray(data)) {
         for (const entry of data) {
           mapScalars({field: child, data: entry[child.name]});
@@ -77986,6 +78090,7 @@ function getAlternative(str, options) {
 const debug3 = debug2.default("prisma-client");
 const actionOperationMap = {
   findOne: "query",
+  findUnique: "query",
   findFirst: "query",
   findMany: "query",
   count: "query",
@@ -78072,14 +78177,9 @@ function getPrismaClient(config2) {
           env: loadedEnv ? loadedEnv.parsed : {},
           flags: [],
           clientVersion: config2.clientVersion,
-          enableExperimental: mapPreviewFeatures.mapPreviewFeatures(previewFeatures),
-          useUds: internal.useUds
+          enableExperimental: mapPreviewFeatures.mapPreviewFeatures(previewFeatures)
         };
-        const sanitizedEngineConfig = omit(this._engineConfig, [
-          "env",
-          "datasources"
-        ]);
-        debug3({engineConfig: sanitizedEngineConfig});
+        debug3({clientVersion: config2.clientVersion});
         this._engine = new NodeEngine2.NodeEngine(this._engineConfig);
         this._fetcher = new PrismaClientFetcher(this, false, this._hooks);
         if (options.log) {
@@ -78104,10 +78204,6 @@ function getPrismaClient(config2) {
         throw e;
       }
     }
-    use(...args) {
-      console.warn(`${chalk11.default.yellow("warn")} prisma.use() is deprecated, please use prisma.$use() instead`);
-      return this.$use(...args);
-    }
     $use(namespace, cb) {
       if (typeof namespace === "function") {
         this._middlewares.push(namespace);
@@ -78122,10 +78218,6 @@ function getPrismaClient(config2) {
       } else {
         throw new Error(`Invalid middleware ${namespace}`);
       }
-    }
-    on(eventType, callback) {
-      console.warn(`${chalk11.default.yellow("warn")} prisma.on() is deprecated, please use prisma.$on() instead`);
-      return this.$on(eventType, callback);
     }
     $on(eventType, callback) {
       if (eventType === "beforeExit") {
@@ -78151,10 +78243,6 @@ function getPrismaClient(config2) {
         });
       }
     }
-    connect() {
-      console.warn(`${chalk11.default.yellow("warn")} prisma.connect() is deprecated, please use prisma.$connect() instead`);
-      return this.$connect();
-    }
     async $connect() {
       try {
         return this._engine.start();
@@ -78170,10 +78258,6 @@ function getPrismaClient(config2) {
       delete this._disconnectionPromise;
       delete this._getConfigPromise;
     }
-    disconnect() {
-      console.warn(`${chalk11.default.yellow("warn")} prisma.disconnect() is deprecated, please use prisma.$disconnect() instead`);
-      return this.$disconnect();
-    }
     async $disconnect() {
       try {
         return this._engine.stop();
@@ -78185,10 +78269,6 @@ function getPrismaClient(config2) {
     async _getActiveProvider() {
       const configResult = await this._engine.getConfig();
       return configResult.datasources[0].activeProvider;
-    }
-    executeRaw(stringOrTemplateStringsArray, ...values) {
-      console.warn(`${chalk11.default.yellow("warn")} prisma.executeRaw() is deprecated, please use prisma.$executeRaw() instead`);
-      return this.$executeRaw(stringOrTemplateStringsArray, ...values);
     }
     async $executeRawInternal(stringOrTemplateStringsArray, ...values) {
       let query3 = "";
@@ -78279,10 +78359,6 @@ function getPrismaClient(config2) {
         return new Error().stack;
       }
       return void 0;
-    }
-    queryRaw(stringOrTemplateStringsArray, ...values) {
-      console.warn(`${chalk11.default.yellow("warn")} prisma.queryRaw() is deprecated, please use prisma.$queryRaw() instead`);
-      return this.$queryRaw(stringOrTemplateStringsArray, ...values);
     }
     async $queryRawInternal(stringOrTemplateStringsArray, ...values) {
       let query3 = "";
@@ -78394,10 +78470,6 @@ new PrismaClient({
         callsite: this._getCallsite()
       });
     }
-    transaction(promises) {
-      console.warn(`${chalk11.default.yellow("warn")} prisma.transaction() is deprecated, please use prisma.$transaction() instead`);
-      return this.$transaction(promises);
-    }
     async $transactionInternal(promises) {
       for (const p of promises) {
         if (!p) {
@@ -78468,6 +78540,8 @@ new PrismaClient({
       if ((action === "executeRaw" || action === "queryRaw") && model) {
         throw new Error(`executeRaw and queryRaw can't be executed on a model basis. The model ${model} has been provided`);
       }
+      if (action === "findOne")
+        action = "findUnique";
       let rootField;
       const operation = actionOperationMap[action];
       if (action === "executeRaw" || action === "queryRaw") {
@@ -78539,6 +78613,9 @@ new PrismaClient({
           dataPath,
           modelName
         }) => {
+          if (actionName === "findOne") {
+            console.warn(`${chalk11.default.yellow("warn(prisma) ")} findOne is deprecated. Please use findUnique instead.`);
+          }
           dataPath = dataPath != null ? dataPath : [];
           const clientMethod = `${lowerCaseModel}.${actionName}`;
           let requestPromise;
@@ -78629,7 +78706,11 @@ new PrismaClient({
           plural: true,
           aggregate: true
         };
-        const delegate = Object.entries(mapping).reduce((acc, [actionName, rootField]) => {
+        const newMapping = {
+          ...mapping,
+          findOne: mapping.findUnique
+        };
+        const delegate = Object.entries(newMapping).reduce((acc, [actionName, rootField]) => {
           if (!denyList[actionName]) {
             const operation = getOperation(actionName);
             acc[actionName] = (args) => clients[mapping.model]({
@@ -78701,7 +78782,7 @@ class PrismaClientFetcher {
         if (request.runInTransaction) {
           return "transaction-batch";
         }
-        if (!request.document.children[0].name.startsWith("findOne")) {
+        if (!(request.document.children[0].name.startsWith("findOne") || request.document.children[0].name.startsWith("findUnique"))) {
           return null;
         }
         const selectionSet = request.document.children[0].children.join(",");
@@ -78812,7 +78893,7 @@ class PrismaClientFetcher {
   }
 }
 function getOperation(action) {
-  if (action === generator_helper.DMMF.ModelAction.findMany || action === generator_helper.DMMF.ModelAction.findOne || action === generator_helper.DMMF.ModelAction.findFirst) {
+  if (action === generator_helper.DMMF.ModelAction.findMany || action === generator_helper.DMMF.ModelAction.findUnique || action === "findOne" || action === generator_helper.DMMF.ModelAction.findFirst) {
     return "query";
   }
   return "mutation";

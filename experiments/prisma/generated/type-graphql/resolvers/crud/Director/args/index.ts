@@ -4,7 +4,7 @@ export { DeleteDirectorArgs } from "./DeleteDirectorArgs";
 export { DeleteManyDirectorArgs } from "./DeleteManyDirectorArgs";
 export { FindFirstDirectorArgs } from "./FindFirstDirectorArgs";
 export { FindManyDirectorArgs } from "./FindManyDirectorArgs";
-export { FindOneDirectorArgs } from "./FindOneDirectorArgs";
+export { FindUniqueDirectorArgs } from "./FindUniqueDirectorArgs";
 export { UpdateDirectorArgs } from "./UpdateDirectorArgs";
 export { UpdateManyDirectorArgs } from "./UpdateManyDirectorArgs";
 export { UpsertDirectorArgs } from "./UpsertDirectorArgs";

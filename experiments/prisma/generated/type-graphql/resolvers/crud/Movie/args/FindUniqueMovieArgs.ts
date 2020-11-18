@@ -3,7 +3,7 @@ import GraphQLJSON from "graphql-type-json";
 import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
-export class FindOneMovieArgs {
+export class FindUniqueMovieArgs {
   @TypeGraphQL.Field(_type => MovieWhereUniqueInput, { nullable: false })
   where!: MovieWhereUniqueInput;
 }
