@@ -1,16 +1,25 @@
 import * as semVer from "semver";
 
-export function getInstalledPrismaVersion(): string {
+function shouldSkipPrismaVersionCheck() {
+  const value = process.env.SKIP_PRISMA_VERSION_CHECK;
+  return value === "true" || value === "TRUE" || value === "1";
+}
+
+function getInstalledPrismaVersion(): string {
   const prismaPackageJson = require("@prisma/cli/package.json");
   return prismaPackageJson.version;
 }
 
-export function getPeerDependencyPrismaRequirement(): string {
+function getPeerDependencyPrismaRequirement(): string {
   const ownPackageJson = require("../../package.json");
   return ownPackageJson.peerDependencies["@prisma/cli"];
 }
 
 export function ensureInstalledCorrectPrismaPackage() {
+  if (shouldSkipPrismaVersionCheck()) {
+    return;
+  }
+
   const installedVersion = getInstalledPrismaVersion();
   const versionRequirement = getPeerDependencyPrismaRequirement();
 
