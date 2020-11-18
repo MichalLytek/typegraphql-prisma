@@ -3,6 +3,8 @@
   "version": "0.8.5",
   "scripts": {
     "build": "tsc",
+    "package:build": "./package.sh",
+    "package:publish": "cd package *&& npm publish",
     "check:type": "tsc --noEmit",
     "check:experiments": "cd ./experiments && tsc --noEmit",
     "check:format": "prettier --check ./**/*.{js,json,ts,tsx}",
