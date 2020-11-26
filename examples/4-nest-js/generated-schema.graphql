@@ -130,7 +130,13 @@ input PostCreateInput {
 
 input PostCreateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
   create: [PostCreateWithoutAuthorInput!]
+}
+
+input PostCreateOrConnectWithoutauthorInput {
+  create: PostCreateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
 }
 
 input PostCreateWithoutAuthorInput {
@@ -191,15 +197,6 @@ input PostUpdateInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input PostUpdateManyDataInput {
-  content: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  published: BoolFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
 input PostUpdateManyMutationInput {
   content: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -211,22 +208,23 @@ input PostUpdateManyMutationInput {
 
 input PostUpdateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
   create: [PostCreateWithoutAuthorInput!]
   delete: [PostWhereUniqueInput!]
   deleteMany: [PostScalarWhereInput!]
   disconnect: [PostWhereUniqueInput!]
   set: [PostWhereUniqueInput!]
   update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  updateMany: [PostUpdateManyWithWhereNestedInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
   upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
-input PostUpdateManyWithWhereNestedInput {
-  data: PostUpdateManyDataInput!
+input PostUpdateManyWithWhereWithoutAuthorInput {
+  data: PostUpdateManyMutationInput!
   where: PostScalarWhereInput!
 }
 
-input PostUpdateWithoutAuthorDataInput {
+input PostUpdateWithoutAuthorInput {
   content: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -236,13 +234,13 @@ input PostUpdateWithoutAuthorDataInput {
 }
 
 input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  data: PostUpdateWithoutAuthorDataInput!
+  data: PostUpdateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutAuthorInput {
   create: PostCreateWithoutAuthorInput!
-  update: PostUpdateWithoutAuthorDataInput!
+  update: PostUpdateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
 
@@ -330,7 +328,13 @@ input UserCreateInput {
 
 input UserCreateOneWithoutPostsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutpostsInput
   create: UserCreateWithoutPostsInput
+}
+
+input UserCreateOrConnectWithoutpostsInput {
+  create: UserCreateWithoutPostsInput!
+  where: UserWhereUniqueInput!
 }
 
 input UserCreateWithoutPostsInput {
@@ -371,14 +375,15 @@ input UserUpdateManyMutationInput {
 
 input UserUpdateOneWithoutPostsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutpostsInput
   create: UserCreateWithoutPostsInput
   delete: Boolean
   disconnect: Boolean
-  update: UserUpdateWithoutPostsDataInput
+  update: UserUpdateWithoutPostsInput
   upsert: UserUpsertWithoutPostsInput
 }
 
-input UserUpdateWithoutPostsDataInput {
+input UserUpdateWithoutPostsInput {
   email: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
@@ -386,7 +391,7 @@ input UserUpdateWithoutPostsDataInput {
 
 input UserUpsertWithoutPostsInput {
   create: UserCreateWithoutPostsInput!
-  update: UserUpdateWithoutPostsDataInput!
+  update: UserUpdateWithoutPostsInput!
 }
 
 input UserWhereInput {

@@ -7,9 +7,9 @@ import { PrismaClient } from "@prisma/client";
 import {
   UserRelationsResolver,
   PostRelationsResolver,
-  FindOnePostResolver,
+  FindUniquePostResolver,
   FindManyPostResolver,
-  FindOneUserResolver,
+  FindUniqueUserResolver,
   FindManyUserResolver,
   AggregatePostResolver,
   AggregateUserResolver,
@@ -27,11 +27,11 @@ async function main() {
       UserRelationsResolver,
       PostRelationsResolver,
       // instead of PostCrudResolver, expose only find and aggregate  actions
-      FindOnePostResolver,
+      FindUniquePostResolver,
       FindManyPostResolver,
       AggregatePostResolver,
       // instead of UserCrudResolver, expose only find and aggregate actions
-      FindOneUserResolver,
+      FindUniqueUserResolver,
       FindManyUserResolver,
       AggregateUserResolver,
     ],

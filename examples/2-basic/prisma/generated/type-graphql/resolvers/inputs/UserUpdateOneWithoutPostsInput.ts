@@ -1,8 +1,9 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "@prisma/client";
+import { UserCreateOrConnectWithoutpostsInput } from "../inputs/UserCreateOrConnectWithoutpostsInput";
 import { UserCreateWithoutPostsInput } from "../inputs/UserCreateWithoutPostsInput";
-import { UserUpdateWithoutPostsDataInput } from "../inputs/UserUpdateWithoutPostsDataInput";
+import { UserUpdateWithoutPostsInput } from "../inputs/UserUpdateWithoutPostsInput";
 import { UserUpsertWithoutPostsInput } from "../inputs/UserUpsertWithoutPostsInput";
 import { UserWhereUniqueInput } from "../inputs/UserWhereUniqueInput";
 
@@ -35,15 +36,21 @@ export class UserUpdateOneWithoutPostsInput {
   })
   delete?: boolean | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateWithoutPostsDataInput, {
+  @TypeGraphQL.Field(_type => UserUpdateWithoutPostsInput, {
     nullable: true,
     description: undefined
   })
-  update?: UserUpdateWithoutPostsDataInput | undefined;
+  update?: UserUpdateWithoutPostsInput | undefined;
 
   @TypeGraphQL.Field(_type => UserUpsertWithoutPostsInput, {
     nullable: true,
     description: undefined
   })
   upsert?: UserUpsertWithoutPostsInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserCreateOrConnectWithoutpostsInput, {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: UserCreateOrConnectWithoutpostsInput | undefined;
 }

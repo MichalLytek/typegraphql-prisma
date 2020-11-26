@@ -7,7 +7,7 @@ import { DeleteManyUserArgs } from "./args/DeleteManyUserArgs";
 import { DeleteUserArgs } from "./args/DeleteUserArgs";
 import { FindFirstUserArgs } from "./args/FindFirstUserArgs";
 import { FindManyUserArgs } from "./args/FindManyUserArgs";
-import { FindOneUserArgs } from "./args/FindOneUserArgs";
+import { FindUniqueUserArgs } from "./args/FindUniqueUserArgs";
 import { UpdateManyUserArgs } from "./args/UpdateManyUserArgs";
 import { UpdateUserArgs } from "./args/UpdateUserArgs";
 import { UpsertUserArgs } from "./args/UpsertUserArgs";
@@ -21,8 +21,8 @@ export class UserCrudResolver {
     nullable: true,
     description: undefined
   })
-  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | null> {
-    return ctx.prisma.user.findOne(args);
+  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
+    return ctx.prisma.user.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => User, {

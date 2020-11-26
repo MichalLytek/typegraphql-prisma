@@ -1,9 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "@prisma/client";
+import { PostCreateOrConnectWithoutauthorInput } from "../inputs/PostCreateOrConnectWithoutauthorInput";
 import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorInput";
 import { PostScalarWhereInput } from "../inputs/PostScalarWhereInput";
-import { PostUpdateManyWithWhereNestedInput } from "../inputs/PostUpdateManyWithWhereNestedInput";
+import { PostUpdateManyWithWhereWithoutAuthorInput } from "../inputs/PostUpdateManyWithWhereWithoutAuthorInput";
 import { PostUpdateWithWhereUniqueWithoutAuthorInput } from "../inputs/PostUpdateWithWhereUniqueWithoutAuthorInput";
 import { PostUpsertWithWhereUniqueWithoutAuthorInput } from "../inputs/PostUpsertWithWhereUniqueWithoutAuthorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
@@ -49,11 +50,11 @@ export class PostUpdateManyWithoutAuthorInput {
   })
   update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [PostUpdateManyWithWhereNestedInput], {
+  @TypeGraphQL.Field(_type => [PostUpdateManyWithWhereWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
-  updateMany?: PostUpdateManyWithWhereNestedInput[] | undefined;
+  updateMany?: PostUpdateManyWithWhereWithoutAuthorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostScalarWhereInput], {
     nullable: true,
@@ -66,4 +67,10 @@ export class PostUpdateManyWithoutAuthorInput {
     description: undefined
   })
   upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithoutauthorInput], {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: PostCreateOrConnectWithoutauthorInput[] | undefined;
 }

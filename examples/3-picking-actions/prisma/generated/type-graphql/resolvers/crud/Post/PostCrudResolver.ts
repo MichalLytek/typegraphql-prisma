@@ -7,7 +7,7 @@ import { DeleteManyPostArgs } from "./args/DeleteManyPostArgs";
 import { DeletePostArgs } from "./args/DeletePostArgs";
 import { FindFirstPostArgs } from "./args/FindFirstPostArgs";
 import { FindManyPostArgs } from "./args/FindManyPostArgs";
-import { FindOnePostArgs } from "./args/FindOnePostArgs";
+import { FindUniquePostArgs } from "./args/FindUniquePostArgs";
 import { UpdateManyPostArgs } from "./args/UpdateManyPostArgs";
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
@@ -21,8 +21,8 @@ export class PostCrudResolver {
     nullable: true,
     description: undefined
   })
-  async post(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOnePostArgs): Promise<Post | null> {
-    return ctx.prisma.post.findOne(args);
+  async post(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniquePostArgs): Promise<Post | null> {
+    return ctx.prisma.post.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Post, {

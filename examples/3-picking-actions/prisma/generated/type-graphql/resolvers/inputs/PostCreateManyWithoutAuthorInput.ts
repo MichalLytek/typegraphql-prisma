@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "@prisma/client";
+import { PostCreateOrConnectWithoutauthorInput } from "../inputs/PostCreateOrConnectWithoutauthorInput";
 import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
@@ -20,4 +21,10 @@ export class PostCreateManyWithoutAuthorInput {
     description: undefined
   })
   connect?: PostWhereUniqueInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithoutauthorInput], {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: PostCreateOrConnectWithoutauthorInput[] | undefined;
 }
