@@ -398,10 +398,10 @@ declare class Args {
 interface ArgOptions {
     key: string;
     value: ArgValue;
-    argType?: DMMF.ArgType;
     isEnum?: boolean;
     error?: InvalidArgError;
     schemaArg?: DMMF.SchemaArg;
+    inputType?: DMMF.SchemaArgInputType;
 }
 declare class Arg {
     key: string;
@@ -410,9 +410,9 @@ declare class Arg {
     hasError: boolean;
     isEnum: boolean;
     schemaArg?: DMMF.SchemaArg;
-    argType?: DMMF.ArgType;
     isNullable: boolean;
-    constructor({ key, value, argType, isEnum, error, schemaArg, }: ArgOptions);
+    inputType?: DMMF.SchemaArgInputType;
+    constructor({ key, value, isEnum, error, schemaArg, inputType }: ArgOptions);
     _toString(value: ArgValue, key: string): string | undefined;
     toString(): string;
     collectErrors(): ArgError[];
@@ -529,6 +529,7 @@ interface DatasourceOverwrite {
 }
 interface EngineConfig {
     cwd?: string;
+    dirname?: string;
     datamodelPath: string;
     enableDebugLogs?: boolean;
     enableEngineDebugMode?: boolean;
@@ -587,6 +588,7 @@ declare class NodeEngine {
     private getConfigPromise?;
     private stopPromise?;
     private beforeExitListener?;
+    private dirname?;
     exitCode: number;
     /**
      * exiting is used to tell the .on('exit') hook, if the exit came from our script.
@@ -613,7 +615,7 @@ declare class NodeEngine {
     engineStartDeferred?: Deferred;
     engineStopDeferred?: StopDeferred;
     undici: Undici;
-    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, }: EngineConfig);
+    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname }: EngineConfig);
     private checkForTooManyEngines;
     private resolveCwd;
     on(event: 'query' | 'info' | 'warn' | 'error' | 'beforeExit', listener: (args?: any) => any): void;

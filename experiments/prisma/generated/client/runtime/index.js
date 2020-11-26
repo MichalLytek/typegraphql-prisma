@@ -2229,7 +2229,7 @@ var require_ms2 = __commonJS2((exports2, module2) => {
   }
 });
 
-// ../../node_modules/.pnpm/debug@4.2.0/node_modules/debug/src/common.js
+// ../../node_modules/.pnpm/debug@4.3.1/node_modules/debug/src/common.js
 var require_common4 = __commonJS2((exports2, module2) => {
   function setup(env2) {
     createDebug.debug = createDebug;
@@ -2239,10 +2239,10 @@ var require_common4 = __commonJS2((exports2, module2) => {
     createDebug.enable = enable;
     createDebug.enabled = enabled;
     createDebug.humanize = require_ms2();
+    createDebug.destroy = destroy;
     Object.keys(env2).forEach((key) => {
       createDebug[key] = env2[key];
     });
-    createDebug.instances = [];
     createDebug.names = [];
     createDebug.skips = [];
     createDebug.formatters = {};
@@ -2257,6 +2257,7 @@ var require_common4 = __commonJS2((exports2, module2) => {
     createDebug.selectColor = selectColor;
     function createDebug(namespace) {
       let prevTime;
+      let enableOverride = null;
       function debug4(...args) {
         if (!debug4.enabled) {
           return;
@@ -2275,7 +2276,7 @@ var require_common4 = __commonJS2((exports2, module2) => {
         let index = 0;
         args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
           if (match === "%%") {
-            return match;
+            return "%";
           }
           index++;
           const formatter = createDebug.formatters[format];
@@ -2292,24 +2293,22 @@ var require_common4 = __commonJS2((exports2, module2) => {
         logFn.apply(self2, args);
       }
       debug4.namespace = namespace;
-      debug4.enabled = createDebug.enabled(namespace);
       debug4.useColors = createDebug.useColors();
       debug4.color = createDebug.selectColor(namespace);
-      debug4.destroy = destroy;
       debug4.extend = extend;
+      debug4.destroy = createDebug.destroy;
+      Object.defineProperty(debug4, "enabled", {
+        enumerable: true,
+        configurable: false,
+        get: () => enableOverride === null ? createDebug.enabled(namespace) : enableOverride,
+        set: (v) => {
+          enableOverride = v;
+        }
+      });
       if (typeof createDebug.init === "function") {
         createDebug.init(debug4);
       }
-      createDebug.instances.push(debug4);
       return debug4;
-    }
-    function destroy() {
-      const index = createDebug.instances.indexOf(this);
-      if (index !== -1) {
-        createDebug.instances.splice(index, 1);
-        return true;
-      }
-      return false;
     }
     function extend(namespace, delimiter) {
       const newDebug = createDebug(this.namespace + (typeof delimiter === "undefined" ? ":" : delimiter) + namespace);
@@ -2333,10 +2332,6 @@ var require_common4 = __commonJS2((exports2, module2) => {
         } else {
           createDebug.names.push(new RegExp("^" + namespaces + "$"));
         }
-      }
-      for (i = 0; i < createDebug.instances.length; i++) {
-        const instance = createDebug.instances[i];
-        instance.enabled = createDebug.enabled(instance.namespace);
       }
     }
     function disable() {
@@ -2374,19 +2369,31 @@ var require_common4 = __commonJS2((exports2, module2) => {
       }
       return val;
     }
+    function destroy() {
+      console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+    }
     createDebug.enable(createDebug.load());
     return createDebug;
   }
   module2.exports = setup;
 });
 
-// ../../node_modules/.pnpm/debug@4.2.0/node_modules/debug/src/browser.js
+// ../../node_modules/.pnpm/debug@4.3.1/node_modules/debug/src/browser.js
 var require_browser2 = __commonJS2((exports2, module2) => {
   exports2.formatArgs = formatArgs;
   exports2.save = save;
   exports2.load = load;
   exports2.useColors = useColors;
   exports2.storage = localstorage();
+  exports2.destroy = (() => {
+    let warned = false;
+    return () => {
+      if (!warned) {
+        warned = true;
+        console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+      }
+    };
+  })();
   exports2.colors = [
     "#0000CC",
     "#0000FF",
@@ -2534,7 +2541,7 @@ var require_browser2 = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/debug@4.2.0/node_modules/debug/src/node.js
+// ../../node_modules/.pnpm/debug@4.3.1/node_modules/debug/src/node.js
 var require_node2 = __commonJS2((exports2, module2) => {
   const tty = require("tty");
   const util2 = require("util");
@@ -2544,6 +2551,8 @@ var require_node2 = __commonJS2((exports2, module2) => {
   exports2.save = save;
   exports2.load = load;
   exports2.useColors = useColors;
+  exports2.destroy = util2.deprecate(() => {
+  }, "Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
   exports2.colors = [6, 2, 3, 4, 5, 1];
   try {
     const supportsColor = require_supports_color2();
@@ -2693,7 +2702,7 @@ var require_node2 = __commonJS2((exports2, module2) => {
   const {formatters} = module2.exports;
   formatters.o = function(v) {
     this.inspectOpts.colors = this.useColors;
-    return util2.inspect(v, this.inspectOpts).replace(/\s*\n\s*/g, " ");
+    return util2.inspect(v, this.inspectOpts).split("\n").map((str) => str.trim()).join(" ");
   };
   formatters.O = function(v) {
     this.inspectOpts.colors = this.useColors;
@@ -2701,7 +2710,7 @@ var require_node2 = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/debug@4.2.0/node_modules/debug/src/index.js
+// ../../node_modules/.pnpm/debug@4.3.1/node_modules/debug/src/index.js
 var require_src3 = __commonJS2((exports2, module2) => {
   if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
     module2.exports = require_browser2();
@@ -4293,7 +4302,7 @@ If you want the Prisma team to look into it, please open the link above \u{1F64F
   }
 });
 
-// ../../node_modules/.pnpm/@prisma/engines@2.12.0-10.a4ef806349a7b17c41f45735ce4a36322e01c250/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma/engines@2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports) => {
   var __defineProperty = Object.defineProperty;
   var __hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -4329,13 +4338,13 @@ var require_dist9 = __commonJS2((exports) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.12.0-10.a4ef806349a7b17c41f45735ce4a36322e01c250",
+      version: "2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "a4ef806349a7b17c41f45735ce4a36322e01c250"
+        enginesVersion: "cf0680a1bfe8d5e743dc659cc7f08009f9587d58"
       },
       devDependencies: {
         "@types/node": "^14.11.8",
@@ -27025,7 +27034,7 @@ var require_NodeEngine = __commonJS2((exports) => {
   const engines = [];
   const socketPaths = [];
   class NodeEngine {
-    constructor({cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env: env2, flags, clientVersion: clientVersion3, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode}) {
+    constructor({cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env: env2, flags, clientVersion: clientVersion3, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname: dirname2}) {
       var _a;
       this.restartCount = 0;
       this.queryEngineStarted = false;
@@ -27141,6 +27150,7 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
         }
         throw error;
       };
+      this.dirname = dirname2;
       this.useUds = process.platform !== "win32";
       this.env = env2;
       this.cwd = this.resolveCwd(cwd);
@@ -27280,6 +27290,9 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         path_1.default.dirname(this.datamodelPath),
         this.cwd
       ];
+      if (this.dirname) {
+        searchLocations.push(this.dirname);
+      }
       for (const location of searchLocations) {
         searchedLocations.push(location);
         debug(`Search for Query Engine in ${location}`);
@@ -27304,7 +27317,14 @@ This probably happens, because you built Prisma Client on a different platform.
 
 Searched Locations:
 
-${searchedLocations.map((f) => `  ${f}`).join("\n")}
+${searchedLocations.map((f) => {
+          let msg = `  ${f}`;
+          if (process.env.DEBUG === "node-engine-search-locations" && fs_1.default.existsSync(f)) {
+            const dir = fs_1.default.readdirSync(f);
+            msg += dir.map((d2) => `    ${d2}`).join("\n");
+          }
+          return msg;
+        }).join("\n" + (process.env.DEBUG === "node-engine-search-locations" ? "\n" : ""))}
 `;
         if (this.generator) {
           if (this.generator.binaryTargets.includes(this.platform) || this.generator.binaryTargets.includes("native")) {
@@ -28023,7 +28043,7 @@ var require_mapPreviewFeatures = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.12.0-dev.38",
+    version: "2.12.1",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -28077,20 +28097,20 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "index.d.ts"
     ],
     devDependencies: {
-      "@prisma/debug": "2.12.0-dev.38",
-      "@prisma/engine-core": "2.12.0-dev.38",
-      "@prisma/engines": "2.12.0-10.a4ef806349a7b17c41f45735ce4a36322e01c250",
-      "@prisma/fetch-engine": "2.12.0-dev.38",
-      "@prisma/generator-helper": "2.12.0-dev.38",
-      "@prisma/get-platform": "2.12.0-dev.38",
-      "@prisma/migrate": "2.12.0-dev.38",
-      "@prisma/sdk": "2.12.0-dev.38",
+      "@prisma/debug": "2.12.1",
+      "@prisma/engine-core": "2.12.1",
+      "@prisma/engines": "2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58",
+      "@prisma/fetch-engine": "2.12.1",
+      "@prisma/generator-helper": "2.12.1",
+      "@prisma/get-platform": "2.12.1",
+      "@prisma/migrate": "2.12.1",
+      "@prisma/sdk": "2.12.1",
       "@timsuchanek/copy": "1.4.5",
       "@types/debug": "4.1.5",
       "@types/fs-extra": "9.0.4",
       "@types/jest": "26.0.15",
       "@types/js-levenshtein": "1.1.0",
-      "@types/node": "12.19.5",
+      "@types/node": "12.19.6",
       "@types/node-fetch": "2.5.7",
       "@types/pg": "7.14.7",
       "@typescript-eslint/eslint-plugin": "4.8.1",
@@ -28100,9 +28120,9 @@ var require_package2 = __commonJS2((exports2, module2) => {
       chalk: "4.1.0",
       "decimal.js": "10.2.1",
       dotenv: "8.2.0",
-      esbuild: "0.8.10",
+      esbuild: "0.8.12",
       "escape-string-regexp": "4.0.0",
-      eslint: "7.13.0",
+      eslint: "7.14.0",
       "eslint-config-prettier": "6.15.0",
       "eslint-plugin-eslint-comments": "3.2.0",
       "eslint-plugin-jest": "24.1.3",
@@ -28130,7 +28150,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       pidtree: "0.5.0",
       "pkg-up": "3.1.0",
       pluralize: "8.0.0",
-      prettier: "2.1.2",
+      prettier: "2.2.0",
       "replace-string": "3.1.0",
       rimraf: "3.0.2",
       rollup: "2.33.3",
@@ -28145,7 +28165,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "ts-jest": "26.4.4",
       "ts-loader": "8.0.11",
       "ts-node": "9.0.0",
-      typescript: "4.0.5"
+      typescript: "4.1.2"
     },
     peerDependencies: {
       "@prisma/cli": "*"
@@ -28170,7 +28190,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       ]
     },
     dependencies: {
-      "@prisma/engines-version": "2.12.0-10.a4ef806349a7b17c41f45735ce4a36322e01c250"
+      "@prisma/engines-version": "2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58"
     }
   };
 });
@@ -28196,12 +28216,13 @@ var require_keyBy = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.keyBy = void 0;
-  exports2.keyBy = (collection, iteratee) => {
+  const keyBy3 = (collection, iteratee) => {
     return collection.reduce((acc, curr) => {
       acc[iteratee(curr)] = curr;
       return acc;
     }, {});
   };
+  exports2.keyBy = keyBy3;
 });
 
 // ../../node_modules/.pnpm/temp-dir@2.0.0/node_modules/temp-dir/index.js
@@ -29553,7 +29574,8 @@ var require_theme = __commonJS2((exports2) => {
   exports2.darkBrightBlue = chalk_12.default.rgb(107, 139, 140);
   exports2.blue = chalk_12.default.cyan;
   exports2.brightBlue = chalk_12.default.rgb(127, 155, 175);
-  exports2.identity = (str) => str || "";
+  const identity2 = (str) => str || "";
+  exports2.identity = identity2;
   exports2.theme = {
     keyword: exports2.blue,
     entity: exports2.blue,
@@ -32040,6 +32062,487 @@ var require_lib3 = __commonJS2((exports2) => {
   var lib_default = fetch;
 });
 
+// ../../node_modules/.pnpm/debug@4.2.0/node_modules/debug/src/common.js
+var require_common6 = __commonJS2((exports2, module2) => {
+  function setup(env2) {
+    createDebug.debug = createDebug;
+    createDebug.default = createDebug;
+    createDebug.coerce = coerce;
+    createDebug.disable = disable;
+    createDebug.enable = enable;
+    createDebug.enabled = enabled;
+    createDebug.humanize = require_ms2();
+    Object.keys(env2).forEach((key) => {
+      createDebug[key] = env2[key];
+    });
+    createDebug.instances = [];
+    createDebug.names = [];
+    createDebug.skips = [];
+    createDebug.formatters = {};
+    function selectColor(namespace) {
+      let hash = 0;
+      for (let i = 0; i < namespace.length; i++) {
+        hash = (hash << 5) - hash + namespace.charCodeAt(i);
+        hash |= 0;
+      }
+      return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+    }
+    createDebug.selectColor = selectColor;
+    function createDebug(namespace) {
+      let prevTime;
+      function debug4(...args) {
+        if (!debug4.enabled) {
+          return;
+        }
+        const self2 = debug4;
+        const curr = Number(new Date());
+        const ms2 = curr - (prevTime || curr);
+        self2.diff = ms2;
+        self2.prev = prevTime;
+        self2.curr = curr;
+        prevTime = curr;
+        args[0] = createDebug.coerce(args[0]);
+        if (typeof args[0] !== "string") {
+          args.unshift("%O");
+        }
+        let index = 0;
+        args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+          if (match === "%%") {
+            return match;
+          }
+          index++;
+          const formatter = createDebug.formatters[format];
+          if (typeof formatter === "function") {
+            const val = args[index];
+            match = formatter.call(self2, val);
+            args.splice(index, 1);
+            index--;
+          }
+          return match;
+        });
+        createDebug.formatArgs.call(self2, args);
+        const logFn = self2.log || createDebug.log;
+        logFn.apply(self2, args);
+      }
+      debug4.namespace = namespace;
+      debug4.enabled = createDebug.enabled(namespace);
+      debug4.useColors = createDebug.useColors();
+      debug4.color = createDebug.selectColor(namespace);
+      debug4.destroy = destroy;
+      debug4.extend = extend;
+      if (typeof createDebug.init === "function") {
+        createDebug.init(debug4);
+      }
+      createDebug.instances.push(debug4);
+      return debug4;
+    }
+    function destroy() {
+      const index = createDebug.instances.indexOf(this);
+      if (index !== -1) {
+        createDebug.instances.splice(index, 1);
+        return true;
+      }
+      return false;
+    }
+    function extend(namespace, delimiter) {
+      const newDebug = createDebug(this.namespace + (typeof delimiter === "undefined" ? ":" : delimiter) + namespace);
+      newDebug.log = this.log;
+      return newDebug;
+    }
+    function enable(namespaces) {
+      createDebug.save(namespaces);
+      createDebug.names = [];
+      createDebug.skips = [];
+      let i;
+      const split = (typeof namespaces === "string" ? namespaces : "").split(/[\s,]+/);
+      const len = split.length;
+      for (i = 0; i < len; i++) {
+        if (!split[i]) {
+          continue;
+        }
+        namespaces = split[i].replace(/\*/g, ".*?");
+        if (namespaces[0] === "-") {
+          createDebug.skips.push(new RegExp("^" + namespaces.substr(1) + "$"));
+        } else {
+          createDebug.names.push(new RegExp("^" + namespaces + "$"));
+        }
+      }
+      for (i = 0; i < createDebug.instances.length; i++) {
+        const instance = createDebug.instances[i];
+        instance.enabled = createDebug.enabled(instance.namespace);
+      }
+    }
+    function disable() {
+      const namespaces = [
+        ...createDebug.names.map(toNamespace),
+        ...createDebug.skips.map(toNamespace).map((namespace) => "-" + namespace)
+      ].join(",");
+      createDebug.enable("");
+      return namespaces;
+    }
+    function enabled(name) {
+      if (name[name.length - 1] === "*") {
+        return true;
+      }
+      let i;
+      let len;
+      for (i = 0, len = createDebug.skips.length; i < len; i++) {
+        if (createDebug.skips[i].test(name)) {
+          return false;
+        }
+      }
+      for (i = 0, len = createDebug.names.length; i < len; i++) {
+        if (createDebug.names[i].test(name)) {
+          return true;
+        }
+      }
+      return false;
+    }
+    function toNamespace(regexp) {
+      return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
+    }
+    function coerce(val) {
+      if (val instanceof Error) {
+        return val.stack || val.message;
+      }
+      return val;
+    }
+    createDebug.enable(createDebug.load());
+    return createDebug;
+  }
+  module2.exports = setup;
+});
+
+// ../../node_modules/.pnpm/debug@4.2.0/node_modules/debug/src/browser.js
+var require_browser4 = __commonJS2((exports2, module2) => {
+  exports2.formatArgs = formatArgs;
+  exports2.save = save;
+  exports2.load = load;
+  exports2.useColors = useColors;
+  exports2.storage = localstorage();
+  exports2.colors = [
+    "#0000CC",
+    "#0000FF",
+    "#0033CC",
+    "#0033FF",
+    "#0066CC",
+    "#0066FF",
+    "#0099CC",
+    "#0099FF",
+    "#00CC00",
+    "#00CC33",
+    "#00CC66",
+    "#00CC99",
+    "#00CCCC",
+    "#00CCFF",
+    "#3300CC",
+    "#3300FF",
+    "#3333CC",
+    "#3333FF",
+    "#3366CC",
+    "#3366FF",
+    "#3399CC",
+    "#3399FF",
+    "#33CC00",
+    "#33CC33",
+    "#33CC66",
+    "#33CC99",
+    "#33CCCC",
+    "#33CCFF",
+    "#6600CC",
+    "#6600FF",
+    "#6633CC",
+    "#6633FF",
+    "#66CC00",
+    "#66CC33",
+    "#9900CC",
+    "#9900FF",
+    "#9933CC",
+    "#9933FF",
+    "#99CC00",
+    "#99CC33",
+    "#CC0000",
+    "#CC0033",
+    "#CC0066",
+    "#CC0099",
+    "#CC00CC",
+    "#CC00FF",
+    "#CC3300",
+    "#CC3333",
+    "#CC3366",
+    "#CC3399",
+    "#CC33CC",
+    "#CC33FF",
+    "#CC6600",
+    "#CC6633",
+    "#CC9900",
+    "#CC9933",
+    "#CCCC00",
+    "#CCCC33",
+    "#FF0000",
+    "#FF0033",
+    "#FF0066",
+    "#FF0099",
+    "#FF00CC",
+    "#FF00FF",
+    "#FF3300",
+    "#FF3333",
+    "#FF3366",
+    "#FF3399",
+    "#FF33CC",
+    "#FF33FF",
+    "#FF6600",
+    "#FF6633",
+    "#FF9900",
+    "#FF9933",
+    "#FFCC00",
+    "#FFCC33"
+  ];
+  function useColors() {
+    if (typeof window !== "undefined" && window.process && (window.process.type === "renderer" || window.process.__nwjs)) {
+      return true;
+    }
+    if (typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+      return false;
+    }
+    return typeof document !== "undefined" && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || typeof window !== "undefined" && window.console && (window.console.firebug || window.console.exception && window.console.table) || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+  }
+  function formatArgs(args) {
+    args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module2.exports.humanize(this.diff);
+    if (!this.useColors) {
+      return;
+    }
+    const c = "color: " + this.color;
+    args.splice(1, 0, c, "color: inherit");
+    let index = 0;
+    let lastC = 0;
+    args[0].replace(/%[a-zA-Z%]/g, (match) => {
+      if (match === "%%") {
+        return;
+      }
+      index++;
+      if (match === "%c") {
+        lastC = index;
+      }
+    });
+    args.splice(lastC, 0, c);
+  }
+  exports2.log = console.debug || console.log || (() => {
+  });
+  function save(namespaces) {
+    try {
+      if (namespaces) {
+        exports2.storage.setItem("debug", namespaces);
+      } else {
+        exports2.storage.removeItem("debug");
+      }
+    } catch (error) {
+    }
+  }
+  function load() {
+    let r;
+    try {
+      r = exports2.storage.getItem("debug");
+    } catch (error) {
+    }
+    if (!r && typeof process !== "undefined" && "env" in process) {
+      r = process.env.DEBUG;
+    }
+    return r;
+  }
+  function localstorage() {
+    try {
+      return localStorage;
+    } catch (error) {
+    }
+  }
+  module2.exports = require_common6()(exports2);
+  const {formatters} = module2.exports;
+  formatters.j = function(v) {
+    try {
+      return JSON.stringify(v);
+    } catch (error) {
+      return "[UnexpectedJSONParseError]: " + error.message;
+    }
+  };
+});
+
+// ../../node_modules/.pnpm/debug@4.2.0/node_modules/debug/src/node.js
+var require_node4 = __commonJS2((exports2, module2) => {
+  const tty = require("tty");
+  const util2 = require("util");
+  exports2.init = init;
+  exports2.log = log3;
+  exports2.formatArgs = formatArgs;
+  exports2.save = save;
+  exports2.load = load;
+  exports2.useColors = useColors;
+  exports2.colors = [6, 2, 3, 4, 5, 1];
+  try {
+    const supportsColor = require_supports_color2();
+    if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
+      exports2.colors = [
+        20,
+        21,
+        26,
+        27,
+        32,
+        33,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        56,
+        57,
+        62,
+        63,
+        68,
+        69,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        92,
+        93,
+        98,
+        99,
+        112,
+        113,
+        128,
+        129,
+        134,
+        135,
+        148,
+        149,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        178,
+        179,
+        184,
+        185,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        214,
+        215,
+        220,
+        221
+      ];
+    }
+  } catch (error) {
+  }
+  exports2.inspectOpts = Object.keys(process.env).filter((key) => {
+    return /^debug_/i.test(key);
+  }).reduce((obj, key) => {
+    const prop = key.substring(6).toLowerCase().replace(/_([a-z])/g, (_3, k) => {
+      return k.toUpperCase();
+    });
+    let val = process.env[key];
+    if (/^(yes|on|true|enabled)$/i.test(val)) {
+      val = true;
+    } else if (/^(no|off|false|disabled)$/i.test(val)) {
+      val = false;
+    } else if (val === "null") {
+      val = null;
+    } else {
+      val = Number(val);
+    }
+    obj[prop] = val;
+    return obj;
+  }, {});
+  function useColors() {
+    return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : tty.isatty(process.stderr.fd);
+  }
+  function formatArgs(args) {
+    const {namespace: name, useColors: useColors2} = this;
+    if (useColors2) {
+      const c = this.color;
+      const colorCode = "[3" + (c < 8 ? c : "8;5;" + c);
+      const prefix = `  ${colorCode};1m${name} [0m`;
+      args[0] = prefix + args[0].split("\n").join("\n" + prefix);
+      args.push(colorCode + "m+" + module2.exports.humanize(this.diff) + "[0m");
+    } else {
+      args[0] = getDate() + name + " " + args[0];
+    }
+  }
+  function getDate() {
+    if (exports2.inspectOpts.hideDate) {
+      return "";
+    }
+    return new Date().toISOString() + " ";
+  }
+  function log3(...args) {
+    return process.stderr.write(util2.format(...args) + "\n");
+  }
+  function save(namespaces) {
+    if (namespaces) {
+      process.env.DEBUG = namespaces;
+    } else {
+      delete process.env.DEBUG;
+    }
+  }
+  function load() {
+    return process.env.DEBUG;
+  }
+  function init(debug4) {
+    debug4.inspectOpts = {};
+    const keys2 = Object.keys(exports2.inspectOpts);
+    for (let i = 0; i < keys2.length; i++) {
+      debug4.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
+    }
+  }
+  module2.exports = require_common6()(exports2);
+  const {formatters} = module2.exports;
+  formatters.o = function(v) {
+    this.inspectOpts.colors = this.useColors;
+    return util2.inspect(v, this.inspectOpts).replace(/\s*\n\s*/g, " ");
+  };
+  formatters.O = function(v) {
+    this.inspectOpts.colors = this.useColors;
+    return util2.inspect(v, this.inspectOpts);
+  };
+});
+
+// ../../node_modules/.pnpm/debug@4.2.0/node_modules/debug/src/index.js
+var require_src5 = __commonJS2((exports2, module2) => {
+  if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
+    module2.exports = require_browser4();
+  } else {
+    module2.exports = require_node4();
+  }
+});
+
 // ../../node_modules/.pnpm/agent-base@6.0.2/node_modules/agent-base/dist/src/promisify.js
 var require_promisify2 = __commonJS2((exports2) => {
   "use strict";
@@ -32061,13 +32564,13 @@ var require_promisify2 = __commonJS2((exports2) => {
 });
 
 // ../../node_modules/.pnpm/agent-base@6.0.2/node_modules/agent-base/dist/src/index.js
-var require_src5 = __commonJS2((exports2, module2) => {
+var require_src6 = __commonJS2((exports2, module2) => {
   "use strict";
   var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
   const events_12 = require("events");
-  const debug_12 = __importDefault2(require_src3());
+  const debug_12 = __importDefault2(require_src5());
   const promisify_1 = __importDefault2(require_promisify2());
   const debug4 = debug_12.default("agent-base");
   function isAgent(v) {
@@ -32242,7 +32745,7 @@ var require_parse_proxy_response2 = __commonJS2((exports2) => {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
   Object.defineProperty(exports2, "__esModule", {value: true});
-  const debug_12 = __importDefault2(require_src3());
+  const debug_12 = __importDefault2(require_src5());
   const debug4 = debug_12.default("https-proxy-agent:parse-proxy-response");
   function parseProxyResponse(socket) {
     return new Promise((resolve, reject) => {
@@ -32337,8 +32840,8 @@ var require_agent3 = __commonJS2((exports2) => {
   const tls_1 = __importDefault2(require("tls"));
   const url_1 = __importDefault2(require("url"));
   const assert_1 = __importDefault2(require("assert"));
-  const debug_12 = __importDefault2(require_src3());
-  const agent_base_1 = require_src5();
+  const debug_12 = __importDefault2(require_src5());
+  const agent_base_1 = require_src6();
   const parse_proxy_response_1 = __importDefault2(require_parse_proxy_response2());
   const debug4 = debug_12.default("https-proxy-agent:agent");
   class HttpsProxyAgent extends agent_base_1.Agent {
@@ -32551,9 +33054,9 @@ var require_agent4 = __commonJS2((exports2) => {
   const net_12 = __importDefault2(require("net"));
   const tls_1 = __importDefault2(require("tls"));
   const url_1 = __importDefault2(require("url"));
-  const debug_12 = __importDefault2(require_src3());
+  const debug_12 = __importDefault2(require_src5());
   const once_1 = __importDefault2(require_dist14());
-  const agent_base_1 = require_src5();
+  const agent_base_1 = require_src6();
   const debug4 = debug_12.default("http-proxy-agent");
   function isHTTPS(protocol) {
     return typeof protocol === "string" ? /^https:?$/i.test(protocol) : false;
@@ -36599,7 +37102,7 @@ var require_queue2 = __commonJS2((exports2, module2) => {
 });
 
 // ../../node_modules/.pnpm/@nodelib/fs.walk@1.2.4/node_modules/@nodelib/fs.walk/out/readers/common.js
-var require_common6 = __commonJS2((exports2) => {
+var require_common7 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
   function isFatalError(settings, error) {
@@ -36630,7 +37133,7 @@ var require_common6 = __commonJS2((exports2) => {
 var require_reader3 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
-  const common4 = require_common6();
+  const common4 = require_common7();
   class Reader {
     constructor(_root, _settings) {
       this._root = _root;
@@ -36648,7 +37151,7 @@ var require_async8 = __commonJS2((exports2) => {
   const events_12 = require("events");
   const fsScandir = require_out6();
   const fastq = require_queue2();
-  const common4 = require_common6();
+  const common4 = require_common7();
   const reader_1 = require_reader3();
   class AsyncReader extends reader_1.default {
     constructor(_root, _settings) {
@@ -36812,7 +37315,7 @@ var require_sync10 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
   const fsScandir = require_out6();
-  const common4 = require_common6();
+  const common4 = require_common7();
   const reader_1 = require_reader3();
   class SyncReader extends reader_1.default {
     constructor() {
@@ -40083,7 +40586,7 @@ var require_path_is_absolute2 = __commonJS2((exports2, module2) => {
 });
 
 // ../../node_modules/.pnpm/glob@7.1.6/node_modules/glob/common.js
-var require_common7 = __commonJS2((exports2) => {
+var require_common8 = __commonJS2((exports2) => {
   exports2.alphasort = alphasort;
   exports2.alphasorti = alphasorti;
   exports2.setopts = setopts;
@@ -40289,7 +40792,7 @@ var require_sync14 = __commonJS2((exports2, module2) => {
   var path4 = require("path");
   var assert = require("assert");
   var isAbsolute = require_path_is_absolute2();
-  var common4 = require_common7();
+  var common4 = require_common8();
   var alphasort = common4.alphasort;
   var alphasorti = common4.alphasorti;
   var setopts = common4.setopts;
@@ -40685,7 +41188,7 @@ var require_glob2 = __commonJS2((exports2, module2) => {
   var assert = require("assert");
   var isAbsolute = require_path_is_absolute2();
   var globSync = require_sync14();
-  var common4 = require_common7();
+  var common4 = require_common8();
   var alphasort = common4.alphasort;
   var alphasorti = common4.alphasorti;
   var setopts = common4.setopts;
@@ -42348,13 +42851,8 @@ var require_getLatestTag2 = __commonJS2((exports2) => {
   const p_map_12 = __importDefault2(require_p_map3());
   const chalk_12 = __importDefault2(require_source2());
   async function getLatestTag() {
-    if (process.env.RELEASE_PROMOTE_DEV) {
-      const versions = await getVersionHashes(process.env.RELEASE_PROMOTE_DEV);
-      console.log(`getLatestTag: taking ${versions.engines} as RELEASE_PROMOTE_DEV has been provided`);
-      return versions.engines;
-    }
     let branch = await getBranch();
-    if (branch !== "master" && (!isPatchBranch(branch) && !branch.startsWith("integration/"))) {
+    if (branch !== "master" && !isPatchBranch(branch) && !branch.startsWith("integration/")) {
       branch = "master";
     }
     branch = branch.replace(/^integration\//, "");
@@ -42446,15 +42944,17 @@ var require_getLatestTag2 = __commonJS2((exports2) => {
     return result;
   }
   async function getBranch() {
-    if (process.env.PATCH_BRANCH) {
-      return process.env.PATCH_BRANCH;
-    }
-    if (process.env.BUILDKITE_BRANCH) {
-      return process.env.BUILDKITE_BRANCH;
-    }
-    if (process.env.GITHUB_CONTEXT) {
-      const context = JSON.parse(process.env.GITHUB_CONTEXT);
-      return context.head_ref;
+    if (process.env.NODE_ENV !== "test") {
+      if (process.env.PATCH_BRANCH) {
+        return process.env.PATCH_BRANCH;
+      }
+      if (process.env.BUILDKITE_BRANCH) {
+        return process.env.BUILDKITE_BRANCH;
+      }
+      if (process.env.GITHUB_CONTEXT) {
+        const context = JSON.parse(process.env.GITHUB_CONTEXT);
+        return context.head_ref;
+      }
     }
     try {
       const result = await execa_12.default.command("git rev-parse --abbrev-ref HEAD", {
@@ -42469,16 +42969,6 @@ var require_getLatestTag2 = __commonJS2((exports2) => {
   }
   function isPatchBranch(version) {
     return /^2\.(\d+)\.x/.test(version);
-  }
-  async function getVersionHashes(npmVersion) {
-    return node_fetch_1.default(`https://unpkg.com/@prisma/cli@${npmVersion}/package.json`, {
-      headers: {
-        accept: "application/json"
-      }
-    }).then((res) => res.json()).then((pkg) => ({
-      engines: pkg.prisma.version,
-      prisma: pkg.prisma.prismaCommit
-    }));
   }
   async function getCommits(branch) {
     const url = `https://github-cache.prisma.workers.dev/repos/prisma/prisma-engines/commits?sha=${branch}`;
@@ -42573,12 +43063,6 @@ var require_download2 = __commonJS2((exports) => {
     if (!options.binaries || Object.values(options.binaries).length === 0) {
       return {};
     }
-    if (options.binaryTargets && Array.isArray(options.binaryTargets)) {
-      const unknownTargets = options.binaryTargets.filter((t) => !get_platform_1.platforms.includes(t));
-      if (unknownTargets.length > 0) {
-        throw new Error(`Unknown binaryTargets ${unknownTargets.join(", ")}`);
-      }
-    }
     options = {
       ...options,
       binaryTargets: (_a = options.binaryTargets) !== null && _a !== void 0 ? _a : [platform],
@@ -42607,7 +43091,12 @@ var require_download2 = __commonJS2((exports) => {
     }
     const binariesToDownload = await p_filter_1.default(binaryJobs, async (job) => {
       const needsToBeDownloaded = await binaryNeedsToBeDownloaded(job, platform, options.version, options.failSilent);
-      return !job.envVarPath && (options.ignoreCache || needsToBeDownloaded);
+      const isSupported = get_platform_1.platforms.includes(job.binaryTarget);
+      const shouldDownload = isSupported && !job.envVarPath && (options.ignoreCache || needsToBeDownloaded);
+      if (needsToBeDownloaded && !isSupported) {
+        throw new Error(`Unknown binaryTarget ${job.binaryTarget} and no custom binaries were provided`);
+      }
+      return shouldDownload;
     });
     if (binariesToDownload.length > 0) {
       const cleanupPromise = cleanupCache_1.cleanupCache();
@@ -55359,7 +55848,7 @@ var require_function_bind = __commonJS2((exports2, module2) => {
 });
 
 // ../../node_modules/.pnpm/has@1.0.3/node_modules/has/src/index.js
-var require_src6 = __commonJS2((exports2, module2) => {
+var require_src7 = __commonJS2((exports2, module2) => {
   "use strict";
   var bind = require_function_bind();
   module2.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
@@ -55451,7 +55940,7 @@ var require_core3 = __commonJS2((exports2, module2) => {
 // ../../node_modules/.pnpm/is-core-module@2.0.0/node_modules/is-core-module/index.js
 var require_is_core_module = __commonJS2((exports2, module2) => {
   "use strict";
-  var has = require_src6();
+  var has = require_src7();
   function specifierIncluded(current, specifier) {
     var nodeParts = current.split(".");
     var parts = specifier.split(" ");
@@ -59578,7 +60067,7 @@ var require_destroy = __commonJS2((exports2, module2) => {
 });
 
 // ../../node_modules/.pnpm/util-deprecate@1.0.2/node_modules/util-deprecate/node.js
-var require_node4 = __commonJS2((exports2, module2) => {
+var require_node5 = __commonJS2((exports2, module2) => {
   module2.exports = require("util").deprecate;
 });
 
@@ -59601,7 +60090,7 @@ var require_stream_writable = __commonJS2((exports2, module2) => {
   var util2 = Object.create(require_util7());
   util2.inherits = require_inherits2();
   var internalUtil = {
-    deprecate: require_node4()
+    deprecate: require_node5()
   };
   var Stream = require_stream11();
   var Buffer2 = require_safe_buffer().Buffer;
@@ -62977,7 +63466,7 @@ var require_stream_writable2 = __commonJS2((exports2, module2) => {
   var Duplex;
   Writable.WritableState = WritableState;
   var internalUtil = {
-    deprecate: require_node4()
+    deprecate: require_node5()
   };
   var Stream = require_stream12();
   var Buffer2 = require("buffer").Buffer;
@@ -71816,9 +72305,10 @@ var require_isCi = __commonJS2((exports2) => {
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.isCi = void 0;
   const is_ci_1 = require_is_ci();
-  exports2.isCi = () => {
+  const isCi = () => {
     return !process.stdout.isTTY || is_ci_1.isCi || Boolean(process.env.GITHUB_ACTIONS);
   };
+  exports2.isCi = isCi;
 });
 
 // ../sdk/dist/cli/Help.js
@@ -72978,7 +73468,8 @@ ${e.stderr}`);
 var require_dist19 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.printConfigWarnings = exports2.dropDatabase = exports2.createDatabase = exports2.canConnectToDatabase = exports2.trimNewLine = exports2.trimBlocksFromSchema = exports2.mapPreviewFeatures = exports2.extractPreviewFeatures = exports2.tryLoadEnvs = exports2.getEnvPaths = exports2.getSchemaPathFromPackageJsonSync = exports2.getSchemaPathFromPackageJson = exports2.getSchemaDirSync = exports2.getSchemaSync = exports2.getSchemaPathSync = exports2.getSchema = exports2.getSchemaDir = exports2.getSchemaPath = exports2.getRelativeSchemaPath = exports2.isError = exports2.format = exports2.arg = exports2.getProjectHash = exports2.getCLIPathHash = exports2.unknownCommand = exports2.HelpError = exports2.isCi = exports2.getCommandWithExecutor = exports2.isCurrentBinInstalledGlobally = exports2.drawBox = exports2.maskSchema = exports2.sendPanic = exports2.link = exports2.ErrorArea = exports2.RustPanic = exports2.uriToCredentials = exports2.credentialsToUri = exports2.getPackedPackage = exports2.formatSchema = exports2.getVersion = exports2.getConfig = exports2.getDMMF = exports2.getGenerator = exports2.getGenerators = exports2.Generator = exports2.IntrospectionEngine = exports2.highlightTS = exports2.highlightSql = exports2.highlightDatamodel = exports2.missingGeneratorMessage = exports2.resolveBinary = exports2.keyBy = exports2.pick = void 0;
+  exports2.canConnectToDatabase = exports2.trimNewLine = exports2.trimBlocksFromSchema = exports2.mapPreviewFeatures = exports2.extractPreviewFeatures = exports2.tryLoadEnvs = exports2.getEnvPaths = exports2.getSchemaPathFromPackageJsonSync = exports2.getSchemaPathFromPackageJson = exports2.getSchemaDirSync = exports2.getSchemaSync = exports2.getSchemaPathSync = exports2.getSchema = exports2.getSchemaDir = exports2.getSchemaPath = exports2.getRelativeSchemaPath = exports2.isError = exports2.format = exports2.arg = exports2.getProjectHash = exports2.getCLIPathHash = exports2.unknownCommand = exports2.HelpError = exports2.isCi = exports2.getCommandWithExecutor = exports2.isCurrentBinInstalledGlobally = exports2.drawBox = exports2.maskSchema = exports2.sendPanic = exports2.link = exports2.ErrorArea = exports2.RustPanic = exports2.uriToCredentials = exports2.credentialsToUri = exports2.getPackedPackage = exports2.formatSchema = exports2.getVersion = exports2.getConfig = exports2.getDMMF = exports2.getGenerator = exports2.getGenerators = exports2.Generator = exports2.IntrospectionEngine = exports2.highlightTS = exports2.highlightSql = exports2.highlightDatamodel = exports2.missingGeneratorMessage = exports2.resolveBinary = exports2.keyBy = exports2.pick = void 0;
+  exports2.printConfigWarnings = exports2.dropDatabase = exports2.createDatabase = void 0;
   var pick_12 = require_pick();
   Object.defineProperty(exports2, "pick", {enumerable: true, get: function() {
     return pick_12.pick;
@@ -77039,55 +77530,58 @@ class Args {
     return flatMap(this.args, (arg) => arg.collectErrors());
   }
 }
-function stringify2(obj, _3, tabbing, isEnum, isJson) {
-  if (Buffer.isBuffer(obj)) {
-    return JSON.stringify(obj.toString("base64"));
+function stringify2(value, inputType) {
+  if (Buffer.isBuffer(value)) {
+    return JSON.stringify(value.toString("base64"));
   }
-  if (Object.prototype.toString.call(obj) === "[object BigInt]") {
-    return obj.toString();
+  if (Object.prototype.toString.call(value) === "[object BigInt]") {
+    return value.toString();
   }
-  if (isJson) {
-    if (obj === null) {
+  if (typeof (inputType == null ? void 0 : inputType.type) === "string" && inputType.type === "Json") {
+    if (value === null) {
       return "null";
     }
-    if (obj && obj.values && obj.__prismaRawParamaters__) {
-      return JSON.stringify(obj.values);
+    if (value && value.values && value.__prismaRawParamaters__) {
+      return JSON.stringify(value.values);
     }
-    return JSON.stringify(JSON.stringify(obj));
+    if ((inputType == null ? void 0 : inputType.isList) && Array.isArray(value)) {
+      return JSON.stringify(value.map((o) => JSON.stringify(o)));
+    }
+    return JSON.stringify(JSON.stringify(value));
   }
-  if (obj === void 0) {
+  if (value === void 0) {
     return null;
   }
-  if (obj === null) {
+  if (value === null) {
     return "null";
   }
-  if (decimal_default.isDecimal(obj)) {
-    return obj.toString();
+  if (decimal_default.isDecimal(value)) {
+    return value.toString();
   }
-  if (isEnum && typeof obj === "string") {
-    return obj;
+  if ((inputType == null ? void 0 : inputType.location) === "enumTypes" && typeof value === "string") {
+    if (Array.isArray(value)) {
+      return `[${value.join(", ")}]`;
+    }
+    return value;
   }
-  if (isEnum && Array.isArray(obj)) {
-    return `[${obj.join(", ")}]`;
-  }
-  return JSON.stringify(obj, _3, tabbing);
+  return JSON.stringify(value, null, 2);
 }
 class Arg {
   constructor({
     key,
     value,
-    argType,
     isEnum = false,
     error,
-    schemaArg
+    schemaArg,
+    inputType
   }) {
+    this.inputType = inputType;
     this.key = key;
     this.value = value;
-    this.argType = argType;
     this.isEnum = isEnum;
     this.error = error;
     this.schemaArg = schemaArg;
-    this.isNullable = (schemaArg == null ? void 0 : schemaArg.inputTypes.reduce((isNullable, inputType) => isNullable && schemaArg.isNullable, true)) || false;
+    this.isNullable = (schemaArg == null ? void 0 : schemaArg.inputTypes.reduce((isNullable, inputType2) => isNullable && schemaArg.isNullable, true)) || false;
     this.hasError = Boolean(error) || (value instanceof Args ? value.hasInvalidArg : false) || Array.isArray(value) && value.some((v) => v instanceof Args ? v.hasInvalidArg : false);
   }
   _toString(value, key) {
@@ -77096,18 +77590,13 @@ class Arg {
       return void 0;
     }
     if (value instanceof Args) {
-      if (value.args.length === 1 && value.args[0].key === "set" && ((_a = value.args[0].schemaArg) == null ? void 0 : _a.inputTypes[0].type) === "Json") {
-        return `${key}: {
-  set: ${stringify2(value.args[0].value, null, 2, this.isEnum, true)}
-}`;
-      }
       return `${key}: {
 ${indent_string2.default(value.toString(), 2)}
 }`;
     }
     if (Array.isArray(value)) {
-      if (this.argType === "Json") {
-        return `${key}: ${stringify2(value, null, 2, this.isEnum, this.argType === "Json")}`;
+      if (((_a = this.inputType) == null ? void 0 : _a.type) === "Json") {
+        return `${key}: ${stringify2(value, this.inputType)}`;
       }
       const isScalar = !value.some((v) => typeof v === "object");
       return `${key}: [${isScalar ? "" : "\n"}${indent_string2.default(value.map((nestedValue) => {
@@ -77116,10 +77605,10 @@ ${indent_string2.default(value.toString(), 2)}
 ${indent_string2.default(nestedValue.toString(), tab)}
 }`;
         }
-        return stringify2(nestedValue, null, 2, this.isEnum);
+        return stringify2(nestedValue, this.inputType);
       }).join(`,${isScalar ? " " : "\n"}`), isScalar ? 0 : tab)}${isScalar ? "" : "\n"}]`;
     }
-    return `${key}: ${stringify2(value, null, 2, this.isEnum, this.argType === "Json")}`;
+    return `${key}: ${stringify2(value, this.inputType)}`;
   }
   toString() {
     return this._toString(this.value, this.key);
@@ -77351,7 +77840,7 @@ function getInvalidTypeArg(key, value, arg, bestFittingType) {
     key,
     value,
     isEnum: bestFittingType.location === "enumTypes",
-    argType: bestFittingType.type,
+    inputType: bestFittingType,
     error: {
       type: "invalidType",
       providedValue: value,
@@ -77456,6 +77945,7 @@ function tryInferArgs(key, value, arg, inputType) {
       key,
       value,
       isEnum: inputType.location === "enumTypes",
+      inputType,
       error: {
         type: "missingArg",
         missingName: key,
@@ -77473,6 +77963,7 @@ function tryInferArgs(key, value, arg, inputType) {
         key,
         value,
         isEnum: inputType.location === "enumTypes",
+        inputType,
         error: {
           type: "invalidNullArg",
           name: key,
@@ -77511,7 +78002,7 @@ function tryInferArgs(key, value, arg, inputType) {
           value: val === null ? null : objectToArgs(val, inputType.type, arg.inputTypes),
           isEnum: inputType.location === "enumTypes",
           error,
-          argType: inputType.type,
+          inputType,
           schemaArg: arg
         });
       }
@@ -77546,10 +78037,10 @@ function tryInferArgs(key, value, arg, inputType) {
     }
   }
   if (!Array.isArray(value)) {
-    for (const argInputType2 of arg.inputTypes) {
-      const args = objectToArgs(value, argInputType2.type);
+    for (const nestedArgInputType of arg.inputTypes) {
+      const args = objectToArgs(value, nestedArgInputType.type);
       if (args.collectErrors().length === 0) {
-        return new Arg({key, value: args, isEnum: false, argType: argInputType2.type, schemaArg: arg});
+        return new Arg({key, value: args, isEnum: false, schemaArg: arg, inputType: nestedArgInputType});
       }
     }
   }
@@ -77565,7 +78056,7 @@ function tryInferArgs(key, value, arg, inputType) {
       return objectToArgs(v, argInputType);
     }),
     isEnum: false,
-    argType: argInputType,
+    inputType,
     schemaArg: arg,
     error: err
   });
@@ -77584,9 +78075,9 @@ function scalarToArg(key, value, arg, inputType) {
     return new Arg({
       key,
       value,
-      isEnum: arg.inputTypes[0].location === "enumTypes",
-      argType: inputType.type,
-      schemaArg: arg
+      isEnum: inputType.location === "enumTypes",
+      schemaArg: arg,
+      inputType
     });
   }
   return getInvalidTypeArg(key, value, arg, inputType);
@@ -77643,7 +78134,8 @@ function objectToArgs(initialObj, inputType, possibilities, outputType) {
           missingArg: arg,
           atLeastOne: Boolean(inputType.constraints.minNumFields) || false,
           atMostOne: inputType.constraints.maxNumFields === 1 || false
-        }
+        },
+        inputType: argInputType
       });
     }));
   }
@@ -78160,10 +78652,10 @@ function getPrismaClient(config2) {
         if (!fs2.default.existsSync(cwd)) {
           cwd = config2.dirname;
         }
-        const schemaPath = path2.default.resolve(config2.dirname, config2.relativePath, ".schema");
         const previewFeatures = (_e = (_d = config2.generator) == null ? void 0 : _d.previewFeatures) != null ? _e : [];
         this._engineConfig = {
           cwd,
+          dirname: config2.dirname,
           enableDebugLogs: useDebug,
           enableEngineDebugMode: engineConfig.enableEngineDebugMode,
           datamodelPath: path2.default.join(config2.dirname, "schema.prisma"),

@@ -21,7 +21,7 @@ npm i @prisma/client
 
 > Be aware that `typegraphql-prisma` is designed to work with a selected versions of `prisma`.
 >
-> Please make sure you use `@prisma/cli` and `@prisma/client` of version matching `~2.11.0`.
+> Please make sure you use `@prisma/cli` and `@prisma/client` of version matching `~2.12.1`.
 > Otherwise, the runtime check will report an error when you run the generator.
 
 You also need to install the GraphQL JSON scalar library (to support the Prisma `Json` scalar):
@@ -140,7 +140,7 @@ CRUD resolvers supports this following methods with args that are 1:1 matching w
 - create
 - update
 - delete
-- findOne
+- findUnique
 - findFirst
 - findMany
 - updateMany
@@ -255,7 +255,7 @@ You can also add custom queries and mutations to the schema as always, using the
 export class CustomUserResolver {
   @Query(returns => User, { nullable: true })
   async bestUser(@Ctx() { prisma }: Context): Promise<User | null> {
-    return await prisma.user.findOne({
+    return await prisma.user.findUnique({
       where: { email: "bob@prisma.io" },
     });
   }
@@ -329,7 +329,7 @@ export class CustomUserResolver {
     @Ctx() { prisma }: Context,
   ): Promise<Post | undefined> {
     const [favoritePost] = await prisma.user
-      .findOne({ where: { id: user.id } })
+      .findUnique({ where: { id: user.id } })
       .posts({ first: 1 });
 
     return favoritePost;

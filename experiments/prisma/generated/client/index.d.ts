@@ -10,11 +10,11 @@ export import DMMF = runtime.DMMF
 /**
  * Prisma Errors
  */
-export type PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
-export type PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
-export type PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
-export type PrismaClientInitializationError = runtime.PrismaClientInitializationError
-export type PrismaClientValidationError = runtime.PrismaClientValidationError
+export import PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
+export import PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
+export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
+export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
+export import PrismaClientValidationError = runtime.PrismaClientValidationError
 
 /**
  * Re-export of sql-template-tag
@@ -31,8 +31,8 @@ export import Sql = runtime.Sql
 export import Decimal = runtime.Decimal
 
 /**
- * Prisma Client JS version: 2.12.0-dev.38
- * Query Engine version: a4ef806349a7b17c41f45735ce4a36322e01c250
+ * Prisma Client JS version: 2.12.1
+ * Query Engine version: cf0680a1bfe8d5e743dc659cc7f08009f9587d58
  */
 export type PrismaVersion = {
   client: string
@@ -100,7 +100,7 @@ export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infe
 export type PromiseReturnType<T extends (...args: any) => Promise<any>> = PromiseType<ReturnType<T>>
 
 
-export type Enumerable<T> = T | ReadonlyArray<T>;
+export type Enumerable<T> = T | Array<T>;
 
 export type RequiredKeys<T> = {
   [K in keyof T]-?: {} extends Pick<T, K> ? never : K
@@ -450,11 +450,11 @@ export namespace Prisma {
   /**
    * Prisma Errors
    */
-  export type PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
-  export type PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
-  export type PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
-  export type PrismaClientInitializationError = runtime.PrismaClientInitializationError
-  export type PrismaClientValidationError = runtime.PrismaClientValidationError
+  export import PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
+  export import PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
+  export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
+  export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
+  export import PrismaClientValidationError = runtime.PrismaClientValidationError
 
   /**
    * Re-export of sql-template-tag
@@ -471,8 +471,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.12.0-dev.38
-   * Query Engine version: a4ef806349a7b17c41f45735ce4a36322e01c250
+   * Prisma Client JS version: 2.12.1
+   * Query Engine version: cf0680a1bfe8d5e743dc659cc7f08009f9587d58
    */
   export type PrismaVersion = {
     client: string
@@ -540,7 +540,7 @@ export namespace Prisma {
   export type PromiseReturnType<T extends (...args: any) => Promise<any>> = PromiseType<ReturnType<T>>
 
 
-  export type Enumerable<T> = T | ReadonlyArray<T>;
+  export type Enumerable<T> = T | Array<T>;
 
   export type RequiredKeys<T> = {
     [K in keyof T]-?: {} extends Pick<T, K> ? never : K
@@ -742,33 +742,33 @@ export namespace Prisma {
   }
 
 
-  export type UserAvgAggregateInputType = Readonly<{
+  export type UserAvgAggregateInputType = {
     id?: true
     age?: true
     balance?: true
     amount?: true
-  }>
+  }
 
-  export type UserSumAggregateInputType = Readonly<{
+  export type UserSumAggregateInputType = {
     id?: true
     age?: true
     balance?: true
     amount?: true
-  }>
+  }
 
-  export type UserMinAggregateInputType = Readonly<{
+  export type UserMinAggregateInputType = {
     id?: true
     age?: true
     balance?: true
     amount?: true
-  }>
+  }
 
-  export type UserMaxAggregateInputType = Readonly<{
+  export type UserMaxAggregateInputType = {
     id?: true
     age?: true
     balance?: true
     amount?: true
-  }>
+  }
 
   export type AggregateUserArgs = {
     where?: UserWhereInput
@@ -1298,25 +1298,25 @@ export namespace Prisma {
   }
 
 
-  export type PostAvgAggregateInputType = Readonly<{
+  export type PostAvgAggregateInputType = {
     authorId?: true
     editorId?: true
-  }>
+  }
 
-  export type PostSumAggregateInputType = Readonly<{
+  export type PostSumAggregateInputType = {
     authorId?: true
     editorId?: true
-  }>
+  }
 
-  export type PostMinAggregateInputType = Readonly<{
+  export type PostMinAggregateInputType = {
     authorId?: true
     editorId?: true
-  }>
+  }
 
-  export type PostMaxAggregateInputType = Readonly<{
+  export type PostMaxAggregateInputType = {
     authorId?: true
     editorId?: true
-  }>
+  }
 
   export type AggregatePostArgs = {
     where?: postWhereInput
@@ -1846,21 +1846,21 @@ export namespace Prisma {
   }
 
 
-  export type CategoryAvgAggregateInputType = Readonly<{
+  export type CategoryAvgAggregateInputType = {
     number?: true
-  }>
+  }
 
-  export type CategorySumAggregateInputType = Readonly<{
+  export type CategorySumAggregateInputType = {
     number?: true
-  }>
+  }
 
-  export type CategoryMinAggregateInputType = Readonly<{
+  export type CategoryMinAggregateInputType = {
     number?: true
-  }>
+  }
 
-  export type CategoryMaxAggregateInputType = Readonly<{
+  export type CategoryMaxAggregateInputType = {
     number?: true
-  }>
+  }
 
   export type AggregateCategoryArgs = {
     where?: CategoryWhereInput
@@ -3752,25 +3752,25 @@ export namespace Prisma {
   }
 
 
-  export type ProblemAvgAggregateInputType = Readonly<{
+  export type ProblemAvgAggregateInputType = {
     id?: true
     creatorId?: true
-  }>
+  }
 
-  export type ProblemSumAggregateInputType = Readonly<{
+  export type ProblemSumAggregateInputType = {
     id?: true
     creatorId?: true
-  }>
+  }
 
-  export type ProblemMinAggregateInputType = Readonly<{
+  export type ProblemMinAggregateInputType = {
     id?: true
     creatorId?: true
-  }>
+  }
 
-  export type ProblemMaxAggregateInputType = Readonly<{
+  export type ProblemMaxAggregateInputType = {
     id?: true
     creatorId?: true
-  }>
+  }
 
   export type AggregateProblemArgs = {
     where?: ProblemWhereInput
@@ -4292,21 +4292,21 @@ export namespace Prisma {
   }
 
 
-  export type CreatorAvgAggregateInputType = Readonly<{
+  export type CreatorAvgAggregateInputType = {
     id?: true
-  }>
+  }
 
-  export type CreatorSumAggregateInputType = Readonly<{
+  export type CreatorSumAggregateInputType = {
     id?: true
-  }>
+  }
 
-  export type CreatorMinAggregateInputType = Readonly<{
+  export type CreatorMinAggregateInputType = {
     id?: true
-  }>
+  }
 
-  export type CreatorMaxAggregateInputType = Readonly<{
+  export type CreatorMaxAggregateInputType = {
     id?: true
-  }>
+  }
 
   export type AggregateCreatorArgs = {
     where?: CreatorWhereInput
@@ -4907,7 +4907,7 @@ export namespace Prisma {
    */
 
 
-  export type UserWhereInput = Readonly<{
+  export type UserWhereInput = {
     AND?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
     OR?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
     NOT?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
@@ -4920,9 +4920,9 @@ export namespace Prisma {
     posts?: PostListRelationFilter
     role?: XOR<EnumRoleFilter, Role>
     editorPosts?: PostListRelationFilter
-  }>
+  }
 
-  export type UserOrderByInput = Readonly<{
+  export type UserOrderByInput = {
     id?: SortOrder
     email?: SortOrder
     name?: SortOrder
@@ -4930,14 +4930,14 @@ export namespace Prisma {
     balance?: SortOrder
     amount?: SortOrder
     role?: SortOrder
-  }>
+  }
 
-  export type UserWhereUniqueInput = Readonly<{
+  export type UserWhereUniqueInput = {
     id?: number
     email?: string
-  }>
+  }
 
-  export type postWhereInput = Readonly<{
+  export type postWhereInput = {
     AND?: XOR<postWhereInput, Enumerable<postWhereInput>>
     OR?: XOR<postWhereInput, Enumerable<postWhereInput>>
     NOT?: XOR<postWhereInput, Enumerable<postWhereInput>>
@@ -4954,9 +4954,9 @@ export namespace Prisma {
     editorId?: IntNullableFilter | number | null
     kind?: EnumPostKindNullableFilter | PostKind | null
     metadata?: JsonFilter
-  }>
+  }
 
-  export type postOrderByInput = Readonly<{
+  export type postOrderByInput = {
     uuid?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4968,51 +4968,51 @@ export namespace Prisma {
     editorId?: SortOrder
     kind?: SortOrder
     metadata?: SortOrder
-  }>
+  }
 
-  export type postWhereUniqueInput = Readonly<{
+  export type postWhereUniqueInput = {
     uuid?: string
-  }>
+  }
 
-  export type CategoryWhereInput = Readonly<{
+  export type CategoryWhereInput = {
     AND?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
     OR?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
     NOT?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
     name?: XOR<StringFilter, string>
     slug?: XOR<StringFilter, string>
     number?: XOR<IntFilter, number>
-  }>
+  }
 
-  export type CategoryOrderByInput = Readonly<{
+  export type CategoryOrderByInput = {
     name?: SortOrder
     slug?: SortOrder
     number?: SortOrder
-  }>
+  }
 
-  export type CategoryWhereUniqueInput = Readonly<{
+  export type CategoryWhereUniqueInput = {
     slug_number?: SlugNumberCompoundUniqueInput
-  }>
+  }
 
-  export type PatientWhereInput = Readonly<{
+  export type PatientWhereInput = {
     AND?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
     OR?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
     NOT?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
     firstName?: XOR<StringFilter, string>
     lastName?: XOR<StringFilter, string>
     email?: XOR<StringFilter, string>
-  }>
+  }
 
-  export type PatientOrderByInput = Readonly<{
+  export type PatientOrderByInput = {
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
-  }>
+  }
 
-  export type PatientWhereUniqueInput = Readonly<{
+  export type PatientWhereUniqueInput = {
     firstName_lastName?: FirstNameLastNameCompoundUniqueInput
-  }>
+  }
 
-  export type MovieWhereInput = Readonly<{
+  export type MovieWhereInput = {
     AND?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
     OR?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
     NOT?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
@@ -5020,37 +5020,37 @@ export namespace Prisma {
     directorLastName?: XOR<StringFilter, string>
     director?: XOR<DirectorRelationFilter, DirectorWhereInput>
     title?: XOR<StringFilter, string>
-  }>
+  }
 
-  export type MovieOrderByInput = Readonly<{
+  export type MovieOrderByInput = {
     directorFirstName?: SortOrder
     directorLastName?: SortOrder
     title?: SortOrder
-  }>
+  }
 
-  export type MovieWhereUniqueInput = Readonly<{
+  export type MovieWhereUniqueInput = {
     directorFirstName_directorLastName_title?: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
-  }>
+  }
 
-  export type DirectorWhereInput = Readonly<{
+  export type DirectorWhereInput = {
     AND?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
     OR?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
     NOT?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
     firstName?: XOR<StringFilter, string>
     lastName?: XOR<StringFilter, string>
     movies?: MovieListRelationFilter
-  }>
+  }
 
-  export type DirectorOrderByInput = Readonly<{
+  export type DirectorOrderByInput = {
     firstName?: SortOrder
     lastName?: SortOrder
-  }>
+  }
 
-  export type DirectorWhereUniqueInput = Readonly<{
+  export type DirectorWhereUniqueInput = {
     firstName_lastName?: FirstNameLastNameCompoundUniqueInput
-  }>
+  }
 
-  export type ProblemWhereInput = Readonly<{
+  export type ProblemWhereInput = {
     AND?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
     OR?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
     NOT?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
@@ -5059,19 +5059,19 @@ export namespace Prisma {
     likedBy?: CreatorListRelationFilter
     creator?: CreatorRelationFilter | CreatorWhereInput | null
     creatorId?: IntNullableFilter | number | null
-  }>
+  }
 
-  export type ProblemOrderByInput = Readonly<{
+  export type ProblemOrderByInput = {
     id?: SortOrder
     problemText?: SortOrder
     creatorId?: SortOrder
-  }>
+  }
 
-  export type ProblemWhereUniqueInput = Readonly<{
+  export type ProblemWhereUniqueInput = {
     id?: number
-  }>
+  }
 
-  export type CreatorWhereInput = Readonly<{
+  export type CreatorWhereInput = {
     AND?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
     OR?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
     NOT?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
@@ -5079,18 +5079,18 @@ export namespace Prisma {
     name?: XOR<StringFilter, string>
     likes?: ProblemListRelationFilter
     problems?: ProblemListRelationFilter
-  }>
+  }
 
-  export type CreatorOrderByInput = Readonly<{
+  export type CreatorOrderByInput = {
     id?: SortOrder
     name?: SortOrder
-  }>
+  }
 
-  export type CreatorWhereUniqueInput = Readonly<{
+  export type CreatorWhereUniqueInput = {
     id?: number
-  }>
+  }
 
-  export type UserCreateInput = Readonly<{
+  export type UserCreateInput = {
     email: string
     name?: XOR<string, null>
     age: number
@@ -5099,9 +5099,9 @@ export namespace Prisma {
     role: Role
     posts?: postCreateManyWithoutAuthorInput
     editorPosts?: postCreateManyWithoutEditorInput
-  }>
+  }
 
-  export type UserUpdateInput = Readonly<{
+  export type UserUpdateInput = {
     email?: XOR<string, StringFieldUpdateOperationsInput>
     name?: string | NullableStringFieldUpdateOperationsInput | null
     age?: XOR<number, IntFieldUpdateOperationsInput>
@@ -5110,18 +5110,18 @@ export namespace Prisma {
     role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
     posts?: postUpdateManyWithoutAuthorInput
     editorPosts?: postUpdateManyWithoutEditorInput
-  }>
+  }
 
-  export type UserUpdateManyMutationInput = Readonly<{
+  export type UserUpdateManyMutationInput = {
     email?: XOR<string, StringFieldUpdateOperationsInput>
     name?: string | NullableStringFieldUpdateOperationsInput | null
     age?: XOR<number, IntFieldUpdateOperationsInput>
     balance?: XOR<number, FloatFieldUpdateOperationsInput>
     amount?: XOR<number, FloatFieldUpdateOperationsInput>
     role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type postCreateInput = Readonly<{
+  export type postCreateInput = {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5133,9 +5133,9 @@ export namespace Prisma {
     metadata: InputJsonValue
     author: UserCreateOneWithoutPostsInput
     editor?: UserCreateOneWithoutEditorPostsInput
-  }>
+  }
 
-  export type postUpdateInput = Readonly<{
+  export type postUpdateInput = {
     uuid?: XOR<string, StringFieldUpdateOperationsInput>
     createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
     updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
@@ -5147,9 +5147,9 @@ export namespace Prisma {
     metadata?: InputJsonValue
     author?: UserUpdateOneRequiredWithoutPostsInput
     editor?: UserUpdateOneWithoutEditorPostsInput
-  }>
+  }
 
-  export type postUpdateManyMutationInput = Readonly<{
+  export type postUpdateManyMutationInput = {
     uuid?: XOR<string, StringFieldUpdateOperationsInput>
     createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
     updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
@@ -5159,108 +5159,108 @@ export namespace Prisma {
     content?: string | NullableStringFieldUpdateOperationsInput | null
     kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
     metadata?: InputJsonValue
-  }>
+  }
 
-  export type CategoryCreateInput = Readonly<{
+  export type CategoryCreateInput = {
     name: string
     slug: string
     number: number
-  }>
+  }
 
-  export type CategoryUpdateInput = Readonly<{
+  export type CategoryUpdateInput = {
     name?: XOR<string, StringFieldUpdateOperationsInput>
     slug?: XOR<string, StringFieldUpdateOperationsInput>
     number?: XOR<number, IntFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type CategoryUpdateManyMutationInput = Readonly<{
+  export type CategoryUpdateManyMutationInput = {
     name?: XOR<string, StringFieldUpdateOperationsInput>
     slug?: XOR<string, StringFieldUpdateOperationsInput>
     number?: XOR<number, IntFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type PatientCreateInput = Readonly<{
+  export type PatientCreateInput = {
     firstName: string
     lastName: string
     email: string
-  }>
+  }
 
-  export type PatientUpdateInput = Readonly<{
+  export type PatientUpdateInput = {
     firstName?: XOR<string, StringFieldUpdateOperationsInput>
     lastName?: XOR<string, StringFieldUpdateOperationsInput>
     email?: XOR<string, StringFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type PatientUpdateManyMutationInput = Readonly<{
+  export type PatientUpdateManyMutationInput = {
     firstName?: XOR<string, StringFieldUpdateOperationsInput>
     lastName?: XOR<string, StringFieldUpdateOperationsInput>
     email?: XOR<string, StringFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type MovieCreateInput = Readonly<{
+  export type MovieCreateInput = {
     title: string
     director: DirectorCreateOneWithoutMoviesInput
-  }>
+  }
 
-  export type MovieUpdateInput = Readonly<{
+  export type MovieUpdateInput = {
     title?: XOR<string, StringFieldUpdateOperationsInput>
     director?: DirectorUpdateOneRequiredWithoutMoviesInput
-  }>
+  }
 
-  export type MovieUpdateManyMutationInput = Readonly<{
+  export type MovieUpdateManyMutationInput = {
     title?: XOR<string, StringFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type DirectorCreateInput = Readonly<{
+  export type DirectorCreateInput = {
     firstName: string
     lastName: string
     movies?: MovieCreateManyWithoutDirectorInput
-  }>
+  }
 
-  export type DirectorUpdateInput = Readonly<{
+  export type DirectorUpdateInput = {
     firstName?: XOR<string, StringFieldUpdateOperationsInput>
     lastName?: XOR<string, StringFieldUpdateOperationsInput>
     movies?: MovieUpdateManyWithoutDirectorInput
-  }>
+  }
 
-  export type DirectorUpdateManyMutationInput = Readonly<{
+  export type DirectorUpdateManyMutationInput = {
     firstName?: XOR<string, StringFieldUpdateOperationsInput>
     lastName?: XOR<string, StringFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type ProblemCreateInput = Readonly<{
+  export type ProblemCreateInput = {
     problemText: string
     likedBy?: CreatorCreateManyWithoutLikesInput
     creator?: CreatorCreateOneWithoutProblemsInput
-  }>
+  }
 
-  export type ProblemUpdateInput = Readonly<{
+  export type ProblemUpdateInput = {
     problemText?: XOR<string, StringFieldUpdateOperationsInput>
     likedBy?: CreatorUpdateManyWithoutLikesInput
     creator?: CreatorUpdateOneWithoutProblemsInput
-  }>
+  }
 
-  export type ProblemUpdateManyMutationInput = Readonly<{
+  export type ProblemUpdateManyMutationInput = {
     problemText?: XOR<string, StringFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type CreatorCreateInput = Readonly<{
+  export type CreatorCreateInput = {
     name: string
     likes?: ProblemCreateManyWithoutLikedByInput
     problems?: ProblemCreateManyWithoutCreatorInput
-  }>
+  }
 
-  export type CreatorUpdateInput = Readonly<{
+  export type CreatorUpdateInput = {
     name?: XOR<string, StringFieldUpdateOperationsInput>
     likes?: ProblemUpdateManyWithoutLikedByInput
     problems?: ProblemUpdateManyWithoutCreatorInput
-  }>
+  }
 
-  export type CreatorUpdateManyMutationInput = Readonly<{
+  export type CreatorUpdateManyMutationInput = {
     name?: XOR<string, StringFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type IntFilter = Readonly<{
+  export type IntFilter = {
     equals?: number
     in?: Enumerable<number>
     notIn?: Enumerable<number>
@@ -5269,9 +5269,9 @@ export namespace Prisma {
     gt?: number
     gte?: number
     not?: XOR<number, NestedIntFilter>
-  }>
+  }
 
-  export type StringFilter = Readonly<{
+  export type StringFilter = {
     equals?: string
     in?: Enumerable<string>
     notIn?: Enumerable<string>
@@ -5284,9 +5284,9 @@ export namespace Prisma {
     endsWith?: string
     mode?: QueryMode
     not?: XOR<string, NestedStringFilter>
-  }>
+  }
 
-  export type StringNullableFilter = Readonly<{
+  export type StringNullableFilter = {
     equals?: XOR<string, null>
     in?: XOR<Enumerable<string>, null>
     notIn?: XOR<Enumerable<string>, null>
@@ -5299,9 +5299,9 @@ export namespace Prisma {
     endsWith?: string
     mode?: QueryMode
     not?: string | NestedStringNullableFilter | null
-  }>
+  }
 
-  export type FloatFilter = Readonly<{
+  export type FloatFilter = {
     equals?: number
     in?: Enumerable<number>
     notIn?: Enumerable<number>
@@ -5310,22 +5310,22 @@ export namespace Prisma {
     gt?: number
     gte?: number
     not?: XOR<number, NestedFloatFilter>
-  }>
+  }
 
-  export type PostListRelationFilter = Readonly<{
+  export type PostListRelationFilter = {
     every?: postWhereInput
     some?: postWhereInput
     none?: postWhereInput
-  }>
+  }
 
-  export type EnumRoleFilter = Readonly<{
+  export type EnumRoleFilter = {
     equals?: Role
     in?: Enumerable<Role>
     notIn?: Enumerable<Role>
     not?: XOR<Role, NestedEnumRoleFilter>
-  }>
+  }
 
-  export type DateTimeFilter = Readonly<{
+  export type DateTimeFilter = {
     equals?: Date | string
     in?: Enumerable<Date> | Enumerable<string>
     notIn?: Enumerable<Date> | Enumerable<string>
@@ -5334,19 +5334,19 @@ export namespace Prisma {
     gt?: Date | string
     gte?: Date | string
     not?: XOR<Date | string, NestedDateTimeFilter>
-  }>
+  }
 
-  export type BoolFilter = Readonly<{
+  export type BoolFilter = {
     equals?: boolean
     not?: XOR<boolean, NestedBoolFilter>
-  }>
+  }
 
-  export type UserRelationFilter = Readonly<{
+  export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
-  }>
+  }
 
-  export type IntNullableFilter = Readonly<{
+  export type IntNullableFilter = {
     equals?: XOR<number, null>
     in?: XOR<Enumerable<number>, null>
     notIn?: XOR<Enumerable<number>, null>
@@ -5355,105 +5355,105 @@ export namespace Prisma {
     gt?: number
     gte?: number
     not?: number | NestedIntNullableFilter | null
-  }>
+  }
 
-  export type EnumPostKindNullableFilter = Readonly<{
+  export type EnumPostKindNullableFilter = {
     equals?: XOR<PostKind, null>
     in?: XOR<Enumerable<PostKind>, null>
     notIn?: XOR<Enumerable<PostKind>, null>
     not?: PostKind | NestedEnumPostKindNullableFilter | null
-  }>
+  }
 
-  export type JsonFilter = Readonly<{
+  export type JsonFilter = {
     equals?: InputJsonValue
     not?: InputJsonValue
-  }>
+  }
 
-  export type SlugNumberCompoundUniqueInput = Readonly<{
+  export type SlugNumberCompoundUniqueInput = {
     slug: string
     number: number
-  }>
+  }
 
-  export type FirstNameLastNameCompoundUniqueInput = Readonly<{
+  export type FirstNameLastNameCompoundUniqueInput = {
     firstName: string
     lastName: string
-  }>
+  }
 
-  export type DirectorRelationFilter = Readonly<{
+  export type DirectorRelationFilter = {
     is?: DirectorWhereInput
     isNot?: DirectorWhereInput
-  }>
+  }
 
-  export type DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = Readonly<{
+  export type DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = {
     directorFirstName: string
     directorLastName: string
     title: string
-  }>
+  }
 
-  export type MovieListRelationFilter = Readonly<{
+  export type MovieListRelationFilter = {
     every?: MovieWhereInput
     some?: MovieWhereInput
     none?: MovieWhereInput
-  }>
+  }
 
-  export type CreatorListRelationFilter = Readonly<{
+  export type CreatorListRelationFilter = {
     every?: CreatorWhereInput
     some?: CreatorWhereInput
     none?: CreatorWhereInput
-  }>
+  }
 
-  export type CreatorRelationFilter = Readonly<{
+  export type CreatorRelationFilter = {
     is?: XOR<CreatorWhereInput, null>
     isNot?: XOR<CreatorWhereInput, null>
-  }>
+  }
 
-  export type ProblemListRelationFilter = Readonly<{
+  export type ProblemListRelationFilter = {
     every?: ProblemWhereInput
     some?: ProblemWhereInput
     none?: ProblemWhereInput
-  }>
+  }
 
-  export type postCreateManyWithoutAuthorInput = Readonly<{
+  export type postCreateManyWithoutAuthorInput = {
     create?: XOR<postCreateWithoutAuthorInput, Enumerable<postCreateWithoutAuthorInput>>
     connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
     connectOrCreate?: XOR<postCreateOrConnectWithoutauthorInput, Enumerable<postCreateOrConnectWithoutauthorInput>>
-  }>
+  }
 
-  export type postCreateManyWithoutEditorInput = Readonly<{
+  export type postCreateManyWithoutEditorInput = {
     create?: XOR<postCreateWithoutEditorInput, Enumerable<postCreateWithoutEditorInput>>
     connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
     connectOrCreate?: XOR<postCreateOrConnectWithouteditorInput, Enumerable<postCreateOrConnectWithouteditorInput>>
-  }>
+  }
 
-  export type StringFieldUpdateOperationsInput = Readonly<{
+  export type StringFieldUpdateOperationsInput = {
     set?: string
-  }>
+  }
 
-  export type NullableStringFieldUpdateOperationsInput = Readonly<{
+  export type NullableStringFieldUpdateOperationsInput = {
     set?: XOR<string, null>
-  }>
+  }
 
-  export type IntFieldUpdateOperationsInput = Readonly<{
+  export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }>
+  }
 
-  export type FloatFieldUpdateOperationsInput = Readonly<{
+  export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }>
+  }
 
-  export type EnumRoleFieldUpdateOperationsInput = Readonly<{
+  export type EnumRoleFieldUpdateOperationsInput = {
     set?: Role
-  }>
+  }
 
-  export type postUpdateManyWithoutAuthorInput = Readonly<{
+  export type postUpdateManyWithoutAuthorInput = {
     create?: XOR<postCreateWithoutAuthorInput, Enumerable<postCreateWithoutAuthorInput>>
     connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
     set?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
@@ -5464,9 +5464,9 @@ export namespace Prisma {
     deleteMany?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
     upsert?: XOR<postUpsertWithWhereUniqueWithoutAuthorInput, Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>>
     connectOrCreate?: XOR<postCreateOrConnectWithoutauthorInput, Enumerable<postCreateOrConnectWithoutauthorInput>>
-  }>
+  }
 
-  export type postUpdateManyWithoutEditorInput = Readonly<{
+  export type postUpdateManyWithoutEditorInput = {
     create?: XOR<postCreateWithoutEditorInput, Enumerable<postCreateWithoutEditorInput>>
     connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
     set?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
@@ -5477,41 +5477,41 @@ export namespace Prisma {
     deleteMany?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
     upsert?: XOR<postUpsertWithWhereUniqueWithoutEditorInput, Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>>
     connectOrCreate?: XOR<postCreateOrConnectWithouteditorInput, Enumerable<postCreateOrConnectWithouteditorInput>>
-  }>
+  }
 
-  export type UserCreateOneWithoutPostsInput = Readonly<{
+  export type UserCreateOneWithoutPostsInput = {
     create?: UserCreateWithoutPostsInput
     connect?: UserWhereUniqueInput
     connectOrCreate?: UserCreateOrConnectWithoutpostsInput
-  }>
+  }
 
-  export type UserCreateOneWithoutEditorPostsInput = Readonly<{
+  export type UserCreateOneWithoutEditorPostsInput = {
     create?: UserCreateWithoutEditorPostsInput
     connect?: UserWhereUniqueInput
     connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
-  }>
+  }
 
-  export type DateTimeFieldUpdateOperationsInput = Readonly<{
+  export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }>
+  }
 
-  export type BoolFieldUpdateOperationsInput = Readonly<{
+  export type BoolFieldUpdateOperationsInput = {
     set?: boolean
-  }>
+  }
 
-  export type NullableEnumPostKindFieldUpdateOperationsInput = Readonly<{
+  export type NullableEnumPostKindFieldUpdateOperationsInput = {
     set?: XOR<PostKind, null>
-  }>
+  }
 
-  export type UserUpdateOneRequiredWithoutPostsInput = Readonly<{
+  export type UserUpdateOneRequiredWithoutPostsInput = {
     create?: UserCreateWithoutPostsInput
     connect?: UserWhereUniqueInput
     update?: UserUpdateWithoutPostsInput
     upsert?: UserUpsertWithoutPostsInput
     connectOrCreate?: UserCreateOrConnectWithoutpostsInput
-  }>
+  }
 
-  export type UserUpdateOneWithoutEditorPostsInput = Readonly<{
+  export type UserUpdateOneWithoutEditorPostsInput = {
     create?: UserCreateWithoutEditorPostsInput
     connect?: UserWhereUniqueInput
     disconnect?: boolean
@@ -5519,29 +5519,29 @@ export namespace Prisma {
     update?: UserUpdateWithoutEditorPostsInput
     upsert?: UserUpsertWithoutEditorPostsInput
     connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
-  }>
+  }
 
-  export type DirectorCreateOneWithoutMoviesInput = Readonly<{
+  export type DirectorCreateOneWithoutMoviesInput = {
     create?: DirectorCreateWithoutMoviesInput
     connect?: DirectorWhereUniqueInput
     connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
-  }>
+  }
 
-  export type DirectorUpdateOneRequiredWithoutMoviesInput = Readonly<{
+  export type DirectorUpdateOneRequiredWithoutMoviesInput = {
     create?: DirectorCreateWithoutMoviesInput
     connect?: DirectorWhereUniqueInput
     update?: DirectorUpdateWithoutMoviesInput
     upsert?: DirectorUpsertWithoutMoviesInput
     connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
-  }>
+  }
 
-  export type MovieCreateManyWithoutDirectorInput = Readonly<{
+  export type MovieCreateManyWithoutDirectorInput = {
     create?: XOR<MovieCreateWithoutDirectorInput, Enumerable<MovieCreateWithoutDirectorInput>>
     connect?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
     connectOrCreate?: XOR<MovieCreateOrConnectWithoutdirectorInput, Enumerable<MovieCreateOrConnectWithoutdirectorInput>>
-  }>
+  }
 
-  export type MovieUpdateManyWithoutDirectorInput = Readonly<{
+  export type MovieUpdateManyWithoutDirectorInput = {
     create?: XOR<MovieCreateWithoutDirectorInput, Enumerable<MovieCreateWithoutDirectorInput>>
     connect?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
     set?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
@@ -5552,21 +5552,21 @@ export namespace Prisma {
     deleteMany?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
     upsert?: XOR<MovieUpsertWithWhereUniqueWithoutDirectorInput, Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>>
     connectOrCreate?: XOR<MovieCreateOrConnectWithoutdirectorInput, Enumerable<MovieCreateOrConnectWithoutdirectorInput>>
-  }>
+  }
 
-  export type CreatorCreateManyWithoutLikesInput = Readonly<{
+  export type CreatorCreateManyWithoutLikesInput = {
     create?: XOR<CreatorCreateWithoutLikesInput, Enumerable<CreatorCreateWithoutLikesInput>>
     connect?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
     connectOrCreate?: XOR<CreatorCreateOrConnectWithoutlikesInput, Enumerable<CreatorCreateOrConnectWithoutlikesInput>>
-  }>
+  }
 
-  export type CreatorCreateOneWithoutProblemsInput = Readonly<{
+  export type CreatorCreateOneWithoutProblemsInput = {
     create?: CreatorCreateWithoutProblemsInput
     connect?: CreatorWhereUniqueInput
     connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
-  }>
+  }
 
-  export type CreatorUpdateManyWithoutLikesInput = Readonly<{
+  export type CreatorUpdateManyWithoutLikesInput = {
     create?: XOR<CreatorCreateWithoutLikesInput, Enumerable<CreatorCreateWithoutLikesInput>>
     connect?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
     set?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
@@ -5577,9 +5577,9 @@ export namespace Prisma {
     deleteMany?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
     upsert?: XOR<CreatorUpsertWithWhereUniqueWithoutLikesInput, Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>>
     connectOrCreate?: XOR<CreatorCreateOrConnectWithoutlikesInput, Enumerable<CreatorCreateOrConnectWithoutlikesInput>>
-  }>
+  }
 
-  export type CreatorUpdateOneWithoutProblemsInput = Readonly<{
+  export type CreatorUpdateOneWithoutProblemsInput = {
     create?: CreatorCreateWithoutProblemsInput
     connect?: CreatorWhereUniqueInput
     disconnect?: boolean
@@ -5587,21 +5587,21 @@ export namespace Prisma {
     update?: CreatorUpdateWithoutProblemsInput
     upsert?: CreatorUpsertWithoutProblemsInput
     connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
-  }>
+  }
 
-  export type ProblemCreateManyWithoutLikedByInput = Readonly<{
+  export type ProblemCreateManyWithoutLikedByInput = {
     create?: XOR<ProblemCreateWithoutLikedByInput, Enumerable<ProblemCreateWithoutLikedByInput>>
     connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
     connectOrCreate?: XOR<ProblemCreateOrConnectWithoutlikedByInput, Enumerable<ProblemCreateOrConnectWithoutlikedByInput>>
-  }>
+  }
 
-  export type ProblemCreateManyWithoutCreatorInput = Readonly<{
+  export type ProblemCreateManyWithoutCreatorInput = {
     create?: XOR<ProblemCreateWithoutCreatorInput, Enumerable<ProblemCreateWithoutCreatorInput>>
     connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
     connectOrCreate?: XOR<ProblemCreateOrConnectWithoutcreatorInput, Enumerable<ProblemCreateOrConnectWithoutcreatorInput>>
-  }>
+  }
 
-  export type ProblemUpdateManyWithoutLikedByInput = Readonly<{
+  export type ProblemUpdateManyWithoutLikedByInput = {
     create?: XOR<ProblemCreateWithoutLikedByInput, Enumerable<ProblemCreateWithoutLikedByInput>>
     connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
     set?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
@@ -5612,9 +5612,9 @@ export namespace Prisma {
     deleteMany?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
     upsert?: XOR<ProblemUpsertWithWhereUniqueWithoutLikedByInput, Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>>
     connectOrCreate?: XOR<ProblemCreateOrConnectWithoutlikedByInput, Enumerable<ProblemCreateOrConnectWithoutlikedByInput>>
-  }>
+  }
 
-  export type ProblemUpdateManyWithoutCreatorInput = Readonly<{
+  export type ProblemUpdateManyWithoutCreatorInput = {
     create?: XOR<ProblemCreateWithoutCreatorInput, Enumerable<ProblemCreateWithoutCreatorInput>>
     connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
     set?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
@@ -5625,9 +5625,9 @@ export namespace Prisma {
     deleteMany?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
     upsert?: XOR<ProblemUpsertWithWhereUniqueWithoutCreatorInput, Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>>
     connectOrCreate?: XOR<ProblemCreateOrConnectWithoutcreatorInput, Enumerable<ProblemCreateOrConnectWithoutcreatorInput>>
-  }>
+  }
 
-  export type NestedIntFilter = Readonly<{
+  export type NestedIntFilter = {
     equals?: number
     in?: Enumerable<number>
     notIn?: Enumerable<number>
@@ -5636,9 +5636,9 @@ export namespace Prisma {
     gt?: number
     gte?: number
     not?: XOR<number, NestedIntFilter>
-  }>
+  }
 
-  export type NestedStringFilter = Readonly<{
+  export type NestedStringFilter = {
     equals?: string
     in?: Enumerable<string>
     notIn?: Enumerable<string>
@@ -5650,9 +5650,9 @@ export namespace Prisma {
     startsWith?: string
     endsWith?: string
     not?: XOR<string, NestedStringFilter>
-  }>
+  }
 
-  export type NestedStringNullableFilter = Readonly<{
+  export type NestedStringNullableFilter = {
     equals?: XOR<string, null>
     in?: XOR<Enumerable<string>, null>
     notIn?: XOR<Enumerable<string>, null>
@@ -5664,9 +5664,9 @@ export namespace Prisma {
     startsWith?: string
     endsWith?: string
     not?: string | NestedStringNullableFilter | null
-  }>
+  }
 
-  export type NestedFloatFilter = Readonly<{
+  export type NestedFloatFilter = {
     equals?: number
     in?: Enumerable<number>
     notIn?: Enumerable<number>
@@ -5675,16 +5675,16 @@ export namespace Prisma {
     gt?: number
     gte?: number
     not?: XOR<number, NestedFloatFilter>
-  }>
+  }
 
-  export type NestedEnumRoleFilter = Readonly<{
+  export type NestedEnumRoleFilter = {
     equals?: Role
     in?: Enumerable<Role>
     notIn?: Enumerable<Role>
     not?: XOR<Role, NestedEnumRoleFilter>
-  }>
+  }
 
-  export type NestedDateTimeFilter = Readonly<{
+  export type NestedDateTimeFilter = {
     equals?: Date | string
     in?: Enumerable<Date> | Enumerable<string>
     notIn?: Enumerable<Date> | Enumerable<string>
@@ -5693,14 +5693,14 @@ export namespace Prisma {
     gt?: Date | string
     gte?: Date | string
     not?: XOR<Date | string, NestedDateTimeFilter>
-  }>
+  }
 
-  export type NestedBoolFilter = Readonly<{
+  export type NestedBoolFilter = {
     equals?: boolean
     not?: XOR<boolean, NestedBoolFilter>
-  }>
+  }
 
-  export type NestedIntNullableFilter = Readonly<{
+  export type NestedIntNullableFilter = {
     equals?: XOR<number, null>
     in?: XOR<Enumerable<number>, null>
     notIn?: XOR<Enumerable<number>, null>
@@ -5709,16 +5709,16 @@ export namespace Prisma {
     gt?: number
     gte?: number
     not?: number | NestedIntNullableFilter | null
-  }>
+  }
 
-  export type NestedEnumPostKindNullableFilter = Readonly<{
+  export type NestedEnumPostKindNullableFilter = {
     equals?: XOR<PostKind, null>
     in?: XOR<Enumerable<PostKind>, null>
     notIn?: XOR<Enumerable<PostKind>, null>
     not?: PostKind | NestedEnumPostKindNullableFilter | null
-  }>
+  }
 
-  export type postCreateWithoutAuthorInput = Readonly<{
+  export type postCreateWithoutAuthorInput = {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5729,14 +5729,14 @@ export namespace Prisma {
     kind?: XOR<PostKind, null>
     metadata: InputJsonValue
     editor?: UserCreateOneWithoutEditorPostsInput
-  }>
+  }
 
-  export type postCreateOrConnectWithoutauthorInput = Readonly<{
+  export type postCreateOrConnectWithoutauthorInput = {
     where: postWhereUniqueInput
     create: postCreateWithoutAuthorInput
-  }>
+  }
 
-  export type postCreateWithoutEditorInput = Readonly<{
+  export type postCreateWithoutEditorInput = {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5747,24 +5747,24 @@ export namespace Prisma {
     kind?: XOR<PostKind, null>
     metadata: InputJsonValue
     author: UserCreateOneWithoutPostsInput
-  }>
+  }
 
-  export type postCreateOrConnectWithouteditorInput = Readonly<{
+  export type postCreateOrConnectWithouteditorInput = {
     where: postWhereUniqueInput
     create: postCreateWithoutEditorInput
-  }>
+  }
 
-  export type postUpdateWithWhereUniqueWithoutAuthorInput = Readonly<{
+  export type postUpdateWithWhereUniqueWithoutAuthorInput = {
     where: postWhereUniqueInput
     data: postUpdateWithoutAuthorInput
-  }>
+  }
 
-  export type postUpdateManyWithWhereWithoutAuthorInput = Readonly<{
+  export type postUpdateManyWithWhereWithoutAuthorInput = {
     where: postScalarWhereInput
     data: postUpdateManyMutationInput
-  }>
+  }
 
-  export type postScalarWhereInput = Readonly<{
+  export type postScalarWhereInput = {
     AND?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
     OR?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
     NOT?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
@@ -5779,31 +5779,31 @@ export namespace Prisma {
     editorId?: IntNullableFilter | number | null
     kind?: EnumPostKindNullableFilter | PostKind | null
     metadata?: JsonFilter
-  }>
+  }
 
-  export type postUpsertWithWhereUniqueWithoutAuthorInput = Readonly<{
+  export type postUpsertWithWhereUniqueWithoutAuthorInput = {
     where: postWhereUniqueInput
     update: postUpdateWithoutAuthorInput
     create: postCreateWithoutAuthorInput
-  }>
+  }
 
-  export type postUpdateWithWhereUniqueWithoutEditorInput = Readonly<{
+  export type postUpdateWithWhereUniqueWithoutEditorInput = {
     where: postWhereUniqueInput
     data: postUpdateWithoutEditorInput
-  }>
+  }
 
-  export type postUpdateManyWithWhereWithoutEditorInput = Readonly<{
+  export type postUpdateManyWithWhereWithoutEditorInput = {
     where: postScalarWhereInput
     data: postUpdateManyMutationInput
-  }>
+  }
 
-  export type postUpsertWithWhereUniqueWithoutEditorInput = Readonly<{
+  export type postUpsertWithWhereUniqueWithoutEditorInput = {
     where: postWhereUniqueInput
     update: postUpdateWithoutEditorInput
     create: postCreateWithoutEditorInput
-  }>
+  }
 
-  export type UserCreateWithoutPostsInput = Readonly<{
+  export type UserCreateWithoutPostsInput = {
     email: string
     name?: XOR<string, null>
     age: number
@@ -5811,14 +5811,14 @@ export namespace Prisma {
     amount: number
     role: Role
     editorPosts?: postCreateManyWithoutEditorInput
-  }>
+  }
 
-  export type UserCreateOrConnectWithoutpostsInput = Readonly<{
+  export type UserCreateOrConnectWithoutpostsInput = {
     where: UserWhereUniqueInput
     create: UserCreateWithoutPostsInput
-  }>
+  }
 
-  export type UserCreateWithoutEditorPostsInput = Readonly<{
+  export type UserCreateWithoutEditorPostsInput = {
     email: string
     name?: XOR<string, null>
     age: number
@@ -5826,14 +5826,14 @@ export namespace Prisma {
     amount: number
     role: Role
     posts?: postCreateManyWithoutAuthorInput
-  }>
+  }
 
-  export type UserCreateOrConnectWithouteditorPostsInput = Readonly<{
+  export type UserCreateOrConnectWithouteditorPostsInput = {
     where: UserWhereUniqueInput
     create: UserCreateWithoutEditorPostsInput
-  }>
+  }
 
-  export type UserUpdateWithoutPostsInput = Readonly<{
+  export type UserUpdateWithoutPostsInput = {
     email?: XOR<string, StringFieldUpdateOperationsInput>
     name?: string | NullableStringFieldUpdateOperationsInput | null
     age?: XOR<number, IntFieldUpdateOperationsInput>
@@ -5841,14 +5841,14 @@ export namespace Prisma {
     amount?: XOR<number, FloatFieldUpdateOperationsInput>
     role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
     editorPosts?: postUpdateManyWithoutEditorInput
-  }>
+  }
 
-  export type UserUpsertWithoutPostsInput = Readonly<{
+  export type UserUpsertWithoutPostsInput = {
     update: UserUpdateWithoutPostsInput
     create: UserCreateWithoutPostsInput
-  }>
+  }
 
-  export type UserUpdateWithoutEditorPostsInput = Readonly<{
+  export type UserUpdateWithoutEditorPostsInput = {
     email?: XOR<string, StringFieldUpdateOperationsInput>
     name?: string | NullableStringFieldUpdateOperationsInput | null
     age?: XOR<number, IntFieldUpdateOperationsInput>
@@ -5856,183 +5856,183 @@ export namespace Prisma {
     amount?: XOR<number, FloatFieldUpdateOperationsInput>
     role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
     posts?: postUpdateManyWithoutAuthorInput
-  }>
+  }
 
-  export type UserUpsertWithoutEditorPostsInput = Readonly<{
+  export type UserUpsertWithoutEditorPostsInput = {
     update: UserUpdateWithoutEditorPostsInput
     create: UserCreateWithoutEditorPostsInput
-  }>
+  }
 
-  export type DirectorCreateWithoutMoviesInput = Readonly<{
+  export type DirectorCreateWithoutMoviesInput = {
     firstName: string
     lastName: string
-  }>
+  }
 
-  export type DirectorCreateOrConnectWithoutmoviesInput = Readonly<{
+  export type DirectorCreateOrConnectWithoutmoviesInput = {
     where: DirectorWhereUniqueInput
     create: DirectorCreateWithoutMoviesInput
-  }>
+  }
 
-  export type DirectorUpdateWithoutMoviesInput = Readonly<{
+  export type DirectorUpdateWithoutMoviesInput = {
     firstName?: XOR<string, StringFieldUpdateOperationsInput>
     lastName?: XOR<string, StringFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type DirectorUpsertWithoutMoviesInput = Readonly<{
+  export type DirectorUpsertWithoutMoviesInput = {
     update: DirectorUpdateWithoutMoviesInput
     create: DirectorCreateWithoutMoviesInput
-  }>
+  }
 
-  export type MovieCreateWithoutDirectorInput = Readonly<{
+  export type MovieCreateWithoutDirectorInput = {
     title: string
-  }>
+  }
 
-  export type MovieCreateOrConnectWithoutdirectorInput = Readonly<{
+  export type MovieCreateOrConnectWithoutdirectorInput = {
     where: MovieWhereUniqueInput
     create: MovieCreateWithoutDirectorInput
-  }>
+  }
 
-  export type MovieUpdateWithWhereUniqueWithoutDirectorInput = Readonly<{
+  export type MovieUpdateWithWhereUniqueWithoutDirectorInput = {
     where: MovieWhereUniqueInput
     data: MovieUpdateWithoutDirectorInput
-  }>
+  }
 
-  export type MovieUpdateManyWithWhereWithoutDirectorInput = Readonly<{
+  export type MovieUpdateManyWithWhereWithoutDirectorInput = {
     where: MovieScalarWhereInput
     data: MovieUpdateManyMutationInput
-  }>
+  }
 
-  export type MovieScalarWhereInput = Readonly<{
+  export type MovieScalarWhereInput = {
     AND?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
     OR?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
     NOT?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
     directorFirstName?: XOR<StringFilter, string>
     directorLastName?: XOR<StringFilter, string>
     title?: XOR<StringFilter, string>
-  }>
+  }
 
-  export type MovieUpsertWithWhereUniqueWithoutDirectorInput = Readonly<{
+  export type MovieUpsertWithWhereUniqueWithoutDirectorInput = {
     where: MovieWhereUniqueInput
     update: MovieUpdateWithoutDirectorInput
     create: MovieCreateWithoutDirectorInput
-  }>
+  }
 
-  export type CreatorCreateWithoutLikesInput = Readonly<{
+  export type CreatorCreateWithoutLikesInput = {
     name: string
     problems?: ProblemCreateManyWithoutCreatorInput
-  }>
+  }
 
-  export type CreatorCreateOrConnectWithoutlikesInput = Readonly<{
+  export type CreatorCreateOrConnectWithoutlikesInput = {
     where: CreatorWhereUniqueInput
     create: CreatorCreateWithoutLikesInput
-  }>
+  }
 
-  export type CreatorCreateWithoutProblemsInput = Readonly<{
+  export type CreatorCreateWithoutProblemsInput = {
     name: string
     likes?: ProblemCreateManyWithoutLikedByInput
-  }>
+  }
 
-  export type CreatorCreateOrConnectWithoutproblemsInput = Readonly<{
+  export type CreatorCreateOrConnectWithoutproblemsInput = {
     where: CreatorWhereUniqueInput
     create: CreatorCreateWithoutProblemsInput
-  }>
+  }
 
-  export type CreatorUpdateWithWhereUniqueWithoutLikesInput = Readonly<{
+  export type CreatorUpdateWithWhereUniqueWithoutLikesInput = {
     where: CreatorWhereUniqueInput
     data: CreatorUpdateWithoutLikesInput
-  }>
+  }
 
-  export type CreatorUpdateManyWithWhereWithoutLikesInput = Readonly<{
+  export type CreatorUpdateManyWithWhereWithoutLikesInput = {
     where: CreatorScalarWhereInput
     data: CreatorUpdateManyMutationInput
-  }>
+  }
 
-  export type CreatorScalarWhereInput = Readonly<{
+  export type CreatorScalarWhereInput = {
     AND?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
     OR?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
     NOT?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
     id?: XOR<IntFilter, number>
     name?: XOR<StringFilter, string>
-  }>
+  }
 
-  export type CreatorUpsertWithWhereUniqueWithoutLikesInput = Readonly<{
+  export type CreatorUpsertWithWhereUniqueWithoutLikesInput = {
     where: CreatorWhereUniqueInput
     update: CreatorUpdateWithoutLikesInput
     create: CreatorCreateWithoutLikesInput
-  }>
+  }
 
-  export type CreatorUpdateWithoutProblemsInput = Readonly<{
+  export type CreatorUpdateWithoutProblemsInput = {
     name?: XOR<string, StringFieldUpdateOperationsInput>
     likes?: ProblemUpdateManyWithoutLikedByInput
-  }>
+  }
 
-  export type CreatorUpsertWithoutProblemsInput = Readonly<{
+  export type CreatorUpsertWithoutProblemsInput = {
     update: CreatorUpdateWithoutProblemsInput
     create: CreatorCreateWithoutProblemsInput
-  }>
+  }
 
-  export type ProblemCreateWithoutLikedByInput = Readonly<{
+  export type ProblemCreateWithoutLikedByInput = {
     problemText: string
     creator?: CreatorCreateOneWithoutProblemsInput
-  }>
+  }
 
-  export type ProblemCreateOrConnectWithoutlikedByInput = Readonly<{
+  export type ProblemCreateOrConnectWithoutlikedByInput = {
     where: ProblemWhereUniqueInput
     create: ProblemCreateWithoutLikedByInput
-  }>
+  }
 
-  export type ProblemCreateWithoutCreatorInput = Readonly<{
+  export type ProblemCreateWithoutCreatorInput = {
     problemText: string
     likedBy?: CreatorCreateManyWithoutLikesInput
-  }>
+  }
 
-  export type ProblemCreateOrConnectWithoutcreatorInput = Readonly<{
+  export type ProblemCreateOrConnectWithoutcreatorInput = {
     where: ProblemWhereUniqueInput
     create: ProblemCreateWithoutCreatorInput
-  }>
+  }
 
-  export type ProblemUpdateWithWhereUniqueWithoutLikedByInput = Readonly<{
+  export type ProblemUpdateWithWhereUniqueWithoutLikedByInput = {
     where: ProblemWhereUniqueInput
     data: ProblemUpdateWithoutLikedByInput
-  }>
+  }
 
-  export type ProblemUpdateManyWithWhereWithoutLikedByInput = Readonly<{
+  export type ProblemUpdateManyWithWhereWithoutLikedByInput = {
     where: ProblemScalarWhereInput
     data: ProblemUpdateManyMutationInput
-  }>
+  }
 
-  export type ProblemScalarWhereInput = Readonly<{
+  export type ProblemScalarWhereInput = {
     AND?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
     OR?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
     NOT?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
     id?: XOR<IntFilter, number>
     problemText?: XOR<StringFilter, string>
     creatorId?: IntNullableFilter | number | null
-  }>
+  }
 
-  export type ProblemUpsertWithWhereUniqueWithoutLikedByInput = Readonly<{
+  export type ProblemUpsertWithWhereUniqueWithoutLikedByInput = {
     where: ProblemWhereUniqueInput
     update: ProblemUpdateWithoutLikedByInput
     create: ProblemCreateWithoutLikedByInput
-  }>
+  }
 
-  export type ProblemUpdateWithWhereUniqueWithoutCreatorInput = Readonly<{
+  export type ProblemUpdateWithWhereUniqueWithoutCreatorInput = {
     where: ProblemWhereUniqueInput
     data: ProblemUpdateWithoutCreatorInput
-  }>
+  }
 
-  export type ProblemUpdateManyWithWhereWithoutCreatorInput = Readonly<{
+  export type ProblemUpdateManyWithWhereWithoutCreatorInput = {
     where: ProblemScalarWhereInput
     data: ProblemUpdateManyMutationInput
-  }>
+  }
 
-  export type ProblemUpsertWithWhereUniqueWithoutCreatorInput = Readonly<{
+  export type ProblemUpsertWithWhereUniqueWithoutCreatorInput = {
     where: ProblemWhereUniqueInput
     update: ProblemUpdateWithoutCreatorInput
     create: ProblemCreateWithoutCreatorInput
-  }>
+  }
 
-  export type postUpdateWithoutAuthorInput = Readonly<{
+  export type postUpdateWithoutAuthorInput = {
     uuid?: XOR<string, StringFieldUpdateOperationsInput>
     createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
     updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
@@ -6043,9 +6043,9 @@ export namespace Prisma {
     kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
     metadata?: InputJsonValue
     editor?: UserUpdateOneWithoutEditorPostsInput
-  }>
+  }
 
-  export type postUpdateWithoutEditorInput = Readonly<{
+  export type postUpdateWithoutEditorInput = {
     uuid?: XOR<string, StringFieldUpdateOperationsInput>
     createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
     updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
@@ -6056,26 +6056,26 @@ export namespace Prisma {
     kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
     metadata?: InputJsonValue
     author?: UserUpdateOneRequiredWithoutPostsInput
-  }>
+  }
 
-  export type MovieUpdateWithoutDirectorInput = Readonly<{
+  export type MovieUpdateWithoutDirectorInput = {
     title?: XOR<string, StringFieldUpdateOperationsInput>
-  }>
+  }
 
-  export type CreatorUpdateWithoutLikesInput = Readonly<{
+  export type CreatorUpdateWithoutLikesInput = {
     name?: XOR<string, StringFieldUpdateOperationsInput>
     problems?: ProblemUpdateManyWithoutCreatorInput
-  }>
+  }
 
-  export type ProblemUpdateWithoutLikedByInput = Readonly<{
+  export type ProblemUpdateWithoutLikedByInput = {
     problemText?: XOR<string, StringFieldUpdateOperationsInput>
     creator?: CreatorUpdateOneWithoutProblemsInput
-  }>
+  }
 
-  export type ProblemUpdateWithoutCreatorInput = Readonly<{
+  export type ProblemUpdateWithoutCreatorInput = {
     problemText?: XOR<string, StringFieldUpdateOperationsInput>
     likedBy?: CreatorUpdateManyWithoutLikesInput
-  }>
+  }
 
 
 
@@ -6097,317 +6097,1573 @@ export namespace Prisma {
 * Exports for compatiblity introduced in 2.12.0
 * Please import from the Prisma namespace instead
 */
-export import UserDistinctFieldEnum = Prisma.UserDistinctFieldEnum
-export import PostDistinctFieldEnum = Prisma.PostDistinctFieldEnum
-export import CategoryDistinctFieldEnum = Prisma.CategoryDistinctFieldEnum
-export import PatientDistinctFieldEnum = Prisma.PatientDistinctFieldEnum
-export import MovieDistinctFieldEnum = Prisma.MovieDistinctFieldEnum
-export import DirectorDistinctFieldEnum = Prisma.DirectorDistinctFieldEnum
-export import ProblemDistinctFieldEnum = Prisma.ProblemDistinctFieldEnum
-export import CreatorDistinctFieldEnum = Prisma.CreatorDistinctFieldEnum
-export import SortOrder = Prisma.SortOrder
-export import QueryMode = Prisma.QueryMode
-export import ModelName = Prisma.ModelName
-export import AggregateUser = Prisma.AggregateUser
-export import UserAvgAggregateOutputType = Prisma.UserAvgAggregateOutputType
-export import UserSumAggregateOutputType = Prisma.UserSumAggregateOutputType
-export import UserMinAggregateOutputType = Prisma.UserMinAggregateOutputType
-export import UserMaxAggregateOutputType = Prisma.UserMaxAggregateOutputType
-export import AggregateUserArgs = Prisma.AggregateUserArgs
-export import UserAvgAggregateInputType = Prisma.UserAvgAggregateInputType
-export import UserSumAggregateInputType = Prisma.UserSumAggregateInputType
-export import UserMinAggregateInputType = Prisma.UserMinAggregateInputType
-export import UserMaxAggregateInputType = Prisma.UserMaxAggregateInputType
-export import UserSelect = Prisma.UserSelect
-export import UserInclude = Prisma.UserInclude
-export import FindUniqueUserArgs = Prisma.FindUniqueUserArgs
-export import FindFirstUserArgs = Prisma.FindFirstUserArgs
-export import FindManyUserArgs = Prisma.FindManyUserArgs
-export import UserCreateArgs = Prisma.UserCreateArgs
-export import UserUpdateArgs = Prisma.UserUpdateArgs
-export import UserUpdateManyArgs = Prisma.UserUpdateManyArgs
-export import UserUpsertArgs = Prisma.UserUpsertArgs
-export import UserDeleteArgs = Prisma.UserDeleteArgs
-export import UserDeleteManyArgs = Prisma.UserDeleteManyArgs
-export import AggregatePost = Prisma.AggregatePost
-export import PostAvgAggregateOutputType = Prisma.PostAvgAggregateOutputType
-export import PostSumAggregateOutputType = Prisma.PostSumAggregateOutputType
-export import PostMinAggregateOutputType = Prisma.PostMinAggregateOutputType
-export import PostMaxAggregateOutputType = Prisma.PostMaxAggregateOutputType
-export import AggregatePostArgs = Prisma.AggregatePostArgs
-export import PostAvgAggregateInputType = Prisma.PostAvgAggregateInputType
-export import PostSumAggregateInputType = Prisma.PostSumAggregateInputType
-export import PostMinAggregateInputType = Prisma.PostMinAggregateInputType
-export import PostMaxAggregateInputType = Prisma.PostMaxAggregateInputType
-export import postSelect = Prisma.postSelect
-export import postInclude = Prisma.postInclude
-export import FindUniquepostArgs = Prisma.FindUniquepostArgs
-export import FindFirstpostArgs = Prisma.FindFirstpostArgs
-export import FindManypostArgs = Prisma.FindManypostArgs
-export import postCreateArgs = Prisma.postCreateArgs
-export import postUpdateArgs = Prisma.postUpdateArgs
-export import postUpdateManyArgs = Prisma.postUpdateManyArgs
-export import postUpsertArgs = Prisma.postUpsertArgs
-export import postDeleteArgs = Prisma.postDeleteArgs
-export import postDeleteManyArgs = Prisma.postDeleteManyArgs
-export import AggregateCategory = Prisma.AggregateCategory
-export import CategoryAvgAggregateOutputType = Prisma.CategoryAvgAggregateOutputType
-export import CategorySumAggregateOutputType = Prisma.CategorySumAggregateOutputType
-export import CategoryMinAggregateOutputType = Prisma.CategoryMinAggregateOutputType
-export import CategoryMaxAggregateOutputType = Prisma.CategoryMaxAggregateOutputType
-export import AggregateCategoryArgs = Prisma.AggregateCategoryArgs
-export import CategoryAvgAggregateInputType = Prisma.CategoryAvgAggregateInputType
-export import CategorySumAggregateInputType = Prisma.CategorySumAggregateInputType
-export import CategoryMinAggregateInputType = Prisma.CategoryMinAggregateInputType
-export import CategoryMaxAggregateInputType = Prisma.CategoryMaxAggregateInputType
-export import CategorySelect = Prisma.CategorySelect
-export import FindUniqueCategoryArgs = Prisma.FindUniqueCategoryArgs
-export import FindFirstCategoryArgs = Prisma.FindFirstCategoryArgs
-export import FindManyCategoryArgs = Prisma.FindManyCategoryArgs
-export import CategoryCreateArgs = Prisma.CategoryCreateArgs
-export import CategoryUpdateArgs = Prisma.CategoryUpdateArgs
-export import CategoryUpdateManyArgs = Prisma.CategoryUpdateManyArgs
-export import CategoryUpsertArgs = Prisma.CategoryUpsertArgs
-export import CategoryDeleteArgs = Prisma.CategoryDeleteArgs
-export import CategoryDeleteManyArgs = Prisma.CategoryDeleteManyArgs
-export import AggregatePatient = Prisma.AggregatePatient
-export import AggregatePatientArgs = Prisma.AggregatePatientArgs
-export import PatientSelect = Prisma.PatientSelect
-export import FindUniquePatientArgs = Prisma.FindUniquePatientArgs
-export import FindFirstPatientArgs = Prisma.FindFirstPatientArgs
-export import FindManyPatientArgs = Prisma.FindManyPatientArgs
-export import PatientCreateArgs = Prisma.PatientCreateArgs
-export import PatientUpdateArgs = Prisma.PatientUpdateArgs
-export import PatientUpdateManyArgs = Prisma.PatientUpdateManyArgs
-export import PatientUpsertArgs = Prisma.PatientUpsertArgs
-export import PatientDeleteArgs = Prisma.PatientDeleteArgs
-export import PatientDeleteManyArgs = Prisma.PatientDeleteManyArgs
-export import AggregateMovie = Prisma.AggregateMovie
-export import AggregateMovieArgs = Prisma.AggregateMovieArgs
-export import MovieSelect = Prisma.MovieSelect
-export import MovieInclude = Prisma.MovieInclude
-export import FindUniqueMovieArgs = Prisma.FindUniqueMovieArgs
-export import FindFirstMovieArgs = Prisma.FindFirstMovieArgs
-export import FindManyMovieArgs = Prisma.FindManyMovieArgs
-export import MovieCreateArgs = Prisma.MovieCreateArgs
-export import MovieUpdateArgs = Prisma.MovieUpdateArgs
-export import MovieUpdateManyArgs = Prisma.MovieUpdateManyArgs
-export import MovieUpsertArgs = Prisma.MovieUpsertArgs
-export import MovieDeleteArgs = Prisma.MovieDeleteArgs
-export import MovieDeleteManyArgs = Prisma.MovieDeleteManyArgs
-export import AggregateDirector = Prisma.AggregateDirector
-export import AggregateDirectorArgs = Prisma.AggregateDirectorArgs
-export import DirectorSelect = Prisma.DirectorSelect
-export import DirectorInclude = Prisma.DirectorInclude
-export import FindUniqueDirectorArgs = Prisma.FindUniqueDirectorArgs
-export import FindFirstDirectorArgs = Prisma.FindFirstDirectorArgs
-export import FindManyDirectorArgs = Prisma.FindManyDirectorArgs
-export import DirectorCreateArgs = Prisma.DirectorCreateArgs
-export import DirectorUpdateArgs = Prisma.DirectorUpdateArgs
-export import DirectorUpdateManyArgs = Prisma.DirectorUpdateManyArgs
-export import DirectorUpsertArgs = Prisma.DirectorUpsertArgs
-export import DirectorDeleteArgs = Prisma.DirectorDeleteArgs
-export import DirectorDeleteManyArgs = Prisma.DirectorDeleteManyArgs
-export import AggregateProblem = Prisma.AggregateProblem
-export import ProblemAvgAggregateOutputType = Prisma.ProblemAvgAggregateOutputType
-export import ProblemSumAggregateOutputType = Prisma.ProblemSumAggregateOutputType
-export import ProblemMinAggregateOutputType = Prisma.ProblemMinAggregateOutputType
-export import ProblemMaxAggregateOutputType = Prisma.ProblemMaxAggregateOutputType
-export import AggregateProblemArgs = Prisma.AggregateProblemArgs
-export import ProblemAvgAggregateInputType = Prisma.ProblemAvgAggregateInputType
-export import ProblemSumAggregateInputType = Prisma.ProblemSumAggregateInputType
-export import ProblemMinAggregateInputType = Prisma.ProblemMinAggregateInputType
-export import ProblemMaxAggregateInputType = Prisma.ProblemMaxAggregateInputType
-export import ProblemSelect = Prisma.ProblemSelect
-export import ProblemInclude = Prisma.ProblemInclude
-export import FindUniqueProblemArgs = Prisma.FindUniqueProblemArgs
-export import FindFirstProblemArgs = Prisma.FindFirstProblemArgs
-export import FindManyProblemArgs = Prisma.FindManyProblemArgs
-export import ProblemCreateArgs = Prisma.ProblemCreateArgs
-export import ProblemUpdateArgs = Prisma.ProblemUpdateArgs
-export import ProblemUpdateManyArgs = Prisma.ProblemUpdateManyArgs
-export import ProblemUpsertArgs = Prisma.ProblemUpsertArgs
-export import ProblemDeleteArgs = Prisma.ProblemDeleteArgs
-export import ProblemDeleteManyArgs = Prisma.ProblemDeleteManyArgs
-export import AggregateCreator = Prisma.AggregateCreator
-export import CreatorAvgAggregateOutputType = Prisma.CreatorAvgAggregateOutputType
-export import CreatorSumAggregateOutputType = Prisma.CreatorSumAggregateOutputType
-export import CreatorMinAggregateOutputType = Prisma.CreatorMinAggregateOutputType
-export import CreatorMaxAggregateOutputType = Prisma.CreatorMaxAggregateOutputType
-export import AggregateCreatorArgs = Prisma.AggregateCreatorArgs
-export import CreatorAvgAggregateInputType = Prisma.CreatorAvgAggregateInputType
-export import CreatorSumAggregateInputType = Prisma.CreatorSumAggregateInputType
-export import CreatorMinAggregateInputType = Prisma.CreatorMinAggregateInputType
-export import CreatorMaxAggregateInputType = Prisma.CreatorMaxAggregateInputType
-export import CreatorSelect = Prisma.CreatorSelect
-export import CreatorInclude = Prisma.CreatorInclude
-export import FindUniqueCreatorArgs = Prisma.FindUniqueCreatorArgs
-export import FindFirstCreatorArgs = Prisma.FindFirstCreatorArgs
-export import FindManyCreatorArgs = Prisma.FindManyCreatorArgs
-export import CreatorCreateArgs = Prisma.CreatorCreateArgs
-export import CreatorUpdateArgs = Prisma.CreatorUpdateArgs
-export import CreatorUpdateManyArgs = Prisma.CreatorUpdateManyArgs
-export import CreatorUpsertArgs = Prisma.CreatorUpsertArgs
-export import CreatorDeleteArgs = Prisma.CreatorDeleteArgs
-export import CreatorDeleteManyArgs = Prisma.CreatorDeleteManyArgs
-export import UserWhereInput = Prisma.UserWhereInput
-export import UserOrderByInput = Prisma.UserOrderByInput
-export import UserWhereUniqueInput = Prisma.UserWhereUniqueInput
-export import postWhereInput = Prisma.postWhereInput
-export import postOrderByInput = Prisma.postOrderByInput
-export import postWhereUniqueInput = Prisma.postWhereUniqueInput
-export import CategoryWhereInput = Prisma.CategoryWhereInput
-export import CategoryOrderByInput = Prisma.CategoryOrderByInput
-export import CategoryWhereUniqueInput = Prisma.CategoryWhereUniqueInput
-export import PatientWhereInput = Prisma.PatientWhereInput
-export import PatientOrderByInput = Prisma.PatientOrderByInput
-export import PatientWhereUniqueInput = Prisma.PatientWhereUniqueInput
-export import MovieWhereInput = Prisma.MovieWhereInput
-export import MovieOrderByInput = Prisma.MovieOrderByInput
-export import MovieWhereUniqueInput = Prisma.MovieWhereUniqueInput
-export import DirectorWhereInput = Prisma.DirectorWhereInput
-export import DirectorOrderByInput = Prisma.DirectorOrderByInput
-export import DirectorWhereUniqueInput = Prisma.DirectorWhereUniqueInput
-export import ProblemWhereInput = Prisma.ProblemWhereInput
-export import ProblemOrderByInput = Prisma.ProblemOrderByInput
-export import ProblemWhereUniqueInput = Prisma.ProblemWhereUniqueInput
-export import CreatorWhereInput = Prisma.CreatorWhereInput
-export import CreatorOrderByInput = Prisma.CreatorOrderByInput
-export import CreatorWhereUniqueInput = Prisma.CreatorWhereUniqueInput
-export import UserCreateInput = Prisma.UserCreateInput
-export import UserUpdateInput = Prisma.UserUpdateInput
-export import UserUpdateManyMutationInput = Prisma.UserUpdateManyMutationInput
-export import postCreateInput = Prisma.postCreateInput
-export import postUpdateInput = Prisma.postUpdateInput
-export import postUpdateManyMutationInput = Prisma.postUpdateManyMutationInput
-export import CategoryCreateInput = Prisma.CategoryCreateInput
-export import CategoryUpdateInput = Prisma.CategoryUpdateInput
-export import CategoryUpdateManyMutationInput = Prisma.CategoryUpdateManyMutationInput
-export import PatientCreateInput = Prisma.PatientCreateInput
-export import PatientUpdateInput = Prisma.PatientUpdateInput
-export import PatientUpdateManyMutationInput = Prisma.PatientUpdateManyMutationInput
-export import MovieCreateInput = Prisma.MovieCreateInput
-export import MovieUpdateInput = Prisma.MovieUpdateInput
-export import MovieUpdateManyMutationInput = Prisma.MovieUpdateManyMutationInput
-export import DirectorCreateInput = Prisma.DirectorCreateInput
-export import DirectorUpdateInput = Prisma.DirectorUpdateInput
-export import DirectorUpdateManyMutationInput = Prisma.DirectorUpdateManyMutationInput
-export import ProblemCreateInput = Prisma.ProblemCreateInput
-export import ProblemUpdateInput = Prisma.ProblemUpdateInput
-export import ProblemUpdateManyMutationInput = Prisma.ProblemUpdateManyMutationInput
-export import CreatorCreateInput = Prisma.CreatorCreateInput
-export import CreatorUpdateInput = Prisma.CreatorUpdateInput
-export import CreatorUpdateManyMutationInput = Prisma.CreatorUpdateManyMutationInput
-export import IntFilter = Prisma.IntFilter
-export import StringFilter = Prisma.StringFilter
-export import StringNullableFilter = Prisma.StringNullableFilter
-export import FloatFilter = Prisma.FloatFilter
-export import PostListRelationFilter = Prisma.PostListRelationFilter
-export import EnumRoleFilter = Prisma.EnumRoleFilter
-export import DateTimeFilter = Prisma.DateTimeFilter
-export import BoolFilter = Prisma.BoolFilter
-export import UserRelationFilter = Prisma.UserRelationFilter
-export import IntNullableFilter = Prisma.IntNullableFilter
-export import EnumPostKindNullableFilter = Prisma.EnumPostKindNullableFilter
-export import JsonFilter = Prisma.JsonFilter
-export import SlugNumberCompoundUniqueInput = Prisma.SlugNumberCompoundUniqueInput
-export import FirstNameLastNameCompoundUniqueInput = Prisma.FirstNameLastNameCompoundUniqueInput
-export import DirectorRelationFilter = Prisma.DirectorRelationFilter
-export import DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = Prisma.DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
-export import MovieListRelationFilter = Prisma.MovieListRelationFilter
-export import CreatorListRelationFilter = Prisma.CreatorListRelationFilter
-export import CreatorRelationFilter = Prisma.CreatorRelationFilter
-export import ProblemListRelationFilter = Prisma.ProblemListRelationFilter
-export import postCreateManyWithoutAuthorInput = Prisma.postCreateManyWithoutAuthorInput
-export import postCreateManyWithoutEditorInput = Prisma.postCreateManyWithoutEditorInput
-export import StringFieldUpdateOperationsInput = Prisma.StringFieldUpdateOperationsInput
-export import NullableStringFieldUpdateOperationsInput = Prisma.NullableStringFieldUpdateOperationsInput
-export import IntFieldUpdateOperationsInput = Prisma.IntFieldUpdateOperationsInput
-export import FloatFieldUpdateOperationsInput = Prisma.FloatFieldUpdateOperationsInput
-export import EnumRoleFieldUpdateOperationsInput = Prisma.EnumRoleFieldUpdateOperationsInput
-export import postUpdateManyWithoutAuthorInput = Prisma.postUpdateManyWithoutAuthorInput
-export import postUpdateManyWithoutEditorInput = Prisma.postUpdateManyWithoutEditorInput
-export import UserCreateOneWithoutPostsInput = Prisma.UserCreateOneWithoutPostsInput
-export import UserCreateOneWithoutEditorPostsInput = Prisma.UserCreateOneWithoutEditorPostsInput
-export import DateTimeFieldUpdateOperationsInput = Prisma.DateTimeFieldUpdateOperationsInput
-export import BoolFieldUpdateOperationsInput = Prisma.BoolFieldUpdateOperationsInput
-export import NullableEnumPostKindFieldUpdateOperationsInput = Prisma.NullableEnumPostKindFieldUpdateOperationsInput
-export import UserUpdateOneRequiredWithoutPostsInput = Prisma.UserUpdateOneRequiredWithoutPostsInput
-export import UserUpdateOneWithoutEditorPostsInput = Prisma.UserUpdateOneWithoutEditorPostsInput
-export import DirectorCreateOneWithoutMoviesInput = Prisma.DirectorCreateOneWithoutMoviesInput
-export import DirectorUpdateOneRequiredWithoutMoviesInput = Prisma.DirectorUpdateOneRequiredWithoutMoviesInput
-export import MovieCreateManyWithoutDirectorInput = Prisma.MovieCreateManyWithoutDirectorInput
-export import MovieUpdateManyWithoutDirectorInput = Prisma.MovieUpdateManyWithoutDirectorInput
-export import CreatorCreateManyWithoutLikesInput = Prisma.CreatorCreateManyWithoutLikesInput
-export import CreatorCreateOneWithoutProblemsInput = Prisma.CreatorCreateOneWithoutProblemsInput
-export import CreatorUpdateManyWithoutLikesInput = Prisma.CreatorUpdateManyWithoutLikesInput
-export import CreatorUpdateOneWithoutProblemsInput = Prisma.CreatorUpdateOneWithoutProblemsInput
-export import ProblemCreateManyWithoutLikedByInput = Prisma.ProblemCreateManyWithoutLikedByInput
-export import ProblemCreateManyWithoutCreatorInput = Prisma.ProblemCreateManyWithoutCreatorInput
-export import ProblemUpdateManyWithoutLikedByInput = Prisma.ProblemUpdateManyWithoutLikedByInput
-export import ProblemUpdateManyWithoutCreatorInput = Prisma.ProblemUpdateManyWithoutCreatorInput
-export import NestedIntFilter = Prisma.NestedIntFilter
-export import NestedStringFilter = Prisma.NestedStringFilter
-export import NestedStringNullableFilter = Prisma.NestedStringNullableFilter
-export import NestedFloatFilter = Prisma.NestedFloatFilter
-export import NestedEnumRoleFilter = Prisma.NestedEnumRoleFilter
-export import NestedDateTimeFilter = Prisma.NestedDateTimeFilter
-export import NestedBoolFilter = Prisma.NestedBoolFilter
-export import NestedIntNullableFilter = Prisma.NestedIntNullableFilter
-export import NestedEnumPostKindNullableFilter = Prisma.NestedEnumPostKindNullableFilter
-export import postCreateWithoutAuthorInput = Prisma.postCreateWithoutAuthorInput
-export import postCreateOrConnectWithoutauthorInput = Prisma.postCreateOrConnectWithoutauthorInput
-export import postCreateWithoutEditorInput = Prisma.postCreateWithoutEditorInput
-export import postCreateOrConnectWithouteditorInput = Prisma.postCreateOrConnectWithouteditorInput
-export import postUpdateWithWhereUniqueWithoutAuthorInput = Prisma.postUpdateWithWhereUniqueWithoutAuthorInput
-export import postUpdateManyWithWhereWithoutAuthorInput = Prisma.postUpdateManyWithWhereWithoutAuthorInput
-export import postScalarWhereInput = Prisma.postScalarWhereInput
-export import postUpsertWithWhereUniqueWithoutAuthorInput = Prisma.postUpsertWithWhereUniqueWithoutAuthorInput
-export import postUpdateWithWhereUniqueWithoutEditorInput = Prisma.postUpdateWithWhereUniqueWithoutEditorInput
-export import postUpdateManyWithWhereWithoutEditorInput = Prisma.postUpdateManyWithWhereWithoutEditorInput
-export import postUpsertWithWhereUniqueWithoutEditorInput = Prisma.postUpsertWithWhereUniqueWithoutEditorInput
-export import UserCreateWithoutPostsInput = Prisma.UserCreateWithoutPostsInput
-export import UserCreateOrConnectWithoutpostsInput = Prisma.UserCreateOrConnectWithoutpostsInput
-export import UserCreateWithoutEditorPostsInput = Prisma.UserCreateWithoutEditorPostsInput
-export import UserCreateOrConnectWithouteditorPostsInput = Prisma.UserCreateOrConnectWithouteditorPostsInput
-export import UserUpdateWithoutPostsInput = Prisma.UserUpdateWithoutPostsInput
-export import UserUpsertWithoutPostsInput = Prisma.UserUpsertWithoutPostsInput
-export import UserUpdateWithoutEditorPostsInput = Prisma.UserUpdateWithoutEditorPostsInput
-export import UserUpsertWithoutEditorPostsInput = Prisma.UserUpsertWithoutEditorPostsInput
-export import DirectorCreateWithoutMoviesInput = Prisma.DirectorCreateWithoutMoviesInput
-export import DirectorCreateOrConnectWithoutmoviesInput = Prisma.DirectorCreateOrConnectWithoutmoviesInput
-export import DirectorUpdateWithoutMoviesInput = Prisma.DirectorUpdateWithoutMoviesInput
-export import DirectorUpsertWithoutMoviesInput = Prisma.DirectorUpsertWithoutMoviesInput
-export import MovieCreateWithoutDirectorInput = Prisma.MovieCreateWithoutDirectorInput
-export import MovieCreateOrConnectWithoutdirectorInput = Prisma.MovieCreateOrConnectWithoutdirectorInput
-export import MovieUpdateWithWhereUniqueWithoutDirectorInput = Prisma.MovieUpdateWithWhereUniqueWithoutDirectorInput
-export import MovieUpdateManyWithWhereWithoutDirectorInput = Prisma.MovieUpdateManyWithWhereWithoutDirectorInput
-export import MovieScalarWhereInput = Prisma.MovieScalarWhereInput
-export import MovieUpsertWithWhereUniqueWithoutDirectorInput = Prisma.MovieUpsertWithWhereUniqueWithoutDirectorInput
-export import CreatorCreateWithoutLikesInput = Prisma.CreatorCreateWithoutLikesInput
-export import CreatorCreateOrConnectWithoutlikesInput = Prisma.CreatorCreateOrConnectWithoutlikesInput
-export import CreatorCreateWithoutProblemsInput = Prisma.CreatorCreateWithoutProblemsInput
-export import CreatorCreateOrConnectWithoutproblemsInput = Prisma.CreatorCreateOrConnectWithoutproblemsInput
-export import CreatorUpdateWithWhereUniqueWithoutLikesInput = Prisma.CreatorUpdateWithWhereUniqueWithoutLikesInput
-export import CreatorUpdateManyWithWhereWithoutLikesInput = Prisma.CreatorUpdateManyWithWhereWithoutLikesInput
-export import CreatorScalarWhereInput = Prisma.CreatorScalarWhereInput
-export import CreatorUpsertWithWhereUniqueWithoutLikesInput = Prisma.CreatorUpsertWithWhereUniqueWithoutLikesInput
-export import CreatorUpdateWithoutProblemsInput = Prisma.CreatorUpdateWithoutProblemsInput
-export import CreatorUpsertWithoutProblemsInput = Prisma.CreatorUpsertWithoutProblemsInput
-export import ProblemCreateWithoutLikedByInput = Prisma.ProblemCreateWithoutLikedByInput
-export import ProblemCreateOrConnectWithoutlikedByInput = Prisma.ProblemCreateOrConnectWithoutlikedByInput
-export import ProblemCreateWithoutCreatorInput = Prisma.ProblemCreateWithoutCreatorInput
-export import ProblemCreateOrConnectWithoutcreatorInput = Prisma.ProblemCreateOrConnectWithoutcreatorInput
-export import ProblemUpdateWithWhereUniqueWithoutLikedByInput = Prisma.ProblemUpdateWithWhereUniqueWithoutLikedByInput
-export import ProblemUpdateManyWithWhereWithoutLikedByInput = Prisma.ProblemUpdateManyWithWhereWithoutLikedByInput
-export import ProblemScalarWhereInput = Prisma.ProblemScalarWhereInput
-export import ProblemUpsertWithWhereUniqueWithoutLikedByInput = Prisma.ProblemUpsertWithWhereUniqueWithoutLikedByInput
-export import ProblemUpdateWithWhereUniqueWithoutCreatorInput = Prisma.ProblemUpdateWithWhereUniqueWithoutCreatorInput
-export import ProblemUpdateManyWithWhereWithoutCreatorInput = Prisma.ProblemUpdateManyWithWhereWithoutCreatorInput
-export import ProblemUpsertWithWhereUniqueWithoutCreatorInput = Prisma.ProblemUpsertWithWhereUniqueWithoutCreatorInput
-export import postUpdateWithoutAuthorInput = Prisma.postUpdateWithoutAuthorInput
-export import postUpdateWithoutEditorInput = Prisma.postUpdateWithoutEditorInput
-export import MovieUpdateWithoutDirectorInput = Prisma.MovieUpdateWithoutDirectorInput
-export import CreatorUpdateWithoutLikesInput = Prisma.CreatorUpdateWithoutLikesInput
-export import ProblemUpdateWithoutLikedByInput = Prisma.ProblemUpdateWithoutLikedByInput
-export import ProblemUpdateWithoutCreatorInput = Prisma.ProblemUpdateWithoutCreatorInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserDistinctFieldEnum`
+ */
+export type UserDistinctFieldEnum = Prisma.UserDistinctFieldEnum
+
+/**
+ * @deprecated Renamed to `Prisma.PostDistinctFieldEnum`
+ */
+export type PostDistinctFieldEnum = Prisma.PostDistinctFieldEnum
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryDistinctFieldEnum`
+ */
+export type CategoryDistinctFieldEnum = Prisma.CategoryDistinctFieldEnum
+
+/**
+ * @deprecated Renamed to `Prisma.PatientDistinctFieldEnum`
+ */
+export type PatientDistinctFieldEnum = Prisma.PatientDistinctFieldEnum
+
+/**
+ * @deprecated Renamed to `Prisma.MovieDistinctFieldEnum`
+ */
+export type MovieDistinctFieldEnum = Prisma.MovieDistinctFieldEnum
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorDistinctFieldEnum`
+ */
+export type DirectorDistinctFieldEnum = Prisma.DirectorDistinctFieldEnum
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemDistinctFieldEnum`
+ */
+export type ProblemDistinctFieldEnum = Prisma.ProblemDistinctFieldEnum
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorDistinctFieldEnum`
+ */
+export type CreatorDistinctFieldEnum = Prisma.CreatorDistinctFieldEnum
+
+/**
+ * @deprecated Renamed to `Prisma.SortOrder`
+ */
+export type SortOrder = Prisma.SortOrder
+
+/**
+ * @deprecated Renamed to `Prisma.QueryMode`
+ */
+export type QueryMode = Prisma.QueryMode
+
+/**
+ * @deprecated Renamed to `Prisma.ModelName`
+ */
+export type ModelName = Prisma.ModelName
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateUser`
+ */
+export type AggregateUser = Prisma.AggregateUser
+
+/**
+ * @deprecated Renamed to `Prisma.UserAvgAggregateOutputType`
+ */
+export type UserAvgAggregateOutputType = Prisma.UserAvgAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.UserSumAggregateOutputType`
+ */
+export type UserSumAggregateOutputType = Prisma.UserSumAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.UserMinAggregateOutputType`
+ */
+export type UserMinAggregateOutputType = Prisma.UserMinAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.UserMaxAggregateOutputType`
+ */
+export type UserMaxAggregateOutputType = Prisma.UserMaxAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateUserArgs`
+ */
+export type AggregateUserArgs = Prisma.AggregateUserArgs
+
+/**
+ * @deprecated Renamed to `Prisma.UserAvgAggregateInputType`
+ */
+export type UserAvgAggregateInputType = Prisma.UserAvgAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.UserSumAggregateInputType`
+ */
+export type UserSumAggregateInputType = Prisma.UserSumAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.UserMinAggregateInputType`
+ */
+export type UserMinAggregateInputType = Prisma.UserMinAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.UserMaxAggregateInputType`
+ */
+export type UserMaxAggregateInputType = Prisma.UserMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.UserSelect`
+ */
+export type UserSelect = Prisma.UserSelect
+
+/**
+ * @deprecated Renamed to `Prisma.UserInclude`
+ */
+export type UserInclude = Prisma.UserInclude
+
+/**
+ * @deprecated Renamed to `Prisma.FindUniqueUserArgs`
+ */
+export type FindUniqueUserArgs = Prisma.FindUniqueUserArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindFirstUserArgs`
+ */
+export type FindFirstUserArgs = Prisma.FindFirstUserArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindManyUserArgs`
+ */
+export type FindManyUserArgs = Prisma.FindManyUserArgs
+
+/**
+ * @deprecated Renamed to `Prisma.UserCreateArgs`
+ */
+export type UserCreateArgs = Prisma.UserCreateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpdateArgs`
+ */
+export type UserUpdateArgs = Prisma.UserUpdateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpdateManyArgs`
+ */
+export type UserUpdateManyArgs = Prisma.UserUpdateManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpsertArgs`
+ */
+export type UserUpsertArgs = Prisma.UserUpsertArgs
+
+/**
+ * @deprecated Renamed to `Prisma.UserDeleteArgs`
+ */
+export type UserDeleteArgs = Prisma.UserDeleteArgs
+
+/**
+ * @deprecated Renamed to `Prisma.UserDeleteManyArgs`
+ */
+export type UserDeleteManyArgs = Prisma.UserDeleteManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.AggregatePost`
+ */
+export type AggregatePost = Prisma.AggregatePost
+
+/**
+ * @deprecated Renamed to `Prisma.PostAvgAggregateOutputType`
+ */
+export type PostAvgAggregateOutputType = Prisma.PostAvgAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.PostSumAggregateOutputType`
+ */
+export type PostSumAggregateOutputType = Prisma.PostSumAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.PostMinAggregateOutputType`
+ */
+export type PostMinAggregateOutputType = Prisma.PostMinAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.PostMaxAggregateOutputType`
+ */
+export type PostMaxAggregateOutputType = Prisma.PostMaxAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.AggregatePostArgs`
+ */
+export type AggregatePostArgs = Prisma.AggregatePostArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PostAvgAggregateInputType`
+ */
+export type PostAvgAggregateInputType = Prisma.PostAvgAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.PostSumAggregateInputType`
+ */
+export type PostSumAggregateInputType = Prisma.PostSumAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.PostMinAggregateInputType`
+ */
+export type PostMinAggregateInputType = Prisma.PostMinAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.PostMaxAggregateInputType`
+ */
+export type PostMaxAggregateInputType = Prisma.PostMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.postSelect`
+ */
+export type postSelect = Prisma.postSelect
+
+/**
+ * @deprecated Renamed to `Prisma.postInclude`
+ */
+export type postInclude = Prisma.postInclude
+
+/**
+ * @deprecated Renamed to `Prisma.FindUniquepostArgs`
+ */
+export type FindUniquepostArgs = Prisma.FindUniquepostArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindFirstpostArgs`
+ */
+export type FindFirstpostArgs = Prisma.FindFirstpostArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindManypostArgs`
+ */
+export type FindManypostArgs = Prisma.FindManypostArgs
+
+/**
+ * @deprecated Renamed to `Prisma.postCreateArgs`
+ */
+export type postCreateArgs = Prisma.postCreateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateArgs`
+ */
+export type postUpdateArgs = Prisma.postUpdateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateManyArgs`
+ */
+export type postUpdateManyArgs = Prisma.postUpdateManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.postUpsertArgs`
+ */
+export type postUpsertArgs = Prisma.postUpsertArgs
+
+/**
+ * @deprecated Renamed to `Prisma.postDeleteArgs`
+ */
+export type postDeleteArgs = Prisma.postDeleteArgs
+
+/**
+ * @deprecated Renamed to `Prisma.postDeleteManyArgs`
+ */
+export type postDeleteManyArgs = Prisma.postDeleteManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateCategory`
+ */
+export type AggregateCategory = Prisma.AggregateCategory
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryAvgAggregateOutputType`
+ */
+export type CategoryAvgAggregateOutputType = Prisma.CategoryAvgAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.CategorySumAggregateOutputType`
+ */
+export type CategorySumAggregateOutputType = Prisma.CategorySumAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryMinAggregateOutputType`
+ */
+export type CategoryMinAggregateOutputType = Prisma.CategoryMinAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryMaxAggregateOutputType`
+ */
+export type CategoryMaxAggregateOutputType = Prisma.CategoryMaxAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateCategoryArgs`
+ */
+export type AggregateCategoryArgs = Prisma.AggregateCategoryArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryAvgAggregateInputType`
+ */
+export type CategoryAvgAggregateInputType = Prisma.CategoryAvgAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CategorySumAggregateInputType`
+ */
+export type CategorySumAggregateInputType = Prisma.CategorySumAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryMinAggregateInputType`
+ */
+export type CategoryMinAggregateInputType = Prisma.CategoryMinAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryMaxAggregateInputType`
+ */
+export type CategoryMaxAggregateInputType = Prisma.CategoryMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CategorySelect`
+ */
+export type CategorySelect = Prisma.CategorySelect
+
+/**
+ * @deprecated Renamed to `Prisma.FindUniqueCategoryArgs`
+ */
+export type FindUniqueCategoryArgs = Prisma.FindUniqueCategoryArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindFirstCategoryArgs`
+ */
+export type FindFirstCategoryArgs = Prisma.FindFirstCategoryArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindManyCategoryArgs`
+ */
+export type FindManyCategoryArgs = Prisma.FindManyCategoryArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryCreateArgs`
+ */
+export type CategoryCreateArgs = Prisma.CategoryCreateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryUpdateArgs`
+ */
+export type CategoryUpdateArgs = Prisma.CategoryUpdateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryUpdateManyArgs`
+ */
+export type CategoryUpdateManyArgs = Prisma.CategoryUpdateManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryUpsertArgs`
+ */
+export type CategoryUpsertArgs = Prisma.CategoryUpsertArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryDeleteArgs`
+ */
+export type CategoryDeleteArgs = Prisma.CategoryDeleteArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryDeleteManyArgs`
+ */
+export type CategoryDeleteManyArgs = Prisma.CategoryDeleteManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.AggregatePatient`
+ */
+export type AggregatePatient = Prisma.AggregatePatient
+
+/**
+ * @deprecated Renamed to `Prisma.AggregatePatientArgs`
+ */
+export type AggregatePatientArgs = Prisma.AggregatePatientArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PatientSelect`
+ */
+export type PatientSelect = Prisma.PatientSelect
+
+/**
+ * @deprecated Renamed to `Prisma.FindUniquePatientArgs`
+ */
+export type FindUniquePatientArgs = Prisma.FindUniquePatientArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindFirstPatientArgs`
+ */
+export type FindFirstPatientArgs = Prisma.FindFirstPatientArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindManyPatientArgs`
+ */
+export type FindManyPatientArgs = Prisma.FindManyPatientArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PatientCreateArgs`
+ */
+export type PatientCreateArgs = Prisma.PatientCreateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PatientUpdateArgs`
+ */
+export type PatientUpdateArgs = Prisma.PatientUpdateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PatientUpdateManyArgs`
+ */
+export type PatientUpdateManyArgs = Prisma.PatientUpdateManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PatientUpsertArgs`
+ */
+export type PatientUpsertArgs = Prisma.PatientUpsertArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PatientDeleteArgs`
+ */
+export type PatientDeleteArgs = Prisma.PatientDeleteArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PatientDeleteManyArgs`
+ */
+export type PatientDeleteManyArgs = Prisma.PatientDeleteManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateMovie`
+ */
+export type AggregateMovie = Prisma.AggregateMovie
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateMovieArgs`
+ */
+export type AggregateMovieArgs = Prisma.AggregateMovieArgs
+
+/**
+ * @deprecated Renamed to `Prisma.MovieSelect`
+ */
+export type MovieSelect = Prisma.MovieSelect
+
+/**
+ * @deprecated Renamed to `Prisma.MovieInclude`
+ */
+export type MovieInclude = Prisma.MovieInclude
+
+/**
+ * @deprecated Renamed to `Prisma.FindUniqueMovieArgs`
+ */
+export type FindUniqueMovieArgs = Prisma.FindUniqueMovieArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindFirstMovieArgs`
+ */
+export type FindFirstMovieArgs = Prisma.FindFirstMovieArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindManyMovieArgs`
+ */
+export type FindManyMovieArgs = Prisma.FindManyMovieArgs
+
+/**
+ * @deprecated Renamed to `Prisma.MovieCreateArgs`
+ */
+export type MovieCreateArgs = Prisma.MovieCreateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpdateArgs`
+ */
+export type MovieUpdateArgs = Prisma.MovieUpdateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpdateManyArgs`
+ */
+export type MovieUpdateManyArgs = Prisma.MovieUpdateManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpsertArgs`
+ */
+export type MovieUpsertArgs = Prisma.MovieUpsertArgs
+
+/**
+ * @deprecated Renamed to `Prisma.MovieDeleteArgs`
+ */
+export type MovieDeleteArgs = Prisma.MovieDeleteArgs
+
+/**
+ * @deprecated Renamed to `Prisma.MovieDeleteManyArgs`
+ */
+export type MovieDeleteManyArgs = Prisma.MovieDeleteManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateDirector`
+ */
+export type AggregateDirector = Prisma.AggregateDirector
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateDirectorArgs`
+ */
+export type AggregateDirectorArgs = Prisma.AggregateDirectorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorSelect`
+ */
+export type DirectorSelect = Prisma.DirectorSelect
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorInclude`
+ */
+export type DirectorInclude = Prisma.DirectorInclude
+
+/**
+ * @deprecated Renamed to `Prisma.FindUniqueDirectorArgs`
+ */
+export type FindUniqueDirectorArgs = Prisma.FindUniqueDirectorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindFirstDirectorArgs`
+ */
+export type FindFirstDirectorArgs = Prisma.FindFirstDirectorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindManyDirectorArgs`
+ */
+export type FindManyDirectorArgs = Prisma.FindManyDirectorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorCreateArgs`
+ */
+export type DirectorCreateArgs = Prisma.DirectorCreateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorUpdateArgs`
+ */
+export type DirectorUpdateArgs = Prisma.DirectorUpdateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorUpdateManyArgs`
+ */
+export type DirectorUpdateManyArgs = Prisma.DirectorUpdateManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorUpsertArgs`
+ */
+export type DirectorUpsertArgs = Prisma.DirectorUpsertArgs
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorDeleteArgs`
+ */
+export type DirectorDeleteArgs = Prisma.DirectorDeleteArgs
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorDeleteManyArgs`
+ */
+export type DirectorDeleteManyArgs = Prisma.DirectorDeleteManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateProblem`
+ */
+export type AggregateProblem = Prisma.AggregateProblem
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemAvgAggregateOutputType`
+ */
+export type ProblemAvgAggregateOutputType = Prisma.ProblemAvgAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemSumAggregateOutputType`
+ */
+export type ProblemSumAggregateOutputType = Prisma.ProblemSumAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemMinAggregateOutputType`
+ */
+export type ProblemMinAggregateOutputType = Prisma.ProblemMinAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemMaxAggregateOutputType`
+ */
+export type ProblemMaxAggregateOutputType = Prisma.ProblemMaxAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateProblemArgs`
+ */
+export type AggregateProblemArgs = Prisma.AggregateProblemArgs
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemAvgAggregateInputType`
+ */
+export type ProblemAvgAggregateInputType = Prisma.ProblemAvgAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemSumAggregateInputType`
+ */
+export type ProblemSumAggregateInputType = Prisma.ProblemSumAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemMinAggregateInputType`
+ */
+export type ProblemMinAggregateInputType = Prisma.ProblemMinAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemMaxAggregateInputType`
+ */
+export type ProblemMaxAggregateInputType = Prisma.ProblemMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemSelect`
+ */
+export type ProblemSelect = Prisma.ProblemSelect
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemInclude`
+ */
+export type ProblemInclude = Prisma.ProblemInclude
+
+/**
+ * @deprecated Renamed to `Prisma.FindUniqueProblemArgs`
+ */
+export type FindUniqueProblemArgs = Prisma.FindUniqueProblemArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindFirstProblemArgs`
+ */
+export type FindFirstProblemArgs = Prisma.FindFirstProblemArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindManyProblemArgs`
+ */
+export type FindManyProblemArgs = Prisma.FindManyProblemArgs
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCreateArgs`
+ */
+export type ProblemCreateArgs = Prisma.ProblemCreateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateArgs`
+ */
+export type ProblemUpdateArgs = Prisma.ProblemUpdateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateManyArgs`
+ */
+export type ProblemUpdateManyArgs = Prisma.ProblemUpdateManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpsertArgs`
+ */
+export type ProblemUpsertArgs = Prisma.ProblemUpsertArgs
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemDeleteArgs`
+ */
+export type ProblemDeleteArgs = Prisma.ProblemDeleteArgs
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemDeleteManyArgs`
+ */
+export type ProblemDeleteManyArgs = Prisma.ProblemDeleteManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateCreator`
+ */
+export type AggregateCreator = Prisma.AggregateCreator
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorAvgAggregateOutputType`
+ */
+export type CreatorAvgAggregateOutputType = Prisma.CreatorAvgAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorSumAggregateOutputType`
+ */
+export type CreatorSumAggregateOutputType = Prisma.CreatorSumAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorMinAggregateOutputType`
+ */
+export type CreatorMinAggregateOutputType = Prisma.CreatorMinAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorMaxAggregateOutputType`
+ */
+export type CreatorMaxAggregateOutputType = Prisma.CreatorMaxAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.AggregateCreatorArgs`
+ */
+export type AggregateCreatorArgs = Prisma.AggregateCreatorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorAvgAggregateInputType`
+ */
+export type CreatorAvgAggregateInputType = Prisma.CreatorAvgAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorSumAggregateInputType`
+ */
+export type CreatorSumAggregateInputType = Prisma.CreatorSumAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorMinAggregateInputType`
+ */
+export type CreatorMinAggregateInputType = Prisma.CreatorMinAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorMaxAggregateInputType`
+ */
+export type CreatorMaxAggregateInputType = Prisma.CreatorMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorSelect`
+ */
+export type CreatorSelect = Prisma.CreatorSelect
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorInclude`
+ */
+export type CreatorInclude = Prisma.CreatorInclude
+
+/**
+ * @deprecated Renamed to `Prisma.FindUniqueCreatorArgs`
+ */
+export type FindUniqueCreatorArgs = Prisma.FindUniqueCreatorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindFirstCreatorArgs`
+ */
+export type FindFirstCreatorArgs = Prisma.FindFirstCreatorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.FindManyCreatorArgs`
+ */
+export type FindManyCreatorArgs = Prisma.FindManyCreatorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCreateArgs`
+ */
+export type CreatorCreateArgs = Prisma.CreatorCreateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateArgs`
+ */
+export type CreatorUpdateArgs = Prisma.CreatorUpdateArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateManyArgs`
+ */
+export type CreatorUpdateManyArgs = Prisma.CreatorUpdateManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpsertArgs`
+ */
+export type CreatorUpsertArgs = Prisma.CreatorUpsertArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorDeleteArgs`
+ */
+export type CreatorDeleteArgs = Prisma.CreatorDeleteArgs
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorDeleteManyArgs`
+ */
+export type CreatorDeleteManyArgs = Prisma.CreatorDeleteManyArgs
+
+/**
+ * @deprecated Renamed to `Prisma.UserWhereInput`
+ */
+export type UserWhereInput = Prisma.UserWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserOrderByInput`
+ */
+export type UserOrderByInput = Prisma.UserOrderByInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserWhereUniqueInput`
+ */
+export type UserWhereUniqueInput = Prisma.UserWhereUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.postWhereInput`
+ */
+export type postWhereInput = Prisma.postWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.postOrderByInput`
+ */
+export type postOrderByInput = Prisma.postOrderByInput
+
+/**
+ * @deprecated Renamed to `Prisma.postWhereUniqueInput`
+ */
+export type postWhereUniqueInput = Prisma.postWhereUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryWhereInput`
+ */
+export type CategoryWhereInput = Prisma.CategoryWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryOrderByInput`
+ */
+export type CategoryOrderByInput = Prisma.CategoryOrderByInput
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryWhereUniqueInput`
+ */
+export type CategoryWhereUniqueInput = Prisma.CategoryWhereUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.PatientWhereInput`
+ */
+export type PatientWhereInput = Prisma.PatientWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.PatientOrderByInput`
+ */
+export type PatientOrderByInput = Prisma.PatientOrderByInput
+
+/**
+ * @deprecated Renamed to `Prisma.PatientWhereUniqueInput`
+ */
+export type PatientWhereUniqueInput = Prisma.PatientWhereUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieWhereInput`
+ */
+export type MovieWhereInput = Prisma.MovieWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieOrderByInput`
+ */
+export type MovieOrderByInput = Prisma.MovieOrderByInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieWhereUniqueInput`
+ */
+export type MovieWhereUniqueInput = Prisma.MovieWhereUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorWhereInput`
+ */
+export type DirectorWhereInput = Prisma.DirectorWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorOrderByInput`
+ */
+export type DirectorOrderByInput = Prisma.DirectorOrderByInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorWhereUniqueInput`
+ */
+export type DirectorWhereUniqueInput = Prisma.DirectorWhereUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemWhereInput`
+ */
+export type ProblemWhereInput = Prisma.ProblemWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemOrderByInput`
+ */
+export type ProblemOrderByInput = Prisma.ProblemOrderByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemWhereUniqueInput`
+ */
+export type ProblemWhereUniqueInput = Prisma.ProblemWhereUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorWhereInput`
+ */
+export type CreatorWhereInput = Prisma.CreatorWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorOrderByInput`
+ */
+export type CreatorOrderByInput = Prisma.CreatorOrderByInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorWhereUniqueInput`
+ */
+export type CreatorWhereUniqueInput = Prisma.CreatorWhereUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserCreateInput`
+ */
+export type UserCreateInput = Prisma.UserCreateInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpdateInput`
+ */
+export type UserUpdateInput = Prisma.UserUpdateInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpdateManyMutationInput`
+ */
+export type UserUpdateManyMutationInput = Prisma.UserUpdateManyMutationInput
+
+/**
+ * @deprecated Renamed to `Prisma.postCreateInput`
+ */
+export type postCreateInput = Prisma.postCreateInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateInput`
+ */
+export type postUpdateInput = Prisma.postUpdateInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateManyMutationInput`
+ */
+export type postUpdateManyMutationInput = Prisma.postUpdateManyMutationInput
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryCreateInput`
+ */
+export type CategoryCreateInput = Prisma.CategoryCreateInput
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryUpdateInput`
+ */
+export type CategoryUpdateInput = Prisma.CategoryUpdateInput
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryUpdateManyMutationInput`
+ */
+export type CategoryUpdateManyMutationInput = Prisma.CategoryUpdateManyMutationInput
+
+/**
+ * @deprecated Renamed to `Prisma.PatientCreateInput`
+ */
+export type PatientCreateInput = Prisma.PatientCreateInput
+
+/**
+ * @deprecated Renamed to `Prisma.PatientUpdateInput`
+ */
+export type PatientUpdateInput = Prisma.PatientUpdateInput
+
+/**
+ * @deprecated Renamed to `Prisma.PatientUpdateManyMutationInput`
+ */
+export type PatientUpdateManyMutationInput = Prisma.PatientUpdateManyMutationInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieCreateInput`
+ */
+export type MovieCreateInput = Prisma.MovieCreateInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpdateInput`
+ */
+export type MovieUpdateInput = Prisma.MovieUpdateInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpdateManyMutationInput`
+ */
+export type MovieUpdateManyMutationInput = Prisma.MovieUpdateManyMutationInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorCreateInput`
+ */
+export type DirectorCreateInput = Prisma.DirectorCreateInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorUpdateInput`
+ */
+export type DirectorUpdateInput = Prisma.DirectorUpdateInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorUpdateManyMutationInput`
+ */
+export type DirectorUpdateManyMutationInput = Prisma.DirectorUpdateManyMutationInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCreateInput`
+ */
+export type ProblemCreateInput = Prisma.ProblemCreateInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateInput`
+ */
+export type ProblemUpdateInput = Prisma.ProblemUpdateInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateManyMutationInput`
+ */
+export type ProblemUpdateManyMutationInput = Prisma.ProblemUpdateManyMutationInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCreateInput`
+ */
+export type CreatorCreateInput = Prisma.CreatorCreateInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateInput`
+ */
+export type CreatorUpdateInput = Prisma.CreatorUpdateInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateManyMutationInput`
+ */
+export type CreatorUpdateManyMutationInput = Prisma.CreatorUpdateManyMutationInput
+
+/**
+ * @deprecated Renamed to `Prisma.IntFilter`
+ */
+export type IntFilter = Prisma.IntFilter
+
+/**
+ * @deprecated Renamed to `Prisma.StringFilter`
+ */
+export type StringFilter = Prisma.StringFilter
+
+/**
+ * @deprecated Renamed to `Prisma.StringNullableFilter`
+ */
+export type StringNullableFilter = Prisma.StringNullableFilter
+
+/**
+ * @deprecated Renamed to `Prisma.FloatFilter`
+ */
+export type FloatFilter = Prisma.FloatFilter
+
+/**
+ * @deprecated Renamed to `Prisma.PostListRelationFilter`
+ */
+export type PostListRelationFilter = Prisma.PostListRelationFilter
+
+/**
+ * @deprecated Renamed to `Prisma.EnumRoleFilter`
+ */
+export type EnumRoleFilter = Prisma.EnumRoleFilter
+
+/**
+ * @deprecated Renamed to `Prisma.DateTimeFilter`
+ */
+export type DateTimeFilter = Prisma.DateTimeFilter
+
+/**
+ * @deprecated Renamed to `Prisma.BoolFilter`
+ */
+export type BoolFilter = Prisma.BoolFilter
+
+/**
+ * @deprecated Renamed to `Prisma.UserRelationFilter`
+ */
+export type UserRelationFilter = Prisma.UserRelationFilter
+
+/**
+ * @deprecated Renamed to `Prisma.IntNullableFilter`
+ */
+export type IntNullableFilter = Prisma.IntNullableFilter
+
+/**
+ * @deprecated Renamed to `Prisma.EnumPostKindNullableFilter`
+ */
+export type EnumPostKindNullableFilter = Prisma.EnumPostKindNullableFilter
+
+/**
+ * @deprecated Renamed to `Prisma.JsonFilter`
+ */
+export type JsonFilter = Prisma.JsonFilter
+
+/**
+ * @deprecated Renamed to `Prisma.SlugNumberCompoundUniqueInput`
+ */
+export type SlugNumberCompoundUniqueInput = Prisma.SlugNumberCompoundUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.FirstNameLastNameCompoundUniqueInput`
+ */
+export type FirstNameLastNameCompoundUniqueInput = Prisma.FirstNameLastNameCompoundUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorRelationFilter`
+ */
+export type DirectorRelationFilter = Prisma.DirectorRelationFilter
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput`
+ */
+export type DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = Prisma.DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieListRelationFilter`
+ */
+export type MovieListRelationFilter = Prisma.MovieListRelationFilter
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorListRelationFilter`
+ */
+export type CreatorListRelationFilter = Prisma.CreatorListRelationFilter
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorRelationFilter`
+ */
+export type CreatorRelationFilter = Prisma.CreatorRelationFilter
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemListRelationFilter`
+ */
+export type ProblemListRelationFilter = Prisma.ProblemListRelationFilter
+
+/**
+ * @deprecated Renamed to `Prisma.postCreateManyWithoutAuthorInput`
+ */
+export type postCreateManyWithoutAuthorInput = Prisma.postCreateManyWithoutAuthorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postCreateManyWithoutEditorInput`
+ */
+export type postCreateManyWithoutEditorInput = Prisma.postCreateManyWithoutEditorInput
+
+/**
+ * @deprecated Renamed to `Prisma.StringFieldUpdateOperationsInput`
+ */
+export type StringFieldUpdateOperationsInput = Prisma.StringFieldUpdateOperationsInput
+
+/**
+ * @deprecated Renamed to `Prisma.NullableStringFieldUpdateOperationsInput`
+ */
+export type NullableStringFieldUpdateOperationsInput = Prisma.NullableStringFieldUpdateOperationsInput
+
+/**
+ * @deprecated Renamed to `Prisma.IntFieldUpdateOperationsInput`
+ */
+export type IntFieldUpdateOperationsInput = Prisma.IntFieldUpdateOperationsInput
+
+/**
+ * @deprecated Renamed to `Prisma.FloatFieldUpdateOperationsInput`
+ */
+export type FloatFieldUpdateOperationsInput = Prisma.FloatFieldUpdateOperationsInput
+
+/**
+ * @deprecated Renamed to `Prisma.EnumRoleFieldUpdateOperationsInput`
+ */
+export type EnumRoleFieldUpdateOperationsInput = Prisma.EnumRoleFieldUpdateOperationsInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateManyWithoutAuthorInput`
+ */
+export type postUpdateManyWithoutAuthorInput = Prisma.postUpdateManyWithoutAuthorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateManyWithoutEditorInput`
+ */
+export type postUpdateManyWithoutEditorInput = Prisma.postUpdateManyWithoutEditorInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserCreateOneWithoutPostsInput`
+ */
+export type UserCreateOneWithoutPostsInput = Prisma.UserCreateOneWithoutPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserCreateOneWithoutEditorPostsInput`
+ */
+export type UserCreateOneWithoutEditorPostsInput = Prisma.UserCreateOneWithoutEditorPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.DateTimeFieldUpdateOperationsInput`
+ */
+export type DateTimeFieldUpdateOperationsInput = Prisma.DateTimeFieldUpdateOperationsInput
+
+/**
+ * @deprecated Renamed to `Prisma.BoolFieldUpdateOperationsInput`
+ */
+export type BoolFieldUpdateOperationsInput = Prisma.BoolFieldUpdateOperationsInput
+
+/**
+ * @deprecated Renamed to `Prisma.NullableEnumPostKindFieldUpdateOperationsInput`
+ */
+export type NullableEnumPostKindFieldUpdateOperationsInput = Prisma.NullableEnumPostKindFieldUpdateOperationsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpdateOneRequiredWithoutPostsInput`
+ */
+export type UserUpdateOneRequiredWithoutPostsInput = Prisma.UserUpdateOneRequiredWithoutPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpdateOneWithoutEditorPostsInput`
+ */
+export type UserUpdateOneWithoutEditorPostsInput = Prisma.UserUpdateOneWithoutEditorPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorCreateOneWithoutMoviesInput`
+ */
+export type DirectorCreateOneWithoutMoviesInput = Prisma.DirectorCreateOneWithoutMoviesInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorUpdateOneRequiredWithoutMoviesInput`
+ */
+export type DirectorUpdateOneRequiredWithoutMoviesInput = Prisma.DirectorUpdateOneRequiredWithoutMoviesInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieCreateManyWithoutDirectorInput`
+ */
+export type MovieCreateManyWithoutDirectorInput = Prisma.MovieCreateManyWithoutDirectorInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpdateManyWithoutDirectorInput`
+ */
+export type MovieUpdateManyWithoutDirectorInput = Prisma.MovieUpdateManyWithoutDirectorInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCreateManyWithoutLikesInput`
+ */
+export type CreatorCreateManyWithoutLikesInput = Prisma.CreatorCreateManyWithoutLikesInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCreateOneWithoutProblemsInput`
+ */
+export type CreatorCreateOneWithoutProblemsInput = Prisma.CreatorCreateOneWithoutProblemsInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateManyWithoutLikesInput`
+ */
+export type CreatorUpdateManyWithoutLikesInput = Prisma.CreatorUpdateManyWithoutLikesInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateOneWithoutProblemsInput`
+ */
+export type CreatorUpdateOneWithoutProblemsInput = Prisma.CreatorUpdateOneWithoutProblemsInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCreateManyWithoutLikedByInput`
+ */
+export type ProblemCreateManyWithoutLikedByInput = Prisma.ProblemCreateManyWithoutLikedByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCreateManyWithoutCreatorInput`
+ */
+export type ProblemCreateManyWithoutCreatorInput = Prisma.ProblemCreateManyWithoutCreatorInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateManyWithoutLikedByInput`
+ */
+export type ProblemUpdateManyWithoutLikedByInput = Prisma.ProblemUpdateManyWithoutLikedByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateManyWithoutCreatorInput`
+ */
+export type ProblemUpdateManyWithoutCreatorInput = Prisma.ProblemUpdateManyWithoutCreatorInput
+
+/**
+ * @deprecated Renamed to `Prisma.NestedIntFilter`
+ */
+export type NestedIntFilter = Prisma.NestedIntFilter
+
+/**
+ * @deprecated Renamed to `Prisma.NestedStringFilter`
+ */
+export type NestedStringFilter = Prisma.NestedStringFilter
+
+/**
+ * @deprecated Renamed to `Prisma.NestedStringNullableFilter`
+ */
+export type NestedStringNullableFilter = Prisma.NestedStringNullableFilter
+
+/**
+ * @deprecated Renamed to `Prisma.NestedFloatFilter`
+ */
+export type NestedFloatFilter = Prisma.NestedFloatFilter
+
+/**
+ * @deprecated Renamed to `Prisma.NestedEnumRoleFilter`
+ */
+export type NestedEnumRoleFilter = Prisma.NestedEnumRoleFilter
+
+/**
+ * @deprecated Renamed to `Prisma.NestedDateTimeFilter`
+ */
+export type NestedDateTimeFilter = Prisma.NestedDateTimeFilter
+
+/**
+ * @deprecated Renamed to `Prisma.NestedBoolFilter`
+ */
+export type NestedBoolFilter = Prisma.NestedBoolFilter
+
+/**
+ * @deprecated Renamed to `Prisma.NestedIntNullableFilter`
+ */
+export type NestedIntNullableFilter = Prisma.NestedIntNullableFilter
+
+/**
+ * @deprecated Renamed to `Prisma.NestedEnumPostKindNullableFilter`
+ */
+export type NestedEnumPostKindNullableFilter = Prisma.NestedEnumPostKindNullableFilter
+
+/**
+ * @deprecated Renamed to `Prisma.postCreateWithoutAuthorInput`
+ */
+export type postCreateWithoutAuthorInput = Prisma.postCreateWithoutAuthorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postCreateOrConnectWithoutauthorInput`
+ */
+export type postCreateOrConnectWithoutauthorInput = Prisma.postCreateOrConnectWithoutauthorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postCreateWithoutEditorInput`
+ */
+export type postCreateWithoutEditorInput = Prisma.postCreateWithoutEditorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postCreateOrConnectWithouteditorInput`
+ */
+export type postCreateOrConnectWithouteditorInput = Prisma.postCreateOrConnectWithouteditorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateWithWhereUniqueWithoutAuthorInput`
+ */
+export type postUpdateWithWhereUniqueWithoutAuthorInput = Prisma.postUpdateWithWhereUniqueWithoutAuthorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateManyWithWhereWithoutAuthorInput`
+ */
+export type postUpdateManyWithWhereWithoutAuthorInput = Prisma.postUpdateManyWithWhereWithoutAuthorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postScalarWhereInput`
+ */
+export type postScalarWhereInput = Prisma.postScalarWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpsertWithWhereUniqueWithoutAuthorInput`
+ */
+export type postUpsertWithWhereUniqueWithoutAuthorInput = Prisma.postUpsertWithWhereUniqueWithoutAuthorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateWithWhereUniqueWithoutEditorInput`
+ */
+export type postUpdateWithWhereUniqueWithoutEditorInput = Prisma.postUpdateWithWhereUniqueWithoutEditorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateManyWithWhereWithoutEditorInput`
+ */
+export type postUpdateManyWithWhereWithoutEditorInput = Prisma.postUpdateManyWithWhereWithoutEditorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpsertWithWhereUniqueWithoutEditorInput`
+ */
+export type postUpsertWithWhereUniqueWithoutEditorInput = Prisma.postUpsertWithWhereUniqueWithoutEditorInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserCreateWithoutPostsInput`
+ */
+export type UserCreateWithoutPostsInput = Prisma.UserCreateWithoutPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserCreateOrConnectWithoutpostsInput`
+ */
+export type UserCreateOrConnectWithoutpostsInput = Prisma.UserCreateOrConnectWithoutpostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserCreateWithoutEditorPostsInput`
+ */
+export type UserCreateWithoutEditorPostsInput = Prisma.UserCreateWithoutEditorPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserCreateOrConnectWithouteditorPostsInput`
+ */
+export type UserCreateOrConnectWithouteditorPostsInput = Prisma.UserCreateOrConnectWithouteditorPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpdateWithoutPostsInput`
+ */
+export type UserUpdateWithoutPostsInput = Prisma.UserUpdateWithoutPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpsertWithoutPostsInput`
+ */
+export type UserUpsertWithoutPostsInput = Prisma.UserUpsertWithoutPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpdateWithoutEditorPostsInput`
+ */
+export type UserUpdateWithoutEditorPostsInput = Prisma.UserUpdateWithoutEditorPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.UserUpsertWithoutEditorPostsInput`
+ */
+export type UserUpsertWithoutEditorPostsInput = Prisma.UserUpsertWithoutEditorPostsInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorCreateWithoutMoviesInput`
+ */
+export type DirectorCreateWithoutMoviesInput = Prisma.DirectorCreateWithoutMoviesInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorCreateOrConnectWithoutmoviesInput`
+ */
+export type DirectorCreateOrConnectWithoutmoviesInput = Prisma.DirectorCreateOrConnectWithoutmoviesInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorUpdateWithoutMoviesInput`
+ */
+export type DirectorUpdateWithoutMoviesInput = Prisma.DirectorUpdateWithoutMoviesInput
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorUpsertWithoutMoviesInput`
+ */
+export type DirectorUpsertWithoutMoviesInput = Prisma.DirectorUpsertWithoutMoviesInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieCreateWithoutDirectorInput`
+ */
+export type MovieCreateWithoutDirectorInput = Prisma.MovieCreateWithoutDirectorInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieCreateOrConnectWithoutdirectorInput`
+ */
+export type MovieCreateOrConnectWithoutdirectorInput = Prisma.MovieCreateOrConnectWithoutdirectorInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpdateWithWhereUniqueWithoutDirectorInput`
+ */
+export type MovieUpdateWithWhereUniqueWithoutDirectorInput = Prisma.MovieUpdateWithWhereUniqueWithoutDirectorInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpdateManyWithWhereWithoutDirectorInput`
+ */
+export type MovieUpdateManyWithWhereWithoutDirectorInput = Prisma.MovieUpdateManyWithWhereWithoutDirectorInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieScalarWhereInput`
+ */
+export type MovieScalarWhereInput = Prisma.MovieScalarWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpsertWithWhereUniqueWithoutDirectorInput`
+ */
+export type MovieUpsertWithWhereUniqueWithoutDirectorInput = Prisma.MovieUpsertWithWhereUniqueWithoutDirectorInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCreateWithoutLikesInput`
+ */
+export type CreatorCreateWithoutLikesInput = Prisma.CreatorCreateWithoutLikesInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCreateOrConnectWithoutlikesInput`
+ */
+export type CreatorCreateOrConnectWithoutlikesInput = Prisma.CreatorCreateOrConnectWithoutlikesInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCreateWithoutProblemsInput`
+ */
+export type CreatorCreateWithoutProblemsInput = Prisma.CreatorCreateWithoutProblemsInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCreateOrConnectWithoutproblemsInput`
+ */
+export type CreatorCreateOrConnectWithoutproblemsInput = Prisma.CreatorCreateOrConnectWithoutproblemsInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateWithWhereUniqueWithoutLikesInput`
+ */
+export type CreatorUpdateWithWhereUniqueWithoutLikesInput = Prisma.CreatorUpdateWithWhereUniqueWithoutLikesInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateManyWithWhereWithoutLikesInput`
+ */
+export type CreatorUpdateManyWithWhereWithoutLikesInput = Prisma.CreatorUpdateManyWithWhereWithoutLikesInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorScalarWhereInput`
+ */
+export type CreatorScalarWhereInput = Prisma.CreatorScalarWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpsertWithWhereUniqueWithoutLikesInput`
+ */
+export type CreatorUpsertWithWhereUniqueWithoutLikesInput = Prisma.CreatorUpsertWithWhereUniqueWithoutLikesInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateWithoutProblemsInput`
+ */
+export type CreatorUpdateWithoutProblemsInput = Prisma.CreatorUpdateWithoutProblemsInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpsertWithoutProblemsInput`
+ */
+export type CreatorUpsertWithoutProblemsInput = Prisma.CreatorUpsertWithoutProblemsInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCreateWithoutLikedByInput`
+ */
+export type ProblemCreateWithoutLikedByInput = Prisma.ProblemCreateWithoutLikedByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCreateOrConnectWithoutlikedByInput`
+ */
+export type ProblemCreateOrConnectWithoutlikedByInput = Prisma.ProblemCreateOrConnectWithoutlikedByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCreateWithoutCreatorInput`
+ */
+export type ProblemCreateWithoutCreatorInput = Prisma.ProblemCreateWithoutCreatorInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCreateOrConnectWithoutcreatorInput`
+ */
+export type ProblemCreateOrConnectWithoutcreatorInput = Prisma.ProblemCreateOrConnectWithoutcreatorInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateWithWhereUniqueWithoutLikedByInput`
+ */
+export type ProblemUpdateWithWhereUniqueWithoutLikedByInput = Prisma.ProblemUpdateWithWhereUniqueWithoutLikedByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateManyWithWhereWithoutLikedByInput`
+ */
+export type ProblemUpdateManyWithWhereWithoutLikedByInput = Prisma.ProblemUpdateManyWithWhereWithoutLikedByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemScalarWhereInput`
+ */
+export type ProblemScalarWhereInput = Prisma.ProblemScalarWhereInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpsertWithWhereUniqueWithoutLikedByInput`
+ */
+export type ProblemUpsertWithWhereUniqueWithoutLikedByInput = Prisma.ProblemUpsertWithWhereUniqueWithoutLikedByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateWithWhereUniqueWithoutCreatorInput`
+ */
+export type ProblemUpdateWithWhereUniqueWithoutCreatorInput = Prisma.ProblemUpdateWithWhereUniqueWithoutCreatorInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateManyWithWhereWithoutCreatorInput`
+ */
+export type ProblemUpdateManyWithWhereWithoutCreatorInput = Prisma.ProblemUpdateManyWithWhereWithoutCreatorInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpsertWithWhereUniqueWithoutCreatorInput`
+ */
+export type ProblemUpsertWithWhereUniqueWithoutCreatorInput = Prisma.ProblemUpsertWithWhereUniqueWithoutCreatorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateWithoutAuthorInput`
+ */
+export type postUpdateWithoutAuthorInput = Prisma.postUpdateWithoutAuthorInput
+
+/**
+ * @deprecated Renamed to `Prisma.postUpdateWithoutEditorInput`
+ */
+export type postUpdateWithoutEditorInput = Prisma.postUpdateWithoutEditorInput
+
+/**
+ * @deprecated Renamed to `Prisma.MovieUpdateWithoutDirectorInput`
+ */
+export type MovieUpdateWithoutDirectorInput = Prisma.MovieUpdateWithoutDirectorInput
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorUpdateWithoutLikesInput`
+ */
+export type CreatorUpdateWithoutLikesInput = Prisma.CreatorUpdateWithoutLikesInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateWithoutLikedByInput`
+ */
+export type ProblemUpdateWithoutLikedByInput = Prisma.ProblemUpdateWithoutLikedByInput
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemUpdateWithoutCreatorInput`
+ */
+export type ProblemUpdateWithoutCreatorInput = Prisma.ProblemUpdateWithoutCreatorInput
