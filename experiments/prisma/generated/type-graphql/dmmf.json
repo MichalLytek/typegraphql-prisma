@@ -12796,1042 +12796,6 @@
       ]
     },
     "outputObjectTypes": {
-      "model": [
-        {
-          "name": "User",
-          "fields": [
-            {
-              "name": "id",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Int",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "email",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "name",
-              "args": [],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "age",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Int",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "balance",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Float",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "amount",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Float",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "posts",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "postWhereInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "orderBy",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "postOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": true
-                    },
-                    {
-                      "type": "postOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "cursor",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "postWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "take",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "skip",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "PostDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
-                    }
-                  ]
-                }
-              ],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "post",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": true
-              }
-            },
-            {
-              "name": "role",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Role",
-                "namespace": "model",
-                "location": "enumTypes",
-                "isList": false
-              }
-            },
-            {
-              "name": "editorPosts",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "postWhereInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "orderBy",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "postOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": true
-                    },
-                    {
-                      "type": "postOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "cursor",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "postWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "take",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "skip",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "PostDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
-                    }
-                  ]
-                }
-              ],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "post",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": true
-              }
-            }
-          ]
-        },
-        {
-          "name": "post",
-          "fields": [
-            {
-              "name": "uuid",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "createdAt",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "DateTime",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "updatedAt",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "DateTime",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "published",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Boolean",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "title",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "subtitle",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "content",
-              "args": [],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "author",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "User",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              }
-            },
-            {
-              "name": "authorId",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Int",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "editor",
-              "args": [],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "User",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              }
-            },
-            {
-              "name": "editorId",
-              "args": [],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "Int",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "kind",
-              "args": [],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "PostKind",
-                "namespace": "model",
-                "location": "enumTypes",
-                "isList": false
-              }
-            },
-            {
-              "name": "metadata",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Json",
-                "location": "scalar",
-                "isList": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "Category",
-          "fields": [
-            {
-              "name": "name",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "slug",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "number",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Int",
-                "location": "scalar",
-                "isList": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "Patient",
-          "fields": [
-            {
-              "name": "firstName",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "lastName",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "email",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "Movie",
-          "fields": [
-            {
-              "name": "directorFirstName",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "directorLastName",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "director",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Director",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              }
-            },
-            {
-              "name": "title",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "Director",
-          "fields": [
-            {
-              "name": "firstName",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "lastName",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "movies",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "MovieWhereInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "orderBy",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "MovieOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": true
-                    },
-                    {
-                      "type": "MovieOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "cursor",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "MovieWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "take",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "skip",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "MovieDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
-                    }
-                  ]
-                }
-              ],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "Movie",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": true
-              }
-            }
-          ]
-        },
-        {
-          "name": "Problem",
-          "fields": [
-            {
-              "name": "id",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Int",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "problemText",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "likedBy",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "CreatorWhereInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "orderBy",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "CreatorOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": true
-                    },
-                    {
-                      "type": "CreatorOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "cursor",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "CreatorWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "take",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "skip",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "CreatorDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
-                    }
-                  ]
-                }
-              ],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "Creator",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": true
-              }
-            },
-            {
-              "name": "creator",
-              "args": [],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "Creator",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              }
-            },
-            {
-              "name": "creatorId",
-              "args": [],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "Int",
-                "location": "scalar",
-                "isList": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "Creator",
-          "fields": [
-            {
-              "name": "id",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "Int",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "name",
-              "args": [],
-              "isRequired": true,
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
-              "name": "likes",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemWhereInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "orderBy",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": true
-                    },
-                    {
-                      "type": "ProblemOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "cursor",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "take",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "skip",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
-                    }
-                  ]
-                }
-              ],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "Problem",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": true
-              }
-            },
-            {
-              "name": "problems",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemWhereInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "orderBy",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": true
-                    },
-                    {
-                      "type": "ProblemOrderByInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "cursor",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "take",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "skip",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "Int",
-                      "location": "scalar",
-                      "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
-                    }
-                  ]
-                }
-              ],
-              "isRequired": false,
-              "isNullable": true,
-              "outputType": {
-                "type": "Problem",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": true
-              }
-            }
-          ]
-        }
-      ],
       "prisma": [
         {
           "name": "Query",
@@ -18987,6 +17951,1042 @@
                 "type": "Int",
                 "location": "scalar",
                 "isList": false
+              }
+            }
+          ]
+        }
+      ],
+      "model": [
+        {
+          "name": "User",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "email",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "age",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "balance",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Float",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "amount",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Float",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "posts",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "postOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "distinct",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "PostDistinctFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    }
+                  ]
+                }
+              ],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "post",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
+              "name": "role",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Role",
+                "namespace": "model",
+                "location": "enumTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "editorPosts",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "postOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "distinct",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "PostDistinctFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    }
+                  ]
+                }
+              ],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "post",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "post",
+          "fields": [
+            {
+              "name": "uuid",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "createdAt",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "DateTime",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "updatedAt",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "DateTime",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "published",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Boolean",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "subtitle",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "content",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "author",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "User",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "authorId",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "editor",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "User",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "editorId",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "kind",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "PostKind",
+                "namespace": "model",
+                "location": "enumTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "metadata",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Json",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "Category",
+          "fields": [
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "slug",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "number",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "Patient",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "email",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "Movie",
+          "fields": [
+            {
+              "name": "directorFirstName",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "directorLastName",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "director",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Director",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "Director",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "movies",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "MovieWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "MovieOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "MovieOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "MovieWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "distinct",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "MovieDistinctFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    }
+                  ]
+                }
+              ],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Movie",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "Problem",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "problemText",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "likedBy",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CreatorWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CreatorOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "CreatorOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CreatorWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "distinct",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CreatorDistinctFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    }
+                  ]
+                }
+              ],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Creator",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
+              "name": "creator",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Creator",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "creatorId",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "Creator",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "likes",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "ProblemOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "distinct",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemDistinctFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    }
+                  ]
+                }
+              ],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Problem",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
+              "name": "problems",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "ProblemOrderByInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "distinct",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemDistinctFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    }
+                  ]
+                }
+              ],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Problem",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
               }
             }
           ]

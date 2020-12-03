@@ -2,6 +2,16 @@ import { DmmfDocument } from "./dmmf/dmmf-document";
 import { modelAttributeRegex, fieldAttributeRegex } from "./dmmf/helpers";
 import { DMMF } from "./dmmf/types";
 
+enum PrismaScalars {
+  String = "String",
+  Boolean = "Boolean",
+  Int = "Int",
+  Float = "Float",
+  DateTime = "DateTime",
+  Json = "Json",
+  // TODO: add native types
+}
+
 export function noop() {}
 
 export function getFieldTSType(
@@ -54,25 +64,22 @@ export function getFieldTSType(
 
 export function mapScalarToTSType(scalar: string, isInputType: boolean) {
   switch (scalar) {
-    case "ID":
-    case "UUID": {
+    case PrismaScalars.String: {
       return "string";
     }
-    case "String": {
-      return "string";
-    }
-    case "Boolean": {
+    case PrismaScalars.Boolean: {
       return "boolean";
     }
-    case "DateTime": {
-      return "Date";
-    }
-    case "Int":
-    case "Float": {
+    case PrismaScalars.Int:
+    case PrismaScalars.Float: {
       return "number";
     }
-    case "Json":
+    case PrismaScalars.DateTime: {
+      return "Date";
+    }
+    case PrismaScalars.Json:
       return isInputType ? "InputJsonValue" : "JsonValue";
+    // TODO: handle native types
     default:
       throw new Error(`Unrecognized scalar type: ${scalar}`);
   }
@@ -110,25 +117,21 @@ export function getTypeGraphQLType(
 
 export function mapScalarToTypeGraphQLType(scalar: string) {
   switch (scalar) {
-    case "DateTime": {
-      return "Date";
-    }
-    // TODO: use proper uuid graphql scalar
-    case "UUID": {
-      return "String";
-    }
-    case "Boolean":
-    case "String": {
+    case PrismaScalars.String:
+    case PrismaScalars.Boolean: {
       return scalar;
     }
-    case "ID":
-    case "Int":
-    case "Float": {
+    case PrismaScalars.Int:
+    case PrismaScalars.Float: {
       return `TypeGraphQL.${scalar}`;
     }
-    case "Json": {
+    case PrismaScalars.DateTime: {
+      return "Date";
+    }
+    case PrismaScalars.Json: {
       return `GraphQLJSON`;
     }
+    // TODO: handle native types
     default: {
       throw new Error(`Unrecognized scalar type: ${scalar}`);
     }
