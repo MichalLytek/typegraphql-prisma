@@ -6,7 +6,7 @@ import { Problem } from "../models/Problem";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
-  simpleResolvers: true,
+  simpleResolvers: undefined,
 })
 export class Creator {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

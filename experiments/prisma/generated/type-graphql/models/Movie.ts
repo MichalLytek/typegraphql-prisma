@@ -6,7 +6,7 @@ import { Director } from "../models/Director";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
-  simpleResolvers: true,
+  simpleResolvers: undefined,
 })
 export class Movie {
   @TypeGraphQL.Field(_type => String, {

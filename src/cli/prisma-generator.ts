@@ -8,6 +8,10 @@ import removeDir from "../utils/removeDir";
 import { GenerateCodeOptions } from "../generator/options";
 import { toUnixPath } from "../generator/helpers";
 
+function parseStringBoolean(stringBoolean: string | undefined) {
+  return stringBoolean ? stringBoolean === "true" : undefined;
+}
+
 export async function generate(options: GeneratorOptions) {
   const outputDir = options.generator.output!;
   await asyncFs.mkdir(outputDir, { recursive: true });
@@ -19,8 +23,12 @@ export async function generate(options: GeneratorOptions) {
   const prismaClientDmmf = require(prismaClientPath)
     .dmmf as PrismaDMMF.Document;
 
+  const generatorConfig = options.generator.config;
   const config: GenerateCodeOptions = {
-    ...options.generator.config,
+    emitDMMF: parseStringBoolean(generatorConfig.emitDMMF),
+    emitTranspiledCode: parseStringBoolean(generatorConfig.emitTranspiledCode),
+    simpleResolvers: parseStringBoolean(generatorConfig.simpleResolvers),
+    useOriginalMapping: parseStringBoolean(generatorConfig.useOriginalMapping),
     outputDirPath: outputDir,
     relativePrismaOutputPath: toUnixPath(
       path.relative(outputDir, prismaClientPath),

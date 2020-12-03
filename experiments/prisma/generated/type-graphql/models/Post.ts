@@ -7,7 +7,7 @@ import { PostKind } from "../enums/PostKind";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
-  simpleResolvers: true,
+  simpleResolvers: undefined,
 })
 export class Post {
   @TypeGraphQL.Field(_type => String, {

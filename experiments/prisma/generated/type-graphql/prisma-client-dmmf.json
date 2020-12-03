@@ -18994,6 +18994,22 @@
       ]
     },
     "enumTypes": {
+      "model": [
+        {
+          "name": "Role",
+          "values": [
+            "USER",
+            "ADMIN"
+          ]
+        },
+        {
+          "name": "PostKind",
+          "values": [
+            "BLOG",
+            "ADVERT"
+          ]
+        }
+      ],
       "prisma": [
         {
           "name": "UserDistinctFieldEnum",
@@ -19081,22 +19097,6 @@
           "values": [
             "default",
             "insensitive"
-          ]
-        }
-      ],
-      "model": [
-        {
-          "name": "Role",
-          "values": [
-            "USER",
-            "ADMIN"
-          ]
-        },
-        {
-          "name": "PostKind",
-          "values": [
-            "BLOG",
-            "ADVERT"
           ]
         }
       ]

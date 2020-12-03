@@ -5,7 +5,7 @@ import { JsonValue, InputJsonValue } from "../../../client";
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
-  simpleResolvers: true,
+  simpleResolvers: undefined,
 })
 export class CategoryMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
