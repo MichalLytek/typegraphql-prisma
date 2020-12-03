@@ -15,7 +15,7 @@ describe("resolvers enhance", () => {
     readGeneratedFile = createReadGeneratedFile(outputDirPath);
   });
 
-  it("should emit resolvers model config map with types", async () => {
+  it("should emit models and resolvers config map with types", async () => {
     const schema = /* prisma */ `
       datasource db {
         provider = "postgresql"
@@ -42,10 +42,7 @@ describe("resolvers enhance", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, {
-      outputDirPath,
-      simpleResolvers: true,
-    });
+    await generateCodeFromSchema(schema, { outputDirPath });
     const enhanceTSFile = await readGeneratedFile("/enhance.ts");
 
     expect(enhanceTSFile).toMatchSnapshot("enhance");

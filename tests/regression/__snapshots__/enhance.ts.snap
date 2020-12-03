@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`resolvers enhance should emit resolvers model config map with types: enhance 1`] = `
+exports[`resolvers enhance should emit models and resolvers config map with types: enhance 1`] = `
 "import * as crudResolvers from \\"./resolvers/crud/resolvers-crud.index\\";
 import * as actionResolvers from \\"./resolvers/crud/resolvers-actions.index\\";
+import * as models from \\"./models\\";
 
 const crudResolversMap = {
   Client: crudResolvers.ClientCrudResolver,
@@ -35,18 +36,18 @@ const actionResolversMap = {
   }
 };
 
-type ModelNames = keyof typeof crudResolversMap;
+type ResolverModelNames = keyof typeof crudResolversMap;
 
 type ModelResolverActionNames<
-  TModel extends ModelNames
+  TModel extends ResolverModelNames
   > = keyof typeof crudResolversMap[TModel][\\"prototype\\"];
 
-export type ResolverActionsConfig<TModel extends ModelNames> = {
+export type ResolverActionsConfig<TModel extends ResolverModelNames> = {
   [TActionName in ModelResolverActionNames<TModel>]?: MethodDecorator[];
 };
 
 export type ResolversEnhanceMap = {
-  [TModel in ModelNames]?: ResolverActionsConfig<TModel>;
+  [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
 };
 
 export function applyResolversEnhanceMap(
@@ -79,6 +80,37 @@ export function applyResolversEnhanceMap(
     }
   }
 }
+
+type ModelNames = keyof typeof models;
+
+type ModelFieldNames<
+  TModel extends ModelNames
+  > = keyof typeof models[TModel][\\"prototype\\"];
+
+export type ModelFieldsConfig<TModel extends ModelNames> = {
+  [TActionName in ModelFieldNames<TModel>]?: Array<PropertyDecorator>;
+};
+
+export type ModelsEnhanceMap = {
+  [TModel in ModelNames]?: ModelFieldsConfig<TModel>;
+};
+
+export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
+  for (const modelsEnhanceMapKey of Object.keys(modelsEnhanceMap)) {
+    const modelName = modelsEnhanceMapKey as keyof typeof modelsEnhanceMap;
+    const modelFieldsConfig = modelsEnhanceMap[modelName]!;
+    for (const modelFieldName of Object.keys(modelFieldsConfig)) {
+      const decorators = modelFieldsConfig[
+        modelFieldName as keyof typeof modelFieldsConfig
+      ] as Array<PropertyDecorator>;
+      const modelTarget = models[modelName].prototype;
+      for (const decorator of decorators) {
+        decorator(modelTarget, modelFieldName);
+      }
+    }
+  }
+}
+
 
 "
 `;

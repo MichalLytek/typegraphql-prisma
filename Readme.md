@@ -313,8 +313,46 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
   Category: categoryActionsConfig,
   Problem: problemActionsConfig,
 };
+
+// apply the config (it will apply decorators on the resolver class methods)
 applyResolversEnhanceMap(resolversEnhanceMap);
 ```
+
+#### Additional decorators for Prisma schema model fields
+
+If you need to apply some decorators, like `@Authorized` or `@Extensions`, on the model `@ObjectType` fields, you can use similar pattern as for the resolver actions described above.
+
+All you need to do is to import `ModelsEnhanceMap` type and `applyModelsEnhanceMap` function, and then create a config object, where you put the decorator functions (without `@`) in an array.
+If you want to split the config definitions, you can use `ModelFieldsConfig` type in the same way like `ResolverActionsConfig`, e.g.:
+
+```ts
+import {
+  ResolversEnhanceMap,
+  ResolverActionsConfig,
+  applyResolversEnhanceMap,
+} from "@generated/type-graphql";
+import { Authorized, Extensions } from "type-graphql";
+
+// define the decorators configs
+const userFieldsConfig: ModelFieldsConfig<"User"> = {
+  email: [
+    Authorized(Role.ADMIN),
+    Extensions({ logMessage: "Danger zone", logLevel: LogLevel.WARN }),
+  ],
+};
+const recipeFieldsConfig: ModelFieldsConfig<"Recipe"> = {
+  averageRating: [Authorized()],
+};
+const modelsEnhanceMap: ModelsEnhanceMap = {
+  User: userFieldsConfig,
+  Recipe: recipeFieldsConfig,
+};
+
+// apply the config (it will apply decorators on the model class properties)
+applyModelsEnhanceMap(modelsEnhanceMap);
+```
+
+This way, you can apply some rules on single model fields, like `User.email` visible only for Admin.
 
 #### Adding fields to model type
 

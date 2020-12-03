@@ -1,5 +1,9 @@
 import { SourceFile, VariableDeclarationKind, Writers } from "ts-morph";
-import { crudResolversFolderName, resolversFolderName } from "./config";
+import {
+  crudResolversFolderName,
+  modelsFolderName,
+  resolversFolderName,
+} from "./config";
 import { DMMF } from "./dmmf/types";
 
 export function generateEnhanceMap(
@@ -14,6 +18,11 @@ export function generateEnhanceMap(
   sourceFile.addImportDeclaration({
     moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-actions.index`,
     namespaceImport: "actionResolvers",
+  });
+
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: `./${modelsFolderName}`,
+    namespaceImport: "models",
   });
 
   sourceFile.addVariableStatement({
@@ -59,18 +68,18 @@ export function generateEnhanceMap(
   });
 
   sourceFile.addStatements(/* ts */ `
-    type ModelNames = keyof typeof crudResolversMap;
+    type ResolverModelNames = keyof typeof crudResolversMap;
 
     type ModelResolverActionNames<
-      TModel extends ModelNames
+      TModel extends ResolverModelNames
     > = keyof typeof crudResolversMap[TModel]["prototype"];
 
-    export type ResolverActionsConfig<TModel extends ModelNames> = {
+    export type ResolverActionsConfig<TModel extends ResolverModelNames> = {
       [TActionName in ModelResolverActionNames<TModel>]?: MethodDecorator[];
     };
 
     export type ResolversEnhanceMap = {
-      [TModel in ModelNames]?: ResolverActionsConfig<TModel>;
+      [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
     };
 
     export function applyResolversEnhanceMap(
@@ -99,6 +108,38 @@ export function generateEnhanceMap(
               modelResolverActionName,
               Object.getOwnPropertyDescriptor(actionTarget, modelResolverActionName)!,
             );
+          }
+        }
+      }
+    }
+  `);
+
+  sourceFile.addStatements(/* ts */ `
+    type ModelNames = keyof typeof models;
+
+    type ModelFieldNames<
+      TModel extends ModelNames
+    > = keyof typeof models[TModel]["prototype"];
+
+    export type ModelFieldsConfig<TModel extends ModelNames> = {
+      [TActionName in ModelFieldNames<TModel>]?: Array<PropertyDecorator>;
+    };
+
+    export type ModelsEnhanceMap = {
+      [TModel in ModelNames]?: ModelFieldsConfig<TModel>;
+    };
+
+    export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
+      for (const modelsEnhanceMapKey of Object.keys(modelsEnhanceMap)) {
+        const modelName = modelsEnhanceMapKey as keyof typeof modelsEnhanceMap;
+        const modelFieldsConfig = modelsEnhanceMap[modelName]!;
+        for (const modelFieldName of Object.keys(modelFieldsConfig)) {
+          const decorators = modelFieldsConfig[
+            modelFieldName as keyof typeof modelFieldsConfig
+          ] as Array<PropertyDecorator>;
+          const modelTarget = models[modelName].prototype;
+          for (const decorator of decorators) {
+            decorator(modelTarget, modelFieldName);
           }
         }
       }

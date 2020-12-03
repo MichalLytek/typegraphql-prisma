@@ -38,23 +38,32 @@ import {
   applyResolversEnhanceMap,
   ResolverActionsConfig,
   FindManyCategoryResolver,
+  ModelsEnhanceMap,
+  applyModelsEnhanceMap,
+  ModelFieldsConfig,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
 import { ProblemCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Problem/ProblemCrudResolver";
 import { CreatorCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Creator/CreatorCrudResolver";
 
+const clientFieldsConfig: ModelFieldsConfig<"Client"> = {
+  email: [Authorized()],
+};
+const modelsEnhanceMap: ModelsEnhanceMap = {
+  Client: clientFieldsConfig,
+};
+applyModelsEnhanceMap(modelsEnhanceMap);
+
 const problemActionsConfig: ResolverActionsConfig<"Problem"> = {
   createProblem: [Authorized()],
 };
-
 const resolversEnhanceMap: ResolversEnhanceMap = {
   Category: {
     categories: [Authorized()],
   },
   Problem: problemActionsConfig,
 };
-
 applyResolversEnhanceMap(resolversEnhanceMap);
 
 interface Context {
