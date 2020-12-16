@@ -320,10 +320,10 @@ applyResolversEnhanceMap(resolversEnhanceMap);
 
 #### Additional decorators for Prisma schema model fields
 
-If you need to apply some decorators, like `@Authorized` or `@Extensions`, on the model `@ObjectType` fields, you can use similar pattern as for the resolver actions described above.
+If you need to apply some decorators, like `@Authorized` or `@Extensions`, on the model `@ObjectType` and its fields, you can use similar pattern as for the resolver actions described above.
 
 All you need to do is to import `ModelsEnhanceMap` type and `applyModelsEnhanceMap` function, and then create a config object, where you put the decorator functions (without `@`) in an array.
-If you want to split the config definitions, you can use `ModelFieldsConfig` type in the same way like `ResolverActionsConfig`, e.g.:
+If you want to split the config definitions, you can use `ModelConfig` and `ModelFieldsConfig` type in the same way like `ResolverActionsConfig`, e.g.:
 
 ```ts
 import {
@@ -334,25 +334,34 @@ import {
 import { Authorized, Extensions } from "type-graphql";
 
 // define the decorators configs
-const userFieldsConfig: ModelFieldsConfig<"User"> = {
-  email: [
-    Authorized(Role.ADMIN),
-    Extensions({ logMessage: "Danger zone", logLevel: LogLevel.WARN }),
-  ],
-};
-const recipeFieldsConfig: ModelFieldsConfig<"Recipe"> = {
-  averageRating: [Authorized()],
+const userEnhanceConfig: ModelConfig<"User"> = {
+  fields: {
+    email: [
+      Authorized(Role.ADMIN),
+      Extensions({ logMessage: "Danger zone", logLevel: LogLevel.WARN }),
+    ],
+  },
 };
 const modelsEnhanceMap: ModelsEnhanceMap = {
-  User: userFieldsConfig,
-  Recipe: recipeFieldsConfig,
+  User: userEnhanceConfig,
+  // or apply it inline
+  Recipe: {
+    class: [
+      // decorators for @ObjectType model class
+      Extensions({ logMessage: "Secret recipe", logLevel: LogLevel.INFO }),
+    ],
+    fields: {
+      // decorator for model class fields
+      averageRating: [Authorized()],
+    },
+  },
 };
 
-// apply the config (it will apply decorators on the model class properties)
+// apply the config (it will apply decorators on the model class and its properties)
 applyModelsEnhanceMap(modelsEnhanceMap);
 ```
 
-This way, you can apply some rules on single model fields, like `User.email` visible only for Admin.
+This way, you can apply some rules on single model or its fields, like `User.email` visible only for Admin.
 
 #### Adding fields to model type
 

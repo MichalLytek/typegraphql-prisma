@@ -9,6 +9,7 @@ import {
   Args,
   Mutation,
   Authorized,
+  Extensions,
 } from "type-graphql";
 import { ApolloServer } from "apollo-server";
 import path from "path";
@@ -40,18 +41,26 @@ import {
   FindManyCategoryResolver,
   ModelsEnhanceMap,
   applyModelsEnhanceMap,
-  ModelFieldsConfig,
+  ModelConfig,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
 import { ProblemCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Problem/ProblemCrudResolver";
 import { CreatorCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Creator/CreatorCrudResolver";
 
-const problemTypeFieldsConfig: ModelFieldsConfig<"Problem"> = {
-  likedBy: [Authorized()],
+const problemTypeFieldsConfig: ModelConfig<"Problem"> = {
+  fields: {
+    likedBy: [Authorized()],
+  },
 };
 const modelsEnhanceMap: ModelsEnhanceMap = {
   Problem: problemTypeFieldsConfig,
+  Director: {
+    class: [Extensions({ isDirector: true })],
+    fields: {
+      movies: [Authorized()],
+    },
+  },
 };
 applyModelsEnhanceMap(modelsEnhanceMap);
 

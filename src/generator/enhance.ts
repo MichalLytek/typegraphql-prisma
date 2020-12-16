@@ -122,24 +122,38 @@ export function generateEnhanceMap(
     > = keyof typeof models[TModel]["prototype"];
 
     export type ModelFieldsConfig<TModel extends ModelNames> = {
-      [TActionName in ModelFieldNames<TModel>]?: Array<PropertyDecorator>;
+      [TActionName in ModelFieldNames<TModel>]?: PropertyDecorator[];
     };
 
+    export type ModelConfig<TModel extends ModelNames> = {
+      class?: ClassDecorator[];
+      fields?: ModelFieldsConfig<TModel>;
+    }
+
     export type ModelsEnhanceMap = {
-      [TModel in ModelNames]?: ModelFieldsConfig<TModel>;
+      [TModel in ModelNames]?: ModelConfig<TModel>;
     };
 
     export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
       for (const modelsEnhanceMapKey of Object.keys(modelsEnhanceMap)) {
         const modelName = modelsEnhanceMapKey as keyof typeof modelsEnhanceMap;
-        const modelFieldsConfig = modelsEnhanceMap[modelName]!;
-        for (const modelFieldName of Object.keys(modelFieldsConfig)) {
-          const decorators = modelFieldsConfig[
-            modelFieldName as keyof typeof modelFieldsConfig
-          ] as Array<PropertyDecorator>;
-          const modelTarget = models[modelName].prototype;
-          for (const decorator of decorators) {
-            decorator(modelTarget, modelFieldName);
+        const modelClass = models[modelName];
+        const modelTarget = models[modelName].prototype;
+        const modelConfig = modelsEnhanceMap[modelName]!;
+        if (modelConfig.class) {
+          for (const decorator of modelConfig.class) {
+            decorator(modelClass);
+          }
+        }
+        if (modelConfig.fields) {
+          for (const modelFieldName of Object.keys(modelConfig.fields)) {
+            const decorators = modelConfig.fields[
+              modelFieldName as keyof typeof modelConfig.fields
+            ] as Array<PropertyDecorator>;
+
+            for (const decorator of decorators) {
+              decorator(modelTarget, modelFieldName);
+            }
           }
         }
       }
