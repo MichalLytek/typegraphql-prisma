@@ -3,7 +3,6 @@ import GraphQLJSON from "graphql-type-json";
 import { MovieOrderByInput } from "../../../inputs/MovieOrderByInput";
 import { MovieWhereInput } from "../../../inputs/MovieWhereInput";
 import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
-import { MovieDistinctFieldEnum } from "../../../../enums/MovieDistinctFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class AggregateMovieArgs {
@@ -21,7 +20,4 @@ export class AggregateMovieArgs {
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
-
-  @TypeGraphQL.Field(_type => [MovieDistinctFieldEnum], { nullable: true })
-  distinct?: Array<"directorFirstName" | "directorLastName" | "title"> | undefined;
 }

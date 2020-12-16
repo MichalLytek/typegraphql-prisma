@@ -167,16 +167,11 @@ describe("generator integration", () => {
     await pgClient.query(`DROP DATABASE IF EXISTS "${dbName}"`);
     await pgClient.end();
 
-    const migrateSaveResult = await exec(
-      "npx prisma migrate save --experimental --name='init' --create-db",
+    const migrateResult = await exec(
+      "npx prisma migrate dev --preview-feature --name init",
       { cwd: cwdDirPath },
     );
-    expect(migrateSaveResult.stderr).toHaveLength(0);
-
-    const migrateUpResult = await exec("npx prisma migrate up --experimental", {
-      cwd: cwdDirPath,
-    });
-    expect(migrateUpResult.stderr).toHaveLength(0);
+    expect(migrateResult.stderr).toHaveLength(0);
 
     const { PrismaClient } = require(cwdDirPath + "/generated/client");
     const prisma = new PrismaClient();

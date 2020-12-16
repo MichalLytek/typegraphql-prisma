@@ -3,7 +3,7 @@ import GraphQLJSON from "graphql-type-json";
 import { PostOrderByInput } from "../../../inputs/PostOrderByInput";
 import { PostWhereInput } from "../../../inputs/PostWhereInput";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
-import { PostDistinctFieldEnum } from "../../../../enums/PostDistinctFieldEnum";
+import { PostScalarFieldEnum } from "../../../../enums/PostScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class FindFirstPostArgs {
@@ -22,6 +22,6 @@ export class FindFirstPostArgs {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [PostDistinctFieldEnum], { nullable: true })
+  @TypeGraphQL.Field(_type => [PostScalarFieldEnum], { nullable: true })
   distinct?: Array<"uuid" | "createdAt" | "updatedAt" | "published" | "title" | "subtitle" | "content" | "authorId" | "editorId" | "kind" | "metadata"> | undefined;
 }

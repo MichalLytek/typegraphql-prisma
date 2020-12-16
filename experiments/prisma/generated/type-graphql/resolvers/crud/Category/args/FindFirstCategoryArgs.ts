@@ -3,7 +3,7 @@ import GraphQLJSON from "graphql-type-json";
 import { CategoryOrderByInput } from "../../../inputs/CategoryOrderByInput";
 import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInput";
-import { CategoryDistinctFieldEnum } from "../../../../enums/CategoryDistinctFieldEnum";
+import { CategoryScalarFieldEnum } from "../../../../enums/CategoryScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class FindFirstCategoryArgs {
@@ -22,6 +22,6 @@ export class FindFirstCategoryArgs {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [CategoryDistinctFieldEnum], { nullable: true })
+  @TypeGraphQL.Field(_type => [CategoryScalarFieldEnum], { nullable: true })
   distinct?: Array<"name" | "slug" | "number"> | undefined;
 }

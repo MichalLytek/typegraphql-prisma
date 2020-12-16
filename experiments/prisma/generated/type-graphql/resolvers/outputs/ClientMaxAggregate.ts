@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
+import { Role } from "../../enums/Role";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -13,6 +14,18 @@ export class ClientMaxAggregate {
     description: undefined
   })
   id!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  email!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  name!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
@@ -31,4 +44,10 @@ export class ClientMaxAggregate {
     description: undefined
   })
   amount!: number;
+
+  @TypeGraphQL.Field(_type => Role, {
+    nullable: true,
+    description: undefined
+  })
+  role!: "USER" | "ADMIN" | null;
 }

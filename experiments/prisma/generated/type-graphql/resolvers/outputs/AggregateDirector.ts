@@ -1,6 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
+import { DirectorMaxAggregate } from "../outputs/DirectorMaxAggregate";
+import { DirectorMinAggregate } from "../outputs/DirectorMinAggregate";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -9,8 +11,20 @@ import { JsonValue, InputJsonValue } from "../../../client";
 })
 export class AggregateDirector {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  count!: number;
+  count!: number | null;
+
+  @TypeGraphQL.Field(_type => DirectorMinAggregate, {
+    nullable: true,
+    description: undefined
+  })
+  min!: DirectorMinAggregate | null;
+
+  @TypeGraphQL.Field(_type => DirectorMaxAggregate, {
+    nullable: true,
+    description: undefined
+  })
+  max!: DirectorMaxAggregate | null;
 }

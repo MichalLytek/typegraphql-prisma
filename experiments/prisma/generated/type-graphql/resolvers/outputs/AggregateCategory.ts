@@ -13,10 +13,10 @@ import { CategorySumAggregate } from "../outputs/CategorySumAggregate";
 })
 export class AggregateCategory {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  count!: number;
+  count!: number | null;
 
   @TypeGraphQL.Field(_type => CategoryAvgAggregate, {
     nullable: true,

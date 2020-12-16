@@ -10,7 +10,7 @@ generator client {
   binaryTargets   = ["windows", "debian-openssl-1.1.x"]
   output          = "../prisma/generated/client"
   // previewFeatures = ["nativeTypes", "uncheckedScalarInputs"]
-  previewFeatures = ["nativeTypes"]
+  // previewFeatures = ["uncheckedScalarInputs"]
 }
 
 generator typegraphql {

@@ -31,8 +31,8 @@ export import Sql = runtime.Sql
 export import Decimal = runtime.Decimal
 
 /**
- * Prisma Client JS version: 2.12.1
- * Query Engine version: cf0680a1bfe8d5e743dc659cc7f08009f9587d58
+ * Prisma Client JS version: 2.13.0
+ * Query Engine version: 833ab05d2a20e822f6736a39a27de4fc8f6b3e49
  */
 export type PrismaVersion = {
   client: string
@@ -127,6 +127,28 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
  * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
  */
 type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+
+
+
+/**
+ * Used by group by
+ */
+export type GetScalarType<T, O> = O extends object ? {
+  [P in keyof T]: P extends keyof O
+    ? O[P]
+    : never
+} : never
+
+/**
+ * Convert tuple to union
+ */
+type _TupleToUnion<T> = T extends (infer E)[] ? E : never
+type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
+
+/**
+ * Like `Pick`, but with an array
+ */
+type PickArray<T, K extends Array<keyof T>> = Pick<T, TupleToUnion<K>>
 
 
 
@@ -471,8 +493,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.12.1
-   * Query Engine version: cf0680a1bfe8d5e743dc659cc7f08009f9587d58
+   * Prisma Client JS version: 2.13.0
+   * Query Engine version: 833ab05d2a20e822f6736a39a27de4fc8f6b3e49
    */
   export type PrismaVersion = {
     client: string
@@ -567,6 +589,28 @@ export namespace Prisma {
    * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
    */
   type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+
+
+
+  /**
+   * Used by group by
+   */
+  export type GetScalarType<T, O> = O extends object ? {
+    [P in keyof T]: P extends keyof O
+      ? O[P]
+      : never
+  } : never
+
+  /**
+   * Convert tuple to union
+   */
+  type _TupleToUnion<T> = T extends (infer E)[] ? E : never
+  type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
+
+  /**
+   * Like `Pick`, but with an array
+   */
+  type PickArray<T, K extends Array<keyof T>> = Pick<T, TupleToUnion<K>>
 
   class PrismaClientFetcher {
     private readonly prisma;
@@ -673,12 +717,13 @@ export namespace Prisma {
     | 'executeRaw'
     | 'queryRaw'
     | 'aggregate'
+    | 'count'
 
   /**
    * These options are being passed in to the middleware as "params"
    */
   export type MiddlewareParams = {
-    model?: string
+    model?: ModelName
     action: PrismaAction
     args: any
     dataPath: string[]
@@ -706,7 +751,7 @@ export namespace Prisma {
 
 
   export type AggregateUser = {
-    count: number
+    count: number | null
     avg: UserAvgAggregateOutputType | null
     sum: UserSumAggregateOutputType | null
     min: UserMinAggregateOutputType | null
@@ -729,16 +774,33 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: number
+    email: string | null
+    name: string | null
     age: number
     balance: number
     amount: number
+    role: Role | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: number
+    email: string | null
+    name: string | null
     age: number
     balance: number
     amount: number
+    role: Role | null
+  }
+
+  export type UserCountAggregateOutputType = {
+    id: number
+    email: number | null
+    name: number | null
+    age: number
+    balance: number
+    amount: number
+    role: number | null
+    _all: number
   }
 
 
@@ -758,25 +820,41 @@ export namespace Prisma {
 
   export type UserMinAggregateInputType = {
     id?: true
+    email?: true
+    name?: true
     age?: true
     balance?: true
     amount?: true
+    role?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
+    email?: true
+    name?: true
     age?: true
     balance?: true
     amount?: true
+    role?: true
+  }
+
+  export type UserCountAggregateInputType = {
+    id?: true
+    email?: true
+    name?: true
+    age?: true
+    balance?: true
+    amount?: true
+    role?: true
+    _all?: true
   }
 
   export type AggregateUserArgs = {
     where?: UserWhereInput
-    orderBy?: XOR<Enumerable<UserOrderByInput>, UserOrderByInput>
+    orderBy?: Enumerable<UserOrderByInput>
     cursor?: UserWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<UserDistinctFieldEnum>
     count?: true
     avg?: UserAvgAggregateInputType
     sum?: UserSumAggregateInputType
@@ -791,8 +869,10 @@ export namespace Prisma {
   export type GetUserAggregateScalarType<T extends any> = {
     [P in keyof T]: P extends keyof UserAvgAggregateOutputType ? UserAvgAggregateOutputType[P] : never
   }
+
     
-    
+
+
 
   export type UserSelect = {
     id?: boolean
@@ -947,7 +1027,7 @@ export namespace Prisma {
      * 
     **/
     deleteMany<T extends UserDeleteManyArgs>(
-      args: Subset<T, UserDeleteManyArgs>
+      args?: Subset<T, UserDeleteManyArgs>
     ): Promise<BatchPayload>
     /**
      * Update zero or more Users.
@@ -1006,6 +1086,8 @@ export namespace Prisma {
      * Count
      */
     count(args?: Omit<FindManyUserArgs, 'select' | 'include'>): Promise<number>
+
+  
 
     /**
      * Aggregate
@@ -1071,11 +1153,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
     **/
-    select?: XOR<UserSelect, null>
+    select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<UserInclude, null>
+    include?: UserInclude | null
     /**
      * Filter, which User to fetch.
     **/
@@ -1090,20 +1172,20 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
     **/
-    select?: XOR<UserSelect, null>
+    select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<UserInclude, null>
+    include?: UserInclude | null
     /**
      * Filter, which User to fetch.
     **/
     where?: UserWhereInput
-    orderBy?: XOR<Enumerable<UserOrderByInput>, UserOrderByInput>
+    orderBy?: Enumerable<UserOrderByInput>
     cursor?: UserWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<UserDistinctFieldEnum>
+    distinct?: Enumerable<UserScalarFieldEnum>
   }
 
 
@@ -1114,11 +1196,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
     **/
-    select?: XOR<UserSelect, null>
+    select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<UserInclude, null>
+    include?: UserInclude | null
     /**
      * Filter, which Users to fetch.
     **/
@@ -1126,7 +1208,7 @@ export namespace Prisma {
     /**
      * Determine the order of the Users to fetch.
     **/
-    orderBy?: XOR<Enumerable<UserOrderByInput>, UserOrderByInput>
+    orderBy?: Enumerable<UserOrderByInput>
     /**
      * Sets the position for listing Users.
     **/
@@ -1139,7 +1221,7 @@ export namespace Prisma {
      * Skip the first `n` Users.
     **/
     skip?: number
-    distinct?: Enumerable<UserDistinctFieldEnum>
+    distinct?: Enumerable<UserScalarFieldEnum>
   }
 
 
@@ -1150,11 +1232,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
     **/
-    select?: XOR<UserSelect, null>
+    select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<UserInclude, null>
+    include?: UserInclude | null
     /**
      * The data needed to create a User.
     **/
@@ -1169,11 +1251,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
     **/
-    select?: XOR<UserSelect, null>
+    select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<UserInclude, null>
+    include?: UserInclude | null
     /**
      * The data needed to update a User.
     **/
@@ -1201,11 +1283,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
     **/
-    select?: XOR<UserSelect, null>
+    select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<UserInclude, null>
+    include?: UserInclude | null
     /**
      * The filter to search for the User to update in case it exists.
     **/
@@ -1228,11 +1310,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
     **/
-    select?: XOR<UserSelect, null>
+    select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<UserInclude, null>
+    include?: UserInclude | null
     /**
      * Filter which User to delete.
     **/
@@ -1255,11 +1337,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
     **/
-    select?: XOR<UserSelect, null>
+    select?: UserSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<UserInclude, null>
+    include?: UserInclude | null
   }
 
 
@@ -1270,7 +1352,7 @@ export namespace Prisma {
 
 
   export type AggregatePost = {
-    count: number
+    count: number | null
     avg: PostAvgAggregateOutputType | null
     sum: PostSumAggregateOutputType | null
     min: PostMinAggregateOutputType | null
@@ -1288,13 +1370,46 @@ export namespace Prisma {
   }
 
   export type PostMinAggregateOutputType = {
+    uuid: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    published: boolean | null
+    title: string | null
+    subtitle: string | null
+    content: string | null
     authorId: number
     editorId: number | null
+    kind: PostKind | null
+    metadata: JsonValue | null
   }
 
   export type PostMaxAggregateOutputType = {
+    uuid: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    published: boolean | null
+    title: string | null
+    subtitle: string | null
+    content: string | null
     authorId: number
     editorId: number | null
+    kind: PostKind | null
+    metadata: JsonValue | null
+  }
+
+  export type PostCountAggregateOutputType = {
+    uuid: number | null
+    createdAt: number | null
+    updatedAt: number | null
+    published: number | null
+    title: number | null
+    subtitle: number | null
+    content: number | null
+    authorId: number
+    editorId: number | null
+    kind: number | null
+    metadata: number | null
+    _all: number
   }
 
 
@@ -1309,22 +1424,54 @@ export namespace Prisma {
   }
 
   export type PostMinAggregateInputType = {
+    uuid?: true
+    createdAt?: true
+    updatedAt?: true
+    published?: true
+    title?: true
+    subtitle?: true
+    content?: true
     authorId?: true
     editorId?: true
+    kind?: true
+    metadata?: true
   }
 
   export type PostMaxAggregateInputType = {
+    uuid?: true
+    createdAt?: true
+    updatedAt?: true
+    published?: true
+    title?: true
+    subtitle?: true
+    content?: true
     authorId?: true
     editorId?: true
+    kind?: true
+    metadata?: true
+  }
+
+  export type PostCountAggregateInputType = {
+    uuid?: true
+    createdAt?: true
+    updatedAt?: true
+    published?: true
+    title?: true
+    subtitle?: true
+    content?: true
+    authorId?: true
+    editorId?: true
+    kind?: true
+    metadata?: true
+    _all?: true
   }
 
   export type AggregatePostArgs = {
     where?: postWhereInput
-    orderBy?: XOR<Enumerable<postOrderByInput>, postOrderByInput>
+    orderBy?: Enumerable<postOrderByInput>
     cursor?: postWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<PostDistinctFieldEnum>
     count?: true
     avg?: PostAvgAggregateInputType
     sum?: PostSumAggregateInputType
@@ -1339,8 +1486,10 @@ export namespace Prisma {
   export type GetPostAggregateScalarType<T extends any> = {
     [P in keyof T]: P extends keyof PostAvgAggregateOutputType ? PostAvgAggregateOutputType[P] : never
   }
+
     
-    
+
+
 
   export type postSelect = {
     uuid?: boolean
@@ -1499,7 +1648,7 @@ export namespace Prisma {
      * 
     **/
     deleteMany<T extends postDeleteManyArgs>(
-      args: Subset<T, postDeleteManyArgs>
+      args?: Subset<T, postDeleteManyArgs>
     ): Promise<BatchPayload>
     /**
      * Update zero or more Posts.
@@ -1558,6 +1707,8 @@ export namespace Prisma {
      * Count
      */
     count(args?: Omit<FindManypostArgs, 'select' | 'include'>): Promise<number>
+
+  
 
     /**
      * Aggregate
@@ -1623,11 +1774,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the post
     **/
-    select?: XOR<postSelect, null>
+    select?: postSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<postInclude, null>
+    include?: postInclude | null
     /**
      * Filter, which post to fetch.
     **/
@@ -1642,20 +1793,20 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the post
     **/
-    select?: XOR<postSelect, null>
+    select?: postSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<postInclude, null>
+    include?: postInclude | null
     /**
      * Filter, which post to fetch.
     **/
     where?: postWhereInput
-    orderBy?: XOR<Enumerable<postOrderByInput>, postOrderByInput>
+    orderBy?: Enumerable<postOrderByInput>
     cursor?: postWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<PostDistinctFieldEnum>
+    distinct?: Enumerable<PostScalarFieldEnum>
   }
 
 
@@ -1666,11 +1817,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the post
     **/
-    select?: XOR<postSelect, null>
+    select?: postSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<postInclude, null>
+    include?: postInclude | null
     /**
      * Filter, which posts to fetch.
     **/
@@ -1678,7 +1829,7 @@ export namespace Prisma {
     /**
      * Determine the order of the posts to fetch.
     **/
-    orderBy?: XOR<Enumerable<postOrderByInput>, postOrderByInput>
+    orderBy?: Enumerable<postOrderByInput>
     /**
      * Sets the position for listing posts.
     **/
@@ -1691,7 +1842,7 @@ export namespace Prisma {
      * Skip the first `n` posts.
     **/
     skip?: number
-    distinct?: Enumerable<PostDistinctFieldEnum>
+    distinct?: Enumerable<PostScalarFieldEnum>
   }
 
 
@@ -1702,11 +1853,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the post
     **/
-    select?: XOR<postSelect, null>
+    select?: postSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<postInclude, null>
+    include?: postInclude | null
     /**
      * The data needed to create a post.
     **/
@@ -1721,11 +1872,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the post
     **/
-    select?: XOR<postSelect, null>
+    select?: postSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<postInclude, null>
+    include?: postInclude | null
     /**
      * The data needed to update a post.
     **/
@@ -1753,11 +1904,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the post
     **/
-    select?: XOR<postSelect, null>
+    select?: postSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<postInclude, null>
+    include?: postInclude | null
     /**
      * The filter to search for the post to update in case it exists.
     **/
@@ -1780,11 +1931,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the post
     **/
-    select?: XOR<postSelect, null>
+    select?: postSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<postInclude, null>
+    include?: postInclude | null
     /**
      * Filter which post to delete.
     **/
@@ -1807,11 +1958,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the post
     **/
-    select?: XOR<postSelect, null>
+    select?: postSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<postInclude, null>
+    include?: postInclude | null
   }
 
 
@@ -1822,7 +1973,7 @@ export namespace Prisma {
 
 
   export type AggregateCategory = {
-    count: number
+    count: number | null
     avg: CategoryAvgAggregateOutputType | null
     sum: CategorySumAggregateOutputType | null
     min: CategoryMinAggregateOutputType | null
@@ -1838,11 +1989,22 @@ export namespace Prisma {
   }
 
   export type CategoryMinAggregateOutputType = {
+    name: string | null
+    slug: string | null
     number: number
   }
 
   export type CategoryMaxAggregateOutputType = {
+    name: string | null
+    slug: string | null
     number: number
+  }
+
+  export type CategoryCountAggregateOutputType = {
+    name: number | null
+    slug: number | null
+    number: number
+    _all: number
   }
 
 
@@ -1855,20 +2017,30 @@ export namespace Prisma {
   }
 
   export type CategoryMinAggregateInputType = {
+    name?: true
+    slug?: true
     number?: true
   }
 
   export type CategoryMaxAggregateInputType = {
+    name?: true
+    slug?: true
     number?: true
+  }
+
+  export type CategoryCountAggregateInputType = {
+    name?: true
+    slug?: true
+    number?: true
+    _all?: true
   }
 
   export type AggregateCategoryArgs = {
     where?: CategoryWhereInput
-    orderBy?: XOR<Enumerable<CategoryOrderByInput>, CategoryOrderByInput>
+    orderBy?: Enumerable<CategoryOrderByInput>
     cursor?: CategoryWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<CategoryDistinctFieldEnum>
     count?: true
     avg?: CategoryAvgAggregateInputType
     sum?: CategorySumAggregateInputType
@@ -1883,8 +2055,10 @@ export namespace Prisma {
   export type GetCategoryAggregateScalarType<T extends any> = {
     [P in keyof T]: P extends keyof CategoryAvgAggregateOutputType ? CategoryAvgAggregateOutputType[P] : never
   }
+
     
-    
+
+
 
   export type CategorySelect = {
     name?: boolean
@@ -2019,7 +2193,7 @@ export namespace Prisma {
      * 
     **/
     deleteMany<T extends CategoryDeleteManyArgs>(
-      args: Subset<T, CategoryDeleteManyArgs>
+      args?: Subset<T, CategoryDeleteManyArgs>
     ): Promise<BatchPayload>
     /**
      * Update zero or more Categories.
@@ -2078,6 +2252,8 @@ export namespace Prisma {
      * Count
      */
     count(args?: Omit<FindManyCategoryArgs, 'select' | 'include'>): Promise<number>
+
+  
 
     /**
      * Aggregate
@@ -2140,7 +2316,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Category
     **/
-    select?: XOR<CategorySelect, null>
+    select?: CategorySelect | null
     /**
      * Filter, which Category to fetch.
     **/
@@ -2155,16 +2331,16 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Category
     **/
-    select?: XOR<CategorySelect, null>
+    select?: CategorySelect | null
     /**
      * Filter, which Category to fetch.
     **/
     where?: CategoryWhereInput
-    orderBy?: XOR<Enumerable<CategoryOrderByInput>, CategoryOrderByInput>
+    orderBy?: Enumerable<CategoryOrderByInput>
     cursor?: CategoryWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<CategoryDistinctFieldEnum>
+    distinct?: Enumerable<CategoryScalarFieldEnum>
   }
 
 
@@ -2175,7 +2351,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Category
     **/
-    select?: XOR<CategorySelect, null>
+    select?: CategorySelect | null
     /**
      * Filter, which Categories to fetch.
     **/
@@ -2183,7 +2359,7 @@ export namespace Prisma {
     /**
      * Determine the order of the Categories to fetch.
     **/
-    orderBy?: XOR<Enumerable<CategoryOrderByInput>, CategoryOrderByInput>
+    orderBy?: Enumerable<CategoryOrderByInput>
     /**
      * Sets the position for listing Categories.
     **/
@@ -2196,7 +2372,7 @@ export namespace Prisma {
      * Skip the first `n` Categories.
     **/
     skip?: number
-    distinct?: Enumerable<CategoryDistinctFieldEnum>
+    distinct?: Enumerable<CategoryScalarFieldEnum>
   }
 
 
@@ -2207,7 +2383,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Category
     **/
-    select?: XOR<CategorySelect, null>
+    select?: CategorySelect | null
     /**
      * The data needed to create a Category.
     **/
@@ -2222,7 +2398,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Category
     **/
-    select?: XOR<CategorySelect, null>
+    select?: CategorySelect | null
     /**
      * The data needed to update a Category.
     **/
@@ -2250,7 +2426,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Category
     **/
-    select?: XOR<CategorySelect, null>
+    select?: CategorySelect | null
     /**
      * The filter to search for the Category to update in case it exists.
     **/
@@ -2273,7 +2449,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Category
     **/
-    select?: XOR<CategorySelect, null>
+    select?: CategorySelect | null
     /**
      * Filter which Category to delete.
     **/
@@ -2296,7 +2472,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Category
     **/
-    select?: XOR<CategorySelect, null>
+    select?: CategorySelect | null
   }
 
 
@@ -2307,19 +2483,59 @@ export namespace Prisma {
 
 
   export type AggregatePatient = {
-    count: number
+    count: number | null
+    min: PatientMinAggregateOutputType | null
+    max: PatientMaxAggregateOutputType | null
+  }
+
+  export type PatientMinAggregateOutputType = {
+    firstName: string | null
+    lastName: string | null
+    email: string | null
+  }
+
+  export type PatientMaxAggregateOutputType = {
+    firstName: string | null
+    lastName: string | null
+    email: string | null
+  }
+
+  export type PatientCountAggregateOutputType = {
+    firstName: number | null
+    lastName: number | null
+    email: number | null
+    _all: number
   }
 
 
+  export type PatientMinAggregateInputType = {
+    firstName?: true
+    lastName?: true
+    email?: true
+  }
+
+  export type PatientMaxAggregateInputType = {
+    firstName?: true
+    lastName?: true
+    email?: true
+  }
+
+  export type PatientCountAggregateInputType = {
+    firstName?: true
+    lastName?: true
+    email?: true
+    _all?: true
+  }
 
   export type AggregatePatientArgs = {
     where?: PatientWhereInput
-    orderBy?: XOR<Enumerable<PatientOrderByInput>, PatientOrderByInput>
+    orderBy?: Enumerable<PatientOrderByInput>
     cursor?: PatientWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<PatientDistinctFieldEnum>
     count?: true
+    min?: PatientMinAggregateInputType
+    max?: PatientMaxAggregateInputType
   }
 
   export type GetPatientAggregateType<T extends AggregatePatientArgs> = {
@@ -2327,8 +2543,10 @@ export namespace Prisma {
   }
 
 
+
     
-    
+
+
 
   export type PatientSelect = {
     firstName?: boolean
@@ -2463,7 +2681,7 @@ export namespace Prisma {
      * 
     **/
     deleteMany<T extends PatientDeleteManyArgs>(
-      args: Subset<T, PatientDeleteManyArgs>
+      args?: Subset<T, PatientDeleteManyArgs>
     ): Promise<BatchPayload>
     /**
      * Update zero or more Patients.
@@ -2522,6 +2740,8 @@ export namespace Prisma {
      * Count
      */
     count(args?: Omit<FindManyPatientArgs, 'select' | 'include'>): Promise<number>
+
+  
 
     /**
      * Aggregate
@@ -2584,7 +2804,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Patient
     **/
-    select?: XOR<PatientSelect, null>
+    select?: PatientSelect | null
     /**
      * Filter, which Patient to fetch.
     **/
@@ -2599,16 +2819,16 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Patient
     **/
-    select?: XOR<PatientSelect, null>
+    select?: PatientSelect | null
     /**
      * Filter, which Patient to fetch.
     **/
     where?: PatientWhereInput
-    orderBy?: XOR<Enumerable<PatientOrderByInput>, PatientOrderByInput>
+    orderBy?: Enumerable<PatientOrderByInput>
     cursor?: PatientWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<PatientDistinctFieldEnum>
+    distinct?: Enumerable<PatientScalarFieldEnum>
   }
 
 
@@ -2619,7 +2839,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Patient
     **/
-    select?: XOR<PatientSelect, null>
+    select?: PatientSelect | null
     /**
      * Filter, which Patients to fetch.
     **/
@@ -2627,7 +2847,7 @@ export namespace Prisma {
     /**
      * Determine the order of the Patients to fetch.
     **/
-    orderBy?: XOR<Enumerable<PatientOrderByInput>, PatientOrderByInput>
+    orderBy?: Enumerable<PatientOrderByInput>
     /**
      * Sets the position for listing Patients.
     **/
@@ -2640,7 +2860,7 @@ export namespace Prisma {
      * Skip the first `n` Patients.
     **/
     skip?: number
-    distinct?: Enumerable<PatientDistinctFieldEnum>
+    distinct?: Enumerable<PatientScalarFieldEnum>
   }
 
 
@@ -2651,7 +2871,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Patient
     **/
-    select?: XOR<PatientSelect, null>
+    select?: PatientSelect | null
     /**
      * The data needed to create a Patient.
     **/
@@ -2666,7 +2886,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Patient
     **/
-    select?: XOR<PatientSelect, null>
+    select?: PatientSelect | null
     /**
      * The data needed to update a Patient.
     **/
@@ -2694,7 +2914,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Patient
     **/
-    select?: XOR<PatientSelect, null>
+    select?: PatientSelect | null
     /**
      * The filter to search for the Patient to update in case it exists.
     **/
@@ -2717,7 +2937,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Patient
     **/
-    select?: XOR<PatientSelect, null>
+    select?: PatientSelect | null
     /**
      * Filter which Patient to delete.
     **/
@@ -2740,7 +2960,7 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Patient
     **/
-    select?: XOR<PatientSelect, null>
+    select?: PatientSelect | null
   }
 
 
@@ -2751,19 +2971,59 @@ export namespace Prisma {
 
 
   export type AggregateMovie = {
-    count: number
+    count: number | null
+    min: MovieMinAggregateOutputType | null
+    max: MovieMaxAggregateOutputType | null
+  }
+
+  export type MovieMinAggregateOutputType = {
+    directorFirstName: string | null
+    directorLastName: string | null
+    title: string | null
+  }
+
+  export type MovieMaxAggregateOutputType = {
+    directorFirstName: string | null
+    directorLastName: string | null
+    title: string | null
+  }
+
+  export type MovieCountAggregateOutputType = {
+    directorFirstName: number | null
+    directorLastName: number | null
+    title: number | null
+    _all: number
   }
 
 
+  export type MovieMinAggregateInputType = {
+    directorFirstName?: true
+    directorLastName?: true
+    title?: true
+  }
+
+  export type MovieMaxAggregateInputType = {
+    directorFirstName?: true
+    directorLastName?: true
+    title?: true
+  }
+
+  export type MovieCountAggregateInputType = {
+    directorFirstName?: true
+    directorLastName?: true
+    title?: true
+    _all?: true
+  }
 
   export type AggregateMovieArgs = {
     where?: MovieWhereInput
-    orderBy?: XOR<Enumerable<MovieOrderByInput>, MovieOrderByInput>
+    orderBy?: Enumerable<MovieOrderByInput>
     cursor?: MovieWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<MovieDistinctFieldEnum>
     count?: true
+    min?: MovieMinAggregateInputType
+    max?: MovieMaxAggregateInputType
   }
 
   export type GetMovieAggregateType<T extends AggregateMovieArgs> = {
@@ -2771,8 +3031,10 @@ export namespace Prisma {
   }
 
 
+
     
-    
+
+
 
   export type MovieSelect = {
     directorFirstName?: boolean
@@ -2917,7 +3179,7 @@ export namespace Prisma {
      * 
     **/
     deleteMany<T extends MovieDeleteManyArgs>(
-      args: Subset<T, MovieDeleteManyArgs>
+      args?: Subset<T, MovieDeleteManyArgs>
     ): Promise<BatchPayload>
     /**
      * Update zero or more Movies.
@@ -2976,6 +3238,8 @@ export namespace Prisma {
      * Count
      */
     count(args?: Omit<FindManyMovieArgs, 'select' | 'include'>): Promise<number>
+
+  
 
     /**
      * Aggregate
@@ -3039,11 +3303,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Movie
     **/
-    select?: XOR<MovieSelect, null>
+    select?: MovieSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<MovieInclude, null>
+    include?: MovieInclude | null
     /**
      * Filter, which Movie to fetch.
     **/
@@ -3058,20 +3322,20 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Movie
     **/
-    select?: XOR<MovieSelect, null>
+    select?: MovieSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<MovieInclude, null>
+    include?: MovieInclude | null
     /**
      * Filter, which Movie to fetch.
     **/
     where?: MovieWhereInput
-    orderBy?: XOR<Enumerable<MovieOrderByInput>, MovieOrderByInput>
+    orderBy?: Enumerable<MovieOrderByInput>
     cursor?: MovieWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<MovieDistinctFieldEnum>
+    distinct?: Enumerable<MovieScalarFieldEnum>
   }
 
 
@@ -3082,11 +3346,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Movie
     **/
-    select?: XOR<MovieSelect, null>
+    select?: MovieSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<MovieInclude, null>
+    include?: MovieInclude | null
     /**
      * Filter, which Movies to fetch.
     **/
@@ -3094,7 +3358,7 @@ export namespace Prisma {
     /**
      * Determine the order of the Movies to fetch.
     **/
-    orderBy?: XOR<Enumerable<MovieOrderByInput>, MovieOrderByInput>
+    orderBy?: Enumerable<MovieOrderByInput>
     /**
      * Sets the position for listing Movies.
     **/
@@ -3107,7 +3371,7 @@ export namespace Prisma {
      * Skip the first `n` Movies.
     **/
     skip?: number
-    distinct?: Enumerable<MovieDistinctFieldEnum>
+    distinct?: Enumerable<MovieScalarFieldEnum>
   }
 
 
@@ -3118,11 +3382,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Movie
     **/
-    select?: XOR<MovieSelect, null>
+    select?: MovieSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<MovieInclude, null>
+    include?: MovieInclude | null
     /**
      * The data needed to create a Movie.
     **/
@@ -3137,11 +3401,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Movie
     **/
-    select?: XOR<MovieSelect, null>
+    select?: MovieSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<MovieInclude, null>
+    include?: MovieInclude | null
     /**
      * The data needed to update a Movie.
     **/
@@ -3169,11 +3433,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Movie
     **/
-    select?: XOR<MovieSelect, null>
+    select?: MovieSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<MovieInclude, null>
+    include?: MovieInclude | null
     /**
      * The filter to search for the Movie to update in case it exists.
     **/
@@ -3196,11 +3460,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Movie
     **/
-    select?: XOR<MovieSelect, null>
+    select?: MovieSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<MovieInclude, null>
+    include?: MovieInclude | null
     /**
      * Filter which Movie to delete.
     **/
@@ -3223,11 +3487,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Movie
     **/
-    select?: XOR<MovieSelect, null>
+    select?: MovieSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<MovieInclude, null>
+    include?: MovieInclude | null
   }
 
 
@@ -3238,19 +3502,53 @@ export namespace Prisma {
 
 
   export type AggregateDirector = {
-    count: number
+    count: number | null
+    min: DirectorMinAggregateOutputType | null
+    max: DirectorMaxAggregateOutputType | null
+  }
+
+  export type DirectorMinAggregateOutputType = {
+    firstName: string | null
+    lastName: string | null
+  }
+
+  export type DirectorMaxAggregateOutputType = {
+    firstName: string | null
+    lastName: string | null
+  }
+
+  export type DirectorCountAggregateOutputType = {
+    firstName: number | null
+    lastName: number | null
+    _all: number
   }
 
 
+  export type DirectorMinAggregateInputType = {
+    firstName?: true
+    lastName?: true
+  }
+
+  export type DirectorMaxAggregateInputType = {
+    firstName?: true
+    lastName?: true
+  }
+
+  export type DirectorCountAggregateInputType = {
+    firstName?: true
+    lastName?: true
+    _all?: true
+  }
 
   export type AggregateDirectorArgs = {
     where?: DirectorWhereInput
-    orderBy?: XOR<Enumerable<DirectorOrderByInput>, DirectorOrderByInput>
+    orderBy?: Enumerable<DirectorOrderByInput>
     cursor?: DirectorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<DirectorDistinctFieldEnum>
     count?: true
+    min?: DirectorMinAggregateInputType
+    max?: DirectorMaxAggregateInputType
   }
 
   export type GetDirectorAggregateType<T extends AggregateDirectorArgs> = {
@@ -3258,8 +3556,10 @@ export namespace Prisma {
   }
 
 
+
     
-    
+
+
 
   export type DirectorSelect = {
     firstName?: boolean
@@ -3403,7 +3703,7 @@ export namespace Prisma {
      * 
     **/
     deleteMany<T extends DirectorDeleteManyArgs>(
-      args: Subset<T, DirectorDeleteManyArgs>
+      args?: Subset<T, DirectorDeleteManyArgs>
     ): Promise<BatchPayload>
     /**
      * Update zero or more Directors.
@@ -3462,6 +3762,8 @@ export namespace Prisma {
      * Count
      */
     count(args?: Omit<FindManyDirectorArgs, 'select' | 'include'>): Promise<number>
+
+  
 
     /**
      * Aggregate
@@ -3525,11 +3827,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Director
     **/
-    select?: XOR<DirectorSelect, null>
+    select?: DirectorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<DirectorInclude, null>
+    include?: DirectorInclude | null
     /**
      * Filter, which Director to fetch.
     **/
@@ -3544,20 +3846,20 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Director
     **/
-    select?: XOR<DirectorSelect, null>
+    select?: DirectorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<DirectorInclude, null>
+    include?: DirectorInclude | null
     /**
      * Filter, which Director to fetch.
     **/
     where?: DirectorWhereInput
-    orderBy?: XOR<Enumerable<DirectorOrderByInput>, DirectorOrderByInput>
+    orderBy?: Enumerable<DirectorOrderByInput>
     cursor?: DirectorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<DirectorDistinctFieldEnum>
+    distinct?: Enumerable<DirectorScalarFieldEnum>
   }
 
 
@@ -3568,11 +3870,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Director
     **/
-    select?: XOR<DirectorSelect, null>
+    select?: DirectorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<DirectorInclude, null>
+    include?: DirectorInclude | null
     /**
      * Filter, which Directors to fetch.
     **/
@@ -3580,7 +3882,7 @@ export namespace Prisma {
     /**
      * Determine the order of the Directors to fetch.
     **/
-    orderBy?: XOR<Enumerable<DirectorOrderByInput>, DirectorOrderByInput>
+    orderBy?: Enumerable<DirectorOrderByInput>
     /**
      * Sets the position for listing Directors.
     **/
@@ -3593,7 +3895,7 @@ export namespace Prisma {
      * Skip the first `n` Directors.
     **/
     skip?: number
-    distinct?: Enumerable<DirectorDistinctFieldEnum>
+    distinct?: Enumerable<DirectorScalarFieldEnum>
   }
 
 
@@ -3604,11 +3906,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Director
     **/
-    select?: XOR<DirectorSelect, null>
+    select?: DirectorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<DirectorInclude, null>
+    include?: DirectorInclude | null
     /**
      * The data needed to create a Director.
     **/
@@ -3623,11 +3925,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Director
     **/
-    select?: XOR<DirectorSelect, null>
+    select?: DirectorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<DirectorInclude, null>
+    include?: DirectorInclude | null
     /**
      * The data needed to update a Director.
     **/
@@ -3655,11 +3957,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Director
     **/
-    select?: XOR<DirectorSelect, null>
+    select?: DirectorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<DirectorInclude, null>
+    include?: DirectorInclude | null
     /**
      * The filter to search for the Director to update in case it exists.
     **/
@@ -3682,11 +3984,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Director
     **/
-    select?: XOR<DirectorSelect, null>
+    select?: DirectorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<DirectorInclude, null>
+    include?: DirectorInclude | null
     /**
      * Filter which Director to delete.
     **/
@@ -3709,11 +4011,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Director
     **/
-    select?: XOR<DirectorSelect, null>
+    select?: DirectorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<DirectorInclude, null>
+    include?: DirectorInclude | null
   }
 
 
@@ -3724,7 +4026,7 @@ export namespace Prisma {
 
 
   export type AggregateProblem = {
-    count: number
+    count: number | null
     avg: ProblemAvgAggregateOutputType | null
     sum: ProblemSumAggregateOutputType | null
     min: ProblemMinAggregateOutputType | null
@@ -3743,12 +4045,21 @@ export namespace Prisma {
 
   export type ProblemMinAggregateOutputType = {
     id: number
+    problemText: string | null
     creatorId: number | null
   }
 
   export type ProblemMaxAggregateOutputType = {
     id: number
+    problemText: string | null
     creatorId: number | null
+  }
+
+  export type ProblemCountAggregateOutputType = {
+    id: number
+    problemText: number | null
+    creatorId: number | null
+    _all: number
   }
 
 
@@ -3764,21 +4075,29 @@ export namespace Prisma {
 
   export type ProblemMinAggregateInputType = {
     id?: true
+    problemText?: true
     creatorId?: true
   }
 
   export type ProblemMaxAggregateInputType = {
     id?: true
+    problemText?: true
     creatorId?: true
+  }
+
+  export type ProblemCountAggregateInputType = {
+    id?: true
+    problemText?: true
+    creatorId?: true
+    _all?: true
   }
 
   export type AggregateProblemArgs = {
     where?: ProblemWhereInput
-    orderBy?: XOR<Enumerable<ProblemOrderByInput>, ProblemOrderByInput>
+    orderBy?: Enumerable<ProblemOrderByInput>
     cursor?: ProblemWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<ProblemDistinctFieldEnum>
     count?: true
     avg?: ProblemAvgAggregateInputType
     sum?: ProblemSumAggregateInputType
@@ -3793,8 +4112,10 @@ export namespace Prisma {
   export type GetProblemAggregateScalarType<T extends any> = {
     [P in keyof T]: P extends keyof ProblemAvgAggregateOutputType ? ProblemAvgAggregateOutputType[P] : never
   }
+
     
-    
+
+
 
   export type ProblemSelect = {
     id?: boolean
@@ -3945,7 +4266,7 @@ export namespace Prisma {
      * 
     **/
     deleteMany<T extends ProblemDeleteManyArgs>(
-      args: Subset<T, ProblemDeleteManyArgs>
+      args?: Subset<T, ProblemDeleteManyArgs>
     ): Promise<BatchPayload>
     /**
      * Update zero or more Problems.
@@ -4004,6 +4325,8 @@ export namespace Prisma {
      * Count
      */
     count(args?: Omit<FindManyProblemArgs, 'select' | 'include'>): Promise<number>
+
+  
 
     /**
      * Aggregate
@@ -4069,11 +4392,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Problem
     **/
-    select?: XOR<ProblemSelect, null>
+    select?: ProblemSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<ProblemInclude, null>
+    include?: ProblemInclude | null
     /**
      * Filter, which Problem to fetch.
     **/
@@ -4088,20 +4411,20 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Problem
     **/
-    select?: XOR<ProblemSelect, null>
+    select?: ProblemSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<ProblemInclude, null>
+    include?: ProblemInclude | null
     /**
      * Filter, which Problem to fetch.
     **/
     where?: ProblemWhereInput
-    orderBy?: XOR<Enumerable<ProblemOrderByInput>, ProblemOrderByInput>
+    orderBy?: Enumerable<ProblemOrderByInput>
     cursor?: ProblemWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<ProblemDistinctFieldEnum>
+    distinct?: Enumerable<ProblemScalarFieldEnum>
   }
 
 
@@ -4112,11 +4435,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Problem
     **/
-    select?: XOR<ProblemSelect, null>
+    select?: ProblemSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<ProblemInclude, null>
+    include?: ProblemInclude | null
     /**
      * Filter, which Problems to fetch.
     **/
@@ -4124,7 +4447,7 @@ export namespace Prisma {
     /**
      * Determine the order of the Problems to fetch.
     **/
-    orderBy?: XOR<Enumerable<ProblemOrderByInput>, ProblemOrderByInput>
+    orderBy?: Enumerable<ProblemOrderByInput>
     /**
      * Sets the position for listing Problems.
     **/
@@ -4137,7 +4460,7 @@ export namespace Prisma {
      * Skip the first `n` Problems.
     **/
     skip?: number
-    distinct?: Enumerable<ProblemDistinctFieldEnum>
+    distinct?: Enumerable<ProblemScalarFieldEnum>
   }
 
 
@@ -4148,11 +4471,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Problem
     **/
-    select?: XOR<ProblemSelect, null>
+    select?: ProblemSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<ProblemInclude, null>
+    include?: ProblemInclude | null
     /**
      * The data needed to create a Problem.
     **/
@@ -4167,11 +4490,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Problem
     **/
-    select?: XOR<ProblemSelect, null>
+    select?: ProblemSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<ProblemInclude, null>
+    include?: ProblemInclude | null
     /**
      * The data needed to update a Problem.
     **/
@@ -4199,11 +4522,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Problem
     **/
-    select?: XOR<ProblemSelect, null>
+    select?: ProblemSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<ProblemInclude, null>
+    include?: ProblemInclude | null
     /**
      * The filter to search for the Problem to update in case it exists.
     **/
@@ -4226,11 +4549,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Problem
     **/
-    select?: XOR<ProblemSelect, null>
+    select?: ProblemSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<ProblemInclude, null>
+    include?: ProblemInclude | null
     /**
      * Filter which Problem to delete.
     **/
@@ -4253,11 +4576,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Problem
     **/
-    select?: XOR<ProblemSelect, null>
+    select?: ProblemSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<ProblemInclude, null>
+    include?: ProblemInclude | null
   }
 
 
@@ -4268,7 +4591,7 @@ export namespace Prisma {
 
 
   export type AggregateCreator = {
-    count: number
+    count: number | null
     avg: CreatorAvgAggregateOutputType | null
     sum: CreatorSumAggregateOutputType | null
     min: CreatorMinAggregateOutputType | null
@@ -4285,10 +4608,18 @@ export namespace Prisma {
 
   export type CreatorMinAggregateOutputType = {
     id: number
+    name: string | null
   }
 
   export type CreatorMaxAggregateOutputType = {
     id: number
+    name: string | null
+  }
+
+  export type CreatorCountAggregateOutputType = {
+    id: number
+    name: number | null
+    _all: number
   }
 
 
@@ -4302,19 +4633,26 @@ export namespace Prisma {
 
   export type CreatorMinAggregateInputType = {
     id?: true
+    name?: true
   }
 
   export type CreatorMaxAggregateInputType = {
     id?: true
+    name?: true
+  }
+
+  export type CreatorCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
   }
 
   export type AggregateCreatorArgs = {
     where?: CreatorWhereInput
-    orderBy?: XOR<Enumerable<CreatorOrderByInput>, CreatorOrderByInput>
+    orderBy?: Enumerable<CreatorOrderByInput>
     cursor?: CreatorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<CreatorDistinctFieldEnum>
     count?: true
     avg?: CreatorAvgAggregateInputType
     sum?: CreatorSumAggregateInputType
@@ -4329,8 +4667,10 @@ export namespace Prisma {
   export type GetCreatorAggregateScalarType<T extends any> = {
     [P in keyof T]: P extends keyof CreatorAvgAggregateOutputType ? CreatorAvgAggregateOutputType[P] : never
   }
+
     
-    
+
+
 
   export type CreatorSelect = {
     id?: boolean
@@ -4480,7 +4820,7 @@ export namespace Prisma {
      * 
     **/
     deleteMany<T extends CreatorDeleteManyArgs>(
-      args: Subset<T, CreatorDeleteManyArgs>
+      args?: Subset<T, CreatorDeleteManyArgs>
     ): Promise<BatchPayload>
     /**
      * Update zero or more Creators.
@@ -4539,6 +4879,8 @@ export namespace Prisma {
      * Count
      */
     count(args?: Omit<FindManyCreatorArgs, 'select' | 'include'>): Promise<number>
+
+  
 
     /**
      * Aggregate
@@ -4604,11 +4946,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Creator
     **/
-    select?: XOR<CreatorSelect, null>
+    select?: CreatorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<CreatorInclude, null>
+    include?: CreatorInclude | null
     /**
      * Filter, which Creator to fetch.
     **/
@@ -4623,20 +4965,20 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Creator
     **/
-    select?: XOR<CreatorSelect, null>
+    select?: CreatorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<CreatorInclude, null>
+    include?: CreatorInclude | null
     /**
      * Filter, which Creator to fetch.
     **/
     where?: CreatorWhereInput
-    orderBy?: XOR<Enumerable<CreatorOrderByInput>, CreatorOrderByInput>
+    orderBy?: Enumerable<CreatorOrderByInput>
     cursor?: CreatorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Enumerable<CreatorDistinctFieldEnum>
+    distinct?: Enumerable<CreatorScalarFieldEnum>
   }
 
 
@@ -4647,11 +4989,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Creator
     **/
-    select?: XOR<CreatorSelect, null>
+    select?: CreatorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<CreatorInclude, null>
+    include?: CreatorInclude | null
     /**
      * Filter, which Creators to fetch.
     **/
@@ -4659,7 +5001,7 @@ export namespace Prisma {
     /**
      * Determine the order of the Creators to fetch.
     **/
-    orderBy?: XOR<Enumerable<CreatorOrderByInput>, CreatorOrderByInput>
+    orderBy?: Enumerable<CreatorOrderByInput>
     /**
      * Sets the position for listing Creators.
     **/
@@ -4672,7 +5014,7 @@ export namespace Prisma {
      * Skip the first `n` Creators.
     **/
     skip?: number
-    distinct?: Enumerable<CreatorDistinctFieldEnum>
+    distinct?: Enumerable<CreatorScalarFieldEnum>
   }
 
 
@@ -4683,11 +5025,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Creator
     **/
-    select?: XOR<CreatorSelect, null>
+    select?: CreatorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<CreatorInclude, null>
+    include?: CreatorInclude | null
     /**
      * The data needed to create a Creator.
     **/
@@ -4702,11 +5044,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Creator
     **/
-    select?: XOR<CreatorSelect, null>
+    select?: CreatorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<CreatorInclude, null>
+    include?: CreatorInclude | null
     /**
      * The data needed to update a Creator.
     **/
@@ -4734,11 +5076,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Creator
     **/
-    select?: XOR<CreatorSelect, null>
+    select?: CreatorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<CreatorInclude, null>
+    include?: CreatorInclude | null
     /**
      * The filter to search for the Creator to update in case it exists.
     **/
@@ -4761,11 +5103,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Creator
     **/
-    select?: XOR<CreatorSelect, null>
+    select?: CreatorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<CreatorInclude, null>
+    include?: CreatorInclude | null
     /**
      * Filter which Creator to delete.
     **/
@@ -4788,11 +5130,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the Creator
     **/
-    select?: XOR<CreatorSelect, null>
+    select?: CreatorSelect | null
     /**
      * Choose, which related nodes to fetch as well.
     **/
-    include?: XOR<CreatorInclude, null>
+    include?: CreatorInclude | null
   }
 
 
@@ -4804,7 +5146,7 @@ export namespace Prisma {
   // Based on
   // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
-  export const UserDistinctFieldEnum: {
+  export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
     name: 'name',
@@ -4814,10 +5156,10 @@ export namespace Prisma {
     role: 'role'
   };
 
-  export type UserDistinctFieldEnum = (typeof UserDistinctFieldEnum)[keyof typeof UserDistinctFieldEnum]
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const PostDistinctFieldEnum: {
+  export const PostScalarFieldEnum: {
     uuid: 'uuid',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -4831,59 +5173,59 @@ export namespace Prisma {
     metadata: 'metadata'
   };
 
-  export type PostDistinctFieldEnum = (typeof PostDistinctFieldEnum)[keyof typeof PostDistinctFieldEnum]
+  export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
-  export const CategoryDistinctFieldEnum: {
+  export const CategoryScalarFieldEnum: {
     name: 'name',
     slug: 'slug',
     number: 'number'
   };
 
-  export type CategoryDistinctFieldEnum = (typeof CategoryDistinctFieldEnum)[keyof typeof CategoryDistinctFieldEnum]
+  export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
-  export const PatientDistinctFieldEnum: {
+  export const PatientScalarFieldEnum: {
     firstName: 'firstName',
     lastName: 'lastName',
     email: 'email'
   };
 
-  export type PatientDistinctFieldEnum = (typeof PatientDistinctFieldEnum)[keyof typeof PatientDistinctFieldEnum]
+  export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeof PatientScalarFieldEnum]
 
 
-  export const MovieDistinctFieldEnum: {
+  export const MovieScalarFieldEnum: {
     directorFirstName: 'directorFirstName',
     directorLastName: 'directorLastName',
     title: 'title'
   };
 
-  export type MovieDistinctFieldEnum = (typeof MovieDistinctFieldEnum)[keyof typeof MovieDistinctFieldEnum]
+  export type MovieScalarFieldEnum = (typeof MovieScalarFieldEnum)[keyof typeof MovieScalarFieldEnum]
 
 
-  export const DirectorDistinctFieldEnum: {
+  export const DirectorScalarFieldEnum: {
     firstName: 'firstName',
     lastName: 'lastName'
   };
 
-  export type DirectorDistinctFieldEnum = (typeof DirectorDistinctFieldEnum)[keyof typeof DirectorDistinctFieldEnum]
+  export type DirectorScalarFieldEnum = (typeof DirectorScalarFieldEnum)[keyof typeof DirectorScalarFieldEnum]
 
 
-  export const ProblemDistinctFieldEnum: {
+  export const ProblemScalarFieldEnum: {
     id: 'id',
     problemText: 'problemText',
     creatorId: 'creatorId'
   };
 
-  export type ProblemDistinctFieldEnum = (typeof ProblemDistinctFieldEnum)[keyof typeof ProblemDistinctFieldEnum]
+  export type ProblemScalarFieldEnum = (typeof ProblemScalarFieldEnum)[keyof typeof ProblemScalarFieldEnum]
 
 
-  export const CreatorDistinctFieldEnum: {
+  export const CreatorScalarFieldEnum: {
     id: 'id',
     name: 'name'
   };
 
-  export type CreatorDistinctFieldEnum = (typeof CreatorDistinctFieldEnum)[keyof typeof CreatorDistinctFieldEnum]
+  export type CreatorScalarFieldEnum = (typeof CreatorScalarFieldEnum)[keyof typeof CreatorScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4908,17 +5250,17 @@ export namespace Prisma {
 
 
   export type UserWhereInput = {
-    AND?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
-    OR?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
-    NOT?: XOR<UserWhereInput, Enumerable<UserWhereInput>>
-    id?: XOR<IntFilter, number>
-    email?: XOR<StringFilter, string>
+    AND?: Enumerable<UserWhereInput>
+    OR?: Enumerable<UserWhereInput>
+    NOT?: Enumerable<UserWhereInput>
+    id?: IntFilter | number
+    email?: StringFilter | string
     name?: StringNullableFilter | string | null
-    age?: XOR<IntFilter, number>
-    balance?: XOR<FloatFilter, number>
-    amount?: XOR<FloatFilter, number>
+    age?: IntFilter | number
+    balance?: FloatFilter | number
+    amount?: FloatFilter | number
     posts?: PostListRelationFilter
-    role?: XOR<EnumRoleFilter, Role>
+    role?: EnumRoleFilter | Role
     editorPosts?: PostListRelationFilter
   }
 
@@ -4938,19 +5280,19 @@ export namespace Prisma {
   }
 
   export type postWhereInput = {
-    AND?: XOR<postWhereInput, Enumerable<postWhereInput>>
-    OR?: XOR<postWhereInput, Enumerable<postWhereInput>>
-    NOT?: XOR<postWhereInput, Enumerable<postWhereInput>>
-    uuid?: XOR<StringFilter, string>
-    createdAt?: XOR<DateTimeFilter, Date | string>
-    updatedAt?: XOR<DateTimeFilter, Date | string>
-    published?: XOR<BoolFilter, boolean>
-    title?: XOR<StringFilter, string>
-    subtitle?: XOR<StringFilter, string>
+    AND?: Enumerable<postWhereInput>
+    OR?: Enumerable<postWhereInput>
+    NOT?: Enumerable<postWhereInput>
+    uuid?: StringFilter | string
+    createdAt?: DateTimeFilter | Date | string
+    updatedAt?: DateTimeFilter | Date | string
+    published?: BoolFilter | boolean
+    title?: StringFilter | string
+    subtitle?: StringFilter | string
     content?: StringNullableFilter | string | null
-    author?: XOR<UserRelationFilter, UserWhereInput>
-    authorId?: XOR<IntFilter, number>
-    editor?: UserRelationFilter | UserWhereInput | null
+    author?: XOR<UserWhereInput, UserRelationFilter>
+    authorId?: IntFilter | number
+    editor?: XOR<UserWhereInput, UserRelationFilter> | null
     editorId?: IntNullableFilter | number | null
     kind?: EnumPostKindNullableFilter | PostKind | null
     metadata?: JsonFilter
@@ -4975,12 +5317,12 @@ export namespace Prisma {
   }
 
   export type CategoryWhereInput = {
-    AND?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
-    OR?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
-    NOT?: XOR<CategoryWhereInput, Enumerable<CategoryWhereInput>>
-    name?: XOR<StringFilter, string>
-    slug?: XOR<StringFilter, string>
-    number?: XOR<IntFilter, number>
+    AND?: Enumerable<CategoryWhereInput>
+    OR?: Enumerable<CategoryWhereInput>
+    NOT?: Enumerable<CategoryWhereInput>
+    name?: StringFilter | string
+    slug?: StringFilter | string
+    number?: IntFilter | number
   }
 
   export type CategoryOrderByInput = {
@@ -4994,12 +5336,12 @@ export namespace Prisma {
   }
 
   export type PatientWhereInput = {
-    AND?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
-    OR?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
-    NOT?: XOR<PatientWhereInput, Enumerable<PatientWhereInput>>
-    firstName?: XOR<StringFilter, string>
-    lastName?: XOR<StringFilter, string>
-    email?: XOR<StringFilter, string>
+    AND?: Enumerable<PatientWhereInput>
+    OR?: Enumerable<PatientWhereInput>
+    NOT?: Enumerable<PatientWhereInput>
+    firstName?: StringFilter | string
+    lastName?: StringFilter | string
+    email?: StringFilter | string
   }
 
   export type PatientOrderByInput = {
@@ -5013,13 +5355,13 @@ export namespace Prisma {
   }
 
   export type MovieWhereInput = {
-    AND?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
-    OR?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
-    NOT?: XOR<MovieWhereInput, Enumerable<MovieWhereInput>>
-    directorFirstName?: XOR<StringFilter, string>
-    directorLastName?: XOR<StringFilter, string>
-    director?: XOR<DirectorRelationFilter, DirectorWhereInput>
-    title?: XOR<StringFilter, string>
+    AND?: Enumerable<MovieWhereInput>
+    OR?: Enumerable<MovieWhereInput>
+    NOT?: Enumerable<MovieWhereInput>
+    directorFirstName?: StringFilter | string
+    directorLastName?: StringFilter | string
+    director?: XOR<DirectorWhereInput, DirectorRelationFilter>
+    title?: StringFilter | string
   }
 
   export type MovieOrderByInput = {
@@ -5033,11 +5375,11 @@ export namespace Prisma {
   }
 
   export type DirectorWhereInput = {
-    AND?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
-    OR?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
-    NOT?: XOR<DirectorWhereInput, Enumerable<DirectorWhereInput>>
-    firstName?: XOR<StringFilter, string>
-    lastName?: XOR<StringFilter, string>
+    AND?: Enumerable<DirectorWhereInput>
+    OR?: Enumerable<DirectorWhereInput>
+    NOT?: Enumerable<DirectorWhereInput>
+    firstName?: StringFilter | string
+    lastName?: StringFilter | string
     movies?: MovieListRelationFilter
   }
 
@@ -5051,13 +5393,13 @@ export namespace Prisma {
   }
 
   export type ProblemWhereInput = {
-    AND?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
-    OR?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
-    NOT?: XOR<ProblemWhereInput, Enumerable<ProblemWhereInput>>
-    id?: XOR<IntFilter, number>
-    problemText?: XOR<StringFilter, string>
+    AND?: Enumerable<ProblemWhereInput>
+    OR?: Enumerable<ProblemWhereInput>
+    NOT?: Enumerable<ProblemWhereInput>
+    id?: IntFilter | number
+    problemText?: StringFilter | string
     likedBy?: CreatorListRelationFilter
-    creator?: CreatorRelationFilter | CreatorWhereInput | null
+    creator?: XOR<CreatorWhereInput, CreatorRelationFilter> | null
     creatorId?: IntNullableFilter | number | null
   }
 
@@ -5072,11 +5414,11 @@ export namespace Prisma {
   }
 
   export type CreatorWhereInput = {
-    AND?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
-    OR?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
-    NOT?: XOR<CreatorWhereInput, Enumerable<CreatorWhereInput>>
-    id?: XOR<IntFilter, number>
-    name?: XOR<StringFilter, string>
+    AND?: Enumerable<CreatorWhereInput>
+    OR?: Enumerable<CreatorWhereInput>
+    NOT?: Enumerable<CreatorWhereInput>
+    id?: IntFilter | number
+    name?: StringFilter | string
     likes?: ProblemListRelationFilter
     problems?: ProblemListRelationFilter
   }
@@ -5092,7 +5434,7 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     email: string
-    name?: XOR<string, null>
+    name?: string | null
     age: number
     balance: number
     amount: number
@@ -5102,23 +5444,23 @@ export namespace Prisma {
   }
 
   export type UserUpdateInput = {
-    email?: XOR<string, StringFieldUpdateOperationsInput>
-    name?: string | NullableStringFieldUpdateOperationsInput | null
-    age?: XOR<number, IntFieldUpdateOperationsInput>
-    balance?: XOR<number, FloatFieldUpdateOperationsInput>
-    amount?: XOR<number, FloatFieldUpdateOperationsInput>
-    role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: IntFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    role?: EnumRoleFieldUpdateOperationsInput | Role
     posts?: postUpdateManyWithoutAuthorInput
     editorPosts?: postUpdateManyWithoutEditorInput
   }
 
   export type UserUpdateManyMutationInput = {
-    email?: XOR<string, StringFieldUpdateOperationsInput>
-    name?: string | NullableStringFieldUpdateOperationsInput | null
-    age?: XOR<number, IntFieldUpdateOperationsInput>
-    balance?: XOR<number, FloatFieldUpdateOperationsInput>
-    amount?: XOR<number, FloatFieldUpdateOperationsInput>
-    role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: IntFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
   export type postCreateInput = {
@@ -5128,36 +5470,36 @@ export namespace Prisma {
     published: boolean
     title: string
     subtitle: string
-    content?: XOR<string, null>
-    kind?: XOR<PostKind, null>
+    content?: string | null
+    kind?: PostKind | null
     metadata: InputJsonValue
     author: UserCreateOneWithoutPostsInput
     editor?: UserCreateOneWithoutEditorPostsInput
   }
 
   export type postUpdateInput = {
-    uuid?: XOR<string, StringFieldUpdateOperationsInput>
-    createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
-    updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
-    published?: XOR<boolean, BoolFieldUpdateOperationsInput>
-    title?: XOR<string, StringFieldUpdateOperationsInput>
-    subtitle?: XOR<string, StringFieldUpdateOperationsInput>
-    content?: string | NullableStringFieldUpdateOperationsInput | null
-    kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: InputJsonValue
     author?: UserUpdateOneRequiredWithoutPostsInput
     editor?: UserUpdateOneWithoutEditorPostsInput
   }
 
   export type postUpdateManyMutationInput = {
-    uuid?: XOR<string, StringFieldUpdateOperationsInput>
-    createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
-    updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
-    published?: XOR<boolean, BoolFieldUpdateOperationsInput>
-    title?: XOR<string, StringFieldUpdateOperationsInput>
-    subtitle?: XOR<string, StringFieldUpdateOperationsInput>
-    content?: string | NullableStringFieldUpdateOperationsInput | null
-    kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: InputJsonValue
   }
 
@@ -5168,15 +5510,15 @@ export namespace Prisma {
   }
 
   export type CategoryUpdateInput = {
-    name?: XOR<string, StringFieldUpdateOperationsInput>
-    slug?: XOR<string, StringFieldUpdateOperationsInput>
-    number?: XOR<number, IntFieldUpdateOperationsInput>
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
   }
 
   export type CategoryUpdateManyMutationInput = {
-    name?: XOR<string, StringFieldUpdateOperationsInput>
-    slug?: XOR<string, StringFieldUpdateOperationsInput>
-    number?: XOR<number, IntFieldUpdateOperationsInput>
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
   }
 
   export type PatientCreateInput = {
@@ -5186,15 +5528,15 @@ export namespace Prisma {
   }
 
   export type PatientUpdateInput = {
-    firstName?: XOR<string, StringFieldUpdateOperationsInput>
-    lastName?: XOR<string, StringFieldUpdateOperationsInput>
-    email?: XOR<string, StringFieldUpdateOperationsInput>
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
   }
 
   export type PatientUpdateManyMutationInput = {
-    firstName?: XOR<string, StringFieldUpdateOperationsInput>
-    lastName?: XOR<string, StringFieldUpdateOperationsInput>
-    email?: XOR<string, StringFieldUpdateOperationsInput>
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
   }
 
   export type MovieCreateInput = {
@@ -5203,12 +5545,12 @@ export namespace Prisma {
   }
 
   export type MovieUpdateInput = {
-    title?: XOR<string, StringFieldUpdateOperationsInput>
+    title?: StringFieldUpdateOperationsInput | string
     director?: DirectorUpdateOneRequiredWithoutMoviesInput
   }
 
   export type MovieUpdateManyMutationInput = {
-    title?: XOR<string, StringFieldUpdateOperationsInput>
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type DirectorCreateInput = {
@@ -5218,14 +5560,14 @@ export namespace Prisma {
   }
 
   export type DirectorUpdateInput = {
-    firstName?: XOR<string, StringFieldUpdateOperationsInput>
-    lastName?: XOR<string, StringFieldUpdateOperationsInput>
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
     movies?: MovieUpdateManyWithoutDirectorInput
   }
 
   export type DirectorUpdateManyMutationInput = {
-    firstName?: XOR<string, StringFieldUpdateOperationsInput>
-    lastName?: XOR<string, StringFieldUpdateOperationsInput>
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProblemCreateInput = {
@@ -5235,13 +5577,13 @@ export namespace Prisma {
   }
 
   export type ProblemUpdateInput = {
-    problemText?: XOR<string, StringFieldUpdateOperationsInput>
+    problemText?: StringFieldUpdateOperationsInput | string
     likedBy?: CreatorUpdateManyWithoutLikesInput
     creator?: CreatorUpdateOneWithoutProblemsInput
   }
 
   export type ProblemUpdateManyMutationInput = {
-    problemText?: XOR<string, StringFieldUpdateOperationsInput>
+    problemText?: StringFieldUpdateOperationsInput | string
   }
 
   export type CreatorCreateInput = {
@@ -5251,13 +5593,13 @@ export namespace Prisma {
   }
 
   export type CreatorUpdateInput = {
-    name?: XOR<string, StringFieldUpdateOperationsInput>
+    name?: StringFieldUpdateOperationsInput | string
     likes?: ProblemUpdateManyWithoutLikedByInput
     problems?: ProblemUpdateManyWithoutCreatorInput
   }
 
   export type CreatorUpdateManyMutationInput = {
-    name?: XOR<string, StringFieldUpdateOperationsInput>
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter = {
@@ -5268,7 +5610,7 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: XOR<number, NestedIntFilter>
+    not?: NestedIntFilter | number
   }
 
   export type StringFilter = {
@@ -5283,13 +5625,13 @@ export namespace Prisma {
     startsWith?: string
     endsWith?: string
     mode?: QueryMode
-    not?: XOR<string, NestedStringFilter>
+    not?: NestedStringFilter | string
   }
 
   export type StringNullableFilter = {
-    equals?: XOR<string, null>
-    in?: XOR<Enumerable<string>, null>
-    notIn?: XOR<Enumerable<string>, null>
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
     lt?: string
     lte?: string
     gt?: string
@@ -5298,7 +5640,7 @@ export namespace Prisma {
     startsWith?: string
     endsWith?: string
     mode?: QueryMode
-    not?: string | NestedStringNullableFilter | null
+    not?: NestedStringNullableFilter | string | null
   }
 
   export type FloatFilter = {
@@ -5309,7 +5651,7 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: XOR<number, NestedFloatFilter>
+    not?: NestedFloatFilter | number
   }
 
   export type PostListRelationFilter = {
@@ -5322,7 +5664,7 @@ export namespace Prisma {
     equals?: Role
     in?: Enumerable<Role>
     notIn?: Enumerable<Role>
-    not?: XOR<Role, NestedEnumRoleFilter>
+    not?: NestedEnumRoleFilter | Role
   }
 
   export type DateTimeFilter = {
@@ -5333,12 +5675,12 @@ export namespace Prisma {
     lte?: Date | string
     gt?: Date | string
     gte?: Date | string
-    not?: XOR<Date | string, NestedDateTimeFilter>
+    not?: NestedDateTimeFilter | Date | string
   }
 
   export type BoolFilter = {
     equals?: boolean
-    not?: XOR<boolean, NestedBoolFilter>
+    not?: NestedBoolFilter | boolean
   }
 
   export type UserRelationFilter = {
@@ -5347,21 +5689,21 @@ export namespace Prisma {
   }
 
   export type IntNullableFilter = {
-    equals?: XOR<number, null>
-    in?: XOR<Enumerable<number>, null>
-    notIn?: XOR<Enumerable<number>, null>
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
     lt?: number
     lte?: number
     gt?: number
     gte?: number
-    not?: number | NestedIntNullableFilter | null
+    not?: NestedIntNullableFilter | number | null
   }
 
   export type EnumPostKindNullableFilter = {
-    equals?: XOR<PostKind, null>
-    in?: XOR<Enumerable<PostKind>, null>
-    notIn?: XOR<Enumerable<PostKind>, null>
-    not?: PostKind | NestedEnumPostKindNullableFilter | null
+    equals?: PostKind | null
+    in?: Enumerable<PostKind> | null
+    notIn?: Enumerable<PostKind> | null
+    not?: NestedEnumPostKindNullableFilter | PostKind | null
   }
 
   export type JsonFilter = {
@@ -5403,8 +5745,8 @@ export namespace Prisma {
   }
 
   export type CreatorRelationFilter = {
-    is?: XOR<CreatorWhereInput, null>
-    isNot?: XOR<CreatorWhereInput, null>
+    is?: CreatorWhereInput | null
+    isNot?: CreatorWhereInput | null
   }
 
   export type ProblemListRelationFilter = {
@@ -5414,15 +5756,15 @@ export namespace Prisma {
   }
 
   export type postCreateManyWithoutAuthorInput = {
-    create?: XOR<postCreateWithoutAuthorInput, Enumerable<postCreateWithoutAuthorInput>>
-    connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    connectOrCreate?: XOR<postCreateOrConnectWithoutauthorInput, Enumerable<postCreateOrConnectWithoutauthorInput>>
+    create?: Enumerable<postCreateWithoutAuthorInput>
+    connect?: Enumerable<postWhereUniqueInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
   }
 
   export type postCreateManyWithoutEditorInput = {
-    create?: XOR<postCreateWithoutEditorInput, Enumerable<postCreateWithoutEditorInput>>
-    connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    connectOrCreate?: XOR<postCreateOrConnectWithouteditorInput, Enumerable<postCreateOrConnectWithouteditorInput>>
+    create?: Enumerable<postCreateWithoutEditorInput>
+    connect?: Enumerable<postWhereUniqueInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -5430,7 +5772,7 @@ export namespace Prisma {
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
-    set?: XOR<string, null>
+    set?: string | null
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -5454,29 +5796,29 @@ export namespace Prisma {
   }
 
   export type postUpdateManyWithoutAuthorInput = {
-    create?: XOR<postCreateWithoutAuthorInput, Enumerable<postCreateWithoutAuthorInput>>
-    connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    set?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    disconnect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    delete?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    update?: XOR<postUpdateWithWhereUniqueWithoutAuthorInput, Enumerable<postUpdateWithWhereUniqueWithoutAuthorInput>>
-    updateMany?: XOR<postUpdateManyWithWhereWithoutAuthorInput, Enumerable<postUpdateManyWithWhereWithoutAuthorInput>>
-    deleteMany?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
-    upsert?: XOR<postUpsertWithWhereUniqueWithoutAuthorInput, Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>>
-    connectOrCreate?: XOR<postCreateOrConnectWithoutauthorInput, Enumerable<postCreateOrConnectWithoutauthorInput>>
+    create?: Enumerable<postCreateWithoutAuthorInput>
+    connect?: Enumerable<postWhereUniqueInput>
+    set?: Enumerable<postWhereUniqueInput>
+    disconnect?: Enumerable<postWhereUniqueInput>
+    delete?: Enumerable<postWhereUniqueInput>
+    update?: Enumerable<postUpdateWithWhereUniqueWithoutAuthorInput>
+    updateMany?: Enumerable<postUpdateManyWithWhereWithoutAuthorInput>
+    deleteMany?: Enumerable<postScalarWhereInput>
+    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
   }
 
   export type postUpdateManyWithoutEditorInput = {
-    create?: XOR<postCreateWithoutEditorInput, Enumerable<postCreateWithoutEditorInput>>
-    connect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    set?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    disconnect?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    delete?: XOR<postWhereUniqueInput, Enumerable<postWhereUniqueInput>>
-    update?: XOR<postUpdateWithWhereUniqueWithoutEditorInput, Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>>
-    updateMany?: XOR<postUpdateManyWithWhereWithoutEditorInput, Enumerable<postUpdateManyWithWhereWithoutEditorInput>>
-    deleteMany?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
-    upsert?: XOR<postUpsertWithWhereUniqueWithoutEditorInput, Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>>
-    connectOrCreate?: XOR<postCreateOrConnectWithouteditorInput, Enumerable<postCreateOrConnectWithouteditorInput>>
+    create?: Enumerable<postCreateWithoutEditorInput>
+    connect?: Enumerable<postWhereUniqueInput>
+    set?: Enumerable<postWhereUniqueInput>
+    disconnect?: Enumerable<postWhereUniqueInput>
+    delete?: Enumerable<postWhereUniqueInput>
+    update?: Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
+    updateMany?: Enumerable<postUpdateManyWithWhereWithoutEditorInput>
+    deleteMany?: Enumerable<postScalarWhereInput>
+    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
   }
 
   export type UserCreateOneWithoutPostsInput = {
@@ -5500,7 +5842,7 @@ export namespace Prisma {
   }
 
   export type NullableEnumPostKindFieldUpdateOperationsInput = {
-    set?: XOR<PostKind, null>
+    set?: PostKind | null
   }
 
   export type UserUpdateOneRequiredWithoutPostsInput = {
@@ -5536,28 +5878,28 @@ export namespace Prisma {
   }
 
   export type MovieCreateManyWithoutDirectorInput = {
-    create?: XOR<MovieCreateWithoutDirectorInput, Enumerable<MovieCreateWithoutDirectorInput>>
-    connect?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
-    connectOrCreate?: XOR<MovieCreateOrConnectWithoutdirectorInput, Enumerable<MovieCreateOrConnectWithoutdirectorInput>>
+    create?: Enumerable<MovieCreateWithoutDirectorInput>
+    connect?: Enumerable<MovieWhereUniqueInput>
+    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
   }
 
   export type MovieUpdateManyWithoutDirectorInput = {
-    create?: XOR<MovieCreateWithoutDirectorInput, Enumerable<MovieCreateWithoutDirectorInput>>
-    connect?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
-    set?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
-    disconnect?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
-    delete?: XOR<MovieWhereUniqueInput, Enumerable<MovieWhereUniqueInput>>
-    update?: XOR<MovieUpdateWithWhereUniqueWithoutDirectorInput, Enumerable<MovieUpdateWithWhereUniqueWithoutDirectorInput>>
-    updateMany?: XOR<MovieUpdateManyWithWhereWithoutDirectorInput, Enumerable<MovieUpdateManyWithWhereWithoutDirectorInput>>
-    deleteMany?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
-    upsert?: XOR<MovieUpsertWithWhereUniqueWithoutDirectorInput, Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>>
-    connectOrCreate?: XOR<MovieCreateOrConnectWithoutdirectorInput, Enumerable<MovieCreateOrConnectWithoutdirectorInput>>
+    create?: Enumerable<MovieCreateWithoutDirectorInput>
+    connect?: Enumerable<MovieWhereUniqueInput>
+    set?: Enumerable<MovieWhereUniqueInput>
+    disconnect?: Enumerable<MovieWhereUniqueInput>
+    delete?: Enumerable<MovieWhereUniqueInput>
+    update?: Enumerable<MovieUpdateWithWhereUniqueWithoutDirectorInput>
+    updateMany?: Enumerable<MovieUpdateManyWithWhereWithoutDirectorInput>
+    deleteMany?: Enumerable<MovieScalarWhereInput>
+    upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
+    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
   }
 
   export type CreatorCreateManyWithoutLikesInput = {
-    create?: XOR<CreatorCreateWithoutLikesInput, Enumerable<CreatorCreateWithoutLikesInput>>
-    connect?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
-    connectOrCreate?: XOR<CreatorCreateOrConnectWithoutlikesInput, Enumerable<CreatorCreateOrConnectWithoutlikesInput>>
+    create?: Enumerable<CreatorCreateWithoutLikesInput>
+    connect?: Enumerable<CreatorWhereUniqueInput>
+    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutlikesInput>
   }
 
   export type CreatorCreateOneWithoutProblemsInput = {
@@ -5567,16 +5909,16 @@ export namespace Prisma {
   }
 
   export type CreatorUpdateManyWithoutLikesInput = {
-    create?: XOR<CreatorCreateWithoutLikesInput, Enumerable<CreatorCreateWithoutLikesInput>>
-    connect?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
-    set?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
-    disconnect?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
-    delete?: XOR<CreatorWhereUniqueInput, Enumerable<CreatorWhereUniqueInput>>
-    update?: XOR<CreatorUpdateWithWhereUniqueWithoutLikesInput, Enumerable<CreatorUpdateWithWhereUniqueWithoutLikesInput>>
-    updateMany?: XOR<CreatorUpdateManyWithWhereWithoutLikesInput, Enumerable<CreatorUpdateManyWithWhereWithoutLikesInput>>
-    deleteMany?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
-    upsert?: XOR<CreatorUpsertWithWhereUniqueWithoutLikesInput, Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>>
-    connectOrCreate?: XOR<CreatorCreateOrConnectWithoutlikesInput, Enumerable<CreatorCreateOrConnectWithoutlikesInput>>
+    create?: Enumerable<CreatorCreateWithoutLikesInput>
+    connect?: Enumerable<CreatorWhereUniqueInput>
+    set?: Enumerable<CreatorWhereUniqueInput>
+    disconnect?: Enumerable<CreatorWhereUniqueInput>
+    delete?: Enumerable<CreatorWhereUniqueInput>
+    update?: Enumerable<CreatorUpdateWithWhereUniqueWithoutLikesInput>
+    updateMany?: Enumerable<CreatorUpdateManyWithWhereWithoutLikesInput>
+    deleteMany?: Enumerable<CreatorScalarWhereInput>
+    upsert?: Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>
+    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutlikesInput>
   }
 
   export type CreatorUpdateOneWithoutProblemsInput = {
@@ -5590,41 +5932,41 @@ export namespace Prisma {
   }
 
   export type ProblemCreateManyWithoutLikedByInput = {
-    create?: XOR<ProblemCreateWithoutLikedByInput, Enumerable<ProblemCreateWithoutLikedByInput>>
-    connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    connectOrCreate?: XOR<ProblemCreateOrConnectWithoutlikedByInput, Enumerable<ProblemCreateOrConnectWithoutlikedByInput>>
+    create?: Enumerable<ProblemCreateWithoutLikedByInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutlikedByInput>
   }
 
   export type ProblemCreateManyWithoutCreatorInput = {
-    create?: XOR<ProblemCreateWithoutCreatorInput, Enumerable<ProblemCreateWithoutCreatorInput>>
-    connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    connectOrCreate?: XOR<ProblemCreateOrConnectWithoutcreatorInput, Enumerable<ProblemCreateOrConnectWithoutcreatorInput>>
+    create?: Enumerable<ProblemCreateWithoutCreatorInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
   }
 
   export type ProblemUpdateManyWithoutLikedByInput = {
-    create?: XOR<ProblemCreateWithoutLikedByInput, Enumerable<ProblemCreateWithoutLikedByInput>>
-    connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    set?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    disconnect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    delete?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    update?: XOR<ProblemUpdateWithWhereUniqueWithoutLikedByInput, Enumerable<ProblemUpdateWithWhereUniqueWithoutLikedByInput>>
-    updateMany?: XOR<ProblemUpdateManyWithWhereWithoutLikedByInput, Enumerable<ProblemUpdateManyWithWhereWithoutLikedByInput>>
-    deleteMany?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
-    upsert?: XOR<ProblemUpsertWithWhereUniqueWithoutLikedByInput, Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>>
-    connectOrCreate?: XOR<ProblemCreateOrConnectWithoutlikedByInput, Enumerable<ProblemCreateOrConnectWithoutlikedByInput>>
+    create?: Enumerable<ProblemCreateWithoutLikedByInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
+    set?: Enumerable<ProblemWhereUniqueInput>
+    disconnect?: Enumerable<ProblemWhereUniqueInput>
+    delete?: Enumerable<ProblemWhereUniqueInput>
+    update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutLikedByInput>
+    updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutLikedByInput>
+    deleteMany?: Enumerable<ProblemScalarWhereInput>
+    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutlikedByInput>
   }
 
   export type ProblemUpdateManyWithoutCreatorInput = {
-    create?: XOR<ProblemCreateWithoutCreatorInput, Enumerable<ProblemCreateWithoutCreatorInput>>
-    connect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    set?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    disconnect?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    delete?: XOR<ProblemWhereUniqueInput, Enumerable<ProblemWhereUniqueInput>>
-    update?: XOR<ProblemUpdateWithWhereUniqueWithoutCreatorInput, Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>>
-    updateMany?: XOR<ProblemUpdateManyWithWhereWithoutCreatorInput, Enumerable<ProblemUpdateManyWithWhereWithoutCreatorInput>>
-    deleteMany?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
-    upsert?: XOR<ProblemUpsertWithWhereUniqueWithoutCreatorInput, Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>>
-    connectOrCreate?: XOR<ProblemCreateOrConnectWithoutcreatorInput, Enumerable<ProblemCreateOrConnectWithoutcreatorInput>>
+    create?: Enumerable<ProblemCreateWithoutCreatorInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
+    set?: Enumerable<ProblemWhereUniqueInput>
+    disconnect?: Enumerable<ProblemWhereUniqueInput>
+    delete?: Enumerable<ProblemWhereUniqueInput>
+    update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>
+    updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutCreatorInput>
+    deleteMany?: Enumerable<ProblemScalarWhereInput>
+    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
   }
 
   export type NestedIntFilter = {
@@ -5635,7 +5977,7 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: XOR<number, NestedIntFilter>
+    not?: NestedIntFilter | number
   }
 
   export type NestedStringFilter = {
@@ -5649,13 +5991,13 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
-    not?: XOR<string, NestedStringFilter>
+    not?: NestedStringFilter | string
   }
 
   export type NestedStringNullableFilter = {
-    equals?: XOR<string, null>
-    in?: XOR<Enumerable<string>, null>
-    notIn?: XOR<Enumerable<string>, null>
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
     lt?: string
     lte?: string
     gt?: string
@@ -5663,7 +6005,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
-    not?: string | NestedStringNullableFilter | null
+    not?: NestedStringNullableFilter | string | null
   }
 
   export type NestedFloatFilter = {
@@ -5674,14 +6016,14 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: XOR<number, NestedFloatFilter>
+    not?: NestedFloatFilter | number
   }
 
   export type NestedEnumRoleFilter = {
     equals?: Role
     in?: Enumerable<Role>
     notIn?: Enumerable<Role>
-    not?: XOR<Role, NestedEnumRoleFilter>
+    not?: NestedEnumRoleFilter | Role
   }
 
   export type NestedDateTimeFilter = {
@@ -5692,30 +6034,30 @@ export namespace Prisma {
     lte?: Date | string
     gt?: Date | string
     gte?: Date | string
-    not?: XOR<Date | string, NestedDateTimeFilter>
+    not?: NestedDateTimeFilter | Date | string
   }
 
   export type NestedBoolFilter = {
     equals?: boolean
-    not?: XOR<boolean, NestedBoolFilter>
+    not?: NestedBoolFilter | boolean
   }
 
   export type NestedIntNullableFilter = {
-    equals?: XOR<number, null>
-    in?: XOR<Enumerable<number>, null>
-    notIn?: XOR<Enumerable<number>, null>
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
     lt?: number
     lte?: number
     gt?: number
     gte?: number
-    not?: number | NestedIntNullableFilter | null
+    not?: NestedIntNullableFilter | number | null
   }
 
   export type NestedEnumPostKindNullableFilter = {
-    equals?: XOR<PostKind, null>
-    in?: XOR<Enumerable<PostKind>, null>
-    notIn?: XOR<Enumerable<PostKind>, null>
-    not?: PostKind | NestedEnumPostKindNullableFilter | null
+    equals?: PostKind | null
+    in?: Enumerable<PostKind> | null
+    notIn?: Enumerable<PostKind> | null
+    not?: NestedEnumPostKindNullableFilter | PostKind | null
   }
 
   export type postCreateWithoutAuthorInput = {
@@ -5725,8 +6067,8 @@ export namespace Prisma {
     published: boolean
     title: string
     subtitle: string
-    content?: XOR<string, null>
-    kind?: XOR<PostKind, null>
+    content?: string | null
+    kind?: PostKind | null
     metadata: InputJsonValue
     editor?: UserCreateOneWithoutEditorPostsInput
   }
@@ -5743,8 +6085,8 @@ export namespace Prisma {
     published: boolean
     title: string
     subtitle: string
-    content?: XOR<string, null>
-    kind?: XOR<PostKind, null>
+    content?: string | null
+    kind?: PostKind | null
     metadata: InputJsonValue
     author: UserCreateOneWithoutPostsInput
   }
@@ -5765,17 +6107,17 @@ export namespace Prisma {
   }
 
   export type postScalarWhereInput = {
-    AND?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
-    OR?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
-    NOT?: XOR<postScalarWhereInput, Enumerable<postScalarWhereInput>>
-    uuid?: XOR<StringFilter, string>
-    createdAt?: XOR<DateTimeFilter, Date | string>
-    updatedAt?: XOR<DateTimeFilter, Date | string>
-    published?: XOR<BoolFilter, boolean>
-    title?: XOR<StringFilter, string>
-    subtitle?: XOR<StringFilter, string>
+    AND?: Enumerable<postScalarWhereInput>
+    OR?: Enumerable<postScalarWhereInput>
+    NOT?: Enumerable<postScalarWhereInput>
+    uuid?: StringFilter | string
+    createdAt?: DateTimeFilter | Date | string
+    updatedAt?: DateTimeFilter | Date | string
+    published?: BoolFilter | boolean
+    title?: StringFilter | string
+    subtitle?: StringFilter | string
     content?: StringNullableFilter | string | null
-    authorId?: XOR<IntFilter, number>
+    authorId?: IntFilter | number
     editorId?: IntNullableFilter | number | null
     kind?: EnumPostKindNullableFilter | PostKind | null
     metadata?: JsonFilter
@@ -5805,7 +6147,7 @@ export namespace Prisma {
 
   export type UserCreateWithoutPostsInput = {
     email: string
-    name?: XOR<string, null>
+    name?: string | null
     age: number
     balance: number
     amount: number
@@ -5820,7 +6162,7 @@ export namespace Prisma {
 
   export type UserCreateWithoutEditorPostsInput = {
     email: string
-    name?: XOR<string, null>
+    name?: string | null
     age: number
     balance: number
     amount: number
@@ -5834,12 +6176,12 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutPostsInput = {
-    email?: XOR<string, StringFieldUpdateOperationsInput>
-    name?: string | NullableStringFieldUpdateOperationsInput | null
-    age?: XOR<number, IntFieldUpdateOperationsInput>
-    balance?: XOR<number, FloatFieldUpdateOperationsInput>
-    amount?: XOR<number, FloatFieldUpdateOperationsInput>
-    role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: IntFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    role?: EnumRoleFieldUpdateOperationsInput | Role
     editorPosts?: postUpdateManyWithoutEditorInput
   }
 
@@ -5849,12 +6191,12 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutEditorPostsInput = {
-    email?: XOR<string, StringFieldUpdateOperationsInput>
-    name?: string | NullableStringFieldUpdateOperationsInput | null
-    age?: XOR<number, IntFieldUpdateOperationsInput>
-    balance?: XOR<number, FloatFieldUpdateOperationsInput>
-    amount?: XOR<number, FloatFieldUpdateOperationsInput>
-    role?: XOR<Role, EnumRoleFieldUpdateOperationsInput>
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: IntFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    role?: EnumRoleFieldUpdateOperationsInput | Role
     posts?: postUpdateManyWithoutAuthorInput
   }
 
@@ -5874,8 +6216,8 @@ export namespace Prisma {
   }
 
   export type DirectorUpdateWithoutMoviesInput = {
-    firstName?: XOR<string, StringFieldUpdateOperationsInput>
-    lastName?: XOR<string, StringFieldUpdateOperationsInput>
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
   }
 
   export type DirectorUpsertWithoutMoviesInput = {
@@ -5903,12 +6245,12 @@ export namespace Prisma {
   }
 
   export type MovieScalarWhereInput = {
-    AND?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
-    OR?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
-    NOT?: XOR<MovieScalarWhereInput, Enumerable<MovieScalarWhereInput>>
-    directorFirstName?: XOR<StringFilter, string>
-    directorLastName?: XOR<StringFilter, string>
-    title?: XOR<StringFilter, string>
+    AND?: Enumerable<MovieScalarWhereInput>
+    OR?: Enumerable<MovieScalarWhereInput>
+    NOT?: Enumerable<MovieScalarWhereInput>
+    directorFirstName?: StringFilter | string
+    directorLastName?: StringFilter | string
+    title?: StringFilter | string
   }
 
   export type MovieUpsertWithWhereUniqueWithoutDirectorInput = {
@@ -5948,11 +6290,11 @@ export namespace Prisma {
   }
 
   export type CreatorScalarWhereInput = {
-    AND?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
-    OR?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
-    NOT?: XOR<CreatorScalarWhereInput, Enumerable<CreatorScalarWhereInput>>
-    id?: XOR<IntFilter, number>
-    name?: XOR<StringFilter, string>
+    AND?: Enumerable<CreatorScalarWhereInput>
+    OR?: Enumerable<CreatorScalarWhereInput>
+    NOT?: Enumerable<CreatorScalarWhereInput>
+    id?: IntFilter | number
+    name?: StringFilter | string
   }
 
   export type CreatorUpsertWithWhereUniqueWithoutLikesInput = {
@@ -5962,7 +6304,7 @@ export namespace Prisma {
   }
 
   export type CreatorUpdateWithoutProblemsInput = {
-    name?: XOR<string, StringFieldUpdateOperationsInput>
+    name?: StringFieldUpdateOperationsInput | string
     likes?: ProblemUpdateManyWithoutLikedByInput
   }
 
@@ -6002,11 +6344,11 @@ export namespace Prisma {
   }
 
   export type ProblemScalarWhereInput = {
-    AND?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
-    OR?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
-    NOT?: XOR<ProblemScalarWhereInput, Enumerable<ProblemScalarWhereInput>>
-    id?: XOR<IntFilter, number>
-    problemText?: XOR<StringFilter, string>
+    AND?: Enumerable<ProblemScalarWhereInput>
+    OR?: Enumerable<ProblemScalarWhereInput>
+    NOT?: Enumerable<ProblemScalarWhereInput>
+    id?: IntFilter | number
+    problemText?: StringFilter | string
     creatorId?: IntNullableFilter | number | null
   }
 
@@ -6033,47 +6375,47 @@ export namespace Prisma {
   }
 
   export type postUpdateWithoutAuthorInput = {
-    uuid?: XOR<string, StringFieldUpdateOperationsInput>
-    createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
-    updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
-    published?: XOR<boolean, BoolFieldUpdateOperationsInput>
-    title?: XOR<string, StringFieldUpdateOperationsInput>
-    subtitle?: XOR<string, StringFieldUpdateOperationsInput>
-    content?: string | NullableStringFieldUpdateOperationsInput | null
-    kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: InputJsonValue
     editor?: UserUpdateOneWithoutEditorPostsInput
   }
 
   export type postUpdateWithoutEditorInput = {
-    uuid?: XOR<string, StringFieldUpdateOperationsInput>
-    createdAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
-    updatedAt?: XOR<Date | string, DateTimeFieldUpdateOperationsInput>
-    published?: XOR<boolean, BoolFieldUpdateOperationsInput>
-    title?: XOR<string, StringFieldUpdateOperationsInput>
-    subtitle?: XOR<string, StringFieldUpdateOperationsInput>
-    content?: string | NullableStringFieldUpdateOperationsInput | null
-    kind?: PostKind | NullableEnumPostKindFieldUpdateOperationsInput | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: InputJsonValue
     author?: UserUpdateOneRequiredWithoutPostsInput
   }
 
   export type MovieUpdateWithoutDirectorInput = {
-    title?: XOR<string, StringFieldUpdateOperationsInput>
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type CreatorUpdateWithoutLikesInput = {
-    name?: XOR<string, StringFieldUpdateOperationsInput>
+    name?: StringFieldUpdateOperationsInput | string
     problems?: ProblemUpdateManyWithoutCreatorInput
   }
 
   export type ProblemUpdateWithoutLikedByInput = {
-    problemText?: XOR<string, StringFieldUpdateOperationsInput>
+    problemText?: StringFieldUpdateOperationsInput | string
     creator?: CreatorUpdateOneWithoutProblemsInput
   }
 
   export type ProblemUpdateWithoutCreatorInput = {
-    problemText?: XOR<string, StringFieldUpdateOperationsInput>
+    problemText?: StringFieldUpdateOperationsInput | string
     likedBy?: CreatorUpdateManyWithoutLikesInput
   }
 
@@ -6094,49 +6436,49 @@ export namespace Prisma {
 }
 
 /*
-* Exports for compatiblity introduced in 2.12.0
+* Exports for compatibility introduced in 2.12.0
 * Please import from the Prisma namespace instead
 */
 
 /**
- * @deprecated Renamed to `Prisma.UserDistinctFieldEnum`
+ * @deprecated Renamed to `Prisma.UserScalarFieldEnum`
  */
-export type UserDistinctFieldEnum = Prisma.UserDistinctFieldEnum
+export type UserScalarFieldEnum = Prisma.UserScalarFieldEnum
 
 /**
- * @deprecated Renamed to `Prisma.PostDistinctFieldEnum`
+ * @deprecated Renamed to `Prisma.PostScalarFieldEnum`
  */
-export type PostDistinctFieldEnum = Prisma.PostDistinctFieldEnum
+export type PostScalarFieldEnum = Prisma.PostScalarFieldEnum
 
 /**
- * @deprecated Renamed to `Prisma.CategoryDistinctFieldEnum`
+ * @deprecated Renamed to `Prisma.CategoryScalarFieldEnum`
  */
-export type CategoryDistinctFieldEnum = Prisma.CategoryDistinctFieldEnum
+export type CategoryScalarFieldEnum = Prisma.CategoryScalarFieldEnum
 
 /**
- * @deprecated Renamed to `Prisma.PatientDistinctFieldEnum`
+ * @deprecated Renamed to `Prisma.PatientScalarFieldEnum`
  */
-export type PatientDistinctFieldEnum = Prisma.PatientDistinctFieldEnum
+export type PatientScalarFieldEnum = Prisma.PatientScalarFieldEnum
 
 /**
- * @deprecated Renamed to `Prisma.MovieDistinctFieldEnum`
+ * @deprecated Renamed to `Prisma.MovieScalarFieldEnum`
  */
-export type MovieDistinctFieldEnum = Prisma.MovieDistinctFieldEnum
+export type MovieScalarFieldEnum = Prisma.MovieScalarFieldEnum
 
 /**
- * @deprecated Renamed to `Prisma.DirectorDistinctFieldEnum`
+ * @deprecated Renamed to `Prisma.DirectorScalarFieldEnum`
  */
-export type DirectorDistinctFieldEnum = Prisma.DirectorDistinctFieldEnum
+export type DirectorScalarFieldEnum = Prisma.DirectorScalarFieldEnum
 
 /**
- * @deprecated Renamed to `Prisma.ProblemDistinctFieldEnum`
+ * @deprecated Renamed to `Prisma.ProblemScalarFieldEnum`
  */
-export type ProblemDistinctFieldEnum = Prisma.ProblemDistinctFieldEnum
+export type ProblemScalarFieldEnum = Prisma.ProblemScalarFieldEnum
 
 /**
- * @deprecated Renamed to `Prisma.CreatorDistinctFieldEnum`
+ * @deprecated Renamed to `Prisma.CreatorScalarFieldEnum`
  */
-export type CreatorDistinctFieldEnum = Prisma.CreatorDistinctFieldEnum
+export type CreatorScalarFieldEnum = Prisma.CreatorScalarFieldEnum
 
 /**
  * @deprecated Renamed to `Prisma.SortOrder`
@@ -6179,6 +6521,11 @@ export type UserMinAggregateOutputType = Prisma.UserMinAggregateOutputType
 export type UserMaxAggregateOutputType = Prisma.UserMaxAggregateOutputType
 
 /**
+ * @deprecated Renamed to `Prisma.UserCountAggregateOutputType`
+ */
+export type UserCountAggregateOutputType = Prisma.UserCountAggregateOutputType
+
+/**
  * @deprecated Renamed to `Prisma.AggregateUserArgs`
  */
 export type AggregateUserArgs = Prisma.AggregateUserArgs
@@ -6202,6 +6549,11 @@ export type UserMinAggregateInputType = Prisma.UserMinAggregateInputType
  * @deprecated Renamed to `Prisma.UserMaxAggregateInputType`
  */
 export type UserMaxAggregateInputType = Prisma.UserMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.UserCountAggregateInputType`
+ */
+export type UserCountAggregateInputType = Prisma.UserCountAggregateInputType
 
 /**
  * @deprecated Renamed to `Prisma.UserSelect`
@@ -6284,6 +6636,11 @@ export type PostMinAggregateOutputType = Prisma.PostMinAggregateOutputType
 export type PostMaxAggregateOutputType = Prisma.PostMaxAggregateOutputType
 
 /**
+ * @deprecated Renamed to `Prisma.PostCountAggregateOutputType`
+ */
+export type PostCountAggregateOutputType = Prisma.PostCountAggregateOutputType
+
+/**
  * @deprecated Renamed to `Prisma.AggregatePostArgs`
  */
 export type AggregatePostArgs = Prisma.AggregatePostArgs
@@ -6307,6 +6664,11 @@ export type PostMinAggregateInputType = Prisma.PostMinAggregateInputType
  * @deprecated Renamed to `Prisma.PostMaxAggregateInputType`
  */
 export type PostMaxAggregateInputType = Prisma.PostMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.PostCountAggregateInputType`
+ */
+export type PostCountAggregateInputType = Prisma.PostCountAggregateInputType
 
 /**
  * @deprecated Renamed to `Prisma.postSelect`
@@ -6389,6 +6751,11 @@ export type CategoryMinAggregateOutputType = Prisma.CategoryMinAggregateOutputTy
 export type CategoryMaxAggregateOutputType = Prisma.CategoryMaxAggregateOutputType
 
 /**
+ * @deprecated Renamed to `Prisma.CategoryCountAggregateOutputType`
+ */
+export type CategoryCountAggregateOutputType = Prisma.CategoryCountAggregateOutputType
+
+/**
  * @deprecated Renamed to `Prisma.AggregateCategoryArgs`
  */
 export type AggregateCategoryArgs = Prisma.AggregateCategoryArgs
@@ -6412,6 +6779,11 @@ export type CategoryMinAggregateInputType = Prisma.CategoryMinAggregateInputType
  * @deprecated Renamed to `Prisma.CategoryMaxAggregateInputType`
  */
 export type CategoryMaxAggregateInputType = Prisma.CategoryMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CategoryCountAggregateInputType`
+ */
+export type CategoryCountAggregateInputType = Prisma.CategoryCountAggregateInputType
 
 /**
  * @deprecated Renamed to `Prisma.CategorySelect`
@@ -6469,9 +6841,39 @@ export type CategoryDeleteManyArgs = Prisma.CategoryDeleteManyArgs
 export type AggregatePatient = Prisma.AggregatePatient
 
 /**
+ * @deprecated Renamed to `Prisma.PatientMinAggregateOutputType`
+ */
+export type PatientMinAggregateOutputType = Prisma.PatientMinAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.PatientMaxAggregateOutputType`
+ */
+export type PatientMaxAggregateOutputType = Prisma.PatientMaxAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.PatientCountAggregateOutputType`
+ */
+export type PatientCountAggregateOutputType = Prisma.PatientCountAggregateOutputType
+
+/**
  * @deprecated Renamed to `Prisma.AggregatePatientArgs`
  */
 export type AggregatePatientArgs = Prisma.AggregatePatientArgs
+
+/**
+ * @deprecated Renamed to `Prisma.PatientMinAggregateInputType`
+ */
+export type PatientMinAggregateInputType = Prisma.PatientMinAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.PatientMaxAggregateInputType`
+ */
+export type PatientMaxAggregateInputType = Prisma.PatientMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.PatientCountAggregateInputType`
+ */
+export type PatientCountAggregateInputType = Prisma.PatientCountAggregateInputType
 
 /**
  * @deprecated Renamed to `Prisma.PatientSelect`
@@ -6529,9 +6931,39 @@ export type PatientDeleteManyArgs = Prisma.PatientDeleteManyArgs
 export type AggregateMovie = Prisma.AggregateMovie
 
 /**
+ * @deprecated Renamed to `Prisma.MovieMinAggregateOutputType`
+ */
+export type MovieMinAggregateOutputType = Prisma.MovieMinAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.MovieMaxAggregateOutputType`
+ */
+export type MovieMaxAggregateOutputType = Prisma.MovieMaxAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.MovieCountAggregateOutputType`
+ */
+export type MovieCountAggregateOutputType = Prisma.MovieCountAggregateOutputType
+
+/**
  * @deprecated Renamed to `Prisma.AggregateMovieArgs`
  */
 export type AggregateMovieArgs = Prisma.AggregateMovieArgs
+
+/**
+ * @deprecated Renamed to `Prisma.MovieMinAggregateInputType`
+ */
+export type MovieMinAggregateInputType = Prisma.MovieMinAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.MovieMaxAggregateInputType`
+ */
+export type MovieMaxAggregateInputType = Prisma.MovieMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.MovieCountAggregateInputType`
+ */
+export type MovieCountAggregateInputType = Prisma.MovieCountAggregateInputType
 
 /**
  * @deprecated Renamed to `Prisma.MovieSelect`
@@ -6594,9 +7026,39 @@ export type MovieDeleteManyArgs = Prisma.MovieDeleteManyArgs
 export type AggregateDirector = Prisma.AggregateDirector
 
 /**
+ * @deprecated Renamed to `Prisma.DirectorMinAggregateOutputType`
+ */
+export type DirectorMinAggregateOutputType = Prisma.DirectorMinAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorMaxAggregateOutputType`
+ */
+export type DirectorMaxAggregateOutputType = Prisma.DirectorMaxAggregateOutputType
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorCountAggregateOutputType`
+ */
+export type DirectorCountAggregateOutputType = Prisma.DirectorCountAggregateOutputType
+
+/**
  * @deprecated Renamed to `Prisma.AggregateDirectorArgs`
  */
 export type AggregateDirectorArgs = Prisma.AggregateDirectorArgs
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorMinAggregateInputType`
+ */
+export type DirectorMinAggregateInputType = Prisma.DirectorMinAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorMaxAggregateInputType`
+ */
+export type DirectorMaxAggregateInputType = Prisma.DirectorMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorCountAggregateInputType`
+ */
+export type DirectorCountAggregateInputType = Prisma.DirectorCountAggregateInputType
 
 /**
  * @deprecated Renamed to `Prisma.DirectorSelect`
@@ -6679,6 +7141,11 @@ export type ProblemMinAggregateOutputType = Prisma.ProblemMinAggregateOutputType
 export type ProblemMaxAggregateOutputType = Prisma.ProblemMaxAggregateOutputType
 
 /**
+ * @deprecated Renamed to `Prisma.ProblemCountAggregateOutputType`
+ */
+export type ProblemCountAggregateOutputType = Prisma.ProblemCountAggregateOutputType
+
+/**
  * @deprecated Renamed to `Prisma.AggregateProblemArgs`
  */
 export type AggregateProblemArgs = Prisma.AggregateProblemArgs
@@ -6702,6 +7169,11 @@ export type ProblemMinAggregateInputType = Prisma.ProblemMinAggregateInputType
  * @deprecated Renamed to `Prisma.ProblemMaxAggregateInputType`
  */
 export type ProblemMaxAggregateInputType = Prisma.ProblemMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.ProblemCountAggregateInputType`
+ */
+export type ProblemCountAggregateInputType = Prisma.ProblemCountAggregateInputType
 
 /**
  * @deprecated Renamed to `Prisma.ProblemSelect`
@@ -6784,6 +7256,11 @@ export type CreatorMinAggregateOutputType = Prisma.CreatorMinAggregateOutputType
 export type CreatorMaxAggregateOutputType = Prisma.CreatorMaxAggregateOutputType
 
 /**
+ * @deprecated Renamed to `Prisma.CreatorCountAggregateOutputType`
+ */
+export type CreatorCountAggregateOutputType = Prisma.CreatorCountAggregateOutputType
+
+/**
  * @deprecated Renamed to `Prisma.AggregateCreatorArgs`
  */
 export type AggregateCreatorArgs = Prisma.AggregateCreatorArgs
@@ -6807,6 +7284,11 @@ export type CreatorMinAggregateInputType = Prisma.CreatorMinAggregateInputType
  * @deprecated Renamed to `Prisma.CreatorMaxAggregateInputType`
  */
 export type CreatorMaxAggregateInputType = Prisma.CreatorMaxAggregateInputType
+
+/**
+ * @deprecated Renamed to `Prisma.CreatorCountAggregateInputType`
+ */
+export type CreatorCountAggregateInputType = Prisma.CreatorCountAggregateInputType
 
 /**
  * @deprecated Renamed to `Prisma.CreatorSelect`

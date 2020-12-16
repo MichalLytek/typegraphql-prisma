@@ -35,68 +35,68 @@ TypeGraphQL.registerEnumType(Color, {
 "
 `;
 
-exports[`enums should properly generate model distinct enum when model field is renamed: SampleModelDistinctFieldEnum 1`] = `
+exports[`enums should properly generate model scalar enum when model field is renamed: SampleModelScalarFieldEnum 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 
-export enum SampleModelDistinctFieldEnum {
+export enum SampleModelScalarFieldEnum {
   intIdField = \\"intIdField\\",
   mappedFieldName = \\"stringField\\",
   intField = \\"intField\\"
 }
-TypeGraphQL.registerEnumType(SampleModelDistinctFieldEnum, {
-  name: \\"SampleModelDistinctFieldEnum\\",
+TypeGraphQL.registerEnumType(SampleModelScalarFieldEnum, {
+  name: \\"SampleModelScalarFieldEnum\\",
   description: undefined,
 });
 "
 `;
 
-exports[`enums should properly generate model distinct enum when model field is renamed: enums index 1`] = `
+exports[`enums should properly generate model scalar enum when model field is renamed: enums index 1`] = `
 "export { QueryMode } from \\"./QueryMode\\";
-export { SampleModelDistinctFieldEnum } from \\"./SampleModelDistinctFieldEnum\\";
+export { SampleModelScalarFieldEnum } from \\"./SampleModelScalarFieldEnum\\";
 export { SortOrder } from \\"./SortOrder\\";
 "
 `;
 
-exports[`enums should properly generate model distinct enum when model is renamed: ExampleModelDistinctFieldEnum 1`] = `
+exports[`enums should properly generate model scalar enum when model is renamed: ExampleModelScalarFieldEnum 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 
-export enum ExampleModelDistinctFieldEnum {
+export enum ExampleModelScalarFieldEnum {
   intIdField = \\"intIdField\\",
   stringField = \\"stringField\\",
   intField = \\"intField\\"
 }
-TypeGraphQL.registerEnumType(ExampleModelDistinctFieldEnum, {
-  name: \\"ExampleModelDistinctFieldEnum\\",
+TypeGraphQL.registerEnumType(ExampleModelScalarFieldEnum, {
+  name: \\"ExampleModelScalarFieldEnum\\",
   description: undefined,
 });
 "
 `;
 
-exports[`enums should properly generate model distinct enum when model is renamed: enums index 1`] = `
-"export { ExampleModelDistinctFieldEnum } from \\"./ExampleModelDistinctFieldEnum\\";
+exports[`enums should properly generate model scalar enum when model is renamed: enums index 1`] = `
+"export { ExampleModelScalarFieldEnum } from \\"./ExampleModelScalarFieldEnum\\";
 export { QueryMode } from \\"./QueryMode\\";
 export { SortOrder } from \\"./SortOrder\\";
 "
 `;
 
-exports[`enums should properly generate model distinct field enum: SampleModelDistinctFieldEnum 1`] = `
+exports[`enums should properly generate model scalar field enum: SampleModelScalarFieldEnum 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 
-export enum SampleModelDistinctFieldEnum {
+export enum SampleModelScalarFieldEnum {
   intIdField = \\"intIdField\\",
   stringField = \\"stringField\\",
   intField = \\"intField\\"
 }
-TypeGraphQL.registerEnumType(SampleModelDistinctFieldEnum, {
-  name: \\"SampleModelDistinctFieldEnum\\",
+TypeGraphQL.registerEnumType(SampleModelScalarFieldEnum, {
+  name: \\"SampleModelScalarFieldEnum\\",
   description: undefined,
 });
 "
 `;
 
-exports[`enums should properly generate model distinct field enum: enums index 1`] = `
+exports[`enums should properly generate model scalar field enum: enums index 1`] = `
 "export { QueryMode } from \\"./QueryMode\\";
-export { SampleModelDistinctFieldEnum } from \\"./SampleModelDistinctFieldEnum\\";
+export { SampleModelScalarFieldEnum } from \\"./SampleModelScalarFieldEnum\\";
 export { SortOrder } from \\"./SortOrder\\";
 "
 `;
@@ -131,7 +131,7 @@ TypeGraphQL.registerEnumType(SortOrder, {
 
 exports[`enums should properly generate standard prisma enums: enums index 1`] = `
 "export { QueryMode } from \\"./QueryMode\\";
-export { SampleModelDistinctFieldEnum } from \\"./SampleModelDistinctFieldEnum\\";
+export { SampleModelScalarFieldEnum } from \\"./SampleModelScalarFieldEnum\\";
 export { SortOrder } from \\"./SortOrder\\";
 "
 `;

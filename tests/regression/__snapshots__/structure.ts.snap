@@ -8,14 +8,14 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
   [enums]
     Color.d.ts
     Color.js
-    PostDistinctFieldEnum.d.ts
-    PostDistinctFieldEnum.js
+    PostScalarFieldEnum.d.ts
+    PostScalarFieldEnum.js
     QueryMode.d.ts
     QueryMode.js
     SortOrder.d.ts
     SortOrder.js
-    UserDistinctFieldEnum.d.ts
-    UserDistinctFieldEnum.js
+    UserScalarFieldEnum.d.ts
+    UserScalarFieldEnum.js
     index.d.ts
     index.js
   index.d.ts
@@ -221,6 +221,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       BatchPayload.js
       PostAvgAggregate.d.ts
       PostAvgAggregate.js
+      PostCountAggregate.d.ts
+      PostCountAggregate.js
       PostMaxAggregate.d.ts
       PostMaxAggregate.js
       PostMinAggregate.d.ts
@@ -229,6 +231,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       PostSumAggregate.js
       UserAvgAggregate.d.ts
       UserAvgAggregate.js
+      UserCountAggregate.d.ts
+      UserCountAggregate.js
       UserMaxAggregate.d.ts
       UserMaxAggregate.js
       UserMinAggregate.d.ts
@@ -265,8 +269,8 @@ exports[`structure should generate proper folders and file names when model is r
   [enums]
     Color.ts
     QueryMode.ts
-    RenamedPostDistinctFieldEnum.ts
-    RenamedUserDistinctFieldEnum.ts
+    RenamedPostScalarFieldEnum.ts
+    RenamedUserScalarFieldEnum.ts
     SortOrder.ts
     index.ts
   index.ts
@@ -375,10 +379,12 @@ exports[`structure should generate proper folders and file names when model is r
       AggregateRenamedUser.ts
       BatchPayload.ts
       RenamedPostAvgAggregate.ts
+      RenamedPostCountAggregate.ts
       RenamedPostMaxAggregate.ts
       RenamedPostMinAggregate.ts
       RenamedPostSumAggregate.ts
       RenamedUserAvgAggregate.ts
+      RenamedUserCountAggregate.ts
       RenamedUserMaxAggregate.ts
       RenamedUserMinAggregate.ts
       RenamedUserSumAggregate.ts
@@ -403,10 +409,10 @@ exports[`structure should generate proper folders structure and file names for c
   enhance.ts
   [enums]
     Color.ts
-    PostDistinctFieldEnum.ts
+    PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
-    UserDistinctFieldEnum.ts
+    UserScalarFieldEnum.ts
     index.ts
   index.ts
   [models]
@@ -514,10 +520,12 @@ exports[`structure should generate proper folders structure and file names for c
       AggregateUser.ts
       BatchPayload.ts
       PostAvgAggregate.ts
+      PostCountAggregate.ts
       PostMaxAggregate.ts
       PostMinAggregate.ts
       PostSumAggregate.ts
       UserAvgAggregate.ts
+      UserCountAggregate.ts
       UserMaxAggregate.ts
       UserMinAggregate.ts
       UserSumAggregate.ts

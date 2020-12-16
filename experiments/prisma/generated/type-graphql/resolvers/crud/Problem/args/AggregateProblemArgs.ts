@@ -3,7 +3,6 @@ import GraphQLJSON from "graphql-type-json";
 import { ProblemOrderByInput } from "../../../inputs/ProblemOrderByInput";
 import { ProblemWhereInput } from "../../../inputs/ProblemWhereInput";
 import { ProblemWhereUniqueInput } from "../../../inputs/ProblemWhereUniqueInput";
-import { ProblemDistinctFieldEnum } from "../../../../enums/ProblemDistinctFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class AggregateProblemArgs {
@@ -21,7 +20,4 @@ export class AggregateProblemArgs {
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
-
-  @TypeGraphQL.Field(_type => [ProblemDistinctFieldEnum], { nullable: true })
-  distinct?: Array<"id" | "problemText" | "creatorId"> | undefined;
 }

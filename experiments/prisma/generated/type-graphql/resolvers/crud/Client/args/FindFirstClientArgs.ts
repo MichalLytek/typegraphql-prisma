@@ -3,7 +3,7 @@ import GraphQLJSON from "graphql-type-json";
 import { ClientOrderByInput } from "../../../inputs/ClientOrderByInput";
 import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
-import { ClientDistinctFieldEnum } from "../../../../enums/ClientDistinctFieldEnum";
+import { ClientScalarFieldEnum } from "../../../../enums/ClientScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class FindFirstClientArgs {
@@ -22,6 +22,6 @@ export class FindFirstClientArgs {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [ClientDistinctFieldEnum], { nullable: true })
+  @TypeGraphQL.Field(_type => [ClientScalarFieldEnum], { nullable: true })
   distinct?: Array<"id" | "email" | "name" | "age" | "balance" | "amount" | "role"> | undefined;
 }

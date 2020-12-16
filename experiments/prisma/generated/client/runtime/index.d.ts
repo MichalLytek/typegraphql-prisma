@@ -157,6 +157,7 @@ declare namespace DMMF {
         delete?: string | null;
         deleteMany?: string | null;
         aggregate?: string | null;
+        groupBy?: string | null;
     }
     enum ModelAction {
         findUnique = "findUnique",
@@ -167,7 +168,8 @@ declare namespace DMMF {
         updateMany = "updateMany",
         upsert = "upsert",
         delete = "delete",
-        deleteMany = "deleteMany"
+        deleteMany = "deleteMany",
+        groupBy = "groupBy"
     }
 }
 
@@ -224,6 +226,7 @@ declare class DMMFClass implements DMMF.Document {
     mappingsMap: Dictionary$1<DMMF.ModelMapping>;
     rootFieldMap: Dictionary$1<DMMF.SchemaField>;
     constructor({ datamodel, schema, mappings }: DMMF.Document);
+    get [Symbol.toStringTag](): string;
     protected outputTypeToMergedOutputType: (outputType: DMMF.OutputType) => DMMF.OutputType;
     protected resolveOutputTypes(): void;
     protected resolveInputTypes(): void;
@@ -352,10 +355,11 @@ declare class Document {
     readonly type: 'query' | 'mutation';
     readonly children: Field[];
     constructor(type: 'query' | 'mutation', children: Field[]);
+    get [Symbol.toStringTag](): string;
     toString(): string;
     validate(select?: any, isTopLevelQuery?: boolean, originalMethod?: string, errorFormat?: 'pretty' | 'minimal' | 'colorless', validationCallsite?: any): void;
-    protected printFieldError: ({ error, path }: FieldError, missingItems: MissingItem[], minimal: boolean) => string;
-    protected printArgError: ({ error, path }: ArgError, hasMissingItems: boolean, minimal: boolean) => string;
+    protected printFieldError: ({ error }: FieldError, missingItems: MissingItem[], minimal: boolean) => string | undefined;
+    protected printArgError: ({ error, path }: ArgError, hasMissingItems: boolean, minimal: boolean) => string | undefined;
     /**
      * As we're allowing both single objects and array of objects for list inputs, we need to remove incorrect
      * zero indexes from the path
@@ -365,6 +369,7 @@ declare class Document {
     private normalizePath;
 }
 declare class PrismaClientValidationError extends Error {
+    get [Symbol.toStringTag](): string;
 }
 interface FieldArgs {
     name: string;
@@ -382,6 +387,7 @@ declare class Field {
     readonly hasInvalidArg: boolean;
     readonly schemaField?: DMMF.SchemaField;
     constructor({ name, args, children, error, schemaField }: FieldArgs);
+    get [Symbol.toStringTag](): string;
     toString(): string;
     collectErrors(prefix?: string): {
         fieldErrors: FieldError[];
@@ -392,6 +398,7 @@ declare class Args {
     args: Arg[];
     readonly hasInvalidArg: boolean;
     constructor(args?: Arg[]);
+    get [Symbol.toStringTag](): string;
     toString(): string;
     collectErrors(): ArgError[];
 }
@@ -412,9 +419,10 @@ declare class Arg {
     schemaArg?: DMMF.SchemaArg;
     isNullable: boolean;
     inputType?: DMMF.SchemaArgInputType;
-    constructor({ key, value, isEnum, error, schemaArg, inputType }: ArgOptions);
+    constructor({ key, value, isEnum, error, schemaArg, inputType, }: ArgOptions);
+    get [Symbol.toStringTag](): string;
     _toString(value: ArgValue, key: string): string | undefined;
-    toString(): string;
+    toString(): string | undefined;
     collectErrors(): ArgError[];
 }
 declare type ArgValue = string | boolean | number | undefined | Args | string[] | boolean[] | number[] | Args[] | null;
@@ -498,18 +506,22 @@ declare class PrismaClientKnownRequestError extends Error {
     meta?: object;
     clientVersion: string;
     constructor(message: string, code: string, clientVersion: string, meta?: any);
+    get [Symbol.toStringTag](): string;
 }
 declare class PrismaClientUnknownRequestError extends Error {
     clientVersion: string;
     constructor(message: string, clientVersion: string);
+    get [Symbol.toStringTag](): string;
 }
 declare class PrismaClientRustPanicError extends Error {
     clientVersion: string;
     constructor(message: string, clientVersion: string);
+    get [Symbol.toStringTag](): string;
 }
 declare class PrismaClientInitializationError extends Error {
     clientVersion: string;
     constructor(message: string, clientVersion: string);
+    get [Symbol.toStringTag](): string;
 }
 
 declare type Platform = 'native' | 'darwin' | 'debian-openssl-1.0.x' | 'debian-openssl-1.1.x' | 'rhel-openssl-1.0.x' | 'rhel-openssl-1.1.x' | 'linux-musl' | 'linux-nixos' | 'windows' | 'freebsd11' | 'freebsd12' | 'openbsd' | 'netbsd' | 'arm';
@@ -615,7 +627,7 @@ declare class NodeEngine {
     engineStartDeferred?: Deferred;
     engineStopDeferred?: StopDeferred;
     undici: Undici;
-    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname }: EngineConfig);
+    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, }: EngineConfig);
     private checkForTooManyEngines;
     private resolveCwd;
     on(event: 'query' | 'info' | 'warn' | 'error' | 'beforeExit', listener: (args?: any) => any): void;
@@ -638,7 +650,7 @@ declare class NodeEngine {
      * If Prisma runs, stop it
      */
     _stop(): Promise<void>;
-    kill(signal: string): Promise<void>;
+    kill(signal: string): void;
     /**
      * Use the port 0 trick to get a new port
      */

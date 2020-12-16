@@ -12878,7 +12878,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserDistinctFieldEnum",
+                      "type": "UserScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -12973,7 +12973,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserDistinctFieldEnum",
+                      "type": "UserScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -13059,19 +13059,6 @@
                       "type": "Int",
                       "location": "scalar",
                       "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "UserDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
                     }
                   ]
                 }
@@ -13189,7 +13176,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PostDistinctFieldEnum",
+                      "type": "PostScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -13284,7 +13271,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PostDistinctFieldEnum",
+                      "type": "PostScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -13370,19 +13357,6 @@
                       "type": "Int",
                       "location": "scalar",
                       "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "PostDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
                     }
                   ]
                 }
@@ -13500,7 +13474,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryDistinctFieldEnum",
+                      "type": "CategoryScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -13595,7 +13569,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryDistinctFieldEnum",
+                      "type": "CategoryScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -13681,19 +13655,6 @@
                       "type": "Int",
                       "location": "scalar",
                       "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "CategoryDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
                     }
                   ]
                 }
@@ -13811,7 +13772,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientDistinctFieldEnum",
+                      "type": "PatientScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -13906,7 +13867,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientDistinctFieldEnum",
+                      "type": "PatientScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -13992,19 +13953,6 @@
                       "type": "Int",
                       "location": "scalar",
                       "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "PatientDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
                     }
                   ]
                 }
@@ -14122,7 +14070,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieDistinctFieldEnum",
+                      "type": "MovieScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -14217,7 +14165,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieDistinctFieldEnum",
+                      "type": "MovieScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -14303,19 +14251,6 @@
                       "type": "Int",
                       "location": "scalar",
                       "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "MovieDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
                     }
                   ]
                 }
@@ -14433,7 +14368,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorDistinctFieldEnum",
+                      "type": "DirectorScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -14528,7 +14463,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorDistinctFieldEnum",
+                      "type": "DirectorScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -14614,19 +14549,6 @@
                       "type": "Int",
                       "location": "scalar",
                       "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "DirectorDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
                     }
                   ]
                 }
@@ -14744,7 +14666,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemDistinctFieldEnum",
+                      "type": "ProblemScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -14839,7 +14761,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemDistinctFieldEnum",
+                      "type": "ProblemScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -14925,19 +14847,6 @@
                       "type": "Int",
                       "location": "scalar",
                       "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
                     }
                   ]
                 }
@@ -15055,7 +14964,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorDistinctFieldEnum",
+                      "type": "CreatorScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -15150,7 +15059,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorDistinctFieldEnum",
+                      "type": "CreatorScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -15236,19 +15145,6 @@
                       "type": "Int",
                       "location": "scalar",
                       "isList": false
-                    }
-                  ]
-                },
-                {
-                  "name": "distinct",
-                  "isRequired": false,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "CreatorDistinctFieldEnum",
-                      "namespace": "prisma",
-                      "location": "enumTypes",
-                      "isList": true
                     }
                   ]
                 }
@@ -17037,11 +16933,12 @@
             {
               "name": "count",
               "args": [],
-              "isRequired": true,
-              "isNullable": false,
+              "isRequired": false,
+              "isNullable": true,
               "outputType": {
-                "type": "Int",
-                "location": "scalar",
+                "type": "UserCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             },
@@ -17101,11 +16998,12 @@
             {
               "name": "count",
               "args": [],
-              "isRequired": true,
-              "isNullable": false,
+              "isRequired": false,
+              "isNullable": true,
               "outputType": {
-                "type": "Int",
-                "location": "scalar",
+                "type": "PostCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             },
@@ -17165,11 +17063,12 @@
             {
               "name": "count",
               "args": [],
-              "isRequired": true,
-              "isNullable": false,
+              "isRequired": false,
+              "isNullable": true,
               "outputType": {
-                "type": "Int",
-                "location": "scalar",
+                "type": "CategoryCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             },
@@ -17229,11 +17128,36 @@
             {
               "name": "count",
               "args": [],
-              "isRequired": true,
-              "isNullable": false,
+              "isRequired": false,
+              "isNullable": true,
               "outputType": {
-                "type": "Int",
-                "location": "scalar",
+                "type": "PatientCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "min",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "PatientMinAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "max",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "PatientMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             }
@@ -17245,11 +17169,36 @@
             {
               "name": "count",
               "args": [],
-              "isRequired": true,
-              "isNullable": false,
+              "isRequired": false,
+              "isNullable": true,
               "outputType": {
-                "type": "Int",
-                "location": "scalar",
+                "type": "MovieCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "min",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "MovieMinAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "max",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "MovieMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             }
@@ -17261,11 +17210,36 @@
             {
               "name": "count",
               "args": [],
-              "isRequired": true,
-              "isNullable": false,
+              "isRequired": false,
+              "isNullable": true,
               "outputType": {
-                "type": "Int",
-                "location": "scalar",
+                "type": "DirectorCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "min",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "DirectorMinAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "max",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "DirectorMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             }
@@ -17277,11 +17251,12 @@
             {
               "name": "count",
               "args": [],
-              "isRequired": true,
-              "isNullable": false,
+              "isRequired": false,
+              "isNullable": true,
               "outputType": {
-                "type": "Int",
-                "location": "scalar",
+                "type": "ProblemCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             },
@@ -17341,11 +17316,12 @@
             {
               "name": "count",
               "args": [],
-              "isRequired": true,
-              "isNullable": false,
+              "isRequired": false,
+              "isNullable": true,
               "outputType": {
-                "type": "Int",
-                "location": "scalar",
+                "type": "CreatorCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             },
@@ -17404,6 +17380,99 @@
           "fields": [
             {
               "name": "count",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "UserCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "email",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "age",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "balance",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "amount",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "role",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
               "args": [],
               "isRequired": true,
               "isNullable": false,
@@ -17528,6 +17597,28 @@
               }
             },
             {
+              "name": "email",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "age",
               "args": [],
               "isRequired": true,
@@ -17557,6 +17648,18 @@
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "role",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Role",
+                "namespace": "model",
+                "location": "enumTypes",
                 "isList": false
               }
             }
@@ -17577,6 +17680,28 @@
               }
             },
             {
+              "name": "email",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "age",
               "args": [],
               "isRequired": true,
@@ -17605,6 +17730,155 @@
               "isNullable": false,
               "outputType": {
                 "type": "Float",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "role",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Role",
+                "namespace": "model",
+                "location": "enumTypes",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "PostCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "uuid",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "createdAt",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "updatedAt",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "published",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "subtitle",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "content",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "authorId",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "editorId",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "kind",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "metadata",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
                 "location": "scalar",
                 "isList": false
               }
@@ -17669,6 +17943,83 @@
           "name": "PostMinAggregateOutputType",
           "fields": [
             {
+              "name": "uuid",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "createdAt",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "DateTime",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "updatedAt",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "DateTime",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "published",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Boolean",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "subtitle",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "content",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "authorId",
               "args": [],
               "isRequired": true,
@@ -17686,6 +18037,29 @@
               "isNullable": true,
               "outputType": {
                 "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "kind",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "PostKind",
+                "namespace": "model",
+                "location": "enumTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "metadata",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Json",
                 "location": "scalar",
                 "isList": false
               }
@@ -17696,6 +18070,83 @@
           "name": "PostMaxAggregateOutputType",
           "fields": [
             {
+              "name": "uuid",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "createdAt",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "DateTime",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "updatedAt",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "DateTime",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "published",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Boolean",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "subtitle",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "content",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "authorId",
               "args": [],
               "isRequired": true,
@@ -17711,6 +18162,78 @@
               "args": [],
               "isRequired": false,
               "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "kind",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "PostKind",
+                "namespace": "model",
+                "location": "enumTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "metadata",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Json",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CategoryCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "slug",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "number",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -17755,6 +18278,28 @@
           "name": "CategoryMinAggregateOutputType",
           "fields": [
             {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "slug",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "number",
               "args": [],
               "isRequired": true,
@@ -17771,7 +18316,420 @@
           "name": "CategoryMaxAggregateOutputType",
           "fields": [
             {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "slug",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "number",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "PatientCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "email",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "PatientMinAggregateOutputType",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "email",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "PatientMaxAggregateOutputType",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "email",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "MovieCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "directorFirstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "directorLastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "MovieMinAggregateOutputType",
+          "fields": [
+            {
+              "name": "directorFirstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "directorLastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "MovieMaxAggregateOutputType",
+          "fields": [
+            {
+              "name": "directorFirstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "directorLastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "DirectorCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "DirectorMinAggregateOutputType",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "DirectorMaxAggregateOutputType",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "ProblemCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "problemText",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "creatorId",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
               "args": [],
               "isRequired": true,
               "isNullable": false,
@@ -17852,6 +18810,17 @@
               }
             },
             {
+              "name": "problemText",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "creatorId",
               "args": [],
               "isRequired": false,
@@ -17879,10 +18848,59 @@
               }
             },
             {
+              "name": "problemText",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "creatorId",
               "args": [],
               "isRequired": false,
               "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreatorCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
+              "args": [],
+              "isRequired": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -17936,6 +18954,17 @@
                 "location": "scalar",
                 "isList": false
               }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
             }
           ]
         },
@@ -17949,6 +18978,17 @@
               "isNullable": false,
               "outputType": {
                 "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isRequired": false,
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
                 "location": "scalar",
                 "isList": false
               }
@@ -18104,7 +19144,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PostDistinctFieldEnum",
+                      "type": "PostScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -18211,7 +19251,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PostDistinctFieldEnum",
+                      "type": "PostScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -18610,7 +19650,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieDistinctFieldEnum",
+                      "type": "MovieScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -18732,7 +19772,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorDistinctFieldEnum",
+                      "type": "CreatorScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -18877,7 +19917,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemDistinctFieldEnum",
+                      "type": "ProblemScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -18972,7 +20012,7 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemDistinctFieldEnum",
+                      "type": "ProblemScalarFieldEnum",
                       "namespace": "prisma",
                       "location": "enumTypes",
                       "isList": true
@@ -18994,25 +20034,9 @@
       ]
     },
     "enumTypes": {
-      "model": [
-        {
-          "name": "Role",
-          "values": [
-            "USER",
-            "ADMIN"
-          ]
-        },
-        {
-          "name": "PostKind",
-          "values": [
-            "BLOG",
-            "ADVERT"
-          ]
-        }
-      ],
       "prisma": [
         {
-          "name": "UserDistinctFieldEnum",
+          "name": "UserScalarFieldEnum",
           "values": [
             "id",
             "email",
@@ -19024,7 +20048,7 @@
           ]
         },
         {
-          "name": "PostDistinctFieldEnum",
+          "name": "PostScalarFieldEnum",
           "values": [
             "uuid",
             "createdAt",
@@ -19040,7 +20064,7 @@
           ]
         },
         {
-          "name": "CategoryDistinctFieldEnum",
+          "name": "CategoryScalarFieldEnum",
           "values": [
             "name",
             "slug",
@@ -19048,7 +20072,7 @@
           ]
         },
         {
-          "name": "PatientDistinctFieldEnum",
+          "name": "PatientScalarFieldEnum",
           "values": [
             "firstName",
             "lastName",
@@ -19056,7 +20080,7 @@
           ]
         },
         {
-          "name": "MovieDistinctFieldEnum",
+          "name": "MovieScalarFieldEnum",
           "values": [
             "directorFirstName",
             "directorLastName",
@@ -19064,14 +20088,14 @@
           ]
         },
         {
-          "name": "DirectorDistinctFieldEnum",
+          "name": "DirectorScalarFieldEnum",
           "values": [
             "firstName",
             "lastName"
           ]
         },
         {
-          "name": "ProblemDistinctFieldEnum",
+          "name": "ProblemScalarFieldEnum",
           "values": [
             "id",
             "problemText",
@@ -19079,7 +20103,7 @@
           ]
         },
         {
-          "name": "CreatorDistinctFieldEnum",
+          "name": "CreatorScalarFieldEnum",
           "values": [
             "id",
             "name"
@@ -19097,6 +20121,22 @@
           "values": [
             "default",
             "insensitive"
+          ]
+        }
+      ],
+      "model": [
+        {
+          "name": "Role",
+          "values": [
+            "USER",
+            "ADMIN"
+          ]
+        },
+        {
+          "name": "PostKind",
+          "values": [
+            "BLOG",
+            "ADVERT"
           ]
         }
       ]

@@ -5,7 +5,7 @@
 
 type AggregateClient {
   avg: ClientAvgAggregate
-  count: Int!
+  count: Int
   max: ClientMaxAggregate
   min: ClientMinAggregate
   sum: ClientSumAggregate
@@ -13,27 +13,33 @@ type AggregateClient {
 
 type AggregateCreator {
   avg: CreatorAvgAggregate
-  count: Int!
+  count: Int
   max: CreatorMaxAggregate
   min: CreatorMinAggregate
   sum: CreatorSumAggregate
 }
 
 type AggregateDirector {
-  count: Int!
+  count: Int
+  max: DirectorMaxAggregate
+  min: DirectorMinAggregate
 }
 
 type AggregateMovie {
-  count: Int!
+  count: Int
+  max: MovieMaxAggregate
+  min: MovieMinAggregate
 }
 
 type AggregatePatient {
-  count: Int!
+  count: Int
+  max: PatientMaxAggregate
+  min: PatientMinAggregate
 }
 
 type AggregateProblem {
   avg: ProblemAvgAggregate
-  count: Int!
+  count: Int
   max: ProblemMaxAggregate
   min: ProblemMinAggregate
   sum: ProblemSumAggregate
@@ -58,16 +64,16 @@ type Category {
   slug: String!
 }
 
-enum CategoryDistinctFieldEnum {
-  name
-  number
-  slug
-}
-
 input CategoryOrderByInput {
   name: SortOrder
   number: SortOrder
   slug: SortOrder
+}
+
+enum CategoryScalarFieldEnum {
+  name
+  number
+  slug
 }
 
 input CategoryWhereInput {
@@ -88,7 +94,7 @@ type Client {
   accountBalance: Float!
   age: Int!
   amount: Float!
-  clientPosts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]
+  clientPosts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]
   email: String!
 
   """renamed field doc"""
@@ -160,28 +166,24 @@ input ClientCreateWithoutPostsInput {
   role: Role!
 }
 
-enum ClientDistinctFieldEnum {
-  accountBalance
-  age
-  amount
-  email
-  firstName
-  id
-  role
-}
-
 type ClientMaxAggregate {
   age: Int!
   amount: Float!
   balance: Float!
+  email: String
   id: Int!
+  name: String
+  role: Role
 }
 
 type ClientMinAggregate {
   age: Int!
   amount: Float!
   balance: Float!
+  email: String
   id: Int!
+  name: String
+  role: Role
 }
 
 input ClientOrderByInput {
@@ -197,6 +199,16 @@ input ClientOrderByInput {
 input ClientRelationFilter {
   is: ClientWhereInput
   isNot: ClientWhereInput
+}
+
+enum ClientScalarFieldEnum {
+  accountBalance
+  age
+  amount
+  email
+  firstName
+  id
+  role
 }
 
 type ClientSumAggregate {
@@ -296,9 +308,9 @@ input ClientWhereUniqueInput {
 
 type Creator {
   id: Int!
-  likes(cursor: ProblemWhereUniqueInput, distinct: [ProblemDistinctFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]
+  likes(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]
   name: String!
-  problems(cursor: ProblemWhereUniqueInput, distinct: [ProblemDistinctFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]
+  problems(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]
 }
 
 type CreatorAvgAggregate {
@@ -343,11 +355,6 @@ input CreatorCreateWithoutProblemsInput {
   name: String!
 }
 
-enum CreatorDistinctFieldEnum {
-  id
-  name
-}
-
 input CreatorListRelationFilter {
   every: CreatorWhereInput
   none: CreatorWhereInput
@@ -356,10 +363,12 @@ input CreatorListRelationFilter {
 
 type CreatorMaxAggregate {
   id: Int!
+  name: String
 }
 
 type CreatorMinAggregate {
   id: Int!
+  name: String
 }
 
 input CreatorOrderByInput {
@@ -370,6 +379,11 @@ input CreatorOrderByInput {
 input CreatorRelationFilter {
   is: CreatorWhereInput
   isNot: CreatorWhereInput
+}
+
+enum CreatorScalarFieldEnum {
+  id
+  name
 }
 
 input CreatorScalarWhereInput {
@@ -485,7 +499,7 @@ input DateTimeFilter {
 type Director {
   firstName: String!
   lastName: String!
-  movies(cursor: MovieWhereUniqueInput, distinct: [MovieDistinctFieldEnum!], orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]
+  movies(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]
 }
 
 input DirectorCreateInput {
@@ -510,15 +524,20 @@ input DirectorCreateWithoutMoviesInput {
   lastName: String!
 }
 
-enum DirectorDistinctFieldEnum {
-  firstName
-  lastName
-}
-
 input DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
   directorFirstName: String!
   directorLastName: String!
   title: String!
+}
+
+type DirectorMaxAggregate {
+  firstName: String
+  lastName: String
+}
+
+type DirectorMinAggregate {
+  firstName: String
+  lastName: String
 }
 
 input DirectorOrderByInput {
@@ -529,6 +548,11 @@ input DirectorOrderByInput {
 input DirectorRelationFilter {
   is: DirectorWhereInput
   isNot: DirectorWhereInput
+}
+
+enum DirectorScalarFieldEnum {
+  firstName
+  lastName
 }
 
 input DirectorUpdateInput {
@@ -682,22 +706,34 @@ input MovieCreateWithoutDirectorInput {
   title: String!
 }
 
-enum MovieDistinctFieldEnum {
-  directorFirstName
-  directorLastName
-  title
-}
-
 input MovieListRelationFilter {
   every: MovieWhereInput
   none: MovieWhereInput
   some: MovieWhereInput
 }
 
+type MovieMaxAggregate {
+  directorFirstName: String
+  directorLastName: String
+  title: String
+}
+
+type MovieMinAggregate {
+  directorFirstName: String
+  directorLastName: String
+  title: String
+}
+
 input MovieOrderByInput {
   directorFirstName: SortOrder
   directorLastName: SortOrder
   title: SortOrder
+}
+
+enum MovieScalarFieldEnum {
+  directorFirstName
+  directorLastName
+  title
 }
 
 input MovieScalarWhereInput {
@@ -918,16 +954,28 @@ input PatientCreateInput {
   lastName: String!
 }
 
-enum PatientDistinctFieldEnum {
-  email
-  firstName
-  lastName
+type PatientMaxAggregate {
+  email: String
+  firstName: String
+  lastName: String
+}
+
+type PatientMinAggregate {
+  email: String
+  firstName: String
+  lastName: String
 }
 
 input PatientOrderByInput {
   email: SortOrder
   firstName: SortOrder
   lastName: SortOrder
+}
+
+enum PatientScalarFieldEnum {
+  email
+  firstName
+  lastName
 }
 
 input PatientUpdateInput {
@@ -1030,20 +1078,6 @@ input PostCreateWithoutEditorInput {
   uuid: String
 }
 
-enum PostDistinctFieldEnum {
-  authorId
-  content
-  createdAt
-  editorId
-  kind
-  metadata
-  published
-  subtitle
-  title
-  updatedAt
-  uuid
-}
-
 enum PostKind {
   ADVERT
   BLOG
@@ -1067,6 +1101,20 @@ input PostOrderByInput {
   title: SortOrder
   updatedAt: SortOrder
   uuid: SortOrder
+}
+
+enum PostScalarFieldEnum {
+  authorId
+  content
+  createdAt
+  editorId
+  kind
+  metadata
+  published
+  subtitle
+  title
+  updatedAt
+  uuid
 }
 
 input PostScalarWhereInput {
@@ -1209,7 +1257,7 @@ type Problem {
   creator: Creator
   creatorId: Int
   id: Int!
-  likedBy(cursor: CreatorWhereUniqueInput, distinct: [CreatorDistinctFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): [Creator!]
+  likedBy(cursor: CreatorWhereUniqueInput, distinct: [CreatorScalarFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): [Creator!]
   problemText: String!
 }
 
@@ -1256,12 +1304,6 @@ input ProblemCreateWithoutLikedByInput {
   problemText: String!
 }
 
-enum ProblemDistinctFieldEnum {
-  creatorId
-  id
-  problemText
-}
-
 input ProblemListRelationFilter {
   every: ProblemWhereInput
   none: ProblemWhereInput
@@ -1271,17 +1313,25 @@ input ProblemListRelationFilter {
 type ProblemMaxAggregate {
   creatorId: Int
   id: Int!
+  problemText: String
 }
 
 type ProblemMinAggregate {
   creatorId: Int
   id: Int!
+  problemText: String
 }
 
 input ProblemOrderByInput {
   creatorId: SortOrder
   id: SortOrder
   problemText: SortOrder
+}
+
+enum ProblemScalarFieldEnum {
+  creatorId
+  id
+  problemText
 }
 
 input ProblemScalarWhereInput {
@@ -1392,36 +1442,36 @@ input ProblemWhereUniqueInput {
 }
 
 type Query {
-  aggregateClient(cursor: ClientWhereUniqueInput, distinct: [ClientDistinctFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): AggregateClient!
-  aggregateCreator(cursor: CreatorWhereUniqueInput, distinct: [CreatorDistinctFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): AggregateCreator!
-  aggregateDirector(cursor: DirectorWhereUniqueInput, distinct: [DirectorDistinctFieldEnum!], orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): AggregateDirector!
-  aggregateMovie(cursor: MovieWhereUniqueInput, distinct: [MovieDistinctFieldEnum!], orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): AggregateMovie!
-  aggregatePatient(cursor: PatientWhereUniqueInput, distinct: [PatientDistinctFieldEnum!], orderBy: [PatientOrderByInput!], skip: Int, take: Int, where: PatientWhereInput): AggregatePatient!
-  aggregateProblem(cursor: ProblemWhereUniqueInput, distinct: [ProblemDistinctFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): AggregateProblem!
+  aggregateClient(cursor: ClientWhereUniqueInput, orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): AggregateClient!
+  aggregateCreator(cursor: CreatorWhereUniqueInput, orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): AggregateCreator!
+  aggregateDirector(cursor: DirectorWhereUniqueInput, orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): AggregateDirector!
+  aggregateMovie(cursor: MovieWhereUniqueInput, orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): AggregateMovie!
+  aggregatePatient(cursor: PatientWhereUniqueInput, orderBy: [PatientOrderByInput!], skip: Int, take: Int, where: PatientWhereInput): AggregatePatient!
+  aggregateProblem(cursor: ProblemWhereUniqueInput, orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): AggregateProblem!
   allClients: [Client!]!
   allPosts: [Post!]!
-  categories(cursor: CategoryWhereUniqueInput, distinct: [CategoryDistinctFieldEnum!], orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): [Category!]!
+  categories(cursor: CategoryWhereUniqueInput, distinct: [CategoryScalarFieldEnum!], orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): [Category!]!
   client(where: ClientWhereUniqueInput!): Client
-  clients(cursor: ClientWhereUniqueInput, distinct: [ClientDistinctFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): [Client!]!
+  clients(cursor: ClientWhereUniqueInput, distinct: [ClientScalarFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): [Client!]!
   creator(where: CreatorWhereUniqueInput!): Creator
-  creators(cursor: CreatorWhereUniqueInput, distinct: [CreatorDistinctFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): [Creator!]!
-  customFindClientsWithArgs(cursor: ClientWhereUniqueInput, distinct: [ClientDistinctFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): [Client!]!
+  creators(cursor: CreatorWhereUniqueInput, distinct: [CreatorScalarFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): [Creator!]!
+  customFindClientsWithArgs(cursor: ClientWhereUniqueInput, distinct: [ClientScalarFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): [Client!]!
   director(where: DirectorWhereUniqueInput!): Director
-  directors(cursor: DirectorWhereUniqueInput, distinct: [DirectorDistinctFieldEnum!], orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): [Director!]!
-  findFirstClient(cursor: ClientWhereUniqueInput, distinct: [ClientDistinctFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): Client
-  findFirstCreator(cursor: CreatorWhereUniqueInput, distinct: [CreatorDistinctFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): Creator
-  findFirstDirector(cursor: DirectorWhereUniqueInput, distinct: [DirectorDistinctFieldEnum!], orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): Director
-  findFirstMovie(cursor: MovieWhereUniqueInput, distinct: [MovieDistinctFieldEnum!], orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): Movie
-  findFirstPatient(cursor: PatientWhereUniqueInput, distinct: [PatientDistinctFieldEnum!], orderBy: [PatientOrderByInput!], skip: Int, take: Int, where: PatientWhereInput): Patient
-  findFirstProblem(cursor: ProblemWhereUniqueInput, distinct: [ProblemDistinctFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): Problem
+  directors(cursor: DirectorWhereUniqueInput, distinct: [DirectorScalarFieldEnum!], orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): [Director!]!
+  findFirstClient(cursor: ClientWhereUniqueInput, distinct: [ClientScalarFieldEnum!], orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): Client
+  findFirstCreator(cursor: CreatorWhereUniqueInput, distinct: [CreatorScalarFieldEnum!], orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): Creator
+  findFirstDirector(cursor: DirectorWhereUniqueInput, distinct: [DirectorScalarFieldEnum!], orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): Director
+  findFirstMovie(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): Movie
+  findFirstPatient(cursor: PatientWhereUniqueInput, distinct: [PatientScalarFieldEnum!], orderBy: [PatientOrderByInput!], skip: Int, take: Int, where: PatientWhereInput): Patient
+  findFirstProblem(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): Problem
   movie(where: MovieWhereUniqueInput!): Movie
-  movies(cursor: MovieWhereUniqueInput, distinct: [MovieDistinctFieldEnum!], orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]!
+  movies(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]!
   patient(where: PatientWhereUniqueInput!): Patient
-  patients(cursor: PatientWhereUniqueInput, distinct: [PatientDistinctFieldEnum!], orderBy: [PatientOrderByInput!], skip: Int, take: Int, where: PatientWhereInput): [Patient!]!
+  patients(cursor: PatientWhereUniqueInput, distinct: [PatientScalarFieldEnum!], orderBy: [PatientOrderByInput!], skip: Int, take: Int, where: PatientWhereInput): [Patient!]!
   post(where: PostWhereUniqueInput!): Post
-  posts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   problem(where: ProblemWhereUniqueInput!): Problem
-  problems(cursor: ProblemWhereUniqueInput, distinct: [ProblemDistinctFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]!
+  problems(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]!
 }
 
 enum QueryMode {

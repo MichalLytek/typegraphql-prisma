@@ -3,7 +3,6 @@ import GraphQLJSON from "graphql-type-json";
 import { CreatorOrderByInput } from "../../../inputs/CreatorOrderByInput";
 import { CreatorWhereInput } from "../../../inputs/CreatorWhereInput";
 import { CreatorWhereUniqueInput } from "../../../inputs/CreatorWhereUniqueInput";
-import { CreatorDistinctFieldEnum } from "../../../../enums/CreatorDistinctFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class AggregateCreatorArgs {
@@ -21,7 +20,4 @@ export class AggregateCreatorArgs {
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
-
-  @TypeGraphQL.Field(_type => [CreatorDistinctFieldEnum], { nullable: true })
-  distinct?: Array<"id" | "name"> | undefined;
 }

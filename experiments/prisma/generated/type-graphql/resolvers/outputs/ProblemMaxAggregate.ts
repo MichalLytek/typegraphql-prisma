@@ -14,6 +14,12 @@ export class ProblemMaxAggregate {
   })
   id!: number;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  problemText!: string | null;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined

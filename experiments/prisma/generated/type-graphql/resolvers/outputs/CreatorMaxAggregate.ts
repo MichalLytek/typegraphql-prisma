@@ -13,4 +13,10 @@ export class CreatorMaxAggregate {
     description: undefined
   })
   id!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  name!: string | null;
 }

@@ -16,10 +16,10 @@ import { ExampleSumAggregate } from \\"../outputs/ExampleSumAggregate\\";
 })
 export class AggregateExample {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  count!: number;
+  count!: number | null;
 
   @TypeGraphQL.Field(_type => ExampleAvgAggregate, {
     nullable: true,
@@ -91,11 +91,29 @@ export class ExampleMaxAggregate {
   })
   intIdField!: number;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  stringField!: string | null;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: false,
     description: undefined
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField!: boolean | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true,
+    description: undefined
+  })
+  dateField!: Date | null;
 }
 "
 `;
@@ -117,11 +135,29 @@ export class ExampleMinAggregate {
   })
   intIdField!: number;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  stringField!: string | null;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: false,
     description: undefined
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField!: boolean | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true,
+    description: undefined
+  })
+  dateField!: Date | null;
 }
 "
 `;
@@ -156,6 +192,7 @@ exports[`outputs should properly generate aggregate classes for model with lower
 "export { AggregateExample } from \\"./AggregateExample\\";
 export { BatchPayload } from \\"./BatchPayload\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
+export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
 export { ExampleMaxAggregate } from \\"./ExampleMaxAggregate\\";
 export { ExampleMinAggregate } from \\"./ExampleMinAggregate\\";
 export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
@@ -178,10 +215,10 @@ import { ExampleSumAggregate } from \\"../outputs/ExampleSumAggregate\\";
 })
 export class AggregateExample {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  count!: number;
+  count!: number | null;
 
   @TypeGraphQL.Field(_type => ExampleAvgAggregate, {
     nullable: true,
@@ -253,11 +290,29 @@ export class ExampleMaxAggregate {
   })
   intIdField!: number;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  stringField!: string | null;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: false,
     description: undefined
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField!: boolean | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true,
+    description: undefined
+  })
+  dateField!: Date | null;
 }
 "
 `;
@@ -279,11 +334,29 @@ export class ExampleMinAggregate {
   })
   intIdField!: number;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  stringField!: string | null;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: false,
     description: undefined
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField!: boolean | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true,
+    description: undefined
+  })
+  dateField!: Date | null;
 }
 "
 `;
@@ -318,6 +391,7 @@ exports[`outputs should properly generate aggregate classes for renamed model: o
 "export { AggregateExample } from \\"./AggregateExample\\";
 export { BatchPayload } from \\"./BatchPayload\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
+export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
 export { ExampleMaxAggregate } from \\"./ExampleMaxAggregate\\";
 export { ExampleMinAggregate } from \\"./ExampleMinAggregate\\";
 export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
@@ -340,10 +414,10 @@ import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
 })
 export class AggregateSample {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  count!: number;
+  count!: number | null;
 
   @TypeGraphQL.Field(_type => SampleAvgAggregate, {
     nullable: true,
@@ -434,10 +508,10 @@ import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
 })
 export class AggregateSample {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  count!: number;
+  count!: number | null;
 
   @TypeGraphQL.Field(_type => SampleAvgAggregate, {
     nullable: true,
@@ -529,11 +603,29 @@ export class SampleMaxAggregate {
   })
   intIdField!: number;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  stringField!: string | null;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: false,
     description: undefined
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField!: boolean | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true,
+    description: undefined
+  })
+  dateField!: Date | null;
 }
 "
 `;
@@ -555,11 +647,29 @@ export class SampleMinAggregate {
   })
   intIdField!: number;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  stringField!: string | null;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: false,
     description: undefined
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField!: boolean | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true,
+    description: undefined
+  })
+  dateField!: Date | null;
 }
 "
 `;
@@ -594,6 +704,7 @@ exports[`outputs should properly generate output type classes: outputs index 1`]
 "export { AggregateSample } from \\"./AggregateSample\\";
 export { BatchPayload } from \\"./BatchPayload\\";
 export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";
+export { SampleCountAggregate } from \\"./SampleCountAggregate\\";
 export { SampleMaxAggregate } from \\"./SampleMaxAggregate\\";
 export { SampleMinAggregate } from \\"./SampleMinAggregate\\";
 export { SampleSumAggregate } from \\"./SampleSumAggregate\\";

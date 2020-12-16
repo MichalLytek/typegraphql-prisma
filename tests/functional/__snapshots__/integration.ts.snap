@@ -8,7 +8,7 @@ exports[`generator integration should be able to use generate TypeGraphQL classe
 
 type AggregatePost {
   avg: PostAvgAggregate
-  count: Int!
+  count: Int
   max: PostMaxAggregate
   min: PostMinAggregate
   sum: PostSumAggregate
@@ -16,7 +16,7 @@ type AggregatePost {
 
 type AggregateUser {
   avg: UserAvgAggregate
-  count: Int!
+  count: Int
   max: UserMaxAggregate
   min: UserMinAggregate
   sum: UserSumAggregate
@@ -155,13 +155,6 @@ input PostCreateWithoutAuthorInput {
   uuid: String
 }
 
-enum PostDistinctFieldEnum {
-  authorId
-  color
-  content
-  uuid
-}
-
 input PostListRelationFilter {
   every: PostWhereInput
   none: PostWhereInput
@@ -170,10 +163,16 @@ input PostListRelationFilter {
 
 type PostMaxAggregate {
   authorId: Int!
+  color: Color
+  content: String
+  uuid: String
 }
 
 type PostMinAggregate {
   authorId: Int!
+  color: Color
+  content: String
+  uuid: String
 }
 
 input PostOrderByInput {
@@ -181,6 +180,13 @@ input PostOrderByInput {
   color: SortOrder
   content: SortOrder
   uuid: SortOrder
+}
+
+enum PostScalarFieldEnum {
+  authorId
+  color
+  content
+  uuid
 }
 
 input PostScalarWhereInput {
@@ -261,14 +267,14 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  aggregatePost(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
-  aggregateUser(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
-  findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): Post
-  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
+  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
+  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
+  findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): Post
+  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
   post(where: PostWhereUniqueInput!): Post
-  posts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   user(where: UserWhereUniqueInput!): User
-  users(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
 
 enum QueryMode {
@@ -318,7 +324,7 @@ input StringNullableFilter {
 type User {
   id: Int!
   name: String
-  posts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]
 }
 
 type UserAvgAggregate {
@@ -345,17 +351,14 @@ input UserCreateWithoutPostsInput {
   name: String
 }
 
-enum UserDistinctFieldEnum {
-  id
-  name
-}
-
 type UserMaxAggregate {
   id: Int!
+  name: String
 }
 
 type UserMinAggregate {
   id: Int!
+  name: String
 }
 
 input UserOrderByInput {
@@ -366,6 +369,11 @@ input UserOrderByInput {
 input UserRelationFilter {
   is: UserWhereInput
   isNot: UserWhereInput
+}
+
+enum UserScalarFieldEnum {
+  id
+  name
 }
 
 type UserSumAggregate {
@@ -419,10 +427,10 @@ exports[`generator integration should generates TypeGraphQL classes files to out
   enhance.ts
   [enums]
     Color.ts
-    PostDistinctFieldEnum.ts
+    PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
-    UserDistinctFieldEnum.ts
+    UserScalarFieldEnum.ts
     index.ts
   index.ts
   [models]
@@ -530,10 +538,12 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       AggregateUser.ts
       BatchPayload.ts
       PostAvgAggregate.ts
+      PostCountAggregate.ts
       PostMaxAggregate.ts
       PostMinAggregate.ts
       PostSumAggregate.ts
       UserAvgAggregate.ts
+      UserCountAggregate.ts
       UserMaxAggregate.ts
       UserMinAggregate.ts
       UserSumAggregate.ts

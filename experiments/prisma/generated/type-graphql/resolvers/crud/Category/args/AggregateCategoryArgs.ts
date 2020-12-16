@@ -3,7 +3,6 @@ import GraphQLJSON from "graphql-type-json";
 import { CategoryOrderByInput } from "../../../inputs/CategoryOrderByInput";
 import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInput";
-import { CategoryDistinctFieldEnum } from "../../../../enums/CategoryDistinctFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class AggregateCategoryArgs {
@@ -21,7 +20,4 @@ export class AggregateCategoryArgs {
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
-
-  @TypeGraphQL.Field(_type => [CategoryDistinctFieldEnum], { nullable: true })
-  distinct?: Array<"name" | "slug" | "number"> | undefined;
 }

@@ -13,10 +13,10 @@ import { PostSumAggregate } from "../outputs/PostSumAggregate";
 })
 export class AggregatePost {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  count!: number;
+  count!: number | null;
 
   @TypeGraphQL.Field(_type => PostAvgAggregate, {
     nullable: true,

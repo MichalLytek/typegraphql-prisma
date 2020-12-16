@@ -1,11 +1,11 @@
 import * as TypeGraphQL from "type-graphql";
 
-export enum MovieDistinctFieldEnum {
+export enum MovieScalarFieldEnum {
   directorFirstName = "directorFirstName",
   directorLastName = "directorLastName",
   title = "title"
 }
-TypeGraphQL.registerEnumType(MovieDistinctFieldEnum, {
-  name: "MovieDistinctFieldEnum",
+TypeGraphQL.registerEnumType(MovieScalarFieldEnum, {
+  name: "MovieScalarFieldEnum",
   description: undefined,
 });

@@ -13,10 +13,10 @@ import { ProblemSumAggregate } from "../outputs/ProblemSumAggregate";
 })
 export class AggregateProblem {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
+    nullable: true,
     description: undefined
   })
-  count!: number;
+  count!: number | null;
 
   @TypeGraphQL.Field(_type => ProblemAvgAggregate, {
     nullable: true,

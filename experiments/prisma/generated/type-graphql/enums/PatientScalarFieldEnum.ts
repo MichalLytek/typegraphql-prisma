@@ -1,11 +1,11 @@
 import * as TypeGraphQL from "type-graphql";
 
-export enum PatientDistinctFieldEnum {
+export enum PatientScalarFieldEnum {
   firstName = "firstName",
   lastName = "lastName",
   email = "email"
 }
-TypeGraphQL.registerEnumType(PatientDistinctFieldEnum, {
-  name: "PatientDistinctFieldEnum",
+TypeGraphQL.registerEnumType(PatientScalarFieldEnum, {
+  name: "PatientScalarFieldEnum",
   description: undefined,
 });

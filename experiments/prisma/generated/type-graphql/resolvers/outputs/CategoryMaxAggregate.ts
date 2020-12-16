@@ -8,6 +8,18 @@ import { JsonValue, InputJsonValue } from "../../../client";
   simpleResolvers: undefined,
 })
 export class CategoryMaxAggregate {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  name!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true,
+    description: undefined
+  })
+  slug!: string | null;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
     description: undefined

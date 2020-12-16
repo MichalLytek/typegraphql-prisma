@@ -3,7 +3,7 @@ import GraphQLJSON from "graphql-type-json";
 import { DirectorOrderByInput } from "../../../inputs/DirectorOrderByInput";
 import { DirectorWhereInput } from "../../../inputs/DirectorWhereInput";
 import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInput";
-import { DirectorDistinctFieldEnum } from "../../../../enums/DirectorDistinctFieldEnum";
+import { DirectorScalarFieldEnum } from "../../../../enums/DirectorScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class FindManyDirectorArgs {
@@ -22,6 +22,6 @@ export class FindManyDirectorArgs {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [DirectorDistinctFieldEnum], { nullable: true })
+  @TypeGraphQL.Field(_type => [DirectorScalarFieldEnum], { nullable: true })
   distinct?: Array<"firstName" | "lastName"> | undefined;
 }

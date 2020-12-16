@@ -3,7 +3,7 @@ import GraphQLJSON from "graphql-type-json";
 import { CreatorOrderByInput } from "../../../inputs/CreatorOrderByInput";
 import { CreatorWhereInput } from "../../../inputs/CreatorWhereInput";
 import { CreatorWhereUniqueInput } from "../../../inputs/CreatorWhereUniqueInput";
-import { CreatorDistinctFieldEnum } from "../../../../enums/CreatorDistinctFieldEnum";
+import { CreatorScalarFieldEnum } from "../../../../enums/CreatorScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class ProblemLikedByArgs {
@@ -22,6 +22,6 @@ export class ProblemLikedByArgs {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [CreatorDistinctFieldEnum], { nullable: true })
+  @TypeGraphQL.Field(_type => [CreatorScalarFieldEnum], { nullable: true })
   distinct?: Array<"id" | "name"> | undefined;
 }

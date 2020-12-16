@@ -156,13 +156,23 @@ function transformOutputType(dmmfDocument: DmmfDocument) {
       modelName,
       typeName,
       fields: outputType.fields.map<DMMF.OutputSchemaField>(field => {
-        const outputType: DMMF.SchemaField["outputType"] = {
-          ...field.outputType,
-          type: getMappedOutputTypeName(
-            dmmfDocument,
-            field.outputType.type as string,
-          ),
-        };
+        // TODO: remove this hardcoded fix when Prisma fully support rich count aggregate
+        const isCountAggregateOutputType = field.outputType.type
+          .toString()
+          .endsWith("CountAggregateOutputType");
+        const outputType: DMMF.TypeInfo = isCountAggregateOutputType
+          ? {
+              isList: false,
+              location: "scalar",
+              type: "Int",
+            }
+          : {
+              ...field.outputType,
+              type: getMappedOutputTypeName(
+                dmmfDocument,
+                field.outputType.type as string,
+              ),
+            };
         const fieldTSType = getFieldTSType(
           dmmfDocument,
           outputType,
@@ -224,6 +234,7 @@ function getMappedOutputTypeName(
   }
 
   const dedicatedTypeSuffix = [
+    "CountAggregateOutputType",
     "MinAggregateOutputType",
     "MaxAggregateOutputType",
     "AvgAggregateOutputType",
@@ -387,11 +398,11 @@ export function transformEnums(dmmfDocument: DmmfDocument) {
   return (
     enumDef: PrismaDMMF.DatamodelEnum | PrismaDMMF.SchemaEnum,
   ): DMMF.Enum => {
-    const modelName = enumDef.name.includes("DistinctFieldEnum")
-      ? enumDef.name.replace("DistinctFieldEnum", "")
+    const modelName = enumDef.name.includes("ScalarFieldEnum")
+      ? enumDef.name.replace("ScalarFieldEnum", "")
       : undefined;
     const typeName = modelName
-      ? `${dmmfDocument.getModelTypeName(modelName)}DistinctFieldEnum`
+      ? `${dmmfDocument.getModelTypeName(modelName)}ScalarFieldEnum`
       : enumDef.name;
     const enumValues = enumDef.values as Array<
       | PrismaDMMF.DatamodelEnum["values"][number]

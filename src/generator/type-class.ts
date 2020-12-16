@@ -48,6 +48,14 @@ export function generateOutputTypeClassFromType(
       .map(field => field.outputType.type),
     1,
   );
+  generateEnumsImports(
+    sourceFile,
+    type.fields
+      .map(field => field.outputType)
+      .filter(fieldType => fieldType.location === "enumTypes")
+      .map(fieldType => fieldType.type),
+    2,
+  );
 
   sourceFile.addClass({
     name: type.typeName,

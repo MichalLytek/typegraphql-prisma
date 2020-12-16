@@ -47,11 +47,11 @@ import * as Prisma from "./prisma/generated/client";
 import { ProblemCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Problem/ProblemCrudResolver";
 import { CreatorCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Creator/CreatorCrudResolver";
 
-const clientFieldsConfig: ModelFieldsConfig<"Client"> = {
-  email: [Authorized()],
+const problemTypeFieldsConfig: ModelFieldsConfig<"Problem"> = {
+  likedBy: [Authorized()],
 };
 const modelsEnhanceMap: ModelsEnhanceMap = {
-  Client: clientFieldsConfig,
+  Problem: problemTypeFieldsConfig,
 };
 applyModelsEnhanceMap(modelsEnhanceMap);
 

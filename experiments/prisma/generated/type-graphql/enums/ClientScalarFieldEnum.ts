@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 
-export enum ClientDistinctFieldEnum {
+export enum ClientScalarFieldEnum {
   id = "id",
   email = "email",
   firstName = "name",
@@ -9,7 +9,7 @@ export enum ClientDistinctFieldEnum {
   amount = "amount",
   role = "role"
 }
-TypeGraphQL.registerEnumType(ClientDistinctFieldEnum, {
-  name: "ClientDistinctFieldEnum",
+TypeGraphQL.registerEnumType(ClientScalarFieldEnum, {
+  name: "ClientScalarFieldEnum",
   description: undefined,
 });

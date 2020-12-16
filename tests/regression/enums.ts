@@ -93,7 +93,7 @@ describe("enums", () => {
     expect(enumsIndexTSFile).toMatchSnapshot("enums index");
   });
 
-  it("should properly generate model distinct field enum", async () => {
+  it("should properly generate model scalar field enum", async () => {
     const schema = /* prisma */ `
       datasource db {
         provider = "postgresql"
@@ -107,18 +107,18 @@ describe("enums", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const sampleModelDistinctFieldEnumTSFile = await readGeneratedFile(
-      "/enums/SampleModelDistinctFieldEnum.ts",
+    const sampleModelScalarFieldEnumTSFile = await readGeneratedFile(
+      "/enums/SampleModelScalarFieldEnum.ts",
     );
     const enumsIndexTSFile = await readGeneratedFile("/enums/index.ts");
 
-    expect(sampleModelDistinctFieldEnumTSFile).toMatchSnapshot(
-      "SampleModelDistinctFieldEnum",
+    expect(sampleModelScalarFieldEnumTSFile).toMatchSnapshot(
+      "SampleModelScalarFieldEnum",
     );
     expect(enumsIndexTSFile).toMatchSnapshot("enums index");
   });
 
-  it("should properly generate model distinct enum when model is renamed", async () => {
+  it("should properly generate model scalar enum when model is renamed", async () => {
     const schema = /* prisma */ `
       datasource db {
         provider = "postgresql"
@@ -133,18 +133,18 @@ describe("enums", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const exampleModelDistinctFieldEnumTSFile = await readGeneratedFile(
-      "/enums/ExampleModelDistinctFieldEnum.ts",
+    const exampleModelScalarFieldEnumTSFile = await readGeneratedFile(
+      "/enums/ExampleModelScalarFieldEnum.ts",
     );
     const enumsIndexTSFile = await readGeneratedFile("/enums/index.ts");
 
-    expect(exampleModelDistinctFieldEnumTSFile).toMatchSnapshot(
-      "ExampleModelDistinctFieldEnum",
+    expect(exampleModelScalarFieldEnumTSFile).toMatchSnapshot(
+      "ExampleModelScalarFieldEnum",
     );
     expect(enumsIndexTSFile).toMatchSnapshot("enums index");
   });
 
-  it("should properly generate model distinct enum when model field is renamed", async () => {
+  it("should properly generate model scalar enum when model field is renamed", async () => {
     const schema = /* prisma */ `
       datasource db {
         provider = "postgresql"
@@ -159,13 +159,13 @@ describe("enums", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const sampleModelDistinctFieldEnumTSFile = await readGeneratedFile(
-      "/enums/SampleModelDistinctFieldEnum.ts",
+    const sampleModelScalarFieldEnumTSFile = await readGeneratedFile(
+      "/enums/SampleModelScalarFieldEnum.ts",
     );
     const enumsIndexTSFile = await readGeneratedFile("/enums/index.ts");
 
-    expect(sampleModelDistinctFieldEnumTSFile).toMatchSnapshot(
-      "SampleModelDistinctFieldEnum",
+    expect(sampleModelScalarFieldEnumTSFile).toMatchSnapshot(
+      "SampleModelScalarFieldEnum",
     );
     expect(enumsIndexTSFile).toMatchSnapshot("enums index");
   });
