@@ -318,7 +318,7 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
 applyResolversEnhanceMap(resolversEnhanceMap);
 ```
 
-#### Additional decorators for Prisma schema model fields
+#### Additional decorators for Prisma schema classes and fields
 
 If you need to apply some decorators, like `@Authorized` or `@Extensions`, on the model `@ObjectType` and its fields, you can use similar pattern as for the resolver actions described above.
 
@@ -362,6 +362,27 @@ applyModelsEnhanceMap(modelsEnhanceMap);
 ```
 
 This way, you can apply some rules on single model or its fields, like `User.email` visible only for Admin.
+
+In case of other output types like `AggregateFooBar`, you can use the same pattern but this time using the `applyOutputTypeEnhanceMap` function and `OutputTypeConfig` or `OutputTypesEnhanceMap` types:
+
+```ts
+const aggregateClientConfig: OutputTypeConfig<"AggregateClient"> = {
+  fields: {
+    avg: [Extensions({ complexity: 10 })],
+  },
+};
+
+applyOutputTypeEnhanceMap({
+  // separate config
+  AggregateClient: aggregateClientConfig,
+  // or an inline one
+  ClientAvgAggregate: {
+    fields: {
+      age: [Authorized()],
+    },
+  },
+});
+```
 
 #### Adding fields to model type
 

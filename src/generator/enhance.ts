@@ -2,6 +2,7 @@ import { SourceFile, VariableDeclarationKind, Writers } from "ts-morph";
 import {
   crudResolversFolderName,
   modelsFolderName,
+  outputsFolderName,
   resolversFolderName,
 } from "./config";
 import { DMMF } from "./dmmf/types";
@@ -10,6 +11,11 @@ export function generateEnhanceMap(
   sourceFile: SourceFile,
   modelMappings: DMMF.ModelMapping[],
 ) {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: "type-graphql",
+    namedImports: ["ClassType"],
+  });
+
   sourceFile.addImportDeclaration({
     moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index`,
     namespaceImport: "crudResolvers",
@@ -23,6 +29,11 @@ export function generateEnhanceMap(
   sourceFile.addImportDeclaration({
     moduleSpecifier: `./${modelsFolderName}`,
     namespaceImport: "models",
+  });
+
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}`,
+    namespaceImport: "outputTypes",
   });
 
   sourceFile.addVariableStatement({
@@ -115,20 +126,58 @@ export function generateEnhanceMap(
   `);
 
   sourceFile.addStatements(/* ts */ `
+    type TypeConfig = {
+      class?: ClassDecorator[];
+      fields?: FieldsConfig;
+    };
+
+    type FieldsConfig<TTypeKeys extends string = string> = Partial<
+      Record<TTypeKeys, PropertyDecorator[]>
+    >;
+
+    export function applyTypeClassEnhanceConfig<
+      TEnhanceConfig extends TypeConfig,
+      TType extends object
+    >(
+      enhanceConfig: TEnhanceConfig,
+      typeClass: ClassType<TType>,
+      typePrototype: TType,
+    ) {
+      if (enhanceConfig.class) {
+        for (const decorator of enhanceConfig.class) {
+          decorator(typeClass);
+        }
+      }
+      if (enhanceConfig.fields) {
+        for (const modelFieldName of Object.keys(enhanceConfig.fields)) {
+          const decorators = enhanceConfig.fields[
+            modelFieldName as keyof typeof enhanceConfig.fields
+          ]!;
+
+          for (const decorator of decorators) {
+            decorator(typePrototype, modelFieldName);
+          }
+        }
+      }
+    }
+  `);
+
+  sourceFile.addStatements(/* ts */ `
     type ModelNames = keyof typeof models;
 
-    type ModelFieldNames<
-      TModel extends ModelNames
-    > = keyof typeof models[TModel]["prototype"];
+    type ModelFieldNames<TModel extends ModelNames> = Exclude<
+      keyof typeof models[TModel]["prototype"],
+      number | symbol
+    >;
 
-    export type ModelFieldsConfig<TModel extends ModelNames> = {
-      [TActionName in ModelFieldNames<TModel>]?: PropertyDecorator[];
-    };
+    export type ModelFieldsConfig<TModel extends ModelNames> = FieldsConfig<
+      ModelFieldNames<TModel>
+    >;
 
     export type ModelConfig<TModel extends ModelNames> = {
       class?: ClassDecorator[];
       fields?: ModelFieldsConfig<TModel>;
-    }
+    };
 
     export type ModelsEnhanceMap = {
       [TModel in ModelNames]?: ModelConfig<TModel>;
@@ -137,25 +186,44 @@ export function generateEnhanceMap(
     export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
       for (const modelsEnhanceMapKey of Object.keys(modelsEnhanceMap)) {
         const modelName = modelsEnhanceMapKey as keyof typeof modelsEnhanceMap;
-        const modelClass = models[modelName];
-        const modelTarget = models[modelName].prototype;
         const modelConfig = modelsEnhanceMap[modelName]!;
-        if (modelConfig.class) {
-          for (const decorator of modelConfig.class) {
-            decorator(modelClass);
-          }
-        }
-        if (modelConfig.fields) {
-          for (const modelFieldName of Object.keys(modelConfig.fields)) {
-            const decorators = modelConfig.fields[
-              modelFieldName as keyof typeof modelConfig.fields
-            ] as Array<PropertyDecorator>;
+        const modelClass = models[modelName];
+        const modelTarget = modelClass.prototype;
+        applyTypeClassEnhanceConfig(modelConfig, modelClass, modelTarget);
+      }
+    }
+  `);
 
-            for (const decorator of decorators) {
-              decorator(modelTarget, modelFieldName);
-            }
-          }
-        }
+  sourceFile.addStatements(/* ts */ `
+    type OutputTypesNames = keyof typeof outputTypes;
+
+    type OutputTypeFieldNames<TModel extends OutputTypesNames> = Exclude<
+      keyof typeof outputTypes[TModel]["prototype"],
+      number | symbol
+    >;
+
+    export type OutputTypeFieldsConfig<
+      TModel extends OutputTypesNames
+    > = FieldsConfig<OutputTypeFieldNames<TModel>>;
+
+    export type OutputTypeConfig<TModel extends OutputTypesNames> = {
+      class?: ClassDecorator[];
+      fields?: OutputTypeFieldsConfig<TModel>;
+    };
+
+    export type OutputTypeEnhanceMap = {
+      [TModel in OutputTypesNames]?: OutputTypeConfig<TModel>;
+    };
+
+    export function applyOutputTypeEnhanceMap(
+      outputTypeEnhanceMap: OutputTypeEnhanceMap,
+    ) {
+      for (const outputTypeEnhanceMapKey of Object.keys(outputTypeEnhanceMap)) {
+        const outputTypeName = outputTypeEnhanceMapKey as keyof typeof outputTypeEnhanceMap;
+        const typeConfig = outputTypeEnhanceMap[outputTypeName]!;
+        const typeClass = outputTypes[outputTypeName];
+        const typeTarget = typeClass.prototype;
+        applyTypeClassEnhanceConfig(typeConfig, typeClass, typeTarget);
       }
     }
   `);

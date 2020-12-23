@@ -42,6 +42,8 @@ import {
   ModelsEnhanceMap,
   applyModelsEnhanceMap,
   ModelConfig,
+  applyOutputTypeEnhanceMap,
+  OutputTypeConfig,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
@@ -63,6 +65,21 @@ const modelsEnhanceMap: ModelsEnhanceMap = {
   },
 };
 applyModelsEnhanceMap(modelsEnhanceMap);
+
+const aggregateClientConfig: OutputTypeConfig<"AggregateClient"> = {
+  fields: {
+    avg: [Extensions({ complexity: 10 })],
+  },
+};
+
+applyOutputTypeEnhanceMap({
+  AggregateClient: aggregateClientConfig,
+  ClientAvgAggregate: {
+    fields: {
+      age: [Authorized()],
+    },
+  },
+});
 
 const problemActionsConfig: ResolverActionsConfig<"Problem"> = {
   createProblem: [Authorized()],
