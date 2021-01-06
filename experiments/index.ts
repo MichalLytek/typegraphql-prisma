@@ -42,7 +42,7 @@ import {
   ModelsEnhanceMap,
   applyModelsEnhanceMap,
   ModelConfig,
-  applyOutputTypeEnhanceMap,
+  applyOutputTypesEnhanceMap,
   OutputTypeConfig,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
@@ -71,8 +71,7 @@ const aggregateClientConfig: OutputTypeConfig<"AggregateClient"> = {
     avg: [Extensions({ complexity: 10 })],
   },
 };
-
-applyOutputTypeEnhanceMap({
+applyOutputTypesEnhanceMap({
   AggregateClient: aggregateClientConfig,
   ClientAvgAggregate: {
     fields: {

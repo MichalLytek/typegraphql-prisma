@@ -164,16 +164,16 @@ export type OutputTypeConfig<TModel extends OutputTypesNames> = {
   fields?: OutputTypeFieldsConfig<TModel>;
 };
 
-export type OutputTypeEnhanceMap = {
+export type OutputTypesEnhanceMap = {
   [TModel in OutputTypesNames]?: OutputTypeConfig<TModel>;
 };
 
-export function applyOutputTypeEnhanceMap(
-  outputTypeEnhanceMap: OutputTypeEnhanceMap,
+export function applyOutputTypesEnhanceMap(
+  outputTypesEnhanceMap: OutputTypesEnhanceMap,
 ) {
-  for (const outputTypeEnhanceMapKey of Object.keys(outputTypeEnhanceMap)) {
-    const outputTypeName = outputTypeEnhanceMapKey as keyof typeof outputTypeEnhanceMap;
-    const typeConfig = outputTypeEnhanceMap[outputTypeName]!;
+  for (const outputTypeEnhanceMapKey of Object.keys(outputTypesEnhanceMap)) {
+    const outputTypeName = outputTypeEnhanceMapKey as keyof typeof outputTypesEnhanceMap;
+    const typeConfig = outputTypesEnhanceMap[outputTypeName]!;
     const typeClass = outputTypes[outputTypeName];
     const typeTarget = typeClass.prototype;
     applyTypeClassEnhanceConfig(typeConfig, typeClass, typeTarget);
