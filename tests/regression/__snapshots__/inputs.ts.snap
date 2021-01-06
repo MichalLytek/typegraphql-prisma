@@ -1694,6 +1694,31 @@ export { StringNullableFilter } from \\"./StringNullableFilter\\";
 "
 `;
 
+exports[`inputs should properly generate input type classes for model with composite unique index: DirectorFirstNameLastNameCompoundUniqueInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class DirectorFirstNameLastNameCompoundUniqueInput {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false,
+    description: undefined
+  })
+  firstName!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false,
+    description: undefined
+  })
+  lastName!: string;
+}
+"
+`;
+
 exports[`inputs should properly generate input type classes for model with composite unique index: DirectorOrderByInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
@@ -1788,43 +1813,18 @@ exports[`inputs should properly generate input type classes for model with compo
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
-import { FirstNameLastNameCompoundUniqueInput } from \\"../inputs/FirstNameLastNameCompoundUniqueInput\\";
+import { DirectorFirstNameLastNameCompoundUniqueInput } from \\"../inputs/DirectorFirstNameLastNameCompoundUniqueInput\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
   description: undefined,
 })
 export class DirectorWhereUniqueInput {
-  @TypeGraphQL.Field(_type => FirstNameLastNameCompoundUniqueInput, {
+  @TypeGraphQL.Field(_type => DirectorFirstNameLastNameCompoundUniqueInput, {
     nullable: true,
     description: undefined
   })
-  firstName_lastName?: FirstNameLastNameCompoundUniqueInput | undefined;
-}
-"
-`;
-
-exports[`inputs should properly generate input type classes for model with composite unique index: FirstNameLastNameCompoundUniqueInput 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
-
-@TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
-})
-export class FirstNameLastNameCompoundUniqueInput {
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
-  })
-  firstName!: string;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
-  })
-  lastName!: string;
+  firstName_lastName?: DirectorFirstNameLastNameCompoundUniqueInput | undefined;
 }
 "
 `;
@@ -1834,7 +1834,7 @@ exports[`inputs should properly generate input type classes for model with compo
 export { DirectorCreateOneWithoutMoviesInput } from \\"./DirectorCreateOneWithoutMoviesInput\\";
 export { DirectorCreateOrConnectWithoutmoviesInput } from \\"./DirectorCreateOrConnectWithoutmoviesInput\\";
 export { DirectorCreateWithoutMoviesInput } from \\"./DirectorCreateWithoutMoviesInput\\";
-export { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"./DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
+export { DirectorFirstNameLastNameCompoundUniqueInput } from \\"./DirectorFirstNameLastNameCompoundUniqueInput\\";
 export { DirectorOrderByInput } from \\"./DirectorOrderByInput\\";
 export { DirectorRelationFilter } from \\"./DirectorRelationFilter\\";
 export { DirectorUpdateInput } from \\"./DirectorUpdateInput\\";
@@ -1844,7 +1844,6 @@ export { DirectorUpdateWithoutMoviesInput } from \\"./DirectorUpdateWithoutMovie
 export { DirectorUpsertWithoutMoviesInput } from \\"./DirectorUpsertWithoutMoviesInput\\";
 export { DirectorWhereInput } from \\"./DirectorWhereInput\\";
 export { DirectorWhereUniqueInput } from \\"./DirectorWhereUniqueInput\\";
-export { FirstNameLastNameCompoundUniqueInput } from \\"./FirstNameLastNameCompoundUniqueInput\\";
 export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
 export { FloatFilter } from \\"./FloatFilter\\";
 export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
@@ -1853,6 +1852,7 @@ export { MovieCreateInput } from \\"./MovieCreateInput\\";
 export { MovieCreateManyWithoutDirectorInput } from \\"./MovieCreateManyWithoutDirectorInput\\";
 export { MovieCreateOrConnectWithoutdirectorInput } from \\"./MovieCreateOrConnectWithoutdirectorInput\\";
 export { MovieCreateWithoutDirectorInput } from \\"./MovieCreateWithoutDirectorInput\\";
+export { MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"./MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
 export { MovieListRelationFilter } from \\"./MovieListRelationFilter\\";
 export { MovieOrderByInput } from \\"./MovieOrderByInput\\";
 export { MovieScalarWhereInput } from \\"./MovieScalarWhereInput\\";
@@ -1873,7 +1873,7 @@ export { StringFilter } from \\"./StringFilter\\";
 "
 `;
 
-exports[`inputs should properly generate input type classes for model with id keys with relation: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput 1`] = `
+exports[`inputs should properly generate input type classes for model with id keys with relation: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
@@ -1882,7 +1882,7 @@ import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-m
   isAbstract: true,
   description: undefined,
 })
-export class DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
+export class MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: undefined
@@ -2067,18 +2067,18 @@ exports[`inputs should properly generate input type classes for model with id ke
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
-import { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"../inputs/DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
+import { MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"../inputs/MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
   description: undefined,
 })
 export class MovieWhereUniqueInput {
-  @TypeGraphQL.Field(_type => DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput, {
+  @TypeGraphQL.Field(_type => MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput, {
     nullable: true,
     description: undefined
   })
-  directorFirstName_directorLastName_title?: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput | undefined;
+  directorFirstName_directorLastName_title?: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput | undefined;
 }
 "
 `;
@@ -2088,7 +2088,7 @@ exports[`inputs should properly generate input type classes for model with id ke
 export { DirectorCreateOneWithoutMoviesInput } from \\"./DirectorCreateOneWithoutMoviesInput\\";
 export { DirectorCreateOrConnectWithoutmoviesInput } from \\"./DirectorCreateOrConnectWithoutmoviesInput\\";
 export { DirectorCreateWithoutMoviesInput } from \\"./DirectorCreateWithoutMoviesInput\\";
-export { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"./DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
+export { DirectorFirstNameLastNameCompoundUniqueInput } from \\"./DirectorFirstNameLastNameCompoundUniqueInput\\";
 export { DirectorOrderByInput } from \\"./DirectorOrderByInput\\";
 export { DirectorRelationFilter } from \\"./DirectorRelationFilter\\";
 export { DirectorUpdateInput } from \\"./DirectorUpdateInput\\";
@@ -2098,7 +2098,6 @@ export { DirectorUpdateWithoutMoviesInput } from \\"./DirectorUpdateWithoutMovie
 export { DirectorUpsertWithoutMoviesInput } from \\"./DirectorUpsertWithoutMoviesInput\\";
 export { DirectorWhereInput } from \\"./DirectorWhereInput\\";
 export { DirectorWhereUniqueInput } from \\"./DirectorWhereUniqueInput\\";
-export { FirstNameLastNameCompoundUniqueInput } from \\"./FirstNameLastNameCompoundUniqueInput\\";
 export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
 export { FloatFilter } from \\"./FloatFilter\\";
 export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
@@ -2107,6 +2106,7 @@ export { MovieCreateInput } from \\"./MovieCreateInput\\";
 export { MovieCreateManyWithoutDirectorInput } from \\"./MovieCreateManyWithoutDirectorInput\\";
 export { MovieCreateOrConnectWithoutdirectorInput } from \\"./MovieCreateOrConnectWithoutdirectorInput\\";
 export { MovieCreateWithoutDirectorInput } from \\"./MovieCreateWithoutDirectorInput\\";
+export { MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"./MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
 export { MovieListRelationFilter } from \\"./MovieListRelationFilter\\";
 export { MovieOrderByInput } from \\"./MovieOrderByInput\\";
 export { MovieScalarWhereInput } from \\"./MovieScalarWhereInput\\";

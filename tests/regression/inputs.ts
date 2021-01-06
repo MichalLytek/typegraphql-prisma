@@ -418,7 +418,7 @@ describe("inputs", () => {
       "/resolvers/inputs/DirectorOrderByInput.ts",
     );
     const directorFirstNameLastNameCompoundUniqueInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/FirstNameLastNameCompoundUniqueInput.ts",
+      "/resolvers/inputs/DirectorFirstNameLastNameCompoundUniqueInput.ts",
     );
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
@@ -428,7 +428,7 @@ describe("inputs", () => {
     );
     expect(directorOrderByInputTSFile).toMatchSnapshot("DirectorOrderByInput");
     expect(directorFirstNameLastNameCompoundUniqueInputTSFile).toMatchSnapshot(
-      "FirstNameLastNameCompoundUniqueInput",
+      "DirectorFirstNameLastNameCompoundUniqueInput",
     );
     expect(indexTSFile).toMatchSnapshot("index");
   });
@@ -473,8 +473,8 @@ describe("inputs", () => {
     const movieOrderByInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/MovieOrderByInput.ts",
     );
-    const directorFirstNameDirectorLastNameTitleCompoundUniqueInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput.ts",
+    const movieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput.ts",
     );
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
@@ -487,9 +487,9 @@ describe("inputs", () => {
     );
     expect(movieOrderByInputTSFile).toMatchSnapshot("MovieOrderByInput");
     expect(
-      directorFirstNameDirectorLastNameTitleCompoundUniqueInputTSFile,
+      movieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInputTSFile,
     ).toMatchSnapshot(
-      "DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput",
+      "MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput",
     );
     expect(indexTSFile).toMatchSnapshot("index");
   });

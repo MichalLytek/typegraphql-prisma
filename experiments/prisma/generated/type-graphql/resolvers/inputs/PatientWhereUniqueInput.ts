@@ -1,16 +1,16 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { FirstNameLastNameCompoundUniqueInput } from "../inputs/FirstNameLastNameCompoundUniqueInput";
+import { PatientFirstNameLastNameCompoundUniqueInput } from "../inputs/PatientFirstNameLastNameCompoundUniqueInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
   description: undefined,
 })
 export class PatientWhereUniqueInput {
-  @TypeGraphQL.Field(_type => FirstNameLastNameCompoundUniqueInput, {
+  @TypeGraphQL.Field(_type => PatientFirstNameLastNameCompoundUniqueInput, {
     nullable: true,
     description: undefined
   })
-  firstName_lastName?: FirstNameLastNameCompoundUniqueInput | undefined;
+  firstName_lastName?: PatientFirstNameLastNameCompoundUniqueInput | undefined;
 }

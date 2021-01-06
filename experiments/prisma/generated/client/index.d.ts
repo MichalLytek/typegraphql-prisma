@@ -31,8 +31,8 @@ export import Sql = runtime.Sql
 export import Decimal = runtime.Decimal
 
 /**
- * Prisma Client JS version: 2.13.1
- * Query Engine version: fcbc4bb2d306c86c28014f596b1e8c7980af8bd4
+ * Prisma Client JS version: 2.14.0
+ * Query Engine version: 5d491261d382a2a5ffdc71de17072b0e409f1cc1
  */
 export type PrismaVersion = {
   client: string
@@ -120,6 +120,15 @@ export type Subset<T, U> = {
   [key in keyof T]: key extends keyof U ? T[key] : never;
 };
 
+/**
+ * Subset + Intersection
+ * @desc From `T` pick properties that exist in `U` and intersect `K`
+ */
+export type SubsetIntersection<T, U, K> = {
+  [key in keyof T]: key extends keyof U ? T[key] : never
+} &
+  K
+
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
 /**
@@ -129,21 +138,154 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
 
 
+/**
+ * Is T a Record?
+ */
+type IsObject<T extends any> = T extends Array<any>
+? False
+: T extends Date
+? False
+: T extends Buffer
+? False
+: T extends BigInt
+? False
+: T extends object
+? True
+: False
+
+
+/**
+ * If it's T[], return T
+ */
+export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T
+
+/**
+ * From ts-toolbelt
+ */
+
+export type Union = any
+
+/** Helper Types for "Merge" **/
+export type IntersectOf<U extends Union> = (
+  U extends unknown ? (k: U) => void : never
+) extends (k: infer I) => void
+  ? I
+  : never
+
+export type Overwrite<O extends object, O1 extends object> = {
+    [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+} & {};
+
+type _Merge<U extends object> = IntersectOf<Overwrite<U, {
+    [K in keyof U]-?: At<U, K>;
+}>>;
+
+type Key = string | number | symbol;
+type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+type AtStrict<O extends object, K extends Key> = O[K & keyof O];
+type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
+    1: AtStrict<O, K>;
+    0: AtLoose<O, K>;
+}[strict];
+
+export type ComputeRaw<A extends any> = A extends Function ? A : {
+  [K in keyof A]: A[K];
+} & {};
+
+export type OptionalFlat<O> = {
+  [K in keyof O]?: O[K];
+} & {};
+
+type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+
+export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
+/** End Helper Types for "Merge" **/
+
+export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
+
+/**
+A [[Boolean]]
+*/
+export type Boolean = True | False
+
+// /**
+// 1
+// */
+export type True = 1
+
+/**
+0
+*/
+export type False = 0
+
+export type Not<B extends Boolean> = {
+  0: 1
+  1: 0
+}[B]
+
+export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
+  ? 0 // anything `never` is false
+  : A1 extends A2
+  ? 1
+  : 0
+
+export type Has<U extends Union, U1 extends Union> = Not<
+  Extends<Exclude<U1, U>, U1>
+>
+
+export type Or<B1 extends Boolean, B2 extends Boolean> = {
+  0: {
+    0: 0
+    1: 1
+  }
+  1: {
+    0: 1
+    1: 1
+  }
+}[B1][B2]
+
+export type Keys<U extends Union> = U extends unknown ? keyof U : never
+
+
 
 /**
  * Used by group by
  */
+
 export type GetScalarType<T, O> = O extends object ? {
   [P in keyof T]: P extends keyof O
     ? O[P]
     : never
 } : never
 
+type FieldPaths<
+  T,
+  U = Omit<T, 'avg' | 'sum' | 'count' | 'min' | 'max'>
+> = IsObject<T> extends True ? U : T
+
+type GetHavingFields<T> = {
+  [K in keyof T]: Or<
+    Or<Extends<'OR', K>, Extends<'AND', K>>,
+    Extends<'NOT', K>
+  > extends True
+    ? // infer is only needed to not hit TS limit
+      // based on the brilliant idea of Pierre-Antoine Mills
+      // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
+      T[K] extends infer TK
+      ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+      : never
+    : {} extends FieldPaths<T[K]>
+    ? never
+    : K
+}[keyof T]
+
 /**
  * Convert tuple to union
  */
 type _TupleToUnion<T> = T extends (infer E)[] ? E : never
 type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
+type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T
 
 /**
  * Like `Pick`, but with an array
@@ -493,8 +635,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.13.1
-   * Query Engine version: fcbc4bb2d306c86c28014f596b1e8c7980af8bd4
+   * Prisma Client JS version: 2.14.0
+   * Query Engine version: 5d491261d382a2a5ffdc71de17072b0e409f1cc1
    */
   export type PrismaVersion = {
     client: string
@@ -582,6 +724,15 @@ export namespace Prisma {
     [key in keyof T]: key extends keyof U ? T[key] : never;
   };
 
+  /**
+   * Subset + Intersection
+   * @desc From `T` pick properties that exist in `U` and intersect `K`
+   */
+  export type SubsetIntersection<T, U, K> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    K
+
   type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
   /**
@@ -591,21 +742,154 @@ export namespace Prisma {
   type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
 
 
+  /**
+   * Is T a Record?
+   */
+  type IsObject<T extends any> = T extends Array<any>
+  ? False
+  : T extends Date
+  ? False
+  : T extends Buffer
+  ? False
+  : T extends BigInt
+  ? False
+  : T extends object
+  ? True
+  : False
+
+
+  /**
+   * If it's T[], return T
+   */
+  export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T
+
+  /**
+   * From ts-toolbelt
+   */
+
+  export type Union = any
+
+  /** Helper Types for "Merge" **/
+  export type IntersectOf<U extends Union> = (
+    U extends unknown ? (k: U) => void : never
+  ) extends (k: infer I) => void
+    ? I
+    : never
+
+  export type Overwrite<O extends object, O1 extends object> = {
+      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+  } & {};
+
+  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
+      [K in keyof U]-?: At<U, K>;
+  }>>;
+
+  type Key = string | number | symbol;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
+      1: AtStrict<O, K>;
+      0: AtLoose<O, K>;
+  }[strict];
+
+  export type ComputeRaw<A extends any> = A extends Function ? A : {
+    [K in keyof A]: A[K];
+  } & {};
+
+  export type OptionalFlat<O> = {
+    [K in keyof O]?: O[K];
+  } & {};
+
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
+  /** End Helper Types for "Merge" **/
+
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
+
+  /**
+  A [[Boolean]]
+  */
+  export type Boolean = True | False
+
+  // /**
+  // 1
+  // */
+  export type True = 1
+
+  /**
+  0
+  */
+  export type False = 0
+
+  export type Not<B extends Boolean> = {
+    0: 1
+    1: 0
+  }[B]
+
+  export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
+    ? 0 // anything `never` is false
+    : A1 extends A2
+    ? 1
+    : 0
+
+  export type Has<U extends Union, U1 extends Union> = Not<
+    Extends<Exclude<U1, U>, U1>
+  >
+
+  export type Or<B1 extends Boolean, B2 extends Boolean> = {
+    0: {
+      0: 0
+      1: 1
+    }
+    1: {
+      0: 1
+      1: 1
+    }
+  }[B1][B2]
+
+  export type Keys<U extends Union> = U extends unknown ? keyof U : never
+
+
 
   /**
    * Used by group by
    */
+
   export type GetScalarType<T, O> = O extends object ? {
     [P in keyof T]: P extends keyof O
       ? O[P]
       : never
   } : never
 
+  type FieldPaths<
+    T,
+    U = Omit<T, 'avg' | 'sum' | 'count' | 'min' | 'max'>
+  > = IsObject<T> extends True ? U : T
+
+  type GetHavingFields<T> = {
+    [K in keyof T]: Or<
+      Or<Extends<'OR', K>, Extends<'AND', K>>,
+      Extends<'NOT', K>
+    > extends True
+      ? // infer is only needed to not hit TS limit
+        // based on the brilliant idea of Pierre-Antoine Mills
+        // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
+        T[K] extends infer TK
+        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+        : never
+      : {} extends FieldPaths<T[K]>
+      ? never
+      : K
+  }[keyof T]
+
   /**
    * Convert tuple to union
    */
   type _TupleToUnion<T> = T extends (infer E)[] ? E : never
   type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
+  type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T
 
   /**
    * Like `Pick`, but with an array
@@ -850,15 +1134,63 @@ export namespace Prisma {
   }
 
   export type AggregateUserArgs = {
+    /**
+     * Filter which User to aggregate.
+    **/
     where?: UserWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Users to fetch.
+    **/
     orderBy?: Enumerable<UserOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
     cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+    **/
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Users
+    **/
     count?: true
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
     avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
     sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
     min?: UserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
     max?: UserMaxAggregateInputType
   }
 
@@ -935,6 +1267,7 @@ export namespace Prisma {
     findUnique<T extends FindUniqueUserArgs>(
       args: Subset<T, FindUniqueUserArgs>
     ): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>
+
     /**
      * Find the first User that matches the filter.
      * @param {FindFirstUserArgs} args - Arguments to find a User
@@ -949,6 +1282,7 @@ export namespace Prisma {
     findFirst<T extends FindFirstUserArgs>(
       args?: Subset<T, FindFirstUserArgs>
     ): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>
+
     /**
      * Find zero or more Users that matches the filter.
      * @param {FindManyUserArgs=} args - Arguments to filter and select certain fields only.
@@ -966,6 +1300,7 @@ export namespace Prisma {
     findMany<T extends FindManyUserArgs>(
       args?: Subset<T, FindManyUserArgs>
     ): CheckSelect<T, Promise<Array<User>>, Promise<Array<UserGetPayload<T>>>>
+
     /**
      * Create a User.
      * @param {UserCreateArgs} args - Arguments to create a User.
@@ -981,6 +1316,7 @@ export namespace Prisma {
     create<T extends UserCreateArgs>(
       args: Subset<T, UserCreateArgs>
     ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+
     /**
      * Delete a User.
      * @param {UserDeleteArgs} args - Arguments to delete one User.
@@ -996,6 +1332,7 @@ export namespace Prisma {
     delete<T extends UserDeleteArgs>(
       args: Subset<T, UserDeleteArgs>
     ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+
     /**
      * Update one User.
      * @param {UserUpdateArgs} args - Arguments to update one User.
@@ -1014,6 +1351,7 @@ export namespace Prisma {
     update<T extends UserUpdateArgs>(
       args: Subset<T, UserUpdateArgs>
     ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+
     /**
      * Delete zero or more Users.
      * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
@@ -1029,6 +1367,7 @@ export namespace Prisma {
     deleteMany<T extends UserDeleteManyArgs>(
       args?: Subset<T, UserDeleteManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Update zero or more Users.
      * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
@@ -1047,6 +1386,7 @@ export namespace Prisma {
     updateMany<T extends UserUpdateManyArgs>(
       args: Subset<T, UserUpdateManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Create or update one User.
      * @param {UserUpsertArgs} args - Arguments to update or create a User.
@@ -1067,6 +1407,7 @@ export namespace Prisma {
     upsert<T extends UserUpsertArgs>(
       args: Subset<T, UserUpsertArgs>
     ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+
     /**
      * Find zero or one User that matches the filter.
      * @param {FindUniqueUserArgs} args - Arguments to find a User
@@ -1082,17 +1423,45 @@ export namespace Prisma {
     findOne<T extends FindUniqueUserArgs>(
       args: Subset<T, FindUniqueUserArgs>
     ): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>
+
     /**
-     * Count
-     */
+     * Count the number of Users.
+     * @param {FindManyUserArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.user.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+    **/
     count(args?: Omit<FindManyUserArgs, 'select' | 'include'>): Promise<number>
 
-  
-
     /**
-     * Aggregate
-     */
+     * Allows you to perform aggregations operations on a User.
+     * @param {AggregateUserArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends AggregateUserArgs>(args: Subset<T, AggregateUserArgs>): Promise<GetUserAggregateType<T>>
+
+
   }
 
   /**
@@ -1181,10 +1550,35 @@ export namespace Prisma {
      * Filter, which User to fetch.
     **/
     where?: UserWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Users to fetch.
+    **/
     orderBy?: Enumerable<UserOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+    **/
     cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+    **/
     skip?: number
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * 
+     * Filter by unique combinations of Users.
+    **/
     distinct?: Enumerable<UserScalarFieldEnum>
   }
 
@@ -1206,18 +1600,26 @@ export namespace Prisma {
     **/
     where?: UserWhereInput
     /**
-     * Determine the order of the Users to fetch.
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Users to fetch.
     **/
     orderBy?: Enumerable<UserOrderByInput>
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
      * Sets the position for listing Users.
     **/
     cursor?: UserWhereUniqueInput
     /**
-     * The number of Users to fetch. If negative number, it will take Users before the `cursor`.
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
     **/
     take?: number
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
      * Skip the first `n` Users.
     **/
     skip?: number
@@ -1467,15 +1869,63 @@ export namespace Prisma {
   }
 
   export type AggregatePostArgs = {
+    /**
+     * Filter which post to aggregate.
+    **/
     where?: postWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of posts to fetch.
+    **/
     orderBy?: Enumerable<postOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
     cursor?: postWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` posts from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` posts.
+    **/
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned posts
+    **/
     count?: true
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
     avg?: PostAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
     sum?: PostSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
     min?: PostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
     max?: PostMaxAggregateInputType
   }
 
@@ -1556,6 +2006,7 @@ export namespace Prisma {
     findUnique<T extends FindUniquepostArgs>(
       args: Subset<T, FindUniquepostArgs>
     ): CheckSelect<T, Prisma__postClient<post | null>, Prisma__postClient<postGetPayload<T> | null>>
+
     /**
      * Find the first Post that matches the filter.
      * @param {FindFirstpostArgs} args - Arguments to find a Post
@@ -1570,6 +2021,7 @@ export namespace Prisma {
     findFirst<T extends FindFirstpostArgs>(
       args?: Subset<T, FindFirstpostArgs>
     ): CheckSelect<T, Prisma__postClient<post | null>, Prisma__postClient<postGetPayload<T> | null>>
+
     /**
      * Find zero or more Posts that matches the filter.
      * @param {FindManypostArgs=} args - Arguments to filter and select certain fields only.
@@ -1587,6 +2039,7 @@ export namespace Prisma {
     findMany<T extends FindManypostArgs>(
       args?: Subset<T, FindManypostArgs>
     ): CheckSelect<T, Promise<Array<post>>, Promise<Array<postGetPayload<T>>>>
+
     /**
      * Create a Post.
      * @param {postCreateArgs} args - Arguments to create a Post.
@@ -1602,6 +2055,7 @@ export namespace Prisma {
     create<T extends postCreateArgs>(
       args: Subset<T, postCreateArgs>
     ): CheckSelect<T, Prisma__postClient<post>, Prisma__postClient<postGetPayload<T>>>
+
     /**
      * Delete a Post.
      * @param {postDeleteArgs} args - Arguments to delete one Post.
@@ -1617,6 +2071,7 @@ export namespace Prisma {
     delete<T extends postDeleteArgs>(
       args: Subset<T, postDeleteArgs>
     ): CheckSelect<T, Prisma__postClient<post>, Prisma__postClient<postGetPayload<T>>>
+
     /**
      * Update one Post.
      * @param {postUpdateArgs} args - Arguments to update one Post.
@@ -1635,6 +2090,7 @@ export namespace Prisma {
     update<T extends postUpdateArgs>(
       args: Subset<T, postUpdateArgs>
     ): CheckSelect<T, Prisma__postClient<post>, Prisma__postClient<postGetPayload<T>>>
+
     /**
      * Delete zero or more Posts.
      * @param {postDeleteManyArgs} args - Arguments to filter Posts to delete.
@@ -1650,6 +2106,7 @@ export namespace Prisma {
     deleteMany<T extends postDeleteManyArgs>(
       args?: Subset<T, postDeleteManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Update zero or more Posts.
      * @param {postUpdateManyArgs} args - Arguments to update one or more rows.
@@ -1668,6 +2125,7 @@ export namespace Prisma {
     updateMany<T extends postUpdateManyArgs>(
       args: Subset<T, postUpdateManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Create or update one Post.
      * @param {postUpsertArgs} args - Arguments to update or create a Post.
@@ -1688,6 +2146,7 @@ export namespace Prisma {
     upsert<T extends postUpsertArgs>(
       args: Subset<T, postUpsertArgs>
     ): CheckSelect<T, Prisma__postClient<post>, Prisma__postClient<postGetPayload<T>>>
+
     /**
      * Find zero or one Post that matches the filter.
      * @param {FindUniquepostArgs} args - Arguments to find a Post
@@ -1703,17 +2162,45 @@ export namespace Prisma {
     findOne<T extends FindUniquepostArgs>(
       args: Subset<T, FindUniquepostArgs>
     ): CheckSelect<T, Prisma__postClient<post | null>, Prisma__postClient<postGetPayload<T> | null>>
+
     /**
-     * Count
-     */
+     * Count the number of Posts.
+     * @param {FindManypostArgs} args - Arguments to filter Posts to count.
+     * @example
+     * // Count the number of Posts
+     * const count = await prisma.post.count({
+     *   where: {
+     *     // ... the filter for the Posts we want to count
+     *   }
+     * })
+    **/
     count(args?: Omit<FindManypostArgs, 'select' | 'include'>): Promise<number>
 
-  
-
     /**
-     * Aggregate
-     */
+     * Allows you to perform aggregations operations on a Post.
+     * @param {AggregatePostArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends AggregatePostArgs>(args: Subset<T, AggregatePostArgs>): Promise<GetPostAggregateType<T>>
+
+
   }
 
   /**
@@ -1802,10 +2289,35 @@ export namespace Prisma {
      * Filter, which post to fetch.
     **/
     where?: postWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of posts to fetch.
+    **/
     orderBy?: Enumerable<postOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for posts.
+    **/
     cursor?: postWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` posts from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` posts.
+    **/
     skip?: number
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * 
+     * Filter by unique combinations of posts.
+    **/
     distinct?: Enumerable<PostScalarFieldEnum>
   }
 
@@ -1827,18 +2339,26 @@ export namespace Prisma {
     **/
     where?: postWhereInput
     /**
-     * Determine the order of the posts to fetch.
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of posts to fetch.
     **/
     orderBy?: Enumerable<postOrderByInput>
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
      * Sets the position for listing posts.
     **/
     cursor?: postWhereUniqueInput
     /**
-     * The number of posts to fetch. If negative number, it will take posts before the `cursor`.
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` posts from the position of the cursor.
     **/
     take?: number
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
      * Skip the first `n` posts.
     **/
     skip?: number
@@ -2036,15 +2556,63 @@ export namespace Prisma {
   }
 
   export type AggregateCategoryArgs = {
+    /**
+     * Filter which Category to aggregate.
+    **/
     where?: CategoryWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Categories to fetch.
+    **/
     orderBy?: Enumerable<CategoryOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
     cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+    **/
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Categories
+    **/
     count?: true
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
     avg?: CategoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
     sum?: CategorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
     min?: CategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
     max?: CategoryMaxAggregateInputType
   }
 
@@ -2101,6 +2669,7 @@ export namespace Prisma {
     findUnique<T extends FindUniqueCategoryArgs>(
       args: Subset<T, FindUniqueCategoryArgs>
     ): CheckSelect<T, Prisma__CategoryClient<Category | null>, Prisma__CategoryClient<CategoryGetPayload<T> | null>>
+
     /**
      * Find the first Category that matches the filter.
      * @param {FindFirstCategoryArgs} args - Arguments to find a Category
@@ -2115,6 +2684,7 @@ export namespace Prisma {
     findFirst<T extends FindFirstCategoryArgs>(
       args?: Subset<T, FindFirstCategoryArgs>
     ): CheckSelect<T, Prisma__CategoryClient<Category | null>, Prisma__CategoryClient<CategoryGetPayload<T> | null>>
+
     /**
      * Find zero or more Categories that matches the filter.
      * @param {FindManyCategoryArgs=} args - Arguments to filter and select certain fields only.
@@ -2132,6 +2702,7 @@ export namespace Prisma {
     findMany<T extends FindManyCategoryArgs>(
       args?: Subset<T, FindManyCategoryArgs>
     ): CheckSelect<T, Promise<Array<Category>>, Promise<Array<CategoryGetPayload<T>>>>
+
     /**
      * Create a Category.
      * @param {CategoryCreateArgs} args - Arguments to create a Category.
@@ -2147,6 +2718,7 @@ export namespace Prisma {
     create<T extends CategoryCreateArgs>(
       args: Subset<T, CategoryCreateArgs>
     ): CheckSelect<T, Prisma__CategoryClient<Category>, Prisma__CategoryClient<CategoryGetPayload<T>>>
+
     /**
      * Delete a Category.
      * @param {CategoryDeleteArgs} args - Arguments to delete one Category.
@@ -2162,6 +2734,7 @@ export namespace Prisma {
     delete<T extends CategoryDeleteArgs>(
       args: Subset<T, CategoryDeleteArgs>
     ): CheckSelect<T, Prisma__CategoryClient<Category>, Prisma__CategoryClient<CategoryGetPayload<T>>>
+
     /**
      * Update one Category.
      * @param {CategoryUpdateArgs} args - Arguments to update one Category.
@@ -2180,6 +2753,7 @@ export namespace Prisma {
     update<T extends CategoryUpdateArgs>(
       args: Subset<T, CategoryUpdateArgs>
     ): CheckSelect<T, Prisma__CategoryClient<Category>, Prisma__CategoryClient<CategoryGetPayload<T>>>
+
     /**
      * Delete zero or more Categories.
      * @param {CategoryDeleteManyArgs} args - Arguments to filter Categories to delete.
@@ -2195,6 +2769,7 @@ export namespace Prisma {
     deleteMany<T extends CategoryDeleteManyArgs>(
       args?: Subset<T, CategoryDeleteManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Update zero or more Categories.
      * @param {CategoryUpdateManyArgs} args - Arguments to update one or more rows.
@@ -2213,6 +2788,7 @@ export namespace Prisma {
     updateMany<T extends CategoryUpdateManyArgs>(
       args: Subset<T, CategoryUpdateManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Create or update one Category.
      * @param {CategoryUpsertArgs} args - Arguments to update or create a Category.
@@ -2233,6 +2809,7 @@ export namespace Prisma {
     upsert<T extends CategoryUpsertArgs>(
       args: Subset<T, CategoryUpsertArgs>
     ): CheckSelect<T, Prisma__CategoryClient<Category>, Prisma__CategoryClient<CategoryGetPayload<T>>>
+
     /**
      * Find zero or one Category that matches the filter.
      * @param {FindUniqueCategoryArgs} args - Arguments to find a Category
@@ -2248,17 +2825,45 @@ export namespace Prisma {
     findOne<T extends FindUniqueCategoryArgs>(
       args: Subset<T, FindUniqueCategoryArgs>
     ): CheckSelect<T, Prisma__CategoryClient<Category | null>, Prisma__CategoryClient<CategoryGetPayload<T> | null>>
+
     /**
-     * Count
-     */
+     * Count the number of Categories.
+     * @param {FindManyCategoryArgs} args - Arguments to filter Categories to count.
+     * @example
+     * // Count the number of Categories
+     * const count = await prisma.category.count({
+     *   where: {
+     *     // ... the filter for the Categories we want to count
+     *   }
+     * })
+    **/
     count(args?: Omit<FindManyCategoryArgs, 'select' | 'include'>): Promise<number>
 
-  
-
     /**
-     * Aggregate
-     */
+     * Allows you to perform aggregations operations on a Category.
+     * @param {AggregateCategoryArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends AggregateCategoryArgs>(args: Subset<T, AggregateCategoryArgs>): Promise<GetCategoryAggregateType<T>>
+
+
   }
 
   /**
@@ -2336,10 +2941,35 @@ export namespace Prisma {
      * Filter, which Category to fetch.
     **/
     where?: CategoryWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Categories to fetch.
+    **/
     orderBy?: Enumerable<CategoryOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+    **/
     cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+    **/
     skip?: number
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * 
+     * Filter by unique combinations of Categories.
+    **/
     distinct?: Enumerable<CategoryScalarFieldEnum>
   }
 
@@ -2357,18 +2987,26 @@ export namespace Prisma {
     **/
     where?: CategoryWhereInput
     /**
-     * Determine the order of the Categories to fetch.
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Categories to fetch.
     **/
     orderBy?: Enumerable<CategoryOrderByInput>
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
      * Sets the position for listing Categories.
     **/
     cursor?: CategoryWhereUniqueInput
     /**
-     * The number of Categories to fetch. If negative number, it will take Categories before the `cursor`.
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
     **/
     take?: number
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
      * Skip the first `n` Categories.
     **/
     skip?: number
@@ -2528,13 +3166,51 @@ export namespace Prisma {
   }
 
   export type AggregatePatientArgs = {
+    /**
+     * Filter which Patient to aggregate.
+    **/
     where?: PatientWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Patients to fetch.
+    **/
     orderBy?: Enumerable<PatientOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
     cursor?: PatientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Patients from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Patients.
+    **/
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Patients
+    **/
     count?: true
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
     min?: PatientMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
     max?: PatientMaxAggregateInputType
   }
 
@@ -2589,6 +3265,7 @@ export namespace Prisma {
     findUnique<T extends FindUniquePatientArgs>(
       args: Subset<T, FindUniquePatientArgs>
     ): CheckSelect<T, Prisma__PatientClient<Patient | null>, Prisma__PatientClient<PatientGetPayload<T> | null>>
+
     /**
      * Find the first Patient that matches the filter.
      * @param {FindFirstPatientArgs} args - Arguments to find a Patient
@@ -2603,6 +3280,7 @@ export namespace Prisma {
     findFirst<T extends FindFirstPatientArgs>(
       args?: Subset<T, FindFirstPatientArgs>
     ): CheckSelect<T, Prisma__PatientClient<Patient | null>, Prisma__PatientClient<PatientGetPayload<T> | null>>
+
     /**
      * Find zero or more Patients that matches the filter.
      * @param {FindManyPatientArgs=} args - Arguments to filter and select certain fields only.
@@ -2620,6 +3298,7 @@ export namespace Prisma {
     findMany<T extends FindManyPatientArgs>(
       args?: Subset<T, FindManyPatientArgs>
     ): CheckSelect<T, Promise<Array<Patient>>, Promise<Array<PatientGetPayload<T>>>>
+
     /**
      * Create a Patient.
      * @param {PatientCreateArgs} args - Arguments to create a Patient.
@@ -2635,6 +3314,7 @@ export namespace Prisma {
     create<T extends PatientCreateArgs>(
       args: Subset<T, PatientCreateArgs>
     ): CheckSelect<T, Prisma__PatientClient<Patient>, Prisma__PatientClient<PatientGetPayload<T>>>
+
     /**
      * Delete a Patient.
      * @param {PatientDeleteArgs} args - Arguments to delete one Patient.
@@ -2650,6 +3330,7 @@ export namespace Prisma {
     delete<T extends PatientDeleteArgs>(
       args: Subset<T, PatientDeleteArgs>
     ): CheckSelect<T, Prisma__PatientClient<Patient>, Prisma__PatientClient<PatientGetPayload<T>>>
+
     /**
      * Update one Patient.
      * @param {PatientUpdateArgs} args - Arguments to update one Patient.
@@ -2668,6 +3349,7 @@ export namespace Prisma {
     update<T extends PatientUpdateArgs>(
       args: Subset<T, PatientUpdateArgs>
     ): CheckSelect<T, Prisma__PatientClient<Patient>, Prisma__PatientClient<PatientGetPayload<T>>>
+
     /**
      * Delete zero or more Patients.
      * @param {PatientDeleteManyArgs} args - Arguments to filter Patients to delete.
@@ -2683,6 +3365,7 @@ export namespace Prisma {
     deleteMany<T extends PatientDeleteManyArgs>(
       args?: Subset<T, PatientDeleteManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Update zero or more Patients.
      * @param {PatientUpdateManyArgs} args - Arguments to update one or more rows.
@@ -2701,6 +3384,7 @@ export namespace Prisma {
     updateMany<T extends PatientUpdateManyArgs>(
       args: Subset<T, PatientUpdateManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Create or update one Patient.
      * @param {PatientUpsertArgs} args - Arguments to update or create a Patient.
@@ -2721,6 +3405,7 @@ export namespace Prisma {
     upsert<T extends PatientUpsertArgs>(
       args: Subset<T, PatientUpsertArgs>
     ): CheckSelect<T, Prisma__PatientClient<Patient>, Prisma__PatientClient<PatientGetPayload<T>>>
+
     /**
      * Find zero or one Patient that matches the filter.
      * @param {FindUniquePatientArgs} args - Arguments to find a Patient
@@ -2736,17 +3421,45 @@ export namespace Prisma {
     findOne<T extends FindUniquePatientArgs>(
       args: Subset<T, FindUniquePatientArgs>
     ): CheckSelect<T, Prisma__PatientClient<Patient | null>, Prisma__PatientClient<PatientGetPayload<T> | null>>
+
     /**
-     * Count
-     */
+     * Count the number of Patients.
+     * @param {FindManyPatientArgs} args - Arguments to filter Patients to count.
+     * @example
+     * // Count the number of Patients
+     * const count = await prisma.patient.count({
+     *   where: {
+     *     // ... the filter for the Patients we want to count
+     *   }
+     * })
+    **/
     count(args?: Omit<FindManyPatientArgs, 'select' | 'include'>): Promise<number>
 
-  
-
     /**
-     * Aggregate
-     */
+     * Allows you to perform aggregations operations on a Patient.
+     * @param {AggregatePatientArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends AggregatePatientArgs>(args: Subset<T, AggregatePatientArgs>): Promise<GetPatientAggregateType<T>>
+
+
   }
 
   /**
@@ -2824,10 +3537,35 @@ export namespace Prisma {
      * Filter, which Patient to fetch.
     **/
     where?: PatientWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Patients to fetch.
+    **/
     orderBy?: Enumerable<PatientOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Patients.
+    **/
     cursor?: PatientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Patients from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Patients.
+    **/
     skip?: number
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * 
+     * Filter by unique combinations of Patients.
+    **/
     distinct?: Enumerable<PatientScalarFieldEnum>
   }
 
@@ -2845,18 +3583,26 @@ export namespace Prisma {
     **/
     where?: PatientWhereInput
     /**
-     * Determine the order of the Patients to fetch.
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Patients to fetch.
     **/
     orderBy?: Enumerable<PatientOrderByInput>
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
      * Sets the position for listing Patients.
     **/
     cursor?: PatientWhereUniqueInput
     /**
-     * The number of Patients to fetch. If negative number, it will take Patients before the `cursor`.
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Patients from the position of the cursor.
     **/
     take?: number
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
      * Skip the first `n` Patients.
     **/
     skip?: number
@@ -3016,13 +3762,51 @@ export namespace Prisma {
   }
 
   export type AggregateMovieArgs = {
+    /**
+     * Filter which Movie to aggregate.
+    **/
     where?: MovieWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Movies to fetch.
+    **/
     orderBy?: Enumerable<MovieOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
     cursor?: MovieWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Movies from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Movies.
+    **/
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Movies
+    **/
     count?: true
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
     min?: MovieMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
     max?: MovieMaxAggregateInputType
   }
 
@@ -3087,6 +3871,7 @@ export namespace Prisma {
     findUnique<T extends FindUniqueMovieArgs>(
       args: Subset<T, FindUniqueMovieArgs>
     ): CheckSelect<T, Prisma__MovieClient<Movie | null>, Prisma__MovieClient<MovieGetPayload<T> | null>>
+
     /**
      * Find the first Movie that matches the filter.
      * @param {FindFirstMovieArgs} args - Arguments to find a Movie
@@ -3101,6 +3886,7 @@ export namespace Prisma {
     findFirst<T extends FindFirstMovieArgs>(
       args?: Subset<T, FindFirstMovieArgs>
     ): CheckSelect<T, Prisma__MovieClient<Movie | null>, Prisma__MovieClient<MovieGetPayload<T> | null>>
+
     /**
      * Find zero or more Movies that matches the filter.
      * @param {FindManyMovieArgs=} args - Arguments to filter and select certain fields only.
@@ -3118,6 +3904,7 @@ export namespace Prisma {
     findMany<T extends FindManyMovieArgs>(
       args?: Subset<T, FindManyMovieArgs>
     ): CheckSelect<T, Promise<Array<Movie>>, Promise<Array<MovieGetPayload<T>>>>
+
     /**
      * Create a Movie.
      * @param {MovieCreateArgs} args - Arguments to create a Movie.
@@ -3133,6 +3920,7 @@ export namespace Prisma {
     create<T extends MovieCreateArgs>(
       args: Subset<T, MovieCreateArgs>
     ): CheckSelect<T, Prisma__MovieClient<Movie>, Prisma__MovieClient<MovieGetPayload<T>>>
+
     /**
      * Delete a Movie.
      * @param {MovieDeleteArgs} args - Arguments to delete one Movie.
@@ -3148,6 +3936,7 @@ export namespace Prisma {
     delete<T extends MovieDeleteArgs>(
       args: Subset<T, MovieDeleteArgs>
     ): CheckSelect<T, Prisma__MovieClient<Movie>, Prisma__MovieClient<MovieGetPayload<T>>>
+
     /**
      * Update one Movie.
      * @param {MovieUpdateArgs} args - Arguments to update one Movie.
@@ -3166,6 +3955,7 @@ export namespace Prisma {
     update<T extends MovieUpdateArgs>(
       args: Subset<T, MovieUpdateArgs>
     ): CheckSelect<T, Prisma__MovieClient<Movie>, Prisma__MovieClient<MovieGetPayload<T>>>
+
     /**
      * Delete zero or more Movies.
      * @param {MovieDeleteManyArgs} args - Arguments to filter Movies to delete.
@@ -3181,6 +3971,7 @@ export namespace Prisma {
     deleteMany<T extends MovieDeleteManyArgs>(
       args?: Subset<T, MovieDeleteManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Update zero or more Movies.
      * @param {MovieUpdateManyArgs} args - Arguments to update one or more rows.
@@ -3199,6 +3990,7 @@ export namespace Prisma {
     updateMany<T extends MovieUpdateManyArgs>(
       args: Subset<T, MovieUpdateManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Create or update one Movie.
      * @param {MovieUpsertArgs} args - Arguments to update or create a Movie.
@@ -3219,6 +4011,7 @@ export namespace Prisma {
     upsert<T extends MovieUpsertArgs>(
       args: Subset<T, MovieUpsertArgs>
     ): CheckSelect<T, Prisma__MovieClient<Movie>, Prisma__MovieClient<MovieGetPayload<T>>>
+
     /**
      * Find zero or one Movie that matches the filter.
      * @param {FindUniqueMovieArgs} args - Arguments to find a Movie
@@ -3234,17 +4027,45 @@ export namespace Prisma {
     findOne<T extends FindUniqueMovieArgs>(
       args: Subset<T, FindUniqueMovieArgs>
     ): CheckSelect<T, Prisma__MovieClient<Movie | null>, Prisma__MovieClient<MovieGetPayload<T> | null>>
+
     /**
-     * Count
-     */
+     * Count the number of Movies.
+     * @param {FindManyMovieArgs} args - Arguments to filter Movies to count.
+     * @example
+     * // Count the number of Movies
+     * const count = await prisma.movie.count({
+     *   where: {
+     *     // ... the filter for the Movies we want to count
+     *   }
+     * })
+    **/
     count(args?: Omit<FindManyMovieArgs, 'select' | 'include'>): Promise<number>
 
-  
-
     /**
-     * Aggregate
-     */
+     * Allows you to perform aggregations operations on a Movie.
+     * @param {AggregateMovieArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends AggregateMovieArgs>(args: Subset<T, AggregateMovieArgs>): Promise<GetMovieAggregateType<T>>
+
+
   }
 
   /**
@@ -3331,10 +4152,35 @@ export namespace Prisma {
      * Filter, which Movie to fetch.
     **/
     where?: MovieWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Movies to fetch.
+    **/
     orderBy?: Enumerable<MovieOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Movies.
+    **/
     cursor?: MovieWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Movies from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Movies.
+    **/
     skip?: number
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * 
+     * Filter by unique combinations of Movies.
+    **/
     distinct?: Enumerable<MovieScalarFieldEnum>
   }
 
@@ -3356,18 +4202,26 @@ export namespace Prisma {
     **/
     where?: MovieWhereInput
     /**
-     * Determine the order of the Movies to fetch.
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Movies to fetch.
     **/
     orderBy?: Enumerable<MovieOrderByInput>
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
      * Sets the position for listing Movies.
     **/
     cursor?: MovieWhereUniqueInput
     /**
-     * The number of Movies to fetch. If negative number, it will take Movies before the `cursor`.
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Movies from the position of the cursor.
     **/
     take?: number
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
      * Skip the first `n` Movies.
     **/
     skip?: number
@@ -3541,13 +4395,51 @@ export namespace Prisma {
   }
 
   export type AggregateDirectorArgs = {
+    /**
+     * Filter which Director to aggregate.
+    **/
     where?: DirectorWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Directors to fetch.
+    **/
     orderBy?: Enumerable<DirectorOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
     cursor?: DirectorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Directors from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Directors.
+    **/
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Directors
+    **/
     count?: true
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
     min?: DirectorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
     max?: DirectorMaxAggregateInputType
   }
 
@@ -3611,6 +4503,7 @@ export namespace Prisma {
     findUnique<T extends FindUniqueDirectorArgs>(
       args: Subset<T, FindUniqueDirectorArgs>
     ): CheckSelect<T, Prisma__DirectorClient<Director | null>, Prisma__DirectorClient<DirectorGetPayload<T> | null>>
+
     /**
      * Find the first Director that matches the filter.
      * @param {FindFirstDirectorArgs} args - Arguments to find a Director
@@ -3625,6 +4518,7 @@ export namespace Prisma {
     findFirst<T extends FindFirstDirectorArgs>(
       args?: Subset<T, FindFirstDirectorArgs>
     ): CheckSelect<T, Prisma__DirectorClient<Director | null>, Prisma__DirectorClient<DirectorGetPayload<T> | null>>
+
     /**
      * Find zero or more Directors that matches the filter.
      * @param {FindManyDirectorArgs=} args - Arguments to filter and select certain fields only.
@@ -3642,6 +4536,7 @@ export namespace Prisma {
     findMany<T extends FindManyDirectorArgs>(
       args?: Subset<T, FindManyDirectorArgs>
     ): CheckSelect<T, Promise<Array<Director>>, Promise<Array<DirectorGetPayload<T>>>>
+
     /**
      * Create a Director.
      * @param {DirectorCreateArgs} args - Arguments to create a Director.
@@ -3657,6 +4552,7 @@ export namespace Prisma {
     create<T extends DirectorCreateArgs>(
       args: Subset<T, DirectorCreateArgs>
     ): CheckSelect<T, Prisma__DirectorClient<Director>, Prisma__DirectorClient<DirectorGetPayload<T>>>
+
     /**
      * Delete a Director.
      * @param {DirectorDeleteArgs} args - Arguments to delete one Director.
@@ -3672,6 +4568,7 @@ export namespace Prisma {
     delete<T extends DirectorDeleteArgs>(
       args: Subset<T, DirectorDeleteArgs>
     ): CheckSelect<T, Prisma__DirectorClient<Director>, Prisma__DirectorClient<DirectorGetPayload<T>>>
+
     /**
      * Update one Director.
      * @param {DirectorUpdateArgs} args - Arguments to update one Director.
@@ -3690,6 +4587,7 @@ export namespace Prisma {
     update<T extends DirectorUpdateArgs>(
       args: Subset<T, DirectorUpdateArgs>
     ): CheckSelect<T, Prisma__DirectorClient<Director>, Prisma__DirectorClient<DirectorGetPayload<T>>>
+
     /**
      * Delete zero or more Directors.
      * @param {DirectorDeleteManyArgs} args - Arguments to filter Directors to delete.
@@ -3705,6 +4603,7 @@ export namespace Prisma {
     deleteMany<T extends DirectorDeleteManyArgs>(
       args?: Subset<T, DirectorDeleteManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Update zero or more Directors.
      * @param {DirectorUpdateManyArgs} args - Arguments to update one or more rows.
@@ -3723,6 +4622,7 @@ export namespace Prisma {
     updateMany<T extends DirectorUpdateManyArgs>(
       args: Subset<T, DirectorUpdateManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Create or update one Director.
      * @param {DirectorUpsertArgs} args - Arguments to update or create a Director.
@@ -3743,6 +4643,7 @@ export namespace Prisma {
     upsert<T extends DirectorUpsertArgs>(
       args: Subset<T, DirectorUpsertArgs>
     ): CheckSelect<T, Prisma__DirectorClient<Director>, Prisma__DirectorClient<DirectorGetPayload<T>>>
+
     /**
      * Find zero or one Director that matches the filter.
      * @param {FindUniqueDirectorArgs} args - Arguments to find a Director
@@ -3758,17 +4659,45 @@ export namespace Prisma {
     findOne<T extends FindUniqueDirectorArgs>(
       args: Subset<T, FindUniqueDirectorArgs>
     ): CheckSelect<T, Prisma__DirectorClient<Director | null>, Prisma__DirectorClient<DirectorGetPayload<T> | null>>
+
     /**
-     * Count
-     */
+     * Count the number of Directors.
+     * @param {FindManyDirectorArgs} args - Arguments to filter Directors to count.
+     * @example
+     * // Count the number of Directors
+     * const count = await prisma.director.count({
+     *   where: {
+     *     // ... the filter for the Directors we want to count
+     *   }
+     * })
+    **/
     count(args?: Omit<FindManyDirectorArgs, 'select' | 'include'>): Promise<number>
 
-  
-
     /**
-     * Aggregate
-     */
+     * Allows you to perform aggregations operations on a Director.
+     * @param {AggregateDirectorArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends AggregateDirectorArgs>(args: Subset<T, AggregateDirectorArgs>): Promise<GetDirectorAggregateType<T>>
+
+
   }
 
   /**
@@ -3855,10 +4784,35 @@ export namespace Prisma {
      * Filter, which Director to fetch.
     **/
     where?: DirectorWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Directors to fetch.
+    **/
     orderBy?: Enumerable<DirectorOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Directors.
+    **/
     cursor?: DirectorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Directors from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Directors.
+    **/
     skip?: number
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * 
+     * Filter by unique combinations of Directors.
+    **/
     distinct?: Enumerable<DirectorScalarFieldEnum>
   }
 
@@ -3880,18 +4834,26 @@ export namespace Prisma {
     **/
     where?: DirectorWhereInput
     /**
-     * Determine the order of the Directors to fetch.
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Directors to fetch.
     **/
     orderBy?: Enumerable<DirectorOrderByInput>
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
      * Sets the position for listing Directors.
     **/
     cursor?: DirectorWhereUniqueInput
     /**
-     * The number of Directors to fetch. If negative number, it will take Directors before the `cursor`.
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Directors from the position of the cursor.
     **/
     take?: number
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
      * Skip the first `n` Directors.
     **/
     skip?: number
@@ -4093,15 +5055,63 @@ export namespace Prisma {
   }
 
   export type AggregateProblemArgs = {
+    /**
+     * Filter which Problem to aggregate.
+    **/
     where?: ProblemWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Problems to fetch.
+    **/
     orderBy?: Enumerable<ProblemOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
     cursor?: ProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Problems from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Problems.
+    **/
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Problems
+    **/
     count?: true
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
     avg?: ProblemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
     sum?: ProblemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
     min?: ProblemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
     max?: ProblemMaxAggregateInputType
   }
 
@@ -4174,6 +5184,7 @@ export namespace Prisma {
     findUnique<T extends FindUniqueProblemArgs>(
       args: Subset<T, FindUniqueProblemArgs>
     ): CheckSelect<T, Prisma__ProblemClient<Problem | null>, Prisma__ProblemClient<ProblemGetPayload<T> | null>>
+
     /**
      * Find the first Problem that matches the filter.
      * @param {FindFirstProblemArgs} args - Arguments to find a Problem
@@ -4188,6 +5199,7 @@ export namespace Prisma {
     findFirst<T extends FindFirstProblemArgs>(
       args?: Subset<T, FindFirstProblemArgs>
     ): CheckSelect<T, Prisma__ProblemClient<Problem | null>, Prisma__ProblemClient<ProblemGetPayload<T> | null>>
+
     /**
      * Find zero or more Problems that matches the filter.
      * @param {FindManyProblemArgs=} args - Arguments to filter and select certain fields only.
@@ -4205,6 +5217,7 @@ export namespace Prisma {
     findMany<T extends FindManyProblemArgs>(
       args?: Subset<T, FindManyProblemArgs>
     ): CheckSelect<T, Promise<Array<Problem>>, Promise<Array<ProblemGetPayload<T>>>>
+
     /**
      * Create a Problem.
      * @param {ProblemCreateArgs} args - Arguments to create a Problem.
@@ -4220,6 +5233,7 @@ export namespace Prisma {
     create<T extends ProblemCreateArgs>(
       args: Subset<T, ProblemCreateArgs>
     ): CheckSelect<T, Prisma__ProblemClient<Problem>, Prisma__ProblemClient<ProblemGetPayload<T>>>
+
     /**
      * Delete a Problem.
      * @param {ProblemDeleteArgs} args - Arguments to delete one Problem.
@@ -4235,6 +5249,7 @@ export namespace Prisma {
     delete<T extends ProblemDeleteArgs>(
       args: Subset<T, ProblemDeleteArgs>
     ): CheckSelect<T, Prisma__ProblemClient<Problem>, Prisma__ProblemClient<ProblemGetPayload<T>>>
+
     /**
      * Update one Problem.
      * @param {ProblemUpdateArgs} args - Arguments to update one Problem.
@@ -4253,6 +5268,7 @@ export namespace Prisma {
     update<T extends ProblemUpdateArgs>(
       args: Subset<T, ProblemUpdateArgs>
     ): CheckSelect<T, Prisma__ProblemClient<Problem>, Prisma__ProblemClient<ProblemGetPayload<T>>>
+
     /**
      * Delete zero or more Problems.
      * @param {ProblemDeleteManyArgs} args - Arguments to filter Problems to delete.
@@ -4268,6 +5284,7 @@ export namespace Prisma {
     deleteMany<T extends ProblemDeleteManyArgs>(
       args?: Subset<T, ProblemDeleteManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Update zero or more Problems.
      * @param {ProblemUpdateManyArgs} args - Arguments to update one or more rows.
@@ -4286,6 +5303,7 @@ export namespace Prisma {
     updateMany<T extends ProblemUpdateManyArgs>(
       args: Subset<T, ProblemUpdateManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Create or update one Problem.
      * @param {ProblemUpsertArgs} args - Arguments to update or create a Problem.
@@ -4306,6 +5324,7 @@ export namespace Prisma {
     upsert<T extends ProblemUpsertArgs>(
       args: Subset<T, ProblemUpsertArgs>
     ): CheckSelect<T, Prisma__ProblemClient<Problem>, Prisma__ProblemClient<ProblemGetPayload<T>>>
+
     /**
      * Find zero or one Problem that matches the filter.
      * @param {FindUniqueProblemArgs} args - Arguments to find a Problem
@@ -4321,17 +5340,45 @@ export namespace Prisma {
     findOne<T extends FindUniqueProblemArgs>(
       args: Subset<T, FindUniqueProblemArgs>
     ): CheckSelect<T, Prisma__ProblemClient<Problem | null>, Prisma__ProblemClient<ProblemGetPayload<T> | null>>
+
     /**
-     * Count
-     */
+     * Count the number of Problems.
+     * @param {FindManyProblemArgs} args - Arguments to filter Problems to count.
+     * @example
+     * // Count the number of Problems
+     * const count = await prisma.problem.count({
+     *   where: {
+     *     // ... the filter for the Problems we want to count
+     *   }
+     * })
+    **/
     count(args?: Omit<FindManyProblemArgs, 'select' | 'include'>): Promise<number>
 
-  
-
     /**
-     * Aggregate
-     */
+     * Allows you to perform aggregations operations on a Problem.
+     * @param {AggregateProblemArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends AggregateProblemArgs>(args: Subset<T, AggregateProblemArgs>): Promise<GetProblemAggregateType<T>>
+
+
   }
 
   /**
@@ -4420,10 +5467,35 @@ export namespace Prisma {
      * Filter, which Problem to fetch.
     **/
     where?: ProblemWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Problems to fetch.
+    **/
     orderBy?: Enumerable<ProblemOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Problems.
+    **/
     cursor?: ProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Problems from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Problems.
+    **/
     skip?: number
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * 
+     * Filter by unique combinations of Problems.
+    **/
     distinct?: Enumerable<ProblemScalarFieldEnum>
   }
 
@@ -4445,18 +5517,26 @@ export namespace Prisma {
     **/
     where?: ProblemWhereInput
     /**
-     * Determine the order of the Problems to fetch.
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Problems to fetch.
     **/
     orderBy?: Enumerable<ProblemOrderByInput>
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
      * Sets the position for listing Problems.
     **/
     cursor?: ProblemWhereUniqueInput
     /**
-     * The number of Problems to fetch. If negative number, it will take Problems before the `cursor`.
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Problems from the position of the cursor.
     **/
     take?: number
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
      * Skip the first `n` Problems.
     **/
     skip?: number
@@ -4648,15 +5728,63 @@ export namespace Prisma {
   }
 
   export type AggregateCreatorArgs = {
+    /**
+     * Filter which Creator to aggregate.
+    **/
     where?: CreatorWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Creators to fetch.
+    **/
     orderBy?: Enumerable<CreatorOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
     cursor?: CreatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Creators from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Creators.
+    **/
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Creators
+    **/
     count?: true
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
     avg?: CreatorAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
     sum?: CreatorSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
     min?: CreatorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
     max?: CreatorMaxAggregateInputType
   }
 
@@ -4728,6 +5856,7 @@ export namespace Prisma {
     findUnique<T extends FindUniqueCreatorArgs>(
       args: Subset<T, FindUniqueCreatorArgs>
     ): CheckSelect<T, Prisma__CreatorClient<Creator | null>, Prisma__CreatorClient<CreatorGetPayload<T> | null>>
+
     /**
      * Find the first Creator that matches the filter.
      * @param {FindFirstCreatorArgs} args - Arguments to find a Creator
@@ -4742,6 +5871,7 @@ export namespace Prisma {
     findFirst<T extends FindFirstCreatorArgs>(
       args?: Subset<T, FindFirstCreatorArgs>
     ): CheckSelect<T, Prisma__CreatorClient<Creator | null>, Prisma__CreatorClient<CreatorGetPayload<T> | null>>
+
     /**
      * Find zero or more Creators that matches the filter.
      * @param {FindManyCreatorArgs=} args - Arguments to filter and select certain fields only.
@@ -4759,6 +5889,7 @@ export namespace Prisma {
     findMany<T extends FindManyCreatorArgs>(
       args?: Subset<T, FindManyCreatorArgs>
     ): CheckSelect<T, Promise<Array<Creator>>, Promise<Array<CreatorGetPayload<T>>>>
+
     /**
      * Create a Creator.
      * @param {CreatorCreateArgs} args - Arguments to create a Creator.
@@ -4774,6 +5905,7 @@ export namespace Prisma {
     create<T extends CreatorCreateArgs>(
       args: Subset<T, CreatorCreateArgs>
     ): CheckSelect<T, Prisma__CreatorClient<Creator>, Prisma__CreatorClient<CreatorGetPayload<T>>>
+
     /**
      * Delete a Creator.
      * @param {CreatorDeleteArgs} args - Arguments to delete one Creator.
@@ -4789,6 +5921,7 @@ export namespace Prisma {
     delete<T extends CreatorDeleteArgs>(
       args: Subset<T, CreatorDeleteArgs>
     ): CheckSelect<T, Prisma__CreatorClient<Creator>, Prisma__CreatorClient<CreatorGetPayload<T>>>
+
     /**
      * Update one Creator.
      * @param {CreatorUpdateArgs} args - Arguments to update one Creator.
@@ -4807,6 +5940,7 @@ export namespace Prisma {
     update<T extends CreatorUpdateArgs>(
       args: Subset<T, CreatorUpdateArgs>
     ): CheckSelect<T, Prisma__CreatorClient<Creator>, Prisma__CreatorClient<CreatorGetPayload<T>>>
+
     /**
      * Delete zero or more Creators.
      * @param {CreatorDeleteManyArgs} args - Arguments to filter Creators to delete.
@@ -4822,6 +5956,7 @@ export namespace Prisma {
     deleteMany<T extends CreatorDeleteManyArgs>(
       args?: Subset<T, CreatorDeleteManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Update zero or more Creators.
      * @param {CreatorUpdateManyArgs} args - Arguments to update one or more rows.
@@ -4840,6 +5975,7 @@ export namespace Prisma {
     updateMany<T extends CreatorUpdateManyArgs>(
       args: Subset<T, CreatorUpdateManyArgs>
     ): Promise<BatchPayload>
+
     /**
      * Create or update one Creator.
      * @param {CreatorUpsertArgs} args - Arguments to update or create a Creator.
@@ -4860,6 +5996,7 @@ export namespace Prisma {
     upsert<T extends CreatorUpsertArgs>(
       args: Subset<T, CreatorUpsertArgs>
     ): CheckSelect<T, Prisma__CreatorClient<Creator>, Prisma__CreatorClient<CreatorGetPayload<T>>>
+
     /**
      * Find zero or one Creator that matches the filter.
      * @param {FindUniqueCreatorArgs} args - Arguments to find a Creator
@@ -4875,17 +6012,45 @@ export namespace Prisma {
     findOne<T extends FindUniqueCreatorArgs>(
       args: Subset<T, FindUniqueCreatorArgs>
     ): CheckSelect<T, Prisma__CreatorClient<Creator | null>, Prisma__CreatorClient<CreatorGetPayload<T> | null>>
+
     /**
-     * Count
-     */
+     * Count the number of Creators.
+     * @param {FindManyCreatorArgs} args - Arguments to filter Creators to count.
+     * @example
+     * // Count the number of Creators
+     * const count = await prisma.creator.count({
+     *   where: {
+     *     // ... the filter for the Creators we want to count
+     *   }
+     * })
+    **/
     count(args?: Omit<FindManyCreatorArgs, 'select' | 'include'>): Promise<number>
 
-  
-
     /**
-     * Aggregate
-     */
+     * Allows you to perform aggregations operations on a Creator.
+     * @param {AggregateCreatorArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends AggregateCreatorArgs>(args: Subset<T, AggregateCreatorArgs>): Promise<GetCreatorAggregateType<T>>
+
+
   }
 
   /**
@@ -4974,10 +6139,35 @@ export namespace Prisma {
      * Filter, which Creator to fetch.
     **/
     where?: CreatorWhereInput
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Creators to fetch.
+    **/
     orderBy?: Enumerable<CreatorOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Creators.
+    **/
     cursor?: CreatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Creators from the position of the cursor.
+    **/
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Creators.
+    **/
     skip?: number
+    /**
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * 
+     * Filter by unique combinations of Creators.
+    **/
     distinct?: Enumerable<CreatorScalarFieldEnum>
   }
 
@@ -4999,18 +6189,26 @@ export namespace Prisma {
     **/
     where?: CreatorWhereInput
     /**
-     * Determine the order of the Creators to fetch.
+     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * 
+     * Determine the order of Creators to fetch.
     **/
     orderBy?: Enumerable<CreatorOrderByInput>
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
      * Sets the position for listing Creators.
     **/
     cursor?: CreatorWhereUniqueInput
     /**
-     * The number of Creators to fetch. If negative number, it will take Creators before the `cursor`.
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Creators from the position of the cursor.
     **/
     take?: number
     /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
      * Skip the first `n` Creators.
     **/
     skip?: number
@@ -5332,7 +6530,7 @@ export namespace Prisma {
   }
 
   export type CategoryWhereUniqueInput = {
-    slug_number?: SlugNumberCompoundUniqueInput
+    slug_number?: CategorySlugNumberCompoundUniqueInput
   }
 
   export type PatientWhereInput = {
@@ -5351,7 +6549,7 @@ export namespace Prisma {
   }
 
   export type PatientWhereUniqueInput = {
-    firstName_lastName?: FirstNameLastNameCompoundUniqueInput
+    firstName_lastName?: PatientFirstNameLastNameCompoundUniqueInput
   }
 
   export type MovieWhereInput = {
@@ -5371,7 +6569,7 @@ export namespace Prisma {
   }
 
   export type MovieWhereUniqueInput = {
-    directorFirstName_directorLastName_title?: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
+    directorFirstName_directorLastName_title?: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
   }
 
   export type DirectorWhereInput = {
@@ -5389,7 +6587,7 @@ export namespace Prisma {
   }
 
   export type DirectorWhereUniqueInput = {
-    firstName_lastName?: FirstNameLastNameCompoundUniqueInput
+    firstName_lastName?: DirectorFirstNameLastNameCompoundUniqueInput
   }
 
   export type ProblemWhereInput = {
@@ -5711,12 +6909,12 @@ export namespace Prisma {
     not?: InputJsonValue
   }
 
-  export type SlugNumberCompoundUniqueInput = {
+  export type CategorySlugNumberCompoundUniqueInput = {
     slug: string
     number: number
   }
 
-  export type FirstNameLastNameCompoundUniqueInput = {
+  export type PatientFirstNameLastNameCompoundUniqueInput = {
     firstName: string
     lastName: string
   }
@@ -5726,7 +6924,7 @@ export namespace Prisma {
     isNot?: DirectorWhereInput
   }
 
-  export type DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = {
+  export type MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = {
     directorFirstName: string
     directorLastName: string
     title: string
@@ -5736,6 +6934,11 @@ export namespace Prisma {
     every?: MovieWhereInput
     some?: MovieWhereInput
     none?: MovieWhereInput
+  }
+
+  export type DirectorFirstNameLastNameCompoundUniqueInput = {
+    firstName: string
+    lastName: string
   }
 
   export type CreatorListRelationFilter = {
@@ -7646,14 +8849,14 @@ export type EnumPostKindNullableFilter = Prisma.EnumPostKindNullableFilter
 export type JsonFilter = Prisma.JsonFilter
 
 /**
- * @deprecated Renamed to `Prisma.SlugNumberCompoundUniqueInput`
+ * @deprecated Renamed to `Prisma.CategorySlugNumberCompoundUniqueInput`
  */
-export type SlugNumberCompoundUniqueInput = Prisma.SlugNumberCompoundUniqueInput
+export type CategorySlugNumberCompoundUniqueInput = Prisma.CategorySlugNumberCompoundUniqueInput
 
 /**
- * @deprecated Renamed to `Prisma.FirstNameLastNameCompoundUniqueInput`
+ * @deprecated Renamed to `Prisma.PatientFirstNameLastNameCompoundUniqueInput`
  */
-export type FirstNameLastNameCompoundUniqueInput = Prisma.FirstNameLastNameCompoundUniqueInput
+export type PatientFirstNameLastNameCompoundUniqueInput = Prisma.PatientFirstNameLastNameCompoundUniqueInput
 
 /**
  * @deprecated Renamed to `Prisma.DirectorRelationFilter`
@@ -7661,14 +8864,19 @@ export type FirstNameLastNameCompoundUniqueInput = Prisma.FirstNameLastNameCompo
 export type DirectorRelationFilter = Prisma.DirectorRelationFilter
 
 /**
- * @deprecated Renamed to `Prisma.DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput`
+ * @deprecated Renamed to `Prisma.MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput`
  */
-export type DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = Prisma.DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
+export type MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = Prisma.MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
 
 /**
  * @deprecated Renamed to `Prisma.MovieListRelationFilter`
  */
 export type MovieListRelationFilter = Prisma.MovieListRelationFilter
+
+/**
+ * @deprecated Renamed to `Prisma.DirectorFirstNameLastNameCompoundUniqueInput`
+ */
+export type DirectorFirstNameLastNameCompoundUniqueInput = Prisma.DirectorFirstNameLastNameCompoundUniqueInput
 
 /**
  * @deprecated Renamed to `Prisma.CreatorListRelationFilter`

@@ -6,22 +6,16 @@ import { JsonValue, InputJsonValue } from "../../../client";
   isAbstract: true,
   description: undefined,
 })
-export class DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
+export class PatientFirstNameLastNameCompoundUniqueInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: undefined
   })
-  directorFirstName!: string;
+  firstName!: string;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: undefined
   })
-  directorLastName!: string;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
-  })
-  title!: string;
+  lastName!: string;
 }

@@ -6,16 +6,16 @@ import { JsonValue, InputJsonValue } from "../../../client";
   isAbstract: true,
   description: undefined,
 })
-export class SlugNumberCompoundUniqueInput {
+export class DirectorFirstNameLastNameCompoundUniqueInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: undefined
   })
-  slug!: string;
+  firstName!: string;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: undefined
   })
-  number!: number;
+  lastName!: string;
 }

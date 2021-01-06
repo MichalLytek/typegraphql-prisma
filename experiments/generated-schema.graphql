@@ -76,6 +76,11 @@ enum CategoryScalarFieldEnum {
   slug
 }
 
+input CategorySlugNumberCompoundUniqueInput {
+  number: Int!
+  slug: String!
+}
+
 input CategoryWhereInput {
   AND: [CategoryWhereInput!]
   name: StringFilter
@@ -86,7 +91,7 @@ input CategoryWhereInput {
 }
 
 input CategoryWhereUniqueInput {
-  slug_number: SlugNumberCompoundUniqueInput
+  slug_number: CategorySlugNumberCompoundUniqueInput
 }
 
 """User model doc"""
@@ -524,10 +529,9 @@ input DirectorCreateWithoutMoviesInput {
   lastName: String!
 }
 
-input DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
-  directorFirstName: String!
-  directorLastName: String!
-  title: String!
+input DirectorFirstNameLastNameCompoundUniqueInput {
+  firstName: String!
+  lastName: String!
 }
 
 type DirectorMaxAggregate {
@@ -594,7 +598,7 @@ input DirectorWhereInput {
 }
 
 input DirectorWhereUniqueInput {
-  firstName_lastName: FirstNameLastNameCompoundUniqueInput
+  firstName_lastName: DirectorFirstNameLastNameCompoundUniqueInput
 }
 
 input EnumPostKindNullableFilter {
@@ -613,11 +617,6 @@ input EnumRoleFilter {
   in: [Role!]
   not: NestedEnumRoleFilter
   notIn: [Role!]
-}
-
-input FirstNameLastNameCompoundUniqueInput {
-  firstName: String!
-  lastName: String!
 }
 
 input FloatFieldUpdateOperationsInput {
@@ -703,6 +702,12 @@ input MovieCreateOrConnectWithoutdirectorInput {
 }
 
 input MovieCreateWithoutDirectorInput {
+  title: String!
+}
+
+input MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
+  directorFirstName: String!
+  directorLastName: String!
   title: String!
 }
 
@@ -798,7 +803,7 @@ input MovieWhereInput {
 }
 
 input MovieWhereUniqueInput {
-  directorFirstName_directorLastName_title: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
+  directorFirstName_directorLastName_title: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
 }
 
 type Mutation {
@@ -954,6 +959,11 @@ input PatientCreateInput {
   lastName: String!
 }
 
+input PatientFirstNameLastNameCompoundUniqueInput {
+  firstName: String!
+  lastName: String!
+}
+
 type PatientMaxAggregate {
   email: String
   firstName: String
@@ -1000,7 +1010,7 @@ input PatientWhereInput {
 }
 
 input PatientWhereUniqueInput {
-  firstName_lastName: FirstNameLastNameCompoundUniqueInput
+  firstName_lastName: PatientFirstNameLastNameCompoundUniqueInput
 }
 
 type Post {
@@ -1483,11 +1493,6 @@ enum QueryMode {
 enum Role {
   ADMIN
   USER
-}
-
-input SlugNumberCompoundUniqueInput {
-  number: Int!
-  slug: String!
 }
 
 enum SortOrder {

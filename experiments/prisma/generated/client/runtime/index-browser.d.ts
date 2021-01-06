@@ -1,3 +1,6 @@
+// Type definitions for decimal.js >=7.0.0
+
+
 declare namespace Decimal {
   export type Constructor = typeof Decimal;
   export type Instance = Decimal;

@@ -158,6 +158,7 @@ declare namespace DMMF {
         deleteMany?: string | null;
         aggregate?: string | null;
         groupBy?: string | null;
+        count?: string | null;
     }
     enum ModelAction {
         findUnique = "findUnique",
@@ -169,7 +170,9 @@ declare namespace DMMF {
         upsert = "upsert",
         delete = "delete",
         deleteMany = "deleteMany",
-        groupBy = "groupBy"
+        groupBy = "groupBy",
+        count = "count",
+        aggregate = "aggregate"
     }
 }
 
@@ -457,9 +460,6 @@ declare function unpack({ document, path, data }: UnpackOptions): any;
 
 declare var debug: debug.Debug & { debug: debug.Debug; default: debug.Debug };
 
-
-export as namespace debug;
-
 declare namespace debug {
     interface Debug {
         (namespace: string): Debugger;
@@ -524,16 +524,7 @@ declare class PrismaClientInitializationError extends Error {
     get [Symbol.toStringTag](): string;
 }
 
-declare type Platform = 'native' | 'darwin' | 'debian-openssl-1.0.x' | 'debian-openssl-1.1.x' | 'rhel-openssl-1.0.x' | 'rhel-openssl-1.1.x' | 'linux-musl' | 'linux-nixos' | 'windows' | 'freebsd11' | 'freebsd12' | 'openbsd' | 'netbsd' | 'arm';
-
-declare class Undici {
-    private pool;
-    private closed;
-    constructor(url: any, moreArgs?: any);
-    request(body: any, customHeaders?: Record<string, string>): Promise<unknown>;
-    status(): Promise<unknown>;
-    close(): void;
-}
+declare type Platform = 'native' | 'darwin' | 'debian-openssl-1.0.x' | 'debian-openssl-1.1.x' | 'rhel-openssl-1.0.x' | 'rhel-openssl-1.1.x' | 'linux-arm-openssl-1.1.x' | 'linux-arm-openssl-1.0.x' | 'linux-musl' | 'linux-nixos' | 'windows' | 'freebsd11' | 'freebsd12' | 'openbsd' | 'netbsd' | 'arm';
 
 interface DatasourceOverwrite {
     name: string;
@@ -557,21 +548,15 @@ interface EngineConfig {
     logLevel?: 'info' | 'warn';
     env?: Record<string, string>;
     flags?: string[];
+    useUds?: boolean;
     clientVersion?: string;
     enableExperimental?: string[];
     engineEndpoint?: string;
+    activeProvider?: string;
 }
 declare type GetConfigResult = {
     datasources: DataSource[];
     generators: GeneratorConfig[];
-};
-declare type Deferred = {
-    resolve: () => void;
-    reject: (err: Error) => void;
-};
-declare type StopDeferred = {
-    resolve: (code: number | null) => void;
-    reject: (err: Error) => void;
 };
 declare class NodeEngine {
     private logEmitter;
@@ -587,47 +572,42 @@ declare class NodeEngine {
     private clientVersion?;
     private lastPanic?;
     private globalKillSignalReceived?;
-    private restartCount;
-    private backoffPromise?;
-    private queryEngineStarted;
+    private startCount;
     private enableExperimental;
     private engineEndpoint?;
-    private lastLog?;
     private lastErrorLog?;
-    private lastError?;
+    private lastRustError?;
     private useUds;
     private socketPath?;
     private getConfigPromise?;
     private stopPromise?;
     private beforeExitListener?;
     private dirname?;
-    exitCode: number;
+    private cwd;
+    private datamodelPath;
+    private prismaPath?;
+    private stderrLogs;
+    private currentRequestPromise?;
+    private platformPromise?;
+    private platform?;
+    private generator?;
+    private incorrectlyPinnedBinaryTarget?;
+    private datasources?;
+    private startPromise?;
+    private versionPromise?;
+    private engineStartDeferred?;
+    private engineStopDeferred?;
+    private undici?;
+    private lastQuery?;
+    private lastVersion?;
+    private lastActiveProvider?;
+    private activeProvider?;
     /**
      * exiting is used to tell the .on('exit') hook, if the exit came from our script.
      * As soon as the Prisma binary returns a correct return code (like 1 or 0), we don't need this anymore
      */
-    queryEngineKilled: boolean;
-    managementApiEnabled: boolean;
-    datamodelJson?: string;
-    cwd: string;
-    datamodelPath: string;
-    prismaPath?: string;
-    url: string;
-    ready: boolean;
-    stderrLogs: string;
-    stdoutLogs: string;
-    currentRequestPromise?: any;
-    cwdPromise: Promise<string>;
-    platformPromise: Promise<Platform>;
-    platform?: Platform | string;
-    generator?: GeneratorConfig;
-    incorrectlyPinnedBinaryTarget?: string;
-    datasources?: DatasourceOverwrite[];
-    startPromise?: Promise<any>;
-    engineStartDeferred?: Deferred;
-    engineStopDeferred?: StopDeferred;
-    undici: Undici;
-    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, }: EngineConfig);
+    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, useUds, activeProvider, }: EngineConfig);
+    private setError;
     private checkForTooManyEngines;
     private resolveCwd;
     on(event: 'query' | 'info' | 'warn' | 'error' | 'beforeExit', listener: (args?: any) => any): void;
@@ -657,11 +637,19 @@ declare class NodeEngine {
     protected getFreePort(): Promise<number>;
     getConfig(): Promise<GetConfigResult>;
     _getConfig(): Promise<GetConfigResult>;
-    version(): Promise<string>;
+    version(forceRun?: boolean): Promise<string>;
+    internalVersion(): Promise<string>;
     request<T>(query: string, headers: Record<string, string>, numTry?: number): Promise<T>;
     requestBatch<T>(queries: string[], transaction?: boolean, numTry?: number): Promise<T>;
+    private get hasMaxRestarts();
+    /**
+     * If we have request errors like "ECONNRESET", we need to get the error from a
+     * different place, not the request itself. This different place can either be
+     * this.lastRustError or this.lastErrorLog
+     */
+    private throwAsyncErrorIfExists;
+    private getErrorMessageWithLink;
     private handleRequestError;
-    private getLastLog;
     private graphQLToJSError;
 }
 
@@ -702,6 +690,7 @@ interface PrismaClientOptions {
     __internal?: {
         debug?: boolean;
         hooks?: Hooks;
+        useUds?: boolean;
         engine?: {
             cwd?: string;
             binaryPath?: string;
@@ -740,6 +729,7 @@ interface GetPrismaClientOptions {
     clientVersion?: string;
     engineVersion?: string;
     datasourceNames: string[];
+    activeProvider: string;
 }
 declare function getPrismaClient(config: GetPrismaClientOptions): any;
 
@@ -778,6 +768,9 @@ declare const empty: Sql;
 declare function sqltag(strings: ReadonlyArray<string>, ...values: RawValue[]): Sql;
 
 declare function warnEnvConflicts(envPaths: any): void;
+
+// Type definitions for decimal.js >=7.0.0
+
 
 declare namespace Decimal {
   export type Constructor = typeof Decimal;

@@ -2295,6 +2295,6 @@ var require_decimal = __commonJS((exports2, module2) => {
 
 // src/runtime/index-browser.ts
 __export(exports, {
-  Decimal: () => decimal.default
+  Decimal: () => import_decimal.default
 });
-var decimal = __toModule(require_decimal());
+var import_decimal = __toModule(require_decimal());
