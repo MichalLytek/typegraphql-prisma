@@ -1,16 +1,14 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from "../inputs/MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class MovieWhereUniqueInput {
   @TypeGraphQL.Field(_type => MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   directorFirstName_directorLastName_title?: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput | undefined;
 }

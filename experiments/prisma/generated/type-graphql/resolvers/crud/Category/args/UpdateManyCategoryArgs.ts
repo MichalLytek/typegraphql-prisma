@@ -5,9 +5,13 @@ import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 
 @TypeGraphQL.ArgsType()
 export class UpdateManyCategoryArgs {
-  @TypeGraphQL.Field(_type => CategoryUpdateManyMutationInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CategoryUpdateManyMutationInput, {
+    nullable: false
+  })
   data!: CategoryUpdateManyMutationInput;
 
-  @TypeGraphQL.Field(_type => CategoryWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => CategoryWhereInput, {
+    nullable: true
+  })
   where?: CategoryWhereInput | undefined;
 }

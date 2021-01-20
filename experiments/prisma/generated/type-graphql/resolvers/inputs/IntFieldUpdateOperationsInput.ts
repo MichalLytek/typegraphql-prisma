@@ -1,39 +1,33 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class IntFieldUpdateOperationsInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   set?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   increment?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   decrement?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   multiply?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   divide?: number | undefined;
 }

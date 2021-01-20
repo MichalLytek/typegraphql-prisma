@@ -1,29 +1,25 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { CreatorCreateManyWithoutLikesInput } from "../inputs/CreatorCreateManyWithoutLikesInput";
 import { CreatorCreateOneWithoutProblemsInput } from "../inputs/CreatorCreateOneWithoutProblemsInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ProblemCreateInput {
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   problemText!: string;
 
   @TypeGraphQL.Field(_type => CreatorCreateManyWithoutLikesInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   likedBy?: CreatorCreateManyWithoutLikesInput | undefined;
 
   @TypeGraphQL.Field(_type => CreatorCreateOneWithoutProblemsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   creator?: CreatorCreateOneWithoutProblemsInput | undefined;
 }

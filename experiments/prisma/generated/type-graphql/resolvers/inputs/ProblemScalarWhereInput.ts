@@ -1,48 +1,41 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { IntFilter } from "../inputs/IntFilter";
 import { IntNullableFilter } from "../inputs/IntNullableFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ProblemScalarWhereInput {
   @TypeGraphQL.Field(_type => [ProblemScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   AND?: ProblemScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   OR?: ProblemScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   NOT?: ProblemScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => IntFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   problemText?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntNullableFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   creatorId?: IntNullableFilter | undefined;
 }

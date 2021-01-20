@@ -7,21 +7,33 @@ import { ClientScalarFieldEnum } from "../../../../enums/ClientScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class FindFirstClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => ClientWhereInput, {
+    nullable: true
+  })
   where?: ClientWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ClientOrderByInput], { nullable: true })
+  @TypeGraphQL.Field(_type => [ClientOrderByInput], {
+    nullable: true
+  })
   orderBy?: ClientOrderByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: true })
+  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, {
+    nullable: true
+  })
   cursor?: ClientWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [ClientScalarFieldEnum], { nullable: true })
+  @TypeGraphQL.Field(_type => [ClientScalarFieldEnum], {
+    nullable: true
+  })
   distinct?: Array<"id" | "email" | "name" | "age" | "balance" | "amount" | "role"> | undefined;
 }

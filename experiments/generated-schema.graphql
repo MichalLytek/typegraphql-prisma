@@ -5,7 +5,7 @@
 
 type AggregateClient {
   avg: ClientAvgAggregate
-  count: Int
+  count: ClientCountAggregate
   max: ClientMaxAggregate
   min: ClientMinAggregate
   sum: ClientSumAggregate
@@ -13,33 +13,33 @@ type AggregateClient {
 
 type AggregateCreator {
   avg: CreatorAvgAggregate
-  count: Int
+  count: CreatorCountAggregate
   max: CreatorMaxAggregate
   min: CreatorMinAggregate
   sum: CreatorSumAggregate
 }
 
 type AggregateDirector {
-  count: Int
+  count: DirectorCountAggregate
   max: DirectorMaxAggregate
   min: DirectorMinAggregate
 }
 
 type AggregateMovie {
-  count: Int
+  count: MovieCountAggregate
   max: MovieMaxAggregate
   min: MovieMinAggregate
 }
 
 type AggregatePatient {
-  count: Int
+  count: PatientCountAggregate
   max: PatientMaxAggregate
   min: PatientMinAggregate
 }
 
 type AggregateProblem {
   avg: ProblemAvgAggregate
-  count: Int
+  count: ProblemCountAggregate
   max: ProblemMaxAggregate
   min: ProblemMinAggregate
   sum: ProblemSumAggregate
@@ -116,6 +116,17 @@ type ClientAvgAggregate {
   amount: Float!
   balance: Float!
   id: Float!
+}
+
+type ClientCountAggregate {
+  _all: Int!
+  age: Int!
+  amount: Int!
+  balance: Int!
+  email: Int
+  id: Int!
+  name: Int
+  role: Int
 }
 
 input ClientCreateInput {
@@ -322,6 +333,12 @@ type CreatorAvgAggregate {
   id: Float!
 }
 
+type CreatorCountAggregate {
+  _all: Int!
+  id: Int!
+  name: Int
+}
+
 input CreatorCreateInput {
   likes: ProblemCreateManyWithoutLikedByInput
   name: String!
@@ -507,6 +524,12 @@ type Director {
   movies(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]
 }
 
+type DirectorCountAggregate {
+  _all: Int!
+  firstName: Int
+  lastName: Int
+}
+
 input DirectorCreateInput {
   firstName: String!
   lastName: String!
@@ -683,6 +706,13 @@ type Movie {
   directorFirstName: String!
   directorLastName: String!
   title: String!
+}
+
+type MovieCountAggregate {
+  _all: Int!
+  directorFirstName: Int
+  directorLastName: Int
+  title: Int
 }
 
 input MovieCreateInput {
@@ -951,6 +981,13 @@ type Patient {
   email: String!
   firstName: String!
   lastName: String!
+}
+
+type PatientCountAggregate {
+  _all: Int!
+  email: Int
+  firstName: Int
+  lastName: Int
 }
 
 input PatientCreateInput {
@@ -1274,6 +1311,13 @@ type Problem {
 type ProblemAvgAggregate {
   creatorId: Float
   id: Float!
+}
+
+type ProblemCountAggregate {
+  _all: Int!
+  creatorId: Int
+  id: Int!
+  problemText: Int
 }
 
 input ProblemCreateInput {

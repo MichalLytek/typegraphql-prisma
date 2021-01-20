@@ -57,7 +57,7 @@ export function generatePrismaJsonTypeImport(
           ...Array(level).fill(".."),
           options.relativePrismaOutputPath,
         ),
-    namedImports: ["JsonValue", "InputJsonValue"],
+    namedImports: ["Prisma"],
   });
 }
 

@@ -3,6 +3,7 @@ import {
   OptionalKind,
   Project,
   GetAccessorDeclarationStructure,
+  Writers,
 } from "ts-morph";
 import path from "path";
 
@@ -57,13 +58,13 @@ export default function generateObjectTypeClassFromModel(
       {
         name: "TypeGraphQL.ObjectType",
         arguments: [
-          `{
-            isAbstract: true,
-            description: ${model.docs ? `"${model.docs}"` : "undefined"},
-            simpleResolvers: ${
-              dmmfDocument.options.simpleResolvers ? "true" : "undefined"
-            },
-          }`,
+          Writers.object({
+            isAbstract: "true",
+            ...(model.docs && { description: `"${model.docs}"` }),
+            ...(dmmfDocument.options.simpleResolvers && {
+              simpleResolvers: "true",
+            }),
+          }),
         ],
       },
     ],
@@ -90,12 +91,10 @@ export default function generateObjectTypeClassFromModel(
                     name: "TypeGraphQL.Field",
                     arguments: [
                       `_type => ${field.typeGraphQLType}`,
-                      `{
-                        nullable: ${isOptional},
-                        description: ${
-                          field.docs ? `"${field.docs}"` : "undefined"
-                        },
-                      }`,
+                      Writers.object({
+                        nullable: `${isOptional}`,
+                        ...(field.docs && { description: `"${field.docs}"` }),
+                      }),
                     ],
                   },
                 ]),
@@ -123,10 +122,10 @@ export default function generateObjectTypeClassFromModel(
               name: "TypeGraphQL.Field",
               arguments: [
                 `_type => ${field.typeGraphQLType}`,
-                `{
-                  nullable: ${!field.isRequired},
-                  description: ${field.docs ? `"${field.docs}"` : "undefined"},
-                }`,
+                Writers.object({
+                  nullable: `${!field.isRequired}`,
+                  ...(field.docs && { description: `"${field.docs}"` }),
+                }),
               ],
             },
           ],

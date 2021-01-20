@@ -1,54 +1,47 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { PostCreateManyWithoutAuthorInput } from "../inputs/PostCreateManyWithoutAuthorInput";
 import { PostCreateManyWithoutEditorInput } from "../inputs/PostCreateManyWithoutEditorInput";
 import { Role } from "../../enums/Role";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ClientCreateInput {
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   email!: string;
 
   name?: string | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   age!: number;
 
   balance!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   amount!: number;
 
   @TypeGraphQL.Field(_type => Role, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   role!: "USER" | "ADMIN";
 
   posts?: PostCreateManyWithoutAuthorInput | undefined;
 
   @TypeGraphQL.Field(_type => PostCreateManyWithoutEditorInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   editorPosts?: PostCreateManyWithoutEditorInput | undefined;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   get firstName() {
     return this.name;
@@ -59,8 +52,7 @@ export class ClientCreateInput {
   }
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   get accountBalance() {
     return this.balance;
@@ -71,8 +63,7 @@ export class ClientCreateInput {
   }
 
   @TypeGraphQL.Field(_type => PostCreateManyWithoutAuthorInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   get clientPosts() {
     return this.posts;

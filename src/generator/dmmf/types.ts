@@ -11,7 +11,7 @@ export namespace DMMF {
     // documentation?: string;
     // additional props
     typeName: string;
-    docs?: string;
+    docs: string | undefined;
     valuesMap: Array<{ name: string; value: string }>;
   }
   export interface Datamodel {
@@ -120,13 +120,12 @@ export namespace DMMF {
     isEmbedded?: boolean;
     // additional props
     fields: OutputSchemaField[];
-    modelName: string;
+    modelName: string; // ???
     typeName: string;
   }
   export interface SchemaField {
     name: string;
-    isRequired: boolean;
-    isNullable?: boolean;
+    // isNullable?: boolean;
     // outputType: {
     //   type: string | OutputType | Enum;
     //   isList: boolean;
@@ -135,9 +134,16 @@ export namespace DMMF {
     // };
     outputType: TypeInfo;
     args: SchemaArg[];
+    deprecation?: SchemaFieldDeprecation;
     // additional props
     typeGraphQLType: string;
     fieldTSType: string;
+    isRequired: boolean;
+  }
+  export interface SchemaFieldDeprecation {
+    sinceVersion: string;
+    reason: string;
+    plannedRemovalVersion: string;
   }
   // named subtype of SchemaField->outputType
   export interface TypeInfo {
@@ -175,6 +181,8 @@ export namespace DMMF {
     // delete?: string | null;
     // deleteMany?: string | null;
     // aggregate?: string | null;
+    // groupBy?: string | null;
+    // count?: string | null;
 
     // additional props
     actions: Action[];
@@ -205,7 +213,8 @@ export namespace DMMF {
     upsert = "upsert",
     delete = "delete",
     deleteMany = "deleteMany",
-    // additional props
+    // groupBy = "groupBy",
+    // count = "count",
     aggregate = "aggregate",
   }
   // additional type

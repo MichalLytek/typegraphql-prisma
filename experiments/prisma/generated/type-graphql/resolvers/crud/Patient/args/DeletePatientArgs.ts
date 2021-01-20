@@ -4,6 +4,8 @@ import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput
 
 @TypeGraphQL.ArgsType()
 export class DeletePatientArgs {
-  @TypeGraphQL.Field(_type => PatientWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => PatientWhereUniqueInput, {
+    nullable: false
+  })
   where!: PatientWhereUniqueInput;
 }

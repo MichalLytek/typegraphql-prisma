@@ -6,8 +6,7 @@ import { BatchPayload } from "../../outputs/BatchPayload";
 @TypeGraphQL.Resolver(_of => Director)
 export class DeleteManyDirectorResolver {
   @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async deleteManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyDirectorArgs): Promise<BatchPayload> {
     return ctx.prisma.director.deleteMany(args);

@@ -1,28 +1,24 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { ProblemWhereInput } from "../inputs/ProblemWhereInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ProblemListRelationFilter {
   @TypeGraphQL.Field(_type => ProblemWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   every?: ProblemWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => ProblemWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   some?: ProblemWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => ProblemWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   none?: ProblemWhereInput | undefined;
 }

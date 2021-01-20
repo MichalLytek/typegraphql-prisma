@@ -5,8 +5,7 @@ import { Category } from "../../../models/Category";
 @TypeGraphQL.Resolver(_of => Category)
 export class FindManyCategoryResolver {
   @TypeGraphQL.Query(_returns => [Category], {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async categories(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyCategoryArgs): Promise<Category[]> {
     return ctx.prisma.category.findMany(args);

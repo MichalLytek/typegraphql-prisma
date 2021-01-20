@@ -1,23 +1,19 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../client";
+import { Prisma } from "../../client";
 import { Creator } from "../models/Creator";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class Problem {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined,
+    nullable: false
   })
   id!: number;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined,
+    nullable: false
   })
   problemText!: string;
 
@@ -26,8 +22,7 @@ export class Problem {
   creator?: Creator | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   creatorId?: number | null;
 }

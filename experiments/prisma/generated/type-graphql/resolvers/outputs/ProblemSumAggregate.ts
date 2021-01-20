@@ -1,22 +1,18 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ProblemSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   id!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   creatorId!: number | null;
 }

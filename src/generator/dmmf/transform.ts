@@ -28,7 +28,9 @@ export function transformSchema(
     ...(datamodel.outputObjectTypes.model ?? []),
   ];
   return {
-    inputTypes: inputObjectTypes.map(transformInputType(dmmfDocument)),
+    inputTypes: inputObjectTypes
+      .filter(uncheckedScalarInputsFilter(dmmfDocument))
+      .map(transformInputType(dmmfDocument)),
     outputTypes: outputObjectTypes.map(transformOutputType(dmmfDocument)),
     rootMutationType: datamodel.rootMutationType,
     rootQueryType: datamodel.rootQueryType,
@@ -107,6 +109,15 @@ function transformField(dmmfDocument: DmmfDocument) {
   };
 }
 
+function uncheckedScalarInputsFilter(dmmfDocument: DmmfDocument) {
+  const { useUncheckedScalarInputs } = dmmfDocument.options;
+  return (inputType: PrismaDMMF.InputType): boolean => {
+    return useUncheckedScalarInputs
+      ? true
+      : !inputType.name.includes("Unchecked");
+  };
+}
+
 function transformInputType(dmmfDocument: DmmfDocument) {
   return (inputType: PrismaDMMF.InputType): DMMF.InputType => {
     const modelName = getModelNameFromInputType(inputType.name);
@@ -156,27 +167,18 @@ function transformOutputType(dmmfDocument: DmmfDocument) {
       modelName,
       typeName,
       fields: outputType.fields.map<DMMF.OutputSchemaField>(field => {
-        // TODO: remove this hardcoded fix when Prisma fully support rich count aggregate
-        const isCountAggregateOutputType = field.outputType.type
-          .toString()
-          .endsWith("CountAggregateOutputType");
-        const outputType: DMMF.TypeInfo = isCountAggregateOutputType
-          ? {
-              isList: false,
-              location: "scalar",
-              type: "Int",
-            }
-          : {
-              ...field.outputType,
-              type: getMappedOutputTypeName(
-                dmmfDocument,
-                field.outputType.type as string,
-              ),
-            };
+        const isFieldRequired = field.isNullable ? false : true;
+        const outputType: DMMF.TypeInfo = {
+          ...field.outputType,
+          type: getMappedOutputTypeName(
+            dmmfDocument,
+            field.outputType.type as string,
+          ),
+        };
         const fieldTSType = getFieldTSType(
           dmmfDocument,
           outputType,
-          field.isRequired,
+          isFieldRequired,
           false,
         );
         const typeGraphQLType = getTypeGraphQLType(outputType, dmmfDocument);
@@ -212,6 +214,7 @@ function transformOutputType(dmmfDocument: DmmfDocument) {
 
         return {
           ...field,
+          isRequired: isFieldRequired,
           outputType,
           fieldTSType,
           typeGraphQLType,
@@ -259,7 +262,10 @@ function transformMapping(
     const { model, plural, ...availableActions } = mapping;
     const modelTypeName = dmmfDocument.getModelTypeName(model) ?? model;
     const actions = Object.entries(availableActions)
-      .filter(([actionKind]) => getOperationKindName(actionKind))
+      .filter(
+        ([actionKind, fieldName]) =>
+          fieldName && getOperationKindName(actionKind),
+      )
       .map<DMMF.Action>(([modelAction, fieldName]) => {
         const kind = modelAction as DMMF.ModelAction;
         const actionOutputType = dmmfDocument.schema.outputTypes.find(type =>

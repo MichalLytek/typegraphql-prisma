@@ -6,12 +6,18 @@ import { CreatorWhereUniqueInput } from "../../../inputs/CreatorWhereUniqueInput
 
 @TypeGraphQL.ArgsType()
 export class UpsertCreatorArgs {
-  @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
+    nullable: false
+  })
   where!: CreatorWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => CreatorCreateInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CreatorCreateInput, {
+    nullable: false
+  })
   create!: CreatorCreateInput;
 
-  @TypeGraphQL.Field(_type => CreatorUpdateInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CreatorUpdateInput, {
+    nullable: false
+  })
   update!: CreatorUpdateInput;
 }

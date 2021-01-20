@@ -1,22 +1,19 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { DirectorWhereInput } from "../inputs/DirectorWhereInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class DirectorRelationFilter {
   @TypeGraphQL.Field(_type => DirectorWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   is?: DirectorWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => DirectorWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   isNot?: DirectorWhereInput | undefined;
 }

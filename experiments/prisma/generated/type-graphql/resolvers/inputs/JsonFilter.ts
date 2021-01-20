@@ -1,21 +1,18 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class JsonFilter {
   @TypeGraphQL.Field(_type => GraphQLJSON, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
-  equals?: InputJsonValue | undefined;
+  equals?: Prisma.InputJsonValue | undefined;
 
   @TypeGraphQL.Field(_type => GraphQLJSON, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
-  not?: InputJsonValue | undefined;
+  not?: Prisma.InputJsonValue | undefined;
 }

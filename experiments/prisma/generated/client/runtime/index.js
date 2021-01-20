@@ -3747,7 +3747,7 @@ how you used Prisma Client in the issue.
   }
 });
 
-// ../../node_modules/.pnpm/@prisma/engines@2.14.0-28.5d491261d382a2a5ffdc71de17072b0e409f1cc1/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma/engines@2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports) => {
   var __defineProperty = Object.defineProperty;
   var __hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -3783,13 +3783,13 @@ var require_dist9 = __commonJS2((exports) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.14.0-28.5d491261d382a2a5ffdc71de17072b0e409f1cc1",
+      version: "2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "5d491261d382a2a5ffdc71de17072b0e409f1cc1"
+        enginesVersion: "e51dc3b5a9ee790a07104bec1c9477d51740fe54"
       },
       devDependencies: {
         "@types/node": "^14.11.8",
@@ -8169,11 +8169,11 @@ var require_dist9 = __commonJS2((exports) => {
       const errorCode = error && error.code;
       const prefix = getErrorPrefix({timedOut, timeout, errorCode, signal, signalDescription, exitCode, isCanceled});
       const execaMessage = `Command ${prefix}: ${command}`;
-      const isError = Object.prototype.toString.call(error) === "[object Error]";
-      const shortMessage = isError ? `${execaMessage}
+      const isError3 = Object.prototype.toString.call(error) === "[object Error]";
+      const shortMessage = isError3 ? `${execaMessage}
 ${error.message}` : execaMessage;
       const message = [shortMessage, stderr, stdout].filter(Boolean).join("\n");
-      if (isError) {
+      if (isError3) {
         error.originalMessage = error.message;
         error.message = message;
       } else {
@@ -22563,11 +22563,11 @@ var require_error3 = __commonJS2((exports2, module2) => {
     const errorCode = error && error.code;
     const prefix = getErrorPrefix({timedOut, timeout, errorCode, signal, signalDescription, exitCode, isCanceled});
     const execaMessage = `Command ${prefix}: ${command}`;
-    const isError = Object.prototype.toString.call(error) === "[object Error]";
-    const shortMessage = isError ? `${execaMessage}
+    const isError3 = Object.prototype.toString.call(error) === "[object Error]";
+    const shortMessage = isError3 ? `${execaMessage}
 ${error.message}` : execaMessage;
     const message = [shortMessage, stderr, stdout].filter(Boolean).join("\n");
-    if (isError) {
+    if (isError3) {
       error.originalMessage = error.message;
       error.message = message;
     } else {
@@ -23801,14 +23801,14 @@ ${indent_string_1.default(printDatamodelObject(obj), 2)}
   }
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/node/http-parser.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/node/http-parser.js
 var require_http_parser = __commonJS2((exports2, module2) => {
   "use strict";
   var {HTTPParser} = process.binding("http_parser");
   module2.exports = HTTPParser;
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/core/symbols.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/core/symbols.js
 var require_symbols = __commonJS2((exports2, module2) => {
   module2.exports = {
     kUrl: Symbol("url"),
@@ -23816,14 +23816,15 @@ var require_symbols = __commonJS2((exports2, module2) => {
     kResuming: Symbol("resuming"),
     kQueue: Symbol("queue"),
     kConnect: Symbol("connect"),
-    kResume: Symbol("resume"),
-    kPause: Symbol("pause"),
-    kSocketTimeout: Symbol("socket timeout"),
     kIdleTimeout: Symbol("idle timeout"),
+    kIdleTimeoutValue: Symbol("idle timeout value"),
+    kKeepAliveDefaultTimeout: Symbol("default keep alive timeout"),
     kKeepAliveMaxTimeout: Symbol("max keep alive timeout"),
     kKeepAliveTimeoutThreshold: Symbol("keep alive timeout threshold"),
-    kKeepAliveTimeout: Symbol("keep alive timeout"),
+    kKeepAliveTimeoutValue: Symbol("keep alive timeout"),
     kKeepAlive: Symbol("keep alive"),
+    kHeadersTimeout: Symbol("headers timeout"),
+    kBodyTimeout: Symbol("body timeout"),
     kTLSServerName: Symbol("server name"),
     kHost: Symbol("host"),
     kTLSOpts: Symbol("TLS Options"),
@@ -23832,7 +23833,6 @@ var require_symbols = __commonJS2((exports2, module2) => {
     kReset: Symbol("reset"),
     kDestroyed: Symbol("destroyed"),
     kMaxHeadersSize: Symbol("max headers size"),
-    kHeadersTimeout: Symbol("headers timeout"),
     kRunningIdx: Symbol("running index"),
     kPendingIdx: Symbol("pending index"),
     kError: Symbol("error"),
@@ -23840,119 +23840,14 @@ var require_symbols = __commonJS2((exports2, module2) => {
     kParser: Symbol("parser"),
     kOnDestroyed: Symbol("destroy callbacks"),
     kPipelining: Symbol("pipelinig"),
-    kRetryDelay: Symbol("retry delay"),
     kSocketPath: Symbol("socket path"),
     kSocket: Symbol("socket"),
-    kRetryTimeout: Symbol("retry timeout"),
-    kTLSSession: Symbol("tls session cache")
+    kTLSSession: Symbol("tls session cache"),
+    kHostHeader: Symbol("host header")
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/core/util.js
-var require_util5 = __commonJS2((exports2, module2) => {
-  "use strict";
-  var assert = require("assert");
-  var {kDestroyed} = require_symbols();
-  var {IncomingMessage} = require("http");
-  var util2 = require("util");
-  var net = require("net");
-  function nop() {
-  }
-  function isStream(body) {
-    return !!(body && typeof body.on === "function");
-  }
-  function getServerName(host) {
-    if (!host) {
-      return null;
-    }
-    let servername = host;
-    if (servername.startsWith("[")) {
-      const idx = servername.indexOf("]");
-      servername = idx === -1 ? servername : servername.substr(1, idx - 1);
-    } else {
-      servername = servername.split(":", 1)[0];
-    }
-    if (net.isIP(servername)) {
-      servername = null;
-    }
-    return servername;
-  }
-  function bodyLength(body) {
-    if (body && typeof body.on === "function") {
-      const state = body._readableState;
-      return state && state.ended === true && Number.isFinite(state.length) ? state.length : null;
-    }
-    assert(!body || Number.isFinite(body.byteLength));
-    return body ? body.length : 0;
-  }
-  function isDestroyed(stream) {
-    return !stream || !!(stream.destroyed || stream[kDestroyed]);
-  }
-  function destroy(stream, err) {
-    if (!isStream(stream) || isDestroyed(stream)) {
-      return;
-    }
-    if (typeof stream.destroy === "function") {
-      if (err || Object.getPrototypeOf(stream).constructor !== IncomingMessage) {
-        stream.destroy(err);
-      }
-    } else if (err) {
-      process.nextTick((stream2, err2) => {
-        stream2.emit("error", err2);
-      }, stream, err);
-    }
-    if (stream.destroyed !== true) {
-      stream[kDestroyed] = true;
-    }
-  }
-  var KEEPALIVE_TIMEOUT_EXPR = /timeout=(\d+)/;
-  function parseKeepAliveTimeout(val) {
-    const m2 = val.match(KEEPALIVE_TIMEOUT_EXPR);
-    return m2 ? parseInt(m2[1]) * 1e3 : null;
-  }
-  function parseHeaders(headers) {
-    const obj = {};
-    for (var i = 0; i < headers.length; i += 2) {
-      var key = headers[i].toLowerCase();
-      var val = obj[key];
-      if (!val) {
-        obj[key] = headers[i + 1];
-      } else {
-        if (!Array.isArray(val)) {
-          val = [val];
-          obj[key] = val;
-        }
-        val.push(headers[i + 1]);
-      }
-    }
-    return obj;
-  }
-  function isBuffer(buffer) {
-    return buffer instanceof Uint8Array || Buffer.isBuffer(buffer);
-  }
-  function errnoException(code, syscall) {
-    const name = util2.getSystemErrorName(code);
-    const err = new Error(`${syscall} ${name}`);
-    err.errno = err;
-    err.code = code;
-    err.syscall = syscall;
-    return err;
-  }
-  module2.exports = {
-    nop,
-    getServerName,
-    errnoException,
-    isStream,
-    isDestroyed,
-    parseHeaders,
-    parseKeepAliveTimeout,
-    destroy,
-    bodyLength,
-    isBuffer
-  };
-});
-
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/core/errors.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/core/errors.js
 var require_errors = __commonJS2((exports2, module2) => {
   "use strict";
   var UndiciError = class extends Error {
@@ -23971,22 +23866,13 @@ var require_errors = __commonJS2((exports2, module2) => {
       this.code = "UND_ERR_HEADERS_TIMEOUT";
     }
   };
-  var SocketTimeoutError = class extends UndiciError {
+  var BodyTimeoutError = class extends UndiciError {
     constructor(message) {
       super(message);
-      Error.captureStackTrace(this, SocketTimeoutError);
-      this.name = "SocketTimeoutError";
-      this.message = message || "Socket Timeout Error";
-      this.code = "UND_ERR_SOCKET_TIMEOUT";
-    }
-  };
-  var RequestTimeoutError = class extends UndiciError {
-    constructor(message) {
-      super(message);
-      Error.captureStackTrace(this, RequestTimeoutError);
-      this.name = "RequestTimeoutError";
-      this.message = message || "Request Timeout Error";
-      this.code = "UND_ERR_REQUEST_TIMEOUT";
+      Error.captureStackTrace(this, BodyTimeoutError);
+      this.name = "BodyTimeoutError";
+      this.message = message || "Body Timeout Error";
+      this.code = "UND_ERR_BODY_TIMEOUT";
     }
   };
   var InvalidArgumentError = class extends UndiciError {
@@ -24081,9 +23967,8 @@ var require_errors = __commonJS2((exports2, module2) => {
   };
   module2.exports = {
     UndiciError,
-    SocketTimeoutError,
     HeadersTimeoutError,
-    RequestTimeoutError,
+    BodyTimeoutError,
     ContentLengthMismatchError,
     TrailerMismatchError,
     InvalidArgumentError,
@@ -24097,19 +23982,145 @@ var require_errors = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/core/request.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/core/util.js
+var require_util5 = __commonJS2((exports2, module2) => {
+  "use strict";
+  var assert = require("assert");
+  var {kDestroyed} = require_symbols();
+  var {IncomingMessage} = require("http");
+  var util2 = require("util");
+  var net = require("net");
+  var {NotSupportedError} = require_errors();
+  function nop() {
+  }
+  function isStream(body) {
+    return !!(body && typeof body.on === "function");
+  }
+  function getServerName(host) {
+    if (!host) {
+      return null;
+    }
+    let servername = host;
+    if (servername.startsWith("[")) {
+      const idx = servername.indexOf("]");
+      servername = idx === -1 ? servername : servername.substr(1, idx - 1);
+    } else {
+      servername = servername.split(":", 1)[0];
+    }
+    if (net.isIP(servername)) {
+      servername = null;
+    }
+    return servername;
+  }
+  function bodyLength(body) {
+    if (body && typeof body.on === "function") {
+      const state = body._readableState;
+      return state && state.ended === true && Number.isFinite(state.length) ? state.length : null;
+    }
+    assert(!body || Number.isFinite(body.byteLength));
+    return body ? body.length : 0;
+  }
+  function isDestroyed(stream) {
+    return !stream || !!(stream.destroyed || stream[kDestroyed]);
+  }
+  function destroy(stream, err) {
+    if (!isStream(stream) || isDestroyed(stream)) {
+      return;
+    }
+    if (typeof stream.destroy === "function") {
+      if (err || Object.getPrototypeOf(stream).constructor !== IncomingMessage) {
+        stream.destroy(err);
+      }
+    } else if (err) {
+      process.nextTick((stream2, err2) => {
+        stream2.emit("error", err2);
+      }, stream, err);
+    }
+    if (stream.destroyed !== true) {
+      stream[kDestroyed] = true;
+    }
+  }
+  var KEEPALIVE_TIMEOUT_EXPR = /timeout=(\d+)/;
+  function parseKeepAliveTimeout(val) {
+    const m2 = val.match(KEEPALIVE_TIMEOUT_EXPR);
+    return m2 ? parseInt(m2[1]) * 1e3 : null;
+  }
+  function parseHeaders(headers, obj = {}) {
+    for (let i = 0; i < headers.length; i += 2) {
+      const key = headers[i].toLowerCase();
+      let val = obj[key];
+      if (!val) {
+        obj[key] = headers[i + 1];
+      } else {
+        if (!Array.isArray(val)) {
+          val = [val];
+          obj[key] = val;
+        }
+        val.push(headers[i + 1]);
+      }
+    }
+    return obj;
+  }
+  function isBuffer(buffer) {
+    return buffer instanceof Uint8Array || Buffer.isBuffer(buffer);
+  }
+  function errnoException(code, syscall) {
+    const name = util2.getSystemErrorName(code);
+    const err = new Error(`${syscall} ${name}`);
+    err.errno = err;
+    err.code = code;
+    err.syscall = syscall;
+    return err;
+  }
+  function weakCache(fn) {
+    if (typeof WeakRef === "undefined" || typeof FinalizationRegistry === "undefined") {
+      throw new NotSupportedError("In order to use this feature, `WeakRef` and `FinalizationRegistry` must be defined as global objects. Check your Node.js version to be sure it is v14.6.0 or greater.");
+    }
+    const cache = new Map();
+    const cleanup2 = new FinalizationRegistry((key) => {
+      const ref = cache.get(key);
+      if (ref !== void 0 && ref.deref() === void 0) {
+        cache.delete(key);
+      }
+    });
+    return (key) => {
+      const ref = cache.get(key);
+      if (ref !== void 0) {
+        const cached = ref.deref();
+        if (cached !== void 0) {
+          return cached;
+        }
+      }
+      const value = fn(key);
+      cache.set(key, new WeakRef(value));
+      cleanup2.register(value, key);
+      return value;
+    };
+  }
+  module2.exports = {
+    nop,
+    getServerName,
+    errnoException,
+    isStream,
+    isDestroyed,
+    parseHeaders,
+    parseKeepAliveTimeout,
+    destroy,
+    bodyLength,
+    isBuffer,
+    weakCache
+  };
+});
+
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/core/request.js
 var require_request = __commonJS2((exports2, module2) => {
   "use strict";
   var {
     InvalidArgumentError,
-    RequestAbortedError,
-    RequestTimeoutError,
     NotSupportedError
   } = require_errors();
   var util2 = require_util5();
   var assert = require("assert");
-  var kRequestTimeout = Symbol("request timeout");
-  var kTimeout = Symbol("timeout");
   var kHandler = Symbol("handler");
   var REGEXP_ABSOLUTE_URL = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x00a1-\xffff0-9]+-?)*[a-z\x00a1-\xffff0-9]+)(?:\.(?:[a-z\x00a1-\xffff0-9]+-?)*[a-z\x00a1-\xffff0-9]+)*(?:\.(?:[a-z\x00a1-\xffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/ius;
   var Request = class {
@@ -24119,8 +24130,7 @@ var require_request = __commonJS2((exports2, module2) => {
       body,
       headers,
       idempotent,
-      upgrade,
-      requestTimeout
+      upgrade
     }, handler) {
       if (typeof path3 !== "string") {
         throw new InvalidArgumentError("path must be a string");
@@ -24132,9 +24142,6 @@ var require_request = __commonJS2((exports2, module2) => {
       }
       if (upgrade && typeof upgrade !== "string") {
         throw new InvalidArgumentError("upgrade must be a string");
-      }
-      if (requestTimeout != null && (!Number.isInteger(requestTimeout) || requestTimeout < 0)) {
-        throw new InvalidArgumentError("requestTimeout must be a positive integer or zero");
       }
       this.method = method;
       if (body == null) {
@@ -24149,7 +24156,7 @@ var require_request = __commonJS2((exports2, module2) => {
         throw new InvalidArgumentError("body must be a string, a Buffer or a Readable stream");
       }
       this.aborted = false;
-      this.upgrade = upgrade;
+      this.upgrade = upgrade || method === "CONNECT" || null;
       this.path = path3;
       this.idempotent = idempotent == null ? method === "HEAD" || method === "GET" : idempotent;
       this.host = null;
@@ -24169,54 +24176,58 @@ var require_request = __commonJS2((exports2, module2) => {
       } else if (headers != null) {
         throw new InvalidArgumentError("headers must be an object or an array");
       }
-      this[kRequestTimeout] = requestTimeout != null ? requestTimeout : 3e4;
-      this[kTimeout] = null;
+      if (typeof handler.onConnect !== "function") {
+        throw new InvalidArgumentError("invalid onConnect method");
+      }
+      if (typeof handler.onError !== "function") {
+        throw new InvalidArgumentError("invalid onError method");
+      }
+      if (this.upgrade) {
+        if (typeof handler.onUpgrade !== "function") {
+          throw new InvalidArgumentError("invalid onUpgrade method");
+        }
+      } else {
+        if (typeof handler.onHeaders !== "function") {
+          throw new InvalidArgumentError("invalid onHeaders method");
+        }
+        if (typeof handler.onData !== "function") {
+          throw new InvalidArgumentError("invalid onData method");
+        }
+        if (typeof handler.onComplete !== "function") {
+          throw new InvalidArgumentError("invalid onComplete method");
+        }
+      }
       this[kHandler] = handler;
     }
-    onConnect(resume) {
+    onConnect(abort) {
       assert(!this.aborted);
-      const abort = (err) => {
-        if (!this.aborted) {
-          this.onError(err || new RequestAbortedError());
-          resume();
-        }
-      };
-      if (this[kRequestTimeout]) {
-        if (this[kTimeout]) {
-          clearTimeout(this[kTimeout]);
-        }
-        this[kTimeout] = setTimeout((abort2) => {
-          abort2(new RequestTimeoutError());
-        }, this[kRequestTimeout], abort);
-      }
-      this[kHandler].onConnect(abort);
+      return this[kHandler].onConnect(abort);
     }
     onHeaders(statusCode, headers, resume) {
       assert(!this.aborted);
-      clearRequestTimeout(this);
       return this[kHandler].onHeaders(statusCode, headers, resume);
     }
-    onBody(chunk, offset, length) {
+    onData(chunk) {
       assert(!this.aborted);
-      return this[kHandler].onData(chunk.slice(offset, offset + length));
+      assert(!this.upgrade);
+      return this[kHandler].onData(chunk);
     }
     onUpgrade(statusCode, headers, socket) {
       assert(!this.aborted);
-      clearRequestTimeout(this);
-      this[kHandler].onUpgrade(statusCode, headers, socket);
+      assert(this.upgrade);
+      return this[kHandler].onUpgrade(statusCode, headers, socket);
     }
     onComplete(trailers) {
       assert(!this.aborted);
-      clearRequestTimeout(this);
-      this[kHandler].onComplete(trailers);
+      assert(!this.upgrade);
+      return this[kHandler].onComplete(trailers);
     }
     onError(err) {
       if (this.aborted) {
         return;
       }
       this.aborted = true;
-      clearRequestTimeout(this);
-      this[kHandler].onError(err);
+      return this[kHandler].onError(err);
     }
   };
   function processHeader(request, key, val) {
@@ -24249,17 +24260,10 @@ var require_request = __commonJS2((exports2, module2) => {
 `;
     }
   }
-  function clearRequestTimeout(request) {
-    const {[kTimeout]: timeout} = request;
-    if (timeout) {
-      request[kTimeout] = null;
-      clearTimeout(timeout);
-    }
-  }
   module2.exports = Request;
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/core/client.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/core/client.js
 var require_client = __commonJS2((exports2, module2) => {
   "use strict";
   var {URL: URL2} = require("url");
@@ -24272,22 +24276,20 @@ var require_client = __commonJS2((exports2, module2) => {
   var Request = require_request();
   var {
     ContentLengthMismatchError,
-    SocketTimeoutError,
     TrailerMismatchError,
     InvalidArgumentError,
     RequestAbortedError,
+    HeadersTimeoutError,
     ClientDestroyedError,
     ClientClosedError,
-    HeadersTimeoutError,
     SocketError,
-    InformationalError
+    InformationalError,
+    BodyTimeoutError
   } = require_errors();
   var {
     kUrl,
     kReset,
-    kPause,
     kHost,
-    kResume,
     kClient,
     kParser,
     kConnect,
@@ -24296,8 +24298,8 @@ var require_client = __commonJS2((exports2, module2) => {
     kQueue,
     kNeedDrain,
     kTLSServerName,
-    kIdleTimeout,
-    kSocketTimeout,
+    kKeepAliveDefaultTimeout,
+    kHostHeader,
     kTLSOpts,
     kClosed,
     kDestroyed,
@@ -24306,19 +24308,18 @@ var require_client = __commonJS2((exports2, module2) => {
     kError,
     kOnDestroyed,
     kPipelining,
-    kRetryDelay,
-    kRetryTimeout,
     kSocket,
     kSocketPath,
-    kKeepAliveTimeout,
+    kKeepAliveTimeoutValue,
     kMaxHeadersSize,
-    kHeadersTimeout,
     kKeepAliveMaxTimeout,
     kKeepAliveTimeoutThreshold,
-    kKeepAlive,
-    kTLSSession
+    kTLSSession,
+    kIdleTimeout,
+    kIdleTimeoutValue,
+    kHeadersTimeout,
+    kBodyTimeout
   } = require_symbols();
-  var kHostHeader = Symbol("host header");
   var nodeVersions = process.version.split(".");
   var nodeMajorVersion = parseInt(nodeVersions[0].slice(1));
   var nodeMinorVersion = parseInt(nodeVersions[1]);
@@ -24331,16 +24332,34 @@ var require_client = __commonJS2((exports2, module2) => {
       maxHeaderSize,
       headersTimeout,
       socketTimeout,
+      requestTimeout,
+      bodyTimeout,
       idleTimeout,
-      maxKeepAliveTimeout,
       keepAlive,
-      keepAliveMaxTimeout = maxKeepAliveTimeout,
+      keepAliveTimeout,
+      maxKeepAliveTimeout,
+      keepAliveMaxTimeout,
       keepAliveTimeoutThreshold,
       socketPath,
       pipelining,
       tls: tls2
     } = {}) {
       super();
+      if (keepAlive !== void 0) {
+        throw new InvalidArgumentError("unsupported keepAlive, use pipelining=0 instead");
+      }
+      if (socketTimeout !== void 0) {
+        throw new InvalidArgumentError("unsupported socketTimeout, use headersTimeout & bodyTimeout instead");
+      }
+      if (requestTimeout !== void 0) {
+        throw new InvalidArgumentError("unsupported requestTimeout, use headersTimeout & bodyTimeout instead");
+      }
+      if (idleTimeout !== void 0) {
+        throw new InvalidArgumentError("unsupported idleTimeout, use keepAliveTimeout instead");
+      }
+      if (maxKeepAliveTimeout !== void 0) {
+        throw new InvalidArgumentError("unsupported maxKeepAliveTimeout, use keepAliveMaxTimeout instead");
+      }
       if (typeof url === "string") {
         url = new URL2(url);
       }
@@ -24365,56 +24384,43 @@ var require_client = __commonJS2((exports2, module2) => {
       if (maxHeaderSize != null && !Number.isFinite(maxHeaderSize)) {
         throw new InvalidArgumentError("invalid maxHeaderSize");
       }
-      if (socketTimeout != null && !Number.isFinite(socketTimeout)) {
-        throw new InvalidArgumentError("invalid socketTimeout");
-      }
-      if (idleTimeout != null && (!Number.isFinite(idleTimeout) || idleTimeout <= 0)) {
-        throw new InvalidArgumentError("invalid idleTimeout");
+      if (keepAliveTimeout != null && (!Number.isFinite(keepAliveTimeout) || keepAliveTimeout <= 0)) {
+        throw new InvalidArgumentError("invalid keepAliveTimeout");
       }
       if (keepAliveMaxTimeout != null && (!Number.isFinite(keepAliveMaxTimeout) || keepAliveMaxTimeout <= 0)) {
         throw new InvalidArgumentError("invalid keepAliveMaxTimeout");
       }
-      if (keepAlive != null && typeof keepAlive !== "boolean") {
-        throw new InvalidArgumentError("invalid keepAlive");
-      }
       if (keepAliveTimeoutThreshold != null && !Number.isFinite(keepAliveTimeoutThreshold)) {
         throw new InvalidArgumentError("invalid keepAliveTimeoutThreshold");
       }
-      if (headersTimeout != null && !Number.isFinite(headersTimeout)) {
-        throw new InvalidArgumentError("invalid headersTimeout");
+      if (headersTimeout != null && (!Number.isInteger(headersTimeout) || headersTimeout < 0)) {
+        throw new InvalidArgumentError("headersTimeout must be a positive integer or zero");
+      }
+      if (bodyTimeout != null && (!Number.isInteger(bodyTimeout) || bodyTimeout < 0)) {
+        throw new InvalidArgumentError("bodyTimeout must be a positive integer or zero");
       }
       this[kSocket] = null;
-      this[kReset] = false;
-      this[kPipelining] = pipelining || 1;
+      this[kPipelining] = pipelining != null ? pipelining : 1;
       this[kMaxHeadersSize] = maxHeaderSize || 16384;
-      this[kHeadersTimeout] = headersTimeout == null ? 3e4 : headersTimeout;
       this[kUrl] = url;
       this[kSocketPath] = socketPath;
-      this[kSocketTimeout] = socketTimeout == null ? 3e4 : socketTimeout;
-      this[kIdleTimeout] = idleTimeout == null ? 4e3 : idleTimeout;
+      this[kKeepAliveDefaultTimeout] = keepAliveTimeout == null ? 4e3 : keepAliveTimeout;
       this[kKeepAliveMaxTimeout] = keepAliveMaxTimeout == null ? 6e5 : keepAliveMaxTimeout;
       this[kKeepAliveTimeoutThreshold] = keepAliveTimeoutThreshold == null ? 1e3 : keepAliveTimeoutThreshold;
-      this[kKeepAliveTimeout] = this[kIdleTimeout];
-      this[kKeepAlive] = keepAlive == null ? true : keepAlive;
+      this[kKeepAliveTimeoutValue] = this[kKeepAliveDefaultTimeout];
       this[kClosed] = false;
       this[kDestroyed] = false;
       this[kTLSOpts] = tls2;
       this[kTLSServerName] = getServerName(this);
       this[kHost] = null;
-      this[kRetryDelay] = 0;
-      this[kRetryTimeout] = null;
       this[kOnDestroyed] = [];
-      this[kWriting] = false;
       this[kResuming] = 0;
       this[kNeedDrain] = 0;
-      this[kResume] = () => {
-        if (this[kResuming] === 0) {
-          resume(this, true);
-        }
-      };
       this[kTLSSession] = null;
       this[kHostHeader] = `host: ${this[kUrl].hostname}${this[kUrl].port ? `:${this[kUrl].port}` : ""}\r
 `;
+      this[kBodyTimeout] = bodyTimeout != null ? bodyTimeout : 3e4;
+      this[kHeadersTimeout] = headersTimeout != null ? headersTimeout : 3e4;
       this[kQueue] = [];
       this[kRunningIdx] = 0;
       this[kPendingIdx] = 0;
@@ -24439,7 +24445,8 @@ var require_client = __commonJS2((exports2, module2) => {
       return this[kQueue].length - this[kRunningIdx];
     }
     get busy() {
-      return this[kReset] || this[kWriting] || this.pending > 0;
+      const socket = this[kSocket];
+      return socket && (socket[kReset] || socket[kWriting]) || this.pending > 0;
     }
     get destroyed() {
       return this[kDestroyed];
@@ -24469,6 +24476,9 @@ var require_client = __commonJS2((exports2, module2) => {
           resume(this, true);
         }
       } catch (err) {
+        if (typeof handler.onError !== "function") {
+          throw new InvalidArgumentError("invalid onError method");
+        }
         handler.onError(err);
       }
     }
@@ -24523,8 +24533,6 @@ var require_client = __commonJS2((exports2, module2) => {
       for (const request of this[kQueue].splice(this[kPendingIdx])) {
         request.onError(err);
       }
-      clearTimeout(this[kRetryTimeout]);
-      this[kRetryTimeout] = null;
       this[kClosed] = true;
       this[kDestroyed] = true;
       this[kOnDestroyed].push(callback);
@@ -24547,33 +24555,57 @@ var require_client = __commonJS2((exports2, module2) => {
     constructor(client, socket) {
       if (nodeMajorVersion === 12 && nodeMinorVersion < 19) {
         super();
-        this.initialize(HTTPParser.RESPONSE, {}, client[kHeadersTimeout]);
+        this.initialize(HTTPParser.RESPONSE, {}, 0);
       } else if (nodeMajorVersion === 12 && nodeMinorVersion >= 19) {
         super();
-        this.initialize(HTTPParser.RESPONSE, {}, client[kMaxHeadersSize], client[kHeadersTimeout]);
+        this.initialize(HTTPParser.RESPONSE, {}, client[kMaxHeadersSize], 0);
       } else if (nodeMajorVersion > 12) {
         super();
-        this.initialize(HTTPParser.RESPONSE, {}, client[kMaxHeadersSize], insecureHTTPParser, client[kHeadersTimeout]);
+        this.initialize(HTTPParser.RESPONSE, {}, client[kMaxHeadersSize], insecureHTTPParser, 0);
       } else {
         super(HTTPParser.RESPONSE, false);
       }
       this.client = client;
       this.socket = socket;
+      this.timeout = null;
       this.statusCode = null;
       this.upgrade = false;
       this.headers = null;
       this.shouldKeepAlive = false;
-      this.read = 0;
       this.request = null;
-    }
-    [HTTPParser.kOnTimeout]() {
-      if (this.statusCode) {
-        this.socket._unrefTimer();
-      } else {
-        util2.destroy(this.socket, new HeadersTimeoutError());
-      }
+      this.paused = false;
+      this.resuming = false;
+      this.queue = [];
+      this._resume = () => {
+        if (!this.paused || this.resuming) {
+          return;
+        }
+        this.paused = false;
+        this.resuming = true;
+        while (this.queue.length) {
+          const [fn, ...args] = this.queue.shift();
+          Reflect.apply(fn, this, args);
+          if (this.paused) {
+            this.resuming = false;
+            return;
+          }
+        }
+        this.resuming = false;
+        socketResume(this.socket);
+      };
+      this._pause = () => {
+        if (this.paused) {
+          return;
+        }
+        this.paused = true;
+        socketPause(this.socket);
+      };
     }
     [HTTPParser.kOnHeaders](rawHeaders) {
+      if (this.paused) {
+        this.queue.push([this[HTTPParser.kOnHeaders], rawHeaders]);
+        return;
+      }
       if (this.headers) {
         Array.prototype.push.apply(this.headers, rawHeaders);
       } else {
@@ -24581,19 +24613,23 @@ var require_client = __commonJS2((exports2, module2) => {
       }
     }
     [HTTPParser.kOnExecute](ret) {
+      if (this.paused) {
+        this.queue.push([this[HTTPParser.kOnExecute], ret]);
+        return;
+      }
       const {upgrade, socket} = this;
       if (!Number.isFinite(ret)) {
         assert(ret instanceof Error);
         util2.destroy(socket, ret);
         return;
       }
-      socket._unrefTimer();
       if (upgrade && !socket.destroyed) {
         const {client, headers, statusCode, request} = this;
         assert(!socket.destroyed);
         assert(socket === client[kSocket]);
         assert(!socket.isPaused());
-        assert(request.upgrade || request.method === "CONNECT");
+        assert(socket._handle && socket._handle.reading);
+        assert(request.upgrade);
         this.headers = null;
         this.statusCode = null;
         this.request = null;
@@ -24601,33 +24637,48 @@ var require_client = __commonJS2((exports2, module2) => {
         socket.unshift(this.getCurrentBuffer().slice(ret));
         try {
           request.onUpgrade(statusCode, headers, socket);
+          if (!socket.destroyed && !request.aborted) {
+            detachSocket(socket);
+            client[kSocket] = null;
+            client[kQueue][client[kRunningIdx]++] = null;
+            client.emit("disconnect", new InformationalError("upgrade"));
+          }
+          resume(client);
         } catch (err) {
           util2.destroy(socket, err);
-          request.onError(err);
-        }
-        if (!socket.destroyed && !request.aborted) {
-          detachSocket(socket);
-          client[kSocket] = null;
-          client[kQueue][client[kRunningIdx]++] = null;
-          client.emit("disconnect", new InformationalError("upgrade"));
-          setImmediate(() => this.close());
-          resume(client);
         }
       }
     }
     [HTTPParser.kOnHeadersComplete](versionMajor, versionMinor, rawHeaders, method, url, statusCode, statusMessage, upgrade, shouldKeepAlive) {
+      if (this.paused) {
+        this.queue.push([
+          this[HTTPParser.kOnHeadersComplete],
+          versionMajor,
+          versionMinor,
+          rawHeaders,
+          method,
+          url,
+          statusCode,
+          statusMessage,
+          upgrade,
+          shouldKeepAlive
+        ]);
+        return;
+      }
       const {client, socket} = this;
       const request = client[kQueue][client[kRunningIdx]];
       if (socket.destroyed) {
         return;
       }
+      clearTimeout(this.timeout);
+      this.timeout = client[kBodyTimeout] ? setTimeout(onBodyTimeout, client[kBodyTimeout], this) : null;
       assert(!this.upgrade);
       assert(this.statusCode < 200);
       if (statusCode === 100) {
         util2.destroy(socket, new SocketError("bad response"));
         return 1;
       }
-      if (upgrade !== Boolean(request.upgrade)) {
+      if (request.upgrade !== true && upgrade !== Boolean(request.upgrade)) {
         util2.destroy(socket, new SocketError("bad upgrade"));
         return 1;
       }
@@ -24639,43 +24690,43 @@ var require_client = __commonJS2((exports2, module2) => {
       this.statusCode = statusCode;
       this.shouldKeepAlive = shouldKeepAlive;
       this.request = request;
-      if (upgrade || request.method === "CONNECT") {
+      if (request.upgrade) {
         this.unconsume();
         this.upgrade = true;
         return 2;
       }
       let keepAlive;
       let trailers;
-      for (let n = 0; n < this.headers.length; n += 2) {
-        const key = this.headers[n + 0];
-        const val = this.headers[n + 1];
+      const {headers} = this;
+      this.headers = null;
+      for (let n = 0; n < headers.length; n += 2) {
+        const key = headers[n + 0];
+        const val = headers[n + 1];
         if (!keepAlive && key.length === 10 && key.toLowerCase() === "keep-alive") {
           keepAlive = val;
         } else if (!trailers && key.length === 7 && key.toLowerCase() === "trailer") {
           trailers = val;
         }
       }
-      const {headers} = this;
-      this.headers = null;
       this.trailers = trailers ? trailers.toLowerCase().split(/,\s*/) : null;
-      if (shouldKeepAlive && client[kKeepAlive]) {
+      if (shouldKeepAlive && client[kPipelining]) {
         const keepAliveTimeout = keepAlive ? util2.parseKeepAliveTimeout(keepAlive) : null;
         if (keepAliveTimeout != null) {
           const timeout = Math.min(keepAliveTimeout - client[kKeepAliveTimeoutThreshold], client[kKeepAliveMaxTimeout]);
-          if (timeout < 1e3) {
-            client[kReset] = true;
+          if (timeout <= 0) {
+            socket[kReset] = true;
           } else {
-            client[kKeepAliveTimeout] = timeout;
+            client[kKeepAliveTimeoutValue] = timeout;
           }
         } else {
-          client[kKeepAliveTimeout] = client[kIdleTimeout];
+          client[kKeepAliveTimeoutValue] = client[kKeepAliveDefaultTimeout];
         }
       } else {
-        client[kReset] = true;
+        socket[kReset] = true;
       }
       try {
-        if (request.onHeaders(statusCode, headers, socket[kResume]) === false) {
-          socket[kPause]();
+        if (request.onHeaders(statusCode, headers, this._resume) === false) {
+          this._pause();
         }
       } catch (err) {
         util2.destroy(socket, err);
@@ -24684,25 +24735,37 @@ var require_client = __commonJS2((exports2, module2) => {
       return request.method === "HEAD" || statusCode < 200 ? 1 : 0;
     }
     [HTTPParser.kOnBody](chunk, offset, length) {
-      const {socket, statusCode, request} = this;
+      if (this.paused) {
+        this.queue.push([this[HTTPParser.kOnBody], chunk, offset, length]);
+        return;
+      }
+      const {socket, statusCode, request, timeout} = this;
       if (socket.destroyed) {
         return;
       }
+      if (timeout && timeout.refresh) {
+        timeout.refresh();
+      }
       assert(statusCode >= 200);
       try {
-        if (request.onBody(chunk, offset, length) === false) {
-          socket[kPause]();
+        if (request.onData(chunk.slice(offset, offset + length)) === false) {
+          this._pause();
         }
       } catch (err) {
         util2.destroy(socket, err);
       }
     }
     [HTTPParser.kOnMessageComplete]() {
+      if (this.paused) {
+        this.queue.push([this[HTTPParser.kOnMessageComplete]]);
+        return;
+      }
       const {client, socket, statusCode, headers, upgrade, request, trailers} = this;
       if (socket.destroyed) {
         return;
       }
       assert(statusCode >= 100);
+      assert(this.resuming || socket._handle && socket._handle.reading);
       if (upgrade) {
         assert(statusCode < 300 || request.method === "CONNECT");
         return;
@@ -24711,8 +24774,9 @@ var require_client = __commonJS2((exports2, module2) => {
       this.headers = null;
       this.request = null;
       this.trailers = null;
+      clearTimeout(this.timeout);
+      this.timeout = client[kHeadersTimeout] ? setTimeout(onHeadersTimeout, client[kHeadersTimeout], this) : null;
       if (statusCode < 200) {
-        assert(!socket.isPaused());
         return;
       }
       try {
@@ -24734,40 +24798,45 @@ var require_client = __commonJS2((exports2, module2) => {
             }
           }
         }
-        request.onComplete(headers);
+        try {
+          request.onComplete(headers);
+        } catch (err) {
+          request.onError(err);
+        }
       } catch (err) {
         util2.destroy(socket, err);
         return;
       }
       client[kQueue][client[kRunningIdx]++] = null;
-      if (client[kWriting]) {
+      if (socket[kWriting]) {
         util2.destroy(socket, new InformationalError("reset"));
       } else if (!this.shouldKeepAlive) {
         util2.destroy(socket, new InformationalError("reset"));
-      } else if (client[kReset] && !client.running) {
+      } else if (socket[kReset] && !client.running) {
         util2.destroy(socket, new InformationalError("reset"));
       } else {
-        socket[kResume]();
         resume(client);
       }
     }
     destroy() {
+      clearTimeout(this.timeout);
+      this.timeout = null;
       this.unconsume();
       setImmediate((self2) => self2.close(), this);
     }
   };
+  function onBodyTimeout(self2) {
+    if (!self2.paused) {
+      util2.destroy(self2.socket, new BodyTimeoutError());
+    }
+  }
+  function onHeadersTimeout(self2) {
+    util2.destroy(self2.socket, new HeadersTimeoutError());
+  }
   function onSocketConnect() {
     const {[kClient]: client} = this;
-    assert(!this.destroyed);
-    assert(!client[kWriting]);
-    assert(!client[kRetryTimeout]);
-    client[kReset] = false;
-    client[kRetryDelay] = 0;
     client.emit("connect");
     resume(client);
-  }
-  function onSocketTimeout() {
-    util2.destroy(this, new SocketTimeoutError());
   }
   function onSocketError(err) {
     const {[kClient]: client} = this;
@@ -24787,11 +24856,21 @@ var require_client = __commonJS2((exports2, module2) => {
   function onSocketEnd() {
     util2.destroy(this, new SocketError("other side closed"));
   }
+  function detachSocket(socket) {
+    clearTimeout(socket[kIdleTimeout]);
+    socket[kIdleTimeout] = null;
+    socket[kIdleTimeoutValue] = null;
+    socket[kParser].destroy();
+    socket[kParser] = null;
+    socket[kClient] = null;
+    socket[kError] = null;
+    socket.removeListener("session", onSocketSession).removeListener("error", onSocketError).removeListener("end", onSocketEnd).removeListener("close", onSocketClose);
+  }
   function onSocketClose() {
-    const {[kClient]: client, [kParser]: parser} = this;
+    const {[kClient]: client} = this;
     const err = this[kError] || new SocketError("closed");
+    detachSocket(this);
     client[kSocket] = null;
-    parser.destroy();
     if (err.code !== "UND_ERR_INFO") {
       client[kTLSSession] = null;
     }
@@ -24815,18 +24894,8 @@ var require_client = __commonJS2((exports2, module2) => {
     const {[kClient]: client} = this;
     client[kTLSSession] = session;
   }
-  function detachSocket(socket) {
-    socket[kParser].destroy();
-    socket[kParser] = null;
-    socket[kPause] = null;
-    socket[kResume] = null;
-    socket[kClient] = null;
-    socket[kError] = null;
-    socket.removeListener("timeout", onSocketTimeout).removeListener("session", onSocketSession).removeListener("error", onSocketError).removeListener("end", onSocketEnd).removeListener("close", onSocketClose);
-  }
   function connect(client) {
     assert(!client[kSocket]);
-    assert(!client[kRetryTimeout]);
     const {protocol, port, hostname} = client[kUrl];
     let socket;
     if (protocol === "https:") {
@@ -24849,28 +24918,30 @@ var require_client = __commonJS2((exports2, module2) => {
       assert(socket._handle && socket._handle._externalStream);
       parser.consume(socket._handle._externalStream);
     }
-    socket[kPause] = socketPause.bind(socket);
-    socket[kResume] = socketResume.bind(socket);
+    socket[kIdleTimeout] = null;
+    socket[kIdleTimeoutValue] = null;
+    socket[kWriting] = false;
+    socket[kReset] = false;
     socket[kError] = null;
     socket[kParser] = parser;
     socket[kClient] = client;
-    socket.setNoDelay(true).setTimeout(client[kIdleTimeout]).on(protocol === "https:" ? "secureConnect" : "connect", onSocketConnect).on("timeout", onSocketTimeout).on("error", onSocketError).on("end", onSocketEnd).on("close", onSocketClose);
+    socket.setNoDelay(true).on(protocol === "https:" ? "secureConnect" : "connect", onSocketConnect).on("error", onSocketError).on("end", onSocketEnd).on("close", onSocketClose);
   }
-  function socketPause() {
-    if (this._handle && this._handle.reading) {
-      this._handle.reading = false;
-      const err = this._handle.readStop();
+  function socketPause(socket) {
+    if (socket._handle && socket._handle.reading) {
+      socket._handle.reading = false;
+      const err = socket._handle.readStop();
       if (err) {
-        this.destroy(util2.errnoException(err, "read"));
+        socket.destroy(util2.errnoException(err, "read"));
       }
     }
   }
-  function socketResume() {
-    if (this._handle && !this._handle.reading) {
-      this._handle.reading = true;
-      const err = this._handle.readStart();
+  function socketResume(socket) {
+    if (socket._handle && !socket._handle.reading) {
+      socket._handle.reading = true;
+      const err = socket._handle.readStart();
       if (err) {
-        this.destroy(util2.errnoException(err, "read"));
+        socket.destroy(util2.errnoException(err, "read"));
       }
     }
   }
@@ -24902,9 +24973,16 @@ var require_client = __commonJS2((exports2, module2) => {
         continue;
       }
       if (client[kSocket]) {
-        const timeout = client.running ? client[kSocketTimeout] : client[kKeepAliveTimeout];
-        if (client[kSocket].timeout !== timeout) {
-          client[kSocket].setTimeout(timeout);
+        const socket2 = client[kSocket];
+        const timeout = client.running ? 0 : client[kKeepAliveTimeoutValue];
+        if (socket2[kIdleTimeoutValue] !== timeout) {
+          clearTimeout(socket2[kIdleTimeout]);
+          if (timeout) {
+            socket2[kIdleTimeout] = setTimeout((socket3) => {
+              util2.destroy(socket3, new InformationalError("socket idle timeout"));
+            }, timeout, socket2);
+          }
+          socket2[kIdleTimeoutValue] = timeout;
         }
       }
       if (client.running) {
@@ -24928,9 +25006,10 @@ var require_client = __commonJS2((exports2, module2) => {
       } else {
         client[kNeedDrain] = 2;
       }
-      if (client.running >= client[kPipelining]) {
+      if (client.running >= (client[kPipelining] || 1)) {
         return;
       }
+      const socket = client[kSocket];
       const request = client[kQueue][client[kPendingIdx]];
       if (client[kUrl].protocol === "https:" && client[kHost] !== request.host) {
         if (client.running) {
@@ -24941,38 +25020,26 @@ var require_client = __commonJS2((exports2, module2) => {
         if (client[kTLSServerName] !== servername) {
           client[kTLSServerName] = servername;
           client[kTLSSession] = null;
-          if (client[kSocket]) {
-            util2.destroy(client[kSocket], new InformationalError("servername changed"));
+          if (socket) {
+            util2.destroy(socket, new InformationalError("servername changed"));
             return;
           }
         }
       }
-      if (!client[kSocket] && !client[kRetryTimeout]) {
-        if (client[kRetryDelay]) {
-          client[kRetryTimeout] = setTimeout(() => {
-            client[kRetryTimeout] = null;
-            connect(client);
-          }, client[kRetryDelay]);
-          client[kRetryDelay] = Math.min(client[kRetryDelay] * 2, client[kSocketTimeout]);
-        } else {
-          connect(client);
-          client[kRetryDelay] = 1e3;
-        }
+      if (!socket) {
+        connect(client);
         return;
       }
       if (!client.connected) {
         return;
       }
-      if (client[kWriting] || client[kReset]) {
-        return;
-      }
-      if (client.running && !client[kKeepAlive]) {
+      if (socket[kWriting] || socket[kReset]) {
         return;
       }
       if (client.running && !request.idempotent) {
         return;
       }
-      if (client.running && (request.upgrade || request.method === "CONNECT")) {
+      if (client.running && request.upgrade) {
         return;
       }
       if (util2.isStream(request.body) && util2.bodyLength(request.body) === 0) {
@@ -24988,7 +25055,11 @@ var require_client = __commonJS2((exports2, module2) => {
       if (client.running && util2.isStream(request.body)) {
         return;
       }
-      if (write2(client, request)) {
+      if (!request.aborted && write2(client, request)) {
+        const parser = client[kSocket][kParser];
+        if (!parser.timeout && client[kHeadersTimeout]) {
+          parser.timeout = setTimeout(onHeadersTimeout, client[kHeadersTimeout], parser);
+        }
         client[kPendingIdx]++;
       } else {
         client[kQueue].splice(client[kPendingIdx], 1);
@@ -25012,28 +25083,39 @@ var require_client = __commonJS2((exports2, module2) => {
       request.onError(new ContentLengthMismatchError());
       return false;
     }
+    if (request.aborted) {
+      return false;
+    }
     try {
-      request.onConnect(client[kResume]);
+      request.onConnect((err) => {
+        if (request.aborted) {
+          return;
+        }
+        request.onError(err || new RequestAbortedError());
+        if (client[kResuming] === 0) {
+          resume(client, true);
+        }
+      });
     } catch (err) {
       request.onError(err);
-      return false;
     }
     if (request.aborted) {
       return false;
     }
+    const socket = client[kSocket];
     if (method === "HEAD") {
-      client[kReset] = true;
+      socket[kReset] = true;
     }
-    if (method === "CONNECT" || upgrade) {
-      client[kReset] = true;
+    if (upgrade) {
+      socket[kReset] = true;
     }
     let header;
-    if (upgrade) {
+    if (typeof upgrade === "string") {
       header = `${method} ${path3} HTTP/1.1\r
 connection: upgrade\r
 upgrade: ${upgrade}\r
 `;
-    } else if (client[kKeepAlive]) {
+    } else if (client[kPipelining]) {
       header = `${method} ${path3} HTTP/1.1\r
 connection: keep-alive\r
 `;
@@ -25048,7 +25130,6 @@ connection: close\r
     if (headers) {
       header += headers;
     }
-    const socket = client[kSocket];
     if (!body) {
       if (contentLength === 0) {
         socket.write(`${header}content-length: ${contentLength}\r
@@ -25070,10 +25151,10 @@ connection: close\r
       socket.write("\r\n", "ascii");
       socket.uncork();
       if (!expectsPayload) {
-        client[kReset] = true;
+        socket[kReset] = true;
       }
     } else {
-      client[kWriting] = true;
+      socket[kWriting] = true;
       assert(util2.isStream(body));
       assert(contentLength !== 0 || !client.running, "stream body cannot be pipelined");
       let finished = false;
@@ -25091,7 +25172,7 @@ connection: close\r
           }
           if (bytesWritten === 0) {
             if (!expectsPayload) {
-              client[kReset] = true;
+              socket[kReset] = true;
             }
             if (contentLength === null) {
               socket.write(`${header}transfer-encoding: chunked\r
@@ -25129,17 +25210,19 @@ ${len.toString(16)}\r
           return;
         }
         finished = true;
-        assert(client[kWriting] && client.running <= 1);
-        client[kWriting] = false;
+        assert(socket.destroyed || socket[kWriting] && client.running <= 1);
+        socket[kWriting] = false;
         if (!err && contentLength !== null && bytesWritten !== contentLength) {
           err = new ContentLengthMismatchError();
         }
         socket.removeListener("drain", onDrain).removeListener("error", onFinished);
         body.removeListener("data", onData).removeListener("end", onFinished).removeListener("error", onFinished).removeListener("close", onAbort);
-        request.body = null;
         util2.destroy(body, err);
         if (err) {
+          assert(client.running <= 1, "pipeline should only contain this request");
           util2.destroy(socket, err);
+        }
+        if (socket.destroyed) {
           return;
         }
         if (bytesWritten === 0) {
@@ -25165,7 +25248,7 @@ ${len.toString(16)}\r
   module2.exports = Client;
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/node/fixed-queue.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/node/fixed-queue.js
 var require_fixed_queue = __commonJS2((exports2, module2) => {
   "use strict";
   var kSize = 2048;
@@ -25220,143 +25303,31 @@ var require_fixed_queue = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/pool.js
-var require_pool = __commonJS2((exports2, module2) => {
-  "use strict";
-  var Client = require_client();
-  var {
-    ClientClosedError,
-    InvalidArgumentError,
-    ClientDestroyedError
-  } = require_errors();
-  var FixedQueue = require_fixed_queue();
-  var kClients = Symbol("clients");
-  var kQueue = Symbol("queue");
-  var kDestroyed = Symbol("destroyed");
-  var kClosedPromise = Symbol("closed promise");
-  var kClosedResolve = Symbol("closed resolve");
-  var Pool = class {
-    constructor(url, {
-      connections,
-      ...options
-    } = {}) {
-      if (connections != null && (!Number.isFinite(connections) || connections <= 0)) {
-        throw new InvalidArgumentError("invalid connections");
-      }
-      this[kQueue] = new FixedQueue();
-      this[kClosedPromise] = null;
-      this[kClosedResolve] = null;
-      this[kDestroyed] = false;
-      this[kClients] = Array.from({
-        length: connections || 10
-      }, () => new Client(url, options));
-      const pool = this;
-      function onDrain() {
-        const queue = pool[kQueue];
-        while (!this.busy) {
-          const item = queue.shift();
-          if (!item) {
-            break;
-          }
-          this.dispatch(item.opts, item.handler);
-        }
-        if (pool[kClosedResolve] && queue.isEmpty()) {
-          Promise.all(pool[kClients].map((c) => c.close())).then(pool[kClosedResolve]);
-        }
-      }
-      for (const client of this[kClients]) {
-        client.on("drain", onDrain);
-      }
-    }
-    dispatch(opts, handler) {
-      try {
-        if (this[kDestroyed]) {
-          throw new ClientDestroyedError();
-        }
-        if (this[kClosedPromise]) {
-          throw new ClientClosedError();
-        }
-        const client = this[kClients].find((client2) => !client2.busy);
-        if (!client) {
-          this[kQueue].push({opts, handler});
-        } else {
-          client.dispatch(opts, handler);
-        }
-      } catch (err) {
-        handler.onError(err);
-      }
-    }
-    close(cb) {
-      try {
-        if (this[kDestroyed]) {
-          throw new ClientDestroyedError();
-        }
-        if (!this[kClosedPromise]) {
-          if (this[kQueue].isEmpty()) {
-            this[kClosedPromise] = Promise.all(this[kClients].map((c) => c.close()));
-          } else {
-            this[kClosedPromise] = new Promise((resolve) => {
-              this[kClosedResolve] = resolve;
-            });
-          }
-        }
-        if (cb) {
-          this[kClosedPromise].then(() => cb(null, null));
-        } else {
-          return this[kClosedPromise];
-        }
-      } catch (err) {
-        if (cb) {
-          cb(err);
-        } else {
-          return Promise.reject(err);
-        }
-      }
-    }
-    destroy(err, cb) {
-      this[kDestroyed] = true;
-      if (typeof err === "function") {
-        cb = err;
-        err = null;
-      }
-      if (!err) {
-        err = new ClientDestroyedError();
-      }
-      while (true) {
-        const item = this[kQueue].shift();
-        if (!item) {
-          break;
-        }
-        item.handler.onError(err);
-      }
-      const promise = Promise.all(this[kClients].map((c) => c.destroy(err)));
-      if (cb) {
-        promise.then(() => cb(null, null));
-      } else {
-        return promise;
-      }
-    }
-  };
-  module2.exports = Pool;
-});
-
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/abort-signal.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/abort-signal.js
 var require_abort_signal = __commonJS2((exports2, module2) => {
   var {RequestAbortedError} = require_errors();
   var kListener = Symbol("kListener");
   var kSignal = Symbol("kSignal");
+  function abort(self2) {
+    if (self2.abort) {
+      self2.abort();
+    } else {
+      self2.onError(new RequestAbortedError());
+    }
+  }
   function addSignal(self2, signal) {
-    self2[kSignal] = signal;
+    self2[kSignal] = null;
     self2[kListener] = null;
     if (!signal) {
       return;
     }
+    if (signal.aborted) {
+      abort(self2);
+      return;
+    }
+    self2[kSignal] = signal;
     self2[kListener] = () => {
-      if (self2.abort) {
-        self2.abort();
-      } else {
-        self2.onError(new RequestAbortedError());
-      }
+      abort(self2);
     };
     if ("addEventListener" in self2[kSignal]) {
       self2[kSignal].addEventListener("abort", self2[kListener]);
@@ -25382,7 +25353,7 @@ var require_abort_signal = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/client-request.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/client-request.js
 var require_client_request = __commonJS2((exports2, module2) => {
   "use strict";
   var {Readable} = require("stream");
@@ -25437,6 +25408,7 @@ var require_client_request = __commonJS2((exports2, module2) => {
       this.res = null;
       this.abort = null;
       this.body = body;
+      this.trailers = {};
       if (util2.isStream(body)) {
         body.on("error", (err) => {
           this.onError(err);
@@ -25446,10 +25418,9 @@ var require_client_request = __commonJS2((exports2, module2) => {
     }
     onConnect(abort) {
       if (!this.callback) {
-        abort();
-      } else {
-        this.abort = abort;
+        throw new RequestAbortedError();
       }
+      this.abort = abort;
     }
     onHeaders(statusCode, headers, resume) {
       const {callback, opaque, abort} = this;
@@ -25462,6 +25433,7 @@ var require_client_request = __commonJS2((exports2, module2) => {
       this.runInAsyncScope(callback, null, null, {
         statusCode,
         headers: util2.parseHeaders(headers),
+        trailers: this.trailers,
         opaque,
         body
       });
@@ -25473,6 +25445,9 @@ var require_client_request = __commonJS2((exports2, module2) => {
     onComplete(trailers) {
       const {res} = this;
       removeSignal(this);
+      if (trailers) {
+        util2.parseHeaders(trailers, this.trailers);
+      }
       res.push(null);
     }
     onError(err) {
@@ -25515,13 +25490,14 @@ var require_client_request = __commonJS2((exports2, module2) => {
   module2.exports = request;
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/client-stream.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/client-stream.js
 var require_client_stream = __commonJS2((exports2, module2) => {
   "use strict";
   var {finished} = require("stream");
   var {
     InvalidArgumentError,
-    InvalidReturnValueError
+    InvalidReturnValueError,
+    RequestAbortedError
   } = require_errors();
   var util2 = require_util5();
   var {AsyncResource: AsyncResource2} = require("async_hooks");
@@ -25568,10 +25544,9 @@ var require_client_stream = __commonJS2((exports2, module2) => {
     }
     onConnect(abort) {
       if (!this.callback) {
-        abort();
-      } else {
-        this.abort = abort;
+        throw new RequestAbortedError();
       }
+      this.abort = abort;
     }
     onHeaders(statusCode, headers, resume) {
       const {factory, opaque} = this;
@@ -25601,6 +25576,8 @@ var require_client_stream = __commonJS2((exports2, module2) => {
         }
       });
       this.res = res;
+      const needDrain = res.writableNeedDrain !== void 0 ? res.writableNeedDrain : res._writableState && res._writableState.needDrain;
+      return needDrain !== true;
     }
     onData(chunk) {
       const {res} = this;
@@ -25652,7 +25629,7 @@ var require_client_stream = __commonJS2((exports2, module2) => {
   module2.exports = stream;
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/client-pipeline.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/client-pipeline.js
 var require_client_pipeline = __commonJS2((exports2, module2) => {
   "use strict";
   var {
@@ -25722,7 +25699,6 @@ var require_client_pipeline = __commonJS2((exports2, module2) => {
       this.opaque = opaque || null;
       this.handler = handler;
       this.abort = null;
-      addSignal(this, signal);
       this.req = new PipelineRequest().on("error", util2.nop);
       this.ret = new Duplex({
         readableObjectMode: opts.objectMode,
@@ -25760,14 +25736,14 @@ var require_client_pipeline = __commonJS2((exports2, module2) => {
         req.push(null);
       });
       this.res = null;
+      addSignal(this, signal);
     }
     onConnect(abort) {
       const {ret} = this;
       if (ret.destroyed) {
-        abort();
-      } else {
-        this.abort = abort;
+        throw new RequestAbortedError();
       }
+      this.abort = abort;
     }
     onHeaders(statusCode, headers, resume) {
       const {opaque, handler} = this;
@@ -25833,8 +25809,7 @@ var require_client_pipeline = __commonJS2((exports2, module2) => {
         headers,
         idempotent,
         servername,
-        signal,
-        requestTimeout
+        signal
       } = opts;
       this.dispatch({
         path: path3,
@@ -25843,8 +25818,7 @@ var require_client_pipeline = __commonJS2((exports2, module2) => {
         headers,
         idempotent,
         servername,
-        signal,
-        requestTimeout
+        signal
       }, pipelineHandler);
       return pipelineHandler.ret;
     } catch (err) {
@@ -25854,10 +25828,10 @@ var require_client_pipeline = __commonJS2((exports2, module2) => {
   module2.exports = pipeline;
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/client-upgrade.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/client-upgrade.js
 var require_client_upgrade = __commonJS2((exports2, module2) => {
   "use strict";
-  var {InvalidArgumentError} = require_errors();
+  var {InvalidArgumentError, RequestAbortedError} = require_errors();
   var {AsyncResource: AsyncResource2} = require("async_hooks");
   var util2 = require_util5();
   var {addSignal, removeSignal} = require_abort_signal();
@@ -25878,10 +25852,9 @@ var require_client_upgrade = __commonJS2((exports2, module2) => {
     }
     onConnect(abort) {
       if (!this.callback) {
-        abort();
-      } else {
-        this.abort = abort;
+        throw new RequestAbortedError();
       }
+      this.abort = abort;
     }
     onUpgrade(statusCode, headers, socket) {
       const {callback, opaque} = this;
@@ -25923,7 +25896,6 @@ var require_client_upgrade = __commonJS2((exports2, module2) => {
         headers,
         servername,
         signal,
-        requestTimeout,
         protocol
       } = opts;
       this.dispatch({
@@ -25932,7 +25904,6 @@ var require_client_upgrade = __commonJS2((exports2, module2) => {
         headers,
         servername,
         signal,
-        requestTimeout,
         upgrade: protocol || "Websocket"
       }, upgradeHandler);
     } catch (err) {
@@ -25942,10 +25913,10 @@ var require_client_upgrade = __commonJS2((exports2, module2) => {
   module2.exports = upgrade;
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/lib/client-connect.js
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/client-connect.js
 var require_client_connect = __commonJS2((exports2, module2) => {
   "use strict";
-  var {InvalidArgumentError} = require_errors();
+  var {InvalidArgumentError, RequestAbortedError} = require_errors();
   var {AsyncResource: AsyncResource2} = require("async_hooks");
   var util2 = require_util5();
   var {addSignal, removeSignal} = require_abort_signal();
@@ -25966,10 +25937,9 @@ var require_client_connect = __commonJS2((exports2, module2) => {
     }
     onConnect(abort) {
       if (!this.callback) {
-        abort();
-      } else {
-        this.abort = abort;
+        throw new RequestAbortedError();
       }
+      this.abort = abort;
     }
     onUpgrade(statusCode, headers, socket) {
       const {callback, opaque} = this;
@@ -26010,16 +25980,14 @@ var require_client_connect = __commonJS2((exports2, module2) => {
         path: path3,
         headers,
         servername,
-        signal,
-        requestTimeout
+        signal
       } = opts;
       this.dispatch({
         path: path3,
         method: "CONNECT",
         headers,
         servername,
-        signal,
-        requestTimeout
+        signal
       }, connectHandler);
     } catch (err) {
       process.nextTick(callback, err, {opaque: opts && opts.opaque});
@@ -26028,28 +25996,235 @@ var require_client_connect = __commonJS2((exports2, module2) => {
   module2.exports = connect;
 });
 
-// ../../node_modules/.pnpm/undici@2.2.1/node_modules/undici/index.js
-var require_undici = __commonJS2((exports2, module2) => {
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/pool.js
+var require_pool = __commonJS2((exports2, module2) => {
   "use strict";
+  var EventEmitter = require("events");
   var Client = require_client();
-  var errors = require_errors();
-  var Pool = require_pool();
-  Client.prototype.request = require_client_request();
-  Client.prototype.stream = require_client_stream();
-  Client.prototype.pipeline = require_client_pipeline();
-  Client.prototype.upgrade = require_client_upgrade();
-  Client.prototype.connect = require_client_connect();
+  var {
+    ClientClosedError,
+    InvalidArgumentError,
+    ClientDestroyedError
+  } = require_errors();
+  var FixedQueue = require_fixed_queue();
+  var kClients = Symbol("clients");
+  var kQueue = Symbol("queue");
+  var kDestroyed = Symbol("destroyed");
+  var kClosedPromise = Symbol("closed promise");
+  var kClosedResolve = Symbol("closed resolve");
+  var kOptions = Symbol("options");
+  var kUrl = Symbol("url");
+  var kOnDrain = Symbol("onDrain");
+  var kOnConnect = Symbol("onConnect");
+  var kOnDisconnect = Symbol("onDisconnect");
+  var Pool = class extends EventEmitter {
+    constructor(url, options = {}) {
+      super();
+      const {connections} = options;
+      if (connections != null && (!Number.isFinite(connections) || connections < 0)) {
+        throw new InvalidArgumentError("invalid connections");
+      }
+      this[kUrl] = url;
+      this[kOptions] = JSON.parse(JSON.stringify(options));
+      this[kQueue] = new FixedQueue();
+      this[kClosedPromise] = null;
+      this[kClosedResolve] = null;
+      this[kDestroyed] = false;
+      this[kClients] = [];
+      const pool = this;
+      this[kOnDrain] = function onDrain() {
+        const queue = pool[kQueue];
+        while (!this.busy) {
+          const item = queue.shift();
+          if (!item) {
+            break;
+          }
+          this.dispatch(item.opts, item.handler);
+        }
+        if (pool[kClosedResolve] && queue.isEmpty()) {
+          Promise.all(pool[kClients].map((c) => c.close())).then(pool[kClosedResolve]);
+        }
+      };
+      this[kOnConnect] = function onConnect() {
+        pool.emit("connect", this);
+      };
+      this[kOnDisconnect] = function onDisconnect() {
+        pool.emit("disconnect", this);
+      };
+    }
+    dispatch(opts, handler) {
+      try {
+        if (this[kDestroyed]) {
+          throw new ClientDestroyedError();
+        }
+        if (this[kClosedPromise]) {
+          throw new ClientClosedError();
+        }
+        let client = this[kClients].find((client2) => !client2.busy);
+        if (!client) {
+          const {connections, ...options} = this[kOptions];
+          if (!connections || this[kClients].length < connections) {
+            client = new Client(this[kUrl], options).on("drain", this[kOnDrain]).on("connect", this[kOnConnect]).on("disconnect", this[kOnDisconnect]);
+            this[kClients].push(client);
+          }
+        }
+        if (!client) {
+          this[kQueue].push({opts, handler});
+        } else {
+          client.dispatch(opts, handler);
+        }
+      } catch (err) {
+        if (typeof handler.onError !== "function") {
+          throw new InvalidArgumentError("invalid onError method");
+        }
+        handler.onError(err);
+      }
+    }
+    close(cb) {
+      try {
+        if (this[kDestroyed]) {
+          throw new ClientDestroyedError();
+        }
+        if (!this[kClosedPromise]) {
+          if (this[kQueue].isEmpty()) {
+            this[kClosedPromise] = Promise.all(this[kClients].map((c) => c.close()));
+          } else {
+            this[kClosedPromise] = new Promise((resolve) => {
+              this[kClosedResolve] = resolve;
+            });
+          }
+        }
+        if (cb) {
+          this[kClosedPromise].then(() => cb(null, null));
+        } else {
+          return this[kClosedPromise];
+        }
+      } catch (err) {
+        if (cb) {
+          cb(err);
+        } else {
+          return Promise.reject(err);
+        }
+      }
+    }
+    destroy(err, cb) {
+      this[kDestroyed] = true;
+      if (typeof err === "function") {
+        cb = err;
+        err = null;
+      }
+      if (!err) {
+        err = new ClientDestroyedError();
+      }
+      while (true) {
+        const item = this[kQueue].shift();
+        if (!item) {
+          break;
+        }
+        item.handler.onError(err);
+      }
+      const promise = Promise.all(this[kClients].map((c) => c.destroy(err)));
+      if (cb) {
+        promise.then(() => cb(null, null));
+      } else {
+        return promise;
+      }
+    }
+  };
   Pool.prototype.request = require_client_request();
   Pool.prototype.stream = require_client_stream();
   Pool.prototype.pipeline = require_client_pipeline();
   Pool.prototype.upgrade = require_client_upgrade();
   Pool.prototype.connect = require_client_connect();
+  module2.exports = Pool;
+});
+
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/lib/agent.js
+var require_agent3 = __commonJS2((exports2, module2) => {
+  "use strict";
+  var {InvalidArgumentError, InvalidReturnValueError} = require_errors();
+  var Pool = require_pool();
+  var {weakCache} = require_util5();
+  var kAgentFactory = Symbol("agent factory");
+  var Agent = class {
+    constructor(opts) {
+      this[kAgentFactory] = weakCache((origin) => new Pool(origin, opts));
+    }
+    get(origin) {
+      if (typeof origin !== "string" || origin === "") {
+        throw new InvalidArgumentError("Origin must be a non-empty string.");
+      }
+      return this[kAgentFactory](origin);
+    }
+  };
+  var globalAgent = null;
+  try {
+    globalAgent = new Agent({connections: null});
+  } catch (err) {
+  }
+  function setGlobalAgent(agent) {
+    if (!agent || typeof agent.get !== "function") {
+      throw new InvalidArgumentError("Argument agent must implement Agent");
+    }
+    globalAgent = agent;
+  }
+  function dispatchFromAgent(requestType) {
+    return (url, {agent = globalAgent, method = "GET", ...opts} = {}, ...additionalArgs) => {
+      if (url === void 0 || url === null) {
+        throw new InvalidArgumentError("Argument url must be defined");
+      }
+      if (!agent || typeof agent.get !== "function") {
+        throw new InvalidArgumentError("Argument agent must implement Agent");
+      }
+      if (opts.path != null) {
+        throw new InvalidArgumentError("unsupported opts.path");
+      }
+      url = typeof url === "string" ? new URL(url) : url;
+      if (!url || typeof url.origin !== "string" || url.origin === "") {
+        throw new InvalidArgumentError("Argument url.origin must be a non-empty string");
+      }
+      const client = agent.get(url.origin);
+      if (client && typeof client[requestType] !== "function") {
+        throw new InvalidReturnValueError(`Client returned from Agent.get() does not implement method ${requestType}`);
+      }
+      const path3 = url.path || `${url.pathname || "/"}${url.search || ""}`;
+      return client[requestType]({...opts, method, path: path3}, ...additionalArgs);
+    };
+  }
+  module2.exports = {
+    request: dispatchFromAgent("request"),
+    stream: dispatchFromAgent("stream"),
+    pipeline: dispatchFromAgent("pipeline"),
+    connect: dispatchFromAgent("connect"),
+    upgrade: dispatchFromAgent("upgrade"),
+    setGlobalAgent,
+    Agent
+  };
+});
+
+// ../../node_modules/.pnpm/undici@3.2.0/node_modules/undici/index.js
+var require_undici = __commonJS2((exports2, module2) => {
+  "use strict";
+  var Client = require_client();
+  var errors = require_errors();
+  var Pool = require_pool();
+  var {Agent, request, stream, pipeline, setGlobalAgent} = require_agent3();
+  Client.prototype.request = require_client_request();
+  Client.prototype.stream = require_client_stream();
+  Client.prototype.pipeline = require_client_pipeline();
+  Client.prototype.upgrade = require_client_upgrade();
+  Client.prototype.connect = require_client_connect();
   function undici(url, opts) {
     return new Pool(url, opts);
   }
   undici.Pool = Pool;
   undici.Client = Client;
   undici.errors = errors;
+  undici.Agent = Agent;
+  undici.request = request;
+  undici.stream = stream;
+  undici.pipeline = pipeline;
+  undici.setGlobalAgent = setGlobalAgent;
   module2.exports = undici;
 });
 
@@ -26066,7 +26241,6 @@ var require_undici2 = __commonJS2((exports2) => {
       this.pool = new undici_12.Pool(url, {
         connections: 100,
         pipelining: 10,
-        socketTimeout: 0,
         ...moreArgs
       });
     }
@@ -26080,7 +26254,7 @@ var require_undici2 = __commonJS2((exports2) => {
             ...customHeaders
           },
           body,
-          requestTimeout: 0
+          bodyTimeout: 0
         }, async (err, result) => {
           if (err) {
             reject(err);
@@ -26181,16 +26355,16 @@ var require_NodeEngine = __commonJS2((exports) => {
       this.useUds = false;
       this.stderrLogs = "";
       this.handleRequestError = async (error, graceful = false) => {
-        var _a2;
+        var _a2, _b;
         debug({error});
         if (this.startPromise) {
           await this.startPromise;
         }
         this.throwAsyncErrorIfExists();
-        if (this.currentRequestPromise.isCanceled) {
+        if ((_a2 = this.currentRequestPromise) === null || _a2 === void 0 ? void 0 : _a2.isCanceled) {
           this.throwAsyncErrorIfExists();
         } else if (error.code === "ECONNRESET" || error.code === "ECONNREFUSED" || error.code === "UND_ERR_CLOSED" || error.code === "UND_ERR_SOCKET" || error.code === "UND_ERR_DESTROYED" || error.code === "UND_ERR_ABORTED" || error.message.toLowerCase().includes("client is destroyed") || error.message.toLowerCase().includes("other side closed") || error.message.toLowerCase().includes("the client is closed")) {
-          if (this.globalKillSignalReceived && !((_a2 = this.child) === null || _a2 === void 0 ? void 0 : _a2.connected)) {
+          if (this.globalKillSignalReceived && !((_b = this.child) === null || _b === void 0 ? void 0 : _b.connected)) {
             throw new Engine_1.PrismaClientUnknownRequestError(`The Node.js process already received a ${this.globalKillSignalReceived} signal, therefore the Prisma query engine exited
 and your request can't be processed.
 You probably have some open handle that prevents your process from exiting.
@@ -26214,7 +26388,7 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
         return false;
       };
       this.dirname = dirname2;
-      this.useUds = useUds === void 0 ? process.platform !== "win32" : useUds;
+      this.useUds = useUds !== null && useUds !== void 0 ? useUds : false;
       this.env = env2;
       this.cwd = this.resolveCwd(cwd);
       this.enableDebugLogs = enableDebugLogs !== null && enableDebugLogs !== void 0 ? enableDebugLogs : false;
@@ -26242,7 +26416,8 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
         "atomicNumberOperations",
         "transactionApi",
         "transaction",
-        "connectOrCreate"
+        "connectOrCreate",
+        "uncheckedScalarInputs"
       ];
       const filteredFlags = ["nativeTypes"];
       const removedFlagsUsed = this.enableExperimental.filter((e) => removedFlags.includes(e));
@@ -26835,8 +27010,9 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       this.lastQuery = stringifiedQuery;
       return this.currentRequestPromise.then(({data, headers}) => {
         const elapsed = parseInt(headers["x-elapsed"]) / 1e3;
-        if (Array.isArray(data)) {
-          return data.map((result) => {
+        const {batchResult, errors} = data;
+        if (Array.isArray(batchResult)) {
+          return batchResult.map((result) => {
             if (result.errors) {
               return this.graphQLToJSError(result.errors[0]);
             }
@@ -26846,19 +27022,19 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
             };
           });
         } else {
-          if (data.errors && data.errors.length === 1) {
-            throw new Error(data.errors[0].error);
+          if (errors && errors.length === 1) {
+            throw new Error(errors[0].error);
           }
           throw new Error(JSON.stringify(data));
         }
       }).catch(async (e) => {
-        const isError = await this.handleRequestError(e, numTry < 3);
-        if (!isError) {
+        const isError3 = await this.handleRequestError(e, numTry < 3);
+        if (!isError3) {
           if (numTry <= MAX_REQUEST_RETRIES) {
             return this.requestBatch(queries, transaction, numTry + 1);
           }
         }
-        throw isError;
+        throw isError3;
       });
     }
     get hasMaxRestarts() {
@@ -31744,7 +31920,7 @@ var require_parse_proxy_response2 = __commonJS2((exports2) => {
 });
 
 // ../../node_modules/.pnpm/https-proxy-agent@5.0.0/node_modules/https-proxy-agent/dist/agent.js
-var require_agent3 = __commonJS2((exports2) => {
+var require_agent4 = __commonJS2((exports2) => {
   "use strict";
   var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P2, generator) {
     function adopt(value) {
@@ -31904,7 +32080,7 @@ var require_dist12 = __commonJS2((exports2, module2) => {
   var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
-  var agent_1 = __importDefault2(require_agent3());
+  var agent_1 = __importDefault2(require_agent4());
   function createHttpsProxyAgent(opts) {
     return new agent_1.default(opts);
   }
@@ -31959,7 +32135,7 @@ var require_dist13 = __commonJS2((exports2, module2) => {
 });
 
 // ../../node_modules/.pnpm/http-proxy-agent@4.0.1/node_modules/http-proxy-agent/dist/agent.js
-var require_agent4 = __commonJS2((exports2) => {
+var require_agent5 = __commonJS2((exports2) => {
   "use strict";
   var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P2, generator) {
     function adopt(value) {
@@ -32092,7 +32268,7 @@ var require_dist14 = __commonJS2((exports2, module2) => {
   var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
-  var agent_1 = __importDefault2(require_agent4());
+  var agent_1 = __importDefault2(require_agent5());
   function createHttpProxyAgent(opts) {
     return new agent_1.default(opts);
   }
@@ -41795,7 +41971,7 @@ var require_util6 = __commonJS2((exports2) => {
   var debug3 = debug_12.default("cache-dir");
   async function getRootCacheDir() {
     if (os_1.default.platform() === "win32") {
-      const cacheDir = await find_cache_dir_1.default({name: "prisma", create: true});
+      const cacheDir = find_cache_dir_1.default({name: "prisma", create: true});
       if (cacheDir) {
         return cacheDir;
       }
@@ -41854,12 +42030,18 @@ var require_cleanupCache2 = __commonJS2((exports2) => {
   var rimraf_1 = __importDefault2(require_rimraf2());
   var util_22 = require("util");
   var p_map_12 = __importDefault2(require_p_map3());
+  var debug_12 = __importDefault2(require_dist7());
+  var debug3 = debug_12.default("cleanupCache");
   var del = util_22.promisify(rimraf_1.default);
   var readdir2 = util_22.promisify(fs_12.default.readdir);
   var stat = util_22.promisify(fs_12.default.stat);
   async function cleanupCache(n = 5) {
     try {
       const rootCacheDir = await util_12.getRootCacheDir();
+      if (!rootCacheDir) {
+        debug3("no rootCacheDir found");
+        return;
+      }
       const channel2 = "master";
       const cacheDir = path_12.default.join(rootCacheDir, channel2);
       const dirs = await readdir2(cacheDir);
@@ -42113,7 +42295,7 @@ var require_download2 = __commonJS2((exports) => {
     var _a, _b;
     const platform = await get_platform_1.getPlatform();
     const os = await get_platform_1.getos();
-    if (["nixos"].includes(os.distro)) {
+    if (os.distro && ["nixos"].includes(os.distro)) {
       console.error(`${chalk_1.default.yellow("Warning")} Precompiled binaries are not available for ${os.distro}.`);
     } else if (["freebsd11", "freebsd12", "openbsd", "netbsd"].includes(platform)) {
       console.error(`${chalk_1.default.yellow("Warning")} Precompiled binaries are not available for ${platform}. Read more about building your own binaries at https://pris.ly/d/build-binaries`);
@@ -42121,13 +42303,13 @@ var require_download2 = __commonJS2((exports) => {
     if (!options.binaries || Object.values(options.binaries).length === 0) {
       return {};
     }
-    options = {
+    const opts = {
       ...options,
       binaryTargets: (_a = options.binaryTargets) !== null && _a !== void 0 ? _a : [platform],
       version: (_b = options.version) !== null && _b !== void 0 ? _b : "latest",
       binaries: mapKeys(options.binaries, (key) => engineTypeToBinaryType(key, platform))
     };
-    const binaryJobs = flatMap_1.flatMap(Object.entries(options.binaries), ([binaryName, targetFolder]) => options.binaryTargets.map((binaryTarget) => {
+    const binaryJobs = flatMap_1.flatMap(Object.entries(opts.binaries), ([binaryName, targetFolder]) => opts.binaryTargets.map((binaryTarget) => {
       const fileName = getBinaryName(binaryName, binaryTarget);
       return {
         binaryName,
@@ -42139,18 +42321,18 @@ var require_download2 = __commonJS2((exports) => {
       };
     }));
     if (process.env.BINARY_DOWNLOAD_VERSION) {
-      options.version = process.env.BINARY_DOWNLOAD_VERSION;
+      opts.version = process.env.BINARY_DOWNLOAD_VERSION;
     }
-    if (options.version === "latest") {
-      options.version = await getLatestTag_1.getLatestTag();
+    if (opts.version === "latest") {
+      opts.version = await getLatestTag_1.getLatestTag();
     }
-    if (options.printVersion) {
-      console.log(`version: ${options.version}`);
+    if (opts.printVersion) {
+      console.log(`version: ${opts.version}`);
     }
     const binariesToDownload = await p_filter_1.default(binaryJobs, async (job) => {
-      const needsToBeDownloaded = await binaryNeedsToBeDownloaded(job, platform, options.version, options.failSilent);
+      const needsToBeDownloaded = await binaryNeedsToBeDownloaded(job, platform, opts.version, opts.failSilent);
       const isSupported = get_platform_1.platforms.includes(job.binaryTarget);
-      const shouldDownload = isSupported && !job.envVarPath && (options.ignoreCache || needsToBeDownloaded);
+      const shouldDownload = isSupported && !job.envVarPath && (opts.ignoreCache || needsToBeDownloaded);
       if (needsToBeDownloaded && !isSupported) {
         throw new Error(`Unknown binaryTarget ${job.binaryTarget} and no custom binaries were provided`);
       }
@@ -42160,15 +42342,15 @@ var require_download2 = __commonJS2((exports) => {
       const cleanupPromise = cleanupCache_1.cleanupCache();
       let finishBar;
       let setProgress;
-      if (options.showProgress) {
-        const collectiveBar = getCollectiveBar(options);
+      if (opts.showProgress) {
+        const collectiveBar = getCollectiveBar(opts);
         finishBar = collectiveBar.finishBar;
         setProgress = collectiveBar.setProgress;
       }
       await Promise.all(binariesToDownload.map((job) => downloadBinary({
         ...job,
-        version: options.version,
-        failSilent: options.failSilent,
+        version: opts.version,
+        failSilent: opts.failSilent,
         progressCb: setProgress ? setProgress(job.targetFilePath) : void 0
       })));
       await cleanupPromise;
@@ -42191,9 +42373,10 @@ var require_download2 = __commonJS2((exports) => {
   }
   exports.download = download;
   function getCollectiveBar(options) {
-    const bar = log_1.getBar(`Downloading Prisma engines for ${options.binaryTargets.map((p) => chalk_1.default.bold(p)).join(" and ")}`);
+    var _a, _b;
+    const bar = log_1.getBar(`Downloading Prisma engines for ${(_a = options.binaryTargets) === null || _a === void 0 ? void 0 : _a.map((p) => chalk_1.default.bold(p)).join(" and ")}`);
     const progressMap = {};
-    const numDownloads = Object.values(options.binaries).length * Object.values(options.binaryTargets).length;
+    const numDownloads = Object.values(options.binaries).length * Object.values((_b = options === null || options === void 0 ? void 0 : options.binaryTargets) !== null && _b !== void 0 ? _b : []).length;
     const setProgress = (sourcePath) => (progress) => {
       progressMap[sourcePath] = progress;
       const progressValues = Object.values(progressMap);
@@ -42659,7 +42842,6 @@ var require_engineCommands = __commonJS2((exports2) => {
       const options = {
         cwd,
         env: {
-          ...process.env,
           PRISMA_DML_PATH: tempDatamodelPath,
           RUST_BACKTRACE: "1",
           ...process.env.NO_COLOR ? {} : {CLICOLOR_FORCE: "1"}
@@ -42671,7 +42853,8 @@ var require_engineCommands = __commonJS2((exports2) => {
         atomicNumberOperations: `${chalk_12.default.blueBright("info")} The preview flag "atomicNumberOperations" is not needed anymore, please remove it from your schema.prisma`,
         connectOrCreate: `${chalk_12.default.blueBright("info")} The preview flag "connectOrCreate" is not needed anymore, please remove it from your schema.prisma`,
         transaction: `${chalk_12.default.blueBright("info")} The preview flag "transactionApi" is not needed anymore, please remove it from your schema.prisma`,
-        transactionApi: `${chalk_12.default.blueBright("info")} The preview flag "transactionApi" is not needed anymore, please remove it from your schema.prisma`
+        transactionApi: `${chalk_12.default.blueBright("info")} The preview flag "transactionApi" is not needed anymore, please remove it from your schema.prisma`,
+        uncheckedScalarInputs: `${chalk_12.default.blueBright("info")} The preview flag "uncheckedScalarInputs" is not needed anymore, please remove it from your schema.prisma`
       };
       if (enableExperimental) {
         enableExperimental = enableExperimental.filter((f) => {
@@ -42763,7 +42946,6 @@ ${e.stack}`);
       const result = await execa_12.default(queryEnginePath, ["cli", "get-config", ...args], {
         cwd,
         env: {
-          ...process.env,
           PRISMA_DML_PATH: tempDatamodelPath,
           RUST_BACKTRACE: "1"
         },
@@ -42810,7 +42992,6 @@ ${chalk_12.default.redBright(jsonError.message)}
     const showColors = !process.env.NO_COLOR && process.stdout.isTTY;
     const options = {
       env: {
-        ...process.env,
         RUST_BACKTRACE: "1",
         ...showColors ? {CLICOLOR_FORCE: "1"} : {}
       },
@@ -42834,9 +43015,6 @@ ${chalk_12.default.redBright(jsonError.message)}
   async function getVersion2(enginePath, binaryName = "query-engine") {
     enginePath = await resolveBinary_1.resolveBinary(binaryName, enginePath);
     const result = await execa_12.default(enginePath, ["--version"], {
-      env: {
-        ...process.env
-      },
       maxBuffer: MAX_BUFFER
     });
     return result.stdout;
@@ -42968,168 +43146,159 @@ var require_has_yarn = __commonJS2((exports2, module2) => {
   module2.exports.default = hasYarn;
 });
 
-// ../../node_modules/.pnpm/ini@1.3.5/node_modules/ini/ini.js
-var require_ini = __commonJS2((exports2) => {
-  exports2.parse = exports2.decode = decode;
-  exports2.stringify = exports2.encode = encode;
-  exports2.safe = safe;
-  exports2.unsafe = unsafe;
+// ../../node_modules/.pnpm/ini@2.0.0/node_modules/ini/ini.js
+var require_ini = __commonJS2((exports2, module2) => {
+  var {hasOwnProperty} = Object.prototype;
   var eol = typeof process !== "undefined" && process.platform === "win32" ? "\r\n" : "\n";
-  function encode(obj, opt) {
-    var children = [];
-    var out = "";
+  var encode = (obj, opt) => {
+    const children = [];
+    let out = "";
     if (typeof opt === "string") {
       opt = {
         section: opt,
         whitespace: false
       };
     } else {
-      opt = opt || {};
+      opt = opt || Object.create(null);
       opt.whitespace = opt.whitespace === true;
     }
-    var separator = opt.whitespace ? " = " : "=";
-    Object.keys(obj).forEach(function(k, _2, __) {
-      var val = obj[k];
+    const separator = opt.whitespace ? " = " : "=";
+    for (const k of Object.keys(obj)) {
+      const val = obj[k];
       if (val && Array.isArray(val)) {
-        val.forEach(function(item) {
+        for (const item of val)
           out += safe(k + "[]") + separator + safe(item) + "\n";
-        });
-      } else if (val && typeof val === "object") {
+      } else if (val && typeof val === "object")
         children.push(k);
-      } else {
+      else
         out += safe(k) + separator + safe(val) + eol;
-      }
-    });
-    if (opt.section && out.length) {
-      out = "[" + safe(opt.section) + "]" + eol + out;
     }
-    children.forEach(function(k, _2, __) {
-      var nk = dotSplit(k).join("\\.");
-      var section = (opt.section ? opt.section + "." : "") + nk;
-      var child = encode(obj[k], {
+    if (opt.section && out.length)
+      out = "[" + safe(opt.section) + "]" + eol + out;
+    for (const k of children) {
+      const nk = dotSplit(k).join("\\.");
+      const section = (opt.section ? opt.section + "." : "") + nk;
+      const {whitespace} = opt;
+      const child = encode(obj[k], {
         section,
-        whitespace: opt.whitespace
+        whitespace
       });
-      if (out.length && child.length) {
+      if (out.length && child.length)
         out += eol;
-      }
       out += child;
-    });
+    }
     return out;
-  }
-  function dotSplit(str) {
-    return str.replace(/\1/g, "LITERAL\\1LITERAL").replace(/\\\./g, "").split(/\./).map(function(part) {
-      return part.replace(/\1/g, "\\.").replace(/\2LITERAL\\1LITERAL\2/g, "");
-    });
-  }
-  function decode(str) {
-    var out = {};
-    var p = out;
-    var section = null;
-    var re = /^\[([^\]]*)\]$|^([^=]+)(=(.*))?$/i;
-    var lines = str.split(/[\r\n]+/g);
-    lines.forEach(function(line, _2, __) {
+  };
+  var dotSplit = (str) => str.replace(/\1/g, "LITERAL\\1LITERAL").replace(/\\\./g, "").split(/\./).map((part) => part.replace(/\1/g, "\\.").replace(/\2LITERAL\\1LITERAL\2/g, ""));
+  var decode = (str) => {
+    const out = Object.create(null);
+    let p = out;
+    let section = null;
+    const re = /^\[([^\]]*)\]$|^([^=]+)(=(.*))?$/i;
+    const lines = str.split(/[\r\n]+/g);
+    for (const line of lines) {
       if (!line || line.match(/^\s*[;#]/))
-        return;
-      var match = line.match(re);
+        continue;
+      const match = line.match(re);
       if (!match)
-        return;
+        continue;
       if (match[1] !== void 0) {
         section = unsafe(match[1]);
-        p = out[section] = out[section] || {};
-        return;
-      }
-      var key = unsafe(match[2]);
-      var value = match[3] ? unsafe(match[4]) : true;
-      switch (value) {
-        case "true":
-        case "false":
-        case "null":
-          value = JSON.parse(value);
-      }
-      if (key.length > 2 && key.slice(-2) === "[]") {
-        key = key.substring(0, key.length - 2);
-        if (!p[key]) {
-          p[key] = [];
-        } else if (!Array.isArray(p[key])) {
-          p[key] = [p[key]];
+        if (section === "__proto__") {
+          p = Object.create(null);
+          continue;
         }
+        p = out[section] = out[section] || Object.create(null);
+        continue;
       }
-      if (Array.isArray(p[key])) {
+      const keyRaw = unsafe(match[2]);
+      const isArray = keyRaw.length > 2 && keyRaw.slice(-2) === "[]";
+      const key = isArray ? keyRaw.slice(0, -2) : keyRaw;
+      if (key === "__proto__")
+        continue;
+      const valueRaw = match[3] ? unsafe(match[4]) : true;
+      const value = valueRaw === "true" || valueRaw === "false" || valueRaw === "null" ? JSON.parse(valueRaw) : valueRaw;
+      if (isArray) {
+        if (!hasOwnProperty.call(p, key))
+          p[key] = [];
+        else if (!Array.isArray(p[key]))
+          p[key] = [p[key]];
+      }
+      if (Array.isArray(p[key]))
         p[key].push(value);
-      } else {
+      else
         p[key] = value;
-      }
-    });
-    Object.keys(out).filter(function(k, _2, __) {
-      if (!out[k] || typeof out[k] !== "object" || Array.isArray(out[k])) {
-        return false;
-      }
-      var parts = dotSplit(k);
-      var p2 = out;
-      var l = parts.pop();
-      var nl = l.replace(/\\\./g, ".");
-      parts.forEach(function(part, _3, __2) {
-        if (!p2[part] || typeof p2[part] !== "object")
-          p2[part] = {};
+    }
+    const remove = [];
+    for (const k of Object.keys(out)) {
+      if (!hasOwnProperty.call(out, k) || typeof out[k] !== "object" || Array.isArray(out[k]))
+        continue;
+      const parts = dotSplit(k);
+      let p2 = out;
+      const l = parts.pop();
+      const nl = l.replace(/\\\./g, ".");
+      for (const part of parts) {
+        if (part === "__proto__")
+          continue;
+        if (!hasOwnProperty.call(p2, part) || typeof p2[part] !== "object")
+          p2[part] = Object.create(null);
         p2 = p2[part];
-      });
-      if (p2 === out && nl === l) {
-        return false;
       }
+      if (p2 === out && nl === l)
+        continue;
       p2[nl] = out[k];
-      return true;
-    }).forEach(function(del, _2, __) {
+      remove.push(k);
+    }
+    for (const del of remove)
       delete out[del];
-    });
     return out;
-  }
-  function isQuoted(val) {
-    return val.charAt(0) === '"' && val.slice(-1) === '"' || val.charAt(0) === "'" && val.slice(-1) === "'";
-  }
-  function safe(val) {
-    return typeof val !== "string" || val.match(/[=\r\n]/) || val.match(/^\[/) || val.length > 1 && isQuoted(val) || val !== val.trim() ? JSON.stringify(val) : val.replace(/;/g, "\\;").replace(/#/g, "\\#");
-  }
-  function unsafe(val, doUnesc) {
+  };
+  var isQuoted = (val) => val.charAt(0) === '"' && val.slice(-1) === '"' || val.charAt(0) === "'" && val.slice(-1) === "'";
+  var safe = (val) => typeof val !== "string" || val.match(/[=\r\n]/) || val.match(/^\[/) || val.length > 1 && isQuoted(val) || val !== val.trim() ? JSON.stringify(val) : val.replace(/;/g, "\\;").replace(/#/g, "\\#");
+  var unsafe = (val, doUnesc) => {
     val = (val || "").trim();
     if (isQuoted(val)) {
-      if (val.charAt(0) === "'") {
+      if (val.charAt(0) === "'")
         val = val.substr(1, val.length - 2);
-      }
       try {
         val = JSON.parse(val);
       } catch (_2) {
       }
     } else {
-      var esc = false;
-      var unesc = "";
-      for (var i = 0, l = val.length; i < l; i++) {
-        var c = val.charAt(i);
+      let esc = false;
+      let unesc = "";
+      for (let i = 0, l = val.length; i < l; i++) {
+        const c = val.charAt(i);
         if (esc) {
-          if ("\\;#".indexOf(c) !== -1) {
+          if ("\\;#".indexOf(c) !== -1)
             unesc += c;
-          } else {
+          else
             unesc += "\\" + c;
-          }
           esc = false;
-        } else if (";#".indexOf(c) !== -1) {
+        } else if (";#".indexOf(c) !== -1)
           break;
-        } else if (c === "\\") {
+        else if (c === "\\")
           esc = true;
-        } else {
+        else
           unesc += c;
-        }
       }
-      if (esc) {
+      if (esc)
         unesc += "\\";
-      }
       return unesc.trim();
     }
     return val;
-  }
+  };
+  module2.exports = {
+    parse: decode,
+    decode,
+    stringify: encode,
+    encode,
+    safe,
+    unsafe
+  };
 });
 
-// ../../node_modules/.pnpm/global-dirs@2.0.1/node_modules/global-dirs/index.js
+// ../../node_modules/.pnpm/global-dirs@3.0.0/node_modules/global-dirs/index.js
 var require_global_dirs = __commonJS2((exports2) => {
   "use strict";
   var path3 = require("path");
@@ -43140,7 +43309,7 @@ var require_global_dirs = __commonJS2((exports2) => {
   var readRc = (filePath) => {
     try {
       return ini.parse(fs3.readFileSync(filePath, "utf8")).prefix;
-    } catch (_2) {
+    } catch (e) {
     }
   };
   var getEnvNpmPrefix = () => {
@@ -43357,7 +43526,6 @@ Please try to install it with ${chalk_12.default.bold.greenBright("npm install @
       cwd: baseDir,
       stdio: "inherit",
       env: {
-        ...process.env,
         SKIP_GENERATE: "true"
       }
     });
@@ -44040,6 +44208,31 @@ var require_printConfigWarnings = __commonJS2((exports2) => {
   exports2.printConfigWarnings = printConfigWarnings;
 });
 
+// ../sdk/dist/utils/missingDatasource.js
+var require_missingDatasource = __commonJS2((exports2) => {
+  "use strict";
+  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
+    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  };
+  Object.defineProperty(exports2, "__esModule", {value: true});
+  exports2.missingDatasource = void 0;
+  var chalk_12 = __importDefault2(require_source2());
+  var highlight_1 = require_highlight();
+  var link_1 = require_link();
+  exports2.missingDatasource = `
+You don't have any ${chalk_12.default.bold("datasource")} defined in your ${chalk_12.default.bold("schema.prisma")}.
+You can define a datasource like this:
+
+${chalk_12.default.bold(highlight_1.highlightDatamodel(`datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}`))}
+
+More information in our documentation:
+${link_1.link("https://pris.ly/d/prisma-schema")}
+`;
+});
+
 // ../sdk/dist/getGenerators.js
 var require_getGenerators = __commonJS2((exports) => {
   "use strict";
@@ -44068,6 +44261,7 @@ var require_getGenerators = __commonJS2((exports) => {
   var engines_1 = require_dist9();
   var printConfigWarnings_1 = require_printConfigWarnings();
   var debug_1 = __importDefault(require_dist7());
+  var missingDatasource_1 = require_missingDatasource();
   var debug = debug_1.default("getGenerators");
   async function getGenerators({
     schemaPath,
@@ -44080,7 +44274,7 @@ var require_getGenerators = __commonJS2((exports) => {
     skipDownload,
     binaryPathsOverride
   }) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
     if (!schemaPath) {
       throw new Error(`schemaPath for getGenerators got invalid value ${schemaPath}`);
     }
@@ -44112,6 +44306,9 @@ var require_getGenerators = __commonJS2((exports) => {
       prismaPath,
       ignoreEnvVarErrors: true
     });
+    if (config.datasources.length === 0) {
+      throw new Error(missingDatasource_1.missingDatasource);
+    }
     printConfigWarnings_1.printConfigWarnings(config.warnings);
     const experimentalFeatures = mapPreviewFeatures_1.mapPreviewFeatures(extractPreviewFeatures_1.extractPreviewFeatures(config));
     const dmmf = await engineCommands_1.getDMMF({
@@ -44169,20 +44366,36 @@ The generator needs to either define the \`defaultOutput\` path in the manifest 
       }, {
         stopOnError: false
       });
+      const generatorProviders = generatorConfigs.map((g) => g.provider);
+      for (const g of generators) {
+        if (((_a = g === null || g === void 0 ? void 0 : g.manifest) === null || _a === void 0 ? void 0 : _a.requiresGenerators) && ((_b = g === null || g === void 0 ? void 0 : g.manifest) === null || _b === void 0 ? void 0 : _b.requiresGenerators.length) > 0) {
+          for (const neededGenerator of (_c = g === null || g === void 0 ? void 0 : g.manifest) === null || _c === void 0 ? void 0 : _c.requiresGenerators) {
+            if (!generatorProviders.includes(neededGenerator)) {
+              throw new Error(`Generator "${g.manifest.prettyName}" requires generator "${neededGenerator}", but it is missing in your schema.prisma.
+Please add it to your schema.prisma:
+
+generator gen {
+  provider = "${neededGenerator}"
+}
+`);
+            }
+          }
+        }
+      }
       const neededVersions = Object.create(null);
       for (const g of generators) {
-        if (((_a = g.manifest) === null || _a === void 0 ? void 0 : _a.requiresEngines) && Array.isArray((_b = g.manifest) === null || _b === void 0 ? void 0 : _b.requiresEngines) && g.manifest.requiresEngines.length > 0) {
+        if (((_d = g.manifest) === null || _d === void 0 ? void 0 : _d.requiresEngines) && Array.isArray((_e = g.manifest) === null || _e === void 0 ? void 0 : _e.requiresEngines) && g.manifest.requiresEngines.length > 0) {
           const neededVersion = getEngineVersionForGenerator(g.manifest, version);
           if (!neededVersions[neededVersion]) {
             neededVersions[neededVersion] = {engines: [], binaryTargets: []};
           }
-          for (const engine of (_c = g.manifest) === null || _c === void 0 ? void 0 : _c.requiresEngines) {
+          for (const engine of (_f = g.manifest) === null || _f === void 0 ? void 0 : _f.requiresEngines) {
             if (!neededVersions[neededVersion].engines.includes(engine)) {
               neededVersions[neededVersion].engines.push(engine);
             }
           }
-          if (((_e = (_d = g.options) === null || _d === void 0 ? void 0 : _d.generator) === null || _e === void 0 ? void 0 : _e.binaryTargets) && ((_g = (_f = g.options) === null || _f === void 0 ? void 0 : _f.generator) === null || _g === void 0 ? void 0 : _g.binaryTargets.length) > 0) {
-            for (let binaryTarget of (_j = (_h = g.options) === null || _h === void 0 ? void 0 : _h.generator) === null || _j === void 0 ? void 0 : _j.binaryTargets) {
+          if (((_h = (_g = g.options) === null || _g === void 0 ? void 0 : _g.generator) === null || _h === void 0 ? void 0 : _h.binaryTargets) && ((_k = (_j = g.options) === null || _j === void 0 ? void 0 : _j.generator) === null || _k === void 0 ? void 0 : _k.binaryTargets.length) > 0) {
+            for (let binaryTarget of (_m = (_l = g.options) === null || _l === void 0 ? void 0 : _l.generator) === null || _m === void 0 ? void 0 : _m.binaryTargets) {
               if (binaryTarget === "native") {
                 binaryTarget = platform;
               }
@@ -58523,10 +58736,10 @@ var require_util7 = __commonJS2((exports2) => {
     return objectToString(d2) === "[object Date]";
   }
   exports2.isDate = isDate;
-  function isError(e) {
+  function isError3(e) {
     return objectToString(e) === "[object Error]" || e instanceof Error;
   }
-  exports2.isError = isError;
+  exports2.isError = isError3;
   function isFunction(arg) {
     return typeof arg === "function";
   }
@@ -66712,7 +66925,7 @@ var require_bl = __commonJS2((exports2, module2) => {
   module2.exports.BufferList = BufferList;
 });
 
-// ../../node_modules/.pnpm/tar-stream@2.1.4/node_modules/tar-stream/headers.js
+// ../../node_modules/.pnpm/tar-stream@2.2.0/node_modules/tar-stream/headers.js
 var require_headers = __commonJS2((exports2) => {
   var alloc = Buffer.alloc;
   var ZEROS = "0000000000000000000";
@@ -66938,7 +67151,7 @@ var require_headers = __commonJS2((exports2) => {
     buf.write(encodeOct(cksum(buf), 6), 148);
     return buf;
   };
-  exports2.decode = function(buf, filenameEncoding) {
+  exports2.decode = function(buf, filenameEncoding, allowUnknownFormat) {
     var typeflag = buf[156] === 0 ? 0 : buf[156] - ZERO_OFFSET;
     var name = decodeStr(buf, 0, 100, filenameEncoding);
     var mode = decodeOct(buf, 100, 8);
@@ -66962,7 +67175,9 @@ var require_headers = __commonJS2((exports2) => {
         name = decodeStr(buf, 345, 155, filenameEncoding) + "/" + name;
     } else if (GNU_MAGIC.compare(buf, MAGIC_OFFSET, MAGIC_OFFSET + 6) === 0 && GNU_VER.compare(buf, VERSION_OFFSET, VERSION_OFFSET + 2) === 0) {
     } else {
-      throw new Error("Invalid tar header: unknown format.");
+      if (!allowUnknownFormat) {
+        throw new Error("Invalid tar header: unknown format.");
+      }
     }
     if (typeflag === 0 && name && name[name.length - 1] === "/")
       typeflag = 5;
@@ -66983,7 +67198,7 @@ var require_headers = __commonJS2((exports2) => {
   };
 });
 
-// ../../node_modules/.pnpm/tar-stream@2.1.4/node_modules/tar-stream/extract.js
+// ../../node_modules/.pnpm/tar-stream@2.2.0/node_modules/tar-stream/extract.js
 var require_extract2 = __commonJS2((exports2, module2) => {
   var util2 = require("util");
   var bl = require_bl();
@@ -67097,7 +67312,7 @@ var require_extract2 = __commonJS2((exports2, module2) => {
       var offset = self2._offset;
       var header;
       try {
-        header = self2._header = headers.decode(b.slice(0, 512), opts.filenameEncoding);
+        header = self2._header = headers.decode(b.slice(0, 512), opts.filenameEncoding, opts.allowUnknownFormat);
       } catch (err) {
         self2.emit("error", err);
       }
@@ -67319,7 +67534,7 @@ var require_end_of_stream3 = __commonJS2((exports2, module2) => {
   module2.exports = eos;
 });
 
-// ../../node_modules/.pnpm/tar-stream@2.1.4/node_modules/tar-stream/pack.js
+// ../../node_modules/.pnpm/tar-stream@2.2.0/node_modules/tar-stream/pack.js
 var require_pack2 = __commonJS2((exports2, module2) => {
   var constants = require_fs_constants();
   var eos = require_end_of_stream3();
@@ -67555,7 +67770,7 @@ var require_pack2 = __commonJS2((exports2, module2) => {
   module2.exports = Pack;
 });
 
-// ../../node_modules/.pnpm/tar-stream@2.1.4/node_modules/tar-stream/index.js
+// ../../node_modules/.pnpm/tar-stream@2.2.0/node_modules/tar-stream/index.js
 var require_tar_stream = __commonJS2((exports2) => {
   exports2.extract = require_extract2();
   exports2.pack = require_pack2();
@@ -71102,10 +71317,10 @@ var require_utils9 = __commonJS2((exports2) => {
     }
   }
   exports2.arg = arg;
-  function isError(result) {
+  function isError3(result) {
     return result instanceof Error;
   }
-  exports2.isError = isError;
+  exports2.isError = isError3;
 });
 
 // ../sdk/dist/cli/hashes.js
@@ -71768,7 +71983,6 @@ var require_migrateEngineCommands = __commonJS2((exports2) => {
       await execa_12.default(migrationEnginePath, ["cli", "--datasource", connectionString, "can-connect-to-database"], {
         cwd,
         env: {
-          ...process.env,
           RUST_BACKTRACE: "1",
           RUST_LOG: "info"
         }
@@ -71806,7 +72020,6 @@ ${e.stderr}`);
     return await execa_12.default(migrationEnginePath, ["cli", "--datasource", connectionString, "create-database"], {
       cwd,
       env: {
-        ...process.env,
         RUST_BACKTRACE: "1",
         RUST_LOG: "info"
       }
@@ -71818,7 +72031,6 @@ ${e.stderr}`);
     return await execa_12.default(migrationEnginePath, ["cli", "--datasource", connectionString, "drop-database"], {
       cwd,
       env: {
-        ...process.env,
         RUST_BACKTRACE: "1",
         RUST_LOG: "info"
       }
@@ -72125,7 +72337,7 @@ var require_dist19 = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.14.0",
+    version: "2.15.0",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -72183,31 +72395,32 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "index-browser.js"
     ],
     devDependencies: {
-      "@prisma/debug": "2.14.0",
-      "@prisma/engine-core": "2.14.0",
-      "@prisma/engines": "2.14.0-28.5d491261d382a2a5ffdc71de17072b0e409f1cc1",
-      "@prisma/generator-helper": "2.14.0",
-      "@prisma/get-platform": "2.14.0",
-      "@prisma/migrate": "2.14.0",
-      "@prisma/sdk": "2.14.0",
+      "@prisma/debug": "2.15.0",
+      "@prisma/engine-core": "2.15.0",
+      "@prisma/engines": "2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54",
+      "@prisma/generator-helper": "2.15.0",
+      "@prisma/get-platform": "2.15.0",
+      "@prisma/migrate": "2.15.0",
+      "@prisma/sdk": "2.15.0",
       "@timsuchanek/copy": "1.4.5",
       "@types/debug": "4.1.5",
-      "@types/jest": "26.0.19",
+      "@types/mssql": "6.0.7",
+      "@types/jest": "26.0.20",
       "@types/js-levenshtein": "1.1.0",
-      "@types/node": "12.19.11",
-      "@types/pg": "7.14.7",
-      "@typescript-eslint/eslint-plugin": "4.11.1",
-      "@typescript-eslint/parser": "4.11.1",
+      "@types/node": "12.19.14",
+      "@types/pg": "7.14.9",
+      "@typescript-eslint/eslint-plugin": "4.14.0",
+      "@typescript-eslint/parser": "4.14.0",
       arg: "5.0.0",
       chalk: "4.1.0",
       "decimal.js": "10.2.1",
-      esbuild: "0.8.29",
+      esbuild: "0.8.33",
       "escape-string-regexp": "4.0.0",
-      eslint: "7.17.0",
-      "eslint-config-prettier": "7.1.0",
+      eslint: "7.18.0",
+      "eslint-config-prettier": "7.2.0",
       "eslint-plugin-eslint-comments": "3.2.0",
       "eslint-plugin-jest": "24.1.3",
-      "eslint-plugin-prettier": "3.3.0",
+      "eslint-plugin-prettier": "3.3.1",
       execa: "5.0.0",
       "flat-map-polyfill": "0.3.8",
       "fs-monkey": "1.0.1",
@@ -72228,7 +72441,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       prettier: "2.2.1",
       "replace-string": "3.1.0",
       rimraf: "3.0.2",
-      rollup: "2.35.1",
+      rollup: "2.37.0",
       "rollup-plugin-dts": "2.0.1",
       "sort-keys": "4.2.0",
       "source-map-support": "0.5.19",
@@ -72250,7 +72463,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       }
     },
     dependencies: {
-      "@prisma/engines-version": "2.14.0-28.5d491261d382a2a5ffdc71de17072b0e409f1cc1"
+      "@prisma/engines-version": "2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54"
     },
     "lint-staged": {
       "*.ts": [
@@ -74608,6 +74821,8 @@ function wrapWithList(str, isList) {
   }
   return str;
 }
+var RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60))(\.\d{1,})?(([Z])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
+var UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 function getGraphQLType(value, potentialType) {
   if (value === null) {
     return "null";
@@ -74646,7 +74861,7 @@ function getGraphQLType(value, potentialType) {
     return "DateTime";
   }
   if (jsType === "string") {
-    if (/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)) {
+    if (UUID_REGEX.test(value)) {
       return "UUID";
     }
     const date = new Date(value);
@@ -74656,7 +74871,7 @@ function getGraphQLType(value, potentialType) {
     if (date.toString() === "Invalid Date") {
       return "String";
     }
-    if (/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/.test(value)) {
+    if (RFC_3339_REGEX.test(value)) {
       return "DateTime";
     }
   }
@@ -75706,7 +75921,7 @@ function parseStack({
       if (!theLine || theLine.trim() === "") {
         params.callsiteStr = ":";
       } else {
-        const prismaClientRegex = /(\S+(create|updateMany|deleteMany|update|delete|findMany|findOne|findUnique)\()/;
+        const prismaClientRegex = /(\S+(create|updateMany|deleteMany|update|delete|findMany|findUnique)\()/;
         const match = prismaClientRegex.exec(theLine);
         if (!match) {
           return params;
@@ -76283,7 +76498,6 @@ function makeDocument({
       type: rootType,
       location: "outputObjectTypes"
     },
-    isRequired: true,
     name: rootTypeName
   };
   const children = selectionToFields(dmmf, {[rootField]: select}, fakeRootField, [rootTypeName]);
@@ -76916,7 +77130,7 @@ var import_engine_core = __toModule2(require_dist11());
 // src/runtime/getPrismaClient.ts
 var import_debug = __toModule2(require_dist7());
 var import_NodeEngine = __toModule2(require_NodeEngine());
-var import_sdk = __toModule2(require_dist18());
+var import_sdk3 = __toModule2(require_dist18());
 var import_mapPreviewFeatures = __toModule2(require_mapPreviewFeatures());
 var import_async_hooks = __toModule2(require("async_hooks"));
 var import_chalk6 = __toModule2(require_source2());
@@ -77050,6 +77264,52 @@ var mssqlPreparedStatement = (template) => {
   return template.reduce((acc, str, idx) => `${acc}@P${idx}${str}`);
 };
 
+// src/runtime/utils/rejectOnNotFound.ts
+var import_sdk = __toModule2(require_dist18());
+var NotFoundError = class extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "NotFoundError";
+    this.stack = void 0;
+  }
+};
+function getRejectOnNotFound(action, modelName, args, clientInstance) {
+  let rejectOnNotFound;
+  if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
+    rejectOnNotFound = args["rejectOnNotFound"];
+    delete args["rejectOnNotFound"];
+  } else if (typeof clientInstance === "boolean") {
+    rejectOnNotFound = clientInstance;
+  } else if (clientInstance && typeof clientInstance === "object" && action in clientInstance) {
+    const rejectPerOperation = clientInstance[action];
+    if (rejectPerOperation && typeof rejectPerOperation === "object") {
+      if (modelName in rejectPerOperation) {
+        return rejectPerOperation[modelName];
+      }
+      return void 0;
+    }
+    rejectOnNotFound = getRejectOnNotFound(action, modelName, args, rejectPerOperation);
+  } else if (typeof clientInstance === "function") {
+    rejectOnNotFound = clientInstance;
+  } else {
+    rejectOnNotFound = false;
+  }
+  return rejectOnNotFound;
+}
+var REGEX2 = /(findUnique|findFirst)/;
+function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
+  if (rejectOnNotFound && !data && REGEX2.exec(clientMethod)) {
+    if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
+      throw new NotFoundError(`No ${typeName} found`);
+    } else if (typeof rejectOnNotFound === "function") {
+      throw rejectOnNotFound(new NotFoundError(`No ${typeName} found`));
+    } else if (import_sdk.isError(rejectOnNotFound)) {
+      throw rejectOnNotFound;
+    }
+    throw new NotFoundError(`No ${typeName} found`);
+  }
+}
+
 // src/runtime/utils/serializeRawParameters.ts
 function serializeRawParameters(data) {
   return JSON.stringify(replaceDates(data));
@@ -77083,8 +77343,15 @@ function replaceDates(data) {
 }
 
 // src/runtime/utils/validatePrismaClientOptions.ts
+var import_sdk2 = __toModule2(require_dist18());
 var import_js_levenshtein2 = __toModule2(require_js_levenshtein());
-var knownProperties = ["datasources", "errorFormat", "log", "__internal"];
+var knownProperties = [
+  "datasources",
+  "errorFormat",
+  "log",
+  "__internal",
+  "rejectOnNotFound"
+];
 var errorFormats = ["pretty", "colorless", "minimal"];
 var logLevels = ["info", "query", "warn", "error"];
 var validators = {
@@ -77188,6 +77455,15 @@ It should have this form: { url: "CONNECTION_STRING" }`);
         throw new PrismaClientConstructorValidationError(`Invalid property ${JSON.stringify(key)} for "__internal" provided to PrismaClient constructor.${didYouMean}`);
       }
     }
+  },
+  rejectOnNotFound: (value) => {
+    if (!value) {
+      return;
+    }
+    if (import_sdk2.isError(value) || typeof value === "boolean" || typeof value === "object" || typeof value === "function") {
+      return value;
+    }
+    throw new PrismaClientConstructorValidationError(`Invalid rejectOnNotFound expected a boolean/Error/{[modelName: Error | boolean]} but received ${JSON.stringify(value)}`);
   }
 };
 function validatePrismaClientOptions(options, datasourceNames) {
@@ -77249,7 +77525,6 @@ More Information: https://pris.ly/d/execute-raw
   }
 }
 var actionOperationMap = {
-  findOne: "query",
   findUnique: "query",
   findFirst: "query",
   findMany: "query",
@@ -77282,13 +77557,14 @@ function getPrismaClient(config2) {
       if (optionsArg) {
         validatePrismaClientOptions(optionsArg, config2.datasourceNames);
       }
+      this._rejectOnNotFound = optionsArg == null ? void 0 : optionsArg.rejectOnNotFound;
       this._clientVersion = (_a = config2.clientVersion) != null ? _a : clientVersion;
       this._activeProvider = config2.activeProvider;
       const envPaths2 = {
         rootEnvPath: config2.relativeEnvPaths.rootEnvPath && import_path.default.resolve(config2.dirname, config2.relativeEnvPaths.rootEnvPath),
         schemaEnvPath: config2.relativeEnvPaths.schemaEnvPath && import_path.default.resolve(config2.dirname, config2.relativeEnvPaths.schemaEnvPath)
       };
-      const loadedEnv = import_sdk.tryLoadEnvs(envPaths2, {conflictCheck: "none"});
+      const loadedEnv = import_sdk3.tryLoadEnvs(envPaths2, {conflictCheck: "none"});
       try {
         const options = optionsArg != null ? optionsArg : {};
         const internal = (_b = options.__internal) != null ? _b : {};
@@ -77721,7 +77997,7 @@ new PrismaClient({
             action: internalParams.action,
             model: internalParams.model
           };
-          return resource.runInAsyncScope(() => this._requestWithMiddlewares(params, this._middlewares.slice(), internalParams.clientMethod, internalParams.callsite, internalParams.headers));
+          return resource.runInAsyncScope(() => this._requestWithMiddlewares(params, this._middlewares.slice(), internalParams.clientMethod, internalParams.callsite, internalParams.headers, internalParams.unpacker));
         }
         return resource.runInAsyncScope(() => this._executeRequest(internalParams));
       } catch (e) {
@@ -77729,15 +78005,16 @@ new PrismaClient({
         throw e;
       }
     }
-    _requestWithMiddlewares(params, middlewares, clientMethod, callsite, headers) {
+    _requestWithMiddlewares(params, middlewares, clientMethod, callsite, headers, unpacker) {
       const middleware = middlewares.shift();
       if (middleware) {
-        return middleware(params, (params2) => this._requestWithMiddlewares(params2, middlewares, clientMethod, callsite));
+        return middleware(params, (params2) => this._requestWithMiddlewares(params2, middlewares, clientMethod, callsite, headers, unpacker));
       }
       ;
       params.clientMethod = clientMethod;
       params.callsite = callsite;
       params.headers = headers;
+      params.unpacker = unpacker;
       return this._executeRequest(params);
     }
     _executeRequest({
@@ -77749,7 +78026,8 @@ new PrismaClient({
       action,
       model,
       headers,
-      transactionId
+      transactionId,
+      unpacker
     }) {
       if (action !== "executeRaw" && action !== "queryRaw" && !model) {
         throw new Error(`Model missing for action ${action}`);
@@ -77757,8 +78035,6 @@ new PrismaClient({
       if ((action === "executeRaw" || action === "queryRaw") && model) {
         throw new Error(`executeRaw and queryRaw can't be executed on a model basis. The model ${model} has been provided`);
       }
-      if (action === "findOne")
-        action = "findUnique";
       let rootField;
       const operation = actionOperationMap[action];
       if (action === "executeRaw" || action === "queryRaw") {
@@ -77781,6 +78057,7 @@ new PrismaClient({
       }
       const {isList} = field.outputType;
       const typeName = getOutputTypeName(field.outputType.type);
+      const rejectOnNotFound = getRejectOnNotFound(action, typeName, args, this._rejectOnNotFound);
       let document2 = makeDocument({
         dmmf: this._dmmf,
         rootField,
@@ -77806,6 +78083,7 @@ new PrismaClient({
         clientMethod,
         typeName,
         dataPath,
+        rejectOnNotFound,
         isList,
         rootField,
         callsite,
@@ -77814,7 +78092,8 @@ new PrismaClient({
         engineHook: this._engineMiddlewares[0],
         runInTransaction,
         headers,
-        transactionId
+        transactionId,
+        unpacker
       });
     }
     _bootstrapClient() {
@@ -77829,11 +78108,9 @@ new PrismaClient({
           actionName,
           args,
           dataPath,
-          modelName
+          modelName,
+          unpacker
         }) => {
-          if (actionName === "findOne") {
-            console.warn(`${import_chalk6.default.yellow("warn(prisma) ")} findOne is deprecated. Please use findUnique instead.`);
-          }
           dataPath = dataPath != null ? dataPath : [];
           const clientMethod = `${lowerCaseModel}.${actionName}`;
           let requestPromise;
@@ -77849,7 +78126,8 @@ new PrismaClient({
                   model: requestModelName,
                   clientMethod,
                   callsite,
-                  runInTransaction: false
+                  runInTransaction: false,
+                  unpacker
                 });
               }
               return requestPromise.then(onfulfilled, onrejected);
@@ -77864,7 +78142,8 @@ new PrismaClient({
                   clientMethod,
                   callsite,
                   runInTransaction: true,
-                  transactionId
+                  transactionId,
+                  unpacker
                 });
               }
               return requestPromise;
@@ -77878,7 +78157,8 @@ new PrismaClient({
                   model: requestModelName,
                   clientMethod,
                   callsite,
-                  runInTransaction: false
+                  runInTransaction: false,
+                  unpacker
                 });
               }
               return requestPromise.catch(onrejected);
@@ -77892,7 +78172,8 @@ new PrismaClient({
                   model: requestModelName,
                   clientMethod,
                   callsite,
-                  runInTransaction: false
+                  runInTransaction: false,
+                  unpacker
                 });
               }
               return requestPromise.finally(onfinally);
@@ -77926,11 +78207,7 @@ new PrismaClient({
           aggregate: true,
           groupBy: true
         };
-        const newMapping = {
-          ...mapping,
-          findOne: mapping.findUnique
-        };
-        const delegate = Object.keys(newMapping).reduce((acc, actionName) => {
+        const delegate = Object.keys(mapping).reduce((acc, actionName) => {
           if (!filteredActionsList[actionName]) {
             const operation = getOperation(actionName);
             acc[actionName] = (args) => clients[mapping.model]({
@@ -77942,26 +78219,49 @@ new PrismaClient({
           return acc;
         }, {});
         delegate.count = (args) => {
+          let select;
+          let unpacker;
+          if ((args == null ? void 0 : args.select) && typeof (args == null ? void 0 : args.select) === "object") {
+            select = {count: {select: args.select}};
+          } else {
+            select = {count: {select: {_all: true}}};
+            unpacker = (data) => {
+              var _a;
+              data.count = (_a = data.count) == null ? void 0 : _a._all;
+              return data;
+            };
+          }
           return clients[mapping.model]({
             operation: "query",
             actionName: `aggregate`,
-            args: args ? {
-              ...args,
-              select: {count: {select: {_all: true}}}
-            } : {
-              select: {count: {select: {_all: true}}}
+            args: {
+              ...args != null ? args : {},
+              select
             },
-            dataPath: ["count"]
+            dataPath: ["count"],
+            unpacker
           });
         };
         delegate.aggregate = (args) => {
+          let unpacker = void 0;
           const select = Object.entries(args).reduce((acc, [key, value]) => {
             if (aggregateKeys[key]) {
               if (!acc.select) {
                 acc.select = {};
               }
               if (key === "count") {
-                acc.select[key] = {select: {_all: value}};
+                if (typeof value === "object" && value) {
+                  acc.select[key] = {select: value};
+                } else {
+                  acc.select[key] = {select: {_all: value}};
+                  unpacker = (data) => {
+                    var _a;
+                    if (data.count) {
+                      data.count = (_a = data.count) == null ? void 0 : _a._all;
+                    }
+                    return data;
+                  };
+                }
               } else {
                 acc.select[key] = {select: value};
               }
@@ -77975,7 +78275,8 @@ new PrismaClient({
             actionName: "aggregate",
             rootField: mapping.aggregate,
             args: select,
-            dataPath: []
+            dataPath: [],
+            unpacker
           });
         };
         delegate.groupBy = (args) => {
@@ -77988,6 +78289,7 @@ generator client {
 }
 `);
           }
+          let unpacker = void 0;
           const select = Object.entries(args).reduce((acc, [key, value]) => {
             if (aggregateKeys[key]) {
               if (!acc.select) {
@@ -77996,6 +78298,25 @@ generator client {
               acc.select[key] = {select: value};
             } else {
               acc[key] = value;
+            }
+            if (key === "count") {
+              if (typeof value === "object" && value) {
+                acc.select[key] = {select: value};
+              } else if (typeof value === "boolean") {
+                acc.select[key] = {select: {_all: value}};
+                unpacker = (data) => {
+                  if (Array.isArray(data)) {
+                    data = data.map((row) => {
+                      var _a, _b;
+                      if (row && typeof row.count === "object" && ((_a = row.count) == null ? void 0 : _a._all)) {
+                        row.count = (_b = row.count) == null ? void 0 : _b._all;
+                      }
+                      return row;
+                    });
+                  }
+                  return data;
+                };
+              }
             }
             if (key === "by" && Array.isArray(value) && value.length > 0) {
               if (!acc.select) {
@@ -78012,7 +78333,8 @@ generator client {
             actionName: "groupBy",
             rootField: mapping.groupBy,
             args: select,
-            dataPath: []
+            dataPath: [],
+            unpacker
           });
         };
         this[lowerCaseModel] = delegate;
@@ -78044,7 +78366,7 @@ var PrismaClientFetcher = class {
           }
           return "transaction-batch";
         }
-        if (!(request.document.children[0].name.startsWith("findOne") || request.document.children[0].name.startsWith("findUnique"))) {
+        if (!request.document.children[0].name.startsWith("findUnique")) {
           return null;
         }
         const selectionSet = request.document.children[0].children.join(",");
@@ -78068,13 +78390,15 @@ var PrismaClientFetcher = class {
     typeName,
     isList,
     callsite,
+    rejectOnNotFound,
     clientMethod,
     runInTransaction,
     showColors,
     engineHook,
     args,
     headers,
-    transactionId
+    transactionId,
+    unpacker
   }) {
     if (this.hooks && this.hooks.beforeRequest) {
       const query = String(document2);
@@ -78108,7 +78432,8 @@ var PrismaClientFetcher = class {
         data = result.data;
         elapsed = result.elapsed;
       }
-      const unpackResult = this.unpack(document2, data, dataPath, rootField);
+      const unpackResult = this.unpack(document2, data, dataPath, rootField, unpacker);
+      throwIfNotFound(unpackResult, clientMethod, typeName, rejectOnNotFound);
       if (process.env.PRISMA_CLIENT_GET_TIME) {
         return {data: unpackResult, elapsed};
       }
@@ -78147,12 +78472,12 @@ var PrismaClientFetcher = class {
     }
     return message;
   }
-  unpack(document2, data, path3, rootField) {
+  unpack(document2, data, path3, rootField, unpacker) {
     if (data.data) {
       data = data.data;
     }
-    if (rootField.startsWith("aggregate") && data[rootField].count) {
-      data[rootField].count = data[rootField].count._all;
+    if (unpacker) {
+      data[rootField] = unpacker(data[rootField]);
     }
     const getPath = [];
     if (rootField) {
@@ -78163,7 +78488,7 @@ var PrismaClientFetcher = class {
   }
 };
 function getOperation(action) {
-  if (action === import_generator_helper.DMMF.ModelAction.findMany || action === import_generator_helper.DMMF.ModelAction.findUnique || action === "findOne" || action === import_generator_helper.DMMF.ModelAction.findFirst) {
+  if (action === import_generator_helper.DMMF.ModelAction.findMany || action === import_generator_helper.DMMF.ModelAction.findUnique || action === import_generator_helper.DMMF.ModelAction.findFirst) {
     return "query";
   }
   return "mutation";

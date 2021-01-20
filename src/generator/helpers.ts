@@ -78,7 +78,7 @@ export function mapScalarToTSType(scalar: string, isInputType: boolean) {
       return "Date";
     }
     case PrismaScalars.Json:
-      return isInputType ? "InputJsonValue" : "JsonValue";
+      return isInputType ? "Prisma.InputJsonValue" : "Prisma.JsonValue";
     // TODO: handle native types
     default:
       throw new Error(`Unrecognized scalar type: ${scalar}`);

@@ -5,8 +5,7 @@ import { Category } from "../../../models/Category";
 @TypeGraphQL.Resolver(_of => Category)
 export class UpsertCategoryResolver {
   @TypeGraphQL.Mutation(_returns => Category, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async upsertCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertCategoryArgs): Promise<Category> {
     return ctx.prisma.category.upsert(args);

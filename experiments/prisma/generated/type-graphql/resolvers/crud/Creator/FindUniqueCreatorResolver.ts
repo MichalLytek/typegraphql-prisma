@@ -5,8 +5,7 @@ import { Creator } from "../../../models/Creator";
 @TypeGraphQL.Resolver(_of => Creator)
 export class FindUniqueCreatorResolver {
   @TypeGraphQL.Query(_returns => Creator, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async creator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueCreatorArgs): Promise<Creator | null> {
     return ctx.prisma.creator.findUnique(args);

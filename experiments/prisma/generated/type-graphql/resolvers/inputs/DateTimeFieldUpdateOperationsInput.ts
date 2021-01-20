@@ -1,15 +1,13 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class DateTimeFieldUpdateOperationsInput {
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   set?: Date | undefined;
 }

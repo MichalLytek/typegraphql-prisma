@@ -4,6 +4,8 @@ import { PostWhereInput } from "../../../inputs/PostWhereInput";
 
 @TypeGraphQL.ArgsType()
 export class DeleteManyPostArgs {
-  @TypeGraphQL.Field(_type => PostWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => PostWhereInput, {
+    nullable: true
+  })
   where?: PostWhereInput | undefined;
 }

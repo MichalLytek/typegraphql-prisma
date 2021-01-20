@@ -4,6 +4,8 @@ import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 
 @TypeGraphQL.ArgsType()
 export class DeleteManyClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => ClientWhereInput, {
+    nullable: true
+  })
   where?: ClientWhereInput | undefined;
 }

@@ -5,9 +5,13 @@ import { CreatorWhereInput } from "../../../inputs/CreatorWhereInput";
 
 @TypeGraphQL.ArgsType()
 export class UpdateManyCreatorArgs {
-  @TypeGraphQL.Field(_type => CreatorUpdateManyMutationInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CreatorUpdateManyMutationInput, {
+    nullable: false
+  })
   data!: CreatorUpdateManyMutationInput;
 
-  @TypeGraphQL.Field(_type => CreatorWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => CreatorWhereInput, {
+    nullable: true
+  })
   where?: CreatorWhereInput | undefined;
 }

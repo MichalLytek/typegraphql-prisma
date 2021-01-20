@@ -1,28 +1,24 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class CategoryOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   name?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   slug?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   number?: "asc" | "desc" | undefined;
 }

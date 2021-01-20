@@ -1,28 +1,24 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { MovieCreateManyWithoutDirectorInput } from "../inputs/MovieCreateManyWithoutDirectorInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class DirectorCreateInput {
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   firstName!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   lastName!: string;
 
   @TypeGraphQL.Field(_type => MovieCreateManyWithoutDirectorInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   movies?: MovieCreateManyWithoutDirectorInput | undefined;
 }

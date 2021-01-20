@@ -134,6 +134,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       EnumColorFieldUpdateOperationsInput.js
       EnumColorFilter.d.ts
       EnumColorFilter.js
+      IntFieldUpdateOperationsInput.d.ts
+      IntFieldUpdateOperationsInput.js
       IntFilter.d.ts
       IntFilter.js
       NestedEnumColorFilter.d.ts
@@ -335,6 +337,7 @@ exports[`structure should generate proper folders and file names when model is r
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
+      IntFieldUpdateOperationsInput.ts
       IntFilter.ts
       NestedEnumColorFilter.ts
       NestedIntFilter.ts
@@ -476,6 +479,7 @@ exports[`structure should generate proper folders structure and file names for c
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
+      IntFieldUpdateOperationsInput.ts
       IntFilter.ts
       NestedEnumColorFilter.ts
       NestedIntFilter.ts

@@ -8,14 +8,14 @@ import { AggregateMovie } from "../../outputs/AggregateMovie";
 @TypeGraphQL.Resolver(_of => Movie)
 export class AggregateMovieResolver {
   @TypeGraphQL.Query(_returns => AggregateMovie, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async aggregateMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateMovieArgs): Promise<AggregateMovie> {
     function transformFields(fields: Record<string, any>): Record<string, any> {
       return Object.fromEntries(
         Object.entries(fields)
-          .filter(([key, value]) => !key.startsWith("_"))
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
           .map<[string, any]>(([key, value]) => {
             if (Object.keys(value).length === 0) {
               return [key, true];

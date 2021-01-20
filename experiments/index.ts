@@ -44,6 +44,8 @@ import {
   ModelConfig,
   applyOutputTypesEnhanceMap,
   OutputTypeConfig,
+  GroupByCategoryResolver,
+  GroupByPostResolver,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
@@ -155,6 +157,8 @@ async function main() {
       CreatorCrudResolver,
       ProblemRelationsResolver,
       CreatorRelationsResolver,
+      GroupByCategoryResolver,
+      GroupByPostResolver,
     ],
     validate: false,
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),

@@ -1,77 +1,64 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { PostKind } from "../../enums/PostKind";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class PostMinAggregate {
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   uuid!: string | null;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   createdAt!: Date | null;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updatedAt!: Date | null;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   published!: boolean | null;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   title!: string | null;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   subtitle!: string | null;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   content!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   authorId!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   editorId!: number | null;
 
   @TypeGraphQL.Field(_type => PostKind, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   kind!: "BLOG" | "ADVERT" | null;
 
   @TypeGraphQL.Field(_type => GraphQLJSON, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
-  metadata!: JsonValue | null;
+  metadata!: Prisma.JsonValue | null;
 }

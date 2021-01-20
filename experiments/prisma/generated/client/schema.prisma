@@ -9,8 +9,8 @@ generator client {
   provider        = "prisma-client-js"
   binaryTargets   = ["windows", "debian-openssl-1.1.x"]
   output          = "../prisma/generated/client"
-  // previewFeatures = ["nativeTypes", "uncheckedScalarInputs"]
-  // previewFeatures = ["uncheckedScalarInputs"]
+  // previewFeatures = ["nativeTypes"]
+  // previewFeatures = ["groupBy"]
 }
 
 generator typegraphql {

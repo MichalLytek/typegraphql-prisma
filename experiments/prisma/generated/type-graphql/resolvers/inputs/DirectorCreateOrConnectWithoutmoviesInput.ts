@@ -1,23 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { DirectorCreateWithoutMoviesInput } from "../inputs/DirectorCreateWithoutMoviesInput";
 import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class DirectorCreateOrConnectWithoutmoviesInput {
   @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   where!: DirectorWhereUniqueInput;
 
   @TypeGraphQL.Field(_type => DirectorCreateWithoutMoviesInput, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   create!: DirectorCreateWithoutMoviesInput;
 }

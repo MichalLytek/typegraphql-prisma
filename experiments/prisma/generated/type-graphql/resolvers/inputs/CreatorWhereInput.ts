@@ -1,54 +1,46 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { IntFilter } from "../inputs/IntFilter";
 import { ProblemListRelationFilter } from "../inputs/ProblemListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class CreatorWhereInput {
   @TypeGraphQL.Field(_type => [CreatorWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   AND?: CreatorWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   OR?: CreatorWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   NOT?: CreatorWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => IntFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   name?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => ProblemListRelationFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   likes?: ProblemListRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => ProblemListRelationFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   problems?: ProblemListRelationFilter | undefined;
 }

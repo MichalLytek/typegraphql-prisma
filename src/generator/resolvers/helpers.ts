@@ -1,7 +1,22 @@
-import { OptionalKind, MethodDeclarationStructure } from "ts-morph";
+import { OptionalKind, MethodDeclarationStructure, Writers } from "ts-morph";
 
 import { DmmfDocument } from "../dmmf/dmmf-document";
 import { DMMF } from "../dmmf/types";
+
+// TODO: extract helper to importable file
+const transformFieldsFunctionStatement = /* ts */ ` function transformFields(fields: Record<string, any>): Record<string, any> {
+  return Object.fromEntries(
+    Object.entries(fields)
+      // remove __typename and others
+      .filter(([key, value]) => !key.startsWith("__"))
+      .map<[string, any]>(([key, value]) => {
+        if (Object.keys(value).length === 0) {
+          return [key, true];
+        }
+        return [key, transformFields(value)];
+      }),
+  );
+}`;
 
 export function generateCrudResolverClassMethodDeclaration(
   action: DMMF.Action,
@@ -17,10 +32,9 @@ export function generateCrudResolverClassMethodDeclaration(
         name: `TypeGraphQL.${action.operation}`,
         arguments: [
           `_returns => ${action.typeGraphQLType}`,
-          `{
-            nullable: ${!action.method.isRequired},
-            description: undefined
-          }`,
+          Writers.object({
+            nullable: `${!action.method.isRequired}`,
+          }),
         ],
       },
     ],
@@ -31,7 +45,7 @@ export function generateCrudResolverClassMethodDeclaration(
         type: "any",
         decorators: [{ name: "TypeGraphQL.Ctx", arguments: [] }],
       },
-      ...(action.kind === "aggregate"
+      ...(action.kind === DMMF.ModelAction.aggregate
         ? [
             {
               name: "info",
@@ -51,29 +65,18 @@ export function generateCrudResolverClassMethodDeclaration(
           ]),
     ],
     statements:
-      action.kind === "aggregate"
+      action.kind === DMMF.ModelAction.aggregate
         ? [
-            `function transformFields(fields: Record<string, any>): Record<string, any> {
-              return Object.fromEntries(
-                Object.entries(fields)
-                  .filter(([key, value]) => !key.startsWith("_"))
-                  .map<[string, any]>(([key, value]) => {
-                    if (Object.keys(value).length === 0) {
-                      return [key, true];
-                    }
-                    return [key, transformFields(value)];
-                  }),
-              );
-            }`,
-            `return ctx.prisma.${mapping.collectionName}.${action.kind}({
+            transformFieldsFunctionStatement,
+            /* ts */ ` return ctx.prisma.${mapping.collectionName}.${action.kind}({
               ...args,
               ...transformFields(graphqlFields(info as any)),
             });`,
           ]
         : [
-            `return ctx.prisma.${mapping.collectionName}.${action.kind}(${
-              action.argsTypeName ? "args" : ""
-            });`,
+            /* ts */ ` return ctx.prisma.${mapping.collectionName}.${
+              action.kind
+            }(${action.argsTypeName ? "args" : ""});`,
           ],
   };
 }

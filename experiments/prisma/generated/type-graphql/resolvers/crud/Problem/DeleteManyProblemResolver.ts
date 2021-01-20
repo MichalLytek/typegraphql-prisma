@@ -6,8 +6,7 @@ import { BatchPayload } from "../../outputs/BatchPayload";
 @TypeGraphQL.Resolver(_of => Problem)
 export class DeleteManyProblemResolver {
   @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async deleteManyProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyProblemArgs): Promise<BatchPayload> {
     return ctx.prisma.problem.deleteMany(args);

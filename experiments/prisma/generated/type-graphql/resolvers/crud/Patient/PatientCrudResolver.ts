@@ -18,86 +18,77 @@ import { BatchPayload } from "../../outputs/BatchPayload";
 @TypeGraphQL.Resolver(_of => Patient)
 export class PatientCrudResolver {
   @TypeGraphQL.Query(_returns => Patient, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async patient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniquePatientArgs): Promise<Patient | null> {
     return ctx.prisma.patient.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Patient, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async findFirstPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstPatientArgs): Promise<Patient | null> {
     return ctx.prisma.patient.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [Patient], {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async patients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyPatientArgs): Promise<Patient[]> {
     return ctx.prisma.patient.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async createPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatePatientArgs): Promise<Patient> {
     return ctx.prisma.patient.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async deletePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeletePatientArgs): Promise<Patient | null> {
     return ctx.prisma.patient.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async updatePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdatePatientArgs): Promise<Patient | null> {
     return ctx.prisma.patient.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async deleteManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyPatientArgs): Promise<BatchPayload> {
     return ctx.prisma.patient.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async updateManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPatientArgs): Promise<BatchPayload> {
     return ctx.prisma.patient.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async upsertPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertPatientArgs): Promise<Patient> {
     return ctx.prisma.patient.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregatePatient, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async aggregatePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregatePatientArgs): Promise<AggregatePatient> {
     function transformFields(fields: Record<string, any>): Record<string, any> {
       return Object.fromEntries(
         Object.entries(fields)
-          .filter(([key, value]) => !key.startsWith("_"))
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
           .map<[string, any]>(([key, value]) => {
             if (Object.keys(value).length === 0) {
               return [key, true];

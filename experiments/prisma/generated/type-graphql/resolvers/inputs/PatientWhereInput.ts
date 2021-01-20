@@ -1,46 +1,39 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { StringFilter } from "../inputs/StringFilter";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PatientWhereInput {
   @TypeGraphQL.Field(_type => [PatientWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   AND?: PatientWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PatientWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   OR?: PatientWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PatientWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   NOT?: PatientWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   firstName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   lastName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   email?: StringFilter | undefined;
 }

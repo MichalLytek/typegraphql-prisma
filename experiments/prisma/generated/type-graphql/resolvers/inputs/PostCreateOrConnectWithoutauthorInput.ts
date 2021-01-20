@@ -1,23 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostCreateOrConnectWithoutauthorInput {
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   where!: PostWhereUniqueInput;
 
   @TypeGraphQL.Field(_type => PostCreateWithoutAuthorInput, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   create!: PostCreateWithoutAuthorInput;
 }

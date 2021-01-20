@@ -1,28 +1,24 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { PostWhereInput } from "../inputs/PostWhereInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostListRelationFilter {
   @TypeGraphQL.Field(_type => PostWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   every?: PostWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => PostWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   some?: PostWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => PostWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   none?: PostWhereInput | undefined;
 }

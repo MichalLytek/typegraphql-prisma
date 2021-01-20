@@ -5,9 +5,13 @@ import { PatientWhereInput } from "../../../inputs/PatientWhereInput";
 
 @TypeGraphQL.ArgsType()
 export class UpdateManyPatientArgs {
-  @TypeGraphQL.Field(_type => PatientUpdateManyMutationInput, { nullable: false })
+  @TypeGraphQL.Field(_type => PatientUpdateManyMutationInput, {
+    nullable: false
+  })
   data!: PatientUpdateManyMutationInput;
 
-  @TypeGraphQL.Field(_type => PatientWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => PatientWhereInput, {
+    nullable: true
+  })
   where?: PatientWhereInput | undefined;
 }

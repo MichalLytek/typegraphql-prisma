@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { PostCreateOrConnectWithouteditorInput } from "../inputs/PostCreateOrConnectWithouteditorInput";
 import { PostCreateWithoutEditorInput } from "../inputs/PostCreateWithoutEditorInput";
 import { PostScalarWhereInput } from "../inputs/PostScalarWhereInput";
@@ -10,67 +10,56 @@ import { PostUpsertWithWhereUniqueWithoutEditorInput } from "../inputs/PostUpser
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostUpdateManyWithoutEditorInput {
   @TypeGraphQL.Field(_type => [PostCreateWithoutEditorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   create?: PostCreateWithoutEditorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connect?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   set?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   disconnect?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   delete?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostUpdateWithWhereUniqueWithoutEditorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   update?: PostUpdateWithWhereUniqueWithoutEditorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostUpdateManyWithWhereWithoutEditorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updateMany?: PostUpdateManyWithWhereWithoutEditorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   deleteMany?: PostScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostUpsertWithWhereUniqueWithoutEditorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   upsert?: PostUpsertWithWhereUniqueWithoutEditorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostCreateOrConnectWithouteditorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connectOrCreate?: PostCreateOrConnectWithouteditorInput[] | undefined;
 }

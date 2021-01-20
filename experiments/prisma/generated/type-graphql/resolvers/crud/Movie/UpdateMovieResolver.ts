@@ -5,8 +5,7 @@ import { Movie } from "../../../models/Movie";
 @TypeGraphQL.Resolver(_of => Movie)
 export class UpdateMovieResolver {
   @TypeGraphQL.Mutation(_returns => Movie, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async updateMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateMovieArgs): Promise<Movie | null> {
     return ctx.prisma.movie.update(args);

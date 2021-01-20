@@ -4,6 +4,8 @@ import { ClientCreateInput } from "../../../inputs/ClientCreateInput";
 
 @TypeGraphQL.ArgsType()
 export class CreateClientArgs {
-  @TypeGraphQL.Field(_type => ClientCreateInput, { nullable: false })
+  @TypeGraphQL.Field(_type => ClientCreateInput, {
+    nullable: false
+  })
   data!: ClientCreateInput;
 }

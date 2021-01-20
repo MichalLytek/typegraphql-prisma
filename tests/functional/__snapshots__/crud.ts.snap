@@ -9,7 +9,10 @@ Object {
       "floatField": 5,
       "intField": 5,
     },
-    "count": 2,
+    "count": Object {
+      "floatField": 1,
+      "intField": 1,
+    },
     "max": Object {
       "__typename": "UserMaxAggregate",
       "floatField": 10,
@@ -37,7 +40,10 @@ Array [
         "floatField": true,
         "intField": true,
       },
-      "count": true,
+      "count": Object {
+        "floatField": true,
+        "intField": true,
+      },
       "max": Object {
         "floatField": true,
         "intField": true,
@@ -70,7 +76,9 @@ Array [
 exports[`crud resolvers execution aggregations should properly call PrismaClient on \`aggregate\` action with simple count field: aggregateUserCount mocked response 1`] = `
 Object {
   "aggregateUser": Object {
-    "count": 5,
+    "count": Object {
+      "_all": 5,
+    },
   },
 }
 `;
@@ -79,7 +87,9 @@ exports[`crud resolvers execution aggregations should properly call PrismaClient
 Array [
   Array [
     Object {
-      "count": true,
+      "count": Object {
+        "_all": true,
+      },
       "orderBy": Array [
         UserOrderByInput {
           "intField": "desc",

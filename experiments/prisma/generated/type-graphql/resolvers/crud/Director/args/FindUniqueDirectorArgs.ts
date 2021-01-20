@@ -4,6 +4,8 @@ import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInp
 
 @TypeGraphQL.ArgsType()
 export class FindUniqueDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
+    nullable: false
+  })
   where!: DirectorWhereUniqueInput;
 }

@@ -4,6 +4,8 @@ import { ProblemWhereInput } from "../../../inputs/ProblemWhereInput";
 
 @TypeGraphQL.ArgsType()
 export class DeleteManyProblemArgs {
-  @TypeGraphQL.Field(_type => ProblemWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => ProblemWhereInput, {
+    nullable: true
+  })
   where?: ProblemWhereInput | undefined;
 }

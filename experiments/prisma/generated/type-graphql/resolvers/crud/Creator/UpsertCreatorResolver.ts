@@ -5,8 +5,7 @@ import { Creator } from "../../../models/Creator";
 @TypeGraphQL.Resolver(_of => Creator)
 export class UpsertCreatorResolver {
   @TypeGraphQL.Mutation(_returns => Creator, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async upsertCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertCreatorArgs): Promise<Creator> {
     return ctx.prisma.creator.upsert(args);

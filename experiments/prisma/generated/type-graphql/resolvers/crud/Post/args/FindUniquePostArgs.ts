@@ -4,6 +4,8 @@ import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class FindUniquePostArgs {
-  @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
+    nullable: false
+  })
   where!: PostWhereUniqueInput;
 }

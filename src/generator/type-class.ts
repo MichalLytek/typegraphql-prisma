@@ -4,6 +4,7 @@ import {
   Project,
   GetAccessorDeclarationStructure,
   SetAccessorDeclarationStructure,
+  Writers,
 } from "ts-morph";
 import path from "path";
 
@@ -64,13 +65,12 @@ export function generateOutputTypeClassFromType(
       {
         name: "TypeGraphQL.ObjectType",
         arguments: [
-          `{
-            isAbstract: true,
-            description: undefined,
-            simpleResolvers: ${
-              dmmfDocument.options.simpleResolvers ? "true" : "undefined"
-            },
-          }`,
+          Writers.object({
+            isAbstract: "true",
+            ...(dmmfDocument.options.simpleResolvers && {
+              simpleResolvers: "true",
+            }),
+          }),
         ],
       },
     ],
@@ -89,10 +89,9 @@ export function generateOutputTypeClassFromType(
               name: "TypeGraphQL.Field",
               arguments: [
                 `_type => ${field.typeGraphQLType}`,
-                `{
-                  nullable: ${!field.isRequired},
-                  description: undefined
-                }`,
+                Writers.object({
+                  nullable: `${!field.isRequired}`,
+                }),
               ],
             },
           ],
@@ -146,10 +145,9 @@ export function generateInputTypeClassFromType(
       {
         name: "TypeGraphQL.InputType",
         arguments: [
-          `{
-            isAbstract: true,
-            description: undefined,
-          }`,
+          Writers.object({
+            isAbstract: "true",
+          }),
         ],
       },
     ],
@@ -169,10 +167,9 @@ export function generateInputTypeClassFromType(
                 name: "TypeGraphQL.Field",
                 arguments: [
                   `_type => ${field.typeGraphQLType}`,
-                  `{
-                      nullable: ${!field.isRequired},
-                      description: undefined
-                    }`,
+                  Writers.object({
+                    nullable: `${!field.isRequired}`,
+                  }),
                 ],
               },
             ],
@@ -193,10 +190,9 @@ export function generateInputTypeClassFromType(
             name: "TypeGraphQL.Field",
             arguments: [
               `_type => ${field.typeGraphQLType}`,
-              `{
-                  nullable: ${!field.isRequired},
-                  description: undefined
-                }`,
+              Writers.object({
+                nullable: `${!field.isRequired}`,
+              }),
             ],
           },
         ],

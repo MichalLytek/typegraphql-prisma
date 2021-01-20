@@ -1,50 +1,43 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ClientOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   email?: "asc" | "desc" | undefined;
 
   name?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   age?: "asc" | "desc" | undefined;
 
   balance?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   amount?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   role?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   get firstName() {
     return this.name;
@@ -55,8 +48,7 @@ export class ClientOrderByInput {
   }
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   get accountBalance() {
     return this.balance;

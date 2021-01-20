@@ -1,30 +1,26 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { ProblemCreateOrConnectWithoutcreatorInput } from "../inputs/ProblemCreateOrConnectWithoutcreatorInput";
 import { ProblemCreateWithoutCreatorInput } from "../inputs/ProblemCreateWithoutCreatorInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ProblemCreateManyWithoutCreatorInput {
   @TypeGraphQL.Field(_type => [ProblemCreateWithoutCreatorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   create?: ProblemCreateWithoutCreatorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connect?: ProblemWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutcreatorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connectOrCreate?: ProblemCreateOrConnectWithoutcreatorInput[] | undefined;
 }

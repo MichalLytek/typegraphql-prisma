@@ -1,44 +1,38 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { CreatorAvgAggregate } from "../outputs/CreatorAvgAggregate";
+import { CreatorCountAggregate } from "../outputs/CreatorCountAggregate";
 import { CreatorMaxAggregate } from "../outputs/CreatorMaxAggregate";
 import { CreatorMinAggregate } from "../outputs/CreatorMinAggregate";
 import { CreatorSumAggregate } from "../outputs/CreatorSumAggregate";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class AggregateCreator {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+  @TypeGraphQL.Field(_type => CreatorCountAggregate, {
+    nullable: true
   })
-  count!: number | null;
+  count!: CreatorCountAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorAvgAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   avg!: CreatorAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorSumAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   sum!: CreatorSumAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorMinAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   min!: CreatorMinAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorMaxAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   max!: CreatorMaxAggregate | null;
 }

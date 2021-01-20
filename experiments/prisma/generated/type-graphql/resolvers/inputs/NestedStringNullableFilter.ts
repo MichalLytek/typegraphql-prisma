@@ -1,75 +1,63 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class NestedStringNullableFilter {
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   equals?: string | undefined;
 
   @TypeGraphQL.Field(_type => [String], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   in?: string[] | undefined;
 
   @TypeGraphQL.Field(_type => [String], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   notIn?: string[] | undefined;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   lt?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   lte?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   gt?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   gte?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   contains?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   startsWith?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   endsWith?: string | undefined;
 
   @TypeGraphQL.Field(_type => NestedStringNullableFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   not?: NestedStringNullableFilter | undefined;
 }

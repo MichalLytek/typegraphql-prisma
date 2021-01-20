@@ -1,53 +1,45 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { DirectorRelationFilter } from "../inputs/DirectorRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class MovieWhereInput {
   @TypeGraphQL.Field(_type => [MovieWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   AND?: MovieWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   OR?: MovieWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   NOT?: MovieWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   directorFirstName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   directorLastName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => DirectorRelationFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   director?: DirectorRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   title?: StringFilter | undefined;
 }

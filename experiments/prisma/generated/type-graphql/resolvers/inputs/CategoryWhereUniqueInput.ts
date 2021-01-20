@@ -1,16 +1,14 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { CategorySlugNumberCompoundUniqueInput } from "../inputs/CategorySlugNumberCompoundUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class CategoryWhereUniqueInput {
   @TypeGraphQL.Field(_type => CategorySlugNumberCompoundUniqueInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   slug_number?: CategorySlugNumberCompoundUniqueInput | undefined;
 }

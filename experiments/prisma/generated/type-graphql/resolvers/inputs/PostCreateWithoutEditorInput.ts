@@ -1,71 +1,60 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { ClientCreateOneWithoutPostsInput } from "../inputs/ClientCreateOneWithoutPostsInput";
 import { PostKind } from "../../enums/PostKind";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostCreateWithoutEditorInput {
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   uuid?: string | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   createdAt?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updatedAt?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   published!: boolean;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   title!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   subtitle!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   content?: string | undefined;
 
   @TypeGraphQL.Field(_type => PostKind, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   kind?: "BLOG" | "ADVERT" | undefined;
 
   @TypeGraphQL.Field(_type => GraphQLJSON, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
-  metadata!: InputJsonValue;
+  metadata!: Prisma.InputJsonValue;
 
   @TypeGraphQL.Field(_type => ClientCreateOneWithoutPostsInput, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   author!: ClientCreateOneWithoutPostsInput;
 }

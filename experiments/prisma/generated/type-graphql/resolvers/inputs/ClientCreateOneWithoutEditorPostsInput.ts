@@ -1,30 +1,26 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { ClientCreateOrConnectWithouteditorPostsInput } from "../inputs/ClientCreateOrConnectWithouteditorPostsInput";
 import { ClientCreateWithoutEditorPostsInput } from "../inputs/ClientCreateWithoutEditorPostsInput";
 import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ClientCreateOneWithoutEditorPostsInput {
   @TypeGraphQL.Field(_type => ClientCreateWithoutEditorPostsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   create?: ClientCreateWithoutEditorPostsInput | undefined;
 
   @TypeGraphQL.Field(_type => ClientWhereUniqueInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connect?: ClientWhereUniqueInput | undefined;
 
   @TypeGraphQL.Field(_type => ClientCreateOrConnectWithouteditorPostsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connectOrCreate?: ClientCreateOrConnectWithouteditorPostsInput | undefined;
 }

@@ -1,4 +1,9 @@
-import { PropertyDeclarationStructure, OptionalKind, Project } from "ts-morph";
+import {
+  PropertyDeclarationStructure,
+  OptionalKind,
+  Project,
+  Writers,
+} from "ts-morph";
 import path from "path";
 
 import { argsFolderName } from "./config";
@@ -65,7 +70,9 @@ export default function generateArgsTypeClassFromArgs(
             name: "TypeGraphQL.Field",
             arguments: [
               `_type => ${arg.typeGraphQLType}`,
-              `{ nullable: ${!arg.isRequired} }`,
+              Writers.object({
+                nullable: `${!arg.isRequired}`,
+              }),
             ],
           },
         ],

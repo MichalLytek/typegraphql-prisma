@@ -6,12 +6,18 @@ import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInp
 
 @TypeGraphQL.ArgsType()
 export class UpsertDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
+    nullable: false
+  })
   where!: DirectorWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => DirectorCreateInput, { nullable: false })
+  @TypeGraphQL.Field(_type => DirectorCreateInput, {
+    nullable: false
+  })
   create!: DirectorCreateInput;
 
-  @TypeGraphQL.Field(_type => DirectorUpdateInput, { nullable: false })
+  @TypeGraphQL.Field(_type => DirectorUpdateInput, {
+    nullable: false
+  })
   update!: DirectorUpdateInput;
 }

@@ -125,7 +125,6 @@ declare namespace DMMF {
     }
     interface SchemaField {
         name: string;
-        isRequired: boolean;
         isNullable?: boolean;
         outputType: {
             type: string | OutputType | SchemaEnum;
@@ -134,6 +133,12 @@ declare namespace DMMF {
             namespace?: FieldNamespace;
         };
         args: SchemaArg[];
+        deprecation?: SchemaFieldDeprecation;
+    }
+    interface SchemaFieldDeprecation {
+        sinceVersion: string;
+        reason: string;
+        plannedRemovalVersion: string;
     }
     interface InputType {
         name: string;
@@ -558,6 +563,7 @@ declare type GetConfigResult = {
     datasources: DataSource[];
     generators: GeneratorConfig[];
 };
+declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
 declare class NodeEngine {
     private logEmitter;
     private showColors;
@@ -610,7 +616,7 @@ declare class NodeEngine {
     private setError;
     private checkForTooManyEngines;
     private resolveCwd;
-    on(event: 'query' | 'info' | 'warn' | 'error' | 'beforeExit', listener: (args?: any) => any): void;
+    on(event: EngineEventType, listener: (args?: any) => any): void;
     emitExit(): Promise<void>;
     getPlatform(): Promise<Platform>;
     private getQueryEnginePath;
@@ -653,12 +659,19 @@ declare class NodeEngine {
     private graphQLToJSError;
 }
 
+declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
+declare type InstanceRejectOnNotFound = RejectOnNotFound | Record<string, RejectOnNotFound> | Record<string, Record<string, RejectOnNotFound>>;
+
 declare type ErrorFormat = 'pretty' | 'colorless' | 'minimal';
 declare type Datasource = {
     url?: string;
 };
 declare type Datasources = Record<string, Datasource>;
 interface PrismaClientOptions {
+    /**
+     * Will throw an Error if findUnique returns null
+     */
+    rejectOnNotFound?: InstanceRejectOnNotFound;
     /**
      * Overwrites the datasource url from your prisma.schema file
      */

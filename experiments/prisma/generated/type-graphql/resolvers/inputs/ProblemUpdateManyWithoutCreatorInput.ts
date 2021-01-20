@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { ProblemCreateOrConnectWithoutcreatorInput } from "../inputs/ProblemCreateOrConnectWithoutcreatorInput";
 import { ProblemCreateWithoutCreatorInput } from "../inputs/ProblemCreateWithoutCreatorInput";
 import { ProblemScalarWhereInput } from "../inputs/ProblemScalarWhereInput";
@@ -10,67 +10,56 @@ import { ProblemUpsertWithWhereUniqueWithoutCreatorInput } from "../inputs/Probl
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ProblemUpdateManyWithoutCreatorInput {
   @TypeGraphQL.Field(_type => [ProblemCreateWithoutCreatorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   create?: ProblemCreateWithoutCreatorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connect?: ProblemWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   set?: ProblemWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   disconnect?: ProblemWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   delete?: ProblemWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemUpdateWithWhereUniqueWithoutCreatorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   update?: ProblemUpdateWithWhereUniqueWithoutCreatorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemUpdateManyWithWhereWithoutCreatorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updateMany?: ProblemUpdateManyWithWhereWithoutCreatorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   deleteMany?: ProblemScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemUpsertWithWhereUniqueWithoutCreatorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   upsert?: ProblemUpsertWithWhereUniqueWithoutCreatorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutcreatorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connectOrCreate?: ProblemCreateOrConnectWithoutcreatorInput[] | undefined;
 }

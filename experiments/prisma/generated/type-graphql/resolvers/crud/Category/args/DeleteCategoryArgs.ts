@@ -4,6 +4,8 @@ import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInp
 
 @TypeGraphQL.ArgsType()
 export class DeleteCategoryArgs {
-  @TypeGraphQL.Field(_type => CategoryWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CategoryWhereUniqueInput, {
+    nullable: false
+  })
   where!: CategoryWhereUniqueInput;
 }

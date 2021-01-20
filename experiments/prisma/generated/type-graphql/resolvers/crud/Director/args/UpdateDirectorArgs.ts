@@ -5,9 +5,13 @@ import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInp
 
 @TypeGraphQL.ArgsType()
 export class UpdateDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorUpdateInput, { nullable: false })
+  @TypeGraphQL.Field(_type => DirectorUpdateInput, {
+    nullable: false
+  })
   data!: DirectorUpdateInput;
 
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
+    nullable: false
+  })
   where!: DirectorWhereUniqueInput;
 }

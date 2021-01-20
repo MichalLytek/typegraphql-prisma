@@ -353,13 +353,15 @@ describe("crud resolvers execution", () => {
             orderBy: { intField: desc }
             where: { floatField: { lte: 50 } }
           ) {
-            count
+            count {
+              _all
+            }
           }
         }
       `;
       const prismaMock = {
         user: {
-          aggregate: jest.fn().mockResolvedValue({ count: 5 }),
+          aggregate: jest.fn().mockResolvedValue({ count: { _all: 5 } }),
         },
       };
 
@@ -384,7 +386,10 @@ describe("crud resolvers execution", () => {
             where: { floatField: { lte: 50 } }
           ) {
             __typename
-            count
+            count {
+              intField
+              floatField
+            }
             min {
               __typename
               intField
@@ -411,7 +416,10 @@ describe("crud resolvers execution", () => {
       const prismaMock = {
         user: {
           aggregate: jest.fn().mockResolvedValue({
-            count: 2,
+            count: {
+              intField: 1,
+              floatField: 1,
+            },
             min: {
               intField: 0,
               floatField: 0,

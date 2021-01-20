@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { CreatorCreateOrConnectWithoutlikesInput } from "../inputs/CreatorCreateOrConnectWithoutlikesInput";
 import { CreatorCreateWithoutLikesInput } from "../inputs/CreatorCreateWithoutLikesInput";
 import { CreatorScalarWhereInput } from "../inputs/CreatorScalarWhereInput";
@@ -10,67 +10,56 @@ import { CreatorUpsertWithWhereUniqueWithoutLikesInput } from "../inputs/Creator
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class CreatorUpdateManyWithoutLikesInput {
   @TypeGraphQL.Field(_type => [CreatorCreateWithoutLikesInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   create?: CreatorCreateWithoutLikesInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connect?: CreatorWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   set?: CreatorWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   disconnect?: CreatorWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   delete?: CreatorWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorUpdateWithWhereUniqueWithoutLikesInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   update?: CreatorUpdateWithWhereUniqueWithoutLikesInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorUpdateManyWithWhereWithoutLikesInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updateMany?: CreatorUpdateManyWithWhereWithoutLikesInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   deleteMany?: CreatorScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorUpsertWithWhereUniqueWithoutLikesInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   upsert?: CreatorUpsertWithWhereUniqueWithoutLikesInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorCreateOrConnectWithoutlikesInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connectOrCreate?: CreatorCreateOrConnectWithoutlikesInput[] | undefined;
 }

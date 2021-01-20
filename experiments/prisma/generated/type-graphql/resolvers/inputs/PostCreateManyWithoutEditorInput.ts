@@ -1,30 +1,26 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { PostCreateOrConnectWithouteditorInput } from "../inputs/PostCreateOrConnectWithouteditorInput";
 import { PostCreateWithoutEditorInput } from "../inputs/PostCreateWithoutEditorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostCreateManyWithoutEditorInput {
   @TypeGraphQL.Field(_type => [PostCreateWithoutEditorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   create?: PostCreateWithoutEditorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connect?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostCreateOrConnectWithouteditorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connectOrCreate?: PostCreateOrConnectWithouteditorInput[] | undefined;
 }

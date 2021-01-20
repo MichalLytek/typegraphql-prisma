@@ -74,8 +74,7 @@ import { Movie } from \\"../../../models/Movie\\";
 @TypeGraphQL.Resolver(_of => Movie)
 export class MovieRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => Director, {
-    nullable: false,
-    description: undefined,
+    nullable: false
   })
   async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
     return ctx.prisma.movie.findUnique({
@@ -101,8 +100,7 @@ import { DirectorMoviesArgs } from \\"./args/DirectorMoviesArgs\\";
 @TypeGraphQL.Resolver(_of => Director)
 export class DirectorRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Movie], {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[] | null> {
     return ctx.prisma.director.findUnique({
@@ -126,8 +124,7 @@ import { User } from \\"../../../models/User\\";
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => User, {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
     return ctx.prisma.post.findUnique({
@@ -149,8 +146,7 @@ import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Post], {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
     return ctx.prisma.user.findUnique({
@@ -172,7 +168,7 @@ import { User } from \\"../../../models/User\\";
 export class PostRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => User, {
     nullable: true,
-    description: \\"author field doc\\",
+    description: \\"author field doc\\"
   })
   async postAuthor(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
     return ctx.prisma.post.findUnique({
@@ -194,8 +190,7 @@ import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Post], {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async userPosts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
     return ctx.prisma.user.findUnique({
@@ -218,22 +213,34 @@ import { PostScalarFieldEnum } from \\"../../../../enums/PostScalarFieldEnum\\";
 
 @TypeGraphQL.ArgsType()
 export class UserPostsArgs {
-  @TypeGraphQL.Field(_type => PostWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => PostWhereInput, {
+    nullable: true
+  })
   where?: PostWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [PostOrderByInput], { nullable: true })
+  @TypeGraphQL.Field(_type => [PostOrderByInput], {
+    nullable: true
+  })
   orderBy?: PostOrderByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: true })
+  @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
+    nullable: true
+  })
   cursor?: PostWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [PostScalarFieldEnum], { nullable: true })
+  @TypeGraphQL.Field(_type => [PostScalarFieldEnum], {
+    nullable: true
+  })
   distinct?: Array<\\"uuid\\" | \\"content\\" | \\"authorId\\"> | undefined;
 }
 "
@@ -248,8 +255,7 @@ import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Post], {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
     return ctx.prisma.user.findUnique({
@@ -270,8 +276,7 @@ import { User } from \\"../../../models/User\\";
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => Address, {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async address(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<Address | null> {
     return ctx.prisma.user.findUnique({
@@ -293,7 +298,7 @@ import { User } from \\"../../../models/User\\";
 export class PostRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => User, {
     nullable: true,
-    description: \\"author field doc\\",
+    description: \\"author field doc\\"
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
     return ctx.prisma.post.findUnique({
@@ -315,8 +320,7 @@ import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Post], {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
     return ctx.prisma.user.findUnique({

@@ -1,53 +1,44 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { Role } from "../../enums/Role";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ClientMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   id!: number;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   email!: string | null;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   name!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   age!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   balance!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   amount!: number;
 
   @TypeGraphQL.Field(_type => Role, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   role!: "USER" | "ADMIN" | null;
 }

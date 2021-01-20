@@ -8,7 +8,7 @@ exports[`generator integration should be able to use generate TypeGraphQL classe
 
 type AggregatePost {
   avg: PostAvgAggregate
-  count: Int
+  count: PostCountAggregate
   max: PostMaxAggregate
   min: PostMinAggregate
   sum: PostSumAggregate
@@ -16,7 +16,7 @@ type AggregatePost {
 
 type AggregateUser {
   avg: UserAvgAggregate
-  count: Int
+  count: UserCountAggregate
   max: UserMaxAggregate
   min: UserMinAggregate
   sum: UserSumAggregate
@@ -129,6 +129,14 @@ type Post {
 
 type PostAvgAggregate {
   authorId: Float!
+}
+
+type PostCountAggregate {
+  _all: Int!
+  authorId: Int!
+  color: Int
+  content: Int
+  uuid: Int
 }
 
 input PostCreateInput {
@@ -331,6 +339,12 @@ type UserAvgAggregate {
   id: Float!
 }
 
+type UserCountAggregate {
+  _all: Int!
+  id: Int!
+  name: Int
+}
+
 input UserCreateInput {
   name: String
   posts: PostCreateManyWithoutAuthorInput
@@ -494,6 +508,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
+      IntFieldUpdateOperationsInput.ts
       IntFilter.ts
       NestedEnumColorFilter.ts
       NestedIntFilter.ts

@@ -4,6 +4,8 @@ import { CreatorCreateInput } from "../../../inputs/CreatorCreateInput";
 
 @TypeGraphQL.ArgsType()
 export class CreateCreatorArgs {
-  @TypeGraphQL.Field(_type => CreatorCreateInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CreatorCreateInput, {
+    nullable: false
+  })
   data!: CreatorCreateInput;
 }

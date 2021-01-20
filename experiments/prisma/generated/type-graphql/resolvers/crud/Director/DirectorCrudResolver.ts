@@ -18,86 +18,77 @@ import { BatchPayload } from "../../outputs/BatchPayload";
 @TypeGraphQL.Resolver(_of => Director)
 export class DirectorCrudResolver {
   @TypeGraphQL.Query(_returns => Director, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueDirectorArgs): Promise<Director | null> {
     return ctx.prisma.director.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Director, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async findFirstDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstDirectorArgs): Promise<Director | null> {
     return ctx.prisma.director.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [Director], {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async directors(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyDirectorArgs): Promise<Director[]> {
     return ctx.prisma.director.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Director, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async createDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateDirectorArgs): Promise<Director> {
     return ctx.prisma.director.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Director, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async deleteDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteDirectorArgs): Promise<Director | null> {
     return ctx.prisma.director.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Director, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async updateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateDirectorArgs): Promise<Director | null> {
     return ctx.prisma.director.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async deleteManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyDirectorArgs): Promise<BatchPayload> {
     return ctx.prisma.director.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<BatchPayload> {
     return ctx.prisma.director.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Director, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async upsertDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertDirectorArgs): Promise<Director> {
     return ctx.prisma.director.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregateDirector, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async aggregateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateDirectorArgs): Promise<AggregateDirector> {
     function transformFields(fields: Record<string, any>): Record<string, any> {
       return Object.fromEntries(
         Object.entries(fields)
-          .filter(([key, value]) => !key.startsWith("_"))
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
           .map<[string, any]>(([key, value]) => {
             if (Object.keys(value).length === 0) {
               return [key, true];

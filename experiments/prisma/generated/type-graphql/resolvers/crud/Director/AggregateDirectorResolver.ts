@@ -8,14 +8,14 @@ import { AggregateDirector } from "../../outputs/AggregateDirector";
 @TypeGraphQL.Resolver(_of => Director)
 export class AggregateDirectorResolver {
   @TypeGraphQL.Query(_returns => AggregateDirector, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async aggregateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateDirectorArgs): Promise<AggregateDirector> {
     function transformFields(fields: Record<string, any>): Record<string, any> {
       return Object.fromEntries(
         Object.entries(fields)
-          .filter(([key, value]) => !key.startsWith("_"))
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
           .map<[string, any]>(([key, value]) => {
             if (Object.keys(value).length === 0) {
               return [key, true];

@@ -152,7 +152,9 @@ query CountBravoPatients {
   countBravoPatients: aggregatePatient(
     where: { lastName: { contains: "Bravo" } }
   ) {
-    count
+    count {
+      _all
+    }
   }
 }
 
@@ -171,7 +173,9 @@ query FilterPostsByJson {
 
 query AggregateClient {
   aggregateClient {
-    count
+    count {
+      _all
+    }
     avg {
       age
     }

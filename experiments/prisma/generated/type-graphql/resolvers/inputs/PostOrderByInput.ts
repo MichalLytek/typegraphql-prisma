@@ -1,76 +1,64 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   uuid?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   createdAt?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updatedAt?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   published?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   title?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   subtitle?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   content?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   authorId?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   editorId?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   kind?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   metadata?: "asc" | "desc" | undefined;
 }

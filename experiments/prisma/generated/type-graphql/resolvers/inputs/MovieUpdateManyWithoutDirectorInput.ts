@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { MovieCreateOrConnectWithoutdirectorInput } from "../inputs/MovieCreateOrConnectWithoutdirectorInput";
 import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
 import { MovieScalarWhereInput } from "../inputs/MovieScalarWhereInput";
@@ -10,67 +10,56 @@ import { MovieUpsertWithWhereUniqueWithoutDirectorInput } from "../inputs/MovieU
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class MovieUpdateManyWithoutDirectorInput {
   @TypeGraphQL.Field(_type => [MovieCreateWithoutDirectorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   create?: MovieCreateWithoutDirectorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connect?: MovieWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   set?: MovieWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   disconnect?: MovieWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   delete?: MovieWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieUpdateWithWhereUniqueWithoutDirectorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   update?: MovieUpdateWithWhereUniqueWithoutDirectorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieUpdateManyWithWhereWithoutDirectorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updateMany?: MovieUpdateManyWithWhereWithoutDirectorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   deleteMany?: MovieScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieUpsertWithWhereUniqueWithoutDirectorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   upsert?: MovieUpsertWithWhereUniqueWithoutDirectorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieCreateOrConnectWithoutdirectorInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connectOrCreate?: MovieCreateOrConnectWithoutdirectorInput[] | undefined;
 }

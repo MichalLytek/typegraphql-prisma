@@ -21,7 +21,7 @@ npm i @prisma/client
 
 > Be aware that `typegraphql-prisma` is designed to work with a selected versions of `prisma`.
 >
-> Please make sure you use `@prisma/cli` and `@prisma/client` of version matching `~2.14.0`.
+> Please make sure you use `@prisma/cli` and `@prisma/client` of version matching `~2.15.0`.
 > Otherwise, the runtime check will report an error when you run the generator.
 
 You also need to install the GraphQL JSON scalar library (to support the Prisma `Json` scalar):
@@ -147,6 +147,7 @@ CRUD resolvers supports this following methods with args that are 1:1 matching w
 - deleteMany
 - upsert
 - aggregate
+- groupBy
 
 > By default, the method names will be mapped to a GraphQL idiomatic ones (like `findManyUser` -> `users`).
 > You can opt-in to use original names by providing `useOriginalMapping = true` generator option.

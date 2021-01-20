@@ -7,8 +7,7 @@ import { CreatorProblemsArgs } from "./args/CreatorProblemsArgs";
 @TypeGraphQL.Resolver(_of => Creator)
 export class CreatorRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Problem], {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async likes(@TypeGraphQL.Root() creator: Creator, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatorLikesArgs): Promise<Problem[] | null> {
     return ctx.prisma.creator.findUnique({
@@ -19,8 +18,7 @@ export class CreatorRelationsResolver {
   }
 
   @TypeGraphQL.FieldResolver(_type => [Problem], {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   async problems(@TypeGraphQL.Root() creator: Creator, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatorProblemsArgs): Promise<Problem[] | null> {
     return ctx.prisma.creator.findUnique({

@@ -4,6 +4,8 @@ import { ProblemWhereUniqueInput } from "../../../inputs/ProblemWhereUniqueInput
 
 @TypeGraphQL.ArgsType()
 export class FindUniqueProblemArgs {
-  @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, {
+    nullable: false
+  })
   where!: ProblemWhereUniqueInput;
 }

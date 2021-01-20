@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { ClientUpdateOneRequiredWithoutPostsInput } from "../inputs/ClientUpdateOneRequiredWithoutPostsInput";
 import { ClientUpdateOneWithoutEditorPostsInput } from "../inputs/ClientUpdateOneWithoutEditorPostsInput";
@@ -10,73 +10,61 @@ import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStri
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostUpdateInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   uuid?: StringFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   createdAt?: DateTimeFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updatedAt?: DateTimeFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => BoolFieldUpdateOperationsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   published?: BoolFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   title?: StringFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   subtitle?: StringFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   content?: NullableStringFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => NullableEnumPostKindFieldUpdateOperationsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   kind?: NullableEnumPostKindFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => GraphQLJSON, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
-  metadata?: InputJsonValue | undefined;
+  metadata?: Prisma.InputJsonValue | undefined;
 
   @TypeGraphQL.Field(_type => ClientUpdateOneRequiredWithoutPostsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   author?: ClientUpdateOneRequiredWithoutPostsInput | undefined;
 
   @TypeGraphQL.Field(_type => ClientUpdateOneWithoutEditorPostsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   editor?: ClientUpdateOneWithoutEditorPostsInput | undefined;
 }

@@ -18,86 +18,77 @@ import { BatchPayload } from "../../outputs/BatchPayload";
 @TypeGraphQL.Resolver(_of => Category)
 export class CategoryCrudResolver {
   @TypeGraphQL.Query(_returns => Category, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async category(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueCategoryArgs): Promise<Category | null> {
     return ctx.prisma.category.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Category, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async findFirstCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstCategoryArgs): Promise<Category | null> {
     return ctx.prisma.category.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [Category], {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async categories(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyCategoryArgs): Promise<Category[]> {
     return ctx.prisma.category.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async createCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateCategoryArgs): Promise<Category> {
     return ctx.prisma.category.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async deleteCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteCategoryArgs): Promise<Category | null> {
     return ctx.prisma.category.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   async updateCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateCategoryArgs): Promise<Category | null> {
     return ctx.prisma.category.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async deleteManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCategoryArgs): Promise<BatchPayload> {
     return ctx.prisma.category.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async updateManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCategoryArgs): Promise<BatchPayload> {
     return ctx.prisma.category.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async upsertCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertCategoryArgs): Promise<Category> {
     return ctx.prisma.category.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregateCategory, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   async aggregateCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateCategoryArgs): Promise<AggregateCategory> {
     function transformFields(fields: Record<string, any>): Record<string, any> {
       return Object.fromEntries(
         Object.entries(fields)
-          .filter(([key, value]) => !key.startsWith("_"))
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
           .map<[string, any]>(([key, value]) => {
             if (Object.keys(value).length === 0) {
               return [key, true];

@@ -4,6 +4,8 @@ import { DirectorWhereInput } from "../../../inputs/DirectorWhereInput";
 
 @TypeGraphQL.ArgsType()
 export class DeleteManyDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => DirectorWhereInput, {
+    nullable: true
+  })
   where?: DirectorWhereInput | undefined;
 }

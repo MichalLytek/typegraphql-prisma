@@ -101,6 +101,7 @@ export { NestedIntNullableFilter } from "./NestedIntNullableFilter";
 export { NestedStringFilter } from "./NestedStringFilter";
 export { NestedStringNullableFilter } from "./NestedStringNullableFilter";
 export { NullableEnumPostKindFieldUpdateOperationsInput } from "./NullableEnumPostKindFieldUpdateOperationsInput";
+export { NullableIntFieldUpdateOperationsInput } from "./NullableIntFieldUpdateOperationsInput";
 export { NullableStringFieldUpdateOperationsInput } from "./NullableStringFieldUpdateOperationsInput";
 export { PatientCreateInput } from "./PatientCreateInput";
 export { PatientFirstNameLastNameCompoundUniqueInput } from "./PatientFirstNameLastNameCompoundUniqueInput";

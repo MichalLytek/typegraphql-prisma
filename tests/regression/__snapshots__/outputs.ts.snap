@@ -3,45 +3,39 @@
 exports[`outputs should properly generate aggregate classes for model with lowercase name: AggregateExample 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { ExampleAvgAggregate } from \\"../outputs/ExampleAvgAggregate\\";
+import { ExampleCountAggregate } from \\"../outputs/ExampleCountAggregate\\";
 import { ExampleMaxAggregate } from \\"../outputs/ExampleMaxAggregate\\";
 import { ExampleMinAggregate } from \\"../outputs/ExampleMinAggregate\\";
 import { ExampleSumAggregate } from \\"../outputs/ExampleSumAggregate\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class AggregateExample {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+  @TypeGraphQL.Field(_type => ExampleCountAggregate, {
+    nullable: true
   })
-  count!: number | null;
+  count!: ExampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleAvgAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   avg!: ExampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleSumAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   sum!: ExampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleMinAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   min!: ExampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleMaxAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   max!: ExampleMaxAggregate | null;
 }
@@ -51,23 +45,19 @@ export class AggregateExample {
 exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleAvgAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ExampleAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 }
@@ -77,41 +67,34 @@ export class ExampleAvgAggregate {
 exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleMaxAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ExampleMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   booleanField!: boolean | null;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   dateField!: Date | null;
 }
@@ -121,41 +104,34 @@ export class ExampleMaxAggregate {
 exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleMinAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ExampleMinAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   booleanField!: boolean | null;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   dateField!: Date | null;
 }
@@ -165,23 +141,19 @@ export class ExampleMinAggregate {
 exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleSumAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ExampleSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 }
@@ -202,45 +174,39 @@ export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
 exports[`outputs should properly generate aggregate classes for renamed model: AggregateExample 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { ExampleAvgAggregate } from \\"../outputs/ExampleAvgAggregate\\";
+import { ExampleCountAggregate } from \\"../outputs/ExampleCountAggregate\\";
 import { ExampleMaxAggregate } from \\"../outputs/ExampleMaxAggregate\\";
 import { ExampleMinAggregate } from \\"../outputs/ExampleMinAggregate\\";
 import { ExampleSumAggregate } from \\"../outputs/ExampleSumAggregate\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class AggregateExample {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+  @TypeGraphQL.Field(_type => ExampleCountAggregate, {
+    nullable: true
   })
-  count!: number | null;
+  count!: ExampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleAvgAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   avg!: ExampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleSumAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   sum!: ExampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleMinAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   min!: ExampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleMaxAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   max!: ExampleMaxAggregate | null;
 }
@@ -250,23 +216,19 @@ export class AggregateExample {
 exports[`outputs should properly generate aggregate classes for renamed model: ExampleAvgAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ExampleAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 }
@@ -276,41 +238,34 @@ export class ExampleAvgAggregate {
 exports[`outputs should properly generate aggregate classes for renamed model: ExampleMaxAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ExampleMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   booleanField!: boolean | null;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   dateField!: Date | null;
 }
@@ -320,41 +275,34 @@ export class ExampleMaxAggregate {
 exports[`outputs should properly generate aggregate classes for renamed model: ExampleMinAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ExampleMinAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   booleanField!: boolean | null;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   dateField!: Date | null;
 }
@@ -364,23 +312,19 @@ export class ExampleMinAggregate {
 exports[`outputs should properly generate aggregate classes for renamed model: ExampleSumAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class ExampleSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 }
@@ -401,45 +345,40 @@ export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
 exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: AggregateSample 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { SampleAvgAggregate } from \\"../outputs/SampleAvgAggregate\\";
+import { SampleCountAggregate } from \\"../outputs/SampleCountAggregate\\";
 import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
 import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
 import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
-  description: undefined,
-  simpleResolvers: true,
+  simpleResolvers: true
 })
 export class AggregateSample {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+  @TypeGraphQL.Field(_type => SampleCountAggregate, {
+    nullable: true
   })
-  count!: number | null;
+  count!: SampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleAvgAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   avg!: SampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleSumAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   sum!: SampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMinAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   min!: SampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMaxAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   max!: SampleMaxAggregate | null;
 }
@@ -449,17 +388,15 @@ export class AggregateSample {
 exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: BatchPayload 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
-  description: undefined,
-  simpleResolvers: true,
+  simpleResolvers: true
 })
 export class BatchPayload {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   count!: number;
 }
@@ -469,23 +406,20 @@ export class BatchPayload {
 exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: SampleAvgAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
-  description: undefined,
-  simpleResolvers: true,
+  simpleResolvers: true
 })
 export class SampleAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 }
@@ -495,45 +429,39 @@ export class SampleAvgAggregate {
 exports[`outputs should properly generate output type classes: AggregateSample 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { SampleAvgAggregate } from \\"../outputs/SampleAvgAggregate\\";
+import { SampleCountAggregate } from \\"../outputs/SampleCountAggregate\\";
 import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
 import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
 import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class AggregateSample {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
+  @TypeGraphQL.Field(_type => SampleCountAggregate, {
+    nullable: true
   })
-  count!: number | null;
+  count!: SampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleAvgAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   avg!: SampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleSumAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   sum!: SampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMinAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   min!: SampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMaxAggregate, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   max!: SampleMaxAggregate | null;
 }
@@ -543,17 +471,14 @@ export class AggregateSample {
 exports[`outputs should properly generate output type classes: BatchPayload 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class BatchPayload {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   count!: number;
 }
@@ -563,23 +488,19 @@ export class BatchPayload {
 exports[`outputs should properly generate output type classes: SampleAvgAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class SampleAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 }
@@ -589,41 +510,34 @@ export class SampleAvgAggregate {
 exports[`outputs should properly generate output type classes: SampleMaxAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class SampleMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   booleanField!: boolean | null;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   dateField!: Date | null;
 }
@@ -633,41 +547,34 @@ export class SampleMaxAggregate {
 exports[`outputs should properly generate output type classes: SampleMinAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class SampleMinAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   booleanField!: boolean | null;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   dateField!: Date | null;
 }
@@ -677,23 +584,19 @@ export class SampleMinAggregate {
 exports[`outputs should properly generate output type classes: SampleSumAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class SampleSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   intIdField!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   floatField!: number;
 }

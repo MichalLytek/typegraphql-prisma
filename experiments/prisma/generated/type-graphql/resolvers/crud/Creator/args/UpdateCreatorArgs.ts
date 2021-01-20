@@ -5,9 +5,13 @@ import { CreatorWhereUniqueInput } from "../../../inputs/CreatorWhereUniqueInput
 
 @TypeGraphQL.ArgsType()
 export class UpdateCreatorArgs {
-  @TypeGraphQL.Field(_type => CreatorUpdateInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CreatorUpdateInput, {
+    nullable: false
+  })
   data!: CreatorUpdateInput;
 
-  @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
+    nullable: false
+  })
   where!: CreatorWhereUniqueInput;
 }

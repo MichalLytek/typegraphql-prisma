@@ -1,41 +1,35 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class CreatorScalarWhereInput {
   @TypeGraphQL.Field(_type => [CreatorScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   AND?: CreatorScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   OR?: CreatorScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [CreatorScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   NOT?: CreatorScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => IntFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   name?: StringFilter | undefined;
 }

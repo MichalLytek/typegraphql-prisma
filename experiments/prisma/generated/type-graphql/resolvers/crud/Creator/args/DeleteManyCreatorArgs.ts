@@ -4,6 +4,8 @@ import { CreatorWhereInput } from "../../../inputs/CreatorWhereInput";
 
 @TypeGraphQL.ArgsType()
 export class DeleteManyCreatorArgs {
-  @TypeGraphQL.Field(_type => CreatorWhereInput, { nullable: true })
+  @TypeGraphQL.Field(_type => CreatorWhereInput, {
+    nullable: true
+  })
   where?: CreatorWhereInput | undefined;
 }

@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "../../../client";
+import { Prisma } from "../../../client";
 import { CreatorListRelationFilter } from "../inputs/CreatorListRelationFilter";
 import { CreatorRelationFilter } from "../inputs/CreatorRelationFilter";
 import { IntFilter } from "../inputs/IntFilter";
@@ -8,55 +8,46 @@ import { IntNullableFilter } from "../inputs/IntNullableFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class ProblemWhereInput {
   @TypeGraphQL.Field(_type => [ProblemWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   AND?: ProblemWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   OR?: ProblemWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   NOT?: ProblemWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => IntFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   problemText?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => CreatorListRelationFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   likedBy?: CreatorListRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => CreatorRelationFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   creator?: CreatorRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntNullableFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   creatorId?: IntNullableFilter | undefined;
 }
