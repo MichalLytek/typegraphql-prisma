@@ -36,6 +36,9 @@ export async function generate(options: GeneratorOptions) {
     absolutePrismaOutputPath: prismaClientPath.includes("node_modules")
       ? "@prisma/client"
       : undefined,
+    useUncheckedScalarInputs: parseStringBoolean(
+      generatorConfig.useUncheckedScalarInputs,
+    ),
   };
 
   if (config.emitDMMF) {

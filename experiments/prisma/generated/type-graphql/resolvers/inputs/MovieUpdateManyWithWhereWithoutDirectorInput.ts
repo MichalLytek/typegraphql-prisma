@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { MovieScalarWhereInput } from "../inputs/MovieScalarWhereInput";
-import { MovieUpdateManyMutationInput } from "../inputs/MovieUpdateManyMutationInput";
+import { MovieUncheckedUpdateManyWithoutMoviesInput } from "../inputs/MovieUncheckedUpdateManyWithoutMoviesInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -13,8 +13,8 @@ export class MovieUpdateManyWithWhereWithoutDirectorInput {
   })
   where!: MovieScalarWhereInput;
 
-  @TypeGraphQL.Field(_type => MovieUpdateManyMutationInput, {
+  @TypeGraphQL.Field(_type => MovieUncheckedUpdateManyWithoutMoviesInput, {
     nullable: false
   })
-  data!: MovieUpdateManyMutationInput;
+  data!: MovieUncheckedUpdateManyWithoutMoviesInput;
 }

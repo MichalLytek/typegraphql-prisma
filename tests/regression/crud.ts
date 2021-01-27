@@ -490,4 +490,44 @@ describe("crud", () => {
       expect(indexTSFile).toMatchSnapshot("Index");
     });
   });
+
+  describe("when useUncheckedScalarInputs mode is enabled", () => {
+    it("should properly generate create and update args classes", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        useUncheckedScalarInputs: true,
+      });
+      const createUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/args/CreateUserArgs.ts",
+      );
+      const updateManyUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/args/UpdateManyUserArgs.ts",
+      );
+      const updateUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/args/UpdateUserArgs.ts",
+      );
+      const upsertUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/args/UpsertUserArgs.ts",
+      );
+
+      expect(createUserArgsTSFile).toMatchSnapshot("CreateUserArgs");
+      expect(updateManyUserArgsTSFile).toMatchSnapshot("UpdateManyUserArgs");
+      expect(updateUserArgsTSFile).toMatchSnapshot("UpdateUserArgs");
+      expect(upsertUserArgsTSFile).toMatchSnapshot("UpsertUserArgs");
+    });
+  });
 });

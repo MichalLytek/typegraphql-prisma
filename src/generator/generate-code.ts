@@ -329,18 +329,18 @@ export default async function generateCode(
       );
     });
   });
-  const generateMappingData = dmmfDocument.modelMappings.map<
-    GenerateMappingData
-  >(mapping => {
-    const model = dmmfDocument.datamodel.models.find(
-      model => model.name === mapping.model,
-    )!;
-    return {
-      modelName: model.typeName,
-      resolverName: mapping.resolverName,
-      actionResolverNames: mapping.actions.map(it => it.actionResolverName),
-    };
-  });
+  const generateMappingData = dmmfDocument.modelMappings.map<GenerateMappingData>(
+    mapping => {
+      const model = dmmfDocument.datamodel.models.find(
+        model => model.name === mapping.model,
+      )!;
+      return {
+        modelName: model.typeName,
+        resolverName: mapping.resolverName,
+        actionResolverNames: mapping.actions.map(it => it.actionResolverName),
+      };
+    },
+  );
   const crudResolversBarrelExportSourceFile = project.createSourceFile(
     path.resolve(
       baseDirPath,

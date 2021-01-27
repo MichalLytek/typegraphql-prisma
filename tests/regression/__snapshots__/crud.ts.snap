@@ -1632,3 +1632,87 @@ export class ClientCrudResolver {
 }
 "
 `;
+
+exports[`crud when useUncheckedScalarInputs mode is enabled should properly generate create and update args classes: CreateUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { UserUncheckedCreateInput } from \\"../../../inputs/UserUncheckedCreateInput\\";
+
+@TypeGraphQL.ArgsType()
+export class CreateUserArgs {
+  @TypeGraphQL.Field(_type => UserUncheckedCreateInput, {
+    nullable: false
+  })
+  data!: UserUncheckedCreateInput;
+}
+"
+`;
+
+exports[`crud when useUncheckedScalarInputs mode is enabled should properly generate create and update args classes: UpdateManyUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { UserUncheckedUpdateManyInput } from \\"../../../inputs/UserUncheckedUpdateManyInput\\";
+import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
+
+@TypeGraphQL.ArgsType()
+export class UpdateManyUserArgs {
+  @TypeGraphQL.Field(_type => UserUncheckedUpdateManyInput, {
+    nullable: false
+  })
+  data!: UserUncheckedUpdateManyInput;
+
+  @TypeGraphQL.Field(_type => UserWhereInput, {
+    nullable: true
+  })
+  where?: UserWhereInput | undefined;
+}
+"
+`;
+
+exports[`crud when useUncheckedScalarInputs mode is enabled should properly generate create and update args classes: UpdateUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { UserUncheckedUpdateInput } from \\"../../../inputs/UserUncheckedUpdateInput\\";
+import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class UpdateUserArgs {
+  @TypeGraphQL.Field(_type => UserUncheckedUpdateInput, {
+    nullable: false
+  })
+  data!: UserUncheckedUpdateInput;
+
+  @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
+    nullable: false
+  })
+  where!: UserWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud when useUncheckedScalarInputs mode is enabled should properly generate create and update args classes: UpsertUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { UserUncheckedCreateInput } from \\"../../../inputs/UserUncheckedCreateInput\\";
+import { UserUncheckedUpdateInput } from \\"../../../inputs/UserUncheckedUpdateInput\\";
+import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class UpsertUserArgs {
+  @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
+    nullable: false
+  })
+  where!: UserWhereUniqueInput;
+
+  @TypeGraphQL.Field(_type => UserUncheckedCreateInput, {
+    nullable: false
+  })
+  create!: UserUncheckedCreateInput;
+
+  @TypeGraphQL.Field(_type => UserUncheckedUpdateInput, {
+    nullable: false
+  })
+  update!: UserUncheckedUpdateInput;
+}
+"
+`;

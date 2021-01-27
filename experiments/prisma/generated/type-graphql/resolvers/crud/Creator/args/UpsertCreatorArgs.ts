@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { CreatorCreateInput } from "../../../inputs/CreatorCreateInput";
-import { CreatorUpdateInput } from "../../../inputs/CreatorUpdateInput";
+import { CreatorUncheckedCreateInput } from "../../../inputs/CreatorUncheckedCreateInput";
+import { CreatorUncheckedUpdateInput } from "../../../inputs/CreatorUncheckedUpdateInput";
 import { CreatorWhereUniqueInput } from "../../../inputs/CreatorWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
@@ -11,13 +11,13 @@ export class UpsertCreatorArgs {
   })
   where!: CreatorWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => CreatorCreateInput, {
+  @TypeGraphQL.Field(_type => CreatorUncheckedCreateInput, {
     nullable: false
   })
-  create!: CreatorCreateInput;
+  create!: CreatorUncheckedCreateInput;
 
-  @TypeGraphQL.Field(_type => CreatorUpdateInput, {
+  @TypeGraphQL.Field(_type => CreatorUncheckedUpdateInput, {
     nullable: false
   })
-  update!: CreatorUpdateInput;
+  update!: CreatorUncheckedUpdateInput;
 }

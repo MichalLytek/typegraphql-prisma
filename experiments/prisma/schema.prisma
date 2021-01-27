@@ -14,10 +14,11 @@ generator client {
 }
 
 generator typegraphql {
-  provider        = "node ../src/cli/dev.ts"
-  output          = "../prisma/generated/type-graphql"
-  emitDMMF        = true
-  simpleResolvers = false
+  provider                 = "node ../src/cli/dev.ts"
+  output                   = "../prisma/generated/type-graphql"
+  emitDMMF                 = true
+  simpleResolvers          = false
+  useUncheckedScalarInputs = true
 }
 
 // Role enum comment

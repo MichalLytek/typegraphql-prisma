@@ -1,14 +1,14 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { PostUpdateInput } from "../../../inputs/PostUpdateInput";
+import { PostUncheckedUpdateInput } from "../../../inputs/PostUncheckedUpdateInput";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class UpdatePostArgs {
-  @TypeGraphQL.Field(_type => PostUpdateInput, {
+  @TypeGraphQL.Field(_type => PostUncheckedUpdateInput, {
     nullable: false
   })
-  data!: PostUpdateInput;
+  data!: PostUncheckedUpdateInput;
 
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
     nullable: false

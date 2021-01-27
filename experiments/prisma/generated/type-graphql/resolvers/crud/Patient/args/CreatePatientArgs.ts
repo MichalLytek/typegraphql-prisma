@@ -1,11 +1,11 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { PatientCreateInput } from "../../../inputs/PatientCreateInput";
+import { PatientUncheckedCreateInput } from "../../../inputs/PatientUncheckedCreateInput";
 
 @TypeGraphQL.ArgsType()
 export class CreatePatientArgs {
-  @TypeGraphQL.Field(_type => PatientCreateInput, {
+  @TypeGraphQL.Field(_type => PatientUncheckedCreateInput, {
     nullable: false
   })
-  data!: PatientCreateInput;
+  data!: PatientUncheckedCreateInput;
 }

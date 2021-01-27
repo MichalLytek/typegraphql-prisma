@@ -1,14 +1,14 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { ProblemUpdateInput } from "../../../inputs/ProblemUpdateInput";
+import { ProblemUncheckedUpdateInput } from "../../../inputs/ProblemUncheckedUpdateInput";
 import { ProblemWhereUniqueInput } from "../../../inputs/ProblemWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class UpdateProblemArgs {
-  @TypeGraphQL.Field(_type => ProblemUpdateInput, {
+  @TypeGraphQL.Field(_type => ProblemUncheckedUpdateInput, {
     nullable: false
   })
-  data!: ProblemUpdateInput;
+  data!: ProblemUncheckedUpdateInput;
 
   @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, {
     nullable: false

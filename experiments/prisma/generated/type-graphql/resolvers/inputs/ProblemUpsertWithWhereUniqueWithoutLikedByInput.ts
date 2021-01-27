@@ -1,8 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { ProblemCreateWithoutLikedByInput } from "../inputs/ProblemCreateWithoutLikedByInput";
-import { ProblemUpdateWithoutLikedByInput } from "../inputs/ProblemUpdateWithoutLikedByInput";
+import { ProblemUncheckedCreateWithoutLikedByInput } from "../inputs/ProblemUncheckedCreateWithoutLikedByInput";
+import { ProblemUncheckedUpdateWithoutLikedByInput } from "../inputs/ProblemUncheckedUpdateWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -14,13 +14,13 @@ export class ProblemUpsertWithWhereUniqueWithoutLikedByInput {
   })
   where!: ProblemWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => ProblemUpdateWithoutLikedByInput, {
+  @TypeGraphQL.Field(_type => ProblemUncheckedUpdateWithoutLikedByInput, {
     nullable: false
   })
-  update!: ProblemUpdateWithoutLikedByInput;
+  update!: ProblemUncheckedUpdateWithoutLikedByInput;
 
-  @TypeGraphQL.Field(_type => ProblemCreateWithoutLikedByInput, {
+  @TypeGraphQL.Field(_type => ProblemUncheckedCreateWithoutLikedByInput, {
     nullable: false
   })
-  create!: ProblemCreateWithoutLikedByInput;
+  create!: ProblemUncheckedCreateWithoutLikedByInput;
 }

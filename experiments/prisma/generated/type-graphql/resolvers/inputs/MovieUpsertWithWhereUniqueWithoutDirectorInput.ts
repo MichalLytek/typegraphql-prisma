@@ -1,8 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
-import { MovieUpdateWithoutDirectorInput } from "../inputs/MovieUpdateWithoutDirectorInput";
+import { MovieUncheckedCreateWithoutDirectorInput } from "../inputs/MovieUncheckedCreateWithoutDirectorInput";
+import { MovieUncheckedUpdateWithoutDirectorInput } from "../inputs/MovieUncheckedUpdateWithoutDirectorInput";
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -14,13 +14,13 @@ export class MovieUpsertWithWhereUniqueWithoutDirectorInput {
   })
   where!: MovieWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => MovieUpdateWithoutDirectorInput, {
+  @TypeGraphQL.Field(_type => MovieUncheckedUpdateWithoutDirectorInput, {
     nullable: false
   })
-  update!: MovieUpdateWithoutDirectorInput;
+  update!: MovieUncheckedUpdateWithoutDirectorInput;
 
-  @TypeGraphQL.Field(_type => MovieCreateWithoutDirectorInput, {
+  @TypeGraphQL.Field(_type => MovieUncheckedCreateWithoutDirectorInput, {
     nullable: false
   })
-  create!: MovieCreateWithoutDirectorInput;
+  create!: MovieUncheckedCreateWithoutDirectorInput;
 }

@@ -854,4 +854,110 @@ describe("inputs", () => {
       );
     });
   });
+
+  describe("when useUncheckedScalarInputs mode is enabled", () => {
+    it("should properly generate input type classes for filtering models by one to many relation fields", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        useUncheckedScalarInputs: true,
+      });
+      const firstModelUncheckedCreateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelUncheckedCreateInput.ts",
+      );
+      const FirstModelUncheckedCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelUncheckedCreateWithoutSecondModelsFieldInput.ts",
+      );
+      const FirstModelUncheckedUpdateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelUncheckedUpdateInput.ts",
+      );
+      const FirstModelUncheckedUpdateManyInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelUncheckedUpdateManyInput.ts",
+      );
+      const FirstModelUncheckedUpdateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelUncheckedUpdateWithoutSecondModelsFieldInput.ts",
+      );
+      const FirstModelCreateOneWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelCreateOneWithoutSecondModelsFieldInput.ts",
+      );
+      const FirstModelCreateOrConnectWithoutsecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelCreateOrConnectWithoutsecondModelsFieldInput.ts",
+      );
+      const FirstModelCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelCreateWithoutSecondModelsFieldInput.ts",
+      );
+      const FirstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput.ts",
+      );
+      const FirstModelUpdateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelUpdateWithoutSecondModelsFieldInput.ts",
+      );
+      const FirstModelUpsertWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelUpsertWithoutSecondModelsFieldInput.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(firstModelUncheckedCreateInputTSFile).toMatchSnapshot(
+        "FirstModelUncheckedCreateInput",
+      );
+      expect(
+        FirstModelUncheckedCreateWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot(
+        "FirstModelUncheckedCreateWithoutSecondModelsFieldInput",
+      );
+      expect(FirstModelUncheckedUpdateInputTSFile).toMatchSnapshot(
+        "FirstModelUncheckedUpdateInput",
+      );
+      expect(FirstModelUncheckedUpdateManyInputTSFile).toMatchSnapshot(
+        "FirstModelUncheckedUpdateManyInput",
+      );
+      expect(
+        FirstModelUncheckedUpdateWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot(
+        "FirstModelUncheckedUpdateWithoutSecondModelsFieldInput",
+      );
+      expect(
+        FirstModelCreateOneWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot("FirstModelCreateOneWithoutSecondModelsFieldInput");
+      expect(
+        FirstModelCreateOrConnectWithoutsecondModelsFieldInputTSFile,
+      ).toMatchSnapshot(
+        "FirstModelCreateOrConnectWithoutsecondModelsFieldInput",
+      );
+      expect(
+        FirstModelCreateWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot("FirstModelCreateWithoutSecondModelsFieldInputTSFile");
+      expect(
+        FirstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot(
+        "FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput",
+      );
+      expect(
+        FirstModelUpdateWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot("FirstModelUpdateWithoutSecondModelsFieldInputTSFile");
+      expect(
+        FirstModelUpsertWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot("FirstModelUpsertWithoutSecondModelsFieldInputTSFile");
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
 });

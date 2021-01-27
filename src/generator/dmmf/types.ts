@@ -94,11 +94,10 @@ export namespace DMMF {
   export interface SchemaArgInputType {
     isList: boolean;
     // type: ArgType;
-    type: string;
     location: FieldLocation;
     namespace?: FieldNamespace;
     // additional props
-    argType: ArgType;
+    type: string;
   }
   export interface SchemaArg {
     name: string;

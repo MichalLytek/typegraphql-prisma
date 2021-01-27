@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorInput";
+import { PostUncheckedCreateWithoutAuthorInput } from "../inputs/PostUncheckedCreateWithoutAuthorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -13,8 +13,8 @@ export class PostCreateOrConnectWithoutauthorInput {
   })
   where!: PostWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => PostCreateWithoutAuthorInput, {
+  @TypeGraphQL.Field(_type => PostUncheckedCreateWithoutAuthorInput, {
     nullable: false
   })
-  create!: PostCreateWithoutAuthorInput;
+  create!: PostUncheckedCreateWithoutAuthorInput;
 }

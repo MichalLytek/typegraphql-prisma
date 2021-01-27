@@ -1,20 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { CreatorCreateWithoutProblemsInput } from "../inputs/CreatorCreateWithoutProblemsInput";
-import { CreatorUpdateWithoutProblemsInput } from "../inputs/CreatorUpdateWithoutProblemsInput";
+import { CreatorUncheckedCreateWithoutProblemsInput } from "../inputs/CreatorUncheckedCreateWithoutProblemsInput";
+import { CreatorUncheckedUpdateWithoutProblemsInput } from "../inputs/CreatorUncheckedUpdateWithoutProblemsInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
 })
 export class CreatorUpsertWithoutProblemsInput {
-  @TypeGraphQL.Field(_type => CreatorUpdateWithoutProblemsInput, {
+  @TypeGraphQL.Field(_type => CreatorUncheckedUpdateWithoutProblemsInput, {
     nullable: false
   })
-  update!: CreatorUpdateWithoutProblemsInput;
+  update!: CreatorUncheckedUpdateWithoutProblemsInput;
 
-  @TypeGraphQL.Field(_type => CreatorCreateWithoutProblemsInput, {
+  @TypeGraphQL.Field(_type => CreatorUncheckedCreateWithoutProblemsInput, {
     nullable: false
   })
-  create!: CreatorCreateWithoutProblemsInput;
+  create!: CreatorUncheckedCreateWithoutProblemsInput;
 }

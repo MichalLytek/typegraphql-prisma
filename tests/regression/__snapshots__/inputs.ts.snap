@@ -3638,3 +3638,380 @@ export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperation
 export { StringFilter } from \\"./StringFilter\\";
 "
 `;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelCreateOneWithoutSecondModelsFieldInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { FirstModelCreateOrConnectWithoutsecondModelsFieldInput } from \\"../inputs/FirstModelCreateOrConnectWithoutsecondModelsFieldInput\\";
+import { FirstModelUncheckedCreateWithoutSecondModelsFieldInput } from \\"../inputs/FirstModelUncheckedCreateWithoutSecondModelsFieldInput\\";
+import { FirstModelWhereUniqueInput } from \\"../inputs/FirstModelWhereUniqueInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelCreateOneWithoutSecondModelsFieldInput {
+  @TypeGraphQL.Field(_type => FirstModelUncheckedCreateWithoutSecondModelsFieldInput, {
+    nullable: true
+  })
+  create?: FirstModelUncheckedCreateWithoutSecondModelsFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelWhereUniqueInput, {
+    nullable: true
+  })
+  connect?: FirstModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelCreateOrConnectWithoutsecondModelsFieldInput, {
+    nullable: true
+  })
+  connectOrCreate?: FirstModelCreateOrConnectWithoutsecondModelsFieldInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelCreateOrConnectWithoutsecondModelsFieldInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { FirstModelUncheckedCreateWithoutSecondModelsFieldInput } from \\"../inputs/FirstModelUncheckedCreateWithoutSecondModelsFieldInput\\";
+import { FirstModelWhereUniqueInput } from \\"../inputs/FirstModelWhereUniqueInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelCreateOrConnectWithoutsecondModelsFieldInput {
+  @TypeGraphQL.Field(_type => FirstModelWhereUniqueInput, {
+    nullable: false
+  })
+  where!: FirstModelWhereUniqueInput;
+
+  @TypeGraphQL.Field(_type => FirstModelUncheckedCreateWithoutSecondModelsFieldInput, {
+    nullable: false
+  })
+  create!: FirstModelUncheckedCreateWithoutSecondModelsFieldInput;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelCreateWithoutSecondModelsFieldInputTSFile 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelCreateWithoutSecondModelsFieldInput {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  uniqueStringField!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelUncheckedCreateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { SecondModelUncheckedCreateManyWithoutFirstModelFieldInput } from \\"../inputs/SecondModelUncheckedCreateManyWithoutFirstModelFieldInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelUncheckedCreateInput {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  idField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  uniqueStringField!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+
+  @TypeGraphQL.Field(_type => SecondModelUncheckedCreateManyWithoutFirstModelFieldInput, {
+    nullable: true
+  })
+  secondModelsField?: SecondModelUncheckedCreateManyWithoutFirstModelFieldInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelUncheckedCreateWithoutSecondModelsFieldInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelUncheckedCreateWithoutSecondModelsFieldInput {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  idField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  uniqueStringField!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelUncheckedUpdateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { FloatFieldUpdateOperationsInput } from \\"../inputs/FloatFieldUpdateOperationsInput\\";
+import { IntFieldUpdateOperationsInput } from \\"../inputs/IntFieldUpdateOperationsInput\\";
+import { SecondModelUncheckedUpdateManyWithoutFirstModelFieldInput } from \\"../inputs/SecondModelUncheckedUpdateManyWithoutFirstModelFieldInput\\";
+import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelUncheckedUpdateInput {
+  @TypeGraphQL.Field(_type => IntFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  idField?: IntFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  uniqueStringField?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => FloatFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  floatField?: FloatFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => SecondModelUncheckedUpdateManyWithoutFirstModelFieldInput, {
+    nullable: true
+  })
+  secondModelsField?: SecondModelUncheckedUpdateManyWithoutFirstModelFieldInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelUncheckedUpdateManyInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { FloatFieldUpdateOperationsInput } from \\"../inputs/FloatFieldUpdateOperationsInput\\";
+import { IntFieldUpdateOperationsInput } from \\"../inputs/IntFieldUpdateOperationsInput\\";
+import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelUncheckedUpdateManyInput {
+  @TypeGraphQL.Field(_type => IntFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  idField?: IntFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  uniqueStringField?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => FloatFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  floatField?: FloatFieldUpdateOperationsInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelUncheckedUpdateWithoutSecondModelsFieldInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { FloatFieldUpdateOperationsInput } from \\"../inputs/FloatFieldUpdateOperationsInput\\";
+import { IntFieldUpdateOperationsInput } from \\"../inputs/IntFieldUpdateOperationsInput\\";
+import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelUncheckedUpdateWithoutSecondModelsFieldInput {
+  @TypeGraphQL.Field(_type => IntFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  idField?: IntFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  uniqueStringField?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => FloatFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  floatField?: FloatFieldUpdateOperationsInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { FirstModelCreateOrConnectWithoutsecondModelsFieldInput } from \\"../inputs/FirstModelCreateOrConnectWithoutsecondModelsFieldInput\\";
+import { FirstModelUncheckedCreateWithoutSecondModelsFieldInput } from \\"../inputs/FirstModelUncheckedCreateWithoutSecondModelsFieldInput\\";
+import { FirstModelUncheckedUpdateWithoutSecondModelsFieldInput } from \\"../inputs/FirstModelUncheckedUpdateWithoutSecondModelsFieldInput\\";
+import { FirstModelUpsertWithoutSecondModelsFieldInput } from \\"../inputs/FirstModelUpsertWithoutSecondModelsFieldInput\\";
+import { FirstModelWhereUniqueInput } from \\"../inputs/FirstModelWhereUniqueInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput {
+  @TypeGraphQL.Field(_type => FirstModelUncheckedCreateWithoutSecondModelsFieldInput, {
+    nullable: true
+  })
+  create?: FirstModelUncheckedCreateWithoutSecondModelsFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelWhereUniqueInput, {
+    nullable: true
+  })
+  connect?: FirstModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelUncheckedUpdateWithoutSecondModelsFieldInput, {
+    nullable: true
+  })
+  update?: FirstModelUncheckedUpdateWithoutSecondModelsFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelUpsertWithoutSecondModelsFieldInput, {
+    nullable: true
+  })
+  upsert?: FirstModelUpsertWithoutSecondModelsFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelCreateOrConnectWithoutsecondModelsFieldInput, {
+    nullable: true
+  })
+  connectOrCreate?: FirstModelCreateOrConnectWithoutsecondModelsFieldInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelUpdateWithoutSecondModelsFieldInputTSFile 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { FloatFieldUpdateOperationsInput } from \\"../inputs/FloatFieldUpdateOperationsInput\\";
+import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelUpdateWithoutSecondModelsFieldInput {
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  uniqueStringField?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => FloatFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  floatField?: FloatFieldUpdateOperationsInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelUpsertWithoutSecondModelsFieldInputTSFile 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { FirstModelUncheckedCreateWithoutSecondModelsFieldInput } from \\"../inputs/FirstModelUncheckedCreateWithoutSecondModelsFieldInput\\";
+import { FirstModelUncheckedUpdateWithoutSecondModelsFieldInput } from \\"../inputs/FirstModelUncheckedUpdateWithoutSecondModelsFieldInput\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelUpsertWithoutSecondModelsFieldInput {
+  @TypeGraphQL.Field(_type => FirstModelUncheckedUpdateWithoutSecondModelsFieldInput, {
+    nullable: false
+  })
+  update!: FirstModelUncheckedUpdateWithoutSecondModelsFieldInput;
+
+  @TypeGraphQL.Field(_type => FirstModelUncheckedCreateWithoutSecondModelsFieldInput, {
+    nullable: false
+  })
+  create!: FirstModelUncheckedCreateWithoutSecondModelsFieldInput;
+}
+"
+`;
+
+exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: index 1`] = `
+"export { FirstModelCreateInput } from \\"./FirstModelCreateInput\\";
+export { FirstModelCreateOneWithoutSecondModelsFieldInput } from \\"./FirstModelCreateOneWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateOrConnectWithoutsecondModelsFieldInput } from \\"./FirstModelCreateOrConnectWithoutsecondModelsFieldInput\\";
+export { FirstModelCreateWithoutSecondModelsFieldInput } from \\"./FirstModelCreateWithoutSecondModelsFieldInput\\";
+export { FirstModelOrderByInput } from \\"./FirstModelOrderByInput\\";
+export { FirstModelRelationFilter } from \\"./FirstModelRelationFilter\\";
+export { FirstModelUncheckedCreateInput } from \\"./FirstModelUncheckedCreateInput\\";
+export { FirstModelUncheckedCreateWithoutSecondModelsFieldInput } from \\"./FirstModelUncheckedCreateWithoutSecondModelsFieldInput\\";
+export { FirstModelUncheckedUpdateInput } from \\"./FirstModelUncheckedUpdateInput\\";
+export { FirstModelUncheckedUpdateManyInput } from \\"./FirstModelUncheckedUpdateManyInput\\";
+export { FirstModelUncheckedUpdateWithoutSecondModelsFieldInput } from \\"./FirstModelUncheckedUpdateWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateInput } from \\"./FirstModelUpdateInput\\";
+export { FirstModelUpdateManyMutationInput } from \\"./FirstModelUpdateManyMutationInput\\";
+export { FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldInput\\";
+export { FirstModelUpsertWithoutSecondModelsFieldInput } from \\"./FirstModelUpsertWithoutSecondModelsFieldInput\\";
+export { FirstModelWhereInput } from \\"./FirstModelWhereInput\\";
+export { FirstModelWhereUniqueInput } from \\"./FirstModelWhereUniqueInput\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { SecondModelCreateInput } from \\"./SecondModelCreateInput\\";
+export { SecondModelCreateManyWithoutFirstModelFieldInput } from \\"./SecondModelCreateManyWithoutFirstModelFieldInput\\";
+export { SecondModelCreateOrConnectWithoutfirstModelFieldInput } from \\"./SecondModelCreateOrConnectWithoutfirstModelFieldInput\\";
+export { SecondModelCreateWithoutFirstModelFieldInput } from \\"./SecondModelCreateWithoutFirstModelFieldInput\\";
+export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
+export { SecondModelOrderByInput } from \\"./SecondModelOrderByInput\\";
+export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
+export { SecondModelUncheckedCreateInput } from \\"./SecondModelUncheckedCreateInput\\";
+export { SecondModelUncheckedCreateManyWithoutFirstModelFieldInput } from \\"./SecondModelUncheckedCreateManyWithoutFirstModelFieldInput\\";
+export { SecondModelUncheckedCreateWithoutFirstModelFieldInput } from \\"./SecondModelUncheckedCreateWithoutFirstModelFieldInput\\";
+export { SecondModelUncheckedUpdateInput } from \\"./SecondModelUncheckedUpdateInput\\";
+export { SecondModelUncheckedUpdateManyInput } from \\"./SecondModelUncheckedUpdateManyInput\\";
+export { SecondModelUncheckedUpdateManyWithoutFirstModelFieldInput } from \\"./SecondModelUncheckedUpdateManyWithoutFirstModelFieldInput\\";
+export { SecondModelUncheckedUpdateManyWithoutSecondModelsFieldInput } from \\"./SecondModelUncheckedUpdateManyWithoutSecondModelsFieldInput\\";
+export { SecondModelUncheckedUpdateWithoutFirstModelFieldInput } from \\"./SecondModelUncheckedUpdateWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateInput } from \\"./SecondModelUpdateInput\\";
+export { SecondModelUpdateManyMutationInput } from \\"./SecondModelUpdateManyMutationInput\\";
+export { SecondModelUpdateManyWithWhereWithoutFirstModelFieldInput } from \\"./SecondModelUpdateManyWithWhereWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateManyWithoutFirstModelFieldInput } from \\"./SecondModelUpdateManyWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput } from \\"./SecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateWithoutFirstModelFieldInput } from \\"./SecondModelUpdateWithoutFirstModelFieldInput\\";
+export { SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput } from \\"./SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput\\";
+export { SecondModelWhereInput } from \\"./SecondModelWhereInput\\";
+export { SecondModelWhereUniqueInput } from \\"./SecondModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;

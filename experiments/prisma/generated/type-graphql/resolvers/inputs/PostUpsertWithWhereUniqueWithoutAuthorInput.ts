@@ -1,8 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorInput";
-import { PostUpdateWithoutAuthorInput } from "../inputs/PostUpdateWithoutAuthorInput";
+import { PostUncheckedCreateWithoutAuthorInput } from "../inputs/PostUncheckedCreateWithoutAuthorInput";
+import { PostUncheckedUpdateWithoutAuthorInput } from "../inputs/PostUncheckedUpdateWithoutAuthorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -14,13 +14,13 @@ export class PostUpsertWithWhereUniqueWithoutAuthorInput {
   })
   where!: PostWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => PostUpdateWithoutAuthorInput, {
+  @TypeGraphQL.Field(_type => PostUncheckedUpdateWithoutAuthorInput, {
     nullable: false
   })
-  update!: PostUpdateWithoutAuthorInput;
+  update!: PostUncheckedUpdateWithoutAuthorInput;
 
-  @TypeGraphQL.Field(_type => PostCreateWithoutAuthorInput, {
+  @TypeGraphQL.Field(_type => PostUncheckedCreateWithoutAuthorInput, {
     nullable: false
   })
-  create!: PostCreateWithoutAuthorInput;
+  create!: PostUncheckedCreateWithoutAuthorInput;
 }

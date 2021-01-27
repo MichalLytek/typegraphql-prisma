@@ -2,8 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { CreatorCreateOrConnectWithoutproblemsInput } from "../inputs/CreatorCreateOrConnectWithoutproblemsInput";
-import { CreatorCreateWithoutProblemsInput } from "../inputs/CreatorCreateWithoutProblemsInput";
-import { CreatorUpdateWithoutProblemsInput } from "../inputs/CreatorUpdateWithoutProblemsInput";
+import { CreatorUncheckedCreateWithoutProblemsInput } from "../inputs/CreatorUncheckedCreateWithoutProblemsInput";
+import { CreatorUncheckedUpdateWithoutProblemsInput } from "../inputs/CreatorUncheckedUpdateWithoutProblemsInput";
 import { CreatorUpsertWithoutProblemsInput } from "../inputs/CreatorUpsertWithoutProblemsInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
@@ -11,10 +11,10 @@ import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
   isAbstract: true
 })
 export class CreatorUpdateOneWithoutProblemsInput {
-  @TypeGraphQL.Field(_type => CreatorCreateWithoutProblemsInput, {
+  @TypeGraphQL.Field(_type => CreatorUncheckedCreateWithoutProblemsInput, {
     nullable: true
   })
-  create?: CreatorCreateWithoutProblemsInput | undefined;
+  create?: CreatorUncheckedCreateWithoutProblemsInput | undefined;
 
   @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
     nullable: true
@@ -31,10 +31,10 @@ export class CreatorUpdateOneWithoutProblemsInput {
   })
   delete?: boolean | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorUpdateWithoutProblemsInput, {
+  @TypeGraphQL.Field(_type => CreatorUncheckedUpdateWithoutProblemsInput, {
     nullable: true
   })
-  update?: CreatorUpdateWithoutProblemsInput | undefined;
+  update?: CreatorUncheckedUpdateWithoutProblemsInput | undefined;
 
   @TypeGraphQL.Field(_type => CreatorUpsertWithoutProblemsInput, {
     nullable: true

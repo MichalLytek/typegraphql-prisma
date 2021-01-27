@@ -2,8 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { DirectorCreateOrConnectWithoutmoviesInput } from "../inputs/DirectorCreateOrConnectWithoutmoviesInput";
-import { DirectorCreateWithoutMoviesInput } from "../inputs/DirectorCreateWithoutMoviesInput";
-import { DirectorUpdateWithoutMoviesInput } from "../inputs/DirectorUpdateWithoutMoviesInput";
+import { DirectorUncheckedCreateWithoutMoviesInput } from "../inputs/DirectorUncheckedCreateWithoutMoviesInput";
+import { DirectorUncheckedUpdateWithoutMoviesInput } from "../inputs/DirectorUncheckedUpdateWithoutMoviesInput";
 import { DirectorUpsertWithoutMoviesInput } from "../inputs/DirectorUpsertWithoutMoviesInput";
 import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 
@@ -11,20 +11,20 @@ import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
   isAbstract: true
 })
 export class DirectorUpdateOneRequiredWithoutMoviesInput {
-  @TypeGraphQL.Field(_type => DirectorCreateWithoutMoviesInput, {
+  @TypeGraphQL.Field(_type => DirectorUncheckedCreateWithoutMoviesInput, {
     nullable: true
   })
-  create?: DirectorCreateWithoutMoviesInput | undefined;
+  create?: DirectorUncheckedCreateWithoutMoviesInput | undefined;
 
   @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
     nullable: true
   })
   connect?: DirectorWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorUpdateWithoutMoviesInput, {
+  @TypeGraphQL.Field(_type => DirectorUncheckedUpdateWithoutMoviesInput, {
     nullable: true
   })
-  update?: DirectorUpdateWithoutMoviesInput | undefined;
+  update?: DirectorUncheckedUpdateWithoutMoviesInput | undefined;
 
   @TypeGraphQL.Field(_type => DirectorUpsertWithoutMoviesInput, {
     nullable: true
