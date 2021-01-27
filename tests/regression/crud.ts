@@ -424,4 +424,70 @@ describe("crud", () => {
       );
     });
   });
+
+  describe("when experimental feature `groupBy` is enabled", () => {
+    it("should properly generate group by resolver class and crud method for prisma model", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["groupBy"],
+      });
+      const upsertUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/GroupByUserResolver.ts",
+      );
+      const userCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UserCrudResolver.ts",
+      );
+      const actionsIndexTSFile = await readGeneratedFile(
+        "/resolvers/crud/resolvers-actions.index.ts",
+      );
+
+      expect(upsertUserResolverTSFile).toMatchSnapshot("GroupByUserResolver");
+      expect(actionsIndexTSFile).toMatchSnapshot("actionsIndex");
+      expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+    });
+
+    it("should properly generate group by args class for prisma model", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["groupBy"],
+      });
+      const groupByUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/args/GroupByUserArgs.ts",
+      );
+      const indexTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/args/index.ts",
+      );
+
+      expect(groupByUserArgsTSFile).toMatchSnapshot("GroupByUserArgs");
+      expect(indexTSFile).toMatchSnapshot("Index");
+    });
+  });
 });

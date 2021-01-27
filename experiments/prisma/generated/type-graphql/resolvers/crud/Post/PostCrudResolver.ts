@@ -8,12 +8,14 @@ import { DeletePostArgs } from "./args/DeletePostArgs";
 import { FindFirstPostArgs } from "./args/FindFirstPostArgs";
 import { FindManyPostArgs } from "./args/FindManyPostArgs";
 import { FindUniquePostArgs } from "./args/FindUniquePostArgs";
+import { GroupByPostArgs } from "./args/GroupByPostArgs";
 import { UpdateManyPostArgs } from "./args/UpdateManyPostArgs";
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
 import { Post } from "../../../models/Post";
 import { AggregatePost } from "../../outputs/AggregatePost";
 import { BatchPayload } from "../../outputs/BatchPayload";
+import { PostGroupBy } from "../../outputs/PostGroupBy";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostCrudResolver {
@@ -101,6 +103,35 @@ export class PostCrudResolver {
     return ctx.prisma.post.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [PostGroupBy], {
+    nullable: false
+  })
+  async groupByPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByPostArgs): Promise<PostGroupBy[]> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    const { count, avg, sum, min, max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return ctx.prisma.post.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+      ),
     });
   }
 }

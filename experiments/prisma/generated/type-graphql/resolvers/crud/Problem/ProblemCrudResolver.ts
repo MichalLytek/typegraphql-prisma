@@ -8,12 +8,14 @@ import { DeleteProblemArgs } from "./args/DeleteProblemArgs";
 import { FindFirstProblemArgs } from "./args/FindFirstProblemArgs";
 import { FindManyProblemArgs } from "./args/FindManyProblemArgs";
 import { FindUniqueProblemArgs } from "./args/FindUniqueProblemArgs";
+import { GroupByProblemArgs } from "./args/GroupByProblemArgs";
 import { UpdateManyProblemArgs } from "./args/UpdateManyProblemArgs";
 import { UpdateProblemArgs } from "./args/UpdateProblemArgs";
 import { UpsertProblemArgs } from "./args/UpsertProblemArgs";
 import { Problem } from "../../../models/Problem";
 import { AggregateProblem } from "../../outputs/AggregateProblem";
 import { BatchPayload } from "../../outputs/BatchPayload";
+import { ProblemGroupBy } from "../../outputs/ProblemGroupBy";
 
 @TypeGraphQL.Resolver(_of => Problem)
 export class ProblemCrudResolver {
@@ -101,6 +103,35 @@ export class ProblemCrudResolver {
     return ctx.prisma.problem.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [ProblemGroupBy], {
+    nullable: false
+  })
+  async groupByProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByProblemArgs): Promise<ProblemGroupBy[]> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    const { count, avg, sum, min, max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return ctx.prisma.problem.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+      ),
     });
   }
 }

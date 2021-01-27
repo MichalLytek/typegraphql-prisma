@@ -8,12 +8,14 @@ import { DeleteMovieArgs } from "./args/DeleteMovieArgs";
 import { FindFirstMovieArgs } from "./args/FindFirstMovieArgs";
 import { FindManyMovieArgs } from "./args/FindManyMovieArgs";
 import { FindUniqueMovieArgs } from "./args/FindUniqueMovieArgs";
+import { GroupByMovieArgs } from "./args/GroupByMovieArgs";
 import { UpdateManyMovieArgs } from "./args/UpdateManyMovieArgs";
 import { UpdateMovieArgs } from "./args/UpdateMovieArgs";
 import { UpsertMovieArgs } from "./args/UpsertMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
 import { BatchPayload } from "../../outputs/BatchPayload";
+import { MovieGroupBy } from "../../outputs/MovieGroupBy";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class MovieCrudResolver {
@@ -101,6 +103,35 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [MovieGroupBy], {
+    nullable: false
+  })
+  async groupByMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByMovieArgs): Promise<MovieGroupBy[]> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    const { count, avg, sum, min, max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return ctx.prisma.movie.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+      ),
     });
   }
 }

@@ -5,6 +5,7 @@ export { DeleteManyCreatorArgs } from "./DeleteManyCreatorArgs";
 export { FindFirstCreatorArgs } from "./FindFirstCreatorArgs";
 export { FindManyCreatorArgs } from "./FindManyCreatorArgs";
 export { FindUniqueCreatorArgs } from "./FindUniqueCreatorArgs";
+export { GroupByCreatorArgs } from "./GroupByCreatorArgs";
 export { UpdateCreatorArgs } from "./UpdateCreatorArgs";
 export { UpdateManyCreatorArgs } from "./UpdateManyCreatorArgs";
 export { UpsertCreatorArgs } from "./UpsertCreatorArgs";

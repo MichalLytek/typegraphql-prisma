@@ -45,7 +45,8 @@ export function generateCrudResolverClassMethodDeclaration(
         type: "any",
         decorators: [{ name: "TypeGraphQL.Ctx", arguments: [] }],
       },
-      ...(action.kind === DMMF.ModelAction.aggregate
+      ...(action.kind === DMMF.ModelAction.aggregate ||
+      action.kind === DMMF.ModelAction.groupBy
         ? [
             {
               name: "info",
@@ -71,6 +72,19 @@ export function generateCrudResolverClassMethodDeclaration(
             /* ts */ ` return ctx.prisma.${mapping.collectionName}.${action.kind}({
               ...args,
               ...transformFields(graphqlFields(info as any)),
+            });`,
+          ]
+        : action.kind === DMMF.ModelAction.groupBy
+        ? [
+            transformFieldsFunctionStatement,
+            /* ts */ ` const { count, avg, sum, min, max } = transformFields(
+              graphqlFields(info as any)
+            );`,
+            /* ts */ ` return ctx.prisma.${mapping.collectionName}.${action.kind}({
+              ...args,
+              ...Object.fromEntries(
+                Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+              ),
             });`,
           ]
         : [

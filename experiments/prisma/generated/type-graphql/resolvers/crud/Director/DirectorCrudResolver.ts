@@ -8,12 +8,14 @@ import { DeleteManyDirectorArgs } from "./args/DeleteManyDirectorArgs";
 import { FindFirstDirectorArgs } from "./args/FindFirstDirectorArgs";
 import { FindManyDirectorArgs } from "./args/FindManyDirectorArgs";
 import { FindUniqueDirectorArgs } from "./args/FindUniqueDirectorArgs";
+import { GroupByDirectorArgs } from "./args/GroupByDirectorArgs";
 import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { UpsertDirectorArgs } from "./args/UpsertDirectorArgs";
 import { Director } from "../../../models/Director";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
 import { BatchPayload } from "../../outputs/BatchPayload";
+import { DirectorGroupBy } from "../../outputs/DirectorGroupBy";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class DirectorCrudResolver {
@@ -101,6 +103,35 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [DirectorGroupBy], {
+    nullable: false
+  })
+  async groupByDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByDirectorArgs): Promise<DirectorGroupBy[]> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    const { count, avg, sum, min, max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return ctx.prisma.director.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+      ),
     });
   }
 }

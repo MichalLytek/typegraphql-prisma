@@ -307,3 +307,47 @@ Object {
   },
 }
 `;
+
+exports[`crud resolvers execution when experimental feature \`groupBy\` is enabled should properly call PrismaClient on \`groupBy\` action with advanced operations: groupByUser mocked response 1`] = `
+Object {
+  "groupByUser": Array [
+    Object {
+      "__typename": "UserGroupBy",
+      "count": Object {
+        "__typename": "UserCountAggregate",
+        "_all": 5,
+      },
+      "intField": 10,
+      "min": Object {
+        "__typename": "UserMinAggregate",
+        "floatField": 0,
+        "intField": 0,
+      },
+    },
+  ],
+}
+`;
+
+exports[`crud resolvers execution when experimental feature \`groupBy\` is enabled should properly call PrismaClient on \`groupBy\` action with advanced operations: user.groupBy call args 1`] = `
+Array [
+  Array [
+    Object {
+      "by": Array [
+        "intField",
+      ],
+      "count": Object {
+        "_all": true,
+      },
+      "min": Object {
+        "floatField": true,
+        "intField": true,
+      },
+      "where": UserWhereInput {
+        "floatField": IntFilter {
+          "gte": 0,
+        },
+      },
+    },
+  ],
+]
+`;

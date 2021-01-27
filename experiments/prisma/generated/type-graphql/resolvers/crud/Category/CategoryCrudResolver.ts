@@ -8,12 +8,14 @@ import { DeleteManyCategoryArgs } from "./args/DeleteManyCategoryArgs";
 import { FindFirstCategoryArgs } from "./args/FindFirstCategoryArgs";
 import { FindManyCategoryArgs } from "./args/FindManyCategoryArgs";
 import { FindUniqueCategoryArgs } from "./args/FindUniqueCategoryArgs";
+import { GroupByCategoryArgs } from "./args/GroupByCategoryArgs";
 import { UpdateCategoryArgs } from "./args/UpdateCategoryArgs";
 import { UpdateManyCategoryArgs } from "./args/UpdateManyCategoryArgs";
 import { UpsertCategoryArgs } from "./args/UpsertCategoryArgs";
 import { Category } from "../../../models/Category";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
 import { BatchPayload } from "../../outputs/BatchPayload";
+import { CategoryGroupBy } from "../../outputs/CategoryGroupBy";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class CategoryCrudResolver {
@@ -101,6 +103,35 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [CategoryGroupBy], {
+    nullable: false
+  })
+  async groupByCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByCategoryArgs): Promise<CategoryGroupBy[]> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    const { count, avg, sum, min, max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return ctx.prisma.category.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+      ),
     });
   }
 }

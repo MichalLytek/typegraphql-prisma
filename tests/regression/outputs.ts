@@ -187,4 +187,38 @@ describe("outputs", () => {
     expect(avgAggregateTSFile).toMatchSnapshot("SampleAvgAggregate");
     expect(batchPayloadTSFile).toMatchSnapshot("BatchPayload");
   });
+
+  describe("when experimental feature `groupBy` is enabled", () => {
+    it("should generate group by output type for model", async () => {
+      const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model Sample {
+        intIdField    Int       @id @default(autoincrement())
+        stringField   String
+        floatField    Float
+        booleanField  Boolean
+        dateField     DateTime
+      }
+    `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["groupBy"],
+      });
+
+      const sampleGroupByTSFile = await readGeneratedFile(
+        "/resolvers/outputs/SampleGroupBy.ts",
+      );
+      const outputsIndexTSFile = await readGeneratedFile(
+        "/resolvers/outputs/index.ts",
+      );
+
+      expect(sampleGroupByTSFile).toMatchSnapshot("SampleGroupBy");
+      expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
+    });
+  });
 });

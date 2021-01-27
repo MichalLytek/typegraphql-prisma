@@ -774,4 +774,84 @@ describe("inputs", () => {
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });
+
+  describe("when experimental feature `groupBy` is enabled", () => {
+    beforeEach(async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model Sample {
+          idField       Int     @id @default(autoincrement())
+          stringField   String
+          floatField    Float
+          intField      Int
+          booleanField  Boolean
+          dateField     DateTime
+          jsonField     Json
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["groupBy"],
+      });
+    });
+
+    it("should generate proper WithAggregatesFilter for scalars", async () => {
+      // TODO: add nested filter tests
+
+      const stringWithAggregatesFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/StringWithAggregatesFilter.ts",
+      );
+      const floatWithAggregatesFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FloatWithAggregatesFilter.ts",
+      );
+      const intWithAggregatesFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/IntWithAggregatesFilter.ts",
+      );
+      const boolWithAggregatesFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/BoolWithAggregatesFilter.ts",
+      );
+      const dateTimeWithAggregatesFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/DateTimeWithAggregatesFilter.ts",
+      );
+      const jsonWithAggregatesFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/JsonWithAggregatesFilter.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(stringWithAggregatesFilterTSFile).toMatchSnapshot(
+        "StringWithAggregatesFilter",
+      );
+      expect(floatWithAggregatesFilterTSFile).toMatchSnapshot(
+        "FloatWithAggregatesFilter",
+      );
+      expect(intWithAggregatesFilterTSFile).toMatchSnapshot(
+        "IntWithAggregatesFilter",
+      );
+      expect(boolWithAggregatesFilterTSFile).toMatchSnapshot(
+        "BoolWithAggregatesFilter",
+      );
+      expect(dateTimeWithAggregatesFilterTSFile).toMatchSnapshot(
+        "DateTimeWithAggregatesFilter",
+      );
+      expect(jsonWithAggregatesFilterTSFile).toMatchSnapshot(
+        "JsonWithAggregatesFilter",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+
+    it("should generate proper ScalarWhereWithAggregatesInput for model", async () => {
+      const sampleScalarWhereWithAggregatesInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleScalarWhereWithAggregatesInput.ts",
+      );
+
+      expect(sampleScalarWhereWithAggregatesInputTSFile).toMatchSnapshot(
+        "SampleScalarWhereWithAggregatesInput",
+      );
+    });
+  });
 });

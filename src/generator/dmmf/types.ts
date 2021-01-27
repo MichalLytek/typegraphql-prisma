@@ -213,7 +213,7 @@ export namespace DMMF {
     upsert = "upsert",
     delete = "delete",
     deleteMany = "deleteMany",
-    // groupBy = "groupBy",
+    groupBy = "groupBy",
     // count = "count",
     aggregate = "aggregate",
   }

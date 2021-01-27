@@ -451,4 +451,82 @@ describe("crud resolvers execution", () => {
       );
     });
   });
+  describe("when experimental feature `groupBy` is enabled", () => {
+    beforeAll(async () => {
+      outputDirPath = generateArtifactsDirPath("functional-crud");
+      await fs.mkdir(outputDirPath, { recursive: true });
+      const prismaSchema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model User {
+          idField     Int  @id @default(autoincrement())
+          intField    Int
+          floatField  Int
+        }
+      `;
+      await generateCodeFromSchema(prismaSchema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["groupBy"],
+      });
+      const { UserCrudResolver } = require(outputDirPath +
+        "/resolvers/crud/User/UserCrudResolver.ts");
+
+      graphQLSchema = await buildSchema({
+        resolvers: [UserCrudResolver],
+        validate: false,
+      });
+    });
+
+    it("should properly call PrismaClient on `groupBy` action with advanced operations", async () => {
+      const document = /* graphql */ `
+        query {
+          groupByUser(
+            by: [intField]
+            where: { floatField: { gte: 0 } }
+          ) {
+            __typename
+            intField
+            count {
+              __typename
+              _all
+            }
+            min {
+              __typename
+              intField
+              floatField
+            }
+          }
+        }
+      `;
+      const prismaMock = {
+        user: {
+          groupBy: jest.fn().mockResolvedValue([
+            {
+              intField: 10,
+              count: {
+                _all: 5,
+              },
+              min: {
+                intField: 0,
+                floatField: 0,
+              },
+            },
+          ]),
+        },
+      };
+
+      const { data, errors } = await graphql(graphQLSchema, document, null, {
+        prisma: prismaMock,
+      });
+
+      expect(errors).toBeUndefined();
+      expect(data).toMatchSnapshot("groupByUser mocked response");
+      expect(prismaMock.user.groupBy.mock.calls).toMatchSnapshot(
+        "user.groupBy call args",
+      );
+    });
+  });
 });

@@ -8,12 +8,14 @@ import { DeleteManyCreatorArgs } from "./args/DeleteManyCreatorArgs";
 import { FindFirstCreatorArgs } from "./args/FindFirstCreatorArgs";
 import { FindManyCreatorArgs } from "./args/FindManyCreatorArgs";
 import { FindUniqueCreatorArgs } from "./args/FindUniqueCreatorArgs";
+import { GroupByCreatorArgs } from "./args/GroupByCreatorArgs";
 import { UpdateCreatorArgs } from "./args/UpdateCreatorArgs";
 import { UpdateManyCreatorArgs } from "./args/UpdateManyCreatorArgs";
 import { UpsertCreatorArgs } from "./args/UpsertCreatorArgs";
 import { Creator } from "../../../models/Creator";
 import { AggregateCreator } from "../../outputs/AggregateCreator";
 import { BatchPayload } from "../../outputs/BatchPayload";
+import { CreatorGroupBy } from "../../outputs/CreatorGroupBy";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class CreatorCrudResolver {
@@ -101,6 +103,35 @@ export class CreatorCrudResolver {
     return ctx.prisma.creator.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [CreatorGroupBy], {
+    nullable: false
+  })
+  async groupByCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByCreatorArgs): Promise<CreatorGroupBy[]> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith("__"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    const { count, avg, sum, min, max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return ctx.prisma.creator.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+      ),
     });
   }
 }

@@ -949,6 +949,44 @@ export namespace Prisma {
   }
 
 
+    
+    
+  export type UserGroupByArgs = {
+    where?: UserWhereInput
+    orderBy?: Enumerable<UserOrderByInput>
+    by: Array<UserScalarFieldEnum>
+    having?: UserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: UserCountAggregateInputType | true
+    avg?: UserAvgAggregateInputType
+    sum?: UserSumAggregateInputType
+    min?: UserMinAggregateInputType
+    max?: UserMaxAggregateInputType
+  }
+
+
+  export type UserGroupByOutputType = {
+    id: number
+    email: string
+    name: string | null
+    age: number
+    balance: number
+    amount: number
+    role: Role
+    count: UserCountAggregateOutputType | null
+    avg: UserAvgAggregateOutputType | null
+    sum: UserSumAggregateOutputType | null
+    min: UserMinAggregateOutputType | null
+    max: UserMaxAggregateOutputType | null
+  }
+
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Promise<Array<
+    PickArray<UserGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof UserGroupByOutputType))]: GetScalarType<T[P], UserGroupByOutputType[P]>
+    }
+  >>
+    
 
   export type UserSelect = {
     id?: boolean
@@ -1203,7 +1241,80 @@ export namespace Prisma {
     **/
     aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Promise<GetUserAggregateType<T>>
 
-
+    /**
+     * Group by User.
+     * @param {UserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -1688,6 +1799,48 @@ export namespace Prisma {
   }
 
 
+    
+    
+  export type PostGroupByArgs = {
+    where?: postWhereInput
+    orderBy?: Enumerable<postOrderByInput>
+    by: Array<PostScalarFieldEnum>
+    having?: postScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: PostCountAggregateInputType | true
+    avg?: PostAvgAggregateInputType
+    sum?: PostSumAggregateInputType
+    min?: PostMinAggregateInputType
+    max?: PostMaxAggregateInputType
+  }
+
+
+  export type PostGroupByOutputType = {
+    uuid: string
+    createdAt: Date
+    updatedAt: Date
+    published: boolean
+    title: string
+    subtitle: string
+    content: string | null
+    authorId: number
+    editorId: number | null
+    kind: PostKind | null
+    metadata: JsonValue
+    count: PostCountAggregateOutputType | null
+    avg: PostAvgAggregateOutputType | null
+    sum: PostSumAggregateOutputType | null
+    min: PostMinAggregateOutputType | null
+    max: PostMaxAggregateOutputType | null
+  }
+
+  type GetPostGroupByPayload<T extends PostGroupByArgs> = Promise<Array<
+    PickArray<PostGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof PostGroupByOutputType))]: GetScalarType<T[P], PostGroupByOutputType[P]>
+    }
+  >>
+    
 
   export type postSelect = {
     uuid?: boolean
@@ -1946,7 +2099,80 @@ export namespace Prisma {
     **/
     aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): Promise<GetPostAggregateType<T>>
 
-
+    /**
+     * Group by Post.
+     * @param {PostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PostGroupByArgs['orderBy'] }
+        : { orderBy?: PostGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -2379,6 +2605,40 @@ export namespace Prisma {
   }
 
 
+    
+    
+  export type CategoryGroupByArgs = {
+    where?: CategoryWhereInput
+    orderBy?: Enumerable<CategoryOrderByInput>
+    by: Array<CategoryScalarFieldEnum>
+    having?: CategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: CategoryCountAggregateInputType | true
+    avg?: CategoryAvgAggregateInputType
+    sum?: CategorySumAggregateInputType
+    min?: CategoryMinAggregateInputType
+    max?: CategoryMaxAggregateInputType
+  }
+
+
+  export type CategoryGroupByOutputType = {
+    name: string
+    slug: string
+    number: number
+    count: CategoryCountAggregateOutputType | null
+    avg: CategoryAvgAggregateOutputType | null
+    sum: CategorySumAggregateOutputType | null
+    min: CategoryMinAggregateOutputType | null
+    max: CategoryMaxAggregateOutputType | null
+  }
+
+  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = Promise<Array<
+    PickArray<CategoryGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof CategoryGroupByOutputType))]: GetScalarType<T[P], CategoryGroupByOutputType[P]>
+    }
+  >>
+    
 
   export type CategorySelect = {
     name?: boolean
@@ -2613,7 +2873,80 @@ export namespace Prisma {
     **/
     aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): Promise<GetCategoryAggregateType<T>>
 
-
+    /**
+     * Group by Category.
+     * @param {CategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CategoryGroupByArgs['orderBy'] }
+        : { orderBy?: CategoryGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -2981,6 +3314,36 @@ export namespace Prisma {
   }
 
 
+    
+    
+  export type PatientGroupByArgs = {
+    where?: PatientWhereInput
+    orderBy?: Enumerable<PatientOrderByInput>
+    by: Array<PatientScalarFieldEnum>
+    having?: PatientScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: PatientCountAggregateInputType | true
+    min?: PatientMinAggregateInputType
+    max?: PatientMaxAggregateInputType
+  }
+
+
+  export type PatientGroupByOutputType = {
+    firstName: string
+    lastName: string
+    email: string
+    count: PatientCountAggregateOutputType | null
+    min: PatientMinAggregateOutputType | null
+    max: PatientMaxAggregateOutputType | null
+  }
+
+  type GetPatientGroupByPayload<T extends PatientGroupByArgs> = Promise<Array<
+    PickArray<PatientGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof PatientGroupByOutputType))]: GetScalarType<T[P], PatientGroupByOutputType[P]>
+    }
+  >>
+    
 
   export type PatientSelect = {
     firstName?: boolean
@@ -3215,7 +3578,80 @@ export namespace Prisma {
     **/
     aggregate<T extends PatientAggregateArgs>(args: Subset<T, PatientAggregateArgs>): Promise<GetPatientAggregateType<T>>
 
-
+    /**
+     * Group by Patient.
+     * @param {PatientGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PatientGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PatientGroupByArgs['orderBy'] }
+        : { orderBy?: PatientGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PatientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPatientGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -3583,6 +4019,36 @@ export namespace Prisma {
   }
 
 
+    
+    
+  export type MovieGroupByArgs = {
+    where?: MovieWhereInput
+    orderBy?: Enumerable<MovieOrderByInput>
+    by: Array<MovieScalarFieldEnum>
+    having?: MovieScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: MovieCountAggregateInputType | true
+    min?: MovieMinAggregateInputType
+    max?: MovieMaxAggregateInputType
+  }
+
+
+  export type MovieGroupByOutputType = {
+    directorFirstName: string
+    directorLastName: string
+    title: string
+    count: MovieCountAggregateOutputType | null
+    min: MovieMinAggregateOutputType | null
+    max: MovieMaxAggregateOutputType | null
+  }
+
+  type GetMovieGroupByPayload<T extends MovieGroupByArgs> = Promise<Array<
+    PickArray<MovieGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof MovieGroupByOutputType))]: GetScalarType<T[P], MovieGroupByOutputType[P]>
+    }
+  >>
+    
 
   export type MovieSelect = {
     directorFirstName?: boolean
@@ -3827,7 +4293,80 @@ export namespace Prisma {
     **/
     aggregate<T extends MovieAggregateArgs>(args: Subset<T, MovieAggregateArgs>): Promise<GetMovieAggregateType<T>>
 
-
+    /**
+     * Group by Movie.
+     * @param {MovieGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MovieGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MovieGroupByArgs['orderBy'] }
+        : { orderBy?: MovieGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MovieGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMovieGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -4222,6 +4761,35 @@ export namespace Prisma {
   }
 
 
+    
+    
+  export type DirectorGroupByArgs = {
+    where?: DirectorWhereInput
+    orderBy?: Enumerable<DirectorOrderByInput>
+    by: Array<DirectorScalarFieldEnum>
+    having?: DirectorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: DirectorCountAggregateInputType | true
+    min?: DirectorMinAggregateInputType
+    max?: DirectorMaxAggregateInputType
+  }
+
+
+  export type DirectorGroupByOutputType = {
+    firstName: string
+    lastName: string
+    count: DirectorCountAggregateOutputType | null
+    min: DirectorMinAggregateOutputType | null
+    max: DirectorMaxAggregateOutputType | null
+  }
+
+  type GetDirectorGroupByPayload<T extends DirectorGroupByArgs> = Promise<Array<
+    PickArray<DirectorGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof DirectorGroupByOutputType))]: GetScalarType<T[P], DirectorGroupByOutputType[P]>
+    }
+  >>
+    
 
   export type DirectorSelect = {
     firstName?: boolean
@@ -4465,7 +5033,80 @@ export namespace Prisma {
     **/
     aggregate<T extends DirectorAggregateArgs>(args: Subset<T, DirectorAggregateArgs>): Promise<GetDirectorAggregateType<T>>
 
-
+    /**
+     * Group by Director.
+     * @param {DirectorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DirectorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DirectorGroupByArgs['orderBy'] }
+        : { orderBy?: DirectorGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DirectorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDirectorGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -4900,6 +5541,40 @@ export namespace Prisma {
   }
 
 
+    
+    
+  export type ProblemGroupByArgs = {
+    where?: ProblemWhereInput
+    orderBy?: Enumerable<ProblemOrderByInput>
+    by: Array<ProblemScalarFieldEnum>
+    having?: ProblemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: ProblemCountAggregateInputType | true
+    avg?: ProblemAvgAggregateInputType
+    sum?: ProblemSumAggregateInputType
+    min?: ProblemMinAggregateInputType
+    max?: ProblemMaxAggregateInputType
+  }
+
+
+  export type ProblemGroupByOutputType = {
+    id: number
+    problemText: string
+    creatorId: number | null
+    count: ProblemCountAggregateOutputType | null
+    avg: ProblemAvgAggregateOutputType | null
+    sum: ProblemSumAggregateOutputType | null
+    min: ProblemMinAggregateOutputType | null
+    max: ProblemMaxAggregateOutputType | null
+  }
+
+  type GetProblemGroupByPayload<T extends ProblemGroupByArgs> = Promise<Array<
+    PickArray<ProblemGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof ProblemGroupByOutputType))]: GetScalarType<T[P], ProblemGroupByOutputType[P]>
+    }
+  >>
+    
 
   export type ProblemSelect = {
     id?: boolean
@@ -5150,7 +5825,80 @@ export namespace Prisma {
     **/
     aggregate<T extends ProblemAggregateArgs>(args: Subset<T, ProblemAggregateArgs>): Promise<GetProblemAggregateType<T>>
 
-
+    /**
+     * Group by Problem.
+     * @param {ProblemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProblemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProblemGroupByArgs['orderBy'] }
+        : { orderBy?: ProblemGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProblemGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -5577,6 +6325,39 @@ export namespace Prisma {
   }
 
 
+    
+    
+  export type CreatorGroupByArgs = {
+    where?: CreatorWhereInput
+    orderBy?: Enumerable<CreatorOrderByInput>
+    by: Array<CreatorScalarFieldEnum>
+    having?: CreatorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: CreatorCountAggregateInputType | true
+    avg?: CreatorAvgAggregateInputType
+    sum?: CreatorSumAggregateInputType
+    min?: CreatorMinAggregateInputType
+    max?: CreatorMaxAggregateInputType
+  }
+
+
+  export type CreatorGroupByOutputType = {
+    id: number
+    name: string
+    count: CreatorCountAggregateOutputType | null
+    avg: CreatorAvgAggregateOutputType | null
+    sum: CreatorSumAggregateOutputType | null
+    min: CreatorMinAggregateOutputType | null
+    max: CreatorMaxAggregateOutputType | null
+  }
+
+  type GetCreatorGroupByPayload<T extends CreatorGroupByArgs> = Promise<Array<
+    PickArray<CreatorGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof CreatorGroupByOutputType))]: GetScalarType<T[P], CreatorGroupByOutputType[P]>
+    }
+  >>
+    
 
   export type CreatorSelect = {
     id?: boolean
@@ -5826,7 +6607,80 @@ export namespace Prisma {
     **/
     aggregate<T extends CreatorAggregateArgs>(args: Subset<T, CreatorAggregateArgs>): Promise<GetCreatorAggregateType<T>>
 
-
+    /**
+     * Group by Creator.
+     * @param {CreatorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CreatorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CreatorGroupByArgs['orderBy'] }
+        : { orderBy?: CreatorGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CreatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCreatorGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -6261,6 +7115,19 @@ export namespace Prisma {
     email?: string
   }
 
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<UserScalarWhereWithAggregatesInput>
+    OR?: Enumerable<UserScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<UserScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
+    email?: StringWithAggregatesFilter | string
+    name?: StringNullableWithAggregatesFilter | string | null
+    age?: IntWithAggregatesFilter | number
+    balance?: FloatWithAggregatesFilter | number
+    amount?: FloatWithAggregatesFilter | number
+    role?: EnumRoleWithAggregatesFilter | Role
+  }
+
   export type postWhereInput = {
     AND?: Enumerable<postWhereInput>
     OR?: Enumerable<postWhereInput>
@@ -6298,6 +7165,23 @@ export namespace Prisma {
     uuid?: string
   }
 
+  export type postScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<postScalarWhereWithAggregatesInput>
+    OR?: Enumerable<postScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<postScalarWhereWithAggregatesInput>
+    uuid?: StringWithAggregatesFilter | string
+    createdAt?: DateTimeWithAggregatesFilter | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter | Date | string
+    published?: BoolWithAggregatesFilter | boolean
+    title?: StringWithAggregatesFilter | string
+    subtitle?: StringWithAggregatesFilter | string
+    content?: StringNullableWithAggregatesFilter | string | null
+    authorId?: IntWithAggregatesFilter | number
+    editorId?: IntNullableWithAggregatesFilter | number | null
+    kind?: EnumPostKindNullableWithAggregatesFilter | PostKind | null
+    metadata?: JsonWithAggregatesFilter
+  }
+
   export type CategoryWhereInput = {
     AND?: Enumerable<CategoryWhereInput>
     OR?: Enumerable<CategoryWhereInput>
@@ -6317,6 +7201,15 @@ export namespace Prisma {
     slug_number?: CategorySlugNumberCompoundUniqueInput
   }
 
+  export type CategoryScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<CategoryScalarWhereWithAggregatesInput>
+    OR?: Enumerable<CategoryScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<CategoryScalarWhereWithAggregatesInput>
+    name?: StringWithAggregatesFilter | string
+    slug?: StringWithAggregatesFilter | string
+    number?: IntWithAggregatesFilter | number
+  }
+
   export type PatientWhereInput = {
     AND?: Enumerable<PatientWhereInput>
     OR?: Enumerable<PatientWhereInput>
@@ -6334,6 +7227,15 @@ export namespace Prisma {
 
   export type PatientWhereUniqueInput = {
     firstName_lastName?: PatientFirstNameLastNameCompoundUniqueInput
+  }
+
+  export type PatientScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<PatientScalarWhereWithAggregatesInput>
+    OR?: Enumerable<PatientScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<PatientScalarWhereWithAggregatesInput>
+    firstName?: StringWithAggregatesFilter | string
+    lastName?: StringWithAggregatesFilter | string
+    email?: StringWithAggregatesFilter | string
   }
 
   export type MovieWhereInput = {
@@ -6356,6 +7258,15 @@ export namespace Prisma {
     directorFirstName_directorLastName_title?: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
   }
 
+  export type MovieScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<MovieScalarWhereWithAggregatesInput>
+    OR?: Enumerable<MovieScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<MovieScalarWhereWithAggregatesInput>
+    directorFirstName?: StringWithAggregatesFilter | string
+    directorLastName?: StringWithAggregatesFilter | string
+    title?: StringWithAggregatesFilter | string
+  }
+
   export type DirectorWhereInput = {
     AND?: Enumerable<DirectorWhereInput>
     OR?: Enumerable<DirectorWhereInput>
@@ -6372,6 +7283,14 @@ export namespace Prisma {
 
   export type DirectorWhereUniqueInput = {
     firstName_lastName?: DirectorFirstNameLastNameCompoundUniqueInput
+  }
+
+  export type DirectorScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<DirectorScalarWhereWithAggregatesInput>
+    OR?: Enumerable<DirectorScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<DirectorScalarWhereWithAggregatesInput>
+    firstName?: StringWithAggregatesFilter | string
+    lastName?: StringWithAggregatesFilter | string
   }
 
   export type ProblemWhereInput = {
@@ -6395,6 +7314,15 @@ export namespace Prisma {
     id?: number
   }
 
+  export type ProblemScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<ProblemScalarWhereWithAggregatesInput>
+    OR?: Enumerable<ProblemScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<ProblemScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
+    problemText?: StringWithAggregatesFilter | string
+    creatorId?: IntNullableWithAggregatesFilter | number | null
+  }
+
   export type CreatorWhereInput = {
     AND?: Enumerable<CreatorWhereInput>
     OR?: Enumerable<CreatorWhereInput>
@@ -6412,6 +7340,14 @@ export namespace Prisma {
 
   export type CreatorWhereUniqueInput = {
     id?: number
+  }
+
+  export type CreatorScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<CreatorScalarWhereWithAggregatesInput>
+    OR?: Enumerable<CreatorScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<CreatorScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
+    name?: StringWithAggregatesFilter | string
   }
 
   export type UserCreateInput = {
@@ -6831,6 +7767,84 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter | Role
   }
 
+  export type IntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    count?: NestedIntFilter
+    avg?: NestedFloatFilter
+    sum?: NestedIntFilter
+    min?: NestedIntFilter
+    max?: NestedIntFilter
+  }
+
+  export type StringWithAggregatesFilter = {
+    equals?: string
+    in?: Enumerable<string>
+    notIn?: Enumerable<string>
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter | string
+    count?: NestedIntFilter
+    min?: NestedStringFilter
+    max?: NestedStringFilter
+  }
+
+  export type StringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter | string | null
+    count?: NestedIntNullableFilter
+    min?: NestedStringNullableFilter
+    max?: NestedStringNullableFilter
+  }
+
+  export type FloatWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatWithAggregatesFilter | number
+    count?: NestedIntFilter
+    avg?: NestedFloatFilter
+    sum?: NestedFloatFilter
+    min?: NestedFloatFilter
+    max?: NestedFloatFilter
+  }
+
+  export type EnumRoleWithAggregatesFilter = {
+    equals?: Role
+    in?: Enumerable<Role>
+    notIn?: Enumerable<Role>
+    not?: NestedEnumRoleWithAggregatesFilter | Role
+    count?: NestedIntFilter
+    min?: NestedEnumRoleFilter
+    max?: NestedEnumRoleFilter
+  }
+
   export type DateTimeFilter = {
     equals?: Date | string
     in?: Enumerable<Date> | Enumerable<string>
@@ -6873,6 +7887,62 @@ export namespace Prisma {
   export type JsonFilter = {
     equals?: InputJsonValue
     not?: InputJsonValue
+  }
+
+  export type DateTimeWithAggregatesFilter = {
+    equals?: Date | string
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string
+    lte?: Date | string
+    gt?: Date | string
+    gte?: Date | string
+    not?: NestedDateTimeWithAggregatesFilter | Date | string
+    count?: NestedIntFilter
+    min?: NestedDateTimeFilter
+    max?: NestedDateTimeFilter
+  }
+
+  export type BoolWithAggregatesFilter = {
+    equals?: boolean
+    not?: NestedBoolWithAggregatesFilter | boolean
+    count?: NestedIntFilter
+    min?: NestedBoolFilter
+    max?: NestedBoolFilter
+  }
+
+  export type IntNullableWithAggregatesFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntNullableWithAggregatesFilter | number | null
+    count?: NestedIntNullableFilter
+    avg?: NestedFloatNullableFilter
+    sum?: NestedIntNullableFilter
+    min?: NestedIntNullableFilter
+    max?: NestedIntNullableFilter
+  }
+
+  export type EnumPostKindNullableWithAggregatesFilter = {
+    equals?: PostKind | null
+    in?: Enumerable<PostKind> | null
+    notIn?: Enumerable<PostKind> | null
+    not?: NestedEnumPostKindNullableWithAggregatesFilter | PostKind | null
+    count?: NestedIntNullableFilter
+    min?: NestedEnumPostKindNullableFilter
+    max?: NestedEnumPostKindNullableFilter
+  }
+
+  export type JsonWithAggregatesFilter = {
+    equals?: InputJsonValue
+    not?: InputJsonValue
+    count?: NestedIntFilter
+    min?: NestedJsonFilter
+    max?: NestedJsonFilter
   }
 
   export type CategorySlugNumberCompoundUniqueInput = {
@@ -7279,6 +8349,93 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter | Role
   }
 
+  export type NestedIntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    count?: NestedIntFilter
+    avg?: NestedFloatFilter
+    sum?: NestedIntFilter
+    min?: NestedIntFilter
+    max?: NestedIntFilter
+  }
+
+  export type NestedStringWithAggregatesFilter = {
+    equals?: string
+    in?: Enumerable<string>
+    notIn?: Enumerable<string>
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringWithAggregatesFilter | string
+    count?: NestedIntFilter
+    min?: NestedStringFilter
+    max?: NestedStringFilter
+  }
+
+  export type NestedStringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableWithAggregatesFilter | string | null
+    count?: NestedIntNullableFilter
+    min?: NestedStringNullableFilter
+    max?: NestedStringNullableFilter
+  }
+
+  export type NestedIntNullableFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntNullableFilter | number | null
+  }
+
+  export type NestedFloatWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatWithAggregatesFilter | number
+    count?: NestedIntFilter
+    avg?: NestedFloatFilter
+    sum?: NestedFloatFilter
+    min?: NestedFloatFilter
+    max?: NestedFloatFilter
+  }
+
+  export type NestedEnumRoleWithAggregatesFilter = {
+    equals?: Role
+    in?: Enumerable<Role>
+    notIn?: Enumerable<Role>
+    not?: NestedEnumRoleWithAggregatesFilter | Role
+    count?: NestedIntFilter
+    min?: NestedEnumRoleFilter
+    max?: NestedEnumRoleFilter
+  }
+
   export type NestedDateTimeFilter = {
     equals?: Date | string
     in?: Enumerable<Date> | Enumerable<string>
@@ -7295,7 +8452,36 @@ export namespace Prisma {
     not?: NestedBoolFilter | boolean
   }
 
-  export type NestedIntNullableFilter = {
+  export type NestedEnumPostKindNullableFilter = {
+    equals?: PostKind | null
+    in?: Enumerable<PostKind> | null
+    notIn?: Enumerable<PostKind> | null
+    not?: NestedEnumPostKindNullableFilter | PostKind | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter = {
+    equals?: Date | string
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string
+    lte?: Date | string
+    gt?: Date | string
+    gte?: Date | string
+    not?: NestedDateTimeWithAggregatesFilter | Date | string
+    count?: NestedIntFilter
+    min?: NestedDateTimeFilter
+    max?: NestedDateTimeFilter
+  }
+
+  export type NestedBoolWithAggregatesFilter = {
+    equals?: boolean
+    not?: NestedBoolWithAggregatesFilter | boolean
+    count?: NestedIntFilter
+    min?: NestedBoolFilter
+    max?: NestedBoolFilter
+  }
+
+  export type NestedIntNullableWithAggregatesFilter = {
     equals?: number | null
     in?: Enumerable<number> | null
     notIn?: Enumerable<number> | null
@@ -7303,14 +8489,38 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: NestedIntNullableFilter | number | null
+    not?: NestedIntNullableWithAggregatesFilter | number | null
+    count?: NestedIntNullableFilter
+    avg?: NestedFloatNullableFilter
+    sum?: NestedIntNullableFilter
+    min?: NestedIntNullableFilter
+    max?: NestedIntNullableFilter
   }
 
-  export type NestedEnumPostKindNullableFilter = {
+  export type NestedFloatNullableFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatNullableFilter | number | null
+  }
+
+  export type NestedEnumPostKindNullableWithAggregatesFilter = {
     equals?: PostKind | null
     in?: Enumerable<PostKind> | null
     notIn?: Enumerable<PostKind> | null
-    not?: NestedEnumPostKindNullableFilter | PostKind | null
+    not?: NestedEnumPostKindNullableWithAggregatesFilter | PostKind | null
+    count?: NestedIntNullableFilter
+    min?: NestedEnumPostKindNullableFilter
+    max?: NestedEnumPostKindNullableFilter
+  }
+
+  export type NestedJsonFilter = {
+    equals?: InputJsonValue
+    not?: InputJsonValue
   }
 
   export type postCreateWithoutAuthorInput = {

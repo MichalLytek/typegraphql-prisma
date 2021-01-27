@@ -5,6 +5,7 @@ export { DeleteProblemArgs } from "./DeleteProblemArgs";
 export { FindFirstProblemArgs } from "./FindFirstProblemArgs";
 export { FindManyProblemArgs } from "./FindManyProblemArgs";
 export { FindUniqueProblemArgs } from "./FindUniqueProblemArgs";
+export { GroupByProblemArgs } from "./GroupByProblemArgs";
 export { UpdateManyProblemArgs } from "./UpdateManyProblemArgs";
 export { UpdateProblemArgs } from "./UpdateProblemArgs";
 export { UpsertProblemArgs } from "./UpsertProblemArgs";

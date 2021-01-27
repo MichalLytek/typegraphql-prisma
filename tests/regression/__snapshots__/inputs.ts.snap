@@ -2350,6 +2350,513 @@ export { StringFilter } from \\"./StringFilter\\";
 "
 `;
 
+exports[`inputs when experimental feature \`groupBy\` is enabled should generate proper ScalarWhereWithAggregatesInput for model: SampleScalarWhereWithAggregatesInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { BoolWithAggregatesFilter } from \\"../inputs/BoolWithAggregatesFilter\\";
+import { DateTimeWithAggregatesFilter } from \\"../inputs/DateTimeWithAggregatesFilter\\";
+import { FloatWithAggregatesFilter } from \\"../inputs/FloatWithAggregatesFilter\\";
+import { IntWithAggregatesFilter } from \\"../inputs/IntWithAggregatesFilter\\";
+import { JsonWithAggregatesFilter } from \\"../inputs/JsonWithAggregatesFilter\\";
+import { StringWithAggregatesFilter } from \\"../inputs/StringWithAggregatesFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SampleScalarWhereWithAggregatesInput {
+  @TypeGraphQL.Field(_type => [SampleScalarWhereWithAggregatesInput], {
+    nullable: true
+  })
+  AND?: SampleScalarWhereWithAggregatesInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleScalarWhereWithAggregatesInput], {
+    nullable: true
+  })
+  OR?: SampleScalarWhereWithAggregatesInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleScalarWhereWithAggregatesInput], {
+    nullable: true
+  })
+  NOT?: SampleScalarWhereWithAggregatesInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => IntWithAggregatesFilter, {
+    nullable: true
+  })
+  idField?: IntWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+    nullable: true
+  })
+  stringField?: StringWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => FloatWithAggregatesFilter, {
+    nullable: true
+  })
+  floatField?: FloatWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => IntWithAggregatesFilter, {
+    nullable: true
+  })
+  intField?: IntWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => BoolWithAggregatesFilter, {
+    nullable: true
+  })
+  booleanField?: BoolWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeWithAggregatesFilter, {
+    nullable: true
+  })
+  dateField?: DateTimeWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => JsonWithAggregatesFilter, {
+    nullable: true
+  })
+  jsonField?: JsonWithAggregatesFilter | undefined;
+}
+"
+`;
+
+exports[`inputs when experimental feature \`groupBy\` is enabled should generate proper WithAggregatesFilter for scalars: BoolWithAggregatesFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { NestedBoolFilter } from \\"../inputs/NestedBoolFilter\\";
+import { NestedBoolWithAggregatesFilter } from \\"../inputs/NestedBoolWithAggregatesFilter\\";
+import { NestedIntFilter } from \\"../inputs/NestedIntFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class BoolWithAggregatesFilter {
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  equals?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => NestedBoolWithAggregatesFilter, {
+    nullable: true
+  })
+  not?: NestedBoolWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  count?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedBoolFilter, {
+    nullable: true
+  })
+  min?: NestedBoolFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedBoolFilter, {
+    nullable: true
+  })
+  max?: NestedBoolFilter | undefined;
+}
+"
+`;
+
+exports[`inputs when experimental feature \`groupBy\` is enabled should generate proper WithAggregatesFilter for scalars: DateTimeWithAggregatesFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { NestedDateTimeFilter } from \\"../inputs/NestedDateTimeFilter\\";
+import { NestedDateTimeWithAggregatesFilter } from \\"../inputs/NestedDateTimeWithAggregatesFilter\\";
+import { NestedIntFilter } from \\"../inputs/NestedIntFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class DateTimeWithAggregatesFilter {
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  equals?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => [Date], {
+    nullable: true
+  })
+  in?: Date[] | undefined;
+
+  @TypeGraphQL.Field(_type => [Date], {
+    nullable: true
+  })
+  notIn?: Date[] | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  lt?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  lte?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  gt?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  gte?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => NestedDateTimeWithAggregatesFilter, {
+    nullable: true
+  })
+  not?: NestedDateTimeWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  count?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedDateTimeFilter, {
+    nullable: true
+  })
+  min?: NestedDateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedDateTimeFilter, {
+    nullable: true
+  })
+  max?: NestedDateTimeFilter | undefined;
+}
+"
+`;
+
+exports[`inputs when experimental feature \`groupBy\` is enabled should generate proper WithAggregatesFilter for scalars: FloatWithAggregatesFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { NestedFloatFilter } from \\"../inputs/NestedFloatFilter\\";
+import { NestedFloatWithAggregatesFilter } from \\"../inputs/NestedFloatWithAggregatesFilter\\";
+import { NestedIntFilter } from \\"../inputs/NestedIntFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FloatWithAggregatesFilter {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  equals?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Float], {
+    nullable: true
+  })
+  in?: number[] | undefined;
+
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Float], {
+    nullable: true
+  })
+  notIn?: number[] | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  lt?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  lte?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  gt?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  gte?: number | undefined;
+
+  @TypeGraphQL.Field(_type => NestedFloatWithAggregatesFilter, {
+    nullable: true
+  })
+  not?: NestedFloatWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  count?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedFloatFilter, {
+    nullable: true
+  })
+  avg?: NestedFloatFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedFloatFilter, {
+    nullable: true
+  })
+  sum?: NestedFloatFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedFloatFilter, {
+    nullable: true
+  })
+  min?: NestedFloatFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedFloatFilter, {
+    nullable: true
+  })
+  max?: NestedFloatFilter | undefined;
+}
+"
+`;
+
+exports[`inputs when experimental feature \`groupBy\` is enabled should generate proper WithAggregatesFilter for scalars: IntWithAggregatesFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { NestedFloatFilter } from \\"../inputs/NestedFloatFilter\\";
+import { NestedIntFilter } from \\"../inputs/NestedIntFilter\\";
+import { NestedIntWithAggregatesFilter } from \\"../inputs/NestedIntWithAggregatesFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class IntWithAggregatesFilter {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  equals?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
+    nullable: true
+  })
+  in?: number[] | undefined;
+
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
+    nullable: true
+  })
+  notIn?: number[] | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  lt?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  lte?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  gt?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  gte?: number | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntWithAggregatesFilter, {
+    nullable: true
+  })
+  not?: NestedIntWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  count?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedFloatFilter, {
+    nullable: true
+  })
+  avg?: NestedFloatFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  sum?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  min?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  max?: NestedIntFilter | undefined;
+}
+"
+`;
+
+exports[`inputs when experimental feature \`groupBy\` is enabled should generate proper WithAggregatesFilter for scalars: JsonWithAggregatesFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { NestedIntFilter } from \\"../inputs/NestedIntFilter\\";
+import { NestedJsonFilter } from \\"../inputs/NestedJsonFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class JsonWithAggregatesFilter {
+  @TypeGraphQL.Field(_type => GraphQLJSON, {
+    nullable: true
+  })
+  equals?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLJSON, {
+    nullable: true
+  })
+  not?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  count?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedJsonFilter, {
+    nullable: true
+  })
+  min?: NestedJsonFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedJsonFilter, {
+    nullable: true
+  })
+  max?: NestedJsonFilter | undefined;
+}
+"
+`;
+
+exports[`inputs when experimental feature \`groupBy\` is enabled should generate proper WithAggregatesFilter for scalars: StringWithAggregatesFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { NestedIntFilter } from \\"../inputs/NestedIntFilter\\";
+import { NestedStringFilter } from \\"../inputs/NestedStringFilter\\";
+import { NestedStringWithAggregatesFilter } from \\"../inputs/NestedStringWithAggregatesFilter\\";
+import { QueryMode } from \\"../../enums/QueryMode\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class StringWithAggregatesFilter {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  equals?: string | undefined;
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: true
+  })
+  in?: string[] | undefined;
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: true
+  })
+  notIn?: string[] | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  lt?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  lte?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  gt?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  gte?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  contains?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  startsWith?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  endsWith?: string | undefined;
+
+  @TypeGraphQL.Field(_type => QueryMode, {
+    nullable: true
+  })
+  mode?: \\"default\\" | \\"insensitive\\" | undefined;
+
+  @TypeGraphQL.Field(_type => NestedStringWithAggregatesFilter, {
+    nullable: true
+  })
+  not?: NestedStringWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  count?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedStringFilter, {
+    nullable: true
+  })
+  min?: NestedStringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedStringFilter, {
+    nullable: true
+  })
+  max?: NestedStringFilter | undefined;
+}
+"
+`;
+
+exports[`inputs when experimental feature \`groupBy\` is enabled should generate proper WithAggregatesFilter for scalars: index 1`] = `
+"export { BoolFieldUpdateOperationsInput } from \\"./BoolFieldUpdateOperationsInput\\";
+export { BoolFilter } from \\"./BoolFilter\\";
+export { BoolWithAggregatesFilter } from \\"./BoolWithAggregatesFilter\\";
+export { DateTimeFieldUpdateOperationsInput } from \\"./DateTimeFieldUpdateOperationsInput\\";
+export { DateTimeFilter } from \\"./DateTimeFilter\\";
+export { DateTimeWithAggregatesFilter } from \\"./DateTimeWithAggregatesFilter\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { FloatWithAggregatesFilter } from \\"./FloatWithAggregatesFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { IntWithAggregatesFilter } from \\"./IntWithAggregatesFilter\\";
+export { JsonFilter } from \\"./JsonFilter\\";
+export { JsonWithAggregatesFilter } from \\"./JsonWithAggregatesFilter\\";
+export { NestedBoolFilter } from \\"./NestedBoolFilter\\";
+export { NestedBoolWithAggregatesFilter } from \\"./NestedBoolWithAggregatesFilter\\";
+export { NestedDateTimeFilter } from \\"./NestedDateTimeFilter\\";
+export { NestedDateTimeWithAggregatesFilter } from \\"./NestedDateTimeWithAggregatesFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedFloatWithAggregatesFilter } from \\"./NestedFloatWithAggregatesFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedIntWithAggregatesFilter } from \\"./NestedIntWithAggregatesFilter\\";
+export { NestedJsonFilter } from \\"./NestedJsonFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { NestedStringWithAggregatesFilter } from \\"./NestedStringWithAggregatesFilter\\";
+export { SampleCreateInput } from \\"./SampleCreateInput\\";
+export { SampleOrderByInput } from \\"./SampleOrderByInput\\";
+export { SampleScalarWhereWithAggregatesInput } from \\"./SampleScalarWhereWithAggregatesInput\\";
+export { SampleUpdateInput } from \\"./SampleUpdateInput\\";
+export { SampleUpdateManyMutationInput } from \\"./SampleUpdateManyMutationInput\\";
+export { SampleWhereInput } from \\"./SampleWhereInput\\";
+export { SampleWhereUniqueInput } from \\"./SampleWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+export { StringWithAggregatesFilter } from \\"./StringWithAggregatesFilter\\";
+"
+`;
+
 exports[`inputs when model is renamed should properly generate input type classes for filtering models by many to many relation fields: RenamedFirstModelOrderByInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";

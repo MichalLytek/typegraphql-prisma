@@ -613,3 +613,82 @@ export { SampleMinAggregate } from \\"./SampleMinAggregate\\";
 export { SampleSumAggregate } from \\"./SampleSumAggregate\\";
 "
 `;
+
+exports[`outputs when experimental feature \`groupBy\` is enabled should generate group by output type for model: SampleGroupBy 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { SampleAvgAggregate } from \\"../outputs/SampleAvgAggregate\\";
+import { SampleCountAggregate } from \\"../outputs/SampleCountAggregate\\";
+import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
+import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
+import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class SampleGroupBy {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intIdField!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  stringField!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  booleanField!: boolean;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false
+  })
+  dateField!: Date;
+
+  @TypeGraphQL.Field(_type => SampleCountAggregate, {
+    nullable: true
+  })
+  count?: SampleCountAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleAvgAggregate, {
+    nullable: true
+  })
+  avg?: SampleAvgAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleSumAggregate, {
+    nullable: true
+  })
+  sum?: SampleSumAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleMinAggregate, {
+    nullable: true
+  })
+  min?: SampleMinAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleMaxAggregate, {
+    nullable: true
+  })
+  max?: SampleMaxAggregate | null;
+}
+"
+`;
+
+exports[`outputs when experimental feature \`groupBy\` is enabled should generate group by output type for model: outputs index 1`] = `
+"export { AggregateSample } from \\"./AggregateSample\\";
+export { BatchPayload } from \\"./BatchPayload\\";
+export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";
+export { SampleCountAggregate } from \\"./SampleCountAggregate\\";
+export { SampleGroupBy } from \\"./SampleGroupBy\\";
+export { SampleMaxAggregate } from \\"./SampleMaxAggregate\\";
+export { SampleMinAggregate } from \\"./SampleMinAggregate\\";
+export { SampleSumAggregate } from \\"./SampleSumAggregate\\";
+"
+`;

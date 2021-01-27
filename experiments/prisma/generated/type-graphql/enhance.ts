@@ -25,7 +25,8 @@ const actionResolversMap = {
     deleteManyClient: actionResolvers.DeleteManyClientResolver,
     updateManyClient: actionResolvers.UpdateManyClientResolver,
     upsertClient: actionResolvers.UpsertClientResolver,
-    aggregateClient: actionResolvers.AggregateClientResolver
+    aggregateClient: actionResolvers.AggregateClientResolver,
+    groupByClient: actionResolvers.GroupByClientResolver
   },
   Post: {
     post: actionResolvers.FindUniquePostResolver,
@@ -37,7 +38,8 @@ const actionResolversMap = {
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     updateManyPost: actionResolvers.UpdateManyPostResolver,
     upsertPost: actionResolvers.UpsertPostResolver,
-    aggregatePost: actionResolvers.AggregatePostResolver
+    aggregatePost: actionResolvers.AggregatePostResolver,
+    groupByPost: actionResolvers.GroupByPostResolver
   },
   Category: {
     category: actionResolvers.FindUniqueCategoryResolver,
@@ -49,7 +51,8 @@ const actionResolversMap = {
     deleteManyCategory: actionResolvers.DeleteManyCategoryResolver,
     updateManyCategory: actionResolvers.UpdateManyCategoryResolver,
     upsertCategory: actionResolvers.UpsertCategoryResolver,
-    aggregateCategory: actionResolvers.AggregateCategoryResolver
+    aggregateCategory: actionResolvers.AggregateCategoryResolver,
+    groupByCategory: actionResolvers.GroupByCategoryResolver
   },
   Patient: {
     patient: actionResolvers.FindUniquePatientResolver,
@@ -61,7 +64,8 @@ const actionResolversMap = {
     deleteManyPatient: actionResolvers.DeleteManyPatientResolver,
     updateManyPatient: actionResolvers.UpdateManyPatientResolver,
     upsertPatient: actionResolvers.UpsertPatientResolver,
-    aggregatePatient: actionResolvers.AggregatePatientResolver
+    aggregatePatient: actionResolvers.AggregatePatientResolver,
+    groupByPatient: actionResolvers.GroupByPatientResolver
   },
   Movie: {
     movie: actionResolvers.FindUniqueMovieResolver,
@@ -73,7 +77,8 @@ const actionResolversMap = {
     deleteManyMovie: actionResolvers.DeleteManyMovieResolver,
     updateManyMovie: actionResolvers.UpdateManyMovieResolver,
     upsertMovie: actionResolvers.UpsertMovieResolver,
-    aggregateMovie: actionResolvers.AggregateMovieResolver
+    aggregateMovie: actionResolvers.AggregateMovieResolver,
+    groupByMovie: actionResolvers.GroupByMovieResolver
   },
   Director: {
     director: actionResolvers.FindUniqueDirectorResolver,
@@ -85,7 +90,8 @@ const actionResolversMap = {
     deleteManyDirector: actionResolvers.DeleteManyDirectorResolver,
     updateManyDirector: actionResolvers.UpdateManyDirectorResolver,
     upsertDirector: actionResolvers.UpsertDirectorResolver,
-    aggregateDirector: actionResolvers.AggregateDirectorResolver
+    aggregateDirector: actionResolvers.AggregateDirectorResolver,
+    groupByDirector: actionResolvers.GroupByDirectorResolver
   },
   Problem: {
     problem: actionResolvers.FindUniqueProblemResolver,
@@ -97,7 +103,8 @@ const actionResolversMap = {
     deleteManyProblem: actionResolvers.DeleteManyProblemResolver,
     updateManyProblem: actionResolvers.UpdateManyProblemResolver,
     upsertProblem: actionResolvers.UpsertProblemResolver,
-    aggregateProblem: actionResolvers.AggregateProblemResolver
+    aggregateProblem: actionResolvers.AggregateProblemResolver,
+    groupByProblem: actionResolvers.GroupByProblemResolver
   },
   Creator: {
     creator: actionResolvers.FindUniqueCreatorResolver,
@@ -109,7 +116,8 @@ const actionResolversMap = {
     deleteManyCreator: actionResolvers.DeleteManyCreatorResolver,
     updateManyCreator: actionResolvers.UpdateManyCreatorResolver,
     upsertCreator: actionResolvers.UpsertCreatorResolver,
-    aggregateCreator: actionResolvers.AggregateCreatorResolver
+    aggregateCreator: actionResolvers.AggregateCreatorResolver,
+    groupByCreator: actionResolvers.GroupByCreatorResolver
   }
 };
 

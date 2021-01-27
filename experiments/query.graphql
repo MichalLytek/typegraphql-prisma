@@ -236,3 +236,12 @@ query ForbiddenCategories {
     number
   }
 }
+
+query GroupPosts {
+  groupByPost(by: [kind], where: { author: { is: { id: { equals: 2 } } } }) {
+    kind
+    count {
+      _all
+    }
+  }
+}

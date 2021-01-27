@@ -242,6 +242,7 @@ function getMappedOutputTypeName(
     "MaxAggregateOutputType",
     "AvgAggregateOutputType",
     "SumAggregateOutputType",
+    "GroupByOutputType",
   ].find(type => outputTypeName.includes(type));
   if (dedicatedTypeSuffix) {
     const modelName = outputTypeName.replace(dedicatedTypeSuffix, "");
