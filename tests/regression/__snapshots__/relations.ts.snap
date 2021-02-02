@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`relations resolvers generation should properly generate composite keys where phrase in resolver: UsersOnProjectsRelationsResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { Project } from \\"../../../models/Project\\";
+import { User } from \\"../../../models/User\\";
+import { UsersOnProjects } from \\"../../../models/UsersOnProjects\\";
+
+@TypeGraphQL.Resolver(_of => UsersOnProjects)
+export class UsersOnProjectsRelationsResolver {
+  @TypeGraphQL.FieldResolver(_type => Project, {
+    nullable: false
+  })
+  async project(@TypeGraphQL.Root() usersOnProjects: UsersOnProjects, @TypeGraphQL.Ctx() ctx: any): Promise<Project> {
+    return ctx.prisma.usersOnProjects.findUnique({
+      where: {
+        userId_projectId: {
+          userId: usersOnProjects.userId,
+          projectId: usersOnProjects.projectId,
+        },
+      },
+    }).project({});
+  }
+
+  @TypeGraphQL.FieldResolver(_type => User, {
+    nullable: false
+  })
+  async user(@TypeGraphQL.Root() usersOnProjects: UsersOnProjects, @TypeGraphQL.Ctx() ctx: any): Promise<User> {
+    return ctx.prisma.usersOnProjects.findUnique({
+      where: {
+        userId_projectId: {
+          userId: usersOnProjects.userId,
+          projectId: usersOnProjects.projectId,
+        },
+      },
+    }).user({});
+  }
+}
+"
+`;
+
 exports[`relations resolvers generation should properly generate index files for 1-1 relation resolvers: index 1`] = `
 "export * from \\"./resolvers.index\\";
 "

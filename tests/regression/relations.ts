@@ -321,4 +321,46 @@ describe("relations resolvers generation", () => {
     expect(userResolverTSFile).toMatchSnapshot("UserRelationsResolver");
     expect(postResolverTSFile).toMatchSnapshot("PostRelationsResolver");
   });
+
+  it("should properly generate composite keys where phrase in resolver", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model User {
+        id                String      @id @default(cuid())
+        name              String
+        memberOfProjects  UsersOnProjects[]
+        ownsProjects      Project[]
+      }
+
+      model Project {
+        id            String      @id @default(cuid())
+        owner         User        @relation(fields: [ownerId], references: [id])
+        ownerId       String
+        members       UsersOnProjects[]
+      }
+
+      model UsersOnProjects {
+        project       Project     @relation(fields: [projectId], references: [id])
+        projectId     String
+        user          User        @relation(fields: [userId], references: [id])
+        userId        String
+        createdAt     DateTime    @default(now())
+
+        @@id([userId, projectId])
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const usersOnProjectsRelationsResolverTSFile = await readGeneratedFile(
+      "/resolvers/relations/UsersOnProjects/UsersOnProjectsRelationsResolver.ts",
+    );
+
+    expect(usersOnProjectsRelationsResolverTSFile).toMatchSnapshot(
+      "UsersOnProjectsRelationsResolver",
+    );
+  });
 });
