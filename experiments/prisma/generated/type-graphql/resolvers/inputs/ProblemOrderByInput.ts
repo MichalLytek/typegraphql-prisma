@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
+import { CreatorOrderByInput } from "../inputs/CreatorOrderByInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
@@ -16,6 +17,11 @@ export class ProblemOrderByInput {
     nullable: true
   })
   problemText?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => CreatorOrderByInput, {
+    nullable: true
+  })
+  creator?: CreatorOrderByInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

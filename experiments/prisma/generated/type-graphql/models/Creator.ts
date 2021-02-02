@@ -17,7 +17,7 @@ export class Creator {
   })
   name!: string;
 
-  likes?: Problem[] | null;
+  likes?: Problem[];
 
-  problems?: Problem[] | null;
+  problems?: Problem[];
 }

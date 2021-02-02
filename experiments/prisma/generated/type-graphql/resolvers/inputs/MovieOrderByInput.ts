@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
+import { DirectorOrderByInput } from "../inputs/DirectorOrderByInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
@@ -16,6 +17,11 @@ export class MovieOrderByInput {
     nullable: true
   })
   directorLastName?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => DirectorOrderByInput, {
+    nullable: true
+  })
+  director?: DirectorOrderByInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

@@ -56,9 +56,4 @@ export class PostMinAggregate {
     nullable: true
   })
   kind!: "BLOG" | "ADVERT" | null;
-
-  @TypeGraphQL.Field(_type => GraphQLJSON, {
-    nullable: true
-  })
-  metadata!: Prisma.JsonValue | null;
 }

@@ -521,8 +521,8 @@ describe("inputs", () => {
     const userCreateOrConnectWithoutpostsFieldInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/UserCreateOrConnectWithoutpostsFieldInput.ts",
     );
-    const userCreateOneWithoutPostsFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/UserCreateOneWithoutPostsFieldInput.ts",
+    const userCreateNestedOneWithoutPostsFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/UserCreateNestedOneWithoutPostsFieldInput.ts",
     );
 
     expect(userUpdateOneRequiredWithoutPostsFieldInputTSFile).toMatchSnapshot(
@@ -531,8 +531,8 @@ describe("inputs", () => {
     expect(userCreateOrConnectWithoutpostsFieldInputTSFile).toMatchSnapshot(
       "UserCreateOrConnectWithoutpostsFieldInput",
     );
-    expect(userCreateOneWithoutPostsFieldInputTSFile).toMatchSnapshot(
-      "UserCreateOneWithoutPostsFieldInput",
+    expect(userCreateNestedOneWithoutPostsFieldInputTSFile).toMatchSnapshot(
+      "UserCreateNestedOneWithoutPostsFieldInput",
     );
   });
 
@@ -884,34 +884,34 @@ describe("inputs", () => {
       const firstModelUncheckedCreateInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUncheckedCreateInput.ts",
       );
-      const FirstModelUncheckedCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+      const firstModelUncheckedCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUncheckedCreateWithoutSecondModelsFieldInput.ts",
       );
-      const FirstModelUncheckedUpdateInputTSFile = await readGeneratedFile(
+      const firstModelUncheckedUpdateInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUncheckedUpdateInput.ts",
       );
-      const FirstModelUncheckedUpdateManyInputTSFile = await readGeneratedFile(
+      const firstModelUncheckedUpdateManyInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUncheckedUpdateManyInput.ts",
       );
-      const FirstModelUncheckedUpdateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+      const firstModelUncheckedUpdateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUncheckedUpdateWithoutSecondModelsFieldInput.ts",
       );
-      const FirstModelCreateOneWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelCreateOneWithoutSecondModelsFieldInput.ts",
+      const firstModelCreateNestedOneWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelCreateNestedOneWithoutSecondModelsFieldInput.ts",
       );
-      const FirstModelCreateOrConnectWithoutsecondModelsFieldInputTSFile = await readGeneratedFile(
+      const firstModelCreateOrConnectWithoutsecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelCreateOrConnectWithoutsecondModelsFieldInput.ts",
       );
-      const FirstModelCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+      const firstModelCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelCreateWithoutSecondModelsFieldInput.ts",
       );
-      const FirstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+      const firstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput.ts",
       );
-      const FirstModelUpdateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+      const firstModelUpdateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUpdateWithoutSecondModelsFieldInput.ts",
       );
-      const FirstModelUpsertWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+      const firstModelUpsertWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUpsertWithoutSecondModelsFieldInput.ts",
       );
       const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
@@ -920,42 +920,44 @@ describe("inputs", () => {
         "FirstModelUncheckedCreateInput",
       );
       expect(
-        FirstModelUncheckedCreateWithoutSecondModelsFieldInputTSFile,
+        firstModelUncheckedCreateWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot(
         "FirstModelUncheckedCreateWithoutSecondModelsFieldInput",
       );
-      expect(FirstModelUncheckedUpdateInputTSFile).toMatchSnapshot(
+      expect(firstModelUncheckedUpdateInputTSFile).toMatchSnapshot(
         "FirstModelUncheckedUpdateInput",
       );
-      expect(FirstModelUncheckedUpdateManyInputTSFile).toMatchSnapshot(
+      expect(firstModelUncheckedUpdateManyInputTSFile).toMatchSnapshot(
         "FirstModelUncheckedUpdateManyInput",
       );
       expect(
-        FirstModelUncheckedUpdateWithoutSecondModelsFieldInputTSFile,
+        firstModelUncheckedUpdateWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot(
         "FirstModelUncheckedUpdateWithoutSecondModelsFieldInput",
       );
       expect(
-        FirstModelCreateOneWithoutSecondModelsFieldInputTSFile,
-      ).toMatchSnapshot("FirstModelCreateOneWithoutSecondModelsFieldInput");
+        firstModelCreateNestedOneWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot(
+        "FirstModelCreateNestedOneWithoutSecondModelsFieldInput",
+      );
       expect(
-        FirstModelCreateOrConnectWithoutsecondModelsFieldInputTSFile,
+        firstModelCreateOrConnectWithoutsecondModelsFieldInputTSFile,
       ).toMatchSnapshot(
         "FirstModelCreateOrConnectWithoutsecondModelsFieldInput",
       );
       expect(
-        FirstModelCreateWithoutSecondModelsFieldInputTSFile,
+        firstModelCreateWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot("FirstModelCreateWithoutSecondModelsFieldInputTSFile");
       expect(
-        FirstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile,
+        firstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot(
         "FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput",
       );
       expect(
-        FirstModelUpdateWithoutSecondModelsFieldInputTSFile,
+        firstModelUpdateWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot("FirstModelUpdateWithoutSecondModelsFieldInputTSFile");
       expect(
-        FirstModelUpsertWithoutSecondModelsFieldInputTSFile,
+        firstModelUpsertWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot("FirstModelUpsertWithoutSecondModelsFieldInputTSFile");
       expect(indexTSFile).toMatchSnapshot("index");
     });

@@ -2877,6 +2877,7 @@ var require_dmmf = __commonJS2((exports2) => {
       ModelAction2["findFirst"] = "findFirst";
       ModelAction2["findMany"] = "findMany";
       ModelAction2["create"] = "create";
+      ModelAction2["createMany"] = "createMany";
       ModelAction2["update"] = "update";
       ModelAction2["updateMany"] = "updateMany";
       ModelAction2["upsert"] = "upsert";
@@ -3747,7 +3748,7 @@ how you used Prisma Client in the issue.
   }
 });
 
-// ../../node_modules/.pnpm/@prisma/engines@2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma/engines@2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports) => {
   var __defineProperty = Object.defineProperty;
   var __hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -3783,13 +3784,13 @@ var require_dist9 = __commonJS2((exports) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54",
+      version: "2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "e51dc3b5a9ee790a07104bec1c9477d51740fe54"
+        enginesVersion: "854c8ba7f0dce66f115af36af24e66989a8c02a1"
       },
       devDependencies: {
         "@types/node": "^14.11.8",
@@ -26241,6 +26242,8 @@ var require_undici2 = __commonJS2((exports2) => {
       this.pool = new undici_12.Pool(url, {
         connections: 100,
         pipelining: 10,
+        keepAliveMaxTimeout: 6e5,
+        headersTimeout: 0,
         ...moreArgs
       });
     }
@@ -26640,10 +26643,6 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
         RUST_BACKTRACE: "1",
         RUST_LOG: "info"
       };
-      if (!this.useUds) {
-        env2.PORT = String(this.port);
-        debug(`port: ${this.port}`);
-      }
       if (this.logQueries || this.logLevel === "info") {
         env2.RUST_LOG = "info";
         if (this.logQueries) {
@@ -26704,9 +26703,11 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
           ];
           if (this.useUds) {
             flags.push("--unix-path", this.socketPath);
+          } else {
+            this.port = await this.getFreePort();
+            flags.push("--port", String(this.port));
           }
           debug({flags});
-          this.port = await this.getFreePort();
           const env2 = this.getEngineEnvVars();
           this.child = child_process_1.spawn(prismaPath, flags, {
             env: env2,
@@ -26741,10 +26742,7 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
               debug("stdout", log_1.getMessage(json));
               if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b2 = (_a2 = json.fields) === null || _a2 === void 0 ? void 0 : _a2.message) === null || _b2 === void 0 ? void 0 : _b2.startsWith("Started http server"))) {
                 if (this.useUds) {
-                  this.undici = new undici_1.Undici({
-                    hostname: "localhost",
-                    protocol: "http:"
-                  }, {
+                  this.undici = new undici_1.Undici("http://localhost", {
                     socketPath: this.socketPath
                   });
                 } else {
@@ -36070,7 +36068,7 @@ var require_reusify2 = __commonJS2((exports2, module2) => {
   module2.exports = reusify;
 });
 
-// ../../node_modules/.pnpm/fastq@1.10.0/node_modules/fastq/queue.js
+// ../../node_modules/.pnpm/fastq@1.10.1/node_modules/fastq/queue.js
 var require_queue2 = __commonJS2((exports2, module2) => {
   "use strict";
   var reusify = require_reusify2();
@@ -42506,7 +42504,7 @@ var require_download2 = __commonJS2((exports) => {
       if (options.failSilent || e.code !== "EACCES") {
         return;
       } else {
-        throw new Error(`Can't write to ${targetDir} please make sure you install "@prisma/cli" with the right permissions.`);
+        throw new Error(`Can't write to ${targetDir} please make sure you install "prisma" with the right permissions.`);
       }
     }
     debug(`Downloading ${downloadUrl} to ${targetFilePath}`);
@@ -42932,6 +42930,7 @@ ${e.stack}`);
   }
   exports2.getDMMF = getDMMF;
   async function getConfig({datamodel, cwd = process.cwd(), prismaPath: queryEnginePath, datamodelPath, ignoreEnvVarErrors}) {
+    var _a, _b, _c;
     queryEnginePath = await resolveBinary_1.resolveBinary("query-engine", queryEnginePath);
     let tempDatamodelPath = datamodelPath;
     if (!tempDatamodelPath) {
@@ -42954,7 +42953,12 @@ ${e.stack}`);
       if (!datamodelPath) {
         await unlink2(tempDatamodelPath);
       }
-      return JSON.parse(result.stdout);
+      const data = JSON.parse(result.stdout);
+      if (((_c = (_b = (_a = data.datasources) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.provider) === null || _c === void 0 ? void 0 : _c[0]) === "sqlite" && data.generators.some((g) => g.previewFeatures.includes("createMany"))) {
+        throw new Error(`Database provider "sqlite" and the preview feature "createMany" can't be used at the same time.
+Please either remove the "createMany" feature flag or use any other database type that Prisma supports: postgres, mysql or sqlserver.`);
+      }
+      return data;
     } catch (e) {
       if (e.stderr || e.stdout) {
         const error = e.stderr ? e.stderr : e.stout;
@@ -42980,7 +42984,7 @@ ${chalk_12.default.redBright(jsonError.message)}
         }
         throw new Error(message);
       }
-      throw new Error(chalk_12.default.redBright.bold("Get config ") + e);
+      throw new Error(chalk_12.default.redBright.bold("Get config: ") + e);
     }
   }
   exports2.getConfig = getConfig;
@@ -43498,7 +43502,7 @@ var require_predefinedGeneratorResolvers = __commonJS2((exports2) => {
           fs_12.default.writeFileSync(path_12.default.join(process.cwd(), "package.json"), defaultPackageJson);
           console.info(`\u2714 Created ${chalk_12.default.bold.green("./package.json")}`);
         }
-        await installPackage(baseDir, `-D @prisma/cli@${version !== null && version !== void 0 ? version : "latest"}`);
+        await installPackage(baseDir, `-D prisma@${version !== null && version !== void 0 ? version : "latest"}`);
         await installPackage(baseDir, `@prisma/client@${version !== null && version !== void 0 ? version : "latest"}`);
         prismaClientDir = resolve_pkg_1.default("@prisma/client", {cwd: baseDir});
         if (!prismaClientDir) {
@@ -71809,7 +71813,10 @@ Env vars from ${chalk_12.default.underline(relativeEnvPath)} overwrite the ones 
     if (exists2(envPath)) {
       debug3(`Environment variables loaded from ${envPath}`);
       return {
-        dotenvResult: dotenvExpand_1.dotenvExpand(dotenv_1.default.config({path: envPath})),
+        dotenvResult: dotenvExpand_1.dotenvExpand(dotenv_1.default.config({
+          path: envPath,
+          debug: Boolean(process.env.DEBUG) || void 0
+        })),
         message: chalk_12.default.dim(`Environment variables loaded from ${path_12.default.relative(process.cwd(), envPath)}`),
         path: envPath
       };
@@ -72337,7 +72344,7 @@ var require_dist19 = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.15.0",
+    version: "2.16.0",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -72395,28 +72402,28 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "index-browser.js"
     ],
     devDependencies: {
-      "@prisma/debug": "2.15.0",
-      "@prisma/engine-core": "2.15.0",
-      "@prisma/engines": "2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54",
-      "@prisma/generator-helper": "2.15.0",
-      "@prisma/get-platform": "2.15.0",
-      "@prisma/migrate": "2.15.0",
-      "@prisma/sdk": "2.15.0",
+      "@prisma/debug": "2.16.0",
+      "@prisma/engine-core": "2.16.0",
+      "@prisma/engines": "2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1",
+      "@prisma/generator-helper": "2.16.0",
+      "@prisma/get-platform": "2.16.0",
+      "@prisma/migrate": "2.16.0",
+      "@prisma/sdk": "2.16.0",
       "@timsuchanek/copy": "1.4.5",
       "@types/debug": "4.1.5",
-      "@types/mssql": "6.0.7",
       "@types/jest": "26.0.20",
       "@types/js-levenshtein": "1.1.0",
-      "@types/node": "12.19.14",
+      "@types/mssql": "6.0.7",
+      "@types/node": "12.19.15",
       "@types/pg": "7.14.9",
-      "@typescript-eslint/eslint-plugin": "4.14.0",
-      "@typescript-eslint/parser": "4.14.0",
+      "@typescript-eslint/eslint-plugin": "4.14.1",
+      "@typescript-eslint/parser": "4.14.1",
       arg: "5.0.0",
       chalk: "4.1.0",
       "decimal.js": "10.2.1",
-      esbuild: "0.8.33",
+      esbuild: "0.8.38",
       "escape-string-regexp": "4.0.0",
-      eslint: "7.18.0",
+      eslint: "7.19.0",
       "eslint-config-prettier": "7.2.0",
       "eslint-plugin-eslint-comments": "3.2.0",
       "eslint-plugin-jest": "24.1.3",
@@ -72441,7 +72448,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       prettier: "2.2.1",
       "replace-string": "3.1.0",
       rimraf: "3.0.2",
-      rollup: "2.37.0",
+      rollup: "2.38.3",
       "rollup-plugin-dts": "2.0.1",
       "sort-keys": "4.2.0",
       "source-map-support": "0.5.19",
@@ -72449,21 +72456,21 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "stacktrace-parser": "0.1.10",
       "strip-ansi": "6.0.0",
       "strip-indent": "3.0.0",
-      "ts-jest": "26.4.4",
+      "ts-jest": "26.5.0",
       "ts-node": "9.1.1",
       tsd: "0.14.0",
       typescript: "4.1.3"
     },
     peerDependencies: {
-      "@prisma/cli": "*"
+      prisma: ">=2.15.0"
     },
     peerDependenciesMeta: {
-      "@prisma/cli": {
+      prisma: {
         optional: true
       }
     },
     dependencies: {
-      "@prisma/engines-version": "2.15.0-25.e51dc3b5a9ee790a07104bec1c9477d51740fe54"
+      "@prisma/engines-version": "2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1"
     },
     "lint-staged": {
       "*.ts": [
@@ -75921,7 +75928,7 @@ function parseStack({
       if (!theLine || theLine.trim() === "") {
         params.callsiteStr = ":";
       } else {
-        const prismaClientRegex = /(\S+(create|updateMany|deleteMany|update|delete|findMany|findUnique)\()/;
+        const prismaClientRegex = /(\S+(create|createMany|updateMany|deleteMany|update|delete|findMany|findUnique)\()/;
         const match = prismaClientRegex.exec(theLine);
         if (!match) {
           return params;
@@ -77530,6 +77537,7 @@ var actionOperationMap = {
   findMany: "query",
   count: "query",
   create: "mutation",
+  createMany: "mutation",
   update: "mutation",
   updateMany: "mutation",
   upsert: "mutation",

@@ -6,13 +6,13 @@ function shouldSkipPrismaVersionCheck() {
 }
 
 function getInstalledPrismaVersion(): string {
-  const prismaPackageJson = require("@prisma/cli/package.json");
+  const prismaPackageJson = require("prisma/package.json");
   return prismaPackageJson.version;
 }
 
 function getPeerDependencyPrismaRequirement(): string {
   const ownPackageJson = require("../../package.json");
-  return ownPackageJson.peerDependencies["@prisma/cli"];
+  return ownPackageJson.peerDependencies["prisma"];
 }
 
 export function ensureInstalledCorrectPrismaPackage() {

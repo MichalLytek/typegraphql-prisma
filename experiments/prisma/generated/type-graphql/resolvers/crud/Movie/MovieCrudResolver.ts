@@ -13,8 +13,8 @@ import { UpdateManyMovieArgs } from "./args/UpdateManyMovieArgs";
 import { UpdateMovieArgs } from "./args/UpdateMovieArgs";
 import { UpsertMovieArgs } from "./args/UpsertMovieArgs";
 import { Movie } from "../../../models/Movie";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
-import { BatchPayload } from "../../outputs/BatchPayload";
 import { MovieGroupBy } from "../../outputs/MovieGroupBy";
 
 @TypeGraphQL.Resolver(_of => Movie)
@@ -61,17 +61,17 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async deleteManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyMovieArgs): Promise<BatchPayload> {
+  async deleteManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyMovieArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.movie.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyMovieArgs): Promise<BatchPayload> {
+  async updateManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyMovieArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.movie.updateMany(args);
   }
 

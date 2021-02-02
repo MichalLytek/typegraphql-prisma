@@ -8,19 +8,19 @@ import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class ClientCreateOneWithoutPostsInput {
+export class ClientCreateNestedOneWithoutPostsInput {
   @TypeGraphQL.Field(_type => ClientUncheckedCreateWithoutPostsInput, {
     nullable: true
   })
   create?: ClientUncheckedCreateWithoutPostsInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, {
-    nullable: true
-  })
-  connect?: ClientWhereUniqueInput | undefined;
-
   @TypeGraphQL.Field(_type => ClientCreateOrConnectWithoutpostsInput, {
     nullable: true
   })
   connectOrCreate?: ClientCreateOrConnectWithoutpostsInput | undefined;
+
+  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, {
+    nullable: true
+  })
+  connect?: ClientWhereUniqueInput | undefined;
 }

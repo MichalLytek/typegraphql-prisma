@@ -13,8 +13,8 @@ import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { UpsertDirectorArgs } from "./args/UpsertDirectorArgs";
 import { Director } from "../../../models/Director";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
-import { BatchPayload } from "../../outputs/BatchPayload";
 import { DirectorGroupBy } from "../../outputs/DirectorGroupBy";
 
 @TypeGraphQL.Resolver(_of => Director)
@@ -61,17 +61,17 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async deleteManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyDirectorArgs): Promise<BatchPayload> {
+  async deleteManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyDirectorArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.director.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<BatchPayload> {
+  async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.director.updateMany(args);
   }
 

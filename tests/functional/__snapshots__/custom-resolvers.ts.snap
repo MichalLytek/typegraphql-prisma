@@ -96,10 +96,10 @@ enum PostScalarFieldEnum {
 
 input PostWhereInput {
   AND: [PostWhereInput!]
-  color: EnumColorFilter
-  content: StringFilter
   NOT: [PostWhereInput!]
   OR: [PostWhereInput!]
+  color: EnumColorFilter
+  content: StringFilter
   uuid: StringFilter
 }
 

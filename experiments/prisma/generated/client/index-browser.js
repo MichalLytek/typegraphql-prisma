@@ -11,12 +11,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 2.15.0
- * Query Engine version: e51dc3b5a9ee790a07104bec1c9477d51740fe54
+ * Prisma Client JS version: 2.16.0
+ * Query Engine version: 854c8ba7f0dce66f115af36af24e66989a8c02a1
  */
 Prisma.prismaVersion = {
-  client: "2.15.0",
-  engine: "e51dc3b5a9ee790a07104bec1c9477d51740fe54"
+  client: "2.16.0",
+  engine: "854c8ba7f0dce66f115af36af24e66989a8c02a1"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -61,6 +61,7 @@ Prisma.raw = () => {
   throw new Error(`raw is unable to be run in the browser.
 In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
 )}
+Prisma.validator = () => (val) => val
 
 /**
  * Enums

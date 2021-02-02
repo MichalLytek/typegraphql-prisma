@@ -263,3 +263,13 @@ query GroupPosts {
     }
   }
 }
+
+query SortByRelation {
+  posts(take: 5, orderBy: [{ author: { role: asc } }, { title: desc }]) {
+    title
+    author {
+      firstName
+      role
+    }
+  }
+}

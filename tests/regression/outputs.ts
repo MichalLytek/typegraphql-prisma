@@ -48,8 +48,8 @@ describe("outputs", () => {
     const maxAggregateTSFile = await readGeneratedFile(
       "/resolvers/outputs/SampleMaxAggregate.ts",
     );
-    const batchPayloadTSFile = await readGeneratedFile(
-      "/resolvers/outputs/BatchPayload.ts",
+    const affectedRowsOutputTSFile = await readGeneratedFile(
+      "/resolvers/outputs/AffectedRowsOutput.ts",
     );
     const outputsIndexTSFile = await readGeneratedFile(
       "/resolvers/outputs/index.ts",
@@ -60,7 +60,7 @@ describe("outputs", () => {
     expect(sumAggregateTSFile).toMatchSnapshot("SampleSumAggregate");
     expect(minAggregateTSFile).toMatchSnapshot("SampleMinAggregate");
     expect(maxAggregateTSFile).toMatchSnapshot("SampleMaxAggregate");
-    expect(batchPayloadTSFile).toMatchSnapshot("BatchPayload");
+    expect(affectedRowsOutputTSFile).toMatchSnapshot("AffectedRowsOutput");
     expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
   });
 
@@ -179,13 +179,13 @@ describe("outputs", () => {
     const avgAggregateTSFile = await readGeneratedFile(
       "/resolvers/outputs/SampleAvgAggregate.ts",
     );
-    const batchPayloadTSFile = await readGeneratedFile(
-      "/resolvers/outputs/BatchPayload.ts",
+    const affectedRowsOutputTSFile = await readGeneratedFile(
+      "/resolvers/outputs/AffectedRowsOutput.ts",
     );
 
     expect(aggregateSampleTSFile).toMatchSnapshot("AggregateSample");
     expect(avgAggregateTSFile).toMatchSnapshot("SampleAvgAggregate");
-    expect(batchPayloadTSFile).toMatchSnapshot("BatchPayload");
+    expect(affectedRowsOutputTSFile).toMatchSnapshot("AffectedRowsOutput");
   });
 
   describe("when experimental feature `groupBy` is enabled", () => {

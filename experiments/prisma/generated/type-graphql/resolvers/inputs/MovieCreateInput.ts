@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { DirectorCreateOneWithoutMoviesInput } from "../inputs/DirectorCreateOneWithoutMoviesInput";
+import { DirectorCreateNestedOneWithoutMoviesInput } from "../inputs/DirectorCreateNestedOneWithoutMoviesInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -12,8 +12,8 @@ export class MovieCreateInput {
   })
   title!: string;
 
-  @TypeGraphQL.Field(_type => DirectorCreateOneWithoutMoviesInput, {
+  @TypeGraphQL.Field(_type => DirectorCreateNestedOneWithoutMoviesInput, {
     nullable: false
   })
-  director!: DirectorCreateOneWithoutMoviesInput;
+  director!: DirectorCreateNestedOneWithoutMoviesInput;
 }

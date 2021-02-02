@@ -15,13 +15,13 @@ npm i -D typegraphql-prisma
 Furthermore, `typegraphql-prisma` requires Prisma 2 to work properly, so please install Prisma dependencies if you don't have it already installed:
 
 ```sh
-npm i -D @prisma/cli
+npm i -D prisma
 npm i @prisma/client
 ```
 
 > Be aware that `typegraphql-prisma` is designed to work with a selected versions of `prisma`.
 >
-> Please make sure you use `@prisma/cli` and `@prisma/client` of version matching `~2.15.0`.
+> Please make sure you use `prisma` and `@prisma/client` of version matching `~2.16.0`.
 > Otherwise, the runtime check will report an error when you run the generator.
 
 You also need to install the GraphQL JSON scalar library (to support the Prisma `Json` scalar):

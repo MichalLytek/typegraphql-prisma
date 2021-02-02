@@ -52,7 +52,7 @@ declare namespace DMMF {
         idFields: string[];
         [key: string]: any;
     }
-    type FieldKind = 'scalar' | 'object' | 'enum';
+    type FieldKind = 'scalar' | 'object' | 'enum' | 'unsupported';
     type FieldNamespace = 'model' | 'prisma';
     type FieldLocation = 'scalar' | 'inputObjectTypes' | 'outputObjectTypes' | 'enumTypes';
     interface Field {
@@ -156,6 +156,7 @@ declare namespace DMMF {
         findFirst?: string | null;
         findMany?: string | null;
         create?: string | null;
+        createMany?: string | null;
         update?: string | null;
         updateMany?: string | null;
         upsert?: string | null;
@@ -170,6 +171,7 @@ declare namespace DMMF {
         findFirst = "findFirst",
         findMany = "findMany",
         create = "create",
+        createMany = "createMany",
         update = "update",
         updateMany = "updateMany",
         upsert = "upsert",

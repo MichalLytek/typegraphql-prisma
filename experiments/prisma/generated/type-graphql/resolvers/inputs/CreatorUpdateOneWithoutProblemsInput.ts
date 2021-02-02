@@ -16,6 +16,16 @@ export class CreatorUpdateOneWithoutProblemsInput {
   })
   create?: CreatorUncheckedCreateWithoutProblemsInput | undefined;
 
+  @TypeGraphQL.Field(_type => CreatorCreateOrConnectWithoutproblemsInput, {
+    nullable: true
+  })
+  connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput | undefined;
+
+  @TypeGraphQL.Field(_type => CreatorUpsertWithoutProblemsInput, {
+    nullable: true
+  })
+  upsert?: CreatorUpsertWithoutProblemsInput | undefined;
+
   @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
     nullable: true
   })
@@ -35,14 +45,4 @@ export class CreatorUpdateOneWithoutProblemsInput {
     nullable: true
   })
   update?: CreatorUncheckedUpdateWithoutProblemsInput | undefined;
-
-  @TypeGraphQL.Field(_type => CreatorUpsertWithoutProblemsInput, {
-    nullable: true
-  })
-  upsert?: CreatorUpsertWithoutProblemsInput | undefined;
-
-  @TypeGraphQL.Field(_type => CreatorCreateOrConnectWithoutproblemsInput, {
-    nullable: true
-  })
-  connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput | undefined;
 }

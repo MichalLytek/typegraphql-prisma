@@ -106,7 +106,7 @@ describe("relations resolvers execution", () => {
         },
       };
       findUniqueUserMock.mockReturnValueOnce({
-        posts: jest.fn().mockResolvedValue(null),
+        posts: jest.fn().mockResolvedValue([]),
       });
       findUniqueUserMock.mockReturnValueOnce({
         posts: jest.fn().mockResolvedValue([
@@ -156,7 +156,7 @@ describe("relations resolvers execution", () => {
         },
       };
       findUniqueUserMock.mockReturnValueOnce({
-        posts: jest.fn().mockResolvedValue(null),
+        posts: jest.fn().mockResolvedValue([]),
       });
       findUniqueUserMock.mockReturnValueOnce({
         posts: findUniqueUserPostsMock,

@@ -8,19 +8,19 @@ import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class ProblemCreateManyWithoutLikedByInput {
+export class ProblemCreateNestedManyWithoutLikedByInput {
   @TypeGraphQL.Field(_type => [ProblemCreateWithoutLikedByInput], {
     nullable: true
   })
   create?: ProblemCreateWithoutLikedByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
-    nullable: true
-  })
-  connect?: ProblemWhereUniqueInput[] | undefined;
-
   @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutlikedByInput], {
     nullable: true
   })
   connectOrCreate?: ProblemCreateOrConnectWithoutlikedByInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
+    nullable: true
+  })
+  connect?: ProblemWhereUniqueInput[] | undefined;
 }

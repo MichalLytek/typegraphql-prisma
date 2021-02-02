@@ -150,8 +150,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       NullableStringFieldUpdateOperationsInput.js
       PostCreateInput.d.ts
       PostCreateInput.js
-      PostCreateManyWithoutAuthorInput.d.ts
-      PostCreateManyWithoutAuthorInput.js
+      PostCreateNestedManyWithoutAuthorInput.d.ts
+      PostCreateNestedManyWithoutAuthorInput.js
       PostCreateOrConnectWithoutauthorInput.d.ts
       PostCreateOrConnectWithoutauthorInput.js
       PostCreateWithoutAuthorInput.d.ts
@@ -188,8 +188,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       StringNullableFilter.js
       UserCreateInput.d.ts
       UserCreateInput.js
-      UserCreateOneWithoutPostsInput.d.ts
-      UserCreateOneWithoutPostsInput.js
+      UserCreateNestedOneWithoutPostsInput.d.ts
+      UserCreateNestedOneWithoutPostsInput.js
       UserCreateOrConnectWithoutpostsInput.d.ts
       UserCreateOrConnectWithoutpostsInput.js
       UserCreateWithoutPostsInput.d.ts
@@ -215,12 +215,12 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       index.d.ts
       index.js
     [outputs]
+      AffectedRowsOutput.d.ts
+      AffectedRowsOutput.js
       AggregatePost.d.ts
       AggregatePost.js
       AggregateUser.d.ts
       AggregateUser.js
-      BatchPayload.d.ts
-      BatchPayload.js
       PostAvgAggregate.d.ts
       PostAvgAggregate.js
       PostCountAggregate.d.ts
@@ -345,7 +345,7 @@ exports[`structure should generate proper folders and file names when model is r
       NestedStringNullableFilter.ts
       NullableStringFieldUpdateOperationsInput.ts
       RenamedPostCreateInput.ts
-      RenamedPostCreateManyWithoutAuthorInput.ts
+      RenamedPostCreateNestedManyWithoutAuthorInput.ts
       RenamedPostCreateOrConnectWithoutauthorInput.ts
       RenamedPostCreateWithoutAuthorInput.ts
       RenamedPostListRelationFilter.ts
@@ -361,7 +361,7 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedPostWhereInput.ts
       RenamedPostWhereUniqueInput.ts
       RenamedUserCreateInput.ts
-      RenamedUserCreateOneWithoutPostsInput.ts
+      RenamedUserCreateNestedOneWithoutPostsInput.ts
       RenamedUserCreateOrConnectWithoutpostsInput.ts
       RenamedUserCreateWithoutPostsInput.ts
       RenamedUserOrderByInput.ts
@@ -378,9 +378,9 @@ exports[`structure should generate proper folders and file names when model is r
       StringNullableFilter.ts
       index.ts
     [outputs]
+      AffectedRowsOutput.ts
       AggregateRenamedPost.ts
       AggregateRenamedUser.ts
-      BatchPayload.ts
       RenamedPostAvgAggregate.ts
       RenamedPostCountAggregate.ts
       RenamedPostMaxAggregate.ts
@@ -487,7 +487,7 @@ exports[`structure should generate proper folders structure and file names for c
       NestedStringNullableFilter.ts
       NullableStringFieldUpdateOperationsInput.ts
       PostCreateInput.ts
-      PostCreateManyWithoutAuthorInput.ts
+      PostCreateNestedManyWithoutAuthorInput.ts
       PostCreateOrConnectWithoutauthorInput.ts
       PostCreateWithoutAuthorInput.ts
       PostListRelationFilter.ts
@@ -506,7 +506,7 @@ exports[`structure should generate proper folders structure and file names for c
       StringFilter.ts
       StringNullableFilter.ts
       UserCreateInput.ts
-      UserCreateOneWithoutPostsInput.ts
+      UserCreateNestedOneWithoutPostsInput.ts
       UserCreateOrConnectWithoutpostsInput.ts
       UserCreateWithoutPostsInput.ts
       UserOrderByInput.ts
@@ -520,9 +520,9 @@ exports[`structure should generate proper folders structure and file names for c
       UserWhereUniqueInput.ts
       index.ts
     [outputs]
+      AffectedRowsOutput.ts
       AggregatePost.ts
       AggregateUser.ts
-      BatchPayload.ts
       PostAvgAggregate.ts
       PostCountAggregate.ts
       PostMaxAggregate.ts

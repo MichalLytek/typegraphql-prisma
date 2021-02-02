@@ -37,14 +37,14 @@ export class Client {
   })
   amount!: number;
 
-  posts?: Post[] | null;
+  posts?: Post[];
 
   @TypeGraphQL.Field(_type => Role, {
     nullable: false
   })
   role!: "USER" | "ADMIN";
 
-  editorPosts?: Post[] | null;
+  editorPosts?: Post[];
 
   /** renamed field doc */
   @TypeGraphQL.Field(_type => String, {

@@ -13,8 +13,8 @@ import { UpdateManyPatientArgs } from "./args/UpdateManyPatientArgs";
 import { UpdatePatientArgs } from "./args/UpdatePatientArgs";
 import { UpsertPatientArgs } from "./args/UpsertPatientArgs";
 import { Patient } from "../../../models/Patient";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
-import { BatchPayload } from "../../outputs/BatchPayload";
 import { PatientGroupBy } from "../../outputs/PatientGroupBy";
 
 @TypeGraphQL.Resolver(_of => Patient)
@@ -61,17 +61,17 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async deleteManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyPatientArgs): Promise<BatchPayload> {
+  async deleteManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyPatientArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.patient.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPatientArgs): Promise<BatchPayload> {
+  async updateManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPatientArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.patient.updateMany(args);
   }
 

@@ -1,14 +1,14 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { Director } from "../../../models/Director";
-import { BatchPayload } from "../../outputs/BatchPayload";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class UpdateManyDirectorResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<BatchPayload> {
+  async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.director.updateMany(args);
   }
 }

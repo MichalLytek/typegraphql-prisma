@@ -18,6 +18,16 @@ export class PostUpdateManyWithoutAuthorInput {
   })
   create?: PostCreateWithoutAuthorInput[] | undefined;
 
+  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithoutauthorInput], {
+    nullable: true
+  })
+  connectOrCreate?: PostCreateOrConnectWithoutauthorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [PostUpsertWithWhereUniqueWithoutAuthorInput], {
+    nullable: true
+  })
+  upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | undefined;
+
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
     nullable: true
   })
@@ -52,14 +62,4 @@ export class PostUpdateManyWithoutAuthorInput {
     nullable: true
   })
   deleteMany?: PostScalarWhereInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [PostUpsertWithWhereUniqueWithoutAuthorInput], {
-    nullable: true
-  })
-  upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithoutauthorInput], {
-    nullable: true
-  })
-  connectOrCreate?: PostCreateOrConnectWithoutauthorInput[] | undefined;
 }

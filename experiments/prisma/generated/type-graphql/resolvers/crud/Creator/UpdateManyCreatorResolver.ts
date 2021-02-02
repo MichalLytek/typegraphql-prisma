@@ -1,14 +1,14 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpdateManyCreatorArgs } from "./args/UpdateManyCreatorArgs";
 import { Creator } from "../../../models/Creator";
-import { BatchPayload } from "../../outputs/BatchPayload";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class UpdateManyCreatorResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCreatorArgs): Promise<BatchPayload> {
+  async updateManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCreatorArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.creator.updateMany(args);
   }
 }

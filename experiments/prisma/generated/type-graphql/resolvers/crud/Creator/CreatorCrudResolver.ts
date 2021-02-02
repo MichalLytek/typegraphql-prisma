@@ -13,8 +13,8 @@ import { UpdateCreatorArgs } from "./args/UpdateCreatorArgs";
 import { UpdateManyCreatorArgs } from "./args/UpdateManyCreatorArgs";
 import { UpsertCreatorArgs } from "./args/UpsertCreatorArgs";
 import { Creator } from "../../../models/Creator";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateCreator } from "../../outputs/AggregateCreator";
-import { BatchPayload } from "../../outputs/BatchPayload";
 import { CreatorGroupBy } from "../../outputs/CreatorGroupBy";
 
 @TypeGraphQL.Resolver(_of => Creator)
@@ -61,17 +61,17 @@ export class CreatorCrudResolver {
     return ctx.prisma.creator.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async deleteManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCreatorArgs): Promise<BatchPayload> {
+  async deleteManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCreatorArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.creator.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCreatorArgs): Promise<BatchPayload> {
+  async updateManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCreatorArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.creator.updateMany(args);
   }
 

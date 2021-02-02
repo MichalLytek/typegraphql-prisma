@@ -8,19 +8,19 @@ import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class CreatorCreateManyWithoutLikesInput {
+export class CreatorCreateNestedManyWithoutLikesInput {
   @TypeGraphQL.Field(_type => [CreatorCreateWithoutLikesInput], {
     nullable: true
   })
   create?: CreatorCreateWithoutLikesInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [CreatorWhereUniqueInput], {
-    nullable: true
-  })
-  connect?: CreatorWhereUniqueInput[] | undefined;
-
   @TypeGraphQL.Field(_type => [CreatorCreateOrConnectWithoutlikesInput], {
     nullable: true
   })
   connectOrCreate?: CreatorCreateOrConnectWithoutlikesInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [CreatorWhereUniqueInput], {
+    nullable: true
+  })
+  connect?: CreatorWhereUniqueInput[] | undefined;
 }

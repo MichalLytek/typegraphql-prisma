@@ -1,8 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { PostUncheckedCreateManyWithoutAuthorInput } from "../inputs/PostUncheckedCreateManyWithoutAuthorInput";
-import { PostUncheckedCreateManyWithoutEditorInput } from "../inputs/PostUncheckedCreateManyWithoutEditorInput";
+import { PostUncheckedCreateNestedManyWithoutAuthorInput } from "../inputs/PostUncheckedCreateNestedManyWithoutAuthorInput";
+import { PostUncheckedCreateNestedManyWithoutEditorInput } from "../inputs/PostUncheckedCreateNestedManyWithoutEditorInput";
 import { Role } from "../../enums/Role";
 
 @TypeGraphQL.InputType({
@@ -38,12 +38,12 @@ export class ClientUncheckedCreateInput {
   })
   role!: "USER" | "ADMIN";
 
-  posts?: PostUncheckedCreateManyWithoutAuthorInput | undefined;
+  posts?: PostUncheckedCreateNestedManyWithoutAuthorInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostUncheckedCreateManyWithoutEditorInput, {
+  @TypeGraphQL.Field(_type => PostUncheckedCreateNestedManyWithoutEditorInput, {
     nullable: true
   })
-  editorPosts?: PostUncheckedCreateManyWithoutEditorInput | undefined;
+  editorPosts?: PostUncheckedCreateNestedManyWithoutEditorInput | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -67,14 +67,14 @@ export class ClientUncheckedCreateInput {
     this.balance = balance;
   }
 
-  @TypeGraphQL.Field(_type => PostUncheckedCreateManyWithoutAuthorInput, {
+  @TypeGraphQL.Field(_type => PostUncheckedCreateNestedManyWithoutAuthorInput, {
     nullable: true
   })
   get clientPosts() {
     return this.posts;
   }
 
-  set clientPosts(posts: PostUncheckedCreateManyWithoutAuthorInput | undefined) {
+  set clientPosts(posts: PostUncheckedCreateNestedManyWithoutAuthorInput | undefined) {
     this.posts = posts;
   }
 }

@@ -1,14 +1,14 @@
 import * as TypeGraphQL from "type-graphql";
 import { DeleteManyCategoryArgs } from "./args/DeleteManyCategoryArgs";
 import { Category } from "../../../models/Category";
-import { BatchPayload } from "../../outputs/BatchPayload";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class DeleteManyCategoryResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async deleteManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCategoryArgs): Promise<BatchPayload> {
+  async deleteManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCategoryArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.category.deleteMany(args);
   }
 }

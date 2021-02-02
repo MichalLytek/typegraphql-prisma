@@ -18,6 +18,16 @@ export class CreatorUpdateManyWithoutLikesInput {
   })
   create?: CreatorCreateWithoutLikesInput[] | undefined;
 
+  @TypeGraphQL.Field(_type => [CreatorCreateOrConnectWithoutlikesInput], {
+    nullable: true
+  })
+  connectOrCreate?: CreatorCreateOrConnectWithoutlikesInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [CreatorUpsertWithWhereUniqueWithoutLikesInput], {
+    nullable: true
+  })
+  upsert?: CreatorUpsertWithWhereUniqueWithoutLikesInput[] | undefined;
+
   @TypeGraphQL.Field(_type => [CreatorWhereUniqueInput], {
     nullable: true
   })
@@ -52,14 +62,4 @@ export class CreatorUpdateManyWithoutLikesInput {
     nullable: true
   })
   deleteMany?: CreatorScalarWhereInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [CreatorUpsertWithWhereUniqueWithoutLikesInput], {
-    nullable: true
-  })
-  upsert?: CreatorUpsertWithWhereUniqueWithoutLikesInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [CreatorCreateOrConnectWithoutlikesInput], {
-    nullable: true
-  })
-  connectOrCreate?: CreatorCreateOrConnectWithoutlikesInput[] | undefined;
 }

@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { PostUncheckedCreateManyWithoutEditorInput } from "../inputs/PostUncheckedCreateManyWithoutEditorInput";
+import { PostUncheckedCreateNestedManyWithoutEditorInput } from "../inputs/PostUncheckedCreateNestedManyWithoutEditorInput";
 import { Role } from "../../enums/Role";
 
 @TypeGraphQL.InputType({
@@ -37,10 +37,10 @@ export class ClientUncheckedCreateWithoutPostsInput {
   })
   role!: "USER" | "ADMIN";
 
-  @TypeGraphQL.Field(_type => PostUncheckedCreateManyWithoutEditorInput, {
+  @TypeGraphQL.Field(_type => PostUncheckedCreateNestedManyWithoutEditorInput, {
     nullable: true
   })
-  editorPosts?: PostUncheckedCreateManyWithoutEditorInput | undefined;
+  editorPosts?: PostUncheckedCreateNestedManyWithoutEditorInput | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

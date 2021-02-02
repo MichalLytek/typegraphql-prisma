@@ -136,7 +136,10 @@ export type PostKind = (typeof PostKind)[keyof typeof PostKind]
  */
 export class PrismaClient<
   T extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never
+  U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never,
+  GlobalReject = 'rejectOnNotFound' extends keyof T
+    ? T['rejectOnNotFound']
+    : false
       > {
       /**
        * @private
@@ -245,7 +248,7 @@ export class PrismaClient<
     * const users = await prisma.user.findMany()
     * ```
     */
-  get user(): Prisma.UserDelegate;
+  get user(): Prisma.UserDelegate<GlobalReject>;
 
   /**
    * `prisma.post`: Exposes CRUD operations for the **post** model.
@@ -255,7 +258,7 @@ export class PrismaClient<
     * const posts = await prisma.post.findMany()
     * ```
     */
-  get post(): Prisma.postDelegate;
+  get post(): Prisma.postDelegate<GlobalReject>;
 
   /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
@@ -265,7 +268,7 @@ export class PrismaClient<
     * const categories = await prisma.category.findMany()
     * ```
     */
-  get category(): Prisma.CategoryDelegate;
+  get category(): Prisma.CategoryDelegate<GlobalReject>;
 
   /**
    * `prisma.patient`: Exposes CRUD operations for the **Patient** model.
@@ -275,7 +278,7 @@ export class PrismaClient<
     * const patients = await prisma.patient.findMany()
     * ```
     */
-  get patient(): Prisma.PatientDelegate;
+  get patient(): Prisma.PatientDelegate<GlobalReject>;
 
   /**
    * `prisma.movie`: Exposes CRUD operations for the **Movie** model.
@@ -285,7 +288,7 @@ export class PrismaClient<
     * const movies = await prisma.movie.findMany()
     * ```
     */
-  get movie(): Prisma.MovieDelegate;
+  get movie(): Prisma.MovieDelegate<GlobalReject>;
 
   /**
    * `prisma.director`: Exposes CRUD operations for the **Director** model.
@@ -295,7 +298,7 @@ export class PrismaClient<
     * const directors = await prisma.director.findMany()
     * ```
     */
-  get director(): Prisma.DirectorDelegate;
+  get director(): Prisma.DirectorDelegate<GlobalReject>;
 
   /**
    * `prisma.problem`: Exposes CRUD operations for the **Problem** model.
@@ -305,7 +308,7 @@ export class PrismaClient<
     * const problems = await prisma.problem.findMany()
     * ```
     */
-  get problem(): Prisma.ProblemDelegate;
+  get problem(): Prisma.ProblemDelegate<GlobalReject>;
 
   /**
    * `prisma.creator`: Exposes CRUD operations for the **Creator** model.
@@ -315,7 +318,7 @@ export class PrismaClient<
     * const creators = await prisma.creator.findMany()
     * ```
     */
-  get creator(): Prisma.CreatorDelegate;
+  get creator(): Prisma.CreatorDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -345,8 +348,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.15.0
-   * Query Engine version: e51dc3b5a9ee790a07104bec1c9477d51740fe54
+   * Prisma Client JS version: 2.16.0
+   * Query Engine version: 854c8ba7f0dce66f115af36af24e66989a8c02a1
    */
   export type PrismaVersion = {
     client: string
@@ -580,7 +583,43 @@ export namespace Prisma {
 
   export type Keys<U extends Union> = U extends unknown ? keyof U : never
 
+  /**
+   * Allows creating `select` or `include` outside of the main statement
+   * From https://github.com/prisma/prisma/issues/3372#issuecomment-762296484
+   */
 
+  type Cast<A1, A2> = A1 extends A2 ? A1 : A2;
+
+  /**
+   * `Exact` forces a type to comply by another type. It will need to be a subset
+   * and must have exactly the same properties, no more, no less.
+   */
+  type Exact<A, W> = A & Cast<{
+    [K in keyof A]: K extends keyof W ? A[K] : never
+  }, W>;
+
+  type Narrow<A, W = unknown> =
+      A & {[K in keyof A]: NarrowAt<A, W, K>};
+
+  type NarrowAt<A, W, K extends keyof A, AK = A[K], WK = Att<W, K>> =
+      WK extends Widen<infer T> ? T :
+      AK extends Narrowable ? AK & WK :
+      Narrow<AK, WK>;
+
+  type Att<O, K> = K extends keyof O ? O[K] : unknown;
+
+  type Widen<A> = {[type]: A};
+
+  type Narrowable =
+  | string
+  | number
+  | bigint
+  | boolean
+  | [];
+
+  export const type: unique symbol;
+
+  export function validator<V>(): <S>(select: Exact<Narrow<S, V>, V>) => S;
 
   /**
    * Used by group by
@@ -656,7 +695,25 @@ export namespace Prisma {
   export type RejectOnNotFound = boolean | ((error: Error) => Error)
   export type RejectPerModel = { [P in ModelName]?: RejectOnNotFound }
   export type RejectPerOperation =  { [P in "findUnique" | "findFirst"]?: RejectPerModel | RejectOnNotFound } 
-
+  type IsReject<T> = T extends true ? True : T extends (err: Error) => Error ? True : False
+  export type HasReject<
+    GlobalRejectSettings extends Prisma.PrismaClientOptions['rejectOnNotFound'],
+    LocalRejectSettings,
+    Action extends PrismaAction,
+    Model extends ModelName
+  > = LocalRejectSettings extends RejectOnNotFound
+    ? IsReject<LocalRejectSettings>
+    : GlobalRejectSettings extends RejectPerOperation
+    ? Action extends keyof GlobalRejectSettings
+      ? GlobalRejectSettings[Action] extends boolean
+        ? IsReject<GlobalRejectSettings[Action]>
+        : GlobalRejectSettings[Action] extends RejectPerModel
+        ? Model extends keyof GlobalRejectSettings[Action]
+          ? IsReject<GlobalRejectSettings[Action][Model]>
+          : False
+        : False
+      : False
+    : IsReject<GlobalRejectSettings>
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
 
   export interface PrismaClientOptions {
@@ -739,6 +796,7 @@ export namespace Prisma {
     | 'findMany'
     | 'findFirst'
     | 'create'
+    | 'createMany'
     | 'update'
     | 'updateMany'
     | 'upsert'
@@ -1040,7 +1098,7 @@ export namespace Prisma {
     }
   >
 
-  export interface UserDelegate {
+  export interface UserDelegate<GlobalRejectSettings> {
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -1052,9 +1110,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends UserFindUniqueArgs>(
+    findUnique<T extends UserFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, UserFindUniqueArgs>
-    ): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'User'> extends True ? CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>> : CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>
 
     /**
      * Find the first User that matches the filter.
@@ -1067,9 +1125,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends UserFindFirstArgs>(
+    findFirst<T extends UserFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, UserFindFirstArgs>
-    ): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'User'> extends True ? CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>> : CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>
 
     /**
      * Find zero or more Users that matches the filter.
@@ -1643,7 +1701,6 @@ export namespace Prisma {
     authorId: number
     editorId: number | null
     kind: PostKind | null
-    metadata: JsonValue | null
   }
 
   export type PostMaxAggregateOutputType = {
@@ -1657,7 +1714,6 @@ export namespace Prisma {
     authorId: number
     editorId: number | null
     kind: PostKind | null
-    metadata: JsonValue | null
   }
 
   export type PostCountAggregateOutputType = {
@@ -1697,7 +1753,6 @@ export namespace Prisma {
     authorId?: true
     editorId?: true
     kind?: true
-    metadata?: true
   }
 
   export type PostMaxAggregateInputType = {
@@ -1711,7 +1766,6 @@ export namespace Prisma {
     authorId?: true
     editorId?: true
     kind?: true
-    metadata?: true
   }
 
   export type PostCountAggregateInputType = {
@@ -1898,7 +1952,7 @@ export namespace Prisma {
     }
   >
 
-  export interface postDelegate {
+  export interface postDelegate<GlobalRejectSettings> {
     /**
      * Find zero or one Post that matches the filter.
      * @param {postFindUniqueArgs} args - Arguments to find a Post
@@ -1910,9 +1964,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends postFindUniqueArgs>(
+    findUnique<T extends postFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, postFindUniqueArgs>
-    ): CheckSelect<T, Prisma__postClient<post | null>, Prisma__postClient<postGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'post'> extends True ? CheckSelect<T, Prisma__postClient<post>, Prisma__postClient<postGetPayload<T>>> : CheckSelect<T, Prisma__postClient<post | null >, Prisma__postClient<postGetPayload<T> | null >>
 
     /**
      * Find the first Post that matches the filter.
@@ -1925,9 +1979,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends postFindFirstArgs>(
+    findFirst<T extends postFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, postFindFirstArgs>
-    ): CheckSelect<T, Prisma__postClient<post | null>, Prisma__postClient<postGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'post'> extends True ? CheckSelect<T, Prisma__postClient<post>, Prisma__postClient<postGetPayload<T>>> : CheckSelect<T, Prisma__postClient<post | null >, Prisma__postClient<postGetPayload<T> | null >>
 
     /**
      * Find zero or more Posts that matches the filter.
@@ -2197,9 +2251,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    author<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>;
+    author<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
 
-    editor<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>;
+    editor<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -2672,7 +2726,7 @@ export namespace Prisma {
     }
   >
 
-  export interface CategoryDelegate {
+  export interface CategoryDelegate<GlobalRejectSettings> {
     /**
      * Find zero or one Category that matches the filter.
      * @param {CategoryFindUniqueArgs} args - Arguments to find a Category
@@ -2684,9 +2738,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends CategoryFindUniqueArgs>(
+    findUnique<T extends CategoryFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, CategoryFindUniqueArgs>
-    ): CheckSelect<T, Prisma__CategoryClient<Category | null>, Prisma__CategoryClient<CategoryGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Category'> extends True ? CheckSelect<T, Prisma__CategoryClient<Category>, Prisma__CategoryClient<CategoryGetPayload<T>>> : CheckSelect<T, Prisma__CategoryClient<Category | null >, Prisma__CategoryClient<CategoryGetPayload<T> | null >>
 
     /**
      * Find the first Category that matches the filter.
@@ -2699,9 +2753,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends CategoryFindFirstArgs>(
+    findFirst<T extends CategoryFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, CategoryFindFirstArgs>
-    ): CheckSelect<T, Prisma__CategoryClient<Category | null>, Prisma__CategoryClient<CategoryGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Category'> extends True ? CheckSelect<T, Prisma__CategoryClient<Category>, Prisma__CategoryClient<CategoryGetPayload<T>>> : CheckSelect<T, Prisma__CategoryClient<Category | null >, Prisma__CategoryClient<CategoryGetPayload<T> | null >>
 
     /**
      * Find zero or more Categories that matches the filter.
@@ -3377,7 +3431,7 @@ export namespace Prisma {
     }
   >
 
-  export interface PatientDelegate {
+  export interface PatientDelegate<GlobalRejectSettings> {
     /**
      * Find zero or one Patient that matches the filter.
      * @param {PatientFindUniqueArgs} args - Arguments to find a Patient
@@ -3389,9 +3443,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends PatientFindUniqueArgs>(
+    findUnique<T extends PatientFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, PatientFindUniqueArgs>
-    ): CheckSelect<T, Prisma__PatientClient<Patient | null>, Prisma__PatientClient<PatientGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Patient'> extends True ? CheckSelect<T, Prisma__PatientClient<Patient>, Prisma__PatientClient<PatientGetPayload<T>>> : CheckSelect<T, Prisma__PatientClient<Patient | null >, Prisma__PatientClient<PatientGetPayload<T> | null >>
 
     /**
      * Find the first Patient that matches the filter.
@@ -3404,9 +3458,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends PatientFindFirstArgs>(
+    findFirst<T extends PatientFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, PatientFindFirstArgs>
-    ): CheckSelect<T, Prisma__PatientClient<Patient | null>, Prisma__PatientClient<PatientGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Patient'> extends True ? CheckSelect<T, Prisma__PatientClient<Patient>, Prisma__PatientClient<PatientGetPayload<T>>> : CheckSelect<T, Prisma__PatientClient<Patient | null >, Prisma__PatientClient<PatientGetPayload<T> | null >>
 
     /**
      * Find zero or more Patients that matches the filter.
@@ -4092,7 +4146,7 @@ export namespace Prisma {
     }
   >
 
-  export interface MovieDelegate {
+  export interface MovieDelegate<GlobalRejectSettings> {
     /**
      * Find zero or one Movie that matches the filter.
      * @param {MovieFindUniqueArgs} args - Arguments to find a Movie
@@ -4104,9 +4158,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends MovieFindUniqueArgs>(
+    findUnique<T extends MovieFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, MovieFindUniqueArgs>
-    ): CheckSelect<T, Prisma__MovieClient<Movie | null>, Prisma__MovieClient<MovieGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Movie'> extends True ? CheckSelect<T, Prisma__MovieClient<Movie>, Prisma__MovieClient<MovieGetPayload<T>>> : CheckSelect<T, Prisma__MovieClient<Movie | null >, Prisma__MovieClient<MovieGetPayload<T> | null >>
 
     /**
      * Find the first Movie that matches the filter.
@@ -4119,9 +4173,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends MovieFindFirstArgs>(
+    findFirst<T extends MovieFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, MovieFindFirstArgs>
-    ): CheckSelect<T, Prisma__MovieClient<Movie | null>, Prisma__MovieClient<MovieGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Movie'> extends True ? CheckSelect<T, Prisma__MovieClient<Movie>, Prisma__MovieClient<MovieGetPayload<T>>> : CheckSelect<T, Prisma__MovieClient<Movie | null >, Prisma__MovieClient<MovieGetPayload<T> | null >>
 
     /**
      * Find zero or more Movies that matches the filter.
@@ -4391,7 +4445,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    director<T extends DirectorArgs = {}>(args?: Subset<T, DirectorArgs>): CheckSelect<T, Prisma__DirectorClient<Director | null>, Prisma__DirectorClient<DirectorGetPayload<T> | null>>;
+    director<T extends DirectorArgs = {}>(args?: Subset<T, DirectorArgs>): CheckSelect<T, Prisma__DirectorClient<Director | null >, Prisma__DirectorClient<DirectorGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -4832,7 +4886,7 @@ export namespace Prisma {
     }
   >
 
-  export interface DirectorDelegate {
+  export interface DirectorDelegate<GlobalRejectSettings> {
     /**
      * Find zero or one Director that matches the filter.
      * @param {DirectorFindUniqueArgs} args - Arguments to find a Director
@@ -4844,9 +4898,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends DirectorFindUniqueArgs>(
+    findUnique<T extends DirectorFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, DirectorFindUniqueArgs>
-    ): CheckSelect<T, Prisma__DirectorClient<Director | null>, Prisma__DirectorClient<DirectorGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Director'> extends True ? CheckSelect<T, Prisma__DirectorClient<Director>, Prisma__DirectorClient<DirectorGetPayload<T>>> : CheckSelect<T, Prisma__DirectorClient<Director | null >, Prisma__DirectorClient<DirectorGetPayload<T> | null >>
 
     /**
      * Find the first Director that matches the filter.
@@ -4859,9 +4913,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends DirectorFindFirstArgs>(
+    findFirst<T extends DirectorFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, DirectorFindFirstArgs>
-    ): CheckSelect<T, Prisma__DirectorClient<Director | null>, Prisma__DirectorClient<DirectorGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Director'> extends True ? CheckSelect<T, Prisma__DirectorClient<Director>, Prisma__DirectorClient<DirectorGetPayload<T>>> : CheckSelect<T, Prisma__DirectorClient<Director | null >, Prisma__DirectorClient<DirectorGetPayload<T> | null >>
 
     /**
      * Find zero or more Directors that matches the filter.
@@ -5624,7 +5678,7 @@ export namespace Prisma {
     }
   >
 
-  export interface ProblemDelegate {
+  export interface ProblemDelegate<GlobalRejectSettings> {
     /**
      * Find zero or one Problem that matches the filter.
      * @param {ProblemFindUniqueArgs} args - Arguments to find a Problem
@@ -5636,9 +5690,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends ProblemFindUniqueArgs>(
+    findUnique<T extends ProblemFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, ProblemFindUniqueArgs>
-    ): CheckSelect<T, Prisma__ProblemClient<Problem | null>, Prisma__ProblemClient<ProblemGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Problem'> extends True ? CheckSelect<T, Prisma__ProblemClient<Problem>, Prisma__ProblemClient<ProblemGetPayload<T>>> : CheckSelect<T, Prisma__ProblemClient<Problem | null >, Prisma__ProblemClient<ProblemGetPayload<T> | null >>
 
     /**
      * Find the first Problem that matches the filter.
@@ -5651,9 +5705,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends ProblemFindFirstArgs>(
+    findFirst<T extends ProblemFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, ProblemFindFirstArgs>
-    ): CheckSelect<T, Prisma__ProblemClient<Problem | null>, Prisma__ProblemClient<ProblemGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Problem'> extends True ? CheckSelect<T, Prisma__ProblemClient<Problem>, Prisma__ProblemClient<ProblemGetPayload<T>>> : CheckSelect<T, Prisma__ProblemClient<Problem | null >, Prisma__ProblemClient<ProblemGetPayload<T> | null >>
 
     /**
      * Find zero or more Problems that matches the filter.
@@ -5925,7 +5979,7 @@ export namespace Prisma {
 
     likedBy<T extends CreatorFindManyArgs = {}>(args?: Subset<T, CreatorFindManyArgs>): CheckSelect<T, Promise<Array<Creator>>, Promise<Array<CreatorGetPayload<T>>>>;
 
-    creator<T extends CreatorArgs = {}>(args?: Subset<T, CreatorArgs>): CheckSelect<T, Prisma__CreatorClient<Creator | null>, Prisma__CreatorClient<CreatorGetPayload<T> | null>>;
+    creator<T extends CreatorArgs = {}>(args?: Subset<T, CreatorArgs>): CheckSelect<T, Prisma__CreatorClient<Creator | null >, Prisma__CreatorClient<CreatorGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -6406,7 +6460,7 @@ export namespace Prisma {
     }
   >
 
-  export interface CreatorDelegate {
+  export interface CreatorDelegate<GlobalRejectSettings> {
     /**
      * Find zero or one Creator that matches the filter.
      * @param {CreatorFindUniqueArgs} args - Arguments to find a Creator
@@ -6418,9 +6472,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends CreatorFindUniqueArgs>(
+    findUnique<T extends CreatorFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args: SelectSubset<T, CreatorFindUniqueArgs>
-    ): CheckSelect<T, Prisma__CreatorClient<Creator | null>, Prisma__CreatorClient<CreatorGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Creator'> extends True ? CheckSelect<T, Prisma__CreatorClient<Creator>, Prisma__CreatorClient<CreatorGetPayload<T>>> : CheckSelect<T, Prisma__CreatorClient<Creator | null >, Prisma__CreatorClient<CreatorGetPayload<T> | null >>
 
     /**
      * Find the first Creator that matches the filter.
@@ -6433,9 +6487,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends CreatorFindFirstArgs>(
+    findFirst<T extends CreatorFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
       args?: SelectSubset<T, CreatorFindFirstArgs>
-    ): CheckSelect<T, Prisma__CreatorClient<Creator | null>, Prisma__CreatorClient<CreatorGetPayload<T> | null>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Creator'> extends True ? CheckSelect<T, Prisma__CreatorClient<Creator>, Prisma__CreatorClient<CreatorGetPayload<T>>> : CheckSelect<T, Prisma__CreatorClient<Creator | null >, Prisma__CreatorClient<CreatorGetPayload<T> | null >>
 
     /**
      * Find zero or more Creators that matches the filter.
@@ -7155,7 +7209,9 @@ export namespace Prisma {
     title?: SortOrder
     subtitle?: SortOrder
     content?: SortOrder
+    author?: UserOrderByInput
     authorId?: SortOrder
+    editor?: UserOrderByInput
     editorId?: SortOrder
     kind?: SortOrder
     metadata?: SortOrder
@@ -7251,6 +7307,7 @@ export namespace Prisma {
   export type MovieOrderByInput = {
     directorFirstName?: SortOrder
     directorLastName?: SortOrder
+    director?: DirectorOrderByInput
     title?: SortOrder
   }
 
@@ -7307,6 +7364,7 @@ export namespace Prisma {
   export type ProblemOrderByInput = {
     id?: SortOrder
     problemText?: SortOrder
+    creator?: CreatorOrderByInput
     creatorId?: SortOrder
   }
 
@@ -7357,8 +7415,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    posts?: postCreateManyWithoutAuthorInput
-    editorPosts?: postCreateManyWithoutEditorInput
+    posts?: postCreateNestedManyWithoutAuthorInput
+    editorPosts?: postCreateNestedManyWithoutEditorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7369,8 +7427,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    posts?: postUncheckedCreateManyWithoutAuthorInput
-    editorPosts?: postUncheckedCreateManyWithoutEditorInput
+    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
+    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
 
   export type UserUpdateInput = {
@@ -7425,8 +7483,8 @@ export namespace Prisma {
     content?: string | null
     kind?: PostKind | null
     metadata: InputJsonValue
-    author: UserCreateOneWithoutPostsInput
-    editor?: UserCreateOneWithoutEditorPostsInput
+    author: UserCreateNestedOneWithoutPostsInput
+    editor?: UserCreateNestedOneWithoutEditorPostsInput
   }
 
   export type postUncheckedCreateInput = {
@@ -7571,7 +7629,7 @@ export namespace Prisma {
 
   export type MovieCreateInput = {
     title: string
-    director: DirectorCreateOneWithoutMoviesInput
+    director: DirectorCreateNestedOneWithoutMoviesInput
   }
 
   export type MovieUncheckedCreateInput = {
@@ -7604,13 +7662,13 @@ export namespace Prisma {
   export type DirectorCreateInput = {
     firstName: string
     lastName: string
-    movies?: MovieCreateManyWithoutDirectorInput
+    movies?: MovieCreateNestedManyWithoutDirectorInput
   }
 
   export type DirectorUncheckedCreateInput = {
     firstName: string
     lastName: string
-    movies?: MovieUncheckedCreateManyWithoutDirectorInput
+    movies?: MovieUncheckedCreateNestedManyWithoutDirectorInput
   }
 
   export type DirectorUpdateInput = {
@@ -7637,8 +7695,8 @@ export namespace Prisma {
 
   export type ProblemCreateInput = {
     problemText: string
-    likedBy?: CreatorCreateManyWithoutLikesInput
-    creator?: CreatorCreateOneWithoutProblemsInput
+    likedBy?: CreatorCreateNestedManyWithoutLikesInput
+    creator?: CreatorCreateNestedOneWithoutProblemsInput
   }
 
   export type ProblemUncheckedCreateInput = {
@@ -7671,14 +7729,14 @@ export namespace Prisma {
 
   export type CreatorCreateInput = {
     name: string
-    likes?: ProblemCreateManyWithoutLikedByInput
-    problems?: ProblemCreateManyWithoutCreatorInput
+    likes?: ProblemCreateNestedManyWithoutLikedByInput
+    problems?: ProblemCreateNestedManyWithoutCreatorInput
   }
 
   export type CreatorUncheckedCreateInput = {
     id?: number
     name: string
-    problems?: ProblemUncheckedCreateManyWithoutCreatorInput
+    problems?: ProblemUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type CreatorUpdateInput = {
@@ -7994,28 +8052,28 @@ export namespace Prisma {
     none?: ProblemWhereInput
   }
 
-  export type postCreateManyWithoutAuthorInput = {
+  export type postCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
-    connect?: Enumerable<postWhereUniqueInput>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
-  }
-
-  export type postCreateManyWithoutEditorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
     connect?: Enumerable<postWhereUniqueInput>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
   }
 
-  export type postUncheckedCreateManyWithoutAuthorInput = {
+  export type postCreateNestedManyWithoutEditorInput = {
+    create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    connect?: Enumerable<postWhereUniqueInput>
+  }
+
+  export type postUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
-    connect?: Enumerable<postWhereUniqueInput>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    connect?: Enumerable<postWhereUniqueInput>
   }
 
-  export type postUncheckedCreateManyWithoutEditorInput = {
+  export type postUncheckedCreateNestedManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
-    connect?: Enumerable<postWhereUniqueInput>
     connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8048,6 +8106,8 @@ export namespace Prisma {
 
   export type postUpdateManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
     connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
@@ -8055,12 +8115,12 @@ export namespace Prisma {
     update?: Enumerable<postUpdateWithWhereUniqueWithoutAuthorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutAuthorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
-    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
   }
 
   export type postUpdateManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
     connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
@@ -8068,12 +8128,12 @@ export namespace Prisma {
     update?: Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutEditorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
-    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
   }
 
   export type postUncheckedUpdateManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
     connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
@@ -8081,12 +8141,12 @@ export namespace Prisma {
     update?: Enumerable<postUpdateWithWhereUniqueWithoutAuthorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutAuthorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
-    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
   }
 
   export type postUncheckedUpdateManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
     connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
@@ -8094,20 +8154,18 @@ export namespace Prisma {
     update?: Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutEditorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
-    upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
   }
 
-  export type UserCreateOneWithoutPostsInput = {
+  export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
-    connect?: UserWhereUniqueInput
     connectOrCreate?: UserCreateOrConnectWithoutpostsInput
+    connect?: UserWhereUniqueInput
   }
 
-  export type UserCreateOneWithoutEditorPostsInput = {
+  export type UserCreateNestedOneWithoutEditorPostsInput = {
     create?: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
-    connect?: UserWhereUniqueInput
     connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -8124,20 +8182,20 @@ export namespace Prisma {
 
   export type UserUpdateOneRequiredWithoutPostsInput = {
     create?: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutpostsInput
+    upsert?: UserUpsertWithoutPostsInput
     connect?: UserWhereUniqueInput
     update?: XOR<UserUncheckedUpdateWithoutPostsInput, UserUpdateWithoutPostsInput>
-    upsert?: UserUpsertWithoutPostsInput
-    connectOrCreate?: UserCreateOrConnectWithoutpostsInput
   }
 
   export type UserUpdateOneWithoutEditorPostsInput = {
     create?: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
+    connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
+    upsert?: UserUpsertWithoutEditorPostsInput
     connect?: UserWhereUniqueInput
     disconnect?: boolean
     delete?: boolean
     update?: XOR<UserUncheckedUpdateWithoutEditorPostsInput, UserUpdateWithoutEditorPostsInput>
-    upsert?: UserUpsertWithoutEditorPostsInput
-    connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -8148,34 +8206,36 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type DirectorCreateOneWithoutMoviesInput = {
+  export type DirectorCreateNestedOneWithoutMoviesInput = {
     create?: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
-    connect?: DirectorWhereUniqueInput
     connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
+    connect?: DirectorWhereUniqueInput
   }
 
   export type DirectorUpdateOneRequiredWithoutMoviesInput = {
     create?: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
+    connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
+    upsert?: DirectorUpsertWithoutMoviesInput
     connect?: DirectorWhereUniqueInput
     update?: XOR<DirectorUncheckedUpdateWithoutMoviesInput, DirectorUpdateWithoutMoviesInput>
-    upsert?: DirectorUpsertWithoutMoviesInput
-    connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
   }
 
-  export type MovieCreateManyWithoutDirectorInput = {
+  export type MovieCreateNestedManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
-    connect?: Enumerable<MovieWhereUniqueInput>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    connect?: Enumerable<MovieWhereUniqueInput>
   }
 
-  export type MovieUncheckedCreateManyWithoutDirectorInput = {
+  export type MovieUncheckedCreateNestedManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
-    connect?: Enumerable<MovieWhereUniqueInput>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    connect?: Enumerable<MovieWhereUniqueInput>
   }
 
   export type MovieUpdateManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
+    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
     connect?: Enumerable<MovieWhereUniqueInput>
     set?: Enumerable<MovieWhereUniqueInput>
     disconnect?: Enumerable<MovieWhereUniqueInput>
@@ -8183,12 +8243,12 @@ export namespace Prisma {
     update?: Enumerable<MovieUpdateWithWhereUniqueWithoutDirectorInput>
     updateMany?: Enumerable<MovieUpdateManyWithWhereWithoutDirectorInput>
     deleteMany?: Enumerable<MovieScalarWhereInput>
-    upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
-    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
   }
 
   export type MovieUncheckedUpdateManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
+    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
     connect?: Enumerable<MovieWhereUniqueInput>
     set?: Enumerable<MovieWhereUniqueInput>
     disconnect?: Enumerable<MovieWhereUniqueInput>
@@ -8196,24 +8256,24 @@ export namespace Prisma {
     update?: Enumerable<MovieUpdateWithWhereUniqueWithoutDirectorInput>
     updateMany?: Enumerable<MovieUpdateManyWithWhereWithoutDirectorInput>
     deleteMany?: Enumerable<MovieScalarWhereInput>
-    upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
-    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
   }
 
-  export type CreatorCreateManyWithoutLikesInput = {
+  export type CreatorCreateNestedManyWithoutLikesInput = {
     create?: XOR<Enumerable<CreatorUncheckedCreateWithoutLikesInput>, Enumerable<CreatorCreateWithoutLikesInput>>
-    connect?: Enumerable<CreatorWhereUniqueInput>
     connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutlikesInput>
+    connect?: Enumerable<CreatorWhereUniqueInput>
   }
 
-  export type CreatorCreateOneWithoutProblemsInput = {
+  export type CreatorCreateNestedOneWithoutProblemsInput = {
     create?: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
-    connect?: CreatorWhereUniqueInput
     connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
+    connect?: CreatorWhereUniqueInput
   }
 
   export type CreatorUpdateManyWithoutLikesInput = {
     create?: XOR<Enumerable<CreatorUncheckedCreateWithoutLikesInput>, Enumerable<CreatorCreateWithoutLikesInput>>
+    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutlikesInput>
+    upsert?: Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>
     connect?: Enumerable<CreatorWhereUniqueInput>
     set?: Enumerable<CreatorWhereUniqueInput>
     disconnect?: Enumerable<CreatorWhereUniqueInput>
@@ -8221,40 +8281,40 @@ export namespace Prisma {
     update?: Enumerable<CreatorUpdateWithWhereUniqueWithoutLikesInput>
     updateMany?: Enumerable<CreatorUpdateManyWithWhereWithoutLikesInput>
     deleteMany?: Enumerable<CreatorScalarWhereInput>
-    upsert?: Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>
-    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutlikesInput>
   }
 
   export type CreatorUpdateOneWithoutProblemsInput = {
     create?: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
+    connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
+    upsert?: CreatorUpsertWithoutProblemsInput
     connect?: CreatorWhereUniqueInput
     disconnect?: boolean
     delete?: boolean
     update?: XOR<CreatorUncheckedUpdateWithoutProblemsInput, CreatorUpdateWithoutProblemsInput>
-    upsert?: CreatorUpsertWithoutProblemsInput
-    connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
   }
 
-  export type ProblemCreateManyWithoutLikedByInput = {
+  export type ProblemCreateNestedManyWithoutLikedByInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutLikedByInput>, Enumerable<ProblemCreateWithoutLikedByInput>>
-    connect?: Enumerable<ProblemWhereUniqueInput>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutlikedByInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
-  export type ProblemCreateManyWithoutCreatorInput = {
+  export type ProblemCreateNestedManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
-    connect?: Enumerable<ProblemWhereUniqueInput>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
-  export type ProblemUncheckedCreateManyWithoutCreatorInput = {
+  export type ProblemUncheckedCreateNestedManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
-    connect?: Enumerable<ProblemWhereUniqueInput>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
   export type ProblemUpdateManyWithoutLikedByInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutLikedByInput>, Enumerable<ProblemCreateWithoutLikedByInput>>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutlikedByInput>
+    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>
     connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
     disconnect?: Enumerable<ProblemWhereUniqueInput>
@@ -8262,12 +8322,12 @@ export namespace Prisma {
     update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutLikedByInput>
     updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutLikedByInput>
     deleteMany?: Enumerable<ProblemScalarWhereInput>
-    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutlikedByInput>
   }
 
   export type ProblemUpdateManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
     connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
     disconnect?: Enumerable<ProblemWhereUniqueInput>
@@ -8275,12 +8335,12 @@ export namespace Prisma {
     update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>
     updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutCreatorInput>
     deleteMany?: Enumerable<ProblemScalarWhereInput>
-    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
   }
 
   export type ProblemUncheckedUpdateManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
     connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
     disconnect?: Enumerable<ProblemWhereUniqueInput>
@@ -8288,8 +8348,6 @@ export namespace Prisma {
     update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>
     updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutCreatorInput>
     deleteMany?: Enumerable<ProblemScalarWhereInput>
-    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
   }
 
   export type NestedIntFilter = {
@@ -8533,7 +8591,7 @@ export namespace Prisma {
     content?: string | null
     kind?: PostKind | null
     metadata: InputJsonValue
-    editor?: UserCreateOneWithoutEditorPostsInput
+    editor?: UserCreateNestedOneWithoutEditorPostsInput
   }
 
   export type postUncheckedCreateWithoutAuthorInput = {
@@ -8564,7 +8622,7 @@ export namespace Prisma {
     content?: string | null
     kind?: PostKind | null
     metadata: InputJsonValue
-    author: UserCreateOneWithoutPostsInput
+    author: UserCreateNestedOneWithoutPostsInput
   }
 
   export type postUncheckedCreateWithoutEditorInput = {
@@ -8583,6 +8641,12 @@ export namespace Prisma {
   export type postCreateOrConnectWithouteditorInput = {
     where: postWhereUniqueInput
     create: XOR<postUncheckedCreateWithoutEditorInput, postCreateWithoutEditorInput>
+  }
+
+  export type postUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: postWhereUniqueInput
+    update: XOR<postUncheckedUpdateWithoutAuthorInput, postUpdateWithoutAuthorInput>
+    create: XOR<postUncheckedCreateWithoutAuthorInput, postCreateWithoutAuthorInput>
   }
 
   export type postUpdateWithWhereUniqueWithoutAuthorInput = {
@@ -8612,10 +8676,10 @@ export namespace Prisma {
     metadata?: JsonFilter
   }
 
-  export type postUpsertWithWhereUniqueWithoutAuthorInput = {
+  export type postUpsertWithWhereUniqueWithoutEditorInput = {
     where: postWhereUniqueInput
-    update: XOR<postUncheckedUpdateWithoutAuthorInput, postUpdateWithoutAuthorInput>
-    create: XOR<postUncheckedCreateWithoutAuthorInput, postCreateWithoutAuthorInput>
+    update: XOR<postUncheckedUpdateWithoutEditorInput, postUpdateWithoutEditorInput>
+    create: XOR<postUncheckedCreateWithoutEditorInput, postCreateWithoutEditorInput>
   }
 
   export type postUpdateWithWhereUniqueWithoutEditorInput = {
@@ -8628,12 +8692,6 @@ export namespace Prisma {
     data: XOR<postUncheckedUpdateManyWithoutEditorPostsInput, postUpdateManyMutationInput>
   }
 
-  export type postUpsertWithWhereUniqueWithoutEditorInput = {
-    where: postWhereUniqueInput
-    update: XOR<postUncheckedUpdateWithoutEditorInput, postUpdateWithoutEditorInput>
-    create: XOR<postUncheckedCreateWithoutEditorInput, postCreateWithoutEditorInput>
-  }
-
   export type UserCreateWithoutPostsInput = {
     email: string
     name?: string | null
@@ -8641,7 +8699,7 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    editorPosts?: postCreateManyWithoutEditorInput
+    editorPosts?: postCreateNestedManyWithoutEditorInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -8652,7 +8710,7 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    editorPosts?: postUncheckedCreateManyWithoutEditorInput
+    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
 
   export type UserCreateOrConnectWithoutpostsInput = {
@@ -8667,7 +8725,7 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    posts?: postCreateManyWithoutAuthorInput
+    posts?: postCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutEditorPostsInput = {
@@ -8678,12 +8736,17 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    posts?: postUncheckedCreateManyWithoutAuthorInput
+    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithouteditorPostsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
+  }
+
+  export type UserUpsertWithoutPostsInput = {
+    update: XOR<UserUncheckedUpdateWithoutPostsInput, UserUpdateWithoutPostsInput>
+    create: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
   }
 
   export type UserUpdateWithoutPostsInput = {
@@ -8707,9 +8770,9 @@ export namespace Prisma {
     editorPosts?: postUncheckedUpdateManyWithoutEditorInput
   }
 
-  export type UserUpsertWithoutPostsInput = {
-    update: XOR<UserUncheckedUpdateWithoutPostsInput, UserUpdateWithoutPostsInput>
-    create: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
+  export type UserUpsertWithoutEditorPostsInput = {
+    update: XOR<UserUncheckedUpdateWithoutEditorPostsInput, UserUpdateWithoutEditorPostsInput>
+    create: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
   }
 
   export type UserUpdateWithoutEditorPostsInput = {
@@ -8733,11 +8796,6 @@ export namespace Prisma {
     posts?: postUncheckedUpdateManyWithoutAuthorInput
   }
 
-  export type UserUpsertWithoutEditorPostsInput = {
-    update: XOR<UserUncheckedUpdateWithoutEditorPostsInput, UserUpdateWithoutEditorPostsInput>
-    create: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
-  }
-
   export type DirectorCreateWithoutMoviesInput = {
     firstName: string
     lastName: string
@@ -8753,6 +8811,11 @@ export namespace Prisma {
     create: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
   }
 
+  export type DirectorUpsertWithoutMoviesInput = {
+    update: XOR<DirectorUncheckedUpdateWithoutMoviesInput, DirectorUpdateWithoutMoviesInput>
+    create: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
+  }
+
   export type DirectorUpdateWithoutMoviesInput = {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
@@ -8761,11 +8824,6 @@ export namespace Prisma {
   export type DirectorUncheckedUpdateWithoutMoviesInput = {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DirectorUpsertWithoutMoviesInput = {
-    update: XOR<DirectorUncheckedUpdateWithoutMoviesInput, DirectorUpdateWithoutMoviesInput>
-    create: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
   }
 
   export type MovieCreateWithoutDirectorInput = {
@@ -8778,6 +8836,12 @@ export namespace Prisma {
 
   export type MovieCreateOrConnectWithoutdirectorInput = {
     where: MovieWhereUniqueInput
+    create: XOR<MovieUncheckedCreateWithoutDirectorInput, MovieCreateWithoutDirectorInput>
+  }
+
+  export type MovieUpsertWithWhereUniqueWithoutDirectorInput = {
+    where: MovieWhereUniqueInput
+    update: XOR<MovieUncheckedUpdateWithoutDirectorInput, MovieUpdateWithoutDirectorInput>
     create: XOR<MovieUncheckedCreateWithoutDirectorInput, MovieCreateWithoutDirectorInput>
   }
 
@@ -8800,21 +8864,15 @@ export namespace Prisma {
     title?: StringFilter | string
   }
 
-  export type MovieUpsertWithWhereUniqueWithoutDirectorInput = {
-    where: MovieWhereUniqueInput
-    update: XOR<MovieUncheckedUpdateWithoutDirectorInput, MovieUpdateWithoutDirectorInput>
-    create: XOR<MovieUncheckedCreateWithoutDirectorInput, MovieCreateWithoutDirectorInput>
-  }
-
   export type CreatorCreateWithoutLikesInput = {
     name: string
-    problems?: ProblemCreateManyWithoutCreatorInput
+    problems?: ProblemCreateNestedManyWithoutCreatorInput
   }
 
   export type CreatorUncheckedCreateWithoutLikesInput = {
     id?: number
     name: string
-    problems?: ProblemUncheckedCreateManyWithoutCreatorInput
+    problems?: ProblemUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type CreatorCreateOrConnectWithoutlikesInput = {
@@ -8824,7 +8882,7 @@ export namespace Prisma {
 
   export type CreatorCreateWithoutProblemsInput = {
     name: string
-    likes?: ProblemCreateManyWithoutLikedByInput
+    likes?: ProblemCreateNestedManyWithoutLikedByInput
   }
 
   export type CreatorUncheckedCreateWithoutProblemsInput = {
@@ -8835,6 +8893,12 @@ export namespace Prisma {
   export type CreatorCreateOrConnectWithoutproblemsInput = {
     where: CreatorWhereUniqueInput
     create: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
+  }
+
+  export type CreatorUpsertWithWhereUniqueWithoutLikesInput = {
+    where: CreatorWhereUniqueInput
+    update: XOR<CreatorUncheckedUpdateWithoutLikesInput, CreatorUpdateWithoutLikesInput>
+    create: XOR<CreatorUncheckedCreateWithoutLikesInput, CreatorCreateWithoutLikesInput>
   }
 
   export type CreatorUpdateWithWhereUniqueWithoutLikesInput = {
@@ -8855,10 +8919,9 @@ export namespace Prisma {
     name?: StringFilter | string
   }
 
-  export type CreatorUpsertWithWhereUniqueWithoutLikesInput = {
-    where: CreatorWhereUniqueInput
-    update: XOR<CreatorUncheckedUpdateWithoutLikesInput, CreatorUpdateWithoutLikesInput>
-    create: XOR<CreatorUncheckedCreateWithoutLikesInput, CreatorCreateWithoutLikesInput>
+  export type CreatorUpsertWithoutProblemsInput = {
+    update: XOR<CreatorUncheckedUpdateWithoutProblemsInput, CreatorUpdateWithoutProblemsInput>
+    create: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
   }
 
   export type CreatorUpdateWithoutProblemsInput = {
@@ -8871,14 +8934,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type CreatorUpsertWithoutProblemsInput = {
-    update: XOR<CreatorUncheckedUpdateWithoutProblemsInput, CreatorUpdateWithoutProblemsInput>
-    create: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
-  }
-
   export type ProblemCreateWithoutLikedByInput = {
     problemText: string
-    creator?: CreatorCreateOneWithoutProblemsInput
+    creator?: CreatorCreateNestedOneWithoutProblemsInput
   }
 
   export type ProblemUncheckedCreateWithoutLikedByInput = {
@@ -8894,7 +8952,7 @@ export namespace Prisma {
 
   export type ProblemCreateWithoutCreatorInput = {
     problemText: string
-    likedBy?: CreatorCreateManyWithoutLikesInput
+    likedBy?: CreatorCreateNestedManyWithoutLikesInput
   }
 
   export type ProblemUncheckedCreateWithoutCreatorInput = {
@@ -8905,6 +8963,12 @@ export namespace Prisma {
   export type ProblemCreateOrConnectWithoutcreatorInput = {
     where: ProblemWhereUniqueInput
     create: XOR<ProblemUncheckedCreateWithoutCreatorInput, ProblemCreateWithoutCreatorInput>
+  }
+
+  export type ProblemUpsertWithWhereUniqueWithoutLikedByInput = {
+    where: ProblemWhereUniqueInput
+    update: XOR<ProblemUncheckedUpdateWithoutLikedByInput, ProblemUpdateWithoutLikedByInput>
+    create: XOR<ProblemUncheckedCreateWithoutLikedByInput, ProblemCreateWithoutLikedByInput>
   }
 
   export type ProblemUpdateWithWhereUniqueWithoutLikedByInput = {
@@ -8926,10 +8990,10 @@ export namespace Prisma {
     creatorId?: IntNullableFilter | number | null
   }
 
-  export type ProblemUpsertWithWhereUniqueWithoutLikedByInput = {
+  export type ProblemUpsertWithWhereUniqueWithoutCreatorInput = {
     where: ProblemWhereUniqueInput
-    update: XOR<ProblemUncheckedUpdateWithoutLikedByInput, ProblemUpdateWithoutLikedByInput>
-    create: XOR<ProblemUncheckedCreateWithoutLikedByInput, ProblemCreateWithoutLikedByInput>
+    update: XOR<ProblemUncheckedUpdateWithoutCreatorInput, ProblemUpdateWithoutCreatorInput>
+    create: XOR<ProblemUncheckedCreateWithoutCreatorInput, ProblemCreateWithoutCreatorInput>
   }
 
   export type ProblemUpdateWithWhereUniqueWithoutCreatorInput = {
@@ -8940,12 +9004,6 @@ export namespace Prisma {
   export type ProblemUpdateManyWithWhereWithoutCreatorInput = {
     where: ProblemScalarWhereInput
     data: XOR<ProblemUncheckedUpdateManyWithoutProblemsInput, ProblemUpdateManyMutationInput>
-  }
-
-  export type ProblemUpsertWithWhereUniqueWithoutCreatorInput = {
-    where: ProblemWhereUniqueInput
-    update: XOR<ProblemUncheckedUpdateWithoutCreatorInput, ProblemUpdateWithoutCreatorInput>
-    create: XOR<ProblemUncheckedCreateWithoutCreatorInput, ProblemCreateWithoutCreatorInput>
   }
 
   export type postUpdateWithoutAuthorInput = {
@@ -9089,7 +9147,7 @@ export namespace Prisma {
 
 
   /**
-   * Batch Payload for updateMany & deleteMany
+   * Batch Payload for updateMany & deleteMany & createMany
    */
 
   export type BatchPayload = {

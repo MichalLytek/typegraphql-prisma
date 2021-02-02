@@ -13,8 +13,8 @@ import { UpdateManyPostArgs } from "./args/UpdateManyPostArgs";
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
 import { Post } from "../../../models/Post";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregatePost } from "../../outputs/AggregatePost";
-import { BatchPayload } from "../../outputs/BatchPayload";
 import { PostGroupBy } from "../../outputs/PostGroupBy";
 
 @TypeGraphQL.Resolver(_of => Post)
@@ -61,17 +61,17 @@ export class PostCrudResolver {
     return ctx.prisma.post.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async deleteManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyPostArgs): Promise<BatchPayload> {
+  async deleteManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyPostArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.post.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPostArgs): Promise<BatchPayload> {
+  async updateManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPostArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.post.updateMany(args);
   }
 

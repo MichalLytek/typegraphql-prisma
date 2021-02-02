@@ -18,6 +18,16 @@ export class PostUpdateManyWithoutEditorInput {
   })
   create?: PostCreateWithoutEditorInput[] | undefined;
 
+  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithouteditorInput], {
+    nullable: true
+  })
+  connectOrCreate?: PostCreateOrConnectWithouteditorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [PostUpsertWithWhereUniqueWithoutEditorInput], {
+    nullable: true
+  })
+  upsert?: PostUpsertWithWhereUniqueWithoutEditorInput[] | undefined;
+
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
     nullable: true
   })
@@ -52,14 +62,4 @@ export class PostUpdateManyWithoutEditorInput {
     nullable: true
   })
   deleteMany?: PostScalarWhereInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [PostUpsertWithWhereUniqueWithoutEditorInput], {
-    nullable: true
-  })
-  upsert?: PostUpsertWithWhereUniqueWithoutEditorInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithouteditorInput], {
-    nullable: true
-  })
-  connectOrCreate?: PostCreateOrConnectWithouteditorInput[] | undefined;
 }

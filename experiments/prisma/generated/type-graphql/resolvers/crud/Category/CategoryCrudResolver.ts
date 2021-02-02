@@ -13,8 +13,8 @@ import { UpdateCategoryArgs } from "./args/UpdateCategoryArgs";
 import { UpdateManyCategoryArgs } from "./args/UpdateManyCategoryArgs";
 import { UpsertCategoryArgs } from "./args/UpsertCategoryArgs";
 import { Category } from "../../../models/Category";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
-import { BatchPayload } from "../../outputs/BatchPayload";
 import { CategoryGroupBy } from "../../outputs/CategoryGroupBy";
 
 @TypeGraphQL.Resolver(_of => Category)
@@ -61,17 +61,17 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async deleteManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCategoryArgs): Promise<BatchPayload> {
+  async deleteManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCategoryArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.category.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCategoryArgs): Promise<BatchPayload> {
+  async updateManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCategoryArgs): Promise<AffectedRowsOutput> {
     return ctx.prisma.category.updateMany(args);
   }
 

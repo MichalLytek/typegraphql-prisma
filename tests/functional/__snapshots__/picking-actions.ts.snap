@@ -160,11 +160,11 @@ enum UserScalarFieldEnum {
 
 input UserWhereInput {
   AND: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
   dateField: DateTimeFilter
   intIdField: IntFilter
-  NOT: [UserWhereInput!]
   optionalStringField: StringNullableFilter
-  OR: [UserWhereInput!]
   uniqueStringField: StringFilter
 }
 

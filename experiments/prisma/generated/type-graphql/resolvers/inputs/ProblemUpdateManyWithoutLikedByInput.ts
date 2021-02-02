@@ -18,6 +18,16 @@ export class ProblemUpdateManyWithoutLikedByInput {
   })
   create?: ProblemCreateWithoutLikedByInput[] | undefined;
 
+  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutlikedByInput], {
+    nullable: true
+  })
+  connectOrCreate?: ProblemCreateOrConnectWithoutlikedByInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [ProblemUpsertWithWhereUniqueWithoutLikedByInput], {
+    nullable: true
+  })
+  upsert?: ProblemUpsertWithWhereUniqueWithoutLikedByInput[] | undefined;
+
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
     nullable: true
   })
@@ -52,14 +62,4 @@ export class ProblemUpdateManyWithoutLikedByInput {
     nullable: true
   })
   deleteMany?: ProblemScalarWhereInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [ProblemUpsertWithWhereUniqueWithoutLikedByInput], {
-    nullable: true
-  })
-  upsert?: ProblemUpsertWithWhereUniqueWithoutLikedByInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutlikedByInput], {
-    nullable: true
-  })
-  connectOrCreate?: ProblemCreateOrConnectWithoutlikedByInput[] | undefined;
 }

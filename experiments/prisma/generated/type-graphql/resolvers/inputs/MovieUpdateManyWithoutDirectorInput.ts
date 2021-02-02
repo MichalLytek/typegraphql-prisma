@@ -18,6 +18,16 @@ export class MovieUpdateManyWithoutDirectorInput {
   })
   create?: MovieCreateWithoutDirectorInput[] | undefined;
 
+  @TypeGraphQL.Field(_type => [MovieCreateOrConnectWithoutdirectorInput], {
+    nullable: true
+  })
+  connectOrCreate?: MovieCreateOrConnectWithoutdirectorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [MovieUpsertWithWhereUniqueWithoutDirectorInput], {
+    nullable: true
+  })
+  upsert?: MovieUpsertWithWhereUniqueWithoutDirectorInput[] | undefined;
+
   @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
     nullable: true
   })
@@ -52,14 +62,4 @@ export class MovieUpdateManyWithoutDirectorInput {
     nullable: true
   })
   deleteMany?: MovieScalarWhereInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [MovieUpsertWithWhereUniqueWithoutDirectorInput], {
-    nullable: true
-  })
-  upsert?: MovieUpsertWithWhereUniqueWithoutDirectorInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [MovieCreateOrConnectWithoutdirectorInput], {
-    nullable: true
-  })
-  connectOrCreate?: MovieCreateOrConnectWithoutdirectorInput[] | undefined;
 }

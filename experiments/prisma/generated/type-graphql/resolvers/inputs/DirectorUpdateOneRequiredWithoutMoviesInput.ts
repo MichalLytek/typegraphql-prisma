@@ -16,6 +16,16 @@ export class DirectorUpdateOneRequiredWithoutMoviesInput {
   })
   create?: DirectorUncheckedCreateWithoutMoviesInput | undefined;
 
+  @TypeGraphQL.Field(_type => DirectorCreateOrConnectWithoutmoviesInput, {
+    nullable: true
+  })
+  connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput | undefined;
+
+  @TypeGraphQL.Field(_type => DirectorUpsertWithoutMoviesInput, {
+    nullable: true
+  })
+  upsert?: DirectorUpsertWithoutMoviesInput | undefined;
+
   @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
     nullable: true
   })
@@ -25,14 +35,4 @@ export class DirectorUpdateOneRequiredWithoutMoviesInput {
     nullable: true
   })
   update?: DirectorUncheckedUpdateWithoutMoviesInput | undefined;
-
-  @TypeGraphQL.Field(_type => DirectorUpsertWithoutMoviesInput, {
-    nullable: true
-  })
-  upsert?: DirectorUpsertWithoutMoviesInput | undefined;
-
-  @TypeGraphQL.Field(_type => DirectorCreateOrConnectWithoutmoviesInput, {
-    nullable: true
-  })
-  connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput | undefined;
 }

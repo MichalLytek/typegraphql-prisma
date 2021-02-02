@@ -18,6 +18,16 @@ export class ProblemUncheckedUpdateManyWithoutCreatorInput {
   })
   create?: ProblemCreateWithoutCreatorInput[] | undefined;
 
+  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutcreatorInput], {
+    nullable: true
+  })
+  connectOrCreate?: ProblemCreateOrConnectWithoutcreatorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [ProblemUpsertWithWhereUniqueWithoutCreatorInput], {
+    nullable: true
+  })
+  upsert?: ProblemUpsertWithWhereUniqueWithoutCreatorInput[] | undefined;
+
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
     nullable: true
   })
@@ -52,14 +62,4 @@ export class ProblemUncheckedUpdateManyWithoutCreatorInput {
     nullable: true
   })
   deleteMany?: ProblemScalarWhereInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [ProblemUpsertWithWhereUniqueWithoutCreatorInput], {
-    nullable: true
-  })
-  upsert?: ProblemUpsertWithWhereUniqueWithoutCreatorInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutcreatorInput], {
-    nullable: true
-  })
-  connectOrCreate?: ProblemCreateOrConnectWithoutcreatorInput[] | undefined;
 }

@@ -16,6 +16,16 @@ export class ClientUpdateOneRequiredWithoutPostsInput {
   })
   create?: ClientUncheckedCreateWithoutPostsInput | undefined;
 
+  @TypeGraphQL.Field(_type => ClientCreateOrConnectWithoutpostsInput, {
+    nullable: true
+  })
+  connectOrCreate?: ClientCreateOrConnectWithoutpostsInput | undefined;
+
+  @TypeGraphQL.Field(_type => ClientUpsertWithoutPostsInput, {
+    nullable: true
+  })
+  upsert?: ClientUpsertWithoutPostsInput | undefined;
+
   @TypeGraphQL.Field(_type => ClientWhereUniqueInput, {
     nullable: true
   })
@@ -25,14 +35,4 @@ export class ClientUpdateOneRequiredWithoutPostsInput {
     nullable: true
   })
   update?: ClientUncheckedUpdateWithoutPostsInput | undefined;
-
-  @TypeGraphQL.Field(_type => ClientUpsertWithoutPostsInput, {
-    nullable: true
-  })
-  upsert?: ClientUpsertWithoutPostsInput | undefined;
-
-  @TypeGraphQL.Field(_type => ClientCreateOrConnectWithoutpostsInput, {
-    nullable: true
-  })
-  connectOrCreate?: ClientCreateOrConnectWithoutpostsInput | undefined;
 }

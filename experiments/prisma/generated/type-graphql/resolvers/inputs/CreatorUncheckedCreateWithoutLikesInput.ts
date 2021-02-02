@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { ProblemUncheckedCreateManyWithoutCreatorInput } from "../inputs/ProblemUncheckedCreateManyWithoutCreatorInput";
+import { ProblemUncheckedCreateNestedManyWithoutCreatorInput } from "../inputs/ProblemUncheckedCreateNestedManyWithoutCreatorInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -17,8 +17,8 @@ export class CreatorUncheckedCreateWithoutLikesInput {
   })
   name!: string;
 
-  @TypeGraphQL.Field(_type => ProblemUncheckedCreateManyWithoutCreatorInput, {
+  @TypeGraphQL.Field(_type => ProblemUncheckedCreateNestedManyWithoutCreatorInput, {
     nullable: true
   })
-  problems?: ProblemUncheckedCreateManyWithoutCreatorInput | undefined;
+  problems?: ProblemUncheckedCreateNestedManyWithoutCreatorInput | undefined;
 }

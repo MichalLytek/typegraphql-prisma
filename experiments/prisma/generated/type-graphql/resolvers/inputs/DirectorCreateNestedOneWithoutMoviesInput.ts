@@ -8,19 +8,19 @@ import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class DirectorCreateOneWithoutMoviesInput {
+export class DirectorCreateNestedOneWithoutMoviesInput {
   @TypeGraphQL.Field(_type => DirectorUncheckedCreateWithoutMoviesInput, {
     nullable: true
   })
   create?: DirectorUncheckedCreateWithoutMoviesInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
-    nullable: true
-  })
-  connect?: DirectorWhereUniqueInput | undefined;
-
   @TypeGraphQL.Field(_type => DirectorCreateOrConnectWithoutmoviesInput, {
     nullable: true
   })
   connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput | undefined;
+
+  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
+    nullable: true
+  })
+  connect?: DirectorWhereUniqueInput | undefined;
 }

@@ -17,7 +17,7 @@ export class Problem {
   })
   problemText!: string;
 
-  likedBy?: Creator[] | null;
+  likedBy?: Creator[];
 
   creator?: Creator | null;
 

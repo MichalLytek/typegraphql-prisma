@@ -161,8 +161,8 @@ export class ExampleSumAggregate {
 `;
 
 exports[`outputs should properly generate aggregate classes for model with lowercase name: outputs index 1`] = `
-"export { AggregateExample } from \\"./AggregateExample\\";
-export { BatchPayload } from \\"./BatchPayload\\";
+"export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
+export { AggregateExample } from \\"./AggregateExample\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
 export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
 export { ExampleMaxAggregate } from \\"./ExampleMaxAggregate\\";
@@ -332,13 +332,31 @@ export class ExampleSumAggregate {
 `;
 
 exports[`outputs should properly generate aggregate classes for renamed model: outputs index 1`] = `
-"export { AggregateExample } from \\"./AggregateExample\\";
-export { BatchPayload } from \\"./BatchPayload\\";
+"export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
+export { AggregateExample } from \\"./AggregateExample\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
 export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
 export { ExampleMaxAggregate } from \\"./ExampleMaxAggregate\\";
 export { ExampleMinAggregate } from \\"./ExampleMinAggregate\\";
 export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
+"
+`;
+
+exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: AffectedRowsOutput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  simpleResolvers: true
+})
+export class AffectedRowsOutput {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  count!: number;
+}
 "
 `;
 
@@ -385,24 +403,6 @@ export class AggregateSample {
 "
 `;
 
-exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: BatchPayload 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
-import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
-
-@TypeGraphQL.ObjectType({
-  isAbstract: true,
-  simpleResolvers: true
-})
-export class BatchPayload {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
-  count!: number;
-}
-"
-`;
-
 exports[`outputs should properly generate output type classes when simpleResolvers option is enabled: SampleAvgAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
@@ -422,6 +422,23 @@ export class SampleAvgAggregate {
     nullable: false
   })
   floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: AffectedRowsOutput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class AffectedRowsOutput {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  count!: number;
 }
 "
 `;
@@ -464,23 +481,6 @@ export class AggregateSample {
     nullable: true
   })
   max!: SampleMaxAggregate | null;
-}
-"
-`;
-
-exports[`outputs should properly generate output type classes: BatchPayload 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
-import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
-
-@TypeGraphQL.ObjectType({
-  isAbstract: true
-})
-export class BatchPayload {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
-  count!: number;
 }
 "
 `;
@@ -604,8 +604,8 @@ export class SampleSumAggregate {
 `;
 
 exports[`outputs should properly generate output type classes: outputs index 1`] = `
-"export { AggregateSample } from \\"./AggregateSample\\";
-export { BatchPayload } from \\"./BatchPayload\\";
+"export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
+export { AggregateSample } from \\"./AggregateSample\\";
 export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";
 export { SampleCountAggregate } from \\"./SampleCountAggregate\\";
 export { SampleMaxAggregate } from \\"./SampleMaxAggregate\\";
@@ -682,8 +682,8 @@ export class SampleGroupBy {
 `;
 
 exports[`outputs when experimental feature \`groupBy\` is enabled should generate group by output type for model: outputs index 1`] = `
-"export { AggregateSample } from \\"./AggregateSample\\";
-export { BatchPayload } from \\"./BatchPayload\\";
+"export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
+export { AggregateSample } from \\"./AggregateSample\\";
 export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";
 export { SampleCountAggregate } from \\"./SampleCountAggregate\\";
 export { SampleGroupBy } from \\"./SampleGroupBy\\";

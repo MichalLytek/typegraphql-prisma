@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { ClientCreateOneWithoutEditorPostsInput } from "../inputs/ClientCreateOneWithoutEditorPostsInput";
+import { ClientCreateNestedOneWithoutEditorPostsInput } from "../inputs/ClientCreateNestedOneWithoutEditorPostsInput";
 import { PostKind } from "../../enums/PostKind";
 
 @TypeGraphQL.InputType({
@@ -53,8 +53,8 @@ export class PostCreateWithoutAuthorInput {
   })
   metadata!: Prisma.InputJsonValue;
 
-  @TypeGraphQL.Field(_type => ClientCreateOneWithoutEditorPostsInput, {
+  @TypeGraphQL.Field(_type => ClientCreateNestedOneWithoutEditorPostsInput, {
     nullable: true
   })
-  editor?: ClientCreateOneWithoutEditorPostsInput | undefined;
+  editor?: ClientCreateNestedOneWithoutEditorPostsInput | undefined;
 }

@@ -5,7 +5,7 @@ import { Prisma } from "../../../client";
 @TypeGraphQL.ObjectType({
   isAbstract: true
 })
-export class BatchPayload {
+export class AffectedRowsOutput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })

@@ -6,9 +6,9 @@ import { DirectorMoviesArgs } from "./args/DirectorMoviesArgs";
 @TypeGraphQL.Resolver(_of => Director)
 export class DirectorRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Movie], {
-    nullable: true
+    nullable: false
   })
-  async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[] | null> {
+  async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[]> {
     return ctx.prisma.director.findUnique({
       where: {
         firstName_lastName: {

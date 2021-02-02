@@ -58,7 +58,7 @@ export class User {
   intField!: number;
 
   /** relation doc */
-  posts?: Post[] | null;
+  posts?: Post[];
 }
 "
 `;
@@ -197,7 +197,7 @@ export class User {
 
   balance!: number | null;
 
-  posts?: Post[] | null;
+  posts?: Post[];
 
   /** renamed field docs */
   @TypeGraphQL.Field(_type => String, {
@@ -258,7 +258,7 @@ export class Client {
   })
   id!: number;
 
-  posts?: Article[] | null;
+  posts?: Article[];
 }
 "
 `;
@@ -303,7 +303,7 @@ export class User {
   })
   id!: number;
 
-  posts?: Post[] | null;
+  posts?: Post[];
 }
 "
 `;
@@ -334,7 +334,7 @@ export class Service {
   })
   sourceId?: number | null;
 
-  services?: Service[] | null;
+  services?: Service[];
 }
 "
 `;

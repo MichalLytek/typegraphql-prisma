@@ -8,19 +8,19 @@ import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class MovieCreateManyWithoutDirectorInput {
+export class MovieUncheckedCreateNestedManyWithoutDirectorInput {
   @TypeGraphQL.Field(_type => [MovieCreateWithoutDirectorInput], {
     nullable: true
   })
   create?: MovieCreateWithoutDirectorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
-    nullable: true
-  })
-  connect?: MovieWhereUniqueInput[] | undefined;
-
   @TypeGraphQL.Field(_type => [MovieCreateOrConnectWithoutdirectorInput], {
     nullable: true
   })
   connectOrCreate?: MovieCreateOrConnectWithoutdirectorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
+    nullable: true
+  })
+  connect?: MovieWhereUniqueInput[] | undefined;
 }
