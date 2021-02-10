@@ -1,11 +1,11 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { MovieUncheckedCreateInput } from "../../../inputs/MovieUncheckedCreateInput";
+import { MovieCreateInput } from "../../../inputs/MovieCreateInput";
 
 @TypeGraphQL.ArgsType()
 export class CreateMovieArgs {
-  @TypeGraphQL.Field(_type => MovieUncheckedCreateInput, {
+  @TypeGraphQL.Field(_type => MovieCreateInput, {
     nullable: false
   })
-  data!: MovieUncheckedCreateInput;
+  data!: MovieCreateInput;
 }

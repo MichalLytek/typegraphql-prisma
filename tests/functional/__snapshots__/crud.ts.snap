@@ -308,7 +308,7 @@ Object {
 }
 `;
 
-exports[`crud resolvers execution when experimental feature \`groupBy\` is enabled should properly call PrismaClient on \`groupBy\` action with advanced operations: groupByUser mocked response 1`] = `
+exports[`crud resolvers execution when preview feature \`groupBy\` is enabled should properly call PrismaClient on \`groupBy\` action with advanced operations: groupByUser mocked response 1`] = `
 Object {
   "groupByUser": Array [
     Object {
@@ -328,7 +328,7 @@ Object {
 }
 `;
 
-exports[`crud resolvers execution when experimental feature \`groupBy\` is enabled should properly call PrismaClient on \`groupBy\` action with advanced operations: user.groupBy call args 1`] = `
+exports[`crud resolvers execution when preview feature \`groupBy\` is enabled should properly call PrismaClient on \`groupBy\` action with advanced operations: user.groupBy call args 1`] = `
 Array [
   Array [
     Object {

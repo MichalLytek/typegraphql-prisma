@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { CreatorUncheckedCreateWithoutProblemsInput } from "../inputs/CreatorUncheckedCreateWithoutProblemsInput";
+import { CreatorCreateWithoutProblemsInput } from "../inputs/CreatorCreateWithoutProblemsInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -13,8 +13,8 @@ export class CreatorCreateOrConnectWithoutproblemsInput {
   })
   where!: CreatorWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => CreatorUncheckedCreateWithoutProblemsInput, {
+  @TypeGraphQL.Field(_type => CreatorCreateWithoutProblemsInput, {
     nullable: false
   })
-  create!: CreatorUncheckedCreateWithoutProblemsInput;
+  create!: CreatorCreateWithoutProblemsInput;
 }

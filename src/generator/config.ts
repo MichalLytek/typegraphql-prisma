@@ -19,10 +19,17 @@ export const supportedQueryActions: SupportedQueries[] = [
 
 export type SupportedMutations = keyof Pick<
   typeof DMMF.ModelAction,
-  "create" | "delete" | "update" | "deleteMany" | "updateMany" | "upsert"
+  | "create"
+  | "createMany"
+  | "delete"
+  | "update"
+  | "deleteMany"
+  | "updateMany"
+  | "upsert"
 >;
 export const supportedMutationActions: SupportedMutations[] = [
   "create",
+  "createMany",
   "delete",
   "update",
   "deleteMany",

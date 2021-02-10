@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
+import { MovieCreateManyDirectorInputEnvelope } from "../inputs/MovieCreateManyDirectorInputEnvelope";
 import { MovieCreateOrConnectWithoutdirectorInput } from "../inputs/MovieCreateOrConnectWithoutdirectorInput";
 import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
 import { MovieScalarWhereInput } from "../inputs/MovieScalarWhereInput";
@@ -27,6 +28,11 @@ export class MovieUpdateManyWithoutDirectorInput {
     nullable: true
   })
   upsert?: MovieUpsertWithWhereUniqueWithoutDirectorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => MovieCreateManyDirectorInputEnvelope, {
+    nullable: true
+  })
+  createMany?: MovieCreateManyDirectorInputEnvelope | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
     nullable: true

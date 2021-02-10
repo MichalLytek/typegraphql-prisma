@@ -425,7 +425,7 @@ describe("crud", () => {
     });
   });
 
-  describe("when experimental feature `groupBy` is enabled", () => {
+  describe("when preview feature `groupBy` is enabled", () => {
     it("should properly generate group by resolver class and crud method for prisma model", async () => {
       const schema = /* prisma */ `
         datasource db {
@@ -445,7 +445,7 @@ describe("crud", () => {
         outputDirPath,
         enabledPreviewFeatures: ["groupBy"],
       });
-      const upsertUserResolverTSFile = await readGeneratedFile(
+      const groupByUserResolverTSFile = await readGeneratedFile(
         "/resolvers/crud/User/GroupByUserResolver.ts",
       );
       const userCrudResolverTSFile = await readGeneratedFile(
@@ -455,7 +455,7 @@ describe("crud", () => {
         "/resolvers/crud/resolvers-actions.index.ts",
       );
 
-      expect(upsertUserResolverTSFile).toMatchSnapshot("GroupByUserResolver");
+      expect(groupByUserResolverTSFile).toMatchSnapshot("GroupByUserResolver");
       expect(actionsIndexTSFile).toMatchSnapshot("actionsIndex");
       expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
     });
@@ -528,6 +528,52 @@ describe("crud", () => {
       expect(updateManyUserArgsTSFile).toMatchSnapshot("UpdateManyUserArgs");
       expect(updateUserArgsTSFile).toMatchSnapshot("UpdateUserArgs");
       expect(upsertUserArgsTSFile).toMatchSnapshot("UpsertUserArgs");
+    });
+  });
+
+  describe("when `createMany` preview feature is enabled", () => {
+    it("should properly generate createMany method, resolver and args classes", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["createMany"],
+      });
+      const createManyUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/args/CreateManyUserArgs.ts",
+      );
+      const argsIndexTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/args/index.ts",
+      );
+      const createManyUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/CreateManyUserResolver.ts",
+      );
+      const userCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UserCrudResolver.ts",
+      );
+      const actionsIndexTSFile = await readGeneratedFile(
+        "/resolvers/crud/resolvers-actions.index.ts",
+      );
+
+      expect(createManyUserResolverTSFile).toMatchSnapshot(
+        "CreateManyUserResolver",
+      );
+      expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+      expect(createManyUserArgsTSFile).toMatchSnapshot("CreateManyUserArgs");
+      expect(actionsIndexTSFile).toMatchSnapshot("actionsIndex");
+      expect(argsIndexTSFile).toMatchSnapshot("argsIndex");
     });
   });
 });

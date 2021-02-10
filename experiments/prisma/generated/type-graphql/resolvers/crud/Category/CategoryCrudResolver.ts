@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateCategoryArgs } from "./args/AggregateCategoryArgs";
 import { CreateCategoryArgs } from "./args/CreateCategoryArgs";
+import { CreateManyCategoryArgs } from "./args/CreateManyCategoryArgs";
 import { DeleteCategoryArgs } from "./args/DeleteCategoryArgs";
 import { DeleteManyCategoryArgs } from "./args/DeleteManyCategoryArgs";
 import { FindFirstCategoryArgs } from "./args/FindFirstCategoryArgs";
@@ -45,6 +46,13 @@ export class CategoryCrudResolver {
   })
   async createCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateCategoryArgs): Promise<Category> {
     return ctx.prisma.category.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyCategoryArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.category.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {

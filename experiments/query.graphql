@@ -273,3 +273,11 @@ query SortByRelation {
     }
   }
 }
+
+mutation CreateMany {
+  createManyProblem(
+    data: [{ problemText: "problem1" }, { problemText: "problem2" }]
+  ) {
+    count
+  }
+}

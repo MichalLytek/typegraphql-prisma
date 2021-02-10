@@ -1,4 +1,5 @@
 export { AggregateProblemArgs } from "./AggregateProblemArgs";
+export { CreateManyProblemArgs } from "./CreateManyProblemArgs";
 export { CreateProblemArgs } from "./CreateProblemArgs";
 export { DeleteManyProblemArgs } from "./DeleteManyProblemArgs";
 export { DeleteProblemArgs } from "./DeleteProblemArgs";

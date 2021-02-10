@@ -1164,6 +1164,22 @@ export namespace Prisma {
     ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
 
     /**
+     * Create many Users.
+     *     @param {UserCreateManyArgs} args - Arguments to create many Users.
+     *     @example
+     *     // Create many Users
+     *     const user = await prisma.user.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends UserCreateManyArgs>(
+      args?: SelectSubset<T, UserCreateManyArgs>
+    ): Promise<BatchPayload>
+
+    /**
      * Delete a User.
      * @param {UserDeleteArgs} args - Arguments to delete one User.
      * @example
@@ -1562,6 +1578,15 @@ export namespace Prisma {
      * The data needed to create a User.
     **/
     data: XOR<UserUncheckedCreateInput, UserCreateInput>
+  }
+
+
+  /**
+   * User createMany
+   */
+  export type UserCreateManyArgs = {
+    data: Enumerable<UserCreateManyInput>
+    skipDuplicates?: boolean
   }
 
 
@@ -2018,6 +2043,22 @@ export namespace Prisma {
     ): CheckSelect<T, Prisma__postClient<post>, Prisma__postClient<postGetPayload<T>>>
 
     /**
+     * Create many Posts.
+     *     @param {postCreateManyArgs} args - Arguments to create many Posts.
+     *     @example
+     *     // Create many Posts
+     *     const post = await prisma.post.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends postCreateManyArgs>(
+      args?: SelectSubset<T, postCreateManyArgs>
+    ): Promise<BatchPayload>
+
+    /**
      * Delete a Post.
      * @param {postDeleteArgs} args - Arguments to delete one Post.
      * @example
@@ -2420,6 +2461,15 @@ export namespace Prisma {
 
 
   /**
+   * post createMany
+   */
+  export type postCreateManyArgs = {
+    data: Enumerable<postCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
    * post update
    */
   export type postUpdateArgs = {
@@ -2790,6 +2840,22 @@ export namespace Prisma {
     create<T extends CategoryCreateArgs>(
       args: SelectSubset<T, CategoryCreateArgs>
     ): CheckSelect<T, Prisma__CategoryClient<Category>, Prisma__CategoryClient<CategoryGetPayload<T>>>
+
+    /**
+     * Create many Categories.
+     *     @param {CategoryCreateManyArgs} args - Arguments to create many Categories.
+     *     @example
+     *     // Create many Categories
+     *     const category = await prisma.category.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends CategoryCreateManyArgs>(
+      args?: SelectSubset<T, CategoryCreateManyArgs>
+    ): Promise<BatchPayload>
 
     /**
      * Delete a Category.
@@ -3175,6 +3241,15 @@ export namespace Prisma {
 
 
   /**
+   * Category createMany
+   */
+  export type CategoryCreateManyArgs = {
+    data: Enumerable<CategoryCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
    * Category update
    */
   export type CategoryUpdateArgs = {
@@ -3495,6 +3570,22 @@ export namespace Prisma {
     create<T extends PatientCreateArgs>(
       args: SelectSubset<T, PatientCreateArgs>
     ): CheckSelect<T, Prisma__PatientClient<Patient>, Prisma__PatientClient<PatientGetPayload<T>>>
+
+    /**
+     * Create many Patients.
+     *     @param {PatientCreateManyArgs} args - Arguments to create many Patients.
+     *     @example
+     *     // Create many Patients
+     *     const patient = await prisma.patient.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends PatientCreateManyArgs>(
+      args?: SelectSubset<T, PatientCreateManyArgs>
+    ): Promise<BatchPayload>
 
     /**
      * Delete a Patient.
@@ -3880,6 +3971,15 @@ export namespace Prisma {
 
 
   /**
+   * Patient createMany
+   */
+  export type PatientCreateManyArgs = {
+    data: Enumerable<PatientCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
    * Patient update
    */
   export type PatientUpdateArgs = {
@@ -4210,6 +4310,22 @@ export namespace Prisma {
     create<T extends MovieCreateArgs>(
       args: SelectSubset<T, MovieCreateArgs>
     ): CheckSelect<T, Prisma__MovieClient<Movie>, Prisma__MovieClient<MovieGetPayload<T>>>
+
+    /**
+     * Create many Movies.
+     *     @param {MovieCreateManyArgs} args - Arguments to create many Movies.
+     *     @example
+     *     // Create many Movies
+     *     const movie = await prisma.movie.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends MovieCreateManyArgs>(
+      args?: SelectSubset<T, MovieCreateManyArgs>
+    ): Promise<BatchPayload>
 
     /**
      * Delete a Movie.
@@ -4612,6 +4728,15 @@ export namespace Prisma {
 
 
   /**
+   * Movie createMany
+   */
+  export type MovieCreateManyArgs = {
+    data: Enumerable<MovieCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
    * Movie update
    */
   export type MovieUpdateArgs = {
@@ -4950,6 +5075,22 @@ export namespace Prisma {
     create<T extends DirectorCreateArgs>(
       args: SelectSubset<T, DirectorCreateArgs>
     ): CheckSelect<T, Prisma__DirectorClient<Director>, Prisma__DirectorClient<DirectorGetPayload<T>>>
+
+    /**
+     * Create many Directors.
+     *     @param {DirectorCreateManyArgs} args - Arguments to create many Directors.
+     *     @example
+     *     // Create many Directors
+     *     const director = await prisma.director.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends DirectorCreateManyArgs>(
+      args?: SelectSubset<T, DirectorCreateManyArgs>
+    ): Promise<BatchPayload>
 
     /**
      * Delete a Director.
@@ -5352,6 +5493,15 @@ export namespace Prisma {
 
 
   /**
+   * Director createMany
+   */
+  export type DirectorCreateManyArgs = {
+    data: Enumerable<DirectorCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
    * Director update
    */
   export type DirectorUpdateArgs = {
@@ -5742,6 +5892,22 @@ export namespace Prisma {
     create<T extends ProblemCreateArgs>(
       args: SelectSubset<T, ProblemCreateArgs>
     ): CheckSelect<T, Prisma__ProblemClient<Problem>, Prisma__ProblemClient<ProblemGetPayload<T>>>
+
+    /**
+     * Create many Problems.
+     *     @param {ProblemCreateManyArgs} args - Arguments to create many Problems.
+     *     @example
+     *     // Create many Problems
+     *     const problem = await prisma.problem.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends ProblemCreateManyArgs>(
+      args?: SelectSubset<T, ProblemCreateManyArgs>
+    ): Promise<BatchPayload>
 
     /**
      * Delete a Problem.
@@ -6146,6 +6312,15 @@ export namespace Prisma {
 
 
   /**
+   * Problem createMany
+   */
+  export type ProblemCreateManyArgs = {
+    data: Enumerable<ProblemCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
    * Problem update
    */
   export type ProblemUpdateArgs = {
@@ -6524,6 +6699,22 @@ export namespace Prisma {
     create<T extends CreatorCreateArgs>(
       args: SelectSubset<T, CreatorCreateArgs>
     ): CheckSelect<T, Prisma__CreatorClient<Creator>, Prisma__CreatorClient<CreatorGetPayload<T>>>
+
+    /**
+     * Create many Creators.
+     *     @param {CreatorCreateManyArgs} args - Arguments to create many Creators.
+     *     @example
+     *     // Create many Creators
+     *     const creator = await prisma.creator.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends CreatorCreateManyArgs>(
+      args?: SelectSubset<T, CreatorCreateManyArgs>
+    ): Promise<BatchPayload>
 
     /**
      * Delete a Creator.
@@ -6924,6 +7115,15 @@ export namespace Prisma {
      * The data needed to create a Creator.
     **/
     data: XOR<CreatorUncheckedCreateInput, CreatorCreateInput>
+  }
+
+
+  /**
+   * Creator createMany
+   */
+  export type CreatorCreateManyArgs = {
+    data: Enumerable<CreatorCreateManyInput>
+    skipDuplicates?: boolean
   }
 
 
@@ -7454,6 +7654,16 @@ export namespace Prisma {
     editorPosts?: postUncheckedUpdateManyWithoutEditorInput
   }
 
+  export type UserCreateManyInput = {
+    id?: number
+    email: string
+    name?: string | null
+    age: number
+    balance: number
+    amount: number
+    role: Role
+  }
+
   export type UserUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7529,6 +7739,20 @@ export namespace Prisma {
     metadata?: InputJsonValue
   }
 
+  export type postCreateManyInput = {
+    uuid?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    published: boolean
+    title: string
+    subtitle: string
+    content?: string | null
+    authorId: number
+    editorId?: number | null
+    kind?: PostKind | null
+    metadata: InputJsonValue
+  }
+
   export type postUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7579,6 +7803,12 @@ export namespace Prisma {
     number?: IntFieldUpdateOperationsInput | number
   }
 
+  export type CategoryCreateManyInput = {
+    name: string
+    slug: string
+    number: number
+  }
+
   export type CategoryUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -7615,6 +7845,12 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
   }
 
+  export type PatientCreateManyInput = {
+    firstName: string
+    lastName: string
+    email: string
+  }
+
   export type PatientUpdateManyMutationInput = {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
@@ -7647,6 +7883,12 @@ export namespace Prisma {
     directorFirstName?: StringFieldUpdateOperationsInput | string
     directorLastName?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MovieCreateManyInput = {
+    directorFirstName: string
+    directorLastName: string
+    title: string
   }
 
   export type MovieUpdateManyMutationInput = {
@@ -7683,6 +7925,11 @@ export namespace Prisma {
     movies?: MovieUncheckedUpdateManyWithoutDirectorInput
   }
 
+  export type DirectorCreateManyInput = {
+    firstName: string
+    lastName: string
+  }
+
   export type DirectorUpdateManyMutationInput = {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
@@ -7717,6 +7964,12 @@ export namespace Prisma {
     creatorId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
+  export type ProblemCreateManyInput = {
+    id?: number
+    problemText: string
+    creatorId?: number | null
+  }
+
   export type ProblemUpdateManyMutationInput = {
     problemText?: StringFieldUpdateOperationsInput | string
   }
@@ -7749,6 +8002,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     problems?: ProblemUncheckedUpdateManyWithoutCreatorInput
+  }
+
+  export type CreatorCreateManyInput = {
+    id?: number
+    name: string
   }
 
   export type CreatorUpdateManyMutationInput = {
@@ -8055,24 +8313,28 @@ export namespace Prisma {
   export type postCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postCreateNestedManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postUncheckedCreateNestedManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
@@ -8108,6 +8370,7 @@ export namespace Prisma {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
+    createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
@@ -8121,6 +8384,7 @@ export namespace Prisma {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
+    createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
@@ -8134,6 +8398,7 @@ export namespace Prisma {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
+    createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
@@ -8147,6 +8412,7 @@ export namespace Prisma {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
+    createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
@@ -8223,12 +8489,14 @@ export namespace Prisma {
   export type MovieCreateNestedManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
   }
 
   export type MovieUncheckedCreateNestedManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
   }
 
@@ -8236,6 +8504,7 @@ export namespace Prisma {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
     upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
+    createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
     set?: Enumerable<MovieWhereUniqueInput>
     disconnect?: Enumerable<MovieWhereUniqueInput>
@@ -8249,6 +8518,7 @@ export namespace Prisma {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
     upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
+    createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
     set?: Enumerable<MovieWhereUniqueInput>
     disconnect?: Enumerable<MovieWhereUniqueInput>
@@ -8302,12 +8572,14 @@ export namespace Prisma {
   export type ProblemCreateNestedManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
   export type ProblemUncheckedCreateNestedManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
@@ -8328,6 +8600,7 @@ export namespace Prisma {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
+    createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
     disconnect?: Enumerable<ProblemWhereUniqueInput>
@@ -8341,6 +8614,7 @@ export namespace Prisma {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
+    createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
     disconnect?: Enumerable<ProblemWhereUniqueInput>
@@ -8612,6 +8886,11 @@ export namespace Prisma {
     create: XOR<postUncheckedCreateWithoutAuthorInput, postCreateWithoutAuthorInput>
   }
 
+  export type postCreateManyAuthorInputEnvelope = {
+    data: Enumerable<postCreateManyAuthorInput>
+    skipDuplicates?: boolean
+  }
+
   export type postCreateWithoutEditorInput = {
     uuid?: string
     createdAt?: Date | string
@@ -8641,6 +8920,11 @@ export namespace Prisma {
   export type postCreateOrConnectWithouteditorInput = {
     where: postWhereUniqueInput
     create: XOR<postUncheckedCreateWithoutEditorInput, postCreateWithoutEditorInput>
+  }
+
+  export type postCreateManyEditorInputEnvelope = {
+    data: Enumerable<postCreateManyEditorInput>
+    skipDuplicates?: boolean
   }
 
   export type postUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -8839,6 +9123,11 @@ export namespace Prisma {
     create: XOR<MovieUncheckedCreateWithoutDirectorInput, MovieCreateWithoutDirectorInput>
   }
 
+  export type MovieCreateManyDirectorInputEnvelope = {
+    data: Enumerable<MovieCreateManyDirectorInput>
+    skipDuplicates?: boolean
+  }
+
   export type MovieUpsertWithWhereUniqueWithoutDirectorInput = {
     where: MovieWhereUniqueInput
     update: XOR<MovieUncheckedUpdateWithoutDirectorInput, MovieUpdateWithoutDirectorInput>
@@ -8965,6 +9254,11 @@ export namespace Prisma {
     create: XOR<ProblemUncheckedCreateWithoutCreatorInput, ProblemCreateWithoutCreatorInput>
   }
 
+  export type ProblemCreateManyCreatorInputEnvelope = {
+    data: Enumerable<ProblemCreateManyCreatorInput>
+    skipDuplicates?: boolean
+  }
+
   export type ProblemUpsertWithWhereUniqueWithoutLikedByInput = {
     where: ProblemWhereUniqueInput
     update: XOR<ProblemUncheckedUpdateWithoutLikedByInput, ProblemUpdateWithoutLikedByInput>
@@ -9004,6 +9298,32 @@ export namespace Prisma {
   export type ProblemUpdateManyWithWhereWithoutCreatorInput = {
     where: ProblemScalarWhereInput
     data: XOR<ProblemUncheckedUpdateManyWithoutProblemsInput, ProblemUpdateManyMutationInput>
+  }
+
+  export type postCreateManyAuthorInput = {
+    uuid?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    published: boolean
+    title: string
+    subtitle: string
+    content?: string | null
+    editorId?: number | null
+    kind?: PostKind | null
+    metadata: InputJsonValue
+  }
+
+  export type postCreateManyEditorInput = {
+    uuid?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    published: boolean
+    title: string
+    subtitle: string
+    content?: string | null
+    authorId: number
+    kind?: PostKind | null
+    metadata: InputJsonValue
   }
 
   export type postUpdateWithoutAuthorInput = {
@@ -9084,6 +9404,10 @@ export namespace Prisma {
     metadata?: InputJsonValue
   }
 
+  export type MovieCreateManyDirectorInput = {
+    title: string
+  }
+
   export type MovieUpdateWithoutDirectorInput = {
     title?: StringFieldUpdateOperationsInput | string
   }
@@ -9110,6 +9434,11 @@ export namespace Prisma {
   export type CreatorUncheckedUpdateManyWithoutLikedByInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProblemCreateManyCreatorInput = {
+    id?: number
+    problemText: string
   }
 
   export type ProblemUpdateWithoutLikedByInput = {

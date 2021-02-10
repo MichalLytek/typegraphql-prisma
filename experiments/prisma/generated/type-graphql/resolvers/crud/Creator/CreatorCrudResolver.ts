@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateCreatorArgs } from "./args/AggregateCreatorArgs";
 import { CreateCreatorArgs } from "./args/CreateCreatorArgs";
+import { CreateManyCreatorArgs } from "./args/CreateManyCreatorArgs";
 import { DeleteCreatorArgs } from "./args/DeleteCreatorArgs";
 import { DeleteManyCreatorArgs } from "./args/DeleteManyCreatorArgs";
 import { FindFirstCreatorArgs } from "./args/FindFirstCreatorArgs";
@@ -45,6 +46,13 @@ export class CreatorCrudResolver {
   })
   async createCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateCreatorArgs): Promise<Creator> {
     return ctx.prisma.creator.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyCreatorArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.creator.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Creator, {

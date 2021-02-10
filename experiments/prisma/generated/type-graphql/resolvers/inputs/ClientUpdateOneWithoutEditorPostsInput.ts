@@ -2,8 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { ClientCreateOrConnectWithouteditorPostsInput } from "../inputs/ClientCreateOrConnectWithouteditorPostsInput";
-import { ClientUncheckedCreateWithoutEditorPostsInput } from "../inputs/ClientUncheckedCreateWithoutEditorPostsInput";
-import { ClientUncheckedUpdateWithoutEditorPostsInput } from "../inputs/ClientUncheckedUpdateWithoutEditorPostsInput";
+import { ClientCreateWithoutEditorPostsInput } from "../inputs/ClientCreateWithoutEditorPostsInput";
+import { ClientUpdateWithoutEditorPostsInput } from "../inputs/ClientUpdateWithoutEditorPostsInput";
 import { ClientUpsertWithoutEditorPostsInput } from "../inputs/ClientUpsertWithoutEditorPostsInput";
 import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
 
@@ -11,10 +11,10 @@ import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
   isAbstract: true
 })
 export class ClientUpdateOneWithoutEditorPostsInput {
-  @TypeGraphQL.Field(_type => ClientUncheckedCreateWithoutEditorPostsInput, {
+  @TypeGraphQL.Field(_type => ClientCreateWithoutEditorPostsInput, {
     nullable: true
   })
-  create?: ClientUncheckedCreateWithoutEditorPostsInput | undefined;
+  create?: ClientCreateWithoutEditorPostsInput | undefined;
 
   @TypeGraphQL.Field(_type => ClientCreateOrConnectWithouteditorPostsInput, {
     nullable: true
@@ -41,8 +41,8 @@ export class ClientUpdateOneWithoutEditorPostsInput {
   })
   delete?: boolean | undefined;
 
-  @TypeGraphQL.Field(_type => ClientUncheckedUpdateWithoutEditorPostsInput, {
+  @TypeGraphQL.Field(_type => ClientUpdateWithoutEditorPostsInput, {
     nullable: true
   })
-  update?: ClientUncheckedUpdateWithoutEditorPostsInput | undefined;
+  update?: ClientUpdateWithoutEditorPostsInput | undefined;
 }

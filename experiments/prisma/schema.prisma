@@ -10,7 +10,7 @@ generator client {
   binaryTargets   = ["windows", "debian-openssl-1.1.x"]
   output          = "../prisma/generated/client"
   // previewFeatures = ["nativeTypes"]
-  previewFeatures = ["groupBy"]
+  previewFeatures = ["groupBy", "createMany", "orderByRelation"]
 }
 
 generator typegraphql {
@@ -18,7 +18,7 @@ generator typegraphql {
   output                   = "../prisma/generated/type-graphql"
   emitDMMF                 = true
   simpleResolvers          = false
-  useUncheckedScalarInputs = true
+  useUncheckedScalarInputs = false
 }
 
 // Role enum comment

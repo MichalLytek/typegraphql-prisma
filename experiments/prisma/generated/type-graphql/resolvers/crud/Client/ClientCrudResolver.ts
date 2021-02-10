@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateClientArgs } from "./args/AggregateClientArgs";
 import { CreateClientArgs } from "./args/CreateClientArgs";
+import { CreateManyClientArgs } from "./args/CreateManyClientArgs";
 import { DeleteClientArgs } from "./args/DeleteClientArgs";
 import { DeleteManyClientArgs } from "./args/DeleteManyClientArgs";
 import { FindFirstClientArgs } from "./args/FindFirstClientArgs";
@@ -45,6 +46,13 @@ export class ClientCrudResolver {
   })
   async createClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateClientArgs): Promise<Client> {
     return ctx.prisma.user.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyClientArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.user.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Client, {

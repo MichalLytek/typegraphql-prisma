@@ -188,7 +188,7 @@ describe("outputs", () => {
     expect(affectedRowsOutputTSFile).toMatchSnapshot("AffectedRowsOutput");
   });
 
-  describe("when experimental feature `groupBy` is enabled", () => {
+  describe("when preview feature `groupBy` is enabled", () => {
     it("should generate group by output type for model", async () => {
       const schema = /* prisma */ `
       datasource db {

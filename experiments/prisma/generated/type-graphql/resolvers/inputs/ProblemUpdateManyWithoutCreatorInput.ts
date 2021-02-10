@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
+import { ProblemCreateManyCreatorInputEnvelope } from "../inputs/ProblemCreateManyCreatorInputEnvelope";
 import { ProblemCreateOrConnectWithoutcreatorInput } from "../inputs/ProblemCreateOrConnectWithoutcreatorInput";
 import { ProblemCreateWithoutCreatorInput } from "../inputs/ProblemCreateWithoutCreatorInput";
 import { ProblemScalarWhereInput } from "../inputs/ProblemScalarWhereInput";
@@ -27,6 +28,11 @@ export class ProblemUpdateManyWithoutCreatorInput {
     nullable: true
   })
   upsert?: ProblemUpsertWithWhereUniqueWithoutCreatorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => ProblemCreateManyCreatorInputEnvelope, {
+    nullable: true
+  })
+  createMany?: ProblemCreateManyCreatorInputEnvelope | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
     nullable: true

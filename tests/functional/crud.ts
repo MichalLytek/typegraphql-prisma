@@ -451,7 +451,7 @@ describe("crud resolvers execution", () => {
       );
     });
   });
-  describe("when experimental feature `groupBy` is enabled", () => {
+  describe("when preview feature `groupBy` is enabled", () => {
     beforeAll(async () => {
       outputDirPath = generateArtifactsDirPath("functional-crud");
       await fs.mkdir(outputDirPath, { recursive: true });

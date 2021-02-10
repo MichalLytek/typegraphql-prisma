@@ -846,125 +846,62 @@ export class UserCrudResolver {
 "
 `;
 
-exports[`crud when experimental feature \`groupBy\` is enabled should properly generate group by args class for prisma model: GroupByUserArgs 1`] = `
+exports[`crud when \`createMany\` preview feature is enabled should properly generate createMany method, resolver and args classes: CreateManyUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
-import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
-import { UserScalarWhereWithAggregatesInput } from \\"../../../inputs/UserScalarWhereWithAggregatesInput\\";
-import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
-import { UserScalarFieldEnum } from \\"../../../../enums/UserScalarFieldEnum\\";
+import { UserCreateManyInput } from \\"../../../inputs/UserCreateManyInput\\";
 
 @TypeGraphQL.ArgsType()
-export class GroupByUserArgs {
-  @TypeGraphQL.Field(_type => UserWhereInput, {
-    nullable: true
-  })
-  where?: UserWhereInput | undefined;
-
-  @TypeGraphQL.Field(_type => [UserOrderByInput], {
-    nullable: true
-  })
-  orderBy?: UserOrderByInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [UserScalarFieldEnum], {
+export class CreateManyUserArgs {
+  @TypeGraphQL.Field(_type => [UserCreateManyInput], {
     nullable: false
   })
-  by!: Array<\\"intIdField\\" | \\"uniqueStringField\\" | \\"optionalStringField\\" | \\"dateField\\">;
+  data!: UserCreateManyInput[];
 
-  @TypeGraphQL.Field(_type => UserScalarWhereWithAggregatesInput, {
+  @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
   })
-  having?: UserScalarWhereWithAggregatesInput | undefined;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
-  })
-  take?: number | undefined;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
-  })
-  skip?: number | undefined;
+  skipDuplicates?: boolean | undefined;
 }
 "
 `;
 
-exports[`crud when experimental feature \`groupBy\` is enabled should properly generate group by args class for prisma model: Index 1`] = `
-"export { AggregateUserArgs } from \\"./AggregateUserArgs\\";
-export { CreateUserArgs } from \\"./CreateUserArgs\\";
-export { DeleteManyUserArgs } from \\"./DeleteManyUserArgs\\";
-export { DeleteUserArgs } from \\"./DeleteUserArgs\\";
-export { FindFirstUserArgs } from \\"./FindFirstUserArgs\\";
-export { FindManyUserArgs } from \\"./FindManyUserArgs\\";
-export { FindUniqueUserArgs } from \\"./FindUniqueUserArgs\\";
-export { GroupByUserArgs } from \\"./GroupByUserArgs\\";
-export { UpdateManyUserArgs } from \\"./UpdateManyUserArgs\\";
-export { UpdateUserArgs } from \\"./UpdateUserArgs\\";
-export { UpsertUserArgs } from \\"./UpsertUserArgs\\";
-"
-`;
-
-exports[`crud when experimental feature \`groupBy\` is enabled should properly generate group by resolver class and crud method for prisma model: GroupByUserResolver 1`] = `
+exports[`crud when \`createMany\` preview feature is enabled should properly generate createMany method, resolver and args classes: CreateManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
-import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
+import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
+import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 
 @TypeGraphQL.Resolver(_of => User)
-export class GroupByUserResolver {
-  @TypeGraphQL.Query(_returns => [UserGroupBy], {
+export class CreateManyUserResolver {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
-    const { count, avg, sum, min, max } = transformFields(
-      graphqlFields(info as any)
-    );
-    return ctx.prisma.user.groupBy({
-      ...args,
-      ...Object.fromEntries(
-        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
-      ),
-    });
+  async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.user.createMany(args);
   }
 }
 "
 `;
 
-exports[`crud when experimental feature \`groupBy\` is enabled should properly generate group by resolver class and crud method for prisma model: UserCrudResolver 1`] = `
+exports[`crud when \`createMany\` preview feature is enabled should properly generate createMany method, resolver and args classes: UserCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { CreateUserArgs } from \\"./args/CreateUserArgs\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
 import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
 import { FindFirstUserArgs } from \\"./args/FindFirstUserArgs\\";
 import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
-import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
-import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserCrudResolver {
@@ -994,6 +931,13 @@ export class UserCrudResolver {
   })
   async createUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateUserArgs): Promise<User> {
     return ctx.prisma.user.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.user.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => User, {
@@ -1054,51 +998,37 @@ export class UserCrudResolver {
       ...transformFields(graphqlFields(info as any)),
     });
   }
-
-  @TypeGraphQL.Query(_returns => [UserGroupBy], {
-    nullable: false
-  })
-  async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
-    const { count, avg, sum, min, max } = transformFields(
-      graphqlFields(info as any)
-    );
-    return ctx.prisma.user.groupBy({
-      ...args,
-      ...Object.fromEntries(
-        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
-      ),
-    });
-  }
 }
 "
 `;
 
-exports[`crud when experimental feature \`groupBy\` is enabled should properly generate group by resolver class and crud method for prisma model: actionsIndex 1`] = `
+exports[`crud when \`createMany\` preview feature is enabled should properly generate createMany method, resolver and args classes: actionsIndex 1`] = `
 "export { FindUniqueUserResolver } from \\"./User/FindUniqueUserResolver\\";
 export { FindFirstUserResolver } from \\"./User/FindFirstUserResolver\\";
 export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
 export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
+export { CreateManyUserResolver } from \\"./User/CreateManyUserResolver\\";
 export { DeleteUserResolver } from \\"./User/DeleteUserResolver\\";
 export { UpdateUserResolver } from \\"./User/UpdateUserResolver\\";
 export { DeleteManyUserResolver } from \\"./User/DeleteManyUserResolver\\";
 export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
 export { UpsertUserResolver } from \\"./User/UpsertUserResolver\\";
 export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
-export { GroupByUserResolver } from \\"./User/GroupByUserResolver\\";
+"
+`;
+
+exports[`crud when \`createMany\` preview feature is enabled should properly generate createMany method, resolver and args classes: argsIndex 1`] = `
+"export { AggregateUserArgs } from \\"./AggregateUserArgs\\";
+export { CreateManyUserArgs } from \\"./CreateManyUserArgs\\";
+export { CreateUserArgs } from \\"./CreateUserArgs\\";
+export { DeleteManyUserArgs } from \\"./DeleteManyUserArgs\\";
+export { DeleteUserArgs } from \\"./DeleteUserArgs\\";
+export { FindFirstUserArgs } from \\"./FindFirstUserArgs\\";
+export { FindManyUserArgs } from \\"./FindManyUserArgs\\";
+export { FindUniqueUserArgs } from \\"./FindUniqueUserArgs\\";
+export { UpdateManyUserArgs } from \\"./UpdateManyUserArgs\\";
+export { UpdateUserArgs } from \\"./UpdateUserArgs\\";
+export { UpsertUserArgs } from \\"./UpsertUserArgs\\";
 "
 `;
 
@@ -1630,6 +1560,262 @@ export class ClientCrudResolver {
     });
   }
 }
+"
+`;
+
+exports[`crud when preview feature \`groupBy\` is enabled should properly generate group by args class for prisma model: GroupByUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
+import { UserScalarWhereWithAggregatesInput } from \\"../../../inputs/UserScalarWhereWithAggregatesInput\\";
+import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
+import { UserScalarFieldEnum } from \\"../../../../enums/UserScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class GroupByUserArgs {
+  @TypeGraphQL.Field(_type => UserWhereInput, {
+    nullable: true
+  })
+  where?: UserWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [UserOrderByInput], {
+    nullable: true
+  })
+  orderBy?: UserOrderByInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserScalarFieldEnum], {
+    nullable: false
+  })
+  by!: Array<\\"intIdField\\" | \\"uniqueStringField\\" | \\"optionalStringField\\" | \\"dateField\\">;
+
+  @TypeGraphQL.Field(_type => UserScalarWhereWithAggregatesInput, {
+    nullable: true
+  })
+  having?: UserScalarWhereWithAggregatesInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+}
+"
+`;
+
+exports[`crud when preview feature \`groupBy\` is enabled should properly generate group by args class for prisma model: Index 1`] = `
+"export { AggregateUserArgs } from \\"./AggregateUserArgs\\";
+export { CreateUserArgs } from \\"./CreateUserArgs\\";
+export { DeleteManyUserArgs } from \\"./DeleteManyUserArgs\\";
+export { DeleteUserArgs } from \\"./DeleteUserArgs\\";
+export { FindFirstUserArgs } from \\"./FindFirstUserArgs\\";
+export { FindManyUserArgs } from \\"./FindManyUserArgs\\";
+export { FindUniqueUserArgs } from \\"./FindUniqueUserArgs\\";
+export { GroupByUserArgs } from \\"./GroupByUserArgs\\";
+export { UpdateManyUserArgs } from \\"./UpdateManyUserArgs\\";
+export { UpdateUserArgs } from \\"./UpdateUserArgs\\";
+export { UpsertUserArgs } from \\"./UpsertUserArgs\\";
+"
+`;
+
+exports[`crud when preview feature \`groupBy\` is enabled should properly generate group by resolver class and crud method for prisma model: GroupByUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
+
+@TypeGraphQL.Resolver(_of => User)
+export class GroupByUserResolver {
+  @TypeGraphQL.Query(_returns => [UserGroupBy], {
+    nullable: false
+  })
+  async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith(\\"__\\"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    const { count, avg, sum, min, max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return ctx.prisma.user.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+      ),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when preview feature \`groupBy\` is enabled should properly generate group by resolver class and crud method for prisma model: UserCrudResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateUserArgs } from \\"./args/CreateUserArgs\\";
+import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
+import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
+import { FindFirstUserArgs } from \\"./args/FindFirstUserArgs\\";
+import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
+import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
+import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
+import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
+import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
+import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { AggregateUser } from \\"../../outputs/AggregateUser\\";
+import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
+
+@TypeGraphQL.Resolver(_of => User)
+export class UserCrudResolver {
+  @TypeGraphQL.Query(_returns => User, {
+    nullable: true
+  })
+  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
+    return ctx.prisma.user.findUnique(args);
+  }
+
+  @TypeGraphQL.Query(_returns => User, {
+    nullable: true
+  })
+  async findFirstUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstUserArgs): Promise<User | null> {
+    return ctx.prisma.user.findFirst(args);
+  }
+
+  @TypeGraphQL.Query(_returns => [User], {
+    nullable: false
+  })
+  async users(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyUserArgs): Promise<User[]> {
+    return ctx.prisma.user.findMany(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => User, {
+    nullable: false
+  })
+  async createUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateUserArgs): Promise<User> {
+    return ctx.prisma.user.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => User, {
+    nullable: true
+  })
+  async deleteUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteUserArgs): Promise<User | null> {
+    return ctx.prisma.user.delete(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => User, {
+    nullable: true
+  })
+  async updateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateUserArgs): Promise<User | null> {
+    return ctx.prisma.user.update(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async deleteManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyUserArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.user.deleteMany(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async updateManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyUserArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.user.updateMany(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => User, {
+    nullable: false
+  })
+  async upsertUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertUserArgs): Promise<User> {
+    return ctx.prisma.user.upsert(args);
+  }
+
+  @TypeGraphQL.Query(_returns => AggregateUser, {
+    nullable: false
+  })
+  async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith(\\"__\\"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    return ctx.prisma.user.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [UserGroupBy], {
+    nullable: false
+  })
+  async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          // remove __typename and others
+          .filter(([key, value]) => !key.startsWith(\\"__\\"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    const { count, avg, sum, min, max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return ctx.prisma.user.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+      ),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when preview feature \`groupBy\` is enabled should properly generate group by resolver class and crud method for prisma model: actionsIndex 1`] = `
+"export { FindUniqueUserResolver } from \\"./User/FindUniqueUserResolver\\";
+export { FindFirstUserResolver } from \\"./User/FindFirstUserResolver\\";
+export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
+export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
+export { DeleteUserResolver } from \\"./User/DeleteUserResolver\\";
+export { UpdateUserResolver } from \\"./User/UpdateUserResolver\\";
+export { DeleteManyUserResolver } from \\"./User/DeleteManyUserResolver\\";
+export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
+export { UpsertUserResolver } from \\"./User/UpsertUserResolver\\";
+export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
+export { GroupByUserResolver } from \\"./User/GroupByUserResolver\\";
 "
 `;
 

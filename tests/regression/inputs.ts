@@ -775,7 +775,7 @@ describe("inputs", () => {
     });
   });
 
-  describe("when experimental feature `groupBy` is enabled", () => {
+  describe("when preview feature `groupBy` is enabled", () => {
     beforeEach(async () => {
       const schema = /* prisma */ `
         datasource db {
@@ -959,6 +959,62 @@ describe("inputs", () => {
       expect(
         firstModelUpsertWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot("FirstModelUpsertWithoutSecondModelsFieldInputTSFile");
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
+
+  describe("when `createMany` preview feature is enabled", () => {
+    it("should properly generate input type classes for inserting many entities", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["createMany"],
+      });
+      const firstModelCreateManyInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelCreateManyInput.ts",
+      );
+      const secondModelCreateManyInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SecondModelCreateManyInput.ts",
+      );
+      const secondModelCreateManyFirstModelFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInput.ts",
+      );
+      const secondModelCreateManyFirstModelFieldInputEnvelopeTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInputEnvelope.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(firstModelCreateManyInputTSFile).toMatchSnapshot(
+        "FirstModelCreateManyInput",
+      );
+      expect(secondModelCreateManyInputTSFile).toMatchSnapshot(
+        "SecondModelCreateManyInput",
+      );
+      expect(secondModelCreateManyFirstModelFieldInputTSFile).toMatchSnapshot(
+        "SecondModelCreateManyFirstModelFieldInput",
+      );
+      expect(
+        secondModelCreateManyFirstModelFieldInputEnvelopeTSFile,
+      ).toMatchSnapshot("SecondModelCreateManyFirstModelFieldInputEnvelope");
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });

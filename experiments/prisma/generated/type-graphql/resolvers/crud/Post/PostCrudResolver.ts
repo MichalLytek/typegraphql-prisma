@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregatePostArgs } from "./args/AggregatePostArgs";
+import { CreateManyPostArgs } from "./args/CreateManyPostArgs";
 import { CreatePostArgs } from "./args/CreatePostArgs";
 import { DeleteManyPostArgs } from "./args/DeleteManyPostArgs";
 import { DeletePostArgs } from "./args/DeletePostArgs";
@@ -45,6 +46,13 @@ export class PostCrudResolver {
   })
   async createPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatePostArgs): Promise<Post> {
     return ctx.prisma.post.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyPostArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.post.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Post, {

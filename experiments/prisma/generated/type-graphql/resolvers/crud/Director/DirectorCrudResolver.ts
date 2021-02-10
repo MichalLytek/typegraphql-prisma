@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateDirectorArgs } from "./args/AggregateDirectorArgs";
 import { CreateDirectorArgs } from "./args/CreateDirectorArgs";
+import { CreateManyDirectorArgs } from "./args/CreateManyDirectorArgs";
 import { DeleteDirectorArgs } from "./args/DeleteDirectorArgs";
 import { DeleteManyDirectorArgs } from "./args/DeleteManyDirectorArgs";
 import { FindFirstDirectorArgs } from "./args/FindFirstDirectorArgs";
@@ -45,6 +46,13 @@ export class DirectorCrudResolver {
   })
   async createDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateDirectorArgs): Promise<Director> {
     return ctx.prisma.director.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyDirectorArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.director.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Director, {

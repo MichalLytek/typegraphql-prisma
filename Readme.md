@@ -137,13 +137,14 @@ It will also generates a whole bunch of stuffs based on your `schema.prisma` fil
 
 CRUD resolvers supports this following methods with args that are 1:1 matching with the `PrismaClient` API:
 
-- create
-- update
-- delete
 - findUnique
 - findFirst
 - findMany
+- create
+- createMany
+- update
 - updateMany
+- delete
 - deleteMany
 - upsert
 - aggregate

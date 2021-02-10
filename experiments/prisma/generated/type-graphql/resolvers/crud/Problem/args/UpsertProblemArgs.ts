@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { ProblemUncheckedCreateInput } from "../../../inputs/ProblemUncheckedCreateInput";
-import { ProblemUncheckedUpdateInput } from "../../../inputs/ProblemUncheckedUpdateInput";
+import { ProblemCreateInput } from "../../../inputs/ProblemCreateInput";
+import { ProblemUpdateInput } from "../../../inputs/ProblemUpdateInput";
 import { ProblemWhereUniqueInput } from "../../../inputs/ProblemWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
@@ -11,13 +11,13 @@ export class UpsertProblemArgs {
   })
   where!: ProblemWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => ProblemUncheckedCreateInput, {
+  @TypeGraphQL.Field(_type => ProblemCreateInput, {
     nullable: false
   })
-  create!: ProblemUncheckedCreateInput;
+  create!: ProblemCreateInput;
 
-  @TypeGraphQL.Field(_type => ProblemUncheckedUpdateInput, {
+  @TypeGraphQL.Field(_type => ProblemUpdateInput, {
     nullable: false
   })
-  update!: ProblemUncheckedUpdateInput;
+  update!: ProblemUpdateInput;
 }

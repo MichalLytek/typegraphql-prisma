@@ -184,26 +184,67 @@ type ClientCountAggregate {
   role: Int
 }
 
+input ClientCreateInput {
+  accountBalance: Float!
+  age: Int!
+  amount: Float!
+  clientPosts: PostCreateNestedManyWithoutAuthorInput
+  editorPosts: PostCreateNestedManyWithoutEditorInput
+  email: String!
+  firstName: String
+  role: Role!
+}
+
+input ClientCreateManyInput {
+  accountBalance: Float!
+  age: Int!
+  amount: Float!
+  email: String!
+  firstName: String
+  id: Int
+  role: Role!
+}
+
 input ClientCreateNestedOneWithoutEditorPostsInput {
   connect: ClientWhereUniqueInput
   connectOrCreate: ClientCreateOrConnectWithouteditorPostsInput
-  create: ClientUncheckedCreateWithoutEditorPostsInput
+  create: ClientCreateWithoutEditorPostsInput
 }
 
 input ClientCreateNestedOneWithoutPostsInput {
   connect: ClientWhereUniqueInput
   connectOrCreate: ClientCreateOrConnectWithoutpostsInput
-  create: ClientUncheckedCreateWithoutPostsInput
+  create: ClientCreateWithoutPostsInput
 }
 
 input ClientCreateOrConnectWithouteditorPostsInput {
-  create: ClientUncheckedCreateWithoutEditorPostsInput!
+  create: ClientCreateWithoutEditorPostsInput!
   where: ClientWhereUniqueInput!
 }
 
 input ClientCreateOrConnectWithoutpostsInput {
-  create: ClientUncheckedCreateWithoutPostsInput!
+  create: ClientCreateWithoutPostsInput!
   where: ClientWhereUniqueInput!
+}
+
+input ClientCreateWithoutEditorPostsInput {
+  accountBalance: Float!
+  age: Int!
+  amount: Float!
+  clientPosts: PostCreateNestedManyWithoutAuthorInput
+  email: String!
+  firstName: String
+  role: Role!
+}
+
+input ClientCreateWithoutPostsInput {
+  accountBalance: Float!
+  age: Int!
+  amount: Float!
+  editorPosts: PostCreateNestedManyWithoutEditorInput
+  email: String!
+  firstName: String
+  role: Role!
 }
 
 type ClientGroupBy {
@@ -286,60 +327,72 @@ type ClientSumAggregate {
   id: Int!
 }
 
-input ClientUncheckedCreateInput {
-  accountBalance: Float!
-  age: Int!
-  amount: Float!
-  clientPosts: PostUncheckedCreateNestedManyWithoutAuthorInput
-  editorPosts: PostUncheckedCreateNestedManyWithoutEditorInput
-  email: String!
-  firstName: String
-  id: Int
-  role: Role!
-}
-
-input ClientUncheckedCreateWithoutEditorPostsInput {
-  accountBalance: Float!
-  age: Int!
-  amount: Float!
-  clientPosts: PostUncheckedCreateNestedManyWithoutAuthorInput
-  email: String!
-  firstName: String
-  id: Int
-  role: Role!
-}
-
-input ClientUncheckedCreateWithoutPostsInput {
-  accountBalance: Float!
-  age: Int!
-  amount: Float!
-  editorPosts: PostUncheckedCreateNestedManyWithoutEditorInput
-  email: String!
-  firstName: String
-  id: Int
-  role: Role!
-}
-
-input ClientUncheckedUpdateInput {
+input ClientUpdateInput {
   accountBalance: FloatFieldUpdateOperationsInput
   age: IntFieldUpdateOperationsInput
   amount: FloatFieldUpdateOperationsInput
-  clientPosts: PostUncheckedUpdateManyWithoutAuthorInput
-  editorPosts: PostUncheckedUpdateManyWithoutEditorInput
+  clientPosts: PostUpdateManyWithoutAuthorInput
+  editorPosts: PostUpdateManyWithoutEditorInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
-  id: IntFieldUpdateOperationsInput
   role: EnumRoleFieldUpdateOperationsInput
 }
 
-input ClientUncheckedUpdateManyInput {
+input ClientUpdateManyMutationInput {
   accountBalance: FloatFieldUpdateOperationsInput
   age: IntFieldUpdateOperationsInput
   amount: FloatFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
-  id: IntFieldUpdateOperationsInput
   role: EnumRoleFieldUpdateOperationsInput
+}
+
+input ClientUpdateOneRequiredWithoutPostsInput {
+  connect: ClientWhereUniqueInput
+  connectOrCreate: ClientCreateOrConnectWithoutpostsInput
+  create: ClientCreateWithoutPostsInput
+  update: ClientUpdateWithoutPostsInput
+  upsert: ClientUpsertWithoutPostsInput
+}
+
+input ClientUpdateOneWithoutEditorPostsInput {
+  connect: ClientWhereUniqueInput
+  connectOrCreate: ClientCreateOrConnectWithouteditorPostsInput
+  create: ClientCreateWithoutEditorPostsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ClientUpdateWithoutEditorPostsInput
+  upsert: ClientUpsertWithoutEditorPostsInput
+}
+
+input ClientUpdateWithoutEditorPostsInput {
+  accountBalance: FloatFieldUpdateOperationsInput
+  age: IntFieldUpdateOperationsInput
+  amount: FloatFieldUpdateOperationsInput
+  clientPosts: PostUpdateManyWithoutAuthorInput
+  email: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+}
+
+input ClientUpdateWithoutPostsInput {
+  accountBalance: FloatFieldUpdateOperationsInput
+  age: IntFieldUpdateOperationsInput
+  amount: FloatFieldUpdateOperationsInput
+  editorPosts: PostUpdateManyWithoutEditorInput
+  email: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+}
+
+input ClientUpsertWithoutEditorPostsInput {
+  create: ClientCreateWithoutEditorPostsInput!
+  update: ClientUpdateWithoutEditorPostsInput!
+}
+
+input ClientUpsertWithoutPostsInput {
+  create: ClientCreateWithoutPostsInput!
+  update: ClientUpdateWithoutPostsInput!
 }
 
 input ClientWhereInput {
@@ -379,20 +432,47 @@ type CreatorCountAggregate {
   name: Int
 }
 
+input CreatorCreateInput {
+  likes: ProblemCreateNestedManyWithoutLikedByInput
+  name: String!
+  problems: ProblemCreateNestedManyWithoutCreatorInput
+}
+
+input CreatorCreateManyInput {
+  id: Int
+  name: String!
+}
+
 input CreatorCreateNestedManyWithoutLikesInput {
   connect: [CreatorWhereUniqueInput!]
   connectOrCreate: [CreatorCreateOrConnectWithoutlikesInput!]
   create: [CreatorCreateWithoutLikesInput!]
 }
 
+input CreatorCreateNestedOneWithoutProblemsInput {
+  connect: CreatorWhereUniqueInput
+  connectOrCreate: CreatorCreateOrConnectWithoutproblemsInput
+  create: CreatorCreateWithoutProblemsInput
+}
+
 input CreatorCreateOrConnectWithoutlikesInput {
-  create: CreatorUncheckedCreateWithoutLikesInput!
+  create: CreatorCreateWithoutLikesInput!
+  where: CreatorWhereUniqueInput!
+}
+
+input CreatorCreateOrConnectWithoutproblemsInput {
+  create: CreatorCreateWithoutProblemsInput!
   where: CreatorWhereUniqueInput!
 }
 
 input CreatorCreateWithoutLikesInput {
   name: String!
   problems: ProblemCreateNestedManyWithoutCreatorInput
+}
+
+input CreatorCreateWithoutProblemsInput {
+  likes: ProblemCreateNestedManyWithoutLikedByInput
+  name: String!
 }
 
 type CreatorGroupBy {
@@ -436,6 +516,14 @@ enum CreatorScalarFieldEnum {
   name
 }
 
+input CreatorScalarWhereInput {
+  AND: [CreatorScalarWhereInput!]
+  NOT: [CreatorScalarWhereInput!]
+  OR: [CreatorScalarWhereInput!]
+  id: IntFilter
+  name: StringFilter
+}
+
 input CreatorScalarWhereWithAggregatesInput {
   AND: [CreatorScalarWhereWithAggregatesInput!]
   NOT: [CreatorScalarWhereWithAggregatesInput!]
@@ -448,27 +536,68 @@ type CreatorSumAggregate {
   id: Int!
 }
 
-input CreatorUncheckedCreateInput {
-  id: Int
-  name: String!
-  problems: ProblemUncheckedCreateNestedManyWithoutCreatorInput
-}
-
-input CreatorUncheckedCreateWithoutLikesInput {
-  id: Int
-  name: String!
-  problems: ProblemUncheckedCreateNestedManyWithoutCreatorInput
-}
-
-input CreatorUncheckedUpdateInput {
-  id: IntFieldUpdateOperationsInput
+input CreatorUpdateInput {
+  likes: ProblemUpdateManyWithoutLikedByInput
   name: StringFieldUpdateOperationsInput
-  problems: ProblemUncheckedUpdateManyWithoutCreatorInput
+  problems: ProblemUpdateManyWithoutCreatorInput
 }
 
-input CreatorUncheckedUpdateManyInput {
-  id: IntFieldUpdateOperationsInput
+input CreatorUpdateManyMutationInput {
   name: StringFieldUpdateOperationsInput
+}
+
+input CreatorUpdateManyWithWhereWithoutLikesInput {
+  data: CreatorUpdateManyMutationInput!
+  where: CreatorScalarWhereInput!
+}
+
+input CreatorUpdateManyWithoutLikesInput {
+  connect: [CreatorWhereUniqueInput!]
+  connectOrCreate: [CreatorCreateOrConnectWithoutlikesInput!]
+  create: [CreatorCreateWithoutLikesInput!]
+  delete: [CreatorWhereUniqueInput!]
+  deleteMany: [CreatorScalarWhereInput!]
+  disconnect: [CreatorWhereUniqueInput!]
+  set: [CreatorWhereUniqueInput!]
+  update: [CreatorUpdateWithWhereUniqueWithoutLikesInput!]
+  updateMany: [CreatorUpdateManyWithWhereWithoutLikesInput!]
+  upsert: [CreatorUpsertWithWhereUniqueWithoutLikesInput!]
+}
+
+input CreatorUpdateOneWithoutProblemsInput {
+  connect: CreatorWhereUniqueInput
+  connectOrCreate: CreatorCreateOrConnectWithoutproblemsInput
+  create: CreatorCreateWithoutProblemsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CreatorUpdateWithoutProblemsInput
+  upsert: CreatorUpsertWithoutProblemsInput
+}
+
+input CreatorUpdateWithWhereUniqueWithoutLikesInput {
+  data: CreatorUpdateWithoutLikesInput!
+  where: CreatorWhereUniqueInput!
+}
+
+input CreatorUpdateWithoutLikesInput {
+  name: StringFieldUpdateOperationsInput
+  problems: ProblemUpdateManyWithoutCreatorInput
+}
+
+input CreatorUpdateWithoutProblemsInput {
+  likes: ProblemUpdateManyWithoutLikedByInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input CreatorUpsertWithWhereUniqueWithoutLikesInput {
+  create: CreatorCreateWithoutLikesInput!
+  update: CreatorUpdateWithoutLikesInput!
+  where: CreatorWhereUniqueInput!
+}
+
+input CreatorUpsertWithoutProblemsInput {
+  create: CreatorCreateWithoutProblemsInput!
+  update: CreatorUpdateWithoutProblemsInput!
 }
 
 input CreatorWhereInput {
@@ -531,6 +660,33 @@ type DirectorCountAggregate {
   lastName: Int
 }
 
+input DirectorCreateInput {
+  firstName: String!
+  lastName: String!
+  movies: MovieCreateNestedManyWithoutDirectorInput
+}
+
+input DirectorCreateManyInput {
+  firstName: String!
+  lastName: String!
+}
+
+input DirectorCreateNestedOneWithoutMoviesInput {
+  connect: DirectorWhereUniqueInput
+  connectOrCreate: DirectorCreateOrConnectWithoutmoviesInput
+  create: DirectorCreateWithoutMoviesInput
+}
+
+input DirectorCreateOrConnectWithoutmoviesInput {
+  create: DirectorCreateWithoutMoviesInput!
+  where: DirectorWhereUniqueInput!
+}
+
+input DirectorCreateWithoutMoviesInput {
+  firstName: String!
+  lastName: String!
+}
+
 input DirectorFirstNameLastNameCompoundUniqueInput {
   firstName: String!
   lastName: String!
@@ -577,21 +733,33 @@ input DirectorScalarWhereWithAggregatesInput {
   lastName: StringWithAggregatesFilter
 }
 
-input DirectorUncheckedCreateInput {
-  firstName: String!
-  lastName: String!
-  movies: MovieUncheckedCreateNestedManyWithoutDirectorInput
-}
-
-input DirectorUncheckedUpdateInput {
+input DirectorUpdateInput {
   firstName: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
-  movies: MovieUncheckedUpdateManyWithoutDirectorInput
+  movies: MovieUpdateManyWithoutDirectorInput
 }
 
-input DirectorUncheckedUpdateManyInput {
+input DirectorUpdateManyMutationInput {
   firstName: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+}
+
+input DirectorUpdateOneRequiredWithoutMoviesInput {
+  connect: DirectorWhereUniqueInput
+  connectOrCreate: DirectorCreateOrConnectWithoutmoviesInput
+  create: DirectorCreateWithoutMoviesInput
+  update: DirectorUpdateWithoutMoviesInput
+  upsert: DirectorUpsertWithoutMoviesInput
+}
+
+input DirectorUpdateWithoutMoviesInput {
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+}
+
+input DirectorUpsertWithoutMoviesInput {
+  create: DirectorCreateWithoutMoviesInput!
+  update: DirectorUpdateWithoutMoviesInput!
 }
 
 input DirectorWhereInput {
@@ -774,8 +942,35 @@ type MovieCountAggregate {
   title: Int
 }
 
+input MovieCreateInput {
+  director: DirectorCreateNestedOneWithoutMoviesInput!
+  title: String!
+}
+
+input MovieCreateManyDirectorInput {
+  title: String!
+}
+
+input MovieCreateManyDirectorInputEnvelope {
+  data: [MovieCreateManyDirectorInput!]!
+  skipDuplicates: Boolean
+}
+
+input MovieCreateManyInput {
+  directorFirstName: String!
+  directorLastName: String!
+  title: String!
+}
+
+input MovieCreateNestedManyWithoutDirectorInput {
+  connect: [MovieWhereUniqueInput!]
+  connectOrCreate: [MovieCreateOrConnectWithoutdirectorInput!]
+  create: [MovieCreateWithoutDirectorInput!]
+  createMany: MovieCreateManyDirectorInputEnvelope
+}
+
 input MovieCreateOrConnectWithoutdirectorInput {
-  create: MovieUncheckedCreateWithoutDirectorInput!
+  create: MovieCreateWithoutDirectorInput!
   where: MovieWhereUniqueInput!
 }
 
@@ -847,38 +1042,25 @@ input MovieScalarWhereWithAggregatesInput {
   title: StringWithAggregatesFilter
 }
 
-input MovieUncheckedCreateInput {
-  directorFirstName: String!
-  directorLastName: String!
-  title: String!
-}
-
-input MovieUncheckedCreateNestedManyWithoutDirectorInput {
-  connect: [MovieWhereUniqueInput!]
-  connectOrCreate: [MovieCreateOrConnectWithoutdirectorInput!]
-  create: [MovieCreateWithoutDirectorInput!]
-}
-
-input MovieUncheckedCreateWithoutDirectorInput {
-  title: String!
-}
-
-input MovieUncheckedUpdateInput {
-  directorFirstName: StringFieldUpdateOperationsInput
-  directorLastName: StringFieldUpdateOperationsInput
+input MovieUpdateInput {
+  director: DirectorUpdateOneRequiredWithoutMoviesInput
   title: StringFieldUpdateOperationsInput
 }
 
-input MovieUncheckedUpdateManyInput {
-  directorFirstName: StringFieldUpdateOperationsInput
-  directorLastName: StringFieldUpdateOperationsInput
+input MovieUpdateManyMutationInput {
   title: StringFieldUpdateOperationsInput
 }
 
-input MovieUncheckedUpdateManyWithoutDirectorInput {
+input MovieUpdateManyWithWhereWithoutDirectorInput {
+  data: MovieUpdateManyMutationInput!
+  where: MovieScalarWhereInput!
+}
+
+input MovieUpdateManyWithoutDirectorInput {
   connect: [MovieWhereUniqueInput!]
   connectOrCreate: [MovieCreateOrConnectWithoutdirectorInput!]
   create: [MovieCreateWithoutDirectorInput!]
+  createMany: MovieCreateManyDirectorInputEnvelope
   delete: [MovieWhereUniqueInput!]
   deleteMany: [MovieScalarWhereInput!]
   disconnect: [MovieWhereUniqueInput!]
@@ -888,27 +1070,18 @@ input MovieUncheckedUpdateManyWithoutDirectorInput {
   upsert: [MovieUpsertWithWhereUniqueWithoutDirectorInput!]
 }
 
-input MovieUncheckedUpdateManyWithoutMoviesInput {
-  title: StringFieldUpdateOperationsInput
-}
-
-input MovieUncheckedUpdateWithoutDirectorInput {
-  title: StringFieldUpdateOperationsInput
-}
-
-input MovieUpdateManyWithWhereWithoutDirectorInput {
-  data: MovieUncheckedUpdateManyWithoutMoviesInput!
-  where: MovieScalarWhereInput!
-}
-
 input MovieUpdateWithWhereUniqueWithoutDirectorInput {
-  data: MovieUncheckedUpdateWithoutDirectorInput!
+  data: MovieUpdateWithoutDirectorInput!
   where: MovieWhereUniqueInput!
 }
 
+input MovieUpdateWithoutDirectorInput {
+  title: StringFieldUpdateOperationsInput
+}
+
 input MovieUpsertWithWhereUniqueWithoutDirectorInput {
-  create: MovieUncheckedCreateWithoutDirectorInput!
-  update: MovieUncheckedUpdateWithoutDirectorInput!
+  create: MovieCreateWithoutDirectorInput!
+  update: MovieUpdateWithoutDirectorInput!
   where: MovieWhereUniqueInput!
 }
 
@@ -927,14 +1100,20 @@ input MovieWhereUniqueInput {
 }
 
 type Mutation {
-  createClient(data: ClientUncheckedCreateInput!): Client!
-  createCreator(data: CreatorUncheckedCreateInput!): Creator!
-  createDirector(data: DirectorUncheckedCreateInput!): Director!
-  createMovie(data: MovieUncheckedCreateInput!): Movie!
-  createPatient(data: PatientUncheckedCreateInput!): Patient!
-  createPost(data: PostUncheckedCreateInput!): Post!
-  createProblem(data: ProblemUncheckedCreateInput!): Problem!
-  customCreatePost(data: PostUncheckedCreateInput!): Post!
+  createClient(data: ClientCreateInput!): Client!
+  createCreator(data: CreatorCreateInput!): Creator!
+  createDirector(data: DirectorCreateInput!): Director!
+  createManyClient(data: [ClientCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyCreator(data: [CreatorCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyDirector(data: [DirectorCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyMovie(data: [MovieCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyPatient(data: [PatientCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyProblem(data: [ProblemCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createMovie(data: MovieCreateInput!): Movie!
+  createPatient(data: PatientCreateInput!): Patient!
+  createPost(data: PostCreateInput!): Post!
+  createProblem(data: ProblemCreateInput!): Problem!
+  customCreatePost(data: PostCreateInput!): Post!
   deleteClient(where: ClientWhereUniqueInput!): Client
   deleteCreator(where: CreatorWhereUniqueInput!): Creator
   deleteDirector(where: DirectorWhereUniqueInput!): Director
@@ -947,25 +1126,25 @@ type Mutation {
   deleteMovie(where: MovieWhereUniqueInput!): Movie
   deletePatient(where: PatientWhereUniqueInput!): Patient
   deleteProblem(where: ProblemWhereUniqueInput!): Problem
-  updateClient(data: ClientUncheckedUpdateInput!, where: ClientWhereUniqueInput!): Client
-  updateCreator(data: CreatorUncheckedUpdateInput!, where: CreatorWhereUniqueInput!): Creator
-  updateDirector(data: DirectorUncheckedUpdateInput!, where: DirectorWhereUniqueInput!): Director
-  updateManyClient(data: ClientUncheckedUpdateManyInput!, where: ClientWhereInput): AffectedRowsOutput!
-  updateManyCreator(data: CreatorUncheckedUpdateManyInput!, where: CreatorWhereInput): AffectedRowsOutput!
-  updateManyDirector(data: DirectorUncheckedUpdateManyInput!, where: DirectorWhereInput): AffectedRowsOutput!
-  updateManyMovie(data: MovieUncheckedUpdateManyInput!, where: MovieWhereInput): AffectedRowsOutput!
-  updateManyPatient(data: PatientUncheckedUpdateManyInput!, where: PatientWhereInput): AffectedRowsOutput!
-  updateManyPost(data: PostUncheckedUpdateManyInput!, where: PostWhereInput): AffectedRowsOutput!
-  updateManyProblem(data: ProblemUncheckedUpdateManyInput!, where: ProblemWhereInput): AffectedRowsOutput!
-  updateMovie(data: MovieUncheckedUpdateInput!, where: MovieWhereUniqueInput!): Movie
-  updatePatient(data: PatientUncheckedUpdateInput!, where: PatientWhereUniqueInput!): Patient
-  updateProblem(data: ProblemUncheckedUpdateInput!, where: ProblemWhereUniqueInput!): Problem
-  upsertClient(create: ClientUncheckedCreateInput!, update: ClientUncheckedUpdateInput!, where: ClientWhereUniqueInput!): Client!
-  upsertCreator(create: CreatorUncheckedCreateInput!, update: CreatorUncheckedUpdateInput!, where: CreatorWhereUniqueInput!): Creator!
-  upsertDirector(create: DirectorUncheckedCreateInput!, update: DirectorUncheckedUpdateInput!, where: DirectorWhereUniqueInput!): Director!
-  upsertMovie(create: MovieUncheckedCreateInput!, update: MovieUncheckedUpdateInput!, where: MovieWhereUniqueInput!): Movie!
-  upsertPatient(create: PatientUncheckedCreateInput!, update: PatientUncheckedUpdateInput!, where: PatientWhereUniqueInput!): Patient!
-  upsertProblem(create: ProblemUncheckedCreateInput!, update: ProblemUncheckedUpdateInput!, where: ProblemWhereUniqueInput!): Problem!
+  updateClient(data: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client
+  updateCreator(data: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator
+  updateDirector(data: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director
+  updateManyClient(data: ClientUpdateManyMutationInput!, where: ClientWhereInput): AffectedRowsOutput!
+  updateManyCreator(data: CreatorUpdateManyMutationInput!, where: CreatorWhereInput): AffectedRowsOutput!
+  updateManyDirector(data: DirectorUpdateManyMutationInput!, where: DirectorWhereInput): AffectedRowsOutput!
+  updateManyMovie(data: MovieUpdateManyMutationInput!, where: MovieWhereInput): AffectedRowsOutput!
+  updateManyPatient(data: PatientUpdateManyMutationInput!, where: PatientWhereInput): AffectedRowsOutput!
+  updateManyPost(data: PostUpdateManyMutationInput!, where: PostWhereInput): AffectedRowsOutput!
+  updateManyProblem(data: ProblemUpdateManyMutationInput!, where: ProblemWhereInput): AffectedRowsOutput!
+  updateMovie(data: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie
+  updatePatient(data: PatientUpdateInput!, where: PatientWhereUniqueInput!): Patient
+  updateProblem(data: ProblemUpdateInput!, where: ProblemWhereUniqueInput!): Problem
+  upsertClient(create: ClientCreateInput!, update: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client!
+  upsertCreator(create: CreatorCreateInput!, update: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator!
+  upsertDirector(create: DirectorCreateInput!, update: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director!
+  upsertMovie(create: MovieCreateInput!, update: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie!
+  upsertPatient(create: PatientCreateInput!, update: PatientUpdateInput!, where: PatientWhereUniqueInput!): Patient!
+  upsertProblem(create: ProblemCreateInput!, update: ProblemUpdateInput!, where: ProblemWhereUniqueInput!): Problem!
 }
 
 input NestedBoolFilter {
@@ -1203,14 +1382,6 @@ input NullableEnumPostKindFieldUpdateOperationsInput {
   set: PostKind
 }
 
-input NullableIntFieldUpdateOperationsInput {
-  decrement: Int
-  divide: Int
-  increment: Int
-  multiply: Int
-  set: Int
-}
-
 input NullableStringFieldUpdateOperationsInput {
   set: String
 }
@@ -1226,6 +1397,18 @@ type PatientCountAggregate {
   email: Int
   firstName: Int
   lastName: Int
+}
+
+input PatientCreateInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+}
+
+input PatientCreateManyInput {
+  email: String!
+  firstName: String!
+  lastName: String!
 }
 
 input PatientFirstNameLastNameCompoundUniqueInput {
@@ -1275,19 +1458,13 @@ input PatientScalarWhereWithAggregatesInput {
   lastName: StringWithAggregatesFilter
 }
 
-input PatientUncheckedCreateInput {
-  email: String!
-  firstName: String!
-  lastName: String!
-}
-
-input PatientUncheckedUpdateInput {
+input PatientUpdateInput {
   email: StringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
 }
 
-input PatientUncheckedUpdateManyInput {
+input PatientUpdateManyMutationInput {
   email: StringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
@@ -1339,13 +1516,77 @@ type PostCountAggregate {
   uuid: Int
 }
 
+input PostCreateInput {
+  author: ClientCreateNestedOneWithoutPostsInput!
+  content: String
+  createdAt: DateTime
+  editor: ClientCreateNestedOneWithoutEditorPostsInput
+  kind: PostKind
+  metadata: JSON!
+  published: Boolean!
+  subtitle: String!
+  title: String!
+  updatedAt: DateTime
+  uuid: String
+}
+
+input PostCreateManyAuthorInput {
+  content: String
+  createdAt: DateTime
+  editorId: Int
+  kind: PostKind
+  metadata: JSON!
+  published: Boolean!
+  subtitle: String!
+  title: String!
+  updatedAt: DateTime
+  uuid: String
+}
+
+input PostCreateManyAuthorInputEnvelope {
+  data: [PostCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input PostCreateManyEditorInput {
+  authorId: Int!
+  content: String
+  createdAt: DateTime
+  kind: PostKind
+  metadata: JSON!
+  published: Boolean!
+  subtitle: String!
+  title: String!
+  updatedAt: DateTime
+  uuid: String
+}
+
+input PostCreateManyEditorInputEnvelope {
+  data: [PostCreateManyEditorInput!]!
+  skipDuplicates: Boolean
+}
+
+input PostCreateNestedManyWithoutAuthorInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
+  create: [PostCreateWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+}
+
+input PostCreateNestedManyWithoutEditorInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithouteditorInput!]
+  create: [PostCreateWithoutEditorInput!]
+  createMany: PostCreateManyEditorInputEnvelope
+}
+
 input PostCreateOrConnectWithoutauthorInput {
-  create: PostUncheckedCreateWithoutAuthorInput!
+  create: PostCreateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
 
 input PostCreateOrConnectWithouteditorInput {
-  create: PostUncheckedCreateWithoutEditorInput!
+  create: PostCreateWithoutEditorInput!
   where: PostWhereUniqueInput!
 }
 
@@ -1500,139 +1741,7 @@ type PostSumAggregate {
   editorId: Int
 }
 
-input PostUncheckedCreateInput {
-  authorId: Int!
-  content: String
-  createdAt: DateTime
-  editorId: Int
-  kind: PostKind
-  metadata: JSON!
-  published: Boolean!
-  subtitle: String!
-  title: String!
-  updatedAt: DateTime
-  uuid: String
-}
-
-input PostUncheckedCreateNestedManyWithoutAuthorInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
-  create: [PostCreateWithoutAuthorInput!]
-}
-
-input PostUncheckedCreateNestedManyWithoutEditorInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithouteditorInput!]
-  create: [PostCreateWithoutEditorInput!]
-}
-
-input PostUncheckedCreateWithoutAuthorInput {
-  content: String
-  createdAt: DateTime
-  editorId: Int
-  kind: PostKind
-  metadata: JSON!
-  published: Boolean!
-  subtitle: String!
-  title: String!
-  updatedAt: DateTime
-  uuid: String
-}
-
-input PostUncheckedCreateWithoutEditorInput {
-  authorId: Int!
-  content: String
-  createdAt: DateTime
-  kind: PostKind
-  metadata: JSON!
-  published: Boolean!
-  subtitle: String!
-  title: String!
-  updatedAt: DateTime
-  uuid: String
-}
-
-input PostUncheckedUpdateManyInput {
-  authorId: IntFieldUpdateOperationsInput
-  content: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  editorId: NullableIntFieldUpdateOperationsInput
-  kind: NullableEnumPostKindFieldUpdateOperationsInput
-  metadata: JSON
-  published: BoolFieldUpdateOperationsInput
-  subtitle: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  uuid: StringFieldUpdateOperationsInput
-}
-
-input PostUncheckedUpdateManyWithoutAuthorInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
-  create: [PostCreateWithoutAuthorInput!]
-  delete: [PostWhereUniqueInput!]
-  deleteMany: [PostScalarWhereInput!]
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
-}
-
-input PostUncheckedUpdateManyWithoutEditorInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithouteditorInput!]
-  create: [PostCreateWithoutEditorInput!]
-  delete: [PostWhereUniqueInput!]
-  deleteMany: [PostScalarWhereInput!]
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutEditorInput!]
-  updateMany: [PostUpdateManyWithWhereWithoutEditorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutEditorInput!]
-}
-
-input PostUncheckedUpdateManyWithoutEditorPostsInput {
-  authorId: IntFieldUpdateOperationsInput
-  content: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  kind: NullableEnumPostKindFieldUpdateOperationsInput
-  metadata: JSON
-  published: BoolFieldUpdateOperationsInput
-  subtitle: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  uuid: StringFieldUpdateOperationsInput
-}
-
-input PostUncheckedUpdateManyWithoutPostsInput {
-  content: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  editorId: NullableIntFieldUpdateOperationsInput
-  kind: NullableEnumPostKindFieldUpdateOperationsInput
-  metadata: JSON
-  published: BoolFieldUpdateOperationsInput
-  subtitle: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  uuid: StringFieldUpdateOperationsInput
-}
-
-input PostUncheckedUpdateWithoutAuthorInput {
-  content: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  editorId: NullableIntFieldUpdateOperationsInput
-  kind: NullableEnumPostKindFieldUpdateOperationsInput
-  metadata: JSON
-  published: BoolFieldUpdateOperationsInput
-  subtitle: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  uuid: StringFieldUpdateOperationsInput
-}
-
-input PostUncheckedUpdateWithoutEditorInput {
-  authorId: IntFieldUpdateOperationsInput
+input PostUpdateManyMutationInput {
   content: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   kind: NullableEnumPostKindFieldUpdateOperationsInput
@@ -1645,34 +1754,88 @@ input PostUncheckedUpdateWithoutEditorInput {
 }
 
 input PostUpdateManyWithWhereWithoutAuthorInput {
-  data: PostUncheckedUpdateManyWithoutPostsInput!
+  data: PostUpdateManyMutationInput!
   where: PostScalarWhereInput!
 }
 
 input PostUpdateManyWithWhereWithoutEditorInput {
-  data: PostUncheckedUpdateManyWithoutEditorPostsInput!
+  data: PostUpdateManyMutationInput!
   where: PostScalarWhereInput!
 }
 
+input PostUpdateManyWithoutAuthorInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
+  create: [PostCreateWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+  delete: [PostWhereUniqueInput!]
+  deleteMany: [PostScalarWhereInput!]
+  disconnect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input PostUpdateManyWithoutEditorInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithouteditorInput!]
+  create: [PostCreateWithoutEditorInput!]
+  createMany: PostCreateManyEditorInputEnvelope
+  delete: [PostWhereUniqueInput!]
+  deleteMany: [PostScalarWhereInput!]
+  disconnect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutEditorInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutEditorInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutEditorInput!]
+}
+
 input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  data: PostUncheckedUpdateWithoutAuthorInput!
+  data: PostUpdateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
 
 input PostUpdateWithWhereUniqueWithoutEditorInput {
-  data: PostUncheckedUpdateWithoutEditorInput!
+  data: PostUpdateWithoutEditorInput!
   where: PostWhereUniqueInput!
 }
 
+input PostUpdateWithoutAuthorInput {
+  content: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  editor: ClientUpdateOneWithoutEditorPostsInput
+  kind: NullableEnumPostKindFieldUpdateOperationsInput
+  metadata: JSON
+  published: BoolFieldUpdateOperationsInput
+  subtitle: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  uuid: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateWithoutEditorInput {
+  author: ClientUpdateOneRequiredWithoutPostsInput
+  content: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  kind: NullableEnumPostKindFieldUpdateOperationsInput
+  metadata: JSON
+  published: BoolFieldUpdateOperationsInput
+  subtitle: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  uuid: StringFieldUpdateOperationsInput
+}
+
 input PostUpsertWithWhereUniqueWithoutAuthorInput {
-  create: PostUncheckedCreateWithoutAuthorInput!
-  update: PostUncheckedUpdateWithoutAuthorInput!
+  create: PostCreateWithoutAuthorInput!
+  update: PostUpdateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutEditorInput {
-  create: PostUncheckedCreateWithoutEditorInput!
-  update: PostUncheckedUpdateWithoutEditorInput!
+  create: PostCreateWithoutEditorInput!
+  update: PostUpdateWithoutEditorInput!
   where: PostWhereUniqueInput!
 }
 
@@ -1719,19 +1882,58 @@ type ProblemCountAggregate {
   problemText: Int
 }
 
+input ProblemCreateInput {
+  creator: CreatorCreateNestedOneWithoutProblemsInput
+  likedBy: CreatorCreateNestedManyWithoutLikesInput
+  problemText: String!
+}
+
+input ProblemCreateManyCreatorInput {
+  id: Int
+  problemText: String!
+}
+
+input ProblemCreateManyCreatorInputEnvelope {
+  data: [ProblemCreateManyCreatorInput!]!
+  skipDuplicates: Boolean
+}
+
+input ProblemCreateManyInput {
+  creatorId: Int
+  id: Int
+  problemText: String!
+}
+
 input ProblemCreateNestedManyWithoutCreatorInput {
   connect: [ProblemWhereUniqueInput!]
   connectOrCreate: [ProblemCreateOrConnectWithoutcreatorInput!]
   create: [ProblemCreateWithoutCreatorInput!]
+  createMany: ProblemCreateManyCreatorInputEnvelope
+}
+
+input ProblemCreateNestedManyWithoutLikedByInput {
+  connect: [ProblemWhereUniqueInput!]
+  connectOrCreate: [ProblemCreateOrConnectWithoutlikedByInput!]
+  create: [ProblemCreateWithoutLikedByInput!]
 }
 
 input ProblemCreateOrConnectWithoutcreatorInput {
-  create: ProblemUncheckedCreateWithoutCreatorInput!
+  create: ProblemCreateWithoutCreatorInput!
+  where: ProblemWhereUniqueInput!
+}
+
+input ProblemCreateOrConnectWithoutlikedByInput {
+  create: ProblemCreateWithoutLikedByInput!
   where: ProblemWhereUniqueInput!
 }
 
 input ProblemCreateWithoutCreatorInput {
   likedBy: CreatorCreateNestedManyWithoutLikesInput
+  problemText: String!
+}
+
+input ProblemCreateWithoutLikedByInput {
+  creator: CreatorCreateNestedOneWithoutProblemsInput
   problemText: String!
 }
 
@@ -1800,39 +2002,31 @@ type ProblemSumAggregate {
   id: Int!
 }
 
-input ProblemUncheckedCreateInput {
-  creatorId: Int
-  id: Int
-  problemText: String!
-}
-
-input ProblemUncheckedCreateNestedManyWithoutCreatorInput {
-  connect: [ProblemWhereUniqueInput!]
-  connectOrCreate: [ProblemCreateOrConnectWithoutcreatorInput!]
-  create: [ProblemCreateWithoutCreatorInput!]
-}
-
-input ProblemUncheckedCreateWithoutCreatorInput {
-  id: Int
-  problemText: String!
-}
-
-input ProblemUncheckedUpdateInput {
-  creatorId: NullableIntFieldUpdateOperationsInput
-  id: IntFieldUpdateOperationsInput
+input ProblemUpdateInput {
+  creator: CreatorUpdateOneWithoutProblemsInput
+  likedBy: CreatorUpdateManyWithoutLikesInput
   problemText: StringFieldUpdateOperationsInput
 }
 
-input ProblemUncheckedUpdateManyInput {
-  creatorId: NullableIntFieldUpdateOperationsInput
-  id: IntFieldUpdateOperationsInput
+input ProblemUpdateManyMutationInput {
   problemText: StringFieldUpdateOperationsInput
 }
 
-input ProblemUncheckedUpdateManyWithoutCreatorInput {
+input ProblemUpdateManyWithWhereWithoutCreatorInput {
+  data: ProblemUpdateManyMutationInput!
+  where: ProblemScalarWhereInput!
+}
+
+input ProblemUpdateManyWithWhereWithoutLikedByInput {
+  data: ProblemUpdateManyMutationInput!
+  where: ProblemScalarWhereInput!
+}
+
+input ProblemUpdateManyWithoutCreatorInput {
   connect: [ProblemWhereUniqueInput!]
   connectOrCreate: [ProblemCreateOrConnectWithoutcreatorInput!]
   create: [ProblemCreateWithoutCreatorInput!]
+  createMany: ProblemCreateManyCreatorInputEnvelope
   delete: [ProblemWhereUniqueInput!]
   deleteMany: [ProblemScalarWhereInput!]
   disconnect: [ProblemWhereUniqueInput!]
@@ -1842,29 +2036,48 @@ input ProblemUncheckedUpdateManyWithoutCreatorInput {
   upsert: [ProblemUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
-input ProblemUncheckedUpdateManyWithoutProblemsInput {
-  id: IntFieldUpdateOperationsInput
-  problemText: StringFieldUpdateOperationsInput
-}
-
-input ProblemUncheckedUpdateWithoutCreatorInput {
-  id: IntFieldUpdateOperationsInput
-  problemText: StringFieldUpdateOperationsInput
-}
-
-input ProblemUpdateManyWithWhereWithoutCreatorInput {
-  data: ProblemUncheckedUpdateManyWithoutProblemsInput!
-  where: ProblemScalarWhereInput!
+input ProblemUpdateManyWithoutLikedByInput {
+  connect: [ProblemWhereUniqueInput!]
+  connectOrCreate: [ProblemCreateOrConnectWithoutlikedByInput!]
+  create: [ProblemCreateWithoutLikedByInput!]
+  delete: [ProblemWhereUniqueInput!]
+  deleteMany: [ProblemScalarWhereInput!]
+  disconnect: [ProblemWhereUniqueInput!]
+  set: [ProblemWhereUniqueInput!]
+  update: [ProblemUpdateWithWhereUniqueWithoutLikedByInput!]
+  updateMany: [ProblemUpdateManyWithWhereWithoutLikedByInput!]
+  upsert: [ProblemUpsertWithWhereUniqueWithoutLikedByInput!]
 }
 
 input ProblemUpdateWithWhereUniqueWithoutCreatorInput {
-  data: ProblemUncheckedUpdateWithoutCreatorInput!
+  data: ProblemUpdateWithoutCreatorInput!
   where: ProblemWhereUniqueInput!
 }
 
+input ProblemUpdateWithWhereUniqueWithoutLikedByInput {
+  data: ProblemUpdateWithoutLikedByInput!
+  where: ProblemWhereUniqueInput!
+}
+
+input ProblemUpdateWithoutCreatorInput {
+  likedBy: CreatorUpdateManyWithoutLikesInput
+  problemText: StringFieldUpdateOperationsInput
+}
+
+input ProblemUpdateWithoutLikedByInput {
+  creator: CreatorUpdateOneWithoutProblemsInput
+  problemText: StringFieldUpdateOperationsInput
+}
+
 input ProblemUpsertWithWhereUniqueWithoutCreatorInput {
-  create: ProblemUncheckedCreateWithoutCreatorInput!
-  update: ProblemUncheckedUpdateWithoutCreatorInput!
+  create: ProblemCreateWithoutCreatorInput!
+  update: ProblemUpdateWithoutCreatorInput!
+  where: ProblemWhereUniqueInput!
+}
+
+input ProblemUpsertWithWhereUniqueWithoutLikedByInput {
+  create: ProblemCreateWithoutLikedByInput!
+  update: ProblemUpdateWithoutLikedByInput!
   where: ProblemWhereUniqueInput!
 }
 

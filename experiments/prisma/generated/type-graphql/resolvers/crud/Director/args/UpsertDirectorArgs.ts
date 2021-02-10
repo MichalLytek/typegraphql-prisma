@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { DirectorUncheckedCreateInput } from "../../../inputs/DirectorUncheckedCreateInput";
-import { DirectorUncheckedUpdateInput } from "../../../inputs/DirectorUncheckedUpdateInput";
+import { DirectorCreateInput } from "../../../inputs/DirectorCreateInput";
+import { DirectorUpdateInput } from "../../../inputs/DirectorUpdateInput";
 import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
@@ -11,13 +11,13 @@ export class UpsertDirectorArgs {
   })
   where!: DirectorWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => DirectorUncheckedCreateInput, {
+  @TypeGraphQL.Field(_type => DirectorCreateInput, {
     nullable: false
   })
-  create!: DirectorUncheckedCreateInput;
+  create!: DirectorCreateInput;
 
-  @TypeGraphQL.Field(_type => DirectorUncheckedUpdateInput, {
+  @TypeGraphQL.Field(_type => DirectorUpdateInput, {
     nullable: false
   })
-  update!: DirectorUncheckedUpdateInput;
+  update!: DirectorUpdateInput;
 }

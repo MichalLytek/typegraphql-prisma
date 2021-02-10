@@ -1,8 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { CreatorUncheckedCreateWithoutLikesInput } from "../inputs/CreatorUncheckedCreateWithoutLikesInput";
-import { CreatorUncheckedUpdateWithoutLikesInput } from "../inputs/CreatorUncheckedUpdateWithoutLikesInput";
+import { CreatorCreateWithoutLikesInput } from "../inputs/CreatorCreateWithoutLikesInput";
+import { CreatorUpdateWithoutLikesInput } from "../inputs/CreatorUpdateWithoutLikesInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -14,13 +14,13 @@ export class CreatorUpsertWithWhereUniqueWithoutLikesInput {
   })
   where!: CreatorWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => CreatorUncheckedUpdateWithoutLikesInput, {
+  @TypeGraphQL.Field(_type => CreatorUpdateWithoutLikesInput, {
     nullable: false
   })
-  update!: CreatorUncheckedUpdateWithoutLikesInput;
+  update!: CreatorUpdateWithoutLikesInput;
 
-  @TypeGraphQL.Field(_type => CreatorUncheckedCreateWithoutLikesInput, {
+  @TypeGraphQL.Field(_type => CreatorCreateWithoutLikesInput, {
     nullable: false
   })
-  create!: CreatorUncheckedCreateWithoutLikesInput;
+  create!: CreatorCreateWithoutLikesInput;
 }

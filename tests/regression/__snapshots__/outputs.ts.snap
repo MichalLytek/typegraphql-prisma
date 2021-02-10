@@ -614,7 +614,7 @@ export { SampleSumAggregate } from \\"./SampleSumAggregate\\";
 "
 `;
 
-exports[`outputs when experimental feature \`groupBy\` is enabled should generate group by output type for model: SampleGroupBy 1`] = `
+exports[`outputs when preview feature \`groupBy\` is enabled should generate group by output type for model: SampleGroupBy 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
@@ -681,7 +681,7 @@ export class SampleGroupBy {
 "
 `;
 
-exports[`outputs when experimental feature \`groupBy\` is enabled should generate group by output type for model: outputs index 1`] = `
+exports[`outputs when preview feature \`groupBy\` is enabled should generate group by output type for model: outputs index 1`] = `
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateSample } from \\"./AggregateSample\\";
 export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";

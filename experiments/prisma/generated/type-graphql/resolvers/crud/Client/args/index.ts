@@ -1,5 +1,6 @@
 export { AggregateClientArgs } from "./AggregateClientArgs";
 export { CreateClientArgs } from "./CreateClientArgs";
+export { CreateManyClientArgs } from "./CreateManyClientArgs";
 export { DeleteClientArgs } from "./DeleteClientArgs";
 export { DeleteManyClientArgs } from "./DeleteManyClientArgs";
 export { FindFirstClientArgs } from "./FindFirstClientArgs";

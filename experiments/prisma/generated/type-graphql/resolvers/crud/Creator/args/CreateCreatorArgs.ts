@@ -1,11 +1,11 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { CreatorUncheckedCreateInput } from "../../../inputs/CreatorUncheckedCreateInput";
+import { CreatorCreateInput } from "../../../inputs/CreatorCreateInput";
 
 @TypeGraphQL.ArgsType()
 export class CreateCreatorArgs {
-  @TypeGraphQL.Field(_type => CreatorUncheckedCreateInput, {
+  @TypeGraphQL.Field(_type => CreatorCreateInput, {
     nullable: false
   })
-  data!: CreatorUncheckedCreateInput;
+  data!: CreatorCreateInput;
 }

@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { PostScalarWhereInput } from "../inputs/PostScalarWhereInput";
-import { PostUncheckedUpdateManyWithoutPostsInput } from "../inputs/PostUncheckedUpdateManyWithoutPostsInput";
+import { PostUpdateManyMutationInput } from "../inputs/PostUpdateManyMutationInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -13,8 +13,8 @@ export class PostUpdateManyWithWhereWithoutAuthorInput {
   })
   where!: PostScalarWhereInput;
 
-  @TypeGraphQL.Field(_type => PostUncheckedUpdateManyWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => PostUpdateManyMutationInput, {
     nullable: false
   })
-  data!: PostUncheckedUpdateManyWithoutPostsInput;
+  data!: PostUpdateManyMutationInput;
 }

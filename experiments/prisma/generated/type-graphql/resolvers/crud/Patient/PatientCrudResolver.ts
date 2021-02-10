@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregatePatientArgs } from "./args/AggregatePatientArgs";
+import { CreateManyPatientArgs } from "./args/CreateManyPatientArgs";
 import { CreatePatientArgs } from "./args/CreatePatientArgs";
 import { DeleteManyPatientArgs } from "./args/DeleteManyPatientArgs";
 import { DeletePatientArgs } from "./args/DeletePatientArgs";
@@ -45,6 +46,13 @@ export class PatientCrudResolver {
   })
   async createPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatePatientArgs): Promise<Patient> {
     return ctx.prisma.patient.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyPatientArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.patient.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {

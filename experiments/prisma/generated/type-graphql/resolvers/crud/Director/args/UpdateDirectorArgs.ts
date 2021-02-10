@@ -1,14 +1,14 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { DirectorUncheckedUpdateInput } from "../../../inputs/DirectorUncheckedUpdateInput";
+import { DirectorUpdateInput } from "../../../inputs/DirectorUpdateInput";
 import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class UpdateDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorUncheckedUpdateInput, {
+  @TypeGraphQL.Field(_type => DirectorUpdateInput, {
     nullable: false
   })
-  data!: DirectorUncheckedUpdateInput;
+  data!: DirectorUpdateInput;
 
   @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
     nullable: false

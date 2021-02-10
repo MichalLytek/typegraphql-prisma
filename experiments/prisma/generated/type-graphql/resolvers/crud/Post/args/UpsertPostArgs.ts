@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { PostUncheckedCreateInput } from "../../../inputs/PostUncheckedCreateInput";
-import { PostUncheckedUpdateInput } from "../../../inputs/PostUncheckedUpdateInput";
+import { PostCreateInput } from "../../../inputs/PostCreateInput";
+import { PostUpdateInput } from "../../../inputs/PostUpdateInput";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
@@ -11,13 +11,13 @@ export class UpsertPostArgs {
   })
   where!: PostWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => PostUncheckedCreateInput, {
+  @TypeGraphQL.Field(_type => PostCreateInput, {
     nullable: false
   })
-  create!: PostUncheckedCreateInput;
+  create!: PostCreateInput;
 
-  @TypeGraphQL.Field(_type => PostUncheckedUpdateInput, {
+  @TypeGraphQL.Field(_type => PostUpdateInput, {
     nullable: false
   })
-  update!: PostUncheckedUpdateInput;
+  update!: PostUpdateInput;
 }

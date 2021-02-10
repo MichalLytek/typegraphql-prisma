@@ -1,11 +1,11 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { DirectorUncheckedCreateInput } from "../../../inputs/DirectorUncheckedCreateInput";
+import { DirectorCreateInput } from "../../../inputs/DirectorCreateInput";
 
 @TypeGraphQL.ArgsType()
 export class CreateDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorUncheckedCreateInput, {
+  @TypeGraphQL.Field(_type => DirectorCreateInput, {
     nullable: false
   })
-  data!: DirectorUncheckedCreateInput;
+  data!: DirectorCreateInput;
 }

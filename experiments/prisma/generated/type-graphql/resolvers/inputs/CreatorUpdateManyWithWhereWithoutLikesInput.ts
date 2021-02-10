@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { CreatorScalarWhereInput } from "../inputs/CreatorScalarWhereInput";
-import { CreatorUncheckedUpdateManyWithoutLikedByInput } from "../inputs/CreatorUncheckedUpdateManyWithoutLikedByInput";
+import { CreatorUpdateManyMutationInput } from "../inputs/CreatorUpdateManyMutationInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -13,8 +13,8 @@ export class CreatorUpdateManyWithWhereWithoutLikesInput {
   })
   where!: CreatorScalarWhereInput;
 
-  @TypeGraphQL.Field(_type => CreatorUncheckedUpdateManyWithoutLikedByInput, {
+  @TypeGraphQL.Field(_type => CreatorUpdateManyMutationInput, {
     nullable: false
   })
-  data!: CreatorUncheckedUpdateManyWithoutLikedByInput;
+  data!: CreatorUpdateManyMutationInput;
 }

@@ -1,4 +1,5 @@
 export { AggregatePatientArgs } from "./AggregatePatientArgs";
+export { CreateManyPatientArgs } from "./CreateManyPatientArgs";
 export { CreatePatientArgs } from "./CreatePatientArgs";
 export { DeleteManyPatientArgs } from "./DeleteManyPatientArgs";
 export { DeletePatientArgs } from "./DeletePatientArgs";

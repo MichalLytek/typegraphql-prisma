@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { ProblemScalarWhereInput } from "../inputs/ProblemScalarWhereInput";
-import { ProblemUncheckedUpdateManyWithoutLikesInput } from "../inputs/ProblemUncheckedUpdateManyWithoutLikesInput";
+import { ProblemUpdateManyMutationInput } from "../inputs/ProblemUpdateManyMutationInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -13,8 +13,8 @@ export class ProblemUpdateManyWithWhereWithoutLikedByInput {
   })
   where!: ProblemScalarWhereInput;
 
-  @TypeGraphQL.Field(_type => ProblemUncheckedUpdateManyWithoutLikesInput, {
+  @TypeGraphQL.Field(_type => ProblemUpdateManyMutationInput, {
     nullable: false
   })
-  data!: ProblemUncheckedUpdateManyWithoutLikesInput;
+  data!: ProblemUpdateManyMutationInput;
 }

@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
-import { MovieUncheckedCreateInput } from "../../../inputs/MovieUncheckedCreateInput";
-import { MovieUncheckedUpdateInput } from "../../../inputs/MovieUncheckedUpdateInput";
+import { MovieCreateInput } from "../../../inputs/MovieCreateInput";
+import { MovieUpdateInput } from "../../../inputs/MovieUpdateInput";
 import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
@@ -11,13 +11,13 @@ export class UpsertMovieArgs {
   })
   where!: MovieWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => MovieUncheckedCreateInput, {
+  @TypeGraphQL.Field(_type => MovieCreateInput, {
     nullable: false
   })
-  create!: MovieUncheckedCreateInput;
+  create!: MovieCreateInput;
 
-  @TypeGraphQL.Field(_type => MovieUncheckedUpdateInput, {
+  @TypeGraphQL.Field(_type => MovieUpdateInput, {
     nullable: false
   })
-  update!: MovieUncheckedUpdateInput;
+  update!: MovieUpdateInput;
 }

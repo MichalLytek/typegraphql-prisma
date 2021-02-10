@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
+import { PostCreateManyAuthorInputEnvelope } from "../inputs/PostCreateManyAuthorInputEnvelope";
 import { PostCreateOrConnectWithoutauthorInput } from "../inputs/PostCreateOrConnectWithoutauthorInput";
 import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorInput";
 import { PostScalarWhereInput } from "../inputs/PostScalarWhereInput";
@@ -27,6 +28,11 @@ export class PostUpdateManyWithoutAuthorInput {
     nullable: true
   })
   upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => PostCreateManyAuthorInputEnvelope, {
+    nullable: true
+  })
+  createMany?: PostCreateManyAuthorInputEnvelope | undefined;
 
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
     nullable: true

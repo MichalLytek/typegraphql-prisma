@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateMovieArgs } from "./args/AggregateMovieArgs";
+import { CreateManyMovieArgs } from "./args/CreateManyMovieArgs";
 import { CreateMovieArgs } from "./args/CreateMovieArgs";
 import { DeleteManyMovieArgs } from "./args/DeleteManyMovieArgs";
 import { DeleteMovieArgs } from "./args/DeleteMovieArgs";
@@ -45,6 +46,13 @@ export class MovieCrudResolver {
   })
   async createMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateMovieArgs): Promise<Movie> {
     return ctx.prisma.movie.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyMovieArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.movie.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Movie, {

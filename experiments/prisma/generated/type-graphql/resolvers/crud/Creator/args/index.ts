@@ -1,5 +1,6 @@
 export { AggregateCreatorArgs } from "./AggregateCreatorArgs";
 export { CreateCreatorArgs } from "./CreateCreatorArgs";
+export { CreateManyCreatorArgs } from "./CreateManyCreatorArgs";
 export { DeleteCreatorArgs } from "./DeleteCreatorArgs";
 export { DeleteManyCreatorArgs } from "./DeleteManyCreatorArgs";
 export { FindFirstCreatorArgs } from "./FindFirstCreatorArgs";

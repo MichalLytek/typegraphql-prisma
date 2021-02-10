@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { ClientUncheckedCreateWithoutPostsInput } from "../inputs/ClientUncheckedCreateWithoutPostsInput";
+import { ClientCreateWithoutPostsInput } from "../inputs/ClientCreateWithoutPostsInput";
 import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
 
 @TypeGraphQL.InputType({
@@ -13,8 +13,8 @@ export class ClientCreateOrConnectWithoutpostsInput {
   })
   where!: ClientWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => ClientUncheckedCreateWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => ClientCreateWithoutPostsInput, {
     nullable: false
   })
-  create!: ClientUncheckedCreateWithoutPostsInput;
+  create!: ClientCreateWithoutPostsInput;
 }

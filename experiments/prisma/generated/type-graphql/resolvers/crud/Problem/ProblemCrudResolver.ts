@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateProblemArgs } from "./args/AggregateProblemArgs";
+import { CreateManyProblemArgs } from "./args/CreateManyProblemArgs";
 import { CreateProblemArgs } from "./args/CreateProblemArgs";
 import { DeleteManyProblemArgs } from "./args/DeleteManyProblemArgs";
 import { DeleteProblemArgs } from "./args/DeleteProblemArgs";
@@ -45,6 +46,13 @@ export class ProblemCrudResolver {
   })
   async createProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateProblemArgs): Promise<Problem> {
     return ctx.prisma.problem.create(args);
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyProblemArgs): Promise<AffectedRowsOutput> {
+    return ctx.prisma.problem.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Problem, {

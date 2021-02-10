@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
+import { MovieCreateManyDirectorInputEnvelope } from "../inputs/MovieCreateManyDirectorInputEnvelope";
 import { MovieCreateOrConnectWithoutdirectorInput } from "../inputs/MovieCreateOrConnectWithoutdirectorInput";
 import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
@@ -18,6 +19,11 @@ export class MovieCreateNestedManyWithoutDirectorInput {
     nullable: true
   })
   connectOrCreate?: MovieCreateOrConnectWithoutdirectorInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => MovieCreateManyDirectorInputEnvelope, {
+    nullable: true
+  })
+  createMany?: MovieCreateManyDirectorInputEnvelope | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
     nullable: true
