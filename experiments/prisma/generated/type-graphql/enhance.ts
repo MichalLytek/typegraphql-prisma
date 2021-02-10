@@ -218,7 +218,7 @@ type ModelFieldNames<TModel extends ModelNames> = Exclude<
   number | symbol
 >;
 
-export type ModelFieldsConfig<TModel extends ModelNames> = FieldsConfig<
+type ModelFieldsConfig<TModel extends ModelNames> = FieldsConfig<
   ModelFieldNames<TModel>
 >;
 
@@ -248,7 +248,7 @@ type OutputTypeFieldNames<TOutput extends OutputTypesNames> = Exclude<
   number | symbol
 >;
 
-export type OutputTypeFieldsConfig<
+type OutputTypeFieldsConfig<
   TOutput extends OutputTypesNames
   > = FieldsConfig<OutputTypeFieldNames<TOutput>>;
 
@@ -280,7 +280,7 @@ type InputTypeFieldNames<TInput extends InputTypesNames> = Exclude<
   number | symbol
 >;
 
-export type InputTypeFieldsConfig<
+type InputTypeFieldsConfig<
   TInput extends InputTypesNames
   > = FieldsConfig<InputTypeFieldNames<TInput>>;
 

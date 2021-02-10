@@ -3748,7 +3748,7 @@ how you used Prisma Client in the issue.
   }
 });
 
-// ../../node_modules/.pnpm/@prisma/engines@2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma/engines@2.16.1-1.8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports) => {
   var __defineProperty = Object.defineProperty;
   var __hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -3784,13 +3784,13 @@ var require_dist9 = __commonJS2((exports) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1",
+      version: "2.16.1-1.8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "854c8ba7f0dce66f115af36af24e66989a8c02a1"
+        enginesVersion: "8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03"
       },
       devDependencies: {
         "@types/node": "^14.11.8",
@@ -72344,7 +72344,7 @@ var require_dist19 = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.16.0",
+    version: "2.16.1",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -72402,13 +72402,13 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "index-browser.js"
     ],
     devDependencies: {
-      "@prisma/debug": "2.16.0",
-      "@prisma/engine-core": "2.16.0",
-      "@prisma/engines": "2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1",
-      "@prisma/generator-helper": "2.16.0",
-      "@prisma/get-platform": "2.16.0",
-      "@prisma/migrate": "2.16.0",
-      "@prisma/sdk": "2.16.0",
+      "@prisma/debug": "2.16.1",
+      "@prisma/engine-core": "2.16.1",
+      "@prisma/engines": "2.16.1-1.8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03",
+      "@prisma/generator-helper": "2.16.1",
+      "@prisma/get-platform": "2.16.1",
+      "@prisma/migrate": "2.16.1",
+      "@prisma/sdk": "2.16.1",
       "@timsuchanek/copy": "1.4.5",
       "@types/debug": "4.1.5",
       "@types/jest": "26.0.20",
@@ -72470,7 +72470,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       }
     },
     dependencies: {
-      "@prisma/engines-version": "2.16.0-44.854c8ba7f0dce66f115af36af24e66989a8c02a1"
+      "@prisma/engines-version": "2.16.1-1.8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03"
     },
     "lint-staged": {
       "*.ts": [

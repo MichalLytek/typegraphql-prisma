@@ -26,12 +26,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 2.16.0
- * Query Engine version: 854c8ba7f0dce66f115af36af24e66989a8c02a1
+ * Prisma Client JS version: 2.16.1
+ * Query Engine version: 8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03
  */
 Prisma.prismaVersion = {
-  client: "2.16.0",
-  engine: "854c8ba7f0dce66f115af36af24e66989a8c02a1"
+  client: "2.16.1",
+  engine: "8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -188,8 +188,8 @@ const config = {
   },
   "sqliteDatasourceOverrides": [],
   "relativePath": "../..",
-  "clientVersion": "2.16.0",
-  "engineVersion": "854c8ba7f0dce66f115af36af24e66989a8c02a1",
+  "clientVersion": "2.16.1",
+  "engineVersion": "8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03",
   "datasourceNames": [
     "db"
   ],
