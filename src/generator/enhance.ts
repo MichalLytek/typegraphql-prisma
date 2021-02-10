@@ -1,6 +1,7 @@
 import { SourceFile, VariableDeclarationKind, Writers } from "ts-morph";
 import {
   crudResolversFolderName,
+  inputsFolderName,
   modelsFolderName,
   outputsFolderName,
   resolversFolderName,
@@ -34,6 +35,16 @@ export function generateEnhanceMap(
   sourceFile.addImportDeclaration({
     moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}`,
     namespaceImport: "outputTypes",
+  });
+
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}`,
+    namespaceImport: "inputTypes",
+  });
+
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/args.index`,
+    namespaceImport: "argsTypes",
   });
 
   sourceFile.addVariableStatement({
@@ -135,7 +146,7 @@ export function generateEnhanceMap(
       Record<TTypeKeys, PropertyDecorator[]>
     >;
 
-    export function applyTypeClassEnhanceConfig<
+    function applyTypeClassEnhanceConfig<
       TEnhanceConfig extends TypeConfig,
       TType extends object
     >(
@@ -170,7 +181,7 @@ export function generateEnhanceMap(
       number | symbol
     >;
 
-    export type ModelFieldsConfig<TModel extends ModelNames> = FieldsConfig<
+    type ModelFieldsConfig<TModel extends ModelNames> = FieldsConfig<
       ModelFieldNames<TModel>
     >;
 
@@ -197,22 +208,22 @@ export function generateEnhanceMap(
   sourceFile.addStatements(/* ts */ `
     type OutputTypesNames = keyof typeof outputTypes;
 
-    type OutputTypeFieldNames<TModel extends OutputTypesNames> = Exclude<
-      keyof typeof outputTypes[TModel]["prototype"],
+    type OutputTypeFieldNames<TOutput extends OutputTypesNames> = Exclude<
+      keyof typeof outputTypes[TOutput]["prototype"],
       number | symbol
     >;
 
-    export type OutputTypeFieldsConfig<
-      TModel extends OutputTypesNames
-    > = FieldsConfig<OutputTypeFieldNames<TModel>>;
+    type OutputTypeFieldsConfig<
+      TOutput extends OutputTypesNames
+    > = FieldsConfig<OutputTypeFieldNames<TOutput>>;
 
-    export type OutputTypeConfig<TModel extends OutputTypesNames> = {
+    export type OutputTypeConfig<TOutput extends OutputTypesNames> = {
       class?: ClassDecorator[];
-      fields?: OutputTypeFieldsConfig<TModel>;
+      fields?: OutputTypeFieldsConfig<TOutput>;
     };
 
     export type OutputTypesEnhanceMap = {
-      [TModel in OutputTypesNames]?: OutputTypeConfig<TModel>;
+      [TOutput in OutputTypesNames]?: OutputTypeConfig<TOutput>;
     };
 
     export function applyOutputTypesEnhanceMap(
@@ -222,6 +233,74 @@ export function generateEnhanceMap(
         const outputTypeName = outputTypeEnhanceMapKey as keyof typeof outputTypesEnhanceMap;
         const typeConfig = outputTypesEnhanceMap[outputTypeName]!;
         const typeClass = outputTypes[outputTypeName];
+        const typeTarget = typeClass.prototype;
+        applyTypeClassEnhanceConfig(typeConfig, typeClass, typeTarget);
+      }
+    }
+  `);
+
+  sourceFile.addStatements(/* ts */ `
+    type InputTypesNames = keyof typeof inputTypes;
+
+    type InputTypeFieldNames<TInput extends InputTypesNames> = Exclude<
+      keyof typeof inputTypes[TInput]["prototype"],
+      number | symbol
+    >;
+
+    type InputTypeFieldsConfig<
+      TInput extends InputTypesNames
+    > = FieldsConfig<InputTypeFieldNames<TInput>>;
+
+    export type InputTypeConfig<TInput extends InputTypesNames> = {
+      class?: ClassDecorator[];
+      fields?: InputTypeFieldsConfig<TInput>;
+    };
+
+    export type InputTypesEnhanceMap = {
+      [TInput in InputTypesNames]?: InputTypeConfig<TInput>;
+    };
+
+    export function applyInputTypesEnhanceMap(
+      inputTypesEnhanceMap: InputTypesEnhanceMap,
+    ) {
+      for (const inputTypeEnhanceMapKey of Object.keys(inputTypesEnhanceMap)) {
+        const inputTypeName = inputTypeEnhanceMapKey as keyof typeof inputTypesEnhanceMap;
+        const typeConfig = inputTypesEnhanceMap[inputTypeName]!;
+        const typeClass = inputTypes[inputTypeName];
+        const typeTarget = typeClass.prototype;
+        applyTypeClassEnhanceConfig(typeConfig, typeClass, typeTarget);
+      }
+    }
+  `);
+
+  sourceFile.addStatements(/* ts */ `
+    type ArgsTypesNames = keyof typeof argsTypes;
+
+    type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
+      keyof typeof argsTypes[TArgsType]["prototype"],
+      number | symbol
+    >;
+
+    type ArgFieldsConfig<
+      TArgsType extends ArgsTypesNames
+    > = FieldsConfig<ArgFieldNames<TArgsType>>;
+
+    export type ArgConfig<TArgsType extends ArgsTypesNames> = {
+      class?: ClassDecorator[];
+      fields?: ArgFieldsConfig<TArgsType>;
+    };
+
+    export type ArgsTypesEnhanceMap = {
+      [TArgsType in ArgsTypesNames]?: ArgConfig<TArgsType>;
+    };
+
+    export function applyArgsTypesEnhanceMap(
+      argsTypesEnhanceMap: ArgsTypesEnhanceMap,
+    ) {
+      for (const argsTypesEnhanceMapKey of Object.keys(argsTypesEnhanceMap)) {
+        const argsTypeName = argsTypesEnhanceMapKey as keyof typeof argsTypesEnhanceMap;
+        const typeConfig = argsTypesEnhanceMap[argsTypeName]!;
+        const typeClass = argsTypes[argsTypeName];
         const typeTarget = typeClass.prototype;
         applyTypeClassEnhanceConfig(typeConfig, typeClass, typeTarget);
       }

@@ -424,6 +424,28 @@ applyOutputTypeEnhanceMap({
 });
 ```
 
+If you want to add decorators for input types or args classes, you can leverage `applyArgsTypesEnhanceMap` and `applyInputTypesEnhanceMap` functions and use `ArgsTypesEnhanceMap`, `ArgConfig<TArgsType>`, `InputTypesEnhanceMap`, `InputTypeConfig<TInput>` types if you want to split the definitions:
+
+```ts
+applyArgsTypesEnhanceMap({
+  CreateProblemArgs: {
+    fields: {
+      data: [ValidateNested()],
+    },
+  },
+});
+
+applyInputTypesEnhanceMap({
+  ProblemCreateInput: {
+    fields: {
+      problemText: [MinLength(10)],
+    },
+  },
+});
+```
+
+Be aware that in case of `class-validator` you need to add `@ValidateNested` decorator to the args classes to trigger validation of the proper input types.
+
 #### Adding fields to model type
 
 If you want to add a field to the generated type like `User`, you have to add a proper `@FieldResolver` for that:

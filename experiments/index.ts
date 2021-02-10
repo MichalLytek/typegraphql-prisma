@@ -13,6 +13,7 @@ import {
 } from "type-graphql";
 import { ApolloServer } from "apollo-server";
 import path from "path";
+import { MinLength, ValidateNested } from "class-validator";
 
 import {
   Client,
@@ -46,6 +47,8 @@ import {
   OutputTypeConfig,
   GroupByCategoryResolver,
   GroupByPostResolver,
+  applyInputTypesEnhanceMap,
+  applyArgsTypesEnhanceMap,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
@@ -82,14 +85,30 @@ applyOutputTypesEnhanceMap({
   },
 });
 
-const problemActionsConfig: ResolverActionsConfig<"Problem"> = {
-  createProblem: [Authorized()],
+applyArgsTypesEnhanceMap({
+  CreateProblemArgs: {
+    fields: {
+      data: [ValidateNested()],
+    },
+  },
+});
+
+applyInputTypesEnhanceMap({
+  ProblemCreateInput: {
+    fields: {
+      problemText: [MinLength(10)],
+    },
+  },
+});
+
+const directorActionsConfig: ResolverActionsConfig<"Director"> = {
+  createDirector: [Authorized()],
 };
 const resolversEnhanceMap: ResolversEnhanceMap = {
   Category: {
     categories: [Authorized()],
   },
-  Problem: problemActionsConfig,
+  Director: directorActionsConfig,
 };
 applyResolversEnhanceMap(resolversEnhanceMap);
 
@@ -160,7 +179,7 @@ async function main() {
       GroupByCategoryResolver,
       GroupByPostResolver,
     ],
-    validate: false,
+    validate: true,
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
     authChecker: ({ info }) => {
       console.log(
