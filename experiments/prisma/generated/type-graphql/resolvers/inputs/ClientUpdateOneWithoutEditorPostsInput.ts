@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { ClientCreateOrConnectWithouteditorPostsInput } from "../inputs/ClientCreateOrConnectWithouteditorPostsInput";
+import { ClientCreateOrConnectWithoutEditorPostsInput } from "../inputs/ClientCreateOrConnectWithoutEditorPostsInput";
 import { ClientCreateWithoutEditorPostsInput } from "../inputs/ClientCreateWithoutEditorPostsInput";
 import { ClientUpdateWithoutEditorPostsInput } from "../inputs/ClientUpdateWithoutEditorPostsInput";
 import { ClientUpsertWithoutEditorPostsInput } from "../inputs/ClientUpsertWithoutEditorPostsInput";
@@ -16,10 +16,10 @@ export class ClientUpdateOneWithoutEditorPostsInput {
   })
   create?: ClientCreateWithoutEditorPostsInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientCreateOrConnectWithouteditorPostsInput, {
+  @TypeGraphQL.Field(_type => ClientCreateOrConnectWithoutEditorPostsInput, {
     nullable: true
   })
-  connectOrCreate?: ClientCreateOrConnectWithouteditorPostsInput | undefined;
+  connectOrCreate?: ClientCreateOrConnectWithoutEditorPostsInput | undefined;
 
   @TypeGraphQL.Field(_type => ClientUpsertWithoutEditorPostsInput, {
     nullable: true

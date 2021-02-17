@@ -7,7 +7,7 @@ import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class MovieCreateOrConnectWithoutdirectorInput {
+export class MovieCreateOrConnectWithoutDirectorInput {
   @TypeGraphQL.Field(_type => MovieWhereUniqueInput, {
     nullable: false
   })

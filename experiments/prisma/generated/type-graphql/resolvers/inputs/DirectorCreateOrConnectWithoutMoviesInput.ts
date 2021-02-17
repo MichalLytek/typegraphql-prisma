@@ -7,7 +7,7 @@ import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class DirectorCreateOrConnectWithoutmoviesInput {
+export class DirectorCreateOrConnectWithoutMoviesInput {
   @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
     nullable: false
   })

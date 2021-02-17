@@ -518,8 +518,8 @@ describe("inputs", () => {
     const userUpdateOneRequiredWithoutPostsFieldInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/UserUpdateOneRequiredWithoutPostsFieldInput.ts",
     );
-    const userCreateOrConnectWithoutpostsFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/UserCreateOrConnectWithoutpostsFieldInput.ts",
+    const userCreateOrConnectWithoutPostsFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/UserCreateOrConnectWithoutPostsFieldInput.ts",
     );
     const userCreateNestedOneWithoutPostsFieldInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/UserCreateNestedOneWithoutPostsFieldInput.ts",
@@ -528,8 +528,8 @@ describe("inputs", () => {
     expect(userUpdateOneRequiredWithoutPostsFieldInputTSFile).toMatchSnapshot(
       "UserUpdateOneRequiredWithoutPostsFieldInput",
     );
-    expect(userCreateOrConnectWithoutpostsFieldInputTSFile).toMatchSnapshot(
-      "UserCreateOrConnectWithoutpostsFieldInput",
+    expect(userCreateOrConnectWithoutPostsFieldInputTSFile).toMatchSnapshot(
+      "UserCreateOrConnectWithoutPostsFieldInput",
     );
     expect(userCreateNestedOneWithoutPostsFieldInputTSFile).toMatchSnapshot(
       "UserCreateNestedOneWithoutPostsFieldInput",
@@ -899,8 +899,8 @@ describe("inputs", () => {
       const firstModelCreateNestedOneWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelCreateNestedOneWithoutSecondModelsFieldInput.ts",
       );
-      const firstModelCreateOrConnectWithoutsecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelCreateOrConnectWithoutsecondModelsFieldInput.ts",
+      const firstModelCreateOrConnectWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelCreateOrConnectWithoutSecondModelsFieldInput.ts",
       );
       const firstModelCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelCreateWithoutSecondModelsFieldInput.ts",
@@ -941,9 +941,9 @@ describe("inputs", () => {
         "FirstModelCreateNestedOneWithoutSecondModelsFieldInput",
       );
       expect(
-        firstModelCreateOrConnectWithoutsecondModelsFieldInputTSFile,
+        firstModelCreateOrConnectWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot(
-        "FirstModelCreateOrConnectWithoutsecondModelsFieldInput",
+        "FirstModelCreateOrConnectWithoutSecondModelsFieldInput",
       );
       expect(
         firstModelCreateWithoutSecondModelsFieldInputTSFile,

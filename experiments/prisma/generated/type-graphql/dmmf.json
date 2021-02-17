@@ -11267,13 +11267,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postCreateOrConnectWithoutauthorInput",
+                  "type": "postCreateOrConnectWithoutAuthorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "postCreateOrConnectWithoutauthorInput",
+                  "type": "postCreateOrConnectWithoutAuthorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -11358,13 +11358,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postCreateOrConnectWithouteditorInput",
+                  "type": "postCreateOrConnectWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "postCreateOrConnectWithouteditorInput",
+                  "type": "postCreateOrConnectWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -11449,13 +11449,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postCreateOrConnectWithoutauthorInput",
+                  "type": "postCreateOrConnectWithoutAuthorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "postCreateOrConnectWithoutauthorInput",
+                  "type": "postCreateOrConnectWithoutAuthorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -11540,13 +11540,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postCreateOrConnectWithouteditorInput",
+                  "type": "postCreateOrConnectWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "postCreateOrConnectWithouteditorInput",
+                  "type": "postCreateOrConnectWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -11838,13 +11838,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postCreateOrConnectWithoutauthorInput",
+                  "type": "postCreateOrConnectWithoutAuthorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "postCreateOrConnectWithoutauthorInput",
+                  "type": "postCreateOrConnectWithoutAuthorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -12062,13 +12062,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postCreateOrConnectWithouteditorInput",
+                  "type": "postCreateOrConnectWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "postCreateOrConnectWithouteditorInput",
+                  "type": "postCreateOrConnectWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -12286,13 +12286,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postCreateOrConnectWithoutauthorInput",
+                  "type": "postCreateOrConnectWithoutAuthorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "postCreateOrConnectWithoutauthorInput",
+                  "type": "postCreateOrConnectWithoutAuthorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -12510,13 +12510,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postCreateOrConnectWithouteditorInput",
+                  "type": "postCreateOrConnectWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "postCreateOrConnectWithouteditorInput",
+                  "type": "postCreateOrConnectWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -12722,7 +12722,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserCreateOrConnectWithoutpostsInput",
+                  "type": "UserCreateOrConnectWithoutPostsInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -12776,7 +12776,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserCreateOrConnectWithouteditorPostsInput",
+                  "type": "UserCreateOrConnectWithoutEditorPostsInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -12899,7 +12899,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserCreateOrConnectWithoutpostsInput",
+                  "type": "UserCreateOrConnectWithoutPostsInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -12985,7 +12985,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserCreateOrConnectWithouteditorPostsInput",
+                  "type": "UserCreateOrConnectWithoutEditorPostsInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -13169,7 +13169,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "DirectorCreateOrConnectWithoutmoviesInput",
+                  "type": "DirectorCreateOrConnectWithoutMoviesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -13223,7 +13223,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "DirectorCreateOrConnectWithoutmoviesInput",
+                  "type": "DirectorCreateOrConnectWithoutMoviesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -13321,13 +13321,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "MovieCreateOrConnectWithoutdirectorInput",
+                  "type": "MovieCreateOrConnectWithoutDirectorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "MovieCreateOrConnectWithoutdirectorInput",
+                  "type": "MovieCreateOrConnectWithoutDirectorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -13412,13 +13412,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "MovieCreateOrConnectWithoutdirectorInput",
+                  "type": "MovieCreateOrConnectWithoutDirectorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "MovieCreateOrConnectWithoutdirectorInput",
+                  "type": "MovieCreateOrConnectWithoutDirectorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -13503,13 +13503,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "MovieCreateOrConnectWithoutdirectorInput",
+                  "type": "MovieCreateOrConnectWithoutDirectorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "MovieCreateOrConnectWithoutdirectorInput",
+                  "type": "MovieCreateOrConnectWithoutDirectorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -13727,13 +13727,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "MovieCreateOrConnectWithoutdirectorInput",
+                  "type": "MovieCreateOrConnectWithoutDirectorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "MovieCreateOrConnectWithoutdirectorInput",
+                  "type": "MovieCreateOrConnectWithoutDirectorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -13951,13 +13951,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorCreateOrConnectWithoutlikesInput",
+                  "type": "CreatorCreateOrConnectWithoutLikesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "CreatorCreateOrConnectWithoutlikesInput",
+                  "type": "CreatorCreateOrConnectWithoutLikesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -14017,7 +14017,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorCreateOrConnectWithoutproblemsInput",
+                  "type": "CreatorCreateOrConnectWithoutProblemsInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -14083,13 +14083,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorCreateOrConnectWithoutlikesInput",
+                  "type": "CreatorCreateOrConnectWithoutLikesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "CreatorCreateOrConnectWithoutlikesInput",
+                  "type": "CreatorCreateOrConnectWithoutLikesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -14282,7 +14282,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorCreateOrConnectWithoutproblemsInput",
+                  "type": "CreatorCreateOrConnectWithoutProblemsInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -14404,13 +14404,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemCreateOrConnectWithoutlikedByInput",
+                  "type": "ProblemCreateOrConnectWithoutLikedByInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "ProblemCreateOrConnectWithoutlikedByInput",
+                  "type": "ProblemCreateOrConnectWithoutLikedByInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -14482,13 +14482,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemCreateOrConnectWithoutcreatorInput",
+                  "type": "ProblemCreateOrConnectWithoutCreatorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "ProblemCreateOrConnectWithoutcreatorInput",
+                  "type": "ProblemCreateOrConnectWithoutCreatorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -14573,13 +14573,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemCreateOrConnectWithoutcreatorInput",
+                  "type": "ProblemCreateOrConnectWithoutCreatorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "ProblemCreateOrConnectWithoutcreatorInput",
+                  "type": "ProblemCreateOrConnectWithoutCreatorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -14664,13 +14664,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemCreateOrConnectWithoutlikedByInput",
+                  "type": "ProblemCreateOrConnectWithoutLikedByInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "ProblemCreateOrConnectWithoutlikedByInput",
+                  "type": "ProblemCreateOrConnectWithoutLikedByInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -14875,13 +14875,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemCreateOrConnectWithoutcreatorInput",
+                  "type": "ProblemCreateOrConnectWithoutCreatorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "ProblemCreateOrConnectWithoutcreatorInput",
+                  "type": "ProblemCreateOrConnectWithoutCreatorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -15099,13 +15099,13 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemCreateOrConnectWithoutcreatorInput",
+                  "type": "ProblemCreateOrConnectWithoutCreatorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
                 },
                 {
-                  "type": "ProblemCreateOrConnectWithoutcreatorInput",
+                  "type": "ProblemCreateOrConnectWithoutCreatorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -18101,7 +18101,7 @@
           ]
         },
         {
-          "name": "postCreateOrConnectWithoutauthorInput",
+          "name": "postCreateOrConnectWithoutAuthorInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -18457,7 +18457,7 @@
           ]
         },
         {
-          "name": "postCreateOrConnectWithouteditorInput",
+          "name": "postCreateOrConnectWithoutEditorInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -19297,7 +19297,7 @@
           ]
         },
         {
-          "name": "UserCreateOrConnectWithoutpostsInput",
+          "name": "UserCreateOrConnectWithoutPostsInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -19550,7 +19550,7 @@
           ]
         },
         {
-          "name": "UserCreateOrConnectWithouteditorPostsInput",
+          "name": "UserCreateOrConnectWithoutEditorPostsInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -20331,7 +20331,7 @@
           ]
         },
         {
-          "name": "DirectorCreateOrConnectWithoutmoviesInput",
+          "name": "DirectorCreateOrConnectWithoutMoviesInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -20551,7 +20551,7 @@
           ]
         },
         {
-          "name": "MovieCreateOrConnectWithoutdirectorInput",
+          "name": "MovieCreateOrConnectWithoutDirectorInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -20962,7 +20962,7 @@
           ]
         },
         {
-          "name": "CreatorCreateOrConnectWithoutlikesInput",
+          "name": "CreatorCreateOrConnectWithoutLikesInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -21070,7 +21070,7 @@
           ]
         },
         {
-          "name": "CreatorCreateOrConnectWithoutproblemsInput",
+          "name": "CreatorCreateOrConnectWithoutProblemsInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -21565,7 +21565,7 @@
           ]
         },
         {
-          "name": "ProblemCreateOrConnectWithoutlikedByInput",
+          "name": "ProblemCreateOrConnectWithoutLikedByInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -21673,7 +21673,7 @@
           ]
         },
         {
-          "name": "ProblemCreateOrConnectWithoutcreatorInput",
+          "name": "ProblemCreateOrConnectWithoutCreatorInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -24560,36 +24560,6 @@
               }
             },
             {
-              "name": "findOneUser",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": true,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "UserWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                }
-              ],
-              "isNullable": true,
-              "outputType": {
-                "type": "User",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              },
-              "deprecation": {
-                "sinceVersion": "2.14",
-                "reason": "The `findOne` query has been deprecated and replaced with `findUnique`.",
-                "plannedRemovalVersion": "2.15"
-              }
-            },
-            {
               "name": "findUniqueUser",
               "args": [
                 {
@@ -24981,36 +24951,6 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": true
-              }
-            },
-            {
-              "name": "findOnepost",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": true,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "postWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                }
-              ],
-              "isNullable": true,
-              "outputType": {
-                "type": "post",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              },
-              "deprecation": {
-                "sinceVersion": "2.14",
-                "reason": "The `findOne` query has been deprecated and replaced with `findUnique`.",
-                "plannedRemovalVersion": "2.15"
               }
             },
             {
@@ -25408,36 +25348,6 @@
               }
             },
             {
-              "name": "findOneCategory",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": true,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "CategoryWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                }
-              ],
-              "isNullable": true,
-              "outputType": {
-                "type": "Category",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              },
-              "deprecation": {
-                "sinceVersion": "2.14",
-                "reason": "The `findOne` query has been deprecated and replaced with `findUnique`.",
-                "plannedRemovalVersion": "2.15"
-              }
-            },
-            {
               "name": "findUniqueCategory",
               "args": [
                 {
@@ -25829,36 +25739,6 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": true
-              }
-            },
-            {
-              "name": "findOnePatient",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": true,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "PatientWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                }
-              ],
-              "isNullable": true,
-              "outputType": {
-                "type": "Patient",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              },
-              "deprecation": {
-                "sinceVersion": "2.14",
-                "reason": "The `findOne` query has been deprecated and replaced with `findUnique`.",
-                "plannedRemovalVersion": "2.15"
               }
             },
             {
@@ -26256,36 +26136,6 @@
               }
             },
             {
-              "name": "findOneMovie",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": true,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "MovieWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                }
-              ],
-              "isNullable": true,
-              "outputType": {
-                "type": "Movie",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              },
-              "deprecation": {
-                "sinceVersion": "2.14",
-                "reason": "The `findOne` query has been deprecated and replaced with `findUnique`.",
-                "plannedRemovalVersion": "2.15"
-              }
-            },
-            {
               "name": "findUniqueMovie",
               "args": [
                 {
@@ -26677,36 +26527,6 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": true
-              }
-            },
-            {
-              "name": "findOneDirector",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": true,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "DirectorWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                }
-              ],
-              "isNullable": true,
-              "outputType": {
-                "type": "Director",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              },
-              "deprecation": {
-                "sinceVersion": "2.14",
-                "reason": "The `findOne` query has been deprecated and replaced with `findUnique`.",
-                "plannedRemovalVersion": "2.15"
               }
             },
             {
@@ -27104,36 +26924,6 @@
               }
             },
             {
-              "name": "findOneProblem",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": true,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "ProblemWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                }
-              ],
-              "isNullable": true,
-              "outputType": {
-                "type": "Problem",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              },
-              "deprecation": {
-                "sinceVersion": "2.14",
-                "reason": "The `findOne` query has been deprecated and replaced with `findUnique`.",
-                "plannedRemovalVersion": "2.15"
-              }
-            },
-            {
               "name": "findUniqueProblem",
               "args": [
                 {
@@ -27525,36 +27315,6 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": true
-              }
-            },
-            {
-              "name": "findOneCreator",
-              "args": [
-                {
-                  "name": "where",
-                  "isRequired": true,
-                  "isNullable": false,
-                  "inputTypes": [
-                    {
-                      "type": "CreatorWhereUniqueInput",
-                      "namespace": "prisma",
-                      "location": "inputObjectTypes",
-                      "isList": false
-                    }
-                  ]
-                }
-              ],
-              "isNullable": true,
-              "outputType": {
-                "type": "Creator",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              },
-              "deprecation": {
-                "sinceVersion": "2.14",
-                "reason": "The `findOne` query has been deprecated and replaced with `findUnique`.",
-                "plannedRemovalVersion": "2.15"
               }
             },
             {
@@ -33564,7 +33324,6 @@
         "deleteOne": "deleteOneUser",
         "findFirst": "findFirstUser",
         "findMany": "findManyUser",
-        "findOne": "findOneUser",
         "findUnique": "findUniqueUser",
         "groupBy": "groupByUser",
         "updateMany": "updateManyUser",
@@ -33580,7 +33339,6 @@
         "deleteOne": "deleteOnepost",
         "findFirst": "findFirstpost",
         "findMany": "findManypost",
-        "findOne": "findOnepost",
         "findUnique": "findUniquepost",
         "groupBy": "groupBypost",
         "updateMany": "updateManypost",
@@ -33596,7 +33354,6 @@
         "deleteOne": "deleteOneCategory",
         "findFirst": "findFirstCategory",
         "findMany": "findManyCategory",
-        "findOne": "findOneCategory",
         "findUnique": "findUniqueCategory",
         "groupBy": "groupByCategory",
         "updateMany": "updateManyCategory",
@@ -33612,7 +33369,6 @@
         "deleteOne": "deleteOnePatient",
         "findFirst": "findFirstPatient",
         "findMany": "findManyPatient",
-        "findOne": "findOnePatient",
         "findUnique": "findUniquePatient",
         "groupBy": "groupByPatient",
         "updateMany": "updateManyPatient",
@@ -33628,7 +33384,6 @@
         "deleteOne": "deleteOneMovie",
         "findFirst": "findFirstMovie",
         "findMany": "findManyMovie",
-        "findOne": "findOneMovie",
         "findUnique": "findUniqueMovie",
         "groupBy": "groupByMovie",
         "updateMany": "updateManyMovie",
@@ -33644,7 +33399,6 @@
         "deleteOne": "deleteOneDirector",
         "findFirst": "findFirstDirector",
         "findMany": "findManyDirector",
-        "findOne": "findOneDirector",
         "findUnique": "findUniqueDirector",
         "groupBy": "groupByDirector",
         "updateMany": "updateManyDirector",
@@ -33660,7 +33414,6 @@
         "deleteOne": "deleteOneProblem",
         "findFirst": "findFirstProblem",
         "findMany": "findManyProblem",
-        "findOne": "findOneProblem",
         "findUnique": "findUniqueProblem",
         "groupBy": "groupByProblem",
         "updateMany": "updateManyProblem",
@@ -33676,7 +33429,6 @@
         "deleteOne": "deleteOneCreator",
         "findFirst": "findFirstCreator",
         "findMany": "findManyCreator",
-        "findOne": "findOneCreator",
         "findUnique": "findUniqueCreator",
         "groupBy": "groupByCreator",
         "updateMany": "updateManyCreator",

@@ -7,7 +7,7 @@ import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class PostCreateOrConnectWithoutauthorInput {
+export class PostCreateOrConnectWithoutAuthorInput {
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
     nullable: false
   })

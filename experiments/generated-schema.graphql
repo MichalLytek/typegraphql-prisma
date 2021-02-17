@@ -207,22 +207,22 @@ input ClientCreateManyInput {
 
 input ClientCreateNestedOneWithoutEditorPostsInput {
   connect: ClientWhereUniqueInput
-  connectOrCreate: ClientCreateOrConnectWithouteditorPostsInput
+  connectOrCreate: ClientCreateOrConnectWithoutEditorPostsInput
   create: ClientCreateWithoutEditorPostsInput
 }
 
 input ClientCreateNestedOneWithoutPostsInput {
   connect: ClientWhereUniqueInput
-  connectOrCreate: ClientCreateOrConnectWithoutpostsInput
+  connectOrCreate: ClientCreateOrConnectWithoutPostsInput
   create: ClientCreateWithoutPostsInput
 }
 
-input ClientCreateOrConnectWithouteditorPostsInput {
+input ClientCreateOrConnectWithoutEditorPostsInput {
   create: ClientCreateWithoutEditorPostsInput!
   where: ClientWhereUniqueInput!
 }
 
-input ClientCreateOrConnectWithoutpostsInput {
+input ClientCreateOrConnectWithoutPostsInput {
   create: ClientCreateWithoutPostsInput!
   where: ClientWhereUniqueInput!
 }
@@ -349,7 +349,7 @@ input ClientUpdateManyMutationInput {
 
 input ClientUpdateOneRequiredWithoutPostsInput {
   connect: ClientWhereUniqueInput
-  connectOrCreate: ClientCreateOrConnectWithoutpostsInput
+  connectOrCreate: ClientCreateOrConnectWithoutPostsInput
   create: ClientCreateWithoutPostsInput
   update: ClientUpdateWithoutPostsInput
   upsert: ClientUpsertWithoutPostsInput
@@ -357,7 +357,7 @@ input ClientUpdateOneRequiredWithoutPostsInput {
 
 input ClientUpdateOneWithoutEditorPostsInput {
   connect: ClientWhereUniqueInput
-  connectOrCreate: ClientCreateOrConnectWithouteditorPostsInput
+  connectOrCreate: ClientCreateOrConnectWithoutEditorPostsInput
   create: ClientCreateWithoutEditorPostsInput
   delete: Boolean
   disconnect: Boolean
@@ -445,22 +445,22 @@ input CreatorCreateManyInput {
 
 input CreatorCreateNestedManyWithoutLikesInput {
   connect: [CreatorWhereUniqueInput!]
-  connectOrCreate: [CreatorCreateOrConnectWithoutlikesInput!]
+  connectOrCreate: [CreatorCreateOrConnectWithoutLikesInput!]
   create: [CreatorCreateWithoutLikesInput!]
 }
 
 input CreatorCreateNestedOneWithoutProblemsInput {
   connect: CreatorWhereUniqueInput
-  connectOrCreate: CreatorCreateOrConnectWithoutproblemsInput
+  connectOrCreate: CreatorCreateOrConnectWithoutProblemsInput
   create: CreatorCreateWithoutProblemsInput
 }
 
-input CreatorCreateOrConnectWithoutlikesInput {
+input CreatorCreateOrConnectWithoutLikesInput {
   create: CreatorCreateWithoutLikesInput!
   where: CreatorWhereUniqueInput!
 }
 
-input CreatorCreateOrConnectWithoutproblemsInput {
+input CreatorCreateOrConnectWithoutProblemsInput {
   create: CreatorCreateWithoutProblemsInput!
   where: CreatorWhereUniqueInput!
 }
@@ -553,7 +553,7 @@ input CreatorUpdateManyWithWhereWithoutLikesInput {
 
 input CreatorUpdateManyWithoutLikesInput {
   connect: [CreatorWhereUniqueInput!]
-  connectOrCreate: [CreatorCreateOrConnectWithoutlikesInput!]
+  connectOrCreate: [CreatorCreateOrConnectWithoutLikesInput!]
   create: [CreatorCreateWithoutLikesInput!]
   delete: [CreatorWhereUniqueInput!]
   deleteMany: [CreatorScalarWhereInput!]
@@ -566,7 +566,7 @@ input CreatorUpdateManyWithoutLikesInput {
 
 input CreatorUpdateOneWithoutProblemsInput {
   connect: CreatorWhereUniqueInput
-  connectOrCreate: CreatorCreateOrConnectWithoutproblemsInput
+  connectOrCreate: CreatorCreateOrConnectWithoutProblemsInput
   create: CreatorCreateWithoutProblemsInput
   delete: Boolean
   disconnect: Boolean
@@ -673,11 +673,11 @@ input DirectorCreateManyInput {
 
 input DirectorCreateNestedOneWithoutMoviesInput {
   connect: DirectorWhereUniqueInput
-  connectOrCreate: DirectorCreateOrConnectWithoutmoviesInput
+  connectOrCreate: DirectorCreateOrConnectWithoutMoviesInput
   create: DirectorCreateWithoutMoviesInput
 }
 
-input DirectorCreateOrConnectWithoutmoviesInput {
+input DirectorCreateOrConnectWithoutMoviesInput {
   create: DirectorCreateWithoutMoviesInput!
   where: DirectorWhereUniqueInput!
 }
@@ -746,7 +746,7 @@ input DirectorUpdateManyMutationInput {
 
 input DirectorUpdateOneRequiredWithoutMoviesInput {
   connect: DirectorWhereUniqueInput
-  connectOrCreate: DirectorCreateOrConnectWithoutmoviesInput
+  connectOrCreate: DirectorCreateOrConnectWithoutMoviesInput
   create: DirectorCreateWithoutMoviesInput
   update: DirectorUpdateWithoutMoviesInput
   upsert: DirectorUpsertWithoutMoviesInput
@@ -964,12 +964,12 @@ input MovieCreateManyInput {
 
 input MovieCreateNestedManyWithoutDirectorInput {
   connect: [MovieWhereUniqueInput!]
-  connectOrCreate: [MovieCreateOrConnectWithoutdirectorInput!]
+  connectOrCreate: [MovieCreateOrConnectWithoutDirectorInput!]
   create: [MovieCreateWithoutDirectorInput!]
   createMany: MovieCreateManyDirectorInputEnvelope
 }
 
-input MovieCreateOrConnectWithoutdirectorInput {
+input MovieCreateOrConnectWithoutDirectorInput {
   create: MovieCreateWithoutDirectorInput!
   where: MovieWhereUniqueInput!
 }
@@ -1058,7 +1058,7 @@ input MovieUpdateManyWithWhereWithoutDirectorInput {
 
 input MovieUpdateManyWithoutDirectorInput {
   connect: [MovieWhereUniqueInput!]
-  connectOrCreate: [MovieCreateOrConnectWithoutdirectorInput!]
+  connectOrCreate: [MovieCreateOrConnectWithoutDirectorInput!]
   create: [MovieCreateWithoutDirectorInput!]
   createMany: MovieCreateManyDirectorInputEnvelope
   delete: [MovieWhereUniqueInput!]
@@ -1568,24 +1568,24 @@ input PostCreateManyEditorInputEnvelope {
 
 input PostCreateNestedManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
   createMany: PostCreateManyAuthorInputEnvelope
 }
 
 input PostCreateNestedManyWithoutEditorInput {
   connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithouteditorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutEditorInput!]
   create: [PostCreateWithoutEditorInput!]
   createMany: PostCreateManyEditorInputEnvelope
 }
 
-input PostCreateOrConnectWithoutauthorInput {
+input PostCreateOrConnectWithoutAuthorInput {
   create: PostCreateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
 
-input PostCreateOrConnectWithouteditorInput {
+input PostCreateOrConnectWithoutEditorInput {
   create: PostCreateWithoutEditorInput!
   where: PostWhereUniqueInput!
 }
@@ -1765,7 +1765,7 @@ input PostUpdateManyWithWhereWithoutEditorInput {
 
 input PostUpdateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
   createMany: PostCreateManyAuthorInputEnvelope
   delete: [PostWhereUniqueInput!]
@@ -1779,7 +1779,7 @@ input PostUpdateManyWithoutAuthorInput {
 
 input PostUpdateManyWithoutEditorInput {
   connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithouteditorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutEditorInput!]
   create: [PostCreateWithoutEditorInput!]
   createMany: PostCreateManyEditorInputEnvelope
   delete: [PostWhereUniqueInput!]
@@ -1906,23 +1906,23 @@ input ProblemCreateManyInput {
 
 input ProblemCreateNestedManyWithoutCreatorInput {
   connect: [ProblemWhereUniqueInput!]
-  connectOrCreate: [ProblemCreateOrConnectWithoutcreatorInput!]
+  connectOrCreate: [ProblemCreateOrConnectWithoutCreatorInput!]
   create: [ProblemCreateWithoutCreatorInput!]
   createMany: ProblemCreateManyCreatorInputEnvelope
 }
 
 input ProblemCreateNestedManyWithoutLikedByInput {
   connect: [ProblemWhereUniqueInput!]
-  connectOrCreate: [ProblemCreateOrConnectWithoutlikedByInput!]
+  connectOrCreate: [ProblemCreateOrConnectWithoutLikedByInput!]
   create: [ProblemCreateWithoutLikedByInput!]
 }
 
-input ProblemCreateOrConnectWithoutcreatorInput {
+input ProblemCreateOrConnectWithoutCreatorInput {
   create: ProblemCreateWithoutCreatorInput!
   where: ProblemWhereUniqueInput!
 }
 
-input ProblemCreateOrConnectWithoutlikedByInput {
+input ProblemCreateOrConnectWithoutLikedByInput {
   create: ProblemCreateWithoutLikedByInput!
   where: ProblemWhereUniqueInput!
 }
@@ -2024,7 +2024,7 @@ input ProblemUpdateManyWithWhereWithoutLikedByInput {
 
 input ProblemUpdateManyWithoutCreatorInput {
   connect: [ProblemWhereUniqueInput!]
-  connectOrCreate: [ProblemCreateOrConnectWithoutcreatorInput!]
+  connectOrCreate: [ProblemCreateOrConnectWithoutCreatorInput!]
   create: [ProblemCreateWithoutCreatorInput!]
   createMany: ProblemCreateManyCreatorInputEnvelope
   delete: [ProblemWhereUniqueInput!]
@@ -2038,7 +2038,7 @@ input ProblemUpdateManyWithoutCreatorInput {
 
 input ProblemUpdateManyWithoutLikedByInput {
   connect: [ProblemWhereUniqueInput!]
-  connectOrCreate: [ProblemCreateOrConnectWithoutlikedByInput!]
+  connectOrCreate: [ProblemCreateOrConnectWithoutLikedByInput!]
   create: [ProblemCreateWithoutLikedByInput!]
   delete: [ProblemWhereUniqueInput!]
   deleteMany: [ProblemScalarWhereInput!]

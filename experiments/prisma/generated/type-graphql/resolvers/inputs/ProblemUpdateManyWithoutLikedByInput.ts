@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { ProblemCreateOrConnectWithoutlikedByInput } from "../inputs/ProblemCreateOrConnectWithoutlikedByInput";
+import { ProblemCreateOrConnectWithoutLikedByInput } from "../inputs/ProblemCreateOrConnectWithoutLikedByInput";
 import { ProblemCreateWithoutLikedByInput } from "../inputs/ProblemCreateWithoutLikedByInput";
 import { ProblemScalarWhereInput } from "../inputs/ProblemScalarWhereInput";
 import { ProblemUpdateManyWithWhereWithoutLikedByInput } from "../inputs/ProblemUpdateManyWithWhereWithoutLikedByInput";
@@ -18,10 +18,10 @@ export class ProblemUpdateManyWithoutLikedByInput {
   })
   create?: ProblemCreateWithoutLikedByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutlikedByInput], {
+  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutLikedByInput], {
     nullable: true
   })
-  connectOrCreate?: ProblemCreateOrConnectWithoutlikedByInput[] | undefined;
+  connectOrCreate?: ProblemCreateOrConnectWithoutLikedByInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemUpsertWithWhereUniqueWithoutLikedByInput], {
     nullable: true

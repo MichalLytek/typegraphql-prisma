@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { ProblemCreateManyCreatorInputEnvelope } from "../inputs/ProblemCreateManyCreatorInputEnvelope";
-import { ProblemCreateOrConnectWithoutcreatorInput } from "../inputs/ProblemCreateOrConnectWithoutcreatorInput";
+import { ProblemCreateOrConnectWithoutCreatorInput } from "../inputs/ProblemCreateOrConnectWithoutCreatorInput";
 import { ProblemCreateWithoutCreatorInput } from "../inputs/ProblemCreateWithoutCreatorInput";
 import { ProblemScalarWhereInput } from "../inputs/ProblemScalarWhereInput";
 import { ProblemUpdateManyWithWhereWithoutCreatorInput } from "../inputs/ProblemUpdateManyWithWhereWithoutCreatorInput";
@@ -19,10 +19,10 @@ export class ProblemUpdateManyWithoutCreatorInput {
   })
   create?: ProblemCreateWithoutCreatorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutcreatorInput], {
+  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutCreatorInput], {
     nullable: true
   })
-  connectOrCreate?: ProblemCreateOrConnectWithoutcreatorInput[] | undefined;
+  connectOrCreate?: ProblemCreateOrConnectWithoutCreatorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemUpsertWithWhereUniqueWithoutCreatorInput], {
     nullable: true

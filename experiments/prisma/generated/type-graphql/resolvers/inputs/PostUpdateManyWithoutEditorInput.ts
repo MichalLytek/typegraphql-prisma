@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
 import { PostCreateManyEditorInputEnvelope } from "../inputs/PostCreateManyEditorInputEnvelope";
-import { PostCreateOrConnectWithouteditorInput } from "../inputs/PostCreateOrConnectWithouteditorInput";
+import { PostCreateOrConnectWithoutEditorInput } from "../inputs/PostCreateOrConnectWithoutEditorInput";
 import { PostCreateWithoutEditorInput } from "../inputs/PostCreateWithoutEditorInput";
 import { PostScalarWhereInput } from "../inputs/PostScalarWhereInput";
 import { PostUpdateManyWithWhereWithoutEditorInput } from "../inputs/PostUpdateManyWithWhereWithoutEditorInput";
@@ -19,10 +19,10 @@ export class PostUpdateManyWithoutEditorInput {
   })
   create?: PostCreateWithoutEditorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithouteditorInput], {
+  @TypeGraphQL.Field(_type => [PostCreateOrConnectWithoutEditorInput], {
     nullable: true
   })
-  connectOrCreate?: PostCreateOrConnectWithouteditorInput[] | undefined;
+  connectOrCreate?: PostCreateOrConnectWithoutEditorInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostUpsertWithWhereUniqueWithoutEditorInput], {
     nullable: true

@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { CreatorCreateOrConnectWithoutproblemsInput } from "../inputs/CreatorCreateOrConnectWithoutproblemsInput";
+import { CreatorCreateOrConnectWithoutProblemsInput } from "../inputs/CreatorCreateOrConnectWithoutProblemsInput";
 import { CreatorCreateWithoutProblemsInput } from "../inputs/CreatorCreateWithoutProblemsInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
@@ -14,10 +14,10 @@ export class CreatorCreateNestedOneWithoutProblemsInput {
   })
   create?: CreatorCreateWithoutProblemsInput | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorCreateOrConnectWithoutproblemsInput, {
+  @TypeGraphQL.Field(_type => CreatorCreateOrConnectWithoutProblemsInput, {
     nullable: true
   })
-  connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput | undefined;
+  connectOrCreate?: CreatorCreateOrConnectWithoutProblemsInput | undefined;
 
   @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
     nullable: true

@@ -4,6 +4,11 @@
 **/
 
 import * as runtime from './runtime';
+declare const prisma: unique symbol
+export type PrismaPromise<A> = Promise<A> & {[prisma]: true}
+type UnwrapTuple<Tuple extends readonly unknown[]> = {
+  [K in keyof Tuple]: K extends `${number}` ? Tuple[K] extends PrismaPromise<infer X> ? X : never : never
+};
 
 
 /**
@@ -211,7 +216,7 @@ export class PrismaClient<
   * 
   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
   */
-  $executeRaw < T = any > (query: string | TemplateStringsArray | Prisma.Sql, ...values: any[]): Promise<number>;
+  $executeRaw < T = any > (query: string | TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<number>;
 
   /**
    * Performs a raw query and returns the SELECT data
@@ -225,10 +230,10 @@ export class PrismaClient<
   * 
   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
   */
-  $queryRaw < T = any > (query: string | TemplateStringsArray | Prisma.Sql, ...values: any[]): Promise<T>;
+  $queryRaw < T = any > (query: string | TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<T>;
 
   /**
-   * Execute queries in a transaction
+   * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
    * @example
    * ```
    * const [george, bob, alice] = await prisma.transaction([
@@ -237,8 +242,10 @@ export class PrismaClient<
    *   prisma.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction: PromiseConstructor['all']
+  $transaction<P extends PrismaPromise<any>[]>(arg: [...P]): Promise<UnwrapTuple<P>>
 
       /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -348,8 +355,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.16.1
-   * Query Engine version: 8b74ad57aaf2cc6c155f382a18a8e3ba95aceb03
+   * Prisma Client JS version: 2.17.0
+   * Query Engine version: 3c463ebd78b1d21d8fdacdd27899e280cf686223
    */
   export type PrismaVersion = {
     client: string
@@ -533,7 +540,11 @@ export namespace Prisma {
     [K in keyof O]?: O[K];
   } & {};
 
-  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+  type _Record<K extends keyof any, T> = {
+    [P in K]: T;
+  };
+
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
 
   export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
   /** End Helper Types for "Merge" **/
@@ -583,43 +594,19 @@ export namespace Prisma {
 
   export type Keys<U extends Union> = U extends unknown ? keyof U : never
 
-  /**
-   * Allows creating `select` or `include` outside of the main statement
-   * From https://github.com/prisma/prisma/issues/3372#issuecomment-762296484
-   */
+  type Exact<A, W = unknown> = 
+  W extends unknown ? A extends Narrowable ? Cast<A, W> : Cast<
+  {[K in keyof A]: K extends keyof W ? Exact<A[K], W[K]> : never},
+  {[K in keyof W]: K extends keyof A ? Exact<A[K], W[K]> : W[K]}>
+  : never;
 
-  type Cast<A1, A2> = A1 extends A2 ? A1 : A2;
+  type Narrowable = string | number | boolean | bigint;
 
-  /**
-   * `Exact` forces a type to comply by another type. It will need to be a subset
-   * and must have exactly the same properties, no more, no less.
-   */
-  type Exact<A, W> = A & Cast<{
-    [K in keyof A]: K extends keyof W ? A[K] : never
-  }, W>;
-
-  type Narrow<A, W = unknown> =
-      A & {[K in keyof A]: NarrowAt<A, W, K>};
-
-  type NarrowAt<A, W, K extends keyof A, AK = A[K], WK = Att<W, K>> =
-      WK extends Widen<infer T> ? T :
-      AK extends Narrowable ? AK & WK :
-      Narrow<AK, WK>;
-
-  type Att<O, K> = K extends keyof O ? O[K] : unknown;
-
-  type Widen<A> = {[type]: A};
-
-  type Narrowable =
-  | string
-  | number
-  | bigint
-  | boolean
-  | [];
+  type Cast<A, B> = A extends B ? A : B;
 
   export const type: unique symbol;
 
-  export function validator<V>(): <S>(select: Exact<Narrow<S, V>, V>) => S;
+  export function validator<V>(): <S>(select: Exact<S, V>) => S;
 
   /**
    * Used by group by
@@ -943,7 +930,7 @@ export namespace Prisma {
     **/
     where?: UserWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Users to fetch.
     **/
@@ -1116,6 +1103,8 @@ export namespace Prisma {
 
     /**
      * Find the first User that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {UserFindFirstArgs} args - Arguments to find a User
      * @example
      * // Get one User
@@ -1131,6 +1120,8 @@ export namespace Prisma {
 
     /**
      * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {UserFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Users
@@ -1145,7 +1136,7 @@ export namespace Prisma {
     **/
     findMany<T extends UserFindManyArgs>(
       args?: SelectSubset<T, UserFindManyArgs>
-    ): CheckSelect<T, Promise<Array<User>>, Promise<Array<UserGetPayload<T>>>>
+    ): CheckSelect<T, PrismaPromise<Array<User>>, PrismaPromise<Array<UserGetPayload<T>>>>
 
     /**
      * Create a User.
@@ -1177,7 +1168,7 @@ export namespace Prisma {
     **/
     createMany<T extends UserCreateManyArgs>(
       args?: SelectSubset<T, UserCreateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Delete a User.
@@ -1228,10 +1219,12 @@ export namespace Prisma {
     **/
     deleteMany<T extends UserDeleteManyArgs>(
       args?: SelectSubset<T, UserDeleteManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Users
@@ -1247,7 +1240,7 @@ export namespace Prisma {
     **/
     updateMany<T extends UserUpdateManyArgs>(
       args: SelectSubset<T, UserUpdateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Create or update one User.
@@ -1272,6 +1265,8 @@ export namespace Prisma {
 
     /**
      * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {UserCountArgs} args - Arguments to filter Users to count.
      * @example
      * // Count the number of Users
@@ -1283,8 +1278,8 @@ export namespace Prisma {
     **/
     count<T extends UserCountArgs>(
       args?: Subset<T, UserCountArgs>,
-    ): Promise<
-      T extends Record<'select', any>
+    ): PrismaPromise<
+      T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
           : GetScalarType<T['select'], UserCountAggregateOutputType>
@@ -1293,6 +1288,8 @@ export namespace Prisma {
 
     /**
      * Allows you to perform aggregations operations on a User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
@@ -1313,10 +1310,12 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Promise<GetUserAggregateType<T>>
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): PrismaPromise<GetUserAggregateType<T>>
 
     /**
      * Group by User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {UserGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
@@ -1397,7 +1396,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in 
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__UserClient<T> implements Promise<T> {
+  export class Prisma__UserClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
     private readonly _queryType;
@@ -1413,9 +1413,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    posts<T extends postFindManyArgs = {}>(args?: Subset<T, postFindManyArgs>): CheckSelect<T, Promise<Array<post>>, Promise<Array<postGetPayload<T>>>>;
+    posts<T extends postFindManyArgs = {}>(args?: Subset<T, postFindManyArgs>): CheckSelect<T, PrismaPromise<Array<post>>, PrismaPromise<Array<postGetPayload<T>>>>;
 
-    editorPosts<T extends postFindManyArgs = {}>(args?: Subset<T, postFindManyArgs>): CheckSelect<T, Promise<Array<post>>, Promise<Array<postGetPayload<T>>>>;
+    editorPosts<T extends postFindManyArgs = {}>(args?: Subset<T, postFindManyArgs>): CheckSelect<T, PrismaPromise<Array<post>>, PrismaPromise<Array<postGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -1424,13 +1424,13 @@ export namespace Prisma {
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -1486,7 +1486,7 @@ export namespace Prisma {
     **/
     where?: UserWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Users to fetch.
     **/
@@ -1510,7 +1510,7 @@ export namespace Prisma {
     **/
     skip?: number
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Users.
     **/
@@ -1535,7 +1535,7 @@ export namespace Prisma {
     **/
     where?: UserWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Users to fetch.
     **/
@@ -1814,7 +1814,7 @@ export namespace Prisma {
     **/
     where?: postWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of posts to fetch.
     **/
@@ -1995,6 +1995,8 @@ export namespace Prisma {
 
     /**
      * Find the first Post that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {postFindFirstArgs} args - Arguments to find a Post
      * @example
      * // Get one Post
@@ -2010,6 +2012,8 @@ export namespace Prisma {
 
     /**
      * Find zero or more Posts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {postFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Posts
@@ -2024,7 +2028,7 @@ export namespace Prisma {
     **/
     findMany<T extends postFindManyArgs>(
       args?: SelectSubset<T, postFindManyArgs>
-    ): CheckSelect<T, Promise<Array<post>>, Promise<Array<postGetPayload<T>>>>
+    ): CheckSelect<T, PrismaPromise<Array<post>>, PrismaPromise<Array<postGetPayload<T>>>>
 
     /**
      * Create a Post.
@@ -2056,7 +2060,7 @@ export namespace Prisma {
     **/
     createMany<T extends postCreateManyArgs>(
       args?: SelectSubset<T, postCreateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Delete a Post.
@@ -2107,10 +2111,12 @@ export namespace Prisma {
     **/
     deleteMany<T extends postDeleteManyArgs>(
       args?: SelectSubset<T, postDeleteManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Posts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {postUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Posts
@@ -2126,7 +2132,7 @@ export namespace Prisma {
     **/
     updateMany<T extends postUpdateManyArgs>(
       args: SelectSubset<T, postUpdateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Post.
@@ -2151,6 +2157,8 @@ export namespace Prisma {
 
     /**
      * Count the number of Posts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {postCountArgs} args - Arguments to filter Posts to count.
      * @example
      * // Count the number of Posts
@@ -2162,8 +2170,8 @@ export namespace Prisma {
     **/
     count<T extends postCountArgs>(
       args?: Subset<T, postCountArgs>,
-    ): Promise<
-      T extends Record<'select', any>
+    ): PrismaPromise<
+      T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
           : GetScalarType<T['select'], PostCountAggregateOutputType>
@@ -2172,6 +2180,8 @@ export namespace Prisma {
 
     /**
      * Allows you to perform aggregations operations on a Post.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {PostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
@@ -2192,10 +2202,12 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): Promise<GetPostAggregateType<T>>
+    aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): PrismaPromise<GetPostAggregateType<T>>
 
     /**
      * Group by Post.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {PostGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
@@ -2276,7 +2288,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in 
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__postClient<T> implements Promise<T> {
+  export class Prisma__postClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
     private readonly _queryType;
@@ -2303,13 +2316,13 @@ export namespace Prisma {
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -2365,7 +2378,7 @@ export namespace Prisma {
     **/
     where?: postWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of posts to fetch.
     **/
@@ -2389,7 +2402,7 @@ export namespace Prisma {
     **/
     skip?: number
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of posts.
     **/
@@ -2414,7 +2427,7 @@ export namespace Prisma {
     **/
     where?: postWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of posts to fetch.
     **/
@@ -2645,7 +2658,7 @@ export namespace Prisma {
     **/
     where?: CategoryWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Categories to fetch.
     **/
@@ -2794,6 +2807,8 @@ export namespace Prisma {
 
     /**
      * Find the first Category that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CategoryFindFirstArgs} args - Arguments to find a Category
      * @example
      * // Get one Category
@@ -2809,6 +2824,8 @@ export namespace Prisma {
 
     /**
      * Find zero or more Categories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CategoryFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Categories
@@ -2823,7 +2840,7 @@ export namespace Prisma {
     **/
     findMany<T extends CategoryFindManyArgs>(
       args?: SelectSubset<T, CategoryFindManyArgs>
-    ): CheckSelect<T, Promise<Array<Category>>, Promise<Array<CategoryGetPayload<T>>>>
+    ): CheckSelect<T, PrismaPromise<Array<Category>>, PrismaPromise<Array<CategoryGetPayload<T>>>>
 
     /**
      * Create a Category.
@@ -2855,7 +2872,7 @@ export namespace Prisma {
     **/
     createMany<T extends CategoryCreateManyArgs>(
       args?: SelectSubset<T, CategoryCreateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Delete a Category.
@@ -2906,10 +2923,12 @@ export namespace Prisma {
     **/
     deleteMany<T extends CategoryDeleteManyArgs>(
       args?: SelectSubset<T, CategoryDeleteManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CategoryUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Categories
@@ -2925,7 +2944,7 @@ export namespace Prisma {
     **/
     updateMany<T extends CategoryUpdateManyArgs>(
       args: SelectSubset<T, CategoryUpdateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Category.
@@ -2950,6 +2969,8 @@ export namespace Prisma {
 
     /**
      * Count the number of Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CategoryCountArgs} args - Arguments to filter Categories to count.
      * @example
      * // Count the number of Categories
@@ -2961,8 +2982,8 @@ export namespace Prisma {
     **/
     count<T extends CategoryCountArgs>(
       args?: Subset<T, CategoryCountArgs>,
-    ): Promise<
-      T extends Record<'select', any>
+    ): PrismaPromise<
+      T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
           : GetScalarType<T['select'], CategoryCountAggregateOutputType>
@@ -2971,6 +2992,8 @@ export namespace Prisma {
 
     /**
      * Allows you to perform aggregations operations on a Category.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
@@ -2991,10 +3014,12 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): Promise<GetCategoryAggregateType<T>>
+    aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): PrismaPromise<GetCategoryAggregateType<T>>
 
     /**
      * Group by Category.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CategoryGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
@@ -3075,7 +3100,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in 
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__CategoryClient<T> implements Promise<T> {
+  export class Prisma__CategoryClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
     private readonly _queryType;
@@ -3099,13 +3125,13 @@ export namespace Prisma {
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -3153,7 +3179,7 @@ export namespace Prisma {
     **/
     where?: CategoryWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Categories to fetch.
     **/
@@ -3177,7 +3203,7 @@ export namespace Prisma {
     **/
     skip?: number
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Categories.
     **/
@@ -3198,7 +3224,7 @@ export namespace Prisma {
     **/
     where?: CategoryWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Categories to fetch.
     **/
@@ -3391,7 +3417,7 @@ export namespace Prisma {
     **/
     where?: PatientWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Patients to fetch.
     **/
@@ -3524,6 +3550,8 @@ export namespace Prisma {
 
     /**
      * Find the first Patient that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {PatientFindFirstArgs} args - Arguments to find a Patient
      * @example
      * // Get one Patient
@@ -3539,6 +3567,8 @@ export namespace Prisma {
 
     /**
      * Find zero or more Patients that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {PatientFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Patients
@@ -3553,7 +3583,7 @@ export namespace Prisma {
     **/
     findMany<T extends PatientFindManyArgs>(
       args?: SelectSubset<T, PatientFindManyArgs>
-    ): CheckSelect<T, Promise<Array<Patient>>, Promise<Array<PatientGetPayload<T>>>>
+    ): CheckSelect<T, PrismaPromise<Array<Patient>>, PrismaPromise<Array<PatientGetPayload<T>>>>
 
     /**
      * Create a Patient.
@@ -3585,7 +3615,7 @@ export namespace Prisma {
     **/
     createMany<T extends PatientCreateManyArgs>(
       args?: SelectSubset<T, PatientCreateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Delete a Patient.
@@ -3636,10 +3666,12 @@ export namespace Prisma {
     **/
     deleteMany<T extends PatientDeleteManyArgs>(
       args?: SelectSubset<T, PatientDeleteManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Patients.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {PatientUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Patients
@@ -3655,7 +3687,7 @@ export namespace Prisma {
     **/
     updateMany<T extends PatientUpdateManyArgs>(
       args: SelectSubset<T, PatientUpdateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Patient.
@@ -3680,6 +3712,8 @@ export namespace Prisma {
 
     /**
      * Count the number of Patients.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {PatientCountArgs} args - Arguments to filter Patients to count.
      * @example
      * // Count the number of Patients
@@ -3691,8 +3725,8 @@ export namespace Prisma {
     **/
     count<T extends PatientCountArgs>(
       args?: Subset<T, PatientCountArgs>,
-    ): Promise<
-      T extends Record<'select', any>
+    ): PrismaPromise<
+      T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
           : GetScalarType<T['select'], PatientCountAggregateOutputType>
@@ -3701,6 +3735,8 @@ export namespace Prisma {
 
     /**
      * Allows you to perform aggregations operations on a Patient.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {PatientAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
@@ -3721,10 +3757,12 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PatientAggregateArgs>(args: Subset<T, PatientAggregateArgs>): Promise<GetPatientAggregateType<T>>
+    aggregate<T extends PatientAggregateArgs>(args: Subset<T, PatientAggregateArgs>): PrismaPromise<GetPatientAggregateType<T>>
 
     /**
      * Group by Patient.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {PatientGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
@@ -3805,7 +3843,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in 
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__PatientClient<T> implements Promise<T> {
+  export class Prisma__PatientClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
     private readonly _queryType;
@@ -3829,13 +3868,13 @@ export namespace Prisma {
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -3883,7 +3922,7 @@ export namespace Prisma {
     **/
     where?: PatientWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Patients to fetch.
     **/
@@ -3907,7 +3946,7 @@ export namespace Prisma {
     **/
     skip?: number
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Patients.
     **/
@@ -3928,7 +3967,7 @@ export namespace Prisma {
     **/
     where?: PatientWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Patients to fetch.
     **/
@@ -4121,7 +4160,7 @@ export namespace Prisma {
     **/
     where?: MovieWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Movies to fetch.
     **/
@@ -4264,6 +4303,8 @@ export namespace Prisma {
 
     /**
      * Find the first Movie that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {MovieFindFirstArgs} args - Arguments to find a Movie
      * @example
      * // Get one Movie
@@ -4279,6 +4320,8 @@ export namespace Prisma {
 
     /**
      * Find zero or more Movies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {MovieFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Movies
@@ -4293,7 +4336,7 @@ export namespace Prisma {
     **/
     findMany<T extends MovieFindManyArgs>(
       args?: SelectSubset<T, MovieFindManyArgs>
-    ): CheckSelect<T, Promise<Array<Movie>>, Promise<Array<MovieGetPayload<T>>>>
+    ): CheckSelect<T, PrismaPromise<Array<Movie>>, PrismaPromise<Array<MovieGetPayload<T>>>>
 
     /**
      * Create a Movie.
@@ -4325,7 +4368,7 @@ export namespace Prisma {
     **/
     createMany<T extends MovieCreateManyArgs>(
       args?: SelectSubset<T, MovieCreateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Delete a Movie.
@@ -4376,10 +4419,12 @@ export namespace Prisma {
     **/
     deleteMany<T extends MovieDeleteManyArgs>(
       args?: SelectSubset<T, MovieDeleteManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Movies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {MovieUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Movies
@@ -4395,7 +4440,7 @@ export namespace Prisma {
     **/
     updateMany<T extends MovieUpdateManyArgs>(
       args: SelectSubset<T, MovieUpdateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Movie.
@@ -4420,6 +4465,8 @@ export namespace Prisma {
 
     /**
      * Count the number of Movies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {MovieCountArgs} args - Arguments to filter Movies to count.
      * @example
      * // Count the number of Movies
@@ -4431,8 +4478,8 @@ export namespace Prisma {
     **/
     count<T extends MovieCountArgs>(
       args?: Subset<T, MovieCountArgs>,
-    ): Promise<
-      T extends Record<'select', any>
+    ): PrismaPromise<
+      T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
           : GetScalarType<T['select'], MovieCountAggregateOutputType>
@@ -4441,6 +4488,8 @@ export namespace Prisma {
 
     /**
      * Allows you to perform aggregations operations on a Movie.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {MovieAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
@@ -4461,10 +4510,12 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends MovieAggregateArgs>(args: Subset<T, MovieAggregateArgs>): Promise<GetMovieAggregateType<T>>
+    aggregate<T extends MovieAggregateArgs>(args: Subset<T, MovieAggregateArgs>): PrismaPromise<GetMovieAggregateType<T>>
 
     /**
      * Group by Movie.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {MovieGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
@@ -4545,7 +4596,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in 
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__MovieClient<T> implements Promise<T> {
+  export class Prisma__MovieClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
     private readonly _queryType;
@@ -4570,13 +4622,13 @@ export namespace Prisma {
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -4632,7 +4684,7 @@ export namespace Prisma {
     **/
     where?: MovieWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Movies to fetch.
     **/
@@ -4656,7 +4708,7 @@ export namespace Prisma {
     **/
     skip?: number
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Movies.
     **/
@@ -4681,7 +4733,7 @@ export namespace Prisma {
     **/
     where?: MovieWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Movies to fetch.
     **/
@@ -4888,7 +4940,7 @@ export namespace Prisma {
     **/
     where?: DirectorWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Directors to fetch.
     **/
@@ -5029,6 +5081,8 @@ export namespace Prisma {
 
     /**
      * Find the first Director that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {DirectorFindFirstArgs} args - Arguments to find a Director
      * @example
      * // Get one Director
@@ -5044,6 +5098,8 @@ export namespace Prisma {
 
     /**
      * Find zero or more Directors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {DirectorFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Directors
@@ -5058,7 +5114,7 @@ export namespace Prisma {
     **/
     findMany<T extends DirectorFindManyArgs>(
       args?: SelectSubset<T, DirectorFindManyArgs>
-    ): CheckSelect<T, Promise<Array<Director>>, Promise<Array<DirectorGetPayload<T>>>>
+    ): CheckSelect<T, PrismaPromise<Array<Director>>, PrismaPromise<Array<DirectorGetPayload<T>>>>
 
     /**
      * Create a Director.
@@ -5090,7 +5146,7 @@ export namespace Prisma {
     **/
     createMany<T extends DirectorCreateManyArgs>(
       args?: SelectSubset<T, DirectorCreateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Delete a Director.
@@ -5141,10 +5197,12 @@ export namespace Prisma {
     **/
     deleteMany<T extends DirectorDeleteManyArgs>(
       args?: SelectSubset<T, DirectorDeleteManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Directors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {DirectorUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Directors
@@ -5160,7 +5218,7 @@ export namespace Prisma {
     **/
     updateMany<T extends DirectorUpdateManyArgs>(
       args: SelectSubset<T, DirectorUpdateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Director.
@@ -5185,6 +5243,8 @@ export namespace Prisma {
 
     /**
      * Count the number of Directors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {DirectorCountArgs} args - Arguments to filter Directors to count.
      * @example
      * // Count the number of Directors
@@ -5196,8 +5256,8 @@ export namespace Prisma {
     **/
     count<T extends DirectorCountArgs>(
       args?: Subset<T, DirectorCountArgs>,
-    ): Promise<
-      T extends Record<'select', any>
+    ): PrismaPromise<
+      T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
           : GetScalarType<T['select'], DirectorCountAggregateOutputType>
@@ -5206,6 +5266,8 @@ export namespace Prisma {
 
     /**
      * Allows you to perform aggregations operations on a Director.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {DirectorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
@@ -5226,10 +5288,12 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends DirectorAggregateArgs>(args: Subset<T, DirectorAggregateArgs>): Promise<GetDirectorAggregateType<T>>
+    aggregate<T extends DirectorAggregateArgs>(args: Subset<T, DirectorAggregateArgs>): PrismaPromise<GetDirectorAggregateType<T>>
 
     /**
      * Group by Director.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {DirectorGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
@@ -5310,7 +5374,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in 
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__DirectorClient<T> implements Promise<T> {
+  export class Prisma__DirectorClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
     private readonly _queryType;
@@ -5326,7 +5391,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    movies<T extends MovieFindManyArgs = {}>(args?: Subset<T, MovieFindManyArgs>): CheckSelect<T, Promise<Array<Movie>>, Promise<Array<MovieGetPayload<T>>>>;
+    movies<T extends MovieFindManyArgs = {}>(args?: Subset<T, MovieFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Movie>>, PrismaPromise<Array<MovieGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -5335,13 +5400,13 @@ export namespace Prisma {
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -5397,7 +5462,7 @@ export namespace Prisma {
     **/
     where?: DirectorWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Directors to fetch.
     **/
@@ -5421,7 +5486,7 @@ export namespace Prisma {
     **/
     skip?: number
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Directors.
     **/
@@ -5446,7 +5511,7 @@ export namespace Prisma {
     **/
     where?: DirectorWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Directors to fetch.
     **/
@@ -5681,7 +5746,7 @@ export namespace Prisma {
     **/
     where?: ProblemWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Problems to fetch.
     **/
@@ -5846,6 +5911,8 @@ export namespace Prisma {
 
     /**
      * Find the first Problem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {ProblemFindFirstArgs} args - Arguments to find a Problem
      * @example
      * // Get one Problem
@@ -5861,6 +5928,8 @@ export namespace Prisma {
 
     /**
      * Find zero or more Problems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {ProblemFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Problems
@@ -5875,7 +5944,7 @@ export namespace Prisma {
     **/
     findMany<T extends ProblemFindManyArgs>(
       args?: SelectSubset<T, ProblemFindManyArgs>
-    ): CheckSelect<T, Promise<Array<Problem>>, Promise<Array<ProblemGetPayload<T>>>>
+    ): CheckSelect<T, PrismaPromise<Array<Problem>>, PrismaPromise<Array<ProblemGetPayload<T>>>>
 
     /**
      * Create a Problem.
@@ -5907,7 +5976,7 @@ export namespace Prisma {
     **/
     createMany<T extends ProblemCreateManyArgs>(
       args?: SelectSubset<T, ProblemCreateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Delete a Problem.
@@ -5958,10 +6027,12 @@ export namespace Prisma {
     **/
     deleteMany<T extends ProblemDeleteManyArgs>(
       args?: SelectSubset<T, ProblemDeleteManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Problems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {ProblemUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Problems
@@ -5977,7 +6048,7 @@ export namespace Prisma {
     **/
     updateMany<T extends ProblemUpdateManyArgs>(
       args: SelectSubset<T, ProblemUpdateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Problem.
@@ -6002,6 +6073,8 @@ export namespace Prisma {
 
     /**
      * Count the number of Problems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {ProblemCountArgs} args - Arguments to filter Problems to count.
      * @example
      * // Count the number of Problems
@@ -6013,8 +6086,8 @@ export namespace Prisma {
     **/
     count<T extends ProblemCountArgs>(
       args?: Subset<T, ProblemCountArgs>,
-    ): Promise<
-      T extends Record<'select', any>
+    ): PrismaPromise<
+      T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
           : GetScalarType<T['select'], ProblemCountAggregateOutputType>
@@ -6023,6 +6096,8 @@ export namespace Prisma {
 
     /**
      * Allows you to perform aggregations operations on a Problem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {ProblemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
@@ -6043,10 +6118,12 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ProblemAggregateArgs>(args: Subset<T, ProblemAggregateArgs>): Promise<GetProblemAggregateType<T>>
+    aggregate<T extends ProblemAggregateArgs>(args: Subset<T, ProblemAggregateArgs>): PrismaPromise<GetProblemAggregateType<T>>
 
     /**
      * Group by Problem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {ProblemGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
@@ -6127,7 +6204,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in 
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__ProblemClient<T> implements Promise<T> {
+  export class Prisma__ProblemClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
     private readonly _queryType;
@@ -6143,7 +6221,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    likedBy<T extends CreatorFindManyArgs = {}>(args?: Subset<T, CreatorFindManyArgs>): CheckSelect<T, Promise<Array<Creator>>, Promise<Array<CreatorGetPayload<T>>>>;
+    likedBy<T extends CreatorFindManyArgs = {}>(args?: Subset<T, CreatorFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Creator>>, PrismaPromise<Array<CreatorGetPayload<T>>>>;
 
     creator<T extends CreatorArgs = {}>(args?: Subset<T, CreatorArgs>): CheckSelect<T, Prisma__CreatorClient<Creator | null >, Prisma__CreatorClient<CreatorGetPayload<T> | null >>;
 
@@ -6154,13 +6232,13 @@ export namespace Prisma {
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -6216,7 +6294,7 @@ export namespace Prisma {
     **/
     where?: ProblemWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Problems to fetch.
     **/
@@ -6240,7 +6318,7 @@ export namespace Prisma {
     **/
     skip?: number
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Problems.
     **/
@@ -6265,7 +6343,7 @@ export namespace Prisma {
     **/
     where?: ProblemWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Problems to fetch.
     **/
@@ -6490,7 +6568,7 @@ export namespace Prisma {
     **/
     where?: CreatorWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Creators to fetch.
     **/
@@ -6653,6 +6731,8 @@ export namespace Prisma {
 
     /**
      * Find the first Creator that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CreatorFindFirstArgs} args - Arguments to find a Creator
      * @example
      * // Get one Creator
@@ -6668,6 +6748,8 @@ export namespace Prisma {
 
     /**
      * Find zero or more Creators that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CreatorFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Creators
@@ -6682,7 +6764,7 @@ export namespace Prisma {
     **/
     findMany<T extends CreatorFindManyArgs>(
       args?: SelectSubset<T, CreatorFindManyArgs>
-    ): CheckSelect<T, Promise<Array<Creator>>, Promise<Array<CreatorGetPayload<T>>>>
+    ): CheckSelect<T, PrismaPromise<Array<Creator>>, PrismaPromise<Array<CreatorGetPayload<T>>>>
 
     /**
      * Create a Creator.
@@ -6714,7 +6796,7 @@ export namespace Prisma {
     **/
     createMany<T extends CreatorCreateManyArgs>(
       args?: SelectSubset<T, CreatorCreateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Delete a Creator.
@@ -6765,10 +6847,12 @@ export namespace Prisma {
     **/
     deleteMany<T extends CreatorDeleteManyArgs>(
       args?: SelectSubset<T, CreatorDeleteManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Creators.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CreatorUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Creators
@@ -6784,7 +6868,7 @@ export namespace Prisma {
     **/
     updateMany<T extends CreatorUpdateManyArgs>(
       args: SelectSubset<T, CreatorUpdateManyArgs>
-    ): Promise<BatchPayload>
+    ): PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Creator.
@@ -6809,6 +6893,8 @@ export namespace Prisma {
 
     /**
      * Count the number of Creators.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CreatorCountArgs} args - Arguments to filter Creators to count.
      * @example
      * // Count the number of Creators
@@ -6820,8 +6906,8 @@ export namespace Prisma {
     **/
     count<T extends CreatorCountArgs>(
       args?: Subset<T, CreatorCountArgs>,
-    ): Promise<
-      T extends Record<'select', any>
+    ): PrismaPromise<
+      T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
           : GetScalarType<T['select'], CreatorCountAggregateOutputType>
@@ -6830,6 +6916,8 @@ export namespace Prisma {
 
     /**
      * Allows you to perform aggregations operations on a Creator.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CreatorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
@@ -6850,10 +6938,12 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CreatorAggregateArgs>(args: Subset<T, CreatorAggregateArgs>): Promise<GetCreatorAggregateType<T>>
+    aggregate<T extends CreatorAggregateArgs>(args: Subset<T, CreatorAggregateArgs>): PrismaPromise<GetCreatorAggregateType<T>>
 
     /**
      * Group by Creator.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
      * @param {CreatorGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
@@ -6934,7 +7024,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in 
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__CreatorClient<T> implements Promise<T> {
+  export class Prisma__CreatorClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
     private readonly _queryType;
@@ -6950,9 +7041,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    likes<T extends ProblemFindManyArgs = {}>(args?: Subset<T, ProblemFindManyArgs>): CheckSelect<T, Promise<Array<Problem>>, Promise<Array<ProblemGetPayload<T>>>>;
+    likes<T extends ProblemFindManyArgs = {}>(args?: Subset<T, ProblemFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Problem>>, PrismaPromise<Array<ProblemGetPayload<T>>>>;
 
-    problems<T extends ProblemFindManyArgs = {}>(args?: Subset<T, ProblemFindManyArgs>): CheckSelect<T, Promise<Array<Problem>>, Promise<Array<ProblemGetPayload<T>>>>;
+    problems<T extends ProblemFindManyArgs = {}>(args?: Subset<T, ProblemFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Problem>>, PrismaPromise<Array<ProblemGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -6961,13 +7052,13 @@ export namespace Prisma {
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -7023,7 +7114,7 @@ export namespace Prisma {
     **/
     where?: CreatorWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Creators to fetch.
     **/
@@ -7047,7 +7138,7 @@ export namespace Prisma {
     **/
     skip?: number
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
      * Filter by unique combinations of Creators.
     **/
@@ -7072,7 +7163,7 @@ export namespace Prisma {
     **/
     where?: CreatorWhereInput
     /**
-     * @link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Creators to fetch.
     **/
@@ -8312,28 +8403,28 @@ export namespace Prisma {
 
   export type postCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postCreateNestedManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postUncheckedCreateNestedManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
@@ -8368,7 +8459,7 @@ export namespace Prisma {
 
   export type postUpdateManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
@@ -8382,7 +8473,7 @@ export namespace Prisma {
 
   export type postUpdateManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
@@ -8396,7 +8487,7 @@ export namespace Prisma {
 
   export type postUncheckedUpdateManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithoutauthorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
@@ -8410,7 +8501,7 @@ export namespace Prisma {
 
   export type postUncheckedUpdateManyWithoutEditorInput = {
     create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
-    connectOrCreate?: Enumerable<postCreateOrConnectWithouteditorInput>
+    connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
@@ -8424,13 +8515,13 @@ export namespace Prisma {
 
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutpostsInput
+    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     connect?: UserWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutEditorPostsInput = {
     create?: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
+    connectOrCreate?: UserCreateOrConnectWithoutEditorPostsInput
     connect?: UserWhereUniqueInput
   }
 
@@ -8448,7 +8539,7 @@ export namespace Prisma {
 
   export type UserUpdateOneRequiredWithoutPostsInput = {
     create?: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutpostsInput
+    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     upsert?: UserUpsertWithoutPostsInput
     connect?: UserWhereUniqueInput
     update?: XOR<UserUncheckedUpdateWithoutPostsInput, UserUpdateWithoutPostsInput>
@@ -8456,7 +8547,7 @@ export namespace Prisma {
 
   export type UserUpdateOneWithoutEditorPostsInput = {
     create?: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithouteditorPostsInput
+    connectOrCreate?: UserCreateOrConnectWithoutEditorPostsInput
     upsert?: UserUpsertWithoutEditorPostsInput
     connect?: UserWhereUniqueInput
     disconnect?: boolean
@@ -8474,13 +8565,13 @@ export namespace Prisma {
 
   export type DirectorCreateNestedOneWithoutMoviesInput = {
     create?: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
-    connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
+    connectOrCreate?: DirectorCreateOrConnectWithoutMoviesInput
     connect?: DirectorWhereUniqueInput
   }
 
   export type DirectorUpdateOneRequiredWithoutMoviesInput = {
     create?: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
-    connectOrCreate?: DirectorCreateOrConnectWithoutmoviesInput
+    connectOrCreate?: DirectorCreateOrConnectWithoutMoviesInput
     upsert?: DirectorUpsertWithoutMoviesInput
     connect?: DirectorWhereUniqueInput
     update?: XOR<DirectorUncheckedUpdateWithoutMoviesInput, DirectorUpdateWithoutMoviesInput>
@@ -8488,21 +8579,21 @@ export namespace Prisma {
 
   export type MovieCreateNestedManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
-    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
   }
 
   export type MovieUncheckedCreateNestedManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
-    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
   }
 
   export type MovieUpdateManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
-    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
@@ -8516,7 +8607,7 @@ export namespace Prisma {
 
   export type MovieUncheckedUpdateManyWithoutDirectorInput = {
     create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
-    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutdirectorInput>
+    connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
@@ -8530,19 +8621,19 @@ export namespace Prisma {
 
   export type CreatorCreateNestedManyWithoutLikesInput = {
     create?: XOR<Enumerable<CreatorUncheckedCreateWithoutLikesInput>, Enumerable<CreatorCreateWithoutLikesInput>>
-    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutlikesInput>
+    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutLikesInput>
     connect?: Enumerable<CreatorWhereUniqueInput>
   }
 
   export type CreatorCreateNestedOneWithoutProblemsInput = {
     create?: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
-    connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
+    connectOrCreate?: CreatorCreateOrConnectWithoutProblemsInput
     connect?: CreatorWhereUniqueInput
   }
 
   export type CreatorUpdateManyWithoutLikesInput = {
     create?: XOR<Enumerable<CreatorUncheckedCreateWithoutLikesInput>, Enumerable<CreatorCreateWithoutLikesInput>>
-    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutlikesInput>
+    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutLikesInput>
     upsert?: Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>
     connect?: Enumerable<CreatorWhereUniqueInput>
     set?: Enumerable<CreatorWhereUniqueInput>
@@ -8555,7 +8646,7 @@ export namespace Prisma {
 
   export type CreatorUpdateOneWithoutProblemsInput = {
     create?: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
-    connectOrCreate?: CreatorCreateOrConnectWithoutproblemsInput
+    connectOrCreate?: CreatorCreateOrConnectWithoutProblemsInput
     upsert?: CreatorUpsertWithoutProblemsInput
     connect?: CreatorWhereUniqueInput
     disconnect?: boolean
@@ -8565,27 +8656,27 @@ export namespace Prisma {
 
   export type ProblemCreateNestedManyWithoutLikedByInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutLikedByInput>, Enumerable<ProblemCreateWithoutLikedByInput>>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutlikedByInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutLikedByInput>
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
   export type ProblemCreateNestedManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
   export type ProblemUncheckedCreateNestedManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
   export type ProblemUpdateManyWithoutLikedByInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutLikedByInput>, Enumerable<ProblemCreateWithoutLikedByInput>>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutlikedByInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutLikedByInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>
     connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
@@ -8598,7 +8689,7 @@ export namespace Prisma {
 
   export type ProblemUpdateManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
@@ -8612,7 +8703,7 @@ export namespace Prisma {
 
   export type ProblemUncheckedUpdateManyWithoutCreatorInput = {
     create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
-    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutcreatorInput>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
@@ -8881,7 +8972,7 @@ export namespace Prisma {
     metadata: InputJsonValue
   }
 
-  export type postCreateOrConnectWithoutauthorInput = {
+  export type postCreateOrConnectWithoutAuthorInput = {
     where: postWhereUniqueInput
     create: XOR<postUncheckedCreateWithoutAuthorInput, postCreateWithoutAuthorInput>
   }
@@ -8917,7 +9008,7 @@ export namespace Prisma {
     metadata: InputJsonValue
   }
 
-  export type postCreateOrConnectWithouteditorInput = {
+  export type postCreateOrConnectWithoutEditorInput = {
     where: postWhereUniqueInput
     create: XOR<postUncheckedCreateWithoutEditorInput, postCreateWithoutEditorInput>
   }
@@ -8997,7 +9088,7 @@ export namespace Prisma {
     editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
 
-  export type UserCreateOrConnectWithoutpostsInput = {
+  export type UserCreateOrConnectWithoutPostsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
   }
@@ -9023,7 +9114,7 @@ export namespace Prisma {
     posts?: postUncheckedCreateNestedManyWithoutAuthorInput
   }
 
-  export type UserCreateOrConnectWithouteditorPostsInput = {
+  export type UserCreateOrConnectWithoutEditorPostsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
   }
@@ -9090,7 +9181,7 @@ export namespace Prisma {
     lastName: string
   }
 
-  export type DirectorCreateOrConnectWithoutmoviesInput = {
+  export type DirectorCreateOrConnectWithoutMoviesInput = {
     where: DirectorWhereUniqueInput
     create: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
   }
@@ -9118,7 +9209,7 @@ export namespace Prisma {
     title: string
   }
 
-  export type MovieCreateOrConnectWithoutdirectorInput = {
+  export type MovieCreateOrConnectWithoutDirectorInput = {
     where: MovieWhereUniqueInput
     create: XOR<MovieUncheckedCreateWithoutDirectorInput, MovieCreateWithoutDirectorInput>
   }
@@ -9164,7 +9255,7 @@ export namespace Prisma {
     problems?: ProblemUncheckedCreateNestedManyWithoutCreatorInput
   }
 
-  export type CreatorCreateOrConnectWithoutlikesInput = {
+  export type CreatorCreateOrConnectWithoutLikesInput = {
     where: CreatorWhereUniqueInput
     create: XOR<CreatorUncheckedCreateWithoutLikesInput, CreatorCreateWithoutLikesInput>
   }
@@ -9179,7 +9270,7 @@ export namespace Prisma {
     name: string
   }
 
-  export type CreatorCreateOrConnectWithoutproblemsInput = {
+  export type CreatorCreateOrConnectWithoutProblemsInput = {
     where: CreatorWhereUniqueInput
     create: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
   }
@@ -9234,7 +9325,7 @@ export namespace Prisma {
     creatorId?: number | null
   }
 
-  export type ProblemCreateOrConnectWithoutlikedByInput = {
+  export type ProblemCreateOrConnectWithoutLikedByInput = {
     where: ProblemWhereUniqueInput
     create: XOR<ProblemUncheckedCreateWithoutLikedByInput, ProblemCreateWithoutLikedByInput>
   }
@@ -9249,7 +9340,7 @@ export namespace Prisma {
     problemText: string
   }
 
-  export type ProblemCreateOrConnectWithoutcreatorInput = {
+  export type ProblemCreateOrConnectWithoutCreatorInput = {
     where: ProblemWhereUniqueInput
     create: XOR<ProblemUncheckedCreateWithoutCreatorInput, ProblemCreateWithoutCreatorInput>
   }

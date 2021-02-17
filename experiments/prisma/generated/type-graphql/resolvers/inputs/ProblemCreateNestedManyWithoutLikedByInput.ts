@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import GraphQLJSON from "graphql-type-json";
 import { Prisma } from "../../../client";
-import { ProblemCreateOrConnectWithoutlikedByInput } from "../inputs/ProblemCreateOrConnectWithoutlikedByInput";
+import { ProblemCreateOrConnectWithoutLikedByInput } from "../inputs/ProblemCreateOrConnectWithoutLikedByInput";
 import { ProblemCreateWithoutLikedByInput } from "../inputs/ProblemCreateWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
@@ -14,10 +14,10 @@ export class ProblemCreateNestedManyWithoutLikedByInput {
   })
   create?: ProblemCreateWithoutLikedByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutlikedByInput], {
+  @TypeGraphQL.Field(_type => [ProblemCreateOrConnectWithoutLikedByInput], {
     nullable: true
   })
-  connectOrCreate?: ProblemCreateOrConnectWithoutlikedByInput[] | undefined;
+  connectOrCreate?: ProblemCreateOrConnectWithoutLikedByInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
     nullable: true
