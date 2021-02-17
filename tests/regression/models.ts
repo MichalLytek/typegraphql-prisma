@@ -246,4 +246,27 @@ describe("models", () => {
 
     expect(userModelTSFile).toMatchSnapshot("User");
   });
+
+  it("should properly generate object type class for prisma model with native types", async () => {
+    const schema = /* prisma */ `
+      datasource postgres {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model NativeTypeModel {
+        id      Int      @id @default(autoincrement()) @postgres.Integer
+        bigInt  BigInt?  @postgres.BigInt
+        byteA   Bytes?   @postgres.ByteA
+        decimal Decimal? @postgres.Decimal
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const nativeTypeModelTSFile = await readGeneratedFile(
+      "/models/NativeTypeModel.ts",
+    );
+
+    expect(nativeTypeModelTSFile).toMatchSnapshot("NativeTypeModel");
+  });
 });

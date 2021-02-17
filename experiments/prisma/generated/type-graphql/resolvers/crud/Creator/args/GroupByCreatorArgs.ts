@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { CreatorOrderByInput } from "../../../inputs/CreatorOrderByInput";
 import { CreatorScalarWhereWithAggregatesInput } from "../../../inputs/CreatorScalarWhereWithAggregatesInput";
 import { CreatorWhereInput } from "../../../inputs/CreatorWhereInput";

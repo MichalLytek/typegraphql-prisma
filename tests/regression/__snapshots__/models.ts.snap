@@ -2,8 +2,9 @@
 
 exports[`models should properly generate object type class for prisma model when simpleResolvers option is enabled: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -30,8 +31,9 @@ export class User {
 
 exports[`models should properly generate object type class for prisma model with descriptions: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
 
 /** User model doc */
@@ -65,8 +67,9 @@ export class User {
 
 exports[`models should properly generate object type class for prisma model with different scalar fields types: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -107,7 +110,7 @@ export class User {
   })
   dateField!: Date;
 
-  @TypeGraphQL.Field(_type => GraphQLJSON, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: false
   })
   jsonField!: Prisma.JsonValue;
@@ -117,8 +120,9 @@ export class User {
 
 exports[`models should properly generate object type class for prisma model with enum and alias fields types: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 import { Sample } from \\"../enums/Sample\\";
 
 @TypeGraphQL.ObjectType({
@@ -143,10 +147,44 @@ export class User {
 "
 `;
 
+exports[`models should properly generate object type class for prisma model with native types: NativeTypeModel 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class NativeTypeModel {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  id!: number;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.BigIntResolver, {
+    nullable: true
+  })
+  bigInt?: bigint | null;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.ByteResolver, {
+    nullable: true
+  })
+  byteA?: Buffer | null;
+
+  @TypeGraphQL.Field(_type => DecimalJSScalar, {
+    nullable: true
+  })
+  decimal?: Prisma.Decimal | null;
+}
+"
+`;
+
 exports[`models should properly generate object type class for prisma model with omitted field: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -174,8 +212,9 @@ export class User {
 
 exports[`models should properly generate object type class for prisma model with renamed fields: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
 
 @TypeGraphQL.ObjectType({
@@ -220,8 +259,9 @@ export class User {
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations when models are renamed: Article 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 import { Client } from \\"../models/Client\\";
 
 @TypeGraphQL.ObjectType({
@@ -245,8 +285,9 @@ export class Article {
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations when models are renamed: Client 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 import { Article } from \\"../models/Article\\";
 
 @TypeGraphQL.ObjectType({
@@ -265,8 +306,9 @@ export class Client {
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations: Post 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 import { User } from \\"../models/User\\";
 
 @TypeGraphQL.ObjectType({
@@ -290,8 +332,9 @@ export class Post {
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
 
 @TypeGraphQL.ObjectType({
@@ -310,8 +353,9 @@ export class User {
 
 exports[`models should properly generate object type classes for prisma models with self relations: Service 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true

@@ -44,7 +44,9 @@ describe("resolvers enhance", () => {
 
     await generateCodeFromSchema(schema, { outputDirPath });
     const enhanceTSFile = await readGeneratedFile("/enhance.ts");
+    const mainIndexTSFile = await readGeneratedFile("/index.ts");
 
     expect(enhanceTSFile).toMatchSnapshot("enhance");
+    expect(mainIndexTSFile).toMatchSnapshot("mainIndex");
   });
 });

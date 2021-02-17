@@ -24,13 +24,13 @@ npm i @prisma/client
 > Please make sure you use `prisma` and `@prisma/client` of version matching `~2.17.0`.
 > Otherwise, the runtime check will report an error when you run the generator.
 
-You also need to install the GraphQL JSON scalar library (to support the Prisma `Json` scalar):
+You also need to install the GraphQL Scalars library (to support the Prisma `Json`, `BigInt` and `Byte` types):
 
 ```sh
-npm i graphql-type-json
+npm i graphql-scalars
 ```
 
-as well as the `graphql-fields` that is used to properly support the aggregations queries:
+as well as the `graphql-fields` that is used to properly support the aggregate and group by queries:
 
 ```sh
 npm i graphql-fields @types/graphql-fields

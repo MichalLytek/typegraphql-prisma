@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom scalars should properly emit custom scalars file: mainIndex 1`] = `
+"import { NonEmptyArray } from \\"type-graphql\\";
+import * as crudResolversImport from \\"./resolvers/crud/resolvers-crud.index\\";
+
+export * from \\"./enums\\";
+export * from \\"./models\\";
+export * from \\"./resolvers/crud\\";
+export * from \\"./resolvers/inputs\\";
+export * from \\"./resolvers/outputs\\";
+export * from \\"./enhance\\";
+export * from \\"./scalars\\";
+
+export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
+export const resolvers = [...crudResolvers] as unknown as NonEmptyArray<Function>;
+"
+`;
+
+exports[`custom scalars should properly emit custom scalars file: scalars 1`] = `
+"import { Prisma } from \\"./../../helpers/prisma-client-mock\\";
+import { GraphQLScalarType } from \\"graphql\\";
+
+export const DecimalJSScalar = new GraphQLScalarType({
+  name: \\"Decimal\\",
+  description: \\"GraphQL Scalar representing the Prisma.Decimal type, based on Decimal.js library.\\",
+  serialize: (value: unknown) => {
+    if (!(value instanceof Prisma.Decimal)) {
+      throw new Error(\`[DecimalError] Invalid argument: \${typeof value}. Expected Prisma.Decimal instance.\`);
+    }
+    return value.toString();
+  },
+  parseValue: (value: unknown) => {
+    if (!(typeof value === \\"string\\")) {
+      throw new Error(\`[DecimalError] Invalid argument: \${typeof value}. Expected string.\`);
+    }
+    return new Prisma.Decimal(value);
+  },
+});
+
+"
+`;

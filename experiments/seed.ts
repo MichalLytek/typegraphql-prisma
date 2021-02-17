@@ -1,4 +1,4 @@
-import { PrismaClient, PostKind } from "./prisma/generated/client";
+import { PrismaClient, PostKind, Prisma } from "./prisma/generated/client";
 
 const prisma = new PrismaClient({});
 
@@ -147,6 +147,14 @@ async function main() {
           lastName: "Allen",
         },
       },
+    },
+  });
+
+  await prisma.nativeTypeModel.create({
+    data: {
+      bigInt: BigInt(987_654_321_000_000),
+      decimal: new Prisma.Decimal(21.37),
+      byteA: Buffer.from([4, 8, 15, 16, 23, 42]),
     },
   });
 

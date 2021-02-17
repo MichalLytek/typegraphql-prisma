@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { PatientOrderByInput } from "../../../inputs/PatientOrderByInput";
 import { PatientWhereInput } from "../../../inputs/PatientWhereInput";
 import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput";

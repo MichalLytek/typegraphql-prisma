@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
+import { DecimalJSScalar } from "../../scalars";
 import { NestedIntFilter } from "../inputs/NestedIntFilter";
 import { NestedJsonFilter } from "../inputs/NestedJsonFilter";
 
@@ -8,12 +9,12 @@ import { NestedJsonFilter } from "../inputs/NestedJsonFilter";
   isAbstract: true
 })
 export class JsonWithAggregatesFilter {
-  @TypeGraphQL.Field(_type => GraphQLJSON, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: true
   })
   equals?: Prisma.InputJsonValue | undefined;
 
-  @TypeGraphQL.Field(_type => GraphQLJSON, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: true
   })
   not?: Prisma.InputJsonValue | undefined;

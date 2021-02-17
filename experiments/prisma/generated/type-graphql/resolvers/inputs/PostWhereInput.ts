@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
+import { DecimalJSScalar } from "../../scalars";
 import { BoolFilter } from "../inputs/BoolFilter";
 import { ClientRelationFilter } from "../inputs/ClientRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";

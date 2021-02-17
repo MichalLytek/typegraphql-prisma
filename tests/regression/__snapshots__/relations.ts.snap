@@ -56,6 +56,7 @@ export * from \\"./resolvers/relations\\";
 export * from \\"./resolvers/inputs\\";
 export * from \\"./resolvers/outputs\\";
 export * from \\"./enhance\\";
+export * from \\"./scalars\\";
 
 export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
 export const relationResolvers = Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>;
@@ -92,6 +93,7 @@ export * from \\"./resolvers/relations\\";
 export * from \\"./resolvers/inputs\\";
 export * from \\"./resolvers/outputs\\";
 export * from \\"./enhance\\";
+export * from \\"./scalars\\";
 
 export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
 export const relationResolvers = Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>;
@@ -244,7 +246,7 @@ export class UserRelationsResolver {
 
 exports[`relations resolvers generation should properly generate resolver and args class for array relation resolvers: UserPostsArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { PostOrderByInput } from \\"../../../inputs/PostOrderByInput\\";
 import { PostWhereInput } from \\"../../../inputs/PostWhereInput\\";
 import { PostWhereUniqueInput } from \\"../../../inputs/PostWhereUniqueInput\\";

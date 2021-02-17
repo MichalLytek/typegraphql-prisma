@@ -9,7 +9,9 @@ enum PrismaScalars {
   Float = "Float",
   DateTime = "DateTime",
   Json = "Json",
-  // TODO: add native types
+  BigInt = "BigInt",
+  Decimal = "Decimal",
+  Bytes = "Bytes",
 }
 
 export function noop() {}
@@ -79,7 +81,15 @@ export function mapScalarToTSType(scalar: string, isInputType: boolean) {
     }
     case PrismaScalars.Json:
       return isInputType ? "Prisma.InputJsonValue" : "Prisma.JsonValue";
-    // TODO: handle native types
+    case PrismaScalars.BigInt: {
+      return "bigint";
+    }
+    case PrismaScalars.Decimal: {
+      return "Prisma.Decimal";
+    }
+    case PrismaScalars.Bytes: {
+      return "Buffer";
+    }
     default:
       throw new Error(`Unrecognized scalar type: ${scalar}`);
   }
@@ -129,9 +139,17 @@ export function mapScalarToTypeGraphQLType(scalar: string) {
       return "Date";
     }
     case PrismaScalars.Json: {
-      return `GraphQLJSON`;
+      return `GraphQLScalars.JSONResolver`;
     }
-    // TODO: handle native types
+    case PrismaScalars.BigInt: {
+      return "GraphQLScalars.BigIntResolver";
+    }
+    case PrismaScalars.Decimal: {
+      return "DecimalJSScalar";
+    }
+    case PrismaScalars.Bytes: {
+      return "GraphQLScalars.ByteResolver";
+    }
     default: {
       throw new Error(`Unrecognized scalar type: ${scalar}`);
     }

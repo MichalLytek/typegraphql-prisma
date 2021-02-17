@@ -188,7 +188,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 
 exports[`crud should properly generate args classes for every method of crud resolver: AggregateUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
@@ -225,7 +225,7 @@ export class AggregateUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: CreateUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserCreateInput } from \\"../../../inputs/UserCreateInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -240,7 +240,7 @@ export class CreateUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: DeleteManyUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -255,7 +255,7 @@ export class DeleteManyUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: DeleteUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -270,7 +270,7 @@ export class DeleteUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: FindFirstUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
@@ -313,7 +313,7 @@ export class FindFirstUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: FindManyUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
@@ -356,7 +356,7 @@ export class FindManyUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: FindUniqueUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -385,7 +385,7 @@ export { UpsertUserArgs } from \\"./UpsertUserArgs\\";
 
 exports[`crud should properly generate args classes for every method of crud resolver: UpdateManyUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserUpdateManyMutationInput } from \\"../../../inputs/UserUpdateManyMutationInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 
@@ -406,7 +406,7 @@ export class UpdateManyUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: UpdateUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserUpdateInput } from \\"../../../inputs/UserUpdateInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
@@ -427,7 +427,7 @@ export class UpdateUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: UpsertUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserCreateInput } from \\"../../../inputs/UserCreateInput\\";
 import { UserUpdateInput } from \\"../../../inputs/UserUpdateInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
@@ -603,6 +603,7 @@ export * from \\"./resolvers/crud\\";
 export * from \\"./resolvers/inputs\\";
 export * from \\"./resolvers/outputs\\";
 export * from \\"./enhance\\";
+export * from \\"./scalars\\";
 
 export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
 export const resolvers = [...crudResolvers] as unknown as NonEmptyArray<Function>;
@@ -848,7 +849,7 @@ export class UserCrudResolver {
 
 exports[`crud when \`createMany\` preview feature is enabled should properly generate createMany method, resolver and args classes: CreateManyUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserCreateManyInput } from \\"../../../inputs/UserCreateManyInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -1189,7 +1190,7 @@ export class UpsertClientResolver {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: AggregateClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientOrderByInput } from \\"../../../inputs/ClientOrderByInput\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
@@ -1226,7 +1227,7 @@ export class AggregateClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: CreateClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientCreateInput } from \\"../../../inputs/ClientCreateInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -1241,7 +1242,7 @@ export class CreateClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: DeleteClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -1256,7 +1257,7 @@ export class DeleteClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: DeleteManyClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -1271,7 +1272,7 @@ export class DeleteManyClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindFirstClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientOrderByInput } from \\"../../../inputs/ClientOrderByInput\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
@@ -1314,7 +1315,7 @@ export class FindFirstClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindManyClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientOrderByInput } from \\"../../../inputs/ClientOrderByInput\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
@@ -1357,7 +1358,7 @@ export class FindManyClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindUniqueClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -1386,7 +1387,7 @@ export { UpsertClientArgs } from \\"./UpsertClientArgs\\";
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpdateClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientUpdateInput } from \\"../../../inputs/ClientUpdateInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
@@ -1407,7 +1408,7 @@ export class UpdateClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpdateManyClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientUpdateManyMutationInput } from \\"../../../inputs/ClientUpdateManyMutationInput\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 
@@ -1428,7 +1429,7 @@ export class UpdateManyClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpsertClientArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { ClientCreateInput } from \\"../../../inputs/ClientCreateInput\\";
 import { ClientUpdateInput } from \\"../../../inputs/ClientUpdateInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
@@ -1565,7 +1566,7 @@ export class ClientCrudResolver {
 
 exports[`crud when preview feature \`groupBy\` is enabled should properly generate group by args class for prisma model: GroupByUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
 import { UserScalarWhereWithAggregatesInput } from \\"../../../inputs/UserScalarWhereWithAggregatesInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
@@ -1821,7 +1822,7 @@ export { GroupByUserResolver } from \\"./User/GroupByUserResolver\\";
 
 exports[`crud when useUncheckedScalarInputs mode is enabled should properly generate create and update args classes: CreateUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserUncheckedCreateInput } from \\"../../../inputs/UserUncheckedCreateInput\\";
 
 @TypeGraphQL.ArgsType()
@@ -1836,7 +1837,7 @@ export class CreateUserArgs {
 
 exports[`crud when useUncheckedScalarInputs mode is enabled should properly generate create and update args classes: UpdateManyUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserUncheckedUpdateManyInput } from \\"../../../inputs/UserUncheckedUpdateManyInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 
@@ -1857,7 +1858,7 @@ export class UpdateManyUserArgs {
 
 exports[`crud when useUncheckedScalarInputs mode is enabled should properly generate create and update args classes: UpdateUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserUncheckedUpdateInput } from \\"../../../inputs/UserUncheckedUpdateInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
@@ -1878,7 +1879,7 @@ export class UpdateUserArgs {
 
 exports[`crud when useUncheckedScalarInputs mode is enabled should properly generate create and update args classes: UpsertUserArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
 import { UserUncheckedCreateInput } from \\"../../../inputs/UserUncheckedCreateInput\\";
 import { UserUncheckedUpdateInput } from \\"../../../inputs/UserUncheckedUpdateInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";

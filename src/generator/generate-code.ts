@@ -40,6 +40,7 @@ import generateActionResolverClass from "./resolvers/separate-action";
 import { ensureInstalledCorrectPrismaPackage } from "../utils/prisma-version";
 import { GenerateMappingData } from "./types";
 import { generateEnhanceMap } from "./enhance";
+import { generateCustomScalars as generateCustomScalars } from "./scalars";
 
 const baseCompilerOptions: CompilerOptions = {
   target: ScriptTarget.ES2019,
@@ -444,6 +445,14 @@ export default async function generateCode(
     { overwrite: true },
   );
   generateEnhanceMap(enhanceSourceFile, dmmfDocument.modelMappings);
+
+  log("Generate custom scalars");
+  const scalarsSourceFile = project.createSourceFile(
+    baseDirPath + "/scalars.ts",
+    undefined,
+    { overwrite: true },
+  );
+  generateCustomScalars(scalarsSourceFile, dmmfDocument.options);
 
   log("Generating index file");
   const indexSourceFile = project.createSourceFile(

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
+import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { NullableEnumPostKindFieldUpdateOperationsInput } from "../inputs/NullableEnumPostKindFieldUpdateOperationsInput";
@@ -51,7 +52,7 @@ export class PostUpdateManyMutationInput {
   })
   kind?: NullableEnumPostKindFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => GraphQLJSON, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: true
   })
   metadata?: Prisma.InputJsonValue | undefined;

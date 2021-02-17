@@ -11,8 +11,9 @@ import {
   generateTypeGraphQLImport,
   generateModelsImports,
   generateEnumsImports,
-  generateGraphQLScalarImport,
-  generatePrismaJsonTypeImport,
+  generateGraphQLScalarsImport,
+  generatePrismaNamespaceImport,
+  generateCustomScalarsImport,
 } from "./imports";
 import { modelsFolderName } from "./config";
 import { DMMF } from "./dmmf/types";
@@ -31,8 +32,9 @@ export default function generateObjectTypeClassFromModel(
   });
 
   generateTypeGraphQLImport(sourceFile);
-  generateGraphQLScalarImport(sourceFile);
-  generatePrismaJsonTypeImport(sourceFile, dmmfDocument.options, 1);
+  generateGraphQLScalarsImport(sourceFile);
+  generatePrismaNamespaceImport(sourceFile, dmmfDocument.options, 1);
+  generateCustomScalarsImport(sourceFile, 1);
   generateModelsImports(
     sourceFile,
     model.fields

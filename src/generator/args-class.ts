@@ -11,7 +11,7 @@ import {
   generateTypeGraphQLImport,
   generateInputsImports,
   generateEnumsImports,
-  generateGraphQLScalarImport,
+  generateGraphQLScalarsImport,
 } from "./imports";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import { DMMF } from "./dmmf/types";
@@ -31,7 +31,7 @@ export default function generateArgsTypeClassFromArgs(
   });
 
   generateTypeGraphQLImport(sourceFile);
-  generateGraphQLScalarImport(sourceFile);
+  generateGraphQLScalarsImport(sourceFile);
   generateInputsImports(
     sourceFile,
     fields

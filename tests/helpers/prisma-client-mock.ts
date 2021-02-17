@@ -43,4 +43,9 @@ export namespace Prisma {
     | null
     | InputJsonObject
     | InputJsonArray;
+
+  // Decimal.js mock
+  export class Decimal {
+    constructor(...arg: any[]) {}
+  }
 }

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
+import { DecimalJSScalar } from "../../scalars";
 import { NestedEnumPostKindNullableFilter } from "../inputs/NestedEnumPostKindNullableFilter";
 import { NestedEnumPostKindNullableWithAggregatesFilter } from "../inputs/NestedEnumPostKindNullableWithAggregatesFilter";
 import { NestedIntNullableFilter } from "../inputs/NestedIntNullableFilter";

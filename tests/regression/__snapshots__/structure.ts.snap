@@ -261,6 +261,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       index.js
       resolvers.index.d.ts
       resolvers.index.js
+  scalars.d.ts
+  scalars.js
 "
 `;
 
@@ -403,6 +405,7 @@ exports[`structure should generate proper folders and file names when model is r
       args.index.ts
       index.ts
       resolvers.index.ts
+  scalars.ts
 "
 `;
 
@@ -545,5 +548,6 @@ exports[`structure should generate proper folders structure and file names for c
       args.index.ts
       index.ts
       resolvers.index.ts
+  scalars.ts
 "
 `;

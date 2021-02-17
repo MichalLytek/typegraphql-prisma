@@ -101,6 +101,17 @@ export type Creator = {
   name: string
 }
 
+/**
+ * Model NativeTypeModel
+ */
+
+export type NativeTypeModel = {
+  id: number
+  bigInt: BigInt | null
+  byteA: Buffer | null
+  decimal: Prisma.Decimal | null
+}
+
 
 /**
  * Enums
@@ -326,6 +337,16 @@ export class PrismaClient<
     * ```
     */
   get creator(): Prisma.CreatorDelegate<GlobalReject>;
+
+  /**
+   * `prisma.nativeTypeModel`: Exposes CRUD operations for the **NativeTypeModel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NativeTypeModels
+    * const nativeTypeModels = await prisma.nativeTypeModel.findMany()
+    * ```
+    */
+  get nativeTypeModel(): Prisma.NativeTypeModelDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -669,14 +690,15 @@ export namespace Prisma {
     Movie: 'Movie',
     Director: 'Director',
     Problem: 'Problem',
-    Creator: 'Creator'
+    Creator: 'Creator',
+    NativeTypeModel: 'NativeTypeModel'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
 
 
   export type Datasources = {
-    db?: Datasource
+    postgres?: Datasource
   }
 
   export type RejectOnNotFound = boolean | ((error: Error) => Error)
@@ -7321,6 +7343,799 @@ export namespace Prisma {
 
 
   /**
+   * Model NativeTypeModel
+   */
+
+
+  export type AggregateNativeTypeModel = {
+    count: NativeTypeModelCountAggregateOutputType | null
+    avg: NativeTypeModelAvgAggregateOutputType | null
+    sum: NativeTypeModelSumAggregateOutputType | null
+    min: NativeTypeModelMinAggregateOutputType | null
+    max: NativeTypeModelMaxAggregateOutputType | null
+  }
+
+  export type NativeTypeModelAvgAggregateOutputType = {
+    id: number
+    bigInt: number | null
+    decimal: Decimal | null
+  }
+
+  export type NativeTypeModelSumAggregateOutputType = {
+    id: number
+    bigInt: BigInt | null
+    decimal: Decimal | null
+  }
+
+  export type NativeTypeModelMinAggregateOutputType = {
+    id: number
+    bigInt: BigInt | null
+    byteA: Buffer | null
+    decimal: Decimal | null
+  }
+
+  export type NativeTypeModelMaxAggregateOutputType = {
+    id: number
+    bigInt: BigInt | null
+    byteA: Buffer | null
+    decimal: Decimal | null
+  }
+
+  export type NativeTypeModelCountAggregateOutputType = {
+    id: number
+    bigInt: number | null
+    byteA: number | null
+    decimal: number | null
+    _all: number
+  }
+
+
+  export type NativeTypeModelAvgAggregateInputType = {
+    id?: true
+    bigInt?: true
+    decimal?: true
+  }
+
+  export type NativeTypeModelSumAggregateInputType = {
+    id?: true
+    bigInt?: true
+    decimal?: true
+  }
+
+  export type NativeTypeModelMinAggregateInputType = {
+    id?: true
+    bigInt?: true
+    byteA?: true
+    decimal?: true
+  }
+
+  export type NativeTypeModelMaxAggregateInputType = {
+    id?: true
+    bigInt?: true
+    byteA?: true
+    decimal?: true
+  }
+
+  export type NativeTypeModelCountAggregateInputType = {
+    id?: true
+    bigInt?: true
+    byteA?: true
+    decimal?: true
+    _all?: true
+  }
+
+  export type NativeTypeModelAggregateArgs = {
+    /**
+     * Filter which NativeTypeModel to aggregate.
+    **/
+    where?: NativeTypeModelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NativeTypeModels to fetch.
+    **/
+    orderBy?: Enumerable<NativeTypeModelOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+    **/
+    cursor?: NativeTypeModelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NativeTypeModels from the position of the cursor.
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NativeTypeModels.
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NativeTypeModels
+    **/
+    count?: true | NativeTypeModelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    avg?: NativeTypeModelAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    sum?: NativeTypeModelSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    min?: NativeTypeModelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    max?: NativeTypeModelMaxAggregateInputType
+  }
+
+  export type GetNativeTypeModelAggregateType<T extends NativeTypeModelAggregateArgs> = {
+    [P in keyof T & keyof AggregateNativeTypeModel]: P extends 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNativeTypeModel[P]>
+      : GetScalarType<T[P], AggregateNativeTypeModel[P]>
+  }
+
+
+    
+    
+  export type NativeTypeModelGroupByArgs = {
+    where?: NativeTypeModelWhereInput
+    orderBy?: Enumerable<NativeTypeModelOrderByInput>
+    by: Array<NativeTypeModelScalarFieldEnum>
+    having?: NativeTypeModelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    count?: NativeTypeModelCountAggregateInputType | true
+    avg?: NativeTypeModelAvgAggregateInputType
+    sum?: NativeTypeModelSumAggregateInputType
+    min?: NativeTypeModelMinAggregateInputType
+    max?: NativeTypeModelMaxAggregateInputType
+  }
+
+
+  export type NativeTypeModelGroupByOutputType = {
+    id: number
+    bigInt: BigInt | null
+    byteA: Buffer | null
+    decimal: Decimal | null
+    count: NativeTypeModelCountAggregateOutputType | null
+    avg: NativeTypeModelAvgAggregateOutputType | null
+    sum: NativeTypeModelSumAggregateOutputType | null
+    min: NativeTypeModelMinAggregateOutputType | null
+    max: NativeTypeModelMaxAggregateOutputType | null
+  }
+
+  type GetNativeTypeModelGroupByPayload<T extends NativeTypeModelGroupByArgs> = Promise<Array<
+    PickArray<NativeTypeModelGroupByOutputType, T['by']> & {
+      [P in ((keyof T) & (keyof NativeTypeModelGroupByOutputType))]: GetScalarType<T[P], NativeTypeModelGroupByOutputType[P]>
+    }
+  >>
+    
+
+  export type NativeTypeModelSelect = {
+    id?: boolean
+    bigInt?: boolean
+    byteA?: boolean
+    decimal?: boolean
+  }
+
+  export type NativeTypeModelGetPayload<
+    S extends boolean | null | undefined | NativeTypeModelArgs,
+    U = keyof S
+      > = S extends true
+        ? NativeTypeModel
+    : S extends undefined
+    ? never
+    : S extends NativeTypeModelArgs | NativeTypeModelFindManyArgs
+    ?'include' extends U
+    ? NativeTypeModel 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof NativeTypeModel ?NativeTypeModel [P]
+  : 
+     never
+  } 
+    : NativeTypeModel
+  : NativeTypeModel
+
+
+  type NativeTypeModelCountArgs = Merge<
+    Omit<NativeTypeModelFindManyArgs, 'select' | 'include'> & {
+      select?: NativeTypeModelCountAggregateInputType | true
+    }
+  >
+
+  export interface NativeTypeModelDelegate<GlobalRejectSettings> {
+    /**
+     * Find zero or one NativeTypeModel that matches the filter.
+     * @param {NativeTypeModelFindUniqueArgs} args - Arguments to find a NativeTypeModel
+     * @example
+     * // Get one NativeTypeModel
+     * const nativeTypeModel = await prisma.nativeTypeModel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends NativeTypeModelFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, NativeTypeModelFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'NativeTypeModel'> extends True ? CheckSelect<T, Prisma__NativeTypeModelClient<NativeTypeModel>, Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>> : CheckSelect<T, Prisma__NativeTypeModelClient<NativeTypeModel | null >, Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T> | null >>
+
+    /**
+     * Find the first NativeTypeModel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NativeTypeModelFindFirstArgs} args - Arguments to find a NativeTypeModel
+     * @example
+     * // Get one NativeTypeModel
+     * const nativeTypeModel = await prisma.nativeTypeModel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends NativeTypeModelFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, NativeTypeModelFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'NativeTypeModel'> extends True ? CheckSelect<T, Prisma__NativeTypeModelClient<NativeTypeModel>, Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>> : CheckSelect<T, Prisma__NativeTypeModelClient<NativeTypeModel | null >, Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T> | null >>
+
+    /**
+     * Find zero or more NativeTypeModels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NativeTypeModelFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NativeTypeModels
+     * const nativeTypeModels = await prisma.nativeTypeModel.findMany()
+     * 
+     * // Get first 10 NativeTypeModels
+     * const nativeTypeModels = await prisma.nativeTypeModel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const nativeTypeModelWithIdOnly = await prisma.nativeTypeModel.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends NativeTypeModelFindManyArgs>(
+      args?: SelectSubset<T, NativeTypeModelFindManyArgs>
+    ): CheckSelect<T, PrismaPromise<Array<NativeTypeModel>>, PrismaPromise<Array<NativeTypeModelGetPayload<T>>>>
+
+    /**
+     * Create a NativeTypeModel.
+     * @param {NativeTypeModelCreateArgs} args - Arguments to create a NativeTypeModel.
+     * @example
+     * // Create one NativeTypeModel
+     * const NativeTypeModel = await prisma.nativeTypeModel.create({
+     *   data: {
+     *     // ... data to create a NativeTypeModel
+     *   }
+     * })
+     * 
+    **/
+    create<T extends NativeTypeModelCreateArgs>(
+      args: SelectSubset<T, NativeTypeModelCreateArgs>
+    ): CheckSelect<T, Prisma__NativeTypeModelClient<NativeTypeModel>, Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>>
+
+    /**
+     * Create many NativeTypeModels.
+     *     @param {NativeTypeModelCreateManyArgs} args - Arguments to create many NativeTypeModels.
+     *     @example
+     *     // Create many NativeTypeModels
+     *     const nativeTypeModel = await prisma.nativeTypeModel.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends NativeTypeModelCreateManyArgs>(
+      args?: SelectSubset<T, NativeTypeModelCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a NativeTypeModel.
+     * @param {NativeTypeModelDeleteArgs} args - Arguments to delete one NativeTypeModel.
+     * @example
+     * // Delete one NativeTypeModel
+     * const NativeTypeModel = await prisma.nativeTypeModel.delete({
+     *   where: {
+     *     // ... filter to delete one NativeTypeModel
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends NativeTypeModelDeleteArgs>(
+      args: SelectSubset<T, NativeTypeModelDeleteArgs>
+    ): CheckSelect<T, Prisma__NativeTypeModelClient<NativeTypeModel>, Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>>
+
+    /**
+     * Update one NativeTypeModel.
+     * @param {NativeTypeModelUpdateArgs} args - Arguments to update one NativeTypeModel.
+     * @example
+     * // Update one NativeTypeModel
+     * const nativeTypeModel = await prisma.nativeTypeModel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends NativeTypeModelUpdateArgs>(
+      args: SelectSubset<T, NativeTypeModelUpdateArgs>
+    ): CheckSelect<T, Prisma__NativeTypeModelClient<NativeTypeModel>, Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>>
+
+    /**
+     * Delete zero or more NativeTypeModels.
+     * @param {NativeTypeModelDeleteManyArgs} args - Arguments to filter NativeTypeModels to delete.
+     * @example
+     * // Delete a few NativeTypeModels
+     * const { count } = await prisma.nativeTypeModel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends NativeTypeModelDeleteManyArgs>(
+      args?: SelectSubset<T, NativeTypeModelDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NativeTypeModels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NativeTypeModelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NativeTypeModels
+     * const nativeTypeModel = await prisma.nativeTypeModel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends NativeTypeModelUpdateManyArgs>(
+      args: SelectSubset<T, NativeTypeModelUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one NativeTypeModel.
+     * @param {NativeTypeModelUpsertArgs} args - Arguments to update or create a NativeTypeModel.
+     * @example
+     * // Update or create a NativeTypeModel
+     * const nativeTypeModel = await prisma.nativeTypeModel.upsert({
+     *   create: {
+     *     // ... data to create a NativeTypeModel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NativeTypeModel we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends NativeTypeModelUpsertArgs>(
+      args: SelectSubset<T, NativeTypeModelUpsertArgs>
+    ): CheckSelect<T, Prisma__NativeTypeModelClient<NativeTypeModel>, Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>>
+
+    /**
+     * Count the number of NativeTypeModels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NativeTypeModelCountArgs} args - Arguments to filter NativeTypeModels to count.
+     * @example
+     * // Count the number of NativeTypeModels
+     * const count = await prisma.nativeTypeModel.count({
+     *   where: {
+     *     // ... the filter for the NativeTypeModels we want to count
+     *   }
+     * })
+    **/
+    count<T extends NativeTypeModelCountArgs>(
+      args?: Subset<T, NativeTypeModelCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NativeTypeModelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NativeTypeModel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NativeTypeModelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NativeTypeModelAggregateArgs>(args: Subset<T, NativeTypeModelAggregateArgs>): PrismaPromise<GetNativeTypeModelAggregateType<T>>
+
+    /**
+     * Group by NativeTypeModel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NativeTypeModelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NativeTypeModelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NativeTypeModelGroupByArgs['orderBy'] }
+        : { orderBy?: NativeTypeModelGroupByArgs['orderBy'] },
+      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NativeTypeModelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNativeTypeModelGroupByPayload<T> : Promise<InputErrors>
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NativeTypeModel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in 
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__NativeTypeModelClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+  // Custom InputTypes
+
+  /**
+   * NativeTypeModel findUnique
+   */
+  export type NativeTypeModelFindUniqueArgs = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+    **/
+    select?: NativeTypeModelSelect | null
+    /**
+     * Throw an Error if a NativeTypeModel can't be found
+    **/
+    rejectOnNotFound?: RejectOnNotFound
+    /**
+     * Filter, which NativeTypeModel to fetch.
+    **/
+    where: NativeTypeModelWhereUniqueInput
+  }
+
+
+  /**
+   * NativeTypeModel findFirst
+   */
+  export type NativeTypeModelFindFirstArgs = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+    **/
+    select?: NativeTypeModelSelect | null
+    /**
+     * Throw an Error if a NativeTypeModel can't be found
+    **/
+    rejectOnNotFound?: RejectOnNotFound
+    /**
+     * Filter, which NativeTypeModel to fetch.
+    **/
+    where?: NativeTypeModelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NativeTypeModels to fetch.
+    **/
+    orderBy?: Enumerable<NativeTypeModelOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NativeTypeModels.
+    **/
+    cursor?: NativeTypeModelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NativeTypeModels from the position of the cursor.
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NativeTypeModels.
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NativeTypeModels.
+    **/
+    distinct?: Enumerable<NativeTypeModelScalarFieldEnum>
+  }
+
+
+  /**
+   * NativeTypeModel findMany
+   */
+  export type NativeTypeModelFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+    **/
+    select?: NativeTypeModelSelect | null
+    /**
+     * Filter, which NativeTypeModels to fetch.
+    **/
+    where?: NativeTypeModelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NativeTypeModels to fetch.
+    **/
+    orderBy?: Enumerable<NativeTypeModelOrderByInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NativeTypeModels.
+    **/
+    cursor?: NativeTypeModelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NativeTypeModels from the position of the cursor.
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NativeTypeModels.
+    **/
+    skip?: number
+    distinct?: Enumerable<NativeTypeModelScalarFieldEnum>
+  }
+
+
+  /**
+   * NativeTypeModel create
+   */
+  export type NativeTypeModelCreateArgs = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+    **/
+    select?: NativeTypeModelSelect | null
+    /**
+     * The data needed to create a NativeTypeModel.
+    **/
+    data: XOR<NativeTypeModelUncheckedCreateInput, NativeTypeModelCreateInput>
+  }
+
+
+  /**
+   * NativeTypeModel createMany
+   */
+  export type NativeTypeModelCreateManyArgs = {
+    data: Enumerable<NativeTypeModelCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * NativeTypeModel update
+   */
+  export type NativeTypeModelUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+    **/
+    select?: NativeTypeModelSelect | null
+    /**
+     * The data needed to update a NativeTypeModel.
+    **/
+    data: XOR<NativeTypeModelUncheckedUpdateInput, NativeTypeModelUpdateInput>
+    /**
+     * Choose, which NativeTypeModel to update.
+    **/
+    where: NativeTypeModelWhereUniqueInput
+  }
+
+
+  /**
+   * NativeTypeModel updateMany
+   */
+  export type NativeTypeModelUpdateManyArgs = {
+    data: XOR<NativeTypeModelUncheckedUpdateManyInput, NativeTypeModelUpdateManyMutationInput>
+    where?: NativeTypeModelWhereInput
+  }
+
+
+  /**
+   * NativeTypeModel upsert
+   */
+  export type NativeTypeModelUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+    **/
+    select?: NativeTypeModelSelect | null
+    /**
+     * The filter to search for the NativeTypeModel to update in case it exists.
+    **/
+    where: NativeTypeModelWhereUniqueInput
+    /**
+     * In case the NativeTypeModel found by the `where` argument doesn't exist, create a new NativeTypeModel with this data.
+    **/
+    create: XOR<NativeTypeModelUncheckedCreateInput, NativeTypeModelCreateInput>
+    /**
+     * In case the NativeTypeModel was found with the provided `where` argument, update it with this data.
+    **/
+    update: XOR<NativeTypeModelUncheckedUpdateInput, NativeTypeModelUpdateInput>
+  }
+
+
+  /**
+   * NativeTypeModel delete
+   */
+  export type NativeTypeModelDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+    **/
+    select?: NativeTypeModelSelect | null
+    /**
+     * Filter which NativeTypeModel to delete.
+    **/
+    where: NativeTypeModelWhereUniqueInput
+  }
+
+
+  /**
+   * NativeTypeModel deleteMany
+   */
+  export type NativeTypeModelDeleteManyArgs = {
+    where?: NativeTypeModelWhereInput
+  }
+
+
+  /**
+   * NativeTypeModel without action
+   */
+  export type NativeTypeModelArgs = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+    **/
+    select?: NativeTypeModelSelect | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -7407,6 +8222,16 @@ export namespace Prisma {
   };
 
   export type CreatorScalarFieldEnum = (typeof CreatorScalarFieldEnum)[keyof typeof CreatorScalarFieldEnum]
+
+
+  export const NativeTypeModelScalarFieldEnum: {
+    id: 'id',
+    bigInt: 'bigInt',
+    byteA: 'byteA',
+    decimal: 'decimal'
+  };
+
+  export type NativeTypeModelScalarFieldEnum = (typeof NativeTypeModelScalarFieldEnum)[keyof typeof NativeTypeModelScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7697,6 +8522,37 @@ export namespace Prisma {
     NOT?: Enumerable<CreatorScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
     name?: StringWithAggregatesFilter | string
+  }
+
+  export type NativeTypeModelWhereInput = {
+    AND?: Enumerable<NativeTypeModelWhereInput>
+    OR?: Enumerable<NativeTypeModelWhereInput>
+    NOT?: Enumerable<NativeTypeModelWhereInput>
+    id?: IntFilter | number
+    bigInt?: BigIntNullableFilter | BigInt | number | null
+    byteA?: BytesNullableFilter | Buffer | null
+    decimal?: DecimalNullableFilter | Decimal | number | string | null
+  }
+
+  export type NativeTypeModelOrderByInput = {
+    id?: SortOrder
+    bigInt?: SortOrder
+    byteA?: SortOrder
+    decimal?: SortOrder
+  }
+
+  export type NativeTypeModelWhereUniqueInput = {
+    id?: number
+  }
+
+  export type NativeTypeModelScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<NativeTypeModelScalarWhereWithAggregatesInput>
+    OR?: Enumerable<NativeTypeModelScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<NativeTypeModelScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
+    bigInt?: BigIntNullableWithAggregatesFilter | BigInt | number | null
+    byteA?: BytesNullableWithAggregatesFilter | Buffer | null
+    decimal?: DecimalNullableWithAggregatesFilter | Decimal | number | string | null
   }
 
   export type UserCreateInput = {
@@ -8109,6 +8965,52 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type NativeTypeModelCreateInput = {
+    bigInt?: BigInt | number | null
+    byteA?: Buffer | null
+    decimal?: Decimal | number | string | null
+  }
+
+  export type NativeTypeModelUncheckedCreateInput = {
+    id?: number
+    bigInt?: BigInt | number | null
+    byteA?: Buffer | null
+    decimal?: Decimal | number | string | null
+  }
+
+  export type NativeTypeModelUpdateInput = {
+    bigInt?: NullableBigIntFieldUpdateOperationsInput | BigInt | number | null
+    byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
+  }
+
+  export type NativeTypeModelUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    bigInt?: NullableBigIntFieldUpdateOperationsInput | BigInt | number | null
+    byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
+  }
+
+  export type NativeTypeModelCreateManyInput = {
+    id?: number
+    bigInt?: BigInt | number | null
+    byteA?: Buffer | null
+    decimal?: Decimal | number | string | null
+  }
+
+  export type NativeTypeModelUpdateManyMutationInput = {
+    bigInt?: NullableBigIntFieldUpdateOperationsInput | BigInt | number | null
+    byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
+  }
+
+  export type NativeTypeModelUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    bigInt?: NullableBigIntFieldUpdateOperationsInput | BigInt | number | null
+    byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
+  }
+
   export type IntFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -8399,6 +9301,73 @@ export namespace Prisma {
     every?: ProblemWhereInput
     some?: ProblemWhereInput
     none?: ProblemWhereInput
+  }
+
+  export type BigIntNullableFilter = {
+    equals?: BigInt | number | null
+    in?: Enumerable<BigInt> | Enumerable<number> | null
+    notIn?: Enumerable<BigInt> | Enumerable<number> | null
+    lt?: BigInt | number
+    lte?: BigInt | number
+    gt?: BigInt | number
+    gte?: BigInt | number
+    not?: NestedBigIntNullableFilter | BigInt | number | null
+  }
+
+  export type BytesNullableFilter = {
+    equals?: Buffer | null
+    not?: NestedBytesNullableFilter | Buffer | null
+  }
+
+  export type DecimalNullableFilter = {
+    equals?: Decimal | number | string | null
+    in?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
+    notIn?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
+    lt?: Decimal | number | string
+    lte?: Decimal | number | string
+    gt?: Decimal | number | string
+    gte?: Decimal | number | string
+    not?: NestedDecimalNullableFilter | Decimal | number | string | null
+  }
+
+  export type BigIntNullableWithAggregatesFilter = {
+    equals?: BigInt | number | null
+    in?: Enumerable<BigInt> | Enumerable<number> | null
+    notIn?: Enumerable<BigInt> | Enumerable<number> | null
+    lt?: BigInt | number
+    lte?: BigInt | number
+    gt?: BigInt | number
+    gte?: BigInt | number
+    not?: NestedBigIntNullableWithAggregatesFilter | BigInt | number | null
+    count?: NestedIntNullableFilter
+    avg?: NestedFloatNullableFilter
+    sum?: NestedBigIntNullableFilter
+    min?: NestedBigIntNullableFilter
+    max?: NestedBigIntNullableFilter
+  }
+
+  export type BytesNullableWithAggregatesFilter = {
+    equals?: Buffer | null
+    not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
+    count?: NestedIntNullableFilter
+    min?: NestedBytesNullableFilter
+    max?: NestedBytesNullableFilter
+  }
+
+  export type DecimalNullableWithAggregatesFilter = {
+    equals?: Decimal | number | string | null
+    in?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
+    notIn?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
+    lt?: Decimal | number | string
+    lte?: Decimal | number | string
+    gt?: Decimal | number | string
+    gte?: Decimal | number | string
+    not?: NestedDecimalNullableWithAggregatesFilter | Decimal | number | string | null
+    count?: NestedIntNullableFilter
+    avg?: NestedDecimalNullableFilter
+    sum?: NestedDecimalNullableFilter
+    min?: NestedDecimalNullableFilter
+    max?: NestedDecimalNullableFilter
   }
 
   export type postCreateNestedManyWithoutAuthorInput = {
@@ -8715,6 +9684,26 @@ export namespace Prisma {
     deleteMany?: Enumerable<ProblemScalarWhereInput>
   }
 
+  export type NullableBigIntFieldUpdateOperationsInput = {
+    set?: BigInt | number | null
+    increment?: BigInt | number
+    decrement?: BigInt | number
+    multiply?: BigInt | number
+    divide?: BigInt | number
+  }
+
+  export type NullableBytesFieldUpdateOperationsInput = {
+    set?: Buffer | null
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | number | string | null
+    increment?: Decimal | number | string
+    decrement?: Decimal | number | string
+    multiply?: Decimal | number | string
+    divide?: Decimal | number | string
+  }
+
   export type NestedIntFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -8944,6 +9933,73 @@ export namespace Prisma {
   export type NestedJsonFilter = {
     equals?: InputJsonValue
     not?: InputJsonValue
+  }
+
+  export type NestedBigIntNullableFilter = {
+    equals?: BigInt | number | null
+    in?: Enumerable<BigInt> | Enumerable<number> | null
+    notIn?: Enumerable<BigInt> | Enumerable<number> | null
+    lt?: BigInt | number
+    lte?: BigInt | number
+    gt?: BigInt | number
+    gte?: BigInt | number
+    not?: NestedBigIntNullableFilter | BigInt | number | null
+  }
+
+  export type NestedBytesNullableFilter = {
+    equals?: Buffer | null
+    not?: NestedBytesNullableFilter | Buffer | null
+  }
+
+  export type NestedDecimalNullableFilter = {
+    equals?: Decimal | number | string | null
+    in?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
+    notIn?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
+    lt?: Decimal | number | string
+    lte?: Decimal | number | string
+    gt?: Decimal | number | string
+    gte?: Decimal | number | string
+    not?: NestedDecimalNullableFilter | Decimal | number | string | null
+  }
+
+  export type NestedBigIntNullableWithAggregatesFilter = {
+    equals?: BigInt | number | null
+    in?: Enumerable<BigInt> | Enumerable<number> | null
+    notIn?: Enumerable<BigInt> | Enumerable<number> | null
+    lt?: BigInt | number
+    lte?: BigInt | number
+    gt?: BigInt | number
+    gte?: BigInt | number
+    not?: NestedBigIntNullableWithAggregatesFilter | BigInt | number | null
+    count?: NestedIntNullableFilter
+    avg?: NestedFloatNullableFilter
+    sum?: NestedBigIntNullableFilter
+    min?: NestedBigIntNullableFilter
+    max?: NestedBigIntNullableFilter
+  }
+
+  export type NestedBytesNullableWithAggregatesFilter = {
+    equals?: Buffer | null
+    not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
+    count?: NestedIntNullableFilter
+    min?: NestedBytesNullableFilter
+    max?: NestedBytesNullableFilter
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter = {
+    equals?: Decimal | number | string | null
+    in?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
+    notIn?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
+    lt?: Decimal | number | string
+    lte?: Decimal | number | string
+    gt?: Decimal | number | string
+    gte?: Decimal | number | string
+    not?: NestedDecimalNullableWithAggregatesFilter | Decimal | number | string | null
+    count?: NestedIntNullableFilter
+    avg?: NestedDecimalNullableFilter
+    sum?: NestedDecimalNullableFilter
+    min?: NestedDecimalNullableFilter
+    max?: NestedDecimalNullableFilter
   }
 
   export type postCreateWithoutAuthorInput = {

@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { MovieOrderByInput } from "../../../inputs/MovieOrderByInput";
 import { MovieScalarWhereWithAggregatesInput } from "../../../inputs/MovieScalarWhereWithAggregatesInput";
 import { MovieWhereInput } from "../../../inputs/MovieWhereInput";

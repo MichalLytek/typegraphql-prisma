@@ -148,11 +148,11 @@ input PostCreateInput {
 
 input PostCreateNestedManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
 }
 
-input PostCreateOrConnectWithoutauthorInput {
+input PostCreateOrConnectWithoutAuthorInput {
   create: PostCreateWithoutAuthorInput!
   where: PostWhereUniqueInput!
 }
@@ -232,7 +232,7 @@ input PostUpdateManyWithWhereWithoutAuthorInput {
 
 input PostUpdateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutauthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
   delete: [PostWhereUniqueInput!]
   deleteMany: [PostScalarWhereInput!]
@@ -353,11 +353,11 @@ input UserCreateInput {
 
 input UserCreateNestedOneWithoutPostsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutpostsInput
+  connectOrCreate: UserCreateOrConnectWithoutPostsInput
   create: UserCreateWithoutPostsInput
 }
 
-input UserCreateOrConnectWithoutpostsInput {
+input UserCreateOrConnectWithoutPostsInput {
   create: UserCreateWithoutPostsInput!
   where: UserWhereUniqueInput!
 }
@@ -406,7 +406,7 @@ input UserUpdateManyMutationInput {
 
 input UserUpdateOneRequiredWithoutPostsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutpostsInput
+  connectOrCreate: UserCreateOrConnectWithoutPostsInput
   create: UserCreateWithoutPostsInput
   update: UserUpdateWithoutPostsInput
   upsert: UserUpsertWithoutPostsInput
@@ -518,7 +518,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       NullableStringFieldUpdateOperationsInput.ts
       PostCreateInput.ts
       PostCreateNestedManyWithoutAuthorInput.ts
-      PostCreateOrConnectWithoutauthorInput.ts
+      PostCreateOrConnectWithoutAuthorInput.ts
       PostCreateWithoutAuthorInput.ts
       PostListRelationFilter.ts
       PostOrderByInput.ts
@@ -537,7 +537,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       StringNullableFilter.ts
       UserCreateInput.ts
       UserCreateNestedOneWithoutPostsInput.ts
-      UserCreateOrConnectWithoutpostsInput.ts
+      UserCreateOrConnectWithoutPostsInput.ts
       UserCreateWithoutPostsInput.ts
       UserOrderByInput.ts
       UserRelationFilter.ts
@@ -575,6 +575,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       args.index.ts
       index.ts
       resolvers.index.ts
+  scalars.ts
 "
 `;
 

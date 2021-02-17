@@ -536,8 +536,160 @@ describe("inputs", () => {
     );
   });
 
+  it("should properly generate input type scalar filters classes for model with native types", async () => {
+    const schema = /* prisma */ `
+      datasource postgres {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model NativeTypeModel {
+        id      Int      @id @default(autoincrement()) @postgres.Integer
+        bigInt  BigInt?  @postgres.BigInt
+        byteA   Bytes?   @postgres.ByteA
+        decimal Decimal? @postgres.Decimal
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const bigIntNullableFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/BigIntNullableFilter.ts",
+    );
+    // const bigIntNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+    //   "/resolvers/inputs/BigIntNullableWithAggregatesFilter.ts",
+    // );
+    const bytesNullableFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/BytesNullableFilter.ts",
+    );
+    // const bytesNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+    //   "/resolvers/inputs/BytesNullableWithAggregatesFilter.ts",
+    // );
+    const decimalNullableFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/DecimalNullableFilter.ts",
+    );
+    // const decimalNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+    //   "/resolvers/inputs/DecimalNullableWithAggregatesFilter.ts",
+    // );
+    const nestedBytesNullableFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NestedBytesNullableFilter.ts",
+    );
+    // const nestedBytesNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+    //   "/resolvers/inputs/NestedBytesNullableWithAggregatesFilter.ts",
+    // );
+    const nestedDecimalNullableFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NestedDecimalNullableFilter.ts",
+    );
+    // const nestedDecimalNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+    //   "/resolvers/inputs/NestedDecimalNullableWithAggregatesFilter.ts",
+    // );
+    const nullableBigIntFieldUpdateOperationsInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NullableBigIntFieldUpdateOperationsInput.ts",
+    );
+    const nullableBytesFieldUpdateOperationsInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NullableBytesFieldUpdateOperationsInput.ts",
+    );
+    const nullableDecimalFieldUpdateOperationsInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NullableDecimalFieldUpdateOperationsInput.ts",
+    );
+    const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+    expect(bigIntNullableFilterTSFile).toMatchSnapshot("BigIntNullableFilter");
+    // expect(bigIntNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+    //   "BigIntNullableWithAggregatesFilter",
+    // );
+    expect(bytesNullableFilterTSFile).toMatchSnapshot("BytesNullableFilter");
+    // expect(bytesNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+    //   "BytesNullableWithAggregatesFilter",
+    // );
+    expect(decimalNullableFilterTSFile).toMatchSnapshot(
+      "DecimalNullableFilter",
+    );
+    // expect(decimalNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+    //   "DecimalNullableWithAggregatesFilter",
+    // );
+    expect(nestedBytesNullableFilterTSFile).toMatchSnapshot(
+      "NestedBytesNullableFilter",
+    );
+    // expect(nestedBytesNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+    //   "NestedBytesNullableWithAggregatesFilter",
+    // );
+    expect(nestedDecimalNullableFilterTSFile).toMatchSnapshot(
+      "NestedDecimalNullableFilter",
+    );
+    // expect(nestedDecimalNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+    //   "NestedDecimalNullableWithAggregatesFilter",
+    // );
+    expect(nullableBigIntFieldUpdateOperationsInputTSFile).toMatchSnapshot(
+      "NullableBigIntFieldUpdateOperationsInput",
+    );
+    expect(nullableBytesFieldUpdateOperationsInputTSFile).toMatchSnapshot(
+      "NullableBytesFieldUpdateOperationsInput",
+    );
+    expect(nullableDecimalFieldUpdateOperationsInputTSFile).toMatchSnapshot(
+      "NullableDecimalFieldUpdateOperationsInput",
+    );
+    expect(indexTSFile).toMatchSnapshot("index");
+  });
+
+  it("should properly generate input type classes for model with native types", async () => {
+    const schema = /* prisma */ `
+      datasource postgres {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model NativeTypeModel {
+        id      Int      @id @default(autoincrement()) @postgres.Integer
+        bigInt  BigInt?  @postgres.BigInt
+        byteA   Bytes?   @postgres.ByteA
+        decimal Decimal? @postgres.Decimal
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const nativeTypeModelCreateInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NativeTypeModelCreateInput.ts",
+    );
+    const nativeTypeModelOrderByInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NativeTypeModelOrderByInput.ts",
+    );
+    const nativeTypeModelUpdateInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NativeTypeModelUpdateInput.ts",
+    );
+    const nativeTypeModelUpdateManyMutationInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NativeTypeModelUpdateManyMutationInput.ts",
+    );
+    const nativeTypeModelWhereInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NativeTypeModelWhereInput.ts",
+    );
+    const nativeTypeModelWhereUniqueInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NativeTypeModelWhereUniqueInput.ts",
+    );
+    const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+    expect(nativeTypeModelCreateInputTSFile).toMatchSnapshot(
+      "NativeTypeModelCreateInput",
+    );
+    expect(nativeTypeModelOrderByInputTSFile).toMatchSnapshot(
+      "NativeTypeModelOrderByInput",
+    );
+    expect(nativeTypeModelUpdateInputTSFile).toMatchSnapshot(
+      "NativeTypeModelUpdateInput",
+    );
+    expect(nativeTypeModelUpdateManyMutationInputTSFile).toMatchSnapshot(
+      "NativeTypeModelUpdateManyMutationInput",
+    );
+    expect(nativeTypeModelWhereInputTSFile).toMatchSnapshot(
+      "NativeTypeModelWhereInput",
+    );
+    expect(nativeTypeModelWhereUniqueInputTSFile).toMatchSnapshot(
+      "NativeTypeModelWhereUniqueInput",
+    );
+    expect(indexTSFile).toMatchSnapshot("index");
+  });
+
   describe("when model is renamed", () => {
-    it("should properly generate input type classes when model is renamed", async () => {
+    it("should properly generate input type classes", async () => {
       const schema = /* prisma */ `
         datasource db {
           provider = "postgresql"
@@ -719,32 +871,34 @@ describe("inputs", () => {
     });
   });
 
-  it("should properly generate input type classes when model field is renamed", async () => {
-    const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
+  describe("when model field is renamed", () => {
+    it("should properly generate input type classes", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
 
-      model Sample {
-        idField         Int     @id @default(autoincrement())
-        /// @TypeGraphQL.field(name: "mappedFieldName")
-        modelFieldName  String
-      }
-    `;
+        model Sample {
+          idField         Int     @id @default(autoincrement())
+          /// @TypeGraphQL.field(name: "mappedFieldName")
+          modelFieldName  String
+        }
+      `;
 
-    await generateCodeFromSchema(schema, { outputDirPath });
-    const sampleWhereInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/SampleWhereInput.ts",
-    );
-    const sampleOrderByInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/SampleOrderByInput.ts",
-    );
-    const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+      await generateCodeFromSchema(schema, { outputDirPath });
+      const sampleWhereInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleWhereInput.ts",
+      );
+      const sampleOrderByInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleOrderByInput.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
-    expect(sampleWhereInputTSFile).toMatchSnapshot("SampleWhereInput");
-    expect(sampleOrderByInputTSFile).toMatchSnapshot("SampleOrderByInput");
-    expect(indexTSFile).toMatchSnapshot("index");
+      expect(sampleWhereInputTSFile).toMatchSnapshot("SampleWhereInput");
+      expect(sampleOrderByInputTSFile).toMatchSnapshot("SampleOrderByInput");
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
   });
 
   describe("when prisma client is generated into node_modules", () => {

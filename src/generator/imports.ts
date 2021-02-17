@@ -37,14 +37,30 @@ export function generateGraphQLFieldsImport(sourceFile: SourceFile) {
   });
 }
 
-export function generateGraphQLScalarImport(sourceFile: SourceFile) {
+export function generateGraphQLScalarsImport(sourceFile: SourceFile) {
   sourceFile.addImportDeclaration({
-    moduleSpecifier: "graphql-type-json",
-    defaultImport: "GraphQLJSON",
+    moduleSpecifier: "graphql-scalars",
+    namespaceImport: "GraphQLScalars",
   });
 }
 
-export function generatePrismaJsonTypeImport(
+export function generateGraphQLScalarTypeImport(sourceFile: SourceFile) {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: "graphql",
+    namedImports: ["GraphQLScalarType"],
+  });
+}
+
+export function generateCustomScalarsImport(sourceFile: SourceFile, level = 0) {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier:
+      (level === 0 ? "./" : "") +
+      path.posix.join(...Array(level).fill(".."), "scalars"),
+    namedImports: ["DecimalJSScalar"],
+  });
+}
+
+export function generatePrismaNamespaceImport(
   sourceFile: SourceFile,
   options: GenerateCodeOptions,
   level = 0,
@@ -166,6 +182,7 @@ export function generateIndexFile(
     { moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}` },
     { moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}` },
     { moduleSpecifier: `./enhance` },
+    { moduleSpecifier: `./scalars` },
   ]);
 
   sourceFile.addImportDeclarations([

@@ -14,7 +14,8 @@ const crudResolversMap = {
   Movie: crudResolvers.MovieCrudResolver,
   Director: crudResolvers.DirectorCrudResolver,
   Problem: crudResolvers.ProblemCrudResolver,
-  Creator: crudResolvers.CreatorCrudResolver
+  Creator: crudResolvers.CreatorCrudResolver,
+  NativeTypeModel: crudResolvers.NativeTypeModelCrudResolver
 };
 const actionResolversMap = {
   Client: {
@@ -128,6 +129,20 @@ const actionResolversMap = {
     upsertCreator: actionResolvers.UpsertCreatorResolver,
     aggregateCreator: actionResolvers.AggregateCreatorResolver,
     groupByCreator: actionResolvers.GroupByCreatorResolver
+  },
+  NativeTypeModel: {
+    nativeTypeModel: actionResolvers.FindUniqueNativeTypeModelResolver,
+    findFirstNativeTypeModel: actionResolvers.FindFirstNativeTypeModelResolver,
+    nativeTypeModels: actionResolvers.FindManyNativeTypeModelResolver,
+    createNativeTypeModel: actionResolvers.CreateNativeTypeModelResolver,
+    createManyNativeTypeModel: actionResolvers.CreateManyNativeTypeModelResolver,
+    deleteNativeTypeModel: actionResolvers.DeleteNativeTypeModelResolver,
+    updateNativeTypeModel: actionResolvers.UpdateNativeTypeModelResolver,
+    deleteManyNativeTypeModel: actionResolvers.DeleteManyNativeTypeModelResolver,
+    updateManyNativeTypeModel: actionResolvers.UpdateManyNativeTypeModelResolver,
+    upsertNativeTypeModel: actionResolvers.UpsertNativeTypeModelResolver,
+    aggregateNativeTypeModel: actionResolvers.AggregateNativeTypeModelResolver,
+    groupByNativeTypeModel: actionResolvers.GroupByNativeTypeModelResolver
   }
 };
 

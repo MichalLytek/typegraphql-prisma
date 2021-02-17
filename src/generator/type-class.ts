@@ -14,9 +14,10 @@ import {
   generateInputsImports,
   generateEnumsImports,
   generateArgsImports,
-  generateGraphQLScalarImport,
-  generatePrismaJsonTypeImport,
+  generateGraphQLScalarsImport,
+  generatePrismaNamespaceImport,
   generateOutputsImports,
+  generateCustomScalarsImport,
 } from "./imports";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import { DMMF } from "./dmmf/types";
@@ -39,8 +40,9 @@ export function generateOutputTypeClassFromType(
   const isAggregateOutputType = type.name.includes("Aggregate");
 
   generateTypeGraphQLImport(sourceFile);
-  generateGraphQLScalarImport(sourceFile);
-  generatePrismaJsonTypeImport(sourceFile, dmmfDocument.options, 2);
+  generateGraphQLScalarsImport(sourceFile);
+  generatePrismaNamespaceImport(sourceFile, dmmfDocument.options, 2);
+  generateCustomScalarsImport(sourceFile, 2);
   generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
   generateOutputsImports(
     sourceFile,
@@ -118,8 +120,9 @@ export function generateInputTypeClassFromType(
   });
 
   generateTypeGraphQLImport(sourceFile);
-  generateGraphQLScalarImport(sourceFile);
-  generatePrismaJsonTypeImport(sourceFile, options, 2);
+  generateGraphQLScalarsImport(sourceFile);
+  generatePrismaNamespaceImport(sourceFile, options, 2);
+  generateCustomScalarsImport(sourceFile, 2);
   generateInputsImports(
     sourceFile,
     inputType.fields

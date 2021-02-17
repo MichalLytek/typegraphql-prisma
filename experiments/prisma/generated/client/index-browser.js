@@ -128,6 +128,13 @@ exports.Prisma.CreatorScalarFieldEnum = makeEnum({
   name: 'name'
 });
 
+exports.Prisma.NativeTypeModelScalarFieldEnum = makeEnum({
+  id: 'id',
+  bigInt: 'bigInt',
+  byteA: 'byteA',
+  decimal: 'decimal'
+});
+
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
@@ -155,7 +162,8 @@ exports.Prisma.ModelName = makeEnum({
   Movie: 'Movie',
   Director: 'Director',
   Problem: 'Problem',
-  Creator: 'Creator'
+  Creator: 'Creator',
+  NativeTypeModel: 'NativeTypeModel'
 });
 
 /**

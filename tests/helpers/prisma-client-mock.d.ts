@@ -30,4 +30,7 @@ export declare namespace Prisma {
     interface InputJsonArray extends Array<JsonValue> {
     }
     type InputJsonValue = undefined | string | number | boolean | null | InputJsonObject | InputJsonArray;
+    class Decimal {
+        constructor(...arg: any[]);
+    }
 }

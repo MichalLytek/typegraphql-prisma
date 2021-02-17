@@ -1,4 +1,4 @@
-datasource db {
+datasource postgres {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
@@ -9,7 +9,6 @@ generator client {
   provider        = "prisma-client-js"
   binaryTargets   = ["windows", "debian-openssl-1.1.x"]
   output          = "../prisma/generated/client"
-  // previewFeatures = ["nativeTypes"]
   previewFeatures = ["groupBy", "createMany", "orderByRelation"]
 }
 
@@ -122,16 +121,9 @@ model Creator {
   problems Problem[] @relation("creator")
 }
 
-// model Catalog {
-//   id                       Int          @id @default(autoincrement())
-//   productName              String?
-//   status                   curatestatus @default(unreviewed)
-//   createdAt                DateTime     @default(now())
-// }
-
-// enum curatestatus {
-//   accepted
-//   declined
-//   pending
-//   unreviewed
-// }
+model NativeTypeModel {
+  id      Int      @id @default(autoincrement()) @postgres.Integer
+  bigInt  BigInt?  @postgres.BigInt
+  byteA   Bytes?   @postgres.ByteA
+  decimal Decimal? @postgres.Decimal
+}

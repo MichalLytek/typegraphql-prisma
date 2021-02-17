@@ -274,10 +274,27 @@ query SortByRelation {
   }
 }
 
-mutation CreateMany {
+mutation CreateManyProblems {
   createManyProblem(
     data: [{ problemText: "problem1" }, { problemText: "problem2" }]
   ) {
     count
+  }
+}
+
+query GetNativeTypesFields {
+  nativeTypeModels {
+    id
+    bigInt
+    byteA
+    decimal
+  }
+}
+
+mutation InsertNativeTypesFields {
+  createNativeTypeModel(
+    data: { bigInt: "987654321000000", decimal: "73.12", byteA: "BAgPEBcq" }
+  ) {
+    id
   }
 }

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
+import { DecimalJSScalar } from "../../scalars";
 import { DirectorCountAggregate } from "../outputs/DirectorCountAggregate";
 import { DirectorMaxAggregate } from "../outputs/DirectorMaxAggregate";
 import { DirectorMinAggregate } from "../outputs/DirectorMinAggregate";
