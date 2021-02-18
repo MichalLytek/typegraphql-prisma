@@ -1,11 +1,11 @@
-export interface ScalarTypesOptionEntry {
+export interface CustomScalarOptionEntry {
   type?: string;
   module?: string;
 }
 
-export interface ScalarTypesOptions {
-  field?: ScalarTypesOptionEntry;
-  graphql?: ScalarTypesOptionEntry;
+export interface CustomScalarOptions {
+  field?: CustomScalarOptionEntry;
+  graphql?: CustomScalarOptionEntry;
 }
 
 export interface GenerateCodeOptions {
@@ -17,5 +17,5 @@ export interface GenerateCodeOptions {
   absolutePrismaOutputPath?: string;
   simpleResolvers?: boolean;
   useUncheckedScalarInputs?: boolean;
-  types?: Record<string, ScalarTypesOptions>;
+  customScalar?: Record<string, CustomScalarOptions>;
 }

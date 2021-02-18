@@ -64,17 +64,23 @@ export function generateCustomScalarsImport(
       path.posix.join(...Array(level).fill(".."), "scalars"),
     namedImports: ["DecimalJSScalar"],
   });
-  for (const [key, value] of Object.entries(options.types ?? {})) {
+  for (const [key, value] of Object.entries(options.customScalar ?? {})) {
     sourceFile.addImportDeclaration({
       moduleSpecifier: value.field!.module!,
       namedImports: [
-        { name: value.field!.type!, alias: generateImportAliasFromScalar(key, value.field!.type!) },
+        {
+          name: value.field!.type!,
+          alias: generateImportAliasFromScalar(key, value.field!.type!),
+        },
       ],
     });
     sourceFile.addImportDeclaration({
       moduleSpecifier: value.graphql!.module!,
       namedImports: [
-        { name: value.graphql!.type!, alias: generateImportAliasFromScalar(key, value.graphql!.type!) },
+        {
+          name: value.graphql!.type!,
+          alias: generateImportAliasFromScalar(key, value.graphql!.type!),
+        },
       ],
     });
   }

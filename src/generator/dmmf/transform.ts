@@ -97,9 +97,16 @@ function transformField(dmmfDocument: DmmfDocument) {
     // if we have found the custom scalar name from the options
     if (name) {
       // then we assume it is using our unique custom scalar alias
-      const { field: { type: fieldType } = {}, graphql: { type: graphqlType } = {} } = (dmmfDocument.options.types ?? {})[name];
-      if (fieldType) fieldTSType = generateImportAliasFromScalar(name, fieldType);
-      if (graphqlType) typeGraphQLType = generateImportAliasFromScalar(name, graphqlType);
+      const {
+        field: { type: fieldType } = {},
+        graphql: { type: graphqlType } = {},
+      } = (dmmfDocument.options.customScalar ?? {})[name];
+      if (fieldType) {
+        fieldTSType = generateImportAliasFromScalar(name, fieldType);
+      }
+      if (graphqlType) {
+        typeGraphQLType = generateImportAliasFromScalar(name, graphqlType);
+      }
     }
 
     // otherwise, revert to use default type resolution scheme

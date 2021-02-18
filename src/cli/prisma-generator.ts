@@ -7,7 +7,7 @@ import _ from "underscore";
 
 import generateCode from "../generator/generate-code";
 import removeDir from "../utils/removeDir";
-import { GenerateCodeOptions, ScalarTypesOptions } from "../generator/options";
+import { GenerateCodeOptions, CustomScalarOptions } from "../generator/options";
 import { toUnixPath } from "../generator/helpers";
 
 function parseStringBoolean(stringBoolean: string | undefined) {
@@ -15,9 +15,9 @@ function parseStringBoolean(stringBoolean: string | undefined) {
 }
 
 function resolveCustomScalar(
-  oldTypes?: Record<string, ScalarTypesOptions>,
-): Record<string, ScalarTypesOptions> {
-  const types = _.chain(oldTypes ?? {})
+  oldCustomScalar?: Record<string, CustomScalarOptions>,
+): Record<string, CustomScalarOptions> {
+  const customScalar = _.chain(oldCustomScalar ?? {})
     // not both field and graphql entry supplied -- skip
     .pick((value, _) => !!(value.field && value.graphql))
     // none of the entries had field and graphql type supplied -- skip
@@ -26,7 +26,7 @@ function resolveCustomScalar(
     .pick((value, _) => !!(value!.field!.module || value!.graphql!.module))
     .value() as object;
 
-  for (const [_, value] of Object.entries(types ?? {})) {
+  for (const [_, value] of Object.entries(customScalar ?? {})) {
     // one of the entry has type name -- automatic deduction from the entry with non empty module name
     if (!!value.field.type !== !!value.graphql.type) {
       value.graphql.type = value.graphql.type ?? value.field.type;
@@ -39,7 +39,7 @@ function resolveCustomScalar(
       value.field.module = value.field.module ?? value.graphql.module;
     }
   }
-  return types as Record<string, ScalarTypesOptions>;
+  return customScalar as Record<string, CustomScalarOptions>;
 }
 
 export async function generate(options: GeneratorOptions) {
@@ -55,12 +55,12 @@ export async function generate(options: GeneratorOptions) {
 
   const generatorConfig = options.generator.config;
   const {
-    types = {},
+    customScalar = {},
   }: {
-    types?: Record<string, ScalarTypesOptions>;
+    customScalar?: Record<string, CustomScalarOptions>;
   } = unflatten(
     _.pick(generatorConfig, (_: string, key: string) =>
-      key.startsWith("types"),
+      key.startsWith("customScalar"),
     ),
     { delimiter: "_" },
   );
@@ -80,7 +80,7 @@ export async function generate(options: GeneratorOptions) {
     useUncheckedScalarInputs: parseStringBoolean(
       generatorConfig.useUncheckedScalarInputs,
     ),
-    types: resolveCustomScalar(types),
+    customScalar: resolveCustomScalar(customScalar),
   };
 
   if (config.emitDMMF) {
