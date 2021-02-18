@@ -470,9 +470,6 @@ export function generateRelationModel(dmmfDocument: DmmfDocument) {
     const outputType = dmmfDocument.schema.outputTypes.find(
       type => type.name === model.name,
     )!;
-    if (!outputType) {
-      console.log(dmmfDocument.schema.outputTypes, model);
-    }
     const resolverName = `${model.typeName}RelationsResolver`;
     const relationFields = model.fields
       .filter(field => field.relationName && !field.isOmitted.output)
