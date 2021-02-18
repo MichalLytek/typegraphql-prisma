@@ -12,22 +12,30 @@ export function parseDocumentationAttributes<TData extends object = object>(
     expectedAttributeKind === "model"
       ? modelAttributeRegex
       : fieldAttributeRegex;
-  const attribute = documentation?.match(attributeRegex)?.[0];
-  const attributeName = attribute?.match(attributeNameRegex)?.[0]?.slice(1, -1);
-  if (attributeName !== expectedAttributeName) {
-    return {};
+  for (const documentation_ of documentation?.split("\\n") ?? []) {
+    const attribute = documentation_?.match(attributeRegex)?.[0];
+    const attributeName = attribute
+      ?.match(attributeNameRegex)?.[0]
+      ?.slice(1, -1);
+    if (attributeName !== expectedAttributeName) {
+      continue;
+    }
+    const rawAttributeArgs = attribute
+      ?.match(attributeArgsRegex)?.[0]
+      ?.slice(1, -1);
+    const splitRawArgsArray = rawAttributeArgs?.split(",").map(it => it.trim());
+    const parsedAttributeArgs =
+      splitRawArgsArray &&
+      (Object.fromEntries(
+        splitRawArgsArray.map(it => {
+          const [key, value] = it.split(": ");
+          return [key, JSON.parse(value)];
+        }),
+      ) as Partial<TData>);
+    if (!parsedAttributeArgs) {
+      continue;
+    }
+    return parsedAttributeArgs;
   }
-  const rawAttributeArgs = attribute
-    ?.match(attributeArgsRegex)?.[0]
-    ?.slice(1, -1);
-  const splitRawArgsArray = rawAttributeArgs?.split(",").map(it => it.trim());
-  const parsedAttributeArgs =
-    splitRawArgsArray &&
-    (Object.fromEntries(
-      splitRawArgsArray.map(it => {
-        const [key, value] = it.split(": ");
-        return [key, JSON.parse(value)];
-      }),
-    ) as Partial<TData>);
-  return parsedAttributeArgs ?? {};
+  return {};
 }
