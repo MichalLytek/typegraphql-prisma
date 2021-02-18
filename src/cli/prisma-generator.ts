@@ -2,6 +2,8 @@ import { GeneratorOptions } from "@prisma/generator-helper";
 import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
 import { promises as asyncFs } from "fs";
 import path from "path";
+import { unflatten } from "flat";
+import { pick } from "underscore"
 
 import generateCode from "../generator/generate-code";
 import removeDir from "../utils/removeDir";
@@ -39,7 +41,12 @@ export async function generate(options: GeneratorOptions) {
     useUncheckedScalarInputs: parseStringBoolean(
       generatorConfig.useUncheckedScalarInputs,
     ),
+    types: unflatten(
+      pick(generatorConfig, (_: string, key: string) => key.startsWith("types")), 
+      { delimiter: '_' }
+    )
   };
+  console.log(JSON.stringify(config.types))
 
   if (config.emitDMMF) {
     await Promise.all([

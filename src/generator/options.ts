@@ -1,3 +1,13 @@
+export interface ScalarTypesOptions2 {
+  type?: String,
+  module?: String,
+}
+
+export interface ScalarTypesOptions {
+  field?: ScalarTypesOptions2,
+  graphql?: ScalarTypesOptions2,
+}
+
 export interface GenerateCodeOptions {
   outputDirPath: string;
   emitDMMF?: boolean;
@@ -7,4 +17,5 @@ export interface GenerateCodeOptions {
   absolutePrismaOutputPath?: string;
   simpleResolvers?: boolean;
   useUncheckedScalarInputs?: boolean;
+  types?: Record<string, ScalarTypesOptions>;
 }
