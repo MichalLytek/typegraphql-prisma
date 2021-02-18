@@ -14,6 +14,7 @@ import { DmmfDocument } from "./dmmf-document";
 import pluralize from "pluralize";
 import { GenerateCodeOptions } from "../options";
 import { supportedQueryActions, supportedMutationActions } from "../config";
+import { generateImportAliasFromScalar } from "../../utils/gen-import-alias";
 
 export function transformSchema(
   datamodel: PrismaDMMF.Schema,
@@ -96,9 +97,9 @@ function transformField(dmmfDocument: DmmfDocument) {
     // if we have found the custom scalar name from the options
     if (name) {
       // then we assume it is using our unique custom scalar alias
-      const customScalarEntry = (dmmfDocument.options.types ?? {})[name];
-      fieldTSType = `__${name}_${customScalarEntry?.field?.type}`;
-      typeGraphQLType = `__${name}_${customScalarEntry?.graphql?.type}`;
+      const { field: { type: fieldType } = {}, graphql: { type: graphqlType } = {} } = (dmmfDocument.options.types ?? {})[name];
+      if (fieldType) fieldTSType = generateImportAliasFromScalar(name, fieldType);
+      if (graphqlType) typeGraphQLType = generateImportAliasFromScalar(name, graphqlType);
     }
 
     // otherwise, revert to use default type resolution scheme

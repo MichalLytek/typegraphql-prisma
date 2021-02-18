@@ -19,6 +19,7 @@ import {
 import { GenerateMappingData } from "./types";
 import { GenerateCodeOptions } from "./options";
 import { values } from "underscore";
+import { generateImportAliasFromScalar } from "../utils/gen-import-alias";
 
 export function generateTypeGraphQLImport(sourceFile: SourceFile) {
   sourceFile.addImportDeclaration({
@@ -64,21 +65,16 @@ export function generateCustomScalarsImport(
     namedImports: ["DecimalJSScalar"],
   });
   for (const [key, value] of Object.entries(options.types ?? {})) {
-    // since we don't want to see duplicate import names, we need to leverage alias to prevent it from happening
-    // assuming that nobody uses "__" for their prefix, and with the custom scalar name key as an insurance, we can
-    // pretty assume 99% of the case this is unique
-
-    // TODO: decide if this simple alias generator should be extracted as a utility function
     sourceFile.addImportDeclaration({
       moduleSpecifier: value.field!.module!,
       namedImports: [
-        { name: value.field!.type!, alias: `__${key}_${value.field!.type}` },
+        { name: value.field!.type!, alias: generateImportAliasFromScalar(key, value.field!.type!) },
       ],
     });
     sourceFile.addImportDeclaration({
       moduleSpecifier: value.graphql!.module!,
       namedImports: [
-        { name: value.graphql!.type!, alias: `__${key}_${value.graphql!.type}` },
+        { name: value.graphql!.type!, alias: generateImportAliasFromScalar(key, value.graphql!.type!) },
       ],
     });
   }
