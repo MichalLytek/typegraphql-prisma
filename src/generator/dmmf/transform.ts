@@ -86,20 +86,39 @@ function transformField(dmmfDocument: DmmfDocument) {
       isList: field.isList,
       type: field.type,
     };
-    const fieldTSType = getFieldTSType(
-      dmmfDocument,
-      typeInfo,
-      field.isRequired,
-      false,
-    );
-    const typeGraphQLType = getTypeGraphQLType(typeInfo, dmmfDocument);
+    const { name = undefined } = parseDocumentationAttributes<{
+      name?: string;
+    }>(field.documentation, "scalar", "field");
+
+    let fieldTSType: string | null = null;
+    let typeGraphQLType: string | null = null;
+
+    // if we have found the custom scalar name from the options
+    if (name) {
+      // then we assume it is using our unique custom scalar alias
+      const customScalarEntry = (dmmfDocument.options.types ?? {})[name];
+      fieldTSType = `__${name}_${customScalarEntry?.field?.type}`;
+      typeGraphQLType = `__${name}_${customScalarEntry?.graphql?.type}`;
+    }
+
+    // otherwise, revert to use default type resolution scheme
+    if (!fieldTSType) {
+      fieldTSType = getFieldTSType(
+        dmmfDocument,
+        typeInfo,
+        field.isRequired,
+        false,
+      );
+    }
+
+    if (!typeGraphQLType) {
+      typeGraphQLType = getTypeGraphQLType(typeInfo, dmmfDocument);
+    }
+
     const { output = false, input = false } = parseDocumentationAttributes<{
       output: boolean;
       input: boolean;
     }>(field.documentation, "omit", "field");
-    const { name = undefined } = parseDocumentationAttributes<{
-      name: string;
-    }>(field.documentation, "scalar", "field");
     return {
       ...field,
       location,
@@ -108,7 +127,6 @@ function transformField(dmmfDocument: DmmfDocument) {
       typeGraphQLType,
       docs: cleanDocsString(field.documentation),
       isOmitted: { output, input },
-      scalar: { name }
     };
   };
 }
