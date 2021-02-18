@@ -18,6 +18,7 @@ import {
 } from "./config";
 import { GenerateMappingData } from "./types";
 import { GenerateCodeOptions } from "./options";
+import { values } from "underscore";
 
 export function generateTypeGraphQLImport(sourceFile: SourceFile) {
   sourceFile.addImportDeclaration({
@@ -51,13 +52,36 @@ export function generateGraphQLScalarTypeImport(sourceFile: SourceFile) {
   });
 }
 
-export function generateCustomScalarsImport(sourceFile: SourceFile, level = 0) {
+export function generateCustomScalarsImport(
+  sourceFile: SourceFile,
+  options: GenerateCodeOptions,
+  level = 0,
+) {
   sourceFile.addImportDeclaration({
     moduleSpecifier:
       (level === 0 ? "./" : "") +
       path.posix.join(...Array(level).fill(".."), "scalars"),
     namedImports: ["DecimalJSScalar"],
   });
+  for (const [key, value] of Object.entries(options.types ?? {})) {
+    // since we don't want to see duplicate import names, we need to leverage alias to prevent it from happening
+    // assuming that nobody uses "__" for their prefix, and with the custom scalar name key as an insurance, we can
+    // pretty assume 99% of the case this is unique
+
+    // TODO: decide if this simple alias generator should be extracted as a utility function
+    sourceFile.addImportDeclaration({
+      moduleSpecifier: value.field!.module!,
+      namedImports: [
+        { name: value.field!.type!, alias: `__${key}_${value.field!.type}` },
+      ],
+    });
+    sourceFile.addImportDeclaration({
+      moduleSpecifier: value.graphql!.module!,
+      namedImports: [
+        { name: value.graphql!.type!, alias: `__${key}_${value.graphql!.type}` },
+      ],
+    });
+  }
 }
 
 export function generatePrismaNamespaceImport(

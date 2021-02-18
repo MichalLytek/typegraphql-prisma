@@ -42,7 +42,7 @@ export function generateOutputTypeClassFromType(
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarsImport(sourceFile);
   generatePrismaNamespaceImport(sourceFile, dmmfDocument.options, 2);
-  generateCustomScalarsImport(sourceFile, 2);
+  generateCustomScalarsImport(sourceFile, dmmfDocument.options, 2);
   generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
   generateOutputsImports(
     sourceFile,
@@ -122,7 +122,7 @@ export function generateInputTypeClassFromType(
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarsImport(sourceFile);
   generatePrismaNamespaceImport(sourceFile, options, 2);
-  generateCustomScalarsImport(sourceFile, 2);
+  generateCustomScalarsImport(sourceFile, options, 2);
   generateInputsImports(
     sourceFile,
     inputType.fields
