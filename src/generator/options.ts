@@ -1,11 +1,11 @@
-export interface ScalarTypesOptions2 {
-  type?: String,
-  module?: String,
+export interface ScalarTypesOptionEntry {
+  type?: string;
+  module?: string;
 }
 
 export interface ScalarTypesOptions {
-  field?: ScalarTypesOptions2,
-  graphql?: ScalarTypesOptions2,
+  field?: ScalarTypesOptionEntry;
+  graphql?: ScalarTypesOptionEntry;
 }
 
 export interface GenerateCodeOptions {
