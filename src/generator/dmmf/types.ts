@@ -68,6 +68,7 @@ export namespace DMMF {
     fieldTSType: string;
     docs: string | undefined;
     isOmitted: { input: boolean; output: boolean };
+    scalar: { name?: string; };
   }
   export interface FieldDefault {
     name: string;

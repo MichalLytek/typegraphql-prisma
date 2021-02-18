@@ -97,6 +97,9 @@ function transformField(dmmfDocument: DmmfDocument) {
       output: boolean;
       input: boolean;
     }>(field.documentation, "omit", "field");
+    const { name = undefined } = parseDocumentationAttributes<{
+      name: string;
+    }>(field.documentation, "scalar", "field");
     return {
       ...field,
       location,
@@ -105,6 +108,7 @@ function transformField(dmmfDocument: DmmfDocument) {
       typeGraphQLType,
       docs: cleanDocsString(field.documentation),
       isOmitted: { output, input },
+      scalar: { name }
     };
   };
 }
