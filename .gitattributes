@@ -35,3 +35,6 @@
 *.ez binary
 *.bz2 binary
 *.swp binary
+
+# settings for github-linguist
+**/prisma/generated/** linguist-vendored
