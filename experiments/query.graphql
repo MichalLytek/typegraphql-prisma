@@ -221,22 +221,23 @@ query AggregateClient {
 #   }
 # }
 
-mutation UncheckedInputsExample {
-  createPost(
-    data: {
-      title: "Test"
-      subtitle: "Test test"
-      metadata: {}
-      published: true
-      authorId: 1
-    }
-  ) {
-    ...PostData
-    author {
-      ...ClientData
-    }
-  }
-}
+# # incompatible with useUncheckedScalarInputs
+# mutation UncheckedInputsExample {
+#   createPost(
+#     data: {
+#       title: "Test"
+#       subtitle: "Test test"
+#       metadata: {}
+#       published: true
+#       authorId: 1
+#     }
+#   ) {
+#     ...PostData
+#     author {
+#       ...ClientData
+#     }
+#   }
+# }
 
 mutation AtomicNumberOperations {
   updateClient(
@@ -296,5 +297,8 @@ mutation InsertNativeTypesFields {
     data: { bigInt: "987654321000000", decimal: "73.12", byteA: "BAgPEBcq" }
   ) {
     id
+    bigInt
+    byteA
+    decimal
   }
 }
