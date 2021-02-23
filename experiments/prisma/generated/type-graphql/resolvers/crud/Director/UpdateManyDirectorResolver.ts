@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { Director } from "../../../models/Director";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class UpdateManyDirectorResolver {
@@ -10,6 +10,6 @@ export class UpdateManyDirectorResolver {
     nullable: false
   })
   async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.director.updateMany(args);
+    return getPrismaFromContext(ctx).director.updateMany(args);
   }
 }

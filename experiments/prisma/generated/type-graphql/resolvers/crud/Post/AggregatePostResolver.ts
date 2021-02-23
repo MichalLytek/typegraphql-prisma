@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { AggregatePostArgs } from "./args/AggregatePostArgs";
 import { Post } from "../../../models/Post";
 import { AggregatePost } from "../../outputs/AggregatePost";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class AggregatePostResolver {
@@ -12,7 +12,7 @@ export class AggregatePostResolver {
     nullable: false
   })
   async aggregatePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregatePostArgs): Promise<AggregatePost> {
-    return ctx.prisma.post.aggregate({
+    return getPrismaFromContext(ctx).post.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });

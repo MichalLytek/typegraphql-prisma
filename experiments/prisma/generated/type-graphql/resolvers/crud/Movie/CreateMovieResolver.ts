@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { CreateMovieArgs } from "./args/CreateMovieArgs";
 import { Movie } from "../../../models/Movie";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class CreateMovieResolver {
@@ -9,6 +9,6 @@ export class CreateMovieResolver {
     nullable: false
   })
   async createMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateMovieArgs): Promise<Movie> {
-    return ctx.prisma.movie.create(args);
+    return getPrismaFromContext(ctx).movie.create(args);
   }
 }

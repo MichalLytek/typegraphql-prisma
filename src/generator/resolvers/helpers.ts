@@ -53,7 +53,7 @@ export function generateCrudResolverClassMethodDeclaration(
     statements:
       action.kind === DMMF.ModelAction.aggregate
         ? [
-            /* ts */ ` return ctx.prisma.${mapping.collectionName}.${action.kind}({
+            /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}({
               ...args,
               ...transformFields(graphqlFields(info as any)),
             });`,
@@ -63,7 +63,7 @@ export function generateCrudResolverClassMethodDeclaration(
             /* ts */ ` const { count, avg, sum, min, max } = transformFields(
               graphqlFields(info as any)
             );`,
-            /* ts */ ` return ctx.prisma.${mapping.collectionName}.${action.kind}({
+            /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}({
               ...args,
               ...Object.fromEntries(
                 Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
@@ -71,9 +71,9 @@ export function generateCrudResolverClassMethodDeclaration(
             });`,
           ]
         : [
-            /* ts */ ` return ctx.prisma.${mapping.collectionName}.${
-              action.kind
-            }(${action.argsTypeName ? "args" : ""});`,
+            /* ts */ ` return getPrismaFromContext(ctx).${
+              mapping.collectionName
+            }.${action.kind}(${action.argsTypeName ? "args" : ""});`,
           ],
   };
 }

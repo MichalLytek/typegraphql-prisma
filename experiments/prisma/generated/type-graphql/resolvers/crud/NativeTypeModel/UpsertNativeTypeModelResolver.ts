@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpsertNativeTypeModelArgs } from "./args/UpsertNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
 export class UpsertNativeTypeModelResolver {
@@ -9,6 +9,6 @@ export class UpsertNativeTypeModelResolver {
     nullable: false
   })
   async upsertNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertNativeTypeModelArgs): Promise<NativeTypeModel> {
-    return ctx.prisma.nativeTypeModel.upsert(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.upsert(args);
   }
 }

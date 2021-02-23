@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { AggregateCategoryArgs } from "./args/AggregateCategoryArgs";
 import { Category } from "../../../models/Category";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class AggregateCategoryResolver {
@@ -12,7 +12,7 @@ export class AggregateCategoryResolver {
     nullable: false
   })
   async aggregateCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateCategoryArgs): Promise<AggregateCategory> {
-    return ctx.prisma.category.aggregate({
+    return getPrismaFromContext(ctx).category.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });

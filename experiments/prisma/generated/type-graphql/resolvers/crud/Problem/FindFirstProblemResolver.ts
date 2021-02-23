@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindFirstProblemArgs } from "./args/FindFirstProblemArgs";
 import { Problem } from "../../../models/Problem";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Problem)
 export class FindFirstProblemResolver {
@@ -9,6 +9,6 @@ export class FindFirstProblemResolver {
     nullable: true
   })
   async findFirstProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstProblemArgs): Promise<Problem | null> {
-    return ctx.prisma.problem.findFirst(args);
+    return getPrismaFromContext(ctx).problem.findFirst(args);
   }
 }

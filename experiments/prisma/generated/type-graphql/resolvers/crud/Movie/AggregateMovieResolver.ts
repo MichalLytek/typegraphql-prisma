@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { AggregateMovieArgs } from "./args/AggregateMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class AggregateMovieResolver {
@@ -12,7 +12,7 @@ export class AggregateMovieResolver {
     nullable: false
   })
   async aggregateMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateMovieArgs): Promise<AggregateMovie> {
-    return ctx.prisma.movie.aggregate({
+    return getPrismaFromContext(ctx).movie.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });

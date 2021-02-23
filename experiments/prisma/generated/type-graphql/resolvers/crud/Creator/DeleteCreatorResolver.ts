@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { DeleteCreatorArgs } from "./args/DeleteCreatorArgs";
 import { Creator } from "../../../models/Creator";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class DeleteCreatorResolver {
@@ -9,6 +9,6 @@ export class DeleteCreatorResolver {
     nullable: true
   })
   async deleteCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteCreatorArgs): Promise<Creator | null> {
-    return ctx.prisma.creator.delete(args);
+    return getPrismaFromContext(ctx).creator.delete(args);
   }
 }

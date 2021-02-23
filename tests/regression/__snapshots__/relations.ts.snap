@@ -5,6 +5,7 @@ exports[`relations resolvers generation should properly generate composite keys 
 import { Project } from \\"../../../models/Project\\";
 import { User } from \\"../../../models/User\\";
 import { UsersOnProjects } from \\"../../../models/UsersOnProjects\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => UsersOnProjects)
 export class UsersOnProjectsRelationsResolver {
@@ -12,7 +13,7 @@ export class UsersOnProjectsRelationsResolver {
     nullable: false
   })
   async project(@TypeGraphQL.Root() usersOnProjects: UsersOnProjects, @TypeGraphQL.Ctx() ctx: any): Promise<Project> {
-    return ctx.prisma.usersOnProjects.findUnique({
+    return getPrismaFromContext(ctx).usersOnProjects.findUnique({
       where: {
         userId_projectId: {
           userId: usersOnProjects.userId,
@@ -26,7 +27,7 @@ export class UsersOnProjectsRelationsResolver {
     nullable: false
   })
   async user(@TypeGraphQL.Root() usersOnProjects: UsersOnProjects, @TypeGraphQL.Ctx() ctx: any): Promise<User> {
-    return ctx.prisma.usersOnProjects.findUnique({
+    return getPrismaFromContext(ctx).usersOnProjects.findUnique({
       where: {
         userId_projectId: {
           userId: usersOnProjects.userId,
@@ -111,6 +112,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class MovieRelationsResolver {
@@ -118,7 +120,7 @@ export class MovieRelationsResolver {
     nullable: false
   })
   async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
-    return ctx.prisma.movie.findUnique({
+    return getPrismaFromContext(ctx).movie.findUnique({
       where: {
         directorFirstName_directorLastName_title: {
           directorFirstName: movie.directorFirstName,
@@ -137,6 +139,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
 import { DirectorMoviesArgs } from \\"./args/DirectorMoviesArgs\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class DirectorRelationsResolver {
@@ -144,7 +147,7 @@ export class DirectorRelationsResolver {
     nullable: false
   })
   async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[]> {
-    return ctx.prisma.director.findUnique({
+    return getPrismaFromContext(ctx).director.findUnique({
       where: {
         firstName_lastName: {
           firstName: director.firstName,
@@ -161,6 +164,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {
@@ -168,7 +172,7 @@ export class PostRelationsResolver {
     nullable: true
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
-    return ctx.prisma.post.findUnique({
+    return getPrismaFromContext(ctx).post.findUnique({
       where: {
         uuid: post.uuid,
       },
@@ -183,6 +187,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -190,7 +195,7 @@ export class UserRelationsResolver {
     nullable: false
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[]> {
-    return ctx.prisma.user.findUnique({
+    return getPrismaFromContext(ctx).user.findUnique({
       where: {
         id: user.id,
       },
@@ -204,6 +209,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {
@@ -212,7 +218,7 @@ export class PostRelationsResolver {
     description: \\"author field doc\\"
   })
   async postAuthor(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
-    return ctx.prisma.post.findUnique({
+    return getPrismaFromContext(ctx).post.findUnique({
       where: {
         uuid: post.uuid,
       },
@@ -227,6 +233,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -234,7 +241,7 @@ export class UserRelationsResolver {
     nullable: false
   })
   async userPosts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[]> {
-    return ctx.prisma.user.findUnique({
+    return getPrismaFromContext(ctx).user.findUnique({
       where: {
         id: user.id,
       },
@@ -292,6 +299,7 @@ exports[`relations resolvers generation should properly generate resolver and ar
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -299,7 +307,7 @@ export class UserRelationsResolver {
     nullable: false
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[]> {
-    return ctx.prisma.user.findUnique({
+    return getPrismaFromContext(ctx).user.findUnique({
       where: {
         id: user.id,
       },
@@ -313,6 +321,7 @@ exports[`relations resolvers generation should properly generate resolver class 
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Address } from \\"../../../models/Address\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -320,7 +329,7 @@ export class UserRelationsResolver {
     nullable: true
   })
   async address(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<Address | null> {
-    return ctx.prisma.user.findUnique({
+    return getPrismaFromContext(ctx).user.findUnique({
       where: {
         id: user.id,
       },
@@ -334,6 +343,7 @@ exports[`relations resolvers generation should properly generate resolvers class
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {
@@ -342,7 +352,7 @@ export class PostRelationsResolver {
     description: \\"author field doc\\"
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
-    return ctx.prisma.post.findUnique({
+    return getPrismaFromContext(ctx).post.findUnique({
       where: {
         uuid: post.uuid,
       },
@@ -357,6 +367,7 @@ exports[`relations resolvers generation should properly generate resolvers class
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
+import { transformFields, getPrismaFromContext } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -364,7 +375,7 @@ export class UserRelationsResolver {
     nullable: false
   })
   async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[]> {
-    return ctx.prisma.user.findUnique({
+    return getPrismaFromContext(ctx).user.findUnique({
       where: {
         id: user.id,
       },

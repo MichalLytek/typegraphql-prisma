@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { AggregateDirectorArgs } from "./args/AggregateDirectorArgs";
 import { Director } from "../../../models/Director";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class AggregateDirectorResolver {
@@ -12,7 +12,7 @@ export class AggregateDirectorResolver {
     nullable: false
   })
   async aggregateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateDirectorArgs): Promise<AggregateDirector> {
-    return ctx.prisma.director.aggregate({
+    return getPrismaFromContext(ctx).director.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });

@@ -3,6 +3,7 @@ import { Creator } from "../../../models/Creator";
 import { Problem } from "../../../models/Problem";
 import { CreatorLikesArgs } from "./args/CreatorLikesArgs";
 import { CreatorProblemsArgs } from "./args/CreatorProblemsArgs";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class CreatorRelationsResolver {
@@ -10,7 +11,7 @@ export class CreatorRelationsResolver {
     nullable: false
   })
   async likes(@TypeGraphQL.Root() creator: Creator, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatorLikesArgs): Promise<Problem[]> {
-    return ctx.prisma.creator.findUnique({
+    return getPrismaFromContext(ctx).creator.findUnique({
       where: {
         id: creator.id,
       },
@@ -21,7 +22,7 @@ export class CreatorRelationsResolver {
     nullable: false
   })
   async problems(@TypeGraphQL.Root() creator: Creator, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatorProblemsArgs): Promise<Problem[]> {
-    return ctx.prisma.creator.findUnique({
+    return getPrismaFromContext(ctx).creator.findUnique({
       where: {
         id: creator.id,
       },

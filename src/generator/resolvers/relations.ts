@@ -12,6 +12,7 @@ import {
   generateTypeGraphQLImport,
   generateArgsImports,
   generateModelsImports,
+  generateHelpersFileImport,
 } from "../imports";
 import { DmmfDocument } from "../dmmf/dmmf-document";
 import { DMMF } from "../dmmf/types";
@@ -63,6 +64,7 @@ export default function generateRelationsResolverClassesFromModel(
     .filter(it => it.argsTypeName !== undefined)
     .map(it => it.argsTypeName!);
   generateArgsImports(sourceFile, argTypeNames, 0);
+  generateHelpersFileImport(sourceFile, 3);
 
   sourceFile.addClass({
     name: resolverName,
@@ -136,7 +138,9 @@ export default function generateRelationsResolverClassesFromModel(
           ],
           // TODO: refactor to AST
           statements: [
-            `return ctx.prisma.${camelCase(model.name)}.findUnique({
+            /* ts */ `return getPrismaFromContext(ctx).${camelCase(
+              model.name,
+            )}.findUnique({
               where: {${whereConditionString}},
             }).${field.name}(${field.argsTypeName ? "args" : "{}"});`,
           ],

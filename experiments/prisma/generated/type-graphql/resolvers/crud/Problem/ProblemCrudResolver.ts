@@ -13,7 +13,7 @@ import { GroupByProblemArgs } from "./args/GroupByProblemArgs";
 import { UpdateManyProblemArgs } from "./args/UpdateManyProblemArgs";
 import { UpdateProblemArgs } from "./args/UpdateProblemArgs";
 import { UpsertProblemArgs } from "./args/UpsertProblemArgs";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 import { Problem } from "../../../models/Problem";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateProblem } from "../../outputs/AggregateProblem";
@@ -25,77 +25,77 @@ export class ProblemCrudResolver {
     nullable: true
   })
   async problem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueProblemArgs): Promise<Problem | null> {
-    return ctx.prisma.problem.findUnique(args);
+    return getPrismaFromContext(ctx).problem.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Problem, {
     nullable: true
   })
   async findFirstProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstProblemArgs): Promise<Problem | null> {
-    return ctx.prisma.problem.findFirst(args);
+    return getPrismaFromContext(ctx).problem.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [Problem], {
     nullable: false
   })
   async problems(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyProblemArgs): Promise<Problem[]> {
-    return ctx.prisma.problem.findMany(args);
+    return getPrismaFromContext(ctx).problem.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Problem, {
     nullable: false
   })
   async createProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateProblemArgs): Promise<Problem> {
-    return ctx.prisma.problem.create(args);
+    return getPrismaFromContext(ctx).problem.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async createManyProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyProblemArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.problem.createMany(args);
+    return getPrismaFromContext(ctx).problem.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Problem, {
     nullable: true
   })
   async deleteProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteProblemArgs): Promise<Problem | null> {
-    return ctx.prisma.problem.delete(args);
+    return getPrismaFromContext(ctx).problem.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Problem, {
     nullable: true
   })
   async updateProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateProblemArgs): Promise<Problem | null> {
-    return ctx.prisma.problem.update(args);
+    return getPrismaFromContext(ctx).problem.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async deleteManyProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyProblemArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.problem.deleteMany(args);
+    return getPrismaFromContext(ctx).problem.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async updateManyProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyProblemArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.problem.updateMany(args);
+    return getPrismaFromContext(ctx).problem.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Problem, {
     nullable: false
   })
   async upsertProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertProblemArgs): Promise<Problem> {
-    return ctx.prisma.problem.upsert(args);
+    return getPrismaFromContext(ctx).problem.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregateProblem, {
     nullable: false
   })
   async aggregateProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateProblemArgs): Promise<AggregateProblem> {
-    return ctx.prisma.problem.aggregate({
+    return getPrismaFromContext(ctx).problem.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });
@@ -108,7 +108,7 @@ export class ProblemCrudResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.problem.groupBy({
+    return getPrismaFromContext(ctx).problem.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

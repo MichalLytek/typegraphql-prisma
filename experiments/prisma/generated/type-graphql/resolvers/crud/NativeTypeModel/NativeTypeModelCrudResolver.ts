@@ -13,7 +13,7 @@ import { GroupByNativeTypeModelArgs } from "./args/GroupByNativeTypeModelArgs";
 import { UpdateManyNativeTypeModelArgs } from "./args/UpdateManyNativeTypeModelArgs";
 import { UpdateNativeTypeModelArgs } from "./args/UpdateNativeTypeModelArgs";
 import { UpsertNativeTypeModelArgs } from "./args/UpsertNativeTypeModelArgs";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateNativeTypeModel } from "../../outputs/AggregateNativeTypeModel";
@@ -25,77 +25,77 @@ export class NativeTypeModelCrudResolver {
     nullable: true
   })
   async nativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueNativeTypeModelArgs): Promise<NativeTypeModel | null> {
-    return ctx.prisma.nativeTypeModel.findUnique(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => NativeTypeModel, {
     nullable: true
   })
   async findFirstNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstNativeTypeModelArgs): Promise<NativeTypeModel | null> {
-    return ctx.prisma.nativeTypeModel.findFirst(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [NativeTypeModel], {
     nullable: false
   })
   async nativeTypeModels(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyNativeTypeModelArgs): Promise<NativeTypeModel[]> {
-    return ctx.prisma.nativeTypeModel.findMany(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => NativeTypeModel, {
     nullable: false
   })
   async createNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateNativeTypeModelArgs): Promise<NativeTypeModel> {
-    return ctx.prisma.nativeTypeModel.create(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async createManyNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyNativeTypeModelArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.nativeTypeModel.createMany(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => NativeTypeModel, {
     nullable: true
   })
   async deleteNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteNativeTypeModelArgs): Promise<NativeTypeModel | null> {
-    return ctx.prisma.nativeTypeModel.delete(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => NativeTypeModel, {
     nullable: true
   })
   async updateNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateNativeTypeModelArgs): Promise<NativeTypeModel | null> {
-    return ctx.prisma.nativeTypeModel.update(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async deleteManyNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyNativeTypeModelArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.nativeTypeModel.deleteMany(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async updateManyNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyNativeTypeModelArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.nativeTypeModel.updateMany(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => NativeTypeModel, {
     nullable: false
   })
   async upsertNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertNativeTypeModelArgs): Promise<NativeTypeModel> {
-    return ctx.prisma.nativeTypeModel.upsert(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregateNativeTypeModel, {
     nullable: false
   })
   async aggregateNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateNativeTypeModelArgs): Promise<AggregateNativeTypeModel> {
-    return ctx.prisma.nativeTypeModel.aggregate({
+    return getPrismaFromContext(ctx).nativeTypeModel.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });
@@ -108,7 +108,7 @@ export class NativeTypeModelCrudResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.nativeTypeModel.groupBy({
+    return getPrismaFromContext(ctx).nativeTypeModel.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByClientArgs } from "./args/GroupByClientArgs";
 import { Client } from "../../../models/Client";
 import { ClientGroupBy } from "../../outputs/ClientGroupBy";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class GroupByClientResolver {
@@ -15,7 +15,7 @@ export class GroupByClientResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.user.groupBy({
+    return getPrismaFromContext(ctx).user.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByNativeTypeModelArgs } from "./args/GroupByNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
 import { NativeTypeModelGroupBy } from "../../outputs/NativeTypeModelGroupBy";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
 export class GroupByNativeTypeModelResolver {
@@ -15,7 +15,7 @@ export class GroupByNativeTypeModelResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.nativeTypeModel.groupBy({
+    return getPrismaFromContext(ctx).nativeTypeModel.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

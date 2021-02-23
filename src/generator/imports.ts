@@ -65,7 +65,7 @@ export function generateHelpersFileImport(sourceFile: SourceFile, level = 0) {
     moduleSpecifier:
       (level === 0 ? "./" : "") +
       path.posix.join(...Array(level).fill(".."), "helpers"),
-    namedImports: ["transformFields"],
+    namedImports: ["transformFields", "getPrismaFromContext"],
   });
 }
 

@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
 import { Post } from "../../../models/Post";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class UpsertPostResolver {
@@ -9,6 +9,6 @@ export class UpsertPostResolver {
     nullable: false
   })
   async upsertPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertPostArgs): Promise<Post> {
-    return ctx.prisma.post.upsert(args);
+    return getPrismaFromContext(ctx).post.upsert(args);
   }
 }

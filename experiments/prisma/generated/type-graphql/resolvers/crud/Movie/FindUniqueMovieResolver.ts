@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindUniqueMovieArgs } from "./args/FindUniqueMovieArgs";
 import { Movie } from "../../../models/Movie";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class FindUniqueMovieResolver {
@@ -9,6 +9,6 @@ export class FindUniqueMovieResolver {
     nullable: true
   })
   async movie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueMovieArgs): Promise<Movie | null> {
-    return ctx.prisma.movie.findUnique(args);
+    return getPrismaFromContext(ctx).movie.findUnique(args);
   }
 }

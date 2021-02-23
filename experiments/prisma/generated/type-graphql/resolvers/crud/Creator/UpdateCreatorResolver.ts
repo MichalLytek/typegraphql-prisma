@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpdateCreatorArgs } from "./args/UpdateCreatorArgs";
 import { Creator } from "../../../models/Creator";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class UpdateCreatorResolver {
@@ -9,6 +9,6 @@ export class UpdateCreatorResolver {
     nullable: true
   })
   async updateCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateCreatorArgs): Promise<Creator | null> {
-    return ctx.prisma.creator.update(args);
+    return getPrismaFromContext(ctx).creator.update(args);
   }
 }

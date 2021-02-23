@@ -13,7 +13,7 @@ import { GroupByCreatorArgs } from "./args/GroupByCreatorArgs";
 import { UpdateCreatorArgs } from "./args/UpdateCreatorArgs";
 import { UpdateManyCreatorArgs } from "./args/UpdateManyCreatorArgs";
 import { UpsertCreatorArgs } from "./args/UpsertCreatorArgs";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 import { Creator } from "../../../models/Creator";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateCreator } from "../../outputs/AggregateCreator";
@@ -25,77 +25,77 @@ export class CreatorCrudResolver {
     nullable: true
   })
   async creator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueCreatorArgs): Promise<Creator | null> {
-    return ctx.prisma.creator.findUnique(args);
+    return getPrismaFromContext(ctx).creator.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Creator, {
     nullable: true
   })
   async findFirstCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstCreatorArgs): Promise<Creator | null> {
-    return ctx.prisma.creator.findFirst(args);
+    return getPrismaFromContext(ctx).creator.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [Creator], {
     nullable: false
   })
   async creators(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyCreatorArgs): Promise<Creator[]> {
-    return ctx.prisma.creator.findMany(args);
+    return getPrismaFromContext(ctx).creator.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Creator, {
     nullable: false
   })
   async createCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateCreatorArgs): Promise<Creator> {
-    return ctx.prisma.creator.create(args);
+    return getPrismaFromContext(ctx).creator.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async createManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyCreatorArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.creator.createMany(args);
+    return getPrismaFromContext(ctx).creator.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Creator, {
     nullable: true
   })
   async deleteCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteCreatorArgs): Promise<Creator | null> {
-    return ctx.prisma.creator.delete(args);
+    return getPrismaFromContext(ctx).creator.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Creator, {
     nullable: true
   })
   async updateCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateCreatorArgs): Promise<Creator | null> {
-    return ctx.prisma.creator.update(args);
+    return getPrismaFromContext(ctx).creator.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async deleteManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCreatorArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.creator.deleteMany(args);
+    return getPrismaFromContext(ctx).creator.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async updateManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCreatorArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.creator.updateMany(args);
+    return getPrismaFromContext(ctx).creator.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Creator, {
     nullable: false
   })
   async upsertCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertCreatorArgs): Promise<Creator> {
-    return ctx.prisma.creator.upsert(args);
+    return getPrismaFromContext(ctx).creator.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregateCreator, {
     nullable: false
   })
   async aggregateCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateCreatorArgs): Promise<AggregateCreator> {
-    return ctx.prisma.creator.aggregate({
+    return getPrismaFromContext(ctx).creator.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });
@@ -108,7 +108,7 @@ export class CreatorCrudResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.creator.groupBy({
+    return getPrismaFromContext(ctx).creator.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { DeleteManyMovieArgs } from "./args/DeleteManyMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class DeleteManyMovieResolver {
@@ -10,6 +10,6 @@ export class DeleteManyMovieResolver {
     nullable: false
   })
   async deleteManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyMovieArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.movie.deleteMany(args);
+    return getPrismaFromContext(ctx).movie.deleteMany(args);
   }
 }

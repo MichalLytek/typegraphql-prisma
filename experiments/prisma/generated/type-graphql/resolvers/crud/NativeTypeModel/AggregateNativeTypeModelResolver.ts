@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { AggregateNativeTypeModelArgs } from "./args/AggregateNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
 import { AggregateNativeTypeModel } from "../../outputs/AggregateNativeTypeModel";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
 export class AggregateNativeTypeModelResolver {
@@ -12,7 +12,7 @@ export class AggregateNativeTypeModelResolver {
     nullable: false
   })
   async aggregateNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateNativeTypeModelArgs): Promise<AggregateNativeTypeModel> {
-    return ctx.prisma.nativeTypeModel.aggregate({
+    return getPrismaFromContext(ctx).nativeTypeModel.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });

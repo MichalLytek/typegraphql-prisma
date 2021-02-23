@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { Director } from "../../../models/Director";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class UpdateDirectorResolver {
@@ -9,6 +9,6 @@ export class UpdateDirectorResolver {
     nullable: true
   })
   async updateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateDirectorArgs): Promise<Director | null> {
-    return ctx.prisma.director.update(args);
+    return getPrismaFromContext(ctx).director.update(args);
   }
 }

@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { DeleteManyPostArgs } from "./args/DeleteManyPostArgs";
 import { Post } from "../../../models/Post";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class DeleteManyPostResolver {
@@ -10,6 +10,6 @@ export class DeleteManyPostResolver {
     nullable: false
   })
   async deleteManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyPostArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.post.deleteMany(args);
+    return getPrismaFromContext(ctx).post.deleteMany(args);
   }
 }

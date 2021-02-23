@@ -13,7 +13,7 @@ import { GroupByCategoryArgs } from "./args/GroupByCategoryArgs";
 import { UpdateCategoryArgs } from "./args/UpdateCategoryArgs";
 import { UpdateManyCategoryArgs } from "./args/UpdateManyCategoryArgs";
 import { UpsertCategoryArgs } from "./args/UpsertCategoryArgs";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 import { Category } from "../../../models/Category";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
@@ -25,77 +25,77 @@ export class CategoryCrudResolver {
     nullable: true
   })
   async category(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueCategoryArgs): Promise<Category | null> {
-    return ctx.prisma.category.findUnique(args);
+    return getPrismaFromContext(ctx).category.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Category, {
     nullable: true
   })
   async findFirstCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstCategoryArgs): Promise<Category | null> {
-    return ctx.prisma.category.findFirst(args);
+    return getPrismaFromContext(ctx).category.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [Category], {
     nullable: false
   })
   async categories(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyCategoryArgs): Promise<Category[]> {
-    return ctx.prisma.category.findMany(args);
+    return getPrismaFromContext(ctx).category.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {
     nullable: false
   })
   async createCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateCategoryArgs): Promise<Category> {
-    return ctx.prisma.category.create(args);
+    return getPrismaFromContext(ctx).category.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async createManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyCategoryArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.category.createMany(args);
+    return getPrismaFromContext(ctx).category.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {
     nullable: true
   })
   async deleteCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteCategoryArgs): Promise<Category | null> {
-    return ctx.prisma.category.delete(args);
+    return getPrismaFromContext(ctx).category.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {
     nullable: true
   })
   async updateCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateCategoryArgs): Promise<Category | null> {
-    return ctx.prisma.category.update(args);
+    return getPrismaFromContext(ctx).category.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async deleteManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyCategoryArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.category.deleteMany(args);
+    return getPrismaFromContext(ctx).category.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async updateManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyCategoryArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.category.updateMany(args);
+    return getPrismaFromContext(ctx).category.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Category, {
     nullable: false
   })
   async upsertCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertCategoryArgs): Promise<Category> {
-    return ctx.prisma.category.upsert(args);
+    return getPrismaFromContext(ctx).category.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregateCategory, {
     nullable: false
   })
   async aggregateCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateCategoryArgs): Promise<AggregateCategory> {
-    return ctx.prisma.category.aggregate({
+    return getPrismaFromContext(ctx).category.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });
@@ -108,7 +108,7 @@ export class CategoryCrudResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.category.groupBy({
+    return getPrismaFromContext(ctx).category.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

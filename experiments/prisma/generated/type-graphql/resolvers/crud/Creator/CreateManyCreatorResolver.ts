@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { CreateManyCreatorArgs } from "./args/CreateManyCreatorArgs";
 import { Creator } from "../../../models/Creator";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class CreateManyCreatorResolver {
@@ -10,6 +10,6 @@ export class CreateManyCreatorResolver {
     nullable: false
   })
   async createManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyCreatorArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.creator.createMany(args);
+    return getPrismaFromContext(ctx).creator.createMany(args);
   }
 }

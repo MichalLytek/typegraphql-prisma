@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByCreatorArgs } from "./args/GroupByCreatorArgs";
 import { Creator } from "../../../models/Creator";
 import { CreatorGroupBy } from "../../outputs/CreatorGroupBy";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class GroupByCreatorResolver {
@@ -15,7 +15,7 @@ export class GroupByCreatorResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.creator.groupBy({
+    return getPrismaFromContext(ctx).creator.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

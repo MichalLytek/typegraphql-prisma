@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindFirstMovieArgs } from "./args/FindFirstMovieArgs";
 import { Movie } from "../../../models/Movie";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class FindFirstMovieResolver {
@@ -9,6 +9,6 @@ export class FindFirstMovieResolver {
     nullable: true
   })
   async findFirstMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstMovieArgs): Promise<Movie | null> {
-    return ctx.prisma.movie.findFirst(args);
+    return getPrismaFromContext(ctx).movie.findFirst(args);
   }
 }

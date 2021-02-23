@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindFirstCategoryArgs } from "./args/FindFirstCategoryArgs";
 import { Category } from "../../../models/Category";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class FindFirstCategoryResolver {
@@ -9,6 +9,6 @@ export class FindFirstCategoryResolver {
     nullable: true
   })
   async findFirstCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstCategoryArgs): Promise<Category | null> {
-    return ctx.prisma.category.findFirst(args);
+    return getPrismaFromContext(ctx).category.findFirst(args);
   }
 }

@@ -13,7 +13,7 @@ import { GroupByPostArgs } from "./args/GroupByPostArgs";
 import { UpdateManyPostArgs } from "./args/UpdateManyPostArgs";
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 import { Post } from "../../../models/Post";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregatePost } from "../../outputs/AggregatePost";
@@ -25,77 +25,77 @@ export class PostCrudResolver {
     nullable: true
   })
   async post(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniquePostArgs): Promise<Post | null> {
-    return ctx.prisma.post.findUnique(args);
+    return getPrismaFromContext(ctx).post.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Post, {
     nullable: true
   })
   async findFirstPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstPostArgs): Promise<Post | null> {
-    return ctx.prisma.post.findFirst(args);
+    return getPrismaFromContext(ctx).post.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [Post], {
     nullable: false
   })
   async posts(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyPostArgs): Promise<Post[]> {
-    return ctx.prisma.post.findMany(args);
+    return getPrismaFromContext(ctx).post.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Post, {
     nullable: false
   })
   async createPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatePostArgs): Promise<Post> {
-    return ctx.prisma.post.create(args);
+    return getPrismaFromContext(ctx).post.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async createManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyPostArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.post.createMany(args);
+    return getPrismaFromContext(ctx).post.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Post, {
     nullable: true
   })
   async deletePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeletePostArgs): Promise<Post | null> {
-    return ctx.prisma.post.delete(args);
+    return getPrismaFromContext(ctx).post.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Post, {
     nullable: true
   })
   async updatePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdatePostArgs): Promise<Post | null> {
-    return ctx.prisma.post.update(args);
+    return getPrismaFromContext(ctx).post.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async deleteManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyPostArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.post.deleteMany(args);
+    return getPrismaFromContext(ctx).post.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async updateManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPostArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.post.updateMany(args);
+    return getPrismaFromContext(ctx).post.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Post, {
     nullable: false
   })
   async upsertPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertPostArgs): Promise<Post> {
-    return ctx.prisma.post.upsert(args);
+    return getPrismaFromContext(ctx).post.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregatePost, {
     nullable: false
   })
   async aggregatePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregatePostArgs): Promise<AggregatePost> {
-    return ctx.prisma.post.aggregate({
+    return getPrismaFromContext(ctx).post.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });
@@ -108,7 +108,7 @@ export class PostCrudResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.post.groupBy({
+    return getPrismaFromContext(ctx).post.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

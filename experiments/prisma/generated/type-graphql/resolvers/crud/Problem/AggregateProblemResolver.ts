@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { AggregateProblemArgs } from "./args/AggregateProblemArgs";
 import { Problem } from "../../../models/Problem";
 import { AggregateProblem } from "../../outputs/AggregateProblem";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Problem)
 export class AggregateProblemResolver {
@@ -12,7 +12,7 @@ export class AggregateProblemResolver {
     nullable: false
   })
   async aggregateProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateProblemArgs): Promise<AggregateProblem> {
-    return ctx.prisma.problem.aggregate({
+    return getPrismaFromContext(ctx).problem.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });

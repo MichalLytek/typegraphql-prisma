@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { CreateManyCategoryArgs } from "./args/CreateManyCategoryArgs";
 import { Category } from "../../../models/Category";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class CreateManyCategoryResolver {
@@ -10,6 +10,6 @@ export class CreateManyCategoryResolver {
     nullable: false
   })
   async createManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyCategoryArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.category.createMany(args);
+    return getPrismaFromContext(ctx).category.createMany(args);
   }
 }

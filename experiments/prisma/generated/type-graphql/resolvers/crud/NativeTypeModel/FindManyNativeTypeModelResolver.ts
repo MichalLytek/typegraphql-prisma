@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindManyNativeTypeModelArgs } from "./args/FindManyNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
 export class FindManyNativeTypeModelResolver {
@@ -9,6 +9,6 @@ export class FindManyNativeTypeModelResolver {
     nullable: false
   })
   async nativeTypeModels(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyNativeTypeModelArgs): Promise<NativeTypeModel[]> {
-    return ctx.prisma.nativeTypeModel.findMany(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.findMany(args);
   }
 }

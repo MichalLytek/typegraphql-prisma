@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByMovieArgs } from "./args/GroupByMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { MovieGroupBy } from "../../outputs/MovieGroupBy";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class GroupByMovieResolver {
@@ -15,7 +15,7 @@ export class GroupByMovieResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.movie.groupBy({
+    return getPrismaFromContext(ctx).movie.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

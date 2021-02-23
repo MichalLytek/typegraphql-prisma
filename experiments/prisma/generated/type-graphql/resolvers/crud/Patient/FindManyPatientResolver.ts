@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindManyPatientArgs } from "./args/FindManyPatientArgs";
 import { Patient } from "../../../models/Patient";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Patient)
 export class FindManyPatientResolver {
@@ -9,6 +9,6 @@ export class FindManyPatientResolver {
     nullable: false
   })
   async patients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyPatientArgs): Promise<Patient[]> {
-    return ctx.prisma.patient.findMany(args);
+    return getPrismaFromContext(ctx).patient.findMany(args);
   }
 }

@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { DeleteManyNativeTypeModelArgs } from "./args/DeleteManyNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
 export class DeleteManyNativeTypeModelResolver {
@@ -10,6 +10,6 @@ export class DeleteManyNativeTypeModelResolver {
     nullable: false
   })
   async deleteManyNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyNativeTypeModelArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.nativeTypeModel.deleteMany(args);
+    return getPrismaFromContext(ctx).nativeTypeModel.deleteMany(args);
   }
 }

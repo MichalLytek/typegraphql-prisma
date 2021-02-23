@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { CreateManyPostArgs } from "./args/CreateManyPostArgs";
 import { Post } from "../../../models/Post";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class CreateManyPostResolver {
@@ -10,6 +10,6 @@ export class CreateManyPostResolver {
     nullable: false
   })
   async createManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyPostArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.post.createMany(args);
+    return getPrismaFromContext(ctx).post.createMany(args);
   }
 }

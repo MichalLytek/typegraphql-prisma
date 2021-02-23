@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByPostArgs } from "./args/GroupByPostArgs";
 import { Post } from "../../../models/Post";
 import { PostGroupBy } from "../../outputs/PostGroupBy";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class GroupByPostResolver {
@@ -15,7 +15,7 @@ export class GroupByPostResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.post.groupBy({
+    return getPrismaFromContext(ctx).post.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

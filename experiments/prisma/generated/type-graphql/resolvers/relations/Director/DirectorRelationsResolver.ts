@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { Director } from "../../../models/Director";
 import { Movie } from "../../../models/Movie";
 import { DirectorMoviesArgs } from "./args/DirectorMoviesArgs";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class DirectorRelationsResolver {
@@ -9,7 +10,7 @@ export class DirectorRelationsResolver {
     nullable: false
   })
   async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[]> {
-    return ctx.prisma.director.findUnique({
+    return getPrismaFromContext(ctx).director.findUnique({
       where: {
         firstName_lastName: {
           firstName: director.firstName,

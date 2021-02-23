@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { DeleteProblemArgs } from "./args/DeleteProblemArgs";
 import { Problem } from "../../../models/Problem";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Problem)
 export class DeleteProblemResolver {
@@ -9,6 +9,6 @@ export class DeleteProblemResolver {
     nullable: true
   })
   async deleteProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteProblemArgs): Promise<Problem | null> {
-    return ctx.prisma.problem.delete(args);
+    return getPrismaFromContext(ctx).problem.delete(args);
   }
 }

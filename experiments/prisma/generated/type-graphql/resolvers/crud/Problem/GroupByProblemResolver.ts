@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByProblemArgs } from "./args/GroupByProblemArgs";
 import { Problem } from "../../../models/Problem";
 import { ProblemGroupBy } from "../../outputs/ProblemGroupBy";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Problem)
 export class GroupByProblemResolver {
@@ -15,7 +15,7 @@ export class GroupByProblemResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.problem.groupBy({
+    return getPrismaFromContext(ctx).problem.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { CreateCategoryArgs } from "./args/CreateCategoryArgs";
 import { Category } from "../../../models/Category";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class CreateCategoryResolver {
@@ -9,6 +9,6 @@ export class CreateCategoryResolver {
     nullable: false
   })
   async createCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateCategoryArgs): Promise<Category> {
-    return ctx.prisma.category.create(args);
+    return getPrismaFromContext(ctx).category.create(args);
   }
 }

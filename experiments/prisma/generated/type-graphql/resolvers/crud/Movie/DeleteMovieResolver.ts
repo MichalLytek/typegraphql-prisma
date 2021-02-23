@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { DeleteMovieArgs } from "./args/DeleteMovieArgs";
 import { Movie } from "../../../models/Movie";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class DeleteMovieResolver {
@@ -9,6 +9,6 @@ export class DeleteMovieResolver {
     nullable: true
   })
   async deleteMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteMovieArgs): Promise<Movie | null> {
-    return ctx.prisma.movie.delete(args);
+    return getPrismaFromContext(ctx).movie.delete(args);
   }
 }

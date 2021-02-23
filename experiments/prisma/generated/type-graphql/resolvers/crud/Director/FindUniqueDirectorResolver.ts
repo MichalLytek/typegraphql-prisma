@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindUniqueDirectorArgs } from "./args/FindUniqueDirectorArgs";
 import { Director } from "../../../models/Director";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class FindUniqueDirectorResolver {
@@ -9,6 +9,6 @@ export class FindUniqueDirectorResolver {
     nullable: true
   })
   async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniqueDirectorArgs): Promise<Director | null> {
-    return ctx.prisma.director.findUnique(args);
+    return getPrismaFromContext(ctx).director.findUnique(args);
   }
 }

@@ -13,7 +13,7 @@ import { GroupByPatientArgs } from "./args/GroupByPatientArgs";
 import { UpdateManyPatientArgs } from "./args/UpdateManyPatientArgs";
 import { UpdatePatientArgs } from "./args/UpdatePatientArgs";
 import { UpsertPatientArgs } from "./args/UpsertPatientArgs";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 import { Patient } from "../../../models/Patient";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
@@ -25,77 +25,77 @@ export class PatientCrudResolver {
     nullable: true
   })
   async patient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindUniquePatientArgs): Promise<Patient | null> {
-    return ctx.prisma.patient.findUnique(args);
+    return getPrismaFromContext(ctx).patient.findUnique(args);
   }
 
   @TypeGraphQL.Query(_returns => Patient, {
     nullable: true
   })
   async findFirstPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstPatientArgs): Promise<Patient | null> {
-    return ctx.prisma.patient.findFirst(args);
+    return getPrismaFromContext(ctx).patient.findFirst(args);
   }
 
   @TypeGraphQL.Query(_returns => [Patient], {
     nullable: false
   })
   async patients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyPatientArgs): Promise<Patient[]> {
-    return ctx.prisma.patient.findMany(args);
+    return getPrismaFromContext(ctx).patient.findMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {
     nullable: false
   })
   async createPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreatePatientArgs): Promise<Patient> {
-    return ctx.prisma.patient.create(args);
+    return getPrismaFromContext(ctx).patient.create(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async createManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateManyPatientArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.patient.createMany(args);
+    return getPrismaFromContext(ctx).patient.createMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {
     nullable: true
   })
   async deletePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeletePatientArgs): Promise<Patient | null> {
-    return ctx.prisma.patient.delete(args);
+    return getPrismaFromContext(ctx).patient.delete(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {
     nullable: true
   })
   async updatePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdatePatientArgs): Promise<Patient | null> {
-    return ctx.prisma.patient.update(args);
+    return getPrismaFromContext(ctx).patient.update(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async deleteManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyPatientArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.patient.deleteMany(args);
+    return getPrismaFromContext(ctx).patient.deleteMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
   async updateManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPatientArgs): Promise<AffectedRowsOutput> {
-    return ctx.prisma.patient.updateMany(args);
+    return getPrismaFromContext(ctx).patient.updateMany(args);
   }
 
   @TypeGraphQL.Mutation(_returns => Patient, {
     nullable: false
   })
   async upsertPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertPatientArgs): Promise<Patient> {
-    return ctx.prisma.patient.upsert(args);
+    return getPrismaFromContext(ctx).patient.upsert(args);
   }
 
   @TypeGraphQL.Query(_returns => AggregatePatient, {
     nullable: false
   })
   async aggregatePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregatePatientArgs): Promise<AggregatePatient> {
-    return ctx.prisma.patient.aggregate({
+    return getPrismaFromContext(ctx).patient.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
     });
@@ -108,7 +108,7 @@ export class PatientCrudResolver {
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
-    return ctx.prisma.patient.groupBy({
+    return getPrismaFromContext(ctx).patient.groupBy({
       ...args,
       ...Object.fromEntries(
         Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)

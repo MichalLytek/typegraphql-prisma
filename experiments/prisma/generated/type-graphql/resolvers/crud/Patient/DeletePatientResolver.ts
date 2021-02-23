@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { DeletePatientArgs } from "./args/DeletePatientArgs";
 import { Patient } from "../../../models/Patient";
-import { transformFields } from "../../../helpers";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Patient)
 export class DeletePatientResolver {
@@ -9,6 +9,6 @@ export class DeletePatientResolver {
     nullable: true
   })
   async deletePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeletePatientArgs): Promise<Patient | null> {
-    return ctx.prisma.patient.delete(args);
+    return getPrismaFromContext(ctx).patient.delete(args);
   }
 }
