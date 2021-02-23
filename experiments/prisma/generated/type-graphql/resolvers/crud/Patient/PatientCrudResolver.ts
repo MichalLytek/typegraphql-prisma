@@ -13,6 +13,7 @@ import { GroupByPatientArgs } from "./args/GroupByPatientArgs";
 import { UpdateManyPatientArgs } from "./args/UpdateManyPatientArgs";
 import { UpdatePatientArgs } from "./args/UpdatePatientArgs";
 import { UpsertPatientArgs } from "./args/UpsertPatientArgs";
+import { transformFields } from "../../../helpers";
 import { Patient } from "../../../models/Patient";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
@@ -94,20 +95,6 @@ export class PatientCrudResolver {
     nullable: false
   })
   async aggregatePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregatePatientArgs): Promise<AggregatePatient> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith("__"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.patient.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -118,20 +105,6 @@ export class PatientCrudResolver {
     nullable: false
   })
   async groupByPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByPatientArgs): Promise<PatientGroupBy[]> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith("__"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );

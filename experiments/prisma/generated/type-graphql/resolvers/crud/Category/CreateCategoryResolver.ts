@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { CreateCategoryArgs } from "./args/CreateCategoryArgs";
 import { Category } from "../../../models/Category";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class CreateCategoryResolver {

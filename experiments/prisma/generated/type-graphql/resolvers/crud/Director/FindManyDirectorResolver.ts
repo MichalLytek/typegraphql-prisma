@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindManyDirectorArgs } from "./args/FindManyDirectorArgs";
 import { Director } from "../../../models/Director";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class FindManyDirectorResolver {

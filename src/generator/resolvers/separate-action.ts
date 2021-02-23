@@ -8,6 +8,7 @@ import {
   generateModelsImports,
   generateOutputsImports,
   generateGraphQLFieldsImport,
+  generateHelpersFileImport,
 } from "../imports";
 import { generateCrudResolverClassMethodDeclaration } from "./helpers";
 import { DmmfDocument } from "../dmmf/dmmf-document";
@@ -57,6 +58,7 @@ export default function generateActionResolverClass(
     ),
     2,
   );
+  generateHelpersFileImport(sourceFile, 3);
 
   sourceFile.addClass({
     name: action.actionResolverName,

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { Post } from "../../../models/Post";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class UpdatePostResolver {

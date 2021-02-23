@@ -4,6 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByClientArgs } from "./args/GroupByClientArgs";
 import { Client } from "../../../models/Client";
 import { ClientGroupBy } from "../../outputs/ClientGroupBy";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class GroupByClientResolver {
@@ -11,20 +12,6 @@ export class GroupByClientResolver {
     nullable: false
   })
   async groupByClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByClientArgs): Promise<ClientGroupBy[]> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith("__"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );

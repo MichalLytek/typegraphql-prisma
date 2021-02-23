@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { DeleteMovieArgs } from "./args/DeleteMovieArgs";
 import { Movie } from "../../../models/Movie";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class DeleteMovieResolver {

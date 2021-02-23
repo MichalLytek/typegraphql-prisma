@@ -13,6 +13,7 @@ import { GroupByCreatorArgs } from "./args/GroupByCreatorArgs";
 import { UpdateCreatorArgs } from "./args/UpdateCreatorArgs";
 import { UpdateManyCreatorArgs } from "./args/UpdateManyCreatorArgs";
 import { UpsertCreatorArgs } from "./args/UpsertCreatorArgs";
+import { transformFields } from "../../../helpers";
 import { Creator } from "../../../models/Creator";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateCreator } from "../../outputs/AggregateCreator";
@@ -94,20 +95,6 @@ export class CreatorCrudResolver {
     nullable: false
   })
   async aggregateCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateCreatorArgs): Promise<AggregateCreator> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith("__"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.creator.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -118,20 +105,6 @@ export class CreatorCrudResolver {
     nullable: false
   })
   async groupByCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByCreatorArgs): Promise<CreatorGroupBy[]> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith("__"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { DeleteClientArgs } from "./args/DeleteClientArgs";
 import { Client } from "../../../models/Client";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class DeleteClientResolver {

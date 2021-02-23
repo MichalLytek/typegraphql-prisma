@@ -13,6 +13,7 @@ import { GroupByNativeTypeModelArgs } from "./args/GroupByNativeTypeModelArgs";
 import { UpdateManyNativeTypeModelArgs } from "./args/UpdateManyNativeTypeModelArgs";
 import { UpdateNativeTypeModelArgs } from "./args/UpdateNativeTypeModelArgs";
 import { UpsertNativeTypeModelArgs } from "./args/UpsertNativeTypeModelArgs";
+import { transformFields } from "../../../helpers";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateNativeTypeModel } from "../../outputs/AggregateNativeTypeModel";
@@ -94,20 +95,6 @@ export class NativeTypeModelCrudResolver {
     nullable: false
   })
   async aggregateNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateNativeTypeModelArgs): Promise<AggregateNativeTypeModel> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith("__"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.nativeTypeModel.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -118,20 +105,6 @@ export class NativeTypeModelCrudResolver {
     nullable: false
   })
   async groupByNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByNativeTypeModelArgs): Promise<NativeTypeModelGroupBy[]> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith("__"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );

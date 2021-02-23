@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { CreatePatientArgs } from "./args/CreatePatientArgs";
 import { Patient } from "../../../models/Patient";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Patient)
 export class CreatePatientResolver {

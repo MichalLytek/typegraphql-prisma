@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindFirstPostArgs } from "./args/FindFirstPostArgs";
 import { Post } from "../../../models/Post";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class FindFirstPostResolver {

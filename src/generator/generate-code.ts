@@ -39,8 +39,9 @@ import generateArgsTypeClassFromArgs from "./args-class";
 import generateActionResolverClass from "./resolvers/separate-action";
 import { ensureInstalledCorrectPrismaPackage } from "../utils/prisma-version";
 import { GenerateMappingData } from "./types";
-import { generateEnhanceMap } from "./enhance";
-import { generateCustomScalars as generateCustomScalars } from "./scalars";
+import { generateEnhanceMap } from "./generate-enhance";
+import { generateCustomScalars } from "./generate-scalars";
+import { generateHelpersFile } from "./generate-helpers";
 
 const baseCompilerOptions: CompilerOptions = {
   target: ScriptTarget.ES2019,
@@ -454,6 +455,14 @@ export default async function generateCode(
     { overwrite: true },
   );
   generateCustomScalars(scalarsSourceFile, dmmfDocument.options);
+
+  log("Generate custom scalars");
+  const helpersSourceFile = project.createSourceFile(
+    baseDirPath + "/helpers.ts",
+    undefined,
+    { overwrite: true },
+  );
+  generateHelpersFile(helpersSourceFile);
 
   log("Generating index file");
   const indexSourceFile = project.createSourceFile(

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { DeleteNativeTypeModelArgs } from "./args/DeleteNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
 export class DeleteNativeTypeModelResolver {

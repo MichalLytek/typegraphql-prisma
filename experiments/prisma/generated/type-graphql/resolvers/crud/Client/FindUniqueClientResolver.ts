@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindUniqueClientArgs } from "./args/FindUniqueClientArgs";
 import { Client } from "../../../models/Client";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class FindUniqueClientResolver {

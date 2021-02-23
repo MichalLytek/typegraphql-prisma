@@ -18,6 +18,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
     UserScalarFieldEnum.js
     index.d.ts
     index.js
+  helpers.d.ts
+  helpers.js
   index.d.ts
   index.js
   [models]
@@ -277,6 +279,7 @@ exports[`structure should generate proper folders and file names when model is r
     RenamedUserScalarFieldEnum.ts
     SortOrder.ts
     index.ts
+  helpers.ts
   index.ts
   [models]
     RenamedPost.ts
@@ -420,6 +423,7 @@ exports[`structure should generate proper folders structure and file names for c
     SortOrder.ts
     UserScalarFieldEnum.ts
     index.ts
+  helpers.ts
   index.ts
   [models]
     Post.ts

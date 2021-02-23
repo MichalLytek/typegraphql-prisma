@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindUniqueNativeTypeModelArgs } from "./args/FindUniqueNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
 export class FindUniqueNativeTypeModelResolver {

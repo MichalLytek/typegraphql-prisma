@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { CreateManyCategoryArgs } from "./args/CreateManyCategoryArgs";
 import { Category } from "../../../models/Category";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class CreateManyCategoryResolver {

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpsertNativeTypeModelArgs } from "./args/UpsertNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
 export class UpsertNativeTypeModelResolver {

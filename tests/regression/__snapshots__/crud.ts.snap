@@ -4,6 +4,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { CreateUserArgs } from \\"./args/CreateUserArgs\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class CreateUserResolver {
@@ -22,6 +23,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class DeleteManyUserResolver {
@@ -39,6 +41,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class DeleteUserResolver {
@@ -56,6 +59,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { FindFirstUserArgs } from \\"./args/FindFirstUserArgs\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindFirstUserResolver {
@@ -73,6 +77,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindManyUserResolver {
@@ -90,6 +95,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindUniqueUserResolver {
@@ -115,6 +121,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UpdateManyUserResolver {
@@ -132,6 +139,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UpdateUserResolver {
@@ -149,6 +157,7 @@ exports[`crud should properly generate actions resolver classes for prisma model
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UpsertUserResolver {
@@ -473,6 +482,7 @@ import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
+import { transformFields } from \\"../../../helpers\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
@@ -546,20 +556,6 @@ export class UserCrudResolver {
     nullable: false
   })
   async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.user.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -624,6 +620,7 @@ import { FindUniqueStaffArgs } from \\"./args/FindUniqueStaffArgs\\";
 import { UpdateManyStaffArgs } from \\"./args/UpdateManyStaffArgs\\";
 import { UpdateStaffArgs } from \\"./args/UpdateStaffArgs\\";
 import { UpsertStaffArgs } from \\"./args/UpsertStaffArgs\\";
+import { transformFields } from \\"../../../helpers\\";
 import { Staff } from \\"../../../models/Staff\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
@@ -697,20 +694,6 @@ export class StaffCrudResolver {
     nullable: false
   })
   async aggregateStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateStaffArgs): Promise<AggregateStaff> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.staff.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -724,6 +707,7 @@ exports[`crud should properly generate resolver class when useOriginalMapping is
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { User } from \\"../../../models/User\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindUniqueUserResolver {
@@ -751,6 +735,7 @@ import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
+import { transformFields } from \\"../../../helpers\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
@@ -824,20 +809,6 @@ export class UserCrudResolver {
     nullable: false
   })
   async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.user.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -872,6 +843,7 @@ exports[`crud when \`createMany\` preview feature is enabled should properly gen
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class CreateManyUserResolver {
@@ -900,6 +872,7 @@ import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
+import { transformFields } from \\"../../../helpers\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
@@ -980,20 +953,6 @@ export class UserCrudResolver {
     nullable: false
   })
   async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.user.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -1083,6 +1042,7 @@ const FindUniqueUserArgs_1 = require(\\"./args/FindUniqueUserArgs\\");
 const UpdateManyUserArgs_1 = require(\\"./args/UpdateManyUserArgs\\");
 const UpdateUserArgs_1 = require(\\"./args/UpdateUserArgs\\");
 const UpsertUserArgs_1 = require(\\"./args/UpsertUserArgs\\");
+const helpers_1 = require(\\"../../../helpers\\");
 const User_1 = require(\\"../../../models/User\\");
 const AffectedRowsOutput_1 = require(\\"../../outputs/AffectedRowsOutput\\");
 const AggregateUser_1 = require(\\"../../outputs/AggregateUser\\");
@@ -1115,20 +1075,9 @@ let UserCrudResolver = class UserCrudResolver {
         return ctx.prisma.user.upsert(args);
     }
     async aggregateUser(ctx, info, args) {
-        function transformFields(fields) {
-            return Object.fromEntries(Object.entries(fields)
-                // remove __typename and others
-                .filter(([key, value]) => !key.startsWith(\\"__\\"))
-                .map(([key, value]) => {
-                if (Object.keys(value).length === 0) {
-                    return [key, true];
-                }
-                return [key, transformFields(value)];
-            }));
-        }
         return ctx.prisma.user.aggregate({
             ...args,
-            ...transformFields(graphql_fields_1.default(info)),
+            ...helpers_1.transformFields(graphql_fields_1.default(info)),
         });
     }
 };
@@ -1233,6 +1182,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { CreateClientArgs } from \\"./args/CreateClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class CreateClientResolver {
@@ -1250,6 +1200,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { DeleteClientArgs } from \\"./args/DeleteClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class DeleteClientResolver {
@@ -1268,6 +1219,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 import { DeleteManyClientArgs } from \\"./args/DeleteManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class DeleteManyClientResolver {
@@ -1285,6 +1237,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { FindFirstClientArgs } from \\"./args/FindFirstClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class FindFirstClientResolver {
@@ -1302,6 +1255,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { FindManyClientArgs } from \\"./args/FindManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class FindManyClientResolver {
@@ -1319,6 +1273,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { FindUniqueClientArgs } from \\"./args/FindUniqueClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class FindUniqueClientResolver {
@@ -1336,6 +1291,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { UpdateClientArgs } from \\"./args/UpdateClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class UpdateClientResolver {
@@ -1354,6 +1310,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class UpdateManyClientResolver {
@@ -1371,6 +1328,7 @@ exports[`crud when model is renamed should properly generate actions resolver cl
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { UpsertClientArgs } from \\"./args/UpsertClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class UpsertClientResolver {
@@ -1664,6 +1622,7 @@ import { FindUniqueClientArgs } from \\"./args/FindUniqueClientArgs\\";
 import { UpdateClientArgs } from \\"./args/UpdateClientArgs\\";
 import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
 import { UpsertClientArgs } from \\"./args/UpsertClientArgs\\";
+import { transformFields } from \\"../../../helpers\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateClient } from \\"../../outputs/AggregateClient\\";
@@ -1737,20 +1696,6 @@ export class ClientCrudResolver {
     nullable: false
   })
   async aggregateClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateClientArgs): Promise<AggregateClient> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.user.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -1825,6 +1770,7 @@ import { GraphQLResolveInfo } from \\"graphql\\";
 import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
+import { transformFields } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class GroupByUserResolver {
@@ -1832,20 +1778,6 @@ export class GroupByUserResolver {
     nullable: false
   })
   async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );
@@ -1875,6 +1807,7 @@ import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
+import { transformFields } from \\"../../../helpers\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
@@ -1949,20 +1882,6 @@ export class UserCrudResolver {
     nullable: false
   })
   async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     return ctx.prisma.user.aggregate({
       ...args,
       ...transformFields(graphqlFields(info as any)),
@@ -1973,20 +1892,6 @@ export class UserCrudResolver {
     nullable: false
   })
   async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
-      return Object.fromEntries(
-        Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith(\\"__\\"))
-          .map<[string, any]>(([key, value]) => {
-            if (Object.keys(value).length === 0) {
-              return [key, true];
-            }
-            return [key, transformFields(value)];
-          }),
-      );
-    }
-
     const { count, avg, sum, min, max } = transformFields(
       graphqlFields(info as any)
     );

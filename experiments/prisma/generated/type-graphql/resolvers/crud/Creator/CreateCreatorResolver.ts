@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { CreateCreatorArgs } from "./args/CreateCreatorArgs";
 import { Creator } from "../../../models/Creator";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class CreateCreatorResolver {

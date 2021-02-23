@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { DeleteManyMovieArgs } from "./args/DeleteManyMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class DeleteManyMovieResolver {

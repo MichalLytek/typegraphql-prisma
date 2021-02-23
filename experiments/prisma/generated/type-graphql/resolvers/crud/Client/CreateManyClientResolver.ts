@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { CreateManyClientArgs } from "./args/CreateManyClientArgs";
 import { Client } from "../../../models/Client";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class CreateManyClientResolver {

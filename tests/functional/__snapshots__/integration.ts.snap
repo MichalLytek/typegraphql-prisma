@@ -447,6 +447,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
     SortOrder.ts
     UserScalarFieldEnum.ts
     index.ts
+  helpers.ts
   index.ts
   [models]
     Post.ts

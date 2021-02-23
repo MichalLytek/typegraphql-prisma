@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { Director } from "../../../models/Director";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class UpdateDirectorResolver {

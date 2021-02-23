@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { DeleteManyPatientArgs } from "./args/DeleteManyPatientArgs";
 import { Patient } from "../../../models/Patient";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Patient)
 export class DeleteManyPatientResolver {

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { FindManyPostArgs } from "./args/FindManyPostArgs";
 import { Post } from "../../../models/Post";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class FindManyPostResolver {

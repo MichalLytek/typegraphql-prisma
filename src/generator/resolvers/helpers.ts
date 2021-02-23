@@ -3,21 +3,6 @@ import { OptionalKind, MethodDeclarationStructure, Writers } from "ts-morph";
 import { DmmfDocument } from "../dmmf/dmmf-document";
 import { DMMF } from "../dmmf/types";
 
-// TODO: extract helper to importable file
-const transformFieldsFunctionStatement = /* ts */ ` function transformFields(fields: Record<string, any>): Record<string, any> {
-  return Object.fromEntries(
-    Object.entries(fields)
-      // remove __typename and others
-      .filter(([key, value]) => !key.startsWith("__"))
-      .map<[string, any]>(([key, value]) => {
-        if (Object.keys(value).length === 0) {
-          return [key, true];
-        }
-        return [key, transformFields(value)];
-      }),
-  );
-}`;
-
 export function generateCrudResolverClassMethodDeclaration(
   action: DMMF.Action,
   mapping: DMMF.ModelMapping,
@@ -68,7 +53,6 @@ export function generateCrudResolverClassMethodDeclaration(
     statements:
       action.kind === DMMF.ModelAction.aggregate
         ? [
-            transformFieldsFunctionStatement,
             /* ts */ ` return ctx.prisma.${mapping.collectionName}.${action.kind}({
               ...args,
               ...transformFields(graphqlFields(info as any)),
@@ -76,7 +60,6 @@ export function generateCrudResolverClassMethodDeclaration(
           ]
         : action.kind === DMMF.ModelAction.groupBy
         ? [
-            transformFieldsFunctionStatement,
             /* ts */ ` const { count, avg, sum, min, max } = transformFields(
               graphqlFields(info as any)
             );`,

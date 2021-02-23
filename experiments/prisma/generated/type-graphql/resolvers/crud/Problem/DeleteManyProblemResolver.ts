@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { DeleteManyProblemArgs } from "./args/DeleteManyProblemArgs";
 import { Problem } from "../../../models/Problem";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Problem)
 export class DeleteManyProblemResolver {

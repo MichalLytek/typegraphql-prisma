@@ -60,6 +60,15 @@ export function generateCustomScalarsImport(sourceFile: SourceFile, level = 0) {
   });
 }
 
+export function generateHelpersFileImport(sourceFile: SourceFile, level = 0) {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier:
+      (level === 0 ? "./" : "") +
+      path.posix.join(...Array(level).fill(".."), "helpers"),
+    namedImports: ["transformFields"],
+  });
+}
+
 export function generatePrismaNamespaceImport(
   sourceFile: SourceFile,
   options: GenerateCodeOptions,

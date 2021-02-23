@@ -10,7 +10,7 @@ describe("custom scalars", () => {
   let readGeneratedFile: ReadGeneratedFile;
 
   beforeEach(async () => {
-    outputDirPath = generateArtifactsDirPath("enhance-regression");
+    outputDirPath = generateArtifactsDirPath("scalars-regression");
     await fs.mkdir(outputDirPath, { recursive: true });
     readGeneratedFile = createReadGeneratedFile(outputDirPath);
   });

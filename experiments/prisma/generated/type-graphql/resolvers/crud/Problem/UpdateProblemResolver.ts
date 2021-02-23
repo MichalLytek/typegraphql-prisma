@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpdateProblemArgs } from "./args/UpdateProblemArgs";
 import { Problem } from "../../../models/Problem";
+import { transformFields } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Problem)
 export class UpdateProblemResolver {
