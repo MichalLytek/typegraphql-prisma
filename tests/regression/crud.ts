@@ -576,4 +576,32 @@ describe("crud", () => {
       expect(argsIndexTSFile).toMatchSnapshot("argsIndex");
     });
   });
+
+  describe("when emitTranspiledCode is set to true", () => {
+    it("should properly generate imports in js files for resolver classes", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        emitTranspiledCode: true,
+      });
+      const userCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UserCrudResolver.js",
+      );
+
+      expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+    }, 20000);
+  });
 });

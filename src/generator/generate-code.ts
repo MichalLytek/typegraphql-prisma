@@ -47,6 +47,7 @@ const baseCompilerOptions: CompilerOptions = {
   module: ModuleKind.CommonJS,
   emitDecoratorMetadata: true,
   experimentalDecorators: true,
+  esModuleInterop: true,
 };
 
 export default async function generateCode(
