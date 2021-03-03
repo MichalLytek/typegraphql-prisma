@@ -698,18 +698,19 @@ describe("inputs", () => {
 
         /// @@TypeGraphQL.type(name: "Example")
         model SampleModel {
-          intIdField    Int       @id @default(autoincrement())
-          stringField   String    @unique
-          floatField    Float
-          booleanField  Boolean
-          dateField     DateTime
-          other         OtherModel @relation(fields: [otherId], references: [id])
-          otherId       Int
+          intIdField   Int        @id @default(autoincrement())
+          stringField  String     @unique
+          floatField   Float
+          booleanField Boolean
+          dateField    DateTime
+          other        OtherModel @relation(fields: [otherId], references: [id])
+          otherId      Int
         }
 
         model OtherModel {
-          id    Int     @id @default(autoincrement())
-          name  String
+          id          Int           @id @default(autoincrement())
+          name        String
+          SampleModel SampleModel[]
         }
       `;
 

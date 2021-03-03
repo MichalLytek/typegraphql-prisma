@@ -6,8 +6,9 @@
 import * as runtime from './runtime';
 declare const prisma: unique symbol
 export type PrismaPromise<A> = Promise<A> & {[prisma]: true}
+type UnwrapPromise<P extends any> = P extends Promise<infer R> ? R : P
 type UnwrapTuple<Tuple extends readonly unknown[]> = {
-  [K in keyof Tuple]: K extends `${number}` ? Tuple[K] extends PrismaPromise<infer X> ? X : never : never
+  [K in keyof Tuple]: K extends `${number}` ? Tuple[K] extends PrismaPromise<infer X> ? X : UnwrapPromise<Tuple[K]> : UnwrapPromise<Tuple[K]>
 };
 
 
@@ -107,7 +108,7 @@ export type Creator = {
 
 export type NativeTypeModel = {
   id: number
-  bigInt: BigInt | null
+  bigInt: bigint | null
   byteA: Buffer | null
   decimal: Prisma.Decimal | null
 }
@@ -376,8 +377,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.17.0
-   * Query Engine version: 3c463ebd78b1d21d8fdacdd27899e280cf686223
+   * Prisma Client JS version: 2.18.0
+   * Query Engine version: da6fafb57b24e0b61ca20960c64e2d41f9e8cff1
    */
   export type PrismaVersion = {
     client: string
@@ -1599,7 +1600,7 @@ export namespace Prisma {
     /**
      * The data needed to create a User.
     **/
-    data: XOR<UserUncheckedCreateInput, UserCreateInput>
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
 
 
@@ -1627,7 +1628,7 @@ export namespace Prisma {
     /**
      * The data needed to update a User.
     **/
-    data: XOR<UserUncheckedUpdateInput, UserUpdateInput>
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
     /**
      * Choose, which User to update.
     **/
@@ -1639,7 +1640,7 @@ export namespace Prisma {
    * User updateMany
    */
   export type UserUpdateManyArgs = {
-    data: XOR<UserUncheckedUpdateManyInput, UserUpdateManyMutationInput>
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
     where?: UserWhereInput
   }
 
@@ -1663,11 +1664,11 @@ export namespace Prisma {
     /**
      * In case the User found by the `where` argument doesn't exist, create a new User with this data.
     **/
-    create: XOR<UserUncheckedCreateInput, UserCreateInput>
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
     /**
      * In case the User was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<UserUncheckedUpdateInput, UserUpdateInput>
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
   }
 
 
@@ -2491,7 +2492,7 @@ export namespace Prisma {
     /**
      * The data needed to create a post.
     **/
-    data: XOR<postUncheckedCreateInput, postCreateInput>
+    data: XOR<postCreateInput, postUncheckedCreateInput>
   }
 
 
@@ -2519,7 +2520,7 @@ export namespace Prisma {
     /**
      * The data needed to update a post.
     **/
-    data: XOR<postUncheckedUpdateInput, postUpdateInput>
+    data: XOR<postUpdateInput, postUncheckedUpdateInput>
     /**
      * Choose, which post to update.
     **/
@@ -2531,7 +2532,7 @@ export namespace Prisma {
    * post updateMany
    */
   export type postUpdateManyArgs = {
-    data: XOR<postUncheckedUpdateManyInput, postUpdateManyMutationInput>
+    data: XOR<postUpdateManyMutationInput, postUncheckedUpdateManyInput>
     where?: postWhereInput
   }
 
@@ -2555,11 +2556,11 @@ export namespace Prisma {
     /**
      * In case the post found by the `where` argument doesn't exist, create a new post with this data.
     **/
-    create: XOR<postUncheckedCreateInput, postCreateInput>
+    create: XOR<postCreateInput, postUncheckedCreateInput>
     /**
      * In case the post was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<postUncheckedUpdateInput, postUpdateInput>
+    update: XOR<postUpdateInput, postUncheckedUpdateInput>
   }
 
 
@@ -3284,7 +3285,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Category.
     **/
-    data: XOR<CategoryUncheckedCreateInput, CategoryCreateInput>
+    data: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
   }
 
 
@@ -3308,7 +3309,7 @@ export namespace Prisma {
     /**
      * The data needed to update a Category.
     **/
-    data: XOR<CategoryUncheckedUpdateInput, CategoryUpdateInput>
+    data: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
     /**
      * Choose, which Category to update.
     **/
@@ -3320,7 +3321,7 @@ export namespace Prisma {
    * Category updateMany
    */
   export type CategoryUpdateManyArgs = {
-    data: XOR<CategoryUncheckedUpdateManyInput, CategoryUpdateManyMutationInput>
+    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyInput>
     where?: CategoryWhereInput
   }
 
@@ -3340,11 +3341,11 @@ export namespace Prisma {
     /**
      * In case the Category found by the `where` argument doesn't exist, create a new Category with this data.
     **/
-    create: XOR<CategoryUncheckedCreateInput, CategoryCreateInput>
+    create: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
     /**
      * In case the Category was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<CategoryUncheckedUpdateInput, CategoryUpdateInput>
+    update: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
   }
 
 
@@ -4027,7 +4028,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Patient.
     **/
-    data: XOR<PatientUncheckedCreateInput, PatientCreateInput>
+    data: XOR<PatientCreateInput, PatientUncheckedCreateInput>
   }
 
 
@@ -4051,7 +4052,7 @@ export namespace Prisma {
     /**
      * The data needed to update a Patient.
     **/
-    data: XOR<PatientUncheckedUpdateInput, PatientUpdateInput>
+    data: XOR<PatientUpdateInput, PatientUncheckedUpdateInput>
     /**
      * Choose, which Patient to update.
     **/
@@ -4063,7 +4064,7 @@ export namespace Prisma {
    * Patient updateMany
    */
   export type PatientUpdateManyArgs = {
-    data: XOR<PatientUncheckedUpdateManyInput, PatientUpdateManyMutationInput>
+    data: XOR<PatientUpdateManyMutationInput, PatientUncheckedUpdateManyInput>
     where?: PatientWhereInput
   }
 
@@ -4083,11 +4084,11 @@ export namespace Prisma {
     /**
      * In case the Patient found by the `where` argument doesn't exist, create a new Patient with this data.
     **/
-    create: XOR<PatientUncheckedCreateInput, PatientCreateInput>
+    create: XOR<PatientCreateInput, PatientUncheckedCreateInput>
     /**
      * In case the Patient was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<PatientUncheckedUpdateInput, PatientUpdateInput>
+    update: XOR<PatientUpdateInput, PatientUncheckedUpdateInput>
   }
 
 
@@ -4797,7 +4798,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Movie.
     **/
-    data: XOR<MovieUncheckedCreateInput, MovieCreateInput>
+    data: XOR<MovieCreateInput, MovieUncheckedCreateInput>
   }
 
 
@@ -4825,7 +4826,7 @@ export namespace Prisma {
     /**
      * The data needed to update a Movie.
     **/
-    data: XOR<MovieUncheckedUpdateInput, MovieUpdateInput>
+    data: XOR<MovieUpdateInput, MovieUncheckedUpdateInput>
     /**
      * Choose, which Movie to update.
     **/
@@ -4837,7 +4838,7 @@ export namespace Prisma {
    * Movie updateMany
    */
   export type MovieUpdateManyArgs = {
-    data: XOR<MovieUncheckedUpdateManyInput, MovieUpdateManyMutationInput>
+    data: XOR<MovieUpdateManyMutationInput, MovieUncheckedUpdateManyInput>
     where?: MovieWhereInput
   }
 
@@ -4861,11 +4862,11 @@ export namespace Prisma {
     /**
      * In case the Movie found by the `where` argument doesn't exist, create a new Movie with this data.
     **/
-    create: XOR<MovieUncheckedCreateInput, MovieCreateInput>
+    create: XOR<MovieCreateInput, MovieUncheckedCreateInput>
     /**
      * In case the Movie was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<MovieUncheckedUpdateInput, MovieUpdateInput>
+    update: XOR<MovieUpdateInput, MovieUncheckedUpdateInput>
   }
 
 
@@ -5575,7 +5576,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Director.
     **/
-    data: XOR<DirectorUncheckedCreateInput, DirectorCreateInput>
+    data: XOR<DirectorCreateInput, DirectorUncheckedCreateInput>
   }
 
 
@@ -5603,7 +5604,7 @@ export namespace Prisma {
     /**
      * The data needed to update a Director.
     **/
-    data: XOR<DirectorUncheckedUpdateInput, DirectorUpdateInput>
+    data: XOR<DirectorUpdateInput, DirectorUncheckedUpdateInput>
     /**
      * Choose, which Director to update.
     **/
@@ -5615,7 +5616,7 @@ export namespace Prisma {
    * Director updateMany
    */
   export type DirectorUpdateManyArgs = {
-    data: XOR<DirectorUncheckedUpdateManyInput, DirectorUpdateManyMutationInput>
+    data: XOR<DirectorUpdateManyMutationInput, DirectorUncheckedUpdateManyInput>
     where?: DirectorWhereInput
   }
 
@@ -5639,11 +5640,11 @@ export namespace Prisma {
     /**
      * In case the Director found by the `where` argument doesn't exist, create a new Director with this data.
     **/
-    create: XOR<DirectorUncheckedCreateInput, DirectorCreateInput>
+    create: XOR<DirectorCreateInput, DirectorUncheckedCreateInput>
     /**
      * In case the Director was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<DirectorUncheckedUpdateInput, DirectorUpdateInput>
+    update: XOR<DirectorUpdateInput, DirectorUncheckedUpdateInput>
   }
 
 
@@ -6407,7 +6408,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Problem.
     **/
-    data: XOR<ProblemUncheckedCreateInput, ProblemCreateInput>
+    data: XOR<ProblemCreateInput, ProblemUncheckedCreateInput>
   }
 
 
@@ -6435,7 +6436,7 @@ export namespace Prisma {
     /**
      * The data needed to update a Problem.
     **/
-    data: XOR<ProblemUncheckedUpdateInput, ProblemUpdateInput>
+    data: XOR<ProblemUpdateInput, ProblemUncheckedUpdateInput>
     /**
      * Choose, which Problem to update.
     **/
@@ -6447,7 +6448,7 @@ export namespace Prisma {
    * Problem updateMany
    */
   export type ProblemUpdateManyArgs = {
-    data: XOR<ProblemUncheckedUpdateManyInput, ProblemUpdateManyMutationInput>
+    data: XOR<ProblemUpdateManyMutationInput, ProblemUncheckedUpdateManyInput>
     where?: ProblemWhereInput
   }
 
@@ -6471,11 +6472,11 @@ export namespace Prisma {
     /**
      * In case the Problem found by the `where` argument doesn't exist, create a new Problem with this data.
     **/
-    create: XOR<ProblemUncheckedCreateInput, ProblemCreateInput>
+    create: XOR<ProblemCreateInput, ProblemUncheckedCreateInput>
     /**
      * In case the Problem was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<ProblemUncheckedUpdateInput, ProblemUpdateInput>
+    update: XOR<ProblemUpdateInput, ProblemUncheckedUpdateInput>
   }
 
 
@@ -7227,7 +7228,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Creator.
     **/
-    data: XOR<CreatorUncheckedCreateInput, CreatorCreateInput>
+    data: XOR<CreatorCreateInput, CreatorUncheckedCreateInput>
   }
 
 
@@ -7255,7 +7256,7 @@ export namespace Prisma {
     /**
      * The data needed to update a Creator.
     **/
-    data: XOR<CreatorUncheckedUpdateInput, CreatorUpdateInput>
+    data: XOR<CreatorUpdateInput, CreatorUncheckedUpdateInput>
     /**
      * Choose, which Creator to update.
     **/
@@ -7267,7 +7268,7 @@ export namespace Prisma {
    * Creator updateMany
    */
   export type CreatorUpdateManyArgs = {
-    data: XOR<CreatorUncheckedUpdateManyInput, CreatorUpdateManyMutationInput>
+    data: XOR<CreatorUpdateManyMutationInput, CreatorUncheckedUpdateManyInput>
     where?: CreatorWhereInput
   }
 
@@ -7291,11 +7292,11 @@ export namespace Prisma {
     /**
      * In case the Creator found by the `where` argument doesn't exist, create a new Creator with this data.
     **/
-    create: XOR<CreatorUncheckedCreateInput, CreatorCreateInput>
+    create: XOR<CreatorCreateInput, CreatorUncheckedCreateInput>
     /**
      * In case the Creator was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<CreatorUncheckedUpdateInput, CreatorUpdateInput>
+    update: XOR<CreatorUpdateInput, CreatorUncheckedUpdateInput>
   }
 
 
@@ -7363,20 +7364,20 @@ export namespace Prisma {
 
   export type NativeTypeModelSumAggregateOutputType = {
     id: number
-    bigInt: BigInt | null
+    bigInt: bigint | null
     decimal: Decimal | null
   }
 
   export type NativeTypeModelMinAggregateOutputType = {
     id: number
-    bigInt: BigInt | null
+    bigInt: bigint | null
     byteA: Buffer | null
     decimal: Decimal | null
   }
 
   export type NativeTypeModelMaxAggregateOutputType = {
     id: number
-    bigInt: BigInt | null
+    bigInt: bigint | null
     byteA: Buffer | null
     decimal: Decimal | null
   }
@@ -7513,7 +7514,7 @@ export namespace Prisma {
 
   export type NativeTypeModelGroupByOutputType = {
     id: number
-    bigInt: BigInt | null
+    bigInt: bigint | null
     byteA: Buffer | null
     decimal: Decimal | null
     count: NativeTypeModelCountAggregateOutputType | null
@@ -8036,7 +8037,7 @@ export namespace Prisma {
     /**
      * The data needed to create a NativeTypeModel.
     **/
-    data: XOR<NativeTypeModelUncheckedCreateInput, NativeTypeModelCreateInput>
+    data: XOR<NativeTypeModelCreateInput, NativeTypeModelUncheckedCreateInput>
   }
 
 
@@ -8060,7 +8061,7 @@ export namespace Prisma {
     /**
      * The data needed to update a NativeTypeModel.
     **/
-    data: XOR<NativeTypeModelUncheckedUpdateInput, NativeTypeModelUpdateInput>
+    data: XOR<NativeTypeModelUpdateInput, NativeTypeModelUncheckedUpdateInput>
     /**
      * Choose, which NativeTypeModel to update.
     **/
@@ -8072,7 +8073,7 @@ export namespace Prisma {
    * NativeTypeModel updateMany
    */
   export type NativeTypeModelUpdateManyArgs = {
-    data: XOR<NativeTypeModelUncheckedUpdateManyInput, NativeTypeModelUpdateManyMutationInput>
+    data: XOR<NativeTypeModelUpdateManyMutationInput, NativeTypeModelUncheckedUpdateManyInput>
     where?: NativeTypeModelWhereInput
   }
 
@@ -8092,11 +8093,11 @@ export namespace Prisma {
     /**
      * In case the NativeTypeModel found by the `where` argument doesn't exist, create a new NativeTypeModel with this data.
     **/
-    create: XOR<NativeTypeModelUncheckedCreateInput, NativeTypeModelCreateInput>
+    create: XOR<NativeTypeModelCreateInput, NativeTypeModelUncheckedCreateInput>
     /**
      * In case the NativeTypeModel was found with the provided `where` argument, update it with this data.
     **/
-    update: XOR<NativeTypeModelUncheckedUpdateInput, NativeTypeModelUpdateInput>
+    update: XOR<NativeTypeModelUpdateInput, NativeTypeModelUncheckedUpdateInput>
   }
 
 
@@ -8309,9 +8310,9 @@ export namespace Prisma {
     title?: StringFilter | string
     subtitle?: StringFilter | string
     content?: StringNullableFilter | string | null
-    author?: XOR<UserWhereInput, UserRelationFilter>
+    author?: XOR<UserRelationFilter, UserWhereInput>
     authorId?: IntFilter | number
-    editor?: XOR<UserWhereInput, UserRelationFilter> | null
+    editor?: XOR<UserRelationFilter, UserWhereInput> | null
     editorId?: IntNullableFilter | number | null
     kind?: EnumPostKindNullableFilter | PostKind | null
     metadata?: JsonFilter
@@ -8416,7 +8417,7 @@ export namespace Prisma {
     NOT?: Enumerable<MovieWhereInput>
     directorFirstName?: StringFilter | string
     directorLastName?: StringFilter | string
-    director?: XOR<DirectorWhereInput, DirectorRelationFilter>
+    director?: XOR<DirectorRelationFilter, DirectorWhereInput>
     title?: StringFilter | string
   }
 
@@ -8473,7 +8474,7 @@ export namespace Prisma {
     id?: IntFilter | number
     problemText?: StringFilter | string
     likedBy?: CreatorListRelationFilter
-    creator?: XOR<CreatorWhereInput, CreatorRelationFilter> | null
+    creator?: XOR<CreatorRelationFilter, CreatorWhereInput> | null
     creatorId?: IntNullableFilter | number | null
   }
 
@@ -8529,7 +8530,7 @@ export namespace Prisma {
     OR?: Enumerable<NativeTypeModelWhereInput>
     NOT?: Enumerable<NativeTypeModelWhereInput>
     id?: IntFilter | number
-    bigInt?: BigIntNullableFilter | BigInt | number | null
+    bigInt?: BigIntNullableFilter | bigint | number | null
     byteA?: BytesNullableFilter | Buffer | null
     decimal?: DecimalNullableFilter | Decimal | number | string | null
   }
@@ -8550,7 +8551,7 @@ export namespace Prisma {
     OR?: Enumerable<NativeTypeModelScalarWhereWithAggregatesInput>
     NOT?: Enumerable<NativeTypeModelScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
-    bigInt?: BigIntNullableWithAggregatesFilter | BigInt | number | null
+    bigInt?: BigIntNullableWithAggregatesFilter | bigint | number | null
     byteA?: BytesNullableWithAggregatesFilter | Buffer | null
     decimal?: DecimalNullableWithAggregatesFilter | Decimal | number | string | null
   }
@@ -8966,47 +8967,47 @@ export namespace Prisma {
   }
 
   export type NativeTypeModelCreateInput = {
-    bigInt?: BigInt | number | null
+    bigInt?: bigint | number | null
     byteA?: Buffer | null
     decimal?: Decimal | number | string | null
   }
 
   export type NativeTypeModelUncheckedCreateInput = {
     id?: number
-    bigInt?: BigInt | number | null
+    bigInt?: bigint | number | null
     byteA?: Buffer | null
     decimal?: Decimal | number | string | null
   }
 
   export type NativeTypeModelUpdateInput = {
-    bigInt?: NullableBigIntFieldUpdateOperationsInput | BigInt | number | null
+    bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
   }
 
   export type NativeTypeModelUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    bigInt?: NullableBigIntFieldUpdateOperationsInput | BigInt | number | null
+    bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
   }
 
   export type NativeTypeModelCreateManyInput = {
     id?: number
-    bigInt?: BigInt | number | null
+    bigInt?: bigint | number | null
     byteA?: Buffer | null
     decimal?: Decimal | number | string | null
   }
 
   export type NativeTypeModelUpdateManyMutationInput = {
-    bigInt?: NullableBigIntFieldUpdateOperationsInput | BigInt | number | null
+    bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
   }
 
   export type NativeTypeModelUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    bigInt?: NullableBigIntFieldUpdateOperationsInput | BigInt | number | null
+    bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
   }
@@ -9304,14 +9305,14 @@ export namespace Prisma {
   }
 
   export type BigIntNullableFilter = {
-    equals?: BigInt | number | null
-    in?: Enumerable<BigInt> | Enumerable<number> | null
-    notIn?: Enumerable<BigInt> | Enumerable<number> | null
-    lt?: BigInt | number
-    lte?: BigInt | number
-    gt?: BigInt | number
-    gte?: BigInt | number
-    not?: NestedBigIntNullableFilter | BigInt | number | null
+    equals?: bigint | number | null
+    in?: Enumerable<bigint> | Enumerable<number> | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | null
+    lt?: bigint | number
+    lte?: bigint | number
+    gt?: bigint | number
+    gte?: bigint | number
+    not?: NestedBigIntNullableFilter | bigint | number | null
   }
 
   export type BytesNullableFilter = {
@@ -9331,14 +9332,14 @@ export namespace Prisma {
   }
 
   export type BigIntNullableWithAggregatesFilter = {
-    equals?: BigInt | number | null
-    in?: Enumerable<BigInt> | Enumerable<number> | null
-    notIn?: Enumerable<BigInt> | Enumerable<number> | null
-    lt?: BigInt | number
-    lte?: BigInt | number
-    gt?: BigInt | number
-    gte?: BigInt | number
-    not?: NestedBigIntNullableWithAggregatesFilter | BigInt | number | null
+    equals?: bigint | number | null
+    in?: Enumerable<bigint> | Enumerable<number> | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | null
+    lt?: bigint | number
+    lte?: bigint | number
+    gt?: bigint | number
+    gte?: bigint | number
+    not?: NestedBigIntNullableWithAggregatesFilter | bigint | number | null
     count?: NestedIntNullableFilter
     avg?: NestedFloatNullableFilter
     sum?: NestedBigIntNullableFilter
@@ -9371,28 +9372,28 @@ export namespace Prisma {
   }
 
   export type postCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
+    create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postCreateNestedManyWithoutEditorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
+    create?: XOR<Enumerable<postCreateWithoutEditorInput>, Enumerable<postUncheckedCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
+    create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
   }
 
   export type postUncheckedCreateNestedManyWithoutEditorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
+    create?: XOR<Enumerable<postCreateWithoutEditorInput>, Enumerable<postUncheckedCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
@@ -9427,7 +9428,7 @@ export namespace Prisma {
   }
 
   export type postUpdateManyWithoutAuthorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
+    create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
@@ -9441,7 +9442,7 @@ export namespace Prisma {
   }
 
   export type postUpdateManyWithoutEditorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
+    create?: XOR<Enumerable<postCreateWithoutEditorInput>, Enumerable<postUncheckedCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
@@ -9455,7 +9456,7 @@ export namespace Prisma {
   }
 
   export type postUncheckedUpdateManyWithoutAuthorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutAuthorInput>, Enumerable<postCreateWithoutAuthorInput>>
+    create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
@@ -9469,7 +9470,7 @@ export namespace Prisma {
   }
 
   export type postUncheckedUpdateManyWithoutEditorInput = {
-    create?: XOR<Enumerable<postUncheckedCreateWithoutEditorInput>, Enumerable<postCreateWithoutEditorInput>>
+    create?: XOR<Enumerable<postCreateWithoutEditorInput>, Enumerable<postUncheckedCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
@@ -9483,13 +9484,13 @@ export namespace Prisma {
   }
 
   export type UserCreateNestedOneWithoutPostsInput = {
-    create?: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
+    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     connect?: UserWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutEditorPostsInput = {
-    create?: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
+    create?: XOR<UserCreateWithoutEditorPostsInput, UserUncheckedCreateWithoutEditorPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEditorPostsInput
     connect?: UserWhereUniqueInput
   }
@@ -9507,21 +9508,21 @@ export namespace Prisma {
   }
 
   export type UserUpdateOneRequiredWithoutPostsInput = {
-    create?: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
+    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     upsert?: UserUpsertWithoutPostsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<UserUncheckedUpdateWithoutPostsInput, UserUpdateWithoutPostsInput>
+    update?: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
   }
 
   export type UserUpdateOneWithoutEditorPostsInput = {
-    create?: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
+    create?: XOR<UserCreateWithoutEditorPostsInput, UserUncheckedCreateWithoutEditorPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEditorPostsInput
     upsert?: UserUpsertWithoutEditorPostsInput
     connect?: UserWhereUniqueInput
     disconnect?: boolean
     delete?: boolean
-    update?: XOR<UserUncheckedUpdateWithoutEditorPostsInput, UserUpdateWithoutEditorPostsInput>
+    update?: XOR<UserUpdateWithoutEditorPostsInput, UserUncheckedUpdateWithoutEditorPostsInput>
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -9533,35 +9534,35 @@ export namespace Prisma {
   }
 
   export type DirectorCreateNestedOneWithoutMoviesInput = {
-    create?: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
+    create?: XOR<DirectorCreateWithoutMoviesInput, DirectorUncheckedCreateWithoutMoviesInput>
     connectOrCreate?: DirectorCreateOrConnectWithoutMoviesInput
     connect?: DirectorWhereUniqueInput
   }
 
   export type DirectorUpdateOneRequiredWithoutMoviesInput = {
-    create?: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
+    create?: XOR<DirectorCreateWithoutMoviesInput, DirectorUncheckedCreateWithoutMoviesInput>
     connectOrCreate?: DirectorCreateOrConnectWithoutMoviesInput
     upsert?: DirectorUpsertWithoutMoviesInput
     connect?: DirectorWhereUniqueInput
-    update?: XOR<DirectorUncheckedUpdateWithoutMoviesInput, DirectorUpdateWithoutMoviesInput>
+    update?: XOR<DirectorUpdateWithoutMoviesInput, DirectorUncheckedUpdateWithoutMoviesInput>
   }
 
   export type MovieCreateNestedManyWithoutDirectorInput = {
-    create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
+    create?: XOR<Enumerable<MovieCreateWithoutDirectorInput>, Enumerable<MovieUncheckedCreateWithoutDirectorInput>>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
   }
 
   export type MovieUncheckedCreateNestedManyWithoutDirectorInput = {
-    create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
+    create?: XOR<Enumerable<MovieCreateWithoutDirectorInput>, Enumerable<MovieUncheckedCreateWithoutDirectorInput>>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
     connect?: Enumerable<MovieWhereUniqueInput>
   }
 
   export type MovieUpdateManyWithoutDirectorInput = {
-    create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
+    create?: XOR<Enumerable<MovieCreateWithoutDirectorInput>, Enumerable<MovieUncheckedCreateWithoutDirectorInput>>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
@@ -9575,7 +9576,7 @@ export namespace Prisma {
   }
 
   export type MovieUncheckedUpdateManyWithoutDirectorInput = {
-    create?: XOR<Enumerable<MovieUncheckedCreateWithoutDirectorInput>, Enumerable<MovieCreateWithoutDirectorInput>>
+    create?: XOR<Enumerable<MovieCreateWithoutDirectorInput>, Enumerable<MovieUncheckedCreateWithoutDirectorInput>>
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
@@ -9589,19 +9590,19 @@ export namespace Prisma {
   }
 
   export type CreatorCreateNestedManyWithoutLikesInput = {
-    create?: XOR<Enumerable<CreatorUncheckedCreateWithoutLikesInput>, Enumerable<CreatorCreateWithoutLikesInput>>
+    create?: XOR<Enumerable<CreatorCreateWithoutLikesInput>, Enumerable<CreatorUncheckedCreateWithoutLikesInput>>
     connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutLikesInput>
     connect?: Enumerable<CreatorWhereUniqueInput>
   }
 
   export type CreatorCreateNestedOneWithoutProblemsInput = {
-    create?: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
+    create?: XOR<CreatorCreateWithoutProblemsInput, CreatorUncheckedCreateWithoutProblemsInput>
     connectOrCreate?: CreatorCreateOrConnectWithoutProblemsInput
     connect?: CreatorWhereUniqueInput
   }
 
   export type CreatorUpdateManyWithoutLikesInput = {
-    create?: XOR<Enumerable<CreatorUncheckedCreateWithoutLikesInput>, Enumerable<CreatorCreateWithoutLikesInput>>
+    create?: XOR<Enumerable<CreatorCreateWithoutLikesInput>, Enumerable<CreatorUncheckedCreateWithoutLikesInput>>
     connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutLikesInput>
     upsert?: Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>
     connect?: Enumerable<CreatorWhereUniqueInput>
@@ -9614,37 +9615,37 @@ export namespace Prisma {
   }
 
   export type CreatorUpdateOneWithoutProblemsInput = {
-    create?: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
+    create?: XOR<CreatorCreateWithoutProblemsInput, CreatorUncheckedCreateWithoutProblemsInput>
     connectOrCreate?: CreatorCreateOrConnectWithoutProblemsInput
     upsert?: CreatorUpsertWithoutProblemsInput
     connect?: CreatorWhereUniqueInput
     disconnect?: boolean
     delete?: boolean
-    update?: XOR<CreatorUncheckedUpdateWithoutProblemsInput, CreatorUpdateWithoutProblemsInput>
+    update?: XOR<CreatorUpdateWithoutProblemsInput, CreatorUncheckedUpdateWithoutProblemsInput>
   }
 
   export type ProblemCreateNestedManyWithoutLikedByInput = {
-    create?: XOR<Enumerable<ProblemUncheckedCreateWithoutLikedByInput>, Enumerable<ProblemCreateWithoutLikedByInput>>
+    create?: XOR<Enumerable<ProblemCreateWithoutLikedByInput>, Enumerable<ProblemUncheckedCreateWithoutLikedByInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutLikedByInput>
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
   export type ProblemCreateNestedManyWithoutCreatorInput = {
-    create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
+    create?: XOR<Enumerable<ProblemCreateWithoutCreatorInput>, Enumerable<ProblemUncheckedCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
   export type ProblemUncheckedCreateNestedManyWithoutCreatorInput = {
-    create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
+    create?: XOR<Enumerable<ProblemCreateWithoutCreatorInput>, Enumerable<ProblemUncheckedCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
   export type ProblemUpdateManyWithoutLikedByInput = {
-    create?: XOR<Enumerable<ProblemUncheckedCreateWithoutLikedByInput>, Enumerable<ProblemCreateWithoutLikedByInput>>
+    create?: XOR<Enumerable<ProblemCreateWithoutLikedByInput>, Enumerable<ProblemUncheckedCreateWithoutLikedByInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutLikedByInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>
     connect?: Enumerable<ProblemWhereUniqueInput>
@@ -9657,7 +9658,7 @@ export namespace Prisma {
   }
 
   export type ProblemUpdateManyWithoutCreatorInput = {
-    create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
+    create?: XOR<Enumerable<ProblemCreateWithoutCreatorInput>, Enumerable<ProblemUncheckedCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
@@ -9671,7 +9672,7 @@ export namespace Prisma {
   }
 
   export type ProblemUncheckedUpdateManyWithoutCreatorInput = {
-    create?: XOR<Enumerable<ProblemUncheckedCreateWithoutCreatorInput>, Enumerable<ProblemCreateWithoutCreatorInput>>
+    create?: XOR<Enumerable<ProblemCreateWithoutCreatorInput>, Enumerable<ProblemUncheckedCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
@@ -9685,11 +9686,11 @@ export namespace Prisma {
   }
 
   export type NullableBigIntFieldUpdateOperationsInput = {
-    set?: BigInt | number | null
-    increment?: BigInt | number
-    decrement?: BigInt | number
-    multiply?: BigInt | number
-    divide?: BigInt | number
+    set?: bigint | number | null
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
   }
 
   export type NullableBytesFieldUpdateOperationsInput = {
@@ -9936,14 +9937,14 @@ export namespace Prisma {
   }
 
   export type NestedBigIntNullableFilter = {
-    equals?: BigInt | number | null
-    in?: Enumerable<BigInt> | Enumerable<number> | null
-    notIn?: Enumerable<BigInt> | Enumerable<number> | null
-    lt?: BigInt | number
-    lte?: BigInt | number
-    gt?: BigInt | number
-    gte?: BigInt | number
-    not?: NestedBigIntNullableFilter | BigInt | number | null
+    equals?: bigint | number | null
+    in?: Enumerable<bigint> | Enumerable<number> | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | null
+    lt?: bigint | number
+    lte?: bigint | number
+    gt?: bigint | number
+    gte?: bigint | number
+    not?: NestedBigIntNullableFilter | bigint | number | null
   }
 
   export type NestedBytesNullableFilter = {
@@ -9963,14 +9964,14 @@ export namespace Prisma {
   }
 
   export type NestedBigIntNullableWithAggregatesFilter = {
-    equals?: BigInt | number | null
-    in?: Enumerable<BigInt> | Enumerable<number> | null
-    notIn?: Enumerable<BigInt> | Enumerable<number> | null
-    lt?: BigInt | number
-    lte?: BigInt | number
-    gt?: BigInt | number
-    gte?: BigInt | number
-    not?: NestedBigIntNullableWithAggregatesFilter | BigInt | number | null
+    equals?: bigint | number | null
+    in?: Enumerable<bigint> | Enumerable<number> | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | null
+    lt?: bigint | number
+    lte?: bigint | number
+    gt?: bigint | number
+    gte?: bigint | number
+    not?: NestedBigIntNullableWithAggregatesFilter | bigint | number | null
     count?: NestedIntNullableFilter
     avg?: NestedFloatNullableFilter
     sum?: NestedBigIntNullableFilter
@@ -10030,7 +10031,7 @@ export namespace Prisma {
 
   export type postCreateOrConnectWithoutAuthorInput = {
     where: postWhereUniqueInput
-    create: XOR<postUncheckedCreateWithoutAuthorInput, postCreateWithoutAuthorInput>
+    create: XOR<postCreateWithoutAuthorInput, postUncheckedCreateWithoutAuthorInput>
   }
 
   export type postCreateManyAuthorInputEnvelope = {
@@ -10066,7 +10067,7 @@ export namespace Prisma {
 
   export type postCreateOrConnectWithoutEditorInput = {
     where: postWhereUniqueInput
-    create: XOR<postUncheckedCreateWithoutEditorInput, postCreateWithoutEditorInput>
+    create: XOR<postCreateWithoutEditorInput, postUncheckedCreateWithoutEditorInput>
   }
 
   export type postCreateManyEditorInputEnvelope = {
@@ -10076,18 +10077,18 @@ export namespace Prisma {
 
   export type postUpsertWithWhereUniqueWithoutAuthorInput = {
     where: postWhereUniqueInput
-    update: XOR<postUncheckedUpdateWithoutAuthorInput, postUpdateWithoutAuthorInput>
-    create: XOR<postUncheckedCreateWithoutAuthorInput, postCreateWithoutAuthorInput>
+    update: XOR<postUpdateWithoutAuthorInput, postUncheckedUpdateWithoutAuthorInput>
+    create: XOR<postCreateWithoutAuthorInput, postUncheckedCreateWithoutAuthorInput>
   }
 
   export type postUpdateWithWhereUniqueWithoutAuthorInput = {
     where: postWhereUniqueInput
-    data: XOR<postUncheckedUpdateWithoutAuthorInput, postUpdateWithoutAuthorInput>
+    data: XOR<postUpdateWithoutAuthorInput, postUncheckedUpdateWithoutAuthorInput>
   }
 
   export type postUpdateManyWithWhereWithoutAuthorInput = {
     where: postScalarWhereInput
-    data: XOR<postUncheckedUpdateManyWithoutPostsInput, postUpdateManyMutationInput>
+    data: XOR<postUpdateManyMutationInput, postUncheckedUpdateManyWithoutPostsInput>
   }
 
   export type postScalarWhereInput = {
@@ -10109,18 +10110,18 @@ export namespace Prisma {
 
   export type postUpsertWithWhereUniqueWithoutEditorInput = {
     where: postWhereUniqueInput
-    update: XOR<postUncheckedUpdateWithoutEditorInput, postUpdateWithoutEditorInput>
-    create: XOR<postUncheckedCreateWithoutEditorInput, postCreateWithoutEditorInput>
+    update: XOR<postUpdateWithoutEditorInput, postUncheckedUpdateWithoutEditorInput>
+    create: XOR<postCreateWithoutEditorInput, postUncheckedCreateWithoutEditorInput>
   }
 
   export type postUpdateWithWhereUniqueWithoutEditorInput = {
     where: postWhereUniqueInput
-    data: XOR<postUncheckedUpdateWithoutEditorInput, postUpdateWithoutEditorInput>
+    data: XOR<postUpdateWithoutEditorInput, postUncheckedUpdateWithoutEditorInput>
   }
 
   export type postUpdateManyWithWhereWithoutEditorInput = {
     where: postScalarWhereInput
-    data: XOR<postUncheckedUpdateManyWithoutEditorPostsInput, postUpdateManyMutationInput>
+    data: XOR<postUpdateManyMutationInput, postUncheckedUpdateManyWithoutEditorPostsInput>
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -10146,7 +10147,7 @@ export namespace Prisma {
 
   export type UserCreateOrConnectWithoutPostsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
+    create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
   }
 
   export type UserCreateWithoutEditorPostsInput = {
@@ -10172,12 +10173,12 @@ export namespace Prisma {
 
   export type UserCreateOrConnectWithoutEditorPostsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
+    create: XOR<UserCreateWithoutEditorPostsInput, UserUncheckedCreateWithoutEditorPostsInput>
   }
 
   export type UserUpsertWithoutPostsInput = {
-    update: XOR<UserUncheckedUpdateWithoutPostsInput, UserUpdateWithoutPostsInput>
-    create: XOR<UserUncheckedCreateWithoutPostsInput, UserCreateWithoutPostsInput>
+    update: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
+    create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
   }
 
   export type UserUpdateWithoutPostsInput = {
@@ -10202,8 +10203,8 @@ export namespace Prisma {
   }
 
   export type UserUpsertWithoutEditorPostsInput = {
-    update: XOR<UserUncheckedUpdateWithoutEditorPostsInput, UserUpdateWithoutEditorPostsInput>
-    create: XOR<UserUncheckedCreateWithoutEditorPostsInput, UserCreateWithoutEditorPostsInput>
+    update: XOR<UserUpdateWithoutEditorPostsInput, UserUncheckedUpdateWithoutEditorPostsInput>
+    create: XOR<UserCreateWithoutEditorPostsInput, UserUncheckedCreateWithoutEditorPostsInput>
   }
 
   export type UserUpdateWithoutEditorPostsInput = {
@@ -10239,12 +10240,12 @@ export namespace Prisma {
 
   export type DirectorCreateOrConnectWithoutMoviesInput = {
     where: DirectorWhereUniqueInput
-    create: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
+    create: XOR<DirectorCreateWithoutMoviesInput, DirectorUncheckedCreateWithoutMoviesInput>
   }
 
   export type DirectorUpsertWithoutMoviesInput = {
-    update: XOR<DirectorUncheckedUpdateWithoutMoviesInput, DirectorUpdateWithoutMoviesInput>
-    create: XOR<DirectorUncheckedCreateWithoutMoviesInput, DirectorCreateWithoutMoviesInput>
+    update: XOR<DirectorUpdateWithoutMoviesInput, DirectorUncheckedUpdateWithoutMoviesInput>
+    create: XOR<DirectorCreateWithoutMoviesInput, DirectorUncheckedCreateWithoutMoviesInput>
   }
 
   export type DirectorUpdateWithoutMoviesInput = {
@@ -10267,7 +10268,7 @@ export namespace Prisma {
 
   export type MovieCreateOrConnectWithoutDirectorInput = {
     where: MovieWhereUniqueInput
-    create: XOR<MovieUncheckedCreateWithoutDirectorInput, MovieCreateWithoutDirectorInput>
+    create: XOR<MovieCreateWithoutDirectorInput, MovieUncheckedCreateWithoutDirectorInput>
   }
 
   export type MovieCreateManyDirectorInputEnvelope = {
@@ -10277,18 +10278,18 @@ export namespace Prisma {
 
   export type MovieUpsertWithWhereUniqueWithoutDirectorInput = {
     where: MovieWhereUniqueInput
-    update: XOR<MovieUncheckedUpdateWithoutDirectorInput, MovieUpdateWithoutDirectorInput>
-    create: XOR<MovieUncheckedCreateWithoutDirectorInput, MovieCreateWithoutDirectorInput>
+    update: XOR<MovieUpdateWithoutDirectorInput, MovieUncheckedUpdateWithoutDirectorInput>
+    create: XOR<MovieCreateWithoutDirectorInput, MovieUncheckedCreateWithoutDirectorInput>
   }
 
   export type MovieUpdateWithWhereUniqueWithoutDirectorInput = {
     where: MovieWhereUniqueInput
-    data: XOR<MovieUncheckedUpdateWithoutDirectorInput, MovieUpdateWithoutDirectorInput>
+    data: XOR<MovieUpdateWithoutDirectorInput, MovieUncheckedUpdateWithoutDirectorInput>
   }
 
   export type MovieUpdateManyWithWhereWithoutDirectorInput = {
     where: MovieScalarWhereInput
-    data: XOR<MovieUncheckedUpdateManyWithoutMoviesInput, MovieUpdateManyMutationInput>
+    data: XOR<MovieUpdateManyMutationInput, MovieUncheckedUpdateManyWithoutMoviesInput>
   }
 
   export type MovieScalarWhereInput = {
@@ -10313,7 +10314,7 @@ export namespace Prisma {
 
   export type CreatorCreateOrConnectWithoutLikesInput = {
     where: CreatorWhereUniqueInput
-    create: XOR<CreatorUncheckedCreateWithoutLikesInput, CreatorCreateWithoutLikesInput>
+    create: XOR<CreatorCreateWithoutLikesInput, CreatorUncheckedCreateWithoutLikesInput>
   }
 
   export type CreatorCreateWithoutProblemsInput = {
@@ -10328,23 +10329,23 @@ export namespace Prisma {
 
   export type CreatorCreateOrConnectWithoutProblemsInput = {
     where: CreatorWhereUniqueInput
-    create: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
+    create: XOR<CreatorCreateWithoutProblemsInput, CreatorUncheckedCreateWithoutProblemsInput>
   }
 
   export type CreatorUpsertWithWhereUniqueWithoutLikesInput = {
     where: CreatorWhereUniqueInput
-    update: XOR<CreatorUncheckedUpdateWithoutLikesInput, CreatorUpdateWithoutLikesInput>
-    create: XOR<CreatorUncheckedCreateWithoutLikesInput, CreatorCreateWithoutLikesInput>
+    update: XOR<CreatorUpdateWithoutLikesInput, CreatorUncheckedUpdateWithoutLikesInput>
+    create: XOR<CreatorCreateWithoutLikesInput, CreatorUncheckedCreateWithoutLikesInput>
   }
 
   export type CreatorUpdateWithWhereUniqueWithoutLikesInput = {
     where: CreatorWhereUniqueInput
-    data: XOR<CreatorUncheckedUpdateWithoutLikesInput, CreatorUpdateWithoutLikesInput>
+    data: XOR<CreatorUpdateWithoutLikesInput, CreatorUncheckedUpdateWithoutLikesInput>
   }
 
   export type CreatorUpdateManyWithWhereWithoutLikesInput = {
     where: CreatorScalarWhereInput
-    data: XOR<CreatorUncheckedUpdateManyWithoutLikedByInput, CreatorUpdateManyMutationInput>
+    data: XOR<CreatorUpdateManyMutationInput, CreatorUncheckedUpdateManyWithoutLikedByInput>
   }
 
   export type CreatorScalarWhereInput = {
@@ -10356,8 +10357,8 @@ export namespace Prisma {
   }
 
   export type CreatorUpsertWithoutProblemsInput = {
-    update: XOR<CreatorUncheckedUpdateWithoutProblemsInput, CreatorUpdateWithoutProblemsInput>
-    create: XOR<CreatorUncheckedCreateWithoutProblemsInput, CreatorCreateWithoutProblemsInput>
+    update: XOR<CreatorUpdateWithoutProblemsInput, CreatorUncheckedUpdateWithoutProblemsInput>
+    create: XOR<CreatorCreateWithoutProblemsInput, CreatorUncheckedCreateWithoutProblemsInput>
   }
 
   export type CreatorUpdateWithoutProblemsInput = {
@@ -10383,7 +10384,7 @@ export namespace Prisma {
 
   export type ProblemCreateOrConnectWithoutLikedByInput = {
     where: ProblemWhereUniqueInput
-    create: XOR<ProblemUncheckedCreateWithoutLikedByInput, ProblemCreateWithoutLikedByInput>
+    create: XOR<ProblemCreateWithoutLikedByInput, ProblemUncheckedCreateWithoutLikedByInput>
   }
 
   export type ProblemCreateWithoutCreatorInput = {
@@ -10398,7 +10399,7 @@ export namespace Prisma {
 
   export type ProblemCreateOrConnectWithoutCreatorInput = {
     where: ProblemWhereUniqueInput
-    create: XOR<ProblemUncheckedCreateWithoutCreatorInput, ProblemCreateWithoutCreatorInput>
+    create: XOR<ProblemCreateWithoutCreatorInput, ProblemUncheckedCreateWithoutCreatorInput>
   }
 
   export type ProblemCreateManyCreatorInputEnvelope = {
@@ -10408,18 +10409,18 @@ export namespace Prisma {
 
   export type ProblemUpsertWithWhereUniqueWithoutLikedByInput = {
     where: ProblemWhereUniqueInput
-    update: XOR<ProblemUncheckedUpdateWithoutLikedByInput, ProblemUpdateWithoutLikedByInput>
-    create: XOR<ProblemUncheckedCreateWithoutLikedByInput, ProblemCreateWithoutLikedByInput>
+    update: XOR<ProblemUpdateWithoutLikedByInput, ProblemUncheckedUpdateWithoutLikedByInput>
+    create: XOR<ProblemCreateWithoutLikedByInput, ProblemUncheckedCreateWithoutLikedByInput>
   }
 
   export type ProblemUpdateWithWhereUniqueWithoutLikedByInput = {
     where: ProblemWhereUniqueInput
-    data: XOR<ProblemUncheckedUpdateWithoutLikedByInput, ProblemUpdateWithoutLikedByInput>
+    data: XOR<ProblemUpdateWithoutLikedByInput, ProblemUncheckedUpdateWithoutLikedByInput>
   }
 
   export type ProblemUpdateManyWithWhereWithoutLikedByInput = {
     where: ProblemScalarWhereInput
-    data: XOR<ProblemUncheckedUpdateManyWithoutLikesInput, ProblemUpdateManyMutationInput>
+    data: XOR<ProblemUpdateManyMutationInput, ProblemUncheckedUpdateManyWithoutLikesInput>
   }
 
   export type ProblemScalarWhereInput = {
@@ -10433,18 +10434,18 @@ export namespace Prisma {
 
   export type ProblemUpsertWithWhereUniqueWithoutCreatorInput = {
     where: ProblemWhereUniqueInput
-    update: XOR<ProblemUncheckedUpdateWithoutCreatorInput, ProblemUpdateWithoutCreatorInput>
-    create: XOR<ProblemUncheckedCreateWithoutCreatorInput, ProblemCreateWithoutCreatorInput>
+    update: XOR<ProblemUpdateWithoutCreatorInput, ProblemUncheckedUpdateWithoutCreatorInput>
+    create: XOR<ProblemCreateWithoutCreatorInput, ProblemUncheckedCreateWithoutCreatorInput>
   }
 
   export type ProblemUpdateWithWhereUniqueWithoutCreatorInput = {
     where: ProblemWhereUniqueInput
-    data: XOR<ProblemUncheckedUpdateWithoutCreatorInput, ProblemUpdateWithoutCreatorInput>
+    data: XOR<ProblemUpdateWithoutCreatorInput, ProblemUncheckedUpdateWithoutCreatorInput>
   }
 
   export type ProblemUpdateManyWithWhereWithoutCreatorInput = {
     where: ProblemScalarWhereInput
-    data: XOR<ProblemUncheckedUpdateManyWithoutProblemsInput, ProblemUpdateManyMutationInput>
+    data: XOR<ProblemUpdateManyMutationInput, ProblemUncheckedUpdateManyWithoutProblemsInput>
   }
 
   export type postCreateManyAuthorInput = {

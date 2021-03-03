@@ -183,7 +183,7 @@ declare namespace DMMF {
     }
 }
 
-declare type Dictionary<T> = {
+declare type Dictionary$1<T> = {
     [key: string]: T;
 };
 interface GeneratorConfig {
@@ -191,7 +191,7 @@ interface GeneratorConfig {
     output: string | null;
     isCustomOutput?: boolean;
     provider: string;
-    config: Dictionary<string>;
+    config: Dictionary$1<string>;
     binaryTargets: string[];
     previewFeatures: string[];
 }
@@ -210,7 +210,7 @@ interface DataSource {
     };
 }
 
-interface Dictionary$1<T> {
+interface Dictionary<T> {
     [key: string]: T;
 }
 
@@ -224,17 +224,17 @@ declare class DMMFClass implements DMMF.Document {
         model: DMMF.OutputType[];
         prisma: DMMF.OutputType[];
     };
-    outputTypeMap: Dictionary$1<DMMF.OutputType>;
+    outputTypeMap: Dictionary<DMMF.OutputType>;
     inputObjectTypes: {
         model?: DMMF.InputType[];
         prisma: DMMF.InputType[];
     };
-    inputTypeMap: Dictionary$1<DMMF.InputType>;
-    enumMap: Dictionary$1<DMMF.SchemaEnum>;
-    datamodelEnumMap: Dictionary$1<DMMF.DatamodelEnum>;
-    modelMap: Dictionary$1<DMMF.Model>;
-    mappingsMap: Dictionary$1<DMMF.ModelMapping>;
-    rootFieldMap: Dictionary$1<DMMF.SchemaField>;
+    inputTypeMap: Dictionary<DMMF.InputType>;
+    enumMap: Dictionary<DMMF.SchemaEnum>;
+    datamodelEnumMap: Dictionary<DMMF.DatamodelEnum>;
+    modelMap: Dictionary<DMMF.Model>;
+    mappingsMap: Dictionary<DMMF.ModelMapping>;
+    rootFieldMap: Dictionary<DMMF.SchemaField>;
     constructor({ datamodel, schema, mappings }: DMMF.Document);
     get [Symbol.toStringTag](): string;
     protected outputTypeToMergedOutputType: (outputType: DMMF.OutputType) => DMMF.OutputType;
@@ -247,17 +247,18 @@ declare class DMMFClass implements DMMF.Document {
         model: DMMF.OutputType[];
         prisma: DMMF.OutputType[];
     };
-    protected getDatamodelEnumMap(): Dictionary$1<DMMF.DatamodelEnum>;
-    protected getEnumMap(): Dictionary$1<DMMF.SchemaEnum>;
-    protected getModelMap(): Dictionary$1<DMMF.Model>;
-    protected getMergedOutputTypeMap(): Dictionary$1<DMMF.OutputType>;
-    protected getInputTypeMap(): Dictionary$1<DMMF.InputType>;
-    protected getMappingsMap(): Dictionary$1<DMMF.ModelMapping>;
-    protected getRootFieldMap(): Dictionary$1<DMMF.SchemaField>;
+    protected getDatamodelEnumMap(): Dictionary<DMMF.DatamodelEnum>;
+    protected getEnumMap(): Dictionary<DMMF.SchemaEnum>;
+    protected getModelMap(): Dictionary<DMMF.Model>;
+    protected getMergedOutputTypeMap(): Dictionary<DMMF.OutputType>;
+    protected getInputTypeMap(): Dictionary<DMMF.InputType>;
+    protected getMappingsMap(): Dictionary<DMMF.ModelMapping>;
+    protected getRootFieldMap(): Dictionary<DMMF.SchemaField>;
 }
 
 interface ArgError {
     path: string[];
+    id?: string;
     error: InvalidArgError;
 }
 interface FieldError {
@@ -369,7 +370,7 @@ declare class Document {
     toString(): string;
     validate(select?: any, isTopLevelQuery?: boolean, originalMethod?: string, errorFormat?: 'pretty' | 'minimal' | 'colorless', validationCallsite?: any): void;
     protected printFieldError: ({ error }: FieldError, missingItems: MissingItem[], minimal: boolean) => string | undefined;
-    protected printArgError: ({ error, path }: ArgError, hasMissingItems: boolean, minimal: boolean) => string | undefined;
+    protected printArgError: ({ error, path, id }: ArgError, hasMissingItems: boolean, minimal: boolean) => string | undefined;
     /**
      * As we're allowing both single objects and array of objects for list inputs, we need to remove incorrect
      * zero indexes from the path

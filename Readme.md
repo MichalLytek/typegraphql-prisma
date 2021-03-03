@@ -21,7 +21,7 @@ npm i @prisma/client
 
 > Be aware that `typegraphql-prisma` is designed to work with a selected versions of `prisma`.
 >
-> Please make sure you use `prisma` and `@prisma/client` of version matching `~2.17.0`.
+> Please make sure you use `prisma` and `@prisma/client` of version matching `~2.18.0`.
 > Otherwise, the runtime check will report an error when you run the generator.
 
 You also need to install the GraphQL Scalars library (to support the Prisma `Json`, `BigInt` and `Byte` types):

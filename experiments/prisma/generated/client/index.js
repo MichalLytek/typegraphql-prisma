@@ -26,12 +26,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 2.17.0
- * Query Engine version: 3c463ebd78b1d21d8fdacdd27899e280cf686223
+ * Prisma Client JS version: 2.18.0
+ * Query Engine version: da6fafb57b24e0b61ca20960c64e2d41f9e8cff1
  */
 Prisma.prismaVersion = {
-  client: "2.17.0",
-  engine: "3c463ebd78b1d21d8fdacdd27899e280cf686223"
+  client: "2.18.0",
+  engine: "da6fafb57b24e0b61ca20960c64e2d41f9e8cff1"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -196,8 +196,8 @@ const config = {
   },
   "sqliteDatasourceOverrides": [],
   "relativePath": "../..",
-  "clientVersion": "2.17.0",
-  "engineVersion": "3c463ebd78b1d21d8fdacdd27899e280cf686223",
+  "clientVersion": "2.18.0",
+  "engineVersion": "da6fafb57b24e0b61ca20960c64e2d41f9e8cff1",
   "datasourceNames": [
     "postgres"
   ],

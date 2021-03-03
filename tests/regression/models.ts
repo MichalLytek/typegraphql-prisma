@@ -123,17 +123,19 @@ describe("models", () => {
 
       /// User model doc
       model User {
-        id           Int    @id @default(autoincrement())
+        id          Int    @id @default(autoincrement())
         /// field doc
-        stringField  String
+        stringField String
         // field comment
-        intField     Int
+        intField    Int
         /// relation doc
-        posts        Post[]
+        posts       Post[]
       }
 
       model Post {
-        id  Int  @id @default(autoincrement())
+        id     Int   @id @default(autoincrement())
+        userId Int?
+        User   User? @relation(fields: [userId], references: [id])
       }
     `;
 
