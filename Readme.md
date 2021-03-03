@@ -363,7 +363,7 @@ applyResolversEnhanceMap(resolversEnhanceMap);
 If you need to apply some decorators, like `@Authorized` or `@Extensions`, on the model `@ObjectType` and its fields, you can use similar pattern as for the resolver actions described above.
 
 All you need to do is to import `ModelsEnhanceMap` type and `applyModelsEnhanceMap` function, and then create a config object, where you put the decorator functions (without `@`) in an array.
-If you want to split the config definitions, you can use `ModelConfig` and `ModelFieldsConfig` type in the same way like `ResolverActionsConfig`, e.g.:
+If you want to split the config definitions, you can use `ModelConfig` type in the same way like `ResolverActionsConfig`, e.g.:
 
 ```ts
 import {
