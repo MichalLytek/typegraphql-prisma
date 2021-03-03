@@ -3,7 +3,7 @@
   "scripts": {
     "start": "ts-node --transpile-only ./index.ts",
     "generate": "prisma generate",
-    "seed": "ts-node --transpile-only ./seed.ts"
+    "seed": "prisma db seed --preview-feature"
   },
   "dependencies": {
     "@prisma/client": "~2.18.0",
