@@ -10,6 +10,7 @@ import {
   Mutation,
   Authorized,
   Extensions,
+  UseMiddleware,
 } from "type-graphql";
 import { ApolloServer } from "apollo-server";
 import path from "path";
@@ -50,6 +51,8 @@ import {
   applyInputTypesEnhanceMap,
   applyArgsTypesEnhanceMap,
   NativeTypeModelCrudResolver,
+  applyRelationResolversEnhanceMap,
+  RelationResolverActionsConfig,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
@@ -100,6 +103,19 @@ applyInputTypesEnhanceMap({
       problemText: [MinLength(10)],
     },
   },
+});
+
+const clientRelationEnhanceConfig: RelationResolverActionsConfig<"Client"> = {
+  clientPosts: [
+    UseMiddleware((_data, next) => {
+      console.log("Client -> clientPosts accessed");
+      return next();
+    }),
+  ],
+};
+
+applyRelationResolversEnhanceMap({
+  Client: clientRelationEnhanceConfig,
 });
 
 const directorActionsConfig: ResolverActionsConfig<"Director"> = {

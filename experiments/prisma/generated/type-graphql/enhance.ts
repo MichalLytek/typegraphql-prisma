@@ -1,6 +1,7 @@
 import { ClassType } from "type-graphql";
 import * as crudResolvers from "./resolvers/crud/resolvers-crud.index";
 import * as actionResolvers from "./resolvers/crud/resolvers-actions.index";
+import * as relationResolvers from "./resolvers/relations/resolvers.index";
 import * as models from "./models";
 import * as outputTypes from "./resolvers/outputs";
 import * as inputTypes from "./resolvers/inputs";
@@ -16,6 +17,14 @@ const crudResolversMap = {
   Problem: crudResolvers.ProblemCrudResolver,
   Creator: crudResolvers.CreatorCrudResolver,
   NativeTypeModel: crudResolvers.NativeTypeModelCrudResolver
+};
+const relationResolversMap = {
+  Client: relationResolvers.ClientRelationsResolver,
+  Post: relationResolvers.PostRelationsResolver,
+  Movie: relationResolvers.MovieRelationsResolver,
+  Director: relationResolvers.DirectorRelationsResolver,
+  Problem: relationResolvers.ProblemRelationsResolver,
+  Creator: relationResolvers.CreatorRelationsResolver
 };
 const actionResolversMap = {
   Client: {
@@ -191,6 +200,42 @@ export function applyResolversEnhanceMap(
   }
 }
 
+type RelationResolverModelNames = keyof typeof relationResolversMap;
+
+type RelationResolverActionNames<
+  TModel extends RelationResolverModelNames
+  > = keyof typeof relationResolversMap[TModel]["prototype"];
+
+export type RelationResolverActionsConfig<TModel extends RelationResolverModelNames> = {
+  [TActionName in RelationResolverActionNames<TModel>]?: MethodDecorator[];
+};
+
+export type RelationResolversEnhanceMap = {
+  [TModel in RelationResolverModelNames]?: RelationResolverActionsConfig<TModel>;
+};
+
+export function applyRelationResolversEnhanceMap(
+  relationResolversEnhanceMap: RelationResolversEnhanceMap,
+) {
+  for (const relationResolversEnhanceMapKey of Object.keys(relationResolversEnhanceMap)) {
+    const modelName = relationResolversEnhanceMapKey as keyof typeof relationResolversEnhanceMap;
+    const relationResolverActionsConfig = relationResolversEnhanceMap[modelName]!;
+    for (const relationResolverActionName of Object.keys(relationResolverActionsConfig)) {
+      const decorators = relationResolverActionsConfig[
+        relationResolverActionName as keyof typeof relationResolverActionsConfig
+      ] as MethodDecorator[];
+      const relationResolverTarget = relationResolversMap[modelName].prototype;
+      for (const decorator of decorators) {
+        decorator(
+          relationResolverTarget,
+          relationResolverActionName,
+          Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
+        );
+      }
+    }
+  }
+}
+
 type TypeConfig = {
   class?: ClassDecorator[];
   fields?: FieldsConfig;
@@ -351,6 +396,7 @@ export function applyArgsTypesEnhanceMap(
     applyTypeClassEnhanceConfig(typeConfig, typeClass, typeTarget);
   }
 }
+
 
 
 

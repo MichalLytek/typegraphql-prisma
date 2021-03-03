@@ -4,6 +4,7 @@ import {
   inputsFolderName,
   modelsFolderName,
   outputsFolderName,
+  relationsResolversFolderName,
   resolversFolderName,
 } from "./config";
 import { DMMF } from "./dmmf/types";
@@ -11,7 +12,10 @@ import { DMMF } from "./dmmf/types";
 export function generateEnhanceMap(
   sourceFile: SourceFile,
   modelMappings: DMMF.ModelMapping[],
+  relationModels: DMMF.RelationModel[],
 ) {
+  const hasRelations = relationModels.length > 0;
+
   sourceFile.addImportDeclaration({
     moduleSpecifier: "type-graphql",
     namedImports: ["ClassType"],
@@ -26,6 +30,13 @@ export function generateEnhanceMap(
     moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-actions.index`,
     namespaceImport: "actionResolvers",
   });
+
+  if (hasRelations) {
+    sourceFile.addImportDeclaration({
+      moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index`,
+      namespaceImport: "relationResolvers",
+    });
+  }
 
   sourceFile.addImportDeclaration({
     moduleSpecifier: `./${modelsFolderName}`,
@@ -64,6 +75,26 @@ export function generateEnhanceMap(
     ],
     trailingTrivia: "\r\n",
   });
+
+  if (hasRelations) {
+    sourceFile.addVariableStatement({
+      declarationKind: VariableDeclarationKind.Const,
+      declarations: [
+        {
+          name: "relationResolversMap",
+          initializer: Writers.object(
+            Object.fromEntries(
+              relationModels.map(relationModel => [
+                relationModel.model.typeName,
+                `relationResolvers.${relationModel.resolverName}`,
+              ]),
+            ),
+          ),
+        },
+      ],
+      trailingTrivia: "\r\n",
+    });
+  }
 
   sourceFile.addVariableStatement({
     declarationKind: VariableDeclarationKind.Const,
@@ -135,6 +166,46 @@ export function generateEnhanceMap(
       }
     }
   `);
+
+  if (hasRelations) {
+    sourceFile.addStatements(/* ts */ `
+    type RelationResolverModelNames = keyof typeof relationResolversMap;
+
+    type RelationResolverActionNames<
+      TModel extends RelationResolverModelNames
+      > = keyof typeof relationResolversMap[TModel]["prototype"];
+
+    export type RelationResolverActionsConfig<TModel extends RelationResolverModelNames> = {
+      [TActionName in RelationResolverActionNames<TModel>]?: MethodDecorator[];
+    };
+
+    export type RelationResolversEnhanceMap = {
+      [TModel in RelationResolverModelNames]?: RelationResolverActionsConfig<TModel>;
+    };
+
+    export function applyRelationResolversEnhanceMap(
+      relationResolversEnhanceMap: RelationResolversEnhanceMap,
+    ) {
+      for (const relationResolversEnhanceMapKey of Object.keys(relationResolversEnhanceMap)) {
+        const modelName = relationResolversEnhanceMapKey as keyof typeof relationResolversEnhanceMap;
+        const relationResolverActionsConfig = relationResolversEnhanceMap[modelName]!;
+        for (const relationResolverActionName of Object.keys(relationResolverActionsConfig)) {
+          const decorators = relationResolverActionsConfig[
+            relationResolverActionName as keyof typeof relationResolverActionsConfig
+          ] as MethodDecorator[];
+          const relationResolverTarget = relationResolversMap[modelName].prototype;
+          for (const decorator of decorators) {
+            decorator(
+              relationResolverTarget,
+              relationResolverActionName,
+              Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
+            );
+          }
+        }
+      }
+    }
+  `);
+  }
 
   sourceFile.addStatements(/* ts */ `
     type TypeConfig = {

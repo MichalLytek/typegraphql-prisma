@@ -403,6 +403,23 @@ applyModelsEnhanceMap(modelsEnhanceMap);
 
 This way, you can apply some rules on single model or its fields, like `User.email` visible only for Admin.
 
+If you want to apply decorator to model's relation field, you need to use the `applyRelationResolversEnhanceMap` function and `RelationResolverActionsConfig<TModel>` type if you need to separate the configs:
+
+```ts
+const clientRelationEnhanceConfig: RelationResolverActionsConfig<"Client"> = {
+  posts: [
+    UseMiddleware((_data, next) => {
+      console.log("Client.posts relation field accessed");
+      return next();
+    }),
+  ],
+};
+
+applyRelationResolversEnhanceMap({
+  Client: clientRelationEnhanceConfig,
+});
+```
+
 In case of other output types like `AggregateFooBar`, you can use the same pattern but this time using the `applyOutputTypeEnhanceMap` function and `OutputTypeConfig` or `OutputTypesEnhanceMap` types:
 
 ```ts

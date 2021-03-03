@@ -446,7 +446,11 @@ export default async function generateCode(
     undefined,
     { overwrite: true },
   );
-  generateEnhanceMap(enhanceSourceFile, dmmfDocument.modelMappings);
+  generateEnhanceMap(
+    enhanceSourceFile,
+    dmmfDocument.modelMappings,
+    dmmfDocument.relationModels,
+  );
 
   log("Generate custom scalars");
   const scalarsSourceFile = project.createSourceFile(

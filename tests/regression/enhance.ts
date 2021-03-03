@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+
 import generateArtifactsDirPath from "../helpers/artifacts-dir";
 import { generateCodeFromSchema } from "../helpers/generate-code";
 import createReadGeneratedFile, {
@@ -15,7 +16,7 @@ describe("resolvers enhance", () => {
     readGeneratedFile = createReadGeneratedFile(outputDirPath);
   });
 
-  it("should emit models and resolvers config map with types", async () => {
+  it("should emit emit enhance file properly", async () => {
     const schema = /* prisma */ `
       datasource db {
         provider = "postgresql"
@@ -48,5 +49,29 @@ describe("resolvers enhance", () => {
 
     expect(enhanceTSFile).toMatchSnapshot("enhance");
     expect(mainIndexTSFile).toMatchSnapshot("mainIndex");
+  });
+
+  it("should emit enhance file properly even in model has no relations", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model Post {
+        uuid      String    @id @default(uuid())
+        createdAt DateTime  @default(now())
+        updatedAt DateTime  @updatedAt
+        published Boolean
+        title     String
+        content   String?
+        metadata  Json
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const enhanceTSFile = await readGeneratedFile("/enhance.ts");
+
+    expect(enhanceTSFile).toMatchSnapshot("enhance");
   });
 });
