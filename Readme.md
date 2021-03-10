@@ -358,6 +358,16 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
 applyResolversEnhanceMap(resolversEnhanceMap);
 ```
 
+If you want to apply some decorators on all the methods of a model CRUD resolver, you can use the special `_all` property to achieve that:
+
+```ts
+applyResolversEnhanceMap({
+  Client: {
+    _all: [Authorized()],
+  },
+});
+```
+
 #### Additional decorators for Prisma schema classes and fields
 
 If you need to apply some decorators, like `@Authorized` or `@Extensions`, on the model `@ObjectType` and its fields, you can use similar pattern as for the resolver actions described above.
@@ -403,7 +413,24 @@ applyModelsEnhanceMap(modelsEnhanceMap);
 
 This way, you can apply some rules on single model or its fields, like `User.email` visible only for Admin.
 
-If you want to apply decorator to model's relation field, you need to use the `applyRelationResolversEnhanceMap` function and `RelationResolverActionsConfig<TModel>` type if you need to separate the configs:
+If you want to apply some decorators on all the fields of a model, you can use the special `_all` property to achieve that:
+
+```ts
+applyModelsEnhanceMap({
+  User: {
+    fields: {
+      // all fields are protected against unauthorized access
+      _all: [Authorized()],
+      // this field  has additional decorators to apply
+      password: [
+        Extensions({ logMessage: "Danger zone", logLevel: LogLevel.WARN }),
+      ],
+    },
+  },
+});
+```
+
+If you want to apply decorator to model's relation field, you need to use the `applyRelationResolversEnhanceMap` function and `RelationResolverActionsConfig<TModel>` type if you need to separate the configs. In order to apply some decorators on all the fields of a model, you can use the special `_all` property to achieve that:
 
 ```ts
 const clientRelationEnhanceConfig: RelationResolverActionsConfig<"Client"> = {
@@ -417,6 +444,12 @@ const clientRelationEnhanceConfig: RelationResolverActionsConfig<"Client"> = {
 
 applyRelationResolversEnhanceMap({
   Client: clientRelationEnhanceConfig,
+  Product: {
+    fields: {
+      // all fields are protected against unauthorized access
+      _all: [Authorized()],
+    },
+  },
 });
 ```
 
@@ -435,13 +468,14 @@ applyOutputTypeEnhanceMap({
   // or an inline one
   ClientAvgAggregate: {
     fields: {
+      _all: [Extensions({ complexity: 10 })],
       age: [Authorized()],
     },
   },
 });
 ```
 
-If you want to add decorators for input types or args classes, you can leverage `applyArgsTypesEnhanceMap` and `applyInputTypesEnhanceMap` functions and use `ArgsTypesEnhanceMap`, `ArgConfig<TArgsType>`, `InputTypesEnhanceMap`, `InputTypeConfig<TInput>` types if you want to split the definitions:
+If you want to add decorators for input types or args classes, you can leverage `applyArgsTypesEnhanceMap` and `applyInputTypesEnhanceMap` functions and use `ArgsTypesEnhanceMap`, `ArgConfig<TArgsType>`, `InputTypesEnhanceMap`, `InputTypeConfig<TInput>` types if you want to split the definitions. The special `_all` property also can apply the decorators to all the fields:
 
 ```ts
 applyArgsTypesEnhanceMap({
@@ -455,6 +489,7 @@ applyArgsTypesEnhanceMap({
 applyInputTypesEnhanceMap({
   ProblemCreateInput: {
     fields: {
+      _all: [Allow()],
       problemText: [MinLength(10)],
     },
   },

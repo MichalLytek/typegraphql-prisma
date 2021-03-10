@@ -14,7 +14,12 @@ import {
 } from "type-graphql";
 import { ApolloServer } from "apollo-server";
 import path from "path";
-import { MinLength, ValidateNested } from "class-validator";
+import {
+  IsDefined,
+  MinLength,
+  NotEquals,
+  ValidateNested,
+} from "class-validator";
 
 import {
   Client,
@@ -54,7 +59,6 @@ import {
   applyRelationResolversEnhanceMap,
   RelationResolverActionsConfig,
 } from "./prisma/generated/type-graphql";
-import { PrismaClient } from "./prisma/generated/client";
 import * as Prisma from "./prisma/generated/client";
 import { ProblemCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Problem/ProblemCrudResolver";
 import { CreatorCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Creator/CreatorCrudResolver";
@@ -72,6 +76,18 @@ const modelsEnhanceMap: ModelsEnhanceMap = {
       movies: [Authorized()],
     },
   },
+  Post: {
+    fields: {
+      _all: [
+        UseMiddleware(({ info }, next) => {
+          console.log(
+            `${info.parentType.name}.${info.fieldName} field accessed`,
+          );
+          return next();
+        }),
+      ],
+    },
+  },
 };
 applyModelsEnhanceMap(modelsEnhanceMap);
 
@@ -87,6 +103,11 @@ applyOutputTypesEnhanceMap({
       age: [Authorized()],
     },
   },
+  AggregateCreator: {
+    fields: {
+      _all: [Extensions({ test: true })],
+    },
+  },
 });
 
 applyArgsTypesEnhanceMap({
@@ -95,9 +116,19 @@ applyArgsTypesEnhanceMap({
       data: [ValidateNested()],
     },
   },
+  FindManyDirectorArgs: {
+    fields: {
+      _all: [IsDefined()],
+    },
+  },
 });
 
 applyInputTypesEnhanceMap({
+  ClientCreateInput: {
+    fields: {
+      _all: [Extensions({ test: true })],
+    },
+  },
   ProblemCreateInput: {
     fields: {
       problemText: [MinLength(10)],
@@ -107,8 +138,8 @@ applyInputTypesEnhanceMap({
 
 const clientRelationEnhanceConfig: RelationResolverActionsConfig<"Client"> = {
   clientPosts: [
-    UseMiddleware((_data, next) => {
-      console.log("Client -> clientPosts accessed");
+    UseMiddleware(({ info }, next) => {
+      console.log(`${info.parentType.name}.${info.fieldName} field accessed`);
       return next();
     }),
   ],
@@ -116,12 +147,28 @@ const clientRelationEnhanceConfig: RelationResolverActionsConfig<"Client"> = {
 
 applyRelationResolversEnhanceMap({
   Client: clientRelationEnhanceConfig,
+  Movie: {
+    _all: [
+      UseMiddleware(({ info }, next) => {
+        console.log(`${info.parentType.name}.${info.fieldName} field accessed`);
+        return next();
+      }),
+    ],
+  },
 });
 
 const directorActionsConfig: ResolverActionsConfig<"Director"> = {
   createDirector: [Authorized()],
 };
 const resolversEnhanceMap: ResolversEnhanceMap = {
+  Patient: {
+    _all: [
+      UseMiddleware(({ info }, next) => {
+        console.log(`Query "${info.fieldName}" accessed`);
+        return next();
+      }),
+    ],
+  },
   Category: {
     categories: [Authorized()],
   },
@@ -130,7 +177,7 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
 applyResolversEnhanceMap(resolversEnhanceMap);
 
 interface Context {
-  prisma: PrismaClient;
+  prisma: Prisma.PrismaClient;
 }
 
 @Resolver(of => Client)
@@ -207,7 +254,7 @@ async function main() {
     },
   });
 
-  const prisma = new PrismaClient({
+  const prisma = new Prisma.PrismaClient({
     // see dataloader for relations in action
     log: ["query"],
   });

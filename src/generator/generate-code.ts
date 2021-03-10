@@ -450,6 +450,9 @@ export default async function generateCode(
     enhanceSourceFile,
     dmmfDocument.modelMappings,
     dmmfDocument.relationModels,
+    dmmfDocument.datamodel.models,
+    dmmfDocument.schema.inputTypes,
+    dmmfDocument.schema.outputTypes,
   );
 
   log("Generate custom scalars");
