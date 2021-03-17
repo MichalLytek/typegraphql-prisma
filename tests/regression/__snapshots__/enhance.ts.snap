@@ -61,7 +61,7 @@ const inputsInfo = {
   ClientOrderByInput: [\\"id\\", \\"email\\"],
   ClientWhereUniqueInput: [\\"id\\", \\"email\\"],
   PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"author\\", \\"authorId\\", \\"metadata\\"],
-  PostOrderByInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"author\\", \\"authorId\\", \\"metadata\\"],
+  PostOrderByInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostWhereUniqueInput: [\\"uuid\\"],
   ClientCreateInput: [\\"email\\", \\"posts\\"],
   ClientUpdateInput: [\\"email\\", \\"posts\\"],

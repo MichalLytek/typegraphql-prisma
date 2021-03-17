@@ -992,6 +992,280 @@ export { UpsertUserArgs } from \\"./UpsertUserArgs\\";
 "
 `;
 
+exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by many-to-many relation fields: AggregateFirstModelArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { FirstModelOrderByWithRelationInput } from \\"../../../inputs/FirstModelOrderByWithRelationInput\\";
+import { FirstModelWhereInput } from \\"../../../inputs/FirstModelWhereInput\\";
+import { FirstModelWhereUniqueInput } from \\"../../../inputs/FirstModelWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class AggregateFirstModelArgs {
+  @TypeGraphQL.Field(_type => FirstModelWhereInput, {
+    nullable: true
+  })
+  where?: FirstModelWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [FirstModelOrderByWithRelationInput], {
+    nullable: true
+  })
+  orderBy?: FirstModelOrderByWithRelationInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: FirstModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+}
+"
+`;
+
+exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by many-to-many relation fields: FindFirstFirstModelArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { FirstModelOrderByWithRelationInput } from \\"../../../inputs/FirstModelOrderByWithRelationInput\\";
+import { FirstModelWhereInput } from \\"../../../inputs/FirstModelWhereInput\\";
+import { FirstModelWhereUniqueInput } from \\"../../../inputs/FirstModelWhereUniqueInput\\";
+import { FirstModelScalarFieldEnum } from \\"../../../../enums/FirstModelScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class FindFirstFirstModelArgs {
+  @TypeGraphQL.Field(_type => FirstModelWhereInput, {
+    nullable: true
+  })
+  where?: FirstModelWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [FirstModelOrderByWithRelationInput], {
+    nullable: true
+  })
+  orderBy?: FirstModelOrderByWithRelationInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: FirstModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [FirstModelScalarFieldEnum], {
+    nullable: true
+  })
+  distinct?: Array<\\"idField\\" | \\"uniqueStringField\\" | \\"floatField\\"> | undefined;
+}
+"
+`;
+
+exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by many-to-many relation fields: FindManyFirstModelArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { FirstModelOrderByWithRelationInput } from \\"../../../inputs/FirstModelOrderByWithRelationInput\\";
+import { FirstModelWhereInput } from \\"../../../inputs/FirstModelWhereInput\\";
+import { FirstModelWhereUniqueInput } from \\"../../../inputs/FirstModelWhereUniqueInput\\";
+import { FirstModelScalarFieldEnum } from \\"../../../../enums/FirstModelScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class FindManyFirstModelArgs {
+  @TypeGraphQL.Field(_type => FirstModelWhereInput, {
+    nullable: true
+  })
+  where?: FirstModelWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [FirstModelOrderByWithRelationInput], {
+    nullable: true
+  })
+  orderBy?: FirstModelOrderByWithRelationInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: FirstModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [FirstModelScalarFieldEnum], {
+    nullable: true
+  })
+  distinct?: Array<\\"idField\\" | \\"uniqueStringField\\" | \\"floatField\\"> | undefined;
+}
+"
+`;
+
+exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by many-to-many relation fields: index 1`] = `
+"export { AggregateFirstModelArgs } from \\"./AggregateFirstModelArgs\\";
+export { CreateFirstModelArgs } from \\"./CreateFirstModelArgs\\";
+export { DeleteFirstModelArgs } from \\"./DeleteFirstModelArgs\\";
+export { DeleteManyFirstModelArgs } from \\"./DeleteManyFirstModelArgs\\";
+export { FindFirstFirstModelArgs } from \\"./FindFirstFirstModelArgs\\";
+export { FindManyFirstModelArgs } from \\"./FindManyFirstModelArgs\\";
+export { FindUniqueFirstModelArgs } from \\"./FindUniqueFirstModelArgs\\";
+export { UpdateFirstModelArgs } from \\"./UpdateFirstModelArgs\\";
+export { UpdateManyFirstModelArgs } from \\"./UpdateManyFirstModelArgs\\";
+export { UpsertFirstModelArgs } from \\"./UpsertFirstModelArgs\\";
+"
+`;
+
+exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by one-to-many relation fields: AggregateSecondModelArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { SecondModelOrderByWithRelationInput } from \\"../../../inputs/SecondModelOrderByWithRelationInput\\";
+import { SecondModelWhereInput } from \\"../../../inputs/SecondModelWhereInput\\";
+import { SecondModelWhereUniqueInput } from \\"../../../inputs/SecondModelWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class AggregateSecondModelArgs {
+  @TypeGraphQL.Field(_type => SecondModelWhereInput, {
+    nullable: true
+  })
+  where?: SecondModelWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [SecondModelOrderByWithRelationInput], {
+    nullable: true
+  })
+  orderBy?: SecondModelOrderByWithRelationInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => SecondModelWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: SecondModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+}
+"
+`;
+
+exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by one-to-many relation fields: FindFirstSecondModelArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { SecondModelOrderByWithRelationInput } from \\"../../../inputs/SecondModelOrderByWithRelationInput\\";
+import { SecondModelWhereInput } from \\"../../../inputs/SecondModelWhereInput\\";
+import { SecondModelWhereUniqueInput } from \\"../../../inputs/SecondModelWhereUniqueInput\\";
+import { SecondModelScalarFieldEnum } from \\"../../../../enums/SecondModelScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class FindFirstSecondModelArgs {
+  @TypeGraphQL.Field(_type => SecondModelWhereInput, {
+    nullable: true
+  })
+  where?: SecondModelWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [SecondModelOrderByWithRelationInput], {
+    nullable: true
+  })
+  orderBy?: SecondModelOrderByWithRelationInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => SecondModelWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: SecondModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [SecondModelScalarFieldEnum], {
+    nullable: true
+  })
+  distinct?: Array<\\"idField\\" | \\"uniqueStringField\\" | \\"floatField\\" | \\"firstModelFieldId\\"> | undefined;
+}
+"
+`;
+
+exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by one-to-many relation fields: FindManySecondModelArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { SecondModelOrderByWithRelationInput } from \\"../../../inputs/SecondModelOrderByWithRelationInput\\";
+import { SecondModelWhereInput } from \\"../../../inputs/SecondModelWhereInput\\";
+import { SecondModelWhereUniqueInput } from \\"../../../inputs/SecondModelWhereUniqueInput\\";
+import { SecondModelScalarFieldEnum } from \\"../../../../enums/SecondModelScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class FindManySecondModelArgs {
+  @TypeGraphQL.Field(_type => SecondModelWhereInput, {
+    nullable: true
+  })
+  where?: SecondModelWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [SecondModelOrderByWithRelationInput], {
+    nullable: true
+  })
+  orderBy?: SecondModelOrderByWithRelationInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => SecondModelWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: SecondModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [SecondModelScalarFieldEnum], {
+    nullable: true
+  })
+  distinct?: Array<\\"idField\\" | \\"uniqueStringField\\" | \\"floatField\\" | \\"firstModelFieldId\\"> | undefined;
+}
+"
+`;
+
+exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by one-to-many relation fields: index 1`] = `
+"export { AggregateSecondModelArgs } from \\"./AggregateSecondModelArgs\\";
+export { CreateSecondModelArgs } from \\"./CreateSecondModelArgs\\";
+export { DeleteManySecondModelArgs } from \\"./DeleteManySecondModelArgs\\";
+export { DeleteSecondModelArgs } from \\"./DeleteSecondModelArgs\\";
+export { FindFirstSecondModelArgs } from \\"./FindFirstSecondModelArgs\\";
+export { FindManySecondModelArgs } from \\"./FindManySecondModelArgs\\";
+export { FindUniqueSecondModelArgs } from \\"./FindUniqueSecondModelArgs\\";
+export { UpdateManySecondModelArgs } from \\"./UpdateManySecondModelArgs\\";
+export { UpdateSecondModelArgs } from \\"./UpdateSecondModelArgs\\";
+export { UpsertSecondModelArgs } from \\"./UpsertSecondModelArgs\\";
+"
+`;
+
 exports[`crud when emitTranspiledCode is set to true should properly generate imports in js files for resolver classes: UserCrudResolver 1`] = `
 "\\"use strict\\";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {

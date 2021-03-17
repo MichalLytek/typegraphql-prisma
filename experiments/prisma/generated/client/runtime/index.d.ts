@@ -528,12 +528,28 @@ declare class PrismaClientRustPanicError extends Error {
 }
 declare class PrismaClientInitializationError extends Error {
     clientVersion: string;
-    constructor(message: string, clientVersion: string);
+    errorCode?: string;
+    constructor(message: string, clientVersion: string, errorCode?: string);
     get [Symbol.toStringTag](): string;
 }
 
-declare type Platform = 'native' | 'darwin' | 'debian-openssl-1.0.x' | 'debian-openssl-1.1.x' | 'rhel-openssl-1.0.x' | 'rhel-openssl-1.1.x' | 'linux-arm-openssl-1.1.x' | 'linux-arm-openssl-1.0.x' | 'linux-musl' | 'linux-nixos' | 'windows' | 'freebsd11' | 'freebsd12' | 'openbsd' | 'netbsd' | 'arm';
-
+interface Engine {
+    on(event: EngineEventType, listener: (args?: any) => any): void;
+    start(): Promise<void>;
+    stop(): Promise<void>;
+    kill(signal: string): void;
+    getConfig(): Promise<GetConfigResult>;
+    version(forceRun?: boolean): Promise<string>;
+    request<T>(query: string, headers: Record<string, string>, numTry: number): Promise<{
+        data: T;
+        elapsed: number;
+    }>;
+    requestBatch<T>(queries: string[], transaction?: boolean, numTry?: number): Promise<{
+        data: T;
+        elapsed: number;
+    }>;
+}
+declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
 interface DatasourceOverwrite {
     name: string;
     url: string;
@@ -566,8 +582,8 @@ declare type GetConfigResult = {
     datasources: DataSource[];
     generators: GeneratorConfig[];
 };
-declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
-declare class NodeEngine {
+
+declare class NodeEngine implements Engine {
     private logEmitter;
     private showColors;
     private logQueries;
@@ -621,13 +637,13 @@ declare class NodeEngine {
     private resolveCwd;
     on(event: EngineEventType, listener: (args?: any) => any): void;
     emitExit(): Promise<void>;
-    getPlatform(): Promise<Platform>;
+    private getPlatform;
     private getQueryEnginePath;
     private handlePanic;
     private resolvePrismaPath;
     private getPrismaPath;
     private getFixedGenerator;
-    printDatasources(): string;
+    private printDatasources;
     /**
      * Starts the engine, returns the url that it runs on
      */
@@ -643,9 +659,9 @@ declare class NodeEngine {
     /**
      * Use the port 0 trick to get a new port
      */
-    protected getFreePort(): Promise<number>;
+    private getFreePort;
     getConfig(): Promise<GetConfigResult>;
-    _getConfig(): Promise<GetConfigResult>;
+    private _getConfig;
     version(forceRun?: boolean): Promise<string>;
     internalVersion(): Promise<string>;
     request<T>(query: string, headers: Record<string, string>, numTry?: number): Promise<T>;

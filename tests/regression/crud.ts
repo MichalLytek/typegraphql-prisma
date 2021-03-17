@@ -577,6 +577,109 @@ describe("crud", () => {
     });
   });
 
+  describe("when `orderByRelation` preview feature is enabled", () => {
+    it("should properly generate args classes for sorting by many-to-many relation fields", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int           @id @default(autoincrement())
+          uniqueStringField  String        @unique
+          floatField         Float
+          firstModelsField   FirstModel[]
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["orderByRelation"],
+      });
+      const aggregateFirstModelArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/FirstModel/args/AggregateFirstModelArgs.ts",
+      );
+      const findFirstFirstModelArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/FirstModel/args/FindFirstFirstModelArgs.ts",
+      );
+      const findManyFirstModelArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/FirstModel/args/FindManyFirstModelArgs.ts",
+      );
+      const indexTSFile = await readGeneratedFile(
+        "/resolvers/crud/FirstModel/args/index.ts",
+      );
+
+      expect(aggregateFirstModelArgsTSFile).toMatchSnapshot(
+        "AggregateFirstModelArgs",
+      );
+      expect(findFirstFirstModelArgsTSFile).toMatchSnapshot(
+        "FindFirstFirstModelArgs",
+      );
+      expect(findManyFirstModelArgsTSFile).toMatchSnapshot(
+        "FindManyFirstModelArgs",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+
+    it("should properly generate args classes for sorting by one-to-many relation fields", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["orderByRelation"],
+      });
+      const aggregateSecondModelArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/SecondModel/args/AggregateSecondModelArgs.ts",
+      );
+      const findFirstSecondModelArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/SecondModel/args/FindFirstSecondModelArgs.ts",
+      );
+      const findManySecondModelArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/SecondModel/args/FindManySecondModelArgs.ts",
+      );
+      const indexTSFile = await readGeneratedFile(
+        "/resolvers/crud/SecondModel/args/index.ts",
+      );
+
+      expect(aggregateSecondModelArgsTSFile).toMatchSnapshot(
+        "AggregateSecondModelArgs",
+      );
+      expect(findFirstSecondModelArgsTSFile).toMatchSnapshot(
+        "FindFirstSecondModelArgs",
+      );
+      expect(findManySecondModelArgsTSFile).toMatchSnapshot(
+        "FindManySecondModelArgs",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
+
   describe("when emitTranspiledCode is set to true", () => {
     it("should properly generate imports in js files for resolver classes", async () => {
       const schema = /* prisma */ `

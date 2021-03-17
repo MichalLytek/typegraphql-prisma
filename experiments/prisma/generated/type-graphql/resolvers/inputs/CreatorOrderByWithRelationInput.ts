@@ -2,12 +2,13 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
+import { ProblemOrderByAggregateInput } from "../inputs/ProblemOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class ProblemOrderByInput {
+export class CreatorOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -16,10 +17,15 @@ export class ProblemOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  problemText?: "asc" | "desc" | undefined;
+  name?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => ProblemOrderByAggregateInput, {
     nullable: true
   })
-  creatorId?: "asc" | "desc" | undefined;
+  likes?: ProblemOrderByAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProblemOrderByAggregateInput, {
+    nullable: true
+  })
+  problems?: ProblemOrderByAggregateInput | undefined;
 }

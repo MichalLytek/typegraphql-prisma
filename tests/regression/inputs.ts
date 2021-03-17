@@ -1173,4 +1173,97 @@ describe("inputs", () => {
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });
+
+  describe("when `orderByRelation` preview feature is enabled", () => {
+    it("should properly generate input type classes for sorting by many-to-many relation fields", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int           @id @default(autoincrement())
+          uniqueStringField  String        @unique
+          floatField         Float
+          firstModelsField   FirstModel[]
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["orderByRelation"],
+      });
+      const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
+      );
+      const secondModelOrderByAggregateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SecondModelOrderByAggregateInput.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(firstModelOrderByWithRelationInputTSFile).toMatchSnapshot(
+        "FirstModelOrderByWithRelationInput",
+      );
+      expect(secondModelOrderByAggregateInputTSFile).toMatchSnapshot(
+        "SecondModelOrderByAggregateInput",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+
+    it("should properly generate input type classes for sorting by one-to-many relation fields", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["orderByRelation"],
+      });
+      const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
+      );
+      const secondModelOrderByAggregateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SecondModelOrderByAggregateInput.ts",
+      );
+      const secondModelOrderByWithRelationInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SecondModelOrderByWithRelationInput.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(firstModelOrderByWithRelationInputTSFile).toMatchSnapshot(
+        "FirstModelOrderByWithRelationInput",
+      );
+      expect(secondModelOrderByAggregateInputTSFile).toMatchSnapshot(
+        "SecondModelOrderByAggregateInput",
+      );
+      expect(secondModelOrderByWithRelationInputTSFile).toMatchSnapshot(
+        "SecondModelOrderByWithRelationInput",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
 });

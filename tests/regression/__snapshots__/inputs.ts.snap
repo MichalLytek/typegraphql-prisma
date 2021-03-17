@@ -668,7 +668,6 @@ exports[`inputs should properly generate input type classes for filtering models
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
-import { FirstModelOrderByInput } from \\"../inputs/FirstModelOrderByInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType({
@@ -694,11 +693,6 @@ export class SecondModelOrderByInput {
     nullable: true
   })
   firstModelFieldId?: \\"asc\\" | \\"desc\\" | undefined;
-
-  @TypeGraphQL.Field(_type => FirstModelOrderByInput, {
-    nullable: true
-  })
-  firstModelField?: FirstModelOrderByInput | undefined;
 }
 "
 `;
@@ -1726,7 +1720,6 @@ exports[`inputs should properly generate input type classes for model with id ke
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
-import { DirectorOrderByInput } from \\"../inputs/DirectorOrderByInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType({
@@ -1742,11 +1735,6 @@ export class MovieOrderByInput {
     nullable: true
   })
   directorLastName?: \\"asc\\" | \\"desc\\" | undefined;
-
-  @TypeGraphQL.Field(_type => DirectorOrderByInput, {
-    nullable: true
-  })
-  director?: DirectorOrderByInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -3016,6 +3004,244 @@ export { StringFilter } from \\"./StringFilter\\";
 "
 `;
 
+exports[`inputs when \`orderByRelation\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: FirstModelOrderByWithRelationInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SecondModelOrderByAggregateInput } from \\"../inputs/SecondModelOrderByAggregateInput\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelOrderByWithRelationInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  idField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  uniqueStringField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  floatField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SecondModelOrderByAggregateInput, {
+    nullable: true
+  })
+  secondModelsField?: SecondModelOrderByAggregateInput | undefined;
+}
+"
+`;
+
+exports[`inputs when \`orderByRelation\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: SecondModelOrderByAggregateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SecondModelOrderByAggregateInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: false
+  })
+  count!: \\"asc\\" | \\"desc\\";
+}
+"
+`;
+
+exports[`inputs when \`orderByRelation\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: index 1`] = `
+"export { FirstModelCreateInput } from \\"./FirstModelCreateInput\\";
+export { FirstModelCreateNestedManyWithoutSecondModelsFieldInput } from \\"./FirstModelCreateNestedManyWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateOrConnectWithoutSecondModelsFieldInput } from \\"./FirstModelCreateOrConnectWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateWithoutSecondModelsFieldInput } from \\"./FirstModelCreateWithoutSecondModelsFieldInput\\";
+export { FirstModelListRelationFilter } from \\"./FirstModelListRelationFilter\\";
+export { FirstModelOrderByAggregateInput } from \\"./FirstModelOrderByAggregateInput\\";
+export { FirstModelOrderByWithRelationInput } from \\"./FirstModelOrderByWithRelationInput\\";
+export { FirstModelScalarWhereInput } from \\"./FirstModelScalarWhereInput\\";
+export { FirstModelUpdateInput } from \\"./FirstModelUpdateInput\\";
+export { FirstModelUpdateManyMutationInput } from \\"./FirstModelUpdateManyMutationInput\\";
+export { FirstModelUpdateManyWithWhereWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateManyWithWhereWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateManyWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateManyWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldInput\\";
+export { FirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./FirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput\\";
+export { FirstModelWhereInput } from \\"./FirstModelWhereInput\\";
+export { FirstModelWhereUniqueInput } from \\"./FirstModelWhereUniqueInput\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { SecondModelCreateInput } from \\"./SecondModelCreateInput\\";
+export { SecondModelCreateNestedManyWithoutFirstModelsFieldInput } from \\"./SecondModelCreateNestedManyWithoutFirstModelsFieldInput\\";
+export { SecondModelCreateOrConnectWithoutFirstModelsFieldInput } from \\"./SecondModelCreateOrConnectWithoutFirstModelsFieldInput\\";
+export { SecondModelCreateWithoutFirstModelsFieldInput } from \\"./SecondModelCreateWithoutFirstModelsFieldInput\\";
+export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
+export { SecondModelOrderByAggregateInput } from \\"./SecondModelOrderByAggregateInput\\";
+export { SecondModelOrderByWithRelationInput } from \\"./SecondModelOrderByWithRelationInput\\";
+export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
+export { SecondModelUpdateInput } from \\"./SecondModelUpdateInput\\";
+export { SecondModelUpdateManyMutationInput } from \\"./SecondModelUpdateManyMutationInput\\";
+export { SecondModelUpdateManyWithWhereWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateManyWithWhereWithoutFirstModelsFieldInput\\";
+export { SecondModelUpdateManyWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateManyWithoutFirstModelsFieldInput\\";
+export { SecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput\\";
+export { SecondModelUpdateWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateWithoutFirstModelsFieldInput\\";
+export { SecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./SecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput\\";
+export { SecondModelWhereInput } from \\"./SecondModelWhereInput\\";
+export { SecondModelWhereUniqueInput } from \\"./SecondModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs when \`orderByRelation\` preview feature is enabled should properly generate input type classes for sorting by one-to-many relation fields: FirstModelOrderByWithRelationInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SecondModelOrderByAggregateInput } from \\"../inputs/SecondModelOrderByAggregateInput\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class FirstModelOrderByWithRelationInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  idField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  uniqueStringField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  floatField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SecondModelOrderByAggregateInput, {
+    nullable: true
+  })
+  secondModelsField?: SecondModelOrderByAggregateInput | undefined;
+}
+"
+`;
+
+exports[`inputs when \`orderByRelation\` preview feature is enabled should properly generate input type classes for sorting by one-to-many relation fields: SecondModelOrderByAggregateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SecondModelOrderByAggregateInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: false
+  })
+  count!: \\"asc\\" | \\"desc\\";
+}
+"
+`;
+
+exports[`inputs when \`orderByRelation\` preview feature is enabled should properly generate input type classes for sorting by one-to-many relation fields: SecondModelOrderByWithRelationInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { FirstModelOrderByWithRelationInput } from \\"../inputs/FirstModelOrderByWithRelationInput\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SecondModelOrderByWithRelationInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  idField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  uniqueStringField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  floatField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  firstModelFieldId?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => FirstModelOrderByWithRelationInput, {
+    nullable: true
+  })
+  firstModelField?: FirstModelOrderByWithRelationInput | undefined;
+}
+"
+`;
+
+exports[`inputs when \`orderByRelation\` preview feature is enabled should properly generate input type classes for sorting by one-to-many relation fields: index 1`] = `
+"export { FirstModelCreateInput } from \\"./FirstModelCreateInput\\";
+export { FirstModelCreateNestedOneWithoutSecondModelsFieldInput } from \\"./FirstModelCreateNestedOneWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateOrConnectWithoutSecondModelsFieldInput } from \\"./FirstModelCreateOrConnectWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateWithoutSecondModelsFieldInput } from \\"./FirstModelCreateWithoutSecondModelsFieldInput\\";
+export { FirstModelOrderByWithRelationInput } from \\"./FirstModelOrderByWithRelationInput\\";
+export { FirstModelRelationFilter } from \\"./FirstModelRelationFilter\\";
+export { FirstModelUpdateInput } from \\"./FirstModelUpdateInput\\";
+export { FirstModelUpdateManyMutationInput } from \\"./FirstModelUpdateManyMutationInput\\";
+export { FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldInput\\";
+export { FirstModelUpsertWithoutSecondModelsFieldInput } from \\"./FirstModelUpsertWithoutSecondModelsFieldInput\\";
+export { FirstModelWhereInput } from \\"./FirstModelWhereInput\\";
+export { FirstModelWhereUniqueInput } from \\"./FirstModelWhereUniqueInput\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { SecondModelCreateInput } from \\"./SecondModelCreateInput\\";
+export { SecondModelCreateNestedManyWithoutFirstModelFieldInput } from \\"./SecondModelCreateNestedManyWithoutFirstModelFieldInput\\";
+export { SecondModelCreateOrConnectWithoutFirstModelFieldInput } from \\"./SecondModelCreateOrConnectWithoutFirstModelFieldInput\\";
+export { SecondModelCreateWithoutFirstModelFieldInput } from \\"./SecondModelCreateWithoutFirstModelFieldInput\\";
+export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
+export { SecondModelOrderByAggregateInput } from \\"./SecondModelOrderByAggregateInput\\";
+export { SecondModelOrderByWithRelationInput } from \\"./SecondModelOrderByWithRelationInput\\";
+export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
+export { SecondModelUpdateInput } from \\"./SecondModelUpdateInput\\";
+export { SecondModelUpdateManyMutationInput } from \\"./SecondModelUpdateManyMutationInput\\";
+export { SecondModelUpdateManyWithWhereWithoutFirstModelFieldInput } from \\"./SecondModelUpdateManyWithWhereWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateManyWithoutFirstModelFieldInput } from \\"./SecondModelUpdateManyWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput } from \\"./SecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateWithoutFirstModelFieldInput } from \\"./SecondModelUpdateWithoutFirstModelFieldInput\\";
+export { SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput } from \\"./SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput\\";
+export { SecondModelWhereInput } from \\"./SecondModelWhereInput\\";
+export { SecondModelWhereUniqueInput } from \\"./SecondModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
 exports[`inputs when model field is renamed should properly generate input type classes: SampleOrderByInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
@@ -3469,7 +3695,6 @@ exports[`inputs when model is renamed should properly generate input type classe
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
-import { RenamedFirstModelOrderByInput } from \\"../inputs/RenamedFirstModelOrderByInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType({
@@ -3495,11 +3720,6 @@ export class RenamedSecondModelOrderByInput {
     nullable: true
   })
   firstModelFieldId?: \\"asc\\" | \\"desc\\" | undefined;
-
-  @TypeGraphQL.Field(_type => RenamedFirstModelOrderByInput, {
-    nullable: true
-  })
-  firstModelField?: RenamedFirstModelOrderByInput | undefined;
 }
 "
 `;
@@ -3682,7 +3902,6 @@ exports[`inputs when model is renamed should properly generate input type classe
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
-import { OtherModelOrderByInput } from \\"../inputs/OtherModelOrderByInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType({
@@ -3713,11 +3932,6 @@ export class ExampleOrderByInput {
     nullable: true
   })
   dateField?: \\"asc\\" | \\"desc\\" | undefined;
-
-  @TypeGraphQL.Field(_type => OtherModelOrderByInput, {
-    nullable: true
-  })
-  other?: OtherModelOrderByInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

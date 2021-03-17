@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { ProblemOrderByInput } from "../../../inputs/ProblemOrderByInput";
+import { ProblemOrderByWithRelationInput } from "../../../inputs/ProblemOrderByWithRelationInput";
 import { ProblemWhereInput } from "../../../inputs/ProblemWhereInput";
 import { ProblemWhereUniqueInput } from "../../../inputs/ProblemWhereUniqueInput";
 import { ProblemScalarFieldEnum } from "../../../../enums/ProblemScalarFieldEnum";
@@ -12,10 +12,10 @@ export class CreatorLikesArgs {
   })
   where?: ProblemWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemOrderByInput], {
+  @TypeGraphQL.Field(_type => [ProblemOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: ProblemOrderByInput[] | undefined;
+  orderBy?: ProblemOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, {
     nullable: true

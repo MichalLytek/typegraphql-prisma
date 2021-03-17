@@ -2,12 +2,13 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
+import { ClientOrderByWithRelationInput } from "../inputs/ClientOrderByWithRelationInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class PostOrderByInput {
+export class PostOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -43,10 +44,20 @@ export class PostOrderByInput {
   })
   content?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => ClientOrderByWithRelationInput, {
+    nullable: true
+  })
+  author?: ClientOrderByWithRelationInput | undefined;
+
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   authorId?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => ClientOrderByWithRelationInput, {
+    nullable: true
+  })
+  editor?: ClientOrderByWithRelationInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

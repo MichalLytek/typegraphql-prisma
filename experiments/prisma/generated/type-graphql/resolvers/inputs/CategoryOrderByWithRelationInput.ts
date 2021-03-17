@@ -7,19 +7,19 @@ import { SortOrder } from "../../enums/SortOrder";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class MovieOrderByInput {
+export class CategoryOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  directorFirstName?: "asc" | "desc" | undefined;
+  name?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  directorLastName?: "asc" | "desc" | undefined;
+  slug?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  title?: "asc" | "desc" | undefined;
+  number?: "asc" | "desc" | undefined;
 }

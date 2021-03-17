@@ -377,8 +377,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.18.0
-   * Query Engine version: da6fafb57b24e0b61ca20960c64e2d41f9e8cff1
+   * Prisma Client JS version: 2.19.0
+   * Query Engine version: c1455d0b443d66b0d9db9bcb1bb9ee0d5bbc511d
    */
   export type PrismaVersion = {
     client: string
@@ -957,7 +957,7 @@ export namespace Prisma {
      * 
      * Determine the order of Users to fetch.
     **/
-    orderBy?: Enumerable<UserOrderByInput>
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -1513,7 +1513,7 @@ export namespace Prisma {
      * 
      * Determine the order of Users to fetch.
     **/
-    orderBy?: Enumerable<UserOrderByInput>
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -1562,7 +1562,7 @@ export namespace Prisma {
      * 
      * Determine the order of Users to fetch.
     **/
-    orderBy?: Enumerable<UserOrderByInput>
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -1841,7 +1841,7 @@ export namespace Prisma {
      * 
      * Determine the order of posts to fetch.
     **/
-    orderBy?: Enumerable<postOrderByInput>
+    orderBy?: Enumerable<postOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2405,7 +2405,7 @@ export namespace Prisma {
      * 
      * Determine the order of posts to fetch.
     **/
-    orderBy?: Enumerable<postOrderByInput>
+    orderBy?: Enumerable<postOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2454,7 +2454,7 @@ export namespace Prisma {
      * 
      * Determine the order of posts to fetch.
     **/
-    orderBy?: Enumerable<postOrderByInput>
+    orderBy?: Enumerable<postOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2685,7 +2685,7 @@ export namespace Prisma {
      * 
      * Determine the order of Categories to fetch.
     **/
-    orderBy?: Enumerable<CategoryOrderByInput>
+    orderBy?: Enumerable<CategoryOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3206,7 +3206,7 @@ export namespace Prisma {
      * 
      * Determine the order of Categories to fetch.
     **/
-    orderBy?: Enumerable<CategoryOrderByInput>
+    orderBy?: Enumerable<CategoryOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3251,7 +3251,7 @@ export namespace Prisma {
      * 
      * Determine the order of Categories to fetch.
     **/
-    orderBy?: Enumerable<CategoryOrderByInput>
+    orderBy?: Enumerable<CategoryOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3444,7 +3444,7 @@ export namespace Prisma {
      * 
      * Determine the order of Patients to fetch.
     **/
-    orderBy?: Enumerable<PatientOrderByInput>
+    orderBy?: Enumerable<PatientOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3949,7 +3949,7 @@ export namespace Prisma {
      * 
      * Determine the order of Patients to fetch.
     **/
-    orderBy?: Enumerable<PatientOrderByInput>
+    orderBy?: Enumerable<PatientOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3994,7 +3994,7 @@ export namespace Prisma {
      * 
      * Determine the order of Patients to fetch.
     **/
-    orderBy?: Enumerable<PatientOrderByInput>
+    orderBy?: Enumerable<PatientOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4187,7 +4187,7 @@ export namespace Prisma {
      * 
      * Determine the order of Movies to fetch.
     **/
-    orderBy?: Enumerable<MovieOrderByInput>
+    orderBy?: Enumerable<MovieOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4711,7 +4711,7 @@ export namespace Prisma {
      * 
      * Determine the order of Movies to fetch.
     **/
-    orderBy?: Enumerable<MovieOrderByInput>
+    orderBy?: Enumerable<MovieOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4760,7 +4760,7 @@ export namespace Prisma {
      * 
      * Determine the order of Movies to fetch.
     **/
-    orderBy?: Enumerable<MovieOrderByInput>
+    orderBy?: Enumerable<MovieOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4967,7 +4967,7 @@ export namespace Prisma {
      * 
      * Determine the order of Directors to fetch.
     **/
-    orderBy?: Enumerable<DirectorOrderByInput>
+    orderBy?: Enumerable<DirectorOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -5489,7 +5489,7 @@ export namespace Prisma {
      * 
      * Determine the order of Directors to fetch.
     **/
-    orderBy?: Enumerable<DirectorOrderByInput>
+    orderBy?: Enumerable<DirectorOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -5538,7 +5538,7 @@ export namespace Prisma {
      * 
      * Determine the order of Directors to fetch.
     **/
-    orderBy?: Enumerable<DirectorOrderByInput>
+    orderBy?: Enumerable<DirectorOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -5773,7 +5773,7 @@ export namespace Prisma {
      * 
      * Determine the order of Problems to fetch.
     **/
-    orderBy?: Enumerable<ProblemOrderByInput>
+    orderBy?: Enumerable<ProblemOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6321,7 +6321,7 @@ export namespace Prisma {
      * 
      * Determine the order of Problems to fetch.
     **/
-    orderBy?: Enumerable<ProblemOrderByInput>
+    orderBy?: Enumerable<ProblemOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6370,7 +6370,7 @@ export namespace Prisma {
      * 
      * Determine the order of Problems to fetch.
     **/
-    orderBy?: Enumerable<ProblemOrderByInput>
+    orderBy?: Enumerable<ProblemOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6595,7 +6595,7 @@ export namespace Prisma {
      * 
      * Determine the order of Creators to fetch.
     **/
-    orderBy?: Enumerable<CreatorOrderByInput>
+    orderBy?: Enumerable<CreatorOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7141,7 +7141,7 @@ export namespace Prisma {
      * 
      * Determine the order of Creators to fetch.
     **/
-    orderBy?: Enumerable<CreatorOrderByInput>
+    orderBy?: Enumerable<CreatorOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7190,7 +7190,7 @@ export namespace Prisma {
      * 
      * Determine the order of Creators to fetch.
     **/
-    orderBy?: Enumerable<CreatorOrderByInput>
+    orderBy?: Enumerable<CreatorOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7435,7 +7435,7 @@ export namespace Prisma {
      * 
      * Determine the order of NativeTypeModels to fetch.
     **/
-    orderBy?: Enumerable<NativeTypeModelOrderByInput>
+    orderBy?: Enumerable<NativeTypeModelOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7958,7 +7958,7 @@ export namespace Prisma {
      * 
      * Determine the order of NativeTypeModels to fetch.
     **/
-    orderBy?: Enumerable<NativeTypeModelOrderByInput>
+    orderBy?: Enumerable<NativeTypeModelOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8003,7 +8003,7 @@ export namespace Prisma {
      * 
      * Determine the order of NativeTypeModels to fetch.
     **/
-    orderBy?: Enumerable<NativeTypeModelOrderByInput>
+    orderBy?: Enumerable<NativeTypeModelOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8271,6 +8271,23 @@ export namespace Prisma {
     editorPosts?: PostListRelationFilter
   }
 
+  export type UserOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    age?: SortOrder
+    balance?: SortOrder
+    amount?: SortOrder
+    posts?: postOrderByAggregateInput
+    role?: SortOrder
+    editorPosts?: postOrderByAggregateInput
+  }
+
+  export type UserWhereUniqueInput = {
+    id?: number
+    email?: string
+  }
+
   export type UserOrderByInput = {
     id?: SortOrder
     email?: SortOrder
@@ -8279,11 +8296,6 @@ export namespace Prisma {
     balance?: SortOrder
     amount?: SortOrder
     role?: SortOrder
-  }
-
-  export type UserWhereUniqueInput = {
-    id?: number
-    email?: string
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -8318,6 +8330,26 @@ export namespace Prisma {
     metadata?: JsonFilter
   }
 
+  export type postOrderByWithRelationInput = {
+    uuid?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    published?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrder
+    content?: SortOrder
+    author?: UserOrderByWithRelationInput
+    authorId?: SortOrder
+    editor?: UserOrderByWithRelationInput
+    editorId?: SortOrder
+    kind?: SortOrder
+    metadata?: SortOrder
+  }
+
+  export type postWhereUniqueInput = {
+    uuid?: string
+  }
+
   export type postOrderByInput = {
     uuid?: SortOrder
     createdAt?: SortOrder
@@ -8326,16 +8358,10 @@ export namespace Prisma {
     title?: SortOrder
     subtitle?: SortOrder
     content?: SortOrder
-    author?: UserOrderByInput
     authorId?: SortOrder
-    editor?: UserOrderByInput
     editorId?: SortOrder
     kind?: SortOrder
     metadata?: SortOrder
-  }
-
-  export type postWhereUniqueInput = {
-    uuid?: string
   }
 
   export type postScalarWhereWithAggregatesInput = {
@@ -8364,7 +8390,7 @@ export namespace Prisma {
     number?: IntFilter | number
   }
 
-  export type CategoryOrderByInput = {
+  export type CategoryOrderByWithRelationInput = {
     name?: SortOrder
     slug?: SortOrder
     number?: SortOrder
@@ -8372,6 +8398,12 @@ export namespace Prisma {
 
   export type CategoryWhereUniqueInput = {
     slug_number?: CategorySlugNumberCompoundUniqueInput
+  }
+
+  export type CategoryOrderByInput = {
+    name?: SortOrder
+    slug?: SortOrder
+    number?: SortOrder
   }
 
   export type CategoryScalarWhereWithAggregatesInput = {
@@ -8392,7 +8424,7 @@ export namespace Prisma {
     email?: StringFilter | string
   }
 
-  export type PatientOrderByInput = {
+  export type PatientOrderByWithRelationInput = {
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
@@ -8400,6 +8432,12 @@ export namespace Prisma {
 
   export type PatientWhereUniqueInput = {
     firstName_lastName?: PatientFirstNameLastNameCompoundUniqueInput
+  }
+
+  export type PatientOrderByInput = {
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
   }
 
   export type PatientScalarWhereWithAggregatesInput = {
@@ -8421,15 +8459,21 @@ export namespace Prisma {
     title?: StringFilter | string
   }
 
-  export type MovieOrderByInput = {
+  export type MovieOrderByWithRelationInput = {
     directorFirstName?: SortOrder
     directorLastName?: SortOrder
-    director?: DirectorOrderByInput
+    director?: DirectorOrderByWithRelationInput
     title?: SortOrder
   }
 
   export type MovieWhereUniqueInput = {
     directorFirstName_directorLastName_title?: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
+  }
+
+  export type MovieOrderByInput = {
+    directorFirstName?: SortOrder
+    directorLastName?: SortOrder
+    title?: SortOrder
   }
 
   export type MovieScalarWhereWithAggregatesInput = {
@@ -8450,13 +8494,19 @@ export namespace Prisma {
     movies?: MovieListRelationFilter
   }
 
-  export type DirectorOrderByInput = {
+  export type DirectorOrderByWithRelationInput = {
     firstName?: SortOrder
     lastName?: SortOrder
+    movies?: MovieOrderByAggregateInput
   }
 
   export type DirectorWhereUniqueInput = {
     firstName_lastName?: DirectorFirstNameLastNameCompoundUniqueInput
+  }
+
+  export type DirectorOrderByInput = {
+    firstName?: SortOrder
+    lastName?: SortOrder
   }
 
   export type DirectorScalarWhereWithAggregatesInput = {
@@ -8478,15 +8528,22 @@ export namespace Prisma {
     creatorId?: IntNullableFilter | number | null
   }
 
-  export type ProblemOrderByInput = {
+  export type ProblemOrderByWithRelationInput = {
     id?: SortOrder
     problemText?: SortOrder
-    creator?: CreatorOrderByInput
+    likedBy?: CreatorOrderByAggregateInput
+    creator?: CreatorOrderByWithRelationInput
     creatorId?: SortOrder
   }
 
   export type ProblemWhereUniqueInput = {
     id?: number
+  }
+
+  export type ProblemOrderByInput = {
+    id?: SortOrder
+    problemText?: SortOrder
+    creatorId?: SortOrder
   }
 
   export type ProblemScalarWhereWithAggregatesInput = {
@@ -8508,13 +8565,20 @@ export namespace Prisma {
     problems?: ProblemListRelationFilter
   }
 
-  export type CreatorOrderByInput = {
+  export type CreatorOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    likes?: ProblemOrderByAggregateInput
+    problems?: ProblemOrderByAggregateInput
   }
 
   export type CreatorWhereUniqueInput = {
     id?: number
+  }
+
+  export type CreatorOrderByInput = {
+    id?: SortOrder
+    name?: SortOrder
   }
 
   export type CreatorScalarWhereWithAggregatesInput = {
@@ -8535,7 +8599,7 @@ export namespace Prisma {
     decimal?: DecimalNullableFilter | Decimal | number | string | null
   }
 
-  export type NativeTypeModelOrderByInput = {
+  export type NativeTypeModelOrderByWithRelationInput = {
     id?: SortOrder
     bigInt?: SortOrder
     byteA?: SortOrder
@@ -8544,6 +8608,13 @@ export namespace Prisma {
 
   export type NativeTypeModelWhereUniqueInput = {
     id?: number
+  }
+
+  export type NativeTypeModelOrderByInput = {
+    id?: SortOrder
+    bigInt?: SortOrder
+    byteA?: SortOrder
+    decimal?: SortOrder
   }
 
   export type NativeTypeModelScalarWhereWithAggregatesInput = {
@@ -9077,6 +9148,10 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter | Role
   }
 
+  export type postOrderByAggregateInput = {
+    count: SortOrder
+  }
+
   export type IntWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -9282,6 +9357,10 @@ export namespace Prisma {
     none?: MovieWhereInput
   }
 
+  export type MovieOrderByAggregateInput = {
+    count: SortOrder
+  }
+
   export type DirectorFirstNameLastNameCompoundUniqueInput = {
     firstName: string
     lastName: string
@@ -9298,10 +9377,18 @@ export namespace Prisma {
     isNot?: CreatorWhereInput | null
   }
 
+  export type CreatorOrderByAggregateInput = {
+    count: SortOrder
+  }
+
   export type ProblemListRelationFilter = {
     every?: ProblemWhereInput
     some?: ProblemWhereInput
     none?: ProblemWhereInput
+  }
+
+  export type ProblemOrderByAggregateInput = {
+    count: SortOrder
   }
 
   export type BigIntNullableFilter = {

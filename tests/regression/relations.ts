@@ -363,4 +363,45 @@ describe("relations resolvers generation", () => {
       "UsersOnProjectsRelationsResolver",
     );
   });
+
+  describe("when `orderByRelation` preview feature is enabled", () => {
+    it("should properly generate args classes for sorting by relation fields", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["orderByRelation"],
+      });
+      const firstModelSecondModelsFieldArgsTSFile = await readGeneratedFile(
+        "/resolvers/relations/FirstModel/args/FirstModelSecondModelsFieldArgs.ts",
+      );
+      const indexTSFile = await readGeneratedFile(
+        "/resolvers/relations/FirstModel/args/index.ts",
+      );
+
+      expect(firstModelSecondModelsFieldArgsTSFile).toMatchSnapshot(
+        "FirstModelSecondModelsFieldArgs",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
 });

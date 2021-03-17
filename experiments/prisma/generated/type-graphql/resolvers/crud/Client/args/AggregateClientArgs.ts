@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { ClientOrderByInput } from "../../../inputs/ClientOrderByInput";
+import { ClientOrderByWithRelationInput } from "../../../inputs/ClientOrderByWithRelationInput";
 import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
 
@@ -11,10 +11,10 @@ export class AggregateClientArgs {
   })
   where?: ClientWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ClientOrderByInput], {
+  @TypeGraphQL.Field(_type => [ClientOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: ClientOrderByInput[] | undefined;
+  orderBy?: ClientOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => ClientWhereUniqueInput, {
     nullable: true

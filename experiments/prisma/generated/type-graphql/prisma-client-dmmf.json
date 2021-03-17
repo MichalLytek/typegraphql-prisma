@@ -1097,6 +1097,165 @@
           ]
         },
         {
+          "name": "UserOrderByWithRelationInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "email",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "name",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "age",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "balance",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "amount",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "role",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserWhereUniqueInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "email",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "UserOrderByInput",
           "constraints": {
             "maxNumFields": 1,
@@ -1190,39 +1349,6 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
-                  "isList": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "UserWhereUniqueInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "id",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "Int",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "email",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
                   "isList": false
                 }
               ]
@@ -1734,7 +1860,7 @@
           ]
         },
         {
-          "name": "postOrderByInput",
+          "name": "postOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -1837,7 +1963,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserOrderByInput",
+                  "type": "UserOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -1863,7 +1989,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserOrderByInput",
+                  "type": "UserOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -1926,6 +2052,158 @@
                 {
                   "type": "String",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "postOrderByInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "uuid",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "createdAt",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "updatedAt",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "published",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "title",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "subtitle",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "content",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "authorId",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "editorId",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "kind",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "metadata",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -2316,7 +2594,7 @@
           ]
         },
         {
-          "name": "CategoryOrderByInput",
+          "name": "CategoryOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -2379,6 +2657,54 @@
                   "type": "CategorySlugNumberCompoundUniqueInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CategoryOrderByInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "name",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "slug",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "number",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -2614,7 +2940,7 @@
           ]
         },
         {
-          "name": "PatientOrderByInput",
+          "name": "PatientOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -2677,6 +3003,54 @@
                   "type": "PatientFirstNameLastNameCompoundUniqueInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PatientOrderByInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "firstName",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "lastName",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "email",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -2931,7 +3305,7 @@
           ]
         },
         {
-          "name": "MovieOrderByInput",
+          "name": "MovieOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -2969,7 +3343,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "DirectorOrderByInput",
+                  "type": "DirectorOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -3007,6 +3381,54 @@
                   "type": "MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MovieOrderByInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "directorFirstName",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "directorLastName",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "title",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -3237,7 +3659,7 @@
           ]
         },
         {
-          "name": "DirectorOrderByInput",
+          "name": "DirectorOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -3268,6 +3690,19 @@
                   "isList": false
                 }
               ]
+            },
+            {
+              "name": "movies",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "MovieOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
             }
           ]
         },
@@ -3287,6 +3722,41 @@
                   "type": "DirectorFirstNameLastNameCompoundUniqueInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DirectorOrderByInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "firstName",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "lastName",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -3546,7 +4016,7 @@
           ]
         },
         {
-          "name": "ProblemOrderByInput",
+          "name": "ProblemOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -3579,12 +4049,25 @@
               ]
             },
             {
+              "name": "likedBy",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "creator",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorOrderByInput",
+                  "type": "CreatorOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -3621,6 +4104,54 @@
                 {
                   "type": "Int",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ProblemOrderByInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "problemText",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "creatorId",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -3869,7 +4400,7 @@
           ]
         },
         {
-          "name": "CreatorOrderByInput",
+          "name": "CreatorOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -3900,6 +4431,32 @@
                   "isList": false
                 }
               ]
+            },
+            {
+              "name": "likes",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "problems",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
             }
           ]
         },
@@ -3918,6 +4475,41 @@
                 {
                   "type": "Int",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CreatorOrderByInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "name",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -4168,7 +4760,7 @@
           ]
         },
         {
-          "name": "NativeTypeModelOrderByInput",
+          "name": "NativeTypeModelOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -4243,6 +4835,67 @@
                 {
                   "type": "Int",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "NativeTypeModelOrderByInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "bigInt",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "byteA",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "decimal",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -9917,6 +10570,28 @@
           ]
         },
         {
+          "name": "postOrderByAggregateInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "count",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "IntWithAggregatesFilter",
           "constraints": {
             "maxNumFields": null,
@@ -12045,6 +12720,28 @@
           ]
         },
         {
+          "name": "MovieOrderByAggregateInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "count",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "DirectorFirstNameLastNameCompoundUniqueInput",
           "constraints": {
             "maxNumFields": null,
@@ -12171,6 +12868,28 @@
           ]
         },
         {
+          "name": "CreatorOrderByAggregateInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "count",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "ProblemListRelationFilter",
           "constraints": {
             "maxNumFields": null,
@@ -12212,6 +12931,28 @@
                   "type": "ProblemWhereInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ProblemOrderByAggregateInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "count",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -26963,13 +27704,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserOrderByInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "UserOrderByInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -27057,13 +27798,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserOrderByInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "UserOrderByInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -27151,13 +27892,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserOrderByInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "UserOrderByInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -27357,13 +28098,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -27451,13 +28192,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -27545,13 +28286,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -27751,13 +28492,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryOrderByInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CategoryOrderByInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -27845,13 +28586,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryOrderByInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CategoryOrderByInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -27939,13 +28680,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryOrderByInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CategoryOrderByInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -28145,13 +28886,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientOrderByInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "PatientOrderByInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -28239,13 +28980,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientOrderByInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "PatientOrderByInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -28333,13 +29074,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientOrderByInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "PatientOrderByInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -28539,13 +29280,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -28633,13 +29374,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -28727,13 +29468,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -28933,13 +29674,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorOrderByInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "DirectorOrderByInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -29027,13 +29768,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorOrderByInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "DirectorOrderByInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -29121,13 +29862,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorOrderByInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "DirectorOrderByInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -29327,13 +30068,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -29421,13 +30162,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -29515,13 +30256,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -29721,13 +30462,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -29815,13 +30556,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -29909,13 +30650,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -30115,13 +30856,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "NativeTypeModelOrderByInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "NativeTypeModelOrderByInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -30209,13 +30950,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "NativeTypeModelOrderByInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "NativeTypeModelOrderByInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -30303,13 +31044,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "NativeTypeModelOrderByInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "NativeTypeModelOrderByInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -36086,13 +36827,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -36191,13 +36932,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -36564,13 +37305,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -36683,13 +37424,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -36823,13 +37564,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -36917,13 +37658,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
