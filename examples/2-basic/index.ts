@@ -29,7 +29,7 @@ interface Context {
 class CustomUserResolver {
   @Query(returns => User, { nullable: true })
   async bestUser(@Ctx() { prisma }: Context): Promise<User | null> {
-    return await prisma.user.findOne({
+    return await prisma.user.findFirst({
       where: { email: "bob@prisma.io" },
     });
   }
@@ -40,7 +40,7 @@ class CustomUserResolver {
     @Ctx() { prisma }: Context,
   ): Promise<Post | undefined> {
     const [favoritePost] = await prisma.user
-      .findOne({ where: { id: user.id } })
+      .findUnique({ where: { id: user.id } })
       .posts({ take: 1 });
 
     return favoritePost;

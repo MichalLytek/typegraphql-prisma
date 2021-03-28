@@ -1,73 +1,63 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "@prisma/client";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
 import { BoolFilter } from "../inputs/BoolFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostScalarWhereInput {
   @TypeGraphQL.Field(_type => [PostScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   AND?: PostScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   OR?: PostScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostScalarWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   NOT?: PostScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   createdAt?: DateTimeFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updatedAt?: DateTimeFilter | undefined;
 
   @TypeGraphQL.Field(_type => BoolFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   published?: BoolFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   title?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   content?: StringNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   authorId?: StringNullableFilter | undefined;
 }

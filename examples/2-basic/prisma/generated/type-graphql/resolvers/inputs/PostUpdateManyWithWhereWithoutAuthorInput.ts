@@ -1,23 +1,21 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "@prisma/client";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
 import { PostScalarWhereInput } from "../inputs/PostScalarWhereInput";
 import { PostUpdateManyMutationInput } from "../inputs/PostUpdateManyMutationInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostUpdateManyWithWhereWithoutAuthorInput {
   @TypeGraphQL.Field(_type => PostScalarWhereInput, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   where!: PostScalarWhereInput;
 
   @TypeGraphQL.Field(_type => PostUpdateManyMutationInput, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   data!: PostUpdateManyMutationInput;
 }

@@ -1,15 +1,15 @@
 import * as TypeGraphQL from "type-graphql";
 import { UpdateManyPostArgs } from "./args/UpdateManyPostArgs";
 import { Post } from "../../../models/Post";
-import { BatchPayload } from "../../outputs/BatchPayload";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { transformFields, getPrismaFromContext } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class UpdateManyPostResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
-    nullable: false,
-    description: undefined
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
   })
-  async updateManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPostArgs): Promise<BatchPayload> {
-    return ctx.prisma.post.updateMany(args);
+  async updateManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyPostArgs): Promise<AffectedRowsOutput> {
+    return getPrismaFromContext(ctx).post.updateMany(args);
   }
 }

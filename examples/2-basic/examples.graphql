@@ -14,7 +14,7 @@ query GetAllUsersAndPosts {
 }
 
 query GetSelectedPost {
-  post(where: { id: "cke2war9p0006f5tp1nb1bscu" }) {
+  post(where: { id: "ckmsz3tdp0009r6tpcvz7hh4t" }) {
     ...PostData
     author {
       ...UserData
@@ -42,7 +42,7 @@ query CustomResolversQuery {
 
 mutation UpdatePost {
   updatePost(
-    where: { id: "cke2war9p0006f5tp1nb1bscu" }
+    where: { id: "ckmsz3tdp0009r6tpcvz7hh4t" }
     data: { published: { set: true } }
   ) {
     ...PostData
@@ -78,7 +78,9 @@ mutation AddUserWithPost {
 
 query GetPrismaPostCount {
   aggregatePost(where: { title: { contains: "Prisma" } }) {
-    count
+    count {
+      _all
+    }
   }
 }
 

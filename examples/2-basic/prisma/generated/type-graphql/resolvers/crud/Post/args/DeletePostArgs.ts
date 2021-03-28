@@ -1,9 +1,11 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
+import * as GraphQLScalars from "graphql-scalars";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class DeletePostArgs {
-  @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: false })
+  @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
+    nullable: false
+  })
   where!: PostWhereUniqueInput;
 }

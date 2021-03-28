@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 
-export enum PostDistinctFieldEnum {
+export enum PostScalarFieldEnum {
   id = "id",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
@@ -9,7 +9,7 @@ export enum PostDistinctFieldEnum {
   content = "content",
   authorId = "authorId"
 }
-TypeGraphQL.registerEnumType(PostDistinctFieldEnum, {
-  name: "PostDistinctFieldEnum",
+TypeGraphQL.registerEnumType(PostScalarFieldEnum, {
+  name: "PostScalarFieldEnum",
   description: undefined,
 });
