@@ -1,55 +1,47 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "@prisma/client";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../scalars";
 import { User } from "../models/User";
 
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
-  description: undefined,
-  simpleResolvers: undefined,
+  isAbstract: true
 })
 export class Post {
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined,
+    nullable: false
   })
   id!: string;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: false,
-    description: undefined,
+    nullable: false
   })
   createdAt!: Date;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: false,
-    description: undefined,
+    nullable: false
   })
   updatedAt!: Date;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: false,
-    description: undefined,
+    nullable: false
   })
   published!: boolean;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined,
+    nullable: false
   })
   title!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   content?: string | null;
 
   author?: User | null;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined,
+    nullable: true
   })
   authorId?: string | null;
 }

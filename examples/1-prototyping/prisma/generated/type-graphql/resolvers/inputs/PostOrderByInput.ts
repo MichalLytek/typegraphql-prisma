@@ -1,52 +1,45 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "@prisma/client";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   createdAt?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updatedAt?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   published?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   title?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   content?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   authorId?: "asc" | "desc" | undefined;
 }
