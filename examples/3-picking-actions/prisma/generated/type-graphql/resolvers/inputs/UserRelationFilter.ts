@@ -1,22 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "@prisma/client";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
 import { UserWhereInput } from "../inputs/UserWhereInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class UserRelationFilter {
   @TypeGraphQL.Field(_type => UserWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   is?: UserWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => UserWhereInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   isNot?: UserWhereInput | undefined;
 }

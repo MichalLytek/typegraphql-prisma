@@ -4,11 +4,15 @@
 # -----------------------------------------------
 
 type AggregatePost {
-  count: Int!
+  count: PostCountAggregate
+  max: PostMaxAggregate
+  min: PostMinAggregate
 }
 
 type AggregateUser {
-  count: Int!
+  count: UserCountAggregate
+  max: UserMaxAggregate
+  min: UserMinAggregate
 }
 
 input BoolFilter {
@@ -87,20 +91,41 @@ type Post {
   updatedAt: DateTime!
 }
 
-enum PostDistinctFieldEnum {
-  authorId
-  content
-  createdAt
-  id
-  published
-  title
-  updatedAt
+type PostCountAggregate {
+  _all: Int!
+  authorId: Int
+  content: Int
+  createdAt: Int
+  id: Int
+  published: Int
+  title: Int
+  updatedAt: Int
 }
 
 input PostListRelationFilter {
   every: PostWhereInput
   none: PostWhereInput
   some: PostWhereInput
+}
+
+type PostMaxAggregate {
+  authorId: String
+  content: String
+  createdAt: DateTime
+  id: String
+  published: Boolean
+  title: String
+  updatedAt: DateTime
+}
+
+type PostMinAggregate {
+  authorId: String
+  content: String
+  createdAt: DateTime
+  id: String
+  published: Boolean
+  title: String
+  updatedAt: DateTime
 }
 
 input PostOrderByInput {
@@ -113,15 +138,25 @@ input PostOrderByInput {
   updatedAt: SortOrder
 }
 
+enum PostScalarFieldEnum {
+  authorId
+  content
+  createdAt
+  id
+  published
+  title
+  updatedAt
+}
+
 input PostWhereInput {
   AND: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  OR: [PostWhereInput!]
   author: UserRelationFilter
   authorId: StringNullableFilter
   content: StringNullableFilter
   createdAt: DateTimeFilter
   id: StringFilter
-  NOT: [PostWhereInput!]
-  OR: [PostWhereInput!]
   published: BoolFilter
   title: StringFilter
   updatedAt: DateTimeFilter
@@ -132,12 +167,12 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  aggregatePost(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
-  aggregateUser(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
+  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
+  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   post(where: PostWhereUniqueInput!): Post
-  posts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   user(where: UserWhereUniqueInput!): User
-  users(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
 
 enum SortOrder {
@@ -177,13 +212,26 @@ type User {
   email: String!
   id: String!
   name: String
-  posts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
 }
 
-enum UserDistinctFieldEnum {
-  email
-  id
-  name
+type UserCountAggregate {
+  _all: Int!
+  email: Int
+  id: Int
+  name: Int
+}
+
+type UserMaxAggregate {
+  email: String
+  id: String
+  name: String
+}
+
+type UserMinAggregate {
+  email: String
+  id: String
+  name: String
 }
 
 input UserOrderByInput {
@@ -197,13 +245,19 @@ input UserRelationFilter {
   isNot: UserWhereInput
 }
 
+enum UserScalarFieldEnum {
+  email
+  id
+  name
+}
+
 input UserWhereInput {
   AND: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
   email: StringFilter
   id: StringFilter
   name: StringNullableFilter
-  NOT: [UserWhereInput!]
-  OR: [UserWhereInput!]
   posts: PostListRelationFilter
 }
 

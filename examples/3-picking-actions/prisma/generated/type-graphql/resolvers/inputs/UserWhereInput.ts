@@ -1,54 +1,47 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "@prisma/client";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
 import { PostListRelationFilter } from "../inputs/PostListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class UserWhereInput {
   @TypeGraphQL.Field(_type => [UserWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   AND?: UserWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [UserWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   OR?: UserWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [UserWhereInput], {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   NOT?: UserWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   email?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   name?: StringNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => PostListRelationFilter, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   posts?: PostListRelationFilter | undefined;
 }
