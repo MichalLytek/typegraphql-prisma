@@ -1,3 +1,3 @@
-export { PostDistinctFieldEnum } from "./PostDistinctFieldEnum";
+export { PostScalarFieldEnum } from "./PostScalarFieldEnum";
 export { SortOrder } from "./SortOrder";
-export { UserDistinctFieldEnum } from "./UserDistinctFieldEnum";
+export { UserScalarFieldEnum } from "./UserScalarFieldEnum";

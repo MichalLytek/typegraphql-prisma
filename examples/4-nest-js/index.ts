@@ -6,9 +6,9 @@ import { TypeGraphQLModule } from "typegraphql-nestjs";
 import { NestFactory } from "@nestjs/core";
 import { Module } from "@nestjs/common";
 import {
-  NestFastifyApplication,
-  FastifyAdapter,
-} from "@nestjs/platform-fastify";
+  NestExpressApplication,
+  ExpressAdapter,
+} from "@nestjs/platform-express";
 
 import {
   User,
@@ -28,7 +28,7 @@ interface Context {
 class CustomUserResolver {
   @Query(returns => User, { nullable: true })
   async bestUser(@Ctx() { prisma }: Context): Promise<User | null> {
-    return await prisma.user.findOne({
+    return await prisma.user.findFirst({
       where: { email: "bob@prisma.io" },
     });
   }
@@ -39,7 +39,7 @@ class CustomUserResolver {
     @Ctx() { prisma }: Context,
   ): Promise<Post | undefined> {
     const [favoritePost] = await prisma.user
-      .findOne({ where: { id: user.id } })
+      .findUnique({ where: { id: user.id } })
       .posts({ take: 1 });
 
     return favoritePost;
@@ -72,9 +72,9 @@ async function main() {
   })
   class AppModule {}
 
-  const app = await NestFactory.create<NestFastifyApplication>(
+  const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new ExpressAdapter(),
   );
 
   await app.listen(4000);

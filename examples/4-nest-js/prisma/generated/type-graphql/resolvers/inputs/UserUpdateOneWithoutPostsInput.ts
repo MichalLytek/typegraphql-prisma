@@ -1,56 +1,49 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "@prisma/client";
-import { UserCreateOrConnectWithoutpostsInput } from "../inputs/UserCreateOrConnectWithoutpostsInput";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
+import { UserCreateOrConnectWithoutPostsInput } from "../inputs/UserCreateOrConnectWithoutPostsInput";
 import { UserCreateWithoutPostsInput } from "../inputs/UserCreateWithoutPostsInput";
 import { UserUpdateWithoutPostsInput } from "../inputs/UserUpdateWithoutPostsInput";
 import { UserUpsertWithoutPostsInput } from "../inputs/UserUpsertWithoutPostsInput";
 import { UserWhereUniqueInput } from "../inputs/UserWhereUniqueInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class UserUpdateOneWithoutPostsInput {
   @TypeGraphQL.Field(_type => UserCreateWithoutPostsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   create?: UserCreateWithoutPostsInput | undefined;
 
+  @TypeGraphQL.Field(_type => UserCreateOrConnectWithoutPostsInput, {
+    nullable: true
+  })
+  connectOrCreate?: UserCreateOrConnectWithoutPostsInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserUpsertWithoutPostsInput, {
+    nullable: true
+  })
+  upsert?: UserUpsertWithoutPostsInput | undefined;
+
   @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   connect?: UserWhereUniqueInput | undefined;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   disconnect?: boolean | undefined;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   delete?: boolean | undefined;
 
   @TypeGraphQL.Field(_type => UserUpdateWithoutPostsInput, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   update?: UserUpdateWithoutPostsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserUpsertWithoutPostsInput, {
-    nullable: true,
-    description: undefined
-  })
-  upsert?: UserUpsertWithoutPostsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateOrConnectWithoutpostsInput, {
-    nullable: true,
-    description: undefined
-  })
-  connectOrCreate?: UserCreateOrConnectWithoutpostsInput | undefined;
 }

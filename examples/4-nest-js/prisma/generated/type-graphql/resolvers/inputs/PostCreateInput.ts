@@ -1,52 +1,45 @@
 import * as TypeGraphQL from "type-graphql";
-import GraphQLJSON from "graphql-type-json";
-import { JsonValue, InputJsonValue } from "@prisma/client";
-import { UserCreateOneWithoutPostsInput } from "../inputs/UserCreateOneWithoutPostsInput";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
+import { UserCreateNestedOneWithoutPostsInput } from "../inputs/UserCreateNestedOneWithoutPostsInput";
 
 @TypeGraphQL.InputType({
-  isAbstract: true,
-  description: undefined,
+  isAbstract: true
 })
 export class PostCreateInput {
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   id?: string | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   createdAt?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   updatedAt?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Boolean, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   published!: boolean;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false,
-    description: undefined
+    nullable: false
   })
   title!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
+    nullable: true
   })
   content?: string | undefined;
 
-  @TypeGraphQL.Field(_type => UserCreateOneWithoutPostsInput, {
-    nullable: true,
-    description: undefined
+  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutPostsInput, {
+    nullable: true
   })
-  author?: UserCreateOneWithoutPostsInput | undefined;
+  author?: UserCreateNestedOneWithoutPostsInput | undefined;
 }
