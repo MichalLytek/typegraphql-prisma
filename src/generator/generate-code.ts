@@ -452,7 +452,7 @@ export default async function generateCode(
     dmmfDocument.relationModels,
     dmmfDocument.datamodel.models,
     dmmfDocument.schema.inputTypes,
-    dmmfDocument.schema.outputTypes,
+    outputTypesToGenerate,
   );
 
   log("Generate custom scalars");

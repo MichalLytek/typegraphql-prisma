@@ -431,8 +431,6 @@ const inputsInfo = {
   ProblemUpdateWithoutCreatorInput: ["problemText", "likedBy"]
 };
 const outputsInfo = {
-  Query: ["findFirstUser", "findManyUser", "aggregateUser", "groupByUser", "findUniqueUser", "findFirstpost", "findManypost", "aggregatepost", "groupBypost", "findUniquepost", "findFirstCategory", "findManyCategory", "aggregateCategory", "groupByCategory", "findUniqueCategory", "findFirstPatient", "findManyPatient", "aggregatePatient", "groupByPatient", "findUniquePatient", "findFirstMovie", "findManyMovie", "aggregateMovie", "groupByMovie", "findUniqueMovie", "findFirstDirector", "findManyDirector", "aggregateDirector", "groupByDirector", "findUniqueDirector", "findFirstProblem", "findManyProblem", "aggregateProblem", "groupByProblem", "findUniqueProblem", "findFirstCreator", "findManyCreator", "aggregateCreator", "groupByCreator", "findUniqueCreator", "findFirstNativeTypeModel", "findManyNativeTypeModel", "aggregateNativeTypeModel", "groupByNativeTypeModel", "findUniqueNativeTypeModel"],
-  Mutation: ["createOneUser", "upsertOneUser", "createManyUser", "deleteOneUser", "updateOneUser", "updateManyUser", "deleteManyUser", "createOnepost", "upsertOnepost", "createManypost", "deleteOnepost", "updateOnepost", "updateManypost", "deleteManypost", "createOneCategory", "upsertOneCategory", "createManyCategory", "deleteOneCategory", "updateOneCategory", "updateManyCategory", "deleteManyCategory", "createOnePatient", "upsertOnePatient", "createManyPatient", "deleteOnePatient", "updateOnePatient", "updateManyPatient", "deleteManyPatient", "createOneMovie", "upsertOneMovie", "createManyMovie", "deleteOneMovie", "updateOneMovie", "updateManyMovie", "deleteManyMovie", "createOneDirector", "upsertOneDirector", "createManyDirector", "deleteOneDirector", "updateOneDirector", "updateManyDirector", "deleteManyDirector", "createOneProblem", "upsertOneProblem", "createManyProblem", "deleteOneProblem", "updateOneProblem", "updateManyProblem", "deleteManyProblem", "createOneCreator", "upsertOneCreator", "createManyCreator", "deleteOneCreator", "updateOneCreator", "updateManyCreator", "deleteManyCreator", "createOneNativeTypeModel", "upsertOneNativeTypeModel", "createManyNativeTypeModel", "deleteOneNativeTypeModel", "updateOneNativeTypeModel", "updateManyNativeTypeModel", "deleteManyNativeTypeModel", "executeRaw", "queryRaw"],
   AggregateClient: ["count", "avg", "sum", "min", "max"],
   ClientGroupBy: ["id", "email", "name", "age", "balance", "amount", "role", "count", "avg", "sum", "min", "max"],
   AggregatePost: ["count", "avg", "sum", "min", "max"],
@@ -490,16 +488,7 @@ const outputsInfo = {
   NativeTypeModelAvgAggregate: ["id", "bigInt", "decimal"],
   NativeTypeModelSumAggregate: ["id", "bigInt", "decimal"],
   NativeTypeModelMinAggregate: ["id", "bigInt", "byteA", "decimal"],
-  NativeTypeModelMaxAggregate: ["id", "bigInt", "byteA", "decimal"],
-  User: ["id", "email", "name", "age", "balance", "amount", "posts", "role", "editorPosts"],
-  post: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "author", "authorId", "editor", "editorId", "kind", "metadata"],
-  Category: ["name", "slug", "number"],
-  Patient: ["firstName", "lastName", "email"],
-  Movie: ["directorFirstName", "directorLastName", "director", "title"],
-  Director: ["firstName", "lastName", "movies"],
-  Problem: ["id", "problemText", "likedBy", "creator", "creatorId"],
-  Creator: ["id", "name", "likes", "problems"],
-  NativeTypeModel: ["id", "bigInt", "byteA", "decimal"]
+  NativeTypeModelMaxAggregate: ["id", "bigInt", "byteA", "decimal"]
 };
 const argsInfo = {
   FindUniqueClientArgs: ["where"],
