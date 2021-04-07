@@ -24,6 +24,8 @@ export type User = {
   balance: number
   amount: number
   role: Role
+  grades: number[]
+  aliases: string[]
 }
 
 /**
@@ -870,6 +872,7 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
+    grades: number | null
   }
 
   export type UserSumAggregateOutputType = {
@@ -877,6 +880,7 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
+    grades: number[]
   }
 
   export type UserMinAggregateOutputType = {
@@ -907,6 +911,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: number | null
+    grades: number | null
+    aliases: number | null
     _all: number
   }
 
@@ -916,6 +922,7 @@ export namespace Prisma {
     age?: true
     balance?: true
     amount?: true
+    grades?: true
   }
 
   export type UserSumAggregateInputType = {
@@ -923,6 +930,7 @@ export namespace Prisma {
     age?: true
     balance?: true
     amount?: true
+    grades?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -953,6 +961,8 @@ export namespace Prisma {
     balance?: true
     amount?: true
     role?: true
+    grades?: true
+    aliases?: true
     _all?: true
   }
 
@@ -1051,6 +1061,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    grades: number[]
+    aliases: string[]
     count: UserCountAggregateOutputType | null
     avg: UserAvgAggregateOutputType | null
     sum: UserSumAggregateOutputType | null
@@ -1075,6 +1087,8 @@ export namespace Prisma {
     posts?: boolean | postFindManyArgs
     role?: boolean
     editorPosts?: boolean | postFindManyArgs
+    grades?: boolean
+    aliases?: boolean
   }
 
   export type UserInclude = {
@@ -8159,7 +8173,9 @@ export namespace Prisma {
     age: 'age',
     balance: 'balance',
     amount: 'amount',
-    role: 'role'
+    role: 'role',
+    grades: 'grades',
+    aliases: 'aliases'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -8278,6 +8294,8 @@ export namespace Prisma {
     posts?: PostListRelationFilter
     role?: EnumRoleFilter | Role
     editorPosts?: PostListRelationFilter
+    grades?: IntNullableListFilter
+    aliases?: StringNullableListFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -8290,6 +8308,8 @@ export namespace Prisma {
     posts?: postOrderByAggregateInput
     role?: SortOrder
     editorPosts?: postOrderByAggregateInput
+    grades?: SortOrder
+    aliases?: SortOrder
   }
 
   export type UserWhereUniqueInput = {
@@ -8305,6 +8325,8 @@ export namespace Prisma {
     balance?: SortOrder
     amount?: SortOrder
     role?: SortOrder
+    grades?: SortOrder
+    aliases?: SortOrder
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -8318,6 +8340,8 @@ export namespace Prisma {
     balance?: FloatWithAggregatesFilter | number
     amount?: FloatWithAggregatesFilter | number
     role?: EnumRoleWithAggregatesFilter | Role
+    grades?: IntNullableListFilter
+    aliases?: StringNullableListFilter
   }
 
   export type postWhereInput = {
@@ -8643,6 +8667,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    grades?: UserCreategradesInput | Enumerable<number>
+    aliases?: UserCreatealiasesInput | Enumerable<string>
     posts?: postCreateNestedManyWithoutAuthorInput
     editorPosts?: postCreateNestedManyWithoutEditorInput
   }
@@ -8655,6 +8681,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    grades?: UserCreategradesInput | Enumerable<number>
+    aliases?: UserCreatealiasesInput | Enumerable<string>
     posts?: postUncheckedCreateNestedManyWithoutAuthorInput
     editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
@@ -8666,6 +8694,8 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    grades?: UserUpdategradesInput | Enumerable<number>
+    aliases?: UserUpdatealiasesInput | Enumerable<string>
     posts?: postUpdateManyWithoutAuthorInput
     editorPosts?: postUpdateManyWithoutEditorInput
   }
@@ -8678,6 +8708,8 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    grades?: UserUpdategradesInput | Enumerable<number>
+    aliases?: UserUpdatealiasesInput | Enumerable<string>
     posts?: postUncheckedUpdateManyWithoutAuthorInput
     editorPosts?: postUncheckedUpdateManyWithoutEditorInput
   }
@@ -8690,6 +8722,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    grades?: UserCreateManygradesInput | Enumerable<number>
+    aliases?: UserCreateManyaliasesInput | Enumerable<string>
   }
 
   export type UserUpdateManyMutationInput = {
@@ -8699,6 +8733,8 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    grades?: UserUpdategradesInput | Enumerable<number>
+    aliases?: UserUpdatealiasesInput | Enumerable<string>
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -8709,6 +8745,8 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    grades?: UserUpdategradesInput | Enumerable<number>
+    aliases?: UserUpdatealiasesInput | Enumerable<string>
   }
 
   export type postCreateInput = {
@@ -9157,6 +9195,22 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter | Role
   }
 
+  export type IntNullableListFilter = {
+    equals?: Enumerable<number> | null
+    has?: number | null
+    hasEvery?: Enumerable<number>
+    hasSome?: Enumerable<number>
+    isEmpty?: boolean
+  }
+
+  export type StringNullableListFilter = {
+    equals?: Enumerable<string> | null
+    has?: string | null
+    hasEvery?: Enumerable<string>
+    hasSome?: Enumerable<string>
+    isEmpty?: boolean
+  }
+
   export type postOrderByAggregateInput = {
     count: SortOrder
   }
@@ -9467,6 +9521,14 @@ export namespace Prisma {
     max?: NestedDecimalNullableFilter
   }
 
+  export type UserCreategradesInput = {
+    set: Enumerable<number>
+  }
+
+  export type UserCreatealiasesInput = {
+    set: Enumerable<string>
+  }
+
   export type postCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
@@ -9523,6 +9585,16 @@ export namespace Prisma {
     set?: Role
   }
 
+  export type UserUpdategradesInput = {
+    set?: Enumerable<number>
+    push?: number
+  }
+
+  export type UserUpdatealiasesInput = {
+    set?: Enumerable<string>
+    push?: string
+  }
+
   export type postUpdateManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
@@ -9577,6 +9649,14 @@ export namespace Prisma {
     update?: Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutEditorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
+  }
+
+  export type UserCreateManygradesInput = {
+    set: Enumerable<number>
+  }
+
+  export type UserCreateManyaliasesInput = {
+    set: Enumerable<string>
   }
 
   export type UserCreateNestedOneWithoutPostsInput = {
@@ -10227,6 +10307,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    grades?: UserCreategradesInput | Enumerable<number>
+    aliases?: UserCreatealiasesInput | Enumerable<string>
     editorPosts?: postCreateNestedManyWithoutEditorInput
   }
 
@@ -10238,6 +10320,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    grades?: UserCreategradesInput | Enumerable<number>
+    aliases?: UserCreatealiasesInput | Enumerable<string>
     editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
 
@@ -10253,6 +10337,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    grades?: UserCreategradesInput | Enumerable<number>
+    aliases?: UserCreatealiasesInput | Enumerable<string>
     posts?: postCreateNestedManyWithoutAuthorInput
   }
 
@@ -10264,6 +10350,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    grades?: UserCreategradesInput | Enumerable<number>
+    aliases?: UserCreatealiasesInput | Enumerable<string>
     posts?: postUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -10284,6 +10372,8 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    grades?: UserUpdategradesInput | Enumerable<number>
+    aliases?: UserUpdatealiasesInput | Enumerable<string>
     editorPosts?: postUpdateManyWithoutEditorInput
   }
 
@@ -10295,6 +10385,8 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    grades?: UserUpdategradesInput | Enumerable<number>
+    aliases?: UserUpdatealiasesInput | Enumerable<string>
     editorPosts?: postUncheckedUpdateManyWithoutEditorInput
   }
 
@@ -10310,6 +10402,8 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    grades?: UserUpdategradesInput | Enumerable<number>
+    aliases?: UserUpdatealiasesInput | Enumerable<string>
     posts?: postUpdateManyWithoutAuthorInput
   }
 
@@ -10321,6 +10415,8 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    grades?: UserUpdategradesInput | Enumerable<number>
+    aliases?: UserUpdatealiasesInput | Enumerable<string>
     posts?: postUncheckedUpdateManyWithoutAuthorInput
   }
 

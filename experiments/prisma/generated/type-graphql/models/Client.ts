@@ -47,6 +47,16 @@ export class Client {
 
   editorPosts?: Post[];
 
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
+    nullable: false
+  })
+  grades!: number[];
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: false
+  })
+  aliases!: string[];
+
   /** renamed field doc */
   @TypeGraphQL.Field(_type => String, {
     nullable: true,

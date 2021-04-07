@@ -5,9 +5,11 @@ import { DecimalJSScalar } from "../../scalars";
 import { EnumRoleFilter } from "../inputs/EnumRoleFilter";
 import { FloatFilter } from "../inputs/FloatFilter";
 import { IntFilter } from "../inputs/IntFilter";
+import { IntNullableListFilter } from "../inputs/IntNullableListFilter";
 import { PostListRelationFilter } from "../inputs/PostListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
+import { StringNullableListFilter } from "../inputs/StringNullableListFilter";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -63,6 +65,16 @@ export class ClientWhereInput {
     nullable: true
   })
   editorPosts?: PostListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => IntNullableListFilter, {
+    nullable: true
+  })
+  grades?: IntNullableListFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableListFilter, {
+    nullable: true
+  })
+  aliases?: StringNullableListFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true

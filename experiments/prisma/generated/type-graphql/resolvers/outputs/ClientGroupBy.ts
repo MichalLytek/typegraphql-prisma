@@ -48,6 +48,16 @@ export class ClientGroupBy {
   })
   role!: "USER" | "ADMIN";
 
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
+    nullable: true
+  })
+  grades?: number[] | null;
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: true
+  })
+  aliases?: string[] | null;
+
   @TypeGraphQL.Field(_type => ClientCountAggregate, {
     nullable: true
   })

@@ -40,10 +40,8 @@ mutation AddClient {
 }
 
 query MyFindClients {
-  customFindClientsWithArgs(where: { accountBalance: { gte: 10 } }) {
-    id
-    email
-    accountBalance
+  customFindClientsWithArgs(where: { accountBalance: { lte: 10 } }) {
+    ...ClientData
   }
 }
 
@@ -90,6 +88,8 @@ fragment ClientData on Client {
   amount
   role
   hello
+  grades
+  aliases
 }
 
 fragment PostData on Post {
@@ -300,5 +300,11 @@ mutation InsertNativeTypesFields {
     bigInt
     byteA
     decimal
+  }
+}
+
+mutation AddGrade {
+  updateClient(where: { id: 1 }, data: { grades: { push: 5 } }) {
+    ...ClientData
   }
 }

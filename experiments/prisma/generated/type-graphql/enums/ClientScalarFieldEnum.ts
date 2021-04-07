@@ -7,7 +7,9 @@ export enum ClientScalarFieldEnum {
   age = "age",
   accountBalance = "balance",
   amount = "amount",
-  role = "role"
+  role = "role",
+  grades = "grades",
+  aliases = "aliases"
 }
 TypeGraphQL.registerEnumType(ClientScalarFieldEnum, {
   name: "ClientScalarFieldEnum",

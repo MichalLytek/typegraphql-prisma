@@ -18,6 +18,8 @@ async function main() {
       email: "test1@test.test",
       name: "Test",
       role: "ADMIN",
+      grades: [5, 4, 4],
+      aliases: ["Tony"],
       posts: {
         create: [
           {
@@ -55,6 +57,8 @@ async function main() {
       email: "test2@test.test",
       name: "Test",
       role: "USER",
+      grades: [3, 2, 5],
+      aliases: ["Johny"],
       posts: {
         create: [
           {

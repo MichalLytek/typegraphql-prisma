@@ -2,6 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
+import { ClientUpdatealiasesInput } from "../inputs/ClientUpdatealiasesInput";
+import { ClientUpdategradesInput } from "../inputs/ClientUpdategradesInput";
 import { EnumRoleFieldUpdateOperationsInput } from "../inputs/EnumRoleFieldUpdateOperationsInput";
 import { FloatFieldUpdateOperationsInput } from "../inputs/FloatFieldUpdateOperationsInput";
 import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
@@ -37,6 +39,16 @@ export class ClientUpdateInput {
     nullable: true
   })
   role?: EnumRoleFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => ClientUpdategradesInput, {
+    nullable: true
+  })
+  grades?: ClientUpdategradesInput | undefined;
+
+  @TypeGraphQL.Field(_type => ClientUpdatealiasesInput, {
+    nullable: true
+  })
+  aliases?: ClientUpdatealiasesInput | undefined;
 
   posts?: PostUpdateManyWithoutAuthorInput | undefined;
 

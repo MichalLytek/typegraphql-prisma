@@ -215,12 +215,14 @@ input CategoryWhereUniqueInput {
 type Client {
   accountBalance: Float!
   age: Int!
+  aliases: [String!]!
   amount: Float!
   clientPosts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   email: String!
 
   """renamed field doc"""
   firstName: String
+  grades: [Int!]!
   hello: String!
 
   """User model field doc"""
@@ -232,15 +234,18 @@ type ClientAvgAggregate {
   age: Float!
   amount: Float!
   balance: Float!
+  grades: Float
   id: Float!
 }
 
 type ClientCountAggregate {
   _all: Int!
   age: Int!
+  aliases: Int
   amount: Int!
   balance: Int!
   email: Int
+  grades: Int
   id: Int!
   name: Int
   role: Int
@@ -249,22 +254,34 @@ type ClientCountAggregate {
 input ClientCreateInput {
   accountBalance: Float!
   age: Int!
+  aliases: ClientCreatealiasesInput
   amount: Float!
   clientPosts: PostCreateNestedManyWithoutAuthorInput
   editorPosts: PostCreateNestedManyWithoutEditorInput
   email: String!
   firstName: String
+  grades: ClientCreategradesInput
   role: Role!
 }
 
 input ClientCreateManyInput {
   accountBalance: Float!
   age: Int!
+  aliases: ClientCreateManyaliasesInput
   amount: Float!
   email: String!
   firstName: String
+  grades: ClientCreateManygradesInput
   id: Int
   role: Role!
+}
+
+input ClientCreateManyaliasesInput {
+  set: [String!]!
+}
+
+input ClientCreateManygradesInput {
+  set: [Int!]!
 }
 
 input ClientCreateNestedOneWithoutEditorPostsInput {
@@ -292,30 +309,44 @@ input ClientCreateOrConnectWithoutPostsInput {
 input ClientCreateWithoutEditorPostsInput {
   accountBalance: Float!
   age: Int!
+  aliases: ClientCreatealiasesInput
   amount: Float!
   clientPosts: PostCreateNestedManyWithoutAuthorInput
   email: String!
   firstName: String
+  grades: ClientCreategradesInput
   role: Role!
 }
 
 input ClientCreateWithoutPostsInput {
   accountBalance: Float!
   age: Int!
+  aliases: ClientCreatealiasesInput
   amount: Float!
   editorPosts: PostCreateNestedManyWithoutEditorInput
   email: String!
   firstName: String
+  grades: ClientCreategradesInput
   role: Role!
+}
+
+input ClientCreatealiasesInput {
+  set: [String!]!
+}
+
+input ClientCreategradesInput {
+  set: [Int!]!
 }
 
 type ClientGroupBy {
   age: Int!
+  aliases: [String!]
   amount: Float!
   avg: ClientAvgAggregate
   balance: Float!
   count: ClientCountAggregate
   email: String!
+  grades: [Int!]
   id: Int!
   max: ClientMaxAggregate
   min: ClientMinAggregate
@@ -347,9 +378,11 @@ type ClientMinAggregate {
 input ClientOrderByInput {
   accountBalance: SortOrder
   age: SortOrder
+  aliases: SortOrder
   amount: SortOrder
   email: SortOrder
   firstName: SortOrder
+  grades: SortOrder
   id: SortOrder
   role: SortOrder
 }
@@ -357,11 +390,13 @@ input ClientOrderByInput {
 input ClientOrderByWithRelationInput {
   accountBalance: SortOrder
   age: SortOrder
+  aliases: SortOrder
   amount: SortOrder
   clientPosts: PostOrderByAggregateInput
   editorPosts: PostOrderByAggregateInput
   email: SortOrder
   firstName: SortOrder
+  grades: SortOrder
   id: SortOrder
   role: SortOrder
 }
@@ -374,9 +409,11 @@ input ClientRelationFilter {
 enum ClientScalarFieldEnum {
   accountBalance
   age
+  aliases
   amount
   email
   firstName
+  grades
   id
   role
 }
@@ -387,9 +424,11 @@ input ClientScalarWhereWithAggregatesInput {
   OR: [ClientScalarWhereWithAggregatesInput!]
   accountBalance: FloatWithAggregatesFilter
   age: IntWithAggregatesFilter
+  aliases: StringNullableListFilter
   amount: FloatWithAggregatesFilter
   email: StringWithAggregatesFilter
   firstName: StringNullableWithAggregatesFilter
+  grades: IntNullableListFilter
   id: IntWithAggregatesFilter
   role: EnumRoleWithAggregatesFilter
 }
@@ -398,26 +437,31 @@ type ClientSumAggregate {
   age: Int!
   amount: Float!
   balance: Float!
+  grades: [Int!]
   id: Int!
 }
 
 input ClientUpdateInput {
   accountBalance: FloatFieldUpdateOperationsInput
   age: IntFieldUpdateOperationsInput
+  aliases: ClientUpdatealiasesInput
   amount: FloatFieldUpdateOperationsInput
   clientPosts: PostUpdateManyWithoutAuthorInput
   editorPosts: PostUpdateManyWithoutEditorInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
+  grades: ClientUpdategradesInput
   role: EnumRoleFieldUpdateOperationsInput
 }
 
 input ClientUpdateManyMutationInput {
   accountBalance: FloatFieldUpdateOperationsInput
   age: IntFieldUpdateOperationsInput
+  aliases: ClientUpdatealiasesInput
   amount: FloatFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
+  grades: ClientUpdategradesInput
   role: EnumRoleFieldUpdateOperationsInput
 }
 
@@ -442,21 +486,35 @@ input ClientUpdateOneWithoutEditorPostsInput {
 input ClientUpdateWithoutEditorPostsInput {
   accountBalance: FloatFieldUpdateOperationsInput
   age: IntFieldUpdateOperationsInput
+  aliases: ClientUpdatealiasesInput
   amount: FloatFieldUpdateOperationsInput
   clientPosts: PostUpdateManyWithoutAuthorInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
+  grades: ClientUpdategradesInput
   role: EnumRoleFieldUpdateOperationsInput
 }
 
 input ClientUpdateWithoutPostsInput {
   accountBalance: FloatFieldUpdateOperationsInput
   age: IntFieldUpdateOperationsInput
+  aliases: ClientUpdatealiasesInput
   amount: FloatFieldUpdateOperationsInput
   editorPosts: PostUpdateManyWithoutEditorInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
+  grades: ClientUpdategradesInput
   role: EnumRoleFieldUpdateOperationsInput
+}
+
+input ClientUpdatealiasesInput {
+  push: String
+  set: [String!]
+}
+
+input ClientUpdategradesInput {
+  push: Int
+  set: [Int!]
 }
 
 input ClientUpsertWithoutEditorPostsInput {
@@ -475,11 +533,13 @@ input ClientWhereInput {
   OR: [ClientWhereInput!]
   accountBalance: FloatFilter
   age: IntFilter
+  aliases: StringNullableListFilter
   amount: FloatFilter
   clientPosts: PostListRelationFilter
   editorPosts: PostListRelationFilter
   email: StringFilter
   firstName: StringNullableFilter
+  grades: IntNullableListFilter
   id: IntFilter
   role: EnumRoleFilter
 }
@@ -999,6 +1059,14 @@ input IntNullableFilter {
   lte: Int
   not: NestedIntNullableFilter
   notIn: [Int!]
+}
+
+input IntNullableListFilter {
+  equals: [Int!]
+  has: Int
+  hasEvery: [Int!]
+  hasSome: [Int!]
+  isEmpty: Boolean
 }
 
 input IntNullableWithAggregatesFilter {
@@ -2575,6 +2643,14 @@ input StringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
+}
+
+input StringNullableListFilter {
+  equals: [String!]
+  has: String
+  hasEvery: [String!]
+  hasSome: [String!]
+  isEmpty: Boolean
 }
 
 input StringNullableWithAggregatesFilter {

@@ -20,7 +20,7 @@ export class GroupByClientArgs {
   @TypeGraphQL.Field(_type => [ClientScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"id" | "email" | "name" | "age" | "balance" | "amount" | "role">;
+  by!: Array<"id" | "email" | "name" | "age" | "balance" | "amount" | "role" | "grades" | "aliases">;
 
   @TypeGraphQL.Field(_type => ClientScalarWhereWithAggregatesInput, {
     nullable: true

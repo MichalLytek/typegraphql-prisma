@@ -9,7 +9,7 @@ generator client {
   provider        = "prisma-client-js"
   binaryTargets   = ["windows", "debian-openssl-1.1.x"]
   output          = "../prisma/generated/client"
-  previewFeatures = ["orderByRelation"]
+  previewFeatures = ["orderByRelation", "napi"]
 }
 
 generator typegraphql {
@@ -33,8 +33,8 @@ enum Role {
 model User {
   // User model field comment
   /// User model field doc
-  id          Int     @id @default(autoincrement())
-  email       String  @unique
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
   /// renamed field doc
   /// @TypeGraphQL.field(name: "firstName")
   name        String?
@@ -43,10 +43,12 @@ model User {
   balance     Numeric
   amount      Float
   /// @TypeGraphQL.field(name: "clientPosts")
-  posts       post[]  @relation("posts")
+  posts       post[]   @relation("posts")
   role        Role
   /// @TypeGraphQL.omit(output: true)
-  editorPosts post[]  @relation("editorPosts")
+  editorPosts post[]   @relation("editorPosts")
+  grades      Int[]
+  aliases     String[]
 }
 
 enum PostKind {

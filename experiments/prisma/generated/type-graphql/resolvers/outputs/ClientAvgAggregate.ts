@@ -26,4 +26,9 @@ export class ClientAvgAggregate {
     nullable: false
   })
   amount!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  grades!: number | null;
 }

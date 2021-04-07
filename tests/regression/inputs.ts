@@ -36,12 +36,17 @@ describe("inputs", () => {
         optionalDateField     DateTime?
         jsonField             Json
         optionalJsonField     Json?
+        intArrayField         Int[]
+        stringArrayField      String[]
       }
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
     const intFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/IntFilter.ts",
+    );
+    const intNullableListFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/IntNullableListFilter.ts",
     );
     const nestedIntFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/NestedIntFilter.ts",
@@ -51,6 +56,9 @@ describe("inputs", () => {
     );
     const stringNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/StringNullableFilter.ts",
+    );
+    const stringNullableListFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/StringNullableListFilter.ts",
     );
     const nestedStringNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/NestedStringNullableFilter.ts",
@@ -79,9 +87,15 @@ describe("inputs", () => {
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
     expect(intFilterTSFile).toMatchSnapshot("IntFilter");
+    expect(intNullableListFilterTSFile).toMatchSnapshot(
+      "IntNullableListFilter",
+    );
     expect(nestedIntFilterTSFile).toMatchSnapshot("NestedIntFilter");
     expect(stringFilterTSFile).toMatchSnapshot("StringFilter");
     expect(stringNullableFilterTSFile).toMatchSnapshot("StringNullableFilter");
+    expect(stringNullableListFilterTSFile).toMatchSnapshot(
+      "StringNullableListFilter",
+    );
     expect(nestedStringNullableFilterTSFile).toMatchSnapshot(
       "NestedStringNullableFilter",
     );
@@ -92,6 +106,81 @@ describe("inputs", () => {
     expect(dateTimeFilterTSFile).toMatchSnapshot("DateTimeFilter");
     expect(nestedDateTimeFilterTSFile).toMatchSnapshot("NestedDateTimeFilter");
     expect(jsonFilterTSFile).toMatchSnapshot("JsonFilter");
+    expect(indexTSFile).toMatchSnapshot("index");
+  });
+
+  it("should properly generate input type classes for creating models and scalar fields", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+      enum Color {
+        RED
+        GREEN
+        BLUE
+      }
+      model SampleModel {
+        intIdField            Int     @id @default(autoincrement())
+        stringField           String  @unique
+        optionalStringField   String?
+        intField              Int
+        optionalIntField      Int?
+        floatField            Float
+        optionalFloatField    Float?
+        booleanField          Boolean
+        optionalBooleanField  Boolean?
+        dateField             DateTime
+        optionalDateField     DateTime?
+        jsonField             Json
+        optionalJsonField     Json?
+        enumField             Color
+        optionalEnumField     Color?
+        intArrayField         Int[]
+        stringArrayField      String[]
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const sampleModelCreateInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleModelCreateInput.ts",
+    );
+    const sampleModelCreateManyInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleModelCreateManyInput.ts",
+    );
+    const sampleModelCreateintArrayFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleModelCreateintArrayFieldInput.ts",
+    );
+    const sampleModelCreateManyintArrayFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleModelCreateManyintArrayFieldInput.ts",
+    );
+    const sampleModelCreatestringArrayFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleModelCreatestringArrayFieldInput.ts",
+    );
+    const sampleModelCreateManystringArrayFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleModelCreateManystringArrayFieldInput.ts",
+    );
+
+    const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+    expect(sampleModelCreateInputTSFile).toMatchSnapshot(
+      "SampleModelCreateInput",
+    );
+    expect(sampleModelCreateManyInputTSFile).toMatchSnapshot(
+      "SampleModelCreateManyInput",
+    );
+    expect(sampleModelCreateintArrayFieldInputTSFile).toMatchSnapshot(
+      "SampleModelCreateintArrayFieldInput",
+    );
+    expect(sampleModelCreateManyintArrayFieldInputTSFile).toMatchSnapshot(
+      "SampleModelCreateManyintArrayFieldInput",
+    );
+    expect(sampleModelCreatestringArrayFieldInputTSFile).toMatchSnapshot(
+      "SampleModelCreatestringArrayFieldInput",
+    );
+    expect(sampleModelCreateManystringArrayFieldInputTSFile).toMatchSnapshot(
+      "SampleModelCreateManystringArrayFieldInput",
+    );
     expect(indexTSFile).toMatchSnapshot("index");
   });
 
@@ -122,6 +211,8 @@ describe("inputs", () => {
         optionalJsonField     Json?
         enumField             Color
         optionalEnumField     Color?
+        intArrayField         Int[]
+        stringArrayField      String[]
       }
     `;
 
@@ -150,6 +241,12 @@ describe("inputs", () => {
     const enumColorFieldUpdateOperationsInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/EnumColorFieldUpdateOperationsInput.ts",
     );
+    const sampleModelUpdateintArrayFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleModelUpdateintArrayFieldInput.ts",
+    );
+    const sampleModelUpdatestringArrayFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleModelUpdatestringArrayFieldInput.ts",
+    );
 
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
@@ -176,6 +273,12 @@ describe("inputs", () => {
     );
     expect(enumColorFieldUpdateOperationsInputTSFile).toMatchSnapshot(
       "EnumColorFieldUpdateOperationsInput",
+    );
+    expect(sampleModelUpdateintArrayFieldInputTSFile).toMatchSnapshot(
+      "SampleModelUpdateintArrayFieldInput",
+    );
+    expect(sampleModelUpdatestringArrayFieldInputTSFile).toMatchSnapshot(
+      "SampleModelUpdatestringArrayFieldInput",
     );
     expect(indexTSFile).toMatchSnapshot("index");
   });

@@ -35,5 +35,5 @@ export class FindManyClientArgs {
   @TypeGraphQL.Field(_type => [ClientScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "email" | "name" | "age" | "balance" | "amount" | "role"> | undefined;
+  distinct?: Array<"id" | "email" | "name" | "age" | "balance" | "amount" | "role" | "grades" | "aliases"> | undefined;
 }

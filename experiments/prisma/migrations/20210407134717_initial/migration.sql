@@ -13,6 +13,8 @@ CREATE TABLE "User" (
     "balance" DOUBLE PRECISION NOT NULL,
     "amount" DOUBLE PRECISION NOT NULL,
     "role" "Role" NOT NULL,
+    "grades" INTEGER[],
+    "aliases" TEXT[],
 
     PRIMARY KEY ("id")
 );

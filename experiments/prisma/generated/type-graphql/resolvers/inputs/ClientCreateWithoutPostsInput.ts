@@ -2,6 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
+import { ClientCreatealiasesInput } from "../inputs/ClientCreatealiasesInput";
+import { ClientCreategradesInput } from "../inputs/ClientCreategradesInput";
 import { PostCreateNestedManyWithoutEditorInput } from "../inputs/PostCreateNestedManyWithoutEditorInput";
 import { Role } from "../../enums/Role";
 
@@ -32,6 +34,16 @@ export class ClientCreateWithoutPostsInput {
     nullable: false
   })
   role!: "USER" | "ADMIN";
+
+  @TypeGraphQL.Field(_type => ClientCreategradesInput, {
+    nullable: true
+  })
+  grades?: ClientCreategradesInput | undefined;
+
+  @TypeGraphQL.Field(_type => ClientCreatealiasesInput, {
+    nullable: true
+  })
+  aliases?: ClientCreatealiasesInput | undefined;
 
   @TypeGraphQL.Field(_type => PostCreateNestedManyWithoutEditorInput, {
     nullable: true
