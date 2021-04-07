@@ -34,6 +34,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       [Post]
         AggregatePostResolver.d.ts
         AggregatePostResolver.js
+        CreateManyPostResolver.d.ts
+        CreateManyPostResolver.js
         CreatePostResolver.d.ts
         CreatePostResolver.js
         DeleteManyPostResolver.d.ts
@@ -46,6 +48,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         FindManyPostResolver.js
         FindUniquePostResolver.d.ts
         FindUniquePostResolver.js
+        GroupByPostResolver.d.ts
+        GroupByPostResolver.js
         PostCrudResolver.d.ts
         PostCrudResolver.js
         UpdateManyPostResolver.d.ts
@@ -57,6 +61,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         [args]
           AggregatePostArgs.d.ts
           AggregatePostArgs.js
+          CreateManyPostArgs.d.ts
+          CreateManyPostArgs.js
           CreatePostArgs.d.ts
           CreatePostArgs.js
           DeleteManyPostArgs.d.ts
@@ -69,6 +75,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           FindManyPostArgs.js
           FindUniquePostArgs.d.ts
           FindUniquePostArgs.js
+          GroupByPostArgs.d.ts
+          GroupByPostArgs.js
           UpdateManyPostArgs.d.ts
           UpdateManyPostArgs.js
           UpdatePostArgs.d.ts
@@ -80,6 +88,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       [User]
         AggregateUserResolver.d.ts
         AggregateUserResolver.js
+        CreateManyUserResolver.d.ts
+        CreateManyUserResolver.js
         CreateUserResolver.d.ts
         CreateUserResolver.js
         DeleteManyUserResolver.d.ts
@@ -92,6 +102,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         FindManyUserResolver.js
         FindUniqueUserResolver.d.ts
         FindUniqueUserResolver.js
+        GroupByUserResolver.d.ts
+        GroupByUserResolver.js
         UpdateManyUserResolver.d.ts
         UpdateManyUserResolver.js
         UpdateUserResolver.d.ts
@@ -103,6 +115,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         [args]
           AggregateUserArgs.d.ts
           AggregateUserArgs.js
+          CreateManyUserArgs.d.ts
+          CreateManyUserArgs.js
           CreateUserArgs.d.ts
           CreateUserArgs.js
           DeleteManyUserArgs.d.ts
@@ -115,6 +129,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           FindManyUserArgs.js
           FindUniqueUserArgs.d.ts
           FindUniqueUserArgs.js
+          GroupByUserArgs.d.ts
+          GroupByUserArgs.js
           UpdateManyUserArgs.d.ts
           UpdateManyUserArgs.js
           UpdateUserArgs.d.ts
@@ -136,22 +152,44 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       EnumColorFieldUpdateOperationsInput.js
       EnumColorFilter.d.ts
       EnumColorFilter.js
+      EnumColorWithAggregatesFilter.d.ts
+      EnumColorWithAggregatesFilter.js
       IntFieldUpdateOperationsInput.d.ts
       IntFieldUpdateOperationsInput.js
       IntFilter.d.ts
       IntFilter.js
+      IntWithAggregatesFilter.d.ts
+      IntWithAggregatesFilter.js
       NestedEnumColorFilter.d.ts
       NestedEnumColorFilter.js
+      NestedEnumColorWithAggregatesFilter.d.ts
+      NestedEnumColorWithAggregatesFilter.js
+      NestedFloatFilter.d.ts
+      NestedFloatFilter.js
       NestedIntFilter.d.ts
       NestedIntFilter.js
+      NestedIntNullableFilter.d.ts
+      NestedIntNullableFilter.js
+      NestedIntWithAggregatesFilter.d.ts
+      NestedIntWithAggregatesFilter.js
       NestedStringFilter.d.ts
       NestedStringFilter.js
       NestedStringNullableFilter.d.ts
       NestedStringNullableFilter.js
+      NestedStringNullableWithAggregatesFilter.d.ts
+      NestedStringNullableWithAggregatesFilter.js
+      NestedStringWithAggregatesFilter.d.ts
+      NestedStringWithAggregatesFilter.js
       NullableStringFieldUpdateOperationsInput.d.ts
       NullableStringFieldUpdateOperationsInput.js
       PostCreateInput.d.ts
       PostCreateInput.js
+      PostCreateManyAuthorInput.d.ts
+      PostCreateManyAuthorInput.js
+      PostCreateManyAuthorInputEnvelope.d.ts
+      PostCreateManyAuthorInputEnvelope.js
+      PostCreateManyInput.d.ts
+      PostCreateManyInput.js
       PostCreateNestedManyWithoutAuthorInput.d.ts
       PostCreateNestedManyWithoutAuthorInput.js
       PostCreateOrConnectWithoutAuthorInput.d.ts
@@ -164,6 +202,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       PostOrderByInput.js
       PostScalarWhereInput.d.ts
       PostScalarWhereInput.js
+      PostScalarWhereWithAggregatesInput.d.ts
+      PostScalarWhereWithAggregatesInput.js
       PostUpdateInput.d.ts
       PostUpdateInput.js
       PostUpdateManyMutationInput.d.ts
@@ -188,8 +228,14 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       StringFilter.js
       StringNullableFilter.d.ts
       StringNullableFilter.js
+      StringNullableWithAggregatesFilter.d.ts
+      StringNullableWithAggregatesFilter.js
+      StringWithAggregatesFilter.d.ts
+      StringWithAggregatesFilter.js
       UserCreateInput.d.ts
       UserCreateInput.js
+      UserCreateManyInput.d.ts
+      UserCreateManyInput.js
       UserCreateNestedOneWithoutPostsInput.d.ts
       UserCreateNestedOneWithoutPostsInput.js
       UserCreateOrConnectWithoutPostsInput.d.ts
@@ -200,6 +246,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       UserOrderByInput.js
       UserRelationFilter.d.ts
       UserRelationFilter.js
+      UserScalarWhereWithAggregatesInput.d.ts
+      UserScalarWhereWithAggregatesInput.js
       UserUpdateInput.d.ts
       UserUpdateInput.js
       UserUpdateManyMutationInput.d.ts
@@ -227,6 +275,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       PostAvgAggregate.js
       PostCountAggregate.d.ts
       PostCountAggregate.js
+      PostGroupBy.d.ts
+      PostGroupBy.js
       PostMaxAggregate.d.ts
       PostMaxAggregate.js
       PostMinAggregate.d.ts
@@ -237,6 +287,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       UserAvgAggregate.js
       UserCountAggregate.d.ts
       UserCountAggregate.js
+      UserGroupBy.d.ts
+      UserGroupBy.js
       UserMaxAggregate.d.ts
       UserMaxAggregate.js
       UserMinAggregate.d.ts
@@ -289,48 +341,56 @@ exports[`structure should generate proper folders and file names when model is r
     [crud]
       [RenamedPost]
         AggregateRenamedPostResolver.ts
+        CreateManyRenamedPostResolver.ts
         CreateRenamedPostResolver.ts
         DeleteManyRenamedPostResolver.ts
         DeleteRenamedPostResolver.ts
         FindFirstRenamedPostResolver.ts
         FindManyRenamedPostResolver.ts
         FindUniqueRenamedPostResolver.ts
+        GroupByRenamedPostResolver.ts
         RenamedPostCrudResolver.ts
         UpdateManyRenamedPostResolver.ts
         UpdateRenamedPostResolver.ts
         UpsertRenamedPostResolver.ts
         [args]
           AggregateRenamedPostArgs.ts
+          CreateManyRenamedPostArgs.ts
           CreateRenamedPostArgs.ts
           DeleteManyRenamedPostArgs.ts
           DeleteRenamedPostArgs.ts
           FindFirstRenamedPostArgs.ts
           FindManyRenamedPostArgs.ts
           FindUniqueRenamedPostArgs.ts
+          GroupByRenamedPostArgs.ts
           UpdateManyRenamedPostArgs.ts
           UpdateRenamedPostArgs.ts
           UpsertRenamedPostArgs.ts
           index.ts
       [RenamedUser]
         AggregateRenamedUserResolver.ts
+        CreateManyRenamedUserResolver.ts
         CreateRenamedUserResolver.ts
         DeleteManyRenamedUserResolver.ts
         DeleteRenamedUserResolver.ts
         FindFirstRenamedUserResolver.ts
         FindManyRenamedUserResolver.ts
         FindUniqueRenamedUserResolver.ts
+        GroupByRenamedUserResolver.ts
         RenamedUserCrudResolver.ts
         UpdateManyRenamedUserResolver.ts
         UpdateRenamedUserResolver.ts
         UpsertRenamedUserResolver.ts
         [args]
           AggregateRenamedUserArgs.ts
+          CreateManyRenamedUserArgs.ts
           CreateRenamedUserArgs.ts
           DeleteManyRenamedUserArgs.ts
           DeleteRenamedUserArgs.ts
           FindFirstRenamedUserArgs.ts
           FindManyRenamedUserArgs.ts
           FindUniqueRenamedUserArgs.ts
+          GroupByRenamedUserArgs.ts
           UpdateManyRenamedUserArgs.ts
           UpdateRenamedUserArgs.ts
           UpsertRenamedUserArgs.ts
@@ -342,20 +402,32 @@ exports[`structure should generate proper folders and file names when model is r
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
+      EnumColorWithAggregatesFilter.ts
       IntFieldUpdateOperationsInput.ts
       IntFilter.ts
+      IntWithAggregatesFilter.ts
       NestedEnumColorFilter.ts
+      NestedEnumColorWithAggregatesFilter.ts
+      NestedFloatFilter.ts
       NestedIntFilter.ts
+      NestedIntNullableFilter.ts
+      NestedIntWithAggregatesFilter.ts
       NestedStringFilter.ts
       NestedStringNullableFilter.ts
+      NestedStringNullableWithAggregatesFilter.ts
+      NestedStringWithAggregatesFilter.ts
       NullableStringFieldUpdateOperationsInput.ts
       RenamedPostCreateInput.ts
+      RenamedPostCreateManyAuthorInput.ts
+      RenamedPostCreateManyAuthorInputEnvelope.ts
+      RenamedPostCreateManyInput.ts
       RenamedPostCreateNestedManyWithoutAuthorInput.ts
       RenamedPostCreateOrConnectWithoutAuthorInput.ts
       RenamedPostCreateWithoutAuthorInput.ts
       RenamedPostListRelationFilter.ts
       RenamedPostOrderByInput.ts
       RenamedPostScalarWhereInput.ts
+      RenamedPostScalarWhereWithAggregatesInput.ts
       RenamedPostUpdateInput.ts
       RenamedPostUpdateManyMutationInput.ts
       RenamedPostUpdateManyWithWhereWithoutAuthorInput.ts
@@ -366,11 +438,13 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedPostWhereInput.ts
       RenamedPostWhereUniqueInput.ts
       RenamedUserCreateInput.ts
+      RenamedUserCreateManyInput.ts
       RenamedUserCreateNestedOneWithoutPostsInput.ts
       RenamedUserCreateOrConnectWithoutPostsInput.ts
       RenamedUserCreateWithoutPostsInput.ts
       RenamedUserOrderByInput.ts
       RenamedUserRelationFilter.ts
+      RenamedUserScalarWhereWithAggregatesInput.ts
       RenamedUserUpdateInput.ts
       RenamedUserUpdateManyMutationInput.ts
       RenamedUserUpdateOneRequiredWithoutPostsInput.ts
@@ -381,6 +455,8 @@ exports[`structure should generate proper folders and file names when model is r
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
+      StringNullableWithAggregatesFilter.ts
+      StringWithAggregatesFilter.ts
       index.ts
     [outputs]
       AffectedRowsOutput.ts
@@ -388,11 +464,13 @@ exports[`structure should generate proper folders and file names when model is r
       AggregateRenamedUser.ts
       RenamedPostAvgAggregate.ts
       RenamedPostCountAggregate.ts
+      RenamedPostGroupBy.ts
       RenamedPostMaxAggregate.ts
       RenamedPostMinAggregate.ts
       RenamedPostSumAggregate.ts
       RenamedUserAvgAggregate.ts
       RenamedUserCountAggregate.ts
+      RenamedUserGroupBy.ts
       RenamedUserMaxAggregate.ts
       RenamedUserMinAggregate.ts
       RenamedUserSumAggregate.ts
@@ -433,48 +511,56 @@ exports[`structure should generate proper folders structure and file names for c
     [crud]
       [Post]
         AggregatePostResolver.ts
+        CreateManyPostResolver.ts
         CreatePostResolver.ts
         DeleteManyPostResolver.ts
         DeletePostResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
         FindUniquePostResolver.ts
+        GroupByPostResolver.ts
         PostCrudResolver.ts
         UpdateManyPostResolver.ts
         UpdatePostResolver.ts
         UpsertPostResolver.ts
         [args]
           AggregatePostArgs.ts
+          CreateManyPostArgs.ts
           CreatePostArgs.ts
           DeleteManyPostArgs.ts
           DeletePostArgs.ts
           FindFirstPostArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
+          GroupByPostArgs.ts
           UpdateManyPostArgs.ts
           UpdatePostArgs.ts
           UpsertPostArgs.ts
           index.ts
       [User]
         AggregateUserResolver.ts
+        CreateManyUserResolver.ts
         CreateUserResolver.ts
         DeleteManyUserResolver.ts
         DeleteUserResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
         FindUniqueUserResolver.ts
+        GroupByUserResolver.ts
         UpdateManyUserResolver.ts
         UpdateUserResolver.ts
         UpsertUserResolver.ts
         UserCrudResolver.ts
         [args]
           AggregateUserArgs.ts
+          CreateManyUserArgs.ts
           CreateUserArgs.ts
           DeleteManyUserArgs.ts
           DeleteUserArgs.ts
           FindFirstUserArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
+          GroupByUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateUserArgs.ts
           UpsertUserArgs.ts
@@ -486,20 +572,32 @@ exports[`structure should generate proper folders structure and file names for c
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
+      EnumColorWithAggregatesFilter.ts
       IntFieldUpdateOperationsInput.ts
       IntFilter.ts
+      IntWithAggregatesFilter.ts
       NestedEnumColorFilter.ts
+      NestedEnumColorWithAggregatesFilter.ts
+      NestedFloatFilter.ts
       NestedIntFilter.ts
+      NestedIntNullableFilter.ts
+      NestedIntWithAggregatesFilter.ts
       NestedStringFilter.ts
       NestedStringNullableFilter.ts
+      NestedStringNullableWithAggregatesFilter.ts
+      NestedStringWithAggregatesFilter.ts
       NullableStringFieldUpdateOperationsInput.ts
       PostCreateInput.ts
+      PostCreateManyAuthorInput.ts
+      PostCreateManyAuthorInputEnvelope.ts
+      PostCreateManyInput.ts
       PostCreateNestedManyWithoutAuthorInput.ts
       PostCreateOrConnectWithoutAuthorInput.ts
       PostCreateWithoutAuthorInput.ts
       PostListRelationFilter.ts
       PostOrderByInput.ts
       PostScalarWhereInput.ts
+      PostScalarWhereWithAggregatesInput.ts
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
@@ -512,12 +610,16 @@ exports[`structure should generate proper folders structure and file names for c
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
+      StringNullableWithAggregatesFilter.ts
+      StringWithAggregatesFilter.ts
       UserCreateInput.ts
+      UserCreateManyInput.ts
       UserCreateNestedOneWithoutPostsInput.ts
       UserCreateOrConnectWithoutPostsInput.ts
       UserCreateWithoutPostsInput.ts
       UserOrderByInput.ts
       UserRelationFilter.ts
+      UserScalarWhereWithAggregatesInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsInput.ts
@@ -532,11 +634,13 @@ exports[`structure should generate proper folders structure and file names for c
       AggregateUser.ts
       PostAvgAggregate.ts
       PostCountAggregate.ts
+      PostGroupBy.ts
       PostMaxAggregate.ts
       PostMinAggregate.ts
       PostSumAggregate.ts
       UserAvgAggregate.ts
       UserCountAggregate.ts
+      UserGroupBy.ts
       UserMaxAggregate.ts
       UserMinAggregate.ts
       UserSumAggregate.ts

@@ -107,6 +107,50 @@ Array [
 ]
 `;
 
+exports[`crud resolvers execution aggregations should properly call PrismaClient on \`groupBy\` action with advanced operations: groupByUser mocked response 1`] = `
+Object {
+  "groupByUser": Array [
+    Object {
+      "__typename": "UserGroupBy",
+      "count": Object {
+        "__typename": "UserCountAggregate",
+        "_all": 5,
+      },
+      "intField": 10,
+      "min": Object {
+        "__typename": "UserMinAggregate",
+        "floatField": 0,
+        "intField": 0,
+      },
+    },
+  ],
+}
+`;
+
+exports[`crud resolvers execution aggregations should properly call PrismaClient on \`groupBy\` action with advanced operations: user.groupBy call args 1`] = `
+Array [
+  Array [
+    Object {
+      "by": Array [
+        "intField",
+      ],
+      "count": Object {
+        "_all": true,
+      },
+      "min": Object {
+        "floatField": true,
+        "intField": true,
+      },
+      "where": UserWhereInput {
+        "floatField": IntFilter {
+          "gte": 0,
+        },
+      },
+    },
+  ],
+]
+`;
+
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`create\` action: createUser call args 1`] = `
 Array [
   Array [
@@ -306,48 +350,4 @@ Object {
     "uniqueStringField": "unique",
   },
 }
-`;
-
-exports[`crud resolvers execution when preview feature \`groupBy\` is enabled should properly call PrismaClient on \`groupBy\` action with advanced operations: groupByUser mocked response 1`] = `
-Object {
-  "groupByUser": Array [
-    Object {
-      "__typename": "UserGroupBy",
-      "count": Object {
-        "__typename": "UserCountAggregate",
-        "_all": 5,
-      },
-      "intField": 10,
-      "min": Object {
-        "__typename": "UserMinAggregate",
-        "floatField": 0,
-        "intField": 0,
-      },
-    },
-  ],
-}
-`;
-
-exports[`crud resolvers execution when preview feature \`groupBy\` is enabled should properly call PrismaClient on \`groupBy\` action with advanced operations: user.groupBy call args 1`] = `
-Array [
-  Array [
-    Object {
-      "by": Array [
-        "intField",
-      ],
-      "count": Object {
-        "_all": true,
-      },
-      "min": Object {
-        "floatField": true,
-        "intField": true,
-      },
-      "where": UserWhereInput {
-        "floatField": IntFilter {
-          "gte": 0,
-        },
-      },
-    },
-  ],
-]
 `;

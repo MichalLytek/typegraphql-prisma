@@ -2,7 +2,7 @@ import generateCode from "../../src/generator/generate-code";
 import getPrismaClientDmmfFromPrismaSchema from "./dmmf";
 import { GenerateCodeOptions } from "../../src/generator/options";
 
-type SupportedPreviewFeatures = "groupBy" | "createMany" | "orderByRelation";
+type SupportedPreviewFeatures = "orderByRelation" | "selectRelationCount";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<GenerateCodeOptions, "relativePrismaOutputPath"> {

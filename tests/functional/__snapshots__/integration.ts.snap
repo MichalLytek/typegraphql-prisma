@@ -43,6 +43,16 @@ input EnumColorFilter {
   notIn: [Color!]
 }
 
+input EnumColorWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: Color
+  in: [Color!]
+  max: NestedEnumColorFilter
+  min: NestedEnumColorFilter
+  not: NestedEnumColorWithAggregatesFilter
+  notIn: [Color!]
+}
+
 input IntFilter {
   equals: Int
   gt: Int
@@ -54,7 +64,25 @@ input IntFilter {
   notIn: [Int!]
 }
 
+input IntWithAggregatesFilter {
+  avg: NestedFloatFilter
+  count: NestedIntFilter
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  max: NestedIntFilter
+  min: NestedIntFilter
+  not: NestedIntWithAggregatesFilter
+  notIn: [Int!]
+  sum: NestedIntFilter
+}
+
 type Mutation {
+  createManyPost(data: [PostCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyUser(data: [UserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createPost(data: PostCreateInput!): Post!
   createUser(data: UserCreateInput!): User!
   deleteManyPost(where: PostWhereInput): AffectedRowsOutput!
@@ -76,6 +104,27 @@ input NestedEnumColorFilter {
   notIn: [Color!]
 }
 
+input NestedEnumColorWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: Color
+  in: [Color!]
+  max: NestedEnumColorFilter
+  min: NestedEnumColorFilter
+  not: NestedEnumColorWithAggregatesFilter
+  notIn: [Color!]
+}
+
+input NestedFloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
+}
+
 input NestedIntFilter {
   equals: Int
   gt: Int
@@ -85,6 +134,33 @@ input NestedIntFilter {
   lte: Int
   not: NestedIntFilter
   notIn: [Int!]
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input NestedIntWithAggregatesFilter {
+  avg: NestedFloatFilter
+  count: NestedIntFilter
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  max: NestedIntFilter
+  min: NestedIntFilter
+  not: NestedIntWithAggregatesFilter
+  notIn: [Int!]
+  sum: NestedIntFilter
 }
 
 input NestedStringFilter {
@@ -111,6 +187,40 @@ input NestedStringNullableFilter {
   lt: String
   lte: String
   not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableWithAggregatesFilter {
+  contains: String
+  count: NestedIntNullableFilter
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  max: NestedStringNullableFilter
+  min: NestedStringNullableFilter
+  not: NestedStringNullableWithAggregatesFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringWithAggregatesFilter {
+  contains: String
+  count: NestedIntFilter
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  max: NestedStringFilter
+  min: NestedStringFilter
+  not: NestedStringWithAggregatesFilter
   notIn: [String!]
   startsWith: String
 }
@@ -146,10 +256,29 @@ input PostCreateInput {
   uuid: String
 }
 
+input PostCreateManyAuthorInput {
+  color: Color!
+  content: String!
+  uuid: String
+}
+
+input PostCreateManyAuthorInputEnvelope {
+  data: [PostCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input PostCreateManyInput {
+  authorId: Int!
+  color: Color!
+  content: String!
+  uuid: String
+}
+
 input PostCreateNestedManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
   connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
 }
 
 input PostCreateOrConnectWithoutAuthorInput {
@@ -161,6 +290,18 @@ input PostCreateWithoutAuthorInput {
   color: Color!
   content: String!
   uuid: String
+}
+
+type PostGroupBy {
+  authorId: Int!
+  avg: PostAvgAggregate
+  color: Color!
+  content: String!
+  count: PostCountAggregate
+  max: PostMaxAggregate
+  min: PostMinAggregate
+  sum: PostSumAggregate
+  uuid: String!
 }
 
 input PostListRelationFilter {
@@ -184,7 +325,6 @@ type PostMinAggregate {
 }
 
 input PostOrderByInput {
-  author: UserOrderByInput
   authorId: SortOrder
   color: SortOrder
   content: SortOrder
@@ -206,6 +346,16 @@ input PostScalarWhereInput {
   color: EnumColorFilter
   content: StringFilter
   uuid: StringFilter
+}
+
+input PostScalarWhereWithAggregatesInput {
+  AND: [PostScalarWhereWithAggregatesInput!]
+  NOT: [PostScalarWhereWithAggregatesInput!]
+  OR: [PostScalarWhereWithAggregatesInput!]
+  authorId: IntWithAggregatesFilter
+  color: EnumColorWithAggregatesFilter
+  content: StringWithAggregatesFilter
+  uuid: StringWithAggregatesFilter
 }
 
 type PostSumAggregate {
@@ -234,6 +384,7 @@ input PostUpdateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
   connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
   delete: [PostWhereUniqueInput!]
   deleteMany: [PostScalarWhereInput!]
   disconnect: [PostWhereUniqueInput!]
@@ -280,6 +431,8 @@ type Query {
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): Post
   findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
+  groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
+  groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
   post(where: PostWhereUniqueInput!): Post
   posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   user(where: UserWhereUniqueInput!): User
@@ -330,6 +483,42 @@ input StringNullableFilter {
   startsWith: String
 }
 
+input StringNullableWithAggregatesFilter {
+  contains: String
+  count: NestedIntNullableFilter
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  max: NestedStringNullableFilter
+  min: NestedStringNullableFilter
+  mode: QueryMode
+  not: NestedStringNullableWithAggregatesFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringWithAggregatesFilter {
+  contains: String
+  count: NestedIntFilter
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  max: NestedStringFilter
+  min: NestedStringFilter
+  mode: QueryMode
+  not: NestedStringWithAggregatesFilter
+  notIn: [String!]
+  startsWith: String
+}
+
 type User {
   id: Int!
   name: String
@@ -351,6 +540,11 @@ input UserCreateInput {
   posts: PostCreateNestedManyWithoutAuthorInput
 }
 
+input UserCreateManyInput {
+  id: Int
+  name: String
+}
+
 input UserCreateNestedOneWithoutPostsInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutPostsInput
@@ -364,6 +558,16 @@ input UserCreateOrConnectWithoutPostsInput {
 
 input UserCreateWithoutPostsInput {
   name: String
+}
+
+type UserGroupBy {
+  avg: UserAvgAggregate
+  count: UserCountAggregate
+  id: Int!
+  max: UserMaxAggregate
+  min: UserMinAggregate
+  name: String
+  sum: UserSumAggregate
 }
 
 type UserMaxAggregate {
@@ -389,6 +593,14 @@ input UserRelationFilter {
 enum UserScalarFieldEnum {
   id
   name
+}
+
+input UserScalarWhereWithAggregatesInput {
+  AND: [UserScalarWhereWithAggregatesInput!]
+  NOT: [UserScalarWhereWithAggregatesInput!]
+  OR: [UserScalarWhereWithAggregatesInput!]
+  id: IntWithAggregatesFilter
+  name: StringNullableWithAggregatesFilter
 }
 
 type UserSumAggregate {
@@ -457,48 +669,56 @@ exports[`generator integration should generates TypeGraphQL classes files to out
     [crud]
       [Post]
         AggregatePostResolver.ts
+        CreateManyPostResolver.ts
         CreatePostResolver.ts
         DeleteManyPostResolver.ts
         DeletePostResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
         FindUniquePostResolver.ts
+        GroupByPostResolver.ts
         PostCrudResolver.ts
         UpdateManyPostResolver.ts
         UpdatePostResolver.ts
         UpsertPostResolver.ts
         [args]
           AggregatePostArgs.ts
+          CreateManyPostArgs.ts
           CreatePostArgs.ts
           DeleteManyPostArgs.ts
           DeletePostArgs.ts
           FindFirstPostArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
+          GroupByPostArgs.ts
           UpdateManyPostArgs.ts
           UpdatePostArgs.ts
           UpsertPostArgs.ts
           index.ts
       [User]
         AggregateUserResolver.ts
+        CreateManyUserResolver.ts
         CreateUserResolver.ts
         DeleteManyUserResolver.ts
         DeleteUserResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
         FindUniqueUserResolver.ts
+        GroupByUserResolver.ts
         UpdateManyUserResolver.ts
         UpdateUserResolver.ts
         UpsertUserResolver.ts
         UserCrudResolver.ts
         [args]
           AggregateUserArgs.ts
+          CreateManyUserArgs.ts
           CreateUserArgs.ts
           DeleteManyUserArgs.ts
           DeleteUserArgs.ts
           FindFirstUserArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
+          GroupByUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateUserArgs.ts
           UpsertUserArgs.ts
@@ -510,20 +730,32 @@ exports[`generator integration should generates TypeGraphQL classes files to out
     [inputs]
       EnumColorFieldUpdateOperationsInput.ts
       EnumColorFilter.ts
+      EnumColorWithAggregatesFilter.ts
       IntFieldUpdateOperationsInput.ts
       IntFilter.ts
+      IntWithAggregatesFilter.ts
       NestedEnumColorFilter.ts
+      NestedEnumColorWithAggregatesFilter.ts
+      NestedFloatFilter.ts
       NestedIntFilter.ts
+      NestedIntNullableFilter.ts
+      NestedIntWithAggregatesFilter.ts
       NestedStringFilter.ts
       NestedStringNullableFilter.ts
+      NestedStringNullableWithAggregatesFilter.ts
+      NestedStringWithAggregatesFilter.ts
       NullableStringFieldUpdateOperationsInput.ts
       PostCreateInput.ts
+      PostCreateManyAuthorInput.ts
+      PostCreateManyAuthorInputEnvelope.ts
+      PostCreateManyInput.ts
       PostCreateNestedManyWithoutAuthorInput.ts
       PostCreateOrConnectWithoutAuthorInput.ts
       PostCreateWithoutAuthorInput.ts
       PostListRelationFilter.ts
       PostOrderByInput.ts
       PostScalarWhereInput.ts
+      PostScalarWhereWithAggregatesInput.ts
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
@@ -536,12 +768,16 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
+      StringNullableWithAggregatesFilter.ts
+      StringWithAggregatesFilter.ts
       UserCreateInput.ts
+      UserCreateManyInput.ts
       UserCreateNestedOneWithoutPostsInput.ts
       UserCreateOrConnectWithoutPostsInput.ts
       UserCreateWithoutPostsInput.ts
       UserOrderByInput.ts
       UserRelationFilter.ts
+      UserScalarWhereWithAggregatesInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsInput.ts
@@ -556,11 +792,13 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       AggregateUser.ts
       PostAvgAggregate.ts
       PostCountAggregate.ts
+      PostGroupBy.ts
       PostMaxAggregate.ts
       PostMinAggregate.ts
       PostSumAggregate.ts
       UserAvgAggregate.ts
       UserCountAggregate.ts
+      UserGroupBy.ts
       UserMaxAggregate.ts
       UserMinAggregate.ts
       UserSumAggregate.ts

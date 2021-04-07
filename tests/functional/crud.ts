@@ -450,35 +450,6 @@ describe("crud resolvers execution", () => {
         "user.aggregate call args",
       );
     });
-  });
-  describe("when preview feature `groupBy` is enabled", () => {
-    beforeAll(async () => {
-      outputDirPath = generateArtifactsDirPath("functional-crud");
-      await fs.mkdir(outputDirPath, { recursive: true });
-      const prismaSchema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
-        model User {
-          idField     Int  @id @default(autoincrement())
-          intField    Int
-          floatField  Int
-        }
-      `;
-      await generateCodeFromSchema(prismaSchema, {
-        outputDirPath,
-        enabledPreviewFeatures: ["groupBy"],
-      });
-      const { UserCrudResolver } = require(outputDirPath +
-        "/resolvers/crud/User/UserCrudResolver.ts");
-
-      graphQLSchema = await buildSchema({
-        resolvers: [UserCrudResolver],
-        validate: false,
-      });
-    });
 
     it("should properly call PrismaClient on `groupBy` action with advanced operations", async () => {
       const document = /* graphql */ `

@@ -170,6 +170,7 @@ exports[`outputs should properly generate aggregate classes for model with lower
 export { AggregateExample } from \\"./AggregateExample\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
 export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
+export { ExampleGroupBy } from \\"./ExampleGroupBy\\";
 export { ExampleMaxAggregate } from \\"./ExampleMaxAggregate\\";
 export { ExampleMinAggregate } from \\"./ExampleMinAggregate\\";
 export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
@@ -346,6 +347,7 @@ exports[`outputs should properly generate aggregate classes for renamed model: o
 export { AggregateExample } from \\"./AggregateExample\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
 export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
+export { ExampleGroupBy } from \\"./ExampleGroupBy\\";
 export { ExampleMaxAggregate } from \\"./ExampleMaxAggregate\\";
 export { ExampleMinAggregate } from \\"./ExampleMinAggregate\\";
 export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
@@ -523,6 +525,74 @@ export class SampleAvgAggregate {
 "
 `;
 
+exports[`outputs should properly generate output type classes: SampleGroupBy 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SampleAvgAggregate } from \\"../outputs/SampleAvgAggregate\\";
+import { SampleCountAggregate } from \\"../outputs/SampleCountAggregate\\";
+import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
+import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
+import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class SampleGroupBy {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intIdField!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  stringField!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  booleanField!: boolean;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false
+  })
+  dateField!: Date;
+
+  @TypeGraphQL.Field(_type => SampleCountAggregate, {
+    nullable: true
+  })
+  count?: SampleCountAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleAvgAggregate, {
+    nullable: true
+  })
+  avg?: SampleAvgAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleSumAggregate, {
+    nullable: true
+  })
+  sum?: SampleSumAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleMinAggregate, {
+    nullable: true
+  })
+  min?: SampleMinAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleMaxAggregate, {
+    nullable: true
+  })
+  max?: SampleMaxAggregate | null;
+}
+"
+`;
+
 exports[`outputs should properly generate output type classes: SampleMaxAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
@@ -623,85 +693,6 @@ export class SampleSumAggregate {
 `;
 
 exports[`outputs should properly generate output type classes: outputs index 1`] = `
-"export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
-export { AggregateSample } from \\"./AggregateSample\\";
-export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";
-export { SampleCountAggregate } from \\"./SampleCountAggregate\\";
-export { SampleMaxAggregate } from \\"./SampleMaxAggregate\\";
-export { SampleMinAggregate } from \\"./SampleMinAggregate\\";
-export { SampleSumAggregate } from \\"./SampleSumAggregate\\";
-"
-`;
-
-exports[`outputs when preview feature \`groupBy\` is enabled should generate group by output type for model: SampleGroupBy 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import * as GraphQLScalars from \\"graphql-scalars\\";
-import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
-import { DecimalJSScalar } from \\"../../scalars\\";
-import { SampleAvgAggregate } from \\"../outputs/SampleAvgAggregate\\";
-import { SampleCountAggregate } from \\"../outputs/SampleCountAggregate\\";
-import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
-import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
-import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
-
-@TypeGraphQL.ObjectType({
-  isAbstract: true
-})
-export class SampleGroupBy {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
-  intIdField!: number;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  stringField!: string;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
-  })
-  floatField!: number;
-
-  @TypeGraphQL.Field(_type => Boolean, {
-    nullable: false
-  })
-  booleanField!: boolean;
-
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: false
-  })
-  dateField!: Date;
-
-  @TypeGraphQL.Field(_type => SampleCountAggregate, {
-    nullable: true
-  })
-  count?: SampleCountAggregate | null;
-
-  @TypeGraphQL.Field(_type => SampleAvgAggregate, {
-    nullable: true
-  })
-  avg?: SampleAvgAggregate | null;
-
-  @TypeGraphQL.Field(_type => SampleSumAggregate, {
-    nullable: true
-  })
-  sum?: SampleSumAggregate | null;
-
-  @TypeGraphQL.Field(_type => SampleMinAggregate, {
-    nullable: true
-  })
-  min?: SampleMinAggregate | null;
-
-  @TypeGraphQL.Field(_type => SampleMaxAggregate, {
-    nullable: true
-  })
-  max?: SampleMaxAggregate | null;
-}
-"
-`;
-
-exports[`outputs when preview feature \`groupBy\` is enabled should generate group by output type for model: outputs index 1`] = `
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateSample } from \\"./AggregateSample\\";
 export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";

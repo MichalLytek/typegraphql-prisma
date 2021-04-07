@@ -51,6 +51,9 @@ describe("outputs", () => {
     const affectedRowsOutputTSFile = await readGeneratedFile(
       "/resolvers/outputs/AffectedRowsOutput.ts",
     );
+    const sampleGroupByTSFile = await readGeneratedFile(
+      "/resolvers/outputs/SampleGroupBy.ts",
+    );
     const outputsIndexTSFile = await readGeneratedFile(
       "/resolvers/outputs/index.ts",
     );
@@ -61,6 +64,7 @@ describe("outputs", () => {
     expect(minAggregateTSFile).toMatchSnapshot("SampleMinAggregate");
     expect(maxAggregateTSFile).toMatchSnapshot("SampleMaxAggregate");
     expect(affectedRowsOutputTSFile).toMatchSnapshot("AffectedRowsOutput");
+    expect(sampleGroupByTSFile).toMatchSnapshot("SampleGroupBy");
     expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
   });
 
@@ -186,39 +190,5 @@ describe("outputs", () => {
     expect(aggregateSampleTSFile).toMatchSnapshot("AggregateSample");
     expect(avgAggregateTSFile).toMatchSnapshot("SampleAvgAggregate");
     expect(affectedRowsOutputTSFile).toMatchSnapshot("AffectedRowsOutput");
-  });
-
-  describe("when preview feature `groupBy` is enabled", () => {
-    it("should generate group by output type for model", async () => {
-      const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
-      model Sample {
-        intIdField    Int       @id @default(autoincrement())
-        stringField   String
-        floatField    Float
-        booleanField  Boolean
-        dateField     DateTime
-      }
-    `;
-
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        enabledPreviewFeatures: ["groupBy"],
-      });
-
-      const sampleGroupByTSFile = await readGeneratedFile(
-        "/resolvers/outputs/SampleGroupBy.ts",
-      );
-      const outputsIndexTSFile = await readGeneratedFile(
-        "/resolvers/outputs/index.ts",
-      );
-
-      expect(sampleGroupByTSFile).toMatchSnapshot("SampleGroupBy");
-      expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
-    });
   });
 });

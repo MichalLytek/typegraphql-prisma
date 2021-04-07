@@ -555,33 +555,33 @@ describe("inputs", () => {
     const bigIntNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/BigIntNullableFilter.ts",
     );
-    // const bigIntNullableWithAggregatesFilterTSFile = await readGeneratedFile(
-    //   "/resolvers/inputs/BigIntNullableWithAggregatesFilter.ts",
-    // );
+    const bigIntNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/BigIntNullableWithAggregatesFilter.ts",
+    );
     const bytesNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/BytesNullableFilter.ts",
     );
-    // const bytesNullableWithAggregatesFilterTSFile = await readGeneratedFile(
-    //   "/resolvers/inputs/BytesNullableWithAggregatesFilter.ts",
-    // );
+    const bytesNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/BytesNullableWithAggregatesFilter.ts",
+    );
     const decimalNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/DecimalNullableFilter.ts",
     );
-    // const decimalNullableWithAggregatesFilterTSFile = await readGeneratedFile(
-    //   "/resolvers/inputs/DecimalNullableWithAggregatesFilter.ts",
-    // );
+    const decimalNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/DecimalNullableWithAggregatesFilter.ts",
+    );
     const nestedBytesNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/NestedBytesNullableFilter.ts",
     );
-    // const nestedBytesNullableWithAggregatesFilterTSFile = await readGeneratedFile(
-    //   "/resolvers/inputs/NestedBytesNullableWithAggregatesFilter.ts",
-    // );
+    const nestedBytesNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NestedBytesNullableWithAggregatesFilter.ts",
+    );
     const nestedDecimalNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/NestedDecimalNullableFilter.ts",
     );
-    // const nestedDecimalNullableWithAggregatesFilterTSFile = await readGeneratedFile(
-    //   "/resolvers/inputs/NestedDecimalNullableWithAggregatesFilter.ts",
-    // );
+    const nestedDecimalNullableWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NestedDecimalNullableWithAggregatesFilter.ts",
+    );
     const nullableBigIntFieldUpdateOperationsInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/NullableBigIntFieldUpdateOperationsInput.ts",
     );
@@ -594,31 +594,31 @@ describe("inputs", () => {
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
     expect(bigIntNullableFilterTSFile).toMatchSnapshot("BigIntNullableFilter");
-    // expect(bigIntNullableWithAggregatesFilterTSFile).toMatchSnapshot(
-    //   "BigIntNullableWithAggregatesFilter",
-    // );
+    expect(bigIntNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+      "BigIntNullableWithAggregatesFilter",
+    );
     expect(bytesNullableFilterTSFile).toMatchSnapshot("BytesNullableFilter");
-    // expect(bytesNullableWithAggregatesFilterTSFile).toMatchSnapshot(
-    //   "BytesNullableWithAggregatesFilter",
-    // );
+    expect(bytesNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+      "BytesNullableWithAggregatesFilter",
+    );
     expect(decimalNullableFilterTSFile).toMatchSnapshot(
       "DecimalNullableFilter",
     );
-    // expect(decimalNullableWithAggregatesFilterTSFile).toMatchSnapshot(
-    //   "DecimalNullableWithAggregatesFilter",
-    // );
+    expect(decimalNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+      "DecimalNullableWithAggregatesFilter",
+    );
     expect(nestedBytesNullableFilterTSFile).toMatchSnapshot(
       "NestedBytesNullableFilter",
     );
-    // expect(nestedBytesNullableWithAggregatesFilterTSFile).toMatchSnapshot(
-    //   "NestedBytesNullableWithAggregatesFilter",
-    // );
+    expect(nestedBytesNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+      "NestedBytesNullableWithAggregatesFilter",
+    );
     expect(nestedDecimalNullableFilterTSFile).toMatchSnapshot(
       "NestedDecimalNullableFilter",
     );
-    // expect(nestedDecimalNullableWithAggregatesFilterTSFile).toMatchSnapshot(
-    //   "NestedDecimalNullableWithAggregatesFilter",
-    // );
+    expect(nestedDecimalNullableWithAggregatesFilterTSFile).toMatchSnapshot(
+      "NestedDecimalNullableWithAggregatesFilter",
+    );
     expect(nullableBigIntFieldUpdateOperationsInputTSFile).toMatchSnapshot(
       "NullableBigIntFieldUpdateOperationsInput",
     );
@@ -629,6 +629,95 @@ describe("inputs", () => {
       "NullableDecimalFieldUpdateOperationsInput",
     );
     expect(indexTSFile).toMatchSnapshot("index");
+  });
+
+  it("should generate proper WithAggregatesFilter for scalars", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model Sample {
+        idField       Int     @id @default(autoincrement())
+        stringField   String
+        floatField    Float
+        intField      Int
+        booleanField  Boolean
+        dateField     DateTime
+        jsonField     Json
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    // TODO: add nested filter tests
+    const stringWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/StringWithAggregatesFilter.ts",
+    );
+    const floatWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/FloatWithAggregatesFilter.ts",
+    );
+    const intWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/IntWithAggregatesFilter.ts",
+    );
+    const boolWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/BoolWithAggregatesFilter.ts",
+    );
+    const dateTimeWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/DateTimeWithAggregatesFilter.ts",
+    );
+    const jsonWithAggregatesFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/JsonWithAggregatesFilter.ts",
+    );
+    const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+    expect(stringWithAggregatesFilterTSFile).toMatchSnapshot(
+      "StringWithAggregatesFilter",
+    );
+    expect(floatWithAggregatesFilterTSFile).toMatchSnapshot(
+      "FloatWithAggregatesFilter",
+    );
+    expect(intWithAggregatesFilterTSFile).toMatchSnapshot(
+      "IntWithAggregatesFilter",
+    );
+    expect(boolWithAggregatesFilterTSFile).toMatchSnapshot(
+      "BoolWithAggregatesFilter",
+    );
+    expect(dateTimeWithAggregatesFilterTSFile).toMatchSnapshot(
+      "DateTimeWithAggregatesFilter",
+    );
+    expect(jsonWithAggregatesFilterTSFile).toMatchSnapshot(
+      "JsonWithAggregatesFilter",
+    );
+    expect(indexTSFile).toMatchSnapshot("index");
+  });
+
+  it("should generate proper ScalarWhereWithAggregatesInput for model", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+
+      model Sample {
+        idField       Int     @id @default(autoincrement())
+        stringField   String
+        floatField    Float
+        intField      Int
+        booleanField  Boolean
+        dateField     DateTime
+        jsonField     Json
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const sampleScalarWhereWithAggregatesInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SampleScalarWhereWithAggregatesInput.ts",
+    );
+
+    expect(sampleScalarWhereWithAggregatesInputTSFile).toMatchSnapshot(
+      "SampleScalarWhereWithAggregatesInput",
+    );
   });
 
   it("should properly generate input type classes for model with native types", async () => {
@@ -685,6 +774,57 @@ describe("inputs", () => {
     expect(nativeTypeModelWhereUniqueInputTSFile).toMatchSnapshot(
       "NativeTypeModelWhereUniqueInput",
     );
+    expect(indexTSFile).toMatchSnapshot("index");
+  });
+
+  it("should properly generate input type classes for inserting many entities", async () => {
+    const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
+      model FirstModel {
+        idField            Int            @id @default(autoincrement())
+        uniqueStringField  String         @unique
+        floatField         Float
+        secondModelsField  SecondModel[]
+      }
+      model SecondModel {
+        idField            Int          @id @default(autoincrement())
+        uniqueStringField  String       @unique
+        floatField         Float
+        firstModelFieldId  Int
+        firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const firstModelCreateManyInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/FirstModelCreateManyInput.ts",
+    );
+    const secondModelCreateManyInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SecondModelCreateManyInput.ts",
+    );
+    const secondModelCreateManyFirstModelFieldInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInput.ts",
+    );
+    const secondModelCreateManyFirstModelFieldInputEnvelopeTSFile = await readGeneratedFile(
+      "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInputEnvelope.ts",
+    );
+    const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+    expect(firstModelCreateManyInputTSFile).toMatchSnapshot(
+      "FirstModelCreateManyInput",
+    );
+    expect(secondModelCreateManyInputTSFile).toMatchSnapshot(
+      "SecondModelCreateManyInput",
+    );
+    expect(secondModelCreateManyFirstModelFieldInputTSFile).toMatchSnapshot(
+      "SecondModelCreateManyFirstModelFieldInput",
+    );
+    expect(
+      secondModelCreateManyFirstModelFieldInputEnvelopeTSFile,
+    ).toMatchSnapshot("SecondModelCreateManyFirstModelFieldInputEnvelope");
     expect(indexTSFile).toMatchSnapshot("index");
   });
 
@@ -930,85 +1070,7 @@ describe("inputs", () => {
     });
   });
 
-  describe("when preview feature `groupBy` is enabled", () => {
-    beforeEach(async () => {
-      const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
-        model Sample {
-          idField       Int     @id @default(autoincrement())
-          stringField   String
-          floatField    Float
-          intField      Int
-          booleanField  Boolean
-          dateField     DateTime
-          jsonField     Json
-        }
-      `;
-
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        enabledPreviewFeatures: ["groupBy"],
-      });
-    });
-
-    it("should generate proper WithAggregatesFilter for scalars", async () => {
-      // TODO: add nested filter tests
-
-      const stringWithAggregatesFilterTSFile = await readGeneratedFile(
-        "/resolvers/inputs/StringWithAggregatesFilter.ts",
-      );
-      const floatWithAggregatesFilterTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FloatWithAggregatesFilter.ts",
-      );
-      const intWithAggregatesFilterTSFile = await readGeneratedFile(
-        "/resolvers/inputs/IntWithAggregatesFilter.ts",
-      );
-      const boolWithAggregatesFilterTSFile = await readGeneratedFile(
-        "/resolvers/inputs/BoolWithAggregatesFilter.ts",
-      );
-      const dateTimeWithAggregatesFilterTSFile = await readGeneratedFile(
-        "/resolvers/inputs/DateTimeWithAggregatesFilter.ts",
-      );
-      const jsonWithAggregatesFilterTSFile = await readGeneratedFile(
-        "/resolvers/inputs/JsonWithAggregatesFilter.ts",
-      );
-      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
-
-      expect(stringWithAggregatesFilterTSFile).toMatchSnapshot(
-        "StringWithAggregatesFilter",
-      );
-      expect(floatWithAggregatesFilterTSFile).toMatchSnapshot(
-        "FloatWithAggregatesFilter",
-      );
-      expect(intWithAggregatesFilterTSFile).toMatchSnapshot(
-        "IntWithAggregatesFilter",
-      );
-      expect(boolWithAggregatesFilterTSFile).toMatchSnapshot(
-        "BoolWithAggregatesFilter",
-      );
-      expect(dateTimeWithAggregatesFilterTSFile).toMatchSnapshot(
-        "DateTimeWithAggregatesFilter",
-      );
-      expect(jsonWithAggregatesFilterTSFile).toMatchSnapshot(
-        "JsonWithAggregatesFilter",
-      );
-      expect(indexTSFile).toMatchSnapshot("index");
-    });
-
-    it("should generate proper ScalarWhereWithAggregatesInput for model", async () => {
-      const sampleScalarWhereWithAggregatesInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SampleScalarWhereWithAggregatesInput.ts",
-      );
-
-      expect(sampleScalarWhereWithAggregatesInputTSFile).toMatchSnapshot(
-        "SampleScalarWhereWithAggregatesInput",
-      );
-    });
-  });
+  describe("when preview feature `groupBy` is enabled", () => {});
 
   describe("when useUncheckedScalarInputs mode is enabled", () => {
     it("should properly generate input type classes for filtering models by one to many relation fields", async () => {
@@ -1114,62 +1176,6 @@ describe("inputs", () => {
       expect(
         firstModelUpsertWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot("FirstModelUpsertWithoutSecondModelsFieldInputTSFile");
-      expect(indexTSFile).toMatchSnapshot("index");
-    });
-  });
-
-  describe("when `createMany` preview feature is enabled", () => {
-    it("should properly generate input type classes for inserting many entities", async () => {
-      const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-        model FirstModel {
-          idField            Int            @id @default(autoincrement())
-          uniqueStringField  String         @unique
-          floatField         Float
-          secondModelsField  SecondModel[]
-        }
-        model SecondModel {
-          idField            Int          @id @default(autoincrement())
-          uniqueStringField  String       @unique
-          floatField         Float
-          firstModelFieldId  Int
-          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
-        }
-      `;
-
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        enabledPreviewFeatures: ["createMany"],
-      });
-      const firstModelCreateManyInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelCreateManyInput.ts",
-      );
-      const secondModelCreateManyInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelCreateManyInput.ts",
-      );
-      const secondModelCreateManyFirstModelFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInput.ts",
-      );
-      const secondModelCreateManyFirstModelFieldInputEnvelopeTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInputEnvelope.ts",
-      );
-      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
-
-      expect(firstModelCreateManyInputTSFile).toMatchSnapshot(
-        "FirstModelCreateManyInput",
-      );
-      expect(secondModelCreateManyInputTSFile).toMatchSnapshot(
-        "SecondModelCreateManyInput",
-      );
-      expect(secondModelCreateManyFirstModelFieldInputTSFile).toMatchSnapshot(
-        "SecondModelCreateManyFirstModelFieldInput",
-      );
-      expect(
-        secondModelCreateManyFirstModelFieldInputEnvelopeTSFile,
-      ).toMatchSnapshot("SecondModelCreateManyFirstModelFieldInputEnvelope");
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });
