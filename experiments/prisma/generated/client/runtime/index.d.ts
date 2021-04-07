@@ -188,9 +188,9 @@ declare type Dictionary$1<T> = {
 };
 interface GeneratorConfig {
     name: string;
-    output: string | null;
+    output: EnvValue | null;
     isCustomOutput?: boolean;
-    provider: string;
+    provider: EnvValue;
     config: Dictionary$1<string>;
     binaryTargets: string[];
     previewFeatures: string[];
@@ -456,59 +456,6 @@ interface UnpackOptions {
  */
 declare function unpack({ document, path, data }: UnpackOptions): any;
 
-// Type definitions for debug 4.1
-// Project: https://github.com/visionmedia/debug
-// Definitions by: Seon-Wook Park <https://github.com/swook>
-//                 Gal Talmor <https://github.com/galtalmor>
-//                 John McLaughlin <https://github.com/zamb3zi>
-//                 Brasten Sager <https://github.com/brasten>
-//                 Nicolas Penin <https://github.com/npenin>
-//                 Kristian Brünn <https://github.com/kristianmitk>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-declare var debug: debug.Debug & { debug: debug.Debug; default: debug.Debug };
-
-declare namespace debug {
-    interface Debug {
-        (namespace: string): Debugger;
-        coerce: (val: any) => any;
-        disable: () => string;
-        enable: (namespaces: string) => void;
-        enabled: (namespaces: string) => boolean;
-        log: (...args: any[]) => any;
-
-        names: RegExp[];
-        skips: RegExp[];
-
-        formatters: Formatters;
-    }
-
-    type IDebug = Debug;
-
-    interface Formatters {
-        [formatter: string]: (v: any) => string;
-    }
-
-    type IDebugger = Debugger;
-
-    interface Debugger {
-        (formatter: any, ...args: any[]): void;
-
-        color: string;
-        enabled: boolean;
-        log: (...args: any[]) => any;
-        namespace: string;
-        destroy: () => boolean;
-        extend: (namespace: string, delimiter?: string) => Debugger;
-    }
-}
-
-declare function Debug(namespace: string): debug.Debugger;
-declare namespace Debug {
-    var enable: (namespace: string) => void;
-    var enabled: (namespace: string) => boolean;
-}
-
 declare class PrismaClientKnownRequestError extends Error {
     code: string;
     meta?: object;
@@ -552,7 +499,8 @@ interface Engine {
 declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
 interface DatasourceOverwrite {
     name: string;
-    url: string;
+    url?: string;
+    env?: string;
 }
 interface EngineConfig {
     cwd?: string;
@@ -1067,4 +1015,4 @@ declare class Decimal {
   static readonly EUCLID: 9;
 }
 
-export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, Debug as debugLib, empty, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };
+export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, empty, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };

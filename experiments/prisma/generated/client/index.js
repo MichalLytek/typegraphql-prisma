@@ -9,7 +9,6 @@ const {
   PrismaClientValidationError,
   warnEnvConflicts,
   getPrismaClient,
-  debugLib,
   sqltag,
   empty,
   join,
@@ -18,7 +17,6 @@ const {
 } = require('./runtime')
 
 const path = require('path')
-const debug = debugLib('prisma-client')
 
 
 const Prisma = {}
@@ -26,12 +24,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 2.19.0
- * Query Engine version: c1455d0b443d66b0d9db9bcb1bb9ee0d5bbc511d
+ * Prisma Client JS version: 2.20.1
+ * Query Engine version: 60ba6551f29b17d7d6ce479e5733c70d9c00860e
  */
 Prisma.prismaVersion = {
-  client: "2.19.0",
-  engine: "c1455d0b443d66b0d9db9bcb1bb9ee0d5bbc511d"
+  client: "2.20.1",
+  engine: "60ba6551f29b17d7d6ce479e5733c70d9c00860e"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -176,15 +174,19 @@ exports.Prisma.dmmf = JSON.parse(dmmfString)
 const config = {
   "generator": {
     "name": "client",
-    "provider": "prisma-client-js",
-    "output": "/home/majkel/development/typegraphql-prisma/experiments/prisma/generated/client",
+    "provider": {
+      "fromEnvVar": null,
+      "value": "prisma-client-js"
+    },
+    "output": {
+      "value": "/home/majkel/development/typegraphql-prisma/experiments/prisma/generated/client",
+      "fromEnvVar": null
+    },
     "binaryTargets": [
       "windows",
       "debian-openssl-1.1.x"
     ],
     "previewFeatures": [
-      "groupBy",
-      "createMany",
       "orderByRelation"
     ],
     "config": {},
@@ -194,10 +196,9 @@ const config = {
     "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
-  "sqliteDatasourceOverrides": [],
   "relativePath": "../..",
-  "clientVersion": "2.19.0",
-  "engineVersion": "c1455d0b443d66b0d9db9bcb1bb9ee0d5bbc511d",
+  "clientVersion": "2.20.1",
+  "engineVersion": "60ba6551f29b17d7d6ce479e5733c70d9c00860e",
   "datasourceNames": [
     "postgres"
   ],

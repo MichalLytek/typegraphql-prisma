@@ -1,5 +1,6 @@
 import { GeneratorOptions } from "@prisma/generator-helper";
 import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
+import { parseEnvValue } from "@prisma/sdk";
 import { promises as asyncFs } from "fs";
 import path from "path";
 
@@ -13,13 +14,14 @@ function parseStringBoolean(stringBoolean: string | undefined) {
 }
 
 export async function generate(options: GeneratorOptions) {
-  const outputDir = options.generator.output!;
+  const outputDir = parseEnvValue(options.generator.output!);
   await asyncFs.mkdir(outputDir, { recursive: true });
   await removeDir(outputDir, true);
 
-  const prismaClientPath = options.otherGenerators.find(
-    it => it.provider === "prisma-client-js",
-  )!.output!;
+  const prismaClientProvider = options.otherGenerators.find(
+    it => parseEnvValue(it.provider) === "prisma-client-js",
+  )!;
+  const prismaClientPath = parseEnvValue(prismaClientProvider.output!);
   const prismaClientDmmf = require(prismaClientPath)
     .dmmf as PrismaDMMF.Document;
 
