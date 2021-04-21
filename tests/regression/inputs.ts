@@ -1313,7 +1313,7 @@ describe("inputs", () => {
         "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
       );
       const secondModelOrderByAggregateInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelOrderByAggregateInput.ts",
+        "/resolvers/inputs/SecondModelOrderByRelationAggregateInput.ts",
       );
       const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
@@ -1356,7 +1356,7 @@ describe("inputs", () => {
         "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
       );
       const secondModelOrderByAggregateInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelOrderByAggregateInput.ts",
+        "/resolvers/inputs/SecondModelOrderByRelationAggregateInput.ts",
       );
       const secondModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/SecondModelOrderByWithRelationInput.ts",

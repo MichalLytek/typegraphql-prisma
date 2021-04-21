@@ -4525,7 +4525,7 @@ exports[`inputs when \`orderByRelation\` preview feature is enabled should prope
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
-import { SecondModelOrderByAggregateInput } from \\"../inputs/SecondModelOrderByAggregateInput\\";
+import { SecondModelOrderByRelationAggregateInput } from \\"../inputs/SecondModelOrderByRelationAggregateInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType({
@@ -4547,10 +4547,10 @@ export class FirstModelOrderByWithRelationInput {
   })
   floatField?: \\"asc\\" | \\"desc\\" | undefined;
 
-  @TypeGraphQL.Field(_type => SecondModelOrderByAggregateInput, {
+  @TypeGraphQL.Field(_type => SecondModelOrderByRelationAggregateInput, {
     nullable: true
   })
-  secondModelsField?: SecondModelOrderByAggregateInput | undefined;
+  secondModelsField?: SecondModelOrderByRelationAggregateInput | undefined;
 }
 "
 `;
@@ -4565,7 +4565,7 @@ import { SortOrder } from \\"../../enums/SortOrder\\";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class SecondModelOrderByAggregateInput {
+export class SecondModelOrderByRelationAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: false
   })
@@ -4581,8 +4581,8 @@ export { FirstModelCreateNestedManyWithoutSecondModelsFieldInput } from \\"./Fir
 export { FirstModelCreateOrConnectWithoutSecondModelsFieldInput } from \\"./FirstModelCreateOrConnectWithoutSecondModelsFieldInput\\";
 export { FirstModelCreateWithoutSecondModelsFieldInput } from \\"./FirstModelCreateWithoutSecondModelsFieldInput\\";
 export { FirstModelListRelationFilter } from \\"./FirstModelListRelationFilter\\";
-export { FirstModelOrderByAggregateInput } from \\"./FirstModelOrderByAggregateInput\\";
 export { FirstModelOrderByInput } from \\"./FirstModelOrderByInput\\";
+export { FirstModelOrderByRelationAggregateInput } from \\"./FirstModelOrderByRelationAggregateInput\\";
 export { FirstModelOrderByWithRelationInput } from \\"./FirstModelOrderByWithRelationInput\\";
 export { FirstModelScalarWhereInput } from \\"./FirstModelScalarWhereInput\\";
 export { FirstModelScalarWhereWithAggregatesInput } from \\"./FirstModelScalarWhereWithAggregatesInput\\";
@@ -4613,8 +4613,8 @@ export { SecondModelCreateNestedManyWithoutFirstModelsFieldInput } from \\"./Sec
 export { SecondModelCreateOrConnectWithoutFirstModelsFieldInput } from \\"./SecondModelCreateOrConnectWithoutFirstModelsFieldInput\\";
 export { SecondModelCreateWithoutFirstModelsFieldInput } from \\"./SecondModelCreateWithoutFirstModelsFieldInput\\";
 export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
-export { SecondModelOrderByAggregateInput } from \\"./SecondModelOrderByAggregateInput\\";
 export { SecondModelOrderByInput } from \\"./SecondModelOrderByInput\\";
+export { SecondModelOrderByRelationAggregateInput } from \\"./SecondModelOrderByRelationAggregateInput\\";
 export { SecondModelOrderByWithRelationInput } from \\"./SecondModelOrderByWithRelationInput\\";
 export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
 export { SecondModelScalarWhereWithAggregatesInput } from \\"./SecondModelScalarWhereWithAggregatesInput\\";
@@ -4638,7 +4638,7 @@ exports[`inputs when \`orderByRelation\` preview feature is enabled should prope
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
-import { SecondModelOrderByAggregateInput } from \\"../inputs/SecondModelOrderByAggregateInput\\";
+import { SecondModelOrderByRelationAggregateInput } from \\"../inputs/SecondModelOrderByRelationAggregateInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType({
@@ -4660,10 +4660,10 @@ export class FirstModelOrderByWithRelationInput {
   })
   floatField?: \\"asc\\" | \\"desc\\" | undefined;
 
-  @TypeGraphQL.Field(_type => SecondModelOrderByAggregateInput, {
+  @TypeGraphQL.Field(_type => SecondModelOrderByRelationAggregateInput, {
     nullable: true
   })
-  secondModelsField?: SecondModelOrderByAggregateInput | undefined;
+  secondModelsField?: SecondModelOrderByRelationAggregateInput | undefined;
 }
 "
 `;
@@ -4678,7 +4678,7 @@ import { SortOrder } from \\"../../enums/SortOrder\\";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class SecondModelOrderByAggregateInput {
+export class SecondModelOrderByRelationAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: false
   })
@@ -4764,8 +4764,8 @@ export { SecondModelCreateNestedManyWithoutFirstModelFieldInput } from \\"./Seco
 export { SecondModelCreateOrConnectWithoutFirstModelFieldInput } from \\"./SecondModelCreateOrConnectWithoutFirstModelFieldInput\\";
 export { SecondModelCreateWithoutFirstModelFieldInput } from \\"./SecondModelCreateWithoutFirstModelFieldInput\\";
 export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
-export { SecondModelOrderByAggregateInput } from \\"./SecondModelOrderByAggregateInput\\";
 export { SecondModelOrderByInput } from \\"./SecondModelOrderByInput\\";
+export { SecondModelOrderByRelationAggregateInput } from \\"./SecondModelOrderByRelationAggregateInput\\";
 export { SecondModelOrderByWithRelationInput } from \\"./SecondModelOrderByWithRelationInput\\";
 export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
 export { SecondModelScalarWhereWithAggregatesInput } from \\"./SecondModelScalarWhereWithAggregatesInput\\";
