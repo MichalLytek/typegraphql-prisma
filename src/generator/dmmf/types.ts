@@ -119,7 +119,7 @@ export namespace DMMF {
     isEmbedded?: boolean;
     // additional props
     fields: OutputSchemaField[];
-    modelName: string; // ???
+    // modelName: string;
     typeName: string;
   }
   export interface SchemaField {

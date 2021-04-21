@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByMovieArgs } from "./args/GroupByMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { MovieGroupBy } from "../../outputs/MovieGroupBy";
-import { transformFields, getPrismaFromContext } from "../../../helpers";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class GroupByMovieResolver {

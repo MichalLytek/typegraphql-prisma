@@ -30,16 +30,11 @@ export function generateCrudResolverClassMethodDeclaration(
         type: "any",
         decorators: [{ name: "TypeGraphQL.Ctx", arguments: [] }],
       },
-      ...(action.kind === DMMF.ModelAction.aggregate ||
-      action.kind === DMMF.ModelAction.groupBy
-        ? [
-            {
-              name: "info",
-              type: "GraphQLResolveInfo",
-              decorators: [{ name: "TypeGraphQL.Info", arguments: [] }],
-            },
-          ]
-        : []),
+      {
+        name: "info",
+        type: "GraphQLResolveInfo",
+        decorators: [{ name: "TypeGraphQL.Info", arguments: [] }],
+      },
       ...(!action.argsTypeName
         ? []
         : [
@@ -71,9 +66,13 @@ export function generateCrudResolverClassMethodDeclaration(
             });`,
           ]
         : [
-            /* ts */ ` return getPrismaFromContext(ctx).${
-              mapping.collectionName
-            }.${action.kind}(${action.argsTypeName ? "args" : ""});`,
+            /* ts */ ` const { _count } = transformFields(
+              graphqlFields(info as any)
+            );`,
+            /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}({
+              ...args,
+              ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+            });`,
           ],
   };
 }

@@ -1,7 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { Client } from "../../../models/Client";
 import { Post } from "../../../models/Post";
-import { transformFields, getPrismaFromContext } from "../../../helpers";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {

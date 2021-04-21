@@ -271,4 +271,37 @@ describe("models", () => {
 
     expect(nativeTypeModelTSFile).toMatchSnapshot("NativeTypeModel");
   });
+
+  describe("when selectRelationCount preview feature is enabled", () => {
+    it("should properly generate model  object type class", async () => {
+      const schema = /* prisma */ `
+        datasource db {
+          provider = "postgresql"
+          url      = env("DATABASE_URL")
+        }
+
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        enabledPreviewFeatures: ["selectRelationCount"],
+      });
+      const firstModelTSFile = await readGeneratedFile("/models/FirstModel.ts");
+
+      expect(firstModelTSFile).toMatchSnapshot("FirstModel");
+    });
+  });
 });

@@ -14,6 +14,7 @@ import {
   generateGraphQLScalarsImport,
   generatePrismaNamespaceImport,
   generateCustomScalarsImport,
+  generateResolversOutputsImports,
 } from "./imports";
 import { modelsFolderName } from "./config";
 import { DMMF } from "./dmmf/types";
@@ -23,6 +24,7 @@ export default function generateObjectTypeClassFromModel(
   project: Project,
   baseDirPath: string,
   model: DMMF.Model,
+  modelOutputType: DMMF.OutputType,
   dmmfDocument: DmmfDocument,
 ) {
   const dirPath = path.resolve(baseDirPath, modelsFolderName);
@@ -53,6 +55,11 @@ export default function generateObjectTypeClassFromModel(
       .map(field => field.type),
   );
 
+  const countField = modelOutputType.fields.find(it => it.name === "_count");
+  if (countField) {
+    generateResolversOutputsImports(sourceFile, [countField.typeGraphQLType]);
+  }
+
   sourceFile.addClass({
     name: model.typeName,
     isExported: true,
@@ -70,8 +77,8 @@ export default function generateObjectTypeClassFromModel(
         ],
       },
     ],
-    properties: model.fields.map<OptionalKind<PropertyDeclarationStructure>>(
-      field => {
+    properties: [
+      ...model.fields.map<OptionalKind<PropertyDeclarationStructure>>(field => {
         const isOptional =
           !!field.relationName ||
           field.isOmitted.output ||
@@ -105,8 +112,30 @@ export default function generateObjectTypeClassFromModel(
             docs: [{ description: field.docs }],
           }),
         };
-      },
-    ),
+      }),
+      ...(countField
+        ? [
+            {
+              name: countField.name,
+              type: countField.fieldTSType,
+              hasExclamationToken: countField.isRequired,
+              hasQuestionToken: !countField.isRequired,
+              trailingTrivia: "\r\n",
+              decorators: [
+                {
+                  name: "TypeGraphQL.Field",
+                  arguments: [
+                    `_type => ${countField.typeGraphQLType}`,
+                    Writers.object({
+                      nullable: `${!countField.isRequired}`,
+                    }),
+                  ],
+                },
+              ],
+            },
+          ]
+        : []),
+    ],
     getAccessors: model.fields
       .filter(
         field =>

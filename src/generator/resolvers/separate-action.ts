@@ -35,12 +35,7 @@ export default function generateActionResolverClass(
   );
 
   generateTypeGraphQLImport(sourceFile);
-  if (
-    action.kind === DMMF.ModelAction.aggregate ||
-    action.kind === DMMF.ModelAction.groupBy
-  ) {
-    generateGraphQLFieldsImport(sourceFile);
-  }
+  generateGraphQLFieldsImport(sourceFile);
   if (action.argsTypeName) {
     generateArgsImports(sourceFile, [action.argsTypeName], 0);
   }

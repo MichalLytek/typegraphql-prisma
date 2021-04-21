@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { AggregateClientArgs } from "./args/AggregateClientArgs";
 import { Client } from "../../../models/Client";
 import { AggregateClient } from "../../outputs/AggregateClient";
-import { transformFields, getPrismaFromContext } from "../../../helpers";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class AggregateClientResolver {

@@ -26,4 +26,20 @@ export function generateHelpersFile(sourceFile: SourceFile) {
       return prismaClient;
     }
   `);
+
+  sourceFile.addStatements(/* ts */ `
+    export function transformCountFieldIntoSelectRelationsCount(_count: object) {
+      return {
+        include: {
+          _count: {
+            select: {
+              ...Object.fromEntries(
+                Object.entries(_count).filter(([_, v]) => v != null)
+              ),
+            }
+          },
+        },
+      }
+    }
+  `);
 }

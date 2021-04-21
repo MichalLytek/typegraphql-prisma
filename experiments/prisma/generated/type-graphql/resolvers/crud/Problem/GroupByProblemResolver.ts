@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByProblemArgs } from "./args/GroupByProblemArgs";
 import { Problem } from "../../../models/Problem";
 import { ProblemGroupBy } from "../../outputs/ProblemGroupBy";
-import { transformFields, getPrismaFromContext } from "../../../helpers";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Problem)
 export class GroupByProblemResolver {

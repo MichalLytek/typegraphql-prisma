@@ -172,6 +172,7 @@ export function generateEnhanceMap(
         name: "modelsInfo",
         initializer: Writers.object(
           Object.fromEntries(
+            // TODO: support _count
             models.map(model => {
               const fieldsToEmit = model.fields.filter(
                 field => !field.relationName && !field.isOmitted.output,

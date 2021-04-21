@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByCategoryArgs } from "./args/GroupByCategoryArgs";
 import { Category } from "../../../models/Category";
 import { CategoryGroupBy } from "../../outputs/CategoryGroupBy";
-import { transformFields, getPrismaFromContext } from "../../../helpers";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class GroupByCategoryResolver {

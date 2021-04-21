@@ -36070,6 +36070,31 @@
           ]
         },
         {
+          "name": "UserCountOutputType",
+          "fields": [
+            {
+              "name": "posts",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "editorPosts",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
           "name": "UserCountAggregateOutputType",
           "fields": [
             {
@@ -37199,6 +37224,21 @@
           ]
         },
         {
+          "name": "DirectorCountOutputType",
+          "fields": [
+            {
+              "name": "movies",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
           "name": "DirectorCountAggregateOutputType",
           "fields": [
             {
@@ -37277,6 +37317,21 @@
               "isNullable": true,
               "outputType": {
                 "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "ProblemCountOutputType",
+          "fields": [
+            {
+              "name": "likedBy",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
                 "location": "scalar",
                 "isList": false
               }
@@ -37440,6 +37495,31 @@
               "name": "creatorId",
               "args": [],
               "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreatorCountOutputType",
+          "fields": [
+            {
+              "name": "likes",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "problems",
+              "args": [],
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -38061,6 +38141,17 @@
                 "location": "scalar",
                 "isList": true
               }
+            },
+            {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "UserCountOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
             }
           ]
         },
@@ -38434,6 +38525,17 @@
                 "location": "outputObjectTypes",
                 "isList": true
               }
+            },
+            {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "DirectorCountOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
             }
           ]
         },
@@ -38572,6 +38674,17 @@
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "ProblemCountOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             }
@@ -38786,6 +38899,17 @@
                 "namespace": "model",
                 "location": "outputObjectTypes",
                 "isList": true
+              }
+            },
+            {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CreatorCountOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             }
           ]

@@ -128,8 +128,6 @@ const inputsInfo = {
   PostUpdateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
 };
 const outputsInfo = {
-  Query: [\\"findFirstUser\\", \\"findManyUser\\", \\"aggregateUser\\", \\"groupByUser\\", \\"findUniqueUser\\", \\"findFirstPost\\", \\"findManyPost\\", \\"aggregatePost\\", \\"groupByPost\\", \\"findUniquePost\\"],
-  Mutation: [\\"createOneUser\\", \\"upsertOneUser\\", \\"createManyUser\\", \\"deleteOneUser\\", \\"updateOneUser\\", \\"updateManyUser\\", \\"deleteManyUser\\", \\"createOnePost\\", \\"upsertOnePost\\", \\"createManyPost\\", \\"deleteOnePost\\", \\"updateOnePost\\", \\"updateManyPost\\", \\"deleteManyPost\\", \\"executeRaw\\", \\"queryRaw\\"],
   AggregateClient: [\\"count\\", \\"avg\\", \\"sum\\", \\"min\\", \\"max\\"],
   ClientGroupBy: [\\"id\\", \\"email\\", \\"count\\", \\"avg\\", \\"sum\\", \\"min\\", \\"max\\"],
   AggregatePost: [\\"count\\", \\"avg\\", \\"sum\\", \\"min\\", \\"max\\"],
@@ -144,9 +142,7 @@ const outputsInfo = {
   PostAvgAggregate: [\\"authorId\\"],
   PostSumAggregate: [\\"authorId\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  User: [\\"id\\", \\"email\\", \\"posts\\"],
-  Post: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"author\\", \\"authorId\\", \\"metadata\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"]
 };
 const argsInfo = {
   FindUniqueClientArgs: [\\"where\\"],
@@ -584,15 +580,12 @@ const inputsInfo = {
   NestedJsonFilter: [\\"equals\\", \\"not\\"]
 };
 const outputsInfo = {
-  Query: [\\"findFirstPost\\", \\"findManyPost\\", \\"aggregatePost\\", \\"groupByPost\\", \\"findUniquePost\\"],
-  Mutation: [\\"createOnePost\\", \\"upsertOnePost\\", \\"createManyPost\\", \\"deleteOnePost\\", \\"updateOnePost\\", \\"updateManyPost\\", \\"deleteManyPost\\", \\"executeRaw\\", \\"queryRaw\\"],
   AggregatePost: [\\"count\\", \\"min\\", \\"max\\"],
   PostGroupBy: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"count\\", \\"min\\", \\"max\\"],
   AffectedRowsOutput: [\\"count\\"],
   PostCountAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_all\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
-  Post: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"]
 };
 const argsInfo = {
   FindUniquePostArgs: [\\"where\\"],

@@ -213,6 +213,7 @@ input CategoryWhereUniqueInput {
 
 """User model doc"""
 type Client {
+  _count: ClientCount
   accountBalance: Float!
   age: Int!
   aliases: [String!]!
@@ -236,6 +237,11 @@ type ClientAvgAggregate {
   balance: Float!
   grades: Float
   id: Float!
+}
+
+type ClientCount {
+  editorPosts: Int!
+  posts: Int!
 }
 
 type ClientCountAggregate {
@@ -550,6 +556,7 @@ input ClientWhereUniqueInput {
 }
 
 type Creator {
+  _count: CreatorCount
   id: Int!
   likes(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]!
   name: String!
@@ -558,6 +565,11 @@ type Creator {
 
 type CreatorAvgAggregate {
   id: Float!
+}
+
+type CreatorCount {
+  likes: Int!
+  problems: Int!
 }
 
 type CreatorCountAggregate {
@@ -826,9 +838,14 @@ input DecimalNullableWithAggregatesFilter {
 }
 
 type Director {
+  _count: DirectorCount
   firstName: String!
   lastName: String!
   movies(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByWithRelationInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]!
+}
+
+type DirectorCount {
+  movies: Int!
 }
 
 type DirectorCountAggregate {
@@ -2305,6 +2322,7 @@ input PostWhereUniqueInput {
 }
 
 type Problem {
+  _count: ProblemCount
   creator: Creator
   creatorId: Int
   id: Int!
@@ -2315,6 +2333,10 @@ type Problem {
 type ProblemAvgAggregate {
   creatorId: Float
   id: Float!
+}
+
+type ProblemCount {
+  likedBy: Int!
 }
 
 type ProblemCountAggregate {

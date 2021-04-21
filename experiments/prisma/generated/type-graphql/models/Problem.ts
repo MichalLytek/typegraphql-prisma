@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../client";
 import { DecimalJSScalar } from "../scalars";
 import { Creator } from "../models/Creator";
+import { ProblemCount } from "../resolvers/outputs/ProblemCount";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -26,4 +27,9 @@ export class Problem {
     nullable: true
   })
   creatorId?: number | null;
+
+  @TypeGraphQL.Field(_type => ProblemCount, {
+    nullable: true
+  })
+  _count?: ProblemCount | null;
 }

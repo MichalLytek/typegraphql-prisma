@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { GroupByCreatorArgs } from "./args/GroupByCreatorArgs";
 import { Creator } from "../../../models/Creator";
 import { CreatorGroupBy } from "../../outputs/CreatorGroupBy";
-import { transformFields, getPrismaFromContext } from "../../../helpers";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class GroupByCreatorResolver {

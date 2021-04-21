@@ -308,3 +308,13 @@ mutation AddGrade {
     ...ClientData
   }
 }
+
+query CountByRelations {
+  findFirstClient {
+    id
+    email
+    _count {
+      posts
+    }
+  }
+}

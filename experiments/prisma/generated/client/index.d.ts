@@ -849,6 +849,205 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type UserCountOutputType
+   */
+
+
+  export type UserCountOutputType = {
+    posts: number
+    editorPosts: number
+  }
+
+  export type UserCountOutputTypeSelect = {
+    posts?: boolean
+    editorPosts?: boolean
+  }
+
+  export type UserCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | UserCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? UserCountOutputType
+    : S extends undefined
+    ? never
+    : S extends UserCountOutputTypeArgs
+    ?'include' extends U
+    ? UserCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof UserCountOutputType ?UserCountOutputType [P]
+  : 
+     never
+  } 
+    : UserCountOutputType
+  : UserCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+    **/
+    select?: UserCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type DirectorCountOutputType
+   */
+
+
+  export type DirectorCountOutputType = {
+    movies: number
+  }
+
+  export type DirectorCountOutputTypeSelect = {
+    movies?: boolean
+  }
+
+  export type DirectorCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | DirectorCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? DirectorCountOutputType
+    : S extends undefined
+    ? never
+    : S extends DirectorCountOutputTypeArgs
+    ?'include' extends U
+    ? DirectorCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof DirectorCountOutputType ?DirectorCountOutputType [P]
+  : 
+     never
+  } 
+    : DirectorCountOutputType
+  : DirectorCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * DirectorCountOutputType without action
+   */
+  export type DirectorCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the DirectorCountOutputType
+    **/
+    select?: DirectorCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type ProblemCountOutputType
+   */
+
+
+  export type ProblemCountOutputType = {
+    likedBy: number
+  }
+
+  export type ProblemCountOutputTypeSelect = {
+    likedBy?: boolean
+  }
+
+  export type ProblemCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | ProblemCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? ProblemCountOutputType
+    : S extends undefined
+    ? never
+    : S extends ProblemCountOutputTypeArgs
+    ?'include' extends U
+    ? ProblemCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof ProblemCountOutputType ?ProblemCountOutputType [P]
+  : 
+     never
+  } 
+    : ProblemCountOutputType
+  : ProblemCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * ProblemCountOutputType without action
+   */
+  export type ProblemCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the ProblemCountOutputType
+    **/
+    select?: ProblemCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type CreatorCountOutputType
+   */
+
+
+  export type CreatorCountOutputType = {
+    likes: number
+    problems: number
+  }
+
+  export type CreatorCountOutputTypeSelect = {
+    likes?: boolean
+    problems?: boolean
+  }
+
+  export type CreatorCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | CreatorCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? CreatorCountOutputType
+    : S extends undefined
+    ? never
+    : S extends CreatorCountOutputTypeArgs
+    ?'include' extends U
+    ? CreatorCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof CreatorCountOutputType ?CreatorCountOutputType [P]
+  : 
+     never
+  } 
+    : CreatorCountOutputType
+  : CreatorCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * CreatorCountOutputType without action
+   */
+  export type CreatorCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the CreatorCountOutputType
+    **/
+    select?: CreatorCountOutputTypeSelect | null
+  }
+
+
 
   /**
    * Models
@@ -1089,11 +1288,13 @@ export namespace Prisma {
     editorPosts?: boolean | postFindManyArgs
     grades?: boolean
     aliases?: boolean
+    _count?: boolean | UserCountOutputTypeArgs
   }
 
   export type UserInclude = {
     posts?: boolean | postFindManyArgs
     editorPosts?: boolean | postFindManyArgs
+    _count?: boolean | UserCountOutputTypeArgs
   }
 
   export type UserGetPayload<
@@ -1110,7 +1311,9 @@ export namespace Prisma {
           P extends 'posts'
         ? Array < postGetPayload<S['include'][P]>>  :
         P extends 'editorPosts'
-        ? Array < postGetPayload<S['include'][P]>>  : never
+        ? Array < postGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? UserCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -1119,7 +1322,9 @@ export namespace Prisma {
           P extends 'posts'
         ? Array < postGetPayload<S['select'][P]>>  :
         P extends 'editorPosts'
-        ? Array < postGetPayload<S['select'][P]>>  : never
+        ? Array < postGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? UserCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : User
   : User
@@ -5072,10 +5277,12 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     movies?: boolean | MovieFindManyArgs
+    _count?: boolean | DirectorCountOutputTypeArgs
   }
 
   export type DirectorInclude = {
     movies?: boolean | MovieFindManyArgs
+    _count?: boolean | DirectorCountOutputTypeArgs
   }
 
   export type DirectorGetPayload<
@@ -5090,14 +5297,18 @@ export namespace Prisma {
     ? Director  & {
     [P in TrueKeys<S['include']>]: 
           P extends 'movies'
-        ? Array < MovieGetPayload<S['include'][P]>>  : never
+        ? Array < MovieGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? DirectorCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof Director ?Director [P]
   : 
           P extends 'movies'
-        ? Array < MovieGetPayload<S['select'][P]>>  : never
+        ? Array < MovieGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? DirectorCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : Director
   : Director
@@ -5897,11 +6108,13 @@ export namespace Prisma {
     likedBy?: boolean | CreatorFindManyArgs
     creator?: boolean | CreatorArgs
     creatorId?: boolean
+    _count?: boolean | ProblemCountOutputTypeArgs
   }
 
   export type ProblemInclude = {
     likedBy?: boolean | CreatorFindManyArgs
     creator?: boolean | CreatorArgs
+    _count?: boolean | ProblemCountOutputTypeArgs
   }
 
   export type ProblemGetPayload<
@@ -5918,7 +6131,9 @@ export namespace Prisma {
           P extends 'likedBy'
         ? Array < CreatorGetPayload<S['include'][P]>>  :
         P extends 'creator'
-        ? CreatorGetPayload<S['include'][P]> | null : never
+        ? CreatorGetPayload<S['include'][P]> | null :
+        P extends '_count'
+        ? ProblemCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -5927,7 +6142,9 @@ export namespace Prisma {
           P extends 'likedBy'
         ? Array < CreatorGetPayload<S['select'][P]>>  :
         P extends 'creator'
-        ? CreatorGetPayload<S['select'][P]> | null : never
+        ? CreatorGetPayload<S['select'][P]> | null :
+        P extends '_count'
+        ? ProblemCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : Problem
   : Problem
@@ -6717,11 +6934,13 @@ export namespace Prisma {
     name?: boolean
     likes?: boolean | ProblemFindManyArgs
     problems?: boolean | ProblemFindManyArgs
+    _count?: boolean | CreatorCountOutputTypeArgs
   }
 
   export type CreatorInclude = {
     likes?: boolean | ProblemFindManyArgs
     problems?: boolean | ProblemFindManyArgs
+    _count?: boolean | CreatorCountOutputTypeArgs
   }
 
   export type CreatorGetPayload<
@@ -6738,7 +6957,9 @@ export namespace Prisma {
           P extends 'likes'
         ? Array < ProblemGetPayload<S['include'][P]>>  :
         P extends 'problems'
-        ? Array < ProblemGetPayload<S['include'][P]>>  : never
+        ? Array < ProblemGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? CreatorCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -6747,7 +6968,9 @@ export namespace Prisma {
           P extends 'likes'
         ? Array < ProblemGetPayload<S['select'][P]>>  :
         P extends 'problems'
-        ? Array < ProblemGetPayload<S['select'][P]>>  : never
+        ? Array < ProblemGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? CreatorCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : Creator
   : Creator
