@@ -52,8 +52,8 @@ export { CreatorCreateOrConnectWithoutProblemsInput } from "./CreatorCreateOrCon
 export { CreatorCreateWithoutLikesInput } from "./CreatorCreateWithoutLikesInput";
 export { CreatorCreateWithoutProblemsInput } from "./CreatorCreateWithoutProblemsInput";
 export { CreatorListRelationFilter } from "./CreatorListRelationFilter";
-export { CreatorOrderByAggregateInput } from "./CreatorOrderByAggregateInput";
 export { CreatorOrderByInput } from "./CreatorOrderByInput";
+export { CreatorOrderByRelationAggregateInput } from "./CreatorOrderByRelationAggregateInput";
 export { CreatorOrderByWithRelationInput } from "./CreatorOrderByWithRelationInput";
 export { CreatorRelationFilter } from "./CreatorRelationFilter";
 export { CreatorScalarWhereInput } from "./CreatorScalarWhereInput";
@@ -117,8 +117,8 @@ export { MovieCreateOrConnectWithoutDirectorInput } from "./MovieCreateOrConnect
 export { MovieCreateWithoutDirectorInput } from "./MovieCreateWithoutDirectorInput";
 export { MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from "./MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput";
 export { MovieListRelationFilter } from "./MovieListRelationFilter";
-export { MovieOrderByAggregateInput } from "./MovieOrderByAggregateInput";
 export { MovieOrderByInput } from "./MovieOrderByInput";
+export { MovieOrderByRelationAggregateInput } from "./MovieOrderByRelationAggregateInput";
 export { MovieOrderByWithRelationInput } from "./MovieOrderByWithRelationInput";
 export { MovieScalarWhereInput } from "./MovieScalarWhereInput";
 export { MovieScalarWhereWithAggregatesInput } from "./MovieScalarWhereWithAggregatesInput";
@@ -195,8 +195,8 @@ export { PostCreateOrConnectWithoutEditorInput } from "./PostCreateOrConnectWith
 export { PostCreateWithoutAuthorInput } from "./PostCreateWithoutAuthorInput";
 export { PostCreateWithoutEditorInput } from "./PostCreateWithoutEditorInput";
 export { PostListRelationFilter } from "./PostListRelationFilter";
-export { PostOrderByAggregateInput } from "./PostOrderByAggregateInput";
 export { PostOrderByInput } from "./PostOrderByInput";
+export { PostOrderByRelationAggregateInput } from "./PostOrderByRelationAggregateInput";
 export { PostOrderByWithRelationInput } from "./PostOrderByWithRelationInput";
 export { PostScalarWhereInput } from "./PostScalarWhereInput";
 export { PostScalarWhereWithAggregatesInput } from "./PostScalarWhereWithAggregatesInput";
@@ -225,8 +225,8 @@ export { ProblemCreateOrConnectWithoutLikedByInput } from "./ProblemCreateOrConn
 export { ProblemCreateWithoutCreatorInput } from "./ProblemCreateWithoutCreatorInput";
 export { ProblemCreateWithoutLikedByInput } from "./ProblemCreateWithoutLikedByInput";
 export { ProblemListRelationFilter } from "./ProblemListRelationFilter";
-export { ProblemOrderByAggregateInput } from "./ProblemOrderByAggregateInput";
 export { ProblemOrderByInput } from "./ProblemOrderByInput";
+export { ProblemOrderByRelationAggregateInput } from "./ProblemOrderByRelationAggregateInput";
 export { ProblemOrderByWithRelationInput } from "./ProblemOrderByWithRelationInput";
 export { ProblemScalarWhereInput } from "./ProblemScalarWhereInput";
 export { ProblemScalarWhereWithAggregatesInput } from "./ProblemScalarWhereWithAggregatesInput";

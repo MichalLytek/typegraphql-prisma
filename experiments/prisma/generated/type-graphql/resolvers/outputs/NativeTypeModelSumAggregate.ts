@@ -8,9 +8,9 @@ import { DecimalJSScalar } from "../../scalars";
 })
 export class NativeTypeModelSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  id!: number;
+  id!: number | null;
 
   @TypeGraphQL.Field(_type => GraphQLScalars.BigIntResolver, {
     nullable: true

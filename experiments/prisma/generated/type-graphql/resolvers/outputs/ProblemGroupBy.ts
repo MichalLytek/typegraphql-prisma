@@ -25,30 +25,30 @@ export class ProblemGroupBy {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
   })
-  creatorId?: number | null;
+  creatorId!: number | null;
 
   @TypeGraphQL.Field(_type => ProblemCountAggregate, {
     nullable: true
   })
-  count?: ProblemCountAggregate | null;
+  count!: ProblemCountAggregate | null;
 
   @TypeGraphQL.Field(_type => ProblemAvgAggregate, {
     nullable: true
   })
-  avg?: ProblemAvgAggregate | null;
+  avg!: ProblemAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => ProblemSumAggregate, {
     nullable: true
   })
-  sum?: ProblemSumAggregate | null;
+  sum!: ProblemSumAggregate | null;
 
   @TypeGraphQL.Field(_type => ProblemMinAggregate, {
     nullable: true
   })
-  min?: ProblemMinAggregate | null;
+  min!: ProblemMinAggregate | null;
 
   @TypeGraphQL.Field(_type => ProblemMaxAggregate, {
     nullable: true
   })
-  max?: ProblemMaxAggregate | null;
+  max!: ProblemMaxAggregate | null;
 }

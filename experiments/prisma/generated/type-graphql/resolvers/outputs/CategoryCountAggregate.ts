@@ -8,14 +8,14 @@ import { DecimalJSScalar } from "../../scalars";
 })
 export class CategoryCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
+    nullable: false
   })
-  name!: number | null;
+  name!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
+    nullable: false
   })
-  slug!: number | null;
+  slug!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false

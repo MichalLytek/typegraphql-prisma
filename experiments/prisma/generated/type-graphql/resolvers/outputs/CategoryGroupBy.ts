@@ -30,25 +30,25 @@ export class CategoryGroupBy {
   @TypeGraphQL.Field(_type => CategoryCountAggregate, {
     nullable: true
   })
-  count?: CategoryCountAggregate | null;
+  count!: CategoryCountAggregate | null;
 
   @TypeGraphQL.Field(_type => CategoryAvgAggregate, {
     nullable: true
   })
-  avg?: CategoryAvgAggregate | null;
+  avg!: CategoryAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => CategorySumAggregate, {
     nullable: true
   })
-  sum?: CategorySumAggregate | null;
+  sum!: CategorySumAggregate | null;
 
   @TypeGraphQL.Field(_type => CategoryMinAggregate, {
     nullable: true
   })
-  min?: CategoryMinAggregate | null;
+  min!: CategoryMinAggregate | null;
 
   @TypeGraphQL.Field(_type => CategoryMaxAggregate, {
     nullable: true
   })
-  max?: CategoryMaxAggregate | null;
+  max!: CategoryMaxAggregate | null;
 }

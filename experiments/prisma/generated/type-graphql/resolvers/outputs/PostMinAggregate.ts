@@ -44,9 +44,9 @@ export class PostMinAggregate {
   content!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  authorId!: number;
+  authorId!: number | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

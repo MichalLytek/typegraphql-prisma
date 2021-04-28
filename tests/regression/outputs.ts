@@ -24,17 +24,21 @@ describe("outputs", () => {
       }
 
       model Sample {
-        intIdField    Int       @id @default(autoincrement())
-        stringField   String
-        floatField    Float
-        booleanField  Boolean
-        dateField     DateTime
+        intIdField     Int       @id @default(autoincrement())
+        stringField    String
+        floatField     Float
+        booleanField   Boolean
+        dateField      DateTime
+        intArrayField  Int[]
       }
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
     const aggregateSampleTSFile = await readGeneratedFile(
       "/resolvers/outputs/AggregateSample.ts",
+    );
+    const countAggregateTSFile = await readGeneratedFile(
+      "/resolvers/outputs/SampleCountAggregate.ts",
     );
     const avgAggregateTSFile = await readGeneratedFile(
       "/resolvers/outputs/SampleAvgAggregate.ts",
@@ -59,6 +63,7 @@ describe("outputs", () => {
     );
 
     expect(aggregateSampleTSFile).toMatchSnapshot("AggregateSample");
+    expect(countAggregateTSFile).toMatchSnapshot("SampleCountAggregate");
     expect(avgAggregateTSFile).toMatchSnapshot("SampleAvgAggregate");
     expect(sumAggregateTSFile).toMatchSnapshot("SampleSumAggregate");
     expect(minAggregateTSFile).toMatchSnapshot("SampleMinAggregate");
@@ -89,6 +94,9 @@ describe("outputs", () => {
     const aggregateExampleTSFile = await readGeneratedFile(
       "/resolvers/outputs/AggregateExample.ts",
     );
+    const countAggregateTSFile = await readGeneratedFile(
+      "/resolvers/outputs/ExampleCountAggregate.ts",
+    );
     const avgAggregateTSFile = await readGeneratedFile(
       "/resolvers/outputs/ExampleAvgAggregate.ts",
     );
@@ -106,6 +114,7 @@ describe("outputs", () => {
     );
 
     expect(aggregateExampleTSFile).toMatchSnapshot("AggregateExample");
+    expect(countAggregateTSFile).toMatchSnapshot("ExampleCountAggregate");
     expect(avgAggregateTSFile).toMatchSnapshot("ExampleAvgAggregate");
     expect(sumAggregateTSFile).toMatchSnapshot("ExampleSumAggregate");
     expect(minAggregateTSFile).toMatchSnapshot("ExampleMinAggregate");
@@ -133,6 +142,9 @@ describe("outputs", () => {
     const aggregateExampleTSFile = await readGeneratedFile(
       "/resolvers/outputs/AggregateExample.ts",
     );
+    const countAggregateTSFile = await readGeneratedFile(
+      "/resolvers/outputs/ExampleCountAggregate.ts",
+    );
     const avgAggregateTSFile = await readGeneratedFile(
       "/resolvers/outputs/ExampleAvgAggregate.ts",
     );
@@ -150,6 +162,7 @@ describe("outputs", () => {
     );
 
     expect(aggregateExampleTSFile).toMatchSnapshot("AggregateExample");
+    expect(countAggregateTSFile).toMatchSnapshot("ExampleCountAggregate");
     expect(avgAggregateTSFile).toMatchSnapshot("ExampleAvgAggregate");
     expect(sumAggregateTSFile).toMatchSnapshot("ExampleSumAggregate");
     expect(minAggregateTSFile).toMatchSnapshot("ExampleMinAggregate");

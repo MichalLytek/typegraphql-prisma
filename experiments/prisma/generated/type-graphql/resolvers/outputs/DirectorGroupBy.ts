@@ -23,15 +23,15 @@ export class DirectorGroupBy {
   @TypeGraphQL.Field(_type => DirectorCountAggregate, {
     nullable: true
   })
-  count?: DirectorCountAggregate | null;
+  count!: DirectorCountAggregate | null;
 
   @TypeGraphQL.Field(_type => DirectorMinAggregate, {
     nullable: true
   })
-  min?: DirectorMinAggregate | null;
+  min!: DirectorMinAggregate | null;
 
   @TypeGraphQL.Field(_type => DirectorMaxAggregate, {
     nullable: true
   })
-  max?: DirectorMaxAggregate | null;
+  max!: DirectorMaxAggregate | null;
 }

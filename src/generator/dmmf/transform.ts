@@ -163,7 +163,10 @@ function transformOutputType(dmmfDocument: DmmfDocument) {
       ...outputType,
       typeName,
       fields: outputType.fields.map<DMMF.OutputSchemaField>(field => {
-        const isFieldRequired = field.isNullable ? false : true;
+        // FIXME: workaround for https://github.com/prisma/prisma/issues/6835
+        const isFieldRequired = field.outputType.isList
+          ? true
+          : field.isNullable !== true;
         const outputTypeInfo: DMMF.TypeInfo = {
           ...field.outputType,
           type: getMappedOutputTypeName(

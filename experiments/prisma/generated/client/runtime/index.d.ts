@@ -199,7 +199,7 @@ interface EnvValue {
     fromEnvVar: null | string;
     value: string;
 }
-declare type ConnectorType = 'mysql' | 'mongo' | 'sqlite' | 'postgresql' | 'sqlserver';
+declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver';
 interface DataSource {
     name: string;
     activeProvider: ConnectorType;

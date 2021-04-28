@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { MovieOrderByAggregateInput } from "../inputs/MovieOrderByAggregateInput";
+import { MovieOrderByRelationAggregateInput } from "../inputs/MovieOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
@@ -19,8 +19,8 @@ export class DirectorOrderByWithRelationInput {
   })
   lastName?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => MovieOrderByAggregateInput, {
+  @TypeGraphQL.Field(_type => MovieOrderByRelationAggregateInput, {
     nullable: true
   })
-  movies?: MovieOrderByAggregateInput | undefined;
+  movies?: MovieOrderByRelationAggregateInput | undefined;
 }

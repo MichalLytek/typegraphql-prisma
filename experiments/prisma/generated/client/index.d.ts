@@ -379,8 +379,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.20.1
-   * Query Engine version: 60ba6551f29b17d7d6ce479e5733c70d9c00860e
+   * Prisma Client JS version: 2.21.2
+   * Query Engine version: e421996c87d5f3c8f7eeadd502d4ad402c89464d
    */
   export type PrismaVersion = {
     client: string
@@ -674,6 +674,11 @@ export namespace Prisma {
    * Like `Pick`, but with an array
    */
   type PickArray<T, K extends Array<keyof T>> = Prisma__Pick<T, TupleToUnion<K>>
+
+  /**
+   * Exclude all keys with underscores
+   */
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
 
   class PrismaClientFetcher {
     private readonly prisma;
@@ -1067,51 +1072,51 @@ export namespace Prisma {
   }
 
   export type UserAvgAggregateOutputType = {
-    id: number
-    age: number
-    balance: number
-    amount: number
+    id: number | null
+    age: number | null
+    balance: number | null
+    amount: number | null
     grades: number | null
   }
 
   export type UserSumAggregateOutputType = {
-    id: number
-    age: number
-    balance: number
-    amount: number
+    id: number | null
+    age: number | null
+    balance: number | null
+    amount: number | null
     grades: number[]
   }
 
   export type UserMinAggregateOutputType = {
-    id: number
+    id: number | null
     email: string | null
     name: string | null
-    age: number
-    balance: number
-    amount: number
+    age: number | null
+    balance: number | null
+    amount: number | null
     role: Role | null
   }
 
   export type UserMaxAggregateOutputType = {
-    id: number
+    id: number | null
     email: string | null
     name: string | null
-    age: number
-    balance: number
-    amount: number
+    age: number | null
+    balance: number | null
+    amount: number | null
     role: Role | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
-    email: number | null
-    name: number | null
+    email: number
+    name: number
     age: number
     balance: number
     amount: number
-    role: number | null
-    grades: number | null
-    aliases: number | null
+    role: number
+    grades: number
+    aliases: number
     _all: number
   }
 
@@ -1590,7 +1595,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: UserGroupByArgs['orderBy'] }
         : { orderBy?: UserGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -1957,12 +1962,12 @@ export namespace Prisma {
   }
 
   export type PostAvgAggregateOutputType = {
-    authorId: number
+    authorId: number | null
     editorId: number | null
   }
 
   export type PostSumAggregateOutputType = {
-    authorId: number
+    authorId: number | null
     editorId: number | null
   }
 
@@ -1974,7 +1979,7 @@ export namespace Prisma {
     title: string | null
     subtitle: string | null
     content: string | null
-    authorId: number
+    authorId: number | null
     editorId: number | null
     kind: PostKind | null
   }
@@ -1987,23 +1992,23 @@ export namespace Prisma {
     title: string | null
     subtitle: string | null
     content: string | null
-    authorId: number
+    authorId: number | null
     editorId: number | null
     kind: PostKind | null
   }
 
   export type PostCountAggregateOutputType = {
-    uuid: number | null
-    createdAt: number | null
-    updatedAt: number | null
-    published: number | null
-    title: number | null
-    subtitle: number | null
-    content: number | null
+    uuid: number
+    createdAt: number
+    updatedAt: number
+    published: number
+    title: number
+    subtitle: number
+    content: number
     authorId: number
-    editorId: number | null
-    kind: number | null
-    metadata: number | null
+    editorId: number
+    kind: number
+    metadata: number
     _all: number
   }
 
@@ -2482,7 +2487,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: PostGroupByArgs['orderBy'] }
         : { orderBy?: PostGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -2849,28 +2854,28 @@ export namespace Prisma {
   }
 
   export type CategoryAvgAggregateOutputType = {
-    number: number
+    number: number | null
   }
 
   export type CategorySumAggregateOutputType = {
-    number: number
+    number: number | null
   }
 
   export type CategoryMinAggregateOutputType = {
     name: string | null
     slug: string | null
-    number: number
+    number: number | null
   }
 
   export type CategoryMaxAggregateOutputType = {
     name: string | null
     slug: string | null
-    number: number
+    number: number | null
   }
 
   export type CategoryCountAggregateOutputType = {
-    name: number | null
-    slug: number | null
+    name: number
+    slug: number
     number: number
     _all: number
   }
@@ -3294,7 +3299,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: CategoryGroupByArgs['orderBy'] }
         : { orderBy?: CategoryGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -3636,9 +3641,9 @@ export namespace Prisma {
   }
 
   export type PatientCountAggregateOutputType = {
-    firstName: number | null
-    lastName: number | null
-    email: number | null
+    firstName: number
+    lastName: number
+    email: number
     _all: number
   }
 
@@ -4037,7 +4042,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: PatientGroupByArgs['orderBy'] }
         : { orderBy?: PatientGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -4379,9 +4384,9 @@ export namespace Prisma {
   }
 
   export type MovieCountAggregateOutputType = {
-    directorFirstName: number | null
-    directorLastName: number | null
-    title: number | null
+    directorFirstName: number
+    directorLastName: number
+    title: number
     _all: number
   }
 
@@ -4790,7 +4795,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: MovieGroupByArgs['orderBy'] }
         : { orderBy?: MovieGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -5163,8 +5168,8 @@ export namespace Prisma {
   }
 
   export type DirectorCountAggregateOutputType = {
-    firstName: number | null
-    lastName: number | null
+    firstName: number
+    lastName: number
     _all: number
   }
 
@@ -5574,7 +5579,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: DirectorGroupByArgs['orderBy'] }
         : { orderBy?: DirectorGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -5939,31 +5944,31 @@ export namespace Prisma {
   }
 
   export type ProblemAvgAggregateOutputType = {
-    id: number
+    id: number | null
     creatorId: number | null
   }
 
   export type ProblemSumAggregateOutputType = {
-    id: number
+    id: number | null
     creatorId: number | null
   }
 
   export type ProblemMinAggregateOutputType = {
-    id: number
+    id: number | null
     problemText: string | null
     creatorId: number | null
   }
 
   export type ProblemMaxAggregateOutputType = {
-    id: number
+    id: number | null
     problemText: string | null
     creatorId: number | null
   }
 
   export type ProblemCountAggregateOutputType = {
     id: number
-    problemText: number | null
-    creatorId: number | null
+    problemText: number
+    creatorId: number
     _all: number
   }
 
@@ -6410,7 +6415,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ProblemGroupByArgs['orderBy'] }
         : { orderBy?: ProblemGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -6777,26 +6782,26 @@ export namespace Prisma {
   }
 
   export type CreatorAvgAggregateOutputType = {
-    id: number
+    id: number | null
   }
 
   export type CreatorSumAggregateOutputType = {
-    id: number
+    id: number | null
   }
 
   export type CreatorMinAggregateOutputType = {
-    id: number
+    id: number | null
     name: string | null
   }
 
   export type CreatorMaxAggregateOutputType = {
-    id: number
+    id: number | null
     name: string | null
   }
 
   export type CreatorCountAggregateOutputType = {
     id: number
-    name: number | null
+    name: number
     _all: number
   }
 
@@ -7236,7 +7241,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: CreatorGroupByArgs['orderBy'] }
         : { orderBy?: CreatorGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -7603,26 +7608,26 @@ export namespace Prisma {
   }
 
   export type NativeTypeModelAvgAggregateOutputType = {
-    id: number
+    id: number | null
     bigInt: number | null
     decimal: Decimal | null
   }
 
   export type NativeTypeModelSumAggregateOutputType = {
-    id: number
+    id: number | null
     bigInt: bigint | null
     decimal: Decimal | null
   }
 
   export type NativeTypeModelMinAggregateOutputType = {
-    id: number
+    id: number | null
     bigInt: bigint | null
     byteA: Buffer | null
     decimal: Decimal | null
   }
 
   export type NativeTypeModelMaxAggregateOutputType = {
-    id: number
+    id: number | null
     bigInt: bigint | null
     byteA: Buffer | null
     decimal: Decimal | null
@@ -7630,9 +7635,9 @@ export namespace Prisma {
 
   export type NativeTypeModelCountAggregateOutputType = {
     id: number
-    bigInt: number | null
-    byteA: number | null
-    decimal: number | null
+    bigInt: number
+    byteA: number
+    decimal: number
     _all: number
   }
 
@@ -8064,7 +8069,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: NativeTypeModelGroupByArgs['orderBy'] }
         : { orderBy?: NativeTypeModelGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
@@ -8528,9 +8533,9 @@ export namespace Prisma {
     age?: SortOrder
     balance?: SortOrder
     amount?: SortOrder
-    posts?: postOrderByAggregateInput
+    posts?: postOrderByRelationAggregateInput
     role?: SortOrder
-    editorPosts?: postOrderByAggregateInput
+    editorPosts?: postOrderByRelationAggregateInput
     grades?: SortOrder
     aliases?: SortOrder
   }
@@ -8753,7 +8758,7 @@ export namespace Prisma {
   export type DirectorOrderByWithRelationInput = {
     firstName?: SortOrder
     lastName?: SortOrder
-    movies?: MovieOrderByAggregateInput
+    movies?: MovieOrderByRelationAggregateInput
   }
 
   export type DirectorWhereUniqueInput = {
@@ -8787,7 +8792,7 @@ export namespace Prisma {
   export type ProblemOrderByWithRelationInput = {
     id?: SortOrder
     problemText?: SortOrder
-    likedBy?: CreatorOrderByAggregateInput
+    likedBy?: CreatorOrderByRelationAggregateInput
     creator?: CreatorOrderByWithRelationInput
     creatorId?: SortOrder
   }
@@ -8824,8 +8829,8 @@ export namespace Prisma {
   export type CreatorOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    likes?: ProblemOrderByAggregateInput
-    problems?: ProblemOrderByAggregateInput
+    likes?: ProblemOrderByRelationAggregateInput
+    problems?: ProblemOrderByRelationAggregateInput
   }
 
   export type CreatorWhereUniqueInput = {
@@ -9434,7 +9439,7 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type postOrderByAggregateInput = {
+  export type postOrderByRelationAggregateInput = {
     count: SortOrder
   }
 
@@ -9643,7 +9648,7 @@ export namespace Prisma {
     none?: MovieWhereInput
   }
 
-  export type MovieOrderByAggregateInput = {
+  export type MovieOrderByRelationAggregateInput = {
     count: SortOrder
   }
 
@@ -9663,7 +9668,7 @@ export namespace Prisma {
     isNot?: CreatorWhereInput | null
   }
 
-  export type CreatorOrderByAggregateInput = {
+  export type CreatorOrderByRelationAggregateInput = {
     count: SortOrder
   }
 
@@ -9673,7 +9678,7 @@ export namespace Prisma {
     none?: ProblemWhereInput
   }
 
-  export type ProblemOrderByAggregateInput = {
+  export type ProblemOrderByRelationAggregateInput = {
     count: SortOrder
   }
 

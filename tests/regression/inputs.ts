@@ -1312,16 +1312,16 @@ describe("inputs", () => {
       const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
       );
-      const secondModelOrderByAggregateInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelOrderByAggregateInput.ts",
+      const secondModelOrderByRelationAggregateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SecondModelOrderByRelationAggregateInput.ts",
       );
       const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
       expect(firstModelOrderByWithRelationInputTSFile).toMatchSnapshot(
         "FirstModelOrderByWithRelationInput",
       );
-      expect(secondModelOrderByAggregateInputTSFile).toMatchSnapshot(
-        "SecondModelOrderByAggregateInput",
+      expect(secondModelOrderByRelationAggregateInputTSFile).toMatchSnapshot(
+        "SecondModelOrderByRelationAggregateInput",
       );
       expect(indexTSFile).toMatchSnapshot("index");
     });
@@ -1355,8 +1355,8 @@ describe("inputs", () => {
       const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
       );
-      const secondModelOrderByAggregateInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelOrderByAggregateInput.ts",
+      const secondModelOrderByRelationAggregateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SecondModelOrderByRelationAggregateInput.ts",
       );
       const secondModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/SecondModelOrderByWithRelationInput.ts",
@@ -1366,8 +1366,8 @@ describe("inputs", () => {
       expect(firstModelOrderByWithRelationInputTSFile).toMatchSnapshot(
         "FirstModelOrderByWithRelationInput",
       );
-      expect(secondModelOrderByAggregateInputTSFile).toMatchSnapshot(
-        "SecondModelOrderByAggregateInput",
+      expect(secondModelOrderByRelationAggregateInputTSFile).toMatchSnapshot(
+        "SecondModelOrderByRelationAggregateInput",
       );
       expect(secondModelOrderByWithRelationInputTSFile).toMatchSnapshot(
         "SecondModelOrderByWithRelationInput",

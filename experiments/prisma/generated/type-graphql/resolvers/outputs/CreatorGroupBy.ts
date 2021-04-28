@@ -25,25 +25,25 @@ export class CreatorGroupBy {
   @TypeGraphQL.Field(_type => CreatorCountAggregate, {
     nullable: true
   })
-  count?: CreatorCountAggregate | null;
+  count!: CreatorCountAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorAvgAggregate, {
     nullable: true
   })
-  avg?: CreatorAvgAggregate | null;
+  avg!: CreatorAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorSumAggregate, {
     nullable: true
   })
-  sum?: CreatorSumAggregate | null;
+  sum!: CreatorSumAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorMinAggregate, {
     nullable: true
   })
-  min?: CreatorMinAggregate | null;
+  min!: CreatorMinAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorMaxAggregate, {
     nullable: true
   })
-  max?: CreatorMaxAggregate | null;
+  max!: CreatorMaxAggregate | null;
 }

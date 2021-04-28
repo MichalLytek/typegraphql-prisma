@@ -46,7 +46,7 @@ export class PostGroupBy {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  content?: string | null;
+  content!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
@@ -56,12 +56,12 @@ export class PostGroupBy {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
   })
-  editorId?: number | null;
+  editorId!: number | null;
 
   @TypeGraphQL.Field(_type => PostKind, {
     nullable: true
   })
-  kind?: "BLOG" | "ADVERT" | null;
+  kind!: "BLOG" | "ADVERT" | null;
 
   @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: false
@@ -71,25 +71,25 @@ export class PostGroupBy {
   @TypeGraphQL.Field(_type => PostCountAggregate, {
     nullable: true
   })
-  count?: PostCountAggregate | null;
+  count!: PostCountAggregate | null;
 
   @TypeGraphQL.Field(_type => PostAvgAggregate, {
     nullable: true
   })
-  avg?: PostAvgAggregate | null;
+  avg!: PostAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => PostSumAggregate, {
     nullable: true
   })
-  sum?: PostSumAggregate | null;
+  sum!: PostSumAggregate | null;
 
   @TypeGraphQL.Field(_type => PostMinAggregate, {
     nullable: true
   })
-  min?: PostMinAggregate | null;
+  min!: PostMinAggregate | null;
 
   @TypeGraphQL.Field(_type => PostMaxAggregate, {
     nullable: true
   })
-  max?: PostMaxAggregate | null;
+  max!: PostMaxAggregate | null;
 }

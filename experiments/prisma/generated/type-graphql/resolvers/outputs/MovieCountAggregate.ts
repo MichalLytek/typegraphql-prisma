@@ -8,19 +8,19 @@ import { DecimalJSScalar } from "../../scalars";
 })
 export class MovieCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
+    nullable: false
   })
-  directorFirstName!: number | null;
+  directorFirstName!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
+    nullable: false
   })
-  directorLastName!: number | null;
+  directorLastName!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
+    nullable: false
   })
-  title!: number | null;
+  title!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false

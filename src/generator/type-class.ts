@@ -37,7 +37,6 @@ export function generateOutputTypeClassFromType(
   const fieldArgsTypeNames = type.fields
     .filter(it => it.argsTypeName)
     .map(it => it.argsTypeName!);
-  const isAggregateOutputType = type.name.includes("Aggregate");
 
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarsImport(sourceFile);
@@ -77,28 +76,24 @@ export function generateOutputTypeClassFromType(
       },
     ],
     properties: type.fields.map<OptionalKind<PropertyDeclarationStructure>>(
-      field => {
-        // workaround for non-optional aggregate result fields in Prisma Client
-        const isOptional = isAggregateOutputType ? false : !field.isRequired;
-        return {
-          name: field.name,
-          type: field.fieldTSType,
-          hasExclamationToken: !isOptional,
-          hasQuestionToken: isOptional,
-          trailingTrivia: "\r\n",
-          decorators: [
-            {
-              name: "TypeGraphQL.Field",
-              arguments: [
-                `_type => ${field.typeGraphQLType}`,
-                Writers.object({
-                  nullable: `${!field.isRequired}`,
-                }),
-              ],
-            },
-          ],
-        };
-      },
+      field => ({
+        name: field.name,
+        type: field.fieldTSType,
+        hasExclamationToken: true,
+        hasQuestionToken: false,
+        trailingTrivia: "\r\n",
+        decorators: [
+          {
+            name: "TypeGraphQL.Field",
+            arguments: [
+              `_type => ${field.typeGraphQLType}`,
+              Writers.object({
+                nullable: `${!field.isRequired}`,
+              }),
+            ],
+          },
+        ],
+      }),
     ),
   });
 }

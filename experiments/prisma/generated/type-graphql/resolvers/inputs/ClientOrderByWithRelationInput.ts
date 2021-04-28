@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { PostOrderByAggregateInput } from "../inputs/PostOrderByAggregateInput";
+import { PostOrderByRelationAggregateInput } from "../inputs/PostOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
@@ -33,17 +33,17 @@ export class ClientOrderByWithRelationInput {
   })
   amount?: "asc" | "desc" | undefined;
 
-  posts?: PostOrderByAggregateInput | undefined;
+  posts?: PostOrderByRelationAggregateInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   role?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => PostOrderByAggregateInput, {
+  @TypeGraphQL.Field(_type => PostOrderByRelationAggregateInput, {
     nullable: true
   })
-  editorPosts?: PostOrderByAggregateInput | undefined;
+  editorPosts?: PostOrderByRelationAggregateInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -77,14 +77,14 @@ export class ClientOrderByWithRelationInput {
     this.balance = balance;
   }
 
-  @TypeGraphQL.Field(_type => PostOrderByAggregateInput, {
+  @TypeGraphQL.Field(_type => PostOrderByRelationAggregateInput, {
     nullable: true
   })
   get clientPosts() {
     return this.posts;
   }
 
-  set clientPosts(posts: PostOrderByAggregateInput | undefined) {
+  set clientPosts(posts: PostOrderByRelationAggregateInput | undefined) {
     this.posts = posts;
   }
 }

@@ -8,7 +8,7 @@ import { DecimalJSScalar } from "../../scalars";
 })
 export class CategoryAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  number!: number;
+  number!: number | null;
 }

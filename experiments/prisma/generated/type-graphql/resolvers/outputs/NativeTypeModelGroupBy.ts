@@ -20,40 +20,40 @@ export class NativeTypeModelGroupBy {
   @TypeGraphQL.Field(_type => GraphQLScalars.BigIntResolver, {
     nullable: true
   })
-  bigInt?: bigint | null;
+  bigInt!: bigint | null;
 
   @TypeGraphQL.Field(_type => GraphQLScalars.ByteResolver, {
     nullable: true
   })
-  byteA?: Buffer | null;
+  byteA!: Buffer | null;
 
   @TypeGraphQL.Field(_type => DecimalJSScalar, {
     nullable: true
   })
-  decimal?: Prisma.Decimal | null;
+  decimal!: Prisma.Decimal | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelCountAggregate, {
     nullable: true
   })
-  count?: NativeTypeModelCountAggregate | null;
+  count!: NativeTypeModelCountAggregate | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelAvgAggregate, {
     nullable: true
   })
-  avg?: NativeTypeModelAvgAggregate | null;
+  avg!: NativeTypeModelAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelSumAggregate, {
     nullable: true
   })
-  sum?: NativeTypeModelSumAggregate | null;
+  sum!: NativeTypeModelSumAggregate | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelMinAggregate, {
     nullable: true
   })
-  min?: NativeTypeModelMinAggregate | null;
+  min!: NativeTypeModelMinAggregate | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelMaxAggregate, {
     nullable: true
   })
-  max?: NativeTypeModelMaxAggregate | null;
+  max!: NativeTypeModelMaxAggregate | null;
 }

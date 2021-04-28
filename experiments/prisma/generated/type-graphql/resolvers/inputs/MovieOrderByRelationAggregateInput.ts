@@ -7,7 +7,7 @@ import { SortOrder } from "../../enums/SortOrder";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class PostOrderByAggregateInput {
+export class MovieOrderByRelationAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: false
   })

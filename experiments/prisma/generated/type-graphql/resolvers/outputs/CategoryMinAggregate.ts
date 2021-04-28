@@ -18,7 +18,7 @@ export class CategoryMinAggregate {
   slug!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  number!: number;
+  number!: number | null;
 }

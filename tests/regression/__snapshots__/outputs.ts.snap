@@ -54,14 +54,57 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class ExampleAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  intIdField!: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  floatField!: number | null;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleCountAggregate 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class ExampleCountAggregate {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  stringField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  booleanField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  dateField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  _all!: number;
 }
 "
 `;
@@ -77,9 +120,9 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class ExampleMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -87,9 +130,9 @@ export class ExampleMaxAggregate {
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
@@ -115,9 +158,9 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class ExampleMinAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -125,9 +168,9 @@ export class ExampleMinAggregate {
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
@@ -153,14 +196,14 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class ExampleSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 }
 "
 `;
@@ -231,14 +274,57 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class ExampleAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  intIdField!: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  floatField!: number | null;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: ExampleCountAggregate 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class ExampleCountAggregate {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  stringField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  booleanField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  dateField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  _all!: number;
 }
 "
 `;
@@ -254,9 +340,9 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class ExampleMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -264,9 +350,9 @@ export class ExampleMaxAggregate {
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
@@ -292,9 +378,9 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class ExampleMinAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -302,9 +388,9 @@ export class ExampleMinAggregate {
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
@@ -330,14 +416,14 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class ExampleSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 }
 "
 `;
@@ -426,14 +512,67 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class SampleAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  intIdField!: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  floatField!: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  intArrayField!: number | null;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: SampleCountAggregate 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class SampleCountAggregate {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  stringField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
   floatField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  booleanField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  dateField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intArrayField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  _all!: number;
 }
 "
 `;
@@ -478,30 +617,35 @@ export class SampleGroupBy {
   })
   dateField!: Date;
 
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
+    nullable: false
+  })
+  intArrayField!: number[];
+
   @TypeGraphQL.Field(_type => SampleCountAggregate, {
     nullable: true
   })
-  count?: SampleCountAggregate | null;
+  count!: SampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleAvgAggregate, {
     nullable: true
   })
-  avg?: SampleAvgAggregate | null;
+  avg!: SampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleSumAggregate, {
     nullable: true
   })
-  sum?: SampleSumAggregate | null;
+  sum!: SampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMinAggregate, {
     nullable: true
   })
-  min?: SampleMinAggregate | null;
+  min!: SampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMaxAggregate, {
     nullable: true
   })
-  max?: SampleMaxAggregate | null;
+  max!: SampleMaxAggregate | null;
 }
 "
 `;
@@ -517,9 +661,9 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class SampleMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -527,9 +671,9 @@ export class SampleMaxAggregate {
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
@@ -555,9 +699,9 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class SampleMinAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -565,9 +709,9 @@ export class SampleMinAggregate {
   stringField!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
@@ -593,14 +737,19 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class SampleSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  floatField!: number | null;
+
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: false
   })
-  floatField!: number;
+  intArrayField!: number[];
 }
 "
 `;
@@ -730,14 +879,14 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 })
 export class SampleAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  intIdField!: number;
+  intIdField!: number | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
+    nullable: true
   })
-  floatField!: number;
+  floatField!: number | null;
 }
 "
 `;

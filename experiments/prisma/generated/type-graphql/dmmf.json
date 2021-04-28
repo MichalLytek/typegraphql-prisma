@@ -1239,7 +1239,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postOrderByAggregateInput",
+                  "type": "postOrderByRelationAggregateInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -1265,7 +1265,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postOrderByAggregateInput",
+                  "type": "postOrderByRelationAggregateInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -3827,7 +3827,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "MovieOrderByAggregateInput",
+                  "type": "MovieOrderByRelationAggregateInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -4184,7 +4184,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorOrderByAggregateInput",
+                  "type": "CreatorOrderByRelationAggregateInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -4568,7 +4568,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemOrderByAggregateInput",
+                  "type": "ProblemOrderByRelationAggregateInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -4581,7 +4581,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemOrderByAggregateInput",
+                  "type": "ProblemOrderByRelationAggregateInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -11110,7 +11110,7 @@
           ]
         },
         {
-          "name": "postOrderByAggregateInput",
+          "name": "postOrderByRelationAggregateInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 1
@@ -13260,7 +13260,7 @@
           ]
         },
         {
-          "name": "MovieOrderByAggregateInput",
+          "name": "MovieOrderByRelationAggregateInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 1
@@ -13408,7 +13408,7 @@
           ]
         },
         {
-          "name": "CreatorOrderByAggregateInput",
+          "name": "CreatorOrderByRelationAggregateInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 1
@@ -13478,7 +13478,7 @@
           ]
         },
         {
-          "name": "ProblemOrderByAggregateInput",
+          "name": "ProblemOrderByRelationAggregateInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 1
@@ -36110,7 +36110,7 @@
             {
               "name": "email",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36120,7 +36120,7 @@
             {
               "name": "name",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36160,7 +36160,7 @@
             {
               "name": "role",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36170,7 +36170,7 @@
             {
               "name": "grades",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36180,7 +36180,7 @@
             {
               "name": "aliases",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36205,7 +36205,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36215,7 +36215,7 @@
             {
               "name": "age",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36225,7 +36225,7 @@
             {
               "name": "balance",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36235,7 +36235,7 @@
             {
               "name": "amount",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36260,7 +36260,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36270,7 +36270,7 @@
             {
               "name": "age",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36280,7 +36280,7 @@
             {
               "name": "balance",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36290,7 +36290,7 @@
             {
               "name": "amount",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36315,7 +36315,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36345,7 +36345,7 @@
             {
               "name": "age",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36355,7 +36355,7 @@
             {
               "name": "balance",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36365,7 +36365,7 @@
             {
               "name": "amount",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36391,7 +36391,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36421,7 +36421,7 @@
             {
               "name": "age",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36431,7 +36431,7 @@
             {
               "name": "balance",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36441,7 +36441,7 @@
             {
               "name": "amount",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36467,7 +36467,7 @@
             {
               "name": "uuid",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36477,7 +36477,7 @@
             {
               "name": "createdAt",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36487,7 +36487,7 @@
             {
               "name": "updatedAt",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36497,7 +36497,7 @@
             {
               "name": "published",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36507,7 +36507,7 @@
             {
               "name": "title",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36517,7 +36517,7 @@
             {
               "name": "subtitle",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36527,7 +36527,7 @@
             {
               "name": "content",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36547,7 +36547,7 @@
             {
               "name": "editorId",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36557,7 +36557,7 @@
             {
               "name": "kind",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36567,7 +36567,7 @@
             {
               "name": "metadata",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36592,7 +36592,7 @@
             {
               "name": "authorId",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36617,7 +36617,7 @@
             {
               "name": "authorId",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36712,7 +36712,7 @@
             {
               "name": "authorId",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36818,7 +36818,7 @@
             {
               "name": "authorId",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36854,7 +36854,7 @@
             {
               "name": "name",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36864,7 +36864,7 @@
             {
               "name": "slug",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36899,7 +36899,7 @@
             {
               "name": "number",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -36914,7 +36914,7 @@
             {
               "name": "number",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36949,7 +36949,7 @@
             {
               "name": "number",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36984,7 +36984,7 @@
             {
               "name": "number",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -36999,7 +36999,7 @@
             {
               "name": "firstName",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37009,7 +37009,7 @@
             {
               "name": "lastName",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37019,7 +37019,7 @@
             {
               "name": "email",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37114,7 +37114,7 @@
             {
               "name": "directorFirstName",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37124,7 +37124,7 @@
             {
               "name": "directorLastName",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37134,7 +37134,7 @@
             {
               "name": "title",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37244,7 +37244,7 @@
             {
               "name": "firstName",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37254,7 +37254,7 @@
             {
               "name": "lastName",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37354,7 +37354,7 @@
             {
               "name": "problemText",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37364,7 +37364,7 @@
             {
               "name": "creatorId",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37389,7 +37389,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -37414,7 +37414,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37439,7 +37439,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37474,7 +37474,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37544,7 +37544,7 @@
             {
               "name": "name",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37569,7 +37569,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -37584,7 +37584,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37599,7 +37599,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37624,7 +37624,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37659,7 +37659,7 @@
             {
               "name": "bigInt",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37669,7 +37669,7 @@
             {
               "name": "byteA",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37679,7 +37679,7 @@
             {
               "name": "decimal",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37704,7 +37704,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Float",
                 "location": "scalar",
@@ -37739,7 +37739,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37774,7 +37774,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
@@ -37819,7 +37819,7 @@
             {
               "name": "id",
               "args": [],
-              "isNullable": false,
+              "isNullable": true,
               "outputType": {
                 "type": "Int",
                 "location": "scalar",

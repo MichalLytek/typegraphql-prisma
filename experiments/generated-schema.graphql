@@ -129,14 +129,14 @@ type Category {
 }
 
 type CategoryAvgAggregate {
-  number: Float!
+  number: Float
 }
 
 type CategoryCountAggregate {
   _all: Int!
-  name: Int
+  name: Int!
   number: Int!
-  slug: Int
+  slug: Int!
 }
 
 type CategoryGroupBy {
@@ -152,13 +152,13 @@ type CategoryGroupBy {
 
 type CategoryMaxAggregate {
   name: String
-  number: Int!
+  number: Int
   slug: String
 }
 
 type CategoryMinAggregate {
   name: String
-  number: Int!
+  number: Int
   slug: String
 }
 
@@ -195,7 +195,7 @@ input CategorySlugNumberCompoundUniqueInput {
 }
 
 type CategorySumAggregate {
-  number: Int!
+  number: Int
 }
 
 input CategoryWhereInput {
@@ -232,11 +232,11 @@ type Client {
 }
 
 type ClientAvgAggregate {
-  age: Float!
-  amount: Float!
-  balance: Float!
+  age: Float
+  amount: Float
+  balance: Float
   grades: Float
-  id: Float!
+  id: Float
 }
 
 type ClientCount {
@@ -247,14 +247,14 @@ type ClientCount {
 type ClientCountAggregate {
   _all: Int!
   age: Int!
-  aliases: Int
+  aliases: Int!
   amount: Int!
   balance: Int!
-  email: Int
-  grades: Int
+  email: Int!
+  grades: Int!
   id: Int!
-  name: Int
-  role: Int
+  name: Int!
+  role: Int!
 }
 
 input ClientCreateInput {
@@ -346,13 +346,13 @@ input ClientCreategradesInput {
 
 type ClientGroupBy {
   age: Int!
-  aliases: [String!]
+  aliases: [String!]!
   amount: Float!
   avg: ClientAvgAggregate
   balance: Float!
   count: ClientCountAggregate
   email: String!
-  grades: [Int!]
+  grades: [Int!]!
   id: Int!
   max: ClientMaxAggregate
   min: ClientMinAggregate
@@ -362,21 +362,21 @@ type ClientGroupBy {
 }
 
 type ClientMaxAggregate {
-  age: Int!
-  amount: Float!
-  balance: Float!
+  age: Int
+  amount: Float
+  balance: Float
   email: String
-  id: Int!
+  id: Int
   name: String
   role: Role
 }
 
 type ClientMinAggregate {
-  age: Int!
-  amount: Float!
-  balance: Float!
+  age: Int
+  amount: Float
+  balance: Float
   email: String
-  id: Int!
+  id: Int
   name: String
   role: Role
 }
@@ -398,8 +398,8 @@ input ClientOrderByWithRelationInput {
   age: SortOrder
   aliases: SortOrder
   amount: SortOrder
-  clientPosts: PostOrderByAggregateInput
-  editorPosts: PostOrderByAggregateInput
+  clientPosts: PostOrderByRelationAggregateInput
+  editorPosts: PostOrderByRelationAggregateInput
   email: SortOrder
   firstName: SortOrder
   grades: SortOrder
@@ -440,11 +440,11 @@ input ClientScalarWhereWithAggregatesInput {
 }
 
 type ClientSumAggregate {
-  age: Int!
-  amount: Float!
-  balance: Float!
-  grades: [Int!]
-  id: Int!
+  age: Int
+  amount: Float
+  balance: Float
+  grades: [Int!]!
+  id: Int
 }
 
 input ClientUpdateInput {
@@ -564,7 +564,7 @@ type Creator {
 }
 
 type CreatorAvgAggregate {
-  id: Float!
+  id: Float
 }
 
 type CreatorCount {
@@ -575,7 +575,7 @@ type CreatorCount {
 type CreatorCountAggregate {
   _all: Int!
   id: Int!
-  name: Int
+  name: Int!
 }
 
 input CreatorCreateInput {
@@ -638,17 +638,13 @@ input CreatorListRelationFilter {
 }
 
 type CreatorMaxAggregate {
-  id: Int!
+  id: Int
   name: String
 }
 
 type CreatorMinAggregate {
-  id: Int!
+  id: Int
   name: String
-}
-
-input CreatorOrderByAggregateInput {
-  count: SortOrder!
 }
 
 input CreatorOrderByInput {
@@ -656,11 +652,15 @@ input CreatorOrderByInput {
   name: SortOrder
 }
 
+input CreatorOrderByRelationAggregateInput {
+  count: SortOrder!
+}
+
 input CreatorOrderByWithRelationInput {
   id: SortOrder
-  likes: ProblemOrderByAggregateInput
+  likes: ProblemOrderByRelationAggregateInput
   name: SortOrder
-  problems: ProblemOrderByAggregateInput
+  problems: ProblemOrderByRelationAggregateInput
 }
 
 input CreatorRelationFilter {
@@ -690,7 +690,7 @@ input CreatorScalarWhereWithAggregatesInput {
 }
 
 type CreatorSumAggregate {
-  id: Int!
+  id: Int
 }
 
 input CreatorUpdateInput {
@@ -850,8 +850,8 @@ type DirectorCount {
 
 type DirectorCountAggregate {
   _all: Int!
-  firstName: Int
-  lastName: Int
+  firstName: Int!
+  lastName: Int!
 }
 
 input DirectorCreateInput {
@@ -912,7 +912,7 @@ input DirectorOrderByInput {
 input DirectorOrderByWithRelationInput {
   firstName: SortOrder
   lastName: SortOrder
-  movies: MovieOrderByAggregateInput
+  movies: MovieOrderByRelationAggregateInput
 }
 
 input DirectorRelationFilter {
@@ -1121,7 +1121,7 @@ input IntWithAggregatesFilter {
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
-scalar JSON
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 input JsonFilter {
   equals: JSON
@@ -1145,9 +1145,9 @@ type Movie {
 
 type MovieCountAggregate {
   _all: Int!
-  directorFirstName: Int
-  directorLastName: Int
-  title: Int
+  directorFirstName: Int!
+  directorLastName: Int!
+  title: Int!
 }
 
 input MovieCreateInput {
@@ -1219,14 +1219,14 @@ type MovieMinAggregate {
   title: String
 }
 
-input MovieOrderByAggregateInput {
-  count: SortOrder!
-}
-
 input MovieOrderByInput {
   directorFirstName: SortOrder
   directorLastName: SortOrder
   title: SortOrder
+}
+
+input MovieOrderByRelationAggregateInput {
+  count: SortOrder!
 }
 
 input MovieOrderByWithRelationInput {
@@ -1382,14 +1382,14 @@ type NativeTypeModel {
 type NativeTypeModelAvgAggregate {
   bigInt: Float
   decimal: Decimal
-  id: Float!
+  id: Float
 }
 
 type NativeTypeModelCountAggregate {
   _all: Int!
-  bigInt: Int
-  byteA: Int
-  decimal: Int
+  bigInt: Int!
+  byteA: Int!
+  decimal: Int!
   id: Int!
 }
 
@@ -1422,14 +1422,14 @@ type NativeTypeModelMaxAggregate {
   bigInt: BigInt
   byteA: Byte
   decimal: Decimal
-  id: Int!
+  id: Int
 }
 
 type NativeTypeModelMinAggregate {
   bigInt: BigInt
   byteA: Byte
   decimal: Decimal
-  id: Int!
+  id: Int
 }
 
 input NativeTypeModelOrderByInput {
@@ -1466,7 +1466,7 @@ input NativeTypeModelScalarWhereWithAggregatesInput {
 type NativeTypeModelSumAggregate {
   bigInt: BigInt
   decimal: Decimal
-  id: Int!
+  id: Int
 }
 
 input NativeTypeModelUpdateInput {
@@ -1829,9 +1829,9 @@ type Patient {
 
 type PatientCountAggregate {
   _all: Int!
-  email: Int
-  firstName: Int
-  lastName: Int
+  email: Int!
+  firstName: Int!
+  lastName: Int!
 }
 
 input PatientCreateInput {
@@ -1938,23 +1938,23 @@ type Post {
 }
 
 type PostAvgAggregate {
-  authorId: Float!
+  authorId: Float
   editorId: Float
 }
 
 type PostCountAggregate {
   _all: Int!
   authorId: Int!
-  content: Int
-  createdAt: Int
-  editorId: Int
-  kind: Int
-  metadata: Int
-  published: Int
-  subtitle: Int
-  title: Int
-  updatedAt: Int
-  uuid: Int
+  content: Int!
+  createdAt: Int!
+  editorId: Int!
+  kind: Int!
+  metadata: Int!
+  published: Int!
+  subtitle: Int!
+  title: Int!
+  updatedAt: Int!
+  uuid: Int!
 }
 
 input PostCreateInput {
@@ -2088,7 +2088,7 @@ input PostListRelationFilter {
 }
 
 type PostMaxAggregate {
-  authorId: Int!
+  authorId: Int
   content: String
   createdAt: DateTime
   editorId: Int
@@ -2101,7 +2101,7 @@ type PostMaxAggregate {
 }
 
 type PostMinAggregate {
-  authorId: Int!
+  authorId: Int
   content: String
   createdAt: DateTime
   editorId: Int
@@ -2111,10 +2111,6 @@ type PostMinAggregate {
   title: String
   updatedAt: DateTime
   uuid: String
-}
-
-input PostOrderByAggregateInput {
-  count: SortOrder!
 }
 
 input PostOrderByInput {
@@ -2129,6 +2125,10 @@ input PostOrderByInput {
   title: SortOrder
   updatedAt: SortOrder
   uuid: SortOrder
+}
+
+input PostOrderByRelationAggregateInput {
+  count: SortOrder!
 }
 
 input PostOrderByWithRelationInput {
@@ -2196,7 +2196,7 @@ input PostScalarWhereWithAggregatesInput {
 }
 
 type PostSumAggregate {
-  authorId: Int!
+  authorId: Int
   editorId: Int
 }
 
@@ -2332,7 +2332,7 @@ type Problem {
 
 type ProblemAvgAggregate {
   creatorId: Float
-  id: Float!
+  id: Float
 }
 
 type ProblemCount {
@@ -2341,9 +2341,9 @@ type ProblemCount {
 
 type ProblemCountAggregate {
   _all: Int!
-  creatorId: Int
+  creatorId: Int!
   id: Int!
-  problemText: Int
+  problemText: Int!
 }
 
 input ProblemCreateInput {
@@ -2420,18 +2420,14 @@ input ProblemListRelationFilter {
 
 type ProblemMaxAggregate {
   creatorId: Int
-  id: Int!
+  id: Int
   problemText: String
 }
 
 type ProblemMinAggregate {
   creatorId: Int
-  id: Int!
+  id: Int
   problemText: String
-}
-
-input ProblemOrderByAggregateInput {
-  count: SortOrder!
 }
 
 input ProblemOrderByInput {
@@ -2440,11 +2436,15 @@ input ProblemOrderByInput {
   problemText: SortOrder
 }
 
+input ProblemOrderByRelationAggregateInput {
+  count: SortOrder!
+}
+
 input ProblemOrderByWithRelationInput {
   creator: CreatorOrderByWithRelationInput
   creatorId: SortOrder
   id: SortOrder
-  likedBy: CreatorOrderByAggregateInput
+  likedBy: CreatorOrderByRelationAggregateInput
   problemText: SortOrder
 }
 
@@ -2474,7 +2474,7 @@ input ProblemScalarWhereWithAggregatesInput {
 
 type ProblemSumAggregate {
   creatorId: Int
-  id: Int!
+  id: Int
 }
 
 input ProblemUpdateInput {
