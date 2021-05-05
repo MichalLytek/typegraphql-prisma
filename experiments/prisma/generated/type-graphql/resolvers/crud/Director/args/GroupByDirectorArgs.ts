@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { DirectorOrderByInput } from "../../../inputs/DirectorOrderByInput";
+import { DirectorOrderByWithAggregationInput } from "../../../inputs/DirectorOrderByWithAggregationInput";
 import { DirectorScalarWhereWithAggregatesInput } from "../../../inputs/DirectorScalarWhereWithAggregatesInput";
 import { DirectorWhereInput } from "../../../inputs/DirectorWhereInput";
 import { DirectorScalarFieldEnum } from "../../../../enums/DirectorScalarFieldEnum";
@@ -12,10 +12,10 @@ export class GroupByDirectorArgs {
   })
   where?: DirectorWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [DirectorOrderByInput], {
+  @TypeGraphQL.Field(_type => [DirectorOrderByWithAggregationInput], {
     nullable: true
   })
-  orderBy?: DirectorOrderByInput[] | undefined;
+  orderBy?: DirectorOrderByWithAggregationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [DirectorScalarFieldEnum], {
     nullable: false

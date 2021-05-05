@@ -1244,7 +1244,7 @@ export namespace Prisma {
     
   export type UserGroupByArgs = {
     where?: UserWhereInput
-    orderBy?: Enumerable<UserOrderByInput>
+    orderBy?: Enumerable<UserOrderByWithAggregationInput>
     by: Array<UserScalarFieldEnum>
     having?: UserScalarWhereWithAggregatesInput
     take?: number
@@ -2138,7 +2138,7 @@ export namespace Prisma {
     
   export type PostGroupByArgs = {
     where?: postWhereInput
-    orderBy?: Enumerable<postOrderByInput>
+    orderBy?: Enumerable<postOrderByWithAggregationInput>
     by: Array<PostScalarFieldEnum>
     having?: postScalarWhereWithAggregatesInput
     take?: number
@@ -2982,7 +2982,7 @@ export namespace Prisma {
     
   export type CategoryGroupByArgs = {
     where?: CategoryWhereInput
-    orderBy?: Enumerable<CategoryOrderByInput>
+    orderBy?: Enumerable<CategoryOrderByWithAggregationInput>
     by: Array<CategoryScalarFieldEnum>
     having?: CategoryScalarWhereWithAggregatesInput
     take?: number
@@ -3729,7 +3729,7 @@ export namespace Prisma {
     
   export type PatientGroupByArgs = {
     where?: PatientWhereInput
-    orderBy?: Enumerable<PatientOrderByInput>
+    orderBy?: Enumerable<PatientOrderByWithAggregationInput>
     by: Array<PatientScalarFieldEnum>
     having?: PatientScalarWhereWithAggregatesInput
     take?: number
@@ -4472,7 +4472,7 @@ export namespace Prisma {
     
   export type MovieGroupByArgs = {
     where?: MovieWhereInput
-    orderBy?: Enumerable<MovieOrderByInput>
+    orderBy?: Enumerable<MovieOrderByWithAggregationInput>
     by: Array<MovieScalarFieldEnum>
     having?: MovieScalarWhereWithAggregatesInput
     take?: number
@@ -5252,7 +5252,7 @@ export namespace Prisma {
     
   export type DirectorGroupByArgs = {
     where?: DirectorWhereInput
-    orderBy?: Enumerable<DirectorOrderByInput>
+    orderBy?: Enumerable<DirectorOrderByWithAggregationInput>
     by: Array<DirectorScalarFieldEnum>
     having?: DirectorScalarWhereWithAggregatesInput
     take?: number
@@ -6076,7 +6076,7 @@ export namespace Prisma {
     
   export type ProblemGroupByArgs = {
     where?: ProblemWhereInput
-    orderBy?: Enumerable<ProblemOrderByInput>
+    orderBy?: Enumerable<ProblemOrderByWithAggregationInput>
     by: Array<ProblemScalarFieldEnum>
     having?: ProblemScalarWhereWithAggregatesInput
     take?: number
@@ -6904,7 +6904,7 @@ export namespace Prisma {
     
   export type CreatorGroupByArgs = {
     where?: CreatorWhereInput
-    orderBy?: Enumerable<CreatorOrderByInput>
+    orderBy?: Enumerable<CreatorOrderByWithAggregationInput>
     by: Array<CreatorScalarFieldEnum>
     having?: CreatorScalarWhereWithAggregatesInput
     take?: number
@@ -7750,7 +7750,7 @@ export namespace Prisma {
     
   export type NativeTypeModelGroupByArgs = {
     where?: NativeTypeModelWhereInput
-    orderBy?: Enumerable<NativeTypeModelOrderByInput>
+    orderBy?: Enumerable<NativeTypeModelOrderByWithAggregationInput>
     by: Array<NativeTypeModelScalarFieldEnum>
     having?: NativeTypeModelScalarWhereWithAggregatesInput
     take?: number
@@ -8545,7 +8545,7 @@ export namespace Prisma {
     email?: string
   }
 
-  export type UserOrderByInput = {
+  export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
     name?: SortOrder
@@ -8555,6 +8555,11 @@ export namespace Prisma {
     role?: SortOrder
     grades?: SortOrder
     aliases?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -8611,7 +8616,7 @@ export namespace Prisma {
     uuid?: string
   }
 
-  export type postOrderByInput = {
+  export type postOrderByWithAggregationInput = {
     uuid?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8623,6 +8628,11 @@ export namespace Prisma {
     editorId?: SortOrder
     kind?: SortOrder
     metadata?: SortOrder
+    _count?: postCountOrderByAggregateInput
+    _avg?: postAvgOrderByAggregateInput
+    _max?: postMaxOrderByAggregateInput
+    _min?: postMinOrderByAggregateInput
+    _sum?: postSumOrderByAggregateInput
   }
 
   export type postScalarWhereWithAggregatesInput = {
@@ -8661,10 +8671,15 @@ export namespace Prisma {
     slug_number?: CategorySlugNumberCompoundUniqueInput
   }
 
-  export type CategoryOrderByInput = {
+  export type CategoryOrderByWithAggregationInput = {
     name?: SortOrder
     slug?: SortOrder
     number?: SortOrder
+    _count?: CategoryCountOrderByAggregateInput
+    _avg?: CategoryAvgOrderByAggregateInput
+    _max?: CategoryMaxOrderByAggregateInput
+    _min?: CategoryMinOrderByAggregateInput
+    _sum?: CategorySumOrderByAggregateInput
   }
 
   export type CategoryScalarWhereWithAggregatesInput = {
@@ -8695,10 +8710,13 @@ export namespace Prisma {
     firstName_lastName?: PatientFirstNameLastNameCompoundUniqueInput
   }
 
-  export type PatientOrderByInput = {
+  export type PatientOrderByWithAggregationInput = {
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
+    _count?: PatientCountOrderByAggregateInput
+    _max?: PatientMaxOrderByAggregateInput
+    _min?: PatientMinOrderByAggregateInput
   }
 
   export type PatientScalarWhereWithAggregatesInput = {
@@ -8731,10 +8749,13 @@ export namespace Prisma {
     directorFirstName_directorLastName_title?: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
   }
 
-  export type MovieOrderByInput = {
+  export type MovieOrderByWithAggregationInput = {
     directorFirstName?: SortOrder
     directorLastName?: SortOrder
     title?: SortOrder
+    _count?: MovieCountOrderByAggregateInput
+    _max?: MovieMaxOrderByAggregateInput
+    _min?: MovieMinOrderByAggregateInput
   }
 
   export type MovieScalarWhereWithAggregatesInput = {
@@ -8765,9 +8786,12 @@ export namespace Prisma {
     firstName_lastName?: DirectorFirstNameLastNameCompoundUniqueInput
   }
 
-  export type DirectorOrderByInput = {
+  export type DirectorOrderByWithAggregationInput = {
     firstName?: SortOrder
     lastName?: SortOrder
+    _count?: DirectorCountOrderByAggregateInput
+    _max?: DirectorMaxOrderByAggregateInput
+    _min?: DirectorMinOrderByAggregateInput
   }
 
   export type DirectorScalarWhereWithAggregatesInput = {
@@ -8801,10 +8825,15 @@ export namespace Prisma {
     id?: number
   }
 
-  export type ProblemOrderByInput = {
+  export type ProblemOrderByWithAggregationInput = {
     id?: SortOrder
     problemText?: SortOrder
     creatorId?: SortOrder
+    _count?: ProblemCountOrderByAggregateInput
+    _avg?: ProblemAvgOrderByAggregateInput
+    _max?: ProblemMaxOrderByAggregateInput
+    _min?: ProblemMinOrderByAggregateInput
+    _sum?: ProblemSumOrderByAggregateInput
   }
 
   export type ProblemScalarWhereWithAggregatesInput = {
@@ -8837,9 +8866,14 @@ export namespace Prisma {
     id?: number
   }
 
-  export type CreatorOrderByInput = {
+  export type CreatorOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    _count?: CreatorCountOrderByAggregateInput
+    _avg?: CreatorAvgOrderByAggregateInput
+    _max?: CreatorMaxOrderByAggregateInput
+    _min?: CreatorMinOrderByAggregateInput
+    _sum?: CreatorSumOrderByAggregateInput
   }
 
   export type CreatorScalarWhereWithAggregatesInput = {
@@ -8871,11 +8905,16 @@ export namespace Prisma {
     id?: number
   }
 
-  export type NativeTypeModelOrderByInput = {
+  export type NativeTypeModelOrderByWithAggregationInput = {
     id?: SortOrder
     bigInt?: SortOrder
     byteA?: SortOrder
     decimal?: SortOrder
+    _count?: NativeTypeModelCountOrderByAggregateInput
+    _avg?: NativeTypeModelAvgOrderByAggregateInput
+    _max?: NativeTypeModelMaxOrderByAggregateInput
+    _min?: NativeTypeModelMinOrderByAggregateInput
+    _sum?: NativeTypeModelSumOrderByAggregateInput
   }
 
   export type NativeTypeModelScalarWhereWithAggregatesInput = {
@@ -9443,6 +9482,54 @@ export namespace Prisma {
     count: SortOrder
   }
 
+  export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    age?: SortOrder
+    balance?: SortOrder
+    amount?: SortOrder
+    role?: SortOrder
+    grades?: SortOrder
+    aliases?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    id?: SortOrder
+    age?: SortOrder
+    balance?: SortOrder
+    amount?: SortOrder
+    grades?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    age?: SortOrder
+    balance?: SortOrder
+    amount?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    age?: SortOrder
+    balance?: SortOrder
+    amount?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    id?: SortOrder
+    age?: SortOrder
+    balance?: SortOrder
+    amount?: SortOrder
+    grades?: SortOrder
+  }
+
   export type IntWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -9565,6 +9652,56 @@ export namespace Prisma {
     not?: InputJsonValue
   }
 
+  export type postCountOrderByAggregateInput = {
+    uuid?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    published?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    editorId?: SortOrder
+    kind?: SortOrder
+    metadata?: SortOrder
+  }
+
+  export type postAvgOrderByAggregateInput = {
+    authorId?: SortOrder
+    editorId?: SortOrder
+  }
+
+  export type postMaxOrderByAggregateInput = {
+    uuid?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    published?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    editorId?: SortOrder
+    kind?: SortOrder
+  }
+
+  export type postMinOrderByAggregateInput = {
+    uuid?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    published?: SortOrder
+    title?: SortOrder
+    subtitle?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    editorId?: SortOrder
+    kind?: SortOrder
+  }
+
+  export type postSumOrderByAggregateInput = {
+    authorId?: SortOrder
+    editorId?: SortOrder
+  }
+
   export type DateTimeWithAggregatesFilter = {
     equals?: Date | string
     in?: Enumerable<Date> | Enumerable<string>
@@ -9626,9 +9763,53 @@ export namespace Prisma {
     number: number
   }
 
+  export type CategoryCountOrderByAggregateInput = {
+    name?: SortOrder
+    slug?: SortOrder
+    number?: SortOrder
+  }
+
+  export type CategoryAvgOrderByAggregateInput = {
+    number?: SortOrder
+  }
+
+  export type CategoryMaxOrderByAggregateInput = {
+    name?: SortOrder
+    slug?: SortOrder
+    number?: SortOrder
+  }
+
+  export type CategoryMinOrderByAggregateInput = {
+    name?: SortOrder
+    slug?: SortOrder
+    number?: SortOrder
+  }
+
+  export type CategorySumOrderByAggregateInput = {
+    number?: SortOrder
+  }
+
   export type PatientFirstNameLastNameCompoundUniqueInput = {
     firstName: string
     lastName: string
+  }
+
+  export type PatientCountOrderByAggregateInput = {
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+  }
+
+  export type PatientMaxOrderByAggregateInput = {
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+  }
+
+  export type PatientMinOrderByAggregateInput = {
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
   }
 
   export type DirectorRelationFilter = {
@@ -9640,6 +9821,24 @@ export namespace Prisma {
     directorFirstName: string
     directorLastName: string
     title: string
+  }
+
+  export type MovieCountOrderByAggregateInput = {
+    directorFirstName?: SortOrder
+    directorLastName?: SortOrder
+    title?: SortOrder
+  }
+
+  export type MovieMaxOrderByAggregateInput = {
+    directorFirstName?: SortOrder
+    directorLastName?: SortOrder
+    title?: SortOrder
+  }
+
+  export type MovieMinOrderByAggregateInput = {
+    directorFirstName?: SortOrder
+    directorLastName?: SortOrder
+    title?: SortOrder
   }
 
   export type MovieListRelationFilter = {
@@ -9657,6 +9856,21 @@ export namespace Prisma {
     lastName: string
   }
 
+  export type DirectorCountOrderByAggregateInput = {
+    firstName?: SortOrder
+    lastName?: SortOrder
+  }
+
+  export type DirectorMaxOrderByAggregateInput = {
+    firstName?: SortOrder
+    lastName?: SortOrder
+  }
+
+  export type DirectorMinOrderByAggregateInput = {
+    firstName?: SortOrder
+    lastName?: SortOrder
+  }
+
   export type CreatorListRelationFilter = {
     every?: CreatorWhereInput
     some?: CreatorWhereInput
@@ -9672,6 +9886,34 @@ export namespace Prisma {
     count: SortOrder
   }
 
+  export type ProblemCountOrderByAggregateInput = {
+    id?: SortOrder
+    problemText?: SortOrder
+    creatorId?: SortOrder
+  }
+
+  export type ProblemAvgOrderByAggregateInput = {
+    id?: SortOrder
+    creatorId?: SortOrder
+  }
+
+  export type ProblemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    problemText?: SortOrder
+    creatorId?: SortOrder
+  }
+
+  export type ProblemMinOrderByAggregateInput = {
+    id?: SortOrder
+    problemText?: SortOrder
+    creatorId?: SortOrder
+  }
+
+  export type ProblemSumOrderByAggregateInput = {
+    id?: SortOrder
+    creatorId?: SortOrder
+  }
+
   export type ProblemListRelationFilter = {
     every?: ProblemWhereInput
     some?: ProblemWhereInput
@@ -9680,6 +9922,29 @@ export namespace Prisma {
 
   export type ProblemOrderByRelationAggregateInput = {
     count: SortOrder
+  }
+
+  export type CreatorCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type CreatorAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type CreatorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type CreatorMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type CreatorSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type BigIntNullableFilter = {
@@ -9707,6 +9972,39 @@ export namespace Prisma {
     gt?: Decimal | number | string
     gte?: Decimal | number | string
     not?: NestedDecimalNullableFilter | Decimal | number | string | null
+  }
+
+  export type NativeTypeModelCountOrderByAggregateInput = {
+    id?: SortOrder
+    bigInt?: SortOrder
+    byteA?: SortOrder
+    decimal?: SortOrder
+  }
+
+  export type NativeTypeModelAvgOrderByAggregateInput = {
+    id?: SortOrder
+    bigInt?: SortOrder
+    decimal?: SortOrder
+  }
+
+  export type NativeTypeModelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    bigInt?: SortOrder
+    byteA?: SortOrder
+    decimal?: SortOrder
+  }
+
+  export type NativeTypeModelMinOrderByAggregateInput = {
+    id?: SortOrder
+    bigInt?: SortOrder
+    byteA?: SortOrder
+    decimal?: SortOrder
+  }
+
+  export type NativeTypeModelSumOrderByAggregateInput = {
+    id?: SortOrder
+    bigInt?: SortOrder
+    decimal?: SortOrder
   }
 
   export type BigIntNullableWithAggregatesFilter = {

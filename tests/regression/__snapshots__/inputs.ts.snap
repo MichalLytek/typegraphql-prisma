@@ -4520,6 +4520,297 @@ export { NullableDecimalFieldUpdateOperationsInput } from \\"./NullableDecimalFi
 "
 `;
 
+exports[`inputs when \`orderByAggregateGroup\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: SampleAvgOrderByAggregateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SampleAvgOrderByAggregateInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  idField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  floatField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  intField?: \\"asc\\" | \\"desc\\" | undefined;
+}
+"
+`;
+
+exports[`inputs when \`orderByAggregateGroup\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: SampleCountOrderByAggregateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SampleCountOrderByAggregateInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  idField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  stringField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  floatField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  intField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  booleanField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  dateField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  jsonField?: \\"asc\\" | \\"desc\\" | undefined;
+}
+"
+`;
+
+exports[`inputs when \`orderByAggregateGroup\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: SampleMaxOrderByAggregateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SampleMaxOrderByAggregateInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  idField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  stringField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  floatField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  intField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  booleanField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  dateField?: \\"asc\\" | \\"desc\\" | undefined;
+}
+"
+`;
+
+exports[`inputs when \`orderByAggregateGroup\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: SampleMinOrderByAggregateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SampleMinOrderByAggregateInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  idField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  stringField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  floatField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  intField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  booleanField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  dateField?: \\"asc\\" | \\"desc\\" | undefined;
+}
+"
+`;
+
+exports[`inputs when \`orderByAggregateGroup\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: SampleOrderByWithAggregationInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SampleAvgOrderByAggregateInput } from \\"../inputs/SampleAvgOrderByAggregateInput\\";
+import { SampleCountOrderByAggregateInput } from \\"../inputs/SampleCountOrderByAggregateInput\\";
+import { SampleMaxOrderByAggregateInput } from \\"../inputs/SampleMaxOrderByAggregateInput\\";
+import { SampleMinOrderByAggregateInput } from \\"../inputs/SampleMinOrderByAggregateInput\\";
+import { SampleSumOrderByAggregateInput } from \\"../inputs/SampleSumOrderByAggregateInput\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class SampleOrderByWithAggregationInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  idField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  stringField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  floatField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  intField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  booleanField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  dateField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  jsonField?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SampleCountOrderByAggregateInput, {
+    nullable: true
+  })
+  _count?: SampleCountOrderByAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => SampleAvgOrderByAggregateInput, {
+    nullable: true
+  })
+  _avg?: SampleAvgOrderByAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => SampleMaxOrderByAggregateInput, {
+    nullable: true
+  })
+  _max?: SampleMaxOrderByAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => SampleMinOrderByAggregateInput, {
+    nullable: true
+  })
+  _min?: SampleMinOrderByAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => SampleSumOrderByAggregateInput, {
+    nullable: true
+  })
+  _sum?: SampleSumOrderByAggregateInput | undefined;
+}
+"
+`;
+
+exports[`inputs when \`orderByAggregateGroup\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: index 1`] = `
+"export { BoolFieldUpdateOperationsInput } from \\"./BoolFieldUpdateOperationsInput\\";
+export { BoolFilter } from \\"./BoolFilter\\";
+export { BoolWithAggregatesFilter } from \\"./BoolWithAggregatesFilter\\";
+export { DateTimeFieldUpdateOperationsInput } from \\"./DateTimeFieldUpdateOperationsInput\\";
+export { DateTimeFilter } from \\"./DateTimeFilter\\";
+export { DateTimeWithAggregatesFilter } from \\"./DateTimeWithAggregatesFilter\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { FloatWithAggregatesFilter } from \\"./FloatWithAggregatesFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { IntWithAggregatesFilter } from \\"./IntWithAggregatesFilter\\";
+export { JsonFilter } from \\"./JsonFilter\\";
+export { JsonWithAggregatesFilter } from \\"./JsonWithAggregatesFilter\\";
+export { NestedBoolFilter } from \\"./NestedBoolFilter\\";
+export { NestedBoolWithAggregatesFilter } from \\"./NestedBoolWithAggregatesFilter\\";
+export { NestedDateTimeFilter } from \\"./NestedDateTimeFilter\\";
+export { NestedDateTimeWithAggregatesFilter } from \\"./NestedDateTimeWithAggregatesFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedFloatWithAggregatesFilter } from \\"./NestedFloatWithAggregatesFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedIntWithAggregatesFilter } from \\"./NestedIntWithAggregatesFilter\\";
+export { NestedJsonFilter } from \\"./NestedJsonFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { NestedStringWithAggregatesFilter } from \\"./NestedStringWithAggregatesFilter\\";
+export { SampleAvgOrderByAggregateInput } from \\"./SampleAvgOrderByAggregateInput\\";
+export { SampleCountOrderByAggregateInput } from \\"./SampleCountOrderByAggregateInput\\";
+export { SampleCreateInput } from \\"./SampleCreateInput\\";
+export { SampleCreateManyInput } from \\"./SampleCreateManyInput\\";
+export { SampleMaxOrderByAggregateInput } from \\"./SampleMaxOrderByAggregateInput\\";
+export { SampleMinOrderByAggregateInput } from \\"./SampleMinOrderByAggregateInput\\";
+export { SampleOrderByInput } from \\"./SampleOrderByInput\\";
+export { SampleOrderByWithAggregationInput } from \\"./SampleOrderByWithAggregationInput\\";
+export { SampleScalarWhereWithAggregatesInput } from \\"./SampleScalarWhereWithAggregatesInput\\";
+export { SampleSumOrderByAggregateInput } from \\"./SampleSumOrderByAggregateInput\\";
+export { SampleUpdateInput } from \\"./SampleUpdateInput\\";
+export { SampleUpdateManyMutationInput } from \\"./SampleUpdateManyMutationInput\\";
+export { SampleWhereInput } from \\"./SampleWhereInput\\";
+export { SampleWhereUniqueInput } from \\"./SampleWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+export { StringWithAggregatesFilter } from \\"./StringWithAggregatesFilter\\";
+"
+`;
+
 exports[`inputs when \`orderByRelation\` preview feature is enabled should properly generate input type classes for sorting by many-to-many relation fields: FirstModelOrderByWithRelationInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

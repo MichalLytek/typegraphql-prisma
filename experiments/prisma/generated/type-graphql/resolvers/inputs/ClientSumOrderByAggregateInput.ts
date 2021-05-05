@@ -7,18 +7,11 @@ import { SortOrder } from "../../enums/SortOrder";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class ClientOrderByInput {
+export class ClientSumOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   id?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  email?: "asc" | "desc" | undefined;
-
-  name?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -35,28 +28,7 @@ export class ClientOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  role?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
   grades?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  aliases?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  get firstName() {
-    return this.name;
-  }
-
-  set firstName(name: "asc" | "desc" | undefined) {
-    this.name = name;
-  }
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

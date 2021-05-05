@@ -1278,6 +1278,49 @@ export class UserCrudResolver {
 "
 `;
 
+exports[`crud when \`orderByAggregateGroup\` preview feature is enabled should properly generate args classes for group by action using aggregate input: GroupBySampleArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { SampleOrderByWithAggregationInput } from \\"../../../inputs/SampleOrderByWithAggregationInput\\";
+import { SampleScalarWhereWithAggregatesInput } from \\"../../../inputs/SampleScalarWhereWithAggregatesInput\\";
+import { SampleWhereInput } from \\"../../../inputs/SampleWhereInput\\";
+import { SampleScalarFieldEnum } from \\"../../../../enums/SampleScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class GroupBySampleArgs {
+  @TypeGraphQL.Field(_type => SampleWhereInput, {
+    nullable: true
+  })
+  where?: SampleWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleOrderByWithAggregationInput], {
+    nullable: true
+  })
+  orderBy?: SampleOrderByWithAggregationInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleScalarFieldEnum], {
+    nullable: false
+  })
+  by!: Array<\\"idField\\" | \\"stringField\\" | \\"floatField\\" | \\"intField\\" | \\"booleanField\\" | \\"dateField\\" | \\"jsonField\\">;
+
+  @TypeGraphQL.Field(_type => SampleScalarWhereWithAggregatesInput, {
+    nullable: true
+  })
+  having?: SampleScalarWhereWithAggregatesInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+}
+"
+`;
+
 exports[`crud when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by many-to-many relation fields: AggregateFirstModelArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

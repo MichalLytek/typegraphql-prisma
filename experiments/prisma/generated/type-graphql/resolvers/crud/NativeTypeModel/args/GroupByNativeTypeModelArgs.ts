@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { NativeTypeModelOrderByInput } from "../../../inputs/NativeTypeModelOrderByInput";
+import { NativeTypeModelOrderByWithAggregationInput } from "../../../inputs/NativeTypeModelOrderByWithAggregationInput";
 import { NativeTypeModelScalarWhereWithAggregatesInput } from "../../../inputs/NativeTypeModelScalarWhereWithAggregatesInput";
 import { NativeTypeModelWhereInput } from "../../../inputs/NativeTypeModelWhereInput";
 import { NativeTypeModelScalarFieldEnum } from "../../../../enums/NativeTypeModelScalarFieldEnum";
@@ -12,10 +12,10 @@ export class GroupByNativeTypeModelArgs {
   })
   where?: NativeTypeModelWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [NativeTypeModelOrderByInput], {
+  @TypeGraphQL.Field(_type => [NativeTypeModelOrderByWithAggregationInput], {
     nullable: true
   })
-  orderBy?: NativeTypeModelOrderByInput[] | undefined;
+  orderBy?: NativeTypeModelOrderByWithAggregationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [NativeTypeModelScalarFieldEnum], {
     nullable: false

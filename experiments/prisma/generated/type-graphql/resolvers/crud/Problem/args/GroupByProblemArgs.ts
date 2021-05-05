@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { ProblemOrderByInput } from "../../../inputs/ProblemOrderByInput";
+import { ProblemOrderByWithAggregationInput } from "../../../inputs/ProblemOrderByWithAggregationInput";
 import { ProblemScalarWhereWithAggregatesInput } from "../../../inputs/ProblemScalarWhereWithAggregatesInput";
 import { ProblemWhereInput } from "../../../inputs/ProblemWhereInput";
 import { ProblemScalarFieldEnum } from "../../../../enums/ProblemScalarFieldEnum";
@@ -12,10 +12,10 @@ export class GroupByProblemArgs {
   })
   where?: ProblemWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemOrderByInput], {
+  @TypeGraphQL.Field(_type => [ProblemOrderByWithAggregationInput], {
     nullable: true
   })
-  orderBy?: ProblemOrderByInput[] | undefined;
+  orderBy?: ProblemOrderByWithAggregationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemScalarFieldEnum], {
     nullable: false

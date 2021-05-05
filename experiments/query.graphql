@@ -318,3 +318,22 @@ query CountByRelations {
     }
   }
 }
+
+query OrderByRelation {
+  clients(orderBy: { clientPosts: { count: desc } }) {
+    id
+    email
+    _count {
+      posts
+    }
+  }
+}
+
+query OrderByAggregateGroup {
+  groupByPost(by: published, orderBy: { published: desc }) {
+    published
+    count {
+      published
+    }
+  }
+}

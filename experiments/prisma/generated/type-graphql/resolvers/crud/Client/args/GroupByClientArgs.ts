@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { ClientOrderByInput } from "../../../inputs/ClientOrderByInput";
+import { ClientOrderByWithAggregationInput } from "../../../inputs/ClientOrderByWithAggregationInput";
 import { ClientScalarWhereWithAggregatesInput } from "../../../inputs/ClientScalarWhereWithAggregatesInput";
 import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 import { ClientScalarFieldEnum } from "../../../../enums/ClientScalarFieldEnum";
@@ -12,10 +12,10 @@ export class GroupByClientArgs {
   })
   where?: ClientWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ClientOrderByInput], {
+  @TypeGraphQL.Field(_type => [ClientOrderByWithAggregationInput], {
     nullable: true
   })
-  orderBy?: ClientOrderByInput[] | undefined;
+  orderBy?: ClientOrderByWithAggregationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ClientScalarFieldEnum], {
     nullable: false

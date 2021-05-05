@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { MovieOrderByInput } from "../../../inputs/MovieOrderByInput";
+import { MovieOrderByWithAggregationInput } from "../../../inputs/MovieOrderByWithAggregationInput";
 import { MovieScalarWhereWithAggregatesInput } from "../../../inputs/MovieScalarWhereWithAggregatesInput";
 import { MovieWhereInput } from "../../../inputs/MovieWhereInput";
 import { MovieScalarFieldEnum } from "../../../../enums/MovieScalarFieldEnum";
@@ -12,10 +12,10 @@ export class GroupByMovieArgs {
   })
   where?: MovieWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [MovieOrderByInput], {
+  @TypeGraphQL.Field(_type => [MovieOrderByWithAggregationInput], {
     nullable: true
   })
-  orderBy?: MovieOrderByInput[] | undefined;
+  orderBy?: MovieOrderByWithAggregationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieScalarFieldEnum], {
     nullable: false

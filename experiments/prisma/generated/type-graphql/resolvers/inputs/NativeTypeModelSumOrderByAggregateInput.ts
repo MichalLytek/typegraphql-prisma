@@ -7,7 +7,7 @@ import { SortOrder } from "../../enums/SortOrder";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class NativeTypeModelOrderByInput {
+export class NativeTypeModelSumOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -17,11 +17,6 @@ export class NativeTypeModelOrderByInput {
     nullable: true
   })
   bigInt?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  byteA?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

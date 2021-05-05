@@ -7,14 +7,14 @@ import { SortOrder } from "../../enums/SortOrder";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class CreatorOrderByInput {
+export class PostSumOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  id?: "asc" | "desc" | undefined;
+  authorId?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  name?: "asc" | "desc" | undefined;
+  editorId?: "asc" | "desc" | undefined;
 }

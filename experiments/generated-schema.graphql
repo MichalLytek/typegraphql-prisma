@@ -132,11 +132,21 @@ type CategoryAvgAggregate {
   number: Float
 }
 
+input CategoryAvgOrderByAggregateInput {
+  number: SortOrder
+}
+
 type CategoryCountAggregate {
   _all: Int!
   name: Int!
   number: Int!
   slug: Int!
+}
+
+input CategoryCountOrderByAggregateInput {
+  name: SortOrder
+  number: SortOrder
+  slug: SortOrder
 }
 
 type CategoryGroupBy {
@@ -156,13 +166,30 @@ type CategoryMaxAggregate {
   slug: String
 }
 
+input CategoryMaxOrderByAggregateInput {
+  name: SortOrder
+  number: SortOrder
+  slug: SortOrder
+}
+
 type CategoryMinAggregate {
   name: String
   number: Int
   slug: String
 }
 
-input CategoryOrderByInput {
+input CategoryMinOrderByAggregateInput {
+  name: SortOrder
+  number: SortOrder
+  slug: SortOrder
+}
+
+input CategoryOrderByWithAggregationInput {
+  _avg: CategoryAvgOrderByAggregateInput
+  _count: CategoryCountOrderByAggregateInput
+  _max: CategoryMaxOrderByAggregateInput
+  _min: CategoryMinOrderByAggregateInput
+  _sum: CategorySumOrderByAggregateInput
   name: SortOrder
   number: SortOrder
   slug: SortOrder
@@ -196,6 +223,10 @@ input CategorySlugNumberCompoundUniqueInput {
 
 type CategorySumAggregate {
   number: Int
+}
+
+input CategorySumOrderByAggregateInput {
+  number: SortOrder
 }
 
 input CategoryWhereInput {
@@ -239,6 +270,14 @@ type ClientAvgAggregate {
   id: Float
 }
 
+input ClientAvgOrderByAggregateInput {
+  accountBalance: SortOrder
+  age: SortOrder
+  amount: SortOrder
+  grades: SortOrder
+  id: SortOrder
+}
+
 type ClientCount {
   editorPosts: Int!
   posts: Int!
@@ -255,6 +294,18 @@ type ClientCountAggregate {
   id: Int!
   name: Int!
   role: Int!
+}
+
+input ClientCountOrderByAggregateInput {
+  accountBalance: SortOrder
+  age: SortOrder
+  aliases: SortOrder
+  amount: SortOrder
+  email: SortOrder
+  firstName: SortOrder
+  grades: SortOrder
+  id: SortOrder
+  role: SortOrder
 }
 
 input ClientCreateInput {
@@ -371,6 +422,16 @@ type ClientMaxAggregate {
   role: Role
 }
 
+input ClientMaxOrderByAggregateInput {
+  accountBalance: SortOrder
+  age: SortOrder
+  amount: SortOrder
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  role: SortOrder
+}
+
 type ClientMinAggregate {
   age: Int
   amount: Float
@@ -381,7 +442,22 @@ type ClientMinAggregate {
   role: Role
 }
 
-input ClientOrderByInput {
+input ClientMinOrderByAggregateInput {
+  accountBalance: SortOrder
+  age: SortOrder
+  amount: SortOrder
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  role: SortOrder
+}
+
+input ClientOrderByWithAggregationInput {
+  _avg: ClientAvgOrderByAggregateInput
+  _count: ClientCountOrderByAggregateInput
+  _max: ClientMaxOrderByAggregateInput
+  _min: ClientMinOrderByAggregateInput
+  _sum: ClientSumOrderByAggregateInput
   accountBalance: SortOrder
   age: SortOrder
   aliases: SortOrder
@@ -445,6 +521,14 @@ type ClientSumAggregate {
   balance: Float
   grades: [Int!]!
   id: Int
+}
+
+input ClientSumOrderByAggregateInput {
+  accountBalance: SortOrder
+  age: SortOrder
+  amount: SortOrder
+  grades: SortOrder
+  id: SortOrder
 }
 
 input ClientUpdateInput {
@@ -567,6 +651,10 @@ type CreatorAvgAggregate {
   id: Float
 }
 
+input CreatorAvgOrderByAggregateInput {
+  id: SortOrder
+}
+
 type CreatorCount {
   likes: Int!
   problems: Int!
@@ -576,6 +664,11 @@ type CreatorCountAggregate {
   _all: Int!
   id: Int!
   name: Int!
+}
+
+input CreatorCountOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
 }
 
 input CreatorCreateInput {
@@ -642,18 +735,33 @@ type CreatorMaxAggregate {
   name: String
 }
 
+input CreatorMaxOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
+}
+
 type CreatorMinAggregate {
   id: Int
   name: String
 }
 
-input CreatorOrderByInput {
+input CreatorMinOrderByAggregateInput {
   id: SortOrder
   name: SortOrder
 }
 
 input CreatorOrderByRelationAggregateInput {
   count: SortOrder!
+}
+
+input CreatorOrderByWithAggregationInput {
+  _avg: CreatorAvgOrderByAggregateInput
+  _count: CreatorCountOrderByAggregateInput
+  _max: CreatorMaxOrderByAggregateInput
+  _min: CreatorMinOrderByAggregateInput
+  _sum: CreatorSumOrderByAggregateInput
+  id: SortOrder
+  name: SortOrder
 }
 
 input CreatorOrderByWithRelationInput {
@@ -691,6 +799,10 @@ input CreatorScalarWhereWithAggregatesInput {
 
 type CreatorSumAggregate {
   id: Int
+}
+
+input CreatorSumOrderByAggregateInput {
+  id: SortOrder
 }
 
 input CreatorUpdateInput {
@@ -854,6 +966,11 @@ type DirectorCountAggregate {
   lastName: Int!
 }
 
+input DirectorCountOrderByAggregateInput {
+  firstName: SortOrder
+  lastName: SortOrder
+}
+
 input DirectorCreateInput {
   firstName: String!
   lastName: String!
@@ -899,12 +1016,25 @@ type DirectorMaxAggregate {
   lastName: String
 }
 
+input DirectorMaxOrderByAggregateInput {
+  firstName: SortOrder
+  lastName: SortOrder
+}
+
 type DirectorMinAggregate {
   firstName: String
   lastName: String
 }
 
-input DirectorOrderByInput {
+input DirectorMinOrderByAggregateInput {
+  firstName: SortOrder
+  lastName: SortOrder
+}
+
+input DirectorOrderByWithAggregationInput {
+  _count: DirectorCountOrderByAggregateInput
+  _max: DirectorMaxOrderByAggregateInput
+  _min: DirectorMinOrderByAggregateInput
   firstName: SortOrder
   lastName: SortOrder
 }
@@ -1150,6 +1280,12 @@ type MovieCountAggregate {
   title: Int!
 }
 
+input MovieCountOrderByAggregateInput {
+  directorFirstName: SortOrder
+  directorLastName: SortOrder
+  title: SortOrder
+}
+
 input MovieCreateInput {
   director: DirectorCreateNestedOneWithoutMoviesInput!
   title: String!
@@ -1213,13 +1349,19 @@ type MovieMaxAggregate {
   title: String
 }
 
+input MovieMaxOrderByAggregateInput {
+  directorFirstName: SortOrder
+  directorLastName: SortOrder
+  title: SortOrder
+}
+
 type MovieMinAggregate {
   directorFirstName: String
   directorLastName: String
   title: String
 }
 
-input MovieOrderByInput {
+input MovieMinOrderByAggregateInput {
   directorFirstName: SortOrder
   directorLastName: SortOrder
   title: SortOrder
@@ -1227,6 +1369,15 @@ input MovieOrderByInput {
 
 input MovieOrderByRelationAggregateInput {
   count: SortOrder!
+}
+
+input MovieOrderByWithAggregationInput {
+  _count: MovieCountOrderByAggregateInput
+  _max: MovieMaxOrderByAggregateInput
+  _min: MovieMinOrderByAggregateInput
+  directorFirstName: SortOrder
+  directorLastName: SortOrder
+  title: SortOrder
 }
 
 input MovieOrderByWithRelationInput {
@@ -1385,12 +1536,25 @@ type NativeTypeModelAvgAggregate {
   id: Float
 }
 
+input NativeTypeModelAvgOrderByAggregateInput {
+  bigInt: SortOrder
+  decimal: SortOrder
+  id: SortOrder
+}
+
 type NativeTypeModelCountAggregate {
   _all: Int!
   bigInt: Int!
   byteA: Int!
   decimal: Int!
   id: Int!
+}
+
+input NativeTypeModelCountOrderByAggregateInput {
+  bigInt: SortOrder
+  byteA: SortOrder
+  decimal: SortOrder
+  id: SortOrder
 }
 
 input NativeTypeModelCreateInput {
@@ -1425,6 +1589,13 @@ type NativeTypeModelMaxAggregate {
   id: Int
 }
 
+input NativeTypeModelMaxOrderByAggregateInput {
+  bigInt: SortOrder
+  byteA: SortOrder
+  decimal: SortOrder
+  id: SortOrder
+}
+
 type NativeTypeModelMinAggregate {
   bigInt: BigInt
   byteA: Byte
@@ -1432,7 +1603,19 @@ type NativeTypeModelMinAggregate {
   id: Int
 }
 
-input NativeTypeModelOrderByInput {
+input NativeTypeModelMinOrderByAggregateInput {
+  bigInt: SortOrder
+  byteA: SortOrder
+  decimal: SortOrder
+  id: SortOrder
+}
+
+input NativeTypeModelOrderByWithAggregationInput {
+  _avg: NativeTypeModelAvgOrderByAggregateInput
+  _count: NativeTypeModelCountOrderByAggregateInput
+  _max: NativeTypeModelMaxOrderByAggregateInput
+  _min: NativeTypeModelMinOrderByAggregateInput
+  _sum: NativeTypeModelSumOrderByAggregateInput
   bigInt: SortOrder
   byteA: SortOrder
   decimal: SortOrder
@@ -1467,6 +1650,12 @@ type NativeTypeModelSumAggregate {
   bigInt: BigInt
   decimal: Decimal
   id: Int
+}
+
+input NativeTypeModelSumOrderByAggregateInput {
+  bigInt: SortOrder
+  decimal: SortOrder
+  id: SortOrder
 }
 
 input NativeTypeModelUpdateInput {
@@ -1834,6 +2023,12 @@ type PatientCountAggregate {
   lastName: Int!
 }
 
+input PatientCountOrderByAggregateInput {
+  email: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+}
+
 input PatientCreateInput {
   email: String!
   firstName: String!
@@ -1866,13 +2061,28 @@ type PatientMaxAggregate {
   lastName: String
 }
 
+input PatientMaxOrderByAggregateInput {
+  email: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+}
+
 type PatientMinAggregate {
   email: String
   firstName: String
   lastName: String
 }
 
-input PatientOrderByInput {
+input PatientMinOrderByAggregateInput {
+  email: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+}
+
+input PatientOrderByWithAggregationInput {
+  _count: PatientCountOrderByAggregateInput
+  _max: PatientMaxOrderByAggregateInput
+  _min: PatientMinOrderByAggregateInput
   email: SortOrder
   firstName: SortOrder
   lastName: SortOrder
@@ -1942,6 +2152,11 @@ type PostAvgAggregate {
   editorId: Float
 }
 
+input PostAvgOrderByAggregateInput {
+  authorId: SortOrder
+  editorId: SortOrder
+}
+
 type PostCountAggregate {
   _all: Int!
   authorId: Int!
@@ -1955,6 +2170,20 @@ type PostCountAggregate {
   title: Int!
   updatedAt: Int!
   uuid: Int!
+}
+
+input PostCountOrderByAggregateInput {
+  authorId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  editorId: SortOrder
+  kind: SortOrder
+  metadata: SortOrder
+  published: SortOrder
+  subtitle: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  uuid: SortOrder
 }
 
 input PostCreateInput {
@@ -2100,6 +2329,19 @@ type PostMaxAggregate {
   uuid: String
 }
 
+input PostMaxOrderByAggregateInput {
+  authorId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  editorId: SortOrder
+  kind: SortOrder
+  published: SortOrder
+  subtitle: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  uuid: SortOrder
+}
+
 type PostMinAggregate {
   authorId: Int
   content: String
@@ -2113,7 +2355,29 @@ type PostMinAggregate {
   uuid: String
 }
 
-input PostOrderByInput {
+input PostMinOrderByAggregateInput {
+  authorId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  editorId: SortOrder
+  kind: SortOrder
+  published: SortOrder
+  subtitle: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  uuid: SortOrder
+}
+
+input PostOrderByRelationAggregateInput {
+  count: SortOrder!
+}
+
+input PostOrderByWithAggregationInput {
+  _avg: PostAvgOrderByAggregateInput
+  _count: PostCountOrderByAggregateInput
+  _max: PostMaxOrderByAggregateInput
+  _min: PostMinOrderByAggregateInput
+  _sum: PostSumOrderByAggregateInput
   authorId: SortOrder
   content: SortOrder
   createdAt: SortOrder
@@ -2125,10 +2389,6 @@ input PostOrderByInput {
   title: SortOrder
   updatedAt: SortOrder
   uuid: SortOrder
-}
-
-input PostOrderByRelationAggregateInput {
-  count: SortOrder!
 }
 
 input PostOrderByWithRelationInput {
@@ -2198,6 +2458,11 @@ input PostScalarWhereWithAggregatesInput {
 type PostSumAggregate {
   authorId: Int
   editorId: Int
+}
+
+input PostSumOrderByAggregateInput {
+  authorId: SortOrder
+  editorId: SortOrder
 }
 
 input PostUpdateManyMutationInput {
@@ -2335,6 +2600,11 @@ type ProblemAvgAggregate {
   id: Float
 }
 
+input ProblemAvgOrderByAggregateInput {
+  creatorId: SortOrder
+  id: SortOrder
+}
+
 type ProblemCount {
   likedBy: Int!
 }
@@ -2344,6 +2614,12 @@ type ProblemCountAggregate {
   creatorId: Int!
   id: Int!
   problemText: Int!
+}
+
+input ProblemCountOrderByAggregateInput {
+  creatorId: SortOrder
+  id: SortOrder
+  problemText: SortOrder
 }
 
 input ProblemCreateInput {
@@ -2424,13 +2700,19 @@ type ProblemMaxAggregate {
   problemText: String
 }
 
+input ProblemMaxOrderByAggregateInput {
+  creatorId: SortOrder
+  id: SortOrder
+  problemText: SortOrder
+}
+
 type ProblemMinAggregate {
   creatorId: Int
   id: Int
   problemText: String
 }
 
-input ProblemOrderByInput {
+input ProblemMinOrderByAggregateInput {
   creatorId: SortOrder
   id: SortOrder
   problemText: SortOrder
@@ -2438,6 +2720,17 @@ input ProblemOrderByInput {
 
 input ProblemOrderByRelationAggregateInput {
   count: SortOrder!
+}
+
+input ProblemOrderByWithAggregationInput {
+  _avg: ProblemAvgOrderByAggregateInput
+  _count: ProblemCountOrderByAggregateInput
+  _max: ProblemMaxOrderByAggregateInput
+  _min: ProblemMinOrderByAggregateInput
+  _sum: ProblemSumOrderByAggregateInput
+  creatorId: SortOrder
+  id: SortOrder
+  problemText: SortOrder
 }
 
 input ProblemOrderByWithRelationInput {
@@ -2475,6 +2768,11 @@ input ProblemScalarWhereWithAggregatesInput {
 type ProblemSumAggregate {
   creatorId: Int
   id: Int
+}
+
+input ProblemSumOrderByAggregateInput {
+  creatorId: SortOrder
+  id: SortOrder
 }
 
 input ProblemUpdateInput {
@@ -2596,15 +2894,15 @@ type Query {
   findFirstNativeTypeModel(cursor: NativeTypeModelWhereUniqueInput, distinct: [NativeTypeModelScalarFieldEnum!], orderBy: [NativeTypeModelOrderByWithRelationInput!], skip: Int, take: Int, where: NativeTypeModelWhereInput): NativeTypeModel
   findFirstPatient(cursor: PatientWhereUniqueInput, distinct: [PatientScalarFieldEnum!], orderBy: [PatientOrderByWithRelationInput!], skip: Int, take: Int, where: PatientWhereInput): Patient
   findFirstProblem(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationInput!], skip: Int, take: Int, where: ProblemWhereInput): Problem
-  groupByCategory(by: [CategoryScalarFieldEnum!]!, having: CategoryScalarWhereWithAggregatesInput, orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): [CategoryGroupBy!]!
-  groupByClient(by: [ClientScalarFieldEnum!]!, having: ClientScalarWhereWithAggregatesInput, orderBy: [ClientOrderByInput!], skip: Int, take: Int, where: ClientWhereInput): [ClientGroupBy!]!
-  groupByCreator(by: [CreatorScalarFieldEnum!]!, having: CreatorScalarWhereWithAggregatesInput, orderBy: [CreatorOrderByInput!], skip: Int, take: Int, where: CreatorWhereInput): [CreatorGroupBy!]!
-  groupByDirector(by: [DirectorScalarFieldEnum!]!, having: DirectorScalarWhereWithAggregatesInput, orderBy: [DirectorOrderByInput!], skip: Int, take: Int, where: DirectorWhereInput): [DirectorGroupBy!]!
-  groupByMovie(by: [MovieScalarFieldEnum!]!, having: MovieScalarWhereWithAggregatesInput, orderBy: [MovieOrderByInput!], skip: Int, take: Int, where: MovieWhereInput): [MovieGroupBy!]!
-  groupByNativeTypeModel(by: [NativeTypeModelScalarFieldEnum!]!, having: NativeTypeModelScalarWhereWithAggregatesInput, orderBy: [NativeTypeModelOrderByInput!], skip: Int, take: Int, where: NativeTypeModelWhereInput): [NativeTypeModelGroupBy!]!
-  groupByPatient(by: [PatientScalarFieldEnum!]!, having: PatientScalarWhereWithAggregatesInput, orderBy: [PatientOrderByInput!], skip: Int, take: Int, where: PatientWhereInput): [PatientGroupBy!]!
-  groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
-  groupByProblem(by: [ProblemScalarFieldEnum!]!, having: ProblemScalarWhereWithAggregatesInput, orderBy: [ProblemOrderByInput!], skip: Int, take: Int, where: ProblemWhereInput): [ProblemGroupBy!]!
+  groupByCategory(by: [CategoryScalarFieldEnum!]!, having: CategoryScalarWhereWithAggregatesInput, orderBy: [CategoryOrderByWithAggregationInput!], skip: Int, take: Int, where: CategoryWhereInput): [CategoryGroupBy!]!
+  groupByClient(by: [ClientScalarFieldEnum!]!, having: ClientScalarWhereWithAggregatesInput, orderBy: [ClientOrderByWithAggregationInput!], skip: Int, take: Int, where: ClientWhereInput): [ClientGroupBy!]!
+  groupByCreator(by: [CreatorScalarFieldEnum!]!, having: CreatorScalarWhereWithAggregatesInput, orderBy: [CreatorOrderByWithAggregationInput!], skip: Int, take: Int, where: CreatorWhereInput): [CreatorGroupBy!]!
+  groupByDirector(by: [DirectorScalarFieldEnum!]!, having: DirectorScalarWhereWithAggregatesInput, orderBy: [DirectorOrderByWithAggregationInput!], skip: Int, take: Int, where: DirectorWhereInput): [DirectorGroupBy!]!
+  groupByMovie(by: [MovieScalarFieldEnum!]!, having: MovieScalarWhereWithAggregatesInput, orderBy: [MovieOrderByWithAggregationInput!], skip: Int, take: Int, where: MovieWhereInput): [MovieGroupBy!]!
+  groupByNativeTypeModel(by: [NativeTypeModelScalarFieldEnum!]!, having: NativeTypeModelScalarWhereWithAggregatesInput, orderBy: [NativeTypeModelOrderByWithAggregationInput!], skip: Int, take: Int, where: NativeTypeModelWhereInput): [NativeTypeModelGroupBy!]!
+  groupByPatient(by: [PatientScalarFieldEnum!]!, having: PatientScalarWhereWithAggregatesInput, orderBy: [PatientOrderByWithAggregationInput!], skip: Int, take: Int, where: PatientWhereInput): [PatientGroupBy!]!
+  groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByWithAggregationInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
+  groupByProblem(by: [ProblemScalarFieldEnum!]!, having: ProblemScalarWhereWithAggregatesInput, orderBy: [ProblemOrderByWithAggregationInput!], skip: Int, take: Int, where: ProblemWhereInput): [ProblemGroupBy!]!
   movie(where: MovieWhereUniqueInput!): Movie
   movies(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByWithRelationInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]!
   nativeTypeModel(where: NativeTypeModelWhereUniqueInput!): NativeTypeModel

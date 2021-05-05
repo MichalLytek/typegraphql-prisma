@@ -7,7 +7,7 @@ import { SortOrder } from "../../enums/SortOrder";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class ProblemOrderByInput {
+export class ClientAvgOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -16,10 +16,28 @@ export class ProblemOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  problemText?: "asc" | "desc" | undefined;
+  age?: "asc" | "desc" | undefined;
+
+  balance?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  creatorId?: "asc" | "desc" | undefined;
+  amount?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  grades?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  get accountBalance() {
+    return this.balance;
+  }
+
+  set accountBalance(balance: "asc" | "desc" | undefined) {
+    this.balance = balance;
+  }
 }

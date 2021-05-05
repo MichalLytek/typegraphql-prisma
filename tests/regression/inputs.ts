@@ -1266,4 +1266,58 @@ describe("inputs", () => {
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });
+
+  describe("when `orderByAggregateGroup` preview feature is enabled", () => {
+    it("should properly generate input type classes for sorting by many-to-many relation fields", async () => {
+      const schema = /* prisma */ `
+        model Sample {
+          idField       Int     @id @default(autoincrement())
+          stringField   String
+          floatField    Float
+          intField      Int
+          booleanField  Boolean
+          dateField     DateTime
+          jsonField     Json
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["orderByAggregateGroup"],
+      });
+      const sampleOrderByWithAggregationInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleOrderByWithAggregationInput.ts",
+      );
+      const sampleMaxOrderByAggregateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleMaxOrderByAggregateInput.ts",
+      );
+      const sampleMinOrderByAggregateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleMinOrderByAggregateInput.ts",
+      );
+      const sampleAvgOrderByAggregateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleAvgOrderByAggregateInput.ts",
+      );
+      const sampleCountOrderByAggregateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleCountOrderByAggregateInput.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(sampleOrderByWithAggregationInputTSFile).toMatchSnapshot(
+        "SampleOrderByWithAggregationInput",
+      );
+      expect(sampleMaxOrderByAggregateInputTSFile).toMatchSnapshot(
+        "SampleMaxOrderByAggregateInput",
+      );
+      expect(sampleMinOrderByAggregateInputTSFile).toMatchSnapshot(
+        "SampleMinOrderByAggregateInput",
+      );
+      expect(sampleAvgOrderByAggregateInputTSFile).toMatchSnapshot(
+        "SampleAvgOrderByAggregateInput",
+      );
+      expect(sampleCountOrderByAggregateInputTSFile).toMatchSnapshot(
+        "SampleCountOrderByAggregateInput",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
 });

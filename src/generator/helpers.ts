@@ -168,6 +168,11 @@ function getInputKeywordPhrasePosition(inputTypeName: string) {
   const inputParseResult = [
     "Unchecked",
     "Create",
+    "CountOrderBy",
+    "AvgOrderBy",
+    "MaxOrderBy",
+    "MinOrderBy",
+    "SumOrderBy",
     "OrderBy",
     "Update",
     "Upsert",

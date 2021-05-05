@@ -7,19 +7,14 @@ import { SortOrder } from "../../enums/SortOrder";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class CategoryOrderByInput {
+export class DirectorMaxOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  name?: "asc" | "desc" | undefined;
+  firstName?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  slug?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  number?: "asc" | "desc" | undefined;
+  lastName?: "asc" | "desc" | undefined;
 }

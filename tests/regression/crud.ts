@@ -575,4 +575,30 @@ describe("crud", () => {
       expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
     }, 20000);
   });
+
+  describe("when `orderByAggregateGroup` preview feature is enabled", () => {
+    it("should properly generate args classes for group by action using aggregate input", async () => {
+      const schema = /* prisma */ `
+        model Sample {
+          idField       Int     @id @default(autoincrement())
+          stringField   String
+          floatField    Float
+          intField      Int
+          booleanField  Boolean
+          dateField     DateTime
+          jsonField     Json
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["orderByAggregateGroup"],
+      });
+      const groupBySampleArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/Sample/args/GroupBySampleArgs.ts",
+      );
+
+      expect(groupBySampleArgsTSFile).toMatchSnapshot("GroupBySampleArgs");
+    });
+  });
 });
