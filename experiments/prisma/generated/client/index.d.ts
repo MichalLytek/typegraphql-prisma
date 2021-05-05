@@ -379,8 +379,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.21.2
-   * Query Engine version: e421996c87d5f3c8f7eeadd502d4ad402c89464d
+   * Prisma Client JS version: 2.22.0
+   * Query Engine version: 60cc71d884972ab4e897f0277c4b84383dddaf6c
    */
   export type PrismaVersion = {
     client: string
@@ -9815,12 +9815,12 @@ export namespace Prisma {
 
   export type UserUpdategradesInput = {
     set?: Enumerable<number>
-    push?: number
+    push?: number | Enumerable<number>
   }
 
   export type UserUpdatealiasesInput = {
     set?: Enumerable<string>
-    push?: string
+    push?: string | Enumerable<string>
   }
 
   export type postUpdateManyWithoutAuthorInput = {

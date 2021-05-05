@@ -18,11 +18,6 @@ describe("resolvers enhance", () => {
 
   it("should emit emit enhance file properly", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       /// @@TypeGraphQL.type(name: "Client")
       model User {
         id          Int     @id @default(autoincrement())
@@ -53,11 +48,6 @@ describe("resolvers enhance", () => {
 
   it("should emit enhance file properly even in model has no relations", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Post {
         uuid      String    @id @default(uuid())
         createdAt DateTime  @default(now())

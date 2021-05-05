@@ -18,11 +18,6 @@ describe("enums", () => {
 
   it("should properly generate code for normal enum", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       enum Color {
         RED
         GREEN
@@ -38,11 +33,6 @@ describe("enums", () => {
 
   it("should properly generate code for enum with docs", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       /// Role enum doc
       enum Role {
         // User member comment
@@ -61,11 +51,6 @@ describe("enums", () => {
 
   it("should properly generate standard prisma enums", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model SampleModel {
         intIdField            Int     @id @default(autoincrement())
         stringField           String  @unique
@@ -95,10 +80,6 @@ describe("enums", () => {
 
   it("should properly generate model scalar field enum", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       model SampleModel {
         intIdField   Int     @id @default(autoincrement())
         stringField  String  @unique
@@ -120,10 +101,6 @@ describe("enums", () => {
 
   it("should properly generate model scalar enum when model is renamed", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       /// @@TypeGraphQL.type(name: "ExampleModel")
       model SampleModel {
         intIdField   Int     @id @default(autoincrement())
@@ -146,10 +123,6 @@ describe("enums", () => {
 
   it("should properly generate model scalar enum when model field is renamed", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       model SampleModel {
         intIdField   Int     @id @default(autoincrement())
         /// @TypeGraphQL.field(name: "mappedFieldName")

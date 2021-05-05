@@ -17,11 +17,6 @@ describe("custom scalars", () => {
 
   it("should properly emit custom scalars file", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Sample {
         id    Int     @id @default(autoincrement())
         text  String

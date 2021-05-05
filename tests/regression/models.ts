@@ -18,10 +18,6 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model with different scalar fields types", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       model User {
         intIdField          Int     @id @default(autoincrement())
         stringField         String  @unique
@@ -42,11 +38,6 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model with enum and alias fields types", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       type Numeric = Float
 
       enum Sample {
@@ -68,11 +59,6 @@ describe("models", () => {
 
   it("should properly generate object type classes for prisma models with cyclic relations", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id     Int    @id @default(autoincrement())
         posts  Post[]
@@ -94,11 +80,6 @@ describe("models", () => {
 
   it("should properly generate object type classes for prisma models with self relations", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Service {
         id            Int       @default(autoincrement()) @id
         name          String
@@ -116,11 +97,6 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model with descriptions", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       /// User model doc
       model User {
         id          Int    @id @default(autoincrement())
@@ -147,11 +123,6 @@ describe("models", () => {
 
   it("should properly generate object type classes for prisma models with cyclic relations when models are renamed", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       /// @@TypeGraphQL.type(name: "Client")
       model User {
         id     Int    @id @default(autoincrement())
@@ -175,11 +146,6 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model with renamed fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id           Int       @id @default(autoincrement())
         dateOfBirth  DateTime
@@ -206,11 +172,6 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model with omitted field", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id           Int       @id @default(autoincrement())
         dateOfBirth  DateTime
@@ -228,11 +189,6 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model when simpleResolvers option is enabled", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id           Int       @id @default(autoincrement())
         dateOfBirth  DateTime
@@ -251,16 +207,11 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model with native types", async () => {
     const schema = /* prisma */ `
-      datasource postgres {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model NativeTypeModel {
-        id      Int      @id @default(autoincrement()) @postgres.Integer
-        bigInt  BigInt?  @postgres.BigInt
-        byteA   Bytes?   @postgres.ByteA
-        decimal Decimal? @postgres.Decimal
+        id      Int      @id @default(autoincrement()) @db.Integer
+        bigInt  BigInt?  @db.BigInt
+        byteA   Bytes?   @db.ByteA
+        decimal Decimal? @db.Decimal
       }
     `;
 
@@ -275,11 +226,6 @@ describe("models", () => {
   describe("when selectRelationCount preview feature is enabled", () => {
     it("should properly generate model  object type class", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -297,7 +243,7 @@ describe("models", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["selectRelationCount"],
+        previewFeatures: ["selectRelationCount"],
       });
       const firstModelTSFile = await readGeneratedFile("/models/FirstModel.ts");
 

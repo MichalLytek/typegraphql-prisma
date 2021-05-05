@@ -6,7 +6,7 @@ type SupportedPreviewFeatures = "orderByRelation" | "selectRelationCount";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<GenerateCodeOptions, "relativePrismaOutputPath"> {
-  enabledPreviewFeatures?: SupportedPreviewFeatures[];
+  previewFeatures?: SupportedPreviewFeatures[];
 }
 
 export async function generateCodeFromSchema(
@@ -14,10 +14,7 @@ export async function generateCodeFromSchema(
   options: GenerateCodeFromSchemaOptions,
 ): Promise<void> {
   await generateCode(
-    await getPrismaClientDmmfFromPrismaSchema(
-      schema,
-      options.enabledPreviewFeatures,
-    ),
+    await getPrismaClientDmmfFromPrismaSchema(schema, options.previewFeatures),
     {
       ...options,
       relativePrismaOutputPath: "../../helpers/prisma-client-mock",

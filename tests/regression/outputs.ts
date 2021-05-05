@@ -18,11 +18,6 @@ describe("outputs", () => {
 
   it("should properly generate output type classes", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Sample {
         intIdField     Int       @id @default(autoincrement())
         stringField    String
@@ -75,11 +70,6 @@ describe("outputs", () => {
 
   it("should properly generate aggregate classes for renamed model", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       /// @@TypeGraphQL.type(name: "Example")
       model Sample {
         intIdField    Int       @id @default(autoincrement())
@@ -124,11 +114,6 @@ describe("outputs", () => {
 
   it("should properly generate aggregate classes for model with lowercase name", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model example {
         intIdField    Int       @id @default(autoincrement())
         stringField   String
@@ -173,11 +158,6 @@ describe("outputs", () => {
   describe("when selectRelationCount preview feature is enabled", () => {
     it("should properly generate count classes for relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -195,7 +175,7 @@ describe("outputs", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["selectRelationCount"],
+        previewFeatures: ["selectRelationCount"],
       });
       const firstModelCountTSFile = await readGeneratedFile(
         "/resolvers/outputs/FirstModelCount.ts",
@@ -212,11 +192,6 @@ describe("outputs", () => {
   describe("when simpleResolvers option is enabled", () => {
     it("should properly generate output type classes", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model Sample {
           intIdField    Int       @id @default(autoincrement())
           stringField   String

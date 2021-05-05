@@ -514,12 +514,12 @@ input ClientUpdateWithoutPostsInput {
 }
 
 input ClientUpdatealiasesInput {
-  push: String
+  push: [String!]
   set: [String!]
 }
 
 input ClientUpdategradesInput {
-  push: Int
+  push: [Int!]
   set: [Int!]
 }
 

@@ -12,8 +12,8 @@ export class ClientUpdategradesInput {
   })
   set?: number[] | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: true
   })
-  push?: number | undefined;
+  push?: number[] | undefined;
 }

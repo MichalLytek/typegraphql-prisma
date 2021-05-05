@@ -1,4 +1,6 @@
-module.exports = {
+import type { Config } from "@jest/types";
+
+const config: Config.InitialOptions = {
   verbose: false,
   testEnvironment: "node",
   preset: "ts-jest",
@@ -24,3 +26,5 @@ module.exports = {
     "<rootDir>/tests/artifacts",
   ],
 };
+
+export default config;

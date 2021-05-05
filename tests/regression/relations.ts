@@ -18,11 +18,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate index files for 1-1 relation resolvers", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id        Int        @id @default(autoincrement())
         name      String
@@ -53,11 +48,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate index files for 1-many relation resolvers", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id         Int      @id @default(autoincrement())
         name       String
@@ -91,11 +81,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate resolvers classes for prisma models with cyclic relations", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id     Int    @id @default(autoincrement())
         posts  Post[]
@@ -122,11 +107,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate resolver class for single relation resolvers", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id       Int      @id @default(autoincrement())
         name     String
@@ -151,11 +131,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate resolver and args class for array relation resolvers", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id     Int     @id @default(autoincrement())
         posts  Post[]
@@ -184,11 +159,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate relation resolver class for model with unique fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Movie {
         directorFirstName String
         directorLastName  String
@@ -219,11 +189,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate relation resolver class for model with multi id keys with relation", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Movie {
         directorFirstName String
         directorLastName  String
@@ -255,11 +220,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate relation resolvers classes for models with renamed relation fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id     Int    @id @default(autoincrement())
         /// @TypeGraphQL.field(name: "userPosts")
@@ -288,11 +248,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate relation resolvers classes for models with omitted relation field", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id           Int    @id @default(autoincrement())
         posts        Post[]  @relation("posts")
@@ -324,11 +279,6 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate composite keys where phrase in resolver", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id                String      @id @default(cuid())
         name              String
@@ -367,11 +317,6 @@ describe("relations resolvers generation", () => {
   describe("when `orderByRelation` preview feature is enabled", () => {
     it("should properly generate args classes for sorting by relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -389,7 +334,7 @@ describe("relations resolvers generation", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["orderByRelation"],
+        previewFeatures: ["orderByRelation"],
       });
       const firstModelSecondModelsFieldArgsTSFile = await readGeneratedFile(
         "/resolvers/relations/FirstModel/args/FirstModelSecondModelsFieldArgs.ts",

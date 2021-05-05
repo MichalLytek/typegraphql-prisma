@@ -18,11 +18,6 @@ describe("crud", () => {
 
   it("should properly generate resolver class for single prisma model", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         intIdField          Int     @id @default(autoincrement())
         uniqueStringField   String  @unique
@@ -57,11 +52,6 @@ describe("crud", () => {
 
   it("should properly generate resolver class when useOriginalMapping is used", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         intIdField          Int     @id @default(autoincrement())
         uniqueStringField   String  @unique
@@ -89,11 +79,6 @@ describe("crud", () => {
 
   it("should properly generate resolver class when cannot pluralize model name", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Staff {
         intIdField          Int     @id @default(autoincrement())
         uniqueStringField   String  @unique
@@ -114,11 +99,6 @@ describe("crud", () => {
 
   it("should properly generate args classes for every method of crud resolver", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         intIdField          Int     @id @default(autoincrement())
         uniqueStringField   String  @unique
@@ -185,11 +165,6 @@ describe("crud", () => {
 
   it("should properly generate actions resolver classes for prisma model", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         intIdField          Int     @id @default(autoincrement())
         uniqueStringField   String  @unique
@@ -273,11 +248,6 @@ describe("crud", () => {
   describe("when model is renamed", () => {
     it("should properly generate resolver class for single prisma model", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         /// @@TypeGraphQL.type(name: "Client")
         model User {
           intIdField          Int     @id @default(autoincrement())
@@ -300,11 +270,6 @@ describe("crud", () => {
 
     it("should properly generate args classes for every method of crud resolver", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         /// @@TypeGraphQL.type(name: "Client")
         model User {
           intIdField          Int     @id @default(autoincrement())
@@ -380,11 +345,6 @@ describe("crud", () => {
 
     it("should properly generate actions resolver classes for prisma model", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         /// @@TypeGraphQL.type(name: "Client")
         model User {
           intIdField          Int     @id @default(autoincrement())
@@ -468,11 +428,6 @@ describe("crud", () => {
   describe("when useUncheckedScalarInputs mode is enabled", () => {
     it("should properly generate create and update args classes", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model User {
           intIdField          Int     @id @default(autoincrement())
           uniqueStringField   String  @unique
@@ -508,11 +463,6 @@ describe("crud", () => {
   describe("when `orderByRelation` preview feature is enabled", () => {
     it("should properly generate args classes for sorting by many-to-many relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -529,7 +479,7 @@ describe("crud", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["orderByRelation"],
+        previewFeatures: ["orderByRelation"],
       });
       const aggregateFirstModelArgsTSFile = await readGeneratedFile(
         "/resolvers/crud/FirstModel/args/AggregateFirstModelArgs.ts",
@@ -558,11 +508,6 @@ describe("crud", () => {
 
     it("should properly generate args classes for sorting by one-to-many relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -580,7 +525,7 @@ describe("crud", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["orderByRelation"],
+        previewFeatures: ["orderByRelation"],
       });
       const aggregateSecondModelArgsTSFile = await readGeneratedFile(
         "/resolvers/crud/SecondModel/args/AggregateSecondModelArgs.ts",
@@ -611,11 +556,6 @@ describe("crud", () => {
   describe("when emitTranspiledCode is set to true", () => {
     it("should properly generate imports in js files for resolver classes", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model User {
           intIdField          Int     @id @default(autoincrement())
           uniqueStringField   String  @unique

@@ -3724,10 +3724,10 @@ export class SampleModelUpdateintArrayFieldInput {
   })
   set?: number[] | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: true
   })
-  push?: number | undefined;
+  push?: number[] | undefined;
 }
 "
 `;
@@ -3747,10 +3747,10 @@ export class SampleModelUpdatestringArrayFieldInput {
   })
   set?: string[] | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => [String], {
     nullable: true
   })
-  push?: string | undefined;
+  push?: string[] | undefined;
 }
 "
 `;

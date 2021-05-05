@@ -12,8 +12,8 @@ export class ClientUpdatealiasesInput {
   })
   set?: string[] | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => [String], {
     nullable: true
   })
-  push?: string | undefined;
+  push?: string[] | undefined;
 }

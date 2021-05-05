@@ -17,11 +17,6 @@ describe("helpers", () => {
 
   it("should properly emit helpers file", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Sample {
         id    Int     @id @default(autoincrement())
         text  String

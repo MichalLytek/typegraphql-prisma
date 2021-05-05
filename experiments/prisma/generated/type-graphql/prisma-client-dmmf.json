@@ -14931,6 +14931,11 @@
                   "type": "Int",
                   "location": "scalar",
                   "isList": false
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": true
                 }
               ]
             }
@@ -14964,6 +14969,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": false
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": true
                 }
               ]
             }

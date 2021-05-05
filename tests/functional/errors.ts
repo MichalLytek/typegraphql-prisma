@@ -15,10 +15,6 @@ describe("errors", () => {
       outputDirPath = generateArtifactsDirPath("functional-crud");
       await fs.mkdir(outputDirPath, { recursive: true });
       const prismaSchema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
         model User {
           intIdField          Int     @id @default(autoincrement())
           uniqueStringField   String  @unique

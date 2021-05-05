@@ -203,7 +203,7 @@ declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sq
 interface DataSource {
     name: string;
     activeProvider: ConnectorType;
-    provider: ConnectorType[];
+    provider: ConnectorType;
     url: EnvValue;
     config: {
         [key: string]: string;
@@ -522,7 +522,7 @@ interface EngineConfig {
     flags?: string[];
     useUds?: boolean;
     clientVersion?: string;
-    enableExperimental?: string[];
+    previewFeatures?: string[];
     engineEndpoint?: string;
     activeProvider?: string;
 }
@@ -546,7 +546,7 @@ declare class NodeEngine implements Engine {
     private lastPanic?;
     private globalKillSignalReceived?;
     private startCount;
-    private enableExperimental;
+    private previewFeatures;
     private engineEndpoint?;
     private lastErrorLog?;
     private lastRustError?;
@@ -579,7 +579,7 @@ declare class NodeEngine implements Engine {
      * exiting is used to tell the .on('exit') hook, if the exit came from our script.
      * As soon as the Prisma binary returns a correct return code (like 1 or 0), we don't need this anymore
      */
-    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, useUds, activeProvider, }: EngineConfig);
+    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, previewFeatures, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, useUds, activeProvider, }: EngineConfig);
     private setError;
     private checkForTooManyEngines;
     private resolveCwd;

@@ -18,10 +18,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for filtering scalar fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       model SampleModel {
         intIdField            Int     @id @default(autoincrement())
         stringField           String  @unique
@@ -111,10 +107,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for creating models and scalar fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       enum Color {
         RED
         GREEN
@@ -186,10 +178,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for updating scalar fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       enum Color {
         RED
         GREEN
@@ -285,10 +273,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for filtering models by fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       model SampleModel {
         intIdField          Int     @id @default(autoincrement())
         stringField         String  @unique
@@ -321,11 +305,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for filtering models by many to many relation fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model FirstModel {
         idField            Int            @id @default(autoincrement())
         uniqueStringField  String         @unique
@@ -370,11 +349,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for filtering models by one to many relation fields", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model FirstModel {
         idField            Int            @id @default(autoincrement())
         uniqueStringField  String         @unique
@@ -450,11 +424,6 @@ describe("inputs", () => {
 
   it("should properly generate input type class for filtering by enums values", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       enum Color {
         RED
         GREEN
@@ -485,11 +454,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for model with composite unique index", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Movie {
         directorFirstName String
         directorLastName  String
@@ -538,11 +502,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for model with id keys with relation", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Movie {
         directorFirstName String
         directorLastName  String
@@ -599,11 +558,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for connectOrCreate", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model User {
         id          Int     @id @default(autoincrement())
         name        String
@@ -641,16 +595,11 @@ describe("inputs", () => {
 
   it("should properly generate input type scalar filters classes for model with native types", async () => {
     const schema = /* prisma */ `
-      datasource postgres {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model NativeTypeModel {
-        id      Int      @id @default(autoincrement()) @postgres.Integer
-        bigInt  BigInt?  @postgres.BigInt
-        byteA   Bytes?   @postgres.ByteA
-        decimal Decimal? @postgres.Decimal
+        id      Int      @id @default(autoincrement()) @db.Integer
+        bigInt  BigInt?  @db.BigInt
+        byteA   Bytes?   @db.ByteA
+        decimal Decimal? @db.Decimal
       }
     `;
 
@@ -736,11 +685,6 @@ describe("inputs", () => {
 
   it("should generate proper WithAggregatesFilter for scalars", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Sample {
         idField       Int     @id @default(autoincrement())
         stringField   String
@@ -797,11 +741,6 @@ describe("inputs", () => {
 
   it("should generate proper ScalarWhereWithAggregatesInput for model", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model Sample {
         idField       Int     @id @default(autoincrement())
         stringField   String
@@ -825,16 +764,11 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for model with native types", async () => {
     const schema = /* prisma */ `
-      datasource postgres {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       model NativeTypeModel {
-        id      Int      @id @default(autoincrement()) @postgres.Integer
-        bigInt  BigInt?  @postgres.BigInt
-        byteA   Bytes?   @postgres.ByteA
-        decimal Decimal? @postgres.Decimal
+        id      Int      @id @default(autoincrement()) @db.Integer
+        bigInt  BigInt?  @db.BigInt
+        byteA   Bytes?   @db.ByteA
+        decimal Decimal? @db.Decimal
       }
     `;
 
@@ -882,10 +816,6 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for inserting many entities", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
       model FirstModel {
         idField            Int            @id @default(autoincrement())
         uniqueStringField  String         @unique
@@ -934,11 +864,6 @@ describe("inputs", () => {
   describe("when model is renamed", () => {
     it("should properly generate input type classes", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         /// @@TypeGraphQL.type(name: "Example")
         model SampleModel {
           intIdField   Int        @id @default(autoincrement())
@@ -979,11 +904,6 @@ describe("inputs", () => {
 
     it("should properly generate input type classes for filtering models by many to many relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         /// @@TypeGraphQL.type(name: "RenamedFirstModel")
         model FirstModel {
           idField            Int            @id @default(autoincrement())
@@ -1032,11 +952,6 @@ describe("inputs", () => {
 
     it("should properly generate input type classes for filtering models by one to many relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         /// @@TypeGraphQL.type(name: "RenamedFirstModel")
         model FirstModel {
           idField            Int            @id @default(autoincrement())
@@ -1118,11 +1033,6 @@ describe("inputs", () => {
   describe("when model field is renamed", () => {
     it("should properly generate input type classes", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model Sample {
           idField         Int     @id @default(autoincrement())
           /// @TypeGraphQL.field(name: "mappedFieldName")
@@ -1148,11 +1058,6 @@ describe("inputs", () => {
   describe("when prisma client is generated into node_modules", () => {
     it("should properly generate prisma client imports in input type class files", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model Sample {
           idField         Int     @id @default(autoincrement())
           modelFieldName  String
@@ -1178,10 +1083,6 @@ describe("inputs", () => {
   describe("when useUncheckedScalarInputs mode is enabled", () => {
     it("should properly generate input type classes for filtering models by one to many relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -1286,11 +1187,6 @@ describe("inputs", () => {
   describe("when `orderByRelation` preview feature is enabled", () => {
     it("should properly generate input type classes for sorting by many-to-many relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -1307,7 +1203,7 @@ describe("inputs", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["orderByRelation"],
+        previewFeatures: ["orderByRelation"],
       });
       const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
@@ -1328,11 +1224,6 @@ describe("inputs", () => {
 
     it("should properly generate input type classes for sorting by one-to-many relation fields", async () => {
       const schema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -1350,7 +1241,7 @@ describe("inputs", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["orderByRelation"],
+        previewFeatures: ["orderByRelation"],
       });
       const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",

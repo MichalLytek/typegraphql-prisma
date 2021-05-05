@@ -14,11 +14,6 @@ describe("structure", () => {
     await fs.mkdir(outputDirPath, { recursive: true });
 
     complexDatamodel = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       enum Color {
         RED
         GREEN
@@ -68,11 +63,6 @@ describe("structure", () => {
 
   it("should generate proper folders and file names when model is renamed", async () => {
     const schema = /* prisma */ `
-      datasource db {
-        provider = "postgresql"
-        url      = env("DATABASE_URL")
-      }
-
       enum Color {
         RED
         GREEN

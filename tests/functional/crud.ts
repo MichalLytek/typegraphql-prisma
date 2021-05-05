@@ -15,10 +15,6 @@ describe("crud resolvers execution", () => {
       outputDirPath = generateArtifactsDirPath("functional-crud");
       await fs.mkdir(outputDirPath, { recursive: true });
       const prismaSchema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
         model User {
           intIdField          Int     @id @default(autoincrement())
           uniqueStringField   String  @unique
@@ -324,10 +320,6 @@ describe("crud resolvers execution", () => {
         outputDirPath = generateArtifactsDirPath("functional-crud");
         await fs.mkdir(outputDirPath, { recursive: true });
         const prismaSchema = /* prisma */ `
-          datasource db {
-            provider = "postgresql"
-            url      = env("DATABASE_URL")
-          }
           model FirstModel {
             idField            Int            @id @default(autoincrement())
             uniqueStringField  String         @unique
@@ -344,7 +336,7 @@ describe("crud resolvers execution", () => {
         `;
         await generateCodeFromSchema(prismaSchema, {
           outputDirPath,
-          enabledPreviewFeatures: ["selectRelationCount"],
+          previewFeatures: ["selectRelationCount"],
         });
         const { FirstModelCrudResolver } = require(outputDirPath +
           "/resolvers/crud/FirstModel/FirstModelCrudResolver.ts");
@@ -395,11 +387,6 @@ describe("crud resolvers execution", () => {
       outputDirPath = generateArtifactsDirPath("functional-crud");
       await fs.mkdir(outputDirPath, { recursive: true });
       const prismaSchema = /* prisma */ `
-        datasource db {
-          provider = "postgresql"
-          url      = env("DATABASE_URL")
-        }
-
         model User {
           idField     Int  @id @default(autoincrement())
           intField    Int
