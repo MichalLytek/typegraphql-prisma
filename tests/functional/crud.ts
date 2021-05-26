@@ -412,7 +412,7 @@ describe("crud resolvers execution", () => {
             orderBy: { intField: desc }
             where: { floatField: { lte: 50 } }
           ) {
-            count {
+            _count {
               _all
             }
           }
@@ -420,7 +420,7 @@ describe("crud resolvers execution", () => {
       `;
       const prismaMock = {
         user: {
-          aggregate: jest.fn().mockResolvedValue({ count: { _all: 5 } }),
+          aggregate: jest.fn().mockResolvedValue({ _count: { _all: 5 } }),
         },
       };
 
@@ -445,26 +445,26 @@ describe("crud resolvers execution", () => {
             where: { floatField: { lte: 50 } }
           ) {
             __typename
-            count {
+            _count {
               intField
               floatField
             }
-            min {
+            _min {
               __typename
               intField
               floatField
             }
-            max {
+            _max {
               __typename
               intField
               floatField
             }
-            sum {
+            _sum {
               __typename
               intField
               floatField
             }
-            avg {
+            _avg {
               __typename
               intField
               floatField
@@ -475,23 +475,23 @@ describe("crud resolvers execution", () => {
       const prismaMock = {
         user: {
           aggregate: jest.fn().mockResolvedValue({
-            count: {
+            _count: {
               intField: 1,
               floatField: 1,
             },
-            min: {
+            _min: {
               intField: 0,
               floatField: 0,
             },
-            max: {
+            _max: {
               intField: 10,
               floatField: 10,
             },
-            sum: {
+            _sum: {
               intField: 10,
               floatField: 10,
             },
-            avg: {
+            _avg: {
               intField: 5,
               floatField: 5,
             },
@@ -519,11 +519,11 @@ describe("crud resolvers execution", () => {
           ) {
             __typename
             intField
-            count {
+            _count {
               __typename
               _all
             }
-            min {
+            _min {
               __typename
               intField
               floatField
@@ -536,10 +536,10 @@ describe("crud resolvers execution", () => {
           groupBy: jest.fn().mockResolvedValue([
             {
               intField: 10,
-              count: {
+              _count: {
                 _all: 5,
               },
-              min: {
+              _min: {
                 intField: 0,
                 floatField: 0,
               },

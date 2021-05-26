@@ -4,26 +4,26 @@ exports[`crud resolvers execution aggregations should properly call PrismaClient
 Object {
   "aggregateUser": Object {
     "__typename": "AggregateUser",
-    "avg": Object {
+    "_avg": Object {
       "__typename": "UserAvgAggregate",
       "floatField": 5,
       "intField": 5,
     },
-    "count": Object {
+    "_count": Object {
       "floatField": 1,
       "intField": 1,
     },
-    "max": Object {
+    "_max": Object {
       "__typename": "UserMaxAggregate",
       "floatField": 10,
       "intField": 10,
     },
-    "min": Object {
+    "_min": Object {
       "__typename": "UserMinAggregate",
       "floatField": 0,
       "intField": 0,
     },
-    "sum": Object {
+    "_sum": Object {
       "__typename": "UserSumAggregate",
       "floatField": 10,
       "intField": 10,
@@ -36,19 +36,23 @@ exports[`crud resolvers execution aggregations should properly call PrismaClient
 Array [
   Array [
     Object {
-      "avg": Object {
+      "_avg": Object {
         "floatField": true,
         "intField": true,
       },
-      "count": Object {
+      "_count": Object {
         "floatField": true,
         "intField": true,
       },
-      "max": Object {
+      "_max": Object {
         "floatField": true,
         "intField": true,
       },
-      "min": Object {
+      "_min": Object {
+        "floatField": true,
+        "intField": true,
+      },
+      "_sum": Object {
         "floatField": true,
         "intField": true,
       },
@@ -58,10 +62,6 @@ Array [
         },
       ],
       "skip": 1,
-      "sum": Object {
-        "floatField": true,
-        "intField": true,
-      },
       "take": 1,
       "where": UserWhereInput {
         "floatField": IntFilter {
@@ -76,7 +76,7 @@ Array [
 exports[`crud resolvers execution aggregations should properly call PrismaClient on \`aggregate\` action with simple count field: aggregateUserCount mocked response 1`] = `
 Object {
   "aggregateUser": Object {
-    "count": Object {
+    "_count": Object {
       "_all": 5,
     },
   },
@@ -87,7 +87,7 @@ exports[`crud resolvers execution aggregations should properly call PrismaClient
 Array [
   Array [
     Object {
-      "count": Object {
+      "_count": Object {
         "_all": true,
       },
       "orderBy": Array [
@@ -112,16 +112,16 @@ Object {
   "groupByUser": Array [
     Object {
       "__typename": "UserGroupBy",
-      "count": Object {
+      "_count": Object {
         "__typename": "UserCountAggregate",
         "_all": 5,
       },
-      "intField": 10,
-      "min": Object {
+      "_min": Object {
         "__typename": "UserMinAggregate",
         "floatField": 0,
         "intField": 0,
       },
+      "intField": 10,
     },
   ],
 }
@@ -131,16 +131,16 @@ exports[`crud resolvers execution aggregations should properly call PrismaClient
 Array [
   Array [
     Object {
-      "by": Array [
-        "intField",
-      ],
-      "count": Object {
+      "_count": Object {
         "_all": true,
       },
-      "min": Object {
+      "_min": Object {
         "floatField": true,
         "intField": true,
       },
+      "by": Array [
+        "intField",
+      ],
       "where": UserWhereInput {
         "floatField": IntFilter {
           "gte": 0,

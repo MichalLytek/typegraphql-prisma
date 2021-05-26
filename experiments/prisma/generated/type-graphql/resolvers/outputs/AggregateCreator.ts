@@ -15,25 +15,25 @@ export class AggregateCreator {
   @TypeGraphQL.Field(_type => CreatorCountAggregate, {
     nullable: true
   })
-  count!: CreatorCountAggregate | null;
+  _count!: CreatorCountAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorAvgAggregate, {
     nullable: true
   })
-  avg!: CreatorAvgAggregate | null;
+  _avg!: CreatorAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorSumAggregate, {
     nullable: true
   })
-  sum!: CreatorSumAggregate | null;
+  _sum!: CreatorSumAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorMinAggregate, {
     nullable: true
   })
-  min!: CreatorMinAggregate | null;
+  _min!: CreatorMinAggregate | null;
 
   @TypeGraphQL.Field(_type => CreatorMaxAggregate, {
     nullable: true
   })
-  max!: CreatorMaxAggregate | null;
+  _max!: CreatorMaxAggregate | null;
 }

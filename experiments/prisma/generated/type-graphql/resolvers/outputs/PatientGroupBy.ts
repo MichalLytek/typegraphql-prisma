@@ -28,15 +28,15 @@ export class PatientGroupBy {
   @TypeGraphQL.Field(_type => PatientCountAggregate, {
     nullable: true
   })
-  count!: PatientCountAggregate | null;
+  _count!: PatientCountAggregate | null;
 
   @TypeGraphQL.Field(_type => PatientMinAggregate, {
     nullable: true
   })
-  min!: PatientMinAggregate | null;
+  _min!: PatientMinAggregate | null;
 
   @TypeGraphQL.Field(_type => PatientMaxAggregate, {
     nullable: true
   })
-  max!: PatientMaxAggregate | null;
+  _max!: PatientMaxAggregate | null;
 }

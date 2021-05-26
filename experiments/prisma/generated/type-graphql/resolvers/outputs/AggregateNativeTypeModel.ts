@@ -15,25 +15,25 @@ export class AggregateNativeTypeModel {
   @TypeGraphQL.Field(_type => NativeTypeModelCountAggregate, {
     nullable: true
   })
-  count!: NativeTypeModelCountAggregate | null;
+  _count!: NativeTypeModelCountAggregate | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelAvgAggregate, {
     nullable: true
   })
-  avg!: NativeTypeModelAvgAggregate | null;
+  _avg!: NativeTypeModelAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelSumAggregate, {
     nullable: true
   })
-  sum!: NativeTypeModelSumAggregate | null;
+  _sum!: NativeTypeModelSumAggregate | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelMinAggregate, {
     nullable: true
   })
-  min!: NativeTypeModelMinAggregate | null;
+  _min!: NativeTypeModelMinAggregate | null;
 
   @TypeGraphQL.Field(_type => NativeTypeModelMaxAggregate, {
     nullable: true
   })
-  max!: NativeTypeModelMaxAggregate | null;
+  _max!: NativeTypeModelMaxAggregate | null;
 }

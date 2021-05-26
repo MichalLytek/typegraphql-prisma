@@ -34,15 +34,15 @@ export class EnumPostKindNullableWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntNullableFilter, {
     nullable: true
   })
-  count?: NestedIntNullableFilter | undefined;
+  _count?: NestedIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedEnumPostKindNullableFilter, {
     nullable: true
   })
-  min?: NestedEnumPostKindNullableFilter | undefined;
+  _min?: NestedEnumPostKindNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedEnumPostKindNullableFilter, {
     nullable: true
   })
-  max?: NestedEnumPostKindNullableFilter | undefined;
+  _max?: NestedEnumPostKindNullableFilter | undefined;
 }

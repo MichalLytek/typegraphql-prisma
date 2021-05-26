@@ -71,25 +71,25 @@ export class PostGroupBy {
   @TypeGraphQL.Field(_type => PostCountAggregate, {
     nullable: true
   })
-  count!: PostCountAggregate | null;
+  _count!: PostCountAggregate | null;
 
   @TypeGraphQL.Field(_type => PostAvgAggregate, {
     nullable: true
   })
-  avg!: PostAvgAggregate | null;
+  _avg!: PostAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => PostSumAggregate, {
     nullable: true
   })
-  sum!: PostSumAggregate | null;
+  _sum!: PostSumAggregate | null;
 
   @TypeGraphQL.Field(_type => PostMinAggregate, {
     nullable: true
   })
-  min!: PostMinAggregate | null;
+  _min!: PostMinAggregate | null;
 
   @TypeGraphQL.Field(_type => PostMaxAggregate, {
     nullable: true
   })
-  max!: PostMaxAggregate | null;
+  _max!: PostMaxAggregate | null;
 }

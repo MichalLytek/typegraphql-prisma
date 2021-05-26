@@ -23,15 +23,15 @@ export class BytesNullableWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntNullableFilter, {
     nullable: true
   })
-  count?: NestedIntNullableFilter | undefined;
+  _count?: NestedIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedBytesNullableFilter, {
     nullable: true
   })
-  min?: NestedBytesNullableFilter | undefined;
+  _min?: NestedBytesNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedBytesNullableFilter, {
     nullable: true
   })
-  max?: NestedBytesNullableFilter | undefined;
+  _max?: NestedBytesNullableFilter | undefined;
 }

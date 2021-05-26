@@ -15,25 +15,25 @@ export class AggregateClient {
   @TypeGraphQL.Field(_type => ClientCountAggregate, {
     nullable: true
   })
-  count!: ClientCountAggregate | null;
+  _count!: ClientCountAggregate | null;
 
   @TypeGraphQL.Field(_type => ClientAvgAggregate, {
     nullable: true
   })
-  avg!: ClientAvgAggregate | null;
+  _avg!: ClientAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => ClientSumAggregate, {
     nullable: true
   })
-  sum!: ClientSumAggregate | null;
+  _sum!: ClientSumAggregate | null;
 
   @TypeGraphQL.Field(_type => ClientMinAggregate, {
     nullable: true
   })
-  min!: ClientMinAggregate | null;
+  _min!: ClientMinAggregate | null;
 
   @TypeGraphQL.Field(_type => ClientMaxAggregate, {
     nullable: true
   })
-  max!: ClientMaxAggregate | null;
+  _max!: ClientMaxAggregate | null;
 }

@@ -52,25 +52,25 @@ export class NestedFloatWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntFilter, {
     nullable: true
   })
-  count?: NestedIntFilter | undefined;
+  _count?: NestedIntFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedFloatFilter, {
     nullable: true
   })
-  avg?: NestedFloatFilter | undefined;
+  _avg?: NestedFloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedFloatFilter, {
     nullable: true
   })
-  sum?: NestedFloatFilter | undefined;
+  _sum?: NestedFloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedFloatFilter, {
     nullable: true
   })
-  min?: NestedFloatFilter | undefined;
+  _min?: NestedFloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedFloatFilter, {
     nullable: true
   })
-  max?: NestedFloatFilter | undefined;
+  _max?: NestedFloatFilter | undefined;
 }

@@ -9,7 +9,7 @@ import { SortOrder } from "../../enums/SortOrder";
 })
 export class ProblemOrderByRelationAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: false
+    nullable: true
   })
-  count!: "asc" | "desc";
+  _count?: "asc" | "desc" | undefined;
 }

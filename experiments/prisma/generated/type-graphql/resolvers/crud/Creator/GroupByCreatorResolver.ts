@@ -12,13 +12,13 @@ export class GroupByCreatorResolver {
     nullable: false
   })
   async groupByCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByCreatorArgs): Promise<CreatorGroupBy[]> {
-    const { count, avg, sum, min, max } = transformFields(
+    const { _count, _avg, _sum, _min, _max } = transformFields(
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).creator.groupBy({
       ...args,
       ...Object.fromEntries(
-        Object.entries({ count, avg, sum, min, max }).filter(([_, v]) => v != null)
+        Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)
       ),
     });
   }

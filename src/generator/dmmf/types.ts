@@ -37,7 +37,7 @@ export namespace DMMF {
     typeName: string;
     docs: string | undefined;
   }
-  export type FieldKind = "scalar" | "object" | "enum";
+  export type FieldKind = "scalar" | "object" | "enum" | "unsupported";
   export type FieldNamespace = "model" | "prisma";
   export type FieldLocation =
     | "scalar"
@@ -105,6 +105,7 @@ export namespace DMMF {
     isNullable: boolean;
     isRequired: boolean;
     // inputTypes: SchemaArgInputType[];
+    deprecation?: Deprecation;
     // additional props
     selectedInputType: SchemaArgInputType;
     typeName: string;
@@ -133,16 +134,16 @@ export namespace DMMF {
     // };
     outputType: TypeInfo;
     args: SchemaArg[];
-    deprecation?: SchemaFieldDeprecation;
+    deprecation?: Deprecation;
     // additional props
     typeGraphQLType: string;
     fieldTSType: string;
     isRequired: boolean;
   }
-  export interface SchemaFieldDeprecation {
+  export interface Deprecation {
     sinceVersion: string;
     reason: string;
-    plannedRemovalVersion: string;
+    plannedRemovalVersion?: string;
   }
   // named subtype of SchemaField->outputType
   export interface TypeInfo {

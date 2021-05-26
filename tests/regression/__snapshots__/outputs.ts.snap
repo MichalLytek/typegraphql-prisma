@@ -18,27 +18,27 @@ export class AggregateExample {
   @TypeGraphQL.Field(_type => ExampleCountAggregate, {
     nullable: true
   })
-  count!: ExampleCountAggregate | null;
+  _count!: ExampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleAvgAggregate, {
     nullable: true
   })
-  avg!: ExampleAvgAggregate | null;
+  _avg!: ExampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleSumAggregate, {
     nullable: true
   })
-  sum!: ExampleSumAggregate | null;
+  _sum!: ExampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleMinAggregate, {
     nullable: true
   })
-  min!: ExampleMinAggregate | null;
+  _min!: ExampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleMaxAggregate, {
     nullable: true
   })
-  max!: ExampleMaxAggregate | null;
+  _max!: ExampleMaxAggregate | null;
 }
 "
 `;
@@ -238,27 +238,27 @@ export class AggregateExample {
   @TypeGraphQL.Field(_type => ExampleCountAggregate, {
     nullable: true
   })
-  count!: ExampleCountAggregate | null;
+  _count!: ExampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleAvgAggregate, {
     nullable: true
   })
-  avg!: ExampleAvgAggregate | null;
+  _avg!: ExampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleSumAggregate, {
     nullable: true
   })
-  sum!: ExampleSumAggregate | null;
+  _sum!: ExampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleMinAggregate, {
     nullable: true
   })
-  min!: ExampleMinAggregate | null;
+  _min!: ExampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => ExampleMaxAggregate, {
     nullable: true
   })
-  max!: ExampleMaxAggregate | null;
+  _max!: ExampleMaxAggregate | null;
 }
 "
 `;
@@ -476,27 +476,27 @@ export class AggregateSample {
   @TypeGraphQL.Field(_type => SampleCountAggregate, {
     nullable: true
   })
-  count!: SampleCountAggregate | null;
+  _count!: SampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleAvgAggregate, {
     nullable: true
   })
-  avg!: SampleAvgAggregate | null;
+  _avg!: SampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleSumAggregate, {
     nullable: true
   })
-  sum!: SampleSumAggregate | null;
+  _sum!: SampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMinAggregate, {
     nullable: true
   })
-  min!: SampleMinAggregate | null;
+  _min!: SampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMaxAggregate, {
     nullable: true
   })
-  max!: SampleMaxAggregate | null;
+  _max!: SampleMaxAggregate | null;
 }
 "
 `;
@@ -618,34 +618,34 @@ export class SampleGroupBy {
   dateField!: Date;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
-    nullable: false
+    nullable: true
   })
-  intArrayField!: number[];
+  intArrayField!: number[] | null;
 
   @TypeGraphQL.Field(_type => SampleCountAggregate, {
     nullable: true
   })
-  count!: SampleCountAggregate | null;
+  _count!: SampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleAvgAggregate, {
     nullable: true
   })
-  avg!: SampleAvgAggregate | null;
+  _avg!: SampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleSumAggregate, {
     nullable: true
   })
-  sum!: SampleSumAggregate | null;
+  _sum!: SampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMinAggregate, {
     nullable: true
   })
-  min!: SampleMinAggregate | null;
+  _min!: SampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMaxAggregate, {
     nullable: true
   })
-  max!: SampleMaxAggregate | null;
+  _max!: SampleMaxAggregate | null;
 }
 "
 `;
@@ -747,9 +747,9 @@ export class SampleSumAggregate {
   floatField!: number | null;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
-    nullable: false
+    nullable: true
   })
-  intArrayField!: number[];
+  intArrayField!: number[] | null;
 }
 "
 `;
@@ -842,27 +842,27 @@ export class AggregateSample {
   @TypeGraphQL.Field(_type => SampleCountAggregate, {
     nullable: true
   })
-  count!: SampleCountAggregate | null;
+  _count!: SampleCountAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleAvgAggregate, {
     nullable: true
   })
-  avg!: SampleAvgAggregate | null;
+  _avg!: SampleAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleSumAggregate, {
     nullable: true
   })
-  sum!: SampleSumAggregate | null;
+  _sum!: SampleSumAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMinAggregate, {
     nullable: true
   })
-  min!: SampleMinAggregate | null;
+  _min!: SampleMinAggregate | null;
 
   @TypeGraphQL.Field(_type => SampleMaxAggregate, {
     nullable: true
   })
-  max!: SampleMaxAggregate | null;
+  _max!: SampleMaxAggregate | null;
 }
 "
 `;

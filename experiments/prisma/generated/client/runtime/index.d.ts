@@ -116,6 +116,7 @@ declare namespace DMMF {
         isNullable: boolean;
         isRequired: boolean;
         inputTypes: SchemaArgInputType[];
+        deprecation?: Deprecation;
     }
     interface OutputType {
         name: string;
@@ -133,12 +134,12 @@ declare namespace DMMF {
             namespace?: FieldNamespace;
         };
         args: SchemaArg[];
-        deprecation?: SchemaFieldDeprecation;
+        deprecation?: Deprecation;
     }
-    interface SchemaFieldDeprecation {
+    interface Deprecation {
         sinceVersion: string;
         reason: string;
-        plannedRemovalVersion: string;
+        plannedRemovalVersion?: string;
     }
     interface InputType {
         name: string;

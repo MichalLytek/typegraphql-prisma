@@ -13,15 +13,15 @@ export class AggregateDirector {
   @TypeGraphQL.Field(_type => DirectorCountAggregate, {
     nullable: true
   })
-  count!: DirectorCountAggregate | null;
+  _count!: DirectorCountAggregate | null;
 
   @TypeGraphQL.Field(_type => DirectorMinAggregate, {
     nullable: true
   })
-  min!: DirectorMinAggregate | null;
+  _min!: DirectorMinAggregate | null;
 
   @TypeGraphQL.Field(_type => DirectorMaxAggregate, {
     nullable: true
   })
-  max!: DirectorMaxAggregate | null;
+  _max!: DirectorMaxAggregate | null;
 }

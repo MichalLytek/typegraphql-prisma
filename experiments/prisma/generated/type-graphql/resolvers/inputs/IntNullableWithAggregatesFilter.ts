@@ -53,25 +53,25 @@ export class IntNullableWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntNullableFilter, {
     nullable: true
   })
-  count?: NestedIntNullableFilter | undefined;
+  _count?: NestedIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedFloatNullableFilter, {
     nullable: true
   })
-  avg?: NestedFloatNullableFilter | undefined;
+  _avg?: NestedFloatNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedIntNullableFilter, {
     nullable: true
   })
-  sum?: NestedIntNullableFilter | undefined;
+  _sum?: NestedIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedIntNullableFilter, {
     nullable: true
   })
-  min?: NestedIntNullableFilter | undefined;
+  _min?: NestedIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedIntNullableFilter, {
     nullable: true
   })
-  max?: NestedIntNullableFilter | undefined;
+  _max?: NestedIntNullableFilter | undefined;
 }

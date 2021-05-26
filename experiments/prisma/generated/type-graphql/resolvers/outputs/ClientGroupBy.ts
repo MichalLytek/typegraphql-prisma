@@ -49,37 +49,37 @@ export class ClientGroupBy {
   role!: "USER" | "ADMIN";
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
-    nullable: false
+    nullable: true
   })
-  grades!: number[];
+  grades!: number[] | null;
 
   @TypeGraphQL.Field(_type => [String], {
-    nullable: false
+    nullable: true
   })
-  aliases!: string[];
+  aliases!: string[] | null;
 
   @TypeGraphQL.Field(_type => ClientCountAggregate, {
     nullable: true
   })
-  count!: ClientCountAggregate | null;
+  _count!: ClientCountAggregate | null;
 
   @TypeGraphQL.Field(_type => ClientAvgAggregate, {
     nullable: true
   })
-  avg!: ClientAvgAggregate | null;
+  _avg!: ClientAvgAggregate | null;
 
   @TypeGraphQL.Field(_type => ClientSumAggregate, {
     nullable: true
   })
-  sum!: ClientSumAggregate | null;
+  _sum!: ClientSumAggregate | null;
 
   @TypeGraphQL.Field(_type => ClientMinAggregate, {
     nullable: true
   })
-  min!: ClientMinAggregate | null;
+  _min!: ClientMinAggregate | null;
 
   @TypeGraphQL.Field(_type => ClientMaxAggregate, {
     nullable: true
   })
-  max!: ClientMaxAggregate | null;
+  _max!: ClientMaxAggregate | null;
 }

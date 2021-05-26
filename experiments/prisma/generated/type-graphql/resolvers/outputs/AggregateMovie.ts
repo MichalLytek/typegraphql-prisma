@@ -13,15 +13,15 @@ export class AggregateMovie {
   @TypeGraphQL.Field(_type => MovieCountAggregate, {
     nullable: true
   })
-  count!: MovieCountAggregate | null;
+  _count!: MovieCountAggregate | null;
 
   @TypeGraphQL.Field(_type => MovieMinAggregate, {
     nullable: true
   })
-  min!: MovieMinAggregate | null;
+  _min!: MovieMinAggregate | null;
 
   @TypeGraphQL.Field(_type => MovieMaxAggregate, {
     nullable: true
   })
-  max!: MovieMaxAggregate | null;
+  _max!: MovieMaxAggregate | null;
 }

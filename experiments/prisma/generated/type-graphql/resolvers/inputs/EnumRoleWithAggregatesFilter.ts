@@ -34,15 +34,15 @@ export class EnumRoleWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntFilter, {
     nullable: true
   })
-  count?: NestedIntFilter | undefined;
+  _count?: NestedIntFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedEnumRoleFilter, {
     nullable: true
   })
-  min?: NestedEnumRoleFilter | undefined;
+  _min?: NestedEnumRoleFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedEnumRoleFilter, {
     nullable: true
   })
-  max?: NestedEnumRoleFilter | undefined;
+  _max?: NestedEnumRoleFilter | undefined;
 }

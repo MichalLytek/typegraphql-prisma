@@ -11624,8 +11624,8 @@
           },
           "fields": [
             {
-              "name": "count",
-              "isRequired": true,
+              "name": "_count",
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -11635,6 +11635,23 @@
                   "isList": false
                 }
               ]
+            },
+            {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -12222,12 +12239,42 @@
               ]
             },
             {
+              "name": "_count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
                   "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -12245,10 +12292,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12271,6 +12352,23 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
@@ -12284,7 +12382,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -12447,7 +12549,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12460,7 +12562,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedStringFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedStringFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12483,7 +12632,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -12666,7 +12819,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12679,7 +12832,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedStringNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedStringNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12702,7 +12902,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -12816,7 +13020,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12829,7 +13033,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12852,10 +13103,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12878,7 +13163,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -12948,7 +13237,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12961,7 +13250,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedEnumRoleFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedEnumRoleFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12984,7 +13320,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -14034,7 +14374,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14047,7 +14387,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDateTimeFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDateTimeFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14070,7 +14457,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -14112,7 +14503,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14125,7 +14516,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBoolFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBoolFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14148,7 +14586,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -14282,12 +14724,42 @@
               ]
             },
             {
+              "name": "_count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
                   "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatNullableFilter",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -14305,10 +14777,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14331,6 +14837,23 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
@@ -14344,7 +14867,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -14434,7 +14961,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14447,7 +14974,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedEnumPostKindNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedEnumPostKindNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14470,7 +15044,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -14506,7 +15084,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14519,7 +15097,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedJsonFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedJsonFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -14542,7 +15167,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -15224,8 +15853,8 @@
           },
           "fields": [
             {
-              "name": "count",
-              "isRequired": true,
+              "name": "_count",
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -15235,6 +15864,23 @@
                   "isList": false
                 }
               ]
+            },
+            {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -15477,8 +16123,8 @@
           },
           "fields": [
             {
-              "name": "count",
-              "isRequired": true,
+              "name": "_count",
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -15488,6 +16134,23 @@
                   "isList": false
                 }
               ]
+            },
+            {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -15761,8 +16424,8 @@
           },
           "fields": [
             {
-              "name": "count",
-              "isRequired": true,
+              "name": "_count",
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -15772,6 +16435,23 @@
                   "isList": false
                 }
               ]
+            },
+            {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -16644,12 +17324,42 @@
               ]
             },
             {
+              "name": "_count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
                   "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatNullableFilter",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -16667,10 +17377,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBigIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBigIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -16693,6 +17437,23 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBigIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
@@ -16706,7 +17467,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -16758,7 +17523,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -16771,7 +17536,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBytesNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBytesNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -16794,7 +17606,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -16928,7 +17744,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -16941,7 +17757,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDecimalNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDecimalNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -16964,10 +17827,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDecimalNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDecimalNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -16990,7 +17887,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -22097,12 +22998,42 @@
               ]
             },
             {
+              "name": "_count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
                   "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -22120,10 +23051,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22146,6 +23111,23 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
@@ -22159,7 +23141,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -22309,7 +23295,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22322,7 +23308,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedStringFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedStringFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22345,7 +23378,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -22515,7 +23552,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22528,7 +23565,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedStringNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedStringNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22551,7 +23635,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -22796,7 +23884,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22809,7 +23897,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22832,10 +23967,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22858,7 +24027,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -22928,7 +24101,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22941,7 +24114,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedEnumRoleFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedEnumRoleFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22964,7 +24184,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -23315,7 +24539,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -23328,7 +24552,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDateTimeFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDateTimeFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -23351,7 +24622,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -23393,7 +24668,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -23406,7 +24681,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBoolFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBoolFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -23429,7 +24751,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -23563,12 +24889,42 @@
               ]
             },
             {
+              "name": "_count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
                   "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatNullableFilter",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -23586,10 +24942,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -23612,6 +25002,23 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
@@ -23625,7 +25032,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -23846,7 +25257,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -23859,7 +25270,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedEnumPostKindNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedEnumPostKindNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -23882,7 +25340,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -24360,12 +25822,42 @@
               ]
             },
             {
+              "name": "_count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
                   "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedFloatNullableFilter",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -24383,10 +25875,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBigIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "sum",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBigIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -24409,6 +25935,23 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBigIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
@@ -24422,7 +25965,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -24474,7 +26021,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -24487,7 +26034,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBytesNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedBytesNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -24510,7 +26104,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -24644,7 +26242,7 @@
               ]
             },
             {
-              "name": "count",
+              "name": "_count",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -24657,7 +26255,54 @@
               ]
             },
             {
+              "name": "count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedIntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDecimalNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "avg",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDecimalNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -24680,10 +26325,44 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDecimalNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
               ]
             },
             {
               "name": "min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NestedDecimalNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -24706,7 +26385,11 @@
                   "location": "inputObjectTypes",
                   "isList": false
                 }
-              ]
+              ],
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
             }
           ]
         },
@@ -37422,11 +39105,37 @@
           "name": "AggregateUser",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "UserCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "UserCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "UserAvgAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -37441,6 +39150,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "UserSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -37449,6 +39173,21 @@
               "isNullable": true,
               "outputType": {
                 "type": "UserSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "UserMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -37463,6 +39202,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "UserMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -37474,6 +39228,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -37573,7 +39331,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37584,7 +39342,7 @@
               }
             },
             {
-              "name": "avg",
+              "name": "_avg",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37595,7 +39353,7 @@
               }
             },
             {
-              "name": "sum",
+              "name": "_sum",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37606,7 +39364,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37617,7 +39375,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37633,11 +39391,37 @@
           "name": "AggregatePost",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PostCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "PostCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PostAvgAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -37652,6 +39436,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PostSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -37660,6 +39459,21 @@
               "isNullable": true,
               "outputType": {
                 "type": "PostSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PostMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -37674,6 +39488,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PostMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -37685,6 +39514,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -37804,7 +39637,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37815,7 +39648,7 @@
               }
             },
             {
-              "name": "avg",
+              "name": "_avg",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37826,7 +39659,7 @@
               }
             },
             {
-              "name": "sum",
+              "name": "_sum",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37837,7 +39670,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37848,7 +39681,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37864,11 +39697,37 @@
           "name": "AggregateCategory",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CategoryCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "CategoryCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CategoryAvgAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -37883,6 +39742,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CategorySumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -37891,6 +39765,21 @@
               "isNullable": true,
               "outputType": {
                 "type": "CategorySumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CategoryMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -37905,6 +39794,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CategoryMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -37916,6 +39820,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -37954,7 +39862,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37965,7 +39873,7 @@
               }
             },
             {
-              "name": "avg",
+              "name": "_avg",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37976,7 +39884,7 @@
               }
             },
             {
-              "name": "sum",
+              "name": "_sum",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37987,7 +39895,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -37998,7 +39906,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38014,11 +39922,37 @@
           "name": "AggregatePatient",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PatientCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "PatientCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PatientMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38033,6 +39967,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PatientMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38044,6 +39993,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -38082,7 +40035,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38093,7 +40046,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38104,7 +40057,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38120,11 +40073,37 @@
           "name": "AggregateMovie",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "MovieCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "MovieCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "MovieMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38139,6 +40118,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "MovieMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38150,6 +40144,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -38188,7 +40186,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38199,7 +40197,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38210,7 +40208,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38226,11 +40224,37 @@
           "name": "AggregateDirector",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "DirectorCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "DirectorCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "DirectorMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38245,6 +40269,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "DirectorMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38256,6 +40295,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -38284,7 +40327,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38295,7 +40338,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38306,7 +40349,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38322,11 +40365,37 @@
           "name": "AggregateProblem",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "ProblemCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "ProblemCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "ProblemAvgAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38341,6 +40410,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "ProblemSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38349,6 +40433,21 @@
               "isNullable": true,
               "outputType": {
                 "type": "ProblemSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "ProblemMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38363,6 +40462,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "ProblemMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38374,6 +40488,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -38412,7 +40530,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38423,7 +40541,7 @@
               }
             },
             {
-              "name": "avg",
+              "name": "_avg",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38434,7 +40552,7 @@
               }
             },
             {
-              "name": "sum",
+              "name": "_sum",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38445,7 +40563,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38456,7 +40574,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38472,11 +40590,37 @@
           "name": "AggregateCreator",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CreatorCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "CreatorCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CreatorAvgAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38491,6 +40635,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CreatorSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38499,6 +40658,21 @@
               "isNullable": true,
               "outputType": {
                 "type": "CreatorSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CreatorMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38513,6 +40687,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "CreatorMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38524,6 +40713,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -38552,7 +40745,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38563,7 +40756,7 @@
               }
             },
             {
-              "name": "avg",
+              "name": "_avg",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38574,7 +40767,7 @@
               }
             },
             {
-              "name": "sum",
+              "name": "_sum",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38585,7 +40778,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38596,7 +40789,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38612,11 +40805,37 @@
           "name": "AggregateNativeTypeModel",
           "fields": [
             {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "NativeTypeModelCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "count",
               "args": [],
               "isNullable": true,
               "outputType": {
                 "type": "NativeTypeModelCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_avg",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "NativeTypeModelAvgAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38631,6 +40850,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_sum",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "NativeTypeModelSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38639,6 +40873,21 @@
               "isNullable": true,
               "outputType": {
                 "type": "NativeTypeModelSumAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "NativeTypeModelMinAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -38653,6 +40902,21 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "NativeTypeModelMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
               }
             },
             {
@@ -38664,6 +40928,10 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              },
+              "deprecation": {
+                "sinceVersion": "2.23",
+                "reason": "Aggregation keywords got unified to use underscore as prefix to prevent field clashes."
               }
             }
           ]
@@ -38712,7 +40980,7 @@
               }
             },
             {
-              "name": "count",
+              "name": "_count",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38723,7 +40991,7 @@
               }
             },
             {
-              "name": "avg",
+              "name": "_avg",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38734,7 +41002,7 @@
               }
             },
             {
-              "name": "sum",
+              "name": "_sum",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38745,7 +41013,7 @@
               }
             },
             {
-              "name": "min",
+              "name": "_min",
               "args": [],
               "isNullable": true,
               "outputType": {
@@ -38756,7 +41024,7 @@
               }
             },
             {
-              "name": "max",
+              "name": "_max",
               "args": [],
               "isNullable": true,
               "outputType": {

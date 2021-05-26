@@ -4074,7 +4074,7 @@ how you used Prisma Client in the issue.
   }
 });
 
-// ../../node_modules/.pnpm/@prisma/engines@2.22.0-21.60cc71d884972ab4e897f0277c4b84383dddaf6c/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma/engines@2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports, module) => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -4700,16 +4700,16 @@ var require_dist9 = __commonJS2((exports, module) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.22.0-21.60cc71d884972ab4e897f0277c4b84383dddaf6c",
+      version: "2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "60cc71d884972ab4e897f0277c4b84383dddaf6c"
+        enginesVersion: "adf5e8cba3daf12d456d911d72b6e9418681b28b"
       },
       devDependencies: {
-        "@types/node": "14.14.43",
+        "@types/node": "14.14.45",
         typescript: "4.2.4"
       },
       scripts: {
@@ -27904,7 +27904,8 @@ var require_NAPIEngine = __commonJS2((exports, module) => {
         return this.setupPromise;
       this.platform = await this.getPlatform();
       this.libQueryEnginePath = await this.getLibQueryEnginePath();
-      return this.loadEngine();
+      await this.loadEngine();
+      await this.version();
     }
     async getPlatform() {
       if (this.platform)
@@ -28058,7 +28059,6 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
           await ((_a = this.engine) === null || _a === void 0 ? void 0 : _a.connect({enableRawQueries: true}));
           this.connected = true;
           debug("started");
-          void this.version();
           res();
         });
         return this.connectPromise;
@@ -28103,12 +28103,10 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
       }
     }
     async getConfig() {
-      await this.start();
       const config2 = this.parseEngineResponse(await this.engine.getConfig());
       return config2;
     }
     async version(forceRun) {
-      await this.start();
       const serverInfo = this.parseEngineResponse(await this.engine.serverInfo());
       this.serverInfo = serverInfo;
       return this.serverInfo.version;
@@ -28130,12 +28128,11 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         const data = this.parseEngineResponse(await this.currentQuery);
         if (data.errors) {
           if (data.errors.length === 1) {
-            if (this.lastError) {
-              throw this.lastError;
-            }
             throw this.graphQLToJSError(data.errors[0]);
           }
           throw new errors_1.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+        } else if (this.lastError) {
+          throw this.lastError;
         }
         return {data, elapsed: 0};
       } catch (e) {
@@ -28436,7 +28433,7 @@ var require_mapPreviewFeatures = __commonJS2((exports2) => {
   exports2.mapPreviewFeatures = mapPreviewFeatures2;
 });
 
-// ../../node_modules/.pnpm/dotenv@8.2.0/node_modules/dotenv/lib/main.js
+// ../../node_modules/.pnpm/dotenv@9.0.2/node_modules/dotenv/lib/main.js
 var require_main3 = __commonJS2((exports2, module2) => {
   var fs2 = require("fs");
   var path2 = require("path");
@@ -28446,7 +28443,7 @@ var require_main3 = __commonJS2((exports2, module2) => {
   var NEWLINE = "\n";
   var RE_INI_KEY_VAL = /^\s*([\w.-]+)\s*=\s*(.*)?\s*$/;
   var RE_NEWLINES = /\\n/g;
-  var NEWLINES_MATCH = /\n|\r|\r\n/;
+  var NEWLINES_MATCH = /\r\n|\n|\r/;
   function parse2(src, options) {
     const debug4 = Boolean(options && options.debug);
     const obj = {};
@@ -28736,7 +28733,7 @@ var require_dist12 = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.22.0",
+    version: "2.23.0",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -28793,23 +28790,23 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "index-browser.js"
     ],
     devDependencies: {
-      "@prisma/debug": "2.22.0",
-      "@prisma/engine-core": "2.22.0",
-      "@prisma/engines": "2.22.0-21.60cc71d884972ab4e897f0277c4b84383dddaf6c",
-      "@prisma/fetch-engine": "2.22.0",
-      "@prisma/generator-helper": "2.22.0",
-      "@prisma/get-platform": "2.22.0",
-      "@prisma/migrate": "2.22.0",
-      "@prisma/sdk": "2.22.0",
+      "@prisma/debug": "2.23.0",
+      "@prisma/engine-core": "2.23.0",
+      "@prisma/engines": "2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b",
+      "@prisma/fetch-engine": "2.23.0",
+      "@prisma/generator-helper": "2.23.0",
+      "@prisma/get-platform": "2.23.0",
+      "@prisma/migrate": "2.23.0",
+      "@prisma/sdk": "2.23.0",
       "@timsuchanek/copy": "1.4.5",
       "@types/debug": "4.1.5",
       "@types/jest": "26.0.23",
       "@types/js-levenshtein": "1.1.0",
       "@types/mssql": "6.0.8",
-      "@types/node": "12.20.11",
-      "@types/pg": "7.14.11",
-      "@typescript-eslint/eslint-plugin": "4.22.0",
-      "@typescript-eslint/parser": "4.22.0",
+      "@types/node": "12.20.13",
+      "@types/pg": "8.6.0",
+      "@typescript-eslint/eslint-plugin": "4.22.1",
+      "@typescript-eslint/parser": "4.22.1",
       arg: "5.0.0",
       chalk: "4.1.1",
       "decimal.js": "10.2.1",
@@ -28830,7 +28827,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       jest: "26.6.3",
       "js-levenshtein": "1.1.6",
       klona: "2.0.4",
-      "lint-staged": "10.5.4",
+      "lint-staged": "11.0.0",
       "make-dir": "3.1.0",
       mariadb: "2.5.3",
       mssql: "6.3.1",
@@ -28841,7 +28838,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "replace-string": "3.1.0",
       "resolve-from": "5.0.0",
       rimraf: "3.0.2",
-      rollup: "2.46.0",
+      rollup: "2.47.0",
       "rollup-plugin-dts": "3.0.1",
       "sort-keys": "4.2.0",
       "source-map-support": "0.5.19",
@@ -28863,7 +28860,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       }
     },
     dependencies: {
-      "@prisma/engines-version": "2.22.0-21.60cc71d884972ab4e897f0277c4b84383dddaf6c"
+      "@prisma/engines-version": "2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b"
     },
     "lint-staged": {
       "*.ts": [
@@ -31668,6 +31665,7 @@ var DMMFClass = class {
 // src/runtime/query.ts
 var import_chalk5 = __toModule2(require_source3());
 var import_indent_string2 = __toModule2(require_indent_string2());
+var import_strip_ansi2 = __toModule2(require_strip_ansi());
 
 // src/runtime/utils/deep-extend.ts
 /*!
@@ -31788,6 +31786,25 @@ function filterObject(obj, cb) {
     }
   }
   return newObj;
+}
+
+// src/runtime/utils/flatMap.ts
+function flatten(array) {
+  return Array.prototype.concat.apply([], array);
+}
+function flatMap(array, callbackFn, thisArg) {
+  return flatten(array.map(callbackFn, thisArg));
+}
+
+// src/runtime/utils/isObject.ts
+var notReallyObjects = {
+  "[object Date]": true,
+  "[object BitInt]": true,
+  "[object Uint8Array]": true,
+  "[object Function]": true
+};
+function isObject(value) {
+  return value && typeof value === "object" && !notReallyObjects[Object.prototype.toString.call(value)];
 }
 
 // src/runtime/utils/omit.ts
@@ -32500,28 +32517,6 @@ ${prevLines}${import_chalk4.default.reset()}`;
 };
 
 // src/runtime/query.ts
-var import_strip_ansi2 = __toModule2(require_strip_ansi());
-
-// src/runtime/utils/flatMap.ts
-function flatten(array) {
-  return Array.prototype.concat.apply([], array);
-}
-function flatMap(array, callbackFn, thisArg) {
-  return flatten(array.map(callbackFn, thisArg));
-}
-
-// src/runtime/utils/isObject.ts
-var notReallyObjects = {
-  "[object Date]": true,
-  "[object BitInt]": true,
-  "[object Uint8Array]": true,
-  "[object Function]": true
-};
-function isObject(value) {
-  return value && typeof value === "object" && !notReallyObjects[Object.prototype.toString.call(value)];
-}
-
-// src/runtime/query.ts
 var tab = 2;
 var Document = class {
   constructor(type, children) {
@@ -32643,6 +32638,7 @@ ${import_indent_string2.default(this.children.map(String).join("\n"), tab)}
 }`;
   }
   validate(select, isTopLevelQuery = false, originalMethod, errorFormat, validationCallsite) {
+    var _a;
     if (!select) {
       select = {};
     }
@@ -32693,7 +32689,7 @@ ${import_indent_string2.default(this.children.map(String).join("\n"), tab)}
         const selectPathArray = this.normalizePath(fieldError.path, select);
         const selectPath = selectPathArray.slice(0, selectPathArray.length - 1).join(".");
         const fieldType = fieldError.error.field.outputType.type;
-        fieldType.fields.filter((field) => fieldError.error.type === "emptyInclude" ? field.outputType.location === "outputObjectTypes" : true).forEach((field) => {
+        (_a = fieldType.fields) == null ? void 0 : _a.filter((field) => fieldError.error.type === "emptyInclude" ? field.outputType.location === "outputObjectTypes" : true).forEach((field) => {
           missingItems.push({
             path: `${selectPath}.${field.name}`,
             type: "true",
@@ -34180,6 +34176,11 @@ var actionOperationMap = {
   groupBy: "query"
 };
 var aggregateKeys = {
+  _avg: true,
+  _count: true,
+  _sum: true,
+  _min: true,
+  _max: true,
   avg: true,
   count: true,
   sum: true,
@@ -34872,12 +34873,12 @@ new PrismaClient({
           let select;
           let unpacker;
           if ((args == null ? void 0 : args.select) && typeof (args == null ? void 0 : args.select) === "object") {
-            select = {count: {select: args.select}};
+            select = {_count: {select: args.select}};
           } else {
-            select = {count: {select: {_all: true}}};
+            select = {_count: {select: {_all: true}}};
             unpacker = (data) => {
               var _a;
-              data.count = (_a = data.count) == null ? void 0 : _a._all;
+              data._count = (_a = data._count) == null ? void 0 : _a._all;
               return data;
             };
           }
@@ -34888,7 +34889,7 @@ new PrismaClient({
               ...args != null ? args : {},
               select
             },
-            dataPath: ["count"],
+            dataPath: ["_count"],
             unpacker
           });
         };
@@ -34899,15 +34900,17 @@ new PrismaClient({
               if (!acc.select) {
                 acc.select = {};
               }
-              if (key === "count") {
+              if (key === "_count" || key === "count") {
                 if (typeof value === "object" && value) {
                   acc.select[key] = {select: value};
                 } else {
                   acc.select[key] = {select: {_all: value}};
                   unpacker = (data) => {
-                    var _a;
-                    if (data.count) {
-                      data.count = (_a = data.count) == null ? void 0 : _a._all;
+                    var _a, _b;
+                    if (data._count) {
+                      data._count = (_a = data._count) == null ? void 0 : _a._all;
+                    } else if (data.count) {
+                      data.count = (_b = data.count) == null ? void 0 : _b._all;
                     }
                     return data;
                   };
@@ -34940,7 +34943,7 @@ new PrismaClient({
             } else {
               acc[key] = value;
             }
-            if (key === "count") {
+            if (key === "_count") {
               if (typeof value === "object" && value) {
                 acc.select[key] = {select: value};
               } else if (typeof value === "boolean") {
@@ -34949,8 +34952,8 @@ new PrismaClient({
                   if (Array.isArray(data)) {
                     data = data.map((row) => {
                       var _a, _b;
-                      if (row && typeof row.count === "object" && ((_a = row.count) == null ? void 0 : _a._all)) {
-                        row.count = (_b = row.count) == null ? void 0 : _b._all;
+                      if (row && typeof row._count === "object" && ((_a = row._count) == null ? void 0 : _a._all)) {
+                        row._count = (_b = row._count) == null ? void 0 : _b._all;
                       }
                       return row;
                     });

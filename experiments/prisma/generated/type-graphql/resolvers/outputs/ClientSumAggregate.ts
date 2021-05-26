@@ -28,7 +28,7 @@ export class ClientSumAggregate {
   amount!: number | null;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
-    nullable: false
+    nullable: true
   })
-  grades!: number[];
+  grades!: number[] | null;
 }

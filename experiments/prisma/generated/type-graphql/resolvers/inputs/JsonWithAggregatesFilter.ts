@@ -22,15 +22,15 @@ export class JsonWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntFilter, {
     nullable: true
   })
-  count?: NestedIntFilter | undefined;
+  _count?: NestedIntFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedJsonFilter, {
     nullable: true
   })
-  min?: NestedJsonFilter | undefined;
+  _min?: NestedJsonFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedJsonFilter, {
     nullable: true
   })
-  max?: NestedJsonFilter | undefined;
+  _max?: NestedJsonFilter | undefined;
 }

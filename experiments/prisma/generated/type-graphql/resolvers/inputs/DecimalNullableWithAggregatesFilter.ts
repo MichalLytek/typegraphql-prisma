@@ -53,25 +53,25 @@ export class DecimalNullableWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntNullableFilter, {
     nullable: true
   })
-  count?: NestedIntNullableFilter | undefined;
+  _count?: NestedIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedDecimalNullableFilter, {
     nullable: true
   })
-  avg?: NestedDecimalNullableFilter | undefined;
+  _avg?: NestedDecimalNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedDecimalNullableFilter, {
     nullable: true
   })
-  sum?: NestedDecimalNullableFilter | undefined;
+  _sum?: NestedDecimalNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedDecimalNullableFilter, {
     nullable: true
   })
-  min?: NestedDecimalNullableFilter | undefined;
+  _min?: NestedDecimalNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedDecimalNullableFilter, {
     nullable: true
   })
-  max?: NestedDecimalNullableFilter | undefined;
+  _max?: NestedDecimalNullableFilter | undefined;
 }

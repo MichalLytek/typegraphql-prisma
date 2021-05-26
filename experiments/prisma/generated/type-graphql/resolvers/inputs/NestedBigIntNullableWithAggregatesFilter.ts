@@ -53,25 +53,25 @@ export class NestedBigIntNullableWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntNullableFilter, {
     nullable: true
   })
-  count?: NestedIntNullableFilter | undefined;
+  _count?: NestedIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedFloatNullableFilter, {
     nullable: true
   })
-  avg?: NestedFloatNullableFilter | undefined;
+  _avg?: NestedFloatNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedBigIntNullableFilter, {
     nullable: true
   })
-  sum?: NestedBigIntNullableFilter | undefined;
+  _sum?: NestedBigIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedBigIntNullableFilter, {
     nullable: true
   })
-  min?: NestedBigIntNullableFilter | undefined;
+  _min?: NestedBigIntNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedBigIntNullableFilter, {
     nullable: true
   })
-  max?: NestedBigIntNullableFilter | undefined;
+  _max?: NestedBigIntNullableFilter | undefined;
 }
