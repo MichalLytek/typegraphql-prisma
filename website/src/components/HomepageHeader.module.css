@@ -1,0 +1,75 @@
+.heroBanner {
+  padding: 2rem 0 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  --ifm-hero-background-color: var(--ifm-banner-background-color);
+  --ifm-hero-text-color: var(--ifm-font-color-base);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  display: grid;
+  gap: 6%;
+  grid-template-columns: 5fr 6fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+  padding: 2rem 0 3rem 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.logoTypeGraphQL,
+.logoPrisma {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.logoPrisma {
+  padding: 0 3%;
+}
+
+@media screen and (max-width: 966px) {
+  .heroBanner {
+    padding: 1rem 2rem 2rem 2rem;
+  }
+  .logo {
+    padding: 1rem 0;
+    gap: 3%;
+  }
+  .logoPrisma {
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .subtitle {
+    font-size: 1.3rem;
+  }
+  .logo {
+    gap: 1rem;
+    padding: 1rem 0 2rem 0;
+  }
+}
+
+@media screen and (max-width: 398px) {
+  .title {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  .logo {
+    gap: 0;
+    padding: 1rem 0 2rem 0;
+  }
+}

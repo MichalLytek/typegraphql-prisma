@@ -22,7 +22,7 @@ You can paste the errors with stack trace that were printed when the error occur
 - OS: [e.g. Windows 10 21H1]
 - Node (e.g. 15.8.0)
 - `typegraphql-prisma` version [e.g. 0.11.1] (please check if the bug still exist in newest release)
-- Prisma 2 version [e.g. 2.18.0]
+- Prisma version [e.g. 2.18.0]
 - TypeScript version (e.g. 4.2.2)
 
 **Additional Context**

@@ -1,18 +1,20 @@
-name: TypeGraphQL Prisma 2 integration
+name: CI/CD
 
 on:
   push:
     branches:
-      # - prisma
-      - none
+      - main
 
 jobs:
-  build:
+  check:
+    # disable check workflow
+    if: ${{ github.ref == 'refs/heads/none' }}
+
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 13.x, 14.x]
+        node-version: [12.x, 13.x, 14.x, 15.x, 16.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -36,3 +38,31 @@ jobs:
           npm run test:ci
         env:
           CI: true
+
+  deploy-website:
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "12"
+
+      - name: Build Docusaurus website
+        run: |
+          cd website
+          npm i
+          npm run build
+
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website/build
+          user_name: "gh-actions"
+          user_email: "actions@github.com"
+          commit_message: |
+            Deploy website
+            Deploy website version based on

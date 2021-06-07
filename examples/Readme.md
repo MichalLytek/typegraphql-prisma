@@ -1,8 +1,8 @@
 # Examples
 
-This directory contains a few examples of using the TypeGraphQL Prisma 2 integration:
+This directory contains a few examples of using the TypeGraphQL Prisma integration:
 
-- **Prototyping** - the workflow of using the generator that creates TypeGraphQL artifacts from Prisma 2 schema and creating a GraphQL schema with all CRUD operation
+- **Prototyping** - the workflow of using the generator that creates TypeGraphQL artifacts from Prisma schema and creating a GraphQL schema with all CRUD operation
 
   https://github.com/MichalLytek/typegraphql-prisma/tree/main/examples/1-prototyping
 

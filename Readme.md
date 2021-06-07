@@ -1,18 +1,18 @@
 ![integration logo](https://raw.githubusercontent.com/MichalLytek/typegraphql-prisma/main/img/integration.png)
 
-# TypeGraphQL & Prisma 2 integration
+# TypeGraphQL & Prisma integration
 
-Prisma 2 generator to emit TypeGraphQL types and CRUD resolvers from your Prisma 2 schema
+Prisma generator to emit TypeGraphQL types and CRUD resolvers from your Prisma schema
 
 ## Installation
 
-Fist of all, you have to install the generator, as a dev dependency:
+First of all, you have to install the generator, as a dev dependency:
 
 ```sh
 npm i -D typegraphql-prisma
 ```
 
-Furthermore, `typegraphql-prisma` requires Prisma 2 to work properly, so please install Prisma dependencies if you don't have it already installed:
+Furthermore, `typegraphql-prisma` requires Prisma to work properly, so please install Prisma dependencies if you don't have it already installed:
 
 ```sh
 npm i -D prisma

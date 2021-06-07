@@ -5,7 +5,21 @@ package
 tests/artifacts
 coverage
 .env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 ## prisma engine binary
 *.exe
 *.x
 *.node
+
+# docusaurus stuff
+build
+.docusaurus
+.cache-loader
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
