@@ -487,7 +487,7 @@ interface Engine {
     stop(): Promise<void>;
     kill(signal: string): void;
     getConfig(): Promise<GetConfigResult>;
-    version(forceRun?: boolean): Promise<string>;
+    version(forceRun?: boolean): Promise<string> | string;
     request<T>(query: string, headers: Record<string, string>, numTry: number): Promise<{
         data: T;
         elapsed: number;
@@ -1016,4 +1016,20 @@ declare class Decimal {
   static readonly EUCLID: 9;
 }
 
-export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, empty, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };
+declare type ItemType = 'd' | 'f' | 'l';
+declare type Handler = (base: string, item: string, type: ItemType) => boolean | string;
+/**
+ * Find paths that match a set of regexes
+ * @param root to start from
+ * @param match to match against
+ * @param types to select files, folders, links
+ * @param deep to recurse in the directory tree
+ * @param limit to limit the results
+ * @param handler to further filter results
+ * @param found to add to already found
+ * @param seen to add to already seen
+ * @returns found paths (symlinks preserved)
+ */
+declare function findSync(root: string, match: (RegExp | string)[], types?: ('f' | 'd' | 'l')[], deep?: ('d' | 'l')[], limit?: number, handler?: Handler, found?: string[], seen?: Record<string, true>): string[];
+
+export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, empty, findSync, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };

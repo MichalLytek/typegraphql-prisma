@@ -13,7 +13,8 @@ const {
   empty,
   join,
   raw,
-  Decimal
+  Decimal,
+  findSync
 } = require('./runtime')
 
 const path = require('path')
@@ -24,12 +25,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 2.23.0
- * Query Engine version: adf5e8cba3daf12d456d911d72b6e9418681b28b
+ * Prisma Client JS version: 2.25.0
+ * Query Engine version: c838e79f39885bc8e1611849b1eb28b5bb5bc922
  */
 Prisma.prismaVersion = {
-  client: "2.23.0",
-  engine: "adf5e8cba3daf12d456d911d72b6e9418681b28b"
+  client: "2.25.0",
+  engine: "c838e79f39885bc8e1611849b1eb28b5bb5bc922"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -50,8 +51,11 @@ Prisma.raw = raw
 Prisma.validator = () => (val) => val
 
 
-const dirnamePolyfill = path.join(process.cwd(), "prisma/generated/client")
-const dirname = (__dirname.length === 1 || __dirname.includes('.next/serverless')) ? dirnamePolyfill : __dirname
+// folder where the generated client is found
+const dirname = findSync(process.cwd(), [
+  '"prisma/generated/client"',
+  '"generated/client"',
+], ['d'], ['d'], 1)[0] || __dirname
 
 /**
  * Enums
@@ -202,8 +206,8 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "2.23.0",
-  "engineVersion": "adf5e8cba3daf12d456d911d72b6e9418681b28b",
+  "clientVersion": "2.25.0",
+  "engineVersion": "c838e79f39885bc8e1611849b1eb28b5bb5bc922",
   "datasourceNames": [
     "postgres"
   ],
