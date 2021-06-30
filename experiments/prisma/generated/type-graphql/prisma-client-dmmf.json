@@ -358,7 +358,7 @@
             "relationToFields": [
               "id"
             ],
-            "relationOnDelete": "SetNull",
+            "relationOnDelete": "Cascade",
             "isGenerated": false,
             "isUpdatedAt": false,
             "documentation": "@TypeGraphQL.omit(output: true)"
@@ -728,7 +728,7 @@
             "relationToFields": [
               "id"
             ],
-            "relationOnDelete": "SetNull",
+            "relationOnDelete": "Cascade",
             "isGenerated": false,
             "isUpdatedAt": false
           },

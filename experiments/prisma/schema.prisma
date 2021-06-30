@@ -9,7 +9,7 @@ generator client {
   provider        = "prisma-client-js"
   binaryTargets   = ["windows", "debian-openssl-1.1.x"]
   output          = "../prisma/generated/client"
-  previewFeatures = ["orderByRelation", "nApi", "selectRelationCount", "orderByAggregateGroup"]
+  previewFeatures = ["orderByRelation", "nApi", "selectRelationCount", "orderByAggregateGroup", "referentialActions"]
 }
 
 generator typegraphql {
@@ -65,10 +65,10 @@ model post {
   /// @TypeGraphQL.omit(output: true)
   subtitle  String
   content   String?
-  author    User      @relation(fields: [authorId], references: [id], name: "posts")
+  author    User      @relation(fields: [authorId], references: [id], name: "posts", onDelete: Cascade)
   authorId  Int
   /// @TypeGraphQL.omit(output: true)
-  editor    User?     @relation(fields: [editorId], references: [id], name: "editorPosts")
+  editor    User?     @relation(fields: [editorId], references: [id], name: "editorPosts", onDelete: Cascade)
   /// @TypeGraphQL.omit(output: true)
   editorId  Int?
   kind      PostKind?
@@ -94,7 +94,7 @@ model Patient {
 model Movie {
   directorFirstName String
   directorLastName  String
-  director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName])
+  director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName], onDelete: Cascade)
   title             String
 
   @@id([directorFirstName, directorLastName, title])
@@ -112,7 +112,7 @@ model Problem {
   id          Int       @id @default(autoincrement())
   problemText String
   likedBy     Creator[]
-  creator     Creator?  @relation(name: "creator", fields: [creatorId], references: [id])
+  creator     Creator?  @relation(name: "creator", fields: [creatorId], references: [id], onDelete: Cascade)
   creatorId   Int?
 }
 
