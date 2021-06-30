@@ -3570,12 +3570,15 @@ var require_util4 = __commonJS2((exports2) => {
     fs_12.default.chmodSync(file, base8);
   }
   exports2.plusX = plusX;
-  function fixBinaryTargets(platforms, platform) {
-    platforms = platforms || [];
-    if (!platforms.includes("native")) {
-      return ["native", ...platforms];
+  function transformPlatformToEnvValue(platform) {
+    return {fromEnvVar: null, value: platform};
+  }
+  function fixBinaryTargets(binaryTargets, platform) {
+    binaryTargets = binaryTargets || [];
+    if (!binaryTargets.find((object) => object.value === "native")) {
+      return [transformPlatformToEnvValue("native"), ...binaryTargets];
     }
-    return [...platforms, platform];
+    return [...binaryTargets, transformPlatformToEnvValue(platform)];
   }
   exports2.fixBinaryTargets = fixBinaryTargets;
   function link(url) {
@@ -3890,7 +3893,7 @@ var require_getInternalDatamodelJson = __commonJS2((exports2) => {
   exports2.getInternalDatamodelJson = getInternalDatamodelJson;
 });
 
-// ../../node_modules/.pnpm/@prisma/engines@2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma+engines@2.26.0-23.9b816b3aa13cc270074f172f30d6eda8a8ce867d/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports, module) => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -4516,17 +4519,17 @@ var require_dist9 = __commonJS2((exports, module) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922",
+      version: "2.26.0-23.9b816b3aa13cc270074f172f30d6eda8a8ce867d",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "c838e79f39885bc8e1611849b1eb28b5bb5bc922"
+        enginesVersion: "9b816b3aa13cc270074f172f30d6eda8a8ce867d"
       },
       devDependencies: {
-        "@types/node": "14.17.3",
-        typescript: "4.3.2"
+        "@types/node": "14.17.4",
+        typescript: "4.3.4"
       },
       scripts: {
         build: "tsc -d",
@@ -4549,11 +4552,11 @@ var require_dist9 = __commonJS2((exports, module) => {
     "use strict";
     Object.defineProperty(exports2, "__esModule", {value: true});
     exports2.getNapiName = exports2.NAPI_QUERY_ENGINE_URL_BASE = void 0;
-    exports2.NAPI_QUERY_ENGINE_URL_BASE = "libquery_engine_napi";
+    exports2.NAPI_QUERY_ENGINE_URL_BASE = "libquery_engine";
     function getNapiName(platform, type) {
       const isUrl = type === "url";
       if (platform.includes("windows")) {
-        return isUrl ? `query_engine_napi.dll.node` : `query_engine_napi-${platform}.dll.node`;
+        return isUrl ? `query_engine.dll.node` : `query_engine-${platform}.dll.node`;
       } else if (platform.includes("linux") || platform.includes("debian") || platform.includes("rhel")) {
         return isUrl ? `${exports2.NAPI_QUERY_ENGINE_URL_BASE}.so.node` : `${exports2.NAPI_QUERY_ENGINE_URL_BASE}-${platform}.so.node`;
       } else if (platform.includes("darwin")) {
@@ -4724,6 +4727,25 @@ var require_dist9 = __commonJS2((exports, module) => {
     }
     exports2.getPlatform = getPlatform;
   });
+  var require_isNodeAPISupported = __commonJS((exports2) => {
+    "use strict";
+    var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
+      return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+    };
+    Object.defineProperty(exports2, "__esModule", {value: true});
+    exports2.isNodeAPISupported = void 0;
+    var fs_12 = __importDefault2(require("fs"));
+    var _1 = require_dist2();
+    async function isNodeAPISupported() {
+      const customLibraryPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
+      const customLibraryExists = customLibraryPath && fs_12.default.existsSync(customLibraryPath);
+      const os = await _1.getos();
+      if (!customLibraryExists && os.platform === "darwin" && os.arch === "arm64") {
+        throw new Error(`Node-API is currently not supported for Apple M1. Please remove \`nApi\` from the "previewFeatures" attribute in the "generator" block of the "schema.prisma", or remove the "PRISMA_FORCE_NAPI" environment variable.`);
+      }
+    }
+    exports2.isNodeAPISupported = isNodeAPISupported;
+  });
   var require_platforms = __commonJS((exports2) => {
     "use strict";
     Object.defineProperty(exports2, "__esModule", {value: true});
@@ -4765,7 +4787,7 @@ var require_dist9 = __commonJS2((exports, module) => {
           __createBinding(exports3, m, p);
     };
     Object.defineProperty(exports2, "__esModule", {value: true});
-    exports2.platforms = exports2.getPlatform = exports2.getos = void 0;
+    exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = void 0;
     __exportStar22(require_getNapiName(), exports2);
     var getPlatform_1 = require_getPlatform();
     Object.defineProperty(exports2, "getos", {enumerable: true, get: function() {
@@ -4773,6 +4795,10 @@ var require_dist9 = __commonJS2((exports, module) => {
     }});
     Object.defineProperty(exports2, "getPlatform", {enumerable: true, get: function() {
       return getPlatform_1.getPlatform;
+    }});
+    var isNodeAPISupported_1 = require_isNodeAPISupported();
+    Object.defineProperty(exports2, "isNodeAPISupported", {enumerable: true, get: function() {
+      return isNodeAPISupported_1.isNodeAPISupported;
     }});
     var platforms_1 = require_platforms();
     Object.defineProperty(exports2, "platforms", {enumerable: true, get: function() {
@@ -9821,8 +9847,8 @@ ${error.message}` : execaMessage;
     exports2.getCacheDir = getCacheDir;
     function getDownloadUrl(channel2, version, platform, binaryName, extension = ".gz") {
       const baseUrl = process.env.PRISMA_BINARIES_MIRROR || "https://binaries.prisma.sh";
-      const finalExtension = platform === "windows" && download_1.EngineTypes.libqueryEngineNapi !== binaryName ? `.exe${extension}` : extension;
-      if (binaryName === download_1.EngineTypes.libqueryEngineNapi) {
+      const finalExtension = platform === "windows" && download_1.BinaryType.libqueryEngineNapi !== binaryName ? `.exe${extension}` : extension;
+      if (binaryName === download_1.BinaryType.libqueryEngineNapi) {
         binaryName = get_platform_12.getNapiName(platform, "url");
       }
       return `${baseUrl}/${channel2}/${version}/${platform}/${binaryName}${finalExtension}`;
@@ -21813,7 +21839,7 @@ ${error.message}` : execaMessage;
       return mod2 && mod2.__esModule ? mod2 : {default: mod2};
     };
     Object.defineProperty(exports, "__esModule", {value: true});
-    exports.plusX = exports.maybeCopyToTmp = exports.getBinaryEnvVarPath = exports.getBinaryName = exports.checkVersionCommand = exports.getVersion = exports.download = exports.EngineTypes = void 0;
+    exports.plusX = exports.maybeCopyToTmp = exports.getBinaryEnvVarPath = exports.getBinaryName = exports.checkVersionCommand = exports.getVersion = exports.download = exports.BinaryType = void 0;
     var debug_1 = __importDefault(require_dist());
     var get_platform_1 = require_dist2();
     var chalk_1 = __importDefault(require_source());
@@ -21839,20 +21865,20 @@ ${error.message}` : execaMessage;
     var copyFile = util_1.promisify(fs_1.default.copyFile);
     var utimes = util_1.promisify(fs_1.default.utimes);
     var channel = "master";
-    var EngineTypes;
-    (function(EngineTypes3) {
-      EngineTypes3["queryEngine"] = "query-engine";
-      EngineTypes3["libqueryEngineNapi"] = "libquery-engine-napi";
-      EngineTypes3["migrationEngine"] = "migration-engine";
-      EngineTypes3["introspectionEngine"] = "introspection-engine";
-      EngineTypes3["prismaFmt"] = "prisma-fmt";
-    })(EngineTypes = exports.EngineTypes || (exports.EngineTypes = {}));
+    var BinaryType;
+    (function(BinaryType3) {
+      BinaryType3["queryEngine"] = "query-engine";
+      BinaryType3["libqueryEngineNapi"] = "libquery-engine";
+      BinaryType3["migrationEngine"] = "migration-engine";
+      BinaryType3["introspectionEngine"] = "introspection-engine";
+      BinaryType3["prismaFmt"] = "prisma-fmt";
+    })(BinaryType = exports.BinaryType || (exports.BinaryType = {}));
     var BINARY_TO_ENV_VAR = {
-      [EngineTypes.migrationEngine]: "PRISMA_MIGRATION_ENGINE_BINARY",
-      [EngineTypes.queryEngine]: "PRISMA_QUERY_ENGINE_BINARY",
-      [EngineTypes.libqueryEngineNapi]: "PRISMA_QUERY_ENGINE_LIBRARY",
-      [EngineTypes.introspectionEngine]: "PRISMA_INTROSPECTION_ENGINE_BINARY",
-      [EngineTypes.prismaFmt]: "PRISMA_FMT_BINARY"
+      [BinaryType.migrationEngine]: "PRISMA_MIGRATION_ENGINE_BINARY",
+      [BinaryType.queryEngine]: "PRISMA_QUERY_ENGINE_BINARY",
+      [BinaryType.libqueryEngineNapi]: "PRISMA_QUERY_ENGINE_LIBRARY",
+      [BinaryType.introspectionEngine]: "PRISMA_INTROSPECTION_ENGINE_BINARY",
+      [BinaryType.prismaFmt]: "PRISMA_FMT_BINARY"
     };
     async function download(options) {
       var _a, _b;
@@ -21862,6 +21888,8 @@ ${error.message}` : execaMessage;
         console.error(`${chalk_1.default.yellow("Warning")} Precompiled binaries are not available for ${os.distro}.`);
       } else if (["freebsd11", "freebsd12", "openbsd", "netbsd"].includes(platform)) {
         console.error(`${chalk_1.default.yellow("Warning")} Precompiled binaries are not available for ${platform}. Read more about building your own binaries at https://pris.ly/d/build-binaries`);
+      } else if (BinaryType.libqueryEngineNapi in options.binaries) {
+        await get_platform_1.isNodeAPISupported();
       }
       if (!options.binaries || Object.values(options.binaries).length === 0) {
         return {};
@@ -21874,7 +21902,7 @@ ${error.message}` : execaMessage;
       };
       const binaryJobs = flatMap_1.flatMap(Object.entries(opts.binaries), ([binaryName, targetFolder]) => opts.binaryTargets.map((binaryTarget) => {
         const fileName = getBinaryName(binaryName, binaryTarget);
-        const targetFilePath = binaryName === EngineTypes.libqueryEngineNapi ? path_1.default.join(targetFolder, get_platform_1.getNapiName(binaryTarget, "fs")) : path_1.default.join(targetFolder, fileName);
+        const targetFilePath = binaryName === BinaryType.libqueryEngineNapi ? path_1.default.join(targetFolder, get_platform_1.getNapiName(binaryTarget, "fs")) : path_1.default.join(targetFolder, fileName);
         return {
           binaryName,
           targetFolder,
@@ -22008,7 +22036,7 @@ ${error.message}` : execaMessage;
         debug(`file ${binaryPath} does not exist and must be downloaded`);
         return true;
       }
-      if (job.binaryTarget === nativePlatform && job.binaryName !== EngineTypes.libqueryEngineNapi) {
+      if (job.binaryTarget === nativePlatform && job.binaryName !== BinaryType.libqueryEngineNapi) {
         const works = await checkVersionCommand(binaryPath);
         return !works;
       }
@@ -22029,7 +22057,7 @@ ${error.message}` : execaMessage;
     }
     exports.checkVersionCommand = checkVersionCommand;
     function getBinaryName(binaryName, platform) {
-      if (binaryName === EngineTypes.libqueryEngineNapi) {
+      if (binaryName === BinaryType.libqueryEngineNapi) {
         return `${get_platform_1.getNapiName(platform, "url")}`;
       }
       const extension = platform === "windows" ? ".exe" : "";
@@ -22110,8 +22138,8 @@ ${error.message}` : execaMessage;
       }
     }
     function engineTypeToBinaryType(engineType, binaryTarget) {
-      if (EngineTypes[engineType]) {
-        return EngineTypes[engineType];
+      if (BinaryType[engineType]) {
+        return BinaryType[engineType];
       }
       if (engineType === "native") {
         return binaryTarget;
@@ -22208,10 +22236,10 @@ ${error.message}` : execaMessage;
     }
     debug2(`using NAPI: ${process.env.PRISMA_FORCE_NAPI === "true"}`);
     const binaries = {
-      [process.env.PRISMA_FORCE_NAPI === "true" ? import_fetch_engine.EngineTypes.libqueryEngineNapi : import_fetch_engine.EngineTypes.queryEngine]: binaryDir,
-      [import_fetch_engine.EngineTypes.migrationEngine]: binaryDir,
-      [import_fetch_engine.EngineTypes.introspectionEngine]: binaryDir,
-      [import_fetch_engine.EngineTypes.prismaFmt]: binaryDir
+      [process.env.PRISMA_FORCE_NAPI === "true" ? import_fetch_engine.BinaryType.libqueryEngineNapi : import_fetch_engine.BinaryType.queryEngine]: binaryDir,
+      [import_fetch_engine.BinaryType.migrationEngine]: binaryDir,
+      [import_fetch_engine.BinaryType.introspectionEngine]: binaryDir,
+      [import_fetch_engine.BinaryType.prismaFmt]: binaryDir
     };
     debug2(`binaries to download ${Object.keys(binaries).join(", ")}`);
     await import_fetch_engine.download({
@@ -22253,11 +22281,11 @@ var require_getNapiName2 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.getNapiName = exports2.NAPI_QUERY_ENGINE_URL_BASE = void 0;
-  exports2.NAPI_QUERY_ENGINE_URL_BASE = "libquery_engine_napi";
+  exports2.NAPI_QUERY_ENGINE_URL_BASE = "libquery_engine";
   function getNapiName(platform, type) {
     const isUrl = type === "url";
     if (platform.includes("windows")) {
-      return isUrl ? `query_engine_napi.dll.node` : `query_engine_napi-${platform}.dll.node`;
+      return isUrl ? `query_engine.dll.node` : `query_engine-${platform}.dll.node`;
     } else if (platform.includes("linux") || platform.includes("debian") || platform.includes("rhel")) {
       return isUrl ? `${exports2.NAPI_QUERY_ENGINE_URL_BASE}.so.node` : `${exports2.NAPI_QUERY_ENGINE_URL_BASE}-${platform}.so.node`;
     } else if (platform.includes("darwin")) {
@@ -22432,7 +22460,7 @@ var require_getPlatform2 = __commonJS2((exports2) => {
 });
 
 // ../get-platform/dist/isNodeAPISupported.js
-var require_isNodeAPISupported = __commonJS2((exports2) => {
+var require_isNodeAPISupported2 = __commonJS2((exports2) => {
   "use strict";
   var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
@@ -22505,7 +22533,7 @@ var require_dist10 = __commonJS2((exports2) => {
   Object.defineProperty(exports2, "getPlatform", {enumerable: true, get: function() {
     return getPlatform_1.getPlatform;
   }});
-  var isNodeAPISupported_1 = require_isNodeAPISupported();
+  var isNodeAPISupported_1 = require_isNodeAPISupported2();
   Object.defineProperty(exports2, "isNodeAPISupported", {enumerable: true, get: function() {
     return isNodeAPISupported_1.isNodeAPISupported;
   }});
@@ -22522,7 +22550,7 @@ var require_printGeneratorConfig = __commonJS2((exports2) => {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
   Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.printDatamodelObject = exports2.GeneratorConfigClass = exports2.printGeneratorConfig = void 0;
+  exports2.printDatamodelObject = exports2.getOriginalBinaryTargetsValue = exports2.GeneratorConfigClass = exports2.printGeneratorConfig = void 0;
   var indent_string_1 = __importDefault2(require_indent_string2());
   function printGeneratorConfig(config2) {
     return String(new GeneratorConfigClass(config2));
@@ -22534,9 +22562,10 @@ var require_printGeneratorConfig = __commonJS2((exports2) => {
     }
     toString() {
       const {config: config2} = this;
+      const provider = config2.provider.fromEnvVar ? `env("${config2.provider.fromEnvVar}")` : config2.provider.value;
       const obj = JSON.parse(JSON.stringify({
-        provider: config2.provider.fromEnvVar ? `env("${config2.provider.fromEnvVar}")` : config2.provider.value,
-        binaryTargets: config2.binaryTargets || void 0
+        provider,
+        binaryTargets: getOriginalBinaryTargetsValue(config2.binaryTargets)
       }));
       return `generator ${config2.name} {
 ${indent_string_1.default(printDatamodelObject(obj), 2)}
@@ -22544,6 +22573,21 @@ ${indent_string_1.default(printDatamodelObject(obj), 2)}
     }
   };
   exports2.GeneratorConfigClass = GeneratorConfigClass;
+  function getOriginalBinaryTargetsValue(binaryTargets) {
+    let value;
+    if (binaryTargets.length > 0) {
+      const binaryTargetsFromEnvVar = binaryTargets.find((object) => object.fromEnvVar !== null);
+      if (binaryTargetsFromEnvVar) {
+        value = `env("${binaryTargetsFromEnvVar.fromEnvVar}")`;
+      } else {
+        value = binaryTargets.map((object) => object.value);
+      }
+    } else {
+      value = void 0;
+    }
+    return value;
+  }
+  exports2.getOriginalBinaryTargetsValue = getOriginalBinaryTargetsValue;
   function printDatamodelObject(obj) {
     const maxLength = Object.keys(obj).reduce((max2, curr) => Math.max(max2, curr.length), 0);
     return Object.entries(obj).map(([key, value]) => `${key.padEnd(maxLength)} = ${niceStringify(value)}`).join("\n");
@@ -22559,14 +22603,14 @@ ${indent_string_1.default(printDatamodelObject(obj), 2)}
   }
 });
 
-// ../engine-core/dist/NAPIEngine.js
-var require_NAPIEngine = __commonJS2((exports, module) => {
+// ../engine-core/dist/LibraryEngine.js
+var require_LibraryEngine = __commonJS2((exports, module) => {
   "use strict";
   var __importDefault = exports && exports.__importDefault || function(mod2) {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
   Object.defineProperty(exports, "__esModule", {value: true});
-  exports.NAPIEngine = void 0;
+  exports.LibraryEngine = void 0;
   var debug_1 = __importDefault(require_dist7());
   var engines_1 = require_dist9();
   var get_platform_1 = require_dist10();
@@ -22578,7 +22622,6 @@ var require_NAPIEngine = __commonJS2((exports, module) => {
   var printGeneratorConfig_1 = require_printGeneratorConfig();
   var util_1 = require_util4();
   var debug = debug_1.default("prisma:client:napi");
-  var MAX_REQUEST_RETRIES = process.env.PRISMA_CLIENT_NO_RETRY ? 1 : 2;
   function isQueryEvent(event) {
     return event["item_type"] === "query" && "query" in event;
   }
@@ -22586,12 +22629,12 @@ var require_NAPIEngine = __commonJS2((exports, module) => {
     return event.level === "error" && event["message"] === "PANIC";
   }
   var knownPlatforms = [...get_platform_1.platforms, "native"];
-  var NAPIEngine = class {
+  var LibraryEngine = class {
     constructor(config2) {
       var _a, _b;
       this.datamodel = fs_1.default.readFileSync(config2.datamodelPath, "utf-8");
       this.config = config2;
-      this.connected = false;
+      this.libraryStarted = false;
       this.logQueries = (_a = config2.logQueries) !== null && _a !== void 0 ? _a : false;
       this.logLevel = (_b = config2.logLevel) !== null && _b !== void 0 ? _b : "error";
       this.logEmitter = new events_1.default();
@@ -22601,15 +22644,16 @@ var require_NAPIEngine = __commonJS2((exports, module) => {
       if (config2.enableEngineDebugMode) {
         this.logLevel = "debug";
       }
-      this.setupPromise = this.internalSetup();
+      this.libraryInstantiationPromise = this.instantiateLibrary();
+      initHooks(this);
     }
-    async internalSetup() {
+    async instantiateLibrary() {
       debug("internalSetup");
-      if (this.setupPromise)
-        return this.setupPromise;
+      if (this.libraryInstantiationPromise) {
+        return this.libraryInstantiationPromise;
+      }
       await get_platform_1.isNodeAPISupported();
       this.platform = await this.getPlatform();
-      this.libQueryEnginePath = await this.getLibQueryEnginePath();
       await this.loadEngine();
       this.version();
     }
@@ -22643,27 +22687,30 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
     }
     async loadEngine() {
       var _a;
-      debug("loadEngine");
+      if (!this.libQueryEnginePath) {
+        this.libQueryEnginePath = await this.getLibQueryEnginePath();
+      }
+      debug(`loadEngine using ${this.libQueryEnginePath}`);
       if (!this.engine) {
-        if (!this.QueryEngine) {
-          if (!this.libQueryEnginePath) {
-            this.libQueryEnginePath = await this.getLibQueryEnginePath();
-            debug(`using ${this.libQueryEnginePath}`);
-          }
+        if (!this.QueryEngineConstructor) {
           try {
             this.library = eval("require")(this.libQueryEnginePath);
-            this.QueryEngine = this.library.QueryEngine;
+            this.QueryEngineConstructor = this.library.QueryEngine;
           } catch (e) {
             if (fs_1.default.existsSync(this.libQueryEnginePath)) {
-              throw new errors_1.PrismaClientInitializationError(`Unable to load NAPI Library from ${chalk_1.default.dim(this.libQueryEnginePath)}, Library may be corrupt`, this.config.clientVersion);
+              if (this.libQueryEnginePath.endsWith(".node")) {
+                throw new errors_1.PrismaClientInitializationError(`Unable to load Node-API Library from ${chalk_1.default.dim(this.libQueryEnginePath)}, Library may be corrupt`, this.config.clientVersion);
+              } else {
+                throw new errors_1.PrismaClientInitializationError(`Expected an Node-API Library but received ${chalk_1.default.dim(this.libQueryEnginePath)}`, this.config.clientVersion);
+              }
             } else {
-              throw new errors_1.PrismaClientInitializationError(`Unable to load NAPI Library from ${chalk_1.default.dim(this.libQueryEnginePath)}, It does not exist`, this.config.clientVersion);
+              throw new errors_1.PrismaClientInitializationError(`Unable to load Node-API Library from ${chalk_1.default.dim(this.libQueryEnginePath)}, It does not exist`, this.config.clientVersion);
             }
           }
         }
-        if (this.QueryEngine) {
+        if (this.QueryEngineConstructor) {
           try {
-            this.engine = new this.QueryEngine({
+            this.engine = new this.QueryEngineConstructor({
               datamodel: this.datamodel,
               env: process.env,
               logQueries: (_a = this.config.logQueries) !== null && _a !== void 0 ? _a : false,
@@ -22701,8 +22748,8 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
           target: event.module_path
         });
       } else if (isPanicEvent(event)) {
-        this.lastError = new errors_1.PrismaClientRustPanicError(this.getErrorMessageWithLink(`${event.message}: ${event.reason} in ${event.file}:${event.line}:${event.column}`), this.config.clientVersion);
-        this.logEmitter.emit("error", this.lastError);
+        this.loggerRustPanic = new errors_1.PrismaClientRustPanicError(this.getErrorMessageWithLink(`${event.message}: ${event.reason} in ${event.file}:${event.line}:${event.column}`), this.config.clientVersion);
+        this.logEmitter.emit("error", this.loggerRustPanic);
       } else {
         this.logEmitter.emit(event.level, event);
       }
@@ -22745,9 +22792,8 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         this.logEmitter.on(event, listener);
       }
     }
-    async emitExit() {
-      await this.currentQuery;
-      debug("emitExit");
+    async runBeforeExit() {
+      debug("runBeforeExit");
       if (this.beforeExitListener) {
         try {
           await this.beforeExitListener();
@@ -22757,66 +22803,53 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
       }
     }
     async start() {
-      await this.setupPromise;
-      await this.disconnectPromise;
-      if (this.connectPromise) {
-        debug(`already starting: ${this.connected}`);
-        await this.connectPromise;
-        if (this.connected) {
+      await this.libraryInstantiationPromise;
+      await this.libraryStoppingPromise;
+      if (this.libraryStartingPromise) {
+        debug(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
+        await this.libraryStartingPromise;
+        if (this.libraryStarted) {
           return;
         }
       }
-      if (!this.connected) {
-        this.connectPromise = new Promise(async (res) => {
+      if (!this.libraryStarted) {
+        this.libraryStartingPromise = new Promise(async (res) => {
           var _a;
-          debug("starting");
+          debug("library starting");
           await ((_a = this.engine) === null || _a === void 0 ? void 0 : _a.connect({enableRawQueries: true}));
-          this.connected = true;
-          debug("started");
+          this.libraryStarted = true;
+          debug("library started");
           res();
         });
-        return this.connectPromise;
+        return this.libraryStartingPromise;
       }
     }
     async stop() {
-      await this.connectPromise;
-      await this.currentQuery;
-      debug(`stop state ${this.connected}`);
-      if (this.disconnectPromise) {
-        debug("engine is already disconnecting");
-        await this.disconnectPromise;
-        if (!this.connected) {
-          this.disconnectPromise = void 0;
+      await this.libraryStartingPromise;
+      await this.executingQueryPromise;
+      debug(`library stopping, this.libraryStarted: ${this.libraryStarted}`);
+      if (this.libraryStoppingPromise) {
+        debug("library is already disconnecting");
+        await this.libraryStoppingPromise;
+        if (!this.libraryStarted) {
+          this.libraryStoppingPromise = void 0;
           return;
         }
       }
-      if (this.connected) {
-        this.disconnectPromise = new Promise(async (res) => {
+      if (this.libraryStarted) {
+        this.libraryStoppingPromise = new Promise(async (res) => {
           var _a;
-          await this.emitExit();
-          debug("disconnect called");
+          await new Promise((r) => setTimeout(r, 5));
+          debug("library stopping");
           await ((_a = this.engine) === null || _a === void 0 ? void 0 : _a.disconnect());
-          this.connected = false;
-          debug("disconnect resolved");
+          this.libraryStarted = false;
+          debug("library stopped");
           res();
         });
       }
-      return this.disconnectPromise;
+      return this.libraryStoppingPromise;
     }
-    kill(signal) {
-      if (this.connected && !this.disconnectPromise) {
-        this.disconnectPromise = new Promise(async (res) => {
-          var _a;
-          await this.emitExit();
-          debug(`disconnect called with kill signal ${signal}`);
-          await ((_a = this.engine) === null || _a === void 0 ? void 0 : _a.disconnect());
-          this.connected = false;
-          debug(`disconnect resolved`);
-          res();
-        });
-      }
-    }
-    async getConfig() {
+    getConfig() {
       return this.library.getConfig({
         datamodel: this.datamodel,
         datasourceOverrides: this.datasourceOverrides,
@@ -22824,12 +22857,12 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         env: process.env
       });
     }
-    version(forceRun) {
+    version() {
       var _a, _b, _c;
       this.versionInfo = (_a = this.library) === null || _a === void 0 ? void 0 : _a.version();
       return (_c = (_b = this.versionInfo) === null || _b === void 0 ? void 0 : _b.version) !== null && _c !== void 0 ? _c : "unknown";
     }
-    graphQLToJSError(error) {
+    prismaGraphQLToJSError(error) {
       debug("graphQLToJSError");
       if (error.user_facing_error.error_code) {
         return new errors_1.PrismaClientKnownRequestError(error.user_facing_error.message, error.user_facing_error.error_code, this.config.clientVersion, error.user_facing_error.meta);
@@ -22837,20 +22870,23 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
       return new errors_1.PrismaClientUnknownRequestError(error.error, this.config.clientVersion);
     }
     async request(query, headers, numTry) {
+      var _a;
       try {
-        await this.start();
-        debug(`request state: ${this.connected}`);
+        debug(`sending request, this.libraryStarted: ${this.libraryStarted}`);
         const request = {query, variables: {}};
-        this.lastQuery = JSON.stringify(request);
-        this.currentQuery = this.engine.query(this.lastQuery, JSON.stringify({}));
-        const data = this.parseEngineResponse(await this.currentQuery);
+        const queryStr = JSON.stringify(request);
+        const headerStr = JSON.stringify({});
+        await this.start();
+        this.executingQueryPromise = (_a = this.engine) === null || _a === void 0 ? void 0 : _a.query(queryStr, headerStr);
+        this.lastQuery = queryStr;
+        const data = this.parseEngineResponse(await this.executingQueryPromise);
         if (data.errors) {
           if (data.errors.length === 1) {
-            throw this.graphQLToJSError(data.errors[0]);
+            throw this.prismaGraphQLToJSError(data.errors[0]);
           }
           throw new errors_1.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
-        } else if (this.lastError) {
-          throw this.lastError;
+        } else if (this.loggerRustPanic) {
+          throw this.loggerRustPanic;
         }
         return {data, elapsed: 0};
       } catch (e) {
@@ -22864,47 +22900,40 @@ ${error.backtrace}`, this.config.clientVersion);
       }
     }
     async requestBatch(queries, transaction = false, numTry = 1) {
-      await this.start();
       debug("requestBatch");
       const headers = {};
       const request = {
         batch: queries.map((query) => ({query, variables: {}})),
         transaction
       };
+      await this.start();
       this.lastQuery = JSON.stringify(request);
-      this.currentQuery = this.engine.query(this.lastQuery, JSON.stringify(headers));
-      const result = await this.currentQuery;
+      this.executingQueryPromise = this.engine.query(this.lastQuery, JSON.stringify(headers));
+      const result = await this.executingQueryPromise;
       const data = this.parseEngineResponse(result);
       if (data.errors) {
         if (data.errors.length === 1) {
-          throw this.graphQLToJSError(data.errors[0]);
+          throw this.prismaGraphQLToJSError(data.errors[0]);
         }
         throw new errors_1.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
       }
-      try {
-        const {batchResult, errors} = data;
-        if (Array.isArray(batchResult)) {
-          return batchResult.map((result2) => {
-            var _a;
-            if (result2.errors) {
-              return (_a = this.lastError) !== null && _a !== void 0 ? _a : this.graphQLToJSError(result2.errors[0]);
-            }
-            return {
-              data: result2,
-              elapsed: 0
-            };
-          });
-        } else {
-          if (errors && errors.length === 1) {
-            throw new Error(errors[0].error);
+      const {batchResult, errors} = data;
+      if (Array.isArray(batchResult)) {
+        return batchResult.map((result2) => {
+          var _a;
+          if (result2.errors) {
+            return (_a = this.loggerRustPanic) !== null && _a !== void 0 ? _a : this.prismaGraphQLToJSError(result2.errors[0]);
           }
-          throw new Error(JSON.stringify(data));
+          return {
+            data: result2,
+            elapsed: 0
+          };
+        });
+      } else {
+        if (errors && errors.length === 1) {
+          throw new Error(errors[0].error);
         }
-      } catch (e) {
-        if (numTry <= MAX_REQUEST_RETRIES) {
-          return this.requestBatch(queries, transaction, numTry + 1);
-        }
-        throw e;
+        throw new Error(JSON.stringify(data));
       }
     }
     async resolveEnginePath() {
@@ -22915,7 +22944,7 @@ ${error.backtrace}`, this.config.clientVersion);
         return {enginePath: this.libQueryEnginePath, searchedLocations};
       }
       this.platform = (_a = this.platform) !== null && _a !== void 0 ? _a : await get_platform_1.getPlatform();
-      if (__filename.includes("NAPIEngine")) {
+      if (__filename.includes("LibraryEngine")) {
         enginePath = path_1.default.join(engines_1.getEnginesPath(), get_platform_1.getNapiName(this.platform, "fs"));
         return {enginePath, searchedLocations};
       }
@@ -22944,16 +22973,16 @@ ${error.backtrace}`, this.config.clientVersion);
     async getLibQueryEnginePath() {
       var _a, _b, _c, _d;
       const libPath = (_a = process.env.PRISMA_QUERY_ENGINE_LIBRARY) !== null && _a !== void 0 ? _a : this.config.prismaPath;
-      if (libPath && fs_1.default.existsSync(libPath)) {
+      if (libPath && fs_1.default.existsSync(libPath) && libPath.endsWith(".node")) {
         return libPath;
       }
       this.platform = (_b = this.platform) !== null && _b !== void 0 ? _b : await get_platform_1.getPlatform();
       const {enginePath, searchedLocations} = await this.resolveEnginePath();
       if (!fs_1.default.existsSync(enginePath)) {
-        const pinnedStr = this.platform ? `
+        const incorrectPinnedPlatformErrorStr = this.platform ? `
 You incorrectly pinned it to ${chalk_1.default.redBright.bold(`${this.platform}`)}
 ` : "";
-        let errorText = `Query engine library for current platform "${chalk_1.default.bold(this.platform)}" could not be found.${pinnedStr}
+        let errorText = `Query engine library for current platform "${chalk_1.default.bold(this.platform)}" could not be found.${incorrectPinnedPlatformErrorStr}
 This probably happens, because you built Prisma Client on a different platform.
 (Prisma Client looked in "${chalk_1.default.underline(enginePath)}")
 
@@ -22970,9 +22999,9 @@ ${searchedLocations.map((f) => {
 `;
         if (this.config.generator) {
           this.platform = (_c = this.platform) !== null && _c !== void 0 ? _c : await get_platform_1.getPlatform();
-          if (this.config.generator.binaryTargets.includes(this.platform) || this.config.generator.binaryTargets.includes("native")) {
+          if (this.config.generator.binaryTargets.find((object) => object.value === this.platform) || this.config.generator.binaryTargets.find((object) => object.value === "native")) {
             errorText += `
-You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t) => `"${chalk_1.default.bold(t)}"`).join(", ")} to the "${chalk_1.default.underline("generator")}" block
+You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t) => `"${chalk_1.default.bold(t.value)}"`).join(", ")} to the "${chalk_1.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -23006,7 +23035,24 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
       return printGeneratorConfig_1.printGeneratorConfig(fixedGenerator);
     }
   };
-  exports.NAPIEngine = NAPIEngine;
+  exports.LibraryEngine = LibraryEngine;
+  function hookProcess(engine, handler, exit = false) {
+    process.once(handler, async () => {
+      debug(`hookProcess received: ${handler}`);
+      await engine.runBeforeExit();
+      if (exit && process.listenerCount(handler) === 0) {
+        process.exit();
+      }
+    });
+  }
+  function initHooks(engine) {
+    hookProcess(engine, "beforeExit");
+    hookProcess(engine, "exit");
+    hookProcess(engine, "SIGINT", true);
+    hookProcess(engine, "SIGUSR1", true);
+    hookProcess(engine, "SIGUSR2", true);
+    hookProcess(engine, "SIGTERM", true);
+  }
 });
 
 // ../../node_modules/.pnpm/strip-final-newline@2.0.0/node_modules/strip-final-newline/index.js
@@ -27254,14 +27300,14 @@ var require_undici2 = __commonJS2((exports2) => {
   exports2.Undici = Undici;
 });
 
-// ../engine-core/dist/NodeEngine.js
-var require_NodeEngine = __commonJS2((exports, module) => {
+// ../engine-core/dist/BinaryEngine.js
+var require_BinaryEngine = __commonJS2((exports, module) => {
   "use strict";
   var __importDefault = exports && exports.__importDefault || function(mod2) {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
   Object.defineProperty(exports, "__esModule", {value: true});
-  exports.NodeEngine = void 0;
+  exports.BinaryEngine = void 0;
   var debug_1 = __importDefault(require_dist7());
   var engines_1 = require_dist9();
   var get_platform_1 = require_dist10();
@@ -27291,7 +27337,7 @@ var require_NodeEngine = __commonJS2((exports, module) => {
   var socketPaths = [];
   var MAX_STARTS = process.env.PRISMA_CLIENT_NO_RETRY ? 1 : 2;
   var MAX_REQUEST_RETRIES = process.env.PRISMA_CLIENT_NO_RETRY ? 1 : 2;
-  var NodeEngine = class {
+  var BinaryEngine = class {
     constructor({cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion: clientVersion2, previewFeatures, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, useUds, activeProvider}) {
       var _a;
       this.startCount = 0;
@@ -27478,7 +27524,7 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         this.incorrectlyPinnedBinaryTarget = this.platform;
       }
       this.platform = this.platform || platform;
-      if (__filename.includes("NodeEngine")) {
+      if (__filename.includes("BinaryEngine")) {
         enginePath = this.getQueryEnginePath(this.platform, engines_1.getEnginesPath());
         return {prismaPath: enginePath, searchedLocations};
       }
@@ -27527,9 +27573,9 @@ ${searchedLocations.map((f) => {
         }).join("\n" + (process.env.DEBUG === "node-engine-search-locations" ? "\n" : ""))}
 `;
         if (this.generator) {
-          if (this.generator.binaryTargets.includes(this.platform) || this.generator.binaryTargets.includes("native")) {
+          if (this.generator.binaryTargets.find((object) => object.value === this.platform) || this.generator.binaryTargets.find((object) => object.value === "native")) {
             errorText += `
-You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t) => `"${chalk_1.default.bold(t)}"`).join(", ")} to the "${chalk_1.default.underline("generator")}" block
+You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t) => `"${chalk_1.default.bold(t.value)}"`).join(", ")} to the "${chalk_1.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -28016,7 +28062,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       return new errors_1.PrismaClientUnknownRequestError(error.user_facing_error.message, this.clientVersion);
     }
   };
-  exports.NodeEngine = NodeEngine;
+  exports.BinaryEngine = BinaryEngine;
   function stringifyQuery(q) {
     return `{"variables":{},"query":${JSON.stringify(q)}}`;
   }
@@ -28043,21 +28089,19 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
   var hooksInitialized = false;
   function initHooks() {
     if (!hooksInitialized) {
-      if (!process.env.PRISMA_FORCE_NAPI) {
-        hookProcess("beforeExit");
-        hookProcess("exit");
-        hookProcess("SIGINT", true);
-        hookProcess("SIGUSR1", true);
-        hookProcess("SIGUSR2", true);
-        hookProcess("SIGTERM", true);
-      }
+      hookProcess("beforeExit");
+      hookProcess("exit");
+      hookProcess("SIGINT", true);
+      hookProcess("SIGUSR1", true);
+      hookProcess("SIGUSR2", true);
+      hookProcess("SIGTERM", true);
       hooksInitialized = true;
     }
   }
 });
 
-// ../engine-core/dist/napi-types.js
-var require_napi_types = __commonJS2((exports2) => {
+// ../engine-core/dist/NodeAPILibraryTypes.js
+var require_NodeAPILibraryTypes = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
 });
@@ -28094,7 +28138,7 @@ var require_dist11 = __commonJS2((exports2) => {
     return result;
   };
   Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.fixBinaryTargets = exports2.NApiEngineTypes = exports2.printGeneratorConfig = exports2.Engine = exports2.NAPIEngine = exports2.getInternalDatamodelJson = exports2.PrismaClientUnknownRequestError = exports2.PrismaClientRustPanicError = exports2.PrismaClientKnownRequestError = exports2.PrismaClientInitializationError = void 0;
+  exports2.fixBinaryTargets = exports2.NodeAPILibraryTypes = exports2.getOriginalBinaryTargetsValue = exports2.printGeneratorConfig = exports2.BinaryEngine = exports2.LibraryEngine = exports2.getInternalDatamodelJson = exports2.PrismaClientUnknownRequestError = exports2.PrismaClientRustPanicError = exports2.PrismaClientKnownRequestError = exports2.PrismaClientInitializationError = void 0;
   var errors_12 = require_errors();
   Object.defineProperty(exports2, "PrismaClientInitializationError", {enumerable: true, get: function() {
     return errors_12.PrismaClientInitializationError;
@@ -28112,19 +28156,22 @@ var require_dist11 = __commonJS2((exports2) => {
   Object.defineProperty(exports2, "getInternalDatamodelJson", {enumerable: true, get: function() {
     return getInternalDatamodelJson_1.getInternalDatamodelJson;
   }});
-  var NAPIEngine_1 = require_NAPIEngine();
-  Object.defineProperty(exports2, "NAPIEngine", {enumerable: true, get: function() {
-    return NAPIEngine_1.NAPIEngine;
+  var LibraryEngine_1 = require_LibraryEngine();
+  Object.defineProperty(exports2, "LibraryEngine", {enumerable: true, get: function() {
+    return LibraryEngine_1.LibraryEngine;
   }});
-  var NodeEngine_1 = require_NodeEngine();
-  Object.defineProperty(exports2, "Engine", {enumerable: true, get: function() {
-    return NodeEngine_1.NodeEngine;
+  var BinaryEngine_1 = require_BinaryEngine();
+  Object.defineProperty(exports2, "BinaryEngine", {enumerable: true, get: function() {
+    return BinaryEngine_1.BinaryEngine;
   }});
   var printGeneratorConfig_12 = require_printGeneratorConfig();
   Object.defineProperty(exports2, "printGeneratorConfig", {enumerable: true, get: function() {
     return printGeneratorConfig_12.printGeneratorConfig;
   }});
-  exports2.NApiEngineTypes = __importStar(require_napi_types());
+  Object.defineProperty(exports2, "getOriginalBinaryTargetsValue", {enumerable: true, get: function() {
+    return printGeneratorConfig_12.getOriginalBinaryTargetsValue;
+  }});
+  exports2.NodeAPILibraryTypes = __importStar(require_NodeAPILibraryTypes());
   var util_12 = require_util4();
   Object.defineProperty(exports2, "fixBinaryTargets", {enumerable: true, get: function() {
     return util_12.fixBinaryTargets;
@@ -28636,7 +28683,7 @@ var require_utils5 = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.25.0",
+    version: "2.26.0",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -28693,14 +28740,14 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "index-browser.js"
     ],
     devDependencies: {
-      "@prisma/debug": "2.25.0",
-      "@prisma/engine-core": "2.25.0",
-      "@prisma/engines": "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922",
-      "@prisma/fetch-engine": "2.25.0",
-      "@prisma/generator-helper": "2.25.0",
-      "@prisma/get-platform": "2.25.0",
-      "@prisma/migrate": "2.25.0",
-      "@prisma/sdk": "2.25.0",
+      "@prisma/debug": "workspace:*",
+      "@prisma/engine-core": "workspace:*",
+      "@prisma/engines": "2.26.0-23.9b816b3aa13cc270074f172f30d6eda8a8ce867d",
+      "@prisma/fetch-engine": "workspace:*",
+      "@prisma/generator-helper": "workspace:*",
+      "@prisma/get-platform": "workspace:*",
+      "@prisma/migrate": "workspace:*",
+      "@prisma/sdk": "workspace:*",
       "@timsuchanek/copy": "1.4.5",
       "@types/debug": "4.1.5",
       "@types/jest": "26.0.23",
@@ -28708,14 +28755,14 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "@types/mssql": "6.0.8",
       "@types/node": "12.20.15",
       "@types/pg": "8.6.0",
-      "@typescript-eslint/eslint-plugin": "4.26.1",
-      "@typescript-eslint/parser": "4.26.1",
+      "@typescript-eslint/eslint-plugin": "4.28.0",
+      "@typescript-eslint/parser": "4.28.0",
       arg: "5.0.0",
       chalk: "4.1.1",
-      "decimal.js": "10.2.1",
+      "decimal.js": "10.3.0",
       esbuild: "0.8.53",
       "escape-string-regexp": "4.0.0",
-      eslint: "7.28.0",
+      eslint: "7.29.0",
       "eslint-config-prettier": "8.3.0",
       "eslint-plugin-eslint-comments": "3.2.0",
       "eslint-plugin-jest": "24.3.6",
@@ -28727,20 +28774,20 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "indent-string": "4.0.0",
       "is-obj": "2.0.0",
       "is-regexp": "2.1.0",
-      jest: "27.0.4",
+      jest: "27.0.5",
       "js-levenshtein": "1.1.6",
       klona: "2.0.4",
       "lint-staged": "11.0.0",
       "make-dir": "3.1.0",
-      mariadb: "2.5.3",
-      mssql: "7.1.1",
+      mariadb: "2.5.4",
+      mssql: "7.1.3",
       pg: "8.6.0",
       "pkg-up": "3.1.0",
       pluralize: "8.0.0",
       prettier: "2.3.1",
       "replace-string": "3.1.0",
       rimraf: "3.0.2",
-      rollup: "2.51.1",
+      rollup: "2.52.2",
       "rollup-plugin-dts": "3.0.2",
       "sort-keys": "4.2.0",
       "source-map-support": "0.5.19",
@@ -28751,7 +28798,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "ts-jest": "27.0.3",
       "ts-node": "10.0.0",
       tsd: "0.17.0",
-      typescript: "4.3.2"
+      typescript: "4.3.4"
     },
     peerDependencies: {
       prisma: "*"
@@ -28762,7 +28809,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       }
     },
     dependencies: {
-      "@prisma/engines-version": "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922"
+      "@prisma/engines-version": "2.26.0-23.9b816b3aa13cc270074f172f30d6eda8a8ce867d"
     },
     "lint-staged": {
       "*.ts": [
@@ -28808,7 +28855,7 @@ var import_chalk = __toModule2(require_source2());
 var import_indent_string = __toModule2(require_indent_string2());
 var import_js_levenshtein = __toModule2(require_js_levenshtein());
 
-// ../../node_modules/.pnpm/decimal.js@10.2.1/node_modules/decimal.js/decimal.mjs
+// ../../node_modules/.pnpm/decimal.js@10.3.0/node_modules/decimal.js/decimal.mjs
 var EXP_LIMIT = 9e15;
 var MAX_DIGITS = 1e9;
 var NUMERALS = "0123456789abcdef";
@@ -28831,6 +28878,7 @@ var decimalError = "[DecimalError] ";
 var invalidArgument = decimalError + "Invalid argument: ";
 var precisionLimitExceeded = decimalError + "Precision limit exceeded";
 var cryptoUnavailable = decimalError + "crypto unavailable";
+var tag = "[object Decimal]";
 var mathfloor = Math.floor;
 var mathpow = Math.pow;
 var isBinary = /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i;
@@ -28842,7 +28890,7 @@ var LOG_BASE = 7;
 var MAX_SAFE_INTEGER = 9007199254740991;
 var LN10_PRECISION = LN10.length - 1;
 var PI_PRECISION = PI.length - 1;
-var P = {name: "[object Decimal]"};
+var P = {toStringTag: tag};
 P.absoluteValue = P.abs = function() {
   var x = new this.constructor(this);
   if (x.s < 0)
@@ -28851,6 +28899,17 @@ P.absoluteValue = P.abs = function() {
 };
 P.ceil = function() {
   return finalise(new this.constructor(this), this.e + 1, 2);
+};
+P.clampedTo = P.clamp = function(min2, max2) {
+  var k, x = this, Ctor = x.constructor;
+  min2 = new Ctor(min2);
+  max2 = new Ctor(max2);
+  if (!min2.s || !max2.s)
+    return new Ctor(NaN);
+  if (min2.gt(max2))
+    throw Error(invalidArgument + max2);
+  k = x.cmp(min2);
+  return k < 0 ? min2 : x.cmp(max2) > 0 ? max2 : new Ctor(x);
 };
 P.comparedTo = P.cmp = function(y) {
   var i, j, xdL, ydL, x = this, xd = x.d, yd = (y = new x.constructor(y)).d, xs = x.s, ys = y.s;
@@ -29882,7 +29941,10 @@ function convertBase(str, baseIn, baseOut) {
   return arr.reverse();
 }
 function cosine(Ctor, x) {
-  var k, y, len = x.d.length;
+  var k, len, y;
+  if (x.isZero())
+    return x;
+  len = x.d.length;
   if (len < 32) {
     k = Math.ceil(len / 3);
     y = (1 / tinyPow(4, k)).toString();
@@ -30267,7 +30329,7 @@ function maxOrMin(Ctor, args, ltgt) {
   return x;
 }
 function naturalExponential(x, sd) {
-  var denominator, guard, j, pow2, sum2, t, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+  var denominator, guard, j, pow2, sum3, t, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
   if (!x.d || !x.d[0] || x.e > 17) {
     return new Ctor(x.d ? !x.d[0] ? 1 : x.s < 0 ? 0 : 1 / 0 : x.s ? x.s < 0 ? 0 : x : 0 / 0);
   }
@@ -30284,35 +30346,35 @@ function naturalExponential(x, sd) {
   }
   guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
   wpr += guard;
-  denominator = pow2 = sum2 = new Ctor(1);
+  denominator = pow2 = sum3 = new Ctor(1);
   Ctor.precision = wpr;
   for (; ; ) {
     pow2 = finalise(pow2.times(x), wpr, 1);
     denominator = denominator.times(++i);
-    t = sum2.plus(divide(pow2, denominator, wpr, 1));
-    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum2.d).slice(0, wpr)) {
+    t = sum3.plus(divide(pow2, denominator, wpr, 1));
+    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
       j = k;
       while (j--)
-        sum2 = finalise(sum2.times(sum2), wpr, 1);
+        sum3 = finalise(sum3.times(sum3), wpr, 1);
       if (sd == null) {
-        if (rep < 3 && checkRoundingDigits(sum2.d, wpr - guard, rm, rep)) {
+        if (rep < 3 && checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
           Ctor.precision = wpr += 10;
           denominator = pow2 = t = new Ctor(1);
           i = 0;
           rep++;
         } else {
-          return finalise(sum2, Ctor.precision = pr, rm, external = true);
+          return finalise(sum3, Ctor.precision = pr, rm, external = true);
         }
       } else {
         Ctor.precision = pr;
-        return sum2;
+        return sum3;
       }
     }
-    sum2 = t;
+    sum3 = t;
   }
 }
 function naturalLogarithm(y, sd) {
-  var c, c0, denominator, e, numerator, rep, sum2, t, wpr, x1, x2, n = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+  var c, c0, denominator, e, numerator, rep, sum3, t, wpr, x1, x2, n = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
   if (x.s < 0 || !xd || !xd[0] || !x.e && xd[0] == 1 && xd.length == 1) {
     return new Ctor(xd && !xd[0] ? -1 / 0 : x.s != 1 ? NaN : xd ? 0 : x);
   }
@@ -30346,32 +30408,32 @@ function naturalLogarithm(y, sd) {
     return sd == null ? finalise(x, pr, rm, external = true) : x;
   }
   x1 = x;
-  sum2 = numerator = x = divide(x.minus(1), x.plus(1), wpr, 1);
+  sum3 = numerator = x = divide(x.minus(1), x.plus(1), wpr, 1);
   x2 = finalise(x.times(x), wpr, 1);
   denominator = 3;
   for (; ; ) {
     numerator = finalise(numerator.times(x2), wpr, 1);
-    t = sum2.plus(divide(numerator, new Ctor(denominator), wpr, 1));
-    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum2.d).slice(0, wpr)) {
-      sum2 = sum2.times(2);
+    t = sum3.plus(divide(numerator, new Ctor(denominator), wpr, 1));
+    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
+      sum3 = sum3.times(2);
       if (e !== 0)
-        sum2 = sum2.plus(getLn10(Ctor, wpr + 2, pr).times(e + ""));
-      sum2 = divide(sum2, new Ctor(n), wpr, 1);
+        sum3 = sum3.plus(getLn10(Ctor, wpr + 2, pr).times(e + ""));
+      sum3 = divide(sum3, new Ctor(n), wpr, 1);
       if (sd == null) {
-        if (checkRoundingDigits(sum2.d, wpr - guard, rm, rep)) {
+        if (checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
           Ctor.precision = wpr += guard;
           t = numerator = x = divide(x1.minus(1), x1.plus(1), wpr, 1);
           x2 = finalise(x.times(x), wpr, 1);
           denominator = rep = 1;
         } else {
-          return finalise(sum2, Ctor.precision = pr, rm, external = true);
+          return finalise(sum3, Ctor.precision = pr, rm, external = true);
         }
       } else {
         Ctor.precision = pr;
-        return sum2;
+        return sum3;
       }
     }
-    sum2 = t;
+    sum3 = t;
     denominator += 2;
   }
 }
@@ -30432,7 +30494,11 @@ function parseDecimal(x, str) {
 }
 function parseOther(x, str) {
   var base, Ctor, divisor, i, isFloat, len, p, xd, xe;
-  if (str === "Infinity" || str === "NaN") {
+  if (str.indexOf("_") > -1) {
+    str = str.replace(/(\d)_(?=\d)/g, "$1");
+    if (isDecimal.test(str))
+      return parseDecimal(x, str);
+  } else if (str === "Infinity" || str === "NaN") {
     if (!+str)
       x.s = NaN;
     x.e = NaN;
@@ -30483,8 +30549,9 @@ function parseOther(x, str) {
 }
 function sine(Ctor, x) {
   var k, len = x.d.length;
-  if (len < 3)
-    return taylorSeries(Ctor, 2, x, x);
+  if (len < 3) {
+    return x.isZero() ? x : taylorSeries(Ctor, 2, x, x);
+  }
   k = 1.4 * Math.sqrt(len);
   k = k > 16 ? 16 : k | 0;
   x = x.times(1 / tinyPow(5, k));
@@ -30714,6 +30781,9 @@ function cbrt(x) {
 function ceil(x) {
   return finalise(x = new this(x), x.e + 1, 2);
 }
+function clamp(x, min2, max2) {
+  return new this(x).clamp(min2, max2);
+}
 function config(obj) {
   if (!obj || typeof obj !== "object")
     throw Error(decimalError + "Object expected");
@@ -30782,7 +30852,7 @@ function clone(obj) {
     if (!(x instanceof Decimal2))
       return new Decimal2(v);
     x.constructor = Decimal2;
-    if (v instanceof Decimal2) {
+    if (isDecimalInstance(v)) {
       x.s = v.s;
       if (external) {
         if (!v.d || v.e > Decimal2.maxE) {
@@ -30880,6 +30950,7 @@ function clone(obj) {
   Decimal2.atan2 = atan2;
   Decimal2.cbrt = cbrt;
   Decimal2.ceil = ceil;
+  Decimal2.clamp = clamp;
   Decimal2.cos = cos;
   Decimal2.cosh = cosh;
   Decimal2.div = div;
@@ -30902,6 +30973,7 @@ function clone(obj) {
   Decimal2.sinh = sinh;
   Decimal2.sqrt = sqrt;
   Decimal2.sub = sub;
+  Decimal2.sum = sum;
   Decimal2.tan = tan;
   Decimal2.tanh = tanh;
   Decimal2.trunc = trunc;
@@ -30946,7 +31018,7 @@ function hypot() {
   return t.sqrt();
 }
 function isDecimalInstance(obj) {
-  return obj instanceof Decimal || obj && obj.name === "[object Decimal]" || false;
+  return obj instanceof Decimal || obj && obj.toStringTag === tag || false;
 }
 function ln(x) {
   return new this(x).ln();
@@ -31053,6 +31125,14 @@ function sqrt(x) {
 function sub(x, y) {
   return new this(x).sub(y);
 }
+function sum() {
+  var i = 0, args = arguments, x = new this(args[i]);
+  external = false;
+  for (; x.s && ++i < args.length; )
+    x = x.plus(args[i]);
+  external = true;
+  return finalise(x, this.precision, this.rounding);
+}
 function tan(x) {
   return new this(x).tan();
 }
@@ -31064,7 +31144,7 @@ function trunc(x) {
 }
 P[Symbol.for("nodejs.util.inspect.custom")] = P.toString;
 P[Symbol.toStringTag] = "Decimal";
-var Decimal = clone(DEFAULTS);
+var Decimal = P.constructor = clone(DEFAULTS);
 LN10 = new Decimal(LN10);
 PI = new Decimal(PI);
 var decimal_default = Decimal;
@@ -33127,7 +33207,7 @@ function valueToArg(key, value, arg) {
         return score;
       });
       return {
-        score: errors.length + sum(errorScores),
+        score: errors.length + sum2(errorScores),
         arg: arg2,
         errors
       };
@@ -33153,7 +33233,7 @@ function getDepth(object) {
   }
   return level;
 }
-function sum(n) {
+function sum2(n) {
   return n.reduce((acc, curr) => acc + curr, 0);
 }
 function tryInferArgs(key, value, arg, inputType) {
@@ -33498,8 +33578,8 @@ var import_engine_core = __toModule2(require_dist11());
 
 // src/runtime/getPrismaClient.ts
 var import_debug3 = __toModule2(require_dist7());
-var import_NAPIEngine = __toModule2(require_NAPIEngine());
-var import_NodeEngine = __toModule2(require_NodeEngine());
+var import_LibraryEngine = __toModule2(require_LibraryEngine());
+var import_BinaryEngine = __toModule2(require_BinaryEngine());
 var logger2 = __toModule2(require_logger());
 var import_mapPreviewFeatures = __toModule2(require_mapPreviewFeatures());
 var import_tryLoadEnvs = __toModule2(require_tryLoadEnvs());
@@ -34231,9 +34311,9 @@ function getPrismaClient(config2) {
     }
     getEngine() {
       if (this._previewFeatures.includes("nApi") || process.env.PRISMA_FORCE_NAPI === "true") {
-        return new import_NAPIEngine.NAPIEngine(this._engineConfig);
+        return new import_LibraryEngine.LibraryEngine(this._engineConfig);
       } else {
-        return new import_NodeEngine.NodeEngine(this._engineConfig);
+        return new import_BinaryEngine.BinaryEngine(this._engineConfig);
       }
     }
     $use(arg0, arg1) {
@@ -34442,9 +34522,10 @@ function getPrismaClient(config2) {
             break;
           }
           case "sqlserver": {
-            query = mssqlPreparedStatement(stringOrTemplateStringsArray);
+            const queryInstance = sqlTemplateTag.sqltag(stringOrTemplateStringsArray, ...values);
+            query = mssqlPreparedStatement(queryInstance.strings);
             parameters = {
-              values: serializeRawParameters(values),
+              values: serializeRawParameters(queryInstance.values),
               __prismaRawParamaters__: true
             };
             break;

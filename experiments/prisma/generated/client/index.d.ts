@@ -222,10 +222,10 @@ export class PrismaClient<
    * Executes a raw query and returns the number of affected rows
    * @example
    * ```
-   * // With parameters use prisma.executeRaw``, values will be escaped automatically
-   * const result = await prisma.executeRaw`UPDATE User SET cool = ${true} WHERE id = ${1};`
+   * // With parameters use prisma.$executeRaw``, values will be escaped automatically
+   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE id = ${1};`
    * // Or
-   * const result = await prisma.executeRaw('UPDATE User SET cool = $1 WHERE id = $2 ;', true, 1)
+   * const result = await prisma.$executeRaw('UPDATE User SET cool = $1 WHERE id = $2 ;', true, 1)
   * ```
   * 
   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
@@ -236,10 +236,10 @@ export class PrismaClient<
    * Performs a raw query and returns the SELECT data
    * @example
    * ```
-   * // With parameters use prisma.queryRaw``, values will be escaped automatically
-   * const result = await prisma.queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'ema.il'};`
+   * // With parameters use prisma.$queryRaw``, values will be escaped automatically
+   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'ema.il'};`
    * // Or
-   * const result = await prisma.queryRaw('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'ema.il')
+   * const result = await prisma.$queryRaw('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'ema.il')
   * ```
   * 
   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
@@ -250,7 +250,7 @@ export class PrismaClient<
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
    * @example
    * ```
-   * const [george, bob, alice] = await prisma.transaction([
+   * const [george, bob, alice] = await prisma.$transaction([
    *   prisma.user.create({ data: { name: 'George' } }),
    *   prisma.user.create({ data: { name: 'Bob' } }),
    *   prisma.user.create({ data: { name: 'Alice' } }),
@@ -379,8 +379,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.25.0
-   * Query Engine version: c838e79f39885bc8e1611849b1eb28b5bb5bc922
+   * Prisma Client JS version: 2.26.0
+   * Query Engine version: 9b816b3aa13cc270074f172f30d6eda8a8ce867d
    */
   export type PrismaVersion = {
     client: string

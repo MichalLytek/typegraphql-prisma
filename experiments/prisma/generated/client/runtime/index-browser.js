@@ -11,7 +11,7 @@ __export(exports, {
   Decimal: () => decimal_default
 });
 
-// ../../node_modules/.pnpm/decimal.js@10.2.1/node_modules/decimal.js/decimal.mjs
+// ../../node_modules/.pnpm/decimal.js@10.3.0/node_modules/decimal.js/decimal.mjs
 var EXP_LIMIT = 9e15;
 var MAX_DIGITS = 1e9;
 var NUMERALS = "0123456789abcdef";
@@ -34,6 +34,7 @@ var decimalError = "[DecimalError] ";
 var invalidArgument = decimalError + "Invalid argument: ";
 var precisionLimitExceeded = decimalError + "Precision limit exceeded";
 var cryptoUnavailable = decimalError + "crypto unavailable";
+var tag = "[object Decimal]";
 var mathfloor = Math.floor;
 var mathpow = Math.pow;
 var isBinary = /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i;
@@ -45,7 +46,7 @@ var LOG_BASE = 7;
 var MAX_SAFE_INTEGER = 9007199254740991;
 var LN10_PRECISION = LN10.length - 1;
 var PI_PRECISION = PI.length - 1;
-var P = {name: "[object Decimal]"};
+var P = {toStringTag: tag};
 P.absoluteValue = P.abs = function() {
   var x = new this.constructor(this);
   if (x.s < 0)
@@ -54,6 +55,17 @@ P.absoluteValue = P.abs = function() {
 };
 P.ceil = function() {
   return finalise(new this.constructor(this), this.e + 1, 2);
+};
+P.clampedTo = P.clamp = function(min2, max2) {
+  var k, x = this, Ctor = x.constructor;
+  min2 = new Ctor(min2);
+  max2 = new Ctor(max2);
+  if (!min2.s || !max2.s)
+    return new Ctor(NaN);
+  if (min2.gt(max2))
+    throw Error(invalidArgument + max2);
+  k = x.cmp(min2);
+  return k < 0 ? min2 : x.cmp(max2) > 0 ? max2 : new Ctor(x);
 };
 P.comparedTo = P.cmp = function(y) {
   var i, j, xdL, ydL, x = this, xd = x.d, yd = (y = new x.constructor(y)).d, xs = x.s, ys = y.s;
@@ -1085,7 +1097,10 @@ function convertBase(str, baseIn, baseOut) {
   return arr.reverse();
 }
 function cosine(Ctor, x) {
-  var k, y, len = x.d.length;
+  var k, len, y;
+  if (x.isZero())
+    return x;
+  len = x.d.length;
   if (len < 32) {
     k = Math.ceil(len / 3);
     y = (1 / tinyPow(4, k)).toString();
@@ -1470,7 +1485,7 @@ function maxOrMin(Ctor, args, ltgt) {
   return x;
 }
 function naturalExponential(x, sd) {
-  var denominator, guard, j, pow2, sum, t, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+  var denominator, guard, j, pow2, sum2, t, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
   if (!x.d || !x.d[0] || x.e > 17) {
     return new Ctor(x.d ? !x.d[0] ? 1 : x.s < 0 ? 0 : 1 / 0 : x.s ? x.s < 0 ? 0 : x : 0 / 0);
   }
@@ -1487,35 +1502,35 @@ function naturalExponential(x, sd) {
   }
   guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
   wpr += guard;
-  denominator = pow2 = sum = new Ctor(1);
+  denominator = pow2 = sum2 = new Ctor(1);
   Ctor.precision = wpr;
   for (; ; ) {
     pow2 = finalise(pow2.times(x), wpr, 1);
     denominator = denominator.times(++i);
-    t = sum.plus(divide(pow2, denominator, wpr, 1));
-    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum.d).slice(0, wpr)) {
+    t = sum2.plus(divide(pow2, denominator, wpr, 1));
+    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum2.d).slice(0, wpr)) {
       j = k;
       while (j--)
-        sum = finalise(sum.times(sum), wpr, 1);
+        sum2 = finalise(sum2.times(sum2), wpr, 1);
       if (sd == null) {
-        if (rep < 3 && checkRoundingDigits(sum.d, wpr - guard, rm, rep)) {
+        if (rep < 3 && checkRoundingDigits(sum2.d, wpr - guard, rm, rep)) {
           Ctor.precision = wpr += 10;
           denominator = pow2 = t = new Ctor(1);
           i = 0;
           rep++;
         } else {
-          return finalise(sum, Ctor.precision = pr, rm, external = true);
+          return finalise(sum2, Ctor.precision = pr, rm, external = true);
         }
       } else {
         Ctor.precision = pr;
-        return sum;
+        return sum2;
       }
     }
-    sum = t;
+    sum2 = t;
   }
 }
 function naturalLogarithm(y, sd) {
-  var c, c0, denominator, e, numerator, rep, sum, t, wpr, x1, x2, n = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+  var c, c0, denominator, e, numerator, rep, sum2, t, wpr, x1, x2, n = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
   if (x.s < 0 || !xd || !xd[0] || !x.e && xd[0] == 1 && xd.length == 1) {
     return new Ctor(xd && !xd[0] ? -1 / 0 : x.s != 1 ? NaN : xd ? 0 : x);
   }
@@ -1549,32 +1564,32 @@ function naturalLogarithm(y, sd) {
     return sd == null ? finalise(x, pr, rm, external = true) : x;
   }
   x1 = x;
-  sum = numerator = x = divide(x.minus(1), x.plus(1), wpr, 1);
+  sum2 = numerator = x = divide(x.minus(1), x.plus(1), wpr, 1);
   x2 = finalise(x.times(x), wpr, 1);
   denominator = 3;
   for (; ; ) {
     numerator = finalise(numerator.times(x2), wpr, 1);
-    t = sum.plus(divide(numerator, new Ctor(denominator), wpr, 1));
-    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum.d).slice(0, wpr)) {
-      sum = sum.times(2);
+    t = sum2.plus(divide(numerator, new Ctor(denominator), wpr, 1));
+    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum2.d).slice(0, wpr)) {
+      sum2 = sum2.times(2);
       if (e !== 0)
-        sum = sum.plus(getLn10(Ctor, wpr + 2, pr).times(e + ""));
-      sum = divide(sum, new Ctor(n), wpr, 1);
+        sum2 = sum2.plus(getLn10(Ctor, wpr + 2, pr).times(e + ""));
+      sum2 = divide(sum2, new Ctor(n), wpr, 1);
       if (sd == null) {
-        if (checkRoundingDigits(sum.d, wpr - guard, rm, rep)) {
+        if (checkRoundingDigits(sum2.d, wpr - guard, rm, rep)) {
           Ctor.precision = wpr += guard;
           t = numerator = x = divide(x1.minus(1), x1.plus(1), wpr, 1);
           x2 = finalise(x.times(x), wpr, 1);
           denominator = rep = 1;
         } else {
-          return finalise(sum, Ctor.precision = pr, rm, external = true);
+          return finalise(sum2, Ctor.precision = pr, rm, external = true);
         }
       } else {
         Ctor.precision = pr;
-        return sum;
+        return sum2;
       }
     }
-    sum = t;
+    sum2 = t;
     denominator += 2;
   }
 }
@@ -1635,7 +1650,11 @@ function parseDecimal(x, str) {
 }
 function parseOther(x, str) {
   var base, Ctor, divisor, i, isFloat, len, p, xd, xe;
-  if (str === "Infinity" || str === "NaN") {
+  if (str.indexOf("_") > -1) {
+    str = str.replace(/(\d)_(?=\d)/g, "$1");
+    if (isDecimal.test(str))
+      return parseDecimal(x, str);
+  } else if (str === "Infinity" || str === "NaN") {
     if (!+str)
       x.s = NaN;
     x.e = NaN;
@@ -1686,8 +1705,9 @@ function parseOther(x, str) {
 }
 function sine(Ctor, x) {
   var k, len = x.d.length;
-  if (len < 3)
-    return taylorSeries(Ctor, 2, x, x);
+  if (len < 3) {
+    return x.isZero() ? x : taylorSeries(Ctor, 2, x, x);
+  }
   k = 1.4 * Math.sqrt(len);
   k = k > 16 ? 16 : k | 0;
   x = x.times(1 / tinyPow(5, k));
@@ -1917,6 +1937,9 @@ function cbrt(x) {
 function ceil(x) {
   return finalise(x = new this(x), x.e + 1, 2);
 }
+function clamp(x, min2, max2) {
+  return new this(x).clamp(min2, max2);
+}
 function config(obj) {
   if (!obj || typeof obj !== "object")
     throw Error(decimalError + "Object expected");
@@ -1985,7 +2008,7 @@ function clone(obj) {
     if (!(x instanceof Decimal2))
       return new Decimal2(v);
     x.constructor = Decimal2;
-    if (v instanceof Decimal2) {
+    if (isDecimalInstance(v)) {
       x.s = v.s;
       if (external) {
         if (!v.d || v.e > Decimal2.maxE) {
@@ -2083,6 +2106,7 @@ function clone(obj) {
   Decimal2.atan2 = atan2;
   Decimal2.cbrt = cbrt;
   Decimal2.ceil = ceil;
+  Decimal2.clamp = clamp;
   Decimal2.cos = cos;
   Decimal2.cosh = cosh;
   Decimal2.div = div;
@@ -2105,6 +2129,7 @@ function clone(obj) {
   Decimal2.sinh = sinh;
   Decimal2.sqrt = sqrt;
   Decimal2.sub = sub;
+  Decimal2.sum = sum;
   Decimal2.tan = tan;
   Decimal2.tanh = tanh;
   Decimal2.trunc = trunc;
@@ -2149,7 +2174,7 @@ function hypot() {
   return t.sqrt();
 }
 function isDecimalInstance(obj) {
-  return obj instanceof Decimal || obj && obj.name === "[object Decimal]" || false;
+  return obj instanceof Decimal || obj && obj.toStringTag === tag || false;
 }
 function ln(x) {
   return new this(x).ln();
@@ -2256,6 +2281,14 @@ function sqrt(x) {
 function sub(x, y) {
   return new this(x).sub(y);
 }
+function sum() {
+  var i = 0, args = arguments, x = new this(args[i]);
+  external = false;
+  for (; x.s && ++i < args.length; )
+    x = x.plus(args[i]);
+  external = true;
+  return finalise(x, this.precision, this.rounding);
+}
 function tan(x) {
   return new this(x).tan();
 }
@@ -2267,7 +2300,7 @@ function trunc(x) {
 }
 P[Symbol.for("nodejs.util.inspect.custom")] = P.toString;
 P[Symbol.toStringTag] = "Decimal";
-var Decimal = clone(DEFAULTS);
+var Decimal = P.constructor = clone(DEFAULTS);
 LN10 = new Decimal(LN10);
 PI = new Decimal(PI);
 var decimal_default = Decimal;

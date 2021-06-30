@@ -135,7 +135,6 @@
             "relationName": "posts",
             "relationFromFields": [],
             "relationToFields": [],
-            "relationOnDelete": "NONE",
             "isGenerated": false,
             "isUpdatedAt": false,
             "documentation": "@TypeGraphQL.field(name: \"clientPosts\")"
@@ -166,7 +165,6 @@
             "relationName": "editorPosts",
             "relationFromFields": [],
             "relationToFields": [],
-            "relationOnDelete": "NONE",
             "isGenerated": false,
             "isUpdatedAt": false,
             "documentation": "@TypeGraphQL.omit(output: true)"
@@ -326,7 +324,7 @@
             "relationToFields": [
               "id"
             ],
-            "relationOnDelete": "NONE",
+            "relationOnDelete": "Cascade",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -360,7 +358,7 @@
             "relationToFields": [
               "id"
             ],
-            "relationOnDelete": "NONE",
+            "relationOnDelete": "SetNull",
             "isGenerated": false,
             "isUpdatedAt": false,
             "documentation": "@TypeGraphQL.omit(output: true)"
@@ -577,7 +575,7 @@
               "firstName",
               "lastName"
             ],
-            "relationOnDelete": "NONE",
+            "relationOnDelete": "Cascade",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -648,7 +646,6 @@
             "relationName": "DirectorToMovie",
             "relationFromFields": [],
             "relationToFields": [],
-            "relationOnDelete": "NONE",
             "isGenerated": false,
             "isUpdatedAt": false
           }
@@ -711,7 +708,6 @@
             "relationToFields": [
               "id"
             ],
-            "relationOnDelete": "NONE",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -732,7 +728,7 @@
             "relationToFields": [
               "id"
             ],
-            "relationOnDelete": "NONE",
+            "relationOnDelete": "SetNull",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -805,7 +801,6 @@
             "relationToFields": [
               "id"
             ],
-            "relationOnDelete": "NONE",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -822,7 +817,6 @@
             "relationName": "creator",
             "relationFromFields": [],
             "relationToFields": [],
-            "relationOnDelete": "NONE",
             "isGenerated": false,
             "isUpdatedAt": false
           }

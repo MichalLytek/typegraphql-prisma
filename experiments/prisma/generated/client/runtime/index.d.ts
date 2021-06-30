@@ -193,10 +193,14 @@ interface GeneratorConfig {
     isCustomOutput?: boolean;
     provider: EnvValue;
     config: Dictionary$1<string>;
-    binaryTargets: string[];
+    binaryTargets: BinaryTargetsEnvValue[];
     previewFeatures: string[];
 }
 interface EnvValue {
+    fromEnvVar: null | string;
+    value: string;
+}
+interface BinaryTargetsEnvValue {
     fromEnvVar: null | string;
     value: string;
 }
@@ -485,7 +489,6 @@ interface Engine {
     on(event: EngineEventType, listener: (args?: any) => any): void;
     start(): Promise<void>;
     stop(): Promise<void>;
-    kill(signal: string): void;
     getConfig(): Promise<GetConfigResult>;
     version(forceRun?: boolean): Promise<string> | string;
     request<T>(query: string, headers: Record<string, string>, numTry: number): Promise<{
@@ -503,129 +506,10 @@ interface DatasourceOverwrite {
     url?: string;
     env?: string;
 }
-interface EngineConfig {
-    cwd?: string;
-    dirname?: string;
-    datamodelPath: string;
-    enableDebugLogs?: boolean;
-    enableEngineDebugMode?: boolean;
-    prismaPath?: string;
-    fetcher?: (query: string) => Promise<{
-        data?: any;
-        error?: any;
-    }>;
-    generator?: GeneratorConfig;
-    datasources?: DatasourceOverwrite[];
-    showColors?: boolean;
-    logQueries?: boolean;
-    logLevel?: 'info' | 'warn';
-    env?: Record<string, string>;
-    flags?: string[];
-    useUds?: boolean;
-    clientVersion?: string;
-    previewFeatures?: string[];
-    engineEndpoint?: string;
-    activeProvider?: string;
-}
 declare type GetConfigResult = {
     datasources: DataSource[];
     generators: GeneratorConfig[];
 };
-
-declare class NodeEngine implements Engine {
-    private logEmitter;
-    private showColors;
-    private logQueries;
-    private logLevel?;
-    private env?;
-    private flags;
-    private port?;
-    private enableDebugLogs;
-    private enableEngineDebugMode;
-    private child?;
-    private clientVersion?;
-    private lastPanic?;
-    private globalKillSignalReceived?;
-    private startCount;
-    private previewFeatures;
-    private engineEndpoint?;
-    private lastErrorLog?;
-    private lastRustError?;
-    private useUds;
-    private socketPath?;
-    private getConfigPromise?;
-    private stopPromise?;
-    private beforeExitListener?;
-    private dirname?;
-    private cwd;
-    private datamodelPath;
-    private prismaPath?;
-    private stderrLogs;
-    private currentRequestPromise?;
-    private platformPromise?;
-    private platform?;
-    private generator?;
-    private incorrectlyPinnedBinaryTarget?;
-    private datasources?;
-    private startPromise?;
-    private versionPromise?;
-    private engineStartDeferred?;
-    private engineStopDeferred?;
-    private undici?;
-    private lastQuery?;
-    private lastVersion?;
-    private lastActiveProvider?;
-    private activeProvider?;
-    /**
-     * exiting is used to tell the .on('exit') hook, if the exit came from our script.
-     * As soon as the Prisma binary returns a correct return code (like 1 or 0), we don't need this anymore
-     */
-    constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, previewFeatures, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, useUds, activeProvider, }: EngineConfig);
-    private setError;
-    private checkForTooManyEngines;
-    private resolveCwd;
-    on(event: EngineEventType, listener: (args?: any) => any): void;
-    emitExit(): Promise<void>;
-    private getPlatform;
-    private getQueryEnginePath;
-    private handlePanic;
-    private resolvePrismaPath;
-    private getPrismaPath;
-    private getFixedGenerator;
-    private printDatasources;
-    /**
-     * Starts the engine, returns the url that it runs on
-     */
-    start(): Promise<void>;
-    private getEngineEnvVars;
-    private internalStart;
-    stop(): Promise<void>;
-    /**
-     * If Prisma runs, stop it
-     */
-    _stop(): Promise<void>;
-    kill(signal: string): void;
-    /**
-     * Use the port 0 trick to get a new port
-     */
-    private getFreePort;
-    getConfig(): Promise<GetConfigResult>;
-    private _getConfig;
-    version(forceRun?: boolean): Promise<string>;
-    internalVersion(): Promise<string>;
-    request<T>(query: string, headers: Record<string, string>, numTry?: number): Promise<T>;
-    requestBatch<T>(queries: string[], transaction?: boolean, numTry?: number): Promise<T>;
-    private get hasMaxRestarts();
-    /**
-     * If we have request errors like "ECONNRESET", we need to get the error from a
-     * different place, not the request itself. This different place can either be
-     * this.lastRustError or this.lastErrorLog
-     */
-    private throwAsyncErrorIfExists;
-    private getErrorMessageWithLink;
-    private handleRequestError;
-    private graphQLToJSError;
-}
 
 declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
 declare type InstanceRejectOnNotFound = RejectOnNotFound | Record<string, RejectOnNotFound> | Record<string, Record<string, RejectOnNotFound>>;
@@ -778,7 +662,7 @@ declare class Decimal {
   readonly d: number[];
   readonly e: number;
   readonly s: number;
-  private readonly name: string;
+  private readonly toStringTag: string;
 
   constructor(n: Decimal.Value);
 
@@ -786,6 +670,9 @@ declare class Decimal {
   abs(): Decimal;
 
   ceil(): Decimal;
+  
+  clampedTo(min: Decimal.Value, max: Decimal.Value): Decimal;
+  clamp(min: Decimal.Value, max: Decimal.Value): Decimal;
 
   comparedTo(n: Decimal.Value): number;
   cmp(n: Decimal.Value): number;
@@ -961,6 +848,7 @@ declare class Decimal {
   static atan2(y: Decimal.Value, x: Decimal.Value): Decimal;
   static cbrt(n: Decimal.Value): Decimal;
   static ceil(n: Decimal.Value): Decimal;
+  static clamp(n: Decimal.Value, min: Decimal.Value, max: Decimal.Value): Decimal;
   static clone(object?: Decimal.Config): Decimal.Constructor;
   static config(object: Decimal.Config): Decimal.Constructor;
   static cos(n: Decimal.Value): Decimal;
@@ -988,6 +876,7 @@ declare class Decimal {
   static sinh(n: Decimal.Value): Decimal;
   static sqrt(n: Decimal.Value): Decimal;
   static sub(x: Decimal.Value, y: Decimal.Value): Decimal;
+  static sum(...n: Decimal.Value[]): Decimal;
   static tan(n: Decimal.Value): Decimal;
   static tanh(n: Decimal.Value): Decimal;
   static trunc(n: Decimal.Value): Decimal;
@@ -1032,4 +921,4 @@ declare type Handler = (base: string, item: string, type: ItemType) => boolean |
  */
 declare function findSync(root: string, match: (RegExp | string)[], types?: ('f' | 'd' | 'l')[], deep?: ('d' | 'l')[], limit?: number, handler?: Handler, found?: string[], seen?: Record<string, true>): string[];
 
-export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, empty, findSync, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };
+export { DMMF, DMMFClass, Decimal, Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, empty, findSync, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };

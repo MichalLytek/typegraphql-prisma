@@ -25,6 +25,7 @@ const config: Config.InitialOptions = {
     "<rootDir>/package",
     "<rootDir>/tests/artifacts",
   ],
+  testTimeout: 10000,
 };
 
 export default config;
