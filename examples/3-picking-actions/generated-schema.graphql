@@ -4,15 +4,15 @@
 # -----------------------------------------------
 
 type AggregatePost {
-  count: PostCountAggregate
-  max: PostMaxAggregate
-  min: PostMinAggregate
+  _count: PostCountAggregate
+  _max: PostMaxAggregate
+  _min: PostMinAggregate
 }
 
 type AggregateUser {
-  count: UserCountAggregate
-  max: UserMaxAggregate
-  min: UserMinAggregate
+  _count: UserCountAggregate
+  _max: UserMaxAggregate
+  _min: UserMinAggregate
 }
 
 input BoolFilter {
@@ -93,13 +93,13 @@ type Post {
 
 type PostCountAggregate {
   _all: Int!
-  authorId: Int
-  content: Int
-  createdAt: Int
-  id: Int
-  published: Int
-  title: Int
-  updatedAt: Int
+  authorId: Int!
+  content: Int!
+  createdAt: Int!
+  id: Int!
+  published: Int!
+  title: Int!
+  updatedAt: Int!
 }
 
 input PostListRelationFilter {
@@ -217,9 +217,9 @@ type User {
 
 type UserCountAggregate {
   _all: Int!
-  email: Int
-  id: Int
-  name: Int
+  email: Int!
+  id: Int!
+  name: Int!
 }
 
 type UserMaxAggregate {

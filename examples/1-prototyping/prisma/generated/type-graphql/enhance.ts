@@ -26,7 +26,8 @@ const actionResolversMap = {
     deleteManyUser: actionResolvers.DeleteManyUserResolver,
     updateManyUser: actionResolvers.UpdateManyUserResolver,
     upsertUser: actionResolvers.UpsertUserResolver,
-    aggregateUser: actionResolvers.AggregateUserResolver
+    aggregateUser: actionResolvers.AggregateUserResolver,
+    groupByUser: actionResolvers.GroupByUserResolver
   },
   Post: {
     post: actionResolvers.FindUniquePostResolver,
@@ -38,12 +39,13 @@ const actionResolversMap = {
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     updateManyPost: actionResolvers.UpdateManyPostResolver,
     upsertPost: actionResolvers.UpsertPostResolver,
-    aggregatePost: actionResolvers.AggregatePostResolver
+    aggregatePost: actionResolvers.AggregatePostResolver,
+    groupByPost: actionResolvers.GroupByPostResolver
   }
 };
 const resolversInfo = {
-  User: ["user", "findFirstUser", "users", "createUser", "deleteUser", "updateUser", "deleteManyUser", "updateManyUser", "upsertUser", "aggregateUser"],
-  Post: ["post", "findFirstPost", "posts", "createPost", "deletePost", "updatePost", "deleteManyPost", "updateManyPost", "upsertPost", "aggregatePost"]
+  User: ["user", "findFirstUser", "users", "createUser", "deleteUser", "updateUser", "deleteManyUser", "updateManyUser", "upsertUser", "aggregateUser", "groupByUser"],
+  Post: ["post", "findFirstPost", "posts", "createPost", "deletePost", "updatePost", "deleteManyPost", "updateManyPost", "upsertPost", "aggregatePost", "groupByPost"]
 };
 const relationResolversInfo = {
   User: ["posts"],
@@ -57,9 +59,11 @@ const inputsInfo = {
   UserWhereInput: ["AND", "OR", "NOT", "id", "email", "name", "posts"],
   UserOrderByInput: ["id", "email", "name"],
   UserWhereUniqueInput: ["id", "email"],
+  UserScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "email", "name"],
   PostWhereInput: ["AND", "OR", "NOT", "id", "createdAt", "updatedAt", "published", "title", "content", "author", "authorId"],
   PostOrderByInput: ["id", "createdAt", "updatedAt", "published", "title", "content", "authorId"],
   PostWhereUniqueInput: ["id"],
+  PostScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "createdAt", "updatedAt", "published", "title", "content", "authorId"],
   UserCreateInput: ["id", "email", "name", "posts"],
   UserUpdateInput: ["id", "email", "name", "posts"],
   UserUpdateManyMutationInput: ["id", "email", "name"],
@@ -69,9 +73,13 @@ const inputsInfo = {
   StringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
   StringNullableFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
   PostListRelationFilter: ["every", "some", "none"],
+  StringWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not", "_count", "_min", "_max"],
+  StringNullableWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not", "_count", "_min", "_max"],
   DateTimeFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   BoolFilter: ["equals", "not"],
   UserRelationFilter: ["is", "isNot"],
+  DateTimeWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not", "_count", "_min", "_max"],
+  BoolWithAggregatesFilter: ["equals", "not", "_count", "_min", "_max"],
   PostCreateNestedManyWithoutAuthorInput: ["create", "connectOrCreate", "connect"],
   StringFieldUpdateOperationsInput: ["set"],
   NullableStringFieldUpdateOperationsInput: ["set"],
@@ -82,8 +90,14 @@ const inputsInfo = {
   UserUpdateOneWithoutPostsInput: ["create", "connectOrCreate", "upsert", "connect", "disconnect", "delete", "update"],
   NestedStringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
   NestedStringNullableFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
+  NestedStringWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not", "_count", "_min", "_max"],
+  NestedIntFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
+  NestedStringNullableWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not", "_count", "_min", "_max"],
+  NestedIntNullableFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   NestedDateTimeFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   NestedBoolFilter: ["equals", "not"],
+  NestedDateTimeWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not", "_count", "_min", "_max"],
+  NestedBoolWithAggregatesFilter: ["equals", "not", "_count", "_min", "_max"],
   PostCreateWithoutAuthorInput: ["id", "createdAt", "updatedAt", "published", "title", "content"],
   PostCreateOrConnectWithoutAuthorInput: ["where", "create"],
   PostUpsertWithWhereUniqueWithoutAuthorInput: ["where", "update", "create"],
@@ -97,19 +111,17 @@ const inputsInfo = {
   PostUpdateWithoutAuthorInput: ["id", "createdAt", "updatedAt", "published", "title", "content"]
 };
 const outputsInfo = {
-  Query: ["findFirstUser", "findManyUser", "aggregateUser", "findUniqueUser", "findFirstPost", "findManyPost", "aggregatePost", "findUniquePost"],
-  Mutation: ["createOneUser", "upsertOneUser", "deleteOneUser", "updateOneUser", "updateManyUser", "deleteManyUser", "createOnePost", "upsertOnePost", "deleteOnePost", "updateOnePost", "updateManyPost", "deleteManyPost", "executeRaw", "queryRaw"],
-  AggregateUser: ["count", "min", "max"],
-  AggregatePost: ["count", "min", "max"],
+  AggregateUser: ["_count", "_min", "_max"],
+  UserGroupBy: ["id", "email", "name", "_count", "_min", "_max"],
+  AggregatePost: ["_count", "_min", "_max"],
+  PostGroupBy: ["id", "createdAt", "updatedAt", "published", "title", "content", "authorId", "_count", "_min", "_max"],
   AffectedRowsOutput: ["count"],
   UserCountAggregate: ["id", "email", "name", "_all"],
   UserMinAggregate: ["id", "email", "name"],
   UserMaxAggregate: ["id", "email", "name"],
   PostCountAggregate: ["id", "createdAt", "updatedAt", "published", "title", "content", "authorId", "_all"],
   PostMinAggregate: ["id", "createdAt", "updatedAt", "published", "title", "content", "authorId"],
-  PostMaxAggregate: ["id", "createdAt", "updatedAt", "published", "title", "content", "authorId"],
-  User: ["id", "email", "name", "posts"],
-  Post: ["id", "createdAt", "updatedAt", "published", "title", "content", "author", "authorId"]
+  PostMaxAggregate: ["id", "createdAt", "updatedAt", "published", "title", "content", "authorId"]
 };
 const argsInfo = {
   FindUniqueUserArgs: ["where"],
@@ -122,6 +134,7 @@ const argsInfo = {
   UpdateManyUserArgs: ["data", "where"],
   UpsertUserArgs: ["where", "create", "update"],
   AggregateUserArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByUserArgs: ["where", "orderBy", "by", "having", "take", "skip"],
   FindUniquePostArgs: ["where"],
   FindFirstPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
   FindManyPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
@@ -131,7 +144,8 @@ const argsInfo = {
   DeleteManyPostArgs: ["where"],
   UpdateManyPostArgs: ["data", "where"],
   UpsertPostArgs: ["where", "create", "update"],
-  AggregatePostArgs: ["where", "orderBy", "cursor", "take", "skip"]
+  AggregatePostArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByPostArgs: ["where", "orderBy", "by", "having", "take", "skip"]
 };
 
 type ResolverModelNames = keyof typeof crudResolversMap;

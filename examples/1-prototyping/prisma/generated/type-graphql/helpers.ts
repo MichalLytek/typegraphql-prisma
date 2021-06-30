@@ -21,4 +21,19 @@ export function getPrismaFromContext(context: any) {
   return prismaClient;
 }
 
+export function transformCountFieldIntoSelectRelationsCount(_count: object) {
+  return {
+    include: {
+      _count: {
+        select: {
+          ...Object.fromEntries(
+            Object.entries(_count).filter(([_, v]) => v != null)
+          ),
+        }
+      },
+    },
+  }
+}
+
+
 

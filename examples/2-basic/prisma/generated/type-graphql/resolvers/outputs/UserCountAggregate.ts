@@ -8,19 +8,19 @@ import { DecimalJSScalar } from "../../scalars";
 })
 export class UserCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
+    nullable: false
   })
-  id!: number | null;
+  id!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
+    nullable: false
   })
-  email!: number | null;
+  email!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
+    nullable: false
   })
-  name!: number | null;
+  name!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false

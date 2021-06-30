@@ -13,15 +13,15 @@ export class AggregateUser {
   @TypeGraphQL.Field(_type => UserCountAggregate, {
     nullable: true
   })
-  count!: UserCountAggregate | null;
+  _count!: UserCountAggregate | null;
 
   @TypeGraphQL.Field(_type => UserMinAggregate, {
     nullable: true
   })
-  min!: UserMinAggregate | null;
+  _min!: UserMinAggregate | null;
 
   @TypeGraphQL.Field(_type => UserMaxAggregate, {
     nullable: true
   })
-  max!: UserMaxAggregate | null;
+  _max!: UserMaxAggregate | null;
 }

@@ -5,6 +5,7 @@ export { DeletePostArgs } from "./DeletePostArgs";
 export { FindFirstPostArgs } from "./FindFirstPostArgs";
 export { FindManyPostArgs } from "./FindManyPostArgs";
 export { FindUniquePostArgs } from "./FindUniquePostArgs";
+export { GroupByPostArgs } from "./GroupByPostArgs";
 export { UpdateManyPostArgs } from "./UpdateManyPostArgs";
 export { UpdatePostArgs } from "./UpdatePostArgs";
 export { UpsertPostArgs } from "./UpsertPostArgs";

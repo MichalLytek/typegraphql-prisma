@@ -4,7 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { AggregatePostArgs } from "./args/AggregatePostArgs";
 import { Post } from "../../../models/Post";
 import { AggregatePost } from "../../outputs/AggregatePost";
-import { transformFields, getPrismaFromContext } from "../../../helpers";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class AggregatePostResolver {

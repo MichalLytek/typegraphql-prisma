@@ -14,7 +14,7 @@ query GetAllUsersAndPosts {
 }
 
 query GetSelectedPost {
-  post(where: { id: "ckmszantc0009g2tp56fmipp0" }) {
+  post(where: { id: "ckqjmkvum0009l0tpdi0xq2l1" }) {
     ...PostData
     author {
       ...UserData
@@ -33,7 +33,7 @@ query GetSomeUsers {
 
 query GetPrismaPostCount {
   aggregatePost(where: { title: { contains: "Prisma" } }) {
-    count {
+    _count {
       _all
     }
   }
