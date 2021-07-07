@@ -4,6 +4,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import HomepageFeatures from "../components/HomepageFeatures";
 import HomepageHeader from "../components/HomepageHeader";
+import VideoIntroduction from "../components/VideoIntroduction";
 
 const Home: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -12,6 +13,7 @@ const Home: React.FC = () => {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
+        <VideoIntroduction />
       </main>
     </Layout>
   );

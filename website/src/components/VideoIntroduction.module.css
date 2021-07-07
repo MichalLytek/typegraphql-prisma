@@ -1,0 +1,30 @@
+.wrapper {
+  position: relative;
+  width: 966px;
+  padding-bottom: 543px; /* 16:9 ratio */
+  height: 0;
+  overflow: hidden;
+  margin: 0 auto 4rem;
+}
+
+.player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 966px) {
+  .wrapper {
+    width: 100%;
+    padding-bottom: 56.25%;
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .wrapper {
+    margin-bottom: 1.5rem;
+  }
+}
