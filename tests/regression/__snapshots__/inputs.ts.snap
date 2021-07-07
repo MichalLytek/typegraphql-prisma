@@ -2215,6 +2215,29 @@ export class NestedIntFilter {
 "
 `;
 
+exports[`inputs should properly generate input type classes for filtering scalar fields: NestedJsonFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class NestedJsonFilter {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  equals?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  not?: Prisma.InputJsonValue | undefined;
+}
+"
+`;
+
 exports[`inputs should properly generate input type classes for filtering scalar fields: NestedStringNullableFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
@@ -4517,6 +4540,297 @@ export { NestedIntWithAggregatesFilter } from \\"./NestedIntWithAggregatesFilter
 export { NullableBigIntFieldUpdateOperationsInput } from \\"./NullableBigIntFieldUpdateOperationsInput\\";
 export { NullableBytesFieldUpdateOperationsInput } from \\"./NullableBytesFieldUpdateOperationsInput\\";
 export { NullableDecimalFieldUpdateOperationsInput } from \\"./NullableDecimalFieldUpdateOperationsInput\\";
+"
+`;
+
+exports[`inputs when \`filterJson\` preview feature is enabled should properly generate input type classes for filtering json fields: JsonFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class JsonFilter {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  equals?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  lt?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  lte?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  gt?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  gte?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: true
+  })
+  path?: string[] | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_contains?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_starts_with?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_ends_with?: string | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_contains?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_starts_with?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_ends_with?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  not?: Prisma.InputJsonValue | undefined;
+}
+"
+`;
+
+exports[`inputs when \`filterJson\` preview feature is enabled should properly generate input type classes for filtering json fields: JsonWithAggregatesFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { NestedIntFilter } from \\"../inputs/NestedIntFilter\\";
+import { NestedJsonFilter } from \\"../inputs/NestedJsonFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class JsonWithAggregatesFilter {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  equals?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  lt?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  lte?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  gt?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  gte?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: true
+  })
+  path?: string[] | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_contains?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_starts_with?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_ends_with?: string | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_contains?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_starts_with?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_ends_with?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  not?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  _count?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedJsonFilter, {
+    nullable: true
+  })
+  _min?: NestedJsonFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedJsonFilter, {
+    nullable: true
+  })
+  _max?: NestedJsonFilter | undefined;
+}
+"
+`;
+
+exports[`inputs when \`filterJson\` preview feature is enabled should properly generate input type classes for filtering json fields: NestedJsonFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true
+})
+export class NestedJsonFilter {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  equals?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  lt?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  lte?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  gt?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  gte?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: true
+  })
+  path?: string[] | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_contains?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_starts_with?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  string_ends_with?: string | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_contains?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_starts_with?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  array_ends_with?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  not?: Prisma.InputJsonValue | undefined;
+}
+"
+`;
+
+exports[`inputs when \`filterJson\` preview feature is enabled should properly generate input type classes for filtering json fields: index 1`] = `
+"export { BoolFieldUpdateOperationsInput } from \\"./BoolFieldUpdateOperationsInput\\";
+export { BoolFilter } from \\"./BoolFilter\\";
+export { BoolWithAggregatesFilter } from \\"./BoolWithAggregatesFilter\\";
+export { DateTimeFieldUpdateOperationsInput } from \\"./DateTimeFieldUpdateOperationsInput\\";
+export { DateTimeFilter } from \\"./DateTimeFilter\\";
+export { DateTimeWithAggregatesFilter } from \\"./DateTimeWithAggregatesFilter\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { FloatWithAggregatesFilter } from \\"./FloatWithAggregatesFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { IntWithAggregatesFilter } from \\"./IntWithAggregatesFilter\\";
+export { JsonFilter } from \\"./JsonFilter\\";
+export { JsonWithAggregatesFilter } from \\"./JsonWithAggregatesFilter\\";
+export { NestedBoolFilter } from \\"./NestedBoolFilter\\";
+export { NestedBoolWithAggregatesFilter } from \\"./NestedBoolWithAggregatesFilter\\";
+export { NestedDateTimeFilter } from \\"./NestedDateTimeFilter\\";
+export { NestedDateTimeWithAggregatesFilter } from \\"./NestedDateTimeWithAggregatesFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedFloatWithAggregatesFilter } from \\"./NestedFloatWithAggregatesFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedIntWithAggregatesFilter } from \\"./NestedIntWithAggregatesFilter\\";
+export { NestedJsonFilter } from \\"./NestedJsonFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { NestedStringWithAggregatesFilter } from \\"./NestedStringWithAggregatesFilter\\";
+export { SampleCreateInput } from \\"./SampleCreateInput\\";
+export { SampleCreateManyInput } from \\"./SampleCreateManyInput\\";
+export { SampleOrderByInput } from \\"./SampleOrderByInput\\";
+export { SampleScalarWhereWithAggregatesInput } from \\"./SampleScalarWhereWithAggregatesInput\\";
+export { SampleUpdateInput } from \\"./SampleUpdateInput\\";
+export { SampleUpdateManyMutationInput } from \\"./SampleUpdateManyMutationInput\\";
+export { SampleWhereInput } from \\"./SampleWhereInput\\";
+export { SampleWhereUniqueInput } from \\"./SampleWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+export { StringWithAggregatesFilter } from \\"./StringWithAggregatesFilter\\";
 "
 `;
 

@@ -206,9 +206,8 @@ export function getInputTypeName(
   originalInputName: string,
   dmmfDocument: DmmfDocument,
 ): string {
-  const keywordPhrasePosition = getInputKeywordPhrasePosition(
-    originalInputName,
-  );
+  const keywordPhrasePosition =
+    getInputKeywordPhrasePosition(originalInputName);
   if (!keywordPhrasePosition) {
     return originalInputName;
   }

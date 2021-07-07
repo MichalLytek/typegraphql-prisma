@@ -80,6 +80,9 @@ describe("inputs", () => {
     const jsonFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/JsonFilter.ts",
     );
+    const nestedJsonFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NestedJsonFilter.ts",
+    );
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
     expect(intFilterTSFile).toMatchSnapshot("IntFilter");
@@ -102,6 +105,7 @@ describe("inputs", () => {
     expect(dateTimeFilterTSFile).toMatchSnapshot("DateTimeFilter");
     expect(nestedDateTimeFilterTSFile).toMatchSnapshot("NestedDateTimeFilter");
     expect(jsonFilterTSFile).toMatchSnapshot("JsonFilter");
+    expect(nestedJsonFilterTSFile).toMatchSnapshot("NestedJsonFilter");
     expect(indexTSFile).toMatchSnapshot("index");
   });
 
@@ -143,15 +147,18 @@ describe("inputs", () => {
     const sampleModelCreateintArrayFieldInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/SampleModelCreateintArrayFieldInput.ts",
     );
-    const sampleModelCreateManyintArrayFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/SampleModelCreateManyintArrayFieldInput.ts",
-    );
-    const sampleModelCreatestringArrayFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/SampleModelCreatestringArrayFieldInput.ts",
-    );
-    const sampleModelCreateManystringArrayFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/SampleModelCreateManystringArrayFieldInput.ts",
-    );
+    const sampleModelCreateManyintArrayFieldInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/SampleModelCreateManyintArrayFieldInput.ts",
+      );
+    const sampleModelCreatestringArrayFieldInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/SampleModelCreatestringArrayFieldInput.ts",
+      );
+    const sampleModelCreateManystringArrayFieldInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/SampleModelCreateManystringArrayFieldInput.ts",
+      );
 
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
@@ -232,9 +239,10 @@ describe("inputs", () => {
     const sampleModelUpdateintArrayFieldInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/SampleModelUpdateintArrayFieldInput.ts",
     );
-    const sampleModelUpdatestringArrayFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/SampleModelUpdatestringArrayFieldInput.ts",
-    );
+    const sampleModelUpdatestringArrayFieldInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/SampleModelUpdatestringArrayFieldInput.ts",
+      );
 
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
@@ -484,9 +492,10 @@ describe("inputs", () => {
     const directorOrderByInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/DirectorOrderByInput.ts",
     );
-    const directorFirstNameLastNameCompoundUniqueInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/DirectorFirstNameLastNameCompoundUniqueInput.ts",
-    );
+    const directorFirstNameLastNameCompoundUniqueInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/DirectorFirstNameLastNameCompoundUniqueInput.ts",
+      );
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
     expect(directorWhereInputTSFile).toMatchSnapshot("DirectorWhereInput");
@@ -535,9 +544,10 @@ describe("inputs", () => {
     const movieOrderByInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/MovieOrderByInput.ts",
     );
-    const movieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput.ts",
-    );
+    const movieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput.ts",
+      );
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
     expect(movieWhereInputTSFile).toMatchSnapshot("MovieWhereInput");
@@ -572,15 +582,18 @@ describe("inputs", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const userUpdateOneRequiredWithoutPostsFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/UserUpdateOneRequiredWithoutPostsFieldInput.ts",
-    );
-    const userCreateOrConnectWithoutPostsFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/UserCreateOrConnectWithoutPostsFieldInput.ts",
-    );
-    const userCreateNestedOneWithoutPostsFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/UserCreateNestedOneWithoutPostsFieldInput.ts",
-    );
+    const userUpdateOneRequiredWithoutPostsFieldInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/UserUpdateOneRequiredWithoutPostsFieldInput.ts",
+      );
+    const userCreateOrConnectWithoutPostsFieldInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/UserCreateOrConnectWithoutPostsFieldInput.ts",
+      );
+    const userCreateNestedOneWithoutPostsFieldInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/UserCreateNestedOneWithoutPostsFieldInput.ts",
+      );
 
     expect(userUpdateOneRequiredWithoutPostsFieldInputTSFile).toMatchSnapshot(
       "UserUpdateOneRequiredWithoutPostsFieldInput",
@@ -625,24 +638,29 @@ describe("inputs", () => {
     const nestedBytesNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/NestedBytesNullableFilter.ts",
     );
-    const nestedBytesNullableWithAggregatesFilterTSFile = await readGeneratedFile(
-      "/resolvers/inputs/NestedBytesNullableWithAggregatesFilter.ts",
-    );
+    const nestedBytesNullableWithAggregatesFilterTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/NestedBytesNullableWithAggregatesFilter.ts",
+      );
     const nestedDecimalNullableFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/NestedDecimalNullableFilter.ts",
     );
-    const nestedDecimalNullableWithAggregatesFilterTSFile = await readGeneratedFile(
-      "/resolvers/inputs/NestedDecimalNullableWithAggregatesFilter.ts",
-    );
-    const nullableBigIntFieldUpdateOperationsInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/NullableBigIntFieldUpdateOperationsInput.ts",
-    );
-    const nullableBytesFieldUpdateOperationsInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/NullableBytesFieldUpdateOperationsInput.ts",
-    );
-    const nullableDecimalFieldUpdateOperationsInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/NullableDecimalFieldUpdateOperationsInput.ts",
-    );
+    const nestedDecimalNullableWithAggregatesFilterTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/NestedDecimalNullableWithAggregatesFilter.ts",
+      );
+    const nullableBigIntFieldUpdateOperationsInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/NullableBigIntFieldUpdateOperationsInput.ts",
+      );
+    const nullableBytesFieldUpdateOperationsInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/NullableBytesFieldUpdateOperationsInput.ts",
+      );
+    const nullableDecimalFieldUpdateOperationsInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/NullableDecimalFieldUpdateOperationsInput.ts",
+      );
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
     expect(bigIntNullableFilterTSFile).toMatchSnapshot("BigIntNullableFilter");
@@ -782,9 +800,10 @@ describe("inputs", () => {
     const nativeTypeModelUpdateInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/NativeTypeModelUpdateInput.ts",
     );
-    const nativeTypeModelUpdateManyMutationInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/NativeTypeModelUpdateManyMutationInput.ts",
-    );
+    const nativeTypeModelUpdateManyMutationInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/NativeTypeModelUpdateManyMutationInput.ts",
+      );
     const nativeTypeModelWhereInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/NativeTypeModelWhereInput.ts",
     );
@@ -838,12 +857,14 @@ describe("inputs", () => {
     const secondModelCreateManyInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/SecondModelCreateManyInput.ts",
     );
-    const secondModelCreateManyFirstModelFieldInputTSFile = await readGeneratedFile(
-      "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInput.ts",
-    );
-    const secondModelCreateManyFirstModelFieldInputEnvelopeTSFile = await readGeneratedFile(
-      "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInputEnvelope.ts",
-    );
+    const secondModelCreateManyFirstModelFieldInputTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInput.ts",
+      );
+    const secondModelCreateManyFirstModelFieldInputEnvelopeTSFile =
+      await readGeneratedFile(
+        "/resolvers/inputs/SecondModelCreateManyFirstModelFieldInputEnvelope.ts",
+      );
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
     expect(firstModelCreateManyInputTSFile).toMatchSnapshot(
@@ -994,9 +1015,10 @@ describe("inputs", () => {
       const renamedSecondModelOrderByInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/RenamedSecondModelOrderByInput.ts",
       );
-      const renamedSecondModelListRelationFilterTSFile = await readGeneratedFile(
-        "/resolvers/inputs/RenamedSecondModelListRelationFilter.ts",
-      );
+      const renamedSecondModelListRelationFilterTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/RenamedSecondModelListRelationFilter.ts",
+        );
       const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
       expect(renamedFirstModelWhereInputTSFile).toMatchSnapshot(
@@ -1105,36 +1127,44 @@ describe("inputs", () => {
       const firstModelUncheckedCreateInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUncheckedCreateInput.ts",
       );
-      const firstModelUncheckedCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelUncheckedCreateWithoutSecondModelsFieldInput.ts",
-      );
+      const firstModelUncheckedCreateWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelUncheckedCreateWithoutSecondModelsFieldInput.ts",
+        );
       const firstModelUncheckedUpdateInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUncheckedUpdateInput.ts",
       );
       const firstModelUncheckedUpdateManyInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelUncheckedUpdateManyInput.ts",
       );
-      const firstModelUncheckedUpdateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelUncheckedUpdateWithoutSecondModelsFieldInput.ts",
-      );
-      const firstModelCreateNestedOneWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelCreateNestedOneWithoutSecondModelsFieldInput.ts",
-      );
-      const firstModelCreateOrConnectWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelCreateOrConnectWithoutSecondModelsFieldInput.ts",
-      );
-      const firstModelCreateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelCreateWithoutSecondModelsFieldInput.ts",
-      );
-      const firstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput.ts",
-      );
-      const firstModelUpdateWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelUpdateWithoutSecondModelsFieldInput.ts",
-      );
-      const firstModelUpsertWithoutSecondModelsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/FirstModelUpsertWithoutSecondModelsFieldInput.ts",
-      );
+      const firstModelUncheckedUpdateWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelUncheckedUpdateWithoutSecondModelsFieldInput.ts",
+        );
+      const firstModelCreateNestedOneWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelCreateNestedOneWithoutSecondModelsFieldInput.ts",
+        );
+      const firstModelCreateOrConnectWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelCreateOrConnectWithoutSecondModelsFieldInput.ts",
+        );
+      const firstModelCreateWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelCreateWithoutSecondModelsFieldInput.ts",
+        );
+      const firstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput.ts",
+        );
+      const firstModelUpdateWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelUpdateWithoutSecondModelsFieldInput.ts",
+        );
+      const firstModelUpsertWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelUpsertWithoutSecondModelsFieldInput.ts",
+        );
       const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
       expect(firstModelUncheckedCreateInputTSFile).toMatchSnapshot(
@@ -1208,9 +1238,10 @@ describe("inputs", () => {
       const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
       );
-      const secondModelOrderByRelationAggregateInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelOrderByRelationAggregateInput.ts",
-      );
+      const secondModelOrderByRelationAggregateInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/SecondModelOrderByRelationAggregateInput.ts",
+        );
       const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
       expect(firstModelOrderByWithRelationInputTSFile).toMatchSnapshot(
@@ -1246,9 +1277,10 @@ describe("inputs", () => {
       const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
       );
-      const secondModelOrderByRelationAggregateInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/SecondModelOrderByRelationAggregateInput.ts",
-      );
+      const secondModelOrderByRelationAggregateInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/SecondModelOrderByRelationAggregateInput.ts",
+        );
       const secondModelOrderByWithRelationInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/SecondModelOrderByWithRelationInput.ts",
       );
@@ -1317,6 +1349,44 @@ describe("inputs", () => {
       expect(sampleCountOrderByAggregateInputTSFile).toMatchSnapshot(
         "SampleCountOrderByAggregateInput",
       );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
+
+  describe("when `filterJson` preview feature is enabled", () => {
+    it("should properly generate input type classes for filtering json fields", async () => {
+      const schema = /* prisma */ `
+        model Sample {
+          idField       Int     @id @default(autoincrement())
+          stringField   String
+          floatField    Float
+          intField      Int
+          booleanField  Boolean
+          dateField     DateTime
+          jsonField     Json
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["filterJson"],
+      });
+      const jsonFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/JsonFilter.ts",
+      );
+      const jsonWithAggregatesFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/JsonWithAggregatesFilter.ts",
+      );
+      const nestedJsonFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/NestedJsonFilter.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(jsonFilterTSFile).toMatchSnapshot("JsonFilter");
+      expect(jsonWithAggregatesFilterTSFile).toMatchSnapshot(
+        "JsonWithAggregatesFilter",
+      );
+      expect(nestedJsonFilterTSFile).toMatchSnapshot("NestedJsonFilter");
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });

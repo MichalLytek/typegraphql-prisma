@@ -8,53 +8,53 @@ type AffectedRowsOutput {
 }
 
 type AggregateClient {
-  avg: ClientAvgAggregate
-  count: ClientCountAggregate
-  max: ClientMaxAggregate
-  min: ClientMinAggregate
-  sum: ClientSumAggregate
+  _avg: ClientAvgAggregate
+  _count: ClientCountAggregate
+  _max: ClientMaxAggregate
+  _min: ClientMinAggregate
+  _sum: ClientSumAggregate
 }
 
 type AggregateCreator {
-  avg: CreatorAvgAggregate
-  count: CreatorCountAggregate
-  max: CreatorMaxAggregate
-  min: CreatorMinAggregate
-  sum: CreatorSumAggregate
+  _avg: CreatorAvgAggregate
+  _count: CreatorCountAggregate
+  _max: CreatorMaxAggregate
+  _min: CreatorMinAggregate
+  _sum: CreatorSumAggregate
 }
 
 type AggregateDirector {
-  count: DirectorCountAggregate
-  max: DirectorMaxAggregate
-  min: DirectorMinAggregate
+  _count: DirectorCountAggregate
+  _max: DirectorMaxAggregate
+  _min: DirectorMinAggregate
 }
 
 type AggregateMovie {
-  count: MovieCountAggregate
-  max: MovieMaxAggregate
-  min: MovieMinAggregate
+  _count: MovieCountAggregate
+  _max: MovieMaxAggregate
+  _min: MovieMinAggregate
 }
 
 type AggregateNativeTypeModel {
-  avg: NativeTypeModelAvgAggregate
-  count: NativeTypeModelCountAggregate
-  max: NativeTypeModelMaxAggregate
-  min: NativeTypeModelMinAggregate
-  sum: NativeTypeModelSumAggregate
+  _avg: NativeTypeModelAvgAggregate
+  _count: NativeTypeModelCountAggregate
+  _max: NativeTypeModelMaxAggregate
+  _min: NativeTypeModelMinAggregate
+  _sum: NativeTypeModelSumAggregate
 }
 
 type AggregatePatient {
-  count: PatientCountAggregate
-  max: PatientMaxAggregate
-  min: PatientMinAggregate
+  _count: PatientCountAggregate
+  _max: PatientMaxAggregate
+  _min: PatientMinAggregate
 }
 
 type AggregateProblem {
-  avg: ProblemAvgAggregate
-  count: ProblemCountAggregate
-  max: ProblemMaxAggregate
-  min: ProblemMinAggregate
-  sum: ProblemSumAggregate
+  _avg: ProblemAvgAggregate
+  _count: ProblemCountAggregate
+  _max: ProblemMaxAggregate
+  _min: ProblemMinAggregate
+  _sum: ProblemSumAggregate
 }
 
 """
@@ -74,19 +74,19 @@ input BigIntNullableFilter {
 }
 
 input BigIntNullableWithAggregatesFilter {
-  avg: NestedFloatNullableFilter
-  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedBigIntNullableFilter
+  _min: NestedBigIntNullableFilter
+  _sum: NestedBigIntNullableFilter
   equals: BigInt
   gt: BigInt
   gte: BigInt
   in: [BigInt!]
   lt: BigInt
   lte: BigInt
-  max: NestedBigIntNullableFilter
-  min: NestedBigIntNullableFilter
   not: NestedBigIntNullableWithAggregatesFilter
   notIn: [BigInt!]
-  sum: NestedBigIntNullableFilter
 }
 
 input BoolFieldUpdateOperationsInput {
@@ -99,10 +99,10 @@ input BoolFilter {
 }
 
 input BoolWithAggregatesFilter {
-  count: NestedIntFilter
+  _count: NestedIntFilter
+  _max: NestedBoolFilter
+  _min: NestedBoolFilter
   equals: Boolean
-  max: NestedBoolFilter
-  min: NestedBoolFilter
   not: NestedBoolWithAggregatesFilter
 }
 
@@ -115,10 +115,10 @@ input BytesNullableFilter {
 }
 
 input BytesNullableWithAggregatesFilter {
-  count: NestedIntNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedBytesNullableFilter
+  _min: NestedBytesNullableFilter
   equals: Byte
-  max: NestedBytesNullableFilter
-  min: NestedBytesNullableFilter
   not: NestedBytesNullableWithAggregatesFilter
 }
 
@@ -150,14 +150,14 @@ input CategoryCountOrderByAggregateInput {
 }
 
 type CategoryGroupBy {
-  avg: CategoryAvgAggregate
-  count: CategoryCountAggregate
-  max: CategoryMaxAggregate
-  min: CategoryMinAggregate
+  _avg: CategoryAvgAggregate
+  _count: CategoryCountAggregate
+  _max: CategoryMaxAggregate
+  _min: CategoryMinAggregate
+  _sum: CategorySumAggregate
   name: String!
   number: Int!
   slug: String!
-  sum: CategorySumAggregate
 }
 
 type CategoryMaxAggregate {
@@ -396,20 +396,20 @@ input ClientCreategradesInput {
 }
 
 type ClientGroupBy {
+  _avg: ClientAvgAggregate
+  _count: ClientCountAggregate
+  _max: ClientMaxAggregate
+  _min: ClientMinAggregate
+  _sum: ClientSumAggregate
   age: Int!
-  aliases: [String!]!
+  aliases: [String!]
   amount: Float!
-  avg: ClientAvgAggregate
   balance: Float!
-  count: ClientCountAggregate
   email: String!
-  grades: [Int!]!
+  grades: [Int!]
   id: Int!
-  max: ClientMaxAggregate
-  min: ClientMinAggregate
   name: String
   role: Role!
-  sum: ClientSumAggregate
 }
 
 type ClientMaxAggregate {
@@ -519,7 +519,7 @@ type ClientSumAggregate {
   age: Int
   amount: Float
   balance: Float
-  grades: [Int!]!
+  grades: [Int!]
   id: Int
 }
 
@@ -715,13 +715,13 @@ input CreatorCreateWithoutProblemsInput {
 }
 
 type CreatorGroupBy {
-  avg: CreatorAvgAggregate
-  count: CreatorCountAggregate
+  _avg: CreatorAvgAggregate
+  _count: CreatorCountAggregate
+  _max: CreatorMaxAggregate
+  _min: CreatorMinAggregate
+  _sum: CreatorSumAggregate
   id: Int!
-  max: CreatorMaxAggregate
-  min: CreatorMinAggregate
   name: String!
-  sum: CreatorSumAggregate
 }
 
 input CreatorListRelationFilter {
@@ -751,7 +751,7 @@ input CreatorMinOrderByAggregateInput {
 }
 
 input CreatorOrderByRelationAggregateInput {
-  count: SortOrder!
+  _count: SortOrder
 }
 
 input CreatorOrderByWithAggregationInput {
@@ -904,15 +904,15 @@ input DateTimeFilter {
 }
 
 input DateTimeWithAggregatesFilter {
-  count: NestedIntFilter
+  _count: NestedIntFilter
+  _max: NestedDateTimeFilter
+  _min: NestedDateTimeFilter
   equals: DateTime
   gt: DateTime
   gte: DateTime
   in: [DateTime!]
   lt: DateTime
   lte: DateTime
-  max: NestedDateTimeFilter
-  min: NestedDateTimeFilter
   not: NestedDateTimeWithAggregatesFilter
   notIn: [DateTime!]
 }
@@ -934,19 +934,19 @@ input DecimalNullableFilter {
 }
 
 input DecimalNullableWithAggregatesFilter {
-  avg: NestedDecimalNullableFilter
-  count: NestedIntNullableFilter
+  _avg: NestedDecimalNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedDecimalNullableFilter
+  _min: NestedDecimalNullableFilter
+  _sum: NestedDecimalNullableFilter
   equals: Decimal
   gt: Decimal
   gte: Decimal
   in: [Decimal!]
   lt: Decimal
   lte: Decimal
-  max: NestedDecimalNullableFilter
-  min: NestedDecimalNullableFilter
   not: NestedDecimalNullableWithAggregatesFilter
   notIn: [Decimal!]
-  sum: NestedDecimalNullableFilter
 }
 
 type Director {
@@ -1004,11 +1004,11 @@ input DirectorFirstNameLastNameCompoundUniqueInput {
 }
 
 type DirectorGroupBy {
-  count: DirectorCountAggregate
+  _count: DirectorCountAggregate
+  _max: DirectorMaxAggregate
+  _min: DirectorMinAggregate
   firstName: String!
   lastName: String!
-  max: DirectorMaxAggregate
-  min: DirectorMinAggregate
 }
 
 type DirectorMaxAggregate {
@@ -1113,11 +1113,11 @@ input EnumPostKindNullableFilter {
 }
 
 input EnumPostKindNullableWithAggregatesFilter {
-  count: NestedIntNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedEnumPostKindNullableFilter
+  _min: NestedEnumPostKindNullableFilter
   equals: PostKind
   in: [PostKind!]
-  max: NestedEnumPostKindNullableFilter
-  min: NestedEnumPostKindNullableFilter
   not: NestedEnumPostKindNullableWithAggregatesFilter
   notIn: [PostKind!]
 }
@@ -1134,11 +1134,11 @@ input EnumRoleFilter {
 }
 
 input EnumRoleWithAggregatesFilter {
-  count: NestedIntFilter
+  _count: NestedIntFilter
+  _max: NestedEnumRoleFilter
+  _min: NestedEnumRoleFilter
   equals: Role
   in: [Role!]
-  max: NestedEnumRoleFilter
-  min: NestedEnumRoleFilter
   not: NestedEnumRoleWithAggregatesFilter
   notIn: [Role!]
 }
@@ -1163,19 +1163,19 @@ input FloatFilter {
 }
 
 input FloatWithAggregatesFilter {
-  avg: NestedFloatFilter
-  count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _count: NestedIntFilter
+  _max: NestedFloatFilter
+  _min: NestedFloatFilter
+  _sum: NestedFloatFilter
   equals: Float
   gt: Float
   gte: Float
   in: [Float!]
   lt: Float
   lte: Float
-  max: NestedFloatFilter
-  min: NestedFloatFilter
   not: NestedFloatWithAggregatesFilter
   notIn: [Float!]
-  sum: NestedFloatFilter
 }
 
 input IntFieldUpdateOperationsInput {
@@ -1217,35 +1217,35 @@ input IntNullableListFilter {
 }
 
 input IntNullableWithAggregatesFilter {
-  avg: NestedFloatNullableFilter
-  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  _sum: NestedIntNullableFilter
   equals: Int
   gt: Int
   gte: Int
   in: [Int!]
   lt: Int
   lte: Int
-  max: NestedIntNullableFilter
-  min: NestedIntNullableFilter
   not: NestedIntNullableWithAggregatesFilter
   notIn: [Int!]
-  sum: NestedIntNullableFilter
 }
 
 input IntWithAggregatesFilter {
-  avg: NestedFloatFilter
-  count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _count: NestedIntFilter
+  _max: NestedIntFilter
+  _min: NestedIntFilter
+  _sum: NestedIntFilter
   equals: Int
   gt: Int
   gte: Int
   in: [Int!]
   lt: Int
   lte: Int
-  max: NestedIntFilter
-  min: NestedIntFilter
   not: NestedIntWithAggregatesFilter
   notIn: [Int!]
-  sum: NestedIntFilter
 }
 
 """
@@ -1254,16 +1254,38 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 input JsonFilter {
+  array_contains: JSON
+  array_ends_with: JSON
+  array_starts_with: JSON
   equals: JSON
+  gt: JSON
+  gte: JSON
+  lt: JSON
+  lte: JSON
   not: JSON
+  path: [String!]
+  string_contains: String
+  string_ends_with: String
+  string_starts_with: String
 }
 
 input JsonWithAggregatesFilter {
-  count: NestedIntFilter
+  _count: NestedIntFilter
+  _max: NestedJsonFilter
+  _min: NestedJsonFilter
+  array_contains: JSON
+  array_ends_with: JSON
+  array_starts_with: JSON
   equals: JSON
-  max: NestedJsonFilter
-  min: NestedJsonFilter
+  gt: JSON
+  gte: JSON
+  lt: JSON
+  lte: JSON
   not: JSON
+  path: [String!]
+  string_contains: String
+  string_ends_with: String
+  string_starts_with: String
 }
 
 type Movie {
@@ -1329,11 +1351,11 @@ input MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
 }
 
 type MovieGroupBy {
-  count: MovieCountAggregate
+  _count: MovieCountAggregate
+  _max: MovieMaxAggregate
+  _min: MovieMinAggregate
   directorFirstName: String!
   directorLastName: String!
-  max: MovieMaxAggregate
-  min: MovieMinAggregate
   title: String!
 }
 
@@ -1368,7 +1390,7 @@ input MovieMinOrderByAggregateInput {
 }
 
 input MovieOrderByRelationAggregateInput {
-  count: SortOrder!
+  _count: SortOrder
 }
 
 input MovieOrderByWithAggregationInput {
@@ -1571,15 +1593,15 @@ input NativeTypeModelCreateManyInput {
 }
 
 type NativeTypeModelGroupBy {
-  avg: NativeTypeModelAvgAggregate
+  _avg: NativeTypeModelAvgAggregate
+  _count: NativeTypeModelCountAggregate
+  _max: NativeTypeModelMaxAggregate
+  _min: NativeTypeModelMinAggregate
+  _sum: NativeTypeModelSumAggregate
   bigInt: BigInt
   byteA: Byte
-  count: NativeTypeModelCountAggregate
   decimal: Decimal
   id: Int!
-  max: NativeTypeModelMaxAggregate
-  min: NativeTypeModelMinAggregate
-  sum: NativeTypeModelSumAggregate
 }
 
 type NativeTypeModelMaxAggregate {
@@ -1696,19 +1718,19 @@ input NestedBigIntNullableFilter {
 }
 
 input NestedBigIntNullableWithAggregatesFilter {
-  avg: NestedFloatNullableFilter
-  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedBigIntNullableFilter
+  _min: NestedBigIntNullableFilter
+  _sum: NestedBigIntNullableFilter
   equals: BigInt
   gt: BigInt
   gte: BigInt
   in: [BigInt!]
   lt: BigInt
   lte: BigInt
-  max: NestedBigIntNullableFilter
-  min: NestedBigIntNullableFilter
   not: NestedBigIntNullableWithAggregatesFilter
   notIn: [BigInt!]
-  sum: NestedBigIntNullableFilter
 }
 
 input NestedBoolFilter {
@@ -1717,10 +1739,10 @@ input NestedBoolFilter {
 }
 
 input NestedBoolWithAggregatesFilter {
-  count: NestedIntFilter
+  _count: NestedIntFilter
+  _max: NestedBoolFilter
+  _min: NestedBoolFilter
   equals: Boolean
-  max: NestedBoolFilter
-  min: NestedBoolFilter
   not: NestedBoolWithAggregatesFilter
 }
 
@@ -1730,10 +1752,10 @@ input NestedBytesNullableFilter {
 }
 
 input NestedBytesNullableWithAggregatesFilter {
-  count: NestedIntNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedBytesNullableFilter
+  _min: NestedBytesNullableFilter
   equals: Byte
-  max: NestedBytesNullableFilter
-  min: NestedBytesNullableFilter
   not: NestedBytesNullableWithAggregatesFilter
 }
 
@@ -1749,15 +1771,15 @@ input NestedDateTimeFilter {
 }
 
 input NestedDateTimeWithAggregatesFilter {
-  count: NestedIntFilter
+  _count: NestedIntFilter
+  _max: NestedDateTimeFilter
+  _min: NestedDateTimeFilter
   equals: DateTime
   gt: DateTime
   gte: DateTime
   in: [DateTime!]
   lt: DateTime
   lte: DateTime
-  max: NestedDateTimeFilter
-  min: NestedDateTimeFilter
   not: NestedDateTimeWithAggregatesFilter
   notIn: [DateTime!]
 }
@@ -1774,19 +1796,19 @@ input NestedDecimalNullableFilter {
 }
 
 input NestedDecimalNullableWithAggregatesFilter {
-  avg: NestedDecimalNullableFilter
-  count: NestedIntNullableFilter
+  _avg: NestedDecimalNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedDecimalNullableFilter
+  _min: NestedDecimalNullableFilter
+  _sum: NestedDecimalNullableFilter
   equals: Decimal
   gt: Decimal
   gte: Decimal
   in: [Decimal!]
   lt: Decimal
   lte: Decimal
-  max: NestedDecimalNullableFilter
-  min: NestedDecimalNullableFilter
   not: NestedDecimalNullableWithAggregatesFilter
   notIn: [Decimal!]
-  sum: NestedDecimalNullableFilter
 }
 
 input NestedEnumPostKindNullableFilter {
@@ -1797,11 +1819,11 @@ input NestedEnumPostKindNullableFilter {
 }
 
 input NestedEnumPostKindNullableWithAggregatesFilter {
-  count: NestedIntNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedEnumPostKindNullableFilter
+  _min: NestedEnumPostKindNullableFilter
   equals: PostKind
   in: [PostKind!]
-  max: NestedEnumPostKindNullableFilter
-  min: NestedEnumPostKindNullableFilter
   not: NestedEnumPostKindNullableWithAggregatesFilter
   notIn: [PostKind!]
 }
@@ -1814,11 +1836,11 @@ input NestedEnumRoleFilter {
 }
 
 input NestedEnumRoleWithAggregatesFilter {
-  count: NestedIntFilter
+  _count: NestedIntFilter
+  _max: NestedEnumRoleFilter
+  _min: NestedEnumRoleFilter
   equals: Role
   in: [Role!]
-  max: NestedEnumRoleFilter
-  min: NestedEnumRoleFilter
   not: NestedEnumRoleWithAggregatesFilter
   notIn: [Role!]
 }
@@ -1846,19 +1868,19 @@ input NestedFloatNullableFilter {
 }
 
 input NestedFloatWithAggregatesFilter {
-  avg: NestedFloatFilter
-  count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _count: NestedIntFilter
+  _max: NestedFloatFilter
+  _min: NestedFloatFilter
+  _sum: NestedFloatFilter
   equals: Float
   gt: Float
   gte: Float
   in: [Float!]
   lt: Float
   lte: Float
-  max: NestedFloatFilter
-  min: NestedFloatFilter
   not: NestedFloatWithAggregatesFilter
   notIn: [Float!]
-  sum: NestedFloatFilter
 }
 
 input NestedIntFilter {
@@ -1884,40 +1906,51 @@ input NestedIntNullableFilter {
 }
 
 input NestedIntNullableWithAggregatesFilter {
-  avg: NestedFloatNullableFilter
-  count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  _sum: NestedIntNullableFilter
   equals: Int
   gt: Int
   gte: Int
   in: [Int!]
   lt: Int
   lte: Int
-  max: NestedIntNullableFilter
-  min: NestedIntNullableFilter
   not: NestedIntNullableWithAggregatesFilter
   notIn: [Int!]
-  sum: NestedIntNullableFilter
 }
 
 input NestedIntWithAggregatesFilter {
-  avg: NestedFloatFilter
-  count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _count: NestedIntFilter
+  _max: NestedIntFilter
+  _min: NestedIntFilter
+  _sum: NestedIntFilter
   equals: Int
   gt: Int
   gte: Int
   in: [Int!]
   lt: Int
   lte: Int
-  max: NestedIntFilter
-  min: NestedIntFilter
   not: NestedIntWithAggregatesFilter
   notIn: [Int!]
-  sum: NestedIntFilter
 }
 
 input NestedJsonFilter {
+  array_contains: JSON
+  array_ends_with: JSON
+  array_starts_with: JSON
   equals: JSON
+  gt: JSON
+  gte: JSON
+  lt: JSON
+  lte: JSON
   not: JSON
+  path: [String!]
+  string_contains: String
+  string_ends_with: String
+  string_starts_with: String
 }
 
 input NestedStringFilter {
@@ -1949,8 +1982,10 @@ input NestedStringNullableFilter {
 }
 
 input NestedStringNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedStringNullableFilter
+  _min: NestedStringNullableFilter
   contains: String
-  count: NestedIntNullableFilter
   endsWith: String
   equals: String
   gt: String
@@ -1958,16 +1993,16 @@ input NestedStringNullableWithAggregatesFilter {
   in: [String!]
   lt: String
   lte: String
-  max: NestedStringNullableFilter
-  min: NestedStringNullableFilter
   not: NestedStringNullableWithAggregatesFilter
   notIn: [String!]
   startsWith: String
 }
 
 input NestedStringWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedStringFilter
+  _min: NestedStringFilter
   contains: String
-  count: NestedIntFilter
   endsWith: String
   equals: String
   gt: String
@@ -1975,8 +2010,6 @@ input NestedStringWithAggregatesFilter {
   in: [String!]
   lt: String
   lte: String
-  max: NestedStringFilter
-  min: NestedStringFilter
   not: NestedStringWithAggregatesFilter
   notIn: [String!]
   startsWith: String
@@ -2047,12 +2080,12 @@ input PatientFirstNameLastNameCompoundUniqueInput {
 }
 
 type PatientGroupBy {
-  count: PatientCountAggregate
+  _count: PatientCountAggregate
+  _max: PatientMaxAggregate
+  _min: PatientMinAggregate
   email: String!
   firstName: String!
   lastName: String!
-  max: PatientMaxAggregate
-  min: PatientMinAggregate
 }
 
 type PatientMaxAggregate {
@@ -2287,19 +2320,19 @@ input PostCreateWithoutEditorInput {
 }
 
 type PostGroupBy {
+  _avg: PostAvgAggregate
+  _count: PostCountAggregate
+  _max: PostMaxAggregate
+  _min: PostMinAggregate
+  _sum: PostSumAggregate
   authorId: Int!
-  avg: PostAvgAggregate
   content: String
-  count: PostCountAggregate
   createdAt: DateTime!
   editorId: Int
   kind: PostKind
-  max: PostMaxAggregate
   metadata: JSON!
-  min: PostMinAggregate
   published: Boolean!
   subtitle: String!
-  sum: PostSumAggregate
   title: String!
   updatedAt: DateTime!
   uuid: String!
@@ -2369,7 +2402,7 @@ input PostMinOrderByAggregateInput {
 }
 
 input PostOrderByRelationAggregateInput {
-  count: SortOrder!
+  _count: SortOrder
 }
 
 input PostOrderByWithAggregationInput {
@@ -2678,14 +2711,14 @@ input ProblemCreateWithoutLikedByInput {
 }
 
 type ProblemGroupBy {
-  avg: ProblemAvgAggregate
-  count: ProblemCountAggregate
+  _avg: ProblemAvgAggregate
+  _count: ProblemCountAggregate
+  _max: ProblemMaxAggregate
+  _min: ProblemMinAggregate
+  _sum: ProblemSumAggregate
   creatorId: Int
   id: Int!
-  max: ProblemMaxAggregate
-  min: ProblemMinAggregate
   problemText: String!
-  sum: ProblemSumAggregate
 }
 
 input ProblemListRelationFilter {
@@ -2719,7 +2752,7 @@ input ProblemMinOrderByAggregateInput {
 }
 
 input ProblemOrderByRelationAggregateInput {
-  count: SortOrder!
+  _count: SortOrder
 }
 
 input ProblemOrderByWithAggregationInput {
@@ -2974,8 +3007,10 @@ input StringNullableListFilter {
 }
 
 input StringNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedStringNullableFilter
+  _min: NestedStringNullableFilter
   contains: String
-  count: NestedIntNullableFilter
   endsWith: String
   equals: String
   gt: String
@@ -2983,8 +3018,6 @@ input StringNullableWithAggregatesFilter {
   in: [String!]
   lt: String
   lte: String
-  max: NestedStringNullableFilter
-  min: NestedStringNullableFilter
   mode: QueryMode
   not: NestedStringNullableWithAggregatesFilter
   notIn: [String!]
@@ -2992,8 +3025,10 @@ input StringNullableWithAggregatesFilter {
 }
 
 input StringWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedStringFilter
+  _min: NestedStringFilter
   contains: String
-  count: NestedIntFilter
   endsWith: String
   equals: String
   gt: String
@@ -3001,8 +3036,6 @@ input StringWithAggregatesFilter {
   in: [String!]
   lt: String
   lte: String
-  max: NestedStringFilter
-  min: NestedStringFilter
   mode: QueryMode
   not: NestedStringWithAggregatesFilter
   notIn: [String!]

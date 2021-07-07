@@ -152,7 +152,7 @@ query CountBravoPatients {
   countBravoPatients: aggregatePatient(
     where: { lastName: { contains: "Bravo" } }
   ) {
-    count {
+    _count {
       _all
     }
   }
@@ -173,20 +173,20 @@ query FilterPostsByJson {
 
 query AggregateClient {
   aggregateClient {
-    count {
+    _count {
       _all
     }
-    avg {
+    _avg {
       age
     }
-    sum {
+    _sum {
       balance
       amount
     }
-    min {
+    _min {
       age
     }
-    max {
+    _max {
       age
     }
   }
@@ -259,7 +259,7 @@ query ForbiddenCategories {
 query GroupPosts {
   groupByPost(by: [kind], where: { author: { is: { id: { equals: 2 } } } }) {
     kind
-    count {
+    _count {
       _all
     }
   }
@@ -320,7 +320,7 @@ query CountByRelations {
 }
 
 query OrderByRelation {
-  clients(orderBy: { clientPosts: { count: desc } }) {
+  clients(orderBy: { clientPosts: { _count: desc } }) {
     id
     email
     _count {
@@ -332,8 +332,20 @@ query OrderByRelation {
 query OrderByAggregateGroup {
   groupByPost(by: published, orderBy: { published: desc }) {
     published
-    count {
+    _count {
       published
     }
+  }
+}
+
+query PostsPublishedOnWikiLeaks {
+  posts(where: { metadata: { path: ["publishedOnWikiLeaks"], equals: true } }) {
+    ...PostData
+  }
+}
+
+query PostsWithSomeViews {
+  posts(where: { metadata: { path: "views", gte: 1 } }) {
+    ...PostData
   }
 }

@@ -5,7 +5,8 @@ import { GenerateCodeOptions } from "../../src/generator/options";
 type SupportedPreviewFeatures =
   | "orderByRelation"
   | "selectRelationCount"
-  | "orderByAggregateGroup";
+  | "orderByAggregateGroup"
+  | "filterJson";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<GenerateCodeOptions, "relativePrismaOutputPath"> {

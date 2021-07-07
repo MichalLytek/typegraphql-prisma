@@ -10400,6 +10400,17 @@ export namespace Prisma {
 
   export type JsonFilterBase = {
     equals?: InputJsonValue
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    path?: Array<string>
+    string_contains?: string
+    string_starts_with?: string
+    string_ends_with?: string
+    array_contains?: InputJsonValue
+    array_starts_with?: InputJsonValue
+    array_ends_with?: InputJsonValue
     not?: InputJsonValue
   }
 
@@ -10579,6 +10590,17 @@ export namespace Prisma {
 
   export type JsonWithAggregatesFilterBase = {
     equals?: InputJsonValue
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    path?: Array<string>
+    string_contains?: string
+    string_starts_with?: string
+    string_ends_with?: string
+    array_contains?: InputJsonValue
+    array_starts_with?: InputJsonValue
+    array_ends_with?: InputJsonValue
     not?: InputJsonValue
     _count?: NestedIntFilter
     /**
@@ -11728,6 +11750,17 @@ export namespace Prisma {
 
   export type NestedJsonFilterBase = {
     equals?: InputJsonValue
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    path?: Array<string>
+    string_contains?: string
+    string_starts_with?: string
+    string_ends_with?: string
+    array_contains?: InputJsonValue
+    array_starts_with?: InputJsonValue
+    array_ends_with?: InputJsonValue
     not?: InputJsonValue
   }
 
