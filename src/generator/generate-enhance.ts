@@ -262,9 +262,11 @@ export function generateEnhanceMap(
 
     export type ResolverActionConfig = MethodDecorator[] | (decorators: MethodDecorator[]) => MethodDecorator[];
 
-    export type ResolverActionsConfig<
-      TModel extends ResolverModelNames
-    > = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
+    export type ResolverActionsConfig<TModel extends ResolverModelNames> = {
+      [K in ModelResolverActionNames<TModel> | "_all"]?: K extends "_all"
+        ? MethodDecorator[]
+        : ResolverActionConfig;
+    };
 
     export type ResolversEnhanceMap = {
       [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
