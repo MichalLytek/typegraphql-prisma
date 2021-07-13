@@ -260,6 +260,8 @@ export function generateEnhanceMap(
       TModel extends ResolverModelNames
       > = keyof typeof crudResolversMap[TModel]["prototype"];
 
+    export type ResolverActionConfig = MethodDecorator[] | (decorators: MethodDecorator[]) => MethodDecorator[];
+
     export type ResolverActionsConfig<
       TModel extends ResolverModelNames
     > = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
@@ -280,6 +282,12 @@ export function generateEnhanceMap(
           const allActionsDecorators = resolverActionsConfig._all;
           const resolverActionNames = resolversInfo[modelName as keyof typeof resolversInfo];
           for (const resolverActionName of resolverActionNames) {
+            const resolverActionIsOverridden =
+            typeof resolverActionsConfig[
+              resolverActionName as ModelResolverActionNames<ResolverModelNames>
+            ] === "function";
+            if (resolverActionIsOverridden) continue;
+
             const actionTarget = (actionResolversConfig[
               resolverActionName as keyof typeof actionResolversConfig
             ] as Function).prototype;
@@ -301,9 +309,15 @@ export function generateEnhanceMap(
           it => it !== "_all"
         );
         for (const resolverActionName of resolverActionsToApply) {
-          const decorators = resolverActionsConfig[
-            resolverActionName as keyof typeof resolverActionsConfig
-          ] as MethodDecorator[];
+          const decoratorsConfig = resolverActionsConfig[
+              resolverActionName as keyof typeof resolverActionsConfig
+          ] as ResolverActionConfig;
+
+          const decorators: MethodDecorator[] =
+            typeof decoratorsConfig === "function"
+              ? decoratorsConfig(resolverActionsConfig._all || [])
+              : decoratorsConfig;
+
           const actionTarget = (actionResolversConfig[
             resolverActionName as keyof typeof actionResolversConfig
           ] as Function).prototype;

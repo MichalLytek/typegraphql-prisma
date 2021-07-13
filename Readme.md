@@ -368,6 +368,17 @@ applyResolversEnhanceMap({
 });
 ```
 
+If you apply decorators using the  `_all` property you can override the configuration on other fields by passing a function that returns an array of decorators which gets the `_all` decorators if there is any to the field you want to override:
+
+```ts
+applyResolversEnhanceMap({
+  Client:{
+    _all: [Authorized()],
+    createClient: (decorators) => [Authorized("ADMIN", "DEVELOPER")]
+  }
+})
+```
+
 #### Additional decorators for Prisma schema classes and fields
 
 If you need to apply some decorators, like `@Authorized` or `@Extensions`, on the model `@ObjectType` and its fields, you can use similar pattern as for the resolver actions described above.
