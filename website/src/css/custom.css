@@ -23,8 +23,20 @@ html[data-theme="dark"] {
 }
 
 .docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
+  background-color: rgb(214, 219, 229);
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme="dark"] .docusaurus-highlight-code-line {
+  background-color: rgb(72, 77, 91);
+}
+
+.language-sh .token.plain {
+  color: rgb(77, 77, 77);
+}
+
+html[data-theme="dark"] .language-sh .token.plain {
+  color: rgb(222, 222, 222);
 }

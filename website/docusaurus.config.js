@@ -1,3 +1,9 @@
+const vsLightTheme = require("prism-react-renderer/themes/vsLight");
+const vsDarkTheme = require("prism-react-renderer/themes/vsDark");
+
+// edit default full white background
+vsLightTheme.plain.backgroundColor = "rgba(0, 0, 0, 0.05)";
+
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "TypeGraphQL Prisma",
@@ -11,6 +17,10 @@ module.exports = {
   organizationName: "MichalLytek",
   projectName: "typegraphql-prisma",
   themeConfig: {
+    prism: {
+      theme: vsLightTheme,
+      darkTheme: vsDarkTheme,
+    },
     navbar: {
       title: "TypeGraphQL Prisma",
       logo: {
