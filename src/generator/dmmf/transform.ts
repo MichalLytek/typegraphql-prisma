@@ -149,6 +149,7 @@ function transformInputType(dmmfDocument: DmmfDocument) {
           );
           return {
             ...field,
+            isOmitted: modelField?.isOmitted,
             selectedInputType,
             typeName,
             typeGraphQLType,

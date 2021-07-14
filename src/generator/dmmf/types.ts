@@ -112,6 +112,7 @@ export namespace DMMF {
     typeGraphQLType: string;
     fieldTSType: string;
     hasMappedName: boolean;
+    isOmitted?: Field["isOmitted"];
   }
   export interface OutputType {
     name: string;

@@ -134,7 +134,9 @@ export function generateInputTypeClassFromType(
     2,
   );
 
-  const mappedFields = inputType.fields.filter(field => field.hasMappedName);
+  const mappedFields = inputType.fields.filter(
+    field => field.hasMappedName || !field.isOmitted?.input,
+  );
 
   sourceFile.addClass({
     name: inputType.typeName,
@@ -149,30 +151,30 @@ export function generateInputTypeClassFromType(
         ],
       },
     ],
-    properties: inputType.fields.map<
-      OptionalKind<PropertyDeclarationStructure>
-    >(field => {
-      return {
-        name: field.name,
-        type: field.fieldTSType,
-        hasExclamationToken: !!field.isRequired,
-        hasQuestionToken: !field.isRequired,
-        trailingTrivia: "\r\n",
-        decorators: field.hasMappedName
-          ? []
-          : [
-              {
-                name: "TypeGraphQL.Field",
-                arguments: [
-                  `_type => ${field.typeGraphQLType}`,
-                  Writers.object({
-                    nullable: `${!field.isRequired}`,
-                  }),
-                ],
-              },
-            ],
-      };
-    }),
+    properties: inputType.fields
+      .filter(field => !field.isOmitted?.input)
+      .map<OptionalKind<PropertyDeclarationStructure>>(field => {
+        return {
+          name: field.name,
+          type: field.fieldTSType,
+          hasExclamationToken: !!field.isRequired,
+          hasQuestionToken: !field.isRequired,
+          trailingTrivia: "\r\n",
+          decorators: field.hasMappedName
+            ? []
+            : [
+                {
+                  name: "TypeGraphQL.Field",
+                  arguments: [
+                    `_type => ${field.typeGraphQLType}`,
+                    Writers.object({
+                      nullable: `${!field.isRequired}`,
+                    }),
+                  ],
+                },
+              ],
+        };
+      }),
     getAccessors: mappedFields.map<
       OptionalKind<GetAccessorDeclarationStructure>
     >(field => {
