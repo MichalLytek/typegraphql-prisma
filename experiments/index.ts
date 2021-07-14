@@ -93,7 +93,7 @@ applyModelsEnhanceMap(modelsEnhanceMap);
 
 const aggregateClientConfig: OutputTypeConfig<"AggregateClient"> = {
   fields: {
-    avg: [Extensions({ complexity: 10 })],
+    _avg: [Extensions({ complexity: 10 })],
   },
 };
 applyOutputTypesEnhanceMap({
@@ -263,7 +263,6 @@ async function main() {
 
   const server = new ApolloServer({
     schema,
-    playground: true,
     context: (): Context => ({ prisma }),
   });
   const { port } = await server.listen(4000);

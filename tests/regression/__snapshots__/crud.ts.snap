@@ -1745,7 +1745,9 @@ __decorate([
     TypeGraphQL.Query(_returns => User_1.User, {
         nullable: true
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, FindUniqueUserArgs_1.FindUniqueUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1754,7 +1756,9 @@ __decorate([
     TypeGraphQL.Query(_returns => User_1.User, {
         nullable: true
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, FindFirstUserArgs_1.FindFirstUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1763,7 +1767,9 @@ __decorate([
     TypeGraphQL.Query(_returns => [User_1.User], {
         nullable: false
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, FindManyUserArgs_1.FindManyUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1772,7 +1778,9 @@ __decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: false
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, CreateUserArgs_1.CreateUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1781,7 +1789,9 @@ __decorate([
     TypeGraphQL.Mutation(_returns => AffectedRowsOutput_1.AffectedRowsOutput, {
         nullable: false
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, CreateManyUserArgs_1.CreateManyUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1790,7 +1800,9 @@ __decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: true
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, DeleteUserArgs_1.DeleteUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1799,7 +1811,9 @@ __decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: true
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, UpdateUserArgs_1.UpdateUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1808,7 +1822,9 @@ __decorate([
     TypeGraphQL.Mutation(_returns => AffectedRowsOutput_1.AffectedRowsOutput, {
         nullable: false
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, DeleteManyUserArgs_1.DeleteManyUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1817,7 +1833,9 @@ __decorate([
     TypeGraphQL.Mutation(_returns => AffectedRowsOutput_1.AffectedRowsOutput, {
         nullable: false
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, UpdateManyUserArgs_1.UpdateManyUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1826,7 +1844,9 @@ __decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: false
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, UpsertUserArgs_1.UpsertUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1835,7 +1855,9 @@ __decorate([
     TypeGraphQL.Query(_returns => AggregateUser_1.AggregateUser, {
         nullable: false
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, AggregateUserArgs_1.AggregateUserArgs]),
     __metadata(\\"design:returntype\\", Promise)
@@ -1844,7 +1866,9 @@ __decorate([
     TypeGraphQL.Query(_returns => [UserGroupBy_1.UserGroupBy], {
         nullable: false
     }),
-    __param(0, TypeGraphQL.Ctx()), __param(1, TypeGraphQL.Info()), __param(2, TypeGraphQL.Args()),
+    __param(0, TypeGraphQL.Ctx()),
+    __param(1, TypeGraphQL.Info()),
+    __param(2, TypeGraphQL.Args()),
     __metadata(\\"design:type\\", Function),
     __metadata(\\"design:paramtypes\\", [Object, Object, GroupByUserArgs_1.GroupByUserArgs]),
     __metadata(\\"design:returntype\\", Promise)

@@ -11,7 +11,7 @@ __export(exports, {
   Decimal: () => decimal_default
 });
 
-// ../../node_modules/.pnpm/decimal.js@10.3.0/node_modules/decimal.js/decimal.mjs
+// ../../node_modules/.pnpm/decimal.js@10.3.1/node_modules/decimal.js/decimal.mjs
 var EXP_LIMIT = 9e15;
 var MAX_DIGITS = 1e9;
 var NUMERALS = "0123456789abcdef";
