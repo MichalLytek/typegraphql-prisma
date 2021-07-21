@@ -7,9 +7,15 @@ sidebar_position: 1
 Be aware that due to usage of some ES2019 and newer Node.js features, you also have to use **Node.js v12.4.0 or newer**.
 :::
 
+### TypeGraphQL
+
+First of all, you should perform all the steps described in the TypeGraphQL installation instruction:
+
+https://typegraphql.com/docs/installation.html
+
 ### `typegraphql-prisma` generator
 
-First of all, you have to install the generator, as a dev dependency:
+After that, you have to install the generator, as a dev dependency:
 
 ```sh
 npm i -D typegraphql-prisma
@@ -37,7 +43,7 @@ You also need to install the GraphQL Scalars library (to support the Prisma `Jso
 npm i graphql-scalars
 ```
 
-as well as the `graphql-fields` that is used to properly support the aggregate and group by queries:
+In order to properly support the aggregate and group by queries, the `graphql-fields` package is used so it also has to be installed:
 
 ```sh
 npm i graphql-fields @types/graphql-fields
