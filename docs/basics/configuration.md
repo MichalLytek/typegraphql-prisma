@@ -7,7 +7,7 @@ sidebar_position: 2
 
 After installation, you need to update your `schema.prisma` file and then add a new generator section below the `client` one:
 
-```graphql {10-12}
+```prisma {10-12}
 datasource postgres {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -28,7 +28,7 @@ Then run `npx prisma generate` - this will emit the generated TypeGraphQL classe
 
 When you want to emit the generated files into a different folder, you can configure the default output folder via the `output` config option, e.g.:
 
-```graphql {3}
+```prisma {3}
 generator typegraphql {
   provider = "typegraphql-prisma"
   output   = "../prisma/generated/type-graphql"
@@ -43,7 +43,7 @@ However, if you explicitly choose some other (non `node_modules`) folder in `out
 
 You can overwrite that behavior by explicitly setting `emitTranspiledCode` config option:
 
-```graphql {4}
+```prisma {4}
 generator typegraphql {
   provider           = "typegraphql-prisma"
   output             = "../prisma/generated/type-graphql"

@@ -3,6 +3,9 @@ const vsDarkTheme = require("prism-react-renderer/themes/vsDark");
 
 // edit default full white background
 vsLightTheme.plain.backgroundColor = "rgba(0, 0, 0, 0.05)";
+// fix red attribute names
+vsLightTheme.styles.find(it => it.types.includes("attr-name")).style.color =
+  "rgb(0, 0, 0)";
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {

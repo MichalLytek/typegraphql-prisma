@@ -9,7 +9,7 @@ Having installed all the deps and configured the Prisma generator, let's see the
 
 Let's assume you have this statements in your Prisma schema:
 
-```graphql title=prisma/schema.prisma
+```prisma title=prisma/schema.prisma
 enum UserKind {
   NORMAL
   ADMIN
