@@ -7,7 +7,7 @@ sidebar_position: 6
 You can also change the name of the model types exposed in GraphQL Schema.
 To achieve this, just put the `@@TypeGraphQL.type` doc line above the model definition in `schema.prisma` file, e.g:
 
-```prisma
+```prisma {1}
 /// @@TypeGraphQL.type(name: "Client")
 model User {
   id     Int     @default(autoincrement()) @id

@@ -1,13 +1,13 @@
 ---
 title: Hiding Prisma model field in GraphQL schema
-sidebar_label: Hiding field
+sidebar_label: Hiding model fields
 sidebar_position: 3
 ---
 
 Sometimes you may want to not expose some fields in GraphQL schema.
 To achieve this, just put the `@TypeGraphQL.omit` doc line above the model field definition in `schema.prisma` file, e.g:
 
-```prisma
+```prisma {4}
 model User {
   id        Int     @default(autoincrement()) @id
   email     String  @unique
@@ -29,7 +29,7 @@ type User {
 
 However, the prisma model field will be still visible in all input types, like `UserWhereInput` or `UserCreateInput`:
 
-```graphql
+```graphql {3}
 input UserCreateInput {
   email: String!
   password: String!

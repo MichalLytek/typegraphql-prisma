@@ -3,7 +3,7 @@ title: Custom operations
 sidebar_position: 5
 ---
 
-You can also add custom queries and mutations to the schema as always, using the generated `PrismaClient` client:
+You can also add custom queries and mutations to the schema as always, using the generated `PrismaClient`:
 
 ```ts
 @Resolver()

@@ -1,7 +1,7 @@
 ---
 title: Lifting Prisma version restriction
 sidebar_label: Prisma version check
-sidebar_position: 10
+sidebar_position: 11
 ---
 
 By default, `typegraphql-prisma` generator checks is the installed Prisma version matches the one required one using semver rules.

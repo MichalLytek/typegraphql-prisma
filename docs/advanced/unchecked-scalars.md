@@ -7,7 +7,7 @@ GraphQL does not support input unions, hence it's not possible to support both n
 
 If you prefer simplicity over more sophisticated solutions like `connectOrCreate`, you can to provide the `useUncheckedScalarInputs` generator option:
 
-```prisma
+```prisma {4}
 generator typegraphql {
   provider                 = "typegraphql-prisma"
   output                   = "../prisma/generated/type-graphql"

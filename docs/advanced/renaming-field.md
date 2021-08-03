@@ -7,7 +7,7 @@ sidebar_position: 7
 You can also change the name of the model type fields exposed in GraphQL Schema.
 To achieve this, just put the `@TypeGraphQL.field` doc line above the model field definition in `schema.prisma` file, e.g:
 
-```prisma
+```prisma {3}
 model User {
   id     Int     @default(autoincrement()) @id
   /// @TypeGraphQL.field(name: "emailAddress")
@@ -18,7 +18,7 @@ model User {
 
 This will result in the following GraphQL schema representation:
 
-```graphql
+```graphql {3}
 type User {
   id: Int!
   emailAddress: String!
@@ -30,7 +30,7 @@ All generated CRUD and relations resolvers fully support this feature and they m
 
 The same goes to the resolvers input types - they will also be emitted with changed field name, e.g.:
 
-```graphql
+```graphql {2}
 input UserCreateInput {
   emailAddress: String!
   posts: PostCreateManyWithoutAuthorInput
