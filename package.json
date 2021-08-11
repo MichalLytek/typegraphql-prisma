@@ -64,15 +64,15 @@
     "node": ">=12.4"
   },
   "author": {
-    "name": "Michał Lytek",
-    "url": "https://github.com/MichalLytek"
+    "name": "Muhad BK",
+    "url": "https://github.com/muhad-bk"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MichalLytek/typegraphql-prisma.git"
+    "url": "https://github.com/muhad-bk/typegraphql-prisma.git"
   },
   "bugs": {
-    "url": "https://github.com/MichalLytek/typegraphql-prisma/issues"
+    "url": "https://github.com/muhad-bk/typegraphql-prisma/issues"
   },
   "keywords": [
     "type-graphql",
