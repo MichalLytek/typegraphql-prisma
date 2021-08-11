@@ -349,4 +349,74 @@ describe("relations resolvers generation", () => {
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });
+
+  describe("when `namedConstraints` preview feature is enabled", () => {
+    it("should properly generate relation resolver class for model with named compound id with relation", async () => {
+      const schema = /* prisma */ `
+        model Movie {
+          directorFirstName String
+          directorLastName  String
+          director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName])
+          title             String
+
+          @@id([directorFirstName, directorLastName, title], name: "movieIdCompoundName")
+        }
+
+        model Director {
+          firstName String
+          lastName  String
+          movies    Movie[]
+
+          @@id([firstName, lastName], name: "directorIdCompoundName")
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["namedConstraints"],
+      });
+
+      const movieRelationsResolverTSFile = await readGeneratedFile(
+        "/resolvers/relations/Movie/MovieRelationsResolver.ts",
+      );
+
+      expect(movieRelationsResolverTSFile).toMatchSnapshot(
+        "MovieRelationsResolver",
+      );
+    });
+
+    it("should properly generate relation resolver class for model with named compound unique with relation", async () => {
+      const schema = /* prisma */ `
+        model Movie {
+          directorFirstName String
+          directorLastName  String
+          director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName])
+          title             String
+
+          @@unique([directorFirstName, directorLastName, title], name: "movieUniqueCompoundName")
+        }
+
+        model Director {
+          firstName String
+          lastName  String
+          movies    Movie[]
+
+          @@unique([firstName, lastName], name: "directorUniqueCompoundName")
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["namedConstraints"],
+      });
+
+      const movieRelationsResolverTSFile = await readGeneratedFile(
+        "/resolvers/relations/Movie/MovieRelationsResolver.ts",
+      );
+
+      expect(movieRelationsResolverTSFile).toMatchSnapshot(
+        "MovieRelationsResolver",
+      );
+    });
+  });
 });

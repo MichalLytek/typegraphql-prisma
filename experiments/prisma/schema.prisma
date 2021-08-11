@@ -9,7 +9,7 @@ generator client {
   provider        = "prisma-client-js"
   binaryTargets   = ["windows", "debian-openssl-1.1.x"]
   output          = "../prisma/generated/client"
-  previewFeatures = ["orderByRelation", "nApi", "selectRelationCount", "orderByAggregateGroup", "referentialActions", "filterJson"]
+  previewFeatures = ["orderByRelation", "nApi", "selectRelationCount", "orderByAggregateGroup", "referentialActions", "filterJson", "namedConstraints"]
 }
 
 generator typegraphql {
@@ -80,7 +80,7 @@ model Category {
   slug   String
   number Int
 
-  @@unique([slug, number])
+  @@unique([slug, number], name: "categoryCompoundUnique")
 }
 
 model Patient {
@@ -97,7 +97,7 @@ model Movie {
   director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName], onDelete: Cascade)
   title             String
 
-  @@id([directorFirstName, directorLastName, title])
+  @@id([directorFirstName, directorLastName, title], name: "movieCompoundId")
 }
 
 model Director {

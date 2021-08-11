@@ -6,14 +6,19 @@ import { DecimalJSScalar } from "../../scalars";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class CategorySlugNumberCompoundUniqueInput {
+export class MovieMovieCompoundIdCompoundUniqueInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  slug!: string;
+  directorFirstName!: string;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  number!: number;
+  directorLastName!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  title!: string;
 }

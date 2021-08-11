@@ -1344,12 +1344,6 @@ input MovieCreateWithoutDirectorInput {
   title: String!
 }
 
-input MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
-  directorFirstName: String!
-  directorLastName: String!
-  title: String!
-}
-
 type MovieGroupBy {
   _count: MovieCountAggregate
   _max: MovieMaxAggregate
@@ -1387,6 +1381,12 @@ input MovieMinOrderByAggregateInput {
   directorFirstName: SortOrder
   directorLastName: SortOrder
   title: SortOrder
+}
+
+input MovieMovieCompoundIdCompoundUniqueInput {
+  directorFirstName: String!
+  directorLastName: String!
+  title: String!
 }
 
 input MovieOrderByRelationAggregateInput {
@@ -1487,7 +1487,7 @@ input MovieWhereInput {
 }
 
 input MovieWhereUniqueInput {
-  directorFirstName_directorLastName_title: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
+  movieCompoundId: MovieMovieCompoundIdCompoundUniqueInput
 }
 
 type Mutation {

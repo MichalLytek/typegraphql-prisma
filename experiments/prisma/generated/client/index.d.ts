@@ -9313,7 +9313,7 @@ export namespace Prisma {
   }
 
   export type CategoryWhereUniqueInput = {
-    slug_number?: CategorySlugNumberCompoundUniqueInput
+    categoryCompoundUnique?: CategoryCategoryCompoundUniqueCompoundUniqueInput
   }
 
   export type CategoryOrderByWithAggregationInput = {
@@ -9391,7 +9391,7 @@ export namespace Prisma {
   }
 
   export type MovieWhereUniqueInput = {
-    directorFirstName_directorLastName_title?: MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput
+    movieCompoundId?: MovieMovieCompoundIdCompoundUniqueInput
   }
 
   export type MovieOrderByWithAggregationInput = {
@@ -10622,7 +10622,7 @@ export namespace Prisma {
     max?: NestedJsonFilter
   }
 
-  export type CategorySlugNumberCompoundUniqueInput = {
+  export type CategoryCategoryCompoundUniqueCompoundUniqueInput = {
     slug: string
     number: number
   }
@@ -10681,7 +10681,7 @@ export namespace Prisma {
     isNot?: DirectorWhereInput
   }
 
-  export type MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput = {
+  export type MovieMovieCompoundIdCompoundUniqueInput = {
     directorFirstName: string
     directorLastName: string
     title: string

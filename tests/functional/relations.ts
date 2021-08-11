@@ -268,7 +268,7 @@ describe("relations resolvers execution", () => {
       });
     });
 
-    it("should properly call PrismaClient on fetching array relations", async () => {
+    it("should properly call PrismaClient on fetching single relation", async () => {
       const document = /* graphql */ `
         query {
           post {
@@ -304,6 +304,189 @@ describe("relations resolvers execution", () => {
       expect(prismaMock.post.findUnique.mock.calls).toMatchSnapshot(
         "findUniquePost relations call args",
       );
+    });
+  });
+
+  describe("composite unique key with name", () => {
+    let outputDirPath: string;
+    let graphQLSchema: GraphQLSchema;
+
+    beforeAll(async () => {
+      outputDirPath = generateArtifactsDirPath("functional-relations");
+      await fs.mkdir(outputDirPath, { recursive: true });
+      const prismaSchema = /* prisma */ `
+        enum Color {
+          RED
+          GREEN
+          BLUE
+        }
+
+        model User {
+          id     Int      @id @default(autoincrement())
+          name   String?
+          posts  Post[]
+        }
+
+        model Post {
+          title     String
+          color     Color
+          text      String?
+          author    User     @relation(fields: [authorId], references: [id])
+          authorId  Int
+
+          @@unique([title, color], name: "postUniqueCompoundName")
+        }
+      `;
+      await generateCodeFromSchema(prismaSchema, { outputDirPath });
+      const { PostRelationsResolver, Post } = require(outputDirPath);
+      @Resolver()
+      class CustomResolver {
+        @Query(_returns => Post)
+        post(): any {
+          return {
+            title: "Post 1",
+            color: "BLUE",
+            text: "Post text",
+          };
+        }
+      }
+
+      graphQLSchema = await buildSchema({
+        resolvers: [CustomResolver, PostRelationsResolver],
+        validate: false,
+      });
+    });
+
+    it("should properly call PrismaClient on fetching single relation", async () => {
+      const document = /* graphql */ `
+        query {
+          post {
+            title
+            color
+            text
+            author {
+              id
+              name
+            }
+          }
+        }
+      `;
+      const findUniquePostMock = jest.fn();
+      const prismaMock = {
+        post: {
+          findUnique: findUniquePostMock,
+        },
+      };
+      findUniquePostMock.mockReturnValueOnce({
+        author: jest.fn().mockResolvedValue({
+          id: 1,
+          name: "User 1",
+        }),
+      });
+
+      const { data, errors } = await graphql(graphQLSchema, document, null, {
+        prisma: prismaMock,
+      });
+
+      expect(errors).toBeUndefined();
+      expect(data).toMatchSnapshot("post with author mocked response");
+      expect(prismaMock.post.findUnique.mock.calls).toMatchSnapshot(
+        "findUniquePost relations call args",
+      );
+    });
+  });
+
+  describe("with namedConstraints previewFeature", () => {
+    describe("composite primary key with name", () => {
+      let outputDirPath: string;
+      let graphQLSchema: GraphQLSchema;
+
+      beforeAll(async () => {
+        outputDirPath = generateArtifactsDirPath("functional-relations");
+        await fs.mkdir(outputDirPath, { recursive: true });
+        const prismaSchema = /* prisma */ `
+        enum Color {
+          RED
+          GREEN
+          BLUE
+        }
+
+        model User {
+          id     Int      @id @default(autoincrement())
+          name   String?
+          posts  Post[]
+        }
+
+        model Post {
+          title     String
+          color     Color
+          text      String?
+          author    User     @relation(fields: [authorId], references: [id])
+          authorId  Int
+
+          @@id([title, color], name: "postIdCompoundName")
+        }
+      `;
+        await generateCodeFromSchema(prismaSchema, {
+          outputDirPath,
+          previewFeatures: ["namedConstraints"],
+        });
+        const { PostRelationsResolver, Post } = require(outputDirPath);
+        @Resolver()
+        class CustomResolver {
+          @Query(_returns => Post)
+          post(): any {
+            return {
+              title: "Post 1",
+              color: "BLUE",
+              text: "Post text",
+            };
+          }
+        }
+
+        graphQLSchema = await buildSchema({
+          resolvers: [CustomResolver, PostRelationsResolver],
+          validate: false,
+        });
+      });
+
+      it("should properly call PrismaClient on fetching single relation", async () => {
+        const document = /* graphql */ `
+        query {
+          post {
+            title
+            color
+            text
+            author {
+              id
+              name
+            }
+          }
+        }
+      `;
+        const findUniquePostMock = jest.fn();
+        const prismaMock = {
+          post: {
+            findUnique: findUniquePostMock,
+          },
+        };
+        findUniquePostMock.mockReturnValueOnce({
+          author: jest.fn().mockResolvedValue({
+            id: 1,
+            name: "User 1",
+          }),
+        });
+
+        const { data, errors } = await graphql(graphQLSchema, document, null, {
+          prisma: prismaMock,
+        });
+
+        expect(errors).toBeUndefined();
+        expect(data).toMatchSnapshot("post with author mocked response");
+        expect(prismaMock.post.findUnique.mock.calls).toMatchSnapshot(
+          "findUniquePost relations call args",
+        );
+      });
     });
   });
 });

@@ -385,6 +385,58 @@ export class UserRelationsResolver {
 "
 `;
 
+exports[`relations resolvers generation when \`namedConstraints\` preview feature is enabled should properly generate relation resolver class for model with named compound id with relation: MovieRelationsResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { Director } from \\"../../../models/Director\\";
+import { Movie } from \\"../../../models/Movie\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => Movie)
+export class MovieRelationsResolver {
+  @TypeGraphQL.FieldResolver(_type => Director, {
+    nullable: false
+  })
+  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
+    return getPrismaFromContext(ctx).movie.findUnique({
+      where: {
+        movieIdCompoundName: {
+          directorFirstName: movie.directorFirstName,
+          directorLastName: movie.directorLastName,
+          title: movie.title,
+        },
+      },
+    }).director({});
+  }
+}
+"
+`;
+
+exports[`relations resolvers generation when \`namedConstraints\` preview feature is enabled should properly generate relation resolver class for model with named compound unique with relation: MovieRelationsResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { Director } from \\"../../../models/Director\\";
+import { Movie } from \\"../../../models/Movie\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => Movie)
+export class MovieRelationsResolver {
+  @TypeGraphQL.FieldResolver(_type => Director, {
+    nullable: false
+  })
+  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
+    return getPrismaFromContext(ctx).movie.findUnique({
+      where: {
+        movieUniqueCompoundName: {
+          directorFirstName: movie.directorFirstName,
+          directorLastName: movie.directorLastName,
+          title: movie.title,
+        },
+      },
+    }).director({});
+  }
+}
+"
+`;
+
 exports[`relations resolvers generation when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by relation fields: FirstModelSecondModelsFieldArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

@@ -31,8 +31,8 @@ export default function generateRelationsResolverClassesFromModel(
     model.primaryKey?.fields.map(
       idField => model.fields.find(field => idField === field.name)!,
     ) ?? [];
-  const compositeUniqueFields = model.uniqueFields[0]
-    ? model.uniqueFields[0].map(
+  const compositeUniqueFields = model.uniqueIndexes[0]
+    ? model.uniqueIndexes[0].fields.map(
         uniqueField => model.fields.find(field => uniqueField === field.name)!,
       )
     : [];
@@ -85,8 +85,12 @@ export default function generateRelationsResolverClassesFromModel(
             ${singleFilterField.name}: ${rootArgName}.${singleFilterField.name},
           `;
         } else if (compositeFilterFields.length > 0) {
+          const filterKeyName =
+            model.primaryKey?.name ??
+            model.uniqueIndexes[0]?.name ??
+            compositeFilterFields.map(it => it.name).join("_");
           whereConditionString = `
-            ${compositeFilterFields.map(it => it.name).join("_")}: {
+            ${filterKeyName}: {
               ${compositeFilterFields
                 .map(
                   idField => `${idField.name}: ${rootArgName}.${idField.name},`,

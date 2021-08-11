@@ -92,5 +92,5 @@ describe("custom resolvers execution", () => {
       "findManyPost call args",
     );
     expect(graphQLSchemaSDL).toMatchSnapshot("graphQLSchemaSDL");
-  });
+  }, 30000);
 });

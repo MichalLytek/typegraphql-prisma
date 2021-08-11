@@ -464,7 +464,7 @@
         ],
         "uniqueIndexes": [
           {
-            "name": null,
+            "name": "categoryCompoundUnique",
             "fields": [
               "slug",
               "number"
@@ -598,7 +598,7 @@
         ],
         "isGenerated": false,
         "primaryKey": {
-          "name": null,
+          "name": "movieCompoundId",
           "fields": [
             "directorFirstName",
             "directorLastName",
@@ -2912,12 +2912,12 @@
           },
           "fields": [
             {
-              "name": "slug_number",
+              "name": "categoryCompoundUnique",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CategorySlugNumberCompoundUniqueInput",
+                  "type": "CategoryCategoryCompoundUniqueCompoundUniqueInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -3740,12 +3740,12 @@
           },
           "fields": [
             {
-              "name": "directorFirstName_directorLastName_title",
+              "name": "movieCompoundId",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput",
+                  "type": "MovieMovieCompoundIdCompoundUniqueInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -15443,7 +15443,7 @@
           ]
         },
         {
-          "name": "CategorySlugNumberCompoundUniqueInput",
+          "name": "CategoryCategoryCompoundUniqueCompoundUniqueInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -15876,7 +15876,7 @@
           ]
         },
         {
-          "name": "MovieDirectorFirstNameDirectorLastNameTitleCompoundUniqueInput",
+          "name": "MovieMovieCompoundIdCompoundUniqueInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null

@@ -72,5 +72,5 @@ describe("custom resolvers execution", () => {
         [GraphQLError: Access denied! You need to be authorized to perform this action!],
       ]
     `);
-  });
+  }, 30000);
 });
