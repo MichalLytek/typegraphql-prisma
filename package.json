@@ -14,7 +14,7 @@
     "format": "prettier --write ./**/*.{js,json,ts,tsx}"
   },
   "bin": {
-    "typegraphql-prisma": "lib/generator.js"
+    "typegraphql-prisma-muhad": "lib/generator.js"
   },
   "peerDependencies": {
     "@prisma/client": "~2.28.0",
