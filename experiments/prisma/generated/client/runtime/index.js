@@ -501,15 +501,22 @@ var require_cross_spawn2 = __commonJS2((exports2, module2) => {
 
 // ../generator-helper/dist/byline.js
 var require_byline = __commonJS2((exports2, module2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.createLineStream = void 0;
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    createLineStream: () => createLineStream,
+    default: () => byline
+  });
   var stream = require("stream");
   var util = require("util");
   function byline(readStream, options) {
     return module2.exports.createStream(readStream, options);
   }
-  exports2.default = byline;
   module2.exports.createStream = function(readStream, options) {
     if (readStream) {
       return createLineStream(readStream, options);
@@ -528,7 +535,6 @@ var require_byline = __commonJS2((exports2, module2) => {
     readStream.pipe(ls);
     return ls;
   }
-  exports2.createLineStream = createLineStream;
   module2.exports.LineStream = LineStream;
   function LineStream(options) {
     stream.Transform.call(this, options);
@@ -1795,7 +1801,7 @@ var require_supports_color2 = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/chalk@4.1.1/node_modules/chalk/source/util.js
+// ../../node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/util.js
 var require_util3 = __commonJS2((exports2, module2) => {
   "use strict";
   var stringReplaceAll = (string, substring, replacer) => {
@@ -1832,7 +1838,7 @@ var require_util3 = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/chalk@4.1.1/node_modules/chalk/source/templates.js
+// ../../node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/templates.js
 var require_templates2 = __commonJS2((exports2, module2) => {
   "use strict";
   var TEMPLATE_REGEX = /(?:\\(u(?:[a-f\d]{4}|\{[a-f\d]{1,6}\})|x[a-f\d]{2}|.))|(?:\{(~)?(\w+(?:\([^)]*\))?(?:\.\w+(?:\([^)]*\))?)*)(?:[ \t]|(?=\r?\n)))|(\})|((?:.|[\r\n\f])+?)/gi;
@@ -1944,7 +1950,7 @@ var require_templates2 = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/chalk@4.1.1/node_modules/chalk/source/index.js
+// ../../node_modules/.pnpm/chalk@4.1.2/node_modules/chalk/source/index.js
 var require_source2 = __commonJS2((exports2, module2) => {
   "use strict";
   var ansiStyles = require_ansi_styles2();
@@ -2117,7 +2123,7 @@ var require_source2 = __commonJS2((exports2, module2) => {
   module2.exports = chalk6;
 });
 
-// ../../node_modules/.pnpm/ms@2.1.3/node_modules/ms/index.js
+// ../../node_modules/.pnpm/ms@2.1.2/node_modules/ms/index.js
 var require_ms2 = __commonJS2((exports2, module2) => {
   var s = 1e3;
   var m = s * 60;
@@ -2227,19 +2233,638 @@ var require_ms2 = __commonJS2((exports2, module2) => {
   }
 });
 
+// ../../node_modules/.pnpm/debug@4.3.2/node_modules/debug/src/common.js
+var require_common6 = __commonJS2((exports2, module2) => {
+  function setup(env) {
+    createDebug.debug = createDebug;
+    createDebug.default = createDebug;
+    createDebug.coerce = coerce;
+    createDebug.disable = disable;
+    createDebug.enable = enable;
+    createDebug.enabled = enabled;
+    createDebug.humanize = require_ms2();
+    createDebug.destroy = destroy;
+    Object.keys(env).forEach((key) => {
+      createDebug[key] = env[key];
+    });
+    createDebug.names = [];
+    createDebug.skips = [];
+    createDebug.formatters = {};
+    function selectColor(namespace) {
+      let hash = 0;
+      for (let i = 0; i < namespace.length; i++) {
+        hash = (hash << 5) - hash + namespace.charCodeAt(i);
+        hash |= 0;
+      }
+      return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+    }
+    createDebug.selectColor = selectColor;
+    function createDebug(namespace) {
+      let prevTime;
+      let enableOverride = null;
+      let namespacesCache;
+      let enabledCache;
+      function debug6(...args) {
+        if (!debug6.enabled) {
+          return;
+        }
+        const self = debug6;
+        const curr = Number(new Date());
+        const ms = curr - (prevTime || curr);
+        self.diff = ms;
+        self.prev = prevTime;
+        self.curr = curr;
+        prevTime = curr;
+        args[0] = createDebug.coerce(args[0]);
+        if (typeof args[0] !== "string") {
+          args.unshift("%O");
+        }
+        let index = 0;
+        args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+          if (match === "%%") {
+            return "%";
+          }
+          index++;
+          const formatter = createDebug.formatters[format];
+          if (typeof formatter === "function") {
+            const val = args[index];
+            match = formatter.call(self, val);
+            args.splice(index, 1);
+            index--;
+          }
+          return match;
+        });
+        createDebug.formatArgs.call(self, args);
+        const logFn = self.log || createDebug.log;
+        logFn.apply(self, args);
+      }
+      debug6.namespace = namespace;
+      debug6.useColors = createDebug.useColors();
+      debug6.color = createDebug.selectColor(namespace);
+      debug6.extend = extend;
+      debug6.destroy = createDebug.destroy;
+      Object.defineProperty(debug6, "enabled", {
+        enumerable: true,
+        configurable: false,
+        get: () => {
+          if (enableOverride !== null) {
+            return enableOverride;
+          }
+          if (namespacesCache !== createDebug.namespaces) {
+            namespacesCache = createDebug.namespaces;
+            enabledCache = createDebug.enabled(namespace);
+          }
+          return enabledCache;
+        },
+        set: (v) => {
+          enableOverride = v;
+        }
+      });
+      if (typeof createDebug.init === "function") {
+        createDebug.init(debug6);
+      }
+      return debug6;
+    }
+    function extend(namespace, delimiter) {
+      const newDebug = createDebug(this.namespace + (typeof delimiter === "undefined" ? ":" : delimiter) + namespace);
+      newDebug.log = this.log;
+      return newDebug;
+    }
+    function enable(namespaces) {
+      createDebug.save(namespaces);
+      createDebug.namespaces = namespaces;
+      createDebug.names = [];
+      createDebug.skips = [];
+      let i;
+      const split = (typeof namespaces === "string" ? namespaces : "").split(/[\s,]+/);
+      const len = split.length;
+      for (i = 0; i < len; i++) {
+        if (!split[i]) {
+          continue;
+        }
+        namespaces = split[i].replace(/\*/g, ".*?");
+        if (namespaces[0] === "-") {
+          createDebug.skips.push(new RegExp("^" + namespaces.substr(1) + "$"));
+        } else {
+          createDebug.names.push(new RegExp("^" + namespaces + "$"));
+        }
+      }
+    }
+    function disable() {
+      const namespaces = [
+        ...createDebug.names.map(toNamespace),
+        ...createDebug.skips.map(toNamespace).map((namespace) => "-" + namespace)
+      ].join(",");
+      createDebug.enable("");
+      return namespaces;
+    }
+    function enabled(name) {
+      if (name[name.length - 1] === "*") {
+        return true;
+      }
+      let i;
+      let len;
+      for (i = 0, len = createDebug.skips.length; i < len; i++) {
+        if (createDebug.skips[i].test(name)) {
+          return false;
+        }
+      }
+      for (i = 0, len = createDebug.names.length; i < len; i++) {
+        if (createDebug.names[i].test(name)) {
+          return true;
+        }
+      }
+      return false;
+    }
+    function toNamespace(regexp) {
+      return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
+    }
+    function coerce(val) {
+      if (val instanceof Error) {
+        return val.stack || val.message;
+      }
+      return val;
+    }
+    function destroy() {
+      console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+    }
+    createDebug.enable(createDebug.load());
+    return createDebug;
+  }
+  module2.exports = setup;
+});
+
+// ../../node_modules/.pnpm/debug@4.3.2/node_modules/debug/src/browser.js
+var require_browser2 = __commonJS2((exports2, module2) => {
+  exports2.formatArgs = formatArgs;
+  exports2.save = save;
+  exports2.load = load;
+  exports2.useColors = useColors;
+  exports2.storage = localstorage();
+  exports2.destroy = (() => {
+    let warned = false;
+    return () => {
+      if (!warned) {
+        warned = true;
+        console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+      }
+    };
+  })();
+  exports2.colors = [
+    "#0000CC",
+    "#0000FF",
+    "#0033CC",
+    "#0033FF",
+    "#0066CC",
+    "#0066FF",
+    "#0099CC",
+    "#0099FF",
+    "#00CC00",
+    "#00CC33",
+    "#00CC66",
+    "#00CC99",
+    "#00CCCC",
+    "#00CCFF",
+    "#3300CC",
+    "#3300FF",
+    "#3333CC",
+    "#3333FF",
+    "#3366CC",
+    "#3366FF",
+    "#3399CC",
+    "#3399FF",
+    "#33CC00",
+    "#33CC33",
+    "#33CC66",
+    "#33CC99",
+    "#33CCCC",
+    "#33CCFF",
+    "#6600CC",
+    "#6600FF",
+    "#6633CC",
+    "#6633FF",
+    "#66CC00",
+    "#66CC33",
+    "#9900CC",
+    "#9900FF",
+    "#9933CC",
+    "#9933FF",
+    "#99CC00",
+    "#99CC33",
+    "#CC0000",
+    "#CC0033",
+    "#CC0066",
+    "#CC0099",
+    "#CC00CC",
+    "#CC00FF",
+    "#CC3300",
+    "#CC3333",
+    "#CC3366",
+    "#CC3399",
+    "#CC33CC",
+    "#CC33FF",
+    "#CC6600",
+    "#CC6633",
+    "#CC9900",
+    "#CC9933",
+    "#CCCC00",
+    "#CCCC33",
+    "#FF0000",
+    "#FF0033",
+    "#FF0066",
+    "#FF0099",
+    "#FF00CC",
+    "#FF00FF",
+    "#FF3300",
+    "#FF3333",
+    "#FF3366",
+    "#FF3399",
+    "#FF33CC",
+    "#FF33FF",
+    "#FF6600",
+    "#FF6633",
+    "#FF9900",
+    "#FF9933",
+    "#FFCC00",
+    "#FFCC33"
+  ];
+  function useColors() {
+    if (typeof window !== "undefined" && window.process && (window.process.type === "renderer" || window.process.__nwjs)) {
+      return true;
+    }
+    if (typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+      return false;
+    }
+    return typeof document !== "undefined" && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || typeof window !== "undefined" && window.console && (window.console.firebug || window.console.exception && window.console.table) || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+  }
+  function formatArgs(args) {
+    args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module2.exports.humanize(this.diff);
+    if (!this.useColors) {
+      return;
+    }
+    const c = "color: " + this.color;
+    args.splice(1, 0, c, "color: inherit");
+    let index = 0;
+    let lastC = 0;
+    args[0].replace(/%[a-zA-Z%]/g, (match) => {
+      if (match === "%%") {
+        return;
+      }
+      index++;
+      if (match === "%c") {
+        lastC = index;
+      }
+    });
+    args.splice(lastC, 0, c);
+  }
+  exports2.log = console.debug || console.log || (() => {
+  });
+  function save(namespaces) {
+    try {
+      if (namespaces) {
+        exports2.storage.setItem("debug", namespaces);
+      } else {
+        exports2.storage.removeItem("debug");
+      }
+    } catch (error) {
+    }
+  }
+  function load() {
+    let r;
+    try {
+      r = exports2.storage.getItem("debug");
+    } catch (error) {
+    }
+    if (!r && typeof process !== "undefined" && "env" in process) {
+      r = process.env.DEBUG;
+    }
+    return r;
+  }
+  function localstorage() {
+    try {
+      return localStorage;
+    } catch (error) {
+    }
+  }
+  module2.exports = require_common6()(exports2);
+  var {formatters} = module2.exports;
+  formatters.j = function(v) {
+    try {
+      return JSON.stringify(v);
+    } catch (error) {
+      return "[UnexpectedJSONParseError]: " + error.message;
+    }
+  };
+});
+
+// ../../node_modules/.pnpm/debug@4.3.2/node_modules/debug/src/node.js
+var require_node3 = __commonJS2((exports2, module2) => {
+  var tty = require("tty");
+  var util = require("util");
+  exports2.init = init;
+  exports2.log = log4;
+  exports2.formatArgs = formatArgs;
+  exports2.save = save;
+  exports2.load = load;
+  exports2.useColors = useColors;
+  exports2.destroy = util.deprecate(() => {
+  }, "Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+  exports2.colors = [6, 2, 3, 4, 5, 1];
+  try {
+    const supportsColor = require_supports_color2();
+    if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
+      exports2.colors = [
+        20,
+        21,
+        26,
+        27,
+        32,
+        33,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        56,
+        57,
+        62,
+        63,
+        68,
+        69,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        92,
+        93,
+        98,
+        99,
+        112,
+        113,
+        128,
+        129,
+        134,
+        135,
+        148,
+        149,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        178,
+        179,
+        184,
+        185,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        214,
+        215,
+        220,
+        221
+      ];
+    }
+  } catch (error) {
+  }
+  exports2.inspectOpts = Object.keys(process.env).filter((key) => {
+    return /^debug_/i.test(key);
+  }).reduce((obj, key) => {
+    const prop = key.substring(6).toLowerCase().replace(/_([a-z])/g, (_, k) => {
+      return k.toUpperCase();
+    });
+    let val = process.env[key];
+    if (/^(yes|on|true|enabled)$/i.test(val)) {
+      val = true;
+    } else if (/^(no|off|false|disabled)$/i.test(val)) {
+      val = false;
+    } else if (val === "null") {
+      val = null;
+    } else {
+      val = Number(val);
+    }
+    obj[prop] = val;
+    return obj;
+  }, {});
+  function useColors() {
+    return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : tty.isatty(process.stderr.fd);
+  }
+  function formatArgs(args) {
+    const {namespace: name, useColors: useColors2} = this;
+    if (useColors2) {
+      const c = this.color;
+      const colorCode = "[3" + (c < 8 ? c : "8;5;" + c);
+      const prefix = `  ${colorCode};1m${name} [0m`;
+      args[0] = prefix + args[0].split("\n").join("\n" + prefix);
+      args.push(colorCode + "m+" + module2.exports.humanize(this.diff) + "[0m");
+    } else {
+      args[0] = getDate() + name + " " + args[0];
+    }
+  }
+  function getDate() {
+    if (exports2.inspectOpts.hideDate) {
+      return "";
+    }
+    return new Date().toISOString() + " ";
+  }
+  function log4(...args) {
+    return process.stderr.write(util.format(...args) + "\n");
+  }
+  function save(namespaces) {
+    if (namespaces) {
+      process.env.DEBUG = namespaces;
+    } else {
+      delete process.env.DEBUG;
+    }
+  }
+  function load() {
+    return process.env.DEBUG;
+  }
+  function init(debug6) {
+    debug6.inspectOpts = {};
+    const keys2 = Object.keys(exports2.inspectOpts);
+    for (let i = 0; i < keys2.length; i++) {
+      debug6.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
+    }
+  }
+  module2.exports = require_common6()(exports2);
+  var {formatters} = module2.exports;
+  formatters.o = function(v) {
+    this.inspectOpts.colors = this.useColors;
+    return util.inspect(v, this.inspectOpts).split("\n").map((str) => str.trim()).join(" ");
+  };
+  formatters.O = function(v) {
+    this.inspectOpts.colors = this.useColors;
+    return util.inspect(v, this.inspectOpts);
+  };
+});
+
+// ../../node_modules/.pnpm/debug@4.3.2/node_modules/debug/src/index.js
+var require_src3 = __commonJS2((exports2, module2) => {
+  if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
+    module2.exports = require_browser2();
+  } else {
+    module2.exports = require_node3();
+  }
+});
+
+// ../../node_modules/.pnpm/ms@2.1.3/node_modules/ms/index.js
+var require_ms3 = __commonJS2((exports2, module2) => {
+  var s = 1e3;
+  var m = s * 60;
+  var h = m * 60;
+  var d = h * 24;
+  var w = d * 7;
+  var y = d * 365.25;
+  module2.exports = function(val, options) {
+    options = options || {};
+    var type = typeof val;
+    if (type === "string" && val.length > 0) {
+      return parse2(val);
+    } else if (type === "number" && isFinite(val)) {
+      return options.long ? fmtLong(val) : fmtShort(val);
+    }
+    throw new Error("val is not a non-empty string or a valid number. val=" + JSON.stringify(val));
+  };
+  function parse2(str) {
+    str = String(str);
+    if (str.length > 100) {
+      return;
+    }
+    var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(str);
+    if (!match) {
+      return;
+    }
+    var n = parseFloat(match[1]);
+    var type = (match[2] || "ms").toLowerCase();
+    switch (type) {
+      case "years":
+      case "year":
+      case "yrs":
+      case "yr":
+      case "y":
+        return n * y;
+      case "weeks":
+      case "week":
+      case "w":
+        return n * w;
+      case "days":
+      case "day":
+      case "d":
+        return n * d;
+      case "hours":
+      case "hour":
+      case "hrs":
+      case "hr":
+      case "h":
+        return n * h;
+      case "minutes":
+      case "minute":
+      case "mins":
+      case "min":
+      case "m":
+        return n * m;
+      case "seconds":
+      case "second":
+      case "secs":
+      case "sec":
+      case "s":
+        return n * s;
+      case "milliseconds":
+      case "millisecond":
+      case "msecs":
+      case "msec":
+      case "ms":
+        return n;
+      default:
+        return void 0;
+    }
+  }
+  function fmtShort(ms) {
+    var msAbs = Math.abs(ms);
+    if (msAbs >= d) {
+      return Math.round(ms / d) + "d";
+    }
+    if (msAbs >= h) {
+      return Math.round(ms / h) + "h";
+    }
+    if (msAbs >= m) {
+      return Math.round(ms / m) + "m";
+    }
+    if (msAbs >= s) {
+      return Math.round(ms / s) + "s";
+    }
+    return ms + "ms";
+  }
+  function fmtLong(ms) {
+    var msAbs = Math.abs(ms);
+    if (msAbs >= d) {
+      return plural(ms, msAbs, d, "day");
+    }
+    if (msAbs >= h) {
+      return plural(ms, msAbs, h, "hour");
+    }
+    if (msAbs >= m) {
+      return plural(ms, msAbs, m, "minute");
+    }
+    if (msAbs >= s) {
+      return plural(ms, msAbs, s, "second");
+    }
+    return ms + " ms";
+  }
+  function plural(ms, msAbs, n, name) {
+    var isPlural = msAbs >= n * 1.5;
+    return Math.round(ms / n) + " " + name + (isPlural ? "s" : "");
+  }
+});
+
 // ../debug/dist/common.js
-var require_common6 = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.setup = void 0;
+var require_common7 = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    setup: () => setup
+  });
   function setup(env) {
     const createDebug = (namespace, logger3) => {
       let prevTime;
       let enableOverride = null;
       let namespacesCache;
       let enabledCache;
-      const debug5 = (...args) => {
-        const self = debug5;
+      const debug6 = (...args) => {
+        const self = debug6;
         const curr = Number(new Date());
         const ms = curr - (prevTime || curr);
         self.diff = ms;
@@ -2269,17 +2894,17 @@ var require_common6 = __commonJS2((exports2) => {
         if (logger3 && typeof logger3 === "function") {
           logger3.apply(self, args);
         }
-        if (debug5.enabled) {
+        if (debug6.enabled) {
           const logFn = self.log || createDebug.log;
           logFn.apply(self, args);
         }
       };
-      debug5.namespace = namespace;
-      debug5.useColors = createDebug.useColors();
-      debug5.color = createDebug.selectColor(namespace);
-      debug5.extend = extend;
-      debug5.destroy = createDebug.destroy;
-      Object.defineProperty(debug5, "enabled", {
+      debug6.namespace = namespace;
+      debug6.useColors = createDebug.useColors();
+      debug6.color = createDebug.selectColor(namespace);
+      debug6.extend = extend;
+      debug6.destroy = createDebug.destroy;
+      Object.defineProperty(debug6, "enabled", {
         enumerable: true,
         configurable: false,
         get: () => {
@@ -2297,9 +2922,9 @@ var require_common6 = __commonJS2((exports2) => {
         }
       });
       if (typeof createDebug.init === "function") {
-        createDebug.init(debug5);
+        createDebug.init(debug6);
       }
-      return debug5;
+      return debug6;
     };
     createDebug.debug = createDebug;
     createDebug.default = createDebug;
@@ -2307,7 +2932,7 @@ var require_common6 = __commonJS2((exports2) => {
     createDebug.disable = disable;
     createDebug.enable = enable;
     createDebug.enabled = enabled;
-    createDebug.humanize = require_ms2();
+    createDebug.humanize = require_ms3();
     createDebug.destroy = destroy;
     Object.keys(env).forEach((key) => {
       createDebug[key] = env[key];
@@ -2390,13 +3015,37 @@ var require_common6 = __commonJS2((exports2) => {
     createDebug.enable(createDebug.load());
     return createDebug;
   }
-  exports2.setup = setup;
 });
 
 // ../debug/dist/node.js
-var require_node3 = __commonJS2((exports2, module2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
+var require_node4 = __commonJS2((exports2, module2) => {
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    default: () => node_default
+  });
+  var import_common4 = __toModule3(require_common7());
   var tty = require("tty");
   var util = require("util");
   exports2.init = init;
@@ -2545,17 +3194,16 @@ var require_node3 = __commonJS2((exports2, module2) => {
   function load() {
     return process.env.DEBUG;
   }
-  function init(debug5) {
-    debug5.inspectOpts = {};
+  function init(debug6) {
+    debug6.inspectOpts = {};
     const keys2 = Object.keys(exports2.inspectOpts);
     for (let i = 0; i < keys2.length; i++) {
-      debug5.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
+      debug6.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
     }
   }
-  var common_1 = require_common6();
-  var mod2 = common_1.setup(exports2);
+  var mod2 = (0, import_common4.setup)(exports2);
   module2.exports = mod2;
-  exports2.default = mod2;
+  var node_default = mod2;
   var {formatters} = mod2;
   formatters.o = function(v) {
     this.inspectOpts.colors = this.useColors;
@@ -2569,30 +3217,51 @@ var require_node3 = __commonJS2((exports2, module2) => {
 
 // ../debug/dist/index.js
 var require_dist7 = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.getLogs = exports2.Debug = void 0;
-  var node_1 = __importDefault2(require_node3());
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    Debug: () => Debug4,
+    default: () => Debug4,
+    getLogs: () => getLogs
+  });
+  var import_debug5 = __toModule3(require_src3());
+  var import_node = __toModule3(require_node4());
   var cache = [];
   var MAX_LOGS = 100;
-  function Debug3(namespace) {
-    const debug5 = node_1.default(namespace, (...args) => {
+  function Debug4(namespace) {
+    const debug6 = (0, import_node.default)(namespace, (...args) => {
       cache.push(args);
       if (cache.length > MAX_LOGS) {
         cache.shift();
       }
     });
-    return debug5;
+    return debug6;
   }
-  exports2.default = Debug3;
-  exports2.Debug = Debug3;
-  Debug3.enable = (namespace) => {
-    node_1.default.enable(namespace);
+  Debug4.enable = (namespace) => {
+    import_node.default.enable(namespace);
   };
-  Debug3.enabled = (namespace) => node_1.default.enabled(namespace);
+  Debug4.enabled = (namespace) => import_node.default.enabled(namespace);
   function getLogs(numChars = 7500) {
     const output = cache.map((c) => c.map((item) => {
       if (typeof item === "string") {
@@ -2605,33 +3274,52 @@ var require_dist7 = __commonJS2((exports2) => {
     }
     return output.slice(-numChars);
   }
-  exports2.getLogs = getLogs;
 });
 
 // ../generator-helper/dist/GeneratorProcess.js
 var require_GeneratorProcess = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.GeneratorProcess = exports2.GeneratorError = void 0;
-  var child_process_12 = require("child_process");
-  var cross_spawn_1 = require_cross_spawn2();
-  var byline_12 = __importDefault2(require_byline());
-  var chalk_12 = __importDefault2(require_source2());
-  var debug_12 = __importDefault2(require_dist7());
-  var debug5 = debug_12.default("prisma:GeneratorProcess");
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    GeneratorError: () => GeneratorError2,
+    GeneratorProcess: () => GeneratorProcess2
+  });
+  var import_child_process2 = __toModule3(require("child_process"));
+  var import_cross_spawn = __toModule3(require_cross_spawn2());
+  var import_byline2 = __toModule3(require_byline());
+  var import_chalk7 = __toModule3(require_source2());
+  var import_debug5 = __toModule3(require_dist7());
+  var debug6 = (0, import_debug5.default)("prisma:GeneratorProcess");
   var globalMessageId = 1;
-  var GeneratorError = class extends Error {
+  var GeneratorError2 = class extends Error {
     constructor(message, code, data) {
       super(message);
       this.code = code;
       this.data = data;
     }
   };
-  exports2.GeneratorError = GeneratorError;
-  var GeneratorProcess = class {
+  var GeneratorProcess2 = class {
     constructor(executablePath, isNode) {
       this.executablePath = executablePath;
       this.isNode = isNode;
@@ -2649,7 +3337,7 @@ var require_GeneratorProcess = __commonJS2((exports2) => {
       return new Promise((resolve, reject) => {
         try {
           if (this.isNode) {
-            this.child = child_process_12.fork(this.executablePath, [], {
+            this.child = (0, import_child_process2.fork)(this.executablePath, [], {
               stdio: ["pipe", "inherit", "pipe", "ipc"],
               env: {
                 ...process.env,
@@ -2658,7 +3346,7 @@ var require_GeneratorProcess = __commonJS2((exports2) => {
               execArgv: ["--max-old-space-size=8096"]
             });
           } else {
-            this.child = cross_spawn_1.spawn(this.executablePath, {
+            this.child = (0, import_cross_spawn.spawn)(this.executablePath, {
               stdio: ["pipe", "inherit", "pipe"],
               env: {
                 ...process.env,
@@ -2676,19 +3364,19 @@ var require_GeneratorProcess = __commonJS2((exports2) => {
           this.child.on("error", (err) => {
             this.lastError = err;
             if (err.message.includes("EACCES")) {
-              reject(new Error(`The executable at ${this.executablePath} lacks the right chmod. Please use ${chalk_12.default.bold(`chmod +x ${this.executablePath}`)}`));
+              reject(new Error(`The executable at ${this.executablePath} lacks the right chmod. Please use ${import_chalk7.default.bold(`chmod +x ${this.executablePath}`)}`));
             } else {
               reject(err);
             }
           });
-          byline_12.default(this.child.stderr).on("data", (line) => {
+          (0, import_byline2.default)(this.child.stderr).on("data", (line) => {
             const response = String(line);
             this.stderrLogs += response + "\n";
             let data;
             try {
               data = JSON.parse(response);
             } catch (e) {
-              debug5(response);
+              debug6(response);
             }
             if (data) {
               this.handleResponse(data);
@@ -2715,7 +3403,7 @@ ${this.stderrLogs}`));
         }
         if (this.listeners[data.id]) {
           if (data.error) {
-            const error = new GeneratorError(data.error.message, data.error.code, data.error.data);
+            const error = new GeneratorError2(data.error.message, data.error.code, data.error.data);
             this.listeners[data.id](null, error);
           } else {
             this.listeners[data.id](data.result);
@@ -2781,20 +3469,39 @@ ${this.stderrLogs}`));
       });
     }
   };
-  exports2.GeneratorProcess = GeneratorProcess;
 });
 
 // ../generator-helper/dist/generatorHandler.js
 var require_generatorHandler = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.generatorHandler = void 0;
-  var byline_12 = __importDefault2(require_byline());
-  function generatorHandler(handler) {
-    byline_12.default(process.stdin).on("data", async (line) => {
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    generatorHandler: () => generatorHandler2
+  });
+  var import_byline2 = __toModule3(require_byline());
+  function generatorHandler2(handler) {
+    (0, import_byline2.default)(process.stdin).on("data", async (line) => {
       const json = JSON.parse(String(line));
       if (json.method === "generate" && json.params) {
         try {
@@ -2851,7 +3558,6 @@ var require_generatorHandler = __commonJS2((exports2) => {
     });
     process.stdin.resume();
   }
-  exports2.generatorHandler = generatorHandler;
   function respond(response) {
     console.error(JSON.stringify(response));
   }
@@ -2859,17 +3565,25 @@ var require_generatorHandler = __commonJS2((exports2) => {
 
 // ../generator-helper/dist/types.js
 var require_types = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  __markAsModule3(exports2);
 });
 
 // ../generator-helper/dist/dmmf.js
 var require_dmmf = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.DMMF = void 0;
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    DMMF: () => DMMF2
+  });
   var DMMF2;
-  (function(DMMF3) {
+  (function(DMMF22) {
     let ModelAction;
     (function(ModelAction2) {
       ModelAction2["findUnique"] = "findUnique";
@@ -2885,44 +3599,44 @@ var require_dmmf = __commonJS2((exports2) => {
       ModelAction2["groupBy"] = "groupBy";
       ModelAction2["count"] = "count";
       ModelAction2["aggregate"] = "aggregate";
-    })(ModelAction = DMMF3.ModelAction || (DMMF3.ModelAction = {}));
-  })(DMMF2 = exports2.DMMF || (exports2.DMMF = {}));
+    })(ModelAction = DMMF22.ModelAction || (DMMF22.ModelAction = {}));
+  })(DMMF2 || (DMMF2 = {}));
 });
 
 // ../generator-helper/dist/index.js
 var require_dist8 = __commonJS2((exports2) => {
-  "use strict";
-  var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
-    if (k2 === void 0)
-      k2 = k;
-    Object.defineProperty(o, k2, {enumerable: true, get: function() {
-      return m[k];
-    }});
-  } : function(o, m, k, k2) {
-    if (k2 === void 0)
-      k2 = k;
-    o[k2] = m[k];
-  });
-  var __exportStar3 = exports2 && exports2.__exportStar || function(m, exports3) {
-    for (var p in m)
-      if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports3, p))
-        __createBinding(exports3, m, p);
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.generatorHandler = exports2.GeneratorError = exports2.GeneratorProcess = void 0;
-  var GeneratorProcess_1 = require_GeneratorProcess();
-  Object.defineProperty(exports2, "GeneratorProcess", {enumerable: true, get: function() {
-    return GeneratorProcess_1.GeneratorProcess;
-  }});
-  Object.defineProperty(exports2, "GeneratorError", {enumerable: true, get: function() {
-    return GeneratorProcess_1.GeneratorError;
-  }});
-  var generatorHandler_1 = require_generatorHandler();
-  Object.defineProperty(exports2, "generatorHandler", {enumerable: true, get: function() {
-    return generatorHandler_1.generatorHandler;
-  }});
-  __exportStar3(require_types(), exports2);
-  __exportStar3(require_dmmf(), exports2);
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    GeneratorError: () => import_GeneratorProcess.GeneratorError,
+    GeneratorProcess: () => import_GeneratorProcess.GeneratorProcess,
+    generatorHandler: () => import_generatorHandler.generatorHandler
+  });
+  var import_GeneratorProcess = __toModule3(require_GeneratorProcess());
+  var import_generatorHandler = __toModule3(require_generatorHandler());
+  __reExport2(exports2, __toModule3(require_types()));
+  __reExport2(exports2, __toModule3(require_dmmf()));
 });
 
 // ../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js
@@ -3207,432 +3921,44 @@ var require_strip_indent = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../engine-core/dist/log.js
-var require_log2 = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.convertLog = exports2.isRustError = exports2.isRustErrorLog = exports2.isRustLog = exports2.getBacktraceFromRustError = exports2.getBacktraceFromLog = exports2.getMessage = void 0;
-  function getMessage(log4) {
-    if (typeof log4 === "string") {
-      return log4;
-    } else if (isRustError(log4)) {
-      return getBacktraceFromRustError(log4);
-    } else if (isRustLog(log4)) {
-      return getBacktraceFromLog(log4);
-    }
-    return JSON.stringify(log4);
-  }
-  exports2.getMessage = getMessage;
-  function getBacktraceFromLog(log4) {
-    var _a, _b, _c, _d, _e, _f, _g;
-    if ((_a = log4.fields) === null || _a === void 0 ? void 0 : _a.message) {
-      let str = (_b = log4.fields) === null || _b === void 0 ? void 0 : _b.message;
-      if ((_c = log4.fields) === null || _c === void 0 ? void 0 : _c.file) {
-        str += ` in ${log4.fields.file}`;
-        if ((_d = log4.fields) === null || _d === void 0 ? void 0 : _d.line) {
-          str += `:${log4.fields.line}`;
-        }
-        if ((_e = log4.fields) === null || _e === void 0 ? void 0 : _e.column) {
-          str += `:${log4.fields.column}`;
-        }
-      }
-      if ((_f = log4.fields) === null || _f === void 0 ? void 0 : _f.reason) {
-        str += `
-${(_g = log4.fields) === null || _g === void 0 ? void 0 : _g.reason}`;
-      }
-      return str;
-    }
-    return "Unknown error";
-  }
-  exports2.getBacktraceFromLog = getBacktraceFromLog;
-  function getBacktraceFromRustError(err) {
-    let str = "";
-    if (err.is_panic) {
-      str += `PANIC`;
-    }
-    if (err.backtrace) {
-      str += ` in ${err.backtrace}`;
-    }
-    if (err.message) {
-      str += `
-${err.message}`;
-    }
-    return str;
-  }
-  exports2.getBacktraceFromRustError = getBacktraceFromRustError;
-  function isRustLog(e) {
-    return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
-  }
-  exports2.isRustLog = isRustLog;
-  function isRustErrorLog(e) {
-    var _a, _b;
-    return isRustLog(e) && (e.level === "error" || ((_b = (_a = e.fields) === null || _a === void 0 ? void 0 : _a.message) === null || _b === void 0 ? void 0 : _b.includes("fatal error")));
-  }
-  exports2.isRustErrorLog = isRustErrorLog;
-  function isRustError(e) {
-    return typeof e.is_panic !== "undefined";
-  }
-  exports2.isRustError = isRustError;
-  function convertLog(rustLog) {
-    const isQuery = isQueryLog(rustLog.fields);
-    const level = isQuery ? "query" : rustLog.level.toLowerCase();
-    return {
-      ...rustLog,
-      level,
-      timestamp: new Date(new Date().getFullYear() + " " + rustLog.timestamp)
-    };
-  }
-  exports2.convertLog = convertLog;
-  function isQueryLog(fields) {
-    return Boolean(fields.query);
-  }
-});
-
-// ../../node_modules/.pnpm/ansi-escapes@4.3.2/node_modules/ansi-escapes/index.js
-var require_ansi_escapes = __commonJS2((exports2, module2) => {
-  "use strict";
-  var ansiEscapes = module2.exports;
-  module2.exports.default = ansiEscapes;
-  var ESC = "[";
-  var OSC = "]";
-  var BEL = "\x07";
-  var SEP = ";";
-  var isTerminalApp = process.env.TERM_PROGRAM === "Apple_Terminal";
-  ansiEscapes.cursorTo = (x, y) => {
-    if (typeof x !== "number") {
-      throw new TypeError("The `x` argument is required");
-    }
-    if (typeof y !== "number") {
-      return ESC + (x + 1) + "G";
-    }
-    return ESC + (y + 1) + ";" + (x + 1) + "H";
+// ../engine-core/dist/common/errors/PrismaClientInitializationError.js
+var require_PrismaClientInitializationError = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  ansiEscapes.cursorMove = (x, y) => {
-    if (typeof x !== "number") {
-      throw new TypeError("The `x` argument is required");
+  __export3(exports2, {
+    PrismaClientInitializationError: () => PrismaClientInitializationError3
+  });
+  var PrismaClientInitializationError3 = class extends Error {
+    constructor(message, clientVersion2, errorCode) {
+      super(message);
+      this.clientVersion = clientVersion2;
+      this.errorCode = errorCode;
+      Error.captureStackTrace(PrismaClientInitializationError3);
     }
-    let ret = "";
-    if (x < 0) {
-      ret += ESC + -x + "D";
-    } else if (x > 0) {
-      ret += ESC + x + "C";
-    }
-    if (y < 0) {
-      ret += ESC + -y + "A";
-    } else if (y > 0) {
-      ret += ESC + y + "B";
-    }
-    return ret;
-  };
-  ansiEscapes.cursorUp = (count = 1) => ESC + count + "A";
-  ansiEscapes.cursorDown = (count = 1) => ESC + count + "B";
-  ansiEscapes.cursorForward = (count = 1) => ESC + count + "C";
-  ansiEscapes.cursorBackward = (count = 1) => ESC + count + "D";
-  ansiEscapes.cursorLeft = ESC + "G";
-  ansiEscapes.cursorSavePosition = isTerminalApp ? "7" : ESC + "s";
-  ansiEscapes.cursorRestorePosition = isTerminalApp ? "8" : ESC + "u";
-  ansiEscapes.cursorGetPosition = ESC + "6n";
-  ansiEscapes.cursorNextLine = ESC + "E";
-  ansiEscapes.cursorPrevLine = ESC + "F";
-  ansiEscapes.cursorHide = ESC + "?25l";
-  ansiEscapes.cursorShow = ESC + "?25h";
-  ansiEscapes.eraseLines = (count) => {
-    let clear = "";
-    for (let i = 0; i < count; i++) {
-      clear += ansiEscapes.eraseLine + (i < count - 1 ? ansiEscapes.cursorUp() : "");
-    }
-    if (count) {
-      clear += ansiEscapes.cursorLeft;
-    }
-    return clear;
-  };
-  ansiEscapes.eraseEndLine = ESC + "K";
-  ansiEscapes.eraseStartLine = ESC + "1K";
-  ansiEscapes.eraseLine = ESC + "2K";
-  ansiEscapes.eraseDown = ESC + "J";
-  ansiEscapes.eraseUp = ESC + "1J";
-  ansiEscapes.eraseScreen = ESC + "2J";
-  ansiEscapes.scrollUp = ESC + "S";
-  ansiEscapes.scrollDown = ESC + "T";
-  ansiEscapes.clearScreen = "c";
-  ansiEscapes.clearTerminal = process.platform === "win32" ? `${ansiEscapes.eraseScreen}${ESC}0f` : `${ansiEscapes.eraseScreen}${ESC}3J${ESC}H`;
-  ansiEscapes.beep = BEL;
-  ansiEscapes.link = (text, url) => {
-    return [
-      OSC,
-      "8",
-      SEP,
-      SEP,
-      url,
-      BEL,
-      text,
-      OSC,
-      "8",
-      SEP,
-      SEP,
-      BEL
-    ].join("");
-  };
-  ansiEscapes.image = (buffer, options = {}) => {
-    let ret = `${OSC}1337;File=inline=1`;
-    if (options.width) {
-      ret += `;width=${options.width}`;
-    }
-    if (options.height) {
-      ret += `;height=${options.height}`;
-    }
-    if (options.preserveAspectRatio === false) {
-      ret += ";preserveAspectRatio=0";
-    }
-    return ret + ":" + buffer.toString("base64") + BEL;
-  };
-  ansiEscapes.iTerm = {
-    setCwd: (cwd = process.cwd()) => `${OSC}50;CurrentDir=${cwd}${BEL}`,
-    annotation: (message, options = {}) => {
-      let ret = `${OSC}1337;`;
-      const hasX = typeof options.x !== "undefined";
-      const hasY = typeof options.y !== "undefined";
-      if ((hasX || hasY) && !(hasX && hasY && typeof options.length !== "undefined")) {
-        throw new Error("`x`, `y` and `length` must be defined when `x` or `y` is defined");
-      }
-      message = message.replace(/\|/g, "");
-      ret += options.isHidden ? "AddHiddenAnnotation=" : "AddAnnotation=";
-      if (options.length > 0) {
-        ret += (hasX ? [message, options.length, options.x, options.y] : [options.length, message]).join("|");
-      } else {
-        ret += message;
-      }
-      return ret + BEL;
+    get [Symbol.toStringTag]() {
+      return "PrismaClientInitializationError";
     }
   };
 });
 
-// ../../node_modules/.pnpm/supports-hyperlinks@2.2.0/node_modules/supports-hyperlinks/index.js
-var require_supports_hyperlinks = __commonJS2((exports2, module2) => {
-  "use strict";
-  var supportsColor = require_supports_color2();
-  var hasFlag = require_has_flag2();
-  function parseVersion(versionString) {
-    if (/^\d{3,4}$/.test(versionString)) {
-      const m = /(\d{1,2})(\d{2})/.exec(versionString);
-      return {
-        major: 0,
-        minor: parseInt(m[1], 10),
-        patch: parseInt(m[2], 10)
-      };
-    }
-    const versions = (versionString || "").split(".").map((n) => parseInt(n, 10));
-    return {
-      major: versions[0],
-      minor: versions[1],
-      patch: versions[2]
-    };
-  }
-  function supportsHyperlink(stream) {
-    const {env} = process;
-    if ("FORCE_HYPERLINK" in env) {
-      return !(env.FORCE_HYPERLINK.length > 0 && parseInt(env.FORCE_HYPERLINK, 10) === 0);
-    }
-    if (hasFlag("no-hyperlink") || hasFlag("no-hyperlinks") || hasFlag("hyperlink=false") || hasFlag("hyperlink=never")) {
-      return false;
-    }
-    if (hasFlag("hyperlink=true") || hasFlag("hyperlink=always")) {
-      return true;
-    }
-    if (!supportsColor.supportsColor(stream)) {
-      return false;
-    }
-    if (stream && !stream.isTTY) {
-      return false;
-    }
-    if (process.platform === "win32") {
-      return false;
-    }
-    if ("NETLIFY" in env) {
-      return true;
-    }
-    if ("CI" in env) {
-      return false;
-    }
-    if ("TEAMCITY_VERSION" in env) {
-      return false;
-    }
-    if ("TERM_PROGRAM" in env) {
-      const version = parseVersion(env.TERM_PROGRAM_VERSION);
-      switch (env.TERM_PROGRAM) {
-        case "iTerm.app":
-          if (version.major === 3) {
-            return version.minor >= 1;
-          }
-          return version.major > 3;
-      }
-    }
-    if ("VTE_VERSION" in env) {
-      if (env.VTE_VERSION === "0.50.0") {
-        return false;
-      }
-      const version = parseVersion(env.VTE_VERSION);
-      return version.major > 0 || version.minor >= 50;
-    }
-    return false;
-  }
-  module2.exports = {
-    supportsHyperlink,
-    stdout: supportsHyperlink(process.stdout),
-    stderr: supportsHyperlink(process.stderr)
+// ../engine-core/dist/common/errors/PrismaClientKnownRequestError.js
+var require_PrismaClientKnownRequestError = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-});
-
-// ../../node_modules/.pnpm/terminal-link@2.1.1/node_modules/terminal-link/index.js
-var require_terminal_link = __commonJS2((exports2, module2) => {
-  "use strict";
-  var ansiEscapes = require_ansi_escapes();
-  var supportsHyperlinks = require_supports_hyperlinks();
-  var terminalLink = (text, url, {target = "stdout", ...options} = {}) => {
-    if (!supportsHyperlinks[target]) {
-      if (options.fallback === false) {
-        return text;
-      }
-      return typeof options.fallback === "function" ? options.fallback(text, url) : `${text} (\u200B${url}\u200B)`;
-    }
-    return ansiEscapes.link(text, url);
-  };
-  module2.exports = (text, url, options = {}) => terminalLink(text, url, options);
-  module2.exports.stderr = (text, url, options = {}) => terminalLink(text, url, {target: "stderr", ...options});
-  module2.exports.isSupported = supportsHyperlinks.stdout;
-  module2.exports.stderr.isSupported = supportsHyperlinks.stderr;
-});
-
-// ../../node_modules/.pnpm/new-github-issue-url@0.2.1/node_modules/new-github-issue-url/index.js
-var require_new_github_issue_url = __commonJS2((exports2, module2) => {
-  "use strict";
-  module2.exports = (options = {}) => {
-    let repoUrl;
-    if (options.repoUrl) {
-      repoUrl = options.repoUrl;
-    } else if (options.user && options.repo) {
-      repoUrl = `https://github.com/${options.user}/${options.repo}`;
-    } else {
-      throw new Error("You need to specify either the `repoUrl` option or both the `user` and `repo` options");
-    }
-    const url = new URL(`${repoUrl}/issues/new`);
-    const types = [
-      "body",
-      "title",
-      "labels",
-      "template",
-      "milestone",
-      "assignee",
-      "projects"
-    ];
-    for (const type of types) {
-      let value = options[type];
-      if (value === void 0) {
-        continue;
-      }
-      if (type === "labels" || type === "projects") {
-        if (!Array.isArray(value)) {
-          throw new TypeError(`The \`${type}\` option should be an array`);
-        }
-        value = value.join(",");
-      }
-      url.searchParams.set(type, value);
-    }
-    return url.toString();
-  };
-  module2.exports.default = module2.exports;
-});
-
-// ../engine-core/dist/util.js
-var require_util4 = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
-  };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.getRandomString = exports2.getGithubIssueUrl = exports2.link = exports2.fixBinaryTargets = exports2.plusX = void 0;
-  var fs_12 = __importDefault2(require("fs"));
-  var terminal_link_1 = __importDefault2(require_terminal_link());
-  var new_github_issue_url_1 = __importDefault2(require_new_github_issue_url());
-  var chalk_12 = __importDefault2(require_source2());
-  var debug_12 = __importDefault2(require_dist7());
-  var crypto_1 = __importDefault2(require("crypto"));
-  var debug5 = debug_12.default("plusX");
-  function plusX(file) {
-    const s = fs_12.default.statSync(file);
-    const newMode = s.mode | 64 | 8 | 1;
-    if (s.mode === newMode) {
-      debug5(`Execution permissions of ${file} are fine`);
-      return;
-    }
-    const base8 = newMode.toString(8).slice(-3);
-    debug5(`Have to call plusX on ${file}`);
-    fs_12.default.chmodSync(file, base8);
-  }
-  exports2.plusX = plusX;
-  function transformPlatformToEnvValue(platform) {
-    return {fromEnvVar: null, value: platform};
-  }
-  function fixBinaryTargets(binaryTargets, platform) {
-    binaryTargets = binaryTargets || [];
-    if (!binaryTargets.find((object) => object.value === "native")) {
-      return [transformPlatformToEnvValue("native"), ...binaryTargets];
-    }
-    return [...binaryTargets, transformPlatformToEnvValue(platform)];
-  }
-  exports2.fixBinaryTargets = fixBinaryTargets;
-  function link(url) {
-    return terminal_link_1.default(url, url, {
-      fallback: (url2) => chalk_12.default.underline(url2)
-    });
-  }
-  exports2.link = link;
-  function getGithubIssueUrl({title, user = "prisma", repo = "prisma", template = "bug_report.md", body}) {
-    return new_github_issue_url_1.default({
-      user,
-      repo,
-      template,
-      title,
-      body
-    });
-  }
-  exports2.getGithubIssueUrl = getGithubIssueUrl;
-  function getRandomString() {
-    return crypto_1.default.randomBytes(12).toString("hex");
-  }
-  exports2.getRandomString = getRandomString;
-});
-
-// ../engine-core/dist/maskQuery.js
-var require_maskQuery = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.maskQuery = void 0;
-  function maskQuery(query) {
-    if (!query) {
-      return "";
-    }
-    return query.replace(/".*"/g, '"X"').replace(/[\s:\[]([+-]?([0-9]*[.])?[0-9]+)/g, (substr) => {
-      return `${substr[0]}5`;
-    });
-  }
-  exports2.maskQuery = maskQuery;
-});
-
-// ../engine-core/dist/errors.js
-var require_errors = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
-  };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.getErrorMessageWithLink = exports2.PrismaClientInitializationError = exports2.PrismaClientRustError = exports2.PrismaClientRustPanicError = exports2.PrismaClientUnknownRequestError = exports2.PrismaClientKnownRequestError = void 0;
-  var log_12 = require_log2();
-  var debug_12 = require_dist7();
-  var util_12 = require_util4();
-  var strip_ansi_1 = __importDefault2(require_strip_ansi());
-  var maskQuery_1 = require_maskQuery();
-  var PrismaClientKnownRequestError2 = class extends Error {
+  __export3(exports2, {
+    PrismaClientKnownRequestError: () => PrismaClientKnownRequestError3
+  });
+  var PrismaClientKnownRequestError3 = class extends Error {
     constructor(message, code, clientVersion2, meta) {
       super(message);
       this.code = code;
@@ -3643,8 +3969,44 @@ var require_errors = __commonJS2((exports2) => {
       return "PrismaClientKnownRequestError";
     }
   };
-  exports2.PrismaClientKnownRequestError = PrismaClientKnownRequestError2;
-  var PrismaClientUnknownRequestError2 = class extends Error {
+});
+
+// ../engine-core/dist/common/errors/PrismaClientRustPanicError.js
+var require_PrismaClientRustPanicError = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    PrismaClientRustPanicError: () => PrismaClientRustPanicError3
+  });
+  var PrismaClientRustPanicError3 = class extends Error {
+    constructor(message, clientVersion2) {
+      super(message);
+      this.clientVersion = clientVersion2;
+    }
+    get [Symbol.toStringTag]() {
+      return "PrismaClientRustPanicError";
+    }
+  };
+});
+
+// ../engine-core/dist/common/errors/PrismaClientUnknownRequestError.js
+var require_PrismaClientUnknownRequestError = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    PrismaClientUnknownRequestError: () => PrismaClientUnknownRequestError3
+  });
+  var PrismaClientUnknownRequestError3 = class extends Error {
     constructor(message, clientVersion2) {
       super(message);
       this.clientVersion = clientVersion2;
@@ -3653,247 +4015,25 @@ var require_errors = __commonJS2((exports2) => {
       return "PrismaClientUnknownRequestError";
     }
   };
-  exports2.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError2;
-  var PrismaClientRustPanicError2 = class extends Error {
-    constructor(message, clientVersion2) {
-      super(message);
-      this.clientVersion = clientVersion2;
-    }
-    get [Symbol.toStringTag]() {
-      return "PrismaClientRustPanicError";
-    }
-  };
-  exports2.PrismaClientRustPanicError = PrismaClientRustPanicError2;
-  var PrismaClientRustError = class extends Error {
-    constructor({clientVersion: clientVersion2, log: log4, error}) {
-      if (log4) {
-        const backtrace = log_12.getBacktraceFromLog(log4);
-        super(backtrace !== null && backtrace !== void 0 ? backtrace : "Unkown error");
-      } else if (error) {
-        const backtrace = log_12.getBacktraceFromRustError(error);
-        super(backtrace);
-      } else {
-        super(`Unknown error`);
-      }
-      this.clientVersion = clientVersion2;
-    }
-    get [Symbol.toStringTag]() {
-      return "PrismaClientRustPanicError";
-    }
-  };
-  exports2.PrismaClientRustError = PrismaClientRustError;
-  var PrismaClientInitializationError2 = class extends Error {
-    constructor(message, clientVersion2, errorCode) {
-      super(message);
-      this.clientVersion = clientVersion2;
-      this.errorCode = errorCode;
-      Error.captureStackTrace(PrismaClientInitializationError2);
-    }
-    get [Symbol.toStringTag]() {
-      return "PrismaClientInitializationError";
-    }
-  };
-  exports2.PrismaClientInitializationError = PrismaClientInitializationError2;
-  function getErrorMessageWithLink({version, platform, title, description, engineVersion, database, query}) {
-    var _a, _b;
-    const gotLogs = debug_12.getLogs(6e3 - ((_a = query === null || query === void 0 ? void 0 : query.length) !== null && _a !== void 0 ? _a : 0));
-    const logs = normalizeLogs(strip_ansi_1.default(gotLogs));
-    const moreInfo = description ? `# Description
-\`\`\`
-${description}
-\`\`\`` : "";
-    const body = strip_ansi_1.default(`Hi Prisma Team! My Prisma Client just crashed. This is the report:
-## Versions
-
-| Name            | Version            |
-|-----------------|--------------------|
-| Node            | ${(_b = process.version) === null || _b === void 0 ? void 0 : _b.padEnd(19)}| 
-| OS              | ${platform === null || platform === void 0 ? void 0 : platform.padEnd(19)}|
-| Prisma Client   | ${version === null || version === void 0 ? void 0 : version.padEnd(19)}|
-| Query Engine    | ${engineVersion === null || engineVersion === void 0 ? void 0 : engineVersion.padEnd(19)}|
-| Database        | ${database === null || database === void 0 ? void 0 : database.padEnd(19)}|
-
-${moreInfo}
-
-## Query
-\`\`\`
-${query ? maskQuery_1.maskQuery(query) : ""}
-\`\`\`
-
-## Logs
-\`\`\`
-${logs}
-\`\`\`
-
-## Client Snippet
-\`\`\`ts
-// PLEASE FILL YOUR CODE SNIPPET HERE
-\`\`\`
-
-## Schema
-\`\`\`prisma
-// PLEASE ADD YOUR SCHEMA HERE IF POSSIBLE
-\`\`\`
-`);
-    const url = util_12.getGithubIssueUrl({title, body});
-    return `${title}
-
-This is a non-recoverable error which probably happens when the Prisma Query Engine has a panic.
-
-${util_12.link(url)}
-
-If you want the Prisma team to look into it, please open the link above \u{1F64F}
-To increase the chance of success, please post your schema and a snippet of
-how you used Prisma Client in the issue. 
-`;
-  }
-  exports2.getErrorMessageWithLink = getErrorMessageWithLink;
-  function normalizeLogs(logs) {
-    return logs.split("\n").map((l) => {
-      return l.replace(/^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)\s*/, "").replace(/\+\d+\s*ms$/, "");
-    }).join("\n");
-  }
 });
 
-// ../engine-core/dist/byline.js
-var require_byline2 = __commonJS2((exports2, module2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.createLineStream = void 0;
-  var stream = require("stream");
-  var util = require("util");
-  function byline(readStream, options) {
-    return module2.exports.createStream(readStream, options);
-  }
-  exports2.default = byline;
-  module2.exports.createStream = function(readStream, options) {
-    if (readStream) {
-      return createLineStream(readStream, options);
-    } else {
-      return new LineStream(options);
-    }
+// ../engine-core/dist/common/Engine.js
+var require_Engine = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  function createLineStream(readStream, options) {
-    if (!readStream) {
-      throw new Error("expected readStream");
-    }
-    if (!readStream.readable) {
-      throw new Error("readStream must be readable");
-    }
-    var ls = new LineStream(options);
-    readStream.pipe(ls);
-    return ls;
-  }
-  exports2.createLineStream = createLineStream;
-  module2.exports.LineStream = LineStream;
-  function LineStream(options) {
-    stream.Transform.call(this, options);
-    options = options || {};
-    this._readableState.objectMode = true;
-    this._lineBuffer = [];
-    this._keepEmptyLines = options.keepEmptyLines || false;
-    this._lastChunkEndedWithCR = false;
-    this.on("pipe", function(src) {
-      if (!this.encoding) {
-        if (src instanceof stream.Readable) {
-          this.encoding = src._readableState.encoding;
-        }
-      }
-    });
-  }
-  util.inherits(LineStream, stream.Transform);
-  LineStream.prototype._transform = function(chunk, encoding, done) {
-    encoding = encoding || "utf8";
-    if (Buffer.isBuffer(chunk)) {
-      if (encoding == "buffer") {
-        chunk = chunk.toString();
-        encoding = "utf8";
-      } else {
-        chunk = chunk.toString(encoding);
-      }
-    }
-    this._chunkEncoding = encoding;
-    var lines = chunk.split(/\r\n|\r|\n/g);
-    if (this._lastChunkEndedWithCR && chunk[0] == "\n") {
-      lines.shift();
-    }
-    if (this._lineBuffer.length > 0) {
-      this._lineBuffer[this._lineBuffer.length - 1] += lines[0];
-      lines.shift();
-    }
-    this._lastChunkEndedWithCR = chunk[chunk.length - 1] == "\r";
-    this._lineBuffer = this._lineBuffer.concat(lines);
-    this._pushBuffer(encoding, 1, done);
-  };
-  LineStream.prototype._pushBuffer = function(encoding, keep, done) {
-    while (this._lineBuffer.length > keep) {
-      var line = this._lineBuffer.shift();
-      if (this._keepEmptyLines || line.length > 0) {
-        if (!this.push(this._reencode(line, encoding))) {
-          var self = this;
-          setImmediate(function() {
-            self._pushBuffer(encoding, keep, done);
-          });
-          return;
-        }
-      }
-    }
-    done();
-  };
-  LineStream.prototype._flush = function(done) {
-    this._pushBuffer(this._chunkEncoding, 0, done);
-  };
-  LineStream.prototype._reencode = function(line, chunkEncoding) {
-    if (this.encoding && this.encoding != chunkEncoding) {
-      return Buffer.from(line, chunkEncoding).toString(this.encoding);
-    } else if (this.encoding) {
-      return line;
-    } else {
-      return Buffer.from(line, chunkEncoding);
-    }
+  __export3(exports2, {
+    Engine: () => Engine3
+  });
+  var Engine3 = class {
   };
 });
 
-// ../engine-core/dist/getInternalDatamodelJson.js
-var require_getInternalDatamodelJson = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
-  };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.getInternalDatamodelJson = void 0;
-  var path_12 = __importDefault2(require("path"));
-  var child_process_12 = require("child_process");
-  var byline_12 = __importDefault2(require_byline2());
-  function getInternalDatamodelJson(datamodel, schemaInferrerPath = path_12.default.join(__dirname, "../schema-inferrer-bin")) {
-    return new Promise((resolve, reject) => {
-      const proc = child_process_12.spawn(schemaInferrerPath, {
-        stdio: ["pipe", "pipe", process.stderr]
-      });
-      proc.on("error", function(err) {
-        console.error("[schema-inferrer-bin] error: %s", err);
-        reject(err);
-      });
-      proc.on("exit", function(code, signal) {
-        if (code !== 0) {
-          console.error("[schema-inferrer-bin] exit: code=%s signal=%s", code, signal);
-        }
-        reject();
-      });
-      const out = byline_12.default(proc.stdout);
-      out.on("data", (line) => {
-        const result = JSON.parse(line);
-        const resultB64 = Buffer.from(JSON.stringify(result)).toString("base64");
-        resolve(resultB64);
-      });
-      const cut = datamodel.replace(/\n/g, " ");
-      proc.stdin.write(JSON.stringify({dataModel: cut}) + "\n");
-    });
-  }
-  exports2.getInternalDatamodelJson = getInternalDatamodelJson;
-});
-
-// ../../node_modules/.pnpm/@prisma+engines@2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma+engines@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports, module) => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -4519,16 +4659,16 @@ var require_dist9 = __commonJS2((exports, module) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb",
+      version: "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "cdba6ec525e0213cce26f8e4bb23cf556d1479bb"
+        enginesVersion: "1be4cd60b89afa04b192acb1ef47758a39810f3a"
       },
       devDependencies: {
-        "@types/node": "14.17.4",
+        "@types/node": "14.17.9",
         typescript: "4.3.5"
       },
       scripts: {
@@ -4574,7 +4714,7 @@ var require_dist9 = __commonJS2((exports, module) => {
     };
     Object.defineProperty(exports2, "__esModule", {value: true});
     exports2.getPlatform = exports2.getOpenSSLVersion = exports2.parseOpenSSLVersion = exports2.resolveDistro = exports2.parseDistro = exports2.getos = void 0;
-    var child_process_12 = require("child_process");
+    var child_process_1 = require("child_process");
     var fs_12 = __importDefault2(require("fs"));
     var os_1 = __importDefault2(require("os"));
     var util_12 = require("util");
@@ -4679,7 +4819,7 @@ var require_dist9 = __commonJS2((exports, module) => {
     async function gracefulExec(cmd) {
       return new Promise((resolve) => {
         try {
-          child_process_12.exec(cmd, (err, stdout) => {
+          child_process_1.exec(cmd, (err, stdout) => {
             resolve(String(stdout));
           });
         } catch (e) {
@@ -13669,7 +13809,7 @@ ${error.message}` : execaMessage;
     });
     var import_stream = __toModule(require("stream"));
     var import_http = __toModule(require("http"));
-    var import_url = __toModule(require("url"));
+    var import_url2 = __toModule(require("url"));
     var import_https = __toModule(require("https"));
     var import_zlib = __toModule(require("zlib"));
     var Readable = import_stream.default.Readable;
@@ -14376,8 +14516,8 @@ ${error.message}` : execaMessage;
       configurable: true
     });
     var INTERNALS$2 = Symbol("Request internals");
-    var parse_url = import_url.default.parse;
-    var format_url = import_url.default.format;
+    var parse_url = import_url2.default.parse;
+    var format_url = import_url2.default.format;
     var streamDestructionSupported = "destroy" in import_stream.default.Readable.prototype;
     function isRequest(input) {
       return typeof input === "object" && typeof input[INTERNALS$2] === "object";
@@ -14526,7 +14666,7 @@ ${error.message}` : execaMessage;
     AbortError.prototype.constructor = AbortError;
     AbortError.prototype.name = "AbortError";
     var PassThrough$1 = import_stream.default.PassThrough;
-    var resolve_url = import_url.default.resolve;
+    var resolve_url = import_url2.default.resolve;
     function fetch(url, opts) {
       if (!fetch.Promise) {
         throw new Error("native promise missing, set fetch.Promise to your favorite alternative");
@@ -15213,7 +15353,7 @@ ${error.message}` : execaMessage;
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : {default: mod2};
     };
-    var events_12 = require("events");
+    var events_1 = require("events");
     var debug_12 = __importDefault2(require_src());
     var promisify_1 = __importDefault2(require_promisify());
     var debug32 = debug_12.default("agent-base");
@@ -15230,7 +15370,7 @@ ${error.message}` : execaMessage;
       return new createAgent.Agent(callback, opts);
     }
     (function(createAgent2) {
-      class Agent extends events_12.EventEmitter {
+      class Agent extends events_1.EventEmitter {
         constructor(callback, _opts) {
           super();
           let opts = _opts;
@@ -15476,9 +15616,9 @@ ${error.message}` : execaMessage;
       return mod2 && mod2.__esModule ? mod2 : {default: mod2};
     };
     Object.defineProperty(exports2, "__esModule", {value: true});
-    var net_12 = __importDefault2(require("net"));
+    var net_1 = __importDefault2(require("net"));
     var tls_1 = __importDefault2(require("tls"));
-    var url_12 = __importDefault2(require("url"));
+    var url_1 = __importDefault2(require("url"));
     var assert_1 = __importDefault2(require("assert"));
     var debug_12 = __importDefault2(require_src());
     var agent_base_1 = require_src2();
@@ -15488,7 +15628,7 @@ ${error.message}` : execaMessage;
       constructor(_opts) {
         let opts;
         if (typeof _opts === "string") {
-          opts = url_12.default.parse(_opts);
+          opts = url_1.default.parse(_opts);
         } else {
           opts = _opts;
         }
@@ -15524,7 +15664,7 @@ ${error.message}` : execaMessage;
             socket = tls_1.default.connect(proxy);
           } else {
             debug32("Creating `net.Socket`: %o", proxy);
-            socket = net_12.default.connect(proxy);
+            socket = net_1.default.connect(proxy);
           }
           const headers = Object.assign({}, proxy.headers);
           const hostname = `${opts.host}:${opts.port}`;
@@ -15563,7 +15703,7 @@ ${error.message}` : execaMessage;
             return socket;
           }
           socket.destroy();
-          const fakeSocket = new net_12.default.Socket();
+          const fakeSocket = new net_1.default.Socket();
           fakeSocket.readable = true;
           req.once("socket", (s) => {
             debug32("replaying proxy buffer for failed request");
@@ -15685,9 +15825,9 @@ ${error.message}` : execaMessage;
       return mod2 && mod2.__esModule ? mod2 : {default: mod2};
     };
     Object.defineProperty(exports2, "__esModule", {value: true});
-    var net_12 = __importDefault2(require("net"));
+    var net_1 = __importDefault2(require("net"));
     var tls_1 = __importDefault2(require("tls"));
-    var url_12 = __importDefault2(require("url"));
+    var url_1 = __importDefault2(require("url"));
     var debug_12 = __importDefault2(require_src());
     var once_1 = __importDefault2(require_dist4());
     var agent_base_1 = require_src2();
@@ -15699,7 +15839,7 @@ ${error.message}` : execaMessage;
       constructor(_opts) {
         let opts;
         if (typeof _opts === "string") {
-          opts = url_12.default.parse(_opts);
+          opts = url_1.default.parse(_opts);
         } else {
           opts = _opts;
         }
@@ -15726,7 +15866,7 @@ ${error.message}` : execaMessage;
       callback(req, opts) {
         return __awaiter(this, void 0, void 0, function* () {
           const {proxy, secureProxy} = this;
-          const parsed = url_12.default.parse(req.path);
+          const parsed = url_1.default.parse(req.path);
           if (!parsed.protocol) {
             parsed.protocol = "http:";
           }
@@ -15739,7 +15879,7 @@ ${error.message}` : execaMessage;
           if (parsed.port === "80") {
             delete parsed.port;
           }
-          req.path = url_12.default.format(parsed);
+          req.path = url_1.default.format(parsed);
           if (proxy.auth) {
             req.setHeader("Proxy-Authorization", `Basic ${Buffer.from(proxy.auth).toString("base64")}`);
           }
@@ -15749,7 +15889,7 @@ ${error.message}` : execaMessage;
             socket = tls_1.default.connect(proxy);
           } else {
             debug32("Creating `net.Socket`: %o", proxy);
-            socket = net_12.default.connect(proxy);
+            socket = net_1.default.connect(proxy);
           }
           if (req._header) {
             let first;
@@ -15802,7 +15942,7 @@ ${error.message}` : execaMessage;
     exports2.getProxyAgent = void 0;
     var https_proxy_agent_1 = __importDefault2(require_dist3());
     var http_proxy_agent_1 = __importDefault2(require_dist5());
-    var url_12 = __importDefault2(require("url"));
+    var url_1 = __importDefault2(require("url"));
     function formatHostname(hostname) {
       return hostname.replace(/^\.*/, ".").toLowerCase();
     }
@@ -15844,7 +15984,7 @@ ${error.message}` : execaMessage;
       return null;
     }
     function getProxyAgent(url) {
-      const uri = url_12.default.parse(url);
+      const uri = url_1.default.parse(url);
       const proxy = getProxyFromURI(uri);
       if (!proxy) {
         return void 0;
@@ -19754,7 +19894,7 @@ ${error.message}` : execaMessage;
   var require_async3 = __commonJS((exports2) => {
     "use strict";
     Object.defineProperty(exports2, "__esModule", {value: true});
-    var events_12 = require("events");
+    var events_1 = require("events");
     var fsScandir = require_out2();
     var fastq = require_queue();
     var common = require_common5();
@@ -19764,7 +19904,7 @@ ${error.message}` : execaMessage;
         super(_root, _settings);
         this._settings = _settings;
         this._scandir = fsScandir.scandir;
-        this._emitter = new events_12.EventEmitter();
+        this._emitter = new events_1.EventEmitter();
         this._queue = fastq(this._worker.bind(this), this._settings.concurrency);
         this._isFatalError = false;
         this._isDestroyed = false;
@@ -22321,7 +22461,7 @@ ${error.message}` : execaMessage;
     Object.defineProperty(exports2, "__esModule", {value: true});
     exports2.downloadZip = void 0;
     var zlib_1 = __importDefault2(require("zlib"));
-    var p_retry_12 = __importDefault2(require_p_retry());
+    var p_retry_1 = __importDefault2(require_p_retry());
     var node_fetch_1 = __importDefault2(require_lib());
     var fs_12 = __importDefault2(require("fs"));
     var getProxyAgent_1 = require_getProxyAgent();
@@ -22348,7 +22488,7 @@ ${error.message}` : execaMessage;
       const tmpDir = tempy_1.default.directory();
       const partial = path_12.default.join(tmpDir, "partial");
       const {sha256, zippedSha256} = await fetchSha256(url);
-      const result = await p_retry_12.default(async () => {
+      const result = await p_retry_1.default(async () => {
         try {
           const resp = await node_fetch_1.default(url, {
             compress: false,
@@ -23185,7 +23325,7 @@ ${error.message}` : execaMessage;
   import_path.default.join(__dirname, "../query_engine-windows.dll.node");
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
 var require_getNodeAPIName2 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -23206,20 +23346,20 @@ var require_getNodeAPIName2 = __commonJS2((exports2) => {
   exports2.getNodeAPIName = getNodeAPIName;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb/node_modules/@prisma/get-platform/dist/getPlatform.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/getPlatform.js
 var require_getPlatform2 = __commonJS2((exports2) => {
   "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
+  var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.getPlatform = exports2.getOpenSSLVersion = exports2.parseOpenSSLVersion = exports2.resolveDistro = exports2.parseDistro = exports2.getos = void 0;
-  var child_process_12 = require("child_process");
-  var fs_12 = __importDefault2(require("fs"));
-  var os_1 = __importDefault2(require("os"));
-  var util_12 = require("util");
-  var readFile = util_12.promisify(fs_12.default.readFile);
-  var exists2 = util_12.promisify(fs_12.default.exists);
+  var child_process_1 = require("child_process");
+  var fs_1 = __importDefault(require("fs"));
+  var os_1 = __importDefault(require("os"));
+  var util_1 = require("util");
+  var readFile = util_1.promisify(fs_1.default.readFile);
+  var exists2 = util_1.promisify(fs_1.default.exists);
   async function getos() {
     const platform = os_1.default.platform();
     const arch = process.arch;
@@ -23319,7 +23459,7 @@ var require_getPlatform2 = __commonJS2((exports2) => {
   async function gracefulExec(cmd) {
     return new Promise((resolve) => {
       try {
-        child_process_12.exec(cmd, (err, stdout) => {
+        child_process_1.exec(cmd, (err, stdout) => {
           resolve(String(stdout));
         });
       } catch (e) {
@@ -23371,19 +23511,19 @@ var require_getPlatform2 = __commonJS2((exports2) => {
   exports2.getPlatform = getPlatform;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
 var require_isNodeAPISupported2 = __commonJS2((exports2) => {
   "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
+  var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
     return mod2 && mod2.__esModule ? mod2 : {default: mod2};
   };
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.isNodeAPISupported = void 0;
-  var fs_12 = __importDefault2(require("fs"));
+  var fs_1 = __importDefault(require("fs"));
   var _1 = require_dist10();
   async function isNodeAPISupported() {
     const customLibraryPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
-    const customLibraryExists = customLibraryPath && fs_12.default.existsSync(customLibraryPath);
+    const customLibraryExists = customLibraryPath && fs_1.default.existsSync(customLibraryPath);
     const os = await _1.getos();
     if (!customLibraryExists && (os.arch === "x32" || os.arch === "ia32")) {
       throw new Error(`Node-API is currently not supported for 32bit Node. Please remove \`nApi\` from the "previewFeatures" attribute in the "generator" block of the "schema.prisma", or remove the "PRISMA_FORCE_NAPI" environment variable.`);
@@ -23392,7 +23532,7 @@ var require_isNodeAPISupported2 = __commonJS2((exports2) => {
   exports2.isNodeAPISupported = isNodeAPISupported;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb/node_modules/@prisma/get-platform/dist/platforms.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/platforms.js
 var require_platforms2 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -23417,7 +23557,7 @@ var require_platforms2 = __commonJS2((exports2) => {
   ];
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb/node_modules/@prisma/get-platform/dist/index.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/index.js
 var require_dist10 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -23443,19 +23583,518 @@ var require_dist10 = __commonJS2((exports2) => {
   }});
 });
 
-// ../engine-core/dist/printGeneratorConfig.js
-var require_printGeneratorConfig = __commonJS2((exports2) => {
+// ../../node_modules/.pnpm/ansi-escapes@4.3.2/node_modules/ansi-escapes/index.js
+var require_ansi_escapes = __commonJS2((exports2, module2) => {
   "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var ansiEscapes = module2.exports;
+  module2.exports.default = ansiEscapes;
+  var ESC = "[";
+  var OSC = "]";
+  var BEL = "\x07";
+  var SEP = ";";
+  var isTerminalApp = process.env.TERM_PROGRAM === "Apple_Terminal";
+  ansiEscapes.cursorTo = (x, y) => {
+    if (typeof x !== "number") {
+      throw new TypeError("The `x` argument is required");
+    }
+    if (typeof y !== "number") {
+      return ESC + (x + 1) + "G";
+    }
+    return ESC + (y + 1) + ";" + (x + 1) + "H";
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.printDatamodelObject = exports2.getOriginalBinaryTargetsValue = exports2.GeneratorConfigClass = exports2.printGeneratorConfig = void 0;
-  var indent_string_1 = __importDefault2(require_indent_string2());
-  function printGeneratorConfig(config2) {
+  ansiEscapes.cursorMove = (x, y) => {
+    if (typeof x !== "number") {
+      throw new TypeError("The `x` argument is required");
+    }
+    let ret = "";
+    if (x < 0) {
+      ret += ESC + -x + "D";
+    } else if (x > 0) {
+      ret += ESC + x + "C";
+    }
+    if (y < 0) {
+      ret += ESC + -y + "A";
+    } else if (y > 0) {
+      ret += ESC + y + "B";
+    }
+    return ret;
+  };
+  ansiEscapes.cursorUp = (count = 1) => ESC + count + "A";
+  ansiEscapes.cursorDown = (count = 1) => ESC + count + "B";
+  ansiEscapes.cursorForward = (count = 1) => ESC + count + "C";
+  ansiEscapes.cursorBackward = (count = 1) => ESC + count + "D";
+  ansiEscapes.cursorLeft = ESC + "G";
+  ansiEscapes.cursorSavePosition = isTerminalApp ? "7" : ESC + "s";
+  ansiEscapes.cursorRestorePosition = isTerminalApp ? "8" : ESC + "u";
+  ansiEscapes.cursorGetPosition = ESC + "6n";
+  ansiEscapes.cursorNextLine = ESC + "E";
+  ansiEscapes.cursorPrevLine = ESC + "F";
+  ansiEscapes.cursorHide = ESC + "?25l";
+  ansiEscapes.cursorShow = ESC + "?25h";
+  ansiEscapes.eraseLines = (count) => {
+    let clear = "";
+    for (let i = 0; i < count; i++) {
+      clear += ansiEscapes.eraseLine + (i < count - 1 ? ansiEscapes.cursorUp() : "");
+    }
+    if (count) {
+      clear += ansiEscapes.cursorLeft;
+    }
+    return clear;
+  };
+  ansiEscapes.eraseEndLine = ESC + "K";
+  ansiEscapes.eraseStartLine = ESC + "1K";
+  ansiEscapes.eraseLine = ESC + "2K";
+  ansiEscapes.eraseDown = ESC + "J";
+  ansiEscapes.eraseUp = ESC + "1J";
+  ansiEscapes.eraseScreen = ESC + "2J";
+  ansiEscapes.scrollUp = ESC + "S";
+  ansiEscapes.scrollDown = ESC + "T";
+  ansiEscapes.clearScreen = "c";
+  ansiEscapes.clearTerminal = process.platform === "win32" ? `${ansiEscapes.eraseScreen}${ESC}0f` : `${ansiEscapes.eraseScreen}${ESC}3J${ESC}H`;
+  ansiEscapes.beep = BEL;
+  ansiEscapes.link = (text, url) => {
+    return [
+      OSC,
+      "8",
+      SEP,
+      SEP,
+      url,
+      BEL,
+      text,
+      OSC,
+      "8",
+      SEP,
+      SEP,
+      BEL
+    ].join("");
+  };
+  ansiEscapes.image = (buffer, options = {}) => {
+    let ret = `${OSC}1337;File=inline=1`;
+    if (options.width) {
+      ret += `;width=${options.width}`;
+    }
+    if (options.height) {
+      ret += `;height=${options.height}`;
+    }
+    if (options.preserveAspectRatio === false) {
+      ret += ";preserveAspectRatio=0";
+    }
+    return ret + ":" + buffer.toString("base64") + BEL;
+  };
+  ansiEscapes.iTerm = {
+    setCwd: (cwd = process.cwd()) => `${OSC}50;CurrentDir=${cwd}${BEL}`,
+    annotation: (message, options = {}) => {
+      let ret = `${OSC}1337;`;
+      const hasX = typeof options.x !== "undefined";
+      const hasY = typeof options.y !== "undefined";
+      if ((hasX || hasY) && !(hasX && hasY && typeof options.length !== "undefined")) {
+        throw new Error("`x`, `y` and `length` must be defined when `x` or `y` is defined");
+      }
+      message = message.replace(/\|/g, "");
+      ret += options.isHidden ? "AddHiddenAnnotation=" : "AddAnnotation=";
+      if (options.length > 0) {
+        ret += (hasX ? [message, options.length, options.x, options.y] : [options.length, message]).join("|");
+      } else {
+        ret += message;
+      }
+      return ret + BEL;
+    }
+  };
+});
+
+// ../../node_modules/.pnpm/supports-hyperlinks@2.2.0/node_modules/supports-hyperlinks/index.js
+var require_supports_hyperlinks = __commonJS2((exports2, module2) => {
+  "use strict";
+  var supportsColor = require_supports_color2();
+  var hasFlag = require_has_flag2();
+  function parseVersion(versionString) {
+    if (/^\d{3,4}$/.test(versionString)) {
+      const m = /(\d{1,2})(\d{2})/.exec(versionString);
+      return {
+        major: 0,
+        minor: parseInt(m[1], 10),
+        patch: parseInt(m[2], 10)
+      };
+    }
+    const versions = (versionString || "").split(".").map((n) => parseInt(n, 10));
+    return {
+      major: versions[0],
+      minor: versions[1],
+      patch: versions[2]
+    };
+  }
+  function supportsHyperlink(stream) {
+    const {env} = process;
+    if ("FORCE_HYPERLINK" in env) {
+      return !(env.FORCE_HYPERLINK.length > 0 && parseInt(env.FORCE_HYPERLINK, 10) === 0);
+    }
+    if (hasFlag("no-hyperlink") || hasFlag("no-hyperlinks") || hasFlag("hyperlink=false") || hasFlag("hyperlink=never")) {
+      return false;
+    }
+    if (hasFlag("hyperlink=true") || hasFlag("hyperlink=always")) {
+      return true;
+    }
+    if (!supportsColor.supportsColor(stream)) {
+      return false;
+    }
+    if (stream && !stream.isTTY) {
+      return false;
+    }
+    if (process.platform === "win32") {
+      return false;
+    }
+    if ("NETLIFY" in env) {
+      return true;
+    }
+    if ("CI" in env) {
+      return false;
+    }
+    if ("TEAMCITY_VERSION" in env) {
+      return false;
+    }
+    if ("TERM_PROGRAM" in env) {
+      const version = parseVersion(env.TERM_PROGRAM_VERSION);
+      switch (env.TERM_PROGRAM) {
+        case "iTerm.app":
+          if (version.major === 3) {
+            return version.minor >= 1;
+          }
+          return version.major > 3;
+      }
+    }
+    if ("VTE_VERSION" in env) {
+      if (env.VTE_VERSION === "0.50.0") {
+        return false;
+      }
+      const version = parseVersion(env.VTE_VERSION);
+      return version.major > 0 || version.minor >= 50;
+    }
+    return false;
+  }
+  module2.exports = {
+    supportsHyperlink,
+    stdout: supportsHyperlink(process.stdout),
+    stderr: supportsHyperlink(process.stderr)
+  };
+});
+
+// ../../node_modules/.pnpm/terminal-link@2.1.1/node_modules/terminal-link/index.js
+var require_terminal_link = __commonJS2((exports2, module2) => {
+  "use strict";
+  var ansiEscapes = require_ansi_escapes();
+  var supportsHyperlinks = require_supports_hyperlinks();
+  var terminalLink = (text, url, {target = "stdout", ...options} = {}) => {
+    if (!supportsHyperlinks[target]) {
+      if (options.fallback === false) {
+        return text;
+      }
+      return typeof options.fallback === "function" ? options.fallback(text, url) : `${text} (\u200B${url}\u200B)`;
+    }
+    return ansiEscapes.link(text, url);
+  };
+  module2.exports = (text, url, options = {}) => terminalLink(text, url, options);
+  module2.exports.stderr = (text, url, options = {}) => terminalLink(text, url, {target: "stderr", ...options});
+  module2.exports.isSupported = supportsHyperlinks.stdout;
+  module2.exports.stderr.isSupported = supportsHyperlinks.stderr;
+});
+
+// ../../node_modules/.pnpm/new-github-issue-url@0.2.1/node_modules/new-github-issue-url/index.js
+var require_new_github_issue_url = __commonJS2((exports2, module2) => {
+  "use strict";
+  module2.exports = (options = {}) => {
+    let repoUrl;
+    if (options.repoUrl) {
+      repoUrl = options.repoUrl;
+    } else if (options.user && options.repo) {
+      repoUrl = `https://github.com/${options.user}/${options.repo}`;
+    } else {
+      throw new Error("You need to specify either the `repoUrl` option or both the `user` and `repo` options");
+    }
+    const url = new URL(`${repoUrl}/issues/new`);
+    const types = [
+      "body",
+      "title",
+      "labels",
+      "template",
+      "milestone",
+      "assignee",
+      "projects"
+    ];
+    for (const type of types) {
+      let value = options[type];
+      if (value === void 0) {
+        continue;
+      }
+      if (type === "labels" || type === "projects") {
+        if (!Array.isArray(value)) {
+          throw new TypeError(`The \`${type}\` option should be an array`);
+        }
+        value = value.join(",");
+      }
+      url.searchParams.set(type, value);
+    }
+    return url.toString();
+  };
+  module2.exports.default = module2.exports;
+});
+
+// ../engine-core/dist/common/utils/util.js
+var require_util4 = __commonJS2((exports2) => {
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    fixBinaryTargets: () => fixBinaryTargets2,
+    getGithubIssueUrl: () => getGithubIssueUrl,
+    getRandomString: () => getRandomString,
+    link: () => link,
+    plusX: () => plusX2
+  });
+  var import_fs4 = __toModule3(require("fs"));
+  var import_terminal_link = __toModule3(require_terminal_link());
+  var import_new_github_issue_url = __toModule3(require_new_github_issue_url());
+  var import_chalk7 = __toModule3(require_source2());
+  var import_debug5 = __toModule3(require_dist7());
+  var import_crypto = __toModule3(require("crypto"));
+  var debug6 = (0, import_debug5.default)("plusX");
+  function plusX2(file) {
+    const s = import_fs4.default.statSync(file);
+    const newMode = s.mode | 64 | 8 | 1;
+    if (s.mode === newMode) {
+      debug6(`Execution permissions of ${file} are fine`);
+      return;
+    }
+    const base8 = newMode.toString(8).slice(-3);
+    debug6(`Have to call plusX on ${file}`);
+    import_fs4.default.chmodSync(file, base8);
+  }
+  function transformPlatformToEnvValue(platform) {
+    return {fromEnvVar: null, value: platform};
+  }
+  function fixBinaryTargets2(binaryTargets, platform) {
+    binaryTargets = binaryTargets || [];
+    if (!binaryTargets.find((object) => object.value === "native")) {
+      return [transformPlatformToEnvValue("native"), ...binaryTargets];
+    }
+    return [...binaryTargets, transformPlatformToEnvValue(platform)];
+  }
+  function link(url) {
+    return (0, import_terminal_link.default)(url, url, {
+      fallback: (url2) => import_chalk7.default.underline(url2)
+    });
+  }
+  function getGithubIssueUrl({
+    title,
+    user = "prisma",
+    repo = "prisma",
+    template = "bug_report.md",
+    body
+  }) {
+    return (0, import_new_github_issue_url.default)({
+      user,
+      repo,
+      template,
+      title,
+      body
+    });
+  }
+  function getRandomString() {
+    return import_crypto.default.randomBytes(12).toString("hex");
+  }
+});
+
+// ../engine-core/dist/common/errors/utils/maskQuery.js
+var require_maskQuery = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    maskQuery: () => maskQuery
+  });
+  function maskQuery(query) {
+    if (!query) {
+      return "";
+    }
+    return query.replace(/".*"/g, '"X"').replace(/[\s:\[]([+-]?([0-9]*[.])?[0-9]+)/g, (substr) => {
+      return `${substr[0]}5`;
+    });
+  }
+});
+
+// ../engine-core/dist/common/errors/utils/normalizeLogs.js
+var require_normalizeLogs = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    normalizeLogs: () => normalizeLogs
+  });
+  function normalizeLogs(logs) {
+    return logs.split("\n").map((l) => {
+      return l.replace(/^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)\s*/, "").replace(/\+\d+\s*ms$/, "");
+    }).join("\n");
+  }
+});
+
+// ../engine-core/dist/common/errors/utils/getErrorMessageWithLink.js
+var require_getErrorMessageWithLink = __commonJS2((exports2) => {
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    getErrorMessageWithLink: () => getErrorMessageWithLink
+  });
+  var import_debug5 = __toModule3(require_dist7());
+  var import_util4 = __toModule3(require_util4());
+  var import_strip_ansi5 = __toModule3(require_strip_ansi());
+  var import_maskQuery = __toModule3(require_maskQuery());
+  var import_normalizeLogs = __toModule3(require_normalizeLogs());
+  function getErrorMessageWithLink({
+    version,
+    platform,
+    title,
+    description,
+    engineVersion,
+    database,
+    query
+  }) {
+    var _a, _b;
+    const gotLogs = (0, import_debug5.getLogs)(6e3 - ((_a = query == null ? void 0 : query.length) != null ? _a : 0));
+    const logs = (0, import_normalizeLogs.normalizeLogs)((0, import_strip_ansi5.default)(gotLogs));
+    const moreInfo = description ? `# Description
+\`\`\`
+${description}
+\`\`\`` : "";
+    const body = (0, import_strip_ansi5.default)(`Hi Prisma Team! My Prisma Client just crashed. This is the report:
+## Versions
+
+| Name            | Version            |
+|-----------------|--------------------|
+| Node            | ${(_b = process.version) == null ? void 0 : _b.padEnd(19)}| 
+| OS              | ${platform == null ? void 0 : platform.padEnd(19)}|
+| Prisma Client   | ${version == null ? void 0 : version.padEnd(19)}|
+| Query Engine    | ${engineVersion == null ? void 0 : engineVersion.padEnd(19)}|
+| Database        | ${database == null ? void 0 : database.padEnd(19)}|
+
+${moreInfo}
+
+## Query
+\`\`\`
+${query ? (0, import_maskQuery.maskQuery)(query) : ""}
+\`\`\`
+
+## Logs
+\`\`\`
+${logs}
+\`\`\`
+
+## Client Snippet
+\`\`\`ts
+// PLEASE FILL YOUR CODE SNIPPET HERE
+\`\`\`
+
+## Schema
+\`\`\`prisma
+// PLEASE ADD YOUR SCHEMA HERE IF POSSIBLE
+\`\`\`
+`);
+    const url = (0, import_util4.getGithubIssueUrl)({title, body});
+    return `${title}
+
+This is a non-recoverable error which probably happens when the Prisma Query Engine has a panic.
+
+${(0, import_util4.link)(url)}
+
+If you want the Prisma team to look into it, please open the link above \u{1F64F}
+To increase the chance of success, please post your schema and a snippet of
+how you used Prisma Client in the issue. 
+`;
+  }
+});
+
+// ../engine-core/dist/common/utils/printGeneratorConfig.js
+var require_printGeneratorConfig = __commonJS2((exports2) => {
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    GeneratorConfigClass: () => GeneratorConfigClass,
+    getOriginalBinaryTargetsValue: () => getOriginalBinaryTargetsValue2,
+    printDatamodelObject: () => printDatamodelObject,
+    printGeneratorConfig: () => printGeneratorConfig2
+  });
+  var import_indent_string3 = __toModule3(require_indent_string2());
+  function printGeneratorConfig2(config2) {
     return String(new GeneratorConfigClass(config2));
   }
-  exports2.printGeneratorConfig = printGeneratorConfig;
   var GeneratorConfigClass = class {
     constructor(config2) {
       this.config = config2;
@@ -23465,15 +24104,14 @@ var require_printGeneratorConfig = __commonJS2((exports2) => {
       const provider = config2.provider.fromEnvVar ? `env("${config2.provider.fromEnvVar}")` : config2.provider.value;
       const obj = JSON.parse(JSON.stringify({
         provider,
-        binaryTargets: getOriginalBinaryTargetsValue(config2.binaryTargets)
+        binaryTargets: getOriginalBinaryTargetsValue2(config2.binaryTargets)
       }));
       return `generator ${config2.name} {
-${indent_string_1.default(printDatamodelObject(obj), 2)}
+${(0, import_indent_string3.default)(printDatamodelObject(obj), 2)}
 }`;
     }
   };
-  exports2.GeneratorConfigClass = GeneratorConfigClass;
-  function getOriginalBinaryTargetsValue(binaryTargets) {
+  function getOriginalBinaryTargetsValue2(binaryTargets) {
     let value;
     if (binaryTargets.length > 0) {
       const binaryTargetsFromEnvVar = binaryTargets.find((object) => object.fromEnvVar !== null);
@@ -23487,12 +24125,10 @@ ${indent_string_1.default(printDatamodelObject(obj), 2)}
     }
     return value;
   }
-  exports2.getOriginalBinaryTargetsValue = getOriginalBinaryTargetsValue;
   function printDatamodelObject(obj) {
     const maxLength = Object.keys(obj).reduce((max2, curr) => Math.max(max2, curr.length), 0);
     return Object.entries(obj).map(([key, value]) => `${key.padEnd(maxLength)} = ${niceStringify(value)}`).join("\n");
   }
-  exports2.printDatamodelObject = printDatamodelObject;
   function niceStringify(value) {
     return JSON.parse(JSON.stringify(value, (_, value2) => {
       if (Array.isArray(value2)) {
@@ -23503,41 +24139,67 @@ ${indent_string_1.default(printDatamodelObject(obj), 2)}
   }
 });
 
-// ../engine-core/dist/LibraryEngine.js
+// ../engine-core/dist/library/LibraryEngine.js
 var require_LibraryEngine = __commonJS2((exports, module) => {
-  "use strict";
-  var __importDefault = exports && exports.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __markAsModule = (target) => __defProp(target, "__esModule", {value: true});
+  var __export = (target, all) => {
+    __markAsModule(target);
+    for (var name in all)
+      __defProp(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports, "__esModule", {value: true});
-  exports.LibraryEngine = void 0;
-  var debug_1 = __importDefault(require_dist7());
-  var engines_1 = require_dist9();
-  var get_platform_1 = require_dist10();
-  var chalk_1 = __importDefault(require_source2());
-  var events_1 = __importDefault(require("events"));
-  var fs_1 = __importDefault(require("fs"));
-  var path_1 = __importDefault(require("path"));
-  var errors_1 = require_errors();
-  var printGeneratorConfig_1 = require_printGeneratorConfig();
-  var util_1 = require_util4();
-  var debug = debug_1.default("prisma:client:libraryEngine");
+  var __reExport = (target, module2, desc) => {
+    if (module2 && typeof module2 === "object" || typeof module2 === "function") {
+      for (let key of __getOwnPropNames(module2))
+        if (!__hasOwnProp.call(target, key) && key !== "default")
+          __defProp(target, key, {get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule = (module2) => {
+    return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? {get: () => module2.default, enumerable: true} : {value: module2, enumerable: true})), module2);
+  };
+  __export(exports, {
+    LibraryEngine: () => LibraryEngine
+  });
+  var import_debug = __toModule(require_dist7());
+  var import_engines = __toModule(require_dist9());
+  var import_get_platform = __toModule(require_dist10());
+  var import_chalk = __toModule(require_source2());
+  var import_events = __toModule(require("events"));
+  var import_fs = __toModule(require("fs"));
+  var import_path = __toModule(require("path"));
+  var import_Engine = __toModule(require_Engine());
+  var import_PrismaClientKnownRequestError = __toModule(require_PrismaClientKnownRequestError());
+  var import_PrismaClientInitializationError = __toModule(require_PrismaClientInitializationError());
+  var import_PrismaClientRustPanicError = __toModule(require_PrismaClientRustPanicError());
+  var import_PrismaClientUnknownRequestError = __toModule(require_PrismaClientUnknownRequestError());
+  var import_getErrorMessageWithLink = __toModule(require_getErrorMessageWithLink());
+  var import_printGeneratorConfig = __toModule(require_printGeneratorConfig());
+  var import_util = __toModule(require_util4());
+  var debug = (0, import_debug.default)("prisma:client:libraryEngine");
   function isQueryEvent(event) {
     return event["item_type"] === "query" && "query" in event;
   }
   function isPanicEvent(event) {
     return event.level === "error" && event["message"] === "PANIC";
   }
-  var knownPlatforms = [...get_platform_1.platforms, "native"];
-  var LibraryEngine = class {
+  var knownPlatforms = [...import_get_platform.platforms, "native"];
+  var LibraryEngine = class extends import_Engine.Engine {
     constructor(config2) {
+      super();
       var _a, _b;
-      this.datamodel = fs_1.default.readFileSync(config2.datamodelPath, "utf-8");
+      this.datamodel = import_fs.default.readFileSync(config2.datamodelPath, "utf-8");
       this.config = config2;
       this.libraryStarted = false;
-      this.logQueries = (_a = config2.logQueries) !== null && _a !== void 0 ? _a : false;
-      this.logLevel = (_b = config2.logLevel) !== null && _b !== void 0 ? _b : "error";
-      this.logEmitter = new events_1.default();
+      this.logQueries = (_a = config2.logQueries) != null ? _a : false;
+      this.logLevel = (_b = config2.logLevel) != null ? _b : "error";
+      this.logEmitter = new import_events.default();
       this.logEmitter.on("error", (e) => {
       });
       this.datasourceOverrides = config2.datasources ? this.convertDatasources(config2.datasources) : {};
@@ -23547,12 +24209,29 @@ var require_LibraryEngine = __commonJS2((exports, module) => {
       this.libraryInstantiationPromise = this.instantiateLibrary();
       initHooks(this);
     }
+    async transaction(action, arg) {
+      var _a, _b, _c, _d, _e;
+      await this.start();
+      if (action === "start") {
+        const jsonOptions = JSON.stringify({
+          max_wait: (_a = arg == null ? void 0 : arg.maxWait) != null ? _a : 2e3,
+          timeout: (_b = arg == null ? void 0 : arg.timeout) != null ? _b : 5e3
+        });
+        const result = await ((_c = this.engine) == null ? void 0 : _c.startTransaction(jsonOptions, "{}"));
+        return this.parseEngineResponse(result);
+      } else if (action === "commit") {
+        await ((_d = this.engine) == null ? void 0 : _d.commitTransaction(arg.id, "{}"));
+      } else if (action === "rollback") {
+        await ((_e = this.engine) == null ? void 0 : _e.rollbackTransaction(arg.id, "{}"));
+      }
+      return void 0;
+    }
     async instantiateLibrary() {
       debug("internalSetup");
       if (this.libraryInstantiationPromise) {
         return this.libraryInstantiationPromise;
       }
-      await get_platform_1.isNodeAPISupported();
+      await (0, import_get_platform.isNodeAPISupported)();
       this.platform = await this.getPlatform();
       await this.loadEngine();
       this.version();
@@ -23560,22 +24239,22 @@ var require_LibraryEngine = __commonJS2((exports, module) => {
     async getPlatform() {
       if (this.platform)
         return this.platform;
-      const platform = await get_platform_1.getPlatform();
+      const platform = await (0, import_get_platform.getPlatform)();
       if (!knownPlatforms.includes(platform)) {
-        throw new errors_1.PrismaClientInitializationError(`Unknown ${chalk_1.default.red("PRISMA_QUERY_ENGINE_LIBRARY")} ${chalk_1.default.redBright.bold(this.platform)}. Possible binaryTargets: ${chalk_1.default.greenBright(knownPlatforms.join(", "))} or a path to the query engine library.
-You may have to run ${chalk_1.default.greenBright("prisma generate")} for your changes to take effect.`, this.config.clientVersion);
+        throw new import_PrismaClientInitializationError.PrismaClientInitializationError(`Unknown ${import_chalk.default.red("PRISMA_QUERY_ENGINE_LIBRARY")} ${import_chalk.default.redBright.bold(this.platform)}. Possible binaryTargets: ${import_chalk.default.greenBright(knownPlatforms.join(", "))} or a path to the query engine library.
+You may have to run ${import_chalk.default.greenBright("prisma generate")} for your changes to take effect.`, this.config.clientVersion);
       }
       return platform;
     }
     parseEngineResponse(response) {
       if (!response) {
-        throw new errors_1.PrismaClientUnknownRequestError(`Response from the Engine was empty`, this.config.clientVersion);
+        throw new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(`Response from the Engine was empty`, this.config.clientVersion);
       }
       try {
         const config2 = JSON.parse(response);
         return config2;
       } catch (err) {
-        throw new errors_1.PrismaClientUnknownRequestError(`Unable to JSON.parse response from engine`, this.config.clientVersion);
+        throw new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(`Unable to JSON.parse response from engine`, this.config.clientVersion);
       }
     }
     convertDatasources(datasources) {
@@ -23597,14 +24276,14 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
             this.library = eval("require")(this.libQueryEnginePath);
             this.QueryEngineConstructor = this.library.QueryEngine;
           } catch (e) {
-            if (fs_1.default.existsSync(this.libQueryEnginePath)) {
+            if (import_fs.default.existsSync(this.libQueryEnginePath)) {
               if (this.libQueryEnginePath.endsWith(".node")) {
-                throw new errors_1.PrismaClientInitializationError(`Unable to load Node-API Library from ${chalk_1.default.dim(this.libQueryEnginePath)}, Library may be corrupt`, this.config.clientVersion);
+                throw new import_PrismaClientInitializationError.PrismaClientInitializationError(`Unable to load Node-API Library from ${import_chalk.default.dim(this.libQueryEnginePath)}, Library may be corrupt`, this.config.clientVersion);
               } else {
-                throw new errors_1.PrismaClientInitializationError(`Expected an Node-API Library but received ${chalk_1.default.dim(this.libQueryEnginePath)}`, this.config.clientVersion);
+                throw new import_PrismaClientInitializationError.PrismaClientInitializationError(`Expected an Node-API Library but received ${import_chalk.default.dim(this.libQueryEnginePath)}`, this.config.clientVersion);
               }
             } else {
-              throw new errors_1.PrismaClientInitializationError(`Unable to load Node-API Library from ${chalk_1.default.dim(this.libQueryEnginePath)}, It does not exist`, this.config.clientVersion);
+              throw new import_PrismaClientInitializationError.PrismaClientInitializationError(`Unable to load Node-API Library from ${import_chalk.default.dim(this.libQueryEnginePath)}, It does not exist`, this.config.clientVersion);
             }
           }
         }
@@ -23613,7 +24292,7 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
             this.engine = new this.QueryEngineConstructor({
               datamodel: this.datamodel,
               env: process.env,
-              logQueries: (_a = this.config.logQueries) !== null && _a !== void 0 ? _a : false,
+              logQueries: (_a = this.config.logQueries) != null ? _a : false,
               ignoreEnvVarErrors: false,
               datasourceOverrides: this.datasourceOverrides,
               logLevel: this.logLevel,
@@ -23624,7 +24303,7 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
             if (typeof error === "string") {
               throw e;
             } else {
-              throw new errors_1.PrismaClientInitializationError(error.message, this.config.clientVersion, error.error_code);
+              throw new import_PrismaClientInitializationError.PrismaClientInitializationError(error.message, this.config.clientVersion, error.error_code);
             }
           }
         }
@@ -23638,7 +24317,7 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
       const event = this.parseEngineResponse(log4);
       if (!event)
         return;
-      event.level = (_a = event === null || event === void 0 ? void 0 : event.level.toLowerCase()) !== null && _a !== void 0 ? _a : "unknown";
+      event.level = (_a = event == null ? void 0 : event.level.toLowerCase()) != null ? _a : "unknown";
       if (isQueryEvent(event)) {
         this.logEmitter.emit("query", {
           timestamp: Date.now(),
@@ -23648,7 +24327,7 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
           target: event.module_path
         });
       } else if (isPanicEvent(event)) {
-        this.loggerRustPanic = new errors_1.PrismaClientRustPanicError(this.getErrorMessageWithLink(`${event.message}: ${event.reason} in ${event.file}:${event.line}:${event.column}`), this.config.clientVersion);
+        this.loggerRustPanic = new import_PrismaClientRustPanicError.PrismaClientRustPanicError(this.getErrorMessageWithLink(`${event.message}: ${event.reason} in ${event.file}:${event.line}:${event.column}`), this.config.clientVersion);
         this.logEmitter.emit("error", this.loggerRustPanic);
       } else {
         this.logEmitter.emit(event.level, event);
@@ -23656,11 +24335,11 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
     }
     getErrorMessageWithLink(title) {
       var _a;
-      return errors_1.getErrorMessageWithLink({
+      return (0, import_getErrorMessageWithLink.getErrorMessageWithLink)({
         platform: this.platform,
         title,
         version: this.config.clientVersion,
-        engineVersion: (_a = this.versionInfo) === null || _a === void 0 ? void 0 : _a.version,
+        engineVersion: (_a = this.versionInfo) == null ? void 0 : _a.version,
         database: this.config.activeProvider,
         query: this.lastQuery
       });
@@ -23716,7 +24395,7 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         this.libraryStartingPromise = new Promise(async (res) => {
           var _a;
           debug("library starting");
-          await ((_a = this.engine) === null || _a === void 0 ? void 0 : _a.connect({enableRawQueries: true}));
+          await ((_a = this.engine) == null ? void 0 : _a.connect({enableRawQueries: true}));
           this.libraryStarted = true;
           debug("library started");
           res();
@@ -23741,7 +24420,7 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
           var _a;
           await new Promise((r) => setTimeout(r, 5));
           debug("library stopping");
-          await ((_a = this.engine) === null || _a === void 0 ? void 0 : _a.disconnect());
+          await ((_a = this.engine) == null ? void 0 : _a.disconnect());
           this.libraryStarted = false;
           debug("library stopped");
           res();
@@ -23759,32 +24438,32 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
     }
     version() {
       var _a, _b, _c;
-      this.versionInfo = (_a = this.library) === null || _a === void 0 ? void 0 : _a.version();
-      return (_c = (_b = this.versionInfo) === null || _b === void 0 ? void 0 : _b.version) !== null && _c !== void 0 ? _c : "unknown";
+      this.versionInfo = (_a = this.library) == null ? void 0 : _a.version();
+      return (_c = (_b = this.versionInfo) == null ? void 0 : _b.version) != null ? _c : "unknown";
     }
     prismaGraphQLToJSError(error) {
       debug("graphQLToJSError");
       if (error.user_facing_error.error_code) {
-        return new errors_1.PrismaClientKnownRequestError(error.user_facing_error.message, error.user_facing_error.error_code, this.config.clientVersion, error.user_facing_error.meta);
+        return new import_PrismaClientKnownRequestError.PrismaClientKnownRequestError(error.user_facing_error.message, error.user_facing_error.error_code, this.config.clientVersion, error.user_facing_error.meta);
       }
-      return new errors_1.PrismaClientUnknownRequestError(error.error, this.config.clientVersion);
+      return new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(error.error, this.config.clientVersion);
     }
-    async request(query, headers, numTry) {
+    async request(query, headers = {}, numTry = 1) {
       var _a;
       try {
         debug(`sending request, this.libraryStarted: ${this.libraryStarted}`);
         const request = {query, variables: {}};
         const queryStr = JSON.stringify(request);
-        const headerStr = JSON.stringify({});
+        const headerStr = JSON.stringify(headers);
         await this.start();
-        this.executingQueryPromise = (_a = this.engine) === null || _a === void 0 ? void 0 : _a.query(queryStr, headerStr);
+        this.executingQueryPromise = (_a = this.engine) == null ? void 0 : _a.query(queryStr, headerStr, headers.transactionId);
         this.lastQuery = queryStr;
         const data = this.parseEngineResponse(await this.executingQueryPromise);
         if (data.errors) {
           if (data.errors.length === 1) {
             throw this.prismaGraphQLToJSError(data.errors[0]);
           }
-          throw new errors_1.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+          throw new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
         } else if (this.loggerRustPanic) {
           throw this.loggerRustPanic;
         }
@@ -23794,35 +24473,34 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         if (typeof error === "string") {
           throw e;
         } else {
-          throw new errors_1.PrismaClientUnknownRequestError(`${error.message}
+          throw new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(`${error.message}
 ${error.backtrace}`, this.config.clientVersion);
         }
       }
     }
-    async requestBatch(queries, transaction = false, numTry = 1) {
+    async requestBatch(queries, headers = {}, transaction = false, numTry = 1) {
       debug("requestBatch");
-      const headers = {};
       const request = {
         batch: queries.map((query) => ({query, variables: {}})),
         transaction
       };
       await this.start();
       this.lastQuery = JSON.stringify(request);
-      this.executingQueryPromise = this.engine.query(this.lastQuery, JSON.stringify(headers));
+      this.executingQueryPromise = this.engine.query(this.lastQuery, JSON.stringify(headers), headers.transactionId);
       const result = await this.executingQueryPromise;
       const data = this.parseEngineResponse(result);
       if (data.errors) {
         if (data.errors.length === 1) {
           throw this.prismaGraphQLToJSError(data.errors[0]);
         }
-        throw new errors_1.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+        throw new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
       }
       const {batchResult, errors} = data;
       if (Array.isArray(batchResult)) {
         return batchResult.map((result2) => {
           var _a;
           if (result2.errors) {
-            return (_a = this.loggerRustPanic) !== null && _a !== void 0 ? _a : this.prismaGraphQLToJSError(result2.errors[0]);
+            return (_a = this.loggerRustPanic) != null ? _a : this.prismaGraphQLToJSError(result2.errors[0]);
           }
           return {
             data: result2,
@@ -23843,16 +24521,16 @@ ${error.backtrace}`, this.config.clientVersion);
       if (this.libQueryEnginePath) {
         return {enginePath: this.libQueryEnginePath, searchedLocations};
       }
-      this.platform = (_a = this.platform) !== null && _a !== void 0 ? _a : await get_platform_1.getPlatform();
+      this.platform = (_a = this.platform) != null ? _a : await (0, import_get_platform.getPlatform)();
       if (__filename.includes("LibraryEngine")) {
-        enginePath = path_1.default.join(engines_1.getEnginesPath(), get_platform_1.getNodeAPIName(this.platform, "fs"));
+        enginePath = import_path.default.join((0, import_engines.getEnginesPath)(), (0, import_get_platform.getNodeAPIName)(this.platform, "fs"));
         return {enginePath, searchedLocations};
       }
       const searchLocations = [
         eval(`require('path').join(__dirname, '../../../.prisma/client')`),
-        (_d = (_c = (_b = this.config.generator) === null || _b === void 0 ? void 0 : _b.output) === null || _c === void 0 ? void 0 : _c.value) !== null && _d !== void 0 ? _d : eval("__dirname"),
-        path_1.default.join(eval("__dirname"), ".."),
-        path_1.default.dirname(this.config.datamodelPath),
+        (_d = (_c = (_b = this.config.generator) == null ? void 0 : _b.output) == null ? void 0 : _c.value) != null ? _d : eval("__dirname"),
+        import_path.default.join(eval("__dirname"), ".."),
+        import_path.default.dirname(this.config.datamodelPath),
         this.config.cwd,
         "/tmp/prisma-engines"
       ];
@@ -23862,46 +24540,46 @@ ${error.backtrace}`, this.config.clientVersion);
       for (const location of searchLocations) {
         searchedLocations.push(location);
         debug(`Search for Query Engine Library in ${location}`);
-        enginePath = path_1.default.join(location, get_platform_1.getNodeAPIName(this.platform, "fs"));
-        if (fs_1.default.existsSync(enginePath)) {
+        enginePath = import_path.default.join(location, (0, import_get_platform.getNodeAPIName)(this.platform, "fs"));
+        if (import_fs.default.existsSync(enginePath)) {
           return {enginePath, searchedLocations};
         }
       }
-      enginePath = path_1.default.join(__dirname, get_platform_1.getNodeAPIName(this.platform, "fs"));
-      return {enginePath: enginePath !== null && enginePath !== void 0 ? enginePath : "", searchedLocations};
+      enginePath = import_path.default.join(__dirname, (0, import_get_platform.getNodeAPIName)(this.platform, "fs"));
+      return {enginePath: enginePath != null ? enginePath : "", searchedLocations};
     }
     async getLibQueryEnginePath() {
       var _a, _b, _c, _d;
-      const libPath = (_a = process.env.PRISMA_QUERY_ENGINE_LIBRARY) !== null && _a !== void 0 ? _a : this.config.prismaPath;
-      if (libPath && fs_1.default.existsSync(libPath) && libPath.endsWith(".node")) {
+      const libPath = (_a = process.env.PRISMA_QUERY_ENGINE_LIBRARY) != null ? _a : this.config.prismaPath;
+      if (libPath && import_fs.default.existsSync(libPath) && libPath.endsWith(".node")) {
         return libPath;
       }
-      this.platform = (_b = this.platform) !== null && _b !== void 0 ? _b : await get_platform_1.getPlatform();
+      this.platform = (_b = this.platform) != null ? _b : await (0, import_get_platform.getPlatform)();
       const {enginePath, searchedLocations} = await this.resolveEnginePath();
-      if (!fs_1.default.existsSync(enginePath)) {
+      if (!import_fs.default.existsSync(enginePath)) {
         const incorrectPinnedPlatformErrorStr = this.platform ? `
-You incorrectly pinned it to ${chalk_1.default.redBright.bold(`${this.platform}`)}
+You incorrectly pinned it to ${import_chalk.default.redBright.bold(`${this.platform}`)}
 ` : "";
-        let errorText = `Query engine library for current platform "${chalk_1.default.bold(this.platform)}" could not be found.${incorrectPinnedPlatformErrorStr}
+        let errorText = `Query engine library for current platform "${import_chalk.default.bold(this.platform)}" could not be found.${incorrectPinnedPlatformErrorStr}
 This probably happens, because you built Prisma Client on a different platform.
-(Prisma Client looked in "${chalk_1.default.underline(enginePath)}")
+(Prisma Client looked in "${import_chalk.default.underline(enginePath)}")
 
 Searched Locations:
 
 ${searchedLocations.map((f) => {
           let msg = `  ${f}`;
-          if (process.env.DEBUG === "node-engine-search-locations" && fs_1.default.existsSync(f)) {
-            const dir = fs_1.default.readdirSync(f);
+          if (process.env.DEBUG === "node-engine-search-locations" && import_fs.default.existsSync(f)) {
+            const dir = import_fs.default.readdirSync(f);
             msg += dir.map((d) => `    ${d}`).join("\n");
           }
           return msg;
         }).join("\n" + (process.env.DEBUG === "node-engine-search-locations" ? "\n" : ""))}
 `;
         if (this.config.generator) {
-          this.platform = (_c = this.platform) !== null && _c !== void 0 ? _c : await get_platform_1.getPlatform();
+          this.platform = (_c = this.platform) != null ? _c : await (0, import_get_platform.getPlatform)();
           if (this.config.generator.binaryTargets.find((object) => object.value === this.platform) || this.config.generator.binaryTargets.find((object) => object.value === "native")) {
             errorText += `
-You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t) => `"${chalk_1.default.bold(t.value)}"`).join(", ")} to the "${chalk_1.default.underline("generator")}" block
+You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t) => `"${import_chalk.default.bold(t.value)}"`).join(", ")} to the "${import_chalk.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -23910,10 +24588,10 @@ Please create an issue at https://github.com/prisma/prisma/issues/new`;
           } else {
             errorText += `
 
-To solve this problem, add the platform "${this.platform}" to the "${chalk_1.default.underline("binaryTargets")}" attribute in the "${chalk_1.default.underline("generator")}" block in the "schema.prisma" file:
-${chalk_1.default.greenBright(this.getFixedGenerator())}
+To solve this problem, add the platform "${this.platform}" to the "${import_chalk.default.underline("binaryTargets")}" attribute in the "${import_chalk.default.underline("generator")}" block in the "schema.prisma" file:
+${import_chalk.default.greenBright(this.getFixedGenerator())}
 
-Then run "${chalk_1.default.greenBright("prisma generate")}" for your changes to take effect.
+Then run "${import_chalk.default.greenBright("prisma generate")}" for your changes to take effect.
 Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
           }
         } else {
@@ -23922,20 +24600,19 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
 Read more about deploying Prisma Client: https://pris.ly/d/client-generator
 `;
         }
-        throw new errors_1.PrismaClientInitializationError(errorText, this.config.clientVersion);
+        throw new import_PrismaClientInitializationError.PrismaClientInitializationError(errorText, this.config.clientVersion);
       }
-      this.platform = (_d = this.platform) !== null && _d !== void 0 ? _d : await get_platform_1.getPlatform();
+      this.platform = (_d = this.platform) != null ? _d : await (0, import_get_platform.getPlatform)();
       return enginePath;
     }
     getFixedGenerator() {
       const fixedGenerator = {
         ...this.config.generator,
-        binaryTargets: util_1.fixBinaryTargets(this.config.generator.binaryTargets, this.platform)
+        binaryTargets: (0, import_util.fixBinaryTargets)(this.config.generator.binaryTargets, this.platform)
       };
-      return printGeneratorConfig_1.printGeneratorConfig(fixedGenerator);
+      return (0, import_printGeneratorConfig.printGeneratorConfig)(fixedGenerator);
     }
   };
-  exports.LibraryEngine = LibraryEngine;
   function hookProcess(engine, handler, exit = false) {
     process.once(handler, async () => {
       debug(`hookProcess received: ${handler}`);
@@ -24791,14 +25468,14 @@ var require_kill2 = __commonJS2((exports2, module2) => {
   };
 });
 
-// ../../node_modules/.pnpm/is-stream@2.0.0/node_modules/is-stream/index.js
+// ../../node_modules/.pnpm/is-stream@2.0.1/node_modules/is-stream/index.js
 var require_is_stream2 = __commonJS2((exports2, module2) => {
   "use strict";
   var isStream = (stream) => stream !== null && typeof stream === "object" && typeof stream.pipe === "function";
   isStream.writable = (stream) => isStream(stream) && stream.writable !== false && typeof stream._write === "function" && typeof stream._writableState === "object";
   isStream.readable = (stream) => isStream(stream) && stream.readable !== false && typeof stream._read === "function" && typeof stream._readableState === "object";
   isStream.duplex = (stream) => isStream.writable(stream) && isStream.readable(stream);
-  isStream.transform = (stream) => isStream.duplex(stream) && typeof stream._transform === "function" && typeof stream._transformState === "object";
+  isStream.transform = (stream) => isStream.duplex(stream) && typeof stream._transform === "function";
   module2.exports = isStream;
 });
 
@@ -25537,14 +26214,14 @@ var require_retry4 = __commonJS2((exports2, module2) => {
   module2.exports = require_retry3();
 });
 
-// ../../node_modules/.pnpm/p-retry@4.6.0/node_modules/p-retry/index.js
+// ../../node_modules/.pnpm/p-retry@4.6.1/node_modules/p-retry/index.js
 var require_p_retry2 = __commonJS2((exports2, module2) => {
   "use strict";
   var retry = require_retry4();
   var networkErrorMsgs = [
     "Failed to fetch",
-    "NetworkError when attempting to fetch resource",
-    "The Internet connection appears to be offline",
+    "NetworkError when attempting to fetch resource.",
+    "The Internet connection appears to be offline.",
     "Network request failed"
   ];
   var AbortError = class extends Error {
@@ -25610,18 +26287,264 @@ var require_p_retry2 = __commonJS2((exports2, module2) => {
   module2.exports.AbortError = AbortError;
 });
 
-// ../engine-core/dist/omit.js
+// ../engine-core/dist/tools/byline.js
+var require_byline2 = __commonJS2((exports2, module2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    createLineStream: () => createLineStream,
+    default: () => byline
+  });
+  var stream = require("stream");
+  var util = require("util");
+  function byline(readStream, options) {
+    return module2.exports.createStream(readStream, options);
+  }
+  module2.exports.createStream = function(readStream, options) {
+    if (readStream) {
+      return createLineStream(readStream, options);
+    } else {
+      return new LineStream(options);
+    }
+  };
+  function createLineStream(readStream, options) {
+    if (!readStream) {
+      throw new Error("expected readStream");
+    }
+    if (!readStream.readable) {
+      throw new Error("readStream must be readable");
+    }
+    const ls = new LineStream(options);
+    readStream.pipe(ls);
+    return ls;
+  }
+  module2.exports.LineStream = LineStream;
+  function LineStream(options) {
+    stream.Transform.call(this, options);
+    options = options || {};
+    this._readableState.objectMode = true;
+    this._lineBuffer = [];
+    this._keepEmptyLines = options.keepEmptyLines || false;
+    this._lastChunkEndedWithCR = false;
+    this.on("pipe", function(src) {
+      if (!this.encoding) {
+        if (src instanceof stream.Readable) {
+          this.encoding = src._readableState.encoding;
+        }
+      }
+    });
+  }
+  util.inherits(LineStream, stream.Transform);
+  LineStream.prototype._transform = function(chunk, encoding, done) {
+    encoding = encoding || "utf8";
+    if (Buffer.isBuffer(chunk)) {
+      if (encoding == "buffer") {
+        chunk = chunk.toString();
+        encoding = "utf8";
+      } else {
+        chunk = chunk.toString(encoding);
+      }
+    }
+    this._chunkEncoding = encoding;
+    const lines = chunk.split(/\r\n|\r|\n/g);
+    if (this._lastChunkEndedWithCR && chunk[0] == "\n") {
+      lines.shift();
+    }
+    if (this._lineBuffer.length > 0) {
+      this._lineBuffer[this._lineBuffer.length - 1] += lines[0];
+      lines.shift();
+    }
+    this._lastChunkEndedWithCR = chunk[chunk.length - 1] == "\r";
+    this._lineBuffer = this._lineBuffer.concat(lines);
+    this._pushBuffer(encoding, 1, done);
+  };
+  LineStream.prototype._pushBuffer = function(encoding, keep, done) {
+    while (this._lineBuffer.length > keep) {
+      const line = this._lineBuffer.shift();
+      if (this._keepEmptyLines || line.length > 0) {
+        if (!this.push(this._reencode(line, encoding))) {
+          const self = this;
+          setImmediate(function() {
+            self._pushBuffer(encoding, keep, done);
+          });
+          return;
+        }
+      }
+    }
+    done();
+  };
+  LineStream.prototype._flush = function(done) {
+    this._pushBuffer(this._chunkEncoding, 0, done);
+  };
+  LineStream.prototype._reencode = function(line, chunkEncoding) {
+    if (this.encoding && this.encoding != chunkEncoding) {
+      return Buffer.from(line, chunkEncoding).toString(this.encoding);
+    } else if (this.encoding) {
+      return line;
+    } else {
+      return Buffer.from(line, chunkEncoding);
+    }
+  };
+});
+
+// ../engine-core/dist/common/errors/utils/log.js
+var require_log2 = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    convertLog: () => convertLog,
+    getBacktraceFromLog: () => getBacktraceFromLog,
+    getBacktraceFromRustError: () => getBacktraceFromRustError,
+    getMessage: () => getMessage,
+    isRustError: () => isRustError,
+    isRustErrorLog: () => isRustErrorLog,
+    isRustLog: () => isRustLog
+  });
+  function getMessage(log4) {
+    if (typeof log4 === "string") {
+      return log4;
+    } else if (isRustError(log4)) {
+      return getBacktraceFromRustError(log4);
+    } else if (isRustLog(log4)) {
+      return getBacktraceFromLog(log4);
+    }
+    return JSON.stringify(log4);
+  }
+  function getBacktraceFromLog(log4) {
+    var _a, _b, _c, _d, _e, _f, _g;
+    if ((_a = log4.fields) == null ? void 0 : _a.message) {
+      let str = (_b = log4.fields) == null ? void 0 : _b.message;
+      if ((_c = log4.fields) == null ? void 0 : _c.file) {
+        str += ` in ${log4.fields.file}`;
+        if ((_d = log4.fields) == null ? void 0 : _d.line) {
+          str += `:${log4.fields.line}`;
+        }
+        if ((_e = log4.fields) == null ? void 0 : _e.column) {
+          str += `:${log4.fields.column}`;
+        }
+      }
+      if ((_f = log4.fields) == null ? void 0 : _f.reason) {
+        str += `
+${(_g = log4.fields) == null ? void 0 : _g.reason}`;
+      }
+      return str;
+    }
+    return "Unknown error";
+  }
+  function getBacktraceFromRustError(err) {
+    let str = "";
+    if (err.is_panic) {
+      str += `PANIC`;
+    }
+    if (err.backtrace) {
+      str += ` in ${err.backtrace}`;
+    }
+    if (err.message) {
+      str += `
+${err.message}`;
+    }
+    return str;
+  }
+  function isRustLog(e) {
+    return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
+  }
+  function isRustErrorLog(e) {
+    var _a, _b;
+    return isRustLog(e) && (e.level === "error" || ((_b = (_a = e.fields) == null ? void 0 : _a.message) == null ? void 0 : _b.includes("fatal error")));
+  }
+  function isRustError(e) {
+    return typeof e.is_panic !== "undefined";
+  }
+  function convertLog(rustLog) {
+    const isQuery = isQueryLog(rustLog.fields);
+    const level = isQuery ? "query" : rustLog.level.toLowerCase();
+    return {
+      ...rustLog,
+      level,
+      timestamp: new Date(new Date().getFullYear() + " " + rustLog.timestamp)
+    };
+  }
+  function isQueryLog(fields) {
+    return Boolean(fields.query);
+  }
+});
+
+// ../engine-core/dist/common/errors/PrismaClientRustError.js
+var require_PrismaClientRustError = __commonJS2((exports2) => {
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    PrismaClientRustError: () => PrismaClientRustError
+  });
+  var import_log2 = __toModule3(require_log2());
+  var PrismaClientRustError = class extends Error {
+    constructor({clientVersion: clientVersion2, log: log4, error}) {
+      if (log4) {
+        const backtrace = (0, import_log2.getBacktraceFromLog)(log4);
+        super(backtrace != null ? backtrace : "Unkown error");
+      } else if (error) {
+        const backtrace = (0, import_log2.getBacktraceFromRustError)(error);
+        super(backtrace);
+      } else {
+        super(`Unknown error`);
+      }
+      this.clientVersion = clientVersion2;
+    }
+    get [Symbol.toStringTag]() {
+      return "PrismaClientRustPanicError";
+    }
+  };
+});
+
+// ../engine-core/dist/tools/omit.js
 var require_omit = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.omit = void 0;
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    omit: () => omit2
+  });
   function omit2(obj, keys2) {
     return Object.keys(obj).filter((key) => !keys2.includes(key)).reduce((result, key) => {
       result[key] = obj[key];
       return result;
     }, {});
   }
-  exports2.omit = omit2;
 });
 
 // ../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/node/http-parser.js
@@ -25677,7 +26600,7 @@ var require_symbols = __commonJS2((exports2, module2) => {
 });
 
 // ../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/core/errors.js
-var require_errors2 = __commonJS2((exports2, module2) => {
+var require_errors = __commonJS2((exports2, module2) => {
   "use strict";
   var UndiciError = class extends Error {
     constructor(message) {
@@ -25819,7 +26742,7 @@ var require_util5 = __commonJS2((exports2, module2) => {
   var {IncomingMessage} = require("http");
   var util = require("util");
   var net = require("net");
-  var {InvalidArgumentError} = require_errors2();
+  var {InvalidArgumentError} = require_errors();
   function nop() {
   }
   function isStream(body) {
@@ -25960,7 +26883,7 @@ var require_request = __commonJS2((exports2, module2) => {
   var {
     InvalidArgumentError,
     NotSupportedError
-  } = require_errors2();
+  } = require_errors();
   var util = require_util5();
   var assert = require("assert");
   var kHandler = Symbol("handler");
@@ -26126,7 +27049,7 @@ var require_client = __commonJS2((exports2, module2) => {
     SocketError,
     InformationalError,
     BodyTimeoutError
-  } = require_errors2();
+  } = require_errors();
   var {
     kUrl,
     kReset,
@@ -27134,7 +28057,7 @@ var require_fixed_queue = __commonJS2((exports2, module2) => {
 
 // ../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/abort-signal.js
 var require_abort_signal = __commonJS2((exports2, module2) => {
-  var {RequestAbortedError} = require_errors2();
+  var {RequestAbortedError} = require_errors();
   var kListener = Symbol("kListener");
   var kSignal = Symbol("kSignal");
   function abort(self) {
@@ -27189,7 +28112,7 @@ var require_client_request = __commonJS2((exports2, module2) => {
   var {
     InvalidArgumentError,
     RequestAbortedError
-  } = require_errors2();
+  } = require_errors();
   var util = require_util5();
   var {AsyncResource: AsyncResource2} = require("async_hooks");
   var {addSignal, removeSignal} = require_abort_signal();
@@ -27209,7 +28132,7 @@ var require_client_request = __commonJS2((exports2, module2) => {
       callback(err);
     }
   };
-  var RequestHandler = class extends AsyncResource2 {
+  var RequestHandler2 = class extends AsyncResource2 {
     constructor(opts, callback) {
       if (!opts || typeof opts !== "object") {
         throw new InvalidArgumentError("invalid opts");
@@ -27307,7 +28230,7 @@ var require_client_request = __commonJS2((exports2, module2) => {
       });
     }
     try {
-      this.dispatch(opts, new RequestHandler(opts, callback));
+      this.dispatch(opts, new RequestHandler2(opts, callback));
     } catch (err) {
       if (typeof callback === "function") {
         process.nextTick(callback, err, {opaque: opts && opts.opaque});
@@ -27327,7 +28250,7 @@ var require_client_stream = __commonJS2((exports2, module2) => {
     InvalidArgumentError,
     InvalidReturnValueError,
     RequestAbortedError
-  } = require_errors2();
+  } = require_errors();
   var util = require_util5();
   var {AsyncResource: AsyncResource2} = require("async_hooks");
   var {addSignal, removeSignal} = require_abort_signal();
@@ -27470,7 +28393,7 @@ var require_client_pipeline = __commonJS2((exports2, module2) => {
     InvalidArgumentError,
     InvalidReturnValueError,
     RequestAbortedError
-  } = require_errors2();
+  } = require_errors();
   var util = require_util5();
   var {AsyncResource: AsyncResource2} = require("async_hooks");
   var {assert} = require("console");
@@ -27658,7 +28581,7 @@ var require_client_pipeline = __commonJS2((exports2, module2) => {
 // ../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/client-upgrade.js
 var require_client_upgrade = __commonJS2((exports2, module2) => {
   "use strict";
-  var {InvalidArgumentError, RequestAbortedError} = require_errors2();
+  var {InvalidArgumentError, RequestAbortedError} = require_errors();
   var {AsyncResource: AsyncResource2} = require("async_hooks");
   var util = require_util5();
   var {addSignal, removeSignal} = require_abort_signal();
@@ -27743,7 +28666,7 @@ var require_client_upgrade = __commonJS2((exports2, module2) => {
 // ../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/client-connect.js
 var require_client_connect = __commonJS2((exports2, module2) => {
   "use strict";
-  var {InvalidArgumentError, RequestAbortedError} = require_errors2();
+  var {InvalidArgumentError, RequestAbortedError} = require_errors();
   var {AsyncResource: AsyncResource2} = require("async_hooks");
   var util = require_util5();
   var {addSignal, removeSignal} = require_abort_signal();
@@ -27830,7 +28753,7 @@ var require_pool = __commonJS2((exports2, module2) => {
     ClientClosedError,
     InvalidArgumentError,
     ClientDestroyedError
-  } = require_errors2();
+  } = require_errors();
   var FixedQueue = require_fixed_queue();
   var util = require_util5();
   var kClients = Symbol("clients");
@@ -28036,7 +28959,7 @@ var require_pool = __commonJS2((exports2, module2) => {
 // ../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/agent.js
 var require_agent3 = __commonJS2((exports2, module2) => {
   "use strict";
-  var {InvalidArgumentError, InvalidReturnValueError} = require_errors2();
+  var {InvalidArgumentError, InvalidReturnValueError} = require_errors();
   var Pool = require_pool();
   var util = require_util5();
   var {kAgentOpts, kAgentCache} = require_symbols();
@@ -28115,7 +29038,7 @@ var require_agent3 = __commonJS2((exports2, module2) => {
 var require_undici = __commonJS2((exports2, module2) => {
   "use strict";
   var Client = require_client();
-  var errors = require_errors2();
+  var errors = require_errors();
   var Pool = require_pool();
   var {Agent, request, stream, pipeline, setGlobalAgent} = require_agent3();
   Client.prototype.request = require_client_request();
@@ -28137,113 +29060,182 @@ var require_undici = __commonJS2((exports2, module2) => {
   module2.exports = undici;
 });
 
-// ../engine-core/dist/undici.js
-var require_undici2 = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.Undici = void 0;
+// ../engine-core/dist/binary/Connection.js
+var require_Connection = __commonJS2((exports2) => {
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    Connection: () => Connection
+  });
+  var import_undici = __toModule3(require_undici());
   var getStream = require_get_stream2();
-  var undici_12 = require_undici();
-  var Undici = class {
-    constructor(url, moreArgs) {
-      this.closed = false;
-      this.pool = new undici_12.Pool(url, {
+  function assertHasPool(pool) {
+    if (pool === void 0) {
+      throw new Error("Connection has not been opened");
+    }
+  }
+  var Connection = class {
+    constructor() {
+    }
+    static async onHttpError(response, handler) {
+      const _response = await response;
+      if (_response.statusCode >= 400) {
+        return handler(_response);
+      }
+      return _response;
+    }
+    open(url, options) {
+      if (this._pool)
+        return;
+      this._pool = new import_undici.Pool(url, {
         connections: 100,
         pipelining: 10,
         keepAliveMaxTimeout: 6e5,
         headersTimeout: 0,
-        ...moreArgs
+        ...options
       });
     }
-    request(body, customHeaders) {
-      return new Promise((resolve, reject) => {
-        this.pool.request({
-          path: "/",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...customHeaders
-          },
-          body,
-          bodyTimeout: 0
-        }, async (err, result) => {
-          if (err) {
-            reject(err);
-          } else {
-            const {statusCode, headers, body: body2} = result;
-            const data = JSON.parse(await getStream(body2));
-            resolve({statusCode, headers, data});
-          }
-        });
+    async raw(method, endpoint, headers, body) {
+      assertHasPool(this._pool);
+      const response = await this._pool.request({
+        path: endpoint,
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          ...headers
+        },
+        body,
+        bodyTimeout: 0
       });
+      const result = {
+        statusCode: response.statusCode,
+        headers: response.headers,
+        data: JSON.parse(await getStream(response.body))
+      };
+      return result;
     }
-    status() {
-      return new Promise((resolve, reject) => {
-        this.pool.request({
-          path: "/",
-          method: "GET"
-        }, async (err, result) => {
-          if (err) {
-            reject(err);
-          } else {
-            const {statusCode, headers, body} = result;
-            const data = JSON.parse(await getStream(body));
-            resolve({statusCode, headers, data});
-          }
-        });
-      });
+    post(endpoint, body, headers) {
+      return this.raw("POST", endpoint, headers, body);
+    }
+    get(path3, headers) {
+      return this.raw("GET", path3, headers);
     }
     close() {
-      if (!this.closed) {
-        this.pool.close(() => {
+      if (this._pool) {
+        this._pool.close(() => {
         });
       }
-      this.closed = true;
+      this._pool = void 0;
     }
   };
-  exports2.Undici = Undici;
 });
 
-// ../engine-core/dist/BinaryEngine.js
+// ../engine-core/dist/binary/BinaryEngine.js
 var require_BinaryEngine = __commonJS2((exports, module) => {
-  "use strict";
-  var __importDefault = exports && exports.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __markAsModule = (target) => __defProp(target, "__esModule", {value: true});
+  var __export = (target, all) => {
+    __markAsModule(target);
+    for (var name in all)
+      __defProp(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports, "__esModule", {value: true});
-  exports.BinaryEngine = void 0;
-  var debug_1 = __importDefault(require_dist7());
-  var engines_1 = require_dist9();
-  var get_platform_1 = require_dist10();
-  var chalk_1 = __importDefault(require_source2());
-  var child_process_1 = require("child_process");
-  var events_1 = __importDefault(require("events"));
-  var execa_1 = __importDefault(require_execa2());
-  var fs_1 = __importDefault(require("fs"));
-  var net_1 = __importDefault(require("net"));
-  var p_retry_1 = __importDefault(require_p_retry2());
-  var path_1 = __importDefault(require("path"));
-  var url_1 = require("url");
-  var util_1 = require("util");
-  var byline_1 = __importDefault(require_byline2());
-  var errors_1 = require_errors();
-  var log_1 = require_log2();
-  var omit_1 = require_omit();
-  var printGeneratorConfig_1 = require_printGeneratorConfig();
-  var undici_1 = require_undici2();
-  var util_2 = require_util4();
-  var debug = debug_1.default("prisma:engine");
-  var exists = util_1.promisify(fs_1.default.exists);
+  var __reExport = (target, module2, desc) => {
+    if (module2 && typeof module2 === "object" || typeof module2 === "function") {
+      for (let key of __getOwnPropNames(module2))
+        if (!__hasOwnProp.call(target, key) && key !== "default")
+          __defProp(target, key, {get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule = (module2) => {
+    return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? {get: () => module2.default, enumerable: true} : {value: module2, enumerable: true})), module2);
+  };
+  __export(exports, {
+    BinaryEngine: () => BinaryEngine
+  });
+  var import_debug = __toModule(require_dist7());
+  var import_engines = __toModule(require_dist9());
+  var import_get_platform = __toModule(require_dist10());
+  var import_chalk = __toModule(require_source2());
+  var import_child_process = __toModule(require("child_process"));
+  var import_events = __toModule(require("events"));
+  var import_execa = __toModule(require_execa2());
+  var import_fs = __toModule(require("fs"));
+  var import_net = __toModule(require("net"));
+  var import_p_retry = __toModule(require_p_retry2());
+  var import_path = __toModule(require("path"));
+  var import_url = __toModule(require("url"));
+  var import_util = __toModule(require("util"));
+  var import_byline = __toModule(require_byline2());
+  var import_Engine = __toModule(require_Engine());
+  var import_PrismaClientKnownRequestError = __toModule(require_PrismaClientKnownRequestError());
+  var import_PrismaClientInitializationError = __toModule(require_PrismaClientInitializationError());
+  var import_PrismaClientRustError = __toModule(require_PrismaClientRustError());
+  var import_PrismaClientRustPanicError = __toModule(require_PrismaClientRustPanicError());
+  var import_PrismaClientUnknownRequestError = __toModule(require_PrismaClientUnknownRequestError());
+  var import_getErrorMessageWithLink = __toModule(require_getErrorMessageWithLink());
+  var import_log = __toModule(require_log2());
+  var import_omit = __toModule(require_omit());
+  var import_printGeneratorConfig = __toModule(require_printGeneratorConfig());
+  var import_Connection = __toModule(require_Connection());
+  var import_util2 = __toModule(require_util4());
+  var debug = (0, import_debug.default)("prisma:engine");
+  var exists = (0, import_util.promisify)(import_fs.default.exists);
   var logger = (...args) => {
   };
-  var knownPlatforms = [...get_platform_1.platforms, "native"];
+  var knownPlatforms = [...import_get_platform.platforms, "native"];
   var engines = [];
   var socketPaths = [];
   var MAX_STARTS = process.env.PRISMA_CLIENT_NO_RETRY ? 1 : 2;
   var MAX_REQUEST_RETRIES = process.env.PRISMA_CLIENT_NO_RETRY ? 1 : 2;
-  var BinaryEngine = class {
-    constructor({cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion: clientVersion2, previewFeatures, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, useUds, activeProvider}) {
-      var _a;
+  var BinaryEngine = class extends import_Engine.Engine {
+    constructor({
+      cwd,
+      datamodelPath,
+      prismaPath,
+      generator,
+      datasources,
+      showColors,
+      logLevel,
+      logQueries,
+      env,
+      flags,
+      clientVersion: clientVersion2,
+      previewFeatures,
+      engineEndpoint,
+      enableDebugLogs,
+      enableEngineDebugMode,
+      dirname,
+      useUds,
+      activeProvider
+    }) {
+      super();
       this.startCount = 0;
       this.previewFeatures = [];
       this.useUds = false;
@@ -28255,11 +29247,11 @@ var require_BinaryEngine = __commonJS2((exports, module) => {
           await this.startPromise;
         }
         this.throwAsyncErrorIfExists();
-        if ((_a2 = this.currentRequestPromise) === null || _a2 === void 0 ? void 0 : _a2.isCanceled) {
+        if ((_a2 = this.currentRequestPromise) == null ? void 0 : _a2.isCanceled) {
           this.throwAsyncErrorIfExists();
         } else if (error.code === "ECONNRESET" || error.code === "ECONNREFUSED" || error.code === "UND_ERR_CLOSED" || error.code === "UND_ERR_SOCKET" || error.code === "UND_ERR_DESTROYED" || error.code === "UND_ERR_ABORTED" || error.message.toLowerCase().includes("client is destroyed") || error.message.toLowerCase().includes("other side closed") || error.message.toLowerCase().includes("the client is closed")) {
-          if (this.globalKillSignalReceived && !((_b = this.child) === null || _b === void 0 ? void 0 : _b.connected)) {
-            throw new errors_1.PrismaClientUnknownRequestError(`The Node.js process already received a ${this.globalKillSignalReceived} signal, therefore the Prisma query engine exited
+          if (this.globalKillSignalReceived && !((_b = this.child) == null ? void 0 : _b.connected)) {
+            throw new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(`The Node.js process already received a ${this.globalKillSignalReceived} signal, therefore the Prisma query engine exited
 and your request can't be processed.
 You probably have some open handle that prevents your process from exiting.
 It could be an open http server or stream that didn't close yet.
@@ -28281,26 +29273,28 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
         }
         return false;
       };
+      var _a;
       this.dirname = dirname;
-      this.useUds = useUds !== null && useUds !== void 0 ? useUds : false;
+      this.useUds = useUds != null ? useUds : false;
       this.env = env;
       this.cwd = this.resolveCwd(cwd);
-      this.enableDebugLogs = enableDebugLogs !== null && enableDebugLogs !== void 0 ? enableDebugLogs : false;
-      this.enableEngineDebugMode = enableEngineDebugMode !== null && enableEngineDebugMode !== void 0 ? enableEngineDebugMode : false;
+      this.enableDebugLogs = enableDebugLogs != null ? enableDebugLogs : false;
+      this.enableEngineDebugMode = enableEngineDebugMode != null ? enableEngineDebugMode : false;
       this.datamodelPath = datamodelPath;
-      this.prismaPath = (_a = process.env.PRISMA_QUERY_ENGINE_BINARY) !== null && _a !== void 0 ? _a : prismaPath;
+      this.prismaPath = (_a = process.env.PRISMA_QUERY_ENGINE_BINARY) != null ? _a : prismaPath;
       this.generator = generator;
       this.datasources = datasources;
-      this.logEmitter = new events_1.default();
+      this.logEmitter = new import_events.default();
       this.logEmitter.on("error", () => {
       });
-      this.showColors = showColors !== null && showColors !== void 0 ? showColors : false;
+      this.showColors = showColors != null ? showColors : false;
       this.logLevel = logLevel;
-      this.logQueries = logQueries !== null && logQueries !== void 0 ? logQueries : false;
+      this.logQueries = logQueries != null ? logQueries : false;
       this.clientVersion = clientVersion2;
-      this.flags = flags !== null && flags !== void 0 ? flags : [];
-      this.previewFeatures = previewFeatures !== null && previewFeatures !== void 0 ? previewFeatures : [];
+      this.flags = flags != null ? flags : [];
+      this.previewFeatures = previewFeatures != null ? previewFeatures : [];
       this.activeProvider = activeProvider;
+      this.connection = new import_Connection.Connection();
       initHooks();
       const removedFlags = [
         "middlewares",
@@ -28319,46 +29313,46 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
       ];
       const removedFlagsUsed = this.previewFeatures.filter((e) => removedFlags.includes(e));
       if (removedFlagsUsed.length > 0 && !process.env.PRISMA_HIDE_PREVIEW_FLAG_WARNINGS) {
-        console.log(`${chalk_1.default.blueBright("info")} The preview flags \`${removedFlagsUsed.join("`, `")}\` were removed, you can now safely remove them from your schema.prisma.`);
+        console.log(`${import_chalk.default.blueBright("info")} The preview flags \`${removedFlagsUsed.join("`, `")}\` were removed, you can now safely remove them from your schema.prisma.`);
       }
       this.previewFeatures = this.previewFeatures.filter((e) => !removedFlags.includes(e));
       this.engineEndpoint = engineEndpoint;
       if (engineEndpoint) {
-        const url = new url_1.URL(engineEndpoint);
+        const url = new import_url.URL(engineEndpoint);
         this.port = Number(url.port);
       }
       if (this.platform) {
-        if (!knownPlatforms.includes(this.platform) && !fs_1.default.existsSync(this.platform)) {
-          throw new errors_1.PrismaClientInitializationError(`Unknown ${chalk_1.default.red("PRISMA_QUERY_ENGINE_BINARY")} ${chalk_1.default.redBright.bold(this.platform)}. Possible binaryTargets: ${chalk_1.default.greenBright(knownPlatforms.join(", "))} or a path to the query engine binary.
-You may have to run ${chalk_1.default.greenBright("prisma generate")} for your changes to take effect.`, this.clientVersion);
+        if (!knownPlatforms.includes(this.platform) && !import_fs.default.existsSync(this.platform)) {
+          throw new import_PrismaClientInitializationError.PrismaClientInitializationError(`Unknown ${import_chalk.default.red("PRISMA_QUERY_ENGINE_BINARY")} ${import_chalk.default.redBright.bold(this.platform)}. Possible binaryTargets: ${import_chalk.default.greenBright(knownPlatforms.join(", "))} or a path to the query engine binary.
+You may have to run ${import_chalk.default.greenBright("prisma generate")} for your changes to take effect.`, this.clientVersion);
         }
       } else {
         void this.getPlatform();
       }
       if (this.enableDebugLogs) {
-        debug_1.default.enable("*");
+        import_debug.default.enable("*");
       }
       engines.push(this);
       this.checkForTooManyEngines();
     }
     setError(err) {
       var _a;
-      if (log_1.isRustError(err)) {
+      if ((0, import_log.isRustError)(err)) {
         this.lastRustError = err;
-        this.logEmitter.emit("error", new errors_1.PrismaClientRustError({
+        this.logEmitter.emit("error", new import_PrismaClientRustError.PrismaClientRustError({
           clientVersion: this.clientVersion,
           error: err
         }));
         if (err.is_panic) {
           this.handlePanic();
         }
-      } else if (log_1.isRustErrorLog(err)) {
+      } else if ((0, import_log.isRustErrorLog)(err)) {
         this.lastErrorLog = err;
-        this.logEmitter.emit("error", new errors_1.PrismaClientRustError({
+        this.logEmitter.emit("error", new import_PrismaClientRustError.PrismaClientRustError({
           clientVersion: this.clientVersion,
           log: err
         }));
-        if (((_a = err.fields) === null || _a === void 0 ? void 0 : _a.message) === "PANIC") {
+        if (((_a = err.fields) == null ? void 0 : _a.message) === "PANIC") {
           this.handlePanic();
         }
       } else {
@@ -28369,12 +29363,12 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
       if (engines.length >= 10) {
         const runningEngines = engines.filter((e) => e.child);
         if (runningEngines.length === 10) {
-          console.warn(`${chalk_1.default.yellow("warn(prisma-client)")} Already 10 Prisma Clients are actively running.`);
+          console.warn(`${import_chalk.default.yellow("warn(prisma-client)")} Already 10 Prisma Clients are actively running.`);
         }
       }
     }
     resolveCwd(cwd) {
-      if (cwd && fs_1.default.existsSync(cwd) && fs_1.default.lstatSync(cwd).isDirectory()) {
+      if (cwd && import_fs.default.existsSync(cwd) && import_fs.default.lstatSync(cwd).isDirectory()) {
         return cwd;
       }
       return process.cwd();
@@ -28399,11 +29393,11 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
       if (this.platformPromise) {
         return this.platformPromise;
       }
-      this.platformPromise = get_platform_1.getPlatform();
+      this.platformPromise = (0, import_get_platform.getPlatform)();
       return this.platformPromise;
     }
     getQueryEnginePath(platform, prefix = __dirname) {
-      let queryEnginePath = path_1.default.join(prefix, `query-engine-${platform}`);
+      let queryEnginePath = import_path.default.join(prefix, `query-engine-${platform}`);
       if (platform === "windows") {
         queryEnginePath = `${queryEnginePath}.exe`;
       }
@@ -28411,8 +29405,8 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
     }
     handlePanic() {
       var _a, _b;
-      (_a = this.child) === null || _a === void 0 ? void 0 : _a.kill();
-      if ((_b = this.currentRequestPromise) === null || _b === void 0 ? void 0 : _b.cancel) {
+      (_a = this.child) == null ? void 0 : _a.kill();
+      if ((_b = this.currentRequestPromise) == null ? void 0 : _b.cancel) {
         this.currentRequestPromise.cancel();
       }
     }
@@ -28429,14 +29423,14 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
       }
       this.platform = this.platform || platform;
       if (__filename.includes("BinaryEngine")) {
-        enginePath = this.getQueryEnginePath(this.platform, engines_1.getEnginesPath());
+        enginePath = this.getQueryEnginePath(this.platform, (0, import_engines.getEnginesPath)());
         return {prismaPath: enginePath, searchedLocations};
       }
       const searchLocations = [
         eval(`require('path').join(__dirname, '../../../.prisma/client')`),
-        (_c = (_b = (_a = this.generator) === null || _a === void 0 ? void 0 : _a.output) === null || _b === void 0 ? void 0 : _b.value) !== null && _c !== void 0 ? _c : eval("__dirname"),
-        path_1.default.join(eval("__dirname"), ".."),
-        path_1.default.dirname(this.datamodelPath),
+        (_c = (_b = (_a = this.generator) == null ? void 0 : _a.output) == null ? void 0 : _b.value) != null ? _c : eval("__dirname"),
+        import_path.default.join(eval("__dirname"), ".."),
+        import_path.default.dirname(this.datamodelPath),
         this.cwd,
         "/tmp/prisma-engines"
       ];
@@ -28447,30 +29441,30 @@ You may have to run ${chalk_1.default.greenBright("prisma generate")} for your c
         searchedLocations.push(location);
         debug(`Search for Query Engine in ${location}`);
         enginePath = this.getQueryEnginePath(this.platform, location);
-        if (fs_1.default.existsSync(enginePath)) {
+        if (import_fs.default.existsSync(enginePath)) {
           return {prismaPath: enginePath, searchedLocations};
         }
       }
       enginePath = this.getQueryEnginePath(this.platform);
-      return {prismaPath: enginePath !== null && enginePath !== void 0 ? enginePath : "", searchedLocations};
+      return {prismaPath: enginePath != null ? enginePath : "", searchedLocations};
     }
     async getPrismaPath() {
       const {prismaPath, searchedLocations} = await this.resolvePrismaPath();
       const platform = await this.getPlatform();
       if (!await exists(prismaPath)) {
         const pinnedStr = this.incorrectlyPinnedBinaryTarget ? `
-You incorrectly pinned it to ${chalk_1.default.redBright.bold(`${this.incorrectlyPinnedBinaryTarget}`)}
+You incorrectly pinned it to ${import_chalk.default.redBright.bold(`${this.incorrectlyPinnedBinaryTarget}`)}
 ` : "";
-        let errorText = `Query engine binary for current platform "${chalk_1.default.bold(platform)}" could not be found.${pinnedStr}
+        let errorText = `Query engine binary for current platform "${import_chalk.default.bold(platform)}" could not be found.${pinnedStr}
 This probably happens, because you built Prisma Client on a different platform.
-(Prisma Client looked in "${chalk_1.default.underline(prismaPath)}")
+(Prisma Client looked in "${import_chalk.default.underline(prismaPath)}")
 
 Searched Locations:
 
 ${searchedLocations.map((f) => {
           let msg = `  ${f}`;
-          if (process.env.DEBUG === "node-engine-search-locations" && fs_1.default.existsSync(f)) {
-            const dir = fs_1.default.readdirSync(f);
+          if (process.env.DEBUG === "node-engine-search-locations" && import_fs.default.existsSync(f)) {
+            const dir = import_fs.default.readdirSync(f);
             msg += dir.map((d) => `    ${d}`).join("\n");
           }
           return msg;
@@ -28479,7 +29473,7 @@ ${searchedLocations.map((f) => {
         if (this.generator) {
           if (this.generator.binaryTargets.find((object) => object.value === this.platform) || this.generator.binaryTargets.find((object) => object.value === "native")) {
             errorText += `
-You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t) => `"${chalk_1.default.bold(t.value)}"`).join(", ")} to the "${chalk_1.default.underline("generator")}" block
+You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t) => `"${import_chalk.default.bold(t.value)}"`).join(", ")} to the "${import_chalk.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -28488,10 +29482,10 @@ Please create an issue at https://github.com/prisma/prisma/issues/new`;
           } else {
             errorText += `
 
-To solve this problem, add the platform "${this.platform}" to the "${chalk_1.default.underline("binaryTargets")}" attribute in the "${chalk_1.default.underline("generator")}" block in the "schema.prisma" file:
-${chalk_1.default.greenBright(this.getFixedGenerator())}
+To solve this problem, add the platform "${this.platform}" to the "${import_chalk.default.underline("binaryTargets")}" attribute in the "${import_chalk.default.underline("generator")}" block in the "schema.prisma" file:
+${import_chalk.default.greenBright(this.getFixedGenerator())}
 
-Then run "${chalk_1.default.greenBright("prisma generate")}" for your changes to take effect.
+Then run "${import_chalk.default.greenBright("prisma generate")}" for your changes to take effect.
 Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
           }
         } else {
@@ -28500,24 +29494,24 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
 Read more about deploying Prisma Client: https://pris.ly/d/client-generator
 `;
         }
-        throw new errors_1.PrismaClientInitializationError(errorText, this.clientVersion);
+        throw new import_PrismaClientInitializationError.PrismaClientInitializationError(errorText, this.clientVersion);
       }
       if (this.incorrectlyPinnedBinaryTarget) {
-        console.error(`${chalk_1.default.yellow("Warning:")} You pinned the platform ${chalk_1.default.bold(this.incorrectlyPinnedBinaryTarget)}, but Prisma Client detects ${chalk_1.default.bold(await this.getPlatform())}.
-This means you should very likely pin the platform ${chalk_1.default.greenBright(await this.getPlatform())} instead.
-${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F}.")}`);
+        console.error(`${import_chalk.default.yellow("Warning:")} You pinned the platform ${import_chalk.default.bold(this.incorrectlyPinnedBinaryTarget)}, but Prisma Client detects ${import_chalk.default.bold(await this.getPlatform())}.
+This means you should very likely pin the platform ${import_chalk.default.greenBright(await this.getPlatform())} instead.
+${import_chalk.default.dim("In case we're mistaken, please report this to us \u{1F64F}.")}`);
       }
       if (process.platform !== "win32") {
-        util_2.plusX(prismaPath);
+        (0, import_util2.plusX)(prismaPath);
       }
       return prismaPath;
     }
     getFixedGenerator() {
       const fixedGenerator = {
         ...this.generator,
-        binaryTargets: util_2.fixBinaryTargets(this.generator.binaryTargets, this.platform)
+        binaryTargets: (0, import_util2.fixBinaryTargets)(this.generator.binaryTargets, this.platform)
       };
-      return printGeneratorConfig_1.printGeneratorConfig(fixedGenerator);
+      return (0, import_printGeneratorConfig.printGeneratorConfig)(fixedGenerator);
     }
     printDatasources() {
       if (this.datasources) {
@@ -28526,9 +29520,16 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
       return "[]";
     }
     async start() {
+      if (this.stopPromise) {
+        await this.stopPromise;
+      }
       if (!this.startPromise) {
         this.startCount++;
         this.startPromise = this.internalStart();
+      }
+      await this.startPromise;
+      if (!this.child && !this.engineEndpoint) {
+        throw new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(`Can't perform request, as the Engine has already been stopped`, this.clientVersion);
       }
       return this.startPromise;
     }
@@ -28565,7 +29566,7 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
         }
         if (this.engineEndpoint) {
           try {
-            await p_retry_1.default(() => this.undici.status(), {
+            await (0, import_p_retry.default)(() => this.connection.get("/"), {
               retries: 10
             });
           } catch (e) {
@@ -28574,7 +29575,7 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
           return resolve();
         }
         try {
-          if (((_a = this.child) === null || _a === void 0 ? void 0 : _a.connected) || this.child && !((_b = this.child) === null || _b === void 0 ? void 0 : _b.killed)) {
+          if (((_a = this.child) == null ? void 0 : _a.connected) || this.child && !((_b = this.child) == null ? void 0 : _b.killed)) {
             debug(`There is a child that still runs and we want to start again`);
           }
           this.lastRustError = void 0;
@@ -28583,7 +29584,7 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
           logger("startin & resettin");
           this.globalKillSignalReceived = void 0;
           if (this.useUds) {
-            this.socketPath = `/tmp/prisma-${util_2.getRandomString()}.sock`;
+            this.socketPath = `/tmp/prisma-${(0, import_util2.getRandomString)()}.sock`;
             socketPaths.push(this.socketPath);
           }
           debug({cwd: this.cwd});
@@ -28598,13 +29599,13 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
           }
           debug({flags});
           const env = this.getEngineEnvVars();
-          this.child = child_process_1.spawn(prismaPath, flags, {
+          this.child = (0, import_child_process.spawn)(prismaPath, flags, {
             env,
             cwd: this.cwd,
             windowsHide: true,
             stdio: ["ignore", "pipe", "pipe"]
           });
-          byline_1.default(this.child.stderr).on("data", (msg) => {
+          (0, import_byline.default)(this.child.stderr).on("data", (msg) => {
             const data = String(msg);
             debug("stderr", data);
             try {
@@ -28613,7 +29614,7 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
                 debug(json);
                 this.setError(json);
                 if (this.engineStartDeferred) {
-                  const err = new errors_1.PrismaClientInitializationError(json.message, this.clientVersion);
+                  const err = new import_PrismaClientInitializationError.PrismaClientInitializationError(json.message, this.clientVersion);
                   this.engineStartDeferred.reject(err);
                 }
               }
@@ -28623,26 +29624,26 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
               }
             }
           });
-          byline_1.default(this.child.stdout).on("data", (msg) => {
+          (0, import_byline.default)(this.child.stdout).on("data", (msg) => {
             var _a2, _b2;
             const data = String(msg);
             try {
               const json = JSON.parse(data);
-              debug("stdout", log_1.getMessage(json));
-              if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b2 = (_a2 = json.fields) === null || _a2 === void 0 ? void 0 : _a2.message) === null || _b2 === void 0 ? void 0 : _b2.startsWith("Started http server"))) {
+              debug("stdout", (0, import_log.getMessage)(json));
+              if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b2 = (_a2 = json.fields) == null ? void 0 : _a2.message) == null ? void 0 : _b2.startsWith("Started http server"))) {
                 if (this.useUds) {
-                  this.undici = new undici_1.Undici("http://localhost", {
+                  this.connection.open("http://localhost", {
                     socketPath: this.socketPath
                   });
                 } else {
-                  this.undici = new undici_1.Undici(`http://localhost:${this.port}`);
+                  this.connection.open(`http://localhost:${this.port}`);
                 }
                 this.engineStartDeferred.resolve();
                 this.engineStartDeferred = void 0;
               }
               if (typeof json.is_panic === "undefined") {
-                const log4 = log_1.convertLog(json);
-                const logIsRustErrorLog = log_1.isRustErrorLog(log4);
+                const log4 = (0, import_log.convertLog)(json);
+                const logIsRustErrorLog = (0, import_log.isRustErrorLog)(log4);
                 if (logIsRustErrorLog) {
                   this.setError(log4);
                 } else {
@@ -28656,31 +29657,31 @@ ${chalk_1.default.dim("In case we're mistaken, please report this to us \u{1F64F
             }
           });
           this.child.on("exit", (code) => {
-            var _a2, _b2;
+            var _a2;
             logger("removing startPromise");
             this.startPromise = void 0;
             if (this.engineStopDeferred) {
               this.engineStopDeferred.resolve(code);
               return;
             }
-            (_a2 = this.undici) === null || _a2 === void 0 ? void 0 : _a2.close();
+            this.connection.close();
             if (code !== 0 && this.engineStartDeferred && this.startCount === 1) {
               let err;
               let msg = this.stderrLogs;
               if (this.lastRustError) {
-                msg = log_1.getMessage(this.lastRustError);
+                msg = (0, import_log.getMessage)(this.lastRustError);
               } else if (this.lastErrorLog) {
-                msg = log_1.getMessage(this.lastErrorLog);
+                msg = (0, import_log.getMessage)(this.lastErrorLog);
               }
               if (code !== null) {
-                err = new errors_1.PrismaClientInitializationError(`Query engine exited with code ${code}
+                err = new import_PrismaClientInitializationError.PrismaClientInitializationError(`Query engine exited with code ${code}
 ` + msg, this.clientVersion);
-              } else if ((_b2 = this.child) === null || _b2 === void 0 ? void 0 : _b2.signalCode) {
-                err = new errors_1.PrismaClientInitializationError(`Query engine process killed with signal ${this.child.signalCode} for unknown reason.
+              } else if ((_a2 = this.child) == null ? void 0 : _a2.signalCode) {
+                err = new import_PrismaClientInitializationError.PrismaClientInitializationError(`Query engine process killed with signal ${this.child.signalCode} for unknown reason.
 Make sure that the engine binary at ${prismaPath} is not corrupt.
 ` + msg, this.clientVersion);
               } else {
-                err = new errors_1.PrismaClientInitializationError(msg, this.clientVersion);
+                err = new import_PrismaClientInitializationError.PrismaClientInitializationError(msg, this.clientVersion);
               }
               this.engineStartDeferred.reject(err);
             }
@@ -28711,28 +29712,28 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
             reject(err);
           });
           this.child.on("close", (code, signal) => {
-            var _a2, _b2;
-            (_a2 = this.undici) === null || _a2 === void 0 ? void 0 : _a2.close();
+            var _a2;
+            this.connection.close();
             if (code === null && signal === "SIGABRT" && this.child) {
-              const error = new errors_1.PrismaClientRustPanicError(this.getErrorMessageWithLink("Panic in Query Engine with SIGABRT signal"), this.clientVersion);
+              const error = new import_PrismaClientRustPanicError.PrismaClientRustPanicError(this.getErrorMessageWithLink("Panic in Query Engine with SIGABRT signal"), this.clientVersion);
               this.logEmitter.emit("error", error);
-            } else if (code === 255 && signal === null && ((_b2 = this.lastErrorLog) === null || _b2 === void 0 ? void 0 : _b2.fields.message) === "PANIC" && !this.lastPanic) {
-              const error = new errors_1.PrismaClientRustPanicError(this.getErrorMessageWithLink(`${this.lastErrorLog.fields.message}: ${this.lastErrorLog.fields.reason} in ${this.lastErrorLog.fields.file}:${this.lastErrorLog.fields.line}:${this.lastErrorLog.fields.column}`), this.clientVersion);
+            } else if (code === 255 && signal === null && ((_a2 = this.lastErrorLog) == null ? void 0 : _a2.fields.message) === "PANIC" && !this.lastPanic) {
+              const error = new import_PrismaClientRustPanicError.PrismaClientRustPanicError(this.getErrorMessageWithLink(`${this.lastErrorLog.fields.message}: ${this.lastErrorLog.fields.reason} in ${this.lastErrorLog.fields.file}:${this.lastErrorLog.fields.line}:${this.lastErrorLog.fields.column}`), this.clientVersion);
               this.setError(error);
             }
           });
           if (this.lastRustError) {
-            return reject(new errors_1.PrismaClientInitializationError(log_1.getMessage(this.lastRustError), this.clientVersion));
+            return reject(new import_PrismaClientInitializationError.PrismaClientInitializationError((0, import_log.getMessage)(this.lastRustError), this.clientVersion));
           }
           if (this.lastErrorLog) {
-            return reject(new errors_1.PrismaClientInitializationError(log_1.getMessage(this.lastErrorLog), this.clientVersion));
+            return reject(new import_PrismaClientInitializationError.PrismaClientInitializationError((0, import_log.getMessage)(this.lastErrorLog), this.clientVersion));
           }
           try {
             await new Promise((resolve2, reject2) => {
               this.engineStartDeferred = {resolve: resolve2, reject: reject2};
             });
           } catch (err) {
-            (_c = this.child) === null || _c === void 0 ? void 0 : _c.kill();
+            (_c = this.child) == null ? void 0 : _c.kill();
             throw err;
           }
           void (async () => {
@@ -28759,7 +29760,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       return this.stopPromise;
     }
     async _stop() {
-      var _a, _b;
+      var _a;
       if (this.startPromise) {
         await this.startPromise;
       }
@@ -28782,8 +29783,8 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         stopChildPromise = new Promise((resolve, reject) => {
           this.engineStopDeferred = {resolve, reject};
         });
-        (_a = this.undici) === null || _a === void 0 ? void 0 : _a.close();
-        (_b = this.child) === null || _b === void 0 ? void 0 : _b.kill();
+        this.connection.close();
+        (_a = this.child) == null ? void 0 : _a.kill();
         this.child = void 0;
       }
       if (stopChildPromise) {
@@ -28794,15 +29795,15 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       this.engineStopDeferred = void 0;
     }
     kill(signal) {
-      var _a, _b;
+      var _a;
       this.getConfigPromise = void 0;
       this.globalKillSignalReceived = signal;
-      (_a = this.child) === null || _a === void 0 ? void 0 : _a.kill();
-      (_b = this.undici) === null || _b === void 0 ? void 0 : _b.close();
+      (_a = this.child) == null ? void 0 : _a.kill();
+      this.connection.close();
     }
     getFreePort() {
       return new Promise((resolve, reject) => {
-        const server = net_1.default.createServer((s) => s.end(""));
+        const server = import_net.default.createServer((s) => s.end(""));
         server.unref();
         server.on("error", reject);
         server.listen(0, () => {
@@ -28826,8 +29827,8 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     async _getConfig() {
       const prismaPath = await this.getPrismaPath();
       const env = await this.getEngineEnvVars();
-      const result = await execa_1.default(prismaPath, ["cli", "get-config"], {
-        env: omit_1.omit(env, ["PORT"]),
+      const result = await (0, import_execa.default)(prismaPath, ["cli", "get-config"], {
+        env: (0, import_omit.omit)(env, ["PORT"]),
         cwd: this.cwd
       });
       return JSON.parse(result.stdout);
@@ -28841,19 +29842,13 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     }
     async internalVersion() {
       const prismaPath = await this.getPrismaPath();
-      const result = await execa_1.default(prismaPath, ["--version"]);
+      const result = await (0, import_execa.default)(prismaPath, ["--version"]);
       this.lastVersion = result.stdout;
       return this.lastVersion;
     }
-    async request(query, headers, numTry = 1) {
-      if (this.stopPromise) {
-        await this.stopPromise;
-      }
+    async request(query, headers = {}, numTry = 1) {
       await this.start();
-      if (!this.child && !this.engineEndpoint) {
-        throw new errors_1.PrismaClientUnknownRequestError(`Can't perform request, as the Engine has already been stopped`, this.clientVersion);
-      }
-      this.currentRequestPromise = this.undici.request(stringifyQuery(query), headers);
+      this.currentRequestPromise = this.connection.post("/", stringifyQuery(query), runtimeHeadersToHttpHeaders(headers));
       this.lastQuery = query;
       try {
         const {data, headers: headers2} = await this.currentRequestPromise;
@@ -28861,7 +29856,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
           if (data.errors.length === 1) {
             throw this.graphQLToJSError(data.errors[0]);
           }
-          throw new errors_1.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.clientVersion);
+          throw new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.clientVersion);
         }
         const elapsed = parseInt(headers2["x-elapsed"]) / 1e3;
         if (this.startCount > 0) {
@@ -28871,7 +29866,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         return {data, elapsed};
       } catch (error) {
         logger("req - e", error);
-        if (error instanceof errors_1.PrismaClientKnownRequestError) {
+        if (error instanceof import_PrismaClientKnownRequestError.PrismaClientKnownRequestError) {
           throw error;
         }
         await this.handleRequestError(error, numTry <= MAX_REQUEST_RETRIES);
@@ -28882,26 +29877,21 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       }
       return null;
     }
-    async requestBatch(queries, transaction = false, numTry = 1) {
+    async requestBatch(queries, headers = {}, transaction = false, numTry = 1) {
       await this.start();
-      if (!this.child && !this.engineEndpoint) {
-        throw new errors_1.PrismaClientUnknownRequestError(`Can't perform request, as the Engine has already been stopped`, this.clientVersion);
-      }
-      const variables = {};
-      const body = {
-        batch: queries.map((query) => ({query, variables})),
+      const request = {
+        batch: queries.map((query) => ({query, variables: {}})),
         transaction
       };
-      const stringifiedQuery = JSON.stringify(body);
-      this.currentRequestPromise = this.undici.request(stringifiedQuery);
-      this.lastQuery = stringifiedQuery;
-      return this.currentRequestPromise.then(({data, headers}) => {
-        const elapsed = parseInt(headers["x-elapsed"]) / 1e3;
+      this.lastQuery = JSON.stringify(request);
+      this.currentRequestPromise = this.connection.post("/", this.lastQuery, runtimeHeadersToHttpHeaders(headers));
+      return this.currentRequestPromise.then(({data, headers: headers2}) => {
+        const elapsed = parseInt(headers2["x-elapsed"]) / 1e3;
         const {batchResult, errors} = data;
         if (Array.isArray(batchResult)) {
           return batchResult.map((result) => {
             if (result.errors) {
-              return this.graphQLToJSError(result.errors[0]);
+              throw this.graphQLToJSError(result.errors[0]);
             }
             return {
               data: result,
@@ -28909,20 +29899,38 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
             };
           });
         } else {
-          if (errors && errors.length === 1) {
-            throw new Error(errors[0].error);
-          }
-          throw new Error(JSON.stringify(data));
+          throw this.graphQLToJSError(errors[0]);
         }
       }).catch(async (e) => {
         const isError3 = await this.handleRequestError(e, numTry < 3);
         if (!isError3) {
           if (numTry <= MAX_REQUEST_RETRIES) {
-            return this.requestBatch(queries, transaction, numTry + 1);
+            return this.requestBatch(queries, headers, transaction, numTry + 1);
           }
         }
         throw isError3;
       });
+    }
+    async transaction(action, arg) {
+      var _a, _b;
+      await this.start();
+      try {
+        if (action === "start") {
+          const jsonOptions = JSON.stringify({
+            max_wait: (_a = arg == null ? void 0 : arg.maxWait) != null ? _a : 2e3,
+            timeout: (_b = arg == null ? void 0 : arg.timeout) != null ? _b : 5e3
+          });
+          const result = await import_Connection.Connection.onHttpError(this.connection.post("/transaction/start", jsonOptions), transactionHttpErrorHandler);
+          return result.data;
+        } else if (action === "commit") {
+          await import_Connection.Connection.onHttpError(this.connection.post(`/transaction/${arg.id}/commit`), transactionHttpErrorHandler);
+        } else if (action === "rollback") {
+          await import_Connection.Connection.onHttpError(this.connection.post(`/transaction/${arg.id}/rollback`), transactionHttpErrorHandler);
+        }
+      } catch (error) {
+        this.setError(error);
+      }
+      return void 0;
     }
     get hasMaxRestarts() {
       return this.startCount >= MAX_STARTS;
@@ -28931,7 +29939,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       var _a, _b;
       logger("throwAsyncErrorIfExists", this.startCount, this.hasMaxRestarts);
       if (this.lastRustError) {
-        const err = new errors_1.PrismaClientRustPanicError(this.getErrorMessageWithLink(log_1.getMessage(this.lastRustError)), this.clientVersion);
+        const err = new import_PrismaClientRustPanicError.PrismaClientRustPanicError(this.getErrorMessageWithLink((0, import_log.getMessage)(this.lastRustError)), this.clientVersion);
         if (this.lastRustError.is_panic) {
           this.lastPanic = err;
         }
@@ -28939,9 +29947,9 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
           throw err;
         }
       }
-      if (this.lastErrorLog && log_1.isRustErrorLog(this.lastErrorLog)) {
-        const err = new errors_1.PrismaClientUnknownRequestError(this.getErrorMessageWithLink(log_1.getMessage(this.lastErrorLog)), this.clientVersion);
-        if (((_b = (_a = this.lastErrorLog) === null || _a === void 0 ? void 0 : _a.fields) === null || _b === void 0 ? void 0 : _b.message) === "PANIC") {
+      if (this.lastErrorLog && (0, import_log.isRustErrorLog)(this.lastErrorLog)) {
+        const err = new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(this.getErrorMessageWithLink((0, import_log.getMessage)(this.lastErrorLog)), this.clientVersion);
+        if (((_b = (_a = this.lastErrorLog) == null ? void 0 : _a.fields) == null ? void 0 : _b.message) === "PANIC") {
           this.lastPanic = err;
         }
         if (this.hasMaxRestarts || forceThrow) {
@@ -28950,7 +29958,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       }
     }
     getErrorMessageWithLink(title) {
-      return errors_1.getErrorMessageWithLink({
+      return (0, import_getErrorMessageWithLink.getErrorMessageWithLink)({
         platform: this.platform,
         title,
         version: this.clientVersion,
@@ -28961,12 +29969,11 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     }
     graphQLToJSError(error) {
       if (error.user_facing_error.error_code) {
-        return new errors_1.PrismaClientKnownRequestError(error.user_facing_error.message, error.user_facing_error.error_code, this.clientVersion, error.user_facing_error.meta);
+        return new import_PrismaClientKnownRequestError.PrismaClientKnownRequestError(error.user_facing_error.message, error.user_facing_error.error_code, this.clientVersion, error.user_facing_error.meta);
       }
-      return new errors_1.PrismaClientUnknownRequestError(error.user_facing_error.message, this.clientVersion);
+      return new import_PrismaClientUnknownRequestError.PrismaClientUnknownRequestError(error.user_facing_error.message, this.clientVersion);
     }
   };
-  exports.BinaryEngine = BinaryEngine;
   function stringifyQuery(q) {
     return `{"variables":{},"query":${JSON.stringify(q)}}`;
   }
@@ -28980,7 +29987,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       if (socketPaths.length > 0) {
         for (const socketPath of socketPaths) {
           try {
-            fs_1.default.unlinkSync(socketPath);
+            import_fs.default.unlinkSync(socketPath);
           } catch (e) {
           }
         }
@@ -29002,133 +30009,221 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       hooksInitialized = true;
     }
   }
+  function transactionHttpErrorHandler(result) {
+    throw result.data;
+  }
+  function runtimeHeadersToHttpHeaders(headers) {
+    return Object.keys(headers).reduce((acc, runtimeHeaderKey) => {
+      let httpHeaderKey = runtimeHeaderKey;
+      if (runtimeHeaderKey === "transactionId") {
+        httpHeaderKey = "X-transaction-id";
+      }
+      acc[httpHeaderKey] = headers[runtimeHeaderKey];
+      return acc;
+    }, {});
+  }
 });
 
-// ../engine-core/dist/NodeAPILibraryTypes.js
-var require_NodeAPILibraryTypes = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
+// ../engine-core/dist/library/types/Library.js
+var require_Library = __commonJS2((exports2) => {
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  __markAsModule3(exports2);
+});
+
+// ../engine-core/dist/common/utils/getInternalDatamodelJson.js
+var require_getInternalDatamodelJson = __commonJS2((exports2) => {
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    getInternalDatamodelJson: () => getInternalDatamodelJson2
+  });
+  var import_path4 = __toModule3(require("path"));
+  var import_child_process2 = __toModule3(require("child_process"));
+  var import_byline2 = __toModule3(require_byline2());
+  function getInternalDatamodelJson2(datamodel, schemaInferrerPath = import_path4.default.join(__dirname, "../schema-inferrer-bin")) {
+    return new Promise((resolve, reject) => {
+      const proc = (0, import_child_process2.spawn)(schemaInferrerPath, {
+        stdio: ["pipe", "pipe", process.stderr]
+      });
+      proc.on("error", function(err) {
+        console.error("[schema-inferrer-bin] error: %s", err);
+        reject(err);
+      });
+      proc.on("exit", function(code, signal) {
+        if (code !== 0) {
+          console.error("[schema-inferrer-bin] exit: code=%s signal=%s", code, signal);
+        }
+        reject();
+      });
+      const out = (0, import_byline2.default)(proc.stdout);
+      out.on("data", (line) => {
+        const result = JSON.parse(line);
+        const resultB64 = Buffer.from(JSON.stringify(result)).toString("base64");
+        resolve(resultB64);
+      });
+      const cut = datamodel.replace(/\n/g, " ");
+      proc.stdin.write(JSON.stringify({dataModel: cut}) + "\n");
+    });
+  }
 });
 
 // ../engine-core/dist/index.js
 var require_dist11 = __commonJS2((exports2) => {
-  "use strict";
-  var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
-    if (k2 === void 0)
-      k2 = k;
-    Object.defineProperty(o, k2, {enumerable: true, get: function() {
-      return m[k];
-    }});
-  } : function(o, m, k, k2) {
-    if (k2 === void 0)
-      k2 = k;
-    o[k2] = m[k];
-  });
-  var __setModuleDefault = exports2 && exports2.__setModuleDefault || (Object.create ? function(o, v) {
-    Object.defineProperty(o, "default", {enumerable: true, value: v});
-  } : function(o, v) {
-    o["default"] = v;
-  });
-  var __importStar = exports2 && exports2.__importStar || function(mod2) {
-    if (mod2 && mod2.__esModule)
-      return mod2;
-    var result = {};
-    if (mod2 != null) {
-      for (var k in mod2)
-        if (k !== "default" && Object.prototype.hasOwnProperty.call(mod2, k))
-          __createBinding(result, mod2, k);
-    }
-    __setModuleDefault(result, mod2);
-    return result;
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.fixBinaryTargets = exports2.NodeAPILibraryTypes = exports2.getOriginalBinaryTargetsValue = exports2.printGeneratorConfig = exports2.BinaryEngine = exports2.LibraryEngine = exports2.getInternalDatamodelJson = exports2.PrismaClientUnknownRequestError = exports2.PrismaClientRustPanicError = exports2.PrismaClientKnownRequestError = exports2.PrismaClientInitializationError = void 0;
-  var errors_12 = require_errors();
-  Object.defineProperty(exports2, "PrismaClientInitializationError", {enumerable: true, get: function() {
-    return errors_12.PrismaClientInitializationError;
-  }});
-  Object.defineProperty(exports2, "PrismaClientKnownRequestError", {enumerable: true, get: function() {
-    return errors_12.PrismaClientKnownRequestError;
-  }});
-  Object.defineProperty(exports2, "PrismaClientRustPanicError", {enumerable: true, get: function() {
-    return errors_12.PrismaClientRustPanicError;
-  }});
-  Object.defineProperty(exports2, "PrismaClientUnknownRequestError", {enumerable: true, get: function() {
-    return errors_12.PrismaClientUnknownRequestError;
-  }});
-  var getInternalDatamodelJson_1 = require_getInternalDatamodelJson();
-  Object.defineProperty(exports2, "getInternalDatamodelJson", {enumerable: true, get: function() {
-    return getInternalDatamodelJson_1.getInternalDatamodelJson;
-  }});
-  var LibraryEngine_1 = require_LibraryEngine();
-  Object.defineProperty(exports2, "LibraryEngine", {enumerable: true, get: function() {
-    return LibraryEngine_1.LibraryEngine;
-  }});
-  var BinaryEngine_1 = require_BinaryEngine();
-  Object.defineProperty(exports2, "BinaryEngine", {enumerable: true, get: function() {
-    return BinaryEngine_1.BinaryEngine;
-  }});
-  var printGeneratorConfig_12 = require_printGeneratorConfig();
-  Object.defineProperty(exports2, "printGeneratorConfig", {enumerable: true, get: function() {
-    return printGeneratorConfig_12.printGeneratorConfig;
-  }});
-  Object.defineProperty(exports2, "getOriginalBinaryTargetsValue", {enumerable: true, get: function() {
-    return printGeneratorConfig_12.getOriginalBinaryTargetsValue;
-  }});
-  exports2.NodeAPILibraryTypes = __importStar(require_NodeAPILibraryTypes());
-  var util_12 = require_util4();
-  Object.defineProperty(exports2, "fixBinaryTargets", {enumerable: true, get: function() {
-    return util_12.fixBinaryTargets;
-  }});
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    BinaryEngine: () => import_BinaryEngine.BinaryEngine,
+    DatasourceOverwrite: () => import_Engine4.DatasourceOverwrite,
+    Engine: () => import_Engine2.Engine,
+    EngineConfig: () => import_Engine22.EngineConfig,
+    EngineEventType: () => import_Engine3.EngineEventType,
+    LibraryEngine: () => import_LibraryEngine.LibraryEngine,
+    NodeAPILibraryTypes: () => NodeAPILibraryTypes,
+    PrismaClientInitializationError: () => import_PrismaClientInitializationError2.PrismaClientInitializationError,
+    PrismaClientKnownRequestError: () => import_PrismaClientKnownRequestError2.PrismaClientKnownRequestError,
+    PrismaClientRustPanicError: () => import_PrismaClientRustPanicError2.PrismaClientRustPanicError,
+    PrismaClientUnknownRequestError: () => import_PrismaClientUnknownRequestError2.PrismaClientUnknownRequestError,
+    fixBinaryTargets: () => import_util4.fixBinaryTargets,
+    getInternalDatamodelJson: () => import_getInternalDatamodelJson.getInternalDatamodelJson,
+    getOriginalBinaryTargetsValue: () => import_printGeneratorConfig2.getOriginalBinaryTargetsValue,
+    plusX: () => import_util22.plusX,
+    printGeneratorConfig: () => import_printGeneratorConfig2.printGeneratorConfig
+  });
+  var import_PrismaClientInitializationError2 = __toModule3(require_PrismaClientInitializationError());
+  var import_PrismaClientKnownRequestError2 = __toModule3(require_PrismaClientKnownRequestError());
+  var import_PrismaClientRustPanicError2 = __toModule3(require_PrismaClientRustPanicError());
+  var import_PrismaClientUnknownRequestError2 = __toModule3(require_PrismaClientUnknownRequestError());
+  var import_Engine2 = __toModule3(require_Engine());
+  var import_Engine22 = __toModule3(require_Engine());
+  var import_Engine3 = __toModule3(require_Engine());
+  var import_Engine4 = __toModule3(require_Engine());
+  var import_LibraryEngine = __toModule3(require_LibraryEngine());
+  var import_BinaryEngine = __toModule3(require_BinaryEngine());
+  var NodeAPILibraryTypes = __toModule3(require_Library());
+  var import_printGeneratorConfig2 = __toModule3(require_printGeneratorConfig());
+  var import_getInternalDatamodelJson = __toModule3(require_getInternalDatamodelJson());
+  var import_util4 = __toModule3(require_util4());
+  var import_util22 = __toModule3(require_util4());
 });
 
 // ../sdk/dist/logger.js
 var require_logger = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.query = exports2.error = exports2.info = exports2.warn = exports2.log = exports2.should = exports2.tags = void 0;
-  var chalk_12 = __importDefault2(require_source2());
-  exports2.tags = {
-    error: chalk_12.default.red("prisma:error"),
-    warn: chalk_12.default.yellow("prisma:warn"),
-    info: chalk_12.default.cyan("prisma:info"),
-    query: chalk_12.default.blue("prisma:query")
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
   };
-  exports2.should = {
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    error: () => error,
+    info: () => info,
+    log: () => log4,
+    query: () => query,
+    should: () => should,
+    tags: () => tags2,
+    warn: () => warn
+  });
+  var import_chalk7 = __toModule3(require_source2());
+  var tags2 = {
+    error: import_chalk7.default.red("prisma:error"),
+    warn: import_chalk7.default.yellow("prisma:warn"),
+    info: import_chalk7.default.cyan("prisma:info"),
+    query: import_chalk7.default.blue("prisma:query")
+  };
+  var should = {
     warn: !process.env.PRISMA_DISABLE_WARNINGS
   };
   function log4(...data) {
     console.log(...data);
   }
-  exports2.log = log4;
   function warn(message, ...optionalParams) {
-    if (exports2.should.warn) {
-      console.warn(`${exports2.tags.warn} ${message}`, ...optionalParams);
+    if (should.warn) {
+      console.warn(`${tags2.warn} ${message}`, ...optionalParams);
     }
   }
-  exports2.warn = warn;
   function info(message, ...optionalParams) {
-    console.info(`${exports2.tags.info} ${message}`, ...optionalParams);
+    console.info(`${tags2.info} ${message}`, ...optionalParams);
   }
-  exports2.info = info;
   function error(message, ...optionalParams) {
-    console.error(`${exports2.tags.error} ${message}`, ...optionalParams);
+    console.error(`${tags2.error} ${message}`, ...optionalParams);
   }
-  exports2.error = error;
   function query(message, ...optionalParams) {
-    console.log(`${exports2.tags.query} ${message}`, ...optionalParams);
+    console.log(`${tags2.query} ${message}`, ...optionalParams);
   }
-  exports2.query = query;
 });
 
 // ../sdk/dist/utils/mapPreviewFeatures.js
 var require_mapPreviewFeatures = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.mapPreviewFeatures = void 0;
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    mapPreviewFeatures: () => mapPreviewFeatures2
+  });
   var featureFlagMap = {
     transactionApi: "transaction",
     aggregateApi: "aggregations"
@@ -29137,12 +30232,11 @@ var require_mapPreviewFeatures = __commonJS2((exports2) => {
     if (Array.isArray(features) && features.length > 0) {
       return features.map((f) => {
         var _a;
-        return (_a = featureFlagMap[f]) !== null && _a !== void 0 ? _a : f;
+        return (_a = featureFlagMap[f]) != null ? _a : f;
       });
     }
     return [];
   }
-  exports2.mapPreviewFeatures = mapPreviewFeatures2;
 });
 
 // ../../node_modules/.pnpm/dotenv@10.0.0/node_modules/dotenv/lib/main.js
@@ -29158,7 +30252,7 @@ var require_main3 = __commonJS2((exports2, module2) => {
   var RE_NEWLINES = /\\n/g;
   var NEWLINES_MATCH = /\r\n|\n|\r/;
   function parse2(src, options) {
-    const debug5 = Boolean(options && options.debug);
+    const debug6 = Boolean(options && options.debug);
     const obj = {};
     src.toString().split(NEWLINES_MATCH).forEach(function(line, idx) {
       const keyValueArr = line.match(RE_INI_KEY_VAL);
@@ -29177,7 +30271,7 @@ var require_main3 = __commonJS2((exports2, module2) => {
           val = val.trim();
         }
         obj[key] = val;
-      } else if (debug5) {
+      } else if (debug6) {
         log4(`did not match key and value when parsing line ${idx + 1}: ${line}`);
       }
     });
@@ -29189,7 +30283,7 @@ var require_main3 = __commonJS2((exports2, module2) => {
   function config2(options) {
     let dotenvPath = path3.resolve(process.cwd(), ".env");
     let encoding = "utf8";
-    let debug5 = false;
+    let debug6 = false;
     if (options) {
       if (options.path != null) {
         dotenvPath = resolveHome(options.path);
@@ -29198,15 +30292,15 @@ var require_main3 = __commonJS2((exports2, module2) => {
         encoding = options.encoding;
       }
       if (options.debug != null) {
-        debug5 = true;
+        debug6 = true;
       }
     }
     try {
-      const parsed = parse2(fs3.readFileSync(dotenvPath, {encoding}), {debug: debug5});
+      const parsed = parse2(fs3.readFileSync(dotenvPath, {encoding}), {debug: debug6});
       Object.keys(parsed).forEach(function(key) {
         if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
           process.env[key] = parsed[key];
-        } else if (debug5) {
+        } else if (debug6) {
           log4(`"${key}" is already defined in \`process.env\` and will not be overwritten`);
         }
       });
@@ -29221,9 +30315,16 @@ var require_main3 = __commonJS2((exports2, module2) => {
 
 // ../sdk/dist/dotenvExpand.js
 var require_dotenvExpand = __commonJS2((exports2) => {
-  "use strict";
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.dotenvExpand = void 0;
+  var __defProp3 = Object.defineProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
+  };
+  __export3(exports2, {
+    dotenvExpand: () => dotenvExpand
+  });
   function dotenvExpand(config2) {
     const environment = config2.ignoreProcessEnv ? {} : process.env;
     const interpolate = (envValue) => {
@@ -29256,25 +30357,50 @@ var require_dotenvExpand = __commonJS2((exports2) => {
     }
     return config2;
   }
-  exports2.dotenvExpand = dotenvExpand;
 });
 
 // ../sdk/dist/utils/tryLoadEnvs.js
 var require_tryLoadEnvs = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.exists = exports2.pathsEqual = exports2.loadEnv = exports2.tryLoadEnvs = void 0;
-  var chalk_12 = __importDefault2(require_source2());
-  var debug_12 = __importDefault2(require_dist7());
-  var dotenv_1 = __importDefault2(require_main3());
-  var fs_12 = __importDefault2(require("fs"));
-  var path_12 = __importDefault2(require("path"));
-  var dotenvExpand_1 = require_dotenvExpand();
-  var debug5 = debug_12.default("prisma:tryLoadEnv");
-  function tryLoadEnvs3({rootEnvPath, schemaEnvPath}, opts = {
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    exists: () => exists2,
+    loadEnv: () => loadEnv,
+    pathsEqual: () => pathsEqual,
+    tryLoadEnvs: () => tryLoadEnvs3
+  });
+  var import_chalk7 = __toModule3(require_source2());
+  var import_debug5 = __toModule3(require_dist7());
+  var import_dotenv = __toModule3(require_main3());
+  var import_fs4 = __toModule3(require("fs"));
+  var import_path4 = __toModule3(require("path"));
+  var import_dotenvExpand = __toModule3(require_dotenvExpand());
+  var debug6 = (0, import_debug5.default)("prisma:tryLoadEnv");
+  function tryLoadEnvs3({
+    rootEnvPath,
+    schemaEnvPath
+  }, opts = {
     conflictCheck: "none"
   }) {
     var _a, _b;
@@ -29283,30 +30409,29 @@ var require_tryLoadEnvs = __commonJS2((exports2) => {
       checkForConflicts(rootEnvInfo, schemaEnvPath, opts.conflictCheck);
     }
     let schemaEnvInfo = null;
-    if (!pathsEqual(rootEnvInfo === null || rootEnvInfo === void 0 ? void 0 : rootEnvInfo.path, schemaEnvPath)) {
+    if (!pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, schemaEnvPath)) {
       schemaEnvInfo = loadEnv(schemaEnvPath);
     }
     if (!rootEnvInfo && !schemaEnvInfo) {
-      debug5("No Environment variables loaded");
+      debug6("No Environment variables loaded");
     }
-    if (schemaEnvInfo === null || schemaEnvInfo === void 0 ? void 0 : schemaEnvInfo.dotenvResult.error) {
-      return console.error(chalk_12.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
+    if (schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult.error) {
+      return console.error(import_chalk7.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
     }
-    const messages = [rootEnvInfo === null || rootEnvInfo === void 0 ? void 0 : rootEnvInfo.message, schemaEnvInfo === null || schemaEnvInfo === void 0 ? void 0 : schemaEnvInfo.message].filter(Boolean);
+    const messages = [rootEnvInfo == null ? void 0 : rootEnvInfo.message, schemaEnvInfo == null ? void 0 : schemaEnvInfo.message].filter(Boolean);
     return {
       message: messages.join("\n"),
       parsed: {
-        ...(_a = rootEnvInfo === null || rootEnvInfo === void 0 ? void 0 : rootEnvInfo.dotenvResult) === null || _a === void 0 ? void 0 : _a.parsed,
-        ...(_b = schemaEnvInfo === null || schemaEnvInfo === void 0 ? void 0 : schemaEnvInfo.dotenvResult) === null || _b === void 0 ? void 0 : _b.parsed
+        ...(_a = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult) == null ? void 0 : _a.parsed,
+        ...(_b = schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult) == null ? void 0 : _b.parsed
       }
     };
   }
-  exports2.tryLoadEnvs = tryLoadEnvs3;
   function checkForConflicts(rootEnvInfo, envPath, type) {
-    const parsedRootEnv = rootEnvInfo === null || rootEnvInfo === void 0 ? void 0 : rootEnvInfo.dotenvResult.parsed;
-    const areNotTheSame = !pathsEqual(rootEnvInfo === null || rootEnvInfo === void 0 ? void 0 : rootEnvInfo.path, envPath);
-    if (parsedRootEnv && envPath && areNotTheSame && fs_12.default.existsSync(envPath)) {
-      const envConfig = dotenv_1.default.parse(fs_12.default.readFileSync(envPath));
+    const parsedRootEnv = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult.parsed;
+    const areNotTheSame = !pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, envPath);
+    if (parsedRootEnv && envPath && areNotTheSame && import_fs4.default.existsSync(envPath)) {
+      const envConfig = import_dotenv.default.parse(import_fs4.default.readFileSync(envPath));
       const conflicts = [];
       for (const k in envConfig) {
         if (parsedRootEnv[k] === envConfig[k]) {
@@ -29314,55 +30439,52 @@ var require_tryLoadEnvs = __commonJS2((exports2) => {
         }
       }
       if (conflicts.length > 0) {
-        const relativeRootEnvPath = path_12.default.relative(process.cwd(), rootEnvInfo.path);
-        const relativeEnvPath = path_12.default.relative(process.cwd(), envPath);
+        const relativeRootEnvPath = import_path4.default.relative(process.cwd(), rootEnvInfo.path);
+        const relativeEnvPath = import_path4.default.relative(process.cwd(), envPath);
         if (type === "error") {
-          const message = `There is a conflict between env var${conflicts.length > 1 ? "s" : ""} in ${chalk_12.default.underline(relativeRootEnvPath)} and ${chalk_12.default.underline(relativeEnvPath)}
+          const message = `There is a conflict between env var${conflicts.length > 1 ? "s" : ""} in ${import_chalk7.default.underline(relativeRootEnvPath)} and ${import_chalk7.default.underline(relativeEnvPath)}
 Conflicting env vars:
-${conflicts.map((conflict) => `  ${chalk_12.default.bold(conflict)}`).join("\n")}
+${conflicts.map((conflict) => `  ${import_chalk7.default.bold(conflict)}`).join("\n")}
 
-We suggest to move the contents of ${chalk_12.default.underline(relativeEnvPath)} to ${chalk_12.default.underline(relativeRootEnvPath)} to consolidate your env vars.
+We suggest to move the contents of ${import_chalk7.default.underline(relativeEnvPath)} to ${import_chalk7.default.underline(relativeRootEnvPath)} to consolidate your env vars.
 `;
           throw new Error(message);
         } else if (type === "warn") {
-          const message = `Conflict for env var${conflicts.length > 1 ? "s" : ""} ${conflicts.map((c) => chalk_12.default.bold(c)).join(", ")} in ${chalk_12.default.underline(relativeRootEnvPath)} and ${chalk_12.default.underline(relativeEnvPath)}
-Env vars from ${chalk_12.default.underline(relativeEnvPath)} overwrite the ones from ${chalk_12.default.underline(relativeRootEnvPath)}
+          const message = `Conflict for env var${conflicts.length > 1 ? "s" : ""} ${conflicts.map((c) => import_chalk7.default.bold(c)).join(", ")} in ${import_chalk7.default.underline(relativeRootEnvPath)} and ${import_chalk7.default.underline(relativeEnvPath)}
+Env vars from ${import_chalk7.default.underline(relativeEnvPath)} overwrite the ones from ${import_chalk7.default.underline(relativeRootEnvPath)}
       `;
-          console.warn(`${chalk_12.default.yellow("warn(prisma)")} ${message}`);
+          console.warn(`${import_chalk7.default.yellow("warn(prisma)")} ${message}`);
         }
       }
     }
   }
   function loadEnv(envPath) {
     if (exists2(envPath)) {
-      debug5(`Environment variables loaded from ${envPath}`);
+      debug6(`Environment variables loaded from ${envPath}`);
       const debugEnv = process.env.DEBUG;
       let enableDebug = void 0;
       if (debugEnv && (debugEnv.startsWith("prisma") || debugEnv === "*")) {
         enableDebug = true;
       }
       return {
-        dotenvResult: dotenvExpand_1.dotenvExpand(dotenv_1.default.config({
+        dotenvResult: (0, import_dotenvExpand.dotenvExpand)(import_dotenv.default.config({
           path: envPath,
           debug: enableDebug
         })),
-        message: chalk_12.default.dim(`Environment variables loaded from ${path_12.default.relative(process.cwd(), envPath)}`),
+        message: import_chalk7.default.dim(`Environment variables loaded from ${import_path4.default.relative(process.cwd(), envPath)}`),
         path: envPath
       };
     } else {
-      debug5(`Environment variables not found at ${envPath}`);
+      debug6(`Environment variables not found at ${envPath}`);
     }
     return null;
   }
-  exports2.loadEnv = loadEnv;
   function pathsEqual(path1, path22) {
-    return path1 && path22 && path_12.default.resolve(path1) === path_12.default.resolve(path22);
+    return path1 && path22 && import_path4.default.resolve(path1) === import_path4.default.resolve(path22);
   }
-  exports2.pathsEqual = pathsEqual;
   function exists2(p) {
-    return Boolean(p && fs_12.default.existsSync(p));
+    return Boolean(p && import_fs4.default.existsSync(p));
   }
-  exports2.exists = exists2;
 });
 
 // ../../node_modules/.pnpm/sql-template-tag@4.0.0/node_modules/sql-template-tag/dist/index.js
@@ -29370,7 +30492,7 @@ var require_dist12 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.sqltag = exports2.empty = exports2.raw = exports2.join = exports2.Sql = void 0;
-  var util_12 = require("util");
+  var util_1 = require("util");
   var Sql2 = class {
     constructor(rawStrings, rawValues) {
       let valuesLength = rawValues.length;
@@ -29415,7 +30537,7 @@ var require_dist12 = __commonJS2((exports2) => {
     get sql() {
       return this.strings.join("?");
     }
-    [util_12.inspect.custom]() {
+    [util_1.inspect.custom]() {
       return {
         text: this.text,
         sql: this.sql,
@@ -29557,37 +30679,56 @@ var require_arg = __commonJS2((exports2, module2) => {
 
 // ../sdk/dist/cli/utils.js
 var require_utils5 = __commonJS2((exports2) => {
-  "use strict";
-  var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-    return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+  var __create3 = Object.create;
+  var __defProp3 = Object.defineProperty;
+  var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames3 = Object.getOwnPropertyNames;
+  var __getProtoOf3 = Object.getPrototypeOf;
+  var __hasOwnProp3 = Object.prototype.hasOwnProperty;
+  var __markAsModule3 = (target) => __defProp3(target, "__esModule", {value: true});
+  var __export3 = (target, all) => {
+    __markAsModule3(target);
+    for (var name in all)
+      __defProp3(target, name, {get: all[name], enumerable: true});
   };
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2.isError = exports2.arg = exports2.format = void 0;
-  var strip_indent_1 = __importDefault2(require_strip_indent());
-  var arg_1 = __importDefault2(require_arg());
+  var __reExport2 = (target, module22, desc) => {
+    if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+      for (let key of __getOwnPropNames3(module22))
+        if (!__hasOwnProp3.call(target, key) && key !== "default")
+          __defProp3(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule3 = (module22) => {
+    return __reExport2(__markAsModule3(__defProp3(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+  };
+  __export3(exports2, {
+    arg: () => arg,
+    format: () => format,
+    isError: () => isError3
+  });
+  var import_strip_indent2 = __toModule3(require_strip_indent());
+  var import_arg = __toModule3(require_arg());
   function format(input = "") {
-    return strip_indent_1.default(input).trimRight() + "\n";
+    return (0, import_strip_indent2.default)(input).trimRight() + "\n";
   }
-  exports2.format = format;
   function arg(argv, spec, stopAtPositional = true, permissive = false) {
     try {
-      return arg_1.default(spec, {argv, stopAtPositional, permissive});
+      return (0, import_arg.default)(spec, {argv, stopAtPositional, permissive});
     } catch (err) {
       return err;
     }
   }
-  exports2.arg = arg;
   function isError3(result) {
     return result instanceof Error;
   }
-  exports2.isError = isError3;
 });
 
 // package.json
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.27.0",
+    version: "2.29.0",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -29619,10 +30760,12 @@ var require_package2 = __commonJS2((exports2, module2) => {
     maintainers: [
       "Tim Suchanek <suchanek@prisma.io>",
       "Jo\xEBl Galeran <galeran@prisma.io>",
-      "William Luke <luke@prisma.io>"
+      "William Luke <luke@prisma.io>",
+      "Pierre-Antoine Mills <mills@prisma.io>"
     ],
     bugs: "https://github.com/prisma/prisma/issues",
     scripts: {
+      dev: "DEV=true node helpers/build.js",
       build: "node helpers/build.js",
       test: "jest",
       format: "prettier --write .",
@@ -29646,30 +30789,30 @@ var require_package2 = __commonJS2((exports2, module2) => {
     devDependencies: {
       "@prisma/debug": "workspace:*",
       "@prisma/engine-core": "workspace:*",
-      "@prisma/engines": "2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb",
-      "@prisma/fetch-engine": "2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb",
+      "@prisma/engines": "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a",
+      "@prisma/fetch-engine": "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a",
       "@prisma/generator-helper": "workspace:*",
-      "@prisma/get-platform": "2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb",
+      "@prisma/get-platform": "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a",
       "@prisma/migrate": "workspace:*",
       "@prisma/sdk": "workspace:*",
       "@timsuchanek/copy": "1.4.5",
-      "@types/debug": "4.1.6",
+      "@types/debug": "4.1.7",
       "@types/jest": "26.0.24",
       "@types/js-levenshtein": "1.1.0",
       "@types/mssql": "6.0.8",
-      "@types/node": "12.20.15",
-      "@types/pg": "8.6.0",
-      "@typescript-eslint/eslint-plugin": "4.28.2",
-      "@typescript-eslint/parser": "4.28.2",
+      "@types/node": "12.20.18",
+      "@types/pg": "8.6.1",
+      "@typescript-eslint/eslint-plugin": "4.29.0",
+      "@typescript-eslint/parser": "4.29.0",
       arg: "5.0.0",
-      chalk: "4.1.1",
+      chalk: "4.1.2",
       "decimal.js": "10.3.1",
       esbuild: "0.8.53",
       "escape-string-regexp": "4.0.0",
-      eslint: "7.30.0",
+      eslint: "7.32.0",
       "eslint-config-prettier": "8.3.0",
       "eslint-plugin-eslint-comments": "3.2.0",
-      "eslint-plugin-jest": "24.3.6",
+      "eslint-plugin-jest": "24.4.0",
       "eslint-plugin-prettier": "3.4.0",
       execa: "5.1.1",
       "flat-map-polyfill": "0.3.8",
@@ -29681,17 +30824,17 @@ var require_package2 = __commonJS2((exports2, module2) => {
       jest: "27.0.6",
       "js-levenshtein": "1.1.6",
       klona: "2.0.4",
-      "lint-staged": "11.0.0",
+      "lint-staged": "11.1.1",
       "make-dir": "3.1.0",
       mariadb: "2.5.4",
-      mssql: "7.1.3",
-      pg: "8.6.0",
+      mssql: "7.2.0",
+      pg: "8.7.1",
       "pkg-up": "3.1.0",
       pluralize: "8.0.0",
       prettier: "2.3.2",
       "replace-string": "3.1.0",
       rimraf: "3.0.2",
-      rollup: "2.52.8",
+      rollup: "2.55.1",
       "rollup-plugin-dts": "3.0.2",
       "sort-keys": "4.2.0",
       "source-map-support": "0.5.19",
@@ -29699,8 +30842,8 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "stacktrace-parser": "0.1.10",
       "strip-ansi": "6.0.0",
       "strip-indent": "3.0.0",
-      "ts-jest": "27.0.3",
-      "ts-node": "10.0.0",
+      "ts-jest": "27.0.4",
+      "ts-node": "10.1.0",
       tsd: "0.17.0",
       typescript: "4.3.5"
     },
@@ -29713,7 +30856,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       }
     },
     dependencies: {
-      "@prisma/engines-version": "2.27.0-43.cdba6ec525e0213cce26f8e4bb23cf556d1479bb"
+      "@prisma/engines-version": "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a"
     },
     "lint-staged": {
       "*.ts": [
@@ -29730,11 +30873,11 @@ __export2(exports, {
   DMMF: () => import_generator_helper.DMMF,
   DMMFClass: () => DMMFClass,
   Decimal: () => decimal_default,
-  Engine: () => import_engine_core.Engine,
-  PrismaClientInitializationError: () => import_engine_core.PrismaClientInitializationError,
-  PrismaClientKnownRequestError: () => import_engine_core.PrismaClientKnownRequestError,
-  PrismaClientRustPanicError: () => import_engine_core.PrismaClientRustPanicError,
-  PrismaClientUnknownRequestError: () => import_engine_core.PrismaClientUnknownRequestError,
+  Engine: () => import_engine_core3.Engine,
+  PrismaClientInitializationError: () => import_engine_core3.PrismaClientInitializationError,
+  PrismaClientKnownRequestError: () => import_engine_core3.PrismaClientKnownRequestError,
+  PrismaClientRustPanicError: () => import_engine_core3.PrismaClientRustPanicError,
+  PrismaClientUnknownRequestError: () => import_engine_core3.PrismaClientUnknownRequestError,
   PrismaClientValidationError: () => PrismaClientValidationError,
   RawValue: () => import_sql_template_tag.RawValue,
   Sql: () => import_sql_template_tag.Sql,
@@ -29755,7 +30898,7 @@ __export2(exports, {
 var import_generator_helper = __toModule2(require_dist8());
 
 // src/runtime/utils/common.ts
-var import_chalk = __toModule2(require_source2());
+var import_chalk2 = __toModule2(require_source2());
 var import_indent_string = __toModule2(require_indent_string2());
 var import_js_levenshtein = __toModule2(require_js_levenshtein());
 
@@ -32188,17 +33331,17 @@ ${import_indent_string.default(input.values.join(", "), 2)}
   } else {
     const body = import_indent_string.default(input.fields.map((arg) => {
       const key = `${arg.name}`;
-      const str = `${greenKeys ? import_chalk.default.green(key) : key}${arg.isRequired ? "" : "?"}: ${import_chalk.default.white(arg.inputTypes.map((argType) => {
+      const str = `${greenKeys ? import_chalk2.default.green(key) : key}${arg.isRequired ? "" : "?"}: ${import_chalk2.default.white(arg.inputTypes.map((argType) => {
         return wrapWithList(argIsInputType(argType.type) ? argType.type.name : stringifyGraphQLType(argType.type), argType.isList);
       }).join(" | "))}`;
       if (!arg.isRequired) {
-        return import_chalk.default.dim(str);
+        return import_chalk2.default.dim(str);
       }
       return str;
     }).join("\n"), 2);
-    return `${import_chalk.default.dim("type")} ${import_chalk.default.bold.dim(input.name)} ${import_chalk.default.dim("{")}
+    return `${import_chalk2.default.dim("type")} ${import_chalk2.default.bold.dim(input.name)} ${import_chalk2.default.dim("{")}
 ${body}
-${import_chalk.default.dim("}")}`;
+${import_chalk2.default.dim("}")}`;
   }
 }
 function argIsInputType(arg) {
@@ -32411,7 +33554,7 @@ var DMMFClass = class {
 };
 
 // src/runtime/query.ts
-var import_chalk5 = __toModule2(require_source2());
+var import_chalk6 = __toModule2(require_source2());
 var import_indent_string2 = __toModule2(require_indent_string2());
 var import_strip_ansi2 = __toModule2(require_strip_ansi());
 
@@ -32568,7 +33711,7 @@ function omit(object, path3) {
 }
 
 // src/runtime/utils/printJsonErrors.ts
-var import_chalk2 = __toModule2(require_source2());
+var import_chalk3 = __toModule2(require_source2());
 var import_strip_ansi = __toModule2(require_strip_ansi());
 
 // src/runtime/utils/stringifyObject.ts
@@ -32710,10 +33853,10 @@ function printJsonWithErrors({
         }
         const isRequiredStr = missingItem.isRequired ? "" : "?";
         const prefix = missingItem.isRequired ? "+" : "?";
-        const color = missingItem.isRequired ? import_chalk2.default.greenBright : import_chalk2.default.green;
+        const color = missingItem.isRequired ? import_chalk3.default.greenBright : import_chalk3.default.green;
         let output = color(prefixLines(key + isRequiredStr + ": " + valueStr + eol, indent3, prefix));
         if (!missingItem.isRequired) {
-          output = import_chalk2.default.dim(output);
+          output = import_chalk3.default.dim(output);
         }
         return output;
       } else {
@@ -32728,22 +33871,22 @@ function printJsonWithErrors({
         if (isOnMissingItemPath && typeof value === "string") {
           valueStr = valueStr.slice(1, valueStr.length - 1);
           if (!isOptional) {
-            valueStr = import_chalk2.default.bold(valueStr);
+            valueStr = import_chalk3.default.bold(valueStr);
           }
         }
         if ((typeof value !== "object" || value === null) && !valueError && !isOnMissingItemPath) {
-          valueStr = import_chalk2.default.dim(valueStr);
+          valueStr = import_chalk3.default.dim(valueStr);
         }
-        const keyStr = keyError ? import_chalk2.default.redBright(key) : key;
-        valueStr = valueError ? import_chalk2.default.redBright(valueStr) : valueStr;
-        let output = indent3 + keyStr + ": " + valueStr + (isOnMissingItemPath ? eol : import_chalk2.default.dim(eol));
+        const keyStr = keyError ? import_chalk3.default.redBright(key) : key;
+        valueStr = valueError ? import_chalk3.default.redBright(valueStr) : valueStr;
+        let output = indent3 + keyStr + ": " + valueStr + (isOnMissingItemPath ? eol : import_chalk3.default.dim(eol));
         if (keyError || valueError) {
           const lines = output.split("\n");
           const keyLength = String(key).length;
-          const keyScribbles = keyError ? import_chalk2.default.redBright("~".repeat(keyLength)) : " ".repeat(keyLength);
+          const keyScribbles = keyError ? import_chalk3.default.redBright("~".repeat(keyLength)) : " ".repeat(keyLength);
           const valueLength = valueError ? getValueLength(indent3, key, value, stringifiedValue) : 0;
           const hideValueScribbles = Boolean(valueError && typeof value === "object" && value !== null);
-          const valueScribbles = valueError ? "  " + import_chalk2.default.redBright("~".repeat(valueLength)) : "";
+          const valueScribbles = valueError ? "  " + import_chalk3.default.redBright("~".repeat(valueLength)) : "";
           if (keyScribbles && keyScribbles.length > 0 && !hideValueScribbles) {
             lines.splice(1, 0, indent3 + keyScribbles + valueScribbles);
           }
@@ -32774,20 +33917,20 @@ function getLongestLine(str) {
 }
 function prefixLines(str, indent3, prefix) {
   return str.split("\n").map((line, index, arr) => index === 0 ? prefix + indent3.slice(1) + line : index < arr.length - 1 ? prefix + line.slice(1) : line).map((line) => {
-    return import_strip_ansi.default(line).includes(DIM_TOKEN) ? import_chalk2.default.dim(line.replace(DIM_TOKEN, "")) : line.includes("?") ? import_chalk2.default.dim(line) : line;
+    return import_strip_ansi.default(line).includes(DIM_TOKEN) ? import_chalk3.default.dim(line.replace(DIM_TOKEN, "")) : line.includes("?") ? import_chalk3.default.dim(line) : line;
   }).join("\n");
 }
 
 // src/runtime/utils/printStack.ts
-var import_chalk4 = __toModule2(require_source2());
+var import_chalk5 = __toModule2(require_source2());
 var stackTraceParser = __toModule2(require_stack_trace_parser_cjs());
 
 // src/runtime/highlight/theme.ts
-var import_chalk3 = __toModule2(require_source2());
-var orange = import_chalk3.default.rgb(246, 145, 95);
-var darkBrightBlue = import_chalk3.default.rgb(107, 139, 140);
-var blue = import_chalk3.default.cyan;
-var brightBlue = import_chalk3.default.rgb(127, 155, 155);
+var import_chalk4 = __toModule2(require_source2());
+var orange = import_chalk4.default.rgb(246, 145, 95);
+var darkBrightBlue = import_chalk4.default.rgb(107, 139, 140);
+var blue = import_chalk4.default.cyan;
+var brightBlue = import_chalk4.default.rgb(127, 155, 155);
 var identity = (str) => str;
 var theme = {
   keyword: blue,
@@ -32797,10 +33940,10 @@ var theme = {
   directive: blue,
   function: blue,
   variable: brightBlue,
-  string: import_chalk3.default.greenBright,
+  string: import_chalk4.default.greenBright,
   boolean: orange,
-  number: import_chalk3.default.cyan,
-  comment: import_chalk3.default.grey
+  number: import_chalk4.default.cyan,
+  comment: import_chalk4.default.grey
 };
 
 // src/runtime/highlight/prism.ts
@@ -33232,11 +34375,11 @@ function parseStack({
         }
         params.functionName = `${match[1]})`;
         params.callsiteStr = ` in
-${import_chalk4.default.underline(`${printedFileName}:${trace.lineNumber}:${trace.column}`)}`;
+${import_chalk5.default.underline(`${printedFileName}:${trace.lineNumber}:${trace.column}`)}`;
         const slicePoint = theLine.indexOf("{");
         const linesToHighlight = lines.map((l, i, all) => !onUs && i === all.length - 1 ? l.slice(0, slicePoint > -1 ? slicePoint : l.length - 1) : l).join("\n");
         const highlightedLines = showColors ? highlightTS(linesToHighlight).split("\n") : linesToHighlight.split("\n");
-        params.prevLines = "\n" + highlightedLines.map((l, i) => import_chalk4.default.grey(renderN(i + start + 1, lineNumber + start + 1) + " ") + import_chalk4.default.reset() + l).map((l, i, arr) => i === arr.length - 1 ? `${import_chalk4.default.red.bold("\u2192")} ${import_chalk4.default.dim(l)}` : import_chalk4.default.dim("  " + l)).join("\n");
+        params.prevLines = "\n" + highlightedLines.map((l, i) => import_chalk5.default.grey(renderN(i + start + 1, lineNumber + start + 1) + " ") + import_chalk5.default.reset() + l).map((l, i, arr) => i === arr.length - 1 ? `${import_chalk5.default.red.bold("\u2192")} ${import_chalk5.default.dim(l)}` : import_chalk5.default.dim("  " + l)).join("\n");
         if (!match && !isValidationError) {
           params.prevLines += "\n\n";
         }
@@ -33256,11 +34399,11 @@ var printStack = (args) => {
     indentValue,
     lastErrorHeight
   } = parseStack(args);
-  const introText = args.onUs ? import_chalk4.default.red(`Oops, an unknown error occured! This is ${import_chalk4.default.bold("on us")}, you did nothing wrong.
-It occured in the ${import_chalk4.default.bold(`\`${functionName}\``)} invocation${callsiteStr}`) : import_chalk4.default.red(`Invalid ${import_chalk4.default.bold(`\`${functionName}\``)} invocation${callsiteStr}`);
+  const introText = args.onUs ? import_chalk5.default.red(`Oops, an unknown error occured! This is ${import_chalk5.default.bold("on us")}, you did nothing wrong.
+It occured in the ${import_chalk5.default.bold(`\`${functionName}\``)} invocation${callsiteStr}`) : import_chalk5.default.red(`Invalid ${import_chalk5.default.bold(`\`${functionName}\``)} invocation${callsiteStr}`);
   const stackStr = `
 ${introText}
-${prevLines}${import_chalk4.default.reset()}`;
+${prevLines}${import_chalk5.default.reset()}`;
   return {indent: indentValue, stack: stackStr, afterLines, lastErrorHeight};
 };
 
@@ -33272,58 +34415,58 @@ var Document = class {
     this.children = children;
     this.printFieldError = ({error}, missingItems, minimal) => {
       if (error.type === "emptySelect") {
-        const additional = minimal ? "" : ` Available options are listed in ${import_chalk5.default.greenBright.dim("green")}.`;
-        return `The ${import_chalk5.default.redBright("`select`")} statement for type ${import_chalk5.default.bold(getOutputTypeName(error.field.outputType.type))} must not be empty.${additional}`;
+        const additional = minimal ? "" : ` Available options are listed in ${import_chalk6.default.greenBright.dim("green")}.`;
+        return `The ${import_chalk6.default.redBright("`select`")} statement for type ${import_chalk6.default.bold(getOutputTypeName(error.field.outputType.type))} must not be empty.${additional}`;
       }
       if (error.type === "emptyInclude") {
         if (missingItems.length === 0) {
-          return `${import_chalk5.default.bold(getOutputTypeName(error.field.outputType.type))} does not have any relation and therefore can't have an ${import_chalk5.default.redBright("`include`")} statement.`;
+          return `${import_chalk6.default.bold(getOutputTypeName(error.field.outputType.type))} does not have any relation and therefore can't have an ${import_chalk6.default.redBright("`include`")} statement.`;
         }
-        const additional = minimal ? "" : ` Available options are listed in ${import_chalk5.default.greenBright.dim("green")}.`;
-        return `The ${import_chalk5.default.redBright("`include`")} statement for type ${import_chalk5.default.bold(getOutputTypeName(error.field.outputType.type))} must not be empty.${additional}`;
+        const additional = minimal ? "" : ` Available options are listed in ${import_chalk6.default.greenBright.dim("green")}.`;
+        return `The ${import_chalk6.default.redBright("`include`")} statement for type ${import_chalk6.default.bold(getOutputTypeName(error.field.outputType.type))} must not be empty.${additional}`;
       }
       if (error.type === "noTrueSelect") {
-        return `The ${import_chalk5.default.redBright("`select`")} statement for type ${import_chalk5.default.bold(getOutputTypeName(error.field.outputType.type))} needs ${import_chalk5.default.bold("at least one truthy value")}.`;
+        return `The ${import_chalk6.default.redBright("`select`")} statement for type ${import_chalk6.default.bold(getOutputTypeName(error.field.outputType.type))} needs ${import_chalk6.default.bold("at least one truthy value")}.`;
       }
       if (error.type === "includeAndSelect") {
-        return `Please ${import_chalk5.default.bold("either")} use ${import_chalk5.default.greenBright("`include`")} or ${import_chalk5.default.greenBright("`select`")}, but ${import_chalk5.default.redBright("not both")} at the same time.`;
+        return `Please ${import_chalk6.default.bold("either")} use ${import_chalk6.default.greenBright("`include`")} or ${import_chalk6.default.greenBright("`select`")}, but ${import_chalk6.default.redBright("not both")} at the same time.`;
       }
       if (error.type === "invalidFieldName") {
         const statement = error.isInclude ? "include" : "select";
         const wording = error.isIncludeScalar ? "Invalid scalar" : "Unknown";
         const additional = minimal ? "" : error.isInclude && missingItems.length === 0 ? `
-This model has no relations, so you can't use ${import_chalk5.default.redBright("include")} with it.` : ` Available options are listed in ${import_chalk5.default.greenBright.dim("green")}.`;
-        let str = `${wording} field ${import_chalk5.default.redBright(`\`${error.providedName}\``)} for ${import_chalk5.default.bold(statement)} statement on model ${import_chalk5.default.bold.white(error.modelName)}.${additional}`;
+This model has no relations, so you can't use ${import_chalk6.default.redBright("include")} with it.` : ` Available options are listed in ${import_chalk6.default.greenBright.dim("green")}.`;
+        let str = `${wording} field ${import_chalk6.default.redBright(`\`${error.providedName}\``)} for ${import_chalk6.default.bold(statement)} statement on model ${import_chalk6.default.bold.white(error.modelName)}.${additional}`;
         if (error.didYouMean) {
-          str += ` Did you mean ${import_chalk5.default.greenBright(`\`${error.didYouMean}\``)}?`;
+          str += ` Did you mean ${import_chalk6.default.greenBright(`\`${error.didYouMean}\``)}?`;
         }
         if (error.isIncludeScalar) {
           str += `
-Note, that ${import_chalk5.default.bold("include")} statements only accept relation fields.`;
+Note, that ${import_chalk6.default.bold("include")} statements only accept relation fields.`;
         }
         return str;
       }
       if (error.type === "invalidFieldType") {
-        const str = `Invalid value ${import_chalk5.default.redBright(`${stringifyObject_default(error.providedValue)}`)} of type ${import_chalk5.default.redBright(getGraphQLType(error.providedValue, void 0))} for field ${import_chalk5.default.bold(`${error.fieldName}`)} on model ${import_chalk5.default.bold.white(error.modelName)}. Expected either ${import_chalk5.default.greenBright("true")} or ${import_chalk5.default.greenBright("false")}.`;
+        const str = `Invalid value ${import_chalk6.default.redBright(`${stringifyObject_default(error.providedValue)}`)} of type ${import_chalk6.default.redBright(getGraphQLType(error.providedValue, void 0))} for field ${import_chalk6.default.bold(`${error.fieldName}`)} on model ${import_chalk6.default.bold.white(error.modelName)}. Expected either ${import_chalk6.default.greenBright("true")} or ${import_chalk6.default.greenBright("false")}.`;
         return str;
       }
       return void 0;
     };
     this.printArgError = ({error, path: path3, id}, hasMissingItems, minimal) => {
       if (error.type === "invalidName") {
-        let str = `Unknown arg ${import_chalk5.default.redBright(`\`${error.providedName}\``)} in ${import_chalk5.default.bold(path3.join("."))} for type ${import_chalk5.default.bold(error.outputType ? error.outputType.name : getInputTypeName(error.originalType))}.`;
+        let str = `Unknown arg ${import_chalk6.default.redBright(`\`${error.providedName}\``)} in ${import_chalk6.default.bold(path3.join("."))} for type ${import_chalk6.default.bold(error.outputType ? error.outputType.name : getInputTypeName(error.originalType))}.`;
         if (error.didYouMeanField) {
           str += `
-\u2192 Did you forget to wrap it with \`${import_chalk5.default.greenBright("select")}\`? ${import_chalk5.default.dim("e.g. " + import_chalk5.default.greenBright(`{ select: { ${error.providedName}: ${error.providedValue} } }`))}`;
+\u2192 Did you forget to wrap it with \`${import_chalk6.default.greenBright("select")}\`? ${import_chalk6.default.dim("e.g. " + import_chalk6.default.greenBright(`{ select: { ${error.providedName}: ${error.providedValue} } }`))}`;
         } else if (error.didYouMeanArg) {
-          str += ` Did you mean \`${import_chalk5.default.greenBright(error.didYouMeanArg)}\`?`;
+          str += ` Did you mean \`${import_chalk6.default.greenBright(error.didYouMeanArg)}\`?`;
           if (!hasMissingItems && !minimal) {
-            str += ` ${import_chalk5.default.dim("Available args:")}
+            str += ` ${import_chalk6.default.dim("Available args:")}
 ` + stringifyInputType(error.originalType, true);
           }
         } else {
           if (error.originalType.fields.length === 0) {
-            str += ` The field ${import_chalk5.default.bold(error.originalType.name)} has no arguments.`;
+            str += ` The field ${import_chalk6.default.bold(error.originalType.name)} has no arguments.`;
           } else if (!hasMissingItems && !minimal) {
             str += ` Available args:
 
@@ -33341,38 +34484,38 @@ ${valueStr}
 `;
         }
         if (error.requiredType.bestFittingType.location === "enumTypes") {
-          return `Argument ${import_chalk5.default.bold(error.argName)}: Provided value ${import_chalk5.default.redBright(valueStr)}${multilineValue ? "" : " "}of type ${import_chalk5.default.redBright(getGraphQLType(error.providedValue))} on ${import_chalk5.default.bold(`prisma.${this.children[0].name}`)} is not a ${import_chalk5.default.greenBright(wrapWithList(stringifyGraphQLType(error.requiredType.bestFittingType.location), error.requiredType.bestFittingType.isList))}.
-\u2192 Possible values: ${error.requiredType.bestFittingType.type.values.map((v) => import_chalk5.default.greenBright(`${stringifyGraphQLType(error.requiredType.bestFittingType.type)}.${v}`)).join(", ")}`;
+          return `Argument ${import_chalk6.default.bold(error.argName)}: Provided value ${import_chalk6.default.redBright(valueStr)}${multilineValue ? "" : " "}of type ${import_chalk6.default.redBright(getGraphQLType(error.providedValue))} on ${import_chalk6.default.bold(`prisma.${this.children[0].name}`)} is not a ${import_chalk6.default.greenBright(wrapWithList(stringifyGraphQLType(error.requiredType.bestFittingType.location), error.requiredType.bestFittingType.isList))}.
+\u2192 Possible values: ${error.requiredType.bestFittingType.type.values.map((v) => import_chalk6.default.greenBright(`${stringifyGraphQLType(error.requiredType.bestFittingType.type)}.${v}`)).join(", ")}`;
         }
         let typeStr = ".";
         if (isInputArgType(error.requiredType.bestFittingType.type)) {
           typeStr = ":\n" + stringifyInputType(error.requiredType.bestFittingType.type);
         }
-        let expected = `${error.requiredType.inputType.map((t) => import_chalk5.default.greenBright(wrapWithList(stringifyGraphQLType(t.type), error.requiredType.bestFittingType.isList))).join(" or ")}${typeStr}`;
+        let expected = `${error.requiredType.inputType.map((t) => import_chalk6.default.greenBright(wrapWithList(stringifyGraphQLType(t.type), error.requiredType.bestFittingType.isList))).join(" or ")}${typeStr}`;
         const inputType = error.requiredType.inputType.length === 2 && error.requiredType.inputType.find((t) => isInputArgType(t.type)) || null;
         if (inputType) {
           expected += `
 ` + stringifyInputType(inputType.type, true);
         }
-        return `Argument ${import_chalk5.default.bold(error.argName)}: Got invalid value ${import_chalk5.default.redBright(valueStr)}${multilineValue ? "" : " "}on ${import_chalk5.default.bold(`prisma.${this.children[0].name}`)}. Provided ${import_chalk5.default.redBright(getGraphQLType(error.providedValue))}, expected ${expected}`;
+        return `Argument ${import_chalk6.default.bold(error.argName)}: Got invalid value ${import_chalk6.default.redBright(valueStr)}${multilineValue ? "" : " "}on ${import_chalk6.default.bold(`prisma.${this.children[0].name}`)}. Provided ${import_chalk6.default.redBright(getGraphQLType(error.providedValue))}, expected ${expected}`;
       }
       if (error.type === "invalidNullArg") {
-        const forStr = path3.length === 1 && path3[0] === error.name ? "" : ` for ${import_chalk5.default.bold(`${path3.join(".")}`)}`;
-        const undefinedTip = ` Please use ${import_chalk5.default.bold.greenBright("undefined")} instead.`;
-        return `Argument ${import_chalk5.default.greenBright(error.name)}${forStr} must not be ${import_chalk5.default.bold("null")}.${undefinedTip}`;
+        const forStr = path3.length === 1 && path3[0] === error.name ? "" : ` for ${import_chalk6.default.bold(`${path3.join(".")}`)}`;
+        const undefinedTip = ` Please use ${import_chalk6.default.bold.greenBright("undefined")} instead.`;
+        return `Argument ${import_chalk6.default.greenBright(error.name)}${forStr} must not be ${import_chalk6.default.bold("null")}.${undefinedTip}`;
       }
       if (error.type === "missingArg") {
-        const forStr = path3.length === 1 && path3[0] === error.missingName ? "" : ` for ${import_chalk5.default.bold(`${path3.join(".")}`)}`;
-        return `Argument ${import_chalk5.default.greenBright(error.missingName)}${forStr} is missing.`;
+        const forStr = path3.length === 1 && path3[0] === error.missingName ? "" : ` for ${import_chalk6.default.bold(`${path3.join(".")}`)}`;
+        return `Argument ${import_chalk6.default.greenBright(error.missingName)}${forStr} is missing.`;
       }
       if (error.type === "atLeastOne") {
-        const additional = minimal ? "" : ` Available args are listed in ${import_chalk5.default.dim.green("green")}.`;
-        return `Argument ${import_chalk5.default.bold(path3.join("."))} of type ${import_chalk5.default.bold(error.inputType.name)} needs ${import_chalk5.default.greenBright("at least one")} argument.${additional}`;
+        const additional = minimal ? "" : ` Available args are listed in ${import_chalk6.default.dim.green("green")}.`;
+        return `Argument ${import_chalk6.default.bold(path3.join("."))} of type ${import_chalk6.default.bold(error.inputType.name)} needs ${import_chalk6.default.greenBright("at least one")} argument.${additional}`;
       }
       if (error.type === "atMostOne") {
-        const additional = minimal ? "" : ` Please choose one. ${import_chalk5.default.dim("Available args:")} 
+        const additional = minimal ? "" : ` Please choose one. ${import_chalk6.default.dim("Available args:")} 
 ${stringifyInputType(error.inputType, true)}`;
-        return `Argument ${import_chalk5.default.bold(path3.join("."))} of type ${import_chalk5.default.bold(error.inputType.name)} needs ${import_chalk5.default.greenBright("exactly one")} argument, but you provided ${error.providedKeys.map((key) => import_chalk5.default.redBright(key)).join(" and ")}.${additional}`;
+        return `Argument ${import_chalk6.default.bold(path3.join("."))} of type ${import_chalk6.default.bold(error.inputType.name)} needs ${import_chalk6.default.greenBright("exactly one")} argument, but you provided ${error.providedKeys.map((key) => import_chalk6.default.redBright(key)).join(" and ")}.${additional}`;
       }
       return void 0;
     };
@@ -33479,18 +34622,18 @@ ${import_indent_string2.default(this.children.map(String).join("\n"), tab)}
       let missingArgsLegend = "";
       if (hasRequiredMissingArgsErrors) {
         missingArgsLegend += `
-${import_chalk5.default.dim("Note: Lines with ")}${import_chalk5.default.reset.greenBright("+")} ${import_chalk5.default.dim("are required")}`;
+${import_chalk6.default.dim("Note: Lines with ")}${import_chalk6.default.reset.greenBright("+")} ${import_chalk6.default.dim("are required")}`;
       }
       if (hasOptionalMissingArgsErrors) {
         if (missingArgsLegend.length === 0) {
           missingArgsLegend = "\n";
         }
         if (hasRequiredMissingArgsErrors) {
-          missingArgsLegend += import_chalk5.default.dim(`, lines with ${import_chalk5.default.green("?")} are optional`);
+          missingArgsLegend += import_chalk6.default.dim(`, lines with ${import_chalk6.default.green("?")} are optional`);
         } else {
-          missingArgsLegend += import_chalk5.default.dim(`Note: Lines with ${import_chalk5.default.green("?")} are optional`);
+          missingArgsLegend += import_chalk6.default.dim(`Note: Lines with ${import_chalk6.default.green("?")} are optional`);
         }
-        missingArgsLegend += import_chalk5.default.dim(".");
+        missingArgsLegend += import_chalk6.default.dim(".");
       }
       const relevantArgErrors = argErrors.filter((e) => e.error.type !== "missingArg" || e.error.missingArg.isRequired);
       let errorMessages = relevantArgErrors.map((e) => this.printArgError(e, hasMissingArgsErrors, errorFormat === "minimal")).join("\n");
@@ -33518,7 +34661,7 @@ ${fieldErrors.map((e) => this.printFieldError(e, missingItems, errorFormat === "
       if (originalMethod == null ? void 0 : originalMethod.endsWith("aggregate")) {
         printJsonArgs = transformAggregatePrintJsonArgs(printJsonArgs);
       }
-      const errorStr = `${stack}${import_indent_string2.default(printJsonWithErrors(printJsonArgs), indentValue).slice(indentValue)}${import_chalk5.default.dim(afterLines)}
+      const errorStr = `${stack}${import_indent_string2.default(printJsonWithErrors(printJsonArgs), indentValue).slice(indentValue)}${import_chalk6.default.dim(afterLines)}
 
 ${errorMessages}${missingArgsLegend}
 `;
@@ -34478,17 +35621,17 @@ function transformAggregatePrintJsonArgs({
 }
 
 // src/runtime/index.ts
-var import_engine_core = __toModule2(require_dist11());
+var import_engine_core3 = __toModule2(require_dist11());
 
 // src/runtime/getPrismaClient.ts
-var import_debug3 = __toModule2(require_dist7());
-var import_LibraryEngine = __toModule2(require_LibraryEngine());
-var import_BinaryEngine = __toModule2(require_BinaryEngine());
+var import_debug4 = __toModule2(require_dist7());
+var import_engine_core = __toModule2(require_dist11());
+var import_engine_core2 = __toModule2(require_dist11());
 var logger2 = __toModule2(require_logger());
 var import_mapPreviewFeatures = __toModule2(require_mapPreviewFeatures());
 var import_tryLoadEnvs = __toModule2(require_tryLoadEnvs());
 var import_async_hooks = __toModule2(require("async_hooks"));
-var import_fs = __toModule2(require("fs"));
+var import_fs2 = __toModule2(require("fs"));
 var import_path2 = __toModule2(require("path"));
 var sqlTemplateTag = __toModule2(require_dist12());
 
@@ -34565,15 +35708,12 @@ var Middlewares = class {
 var import_debug2 = __toModule2(require_dist7());
 var import_strip_ansi3 = __toModule2(require_strip_ansi());
 
-// src/runtime/Dataloader.ts
-var Dataloader = class {
+// src/runtime/DataLoader.ts
+var DataLoader = class {
   constructor(options) {
     this.options = options;
     this.tickActive = false;
     this.batches = {};
-  }
-  get [Symbol.toStringTag]() {
-    return "Dataloader";
   }
   request(request) {
     const hash = this.options.batchBy(request);
@@ -34636,6 +35776,9 @@ var Dataloader = class {
       }
     }
   }
+  get [Symbol.toStringTag]() {
+    return "DataLoader";
+  }
 };
 
 // src/runtime/utils/rejectOnNotFound.ts
@@ -34691,11 +35834,11 @@ var PrismaClientFetcher = class {
     this.prisma = prisma;
     this.debug = enableDebug;
     this.hooks = hooks;
-    this.dataloader = new Dataloader({
+    this.dataloader = new DataLoader({
       batchLoader: (requests) => {
         const queries = requests.map((r) => String(r.document));
         const runTransaction = requests[0].runInTransaction;
-        return this.prisma._engine.requestBatch(queries, runTransaction);
+        return this.prisma._engine.requestBatch(queries, {}, runTransaction);
       },
       singleLoader: (request) => {
         const query = String(request.document);
@@ -34710,7 +35853,7 @@ var PrismaClientFetcher = class {
           return "transaction-batch";
         }
         if (!request.document.children[0].name.startsWith("findUnique")) {
-          return null;
+          return void 0;
         }
         const selectionSet = request.document.children[0].children.join(",");
         const args = (_a = request.document.children[0].args) == null ? void 0 : _a.args.map((a) => {
@@ -34797,15 +35940,15 @@ var PrismaClientFetcher = class {
         }
         message = this.sanitizeMessage(message);
         if (e.code) {
-          throw new import_engine_core.PrismaClientKnownRequestError(message, e.code, this.prisma._clientVersion, e.meta);
+          throw new import_engine_core3.PrismaClientKnownRequestError(message, e.code, this.prisma._clientVersion, e.meta);
         } else if (e.isPanic) {
-          throw new import_engine_core.PrismaClientRustPanicError(message, this.prisma._clientVersion);
-        } else if (e instanceof import_engine_core.PrismaClientUnknownRequestError) {
-          throw new import_engine_core.PrismaClientUnknownRequestError(message, this.prisma._clientVersion);
-        } else if (e instanceof import_engine_core.PrismaClientInitializationError) {
-          throw new import_engine_core.PrismaClientInitializationError(message, this.prisma._clientVersion);
-        } else if (e instanceof import_engine_core.PrismaClientRustPanicError) {
-          throw new import_engine_core.PrismaClientRustPanicError(message, this.prisma._clientVersion);
+          throw new import_engine_core3.PrismaClientRustPanicError(message, this.prisma._clientVersion);
+        } else if (e instanceof import_engine_core3.PrismaClientUnknownRequestError) {
+          throw new import_engine_core3.PrismaClientUnknownRequestError(message, this.prisma._clientVersion);
+        } else if (e instanceof import_engine_core3.PrismaClientInitializationError) {
+          throw new import_engine_core3.PrismaClientInitializationError(message, this.prisma._clientVersion);
+        } else if (e instanceof import_engine_core3.PrismaClientRustPanicError) {
+          throw new import_engine_core3.PrismaClientRustPanicError(message, this.prisma._clientVersion);
         }
         e.clientVersion = this.prisma._clientVersion;
         throw e;
@@ -35067,8 +36210,161 @@ function getAlternative(str, options) {
   return null;
 }
 
+// src/runtime/RequestHandler.ts
+var import_debug3 = __toModule2(require_dist7());
+var import_strip_ansi4 = __toModule2(require_strip_ansi());
+var debug4 = import_debug3.default("prisma:client:request_handler");
+var RequestHandler = class {
+  constructor(client, hooks) {
+    this.client = client;
+    this.hooks = hooks;
+    this.dataloader = new DataLoader({
+      batchLoader: (requests) => {
+        const queries = requests.map((r) => String(r.document));
+        return this.client._engine.requestBatch(queries, {
+          transactionId: requests[0].transactionId
+        });
+      },
+      singleLoader: (request) => {
+        const query = String(request.document);
+        return this.client._engine.request(query, {
+          transactionId: request.transactionId,
+          ...request.headers
+        });
+      },
+      batchBy: (request) => {
+        if (request.transactionId) {
+          return `transaction-${request.transactionId}`;
+        }
+        return batchFindUniqueBy(request);
+      }
+    });
+  }
+  async request({
+    document: document2,
+    dataPath = [],
+    rootField,
+    typeName,
+    isList,
+    callsite,
+    rejectOnNotFound,
+    clientMethod,
+    runInTransaction,
+    showColors,
+    engineHook,
+    args,
+    headers,
+    transactionId,
+    unpacker
+  }) {
+    if (this.hooks && this.hooks.beforeRequest) {
+      const query = String(document2);
+      this.hooks.beforeRequest({
+        query,
+        path: dataPath,
+        rootField,
+        typeName,
+        document: document2,
+        isList,
+        clientMethod,
+        args
+      });
+    }
+    try {
+      let data, elapsed;
+      if (engineHook) {
+        const result = await engineHook({
+          document: document2,
+          runInTransaction
+        }, (params) => this.dataloader.request(params));
+        data = result.data;
+        elapsed = result.elapsed;
+      } else {
+        const result = await this.dataloader.request({
+          document: document2,
+          runInTransaction,
+          headers,
+          transactionId
+        });
+        data = result == null ? void 0 : result.data;
+        elapsed = result == null ? void 0 : result.elapsed;
+      }
+      const unpackResult = this.unpack(document2, data, dataPath, rootField, unpacker);
+      throwIfNotFound(unpackResult, clientMethod, typeName, rejectOnNotFound);
+      if (process.env.PRISMA_CLIENT_GET_TIME) {
+        return {data: unpackResult, elapsed};
+      }
+      return unpackResult;
+    } catch (e) {
+      debug4(e);
+      let message = e.message;
+      if (callsite) {
+        const {stack} = printStack({
+          callsite,
+          originalMethod: clientMethod,
+          onUs: e.isPanic,
+          showColors
+        });
+        message = `${stack}
+  ${e.message}`;
+      }
+      message = this.sanitizeMessage(message);
+      if (e.code) {
+        throw new import_engine_core3.PrismaClientKnownRequestError(message, e.code, this.client._clientVersion, e.meta);
+      } else if (e.isPanic) {
+        throw new import_engine_core3.PrismaClientRustPanicError(message, this.client._clientVersion);
+      } else if (e instanceof import_engine_core3.PrismaClientUnknownRequestError) {
+        throw new import_engine_core3.PrismaClientUnknownRequestError(message, this.client._clientVersion);
+      } else if (e instanceof import_engine_core3.PrismaClientInitializationError) {
+        throw new import_engine_core3.PrismaClientInitializationError(message, this.client._clientVersion);
+      } else if (e instanceof import_engine_core3.PrismaClientRustPanicError) {
+        throw new import_engine_core3.PrismaClientRustPanicError(message, this.client._clientVersion);
+      }
+      e.clientVersion = this.client._clientVersion;
+      throw e;
+    }
+  }
+  sanitizeMessage(message) {
+    if (this.client._errorFormat && this.client._errorFormat !== "pretty") {
+      return import_strip_ansi4.default(message);
+    }
+    return message;
+  }
+  unpack(document2, data, path3, rootField, unpacker) {
+    if (data == null ? void 0 : data.data) {
+      data = data.data;
+    }
+    if (unpacker) {
+      data[rootField] = unpacker(data[rootField]);
+    }
+    const getPath = [];
+    if (rootField) {
+      getPath.push(rootField);
+    }
+    getPath.push(...path3.filter((p) => p !== "select" && p !== "include"));
+    return unpack({document: document2, data, path: getPath});
+  }
+  get [Symbol.toStringTag]() {
+    return "RequestHandler";
+  }
+};
+function batchFindUniqueBy(request) {
+  var _a;
+  if (!request.document.children[0].name.startsWith("findUnique")) {
+    return void 0;
+  }
+  const args = (_a = request.document.children[0].args) == null ? void 0 : _a.args.map((a) => {
+    if (a.value instanceof Args) {
+      return `${a.key}-${a.value.args.map((a2) => a2.key).join(",")}`;
+    }
+    return a.key;
+  }).join(",");
+  const selectionSet = request.document.children[0].children.join(",");
+  return `${request.document.children[0].name}|${args}|${selectionSet}`;
+}
+
 // src/runtime/getPrismaClient.ts
-var debug4 = import_debug3.default("prisma:client");
+var debug5 = import_debug4.default("prisma:client");
 var ALTER_RE = /^(\s*alter\s)/i;
 function isReadonlyArray(arg) {
   return Array.isArray(arg);
@@ -35115,7 +36411,7 @@ var aggregateKeys = {
   max: true
 };
 function getPrismaClient(config2) {
-  class NewPrismaClient {
+  class PrismaClient {
     constructor(optionsArg) {
       this._middlewares = new Middlewares();
       this._transactionId = 1;
@@ -35136,13 +36432,13 @@ function getPrismaClient(config2) {
         const internal = (_b = options.__internal) != null ? _b : {};
         const useDebug = internal.debug === true;
         if (useDebug) {
-          import_debug3.default.enable("prisma:client");
+          import_debug4.default.enable("prisma:client");
         }
         if (internal.hooks) {
           this._hooks = internal.hooks;
         }
         let cwd = import_path2.default.resolve(config2.dirname, config2.relativePath);
-        if (!import_fs.default.existsSync(cwd)) {
+        if (!import_fs2.default.existsSync(cwd)) {
           cwd = config2.dirname;
         }
         const thedatasources = options.datasources || {};
@@ -35189,10 +36485,14 @@ function getPrismaClient(config2) {
           const previewFeatures = this._engineConfig.previewFeatures ? this._engineConfig.previewFeatures.concat("mongodb") : ["mongodb"];
           this._engineConfig.previewFeatures = previewFeatures;
         }
-        debug4(`clientVersion: ${config2.clientVersion}`);
+        debug5(`clientVersion: ${config2.clientVersion}`);
         this._engine = this.getEngine();
         void this._getActiveProvider();
-        this._fetcher = new PrismaClientFetcher(this, false, this._hooks);
+        if (!this._hasPreviewFlag("interactiveTransactions")) {
+          this._fetcher = new PrismaClientFetcher(this, false, this._hooks);
+        } else {
+          this._fetcher = new RequestHandler(this, this._hooks);
+        }
         if (options.log) {
           for (const log4 of options.log) {
             const level = typeof log4 === "string" ? log4 : log4.emit === "stdout" ? log4.level : null;
@@ -35215,9 +36515,9 @@ function getPrismaClient(config2) {
     }
     getEngine() {
       if (this._previewFeatures.includes("nApi") || process.env.PRISMA_FORCE_NAPI === "true") {
-        return new import_LibraryEngine.LibraryEngine(this._engineConfig);
+        return new import_engine_core.LibraryEngine(this._engineConfig);
       } else {
-        return new import_BinaryEngine.BinaryEngine(this._engineConfig);
+        return new import_engine_core2.BinaryEngine(this._engineConfig);
       }
     }
     $use(arg0, arg1) {
@@ -35347,12 +36647,12 @@ function getPrismaClient(config2) {
         };
       }
       if (parameters == null ? void 0 : parameters.values) {
-        debug4(`prisma.$executeRaw(${query}, ${parameters.values})`);
+        debug5(`prisma.$executeRaw(${query}, ${parameters.values})`);
       } else {
-        debug4(`prisma.$executeRaw(${query})`);
+        debug5(`prisma.$executeRaw(${query})`);
       }
       const args = {query, parameters};
-      debug4(`Prisma Client call:`);
+      debug5(`Prisma Client call:`);
       return this._request({
         args,
         clientMethod: "executeRaw",
@@ -35454,12 +36754,12 @@ function getPrismaClient(config2) {
         };
       }
       if (parameters == null ? void 0 : parameters.values) {
-        debug4(`prisma.queryRaw(${query}, ${parameters.values})`);
+        debug5(`prisma.queryRaw(${query}, ${parameters.values})`);
       } else {
-        debug4(`prisma.queryRaw(${query})`);
+        debug5(`prisma.queryRaw(${query})`);
       }
       const args = {query, parameters};
-      debug4(`Prisma Client call:`);
+      debug5(`Prisma Client call:`);
       return this._request({
         args,
         clientMethod: "queryRaw",
@@ -35507,12 +36807,11 @@ new PrismaClient({
   }
 })`);
       }
-      const query = "SELECT 1";
       const headers = fatal ? {"X-DEBUG-FATAL": "1"} : {"X-DEBUG-NON-FATAL": "1"};
       return this._request({
         action: "queryRaw",
         args: {
-          query,
+          query: "SELECT 1",
           parameters: void 0
         },
         clientMethod: "queryRaw",
@@ -35522,10 +36821,10 @@ new PrismaClient({
         callsite: this._getCallsite()
       });
     }
-    getTransactionId() {
+    ___getTransactionId() {
       return this._transactionId++;
     }
-    async $transactionInternal(promises) {
+    async $___transactionInternal(promises) {
       for (const p of promises) {
         if (!p) {
           throw new Error(`All elements of the array need to be Prisma Client promises. Hint: Please make sure you are not awaiting the Prisma client calls you intended to pass in the $transaction function.`);
@@ -35534,7 +36833,7 @@ new PrismaClient({
           throw new Error(`All elements of the array need to be Prisma Client promises. Hint: Please make sure you are not awaiting the Prisma client calls you intended to pass in the $transaction function.`);
         }
       }
-      const transactionId = this.getTransactionId();
+      const transactionId = this.___getTransactionId();
       const requests = await Promise.all(promises.map((p) => {
         if (p.requestTransaction) {
           return p.requestTransaction(transactionId);
@@ -35552,13 +36851,54 @@ new PrismaClient({
         return r;
       }));
     }
-    async $transaction(promises) {
+    async $___transaction(promises) {
       try {
-        return this.$transactionInternal(promises);
+        return this.$___transactionInternal(promises);
       } catch (e) {
         e.clientVersion = this._clientVersion;
         throw e;
       }
+    }
+    $transaction(input, options) {
+      if (!this._hasPreviewFlag("interactiveTransactions")) {
+        return this.$___transaction(input);
+      }
+      try {
+        return this._transaction(input, options);
+      } catch (e) {
+        e.clientVersion = this._clientVersion;
+        throw e;
+      }
+    }
+    async _transaction(input, options) {
+      if (typeof input === "function") {
+        return this._transactionWithCallback(input, options);
+      }
+      return this._transactionWithRequests(input, options);
+    }
+    async _transactionWithCallback(callback, options) {
+      const info = await this._engine.transaction("start", options);
+      let result;
+      try {
+        result = await callback(transactionProxy(this, info.id));
+        await this._engine.transaction("commit", info);
+      } catch (e) {
+        await this._engine.transaction("rollback", info);
+        throw e;
+      }
+      return result;
+    }
+    async _transactionWithRequests(requests, options) {
+      return this._transactionWithCallback(async (prisma) => {
+        const transactionId = prisma[TX_ID];
+        const _requests = requests.map((request) => {
+          return new Promise((resolve, reject) => {
+            ;
+            request.then(resolve, reject, transactionId);
+          });
+        });
+        return Promise.all(_requests);
+      }, options);
     }
     _request(internalParams) {
       try {
@@ -35577,8 +36917,9 @@ new PrismaClient({
             return nextMiddleware(changedParams, consumer);
           }
           const changedInternalParams = {...internalParams, ...params};
-          if (index > 0)
+          if (index > 0 && !this._hasPreviewFlag("interactiveTransactions")) {
             delete changedInternalParams["transactionId"];
+          }
           return this._executeRequest(changedInternalParams);
         };
         return resource.runInAsyncScope(() => consumer(params));
@@ -35636,17 +36977,17 @@ new PrismaClient({
       });
       document2.validate(args, false, clientMethod, this._errorFormat, callsite);
       document2 = transformDocument(document2);
-      if (import_debug3.default.enabled("prisma:client")) {
+      if (import_debug4.default.enabled("prisma:client")) {
         const query = String(document2);
-        debug4(`Prisma Client call:`);
-        debug4(`prisma.${clientMethod}(${printJsonWithErrors({
+        debug5(`Prisma Client call:`);
+        debug5(`prisma.${clientMethod}(${printJsonWithErrors({
           ast: args,
           keyPaths: [],
           valuePaths: [],
           missingItems: []
         })})`);
-        debug4(`Generated request:`);
-        debug4(query + "\n");
+        debug5(`Generated request:`);
+        debug5(query + "\n");
       }
       return this._fetcher.request({
         document: document2,
@@ -35687,7 +37028,7 @@ new PrismaClient({
           const callsite = this._getCallsite();
           const requestModelName = modelName != null ? modelName : model.name;
           const clientImplementation = {
-            then: (onfulfilled, onrejected) => {
+            then: (onfulfilled, onrejected, transactionId) => {
               if (!requestPromise) {
                 requestPromise = this._request({
                   args,
@@ -35697,6 +37038,7 @@ new PrismaClient({
                   clientMethod,
                   callsite,
                   runInTransaction: false,
+                  transactionId,
                   unpacker
                 });
               }
@@ -35718,36 +37060,8 @@ new PrismaClient({
               }
               return requestPromise;
             },
-            catch: (onrejected) => {
-              if (!requestPromise) {
-                requestPromise = this._request({
-                  args,
-                  dataPath,
-                  action: actionName,
-                  model: requestModelName,
-                  clientMethod,
-                  callsite,
-                  runInTransaction: false,
-                  unpacker
-                });
-              }
-              return requestPromise.catch(onrejected);
-            },
-            finally: (onfinally) => {
-              if (!requestPromise) {
-                requestPromise = this._request({
-                  args,
-                  dataPath,
-                  action: actionName,
-                  model: requestModelName,
-                  clientMethod,
-                  callsite,
-                  runInTransaction: false,
-                  unpacker
-                });
-              }
-              return requestPromise.finally(onfinally);
-            }
+            catch: (onrejected) => requestPromise == null ? void 0 : requestPromise.catch(onrejected),
+            finally: (onfinally) => requestPromise == null ? void 0 : requestPromise.finally(onfinally)
           };
           for (const field of model.fields.filter((f) => f.kind === "object")) {
             clientImplementation[field.name] = (fieldArgs) => {
@@ -35903,9 +37217,36 @@ new PrismaClient({
         this[lowerCaseModel] = delegate;
       }
     }
+    _hasPreviewFlag(feature) {
+      var _a;
+      return !!((_a = this._engineConfig.previewFeatures) == null ? void 0 : _a.includes(feature));
+    }
   }
-  return NewPrismaClient;
+  return PrismaClient;
 }
+var forbidden = ["$connect", "$disconnect", "$on", "$transaction", "$use"];
+function transactionProxy(thing, transactionId) {
+  if (typeof thing !== "object")
+    return thing;
+  return new Proxy(thing, {
+    get: (target, prop) => {
+      if (forbidden.includes(prop))
+        return void 0;
+      if (prop === TX_ID)
+        return transactionId;
+      if (typeof target[prop] === "function") {
+        return (...args) => {
+          if (prop === "then") {
+            return target[prop](...args, transactionId);
+          }
+          return transactionProxy(target[prop](...args), transactionId);
+        };
+      }
+      return transactionProxy(target[prop], transactionId);
+    }
+  });
+}
+var TX_ID = Symbol.for("prisma.client.transaction.id");
 function getOperation(action) {
   if (action === import_generator_helper.DMMF.ModelAction.findMany || action === import_generator_helper.DMMF.ModelAction.findUnique || action === import_generator_helper.DMMF.ModelAction.findFirst) {
     return "query";
@@ -35923,15 +37264,15 @@ function warnEnvConflicts(envPaths) {
 }
 
 // src/runtime/utils/find.ts
-var import_fs2 = __toModule2(require("fs"));
+var import_fs3 = __toModule2(require("fs"));
 var import_path3 = __toModule2(require("path"));
-var import_util = __toModule2(require("util"));
-var readdirAsync = import_util.promisify(import_fs2.default.readdir);
-var realpathAsync = import_util.promisify(import_fs2.default.realpath);
-var statAsync = import_util.promisify(import_fs2.default.stat);
-var readdirSync = import_fs2.default.readdirSync;
-var realpathSync = import_fs2.default.realpathSync;
-var statSync = import_fs2.default.statSync;
+var import_util3 = __toModule2(require("util"));
+var readdirAsync = import_util3.promisify(import_fs3.default.readdir);
+var realpathAsync = import_util3.promisify(import_fs3.default.realpath);
+var statAsync = import_util3.promisify(import_fs3.default.stat);
+var readdirSync = import_fs3.default.readdirSync;
+var realpathSync = import_fs3.default.realpathSync;
+var statSync = import_fs3.default.statSync;
 function direntToType(dirent) {
   return dirent.isFile() ? "f" : dirent.isDirectory() ? "d" : dirent.isSymbolicLink() ? "l" : void 0;
 }
@@ -35978,7 +37319,7 @@ function findSync(root, match, types = ["f", "d", "l"], deep = [], limit = Infin
         findSync(itemPath, match, types, deep, limit, handler, found, seen);
       }
     }
-  } catch {
+  } catch (e) {
   }
   return found;
 }

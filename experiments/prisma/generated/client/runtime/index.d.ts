@@ -40,6 +40,10 @@ declare namespace DMMF {
         name: string;
         fields: string[];
     }
+    interface PrimaryKey {
+        name: string | null;
+        fields: string[];
+    }
     interface Model {
         name: string;
         isEmbedded: boolean;
@@ -49,7 +53,7 @@ declare namespace DMMF {
         uniqueFields: string[][];
         uniqueIndexes: uniqueIndex[];
         documentation?: string;
-        idFields: string[];
+        primaryKey: PrimaryKey | null;
         [key: string]: any;
     }
     type FieldKind = 'scalar' | 'object' | 'enum' | 'unsupported';
@@ -461,23 +465,6 @@ interface UnpackOptions {
  */
 declare function unpack({ document, path, data }: UnpackOptions): any;
 
-declare class PrismaClientKnownRequestError extends Error {
-    code: string;
-    meta?: object;
-    clientVersion: string;
-    constructor(message: string, code: string, clientVersion: string, meta?: any);
-    get [Symbol.toStringTag](): string;
-}
-declare class PrismaClientUnknownRequestError extends Error {
-    clientVersion: string;
-    constructor(message: string, clientVersion: string);
-    get [Symbol.toStringTag](): string;
-}
-declare class PrismaClientRustPanicError extends Error {
-    clientVersion: string;
-    constructor(message: string, clientVersion: string);
-    get [Symbol.toStringTag](): string;
-}
 declare class PrismaClientInitializationError extends Error {
     clientVersion: string;
     errorCode?: string;
@@ -485,20 +472,59 @@ declare class PrismaClientInitializationError extends Error {
     get [Symbol.toStringTag](): string;
 }
 
-interface Engine {
-    on(event: EngineEventType, listener: (args?: any) => any): void;
-    start(): Promise<void>;
-    stop(): Promise<void>;
-    getConfig(): Promise<GetConfigResult>;
-    version(forceRun?: boolean): Promise<string> | string;
-    request<T>(query: string, headers: Record<string, string>, numTry: number): Promise<{
-        data: T;
-        elapsed: number;
-    }>;
-    requestBatch<T>(queries: string[], transaction?: boolean, numTry?: number): Promise<{
-        data: T;
-        elapsed: number;
-    }>;
+declare class PrismaClientKnownRequestError extends Error {
+    code: string;
+    meta?: object;
+    clientVersion: string;
+    constructor(message: string, code: string, clientVersion: string, meta?: any);
+    get [Symbol.toStringTag](): string;
+}
+
+declare class PrismaClientRustPanicError extends Error {
+    clientVersion: string;
+    constructor(message: string, clientVersion: string);
+    get [Symbol.toStringTag](): string;
+}
+
+declare class PrismaClientUnknownRequestError extends Error {
+    clientVersion: string;
+    constructor(message: string, clientVersion: string);
+    get [Symbol.toStringTag](): string;
+}
+
+/**
+ * maxWait ?= 2000
+ * timeout ?= 5000
+ */
+declare type Options = {
+    maxWait?: number;
+    timeout?: number;
+};
+declare type Info = {
+    id: string;
+};
+
+declare type QueryEngineResult<T> = {
+    data: T;
+    elapsed: number;
+};
+declare type QueryEngineRequestHeaders = {
+    traceparent?: string;
+    transactionId?: string;
+    fatal?: string;
+};
+
+declare abstract class Engine {
+    abstract on(event: EngineEventType, listener: (args?: any) => any): void;
+    abstract start(): Promise<void>;
+    abstract stop(): Promise<void>;
+    abstract getConfig(): Promise<GetConfigResult>;
+    abstract version(forceRun?: boolean): Promise<string> | string;
+    abstract request<T>(query: string, headers?: QueryEngineRequestHeaders, numTry?: number): Promise<QueryEngineResult<T>>;
+    abstract requestBatch<T>(queries: string[], headers?: QueryEngineRequestHeaders, transaction?: boolean, numTry?: number): Promise<QueryEngineResult<T>[]>;
+    abstract transaction(action: 'start', options?: Options): Promise<Info>;
+    abstract transaction(action: 'commit', info: Info): Promise<void>;
+    abstract transaction(action: 'rollback', info: Info): Promise<void>;
 }
 declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
 interface DatasourceOverwrite {
@@ -506,13 +532,153 @@ interface DatasourceOverwrite {
     url?: string;
     env?: string;
 }
+interface EngineConfig {
+    cwd?: string;
+    dirname?: string;
+    datamodelPath: string;
+    enableDebugLogs?: boolean;
+    enableEngineDebugMode?: boolean;
+    prismaPath?: string;
+    fetcher?: (query: string) => Promise<{
+        data?: any;
+        error?: any;
+    }>;
+    generator?: GeneratorConfig;
+    datasources?: DatasourceOverwrite[];
+    showColors?: boolean;
+    logQueries?: boolean;
+    logLevel?: 'info' | 'warn';
+    env?: Record<string, string>;
+    flags?: string[];
+    useUds?: boolean;
+    clientVersion?: string;
+    previewFeatures?: string[];
+    engineEndpoint?: string;
+    activeProvider?: string;
+}
 declare type GetConfigResult = {
     datasources: DataSource[];
     generators: GeneratorConfig[];
 };
 
+declare type Value = string | number | boolean | object | null | undefined;
+declare type RawValue = Value | Sql;
+/**
+ * A SQL instance can be nested within each other to build SQL strings.
+ */
+declare class Sql {
+    values: Value[];
+    strings: string[];
+    constructor(rawStrings: ReadonlyArray<string>, rawValues: ReadonlyArray<RawValue>);
+    get text(): string;
+    get sql(): string;
+    [inspect.custom](): {
+        text: string;
+        sql: string;
+        values: Value[];
+    };
+}
+/**
+ * Create a SQL query for a list of values.
+ */
+declare function join(values: RawValue[], separator?: string): Sql;
+/**
+ * Create raw SQL statement.
+ */
+declare function raw(value: string): Sql;
+/**
+ * Placeholder value for "no text".
+ */
+declare const empty: Sql;
+/**
+ * Create a SQL object from a template string.
+ */
+declare function sqltag(strings: ReadonlyArray<string>, ...values: RawValue[]): Sql;
+
+declare type QueryMiddleware<T = unknown> = (params: QueryMiddlewareParams, next: (params: QueryMiddlewareParams) => Promise<T>) => Promise<T>;
+declare type QueryMiddlewareParams = {
+    /** The model this is executed on */
+    model?: string;
+    /** The action that is being handled */
+    action: Action;
+    /** TODO what is this */
+    dataPath: string[];
+    /** TODO what is this */
+    runInTransaction: boolean;
+    /** TODO what is this */
+    args: any;
+};
+declare type EngineMiddleware<T = unknown> = (params: EngineMiddlewareParams, next: (params: EngineMiddlewareParams) => Promise<{
+    data: T;
+    elapsed: number;
+}>) => Promise<{
+    data: T;
+    elapsed: number;
+}>;
+declare type EngineMiddlewareParams = {
+    document: Document;
+    runInTransaction?: boolean;
+};
+declare type Namespace = 'all' | 'engine';
+
+interface Job {
+    resolve: (data: any) => void;
+    reject: (data: any) => void;
+    request: any;
+}
+declare type DataLoaderOptions<T> = {
+    singleLoader: (request: T) => Promise<any>;
+    batchLoader: (request: T[]) => Promise<any[]>;
+    batchBy: (request: T) => string | undefined;
+};
+declare class DataLoader<T = unknown> {
+    private options;
+    batches: {
+        [key: string]: Job[];
+    };
+    private tickActive;
+    constructor(options: DataLoaderOptions<T>);
+    request(request: T): Promise<any>;
+    private dispatchBatches;
+    get [Symbol.toStringTag](): string;
+}
+
 declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
 declare type InstanceRejectOnNotFound = RejectOnNotFound | Record<string, RejectOnNotFound> | Record<string, Record<string, RejectOnNotFound>>;
+
+declare type RequestParams = {
+    document: Document;
+    dataPath: string[];
+    rootField: string;
+    typeName: string;
+    isList: boolean;
+    clientMethod: string;
+    callsite?: string;
+    rejectOnNotFound?: RejectOnNotFound;
+    runInTransaction?: boolean;
+    showColors?: boolean;
+    engineHook?: EngineMiddleware;
+    args: any;
+    headers?: Record<string, string>;
+    transactionId?: number;
+    unpacker?: Unpacker;
+};
+declare class PrismaClientFetcher {
+    prisma: any;
+    debug: boolean;
+    hooks: any;
+    dataloader: DataLoader<{
+        document: Document;
+        runInTransaction?: boolean;
+        transactionId?: number;
+        headers?: Record<string, string>;
+    }>;
+    constructor(prisma: any, enableDebug?: boolean, hooks?: any);
+    get [Symbol.toStringTag](): string;
+    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, showColors, engineHook, args, headers, transactionId, unpacker, }: RequestParams): Promise<any>;
+    sanitizeMessage(message: any): any;
+    unpack(document: any, data: any, path: any, rootField: any, unpacker?: Unpacker): any;
+}
 
 declare type ErrorFormat = 'pretty' | 'colorless' | 'minimal';
 declare type Datasource = {
@@ -564,6 +730,7 @@ interface PrismaClientOptions {
         };
     };
 }
+declare type Unpacker = (data: any) => any;
 declare type HookParams = {
     query: string;
     path: string[];
@@ -573,6 +740,7 @@ declare type HookParams = {
     clientMethod: string;
     args: any;
 };
+declare type Action = DMMF.ModelAction | 'executeRaw' | 'queryRaw';
 declare type Hooks = {
     beforeRequest?: (options: HookParams) => any;
 };
@@ -596,41 +764,26 @@ interface GetPrismaClientOptions {
     datasourceNames: string[];
     activeProvider: string;
 }
-declare function getPrismaClient(config: GetPrismaClientOptions): any;
-
-declare type Value = string | number | boolean | object | null | undefined;
-declare type RawValue = Value | Sql;
-/**
- * A SQL instance can be nested within each other to build SQL strings.
- */
-declare class Sql {
-    values: Value[];
-    strings: string[];
-    constructor(rawStrings: ReadonlyArray<string>, rawValues: ReadonlyArray<RawValue>);
-    get text(): string;
-    get sql(): string;
-    [inspect.custom](): {
-        text: string;
-        sql: string;
-        values: Value[];
-    };
+interface Client {
+    _dmmf: DMMFClass;
+    _engine: Engine;
+    _fetcher: PrismaClientFetcher;
+    _connectionPromise?: Promise<any>;
+    _disconnectionPromise?: Promise<any>;
+    _engineConfig: EngineConfig;
+    _clientVersion: string;
+    _errorFormat: ErrorFormat;
+    $use<T>(arg0: Namespace | QueryMiddleware<T>, arg1?: QueryMiddleware | EngineMiddleware<T>): any;
+    $on(eventType: EngineEventType, callback: (event: any) => void): any;
+    $connect(): any;
+    $disconnect(): any;
+    _runDisconnect(): any;
+    $executeRaw(stringOrTemplateStringsArray: ReadonlyArray<string> | string | Sql): any;
+    $queryRaw(stringOrTemplateStringsArray: any): any;
+    __internal_triggerPanic(fatal: boolean): any;
+    $transaction(input: any, options?: any): any;
 }
-/**
- * Create a SQL query for a list of values.
- */
-declare function join(values: RawValue[], separator?: string): Sql;
-/**
- * Create raw SQL statement.
- */
-declare function raw(value: string): Sql;
-/**
- * Placeholder value for "no text".
- */
-declare const empty: Sql;
-/**
- * Create a SQL object from a template string.
- */
-declare function sqltag(strings: ReadonlyArray<string>, ...values: RawValue[]): Sql;
+declare function getPrismaClient(config: GetPrismaClientOptions): new (optionsArg?: PrismaClientOptions | undefined) => Client;
 
 declare function warnEnvConflicts(envPaths: any): void;
 

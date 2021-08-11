@@ -142,7 +142,7 @@ export type PostKind = (typeof PostKind)[keyof typeof PostKind]
 /**
  * ##  Prisma Client ʲˢ
  * 
- * Type-safe database client for TypeScript & Node.js (ORM replacement)
+ * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
  * const prisma = new PrismaClient()
@@ -188,7 +188,7 @@ export class PrismaClient<
     /**
    * ##  Prisma Client ʲˢ
    * 
-   * Type-safe database client for TypeScript & Node.js (ORM replacement)
+   * Type-safe database client for TypeScript & Node.js
    * @example
    * ```
    * const prisma = new PrismaClient()
@@ -379,8 +379,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.27.0
-   * Query Engine version: cdba6ec525e0213cce26f8e4bb23cf556d1479bb
+   * Prisma Client JS version: 2.29.0
+   * Query Engine version: 1be4cd60b89afa04b192acb1ef47758a39810f3a
    */
   export type PrismaVersion = {
     client: string

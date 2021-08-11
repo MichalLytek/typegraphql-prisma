@@ -198,7 +198,7 @@
         ],
         "isGenerated": false,
         "documentation": "User model doc\\n@@TypeGraphQL.type(name: \"Client\")",
-        "idFields": [],
+        "primaryKey": null,
         "uniqueFields": [],
         "uniqueIndexes": []
       },
@@ -405,7 +405,7 @@
           }
         ],
         "isGenerated": false,
-        "idFields": [],
+        "primaryKey": null,
         "uniqueFields": [],
         "uniqueIndexes": []
       },
@@ -455,7 +455,7 @@
           }
         ],
         "isGenerated": false,
-        "idFields": [],
+        "primaryKey": null,
         "uniqueFields": [
           [
             "slug",
@@ -518,10 +518,13 @@
           }
         ],
         "isGenerated": false,
-        "idFields": [
-          "firstName",
-          "lastName"
-        ],
+        "primaryKey": {
+          "name": null,
+          "fields": [
+            "firstName",
+            "lastName"
+          ]
+        },
         "uniqueFields": [],
         "uniqueIndexes": []
       },
@@ -594,11 +597,14 @@
           }
         ],
         "isGenerated": false,
-        "idFields": [
-          "directorFirstName",
-          "directorLastName",
-          "title"
-        ],
+        "primaryKey": {
+          "name": null,
+          "fields": [
+            "directorFirstName",
+            "directorLastName",
+            "title"
+          ]
+        },
         "uniqueFields": [],
         "uniqueIndexes": []
       },
@@ -651,10 +657,13 @@
           }
         ],
         "isGenerated": false,
-        "idFields": [
-          "firstName",
-          "lastName"
-        ],
+        "primaryKey": {
+          "name": null,
+          "fields": [
+            "firstName",
+            "lastName"
+          ]
+        },
         "uniqueFields": [],
         "uniqueIndexes": []
       },
@@ -747,7 +756,7 @@
           }
         ],
         "isGenerated": false,
-        "idFields": [],
+        "primaryKey": null,
         "uniqueFields": [],
         "uniqueIndexes": []
       },
@@ -822,7 +831,7 @@
           }
         ],
         "isGenerated": false,
-        "idFields": [],
+        "primaryKey": null,
         "uniqueFields": [],
         "uniqueIndexes": []
       },
@@ -889,7 +898,7 @@
           }
         ],
         "isGenerated": false,
-        "idFields": [],
+        "primaryKey": null,
         "uniqueFields": [],
         "uniqueIndexes": []
       }

@@ -27,9 +27,10 @@ export default function generateRelationsResolverClassesFromModel(
   const singleIdField = model.fields.find(field => field.isId);
   const singleUniqueField = model.fields.find(field => field.isUnique);
   const singleFilterField = singleIdField ?? singleUniqueField;
-  const compositeIdFields = model.idFields.map(
-    idField => model.fields.find(field => idField === field.name)!,
-  );
+  const compositeIdFields =
+    model.primaryKey?.fields.map(
+      idField => model.fields.find(field => idField === field.name)!,
+    ) ?? [];
   const compositeUniqueFields = model.uniqueFields[0]
     ? model.uniqueFields[0].map(
         uniqueField => model.fields.find(field => uniqueField === field.name)!,
