@@ -1,6 +1,6 @@
 {
   "name": "typegraphql-prisma-muhad",
-  "version": "0.14.81",
+  "version": "0.14.82",
   "scripts": {
     "build": "tsc",
     "package:build": "./package.sh",
