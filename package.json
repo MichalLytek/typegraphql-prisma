@@ -1,6 +1,6 @@
 {
-  "name": "typegraphql-prisma-muhad",
-  "version": "0.14.82",
+  "name": "typegraphql-prisma",
+  "version": "0.14.7",
   "scripts": {
     "build": "tsc",
     "package:build": "./package.sh",
@@ -14,7 +14,7 @@
     "format": "prettier --write ./**/*.{js,json,ts,tsx}"
   },
   "bin": {
-    "typegraphql-prisma-muhad": "lib/generator.js"
+    "typegraphql-prisma": "lib/generator.js"
   },
   "peerDependencies": {
     "@prisma/client": "~2.28.0",
@@ -52,7 +52,7 @@
     "lint-staged": "^11.0.0",
     "pg": "^8.6.0",
     "prettier": "^2.3.2",
-    "prisma": "~2.27.0",
+    "prisma": "~2.28.0",
     "reflect-metadata": "^0.1.13",
     "ts-jest": "~27.0.3",
     "ts-node": "^10.1.0",
@@ -64,15 +64,15 @@
     "node": ">=12.4"
   },
   "author": {
-    "name": "Muhad BK",
-    "url": "https://github.com/muhad-bk"
+    "name": "Michał Lytek",
+    "url": "https://github.com/MichalLytek"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/muhad-bk/typegraphql-prisma.git"
+    "url": "https://github.com/MichalLytek/typegraphql-prisma.git"
   },
   "bugs": {
-    "url": "https://github.com/muhad-bk/typegraphql-prisma/issues"
+    "url": "https://github.com/MichalLytek/typegraphql-prisma/issues"
   },
   "keywords": [
     "type-graphql",
@@ -95,5 +95,6 @@
     "**/*.{js,json}": [
       "prettier --write"
     ]
-  }
+  },
+  "private": false
 }
