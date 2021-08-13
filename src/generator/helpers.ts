@@ -114,7 +114,7 @@ export function getTypeGraphQLType(
       GraphQLType =
         !typeName || !modelName
           ? getInputTypeName(typeInfo.type, dmmfDocument)
-          : typeInfo.type.replace(modelName, typeName);
+          : typeInfo.type;
     }
   } else {
     GraphQLType = typeInfo.type;

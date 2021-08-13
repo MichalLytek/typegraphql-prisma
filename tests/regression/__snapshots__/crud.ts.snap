@@ -1880,6 +1880,835 @@ exports.UserCrudResolver = UserCrudResolver;
 "
 `;
 
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: AggregateUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { AggregateUUserArgs } from \\"./args/AggregateUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { AggregateUUser } from \\"../../outputs/AggregateUUser\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class AggregateUUserResolver {
+  @TypeGraphQL.Query(_returns => AggregateUUser, {
+    nullable: false
+  })
+  async aggregateUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUUserArgs): Promise<AggregateUUUser> {
+    return getPrismaFromContext(ctx).user.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: CreateManyUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { CreateManyUUserArgs } from \\"./args/CreateManyUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class CreateManyUUserResolver {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyUUserArgs): Promise<AffectedRowsOutput> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: CreateOneUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { CreateUUserArgs } from \\"./args/CreateUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class CreateUUserResolver {
+  @TypeGraphQL.Mutation(_returns => UUser, {
+    nullable: false
+  })
+  async createUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateUUserArgs): Promise<UUser> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.create({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: DeleteManyUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { DeleteManyUUserArgs } from \\"./args/DeleteManyUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class DeleteManyUUserResolver {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async deleteManyUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyUUserArgs): Promise<AffectedRowsOutput> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.deleteMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: DeleteUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { DeleteUUserArgs } from \\"./args/DeleteUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class DeleteUUserResolver {
+  @TypeGraphQL.Mutation(_returns => UUser, {
+    nullable: true
+  })
+  async deleteUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteUUserArgs): Promise<UUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.delete({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: FindFirstUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { FindFirstUUserArgs } from \\"./args/FindFirstUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class FindFirstUUserResolver {
+  @TypeGraphQL.Query(_returns => UUser, {
+    nullable: true
+  })
+  async findFirstUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUUserArgs): Promise<UUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findFirst({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: FindManyUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { FindManyUUserArgs } from \\"./args/FindManyUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class FindManyUUserResolver {
+  @TypeGraphQL.Query(_returns => [UUser], {
+    nullable: false
+  })
+  async uUsers(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyUUserArgs): Promise<UUser[]> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: FindUniqueUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { FindUniqueUUserArgs } from \\"./args/FindUniqueUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class FindUniqueUUserResolver {
+  @TypeGraphQL.Query(_returns => UUser, {
+    nullable: true
+  })
+  async uUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUUserArgs): Promise<UUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: GroupByUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { GroupByUUserArgs } from \\"./args/GroupByUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { UUserGroupBy } from \\"../../outputs/UUserGroupBy\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class GroupByUUserResolver {
+  @TypeGraphQL.Query(_returns => [UUserGroupBy], {
+    nullable: false
+  })
+  async groupByUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUUserArgs): Promise<UUUserGroupBy[]> {
+    const { _count, _avg, _sum, _min, _max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)
+      ),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: UpdateManyUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { UpdateManyUUserArgs } from \\"./args/UpdateManyUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class UpdateManyUUserResolver {
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async updateManyUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyUUserArgs): Promise<AffectedRowsOutput> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.updateMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: UpdateUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { UpdateUUserArgs } from \\"./args/UpdateUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class UpdateUUserResolver {
+  @TypeGraphQL.Mutation(_returns => UUser, {
+    nullable: true
+  })
+  async updateUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateUUserArgs): Promise<UUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.update({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate actions resolver classes for prisma model: UpsertUUserResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { UpsertUUserArgs } from \\"./args/UpsertUUserArgs\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class UpsertUUserResolver {
+  @TypeGraphQL.Mutation(_returns => UUser, {
+    nullable: false
+  })
+  async upsertUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertUUserArgs): Promise<UUser> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.upsert({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: AggregateUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserOrderByInput } from \\"../../../inputs/UUserOrderByInput\\";
+import { UUserWhereInput } from \\"../../../inputs/UUserWhereInput\\";
+import { UUserWhereUniqueInput } from \\"../../../inputs/UUserWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class AggregateUUserArgs {
+  @TypeGraphQL.Field(_type => UUserWhereInput, {
+    nullable: true
+  })
+  where?: UUserWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [UUserOrderByInput], {
+    nullable: true
+  })
+  orderBy?: UUserOrderByInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => UUserWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: UUserWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: CreateManyUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserCreateManyInput } from \\"../../../inputs/UUserCreateManyInput\\";
+
+@TypeGraphQL.ArgsType()
+export class CreateManyUUserArgs {
+  @TypeGraphQL.Field(_type => [UUserCreateManyInput], {
+    nullable: false
+  })
+  data!: UUserCreateManyInput[];
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  skipDuplicates?: boolean | undefined;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: CreateUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserCreateInput } from \\"../../../inputs/UUserCreateInput\\";
+
+@TypeGraphQL.ArgsType()
+export class CreateUUserArgs {
+  @TypeGraphQL.Field(_type => UUserCreateInput, {
+    nullable: false
+  })
+  data!: UUserCreateInput;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: DeleteManyUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserWhereInput } from \\"../../../inputs/UUserWhereInput\\";
+
+@TypeGraphQL.ArgsType()
+export class DeleteManyUUserArgs {
+  @TypeGraphQL.Field(_type => UUserWhereInput, {
+    nullable: true
+  })
+  where?: UUserWhereInput | undefined;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: DeleteUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserWhereUniqueInput } from \\"../../../inputs/UUserWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class DeleteUUserArgs {
+  @TypeGraphQL.Field(_type => UUserWhereUniqueInput, {
+    nullable: false
+  })
+  where!: UUserWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: FindFirstUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserOrderByInput } from \\"../../../inputs/UUserOrderByInput\\";
+import { UUserWhereInput } from \\"../../../inputs/UUserWhereInput\\";
+import { UUserWhereUniqueInput } from \\"../../../inputs/UUserWhereUniqueInput\\";
+import { UUserScalarFieldEnum } from \\"../../../../enums/UUserScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class FindFirstUUserArgs {
+  @TypeGraphQL.Field(_type => UUserWhereInput, {
+    nullable: true
+  })
+  where?: UUserWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [UUserOrderByInput], {
+    nullable: true
+  })
+  orderBy?: UUserOrderByInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => UUserWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: UUserWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [UUserScalarFieldEnum], {
+    nullable: true
+  })
+  distinct?: Array<\\"intIdField\\" | \\"uniqueStringField\\" | \\"optionalStringField\\" | \\"dateField\\"> | undefined;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: FindManyUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserOrderByInput } from \\"../../../inputs/UUserOrderByInput\\";
+import { UUserWhereInput } from \\"../../../inputs/UUserWhereInput\\";
+import { UUserWhereUniqueInput } from \\"../../../inputs/UUserWhereUniqueInput\\";
+import { UUserScalarFieldEnum } from \\"../../../../enums/UUserScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class FindManyUUserArgs {
+  @TypeGraphQL.Field(_type => UUserWhereInput, {
+    nullable: true
+  })
+  where?: UUserWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [UUserOrderByInput], {
+    nullable: true
+  })
+  orderBy?: UUserOrderByInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => UUserWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: UUserWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [UUserScalarFieldEnum], {
+    nullable: true
+  })
+  distinct?: Array<\\"intIdField\\" | \\"uniqueStringField\\" | \\"optionalStringField\\" | \\"dateField\\"> | undefined;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: FindUniqueUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserWhereUniqueInput } from \\"../../../inputs/UUserWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class FindUniqueUUserArgs {
+  @TypeGraphQL.Field(_type => UUserWhereUniqueInput, {
+    nullable: false
+  })
+  where!: UUserWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: GroupByUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserOrderByInput } from \\"../../../inputs/UUserOrderByInput\\";
+import { UUserScalarWhereWithAggregatesInput } from \\"../../../inputs/UUserScalarWhereWithAggregatesInput\\";
+import { UUserWhereInput } from \\"../../../inputs/UUserWhereInput\\";
+import { UUserScalarFieldEnum } from \\"../../../../enums/UUserScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class GroupByUUserArgs {
+  @TypeGraphQL.Field(_type => UUserWhereInput, {
+    nullable: true
+  })
+  where?: UUserWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [UUserOrderByInput], {
+    nullable: true
+  })
+  orderBy?: UUserOrderByInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UUserScalarFieldEnum], {
+    nullable: false
+  })
+  by!: Array<\\"intIdField\\" | \\"uniqueStringField\\" | \\"optionalStringField\\" | \\"dateField\\">;
+
+  @TypeGraphQL.Field(_type => UUserScalarWhereWithAggregatesInput, {
+    nullable: true
+  })
+  having?: UUserScalarWhereWithAggregatesInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: Index 1`] = `
+"export { AggregateUUserArgs } from \\"./AggregateUUserArgs\\";
+export { CreateManyUUserArgs } from \\"./CreateManyUUserArgs\\";
+export { CreateUUserArgs } from \\"./CreateUUserArgs\\";
+export { DeleteManyUUserArgs } from \\"./DeleteManyUUserArgs\\";
+export { DeleteUUserArgs } from \\"./DeleteUUserArgs\\";
+export { FindFirstUUserArgs } from \\"./FindFirstUUserArgs\\";
+export { FindManyUUserArgs } from \\"./FindManyUUserArgs\\";
+export { FindUniqueUUserArgs } from \\"./FindUniqueUUserArgs\\";
+export { GroupByUUserArgs } from \\"./GroupByUUserArgs\\";
+export { UpdateManyUUserArgs } from \\"./UpdateManyUUserArgs\\";
+export { UpdateUUserArgs } from \\"./UpdateUUserArgs\\";
+export { UpsertUUserArgs } from \\"./UpsertUUserArgs\\";
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: UpdateManyUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserUpdateManyMutationInput } from \\"../../../inputs/UUserUpdateManyMutationInput\\";
+import { UUserWhereInput } from \\"../../../inputs/UUserWhereInput\\";
+
+@TypeGraphQL.ArgsType()
+export class UpdateManyUUserArgs {
+  @TypeGraphQL.Field(_type => UUserUpdateManyMutationInput, {
+    nullable: false
+  })
+  data!: UUserUpdateManyMutationInput;
+
+  @TypeGraphQL.Field(_type => UUserWhereInput, {
+    nullable: true
+  })
+  where?: UUserWhereInput | undefined;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: UpdateUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserUpdateInput } from \\"../../../inputs/UUserUpdateInput\\";
+import { UUserWhereUniqueInput } from \\"../../../inputs/UUserWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class UpdateUUserArgs {
+  @TypeGraphQL.Field(_type => UUserUpdateInput, {
+    nullable: false
+  })
+  data!: UUserUpdateInput;
+
+  @TypeGraphQL.Field(_type => UUserWhereUniqueInput, {
+    nullable: false
+  })
+  where!: UUserWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate args classes for every method of crud resolver: UpsertUUserArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { UUserCreateInput } from \\"../../../inputs/UUserCreateInput\\";
+import { UUserUpdateInput } from \\"../../../inputs/UUserUpdateInput\\";
+import { UUserWhereUniqueInput } from \\"../../../inputs/UUserWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class UpsertUUserArgs {
+  @TypeGraphQL.Field(_type => UUserWhereUniqueInput, {
+    nullable: false
+  })
+  where!: UUserWhereUniqueInput;
+
+  @TypeGraphQL.Field(_type => UUserCreateInput, {
+    nullable: false
+  })
+  create!: UUserCreateInput;
+
+  @TypeGraphQL.Field(_type => UUserUpdateInput, {
+    nullable: false
+  })
+  update!: UUserUpdateInput;
+}
+"
+`;
+
+exports[`crud when model has prefix should properly generate resolver class for single prisma model: UUserCrudResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { AggregateUUserArgs } from \\"./args/AggregateUUserArgs\\";
+import { CreateManyUUserArgs } from \\"./args/CreateManyUUserArgs\\";
+import { CreateUUserArgs } from \\"./args/CreateUUserArgs\\";
+import { DeleteManyUUserArgs } from \\"./args/DeleteManyUUserArgs\\";
+import { DeleteUUserArgs } from \\"./args/DeleteUUserArgs\\";
+import { FindFirstUUserArgs } from \\"./args/FindFirstUUserArgs\\";
+import { FindManyUUserArgs } from \\"./args/FindManyUUserArgs\\";
+import { FindUniqueUUserArgs } from \\"./args/FindUniqueUUserArgs\\";
+import { GroupByUUserArgs } from \\"./args/GroupByUUserArgs\\";
+import { UpdateManyUUserArgs } from \\"./args/UpdateManyUUserArgs\\";
+import { UpdateUUserArgs } from \\"./args/UpdateUUserArgs\\";
+import { UpsertUUserArgs } from \\"./args/UpsertUUserArgs\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { UUser } from \\"../../../models/UUser\\";
+import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
+import { AggregateUUser } from \\"../../outputs/AggregateUUser\\";
+import { UUserGroupBy } from \\"../../outputs/UUserGroupBy\\";
+
+@TypeGraphQL.Resolver(_of => UUser)
+export class UUserCrudResolver {
+  @TypeGraphQL.Query(_returns => UUser, {
+    nullable: true
+  })
+  async findUniqueUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUUserArgs): Promise<UUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => UUser, {
+    nullable: true
+  })
+  async findFirstUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUUserArgs): Promise<UUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findFirst({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [UUser], {
+    nullable: false
+  })
+  async findManyUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyUUserArgs): Promise<UUser[]> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => UUser, {
+    nullable: false
+  })
+  async createUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateUUserArgs): Promise<UUser> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.create({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyUUserArgs): Promise<AffectedRowsOutput> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => UUser, {
+    nullable: true
+  })
+  async deleteUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteUUserArgs): Promise<UUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.delete({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => UUser, {
+    nullable: true
+  })
+  async updateUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateUUserArgs): Promise<UUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.update({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async deleteManyUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyUUserArgs): Promise<AffectedRowsOutput> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.deleteMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async updateManyUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyUUserArgs): Promise<AffectedRowsOutput> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.updateMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => UUser, {
+    nullable: false
+  })
+  async upsertUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertUUserArgs): Promise<UUser> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.upsert({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => AggregateUUser, {
+    nullable: false
+  })
+  async aggregateUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUUserArgs): Promise<AggregateUUUser> {
+    return getPrismaFromContext(ctx).user.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => [UUserGroupBy], {
+    nullable: false
+  })
+  async groupByUUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUUserArgs): Promise<UUUserGroupBy[]> {
+    const { _count, _avg, _sum, _min, _max } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.groupBy({
+      ...args,
+      ...Object.fromEntries(
+        Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)
+      ),
+    });
+  }
+}
+"
+`;
+
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: CreateManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import graphqlFields from \\"graphql-fields\\";

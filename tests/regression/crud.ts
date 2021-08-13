@@ -425,6 +425,178 @@ describe("crud", () => {
     });
   });
 
+  describe("when model has prefix", () => {
+    it("should properly generate resolver class for single prisma model", async () => {
+      const schema = /* prisma */ `
+        /// @@TypeGraphQL.type(name: "UUser")
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        useOriginalMapping: true,
+      });
+      const uuserCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/UUserCrudResolver.ts",
+      );
+
+      expect(uuserCrudResolverTSFile).toMatchSnapshot("UUserCrudResolver");
+    });
+
+    it("should properly generate args classes for every method of crud resolver", async () => {
+      const schema = /* prisma */ `
+        /// @@TypeGraphQL.type(name: "UUser")
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, { outputDirPath });
+      const aggregateUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/AggregateUUserArgs.ts",
+      );
+      const createUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/CreateUUserArgs.ts",
+      );
+      const deleteManyUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/DeleteManyUUserArgs.ts",
+      );
+      const deleteUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/DeleteUUserArgs.ts",
+      );
+      const findManyUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/FindManyUUserArgs.ts",
+      );
+      const findFirstUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/FindFirstUUserArgs.ts",
+      );
+      const findUniqueUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/FindUniqueUUserArgs.ts",
+      );
+      const updateManyUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/UpdateManyUUserArgs.ts",
+      );
+      const updateUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/UpdateUUserArgs.ts",
+      );
+      const upsertUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/UpsertUUserArgs.ts",
+      );
+      const groupByUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/GroupByUUserArgs.ts",
+      );
+      const createManyUUserArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/CreateManyUUserArgs.ts",
+      );
+      const indexTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/args/index.ts",
+      );
+
+      expect(aggregateUUserArgsTSFile).toMatchSnapshot("AggregateUUserArgs");
+      expect(createUUserArgsTSFile).toMatchSnapshot("CreateUUserArgs");
+      expect(deleteManyUUserArgsTSFile).toMatchSnapshot("DeleteManyUUserArgs");
+      expect(deleteUUserArgsTSFile).toMatchSnapshot("DeleteUUserArgs");
+      expect(findManyUUserArgsTSFile).toMatchSnapshot("FindManyUUserArgs");
+      expect(findFirstUUserArgsTSFile).toMatchSnapshot("FindFirstUUserArgs");
+      expect(findUniqueUUserArgsTSFile).toMatchSnapshot("FindUniqueUUserArgs");
+      expect(updateManyUUserArgsTSFile).toMatchSnapshot("UpdateManyUUserArgs");
+      expect(updateUUserArgsTSFile).toMatchSnapshot("UpdateUUserArgs");
+      expect(upsertUUserArgsTSFile).toMatchSnapshot("UpsertUUserArgs");
+      expect(groupByUUserArgsTSFile).toMatchSnapshot("GroupByUUserArgs");
+      expect(createManyUUserArgsTSFile).toMatchSnapshot("CreateManyUUserArgs");
+      expect(indexTSFile).toMatchSnapshot("Index");
+    });
+
+    it("should properly generate actions resolver classes for prisma model", async () => {
+      const schema = /* prisma */ `
+        /// @@TypeGraphQL.type(name: "UUser")
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, { outputDirPath });
+      const aggregateUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/AggregateUUserResolver.ts",
+      );
+      const createUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/CreateUUserResolver.ts",
+      );
+      const deleteManyUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/DeleteManyUUserResolver.ts",
+      );
+      const deleteUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/DeleteUUserResolver.ts",
+      );
+      const findManyUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/FindManyUUserResolver.ts",
+      );
+      const findFirstUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/FindFirstUUserResolver.ts",
+      );
+      const findUniqueUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/FindUniqueUUserResolver.ts",
+      );
+      const updateManyUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/UpdateManyUUserResolver.ts",
+      );
+      const updateUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/UpdateUUserResolver.ts",
+      );
+      const upsertUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/UpsertUUserResolver.ts",
+      );
+      const groupByUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/GroupByUUserResolver.ts",
+      );
+      const createManyUUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/UUser/CreateManyUUserResolver.ts",
+      );
+
+      expect(aggregateUUserResolverTSFile).toMatchSnapshot(
+        "AggregateUUserResolver",
+      );
+      expect(createUUserResolverTSFile).toMatchSnapshot(
+        "CreateOneUUserResolver",
+      );
+      expect(deleteManyUUserResolverTSFile).toMatchSnapshot(
+        "DeleteManyUUserResolver",
+      );
+      expect(deleteUUserResolverTSFile).toMatchSnapshot("DeleteUUserResolver");
+      expect(findManyUUserResolverTSFile).toMatchSnapshot(
+        "FindManyUUserResolver",
+      );
+      expect(findFirstUUserResolverTSFile).toMatchSnapshot(
+        "FindFirstUUserResolver",
+      );
+      expect(findUniqueUUserResolverTSFile).toMatchSnapshot(
+        "FindUniqueUUserResolver",
+      );
+      expect(updateManyUUserResolverTSFile).toMatchSnapshot(
+        "UpdateManyUUserResolver",
+      );
+      expect(updateUUserResolverTSFile).toMatchSnapshot("UpdateUUserResolver");
+      expect(upsertUUserResolverTSFile).toMatchSnapshot("UpsertUUserResolver");
+      expect(groupByUUserResolverTSFile).toMatchSnapshot(
+        "GroupByUUserResolver",
+      );
+      expect(createManyUUserResolverTSFile).toMatchSnapshot(
+        "CreateManyUUserResolver",
+      );
+    });
+  });
+
   describe("when useUncheckedScalarInputs mode is enabled", () => {
     it("should properly generate create and update args classes", async () => {
       const schema = /* prisma */ `
