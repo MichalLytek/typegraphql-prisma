@@ -439,24 +439,24 @@ export default async function generateCode(
         )
         .map(mapping => mapping.modelTypeName),
     );
+
+    log("Generate enhance map");
+    const enhanceSourceFile = project.createSourceFile(
+      baseDirPath + "/enhance.ts",
+      undefined,
+      { overwrite: true },
+    );
+    generateEnhanceMap(
+      enhanceSourceFile,
+      dmmfDocument.modelMappings,
+      dmmfDocument.relationModels,
+      dmmfDocument.datamodel.models,
+      dmmfDocument.schema.inputTypes,
+      outputTypesToGenerate,
+    );
   } else {
     log("Resolvers skipped");
   }
-
-  log("Generate enhance map");
-  const enhanceSourceFile = project.createSourceFile(
-    baseDirPath + "/enhance.ts",
-    undefined,
-    { overwrite: true },
-  );
-  generateEnhanceMap(
-    enhanceSourceFile,
-    dmmfDocument.modelMappings,
-    dmmfDocument.relationModels,
-    dmmfDocument.datamodel.models,
-    dmmfDocument.schema.inputTypes,
-    outputTypesToGenerate,
-  );
 
   log("Generate custom scalars");
   const scalarsSourceFile = project.createSourceFile(
