@@ -121,7 +121,6 @@ export default async function generateCode(
     dmmfDocument.datamodel.models.map(it => it.typeName),
   );
 
-  log("Generating output types...");
   const rootTypes = dmmfDocument.schema.outputTypes.filter(type =>
     ["Query", "Mutation"].includes(type.name),
   );
@@ -130,89 +129,92 @@ export default async function generateCode(
     // skip generating models and root resolvers
     type => !modelNames.includes(type.name) && !rootTypes.includes(type),
   );
-  const outputTypesFieldsArgsToGenerate = outputTypesToGenerate
-    .map(it => it.fields)
-    .reduce((a, b) => a.concat(b), [])
-    .filter(it => it.argsTypeName);
-  outputTypesToGenerate.forEach(type =>
-    generateOutputTypeClassFromType(
-      project,
-      resolversDirPath,
-      type,
-      dmmfDocument,
-    ),
-  );
-  const outputsBarrelExportSourceFile = project.createSourceFile(
-    path.resolve(
-      baseDirPath,
-      resolversFolderName,
-      outputsFolderName,
-      "index.ts",
-    ),
-    undefined,
-    { overwrite: true },
-  );
-  generateOutputsBarrelFile(
-    outputsBarrelExportSourceFile,
-    outputTypesToGenerate.map(it => it.typeName),
-    outputTypesFieldsArgsToGenerate.length > 0,
-  );
 
-  if (outputTypesFieldsArgsToGenerate.length > 0) {
-    log("Generating output types args...");
-    outputTypesFieldsArgsToGenerate.forEach(async field => {
-      generateArgsTypeClassFromArgs(
+  if (!options.noResolvers) {
+    log("Generating output types...");
+
+    const outputTypesFieldsArgsToGenerate = outputTypesToGenerate
+      .map(it => it.fields)
+      .reduce((a, b) => a.concat(b), [])
+      .filter(it => it.argsTypeName);
+    outputTypesToGenerate.forEach(type =>
+      generateOutputTypeClassFromType(
         project,
-        path.resolve(resolversDirPath, outputsFolderName),
-        field.args,
-        field.argsTypeName!,
+        resolversDirPath,
+        type,
         dmmfDocument,
-        2,
-      );
-    });
-    const outputsArgsBarrelExportSourceFile = project.createSourceFile(
+      ),
+    );
+    const outputsBarrelExportSourceFile = project.createSourceFile(
       path.resolve(
         baseDirPath,
         resolversFolderName,
         outputsFolderName,
-        argsFolderName,
         "index.ts",
       ),
       undefined,
       { overwrite: true },
     );
-    generateArgsBarrelFile(
-      outputsArgsBarrelExportSourceFile,
-      outputTypesFieldsArgsToGenerate.map(it => it.argsTypeName!),
+    generateOutputsBarrelFile(
+      outputsBarrelExportSourceFile,
+      outputTypesToGenerate.map(it => it.typeName),
+      outputTypesFieldsArgsToGenerate.length > 0,
     );
-  }
 
-  log("Generating input types...");
-  dmmfDocument.schema.inputTypes.forEach(type =>
-    generateInputTypeClassFromType(
-      project,
-      resolversDirPath,
-      type,
-      dmmfDocument,
-      options,
-    ),
-  );
-  const inputsBarrelExportSourceFile = project.createSourceFile(
-    path.resolve(
-      baseDirPath,
-      resolversFolderName,
-      inputsFolderName,
-      "index.ts",
-    ),
-    undefined,
-    { overwrite: true },
-  );
-  generateInputsBarrelFile(
-    inputsBarrelExportSourceFile,
-    dmmfDocument.schema.inputTypes.map(it => it.typeName),
-  );
+    if (outputTypesFieldsArgsToGenerate.length > 0) {
+      log("Generating output types args...");
+      outputTypesFieldsArgsToGenerate.forEach(async field => {
+        generateArgsTypeClassFromArgs(
+          project,
+          path.resolve(resolversDirPath, outputsFolderName),
+          field.args,
+          field.argsTypeName!,
+          dmmfDocument,
+          2,
+        );
+      });
+      const outputsArgsBarrelExportSourceFile = project.createSourceFile(
+        path.resolve(
+          baseDirPath,
+          resolversFolderName,
+          outputsFolderName,
+          argsFolderName,
+          "index.ts",
+        ),
+        undefined,
+        { overwrite: true },
+      );
+      generateArgsBarrelFile(
+        outputsArgsBarrelExportSourceFile,
+        outputTypesFieldsArgsToGenerate.map(it => it.argsTypeName!),
+      );
+    }
 
-  if (!options.noResolvers) {
+    log("Generating input types...");
+    dmmfDocument.schema.inputTypes.forEach(type =>
+      generateInputTypeClassFromType(
+        project,
+        resolversDirPath,
+        type,
+        dmmfDocument,
+        options,
+      ),
+    );
+    const inputsBarrelExportSourceFile = project.createSourceFile(
+      path.resolve(
+        baseDirPath,
+        resolversFolderName,
+        inputsFolderName,
+        "index.ts",
+      ),
+      undefined,
+      { overwrite: true },
+    );
+    generateInputsBarrelFile(
+      inputsBarrelExportSourceFile,
+      dmmfDocument.schema.inputTypes.map(it => it.typeName),
+    );
+
     if (dmmfDocument.relationModels.length > 0) {
       log("Generating relation resolvers...");
       dmmfDocument.relationModels.forEach(relationModel =>
@@ -449,6 +451,8 @@ export default async function generateCode(
         )
         .map(mapping => mapping.modelTypeName),
     );
+  } else {
+    log("Resolvers skipped");
   }
 
   log("Generate enhance map");
