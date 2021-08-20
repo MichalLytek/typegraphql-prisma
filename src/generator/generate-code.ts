@@ -1,5 +1,4 @@
 import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
-import { Project, ScriptTarget, ModuleKind, CompilerOptions } from "ts-morph";
 import path from "path";
 
 import { noop } from "./helpers";
@@ -42,14 +41,7 @@ import { GenerateMappingData } from "./types";
 import { generateEnhanceMap } from "./generate-enhance";
 import { generateCustomScalars } from "./generate-scalars";
 import { generateHelpersFile } from "./generate-helpers";
-
-const baseCompilerOptions: CompilerOptions = {
-  target: ScriptTarget.ES2019,
-  module: ModuleKind.CommonJS,
-  emitDecoratorMetadata: true,
-  experimentalDecorators: true,
-  esModuleInterop: true,
-};
+import { createNewTsMorphProject } from "./createNewTsMorphProject";
 
 export default async function generateCode(
   dmmf: PrismaDMMF.Document,
@@ -62,12 +54,8 @@ export default async function generateCode(
   const emitTranspiledCode =
     options.emitTranspiledCode ??
     options.outputDirPath.includes("node_modules");
-  const project = new Project({
-    compilerOptions: {
-      ...baseCompilerOptions,
-      ...(emitTranspiledCode && { declaration: true }),
-    },
-  });
+
+  const project = createNewTsMorphProject(emitTranspiledCode);
   const resolversDirPath = path.resolve(baseDirPath, resolversFolderName);
 
   log("Transforming dmmfDocument...");
@@ -492,7 +480,11 @@ export default async function generateCode(
     undefined,
     { overwrite: true },
   );
-  generateIndexFile(indexSourceFile, dmmfDocument.relationModels.length > 0);
+  generateIndexFile(
+    indexSourceFile,
+    dmmfDocument.relationModels.length > 0,
+    options.noResolvers,
+  );
 
   log("Emitting generated code files");
   if (emitTranspiledCode) {

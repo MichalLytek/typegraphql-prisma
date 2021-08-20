@@ -180,79 +180,87 @@ export function generateOutputsBarrelFile(
 export function generateIndexFile(
   sourceFile: SourceFile,
   hasSomeRelations: boolean,
+  noResolvers?: boolean,
 ) {
   sourceFile.addExportDeclarations([
     { moduleSpecifier: `./${enumsFolderName}` },
     { moduleSpecifier: `./${modelsFolderName}` },
-    { moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}` },
-    ...(hasSomeRelations
-      ? [
-          {
-            moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}`,
-          },
-        ]
-      : []),
-    { moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}` },
-    { moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}` },
-    { moduleSpecifier: `./enhance` },
     { moduleSpecifier: `./scalars` },
   ]);
 
-  sourceFile.addImportDeclarations([
-    {
-      moduleSpecifier: `type-graphql`,
-      namedImports: ["NonEmptyArray"],
-    },
-    {
-      moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index`,
-      namespaceImport: "crudResolversImport",
-    },
-    ...(hasSomeRelations
-      ? [
-          {
-            moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index`,
-            namespaceImport: "relationResolversImport",
-          },
-        ]
-      : []),
-  ]);
-
-  sourceFile.addVariableStatement({
-    isExported: true,
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
+  if (!noResolvers) {
+    sourceFile.addExportDeclarations([
       {
-        name: "crudResolvers",
-        initializer: `Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>`,
+        moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}`,
       },
-    ],
-  });
+      ...(hasSomeRelations
+        ? [
+            {
+              moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}`,
+            },
+          ]
+        : []),
+      { moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}` },
+      { moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}` },
+      { moduleSpecifier: `./enhance` },
+    ]);
 
-  if (hasSomeRelations) {
+    sourceFile.addImportDeclarations([
+      {
+        moduleSpecifier: `type-graphql`,
+        namedImports: ["NonEmptyArray"],
+      },
+      {
+        moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index`,
+        namespaceImport: "crudResolversImport",
+      },
+      ...(hasSomeRelations
+        ? [
+            {
+              moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index`,
+              namespaceImport: "relationResolversImport",
+            },
+          ]
+        : []),
+    ]);
+
     sourceFile.addVariableStatement({
       isExported: true,
       declarationKind: VariableDeclarationKind.Const,
       declarations: [
         {
-          name: "relationResolvers",
-          initializer: `Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>`,
+          name: "crudResolvers",
+          initializer: `Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>`,
+        },
+      ],
+    });
+
+    if (hasSomeRelations) {
+      sourceFile.addVariableStatement({
+        isExported: true,
+        declarationKind: VariableDeclarationKind.Const,
+        declarations: [
+          {
+            name: "relationResolvers",
+            initializer: `Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>`,
+          },
+        ],
+      });
+    }
+
+    sourceFile.addVariableStatement({
+      isExported: true,
+      declarationKind: VariableDeclarationKind.Const,
+      declarations: [
+        {
+          name: "resolvers",
+          initializer: `[...crudResolvers${
+            hasSomeRelations ? ", ...relationResolvers" : ""
+          }] as unknown as NonEmptyArray<Function>`,
         },
       ],
     });
   }
-
-  sourceFile.addVariableStatement({
-    isExported: true,
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
-        name: "resolvers",
-        initializer: `[...crudResolvers${
-          hasSomeRelations ? ", ...relationResolvers" : ""
-        }] as unknown as NonEmptyArray<Function>`,
-      },
-    ],
-  });
 }
 
 export function generateResolversBarrelFile(
