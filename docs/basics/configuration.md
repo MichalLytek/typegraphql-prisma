@@ -50,3 +50,17 @@ generator typegraphql {
   emitTranspiledCode = true
 }
 ```
+
+## Skip resolvers generation
+
+If you only want your prisma models to get generated into typegraphql ObjectTypes, you can pass
+
+```prisma {5}
+generator typegraphql {
+  provider    = "typegraphql-prisma"
+  output      = "../prisma/generated/type-graphql"
+  noResolvers = true
+}
+```
+
+Resolvers and their input/output types will be skipped.
