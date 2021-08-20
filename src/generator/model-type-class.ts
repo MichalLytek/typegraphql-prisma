@@ -20,13 +20,21 @@ import { modelsFolderName } from "./config";
 import { DMMF } from "./dmmf/types";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 
-export default function generateObjectTypeClassFromModel(
-  project: Project,
-  baseDirPath: string,
-  model: DMMF.Model,
-  modelOutputType: DMMF.OutputType,
-  dmmfDocument: DmmfDocument,
-) {
+export default function generateObjectTypeClassFromModel({
+  project,
+  baseDirPath,
+  model,
+  modelOutputType,
+  dmmfDocument,
+  addCountField,
+}: {
+  project: Project;
+  baseDirPath: string;
+  model: DMMF.Model;
+  modelOutputType: DMMF.OutputType;
+  dmmfDocument: DmmfDocument;
+  addCountField: boolean;
+}) {
   const dirPath = path.resolve(baseDirPath, modelsFolderName);
   const filePath = path.resolve(dirPath, `${model.typeName}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
@@ -54,10 +62,13 @@ export default function generateObjectTypeClassFromModel(
       .filter(field => field.location === "enumTypes")
       .map(field => field.type),
   );
+  let countField;
 
-  const countField = modelOutputType.fields.find(it => it.name === "_count");
-  if (countField) {
-    generateResolversOutputsImports(sourceFile, [countField.typeGraphQLType]);
+  if (addCountField) {
+    countField = modelOutputType.fields.find(it => it.name === "_count");
+    if (countField) {
+      generateResolversOutputsImports(sourceFile, [countField.typeGraphQLType]);
+    }
   }
 
   sourceFile.addClass({

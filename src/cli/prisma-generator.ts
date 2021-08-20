@@ -41,6 +41,7 @@ export async function generate(options: GeneratorOptions) {
     useUncheckedScalarInputs: parseStringBoolean(
       generatorConfig.useUncheckedScalarInputs,
     ),
+    noResolvers: generatorConfig.noResolvers === "true",
   };
 
   if (config.emitDMMF) {

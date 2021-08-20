@@ -115,7 +115,7 @@ describe("models", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, { outputDirPath });
+    await generateCodeFromSchema(schema, { outputDirPath, noResolvers: true });
     const userModelTSFile = await readGeneratedFile("/models/User.ts");
 
     expect(userModelTSFile).toMatchSnapshot("User");
@@ -223,26 +223,38 @@ describe("models", () => {
     expect(nativeTypeModelTSFile).toMatchSnapshot("NativeTypeModel");
   });
 
+  const schemaWith2ModelsAndRelation = /* prisma */ `
+  model FirstModel {
+    idField            Int            @id @default(autoincrement())
+    uniqueStringField  String         @unique
+    floatField         Float
+    secondModelsField  SecondModel[]
+  }
+  model SecondModel {
+    idField            Int          @id @default(autoincrement())
+    uniqueStringField  String       @unique
+    floatField         Float
+    firstModelFieldId  Int
+    firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+  }
+`;
   describe("when selectRelationCount preview feature is enabled", () => {
-    it("should properly generate model  object type class", async () => {
-      const schema = /* prisma */ `
-        model FirstModel {
-          idField            Int            @id @default(autoincrement())
-          uniqueStringField  String         @unique
-          floatField         Float
-          secondModelsField  SecondModel[]
-        }
-        model SecondModel {
-          idField            Int          @id @default(autoincrement())
-          uniqueStringField  String       @unique
-          floatField         Float
-          firstModelFieldId  Int
-          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
-        }
-      `;
-
-      await generateCodeFromSchema(schema, {
+    it("should properly generate model object type class", async () => {
+      await generateCodeFromSchema(schemaWith2ModelsAndRelation, {
         outputDirPath,
+        previewFeatures: ["selectRelationCount"],
+      });
+      const firstModelTSFile = await readGeneratedFile("/models/FirstModel.ts");
+
+      expect(firstModelTSFile).toMatchSnapshot("FirstModel");
+    });
+  });
+
+  describe("when noResolvers is enabled", () => {
+    it("should generate model object type class without _count field", async () => {
+      await generateCodeFromSchema(schemaWith2ModelsAndRelation, {
+        outputDirPath,
+        noResolvers: true,
         previewFeatures: ["selectRelationCount"],
       });
       const firstModelTSFile = await readGeneratedFile("/models/FirstModel.ts");
