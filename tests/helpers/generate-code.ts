@@ -7,7 +7,8 @@ type SupportedPreviewFeatures =
   | "selectRelationCount"
   | "orderByAggregateGroup"
   | "filterJson"
-  | "namedConstraints";
+  | "namedConstraints"
+  | "fullTextSearch";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<GenerateCodeOptions, "relativePrismaOutputPath"> {

@@ -59,6 +59,11 @@ export class StringNullableFilter {
   })
   endsWith?: string | undefined;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  search?: string | undefined;
+
   @TypeGraphQL.Field(_type => QueryMode, {
     nullable: true
   })

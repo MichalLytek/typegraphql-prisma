@@ -4033,7 +4033,7 @@ var require_Engine = __commonJS2((exports2) => {
   };
 });
 
-// ../../node_modules/.pnpm/@prisma+engines@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma+engines@2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports, module) => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -4066,113 +4066,6 @@ var require_dist9 = __commonJS2((exports, module) => {
       return module2;
     return __exportStar(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", {value: module2, enumerable: true})), module2);
   };
-  var require_has_flag = __commonJS((exports2, module2) => {
-    "use strict";
-    module2.exports = (flag, argv = process.argv) => {
-      const prefix = flag.startsWith("-") ? "" : flag.length === 1 ? "-" : "--";
-      const position = argv.indexOf(prefix + flag);
-      const terminatorPosition = argv.indexOf("--");
-      return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
-    };
-  });
-  var require_supports_color = __commonJS((exports2, module2) => {
-    "use strict";
-    var os = require("os");
-    var tty = require("tty");
-    var hasFlag = require_has_flag();
-    var {env} = process;
-    var forceColor;
-    if (hasFlag("no-color") || hasFlag("no-colors") || hasFlag("color=false") || hasFlag("color=never")) {
-      forceColor = 0;
-    } else if (hasFlag("color") || hasFlag("colors") || hasFlag("color=true") || hasFlag("color=always")) {
-      forceColor = 1;
-    }
-    if ("FORCE_COLOR" in env) {
-      if (env.FORCE_COLOR === "true") {
-        forceColor = 1;
-      } else if (env.FORCE_COLOR === "false") {
-        forceColor = 0;
-      } else {
-        forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
-      }
-    }
-    function translateLevel(level) {
-      if (level === 0) {
-        return false;
-      }
-      return {
-        level,
-        hasBasic: true,
-        has256: level >= 2,
-        has16m: level >= 3
-      };
-    }
-    function supportsColor(haveStream, streamIsTTY) {
-      if (forceColor === 0) {
-        return 0;
-      }
-      if (hasFlag("color=16m") || hasFlag("color=full") || hasFlag("color=truecolor")) {
-        return 3;
-      }
-      if (hasFlag("color=256")) {
-        return 2;
-      }
-      if (haveStream && !streamIsTTY && forceColor === void 0) {
-        return 0;
-      }
-      const min2 = forceColor || 0;
-      if (env.TERM === "dumb") {
-        return min2;
-      }
-      if (process.platform === "win32") {
-        const osRelease = os.release().split(".");
-        if (Number(osRelease[0]) >= 10 && Number(osRelease[2]) >= 10586) {
-          return Number(osRelease[2]) >= 14931 ? 3 : 2;
-        }
-        return 1;
-      }
-      if ("CI" in env) {
-        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE"].some((sign2) => sign2 in env) || env.CI_NAME === "codeship") {
-          return 1;
-        }
-        return min2;
-      }
-      if ("TEAMCITY_VERSION" in env) {
-        return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
-      }
-      if (env.COLORTERM === "truecolor") {
-        return 3;
-      }
-      if ("TERM_PROGRAM" in env) {
-        const version = parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
-        switch (env.TERM_PROGRAM) {
-          case "iTerm.app":
-            return version >= 3 ? 3 : 2;
-          case "Apple_Terminal":
-            return 2;
-        }
-      }
-      if (/-256(color)?$/i.test(env.TERM)) {
-        return 2;
-      }
-      if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
-        return 1;
-      }
-      if ("COLORTERM" in env) {
-        return 1;
-      }
-      return min2;
-    }
-    function getSupportLevel(stream) {
-      const level = supportsColor(stream, stream && stream.isTTY);
-      return translateLevel(level);
-    }
-    module2.exports = {
-      supportsColor: getSupportLevel,
-      stdout: translateLevel(supportsColor(true, tty.isatty(1))),
-      stderr: translateLevel(supportsColor(true, tty.isatty(2)))
-    };
-  });
   var require_ms = __commonJS((exports2, module2) => {
     var s = 1e3;
     var m = s * 60;
@@ -4281,10 +4174,618 @@ var require_dist9 = __commonJS2((exports, module) => {
       return Math.round(ms / n) + " " + name + (isPlural ? "s" : "");
     }
   });
-  var require_common = __commonJS((exports2) => {
+  var require_common = __commonJS((exports2, module2) => {
+    function setup(env) {
+      createDebug.debug = createDebug;
+      createDebug.default = createDebug;
+      createDebug.coerce = coerce;
+      createDebug.disable = disable;
+      createDebug.enable = enable;
+      createDebug.enabled = enabled;
+      createDebug.humanize = require_ms();
+      createDebug.destroy = destroy;
+      Object.keys(env).forEach((key) => {
+        createDebug[key] = env[key];
+      });
+      createDebug.names = [];
+      createDebug.skips = [];
+      createDebug.formatters = {};
+      function selectColor(namespace) {
+        let hash = 0;
+        for (let i = 0; i < namespace.length; i++) {
+          hash = (hash << 5) - hash + namespace.charCodeAt(i);
+          hash |= 0;
+        }
+        return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+      }
+      createDebug.selectColor = selectColor;
+      function createDebug(namespace) {
+        let prevTime;
+        let enableOverride = null;
+        let namespacesCache;
+        let enabledCache;
+        function debug32(...args) {
+          if (!debug32.enabled) {
+            return;
+          }
+          const self = debug32;
+          const curr = Number(new Date());
+          const ms = curr - (prevTime || curr);
+          self.diff = ms;
+          self.prev = prevTime;
+          self.curr = curr;
+          prevTime = curr;
+          args[0] = createDebug.coerce(args[0]);
+          if (typeof args[0] !== "string") {
+            args.unshift("%O");
+          }
+          let index = 0;
+          args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+            if (match === "%%") {
+              return "%";
+            }
+            index++;
+            const formatter = createDebug.formatters[format];
+            if (typeof formatter === "function") {
+              const val = args[index];
+              match = formatter.call(self, val);
+              args.splice(index, 1);
+              index--;
+            }
+            return match;
+          });
+          createDebug.formatArgs.call(self, args);
+          const logFn = self.log || createDebug.log;
+          logFn.apply(self, args);
+        }
+        debug32.namespace = namespace;
+        debug32.useColors = createDebug.useColors();
+        debug32.color = createDebug.selectColor(namespace);
+        debug32.extend = extend;
+        debug32.destroy = createDebug.destroy;
+        Object.defineProperty(debug32, "enabled", {
+          enumerable: true,
+          configurable: false,
+          get: () => {
+            if (enableOverride !== null) {
+              return enableOverride;
+            }
+            if (namespacesCache !== createDebug.namespaces) {
+              namespacesCache = createDebug.namespaces;
+              enabledCache = createDebug.enabled(namespace);
+            }
+            return enabledCache;
+          },
+          set: (v) => {
+            enableOverride = v;
+          }
+        });
+        if (typeof createDebug.init === "function") {
+          createDebug.init(debug32);
+        }
+        return debug32;
+      }
+      function extend(namespace, delimiter) {
+        const newDebug = createDebug(this.namespace + (typeof delimiter === "undefined" ? ":" : delimiter) + namespace);
+        newDebug.log = this.log;
+        return newDebug;
+      }
+      function enable(namespaces) {
+        createDebug.save(namespaces);
+        createDebug.namespaces = namespaces;
+        createDebug.names = [];
+        createDebug.skips = [];
+        let i;
+        const split = (typeof namespaces === "string" ? namespaces : "").split(/[\s,]+/);
+        const len = split.length;
+        for (i = 0; i < len; i++) {
+          if (!split[i]) {
+            continue;
+          }
+          namespaces = split[i].replace(/\*/g, ".*?");
+          if (namespaces[0] === "-") {
+            createDebug.skips.push(new RegExp("^" + namespaces.substr(1) + "$"));
+          } else {
+            createDebug.names.push(new RegExp("^" + namespaces + "$"));
+          }
+        }
+      }
+      function disable() {
+        const namespaces = [
+          ...createDebug.names.map(toNamespace),
+          ...createDebug.skips.map(toNamespace).map((namespace) => "-" + namespace)
+        ].join(",");
+        createDebug.enable("");
+        return namespaces;
+      }
+      function enabled(name) {
+        if (name[name.length - 1] === "*") {
+          return true;
+        }
+        let i;
+        let len;
+        for (i = 0, len = createDebug.skips.length; i < len; i++) {
+          if (createDebug.skips[i].test(name)) {
+            return false;
+          }
+        }
+        for (i = 0, len = createDebug.names.length; i < len; i++) {
+          if (createDebug.names[i].test(name)) {
+            return true;
+          }
+        }
+        return false;
+      }
+      function toNamespace(regexp) {
+        return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
+      }
+      function coerce(val) {
+        if (val instanceof Error) {
+          return val.stack || val.message;
+        }
+        return val;
+      }
+      function destroy() {
+        console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+      }
+      createDebug.enable(createDebug.load());
+      return createDebug;
+    }
+    module2.exports = setup;
+  });
+  var require_browser = __commonJS((exports2, module2) => {
+    exports2.formatArgs = formatArgs;
+    exports2.save = save;
+    exports2.load = load;
+    exports2.useColors = useColors;
+    exports2.storage = localstorage();
+    exports2.destroy = (() => {
+      let warned = false;
+      return () => {
+        if (!warned) {
+          warned = true;
+          console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+        }
+      };
+    })();
+    exports2.colors = [
+      "#0000CC",
+      "#0000FF",
+      "#0033CC",
+      "#0033FF",
+      "#0066CC",
+      "#0066FF",
+      "#0099CC",
+      "#0099FF",
+      "#00CC00",
+      "#00CC33",
+      "#00CC66",
+      "#00CC99",
+      "#00CCCC",
+      "#00CCFF",
+      "#3300CC",
+      "#3300FF",
+      "#3333CC",
+      "#3333FF",
+      "#3366CC",
+      "#3366FF",
+      "#3399CC",
+      "#3399FF",
+      "#33CC00",
+      "#33CC33",
+      "#33CC66",
+      "#33CC99",
+      "#33CCCC",
+      "#33CCFF",
+      "#6600CC",
+      "#6600FF",
+      "#6633CC",
+      "#6633FF",
+      "#66CC00",
+      "#66CC33",
+      "#9900CC",
+      "#9900FF",
+      "#9933CC",
+      "#9933FF",
+      "#99CC00",
+      "#99CC33",
+      "#CC0000",
+      "#CC0033",
+      "#CC0066",
+      "#CC0099",
+      "#CC00CC",
+      "#CC00FF",
+      "#CC3300",
+      "#CC3333",
+      "#CC3366",
+      "#CC3399",
+      "#CC33CC",
+      "#CC33FF",
+      "#CC6600",
+      "#CC6633",
+      "#CC9900",
+      "#CC9933",
+      "#CCCC00",
+      "#CCCC33",
+      "#FF0000",
+      "#FF0033",
+      "#FF0066",
+      "#FF0099",
+      "#FF00CC",
+      "#FF00FF",
+      "#FF3300",
+      "#FF3333",
+      "#FF3366",
+      "#FF3399",
+      "#FF33CC",
+      "#FF33FF",
+      "#FF6600",
+      "#FF6633",
+      "#FF9900",
+      "#FF9933",
+      "#FFCC00",
+      "#FFCC33"
+    ];
+    function useColors() {
+      if (typeof window !== "undefined" && window.process && (window.process.type === "renderer" || window.process.__nwjs)) {
+        return true;
+      }
+      if (typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+        return false;
+      }
+      return typeof document !== "undefined" && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || typeof window !== "undefined" && window.console && (window.console.firebug || window.console.exception && window.console.table) || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+    }
+    function formatArgs(args) {
+      args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module2.exports.humanize(this.diff);
+      if (!this.useColors) {
+        return;
+      }
+      const c = "color: " + this.color;
+      args.splice(1, 0, c, "color: inherit");
+      let index = 0;
+      let lastC = 0;
+      args[0].replace(/%[a-zA-Z%]/g, (match) => {
+        if (match === "%%") {
+          return;
+        }
+        index++;
+        if (match === "%c") {
+          lastC = index;
+        }
+      });
+      args.splice(lastC, 0, c);
+    }
+    exports2.log = console.debug || console.log || (() => {
+    });
+    function save(namespaces) {
+      try {
+        if (namespaces) {
+          exports2.storage.setItem("debug", namespaces);
+        } else {
+          exports2.storage.removeItem("debug");
+        }
+      } catch (error) {
+      }
+    }
+    function load() {
+      let r;
+      try {
+        r = exports2.storage.getItem("debug");
+      } catch (error) {
+      }
+      if (!r && typeof process !== "undefined" && "env" in process) {
+        r = process.env.DEBUG;
+      }
+      return r;
+    }
+    function localstorage() {
+      try {
+        return localStorage;
+      } catch (error) {
+      }
+    }
+    module2.exports = require_common()(exports2);
+    var {formatters} = module2.exports;
+    formatters.j = function(v) {
+      try {
+        return JSON.stringify(v);
+      } catch (error) {
+        return "[UnexpectedJSONParseError]: " + error.message;
+      }
+    };
+  });
+  var require_has_flag = __commonJS((exports2, module2) => {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {value: true});
-    exports2.setup = void 0;
+    module2.exports = (flag, argv = process.argv) => {
+      const prefix = flag.startsWith("-") ? "" : flag.length === 1 ? "-" : "--";
+      const position = argv.indexOf(prefix + flag);
+      const terminatorPosition = argv.indexOf("--");
+      return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
+    };
+  });
+  var require_supports_color = __commonJS((exports2, module2) => {
+    "use strict";
+    var os = require("os");
+    var tty = require("tty");
+    var hasFlag = require_has_flag();
+    var {env} = process;
+    var forceColor;
+    if (hasFlag("no-color") || hasFlag("no-colors") || hasFlag("color=false") || hasFlag("color=never")) {
+      forceColor = 0;
+    } else if (hasFlag("color") || hasFlag("colors") || hasFlag("color=true") || hasFlag("color=always")) {
+      forceColor = 1;
+    }
+    if ("FORCE_COLOR" in env) {
+      if (env.FORCE_COLOR === "true") {
+        forceColor = 1;
+      } else if (env.FORCE_COLOR === "false") {
+        forceColor = 0;
+      } else {
+        forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
+      }
+    }
+    function translateLevel(level) {
+      if (level === 0) {
+        return false;
+      }
+      return {
+        level,
+        hasBasic: true,
+        has256: level >= 2,
+        has16m: level >= 3
+      };
+    }
+    function supportsColor(haveStream, streamIsTTY) {
+      if (forceColor === 0) {
+        return 0;
+      }
+      if (hasFlag("color=16m") || hasFlag("color=full") || hasFlag("color=truecolor")) {
+        return 3;
+      }
+      if (hasFlag("color=256")) {
+        return 2;
+      }
+      if (haveStream && !streamIsTTY && forceColor === void 0) {
+        return 0;
+      }
+      const min2 = forceColor || 0;
+      if (env.TERM === "dumb") {
+        return min2;
+      }
+      if (process.platform === "win32") {
+        const osRelease = os.release().split(".");
+        if (Number(osRelease[0]) >= 10 && Number(osRelease[2]) >= 10586) {
+          return Number(osRelease[2]) >= 14931 ? 3 : 2;
+        }
+        return 1;
+      }
+      if ("CI" in env) {
+        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE"].some((sign2) => sign2 in env) || env.CI_NAME === "codeship") {
+          return 1;
+        }
+        return min2;
+      }
+      if ("TEAMCITY_VERSION" in env) {
+        return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
+      }
+      if (env.COLORTERM === "truecolor") {
+        return 3;
+      }
+      if ("TERM_PROGRAM" in env) {
+        const version = parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
+        switch (env.TERM_PROGRAM) {
+          case "iTerm.app":
+            return version >= 3 ? 3 : 2;
+          case "Apple_Terminal":
+            return 2;
+        }
+      }
+      if (/-256(color)?$/i.test(env.TERM)) {
+        return 2;
+      }
+      if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
+        return 1;
+      }
+      if ("COLORTERM" in env) {
+        return 1;
+      }
+      return min2;
+    }
+    function getSupportLevel(stream) {
+      const level = supportsColor(stream, stream && stream.isTTY);
+      return translateLevel(level);
+    }
+    module2.exports = {
+      supportsColor: getSupportLevel,
+      stdout: translateLevel(supportsColor(true, tty.isatty(1))),
+      stderr: translateLevel(supportsColor(true, tty.isatty(2)))
+    };
+  });
+  var require_node = __commonJS((exports2, module2) => {
+    var tty = require("tty");
+    var util = require("util");
+    exports2.init = init;
+    exports2.log = log4;
+    exports2.formatArgs = formatArgs;
+    exports2.save = save;
+    exports2.load = load;
+    exports2.useColors = useColors;
+    exports2.destroy = util.deprecate(() => {
+    }, "Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+    exports2.colors = [6, 2, 3, 4, 5, 1];
+    try {
+      const supportsColor = require_supports_color();
+      if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
+        exports2.colors = [
+          20,
+          21,
+          26,
+          27,
+          32,
+          33,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          56,
+          57,
+          62,
+          63,
+          68,
+          69,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          92,
+          93,
+          98,
+          99,
+          112,
+          113,
+          128,
+          129,
+          134,
+          135,
+          148,
+          149,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          178,
+          179,
+          184,
+          185,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          214,
+          215,
+          220,
+          221
+        ];
+      }
+    } catch (error) {
+    }
+    exports2.inspectOpts = Object.keys(process.env).filter((key) => {
+      return /^debug_/i.test(key);
+    }).reduce((obj, key) => {
+      const prop = key.substring(6).toLowerCase().replace(/_([a-z])/g, (_, k) => {
+        return k.toUpperCase();
+      });
+      let val = process.env[key];
+      if (/^(yes|on|true|enabled)$/i.test(val)) {
+        val = true;
+      } else if (/^(no|off|false|disabled)$/i.test(val)) {
+        val = false;
+      } else if (val === "null") {
+        val = null;
+      } else {
+        val = Number(val);
+      }
+      obj[prop] = val;
+      return obj;
+    }, {});
+    function useColors() {
+      return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : tty.isatty(process.stderr.fd);
+    }
+    function formatArgs(args) {
+      const {namespace: name, useColors: useColors2} = this;
+      if (useColors2) {
+        const c = this.color;
+        const colorCode = "[3" + (c < 8 ? c : "8;5;" + c);
+        const prefix = `  ${colorCode};1m${name} [0m`;
+        args[0] = prefix + args[0].split("\n").join("\n" + prefix);
+        args.push(colorCode + "m+" + module2.exports.humanize(this.diff) + "[0m");
+      } else {
+        args[0] = getDate() + name + " " + args[0];
+      }
+    }
+    function getDate() {
+      if (exports2.inspectOpts.hideDate) {
+        return "";
+      }
+      return new Date().toISOString() + " ";
+    }
+    function log4(...args) {
+      return process.stderr.write(util.format(...args) + "\n");
+    }
+    function save(namespaces) {
+      if (namespaces) {
+        process.env.DEBUG = namespaces;
+      } else {
+        delete process.env.DEBUG;
+      }
+    }
+    function load() {
+      return process.env.DEBUG;
+    }
+    function init(debug32) {
+      debug32.inspectOpts = {};
+      const keys2 = Object.keys(exports2.inspectOpts);
+      for (let i = 0; i < keys2.length; i++) {
+        debug32.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
+      }
+    }
+    module2.exports = require_common()(exports2);
+    var {formatters} = module2.exports;
+    formatters.o = function(v) {
+      this.inspectOpts.colors = this.useColors;
+      return util.inspect(v, this.inspectOpts).split("\n").map((str) => str.trim()).join(" ");
+    };
+    formatters.O = function(v) {
+      this.inspectOpts.colors = this.useColors;
+      return util.inspect(v, this.inspectOpts);
+    };
+  });
+  var require_src = __commonJS((exports2, module2) => {
+    if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
+      module2.exports = require_browser();
+    } else {
+      module2.exports = require_node();
+    }
+  });
+  var require_common2 = __commonJS((exports2) => {
+    var __defProp22 = Object.defineProperty;
+    var __markAsModule22 = (target) => __defProp22(target, "__esModule", {value: true});
+    var __export22 = (target, all) => {
+      __markAsModule22(target);
+      for (var name in all)
+        __defProp22(target, name, {get: all[name], enumerable: true});
+    };
+    __export22(exports2, {
+      setup: () => setup
+    });
     function setup(env) {
       const createDebug = (namespace, logger3) => {
         let prevTime;
@@ -4443,11 +4944,35 @@ var require_dist9 = __commonJS2((exports, module) => {
       createDebug.enable(createDebug.load());
       return createDebug;
     }
-    exports2.setup = setup;
   });
-  var require_node = __commonJS((exports2, module2) => {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", {value: true});
+  var require_node2 = __commonJS((exports2, module2) => {
+    var __create22 = Object.create;
+    var __defProp22 = Object.defineProperty;
+    var __getOwnPropDesc22 = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames22 = Object.getOwnPropertyNames;
+    var __getProtoOf22 = Object.getPrototypeOf;
+    var __hasOwnProp22 = Object.prototype.hasOwnProperty;
+    var __markAsModule22 = (target) => __defProp22(target, "__esModule", {value: true});
+    var __export22 = (target, all) => {
+      __markAsModule22(target);
+      for (var name in all)
+        __defProp22(target, name, {get: all[name], enumerable: true});
+    };
+    var __reExport2 = (target, module22, desc) => {
+      if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+        for (let key of __getOwnPropNames22(module22))
+          if (!__hasOwnProp22.call(target, key) && key !== "default")
+            __defProp22(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc22(module22, key)) || desc.enumerable});
+      }
+      return target;
+    };
+    var __toModule22 = (module22) => {
+      return __reExport2(__markAsModule22(__defProp22(module22 != null ? __create22(__getProtoOf22(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+    };
+    __export22(exports2, {
+      default: () => node_default
+    });
+    var import_common4 = __toModule22(require_common2());
     var tty = require("tty");
     var util = require("util");
     exports2.init = init;
@@ -4603,10 +5128,9 @@ var require_dist9 = __commonJS2((exports, module) => {
         debug32.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
       }
     }
-    var common_1 = require_common();
-    var mod2 = common_1.setup(exports2);
+    var mod2 = (0, import_common4.setup)(exports2);
     module2.exports = mod2;
-    exports2.default = mod2;
+    var node_default = mod2;
     var {formatters} = mod2;
     formatters.o = function(v) {
       this.inspectOpts.colors = this.useColors;
@@ -4618,17 +5142,40 @@ var require_dist9 = __commonJS2((exports, module) => {
     };
   });
   var require_dist = __commonJS((exports2) => {
-    "use strict";
-    var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
-      return mod2 && mod2.__esModule ? mod2 : {default: mod2};
+    var __create22 = Object.create;
+    var __defProp22 = Object.defineProperty;
+    var __getOwnPropDesc22 = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames22 = Object.getOwnPropertyNames;
+    var __getProtoOf22 = Object.getPrototypeOf;
+    var __hasOwnProp22 = Object.prototype.hasOwnProperty;
+    var __markAsModule22 = (target) => __defProp22(target, "__esModule", {value: true});
+    var __export22 = (target, all) => {
+      __markAsModule22(target);
+      for (var name in all)
+        __defProp22(target, name, {get: all[name], enumerable: true});
     };
-    Object.defineProperty(exports2, "__esModule", {value: true});
-    exports2.getLogs = exports2.Debug = void 0;
-    var node_1 = __importDefault2(require_node());
+    var __reExport2 = (target, module22, desc) => {
+      if (module22 && typeof module22 === "object" || typeof module22 === "function") {
+        for (let key of __getOwnPropNames22(module22))
+          if (!__hasOwnProp22.call(target, key) && key !== "default")
+            __defProp22(target, key, {get: () => module22[key], enumerable: !(desc = __getOwnPropDesc22(module22, key)) || desc.enumerable});
+      }
+      return target;
+    };
+    var __toModule22 = (module22) => {
+      return __reExport2(__markAsModule22(__defProp22(module22 != null ? __create22(__getProtoOf22(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? {get: () => module22.default, enumerable: true} : {value: module22, enumerable: true})), module22);
+    };
+    __export22(exports2, {
+      Debug: () => Debug22,
+      default: () => Debug22,
+      getLogs: () => getLogs
+    });
+    var import_debug22 = __toModule22(require_src());
+    var import_node = __toModule22(require_node2());
     var cache = [];
     var MAX_LOGS = 100;
     function Debug22(namespace) {
-      const debug32 = node_1.default(namespace, (...args) => {
+      const debug32 = (0, import_node.default)(namespace, (...args) => {
         cache.push(args);
         if (cache.length > MAX_LOGS) {
           cache.shift();
@@ -4636,12 +5183,10 @@ var require_dist9 = __commonJS2((exports, module) => {
       });
       return debug32;
     }
-    exports2.default = Debug22;
-    exports2.Debug = Debug22;
     Debug22.enable = (namespace) => {
-      node_1.default.enable(namespace);
+      import_node.default.enable(namespace);
     };
-    Debug22.enabled = (namespace) => node_1.default.enabled(namespace);
+    Debug22.enabled = (namespace) => import_node.default.enabled(namespace);
     function getLogs(numChars = 7500) {
       const output = cache.map((c) => c.map((item) => {
         if (typeof item === "string") {
@@ -4654,21 +5199,20 @@ var require_dist9 = __commonJS2((exports, module) => {
       }
       return output.slice(-numChars);
     }
-    exports2.getLogs = getLogs;
   });
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a",
+      version: "2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "1be4cd60b89afa04b192acb1ef47758a39810f3a"
+        enginesVersion: "60b19f4a1de4fe95741da371b4c44a92f4d1adcb"
       },
       devDependencies: {
-        "@types/node": "14.17.9",
+        "@types/node": "14.17.11",
         typescript: "4.3.5"
       },
       scripts: {
@@ -11206,6 +11750,9 @@ ${error.message}` : execaMessage;
       var bi = str.indexOf(b, ai + 1);
       var i = ai;
       if (ai >= 0 && bi > 0) {
+        if (a === b) {
+          return [ai, bi];
+        }
         begs = [];
         left = str.length;
         while (i >= 0 && !result) {
@@ -11991,7 +12538,7 @@ ${error.message}` : execaMessage;
     module2.exports.posix = posix;
     module2.exports.win32 = win32;
   });
-  var require_common2 = __commonJS((exports2) => {
+  var require_common3 = __commonJS((exports2) => {
     exports2.alphasort = alphasort;
     exports2.alphasorti = alphasorti;
     exports2.setopts = setopts;
@@ -12195,7 +12742,7 @@ ${error.message}` : execaMessage;
     var path22 = require("path");
     var assert = require("assert");
     var isAbsolute = require_path_is_absolute();
-    var common = require_common2();
+    var common = require_common3();
     var alphasort = common.alphasort;
     var alphasorti = common.alphasorti;
     var setopts = common.setopts;
@@ -12655,7 +13202,7 @@ ${error.message}` : execaMessage;
     var assert = require("assert");
     var isAbsolute = require_path_is_absolute();
     var globSync = require_sync();
-    var common = require_common2();
+    var common = require_common3();
     var alphasort = common.alphasort;
     var alphasorti = common.alphasorti;
     var setopts = common.setopts;
@@ -14835,500 +15382,6 @@ ${error.message}` : execaMessage;
     };
     fetch.Promise = global.Promise;
     var lib_default = fetch;
-  });
-  var require_common3 = __commonJS((exports2, module2) => {
-    function setup(env) {
-      createDebug.debug = createDebug;
-      createDebug.default = createDebug;
-      createDebug.coerce = coerce;
-      createDebug.disable = disable;
-      createDebug.enable = enable;
-      createDebug.enabled = enabled;
-      createDebug.humanize = require_ms();
-      createDebug.destroy = destroy;
-      Object.keys(env).forEach((key) => {
-        createDebug[key] = env[key];
-      });
-      createDebug.names = [];
-      createDebug.skips = [];
-      createDebug.formatters = {};
-      function selectColor(namespace) {
-        let hash = 0;
-        for (let i = 0; i < namespace.length; i++) {
-          hash = (hash << 5) - hash + namespace.charCodeAt(i);
-          hash |= 0;
-        }
-        return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
-      }
-      createDebug.selectColor = selectColor;
-      function createDebug(namespace) {
-        let prevTime;
-        let enableOverride = null;
-        let namespacesCache;
-        let enabledCache;
-        function debug32(...args) {
-          if (!debug32.enabled) {
-            return;
-          }
-          const self = debug32;
-          const curr = Number(new Date());
-          const ms = curr - (prevTime || curr);
-          self.diff = ms;
-          self.prev = prevTime;
-          self.curr = curr;
-          prevTime = curr;
-          args[0] = createDebug.coerce(args[0]);
-          if (typeof args[0] !== "string") {
-            args.unshift("%O");
-          }
-          let index = 0;
-          args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
-            if (match === "%%") {
-              return "%";
-            }
-            index++;
-            const formatter = createDebug.formatters[format];
-            if (typeof formatter === "function") {
-              const val = args[index];
-              match = formatter.call(self, val);
-              args.splice(index, 1);
-              index--;
-            }
-            return match;
-          });
-          createDebug.formatArgs.call(self, args);
-          const logFn = self.log || createDebug.log;
-          logFn.apply(self, args);
-        }
-        debug32.namespace = namespace;
-        debug32.useColors = createDebug.useColors();
-        debug32.color = createDebug.selectColor(namespace);
-        debug32.extend = extend;
-        debug32.destroy = createDebug.destroy;
-        Object.defineProperty(debug32, "enabled", {
-          enumerable: true,
-          configurable: false,
-          get: () => {
-            if (enableOverride !== null) {
-              return enableOverride;
-            }
-            if (namespacesCache !== createDebug.namespaces) {
-              namespacesCache = createDebug.namespaces;
-              enabledCache = createDebug.enabled(namespace);
-            }
-            return enabledCache;
-          },
-          set: (v) => {
-            enableOverride = v;
-          }
-        });
-        if (typeof createDebug.init === "function") {
-          createDebug.init(debug32);
-        }
-        return debug32;
-      }
-      function extend(namespace, delimiter) {
-        const newDebug = createDebug(this.namespace + (typeof delimiter === "undefined" ? ":" : delimiter) + namespace);
-        newDebug.log = this.log;
-        return newDebug;
-      }
-      function enable(namespaces) {
-        createDebug.save(namespaces);
-        createDebug.namespaces = namespaces;
-        createDebug.names = [];
-        createDebug.skips = [];
-        let i;
-        const split = (typeof namespaces === "string" ? namespaces : "").split(/[\s,]+/);
-        const len = split.length;
-        for (i = 0; i < len; i++) {
-          if (!split[i]) {
-            continue;
-          }
-          namespaces = split[i].replace(/\*/g, ".*?");
-          if (namespaces[0] === "-") {
-            createDebug.skips.push(new RegExp("^" + namespaces.substr(1) + "$"));
-          } else {
-            createDebug.names.push(new RegExp("^" + namespaces + "$"));
-          }
-        }
-      }
-      function disable() {
-        const namespaces = [
-          ...createDebug.names.map(toNamespace),
-          ...createDebug.skips.map(toNamespace).map((namespace) => "-" + namespace)
-        ].join(",");
-        createDebug.enable("");
-        return namespaces;
-      }
-      function enabled(name) {
-        if (name[name.length - 1] === "*") {
-          return true;
-        }
-        let i;
-        let len;
-        for (i = 0, len = createDebug.skips.length; i < len; i++) {
-          if (createDebug.skips[i].test(name)) {
-            return false;
-          }
-        }
-        for (i = 0, len = createDebug.names.length; i < len; i++) {
-          if (createDebug.names[i].test(name)) {
-            return true;
-          }
-        }
-        return false;
-      }
-      function toNamespace(regexp) {
-        return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
-      }
-      function coerce(val) {
-        if (val instanceof Error) {
-          return val.stack || val.message;
-        }
-        return val;
-      }
-      function destroy() {
-        console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
-      }
-      createDebug.enable(createDebug.load());
-      return createDebug;
-    }
-    module2.exports = setup;
-  });
-  var require_browser = __commonJS((exports2, module2) => {
-    exports2.formatArgs = formatArgs;
-    exports2.save = save;
-    exports2.load = load;
-    exports2.useColors = useColors;
-    exports2.storage = localstorage();
-    exports2.destroy = (() => {
-      let warned = false;
-      return () => {
-        if (!warned) {
-          warned = true;
-          console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
-        }
-      };
-    })();
-    exports2.colors = [
-      "#0000CC",
-      "#0000FF",
-      "#0033CC",
-      "#0033FF",
-      "#0066CC",
-      "#0066FF",
-      "#0099CC",
-      "#0099FF",
-      "#00CC00",
-      "#00CC33",
-      "#00CC66",
-      "#00CC99",
-      "#00CCCC",
-      "#00CCFF",
-      "#3300CC",
-      "#3300FF",
-      "#3333CC",
-      "#3333FF",
-      "#3366CC",
-      "#3366FF",
-      "#3399CC",
-      "#3399FF",
-      "#33CC00",
-      "#33CC33",
-      "#33CC66",
-      "#33CC99",
-      "#33CCCC",
-      "#33CCFF",
-      "#6600CC",
-      "#6600FF",
-      "#6633CC",
-      "#6633FF",
-      "#66CC00",
-      "#66CC33",
-      "#9900CC",
-      "#9900FF",
-      "#9933CC",
-      "#9933FF",
-      "#99CC00",
-      "#99CC33",
-      "#CC0000",
-      "#CC0033",
-      "#CC0066",
-      "#CC0099",
-      "#CC00CC",
-      "#CC00FF",
-      "#CC3300",
-      "#CC3333",
-      "#CC3366",
-      "#CC3399",
-      "#CC33CC",
-      "#CC33FF",
-      "#CC6600",
-      "#CC6633",
-      "#CC9900",
-      "#CC9933",
-      "#CCCC00",
-      "#CCCC33",
-      "#FF0000",
-      "#FF0033",
-      "#FF0066",
-      "#FF0099",
-      "#FF00CC",
-      "#FF00FF",
-      "#FF3300",
-      "#FF3333",
-      "#FF3366",
-      "#FF3399",
-      "#FF33CC",
-      "#FF33FF",
-      "#FF6600",
-      "#FF6633",
-      "#FF9900",
-      "#FF9933",
-      "#FFCC00",
-      "#FFCC33"
-    ];
-    function useColors() {
-      if (typeof window !== "undefined" && window.process && (window.process.type === "renderer" || window.process.__nwjs)) {
-        return true;
-      }
-      if (typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
-        return false;
-      }
-      return typeof document !== "undefined" && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || typeof window !== "undefined" && window.console && (window.console.firebug || window.console.exception && window.console.table) || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
-    }
-    function formatArgs(args) {
-      args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module2.exports.humanize(this.diff);
-      if (!this.useColors) {
-        return;
-      }
-      const c = "color: " + this.color;
-      args.splice(1, 0, c, "color: inherit");
-      let index = 0;
-      let lastC = 0;
-      args[0].replace(/%[a-zA-Z%]/g, (match) => {
-        if (match === "%%") {
-          return;
-        }
-        index++;
-        if (match === "%c") {
-          lastC = index;
-        }
-      });
-      args.splice(lastC, 0, c);
-    }
-    exports2.log = console.debug || console.log || (() => {
-    });
-    function save(namespaces) {
-      try {
-        if (namespaces) {
-          exports2.storage.setItem("debug", namespaces);
-        } else {
-          exports2.storage.removeItem("debug");
-        }
-      } catch (error) {
-      }
-    }
-    function load() {
-      let r;
-      try {
-        r = exports2.storage.getItem("debug");
-      } catch (error) {
-      }
-      if (!r && typeof process !== "undefined" && "env" in process) {
-        r = process.env.DEBUG;
-      }
-      return r;
-    }
-    function localstorage() {
-      try {
-        return localStorage;
-      } catch (error) {
-      }
-    }
-    module2.exports = require_common3()(exports2);
-    var {formatters} = module2.exports;
-    formatters.j = function(v) {
-      try {
-        return JSON.stringify(v);
-      } catch (error) {
-        return "[UnexpectedJSONParseError]: " + error.message;
-      }
-    };
-  });
-  var require_node2 = __commonJS((exports2, module2) => {
-    var tty = require("tty");
-    var util = require("util");
-    exports2.init = init;
-    exports2.log = log4;
-    exports2.formatArgs = formatArgs;
-    exports2.save = save;
-    exports2.load = load;
-    exports2.useColors = useColors;
-    exports2.destroy = util.deprecate(() => {
-    }, "Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
-    exports2.colors = [6, 2, 3, 4, 5, 1];
-    try {
-      const supportsColor = require_supports_color();
-      if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
-        exports2.colors = [
-          20,
-          21,
-          26,
-          27,
-          32,
-          33,
-          38,
-          39,
-          40,
-          41,
-          42,
-          43,
-          44,
-          45,
-          56,
-          57,
-          62,
-          63,
-          68,
-          69,
-          74,
-          75,
-          76,
-          77,
-          78,
-          79,
-          80,
-          81,
-          92,
-          93,
-          98,
-          99,
-          112,
-          113,
-          128,
-          129,
-          134,
-          135,
-          148,
-          149,
-          160,
-          161,
-          162,
-          163,
-          164,
-          165,
-          166,
-          167,
-          168,
-          169,
-          170,
-          171,
-          172,
-          173,
-          178,
-          179,
-          184,
-          185,
-          196,
-          197,
-          198,
-          199,
-          200,
-          201,
-          202,
-          203,
-          204,
-          205,
-          206,
-          207,
-          208,
-          209,
-          214,
-          215,
-          220,
-          221
-        ];
-      }
-    } catch (error) {
-    }
-    exports2.inspectOpts = Object.keys(process.env).filter((key) => {
-      return /^debug_/i.test(key);
-    }).reduce((obj, key) => {
-      const prop = key.substring(6).toLowerCase().replace(/_([a-z])/g, (_, k) => {
-        return k.toUpperCase();
-      });
-      let val = process.env[key];
-      if (/^(yes|on|true|enabled)$/i.test(val)) {
-        val = true;
-      } else if (/^(no|off|false|disabled)$/i.test(val)) {
-        val = false;
-      } else if (val === "null") {
-        val = null;
-      } else {
-        val = Number(val);
-      }
-      obj[prop] = val;
-      return obj;
-    }, {});
-    function useColors() {
-      return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : tty.isatty(process.stderr.fd);
-    }
-    function formatArgs(args) {
-      const {namespace: name, useColors: useColors2} = this;
-      if (useColors2) {
-        const c = this.color;
-        const colorCode = "[3" + (c < 8 ? c : "8;5;" + c);
-        const prefix = `  ${colorCode};1m${name} [0m`;
-        args[0] = prefix + args[0].split("\n").join("\n" + prefix);
-        args.push(colorCode + "m+" + module2.exports.humanize(this.diff) + "[0m");
-      } else {
-        args[0] = getDate() + name + " " + args[0];
-      }
-    }
-    function getDate() {
-      if (exports2.inspectOpts.hideDate) {
-        return "";
-      }
-      return new Date().toISOString() + " ";
-    }
-    function log4(...args) {
-      return process.stderr.write(util.format(...args) + "\n");
-    }
-    function save(namespaces) {
-      if (namespaces) {
-        process.env.DEBUG = namespaces;
-      } else {
-        delete process.env.DEBUG;
-      }
-    }
-    function load() {
-      return process.env.DEBUG;
-    }
-    function init(debug32) {
-      debug32.inspectOpts = {};
-      const keys2 = Object.keys(exports2.inspectOpts);
-      for (let i = 0; i < keys2.length; i++) {
-        debug32.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
-      }
-    }
-    module2.exports = require_common3()(exports2);
-    var {formatters} = module2.exports;
-    formatters.o = function(v) {
-      this.inspectOpts.colors = this.useColors;
-      return util.inspect(v, this.inspectOpts).split("\n").map((str) => str.trim()).join(" ");
-    };
-    formatters.O = function(v) {
-      this.inspectOpts.colors = this.useColors;
-      return util.inspect(v, this.inspectOpts);
-    };
-  });
-  var require_src = __commonJS((exports2, module2) => {
-    if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
-      module2.exports = require_browser();
-    } else {
-      module2.exports = require_node2();
-    }
   });
   var require_promisify = __commonJS((exports2) => {
     "use strict";
@@ -22945,8 +22998,8 @@ ${error.message}` : execaMessage;
         binaries: mapKeys(options.binaries, (key) => engineTypeToBinaryType(key, platform))
       };
       const binaryJobs = flatMap_1.flatMap(Object.entries(opts.binaries), ([binaryName, targetFolder]) => opts.binaryTargets.map((binaryTarget) => {
-        const fileName = getBinaryName(binaryName, binaryTarget);
-        const targetFilePath = binaryName === BinaryType.libqueryEngine ? path_1.default.join(targetFolder, get_platform_1.getNodeAPIName(binaryTarget, "fs")) : path_1.default.join(targetFolder, fileName);
+        const fileName = binaryName === BinaryType.libqueryEngine ? get_platform_1.getNodeAPIName(binaryTarget, "fs") : getBinaryName(binaryName, binaryTarget);
+        const targetFilePath = path_1.default.join(targetFolder, fileName);
         return {
           binaryName,
           targetFolder,
@@ -23045,9 +23098,10 @@ ${error.message}` : execaMessage;
       }, {});
     }
     async function binaryNeedsToBeDownloaded(job, nativePlatform, version, failSilent) {
-      var _a;
-      const binaryPath = (_a = job.envVarPath) !== null && _a !== void 0 ? _a : job.targetFilePath;
-      const targetExists = await exists(binaryPath);
+      if (job.envVarPath && fs_1.default.existsSync(job.envVarPath)) {
+        return false;
+      }
+      const targetExists = await exists(job.targetFilePath);
       const cachedFile = await getCachedBinaryPath({
         ...job,
         version,
@@ -23078,11 +23132,11 @@ ${error.message}` : execaMessage;
         }
       }
       if (!targetExists) {
-        debug(`file ${binaryPath} does not exist and must be downloaded`);
+        debug(`file ${job.targetFilePath} does not exist and must be downloaded`);
         return true;
       }
       if (job.binaryTarget === nativePlatform && job.binaryName !== BinaryType.libqueryEngine) {
-        const works = await checkVersionCommand(binaryPath);
+        const works = await checkVersionCommand(job.targetFilePath);
         return !works;
       }
       return false;
@@ -23260,8 +23314,10 @@ ${error.message}` : execaMessage;
   });
   __markAsModule(exports);
   __export(exports, {
+    DEFAULT_CLI_QUERY_ENGINE_BINARY_TYPE: () => DEFAULT_CLI_QUERY_ENGINE_BINARY_TYPE,
     enginesVersion: () => import_engines_version2.enginesVersion,
     ensureBinariesExist: () => ensureBinariesExist,
+    getCliQueryEngineBinaryType: () => getCliQueryEngineBinaryType,
     getEnginesPath: () => getEnginesPath
   });
   var import_debug = __toModule(require_dist());
@@ -23273,15 +23329,28 @@ ${error.message}` : execaMessage;
   function getEnginesPath() {
     return import_path.default.join(__dirname, "../");
   }
+  var DEFAULT_CLI_QUERY_ENGINE_BINARY_TYPE = import_fetch_engine.BinaryType.queryEngine;
+  function getCliQueryEngineBinaryType() {
+    const envCliQueryEngineType = process.env.PRISMA_CLI_QUERY_ENGINE_TYPE;
+    if (envCliQueryEngineType) {
+      if (envCliQueryEngineType === "binary") {
+        return import_fetch_engine.BinaryType.queryEngine;
+      }
+      if (envCliQueryEngineType === "library") {
+        return import_fetch_engine.BinaryType.libqueryEngine;
+      }
+    }
+    return DEFAULT_CLI_QUERY_ENGINE_BINARY_TYPE;
+  }
   async function ensureBinariesExist() {
     const binaryDir = import_path.default.join(__dirname, "../");
     let binaryTargets = void 0;
     if (process.env.PRISMA_CLI_BINARY_TARGETS) {
       binaryTargets = process.env.PRISMA_CLI_BINARY_TARGETS.split(",");
     }
-    debug2(`using Node API: ${process.env.PRISMA_FORCE_NAPI === "true"}`);
+    const cliQueryEngineBinaryType = getCliQueryEngineBinaryType();
     const binaries = {
-      [process.env.PRISMA_FORCE_NAPI === "true" ? import_fetch_engine.BinaryType.libqueryEngine : import_fetch_engine.BinaryType.queryEngine]: binaryDir,
+      [cliQueryEngineBinaryType]: binaryDir,
       [import_fetch_engine.BinaryType.migrationEngine]: binaryDir,
       [import_fetch_engine.BinaryType.introspectionEngine]: binaryDir,
       [import_fetch_engine.BinaryType.prismaFmt]: binaryDir
@@ -23325,7 +23394,7 @@ ${error.message}` : execaMessage;
   import_path.default.join(__dirname, "../query_engine-windows.dll.node");
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
 var require_getNodeAPIName2 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -23346,7 +23415,7 @@ var require_getNodeAPIName2 = __commonJS2((exports2) => {
   exports2.getNodeAPIName = getNodeAPIName;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/getPlatform.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb/node_modules/@prisma/get-platform/dist/getPlatform.js
 var require_getPlatform2 = __commonJS2((exports2) => {
   "use strict";
   var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
@@ -23511,7 +23580,7 @@ var require_getPlatform2 = __commonJS2((exports2) => {
   exports2.getPlatform = getPlatform;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
 var require_isNodeAPISupported2 = __commonJS2((exports2) => {
   "use strict";
   var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
@@ -23532,7 +23601,7 @@ var require_isNodeAPISupported2 = __commonJS2((exports2) => {
   exports2.isNodeAPISupported = isNodeAPISupported;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/platforms.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb/node_modules/@prisma/get-platform/dist/platforms.js
 var require_platforms2 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -23557,7 +23626,7 @@ var require_platforms2 = __commonJS2((exports2) => {
   ];
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a/node_modules/@prisma/get-platform/dist/index.js
+// ../../node_modules/.pnpm/@prisma+get-platform@2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb/node_modules/@prisma/get-platform/dist/index.js
 var require_dist10 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -24026,11 +24095,6 @@ ${description}
 
 ${moreInfo}
 
-## Query
-\`\`\`
-${query ? (0, import_maskQuery.maskQuery)(query) : ""}
-\`\`\`
-
 ## Logs
 \`\`\`
 ${logs}
@@ -24044,6 +24108,11 @@ ${logs}
 ## Schema
 \`\`\`prisma
 // PLEASE ADD YOUR SCHEMA HERE IF POSSIBLE
+\`\`\`
+
+## Prisma Engine Query
+\`\`\`
+${query ? (0, import_maskQuery.maskQuery)(query) : ""}
 \`\`\`
 `);
     const url = (0, import_util4.getGithubIssueUrl)({title, body});
@@ -24190,6 +24259,7 @@ var require_LibraryEngine = __commonJS2((exports, module) => {
     return event.level === "error" && event["message"] === "PANIC";
   }
   var knownPlatforms = [...import_get_platform.platforms, "native"];
+  var engines = [];
   var LibraryEngine = class extends import_Engine.Engine {
     constructor(config2) {
       super();
@@ -24207,7 +24277,17 @@ var require_LibraryEngine = __commonJS2((exports, module) => {
         this.logLevel = "debug";
       }
       this.libraryInstantiationPromise = this.instantiateLibrary();
-      initHooks(this);
+      initHooks();
+      engines.push(this);
+      this.checkForTooManyEngines();
+    }
+    checkForTooManyEngines() {
+      if (engines.length >= 10) {
+        const runningEngines = engines.filter((e) => e.engine);
+        if (runningEngines.length === 10) {
+          console.warn(`${import_chalk.default.yellow("warn(prisma-client)")} Already 10 Prisma Clients are actively running.`);
+        }
+      }
     }
     async transaction(action, arg) {
       var _a, _b, _c, _d, _e;
@@ -24613,22 +24693,29 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
       return (0, import_printGeneratorConfig.printGeneratorConfig)(fixedGenerator);
     }
   };
-  function hookProcess(engine, handler, exit = false) {
+  function hookProcess(handler, exit = false) {
     process.once(handler, async () => {
       debug(`hookProcess received: ${handler}`);
-      await engine.runBeforeExit();
+      for (const engine of engines) {
+        await engine.runBeforeExit();
+      }
+      engines.splice(0, engines.length);
       if (exit && process.listenerCount(handler) === 0) {
         process.exit();
       }
     });
   }
-  function initHooks(engine) {
-    hookProcess(engine, "beforeExit");
-    hookProcess(engine, "exit");
-    hookProcess(engine, "SIGINT", true);
-    hookProcess(engine, "SIGUSR1", true);
-    hookProcess(engine, "SIGUSR2", true);
-    hookProcess(engine, "SIGTERM", true);
+  var hooksInitialized = false;
+  function initHooks() {
+    if (!hooksInitialized) {
+      hookProcess("beforeExit");
+      hookProcess("exit");
+      hookProcess("SIGINT", true);
+      hookProcess("SIGUSR1", true);
+      hookProcess("SIGUSR2", true);
+      hookProcess("SIGTERM", true);
+      hooksInitialized = true;
+    }
   }
 });
 
@@ -30567,7 +30654,7 @@ var require_dist12 = __commonJS2((exports2) => {
   exports2.default = sqltag3;
 });
 
-// ../../node_modules/.pnpm/arg@5.0.0/node_modules/arg/index.js
+// ../../node_modules/.pnpm/arg@5.0.1/node_modules/arg/index.js
 var require_arg = __commonJS2((exports2, module2) => {
   var flagSymbol = Symbol("arg flag");
   var ArgError = class extends Error {
@@ -30578,7 +30665,11 @@ var require_arg = __commonJS2((exports2, module2) => {
       Object.setPrototypeOf(this, ArgError.prototype);
     }
   };
-  function arg(opts, {argv = process.argv.slice(2), permissive = false, stopAtPositional = false} = {}) {
+  function arg(opts, {
+    argv = process.argv.slice(2),
+    permissive = false,
+    stopAtPositional = false
+  } = {}) {
     if (!opts) {
       throw new ArgError("argument specification object is required", "ARG_CONFIG_NO_SPEC");
     }
@@ -30728,7 +30819,7 @@ var require_utils5 = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "2.29.0",
+    version: "2.30.0",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -30789,22 +30880,22 @@ var require_package2 = __commonJS2((exports2, module2) => {
     devDependencies: {
       "@prisma/debug": "workspace:*",
       "@prisma/engine-core": "workspace:*",
-      "@prisma/engines": "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a",
-      "@prisma/fetch-engine": "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a",
+      "@prisma/engines": "2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb",
+      "@prisma/fetch-engine": "2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb",
       "@prisma/generator-helper": "workspace:*",
-      "@prisma/get-platform": "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a",
+      "@prisma/get-platform": "2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb",
       "@prisma/migrate": "workspace:*",
       "@prisma/sdk": "workspace:*",
       "@timsuchanek/copy": "1.4.5",
       "@types/debug": "4.1.7",
-      "@types/jest": "26.0.24",
+      "@types/jest": "27.0.1",
       "@types/js-levenshtein": "1.1.0",
       "@types/mssql": "6.0.8",
-      "@types/node": "12.20.18",
+      "@types/node": "12.20.19",
       "@types/pg": "8.6.1",
-      "@typescript-eslint/eslint-plugin": "4.29.0",
-      "@typescript-eslint/parser": "4.29.0",
-      arg: "5.0.0",
+      "@typescript-eslint/eslint-plugin": "4.29.2",
+      "@typescript-eslint/parser": "4.29.2",
+      arg: "5.0.1",
       chalk: "4.1.2",
       "decimal.js": "10.3.1",
       esbuild: "0.8.53",
@@ -30824,7 +30915,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       jest: "27.0.6",
       "js-levenshtein": "1.1.6",
       klona: "2.0.4",
-      "lint-staged": "11.1.1",
+      "lint-staged": "11.1.2",
       "make-dir": "3.1.0",
       mariadb: "2.5.4",
       mssql: "7.2.0",
@@ -30834,7 +30925,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       prettier: "2.3.2",
       "replace-string": "3.1.0",
       rimraf: "3.0.2",
-      rollup: "2.55.1",
+      rollup: "2.56.2",
       "rollup-plugin-dts": "3.0.2",
       "sort-keys": "4.2.0",
       "source-map-support": "0.5.19",
@@ -30842,8 +30933,8 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "stacktrace-parser": "0.1.10",
       "strip-ansi": "6.0.0",
       "strip-indent": "3.0.0",
-      "ts-jest": "27.0.4",
-      "ts-node": "10.1.0",
+      "ts-jest": "27.0.5",
+      "ts-node": "10.2.0",
       tsd: "0.17.0",
       typescript: "4.3.5"
     },
@@ -30856,7 +30947,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       }
     },
     dependencies: {
-      "@prisma/engines-version": "2.29.0-34.1be4cd60b89afa04b192acb1ef47758a39810f3a"
+      "@prisma/engines-version": "2.30.0-28.60b19f4a1de4fe95741da371b4c44a92f4d1adcb"
     },
     "lint-staged": {
       "*.ts": [
@@ -35635,6 +35726,35 @@ var import_fs2 = __toModule2(require("fs"));
 var import_path2 = __toModule2(require("path"));
 var sqlTemplateTag = __toModule2(require_dist12());
 
+// src/runtime/utils/getClientEngineType.ts
+var ClientEngineType;
+(function(ClientEngineType2) {
+  ClientEngineType2["Library"] = "library";
+  ClientEngineType2["Binary"] = "binary";
+})(ClientEngineType || (ClientEngineType = {}));
+var DEFAULT_CLIENT_ENGINE_TYPE = ClientEngineType.Binary;
+function getClientEngineType(generatorConfig) {
+  const engineTypeFromEnvVar = getEngineTypeFromEnvVar();
+  if (engineTypeFromEnvVar)
+    return engineTypeFromEnvVar;
+  if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === ClientEngineType.Library || (generatorConfig == null ? void 0 : generatorConfig.previewFeatures.includes("nApi"))) {
+    return ClientEngineType.Library;
+  } else if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === ClientEngineType.Binary) {
+    return ClientEngineType.Binary;
+  }
+  return DEFAULT_CLIENT_ENGINE_TYPE;
+}
+function getEngineTypeFromEnvVar() {
+  const engineType = process.env.PRISMA_CLIENT_ENGINE_TYPE;
+  if (engineType === ClientEngineType.Library) {
+    return ClientEngineType.Library;
+  } else if (engineType === ClientEngineType.Binary) {
+    return ClientEngineType.Binary;
+  } else {
+    return void 0;
+  }
+}
+
 // src/runtime/getLogLevel.ts
 function getLogLevel(log4) {
   if (typeof log4 === "string") {
@@ -36422,6 +36542,7 @@ function getPrismaClient(config2) {
       this._rejectOnNotFound = optionsArg == null ? void 0 : optionsArg.rejectOnNotFound;
       this._clientVersion = (_a = config2.clientVersion) != null ? _a : clientVersion;
       this._activeProvider = config2.activeProvider;
+      this._clientEngineType = getClientEngineType(config2.generator);
       const envPaths = {
         rootEnvPath: config2.relativeEnvPaths.rootEnvPath && import_path2.default.resolve(config2.dirname, config2.relativeEnvPaths.rootEnvPath),
         schemaEnvPath: config2.relativeEnvPaths.schemaEnvPath && import_path2.default.resolve(config2.dirname, config2.relativeEnvPaths.schemaEnvPath)
@@ -36514,10 +36635,10 @@ function getPrismaClient(config2) {
       return "PrismaClient";
     }
     getEngine() {
-      if (this._previewFeatures.includes("nApi") || process.env.PRISMA_FORCE_NAPI === "true") {
-        return new import_engine_core.LibraryEngine(this._engineConfig);
-      } else {
+      if (this._clientEngineType === ClientEngineType.Binary) {
         return new import_engine_core2.BinaryEngine(this._engineConfig);
+      } else {
+        return new import_engine_core.LibraryEngine(this._engineConfig);
       }
     }
     $use(arg0, arg1) {
@@ -36660,13 +36781,13 @@ function getPrismaClient(config2) {
         action: "executeRaw",
         callsite: this._getCallsite(),
         runInTransaction,
-        transactionId: transactionId != null ? transactionId : void 0
+        transactionId
       });
     }
     $executeRaw(stringOrTemplateStringsArray, ...values) {
-      const doRequest = (runInTransaction = false, transactionId) => {
+      const request = (transactionId, runInTransaction) => {
         try {
-          const promise = this.$executeRawInternal(runInTransaction, transactionId != null ? transactionId : null, stringOrTemplateStringsArray, ...values);
+          const promise = this.$executeRawInternal(runInTransaction != null ? runInTransaction : false, transactionId, stringOrTemplateStringsArray, ...values);
           promise.isExecuteRaw = true;
           return promise;
         } catch (e) {
@@ -36675,17 +36796,17 @@ function getPrismaClient(config2) {
         }
       };
       return {
-        then(onfulfilled, onrejected) {
-          return doRequest().then(onfulfilled, onrejected);
+        then(onFulfilled, onRejected, transactionId) {
+          return request(transactionId).then(onFulfilled, onRejected);
         },
         requestTransaction(transactionId) {
-          return doRequest(true, transactionId);
+          return request(transactionId, true);
         },
-        catch(onrejected) {
-          return doRequest().catch(onrejected);
+        catch(onRejected) {
+          return request().catch(onRejected);
         },
-        finally(onfinally) {
-          return doRequest().finally(onfinally);
+        finally(onFinally) {
+          return request().finally(onFinally);
         }
       };
     }
@@ -36767,13 +36888,13 @@ function getPrismaClient(config2) {
         action: "queryRaw",
         callsite: this._getCallsite(),
         runInTransaction,
-        transactionId: transactionId != null ? transactionId : void 0
+        transactionId
       });
     }
     $queryRaw(stringOrTemplateStringsArray, ...values) {
-      const doRequest = (runInTransaction = false, transactionId) => {
+      const request = (transactionId, runInTransaction) => {
         try {
-          const promise = this.$queryRawInternal(runInTransaction, transactionId != null ? transactionId : null, stringOrTemplateStringsArray, ...values);
+          const promise = this.$queryRawInternal(runInTransaction != null ? runInTransaction : false, transactionId, stringOrTemplateStringsArray, ...values);
           promise.isQueryRaw = true;
           return promise;
         } catch (e) {
@@ -36782,17 +36903,17 @@ function getPrismaClient(config2) {
         }
       };
       return {
-        then(onfulfilled, onrejected) {
-          return doRequest().then(onfulfilled, onrejected);
+        then(onFulfilled, onRejected, transactionId) {
+          return request(transactionId).then(onFulfilled, onRejected);
         },
         requestTransaction(transactionId) {
-          return doRequest(true, transactionId);
+          return request(transactionId, true);
         },
-        catch(onrejected) {
-          return doRequest().catch(onrejected);
+        catch(onRejected) {
+          return request().catch(onRejected);
         },
-        finally(onfinally) {
-          return doRequest().finally(onfinally);
+        finally(onFinally) {
+          return request().finally(onFinally);
         }
       };
     }
@@ -37008,13 +37129,13 @@ new PrismaClient({
       });
     }
     _bootstrapClient() {
-      const clients = this._dmmf.mappings.modelOperations.reduce((acc, mapping) => {
-        const lowerCaseModel = lowerCase(mapping.model);
-        const model = this._dmmf.modelMap[mapping.model];
+      const modelClientBuilders = this._dmmf.mappings.modelOperations.reduce((modelClientBuilders2, modelMapping) => {
+        const lowerCaseModel = lowerCase(modelMapping.model);
+        const model = this._dmmf.modelMap[modelMapping.model];
         if (!model) {
-          throw new Error(`Invalid mapping ${mapping.model}, can't find model`);
+          throw new Error(`Invalid mapping ${modelMapping.model}, can't find model`);
         }
-        const prismaClient = ({
+        const ModelClientBuilder = ({
           operation,
           actionName,
           args,
@@ -37022,53 +37143,42 @@ new PrismaClient({
           modelName,
           unpacker
         }) => {
-          dataPath = dataPath != null ? dataPath : [];
-          const clientMethod = `${lowerCaseModel}.${actionName}`;
           let requestPromise;
           const callsite = this._getCallsite();
-          const requestModelName = modelName != null ? modelName : model.name;
-          const clientImplementation = {
-            then: (onfulfilled, onrejected, transactionId) => {
-              if (!requestPromise) {
-                requestPromise = this._request({
-                  args,
-                  dataPath,
-                  action: actionName,
-                  model: requestModelName,
-                  clientMethod,
-                  callsite,
-                  runInTransaction: false,
-                  transactionId,
-                  unpacker
-                });
-              }
-              return requestPromise.then(onfulfilled, onrejected);
+          const request = (transactionId, runInTransaction) => {
+            requestPromise = requestPromise != null ? requestPromise : this._request({
+              args,
+              model: modelName != null ? modelName : model.name,
+              action: actionName,
+              clientMethod: `${lowerCaseModel}.${actionName}`,
+              dataPath,
+              callsite,
+              runInTransaction: runInTransaction != null ? runInTransaction : false,
+              transactionId,
+              unpacker
+            });
+            return requestPromise;
+          };
+          const modelClient = {
+            then: (onFulfilled, onRejected, transactionId) => {
+              return request(transactionId).then(onFulfilled, onRejected);
             },
             requestTransaction: (transactionId) => {
-              if (!requestPromise) {
-                requestPromise = this._request({
-                  args,
-                  dataPath,
-                  action: actionName,
-                  model: requestModelName,
-                  clientMethod,
-                  callsite,
-                  runInTransaction: true,
-                  transactionId,
-                  unpacker
-                });
-              }
-              return requestPromise;
+              return request(transactionId, true);
             },
-            catch: (onrejected) => requestPromise == null ? void 0 : requestPromise.catch(onrejected),
-            finally: (onfinally) => requestPromise == null ? void 0 : requestPromise.finally(onfinally)
+            catch: (onRejected) => {
+              return request().catch(onRejected);
+            },
+            finally: (onFinally) => {
+              return request().finally(onFinally);
+            }
           };
           for (const field of model.fields.filter((f) => f.kind === "object")) {
-            clientImplementation[field.name] = (fieldArgs) => {
+            modelClient[field.name] = (fieldArgs) => {
               const prefix = dataPath.includes("select") ? "select" : dataPath.includes("include") ? "include" : "select";
               const newDataPath = [...dataPath, prefix, field.name];
               const newArgs = deepSet(args, newDataPath, fieldArgs || true);
-              return clients[field.type]({
+              return modelClientBuilders2[field.type]({
                 operation,
                 actionName,
                 args: newArgs,
@@ -37078,10 +37188,10 @@ new PrismaClient({
               });
             };
           }
-          return clientImplementation;
+          return modelClient;
         };
-        acc[model.name] = prismaClient;
-        return acc;
+        modelClientBuilders2[model.name] = ModelClientBuilder;
+        return modelClientBuilders2;
       }, {});
       for (const mapping of this._dmmf.mappings.modelOperations) {
         const lowerCaseModel = lowerCase(mapping.model);
@@ -37094,9 +37204,10 @@ new PrismaClient({
         const delegate = Object.keys(mapping).reduce((acc, actionName) => {
           if (!filteredActionsList[actionName]) {
             const operation = getOperation(actionName);
-            acc[actionName] = (args) => clients[mapping.model]({
+            acc[actionName] = (args) => modelClientBuilders[mapping.model]({
               operation,
               actionName,
+              dataPath: [],
               args
             });
           }
@@ -37115,7 +37226,7 @@ new PrismaClient({
               return data;
             };
           }
-          return clients[mapping.model]({
+          return modelClientBuilders[mapping.model]({
             operation: "query",
             actionName: `aggregate`,
             args: {
@@ -37156,7 +37267,7 @@ new PrismaClient({
             }
             return acc;
           }, {});
-          return clients[mapping.model]({
+          return modelClientBuilders[mapping.model]({
             operation: "query",
             actionName: "aggregate",
             rootField: mapping.aggregate,
@@ -37205,7 +37316,7 @@ new PrismaClient({
             }
             return acc;
           }, {});
-          return clients[mapping.model]({
+          return modelClientBuilders[mapping.model]({
             operation: "query",
             actionName: "groupBy",
             rootField: mapping.groupBy,

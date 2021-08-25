@@ -1390,4 +1390,36 @@ describe("inputs", () => {
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });
+
+  describe("when `fullTextSearch` preview feature is enabled", () => {
+    it("should properly generate input type classes with string search field", async () => {
+      const schema = /* prisma */ `
+        model Sample {
+          idField       Int     @id @default(autoincrement())
+          stringField   String
+          floatField    Float
+          intField      Int
+          booleanField  Boolean
+          dateField     DateTime
+          jsonField     Json
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["fullTextSearch"],
+      });
+      const nestedStringFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/NestedStringFilter.ts",
+      );
+      const stringFilterTSFile = await readGeneratedFile(
+        "/resolvers/inputs/StringFilter.ts",
+      );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(nestedStringFilterTSFile).toMatchSnapshot("NestedStringFilter");
+      expect(stringFilterTSFile).toMatchSnapshot("StringFilter");
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
 });

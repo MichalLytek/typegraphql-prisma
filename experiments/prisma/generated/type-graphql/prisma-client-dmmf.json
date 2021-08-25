@@ -11023,6 +11023,18 @@
               ]
             },
             {
+              "name": "search",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "mode",
               "isRequired": false,
               "isNullable": false,
@@ -11187,6 +11199,18 @@
             },
             {
               "name": "endsWith",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "search",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -12521,6 +12545,18 @@
               ]
             },
             {
+              "name": "search",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "mode",
               "isRequired": false,
               "isNullable": false,
@@ -12775,6 +12811,18 @@
             },
             {
               "name": "endsWith",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "search",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22791,6 +22839,18 @@
               ]
             },
             {
+              "name": "search",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "not",
               "isRequired": false,
               "isNullable": false,
@@ -22942,6 +23002,18 @@
             },
             {
               "name": "endsWith",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "search",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -23544,6 +23616,18 @@
               ]
             },
             {
+              "name": "search",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "not",
               "isRequired": false,
               "isNullable": false,
@@ -23785,6 +23869,18 @@
             },
             {
               "name": "endsWith",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "search",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [

@@ -379,8 +379,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.29.0
-   * Query Engine version: 1be4cd60b89afa04b192acb1ef47758a39810f3a
+   * Prisma Client JS version: 2.30.0
+   * Query Engine version: 60b19f4a1de4fe95741da371b4c44a92f4d1adcb
    */
   export type PrismaVersion = {
     client: string
@@ -10064,6 +10064,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
+    search?: string
     mode?: QueryMode
     not?: NestedStringFilter | string
   }
@@ -10079,6 +10080,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
+    search?: string
     mode?: QueryMode
     not?: NestedStringNullableFilter | string | null
   }
@@ -10232,6 +10234,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
+    search?: string
     mode?: QueryMode
     not?: NestedStringWithAggregatesFilter | string
     _count?: NestedIntFilter
@@ -10265,6 +10268,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
+    search?: string
     mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
@@ -11373,6 +11377,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
+    search?: string
     not?: NestedStringFilter | string
   }
 
@@ -11387,6 +11392,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
+    search?: string
     not?: NestedStringNullableFilter | string | null
   }
 
@@ -11460,6 +11466,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
+    search?: string
     not?: NestedStringWithAggregatesFilter | string
     _count?: NestedIntFilter
     /**
@@ -11492,6 +11499,7 @@ export namespace Prisma {
     contains?: string
     startsWith?: string
     endsWith?: string
+    search?: string
     not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
     /**
