@@ -1,0 +1,12 @@
+export { AggregateMainUserArgs } from "./AggregateMainUserArgs";
+export { CreateMainUserArgs } from "./CreateMainUserArgs";
+export { CreateManyMainUserArgs } from "./CreateManyMainUserArgs";
+export { DeleteMainUserArgs } from "./DeleteMainUserArgs";
+export { DeleteManyMainUserArgs } from "./DeleteManyMainUserArgs";
+export { FindFirstMainUserArgs } from "./FindFirstMainUserArgs";
+export { FindManyMainUserArgs } from "./FindManyMainUserArgs";
+export { FindUniqueMainUserArgs } from "./FindUniqueMainUserArgs";
+export { GroupByMainUserArgs } from "./GroupByMainUserArgs";
+export { UpdateMainUserArgs } from "./UpdateMainUserArgs";
+export { UpdateManyMainUserArgs } from "./UpdateManyMainUserArgs";
+export { UpsertMainUserArgs } from "./UpsertMainUserArgs";

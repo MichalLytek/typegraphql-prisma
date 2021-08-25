@@ -385,6 +385,9 @@ describe("crud", () => {
       const groupByClientResolverTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/GroupByClientResolver.ts",
       );
+      const aggregateClientResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/Client/AggregateClientResolver.ts",
+      );
       const createManyClientResolverTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/CreateManyClientResolver.ts",
       );
@@ -419,8 +422,44 @@ describe("crud", () => {
       expect(groupByClientResolverTSFile).toMatchSnapshot(
         "GroupByClientResolver",
       );
+      expect(aggregateClientResolverTSFile).toMatchSnapshot(
+        "AggregateClientResolver",
+      );
       expect(createManyClientResolverTSFile).toMatchSnapshot(
         "CreateManyClientResolver",
+      );
+    });
+
+    it("should properly generate resolver class for single prisma model", async () => {
+      const schema = /* prisma */ `
+        /// @@TypeGraphQL.type(name: "MainUser")
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, { outputDirPath });
+      const mainUserCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/MainUser/MainUserCrudResolver.ts",
+      );
+      const aggregateMainUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/MainUser/AggregateMainUserResolver.ts",
+      );
+      const groupByMainUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/MainUser/GroupByMainUserResolver.ts",
+      );
+
+      expect(mainUserCrudResolverTSFile).toMatchSnapshot(
+        "MainUserCrudResolver",
+      );
+      expect(aggregateMainUserResolverTSFile).toMatchSnapshot(
+        "AggregateMainUserResolver",
+      );
+      expect(groupByMainUserResolverTSFile).toMatchSnapshot(
+        "GroupByMainUserResolver",
       );
     });
   });

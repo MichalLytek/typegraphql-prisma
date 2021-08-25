@@ -1,6 +1,6 @@
-query GetClientsAndPosts {
-  clients {
-    ...ClientData
+query GetMainUsersAndPosts {
+  mainUsers {
+    ...MainUserData
     advertPosts: clientPosts(where: { kind: { equals: ADVERT } }) {
       ...PostData
     }
@@ -19,13 +19,13 @@ query GetClientsAndPosts {
   allPosts {
     ...PostData
     author {
-      ...ClientData
+      ...MainUserData
     }
   }
 }
 
-mutation AddClient {
-  createClient(
+mutation AddMainUser {
+  createMainUser(
     data: {
       age: 50
       amount: 123
@@ -35,18 +35,18 @@ mutation AddClient {
       role: USER
     }
   ) {
-    ...ClientData
+    ...MainUserData
   }
 }
 
-query MyFindClients {
-  customFindClientsWithArgs(where: { accountBalance: { lte: 10 } }) {
-    ...ClientData
+query MyFindMainUsers {
+  customFindMainUsersWithArgs(where: { accountBalance: { lte: 10 } }) {
+    ...MainUserData
   }
 }
 
-query FindClients {
-  clients(
+query FindMainUsers {
+  mainUsers(
     orderBy: { id: desc }
     take: 2
     where: {
@@ -54,19 +54,19 @@ query FindClients {
     }
     distinct: [firstName]
   ) {
-    ...ClientData
+    ...MainUserData
   }
 }
 
-query SortAllClients {
-  clients(orderBy: [{ firstName: asc }, { id: desc }]) {
-    ...ClientData
+query SortAllMainUsers {
+  mainUsers(orderBy: [{ firstName: asc }, { id: desc }]) {
+    ...MainUserData
   }
 }
 
-query FindClientsWithEmptyBalance {
-  clients(where: { accountBalance: { equals: 0 } }) {
-    ...ClientData
+query FindMainUsersWithEmptyBalance {
+  mainUsers(where: { accountBalance: { equals: 0 } }) {
+    ...MainUserData
   }
 }
 
@@ -74,12 +74,12 @@ query FindPostsOfAdmins {
   posts(where: { author: { is: { role: { equals: ADMIN } } } }) {
     ...PostData
     author {
-      ...ClientData
+      ...MainUserData
     }
   }
 }
 
-fragment ClientData on Client {
+fragment MainUserData on MainUser {
   id
   email
   firstName
@@ -171,8 +171,8 @@ query FilterPostsByJson {
   }
 }
 
-query AggregateClient {
-  aggregateClient {
+query AggregateMainUser {
+  aggregateMainUser {
     _count {
       _all
     }
@@ -216,7 +216,7 @@ query AggregateClient {
 #   ) {
 #     ...PostData
 #     author {
-#       ...ClientData
+#       ...MainUserData
 #     }
 #   }
 # }
@@ -234,17 +234,17 @@ query AggregateClient {
 #   ) {
 #     ...PostData
 #     author {
-#       ...ClientData
+#       ...MainUserData
 #     }
 #   }
 # }
 
 mutation AtomicNumberOperations {
-  updateClient(
+  updateMainUser(
     data: { accountBalance: { increment: 100 } }
     where: { email: "test1@test.test" }
   ) {
-    ...ClientData
+    ...MainUserData
   }
 }
 
@@ -304,13 +304,13 @@ mutation InsertNativeTypesFields {
 }
 
 mutation AddGrade {
-  updateClient(where: { id: 1 }, data: { grades: { push: 5 } }) {
-    ...ClientData
+  updateMainUser(where: { id: 1 }, data: { grades: { push: 5 } }) {
+    ...MainUserData
   }
 }
 
 query CountByRelations {
-  findFirstClient {
+  findFirstMainUser {
     id
     email
     _count {
@@ -320,7 +320,7 @@ query CountByRelations {
 }
 
 query OrderByRelation {
-  clients(orderBy: { clientPosts: { _count: desc } }) {
+  mainUsers(orderBy: { mainUserPosts: { _count: desc } }) {
     id
     email
     _count {

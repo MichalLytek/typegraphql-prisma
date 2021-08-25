@@ -6,15 +6,15 @@ process.exit(1);
 
 // @ts-ignore Unreachable code detected.ts(7027)
 
-declare const findManyClientArgs: TypeGraphQLPrisma.FindManyClientArgs;
-const prismaFindManyUserArgs: Prisma.UserFindManyArgs = findManyClientArgs;
+declare const findManyMainUserArgs: TypeGraphQLPrisma.FindManyMainUserArgs;
+const prismaFindManyUserArgs: Prisma.UserFindManyArgs = findManyMainUserArgs;
 
-declare const clientInput: TypeGraphQLPrisma.Client;
-const prismaUserOutput: PrismaModels.User = clientInput;
+declare const mainUserModel: TypeGraphQLPrisma.MainUser;
+const prismaUserOutput: PrismaModels.User = mainUserModel;
 
-// TODO: fix renamed fields - getters
-// declare const prismaUserInput: Prisma.User;
-// const clientOutput: TypeGraphQLPrisma.Client = prismaUserInput;
+declare const prismaUserModel: PrismaModels.User;
+// @ts-expect-error fix renamed fields - getters
+const mainUserOutput: TypeGraphQLPrisma.MainUser = prismaUserModel;
 
 declare const prismaPostInput: PrismaModels.post;
 const postOutput: TypeGraphQLPrisma.Post = prismaPostInput;
@@ -22,14 +22,15 @@ const postOutput: TypeGraphQLPrisma.Post = prismaPostInput;
 declare const postCreateInput: TypeGraphQLPrisma.PostCreateInput;
 const prismaPostCreateInput: Prisma.postCreateInput = postCreateInput;
 
-declare const createClientArgs: TypeGraphQLPrisma.CreateClientArgs;
-const prismaUserCreateArgs: Prisma.UserCreateArgs = createClientArgs;
+declare const createMainUserArgs: TypeGraphQLPrisma.CreateMainUserArgs;
+const prismaUserCreateArgs: Prisma.UserCreateArgs = createMainUserArgs;
 
-declare const clientCreateInput: TypeGraphQLPrisma.ClientCreateInput;
+declare const clientCreateInput: TypeGraphQLPrisma.MainUserCreateInput;
 const prismaUserCreateInput: Prisma.UserCreateInput = clientCreateInput;
 
-declare const aggregateClient: TypeGraphQLPrisma.AggregateClient;
-const prismaAggregateUser: Prisma.AggregateUser = aggregateClient;
+declare const aggregateMainUser: TypeGraphQLPrisma.AggregateMainUser;
+// @ts-expect-error `_count` and `count` fields
+const prismaAggregateUser: Prisma.AggregateUser = aggregateMainUser;
 
-declare const aggregateClientArgs: TypeGraphQLPrisma.AggregateClientArgs;
-const prismaAggregateUserArgs: Prisma.UserAggregateArgs = aggregateClientArgs;
+declare const aggregateMainUserArgs: TypeGraphQLPrisma.AggregateMainUserArgs;
+const prismaAggregateUserArgs: Prisma.UserAggregateArgs = aggregateMainUserArgs;

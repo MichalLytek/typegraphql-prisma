@@ -1,7 +1,7 @@
 export { Category } from "./Category";
-export { Client } from "./Client";
 export { Creator } from "./Creator";
 export { Director } from "./Director";
+export { MainUser } from "./MainUser";
 export { Movie } from "./Movie";
 export { NativeTypeModel } from "./NativeTypeModel";
 export { Patient } from "./Patient";

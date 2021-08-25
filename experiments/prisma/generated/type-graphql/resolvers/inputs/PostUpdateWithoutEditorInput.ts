@@ -3,8 +3,8 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
-import { ClientUpdateOneRequiredWithoutPostsInput } from "../inputs/ClientUpdateOneRequiredWithoutPostsInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { MainUserUpdateOneRequiredWithoutPostsInput } from "../inputs/MainUserUpdateOneRequiredWithoutPostsInput";
 import { NullableEnumPostKindFieldUpdateOperationsInput } from "../inputs/NullableEnumPostKindFieldUpdateOperationsInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
@@ -58,8 +58,8 @@ export class PostUpdateWithoutEditorInput {
   })
   metadata?: Prisma.InputJsonValue | undefined;
 
-  @TypeGraphQL.Field(_type => ClientUpdateOneRequiredWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => MainUserUpdateOneRequiredWithoutPostsInput, {
     nullable: true
   })
-  author?: ClientUpdateOneRequiredWithoutPostsInput | undefined;
+  author?: MainUserUpdateOneRequiredWithoutPostsInput | undefined;
 }

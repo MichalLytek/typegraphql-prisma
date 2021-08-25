@@ -46,11 +46,11 @@ export default function generateCrudResolverClassFromMapping(
   const distinctOutputTypesNames = [
     ...new Set(mapping.actions.map(it => it.outputTypeName)),
   ];
-  const modelOutputTypeNames = distinctOutputTypesNames
-    .filter(typeName => dmmfDocument.isModelName(typeName))
-    .map(typeName => dmmfDocument.getModelTypeName(typeName)!);
+  const modelOutputTypeNames = distinctOutputTypesNames.filter(typeName =>
+    dmmfDocument.isModelTypeName(typeName),
+  );
   const otherOutputTypeNames = distinctOutputTypesNames.filter(
-    typeName => !dmmfDocument.isModelName(typeName),
+    typeName => !dmmfDocument.isModelTypeName(typeName),
   );
   generateModelsImports(sourceFile, modelOutputTypeNames, 3);
   generateOutputsImports(sourceFile, otherOutputTypeNames, 2);

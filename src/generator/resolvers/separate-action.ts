@@ -41,15 +41,15 @@ export default function generateActionResolverClass(
   }
   generateModelsImports(
     sourceFile,
-    [model.name, action.outputTypeName]
-      .filter(typeName => dmmfDocument.isModelName(typeName))
-      .map(typeName => dmmfDocument.getModelTypeName(typeName)!),
+    [model.typeName, action.outputTypeName].filter(typeName =>
+      dmmfDocument.isModelTypeName(typeName),
+    ),
     3,
   );
   generateOutputsImports(
     sourceFile,
     [action.outputTypeName].filter(
-      typeName => !dmmfDocument.isModelName(typeName),
+      typeName => !dmmfDocument.isModelTypeName(typeName),
     ),
     2,
   );

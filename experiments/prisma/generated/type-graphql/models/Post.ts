@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../client";
 import { DecimalJSScalar } from "../scalars";
-import { Client } from "../models/Client";
+import { MainUser } from "../models/MainUser";
 import { PostKind } from "../enums/PostKind";
 
 @TypeGraphQL.ObjectType({
@@ -41,14 +41,14 @@ export class Post {
   })
   content?: string | null;
 
-  author?: Client;
+  author?: MainUser;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
   authorId!: number;
 
-  editor?: Client | null;
+  editor?: MainUser | null;
 
   editorId?: number | null;
 

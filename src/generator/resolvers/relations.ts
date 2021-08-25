@@ -53,11 +53,7 @@ export default function generateRelationsResolverClassesFromModel(
   generateTypeGraphQLImport(sourceFile);
   generateModelsImports(
     sourceFile,
-    [...relationFields.map(field => field.type), model.name].map(typeName =>
-      dmmfDocument.isModelName(typeName)
-        ? dmmfDocument.getModelTypeName(typeName)!
-        : typeName,
-    ),
+    [...relationFields.map(field => field.type), model.typeName],
     3,
   );
 

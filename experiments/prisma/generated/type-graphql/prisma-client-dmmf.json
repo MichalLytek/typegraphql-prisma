@@ -197,7 +197,7 @@
           }
         ],
         "isGenerated": false,
-        "documentation": "User model doc\\n@@TypeGraphQL.type(name: \"Client\")",
+        "documentation": "User model doc\\n@@TypeGraphQL.type(name: \"MainUser\")",
         "primaryKey": null,
         "uniqueFields": [],
         "uniqueIndexes": []

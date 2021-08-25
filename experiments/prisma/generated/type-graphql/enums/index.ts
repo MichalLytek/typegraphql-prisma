@@ -1,7 +1,7 @@
 export { CategoryScalarFieldEnum } from "./CategoryScalarFieldEnum";
-export { ClientScalarFieldEnum } from "./ClientScalarFieldEnum";
 export { CreatorScalarFieldEnum } from "./CreatorScalarFieldEnum";
 export { DirectorScalarFieldEnum } from "./DirectorScalarFieldEnum";
+export { MainUserScalarFieldEnum } from "./MainUserScalarFieldEnum";
 export { MovieScalarFieldEnum } from "./MovieScalarFieldEnum";
 export { NativeTypeModelScalarFieldEnum } from "./NativeTypeModelScalarFieldEnum";
 export { PatientScalarFieldEnum } from "./PatientScalarFieldEnum";

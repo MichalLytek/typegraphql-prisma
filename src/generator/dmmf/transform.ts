@@ -84,7 +84,9 @@ function transformField(dmmfDocument: DmmfDocument) {
     const typeInfo: DMMF.TypeInfo = {
       location,
       isList: field.isList,
-      type: field.type,
+      type: dmmfDocument.isModelName(field.type)
+        ? dmmfDocument.getModelTypeName(field.type)!
+        : field.type,
     };
     const fieldTSType = getFieldTSType(
       dmmfDocument,
@@ -165,6 +167,7 @@ function transformOutputType(dmmfDocument: DmmfDocument) {
     const typeName = getMappedOutputTypeName(dmmfDocument, outputType.name);
     return {
       ...outputType,
+
       typeName,
       fields: outputType.fields
         .filter(field => field.deprecation === undefined)
@@ -231,14 +234,19 @@ function transformOutputType(dmmfDocument: DmmfDocument) {
   };
 }
 
-function getMappedOutputTypeName(
+export function getMappedOutputTypeName(
   dmmfDocument: DmmfDocument,
   outputTypeName: string,
 ): string {
   if (outputTypeName.startsWith("Aggregate")) {
-    return `Aggregate${dmmfDocument.getModelTypeName(
+    const modelTypeName = dmmfDocument.getModelTypeName(
       outputTypeName.replace("Aggregate", ""),
-    )}`;
+    );
+    return `Aggregate${modelTypeName}`;
+  }
+
+  if (dmmfDocument.isModelName(outputTypeName)) {
+    return dmmfDocument.getModelTypeName(outputTypeName)!;
   }
 
   const dedicatedTypeSuffix = [
@@ -454,9 +462,6 @@ export function generateRelationModel(dmmfDocument: DmmfDocument) {
     const outputType = dmmfDocument.schema.outputTypes.find(
       type => type.name === model.name,
     )!;
-    if (!outputType) {
-      console.log(dmmfDocument.schema.outputTypes, model);
-    }
     const resolverName = `${model.typeName}RelationsResolver`;
     const relationFields = model.fields
       .filter(field => field.relationName && !field.isOmitted.output)
@@ -473,6 +478,7 @@ export function generateRelationModel(dmmfDocument: DmmfDocument) {
           ...field,
           outputTypeField,
           argsTypeName,
+          type: dmmfDocument.getModelTypeName(field.type)!,
         };
       });
 

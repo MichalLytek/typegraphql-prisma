@@ -3,12 +3,12 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFilter } from "../inputs/BoolFilter";
-import { ClientRelationFilter } from "../inputs/ClientRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumPostKindNullableFilter } from "../inputs/EnumPostKindNullableFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { IntNullableFilter } from "../inputs/IntNullableFilter";
 import { JsonFilter } from "../inputs/JsonFilter";
+import { MainUserRelationFilter } from "../inputs/MainUserRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
@@ -66,20 +66,20 @@ export class PostWhereInput {
   })
   content?: StringNullableFilter | undefined;
 
-  @TypeGraphQL.Field(_type => ClientRelationFilter, {
+  @TypeGraphQL.Field(_type => MainUserRelationFilter, {
     nullable: true
   })
-  author?: ClientRelationFilter | undefined;
+  author?: MainUserRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntFilter, {
     nullable: true
   })
   authorId?: IntFilter | undefined;
 
-  @TypeGraphQL.Field(_type => ClientRelationFilter, {
+  @TypeGraphQL.Field(_type => MainUserRelationFilter, {
     nullable: true
   })
-  editor?: ClientRelationFilter | undefined;
+  editor?: MainUserRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntNullableFilter, {
     nullable: true
