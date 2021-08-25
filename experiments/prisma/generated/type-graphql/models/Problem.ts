@@ -9,7 +9,7 @@ import { ProblemCount } from "../resolvers/outputs/ProblemCount";
   isAbstract: true
 })
 export class Problem {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
     nullable: false
   })
   id!: number;

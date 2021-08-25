@@ -9,7 +9,7 @@ import { CreatorCount } from "../resolvers/outputs/CreatorCount";
   isAbstract: true
 })
 export class Creator {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
     nullable: false
   })
   id!: number;

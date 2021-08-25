@@ -9,7 +9,7 @@ import { PostKind } from "../enums/PostKind";
   isAbstract: true
 })
 export class Post {
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
     nullable: false
   })
   uuid!: string;

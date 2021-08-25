@@ -18,6 +18,7 @@ generator typegraphql {
   emitDMMF                 = true
   simpleResolvers          = false
   useUncheckedScalarInputs = false
+  emitIdAsIDType           = true
 }
 
 // Role enum comment

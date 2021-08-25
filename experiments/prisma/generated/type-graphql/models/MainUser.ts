@@ -13,7 +13,7 @@ import { MainUserCount } from "../resolvers/outputs/MainUserCount";
 })
 export class MainUser {
   /** User model field doc */
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
     nullable: false,
     description: "User model field doc"
   })

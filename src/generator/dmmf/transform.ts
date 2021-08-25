@@ -94,7 +94,13 @@ function transformField(dmmfDocument: DmmfDocument) {
       field.isRequired,
       false,
     );
-    const typeGraphQLType = getTypeGraphQLType(typeInfo, dmmfDocument);
+    const typeGraphQLType = getTypeGraphQLType(
+      typeInfo,
+      dmmfDocument,
+      undefined,
+      undefined,
+      field.isId,
+    );
     const { output = false, input = false } = parseDocumentationAttributes<{
       output: boolean;
       input: boolean;

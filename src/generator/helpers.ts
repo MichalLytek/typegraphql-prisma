@@ -96,10 +96,15 @@ export function getTypeGraphQLType(
   dmmfDocument: DmmfDocument,
   modelName?: string,
   typeName?: string,
+  isIdField?: boolean,
 ) {
   let GraphQLType: string = typeInfo.type;
   if (typeInfo.location === "scalar") {
-    GraphQLType = mapScalarToTypeGraphQLType(typeInfo.type);
+    GraphQLType = mapScalarToTypeGraphQLType(
+      typeInfo.type,
+      dmmfDocument.options.emitIdAsIDType,
+      isIdField,
+    );
   } else if (
     (typeInfo.location === "inputObjectTypes" ||
       typeInfo.location === "outputObjectTypes") &&
@@ -114,7 +119,14 @@ export function getTypeGraphQLType(
   return GraphQLType;
 }
 
-export function mapScalarToTypeGraphQLType(scalar: string) {
+export function mapScalarToTypeGraphQLType(
+  scalar: string,
+  emitIdAsIDType: boolean | undefined,
+  isIdField?: boolean,
+) {
+  if (emitIdAsIDType && isIdField) {
+    return `TypeGraphQL.ID`;
+  }
   switch (scalar) {
     case PrismaScalars.String:
     case PrismaScalars.Boolean: {

@@ -244,7 +244,7 @@ input CategoryWhereUniqueInput {
 
 type Creator {
   _count: CreatorCount
-  id: Int!
+  id: ID!
   likes(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]!
   name: String!
   problems(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]!
@@ -907,7 +907,7 @@ type MainUser {
   hello: String!
 
   """User model field doc"""
-  id: Int!
+  id: ID!
   role: Role!
 }
 
@@ -1549,7 +1549,7 @@ type NativeTypeModel {
   bigInt: BigInt
   byteA: Byte
   decimal: Decimal
-  id: Int!
+  id: ID!
 }
 
 type NativeTypeModelAvgAggregate {
@@ -2181,7 +2181,7 @@ type Post {
   published: Boolean!
   title: String!
   updatedAt: DateTime!
-  uuid: String!
+  uuid: ID!
 }
 
 type PostAvgAggregate {
@@ -2627,7 +2627,7 @@ type Problem {
   _count: ProblemCount
   creator: Creator
   creatorId: Int
-  id: Int!
+  id: ID!
   likedBy(cursor: CreatorWhereUniqueInput, distinct: [CreatorScalarFieldEnum!], orderBy: [CreatorOrderByWithRelationInput!], skip: Int, take: Int, where: CreatorWhereInput): [Creator!]!
   problemText: String!
 }

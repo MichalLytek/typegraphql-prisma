@@ -250,4 +250,33 @@ describe("models", () => {
       expect(firstModelTSFile).toMatchSnapshot("FirstModel");
     });
   });
+
+  describe("when emitIdAsIDType is set to true", () => {
+    it("should properly generate model object type class", async () => {
+      const schema = /* prisma */ `
+        model FirstModel {
+          intIdField Int   @id @default(autoincrement())
+          intField   Int   @unique
+          floatField Float
+        }
+        model SecondModel {
+          stringIdField String  @id @default(cuid())
+          stringField   String  @unique
+          booleanField  Boolean
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        emitIdAsIDType: true,
+      });
+      const firstModelTSFile = await readGeneratedFile("/models/FirstModel.ts");
+      const secondModelTSFile = await readGeneratedFile(
+        "/models/SecondModel.ts",
+      );
+
+      expect(firstModelTSFile).toMatchSnapshot("FirstModel");
+      expect(secondModelTSFile).toMatchSnapshot("SecondModel");
+    });
+  });
 });

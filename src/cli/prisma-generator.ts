@@ -41,6 +41,7 @@ export async function generate(options: GeneratorOptions) {
     useUncheckedScalarInputs: parseStringBoolean(
       generatorConfig.useUncheckedScalarInputs,
     ),
+    emitIdAsIDType: parseStringBoolean(generatorConfig.emitIdAsIDType),
   };
 
   if (config.emitDMMF) {

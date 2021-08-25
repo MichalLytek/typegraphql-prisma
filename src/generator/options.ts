@@ -7,4 +7,5 @@ export interface GenerateCodeOptions {
   absolutePrismaOutputPath?: string;
   simpleResolvers?: boolean;
   useUncheckedScalarInputs?: boolean;
+  emitIdAsIDType?: boolean;
 }

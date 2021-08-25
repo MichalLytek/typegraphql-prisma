@@ -7,7 +7,7 @@ import { DecimalJSScalar } from "../scalars";
   isAbstract: true
 })
 export class NativeTypeModel {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
     nullable: false
   })
   id!: number;
