@@ -31,6 +31,12 @@ export async function generate(options: GeneratorOptions) {
     emitTranspiledCode: parseStringBoolean(generatorConfig.emitTranspiledCode),
     simpleResolvers: parseStringBoolean(generatorConfig.simpleResolvers),
     useOriginalMapping: parseStringBoolean(generatorConfig.useOriginalMapping),
+    useUncheckedScalarInputs: parseStringBoolean(
+      generatorConfig.useUncheckedScalarInputs,
+    ),
+    emitIdAsIDType: parseStringBoolean(generatorConfig.emitIdAsIDType),
+
+    /* internal options */
     outputDirPath: outputDir,
     relativePrismaOutputPath: toUnixPath(
       path.relative(outputDir, prismaClientPath),
@@ -38,10 +44,9 @@ export async function generate(options: GeneratorOptions) {
     absolutePrismaOutputPath: prismaClientPath.includes("node_modules")
       ? "@prisma/client"
       : undefined,
-    useUncheckedScalarInputs: parseStringBoolean(
-      generatorConfig.useUncheckedScalarInputs,
+    selectRelationCountEnabled: prismaClientProvider.previewFeatures.includes(
+      "selectRelationCount",
     ),
-    emitIdAsIDType: parseStringBoolean(generatorConfig.emitIdAsIDType),
   };
 
   if (config.emitDMMF) {

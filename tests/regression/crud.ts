@@ -640,4 +640,79 @@ describe("crud", () => {
       expect(groupBySampleArgsTSFile).toMatchSnapshot("GroupBySampleArgs");
     });
   });
+
+  describe("when selectRelationCount preview feature is enabled", () => {
+    it("should properly generate actions resolver classes for prisma model", async () => {
+      const schema = /* prisma */ `
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["selectRelationCount"],
+      });
+
+      const userCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UserCrudResolver.ts",
+      );
+      const createUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/CreateUserResolver.ts",
+      );
+      const deleteManyUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/DeleteManyUserResolver.ts",
+      );
+      const deleteUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/DeleteUserResolver.ts",
+      );
+      const findManyUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/FindManyUserResolver.ts",
+      );
+      const findFirstUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/FindFirstUserResolver.ts",
+      );
+      const findUniqueUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/FindUniqueUserResolver.ts",
+      );
+      const updateManyUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UpdateManyUserResolver.ts",
+      );
+      const updateUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UpdateUserResolver.ts",
+      );
+      const upsertUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UpsertUserResolver.ts",
+      );
+      const createManyUserResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/CreateManyUserResolver.ts",
+      );
+
+      expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+      expect(createUserResolverTSFile).toMatchSnapshot("CreateOneUserResolver");
+      expect(deleteManyUserResolverTSFile).toMatchSnapshot(
+        "DeleteManyUserResolver",
+      );
+      expect(deleteUserResolverTSFile).toMatchSnapshot("DeleteUserResolver");
+      expect(findManyUserResolverTSFile).toMatchSnapshot(
+        "FindManyUserResolver",
+      );
+      expect(findFirstUserResolverTSFile).toMatchSnapshot(
+        "FindFirstUserResolver",
+      );
+      expect(findUniqueUserResolverTSFile).toMatchSnapshot(
+        "FindUniqueUserResolver",
+      );
+      expect(updateManyUserResolverTSFile).toMatchSnapshot(
+        "UpdateManyUserResolver",
+      );
+      expect(updateUserResolverTSFile).toMatchSnapshot("UpdateUserResolver");
+      expect(upsertUserResolverTSFile).toMatchSnapshot("UpsertUserResolver");
+      expect(createManyUserResolverTSFile).toMatchSnapshot(
+        "CreateManyUserResolver",
+      );
+    });
+  });
 });

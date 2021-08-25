@@ -1,11 +1,14 @@
 export interface GenerateCodeOptions {
-  outputDirPath: string;
   emitDMMF?: boolean;
   emitTranspiledCode?: boolean;
-  useOriginalMapping?: boolean;
-  relativePrismaOutputPath: string;
-  absolutePrismaOutputPath?: string;
   simpleResolvers?: boolean;
+  useOriginalMapping?: boolean;
   useUncheckedScalarInputs?: boolean;
   emitIdAsIDType?: boolean;
+
+  /* internal options */
+  outputDirPath: string;
+  relativePrismaOutputPath: string;
+  absolutePrismaOutputPath?: string;
+  selectRelationCountEnabled?: boolean;
 }

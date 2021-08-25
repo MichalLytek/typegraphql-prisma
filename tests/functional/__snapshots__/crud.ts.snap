@@ -154,7 +154,7 @@ Array [
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`create\` action: createUser call args 1`] = `
 Array [
   Array [
-    Object {
+    CreateUserArgs {
       "data": UserCreateInput {
         "dateField": 2019-12-31T14:16:02.572Z,
         "optionalStringField": "optional",
@@ -177,7 +177,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`delete\` action: deleteUser call args 1`] = `
 Array [
   Array [
-    Object {
+    DeleteUserArgs {
       "where": UserWhereUniqueInput {
         "uniqueStringField": "unique",
       },
@@ -198,7 +198,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`deleteMany\` action: deleteManyUser call args 1`] = `
 Array [
   Array [
-    Object {
+    DeleteManyUserArgs {
       "where": UserWhereInput {
         "dateField": DateTimeFilter {
           "lte": 2019-12-31T19:16:02.572Z,
@@ -220,7 +220,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`findMany\` action: findManyUser call args 1`] = `
 Array [
   Array [
-    Object {
+    FindManyUserArgs {
       "orderBy": Array [
         UserOrderByInput {
           "intIdField": "desc",
@@ -252,7 +252,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`findUnique\` action: findUniqueUser call args 1`] = `
 Array [
   Array [
-    Object {
+    FindUniqueUserArgs {
       "where": UserWhereUniqueInput {
         "uniqueStringField": "uniqueValue",
       },
@@ -273,7 +273,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`update\` action: updateUser call args 1`] = `
 Array [
   Array [
-    Object {
+    UpdateUserArgs {
       "data": UserUpdateInput {
         "dateField": DateTimeFieldUpdateOperationsInput {
           "set": 2019-12-31T14:16:02.572Z,
@@ -299,7 +299,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`updateMany\` action: updateManyUser call args 1`] = `
 Array [
   Array [
-    Object {
+    UpdateManyUserArgs {
       "data": UserUpdateManyMutationInput {
         "optionalStringField": null,
       },
@@ -324,7 +324,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`upsert\` action: upsertUser call args 1`] = `
 Array [
   Array [
-    Object {
+    UpsertUserArgs {
       "create": UserCreateInput {
         "dateField": 2019-12-31T14:16:02.572Z,
         "optionalStringField": "optional",

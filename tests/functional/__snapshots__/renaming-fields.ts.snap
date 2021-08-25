@@ -3,7 +3,7 @@
 exports[`crud resolvers execution should properly map aliased input field values to prisma input values: findManyUser call args 1`] = `
 Array [
   Array [
-    Object {
+    FindManyUserArgs {
       "where": UserWhereInput {
         "name": StringFilter {
           "equals": "John",

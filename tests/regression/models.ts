@@ -224,7 +224,7 @@ describe("models", () => {
   });
 
   describe("when selectRelationCount preview feature is enabled", () => {
-    it("should properly generate model  object type class", async () => {
+    it("should properly generate model object type class", async () => {
       const schema = /* prisma */ `
         model FirstModel {
           idField            Int            @id @default(autoincrement())

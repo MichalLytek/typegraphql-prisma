@@ -24,6 +24,9 @@ export async function generateCodeFromSchema(
     {
       ...options,
       relativePrismaOutputPath: "../../helpers/prisma-client-mock",
+      selectRelationCountEnabled: options.previewFeatures?.includes(
+        "selectRelationCount",
+      ),
     },
   );
 }
