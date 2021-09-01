@@ -61,7 +61,8 @@ model post {
   uuid      String    @id @default(uuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  published Boolean
+  /// @TypeGraphQL.omit(input: true)
+  published Boolean   @default(false)
   title     String
   /// @TypeGraphQL.omit(output: true)
   subtitle  String

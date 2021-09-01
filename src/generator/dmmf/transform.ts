@@ -63,13 +63,13 @@ export function transformModelWithFields(dmmfDocument: DmmfDocument) {
   return (model: PrismaDMMF.Model): DMMF.Model => {
     return {
       ...transformBareModel(model),
-      fields: model.fields.map(transformField(dmmfDocument)),
+      fields: model.fields.map(transformModelField(dmmfDocument)),
     };
   };
 }
 
-function transformField(dmmfDocument: DmmfDocument) {
-  return (field: PrismaDMMF.Field): DMMF.Field => {
+function transformModelField(dmmfDocument: DmmfDocument) {
+  return (field: PrismaDMMF.Field): DMMF.ModelField => {
     const attributeArgs = parseDocumentationAttributes<{ name: string }>(
       field.documentation,
       "field",
@@ -141,6 +141,9 @@ function transformInputType(dmmfDocument: DmmfDocument) {
           const modelField = modelType?.fields.find(
             it => it.name === field.name,
           );
+          // if (modelType?.name === "post") {
+          //   console.log(inputType.name, field.name, modelField?.isOmitted);
+          // }
           const typeName = modelField?.typeFieldAlias ?? field.name;
           const selectedInputType = selectInputTypeFromTypes(dmmfDocument)(
             field.inputTypes,
@@ -162,6 +165,7 @@ function transformInputType(dmmfDocument: DmmfDocument) {
             typeGraphQLType,
             fieldTSType,
             hasMappedName: field.name !== typeName,
+            isOmitted: modelField?.isOmitted.input ?? false,
           };
         }),
     };
@@ -219,6 +223,7 @@ function transformOutputType(dmmfDocument: DmmfDocument) {
               hasMappedName: arg.name !== typeName,
               // TODO: add proper mapping in the future if needed
               typeName: arg.name,
+              isOmitted: false,
             };
           });
           const argsTypeName =

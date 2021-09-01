@@ -30,7 +30,7 @@ export namespace DMMF {
     name: string;
     isEmbedded: boolean;
     dbName: string | null;
-    fields: Field[];
+    fields: ModelField[];
     // fieldMap?: Record<string, Field>;
     uniqueFields: string[][];
     uniqueIndexes: UniqueIndex[];
@@ -48,7 +48,8 @@ export namespace DMMF {
     | "inputObjectTypes"
     | "outputObjectTypes"
     | "enumTypes";
-  export interface Field {
+  // Field
+  export interface ModelField {
     // kind: FieldKind;
     name: string;
     isRequired: boolean;
@@ -116,6 +117,7 @@ export namespace DMMF {
     typeGraphQLType: string;
     fieldTSType: string;
     hasMappedName: boolean;
+    isOmitted: boolean;
   }
   export interface OutputType {
     name: string;
@@ -231,7 +233,7 @@ export namespace DMMF {
     resolverName: string;
   }
   // additional type
-  export interface RelationField extends Field {
+  export interface RelationField extends ModelField {
     outputTypeField: OutputSchemaField;
     argsTypeName: string | undefined;
   }

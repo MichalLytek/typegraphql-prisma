@@ -263,9 +263,11 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Boolean",
-            "hasDefaultValue": false,
+            "hasDefaultValue": true,
+            "default": false,
             "isGenerated": false,
-            "isUpdatedAt": false
+            "isUpdatedAt": false,
+            "documentation": "@TypeGraphQL.omit(input: true)"
           },
           {
             "name": "title",
@@ -6903,7 +6905,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -7057,7 +7059,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -7633,7 +7635,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -26933,7 +26935,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -27074,7 +27076,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -27294,7 +27296,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -27435,7 +27437,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -31557,7 +31559,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {
@@ -31702,7 +31704,7 @@
             },
             {
               "name": "published",
-              "isRequired": true,
+              "isRequired": false,
               "isNullable": false,
               "inputTypes": [
                 {

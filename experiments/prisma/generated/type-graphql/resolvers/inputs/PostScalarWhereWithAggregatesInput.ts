@@ -45,11 +45,6 @@ export class PostScalarWhereWithAggregatesInput {
   })
   updatedAt?: DateTimeWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => BoolWithAggregatesFilter, {
-    nullable: true
-  })
-  published?: BoolWithAggregatesFilter | undefined;
-
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true
   })

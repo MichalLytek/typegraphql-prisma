@@ -37,4 +37,23 @@ input UserCreateInput {
 }
 ```
 
-This behavior is temporary and will be improved soon by introducing `input: true` option to `@TypeGraphQL.omit`.
+In order to hide the input fields as well, you need to provide the `input: true` option to `@TypeGraphQL.omit`:
+
+```prisma {4}
+model User {
+  id        Int     @default(autoincrement()) @id
+  email     String  @unique
+  /// @TypeGraphQL.omit(output: true, input: true)
+  password  String
+  posts     Post[]
+}
+```
+
+So that the field won't show anymore in all model-related input types, like `UserCreateInput`:
+
+```graphql
+input UserCreateInput {
+  email: String!
+  posts: PostCreateManyWithoutAuthorInput!
+}
+```

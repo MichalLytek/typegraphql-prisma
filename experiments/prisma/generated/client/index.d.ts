@@ -9665,7 +9665,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null
@@ -9679,7 +9679,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null
@@ -9721,7 +9721,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null
@@ -11908,7 +11908,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null
@@ -11921,7 +11921,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null
@@ -11944,7 +11944,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null
@@ -11957,7 +11957,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null
@@ -12369,7 +12369,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null
@@ -12382,7 +12382,7 @@ export namespace Prisma {
     uuid?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
     title: string
     subtitle: string
     content?: string | null

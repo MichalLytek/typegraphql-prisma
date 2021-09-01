@@ -23,11 +23,6 @@ export class PostCreateManyAuthorInput {
   })
   updatedAt?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => Boolean, {
-    nullable: false
-  })
-  published!: boolean;
-
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
