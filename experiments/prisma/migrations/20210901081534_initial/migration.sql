@@ -16,7 +16,7 @@ CREATE TABLE "User" (
     "grades" INTEGER[],
     "aliases" TEXT[],
 
-    PRIMARY KEY ("id")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -33,7 +33,7 @@ CREATE TABLE "post" (
     "kind" "PostKind",
     "metadata" JSONB NOT NULL,
 
-    PRIMARY KEY ("uuid")
+    CONSTRAINT "post_pkey" PRIMARY KEY ("uuid")
 );
 
 -- CreateTable
@@ -49,7 +49,7 @@ CREATE TABLE "Patient" (
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
 
-    PRIMARY KEY ("firstName","lastName")
+    CONSTRAINT "Patient_pkey" PRIMARY KEY ("firstName","lastName")
 );
 
 -- CreateTable
@@ -58,7 +58,7 @@ CREATE TABLE "Movie" (
     "directorLastName" TEXT NOT NULL,
     "title" TEXT NOT NULL,
 
-    PRIMARY KEY ("directorFirstName","directorLastName","title")
+    CONSTRAINT "Movie_pkey" PRIMARY KEY ("directorFirstName","directorLastName","title")
 );
 
 -- CreateTable
@@ -66,7 +66,7 @@ CREATE TABLE "Director" (
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
 
-    PRIMARY KEY ("firstName","lastName")
+    CONSTRAINT "Director_pkey" PRIMARY KEY ("firstName","lastName")
 );
 
 -- CreateTable
@@ -75,7 +75,7 @@ CREATE TABLE "Problem" (
     "problemText" TEXT NOT NULL,
     "creatorId" INTEGER,
 
-    PRIMARY KEY ("id")
+    CONSTRAINT "Problem_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -83,7 +83,7 @@ CREATE TABLE "Creator" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
 
-    PRIMARY KEY ("id")
+    CONSTRAINT "Creator_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -93,7 +93,7 @@ CREATE TABLE "NativeTypeModel" (
     "byteA" BYTEA,
     "decimal" DECIMAL,
 
-    PRIMARY KEY ("id")
+    CONSTRAINT "NativeTypeModel_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -103,10 +103,10 @@ CREATE TABLE "_CreatorToProblem" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User.email_unique" ON "User"("email");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Category.slug_number_unique" ON "Category"("slug", "number");
+CREATE UNIQUE INDEX "Category_slug_number_key" ON "Category"("slug", "number");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CreatorToProblem_AB_unique" ON "_CreatorToProblem"("A", "B");
@@ -115,16 +115,16 @@ CREATE UNIQUE INDEX "_CreatorToProblem_AB_unique" ON "_CreatorToProblem"("A", "B
 CREATE INDEX "_CreatorToProblem_B_index" ON "_CreatorToProblem"("B");
 
 -- AddForeignKey
-ALTER TABLE "post" ADD FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "post" ADD CONSTRAINT "post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "post" ADD FOREIGN KEY ("editorId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "post" ADD CONSTRAINT "post_editorId_fkey" FOREIGN KEY ("editorId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Movie" ADD FOREIGN KEY ("directorFirstName", "directorLastName") REFERENCES "Director"("firstName", "lastName") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Movie" ADD CONSTRAINT "Movie_directorFirstName_directorLastName_fkey" FOREIGN KEY ("directorFirstName", "directorLastName") REFERENCES "Director"("firstName", "lastName") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Problem" ADD FOREIGN KEY ("creatorId") REFERENCES "Creator"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Problem" ADD CONSTRAINT "Problem_creatorId_fkey" FOREIGN KEY ("creatorId") REFERENCES "Creator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_CreatorToProblem" ADD FOREIGN KEY ("A") REFERENCES "Creator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
