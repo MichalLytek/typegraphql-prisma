@@ -71,10 +71,18 @@ describe("enums", () => {
     await generateCodeFromSchema(schema, { outputDirPath });
     const sortOrderTSFile = await readGeneratedFile("/enums/SortOrder.ts");
     const queryModeTSFile = await readGeneratedFile("/enums/QueryMode.ts");
+    const jsonNullValueFilterTSFile = await readGeneratedFile(
+      "/enums/JsonNullValueFilter.ts",
+    );
+    const jsonNullValueInputTSFile = await readGeneratedFile(
+      "/enums/JsonNullValueInput.ts",
+    );
     const enumsIndexTSFile = await readGeneratedFile("/enums/index.ts");
 
     expect(sortOrderTSFile).toMatchSnapshot("SortOrder");
     expect(queryModeTSFile).toMatchSnapshot("QueryMode");
+    expect(jsonNullValueFilterTSFile).toMatchSnapshot("JsonNullValueFilter");
+    expect(jsonNullValueInputTSFile).toMatchSnapshot("JsonNullValueInput");
     expect(enumsIndexTSFile).toMatchSnapshot("enums index");
   });
 

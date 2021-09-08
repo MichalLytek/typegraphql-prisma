@@ -35,6 +35,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
+import { UserCount } from \\"../resolvers/outputs/UserCount\\";
 
 /** User model doc */
 @TypeGraphQL.ObjectType({
@@ -61,6 +62,11 @@ export class User {
 
   /** relation doc */
   posts?: Post[];
+
+  @TypeGraphQL.Field(_type => UserCount, {
+    nullable: true
+  })
+  _count?: UserCount | null;
 }
 "
 `;
@@ -216,6 +222,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
+import { UserCount } from \\"../resolvers/outputs/UserCount\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -237,6 +244,11 @@ export class User {
   balance!: number | null;
 
   posts?: Post[];
+
+  @TypeGraphQL.Field(_type => UserCount, {
+    nullable: true
+  })
+  _count?: UserCount | null;
 
   /** renamed field docs */
   @TypeGraphQL.Field(_type => String, {
@@ -289,6 +301,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { Article } from \\"../models/Article\\";
+import { ClientCount } from \\"../resolvers/outputs/ClientCount\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -300,6 +313,11 @@ export class Client {
   id!: number;
 
   posts?: Article[];
+
+  @TypeGraphQL.Field(_type => ClientCount, {
+    nullable: true
+  })
+  _count?: ClientCount | null;
 }
 "
 `;
@@ -336,6 +354,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
+import { UserCount } from \\"../resolvers/outputs/UserCount\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -347,6 +366,11 @@ export class User {
   id!: number;
 
   posts?: Post[];
+
+  @TypeGraphQL.Field(_type => UserCount, {
+    nullable: true
+  })
+  _count?: UserCount | null;
 }
 "
 `;
@@ -356,6 +380,7 @@ exports[`models should properly generate object type classes for prisma models w
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
+import { ServiceCount } from \\"../resolvers/outputs/ServiceCount\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -379,6 +404,11 @@ export class Service {
   sourceId?: number | null;
 
   services?: Service[];
+
+  @TypeGraphQL.Field(_type => ServiceCount, {
+    nullable: true
+  })
+  _count?: ServiceCount | null;
 }
 "
 `;
@@ -435,43 +465,6 @@ export class SecondModel {
     nullable: false
   })
   booleanField!: boolean;
-}
-"
-`;
-
-exports[`models when selectRelationCount preview feature is enabled should properly generate model object type class: FirstModel 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import * as GraphQLScalars from \\"graphql-scalars\\";
-import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
-import { DecimalJSScalar } from \\"../scalars\\";
-import { SecondModel } from \\"../models/SecondModel\\";
-import { FirstModelCount } from \\"../resolvers/outputs/FirstModelCount\\";
-
-@TypeGraphQL.ObjectType({
-  isAbstract: true
-})
-export class FirstModel {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
-  idField!: number;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  uniqueStringField!: string;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
-  })
-  floatField!: number;
-
-  secondModelsField?: SecondModel[];
-
-  @TypeGraphQL.Field(_type => FirstModelCount, {
-    nullable: true
-  })
-  _count?: FirstModelCount | null;
 }
 "
 `;

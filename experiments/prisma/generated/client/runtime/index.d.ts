@@ -537,7 +537,7 @@ interface EngineConfig {
     dirname?: string;
     datamodelPath: string;
     enableDebugLogs?: boolean;
-    enableEngineDebugMode?: boolean;
+    allowTriggerPanic?: boolean;
     prismaPath?: string;
     fetcher?: (query: string) => Promise<{
         data?: any;
@@ -726,7 +726,7 @@ interface PrismaClientOptions {
             cwd?: string;
             binaryPath?: string;
             endpoint?: string;
-            enableEngineDebugMode?: boolean;
+            allowTriggerPanic?: boolean;
         };
     };
 }
@@ -778,8 +778,8 @@ interface Client {
     $connect(): any;
     $disconnect(): any;
     _runDisconnect(): any;
-    $executeRaw(stringOrTemplateStringsArray: ReadonlyArray<string> | string | Sql): any;
-    $queryRaw(stringOrTemplateStringsArray: any): any;
+    $executeRaw(query: TemplateStringsArray | Sql, ...values: any[]): any;
+    $queryRaw(query: TemplateStringsArray | Sql, ...values: any[]): any;
     __internal_triggerPanic(fatal: boolean): any;
     $transaction(input: any, options?: any): any;
 }

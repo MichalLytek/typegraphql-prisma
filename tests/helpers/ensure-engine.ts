@@ -16,7 +16,7 @@ export default async function ensurePrismaEngine() {
 
   await download({
     binaries: {
-      "query-engine": prismaClientRuntimeDir,
+      "libquery-engine": prismaClientRuntimeDir,
     },
     showProgress: true,
     version: require("@prisma/engines-version/package.json").prisma

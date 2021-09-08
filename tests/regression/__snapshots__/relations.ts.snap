@@ -1,5 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`relations resolvers generation should properly generate args classes for sorting by relation fields: FirstModelSecondModelsFieldArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { SecondModelOrderByWithRelationInput } from \\"../../../inputs/SecondModelOrderByWithRelationInput\\";
+import { SecondModelWhereInput } from \\"../../../inputs/SecondModelWhereInput\\";
+import { SecondModelWhereUniqueInput } from \\"../../../inputs/SecondModelWhereUniqueInput\\";
+import { SecondModelScalarFieldEnum } from \\"../../../../enums/SecondModelScalarFieldEnum\\";
+
+@TypeGraphQL.ArgsType()
+export class FirstModelSecondModelsFieldArgs {
+  @TypeGraphQL.Field(_type => SecondModelWhereInput, {
+    nullable: true
+  })
+  where?: SecondModelWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => [SecondModelOrderByWithRelationInput], {
+    nullable: true
+  })
+  orderBy?: SecondModelOrderByWithRelationInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => SecondModelWhereUniqueInput, {
+    nullable: true
+  })
+  cursor?: SecondModelWhereUniqueInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  take?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  skip?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [SecondModelScalarFieldEnum], {
+    nullable: true
+  })
+  distinct?: Array<\\"idField\\" | \\"uniqueStringField\\" | \\"floatField\\" | \\"firstModelFieldId\\"> | undefined;
+}
+"
+`;
+
+exports[`relations resolvers generation should properly generate args classes for sorting by relation fields: index 1`] = `
+"export { FirstModelSecondModelsFieldArgs } from \\"./FirstModelSecondModelsFieldArgs\\";
+"
+`;
+
 exports[`relations resolvers generation should properly generate composite keys where phrase in resolver: UsersOnProjectsRelationsResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Project } from \\"../../../models/Project\\";
@@ -134,6 +182,58 @@ export class MovieRelationsResolver {
 "
 `;
 
+exports[`relations resolvers generation should properly generate relation resolver class for model with named compound id with relation: MovieRelationsResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { Director } from \\"../../../models/Director\\";
+import { Movie } from \\"../../../models/Movie\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => Movie)
+export class MovieRelationsResolver {
+  @TypeGraphQL.FieldResolver(_type => Director, {
+    nullable: false
+  })
+  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
+    return getPrismaFromContext(ctx).movie.findUnique({
+      where: {
+        movieIdCompoundName: {
+          directorFirstName: movie.directorFirstName,
+          directorLastName: movie.directorLastName,
+          title: movie.title,
+        },
+      },
+    }).director({});
+  }
+}
+"
+`;
+
+exports[`relations resolvers generation should properly generate relation resolver class for model with named compound unique with relation: MovieRelationsResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { Director } from \\"../../../models/Director\\";
+import { Movie } from \\"../../../models/Movie\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => Movie)
+export class MovieRelationsResolver {
+  @TypeGraphQL.FieldResolver(_type => Director, {
+    nullable: false
+  })
+  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
+    return getPrismaFromContext(ctx).movie.findUnique({
+      where: {
+        movieUniqueCompoundName: {
+          directorFirstName: movie.directorFirstName,
+          directorLastName: movie.directorLastName,
+          title: movie.title,
+        },
+      },
+    }).director({});
+  }
+}
+"
+`;
+
 exports[`relations resolvers generation should properly generate relation resolver class for model with unique fields: DirectorRelationsResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Director } from \\"../../../models/Director\\";
@@ -254,7 +354,7 @@ export class UserRelationsResolver {
 exports[`relations resolvers generation should properly generate resolver and args class for array relation resolvers: UserPostsArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
-import { PostOrderByInput } from \\"../../../inputs/PostOrderByInput\\";
+import { PostOrderByWithRelationInput } from \\"../../../inputs/PostOrderByWithRelationInput\\";
 import { PostWhereInput } from \\"../../../inputs/PostWhereInput\\";
 import { PostWhereUniqueInput } from \\"../../../inputs/PostWhereUniqueInput\\";
 import { PostScalarFieldEnum } from \\"../../../../enums/PostScalarFieldEnum\\";
@@ -266,10 +366,10 @@ export class UserPostsArgs {
   })
   where?: PostWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [PostOrderByInput], {
+  @TypeGraphQL.Field(_type => [PostOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: PostOrderByInput[] | undefined;
+  orderBy?: PostOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
     nullable: true
@@ -382,105 +482,5 @@ export class UserRelationsResolver {
     }).posts(args);
   }
 }
-"
-`;
-
-exports[`relations resolvers generation when \`namedConstraints\` preview feature is enabled should properly generate relation resolver class for model with named compound id with relation: MovieRelationsResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import { Director } from \\"../../../models/Director\\";
-import { Movie } from \\"../../../models/Movie\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
-
-@TypeGraphQL.Resolver(_of => Movie)
-export class MovieRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Director, {
-    nullable: false
-  })
-  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
-    return getPrismaFromContext(ctx).movie.findUnique({
-      where: {
-        movieIdCompoundName: {
-          directorFirstName: movie.directorFirstName,
-          directorLastName: movie.directorLastName,
-          title: movie.title,
-        },
-      },
-    }).director({});
-  }
-}
-"
-`;
-
-exports[`relations resolvers generation when \`namedConstraints\` preview feature is enabled should properly generate relation resolver class for model with named compound unique with relation: MovieRelationsResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import { Director } from \\"../../../models/Director\\";
-import { Movie } from \\"../../../models/Movie\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
-
-@TypeGraphQL.Resolver(_of => Movie)
-export class MovieRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Director, {
-    nullable: false
-  })
-  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
-    return getPrismaFromContext(ctx).movie.findUnique({
-      where: {
-        movieUniqueCompoundName: {
-          directorFirstName: movie.directorFirstName,
-          directorLastName: movie.directorLastName,
-          title: movie.title,
-        },
-      },
-    }).director({});
-  }
-}
-"
-`;
-
-exports[`relations resolvers generation when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by relation fields: FirstModelSecondModelsFieldArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import * as GraphQLScalars from \\"graphql-scalars\\";
-import { SecondModelOrderByWithRelationInput } from \\"../../../inputs/SecondModelOrderByWithRelationInput\\";
-import { SecondModelWhereInput } from \\"../../../inputs/SecondModelWhereInput\\";
-import { SecondModelWhereUniqueInput } from \\"../../../inputs/SecondModelWhereUniqueInput\\";
-import { SecondModelScalarFieldEnum } from \\"../../../../enums/SecondModelScalarFieldEnum\\";
-
-@TypeGraphQL.ArgsType()
-export class FirstModelSecondModelsFieldArgs {
-  @TypeGraphQL.Field(_type => SecondModelWhereInput, {
-    nullable: true
-  })
-  where?: SecondModelWhereInput | undefined;
-
-  @TypeGraphQL.Field(_type => [SecondModelOrderByWithRelationInput], {
-    nullable: true
-  })
-  orderBy?: SecondModelOrderByWithRelationInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => SecondModelWhereUniqueInput, {
-    nullable: true
-  })
-  cursor?: SecondModelWhereUniqueInput | undefined;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
-  })
-  take?: number | undefined;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
-  })
-  skip?: number | undefined;
-
-  @TypeGraphQL.Field(_type => [SecondModelScalarFieldEnum], {
-    nullable: true
-  })
-  distinct?: Array<\\"idField\\" | \\"uniqueStringField\\" | \\"floatField\\" | \\"firstModelFieldId\\"> | undefined;
-}
-"
-`;
-
-exports[`relations resolvers generation when \`orderByRelation\` preview feature is enabled should properly generate args classes for sorting by relation fields: index 1`] = `
-"export { FirstModelSecondModelsFieldArgs } from \\"./FirstModelSecondModelsFieldArgs\\";
 "
 `;

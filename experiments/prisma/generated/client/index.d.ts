@@ -219,32 +219,50 @@ export class PrismaClient<
   $use(cb: Prisma.Middleware): void
 
   /**
-   * Executes a raw query and returns the number of affected rows
+   * Executes a prepared raw query and returns the number of affected rows.
    * @example
    * ```
-   * // With parameters use prisma.$executeRaw``, values will be escaped automatically
-   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE id = ${1};`
-   * // Or
-   * const result = await prisma.$executeRaw('UPDATE User SET cool = $1 WHERE id = $2 ;', true, 1)
-  * ```
-  * 
-  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
-  */
-  $executeRaw < T = any > (query: string | TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<number>;
+   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<number>;
 
   /**
-   * Performs a raw query and returns the SELECT data
+   * Executes a raw query and returns the number of affected rows.
+   * Susceptible to SQL injections, see documentation.
    * @example
    * ```
-   * // With parameters use prisma.$queryRaw``, values will be escaped automatically
-   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'ema.il'};`
-   * // Or
-   * const result = await prisma.$queryRaw('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'ema.il')
-  * ```
-  * 
-  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
-  */
-  $queryRaw < T = any > (query: string | TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<T>;
+   * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<number>;
+
+  /**
+   * Performs a prepared raw query and returns the `SELECT` data.
+   * @example
+   * ```
+   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<T>;
+
+  /**
+   * Performs a raw query and returns the `SELECT` data.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<T>;
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -259,7 +277,8 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends PrismaPromise<any>[]>(arg: [...P]): Promise<UnwrapTuple<P>>
+  $transaction<P extends PrismaPromise<any>[]>(arg: [...P]): Promise<UnwrapTuple<P>>;
+
 
       /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -379,8 +398,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.30.0
-   * Query Engine version: 60b19f4a1de4fe95741da371b4c44a92f4d1adcb
+   * Prisma Client JS version: 3.0.1
+   * Query Engine version: 2452cc6313d52b8b9a96999ac0e974d0aedf88db
    */
   export type PrismaVersion = {
     client: string
@@ -409,7 +428,7 @@ export namespace Prisma {
    * From https://github.com/sindresorhus/type-fest/
    * Matches any valid JSON value.
    */
-  export type JsonValue = string | number | boolean | null | JsonObject | JsonArray
+  export type JsonValue = string | number | boolean | JsonObject | JsonArray | null
 
   /**
    * Same as JsonObject, but allows undefined
@@ -418,8 +437,30 @@ export namespace Prisma {
  
   export interface InputJsonArray extends Array<JsonValue> {}
  
-  export type InputJsonValue = undefined |  string | number | boolean | null | InputJsonObject | InputJsonArray
-   type SelectAndInclude = {
+  export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray
+
+  /**
+   * Helper for filtering JSON entries that have `null` on the database (empty on the db)
+   * 
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const DbNull: 'DbNull'
+
+  /**
+   * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
+   * 
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const JsonNull: 'JsonNull'
+
+  /**
+   * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
+   * 
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const AnyNull: 'AnyNull'
+
+  type SelectAndInclude = {
     select: any
     include: any
   }
@@ -1098,15 +1139,10 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
-    count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
-    avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
-    sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
-    min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
-    max: UserMaxAggregateOutputType | null
   }
 
   export type UserAvgAggregateOutputType = {
@@ -1249,19 +1285,11 @@ export namespace Prisma {
     **/
     _count?: true | UserCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | UserCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: UserAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: UserAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -1269,29 +1297,17 @@ export namespace Prisma {
     **/
     _sum?: UserSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: UserSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: UserMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: UserMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: UserMaxAggregateInputType
   }
 
   export type GetUserAggregateType<T extends UserAggregateArgs> = {
@@ -2062,15 +2078,10 @@ export namespace Prisma {
 
   export type AggregatePost = {
     _count: PostCountAggregateOutputType | null
-    count: PostCountAggregateOutputType | null
     _avg: PostAvgAggregateOutputType | null
-    avg: PostAvgAggregateOutputType | null
     _sum: PostSumAggregateOutputType | null
-    sum: PostSumAggregateOutputType | null
     _min: PostMinAggregateOutputType | null
-    min: PostMinAggregateOutputType | null
     _max: PostMaxAggregateOutputType | null
-    max: PostMaxAggregateOutputType | null
   }
 
   export type PostAvgAggregateOutputType = {
@@ -2217,19 +2228,11 @@ export namespace Prisma {
     **/
     _count?: true | PostCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | PostCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: PostAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: PostAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -2237,29 +2240,17 @@ export namespace Prisma {
     **/
     _sum?: PostSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: PostSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: PostMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: PostMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: PostMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: PostMaxAggregateInputType
   }
 
   export type GetPostAggregateType<T extends PostAggregateArgs> = {
@@ -3028,15 +3019,10 @@ export namespace Prisma {
 
   export type AggregateCategory = {
     _count: CategoryCountAggregateOutputType | null
-    count: CategoryCountAggregateOutputType | null
     _avg: CategoryAvgAggregateOutputType | null
-    avg: CategoryAvgAggregateOutputType | null
     _sum: CategorySumAggregateOutputType | null
-    sum: CategorySumAggregateOutputType | null
     _min: CategoryMinAggregateOutputType | null
-    min: CategoryMinAggregateOutputType | null
     _max: CategoryMaxAggregateOutputType | null
-    max: CategoryMaxAggregateOutputType | null
   }
 
   export type CategoryAvgAggregateOutputType = {
@@ -3135,19 +3121,11 @@ export namespace Prisma {
     **/
     _count?: true | CategoryCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | CategoryCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: CategoryAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: CategoryAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -3155,29 +3133,17 @@ export namespace Prisma {
     **/
     _sum?: CategorySumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: CategorySumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: CategoryMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: CategoryMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: CategoryMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: CategoryMaxAggregateInputType
   }
 
   export type GetCategoryAggregateType<T extends CategoryAggregateArgs> = {
@@ -3871,11 +3837,8 @@ export namespace Prisma {
 
   export type AggregatePatient = {
     _count: PatientCountAggregateOutputType | null
-    count: PatientCountAggregateOutputType | null
     _min: PatientMinAggregateOutputType | null
-    min: PatientMinAggregateOutputType | null
     _max: PatientMaxAggregateOutputType | null
-    max: PatientMaxAggregateOutputType | null
   }
 
   export type PatientMinAggregateOutputType = {
@@ -3958,29 +3921,17 @@ export namespace Prisma {
     **/
     _count?: true | PatientCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | PatientCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: PatientMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: PatientMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: PatientMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: PatientMaxAggregateInputType
   }
 
   export type GetPatientAggregateType<T extends PatientAggregateArgs> = {
@@ -4670,11 +4621,8 @@ export namespace Prisma {
 
   export type AggregateMovie = {
     _count: MovieCountAggregateOutputType | null
-    count: MovieCountAggregateOutputType | null
     _min: MovieMinAggregateOutputType | null
-    min: MovieMinAggregateOutputType | null
     _max: MovieMaxAggregateOutputType | null
-    max: MovieMaxAggregateOutputType | null
   }
 
   export type MovieMinAggregateOutputType = {
@@ -4757,29 +4705,17 @@ export namespace Prisma {
     **/
     _count?: true | MovieCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | MovieCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: MovieMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: MovieMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: MovieMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: MovieMaxAggregateInputType
   }
 
   export type GetMovieAggregateType<T extends MovieAggregateArgs> = {
@@ -5520,11 +5456,8 @@ export namespace Prisma {
 
   export type AggregateDirector = {
     _count: DirectorCountAggregateOutputType | null
-    count: DirectorCountAggregateOutputType | null
     _min: DirectorMinAggregateOutputType | null
-    min: DirectorMinAggregateOutputType | null
     _max: DirectorMaxAggregateOutputType | null
-    max: DirectorMaxAggregateOutputType | null
   }
 
   export type DirectorMinAggregateOutputType = {
@@ -5601,29 +5534,17 @@ export namespace Prisma {
     **/
     _count?: true | DirectorCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | DirectorCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: DirectorMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: DirectorMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: DirectorMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: DirectorMaxAggregateInputType
   }
 
   export type GetDirectorAggregateType<T extends DirectorAggregateArgs> = {
@@ -6368,15 +6289,10 @@ export namespace Prisma {
 
   export type AggregateProblem = {
     _count: ProblemCountAggregateOutputType | null
-    count: ProblemCountAggregateOutputType | null
     _avg: ProblemAvgAggregateOutputType | null
-    avg: ProblemAvgAggregateOutputType | null
     _sum: ProblemSumAggregateOutputType | null
-    sum: ProblemSumAggregateOutputType | null
     _min: ProblemMinAggregateOutputType | null
-    min: ProblemMinAggregateOutputType | null
     _max: ProblemMaxAggregateOutputType | null
-    max: ProblemMaxAggregateOutputType | null
   }
 
   export type ProblemAvgAggregateOutputType = {
@@ -6479,19 +6395,11 @@ export namespace Prisma {
     **/
     _count?: true | ProblemCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | ProblemCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: ProblemAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: ProblemAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -6499,29 +6407,17 @@ export namespace Prisma {
     **/
     _sum?: ProblemSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: ProblemSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: ProblemMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: ProblemMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: ProblemMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: ProblemMaxAggregateInputType
   }
 
   export type GetProblemAggregateType<T extends ProblemAggregateArgs> = {
@@ -7280,15 +7176,10 @@ export namespace Prisma {
 
   export type AggregateCreator = {
     _count: CreatorCountAggregateOutputType | null
-    count: CreatorCountAggregateOutputType | null
     _avg: CreatorAvgAggregateOutputType | null
-    avg: CreatorAvgAggregateOutputType | null
     _sum: CreatorSumAggregateOutputType | null
-    sum: CreatorSumAggregateOutputType | null
     _min: CreatorMinAggregateOutputType | null
-    min: CreatorMinAggregateOutputType | null
     _max: CreatorMaxAggregateOutputType | null
-    max: CreatorMaxAggregateOutputType | null
   }
 
   export type CreatorAvgAggregateOutputType = {
@@ -7381,19 +7272,11 @@ export namespace Prisma {
     **/
     _count?: true | CreatorCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | CreatorCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: CreatorAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: CreatorAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -7401,29 +7284,17 @@ export namespace Prisma {
     **/
     _sum?: CreatorSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: CreatorSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: CreatorMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: CreatorMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: CreatorMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: CreatorMaxAggregateInputType
   }
 
   export type GetCreatorAggregateType<T extends CreatorAggregateArgs> = {
@@ -8180,15 +8051,10 @@ export namespace Prisma {
 
   export type AggregateNativeTypeModel = {
     _count: NativeTypeModelCountAggregateOutputType | null
-    count: NativeTypeModelCountAggregateOutputType | null
     _avg: NativeTypeModelAvgAggregateOutputType | null
-    avg: NativeTypeModelAvgAggregateOutputType | null
     _sum: NativeTypeModelSumAggregateOutputType | null
-    sum: NativeTypeModelSumAggregateOutputType | null
     _min: NativeTypeModelMinAggregateOutputType | null
-    min: NativeTypeModelMinAggregateOutputType | null
     _max: NativeTypeModelMaxAggregateOutputType | null
-    max: NativeTypeModelMaxAggregateOutputType | null
   }
 
   export type NativeTypeModelAvgAggregateOutputType = {
@@ -8301,19 +8167,11 @@ export namespace Prisma {
     **/
     _count?: true | NativeTypeModelCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | NativeTypeModelCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: NativeTypeModelAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: NativeTypeModelAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -8321,29 +8179,17 @@ export namespace Prisma {
     **/
     _sum?: NativeTypeModelSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: NativeTypeModelSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: NativeTypeModelMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: NativeTypeModelMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: NativeTypeModelMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: NativeTypeModelMaxAggregateInputType
   }
 
   export type GetNativeTypeModelAggregateType<T extends NativeTypeModelAggregateArgs> = {
@@ -9141,12 +8987,28 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: 'JsonNull'
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: 'DbNull',
+    JsonNull: 'JsonNull',
+    AnyNull: 'AnyNull'
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -9670,7 +9532,7 @@ export namespace Prisma {
     subtitle: string
     content?: string | null
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
     author: UserCreateNestedOneWithoutPostsInput
     editor?: UserCreateNestedOneWithoutEditorPostsInput
   }
@@ -9686,7 +9548,7 @@ export namespace Prisma {
     authorId: number
     editorId?: number | null
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
   }
 
   export type postUpdateInput = {
@@ -9698,7 +9560,7 @@ export namespace Prisma {
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
     author?: UserUpdateOneRequiredWithoutPostsInput
     editor?: UserUpdateOneWithoutEditorPostsInput
   }
@@ -9714,7 +9576,7 @@ export namespace Prisma {
     authorId?: IntFieldUpdateOperationsInput | number
     editorId?: NullableIntFieldUpdateOperationsInput | number | null
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
   }
 
   export type postCreateManyInput = {
@@ -9728,7 +9590,7 @@ export namespace Prisma {
     authorId: number
     editorId?: number | null
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
   }
 
   export type postUpdateManyMutationInput = {
@@ -9740,7 +9602,7 @@ export namespace Prisma {
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
   }
 
   export type postUncheckedUpdateManyInput = {
@@ -9754,7 +9616,7 @@ export namespace Prisma {
     authorId?: IntFieldUpdateOperationsInput | number
     editorId?: NullableIntFieldUpdateOperationsInput | number | null
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
   }
 
   export type CategoryCreateInput = {
@@ -10127,11 +9989,6 @@ export namespace Prisma {
 
   export type postOrderByRelationAggregateInput = {
     _count?: SortOrder
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -10192,35 +10049,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntWithAggregatesFilter | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedIntFilter
     _min?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedIntFilter
     _max?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedIntFilter
   }
 
   export type StringWithAggregatesFilter = {
@@ -10238,23 +10070,8 @@ export namespace Prisma {
     mode?: QueryMode
     not?: NestedStringWithAggregatesFilter | string
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedStringFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedStringFilter
     _max?: NestedStringFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedStringFilter
   }
 
   export type StringNullableWithAggregatesFilter = {
@@ -10272,23 +10089,8 @@ export namespace Prisma {
     mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedStringNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedStringNullableFilter
     _max?: NestedStringNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedStringNullableFilter
   }
 
   export type FloatWithAggregatesFilter = {
@@ -10301,35 +10103,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedFloatWithAggregatesFilter | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedFloatFilter
     _min?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedFloatFilter
     _max?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedFloatFilter
   }
 
   export type EnumRoleWithAggregatesFilter = {
@@ -10338,23 +10115,8 @@ export namespace Prisma {
     notIn?: Enumerable<Role>
     not?: NestedEnumRoleWithAggregatesFilter | Role
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedEnumRoleFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedEnumRoleFilter
     _max?: NestedEnumRoleFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedEnumRoleFilter
   }
 
   export type DateTimeFilter = {
@@ -10403,7 +10165,7 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<JsonFilterBase>, 'path'>>
 
   export type JsonFilterBase = {
-    equals?: InputJsonValue
+    equals?: JsonNullValueFilter | InputJsonValue
     lt?: InputJsonValue
     lte?: InputJsonValue
     gt?: InputJsonValue
@@ -10412,10 +10174,10 @@ export namespace Prisma {
     string_contains?: string
     string_starts_with?: string
     string_ends_with?: string
-    array_contains?: InputJsonValue
-    array_starts_with?: InputJsonValue
-    array_ends_with?: InputJsonValue
-    not?: InputJsonValue
+    array_contains?: InputJsonValue | null
+    array_starts_with?: InputJsonValue | null
+    array_ends_with?: InputJsonValue | null
+    not?: JsonNullValueFilter | InputJsonValue
   }
 
   export type postCountOrderByAggregateInput = {
@@ -10478,46 +10240,16 @@ export namespace Prisma {
     gte?: Date | string
     not?: NestedDateTimeWithAggregatesFilter | Date | string
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedDateTimeFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedDateTimeFilter
     _max?: NestedDateTimeFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedDateTimeFilter
   }
 
   export type BoolWithAggregatesFilter = {
     equals?: boolean
     not?: NestedBoolWithAggregatesFilter | boolean
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedBoolFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBoolFilter
     _max?: NestedBoolFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBoolFilter
   }
 
   export type IntNullableWithAggregatesFilter = {
@@ -10530,35 +10262,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntNullableWithAggregatesFilter | number | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatNullableFilter
     _sum?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedIntNullableFilter
     _min?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedIntNullableFilter
     _max?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedIntNullableFilter
   }
 
   export type EnumPostKindNullableWithAggregatesFilter = {
@@ -10567,23 +10274,8 @@ export namespace Prisma {
     notIn?: Enumerable<PostKind> | null
     not?: NestedEnumPostKindNullableWithAggregatesFilter | PostKind | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedEnumPostKindNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedEnumPostKindNullableFilter
     _max?: NestedEnumPostKindNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedEnumPostKindNullableFilter
   }
   export type JsonWithAggregatesFilter = 
     | PatchUndefined<
@@ -10593,7 +10285,7 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase>, 'path'>>
 
   export type JsonWithAggregatesFilterBase = {
-    equals?: InputJsonValue
+    equals?: JsonNullValueFilter | InputJsonValue
     lt?: InputJsonValue
     lte?: InputJsonValue
     gt?: InputJsonValue
@@ -10602,28 +10294,13 @@ export namespace Prisma {
     string_contains?: string
     string_starts_with?: string
     string_ends_with?: string
-    array_contains?: InputJsonValue
-    array_starts_with?: InputJsonValue
-    array_ends_with?: InputJsonValue
-    not?: InputJsonValue
+    array_contains?: InputJsonValue | null
+    array_starts_with?: InputJsonValue | null
+    array_ends_with?: InputJsonValue | null
+    not?: JsonNullValueFilter | InputJsonValue
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedJsonFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedJsonFilter
     _max?: NestedJsonFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedJsonFilter
   }
 
   export type CategoryCategoryCompoundUniqueCompoundUniqueInput = {
@@ -10717,11 +10394,6 @@ export namespace Prisma {
 
   export type MovieOrderByRelationAggregateInput = {
     _count?: SortOrder
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: SortOrder
   }
 
   export type DirectorFirstNameLastNameCompoundUniqueInput = {
@@ -10757,11 +10429,6 @@ export namespace Prisma {
 
   export type CreatorOrderByRelationAggregateInput = {
     _count?: SortOrder
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: SortOrder
   }
 
   export type ProblemCountOrderByAggregateInput = {
@@ -10800,11 +10467,6 @@ export namespace Prisma {
 
   export type ProblemOrderByRelationAggregateInput = {
     _count?: SortOrder
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: SortOrder
   }
 
   export type CreatorCountOrderByAggregateInput = {
@@ -10900,58 +10562,18 @@ export namespace Prisma {
     gte?: bigint | number
     not?: NestedBigIntNullableWithAggregatesFilter | bigint | number | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatNullableFilter
     _sum?: NestedBigIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedBigIntNullableFilter
     _min?: NestedBigIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBigIntNullableFilter
     _max?: NestedBigIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBigIntNullableFilter
   }
 
   export type BytesNullableWithAggregatesFilter = {
     equals?: Buffer | null
     not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedBytesNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBytesNullableFilter
     _max?: NestedBytesNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBytesNullableFilter
   }
 
   export type DecimalNullableWithAggregatesFilter = {
@@ -10964,35 +10586,10 @@ export namespace Prisma {
     gte?: Decimal | number | string
     not?: NestedDecimalNullableWithAggregatesFilter | Decimal | number | string | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedDecimalNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedDecimalNullableFilter
     _sum?: NestedDecimalNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedDecimalNullableFilter
     _min?: NestedDecimalNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedDecimalNullableFilter
     _max?: NestedDecimalNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedDecimalNullableFilter
   }
 
   export type UserCreategradesInput = {
@@ -11424,35 +11021,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntWithAggregatesFilter | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedIntFilter
     _min?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedIntFilter
     _max?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedIntFilter
   }
 
   export type NestedStringWithAggregatesFilter = {
@@ -11469,23 +11041,8 @@ export namespace Prisma {
     search?: string
     not?: NestedStringWithAggregatesFilter | string
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedStringFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedStringFilter
     _max?: NestedStringFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedStringFilter
   }
 
   export type NestedStringNullableWithAggregatesFilter = {
@@ -11502,23 +11059,8 @@ export namespace Prisma {
     search?: string
     not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedStringNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedStringNullableFilter
     _max?: NestedStringNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedStringNullableFilter
   }
 
   export type NestedIntNullableFilter = {
@@ -11542,35 +11084,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedFloatWithAggregatesFilter | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedFloatFilter
     _min?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedFloatFilter
     _max?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedFloatFilter
   }
 
   export type NestedEnumRoleWithAggregatesFilter = {
@@ -11579,23 +11096,8 @@ export namespace Prisma {
     notIn?: Enumerable<Role>
     not?: NestedEnumRoleWithAggregatesFilter | Role
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedEnumRoleFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedEnumRoleFilter
     _max?: NestedEnumRoleFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedEnumRoleFilter
   }
 
   export type NestedDateTimeFilter = {
@@ -11631,46 +11133,16 @@ export namespace Prisma {
     gte?: Date | string
     not?: NestedDateTimeWithAggregatesFilter | Date | string
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedDateTimeFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedDateTimeFilter
     _max?: NestedDateTimeFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedDateTimeFilter
   }
 
   export type NestedBoolWithAggregatesFilter = {
     equals?: boolean
     not?: NestedBoolWithAggregatesFilter | boolean
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedBoolFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBoolFilter
     _max?: NestedBoolFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBoolFilter
   }
 
   export type NestedIntNullableWithAggregatesFilter = {
@@ -11683,35 +11155,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntNullableWithAggregatesFilter | number | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatNullableFilter
     _sum?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedIntNullableFilter
     _min?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedIntNullableFilter
     _max?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedIntNullableFilter
   }
 
   export type NestedFloatNullableFilter = {
@@ -11731,23 +11178,8 @@ export namespace Prisma {
     notIn?: Enumerable<PostKind> | null
     not?: NestedEnumPostKindNullableWithAggregatesFilter | PostKind | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedEnumPostKindNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedEnumPostKindNullableFilter
     _max?: NestedEnumPostKindNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedEnumPostKindNullableFilter
   }
   export type NestedJsonFilter = 
     | PatchUndefined<
@@ -11757,7 +11189,7 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<NestedJsonFilterBase>, 'path'>>
 
   export type NestedJsonFilterBase = {
-    equals?: InputJsonValue
+    equals?: JsonNullValueFilter | InputJsonValue
     lt?: InputJsonValue
     lte?: InputJsonValue
     gt?: InputJsonValue
@@ -11766,10 +11198,10 @@ export namespace Prisma {
     string_contains?: string
     string_starts_with?: string
     string_ends_with?: string
-    array_contains?: InputJsonValue
-    array_starts_with?: InputJsonValue
-    array_ends_with?: InputJsonValue
-    not?: InputJsonValue
+    array_contains?: InputJsonValue | null
+    array_starts_with?: InputJsonValue | null
+    array_ends_with?: InputJsonValue | null
+    not?: JsonNullValueFilter | InputJsonValue
   }
 
   export type NestedBigIntNullableFilter = {
@@ -11809,58 +11241,18 @@ export namespace Prisma {
     gte?: bigint | number
     not?: NestedBigIntNullableWithAggregatesFilter | bigint | number | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatNullableFilter
     _sum?: NestedBigIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedBigIntNullableFilter
     _min?: NestedBigIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBigIntNullableFilter
     _max?: NestedBigIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBigIntNullableFilter
   }
 
   export type NestedBytesNullableWithAggregatesFilter = {
     equals?: Buffer | null
     not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedBytesNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBytesNullableFilter
     _max?: NestedBytesNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBytesNullableFilter
   }
 
   export type NestedDecimalNullableWithAggregatesFilter = {
@@ -11873,35 +11265,10 @@ export namespace Prisma {
     gte?: Decimal | number | string
     not?: NestedDecimalNullableWithAggregatesFilter | Decimal | number | string | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedDecimalNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedDecimalNullableFilter
     _sum?: NestedDecimalNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedDecimalNullableFilter
     _min?: NestedDecimalNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedDecimalNullableFilter
     _max?: NestedDecimalNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedDecimalNullableFilter
   }
 
   export type postCreateWithoutAuthorInput = {
@@ -11913,7 +11280,7 @@ export namespace Prisma {
     subtitle: string
     content?: string | null
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
     editor?: UserCreateNestedOneWithoutEditorPostsInput
   }
 
@@ -11927,7 +11294,7 @@ export namespace Prisma {
     content?: string | null
     editorId?: number | null
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
   }
 
   export type postCreateOrConnectWithoutAuthorInput = {
@@ -11949,7 +11316,7 @@ export namespace Prisma {
     subtitle: string
     content?: string | null
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
     author: UserCreateNestedOneWithoutPostsInput
   }
 
@@ -11963,7 +11330,7 @@ export namespace Prisma {
     content?: string | null
     authorId: number
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
   }
 
   export type postCreateOrConnectWithoutEditorInput = {
@@ -12375,7 +11742,7 @@ export namespace Prisma {
     content?: string | null
     editorId?: number | null
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
   }
 
   export type postCreateManyEditorInput = {
@@ -12388,7 +11755,7 @@ export namespace Prisma {
     content?: string | null
     authorId: number
     kind?: PostKind | null
-    metadata: InputJsonValue
+    metadata: JsonNullValueInput | InputJsonValue
   }
 
   export type postUpdateWithoutAuthorInput = {
@@ -12400,7 +11767,7 @@ export namespace Prisma {
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
     editor?: UserUpdateOneWithoutEditorPostsInput
   }
 
@@ -12414,7 +11781,7 @@ export namespace Prisma {
     content?: NullableStringFieldUpdateOperationsInput | string | null
     editorId?: NullableIntFieldUpdateOperationsInput | number | null
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
   }
 
   export type postUncheckedUpdateManyWithoutPostsInput = {
@@ -12427,7 +11794,7 @@ export namespace Prisma {
     content?: NullableStringFieldUpdateOperationsInput | string | null
     editorId?: NullableIntFieldUpdateOperationsInput | number | null
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
   }
 
   export type postUpdateWithoutEditorInput = {
@@ -12439,7 +11806,7 @@ export namespace Prisma {
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
     author?: UserUpdateOneRequiredWithoutPostsInput
   }
 
@@ -12453,7 +11820,7 @@ export namespace Prisma {
     content?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: IntFieldUpdateOperationsInput | number
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
   }
 
   export type postUncheckedUpdateManyWithoutEditorPostsInput = {
@@ -12466,7 +11833,7 @@ export namespace Prisma {
     content?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: IntFieldUpdateOperationsInput | number
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: InputJsonValue
+    metadata?: JsonNullValueInput | InputJsonValue
   }
 
   export type MovieCreateManyDirectorInput = {

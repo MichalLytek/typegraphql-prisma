@@ -313,7 +313,7 @@ describe("crud resolvers execution", () => {
       );
     });
 
-    describe("when selectRelationCount preview feature is enabled", () => {
+    describe("_count for relations", () => {
       let outputDirPath: string;
       let graphQLSchema: GraphQLSchema;
       beforeAll(async () => {
@@ -334,10 +334,7 @@ describe("crud resolvers execution", () => {
             firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
           }
         `;
-        await generateCodeFromSchema(prismaSchema, {
-          outputDirPath,
-          previewFeatures: ["selectRelationCount"],
-        });
+        await generateCodeFromSchema(prismaSchema, { outputDirPath });
         const { FirstModelCrudResolver } = require(outputDirPath +
           "/resolvers/crud/FirstModel/FirstModelCrudResolver.ts");
 
@@ -347,7 +344,7 @@ describe("crud resolvers execution", () => {
         });
       });
 
-      it("should properly count relations", async () => {
+      it("should properly call prisma client", async () => {
         const document = /* graphql */ `
           query {
             findFirstFirstModel {

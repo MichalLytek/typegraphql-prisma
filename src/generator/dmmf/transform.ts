@@ -365,6 +365,11 @@ function selectInputTypeFromTypes(dmmfDocument: DmmfDocument) {
       it => it.location === "inputObjectTypes",
     );
     if (possibleInputTypes.length === 0) {
+      possibleInputTypes = inputTypes.filter(
+        it => it.location === "scalar" && it.type !== "Null",
+      );
+    }
+    if (possibleInputTypes.length === 0) {
       possibleInputTypes = inputTypes.filter(it => it.location === "enumTypes");
     }
     if (possibleInputTypes.length === 0) {

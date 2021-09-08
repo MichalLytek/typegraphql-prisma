@@ -57,7 +57,7 @@ Array [
         "intField": true,
       },
       "orderBy": Array [
-        UserOrderByInput {
+        UserOrderByWithRelationInput {
           "intField": "desc",
         },
       ],
@@ -91,7 +91,7 @@ Array [
         "_all": true,
       },
       "orderBy": Array [
-        UserOrderByInput {
+        UserOrderByWithRelationInput {
           "intField": "desc",
         },
       ],
@@ -151,10 +151,37 @@ Array [
 ]
 `;
 
+exports[`crud resolvers execution basic operations _count for relations should properly call prisma client: firstModel.findFirst call args 1`] = `
+Array [
+  Array [
+    Object {
+      "include": Object {
+        "_count": Object {
+          "select": Object {
+            "secondModelsField": true,
+          },
+        },
+      },
+    },
+  ],
+]
+`;
+
+exports[`crud resolvers execution basic operations _count for relations should properly call prisma client: secondModelsField count mocked response 1`] = `
+Object {
+  "findFirstFirstModel": Object {
+    "_count": Object {
+      "secondModelsField": 2,
+    },
+    "idField": 1,
+  },
+}
+`;
+
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`create\` action: createUser call args 1`] = `
 Array [
   Array [
-    CreateUserArgs {
+    Object {
       "data": UserCreateInput {
         "dateField": 2019-12-31T14:16:02.572Z,
         "optionalStringField": "optional",
@@ -177,7 +204,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`delete\` action: deleteUser call args 1`] = `
 Array [
   Array [
-    DeleteUserArgs {
+    Object {
       "where": UserWhereUniqueInput {
         "uniqueStringField": "unique",
       },
@@ -198,7 +225,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`deleteMany\` action: deleteManyUser call args 1`] = `
 Array [
   Array [
-    DeleteManyUserArgs {
+    Object {
       "where": UserWhereInput {
         "dateField": DateTimeFilter {
           "lte": 2019-12-31T19:16:02.572Z,
@@ -220,9 +247,9 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`findMany\` action: findManyUser call args 1`] = `
 Array [
   Array [
-    FindManyUserArgs {
+    Object {
       "orderBy": Array [
-        UserOrderByInput {
+        UserOrderByWithRelationInput {
           "intIdField": "desc",
         },
       ],
@@ -252,7 +279,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`findUnique\` action: findUniqueUser call args 1`] = `
 Array [
   Array [
-    FindUniqueUserArgs {
+    Object {
       "where": UserWhereUniqueInput {
         "uniqueStringField": "uniqueValue",
       },
@@ -273,7 +300,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`update\` action: updateUser call args 1`] = `
 Array [
   Array [
-    UpdateUserArgs {
+    Object {
       "data": UserUpdateInput {
         "dateField": DateTimeFieldUpdateOperationsInput {
           "set": 2019-12-31T14:16:02.572Z,
@@ -299,7 +326,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`updateMany\` action: updateManyUser call args 1`] = `
 Array [
   Array [
-    UpdateManyUserArgs {
+    Object {
       "data": UserUpdateManyMutationInput {
         "optionalStringField": null,
       },
@@ -324,7 +351,7 @@ Object {
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`upsert\` action: upsertUser call args 1`] = `
 Array [
   Array [
-    UpsertUserArgs {
+    Object {
       "create": UserCreateInput {
         "dateField": 2019-12-31T14:16:02.572Z,
         "optionalStringField": "optional",
@@ -348,33 +375,6 @@ Object {
     "intIdField": 1,
     "optionalStringField": "optional",
     "uniqueStringField": "unique",
-  },
-}
-`;
-
-exports[`crud resolvers execution basic operations when selectRelationCount preview feature is enabled should properly count relations: firstModel.findFirst call args 1`] = `
-Array [
-  Array [
-    Object {
-      "include": Object {
-        "_count": Object {
-          "select": Object {
-            "secondModelsField": true,
-          },
-        },
-      },
-    },
-  ],
-]
-`;
-
-exports[`crud resolvers execution basic operations when selectRelationCount preview feature is enabled should properly count relations: secondModelsField count mocked response 1`] = `
-Object {
-  "findFirstFirstModel": Object {
-    "_count": Object {
-      "secondModelsField": 2,
-    },
-    "idField": 1,
   },
 }
 `;

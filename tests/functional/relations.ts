@@ -396,15 +396,14 @@ describe("relations resolvers execution", () => {
     });
   });
 
-  describe("with namedConstraints previewFeature", () => {
-    describe("composite primary key with name", () => {
-      let outputDirPath: string;
-      let graphQLSchema: GraphQLSchema;
+  describe("composite primary key with name", () => {
+    let outputDirPath: string;
+    let graphQLSchema: GraphQLSchema;
 
-      beforeAll(async () => {
-        outputDirPath = generateArtifactsDirPath("functional-relations");
-        await fs.mkdir(outputDirPath, { recursive: true });
-        const prismaSchema = /* prisma */ `
+    beforeAll(async () => {
+      outputDirPath = generateArtifactsDirPath("functional-relations");
+      await fs.mkdir(outputDirPath, { recursive: true });
+      const prismaSchema = /* prisma */ `
         enum Color {
           RED
           GREEN
@@ -427,31 +426,28 @@ describe("relations resolvers execution", () => {
           @@id([title, color], name: "postIdCompoundName")
         }
       `;
-        await generateCodeFromSchema(prismaSchema, {
-          outputDirPath,
-          previewFeatures: ["namedConstraints"],
-        });
-        const { PostRelationsResolver, Post } = require(outputDirPath);
-        @Resolver()
-        class CustomResolver {
-          @Query(_returns => Post)
-          post(): any {
-            return {
-              title: "Post 1",
-              color: "BLUE",
-              text: "Post text",
-            };
-          }
+      await generateCodeFromSchema(prismaSchema, { outputDirPath });
+      const { PostRelationsResolver, Post } = require(outputDirPath);
+      @Resolver()
+      class CustomResolver {
+        @Query(_returns => Post)
+        post(): any {
+          return {
+            title: "Post 1",
+            color: "BLUE",
+            text: "Post text",
+          };
         }
+      }
 
-        graphQLSchema = await buildSchema({
-          resolvers: [CustomResolver, PostRelationsResolver],
-          validate: false,
-        });
+      graphQLSchema = await buildSchema({
+        resolvers: [CustomResolver, PostRelationsResolver],
+        validate: false,
       });
+    });
 
-      it("should properly call PrismaClient on fetching single relation", async () => {
-        const document = /* graphql */ `
+    it("should properly call PrismaClient on fetching single relation", async () => {
+      const document = /* graphql */ `
         query {
           post {
             title
@@ -464,29 +460,28 @@ describe("relations resolvers execution", () => {
           }
         }
       `;
-        const findUniquePostMock = jest.fn();
-        const prismaMock = {
-          post: {
-            findUnique: findUniquePostMock,
-          },
-        };
-        findUniquePostMock.mockReturnValueOnce({
-          author: jest.fn().mockResolvedValue({
-            id: 1,
-            name: "User 1",
-          }),
-        });
-
-        const { data, errors } = await graphql(graphQLSchema, document, null, {
-          prisma: prismaMock,
-        });
-
-        expect(errors).toBeUndefined();
-        expect(data).toMatchSnapshot("post with author mocked response");
-        expect(prismaMock.post.findUnique.mock.calls).toMatchSnapshot(
-          "findUniquePost relations call args",
-        );
+      const findUniquePostMock = jest.fn();
+      const prismaMock = {
+        post: {
+          findUnique: findUniquePostMock,
+        },
+      };
+      findUniquePostMock.mockReturnValueOnce({
+        author: jest.fn().mockResolvedValue({
+          id: 1,
+          name: "User 1",
+        }),
       });
+
+      const { data, errors } = await graphql(graphQLSchema, document, null, {
+        prisma: prismaMock,
+      });
+
+      expect(errors).toBeUndefined();
+      expect(data).toMatchSnapshot("post with author mocked response");
+      expect(prismaMock.post.findUnique.mock.calls).toMatchSnapshot(
+        "findUniquePost relations call args",
+      );
     });
   });
 });

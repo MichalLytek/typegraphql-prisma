@@ -314,9 +314,8 @@ describe("relations resolvers generation", () => {
     );
   });
 
-  describe("when `orderByRelation` preview feature is enabled", () => {
-    it("should properly generate args classes for sorting by relation fields", async () => {
-      const schema = /* prisma */ `
+  it("should properly generate args classes for sorting by relation fields", async () => {
+    const schema = /* prisma */ `
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -332,61 +331,53 @@ describe("relations resolvers generation", () => {
         }
       `;
 
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["orderByRelation"],
-      });
-      const firstModelSecondModelsFieldArgsTSFile = await readGeneratedFile(
-        "/resolvers/relations/FirstModel/args/FirstModelSecondModelsFieldArgs.ts",
-      );
-      const indexTSFile = await readGeneratedFile(
-        "/resolvers/relations/FirstModel/args/index.ts",
-      );
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const firstModelSecondModelsFieldArgsTSFile = await readGeneratedFile(
+      "/resolvers/relations/FirstModel/args/FirstModelSecondModelsFieldArgs.ts",
+    );
+    const indexTSFile = await readGeneratedFile(
+      "/resolvers/relations/FirstModel/args/index.ts",
+    );
 
-      expect(firstModelSecondModelsFieldArgsTSFile).toMatchSnapshot(
-        "FirstModelSecondModelsFieldArgs",
-      );
-      expect(indexTSFile).toMatchSnapshot("index");
-    });
+    expect(firstModelSecondModelsFieldArgsTSFile).toMatchSnapshot(
+      "FirstModelSecondModelsFieldArgs",
+    );
+    expect(indexTSFile).toMatchSnapshot("index");
   });
 
-  describe("when `namedConstraints` preview feature is enabled", () => {
-    it("should properly generate relation resolver class for model with named compound id with relation", async () => {
-      const schema = /* prisma */ `
-        model Movie {
-          directorFirstName String
-          directorLastName  String
-          director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName])
-          title             String
+  it("should properly generate relation resolver class for model with named compound id with relation", async () => {
+    const schema = /* prisma */ `
+      model Movie {
+        directorFirstName String
+        directorLastName  String
+        director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName])
+        title             String
 
-          @@id([directorFirstName, directorLastName, title], name: "movieIdCompoundName")
-        }
+        @@id([directorFirstName, directorLastName, title], name: "movieIdCompoundName")
+      }
 
-        model Director {
-          firstName String
-          lastName  String
-          movies    Movie[]
+      model Director {
+        firstName String
+        lastName  String
+        movies    Movie[]
 
-          @@id([firstName, lastName], name: "directorIdCompoundName")
-        }
-      `;
+        @@id([firstName, lastName], name: "directorIdCompoundName")
+      }
+    `;
 
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["namedConstraints"],
-      });
+    await generateCodeFromSchema(schema, { outputDirPath });
 
-      const movieRelationsResolverTSFile = await readGeneratedFile(
-        "/resolvers/relations/Movie/MovieRelationsResolver.ts",
-      );
+    const movieRelationsResolverTSFile = await readGeneratedFile(
+      "/resolvers/relations/Movie/MovieRelationsResolver.ts",
+    );
 
-      expect(movieRelationsResolverTSFile).toMatchSnapshot(
-        "MovieRelationsResolver",
-      );
-    });
+    expect(movieRelationsResolverTSFile).toMatchSnapshot(
+      "MovieRelationsResolver",
+    );
+  });
 
-    it("should properly generate relation resolver class for model with named compound unique with relation", async () => {
-      const schema = /* prisma */ `
+  it("should properly generate relation resolver class for model with named compound unique with relation", async () => {
+    const schema = /* prisma */ `
         model Movie {
           directorFirstName String
           directorLastName  String
@@ -405,18 +396,14 @@ describe("relations resolvers generation", () => {
         }
       `;
 
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["namedConstraints"],
-      });
+    await generateCodeFromSchema(schema, { outputDirPath });
 
-      const movieRelationsResolverTSFile = await readGeneratedFile(
-        "/resolvers/relations/Movie/MovieRelationsResolver.ts",
-      );
+    const movieRelationsResolverTSFile = await readGeneratedFile(
+      "/resolvers/relations/Movie/MovieRelationsResolver.ts",
+    );
 
-      expect(movieRelationsResolverTSFile).toMatchSnapshot(
-        "MovieRelationsResolver",
-      );
-    });
+    expect(movieRelationsResolverTSFile).toMatchSnapshot(
+      "MovieRelationsResolver",
+    );
   });
 });

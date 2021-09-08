@@ -88,7 +88,7 @@ input NestedStringNullableFilter {
 }
 
 type Query {
-  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
 
 enum QueryMode {
@@ -144,7 +144,7 @@ input UserCreateInput {
   uniqueStringField: String!
 }
 
-input UserOrderByInput {
+input UserOrderByWithRelationInput {
   dateField: SortOrder
   intIdField: SortOrder
   optionalStringField: SortOrder

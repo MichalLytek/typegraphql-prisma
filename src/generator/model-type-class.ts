@@ -55,9 +55,7 @@ export default function generateObjectTypeClassFromModel(
       .map(field => field.type),
   );
 
-  const countField = dmmfDocument.options.selectRelationCountEnabled
-    ? modelOutputType.fields.find(it => it.name === "_count")
-    : undefined;
+  const countField = modelOutputType.fields.find(it => it.name === "_count");
   if (countField) {
     generateResolversOutputsImports(sourceFile, [countField.typeGraphQLType]);
   }

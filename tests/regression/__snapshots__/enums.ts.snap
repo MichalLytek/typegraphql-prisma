@@ -101,6 +101,34 @@ export { SortOrder } from \\"./SortOrder\\";
 "
 `;
 
+exports[`enums should properly generate standard prisma enums: JsonNullValueFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+
+export enum JsonNullValueFilter {
+  DbNull = \\"DbNull\\",
+  JsonNull = \\"JsonNull\\",
+  AnyNull = \\"AnyNull\\"
+}
+TypeGraphQL.registerEnumType(JsonNullValueFilter, {
+  name: \\"JsonNullValueFilter\\",
+  description: undefined,
+});
+"
+`;
+
+exports[`enums should properly generate standard prisma enums: JsonNullValueInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+
+export enum JsonNullValueInput {
+  JsonNull = \\"JsonNull\\"
+}
+TypeGraphQL.registerEnumType(JsonNullValueInput, {
+  name: \\"JsonNullValueInput\\",
+  description: undefined,
+});
+"
+`;
+
 exports[`enums should properly generate standard prisma enums: QueryMode 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 
@@ -130,7 +158,10 @@ TypeGraphQL.registerEnumType(SortOrder, {
 `;
 
 exports[`enums should properly generate standard prisma enums: enums index 1`] = `
-"export { QueryMode } from \\"./QueryMode\\";
+"export { JsonNullValueFilter } from \\"./JsonNullValueFilter\\";
+export { JsonNullValueInput } from \\"./JsonNullValueInput\\";
+export { NullableJsonNullValueInput } from \\"./NullableJsonNullValueInput\\";
+export { QueryMode } from \\"./QueryMode\\";
 export { SampleModelScalarFieldEnum } from \\"./SampleModelScalarFieldEnum\\";
 export { SortOrder } from \\"./SortOrder\\";
 "

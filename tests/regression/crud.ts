@@ -499,9 +499,8 @@ describe("crud", () => {
     });
   });
 
-  describe("when `orderByRelation` preview feature is enabled", () => {
-    it("should properly generate args classes for sorting by many-to-many relation fields", async () => {
-      const schema = /* prisma */ `
+  it("should properly generate args classes for sorting by many-to-many relation fields", async () => {
+    const schema = /* prisma */ `
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -516,37 +515,34 @@ describe("crud", () => {
         }
       `;
 
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["orderByRelation"],
-      });
-      const aggregateFirstModelArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/FirstModel/args/AggregateFirstModelArgs.ts",
-      );
-      const findFirstFirstModelArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/FirstModel/args/FindFirstFirstModelArgs.ts",
-      );
-      const findManyFirstModelArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/FirstModel/args/FindManyFirstModelArgs.ts",
-      );
-      const indexTSFile = await readGeneratedFile(
-        "/resolvers/crud/FirstModel/args/index.ts",
-      );
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const aggregateFirstModelArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/FirstModel/args/AggregateFirstModelArgs.ts",
+    );
+    const findFirstFirstModelArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/FirstModel/args/FindFirstFirstModelArgs.ts",
+    );
+    const findManyFirstModelArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/FirstModel/args/FindManyFirstModelArgs.ts",
+    );
+    const indexTSFile = await readGeneratedFile(
+      "/resolvers/crud/FirstModel/args/index.ts",
+    );
 
-      expect(aggregateFirstModelArgsTSFile).toMatchSnapshot(
-        "AggregateFirstModelArgs",
-      );
-      expect(findFirstFirstModelArgsTSFile).toMatchSnapshot(
-        "FindFirstFirstModelArgs",
-      );
-      expect(findManyFirstModelArgsTSFile).toMatchSnapshot(
-        "FindManyFirstModelArgs",
-      );
-      expect(indexTSFile).toMatchSnapshot("index");
-    });
+    expect(aggregateFirstModelArgsTSFile).toMatchSnapshot(
+      "AggregateFirstModelArgs",
+    );
+    expect(findFirstFirstModelArgsTSFile).toMatchSnapshot(
+      "FindFirstFirstModelArgs",
+    );
+    expect(findManyFirstModelArgsTSFile).toMatchSnapshot(
+      "FindManyFirstModelArgs",
+    );
+    expect(indexTSFile).toMatchSnapshot("index");
+  });
 
-    it("should properly generate args classes for sorting by one-to-many relation fields", async () => {
-      const schema = /* prisma */ `
+  it("should properly generate args classes for sorting by one-to-many relation fields", async () => {
+    const schema = /* prisma */ `
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -562,34 +558,30 @@ describe("crud", () => {
         }
       `;
 
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["orderByRelation"],
-      });
-      const aggregateSecondModelArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/SecondModel/args/AggregateSecondModelArgs.ts",
-      );
-      const findFirstSecondModelArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/SecondModel/args/FindFirstSecondModelArgs.ts",
-      );
-      const findManySecondModelArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/SecondModel/args/FindManySecondModelArgs.ts",
-      );
-      const indexTSFile = await readGeneratedFile(
-        "/resolvers/crud/SecondModel/args/index.ts",
-      );
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const aggregateSecondModelArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/SecondModel/args/AggregateSecondModelArgs.ts",
+    );
+    const findFirstSecondModelArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/SecondModel/args/FindFirstSecondModelArgs.ts",
+    );
+    const findManySecondModelArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/SecondModel/args/FindManySecondModelArgs.ts",
+    );
+    const indexTSFile = await readGeneratedFile(
+      "/resolvers/crud/SecondModel/args/index.ts",
+    );
 
-      expect(aggregateSecondModelArgsTSFile).toMatchSnapshot(
-        "AggregateSecondModelArgs",
-      );
-      expect(findFirstSecondModelArgsTSFile).toMatchSnapshot(
-        "FindFirstSecondModelArgs",
-      );
-      expect(findManySecondModelArgsTSFile).toMatchSnapshot(
-        "FindManySecondModelArgs",
-      );
-      expect(indexTSFile).toMatchSnapshot("index");
-    });
+    expect(aggregateSecondModelArgsTSFile).toMatchSnapshot(
+      "AggregateSecondModelArgs",
+    );
+    expect(findFirstSecondModelArgsTSFile).toMatchSnapshot(
+      "FindFirstSecondModelArgs",
+    );
+    expect(findManySecondModelArgsTSFile).toMatchSnapshot(
+      "FindManySecondModelArgs",
+    );
+    expect(indexTSFile).toMatchSnapshot("index");
   });
 
   describe("when emitTranspiledCode is set to true", () => {
@@ -615,9 +607,8 @@ describe("crud", () => {
     }, 20000);
   });
 
-  describe("when `orderByAggregateGroup` preview feature is enabled", () => {
-    it("should properly generate args classes for group by action using aggregate input", async () => {
-      const schema = /* prisma */ `
+  it("should properly generate args classes for group by action using aggregate input", async () => {
+    const schema = /* prisma */ `
         model Sample {
           idField       Int     @id @default(autoincrement())
           stringField   String
@@ -629,21 +620,16 @@ describe("crud", () => {
         }
       `;
 
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["orderByAggregateGroup"],
-      });
-      const groupBySampleArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/Sample/args/GroupBySampleArgs.ts",
-      );
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const groupBySampleArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/Sample/args/GroupBySampleArgs.ts",
+    );
 
-      expect(groupBySampleArgsTSFile).toMatchSnapshot("GroupBySampleArgs");
-    });
+    expect(groupBySampleArgsTSFile).toMatchSnapshot("GroupBySampleArgs");
   });
 
-  describe("when selectRelationCount preview feature is enabled", () => {
-    it("should properly generate actions resolver classes for prisma model", async () => {
-      const schema = /* prisma */ `
+  it("should properly generate actions resolver classes for prisma model", async () => {
+    const schema = /* prisma */ `
         model User {
           intIdField          Int     @id @default(autoincrement())
           uniqueStringField   String  @unique
@@ -651,68 +637,62 @@ describe("crud", () => {
           dateField           DateTime
         }
       `;
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["selectRelationCount"],
-      });
+    await generateCodeFromSchema(schema, { outputDirPath });
 
-      const userCrudResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/UserCrudResolver.ts",
-      );
-      const createUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/CreateUserResolver.ts",
-      );
-      const deleteManyUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/DeleteManyUserResolver.ts",
-      );
-      const deleteUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/DeleteUserResolver.ts",
-      );
-      const findManyUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/FindManyUserResolver.ts",
-      );
-      const findFirstUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/FindFirstUserResolver.ts",
-      );
-      const findUniqueUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/FindUniqueUserResolver.ts",
-      );
-      const updateManyUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/UpdateManyUserResolver.ts",
-      );
-      const updateUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/UpdateUserResolver.ts",
-      );
-      const upsertUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/UpsertUserResolver.ts",
-      );
-      const createManyUserResolverTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/CreateManyUserResolver.ts",
-      );
+    const userCrudResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/UserCrudResolver.ts",
+    );
+    const createUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/CreateUserResolver.ts",
+    );
+    const deleteManyUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/DeleteManyUserResolver.ts",
+    );
+    const deleteUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/DeleteUserResolver.ts",
+    );
+    const findManyUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/FindManyUserResolver.ts",
+    );
+    const findFirstUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/FindFirstUserResolver.ts",
+    );
+    const findUniqueUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/FindUniqueUserResolver.ts",
+    );
+    const updateManyUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/UpdateManyUserResolver.ts",
+    );
+    const updateUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/UpdateUserResolver.ts",
+    );
+    const upsertUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/UpsertUserResolver.ts",
+    );
+    const createManyUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/CreateManyUserResolver.ts",
+    );
 
-      expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
-      expect(createUserResolverTSFile).toMatchSnapshot("CreateOneUserResolver");
-      expect(deleteManyUserResolverTSFile).toMatchSnapshot(
-        "DeleteManyUserResolver",
-      );
-      expect(deleteUserResolverTSFile).toMatchSnapshot("DeleteUserResolver");
-      expect(findManyUserResolverTSFile).toMatchSnapshot(
-        "FindManyUserResolver",
-      );
-      expect(findFirstUserResolverTSFile).toMatchSnapshot(
-        "FindFirstUserResolver",
-      );
-      expect(findUniqueUserResolverTSFile).toMatchSnapshot(
-        "FindUniqueUserResolver",
-      );
-      expect(updateManyUserResolverTSFile).toMatchSnapshot(
-        "UpdateManyUserResolver",
-      );
-      expect(updateUserResolverTSFile).toMatchSnapshot("UpdateUserResolver");
-      expect(upsertUserResolverTSFile).toMatchSnapshot("UpsertUserResolver");
-      expect(createManyUserResolverTSFile).toMatchSnapshot(
-        "CreateManyUserResolver",
-      );
-    });
+    expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+    expect(createUserResolverTSFile).toMatchSnapshot("CreateOneUserResolver");
+    expect(deleteManyUserResolverTSFile).toMatchSnapshot(
+      "DeleteManyUserResolver",
+    );
+    expect(deleteUserResolverTSFile).toMatchSnapshot("DeleteUserResolver");
+    expect(findManyUserResolverTSFile).toMatchSnapshot("FindManyUserResolver");
+    expect(findFirstUserResolverTSFile).toMatchSnapshot(
+      "FindFirstUserResolver",
+    );
+    expect(findUniqueUserResolverTSFile).toMatchSnapshot(
+      "FindUniqueUserResolver",
+    );
+    expect(updateManyUserResolverTSFile).toMatchSnapshot(
+      "UpdateManyUserResolver",
+    );
+    expect(updateUserResolverTSFile).toMatchSnapshot("UpdateUserResolver");
+    expect(upsertUserResolverTSFile).toMatchSnapshot("UpsertUserResolver");
+    expect(createManyUserResolverTSFile).toMatchSnapshot(
+      "CreateManyUserResolver",
+    );
   });
 });

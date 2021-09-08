@@ -13,7 +13,9 @@ async function setupTests() {
     console.log("cleaned!");
   }
 
+  console.log("checking prisma engine...");
   await ensurePrismaEngine();
+  console.log("checked!");
 }
 
 setupTests()

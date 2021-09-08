@@ -44,9 +44,6 @@ export async function generate(options: GeneratorOptions) {
     absolutePrismaOutputPath: prismaClientPath.includes("node_modules")
       ? "@prisma/client"
       : undefined,
-    selectRelationCountEnabled: prismaClientProvider.previewFeatures.includes(
-      "selectRelationCount",
-    ),
   };
 
   if (config.emitDMMF) {

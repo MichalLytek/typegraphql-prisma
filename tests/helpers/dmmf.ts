@@ -10,7 +10,7 @@ export default async function getPrismaClientDmmfFromPrismaSchema(
   prismaSchema: string,
   previewFeatures: string[] = [],
 ): Promise<PrismaDMMF.Document> {
-  const previewFeaturesToEmit = ["nApi", ...previewFeatures];
+  const previewFeaturesToEmit = [...previewFeatures];
   const datamodelWithGeneratorBlock = /* prisma */ `
     datasource db {
       provider = "postgresql"
@@ -18,9 +18,13 @@ export default async function getPrismaClientDmmfFromPrismaSchema(
     }
     generator client {
       provider = "prisma-client-js"
-      ${`previewFeatures = [${previewFeaturesToEmit
-        .map(it => `"${it}"`)
-        .join(", ")}]`}
+      ${
+        previewFeaturesToEmit.length > 0
+          ? `previewFeatures = [${previewFeaturesToEmit
+              .map(it => `"${it}"`)
+              .join(", ")}]`
+          : ""
+      }
     }
     ${prismaSchema}
   `;

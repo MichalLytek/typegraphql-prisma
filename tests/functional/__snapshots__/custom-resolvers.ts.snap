@@ -20,7 +20,7 @@ Array [
   Array [
     FindManyPostArgs {
       "orderBy": Array [
-        PostOrderByInput {
+        PostOrderByWithRelationInput {
           "color": "desc",
         },
       ],
@@ -82,7 +82,7 @@ type Post {
   uuid: String!
 }
 
-input PostOrderByInput {
+input PostOrderByWithRelationInput {
   color: SortOrder
   content: SortOrder
   uuid: SortOrder
@@ -108,7 +108,7 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  customFindManyPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  customFindManyPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
 }
 
 enum QueryMode {

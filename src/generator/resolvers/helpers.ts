@@ -66,15 +66,13 @@ export function generateCrudResolverClassMethodDeclaration(
             });`,
           ]
         : [
-            dmmfDocument.options.selectRelationCountEnabled
-              ? /* ts */ ` const { _count } = transformFields(
-                  graphqlFields(info as any)
-                );
-                return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}({
-                  ...args,
-                  ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-                });`
-              : /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}(args);`,
+            /* ts */ ` const { _count } = transformFields(
+              graphqlFields(info as any)
+            );
+            return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}({
+              ...args,
+              ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+            });`,
           ],
   };
 }

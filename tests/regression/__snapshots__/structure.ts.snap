@@ -182,6 +182,10 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       NestedStringWithAggregatesFilter.js
       NullableStringFieldUpdateOperationsInput.d.ts
       NullableStringFieldUpdateOperationsInput.js
+      PostAvgOrderByAggregateInput.d.ts
+      PostAvgOrderByAggregateInput.js
+      PostCountOrderByAggregateInput.d.ts
+      PostCountOrderByAggregateInput.js
       PostCreateInput.d.ts
       PostCreateInput.js
       PostCreateManyAuthorInput.d.ts
@@ -198,12 +202,22 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       PostCreateWithoutAuthorInput.js
       PostListRelationFilter.d.ts
       PostListRelationFilter.js
-      PostOrderByInput.d.ts
-      PostOrderByInput.js
+      PostMaxOrderByAggregateInput.d.ts
+      PostMaxOrderByAggregateInput.js
+      PostMinOrderByAggregateInput.d.ts
+      PostMinOrderByAggregateInput.js
+      PostOrderByRelationAggregateInput.d.ts
+      PostOrderByRelationAggregateInput.js
+      PostOrderByWithAggregationInput.d.ts
+      PostOrderByWithAggregationInput.js
+      PostOrderByWithRelationInput.d.ts
+      PostOrderByWithRelationInput.js
       PostScalarWhereInput.d.ts
       PostScalarWhereInput.js
       PostScalarWhereWithAggregatesInput.d.ts
       PostScalarWhereWithAggregatesInput.js
+      PostSumOrderByAggregateInput.d.ts
+      PostSumOrderByAggregateInput.js
       PostUpdateInput.d.ts
       PostUpdateInput.js
       PostUpdateManyMutationInput.d.ts
@@ -232,6 +246,10 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       StringNullableWithAggregatesFilter.js
       StringWithAggregatesFilter.d.ts
       StringWithAggregatesFilter.js
+      UserAvgOrderByAggregateInput.d.ts
+      UserAvgOrderByAggregateInput.js
+      UserCountOrderByAggregateInput.d.ts
+      UserCountOrderByAggregateInput.js
       UserCreateInput.d.ts
       UserCreateInput.js
       UserCreateManyInput.d.ts
@@ -242,12 +260,20 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       UserCreateOrConnectWithoutPostsInput.js
       UserCreateWithoutPostsInput.d.ts
       UserCreateWithoutPostsInput.js
-      UserOrderByInput.d.ts
-      UserOrderByInput.js
+      UserMaxOrderByAggregateInput.d.ts
+      UserMaxOrderByAggregateInput.js
+      UserMinOrderByAggregateInput.d.ts
+      UserMinOrderByAggregateInput.js
+      UserOrderByWithAggregationInput.d.ts
+      UserOrderByWithAggregationInput.js
+      UserOrderByWithRelationInput.d.ts
+      UserOrderByWithRelationInput.js
       UserRelationFilter.d.ts
       UserRelationFilter.js
       UserScalarWhereWithAggregatesInput.d.ts
       UserScalarWhereWithAggregatesInput.js
+      UserSumOrderByAggregateInput.d.ts
+      UserSumOrderByAggregateInput.js
       UserUpdateInput.d.ts
       UserUpdateInput.js
       UserUpdateManyMutationInput.d.ts
@@ -285,6 +311,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       PostSumAggregate.js
       UserAvgAggregate.d.ts
       UserAvgAggregate.js
+      UserCount.d.ts
+      UserCount.js
       UserCountAggregate.d.ts
       UserCountAggregate.js
       UserGroupBy.d.ts
@@ -417,6 +445,8 @@ exports[`structure should generate proper folders and file names when model is r
       NestedStringNullableWithAggregatesFilter.ts
       NestedStringWithAggregatesFilter.ts
       NullableStringFieldUpdateOperationsInput.ts
+      RenamedPostAvgOrderByAggregateInput.ts
+      RenamedPostCountOrderByAggregateInput.ts
       RenamedPostCreateInput.ts
       RenamedPostCreateManyAuthorInput.ts
       RenamedPostCreateManyAuthorInputEnvelope.ts
@@ -425,9 +455,14 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedPostCreateOrConnectWithoutAuthorInput.ts
       RenamedPostCreateWithoutAuthorInput.ts
       RenamedPostListRelationFilter.ts
-      RenamedPostOrderByInput.ts
+      RenamedPostMaxOrderByAggregateInput.ts
+      RenamedPostMinOrderByAggregateInput.ts
+      RenamedPostOrderByRelationAggregateInput.ts
+      RenamedPostOrderByWithAggregationInput.ts
+      RenamedPostOrderByWithRelationInput.ts
       RenamedPostScalarWhereInput.ts
       RenamedPostScalarWhereWithAggregatesInput.ts
+      RenamedPostSumOrderByAggregateInput.ts
       RenamedPostUpdateInput.ts
       RenamedPostUpdateManyMutationInput.ts
       RenamedPostUpdateManyWithWhereWithoutAuthorInput.ts
@@ -437,14 +472,20 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedPostUpsertWithWhereUniqueWithoutAuthorInput.ts
       RenamedPostWhereInput.ts
       RenamedPostWhereUniqueInput.ts
+      RenamedUserAvgOrderByAggregateInput.ts
+      RenamedUserCountOrderByAggregateInput.ts
       RenamedUserCreateInput.ts
       RenamedUserCreateManyInput.ts
       RenamedUserCreateNestedOneWithoutPostsInput.ts
       RenamedUserCreateOrConnectWithoutPostsInput.ts
       RenamedUserCreateWithoutPostsInput.ts
-      RenamedUserOrderByInput.ts
+      RenamedUserMaxOrderByAggregateInput.ts
+      RenamedUserMinOrderByAggregateInput.ts
+      RenamedUserOrderByWithAggregationInput.ts
+      RenamedUserOrderByWithRelationInput.ts
       RenamedUserRelationFilter.ts
       RenamedUserScalarWhereWithAggregatesInput.ts
+      RenamedUserSumOrderByAggregateInput.ts
       RenamedUserUpdateInput.ts
       RenamedUserUpdateManyMutationInput.ts
       RenamedUserUpdateOneRequiredWithoutPostsInput.ts
@@ -469,6 +510,7 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedPostMinAggregate.ts
       RenamedPostSumAggregate.ts
       RenamedUserAvgAggregate.ts
+      RenamedUserCount.ts
       RenamedUserCountAggregate.ts
       RenamedUserGroupBy.ts
       RenamedUserMaxAggregate.ts
@@ -587,6 +629,8 @@ exports[`structure should generate proper folders structure and file names for c
       NestedStringNullableWithAggregatesFilter.ts
       NestedStringWithAggregatesFilter.ts
       NullableStringFieldUpdateOperationsInput.ts
+      PostAvgOrderByAggregateInput.ts
+      PostCountOrderByAggregateInput.ts
       PostCreateInput.ts
       PostCreateManyAuthorInput.ts
       PostCreateManyAuthorInputEnvelope.ts
@@ -595,9 +639,14 @@ exports[`structure should generate proper folders structure and file names for c
       PostCreateOrConnectWithoutAuthorInput.ts
       PostCreateWithoutAuthorInput.ts
       PostListRelationFilter.ts
-      PostOrderByInput.ts
+      PostMaxOrderByAggregateInput.ts
+      PostMinOrderByAggregateInput.ts
+      PostOrderByRelationAggregateInput.ts
+      PostOrderByWithAggregationInput.ts
+      PostOrderByWithRelationInput.ts
       PostScalarWhereInput.ts
       PostScalarWhereWithAggregatesInput.ts
+      PostSumOrderByAggregateInput.ts
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
@@ -612,14 +661,20 @@ exports[`structure should generate proper folders structure and file names for c
       StringNullableFilter.ts
       StringNullableWithAggregatesFilter.ts
       StringWithAggregatesFilter.ts
+      UserAvgOrderByAggregateInput.ts
+      UserCountOrderByAggregateInput.ts
       UserCreateInput.ts
       UserCreateManyInput.ts
       UserCreateNestedOneWithoutPostsInput.ts
       UserCreateOrConnectWithoutPostsInput.ts
       UserCreateWithoutPostsInput.ts
-      UserOrderByInput.ts
+      UserMaxOrderByAggregateInput.ts
+      UserMinOrderByAggregateInput.ts
+      UserOrderByWithAggregationInput.ts
+      UserOrderByWithRelationInput.ts
       UserRelationFilter.ts
       UserScalarWhereWithAggregatesInput.ts
+      UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsInput.ts
@@ -639,6 +694,7 @@ exports[`structure should generate proper folders structure and file names for c
       PostMinAggregate.ts
       PostSumAggregate.ts
       UserAvgAggregate.ts
+      UserCount.ts
       UserCountAggregate.ts
       UserGroupBy.ts
       UserMaxAggregate.ts

@@ -2,13 +2,7 @@ import generateCode from "../../src/generator/generate-code";
 import getPrismaClientDmmfFromPrismaSchema from "./dmmf";
 import { GenerateCodeOptions } from "../../src/generator/options";
 
-type SupportedPreviewFeatures =
-  | "orderByRelation"
-  | "selectRelationCount"
-  | "orderByAggregateGroup"
-  | "filterJson"
-  | "namedConstraints"
-  | "fullTextSearch";
+type SupportedPreviewFeatures = "filterJson" | "fullTextSearch";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<GenerateCodeOptions, "relativePrismaOutputPath"> {
@@ -24,9 +18,6 @@ export async function generateCodeFromSchema(
     {
       ...options,
       relativePrismaOutputPath: "../../helpers/prisma-client-mock",
-      selectRelationCountEnabled: options.previewFeatures?.includes(
-        "selectRelationCount",
-      ),
     },
   );
 }

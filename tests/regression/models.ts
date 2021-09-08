@@ -223,34 +223,6 @@ describe("models", () => {
     expect(nativeTypeModelTSFile).toMatchSnapshot("NativeTypeModel");
   });
 
-  describe("when selectRelationCount preview feature is enabled", () => {
-    it("should properly generate model object type class", async () => {
-      const schema = /* prisma */ `
-        model FirstModel {
-          idField            Int            @id @default(autoincrement())
-          uniqueStringField  String         @unique
-          floatField         Float
-          secondModelsField  SecondModel[]
-        }
-        model SecondModel {
-          idField            Int          @id @default(autoincrement())
-          uniqueStringField  String       @unique
-          floatField         Float
-          firstModelFieldId  Int
-          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
-        }
-      `;
-
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["selectRelationCount"],
-      });
-      const firstModelTSFile = await readGeneratedFile("/models/FirstModel.ts");
-
-      expect(firstModelTSFile).toMatchSnapshot("FirstModel");
-    });
-  });
-
   describe("when emitIdAsIDType is set to true", () => {
     it("should properly generate model object type class", async () => {
       const schema = /* prisma */ `

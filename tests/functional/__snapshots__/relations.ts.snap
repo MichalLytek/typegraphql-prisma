@@ -1,5 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`relations resolvers execution composite primary key with name should properly call PrismaClient on fetching single relation: findUniquePost relations call args 1`] = `
+Array [
+  Array [
+    Object {
+      "where": Object {
+        "postIdCompoundName": Object {
+          "color": "BLUE",
+          "title": "Post 1",
+        },
+      },
+    },
+  ],
+]
+`;
+
+exports[`relations resolvers execution composite primary key with name should properly call PrismaClient on fetching single relation: post with author mocked response 1`] = `
+Object {
+  "post": Object {
+    "author": Object {
+      "id": 1,
+      "name": "User 1",
+    },
+    "color": "BLUE",
+    "text": "Post text",
+    "title": "Post 1",
+  },
+}
+`;
+
 exports[`relations resolvers execution composite unique key should properly call PrismaClient on fetching single relation: findUniquePost relations call args 1`] = `
 Array [
   Array [
@@ -197,34 +226,5 @@ Object {
       "uuid": "72c8a188-3d46-45b3-b23f-7d420aa282f1",
     },
   ],
-}
-`;
-
-exports[`relations resolvers execution with namedConstraints previewFeature composite primary key with name should properly call PrismaClient on fetching single relation: findUniquePost relations call args 1`] = `
-Array [
-  Array [
-    Object {
-      "where": Object {
-        "postIdCompoundName": Object {
-          "color": "BLUE",
-          "title": "Post 1",
-        },
-      },
-    },
-  ],
-]
-`;
-
-exports[`relations resolvers execution with namedConstraints previewFeature composite primary key with name should properly call PrismaClient on fetching single relation: post with author mocked response 1`] = `
-Object {
-  "post": Object {
-    "author": Object {
-      "id": 1,
-      "name": "User 1",
-    },
-    "color": "BLUE",
-    "text": "Post text",
-    "title": "Post 1",
-  },
 }
 `;
