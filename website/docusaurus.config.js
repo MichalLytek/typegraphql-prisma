@@ -100,7 +100,7 @@ module.exports = {
           path: "../docs",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl:
-            "https://github.comichalLytek/typegraphql-prisma/edit/main/docs/",
+            "https://github.com/MichalLytek/typegraphql-prisma/edit/main/docs/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
