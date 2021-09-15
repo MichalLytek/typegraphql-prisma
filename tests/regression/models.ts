@@ -170,13 +170,30 @@ describe("models", () => {
     expect(userModelTSFile).toMatchSnapshot("User");
   });
 
-  it("should properly generate object type class for prisma model with omitted field", async () => {
+  it("should properly generate object type class for prisma model without omitted output field", async () => {
     const schema = /* prisma */ `
       model User {
         id           Int       @id @default(autoincrement())
         dateOfBirth  DateTime
         name         String
         /// @TypeGraphQL.omit(output: true)
+        balance      Float?
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+
+    expect(userModelTSFile).toMatchSnapshot("User");
+  });
+
+  it("should properly generate object type class for prisma model with omitted input field", async () => {
+    const schema = /* prisma */ `
+      model User {
+        id           Int       @id @default(autoincrement())
+        dateOfBirth  DateTime
+        name         String
+        /// @TypeGraphQL.omit(input: true)
         balance      Float?
       }
     `;
