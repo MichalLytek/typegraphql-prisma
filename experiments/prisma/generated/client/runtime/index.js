@@ -4143,7 +4143,7 @@ var require_Engine = __commonJS2((exports2) => {
   __name(Engine3, "Engine");
 });
 
-// ../../node_modules/.pnpm/@prisma+engines@2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma+engines@3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f/node_modules/@prisma/engines/dist/index.js
 var require_dist9 = __commonJS2((exports, module) => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -5361,16 +5361,16 @@ var require_dist9 = __commonJS2((exports, module) => {
   var require_package = __commonJS((exports2, module2) => {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db",
+      version: "3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "2452cc6313d52b8b9a96999ac0e974d0aedf88db"
+        enginesVersion: "c22652b7e418506fab23052d569b85d3aec4883f"
       },
       devDependencies: {
-        "@types/node": "14.17.15",
+        "@types/node": "14.17.17",
         typescript: "4.3.5"
       },
       scripts: {
@@ -5558,6 +5558,9 @@ var require_dist9 = __commonJS2((exports, module) => {
         return "netbsd";
       }
       if (platform === "linux" && arch === "arm64") {
+        return `linux-arm64-openssl-${libssl}`;
+      }
+      if (platform === "linux" && arch === "arm") {
         return `linux-arm-openssl-${libssl}`;
       }
       if (platform === "linux" && distro === "nixos") {
@@ -5611,6 +5614,8 @@ var require_dist9 = __commonJS2((exports, module) => {
       "debian-openssl-1.1.x",
       "rhel-openssl-1.0.x",
       "rhel-openssl-1.1.x",
+      "linux-arm64-openssl-1.1.x",
+      "linux-arm64-openssl-1.0.x",
       "linux-arm-openssl-1.1.x",
       "linux-arm-openssl-1.0.x",
       "linux-musl",
@@ -23219,6 +23224,8 @@ ${error.message}` : execaMessage;
         "freebsd",
         "arm",
         "linux-nixos",
+        "linux-arm-openssl-1.1.x",
+        "linux-arm-openssl-1.0.x",
         "openbsd",
         "netbsd",
         "freebsd11",
@@ -23956,15 +23963,15 @@ ${error.message}` : execaMessage;
   import_path.default.join(__dirname, "../libquery_engine-darwin-arm64.dylib.node");
   import_path.default.join(__dirname, "../libquery_engine-debian-openssl-1.0.x.so.node");
   import_path.default.join(__dirname, "../libquery_engine-debian-openssl-1.1.x.so.node");
-  import_path.default.join(__dirname, "../libquery_engine-linux-arm-openssl-1.0.x.so.node");
-  import_path.default.join(__dirname, "../libquery_engine-linux-arm-openssl-1.1.x.so.node");
+  import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.0.x.so.node");
+  import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.1.x.so.node");
   import_path.default.join(__dirname, "../libquery_engine-linux-musl.so.node");
   import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-1.0.x.so.node");
   import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-1.1.x.so.node");
   import_path.default.join(__dirname, "../query_engine-windows.dll.node");
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
 var require_getNodeAPIName2 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -23986,7 +23993,7 @@ var require_getNodeAPIName2 = __commonJS2((exports2) => {
   exports2.getNodeAPIName = getNodeAPIName;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db/node_modules/@prisma/get-platform/dist/getPlatform.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f/node_modules/@prisma/get-platform/dist/getPlatform.js
 var require_getPlatform2 = __commonJS2((exports2) => {
   "use strict";
   var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
@@ -24135,6 +24142,9 @@ var require_getPlatform2 = __commonJS2((exports2) => {
       return "netbsd";
     }
     if (platform === "linux" && arch === "arm64") {
+      return `linux-arm64-openssl-${libssl}`;
+    }
+    if (platform === "linux" && arch === "arm") {
       return `linux-arm-openssl-${libssl}`;
     }
     if (platform === "linux" && distro === "nixos") {
@@ -24158,7 +24168,7 @@ var require_getPlatform2 = __commonJS2((exports2) => {
   exports2.getPlatform = getPlatform;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
 var require_isNodeAPISupported2 = __commonJS2((exports2) => {
   "use strict";
   var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
@@ -24180,7 +24190,7 @@ var require_isNodeAPISupported2 = __commonJS2((exports2) => {
   exports2.isNodeAPISupported = isNodeAPISupported;
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db/node_modules/@prisma/get-platform/dist/platforms.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f/node_modules/@prisma/get-platform/dist/platforms.js
 var require_platforms2 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -24192,6 +24202,8 @@ var require_platforms2 = __commonJS2((exports2) => {
     "debian-openssl-1.1.x",
     "rhel-openssl-1.0.x",
     "rhel-openssl-1.1.x",
+    "linux-arm64-openssl-1.1.x",
+    "linux-arm64-openssl-1.0.x",
     "linux-arm-openssl-1.1.x",
     "linux-arm-openssl-1.0.x",
     "linux-musl",
@@ -24205,7 +24217,7 @@ var require_platforms2 = __commonJS2((exports2) => {
   ];
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db/node_modules/@prisma/get-platform/dist/index.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f/node_modules/@prisma/get-platform/dist/index.js
 var require_dist10 = __commonJS2((exports2) => {
   "use strict";
   Object.defineProperty(exports2, "__esModule", {value: true});
@@ -31553,7 +31565,7 @@ var require_utils5 = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "3.0.1",
+    version: "3.1.1",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",
@@ -31615,10 +31627,10 @@ var require_package2 = __commonJS2((exports2, module2) => {
     devDependencies: {
       "@prisma/debug": "workspace:*",
       "@prisma/engine-core": "workspace:*",
-      "@prisma/engines": "2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db",
-      "@prisma/fetch-engine": "2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db",
+      "@prisma/engines": "3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f",
+      "@prisma/fetch-engine": "3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f",
       "@prisma/generator-helper": "workspace:*",
-      "@prisma/get-platform": "2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db",
+      "@prisma/get-platform": "3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f",
       "@prisma/migrate": "workspace:*",
       "@prisma/sdk": "workspace:*",
       "@timsuchanek/copy": "1.4.5",
@@ -31626,7 +31638,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "@types/jest": "27.0.1",
       "@types/js-levenshtein": "1.1.0",
       "@types/mssql": "6.0.8",
-      "@types/node": "12.20.23",
+      "@types/node": "12.20.25",
       "@types/pg": "8.6.1",
       "@typescript-eslint/eslint-plugin": "4.29.3",
       "@typescript-eslint/parser": "4.29.3",
@@ -31647,7 +31659,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       "indent-string": "4.0.0",
       "is-obj": "2.0.0",
       "is-regexp": "2.1.0",
-      jest: "27.1.0",
+      jest: "27.2.0",
       "js-levenshtein": "1.1.6",
       klona: "2.0.4",
       "lint-staged": "11.1.2",
@@ -31682,7 +31694,7 @@ var require_package2 = __commonJS2((exports2, module2) => {
       }
     },
     dependencies: {
-      "@prisma/engines-version": "2.31.0-32.2452cc6313d52b8b9a96999ac0e974d0aedf88db"
+      "@prisma/engines-version": "3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f"
     },
     "lint-staged": {
       "*.ts": [

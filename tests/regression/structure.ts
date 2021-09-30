@@ -1,8 +1,7 @@
 import { promises as fs } from "fs";
-import directoryTree from "directory-tree";
 
 import generateArtifactsDirPath from "../helpers/artifacts-dir";
-import { stringifyDirectoryTrees } from "../helpers/structure";
+import { getDirectoryStructureString } from "../helpers/structure";
 import { generateCodeFromSchema } from "../helpers/generate-code";
 
 describe("structure", () => {
@@ -38,10 +37,7 @@ describe("structure", () => {
 
   it("should generate proper folders structure and file names for complex datamodel", async () => {
     await generateCodeFromSchema(complexDatamodel, { outputDirPath });
-    const directoryStructure = directoryTree(outputDirPath);
-    const directoryStructureString =
-      "\n[type-graphql]\n" +
-      stringifyDirectoryTrees(directoryStructure.children, 2);
+    const directoryStructureString = getDirectoryStructureString(outputDirPath);
 
     // FIXME: replace with `.toMatchInlineSnapshot()` when it starts working again
     expect(directoryStructureString).toMatchSnapshot("structure");
@@ -52,10 +48,7 @@ describe("structure", () => {
       outputDirPath,
       emitTranspiledCode: true,
     });
-    const directoryStructure = directoryTree(outputDirPath);
-    const directoryStructureString =
-      "\n[type-graphql]\n" +
-      stringifyDirectoryTrees(directoryStructure.children, 2);
+    const directoryStructureString = getDirectoryStructureString(outputDirPath);
 
     // FIXME: replace with `.toMatchInlineSnapshot()` when it starts working again
     expect(directoryStructureString).toMatchSnapshot("structure");
@@ -87,10 +80,7 @@ describe("structure", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const directoryStructure = directoryTree(outputDirPath);
-    const directoryStructureString =
-      "\n[type-graphql]\n" +
-      stringifyDirectoryTrees(directoryStructure.children, 2);
+    const directoryStructureString = getDirectoryStructureString(outputDirPath);
 
     // FIXME: replace with `.toMatchInlineSnapshot()` when it starts working again
     expect(directoryStructureString).toMatchSnapshot("structure");

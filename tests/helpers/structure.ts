@@ -1,6 +1,9 @@
-import { DirectoryTree } from "directory-tree";
+import directoryTree, { DirectoryTree } from "directory-tree";
 
-export function stringifyDirectoryTrees(
+const getDirNodeNameString = (node: DirectoryTree) =>
+  node.type === "file" ? node.name : `[${node.name}]`;
+
+function stringifyDirectoryTrees(
   directoryStructure: DirectoryTree[] | undefined,
   indent = 0,
 ): string {
@@ -20,5 +23,12 @@ export function stringifyDirectoryTrees(
     );
 }
 
-const getDirNodeNameString = (node: DirectoryTree) =>
-  node.extension ? node.name : `[${node.name}]`;
+export function getDirectoryStructureString(dirPath: string) {
+  const directoryStructure = directoryTree(dirPath, {
+    attributes: ["size", "type", "extension"] as any,
+  });
+  const directoryStructureString =
+    "\n[type-graphql]\n" +
+    stringifyDirectoryTrees(directoryStructure.children, 2);
+  return directoryStructureString;
+}
