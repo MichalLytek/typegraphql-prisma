@@ -1,6 +1,6 @@
 ---
 title: Nest JS
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 ## `typegraphql-nestjs`

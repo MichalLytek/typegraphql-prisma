@@ -25,9 +25,13 @@ export function ensureInstalledCorrectPrismaPackage() {
 
   if (!semVer.satisfies(installedVersion, versionRequirement)) {
     throw new Error(
-      `Looks like you use an incorrect version of the Prisma packages: "${installedVersion}". ` +
-        `Please ensure that you have installed a version ` +
-        `that meets 'typegraphql-prisma' requirement: "${versionRequirement}".`,
+      `Looks like an incorrect version "${installedVersion}" ` +
+        `of the Prisma packages has been installed. ` +
+        `'typegraphql-prisma' works only with selected versions, ` +
+        `so please ensure that you have installed a version of Prisma ` +
+        `that meets the requirement: "${versionRequirement}". ` +
+        `Find out more about that requirement in the docs: ` +
+        `https://prisma.typegraphql.com/docs/advanced/prisma-version`,
     );
   }
 }
