@@ -3,20 +3,16 @@
 exports[`resolvers enhance should emit emit enhance file properly: enhance 1`] = `
 "import { ClassType } from \\"type-graphql\\";
 import * as crudResolvers from \\"./resolvers/crud/resolvers-crud.index\\";
+import * as argsTypes from \\"./resolvers/crud/args.index\\";
 import * as actionResolvers from \\"./resolvers/crud/resolvers-actions.index\\";
 import * as relationResolvers from \\"./resolvers/relations/resolvers.index\\";
 import * as models from \\"./models\\";
 import * as outputTypes from \\"./resolvers/outputs\\";
 import * as inputTypes from \\"./resolvers/inputs\\";
-import * as argsTypes from \\"./resolvers/crud/args.index\\";
 
 const crudResolversMap = {
   Client: crudResolvers.ClientCrudResolver,
   Post: crudResolvers.PostCrudResolver
-};
-const relationResolversMap = {
-  Client: relationResolvers.ClientRelationsResolver,
-  Post: relationResolvers.PostRelationsResolver
 };
 const actionResolversMap = {
   Client: {
@@ -48,115 +44,9 @@ const actionResolversMap = {
     groupByPost: actionResolvers.GroupByPostResolver
   }
 };
-const resolversInfo = {
+const crudResolversInfo = {
   Client: [\\"client\\", \\"findFirstClient\\", \\"clients\\", \\"createClient\\", \\"createManyClient\\", \\"deleteClient\\", \\"updateClient\\", \\"deleteManyClient\\", \\"updateManyClient\\", \\"upsertClient\\", \\"aggregateClient\\", \\"groupByClient\\"],
   Post: [\\"post\\", \\"findFirstPost\\", \\"posts\\", \\"createPost\\", \\"createManyPost\\", \\"deletePost\\", \\"updatePost\\", \\"deleteManyPost\\", \\"updateManyPost\\", \\"upsertPost\\", \\"aggregatePost\\", \\"groupByPost\\"]
-};
-const relationResolversInfo = {
-  Client: [\\"posts\\"],
-  Post: [\\"author\\"]
-};
-const modelsInfo = {
-  Client: [\\"id\\", \\"email\\"],
-  Post: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"]
-};
-const inputsInfo = {
-  ClientWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\", \\"posts\\"],
-  ClientOrderByWithRelationInput: [\\"id\\", \\"email\\", \\"posts\\"],
-  ClientWhereUniqueInput: [\\"id\\", \\"email\\"],
-  ClientOrderByWithAggregationInput: [\\"id\\", \\"email\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
-  ClientScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\"],
-  PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"author\\", \\"authorId\\", \\"metadata\\"],
-  PostOrderByWithRelationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"author\\", \\"authorId\\", \\"metadata\\"],
-  PostWhereUniqueInput: [\\"uuid\\"],
-  PostOrderByWithAggregationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
-  PostScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
-  ClientCreateInput: [\\"email\\", \\"posts\\"],
-  ClientUpdateInput: [\\"email\\", \\"posts\\"],
-  ClientCreateManyInput: [\\"id\\", \\"email\\"],
-  ClientUpdateManyMutationInput: [\\"email\\"],
-  PostCreateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"author\\"],
-  PostUpdateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"author\\"],
-  PostCreateManyInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
-  PostUpdateManyMutationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  IntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  StringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
-  PostListRelationFilter: [\\"every\\", \\"some\\", \\"none\\"],
-  PostOrderByRelationAggregateInput: [\\"_count\\"],
-  ClientCountOrderByAggregateInput: [\\"id\\", \\"email\\"],
-  ClientAvgOrderByAggregateInput: [\\"id\\"],
-  ClientMaxOrderByAggregateInput: [\\"id\\", \\"email\\"],
-  ClientMinOrderByAggregateInput: [\\"id\\", \\"email\\"],
-  ClientSumOrderByAggregateInput: [\\"id\\"],
-  IntWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
-  StringWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  DateTimeFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  BoolFilter: [\\"equals\\", \\"not\\"],
-  StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
-  ClientRelationFilter: [\\"is\\", \\"isNot\\"],
-  JsonFilter: [\\"equals\\", \\"not\\"],
-  PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
-  PostAvgOrderByAggregateInput: [\\"authorId\\"],
-  PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostMinOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostSumOrderByAggregateInput: [\\"authorId\\"],
-  DateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  BoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  StringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  JsonWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  PostCreateNestedManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"createMany\\", \\"connect\\"],
-  StringFieldUpdateOperationsInput: [\\"set\\"],
-  PostUpdateManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"connect\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
-  IntFieldUpdateOperationsInput: [\\"set\\", \\"increment\\", \\"decrement\\", \\"multiply\\", \\"divide\\"],
-  ClientCreateNestedOneWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"connect\\"],
-  DateTimeFieldUpdateOperationsInput: [\\"set\\"],
-  BoolFieldUpdateOperationsInput: [\\"set\\"],
-  NullableStringFieldUpdateOperationsInput: [\\"set\\"],
-  ClientUpdateOneRequiredWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
-  NestedIntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedStringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
-  NestedIntWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
-  NestedFloatFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedStringWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  NestedDateTimeFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedBoolFilter: [\\"equals\\", \\"not\\"],
-  NestedStringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
-  NestedDateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  NestedBoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  NestedStringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  NestedIntNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedJsonFilter: [\\"equals\\", \\"not\\"],
-  PostCreateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostCreateOrConnectWithoutAuthorInput: [\\"where\\", \\"create\\"],
-  PostCreateManyAuthorInputEnvelope: [\\"data\\", \\"skipDuplicates\\"],
-  PostUpsertWithWhereUniqueWithoutAuthorInput: [\\"where\\", \\"update\\", \\"create\\"],
-  PostUpdateWithWhereUniqueWithoutAuthorInput: [\\"where\\", \\"data\\"],
-  PostUpdateManyWithWhereWithoutAuthorInput: [\\"where\\", \\"data\\"],
-  PostScalarWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
-  ClientCreateWithoutPostsInput: [\\"email\\"],
-  ClientCreateOrConnectWithoutPostsInput: [\\"where\\", \\"create\\"],
-  ClientUpsertWithoutPostsInput: [\\"update\\", \\"create\\"],
-  ClientUpdateWithoutPostsInput: [\\"email\\"],
-  PostCreateManyAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostUpdateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
-};
-const outputsInfo = {
-  AggregateClient: [\\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
-  ClientGroupBy: [\\"id\\", \\"email\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
-  AggregatePost: [\\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
-  PostGroupBy: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
-  AffectedRowsOutput: [\\"count\\"],
-  ClientCount: [\\"posts\\"],
-  ClientCountAggregate: [\\"id\\", \\"email\\", \\"_all\\"],
-  ClientAvgAggregate: [\\"id\\"],
-  ClientSumAggregate: [\\"id\\"],
-  ClientMinAggregate: [\\"id\\", \\"email\\"],
-  ClientMaxAggregate: [\\"id\\", \\"email\\"],
-  PostCountAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_all\\"],
-  PostAvgAggregate: [\\"authorId\\"],
-  PostSumAggregate: [\\"authorId\\"],
-  PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"]
 };
 const argsInfo = {
   FindUniqueClientArgs: [\\"where\\"],
@@ -209,7 +99,7 @@ export function applyResolversEnhanceMap(
     const actionResolversConfig = actionResolversMap[modelName];
     if (resolverActionsConfig._all) {
       const allActionsDecorators = resolverActionsConfig._all;
-      const resolverActionNames = resolversInfo[modelName as keyof typeof resolversInfo];
+      const resolverActionNames = crudResolversInfo[modelName as keyof typeof crudResolversInfo];
       for (const resolverActionName of resolverActionNames) {
         const actionTarget = (actionResolversConfig[
           resolverActionName as keyof typeof actionResolversConfig
@@ -253,6 +143,52 @@ export function applyResolversEnhanceMap(
     }
   }
 }
+
+type ArgsTypesNames = keyof typeof argsTypes;
+
+type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
+  keyof typeof argsTypes[TArgsType][\\"prototype\\"],
+  number | symbol
+>;
+
+type ArgFieldsConfig<
+  TArgsType extends ArgsTypesNames
+  > = FieldsConfig<ArgFieldNames<TArgsType>>;
+
+export type ArgConfig<TArgsType extends ArgsTypesNames> = {
+  class?: ClassDecorator[];
+  fields?: ArgFieldsConfig<TArgsType>;
+};
+
+export type ArgsTypesEnhanceMap = {
+  [TArgsType in ArgsTypesNames]?: ArgConfig<TArgsType>;
+};
+
+export function applyArgsTypesEnhanceMap(
+  argsTypesEnhanceMap: ArgsTypesEnhanceMap,
+) {
+  for (const argsTypesEnhanceMapKey of Object.keys(argsTypesEnhanceMap)) {
+    const argsTypeName = argsTypesEnhanceMapKey as keyof typeof argsTypesEnhanceMap;
+    const typeConfig = argsTypesEnhanceMap[argsTypeName]!;
+    const typeClass = argsTypes[argsTypeName];
+    const typeTarget = typeClass.prototype;
+    applyTypeClassEnhanceConfig(
+      typeConfig,
+      typeClass,
+      typeTarget,
+      argsInfo[argsTypeName as keyof typeof argsInfo],
+    );
+  }
+}
+
+const relationResolversMap = {
+  Client: relationResolvers.ClientRelationsResolver,
+  Post: relationResolvers.PostRelationsResolver
+};
+const relationResolversInfo = {
+  Client: [\\"posts\\"],
+  Post: [\\"author\\"]
+};
 
 type RelationResolverModelNames = keyof typeof relationResolversMap;
 
@@ -349,6 +285,11 @@ function applyTypeClassEnhanceConfig<
   }
 }
 
+const modelsInfo = {
+  Client: [\\"id\\", \\"email\\"],
+  Post: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"]
+};
+
 type ModelNames = keyof typeof models;
 
 type ModelFieldNames<TModel extends ModelNames> = Exclude<
@@ -383,6 +324,25 @@ export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
     );
   }
 }
+
+const outputsInfo = {
+  AggregateClient: [\\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
+  ClientGroupBy: [\\"id\\", \\"email\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
+  AggregatePost: [\\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
+  PostGroupBy: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
+  AffectedRowsOutput: [\\"count\\"],
+  ClientCount: [\\"posts\\"],
+  ClientCountAggregate: [\\"id\\", \\"email\\", \\"_all\\"],
+  ClientAvgAggregate: [\\"id\\"],
+  ClientSumAggregate: [\\"id\\"],
+  ClientMinAggregate: [\\"id\\", \\"email\\"],
+  ClientMaxAggregate: [\\"id\\", \\"email\\"],
+  PostCountAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_all\\"],
+  PostAvgAggregate: [\\"authorId\\"],
+  PostSumAggregate: [\\"authorId\\"],
+  PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"]
+};
 
 type OutputTypesNames = keyof typeof outputTypes;
 
@@ -421,6 +381,87 @@ export function applyOutputTypesEnhanceMap(
   }
 }
 
+const inputsInfo = {
+  ClientWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\", \\"posts\\"],
+  ClientOrderByWithRelationInput: [\\"id\\", \\"email\\", \\"posts\\"],
+  ClientWhereUniqueInput: [\\"id\\", \\"email\\"],
+  ClientOrderByWithAggregationInput: [\\"id\\", \\"email\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
+  ClientScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\"],
+  PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"author\\", \\"authorId\\", \\"metadata\\"],
+  PostOrderByWithRelationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"author\\", \\"authorId\\", \\"metadata\\"],
+  PostWhereUniqueInput: [\\"uuid\\"],
+  PostOrderByWithAggregationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
+  PostScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
+  ClientCreateInput: [\\"email\\", \\"posts\\"],
+  ClientUpdateInput: [\\"email\\", \\"posts\\"],
+  ClientCreateManyInput: [\\"id\\", \\"email\\"],
+  ClientUpdateManyMutationInput: [\\"email\\"],
+  PostCreateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"author\\"],
+  PostUpdateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"author\\"],
+  PostCreateManyInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
+  PostUpdateManyMutationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  IntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  StringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
+  PostListRelationFilter: [\\"every\\", \\"some\\", \\"none\\"],
+  PostOrderByRelationAggregateInput: [\\"_count\\"],
+  ClientCountOrderByAggregateInput: [\\"id\\", \\"email\\"],
+  ClientAvgOrderByAggregateInput: [\\"id\\"],
+  ClientMaxOrderByAggregateInput: [\\"id\\", \\"email\\"],
+  ClientMinOrderByAggregateInput: [\\"id\\", \\"email\\"],
+  ClientSumOrderByAggregateInput: [\\"id\\"],
+  IntWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
+  StringWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  DateTimeFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  BoolFilter: [\\"equals\\", \\"not\\"],
+  StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
+  ClientRelationFilter: [\\"is\\", \\"isNot\\"],
+  JsonFilter: [\\"equals\\", \\"not\\"],
+  PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
+  PostAvgOrderByAggregateInput: [\\"authorId\\"],
+  PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
+  PostMinOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
+  PostSumOrderByAggregateInput: [\\"authorId\\"],
+  DateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  BoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  StringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  JsonWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  PostCreateNestedManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"createMany\\", \\"connect\\"],
+  StringFieldUpdateOperationsInput: [\\"set\\"],
+  PostUpdateManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"connect\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
+  IntFieldUpdateOperationsInput: [\\"set\\", \\"increment\\", \\"decrement\\", \\"multiply\\", \\"divide\\"],
+  ClientCreateNestedOneWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"connect\\"],
+  DateTimeFieldUpdateOperationsInput: [\\"set\\"],
+  BoolFieldUpdateOperationsInput: [\\"set\\"],
+  NullableStringFieldUpdateOperationsInput: [\\"set\\"],
+  ClientUpdateOneRequiredWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
+  NestedIntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  NestedStringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
+  NestedIntWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
+  NestedFloatFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  NestedStringWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  NestedDateTimeFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  NestedBoolFilter: [\\"equals\\", \\"not\\"],
+  NestedStringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
+  NestedDateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  NestedBoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  NestedStringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  NestedIntNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  NestedJsonFilter: [\\"equals\\", \\"not\\"],
+  PostCreateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostCreateOrConnectWithoutAuthorInput: [\\"where\\", \\"create\\"],
+  PostCreateManyAuthorInputEnvelope: [\\"data\\", \\"skipDuplicates\\"],
+  PostUpsertWithWhereUniqueWithoutAuthorInput: [\\"where\\", \\"update\\", \\"create\\"],
+  PostUpdateWithWhereUniqueWithoutAuthorInput: [\\"where\\", \\"data\\"],
+  PostUpdateManyWithWhereWithoutAuthorInput: [\\"where\\", \\"data\\"],
+  PostScalarWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
+  ClientCreateWithoutPostsInput: [\\"email\\"],
+  ClientCreateOrConnectWithoutPostsInput: [\\"where\\", \\"create\\"],
+  ClientUpsertWithoutPostsInput: [\\"update\\", \\"create\\"],
+  ClientUpdateWithoutPostsInput: [\\"email\\"],
+  PostCreateManyAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostUpdateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
+};
+
 type InputTypesNames = keyof typeof inputTypes;
 
 type InputTypeFieldNames<TInput extends InputTypesNames> = Exclude<
@@ -458,80 +499,44 @@ export function applyInputTypesEnhanceMap(
   }
 }
 
-type ArgsTypesNames = keyof typeof argsTypes;
-
-type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
-  keyof typeof argsTypes[TArgsType][\\"prototype\\"],
-  number | symbol
->;
-
-type ArgFieldsConfig<
-  TArgsType extends ArgsTypesNames
-  > = FieldsConfig<ArgFieldNames<TArgsType>>;
-
-export type ArgConfig<TArgsType extends ArgsTypesNames> = {
-  class?: ClassDecorator[];
-  fields?: ArgFieldsConfig<TArgsType>;
-};
-
-export type ArgsTypesEnhanceMap = {
-  [TArgsType in ArgsTypesNames]?: ArgConfig<TArgsType>;
-};
-
-export function applyArgsTypesEnhanceMap(
-  argsTypesEnhanceMap: ArgsTypesEnhanceMap,
-) {
-  for (const argsTypesEnhanceMapKey of Object.keys(argsTypesEnhanceMap)) {
-    const argsTypeName = argsTypesEnhanceMapKey as keyof typeof argsTypesEnhanceMap;
-    const typeConfig = argsTypesEnhanceMap[argsTypeName]!;
-    const typeClass = argsTypes[argsTypeName];
-    const typeTarget = typeClass.prototype;
-    applyTypeClassEnhanceConfig(
-      typeConfig,
-      typeClass,
-      typeTarget,
-      argsInfo[argsTypeName as keyof typeof argsInfo],
-    );
-  }
-}
-
-
-
-
-
-
-
 "
 `;
 
 exports[`resolvers enhance should emit emit enhance file properly: mainIndex 1`] = `
-"import { NonEmptyArray } from \\"type-graphql\\";
-import * as crudResolversImport from \\"./resolvers/crud/resolvers-crud.index\\";
+"import * as crudResolversImport from \\"./resolvers/crud/resolvers-crud.index\\";
 import * as relationResolversImport from \\"./resolvers/relations/resolvers.index\\";
+import { NonEmptyArray } from \\"type-graphql\\";
 
 export * from \\"./enums\\";
 export * from \\"./models\\";
 export * from \\"./resolvers/crud\\";
+
+export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
+
 export * from \\"./resolvers/relations\\";
+
+export const relationResolvers = Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>;
+
 export * from \\"./resolvers/inputs\\";
 export * from \\"./resolvers/outputs\\";
 export * from \\"./enhance\\";
 export * from \\"./scalars\\";
 
-export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
-export const relationResolvers = Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>;
-export const resolvers = [...crudResolvers, ...relationResolvers] as unknown as NonEmptyArray<Function>;
+export const resolvers = [
+  ...crudResolvers,
+  ...relationResolvers,
+] as unknown as NonEmptyArray<Function>;
 "
 `;
 
 exports[`resolvers enhance should emit enhance file properly even in model has no relations: enhance 1`] = `
 "import { ClassType } from \\"type-graphql\\";
 import * as crudResolvers from \\"./resolvers/crud/resolvers-crud.index\\";
+import * as argsTypes from \\"./resolvers/crud/args.index\\";
 import * as actionResolvers from \\"./resolvers/crud/resolvers-actions.index\\";
 import * as models from \\"./models\\";
 import * as outputTypes from \\"./resolvers/outputs\\";
 import * as inputTypes from \\"./resolvers/inputs\\";
-import * as argsTypes from \\"./resolvers/crud/args.index\\";
 
 const crudResolversMap = {
   Post: crudResolvers.PostCrudResolver
@@ -552,58 +557,8 @@ const actionResolversMap = {
     groupByPost: actionResolvers.GroupByPostResolver
   }
 };
-const resolversInfo = {
+const crudResolversInfo = {
   Post: [\\"post\\", \\"findFirstPost\\", \\"posts\\", \\"createPost\\", \\"createManyPost\\", \\"deletePost\\", \\"updatePost\\", \\"deleteManyPost\\", \\"updateManyPost\\", \\"upsertPost\\", \\"aggregatePost\\", \\"groupByPost\\"]
-};
-const modelsInfo = {
-  Post: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
-};
-const inputsInfo = {
-  PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostOrderByWithRelationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostWhereUniqueInput: [\\"uuid\\"],
-  PostOrderByWithAggregationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_count\\", \\"_max\\", \\"_min\\"],
-  PostScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostCreateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostUpdateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostCreateManyInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostUpdateManyMutationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  StringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
-  DateTimeFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  BoolFilter: [\\"equals\\", \\"not\\"],
-  StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
-  JsonFilter: [\\"equals\\", \\"not\\"],
-  PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
-  PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
-  PostMinOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
-  StringWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  DateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  BoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  StringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  JsonWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  StringFieldUpdateOperationsInput: [\\"set\\"],
-  DateTimeFieldUpdateOperationsInput: [\\"set\\"],
-  BoolFieldUpdateOperationsInput: [\\"set\\"],
-  NullableStringFieldUpdateOperationsInput: [\\"set\\"],
-  NestedStringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
-  NestedDateTimeFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedBoolFilter: [\\"equals\\", \\"not\\"],
-  NestedStringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
-  NestedStringWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  NestedIntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedDateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  NestedBoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  NestedStringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  NestedIntNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedJsonFilter: [\\"equals\\", \\"not\\"]
-};
-const outputsInfo = {
-  AggregatePost: [\\"_count\\", \\"_min\\", \\"_max\\"],
-  PostGroupBy: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  AffectedRowsOutput: [\\"count\\"],
-  PostCountAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_all\\"],
-  PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"]
 };
 const argsInfo = {
   FindUniquePostArgs: [\\"where\\"],
@@ -644,7 +599,7 @@ export function applyResolversEnhanceMap(
     const actionResolversConfig = actionResolversMap[modelName];
     if (resolverActionsConfig._all) {
       const allActionsDecorators = resolverActionsConfig._all;
-      const resolverActionNames = resolversInfo[modelName as keyof typeof resolversInfo];
+      const resolverActionNames = crudResolversInfo[modelName as keyof typeof crudResolversInfo];
       for (const resolverActionName of resolverActionNames) {
         const actionTarget = (actionResolversConfig[
           resolverActionName as keyof typeof actionResolversConfig
@@ -686,6 +641,43 @@ export function applyResolversEnhanceMap(
         );
       }
     }
+  }
+}
+
+type ArgsTypesNames = keyof typeof argsTypes;
+
+type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
+  keyof typeof argsTypes[TArgsType][\\"prototype\\"],
+  number | symbol
+>;
+
+type ArgFieldsConfig<
+  TArgsType extends ArgsTypesNames
+  > = FieldsConfig<ArgFieldNames<TArgsType>>;
+
+export type ArgConfig<TArgsType extends ArgsTypesNames> = {
+  class?: ClassDecorator[];
+  fields?: ArgFieldsConfig<TArgsType>;
+};
+
+export type ArgsTypesEnhanceMap = {
+  [TArgsType in ArgsTypesNames]?: ArgConfig<TArgsType>;
+};
+
+export function applyArgsTypesEnhanceMap(
+  argsTypesEnhanceMap: ArgsTypesEnhanceMap,
+) {
+  for (const argsTypesEnhanceMapKey of Object.keys(argsTypesEnhanceMap)) {
+    const argsTypeName = argsTypesEnhanceMapKey as keyof typeof argsTypesEnhanceMap;
+    const typeConfig = argsTypesEnhanceMap[argsTypeName]!;
+    const typeClass = argsTypes[argsTypeName];
+    const typeTarget = typeClass.prototype;
+    applyTypeClassEnhanceConfig(
+      typeConfig,
+      typeClass,
+      typeTarget,
+      argsInfo[argsTypeName as keyof typeof argsInfo],
+    );
   }
 }
 
@@ -733,6 +725,10 @@ function applyTypeClassEnhanceConfig<
   }
 }
 
+const modelsInfo = {
+  Post: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
+};
+
 type ModelNames = keyof typeof models;
 
 type ModelFieldNames<TModel extends ModelNames> = Exclude<
@@ -767,6 +763,15 @@ export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
     );
   }
 }
+
+const outputsInfo = {
+  AggregatePost: [\\"_count\\", \\"_min\\", \\"_max\\"],
+  PostGroupBy: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  AffectedRowsOutput: [\\"count\\"],
+  PostCountAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_all\\"],
+  PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"]
+};
 
 type OutputTypesNames = keyof typeof outputTypes;
 
@@ -805,6 +810,46 @@ export function applyOutputTypesEnhanceMap(
   }
 }
 
+const inputsInfo = {
+  PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostOrderByWithRelationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostWhereUniqueInput: [\\"uuid\\"],
+  PostOrderByWithAggregationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_count\\", \\"_max\\", \\"_min\\"],
+  PostScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostCreateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostUpdateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostCreateManyInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostUpdateManyMutationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  StringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
+  DateTimeFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  BoolFilter: [\\"equals\\", \\"not\\"],
+  StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
+  JsonFilter: [\\"equals\\", \\"not\\"],
+  PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
+  PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
+  PostMinOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
+  StringWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  DateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  BoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  StringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  JsonWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  StringFieldUpdateOperationsInput: [\\"set\\"],
+  DateTimeFieldUpdateOperationsInput: [\\"set\\"],
+  BoolFieldUpdateOperationsInput: [\\"set\\"],
+  NullableStringFieldUpdateOperationsInput: [\\"set\\"],
+  NestedStringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
+  NestedDateTimeFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  NestedBoolFilter: [\\"equals\\", \\"not\\"],
+  NestedStringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
+  NestedStringWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  NestedIntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  NestedDateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  NestedBoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  NestedStringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  NestedIntNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
+  NestedJsonFilter: [\\"equals\\", \\"not\\"]
+};
+
 type InputTypesNames = keyof typeof inputTypes;
 
 type InputTypeFieldNames<TInput extends InputTypesNames> = Exclude<
@@ -841,48 +886,6 @@ export function applyInputTypesEnhanceMap(
     );
   }
 }
-
-type ArgsTypesNames = keyof typeof argsTypes;
-
-type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
-  keyof typeof argsTypes[TArgsType][\\"prototype\\"],
-  number | symbol
->;
-
-type ArgFieldsConfig<
-  TArgsType extends ArgsTypesNames
-  > = FieldsConfig<ArgFieldNames<TArgsType>>;
-
-export type ArgConfig<TArgsType extends ArgsTypesNames> = {
-  class?: ClassDecorator[];
-  fields?: ArgFieldsConfig<TArgsType>;
-};
-
-export type ArgsTypesEnhanceMap = {
-  [TArgsType in ArgsTypesNames]?: ArgConfig<TArgsType>;
-};
-
-export function applyArgsTypesEnhanceMap(
-  argsTypesEnhanceMap: ArgsTypesEnhanceMap,
-) {
-  for (const argsTypesEnhanceMapKey of Object.keys(argsTypesEnhanceMap)) {
-    const argsTypeName = argsTypesEnhanceMapKey as keyof typeof argsTypesEnhanceMap;
-    const typeConfig = argsTypesEnhanceMap[argsTypeName]!;
-    const typeClass = argsTypes[argsTypeName];
-    const typeTarget = typeClass.prototype;
-    applyTypeClassEnhanceConfig(
-      typeConfig,
-      typeClass,
-      typeTarget,
-      argsInfo[argsTypeName as keyof typeof argsInfo],
-    );
-  }
-}
-
-
-
-
-
 
 "
 `;

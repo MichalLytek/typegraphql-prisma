@@ -4,11 +4,11 @@ import {
   generatePrismaNamespaceImport,
 } from "./imports";
 
-import { GenerateCodeOptions } from "./options";
+import { GeneratorOptions } from "./options";
 
 export function generateCustomScalars(
   sourceFile: SourceFile,
-  options: GenerateCodeOptions,
+  options: GeneratorOptions,
 ) {
   generatePrismaNamespaceImport(sourceFile, options);
   generateGraphQLScalarTypeImport(sourceFile);

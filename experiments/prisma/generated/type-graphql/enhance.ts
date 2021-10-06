@@ -1,11 +1,11 @@
 import { ClassType } from "type-graphql";
 import * as crudResolvers from "./resolvers/crud/resolvers-crud.index";
+import * as argsTypes from "./resolvers/crud/args.index";
 import * as actionResolvers from "./resolvers/crud/resolvers-actions.index";
 import * as relationResolvers from "./resolvers/relations/resolvers.index";
 import * as models from "./models";
 import * as outputTypes from "./resolvers/outputs";
 import * as inputTypes from "./resolvers/inputs";
-import * as argsTypes from "./resolvers/crud/args.index";
 
 const crudResolversMap = {
   MainUser: crudResolvers.MainUserCrudResolver,
@@ -17,14 +17,6 @@ const crudResolversMap = {
   Problem: crudResolvers.ProblemCrudResolver,
   Creator: crudResolvers.CreatorCrudResolver,
   NativeTypeModel: crudResolvers.NativeTypeModelCrudResolver
-};
-const relationResolversMap = {
-  MainUser: relationResolvers.MainUserRelationsResolver,
-  Post: relationResolvers.PostRelationsResolver,
-  Movie: relationResolvers.MovieRelationsResolver,
-  Director: relationResolvers.DirectorRelationsResolver,
-  Problem: relationResolvers.ProblemRelationsResolver,
-  Creator: relationResolvers.CreatorRelationsResolver
 };
 const actionResolversMap = {
   MainUser: {
@@ -154,7 +146,7 @@ const actionResolversMap = {
     groupByNativeTypeModel: actionResolvers.GroupByNativeTypeModelResolver
   }
 };
-const resolversInfo = {
+const crudResolversInfo = {
   MainUser: ["mainUser", "findFirstMainUser", "mainUsers", "createMainUser", "createManyMainUser", "deleteMainUser", "updateMainUser", "deleteManyMainUser", "updateManyMainUser", "upsertMainUser", "aggregateMainUser", "groupByMainUser"],
   Post: ["post", "findFirstPost", "posts", "createPost", "createManyPost", "deletePost", "updatePost", "deleteManyPost", "updateManyPost", "upsertPost", "aggregatePost", "groupByPost"],
   Category: ["category", "findFirstCategory", "categories", "createCategory", "createManyCategory", "deleteCategory", "updateCategory", "deleteManyCategory", "updateManyCategory", "upsertCategory", "aggregateCategory", "groupByCategory"],
@@ -165,6 +157,231 @@ const resolversInfo = {
   Creator: ["creator", "findFirstCreator", "creators", "createCreator", "createManyCreator", "deleteCreator", "updateCreator", "deleteManyCreator", "updateManyCreator", "upsertCreator", "aggregateCreator", "groupByCreator"],
   NativeTypeModel: ["nativeTypeModel", "findFirstNativeTypeModel", "nativeTypeModels", "createNativeTypeModel", "createManyNativeTypeModel", "deleteNativeTypeModel", "updateNativeTypeModel", "deleteManyNativeTypeModel", "updateManyNativeTypeModel", "upsertNativeTypeModel", "aggregateNativeTypeModel", "groupByNativeTypeModel"]
 };
+const argsInfo = {
+  FindUniqueMainUserArgs: ["where"],
+  FindFirstMainUserArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyMainUserArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreateMainUserArgs: ["data"],
+  CreateManyMainUserArgs: ["data", "skipDuplicates"],
+  DeleteMainUserArgs: ["where"],
+  UpdateMainUserArgs: ["data", "where"],
+  DeleteManyMainUserArgs: ["where"],
+  UpdateManyMainUserArgs: ["data", "where"],
+  UpsertMainUserArgs: ["where", "create", "update"],
+  AggregateMainUserArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByMainUserArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  FindUniquePostArgs: ["where"],
+  FindFirstPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreatePostArgs: ["data"],
+  CreateManyPostArgs: ["data", "skipDuplicates"],
+  DeletePostArgs: ["where"],
+  UpdatePostArgs: ["data", "where"],
+  DeleteManyPostArgs: ["where"],
+  UpdateManyPostArgs: ["data", "where"],
+  UpsertPostArgs: ["where", "create", "update"],
+  AggregatePostArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByPostArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  FindUniqueCategoryArgs: ["where"],
+  FindFirstCategoryArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyCategoryArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreateCategoryArgs: ["data"],
+  CreateManyCategoryArgs: ["data", "skipDuplicates"],
+  DeleteCategoryArgs: ["where"],
+  UpdateCategoryArgs: ["data", "where"],
+  DeleteManyCategoryArgs: ["where"],
+  UpdateManyCategoryArgs: ["data", "where"],
+  UpsertCategoryArgs: ["where", "create", "update"],
+  AggregateCategoryArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByCategoryArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  FindUniquePatientArgs: ["where"],
+  FindFirstPatientArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyPatientArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreatePatientArgs: ["data"],
+  CreateManyPatientArgs: ["data", "skipDuplicates"],
+  DeletePatientArgs: ["where"],
+  UpdatePatientArgs: ["data", "where"],
+  DeleteManyPatientArgs: ["where"],
+  UpdateManyPatientArgs: ["data", "where"],
+  UpsertPatientArgs: ["where", "create", "update"],
+  AggregatePatientArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByPatientArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  FindUniqueMovieArgs: ["where"],
+  FindFirstMovieArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyMovieArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreateMovieArgs: ["data"],
+  CreateManyMovieArgs: ["data", "skipDuplicates"],
+  DeleteMovieArgs: ["where"],
+  UpdateMovieArgs: ["data", "where"],
+  DeleteManyMovieArgs: ["where"],
+  UpdateManyMovieArgs: ["data", "where"],
+  UpsertMovieArgs: ["where", "create", "update"],
+  AggregateMovieArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByMovieArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  FindUniqueDirectorArgs: ["where"],
+  FindFirstDirectorArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyDirectorArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreateDirectorArgs: ["data"],
+  CreateManyDirectorArgs: ["data", "skipDuplicates"],
+  DeleteDirectorArgs: ["where"],
+  UpdateDirectorArgs: ["data", "where"],
+  DeleteManyDirectorArgs: ["where"],
+  UpdateManyDirectorArgs: ["data", "where"],
+  UpsertDirectorArgs: ["where", "create", "update"],
+  AggregateDirectorArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByDirectorArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  FindUniqueProblemArgs: ["where"],
+  FindFirstProblemArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyProblemArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreateProblemArgs: ["data"],
+  CreateManyProblemArgs: ["data", "skipDuplicates"],
+  DeleteProblemArgs: ["where"],
+  UpdateProblemArgs: ["data", "where"],
+  DeleteManyProblemArgs: ["where"],
+  UpdateManyProblemArgs: ["data", "where"],
+  UpsertProblemArgs: ["where", "create", "update"],
+  AggregateProblemArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByProblemArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  FindUniqueCreatorArgs: ["where"],
+  FindFirstCreatorArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyCreatorArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreateCreatorArgs: ["data"],
+  CreateManyCreatorArgs: ["data", "skipDuplicates"],
+  DeleteCreatorArgs: ["where"],
+  UpdateCreatorArgs: ["data", "where"],
+  DeleteManyCreatorArgs: ["where"],
+  UpdateManyCreatorArgs: ["data", "where"],
+  UpsertCreatorArgs: ["where", "create", "update"],
+  AggregateCreatorArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByCreatorArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  FindUniqueNativeTypeModelArgs: ["where"],
+  FindFirstNativeTypeModelArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyNativeTypeModelArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  CreateNativeTypeModelArgs: ["data"],
+  CreateManyNativeTypeModelArgs: ["data", "skipDuplicates"],
+  DeleteNativeTypeModelArgs: ["where"],
+  UpdateNativeTypeModelArgs: ["data", "where"],
+  DeleteManyNativeTypeModelArgs: ["where"],
+  UpdateManyNativeTypeModelArgs: ["data", "where"],
+  UpsertNativeTypeModelArgs: ["where", "create", "update"],
+  AggregateNativeTypeModelArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  GroupByNativeTypeModelArgs: ["where", "orderBy", "by", "having", "take", "skip"]
+};
+
+type ResolverModelNames = keyof typeof crudResolversMap;
+
+type ModelResolverActionNames<
+  TModel extends ResolverModelNames
+  > = keyof typeof crudResolversMap[TModel]["prototype"];
+
+export type ResolverActionsConfig<
+  TModel extends ResolverModelNames
+  > = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
+
+export type ResolversEnhanceMap = {
+  [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
+};
+
+export function applyResolversEnhanceMap(
+  resolversEnhanceMap: ResolversEnhanceMap,
+) {
+  for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
+    const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;
+    const crudTarget = crudResolversMap[modelName].prototype;
+    const resolverActionsConfig = resolversEnhanceMap[modelName]!;
+    const actionResolversConfig = actionResolversMap[modelName];
+    if (resolverActionsConfig._all) {
+      const allActionsDecorators = resolverActionsConfig._all;
+      const resolverActionNames = crudResolversInfo[modelName as keyof typeof crudResolversInfo];
+      for (const resolverActionName of resolverActionNames) {
+        const actionTarget = (actionResolversConfig[
+          resolverActionName as keyof typeof actionResolversConfig
+        ] as Function).prototype;
+        for (const allActionsDecorator of allActionsDecorators) {
+          allActionsDecorator(
+            crudTarget,
+            resolverActionName,
+            Object.getOwnPropertyDescriptor(crudTarget, resolverActionName)!,
+          );
+          allActionsDecorator(
+            actionTarget,
+            resolverActionName,
+            Object.getOwnPropertyDescriptor(actionTarget, resolverActionName)!,
+          );
+        }
+      }
+    }
+    const resolverActionsToApply = Object.keys(resolverActionsConfig).filter(
+      it => it !== "_all"
+    );
+    for (const resolverActionName of resolverActionsToApply) {
+      const decorators = resolverActionsConfig[
+        resolverActionName as keyof typeof resolverActionsConfig
+      ] as MethodDecorator[];
+      const actionTarget = (actionResolversConfig[
+        resolverActionName as keyof typeof actionResolversConfig
+      ] as Function).prototype;
+      for (const decorator of decorators) {
+        decorator(
+          crudTarget,
+          resolverActionName,
+          Object.getOwnPropertyDescriptor(crudTarget, resolverActionName)!,
+        );
+        decorator(
+          actionTarget,
+          resolverActionName,
+          Object.getOwnPropertyDescriptor(actionTarget, resolverActionName)!,
+        );
+      }
+    }
+  }
+}
+
+type ArgsTypesNames = keyof typeof argsTypes;
+
+type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
+  keyof typeof argsTypes[TArgsType]["prototype"],
+  number | symbol
+>;
+
+type ArgFieldsConfig<
+  TArgsType extends ArgsTypesNames
+  > = FieldsConfig<ArgFieldNames<TArgsType>>;
+
+export type ArgConfig<TArgsType extends ArgsTypesNames> = {
+  class?: ClassDecorator[];
+  fields?: ArgFieldsConfig<TArgsType>;
+};
+
+export type ArgsTypesEnhanceMap = {
+  [TArgsType in ArgsTypesNames]?: ArgConfig<TArgsType>;
+};
+
+export function applyArgsTypesEnhanceMap(
+  argsTypesEnhanceMap: ArgsTypesEnhanceMap,
+) {
+  for (const argsTypesEnhanceMapKey of Object.keys(argsTypesEnhanceMap)) {
+    const argsTypeName = argsTypesEnhanceMapKey as keyof typeof argsTypesEnhanceMap;
+    const typeConfig = argsTypesEnhanceMap[argsTypeName]!;
+    const typeClass = argsTypes[argsTypeName];
+    const typeTarget = typeClass.prototype;
+    applyTypeClassEnhanceConfig(
+      typeConfig,
+      typeClass,
+      typeTarget,
+      argsInfo[argsTypeName as keyof typeof argsInfo],
+    );
+  }
+}
+
+const relationResolversMap = {
+  MainUser: relationResolvers.MainUserRelationsResolver,
+  Post: relationResolvers.PostRelationsResolver,
+  Movie: relationResolvers.MovieRelationsResolver,
+  Director: relationResolvers.DirectorRelationsResolver,
+  Problem: relationResolvers.ProblemRelationsResolver,
+  Creator: relationResolvers.CreatorRelationsResolver
+};
 const relationResolversInfo = {
   MainUser: ["posts"],
   Post: ["author"],
@@ -173,6 +390,102 @@ const relationResolversInfo = {
   Problem: ["likedBy", "creator"],
   Creator: ["likes", "problems"]
 };
+
+type RelationResolverModelNames = keyof typeof relationResolversMap;
+
+type RelationResolverActionNames<
+  TModel extends RelationResolverModelNames
+  > = keyof typeof relationResolversMap[TModel]["prototype"];
+
+export type RelationResolverActionsConfig<TModel extends RelationResolverModelNames>
+  = Partial<Record<RelationResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
+
+export type RelationResolversEnhanceMap = {
+  [TModel in RelationResolverModelNames]?: RelationResolverActionsConfig<TModel>;
+};
+
+export function applyRelationResolversEnhanceMap(
+  relationResolversEnhanceMap: RelationResolversEnhanceMap,
+) {
+  for (const relationResolversEnhanceMapKey of Object.keys(relationResolversEnhanceMap)) {
+    const modelName = relationResolversEnhanceMapKey as keyof typeof relationResolversEnhanceMap;
+    const relationResolverTarget = relationResolversMap[modelName].prototype;
+    const relationResolverActionsConfig = relationResolversEnhanceMap[modelName]!;
+    if (relationResolverActionsConfig._all) {
+      const allActionsDecorators = relationResolverActionsConfig._all;
+      const relationResolverActionNames = relationResolversInfo[modelName as keyof typeof relationResolversInfo];
+      for (const relationResolverActionName of relationResolverActionNames) {
+        for (const allActionsDecorator of allActionsDecorators) {
+          allActionsDecorator(
+            relationResolverTarget,
+            relationResolverActionName,
+            Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
+          );
+        }
+      }
+    }
+    const relationResolverActionsToApply = Object.keys(relationResolverActionsConfig).filter(
+      it => it !== "_all"
+    );
+    for (const relationResolverActionName of relationResolverActionsToApply) {
+      const decorators = relationResolverActionsConfig[
+        relationResolverActionName as keyof typeof relationResolverActionsConfig
+      ] as MethodDecorator[];
+      for (const decorator of decorators) {
+        decorator(
+          relationResolverTarget,
+          relationResolverActionName,
+          Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
+        );
+      }
+    }
+  }
+}
+
+type TypeConfig = {
+  class?: ClassDecorator[];
+  fields?: FieldsConfig;
+};
+
+type FieldsConfig<TTypeKeys extends string = string> = Partial<
+  Record<TTypeKeys | "_all", PropertyDecorator[]>
+>;
+
+function applyTypeClassEnhanceConfig<
+  TEnhanceConfig extends TypeConfig,
+  TType extends object
+>(
+  enhanceConfig: TEnhanceConfig,
+  typeClass: ClassType<TType>,
+  typePrototype: TType,
+  typeFieldNames: string[]
+) {
+  if (enhanceConfig.class) {
+    for (const decorator of enhanceConfig.class) {
+      decorator(typeClass);
+    }
+  }
+  if (enhanceConfig.fields) {
+    if (enhanceConfig.fields._all) {
+      const allFieldsDecorators = enhanceConfig.fields._all;
+      for (const typeFieldName of typeFieldNames) {
+        for (const allFieldsDecorator of allFieldsDecorators) {
+          allFieldsDecorator(typePrototype, typeFieldName);
+        }
+      }
+    }
+    const configFieldsToApply = Object.keys(enhanceConfig.fields).filter(
+      it => it !== "_all"
+    );
+    for (const typeFieldName of configFieldsToApply) {
+      const fieldDecorators = enhanceConfig.fields[typeFieldName]!;
+      for (const fieldDecorator of fieldDecorators) {
+        fieldDecorator(typePrototype, typeFieldName);
+      }
+    }
+  }
+}
+
 const modelsInfo = {
   MainUser: ["id", "email", "firstName", "age", "accountBalance", "amount", "role", "grades", "aliases"],
   Post: ["uuid", "createdAt", "updatedAt", "published", "title", "content", "authorId", "kind", "metadata"],
@@ -184,6 +497,144 @@ const modelsInfo = {
   Creator: ["id", "name"],
   NativeTypeModel: ["id", "bigInt", "byteA", "decimal"]
 };
+
+type ModelNames = keyof typeof models;
+
+type ModelFieldNames<TModel extends ModelNames> = Exclude<
+  keyof typeof models[TModel]["prototype"],
+  number | symbol
+>;
+
+type ModelFieldsConfig<TModel extends ModelNames> = FieldsConfig<
+  ModelFieldNames<TModel>
+>;
+
+export type ModelConfig<TModel extends ModelNames> = {
+  class?: ClassDecorator[];
+  fields?: ModelFieldsConfig<TModel>;
+};
+
+export type ModelsEnhanceMap = {
+  [TModel in ModelNames]?: ModelConfig<TModel>;
+};
+
+export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
+  for (const modelsEnhanceMapKey of Object.keys(modelsEnhanceMap)) {
+    const modelName = modelsEnhanceMapKey as keyof typeof modelsEnhanceMap;
+    const modelConfig = modelsEnhanceMap[modelName]!;
+    const modelClass = models[modelName];
+    const modelTarget = modelClass.prototype;
+    applyTypeClassEnhanceConfig(
+      modelConfig,
+      modelClass,
+      modelTarget,
+      modelsInfo[modelName as keyof typeof modelsInfo],
+    );
+  }
+}
+
+const outputsInfo = {
+  AggregateMainUser: ["_count", "_avg", "_sum", "_min", "_max"],
+  MainUserGroupBy: ["id", "email", "name", "age", "balance", "amount", "role", "grades", "aliases", "_count", "_avg", "_sum", "_min", "_max"],
+  AggregatePost: ["_count", "_avg", "_sum", "_min", "_max"],
+  PostGroupBy: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "authorId", "editorId", "kind", "metadata", "_count", "_avg", "_sum", "_min", "_max"],
+  AggregateCategory: ["_count", "_avg", "_sum", "_min", "_max"],
+  CategoryGroupBy: ["name", "slug", "number", "_count", "_avg", "_sum", "_min", "_max"],
+  AggregatePatient: ["_count", "_min", "_max"],
+  PatientGroupBy: ["firstName", "lastName", "email", "_count", "_min", "_max"],
+  AggregateMovie: ["_count", "_min", "_max"],
+  MovieGroupBy: ["directorFirstName", "directorLastName", "title", "_count", "_min", "_max"],
+  AggregateDirector: ["_count", "_min", "_max"],
+  DirectorGroupBy: ["firstName", "lastName", "_count", "_min", "_max"],
+  AggregateProblem: ["_count", "_avg", "_sum", "_min", "_max"],
+  ProblemGroupBy: ["id", "problemText", "creatorId", "_count", "_avg", "_sum", "_min", "_max"],
+  AggregateCreator: ["_count", "_avg", "_sum", "_min", "_max"],
+  CreatorGroupBy: ["id", "name", "_count", "_avg", "_sum", "_min", "_max"],
+  AggregateNativeTypeModel: ["_count", "_avg", "_sum", "_min", "_max"],
+  NativeTypeModelGroupBy: ["id", "bigInt", "byteA", "decimal", "_count", "_avg", "_sum", "_min", "_max"],
+  AffectedRowsOutput: ["count"],
+  MainUserCount: ["posts", "editorPosts"],
+  MainUserCountAggregate: ["id", "email", "name", "age", "balance", "amount", "role", "grades", "aliases", "_all"],
+  MainUserAvgAggregate: ["id", "age", "balance", "amount", "grades"],
+  MainUserSumAggregate: ["id", "age", "balance", "amount", "grades"],
+  MainUserMinAggregate: ["id", "email", "name", "age", "balance", "amount", "role"],
+  MainUserMaxAggregate: ["id", "email", "name", "age", "balance", "amount", "role"],
+  PostCountAggregate: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "authorId", "editorId", "kind", "metadata", "_all"],
+  PostAvgAggregate: ["authorId", "editorId"],
+  PostSumAggregate: ["authorId", "editorId"],
+  PostMinAggregate: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "authorId", "editorId", "kind"],
+  PostMaxAggregate: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "authorId", "editorId", "kind"],
+  CategoryCountAggregate: ["name", "slug", "number", "_all"],
+  CategoryAvgAggregate: ["number"],
+  CategorySumAggregate: ["number"],
+  CategoryMinAggregate: ["name", "slug", "number"],
+  CategoryMaxAggregate: ["name", "slug", "number"],
+  PatientCountAggregate: ["firstName", "lastName", "email", "_all"],
+  PatientMinAggregate: ["firstName", "lastName", "email"],
+  PatientMaxAggregate: ["firstName", "lastName", "email"],
+  MovieCountAggregate: ["directorFirstName", "directorLastName", "title", "_all"],
+  MovieMinAggregate: ["directorFirstName", "directorLastName", "title"],
+  MovieMaxAggregate: ["directorFirstName", "directorLastName", "title"],
+  DirectorCount: ["movies"],
+  DirectorCountAggregate: ["firstName", "lastName", "_all"],
+  DirectorMinAggregate: ["firstName", "lastName"],
+  DirectorMaxAggregate: ["firstName", "lastName"],
+  ProblemCount: ["likedBy"],
+  ProblemCountAggregate: ["id", "problemText", "creatorId", "_all"],
+  ProblemAvgAggregate: ["id", "creatorId"],
+  ProblemSumAggregate: ["id", "creatorId"],
+  ProblemMinAggregate: ["id", "problemText", "creatorId"],
+  ProblemMaxAggregate: ["id", "problemText", "creatorId"],
+  CreatorCount: ["likes", "problems"],
+  CreatorCountAggregate: ["id", "name", "_all"],
+  CreatorAvgAggregate: ["id"],
+  CreatorSumAggregate: ["id"],
+  CreatorMinAggregate: ["id", "name"],
+  CreatorMaxAggregate: ["id", "name"],
+  NativeTypeModelCountAggregate: ["id", "bigInt", "byteA", "decimal", "_all"],
+  NativeTypeModelAvgAggregate: ["id", "bigInt", "decimal"],
+  NativeTypeModelSumAggregate: ["id", "bigInt", "decimal"],
+  NativeTypeModelMinAggregate: ["id", "bigInt", "byteA", "decimal"],
+  NativeTypeModelMaxAggregate: ["id", "bigInt", "byteA", "decimal"]
+};
+
+type OutputTypesNames = keyof typeof outputTypes;
+
+type OutputTypeFieldNames<TOutput extends OutputTypesNames> = Exclude<
+  keyof typeof outputTypes[TOutput]["prototype"],
+  number | symbol
+>;
+
+type OutputTypeFieldsConfig<
+  TOutput extends OutputTypesNames
+  > = FieldsConfig<OutputTypeFieldNames<TOutput>>;
+
+export type OutputTypeConfig<TOutput extends OutputTypesNames> = {
+  class?: ClassDecorator[];
+  fields?: OutputTypeFieldsConfig<TOutput>;
+};
+
+export type OutputTypesEnhanceMap = {
+  [TOutput in OutputTypesNames]?: OutputTypeConfig<TOutput>;
+};
+
+export function applyOutputTypesEnhanceMap(
+  outputTypesEnhanceMap: OutputTypesEnhanceMap,
+) {
+  for (const outputTypeEnhanceMapKey of Object.keys(outputTypesEnhanceMap)) {
+    const outputTypeName = outputTypeEnhanceMapKey as keyof typeof outputTypesEnhanceMap;
+    const typeConfig = outputTypesEnhanceMap[outputTypeName]!;
+    const typeClass = outputTypes[outputTypeName];
+    const typeTarget = typeClass.prototype;
+    applyTypeClassEnhanceConfig(
+      typeConfig,
+      typeClass,
+      typeTarget,
+      outputsInfo[outputTypeName as keyof typeof outputsInfo],
+    );
+  }
+}
+
 const inputsInfo = {
   MainUserWhereInput: ["AND", "OR", "NOT", "id", "email", "firstName", "age", "accountBalance", "amount", "clientPosts", "role", "editorPosts", "grades", "aliases"],
   MainUserOrderByWithRelationInput: ["id", "email", "firstName", "age", "accountBalance", "amount", "clientPosts", "role", "editorPosts", "grades", "aliases"],
@@ -477,416 +928,6 @@ const inputsInfo = {
   ProblemUpdateWithoutLikedByInput: ["problemText", "creator"],
   ProblemUpdateWithoutCreatorInput: ["problemText", "likedBy"]
 };
-const outputsInfo = {
-  AggregateMainUser: ["_count", "_avg", "_sum", "_min", "_max"],
-  MainUserGroupBy: ["id", "email", "name", "age", "balance", "amount", "role", "grades", "aliases", "_count", "_avg", "_sum", "_min", "_max"],
-  AggregatePost: ["_count", "_avg", "_sum", "_min", "_max"],
-  PostGroupBy: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "authorId", "editorId", "kind", "metadata", "_count", "_avg", "_sum", "_min", "_max"],
-  AggregateCategory: ["_count", "_avg", "_sum", "_min", "_max"],
-  CategoryGroupBy: ["name", "slug", "number", "_count", "_avg", "_sum", "_min", "_max"],
-  AggregatePatient: ["_count", "_min", "_max"],
-  PatientGroupBy: ["firstName", "lastName", "email", "_count", "_min", "_max"],
-  AggregateMovie: ["_count", "_min", "_max"],
-  MovieGroupBy: ["directorFirstName", "directorLastName", "title", "_count", "_min", "_max"],
-  AggregateDirector: ["_count", "_min", "_max"],
-  DirectorGroupBy: ["firstName", "lastName", "_count", "_min", "_max"],
-  AggregateProblem: ["_count", "_avg", "_sum", "_min", "_max"],
-  ProblemGroupBy: ["id", "problemText", "creatorId", "_count", "_avg", "_sum", "_min", "_max"],
-  AggregateCreator: ["_count", "_avg", "_sum", "_min", "_max"],
-  CreatorGroupBy: ["id", "name", "_count", "_avg", "_sum", "_min", "_max"],
-  AggregateNativeTypeModel: ["_count", "_avg", "_sum", "_min", "_max"],
-  NativeTypeModelGroupBy: ["id", "bigInt", "byteA", "decimal", "_count", "_avg", "_sum", "_min", "_max"],
-  AffectedRowsOutput: ["count"],
-  MainUserCount: ["posts", "editorPosts"],
-  MainUserCountAggregate: ["id", "email", "name", "age", "balance", "amount", "role", "grades", "aliases", "_all"],
-  MainUserAvgAggregate: ["id", "age", "balance", "amount", "grades"],
-  MainUserSumAggregate: ["id", "age", "balance", "amount", "grades"],
-  MainUserMinAggregate: ["id", "email", "name", "age", "balance", "amount", "role"],
-  MainUserMaxAggregate: ["id", "email", "name", "age", "balance", "amount", "role"],
-  PostCountAggregate: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "authorId", "editorId", "kind", "metadata", "_all"],
-  PostAvgAggregate: ["authorId", "editorId"],
-  PostSumAggregate: ["authorId", "editorId"],
-  PostMinAggregate: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "authorId", "editorId", "kind"],
-  PostMaxAggregate: ["uuid", "createdAt", "updatedAt", "published", "title", "subtitle", "content", "authorId", "editorId", "kind"],
-  CategoryCountAggregate: ["name", "slug", "number", "_all"],
-  CategoryAvgAggregate: ["number"],
-  CategorySumAggregate: ["number"],
-  CategoryMinAggregate: ["name", "slug", "number"],
-  CategoryMaxAggregate: ["name", "slug", "number"],
-  PatientCountAggregate: ["firstName", "lastName", "email", "_all"],
-  PatientMinAggregate: ["firstName", "lastName", "email"],
-  PatientMaxAggregate: ["firstName", "lastName", "email"],
-  MovieCountAggregate: ["directorFirstName", "directorLastName", "title", "_all"],
-  MovieMinAggregate: ["directorFirstName", "directorLastName", "title"],
-  MovieMaxAggregate: ["directorFirstName", "directorLastName", "title"],
-  DirectorCount: ["movies"],
-  DirectorCountAggregate: ["firstName", "lastName", "_all"],
-  DirectorMinAggregate: ["firstName", "lastName"],
-  DirectorMaxAggregate: ["firstName", "lastName"],
-  ProblemCount: ["likedBy"],
-  ProblemCountAggregate: ["id", "problemText", "creatorId", "_all"],
-  ProblemAvgAggregate: ["id", "creatorId"],
-  ProblemSumAggregate: ["id", "creatorId"],
-  ProblemMinAggregate: ["id", "problemText", "creatorId"],
-  ProblemMaxAggregate: ["id", "problemText", "creatorId"],
-  CreatorCount: ["likes", "problems"],
-  CreatorCountAggregate: ["id", "name", "_all"],
-  CreatorAvgAggregate: ["id"],
-  CreatorSumAggregate: ["id"],
-  CreatorMinAggregate: ["id", "name"],
-  CreatorMaxAggregate: ["id", "name"],
-  NativeTypeModelCountAggregate: ["id", "bigInt", "byteA", "decimal", "_all"],
-  NativeTypeModelAvgAggregate: ["id", "bigInt", "decimal"],
-  NativeTypeModelSumAggregate: ["id", "bigInt", "decimal"],
-  NativeTypeModelMinAggregate: ["id", "bigInt", "byteA", "decimal"],
-  NativeTypeModelMaxAggregate: ["id", "bigInt", "byteA", "decimal"]
-};
-const argsInfo = {
-  FindUniqueMainUserArgs: ["where"],
-  FindFirstMainUserArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyMainUserArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateMainUserArgs: ["data"],
-  CreateManyMainUserArgs: ["data", "skipDuplicates"],
-  DeleteMainUserArgs: ["where"],
-  UpdateMainUserArgs: ["data", "where"],
-  DeleteManyMainUserArgs: ["where"],
-  UpdateManyMainUserArgs: ["data", "where"],
-  UpsertMainUserArgs: ["where", "create", "update"],
-  AggregateMainUserArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByMainUserArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniquePostArgs: ["where"],
-  FindFirstPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreatePostArgs: ["data"],
-  CreateManyPostArgs: ["data", "skipDuplicates"],
-  DeletePostArgs: ["where"],
-  UpdatePostArgs: ["data", "where"],
-  DeleteManyPostArgs: ["where"],
-  UpdateManyPostArgs: ["data", "where"],
-  UpsertPostArgs: ["where", "create", "update"],
-  AggregatePostArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByPostArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniqueCategoryArgs: ["where"],
-  FindFirstCategoryArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyCategoryArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateCategoryArgs: ["data"],
-  CreateManyCategoryArgs: ["data", "skipDuplicates"],
-  DeleteCategoryArgs: ["where"],
-  UpdateCategoryArgs: ["data", "where"],
-  DeleteManyCategoryArgs: ["where"],
-  UpdateManyCategoryArgs: ["data", "where"],
-  UpsertCategoryArgs: ["where", "create", "update"],
-  AggregateCategoryArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByCategoryArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniquePatientArgs: ["where"],
-  FindFirstPatientArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyPatientArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreatePatientArgs: ["data"],
-  CreateManyPatientArgs: ["data", "skipDuplicates"],
-  DeletePatientArgs: ["where"],
-  UpdatePatientArgs: ["data", "where"],
-  DeleteManyPatientArgs: ["where"],
-  UpdateManyPatientArgs: ["data", "where"],
-  UpsertPatientArgs: ["where", "create", "update"],
-  AggregatePatientArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByPatientArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniqueMovieArgs: ["where"],
-  FindFirstMovieArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyMovieArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateMovieArgs: ["data"],
-  CreateManyMovieArgs: ["data", "skipDuplicates"],
-  DeleteMovieArgs: ["where"],
-  UpdateMovieArgs: ["data", "where"],
-  DeleteManyMovieArgs: ["where"],
-  UpdateManyMovieArgs: ["data", "where"],
-  UpsertMovieArgs: ["where", "create", "update"],
-  AggregateMovieArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByMovieArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniqueDirectorArgs: ["where"],
-  FindFirstDirectorArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyDirectorArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateDirectorArgs: ["data"],
-  CreateManyDirectorArgs: ["data", "skipDuplicates"],
-  DeleteDirectorArgs: ["where"],
-  UpdateDirectorArgs: ["data", "where"],
-  DeleteManyDirectorArgs: ["where"],
-  UpdateManyDirectorArgs: ["data", "where"],
-  UpsertDirectorArgs: ["where", "create", "update"],
-  AggregateDirectorArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByDirectorArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniqueProblemArgs: ["where"],
-  FindFirstProblemArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyProblemArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateProblemArgs: ["data"],
-  CreateManyProblemArgs: ["data", "skipDuplicates"],
-  DeleteProblemArgs: ["where"],
-  UpdateProblemArgs: ["data", "where"],
-  DeleteManyProblemArgs: ["where"],
-  UpdateManyProblemArgs: ["data", "where"],
-  UpsertProblemArgs: ["where", "create", "update"],
-  AggregateProblemArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByProblemArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniqueCreatorArgs: ["where"],
-  FindFirstCreatorArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyCreatorArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateCreatorArgs: ["data"],
-  CreateManyCreatorArgs: ["data", "skipDuplicates"],
-  DeleteCreatorArgs: ["where"],
-  UpdateCreatorArgs: ["data", "where"],
-  DeleteManyCreatorArgs: ["where"],
-  UpdateManyCreatorArgs: ["data", "where"],
-  UpsertCreatorArgs: ["where", "create", "update"],
-  AggregateCreatorArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByCreatorArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniqueNativeTypeModelArgs: ["where"],
-  FindFirstNativeTypeModelArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyNativeTypeModelArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateNativeTypeModelArgs: ["data"],
-  CreateManyNativeTypeModelArgs: ["data", "skipDuplicates"],
-  DeleteNativeTypeModelArgs: ["where"],
-  UpdateNativeTypeModelArgs: ["data", "where"],
-  DeleteManyNativeTypeModelArgs: ["where"],
-  UpdateManyNativeTypeModelArgs: ["data", "where"],
-  UpsertNativeTypeModelArgs: ["where", "create", "update"],
-  AggregateNativeTypeModelArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByNativeTypeModelArgs: ["where", "orderBy", "by", "having", "take", "skip"]
-};
-
-type ResolverModelNames = keyof typeof crudResolversMap;
-
-type ModelResolverActionNames<
-  TModel extends ResolverModelNames
-  > = keyof typeof crudResolversMap[TModel]["prototype"];
-
-export type ResolverActionsConfig<
-  TModel extends ResolverModelNames
-  > = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
-
-export type ResolversEnhanceMap = {
-  [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
-};
-
-export function applyResolversEnhanceMap(
-  resolversEnhanceMap: ResolversEnhanceMap,
-) {
-  for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
-    const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;
-    const crudTarget = crudResolversMap[modelName].prototype;
-    const resolverActionsConfig = resolversEnhanceMap[modelName]!;
-    const actionResolversConfig = actionResolversMap[modelName];
-    if (resolverActionsConfig._all) {
-      const allActionsDecorators = resolverActionsConfig._all;
-      const resolverActionNames = resolversInfo[modelName as keyof typeof resolversInfo];
-      for (const resolverActionName of resolverActionNames) {
-        const actionTarget = (actionResolversConfig[
-          resolverActionName as keyof typeof actionResolversConfig
-        ] as Function).prototype;
-        for (const allActionsDecorator of allActionsDecorators) {
-          allActionsDecorator(
-            crudTarget,
-            resolverActionName,
-            Object.getOwnPropertyDescriptor(crudTarget, resolverActionName)!,
-          );
-          allActionsDecorator(
-            actionTarget,
-            resolverActionName,
-            Object.getOwnPropertyDescriptor(actionTarget, resolverActionName)!,
-          );
-        }
-      }
-    }
-    const resolverActionsToApply = Object.keys(resolverActionsConfig).filter(
-      it => it !== "_all"
-    );
-    for (const resolverActionName of resolverActionsToApply) {
-      const decorators = resolverActionsConfig[
-        resolverActionName as keyof typeof resolverActionsConfig
-      ] as MethodDecorator[];
-      const actionTarget = (actionResolversConfig[
-        resolverActionName as keyof typeof actionResolversConfig
-      ] as Function).prototype;
-      for (const decorator of decorators) {
-        decorator(
-          crudTarget,
-          resolverActionName,
-          Object.getOwnPropertyDescriptor(crudTarget, resolverActionName)!,
-        );
-        decorator(
-          actionTarget,
-          resolverActionName,
-          Object.getOwnPropertyDescriptor(actionTarget, resolverActionName)!,
-        );
-      }
-    }
-  }
-}
-
-type RelationResolverModelNames = keyof typeof relationResolversMap;
-
-type RelationResolverActionNames<
-  TModel extends RelationResolverModelNames
-  > = keyof typeof relationResolversMap[TModel]["prototype"];
-
-export type RelationResolverActionsConfig<TModel extends RelationResolverModelNames>
-  = Partial<Record<RelationResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
-
-export type RelationResolversEnhanceMap = {
-  [TModel in RelationResolverModelNames]?: RelationResolverActionsConfig<TModel>;
-};
-
-export function applyRelationResolversEnhanceMap(
-  relationResolversEnhanceMap: RelationResolversEnhanceMap,
-) {
-  for (const relationResolversEnhanceMapKey of Object.keys(relationResolversEnhanceMap)) {
-    const modelName = relationResolversEnhanceMapKey as keyof typeof relationResolversEnhanceMap;
-    const relationResolverTarget = relationResolversMap[modelName].prototype;
-    const relationResolverActionsConfig = relationResolversEnhanceMap[modelName]!;
-    if (relationResolverActionsConfig._all) {
-      const allActionsDecorators = relationResolverActionsConfig._all;
-      const relationResolverActionNames = relationResolversInfo[modelName as keyof typeof relationResolversInfo];
-      for (const relationResolverActionName of relationResolverActionNames) {
-        for (const allActionsDecorator of allActionsDecorators) {
-          allActionsDecorator(
-            relationResolverTarget,
-            relationResolverActionName,
-            Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
-          );
-        }
-      }
-    }
-    const relationResolverActionsToApply = Object.keys(relationResolverActionsConfig).filter(
-      it => it !== "_all"
-    );
-    for (const relationResolverActionName of relationResolverActionsToApply) {
-      const decorators = relationResolverActionsConfig[
-        relationResolverActionName as keyof typeof relationResolverActionsConfig
-      ] as MethodDecorator[];
-      for (const decorator of decorators) {
-        decorator(
-          relationResolverTarget,
-          relationResolverActionName,
-          Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
-        );
-      }
-    }
-  }
-}
-
-type TypeConfig = {
-  class?: ClassDecorator[];
-  fields?: FieldsConfig;
-};
-
-type FieldsConfig<TTypeKeys extends string = string> = Partial<
-  Record<TTypeKeys | "_all", PropertyDecorator[]>
->;
-
-function applyTypeClassEnhanceConfig<
-  TEnhanceConfig extends TypeConfig,
-  TType extends object
->(
-  enhanceConfig: TEnhanceConfig,
-  typeClass: ClassType<TType>,
-  typePrototype: TType,
-  typeFieldNames: string[]
-) {
-  if (enhanceConfig.class) {
-    for (const decorator of enhanceConfig.class) {
-      decorator(typeClass);
-    }
-  }
-  if (enhanceConfig.fields) {
-    if (enhanceConfig.fields._all) {
-      const allFieldsDecorators = enhanceConfig.fields._all;
-      for (const typeFieldName of typeFieldNames) {
-        for (const allFieldsDecorator of allFieldsDecorators) {
-          allFieldsDecorator(typePrototype, typeFieldName);
-        }
-      }
-    }
-    const configFieldsToApply = Object.keys(enhanceConfig.fields).filter(
-      it => it !== "_all"
-    );
-    for (const typeFieldName of configFieldsToApply) {
-      const fieldDecorators = enhanceConfig.fields[typeFieldName]!;
-      for (const fieldDecorator of fieldDecorators) {
-        fieldDecorator(typePrototype, typeFieldName);
-      }
-    }
-  }
-}
-
-type ModelNames = keyof typeof models;
-
-type ModelFieldNames<TModel extends ModelNames> = Exclude<
-  keyof typeof models[TModel]["prototype"],
-  number | symbol
->;
-
-type ModelFieldsConfig<TModel extends ModelNames> = FieldsConfig<
-  ModelFieldNames<TModel>
->;
-
-export type ModelConfig<TModel extends ModelNames> = {
-  class?: ClassDecorator[];
-  fields?: ModelFieldsConfig<TModel>;
-};
-
-export type ModelsEnhanceMap = {
-  [TModel in ModelNames]?: ModelConfig<TModel>;
-};
-
-export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
-  for (const modelsEnhanceMapKey of Object.keys(modelsEnhanceMap)) {
-    const modelName = modelsEnhanceMapKey as keyof typeof modelsEnhanceMap;
-    const modelConfig = modelsEnhanceMap[modelName]!;
-    const modelClass = models[modelName];
-    const modelTarget = modelClass.prototype;
-    applyTypeClassEnhanceConfig(
-      modelConfig,
-      modelClass,
-      modelTarget,
-      modelsInfo[modelName as keyof typeof modelsInfo],
-    );
-  }
-}
-
-type OutputTypesNames = keyof typeof outputTypes;
-
-type OutputTypeFieldNames<TOutput extends OutputTypesNames> = Exclude<
-  keyof typeof outputTypes[TOutput]["prototype"],
-  number | symbol
->;
-
-type OutputTypeFieldsConfig<
-  TOutput extends OutputTypesNames
-  > = FieldsConfig<OutputTypeFieldNames<TOutput>>;
-
-export type OutputTypeConfig<TOutput extends OutputTypesNames> = {
-  class?: ClassDecorator[];
-  fields?: OutputTypeFieldsConfig<TOutput>;
-};
-
-export type OutputTypesEnhanceMap = {
-  [TOutput in OutputTypesNames]?: OutputTypeConfig<TOutput>;
-};
-
-export function applyOutputTypesEnhanceMap(
-  outputTypesEnhanceMap: OutputTypesEnhanceMap,
-) {
-  for (const outputTypeEnhanceMapKey of Object.keys(outputTypesEnhanceMap)) {
-    const outputTypeName = outputTypeEnhanceMapKey as keyof typeof outputTypesEnhanceMap;
-    const typeConfig = outputTypesEnhanceMap[outputTypeName]!;
-    const typeClass = outputTypes[outputTypeName];
-    const typeTarget = typeClass.prototype;
-    applyTypeClassEnhanceConfig(
-      typeConfig,
-      typeClass,
-      typeTarget,
-      outputsInfo[outputTypeName as keyof typeof outputsInfo],
-    );
-  }
-}
 
 type InputTypesNames = keyof typeof inputTypes;
 
@@ -924,47 +965,4 @@ export function applyInputTypesEnhanceMap(
     );
   }
 }
-
-type ArgsTypesNames = keyof typeof argsTypes;
-
-type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
-  keyof typeof argsTypes[TArgsType]["prototype"],
-  number | symbol
->;
-
-type ArgFieldsConfig<
-  TArgsType extends ArgsTypesNames
-  > = FieldsConfig<ArgFieldNames<TArgsType>>;
-
-export type ArgConfig<TArgsType extends ArgsTypesNames> = {
-  class?: ClassDecorator[];
-  fields?: ArgFieldsConfig<TArgsType>;
-};
-
-export type ArgsTypesEnhanceMap = {
-  [TArgsType in ArgsTypesNames]?: ArgConfig<TArgsType>;
-};
-
-export function applyArgsTypesEnhanceMap(
-  argsTypesEnhanceMap: ArgsTypesEnhanceMap,
-) {
-  for (const argsTypesEnhanceMapKey of Object.keys(argsTypesEnhanceMap)) {
-    const argsTypeName = argsTypesEnhanceMapKey as keyof typeof argsTypesEnhanceMap;
-    const typeConfig = argsTypesEnhanceMap[argsTypeName]!;
-    const typeClass = argsTypes[argsTypeName];
-    const typeTarget = typeClass.prototype;
-    applyTypeClassEnhanceConfig(
-      typeConfig,
-      typeClass,
-      typeTarget,
-      argsInfo[argsTypeName as keyof typeof argsInfo],
-    );
-  }
-}
-
-
-
-
-
-
 

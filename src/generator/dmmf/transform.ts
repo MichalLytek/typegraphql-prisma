@@ -12,7 +12,7 @@ import {
 } from "../helpers";
 import { DmmfDocument } from "./dmmf-document";
 import pluralize from "pluralize";
-import { GenerateCodeOptions } from "../options";
+import { GeneratorOptions } from "../options";
 import { supportedQueryActions, supportedMutationActions } from "../config";
 
 export function transformSchema(
@@ -40,7 +40,7 @@ export function transformSchema(
 export function transformMappings(
   mapping: PrismaDMMF.ModelMapping[],
   dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions,
+  options: GeneratorOptions,
 ): DMMF.ModelMapping[] {
   return mapping.map(transformMapping(dmmfDocument, options));
 }
@@ -282,7 +282,7 @@ export function getMappedOutputTypeName(
 
 function transformMapping(
   dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions,
+  options: GeneratorOptions,
 ) {
   return (mapping: PrismaDMMF.ModelMapping): DMMF.ModelMapping => {
     const { model, plural, ...availableActions } = mapping;
@@ -401,7 +401,7 @@ function selectInputTypeFromTypes(dmmfDocument: DmmfDocument) {
 function getMappedActionName(
   actionName: DMMF.ModelAction,
   typeName: string,
-  options: GenerateCodeOptions,
+  options: GeneratorOptions,
 ): string {
   const defaultMappedActionName = `${actionName}${typeName}`;
   if (options.useOriginalMapping) {

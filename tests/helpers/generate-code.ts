@@ -1,11 +1,17 @@
 import generateCode from "../../src/generator/generate-code";
+import {
+  ExternalGeneratorOptions,
+  InternalGeneratorOptions,
+} from "../../src/generator/options";
 import getPrismaClientDmmfFromPrismaSchema from "./dmmf";
-import { GenerateCodeOptions } from "../../src/generator/options";
 
 type SupportedPreviewFeatures = "filterJson" | "fullTextSearch";
 
 interface GenerateCodeFromSchemaOptions
-  extends Omit<GenerateCodeOptions, "relativePrismaOutputPath"> {
+  extends Omit<
+    ExternalGeneratorOptions & InternalGeneratorOptions,
+    "relativePrismaOutputPath"
+  > {
   previewFeatures?: SupportedPreviewFeatures[];
 }
 

@@ -19,6 +19,7 @@ generator typegraphql {
   simpleResolvers          = false
   useUncheckedScalarInputs = false
   emitIdAsIDType           = true
+  // emitOnly                 = "crudResolvers"
 }
 
 // Role enum comment

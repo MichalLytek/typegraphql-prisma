@@ -241,12 +241,23 @@ type PostAvgAggregate {
   authorId: Float
 }
 
+input PostAvgOrderByAggregateInput {
+  authorId: SortOrder
+}
+
 type PostCountAggregate {
   _all: Int!
   authorId: Int!
   color: Int!
   content: Int!
   uuid: Int!
+}
+
+input PostCountOrderByAggregateInput {
+  authorId: SortOrder
+  color: SortOrder
+  content: SortOrder
+  uuid: SortOrder
 }
 
 input PostCreateInput {
@@ -317,6 +328,13 @@ type PostMaxAggregate {
   uuid: String
 }
 
+input PostMaxOrderByAggregateInput {
+  authorId: SortOrder
+  color: SortOrder
+  content: SortOrder
+  uuid: SortOrder
+}
+
 type PostMinAggregate {
   authorId: Int
   color: Color
@@ -324,7 +342,31 @@ type PostMinAggregate {
   uuid: String
 }
 
-input PostOrderByInput {
+input PostMinOrderByAggregateInput {
+  authorId: SortOrder
+  color: SortOrder
+  content: SortOrder
+  uuid: SortOrder
+}
+
+input PostOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input PostOrderByWithAggregationInput {
+  _avg: PostAvgOrderByAggregateInput
+  _count: PostCountOrderByAggregateInput
+  _max: PostMaxOrderByAggregateInput
+  _min: PostMinOrderByAggregateInput
+  _sum: PostSumOrderByAggregateInput
+  authorId: SortOrder
+  color: SortOrder
+  content: SortOrder
+  uuid: SortOrder
+}
+
+input PostOrderByWithRelationInput {
+  author: UserOrderByWithRelationInput
   authorId: SortOrder
   color: SortOrder
   content: SortOrder
@@ -360,6 +402,10 @@ input PostScalarWhereWithAggregatesInput {
 
 type PostSumAggregate {
   authorId: Int
+}
+
+input PostSumOrderByAggregateInput {
+  authorId: SortOrder
 }
 
 input PostUpdateInput {
@@ -427,16 +473,16 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
-  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
-  findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): Post
-  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
-  groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
-  groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
+  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
+  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
+  findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): Post
+  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): User
+  groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByWithAggregationInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
+  groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
   post(where: PostWhereUniqueInput!): Post
-  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   user(where: UserWhereUniqueInput!): User
-  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
 
 enum QueryMode {
@@ -520,19 +566,33 @@ input StringWithAggregatesFilter {
 }
 
 type User {
+  _count: UserCount
   id: Int!
   name: String
-  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
 }
 
 type UserAvgAggregate {
   id: Float
 }
 
+input UserAvgOrderByAggregateInput {
+  id: SortOrder
+}
+
+type UserCount {
+  posts: Int!
+}
+
 type UserCountAggregate {
   _all: Int!
   id: Int!
   name: Int!
+}
+
+input UserCountOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
 }
 
 input UserCreateInput {
@@ -575,14 +635,35 @@ type UserMaxAggregate {
   name: String
 }
 
+input UserMaxOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
+}
+
 type UserMinAggregate {
   id: Int
   name: String
 }
 
-input UserOrderByInput {
+input UserMinOrderByAggregateInput {
   id: SortOrder
   name: SortOrder
+}
+
+input UserOrderByWithAggregationInput {
+  _avg: UserAvgOrderByAggregateInput
+  _count: UserCountOrderByAggregateInput
+  _max: UserMaxOrderByAggregateInput
+  _min: UserMinOrderByAggregateInput
+  _sum: UserSumOrderByAggregateInput
+  id: SortOrder
+  name: SortOrder
+}
+
+input UserOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  posts: PostOrderByRelationAggregateInput
 }
 
 input UserRelationFilter {
@@ -605,6 +686,10 @@ input UserScalarWhereWithAggregatesInput {
 
 type UserSumAggregate {
   id: Int
+}
+
+input UserSumOrderByAggregateInput {
+  id: SortOrder
 }
 
 input UserUpdateInput {
@@ -745,6 +830,8 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       NestedStringNullableWithAggregatesFilter.ts
       NestedStringWithAggregatesFilter.ts
       NullableStringFieldUpdateOperationsInput.ts
+      PostAvgOrderByAggregateInput.ts
+      PostCountOrderByAggregateInput.ts
       PostCreateInput.ts
       PostCreateManyAuthorInput.ts
       PostCreateManyAuthorInputEnvelope.ts
@@ -753,9 +840,14 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       PostCreateOrConnectWithoutAuthorInput.ts
       PostCreateWithoutAuthorInput.ts
       PostListRelationFilter.ts
-      PostOrderByInput.ts
+      PostMaxOrderByAggregateInput.ts
+      PostMinOrderByAggregateInput.ts
+      PostOrderByRelationAggregateInput.ts
+      PostOrderByWithAggregationInput.ts
+      PostOrderByWithRelationInput.ts
       PostScalarWhereInput.ts
       PostScalarWhereWithAggregatesInput.ts
+      PostSumOrderByAggregateInput.ts
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
@@ -770,14 +862,20 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       StringNullableFilter.ts
       StringNullableWithAggregatesFilter.ts
       StringWithAggregatesFilter.ts
+      UserAvgOrderByAggregateInput.ts
+      UserCountOrderByAggregateInput.ts
       UserCreateInput.ts
       UserCreateManyInput.ts
       UserCreateNestedOneWithoutPostsInput.ts
       UserCreateOrConnectWithoutPostsInput.ts
       UserCreateWithoutPostsInput.ts
-      UserOrderByInput.ts
+      UserMaxOrderByAggregateInput.ts
+      UserMinOrderByAggregateInput.ts
+      UserOrderByWithAggregationInput.ts
+      UserOrderByWithRelationInput.ts
       UserRelationFilter.ts
       UserScalarWhereWithAggregatesInput.ts
+      UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsInput.ts
@@ -797,6 +895,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       PostMinAggregate.ts
       PostSumAggregate.ts
       UserAvgAggregate.ts
+      UserCount.ts
       UserCountAggregate.ts
       UserGroupBy.ts
       UserMaxAggregate.ts

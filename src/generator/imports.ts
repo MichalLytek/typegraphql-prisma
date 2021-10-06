@@ -17,7 +17,8 @@ import {
   relationsResolversFolderName,
 } from "./config";
 import { GenerateMappingData } from "./types";
-import { GenerateCodeOptions } from "./options";
+import { GeneratorOptions } from "./options";
+import { EmitBlockKind } from "./emit-block";
 
 export function generateTypeGraphQLImport(sourceFile: SourceFile) {
   sourceFile.addImportDeclaration({
@@ -75,7 +76,7 @@ export function generateHelpersFileImport(sourceFile: SourceFile, level = 0) {
 
 export function generatePrismaNamespaceImport(
   sourceFile: SourceFile,
-  options: GenerateCodeOptions,
+  options: GeneratorOptions,
   level = 0,
 ) {
   sourceFile.addImportDeclaration({
@@ -180,55 +181,45 @@ export function generateOutputsBarrelFile(
 export function generateIndexFile(
   sourceFile: SourceFile,
   hasSomeRelations: boolean,
+  blocksToEmit: EmitBlockKind[],
 ) {
-  sourceFile.addExportDeclarations([
-    { moduleSpecifier: `./${enumsFolderName}` },
-    { moduleSpecifier: `./${modelsFolderName}` },
-    { moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}` },
-    ...(hasSomeRelations
-      ? [
-          {
-            moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}`,
-          },
-        ]
-      : []),
-    { moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}` },
-    { moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}` },
-    { moduleSpecifier: `./enhance` },
-    { moduleSpecifier: `./scalars` },
-  ]);
-
-  sourceFile.addImportDeclarations([
-    {
-      moduleSpecifier: `type-graphql`,
-      namedImports: ["NonEmptyArray"],
-    },
-    {
+  if (blocksToEmit.includes("enums")) {
+    sourceFile.addExportDeclaration({
+      moduleSpecifier: `./${enumsFolderName}`,
+    });
+  }
+  if (blocksToEmit.includes("models")) {
+    sourceFile.addExportDeclaration({
+      moduleSpecifier: `./${modelsFolderName}`,
+    });
+  }
+  if (blocksToEmit.includes("crudResolvers")) {
+    sourceFile.addExportDeclaration({
+      moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}`,
+    });
+    sourceFile.addImportDeclaration({
       moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index`,
       namespaceImport: "crudResolversImport",
-    },
-    ...(hasSomeRelations
-      ? [
-          {
-            moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index`,
-            namespaceImport: "relationResolversImport",
-          },
-        ]
-      : []),
-  ]);
-
-  sourceFile.addVariableStatement({
-    isExported: true,
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
-        name: "crudResolvers",
-        initializer: `Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>`,
-      },
-    ],
-  });
-
-  if (hasSomeRelations) {
+    });
+    sourceFile.addVariableStatement({
+      isExported: true,
+      declarationKind: VariableDeclarationKind.Const,
+      declarations: [
+        {
+          name: "crudResolvers",
+          initializer: `Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>`,
+        },
+      ],
+    });
+  }
+  if (hasSomeRelations && blocksToEmit.includes("relationResolvers")) {
+    sourceFile.addExportDeclaration({
+      moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}`,
+    });
+    sourceFile.addImportDeclaration({
+      moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index`,
+      namespaceImport: "relationResolversImport",
+    });
     sourceFile.addVariableStatement({
       isExported: true,
       declarationKind: VariableDeclarationKind.Const,
@@ -240,23 +231,52 @@ export function generateIndexFile(
       ],
     });
   }
+  if (blocksToEmit.includes("inputs")) {
+    sourceFile.addExportDeclaration({
+      moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}`,
+    });
+  }
+  if (blocksToEmit.includes("outputs")) {
+    sourceFile.addExportDeclaration({
+      moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}`,
+    });
+  }
 
-  sourceFile.addVariableStatement({
-    isExported: true,
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
-        name: "resolvers",
-        initializer: `[...crudResolvers${
-          hasSomeRelations ? ", ...relationResolvers" : ""
-        }] as unknown as NonEmptyArray<Function>`,
-      },
-    ],
-  });
+  sourceFile.addExportDeclarations([
+    { moduleSpecifier: `./enhance` },
+    { moduleSpecifier: `./scalars` },
+  ]);
+  sourceFile.addImportDeclarations([
+    {
+      moduleSpecifier: `type-graphql`,
+      namedImports: ["NonEmptyArray"],
+    },
+  ]);
+
+  if (
+    blocksToEmit.includes("crudResolvers") ||
+    (hasSomeRelations && blocksToEmit.includes("relationResolvers"))
+  )
+    sourceFile.addVariableStatement({
+      isExported: true,
+      declarationKind: VariableDeclarationKind.Const,
+      declarations: [
+        {
+          name: "resolvers",
+          initializer: `[
+            ${blocksToEmit.includes("crudResolvers") ? "...crudResolvers," : ""}
+            ${
+              hasSomeRelations && blocksToEmit.includes("relationResolvers")
+                ? "...relationResolvers,"
+                : ""
+            }
+            ] as unknown as NonEmptyArray<Function>`,
+        },
+      ],
+    });
 }
 
 export function generateResolversBarrelFile(
-  type: "crud" | "relations",
   sourceFile: SourceFile,
   resolversData: GenerateMappingData[],
 ) {

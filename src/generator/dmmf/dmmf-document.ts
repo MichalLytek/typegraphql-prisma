@@ -8,7 +8,8 @@ import {
   transformEnums,
   generateRelationModel,
 } from "./transform";
-import { GenerateCodeOptions } from "../options";
+import { GeneratorOptions } from "../options";
+import { EmitBlockKind } from "../emit-block";
 
 export class DmmfDocument implements DMMF.Document {
   private models: DMMF.Model[];
@@ -20,7 +21,7 @@ export class DmmfDocument implements DMMF.Document {
 
   constructor(
     { datamodel, schema, mappings }: PrismaDMMF.Document,
-    public options: GenerateCodeOptions,
+    public options: GeneratorOptions,
   ) {
     const enumTypes = [
       ...(schema.enumTypes.prisma ?? []),
@@ -75,5 +76,9 @@ export class DmmfDocument implements DMMF.Document {
   getModelFieldAlias(modelName: string, fieldName: string): string | undefined {
     const model = this.models.find(it => it.name === modelName);
     return model?.fields.find(it => it.name === fieldName)?.typeFieldAlias;
+  }
+
+  shouldGenerateBlock(block: EmitBlockKind): boolean {
+    return this.options.blocksToEmit.includes(block);
   }
 }

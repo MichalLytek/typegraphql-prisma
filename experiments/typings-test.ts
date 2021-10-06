@@ -29,7 +29,6 @@ declare const clientCreateInput: TypeGraphQLPrisma.MainUserCreateInput;
 const prismaUserCreateInput: Prisma.UserCreateInput = clientCreateInput;
 
 declare const aggregateMainUser: TypeGraphQLPrisma.AggregateMainUser;
-// @ts-expect-error `_count` and `count` fields
 const prismaAggregateUser: Prisma.AggregateUser = aggregateMainUser;
 
 declare const aggregateMainUserArgs: TypeGraphQLPrisma.AggregateMainUserArgs;

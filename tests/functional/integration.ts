@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import { promises as fs } from "fs";
-import directoryTree from "directory-tree";
 import path from "path";
 import util from "util";
 import childProcess from "child_process";
@@ -9,7 +8,7 @@ import { graphql } from "graphql";
 import pg from "pg";
 
 import generateArtifactsDirPath from "../helpers/artifacts-dir";
-import { stringifyDirectoryTrees } from "../helpers/structure";
+import { getDirectoryStructureString } from "../helpers/structure";
 
 const exec = util.promisify(childProcess.exec);
 
@@ -70,12 +69,9 @@ describe("generator integration", () => {
     });
     // console.log(prismaGenerateResult);
 
-    const directoryStructure = directoryTree(
+    const directoryStructureString = getDirectoryStructureString(
       cwdDirPath + "/generated/type-graphql",
     );
-    const directoryStructureString =
-      "\n[type-graphql]\n" +
-      stringifyDirectoryTrees(directoryStructure.children, 2);
 
     expect(prismaGenerateResult.stderr).toHaveLength(0);
     expect(directoryStructureString).toMatchSnapshot("files structure");
@@ -167,11 +163,12 @@ describe("generator integration", () => {
     await pgClient.query(`DROP DATABASE IF EXISTS "${dbName}"`);
     await pgClient.end();
 
-    const migrateResult = await exec(
+    const prismaMigrateResult = await exec(
       "npx prisma migrate dev --preview-feature --name init",
       { cwd: cwdDirPath },
     );
-    expect(migrateResult.stderr).toHaveLength(0);
+    // console.log(prismaMigrateResult);
+    expect(prismaMigrateResult.stderr).toHaveLength(0);
 
     const { PrismaClient } = require(cwdDirPath + "/generated/client");
     const prisma = new PrismaClient();

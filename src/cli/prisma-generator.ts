@@ -6,12 +6,13 @@ import path from "path";
 
 import generateCode from "../generator/generate-code";
 import removeDir from "../utils/removeDir";
-import { GenerateCodeOptions } from "../generator/options";
+import {
+  ExternalGeneratorOptions,
+  InternalGeneratorOptions,
+} from "../generator/options";
 import { toUnixPath } from "../generator/helpers";
-
-function parseStringBoolean(stringBoolean: string | undefined) {
-  return stringBoolean ? stringBoolean === "true" : undefined;
-}
+import { ALL_EMIT_BLOCK_KINDS } from "../generator/emit-block";
+import { parseStringBoolean, parseStringArray } from "./helpers";
 
 export async function generate(options: GeneratorOptions) {
   const outputDir = parseEnvValue(options.generator.output!);
@@ -26,7 +27,7 @@ export async function generate(options: GeneratorOptions) {
     .dmmf as PrismaDMMF.Document;
 
   const generatorConfig = options.generator.config;
-  const config: GenerateCodeOptions = {
+  const externalConfig: ExternalGeneratorOptions = {
     emitDMMF: parseStringBoolean(generatorConfig.emitDMMF),
     emitTranspiledCode: parseStringBoolean(generatorConfig.emitTranspiledCode),
     simpleResolvers: parseStringBoolean(generatorConfig.simpleResolvers),
@@ -35,8 +36,13 @@ export async function generate(options: GeneratorOptions) {
       generatorConfig.useUncheckedScalarInputs,
     ),
     emitIdAsIDType: parseStringBoolean(generatorConfig.emitIdAsIDType),
-
-    /* internal options */
+    emitOnly: parseStringArray(
+      generatorConfig.emitOnly,
+      "emitOnly",
+      ALL_EMIT_BLOCK_KINDS,
+    ),
+  };
+  const internalConfig: InternalGeneratorOptions = {
     outputDirPath: outputDir,
     relativePrismaOutputPath: toUnixPath(
       path.relative(outputDir, prismaClientPath),
@@ -46,7 +52,7 @@ export async function generate(options: GeneratorOptions) {
       : undefined,
   };
 
-  if (config.emitDMMF) {
+  if (externalConfig.emitDMMF) {
     await Promise.all([
       asyncFs.writeFile(
         path.resolve(outputDir, "./dmmf.json"),
@@ -60,6 +66,9 @@ export async function generate(options: GeneratorOptions) {
   }
 
   // TODO: replace with `options.dmmf` when the spec match prisma client output
-  await generateCode(prismaClientDmmf, config);
+  await generateCode(prismaClientDmmf, {
+    ...externalConfig,
+    ...internalConfig,
+  });
   return "";
 }

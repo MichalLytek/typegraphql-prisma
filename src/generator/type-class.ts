@@ -21,7 +21,7 @@ import {
 } from "./imports";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import { DMMF } from "./dmmf/types";
-import { GenerateCodeOptions } from "./options";
+import { GeneratorOptions } from "./options";
 
 export function generateOutputTypeClassFromType(
   project: Project,
@@ -103,7 +103,7 @@ export function generateInputTypeClassFromType(
   dirPath: string,
   inputType: DMMF.InputType,
   _dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions,
+  options: GeneratorOptions,
 ) {
   const filePath = path.resolve(
     dirPath,
