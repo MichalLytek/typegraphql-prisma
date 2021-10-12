@@ -19,6 +19,7 @@ import {
 import { modelsFolderName } from "./config";
 import { DMMF } from "./dmmf/types";
 import { DmmfDocument } from "./dmmf/dmmf-document";
+import { convertNewLines } from "./helpers";
 
 export default function generateObjectTypeClassFromModel(
   project: Project,
@@ -112,7 +113,7 @@ export default function generateObjectTypeClassFromModel(
                 ]),
           ],
           ...(field.docs && {
-            docs: [{ description: field.docs }],
+            docs: [{ description: `\n${convertNewLines(field.docs)}` }],
           }),
         };
       }),
@@ -169,12 +170,12 @@ export default function generateObjectTypeClassFromModel(
               : `return this.${field.name} ?? null;`,
           ],
           ...(field.docs && {
-            docs: [{ description: field.docs }],
+            docs: [{ description: `\n${convertNewLines(field.docs)}` }],
           }),
         };
       }),
     ...(model.docs && {
-      docs: [{ description: model.docs }],
+      docs: [{ description: `\n${convertNewLines(model.docs)}` }],
     }),
   });
 }

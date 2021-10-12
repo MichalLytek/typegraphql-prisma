@@ -6,13 +6,17 @@ import { Post } from "../models/Post";
 import { Role } from "../enums/Role";
 import { MainUserCount } from "../resolvers/outputs/MainUserCount";
 
-/** User model doc */
+/**
+ * User model doc
+ */
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: "User model doc"
 })
 export class MainUser {
-  /** User model field doc */
+  /**
+   * User model field doc
+   */
   @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
     nullable: false,
     description: "User model field doc"
@@ -24,7 +28,9 @@ export class MainUser {
   })
   email!: string;
 
-  /** renamed field doc */
+  /**
+   * renamed field doc
+   */
   name!: string | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -63,7 +69,9 @@ export class MainUser {
   })
   _count?: MainUserCount | null;
 
-  /** renamed field doc */
+  /**
+   * renamed field doc
+   */
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: "renamed field doc"

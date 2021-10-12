@@ -9,8 +9,14 @@ import { PostKind } from "../enums/PostKind";
   isAbstract: true
 })
 export class Post {
+  /**
+   * first line of comment
+   * second line of comment
+   * third line of comment
+   */
   @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
-    nullable: false
+    nullable: false,
+    description: "first line of comment\nsecond line of comment\nthird line of comment"
   })
   uuid!: string;
 

@@ -4,6 +4,7 @@ import path from "path";
 import { generateTypeGraphQLImport } from "./imports";
 import { enumsFolderName } from "./config";
 import { DMMF } from "./dmmf/types";
+import { convertNewLines } from "./helpers";
 
 export default function generateEnumFromDef(
   project: Project,
@@ -21,7 +22,7 @@ export default function generateEnumFromDef(
     isExported: true,
     name: enumDef.typeName,
     ...(enumDef.docs && {
-      docs: [{ description: enumDef.docs }],
+      docs: [{ description: convertNewLines(enumDef.docs) }],
     }),
     members: enumDef.valuesMap.map<OptionalKind<EnumMemberStructure>>(
       ({ name, value }) => ({

@@ -222,7 +222,8 @@
               "args": []
             },
             "isGenerated": false,
-            "isUpdatedAt": false
+            "isUpdatedAt": false,
+            "documentation": "first line of comment\\nsecond line of comment\\nthird line of comment"
           },
           {
             "name": "createdAt",

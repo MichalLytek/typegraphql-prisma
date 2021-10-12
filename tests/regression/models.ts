@@ -104,6 +104,9 @@ describe("models", () => {
         stringField String
         // field comment
         intField    Int
+        /// multiline doc 1
+        /// multiline doc 2
+        boolField   Boolean
         /// relation doc
         posts       Post[]
       }

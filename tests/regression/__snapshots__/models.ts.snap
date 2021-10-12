@@ -37,7 +37,9 @@ import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
 import { UserCount } from \\"../resolvers/outputs/UserCount\\";
 
-/** User model doc */
+/**
+ * User model doc
+ */
 @TypeGraphQL.ObjectType({
   isAbstract: true,
   description: \\"User model doc\\"
@@ -48,7 +50,9 @@ export class User {
   })
   id!: number;
 
-  /** field doc */
+  /**
+   * field doc
+   */
   @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: \\"field doc\\"
@@ -60,7 +64,20 @@ export class User {
   })
   intField!: number;
 
-  /** relation doc */
+  /**
+   * multiline doc 1
+   * multiline doc 2
+   */
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false,
+    description: \\"multiline doc 1
+            multiline doc 2\\"
+  })
+  boolField!: boolean;
+
+  /**
+   * relation doc
+   */
   posts?: Post[];
 
   @TypeGraphQL.Field(_type => UserCount, {
@@ -241,7 +258,9 @@ export class User {
   })
   dateOfBirth!: Date;
 
-  /** renamed field docs */
+  /**
+   * renamed field docs
+   */
   name!: string;
 
   balance!: number | null;
@@ -253,7 +272,9 @@ export class User {
   })
   _count?: UserCount | null;
 
-  /** renamed field docs */
+  /**
+   * renamed field docs
+   */
   @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: \\"renamed field docs\\"

@@ -233,11 +233,23 @@ export function cleanDocsString(
   cleanedDocs = cleanedDocs.replace(modelAttributeRegex, "");
   cleanedDocs = cleanedDocs.replace(fieldAttributeRegex, "");
   cleanedDocs = cleanedDocs.split('"').join('\\"');
-  cleanedDocs = cleanedDocs.split("\r").join("");
-  cleanedDocs = cleanedDocs.split("\\r").join("");
-  cleanedDocs = cleanedDocs.split("\n").join("");
-  cleanedDocs = cleanedDocs.split("\\n").join("");
+  if (cleanedDocs.endsWith("\r")) {
+    cleanedDocs = cleanedDocs.slice(0, -1);
+  }
+  if (cleanedDocs.endsWith("\\r")) {
+    cleanedDocs = cleanedDocs.slice(0, -2);
+  }
+  if (cleanedDocs.endsWith("\n")) {
+    cleanedDocs = cleanedDocs.slice(0, -1);
+  }
+  if (cleanedDocs.endsWith("\\n")) {
+    cleanedDocs = cleanedDocs.slice(0, -2);
+  }
   return cleanedDocs;
+}
+
+export function convertNewLines(str: string) {
+  return str.split("\\n").join("\n");
 }
 
 export function toUnixPath(maybeWindowsPath: string) {

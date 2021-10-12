@@ -59,6 +59,9 @@ enum PostKind {
 }
 
 model post {
+  /// first line of comment
+  /// second line of comment
+  /// third line of comment
   uuid      String    @id @default(uuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
