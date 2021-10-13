@@ -46,5 +46,10 @@ npm i graphql-scalars
 In order to properly support the aggregate and group by queries, the `graphql-fields` package is used so it also has to be installed:
 
 ```sh
-npm i graphql-fields @types/graphql-fields
+npm i graphql-fields
+```
+The types of graphql-fields is installed with:
+
+```sh
+npm i -D @types/graphql-fields
 ```
