@@ -1,0 +1,1 @@
+(self.webpackChunktypegraphql_prisma_website=self.webpackChunktypegraphql_prisma_website||[]).push([[477],{4580:function(e){"use strict";e.exports={blogPosts:[]}}}]);
