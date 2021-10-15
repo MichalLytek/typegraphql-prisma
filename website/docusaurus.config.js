@@ -24,6 +24,21 @@ module.exports = {
       theme: vsLightTheme,
       darkTheme: vsDarkTheme,
     },
+    algolia: {
+      // If Algolia did not provide you any appId, use 'BH4D9OD16A'
+      appId: "BH4D9OD16A",
+      // Public API key: it is safe to commit it
+      apiKey: "f050b2ccf954c63956fa147598baeed8",
+      indexName: "typegraphql_prisma",
+      // Optional: see doc section below
+      contextualSearch: true,
+      // Optional: Algolia search parameters
+      searchParameters: {
+        // facetFilters: ["type:content"],
+      },
+      // Set debug to true if you want to inspect the modal
+      debug: false,
+    },
     navbar: {
       title: "TypeGraphQL Prisma",
       logo: {
