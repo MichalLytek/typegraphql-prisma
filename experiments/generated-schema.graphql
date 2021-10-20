@@ -89,23 +89,6 @@ input BigIntNullableWithAggregatesFilter {
   notIn: [BigInt!]
 }
 
-input BoolFieldUpdateOperationsInput {
-  set: Boolean
-}
-
-input BoolFilter {
-  equals: Boolean
-  not: NestedBoolFilter
-}
-
-input BoolWithAggregatesFilter {
-  _count: NestedIntFilter
-  _max: NestedBoolFilter
-  _min: NestedBoolFilter
-  equals: Boolean
-  not: NestedBoolWithAggregatesFilter
-}
-
 """The `Byte` scalar type represents byte value as a Buffer"""
 scalar Byte
 
@@ -1733,19 +1716,6 @@ input NestedBigIntNullableWithAggregatesFilter {
   notIn: [BigInt!]
 }
 
-input NestedBoolFilter {
-  equals: Boolean
-  not: NestedBoolFilter
-}
-
-input NestedBoolWithAggregatesFilter {
-  _count: NestedIntFilter
-  _max: NestedBoolFilter
-  _min: NestedBoolFilter
-  equals: Boolean
-  not: NestedBoolWithAggregatesFilter
-}
-
 input NestedBytesNullableFilter {
   equals: Byte
   not: NestedBytesNullableFilter
@@ -2216,7 +2186,6 @@ input PostCountOrderByAggregateInput {
   editorId: SortOrder
   kind: SortOrder
   metadata: SortOrder
-  published: SortOrder
   subtitle: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2230,7 +2199,6 @@ input PostCreateInput {
   editor: MainUserCreateNestedOneWithoutEditorPostsInput
   kind: PostKind
   metadata: JSON!
-  published: Boolean!
   subtitle: String!
   title: String!
   updatedAt: DateTime
@@ -2243,7 +2211,6 @@ input PostCreateManyAuthorInput {
   editorId: Int
   kind: PostKind
   metadata: JSON!
-  published: Boolean!
   subtitle: String!
   title: String!
   updatedAt: DateTime
@@ -2261,7 +2228,6 @@ input PostCreateManyEditorInput {
   createdAt: DateTime
   kind: PostKind
   metadata: JSON!
-  published: Boolean!
   subtitle: String!
   title: String!
   updatedAt: DateTime
@@ -2303,7 +2269,6 @@ input PostCreateWithoutAuthorInput {
   editor: MainUserCreateNestedOneWithoutEditorPostsInput
   kind: PostKind
   metadata: JSON!
-  published: Boolean!
   subtitle: String!
   title: String!
   updatedAt: DateTime
@@ -2316,7 +2281,6 @@ input PostCreateWithoutEditorInput {
   createdAt: DateTime
   kind: PostKind
   metadata: JSON!
-  published: Boolean!
   subtitle: String!
   title: String!
   updatedAt: DateTime
@@ -2372,7 +2336,6 @@ input PostMaxOrderByAggregateInput {
   createdAt: SortOrder
   editorId: SortOrder
   kind: SortOrder
-  published: SortOrder
   subtitle: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2398,7 +2361,6 @@ input PostMinOrderByAggregateInput {
   createdAt: SortOrder
   editorId: SortOrder
   kind: SortOrder
-  published: SortOrder
   subtitle: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2421,7 +2383,6 @@ input PostOrderByWithAggregationInput {
   editorId: SortOrder
   kind: SortOrder
   metadata: SortOrder
-  published: SortOrder
   subtitle: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2437,7 +2398,6 @@ input PostOrderByWithRelationInput {
   editorId: SortOrder
   kind: SortOrder
   metadata: SortOrder
-  published: SortOrder
   subtitle: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2468,7 +2428,6 @@ input PostScalarWhereInput {
   editorId: IntNullableFilter
   kind: EnumPostKindNullableFilter
   metadata: JsonFilter
-  published: BoolFilter
   subtitle: StringFilter
   title: StringFilter
   updatedAt: DateTimeFilter
@@ -2485,7 +2444,6 @@ input PostScalarWhereWithAggregatesInput {
   editorId: IntNullableWithAggregatesFilter
   kind: EnumPostKindNullableWithAggregatesFilter
   metadata: JsonWithAggregatesFilter
-  published: BoolWithAggregatesFilter
   subtitle: StringWithAggregatesFilter
   title: StringWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -2507,7 +2465,6 @@ input PostUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   kind: NullableEnumPostKindFieldUpdateOperationsInput
   metadata: JSON
-  published: BoolFieldUpdateOperationsInput
   subtitle: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2568,7 +2525,6 @@ input PostUpdateWithoutAuthorInput {
   editor: MainUserUpdateOneWithoutEditorPostsInput
   kind: NullableEnumPostKindFieldUpdateOperationsInput
   metadata: JSON
-  published: BoolFieldUpdateOperationsInput
   subtitle: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2581,7 +2537,6 @@ input PostUpdateWithoutEditorInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   kind: NullableEnumPostKindFieldUpdateOperationsInput
   metadata: JSON
-  published: BoolFieldUpdateOperationsInput
   subtitle: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2612,7 +2567,6 @@ input PostWhereInput {
   editorId: IntNullableFilter
   kind: EnumPostKindNullableFilter
   metadata: JsonFilter
-  published: BoolFilter
   subtitle: StringFilter
   title: StringFilter
   updatedAt: DateTimeFilter

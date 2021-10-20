@@ -3,7 +3,7 @@
  * Client
 **/
 
-import * as runtime from './runtime';
+import * as runtime from './runtime/index';
 declare const prisma: unique symbol
 export type PrismaPromise<A> = Promise<A> & {[prisma]: true}
 type UnwrapPromise<P extends any> = P extends Promise<infer R> ? R : P
@@ -398,8 +398,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.2.0
-   * Query Engine version: afdab2f10860244038c4e32458134112852d4dad
+   * Prisma Client JS version: 3.3.0
+   * Query Engine version: 33838b0f78f1fe9052cf9a00e9761c9dc097a63c
    */
   export type PrismaVersion = {
     client: string
