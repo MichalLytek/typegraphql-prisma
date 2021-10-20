@@ -56,17 +56,19 @@ describe("emitOnly generator option", () => {
   });
 
   describe("when only 'models' is set", () => {
-    it("should generate proper files, enhance and index", async () => {
+    it("should generate model without _count, proper files, enhance and index", async () => {
       await generateCodeFromSchema(schema, {
         emitOnly: ["models"],
         outputDirPath,
       });
 
+      const userModelTSFile = await readGeneratedFile("/models/User.ts");
       const enhanceTSFile = await readGeneratedFile("/enhance.ts");
       const mainIndexTSFile = await readGeneratedFile("/index.ts");
       const directoryStructureString =
         getDirectoryStructureString(outputDirPath);
 
+      expect(userModelTSFile).toMatchSnapshot("User");
       expect(enhanceTSFile).toMatchSnapshot("enhance");
       expect(mainIndexTSFile).toMatchSnapshot("mainIndex");
       // FIXME: replace with `.toMatchInlineSnapshot()` when it starts working again

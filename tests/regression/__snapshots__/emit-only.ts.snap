@@ -1600,7 +1600,33 @@ exports[`emitOnly generator option when only 'inputs' is set should generate pro
 "
 `;
 
-exports[`emitOnly generator option when only 'models' is set should generate proper files, enhance and index: enhance 1`] = `
+exports[`emitOnly generator option when only 'models' is set should generate model without _count, proper files, enhance and index: User 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
+import { Post } from \\"../models/Post\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class User {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  id!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  email!: string;
+
+  posts?: Post[];
+}
+"
+`;
+
+exports[`emitOnly generator option when only 'models' is set should generate model without _count, proper files, enhance and index: enhance 1`] = `
 "import { ClassType } from \\"type-graphql\\";
 import * as models from \\"./models\\";
 
@@ -1691,7 +1717,7 @@ export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
 "
 `;
 
-exports[`emitOnly generator option when only 'models' is set should generate proper files, enhance and index: mainIndex 1`] = `
+exports[`emitOnly generator option when only 'models' is set should generate model without _count, proper files, enhance and index: mainIndex 1`] = `
 "import { NonEmptyArray } from \\"type-graphql\\";
 
 export * from \\"./enums\\";
@@ -1701,7 +1727,7 @@ export * from \\"./scalars\\";
 "
 `;
 
-exports[`emitOnly generator option when only 'models' is set should generate proper files, enhance and index: structure 1`] = `
+exports[`emitOnly generator option when only 'models' is set should generate model without _count, proper files, enhance and index: structure 1`] = `
 "
 [type-graphql]
   enhance.ts

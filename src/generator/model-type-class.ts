@@ -56,7 +56,10 @@ export default function generateObjectTypeClassFromModel(
   );
 
   const countField = modelOutputType.fields.find(it => it.name === "_count");
-  if (countField) {
+  const shouldEmitCountField =
+    countField !== undefined &&
+    dmmfDocument.shouldGenerateBlock("crudResolvers");
+  if (shouldEmitCountField) {
     generateResolversOutputsImports(sourceFile, [countField.typeGraphQLType]);
   }
 
@@ -113,7 +116,7 @@ export default function generateObjectTypeClassFromModel(
           }),
         };
       }),
-      ...(countField
+      ...(shouldEmitCountField
         ? [
             {
               name: countField.name,
