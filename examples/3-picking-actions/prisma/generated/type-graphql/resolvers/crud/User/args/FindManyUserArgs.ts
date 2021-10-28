@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { UserOrderByInput } from "../../../inputs/UserOrderByInput";
+import { UserOrderByWithRelationInput } from "../../../inputs/UserOrderByWithRelationInput";
 import { UserWhereInput } from "../../../inputs/UserWhereInput";
 import { UserWhereUniqueInput } from "../../../inputs/UserWhereUniqueInput";
 import { UserScalarFieldEnum } from "../../../../enums/UserScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindManyUserArgs {
   })
   where?: UserWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [UserOrderByInput], {
+  @TypeGraphQL.Field(_type => [UserOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: UserOrderByInput[] | undefined;
+  orderBy?: UserOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
     nullable: true

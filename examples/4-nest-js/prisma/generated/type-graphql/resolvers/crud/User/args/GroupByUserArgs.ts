@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { UserOrderByInput } from "../../../inputs/UserOrderByInput";
+import { UserOrderByWithAggregationInput } from "../../../inputs/UserOrderByWithAggregationInput";
 import { UserScalarWhereWithAggregatesInput } from "../../../inputs/UserScalarWhereWithAggregatesInput";
 import { UserWhereInput } from "../../../inputs/UserWhereInput";
 import { UserScalarFieldEnum } from "../../../../enums/UserScalarFieldEnum";
@@ -12,10 +12,10 @@ export class GroupByUserArgs {
   })
   where?: UserWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [UserOrderByInput], {
+  @TypeGraphQL.Field(_type => [UserOrderByWithAggregationInput], {
     nullable: true
   })
-  orderBy?: UserOrderByInput[] | undefined;
+  orderBy?: UserOrderByWithAggregationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [UserScalarFieldEnum], {
     nullable: false

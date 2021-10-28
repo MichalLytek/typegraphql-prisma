@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { PostOrderByInput } from "../../../inputs/PostOrderByInput";
+import { PostOrderByWithAggregationInput } from "../../../inputs/PostOrderByWithAggregationInput";
 import { PostScalarWhereWithAggregatesInput } from "../../../inputs/PostScalarWhereWithAggregatesInput";
 import { PostWhereInput } from "../../../inputs/PostWhereInput";
 import { PostScalarFieldEnum } from "../../../../enums/PostScalarFieldEnum";
@@ -12,10 +12,10 @@ export class GroupByPostArgs {
   })
   where?: PostWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [PostOrderByInput], {
+  @TypeGraphQL.Field(_type => [PostOrderByWithAggregationInput], {
     nullable: true
   })
-  orderBy?: PostOrderByInput[] | undefined;
+  orderBy?: PostOrderByWithAggregationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostScalarFieldEnum], {
     nullable: false

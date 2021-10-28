@@ -225,7 +225,6 @@ const prisma = new PrismaClient();
 
 const server = new ApolloServer({
   schema, // from previous step
-  playground: true,
   context: () => ({ prisma }),
 });
 ```

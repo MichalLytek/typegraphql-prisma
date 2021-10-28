@@ -22,7 +22,6 @@ async function main() {
 
   const server = new ApolloServer({
     schema,
-    playground: true,
     context: (): Context => ({ prisma }),
   });
   const { port } = await server.listen(4000);

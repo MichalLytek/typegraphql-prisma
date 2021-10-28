@@ -128,7 +128,12 @@ type PostMinAggregate {
   updatedAt: DateTime
 }
 
-input PostOrderByInput {
+input PostOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input PostOrderByWithRelationInput {
+  author: UserOrderByWithRelationInput
   authorId: SortOrder
   content: SortOrder
   createdAt: SortOrder
@@ -167,12 +172,12 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
-  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
+  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
+  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   post(where: PostWhereUniqueInput!): Post
-  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   user(where: UserWhereUniqueInput!): User
-  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
 
 enum SortOrder {
@@ -209,10 +214,15 @@ input StringNullableFilter {
 }
 
 type User {
+  _count: UserCount
   email: String!
   id: String!
   name: String
-  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+}
+
+type UserCount {
+  posts: Int!
 }
 
 type UserCountAggregate {
@@ -234,10 +244,11 @@ type UserMinAggregate {
   name: String
 }
 
-input UserOrderByInput {
+input UserOrderByWithRelationInput {
   email: SortOrder
   id: SortOrder
   name: SortOrder
+  posts: PostOrderByRelationAggregateInput
 }
 
 input UserRelationFilter {

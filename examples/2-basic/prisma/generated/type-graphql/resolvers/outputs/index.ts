@@ -5,6 +5,7 @@ export { PostCountAggregate } from "./PostCountAggregate";
 export { PostGroupBy } from "./PostGroupBy";
 export { PostMaxAggregate } from "./PostMaxAggregate";
 export { PostMinAggregate } from "./PostMinAggregate";
+export { UserCount } from "./UserCount";
 export { UserCountAggregate } from "./UserCountAggregate";
 export { UserGroupBy } from "./UserGroupBy";
 export { UserMaxAggregate } from "./UserMaxAggregate";

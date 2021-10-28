@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
 import { Post } from "../models/Post";
+import { UserCount } from "../resolvers/outputs/UserCount";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -24,4 +25,9 @@ export class User {
   name?: string | null;
 
   posts?: Post[];
+
+  @TypeGraphQL.Field(_type => UserCount, {
+    nullable: true
+  })
+  _count?: UserCount | null;
 }

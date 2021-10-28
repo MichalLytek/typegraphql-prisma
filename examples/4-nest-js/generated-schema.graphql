@@ -233,6 +233,16 @@ type PostCountAggregate {
   updatedAt: Int!
 }
 
+input PostCountOrderByAggregateInput {
+  authorId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  published: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+}
+
 input PostCreateInput {
   author: UserCreateNestedOneWithoutPostsInput
   content: String
@@ -292,6 +302,16 @@ type PostMaxAggregate {
   updatedAt: DateTime
 }
 
+input PostMaxOrderByAggregateInput {
+  authorId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  published: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+}
+
 type PostMinAggregate {
   authorId: String
   content: String
@@ -302,7 +322,35 @@ type PostMinAggregate {
   updatedAt: DateTime
 }
 
-input PostOrderByInput {
+input PostMinOrderByAggregateInput {
+  authorId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  published: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+}
+
+input PostOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input PostOrderByWithAggregationInput {
+  _count: PostCountOrderByAggregateInput
+  _max: PostMaxOrderByAggregateInput
+  _min: PostMinOrderByAggregateInput
+  authorId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  published: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+}
+
+input PostOrderByWithRelationInput {
+  author: UserOrderByWithRelationInput
   authorId: SortOrder
   content: SortOrder
   createdAt: SortOrder
@@ -424,17 +472,17 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
-  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
+  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
+  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   bestUser: User
-  findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): Post
-  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
-  groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
-  groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
+  findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): Post
+  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): User
+  groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByWithAggregationInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
+  groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
   post(where: PostWhereUniqueInput!): Post
-  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   user(where: UserWhereUniqueInput!): User
-  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
 
 enum SortOrder {
@@ -509,11 +557,16 @@ input StringWithAggregatesFilter {
 }
 
 type User {
+  _count: UserCount
   email: String!
   favoritePost: Post
   id: String!
   name: String
-  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+}
+
+type UserCount {
+  posts: Int!
 }
 
 type UserCountAggregate {
@@ -521,6 +574,12 @@ type UserCountAggregate {
   email: Int!
   id: Int!
   name: Int!
+}
+
+input UserCountOrderByAggregateInput {
+  email: SortOrder
+  id: SortOrder
+  name: SortOrder
 }
 
 input UserCreateInput {
@@ -562,16 +621,38 @@ type UserMaxAggregate {
   name: String
 }
 
+input UserMaxOrderByAggregateInput {
+  email: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
 type UserMinAggregate {
   email: String
   id: String
   name: String
 }
 
-input UserOrderByInput {
+input UserMinOrderByAggregateInput {
   email: SortOrder
   id: SortOrder
   name: SortOrder
+}
+
+input UserOrderByWithAggregationInput {
+  _count: UserCountOrderByAggregateInput
+  _max: UserMaxOrderByAggregateInput
+  _min: UserMinOrderByAggregateInput
+  email: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+input UserOrderByWithRelationInput {
+  email: SortOrder
+  id: SortOrder
+  name: SortOrder
+  posts: PostOrderByRelationAggregateInput
 }
 
 input UserRelationFilter {
