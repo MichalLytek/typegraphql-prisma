@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { PatientOrderByWithRelationInput } from "../../../inputs/PatientOrderByWithRelationInput";
+import { PatientOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/PatientOrderByWithRelationAndSearchRelevanceInput";
 import { PatientWhereInput } from "../../../inputs/PatientWhereInput";
 import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput";
 import { PatientScalarFieldEnum } from "../../../../enums/PatientScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindFirstPatientArgs {
   })
   where?: PatientWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [PatientOrderByWithRelationInput], {
+  @TypeGraphQL.Field(_type => [PatientOrderByWithRelationAndSearchRelevanceInput], {
     nullable: true
   })
-  orderBy?: PatientOrderByWithRelationInput[] | undefined;
+  orderBy?: PatientOrderByWithRelationAndSearchRelevanceInput[] | undefined;
 
   @TypeGraphQL.Field(_type => PatientWhereUniqueInput, {
     nullable: true

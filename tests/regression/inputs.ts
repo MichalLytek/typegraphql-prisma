@@ -1375,20 +1375,20 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for sorting by one-to-many relation fields", async () => {
     const schema = /* prisma */ `
-        model FirstModel {
-          idField            Int            @id @default(autoincrement())
-          uniqueStringField  String         @unique
-          floatField         Float
-          secondModelsField  SecondModel[]
-        }
-        model SecondModel {
-          idField            Int          @id @default(autoincrement())
-          uniqueStringField  String       @unique
-          floatField         Float
-          firstModelFieldId  Int
-          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
-        }
-      `;
+      model FirstModel {
+        idField            Int            @id @default(autoincrement())
+        uniqueStringField  String         @unique
+        floatField         Float
+        secondModelsField  SecondModel[]
+      }
+      model SecondModel {
+        idField            Int          @id @default(autoincrement())
+        uniqueStringField  String       @unique
+        floatField         Float
+        firstModelFieldId  Int
+        firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+      }
+    `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
     const firstModelOrderByWithRelationInputTSFile = await readGeneratedFile(
@@ -1417,16 +1417,16 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for sorting by many-to-many relation fields", async () => {
     const schema = /* prisma */ `
-        model Sample {
-          idField       Int     @id @default(autoincrement())
-          stringField   String
-          floatField    Float
-          intField      Int
-          booleanField  Boolean
-          dateField     DateTime
-          jsonField     Json
-        }
-      `;
+      model Sample {
+        idField       Int     @id @default(autoincrement())
+        stringField   String
+        floatField    Float
+        intField      Int
+        booleanField  Boolean
+        dateField     DateTime
+        jsonField     Json
+      }
+    `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
     const sampleOrderByWithAggregationInputTSFile = await readGeneratedFile(
@@ -1503,16 +1503,20 @@ describe("inputs", () => {
   });
 
   describe("when `fullTextSearch` preview feature is enabled", () => {
-    it("should properly generate input type classes with string search field", async () => {
+    it("should properly generate input type classes with relevance and string search field", async () => {
       const schema = /* prisma */ `
-        model Sample {
-          idField       Int     @id @default(autoincrement())
-          stringField   String
-          floatField    Float
-          intField      Int
-          booleanField  Boolean
-          dateField     DateTime
-          jsonField     Json
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
         }
       `;
 
@@ -1520,6 +1524,13 @@ describe("inputs", () => {
         outputDirPath,
         previewFeatures: ["fullTextSearch"],
       });
+      const orderByRelevanceInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelOrderByRelevanceInput.ts",
+      );
+      const orderByWithRelationAndSearchRelevanceInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelOrderByWithRelationAndSearchRelevanceInput.ts",
+        );
       const nestedStringFilterTSFile = await readGeneratedFile(
         "/resolvers/inputs/NestedStringFilter.ts",
       );
@@ -1528,6 +1539,12 @@ describe("inputs", () => {
       );
       const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
 
+      expect(orderByRelevanceInputTSFile).toMatchSnapshot(
+        "FirstModelOrderByRelevanceInput",
+      );
+      expect(orderByWithRelationAndSearchRelevanceInputTSFile).toMatchSnapshot(
+        "FirstModelOrderByWithRelationAndSearchRelevanceInput",
+      );
       expect(nestedStringFilterTSFile).toMatchSnapshot("NestedStringFilter");
       expect(stringFilterTSFile).toMatchSnapshot("StringFilter");
       expect(indexTSFile).toMatchSnapshot("index");

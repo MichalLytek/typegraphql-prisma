@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { PostOrderByWithRelationInput } from "../../../inputs/PostOrderByWithRelationInput";
+import { PostOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/PostOrderByWithRelationAndSearchRelevanceInput";
 import { PostWhereInput } from "../../../inputs/PostWhereInput";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 import { PostScalarFieldEnum } from "../../../../enums/PostScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindManyPostArgs {
   })
   where?: PostWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [PostOrderByWithRelationInput], {
+  @TypeGraphQL.Field(_type => [PostOrderByWithRelationAndSearchRelevanceInput], {
     nullable: true
   })
-  orderBy?: PostOrderByWithRelationInput[] | undefined;
+  orderBy?: PostOrderByWithRelationAndSearchRelevanceInput[] | undefined;
 
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
     nullable: true

@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { NativeTypeModelOrderByWithRelationInput } from "../../../inputs/NativeTypeModelOrderByWithRelationInput";
+import { NativeTypeModelOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/NativeTypeModelOrderByWithRelationAndSearchRelevanceInput";
 import { NativeTypeModelWhereInput } from "../../../inputs/NativeTypeModelWhereInput";
 import { NativeTypeModelWhereUniqueInput } from "../../../inputs/NativeTypeModelWhereUniqueInput";
 
@@ -11,10 +11,10 @@ export class AggregateNativeTypeModelArgs {
   })
   where?: NativeTypeModelWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [NativeTypeModelOrderByWithRelationInput], {
+  @TypeGraphQL.Field(_type => [NativeTypeModelOrderByWithRelationAndSearchRelevanceInput], {
     nullable: true
   })
-  orderBy?: NativeTypeModelOrderByWithRelationInput[] | undefined;
+  orderBy?: NativeTypeModelOrderByWithRelationAndSearchRelevanceInput[] | undefined;
 
   @TypeGraphQL.Field(_type => NativeTypeModelWhereUniqueInput, {
     nullable: true

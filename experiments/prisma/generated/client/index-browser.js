@@ -11,12 +11,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 3.3.0
- * Query Engine version: 33838b0f78f1fe9052cf9a00e9761c9dc097a63c
+ * Prisma Client JS version: 3.4.0
+ * Query Engine version: 1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85
  */
 Prisma.prismaVersion = {
-  client: "3.3.0",
-  engine: "33838b0f78f1fe9052cf9a00e9761c9dc097a63c"
+  client: "3.4.0",
+  engine: "1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -157,10 +157,53 @@ exports.Prisma.QueryMode = makeEnum({
   insensitive: 'insensitive'
 });
 
+exports.Prisma.UserOrderByRelevanceFieldEnum = makeEnum({
+  email: 'email',
+  name: 'name',
+  aliases: 'aliases'
+});
+
 exports.Prisma.JsonNullValueFilter = makeEnum({
   DbNull: 'DbNull',
   JsonNull: 'JsonNull',
   AnyNull: 'AnyNull'
+});
+
+exports.Prisma.postOrderByRelevanceFieldEnum = makeEnum({
+  uuid: 'uuid',
+  title: 'title',
+  subtitle: 'subtitle',
+  content: 'content'
+});
+
+exports.Prisma.CategoryOrderByRelevanceFieldEnum = makeEnum({
+  name: 'name',
+  slug: 'slug'
+});
+
+exports.Prisma.PatientOrderByRelevanceFieldEnum = makeEnum({
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email'
+});
+
+exports.Prisma.MovieOrderByRelevanceFieldEnum = makeEnum({
+  directorFirstName: 'directorFirstName',
+  directorLastName: 'directorLastName',
+  title: 'title'
+});
+
+exports.Prisma.DirectorOrderByRelevanceFieldEnum = makeEnum({
+  firstName: 'firstName',
+  lastName: 'lastName'
+});
+
+exports.Prisma.ProblemOrderByRelevanceFieldEnum = makeEnum({
+  problemText: 'problemText'
+});
+
+exports.Prisma.CreatorOrderByRelevanceFieldEnum = makeEnum({
+  name: 'name'
 });
 exports.Role = makeEnum({
   USER: 'USER',

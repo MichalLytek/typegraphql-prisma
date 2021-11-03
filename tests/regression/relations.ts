@@ -406,4 +406,36 @@ describe("relations resolvers generation", () => {
       "MovieRelationsResolver",
     );
   });
+
+  describe("when `fullTextSearch` preview feature is enabled", () => {
+    it("should properly generate args type classes using SearchRelevanceInput", async () => {
+      const schema = /* prisma */ `
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["fullTextSearch"],
+      });
+      const firstModelSecondModelsFieldArgsTSFile = await readGeneratedFile(
+        "/resolvers/relations/FirstModel/args/FirstModelSecondModelsFieldArgs.ts",
+      );
+
+      expect(firstModelSecondModelsFieldArgsTSFile).toMatchSnapshot(
+        "FirstModelSecondModelsFieldArgs",
+      );
+    });
+  });
 });

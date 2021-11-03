@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { ProblemOrderByWithRelationInput } from "../../../inputs/ProblemOrderByWithRelationInput";
+import { ProblemOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/ProblemOrderByWithRelationAndSearchRelevanceInput";
 import { ProblemWhereInput } from "../../../inputs/ProblemWhereInput";
 import { ProblemWhereUniqueInput } from "../../../inputs/ProblemWhereUniqueInput";
 
@@ -11,10 +11,10 @@ export class AggregateProblemArgs {
   })
   where?: ProblemWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemOrderByWithRelationInput], {
+  @TypeGraphQL.Field(_type => [ProblemOrderByWithRelationAndSearchRelevanceInput], {
     nullable: true
   })
-  orderBy?: ProblemOrderByWithRelationInput[] | undefined;
+  orderBy?: ProblemOrderByWithRelationAndSearchRelevanceInput[] | undefined;
 
   @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, {
     nullable: true

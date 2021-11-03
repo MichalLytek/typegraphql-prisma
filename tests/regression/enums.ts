@@ -150,4 +150,29 @@ describe("enums", () => {
     );
     expect(enumsIndexTSFile).toMatchSnapshot("enums index");
   });
+
+  describe("when `fullTextSearch` preview feature is enabled", () => {
+    it("should properly generate enums for relevance", async () => {
+      const schema = /* prisma */ `
+        model SampleModel {
+          intIdField   Int     @id @default(autoincrement())
+          stringField  String  @unique
+          intField     Int
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["fullTextSearch"],
+      });
+      const sampleModelOrderByRelevanceFieldEnumTSFile =
+        await readGeneratedFile(
+          "/enums/SampleModelOrderByRelevanceFieldEnum.ts",
+        );
+
+      expect(sampleModelOrderByRelevanceFieldEnumTSFile).toMatchSnapshot(
+        "SampleModelOrderByRelevanceFieldEnum",
+      );
+    });
+  });
 });

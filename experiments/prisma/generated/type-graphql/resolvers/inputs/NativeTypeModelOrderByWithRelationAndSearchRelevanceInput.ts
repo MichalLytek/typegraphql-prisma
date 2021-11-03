@@ -7,19 +7,24 @@ import { SortOrder } from "../../enums/SortOrder";
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class PatientOrderByWithRelationInput {
+export class NativeTypeModelOrderByWithRelationAndSearchRelevanceInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  firstName?: "asc" | "desc" | undefined;
+  id?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  lastName?: "asc" | "desc" | undefined;
+  bigInt?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  email?: "asc" | "desc" | undefined;
+  byteA?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  decimal?: "asc" | "desc" | undefined;
 }

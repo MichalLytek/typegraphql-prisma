@@ -3,13 +3,14 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CreatorOrderByRelationAggregateInput } from "../inputs/CreatorOrderByRelationAggregateInput";
-import { CreatorOrderByWithRelationInput } from "../inputs/CreatorOrderByWithRelationInput";
+import { CreatorOrderByWithRelationAndSearchRelevanceInput } from "../inputs/CreatorOrderByWithRelationAndSearchRelevanceInput";
+import { ProblemOrderByRelevanceInput } from "../inputs/ProblemOrderByRelevanceInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class ProblemOrderByWithRelationInput {
+export class ProblemOrderByWithRelationAndSearchRelevanceInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -25,13 +26,18 @@ export class ProblemOrderByWithRelationInput {
   })
   likedBy?: CreatorOrderByRelationAggregateInput | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorOrderByWithRelationInput, {
+  @TypeGraphQL.Field(_type => CreatorOrderByWithRelationAndSearchRelevanceInput, {
     nullable: true
   })
-  creator?: CreatorOrderByWithRelationInput | undefined;
+  creator?: CreatorOrderByWithRelationAndSearchRelevanceInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   creatorId?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => ProblemOrderByRelevanceInput, {
+    nullable: true
+  })
+  _relevance?: ProblemOrderByRelevanceInput | undefined;
 }

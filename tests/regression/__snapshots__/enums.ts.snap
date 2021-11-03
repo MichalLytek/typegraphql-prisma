@@ -166,3 +166,16 @@ export { SampleModelScalarFieldEnum } from \\"./SampleModelScalarFieldEnum\\";
 export { SortOrder } from \\"./SortOrder\\";
 "
 `;
+
+exports[`enums when \`fullTextSearch\` preview feature is enabled should properly generate enums for relevance: SampleModelOrderByRelevanceFieldEnum 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+
+export enum SampleModelOrderByRelevanceFieldEnum {
+  stringField = \\"stringField\\"
+}
+TypeGraphQL.registerEnumType(SampleModelOrderByRelevanceFieldEnum, {
+  name: \\"SampleModelOrderByRelevanceFieldEnum\\",
+  description: undefined,
+});
+"
+`;

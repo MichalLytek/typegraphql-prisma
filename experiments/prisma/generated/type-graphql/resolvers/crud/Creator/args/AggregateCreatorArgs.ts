@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { CreatorOrderByWithRelationInput } from "../../../inputs/CreatorOrderByWithRelationInput";
+import { CreatorOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/CreatorOrderByWithRelationAndSearchRelevanceInput";
 import { CreatorWhereInput } from "../../../inputs/CreatorWhereInput";
 import { CreatorWhereUniqueInput } from "../../../inputs/CreatorWhereUniqueInput";
 
@@ -11,10 +11,10 @@ export class AggregateCreatorArgs {
   })
   where?: CreatorWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [CreatorOrderByWithRelationInput], {
+  @TypeGraphQL.Field(_type => [CreatorOrderByWithRelationAndSearchRelevanceInput], {
     nullable: true
   })
-  orderBy?: CreatorOrderByWithRelationInput[] | undefined;
+  orderBy?: CreatorOrderByWithRelationAndSearchRelevanceInput[] | undefined;
 
   @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
     nullable: true

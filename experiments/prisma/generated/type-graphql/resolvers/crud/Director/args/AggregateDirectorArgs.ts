@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { DirectorOrderByWithRelationInput } from "../../../inputs/DirectorOrderByWithRelationInput";
+import { DirectorOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/DirectorOrderByWithRelationAndSearchRelevanceInput";
 import { DirectorWhereInput } from "../../../inputs/DirectorWhereInput";
 import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInput";
 
@@ -11,10 +11,10 @@ export class AggregateDirectorArgs {
   })
   where?: DirectorWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [DirectorOrderByWithRelationInput], {
+  @TypeGraphQL.Field(_type => [DirectorOrderByWithRelationAndSearchRelevanceInput], {
     nullable: true
   })
-  orderBy?: DirectorOrderByWithRelationInput[] | undefined;
+  orderBy?: DirectorOrderByWithRelationAndSearchRelevanceInput[] | undefined;
 
   @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
     nullable: true

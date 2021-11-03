@@ -2,13 +2,13 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { MovieOrderByRelationAggregateInput } from "../inputs/MovieOrderByRelationAggregateInput";
+import { PatientOrderByRelevanceInput } from "../inputs/PatientOrderByRelevanceInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class DirectorOrderByWithRelationInput {
+export class PatientOrderByWithRelationAndSearchRelevanceInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -19,8 +19,13 @@ export class DirectorOrderByWithRelationInput {
   })
   lastName?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => MovieOrderByRelationAggregateInput, {
+  @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  movies?: MovieOrderByRelationAggregateInput | undefined;
+  email?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => PatientOrderByRelevanceInput, {
+    nullable: true
+  })
+  _relevance?: PatientOrderByRelevanceInput | undefined;
 }
