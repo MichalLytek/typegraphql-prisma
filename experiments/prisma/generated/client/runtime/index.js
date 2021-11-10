@@ -2899,7 +2899,7 @@ var require_strip_indent = __commonJS2({
   }
 });
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -3472,13 +3472,13 @@ var require_dist8 = __commonJS2({
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85",
+        version: "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85"
+          enginesVersion: "57771c0558568c7d08bd34c7248af5244ae16bd9"
         },
         repository: {
           type: "git",
@@ -15614,7 +15614,7 @@ ${error2.message}` : execaMessage;
         configurable: true
       });
       var INTERNALS$2 = Symbol("Request internals");
-      var URL3 = whatwgUrl.URL;
+      var URL3 = Url.URL || whatwgUrl.URL;
       var parse_url = Url.parse;
       var format_url = Url.format;
       function parseURL(urlStr) {
@@ -24979,7 +24979,7 @@ ${error2.message}` : execaMessage;
   }
 });
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -25002,7 +25002,7 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25184,7 +25184,7 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25207,7 +25207,7 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -25234,7 +25234,7 @@ var require_platforms2 = __commonJS2({
   }
 });
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -30125,7 +30125,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.4.0",
+      version: "3.4.2",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -30187,10 +30187,10 @@ var require_package2 = __commonJS2({
         "@microsoft/api-extractor": "7.18.17",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85",
-        "@prisma/fetch-engine": "3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85",
+        "@prisma/engines": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
+        "@prisma/fetch-engine": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85",
+        "@prisma/get-platform": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@timsuchanek/copy": "1.4.5",
@@ -30253,7 +30253,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85"
+        "@prisma/engines-version": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9"
       },
       "lint-staged": {
         "*.ts": [
@@ -37678,11 +37678,9 @@ __name(request3, "request3");
 __name2(request3, "request");
 __name20(request3, "request");
 function buildHeaders(options2) {
-  var _a2, _b2;
   return {
     ...options2.headers,
-    "Content-Type": "application/json",
-    "Content-Length": `${(_b2 = (_a2 = options2.body) == null ? void 0 : _a2.length) != null ? _b2 : 0}`
+    "Content-Type": "application/json"
   };
 }
 __name(buildHeaders, "buildHeaders");
@@ -37764,7 +37762,7 @@ function getClientVersion(config2) {
   if (!suffix && /^[1-9][0-9]*\.[0-9]+\.[0-9]+$/.test(version)) {
     return version;
   }
-  return "3.2.0";
+  return "3.4.1";
 }
 __name(getClientVersion, "getClientVersion");
 __name2(getClientVersion, "getClientVersion");
