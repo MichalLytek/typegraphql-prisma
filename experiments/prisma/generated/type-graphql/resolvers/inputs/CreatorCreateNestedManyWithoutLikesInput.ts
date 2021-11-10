@@ -6,7 +6,7 @@ import { CreatorCreateOrConnectWithoutLikesInput } from "../inputs/CreatorCreate
 import { CreatorCreateWithoutLikesInput } from "../inputs/CreatorCreateWithoutLikesInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("CreatorCreateNestedManyWithoutLikesInput", {
   isAbstract: true
 })
 export class CreatorCreateNestedManyWithoutLikesInput {

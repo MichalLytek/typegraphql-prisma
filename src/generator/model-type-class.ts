@@ -71,6 +71,7 @@ export default function generateObjectTypeClassFromModel(
       {
         name: "TypeGraphQL.ObjectType",
         arguments: [
+          `"${model.typeName}"`,
           Writers.object({
             isAbstract: "true",
             ...(model.docs && { description: `"${model.docs}"` }),

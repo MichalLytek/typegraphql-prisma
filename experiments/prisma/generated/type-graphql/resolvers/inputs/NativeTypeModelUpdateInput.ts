@@ -6,7 +6,7 @@ import { NullableBigIntFieldUpdateOperationsInput } from "../inputs/NullableBigI
 import { NullableBytesFieldUpdateOperationsInput } from "../inputs/NullableBytesFieldUpdateOperationsInput";
 import { NullableDecimalFieldUpdateOperationsInput } from "../inputs/NullableDecimalFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("NativeTypeModelUpdateInput", {
   isAbstract: true
 })
 export class NativeTypeModelUpdateInput {

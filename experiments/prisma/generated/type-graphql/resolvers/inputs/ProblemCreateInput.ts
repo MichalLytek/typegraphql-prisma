@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { CreatorCreateNestedManyWithoutLikesInput } from "../inputs/CreatorCreateNestedManyWithoutLikesInput";
 import { CreatorCreateNestedOneWithoutProblemsInput } from "../inputs/CreatorCreateNestedOneWithoutProblemsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("ProblemCreateInput", {
   isAbstract: true
 })
 export class ProblemCreateInput {

@@ -11,7 +11,7 @@ import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStri
 import { PostUpdateManyWithoutEditorInput } from "../inputs/PostUpdateManyWithoutEditorInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("MainUserUpdateWithoutPostsInput", {
   isAbstract: true
 })
 export class MainUserUpdateWithoutPostsInput {

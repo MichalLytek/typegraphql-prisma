@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { CreatorCreateWithoutLikesInput } from "../inputs/CreatorCreateWithoutLikesInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("CreatorCreateOrConnectWithoutLikesInput", {
   isAbstract: true
 })
 export class CreatorCreateOrConnectWithoutLikesInput {

@@ -6,7 +6,7 @@ import { NestedDecimalNullableFilter } from "../inputs/NestedDecimalNullableFilt
 import { NestedDecimalNullableWithAggregatesFilter } from "../inputs/NestedDecimalNullableWithAggregatesFilter";
 import { NestedIntNullableFilter } from "../inputs/NestedIntNullableFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("DecimalNullableWithAggregatesFilter", {
   isAbstract: true
 })
 export class DecimalNullableWithAggregatesFilter {

@@ -11,7 +11,7 @@ import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 import { StringNullableListFilter } from "../inputs/StringNullableListFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("MainUserWhereInput", {
   isAbstract: true
 })
 export class MainUserWhereInput {

@@ -7,7 +7,7 @@ import { DirectorMaxOrderByAggregateInput } from "../inputs/DirectorMaxOrderByAg
 import { DirectorMinOrderByAggregateInput } from "../inputs/DirectorMinOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("DirectorOrderByWithAggregationInput", {
   isAbstract: true
 })
 export class DirectorOrderByWithAggregationInput {

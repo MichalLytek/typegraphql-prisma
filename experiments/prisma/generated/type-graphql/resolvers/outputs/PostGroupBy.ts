@@ -9,7 +9,7 @@ import { PostMinAggregate } from "../outputs/PostMinAggregate";
 import { PostSumAggregate } from "../outputs/PostSumAggregate";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("PostGroupBy", {
   isAbstract: true
 })
 export class PostGroupBy {

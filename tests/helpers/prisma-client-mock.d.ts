@@ -32,5 +32,6 @@ export declare namespace Prisma {
     type InputJsonValue = undefined | string | number | boolean | null | InputJsonObject | InputJsonArray;
     class Decimal {
         constructor(...arg: any[]);
+        static isDecimal(object: any): boolean;
     }
 }

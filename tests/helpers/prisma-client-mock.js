@@ -9,6 +9,9 @@ var Prisma;
     // Decimal.js mock
     class Decimal {
         constructor(...arg) { }
+        static isDecimal(object) {
+            return true;
+        }
     }
     Prisma.Decimal = Decimal;
 })(Prisma = exports.Prisma || (exports.Prisma = {}));

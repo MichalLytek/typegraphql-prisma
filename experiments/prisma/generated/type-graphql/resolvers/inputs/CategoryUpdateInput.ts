@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("CategoryUpdateInput", {
   isAbstract: true
 })
 export class CategoryUpdateInput {

@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { NestedEnumPostKindNullableFilter } from "../inputs/NestedEnumPostKindNullableFilter";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("EnumPostKindNullableFilter", {
   isAbstract: true
 })
 export class EnumPostKindNullableFilter {

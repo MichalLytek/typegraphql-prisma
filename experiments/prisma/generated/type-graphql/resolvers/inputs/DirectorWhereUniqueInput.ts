@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { DirectorFirstNameLastNameCompoundUniqueInput } from "../inputs/DirectorFirstNameLastNameCompoundUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("DirectorWhereUniqueInput", {
   isAbstract: true
 })
 export class DirectorWhereUniqueInput {

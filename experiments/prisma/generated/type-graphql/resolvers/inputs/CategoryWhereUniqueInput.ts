@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CategoryCategoryCompoundUniqueCompoundUniqueInput } from "../inputs/CategoryCategoryCompoundUniqueCompoundUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("CategoryWhereUniqueInput", {
   isAbstract: true
 })
 export class CategoryWhereUniqueInput {

@@ -3,7 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("DirectorFirstNameLastNameCompoundUniqueInput", {
   isAbstract: true
 })
 export class DirectorFirstNameLastNameCompoundUniqueInput {

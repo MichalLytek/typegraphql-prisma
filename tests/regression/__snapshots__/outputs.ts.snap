@@ -11,7 +11,7 @@ import { ExampleMaxAggregate } from \\"../outputs/ExampleMaxAggregate\\";
 import { ExampleMinAggregate } from \\"../outputs/ExampleMinAggregate\\";
 import { ExampleSumAggregate } from \\"../outputs/ExampleSumAggregate\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"AggregateExample\\", {
   isAbstract: true
 })
 export class AggregateExample {
@@ -49,7 +49,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleAvgAggregate\\", {
   isAbstract: true
 })
 export class ExampleAvgAggregate {
@@ -72,7 +72,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleCountAggregate\\", {
   isAbstract: true
 })
 export class ExampleCountAggregate {
@@ -115,7 +115,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleMaxAggregate\\", {
   isAbstract: true
 })
 export class ExampleMaxAggregate {
@@ -153,7 +153,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleMinAggregate\\", {
   isAbstract: true
 })
 export class ExampleMinAggregate {
@@ -191,7 +191,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleSumAggregate\\", {
   isAbstract: true
 })
 export class ExampleSumAggregate {
@@ -231,7 +231,7 @@ import { ExampleMaxAggregate } from \\"../outputs/ExampleMaxAggregate\\";
 import { ExampleMinAggregate } from \\"../outputs/ExampleMinAggregate\\";
 import { ExampleSumAggregate } from \\"../outputs/ExampleSumAggregate\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"AggregateExample\\", {
   isAbstract: true
 })
 export class AggregateExample {
@@ -269,7 +269,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleAvgAggregate\\", {
   isAbstract: true
 })
 export class ExampleAvgAggregate {
@@ -292,7 +292,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleCountAggregate\\", {
   isAbstract: true
 })
 export class ExampleCountAggregate {
@@ -335,7 +335,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleMaxAggregate\\", {
   isAbstract: true
 })
 export class ExampleMaxAggregate {
@@ -373,7 +373,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleMinAggregate\\", {
   isAbstract: true
 })
 export class ExampleMinAggregate {
@@ -411,7 +411,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"ExampleSumAggregate\\", {
   isAbstract: true
 })
 export class ExampleSumAggregate {
@@ -446,7 +446,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"FirstModelCount\\", {
   isAbstract: true
 })
 export class FirstModelCount {
@@ -484,7 +484,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"AffectedRowsOutput\\", {
   isAbstract: true
 })
 export class AffectedRowsOutput {
@@ -507,7 +507,7 @@ import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
 import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
 import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"AggregateSample\\", {
   isAbstract: true
 })
 export class AggregateSample {
@@ -545,7 +545,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"SampleAvgAggregate\\", {
   isAbstract: true
 })
 export class SampleAvgAggregate {
@@ -573,7 +573,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"SampleCountAggregate\\", {
   isAbstract: true
 })
 export class SampleCountAggregate {
@@ -626,7 +626,7 @@ import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
 import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
 import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"SampleGroupBy\\", {
   isAbstract: true
 })
 export class SampleGroupBy {
@@ -694,7 +694,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"SampleMaxAggregate\\", {
   isAbstract: true
 })
 export class SampleMaxAggregate {
@@ -732,7 +732,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"SampleMinAggregate\\", {
   isAbstract: true
 })
 export class SampleMinAggregate {
@@ -770,7 +770,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"SampleSumAggregate\\", {
   isAbstract: true
 })
 export class SampleSumAggregate {
@@ -810,7 +810,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"AffectedRowsOutput\\", {
   isAbstract: true,
   simpleResolvers: true
 })
@@ -834,7 +834,7 @@ import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
 import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
 import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"AggregateSample\\", {
   isAbstract: true,
   simpleResolvers: true
 })
@@ -873,7 +873,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"SampleAvgAggregate\\", {
   isAbstract: true,
   simpleResolvers: true
 })

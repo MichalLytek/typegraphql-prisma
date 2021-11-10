@@ -7,7 +7,7 @@ import { BytesNullableFilter } from "../inputs/BytesNullableFilter";
 import { DecimalNullableFilter } from "../inputs/DecimalNullableFilter";
 import { IntFilter } from "../inputs/IntFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("NativeTypeModelWhereInput", {
   isAbstract: true
 })
 export class NativeTypeModelWhereInput {

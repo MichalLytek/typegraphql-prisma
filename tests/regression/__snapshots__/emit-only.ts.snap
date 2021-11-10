@@ -1607,7 +1607,7 @@ import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true
 })
 export class User {

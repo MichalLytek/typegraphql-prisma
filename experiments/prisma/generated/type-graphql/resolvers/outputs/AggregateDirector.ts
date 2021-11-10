@@ -6,7 +6,7 @@ import { DirectorCountAggregate } from "../outputs/DirectorCountAggregate";
 import { DirectorMaxAggregate } from "../outputs/DirectorMaxAggregate";
 import { DirectorMinAggregate } from "../outputs/DirectorMinAggregate";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("AggregateDirector", {
   isAbstract: true
 })
 export class AggregateDirector {

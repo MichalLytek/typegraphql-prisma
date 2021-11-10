@@ -7,7 +7,7 @@ import { BytesNullableWithAggregatesFilter } from "../inputs/BytesNullableWithAg
 import { DecimalNullableWithAggregatesFilter } from "../inputs/DecimalNullableWithAggregatesFilter";
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("NativeTypeModelScalarWhereWithAggregatesInput", {
   isAbstract: true
 })
 export class NativeTypeModelScalarWhereWithAggregatesInput {

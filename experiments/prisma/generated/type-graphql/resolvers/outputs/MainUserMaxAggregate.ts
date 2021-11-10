@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("MainUserMaxAggregate", {
   isAbstract: true
 })
 export class MainUserMaxAggregate {

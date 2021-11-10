@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../scalars";
 import { Creator } from "../models/Creator";
 import { ProblemCount } from "../resolvers/outputs/ProblemCount";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("Problem", {
   isAbstract: true
 })
 export class Problem {

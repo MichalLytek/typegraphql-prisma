@@ -10,7 +10,7 @@ import { MainUserUpdategradesInput } from "../inputs/MainUserUpdategradesInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("MainUserUpdateManyMutationInput", {
   isAbstract: true
 })
 export class MainUserUpdateManyMutationInput {

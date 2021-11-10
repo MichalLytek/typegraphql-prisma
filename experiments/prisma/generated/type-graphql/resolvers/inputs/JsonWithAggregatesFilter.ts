@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { NestedIntFilter } from "../inputs/NestedIntFilter";
 import { NestedJsonFilter } from "../inputs/NestedJsonFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("JsonWithAggregatesFilter", {
   isAbstract: true
 })
 export class JsonWithAggregatesFilter {

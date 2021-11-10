@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("EnumRoleFieldUpdateOperationsInput", {
   isAbstract: true
 })
 export class EnumRoleFieldUpdateOperationsInput {

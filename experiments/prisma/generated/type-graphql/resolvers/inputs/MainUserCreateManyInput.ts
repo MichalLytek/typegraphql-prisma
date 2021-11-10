@@ -6,7 +6,7 @@ import { MainUserCreateManyaliasesInput } from "../inputs/MainUserCreateManyalia
 import { MainUserCreateManygradesInput } from "../inputs/MainUserCreateManygradesInput";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("MainUserCreateManyInput", {
   isAbstract: true
 })
 export class MainUserCreateManyInput {

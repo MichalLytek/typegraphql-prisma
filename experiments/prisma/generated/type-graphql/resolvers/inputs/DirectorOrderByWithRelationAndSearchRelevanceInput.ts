@@ -6,7 +6,7 @@ import { DirectorOrderByRelevanceInput } from "../inputs/DirectorOrderByRelevanc
 import { MovieOrderByRelationAggregateInput } from "../inputs/MovieOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("DirectorOrderByWithRelationAndSearchRelevanceInput", {
   isAbstract: true
 })
 export class DirectorOrderByWithRelationAndSearchRelevanceInput {

@@ -10,7 +10,7 @@ import { NullableEnumPostKindFieldUpdateOperationsInput } from "../inputs/Nullab
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PostUpdateInput", {
   isAbstract: true
 })
 export class PostUpdateInput {

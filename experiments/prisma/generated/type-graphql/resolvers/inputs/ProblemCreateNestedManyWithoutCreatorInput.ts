@@ -7,7 +7,7 @@ import { ProblemCreateOrConnectWithoutCreatorInput } from "../inputs/ProblemCrea
 import { ProblemCreateWithoutCreatorInput } from "../inputs/ProblemCreateWithoutCreatorInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("ProblemCreateNestedManyWithoutCreatorInput", {
   isAbstract: true
 })
 export class ProblemCreateNestedManyWithoutCreatorInput {

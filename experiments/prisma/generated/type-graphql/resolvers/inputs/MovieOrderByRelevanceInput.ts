@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { MovieOrderByRelevanceFieldEnum } from "../../enums/MovieOrderByRelevanceFieldEnum";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("MovieOrderByRelevanceInput", {
   isAbstract: true
 })
 export class MovieOrderByRelevanceInput {

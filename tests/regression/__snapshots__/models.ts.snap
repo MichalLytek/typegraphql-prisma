@@ -6,7 +6,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true,
   simpleResolvers: true
 })
@@ -40,7 +40,7 @@ import { UserCount } from \\"../resolvers/outputs/UserCount\\";
 /**
  * User model doc
  */
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true,
   description: \\"User model doc\\"
 })
@@ -94,7 +94,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true
 })
 export class User {
@@ -148,7 +148,7 @@ import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { Sample } from \\"../enums/Sample\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true
 })
 export class User {
@@ -176,7 +176,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"NativeTypeModel\\", {
   isAbstract: true
 })
 export class NativeTypeModel {
@@ -209,7 +209,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true
 })
 export class User {
@@ -244,7 +244,7 @@ import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
 import { UserCount } from \\"../resolvers/outputs/UserCount\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true
 })
 export class User {
@@ -299,7 +299,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true
 })
 export class User {
@@ -330,7 +330,7 @@ import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { Client } from \\"../models/Client\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"Article\\", {
   isAbstract: true
 })
 export class Article {
@@ -357,7 +357,7 @@ import { DecimalJSScalar } from \\"../scalars\\";
 import { Article } from \\"../models/Article\\";
 import { ClientCount } from \\"../resolvers/outputs/ClientCount\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"Client\\", {
   isAbstract: true
 })
 export class Client {
@@ -383,7 +383,7 @@ import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { User } from \\"../models/User\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"Post\\", {
   isAbstract: true
 })
 export class Post {
@@ -410,7 +410,7 @@ import { DecimalJSScalar } from \\"../scalars\\";
 import { Post } from \\"../models/Post\\";
 import { UserCount } from \\"../resolvers/outputs/UserCount\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"User\\", {
   isAbstract: true
 })
 export class User {
@@ -436,7 +436,7 @@ import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 import { ServiceCount } from \\"../resolvers/outputs/ServiceCount\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"Service\\", {
   isAbstract: true
 })
 export class Service {
@@ -473,7 +473,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"FirstModel\\", {
   isAbstract: true
 })
 export class FirstModel {
@@ -501,7 +501,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType(\\"SecondModel\\", {
   isAbstract: true
 })
 export class SecondModel {

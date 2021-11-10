@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { CategoryOrderByRelevanceInput } from "../inputs/CategoryOrderByRelevanceInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("CategoryOrderByWithRelationAndSearchRelevanceInput", {
   isAbstract: true
 })
 export class CategoryOrderByWithRelationAndSearchRelevanceInput {

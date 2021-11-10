@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { CreatorUpdateManyWithoutLikesInput } from "../inputs/CreatorUpdateManyWithoutLikesInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("ProblemUpdateWithoutCreatorInput", {
   isAbstract: true
 })
 export class ProblemUpdateWithoutCreatorInput {

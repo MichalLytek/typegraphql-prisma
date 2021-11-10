@@ -8,7 +8,7 @@ import { CreatorUpdateWithoutProblemsInput } from "../inputs/CreatorUpdateWithou
 import { CreatorUpsertWithoutProblemsInput } from "../inputs/CreatorUpsertWithoutProblemsInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("CreatorUpdateOneWithoutProblemsInput", {
   isAbstract: true
 })
 export class CreatorUpdateOneWithoutProblemsInput {

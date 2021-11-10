@@ -11,7 +11,7 @@ import { ProblemUpdateWithWhereUniqueWithoutCreatorInput } from "../inputs/Probl
 import { ProblemUpsertWithWhereUniqueWithoutCreatorInput } from "../inputs/ProblemUpsertWithWhereUniqueWithoutCreatorInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("ProblemUpdateManyWithoutCreatorInput", {
   isAbstract: true
 })
 export class ProblemUpdateManyWithoutCreatorInput {

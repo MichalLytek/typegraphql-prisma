@@ -6,7 +6,7 @@ import { NestedBigIntNullableFilter } from "../inputs/NestedBigIntNullableFilter
 import { NestedFloatNullableFilter } from "../inputs/NestedFloatNullableFilter";
 import { NestedIntNullableFilter } from "../inputs/NestedIntNullableFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("NestedBigIntNullableWithAggregatesFilter", {
   isAbstract: true
 })
 export class NestedBigIntNullableWithAggregatesFilter {

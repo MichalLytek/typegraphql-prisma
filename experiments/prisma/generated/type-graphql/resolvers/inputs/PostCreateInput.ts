@@ -6,7 +6,7 @@ import { MainUserCreateNestedOneWithoutEditorPostsInput } from "../inputs/MainUs
 import { MainUserCreateNestedOneWithoutPostsInput } from "../inputs/MainUserCreateNestedOneWithoutPostsInput";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PostCreateInput", {
   isAbstract: true
 })
 export class PostCreateInput {

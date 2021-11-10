@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PatientScalarWhereWithAggregatesInput", {
   isAbstract: true
 })
 export class PatientScalarWhereWithAggregatesInput {

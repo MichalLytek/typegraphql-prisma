@@ -47,5 +47,8 @@ export namespace Prisma {
   // Decimal.js mock
   export class Decimal {
     constructor(...arg: any[]) {}
+    static isDecimal(object: any): boolean {
+      return true;
+    }
   }
 }

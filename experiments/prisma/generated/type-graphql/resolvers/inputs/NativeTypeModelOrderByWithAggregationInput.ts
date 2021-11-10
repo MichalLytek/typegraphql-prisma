@@ -9,7 +9,7 @@ import { NativeTypeModelMinOrderByAggregateInput } from "../inputs/NativeTypeMod
 import { NativeTypeModelSumOrderByAggregateInput } from "../inputs/NativeTypeModelSumOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("NativeTypeModelOrderByWithAggregationInput", {
   isAbstract: true
 })
 export class NativeTypeModelOrderByWithAggregationInput {

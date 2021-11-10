@@ -6,7 +6,7 @@ import { CreatorUpdateManyWithoutLikesInput } from "../inputs/CreatorUpdateManyW
 import { CreatorUpdateOneWithoutProblemsInput } from "../inputs/CreatorUpdateOneWithoutProblemsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("ProblemUpdateInput", {
   isAbstract: true
 })
 export class ProblemUpdateInput {

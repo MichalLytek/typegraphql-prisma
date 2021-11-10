@@ -9,7 +9,7 @@ import { MainUserMinAggregate } from "../outputs/MainUserMinAggregate";
 import { MainUserSumAggregate } from "../outputs/MainUserSumAggregate";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("MainUserGroupBy", {
   isAbstract: true
 })
 export class MainUserGroupBy {

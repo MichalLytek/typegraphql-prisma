@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { DirectorCreateNestedOneWithoutMoviesInput } from "../inputs/DirectorCreateNestedOneWithoutMoviesInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("MovieCreateInput", {
   isAbstract: true
 })
 export class MovieCreateInput {

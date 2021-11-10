@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../scalars";
 import { Movie } from "../models/Movie";
 import { DirectorCount } from "../resolvers/outputs/DirectorCount";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("Director", {
   isAbstract: true
 })
 export class Director {

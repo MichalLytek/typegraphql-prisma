@@ -6,7 +6,7 @@ import { MovieCountAggregate } from "../outputs/MovieCountAggregate";
 import { MovieMaxAggregate } from "../outputs/MovieMaxAggregate";
 import { MovieMinAggregate } from "../outputs/MovieMinAggregate";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("AggregateMovie", {
   isAbstract: true
 })
 export class AggregateMovie {

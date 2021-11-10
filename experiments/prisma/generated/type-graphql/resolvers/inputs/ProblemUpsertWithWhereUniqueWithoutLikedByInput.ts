@@ -6,7 +6,7 @@ import { ProblemCreateWithoutLikedByInput } from "../inputs/ProblemCreateWithout
 import { ProblemUpdateWithoutLikedByInput } from "../inputs/ProblemUpdateWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("ProblemUpsertWithWhereUniqueWithoutLikedByInput", {
   isAbstract: true
 })
 export class ProblemUpsertWithWhereUniqueWithoutLikedByInput {

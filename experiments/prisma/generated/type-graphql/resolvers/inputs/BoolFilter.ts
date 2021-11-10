@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { NestedBoolFilter } from "../inputs/NestedBoolFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("BoolFilter", {
   isAbstract: true
 })
 export class BoolFilter {

@@ -8,7 +8,7 @@ import { CreatorMaxAggregate } from "../outputs/CreatorMaxAggregate";
 import { CreatorMinAggregate } from "../outputs/CreatorMinAggregate";
 import { CreatorSumAggregate } from "../outputs/CreatorSumAggregate";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("AggregateCreator", {
   isAbstract: true
 })
 export class AggregateCreator {

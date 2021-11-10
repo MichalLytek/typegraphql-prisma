@@ -12,7 +12,7 @@ import { PostUpdateManyWithoutAuthorInput } from "../inputs/PostUpdateManyWithou
 import { PostUpdateManyWithoutEditorInput } from "../inputs/PostUpdateManyWithoutEditorInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("MainUserUpdateInput", {
   isAbstract: true
 })
 export class MainUserUpdateInput {

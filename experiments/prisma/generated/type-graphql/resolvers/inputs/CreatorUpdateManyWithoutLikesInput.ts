@@ -10,7 +10,7 @@ import { CreatorUpdateWithWhereUniqueWithoutLikesInput } from "../inputs/Creator
 import { CreatorUpsertWithWhereUniqueWithoutLikesInput } from "../inputs/CreatorUpsertWithWhereUniqueWithoutLikesInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("CreatorUpdateManyWithoutLikesInput", {
   isAbstract: true
 })
 export class CreatorUpdateManyWithoutLikesInput {

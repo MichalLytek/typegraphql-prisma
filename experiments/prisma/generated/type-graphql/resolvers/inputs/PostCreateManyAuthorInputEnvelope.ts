@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { PostCreateManyAuthorInput } from "../inputs/PostCreateManyAuthorInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PostCreateManyAuthorInputEnvelope", {
   isAbstract: true
 })
 export class PostCreateManyAuthorInputEnvelope {

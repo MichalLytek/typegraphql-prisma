@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProblemCreateManyCreatorInput } from "../inputs/ProblemCreateManyCreatorInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("ProblemCreateManyCreatorInputEnvelope", {
   isAbstract: true
 })
 export class ProblemCreateManyCreatorInputEnvelope {

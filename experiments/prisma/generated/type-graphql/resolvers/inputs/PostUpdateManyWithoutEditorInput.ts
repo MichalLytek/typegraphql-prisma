@@ -11,7 +11,7 @@ import { PostUpdateWithWhereUniqueWithoutEditorInput } from "../inputs/PostUpdat
 import { PostUpsertWithWhereUniqueWithoutEditorInput } from "../inputs/PostUpsertWithWhereUniqueWithoutEditorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PostUpdateManyWithoutEditorInput", {
   isAbstract: true
 })
 export class PostUpdateManyWithoutEditorInput {

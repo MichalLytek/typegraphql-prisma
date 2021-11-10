@@ -4,7 +4,7 @@ import { Prisma } from "../../client";
 import { DecimalJSScalar } from "../scalars";
 import { Director } from "../models/Director";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("Movie", {
   isAbstract: true
 })
 export class Movie {

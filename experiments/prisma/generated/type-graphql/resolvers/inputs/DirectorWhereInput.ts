@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { MovieListRelationFilter } from "../inputs/MovieListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("DirectorWhereInput", {
   isAbstract: true
 })
 export class DirectorWhereInput {

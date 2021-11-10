@@ -7,7 +7,7 @@ import { MainUserCreategradesInput } from "../inputs/MainUserCreategradesInput";
 import { PostCreateNestedManyWithoutAuthorInput } from "../inputs/PostCreateNestedManyWithoutAuthorInput";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("MainUserCreateWithoutEditorPostsInput", {
   isAbstract: true
 })
 export class MainUserCreateWithoutEditorPostsInput {

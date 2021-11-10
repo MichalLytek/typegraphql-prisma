@@ -8,7 +8,7 @@ import { NativeTypeModelMaxAggregate } from "../outputs/NativeTypeModelMaxAggreg
 import { NativeTypeModelMinAggregate } from "../outputs/NativeTypeModelMinAggregate";
 import { NativeTypeModelSumAggregate } from "../outputs/NativeTypeModelSumAggregate";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("NativeTypeModelGroupBy", {
   isAbstract: true
 })
 export class NativeTypeModelGroupBy {

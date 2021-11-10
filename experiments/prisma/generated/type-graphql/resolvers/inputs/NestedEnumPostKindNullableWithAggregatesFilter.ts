@@ -6,7 +6,7 @@ import { NestedEnumPostKindNullableFilter } from "../inputs/NestedEnumPostKindNu
 import { NestedIntNullableFilter } from "../inputs/NestedIntNullableFilter";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("NestedEnumPostKindNullableWithAggregatesFilter", {
   isAbstract: true
 })
 export class NestedEnumPostKindNullableWithAggregatesFilter {

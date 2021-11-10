@@ -6,7 +6,7 @@ import { MainUserOrderByWithRelationAndSearchRelevanceInput } from "../inputs/Ma
 import { PostOrderByRelevanceInput } from "../inputs/PostOrderByRelevanceInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PostOrderByWithRelationAndSearchRelevanceInput", {
   isAbstract: true
 })
 export class PostOrderByWithRelationAndSearchRelevanceInput {
