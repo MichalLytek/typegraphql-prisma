@@ -179,3 +179,16 @@ TypeGraphQL.registerEnumType(SampleModelOrderByRelevanceFieldEnum, {
 });
 "
 `;
+
+exports[`enums when \`fullTextSearch\` preview feature is enabled when model is renamed should properly generate enums for relevance: SampleRenamedModelOrderByRelevanceFieldEnum 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+
+export enum SampleRenamedModelOrderByRelevanceFieldEnum {
+  stringField = \\"stringField\\"
+}
+TypeGraphQL.registerEnumType(SampleRenamedModelOrderByRelevanceFieldEnum, {
+  name: \\"SampleRenamedModelOrderByRelevanceFieldEnum\\",
+  description: undefined,
+});
+"
+`;

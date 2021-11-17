@@ -2,14 +2,14 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
+import { MainUserOrderByRelevanceFieldEnum } from "../../enums/MainUserOrderByRelevanceFieldEnum";
 import { SortOrder } from "../../enums/SortOrder";
-import { UserOrderByRelevanceFieldEnum } from "../../enums/UserOrderByRelevanceFieldEnum";
 
 @TypeGraphQL.InputType("MainUserOrderByRelevanceInput", {
   isAbstract: true
 })
 export class MainUserOrderByRelevanceInput {
-  @TypeGraphQL.Field(_type => [UserOrderByRelevanceFieldEnum], {
+  @TypeGraphQL.Field(_type => [MainUserOrderByRelevanceFieldEnum], {
     nullable: false
   })
   fields!: Array<"email" | "name" | "aliases">;

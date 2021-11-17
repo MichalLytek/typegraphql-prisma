@@ -174,5 +174,31 @@ describe("enums", () => {
         "SampleModelOrderByRelevanceFieldEnum",
       );
     });
+
+    describe("when model is renamed", () => {
+      it("should properly generate enums for relevance", async () => {
+        const schema = /* prisma */ `
+          /// @@TypeGraphQL.type(name: "SampleRenamedModel")
+          model SampleModel {
+            intIdField   Int     @id @default(autoincrement())
+            stringField  String  @unique
+            intField     Int
+          }
+        `;
+
+        await generateCodeFromSchema(schema, {
+          outputDirPath,
+          previewFeatures: ["fullTextSearch"],
+        });
+        const sampleRenamedModelOrderByRelevanceFieldEnumTSFile =
+          await readGeneratedFile(
+            "/enums/SampleRenamedModelOrderByRelevanceFieldEnum.ts",
+          );
+
+        expect(
+          sampleRenamedModelOrderByRelevanceFieldEnumTSFile,
+        ).toMatchSnapshot("SampleRenamedModelOrderByRelevanceFieldEnum");
+      });
+    });
   });
 });

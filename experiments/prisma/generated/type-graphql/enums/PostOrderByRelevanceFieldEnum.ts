@@ -1,12 +1,12 @@
 import * as TypeGraphQL from "type-graphql";
 
-export enum postOrderByRelevanceFieldEnum {
+export enum PostOrderByRelevanceFieldEnum {
   uuid = "uuid",
   title = "title",
   subtitle = "subtitle",
   content = "content"
 }
-TypeGraphQL.registerEnumType(postOrderByRelevanceFieldEnum, {
-  name: "postOrderByRelevanceFieldEnum",
+TypeGraphQL.registerEnumType(PostOrderByRelevanceFieldEnum, {
+  name: "PostOrderByRelevanceFieldEnum",
   description: undefined,
 });
