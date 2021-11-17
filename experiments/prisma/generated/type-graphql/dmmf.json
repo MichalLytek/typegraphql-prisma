@@ -34,7 +34,6 @@
     "models": [
       {
         "name": "User",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -204,7 +203,6 @@
       },
       {
         "name": "post",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -414,7 +412,6 @@
       },
       {
         "name": "Category",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -477,7 +474,6 @@
       },
       {
         "name": "Patient",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -533,7 +529,6 @@
       },
       {
         "name": "Movie",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -613,7 +608,6 @@
       },
       {
         "name": "Director",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -672,7 +666,6 @@
       },
       {
         "name": "Problem",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -765,7 +758,6 @@
       },
       {
         "name": "Creator",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -840,7 +832,6 @@
       },
       {
         "name": "NativeTypeModel",
-        "isEmbedded": false,
         "dbName": null,
         "fields": [
           {
@@ -18715,25 +18706,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "postWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -18773,6 +18745,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "postWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -18939,25 +18930,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "postWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -18997,6 +18969,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "postWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -19163,25 +19154,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "postWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -19221,6 +19193,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "postWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -19387,25 +19378,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "postWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -19445,6 +19417,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "postWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -19879,19 +19870,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "disconnect",
               "isRequired": false,
               "isNullable": false,
@@ -19911,6 +19889,19 @@
                 {
                   "type": "Boolean",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "connect",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -20422,25 +20413,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "MovieWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "MovieWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -20480,6 +20452,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "MovieWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "MovieWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -20646,25 +20637,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "MovieWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "MovieWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -20704,6 +20676,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "MovieWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "MovieWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -20989,25 +20980,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "CreatorWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "CreatorWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -21047,6 +21019,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -21176,19 +21167,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "CreatorWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "disconnect",
               "isRequired": false,
               "isNullable": false,
@@ -21208,6 +21186,19 @@
                 {
                   "type": "Boolean",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "connect",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -21570,25 +21561,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "ProblemWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "ProblemWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -21628,6 +21600,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -21794,25 +21785,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "ProblemWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "ProblemWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -21852,6 +21824,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -22018,25 +22009,6 @@
               ]
             },
             {
-              "name": "connect",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "ProblemWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "ProblemWhereUniqueInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
               "name": "set",
               "isRequired": false,
               "isNullable": false,
@@ -22076,6 +22048,25 @@
             },
             {
               "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
               "isRequired": false,
               "isNullable": false,
               "inputTypes": [
@@ -42080,7 +42071,7 @@
             {
               "name": "_count",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "UserCountOutputType",
                 "namespace": "prisma",
@@ -42464,7 +42455,7 @@
             {
               "name": "_count",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "DirectorCountOutputType",
                 "namespace": "prisma",
@@ -42615,7 +42606,7 @@
             {
               "name": "_count",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "ProblemCountOutputType",
                 "namespace": "prisma",
@@ -42839,7 +42830,7 @@
             {
               "name": "_count",
               "args": [],
-              "isNullable": true,
+              "isNullable": false,
               "outputType": {
                 "type": "CreatorCountOutputType",
                 "namespace": "prisma",

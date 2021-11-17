@@ -81,6 +81,11 @@ function transformModelField(dmmfDocument: DmmfDocument) {
         : field.kind === "object"
         ? "inputObjectTypes"
         : "scalar";
+    if (typeof field.type !== "string") {
+      throw new Error(
+        `[Internal Generator Error] Unexpected 'field.type' value: "${field.type}""`,
+      );
+    }
     const typeInfo: DMMF.TypeInfo = {
       location,
       isList: field.isList,
@@ -107,6 +112,7 @@ function transformModelField(dmmfDocument: DmmfDocument) {
     }>(field.documentation, "omit", "field");
     return {
       ...field,
+      type: field.type, // TS type check limitation
       location,
       typeFieldAlias: attributeArgs.name,
       fieldTSType,
@@ -436,16 +442,20 @@ function getOperationKindName(actionName: string) {
   // throw new Error(`Unsupported operation kind: '${actionName}'`);
 }
 
+const ENUM_SUFFIXES = ["OrderByRelevanceFieldEnum", "ScalarFieldEnum"] as const;
 export function transformEnums(dmmfDocument: DmmfDocument) {
   return (
     enumDef: PrismaDMMF.DatamodelEnum | PrismaDMMF.SchemaEnum,
   ): DMMF.Enum => {
-    const modelName = enumDef.name.includes("ScalarFieldEnum")
-      ? enumDef.name.replace("ScalarFieldEnum", "")
-      : undefined;
-    const typeName = modelName
-      ? `${dmmfDocument.getModelTypeName(modelName)}ScalarFieldEnum`
-      : enumDef.name;
+    let modelName: string | undefined = undefined;
+    let typeName = enumDef.name;
+    const detectedSuffix = ENUM_SUFFIXES.find(suffix =>
+      enumDef.name.endsWith(suffix),
+    );
+    if (detectedSuffix) {
+      modelName = enumDef.name.replace(detectedSuffix, "");
+      typeName = `${dmmfDocument.getModelTypeName(modelName)}${detectedSuffix}`;
+    }
     const enumValues = enumDef.values as Array<
       | PrismaDMMF.DatamodelEnum["values"][number]
       | PrismaDMMF.SchemaEnum["values"][number]

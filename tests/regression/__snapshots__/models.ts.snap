@@ -81,9 +81,9 @@ export class User {
   posts?: Post[];
 
   @TypeGraphQL.Field(_type => UserCount, {
-    nullable: true
+    nullable: false
   })
-  _count?: UserCount | null;
+  _count!: UserCount;
 }
 "
 `;
@@ -268,9 +268,9 @@ export class User {
   posts?: Post[];
 
   @TypeGraphQL.Field(_type => UserCount, {
-    nullable: true
+    nullable: false
   })
-  _count?: UserCount | null;
+  _count!: UserCount;
 
   /**
    * renamed field docs
@@ -369,9 +369,9 @@ export class Client {
   posts?: Article[];
 
   @TypeGraphQL.Field(_type => ClientCount, {
-    nullable: true
+    nullable: false
   })
-  _count?: ClientCount | null;
+  _count!: ClientCount;
 }
 "
 `;
@@ -422,9 +422,9 @@ export class User {
   posts?: Post[];
 
   @TypeGraphQL.Field(_type => UserCount, {
-    nullable: true
+    nullable: false
   })
-  _count?: UserCount | null;
+  _count!: UserCount;
 }
 "
 `;
@@ -460,9 +460,9 @@ export class Service {
   services?: Service[];
 
   @TypeGraphQL.Field(_type => ServiceCount, {
-    nullable: true
+    nullable: false
   })
-  _count?: ServiceCount | null;
+  _count!: ServiceCount;
 }
 "
 `;

@@ -38,11 +38,6 @@ export class PostUpdateManyWithoutAuthorInput {
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
     nullable: true
   })
-  connect?: PostWhereUniqueInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
-    nullable: true
-  })
   set?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
@@ -54,6 +49,11 @@ export class PostUpdateManyWithoutAuthorInput {
     nullable: true
   })
   delete?: PostWhereUniqueInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
+    nullable: true
+  })
+  connect?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostUpdateWithWhereUniqueWithoutAuthorInput], {
     nullable: true

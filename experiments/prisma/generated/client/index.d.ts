@@ -14,13 +14,24 @@ type UnwrapTuple<Tuple extends readonly unknown[]> = {
 
 /**
  * Model User
+ * User model doc
+ * @@TypeGraphQL.type(name: "MainUser")
  */
-
 export type User = {
+  /**
+   * User model field doc
+   */
   id: number
   email: string
+  /**
+   * renamed field doc
+   * @TypeGraphQL.field(name: "firstName")
+   */
   name: string | null
   age: number
+  /**
+   * @TypeGraphQL.field(name: "accountBalance")
+   */
   balance: number
   amount: number
   role: Role
@@ -30,17 +41,31 @@ export type User = {
 
 /**
  * Model post
+ * 
  */
-
 export type post = {
+  /**
+   * first line of comment
+   * second line of comment
+   * third line of comment
+   */
   uuid: string
   createdAt: Date
   updatedAt: Date
+  /**
+   * @TypeGraphQL.omit(input: true)
+   */
   published: boolean
   title: string
+  /**
+   * @TypeGraphQL.omit(output: true)
+   */
   subtitle: string
   content: string | null
   authorId: number
+  /**
+   * @TypeGraphQL.omit(output: true)
+   */
   editorId: number | null
   kind: PostKind | null
   metadata: Prisma.JsonValue
@@ -48,8 +73,8 @@ export type post = {
 
 /**
  * Model Category
+ * 
  */
-
 export type Category = {
   name: string
   slug: string
@@ -58,8 +83,8 @@ export type Category = {
 
 /**
  * Model Patient
+ * 
  */
-
 export type Patient = {
   firstName: string
   lastName: string
@@ -68,8 +93,8 @@ export type Patient = {
 
 /**
  * Model Movie
+ * 
  */
-
 export type Movie = {
   directorFirstName: string
   directorLastName: string
@@ -78,8 +103,8 @@ export type Movie = {
 
 /**
  * Model Director
+ * 
  */
-
 export type Director = {
   firstName: string
   lastName: string
@@ -87,8 +112,8 @@ export type Director = {
 
 /**
  * Model Problem
+ * 
  */
-
 export type Problem = {
   id: number
   problemText: string
@@ -97,8 +122,8 @@ export type Problem = {
 
 /**
  * Model Creator
+ * 
  */
-
 export type Creator = {
   id: number
   name: string
@@ -106,8 +131,8 @@ export type Creator = {
 
 /**
  * Model NativeTypeModel
+ * 
  */
-
 export type NativeTypeModel = {
   id: number
   bigInt: bigint | null
@@ -398,8 +423,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.4.2
-   * Query Engine version: 57771c0558568c7d08bd34c7248af5244ae16bd9
+   * Prisma Client JS version: 3.5.0
+   * Query Engine version: 78a5df6def6943431f4c022e1428dbc3e833cf8e
    */
   export type PrismaVersion = {
     client: string
@@ -1319,8 +1344,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type UserGroupByArgs = {
     where?: UserWhereInput
     orderBy?: Enumerable<UserOrderByWithAggregationInput>
@@ -1355,15 +1380,15 @@ export namespace Prisma {
 
   type GetUserGroupByPayload<T extends UserGroupByArgs> = Promise<
     Array<
-      PickArray<UserGroupByOutputType, T['by']> & 
+      PickArray<UserGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], UserGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
             : GetScalarType<T[P], UserGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -1404,7 +1429,7 @@ export namespace Prisma {
         P extends 'editorPosts'
         ? Array < postGetPayload<S['include'][P]>>  :
         P extends '_count'
-        ? UserCountOutputTypeGetPayload<S['include'][P]> | null : never
+        ? UserCountOutputTypeGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
@@ -1415,7 +1440,7 @@ export namespace Prisma {
         P extends 'editorPosts'
         ? Array < postGetPayload<S['select'][P]>>  :
         P extends '_count'
-        ? UserCountOutputTypeGetPayload<S['select'][P]> | null : never
+        ? UserCountOutputTypeGetPayload<S['select'][P]> : never
   } 
     : User
   : User
@@ -1735,7 +1760,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for User.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__UserClient<T> implements PrismaPromise<T> {
@@ -2262,8 +2287,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type PostGroupByArgs = {
     where?: postWhereInput
     orderBy?: Enumerable<postOrderByWithAggregationInput>
@@ -2300,15 +2325,15 @@ export namespace Prisma {
 
   type GetPostGroupByPayload<T extends PostGroupByArgs> = Promise<
     Array<
-      PickArray<PostGroupByOutputType, T['by']> & 
+      PickArray<PostGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PostGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], PostGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof PostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PostGroupByOutputType[P]>
             : GetScalarType<T[P], PostGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -2676,7 +2701,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for post.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__postClient<T> implements PrismaPromise<T> {
@@ -3155,8 +3180,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type CategoryGroupByArgs = {
     where?: CategoryWhereInput
     orderBy?: Enumerable<CategoryOrderByWithAggregationInput>
@@ -3185,15 +3210,15 @@ export namespace Prisma {
 
   type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = Promise<
     Array<
-      PickArray<CategoryGroupByOutputType, T['by']> & 
+      PickArray<CategoryGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof CategoryGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], CategoryGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof CategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CategoryGroupByOutputType[P]>
             : GetScalarType<T[P], CategoryGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -3537,7 +3562,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for Category.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__CategoryClient<T> implements PrismaPromise<T> {
@@ -3943,8 +3968,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type PatientGroupByArgs = {
     where?: PatientWhereInput
     orderBy?: Enumerable<PatientOrderByWithAggregationInput>
@@ -3969,15 +3994,15 @@ export namespace Prisma {
 
   type GetPatientGroupByPayload<T extends PatientGroupByArgs> = Promise<
     Array<
-      PickArray<PatientGroupByOutputType, T['by']> & 
+      PickArray<PatientGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PatientGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], PatientGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof PatientGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PatientGroupByOutputType[P]>
             : GetScalarType<T[P], PatientGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -4321,7 +4346,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for Patient.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__PatientClient<T> implements PrismaPromise<T> {
@@ -4727,8 +4752,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type MovieGroupByArgs = {
     where?: MovieWhereInput
     orderBy?: Enumerable<MovieOrderByWithAggregationInput>
@@ -4753,15 +4778,15 @@ export namespace Prisma {
 
   type GetMovieGroupByPayload<T extends MovieGroupByArgs> = Promise<
     Array<
-      PickArray<MovieGroupByOutputType, T['by']> & 
+      PickArray<MovieGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof MovieGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], MovieGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof MovieGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MovieGroupByOutputType[P]>
             : GetScalarType<T[P], MovieGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -5115,7 +5140,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for Movie.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__MovieClient<T> implements PrismaPromise<T> {
@@ -5556,8 +5581,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type DirectorGroupByArgs = {
     where?: DirectorWhereInput
     orderBy?: Enumerable<DirectorOrderByWithAggregationInput>
@@ -5581,15 +5606,15 @@ export namespace Prisma {
 
   type GetDirectorGroupByPayload<T extends DirectorGroupByArgs> = Promise<
     Array<
-      PickArray<DirectorGroupByOutputType, T['by']> & 
+      PickArray<DirectorGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof DirectorGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], DirectorGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof DirectorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DirectorGroupByOutputType[P]>
             : GetScalarType<T[P], DirectorGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -5619,7 +5644,7 @@ export namespace Prisma {
           P extends 'movies'
         ? Array < MovieGetPayload<S['include'][P]>>  :
         P extends '_count'
-        ? DirectorCountOutputTypeGetPayload<S['include'][P]> | null : never
+        ? DirectorCountOutputTypeGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
@@ -5628,7 +5653,7 @@ export namespace Prisma {
           P extends 'movies'
         ? Array < MovieGetPayload<S['select'][P]>>  :
         P extends '_count'
-        ? DirectorCountOutputTypeGetPayload<S['select'][P]> | null : never
+        ? DirectorCountOutputTypeGetPayload<S['select'][P]> : never
   } 
     : Director
   : Director
@@ -5948,7 +5973,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for Director.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__DirectorClient<T> implements PrismaPromise<T> {
@@ -6429,8 +6454,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type ProblemGroupByArgs = {
     where?: ProblemWhereInput
     orderBy?: Enumerable<ProblemOrderByWithAggregationInput>
@@ -6459,15 +6484,15 @@ export namespace Prisma {
 
   type GetProblemGroupByPayload<T extends ProblemGroupByArgs> = Promise<
     Array<
-      PickArray<ProblemGroupByOutputType, T['by']> & 
+      PickArray<ProblemGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ProblemGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], ProblemGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof ProblemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProblemGroupByOutputType[P]>
             : GetScalarType<T[P], ProblemGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -6502,7 +6527,7 @@ export namespace Prisma {
         P extends 'creator'
         ? CreatorGetPayload<S['include'][P]> | null :
         P extends '_count'
-        ? ProblemCountOutputTypeGetPayload<S['include'][P]> | null : never
+        ? ProblemCountOutputTypeGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
@@ -6513,7 +6538,7 @@ export namespace Prisma {
         P extends 'creator'
         ? CreatorGetPayload<S['select'][P]> | null :
         P extends '_count'
-        ? ProblemCountOutputTypeGetPayload<S['select'][P]> | null : never
+        ? ProblemCountOutputTypeGetPayload<S['select'][P]> : never
   } 
     : Problem
   : Problem
@@ -6833,7 +6858,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for Problem.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__ProblemClient<T> implements PrismaPromise<T> {
@@ -7306,8 +7331,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type CreatorGroupByArgs = {
     where?: CreatorWhereInput
     orderBy?: Enumerable<CreatorOrderByWithAggregationInput>
@@ -7335,15 +7360,15 @@ export namespace Prisma {
 
   type GetCreatorGroupByPayload<T extends CreatorGroupByArgs> = Promise<
     Array<
-      PickArray<CreatorGroupByOutputType, T['by']> & 
+      PickArray<CreatorGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof CreatorGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], CreatorGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof CreatorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CreatorGroupByOutputType[P]>
             : GetScalarType<T[P], CreatorGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -7377,7 +7402,7 @@ export namespace Prisma {
         P extends 'problems'
         ? Array < ProblemGetPayload<S['include'][P]>>  :
         P extends '_count'
-        ? CreatorCountOutputTypeGetPayload<S['include'][P]> | null : never
+        ? CreatorCountOutputTypeGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
@@ -7388,7 +7413,7 @@ export namespace Prisma {
         P extends 'problems'
         ? Array < ProblemGetPayload<S['select'][P]>>  :
         P extends '_count'
-        ? CreatorCountOutputTypeGetPayload<S['select'][P]> | null : never
+        ? CreatorCountOutputTypeGetPayload<S['select'][P]> : never
   } 
     : Creator
   : Creator
@@ -7708,7 +7733,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for Creator.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__CreatorClient<T> implements PrismaPromise<T> {
@@ -8201,8 +8226,8 @@ export namespace Prisma {
   }
 
 
-    
-    
+
+
   export type NativeTypeModelGroupByArgs = {
     where?: NativeTypeModelWhereInput
     orderBy?: Enumerable<NativeTypeModelOrderByWithAggregationInput>
@@ -8232,15 +8257,15 @@ export namespace Prisma {
 
   type GetNativeTypeModelGroupByPayload<T extends NativeTypeModelGroupByArgs> = Promise<
     Array<
-      PickArray<NativeTypeModelGroupByOutputType, T['by']> & 
+      PickArray<NativeTypeModelGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof NativeTypeModelGroupByOutputType))]: P extends '_count' 
-            ? T[P] extends boolean 
-              ? number 
-              : GetScalarType<T[P], NativeTypeModelGroupByOutputType[P]> 
+          [P in ((keyof T) & (keyof NativeTypeModelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NativeTypeModelGroupByOutputType[P]>
             : GetScalarType<T[P], NativeTypeModelGroupByOutputType[P]>
         }
-      > 
+      >
     >
 
 
@@ -8585,7 +8610,7 @@ export namespace Prisma {
   /**
    * The delegate class that acts as a "Promise-like" for NativeTypeModel.
    * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in 
+   * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__NativeTypeModelClient<T> implements PrismaPromise<T> {
@@ -10794,10 +10819,10 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
-    connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
     delete?: Enumerable<postWhereUniqueInput>
+    connect?: Enumerable<postWhereUniqueInput>
     update?: Enumerable<postUpdateWithWhereUniqueWithoutAuthorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutAuthorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
@@ -10808,10 +10833,10 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
-    connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
     delete?: Enumerable<postWhereUniqueInput>
+    connect?: Enumerable<postWhereUniqueInput>
     update?: Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutEditorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
@@ -10822,10 +10847,10 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutAuthorInput>
     createMany?: postCreateManyAuthorInputEnvelope
-    connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
     delete?: Enumerable<postWhereUniqueInput>
+    connect?: Enumerable<postWhereUniqueInput>
     update?: Enumerable<postUpdateWithWhereUniqueWithoutAuthorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutAuthorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
@@ -10836,10 +10861,10 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     upsert?: Enumerable<postUpsertWithWhereUniqueWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
-    connect?: Enumerable<postWhereUniqueInput>
     set?: Enumerable<postWhereUniqueInput>
     disconnect?: Enumerable<postWhereUniqueInput>
     delete?: Enumerable<postWhereUniqueInput>
+    connect?: Enumerable<postWhereUniqueInput>
     update?: Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutEditorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
@@ -10889,9 +10914,9 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutEditorPostsInput, UserUncheckedCreateWithoutEditorPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEditorPostsInput
     upsert?: UserUpsertWithoutEditorPostsInput
-    connect?: UserWhereUniqueInput
     disconnect?: boolean
     delete?: boolean
+    connect?: UserWhereUniqueInput
     update?: XOR<UserUpdateWithoutEditorPostsInput, UserUncheckedUpdateWithoutEditorPostsInput>
   }
 
@@ -10936,10 +10961,10 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
-    connect?: Enumerable<MovieWhereUniqueInput>
     set?: Enumerable<MovieWhereUniqueInput>
     disconnect?: Enumerable<MovieWhereUniqueInput>
     delete?: Enumerable<MovieWhereUniqueInput>
+    connect?: Enumerable<MovieWhereUniqueInput>
     update?: Enumerable<MovieUpdateWithWhereUniqueWithoutDirectorInput>
     updateMany?: Enumerable<MovieUpdateManyWithWhereWithoutDirectorInput>
     deleteMany?: Enumerable<MovieScalarWhereInput>
@@ -10950,10 +10975,10 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<MovieCreateOrConnectWithoutDirectorInput>
     upsert?: Enumerable<MovieUpsertWithWhereUniqueWithoutDirectorInput>
     createMany?: MovieCreateManyDirectorInputEnvelope
-    connect?: Enumerable<MovieWhereUniqueInput>
     set?: Enumerable<MovieWhereUniqueInput>
     disconnect?: Enumerable<MovieWhereUniqueInput>
     delete?: Enumerable<MovieWhereUniqueInput>
+    connect?: Enumerable<MovieWhereUniqueInput>
     update?: Enumerable<MovieUpdateWithWhereUniqueWithoutDirectorInput>
     updateMany?: Enumerable<MovieUpdateManyWithWhereWithoutDirectorInput>
     deleteMany?: Enumerable<MovieScalarWhereInput>
@@ -10975,10 +11000,10 @@ export namespace Prisma {
     create?: XOR<Enumerable<CreatorCreateWithoutLikesInput>, Enumerable<CreatorUncheckedCreateWithoutLikesInput>>
     connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutLikesInput>
     upsert?: Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>
-    connect?: Enumerable<CreatorWhereUniqueInput>
     set?: Enumerable<CreatorWhereUniqueInput>
     disconnect?: Enumerable<CreatorWhereUniqueInput>
     delete?: Enumerable<CreatorWhereUniqueInput>
+    connect?: Enumerable<CreatorWhereUniqueInput>
     update?: Enumerable<CreatorUpdateWithWhereUniqueWithoutLikesInput>
     updateMany?: Enumerable<CreatorUpdateManyWithWhereWithoutLikesInput>
     deleteMany?: Enumerable<CreatorScalarWhereInput>
@@ -10988,9 +11013,9 @@ export namespace Prisma {
     create?: XOR<CreatorCreateWithoutProblemsInput, CreatorUncheckedCreateWithoutProblemsInput>
     connectOrCreate?: CreatorCreateOrConnectWithoutProblemsInput
     upsert?: CreatorUpsertWithoutProblemsInput
-    connect?: CreatorWhereUniqueInput
     disconnect?: boolean
     delete?: boolean
+    connect?: CreatorWhereUniqueInput
     update?: XOR<CreatorUpdateWithoutProblemsInput, CreatorUncheckedUpdateWithoutProblemsInput>
   }
 
@@ -11018,10 +11043,10 @@ export namespace Prisma {
     create?: XOR<Enumerable<ProblemCreateWithoutLikedByInput>, Enumerable<ProblemUncheckedCreateWithoutLikedByInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutLikedByInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>
-    connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
     disconnect?: Enumerable<ProblemWhereUniqueInput>
     delete?: Enumerable<ProblemWhereUniqueInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
     update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutLikedByInput>
     updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutLikedByInput>
     deleteMany?: Enumerable<ProblemScalarWhereInput>
@@ -11032,10 +11057,10 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
-    connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
     disconnect?: Enumerable<ProblemWhereUniqueInput>
     delete?: Enumerable<ProblemWhereUniqueInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
     update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>
     updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutCreatorInput>
     deleteMany?: Enumerable<ProblemScalarWhereInput>
@@ -11046,10 +11071,10 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
-    connect?: Enumerable<ProblemWhereUniqueInput>
     set?: Enumerable<ProblemWhereUniqueInput>
     disconnect?: Enumerable<ProblemWhereUniqueInput>
     delete?: Enumerable<ProblemWhereUniqueInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
     update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>
     updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutCreatorInput>
     deleteMany?: Enumerable<ProblemScalarWhereInput>

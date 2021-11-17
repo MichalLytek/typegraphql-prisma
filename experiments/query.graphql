@@ -349,3 +349,14 @@ query PostsWithSomeViews {
     ...PostData
   }
 }
+
+query getUsersByRelevance {
+  mainUsers(
+    orderBy: { _relevance: { fields: [email], sort: desc, search: "test" } }
+  ) {
+    id
+    firstName
+    email
+    role
+  }
+}

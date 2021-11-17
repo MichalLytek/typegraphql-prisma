@@ -2227,19 +2227,19 @@ var require_ms2 = __commonJS2({
 // ../debug/dist/common.js
 var require_common6 = __commonJS2({
   "../debug/dist/common.js"(exports2) {
-    var __defProp31 = Object.defineProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp31(target, "__esModule", { value: true }), "__markAsModule");
-    var __name30 = /* @__PURE__ */ __name((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+    var __defProp45 = Object.defineProperty;
+    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
+    var __name44 = /* @__PURE__ */ __name((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp31(target, name, { get: all[name], enumerable: true });
+        __defProp45(target, name, { get: all[name], enumerable: true });
     }, "__export");
     __export3(exports2, {
       setup: () => setup
     });
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     function setup(env) {
       const createDebug = /* @__PURE__ */ __name210((namespace, logger2) => {
         let prevTime;
@@ -2324,15 +2324,15 @@ var require_common6 = __commonJS2({
       createDebug.skips = [];
       createDebug.formatters = {};
       function selectColor(namespace) {
-        let hash2 = 0;
+        let hash = 0;
         for (let i = 0; i < namespace.length; i++) {
-          hash2 = (hash2 << 5) - hash2 + namespace.charCodeAt(i);
-          hash2 |= 0;
+          hash = (hash << 5) - hash + namespace.charCodeAt(i);
+          hash |= 0;
         }
-        return createDebug.colors[Math.abs(hash2) % createDebug.colors.length];
+        return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
       }
       __name(selectColor, "selectColor");
-      __name30(selectColor, "selectColor");
+      __name44(selectColor, "selectColor");
       __name210(selectColor, "selectColor");
       createDebug.selectColor = selectColor;
       function extend(namespace, delimiter) {
@@ -2341,7 +2341,7 @@ var require_common6 = __commonJS2({
         return newDebug;
       }
       __name(extend, "extend");
-      __name30(extend, "extend");
+      __name44(extend, "extend");
       __name210(extend, "extend");
       function enable(namespaces) {
         createDebug.save(namespaces);
@@ -2364,7 +2364,7 @@ var require_common6 = __commonJS2({
         }
       }
       __name(enable, "enable");
-      __name30(enable, "enable");
+      __name44(enable, "enable");
       __name210(enable, "enable");
       function disable() {
         const namespaces = [
@@ -2375,7 +2375,7 @@ var require_common6 = __commonJS2({
         return namespaces;
       }
       __name(disable, "disable");
-      __name30(disable, "disable");
+      __name44(disable, "disable");
       __name210(disable, "disable");
       function enabled(name) {
         if (name[name.length - 1] === "*") {
@@ -2396,13 +2396,13 @@ var require_common6 = __commonJS2({
         return false;
       }
       __name(enabled, "enabled");
-      __name30(enabled, "enabled");
+      __name44(enabled, "enabled");
       __name210(enabled, "enabled");
       function toNamespace(regexp) {
         return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
       }
       __name(toNamespace, "toNamespace");
-      __name30(toNamespace, "toNamespace");
+      __name44(toNamespace, "toNamespace");
       __name210(toNamespace, "toNamespace");
       function coerce(val) {
         if (val instanceof Error) {
@@ -2411,19 +2411,19 @@ var require_common6 = __commonJS2({
         return val;
       }
       __name(coerce, "coerce");
-      __name30(coerce, "coerce");
+      __name44(coerce, "coerce");
       __name210(coerce, "coerce");
       function destroy() {
         console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
       }
       __name(destroy, "destroy");
-      __name30(destroy, "destroy");
+      __name44(destroy, "destroy");
       __name210(destroy, "destroy");
       createDebug.enable(createDebug.load());
       return createDebug;
     }
     __name(setup, "setup");
-    __name30(setup, "setup");
+    __name44(setup, "setup");
     __name210(setup, "setup");
   }
 });
@@ -2432,28 +2432,28 @@ var require_common6 = __commonJS2({
 var require_node3 = __commonJS2({
   "../debug/dist/node.js"(exports2, module2) {
     var __create3 = Object.create;
-    var __defProp31 = Object.defineProperty;
+    var __defProp45 = Object.defineProperty;
     var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames3 = Object.getOwnPropertyNames;
     var __getProtoOf3 = Object.getPrototypeOf;
     var __hasOwnProp3 = Object.prototype.hasOwnProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp31(target, "__esModule", { value: true }), "__markAsModule");
-    var __name30 = /* @__PURE__ */ __name((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
+    var __name44 = /* @__PURE__ */ __name((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp31(target, name, { get: all[name], enumerable: true });
+        __defProp45(target, name, { get: all[name], enumerable: true });
     }, "__export");
     var __reExport2 = /* @__PURE__ */ __name((target, module22, desc) => {
       if (module22 && typeof module22 === "object" || typeof module22 === "function") {
         for (let key of __getOwnPropNames3(module22))
           if (!__hasOwnProp3.call(target, key) && key !== "default")
-            __defProp31(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
+            __defProp45(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
       }
       return target;
     }, "__reExport");
     var __toModule3 = /* @__PURE__ */ __name((module22) => {
-      return __reExport2(__markAsModule3(__defProp31(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
+      return __reExport2(__markAsModule3(__defProp45(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
     }, "__toModule");
     __export3(exports2, {
       default: () => node_default
@@ -2462,7 +2462,7 @@ var require_node3 = __commonJS2({
     var import_util7 = __toModule3(__require("util"));
     var import_common4 = __toModule3(require_common6());
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     exports2.init = init;
     exports2.log = log4;
     exports2.formatArgs = formatArgs;
@@ -2496,7 +2496,7 @@ var require_node3 = __commonJS2({
       return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : import_tty.default.isatty((_a2 = process.stderr) == null ? void 0 : _a2.fd);
     }
     __name(useColors, "useColors");
-    __name30(useColors, "useColors");
+    __name44(useColors, "useColors");
     __name210(useColors, "useColors");
     function formatArgs(args) {
       const { namespace: name, useColors: useColors2 } = this;
@@ -2511,7 +2511,7 @@ var require_node3 = __commonJS2({
       }
     }
     __name(formatArgs, "formatArgs");
-    __name30(formatArgs, "formatArgs");
+    __name44(formatArgs, "formatArgs");
     __name210(formatArgs, "formatArgs");
     function getDate() {
       if (exports2.inspectOpts.hideDate) {
@@ -2520,13 +2520,13 @@ var require_node3 = __commonJS2({
       return new Date().toISOString() + " ";
     }
     __name(getDate, "getDate");
-    __name30(getDate, "getDate");
+    __name44(getDate, "getDate");
     __name210(getDate, "getDate");
     function log4(...args) {
       return process.stderr.write(import_util7.default.format(...args) + "\n");
     }
     __name(log4, "log");
-    __name30(log4, "log");
+    __name44(log4, "log");
     __name210(log4, "log");
     function save(namespaces) {
       if (namespaces) {
@@ -2536,13 +2536,13 @@ var require_node3 = __commonJS2({
       }
     }
     __name(save, "save");
-    __name30(save, "save");
+    __name44(save, "save");
     __name210(save, "save");
     function load() {
       return process.env.DEBUG;
     }
     __name(load, "load");
-    __name30(load, "load");
+    __name44(load, "load");
     __name210(load, "load");
     function init(debug10) {
       debug10.inspectOpts = {};
@@ -2552,7 +2552,7 @@ var require_node3 = __commonJS2({
       }
     }
     __name(init, "init");
-    __name30(init, "init");
+    __name44(init, "init");
     __name210(init, "init");
     var mod2 = (0, import_common4.setup)(exports2);
     module2.exports = mod2;
@@ -2573,28 +2573,28 @@ var require_node3 = __commonJS2({
 var require_dist7 = __commonJS2({
   "../debug/dist/index.js"(exports2) {
     var __create3 = Object.create;
-    var __defProp31 = Object.defineProperty;
+    var __defProp45 = Object.defineProperty;
     var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames3 = Object.getOwnPropertyNames;
     var __getProtoOf3 = Object.getPrototypeOf;
     var __hasOwnProp3 = Object.prototype.hasOwnProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp31(target, "__esModule", { value: true }), "__markAsModule");
-    var __name30 = /* @__PURE__ */ __name((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
+    var __name44 = /* @__PURE__ */ __name((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp31(target, name, { get: all[name], enumerable: true });
+        __defProp45(target, name, { get: all[name], enumerable: true });
     }, "__export");
     var __reExport2 = /* @__PURE__ */ __name((target, module22, desc) => {
       if (module22 && typeof module22 === "object" || typeof module22 === "function") {
         for (let key of __getOwnPropNames3(module22))
           if (!__hasOwnProp3.call(target, key) && key !== "default")
-            __defProp31(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
+            __defProp45(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
       }
       return target;
     }, "__reExport");
     var __toModule3 = /* @__PURE__ */ __name((module22) => {
-      return __reExport2(__markAsModule3(__defProp31(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
+      return __reExport2(__markAsModule3(__defProp45(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
     }, "__toModule");
     __export3(exports2, {
       Debug: () => Debug8,
@@ -2603,7 +2603,7 @@ var require_dist7 = __commonJS2({
     });
     var import_node = __toModule3(require_node3());
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     var cache = [];
     var MAX_LOGS = 100;
     function Debug8(namespace) {
@@ -2616,7 +2616,7 @@ var require_dist7 = __commonJS2({
       return debug10;
     }
     __name(Debug8, "Debug");
-    __name30(Debug8, "Debug");
+    __name44(Debug8, "Debug");
     __name210(Debug8, "Debug");
     Debug8.enable = (namespace) => {
       import_node.default.enable(namespace);
@@ -2635,7 +2635,7 @@ var require_dist7 = __commonJS2({
       return output.slice(-numChars);
     }
     __name(getLogs2, "getLogs");
-    __name30(getLogs2, "getLogs");
+    __name44(getLogs2, "getLogs");
     __name210(getLogs2, "getLogs");
   }
 });
@@ -2836,9 +2836,9 @@ var require_strip_indent = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+engines@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma+engines@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/engines/dist/index.js
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -2985,7 +2985,7 @@ var require_dist8 = __commonJS2({
     var require_common = __commonJS((exports2) => {
       var __defProp210 = Object.defineProperty;
       var __markAsModule22 = /* @__PURE__ */ __name((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name30 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name44 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export22 = /* @__PURE__ */ __name((target, all) => {
         __markAsModule22(target);
         for (var name in all)
@@ -2995,7 +2995,7 @@ var require_dist8 = __commonJS2({
         setup: () => setup
       });
       var __defProp222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
       function setup(env) {
         const createDebug = /* @__PURE__ */ __name210((namespace, logger2) => {
           let prevTime;
@@ -3080,15 +3080,15 @@ var require_dist8 = __commonJS2({
         createDebug.skips = [];
         createDebug.formatters = {};
         function selectColor(namespace) {
-          let hash2 = 0;
+          let hash = 0;
           for (let i = 0; i < namespace.length; i++) {
-            hash2 = (hash2 << 5) - hash2 + namespace.charCodeAt(i);
-            hash2 |= 0;
+            hash = (hash << 5) - hash + namespace.charCodeAt(i);
+            hash |= 0;
           }
-          return createDebug.colors[Math.abs(hash2) % createDebug.colors.length];
+          return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
         }
         __name(selectColor, "selectColor");
-        __name30(selectColor, "selectColor");
+        __name44(selectColor, "selectColor");
         __name210(selectColor, "selectColor");
         createDebug.selectColor = selectColor;
         function extend(namespace, delimiter) {
@@ -3097,7 +3097,7 @@ var require_dist8 = __commonJS2({
           return newDebug;
         }
         __name(extend, "extend");
-        __name30(extend, "extend");
+        __name44(extend, "extend");
         __name210(extend, "extend");
         function enable(namespaces) {
           createDebug.save(namespaces);
@@ -3120,7 +3120,7 @@ var require_dist8 = __commonJS2({
           }
         }
         __name(enable, "enable");
-        __name30(enable, "enable");
+        __name44(enable, "enable");
         __name210(enable, "enable");
         function disable() {
           const namespaces = [
@@ -3131,7 +3131,7 @@ var require_dist8 = __commonJS2({
           return namespaces;
         }
         __name(disable, "disable");
-        __name30(disable, "disable");
+        __name44(disable, "disable");
         __name210(disable, "disable");
         function enabled(name) {
           if (name[name.length - 1] === "*") {
@@ -3152,13 +3152,13 @@ var require_dist8 = __commonJS2({
           return false;
         }
         __name(enabled, "enabled");
-        __name30(enabled, "enabled");
+        __name44(enabled, "enabled");
         __name210(enabled, "enabled");
         function toNamespace(regexp) {
           return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
         }
         __name(toNamespace, "toNamespace");
-        __name30(toNamespace, "toNamespace");
+        __name44(toNamespace, "toNamespace");
         __name210(toNamespace, "toNamespace");
         function coerce(val) {
           if (val instanceof Error) {
@@ -3167,19 +3167,19 @@ var require_dist8 = __commonJS2({
           return val;
         }
         __name(coerce, "coerce");
-        __name30(coerce, "coerce");
+        __name44(coerce, "coerce");
         __name210(coerce, "coerce");
         function destroy() {
           console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
         }
         __name(destroy, "destroy");
-        __name30(destroy, "destroy");
+        __name44(destroy, "destroy");
         __name210(destroy, "destroy");
         createDebug.enable(createDebug.load());
         return createDebug;
       }
       __name(setup, "setup");
-      __name30(setup, "setup");
+      __name44(setup, "setup");
       __name210(setup, "setup");
     });
     var require_node = __commonJS((exports2, module2) => {
@@ -3190,7 +3190,7 @@ var require_dist8 = __commonJS2({
       var __getProtoOf22 = Object.getPrototypeOf;
       var __hasOwnProp22 = Object.prototype.hasOwnProperty;
       var __markAsModule22 = /* @__PURE__ */ __name((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name30 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name44 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export22 = /* @__PURE__ */ __name((target, all) => {
         __markAsModule22(target);
         for (var name in all)
@@ -3214,7 +3214,7 @@ var require_dist8 = __commonJS2({
       var import_util7 = __toModule22(__require("util"));
       var import_common4 = __toModule22(require_common());
       var __defProp222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
       exports2.init = init;
       exports2.log = log4;
       exports2.formatArgs = formatArgs;
@@ -3248,7 +3248,7 @@ var require_dist8 = __commonJS2({
         return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : import_tty.default.isatty((_a2 = process.stderr) == null ? void 0 : _a2.fd);
       }
       __name(useColors, "useColors");
-      __name30(useColors, "useColors");
+      __name44(useColors, "useColors");
       __name210(useColors, "useColors");
       function formatArgs(args) {
         const { namespace: name, useColors: useColors2 } = this;
@@ -3263,7 +3263,7 @@ var require_dist8 = __commonJS2({
         }
       }
       __name(formatArgs, "formatArgs");
-      __name30(formatArgs, "formatArgs");
+      __name44(formatArgs, "formatArgs");
       __name210(formatArgs, "formatArgs");
       function getDate() {
         if (exports2.inspectOpts.hideDate) {
@@ -3272,13 +3272,13 @@ var require_dist8 = __commonJS2({
         return new Date().toISOString() + " ";
       }
       __name(getDate, "getDate");
-      __name30(getDate, "getDate");
+      __name44(getDate, "getDate");
       __name210(getDate, "getDate");
       function log4(...args) {
         return process.stderr.write(import_util7.default.format(...args) + "\n");
       }
       __name(log4, "log");
-      __name30(log4, "log");
+      __name44(log4, "log");
       __name210(log4, "log");
       function save(namespaces) {
         if (namespaces) {
@@ -3288,13 +3288,13 @@ var require_dist8 = __commonJS2({
         }
       }
       __name(save, "save");
-      __name30(save, "save");
+      __name44(save, "save");
       __name210(save, "save");
       function load() {
         return process.env.DEBUG;
       }
       __name(load, "load");
-      __name30(load, "load");
+      __name44(load, "load");
       __name210(load, "load");
       function init(debug32) {
         debug32.inspectOpts = {};
@@ -3304,7 +3304,7 @@ var require_dist8 = __commonJS2({
         }
       }
       __name(init, "init");
-      __name30(init, "init");
+      __name44(init, "init");
       __name210(init, "init");
       var mod2 = (0, import_common4.setup)(exports2);
       module2.exports = mod2;
@@ -3327,7 +3327,7 @@ var require_dist8 = __commonJS2({
       var __getProtoOf22 = Object.getPrototypeOf;
       var __hasOwnProp22 = Object.prototype.hasOwnProperty;
       var __markAsModule22 = /* @__PURE__ */ __name((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name30 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name44 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export22 = /* @__PURE__ */ __name((target, all) => {
         __markAsModule22(target);
         for (var name in all)
@@ -3351,7 +3351,7 @@ var require_dist8 = __commonJS2({
       });
       var import_node = __toModule22(require_node());
       var __defProp222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
       var cache = [];
       var MAX_LOGS = 100;
       function Debug22(namespace) {
@@ -3364,7 +3364,7 @@ var require_dist8 = __commonJS2({
         return debug32;
       }
       __name(Debug22, "Debug2");
-      __name30(Debug22, "Debug");
+      __name44(Debug22, "Debug");
       __name210(Debug22, "Debug");
       Debug22.enable = (namespace) => {
         import_node.default.enable(namespace);
@@ -3383,19 +3383,19 @@ var require_dist8 = __commonJS2({
         return output.slice(-numChars);
       }
       __name(getLogs2, "getLogs");
-      __name30(getLogs2, "getLogs");
+      __name44(getLogs2, "getLogs");
       __name210(getLogs2, "getLogs");
     });
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
+        version: "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "57771c0558568c7d08bd34c7248af5244ae16bd9"
+          enginesVersion: "78a5df6def6943431f4c022e1428dbc3e833cf8e"
         },
         repository: {
           type: "git",
@@ -3403,7 +3403,7 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "14.17.32",
+          "@types/node": "16.11.7",
           typescript: "4.4.4"
         },
         scripts: {
@@ -15675,12 +15675,12 @@ ${error2.message}` : execaMessage;
         createDebug.skips = [];
         createDebug.formatters = {};
         function selectColor(namespace) {
-          let hash2 = 0;
+          let hash = 0;
           for (let i = 0; i < namespace.length; i++) {
-            hash2 = (hash2 << 5) - hash2 + namespace.charCodeAt(i);
-            hash2 |= 0;
+            hash = (hash << 5) - hash + namespace.charCodeAt(i);
+            hash |= 0;
           }
-          return createDebug.colors[Math.abs(hash2) % createDebug.colors.length];
+          return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
         }
         __name(selectColor, "selectColor");
         createDebug.selectColor = selectColor;
@@ -22322,7 +22322,7 @@ ${error2.message}` : execaMessage;
         let stat;
         try {
           stat = fs7.statSync(options2.cwd);
-        } catch (e) {
+        } catch {
           return;
         }
         if (!stat.isDirectory()) {
@@ -23434,17 +23434,17 @@ ${error2.message}` : execaMessage;
         if (outputEncoding === "buffer") {
           outputEncoding = void 0;
         }
-        const hash2 = crypto3.createHash(options2.algorithm || "sha512");
+        const hash = crypto3.createHash(options2.algorithm || "sha512");
         const update = /* @__PURE__ */ __name((buffer) => {
           const inputEncoding = typeof buffer === "string" ? "utf8" : void 0;
-          hash2.update(buffer, inputEncoding);
+          hash.update(buffer, inputEncoding);
         }, "update");
         if (Array.isArray(input)) {
           input.forEach(update);
         } else {
           update(input);
         }
-        return hash2.digest(outputEncoding);
+        return hash.digest(outputEncoding);
       }, "hasha");
       hasha.stream = (options2 = {}) => {
         let outputEncoding = options2.encoding || "hex";
@@ -23470,21 +23470,21 @@ ${error2.message}` : execaMessage;
         hasha.async = async (input, options2) => hasha(input, options2);
       } else {
         hasha.fromFile = async (filePath, { algorithm = "sha512", encoding = "hex" } = {}) => {
-          const hash2 = await taskWorker("hashFile", [algorithm, filePath]);
+          const hash = await taskWorker("hashFile", [algorithm, filePath]);
           if (encoding === "buffer") {
-            return Buffer.from(hash2);
+            return Buffer.from(hash);
           }
-          return Buffer.from(hash2).toString(encoding);
+          return Buffer.from(hash).toString(encoding);
         };
         hasha.async = async (input, { algorithm = "sha512", encoding = "hex" } = {}) => {
           if (encoding === "buffer") {
             encoding = void 0;
           }
-          const hash2 = await taskWorker("hash", [algorithm, input]);
+          const hash = await taskWorker("hash", [algorithm, input]);
           if (encoding === void 0) {
-            return Buffer.from(hash2);
+            return Buffer.from(hash);
           }
-          return Buffer.from(hash2).toString(encoding);
+          return Buffer.from(hash).toString(encoding);
         };
       }
       hasha.fromFileSync = (filePath, options2) => hasha(fs7.readFileSync(filePath), options2);
@@ -23559,13 +23559,13 @@ ${error2.message}` : execaMessage;
               ws.on("error", reject2).on("close", () => {
                 resolve2({ lastModified, sha256, zippedSha256 });
               });
-              const hash2 = await hashPromise;
+              const hash = await hashPromise;
               const zippedHash = await zippedHashPromise;
               if (zippedHash !== zippedSha256) {
                 throw new Error(`sha256 of ${url2} (zipped) should be ${zippedSha256} but is ${zippedHash}`);
               }
-              if (hash2 !== sha256) {
-                throw new Error(`sha256 of ${url2} (uzipped) should be ${sha256} but is ${hash2}`);
+              if (hash !== sha256) {
+                throw new Error(`sha256 of ${url2} (uzipped) should be ${sha256} but is ${hash}`);
               }
             });
           } finally {
@@ -23610,15 +23610,15 @@ ${error2.message}` : execaMessage;
       var crypto_1 = __importDefault2(__require("crypto"));
       var fs_12 = __importDefault2(__require("fs"));
       function getHash(filePath) {
-        const hash2 = crypto_1.default.createHash("sha256");
+        const hash = crypto_1.default.createHash("sha256");
         const input = fs_12.default.createReadStream(filePath);
         return new Promise((resolve2) => {
           input.on("readable", () => {
             const data = input.read();
             if (data) {
-              hash2.update(data);
+              hash.update(data);
             } else {
-              resolve2(hash2.digest("hex"));
+              resolve2(hash.digest("hex"));
             }
           });
         });
@@ -24409,9 +24409,9 @@ ${error2.message}` : execaMessage;
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -24433,9 +24433,9 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/getPlatform.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getPlatform.js
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -24610,9 +24610,9 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -24634,9 +24634,9 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/platforms.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/platforms.js
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -24663,9 +24663,9 @@ var require_platforms2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/index.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/index.js
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -29598,7 +29598,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.4.2",
+      version: "3.5.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -29657,13 +29657,13 @@ var require_package2 = __commonJS2({
         "index-browser.js"
       ],
       devDependencies: {
-        "@microsoft/api-extractor": "7.18.17",
+        "@microsoft/api-extractor": "7.18.19",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
-        "@prisma/fetch-engine": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
+        "@prisma/engines": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
+        "@prisma/fetch-engine": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
+        "@prisma/get-platform": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@timsuchanek/copy": "1.4.5",
@@ -29671,7 +29671,7 @@ var require_package2 = __commonJS2({
         "@types/jest": "27.0.2",
         "@types/js-levenshtein": "1.1.0",
         "@types/mssql": "6.0.8",
-        "@types/node": "12.20.36",
+        "@types/node": "12.20.37",
         "@types/pg": "8.6.1",
         "@typescript-eslint/eslint-plugin": "4.33.0",
         "@typescript-eslint/parser": "4.33.0",
@@ -29679,11 +29679,11 @@ var require_package2 = __commonJS2({
         benchmark: "2.1.4",
         chalk: "4.1.2",
         "decimal.js": "10.3.1",
-        esbuild: "0.13.9",
+        esbuild: "0.13.13",
         eslint: "7.32.0",
         "eslint-config-prettier": "8.3.0",
         "eslint-plugin-eslint-comments": "3.2.0",
-        "eslint-plugin-jest": "25.2.2",
+        "eslint-plugin-jest": "25.2.4",
         "eslint-plugin-prettier": "4.0.0",
         execa: "5.1.1",
         "flat-map-polyfill": "0.3.8",
@@ -29695,7 +29695,7 @@ var require_package2 = __commonJS2({
         jest: "27.3.1",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
-        "lint-staged": "11.2.6",
+        "lint-staged": "12.0.1",
         "lz-string": "1.4.4",
         "make-dir": "3.1.0",
         mariadb: "2.5.5",
@@ -29726,7 +29726,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9"
+        "@prisma/engines-version": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e"
       },
       "lint-staged": {
         "*.ts": [
@@ -30189,7 +30189,7 @@ var require_lz_string = __commonJS2({
       };
       return LZString2;
     }();
-    if (typeof define === "function" && define.amd) {
+    if (typeof define === "function" && false) {
       define(function() {
         return LZString;
       });
@@ -32821,10 +32821,8 @@ __name(isGroupByOutputName, "isGroupByOutputName");
 var DMMFClass = class {
   constructor({ datamodel, schema, mappings }) {
     this.outputTypeToMergedOutputType = (outputType) => {
-      const model = this.modelMap[outputType.name];
       return {
         ...outputType,
-        isEmbedded: model ? model.isEmbedded : false,
         fields: outputType.fields
       };
     };
@@ -34597,12 +34595,6 @@ function getDefaultSelection(outputType) {
   for (const f of outputType.fields) {
     if (f.outputType.location === "scalar" || f.outputType.location === "enumTypes") {
       acc[f.name] = true;
-    } else {
-      if (f.outputType.type.isEmbedded) {
-        acc[f.name] = {
-          select: getDefaultSelection(f.outputType.type)
-        };
-      }
     }
   }
   return acc;
@@ -35358,15 +35350,27 @@ how you used Prisma Client in the issue.
 __name(getErrorMessageWithLink, "getErrorMessageWithLink");
 __name10(getErrorMessageWithLink, "getErrorMessageWithLink");
 
-// ../engine-core/dist/esm/common/utils/printGeneratorConfig.mjs
-var import_indent_string3 = __toModule2(require_indent_string2());
+// ../engine-core/dist/esm/common/errors/utils/prismaGraphQLToJSError.mjs
 var __defProp12 = Object.defineProperty;
 var __name11 = /* @__PURE__ */ __name((target, value) => __defProp12(target, "name", { value, configurable: true }), "__name");
+function prismaGraphQLToJSError(error2, clientVersion2) {
+  if (error2.user_facing_error.error_code) {
+    return new PrismaClientKnownRequestError(error2.user_facing_error.message, error2.user_facing_error.error_code, clientVersion2, error2.user_facing_error.meta);
+  }
+  return new PrismaClientUnknownRequestError(error2.error, clientVersion2);
+}
+__name(prismaGraphQLToJSError, "prismaGraphQLToJSError");
+__name11(prismaGraphQLToJSError, "prismaGraphQLToJSError");
+
+// ../engine-core/dist/esm/common/utils/printGeneratorConfig.mjs
+var import_indent_string3 = __toModule2(require_indent_string2());
+var __defProp13 = Object.defineProperty;
+var __name12 = /* @__PURE__ */ __name((target, value) => __defProp13(target, "name", { value, configurable: true }), "__name");
 function printGeneratorConfig(config2) {
   return String(new GeneratorConfigClass(config2));
 }
 __name(printGeneratorConfig, "printGeneratorConfig");
-__name11(printGeneratorConfig, "printGeneratorConfig");
+__name12(printGeneratorConfig, "printGeneratorConfig");
 var GeneratorConfigClass = class {
   constructor(config2) {
     this.config = config2;
@@ -35384,7 +35388,7 @@ ${(0, import_indent_string3.default)(printDatamodelObject(obj), 2)}
   }
 };
 __name(GeneratorConfigClass, "GeneratorConfigClass");
-__name11(GeneratorConfigClass, "GeneratorConfigClass");
+__name12(GeneratorConfigClass, "GeneratorConfigClass");
 function getOriginalBinaryTargetsValue(binaryTargets) {
   let value;
   if (binaryTargets.length > 0) {
@@ -35400,13 +35404,13 @@ function getOriginalBinaryTargetsValue(binaryTargets) {
   return value;
 }
 __name(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
-__name11(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
+__name12(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
 function printDatamodelObject(obj) {
   const maxLength = Object.keys(obj).reduce((max2, curr) => Math.max(max2, curr.length), 0);
   return Object.entries(obj).map(([key, value]) => `${key.padEnd(maxLength)} = ${niceStringify(value)}`).join("\n");
 }
 __name(printDatamodelObject, "printDatamodelObject");
-__name11(printDatamodelObject, "printDatamodelObject");
+__name12(printDatamodelObject, "printDatamodelObject");
 function niceStringify(value) {
   return JSON.parse(JSON.stringify(value, (_, value2) => {
     if (Array.isArray(value2)) {
@@ -35416,22 +35420,22 @@ function niceStringify(value) {
   }));
 }
 __name(niceStringify, "niceStringify");
-__name11(niceStringify, "niceStringify");
+__name12(niceStringify, "niceStringify");
 
 // ../engine-core/dist/esm/library/LibraryEngine.mjs
-var __defProp13 = Object.defineProperty;
-var __name12 = /* @__PURE__ */ __name((target, value) => __defProp13(target, "name", { value, configurable: true }), "__name");
+var __defProp14 = Object.defineProperty;
+var __name13 = /* @__PURE__ */ __name((target, value) => __defProp14(target, "name", { value, configurable: true }), "__name");
 var debug4 = (0, import_debug4.default)("prisma:client:libraryEngine");
 function isQueryEvent(event) {
   return event["item_type"] === "query" && "query" in event;
 }
 __name(isQueryEvent, "isQueryEvent");
-__name12(isQueryEvent, "isQueryEvent");
+__name13(isQueryEvent, "isQueryEvent");
 function isPanicEvent(event) {
   return event.level === "error" && event["message"] === "PANIC";
 }
 __name(isPanicEvent, "isPanicEvent");
-__name12(isPanicEvent, "isPanicEvent");
+__name13(isPanicEvent, "isPanicEvent");
 var knownPlatforms = [...import_get_platform.platforms, "native"];
 var engines = [];
 var LibraryEngine = class extends Engine {
@@ -35690,13 +35694,6 @@ You may have to run ${import_chalk7.default.greenBright("prisma generate")} for 
     this.versionInfo = this.library?.version();
     return this.versionInfo?.version ?? "unknown";
   }
-  prismaGraphQLToJSError(error2) {
-    debug4("graphQLToJSError");
-    if (error2.user_facing_error.error_code) {
-      return new PrismaClientKnownRequestError(error2.user_facing_error.message, error2.user_facing_error.error_code, this.config.clientVersion, error2.user_facing_error.meta);
-    }
-    return new PrismaClientUnknownRequestError(error2.error, this.config.clientVersion);
-  }
   async request(query2, headers = {}, numTry = 1) {
     debug4(`sending request, this.libraryStarted: ${this.libraryStarted}`);
     const request4 = { query: query2, variables: {} };
@@ -35709,7 +35706,7 @@ You may have to run ${import_chalk7.default.greenBright("prisma generate")} for 
       const data = this.parseEngineResponse(await this.executingQueryPromise);
       if (data.errors) {
         if (data.errors.length === 1) {
-          throw this.prismaGraphQLToJSError(data.errors[0]);
+          throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
         }
         throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
       } else if (this.loggerRustPanic) {
@@ -35742,7 +35739,7 @@ ${error2.backtrace}`, this.config.clientVersion);
     const data = this.parseEngineResponse(result);
     if (data.errors) {
       if (data.errors.length === 1) {
-        throw this.prismaGraphQLToJSError(data.errors[0]);
+        throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
       }
       throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
     }
@@ -35750,7 +35747,7 @@ ${error2.backtrace}`, this.config.clientVersion);
     if (Array.isArray(batchResult)) {
       return batchResult.map((result2) => {
         if (result2.errors) {
-          return this.loggerRustPanic ?? this.prismaGraphQLToJSError(result2.errors[0]);
+          return this.loggerRustPanic ?? prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
         }
         return {
           data: result2,
@@ -35862,7 +35859,7 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
   }
 };
 __name(LibraryEngine, "LibraryEngine");
-__name12(LibraryEngine, "LibraryEngine");
+__name13(LibraryEngine, "LibraryEngine");
 function hookProcess(handler, exit = false) {
   process.once(handler, async () => {
     debug4(`hookProcess received: ${handler}`);
@@ -35876,21 +35873,20 @@ function hookProcess(handler, exit = false) {
   });
 }
 __name(hookProcess, "hookProcess");
-__name12(hookProcess, "hookProcess");
+__name13(hookProcess, "hookProcess");
 var hooksInitialized = false;
 function initHooks() {
   if (!hooksInitialized) {
     hookProcess("beforeExit");
     hookProcess("exit");
     hookProcess("SIGINT", true);
-    hookProcess("SIGUSR1", true);
     hookProcess("SIGUSR2", true);
     hookProcess("SIGTERM", true);
     hooksInitialized = true;
   }
 }
 __name(initHooks, "initHooks");
-__name12(initHooks, "initHooks");
+__name13(initHooks, "initHooks");
 
 // ../engine-core/dist/esm/binary/BinaryEngine.mjs
 var import_debug5 = __toModule2(require_dist7());
@@ -35910,13 +35906,13 @@ import { promisify } from "util";
 // ../engine-core/dist/esm/tools/byline.mjs
 import stream from "stream";
 import util from "util";
-var __defProp14 = Object.defineProperty;
-var __name13 = /* @__PURE__ */ __name((target, value) => __defProp14(target, "name", { value, configurable: true }), "__name");
+var __defProp15 = Object.defineProperty;
+var __name14 = /* @__PURE__ */ __name((target, value) => __defProp15(target, "name", { value, configurable: true }), "__name");
 function byline(readStream, options2) {
   return module.exports.createStream(readStream, options2);
 }
 __name(byline, "byline");
-__name13(byline, "byline");
+__name14(byline, "byline");
 module.exports.createStream = function(readStream, options2) {
   if (readStream) {
     return createLineStream(readStream, options2);
@@ -35936,7 +35932,7 @@ function createLineStream(readStream, options2) {
   return ls;
 }
 __name(createLineStream, "createLineStream");
-__name13(createLineStream, "createLineStream");
+__name14(createLineStream, "createLineStream");
 module.exports.LineStream = LineStream;
 function LineStream(options2) {
   stream.Transform.call(this, options2);
@@ -35954,7 +35950,7 @@ function LineStream(options2) {
   });
 }
 __name(LineStream, "LineStream");
-__name13(LineStream, "LineStream");
+__name14(LineStream, "LineStream");
 util.inherits(LineStream, stream.Transform);
 LineStream.prototype._transform = function(chunk, encoding, done) {
   encoding = encoding || "utf8";
@@ -36008,8 +36004,8 @@ LineStream.prototype._reencode = function(line, chunkEncoding) {
 };
 
 // ../engine-core/dist/esm/common/errors/utils/log.mjs
-var __defProp15 = Object.defineProperty;
-var __name14 = /* @__PURE__ */ __name((target, value) => __defProp15(target, "name", { value, configurable: true }), "__name");
+var __defProp16 = Object.defineProperty;
+var __name15 = /* @__PURE__ */ __name((target, value) => __defProp16(target, "name", { value, configurable: true }), "__name");
 function getMessage(log4) {
   if (typeof log4 === "string") {
     return log4;
@@ -36021,7 +36017,7 @@ function getMessage(log4) {
   return JSON.stringify(log4);
 }
 __name(getMessage, "getMessage");
-__name14(getMessage, "getMessage");
+__name15(getMessage, "getMessage");
 function getBacktraceFromLog(log4) {
   if (log4.fields?.message) {
     let str = log4.fields?.message;
@@ -36043,7 +36039,7 @@ ${log4.fields?.reason}`;
   return "Unknown error";
 }
 __name(getBacktraceFromLog, "getBacktraceFromLog");
-__name14(getBacktraceFromLog, "getBacktraceFromLog");
+__name15(getBacktraceFromLog, "getBacktraceFromLog");
 function getBacktraceFromRustError(err) {
   let str = "";
   if (err.is_panic) {
@@ -36059,22 +36055,22 @@ ${err.message}`;
   return str;
 }
 __name(getBacktraceFromRustError, "getBacktraceFromRustError");
-__name14(getBacktraceFromRustError, "getBacktraceFromRustError");
+__name15(getBacktraceFromRustError, "getBacktraceFromRustError");
 function isRustLog(e) {
   return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
 }
 __name(isRustLog, "isRustLog");
-__name14(isRustLog, "isRustLog");
+__name15(isRustLog, "isRustLog");
 function isRustErrorLog(e) {
   return isRustLog(e) && (e.level === "error" || e.fields?.message?.includes("fatal error"));
 }
 __name(isRustErrorLog, "isRustErrorLog");
-__name14(isRustErrorLog, "isRustErrorLog");
+__name15(isRustErrorLog, "isRustErrorLog");
 function isRustError(e) {
   return typeof e.is_panic !== "undefined";
 }
 __name(isRustError, "isRustError");
-__name14(isRustError, "isRustError");
+__name15(isRustError, "isRustError");
 function convertLog(rustLog) {
   const isQuery = isQueryLog(rustLog.fields);
   const level = isQuery ? "query" : rustLog.level.toLowerCase();
@@ -36085,16 +36081,16 @@ function convertLog(rustLog) {
   };
 }
 __name(convertLog, "convertLog");
-__name14(convertLog, "convertLog");
+__name15(convertLog, "convertLog");
 function isQueryLog(fields) {
   return Boolean(fields.query);
 }
 __name(isQueryLog, "isQueryLog");
-__name14(isQueryLog, "isQueryLog");
+__name15(isQueryLog, "isQueryLog");
 
 // ../engine-core/dist/esm/common/errors/PrismaClientRustError.mjs
-var __defProp16 = Object.defineProperty;
-var __name15 = /* @__PURE__ */ __name((target, value) => __defProp16(target, "name", { value, configurable: true }), "__name");
+var __defProp17 = Object.defineProperty;
+var __name16 = /* @__PURE__ */ __name((target, value) => __defProp17(target, "name", { value, configurable: true }), "__name");
 var PrismaClientRustError = class extends Error {
   constructor({ clientVersion: clientVersion2, log: log4, error: error2 }) {
     if (log4) {
@@ -36113,11 +36109,11 @@ var PrismaClientRustError = class extends Error {
   }
 };
 __name(PrismaClientRustError, "PrismaClientRustError");
-__name15(PrismaClientRustError, "PrismaClientRustError");
+__name16(PrismaClientRustError, "PrismaClientRustError");
 
 // ../engine-core/dist/esm/tools/omit.mjs
-var __defProp17 = Object.defineProperty;
-var __name16 = /* @__PURE__ */ __name((target, value) => __defProp17(target, "name", { value, configurable: true }), "__name");
+var __defProp18 = Object.defineProperty;
+var __name17 = /* @__PURE__ */ __name((target, value) => __defProp18(target, "name", { value, configurable: true }), "__name");
 function omit2(obj, keys2) {
   return Object.keys(obj).filter((key) => !keys2.includes(key)).reduce((result, key) => {
     result[key] = obj[key];
@@ -36125,7 +36121,7 @@ function omit2(obj, keys2) {
   }, {});
 }
 __name(omit2, "omit");
-__name16(omit2, "omit");
+__name17(omit2, "omit");
 
 // ../engine-core/dist/esm/binary/Connection.mjs
 var import_get_stream = __toModule2(require_get_stream2());
@@ -36142,15 +36138,15 @@ var pipeline = import_index.default.pipeline;
 var setGlobalAgent = import_index.default.setGlobalAgent;
 
 // ../engine-core/dist/esm/binary/Connection.mjs
-var __defProp18 = Object.defineProperty;
-var __name17 = /* @__PURE__ */ __name((target, value) => __defProp18(target, "name", { value, configurable: true }), "__name");
+var __defProp19 = Object.defineProperty;
+var __name18 = /* @__PURE__ */ __name((target, value) => __defProp19(target, "name", { value, configurable: true }), "__name");
 function assertHasPool(pool) {
   if (pool === void 0) {
     throw new Error("Connection has not been opened");
   }
 }
 __name(assertHasPool, "assertHasPool");
-__name17(assertHasPool, "assertHasPool");
+__name18(assertHasPool, "assertHasPool");
 var Connection = class {
   constructor() {
   }
@@ -36206,14 +36202,14 @@ var Connection = class {
   }
 };
 __name(Connection, "Connection");
-__name17(Connection, "Connection");
+__name18(Connection, "Connection");
 
 // ../engine-core/dist/esm/binary/BinaryEngine.mjs
-var __defProp19 = Object.defineProperty;
-var __name18 = /* @__PURE__ */ __name((target, value) => __defProp19(target, "name", { value, configurable: true }), "__name");
+var __defProp20 = Object.defineProperty;
+var __name19 = /* @__PURE__ */ __name((target, value) => __defProp20(target, "name", { value, configurable: true }), "__name");
 var debug5 = (0, import_debug5.default)("prisma:engine");
 var exists2 = promisify(fs3.exists);
-var logger = /* @__PURE__ */ __name18((...args) => {
+var logger = /* @__PURE__ */ __name19((...args) => {
 }, "logger");
 var knownPlatforms2 = [...import_get_platform2.platforms, "native"];
 var engines2 = [];
@@ -36633,11 +36629,11 @@ ${import_chalk8.default.dim("In case we're mistaken, please report this to us \u
             debug5("stdout", getMessage(json));
             if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && json.fields?.message?.startsWith("Started http server")) {
               if (this.useUds) {
-                this.connection.open("http://localhost", {
+                this.connection.open("http://127.0.0.1", {
                   socketPath: this.socketPath
                 });
               } else {
-                this.connection.open(`http://localhost:${this.port}`);
+                this.connection.open(`http://127.0.0.1:${this.port}`);
               }
               this.engineStartDeferred.resolve();
               this.engineStartDeferred = void 0;
@@ -36851,7 +36847,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       const { data, headers: headers2 } = await this.currentRequestPromise;
       if (data.errors) {
         if (data.errors.length === 1) {
-          throw this.graphQLToJSError(data.errors[0]);
+          throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
         }
         throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.clientVersion);
       }
@@ -36888,7 +36884,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       if (Array.isArray(batchResult)) {
         return batchResult.map((result) => {
           if (result.errors) {
-            throw this.graphQLToJSError(result.errors[0]);
+            throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
           }
           return {
             data: result,
@@ -36896,7 +36892,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
           };
         });
       } else {
-        throw this.graphQLToJSError(errors2[0]);
+        throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
       }
     }).catch(async (e) => {
       const isError2 = await this.handleRequestError(e, numTry < 3);
@@ -36962,20 +36958,14 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       query: this.lastQuery
     });
   }
-  graphQLToJSError(error2) {
-    if (error2.user_facing_error.error_code) {
-      return new PrismaClientKnownRequestError(error2.user_facing_error.message, error2.user_facing_error.error_code, this.clientVersion, error2.user_facing_error.meta);
-    }
-    return new PrismaClientUnknownRequestError(error2.user_facing_error.message, this.clientVersion);
-  }
 };
 __name(BinaryEngine, "BinaryEngine");
-__name18(BinaryEngine, "BinaryEngine");
+__name19(BinaryEngine, "BinaryEngine");
 function stringifyQuery(q) {
   return `{"variables":{},"query":${JSON.stringify(q)}}`;
 }
 __name(stringifyQuery, "stringifyQuery");
-__name18(stringifyQuery, "stringifyQuery");
+__name19(stringifyQuery, "stringifyQuery");
 function hookProcess2(handler, exit = false) {
   process.once(handler, async () => {
     for (const engine of engines2) {
@@ -36997,26 +36987,25 @@ function hookProcess2(handler, exit = false) {
   });
 }
 __name(hookProcess2, "hookProcess");
-__name18(hookProcess2, "hookProcess");
+__name19(hookProcess2, "hookProcess");
 var hooksInitialized2 = false;
 function initHooks2() {
   if (!hooksInitialized2) {
     hookProcess2("beforeExit");
     hookProcess2("exit");
     hookProcess2("SIGINT", true);
-    hookProcess2("SIGUSR1", true);
     hookProcess2("SIGUSR2", true);
     hookProcess2("SIGTERM", true);
     hooksInitialized2 = true;
   }
 }
 __name(initHooks2, "initHooks");
-__name18(initHooks2, "initHooks");
+__name19(initHooks2, "initHooks");
 function transactionHttpErrorHandler(result) {
   throw result.data;
 }
 __name(transactionHttpErrorHandler, "transactionHttpErrorHandler");
-__name18(transactionHttpErrorHandler, "transactionHttpErrorHandler");
+__name19(transactionHttpErrorHandler, "transactionHttpErrorHandler");
 function runtimeHeadersToHttpHeaders(headers) {
   return Object.keys(headers).reduce((acc, runtimeHeaderKey) => {
     let httpHeaderKey = runtimeHeaderKey;
@@ -37028,11 +37017,11 @@ function runtimeHeadersToHttpHeaders(headers) {
   }, {});
 }
 __name(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
-__name18(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
+__name19(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
 
 // ../engine-core/dist/esm/data-proxy/utils/getJSRuntimeName.mjs
-var __defProp20 = Object.defineProperty;
-var __name19 = /* @__PURE__ */ __name((target, value) => __defProp20(target, "name", { value, configurable: true }), "__name");
+var __defProp21 = Object.defineProperty;
+var __name20 = /* @__PURE__ */ __name((target, value) => __defProp21(target, "name", { value, configurable: true }), "__name");
 function getJSRuntimeName() {
   if (typeof self === "undefined") {
     return "node";
@@ -37040,21 +37029,21 @@ function getJSRuntimeName() {
   return "browser";
 }
 __name(getJSRuntimeName, "getJSRuntimeName");
-__name19(getJSRuntimeName, "getJSRuntimeName");
+__name20(getJSRuntimeName, "getJSRuntimeName");
 
 // ../engine-core/dist/esm/data-proxy/utils/request.mjs
-var __defProp21 = Object.defineProperty;
-var __name20 = /* @__PURE__ */ __name((target, value) => __defProp21(target, "name", { value, configurable: true }), "__name");
+var __defProp22 = Object.defineProperty;
+var __name21 = /* @__PURE__ */ __name((target, value) => __defProp22(target, "name", { value, configurable: true }), "__name");
 async function request3(url2, options2 = {}) {
-  const jsRuntimeName2 = getJSRuntimeName();
-  if (jsRuntimeName2 === "browser") {
+  const jsRuntimeName = getJSRuntimeName();
+  if (jsRuntimeName === "browser") {
     return fetch(url2, options2);
   } else {
     return nodeFetch(url2, options2);
   }
 }
 __name(request3, "request");
-__name20(request3, "request");
+__name21(request3, "request");
 function buildHeaders(options2) {
   return {
     ...options2.headers,
@@ -37062,7 +37051,7 @@ function buildHeaders(options2) {
   };
 }
 __name(buildHeaders, "buildHeaders");
-__name20(buildHeaders, "buildHeaders");
+__name21(buildHeaders, "buildHeaders");
 function buildOptions(options2) {
   return {
     method: options2.method,
@@ -37070,7 +37059,7 @@ function buildOptions(options2) {
   };
 }
 __name(buildOptions, "buildOptions");
-__name20(buildOptions, "buildOptions");
+__name21(buildOptions, "buildOptions");
 function buildResponse(incomingData2, response) {
   return {
     json: () => JSON.parse(Buffer.concat(incomingData2).toString()),
@@ -37080,7 +37069,7 @@ function buildResponse(incomingData2, response) {
   };
 }
 __name(buildResponse, "buildResponse");
-__name20(buildResponse, "buildResponse");
+__name21(buildResponse, "buildResponse");
 function nodeFetch(url, options = {}) {
   const httpsOptions = buildOptions(options);
   const incomingData = [];
@@ -37092,39 +37081,20 @@ function nodeFetch(url, options = {}) {
       response.on("error", reject);
     });
     request.on("error", reject);
-    request.write(options.body);
+    request.write(options.body ?? "");
     request.end();
   });
 }
 __name(nodeFetch, "nodeFetch");
-__name20(nodeFetch, "nodeFetch");
+__name21(nodeFetch, "nodeFetch");
 
 // ../engine-core/dist/esm/data-proxy/DataProxyEngine.mjs
 import EventEmitter3 from "events";
 
-// ../engine-core/dist/esm/data-proxy/utils/createSchemaHash.mjs
-var __defProp22 = Object.defineProperty;
-var __name21 = /* @__PURE__ */ __name((target, value) => __defProp22(target, "name", { value, configurable: true }), "__name");
-async function createSchemaHash(inlineSchema) {
-  const schemaBuffer = Buffer.from(inlineSchema);
-  const jsRuntimeName = getJSRuntimeName();
-  if (jsRuntimeName === "node") {
-    const crypto = eval(`require('crypto')`);
-    const hash = crypto.createHash("sha256").update(schemaBuffer);
-    return hash.digest("hex");
-  } else if (jsRuntimeName === "browser") {
-    const hash2 = await crypto.subtle.digest("SHA-256", schemaBuffer);
-    return Buffer.from(hash2).toString("hex");
-  }
-  return "";
-}
-__name(createSchemaHash, "createSchemaHash");
-__name21(createSchemaHash, "createSchemaHash");
-
 // ../engine-core/dist/esm/data-proxy/utils/backOff.mjs
 var __defProp23 = Object.defineProperty;
 var __name22 = /* @__PURE__ */ __name((target, value) => __defProp23(target, "name", { value, configurable: true }), "__name");
-var BACKOFF_INTERVAL = 250;
+var BACKOFF_INTERVAL = 50;
 function backOff(n) {
   const baseDelay = Math.pow(2, n) * BACKOFF_INTERVAL;
   const jitter = Math.ceil(Math.random() * baseDelay) - Math.ceil(baseDelay / 2);
@@ -37147,11 +37117,212 @@ function getClientVersion(config2) {
 __name(getClientVersion, "getClientVersion");
 __name23(getClientVersion, "getClientVersion");
 
-// ../engine-core/dist/esm/data-proxy/DataProxyEngine.mjs
+// ../engine-core/dist/esm/common/errors/PrismaClientError.mjs
 var __defProp25 = Object.defineProperty;
 var __name24 = /* @__PURE__ */ __name((target, value) => __defProp25(target, "name", { value, configurable: true }), "__name");
-var randomDebugId = Math.ceil(Math.random() * 1e3);
-var MAX_RETRIES = 5;
+var PrismaClientError = class extends Error {
+  constructor(message, info2) {
+    super(message);
+    this.clientVersion = info2.clientVersion;
+    this.cause = info2.cause;
+  }
+  get [Symbol.toStringTag]() {
+    return this.name;
+  }
+};
+__name(PrismaClientError, "PrismaClientError");
+__name24(PrismaClientError, "PrismaClientError");
+
+// ../engine-core/dist/esm/data-proxy/errors/DataProxyError.mjs
+var __defProp26 = Object.defineProperty;
+var __name25 = /* @__PURE__ */ __name((target, value) => __defProp26(target, "name", { value, configurable: true }), "__name");
+var DataProxyError = class extends PrismaClientError {
+  constructor(message, info2) {
+    super(message, info2);
+    this.isRetryable = info2.isRetryable ?? true;
+  }
+};
+__name(DataProxyError, "DataProxyError");
+__name25(DataProxyError, "DataProxyError");
+
+// ../engine-core/dist/esm/data-proxy/errors/DataProxyAPIError.mjs
+var __defProp27 = Object.defineProperty;
+var __name26 = /* @__PURE__ */ __name((target, value) => __defProp27(target, "name", { value, configurable: true }), "__name");
+var DataProxyAPIError = class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, info2);
+    this.response = info2.response;
+  }
+};
+__name(DataProxyAPIError, "DataProxyAPIError");
+__name26(DataProxyAPIError, "DataProxyAPIError");
+
+// ../engine-core/dist/esm/data-proxy/errors/utils/setRetryable.mjs
+var __defProp28 = Object.defineProperty;
+var __name27 = /* @__PURE__ */ __name((target, value) => __defProp28(target, "name", { value, configurable: true }), "__name");
+function setRetryable(info2, retryable) {
+  return {
+    ...info2,
+    isRetryable: retryable
+  };
+}
+__name(setRetryable, "setRetryable");
+__name27(setRetryable, "setRetryable");
+
+// ../engine-core/dist/esm/data-proxy/errors/BadRequestError.mjs
+var __defProp29 = Object.defineProperty;
+var __name28 = /* @__PURE__ */ __name((target, value) => __defProp29(target, "name", { value, configurable: true }), "__name");
+var BadRequestError = class extends DataProxyAPIError {
+  constructor(info2) {
+    super("This request could not be understood by the server", setRetryable(info2, false));
+    this.name = "BadRequestError";
+    this.code = "P5000";
+  }
+};
+__name(BadRequestError, "BadRequestError");
+__name28(BadRequestError, "BadRequestError");
+
+// ../engine-core/dist/esm/data-proxy/errors/NotFoundError.mjs
+var __defProp30 = Object.defineProperty;
+var __name29 = /* @__PURE__ */ __name((target, value) => __defProp30(target, "name", { value, configurable: true }), "__name");
+var NotFoundError = class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Requested resource does not exist", setRetryable(info2, false));
+    this.name = "NotFoundError";
+    this.code = "P5003";
+  }
+};
+__name(NotFoundError, "NotFoundError");
+__name29(NotFoundError, "NotFoundError");
+
+// ../engine-core/dist/esm/data-proxy/errors/SchemaMissingError.mjs
+var __defProp31 = Object.defineProperty;
+var __name30 = /* @__PURE__ */ __name((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+var SchemaMissingError = class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Schema needs to be uploaded", setRetryable(info2, true));
+    this.name = "SchemaMissingError";
+    this.code = "P5005";
+  }
+};
+__name(SchemaMissingError, "SchemaMissingError");
+__name30(SchemaMissingError, "SchemaMissingError");
+
+// ../engine-core/dist/esm/data-proxy/errors/ServerError.mjs
+var __defProp32 = Object.defineProperty;
+var __name31 = /* @__PURE__ */ __name((target, value) => __defProp32(target, "name", { value, configurable: true }), "__name");
+var ServerError = class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Unknown server error", setRetryable(info2, true));
+    this.name = "ServerError";
+    this.code = "P5006";
+  }
+};
+__name(ServerError, "ServerError");
+__name31(ServerError, "ServerError");
+
+// ../engine-core/dist/esm/data-proxy/errors/UnauthorizedError.mjs
+var __defProp33 = Object.defineProperty;
+var __name32 = /* @__PURE__ */ __name((target, value) => __defProp33(target, "name", { value, configurable: true }), "__name");
+var UnauthorizedError = class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Unauthorized, check your connection string", setRetryable(info2, false));
+    this.name = "UnauthorizedError";
+    this.code = "P5007";
+  }
+};
+__name(UnauthorizedError, "UnauthorizedError");
+__name32(UnauthorizedError, "UnauthorizedError");
+
+// ../engine-core/dist/esm/data-proxy/errors/UsageExceededError.mjs
+var __defProp34 = Object.defineProperty;
+var __name33 = /* @__PURE__ */ __name((target, value) => __defProp34(target, "name", { value, configurable: true }), "__name");
+var UsageExceededError = class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Usage exceeded, retry again later", setRetryable(info2, true));
+    this.name = "UsageExceededError";
+    this.code = "P5008";
+  }
+};
+__name(UsageExceededError, "UsageExceededError");
+__name33(UsageExceededError, "UsageExceededError");
+
+// ../engine-core/dist/esm/data-proxy/errors/utils/responseToError.mjs
+var __defProp35 = Object.defineProperty;
+var __name34 = /* @__PURE__ */ __name((target, value) => __defProp35(target, "name", { value, configurable: true }), "__name");
+async function responseToError(response, clientVersion2) {
+  if (response.ok)
+    return void 0;
+  const info2 = { clientVersion: clientVersion2, response };
+  if (response.status === 401) {
+    throw new UnauthorizedError(info2);
+  }
+  if (response.status === 404) {
+    try {
+      const body = await response.json();
+      const isSchemaMissing = body?.EngineNotStarted?.reason === "SchemaMissing";
+      return isSchemaMissing ? new SchemaMissingError(info2) : new NotFoundError(info2);
+    } catch (err) {
+      return new NotFoundError(info2);
+    }
+  }
+  if (response.status === 429) {
+    throw new UsageExceededError(info2);
+  }
+  if (response.status >= 500) {
+    throw new ServerError(info2);
+  }
+  if (response.status >= 400) {
+    throw new BadRequestError(info2);
+  }
+  return void 0;
+}
+__name(responseToError, "responseToError");
+__name34(responseToError, "responseToError");
+
+// ../engine-core/dist/esm/data-proxy/errors/InvalidDatasourceError.mjs
+var __defProp36 = Object.defineProperty;
+var __name35 = /* @__PURE__ */ __name((target, value) => __defProp36(target, "name", { value, configurable: true }), "__name");
+var InvalidDatasourceError = class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, setRetryable(info2, false));
+    this.name = "InvalidDatasourceError";
+    this.code = "P5002";
+  }
+};
+__name(InvalidDatasourceError, "InvalidDatasourceError");
+__name35(InvalidDatasourceError, "InvalidDatasourceError");
+
+// ../engine-core/dist/esm/data-proxy/errors/NotImplementedYetError.mjs
+var __defProp37 = Object.defineProperty;
+var __name36 = /* @__PURE__ */ __name((target, value) => __defProp37(target, "name", { value, configurable: true }), "__name");
+var NotImplementedYetError = class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, setRetryable(info2, false));
+    this.name = "NotImplementedYetError";
+    this.code = "P5004";
+  }
+};
+__name(NotImplementedYetError, "NotImplementedYetError");
+__name36(NotImplementedYetError, "NotImplementedYetError");
+
+// ../engine-core/dist/esm/data-proxy/errors/ForcedRetryError.mjs
+var __defProp38 = Object.defineProperty;
+var __name37 = /* @__PURE__ */ __name((target, value) => __defProp38(target, "name", { value, configurable: true }), "__name");
+var ForcedRetryError = class extends DataProxyError {
+  constructor(info2) {
+    super("This request must be retried", setRetryable(info2, true));
+    this.name = "ForcedRetryError";
+    this.code = "P5001";
+  }
+};
+__name(ForcedRetryError, "ForcedRetryError");
+__name37(ForcedRetryError, "ForcedRetryError");
+
+// ../engine-core/dist/esm/data-proxy/DataProxyEngine.mjs
+var __defProp39 = Object.defineProperty;
+var __name38 = /* @__PURE__ */ __name((target, value) => __defProp39(target, "name", { value, configurable: true }), "__name");
+var MAX_RETRIES = 10;
 var DataProxyEngine = class extends Engine {
   constructor(config2) {
     super();
@@ -37159,17 +37330,26 @@ var DataProxyEngine = class extends Engine {
     this.env = this.config.env ?? {};
     this.inlineSchema = config2.inlineSchema ?? "";
     this.inlineDatasources = config2.inlineDatasources ?? {};
+    this.inlineSchemaHash = config2.inlineSchemaHash ?? "";
+    this.clientVersion = config2.clientVersion ?? "unknown";
     this.logEmitter = new EventEmitter3();
     this.logEmitter.on("error", () => {
     });
-    this.initPromise = this.init();
-  }
-  async init() {
     const [host, apiKey] = this.extractHostAndApiKey();
-    this.schemaHash = await createSchemaHash(this.inlineSchema);
-    this.clientVersion = getClientVersion(this.config);
+    this.remoteClientVersion = getClientVersion(this.config);
     this.headers = { Authorization: `Bearer ${apiKey}` };
     this.host = host;
+    const promise = Promise.resolve();
+    this.pushPromise = promise.then(() => this.pushSchema());
+  }
+  async pushSchema() {
+    const response = await request3(this.url("schema"), {
+      method: "GET",
+      headers: this.headers
+    });
+    if (response.status === 404) {
+      await this.uploadSchema();
+    }
   }
   version() {
     return "unknown";
@@ -37180,39 +37360,39 @@ var DataProxyEngine = class extends Engine {
   }
   on(event, listener) {
     if (event === "beforeExit") {
-      throw new Error("beforeExit event is not supported yet");
+      throw new NotImplementedYetError("beforeExit event is not yet supported", {
+        clientVersion: this.clientVersion
+      });
     } else {
       this.logEmitter.on(event, listener);
     }
   }
-  async url(s) {
-    await this.initPromise;
-    return `https://${this.host}/${this.clientVersion}/${this.schemaHash}/${s}?id=${randomDebugId}`;
+  url(s) {
+    return `https://${this.host}/${this.remoteClientVersion}/${this.inlineSchemaHash}/${s}`;
   }
   async getConfig() {
-    await this.initPromise;
-    return {
+    return Promise.resolve({
       datasources: [
         {
           activeProvider: this.config.activeProvider
         }
       ]
-    };
+    });
   }
   async uploadSchema() {
-    await this.initPromise;
-    const res = await request3(await this.url("schema"), {
+    const response = await request3(this.url("schema"), {
       method: "PUT",
       headers: this.headers,
-      body: this.config.inlineSchema
+      body: this.inlineSchema
     });
-    if (res) {
-      this.logEmitter.emit("info", {
-        message: `Schema (re)uploaded (hash: ${this.schemaHash})`
-      });
+    const err = await responseToError(response, this.clientVersion);
+    if (err) {
+      this.logEmitter.emit("warn", { message: `Error while uploading schema: ${err.message}` });
+      throw err;
     } else {
-      this.logEmitter.emit("warn", { message: "Could not upload the schema" });
-      throw new Error("Could not upload the schema");
+      this.logEmitter.emit("info", {
+        message: `Schema (re)uploaded (hash: ${this.inlineSchemaHash})`
+      });
     }
   }
   request(query2, headers, attempt = 0) {
@@ -37232,39 +37412,61 @@ ${queries.join("\n")}`
     return batchResult;
   }
   async requestInternal(body, headers, attempt) {
-    await this.initPromise;
+    await this.pushPromise;
     try {
       this.logEmitter.emit("info", {
-        message: `Calling ${await this.url("graphql")} (n=${attempt})`
+        message: `Calling ${this.url("graphql")} (n=${attempt})`
       });
-      const res = await request3(await this.url("graphql"), {
+      const response = await request3(this.url("graphql"), {
         method: "POST",
         headers: { ...headers, ...this.headers },
         body: JSON.stringify(body)
       });
-      if (res.status === 404) {
+      const err = await responseToError(response, this.clientVersion);
+      if (err instanceof SchemaMissingError) {
         await this.uploadSchema();
-        throw new Error("Schema (re)uploaded");
-      }
-      if (!res.ok) {
-        throw new Error("GraphQL request failed");
-      }
-      return res.json();
-    } catch (err) {
-      if (attempt >= MAX_RETRIES) {
-        this.logEmitter.emit("error", {
-          message: `Failed to query: ${err.message}`
+        throw new ForcedRetryError({
+          clientVersion: this.clientVersion,
+          cause: err
         });
-        throw err;
-      } else {
-        const delay = await backOff(attempt);
-        this.logEmitter.emit("warn", { message: `Retrying after ${delay}ms` });
-        return this.requestInternal(body, headers, attempt + 1);
       }
+      if (err) {
+        throw err;
+      }
+      const data = await response.json();
+      if (data.errors) {
+        if (data.errors.length === 1) {
+          throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
+        }
+      }
+      return data;
+    } catch (err) {
+      this.logEmitter.emit("error", {
+        message: `Error while querying: ${err.message ?? "(unknown)"}`
+      });
+      if (!(err instanceof DataProxyError)) {
+        throw err;
+      }
+      if (!err.isRetryable) {
+        throw err;
+      }
+      if (attempt >= MAX_RETRIES) {
+        if (err instanceof ForcedRetryError) {
+          throw err.cause;
+        } else {
+          throw err;
+        }
+      }
+      this.logEmitter.emit("warn", { message: "This request can be retried" });
+      const delay = await backOff(attempt);
+      this.logEmitter.emit("warn", { message: `Retrying after ${delay}ms` });
+      return this.requestInternal(body, headers, attempt + 1);
     }
   }
   transaction() {
-    throw new Error("Transactions are currently not supported in Data Proxy");
+    throw new NotImplementedYetError("Interactive transactions are not yet supported", {
+      clientVersion: this.clientVersion
+    });
   }
   extractHostAndApiKey() {
     const mainDatasourceName = Object.keys(this.inlineDatasources)[0];
@@ -37277,21 +37479,27 @@ ${queries.join("\n")}`
     try {
       url2 = new URL(dataProxyURL ?? "");
     } catch {
-      throw new Error("Could not parse URL of the datasource");
+      throw new InvalidDatasourceError("Could not parse URL of the datasource", {
+        clientVersion: this.clientVersion
+      });
     }
     const { protocol, host, searchParams } = url2;
     if (protocol !== "prisma:") {
-      throw new Error("Datasource URL should use prisma:// protocol");
+      throw new InvalidDatasourceError("Datasource URL should use prisma:// protocol", {
+        clientVersion: this.clientVersion
+      });
     }
     const apiKey = searchParams.get("api_key");
     if (apiKey === null || apiKey.length < 1) {
-      throw new Error("No valid API key found in the datasource URL");
+      throw new InvalidDatasourceError("No valid API key found in the datasource URL", {
+        clientVersion: this.clientVersion
+      });
     }
     return [host, apiKey];
   }
 };
 __name(DataProxyEngine, "DataProxyEngine");
-__name24(DataProxyEngine, "DataProxyEngine");
+__name38(DataProxyEngine, "DataProxyEngine");
 
 // src/runtime/getPrismaClient.ts
 var import_debug9 = __toModule2(require_dist7());
@@ -37299,13 +37507,13 @@ var import_debug9 = __toModule2(require_dist7());
 // ../sdk/dist/esm/cli/utils.mjs
 var import_strip_indent2 = __toModule2(require_strip_indent());
 var import_arg = __toModule2(require_arg());
-var __defProp26 = Object.defineProperty;
-var __name25 = /* @__PURE__ */ __name((target, value) => __defProp26(target, "name", { value, configurable: true }), "__name");
+var __defProp40 = Object.defineProperty;
+var __name39 = /* @__PURE__ */ __name((target, value) => __defProp40(target, "name", { value, configurable: true }), "__name");
 function format(input = "") {
   return (0, import_strip_indent2.default)(input).trimRight() + "\n";
 }
 __name(format, "format");
-__name25(format, "format");
+__name39(format, "format");
 function arg(argv, spec, stopAtPositional = true, permissive = false) {
   try {
     return (0, import_arg.default)(spec, { argv, stopAtPositional, permissive });
@@ -37314,16 +37522,16 @@ function arg(argv, spec, stopAtPositional = true, permissive = false) {
   }
 }
 __name(arg, "arg");
-__name25(arg, "arg");
+__name39(arg, "arg");
 function isError(result) {
   return result instanceof Error;
 }
 __name(isError, "isError");
-__name25(isError, "isError");
+__name39(isError, "isError");
 
 // ../sdk/dist/esm/utils/mapPreviewFeatures.mjs
-var __defProp27 = Object.defineProperty;
-var __name26 = /* @__PURE__ */ __name((target, value) => __defProp27(target, "name", { value, configurable: true }), "__name");
+var __defProp41 = Object.defineProperty;
+var __name40 = /* @__PURE__ */ __name((target, value) => __defProp41(target, "name", { value, configurable: true }), "__name");
 var featureFlagMap = {
   transactionApi: "transaction",
   aggregateApi: "aggregations"
@@ -37335,7 +37543,7 @@ function mapPreviewFeatures(features) {
   return [];
 }
 __name(mapPreviewFeatures, "mapPreviewFeatures");
-__name26(mapPreviewFeatures, "mapPreviewFeatures");
+__name40(mapPreviewFeatures, "mapPreviewFeatures");
 
 // ../sdk/dist/esm/logger.mjs
 var logger_exports = {};
@@ -37349,8 +37557,8 @@ __export2(logger_exports, {
   warn: () => warn
 });
 var import_chalk9 = __toModule2(require_source2());
-var __defProp28 = Object.defineProperty;
-var __name27 = /* @__PURE__ */ __name((target, value) => __defProp28(target, "name", { value, configurable: true }), "__name");
+var __defProp42 = Object.defineProperty;
+var __name41 = /* @__PURE__ */ __name((target, value) => __defProp42(target, "name", { value, configurable: true }), "__name");
 var tags = {
   error: import_chalk9.default.red("prisma:error"),
   warn: import_chalk9.default.yellow("prisma:warn"),
@@ -37364,29 +37572,29 @@ function log3(...data) {
   console.log(...data);
 }
 __name(log3, "log");
-__name27(log3, "log");
+__name41(log3, "log");
 function warn(message, ...optionalParams) {
   if (should.warn) {
     console.warn(`${tags.warn} ${message}`, ...optionalParams);
   }
 }
 __name(warn, "warn");
-__name27(warn, "warn");
+__name41(warn, "warn");
 function info(message, ...optionalParams) {
   console.info(`${tags.info} ${message}`, ...optionalParams);
 }
 __name(info, "info");
-__name27(info, "info");
+__name41(info, "info");
 function error(message, ...optionalParams) {
   console.error(`${tags.error} ${message}`, ...optionalParams);
 }
 __name(error, "error");
-__name27(error, "error");
+__name41(error, "error");
 function query(message, ...optionalParams) {
   console.log(`${tags.query} ${message}`, ...optionalParams);
 }
 __name(query, "query");
-__name27(query, "query");
+__name41(query, "query");
 
 // ../sdk/dist/esm/utils/tryLoadEnvs.mjs
 var import_chalk10 = __toModule2(require_source2());
@@ -37396,11 +37604,11 @@ import fs4 from "fs";
 import path3 from "path";
 
 // ../sdk/dist/esm/dotenvExpand.mjs
-var __defProp29 = Object.defineProperty;
-var __name28 = /* @__PURE__ */ __name((target, value) => __defProp29(target, "name", { value, configurable: true }), "__name");
+var __defProp43 = Object.defineProperty;
+var __name42 = /* @__PURE__ */ __name((target, value) => __defProp43(target, "name", { value, configurable: true }), "__name");
 function dotenvExpand(config2) {
   const environment = config2.ignoreProcessEnv ? {} : process.env;
-  const interpolate = /* @__PURE__ */ __name28((envValue) => {
+  const interpolate = /* @__PURE__ */ __name42((envValue) => {
     const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g) || [];
     return matches.reduce(function(newEnv, match) {
       const parts = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(match);
@@ -37431,11 +37639,11 @@ function dotenvExpand(config2) {
   return config2;
 }
 __name(dotenvExpand, "dotenvExpand");
-__name28(dotenvExpand, "dotenvExpand");
+__name42(dotenvExpand, "dotenvExpand");
 
 // ../sdk/dist/esm/utils/tryLoadEnvs.mjs
-var __defProp30 = Object.defineProperty;
-var __name29 = /* @__PURE__ */ __name((target, value) => __defProp30(target, "name", { value, configurable: true }), "__name");
+var __defProp44 = Object.defineProperty;
+var __name43 = /* @__PURE__ */ __name((target, value) => __defProp44(target, "name", { value, configurable: true }), "__name");
 var debug6 = (0, import_debug6.default)("prisma:tryLoadEnv");
 function tryLoadEnvs({
   rootEnvPath,
@@ -37467,7 +37675,7 @@ function tryLoadEnvs({
   };
 }
 __name(tryLoadEnvs, "tryLoadEnvs");
-__name29(tryLoadEnvs, "tryLoadEnvs");
+__name43(tryLoadEnvs, "tryLoadEnvs");
 function checkForConflicts(rootEnvInfo, envPath, type) {
   const parsedRootEnv = rootEnvInfo?.dotenvResult.parsed;
   const areNotTheSame = !pathsEqual(rootEnvInfo?.path, envPath);
@@ -37500,19 +37708,13 @@ Env vars from ${import_chalk10.default.underline(relativeEnvPath)} overwrite the
   }
 }
 __name(checkForConflicts, "checkForConflicts");
-__name29(checkForConflicts, "checkForConflicts");
+__name43(checkForConflicts, "checkForConflicts");
 function loadEnv(envPath) {
   if (exists3(envPath)) {
     debug6(`Environment variables loaded from ${envPath}`);
-    const debugEnv = process.env.DEBUG;
-    let enableDebug = void 0;
-    if (debugEnv && (debugEnv.startsWith("prisma") || debugEnv === "*")) {
-      enableDebug = true;
-    }
     return {
       dotenvResult: dotenvExpand(import_dotenv.default.config({
-        path: envPath,
-        debug: enableDebug
+        path: envPath
       })),
       message: import_chalk10.default.dim(`Environment variables loaded from ${path3.relative(process.cwd(), envPath)}`),
       path: envPath
@@ -37523,17 +37725,17 @@ function loadEnv(envPath) {
   return null;
 }
 __name(loadEnv, "loadEnv");
-__name29(loadEnv, "loadEnv");
+__name43(loadEnv, "loadEnv");
 function pathsEqual(path1, path22) {
   return path1 && path22 && path3.resolve(path1) === path3.resolve(path22);
 }
 __name(pathsEqual, "pathsEqual");
-__name29(pathsEqual, "pathsEqual");
+__name43(pathsEqual, "pathsEqual");
 function exists3(p) {
   return Boolean(p && fs4.existsSync(p));
 }
 __name(exists3, "exists");
-__name29(exists3, "exists");
+__name43(exists3, "exists");
 
 // ../sdk/dist/esm/index.mjs
 var import_get_platform3 = __toModule2(require_dist9());
@@ -37666,12 +37868,12 @@ var DataLoader = class {
     this.batches = {};
   }
   request(request4) {
-    const hash2 = this.options.batchBy(request4);
-    if (!hash2) {
+    const hash = this.options.batchBy(request4);
+    if (!hash) {
       return this.options.singleLoader(request4);
     }
-    if (!this.batches[hash2]) {
-      this.batches[hash2] = [];
+    if (!this.batches[hash]) {
+      this.batches[hash] = [];
       if (!this.tickActive) {
         this.tickActive = true;
         process.nextTick(() => {
@@ -37681,7 +37883,7 @@ var DataLoader = class {
       }
     }
     return new Promise((resolve2, reject2) => {
-      this.batches[hash2].push({
+      this.batches[hash].push({
         request: request4,
         resolve: resolve2,
         reject: reject2
@@ -37733,14 +37935,14 @@ var DataLoader = class {
 __name(DataLoader, "DataLoader");
 
 // src/runtime/utils/rejectOnNotFound.ts
-var NotFoundError = class extends Error {
+var NotFoundError2 = class extends Error {
   constructor(message) {
     super(message);
     this.name = "NotFoundError";
     this.stack = void 0;
   }
 };
-__name(NotFoundError, "NotFoundError");
+__name(NotFoundError2, "NotFoundError");
 function getRejectOnNotFound(action, modelName, args, clientInstance) {
   let rejectOnNotFound;
   if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
@@ -37769,13 +37971,13 @@ var REGEX = /(findUnique|findFirst)/;
 function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
   if (rejectOnNotFound && !data && REGEX.exec(clientMethod)) {
     if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
-      throw new NotFoundError(`No ${typeName} found`);
+      throw new NotFoundError2(`No ${typeName} found`);
     } else if (typeof rejectOnNotFound === "function") {
-      throw rejectOnNotFound(new NotFoundError(`No ${typeName} found`));
+      throw rejectOnNotFound(new NotFoundError2(`No ${typeName} found`));
     } else if (isError(rejectOnNotFound)) {
       throw rejectOnNotFound;
     }
-    throw new NotFoundError(`No ${typeName} found`);
+    throw new NotFoundError2(`No ${typeName} found`);
   }
 }
 __name(throwIfNotFound, "throwIfNotFound");
@@ -38427,7 +38629,8 @@ function getPrismaClient(config2) {
           useUds: internal.useUds,
           activeProvider: config2.activeProvider,
           inlineSchema: config2.inlineSchema,
-          inlineDatasources: config2.inlineDatasources
+          inlineDatasources: config2.inlineDatasources,
+          inlineSchemaHash: config2.inlineSchemaHash
         };
         if (config2.activeProvider === "mongodb") {
           const previewFeatures = this._engineConfig.previewFeatures ? this._engineConfig.previewFeatures.concat("mongodb") : ["mongodb"];

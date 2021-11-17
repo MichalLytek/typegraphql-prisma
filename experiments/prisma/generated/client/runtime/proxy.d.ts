@@ -453,7 +453,6 @@ export declare namespace DMMF {
     }
     export interface Model {
         name: string;
-        isEmbedded: boolean;
         dbName: string | null;
         fields: Field[];
         fieldMap?: Record<string, Field>;
@@ -473,7 +472,7 @@ export declare namespace DMMF {
         isList: boolean;
         isUnique: boolean;
         isId: boolean;
-        type: string;
+        type: string | DMMF.SchemaEnum | DMMF.OutputType | DMMF.SchemaArg;
         dbNames?: string[] | null;
         isGenerated: boolean;
         hasDefaultValue: boolean;
@@ -533,7 +532,6 @@ export declare namespace DMMF {
         name: string;
         fields: SchemaField[];
         fieldMap?: Record<string, SchemaField>;
-        isEmbedded?: boolean;
     }
     export interface SchemaField {
         name: string;
@@ -546,6 +544,7 @@ export declare namespace DMMF {
         };
         args: SchemaArg[];
         deprecation?: Deprecation;
+        documentation?: string;
     }
     export interface Deprecation {
         sinceVersion: string;
@@ -723,6 +722,11 @@ declare interface EngineConfig {
      * @remarks only used for the purpose of data proxy
      */
     inlineDatasources?: any;
+    /**
+     * The string hash that was produced for a given schema
+     * @remarks only used for the purpose of data proxy
+     */
+    inlineSchemaHash?: string;
 }
 
 declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
@@ -847,6 +851,11 @@ declare interface GetPrismaClientConfig {
      * @remarks only used for the purpose of data proxy
      */
     inlineDatasources?: InlineDatasources;
+    /**
+     * The string hash that was produced for a given schema
+     * @remarks only used for the purpose of data proxy
+     */
+    inlineSchemaHash?: string;
 }
 
 declare type Handler = (base: string, item: string, type: ItemType) => boolean | string;

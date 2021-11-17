@@ -32,11 +32,6 @@ export class ProblemUpdateManyWithoutLikedByInput {
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
     nullable: true
   })
-  connect?: ProblemWhereUniqueInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
-    nullable: true
-  })
   set?: ProblemWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
@@ -48,6 +43,11 @@ export class ProblemUpdateManyWithoutLikedByInput {
     nullable: true
   })
   delete?: ProblemWhereUniqueInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [ProblemWhereUniqueInput], {
+    nullable: true
+  })
+  connect?: ProblemWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ProblemUpdateWithWhereUniqueWithoutLikedByInput], {
     nullable: true

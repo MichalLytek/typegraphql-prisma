@@ -27,11 +27,6 @@ export class MainUserUpdateOneWithoutEditorPostsInput {
   })
   upsert?: MainUserUpsertWithoutEditorPostsInput | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserWhereUniqueInput, {
-    nullable: true
-  })
-  connect?: MainUserWhereUniqueInput | undefined;
-
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
   })
@@ -41,6 +36,11 @@ export class MainUserUpdateOneWithoutEditorPostsInput {
     nullable: true
   })
   delete?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => MainUserWhereUniqueInput, {
+    nullable: true
+  })
+  connect?: MainUserWhereUniqueInput | undefined;
 
   @TypeGraphQL.Field(_type => MainUserUpdateWithoutEditorPostsInput, {
     nullable: true

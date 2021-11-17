@@ -27,11 +27,6 @@ export class CreatorUpdateOneWithoutProblemsInput {
   })
   upsert?: CreatorUpsertWithoutProblemsInput | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
-    nullable: true
-  })
-  connect?: CreatorWhereUniqueInput | undefined;
-
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
   })
@@ -41,6 +36,11 @@ export class CreatorUpdateOneWithoutProblemsInput {
     nullable: true
   })
   delete?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
+    nullable: true
+  })
+  connect?: CreatorWhereUniqueInput | undefined;
 
   @TypeGraphQL.Field(_type => CreatorUpdateWithoutProblemsInput, {
     nullable: true

@@ -238,7 +238,7 @@ input CategoryWhereUniqueInput {
 }
 
 type Creator {
-  _count: CreatorCount
+  _count: CreatorCount!
   id: ID!
   likes(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]!
   name: String!
@@ -559,7 +559,7 @@ input DecimalNullableWithAggregatesFilter {
 }
 
 type Director {
-  _count: DirectorCount
+  _count: DirectorCount!
   firstName: String!
   lastName: String!
   movies(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]!
@@ -911,7 +911,7 @@ input JsonWithAggregatesFilter {
 
 """User model doc"""
 type MainUser {
-  _count: MainUserCount
+  _count: MainUserCount!
   accountBalance: Float!
   age: Int!
   aliases: [String!]!
@@ -1119,8 +1119,14 @@ input MainUserMinOrderByAggregateInput {
   role: SortOrder
 }
 
+enum MainUserOrderByRelevanceFieldEnum {
+  aliases
+  email
+  firstName
+}
+
 input MainUserOrderByRelevanceInput {
-  fields: [UserOrderByRelevanceFieldEnum!]!
+  fields: [MainUserOrderByRelevanceFieldEnum!]!
   search: String!
   sort: SortOrder!
 }
@@ -2445,8 +2451,15 @@ input PostOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+enum PostOrderByRelevanceFieldEnum {
+  content
+  subtitle
+  title
+  uuid
+}
+
 input PostOrderByRelevanceInput {
-  fields: [postOrderByRelevanceFieldEnum!]!
+  fields: [PostOrderByRelevanceFieldEnum!]!
   search: String!
   sort: SortOrder!
 }
@@ -2659,7 +2672,7 @@ input PostWhereUniqueInput {
 }
 
 type Problem {
-  _count: ProblemCount
+  _count: ProblemCount!
   creator: Creator
   creatorId: Int
   id: ID!
@@ -3094,17 +3107,4 @@ input StringWithAggregatesFilter {
   notIn: [String!]
   search: String
   startsWith: String
-}
-
-enum UserOrderByRelevanceFieldEnum {
-  aliases
-  email
-  name
-}
-
-enum postOrderByRelevanceFieldEnum {
-  content
-  subtitle
-  title
-  uuid
 }

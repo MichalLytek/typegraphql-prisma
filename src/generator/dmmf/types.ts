@@ -28,7 +28,6 @@ export namespace DMMF {
   }
   export interface Model {
     name: string;
-    isEmbedded: boolean;
     dbName: string | null;
     fields: ModelField[];
     // fieldMap?: Record<string, Field>;
@@ -56,7 +55,7 @@ export namespace DMMF {
     isList: boolean;
     isUnique: boolean;
     isId: boolean;
-    type: string;
+    // type: string | DMMF.SchemaEnum | DMMF.OutputType | DMMF.SchemaArg;
     dbNames?: string[] | null;
     isGenerated: boolean;
     hasDefaultValue: boolean;
@@ -67,6 +66,7 @@ export namespace DMMF {
     // documentation?: string;
     // [key: string]: any;
     // additional props
+    type: string;
     location: FieldLocation;
     typeFieldAlias?: string;
     typeGraphQLType: string;
@@ -154,10 +154,11 @@ export namespace DMMF {
   // named subtype of SchemaField->outputType
   export interface TypeInfo {
     // type: string | OutputType | Enum;
-    type: string;
     isList: boolean;
     location: FieldLocation;
     namespace?: FieldNamespace;
+    // additional props
+    type: string;
   }
   // additional type
   export interface OutputSchemaField extends SchemaField {

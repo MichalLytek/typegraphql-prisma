@@ -78,13 +78,6 @@ var __getProtoOf22 = Object.getPrototypeOf;
 var __hasOwnProp22 = Object.prototype.hasOwnProperty;
 var __markAsModule22 = /* @__PURE__ */ __name((target) => __defProp22(target, "__esModule", { value: true }), "__markAsModule2");
 var __name2 = /* @__PURE__ */ __name((target, value) => __defProp22(target, "name", { value, configurable: true }), "__name");
-var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-}) : x)(function(x) {
-  if (typeof require !== "undefined")
-    return require.apply(this, arguments);
-  throw new Error('Dynamic require of "' + x + '" is not supported');
-});
 var __commonJS2 = /* @__PURE__ */ __name((cb, mod2) => /* @__PURE__ */ __name(function __require2() {
   return mod2 || (0, cb[Object.keys(cb)[0]])((mod2 = { exports: {} }).exports, mod2), mod2.exports;
 }, "__require2"), "__commonJS2");
@@ -108,7 +101,7 @@ var require_windows2 = __commonJS2({
   "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/windows.js"(exports2, module2) {
     module2.exports = isexe;
     isexe.sync = sync;
-    var fs7 = __require("fs");
+    var fs7 = require("fs");
     function checkPathExt(path6, options2) {
       var pathext = options2.pathExt !== void 0 ? options2.pathExt : process.env.PATHEXT;
       if (!pathext) {
@@ -154,7 +147,7 @@ var require_mode2 = __commonJS2({
   "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/mode.js"(exports2, module2) {
     module2.exports = isexe;
     isexe.sync = sync;
-    var fs7 = __require("fs");
+    var fs7 = require("fs");
     function isexe(path6, options2, cb) {
       fs7.stat(path6, function(er, stat) {
         cb(er, er ? false : checkStat(stat, options2));
@@ -191,7 +184,7 @@ var require_mode2 = __commonJS2({
 });
 var require_isexe2 = __commonJS2({
   "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/index.js"(exports2, module2) {
-    var fs7 = __require("fs");
+    var fs7 = require("fs");
     var core;
     if (process.platform === "win32" || global.TESTING_WINDOWS) {
       core = require_windows2();
@@ -249,7 +242,7 @@ var require_isexe2 = __commonJS2({
 var require_which2 = __commonJS2({
   "../../node_modules/.pnpm/which@2.0.2/node_modules/which/which.js"(exports2, module2) {
     var isWindows = process.platform === "win32" || process.env.OSTYPE === "cygwin" || process.env.OSTYPE === "msys";
-    var path6 = __require("path");
+    var path6 = require("path");
     var COLON = isWindows ? ";" : ":";
     var isexe = require_isexe2();
     var getNotFoundError = /* @__PURE__ */ __name2((cmd) => Object.assign(new Error(`not found: ${cmd}`), { code: "ENOENT" }), "getNotFoundError");
@@ -356,7 +349,7 @@ var require_path_key2 = __commonJS2({
 var require_resolveCommand2 = __commonJS2({
   "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/util/resolveCommand.js"(exports2, module2) {
     "use strict";
-    var path6 = __require("path");
+    var path6 = require("path");
     var which = require_which2();
     var getPathKey = require_path_key2();
     function resolveCommandAttempt(parsed, withoutPathExt) {
@@ -451,7 +444,7 @@ var require_shebang_command2 = __commonJS2({
 var require_readShebang2 = __commonJS2({
   "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/util/readShebang.js"(exports2, module2) {
     "use strict";
-    var fs7 = __require("fs");
+    var fs7 = require("fs");
     var shebangCommand = require_shebang_command2();
     function readShebang(command) {
       const size = 150;
@@ -473,7 +466,7 @@ var require_readShebang2 = __commonJS2({
 var require_parse5 = __commonJS2({
   "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/parse.js"(exports2, module2) {
     "use strict";
-    var path6 = __require("path");
+    var path6 = require("path");
     var resolveCommand = require_resolveCommand2();
     var escape = require_escape2();
     var readShebang = require_readShebang2();
@@ -595,7 +588,7 @@ var require_enoent2 = __commonJS2({
 var require_cross_spawn2 = __commonJS2({
   "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/index.js"(exports2, module2) {
     "use strict";
-    var cp = __require("child_process");
+    var cp = require("child_process");
     var parse2 = require_parse5();
     var enoent = require_enoent2();
     function spawn2(command, args, options2) {
@@ -1737,8 +1730,8 @@ var require_has_flag2 = __commonJS2({
 var require_supports_color2 = __commonJS2({
   "../../node_modules/.pnpm/supports-color@7.2.0/node_modules/supports-color/index.js"(exports2, module2) {
     "use strict";
-    var os2 = __require("os");
-    var tty = __require("tty");
+    var os2 = require("os");
+    var tty = require("tty");
     var hasFlag = require_has_flag2();
     var { env } = process;
     var forceColor;
@@ -2293,19 +2286,19 @@ var require_ms2 = __commonJS2({
 });
 var require_common6 = __commonJS2({
   "../debug/dist/common.js"(exports2) {
-    var __defProp31 = Object.defineProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name2((target) => __defProp31(target, "__esModule", { value: true }), "__markAsModule");
-    var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+    var __defProp45 = Object.defineProperty;
+    var __markAsModule3 = /* @__PURE__ */ __name2((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
+    var __name44 = /* @__PURE__ */ __name2((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name2((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp31(target, name, { get: all[name], enumerable: true });
+        __defProp45(target, name, { get: all[name], enumerable: true });
     }, "__export");
     __export3(exports2, {
       setup: () => setup
     });
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     function setup(env) {
       const createDebug = /* @__PURE__ */ __name210((namespace, logger2) => {
         let prevTime;
@@ -2390,16 +2383,16 @@ var require_common6 = __commonJS2({
       createDebug.skips = [];
       createDebug.formatters = {};
       function selectColor(namespace) {
-        let hash2 = 0;
+        let hash = 0;
         for (let i = 0; i < namespace.length; i++) {
-          hash2 = (hash2 << 5) - hash2 + namespace.charCodeAt(i);
-          hash2 |= 0;
+          hash = (hash << 5) - hash + namespace.charCodeAt(i);
+          hash |= 0;
         }
-        return createDebug.colors[Math.abs(hash2) % createDebug.colors.length];
+        return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
       }
       __name(selectColor, "selectColor");
       __name2(selectColor, "selectColor");
-      __name30(selectColor, "selectColor");
+      __name44(selectColor, "selectColor");
       __name210(selectColor, "selectColor");
       createDebug.selectColor = selectColor;
       function extend(namespace, delimiter) {
@@ -2409,7 +2402,7 @@ var require_common6 = __commonJS2({
       }
       __name(extend, "extend");
       __name2(extend, "extend");
-      __name30(extend, "extend");
+      __name44(extend, "extend");
       __name210(extend, "extend");
       function enable(namespaces) {
         createDebug.save(namespaces);
@@ -2433,7 +2426,7 @@ var require_common6 = __commonJS2({
       }
       __name(enable, "enable");
       __name2(enable, "enable");
-      __name30(enable, "enable");
+      __name44(enable, "enable");
       __name210(enable, "enable");
       function disable() {
         const namespaces = [
@@ -2445,7 +2438,7 @@ var require_common6 = __commonJS2({
       }
       __name(disable, "disable");
       __name2(disable, "disable");
-      __name30(disable, "disable");
+      __name44(disable, "disable");
       __name210(disable, "disable");
       function enabled(name) {
         if (name[name.length - 1] === "*") {
@@ -2467,14 +2460,14 @@ var require_common6 = __commonJS2({
       }
       __name(enabled, "enabled");
       __name2(enabled, "enabled");
-      __name30(enabled, "enabled");
+      __name44(enabled, "enabled");
       __name210(enabled, "enabled");
       function toNamespace(regexp) {
         return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
       }
       __name(toNamespace, "toNamespace");
       __name2(toNamespace, "toNamespace");
-      __name30(toNamespace, "toNamespace");
+      __name44(toNamespace, "toNamespace");
       __name210(toNamespace, "toNamespace");
       function coerce(val) {
         if (val instanceof Error) {
@@ -2484,58 +2477,58 @@ var require_common6 = __commonJS2({
       }
       __name(coerce, "coerce");
       __name2(coerce, "coerce");
-      __name30(coerce, "coerce");
+      __name44(coerce, "coerce");
       __name210(coerce, "coerce");
       function destroy() {
         console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
       }
       __name(destroy, "destroy");
       __name2(destroy, "destroy");
-      __name30(destroy, "destroy");
+      __name44(destroy, "destroy");
       __name210(destroy, "destroy");
       createDebug.enable(createDebug.load());
       return createDebug;
     }
     __name(setup, "setup");
     __name2(setup, "setup");
-    __name30(setup, "setup");
+    __name44(setup, "setup");
     __name210(setup, "setup");
   }
 });
 var require_node3 = __commonJS2({
   "../debug/dist/node.js"(exports2, module2) {
     var __create3 = Object.create;
-    var __defProp31 = Object.defineProperty;
+    var __defProp45 = Object.defineProperty;
     var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames3 = Object.getOwnPropertyNames;
     var __getProtoOf3 = Object.getPrototypeOf;
     var __hasOwnProp3 = Object.prototype.hasOwnProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name2((target) => __defProp31(target, "__esModule", { value: true }), "__markAsModule");
-    var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+    var __markAsModule3 = /* @__PURE__ */ __name2((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
+    var __name44 = /* @__PURE__ */ __name2((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name2((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp31(target, name, { get: all[name], enumerable: true });
+        __defProp45(target, name, { get: all[name], enumerable: true });
     }, "__export");
     var __reExport22 = /* @__PURE__ */ __name2((target, module22, desc) => {
       if (module22 && typeof module22 === "object" || typeof module22 === "function") {
         for (let key of __getOwnPropNames3(module22))
           if (!__hasOwnProp3.call(target, key) && key !== "default")
-            __defProp31(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
+            __defProp45(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
       }
       return target;
     }, "__reExport");
     var __toModule3 = /* @__PURE__ */ __name2((module22) => {
-      return __reExport22(__markAsModule3(__defProp31(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
+      return __reExport22(__markAsModule3(__defProp45(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
     }, "__toModule");
     __export3(exports2, {
       default: () => node_default
     });
-    var import_tty = __toModule3(__require("tty"));
-    var import_util7 = __toModule3(__require("util"));
+    var import_tty = __toModule3(require("tty"));
+    var import_util7 = __toModule3(require("util"));
     var import_common4 = __toModule3(require_common6());
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     exports2.init = init;
     exports2.log = log4;
     exports2.formatArgs = formatArgs;
@@ -2570,7 +2563,7 @@ var require_node3 = __commonJS2({
     }
     __name(useColors, "useColors");
     __name2(useColors, "useColors");
-    __name30(useColors, "useColors");
+    __name44(useColors, "useColors");
     __name210(useColors, "useColors");
     function formatArgs(args) {
       const { namespace: name, useColors: useColors2 } = this;
@@ -2586,7 +2579,7 @@ var require_node3 = __commonJS2({
     }
     __name(formatArgs, "formatArgs");
     __name2(formatArgs, "formatArgs");
-    __name30(formatArgs, "formatArgs");
+    __name44(formatArgs, "formatArgs");
     __name210(formatArgs, "formatArgs");
     function getDate() {
       if (exports2.inspectOpts.hideDate) {
@@ -2596,14 +2589,14 @@ var require_node3 = __commonJS2({
     }
     __name(getDate, "getDate");
     __name2(getDate, "getDate");
-    __name30(getDate, "getDate");
+    __name44(getDate, "getDate");
     __name210(getDate, "getDate");
     function log4(...args) {
       return process.stderr.write(import_util7.default.format(...args) + "\n");
     }
     __name(log4, "log4");
     __name2(log4, "log");
-    __name30(log4, "log");
+    __name44(log4, "log");
     __name210(log4, "log");
     function save(namespaces) {
       if (namespaces) {
@@ -2614,14 +2607,14 @@ var require_node3 = __commonJS2({
     }
     __name(save, "save");
     __name2(save, "save");
-    __name30(save, "save");
+    __name44(save, "save");
     __name210(save, "save");
     function load() {
       return process.env.DEBUG;
     }
     __name(load, "load");
     __name2(load, "load");
-    __name30(load, "load");
+    __name44(load, "load");
     __name210(load, "load");
     function init(debug10) {
       debug10.inspectOpts = {};
@@ -2632,7 +2625,7 @@ var require_node3 = __commonJS2({
     }
     __name(init, "init");
     __name2(init, "init");
-    __name30(init, "init");
+    __name44(init, "init");
     __name210(init, "init");
     var mod2 = (0, import_common4.setup)(exports2);
     module2.exports = mod2;
@@ -2651,28 +2644,28 @@ var require_node3 = __commonJS2({
 var require_dist7 = __commonJS2({
   "../debug/dist/index.js"(exports2) {
     var __create3 = Object.create;
-    var __defProp31 = Object.defineProperty;
+    var __defProp45 = Object.defineProperty;
     var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames3 = Object.getOwnPropertyNames;
     var __getProtoOf3 = Object.getPrototypeOf;
     var __hasOwnProp3 = Object.prototype.hasOwnProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name2((target) => __defProp31(target, "__esModule", { value: true }), "__markAsModule");
-    var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+    var __markAsModule3 = /* @__PURE__ */ __name2((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
+    var __name44 = /* @__PURE__ */ __name2((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name2((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp31(target, name, { get: all[name], enumerable: true });
+        __defProp45(target, name, { get: all[name], enumerable: true });
     }, "__export");
     var __reExport22 = /* @__PURE__ */ __name2((target, module22, desc) => {
       if (module22 && typeof module22 === "object" || typeof module22 === "function") {
         for (let key of __getOwnPropNames3(module22))
           if (!__hasOwnProp3.call(target, key) && key !== "default")
-            __defProp31(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
+            __defProp45(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
       }
       return target;
     }, "__reExport");
     var __toModule3 = /* @__PURE__ */ __name2((module22) => {
-      return __reExport22(__markAsModule3(__defProp31(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
+      return __reExport22(__markAsModule3(__defProp45(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
     }, "__toModule");
     __export3(exports2, {
       Debug: () => Debug8,
@@ -2681,7 +2674,7 @@ var require_dist7 = __commonJS2({
     });
     var import_node = __toModule3(require_node3());
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     var cache = [];
     var MAX_LOGS = 100;
     function Debug8(namespace) {
@@ -2695,7 +2688,7 @@ var require_dist7 = __commonJS2({
     }
     __name(Debug8, "Debug8");
     __name2(Debug8, "Debug");
-    __name30(Debug8, "Debug");
+    __name44(Debug8, "Debug");
     __name210(Debug8, "Debug");
     Debug8.enable = (namespace) => {
       import_node.default.enable(namespace);
@@ -2715,7 +2708,7 @@ var require_dist7 = __commonJS2({
     }
     __name(getLogs2, "getLogs2");
     __name2(getLogs2, "getLogs");
-    __name30(getLogs2, "getLogs");
+    __name44(getLogs2, "getLogs");
     __name210(getLogs2, "getLogs");
   }
 });
@@ -2899,7 +2892,7 @@ var require_strip_indent = __commonJS2({
   }
 });
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -3050,7 +3043,7 @@ var require_dist8 = __commonJS2({
     var require_common = __commonJS((exports2) => {
       var __defProp210 = Object.defineProperty;
       var __markAsModule222 = /* @__PURE__ */ __name2((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name44 = /* @__PURE__ */ __name2((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export222 = /* @__PURE__ */ __name2((target, all) => {
         __markAsModule222(target);
         for (var name in all)
@@ -3060,7 +3053,7 @@ var require_dist8 = __commonJS2({
         setup: () => setup
       });
       var __defProp2222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp2222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp2222(target, "name", { value, configurable: true }), "__name");
       function setup(env) {
         const createDebug = /* @__PURE__ */ __name210((namespace, logger2) => {
           let prevTime;
@@ -3145,16 +3138,16 @@ var require_dist8 = __commonJS2({
         createDebug.skips = [];
         createDebug.formatters = {};
         function selectColor(namespace) {
-          let hash2 = 0;
+          let hash = 0;
           for (let i = 0; i < namespace.length; i++) {
-            hash2 = (hash2 << 5) - hash2 + namespace.charCodeAt(i);
-            hash2 |= 0;
+            hash = (hash << 5) - hash + namespace.charCodeAt(i);
+            hash |= 0;
           }
-          return createDebug.colors[Math.abs(hash2) % createDebug.colors.length];
+          return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
         }
         __name(selectColor, "selectColor");
         __name2(selectColor, "selectColor");
-        __name30(selectColor, "selectColor");
+        __name44(selectColor, "selectColor");
         __name210(selectColor, "selectColor");
         createDebug.selectColor = selectColor;
         function extend(namespace, delimiter) {
@@ -3164,7 +3157,7 @@ var require_dist8 = __commonJS2({
         }
         __name(extend, "extend");
         __name2(extend, "extend");
-        __name30(extend, "extend");
+        __name44(extend, "extend");
         __name210(extend, "extend");
         function enable(namespaces) {
           createDebug.save(namespaces);
@@ -3188,7 +3181,7 @@ var require_dist8 = __commonJS2({
         }
         __name(enable, "enable");
         __name2(enable, "enable");
-        __name30(enable, "enable");
+        __name44(enable, "enable");
         __name210(enable, "enable");
         function disable() {
           const namespaces = [
@@ -3200,7 +3193,7 @@ var require_dist8 = __commonJS2({
         }
         __name(disable, "disable");
         __name2(disable, "disable");
-        __name30(disable, "disable");
+        __name44(disable, "disable");
         __name210(disable, "disable");
         function enabled(name) {
           if (name[name.length - 1] === "*") {
@@ -3222,14 +3215,14 @@ var require_dist8 = __commonJS2({
         }
         __name(enabled, "enabled");
         __name2(enabled, "enabled");
-        __name30(enabled, "enabled");
+        __name44(enabled, "enabled");
         __name210(enabled, "enabled");
         function toNamespace(regexp) {
           return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
         }
         __name(toNamespace, "toNamespace");
         __name2(toNamespace, "toNamespace");
-        __name30(toNamespace, "toNamespace");
+        __name44(toNamespace, "toNamespace");
         __name210(toNamespace, "toNamespace");
         function coerce(val) {
           if (val instanceof Error) {
@@ -3239,21 +3232,21 @@ var require_dist8 = __commonJS2({
         }
         __name(coerce, "coerce");
         __name2(coerce, "coerce");
-        __name30(coerce, "coerce");
+        __name44(coerce, "coerce");
         __name210(coerce, "coerce");
         function destroy() {
           console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
         }
         __name(destroy, "destroy");
         __name2(destroy, "destroy");
-        __name30(destroy, "destroy");
+        __name44(destroy, "destroy");
         __name210(destroy, "destroy");
         createDebug.enable(createDebug.load());
         return createDebug;
       }
       __name(setup, "setup");
       __name2(setup, "setup");
-      __name30(setup, "setup");
+      __name44(setup, "setup");
       __name210(setup, "setup");
     });
     var require_node = __commonJS((exports2, module2) => {
@@ -3264,7 +3257,7 @@ var require_dist8 = __commonJS2({
       var __getProtoOf222 = Object.getPrototypeOf;
       var __hasOwnProp222 = Object.prototype.hasOwnProperty;
       var __markAsModule222 = /* @__PURE__ */ __name2((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name44 = /* @__PURE__ */ __name2((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export222 = /* @__PURE__ */ __name2((target, all) => {
         __markAsModule222(target);
         for (var name in all)
@@ -3284,11 +3277,11 @@ var require_dist8 = __commonJS2({
       __export222(exports2, {
         default: () => node_default
       });
-      var import_tty = __toModule222(__require("tty"));
-      var import_util7 = __toModule222(__require("util"));
+      var import_tty = __toModule222(require("tty"));
+      var import_util7 = __toModule222(require("util"));
       var import_common4 = __toModule222(require_common());
       var __defProp2222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp2222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp2222(target, "name", { value, configurable: true }), "__name");
       exports2.init = init;
       exports2.log = log4;
       exports2.formatArgs = formatArgs;
@@ -3323,7 +3316,7 @@ var require_dist8 = __commonJS2({
       }
       __name(useColors, "useColors");
       __name2(useColors, "useColors");
-      __name30(useColors, "useColors");
+      __name44(useColors, "useColors");
       __name210(useColors, "useColors");
       function formatArgs(args) {
         const { namespace: name, useColors: useColors2 } = this;
@@ -3339,7 +3332,7 @@ var require_dist8 = __commonJS2({
       }
       __name(formatArgs, "formatArgs");
       __name2(formatArgs, "formatArgs");
-      __name30(formatArgs, "formatArgs");
+      __name44(formatArgs, "formatArgs");
       __name210(formatArgs, "formatArgs");
       function getDate() {
         if (exports2.inspectOpts.hideDate) {
@@ -3349,14 +3342,14 @@ var require_dist8 = __commonJS2({
       }
       __name(getDate, "getDate");
       __name2(getDate, "getDate");
-      __name30(getDate, "getDate");
+      __name44(getDate, "getDate");
       __name210(getDate, "getDate");
       function log4(...args) {
         return process.stderr.write(import_util7.default.format(...args) + "\n");
       }
       __name(log4, "log4");
       __name2(log4, "log");
-      __name30(log4, "log");
+      __name44(log4, "log");
       __name210(log4, "log");
       function save(namespaces) {
         if (namespaces) {
@@ -3367,14 +3360,14 @@ var require_dist8 = __commonJS2({
       }
       __name(save, "save");
       __name2(save, "save");
-      __name30(save, "save");
+      __name44(save, "save");
       __name210(save, "save");
       function load() {
         return process.env.DEBUG;
       }
       __name(load, "load");
       __name2(load, "load");
-      __name30(load, "load");
+      __name44(load, "load");
       __name210(load, "load");
       function init(debug32) {
         debug32.inspectOpts = {};
@@ -3385,7 +3378,7 @@ var require_dist8 = __commonJS2({
       }
       __name(init, "init");
       __name2(init, "init");
-      __name30(init, "init");
+      __name44(init, "init");
       __name210(init, "init");
       var mod2 = (0, import_common4.setup)(exports2);
       module2.exports = mod2;
@@ -3408,7 +3401,7 @@ var require_dist8 = __commonJS2({
       var __getProtoOf222 = Object.getPrototypeOf;
       var __hasOwnProp222 = Object.prototype.hasOwnProperty;
       var __markAsModule222 = /* @__PURE__ */ __name2((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name44 = /* @__PURE__ */ __name2((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export222 = /* @__PURE__ */ __name2((target, all) => {
         __markAsModule222(target);
         for (var name in all)
@@ -3432,7 +3425,7 @@ var require_dist8 = __commonJS2({
       });
       var import_node = __toModule222(require_node());
       var __defProp2222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name30((target, value) => __defProp2222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp2222(target, "name", { value, configurable: true }), "__name");
       var cache = [];
       var MAX_LOGS = 100;
       function Debug22(namespace) {
@@ -3446,7 +3439,7 @@ var require_dist8 = __commonJS2({
       }
       __name(Debug22, "Debug22");
       __name2(Debug22, "Debug2");
-      __name30(Debug22, "Debug");
+      __name44(Debug22, "Debug");
       __name210(Debug22, "Debug");
       Debug22.enable = (namespace) => {
         import_node.default.enable(namespace);
@@ -3466,19 +3459,19 @@ var require_dist8 = __commonJS2({
       }
       __name(getLogs2, "getLogs2");
       __name2(getLogs2, "getLogs");
-      __name30(getLogs2, "getLogs");
+      __name44(getLogs2, "getLogs");
       __name210(getLogs2, "getLogs");
     });
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
+        version: "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "57771c0558568c7d08bd34c7248af5244ae16bd9"
+          enginesVersion: "78a5df6def6943431f4c022e1428dbc3e833cf8e"
         },
         repository: {
           type: "git",
@@ -3486,7 +3479,7 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "14.17.32",
+          "@types/node": "16.11.7",
           typescript: "4.4.4"
         },
         scripts: {
@@ -3534,10 +3527,10 @@ var require_dist8 = __commonJS2({
       };
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.getPlatform = exports2.getOpenSSLVersion = exports2.parseOpenSSLVersion = exports2.resolveDistro = exports2.parseDistro = exports2.getos = void 0;
-      var child_process_1 = __require("child_process");
-      var fs_12 = __importDefault2(__require("fs"));
-      var os_1 = __importDefault2(__require("os"));
-      var util_12 = __require("util");
+      var child_process_1 = require("child_process");
+      var fs_12 = __importDefault2(require("fs"));
+      var os_1 = __importDefault2(require("os"));
+      var util_12 = require("util");
       var readFile2 = (0, util_12.promisify)(fs_12.default.readFile);
       var exists22 = (0, util_12.promisify)(fs_12.default.exists);
       async function getos() {
@@ -3714,7 +3707,7 @@ var require_dist8 = __commonJS2({
       };
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.isNodeAPISupported = void 0;
-      var fs_12 = __importDefault2(__require("fs"));
+      var fs_12 = __importDefault2(require("fs"));
       var _1 = require_dist2();
       async function isNodeAPISupported2() {
         const customLibraryPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
@@ -4880,8 +4873,8 @@ var require_dist8 = __commonJS2({
     });
     var require_supports_color = __commonJS((exports2, module2) => {
       "use strict";
-      var os2 = __require("os");
-      var tty = __require("tty");
+      var os2 = require("os");
+      var tty = require("tty");
       var hasFlag = require_has_flag();
       var { env } = process;
       var forceColor;
@@ -5311,7 +5304,7 @@ var require_dist8 = __commonJS2({
     var require_windows = __commonJS((exports2, module2) => {
       module2.exports = isexe;
       isexe.sync = sync;
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       function checkPathExt(path22, options2) {
         var pathext = options2.pathExt !== void 0 ? options2.pathExt : process.env.PATHEXT;
         if (!pathext) {
@@ -5355,7 +5348,7 @@ var require_dist8 = __commonJS2({
     var require_mode = __commonJS((exports2, module2) => {
       module2.exports = isexe;
       isexe.sync = sync;
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       function isexe(path22, options2, cb) {
         fs7.stat(path22, function(er, stat) {
           cb(er, er ? false : checkStat(stat, options2));
@@ -5390,7 +5383,7 @@ var require_dist8 = __commonJS2({
       __name2(checkMode, "checkMode");
     });
     var require_isexe = __commonJS((exports2, module2) => {
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       var core;
       if (process.platform === "win32" || global.TESTING_WINDOWS) {
         core = require_windows();
@@ -5446,7 +5439,7 @@ var require_dist8 = __commonJS2({
     });
     var require_which = __commonJS((exports2, module2) => {
       var isWindows = process.platform === "win32" || process.env.OSTYPE === "cygwin" || process.env.OSTYPE === "msys";
-      var path22 = __require("path");
+      var path22 = require("path");
       var COLON = isWindows ? ";" : ":";
       var isexe = require_isexe();
       var getNotFoundError = /* @__PURE__ */ __name2((cmd) => Object.assign(new Error(`not found: ${cmd}`), { code: "ENOENT" }), "getNotFoundError");
@@ -5549,7 +5542,7 @@ var require_dist8 = __commonJS2({
     });
     var require_resolveCommand = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var which = require_which();
       var getPathKey = require_path_key();
       function resolveCommandAttempt(parsed, withoutPathExt) {
@@ -5636,7 +5629,7 @@ var require_dist8 = __commonJS2({
     });
     var require_readShebang = __commonJS((exports2, module2) => {
       "use strict";
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       var shebangCommand = require_shebang_command();
       function readShebang(command) {
         const size = 150;
@@ -5656,7 +5649,7 @@ var require_dist8 = __commonJS2({
     });
     var require_parse = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var resolveCommand = require_resolveCommand();
       var escape = require_escape();
       var readShebang = require_readShebang();
@@ -5774,7 +5767,7 @@ var require_dist8 = __commonJS2({
     });
     var require_cross_spawn = __commonJS((exports2, module2) => {
       "use strict";
-      var cp = __require("child_process");
+      var cp = require("child_process");
       var parse2 = require_parse();
       var enoent = require_enoent();
       function spawn2(command, args, options2) {
@@ -5815,7 +5808,7 @@ var require_dist8 = __commonJS2({
     });
     var require_npm_run_path = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var pathKey = require_path_key();
       var npmRunPath = /* @__PURE__ */ __name2((options2) => {
         options2 = {
@@ -6198,7 +6191,7 @@ var require_dist8 = __commonJS2({
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.getSignals = void 0;
-      var _os = __require("os");
+      var _os = require("os");
       var _core = require_core();
       var _realtime = require_realtime();
       var getSignals = /* @__PURE__ */ __name2(function() {
@@ -6227,7 +6220,7 @@ var require_dist8 = __commonJS2({
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.signalsByNumber = exports2.signalsByName = void 0;
-      var _os = __require("os");
+      var _os = require("os");
       var _signals = require_signals();
       var _realtime = require_realtime();
       var getSignalsByName = /* @__PURE__ */ __name2(function() {
@@ -6404,10 +6397,10 @@ ${error2.message}` : execaMessage;
       }
     });
     var require_signal_exit = __commonJS((exports2, module2) => {
-      var assert = __require("assert");
+      var assert = require("assert");
       var signals = require_signals2();
       var isWin = /^win/i.test(process.platform);
-      var EE = __require("events");
+      var EE = require("events");
       if (typeof EE !== "function") {
         EE = EE.EventEmitter;
       }
@@ -6535,7 +6528,7 @@ ${error2.message}` : execaMessage;
     });
     var require_kill = __commonJS((exports2, module2) => {
       "use strict";
-      var os2 = __require("os");
+      var os2 = require("os");
       var onExit = require_signal_exit();
       var DEFAULT_FORCE_KILL_TIMEOUT = 1e3 * 5;
       var spawnedKill = /* @__PURE__ */ __name2((kill, signal = "SIGTERM", options2 = {}) => {
@@ -6630,7 +6623,7 @@ ${error2.message}` : execaMessage;
     });
     var require_buffer_stream = __commonJS((exports2, module2) => {
       "use strict";
-      var { PassThrough: PassThroughStream } = __require("stream");
+      var { PassThrough: PassThroughStream } = require("stream");
       module2.exports = (options2) => {
         options2 = { ...options2 };
         const { array } = options2;
@@ -6671,9 +6664,9 @@ ${error2.message}` : execaMessage;
     });
     var require_get_stream = __commonJS((exports2, module2) => {
       "use strict";
-      var { constants: BufferConstants } = __require("buffer");
-      var stream3 = __require("stream");
-      var { promisify: promisify3 } = __require("util");
+      var { constants: BufferConstants } = require("buffer");
+      var stream3 = require("stream");
+      var { promisify: promisify3 } = require("util");
       var bufferStream = require_buffer_stream();
       var streamPipelinePromisified = promisify3(stream3.pipeline);
       var MaxBufferError = /* @__PURE__ */ __name2(class extends Error {
@@ -6724,7 +6717,7 @@ ${error2.message}` : execaMessage;
     });
     var require_merge_stream = __commonJS((exports2, module2) => {
       "use strict";
-      var { PassThrough } = __require("stream");
+      var { PassThrough } = require("stream");
       module2.exports = function() {
         var sources = [];
         var output = new PassThrough({ objectMode: true });
@@ -6917,8 +6910,8 @@ ${error2.message}` : execaMessage;
     });
     var require_execa = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
-      var childProcess = __require("child_process");
+      var path22 = require("path");
+      var childProcess = require("child_process");
       var crossSpawn = require_cross_spawn();
       var stripFinalNewline = require_strip_final_newline();
       var npmRunPath = require_npm_run_path();
@@ -9229,9 +9222,9 @@ ${error2.message}` : execaMessage;
     });
     var require_make_dir = __commonJS((exports2, module2) => {
       "use strict";
-      var fs7 = __require("fs");
-      var path22 = __require("path");
-      var { promisify: promisify3 } = __require("util");
+      var fs7 = require("fs");
+      var path22 = require("path");
+      var { promisify: promisify3 } = require("util");
       var semver = require_semver2();
       var useNativeRecursiveOption = semver.satisfies(process.version, ">=10.12.0");
       var checkPath = /* @__PURE__ */ __name2((pth) => {
@@ -9374,7 +9367,7 @@ ${error2.message}` : execaMessage;
     });
     var require_clean_stack = __commonJS((exports2, module2) => {
       "use strict";
-      var os2 = __require("os");
+      var os2 = require("os");
       var extractPathRegex = /\s+at.*(?:\(|\s)(.*)\)?/;
       var pathRegex = /^(?:(?:(?:node|(?:internal\/[\w/]*|.*node_modules\/(?:babel-polyfill|pirates)\/.*)?\w+)\.js:\d+:\d+)|native)/;
       var homeDir = typeof os2.homedir === "undefined" ? "" : os2.homedir();
@@ -9512,8 +9505,8 @@ ${error2.message}` : execaMessage;
     });
     var require_temp_dir = __commonJS((exports2, module2) => {
       "use strict";
-      var fs7 = __require("fs");
-      var os2 = __require("os");
+      var fs7 = require("fs");
+      var os2 = require("os");
       var tempDirectorySymbol = Symbol.for("__RESOLVED_TEMP_DIRECTORY__");
       if (!global[tempDirectorySymbol]) {
         Object.defineProperty(global, tempDirectorySymbol, {
@@ -9553,7 +9546,7 @@ ${error2.message}` : execaMessage;
         return result;
       };
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var fs7 = __importStar(__require("fs"));
+      var fs7 = __importStar(require("fs"));
       function default_1(file2) {
         const s = fs7.statSync(file2);
         const newMode = s.mode | 64 | 8 | 1;
@@ -9567,7 +9560,7 @@ ${error2.message}` : execaMessage;
       exports2.default = default_1;
     });
     var require_commondir = __commonJS((exports2, module2) => {
-      var path22 = __require("path");
+      var path22 = require("path");
       module2.exports = function(basedir, relfiles) {
         if (relfiles) {
           var files = relfiles.map(function(r) {
@@ -9683,9 +9676,9 @@ ${error2.message}` : execaMessage;
     });
     var require_locate_path = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
-      var fs7 = __require("fs");
-      var { promisify: promisify3 } = __require("util");
+      var path22 = require("path");
+      var fs7 = require("fs");
+      var { promisify: promisify3 } = require("util");
       var pLocate = require_p_locate();
       var fsStat = promisify3(fs7.stat);
       var fsLStat = promisify3(fs7.lstat);
@@ -9742,8 +9735,8 @@ ${error2.message}` : execaMessage;
     });
     var require_path_exists = __commonJS((exports2, module2) => {
       "use strict";
-      var fs7 = __require("fs");
-      var { promisify: promisify3 } = __require("util");
+      var fs7 = require("fs");
+      var { promisify: promisify3 } = require("util");
       var pAccess = promisify3(fs7.access);
       module2.exports = async (path22) => {
         try {
@@ -9764,7 +9757,7 @@ ${error2.message}` : execaMessage;
     });
     var require_find_up = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var locatePath = require_locate_path();
       var pathExists = require_path_exists();
       var stop = Symbol("findUp.stop");
@@ -9830,7 +9823,7 @@ ${error2.message}` : execaMessage;
     });
     var require_pkg_dir = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var findUp = require_find_up();
       var pkgDir = /* @__PURE__ */ __name2(async (cwd) => {
         const filePath = await findUp("package.json", { cwd });
@@ -9845,8 +9838,8 @@ ${error2.message}` : execaMessage;
     });
     var require_find_cache_dir = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
-      var fs7 = __require("fs");
+      var path22 = require("path");
+      var fs7 = require("fs");
       var commonDir = require_commondir();
       var pkgDir = require_pkg_dir();
       var makeDir = require_make_dir();
@@ -9908,10 +9901,10 @@ ${error2.message}` : execaMessage;
       var debug_12 = __importDefault2(require_dist());
       var get_platform_12 = require_dist2();
       var find_cache_dir_1 = __importDefault2(require_find_cache_dir());
-      var fs_12 = __importDefault2(__require("fs"));
+      var fs_12 = __importDefault2(require("fs"));
       var make_dir_12 = __importDefault2(require_make_dir());
-      var os_1 = __importDefault2(__require("os"));
-      var path_12 = __importDefault2(__require("path"));
+      var os_1 = __importDefault2(require("os"));
+      var path_12 = __importDefault2(require("path"));
       var download_1 = require_download();
       var debug32 = (0, debug_12.default)("prisma:cache-dir");
       async function getRootCacheDir() {
@@ -9970,9 +9963,9 @@ ${error2.message}` : execaMessage;
       exports2.getDownloadUrl = getDownloadUrl;
     });
     var require_old = __commonJS((exports2) => {
-      var pathModule = __require("path");
+      var pathModule = require("path");
       var isWindows = process.platform === "win32";
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       var DEBUG = process.env.NODE_DEBUG && /fs/.test(process.env.NODE_DEBUG);
       function rethrow() {
         var callback;
@@ -10204,7 +10197,7 @@ ${error2.message}` : execaMessage;
       realpath.realpathSync = realpathSync2;
       realpath.monkeypatch = monkeypatch;
       realpath.unmonkeypatch = unmonkeypatch;
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       var origRealpath = fs7.realpath;
       var origRealpathSync = fs7.realpathSync;
       var version = process.version;
@@ -10506,7 +10499,7 @@ ${error2.message}` : execaMessage;
       minimatch.Minimatch = Minimatch;
       var path22 = { sep: "/" };
       try {
-        path22 = __require("path");
+        path22 = require("path");
       } catch (er) {
       }
       var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {};
@@ -11123,7 +11116,7 @@ ${error2.message}` : execaMessage;
     });
     var require_inherits = __commonJS((exports2, module2) => {
       try {
-        util2 = __require("util");
+        util2 = require("util");
         if (typeof util2.inherits !== "function")
           throw "";
         module2.exports = util2.inherits;
@@ -11167,7 +11160,7 @@ ${error2.message}` : execaMessage;
       }
       __name(ownProp, "ownProp");
       __name2(ownProp, "ownProp");
-      var path22 = __require("path");
+      var path22 = require("path");
       var minimatch = require_minimatch();
       var isAbsolute = require_path_is_absolute();
       var Minimatch = minimatch.Minimatch;
@@ -11369,14 +11362,14 @@ ${error2.message}` : execaMessage;
     var require_sync = __commonJS((exports2, module2) => {
       module2.exports = globSync;
       globSync.GlobSync = GlobSync;
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       var rp = require_fs();
       var minimatch = require_minimatch();
       var Minimatch = minimatch.Minimatch;
       var Glob = require_glob().Glob;
-      var util2 = __require("util");
-      var path22 = __require("path");
-      var assert = __require("assert");
+      var util2 = require("util");
+      var path22 = require("path");
+      var assert = require("assert");
       var isAbsolute = require_path_is_absolute();
       var common = require_common2();
       var alphasort = common.alphasort;
@@ -11846,14 +11839,14 @@ ${error2.message}` : execaMessage;
     });
     var require_glob = __commonJS((exports2, module2) => {
       module2.exports = glob;
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       var rp = require_fs();
       var minimatch = require_minimatch();
       var Minimatch = minimatch.Minimatch;
       var inherits = require_inherits();
-      var EE = __require("events").EventEmitter;
-      var path22 = __require("path");
-      var assert = __require("assert");
+      var EE = require("events").EventEmitter;
+      var path22 = require("path");
+      var assert = require("assert");
       var isAbsolute = require_path_is_absolute();
       var globSync = require_sync();
       var common = require_common2();
@@ -11862,7 +11855,7 @@ ${error2.message}` : execaMessage;
       var setopts = common.setopts;
       var ownProp = common.ownProp;
       var inflight = require_inflight();
-      var util2 = __require("util");
+      var util2 = require("util");
       var childrenIgnored = common.childrenIgnored;
       var isIgnored = common.isIgnored;
       var once = require_once();
@@ -12413,9 +12406,9 @@ ${error2.message}` : execaMessage;
       };
     });
     var require_rimraf = __commonJS((exports2, module2) => {
-      var assert = __require("assert");
-      var path22 = __require("path");
-      var fs7 = __require("fs");
+      var assert = require("assert");
+      var path22 = require("path");
+      var fs7 = require("fs");
       var glob = void 0;
       try {
         glob = require_glob();
@@ -12696,11 +12689,11 @@ ${error2.message}` : execaMessage;
       };
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.cleanupCache = void 0;
-      var fs_12 = __importDefault2(__require("fs"));
-      var path_12 = __importDefault2(__require("path"));
+      var fs_12 = __importDefault2(require("fs"));
+      var path_12 = __importDefault2(require("path"));
       var util_12 = require_util2();
       var rimraf_1 = __importDefault2(require_rimraf());
-      var util_22 = __require("util");
+      var util_22 = require("util");
       var p_map_1 = __importDefault2(require_p_map());
       var debug_12 = __importDefault2(require_dist());
       var debug32 = (0, debug_12.default)("cleanupCache");
@@ -13200,7 +13193,7 @@ ${error2.message}` : execaMessage;
     });
     var require_tr46 = __commonJS((exports2, module2) => {
       "use strict";
-      var punycode = __require("punycode");
+      var punycode = require("punycode");
       var mappingTable = require_mappingTable();
       var PROCESSING_OPTIONS = {
         TRANSITIONAL: 0,
@@ -13370,7 +13363,7 @@ ${error2.message}` : execaMessage;
     });
     var require_url_state_machine = __commonJS((exports2, module2) => {
       "use strict";
-      var punycode = __require("punycode");
+      var punycode = require("punycode");
       var tr46 = require_tr46();
       var specialSchemes = {
         ftp: 21,
@@ -14870,12 +14863,12 @@ ${error2.message}` : execaMessage;
       }
       __name(_interopDefault, "_interopDefault");
       __name2(_interopDefault, "_interopDefault");
-      var Stream = _interopDefault(__require("stream"));
-      var http = _interopDefault(__require("http"));
-      var Url = _interopDefault(__require("url"));
+      var Stream = _interopDefault(require("stream"));
+      var http = _interopDefault(require("http"));
+      var Url = _interopDefault(require("url"));
       var whatwgUrl = _interopDefault(require_public_api());
-      var https2 = _interopDefault(__require("https"));
-      var zlib = _interopDefault(__require("zlib"));
+      var https2 = _interopDefault(require("https"));
+      var zlib = _interopDefault(require("zlib"));
       var Readable = Stream.Readable;
       var BUFFER = Symbol("buffer");
       var TYPE = Symbol("type");
@@ -14992,7 +14985,7 @@ ${error2.message}` : execaMessage;
       FetchError.prototype.name = "FetchError";
       var convert;
       try {
-        convert = __require("encoding").convert;
+        convert = require("encoding").convert;
       } catch (e) {
       }
       var INTERNALS = Symbol("Body internals");
@@ -15978,12 +15971,12 @@ ${error2.message}` : execaMessage;
         createDebug.skips = [];
         createDebug.formatters = {};
         function selectColor(namespace) {
-          let hash2 = 0;
+          let hash = 0;
           for (let i = 0; i < namespace.length; i++) {
-            hash2 = (hash2 << 5) - hash2 + namespace.charCodeAt(i);
-            hash2 |= 0;
+            hash = (hash << 5) - hash + namespace.charCodeAt(i);
+            hash |= 0;
           }
-          return createDebug.colors[Math.abs(hash2) % createDebug.colors.length];
+          return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
         }
         __name(selectColor, "selectColor");
         __name2(selectColor, "selectColor");
@@ -16314,8 +16307,8 @@ ${error2.message}` : execaMessage;
       };
     });
     var require_node2 = __commonJS((exports2, module2) => {
-      var tty = __require("tty");
-      var util2 = __require("util");
+      var tty = require("tty");
+      var util2 = require("util");
       exports2.init = init;
       exports2.log = log4;
       exports2.formatArgs = formatArgs;
@@ -16526,7 +16519,7 @@ ${error2.message}` : execaMessage;
       var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
         return mod2 && mod2.__esModule ? mod2 : { default: mod2 };
       };
-      var events_1 = __require("events");
+      var events_1 = require("events");
       var debug_12 = __importDefault2(require_src());
       var promisify_1 = __importDefault2(require_promisify());
       var debug32 = debug_12.default("agent-base");
@@ -16819,10 +16812,10 @@ ${error2.message}` : execaMessage;
         return mod2 && mod2.__esModule ? mod2 : { default: mod2 };
       };
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var net_1 = __importDefault2(__require("net"));
-      var tls_1 = __importDefault2(__require("tls"));
-      var url_1 = __importDefault2(__require("url"));
-      var assert_1 = __importDefault2(__require("assert"));
+      var net_1 = __importDefault2(require("net"));
+      var tls_1 = __importDefault2(require("tls"));
+      var url_1 = __importDefault2(require("url"));
+      var assert_1 = __importDefault2(require("assert"));
       var debug_12 = __importDefault2(require_src());
       var agent_base_1 = require_src2();
       var parse_proxy_response_1 = __importDefault2(require_parse_proxy_response());
@@ -17038,9 +17031,9 @@ ${error2.message}` : execaMessage;
         return mod2 && mod2.__esModule ? mod2 : { default: mod2 };
       };
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var net_1 = __importDefault2(__require("net"));
-      var tls_1 = __importDefault2(__require("tls"));
-      var url_1 = __importDefault2(__require("url"));
+      var net_1 = __importDefault2(require("net"));
+      var tls_1 = __importDefault2(require("tls"));
+      var url_1 = __importDefault2(require("url"));
       var debug_12 = __importDefault2(require_src());
       var once_1 = __importDefault2(require_dist4());
       var agent_base_1 = require_src2();
@@ -17159,7 +17152,7 @@ ${error2.message}` : execaMessage;
       exports2.getProxyAgent = void 0;
       var https_proxy_agent_1 = __importDefault2(require_dist3());
       var http_proxy_agent_1 = __importDefault2(require_dist5());
-      var url_1 = __importDefault2(__require("url"));
+      var url_1 = __importDefault2(require("url"));
       function formatHostname(hostname) {
         return hostname.replace(/^\.*/, ".").toLowerCase();
       }
@@ -17228,7 +17221,7 @@ ${error2.message}` : execaMessage;
     });
     var require_crypto_random_string = __commonJS((exports2, module2) => {
       "use strict";
-      var crypto3 = __require("crypto");
+      var crypto3 = require("crypto");
       module2.exports = (length) => {
         if (!Number.isFinite(length)) {
           throw new TypeError("Expected a finite number");
@@ -17249,7 +17242,7 @@ ${error2.message}` : execaMessage;
     });
     var require_merge2 = __commonJS((exports2, module2) => {
       "use strict";
-      var Stream = __require("stream");
+      var Stream = require("stream");
       var PassThrough = Stream.PassThrough;
       var slice = Array.prototype.slice;
       module2.exports = merge2;
@@ -17445,7 +17438,7 @@ ${error2.message}` : execaMessage;
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.removeLeadingDotSegment = exports2.escape = exports2.makeAbsolute = exports2.unixify = void 0;
-      var path22 = __require("path");
+      var path22 = require("path");
       var LEADING_DOT_SEGMENT_CHARACTERS_COUNT = 2;
       var UNESCAPED_GLOB_SYMBOLS_RE = /(\\?)([()*?[\]{|}]|^!|[!+@](?=\())/g;
       function unixify(filepath) {
@@ -17530,8 +17523,8 @@ ${error2.message}` : execaMessage;
     var require_glob_parent = __commonJS((exports2, module2) => {
       "use strict";
       var isGlob = require_is_glob();
-      var pathPosixDirname = __require("path").posix.dirname;
-      var isWin32 = __require("os").platform() === "win32";
+      var pathPosixDirname = require("path").posix.dirname;
+      var isWin32 = require("os").platform() === "win32";
       var slash = "/";
       var backslash = /\\/g;
       var escaped = /\\([!*?|[\](){}])/g;
@@ -17942,7 +17935,7 @@ ${error2.message}` : execaMessage;
     });
     var require_fill_range = __commonJS((exports2, module2) => {
       "use strict";
-      var util2 = __require("util");
+      var util2 = require("util");
       var toRegexRange = require_to_regex_range();
       var isObject2 = /* @__PURE__ */ __name2((val) => val !== null && typeof val === "object" && !Array.isArray(val), "isObject");
       var transform = /* @__PURE__ */ __name2((toNumber) => {
@@ -18621,7 +18614,7 @@ ${error2.message}` : execaMessage;
     });
     var require_constants3 = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var WIN_SLASH = "\\\\/";
       var WIN_NO_SLASH = `[^${WIN_SLASH}]`;
       var DOT_LITERAL = "\\.";
@@ -18760,7 +18753,7 @@ ${error2.message}` : execaMessage;
     });
     var require_utils3 = __commonJS((exports2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var win32 = process.platform === "win32";
       var {
         REGEX_BACKSLASH,
@@ -19909,7 +19902,7 @@ ${error2.message}` : execaMessage;
     });
     var require_picomatch = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var scan = require_scan();
       var parse2 = require_parse4();
       var utils = require_utils3();
@@ -20053,7 +20046,7 @@ ${error2.message}` : execaMessage;
     });
     var require_micromatch = __commonJS((exports2, module2) => {
       "use strict";
-      var util2 = __require("util");
+      var util2 = require("util");
       var braces = require_braces();
       var picomatch = require_picomatch2();
       var utils = require_utils3();
@@ -20213,7 +20206,7 @@ ${error2.message}` : execaMessage;
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.matchAny = exports2.convertPatternsToRe = exports2.makeRe = exports2.getPatternParts = exports2.expandBraceExpansion = exports2.expandPatternsWithBraceExpansion = exports2.isAffectDepthOfReadingPattern = exports2.endsWithSlashGlobStar = exports2.hasGlobStar = exports2.getBaseDirectory = exports2.getPositivePatterns = exports2.getNegativePatterns = exports2.isPositivePattern = exports2.isNegativePattern = exports2.convertToNegativePattern = exports2.convertToPositivePattern = exports2.isDynamicPattern = exports2.isStaticPattern = void 0;
-      var path22 = __require("path");
+      var path22 = require("path");
       var globParent = require_glob_parent();
       var micromatch = require_micromatch();
       var picomatch = require_picomatch2();
@@ -20569,7 +20562,7 @@ ${error2.message}` : execaMessage;
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.createFileSystemAdapter = exports2.FILE_SYSTEM_ADAPTER = void 0;
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       exports2.FILE_SYSTEM_ADAPTER = {
         lstat: fs7.lstat,
         stat: fs7.stat,
@@ -20928,7 +20921,7 @@ ${error2.message}` : execaMessage;
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.createFileSystemAdapter = exports2.FILE_SYSTEM_ADAPTER = void 0;
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       exports2.FILE_SYSTEM_ADAPTER = {
         lstat: fs7.lstat,
         stat: fs7.stat,
@@ -20950,7 +20943,7 @@ ${error2.message}` : execaMessage;
     var require_settings2 = __commonJS((exports2) => {
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var path22 = __require("path");
+      var path22 = require("path");
       var fsStat = require_out();
       var fs7 = require_fs5();
       var Settings = /* @__PURE__ */ __name2(class {
@@ -21348,7 +21341,7 @@ ${error2.message}` : execaMessage;
     var require_async3 = __commonJS((exports2) => {
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var events_1 = __require("events");
+      var events_1 = require("events");
       var fsScandir = require_out2();
       var fastq = require_queue();
       var common = require_common5();
@@ -21482,7 +21475,7 @@ ${error2.message}` : execaMessage;
     var require_stream3 = __commonJS((exports2) => {
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var stream_1 = __require("stream");
+      var stream_1 = require("stream");
       var async_1 = require_async3();
       var StreamProvider = /* @__PURE__ */ __name2(class {
         constructor(_root, _settings) {
@@ -21595,7 +21588,7 @@ ${error2.message}` : execaMessage;
     var require_settings3 = __commonJS((exports2) => {
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var path22 = __require("path");
+      var path22 = require("path");
       var fsScandir = require_out2();
       var Settings = /* @__PURE__ */ __name2(class {
         constructor(_options = {}) {
@@ -21666,7 +21659,7 @@ ${error2.message}` : execaMessage;
     var require_reader2 = __commonJS((exports2) => {
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var path22 = __require("path");
+      var path22 = require("path");
       var fsStat = require_out();
       var utils = require_utils4();
       var Reader = /* @__PURE__ */ __name2(class {
@@ -21701,7 +21694,7 @@ ${error2.message}` : execaMessage;
     var require_stream4 = __commonJS((exports2) => {
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var stream_1 = __require("stream");
+      var stream_1 = require("stream");
       var fsStat = require_out();
       var fsWalk = require_out3();
       var reader_1 = require_reader2();
@@ -21999,7 +21992,7 @@ ${error2.message}` : execaMessage;
     var require_provider = __commonJS((exports2) => {
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var path22 = __require("path");
+      var path22 = require("path");
       var deep_1 = require_deep();
       var entry_1 = require_entry();
       var error_1 = require_error2();
@@ -22079,7 +22072,7 @@ ${error2.message}` : execaMessage;
     var require_stream5 = __commonJS((exports2) => {
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
-      var stream_1 = __require("stream");
+      var stream_1 = require("stream");
       var stream_2 = require_stream4();
       var provider_1 = require_provider();
       var ProviderStream = /* @__PURE__ */ __name2(class extends provider_1.default {
@@ -22179,8 +22172,8 @@ ${error2.message}` : execaMessage;
       "use strict";
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.DEFAULT_FILE_SYSTEM_ADAPTER = void 0;
-      var fs7 = __require("fs");
-      var os2 = __require("os");
+      var fs7 = require("fs");
+      var os2 = require("os");
       var CPU_COUNT = Math.max(os2.cpus().length, 1);
       exports2.DEFAULT_FILE_SYSTEM_ADAPTER = {
         lstat: fs7.lstat,
@@ -22310,8 +22303,8 @@ ${error2.message}` : execaMessage;
     });
     var require_path_type = __commonJS((exports2) => {
       "use strict";
-      var { promisify: promisify3 } = __require("util");
-      var fs7 = __require("fs");
+      var { promisify: promisify3 } = require("util");
+      var fs7 = require("fs");
       async function isType(fsStatType, statsMethodName, filePath) {
         if (typeof filePath !== "string") {
           throw new TypeError(`Expected a string, got ${typeof filePath}`);
@@ -22352,7 +22345,7 @@ ${error2.message}` : execaMessage;
     });
     var require_dir_glob = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       var pathType = require_path_type();
       var getExtensions = /* @__PURE__ */ __name2((extensions) => extensions.length > 1 ? `{${extensions.join(",")}}` : extensions[0], "getExtensions");
       var getPath = /* @__PURE__ */ __name2((filepath, cwd) => {
@@ -22662,9 +22655,9 @@ ${error2.message}` : execaMessage;
     });
     var require_gitignore = __commonJS((exports2, module2) => {
       "use strict";
-      var { promisify: promisify3 } = __require("util");
-      var fs7 = __require("fs");
-      var path22 = __require("path");
+      var { promisify: promisify3 } = require("util");
+      var fs7 = require("fs");
+      var path22 = require("path");
       var fastGlob = require_out4();
       var gitIgnore = require_ignore();
       var slash = require_slash();
@@ -22755,7 +22748,7 @@ ${error2.message}` : execaMessage;
     });
     var require_stream_utils = __commonJS((exports2, module2) => {
       "use strict";
-      var { Transform } = __require("stream");
+      var { Transform } = require("stream");
       var ObjectTransform = /* @__PURE__ */ __name2(class extends Transform {
         constructor() {
           super({
@@ -22795,7 +22788,7 @@ ${error2.message}` : execaMessage;
     });
     var require_globby = __commonJS((exports2, module2) => {
       "use strict";
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       var arrayUnion = require_array_union();
       var merge2 = require_merge2();
       var fastGlob = require_out4();
@@ -22926,7 +22919,7 @@ ${error2.message}` : execaMessage;
       module2.exports.gitignore = gitignore;
     });
     var require_polyfills = __commonJS((exports2, module2) => {
-      var constants = __require("constants");
+      var constants = require("constants");
       var origCwd = process.cwd;
       var cwd = null;
       var platform2 = process.env.GRACEFUL_FS_PLATFORM || process.platform;
@@ -23252,7 +23245,7 @@ ${error2.message}` : execaMessage;
       __name2(patch, "patch");
     });
     var require_legacy_streams = __commonJS((exports2, module2) => {
-      var Stream = __require("stream").Stream;
+      var Stream = require("stream").Stream;
       module2.exports = legacy;
       function legacy(fs7) {
         return {
@@ -23374,11 +23367,11 @@ ${error2.message}` : execaMessage;
       __name2(clone2, "clone");
     });
     var require_graceful_fs = __commonJS((exports2, module2) => {
-      var fs7 = __require("fs");
+      var fs7 = require("fs");
       var polyfills = require_polyfills();
       var legacy = require_legacy_streams();
       var clone2 = require_clone();
-      var util2 = __require("util");
+      var util2 = require("util");
       var gracefulQueue;
       var previousSymbol;
       if (typeof Symbol === "function" && typeof Symbol.for === "function") {
@@ -23445,7 +23438,7 @@ ${error2.message}` : execaMessage;
         if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || "")) {
           process.on("exit", function() {
             debug32(fs7[gracefulQueue]);
-            __require("assert").equal(fs7[gracefulQueue].length, 0);
+            require("assert").equal(fs7[gracefulQueue].length, 0);
           });
         }
       }
@@ -23739,7 +23732,7 @@ ${error2.message}` : execaMessage;
     });
     var require_is_path_cwd = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       module2.exports = (path_) => {
         let cwd = process.cwd();
         path_ = path22.resolve(path_);
@@ -23752,7 +23745,7 @@ ${error2.message}` : execaMessage;
     });
     var require_is_path_inside = __commonJS((exports2, module2) => {
       "use strict";
-      var path22 = __require("path");
+      var path22 = require("path");
       module2.exports = (childPath, parentPath) => {
         const relation = path22.relative(parentPath, childPath);
         return Boolean(relation && relation !== ".." && !relation.startsWith(`..${path22.sep}`) && relation !== path22.resolve(childPath));
@@ -23760,8 +23753,8 @@ ${error2.message}` : execaMessage;
     });
     var require_del = __commonJS((exports2, module2) => {
       "use strict";
-      var { promisify: promisify3 } = __require("util");
-      var path22 = __require("path");
+      var { promisify: promisify3 } = require("util");
+      var path22 = require("path");
       var globby = require_globby();
       var isGlob = require_is_glob();
       var slash = require_slash();
@@ -23858,14 +23851,14 @@ ${error2.message}` : execaMessage;
     });
     var require_tempy = __commonJS((exports2, module2) => {
       "use strict";
-      var fs7 = __require("fs");
-      var path22 = __require("path");
+      var fs7 = require("fs");
+      var path22 = require("path");
       var uniqueString = require_unique_string();
       var tempDir = require_temp_dir();
       var isStream = require_is_stream();
       var del = require_del();
-      var stream3 = __require("stream");
-      var { promisify: promisify3 } = __require("util");
+      var stream3 = require("stream");
+      var { promisify: promisify3 } = require("util");
       var pipeline2 = promisify3(stream3.pipeline);
       var { writeFile: writeFile2 } = fs7.promises;
       var getPath = /* @__PURE__ */ __name2((prefix = "") => path22.join(tempDir, prefix + uniqueString()), "getPath");
@@ -23916,13 +23909,13 @@ ${error2.message}` : execaMessage;
     });
     var require_hasha = __commonJS((exports2, module2) => {
       "use strict";
-      var fs7 = __require("fs");
-      var path22 = __require("path");
-      var crypto3 = __require("crypto");
+      var fs7 = require("fs");
+      var path22 = require("path");
+      var crypto3 = require("crypto");
       var isStream = require_is_stream();
       var { Worker } = (() => {
         try {
-          return __require("worker_threads");
+          return require("worker_threads");
         } catch (_) {
           return {};
         }
@@ -23971,17 +23964,17 @@ ${error2.message}` : execaMessage;
         if (outputEncoding === "buffer") {
           outputEncoding = void 0;
         }
-        const hash2 = crypto3.createHash(options2.algorithm || "sha512");
+        const hash = crypto3.createHash(options2.algorithm || "sha512");
         const update = /* @__PURE__ */ __name2((buffer) => {
           const inputEncoding = typeof buffer === "string" ? "utf8" : void 0;
-          hash2.update(buffer, inputEncoding);
+          hash.update(buffer, inputEncoding);
         }, "update");
         if (Array.isArray(input)) {
           input.forEach(update);
         } else {
           update(input);
         }
-        return hash2.digest(outputEncoding);
+        return hash.digest(outputEncoding);
       }, "hasha");
       hasha.stream = (options2 = {}) => {
         let outputEncoding = options2.encoding || "hex";
@@ -24007,21 +24000,21 @@ ${error2.message}` : execaMessage;
         hasha.async = async (input, options2) => hasha(input, options2);
       } else {
         hasha.fromFile = async (filePath, { algorithm = "sha512", encoding = "hex" } = {}) => {
-          const hash2 = await taskWorker("hashFile", [algorithm, filePath]);
+          const hash = await taskWorker("hashFile", [algorithm, filePath]);
           if (encoding === "buffer") {
-            return Buffer.from(hash2);
+            return Buffer.from(hash);
           }
-          return Buffer.from(hash2).toString(encoding);
+          return Buffer.from(hash).toString(encoding);
         };
         hasha.async = async (input, { algorithm = "sha512", encoding = "hex" } = {}) => {
           if (encoding === "buffer") {
             encoding = void 0;
           }
-          const hash2 = await taskWorker("hash", [algorithm, input]);
+          const hash = await taskWorker("hash", [algorithm, input]);
           if (encoding === void 0) {
-            return Buffer.from(hash2);
+            return Buffer.from(hash);
           }
-          return Buffer.from(hash2).toString(encoding);
+          return Buffer.from(hash).toString(encoding);
         };
       }
       hasha.fromFileSync = (filePath, options2) => hasha(fs7.readFileSync(filePath), options2);
@@ -24034,16 +24027,16 @@ ${error2.message}` : execaMessage;
       };
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.downloadZip = void 0;
-      var zlib_1 = __importDefault2(__require("zlib"));
+      var zlib_1 = __importDefault2(require("zlib"));
       var p_retry_1 = __importDefault2(require_p_retry());
       var node_fetch_1 = __importDefault2(require_lib2());
-      var fs_12 = __importDefault2(__require("fs"));
+      var fs_12 = __importDefault2(require("fs"));
       var getProxyAgent_1 = require_getProxyAgent();
       var tempy_1 = __importDefault2(require_tempy());
-      var path_12 = __importDefault2(__require("path"));
+      var path_12 = __importDefault2(require("path"));
       var debug_12 = __importDefault2(require_dist());
       var hasha_1 = __importDefault2(require_hasha());
-      var util_12 = __require("util");
+      var util_12 = require("util");
       var rimraf_1 = __importDefault2(require_rimraf());
       var debug32 = (0, debug_12.default)("prisma:downloadZip");
       var del = (0, util_12.promisify)(rimraf_1.default);
@@ -24097,13 +24090,13 @@ ${error2.message}` : execaMessage;
               ws.on("error", reject2).on("close", () => {
                 resolve2({ lastModified, sha256, zippedSha256 });
               });
-              const hash2 = await hashPromise;
+              const hash = await hashPromise;
               const zippedHash = await zippedHashPromise;
               if (zippedHash !== zippedSha256) {
                 throw new Error(`sha256 of ${url2} (zipped) should be ${zippedSha256} but is ${zippedHash}`);
               }
-              if (hash2 !== sha256) {
-                throw new Error(`sha256 of ${url2} (uzipped) should be ${sha256} but is ${hash2}`);
+              if (hash !== sha256) {
+                throw new Error(`sha256 of ${url2} (uzipped) should be ${sha256} but is ${hash}`);
               }
             });
           } finally {
@@ -24148,18 +24141,18 @@ ${error2.message}` : execaMessage;
       };
       Object.defineProperty(exports2, "__esModule", { value: true });
       exports2.getHash = void 0;
-      var crypto_1 = __importDefault2(__require("crypto"));
-      var fs_12 = __importDefault2(__require("fs"));
+      var crypto_1 = __importDefault2(require("crypto"));
+      var fs_12 = __importDefault2(require("fs"));
       function getHash(filePath) {
-        const hash2 = crypto_1.default.createHash("sha256");
+        const hash = crypto_1.default.createHash("sha256");
         const input = fs_12.default.createReadStream(filePath);
         return new Promise((resolve2) => {
           input.on("readable", () => {
             const data = input.read();
             if (data) {
-              hash2.update(data);
+              hash.update(data);
             } else {
-              resolve2(hash2.digest("hex"));
+              resolve2(hash.digest("hex"));
             }
           });
         });
@@ -24489,12 +24482,12 @@ ${error2.message}` : execaMessage;
       var get_platform_1 = require_dist2();
       var chalk_1 = __importDefault(require_source());
       var execa_1 = __importDefault(require_execa());
-      var fs_1 = __importDefault(__require("fs"));
+      var fs_1 = __importDefault(require("fs"));
       var make_dir_1 = __importDefault(require_make_dir());
       var p_filter_1 = __importDefault(require_p_filter());
-      var path_1 = __importDefault(__require("path"));
+      var path_1 = __importDefault(require("path"));
       var temp_dir_1 = __importDefault(require_temp_dir());
-      var util_1 = __require("util");
+      var util_1 = require("util");
       var chmod_1 = __importDefault(require_chmod());
       var cleanupCache_1 = require_cleanupCache();
       var downloadZip_1 = require_downloadZip();
@@ -24901,7 +24894,7 @@ ${error2.message}` : execaMessage;
     var import_debug = __toModule(require_dist());
     var import_engines_version = __toModule(require_engines_version());
     var import_fetch_engine = __toModule(require_dist6());
-    var import_path = __toModule(__require("path"));
+    var import_path = __toModule(require("path"));
     var import_engines_version2 = __toModule(require_engines_version());
     var debug2 = import_debug.default("prisma:engines");
     function getEnginesPath() {
@@ -24979,7 +24972,7 @@ ${error2.message}` : execaMessage;
   }
 });
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -25002,17 +24995,17 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getPlatform = exports2.getOpenSSLVersion = exports2.parseOpenSSLVersion = exports2.resolveDistro = exports2.parseDistro = exports2.getos = void 0;
-    var child_process_1 = __require("child_process");
-    var fs_12 = __importDefault2(__require("fs"));
-    var os_1 = __importDefault2(__require("os"));
-    var util_12 = __require("util");
+    var child_process_1 = require("child_process");
+    var fs_12 = __importDefault2(require("fs"));
+    var os_1 = __importDefault2(require("os"));
+    var util_12 = require("util");
     var readFile2 = (0, util_12.promisify)(fs_12.default.readFile);
     var exists4 = (0, util_12.promisify)(fs_12.default.exists);
     async function getos() {
@@ -25184,14 +25177,14 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.isNodeAPISupported = void 0;
-    var fs_12 = __importDefault2(__require("fs"));
+    var fs_12 = __importDefault2(require("fs"));
     var _1 = require_dist9();
     async function isNodeAPISupported2() {
       const customLibraryPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
@@ -25207,7 +25200,7 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -25234,7 +25227,7 @@ var require_platforms2 = __commonJS2({
   }
 });
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -25537,7 +25530,7 @@ var require_strip_final_newline2 = __commonJS2({
 var require_npm_run_path2 = __commonJS2({
   "../../node_modules/.pnpm/npm-run-path@4.0.1/node_modules/npm-run-path/index.js"(exports2, module2) {
     "use strict";
-    var path6 = __require("path");
+    var path6 = require("path");
     var pathKey = require_path_key2();
     var npmRunPath = /* @__PURE__ */ __name2((options2) => {
       options2 = {
@@ -25930,7 +25923,7 @@ var require_signals3 = __commonJS2({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getSignals = void 0;
-    var _os = __require("os");
+    var _os = require("os");
     var _core = require_core2();
     var _realtime = require_realtime2();
     var getSignals = /* @__PURE__ */ __name2(function() {
@@ -25961,7 +25954,7 @@ var require_main2 = __commonJS2({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.signalsByNumber = exports2.signalsByName = void 0;
-    var _os = __require("os");
+    var _os = require("os");
     var _signals = require_signals3();
     var _realtime = require_realtime2();
     var getSignalsByName = /* @__PURE__ */ __name2(function() {
@@ -26151,10 +26144,10 @@ var require_signal_exit2 = __commonJS2({
       module2.exports = function() {
       };
     } else {
-      assert = __require("assert");
+      assert = require("assert");
       signals = require_signals4();
       isWin = /^win/i.test(process2.platform);
-      EE = __require("events");
+      EE = require("events");
       if (typeof EE !== "function") {
         EE = EE.EventEmitter;
       }
@@ -26297,7 +26290,7 @@ var require_signal_exit2 = __commonJS2({
 var require_kill2 = __commonJS2({
   "../../node_modules/.pnpm/execa@5.1.1/node_modules/execa/lib/kill.js"(exports2, module2) {
     "use strict";
-    var os2 = __require("os");
+    var os2 = require("os");
     var onExit = require_signal_exit2();
     var DEFAULT_FORCE_KILL_TIMEOUT = 1e3 * 5;
     var spawnedKill = /* @__PURE__ */ __name2((kill, signal = "SIGTERM", options2 = {}) => {
@@ -26396,7 +26389,7 @@ var require_is_stream2 = __commonJS2({
 var require_buffer_stream2 = __commonJS2({
   "../../node_modules/.pnpm/get-stream@6.0.1/node_modules/get-stream/buffer-stream.js"(exports2, module2) {
     "use strict";
-    var { PassThrough: PassThroughStream } = __require("stream");
+    var { PassThrough: PassThroughStream } = require("stream");
     module2.exports = (options2) => {
       options2 = { ...options2 };
       const { array } = options2;
@@ -26439,9 +26432,9 @@ var require_buffer_stream2 = __commonJS2({
 var require_get_stream2 = __commonJS2({
   "../../node_modules/.pnpm/get-stream@6.0.1/node_modules/get-stream/index.js"(exports2, module2) {
     "use strict";
-    var { constants: BufferConstants } = __require("buffer");
-    var stream3 = __require("stream");
-    var { promisify: promisify3 } = __require("util");
+    var { constants: BufferConstants } = require("buffer");
+    var stream3 = require("stream");
+    var { promisify: promisify3 } = require("util");
     var bufferStream = require_buffer_stream2();
     var streamPipelinePromisified = promisify3(stream3.pipeline);
     var MaxBufferError = /* @__PURE__ */ __name(class extends Error {
@@ -26495,7 +26488,7 @@ var require_get_stream2 = __commonJS2({
 var require_merge_stream2 = __commonJS2({
   "../../node_modules/.pnpm/merge-stream@2.0.0/node_modules/merge-stream/index.js"(exports2, module2) {
     "use strict";
-    var { PassThrough } = __require("stream");
+    var { PassThrough } = require("stream");
     module2.exports = function() {
       var sources = [];
       var output = new PassThrough({ objectMode: true });
@@ -26696,8 +26689,8 @@ var require_command2 = __commonJS2({
 var require_execa2 = __commonJS2({
   "../../node_modules/.pnpm/execa@5.1.1/node_modules/execa/index.js"(exports2, module2) {
     "use strict";
-    var path6 = __require("path");
-    var childProcess = __require("child_process");
+    var path6 = require("path");
+    var childProcess = require("child_process");
     var crossSpawn = require_cross_spawn2();
     var stripFinalNewline = require_strip_final_newline2();
     var npmRunPath = require_npm_run_path2();
@@ -27216,7 +27209,7 @@ var require_p_retry2 = __commonJS2({
 var require_http_parser = __commonJS2({
   "../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/node/http-parser.js"(exports2, module2) {
     "use strict";
-    var common = __require("_http_common");
+    var common = require("_http_common");
     if (common.HTTPParser) {
       module2.exports = common.HTTPParser;
     } else {
@@ -27416,11 +27409,11 @@ var require_errors = __commonJS2({
 var require_util4 = __commonJS2({
   "../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/core/util.js"(exports2, module2) {
     "use strict";
-    var assert = __require("assert");
+    var assert = require("assert");
     var { kDestroyed } = require_symbols();
-    var { IncomingMessage } = __require("http");
-    var util2 = __require("util");
-    var net2 = __require("net");
+    var { IncomingMessage } = require("http");
+    var util2 = require("util");
+    var net2 = require("net");
     var { InvalidArgumentError } = require_errors();
     function nop() {
     }
@@ -27588,7 +27581,7 @@ var require_request = __commonJS2({
       NotSupportedError
     } = require_errors();
     var util2 = require_util4();
-    var assert = __require("assert");
+    var assert = require("assert");
     var kHandler = Symbol("handler");
     var REGEXP_ABSOLUTE_URL = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x00a1-\xffff0-9]+-?)*[a-z\x00a1-\xffff0-9]+)(?:\.(?:[a-z\x00a1-\xffff0-9]+-?)*[a-z\x00a1-\xffff0-9]+)*(?:\.(?:[a-z\x00a1-\xffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/ius;
     var Request = /* @__PURE__ */ __name(class {
@@ -27737,11 +27730,11 @@ var require_request = __commonJS2({
 var require_client = __commonJS2({
   "../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/core/client.js"(exports2, module2) {
     "use strict";
-    var net2 = __require("net");
-    var tls = __require("tls");
+    var net2 = require("net");
+    var tls = require("tls");
     var HTTPParser = require_http_parser();
-    var EventEmitter4 = __require("events");
-    var assert = __require("assert");
+    var EventEmitter4 = require("events");
+    var assert = require("assert");
     var util2 = require_util4();
     var Request = require_request();
     var {
@@ -28855,13 +28848,13 @@ var require_abort_signal = __commonJS2({
 var require_client_request = __commonJS2({
   "../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/client-request.js"(exports2, module2) {
     "use strict";
-    var { Readable } = __require("stream");
+    var { Readable } = require("stream");
     var {
       InvalidArgumentError,
       RequestAbortedError
     } = require_errors();
     var util2 = require_util4();
-    var { AsyncResource: AsyncResource2 } = __require("async_hooks");
+    var { AsyncResource: AsyncResource2 } = require("async_hooks");
     var { addSignal, removeSignal } = require_abort_signal();
     var kAbort = Symbol("abort");
     var RequestResponse = /* @__PURE__ */ __name(class extends Readable {
@@ -28996,14 +28989,14 @@ var require_client_request = __commonJS2({
 var require_client_stream = __commonJS2({
   "../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/client-stream.js"(exports2, module2) {
     "use strict";
-    var { finished } = __require("stream");
+    var { finished } = require("stream");
     var {
       InvalidArgumentError,
       InvalidReturnValueError,
       RequestAbortedError
     } = require_errors();
     var util2 = require_util4();
-    var { AsyncResource: AsyncResource2 } = __require("async_hooks");
+    var { AsyncResource: AsyncResource2 } = require("async_hooks");
     var { addSignal, removeSignal } = require_abort_signal();
     var StreamHandler = /* @__PURE__ */ __name(class extends AsyncResource2 {
       constructor(opts2, factory, callback) {
@@ -29142,15 +29135,15 @@ var require_client_pipeline = __commonJS2({
       Readable,
       Duplex,
       PassThrough
-    } = __require("stream");
+    } = require("stream");
     var {
       InvalidArgumentError,
       InvalidReturnValueError,
       RequestAbortedError
     } = require_errors();
     var util2 = require_util4();
-    var { AsyncResource: AsyncResource2 } = __require("async_hooks");
-    var { assert } = __require("console");
+    var { AsyncResource: AsyncResource2 } = require("async_hooks");
+    var { assert } = require("console");
     var { addSignal, removeSignal } = require_abort_signal();
     var kResume = Symbol("resume");
     var PipelineRequest = /* @__PURE__ */ __name(class extends Readable {
@@ -29341,10 +29334,10 @@ var require_client_upgrade = __commonJS2({
   "../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/client-upgrade.js"(exports2, module2) {
     "use strict";
     var { InvalidArgumentError, RequestAbortedError } = require_errors();
-    var { AsyncResource: AsyncResource2 } = __require("async_hooks");
+    var { AsyncResource: AsyncResource2 } = require("async_hooks");
     var util2 = require_util4();
     var { addSignal, removeSignal } = require_abort_signal();
-    var assert = __require("assert");
+    var assert = require("assert");
     var UpgradeHandler = /* @__PURE__ */ __name(class extends AsyncResource2 {
       constructor(opts2, callback) {
         if (!opts2 || typeof opts2 !== "object") {
@@ -29429,7 +29422,7 @@ var require_client_connect = __commonJS2({
   "../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/client-connect.js"(exports2, module2) {
     "use strict";
     var { InvalidArgumentError, RequestAbortedError } = require_errors();
-    var { AsyncResource: AsyncResource2 } = __require("async_hooks");
+    var { AsyncResource: AsyncResource2 } = require("async_hooks");
     var util2 = require_util4();
     var { addSignal, removeSignal } = require_abort_signal();
     var ConnectHandler = /* @__PURE__ */ __name(class extends AsyncResource2 {
@@ -29512,7 +29505,7 @@ var require_client_connect = __commonJS2({
 var require_pool = __commonJS2({
   "../../node_modules/.pnpm/undici@3.3.6/node_modules/undici/lib/pool.js"(exports2, module2) {
     "use strict";
-    var EventEmitter4 = __require("events");
+    var EventEmitter4 = require("events");
     var Client2 = require_client();
     var {
       ClientClosedError,
@@ -29954,9 +29947,9 @@ var require_arg = __commonJS2({
 });
 var require_main3 = __commonJS2({
   "../../node_modules/.pnpm/dotenv@10.0.0/node_modules/dotenv/lib/main.js"(exports2, module2) {
-    var fs7 = __require("fs");
-    var path6 = __require("path");
-    var os2 = __require("os");
+    var fs7 = require("fs");
+    var path6 = require("path");
+    var os2 = require("os");
     function log4(message) {
       console.log(`[dotenv][DEBUG] ${message}`);
     }
@@ -30039,7 +30032,7 @@ var require_dist10 = __commonJS2({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.sqltag = exports2.empty = exports2.raw = exports2.join = exports2.Sql = void 0;
-    var util_12 = __require("util");
+    var util_12 = require("util");
     var Sql2 = /* @__PURE__ */ __name(class {
       constructor(rawStrings, rawValues) {
         let valuesLength = rawValues.length;
@@ -30125,7 +30118,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.4.2",
+      version: "3.5.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -30184,13 +30177,13 @@ var require_package2 = __commonJS2({
         "index-browser.js"
       ],
       devDependencies: {
-        "@microsoft/api-extractor": "7.18.17",
+        "@microsoft/api-extractor": "7.18.19",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
-        "@prisma/fetch-engine": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
+        "@prisma/engines": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
+        "@prisma/fetch-engine": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9",
+        "@prisma/get-platform": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@timsuchanek/copy": "1.4.5",
@@ -30198,7 +30191,7 @@ var require_package2 = __commonJS2({
         "@types/jest": "27.0.2",
         "@types/js-levenshtein": "1.1.0",
         "@types/mssql": "6.0.8",
-        "@types/node": "12.20.36",
+        "@types/node": "12.20.37",
         "@types/pg": "8.6.1",
         "@typescript-eslint/eslint-plugin": "4.33.0",
         "@typescript-eslint/parser": "4.33.0",
@@ -30206,11 +30199,11 @@ var require_package2 = __commonJS2({
         benchmark: "2.1.4",
         chalk: "4.1.2",
         "decimal.js": "10.3.1",
-        esbuild: "0.13.9",
+        esbuild: "0.13.13",
         eslint: "7.32.0",
         "eslint-config-prettier": "8.3.0",
         "eslint-plugin-eslint-comments": "3.2.0",
-        "eslint-plugin-jest": "25.2.2",
+        "eslint-plugin-jest": "25.2.4",
         "eslint-plugin-prettier": "4.0.0",
         execa: "5.1.1",
         "flat-map-polyfill": "0.3.8",
@@ -30222,7 +30215,7 @@ var require_package2 = __commonJS2({
         jest: "27.3.1",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
-        "lint-staged": "11.2.6",
+        "lint-staged": "12.0.1",
         "lz-string": "1.4.4",
         "make-dir": "3.1.0",
         mariadb: "2.5.5",
@@ -30253,7 +30246,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9"
+        "@prisma/engines-version": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e"
       },
       "lint-staged": {
         "*.ts": [
@@ -30715,7 +30708,7 @@ var require_lz_string = __commonJS2({
       };
       return LZString2;
     }();
-    if (typeof define === "function" && define.amd) {
+    if (typeof define === "function" && false) {
       define(function() {
         return LZString;
       });
@@ -33423,10 +33416,8 @@ __name2(isGroupByOutputName, "isGroupByOutputName");
 var DMMFClass = /* @__PURE__ */ __name(class {
   constructor({ datamodel, schema, mappings }) {
     this.outputTypeToMergedOutputType = (outputType) => {
-      const model = this.modelMap[outputType.name];
       return {
         ...outputType,
-        isEmbedded: model ? model.isEmbedded : false,
         fields: outputType.fields
       };
     };
@@ -34444,9 +34435,9 @@ function parseStack({
   });
   if (process.env.NODE_ENV !== "production" && trace && trace.file && trace.lineNumber && trace.column) {
     const lineNumber = trace.lineNumber;
-    const printedFileName = renderPathRelative ? __require("path").relative(process.cwd(), trace.file) : trace.file;
+    const printedFileName = renderPathRelative ? require("path").relative(process.cwd(), trace.file) : trace.file;
     const start = Math.max(0, lineNumber - 4);
-    const fs7 = __require("fs");
+    const fs7 = require("fs");
     const exists4 = fs7.existsSync(trace.file);
     if (exists4) {
       const file2 = fs7.readFileSync(trace.file, "utf-8");
@@ -35197,12 +35188,6 @@ function getDefaultSelection(outputType) {
   for (const f of outputType.fields) {
     if (f.outputType.location === "scalar" || f.outputType.location === "enumTypes") {
       acc[f.name] = true;
-    } else {
-      if (f.outputType.type.isEmbedded) {
-        acc[f.name] = {
-          select: getDefaultSelection(f.outputType.type)
-        };
-      }
     }
   }
   return acc;
@@ -35959,15 +35944,26 @@ how you used Prisma Client in the issue.
 __name(getErrorMessageWithLink, "getErrorMessageWithLink");
 __name2(getErrorMessageWithLink, "getErrorMessageWithLink");
 __name10(getErrorMessageWithLink, "getErrorMessageWithLink");
-var import_indent_string3 = __toModule22(require_indent_string2());
 var __defProp12 = Object.defineProperty;
 var __name11 = /* @__PURE__ */ __name2((target, value) => __defProp12(target, "name", { value, configurable: true }), "__name");
+function prismaGraphQLToJSError(error2, clientVersion2) {
+  if (error2.user_facing_error.error_code) {
+    return new PrismaClientKnownRequestError(error2.user_facing_error.message, error2.user_facing_error.error_code, clientVersion2, error2.user_facing_error.meta);
+  }
+  return new PrismaClientUnknownRequestError(error2.error, clientVersion2);
+}
+__name(prismaGraphQLToJSError, "prismaGraphQLToJSError");
+__name2(prismaGraphQLToJSError, "prismaGraphQLToJSError");
+__name11(prismaGraphQLToJSError, "prismaGraphQLToJSError");
+var import_indent_string3 = __toModule22(require_indent_string2());
+var __defProp13 = Object.defineProperty;
+var __name12 = /* @__PURE__ */ __name2((target, value) => __defProp13(target, "name", { value, configurable: true }), "__name");
 function printGeneratorConfig(config2) {
   return String(new GeneratorConfigClass(config2));
 }
 __name(printGeneratorConfig, "printGeneratorConfig");
 __name2(printGeneratorConfig, "printGeneratorConfig");
-__name11(printGeneratorConfig, "printGeneratorConfig");
+__name12(printGeneratorConfig, "printGeneratorConfig");
 var GeneratorConfigClass = /* @__PURE__ */ __name(class {
   constructor(config2) {
     this.config = config2;
@@ -35985,7 +35981,7 @@ ${(0, import_indent_string3.default)(printDatamodelObject(obj), 2)}
   }
 }, "GeneratorConfigClass");
 __name2(GeneratorConfigClass, "GeneratorConfigClass");
-__name11(GeneratorConfigClass, "GeneratorConfigClass");
+__name12(GeneratorConfigClass, "GeneratorConfigClass");
 function getOriginalBinaryTargetsValue(binaryTargets) {
   let value;
   if (binaryTargets.length > 0) {
@@ -36002,14 +35998,14 @@ function getOriginalBinaryTargetsValue(binaryTargets) {
 }
 __name(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
 __name2(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
-__name11(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
+__name12(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
 function printDatamodelObject(obj) {
   const maxLength = Object.keys(obj).reduce((max2, curr) => Math.max(max2, curr.length), 0);
   return Object.entries(obj).map(([key, value]) => `${key.padEnd(maxLength)} = ${niceStringify(value)}`).join("\n");
 }
 __name(printDatamodelObject, "printDatamodelObject");
 __name2(printDatamodelObject, "printDatamodelObject");
-__name11(printDatamodelObject, "printDatamodelObject");
+__name12(printDatamodelObject, "printDatamodelObject");
 function niceStringify(value) {
   return JSON.parse(JSON.stringify(value, (_, value2) => {
     if (Array.isArray(value2)) {
@@ -36020,22 +36016,22 @@ function niceStringify(value) {
 }
 __name(niceStringify, "niceStringify");
 __name2(niceStringify, "niceStringify");
-__name11(niceStringify, "niceStringify");
-var __defProp13 = Object.defineProperty;
-var __name12 = /* @__PURE__ */ __name2((target, value) => __defProp13(target, "name", { value, configurable: true }), "__name");
+__name12(niceStringify, "niceStringify");
+var __defProp14 = Object.defineProperty;
+var __name13 = /* @__PURE__ */ __name2((target, value) => __defProp14(target, "name", { value, configurable: true }), "__name");
 var debug4 = (0, import_debug4.default)("prisma:client:libraryEngine");
 function isQueryEvent(event) {
   return event["item_type"] === "query" && "query" in event;
 }
 __name(isQueryEvent, "isQueryEvent");
 __name2(isQueryEvent, "isQueryEvent");
-__name12(isQueryEvent, "isQueryEvent");
+__name13(isQueryEvent, "isQueryEvent");
 function isPanicEvent(event) {
   return event.level === "error" && event["message"] === "PANIC";
 }
 __name(isPanicEvent, "isPanicEvent");
 __name2(isPanicEvent, "isPanicEvent");
-__name12(isPanicEvent, "isPanicEvent");
+__name13(isPanicEvent, "isPanicEvent");
 var knownPlatforms = [...import_get_platform.platforms, "native"];
 var engines = [];
 var LibraryEngine = /* @__PURE__ */ __name(class extends Engine {
@@ -36302,13 +36298,6 @@ You may have to run ${import_chalk7.default.greenBright("prisma generate")} for 
     this.versionInfo = (_a2 = this.library) == null ? void 0 : _a2.version();
     return (_c = (_b2 = this.versionInfo) == null ? void 0 : _b2.version) != null ? _c : "unknown";
   }
-  prismaGraphQLToJSError(error2) {
-    debug4("graphQLToJSError");
-    if (error2.user_facing_error.error_code) {
-      return new PrismaClientKnownRequestError(error2.user_facing_error.message, error2.user_facing_error.error_code, this.config.clientVersion, error2.user_facing_error.meta);
-    }
-    return new PrismaClientUnknownRequestError(error2.error, this.config.clientVersion);
-  }
   async request(query2, headers = {}, numTry = 1) {
     var _a2;
     debug4(`sending request, this.libraryStarted: ${this.libraryStarted}`);
@@ -36322,7 +36311,7 @@ You may have to run ${import_chalk7.default.greenBright("prisma generate")} for 
       const data = this.parseEngineResponse(await this.executingQueryPromise);
       if (data.errors) {
         if (data.errors.length === 1) {
-          throw this.prismaGraphQLToJSError(data.errors[0]);
+          throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
         }
         throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
       } else if (this.loggerRustPanic) {
@@ -36355,7 +36344,7 @@ ${error2.backtrace}`, this.config.clientVersion);
     const data = this.parseEngineResponse(result);
     if (data.errors) {
       if (data.errors.length === 1) {
-        throw this.prismaGraphQLToJSError(data.errors[0]);
+        throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
       }
       throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
     }
@@ -36364,7 +36353,7 @@ ${error2.backtrace}`, this.config.clientVersion);
       return batchResult.map((result2) => {
         var _a2;
         if (result2.errors) {
-          return (_a2 = this.loggerRustPanic) != null ? _a2 : this.prismaGraphQLToJSError(result2.errors[0]);
+          return (_a2 = this.loggerRustPanic) != null ? _a2 : prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
         }
         return {
           data: result2,
@@ -36478,7 +36467,7 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
   }
 }, "LibraryEngine");
 __name2(LibraryEngine, "LibraryEngine");
-__name12(LibraryEngine, "LibraryEngine");
+__name13(LibraryEngine, "LibraryEngine");
 function hookProcess(handler, exit = false) {
   process.once(handler, async () => {
     debug4(`hookProcess received: ${handler}`);
@@ -36493,14 +36482,13 @@ function hookProcess(handler, exit = false) {
 }
 __name(hookProcess, "hookProcess");
 __name2(hookProcess, "hookProcess");
-__name12(hookProcess, "hookProcess");
+__name13(hookProcess, "hookProcess");
 var hooksInitialized = false;
 function initHooks() {
   if (!hooksInitialized) {
     hookProcess("beforeExit");
     hookProcess("exit");
     hookProcess("SIGINT", true);
-    hookProcess("SIGUSR1", true);
     hookProcess("SIGUSR2", true);
     hookProcess("SIGTERM", true);
     hooksInitialized = true;
@@ -36508,21 +36496,21 @@ function initHooks() {
 }
 __name(initHooks, "initHooks");
 __name2(initHooks, "initHooks");
-__name12(initHooks, "initHooks");
+__name13(initHooks, "initHooks");
 var import_debug5 = __toModule22(require_dist7());
 var import_engines2 = __toModule22(require_dist8());
 var import_get_platform2 = __toModule22(require_dist9());
 var import_chalk8 = __toModule22(require_source2());
 var import_execa = __toModule22(require_execa2());
 var import_p_retry = __toModule22(require_p_retry2());
-var __defProp14 = Object.defineProperty;
-var __name13 = /* @__PURE__ */ __name2((target, value) => __defProp14(target, "name", { value, configurable: true }), "__name");
+var __defProp15 = Object.defineProperty;
+var __name14 = /* @__PURE__ */ __name2((target, value) => __defProp15(target, "name", { value, configurable: true }), "__name");
 function byline(readStream, options2) {
   return module.exports.createStream(readStream, options2);
 }
 __name(byline, "byline");
 __name2(byline, "byline");
-__name13(byline, "byline");
+__name14(byline, "byline");
 module.exports.createStream = function(readStream, options2) {
   if (readStream) {
     return createLineStream(readStream, options2);
@@ -36543,7 +36531,7 @@ function createLineStream(readStream, options2) {
 }
 __name(createLineStream, "createLineStream");
 __name2(createLineStream, "createLineStream");
-__name13(createLineStream, "createLineStream");
+__name14(createLineStream, "createLineStream");
 module.exports.LineStream = LineStream;
 function LineStream(options2) {
   import_stream.default.Transform.call(this, options2);
@@ -36562,7 +36550,7 @@ function LineStream(options2) {
 }
 __name(LineStream, "LineStream");
 __name2(LineStream, "LineStream");
-__name13(LineStream, "LineStream");
+__name14(LineStream, "LineStream");
 import_util2.default.inherits(LineStream, import_stream.default.Transform);
 LineStream.prototype._transform = function(chunk, encoding, done) {
   encoding = encoding || "utf8";
@@ -36614,8 +36602,8 @@ LineStream.prototype._reencode = function(line, chunkEncoding) {
     return Buffer.from(line, chunkEncoding);
   }
 };
-var __defProp15 = Object.defineProperty;
-var __name14 = /* @__PURE__ */ __name2((target, value) => __defProp15(target, "name", { value, configurable: true }), "__name");
+var __defProp16 = Object.defineProperty;
+var __name15 = /* @__PURE__ */ __name2((target, value) => __defProp16(target, "name", { value, configurable: true }), "__name");
 function getMessage(log4) {
   if (typeof log4 === "string") {
     return log4;
@@ -36628,7 +36616,7 @@ function getMessage(log4) {
 }
 __name(getMessage, "getMessage");
 __name2(getMessage, "getMessage");
-__name14(getMessage, "getMessage");
+__name15(getMessage, "getMessage");
 function getBacktraceFromLog(log4) {
   var _a2, _b2, _c, _d, _e, _f, _g;
   if ((_a2 = log4.fields) == null ? void 0 : _a2.message) {
@@ -36652,7 +36640,7 @@ ${(_g = log4.fields) == null ? void 0 : _g.reason}`;
 }
 __name(getBacktraceFromLog, "getBacktraceFromLog");
 __name2(getBacktraceFromLog, "getBacktraceFromLog");
-__name14(getBacktraceFromLog, "getBacktraceFromLog");
+__name15(getBacktraceFromLog, "getBacktraceFromLog");
 function getBacktraceFromRustError(err) {
   let str = "";
   if (err.is_panic) {
@@ -36669,26 +36657,26 @@ ${err.message}`;
 }
 __name(getBacktraceFromRustError, "getBacktraceFromRustError");
 __name2(getBacktraceFromRustError, "getBacktraceFromRustError");
-__name14(getBacktraceFromRustError, "getBacktraceFromRustError");
+__name15(getBacktraceFromRustError, "getBacktraceFromRustError");
 function isRustLog(e) {
   return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
 }
 __name(isRustLog, "isRustLog");
 __name2(isRustLog, "isRustLog");
-__name14(isRustLog, "isRustLog");
+__name15(isRustLog, "isRustLog");
 function isRustErrorLog(e) {
   var _a2, _b2;
   return isRustLog(e) && (e.level === "error" || ((_b2 = (_a2 = e.fields) == null ? void 0 : _a2.message) == null ? void 0 : _b2.includes("fatal error")));
 }
 __name(isRustErrorLog, "isRustErrorLog");
 __name2(isRustErrorLog, "isRustErrorLog");
-__name14(isRustErrorLog, "isRustErrorLog");
+__name15(isRustErrorLog, "isRustErrorLog");
 function isRustError(e) {
   return typeof e.is_panic !== "undefined";
 }
 __name(isRustError, "isRustError");
 __name2(isRustError, "isRustError");
-__name14(isRustError, "isRustError");
+__name15(isRustError, "isRustError");
 function convertLog(rustLog) {
   const isQuery = isQueryLog(rustLog.fields);
   const level = isQuery ? "query" : rustLog.level.toLowerCase();
@@ -36700,15 +36688,15 @@ function convertLog(rustLog) {
 }
 __name(convertLog, "convertLog");
 __name2(convertLog, "convertLog");
-__name14(convertLog, "convertLog");
+__name15(convertLog, "convertLog");
 function isQueryLog(fields) {
   return Boolean(fields.query);
 }
 __name(isQueryLog, "isQueryLog");
 __name2(isQueryLog, "isQueryLog");
-__name14(isQueryLog, "isQueryLog");
-var __defProp16 = Object.defineProperty;
-var __name15 = /* @__PURE__ */ __name2((target, value) => __defProp16(target, "name", { value, configurable: true }), "__name");
+__name15(isQueryLog, "isQueryLog");
+var __defProp17 = Object.defineProperty;
+var __name16 = /* @__PURE__ */ __name2((target, value) => __defProp17(target, "name", { value, configurable: true }), "__name");
 var PrismaClientRustError = /* @__PURE__ */ __name(class extends Error {
   constructor({ clientVersion: clientVersion2, log: log4, error: error2 }) {
     if (log4) {
@@ -36727,9 +36715,9 @@ var PrismaClientRustError = /* @__PURE__ */ __name(class extends Error {
   }
 }, "PrismaClientRustError");
 __name2(PrismaClientRustError, "PrismaClientRustError");
-__name15(PrismaClientRustError, "PrismaClientRustError");
-var __defProp17 = Object.defineProperty;
-var __name16 = /* @__PURE__ */ __name2((target, value) => __defProp17(target, "name", { value, configurable: true }), "__name");
+__name16(PrismaClientRustError, "PrismaClientRustError");
+var __defProp18 = Object.defineProperty;
+var __name17 = /* @__PURE__ */ __name2((target, value) => __defProp18(target, "name", { value, configurable: true }), "__name");
 function omit2(obj, keys2) {
   return Object.keys(obj).filter((key) => !keys2.includes(key)).reduce((result, key) => {
     result[key] = obj[key];
@@ -36738,7 +36726,7 @@ function omit2(obj, keys2) {
 }
 __name(omit2, "omit2");
 __name2(omit2, "omit");
-__name16(omit2, "omit");
+__name17(omit2, "omit");
 var import_get_stream = __toModule22(require_get_stream2());
 var import_index = __toModule22(require_undici());
 var Client = import_index.default.Client;
@@ -36749,8 +36737,8 @@ var request2 = import_index.default.request;
 var stream2 = import_index.default.stream;
 var pipeline = import_index.default.pipeline;
 var setGlobalAgent = import_index.default.setGlobalAgent;
-var __defProp18 = Object.defineProperty;
-var __name17 = /* @__PURE__ */ __name2((target, value) => __defProp18(target, "name", { value, configurable: true }), "__name");
+var __defProp19 = Object.defineProperty;
+var __name18 = /* @__PURE__ */ __name2((target, value) => __defProp19(target, "name", { value, configurable: true }), "__name");
 function assertHasPool(pool) {
   if (pool === void 0) {
     throw new Error("Connection has not been opened");
@@ -36758,7 +36746,7 @@ function assertHasPool(pool) {
 }
 __name(assertHasPool, "assertHasPool");
 __name2(assertHasPool, "assertHasPool");
-__name17(assertHasPool, "assertHasPool");
+__name18(assertHasPool, "assertHasPool");
 var Connection = /* @__PURE__ */ __name(class {
   constructor() {
   }
@@ -36814,12 +36802,12 @@ var Connection = /* @__PURE__ */ __name(class {
   }
 }, "Connection");
 __name2(Connection, "Connection");
-__name17(Connection, "Connection");
-var __defProp19 = Object.defineProperty;
-var __name18 = /* @__PURE__ */ __name2((target, value) => __defProp19(target, "name", { value, configurable: true }), "__name");
+__name18(Connection, "Connection");
+var __defProp20 = Object.defineProperty;
+var __name19 = /* @__PURE__ */ __name2((target, value) => __defProp20(target, "name", { value, configurable: true }), "__name");
 var debug5 = (0, import_debug5.default)("prisma:engine");
 var exists2 = (0, import_util.promisify)(import_fs3.default.exists);
-var logger = /* @__PURE__ */ __name18((...args) => {
+var logger = /* @__PURE__ */ __name19((...args) => {
 }, "logger");
 var knownPlatforms2 = [...import_get_platform2.platforms, "native"];
 var engines2 = [];
@@ -37246,11 +37234,11 @@ ${import_chalk8.default.dim("In case we're mistaken, please report this to us \u
             debug5("stdout", getMessage(json));
             if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b3 = (_a3 = json.fields) == null ? void 0 : _a3.message) == null ? void 0 : _b3.startsWith("Started http server"))) {
               if (this.useUds) {
-                this.connection.open("http://localhost", {
+                this.connection.open("http://127.0.0.1", {
                   socketPath: this.socketPath
                 });
               } else {
-                this.connection.open(`http://localhost:${this.port}`);
+                this.connection.open(`http://127.0.0.1:${this.port}`);
               }
               this.engineStartDeferred.resolve();
               this.engineStartDeferred = void 0;
@@ -37468,7 +37456,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       const { data, headers: headers2 } = await this.currentRequestPromise;
       if (data.errors) {
         if (data.errors.length === 1) {
-          throw this.graphQLToJSError(data.errors[0]);
+          throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
         }
         throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.clientVersion);
       }
@@ -37505,7 +37493,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       if (Array.isArray(batchResult)) {
         return batchResult.map((result) => {
           if (result.errors) {
-            throw this.graphQLToJSError(result.errors[0]);
+            throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
           }
           return {
             data: result,
@@ -37513,7 +37501,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
           };
         });
       } else {
-        throw this.graphQLToJSError(errors2[0]);
+        throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
       }
     }).catch(async (e) => {
       const isError2 = await this.handleRequestError(e, numTry < 3);
@@ -37581,21 +37569,15 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       query: this.lastQuery
     });
   }
-  graphQLToJSError(error2) {
-    if (error2.user_facing_error.error_code) {
-      return new PrismaClientKnownRequestError(error2.user_facing_error.message, error2.user_facing_error.error_code, this.clientVersion, error2.user_facing_error.meta);
-    }
-    return new PrismaClientUnknownRequestError(error2.user_facing_error.message, this.clientVersion);
-  }
 }, "BinaryEngine");
 __name2(BinaryEngine, "BinaryEngine");
-__name18(BinaryEngine, "BinaryEngine");
+__name19(BinaryEngine, "BinaryEngine");
 function stringifyQuery(q) {
   return `{"variables":{},"query":${JSON.stringify(q)}}`;
 }
 __name(stringifyQuery, "stringifyQuery");
 __name2(stringifyQuery, "stringifyQuery");
-__name18(stringifyQuery, "stringifyQuery");
+__name19(stringifyQuery, "stringifyQuery");
 function hookProcess2(handler, exit = false) {
   process.once(handler, async () => {
     for (const engine of engines2) {
@@ -37618,14 +37600,13 @@ function hookProcess2(handler, exit = false) {
 }
 __name(hookProcess2, "hookProcess2");
 __name2(hookProcess2, "hookProcess");
-__name18(hookProcess2, "hookProcess");
+__name19(hookProcess2, "hookProcess");
 var hooksInitialized2 = false;
 function initHooks2() {
   if (!hooksInitialized2) {
     hookProcess2("beforeExit");
     hookProcess2("exit");
     hookProcess2("SIGINT", true);
-    hookProcess2("SIGUSR1", true);
     hookProcess2("SIGUSR2", true);
     hookProcess2("SIGTERM", true);
     hooksInitialized2 = true;
@@ -37633,13 +37614,13 @@ function initHooks2() {
 }
 __name(initHooks2, "initHooks2");
 __name2(initHooks2, "initHooks");
-__name18(initHooks2, "initHooks");
+__name19(initHooks2, "initHooks");
 function transactionHttpErrorHandler(result) {
   throw result.data;
 }
 __name(transactionHttpErrorHandler, "transactionHttpErrorHandler");
 __name2(transactionHttpErrorHandler, "transactionHttpErrorHandler");
-__name18(transactionHttpErrorHandler, "transactionHttpErrorHandler");
+__name19(transactionHttpErrorHandler, "transactionHttpErrorHandler");
 function runtimeHeadersToHttpHeaders(headers) {
   return Object.keys(headers).reduce((acc, runtimeHeaderKey) => {
     let httpHeaderKey = runtimeHeaderKey;
@@ -37652,9 +37633,9 @@ function runtimeHeadersToHttpHeaders(headers) {
 }
 __name(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
 __name2(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
-__name18(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
-var __defProp20 = Object.defineProperty;
-var __name19 = /* @__PURE__ */ __name2((target, value) => __defProp20(target, "name", { value, configurable: true }), "__name");
+__name19(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
+var __defProp21 = Object.defineProperty;
+var __name20 = /* @__PURE__ */ __name2((target, value) => __defProp21(target, "name", { value, configurable: true }), "__name");
 function getJSRuntimeName() {
   if (typeof self === "undefined") {
     return "node";
@@ -37663,12 +37644,12 @@ function getJSRuntimeName() {
 }
 __name(getJSRuntimeName, "getJSRuntimeName");
 __name2(getJSRuntimeName, "getJSRuntimeName");
-__name19(getJSRuntimeName, "getJSRuntimeName");
-var __defProp21 = Object.defineProperty;
-var __name20 = /* @__PURE__ */ __name2((target, value) => __defProp21(target, "name", { value, configurable: true }), "__name");
+__name20(getJSRuntimeName, "getJSRuntimeName");
+var __defProp222 = Object.defineProperty;
+var __name21 = /* @__PURE__ */ __name2((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
 async function request3(url2, options2 = {}) {
-  const jsRuntimeName2 = getJSRuntimeName();
-  if (jsRuntimeName2 === "browser") {
+  const jsRuntimeName = getJSRuntimeName();
+  if (jsRuntimeName === "browser") {
     return fetch(url2, options2);
   } else {
     return nodeFetch(url2, options2);
@@ -37676,7 +37657,7 @@ async function request3(url2, options2 = {}) {
 }
 __name(request3, "request3");
 __name2(request3, "request");
-__name20(request3, "request");
+__name21(request3, "request");
 function buildHeaders(options2) {
   return {
     ...options2.headers,
@@ -37685,7 +37666,7 @@ function buildHeaders(options2) {
 }
 __name(buildHeaders, "buildHeaders");
 __name2(buildHeaders, "buildHeaders");
-__name20(buildHeaders, "buildHeaders");
+__name21(buildHeaders, "buildHeaders");
 function buildOptions(options2) {
   return {
     method: options2.method,
@@ -37694,7 +37675,7 @@ function buildOptions(options2) {
 }
 __name(buildOptions, "buildOptions");
 __name2(buildOptions, "buildOptions");
-__name20(buildOptions, "buildOptions");
+__name21(buildOptions, "buildOptions");
 function buildResponse(incomingData2, response) {
   return {
     json: () => JSON.parse(Buffer.concat(incomingData2).toString()),
@@ -37705,11 +37686,12 @@ function buildResponse(incomingData2, response) {
 }
 __name(buildResponse, "buildResponse");
 __name2(buildResponse, "buildResponse");
-__name20(buildResponse, "buildResponse");
+__name21(buildResponse, "buildResponse");
 function nodeFetch(url, options = {}) {
   const httpsOptions = buildOptions(options);
   const incomingData = [];
   return new Promise((resolve, reject) => {
+    var _a2;
     const https = eval(`require('https')`);
     const request = https.request(url, httpsOptions, (response) => {
       response.on("data", (chunk) => incomingData.push(chunk));
@@ -37717,34 +37699,16 @@ function nodeFetch(url, options = {}) {
       response.on("error", reject);
     });
     request.on("error", reject);
-    request.write(options.body);
+    request.write((_a2 = options.body) != null ? _a2 : "");
     request.end();
   });
 }
 __name(nodeFetch, "nodeFetch");
 __name2(nodeFetch, "nodeFetch");
-__name20(nodeFetch, "nodeFetch");
-var __defProp222 = Object.defineProperty;
-var __name21 = /* @__PURE__ */ __name2((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
-async function createSchemaHash(inlineSchema) {
-  const schemaBuffer = Buffer.from(inlineSchema);
-  const jsRuntimeName = getJSRuntimeName();
-  if (jsRuntimeName === "node") {
-    const crypto = eval(`require('crypto')`);
-    const hash = crypto.createHash("sha256").update(schemaBuffer);
-    return hash.digest("hex");
-  } else if (jsRuntimeName === "browser") {
-    const hash2 = await crypto.subtle.digest("SHA-256", schemaBuffer);
-    return Buffer.from(hash2).toString("hex");
-  }
-  return "";
-}
-__name(createSchemaHash, "createSchemaHash");
-__name2(createSchemaHash, "createSchemaHash");
-__name21(createSchemaHash, "createSchemaHash");
+__name21(nodeFetch, "nodeFetch");
 var __defProp23 = Object.defineProperty;
 var __name222 = /* @__PURE__ */ __name2((target, value) => __defProp23(target, "name", { value, configurable: true }), "__name");
-var BACKOFF_INTERVAL = 250;
+var BACKOFF_INTERVAL = 50;
 function backOff(n) {
   const baseDelay = Math.pow(2, n) * BACKOFF_INTERVAL;
   const jitter = Math.ceil(Math.random() * baseDelay) - Math.ceil(baseDelay / 2);
@@ -37769,27 +37733,213 @@ __name2(getClientVersion, "getClientVersion");
 __name23(getClientVersion, "getClientVersion");
 var __defProp25 = Object.defineProperty;
 var __name24 = /* @__PURE__ */ __name2((target, value) => __defProp25(target, "name", { value, configurable: true }), "__name");
-var randomDebugId = Math.ceil(Math.random() * 1e3);
-var MAX_RETRIES = 5;
+var PrismaClientError = /* @__PURE__ */ __name(class extends Error {
+  constructor(message, info2) {
+    super(message);
+    this.clientVersion = info2.clientVersion;
+    this.cause = info2.cause;
+  }
+  get [Symbol.toStringTag]() {
+    return this.name;
+  }
+}, "PrismaClientError");
+__name2(PrismaClientError, "PrismaClientError");
+__name24(PrismaClientError, "PrismaClientError");
+var __defProp26 = Object.defineProperty;
+var __name25 = /* @__PURE__ */ __name2((target, value) => __defProp26(target, "name", { value, configurable: true }), "__name");
+var DataProxyError = /* @__PURE__ */ __name(class extends PrismaClientError {
+  constructor(message, info2) {
+    super(message, info2);
+    var _a2;
+    this.isRetryable = (_a2 = info2.isRetryable) != null ? _a2 : true;
+  }
+}, "DataProxyError");
+__name2(DataProxyError, "DataProxyError");
+__name25(DataProxyError, "DataProxyError");
+var __defProp27 = Object.defineProperty;
+var __name26 = /* @__PURE__ */ __name2((target, value) => __defProp27(target, "name", { value, configurable: true }), "__name");
+var DataProxyAPIError = /* @__PURE__ */ __name(class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, info2);
+    this.response = info2.response;
+  }
+}, "DataProxyAPIError");
+__name2(DataProxyAPIError, "DataProxyAPIError");
+__name26(DataProxyAPIError, "DataProxyAPIError");
+var __defProp28 = Object.defineProperty;
+var __name27 = /* @__PURE__ */ __name2((target, value) => __defProp28(target, "name", { value, configurable: true }), "__name");
+function setRetryable(info2, retryable) {
+  return {
+    ...info2,
+    isRetryable: retryable
+  };
+}
+__name(setRetryable, "setRetryable");
+__name2(setRetryable, "setRetryable");
+__name27(setRetryable, "setRetryable");
+var __defProp29 = Object.defineProperty;
+var __name28 = /* @__PURE__ */ __name2((target, value) => __defProp29(target, "name", { value, configurable: true }), "__name");
+var BadRequestError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+  constructor(info2) {
+    super("This request could not be understood by the server", setRetryable(info2, false));
+    this.name = "BadRequestError";
+    this.code = "P5000";
+  }
+}, "BadRequestError");
+__name2(BadRequestError, "BadRequestError");
+__name28(BadRequestError, "BadRequestError");
+var __defProp30 = Object.defineProperty;
+var __name29 = /* @__PURE__ */ __name2((target, value) => __defProp30(target, "name", { value, configurable: true }), "__name");
+var NotFoundError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Requested resource does not exist", setRetryable(info2, false));
+    this.name = "NotFoundError";
+    this.code = "P5003";
+  }
+}, "NotFoundError");
+__name2(NotFoundError, "NotFoundError");
+__name29(NotFoundError, "NotFoundError");
+var __defProp31 = Object.defineProperty;
+var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+var SchemaMissingError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Schema needs to be uploaded", setRetryable(info2, true));
+    this.name = "SchemaMissingError";
+    this.code = "P5005";
+  }
+}, "SchemaMissingError");
+__name2(SchemaMissingError, "SchemaMissingError");
+__name30(SchemaMissingError, "SchemaMissingError");
+var __defProp32 = Object.defineProperty;
+var __name31 = /* @__PURE__ */ __name2((target, value) => __defProp32(target, "name", { value, configurable: true }), "__name");
+var ServerError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Unknown server error", setRetryable(info2, true));
+    this.name = "ServerError";
+    this.code = "P5006";
+  }
+}, "ServerError");
+__name2(ServerError, "ServerError");
+__name31(ServerError, "ServerError");
+var __defProp33 = Object.defineProperty;
+var __name32 = /* @__PURE__ */ __name2((target, value) => __defProp33(target, "name", { value, configurable: true }), "__name");
+var UnauthorizedError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Unauthorized, check your connection string", setRetryable(info2, false));
+    this.name = "UnauthorizedError";
+    this.code = "P5007";
+  }
+}, "UnauthorizedError");
+__name2(UnauthorizedError, "UnauthorizedError");
+__name32(UnauthorizedError, "UnauthorizedError");
+var __defProp34 = Object.defineProperty;
+var __name33 = /* @__PURE__ */ __name2((target, value) => __defProp34(target, "name", { value, configurable: true }), "__name");
+var UsageExceededError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Usage exceeded, retry again later", setRetryable(info2, true));
+    this.name = "UsageExceededError";
+    this.code = "P5008";
+  }
+}, "UsageExceededError");
+__name2(UsageExceededError, "UsageExceededError");
+__name33(UsageExceededError, "UsageExceededError");
+var __defProp35 = Object.defineProperty;
+var __name34 = /* @__PURE__ */ __name2((target, value) => __defProp35(target, "name", { value, configurable: true }), "__name");
+async function responseToError(response, clientVersion2) {
+  var _a2;
+  if (response.ok)
+    return void 0;
+  const info2 = { clientVersion: clientVersion2, response };
+  if (response.status === 401) {
+    throw new UnauthorizedError(info2);
+  }
+  if (response.status === 404) {
+    try {
+      const body = await response.json();
+      const isSchemaMissing = ((_a2 = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _a2.reason) === "SchemaMissing";
+      return isSchemaMissing ? new SchemaMissingError(info2) : new NotFoundError(info2);
+    } catch (err) {
+      return new NotFoundError(info2);
+    }
+  }
+  if (response.status === 429) {
+    throw new UsageExceededError(info2);
+  }
+  if (response.status >= 500) {
+    throw new ServerError(info2);
+  }
+  if (response.status >= 400) {
+    throw new BadRequestError(info2);
+  }
+  return void 0;
+}
+__name(responseToError, "responseToError");
+__name2(responseToError, "responseToError");
+__name34(responseToError, "responseToError");
+var __defProp36 = Object.defineProperty;
+var __name35 = /* @__PURE__ */ __name2((target, value) => __defProp36(target, "name", { value, configurable: true }), "__name");
+var InvalidDatasourceError = /* @__PURE__ */ __name(class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, setRetryable(info2, false));
+    this.name = "InvalidDatasourceError";
+    this.code = "P5002";
+  }
+}, "InvalidDatasourceError");
+__name2(InvalidDatasourceError, "InvalidDatasourceError");
+__name35(InvalidDatasourceError, "InvalidDatasourceError");
+var __defProp37 = Object.defineProperty;
+var __name36 = /* @__PURE__ */ __name2((target, value) => __defProp37(target, "name", { value, configurable: true }), "__name");
+var NotImplementedYetError = /* @__PURE__ */ __name(class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, setRetryable(info2, false));
+    this.name = "NotImplementedYetError";
+    this.code = "P5004";
+  }
+}, "NotImplementedYetError");
+__name2(NotImplementedYetError, "NotImplementedYetError");
+__name36(NotImplementedYetError, "NotImplementedYetError");
+var __defProp38 = Object.defineProperty;
+var __name37 = /* @__PURE__ */ __name2((target, value) => __defProp38(target, "name", { value, configurable: true }), "__name");
+var ForcedRetryError = /* @__PURE__ */ __name(class extends DataProxyError {
+  constructor(info2) {
+    super("This request must be retried", setRetryable(info2, true));
+    this.name = "ForcedRetryError";
+    this.code = "P5001";
+  }
+}, "ForcedRetryError");
+__name2(ForcedRetryError, "ForcedRetryError");
+__name37(ForcedRetryError, "ForcedRetryError");
+var __defProp39 = Object.defineProperty;
+var __name38 = /* @__PURE__ */ __name2((target, value) => __defProp39(target, "name", { value, configurable: true }), "__name");
+var MAX_RETRIES = 10;
 var DataProxyEngine = /* @__PURE__ */ __name(class extends Engine {
   constructor(config2) {
     super();
-    var _a2, _b2, _c;
+    var _a2, _b2, _c, _d, _e;
     this.config = config2;
     this.env = (_a2 = this.config.env) != null ? _a2 : {};
     this.inlineSchema = (_b2 = config2.inlineSchema) != null ? _b2 : "";
     this.inlineDatasources = (_c = config2.inlineDatasources) != null ? _c : {};
+    this.inlineSchemaHash = (_d = config2.inlineSchemaHash) != null ? _d : "";
+    this.clientVersion = (_e = config2.clientVersion) != null ? _e : "unknown";
     this.logEmitter = new import_events3.default();
     this.logEmitter.on("error", () => {
     });
-    this.initPromise = this.init();
-  }
-  async init() {
     const [host, apiKey] = this.extractHostAndApiKey();
-    this.schemaHash = await createSchemaHash(this.inlineSchema);
-    this.clientVersion = getClientVersion(this.config);
+    this.remoteClientVersion = getClientVersion(this.config);
     this.headers = { Authorization: `Bearer ${apiKey}` };
     this.host = host;
+    const promise = Promise.resolve();
+    this.pushPromise = promise.then(() => this.pushSchema());
+  }
+  async pushSchema() {
+    const response = await request3(this.url("schema"), {
+      method: "GET",
+      headers: this.headers
+    });
+    if (response.status === 404) {
+      await this.uploadSchema();
+    }
   }
   version() {
     return "unknown";
@@ -37800,39 +37950,39 @@ var DataProxyEngine = /* @__PURE__ */ __name(class extends Engine {
   }
   on(event, listener) {
     if (event === "beforeExit") {
-      throw new Error("beforeExit event is not supported yet");
+      throw new NotImplementedYetError("beforeExit event is not yet supported", {
+        clientVersion: this.clientVersion
+      });
     } else {
       this.logEmitter.on(event, listener);
     }
   }
-  async url(s) {
-    await this.initPromise;
-    return `https://${this.host}/${this.clientVersion}/${this.schemaHash}/${s}?id=${randomDebugId}`;
+  url(s) {
+    return `https://${this.host}/${this.remoteClientVersion}/${this.inlineSchemaHash}/${s}`;
   }
   async getConfig() {
-    await this.initPromise;
-    return {
+    return Promise.resolve({
       datasources: [
         {
           activeProvider: this.config.activeProvider
         }
       ]
-    };
+    });
   }
   async uploadSchema() {
-    await this.initPromise;
-    const res = await request3(await this.url("schema"), {
+    const response = await request3(this.url("schema"), {
       method: "PUT",
       headers: this.headers,
-      body: this.config.inlineSchema
+      body: this.inlineSchema
     });
-    if (res) {
-      this.logEmitter.emit("info", {
-        message: `Schema (re)uploaded (hash: ${this.schemaHash})`
-      });
+    const err = await responseToError(response, this.clientVersion);
+    if (err) {
+      this.logEmitter.emit("warn", { message: `Error while uploading schema: ${err.message}` });
+      throw err;
     } else {
-      this.logEmitter.emit("warn", { message: "Could not upload the schema" });
-      throw new Error("Could not upload the schema");
+      this.logEmitter.emit("info", {
+        message: `Schema (re)uploaded (hash: ${this.inlineSchemaHash})`
+      });
     }
   }
   request(query2, headers, attempt = 0) {
@@ -37852,39 +38002,62 @@ ${queries.join("\n")}`
     return batchResult;
   }
   async requestInternal(body, headers, attempt) {
-    await this.initPromise;
+    var _a2;
+    await this.pushPromise;
     try {
       this.logEmitter.emit("info", {
-        message: `Calling ${await this.url("graphql")} (n=${attempt})`
+        message: `Calling ${this.url("graphql")} (n=${attempt})`
       });
-      const res = await request3(await this.url("graphql"), {
+      const response = await request3(this.url("graphql"), {
         method: "POST",
         headers: { ...headers, ...this.headers },
         body: JSON.stringify(body)
       });
-      if (res.status === 404) {
+      const err = await responseToError(response, this.clientVersion);
+      if (err instanceof SchemaMissingError) {
         await this.uploadSchema();
-        throw new Error("Schema (re)uploaded");
-      }
-      if (!res.ok) {
-        throw new Error("GraphQL request failed");
-      }
-      return res.json();
-    } catch (err) {
-      if (attempt >= MAX_RETRIES) {
-        this.logEmitter.emit("error", {
-          message: `Failed to query: ${err.message}`
+        throw new ForcedRetryError({
+          clientVersion: this.clientVersion,
+          cause: err
         });
-        throw err;
-      } else {
-        const delay = await backOff(attempt);
-        this.logEmitter.emit("warn", { message: `Retrying after ${delay}ms` });
-        return this.requestInternal(body, headers, attempt + 1);
       }
+      if (err) {
+        throw err;
+      }
+      const data = await response.json();
+      if (data.errors) {
+        if (data.errors.length === 1) {
+          throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
+        }
+      }
+      return data;
+    } catch (err) {
+      this.logEmitter.emit("error", {
+        message: `Error while querying: ${(_a2 = err.message) != null ? _a2 : "(unknown)"}`
+      });
+      if (!(err instanceof DataProxyError)) {
+        throw err;
+      }
+      if (!err.isRetryable) {
+        throw err;
+      }
+      if (attempt >= MAX_RETRIES) {
+        if (err instanceof ForcedRetryError) {
+          throw err.cause;
+        } else {
+          throw err;
+        }
+      }
+      this.logEmitter.emit("warn", { message: "This request can be retried" });
+      const delay = await backOff(attempt);
+      this.logEmitter.emit("warn", { message: `Retrying after ${delay}ms` });
+      return this.requestInternal(body, headers, attempt + 1);
     }
   }
   transaction() {
-    throw new Error("Transactions are currently not supported in Data Proxy");
+    throw new NotImplementedYetError("Interactive transactions are not yet supported", {
+      clientVersion: this.clientVersion
+    });
   }
   extractHostAndApiKey() {
     const mainDatasourceName = Object.keys(this.inlineDatasources)[0];
@@ -37897,32 +38070,38 @@ ${queries.join("\n")}`
     try {
       url2 = new URL(dataProxyURL != null ? dataProxyURL : "");
     } catch (e) {
-      throw new Error("Could not parse URL of the datasource");
+      throw new InvalidDatasourceError("Could not parse URL of the datasource", {
+        clientVersion: this.clientVersion
+      });
     }
     const { protocol, host, searchParams } = url2;
     if (protocol !== "prisma:") {
-      throw new Error("Datasource URL should use prisma:// protocol");
+      throw new InvalidDatasourceError("Datasource URL should use prisma:// protocol", {
+        clientVersion: this.clientVersion
+      });
     }
     const apiKey = searchParams.get("api_key");
     if (apiKey === null || apiKey.length < 1) {
-      throw new Error("No valid API key found in the datasource URL");
+      throw new InvalidDatasourceError("No valid API key found in the datasource URL", {
+        clientVersion: this.clientVersion
+      });
     }
     return [host, apiKey];
   }
 }, "DataProxyEngine");
 __name2(DataProxyEngine, "DataProxyEngine");
-__name24(DataProxyEngine, "DataProxyEngine");
+__name38(DataProxyEngine, "DataProxyEngine");
 var import_debug9 = __toModule22(require_dist7());
 var import_strip_indent2 = __toModule22(require_strip_indent());
 var import_arg = __toModule22(require_arg());
-var __defProp26 = Object.defineProperty;
-var __name25 = /* @__PURE__ */ __name2((target, value) => __defProp26(target, "name", { value, configurable: true }), "__name");
+var __defProp40 = Object.defineProperty;
+var __name39 = /* @__PURE__ */ __name2((target, value) => __defProp40(target, "name", { value, configurable: true }), "__name");
 function format(input = "") {
   return (0, import_strip_indent2.default)(input).trimRight() + "\n";
 }
 __name(format, "format");
 __name2(format, "format");
-__name25(format, "format");
+__name39(format, "format");
 function arg(argv, spec, stopAtPositional = true, permissive = false) {
   try {
     return (0, import_arg.default)(spec, { argv, stopAtPositional, permissive });
@@ -37932,15 +38111,15 @@ function arg(argv, spec, stopAtPositional = true, permissive = false) {
 }
 __name(arg, "arg");
 __name2(arg, "arg");
-__name25(arg, "arg");
+__name39(arg, "arg");
 function isError(result) {
   return result instanceof Error;
 }
 __name(isError, "isError");
 __name2(isError, "isError");
-__name25(isError, "isError");
-var __defProp27 = Object.defineProperty;
-var __name26 = /* @__PURE__ */ __name2((target, value) => __defProp27(target, "name", { value, configurable: true }), "__name");
+__name39(isError, "isError");
+var __defProp41 = Object.defineProperty;
+var __name40 = /* @__PURE__ */ __name2((target, value) => __defProp41(target, "name", { value, configurable: true }), "__name");
 var featureFlagMap = {
   transactionApi: "transaction",
   aggregateApi: "aggregations"
@@ -37956,7 +38135,7 @@ function mapPreviewFeatures(features) {
 }
 __name(mapPreviewFeatures, "mapPreviewFeatures");
 __name2(mapPreviewFeatures, "mapPreviewFeatures");
-__name26(mapPreviewFeatures, "mapPreviewFeatures");
+__name40(mapPreviewFeatures, "mapPreviewFeatures");
 var logger_exports = {};
 __export22(logger_exports, {
   error: () => error,
@@ -37968,8 +38147,8 @@ __export22(logger_exports, {
   warn: () => warn
 });
 var import_chalk9 = __toModule22(require_source2());
-var __defProp28 = Object.defineProperty;
-var __name27 = /* @__PURE__ */ __name2((target, value) => __defProp28(target, "name", { value, configurable: true }), "__name");
+var __defProp42 = Object.defineProperty;
+var __name41 = /* @__PURE__ */ __name2((target, value) => __defProp42(target, "name", { value, configurable: true }), "__name");
 var tags = {
   error: import_chalk9.default.red("prisma:error"),
   warn: import_chalk9.default.yellow("prisma:warn"),
@@ -37984,7 +38163,7 @@ function log3(...data) {
 }
 __name(log3, "log3");
 __name2(log3, "log");
-__name27(log3, "log");
+__name41(log3, "log");
 function warn(message, ...optionalParams) {
   if (should.warn) {
     console.warn(`${tags.warn} ${message}`, ...optionalParams);
@@ -37992,33 +38171,33 @@ function warn(message, ...optionalParams) {
 }
 __name(warn, "warn");
 __name2(warn, "warn");
-__name27(warn, "warn");
+__name41(warn, "warn");
 function info(message, ...optionalParams) {
   console.info(`${tags.info} ${message}`, ...optionalParams);
 }
 __name(info, "info");
 __name2(info, "info");
-__name27(info, "info");
+__name41(info, "info");
 function error(message, ...optionalParams) {
   console.error(`${tags.error} ${message}`, ...optionalParams);
 }
 __name(error, "error");
 __name2(error, "error");
-__name27(error, "error");
+__name41(error, "error");
 function query(message, ...optionalParams) {
   console.log(`${tags.query} ${message}`, ...optionalParams);
 }
 __name(query, "query");
 __name2(query, "query");
-__name27(query, "query");
+__name41(query, "query");
 var import_chalk10 = __toModule22(require_source2());
 var import_debug6 = __toModule22(require_dist7());
 var import_dotenv = __toModule22(require_main3());
-var __defProp29 = Object.defineProperty;
-var __name28 = /* @__PURE__ */ __name2((target, value) => __defProp29(target, "name", { value, configurable: true }), "__name");
+var __defProp43 = Object.defineProperty;
+var __name42 = /* @__PURE__ */ __name2((target, value) => __defProp43(target, "name", { value, configurable: true }), "__name");
 function dotenvExpand(config2) {
   const environment = config2.ignoreProcessEnv ? {} : process.env;
-  const interpolate = /* @__PURE__ */ __name28((envValue) => {
+  const interpolate = /* @__PURE__ */ __name42((envValue) => {
     const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g) || [];
     return matches.reduce(function(newEnv, match) {
       const parts = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(match);
@@ -38050,9 +38229,9 @@ function dotenvExpand(config2) {
 }
 __name(dotenvExpand, "dotenvExpand");
 __name2(dotenvExpand, "dotenvExpand");
-__name28(dotenvExpand, "dotenvExpand");
-var __defProp30 = Object.defineProperty;
-var __name29 = /* @__PURE__ */ __name2((target, value) => __defProp30(target, "name", { value, configurable: true }), "__name");
+__name42(dotenvExpand, "dotenvExpand");
+var __defProp44 = Object.defineProperty;
+var __name43 = /* @__PURE__ */ __name2((target, value) => __defProp44(target, "name", { value, configurable: true }), "__name");
 var debug6 = (0, import_debug6.default)("prisma:tryLoadEnv");
 function tryLoadEnvs({
   rootEnvPath,
@@ -38086,7 +38265,7 @@ function tryLoadEnvs({
 }
 __name(tryLoadEnvs, "tryLoadEnvs");
 __name2(tryLoadEnvs, "tryLoadEnvs");
-__name29(tryLoadEnvs, "tryLoadEnvs");
+__name43(tryLoadEnvs, "tryLoadEnvs");
 function checkForConflicts(rootEnvInfo, envPath, type) {
   const parsedRootEnv = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult.parsed;
   const areNotTheSame = !pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, envPath);
@@ -38120,19 +38299,13 @@ Env vars from ${import_chalk10.default.underline(relativeEnvPath)} overwrite the
 }
 __name(checkForConflicts, "checkForConflicts");
 __name2(checkForConflicts, "checkForConflicts");
-__name29(checkForConflicts, "checkForConflicts");
+__name43(checkForConflicts, "checkForConflicts");
 function loadEnv(envPath) {
   if (exists3(envPath)) {
     debug6(`Environment variables loaded from ${envPath}`);
-    const debugEnv = process.env.DEBUG;
-    let enableDebug = void 0;
-    if (debugEnv && (debugEnv.startsWith("prisma") || debugEnv === "*")) {
-      enableDebug = true;
-    }
     return {
       dotenvResult: dotenvExpand(import_dotenv.default.config({
-        path: envPath,
-        debug: enableDebug
+        path: envPath
       })),
       message: import_chalk10.default.dim(`Environment variables loaded from ${import_path4.default.relative(process.cwd(), envPath)}`),
       path: envPath
@@ -38144,19 +38317,19 @@ function loadEnv(envPath) {
 }
 __name(loadEnv, "loadEnv");
 __name2(loadEnv, "loadEnv");
-__name29(loadEnv, "loadEnv");
+__name43(loadEnv, "loadEnv");
 function pathsEqual(path1, path22) {
   return path1 && path22 && import_path4.default.resolve(path1) === import_path4.default.resolve(path22);
 }
 __name(pathsEqual, "pathsEqual");
 __name2(pathsEqual, "pathsEqual");
-__name29(pathsEqual, "pathsEqual");
+__name43(pathsEqual, "pathsEqual");
 function exists3(p) {
   return Boolean(p && import_fs4.default.existsSync(p));
 }
 __name(exists3, "exists3");
 __name2(exists3, "exists");
-__name29(exists3, "exists");
+__name43(exists3, "exists");
 var import_get_platform3 = __toModule22(require_dist9());
 var sqlTemplateTag = __toModule22(require_dist10());
 var ClientEngineType;
@@ -38274,12 +38447,12 @@ var DataLoader = /* @__PURE__ */ __name(class {
     this.batches = {};
   }
   request(request4) {
-    const hash2 = this.options.batchBy(request4);
-    if (!hash2) {
+    const hash = this.options.batchBy(request4);
+    if (!hash) {
       return this.options.singleLoader(request4);
     }
-    if (!this.batches[hash2]) {
-      this.batches[hash2] = [];
+    if (!this.batches[hash]) {
+      this.batches[hash] = [];
       if (!this.tickActive) {
         this.tickActive = true;
         process.nextTick(() => {
@@ -38289,7 +38462,7 @@ var DataLoader = /* @__PURE__ */ __name(class {
       }
     }
     return new Promise((resolve2, reject2) => {
-      this.batches[hash2].push({
+      this.batches[hash].push({
         request: request4,
         resolve: resolve2,
         reject: reject2
@@ -38339,14 +38512,14 @@ var DataLoader = /* @__PURE__ */ __name(class {
   }
 }, "DataLoader");
 __name2(DataLoader, "DataLoader");
-var NotFoundError = /* @__PURE__ */ __name(class extends Error {
+var NotFoundError2 = /* @__PURE__ */ __name(class extends Error {
   constructor(message) {
     super(message);
     this.name = "NotFoundError";
     this.stack = void 0;
   }
-}, "NotFoundError");
-__name2(NotFoundError, "NotFoundError");
+}, "NotFoundError2");
+__name2(NotFoundError2, "NotFoundError");
 function getRejectOnNotFound(action, modelName, args, clientInstance) {
   let rejectOnNotFound;
   if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
@@ -38376,13 +38549,13 @@ var REGEX = /(findUnique|findFirst)/;
 function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
   if (rejectOnNotFound && !data && REGEX.exec(clientMethod)) {
     if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
-      throw new NotFoundError(`No ${typeName} found`);
+      throw new NotFoundError2(`No ${typeName} found`);
     } else if (typeof rejectOnNotFound === "function") {
-      throw rejectOnNotFound(new NotFoundError(`No ${typeName} found`));
+      throw rejectOnNotFound(new NotFoundError2(`No ${typeName} found`));
     } else if (isError(rejectOnNotFound)) {
       throw rejectOnNotFound;
     }
-    throw new NotFoundError(`No ${typeName} found`);
+    throw new NotFoundError2(`No ${typeName} found`);
   }
 }
 __name(throwIfNotFound, "throwIfNotFound");
@@ -39034,7 +39207,8 @@ function getPrismaClient(config2) {
           useUds: internal.useUds,
           activeProvider: config2.activeProvider,
           inlineSchema: config2.inlineSchema,
-          inlineDatasources: config2.inlineDatasources
+          inlineDatasources: config2.inlineDatasources,
+          inlineSchemaHash: config2.inlineSchemaHash
         };
         if (config2.activeProvider === "mongodb") {
           const previewFeatures = this._engineConfig.previewFeatures ? this._engineConfig.previewFeatures.concat("mongodb") : ["mongodb"];
