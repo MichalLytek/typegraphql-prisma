@@ -161,6 +161,22 @@ const directorActionsConfig: ResolverActionsConfig<"Director"> = {
   createDirector: [Authorized()],
 };
 const resolversEnhanceMap: ResolversEnhanceMap = {
+  MainUser: {
+    mainUser: [
+      (target, propertyKey, descriptor): any => {
+        return {
+          value: () => {
+            console.log(
+              `${target.constructor.name}.${String(
+                propertyKey,
+              )} descriptor.value called!`,
+            );
+            return null;
+          },
+        };
+      },
+    ],
+  },
   Patient: {
     _all: [
       UseMiddleware(({ info }, next) => {

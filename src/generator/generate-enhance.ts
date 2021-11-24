@@ -25,6 +25,10 @@ export function generateEnhanceMap(
     moduleSpecifier: "type-graphql",
     namedImports: ["ClassType"],
   });
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: "tslib",
+    namespaceImport: "tslib",
+  });
 
   if (dmmfDocument.shouldGenerateBlock("crudResolvers")) {
     sourceFile.addImportDeclaration({
@@ -152,18 +156,8 @@ export function generateEnhanceMap(
               const actionTarget = (actionResolversConfig[
                 resolverActionName as keyof typeof actionResolversConfig
               ] as Function).prototype;
-              for (const allActionsDecorator of allActionsDecorators) {
-                allActionsDecorator(
-                  crudTarget,
-                  resolverActionName,
-                  Object.getOwnPropertyDescriptor(crudTarget, resolverActionName)!,
-                );
-                allActionsDecorator(
-                  actionTarget,
-                  resolverActionName,
-                  Object.getOwnPropertyDescriptor(actionTarget, resolverActionName)!,
-                );
-              }
+              tslib.__decorate(allActionsDecorators, crudTarget, resolverActionName, void 0);
+              tslib.__decorate(allActionsDecorators, actionTarget, resolverActionName, void 0);
             }
           }
           const resolverActionsToApply = Object.keys(resolverActionsConfig).filter(
@@ -176,18 +170,8 @@ export function generateEnhanceMap(
             const actionTarget = (actionResolversConfig[
               resolverActionName as keyof typeof actionResolversConfig
             ] as Function).prototype;
-            for (const decorator of decorators) {
-              decorator(
-                crudTarget,
-                resolverActionName,
-                Object.getOwnPropertyDescriptor(crudTarget, resolverActionName)!,
-              );
-              decorator(
-                actionTarget,
-                resolverActionName,
-                Object.getOwnPropertyDescriptor(actionTarget, resolverActionName)!,
-              );
-            }
+            tslib.__decorate(decorators, crudTarget, resolverActionName, void 0);
+            tslib.__decorate(decorators, actionTarget, resolverActionName, void 0);
           }
         }
       }
@@ -299,13 +283,7 @@ export function generateEnhanceMap(
             const allActionsDecorators = relationResolverActionsConfig._all;
             const relationResolverActionNames = relationResolversInfo[modelName as keyof typeof relationResolversInfo];
             for (const relationResolverActionName of relationResolverActionNames) {
-              for (const allActionsDecorator of allActionsDecorators) {
-                allActionsDecorator(
-                  relationResolverTarget,
-                  relationResolverActionName,
-                  Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
-                );
-              }
+              tslib.__decorate(allActionsDecorators, relationResolverTarget, relationResolverActionName, void 0);
             }
           }
           const relationResolverActionsToApply = Object.keys(relationResolverActionsConfig).filter(
@@ -315,13 +293,7 @@ export function generateEnhanceMap(
             const decorators = relationResolverActionsConfig[
               relationResolverActionName as keyof typeof relationResolverActionsConfig
             ] as MethodDecorator[];
-            for (const decorator of decorators) {
-              decorator(
-                relationResolverTarget,
-                relationResolverActionName,
-                Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
-              );
-            }
+            tslib.__decorate(decorators, relationResolverTarget, relationResolverActionName, void 0);
           }
         }
       }
@@ -353,17 +325,13 @@ export function generateEnhanceMap(
         typeFieldNames: string[]
       ) {
         if (enhanceConfig.class) {
-          for (const decorator of enhanceConfig.class) {
-            decorator(typeClass);
-          }
+          tslib.__decorate(enhanceConfig.class, typeClass);
         }
         if (enhanceConfig.fields) {
           if (enhanceConfig.fields._all) {
             const allFieldsDecorators = enhanceConfig.fields._all;
             for (const typeFieldName of typeFieldNames) {
-              for (const allFieldsDecorator of allFieldsDecorators) {
-                allFieldsDecorator(typePrototype, typeFieldName);
-              }
+              tslib.__decorate(allFieldsDecorators, typePrototype, typeFieldName);
             }
           }
           const configFieldsToApply = Object.keys(enhanceConfig.fields).filter(
@@ -371,9 +339,7 @@ export function generateEnhanceMap(
           );
           for (const typeFieldName of configFieldsToApply) {
             const fieldDecorators = enhanceConfig.fields[typeFieldName]!;
-            for (const fieldDecorator of fieldDecorators) {
-              fieldDecorator(typePrototype, typeFieldName);
-            }
+            tslib.__decorate(fieldDecorators, typePrototype, typeFieldName);
           }
         }
       }

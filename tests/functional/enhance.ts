@@ -20,7 +20,7 @@ describe("custom resolvers execution", () => {
       }
 
       model Post {
-        uuid     String  @id @default(cuid())
+        cuid     String  @id @default(cuid())
         content  String
         color    Color
       }
@@ -52,7 +52,7 @@ describe("custom resolvers execution", () => {
             color: desc
           }
         ) {
-          uuid
+          cuid
           color
         }
       }
@@ -72,5 +72,49 @@ describe("custom resolvers execution", () => {
         [GraphQLError: Access denied! You need to be authorized to perform this action!],
       ]
     `);
-  }, 30000);
+  }, 10000);
+
+  it("should properly apply descriptor decorators in enhance map", async () => {
+    let descriptorCalledFlag = false;
+    const {
+      applyResolversEnhanceMap,
+      PostCrudResolver,
+    } = require(outputDirPath);
+
+    applyResolversEnhanceMap({
+      Post: {
+        post: [
+          (): any => {
+            return {
+              value: () => {
+                descriptorCalledFlag = true;
+                return null;
+              },
+            };
+          },
+        ],
+      },
+    });
+
+    const document = /* graphql */ `
+      query {
+        post(where: { cuid: "cjld2cjxh0000qzrmn831i7rn" }) {
+          color
+        }
+      }
+    `;
+    const graphQLSchema = await buildSchema({
+      resolvers: [PostCrudResolver],
+      validate: false,
+      authChecker: () => false,
+      emitSchemaFile: outputDirPath + "/schema.graphql",
+    });
+    const { data, errors } = await graphql(graphQLSchema, document, null, {
+      prisma: {},
+    });
+
+    expect(errors).toBeUndefined();
+    expect(data?.post).toBeNull();
+    expect(descriptorCalledFlag).toBe(true);
+  }, 10000);
 });
