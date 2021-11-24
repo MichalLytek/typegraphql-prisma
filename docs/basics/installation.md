@@ -43,8 +43,14 @@ You also need to install the GraphQL Scalars library (to support the Prisma `Jso
 npm i graphql-scalars
 ```
 
-In order to properly support the aggregate and group by queries, the `graphql-fields` package is used so it also has to be installed:
+In order to properly support the aggregate and group by queries, the `graphql-fields` package is used, so it also has to be installed:
 
 ```sh
 npm i graphql-fields @types/graphql-fields
+```
+
+Finally, please also install the `tslib` package, which is required for [applying the additional decorators](../advanced/additional-decorators.md) properly:
+
+```sh
+npm i tslib
 ```

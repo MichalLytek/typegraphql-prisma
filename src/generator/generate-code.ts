@@ -76,7 +76,10 @@ export default async function generateCode(
   const project = new Project({
     compilerOptions: {
       ...baseCompilerOptions,
-      ...(emitTranspiledCode && { declaration: true }),
+      ...(emitTranspiledCode && {
+        declaration: true,
+        importHelpers: true,
+      }),
     },
   });
   const resolversDirPath = path.resolve(baseDirPath, resolversFolderName);
