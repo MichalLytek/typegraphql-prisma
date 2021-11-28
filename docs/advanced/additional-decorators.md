@@ -79,9 +79,9 @@ If you want to split the config definitions, you can use `ModelConfig` type in t
 
 ```ts
 import {
-  ResolversEnhanceMap,
-  ResolverActionsConfig,
-  applyResolversEnhanceMap,
+  ModelsEnhanceMap,
+  ModelConfig,
+  applyModelsEnhanceMap,
 } from "@generated/type-graphql";
 import { Authorized, Extensions } from "type-graphql";
 
