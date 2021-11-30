@@ -12,6 +12,16 @@ export class NestedBytesNullableFilter {
   })
   equals?: Buffer | undefined;
 
+  @TypeGraphQL.Field(_type => [GraphQLScalars.ByteResolver], {
+    nullable: true
+  })
+  in?: Buffer[] | undefined;
+
+  @TypeGraphQL.Field(_type => [GraphQLScalars.ByteResolver], {
+    nullable: true
+  })
+  notIn?: Buffer[] | undefined;
+
   @TypeGraphQL.Field(_type => NestedBytesNullableFilter, {
     nullable: true
   })

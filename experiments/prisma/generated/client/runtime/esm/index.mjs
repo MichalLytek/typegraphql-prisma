@@ -2227,19 +2227,19 @@ var require_ms2 = __commonJS2({
 // ../debug/dist/common.js
 var require_common6 = __commonJS2({
   "../debug/dist/common.js"(exports2) {
-    var __defProp45 = Object.defineProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
-    var __name44 = /* @__PURE__ */ __name((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
+    var __defProp46 = Object.defineProperty;
+    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp46(target, "__esModule", { value: true }), "__markAsModule");
+    var __name45 = /* @__PURE__ */ __name((target, value) => __defProp46(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp45(target, name, { get: all[name], enumerable: true });
+        __defProp46(target, name, { get: all[name], enumerable: true });
     }, "__export");
     __export3(exports2, {
       setup: () => setup
     });
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name45((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     function setup(env) {
       const createDebug = /* @__PURE__ */ __name210((namespace, logger2) => {
         let prevTime;
@@ -2332,7 +2332,7 @@ var require_common6 = __commonJS2({
         return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
       }
       __name(selectColor, "selectColor");
-      __name44(selectColor, "selectColor");
+      __name45(selectColor, "selectColor");
       __name210(selectColor, "selectColor");
       createDebug.selectColor = selectColor;
       function extend(namespace, delimiter) {
@@ -2341,7 +2341,7 @@ var require_common6 = __commonJS2({
         return newDebug;
       }
       __name(extend, "extend");
-      __name44(extend, "extend");
+      __name45(extend, "extend");
       __name210(extend, "extend");
       function enable(namespaces) {
         createDebug.save(namespaces);
@@ -2364,7 +2364,7 @@ var require_common6 = __commonJS2({
         }
       }
       __name(enable, "enable");
-      __name44(enable, "enable");
+      __name45(enable, "enable");
       __name210(enable, "enable");
       function disable() {
         const namespaces = [
@@ -2375,7 +2375,7 @@ var require_common6 = __commonJS2({
         return namespaces;
       }
       __name(disable, "disable");
-      __name44(disable, "disable");
+      __name45(disable, "disable");
       __name210(disable, "disable");
       function enabled(name) {
         if (name[name.length - 1] === "*") {
@@ -2396,13 +2396,13 @@ var require_common6 = __commonJS2({
         return false;
       }
       __name(enabled, "enabled");
-      __name44(enabled, "enabled");
+      __name45(enabled, "enabled");
       __name210(enabled, "enabled");
       function toNamespace(regexp) {
         return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
       }
       __name(toNamespace, "toNamespace");
-      __name44(toNamespace, "toNamespace");
+      __name45(toNamespace, "toNamespace");
       __name210(toNamespace, "toNamespace");
       function coerce(val) {
         if (val instanceof Error) {
@@ -2411,19 +2411,19 @@ var require_common6 = __commonJS2({
         return val;
       }
       __name(coerce, "coerce");
-      __name44(coerce, "coerce");
+      __name45(coerce, "coerce");
       __name210(coerce, "coerce");
       function destroy() {
         console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
       }
       __name(destroy, "destroy");
-      __name44(destroy, "destroy");
+      __name45(destroy, "destroy");
       __name210(destroy, "destroy");
       createDebug.enable(createDebug.load());
       return createDebug;
     }
     __name(setup, "setup");
-    __name44(setup, "setup");
+    __name45(setup, "setup");
     __name210(setup, "setup");
   }
 });
@@ -2432,28 +2432,28 @@ var require_common6 = __commonJS2({
 var require_node3 = __commonJS2({
   "../debug/dist/node.js"(exports2, module2) {
     var __create3 = Object.create;
-    var __defProp45 = Object.defineProperty;
+    var __defProp46 = Object.defineProperty;
     var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames3 = Object.getOwnPropertyNames;
     var __getProtoOf3 = Object.getPrototypeOf;
     var __hasOwnProp3 = Object.prototype.hasOwnProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
-    var __name44 = /* @__PURE__ */ __name((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
+    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp46(target, "__esModule", { value: true }), "__markAsModule");
+    var __name45 = /* @__PURE__ */ __name((target, value) => __defProp46(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp45(target, name, { get: all[name], enumerable: true });
+        __defProp46(target, name, { get: all[name], enumerable: true });
     }, "__export");
     var __reExport2 = /* @__PURE__ */ __name((target, module22, desc) => {
       if (module22 && typeof module22 === "object" || typeof module22 === "function") {
         for (let key of __getOwnPropNames3(module22))
           if (!__hasOwnProp3.call(target, key) && key !== "default")
-            __defProp45(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
+            __defProp46(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
       }
       return target;
     }, "__reExport");
     var __toModule3 = /* @__PURE__ */ __name((module22) => {
-      return __reExport2(__markAsModule3(__defProp45(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
+      return __reExport2(__markAsModule3(__defProp46(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
     }, "__toModule");
     __export3(exports2, {
       default: () => node_default
@@ -2462,7 +2462,7 @@ var require_node3 = __commonJS2({
     var import_util7 = __toModule3(__require("util"));
     var import_common4 = __toModule3(require_common6());
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name45((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     exports2.init = init;
     exports2.log = log4;
     exports2.formatArgs = formatArgs;
@@ -2496,7 +2496,7 @@ var require_node3 = __commonJS2({
       return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : import_tty.default.isatty((_a2 = process.stderr) == null ? void 0 : _a2.fd);
     }
     __name(useColors, "useColors");
-    __name44(useColors, "useColors");
+    __name45(useColors, "useColors");
     __name210(useColors, "useColors");
     function formatArgs(args) {
       const { namespace: name, useColors: useColors2 } = this;
@@ -2511,7 +2511,7 @@ var require_node3 = __commonJS2({
       }
     }
     __name(formatArgs, "formatArgs");
-    __name44(formatArgs, "formatArgs");
+    __name45(formatArgs, "formatArgs");
     __name210(formatArgs, "formatArgs");
     function getDate() {
       if (exports2.inspectOpts.hideDate) {
@@ -2520,13 +2520,13 @@ var require_node3 = __commonJS2({
       return new Date().toISOString() + " ";
     }
     __name(getDate, "getDate");
-    __name44(getDate, "getDate");
+    __name45(getDate, "getDate");
     __name210(getDate, "getDate");
     function log4(...args) {
       return process.stderr.write(import_util7.default.format(...args) + "\n");
     }
     __name(log4, "log");
-    __name44(log4, "log");
+    __name45(log4, "log");
     __name210(log4, "log");
     function save(namespaces) {
       if (namespaces) {
@@ -2536,13 +2536,13 @@ var require_node3 = __commonJS2({
       }
     }
     __name(save, "save");
-    __name44(save, "save");
+    __name45(save, "save");
     __name210(save, "save");
     function load() {
       return process.env.DEBUG;
     }
     __name(load, "load");
-    __name44(load, "load");
+    __name45(load, "load");
     __name210(load, "load");
     function init(debug10) {
       debug10.inspectOpts = {};
@@ -2552,7 +2552,7 @@ var require_node3 = __commonJS2({
       }
     }
     __name(init, "init");
-    __name44(init, "init");
+    __name45(init, "init");
     __name210(init, "init");
     var mod2 = (0, import_common4.setup)(exports2);
     module2.exports = mod2;
@@ -2573,28 +2573,28 @@ var require_node3 = __commonJS2({
 var require_dist7 = __commonJS2({
   "../debug/dist/index.js"(exports2) {
     var __create3 = Object.create;
-    var __defProp45 = Object.defineProperty;
+    var __defProp46 = Object.defineProperty;
     var __getOwnPropDesc3 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames3 = Object.getOwnPropertyNames;
     var __getProtoOf3 = Object.getPrototypeOf;
     var __hasOwnProp3 = Object.prototype.hasOwnProperty;
-    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp45(target, "__esModule", { value: true }), "__markAsModule");
-    var __name44 = /* @__PURE__ */ __name((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
+    var __markAsModule3 = /* @__PURE__ */ __name((target) => __defProp46(target, "__esModule", { value: true }), "__markAsModule");
+    var __name45 = /* @__PURE__ */ __name((target, value) => __defProp46(target, "name", { value, configurable: true }), "__name");
     var __export3 = /* @__PURE__ */ __name((target, all) => {
       __markAsModule3(target);
       for (var name in all)
-        __defProp45(target, name, { get: all[name], enumerable: true });
+        __defProp46(target, name, { get: all[name], enumerable: true });
     }, "__export");
     var __reExport2 = /* @__PURE__ */ __name((target, module22, desc) => {
       if (module22 && typeof module22 === "object" || typeof module22 === "function") {
         for (let key of __getOwnPropNames3(module22))
           if (!__hasOwnProp3.call(target, key) && key !== "default")
-            __defProp45(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
+            __defProp46(target, key, { get: () => module22[key], enumerable: !(desc = __getOwnPropDesc3(module22, key)) || desc.enumerable });
       }
       return target;
     }, "__reExport");
     var __toModule3 = /* @__PURE__ */ __name((module22) => {
-      return __reExport2(__markAsModule3(__defProp45(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
+      return __reExport2(__markAsModule3(__defProp46(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
     }, "__toModule");
     __export3(exports2, {
       Debug: () => Debug8,
@@ -2603,7 +2603,7 @@ var require_dist7 = __commonJS2({
     });
     var import_node = __toModule3(require_node3());
     var __defProp210 = Object.defineProperty;
-    var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+    var __name210 = /* @__PURE__ */ __name45((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     var cache = [];
     var MAX_LOGS = 100;
     function Debug8(namespace) {
@@ -2616,7 +2616,7 @@ var require_dist7 = __commonJS2({
       return debug10;
     }
     __name(Debug8, "Debug");
-    __name44(Debug8, "Debug");
+    __name45(Debug8, "Debug");
     __name210(Debug8, "Debug");
     Debug8.enable = (namespace) => {
       import_node.default.enable(namespace);
@@ -2635,7 +2635,7 @@ var require_dist7 = __commonJS2({
       return output.slice(-numChars);
     }
     __name(getLogs2, "getLogs");
-    __name44(getLogs2, "getLogs");
+    __name45(getLogs2, "getLogs");
     __name210(getLogs2, "getLogs");
   }
 });
@@ -2836,9 +2836,9 @@ var require_strip_indent = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+engines@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma+engines@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/engines/dist/index.js
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -2985,7 +2985,7 @@ var require_dist8 = __commonJS2({
     var require_common = __commonJS((exports2) => {
       var __defProp210 = Object.defineProperty;
       var __markAsModule22 = /* @__PURE__ */ __name((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name44 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name45 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export22 = /* @__PURE__ */ __name((target, all) => {
         __markAsModule22(target);
         for (var name in all)
@@ -2995,7 +2995,7 @@ var require_dist8 = __commonJS2({
         setup: () => setup
       });
       var __defProp222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name45((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
       function setup(env) {
         const createDebug = /* @__PURE__ */ __name210((namespace, logger2) => {
           let prevTime;
@@ -3088,7 +3088,7 @@ var require_dist8 = __commonJS2({
           return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
         }
         __name(selectColor, "selectColor");
-        __name44(selectColor, "selectColor");
+        __name45(selectColor, "selectColor");
         __name210(selectColor, "selectColor");
         createDebug.selectColor = selectColor;
         function extend(namespace, delimiter) {
@@ -3097,7 +3097,7 @@ var require_dist8 = __commonJS2({
           return newDebug;
         }
         __name(extend, "extend");
-        __name44(extend, "extend");
+        __name45(extend, "extend");
         __name210(extend, "extend");
         function enable(namespaces) {
           createDebug.save(namespaces);
@@ -3120,7 +3120,7 @@ var require_dist8 = __commonJS2({
           }
         }
         __name(enable, "enable");
-        __name44(enable, "enable");
+        __name45(enable, "enable");
         __name210(enable, "enable");
         function disable() {
           const namespaces = [
@@ -3131,7 +3131,7 @@ var require_dist8 = __commonJS2({
           return namespaces;
         }
         __name(disable, "disable");
-        __name44(disable, "disable");
+        __name45(disable, "disable");
         __name210(disable, "disable");
         function enabled(name) {
           if (name[name.length - 1] === "*") {
@@ -3152,13 +3152,13 @@ var require_dist8 = __commonJS2({
           return false;
         }
         __name(enabled, "enabled");
-        __name44(enabled, "enabled");
+        __name45(enabled, "enabled");
         __name210(enabled, "enabled");
         function toNamespace(regexp) {
           return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
         }
         __name(toNamespace, "toNamespace");
-        __name44(toNamespace, "toNamespace");
+        __name45(toNamespace, "toNamespace");
         __name210(toNamespace, "toNamespace");
         function coerce(val) {
           if (val instanceof Error) {
@@ -3167,19 +3167,19 @@ var require_dist8 = __commonJS2({
           return val;
         }
         __name(coerce, "coerce");
-        __name44(coerce, "coerce");
+        __name45(coerce, "coerce");
         __name210(coerce, "coerce");
         function destroy() {
           console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
         }
         __name(destroy, "destroy");
-        __name44(destroy, "destroy");
+        __name45(destroy, "destroy");
         __name210(destroy, "destroy");
         createDebug.enable(createDebug.load());
         return createDebug;
       }
       __name(setup, "setup");
-      __name44(setup, "setup");
+      __name45(setup, "setup");
       __name210(setup, "setup");
     });
     var require_node = __commonJS((exports2, module2) => {
@@ -3190,7 +3190,7 @@ var require_dist8 = __commonJS2({
       var __getProtoOf22 = Object.getPrototypeOf;
       var __hasOwnProp22 = Object.prototype.hasOwnProperty;
       var __markAsModule22 = /* @__PURE__ */ __name((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name44 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name45 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export22 = /* @__PURE__ */ __name((target, all) => {
         __markAsModule22(target);
         for (var name in all)
@@ -3214,7 +3214,7 @@ var require_dist8 = __commonJS2({
       var import_util7 = __toModule22(__require("util"));
       var import_common4 = __toModule22(require_common());
       var __defProp222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name45((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
       exports2.init = init;
       exports2.log = log4;
       exports2.formatArgs = formatArgs;
@@ -3248,7 +3248,7 @@ var require_dist8 = __commonJS2({
         return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : import_tty.default.isatty((_a2 = process.stderr) == null ? void 0 : _a2.fd);
       }
       __name(useColors, "useColors");
-      __name44(useColors, "useColors");
+      __name45(useColors, "useColors");
       __name210(useColors, "useColors");
       function formatArgs(args) {
         const { namespace: name, useColors: useColors2 } = this;
@@ -3263,7 +3263,7 @@ var require_dist8 = __commonJS2({
         }
       }
       __name(formatArgs, "formatArgs");
-      __name44(formatArgs, "formatArgs");
+      __name45(formatArgs, "formatArgs");
       __name210(formatArgs, "formatArgs");
       function getDate() {
         if (exports2.inspectOpts.hideDate) {
@@ -3272,13 +3272,13 @@ var require_dist8 = __commonJS2({
         return new Date().toISOString() + " ";
       }
       __name(getDate, "getDate");
-      __name44(getDate, "getDate");
+      __name45(getDate, "getDate");
       __name210(getDate, "getDate");
       function log4(...args) {
         return process.stderr.write(import_util7.default.format(...args) + "\n");
       }
       __name(log4, "log");
-      __name44(log4, "log");
+      __name45(log4, "log");
       __name210(log4, "log");
       function save(namespaces) {
         if (namespaces) {
@@ -3288,13 +3288,13 @@ var require_dist8 = __commonJS2({
         }
       }
       __name(save, "save");
-      __name44(save, "save");
+      __name45(save, "save");
       __name210(save, "save");
       function load() {
         return process.env.DEBUG;
       }
       __name(load, "load");
-      __name44(load, "load");
+      __name45(load, "load");
       __name210(load, "load");
       function init(debug32) {
         debug32.inspectOpts = {};
@@ -3304,7 +3304,7 @@ var require_dist8 = __commonJS2({
         }
       }
       __name(init, "init");
-      __name44(init, "init");
+      __name45(init, "init");
       __name210(init, "init");
       var mod2 = (0, import_common4.setup)(exports2);
       module2.exports = mod2;
@@ -3327,7 +3327,7 @@ var require_dist8 = __commonJS2({
       var __getProtoOf22 = Object.getPrototypeOf;
       var __hasOwnProp22 = Object.prototype.hasOwnProperty;
       var __markAsModule22 = /* @__PURE__ */ __name((target) => __defProp210(target, "__esModule", { value: true }), "__markAsModule2");
-      var __name44 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
+      var __name45 = /* @__PURE__ */ __name((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
       var __export22 = /* @__PURE__ */ __name((target, all) => {
         __markAsModule22(target);
         for (var name in all)
@@ -3351,7 +3351,7 @@ var require_dist8 = __commonJS2({
       });
       var import_node = __toModule22(require_node());
       var __defProp222 = Object.defineProperty;
-      var __name210 = /* @__PURE__ */ __name44((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
+      var __name210 = /* @__PURE__ */ __name45((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
       var cache = [];
       var MAX_LOGS = 100;
       function Debug22(namespace) {
@@ -3364,7 +3364,7 @@ var require_dist8 = __commonJS2({
         return debug32;
       }
       __name(Debug22, "Debug2");
-      __name44(Debug22, "Debug");
+      __name45(Debug22, "Debug");
       __name210(Debug22, "Debug");
       Debug22.enable = (namespace) => {
         import_node.default.enable(namespace);
@@ -3383,19 +3383,19 @@ var require_dist8 = __commonJS2({
         return output.slice(-numChars);
       }
       __name(getLogs2, "getLogs");
-      __name44(getLogs2, "getLogs");
+      __name45(getLogs2, "getLogs");
       __name210(getLogs2, "getLogs");
     });
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
+        version: "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "78a5df6def6943431f4c022e1428dbc3e833cf8e"
+          enginesVersion: "dc520b92b1ebb2d28dc3161f9f82e875bd35d727"
         },
         repository: {
           type: "git",
@@ -3403,8 +3403,8 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "16.11.7",
-          typescript: "4.4.4"
+          "@types/node": "16.11.10",
+          typescript: "4.5.2"
         },
         scripts: {
           build: "tsc -d",
@@ -24409,9 +24409,9 @@ ${error2.message}` : execaMessage;
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -24433,9 +24433,9 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getPlatform.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/getPlatform.js
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -24610,9 +24610,9 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -24634,9 +24634,9 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/platforms.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/platforms.js
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -24663,9 +24663,9 @@ var require_platforms2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/index.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/index.js
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -29598,7 +29598,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.5.0",
+      version: "3.6.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -29625,11 +29625,16 @@ var require_package2 = __commonJS2({
         node: ">=12.6"
       },
       homepage: "https://www.prisma.io",
-      repository: "git@github.com:prisma/prisma.git",
+      repository: {
+        type: "git",
+        url: "https://github.com/prisma/prisma.git",
+        directory: "packages/client"
+      },
       author: "Tim Suchanek <suchanek@prisma.io>",
       maintainers: [
         "Jo\xEBl Galeran <galeran@prisma.io>",
-        "Pierre-Antoine Mills <mills@prisma.io>"
+        "Pierre-Antoine Mills <mills@prisma.io>",
+        "Alexey Orlenko <orlenko@prisma.io>"
       ],
       bugs: "https://github.com/prisma/prisma/issues",
       scripts: {
@@ -29660,30 +29665,30 @@ var require_package2 = __commonJS2({
         "@microsoft/api-extractor": "7.18.19",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
-        "@prisma/fetch-engine": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
+        "@prisma/engines": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727",
+        "@prisma/fetch-engine": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e",
+        "@prisma/get-platform": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@timsuchanek/copy": "1.4.5",
         "@types/debug": "4.1.7",
-        "@types/jest": "27.0.2",
+        "@types/jest": "27.0.3",
         "@types/js-levenshtein": "1.1.0",
         "@types/mssql": "6.0.8",
         "@types/node": "12.20.37",
         "@types/pg": "8.6.1",
-        "@typescript-eslint/eslint-plugin": "4.33.0",
-        "@typescript-eslint/parser": "4.33.0",
+        "@typescript-eslint/eslint-plugin": "5.4.0",
+        "@typescript-eslint/parser": "5.4.0",
         arg: "5.0.1",
         benchmark: "2.1.4",
         chalk: "4.1.2",
         "decimal.js": "10.3.1",
-        esbuild: "0.13.13",
-        eslint: "7.32.0",
+        esbuild: "0.13.14",
+        eslint: "8.3.0",
         "eslint-config-prettier": "8.3.0",
         "eslint-plugin-eslint-comments": "3.2.0",
-        "eslint-plugin-jest": "25.2.4",
+        "eslint-plugin-jest": "25.3.0",
         "eslint-plugin-prettier": "4.0.0",
         execa: "5.1.1",
         "flat-map-polyfill": "0.3.8",
@@ -29695,7 +29700,7 @@ var require_package2 = __commonJS2({
         jest: "27.3.1",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
-        "lint-staged": "12.0.1",
+        "lint-staged": "12.0.2",
         "lz-string": "1.4.4",
         "make-dir": "3.1.0",
         mariadb: "2.5.5",
@@ -29726,7 +29731,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e"
+        "@prisma/engines-version": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727"
       },
       "lint-staged": {
         "*.ts": [
@@ -36161,8 +36166,7 @@ var Connection = class {
     if (this._pool)
       return;
     this._pool = new Pool(url2, {
-      connections: 100,
-      pipelining: 10,
+      connections: 1e3,
       keepAliveMaxTimeout: 6e5,
       headersTimeout: 0,
       ...options2
@@ -37504,16 +37508,57 @@ __name38(DataProxyEngine, "DataProxyEngine");
 // src/runtime/getPrismaClient.ts
 var import_debug9 = __toModule2(require_dist7());
 
+// ../sdk/dist/esm/client/getClientEngineType.mjs
+var __defProp40 = Object.defineProperty;
+var __name39 = /* @__PURE__ */ __name((target, value) => __defProp40(target, "name", { value, configurable: true }), "__name");
+var ClientEngineType;
+(function(ClientEngineType2) {
+  ClientEngineType2["Library"] = "library";
+  ClientEngineType2["Binary"] = "binary";
+  ClientEngineType2["DataProxy"] = "dataproxy";
+})(ClientEngineType || (ClientEngineType = {}));
+var DEFAULT_CLIENT_ENGINE_TYPE = ClientEngineType.Library;
+function getClientEngineType(generatorConfig) {
+  const engineTypeFromEnvVar = getEngineTypeFromEnvVar();
+  if (engineTypeFromEnvVar)
+    return engineTypeFromEnvVar;
+  if (generatorConfig?.config.engineType === ClientEngineType.Library) {
+    return ClientEngineType.Library;
+  } else if (generatorConfig?.config.engineType === ClientEngineType.Binary) {
+    return ClientEngineType.Binary;
+  } else if (generatorConfig?.config.engineType === ClientEngineType.DataProxy) {
+    return ClientEngineType.DataProxy;
+  } else {
+    return DEFAULT_CLIENT_ENGINE_TYPE;
+  }
+}
+__name(getClientEngineType, "getClientEngineType");
+__name39(getClientEngineType, "getClientEngineType");
+function getEngineTypeFromEnvVar() {
+  const engineType = process.env.PRISMA_CLIENT_ENGINE_TYPE;
+  if (engineType === ClientEngineType.Library) {
+    return ClientEngineType.Library;
+  } else if (engineType === ClientEngineType.Binary) {
+    return ClientEngineType.Binary;
+  } else if (engineType === ClientEngineType.DataProxy) {
+    return ClientEngineType.DataProxy;
+  } else {
+    return void 0;
+  }
+}
+__name(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
+__name39(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
+
 // ../sdk/dist/esm/cli/utils.mjs
 var import_strip_indent2 = __toModule2(require_strip_indent());
 var import_arg = __toModule2(require_arg());
-var __defProp40 = Object.defineProperty;
-var __name39 = /* @__PURE__ */ __name((target, value) => __defProp40(target, "name", { value, configurable: true }), "__name");
+var __defProp41 = Object.defineProperty;
+var __name40 = /* @__PURE__ */ __name((target, value) => __defProp41(target, "name", { value, configurable: true }), "__name");
 function format(input = "") {
   return (0, import_strip_indent2.default)(input).trimRight() + "\n";
 }
 __name(format, "format");
-__name39(format, "format");
+__name40(format, "format");
 function arg(argv, spec, stopAtPositional = true, permissive = false) {
   try {
     return (0, import_arg.default)(spec, { argv, stopAtPositional, permissive });
@@ -37522,16 +37567,16 @@ function arg(argv, spec, stopAtPositional = true, permissive = false) {
   }
 }
 __name(arg, "arg");
-__name39(arg, "arg");
+__name40(arg, "arg");
 function isError(result) {
   return result instanceof Error;
 }
 __name(isError, "isError");
-__name39(isError, "isError");
+__name40(isError, "isError");
 
 // ../sdk/dist/esm/utils/mapPreviewFeatures.mjs
-var __defProp41 = Object.defineProperty;
-var __name40 = /* @__PURE__ */ __name((target, value) => __defProp41(target, "name", { value, configurable: true }), "__name");
+var __defProp42 = Object.defineProperty;
+var __name41 = /* @__PURE__ */ __name((target, value) => __defProp42(target, "name", { value, configurable: true }), "__name");
 var featureFlagMap = {
   transactionApi: "transaction",
   aggregateApi: "aggregations"
@@ -37543,7 +37588,7 @@ function mapPreviewFeatures(features) {
   return [];
 }
 __name(mapPreviewFeatures, "mapPreviewFeatures");
-__name40(mapPreviewFeatures, "mapPreviewFeatures");
+__name41(mapPreviewFeatures, "mapPreviewFeatures");
 
 // ../sdk/dist/esm/logger.mjs
 var logger_exports = {};
@@ -37557,8 +37602,8 @@ __export2(logger_exports, {
   warn: () => warn
 });
 var import_chalk9 = __toModule2(require_source2());
-var __defProp42 = Object.defineProperty;
-var __name41 = /* @__PURE__ */ __name((target, value) => __defProp42(target, "name", { value, configurable: true }), "__name");
+var __defProp43 = Object.defineProperty;
+var __name42 = /* @__PURE__ */ __name((target, value) => __defProp43(target, "name", { value, configurable: true }), "__name");
 var tags = {
   error: import_chalk9.default.red("prisma:error"),
   warn: import_chalk9.default.yellow("prisma:warn"),
@@ -37572,29 +37617,29 @@ function log3(...data) {
   console.log(...data);
 }
 __name(log3, "log");
-__name41(log3, "log");
+__name42(log3, "log");
 function warn(message, ...optionalParams) {
   if (should.warn) {
     console.warn(`${tags.warn} ${message}`, ...optionalParams);
   }
 }
 __name(warn, "warn");
-__name41(warn, "warn");
+__name42(warn, "warn");
 function info(message, ...optionalParams) {
   console.info(`${tags.info} ${message}`, ...optionalParams);
 }
 __name(info, "info");
-__name41(info, "info");
+__name42(info, "info");
 function error(message, ...optionalParams) {
   console.error(`${tags.error} ${message}`, ...optionalParams);
 }
 __name(error, "error");
-__name41(error, "error");
+__name42(error, "error");
 function query(message, ...optionalParams) {
   console.log(`${tags.query} ${message}`, ...optionalParams);
 }
 __name(query, "query");
-__name41(query, "query");
+__name42(query, "query");
 
 // ../sdk/dist/esm/utils/tryLoadEnvs.mjs
 var import_chalk10 = __toModule2(require_source2());
@@ -37604,11 +37649,11 @@ import fs4 from "fs";
 import path3 from "path";
 
 // ../sdk/dist/esm/dotenvExpand.mjs
-var __defProp43 = Object.defineProperty;
-var __name42 = /* @__PURE__ */ __name((target, value) => __defProp43(target, "name", { value, configurable: true }), "__name");
+var __defProp44 = Object.defineProperty;
+var __name43 = /* @__PURE__ */ __name((target, value) => __defProp44(target, "name", { value, configurable: true }), "__name");
 function dotenvExpand(config2) {
   const environment = config2.ignoreProcessEnv ? {} : process.env;
-  const interpolate = /* @__PURE__ */ __name42((envValue) => {
+  const interpolate = /* @__PURE__ */ __name43((envValue) => {
     const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g) || [];
     return matches.reduce(function(newEnv, match) {
       const parts = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(match);
@@ -37639,11 +37684,11 @@ function dotenvExpand(config2) {
   return config2;
 }
 __name(dotenvExpand, "dotenvExpand");
-__name42(dotenvExpand, "dotenvExpand");
+__name43(dotenvExpand, "dotenvExpand");
 
 // ../sdk/dist/esm/utils/tryLoadEnvs.mjs
-var __defProp44 = Object.defineProperty;
-var __name43 = /* @__PURE__ */ __name((target, value) => __defProp44(target, "name", { value, configurable: true }), "__name");
+var __defProp45 = Object.defineProperty;
+var __name44 = /* @__PURE__ */ __name((target, value) => __defProp45(target, "name", { value, configurable: true }), "__name");
 var debug6 = (0, import_debug6.default)("prisma:tryLoadEnv");
 function tryLoadEnvs({
   rootEnvPath,
@@ -37675,7 +37720,7 @@ function tryLoadEnvs({
   };
 }
 __name(tryLoadEnvs, "tryLoadEnvs");
-__name43(tryLoadEnvs, "tryLoadEnvs");
+__name44(tryLoadEnvs, "tryLoadEnvs");
 function checkForConflicts(rootEnvInfo, envPath, type) {
   const parsedRootEnv = rootEnvInfo?.dotenvResult.parsed;
   const areNotTheSame = !pathsEqual(rootEnvInfo?.path, envPath);
@@ -37708,7 +37753,7 @@ Env vars from ${import_chalk10.default.underline(relativeEnvPath)} overwrite the
   }
 }
 __name(checkForConflicts, "checkForConflicts");
-__name43(checkForConflicts, "checkForConflicts");
+__name44(checkForConflicts, "checkForConflicts");
 function loadEnv(envPath) {
   if (exists3(envPath)) {
     debug6(`Environment variables loaded from ${envPath}`);
@@ -37725,17 +37770,17 @@ function loadEnv(envPath) {
   return null;
 }
 __name(loadEnv, "loadEnv");
-__name43(loadEnv, "loadEnv");
+__name44(loadEnv, "loadEnv");
 function pathsEqual(path1, path22) {
   return path1 && path22 && path3.resolve(path1) === path3.resolve(path22);
 }
 __name(pathsEqual, "pathsEqual");
-__name43(pathsEqual, "pathsEqual");
+__name44(pathsEqual, "pathsEqual");
 function exists3(p) {
   return Boolean(p && fs4.existsSync(p));
 }
 __name(exists3, "exists");
-__name43(exists3, "exists");
+__name44(exists3, "exists");
 
 // ../sdk/dist/esm/index.mjs
 var import_get_platform3 = __toModule2(require_dist9());
@@ -37745,43 +37790,6 @@ var sqlTemplateTag = __toModule2(require_dist10());
 import { AsyncResource } from "async_hooks";
 import fs5 from "fs";
 import path4 from "path";
-
-// src/runtime/utils/getClientEngineType.ts
-var ClientEngineType;
-(function(ClientEngineType2) {
-  ClientEngineType2["Library"] = "library";
-  ClientEngineType2["Binary"] = "binary";
-  ClientEngineType2["DataProxy"] = "dataproxy";
-})(ClientEngineType || (ClientEngineType = {}));
-var DEFAULT_CLIENT_ENGINE_TYPE = ClientEngineType.Library;
-function getClientEngineType(generatorConfig) {
-  const engineTypeFromEnvVar = getEngineTypeFromEnvVar();
-  if (engineTypeFromEnvVar)
-    return engineTypeFromEnvVar;
-  if (generatorConfig?.config.engineType === ClientEngineType.Library) {
-    return ClientEngineType.Library;
-  } else if (generatorConfig?.config.engineType === ClientEngineType.Binary) {
-    return ClientEngineType.Binary;
-  } else if (generatorConfig?.config.engineType === ClientEngineType.DataProxy) {
-    return ClientEngineType.DataProxy;
-  } else {
-    return DEFAULT_CLIENT_ENGINE_TYPE;
-  }
-}
-__name(getClientEngineType, "getClientEngineType");
-function getEngineTypeFromEnvVar() {
-  const engineType = process.env.PRISMA_CLIENT_ENGINE_TYPE;
-  if (engineType === ClientEngineType.Library) {
-    return ClientEngineType.Library;
-  } else if (engineType === ClientEngineType.Binary) {
-    return ClientEngineType.Binary;
-  } else if (engineType === ClientEngineType.DataProxy) {
-    return ClientEngineType.DataProxy;
-  } else {
-    return void 0;
-  }
-}
-__name(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
 
 // src/runtime/getLogLevel.ts
 function getLogLevel(log4) {
@@ -38637,6 +38645,7 @@ function getPrismaClient(config2) {
           this._engineConfig.previewFeatures = previewFeatures;
         }
         debug9(`clientVersion: ${config2.clientVersion}`);
+        debug9(`clientEngineType: ${this._clientEngineType}`);
         this._engine = this.getEngine();
         void this._getActiveProvider();
         if (!this._hasPreviewFlag("interactiveTransactions")) {

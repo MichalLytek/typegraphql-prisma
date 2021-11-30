@@ -17013,6 +17013,40 @@
               ]
             },
             {
+              "name": "in",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Bytes",
+                  "location": "scalar",
+                  "isList": true
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "notIn",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Bytes",
+                  "location": "scalar",
+                  "isList": true
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "not",
               "isRequired": false,
               "isNullable": true,
@@ -17659,6 +17693,40 @@
                   "type": "Bytes",
                   "location": "scalar",
                   "isList": false
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "in",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Bytes",
+                  "location": "scalar",
+                  "isList": true
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "notIn",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Bytes",
+                  "location": "scalar",
+                  "isList": true
                 },
                 {
                   "type": "Null",
@@ -25215,6 +25283,40 @@
               ]
             },
             {
+              "name": "in",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Bytes",
+                  "location": "scalar",
+                  "isList": true
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "notIn",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Bytes",
+                  "location": "scalar",
+                  "isList": true
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "not",
               "isRequired": false,
               "isNullable": true,
@@ -25582,6 +25684,40 @@
                   "type": "Bytes",
                   "location": "scalar",
                   "isList": false
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "in",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Bytes",
+                  "location": "scalar",
+                  "isList": true
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "notIn",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Bytes",
+                  "location": "scalar",
+                  "isList": true
                 },
                 {
                   "type": "Null",
