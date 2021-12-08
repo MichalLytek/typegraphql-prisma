@@ -56,6 +56,22 @@ export class DmmfDocument implements DMMF.Document {
           field => field.relationName !== undefined && !field.isOmitted.output,
         ),
       )
+      .filter(model => {
+        const outputType = this.schema.outputTypes.find(
+          type => type.name === model.name,
+        );
+        return (
+          outputType &&
+          outputType.fields.some(outputTypeField =>
+            model.fields.some(
+              modelField =>
+                modelField.name === outputTypeField.name &&
+                modelField.relationName !== undefined &&
+                !modelField.isOmitted.output,
+            ),
+          )
+        );
+      })
       .map(generateRelationModel(this));
   }
 

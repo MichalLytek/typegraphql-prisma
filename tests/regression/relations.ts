@@ -378,23 +378,23 @@ describe("relations resolvers generation", () => {
 
   it("should properly generate relation resolver class for model with named compound unique with relation", async () => {
     const schema = /* prisma */ `
-        model Movie {
-          directorFirstName String
-          directorLastName  String
-          director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName])
-          title             String
+      model Movie {
+        directorFirstName String
+        directorLastName  String
+        director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName])
+        title             String
 
-          @@unique([directorFirstName, directorLastName, title], name: "movieUniqueCompoundName")
-        }
+        @@unique([directorFirstName, directorLastName, title], name: "movieUniqueCompoundName")
+      }
 
-        model Director {
-          firstName String
-          lastName  String
-          movies    Movie[]
+      model Director {
+        firstName String
+        lastName  String
+        movies    Movie[]
 
-          @@unique([firstName, lastName], name: "directorUniqueCompoundName")
-        }
-      `;
+        @@unique([firstName, lastName], name: "directorUniqueCompoundName")
+      }
+    `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
 
@@ -405,6 +405,52 @@ describe("relations resolvers generation", () => {
     expect(movieRelationsResolverTSFile).toMatchSnapshot(
       "MovieRelationsResolver",
     );
+  });
+
+  it("should not emit relation resolver when relation field is ignored", async () => {
+    const schema = /* prisma */ `
+      model User {
+        id        Int       @id @default(autoincrement())
+        name      String
+        addresses Address[] @ignore
+        points    Point[]
+      }
+      model Address {
+        uuid    String @id @default(cuid())
+        content String
+        user    User   @relation(fields: [userId], references: [id])
+        userId  Int
+      }
+      model Point {
+        uuid   String @id @default(cuid())
+        score  Int
+        user   User   @relation(fields: [userId], references: [id])
+        userId Int
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const userRelationsResolverTSFile = await readGeneratedFile(
+      "/resolvers/relations/User/UserRelationsResolver.ts",
+    );
+    const indexTSFile = await readGeneratedFile(
+      "/resolvers/relations/index.ts",
+    );
+    const argsIndexTSFile = await readGeneratedFile(
+      "/resolvers/relations/args.index.ts",
+    );
+    const resolversIndexTSFile = await readGeneratedFile(
+      "/resolvers/relations/resolvers.index.ts",
+    );
+    const mainIndexTSFile = await readGeneratedFile("/index.ts");
+
+    expect(userRelationsResolverTSFile).toMatchSnapshot(
+      "UserRelationsResolver",
+    );
+    expect(indexTSFile).toMatchSnapshot("index");
+    expect(argsIndexTSFile).toMatchSnapshot("argsIndex");
+    expect(resolversIndexTSFile).toMatchSnapshot("resolversIndex");
+    expect(mainIndexTSFile).toMatchSnapshot("mainIndex");
   });
 
   describe("when `fullTextSearch` preview feature is enabled", () => {

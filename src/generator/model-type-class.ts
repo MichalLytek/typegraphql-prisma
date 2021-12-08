@@ -41,7 +41,7 @@ export default function generateObjectTypeClassFromModel(
   generateModelsImports(
     sourceFile,
     model.fields
-      .filter(field => field.location === "inputObjectTypes")
+      .filter(field => field.location === "outputObjectTypes")
       .filter(field => field.type !== model.name)
       .map(field =>
         dmmfDocument.isModelName(field.type)

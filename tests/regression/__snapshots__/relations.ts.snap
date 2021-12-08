@@ -1,5 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`relations resolvers generation should not emit relation resolver when relation field is ignored: UserRelationsResolver 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { Point } from \\"../../../models/Point\\";
+import { User } from \\"../../../models/User\\";
+import { UserPointsArgs } from \\"./args/UserPointsArgs\\";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+
+@TypeGraphQL.Resolver(_of => User)
+export class UserRelationsResolver {
+  @TypeGraphQL.FieldResolver(_type => [Point], {
+    nullable: false
+  })
+  async points(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPointsArgs): Promise<Point[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).points(args);
+  }
+}
+"
+`;
+
+exports[`relations resolvers generation should not emit relation resolver when relation field is ignored: argsIndex 1`] = `
+"export * from \\"./User/args\\";
+"
+`;
+
+exports[`relations resolvers generation should not emit relation resolver when relation field is ignored: index 1`] = `
+"export * from \\"./resolvers.index\\";
+export * from \\"./args.index\\";
+"
+`;
+
+exports[`relations resolvers generation should not emit relation resolver when relation field is ignored: mainIndex 1`] = `
+"import * as crudResolversImport from \\"./resolvers/crud/resolvers-crud.index\\";
+import * as relationResolversImport from \\"./resolvers/relations/resolvers.index\\";
+import { NonEmptyArray } from \\"type-graphql\\";
+
+export * from \\"./enums\\";
+export * from \\"./models\\";
+export * from \\"./resolvers/crud\\";
+
+export const crudResolvers = Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>;
+
+export * from \\"./resolvers/relations\\";
+
+export const relationResolvers = Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>;
+
+export * from \\"./resolvers/inputs\\";
+export * from \\"./resolvers/outputs\\";
+export * from \\"./enhance\\";
+export * from \\"./scalars\\";
+
+export const resolvers = [
+  ...crudResolvers,
+  ...relationResolvers,
+] as unknown as NonEmptyArray<Function>;
+"
+`;
+
+exports[`relations resolvers generation should not emit relation resolver when relation field is ignored: resolversIndex 1`] = `
+"export { PointRelationsResolver } from \\"./Point/PointRelationsResolver\\";
+export { UserRelationsResolver } from \\"./User/UserRelationsResolver\\";
+"
+`;
+
 exports[`relations resolvers generation should properly generate args classes for sorting by relation fields: FirstModelSecondModelsFieldArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

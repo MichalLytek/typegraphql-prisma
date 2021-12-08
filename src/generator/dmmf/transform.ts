@@ -79,7 +79,7 @@ function transformModelField(dmmfDocument: DmmfDocument) {
       field.kind === "enum"
         ? "enumTypes"
         : field.kind === "object"
-        ? "inputObjectTypes"
+        ? "outputObjectTypes"
         : "scalar";
     if (typeof field.type !== "string") {
       throw new Error(
@@ -490,7 +490,12 @@ export function generateRelationModel(dmmfDocument: DmmfDocument) {
     )!;
     const resolverName = `${model.typeName}RelationsResolver`;
     const relationFields = model.fields
-      .filter(field => field.relationName && !field.isOmitted.output)
+      .filter(
+        field =>
+          field.relationName &&
+          !field.isOmitted.output &&
+          outputType.fields.some(it => it.name === field.name),
+      )
       .map<DMMF.RelationField>(field => {
         const outputTypeField = outputType.fields.find(
           it => it.name === field.name,
