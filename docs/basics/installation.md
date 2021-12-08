@@ -54,3 +54,22 @@ Finally, please also install the `tslib` package, which is required for [applyin
 ```sh
 npm i tslib
 ```
+
+### TypeScript configuration
+
+As prisma emits multiple files, make sure you have your tsconfig set properly to `"module": "commonjs"`:
+
+```json {4}
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["es2018", "esnext.asynciterable"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+```
+
+Otherwise you may experience runtime errors like `ReferenceError: Cannot access 'BankAccountWhereInput' before initialization`.
+It's because those generated files rely on each other, so `commonjs` is needed to handle that cyclic imports.
