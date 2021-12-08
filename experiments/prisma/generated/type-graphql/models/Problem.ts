@@ -29,7 +29,7 @@ export class Problem {
   creatorId?: number | null;
 
   @TypeGraphQL.Field(_type => ProblemCount, {
-    nullable: false
+    nullable: true
   })
-  _count!: ProblemCount;
+  _count?: ProblemCount | null;
 }

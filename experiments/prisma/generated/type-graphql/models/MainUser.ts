@@ -65,9 +65,9 @@ export class MainUser {
   aliases!: string[];
 
   @TypeGraphQL.Field(_type => MainUserCount, {
-    nullable: false
+    nullable: true
   })
-  _count!: MainUserCount;
+  _count?: MainUserCount | null;
 
   /**
    * renamed field doc

@@ -22,7 +22,7 @@ export class Director {
   movies?: Movie[];
 
   @TypeGraphQL.Field(_type => DirectorCount, {
-    nullable: false
+    nullable: true
   })
-  _count!: DirectorCount;
+  _count?: DirectorCount | null;
 }

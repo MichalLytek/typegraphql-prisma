@@ -183,12 +183,12 @@ function transformOutputType(dmmfDocument: DmmfDocument) {
     const typeName = getMappedOutputTypeName(dmmfDocument, outputType.name);
     return {
       ...outputType,
-
       typeName,
       fields: outputType.fields
         .filter(field => field.deprecation === undefined)
         .map<DMMF.OutputSchemaField>(field => {
-          const isFieldRequired = field.isNullable !== true;
+          const isFieldRequired =
+            field.isNullable !== true && field.name !== "_count";
           const outputTypeInfo: DMMF.TypeInfo = {
             ...field.outputType,
             type: getMappedOutputTypeName(

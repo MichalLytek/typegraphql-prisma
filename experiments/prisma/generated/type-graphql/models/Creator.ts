@@ -24,7 +24,7 @@ export class Creator {
   problems?: Problem[];
 
   @TypeGraphQL.Field(_type => CreatorCount, {
-    nullable: false
+    nullable: true
   })
-  _count!: CreatorCount;
+  _count?: CreatorCount | null;
 }
