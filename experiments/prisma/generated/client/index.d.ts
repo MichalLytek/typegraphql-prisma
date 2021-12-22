@@ -423,8 +423,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.6.0
-   * Query Engine version: dc520b92b1ebb2d28dc3161f9f82e875bd35d727
+   * Prisma Client JS version: 3.7.0
+   * Query Engine version: 8746e055198f517658c08a0c426c7eec87f5a85f
    */
   export type PrismaVersion = {
     client: string
@@ -10290,10 +10290,6 @@ export namespace Prisma {
 
   export type JsonFilterBase = {
     equals?: JsonNullValueFilter | InputJsonValue
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
     path?: Array<string>
     string_contains?: string
     string_starts_with?: string
@@ -10301,6 +10297,10 @@ export namespace Prisma {
     array_contains?: InputJsonValue | null
     array_starts_with?: InputJsonValue | null
     array_ends_with?: InputJsonValue | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
     not?: JsonNullValueFilter | InputJsonValue
   }
 
@@ -10416,10 +10416,6 @@ export namespace Prisma {
 
   export type JsonWithAggregatesFilterBase = {
     equals?: JsonNullValueFilter | InputJsonValue
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
     path?: Array<string>
     string_contains?: string
     string_starts_with?: string
@@ -10427,6 +10423,10 @@ export namespace Prisma {
     array_contains?: InputJsonValue | null
     array_starts_with?: InputJsonValue | null
     array_ends_with?: InputJsonValue | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
     not?: JsonNullValueFilter | InputJsonValue
     _count?: NestedIntFilter
     _min?: NestedJsonFilter
@@ -11360,10 +11360,6 @@ export namespace Prisma {
 
   export type NestedJsonFilterBase = {
     equals?: JsonNullValueFilter | InputJsonValue
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
     path?: Array<string>
     string_contains?: string
     string_starts_with?: string
@@ -11371,6 +11367,10 @@ export namespace Prisma {
     array_contains?: InputJsonValue | null
     array_starts_with?: InputJsonValue | null
     array_ends_with?: InputJsonValue | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
     not?: JsonNullValueFilter | InputJsonValue
   }
 

@@ -2892,7 +2892,7 @@ var require_strip_indent = __commonJS2({
   }
 });
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -3465,13 +3465,13 @@ var require_dist8 = __commonJS2({
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727",
+        version: "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "dc520b92b1ebb2d28dc3161f9f82e875bd35d727"
+          enginesVersion: "8746e055198f517658c08a0c426c7eec87f5a85f"
         },
         repository: {
           type: "git",
@@ -3479,8 +3479,8 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "16.11.10",
-          typescript: "4.5.2"
+          "@types/node": "16.11.13",
+          typescript: "4.5.4"
         },
         scripts: {
           build: "tsc -d",
@@ -24972,7 +24972,7 @@ ${error2.message}` : execaMessage;
   }
 });
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -24995,7 +24995,7 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25177,7 +25177,7 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25200,7 +25200,7 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -25227,7 +25227,7 @@ var require_platforms2 = __commonJS2({
   }
 });
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -30118,7 +30118,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.6.0",
+      version: "3.7.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -30185,10 +30185,10 @@ var require_package2 = __commonJS2({
         "@microsoft/api-extractor": "7.18.19",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727",
-        "@prisma/fetch-engine": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727",
+        "@prisma/engines": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f",
+        "@prisma/fetch-engine": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727",
+        "@prisma/get-platform": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@timsuchanek/copy": "1.4.5",
@@ -30217,7 +30217,7 @@ var require_package2 = __commonJS2({
         "indent-string": "4.0.0",
         "is-obj": "2.0.0",
         "is-regexp": "2.1.0",
-        jest: "27.3.1",
+        jest: "27.4.5",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
         "lint-staged": "12.0.2",
@@ -30237,7 +30237,7 @@ var require_package2 = __commonJS2({
         "stacktrace-parser": "0.1.10",
         "strip-ansi": "6.0.1",
         "strip-indent": "3.0.0",
-        "ts-jest": "27.0.7",
+        "ts-jest": "27.1.1",
         "ts-node": "10.4.0",
         tsd: "0.18.0",
         typescript: "4.4.4"
@@ -30251,7 +30251,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727"
+        "@prisma/engines-version": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f"
       },
       "lint-staged": {
         "*.ts": [
@@ -34446,7 +34446,12 @@ function parseStack({
     const exists4 = fs7.existsSync(trace.file);
     if (exists4) {
       const file2 = fs7.readFileSync(trace.file, "utf-8");
-      const slicedFile = file2.split("\n").slice(start, lineNumber).join("\n");
+      const slicedFile = file2.split("\n").slice(start, lineNumber).map((line) => {
+        if (line.endsWith("\r")) {
+          return line.slice(0, -1);
+        }
+        return line;
+      }).join("\n");
       const lines = dedent(slicedFile).split("\n");
       const theLine = lines[lines.length - 1];
       if (!theLine || theLine.trim() === "") {
@@ -36064,7 +36069,7 @@ var LibraryEngine = /* @__PURE__ */ __name(class extends Engine {
     if (engines.length >= 10) {
       const runningEngines = engines.filter((e) => e.engine);
       if (runningEngines.length === 10) {
-        console.warn(`${import_chalk7.default.yellow("warn(prisma-client)")} Already 10 Prisma Clients are actively running.`);
+        console.warn(`${import_chalk7.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`);
       }
     }
   }
@@ -36969,7 +36974,7 @@ You may have to run ${import_chalk8.default.greenBright("prisma generate")} for 
     if (engines2.length >= 10) {
       const runningEngines = engines2.filter((e) => e.child);
       if (runningEngines.length === 10) {
-        console.warn(`${import_chalk8.default.yellow("warn(prisma-client)")} Already 10 Prisma Clients are actively running.`);
+        console.warn(`${import_chalk8.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`);
       }
     }
   }
@@ -38350,7 +38355,8 @@ function loadEnv(envPath) {
     debug6(`Environment variables loaded from ${envPath}`);
     return {
       dotenvResult: dotenvExpand(import_dotenv.default.config({
-        path: envPath
+        path: envPath,
+        debug: process.env.DOTENV_CONFIG_DEBUG ? true : void 0
       })),
       message: import_chalk10.default.dim(`Environment variables loaded from ${import_path4.default.relative(process.cwd(), envPath)}`),
       path: envPath
@@ -38524,7 +38530,6 @@ var NotFoundError2 = /* @__PURE__ */ __name(class extends Error {
   constructor(message) {
     super(message);
     this.name = "NotFoundError";
-    this.stack = void 0;
   }
 }, "NotFoundError2");
 __name2(NotFoundError2, "NotFoundError");
@@ -39348,6 +39353,7 @@ function getPrismaClient(config2) {
             };
             break;
           }
+          case "cockroachdb":
           case "postgresql": {
             const queryInstance = sqlTemplateTag.sqltag(query2, ...values);
             queryString = queryInstance.text;
@@ -39366,6 +39372,9 @@ function getPrismaClient(config2) {
             };
             break;
           }
+          default: {
+            throw new Error(`The ${this._activeProvider} provider does not support $executeRaw`);
+          }
         }
       } else {
         switch (this._activeProvider) {
@@ -39373,6 +39382,7 @@ function getPrismaClient(config2) {
           case "mysql":
             queryString = query2.sql;
             break;
+          case "cockroachdb":
           case "postgresql":
             queryString = query2.text;
             checkAlter(queryString, query2.values, "prisma.$executeRaw(sql`<SQL>`)");
@@ -39380,6 +39390,8 @@ function getPrismaClient(config2) {
           case "sqlserver":
             queryString = mssqlPreparedStatement(query2.strings);
             break;
+          default:
+            throw new Error(`The ${this._activeProvider} provider does not support $executeRaw`);
         }
         parameters = {
           values: serializeRawParameters(query2.values),
@@ -39460,6 +39472,7 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
             };
             break;
           }
+          case "cockroachdb":
           case "postgresql": {
             const queryInstance = sqlTemplateTag.sqltag(query2, ...values);
             queryString = queryInstance.text;
@@ -39478,6 +39491,9 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
             };
             break;
           }
+          default: {
+            throw new Error(`The ${this._activeProvider} provider does not support $queryRaw`);
+          }
         }
       } else {
         switch (this._activeProvider) {
@@ -39485,12 +39501,16 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
           case "mysql":
             queryString = query2.sql;
             break;
+          case "cockroachdb":
           case "postgresql":
             queryString = query2.text;
             break;
           case "sqlserver":
             queryString = mssqlPreparedStatement(query2.strings);
             break;
+          default: {
+            throw new Error(`The ${this._activeProvider} provider does not support $queryRaw`);
+          }
         }
         parameters = {
           values: serializeRawParameters(query2.values),
