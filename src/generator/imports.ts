@@ -85,7 +85,7 @@ export function generatePrismaNamespaceImport(
       (level === 0 ? "./" : "") +
         path.posix.join(
           ...Array(level).fill(".."),
-          options.relativePrismaOutputPath,
+          options.customPrismaImportPath ?? options.relativePrismaOutputPath,
         ),
     namedImports: ["Prisma"],
   });

@@ -271,4 +271,26 @@ describe("models", () => {
       expect(secondModelTSFile).toMatchSnapshot("SecondModel");
     });
   });
+
+  describe("when customPrismaImportPath is set", () => {
+    it("should properly generate Prisma import path for model object type class", async () => {
+      const schema = /* prisma */ `
+        model SampleModel {
+          intIdField Int   @id @default(autoincrement())
+          intField   Int   @unique
+          floatField Float
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        customPrismaImportPath: "../test/import",
+      });
+      const firstModelTSFile = await readGeneratedFile(
+        "/models/SampleModel.ts",
+      );
+
+      expect(firstModelTSFile).toMatchSnapshot("SampleModel");
+    });
+  });
 });

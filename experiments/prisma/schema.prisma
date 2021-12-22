@@ -20,6 +20,7 @@ generator typegraphql {
   useUncheckedScalarInputs = false
   emitIdAsIDType           = true
   // emitOnly                 = "crudResolvers"
+  customPrismaImportPath   = "../client"
 }
 
 // Role enum comment

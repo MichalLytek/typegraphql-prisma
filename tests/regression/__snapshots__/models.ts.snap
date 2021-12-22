@@ -467,6 +467,34 @@ export class Service {
 "
 `;
 
+exports[`models when customPrismaImportPath is set should properly generate Prisma import path for model object type class: SampleModel 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../test/import\\";
+import { DecimalJSScalar } from \\"../scalars\\";
+
+@TypeGraphQL.ObjectType(\\"SampleModel\\", {
+  isAbstract: true
+})
+export class SampleModel {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intIdField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+}
+"
+`;
+
 exports[`models when emitIdAsIDType is set to true should properly generate model object type class: FirstModel 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

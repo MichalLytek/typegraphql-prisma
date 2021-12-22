@@ -867,6 +867,49 @@ export class AggregateSample {
 "
 `;
 
+exports[`outputs when simpleResolvers option is enabled should properly generate output type classes: AggregateSample 2`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../test/import\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SampleAvgAggregate } from \\"../outputs/SampleAvgAggregate\\";
+import { SampleCountAggregate } from \\"../outputs/SampleCountAggregate\\";
+import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
+import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
+import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
+
+@TypeGraphQL.ObjectType(\\"AggregateSample\\", {
+  isAbstract: true
+})
+export class AggregateSample {
+  @TypeGraphQL.Field(_type => SampleCountAggregate, {
+    nullable: true
+  })
+  _count!: SampleCountAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleAvgAggregate, {
+    nullable: true
+  })
+  _avg!: SampleAvgAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleSumAggregate, {
+    nullable: true
+  })
+  _sum!: SampleSumAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleMinAggregate, {
+    nullable: true
+  })
+  _min!: SampleMinAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleMaxAggregate, {
+    nullable: true
+  })
+  _max!: SampleMaxAggregate | null;
+}
+"
+`;
+
 exports[`outputs when simpleResolvers option is enabled should properly generate output type classes: SampleAvgAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

@@ -157,20 +157,20 @@ describe("outputs", () => {
 
   it("should properly generate count classes for relation fields", async () => {
     const schema = /* prisma */ `
-        model FirstModel {
-          idField            Int            @id @default(autoincrement())
-          uniqueStringField  String         @unique
-          floatField         Float
-          secondModelsField  SecondModel[]
-        }
-        model SecondModel {
-          idField            Int          @id @default(autoincrement())
-          uniqueStringField  String       @unique
-          floatField         Float
-          firstModelFieldId  Int
-          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
-        }
-      `;
+      model FirstModel {
+        idField            Int            @id @default(autoincrement())
+        uniqueStringField  String         @unique
+        floatField         Float
+        secondModelsField  SecondModel[]
+      }
+      model SecondModel {
+        idField            Int          @id @default(autoincrement())
+        uniqueStringField  String       @unique
+        floatField         Float
+        firstModelFieldId  Int
+        firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+      }
+    `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
     const firstModelCountTSFile = await readGeneratedFile(
@@ -213,6 +213,30 @@ describe("outputs", () => {
       expect(aggregateSampleTSFile).toMatchSnapshot("AggregateSample");
       expect(avgAggregateTSFile).toMatchSnapshot("SampleAvgAggregate");
       expect(affectedRowsOutputTSFile).toMatchSnapshot("AffectedRowsOutput");
+    });
+  });
+
+  describe("when simpleResolvers option is enabled", () => {
+    it("should properly generate output type classes", async () => {
+      const schema = /* prisma */ `
+        model Sample {
+          intIdField    Int       @id @default(autoincrement())
+          stringField   String
+          floatField    Float
+          booleanField  Boolean
+          dateField     DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        customPrismaImportPath: "../test/import",
+      });
+      const aggregateSampleTSFile = await readGeneratedFile(
+        "/resolvers/outputs/AggregateSample.ts",
+      );
+
+      expect(aggregateSampleTSFile).toMatchSnapshot("AggregateSample");
     });
   });
 });
