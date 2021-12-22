@@ -9,6 +9,9 @@ async function main() {
   await prisma.user.deleteMany({});
   await prisma.category.deleteMany({});
   await prisma.patient.deleteMany({});
+  await prisma.director.deleteMany({});
+  await prisma.movie.deleteMany({});
+  await prisma.nativeTypeModel.deleteMany({});
 
   await prisma.user.create({
     data: {
@@ -156,7 +159,7 @@ async function main() {
 
   await prisma.nativeTypeModel.create({
     data: {
-      bigInt: BigInt(987_654_321_000_000),
+      bigInt: BigInt("123456789123456789"),
       decimal: new Prisma.Decimal(21.37),
       byteA: Buffer.from([4, 8, 15, 16, 23, 42]),
     },

@@ -94,7 +94,9 @@ scalar Byte
 
 input BytesNullableFilter {
   equals: Byte
+  in: [Byte!]
   not: NestedBytesNullableFilter
+  notIn: [Byte!]
 }
 
 input BytesNullableWithAggregatesFilter {
@@ -102,7 +104,9 @@ input BytesNullableWithAggregatesFilter {
   _max: NestedBytesNullableFilter
   _min: NestedBytesNullableFilter
   equals: Byte
+  in: [Byte!]
   not: NestedBytesNullableWithAggregatesFilter
+  notIn: [Byte!]
 }
 
 type Category {
@@ -238,7 +242,7 @@ input CategoryWhereUniqueInput {
 }
 
 type Creator {
-  _count: CreatorCount!
+  _count: CreatorCount
   id: ID!
   likes(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ProblemWhereInput): [Problem!]!
   name: String!
@@ -559,7 +563,7 @@ input DecimalNullableWithAggregatesFilter {
 }
 
 type Director {
-  _count: DirectorCount!
+  _count: DirectorCount
   firstName: String!
   lastName: String!
   movies(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MovieWhereInput): [Movie!]!
@@ -911,7 +915,7 @@ input JsonWithAggregatesFilter {
 
 """User model doc"""
 type MainUser {
-  _count: MainUserCount!
+  _count: MainUserCount
   accountBalance: Float!
   age: Int!
   aliases: [String!]!
@@ -1779,7 +1783,9 @@ input NestedBigIntNullableWithAggregatesFilter {
 
 input NestedBytesNullableFilter {
   equals: Byte
+  in: [Byte!]
   not: NestedBytesNullableFilter
+  notIn: [Byte!]
 }
 
 input NestedBytesNullableWithAggregatesFilter {
@@ -1787,7 +1793,9 @@ input NestedBytesNullableWithAggregatesFilter {
   _max: NestedBytesNullableFilter
   _min: NestedBytesNullableFilter
   equals: Byte
+  in: [Byte!]
   not: NestedBytesNullableWithAggregatesFilter
+  notIn: [Byte!]
 }
 
 input NestedDateTimeFilter {
@@ -2672,7 +2680,7 @@ input PostWhereUniqueInput {
 }
 
 type Problem {
-  _count: ProblemCount!
+  _count: ProblemCount
   creator: Creator
   creatorId: Int
   id: ID!
