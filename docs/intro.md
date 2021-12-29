@@ -34,7 +34,7 @@ const schema = await buildSchema({
 });
 ```
 
-When you expose that schema over the HTTP, following the [bootstrap guide](https://typegraphql.com/docs/bootstrap.html#create-an-http-graphql-endpoint), you will be able to execute such complex query, that talks with the real database, in just a few minutes!
+When you expose that schema over the HTTP, following the [bootstrap guide](https://typegraphql.com/docs/bootstrap.html#create-an-http-graphql-endpoint), you will be able to execute a complex query, that talks with the real database, in just a few minutes!
 
 ```graphql
 query GetSomeUsers {
