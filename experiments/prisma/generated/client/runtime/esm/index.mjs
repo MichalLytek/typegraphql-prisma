@@ -2836,9 +2836,9 @@ var require_strip_indent = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+engines@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/engines/dist/index.js
+// ../../node_modules/.pnpm/@prisma+engines@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/engines/dist/index.js
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -3389,13 +3389,13 @@ var require_dist8 = __commonJS2({
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f",
+        version: "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "8746e055198f517658c08a0c426c7eec87f5a85f"
+          enginesVersion: "34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"
         },
         repository: {
           type: "git",
@@ -3403,7 +3403,7 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "16.11.13",
+          "@types/node": "16.11.19",
           typescript: "4.5.4"
         },
         scripts: {
@@ -9731,7 +9731,7 @@ ${error2.message}` : execaMessage;
       __name(getNodeModuleDirectory, "getNodeModuleDirectory");
       module2.exports = (options2 = {}) => {
         if (env.CACHE_DIR && !["true", "false", "1", "0"].includes(env.CACHE_DIR)) {
-          return useDirectory(path22.join(env.CACHE_DIR, "find-cache-dir"), options2);
+          return useDirectory(path22.join(env.CACHE_DIR, options2.name), options2);
         }
         let { cwd: directory = cwd() } = options2;
         if (options2.files) {
@@ -12525,6 +12525,7 @@ ${error2.message}` : execaMessage;
         this._operationTimeoutCb = null;
         this._timeout = null;
         this._operationStart = null;
+        this._timer = null;
         if (this._options.forever) {
           this._cachedTimeouts = this._timeouts.slice(0);
         }
@@ -12533,11 +12534,14 @@ ${error2.message}` : execaMessage;
       module2.exports = RetryOperation;
       RetryOperation.prototype.reset = function() {
         this._attempts = 1;
-        this._timeouts = this._originalTimeouts;
+        this._timeouts = this._originalTimeouts.slice(0);
       };
       RetryOperation.prototype.stop = function() {
         if (this._timeout) {
           clearTimeout(this._timeout);
+        }
+        if (this._timer) {
+          clearTimeout(this._timer);
         }
         this._timeouts = [];
         this._cachedTimeouts = null;
@@ -12551,6 +12555,7 @@ ${error2.message}` : execaMessage;
         }
         var currentTime = new Date().getTime();
         if (err && currentTime - this._operationStart >= this._maxRetryTime) {
+          this._errors.push(err);
           this._errors.unshift(new Error("RetryOperation timeout occurred"));
           return false;
         }
@@ -12558,15 +12563,14 @@ ${error2.message}` : execaMessage;
         var timeout = this._timeouts.shift();
         if (timeout === void 0) {
           if (this._cachedTimeouts) {
-            this._errors.splice(this._errors.length - 1, this._errors.length);
-            this._timeouts = this._cachedTimeouts.slice(0);
-            timeout = this._timeouts.shift();
+            this._errors.splice(0, this._errors.length - 1);
+            timeout = this._cachedTimeouts.slice(-1);
           } else {
             return false;
           }
         }
         var self2 = this;
-        var timer = setTimeout(function() {
+        this._timer = setTimeout(function() {
           self2._attempts++;
           if (self2._operationTimeoutCb) {
             self2._timeout = setTimeout(function() {
@@ -12579,7 +12583,7 @@ ${error2.message}` : execaMessage;
           self2._fn(self2._attempts);
         }, timeout);
         if (this._options.unref) {
-          timer.unref();
+          this._timer.unref();
         }
         return true;
       };
@@ -12642,7 +12646,7 @@ ${error2.message}` : execaMessage;
       exports2.operation = function(options2) {
         var timeouts = exports2.timeouts(options2);
         return new RetryOperation(timeouts, {
-          forever: options2 && options2.forever,
+          forever: options2 && (options2.forever || options2.retries === Infinity),
           unref: options2 && options2.unref,
           maxRetryTime: options2 && options2.maxRetryTime
         });
@@ -12678,7 +12682,7 @@ ${error2.message}` : execaMessage;
       };
       exports2.createTimeout = function(attempt, opts2) {
         var random2 = opts2.randomize ? Math.random() + 1 : 1;
-        var timeout = Math.round(random2 * opts2.minTimeout * Math.pow(opts2.factor, attempt));
+        var timeout = Math.round(random2 * Math.max(opts2.minTimeout, 1) * Math.pow(opts2.factor, attempt));
         timeout = Math.min(timeout, opts2.maxTimeout);
         return timeout;
       };
@@ -12727,8 +12731,9 @@ ${error2.message}` : execaMessage;
       var retry = require_retry2();
       var networkErrorMsgs = [
         "Failed to fetch",
-        "NetworkError when attempting to fetch resource",
-        "The Internet connection appears to be offline"
+        "NetworkError when attempting to fetch resource.",
+        "The Internet connection appears to be offline.",
+        "Network request failed"
       ];
       var AbortError = /* @__PURE__ */ __name(class extends Error {
         constructor(message) {
@@ -23336,9 +23341,11 @@ ${error2.message}` : execaMessage;
       var createTask = /* @__PURE__ */ __name((tempyFunction, { extraArguments = 0 } = {}) => async (...arguments_) => {
         const [callback, options2] = arguments_.slice(extraArguments);
         const result = await tempyFunction(...arguments_.slice(0, extraArguments), options2);
-        const returnValue = await callback(result);
-        await del(result, { force: true });
-        return returnValue;
+        try {
+          return await callback(result);
+        } finally {
+          await del(result, { force: true });
+        }
       }, "createTask");
       module2.exports.file = (options2) => {
         options2 = {
@@ -23642,14 +23649,14 @@ ${error2.message}` : execaMessage;
       var util_12 = require_util2();
       async function getLatestTag() {
         let branch = await getBranch();
-        if (branch !== "master" && !isPatchBranch(branch) && !branch.startsWith("integration/")) {
-          branch = "master";
+        if (branch !== "main" && !isPatchBranch(branch) && !branch.startsWith("integration/")) {
+          branch = "main";
         }
         branch = branch.replace(/^integration\//, "");
         let commits = await getCommits(branch);
-        if ((!commits || !Array.isArray(commits)) && branch !== "master" && !isPatchBranch(branch)) {
-          console.log(`Overwriting branch "${branch}" with "master" as it's not a branch we have binaries for`);
-          branch = "master";
+        if ((!commits || !Array.isArray(commits)) && branch !== "main" && !isPatchBranch(branch)) {
+          console.log(`Overwriting branch "${branch}" with "main" as it's not a branch we have binaries for`);
+          branch = "main";
           commits = await getCommits(branch);
         }
         if (!Array.isArray(commits)) {
@@ -23771,10 +23778,7 @@ ${error2.message}` : execaMessage;
       async function getCommits(branch) {
         const url2 = `https://github-cache.prisma.workers.dev/repos/prisma/prisma-engines/commits?sha=${branch}`;
         const result = await (0, node_fetch_1.default)(url2, {
-          agent: (0, getProxyAgent_1.getProxyAgent)(url2),
-          headers: {
-            Authorization: process.env.GITHUB_TOKEN ? `token ${process.env.GITHUB_TOKEN}` : void 0
-          }
+          agent: (0, getProxyAgent_1.getProxyAgent)(url2)
         }).then((res) => res.json());
         if (!Array.isArray(result)) {
           return result;
@@ -24409,9 +24413,9 @@ ${error2.message}` : execaMessage;
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/getNodeAPIName.js
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -24433,9 +24437,9 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/getPlatform.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/getPlatform.js
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -24610,9 +24614,9 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -24634,9 +24638,9 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/platforms.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/platforms.js
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -24663,9 +24667,9 @@ var require_platforms2 = __commonJS2({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/index.js
+// ../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/index.js
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -29598,7 +29602,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.7.0",
+      version: "3.8.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -29662,33 +29666,33 @@ var require_package2 = __commonJS2({
         "index-browser.js"
       ],
       devDependencies: {
-        "@microsoft/api-extractor": "7.18.19",
+        "@microsoft/api-extractor": "7.19.3",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f",
-        "@prisma/fetch-engine": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f",
+        "@prisma/engines": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f",
+        "@prisma/fetch-engine": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f",
+        "@prisma/get-platform": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@timsuchanek/copy": "1.4.5",
         "@types/debug": "4.1.7",
-        "@types/jest": "27.0.3",
-        "@types/js-levenshtein": "1.1.0",
-        "@types/mssql": "6.0.8",
-        "@types/node": "12.20.37",
-        "@types/pg": "8.6.1",
-        "@typescript-eslint/eslint-plugin": "5.4.0",
-        "@typescript-eslint/parser": "5.4.0",
+        "@types/jest": "27.4.0",
+        "@types/js-levenshtein": "1.1.1",
+        "@types/mssql": "7.1.4",
+        "@types/node": "12.20.39",
+        "@types/pg": "8.6.3",
+        "@typescript-eslint/eslint-plugin": "5.9.0",
+        "@typescript-eslint/parser": "5.9.0",
         arg: "5.0.1",
         benchmark: "2.1.4",
         chalk: "4.1.2",
         "decimal.js": "10.3.1",
         esbuild: "0.13.14",
-        eslint: "8.3.0",
+        eslint: "8.6.0",
         "eslint-config-prettier": "8.3.0",
         "eslint-plugin-eslint-comments": "3.2.0",
-        "eslint-plugin-jest": "25.3.0",
+        "eslint-plugin-jest": "25.3.4",
         "eslint-plugin-prettier": "4.0.0",
         execa: "5.1.1",
         "flat-map-polyfill": "0.3.8",
@@ -29697,30 +29701,30 @@ var require_package2 = __commonJS2({
         "indent-string": "4.0.0",
         "is-obj": "2.0.0",
         "is-regexp": "2.1.0",
-        jest: "27.4.5",
+        jest: "27.4.6",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
-        "lint-staged": "12.0.2",
+        "lint-staged": "12.1.5",
         "lz-string": "1.4.4",
         "make-dir": "3.1.0",
         mariadb: "2.5.5",
-        mssql: "7.2.1",
+        mssql: "7.3.0",
         pg: "8.7.1",
         "pkg-up": "3.1.0",
         pluralize: "8.0.0",
-        prettier: "2.4.1",
+        prettier: "2.5.1",
         "replace-string": "3.1.0",
         rimraf: "3.0.2",
         "sort-keys": "4.2.0",
-        "source-map-support": "0.5.20",
+        "source-map-support": "0.5.21",
         "sql-template-tag": "4.0.0",
         "stacktrace-parser": "0.1.10",
         "strip-ansi": "6.0.1",
         "strip-indent": "3.0.0",
-        "ts-jest": "27.1.1",
+        "ts-jest": "27.1.2",
         "ts-node": "10.4.0",
-        tsd: "0.18.0",
-        typescript: "4.4.4"
+        tsd: "0.19.1",
+        typescript: "4.5.4"
       },
       peerDependencies: {
         prisma: "*"
@@ -29731,7 +29735,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f"
+        "@prisma/engines-version": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"
       },
       "lint-staged": {
         "*.ts": [
@@ -35795,7 +35799,7 @@ ${error2.backtrace}`, this.config.clientVersion);
     }
     for (const location of searchLocations) {
       searchedLocations.push(location);
-      debug4(`Search for Query Engine Library in ${location}`);
+      debug4(`Searching for Query Engine Library in ${location}`);
       enginePath = path.join(location, (0, import_get_platform.getNodeAPIName)(this.platform, "fs"));
       if (fs2.existsSync(enginePath)) {
         return { enginePath, searchedLocations };
@@ -38627,7 +38631,7 @@ function getPrismaClient(config2) {
           dirname: config2.dirname,
           enableDebugLogs: useDebug,
           allowTriggerPanic: engineConfig.allowTriggerPanic,
-          datamodelPath: path4.join(config2.dirname, "schema.prisma"),
+          datamodelPath: path4.join(config2.dirname, config2.filename ?? "schema.prisma"),
           prismaPath: engineConfig.binaryPath ?? void 0,
           engineEndpoint: engineConfig.endpoint,
           datasources,
@@ -39103,7 +39107,7 @@ new PrismaClient({
           if (nextMiddleware) {
             return nextMiddleware(changedParams, consumer);
           }
-          const changedInternalParams = { ...internalParams, ...params };
+          const changedInternalParams = { ...internalParams, ...changedParams };
           if (index > 0 && !this._hasPreviewFlag("interactiveTransactions")) {
             delete changedInternalParams["transactionId"];
           }
