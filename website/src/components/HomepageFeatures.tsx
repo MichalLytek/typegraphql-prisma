@@ -34,12 +34,12 @@ const FeatureList: FeatureDefinition[] = [
     ),
   },
   {
-    title: "Extensible to the Needs",
+    title: "Extensible Design",
     Svg: maximizeSvg,
     description: (
       <>
         Reuse generated classes to create custom resolvers with ease. Combine
-        them with generated CRUD resolvers to compose the GraphQL API from the
+        them with generated CRUD resolvers to compose the GraphQL API of your
         dreams.
       </>
     ),
