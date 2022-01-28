@@ -29602,7 +29602,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.8.0",
+      version: "3.8.1",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -29644,7 +29644,6 @@ var require_package2 = __commonJS2({
       scripts: {
         dev: "DEV=true node -r esbuild-register helpers/build.ts",
         build: "node -r esbuild-register helpers/build.ts",
-        depcheck: "node -r esbuild-register ../../helpers/compile/depcheck.ts",
         test: "jest --verbose",
         "test-notypes": "jest --verbose --testPathIgnorePatterns src/__tests__/types/types.test.ts",
         format: "prettier --write .",
