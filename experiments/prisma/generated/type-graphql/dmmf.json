@@ -251,7 +251,8 @@
             "type": "DateTime",
             "hasDefaultValue": false,
             "isGenerated": false,
-            "isUpdatedAt": true
+            "isUpdatedAt": true,
+            "documentation": "@TypeGraphQL.omit(input: [\"create\", \"update\"])"
           },
           {
             "name": "published",

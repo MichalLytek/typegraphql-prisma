@@ -65,6 +65,7 @@ model post {
   /// third line of comment
   uuid      String    @id @default(uuid())
   createdAt DateTime  @default(now())
+  /// @TypeGraphQL.omit(input: ["create", "update"])
   updatedAt DateTime  @updatedAt
   /// @TypeGraphQL.omit(input: true)
   published Boolean   @default(false)

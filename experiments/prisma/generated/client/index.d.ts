@@ -51,6 +51,9 @@ export type post = {
    */
   uuid: string
   createdAt: Date
+  /**
+   * @TypeGraphQL.omit(input: ["create", "update"])
+   */
   updatedAt: Date
   /**
    * @TypeGraphQL.omit(input: true)

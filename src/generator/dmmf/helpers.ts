@@ -20,14 +20,20 @@ export function parseDocumentationAttributes<TData extends object = object>(
   const rawAttributeArgs = attribute
     ?.match(attributeArgsRegex)?.[0]
     ?.slice(1, -1);
-  const splitRawArgsArray = rawAttributeArgs?.split(",").map(it => it.trim());
-  const parsedAttributeArgs =
-    splitRawArgsArray &&
-    (Object.fromEntries(
-      splitRawArgsArray.map(it => {
-        const [key, value] = it.split(": ");
-        return [key, JSON.parse(value)];
-      }),
-    ) as Partial<TData>);
-  return parsedAttributeArgs ?? {};
+  const parsedAttributeArgs: Record<string, unknown> = {};
+  if (rawAttributeArgs) {
+    const rawAttributeArgsParts = rawAttributeArgs
+      .split(":")
+      .map(it => it.trim())
+      .map(part => (part.startsWith("[") ? part : part.split(",")))
+      .flat()
+      .map(it => it.trim());
+
+    for (let i = 0; i < rawAttributeArgsParts.length; i += 2) {
+      const key = rawAttributeArgsParts[i];
+      const value = rawAttributeArgsParts[i + 1];
+      parsedAttributeArgs[key] = JSON.parse(value);
+    }
+  }
+  return parsedAttributeArgs as Partial<TData>;
 }
