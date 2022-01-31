@@ -12,6 +12,7 @@ import {
   generateTypeGraphQLImport,
   generateArgsImports,
   generateModelsImports,
+  generateGraphQLFieldsImport,
   generateHelpersFileImport,
 } from "../imports";
 import { DmmfDocument } from "../dmmf/dmmf-document";
@@ -50,6 +51,8 @@ export default function generateRelationsResolverClassesFromModel(
     overwrite: true,
   });
 
+  generateTypeGraphQLImport(sourceFile);
+  generateGraphQLFieldsImport(sourceFile);
   generateTypeGraphQLImport(sourceFile);
   generateModelsImports(
     sourceFile,
@@ -128,7 +131,13 @@ export default function generateRelationsResolverClassesFromModel(
               decorators: [{ name: "TypeGraphQL.Ctx", arguments: [] }],
             },
             ...(!field.argsTypeName
-              ? []
+              ? [
+                  {
+                    name: "info",
+                    type: "any",
+                    decorators: [{ name: "TypeGraphQL.Info", arguments: [] }],
+                  },
+                ]
               : [
                   {
                     name: "args",
@@ -139,11 +148,14 @@ export default function generateRelationsResolverClassesFromModel(
           ],
           // TODO: refactor to AST
           statements: [
-            /* ts */ `return getPrismaFromContext(ctx).${camelCase(
+              /* ts */ ` const { _count } = transformFields(
+                graphqlFields(info as any)
+              );
+              return getPrismaFromContext(ctx).${camelCase(
               model.name,
             )}.findUnique({
               where: {${whereConditionString}},
-            }).${field.name}(${field.argsTypeName ? "args" : "{}"});`,
+            }).${field.name}(${field.argsTypeName ? "args" : "{...(_count && transformCountFieldIntoSelectRelationsCount(_count))}"});`,
           ],
         };
       },
