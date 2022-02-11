@@ -2,7 +2,7 @@
 
 import { inspect } from 'util';
 
-declare type Action = DMMF.ModelAction | 'executeRaw' | 'queryRaw';
+declare type Action = keyof typeof DMMF.ModelAction | 'executeRaw' | 'queryRaw' | 'runCommandRaw';
 
 declare class Arg {
     key: string;
@@ -82,11 +82,36 @@ declare interface Client_2 {
     $queryRaw(query: TemplateStringsArray | sqlTemplateTag.Sql, ...values: any[]): any;
     __internal_triggerPanic(fatal: boolean): any;
     $transaction(input: any, options?: any): any;
+    _request(internalParams: InternalRequestParams): Promise<any>;
 }
 
-declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver';
+declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
 
-declare type ConnectorType_2 = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver';
+declare type ConnectorType_2 = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
+
+declare interface Context {
+    /**
+     * Get a value from the context.
+     *
+     * @param key key which identifies a context value
+     */
+    getValue(key: symbol): unknown;
+    /**
+     * Create a new context which inherits from this context and has
+     * the given key set to the given value.
+     *
+     * @param key context key for which to set the value
+     * @param value value to set for the given key
+     */
+    setValue(key: symbol, value: unknown): Context;
+    /**
+     * Return a new context which inherits from this context but does
+     * not contain a value for the given key.
+     *
+     * @param key context key for which to clear a value
+     */
+    deleteValue(key: symbol): Context;
+}
 
 declare class DataLoader<T = unknown> {
     private options;
@@ -475,7 +500,11 @@ export declare namespace DMMF {
         isReadOnly: boolean;
         isGenerated: boolean;
         isUpdatedAt: boolean;
-        type: string | DMMF.SchemaEnum | DMMF.OutputType | DMMF.SchemaArg;
+        /**
+         * Describes the data type in the same the way is is defined in the Prisma schema:
+         * BigInt, Boolean, Bytes, DateTime, Decimal, Float, Int, JSON, String, $ModelName
+         */
+        type: string;
         dbNames?: string[] | null;
         hasDefaultValue: boolean;
         default?: FieldDefault | string | boolean | number;
@@ -579,6 +608,8 @@ export declare namespace DMMF {
         aggregate?: string | null;
         groupBy?: string | null;
         count?: string | null;
+        findRaw?: string | null;
+        aggregateRaw?: string | null;
     }
     export enum ModelAction {
         findUnique = "findUnique",
@@ -593,7 +624,9 @@ export declare namespace DMMF {
         deleteMany = "deleteMany",
         groupBy = "groupBy",
         count = "count",
-        aggregate = "aggregate"
+        aggregate = "aggregate",
+        findRaw = "findRaw",
+        aggregateRaw = "aggregateRaw"
     }
 }
 
@@ -710,7 +743,6 @@ declare interface EngineConfig {
     logLevel?: 'info' | 'warn';
     env?: Record<string, string>;
     flags?: string[];
-    useUds?: boolean;
     clientVersion?: string;
     previewFeatures?: string[];
     engineEndpoint?: string;
@@ -903,6 +935,22 @@ declare interface InternalDatasource {
     config: any;
 }
 
+declare type InternalRequestParams = {
+    /**
+     * The original client method being called.
+     * Even though the rootField / operation can be changed,
+     * this method stays as it is, as it's what the user's
+     * code looks like
+     */
+    clientMethod: string;
+    callsite?: string;
+    /** Headers metadata that will be passed to the Engine */
+    headers?: Record<string, string>;
+    transactionId?: number;
+    unpacker?: Unpacker;
+    otelCtx?: Context;
+} & QueryMiddlewareParams;
+
 declare type InvalidArgError = InvalidArgNameError | MissingArgError | InvalidArgTypeError | AtLeastOneError | AtMostOneError | InvalidNullArgError;
 
 /**
@@ -1039,7 +1087,7 @@ declare class PrismaClientFetcher {
     get [Symbol.toStringTag](): string;
     request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, showColors, engineHook, args, headers, transactionId, unpacker, }: RequestParams): Promise<any>;
     sanitizeMessage(message: any): any;
-    unpack(document: any, data: any, path: any, rootField: any, unpacker?: Unpacker): any;
+    unpack(document: Document, data: any, path: string[], rootField: string, unpacker?: Unpacker): any;
 }
 
 export declare class PrismaClientInitializationError extends Error {
@@ -1093,7 +1141,6 @@ export declare interface PrismaClientOptions {
     __internal?: {
         debug?: boolean;
         hooks?: Hooks;
-        useUds?: boolean;
         engine?: {
             cwd?: string;
             binaryPath?: string;

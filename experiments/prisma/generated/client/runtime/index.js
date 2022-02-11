@@ -26,7 +26,7 @@ var __toModule2 = (module2) => {
 // runtime/esm/index.mjs
 __export2(exports, {
   DMMF: () => DMMF,
-  DMMFClass: () => DMMFClass,
+  DMMFClass: () => DMMFHelper,
   Decimal: () => decimal_default,
   Engine: () => Engine,
   PrismaClientInitializationError: () => PrismaClientInitializationError,
@@ -2715,7 +2715,7 @@ var require_dist7 = __commonJS2({
 var require_indent_string2 = __commonJS2({
   "../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js"(exports2, module2) {
     "use strict";
-    module2.exports = (string, count = 1, options2) => {
+    module2.exports = (string, count2 = 1, options2) => {
       options2 = {
         indent: " ",
         includeEmptyLines: false,
@@ -2724,17 +2724,17 @@ var require_indent_string2 = __commonJS2({
       if (typeof string !== "string") {
         throw new TypeError(`Expected \`input\` to be a \`string\`, got \`${typeof string}\``);
       }
-      if (typeof count !== "number") {
-        throw new TypeError(`Expected \`count\` to be a \`number\`, got \`${typeof count}\``);
+      if (typeof count2 !== "number") {
+        throw new TypeError(`Expected \`count\` to be a \`number\`, got \`${typeof count2}\``);
       }
       if (typeof options2.indent !== "string") {
         throw new TypeError(`Expected \`options.indent\` to be a \`string\`, got \`${typeof options2.indent}\``);
       }
-      if (count === 0) {
+      if (count2 === 0) {
         return string;
       }
       const regex = options2.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
-      return string.replace(regex, options2.indent.repeat(count));
+      return string.replace(regex, options2.indent.repeat(count2));
     };
   }
 });
@@ -2892,7 +2892,7 @@ var require_strip_indent = __commonJS2({
   }
 });
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -3465,13 +3465,13 @@ var require_dist8 = __commonJS2({
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f",
+        version: "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"
+          enginesVersion: "bcc2ff906db47790ee902e7bbc76d7ffb1893009"
         },
         repository: {
           type: "git",
@@ -3479,8 +3479,8 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "16.11.19",
-          typescript: "4.5.4"
+          "@types/node": "16.11.21",
+          typescript: "4.5.5"
         },
         scripts: {
           build: "tsc -d",
@@ -6563,10 +6563,10 @@ ${error2.message}` : execaMessage;
         }
         return forceKillAfterTimeout;
       }, "getForceKillAfterTimeout");
-      var spawnedCancel = /* @__PURE__ */ __name2((spawned, context) => {
+      var spawnedCancel = /* @__PURE__ */ __name2((spawned, context3) => {
         const killResult = spawned.kill();
         if (killResult) {
-          context.isCanceled = true;
+          context3.isCanceled = true;
         }
       }, "spawnedCancel");
       var timeoutKill = /* @__PURE__ */ __name2((spawned, signal, reject2) => {
@@ -6993,9 +6993,9 @@ ${error2.message}` : execaMessage;
         const spawnedPromise = getSpawnedPromise(spawned);
         const timedPromise = setupTimeout(spawned, parsed.options, spawnedPromise);
         const processDone = setExitHandler(spawned, parsed.options, timedPromise);
-        const context = { isCanceled: false };
+        const context3 = { isCanceled: false };
         spawned.kill = spawnedKill.bind(null, spawned.kill.bind(spawned));
-        spawned.cancel = spawnedCancel.bind(null, spawned, context);
+        spawned.cancel = spawnedCancel.bind(null, spawned, context3);
         const handlePromise = /* @__PURE__ */ __name2(async () => {
           const [{ error: error2, exitCode, signal, timedOut }, stdoutResult, stderrResult, allResult] = await getSpawnedResult(spawned, parsed.options, processDone);
           const stdout = handleOutput(parsed.options, stdoutResult);
@@ -7013,7 +7013,7 @@ ${error2.message}` : execaMessage;
               escapedCommand,
               parsed,
               timedOut,
-              isCanceled: context.isCanceled,
+              isCanceled: context3.isCanceled,
               killed: spawned.killed
             });
             if (!parsed.options.reject) {
@@ -7149,7 +7149,7 @@ ${error2.message}` : execaMessage;
       var { MAX_SAFE_COMPONENT_LENGTH } = require_constants();
       var debug32 = require_debug();
       exports2 = module2.exports = {};
-      var re = exports2.re = [];
+      var re2 = exports2.re = [];
       var src = exports2.src = [];
       var t = exports2.t = {};
       var R = 0;
@@ -7158,7 +7158,7 @@ ${error2.message}` : execaMessage;
         debug32(index, value);
         t[name] = index;
         src[index] = value;
-        re[index] = new RegExp(value, isGlobal ? "g" : void 0);
+        re2[index] = new RegExp(value, isGlobal ? "g" : void 0);
       }, "createToken");
       createToken("NUMERICIDENTIFIER", "0|[1-9]\\d*");
       createToken("NUMERICIDENTIFIERLOOSE", "[0-9]+");
@@ -7232,7 +7232,7 @@ ${error2.message}` : execaMessage;
     var require_semver = __commonJS((exports2, module2) => {
       var debug32 = require_debug();
       var { MAX_LENGTH, MAX_SAFE_INTEGER: MAX_SAFE_INTEGER2 } = require_constants();
-      var { re, t } = require_re();
+      var { re: re2, t } = require_re();
       var parseOptions = require_parse_options();
       var { compareIdentifiers } = require_identifiers();
       var SemVer = /* @__PURE__ */ __name2(class {
@@ -7254,7 +7254,7 @@ ${error2.message}` : execaMessage;
           this.options = options2;
           this.loose = !!options2.loose;
           this.includePrerelease = !!options2.includePrerelease;
-          const m = version.trim().match(options2.loose ? re[t.LOOSE] : re[t.FULL]);
+          const m = version.trim().match(options2.loose ? re2[t.LOOSE] : re2[t.FULL]);
           if (!m) {
             throw new TypeError(`Invalid Version: ${version}`);
           }
@@ -7451,7 +7451,7 @@ ${error2.message}` : execaMessage;
     });
     var require_parse2 = __commonJS((exports2, module2) => {
       var { MAX_LENGTH } = require_constants();
-      var { re, t } = require_re();
+      var { re: re2, t } = require_re();
       var SemVer = require_semver();
       var parseOptions = require_parse_options();
       var parse2 = /* @__PURE__ */ __name2((version, options2) => {
@@ -7465,7 +7465,7 @@ ${error2.message}` : execaMessage;
         if (version.length > MAX_LENGTH) {
           return null;
         }
-        const r = options2.loose ? re[t.LOOSE] : re[t.FULL];
+        const r = options2.loose ? re2[t.LOOSE] : re2[t.FULL];
         if (!r.test(version)) {
           return null;
         }
@@ -7544,8 +7544,8 @@ ${error2.message}` : execaMessage;
     });
     var require_major = __commonJS((exports2, module2) => {
       var SemVer = require_semver();
-      var major = /* @__PURE__ */ __name2((a, loose) => new SemVer(a, loose).major, "major");
-      module2.exports = major;
+      var major2 = /* @__PURE__ */ __name2((a, loose) => new SemVer(a, loose).major, "major");
+      module2.exports = major2;
     });
     var require_minor = __commonJS((exports2, module2) => {
       var SemVer = require_semver();
@@ -7663,7 +7663,7 @@ ${error2.message}` : execaMessage;
     var require_coerce = __commonJS((exports2, module2) => {
       var SemVer = require_semver();
       var parse2 = require_parse2();
-      var { re, t } = require_re();
+      var { re: re2, t } = require_re();
       var coerce = /* @__PURE__ */ __name2((version, options2) => {
         if (version instanceof SemVer) {
           return version;
@@ -7677,16 +7677,16 @@ ${error2.message}` : execaMessage;
         options2 = options2 || {};
         let match = null;
         if (!options2.rtl) {
-          match = version.match(re[t.COERCE]);
+          match = version.match(re2[t.COERCE]);
         } else {
           let next;
-          while ((next = re[t.COERCERTL].exec(version)) && (!match || match.index + match[0].length !== version.length)) {
+          while ((next = re2[t.COERCERTL].exec(version)) && (!match || match.index + match[0].length !== version.length)) {
             if (!match || next.index + next[0].length !== match.index + match[0].length) {
               match = next;
             }
-            re[t.COERCERTL].lastIndex = next.index + next[1].length + next[2].length;
+            re2[t.COERCERTL].lastIndex = next.index + next[1].length + next[2].length;
           }
-          re[t.COERCERTL].lastIndex = -1;
+          re2[t.COERCERTL].lastIndex = -1;
         }
         if (match === null)
           return null;
@@ -8401,15 +8401,15 @@ ${error2.message}` : execaMessage;
           if (cached)
             return cached;
           const loose = this.options.loose;
-          const hr = loose ? re[t.HYPHENRANGELOOSE] : re[t.HYPHENRANGE];
+          const hr = loose ? re2[t.HYPHENRANGELOOSE] : re2[t.HYPHENRANGE];
           range = range.replace(hr, hyphenReplace(this.options.includePrerelease));
           debug32("hyphen replace", range);
-          range = range.replace(re[t.COMPARATORTRIM], comparatorTrimReplace);
-          debug32("comparator trim", range, re[t.COMPARATORTRIM]);
-          range = range.replace(re[t.TILDETRIM], tildeTrimReplace);
-          range = range.replace(re[t.CARETTRIM], caretTrimReplace);
+          range = range.replace(re2[t.COMPARATORTRIM], comparatorTrimReplace);
+          debug32("comparator trim", range, re2[t.COMPARATORTRIM]);
+          range = range.replace(re2[t.TILDETRIM], tildeTrimReplace);
+          range = range.replace(re2[t.CARETTRIM], caretTrimReplace);
           range = range.split(/\s+/).join(" ");
-          const compRe = loose ? re[t.COMPARATORLOOSE] : re[t.COMPARATOR];
+          const compRe = loose ? re2[t.COMPARATORLOOSE] : re2[t.COMPARATOR];
           const rangeList = range.split(" ").map((comp) => parseComparator(comp, this.options)).join(" ").split(/\s+/).map((comp) => replaceGTE0(comp, this.options)).filter(this.options.loose ? (comp) => !!comp.match(compRe) : () => true).map((comp) => new Comparator(comp, this.options));
           const l = rangeList.length;
           const rangeMap = new Map();
@@ -8465,7 +8465,7 @@ ${error2.message}` : execaMessage;
       var debug32 = require_debug();
       var SemVer = require_semver();
       var {
-        re,
+        re: re2,
         t,
         comparatorTrimReplace,
         tildeTrimReplace,
@@ -8502,7 +8502,7 @@ ${error2.message}` : execaMessage;
         return replaceTilde(comp2, options2);
       }).join(" "), "replaceTildes");
       var replaceTilde = /* @__PURE__ */ __name2((comp, options2) => {
-        const r = options2.loose ? re[t.TILDELOOSE] : re[t.TILDE];
+        const r = options2.loose ? re2[t.TILDELOOSE] : re2[t.TILDE];
         return comp.replace(r, (_, M, m, p, pr) => {
           debug32("tilde", comp, _, M, m, p, pr);
           let ret;
@@ -8527,7 +8527,7 @@ ${error2.message}` : execaMessage;
       }).join(" "), "replaceCarets");
       var replaceCaret = /* @__PURE__ */ __name2((comp, options2) => {
         debug32("caret", comp, options2);
-        const r = options2.loose ? re[t.CARETLOOSE] : re[t.CARET];
+        const r = options2.loose ? re2[t.CARETLOOSE] : re2[t.CARET];
         const z = options2.includePrerelease ? "-0" : "";
         return comp.replace(r, (_, M, m, p, pr) => {
           debug32("caret", comp, _, M, m, p, pr);
@@ -8577,7 +8577,7 @@ ${error2.message}` : execaMessage;
       }, "replaceXRanges");
       var replaceXRange = /* @__PURE__ */ __name2((comp, options2) => {
         comp = comp.trim();
-        const r = options2.loose ? re[t.XRANGELOOSE] : re[t.XRANGE];
+        const r = options2.loose ? re2[t.XRANGELOOSE] : re2[t.XRANGE];
         return comp.replace(r, (ret, gtlt, M, m, p, pr) => {
           debug32("xRange", comp, ret, gtlt, M, m, p, pr);
           const xM = isX(M);
@@ -8631,11 +8631,11 @@ ${error2.message}` : execaMessage;
       }, "replaceXRange");
       var replaceStars = /* @__PURE__ */ __name2((comp, options2) => {
         debug32("replaceStars", comp, options2);
-        return comp.trim().replace(re[t.STAR], "");
+        return comp.trim().replace(re2[t.STAR], "");
       }, "replaceStars");
       var replaceGTE0 = /* @__PURE__ */ __name2((comp, options2) => {
         debug32("replaceGTE0", comp, options2);
-        return comp.trim().replace(re[options2.includePrerelease ? t.GTE0PRE : t.GTE0], "");
+        return comp.trim().replace(re2[options2.includePrerelease ? t.GTE0PRE : t.GTE0], "");
       }, "replaceGTE0");
       var hyphenReplace = /* @__PURE__ */ __name2((incPr) => ($0, from, fM, fm, fp, fpr, fb, to, tM, tm, tp, tpr, tb) => {
         if (isX(fM)) {
@@ -8715,7 +8715,7 @@ ${error2.message}` : execaMessage;
           debug32("comp", this);
         }
         parse(comp) {
-          const r = this.options.loose ? re[t.COMPARATORLOOSE] : re[t.COMPARATOR];
+          const r = this.options.loose ? re2[t.COMPARATORLOOSE] : re2[t.COMPARATOR];
           const m = comp.match(r);
           if (!m) {
             throw new TypeError(`Invalid comparator: ${comp}`);
@@ -8779,7 +8779,7 @@ ${error2.message}` : execaMessage;
       }, "Comparator");
       module2.exports = Comparator;
       var parseOptions = require_parse_options();
-      var { re, t } = require_re();
+      var { re: re2, t } = require_re();
       var cmp = require_cmp();
       var debug32 = require_debug();
       var SemVer = require_semver();
@@ -9343,7 +9343,7 @@ ${error2.message}` : execaMessage;
     });
     var require_indent_string = __commonJS((exports2, module2) => {
       "use strict";
-      module2.exports = (string, count = 1, options2) => {
+      module2.exports = (string, count2 = 1, options2) => {
         options2 = {
           indent: " ",
           includeEmptyLines: false,
@@ -9352,17 +9352,17 @@ ${error2.message}` : execaMessage;
         if (typeof string !== "string") {
           throw new TypeError(`Expected \`input\` to be a \`string\`, got \`${typeof string}\``);
         }
-        if (typeof count !== "number") {
-          throw new TypeError(`Expected \`count\` to be a \`number\`, got \`${typeof count}\``);
+        if (typeof count2 !== "number") {
+          throw new TypeError(`Expected \`count\` to be a \`number\`, got \`${typeof count2}\``);
         }
         if (typeof options2.indent !== "string") {
           throw new TypeError(`Expected \`options.indent\` to be a \`string\`, got \`${typeof options2.indent}\``);
         }
-        if (count === 0) {
+        if (count2 === 0) {
           return string;
         }
         const regex = options2.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
-        return string.replace(regex, options2.indent.repeat(count));
+        return string.replace(regex, options2.indent.repeat(count2));
       };
     });
     var require_clean_stack = __commonJS((exports2, module2) => {
@@ -10693,7 +10693,7 @@ ${error2.message}` : execaMessage;
           return GLOBSTAR;
         if (pattern === "")
           return "";
-        var re = "";
+        var re2 = "";
         var hasMagic = !!options2.nocase;
         var escaping = false;
         var patternListStack = [];
@@ -10708,27 +10708,27 @@ ${error2.message}` : execaMessage;
           if (stateChar) {
             switch (stateChar) {
               case "*":
-                re += star;
+                re2 += star;
                 hasMagic = true;
                 break;
               case "?":
-                re += qmark;
+                re2 += qmark;
                 hasMagic = true;
                 break;
               default:
-                re += "\\" + stateChar;
+                re2 += "\\" + stateChar;
                 break;
             }
-            self2.debug("clearStateChar %j %j", stateChar, re);
+            self2.debug("clearStateChar %j %j", stateChar, re2);
             stateChar = false;
           }
         }
         __name(clearStateChar, "clearStateChar");
         __name2(clearStateChar, "clearStateChar");
         for (var i = 0, len = pattern.length, c; i < len && (c = pattern.charAt(i)); i++) {
-          this.debug("%s	%s %s %j", pattern, i, re, c);
+          this.debug("%s	%s %s %j", pattern, i, re2, c);
           if (escaping && reSpecials[c]) {
-            re += "\\" + c;
+            re2 += "\\" + c;
             escaping = false;
             continue;
           }
@@ -10744,12 +10744,12 @@ ${error2.message}` : execaMessage;
             case "+":
             case "@":
             case "!":
-              this.debug("%s	%s %s %j <-- stateChar", pattern, i, re, c);
+              this.debug("%s	%s %s %j <-- stateChar", pattern, i, re2, c);
               if (inClass) {
                 this.debug("  in class");
                 if (c === "!" && i === classStart + 1)
                   c = "^";
-                re += c;
+                re2 += c;
                 continue;
               }
               self2.debug("call clearStateChar %j", stateChar);
@@ -10760,61 +10760,61 @@ ${error2.message}` : execaMessage;
               continue;
             case "(":
               if (inClass) {
-                re += "(";
+                re2 += "(";
                 continue;
               }
               if (!stateChar) {
-                re += "\\(";
+                re2 += "\\(";
                 continue;
               }
               patternListStack.push({
                 type: stateChar,
                 start: i - 1,
-                reStart: re.length,
+                reStart: re2.length,
                 open: plTypes[stateChar].open,
                 close: plTypes[stateChar].close
               });
-              re += stateChar === "!" ? "(?:(?!(?:" : "(?:";
-              this.debug("plType %j %j", stateChar, re);
+              re2 += stateChar === "!" ? "(?:(?!(?:" : "(?:";
+              this.debug("plType %j %j", stateChar, re2);
               stateChar = false;
               continue;
             case ")":
               if (inClass || !patternListStack.length) {
-                re += "\\)";
+                re2 += "\\)";
                 continue;
               }
               clearStateChar();
               hasMagic = true;
               var pl = patternListStack.pop();
-              re += pl.close;
+              re2 += pl.close;
               if (pl.type === "!") {
                 negativeLists.push(pl);
               }
-              pl.reEnd = re.length;
+              pl.reEnd = re2.length;
               continue;
             case "|":
               if (inClass || !patternListStack.length || escaping) {
-                re += "\\|";
+                re2 += "\\|";
                 escaping = false;
                 continue;
               }
               clearStateChar();
-              re += "|";
+              re2 += "|";
               continue;
             case "[":
               clearStateChar();
               if (inClass) {
-                re += "\\" + c;
+                re2 += "\\" + c;
                 continue;
               }
               inClass = true;
               classStart = i;
-              reClassStart = re.length;
-              re += c;
+              reClassStart = re2.length;
+              re2 += c;
               continue;
             case "]":
               if (i === classStart + 1 || !inClass) {
-                re += "\\" + c;
+                re2 += "\\" + c;
                 escaping = false;
                 continue;
               }
@@ -10824,7 +10824,7 @@ ${error2.message}` : execaMessage;
                   RegExp("[" + cs + "]");
                 } catch (er) {
                   var sp = this.parse(cs, SUBPARSE);
-                  re = re.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
+                  re2 = re2.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
                   hasMagic = hasMagic || sp[1];
                   inClass = false;
                   continue;
@@ -10832,44 +10832,44 @@ ${error2.message}` : execaMessage;
               }
               hasMagic = true;
               inClass = false;
-              re += c;
+              re2 += c;
               continue;
             default:
               clearStateChar();
               if (escaping) {
                 escaping = false;
               } else if (reSpecials[c] && !(c === "^" && inClass)) {
-                re += "\\";
+                re2 += "\\";
               }
-              re += c;
+              re2 += c;
           }
         }
         if (inClass) {
           cs = pattern.substr(classStart + 1);
           sp = this.parse(cs, SUBPARSE);
-          re = re.substr(0, reClassStart) + "\\[" + sp[0];
+          re2 = re2.substr(0, reClassStart) + "\\[" + sp[0];
           hasMagic = hasMagic || sp[1];
         }
         for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
-          var tail = re.slice(pl.reStart + pl.open.length);
-          this.debug("setting tail", re, pl);
+          var tail = re2.slice(pl.reStart + pl.open.length);
+          this.debug("setting tail", re2, pl);
           tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, function(_, $1, $2) {
             if (!$2) {
               $2 = "\\";
             }
             return $1 + $1 + $2 + "|";
           });
-          this.debug("tail=%j\n   %s", tail, tail, pl, re);
+          this.debug("tail=%j\n   %s", tail, tail, pl, re2);
           var t = pl.type === "*" ? star : pl.type === "?" ? qmark : "\\" + pl.type;
           hasMagic = true;
-          re = re.slice(0, pl.reStart) + t + "\\(" + tail;
+          re2 = re2.slice(0, pl.reStart) + t + "\\(" + tail;
         }
         clearStateChar();
         if (escaping) {
-          re += "\\\\";
+          re2 += "\\\\";
         }
         var addPatternStart = false;
-        switch (re.charAt(0)) {
+        switch (re2.charAt(0)) {
           case ".":
           case "[":
           case "(":
@@ -10877,10 +10877,10 @@ ${error2.message}` : execaMessage;
         }
         for (var n = negativeLists.length - 1; n > -1; n--) {
           var nl = negativeLists[n];
-          var nlBefore = re.slice(0, nl.reStart);
-          var nlFirst = re.slice(nl.reStart, nl.reEnd - 8);
-          var nlLast = re.slice(nl.reEnd - 8, nl.reEnd);
-          var nlAfter = re.slice(nl.reEnd);
+          var nlBefore = re2.slice(0, nl.reStart);
+          var nlFirst = re2.slice(nl.reStart, nl.reEnd - 8);
+          var nlLast = re2.slice(nl.reEnd - 8, nl.reEnd);
+          var nlAfter = re2.slice(nl.reEnd);
           nlLast += nlAfter;
           var openParensBefore = nlBefore.split("(").length - 1;
           var cleanAfter = nlAfter;
@@ -10893,28 +10893,28 @@ ${error2.message}` : execaMessage;
             dollar = "$";
           }
           var newRe = nlBefore + nlFirst + nlAfter + dollar + nlLast;
-          re = newRe;
+          re2 = newRe;
         }
-        if (re !== "" && hasMagic) {
-          re = "(?=.)" + re;
+        if (re2 !== "" && hasMagic) {
+          re2 = "(?=.)" + re2;
         }
         if (addPatternStart) {
-          re = patternStart + re;
+          re2 = patternStart + re2;
         }
         if (isSub === SUBPARSE) {
-          return [re, hasMagic];
+          return [re2, hasMagic];
         }
         if (!hasMagic) {
           return globUnescape(pattern);
         }
         var flags = options2.nocase ? "i" : "";
         try {
-          var regExp = new RegExp("^" + re + "$", flags);
+          var regExp = new RegExp("^" + re2 + "$", flags);
         } catch (er) {
           return new RegExp("$.");
         }
         regExp._glob = pattern;
-        regExp._src = re;
+        regExp._src = re2;
         return regExp;
       }
       __name(parse2, "parse2");
@@ -10934,16 +10934,16 @@ ${error2.message}` : execaMessage;
         var options2 = this.options;
         var twoStar = options2.noglobstar ? star : options2.dot ? twoStarDot : twoStarNoDot;
         var flags = options2.nocase ? "i" : "";
-        var re = set.map(function(pattern) {
+        var re2 = set.map(function(pattern) {
           return pattern.map(function(p) {
             return p === GLOBSTAR ? twoStar : typeof p === "string" ? regExpEscape(p) : p._src;
           }).join("\\/");
         }).join("|");
-        re = "^(?:" + re + ")$";
+        re2 = "^(?:" + re2 + ")$";
         if (this.negate)
-          re = "^(?!" + re + ").*$";
+          re2 = "^(?!" + re2 + ").*$";
         try {
-          this.regexp = new RegExp(re, flags);
+          this.regexp = new RegExp(re2, flags);
         } catch (ex) {
           this.regexp = false;
         }
@@ -12851,11 +12851,11 @@ ${error2.message}` : execaMessage;
         for (var i = 0; i < this._errors.length; i++) {
           var error2 = this._errors[i];
           var message = error2.message;
-          var count = (counts[message] || 0) + 1;
-          counts[message] = count;
-          if (count >= mainErrorCount) {
+          var count2 = (counts[message] || 0) + 1;
+          counts[message] = count2;
+          if (count2 >= mainErrorCount) {
             mainError = error2;
-            mainErrorCount = count;
+            mainErrorCount = count2;
           }
         }
         return mainError;
@@ -15778,8 +15778,13 @@ ${error2.message}` : execaMessage;
       AbortError.prototype = Object.create(Error.prototype);
       AbortError.prototype.constructor = AbortError;
       AbortError.prototype.name = "AbortError";
+      var URL$1 = Url.URL || whatwgUrl.URL;
       var PassThrough$1 = Stream.PassThrough;
-      var resolve_url = Url.resolve;
+      var isDomainOrSubdomain = /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function isDomainOrSubdomain2(destination, original) {
+        const orig = new URL$1(original).hostname;
+        const dest = new URL$1(destination).hostname;
+        return orig === dest || orig[orig.length - dest.length - 1] === "." && orig.endsWith(dest);
+      }, "isDomainOrSubdomain2"), "isDomainOrSubdomain2");
       function fetch2(url2, opts2) {
         if (!fetch2.Promise) {
           throw new Error("native promise missing, set fetch.Promise to your favorite alternative");
@@ -15839,7 +15844,16 @@ ${error2.message}` : execaMessage;
             const headers = createHeadersLenient(res.headers);
             if (fetch2.isRedirect(res.statusCode)) {
               const location = headers.get("Location");
-              const locationURL = location === null ? null : resolve_url(request4.url, location);
+              let locationURL = null;
+              try {
+                locationURL = location === null ? null : new URL$1(location, request4.url).toString();
+              } catch (err) {
+                if (request4.redirect !== "manual") {
+                  reject2(new FetchError(`uri requested responds with an invalid redirect URL: ${location}`, "invalid-redirect"));
+                  finalize();
+                  return;
+                }
+              }
               switch (request4.redirect) {
                 case "error":
                   reject2(new FetchError(`uri requested responds with a redirect, redirect mode is set to error: ${request4.url}`, "no-redirect"));
@@ -15875,6 +15889,11 @@ ${error2.message}` : execaMessage;
                     timeout: request4.timeout,
                     size: request4.size
                   };
+                  if (!isDomainOrSubdomain(request4.url, locationURL)) {
+                    for (const name of ["authorization", "www-authenticate", "cookie", "cookie2"]) {
+                      requestOpts.headers.delete(name);
+                    }
+                  }
                   if (res.statusCode !== 303 && request4.body && getTotalBytes(request4) === null) {
                     reject2(new FetchError("Cannot follow redirect with body being a readable stream", "unsupported-redirect"));
                     finalize();
@@ -17804,7 +17823,7 @@ ${error2.message}` : execaMessage;
         let zipped = zip(start, stop);
         let digits = zipped.length;
         let pattern = "";
-        let count = 0;
+        let count2 = 0;
         for (let i = 0; i < digits; i++) {
           let [startDigit, stopDigit] = zipped[i];
           if (startDigit === stopDigit) {
@@ -17812,13 +17831,13 @@ ${error2.message}` : execaMessage;
           } else if (startDigit !== "0" || stopDigit !== "9") {
             pattern += toCharacterClass(startDigit, stopDigit, options2);
           } else {
-            count++;
+            count2++;
           }
         }
-        if (count) {
+        if (count2) {
           pattern += options2.shorthand === true ? "\\d" : "[0-9]";
         }
-        return { pattern, count: [count], digits };
+        return { pattern, count: [count2], digits };
       }
       __name(rangeToPattern, "rangeToPattern");
       __name2(rangeToPattern, "rangeToPattern");
@@ -19236,13 +19255,13 @@ ${error2.message}` : execaMessage;
           consume(token.value);
         }, "append");
         const negate = /* @__PURE__ */ __name2(() => {
-          let count = 1;
+          let count2 = 1;
           while (peek() === "!" && (peek(2) !== "(" || peek(3) === "?")) {
             advance();
             state.start++;
-            count++;
+            count2++;
           }
-          if (count % 2 === 0) {
+          if (count2 % 2 === 0) {
             return false;
           }
           state.negated = true;
@@ -21040,11 +21059,11 @@ ${error2.message}` : execaMessage;
     var require_queue = __commonJS((exports2, module2) => {
       "use strict";
       var reusify = require_reusify();
-      function fastqueue(context, worker, concurrency) {
-        if (typeof context === "function") {
+      function fastqueue(context3, worker, concurrency) {
+        if (typeof context3 === "function") {
           concurrency = worker;
-          worker = context;
-          context = null;
+          worker = context3;
+          context3 = null;
         }
         if (concurrency < 1) {
           throw new Error("fastqueue concurrency must be greater than 1");
@@ -21123,7 +21142,7 @@ ${error2.message}` : execaMessage;
         __name2(idle, "idle");
         function push(value, done) {
           var current = cache.get();
-          current.context = context;
+          current.context = context3;
           current.release = release;
           current.value = value;
           current.callback = done || noop;
@@ -21139,14 +21158,14 @@ ${error2.message}` : execaMessage;
             }
           } else {
             _running++;
-            worker.call(context, current.value, current.worked);
+            worker.call(context3, current.value, current.worked);
           }
         }
         __name(push, "push");
         __name2(push, "push");
         function unshift(value, done) {
           var current = cache.get();
-          current.context = context;
+          current.context = context3;
           current.release = release;
           current.value = value;
           current.callback = done || noop;
@@ -21161,7 +21180,7 @@ ${error2.message}` : execaMessage;
             }
           } else {
             _running++;
-            worker.call(context, current.value, current.worked);
+            worker.call(context3, current.value, current.worked);
           }
         }
         __name(unshift, "unshift");
@@ -21178,7 +21197,7 @@ ${error2.message}` : execaMessage;
               }
               queueHead = next.next;
               next.next = null;
-              worker.call(context, next.value, next.worked);
+              worker.call(context3, next.value, next.worked);
               if (queueTail === null) {
                 self2.empty();
               }
@@ -21241,11 +21260,11 @@ ${error2.message}` : execaMessage;
       }
       __name(Task, "Task");
       __name2(Task, "Task");
-      function queueAsPromised(context, worker, concurrency) {
-        if (typeof context === "function") {
+      function queueAsPromised(context3, worker, concurrency) {
+        if (typeof context3 === "function") {
           concurrency = worker;
-          worker = context;
-          context = null;
+          worker = context3;
+          context3 = null;
         }
         function asyncWrapper(arg2, cb) {
           worker.call(this, arg2).then(function(res) {
@@ -21254,7 +21273,7 @@ ${error2.message}` : execaMessage;
         }
         __name(asyncWrapper, "asyncWrapper");
         __name2(asyncWrapper, "asyncWrapper");
-        var queue = fastqueue(context, asyncWrapper, concurrency);
+        var queue = fastqueue(context3, asyncWrapper, concurrency);
         var pushCb = queue.push;
         var unshiftCb = queue.unshift;
         queue.push = push;
@@ -22425,6 +22444,7 @@ ${error2.message}` : execaMessage;
       var KEY_IGNORE = typeof Symbol !== "undefined" ? Symbol.for("node-ignore") : "node-ignore";
       var define2 = /* @__PURE__ */ __name2((object, key, value) => Object.defineProperty(object, key, { value }), "define");
       var REGEX_REGEXP_RANGE = /([0-z])-([0-z])/g;
+      var RETURN_FALSE = /* @__PURE__ */ __name2(() => false, "RETURN_FALSE");
       var sanitizeRange = /* @__PURE__ */ __name2((range) => range.replace(REGEX_REGEXP_RANGE, (match, from, to) => from.charCodeAt(0) <= to.charCodeAt(0) ? match : EMPTY), "sanitizeRange");
       var cleanRangeBackSlash = /* @__PURE__ */ __name2((slashes) => {
         const { length } = slashes;
@@ -22498,13 +22518,13 @@ ${error2.message}` : execaMessage;
         ]
       ];
       var regexCache = Object.create(null);
-      var makeRegex = /* @__PURE__ */ __name2((pattern, negative, ignorecase) => {
-        const r = regexCache[pattern];
-        if (r) {
-          return r;
+      var makeRegex = /* @__PURE__ */ __name2((pattern, ignoreCase) => {
+        let source = regexCache[pattern];
+        if (!source) {
+          source = REPLACERS.reduce((prev, current) => prev.replace(current[0], current[1].bind(pattern)), pattern);
+          regexCache[pattern] = source;
         }
-        const source = REPLACERS.reduce((prev, current) => prev.replace(current[0], current[1].bind(pattern)), pattern);
-        return regexCache[pattern] = ignorecase ? new RegExp(source, "i") : new RegExp(source);
+        return ignoreCase ? new RegExp(source, "i") : new RegExp(source);
       }, "makeRegex");
       var isString = /* @__PURE__ */ __name2((subject) => typeof subject === "string", "isString");
       var checkPattern = /* @__PURE__ */ __name2((pattern) => pattern && isString(pattern) && !REGEX_TEST_BLANK_LINE.test(pattern) && pattern.indexOf("#") !== 0, "checkPattern");
@@ -22517,7 +22537,7 @@ ${error2.message}` : execaMessage;
           this.regex = regex;
         }
       }, "IgnoreRule");
-      var createRule = /* @__PURE__ */ __name2((pattern, ignorecase) => {
+      var createRule = /* @__PURE__ */ __name2((pattern, ignoreCase) => {
         const origin = pattern;
         let negative = false;
         if (pattern.indexOf("!") === 0) {
@@ -22525,7 +22545,7 @@ ${error2.message}` : execaMessage;
           pattern = pattern.substr(1);
         }
         pattern = pattern.replace(REGEX_REPLACE_LEADING_EXCAPED_EXCLAMATION, "!").replace(REGEX_REPLACE_LEADING_EXCAPED_HASH, "#");
-        const regex = makeRegex(pattern, negative, ignorecase);
+        const regex = makeRegex(pattern, ignoreCase);
         return new IgnoreRule(origin, pattern, negative, regex);
       }, "createRule");
       var throwError = /* @__PURE__ */ __name2((message, Ctor) => {
@@ -22549,11 +22569,14 @@ ${error2.message}` : execaMessage;
       checkPath.convert = (p) => p;
       var Ignore = /* @__PURE__ */ __name2(class {
         constructor({
-          ignorecase = true
+          ignorecase = true,
+          ignoreCase = ignorecase,
+          allowRelativePaths = false
         } = {}) {
-          this._rules = [];
-          this._ignorecase = ignorecase;
           define2(this, KEY_IGNORE, true);
+          this._rules = [];
+          this._ignoreCase = ignoreCase;
+          this._allowRelativePaths = allowRelativePaths;
           this._initCache();
         }
         _initCache() {
@@ -22567,7 +22590,7 @@ ${error2.message}` : execaMessage;
             return;
           }
           if (checkPattern(pattern)) {
-            const rule = createRule(pattern, this._ignorecase);
+            const rule = createRule(pattern, this._ignoreCase);
             this._added = true;
             this._rules.push(rule);
           }
@@ -22604,7 +22627,7 @@ ${error2.message}` : execaMessage;
         }
         _test(originalPath, cache, checkUnignored, slices) {
           const path22 = originalPath && checkPath.convert(originalPath);
-          checkPath(path22, originalPath, throwError);
+          checkPath(path22, originalPath, this._allowRelativePaths ? RETURN_FALSE : throwError);
           return this._t(path22, cache, checkUnignored, slices);
         }
         _t(path22, cache, checkUnignored, slices) {
@@ -22635,8 +22658,7 @@ ${error2.message}` : execaMessage;
         }
       }, "Ignore");
       var factory = /* @__PURE__ */ __name2((options2) => new Ignore(options2), "factory");
-      var returnFalse = /* @__PURE__ */ __name2(() => false, "returnFalse");
-      var isPathValid = /* @__PURE__ */ __name2((path22) => checkPath(path22 && checkPath.convert(path22), path22, returnFalse), "isPathValid");
+      var isPathValid = /* @__PURE__ */ __name2((path22) => checkPath(path22 && checkPath.convert(path22), path22, RETURN_FALSE), "isPathValid");
       factory.isPathValid = isPathValid;
       factory.default = factory;
       module2.exports = factory;
@@ -23390,8 +23412,8 @@ ${error2.message}` : execaMessage;
       }
       __name(noop, "noop");
       __name2(noop, "noop");
-      function publishQueue(context, queue2) {
-        Object.defineProperty(context, gracefulQueue, {
+      function publishQueue(context3, queue2) {
+        Object.defineProperty(context3, gracefulQueue, {
           get: function() {
             return queue2;
           }
@@ -24295,8 +24317,8 @@ ${error2.message}` : execaMessage;
             return process.env.BUILDKITE_BRANCH;
           }
           if (process.env.GITHUB_CONTEXT) {
-            const context = JSON.parse(process.env.GITHUB_CONTEXT);
-            return context.head_ref;
+            const context3 = JSON.parse(process.env.GITHUB_CONTEXT);
+            return context3.head_ref;
           }
         }
         try {
@@ -24976,7 +24998,7 @@ ${error2.message}` : execaMessage;
   }
 });
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -24999,7 +25021,7 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25181,7 +25203,7 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25204,7 +25226,7 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -25231,7 +25253,7 @@ var require_platforms2 = __commonJS2({
   }
 });
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -25292,10 +25314,10 @@ var require_ansi_escapes = __commonJS2({
       }
       return ret;
     };
-    ansiEscapes.cursorUp = (count = 1) => ESC + count + "A";
-    ansiEscapes.cursorDown = (count = 1) => ESC + count + "B";
-    ansiEscapes.cursorForward = (count = 1) => ESC + count + "C";
-    ansiEscapes.cursorBackward = (count = 1) => ESC + count + "D";
+    ansiEscapes.cursorUp = (count2 = 1) => ESC + count2 + "A";
+    ansiEscapes.cursorDown = (count2 = 1) => ESC + count2 + "B";
+    ansiEscapes.cursorForward = (count2 = 1) => ESC + count2 + "C";
+    ansiEscapes.cursorBackward = (count2 = 1) => ESC + count2 + "D";
     ansiEscapes.cursorLeft = ESC + "G";
     ansiEscapes.cursorSavePosition = isTerminalApp ? "7" : ESC + "s";
     ansiEscapes.cursorRestorePosition = isTerminalApp ? "8" : ESC + "u";
@@ -25304,12 +25326,12 @@ var require_ansi_escapes = __commonJS2({
     ansiEscapes.cursorPrevLine = ESC + "F";
     ansiEscapes.cursorHide = ESC + "?25l";
     ansiEscapes.cursorShow = ESC + "?25h";
-    ansiEscapes.eraseLines = (count) => {
+    ansiEscapes.eraseLines = (count2) => {
       let clear = "";
-      for (let i = 0; i < count; i++) {
-        clear += ansiEscapes.eraseLine + (i < count - 1 ? ansiEscapes.cursorUp() : "");
+      for (let i = 0; i < count2; i++) {
+        clear += ansiEscapes.eraseLine + (i < count2 - 1 ? ansiEscapes.cursorUp() : "");
       }
-      if (count) {
+      if (count2) {
         clear += ansiEscapes.cursorLeft;
       }
       return clear;
@@ -26125,7 +26147,7 @@ var require_stdio2 = __commonJS2({
   }
 });
 var require_signals4 = __commonJS2({
-  "../../node_modules/.pnpm/signal-exit@3.0.5/node_modules/signal-exit/signals.js"(exports2, module2) {
+  "../../node_modules/.pnpm/signal-exit@3.0.6/node_modules/signal-exit/signals.js"(exports2, module2) {
     module2.exports = [
       "SIGABRT",
       "SIGALRM",
@@ -26142,9 +26164,12 @@ var require_signals4 = __commonJS2({
   }
 });
 var require_signal_exit2 = __commonJS2({
-  "../../node_modules/.pnpm/signal-exit@3.0.5/node_modules/signal-exit/index.js"(exports2, module2) {
+  "../../node_modules/.pnpm/signal-exit@3.0.6/node_modules/signal-exit/index.js"(exports2, module2) {
     var process2 = global.process;
-    if (typeof process2 !== "object" || !process2) {
+    var processOk = /* @__PURE__ */ __name2(function(process3) {
+      return process3 && typeof process3 === "object" && typeof process3.removeListener === "function" && typeof process3.emit === "function" && typeof process3.reallyExit === "function" && typeof process3.listeners === "function" && typeof process3.kill === "function" && typeof process3.pid === "number" && typeof process3.on === "function";
+    }, "processOk");
+    if (!processOk(process2)) {
       module2.exports = function() {
       };
     } else {
@@ -26167,7 +26192,7 @@ var require_signal_exit2 = __commonJS2({
         emitter.infinite = true;
       }
       module2.exports = function(cb, opts2) {
-        if (global.process !== process2) {
+        if (!processOk(global.process)) {
           return;
         }
         assert.equal(typeof cb, "function", "a callback must be provided for exit handler");
@@ -26188,7 +26213,7 @@ var require_signal_exit2 = __commonJS2({
         return remove;
       };
       unload = /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function unload2() {
-        if (!loaded || global.process !== process2) {
+        if (!loaded || !processOk(global.process)) {
           return;
         }
         loaded = false;
@@ -26213,7 +26238,7 @@ var require_signal_exit2 = __commonJS2({
       sigListeners = {};
       signals.forEach(function(sig) {
         sigListeners[sig] = /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function listener() {
-          if (process2 !== global.process) {
+          if (!processOk(global.process)) {
             return;
           }
           var listeners = process2.listeners(sig);
@@ -26233,7 +26258,7 @@ var require_signal_exit2 = __commonJS2({
       };
       loaded = false;
       load = /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function load2() {
-        if (loaded || process2 !== global.process) {
+        if (loaded || !processOk(global.process)) {
           return;
         }
         loaded = true;
@@ -26252,7 +26277,7 @@ var require_signal_exit2 = __commonJS2({
       module2.exports.load = load;
       originalProcessReallyExit = process2.reallyExit;
       processReallyExit = /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function processReallyExit2(code) {
-        if (process2 !== global.process) {
+        if (!processOk(global.process)) {
           return;
         }
         process2.exitCode = code || 0;
@@ -26262,7 +26287,7 @@ var require_signal_exit2 = __commonJS2({
       }, "processReallyExit2"), "processReallyExit");
       originalProcessEmit = process2.emit;
       processEmit = /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function processEmit2(ev, arg2) {
-        if (ev === "exit" && process2 === global.process) {
+        if (ev === "exit" && processOk(global.process)) {
           if (arg2 !== void 0) {
             process2.exitCode = arg2;
           }
@@ -26329,10 +26354,10 @@ var require_kill2 = __commonJS2({
       }
       return forceKillAfterTimeout;
     }, "getForceKillAfterTimeout");
-    var spawnedCancel = /* @__PURE__ */ __name2((spawned, context) => {
+    var spawnedCancel = /* @__PURE__ */ __name2((spawned, context3) => {
       const killResult = spawned.kill();
       if (killResult) {
-        context.isCanceled = true;
+        context3.isCanceled = true;
       }
     }, "spawnedCancel");
     var timeoutKill = /* @__PURE__ */ __name2((spawned, signal, reject2) => {
@@ -26776,9 +26801,9 @@ var require_execa2 = __commonJS2({
       const spawnedPromise = getSpawnedPromise(spawned);
       const timedPromise = setupTimeout(spawned, parsed.options, spawnedPromise);
       const processDone = setExitHandler(spawned, parsed.options, timedPromise);
-      const context = { isCanceled: false };
+      const context3 = { isCanceled: false };
       spawned.kill = spawnedKill.bind(null, spawned.kill.bind(spawned));
-      spawned.cancel = spawnedCancel.bind(null, spawned, context);
+      spawned.cancel = spawnedCancel.bind(null, spawned, context3);
       const handlePromise = /* @__PURE__ */ __name2(async () => {
         const [{ error: error2, exitCode, signal, timedOut }, stdoutResult, stderrResult, allResult] = await getSpawnedResult(spawned, parsed.options, processDone);
         const stdout = handleOutput(parsed.options, stdoutResult);
@@ -26796,7 +26821,7 @@ var require_execa2 = __commonJS2({
             escapedCommand,
             parsed,
             timedOut,
-            isCanceled: context.isCanceled,
+            isCanceled: context3.isCanceled,
             killed: spawned.killed
           });
           if (!parsed.options.reject) {
@@ -27036,11 +27061,11 @@ var require_retry_operation2 = __commonJS2({
       for (var i = 0; i < this._errors.length; i++) {
         var error2 = this._errors[i];
         var message = error2.message;
-        var count = (counts[message] || 0) + 1;
-        counts[message] = count;
-        if (count >= mainErrorCount) {
+        var count2 = (counts[message] || 0) + 1;
+        counts[message] = count2;
+        if (count2 >= mainErrorCount) {
           mainError = error2;
-          mainErrorCount = count;
+          mainErrorCount = count2;
         }
       }
       return mainError;
@@ -29950,85 +29975,90 @@ var require_arg = __commonJS2({
   }
 });
 var require_main3 = __commonJS2({
-  "../../node_modules/.pnpm/dotenv@10.0.0/node_modules/dotenv/lib/main.js"(exports2, module2) {
+  "../../node_modules/.pnpm/dotenv@15.0.0/node_modules/dotenv/lib/main.js"(exports2, module2) {
     var fs7 = require("fs");
     var path6 = require("path");
     var os2 = require("os");
-    function log4(message) {
-      console.log(`[dotenv][DEBUG] ${message}`);
-    }
-    __name(log4, "log4");
-    __name2(log4, "log");
-    var NEWLINE = "\n";
-    var RE_INI_KEY_VAL = /^\s*([\w.-]+)\s*=\s*(.*)?\s*$/;
-    var RE_NEWLINES = /\\n/g;
-    var NEWLINES_MATCH = /\r\n|\n|\r/;
-    function parse2(src, options2) {
-      const debug10 = Boolean(options2 && options2.debug);
+    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
+    function parse2(src) {
       const obj = {};
-      src.toString().split(NEWLINES_MATCH).forEach(function(line, idx) {
-        const keyValueArr = line.match(RE_INI_KEY_VAL);
-        if (keyValueArr != null) {
-          const key = keyValueArr[1];
-          let val = keyValueArr[2] || "";
-          const end = val.length - 1;
-          const isDoubleQuoted = val[0] === '"' && val[end] === '"';
-          const isSingleQuoted = val[0] === "'" && val[end] === "'";
-          if (isSingleQuoted || isDoubleQuoted) {
-            val = val.substring(1, end);
-            if (isDoubleQuoted) {
-              val = val.replace(RE_NEWLINES, NEWLINE);
-            }
-          } else {
-            val = val.trim();
-          }
-          obj[key] = val;
-        } else if (debug10) {
-          log4(`did not match key and value when parsing line ${idx + 1}: ${line}`);
+      let lines = src.toString();
+      lines = lines.replace(/\r\n?/mg, "\n");
+      let match;
+      while ((match = LINE.exec(lines)) != null) {
+        const key = match[1];
+        let value = match[2] || "";
+        value = value.trim();
+        const maybeQuote = value[0];
+        value = value.replace(/^(['"])([\s\S]+)\1$/mg, "$2");
+        if (maybeQuote === '"') {
+          value = value.replace(/\\n/g, "\n");
+          value = value.replace(/\\r/g, "\r");
         }
-      });
+        obj[key] = value;
+      }
       return obj;
     }
     __name(parse2, "parse2");
     __name2(parse2, "parse");
-    function resolveHome(envPath) {
+    function _log(message) {
+      console.log(`[dotenv][DEBUG] ${message}`);
+    }
+    __name(_log, "_log");
+    __name2(_log, "_log");
+    function _resolveHome(envPath) {
       return envPath[0] === "~" ? path6.join(os2.homedir(), envPath.slice(1)) : envPath;
     }
-    __name(resolveHome, "resolveHome");
-    __name2(resolveHome, "resolveHome");
+    __name(_resolveHome, "_resolveHome");
+    __name2(_resolveHome, "_resolveHome");
     function config2(options2) {
       let dotenvPath = path6.resolve(process.cwd(), ".env");
       let encoding = "utf8";
-      let debug10 = false;
+      const debug10 = Boolean(options2 && options2.debug);
+      const override = Boolean(options2 && options2.override);
       if (options2) {
         if (options2.path != null) {
-          dotenvPath = resolveHome(options2.path);
+          dotenvPath = _resolveHome(options2.path);
         }
         if (options2.encoding != null) {
           encoding = options2.encoding;
         }
-        if (options2.debug != null) {
-          debug10 = true;
-        }
       }
       try {
-        const parsed = parse2(fs7.readFileSync(dotenvPath, { encoding }), { debug: debug10 });
+        const parsed = DotenvModule.parse(fs7.readFileSync(dotenvPath, { encoding }));
         Object.keys(parsed).forEach(function(key) {
           if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
             process.env[key] = parsed[key];
-          } else if (debug10) {
-            log4(`"${key}" is already defined in \`process.env\` and will not be overwritten`);
+          } else {
+            if (override === true) {
+              process.env[key] = parsed[key];
+            }
+            if (debug10) {
+              if (override === true) {
+                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
+              } else {
+                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
+              }
+            }
           }
         });
         return { parsed };
       } catch (e) {
+        if (debug10) {
+          _log(`Failed to load ${dotenvPath} ${e.message}`);
+        }
         return { error: e };
       }
     }
     __name(config2, "config2");
     __name2(config2, "config");
-    module2.exports.config = config2;
-    module2.exports.parse = parse2;
+    var DotenvModule = {
+      config: config2,
+      parse: parse2
+    };
+    module2.exports.config = DotenvModule.config;
+    module2.exports.parse = DotenvModule.parse;
+    module2.exports = DotenvModule;
   }
 });
 var require_dist10 = __commonJS2({
@@ -30122,7 +30152,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.8.1",
+      version: "3.9.2",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -30186,12 +30216,13 @@ var require_package2 = __commonJS2({
       ],
       devDependencies: {
         "@microsoft/api-extractor": "7.19.3",
+        "@opentelemetry/api": "1.0.3",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f",
-        "@prisma/fetch-engine": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f",
+        "@prisma/engines": "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009",
+        "@prisma/fetch-engine": "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f",
+        "@prisma/get-platform": "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@timsuchanek/copy": "1.4.5",
@@ -30199,8 +30230,8 @@ var require_package2 = __commonJS2({
         "@types/jest": "27.4.0",
         "@types/js-levenshtein": "1.1.1",
         "@types/mssql": "7.1.4",
-        "@types/node": "12.20.39",
-        "@types/pg": "8.6.3",
+        "@types/node": "12.20.42",
+        "@types/pg": "8.6.4",
         "@typescript-eslint/eslint-plugin": "5.9.0",
         "@typescript-eslint/parser": "5.9.0",
         arg: "5.0.1",
@@ -30211,7 +30242,7 @@ var require_package2 = __commonJS2({
         eslint: "8.6.0",
         "eslint-config-prettier": "8.3.0",
         "eslint-plugin-eslint-comments": "3.2.0",
-        "eslint-plugin-jest": "25.3.4",
+        "eslint-plugin-jest": "26.0.0",
         "eslint-plugin-prettier": "4.0.0",
         execa: "5.1.1",
         "flat-map-polyfill": "0.3.8",
@@ -30220,14 +30251,14 @@ var require_package2 = __commonJS2({
         "indent-string": "4.0.0",
         "is-obj": "2.0.0",
         "is-regexp": "2.1.0",
-        jest: "27.4.6",
+        jest: "27.4.7",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
         "lint-staged": "12.1.5",
         "lz-string": "1.4.4",
         "make-dir": "3.1.0",
         mariadb: "2.5.5",
-        mssql: "7.3.0",
+        mssql: "8.0.1",
         pg: "8.7.1",
         "pkg-up": "3.1.0",
         pluralize: "8.0.0",
@@ -30240,7 +30271,7 @@ var require_package2 = __commonJS2({
         "stacktrace-parser": "0.1.10",
         "strip-ansi": "6.0.1",
         "strip-indent": "3.0.0",
-        "ts-jest": "27.1.2",
+        "ts-jest": "27.1.3",
         "ts-node": "10.4.0",
         tsd: "0.19.1",
         typescript: "4.5.4"
@@ -30254,7 +30285,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"
+        "@prisma/engines-version": "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009"
       },
       "lint-staged": {
         "*.ts": [
@@ -30742,6 +30773,8 @@ var DMMF;
     ModelAction2["groupBy"] = "groupBy";
     ModelAction2["count"] = "count";
     ModelAction2["aggregate"] = "aggregate";
+    ModelAction2["findRaw"] = "findRaw";
+    ModelAction2["aggregateRaw"] = "aggregateRaw";
   })(ModelAction = DMMF2.ModelAction || (DMMF2.ModelAction = {}));
 })(DMMF || (DMMF = {}));
 var import_chalk = __toModule22(require_source2());
@@ -33411,17 +33444,12 @@ function unionBy(arr1, arr2, iteratee) {
 }
 __name(unionBy, "unionBy");
 __name2(unionBy, "unionBy");
-function lowerCase(name) {
-  return name.substring(0, 1).toLowerCase() + name.substring(1);
-}
-__name(lowerCase, "lowerCase");
-__name2(lowerCase, "lowerCase");
 function isGroupByOutputName(type) {
   return type.endsWith("GroupByOutputType");
 }
 __name(isGroupByOutputName, "isGroupByOutputName");
 __name2(isGroupByOutputName, "isGroupByOutputName");
-var DMMFClass = /* @__PURE__ */ __name(class {
+var DMMFHelper = /* @__PURE__ */ __name(class {
   constructor({ datamodel, schema, mappings }) {
     this.outputTypeToMergedOutputType = (outputType) => {
       return {
@@ -33555,8 +33583,8 @@ var DMMFClass = /* @__PURE__ */ __name(class {
   getRootFieldMap() {
     return keyBy2(this.queryType.fields, this.mutationType.fields, "name");
   }
-}, "DMMFClass");
-__name2(DMMFClass, "DMMFClass");
+}, "DMMFHelper");
+__name2(DMMFHelper, "DMMFHelper");
 var import_chalk5 = __toModule22(require_source2());
 var import_indent_string2 = __toModule22(require_indent_string2());
 var import_strip_ansi2 = __toModule22(require_strip_ansi());
@@ -34438,17 +34466,17 @@ function parseStack({
     return params;
   }
   const stack = parse(callsite);
-  const trace = stack.find((t) => {
-    return t.file && t.file !== "<anonymous>" && !t.file.includes("@prisma") && !t.file.includes("getPrismaClient") && !t.file.startsWith("internal/") && !t.methodName.includes("new ") && !t.methodName.includes("_getCallsite") && t.methodName.split(".").length < 4;
+  const trace2 = stack.find((t) => {
+    return t.file && t.file !== "<anonymous>" && !t.file.includes("@prisma") && !t.file.includes("getPrismaClient") && !t.file.startsWith("internal/") && !t.methodName.includes("new ") && !t.methodName.includes("getCallSite") && !t.methodName.includes("Proxy.") && t.methodName.split(".").length < 4;
   });
-  if (process.env.NODE_ENV !== "production" && trace && trace.file && trace.lineNumber && trace.column) {
-    const lineNumber = trace.lineNumber;
-    const printedFileName = renderPathRelative ? require("path").relative(process.cwd(), trace.file) : trace.file;
+  if (process.env.NODE_ENV !== "production" && trace2 && trace2.file && trace2.lineNumber && trace2.column) {
+    const lineNumber = trace2.lineNumber;
+    const printedFileName = renderPathRelative ? require("path").relative(process.cwd(), trace2.file) : trace2.file;
     const start = Math.max(0, lineNumber - 4);
     const fs7 = require("fs");
-    const exists4 = fs7.existsSync(trace.file);
+    const exists4 = fs7.existsSync(trace2.file);
     if (exists4) {
-      const file2 = fs7.readFileSync(trace.file, "utf-8");
+      const file2 = fs7.readFileSync(trace2.file, "utf-8");
       const slicedFile = file2.split("\n").slice(start, lineNumber).map((line) => {
         if (line.endsWith("\r")) {
           return line.slice(0, -1);
@@ -34467,7 +34495,7 @@ function parseStack({
         }
         params.functionName = `${match[1]})`;
         params.callsiteStr = ` in
-${import_chalk4.default.underline(`${printedFileName}:${trace.lineNumber}:${trace.column}`)}`;
+${import_chalk4.default.underline(`${printedFileName}:${trace2.lineNumber}:${trace2.column}`)}`;
         const slicePoint = theLine.indexOf("{");
         const linesToHighlight = lines.map((l, i, all) => !onUs && i === all.length - 1 ? l.slice(0, slicePoint > -1 ? slicePoint : l.length - 1) : l).join("\n");
         const highlightedLines = showColors ? highlightTS(linesToHighlight).split("\n") : linesToHighlight.split("\n");
@@ -35046,7 +35074,7 @@ function selectionToFields(dmmf, selection, schemaField, path6) {
       }));
       return acc;
     }
-    if (typeof value !== "boolean" && field.outputType.location === "scalar" && field.name !== "executeRaw" && field.name !== "queryRaw" && outputType.name !== "Query" && !name.startsWith("aggregate") && field.name !== "count") {
+    if (typeof value !== "boolean" && field.outputType.location === "scalar" && field.name !== "executeRaw" && field.name !== "queryRaw" && field.name !== "runCommandRaw" && outputType.name !== "Query" && !name.startsWith("aggregate") && field.name !== "count") {
       acc.push(new Field({
         name,
         children: [],
@@ -36079,19 +36107,22 @@ var LibraryEngine = /* @__PURE__ */ __name(class extends Engine {
   async transaction(action, arg2) {
     var _a2, _b2, _c, _d, _e;
     await this.start();
+    let result;
     if (action === "start") {
       const jsonOptions = JSON.stringify({
         max_wait: (_a2 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a2 : 2e3,
         timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3
       });
-      const result = await ((_c = this.engine) == null ? void 0 : _c.startTransaction(jsonOptions, "{}"));
-      return this.parseEngineResponse(result);
+      result = await ((_c = this.engine) == null ? void 0 : _c.startTransaction(jsonOptions, "{}"));
     } else if (action === "commit") {
-      await ((_d = this.engine) == null ? void 0 : _d.commitTransaction(arg2.id, "{}"));
+      result = await ((_d = this.engine) == null ? void 0 : _d.commitTransaction(arg2.id, "{}"));
     } else if (action === "rollback") {
-      await ((_e = this.engine) == null ? void 0 : _e.rollbackTransaction(arg2.id, "{}"));
+      result = await ((_e = this.engine) == null ? void 0 : _e.rollbackTransaction(arg2.id, "{}"));
     }
-    return void 0;
+    const response = this.parseEngineResponse(result);
+    if (response.error_code)
+      throw response;
+    return response;
   }
   async instantiateLibrary() {
     debug4("internalSetup");
@@ -36315,8 +36346,8 @@ You may have to run ${import_chalk7.default.greenBright("prisma generate")} for 
     var _a2;
     debug4(`sending request, this.libraryStarted: ${this.libraryStarted}`);
     const request4 = { query: query2, variables: {} };
-    const queryStr = JSON.stringify(request4);
     const headerStr = JSON.stringify(headers);
+    const queryStr = JSON.stringify(request4);
     try {
       await this.start();
       this.executingQueryPromise = (_a2 = this.engine) == null ? void 0 : _a2.query(queryStr, headerStr, headers.transactionId);
@@ -36844,14 +36875,12 @@ var BinaryEngine = /* @__PURE__ */ __name(class extends Engine {
     enableDebugLogs,
     allowTriggerPanic,
     dirname,
-    useUds,
     activeProvider
   }) {
     super();
     var _a2;
     this.startCount = 0;
     this.previewFeatures = [];
-    this.useUds = false;
     this.stderrLogs = "";
     this.handleRequestError = async (error2, graceful = false) => {
       var _a3, _b2;
@@ -36887,7 +36916,6 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
       return false;
     };
     this.dirname = dirname;
-    this.useUds = useUds != null ? useUds : false;
     this.env = env;
     this.cwd = this.resolveCwd(cwd);
     this.enableDebugLogs = enableDebugLogs != null ? enableDebugLogs : false;
@@ -37197,20 +37225,12 @@ ${import_chalk8.default.dim("In case we're mistaken, please report this to us \u
         this.lastPanic = void 0;
         logger("startin & resettin");
         this.globalKillSignalReceived = void 0;
-        if (this.useUds) {
-          this.socketPath = `/tmp/prisma-${getRandomString()}.sock`;
-          socketPaths.push(this.socketPath);
-        }
         debug5({ cwd: this.cwd });
         const prismaPath = await this.getPrismaPath();
         const additionalFlag = this.allowTriggerPanic ? ["--debug"] : [];
         const flags = ["--enable-raw-queries", ...this.flags, ...additionalFlag];
-        if (this.useUds) {
-          flags.push("--unix-path", this.socketPath);
-        } else {
-          this.port = await this.getFreePort();
-          flags.push("--port", String(this.port));
-        }
+        this.port = await this.getFreePort();
+        flags.push("--port", String(this.port));
         debug5({ flags });
         const env = this.getEngineEnvVars();
         this.child = (0, import_child_process.spawn)(prismaPath, flags, {
@@ -37245,13 +37265,7 @@ ${import_chalk8.default.dim("In case we're mistaken, please report this to us \u
             const json = JSON.parse(data);
             debug5("stdout", getMessage(json));
             if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b3 = (_a3 = json.fields) == null ? void 0 : _a3.message) == null ? void 0 : _b3.startsWith("Started http server"))) {
-              if (this.useUds) {
-                this.connection.open("http://127.0.0.1", {
-                  socketPath: this.socketPath
-                });
-              } else {
-                this.connection.open(`http://127.0.0.1:${this.port}`);
-              }
+              this.connection.open(`http://127.0.0.1:${this.port}`);
               this.engineStartDeferred.resolve();
               this.engineStartDeferred = void 0;
             }
@@ -37528,21 +37542,17 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
   async transaction(action, arg2) {
     var _a2, _b2;
     await this.start();
-    try {
-      if (action === "start") {
-        const jsonOptions = JSON.stringify({
-          max_wait: (_a2 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a2 : 2e3,
-          timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3
-        });
-        const result = await Connection.onHttpError(this.connection.post("/transaction/start", jsonOptions), transactionHttpErrorHandler);
-        return result.data;
-      } else if (action === "commit") {
-        await Connection.onHttpError(this.connection.post(`/transaction/${arg2.id}/commit`), transactionHttpErrorHandler);
-      } else if (action === "rollback") {
-        await Connection.onHttpError(this.connection.post(`/transaction/${arg2.id}/rollback`), transactionHttpErrorHandler);
-      }
-    } catch (e) {
-      this.setError(e);
+    if (action === "start") {
+      const jsonOptions = JSON.stringify({
+        max_wait: (_a2 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a2 : 2e3,
+        timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3
+      });
+      const result = await Connection.onHttpError(this.connection.post("/transaction/start", jsonOptions), transactionHttpErrorHandler);
+      return result.data;
+    } else if (action === "commit") {
+      await Connection.onHttpError(this.connection.post(`/transaction/${arg2.id}/commit`), transactionHttpErrorHandler);
+    } else if (action === "rollback") {
+      await Connection.onHttpError(this.connection.post(`/transaction/${arg2.id}/rollback`), transactionHttpErrorHandler);
     }
     return void 0;
   }
@@ -37672,7 +37682,7 @@ __name2(request3, "request");
 __name21(request3, "request");
 function buildHeaders(options2) {
   return {
-    ...options2.headers,
+    ...JSON.parse(JSON.stringify(options2.headers)),
     "Content-Type": "application/json"
   };
 }
@@ -38584,9 +38594,11 @@ var PrismaClientFetcher = /* @__PURE__ */ __name(class {
     this.hooks = hooks;
     this.dataloader = new DataLoader({
       batchLoader: (requests) => {
+        var _a2;
         const queries = requests.map((r) => String(r.document));
-        const runTransaction = requests[0].runInTransaction;
-        return this.prisma._engine.requestBatch(queries, {}, runTransaction);
+        const runInTransaction = requests[0].runInTransaction;
+        const headers = { traceparent: (_a2 = requests[0].headers) == null ? void 0 : _a2.traceparent };
+        return this.prisma._engine.requestBatch(queries, headers, runInTransaction);
       },
       singleLoader: (request4) => {
         const query2 = String(request4.document);
@@ -38885,7 +38897,7 @@ It should have this form: { url: "CONNECTION_STRING" }`);
     if (!value) {
       return;
     }
-    const knownKeys = ["debug", "hooks", "useUds", "engine", "measurePerformance"];
+    const knownKeys = ["debug", "hooks", "engine", "measurePerformance"];
     if (typeof value !== "object") {
       throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(value)} for "__internal" to PrismaClient constructor`);
     }
@@ -38960,10 +38972,13 @@ var RequestHandler = /* @__PURE__ */ __name(class {
     this.hooks = hooks;
     this.dataloader = new DataLoader({
       batchLoader: (requests) => {
+        var _a2;
         const queries = requests.map((r) => String(r.document));
-        return this.client._engine.requestBatch(queries, {
-          transactionId: requests[0].transactionId
-        });
+        const headers = {
+          transactionId: requests[0].transactionId,
+          traceparent: (_a2 = requests[0].headers) == null ? void 0 : _a2.traceparent
+        };
+        return this.client._engine.requestBatch(queries, headers);
       },
       singleLoader: (request4) => {
         const query2 = String(request4.document);
@@ -39105,6 +39120,1144 @@ function batchFindUniqueBy(request4) {
 }
 __name(batchFindUniqueBy, "batchFindUniqueBy");
 __name2(batchFindUniqueBy, "batchFindUniqueBy");
+var _globalThis = typeof globalThis === "object" ? globalThis : global;
+var VERSION = "1.0.3";
+var re = /^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;
+function _makeCompatibilityCheck(ownVersion) {
+  var acceptedVersions = new Set([ownVersion]);
+  var rejectedVersions = new Set();
+  var myVersionMatch = ownVersion.match(re);
+  if (!myVersionMatch) {
+    return function() {
+      return false;
+    };
+  }
+  var ownVersionParsed = {
+    major: +myVersionMatch[1],
+    minor: +myVersionMatch[2],
+    patch: +myVersionMatch[3],
+    prerelease: myVersionMatch[4]
+  };
+  if (ownVersionParsed.prerelease != null) {
+    return /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function isExactmatch(globalVersion) {
+      return globalVersion === ownVersion;
+    }, "isExactmatch"), "isExactmatch");
+  }
+  function _reject(v) {
+    rejectedVersions.add(v);
+    return false;
+  }
+  __name(_reject, "_reject");
+  __name2(_reject, "_reject");
+  function _accept(v) {
+    acceptedVersions.add(v);
+    return true;
+  }
+  __name(_accept, "_accept");
+  __name2(_accept, "_accept");
+  return /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function isCompatible2(globalVersion) {
+    if (acceptedVersions.has(globalVersion)) {
+      return true;
+    }
+    if (rejectedVersions.has(globalVersion)) {
+      return false;
+    }
+    var globalVersionMatch = globalVersion.match(re);
+    if (!globalVersionMatch) {
+      return _reject(globalVersion);
+    }
+    var globalVersionParsed = {
+      major: +globalVersionMatch[1],
+      minor: +globalVersionMatch[2],
+      patch: +globalVersionMatch[3],
+      prerelease: globalVersionMatch[4]
+    };
+    if (globalVersionParsed.prerelease != null) {
+      return _reject(globalVersion);
+    }
+    if (ownVersionParsed.major !== globalVersionParsed.major) {
+      return _reject(globalVersion);
+    }
+    if (ownVersionParsed.major === 0) {
+      if (ownVersionParsed.minor === globalVersionParsed.minor && ownVersionParsed.patch <= globalVersionParsed.patch) {
+        return _accept(globalVersion);
+      }
+      return _reject(globalVersion);
+    }
+    if (ownVersionParsed.minor <= globalVersionParsed.minor) {
+      return _accept(globalVersion);
+    }
+    return _reject(globalVersion);
+  }, "isCompatible2"), "isCompatible");
+}
+__name(_makeCompatibilityCheck, "_makeCompatibilityCheck");
+__name2(_makeCompatibilityCheck, "_makeCompatibilityCheck");
+var isCompatible = _makeCompatibilityCheck(VERSION);
+var major = VERSION.split(".")[0];
+var GLOBAL_OPENTELEMETRY_API_KEY = Symbol.for("opentelemetry.js.api." + major);
+var _global = _globalThis;
+function registerGlobal(type, instance, diag3, allowOverride) {
+  var _a2;
+  if (allowOverride === void 0) {
+    allowOverride = false;
+  }
+  var api = _global[GLOBAL_OPENTELEMETRY_API_KEY] = (_a2 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) !== null && _a2 !== void 0 ? _a2 : {
+    version: VERSION
+  };
+  if (!allowOverride && api[type]) {
+    var err = new Error("@opentelemetry/api: Attempted duplicate registration of API: " + type);
+    diag3.error(err.stack || err.message);
+    return false;
+  }
+  if (api.version !== VERSION) {
+    var err = new Error("@opentelemetry/api: All API registration versions must match");
+    diag3.error(err.stack || err.message);
+    return false;
+  }
+  api[type] = instance;
+  diag3.debug("@opentelemetry/api: Registered a global for " + type + " v" + VERSION + ".");
+  return true;
+}
+__name(registerGlobal, "registerGlobal");
+__name2(registerGlobal, "registerGlobal");
+function getGlobal(type) {
+  var _a2, _b2;
+  var globalVersion = (_a2 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _a2 === void 0 ? void 0 : _a2.version;
+  if (!globalVersion || !isCompatible(globalVersion)) {
+    return;
+  }
+  return (_b2 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _b2 === void 0 ? void 0 : _b2[type];
+}
+__name(getGlobal, "getGlobal");
+__name2(getGlobal, "getGlobal");
+function unregisterGlobal(type, diag3) {
+  diag3.debug("@opentelemetry/api: Unregistering a global for " + type + " v" + VERSION + ".");
+  var api = _global[GLOBAL_OPENTELEMETRY_API_KEY];
+  if (api) {
+    delete api[type];
+  }
+}
+__name(unregisterGlobal, "unregisterGlobal");
+__name2(unregisterGlobal, "unregisterGlobal");
+var DiagComponentLogger = function() {
+  function DiagComponentLogger2(props) {
+    this._namespace = props.namespace || "DiagComponentLogger";
+  }
+  __name(DiagComponentLogger2, "DiagComponentLogger2");
+  __name2(DiagComponentLogger2, "DiagComponentLogger");
+  DiagComponentLogger2.prototype.debug = function() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+    return logProxy("debug", this._namespace, args);
+  };
+  DiagComponentLogger2.prototype.error = function() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+    return logProxy("error", this._namespace, args);
+  };
+  DiagComponentLogger2.prototype.info = function() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+    return logProxy("info", this._namespace, args);
+  };
+  DiagComponentLogger2.prototype.warn = function() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+    return logProxy("warn", this._namespace, args);
+  };
+  DiagComponentLogger2.prototype.verbose = function() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+    return logProxy("verbose", this._namespace, args);
+  };
+  return DiagComponentLogger2;
+}();
+function logProxy(funcName, namespace, args) {
+  var logger2 = getGlobal("diag");
+  if (!logger2) {
+    return;
+  }
+  args.unshift(namespace);
+  return logger2[funcName].apply(logger2, args);
+}
+__name(logProxy, "logProxy");
+__name2(logProxy, "logProxy");
+var DiagLogLevel;
+(function(DiagLogLevel2) {
+  DiagLogLevel2[DiagLogLevel2["NONE"] = 0] = "NONE";
+  DiagLogLevel2[DiagLogLevel2["ERROR"] = 30] = "ERROR";
+  DiagLogLevel2[DiagLogLevel2["WARN"] = 50] = "WARN";
+  DiagLogLevel2[DiagLogLevel2["INFO"] = 60] = "INFO";
+  DiagLogLevel2[DiagLogLevel2["DEBUG"] = 70] = "DEBUG";
+  DiagLogLevel2[DiagLogLevel2["VERBOSE"] = 80] = "VERBOSE";
+  DiagLogLevel2[DiagLogLevel2["ALL"] = 9999] = "ALL";
+})(DiagLogLevel || (DiagLogLevel = {}));
+function createLogLevelDiagLogger(maxLevel, logger2) {
+  if (maxLevel < DiagLogLevel.NONE) {
+    maxLevel = DiagLogLevel.NONE;
+  } else if (maxLevel > DiagLogLevel.ALL) {
+    maxLevel = DiagLogLevel.ALL;
+  }
+  logger2 = logger2 || {};
+  function _filterFunc(funcName, theLevel) {
+    var theFunc = logger2[funcName];
+    if (typeof theFunc === "function" && maxLevel >= theLevel) {
+      return theFunc.bind(logger2);
+    }
+    return function() {
+    };
+  }
+  __name(_filterFunc, "_filterFunc");
+  __name2(_filterFunc, "_filterFunc");
+  return {
+    error: _filterFunc("error", DiagLogLevel.ERROR),
+    warn: _filterFunc("warn", DiagLogLevel.WARN),
+    info: _filterFunc("info", DiagLogLevel.INFO),
+    debug: _filterFunc("debug", DiagLogLevel.DEBUG),
+    verbose: _filterFunc("verbose", DiagLogLevel.VERBOSE)
+  };
+}
+__name(createLogLevelDiagLogger, "createLogLevelDiagLogger");
+__name2(createLogLevelDiagLogger, "createLogLevelDiagLogger");
+var API_NAME = "diag";
+var DiagAPI = function() {
+  function DiagAPI2() {
+    function _logProxy(funcName) {
+      return function() {
+        var logger2 = getGlobal("diag");
+        if (!logger2)
+          return;
+        return logger2[funcName].apply(logger2, arguments);
+      };
+    }
+    __name(_logProxy, "_logProxy");
+    __name2(_logProxy, "_logProxy");
+    var self2 = this;
+    self2.setLogger = function(logger2, logLevel) {
+      var _a2, _b2;
+      if (logLevel === void 0) {
+        logLevel = DiagLogLevel.INFO;
+      }
+      if (logger2 === self2) {
+        var err = new Error("Cannot use diag as the logger for itself. Please use a DiagLogger implementation like ConsoleDiagLogger or a custom implementation");
+        self2.error((_a2 = err.stack) !== null && _a2 !== void 0 ? _a2 : err.message);
+        return false;
+      }
+      var oldLogger = getGlobal("diag");
+      var newLogger = createLogLevelDiagLogger(logLevel, logger2);
+      if (oldLogger) {
+        var stack = (_b2 = new Error().stack) !== null && _b2 !== void 0 ? _b2 : "<failed to generate stacktrace>";
+        oldLogger.warn("Current logger will be overwritten from " + stack);
+        newLogger.warn("Current logger will overwrite one already registered from " + stack);
+      }
+      return registerGlobal("diag", newLogger, self2, true);
+    };
+    self2.disable = function() {
+      unregisterGlobal(API_NAME, self2);
+    };
+    self2.createComponentLogger = function(options2) {
+      return new DiagComponentLogger(options2);
+    };
+    self2.verbose = _logProxy("verbose");
+    self2.debug = _logProxy("debug");
+    self2.info = _logProxy("info");
+    self2.warn = _logProxy("warn");
+    self2.error = _logProxy("error");
+  }
+  __name(DiagAPI2, "DiagAPI2");
+  __name2(DiagAPI2, "DiagAPI");
+  DiagAPI2.instance = function() {
+    if (!this._instance) {
+      this._instance = new DiagAPI2();
+    }
+    return this._instance;
+  };
+  return DiagAPI2;
+}();
+var BaggageImpl = function() {
+  function BaggageImpl2(entries) {
+    this._entries = entries ? new Map(entries) : new Map();
+  }
+  __name(BaggageImpl2, "BaggageImpl2");
+  __name2(BaggageImpl2, "BaggageImpl");
+  BaggageImpl2.prototype.getEntry = function(key) {
+    var entry = this._entries.get(key);
+    if (!entry) {
+      return void 0;
+    }
+    return Object.assign({}, entry);
+  };
+  BaggageImpl2.prototype.getAllEntries = function() {
+    return Array.from(this._entries.entries()).map(function(_a2) {
+      var k = _a2[0], v = _a2[1];
+      return [k, v];
+    });
+  };
+  BaggageImpl2.prototype.setEntry = function(key, entry) {
+    var newBaggage = new BaggageImpl2(this._entries);
+    newBaggage._entries.set(key, entry);
+    return newBaggage;
+  };
+  BaggageImpl2.prototype.removeEntry = function(key) {
+    var newBaggage = new BaggageImpl2(this._entries);
+    newBaggage._entries.delete(key);
+    return newBaggage;
+  };
+  BaggageImpl2.prototype.removeEntries = function() {
+    var keys2 = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      keys2[_i] = arguments[_i];
+    }
+    var newBaggage = new BaggageImpl2(this._entries);
+    for (var _a2 = 0, keys_1 = keys2; _a2 < keys_1.length; _a2++) {
+      var key = keys_1[_a2];
+      newBaggage._entries.delete(key);
+    }
+    return newBaggage;
+  };
+  BaggageImpl2.prototype.clear = function() {
+    return new BaggageImpl2();
+  };
+  return BaggageImpl2;
+}();
+var baggageEntryMetadataSymbol = Symbol("BaggageEntryMetadata");
+var diag = DiagAPI.instance();
+function createBaggage(entries) {
+  if (entries === void 0) {
+    entries = {};
+  }
+  return new BaggageImpl(new Map(Object.entries(entries)));
+}
+__name(createBaggage, "createBaggage");
+__name2(createBaggage, "createBaggage");
+var consoleMap = [
+  { n: "error", c: "error" },
+  { n: "warn", c: "warn" },
+  { n: "info", c: "info" },
+  { n: "debug", c: "debug" },
+  { n: "verbose", c: "trace" }
+];
+var DiagConsoleLogger = function() {
+  function DiagConsoleLogger2() {
+    function _consoleFunc(funcName) {
+      return function() {
+        var orgArguments = arguments;
+        if (console) {
+          var theFunc = console[funcName];
+          if (typeof theFunc !== "function") {
+            theFunc = console.log;
+          }
+          if (typeof theFunc === "function") {
+            return theFunc.apply(console, orgArguments);
+          }
+        }
+      };
+    }
+    __name(_consoleFunc, "_consoleFunc");
+    __name2(_consoleFunc, "_consoleFunc");
+    for (var i = 0; i < consoleMap.length; i++) {
+      this[consoleMap[i].n] = _consoleFunc(consoleMap[i].c);
+    }
+  }
+  __name(DiagConsoleLogger2, "DiagConsoleLogger2");
+  __name2(DiagConsoleLogger2, "DiagConsoleLogger");
+  return DiagConsoleLogger2;
+}();
+var defaultTextMapGetter = {
+  get: function(carrier, key) {
+    if (carrier == null) {
+      return void 0;
+    }
+    return carrier[key];
+  },
+  keys: function(carrier) {
+    if (carrier == null) {
+      return [];
+    }
+    return Object.keys(carrier);
+  }
+};
+var defaultTextMapSetter = {
+  set: function(carrier, key, value) {
+    if (carrier == null) {
+      return;
+    }
+    carrier[key] = value;
+  }
+};
+function createContextKey(description) {
+  return Symbol.for(description);
+}
+__name(createContextKey, "createContextKey");
+__name2(createContextKey, "createContextKey");
+var BaseContext = function() {
+  function BaseContext2(parentContext) {
+    var self2 = this;
+    self2._currentContext = parentContext ? new Map(parentContext) : new Map();
+    self2.getValue = function(key) {
+      return self2._currentContext.get(key);
+    };
+    self2.setValue = function(key, value) {
+      var context3 = new BaseContext2(self2._currentContext);
+      context3._currentContext.set(key, value);
+      return context3;
+    };
+    self2.deleteValue = function(key) {
+      var context3 = new BaseContext2(self2._currentContext);
+      context3._currentContext.delete(key);
+      return context3;
+    };
+  }
+  __name(BaseContext2, "BaseContext2");
+  __name2(BaseContext2, "BaseContext");
+  return BaseContext2;
+}();
+var ROOT_CONTEXT = new BaseContext();
+var __spreadArray = /* @__PURE__ */ __name(function(to, from) {
+  for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+    to[j] = from[i];
+  return to;
+}, "__spreadArray");
+var NoopContextManager = function() {
+  function NoopContextManager2() {
+  }
+  __name(NoopContextManager2, "NoopContextManager2");
+  __name2(NoopContextManager2, "NoopContextManager");
+  NoopContextManager2.prototype.active = function() {
+    return ROOT_CONTEXT;
+  };
+  NoopContextManager2.prototype.with = function(_context, fn, thisArg) {
+    var args = [];
+    for (var _i = 3; _i < arguments.length; _i++) {
+      args[_i - 3] = arguments[_i];
+    }
+    return fn.call.apply(fn, __spreadArray([thisArg], args));
+  };
+  NoopContextManager2.prototype.bind = function(_context, target) {
+    return target;
+  };
+  NoopContextManager2.prototype.enable = function() {
+    return this;
+  };
+  NoopContextManager2.prototype.disable = function() {
+    return this;
+  };
+  return NoopContextManager2;
+}();
+var __spreadArray2 = /* @__PURE__ */ __name(function(to, from) {
+  for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+    to[j] = from[i];
+  return to;
+}, "__spreadArray2");
+var API_NAME2 = "context";
+var NOOP_CONTEXT_MANAGER = new NoopContextManager();
+var ContextAPI = function() {
+  function ContextAPI2() {
+  }
+  __name(ContextAPI2, "ContextAPI2");
+  __name2(ContextAPI2, "ContextAPI");
+  ContextAPI2.getInstance = function() {
+    if (!this._instance) {
+      this._instance = new ContextAPI2();
+    }
+    return this._instance;
+  };
+  ContextAPI2.prototype.setGlobalContextManager = function(contextManager) {
+    return registerGlobal(API_NAME2, contextManager, DiagAPI.instance());
+  };
+  ContextAPI2.prototype.active = function() {
+    return this._getContextManager().active();
+  };
+  ContextAPI2.prototype.with = function(context3, fn, thisArg) {
+    var _a2;
+    var args = [];
+    for (var _i = 3; _i < arguments.length; _i++) {
+      args[_i - 3] = arguments[_i];
+    }
+    return (_a2 = this._getContextManager()).with.apply(_a2, __spreadArray2([context3, fn, thisArg], args));
+  };
+  ContextAPI2.prototype.bind = function(context3, target) {
+    return this._getContextManager().bind(context3, target);
+  };
+  ContextAPI2.prototype._getContextManager = function() {
+    return getGlobal(API_NAME2) || NOOP_CONTEXT_MANAGER;
+  };
+  ContextAPI2.prototype.disable = function() {
+    this._getContextManager().disable();
+    unregisterGlobal(API_NAME2, DiagAPI.instance());
+  };
+  return ContextAPI2;
+}();
+var TraceFlags;
+(function(TraceFlags2) {
+  TraceFlags2[TraceFlags2["NONE"] = 0] = "NONE";
+  TraceFlags2[TraceFlags2["SAMPLED"] = 1] = "SAMPLED";
+})(TraceFlags || (TraceFlags = {}));
+var INVALID_SPANID = "0000000000000000";
+var INVALID_TRACEID = "00000000000000000000000000000000";
+var INVALID_SPAN_CONTEXT = {
+  traceId: INVALID_TRACEID,
+  spanId: INVALID_SPANID,
+  traceFlags: TraceFlags.NONE
+};
+var NonRecordingSpan = function() {
+  function NonRecordingSpan2(_spanContext) {
+    if (_spanContext === void 0) {
+      _spanContext = INVALID_SPAN_CONTEXT;
+    }
+    this._spanContext = _spanContext;
+  }
+  __name(NonRecordingSpan2, "NonRecordingSpan2");
+  __name2(NonRecordingSpan2, "NonRecordingSpan");
+  NonRecordingSpan2.prototype.spanContext = function() {
+    return this._spanContext;
+  };
+  NonRecordingSpan2.prototype.setAttribute = function(_key, _value) {
+    return this;
+  };
+  NonRecordingSpan2.prototype.setAttributes = function(_attributes) {
+    return this;
+  };
+  NonRecordingSpan2.prototype.addEvent = function(_name, _attributes) {
+    return this;
+  };
+  NonRecordingSpan2.prototype.setStatus = function(_status) {
+    return this;
+  };
+  NonRecordingSpan2.prototype.updateName = function(_name) {
+    return this;
+  };
+  NonRecordingSpan2.prototype.end = function(_endTime) {
+  };
+  NonRecordingSpan2.prototype.isRecording = function() {
+    return false;
+  };
+  NonRecordingSpan2.prototype.recordException = function(_exception, _time) {
+  };
+  return NonRecordingSpan2;
+}();
+var SPAN_KEY = createContextKey("OpenTelemetry Context Key SPAN");
+function getSpan(context3) {
+  return context3.getValue(SPAN_KEY) || void 0;
+}
+__name(getSpan, "getSpan");
+__name2(getSpan, "getSpan");
+function setSpan(context3, span) {
+  return context3.setValue(SPAN_KEY, span);
+}
+__name(setSpan, "setSpan");
+__name2(setSpan, "setSpan");
+function deleteSpan(context3) {
+  return context3.deleteValue(SPAN_KEY);
+}
+__name(deleteSpan, "deleteSpan");
+__name2(deleteSpan, "deleteSpan");
+function setSpanContext(context3, spanContext) {
+  return setSpan(context3, new NonRecordingSpan(spanContext));
+}
+__name(setSpanContext, "setSpanContext");
+__name2(setSpanContext, "setSpanContext");
+function getSpanContext(context3) {
+  var _a2;
+  return (_a2 = getSpan(context3)) === null || _a2 === void 0 ? void 0 : _a2.spanContext();
+}
+__name(getSpanContext, "getSpanContext");
+__name2(getSpanContext, "getSpanContext");
+var VALID_TRACEID_REGEX = /^([0-9a-f]{32})$/i;
+var VALID_SPANID_REGEX = /^[0-9a-f]{16}$/i;
+function isValidTraceId(traceId) {
+  return VALID_TRACEID_REGEX.test(traceId) && traceId !== INVALID_TRACEID;
+}
+__name(isValidTraceId, "isValidTraceId");
+__name2(isValidTraceId, "isValidTraceId");
+function isValidSpanId(spanId) {
+  return VALID_SPANID_REGEX.test(spanId) && spanId !== INVALID_SPANID;
+}
+__name(isValidSpanId, "isValidSpanId");
+__name2(isValidSpanId, "isValidSpanId");
+function isSpanContextValid(spanContext) {
+  return isValidTraceId(spanContext.traceId) && isValidSpanId(spanContext.spanId);
+}
+__name(isSpanContextValid, "isSpanContextValid");
+__name2(isSpanContextValid, "isSpanContextValid");
+function wrapSpanContext(spanContext) {
+  return new NonRecordingSpan(spanContext);
+}
+__name(wrapSpanContext, "wrapSpanContext");
+__name2(wrapSpanContext, "wrapSpanContext");
+var context = ContextAPI.getInstance();
+var NoopTracer = function() {
+  function NoopTracer2() {
+  }
+  __name(NoopTracer2, "NoopTracer2");
+  __name2(NoopTracer2, "NoopTracer");
+  NoopTracer2.prototype.startSpan = function(name, options2, context3) {
+    var root = Boolean(options2 === null || options2 === void 0 ? void 0 : options2.root);
+    if (root) {
+      return new NonRecordingSpan();
+    }
+    var parentFromContext = context3 && getSpanContext(context3);
+    if (isSpanContext(parentFromContext) && isSpanContextValid(parentFromContext)) {
+      return new NonRecordingSpan(parentFromContext);
+    } else {
+      return new NonRecordingSpan();
+    }
+  };
+  NoopTracer2.prototype.startActiveSpan = function(name, arg2, arg3, arg4) {
+    var opts2;
+    var ctx;
+    var fn;
+    if (arguments.length < 2) {
+      return;
+    } else if (arguments.length === 2) {
+      fn = arg2;
+    } else if (arguments.length === 3) {
+      opts2 = arg2;
+      fn = arg3;
+    } else {
+      opts2 = arg2;
+      ctx = arg3;
+      fn = arg4;
+    }
+    var parentContext = ctx !== null && ctx !== void 0 ? ctx : context.active();
+    var span = this.startSpan(name, opts2, parentContext);
+    var contextWithSpanSet = setSpan(parentContext, span);
+    return context.with(contextWithSpanSet, fn, void 0, span);
+  };
+  return NoopTracer2;
+}();
+function isSpanContext(spanContext) {
+  return typeof spanContext === "object" && typeof spanContext["spanId"] === "string" && typeof spanContext["traceId"] === "string" && typeof spanContext["traceFlags"] === "number";
+}
+__name(isSpanContext, "isSpanContext");
+__name2(isSpanContext, "isSpanContext");
+var NOOP_TRACER = new NoopTracer();
+var ProxyTracer = function() {
+  function ProxyTracer2(_provider, name, version) {
+    this._provider = _provider;
+    this.name = name;
+    this.version = version;
+  }
+  __name(ProxyTracer2, "ProxyTracer2");
+  __name2(ProxyTracer2, "ProxyTracer");
+  ProxyTracer2.prototype.startSpan = function(name, options2, context3) {
+    return this._getTracer().startSpan(name, options2, context3);
+  };
+  ProxyTracer2.prototype.startActiveSpan = function(_name, _options, _context, _fn) {
+    var tracer = this._getTracer();
+    return Reflect.apply(tracer.startActiveSpan, tracer, arguments);
+  };
+  ProxyTracer2.prototype._getTracer = function() {
+    if (this._delegate) {
+      return this._delegate;
+    }
+    var tracer = this._provider.getDelegateTracer(this.name, this.version);
+    if (!tracer) {
+      return NOOP_TRACER;
+    }
+    this._delegate = tracer;
+    return this._delegate;
+  };
+  return ProxyTracer2;
+}();
+var NoopTracerProvider = function() {
+  function NoopTracerProvider2() {
+  }
+  __name(NoopTracerProvider2, "NoopTracerProvider2");
+  __name2(NoopTracerProvider2, "NoopTracerProvider");
+  NoopTracerProvider2.prototype.getTracer = function(_name, _version) {
+    return new NoopTracer();
+  };
+  return NoopTracerProvider2;
+}();
+var NOOP_TRACER_PROVIDER = new NoopTracerProvider();
+var ProxyTracerProvider = function() {
+  function ProxyTracerProvider2() {
+  }
+  __name(ProxyTracerProvider2, "ProxyTracerProvider2");
+  __name2(ProxyTracerProvider2, "ProxyTracerProvider");
+  ProxyTracerProvider2.prototype.getTracer = function(name, version) {
+    var _a2;
+    return (_a2 = this.getDelegateTracer(name, version)) !== null && _a2 !== void 0 ? _a2 : new ProxyTracer(this, name, version);
+  };
+  ProxyTracerProvider2.prototype.getDelegate = function() {
+    var _a2;
+    return (_a2 = this._delegate) !== null && _a2 !== void 0 ? _a2 : NOOP_TRACER_PROVIDER;
+  };
+  ProxyTracerProvider2.prototype.setDelegate = function(delegate) {
+    this._delegate = delegate;
+  };
+  ProxyTracerProvider2.prototype.getDelegateTracer = function(name, version) {
+    var _a2;
+    return (_a2 = this._delegate) === null || _a2 === void 0 ? void 0 : _a2.getTracer(name, version);
+  };
+  return ProxyTracerProvider2;
+}();
+var SamplingDecision;
+(function(SamplingDecision2) {
+  SamplingDecision2[SamplingDecision2["NOT_RECORD"] = 0] = "NOT_RECORD";
+  SamplingDecision2[SamplingDecision2["RECORD"] = 1] = "RECORD";
+  SamplingDecision2[SamplingDecision2["RECORD_AND_SAMPLED"] = 2] = "RECORD_AND_SAMPLED";
+})(SamplingDecision || (SamplingDecision = {}));
+var SpanKind;
+(function(SpanKind2) {
+  SpanKind2[SpanKind2["INTERNAL"] = 0] = "INTERNAL";
+  SpanKind2[SpanKind2["SERVER"] = 1] = "SERVER";
+  SpanKind2[SpanKind2["CLIENT"] = 2] = "CLIENT";
+  SpanKind2[SpanKind2["PRODUCER"] = 3] = "PRODUCER";
+  SpanKind2[SpanKind2["CONSUMER"] = 4] = "CONSUMER";
+})(SpanKind || (SpanKind = {}));
+var SpanStatusCode;
+(function(SpanStatusCode2) {
+  SpanStatusCode2[SpanStatusCode2["UNSET"] = 0] = "UNSET";
+  SpanStatusCode2[SpanStatusCode2["OK"] = 1] = "OK";
+  SpanStatusCode2[SpanStatusCode2["ERROR"] = 2] = "ERROR";
+})(SpanStatusCode || (SpanStatusCode = {}));
+var API_NAME3 = "trace";
+var TraceAPI = function() {
+  function TraceAPI2() {
+    this._proxyTracerProvider = new ProxyTracerProvider();
+    this.wrapSpanContext = wrapSpanContext;
+    this.isSpanContextValid = isSpanContextValid;
+    this.deleteSpan = deleteSpan;
+    this.getSpan = getSpan;
+    this.getSpanContext = getSpanContext;
+    this.setSpan = setSpan;
+    this.setSpanContext = setSpanContext;
+  }
+  __name(TraceAPI2, "TraceAPI2");
+  __name2(TraceAPI2, "TraceAPI");
+  TraceAPI2.getInstance = function() {
+    if (!this._instance) {
+      this._instance = new TraceAPI2();
+    }
+    return this._instance;
+  };
+  TraceAPI2.prototype.setGlobalTracerProvider = function(provider) {
+    var success = registerGlobal(API_NAME3, this._proxyTracerProvider, DiagAPI.instance());
+    if (success) {
+      this._proxyTracerProvider.setDelegate(provider);
+    }
+    return success;
+  };
+  TraceAPI2.prototype.getTracerProvider = function() {
+    return getGlobal(API_NAME3) || this._proxyTracerProvider;
+  };
+  TraceAPI2.prototype.getTracer = function(name, version) {
+    return this.getTracerProvider().getTracer(name, version);
+  };
+  TraceAPI2.prototype.disable = function() {
+    unregisterGlobal(API_NAME3, DiagAPI.instance());
+    this._proxyTracerProvider = new ProxyTracerProvider();
+  };
+  return TraceAPI2;
+}();
+var NoopTextMapPropagator = function() {
+  function NoopTextMapPropagator2() {
+  }
+  __name(NoopTextMapPropagator2, "NoopTextMapPropagator2");
+  __name2(NoopTextMapPropagator2, "NoopTextMapPropagator");
+  NoopTextMapPropagator2.prototype.inject = function(_context, _carrier) {
+  };
+  NoopTextMapPropagator2.prototype.extract = function(context3, _carrier) {
+    return context3;
+  };
+  NoopTextMapPropagator2.prototype.fields = function() {
+    return [];
+  };
+  return NoopTextMapPropagator2;
+}();
+var BAGGAGE_KEY = createContextKey("OpenTelemetry Baggage Key");
+function getBaggage(context3) {
+  return context3.getValue(BAGGAGE_KEY) || void 0;
+}
+__name(getBaggage, "getBaggage");
+__name2(getBaggage, "getBaggage");
+function setBaggage(context3, baggage) {
+  return context3.setValue(BAGGAGE_KEY, baggage);
+}
+__name(setBaggage, "setBaggage");
+__name2(setBaggage, "setBaggage");
+function deleteBaggage(context3) {
+  return context3.deleteValue(BAGGAGE_KEY);
+}
+__name(deleteBaggage, "deleteBaggage");
+__name2(deleteBaggage, "deleteBaggage");
+var API_NAME4 = "propagation";
+var NOOP_TEXT_MAP_PROPAGATOR = new NoopTextMapPropagator();
+var PropagationAPI = function() {
+  function PropagationAPI2() {
+    this.createBaggage = createBaggage;
+    this.getBaggage = getBaggage;
+    this.setBaggage = setBaggage;
+    this.deleteBaggage = deleteBaggage;
+  }
+  __name(PropagationAPI2, "PropagationAPI2");
+  __name2(PropagationAPI2, "PropagationAPI");
+  PropagationAPI2.getInstance = function() {
+    if (!this._instance) {
+      this._instance = new PropagationAPI2();
+    }
+    return this._instance;
+  };
+  PropagationAPI2.prototype.setGlobalPropagator = function(propagator) {
+    return registerGlobal(API_NAME4, propagator, DiagAPI.instance());
+  };
+  PropagationAPI2.prototype.inject = function(context3, carrier, setter) {
+    if (setter === void 0) {
+      setter = defaultTextMapSetter;
+    }
+    return this._getGlobalPropagator().inject(context3, carrier, setter);
+  };
+  PropagationAPI2.prototype.extract = function(context3, carrier, getter) {
+    if (getter === void 0) {
+      getter = defaultTextMapGetter;
+    }
+    return this._getGlobalPropagator().extract(context3, carrier, getter);
+  };
+  PropagationAPI2.prototype.fields = function() {
+    return this._getGlobalPropagator().fields();
+  };
+  PropagationAPI2.prototype.disable = function() {
+    unregisterGlobal(API_NAME4, DiagAPI.instance());
+  };
+  PropagationAPI2.prototype._getGlobalPropagator = function() {
+    return getGlobal(API_NAME4) || NOOP_TEXT_MAP_PROPAGATOR;
+  };
+  return PropagationAPI2;
+}();
+var context2 = ContextAPI.getInstance();
+var trace = TraceAPI.getInstance();
+var propagation = PropagationAPI.getInstance();
+var diag2 = DiagAPI.instance();
+async function runInChildSpan(name, parentCtx, cb) {
+  if (parentCtx === void 0)
+    return cb(void 0);
+  const tracer = trace.getTracer("prisma");
+  const childSpan = tracer.startSpan(name, void 0, parentCtx);
+  const childCtx = trace.setSpan(parentCtx, childSpan);
+  const result = await context2.with(childCtx, () => cb(childSpan));
+  childSpan == null ? void 0 : childSpan.end();
+  return result;
+}
+__name(runInChildSpan, "runInChildSpan");
+__name2(runInChildSpan, "runInChildSpan");
+function createPrismaPromise(callback) {
+  const otelCtx = context2.active();
+  let promise;
+  const _callback = /* @__PURE__ */ __name2((txId, inTx) => {
+    try {
+      return promise != null ? promise : promise = callback(txId, inTx, otelCtx);
+    } catch (error2) {
+      return Promise.reject(error2);
+    }
+  }, "_callback");
+  return {
+    then(onFulfilled, onRejected, txId) {
+      return _callback(txId, false).then(onFulfilled, onRejected, txId);
+    },
+    catch(onRejected) {
+      return _callback().catch(onRejected);
+    },
+    finally(onFinally) {
+      return _callback().finally(onFinally);
+    },
+    requestTransaction(txId) {
+      const promise2 = _callback(txId, true);
+      if (promise2.requestTransaction) {
+        return promise2.requestTransaction(txId);
+      }
+      return promise2;
+    },
+    [Symbol.toStringTag]: "PrismaPromise"
+  };
+}
+__name(createPrismaPromise, "createPrismaPromise");
+__name2(createPrismaPromise, "createPrismaPromise");
+function getCallSite(errorFormat) {
+  if (errorFormat === "minimal") {
+    return void 0;
+  }
+  return new Error().stack;
+}
+__name(getCallSite, "getCallSite");
+__name2(getCallSite, "getCallSite");
+var aggregateMap = {
+  _avg: true,
+  _count: true,
+  _sum: true,
+  _min: true,
+  _max: true
+};
+function desugarUserArgs(userArgs) {
+  const _userArgs = desugarCountInUserArgs(userArgs);
+  const userArgsEntries = Object.entries(_userArgs);
+  return userArgsEntries.reduce((aggregateArgs, [key, value]) => {
+    if (aggregateMap[key] !== void 0) {
+      aggregateArgs["select"][key] = { select: value };
+    } else {
+      aggregateArgs[key] = value;
+    }
+    return aggregateArgs;
+  }, { select: {} });
+}
+__name(desugarUserArgs, "desugarUserArgs");
+__name2(desugarUserArgs, "desugarUserArgs");
+function desugarCountInUserArgs(userArgs) {
+  if (typeof userArgs["_count"] === "boolean") {
+    return { ...userArgs, _count: { _all: userArgs["_count"] } };
+  }
+  return userArgs;
+}
+__name(desugarCountInUserArgs, "desugarCountInUserArgs");
+__name2(desugarCountInUserArgs, "desugarCountInUserArgs");
+function createUnpacker(userArgs) {
+  return (data) => {
+    if (typeof userArgs["_count"] === "boolean") {
+      data["_count"] = data["_count"]["_all"];
+    }
+    return data;
+  };
+}
+__name(createUnpacker, "createUnpacker");
+__name2(createUnpacker, "createUnpacker");
+function aggregate(client, userArgs, modelAction) {
+  const aggregateArgs = desugarUserArgs(userArgs != null ? userArgs : {});
+  const aggregateUnpacker = createUnpacker(userArgs != null ? userArgs : {});
+  return modelAction({
+    action: "aggregate",
+    unpacker: aggregateUnpacker
+  })(aggregateArgs);
+}
+__name(aggregate, "aggregate");
+__name2(aggregate, "aggregate");
+function count(client, userArgs, modelAction) {
+  const { select, ..._userArgs } = userArgs != null ? userArgs : {};
+  if (typeof select === "object") {
+    return aggregate(client, { ..._userArgs, _count: select }, (p) => modelAction({ ...p, unpacker: (data) => {
+      var _a2;
+      return (_a2 = p.unpacker) == null ? void 0 : _a2.call(p, data)["_count"];
+    } }));
+  } else {
+    return aggregate(client, { ..._userArgs, _count: { _all: true } }, (p) => modelAction({ ...p, unpacker: (data) => {
+      var _a2;
+      return (_a2 = p.unpacker) == null ? void 0 : _a2.call(p, data)["_count"]["_all"];
+    } }));
+  }
+}
+__name(count, "count");
+__name2(count, "count");
+function desugarUserArgs2(userArgs) {
+  const _userArgs = desugarUserArgs(userArgs);
+  if (Array.isArray(userArgs["by"])) {
+    for (const key of userArgs["by"]) {
+      if (typeof key === "string") {
+        _userArgs["select"][key] = true;
+      }
+    }
+  }
+  return _userArgs;
+}
+__name(desugarUserArgs2, "desugarUserArgs2");
+__name2(desugarUserArgs2, "desugarUserArgs");
+function createUnpacker2(userArgs) {
+  return (data) => {
+    if (typeof userArgs["_count"] === "boolean") {
+      data.forEach((row) => {
+        row["_count"] = row["_count"]["_all"];
+      });
+    }
+    return data;
+  };
+}
+__name(createUnpacker2, "createUnpacker2");
+__name2(createUnpacker2, "createUnpacker");
+function groupBy2(client, userArgs, modelAction) {
+  const groupByArgs = desugarUserArgs2(userArgs != null ? userArgs : {});
+  const groupByUnpacker = createUnpacker2(userArgs != null ? userArgs : {});
+  return modelAction({
+    action: "groupBy",
+    unpacker: groupByUnpacker
+  })(groupByArgs);
+}
+__name(groupBy2, "groupBy2");
+__name2(groupBy2, "groupBy");
+function applyAggregates(client, action, modelAction) {
+  if (action === "aggregate")
+    return (userArgs) => aggregate(client, userArgs, modelAction);
+  if (action === "count")
+    return (userArgs) => count(client, userArgs, modelAction);
+  if (action === "groupBy")
+    return (userArgs) => groupBy2(client, userArgs, modelAction);
+  return void 0;
+}
+__name(applyAggregates, "applyAggregates");
+__name2(applyAggregates, "applyAggregates");
+var defaultPropertyDescriptor = {
+  enumerable: true,
+  configurable: true,
+  writable: true
+};
+function defaultProxyHandlers(ownKeys) {
+  const _ownKeys = new Set(ownKeys);
+  return {
+    getOwnPropertyDescriptor: () => defaultPropertyDescriptor,
+    has: (target, prop) => _ownKeys.has(prop),
+    set: (target, prop, value) => {
+      return _ownKeys.add(prop) && Reflect.set(target, prop, value);
+    },
+    ownKeys: () => [..._ownKeys]
+  };
+}
+__name(defaultProxyHandlers, "defaultProxyHandlers");
+__name2(defaultProxyHandlers, "defaultProxyHandlers");
+function getNextDataPath(fluentPropName, prevDataPath) {
+  if (fluentPropName === void 0 || prevDataPath === void 0)
+    return [];
+  return [...prevDataPath, "select", fluentPropName];
+}
+__name(getNextDataPath, "getNextDataPath");
+__name2(getNextDataPath, "getNextDataPath");
+function getNextUserArgs(callArgs, prevArgs, nextDataPath) {
+  if (prevArgs === void 0)
+    return callArgs != null ? callArgs : {};
+  return deepSet(prevArgs, nextDataPath, callArgs || true);
+}
+__name(getNextUserArgs, "getNextUserArgs");
+__name2(getNextUserArgs, "getNextUserArgs");
+function applyFluent(client, dmmfModelName, modelAction, fluentPropName, prevDataPath, prevUserArgs) {
+  const dmmfModel = client._dmmf.modelMap[dmmfModelName];
+  const dmmfModelFieldMap = dmmfModel.fields.reduce((acc, field) => ({ ...acc, [field.name]: field }), {});
+  return (userArgs) => {
+    const nextDataPath = getNextDataPath(fluentPropName, prevDataPath);
+    const nextUserArgs = getNextUserArgs(userArgs, prevUserArgs, nextDataPath);
+    const prismaPromise = modelAction({ dataPath: nextDataPath })(nextUserArgs);
+    const ownKeys = getOwnKeys(client, dmmfModelName);
+    return new Proxy(prismaPromise, {
+      get(target, prop) {
+        if (!ownKeys.includes(prop))
+          return target[prop];
+        const dmmfModelName2 = dmmfModelFieldMap[prop].type;
+        const modelArgs = [dmmfModelName2, modelAction, prop];
+        const dataArgs = [nextDataPath, nextUserArgs];
+        return applyFluent(client, ...modelArgs, ...dataArgs);
+      },
+      ...defaultProxyHandlers(ownKeys)
+    });
+  };
+}
+__name(applyFluent, "applyFluent");
+__name2(applyFluent, "applyFluent");
+function getOwnKeys(client, dmmfModelName) {
+  return client._dmmf.modelMap[dmmfModelName].fields.filter((field) => field.kind === "object").map((field) => field.name);
+}
+__name(getOwnKeys, "getOwnKeys");
+__name2(getOwnKeys, "getOwnKeys");
+function dmmfToJSModelName(name) {
+  return name.replace(/^./, (str) => str.toLowerCase());
+}
+__name(dmmfToJSModelName, "dmmfToJSModelName");
+__name2(dmmfToJSModelName, "dmmfToJSModelName");
+function applyModel(client, dmmfModelName) {
+  const jsModelName = dmmfToJSModelName(dmmfModelName);
+  const ownKeys = getOwnKeys2(client, dmmfModelName);
+  const baseObject = {};
+  return new Proxy(baseObject, {
+    get(target, prop) {
+      if (prop in target || typeof prop === "symbol")
+        return target[prop];
+      if (!isValidActionName(client, dmmfModelName, prop))
+        return void 0;
+      const action = /* @__PURE__ */ __name2((paramOverrides) => (userArgs) => {
+        const callSite = getCallSite(client._errorFormat);
+        return createPrismaPromise((txId, inTx, otelCtx) => {
+          const data = { args: userArgs, dataPath: [] };
+          const action2 = { action: prop, model: dmmfModelName };
+          const method = { clientMethod: `${jsModelName}.${prop}` };
+          const tx = { runInTransaction: !!inTx, transactionId: txId };
+          const trace2 = { callsite: callSite, otelCtx };
+          const params = { ...data, ...action2, ...method, ...tx, ...trace2 };
+          return client._request({ ...params, ...paramOverrides });
+        });
+      }, "action");
+      if (prop === "findUnique" || prop === "findFirst") {
+        return applyFluent(client, dmmfModelName, action);
+      }
+      if (prop === "aggregate" || prop === "count" || prop === "groupBy") {
+        return applyAggregates(client, prop, action);
+      }
+      return action({});
+    },
+    ...defaultProxyHandlers(ownKeys)
+  });
+}
+__name(applyModel, "applyModel");
+__name2(applyModel, "applyModel");
+function getOwnKeys2(client, dmmfModelName) {
+  return [...Object.keys(client._dmmf.mappingsMap[dmmfModelName]), "count"].filter((key) => !["model", "plural"].includes(key));
+}
+__name(getOwnKeys2, "getOwnKeys2");
+__name2(getOwnKeys2, "getOwnKeys");
+function isValidActionName(client, dmmfModelName, action) {
+  return getOwnKeys2(client, dmmfModelName).includes(action);
+}
+__name(isValidActionName, "isValidActionName");
+__name2(isValidActionName, "isValidActionName");
+function jsToDMMFModelName(name) {
+  return name.replace(/^./, (str) => str.toUpperCase());
+}
+__name(jsToDMMFModelName, "jsToDMMFModelName");
+__name2(jsToDMMFModelName, "jsToDMMFModelName");
+function applyModels(client) {
+  const modelCache = {};
+  const ownKeys = getOwnKeys3(client);
+  return new Proxy(client, {
+    get(target, prop) {
+      if (prop in target || typeof prop === "symbol")
+        return target[prop];
+      const dmmfModelName = jsToDMMFModelName(prop);
+      if (modelCache[dmmfModelName] !== void 0) {
+        return modelCache[dmmfModelName];
+      }
+      if (client._dmmf.modelMap[dmmfModelName] !== void 0) {
+        return modelCache[dmmfModelName] = applyModel(client, dmmfModelName);
+      }
+      if (client._dmmf.modelMap[prop] !== void 0) {
+        return modelCache[dmmfModelName] = applyModel(client, prop);
+      }
+    },
+    ...defaultProxyHandlers(ownKeys)
+  });
+}
+__name(applyModels, "applyModels");
+__name2(applyModels, "applyModels");
+function getOwnKeys3(client) {
+  return [...Object.keys(client._dmmf.modelMap).map(dmmfToJSModelName), ...Object.keys(client)];
+}
+__name(getOwnKeys3, "getOwnKeys3");
+__name2(getOwnKeys3, "getOwnKeys");
+function applyTracingHeaders(headers, otelCtx) {
+  const span = otelCtx && trace.getSpanContext(otelCtx);
+  if ((span == null ? void 0 : span.traceFlags) === 1) {
+    return {
+      traceparent: `00-${span.traceId}-${span.spanId}-01`,
+      ...headers
+    };
+  }
+  return headers != null ? headers : {};
+}
+__name(applyTracingHeaders, "applyTracingHeaders");
+__name2(applyTracingHeaders, "applyTracingHeaders");
 var debug9 = (0, import_debug9.default)("prisma:client");
 var ALTER_RE = /^(\s*alter\s)/i;
 (globalThis = globalThis).NOT_PRISMA_DATA_PROXY = true;
@@ -39142,14 +40295,10 @@ var actionOperationMap = {
   executeRaw: "mutation",
   queryRaw: "mutation",
   aggregate: "query",
-  groupBy: "query"
-};
-var aggregateKeys = {
-  _avg: true,
-  _count: true,
-  _sum: true,
-  _min: true,
-  _max: true
+  groupBy: "query",
+  runCommandRaw: "mutation",
+  findRaw: "query",
+  aggregateRaw: "query"
 };
 function getPrismaClient(config2) {
   class PrismaClient {
@@ -39201,7 +40350,7 @@ function getPrismaClient(config2) {
         } else {
           this._errorFormat = "colorless";
         }
-        this._dmmf = new DMMFClass(config2.document);
+        this._dmmf = new DMMFHelper(config2.document);
         this._previewFeatures = (_d = (_c = config2.generator) == null ? void 0 : _c.previewFeatures) != null ? _d : [];
         this._engineConfig = {
           cwd,
@@ -39220,7 +40369,6 @@ function getPrismaClient(config2) {
           flags: [],
           clientVersion: config2.clientVersion,
           previewFeatures: mapPreviewFeatures(this._previewFeatures),
-          useUds: internal.useUds,
           activeProvider: config2.activeProvider,
           inlineSchema: config2.inlineSchema,
           inlineDatasources: config2.inlineDatasources,
@@ -39250,11 +40398,11 @@ function getPrismaClient(config2) {
             }
           }
         }
-        this._bootstrapClient();
       } catch (e) {
         e.clientVersion = this._clientVersion;
         throw e;
       }
+      return applyModels(this);
     }
     get [Symbol.toStringTag]() {
       return "PrismaClient";
@@ -39334,7 +40482,7 @@ function getPrismaClient(config2) {
       } catch (e) {
       }
     }
-    $executeRawInternal(runInTransaction, transactionId, query2, ...values) {
+    $executeRawInternal(txId, inTx, otelCtx, query2, ...values) {
       let queryString = "";
       let parameters = void 0;
       if (typeof query2 === "string") {
@@ -39413,15 +40561,16 @@ function getPrismaClient(config2) {
         clientMethod: "executeRaw",
         dataPath: [],
         action: "executeRaw",
-        callsite: this._getCallsite(),
-        runInTransaction,
-        transactionId
+        callsite: getCallSite(this._errorFormat),
+        runInTransaction: inTx != null ? inTx : false,
+        transactionId: txId,
+        otelCtx
       });
     }
     $executeRawRequest(query2, ...values) {
-      const request4 = /* @__PURE__ */ __name2((transactionId, runInTransaction) => {
+      const request4 = /* @__PURE__ */ __name2((txId, inTx, otelCtx) => {
         try {
-          const promise = this.$executeRawInternal(runInTransaction != null ? runInTransaction : false, transactionId, query2, ...values);
+          const promise = this.$executeRawInternal(txId, inTx, otelCtx, query2, ...values);
           promise.isExecuteRaw = true;
           return promise;
         } catch (e) {
@@ -39445,16 +40594,27 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
 `);
       });
     }
+    $runCommandRaw(command) {
+      if (config2.activeProvider !== "mongodb") {
+        throw new PrismaClientValidationError(`The ${config2.activeProvider} provider does not support $runCommandRaw. Use the mongodb provider.`);
+      }
+      return createPrismaPromise((txId, inTx, otelCtx) => {
+        return this._request({
+          args: { command },
+          clientMethod: "runCommandRaw",
+          dataPath: [],
+          action: "runCommandRaw",
+          callsite: getCallSite(),
+          runInTransaction: inTx != null ? inTx : false,
+          transactionId: txId,
+          otelCtx
+        });
+      });
+    }
     $executeRawUnsafe(query2, ...values) {
       return this.$executeRawRequest(query2, ...values);
     }
-    _getCallsite() {
-      if (this._errorFormat !== "minimal") {
-        return new Error().stack;
-      }
-      return void 0;
-    }
-    $queryRawInternal(runInTransaction, transactionId, query2, ...values) {
+    $queryRawInternal(txId, inTx, otelCtx, query2, ...values) {
       let queryString = "";
       let parameters = void 0;
       if (typeof query2 === "string") {
@@ -39532,15 +40692,16 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
         clientMethod: "queryRaw",
         dataPath: [],
         action: "queryRaw",
-        callsite: this._getCallsite(),
-        runInTransaction,
-        transactionId
+        callsite: getCallSite(this._errorFormat),
+        runInTransaction: inTx != null ? inTx : false,
+        transactionId: txId,
+        otelCtx
       });
     }
     $queryRawRequest(query2, ...values) {
-      const request4 = /* @__PURE__ */ __name2((transactionId, runInTransaction) => {
+      const request4 = /* @__PURE__ */ __name2((txId, inTx, otelCtx) => {
         try {
-          const promise = this.$queryRawInternal(runInTransaction != null ? runInTransaction : false, transactionId, query2, ...values);
+          const promise = this.$queryRawInternal(txId, inTx, otelCtx, query2, ...values);
           promise.isQueryRaw = true;
           return promise;
         } catch (e) {
@@ -39589,7 +40750,7 @@ new PrismaClient({
         dataPath: [],
         runInTransaction: false,
         headers,
-        callsite: this._getCallsite()
+        callsite: getCallSite(this._errorFormat)
       });
     }
     ___getTransactionId() {
@@ -39654,7 +40815,8 @@ new PrismaClient({
         result = await callback(transactionProxy(this, info2.id));
         await this._engine.transaction("commit", info2);
       } catch (e) {
-        await this._engine.transaction("rollback", info2);
+        await this._engine.transaction("rollback", info2).catch(() => {
+        });
         throw e;
       }
       return result;
@@ -39671,7 +40833,9 @@ new PrismaClient({
         return Promise.all(_requests);
       }, options2);
     }
-    _request(internalParams) {
+    async _request(internalParams) {
+      if (!this._hasPreviewFlag("tracing"))
+        delete internalParams["otelCtx"];
       try {
         const params = {
           args: internalParams.args,
@@ -39683,9 +40847,8 @@ new PrismaClient({
         let index = -1;
         const consumer = /* @__PURE__ */ __name2((changedParams) => {
           const nextMiddleware = this._middlewares.query.get(++index);
-          if (nextMiddleware) {
+          if (nextMiddleware)
             return nextMiddleware(changedParams, consumer);
-          }
           const changedInternalParams = { ...internalParams, ...changedParams };
           if (index > 0 && !this._hasPreviewFlag("interactiveTransactions")) {
             delete changedInternalParams["transactionId"];
@@ -39693,10 +40856,11 @@ new PrismaClient({
           return this._executeRequest(changedInternalParams);
         }, "consumer");
         if (true) {
-          const resource = new import_async_hooks.AsyncResource("prisma-client-request");
-          return resource.runInAsyncScope(() => consumer(params));
+          return await new import_async_hooks.AsyncResource("prisma-client-request").runInAsyncScope(() => {
+            return runInChildSpan("request", internalParams.otelCtx, () => consumer(params));
+          });
         }
-        return consumer(params);
+        return await runInChildSpan("request", internalParams.otelCtx, () => consumer(params));
       } catch (e) {
         e.clientVersion = this._clientVersion;
         throw e;
@@ -39712,17 +40876,12 @@ new PrismaClient({
       model,
       headers,
       transactionId,
+      otelCtx,
       unpacker
     }) {
-      if (action !== "executeRaw" && action !== "queryRaw" && !model) {
-        throw new Error(`Model missing for action ${action}`);
-      }
-      if ((action === "executeRaw" || action === "queryRaw") && model) {
-        throw new Error(`executeRaw and queryRaw can't be executed on a model basis. The model ${model} has been provided`);
-      }
       let rootField;
       const operation = actionOperationMap[action];
-      if (action === "executeRaw" || action === "queryRaw") {
+      if (action === "executeRaw" || action === "queryRaw" || action === "runCommandRaw") {
         rootField = action;
       }
       let mapping;
@@ -39763,6 +40922,7 @@ new PrismaClient({
         debug9(`Generated request:`);
         debug9(query2 + "\n");
       }
+      headers = applyTracingHeaders(headers, otelCtx);
       return this._fetcher.request({
         document: document2,
         clientMethod,
@@ -39780,193 +40940,6 @@ new PrismaClient({
         transactionId,
         unpacker
       });
-    }
-    _bootstrapClient() {
-      const modelClientBuilders = this._dmmf.mappings.modelOperations.reduce((modelClientBuilders2, modelMapping) => {
-        const lowerCaseModel = lowerCase(modelMapping.model);
-        const model = this._dmmf.modelMap[modelMapping.model];
-        if (!model) {
-          throw new Error(`Invalid mapping ${modelMapping.model}, can't find model`);
-        }
-        const ModelClientBuilder = /* @__PURE__ */ __name2(({
-          operation,
-          actionName,
-          args,
-          dataPath,
-          modelName,
-          unpacker
-        }) => {
-          let requestPromise;
-          const callsite = this._getCallsite();
-          const request4 = /* @__PURE__ */ __name2((transactionId, runInTransaction) => {
-            requestPromise = requestPromise != null ? requestPromise : this._request({
-              args,
-              model: modelName != null ? modelName : model.name,
-              action: actionName,
-              clientMethod: `${lowerCaseModel}.${actionName}`,
-              dataPath,
-              callsite,
-              runInTransaction: runInTransaction != null ? runInTransaction : false,
-              transactionId,
-              unpacker
-            });
-            return requestPromise;
-          }, "request");
-          const modelClient = createPrismaPromise(request4);
-          for (const field of model.fields.filter((f) => f.kind === "object")) {
-            modelClient[field.name] = (fieldArgs) => {
-              const prefix = dataPath.includes("select") ? "select" : dataPath.includes("include") ? "include" : "select";
-              const newDataPath = [...dataPath, prefix, field.name];
-              const newArgs = deepSet(args, newDataPath, fieldArgs || true);
-              return modelClientBuilders2[field.type]({
-                operation,
-                actionName,
-                args: newArgs,
-                dataPath: newDataPath,
-                isList: field.isList,
-                modelName: modelName || model.name
-              });
-            };
-          }
-          return modelClient;
-        }, "ModelClientBuilder");
-        modelClientBuilders2[model.name] = ModelClientBuilder;
-        return modelClientBuilders2;
-      }, {});
-      for (const mapping of this._dmmf.mappings.modelOperations) {
-        const lowerCaseModel = lowerCase(mapping.model);
-        const filteredActionsList = {
-          model: true,
-          plural: true,
-          aggregate: true,
-          groupBy: true
-        };
-        const delegate = Object.keys(mapping).reduce((acc, actionName) => {
-          if (!filteredActionsList[actionName]) {
-            const operation = getOperation(actionName);
-            acc[actionName] = (args) => modelClientBuilders[mapping.model]({
-              operation,
-              actionName,
-              dataPath: [],
-              args
-            });
-          }
-          return acc;
-        }, {});
-        delegate.count = (args) => {
-          let select;
-          let unpacker;
-          if ((args == null ? void 0 : args.select) && typeof (args == null ? void 0 : args.select) === "object") {
-            select = { _count: { select: args.select } };
-          } else {
-            select = { _count: { select: { _all: true } } };
-            unpacker = /* @__PURE__ */ __name2((data) => {
-              var _a2;
-              data._count = (_a2 = data._count) == null ? void 0 : _a2._all;
-              return data;
-            }, "unpacker");
-          }
-          return modelClientBuilders[mapping.model]({
-            operation: "query",
-            actionName: `aggregate`,
-            args: {
-              ...args != null ? args : {},
-              select
-            },
-            dataPath: ["_count"],
-            unpacker
-          });
-        };
-        delegate.aggregate = (args) => {
-          let unpacker = void 0;
-          const select = Object.entries(args).reduce((acc, [key, value]) => {
-            if (aggregateKeys[key]) {
-              if (!acc.select) {
-                acc.select = {};
-              }
-              if (key === "_count" || key === "count") {
-                if (typeof value === "object" && value) {
-                  acc.select[key] = { select: value };
-                } else {
-                  acc.select[key] = { select: { _all: value } };
-                  unpacker = /* @__PURE__ */ __name2((data) => {
-                    var _a2, _b2;
-                    if (data._count) {
-                      data._count = (_a2 = data._count) == null ? void 0 : _a2._all;
-                    } else if (data.count) {
-                      data.count = (_b2 = data.count) == null ? void 0 : _b2._all;
-                    }
-                    return data;
-                  }, "unpacker");
-                }
-              } else {
-                acc.select[key] = { select: value };
-              }
-            } else {
-              acc[key] = value;
-            }
-            return acc;
-          }, {});
-          return modelClientBuilders[mapping.model]({
-            operation: "query",
-            actionName: "aggregate",
-            rootField: mapping.aggregate,
-            args: select,
-            dataPath: [],
-            unpacker
-          });
-        };
-        delegate.groupBy = (args) => {
-          let unpacker = void 0;
-          const select = Object.entries(args).reduce((acc, [key, value]) => {
-            if (aggregateKeys[key]) {
-              if (!acc.select) {
-                acc.select = {};
-              }
-              acc.select[key] = { select: value };
-            } else {
-              acc[key] = value;
-            }
-            if (key === "_count") {
-              if (typeof value === "object" && value) {
-                acc.select[key] = { select: value };
-              } else if (typeof value === "boolean") {
-                acc.select[key] = { select: { _all: value } };
-                unpacker = /* @__PURE__ */ __name2((data) => {
-                  if (Array.isArray(data)) {
-                    data = data.map((row) => {
-                      var _a2, _b2;
-                      if (row && typeof row._count === "object" && ((_a2 = row._count) == null ? void 0 : _a2._all)) {
-                        row._count = (_b2 = row._count) == null ? void 0 : _b2._all;
-                      }
-                      return row;
-                    });
-                  }
-                  return data;
-                }, "unpacker");
-              }
-            }
-            if (key === "by" && Array.isArray(value) && value.length > 0) {
-              if (!acc.select) {
-                acc.select = {};
-              }
-              for (const by of value) {
-                acc.select[by] = true;
-              }
-            }
-            return acc;
-          }, {});
-          return modelClientBuilders[mapping.model]({
-            operation: "query",
-            actionName: "groupBy",
-            rootField: mapping.groupBy,
-            args: select,
-            dataPath: [],
-            unpacker
-          });
-        };
-        this[lowerCaseModel] = delegate;
-      }
     }
     _hasPreviewFlag(feature) {
       var _a2;
@@ -40004,45 +40977,6 @@ function transactionProxy(thing, transactionId) {
 }
 __name(transactionProxy, "transactionProxy");
 __name2(transactionProxy, "transactionProxy");
-function createPrismaPromise(callback) {
-  const _callback = /* @__PURE__ */ __name2((transactionId, runInTransaction) => {
-    try {
-      return callback(transactionId, runInTransaction);
-    } catch (error2) {
-      return Promise.reject(error2);
-    }
-  }, "_callback");
-  return {
-    then(onFulfilled, onRejected, transactionId) {
-      const promise = _callback(transactionId, false);
-      return promise.then(onFulfilled, onRejected, transactionId);
-    },
-    catch(onRejected) {
-      return _callback().catch(onRejected);
-    },
-    finally(onFinally) {
-      return _callback().finally(onFinally);
-    },
-    requestTransaction(transactionId) {
-      const promise = _callback(transactionId, true);
-      if (promise.requestTransaction) {
-        return promise.requestTransaction(transactionId);
-      }
-      return promise;
-    },
-    [Symbol.toStringTag]: "PrismaPromise"
-  };
-}
-__name(createPrismaPromise, "createPrismaPromise");
-__name2(createPrismaPromise, "createPrismaPromise");
-function getOperation(action) {
-  if (action === DMMF.ModelAction.findMany || action === DMMF.ModelAction.findUnique || action === DMMF.ModelAction.findFirst) {
-    return "query";
-  }
-  return "mutation";
-}
-__name(getOperation, "getOperation");
-__name2(getOperation, "getOperation");
 var import_sql_template_tag = __toModule22(require_dist10());
 function warnEnvConflicts(envPaths) {
   tryLoadEnvs(envPaths, { conflictCheck: "warn" });
