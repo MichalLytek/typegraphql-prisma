@@ -45,3 +45,10 @@ export const resolversFolderName = "resolvers";
 export const argsFolderName = "args";
 export const relationsResolversFolderName = "relations";
 export const crudResolversFolderName = "crud";
+
+export enum InputOmitSetting {
+  Create = "create",
+  Update = "update",
+  Where = "where",
+  OrderBy = "orderBy",
+}

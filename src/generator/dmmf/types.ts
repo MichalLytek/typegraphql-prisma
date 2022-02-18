@@ -1,3 +1,5 @@
+import { InputOmitSetting } from "../config";
+
 export namespace DMMF {
   export interface Document {
     datamodel: Datamodel;
@@ -72,7 +74,7 @@ export namespace DMMF {
     typeGraphQLType: string;
     fieldTSType: string;
     docs: string | undefined;
-    isOmitted: { input: boolean; output: boolean };
+    isOmitted: { input: boolean | InputOmitSetting[]; output: boolean };
   }
   export interface FieldDefault {
     name: string;

@@ -57,3 +57,17 @@ input UserCreateInput {
   posts: PostCreateManyWithoutAuthorInput!
 }
 ```
+
+If you need more control over hiding field in input types, you can select input kinds by passing an array:
+
+```prisma {4}
+model User {
+  id        Int     @default(autoincrement()) @id
+  email     String  @unique
+  /// @TypeGraphQL.omit(input: ["update", "where", "orderBy"])
+  password  String
+  posts     Post[]
+}
+```
+
+The available options are: `"create"`,`"update"`, `"where"` and `"orderBy"`.

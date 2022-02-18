@@ -40,6 +40,11 @@ export class PostScalarWhereWithAggregatesInput {
   })
   createdAt?: DateTimeWithAggregatesFilter | undefined;
 
+  @TypeGraphQL.Field(_type => DateTimeWithAggregatesFilter, {
+    nullable: true
+  })
+  updatedAt?: DateTimeWithAggregatesFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true
   })

@@ -13,7 +13,11 @@ import {
 import { DmmfDocument } from "./dmmf-document";
 import pluralize from "pluralize";
 import { GeneratorOptions } from "../options";
-import { supportedQueryActions, supportedMutationActions } from "../config";
+import {
+  supportedQueryActions,
+  supportedMutationActions,
+  InputOmitSetting,
+} from "../config";
 
 export function transformSchema(
   datamodel: PrismaDMMF.Schema,
@@ -108,7 +112,7 @@ function transformModelField(dmmfDocument: DmmfDocument) {
     );
     const { output = false, input = false } = parseDocumentationAttributes<{
       output: boolean;
-      input: boolean;
+      input: boolean | InputOmitSetting[];
     }>(field.documentation, "omit", "field");
     return {
       ...field,
@@ -147,9 +151,6 @@ function transformInputType(dmmfDocument: DmmfDocument) {
           const modelField = modelType?.fields.find(
             it => it.name === field.name,
           );
-          // if (modelType?.name === "post") {
-          //   console.log(inputType.name, field.name, modelField?.isOmitted);
-          // }
           const typeName = modelField?.typeFieldAlias ?? field.name;
           const selectedInputType = selectInputTypeFromTypes(dmmfDocument)(
             field.inputTypes,
@@ -164,6 +165,18 @@ function transformInputType(dmmfDocument: DmmfDocument) {
             field.isRequired,
             true,
           );
+          const isOmitted = !modelField?.isOmitted.input
+            ? false
+            : typeof modelField.isOmitted.input === "boolean"
+            ? modelField.isOmitted.input
+            : (modelField.isOmitted.input.includes(InputOmitSetting.Create) &&
+                inputType.name.includes("Create")) ||
+              (modelField.isOmitted.input.includes(InputOmitSetting.Update) &&
+                inputType.name.includes("Update")) ||
+              (modelField.isOmitted.input.includes(InputOmitSetting.Where) &&
+                inputType.name.includes("Where")) ||
+              (modelField.isOmitted.input.includes(InputOmitSetting.OrderBy) &&
+                inputType.name.includes("OrderBy"));
           return {
             ...field,
             selectedInputType,
@@ -171,7 +184,7 @@ function transformInputType(dmmfDocument: DmmfDocument) {
             typeGraphQLType,
             fieldTSType,
             hasMappedName: field.name !== typeName,
-            isOmitted: modelField?.isOmitted.input ?? false,
+            isOmitted,
           };
         }),
     };
