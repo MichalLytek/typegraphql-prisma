@@ -819,8 +819,8 @@ exports[`inputs should properly generate input type classes for creating models 
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
-import { SampleModelCreateManyintArrayFieldInput } from \\"../inputs/SampleModelCreateManyintArrayFieldInput\\";
-import { SampleModelCreateManystringArrayFieldInput } from \\"../inputs/SampleModelCreateManystringArrayFieldInput\\";
+import { SampleModelCreateintArrayFieldInput } from \\"../inputs/SampleModelCreateintArrayFieldInput\\";
+import { SampleModelCreatestringArrayFieldInput } from \\"../inputs/SampleModelCreatestringArrayFieldInput\\";
 import { Color } from \\"../../enums/Color\\";
 
 @TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\", {
@@ -902,51 +902,15 @@ export class SampleModelCreateManyInput {
   })
   optionalEnumField?: \\"RED\\" | \\"GREEN\\" | \\"BLUE\\" | undefined;
 
-  @TypeGraphQL.Field(_type => SampleModelCreateManyintArrayFieldInput, {
+  @TypeGraphQL.Field(_type => SampleModelCreateintArrayFieldInput, {
     nullable: true
   })
-  intArrayField?: SampleModelCreateManyintArrayFieldInput | undefined;
+  intArrayField?: SampleModelCreateintArrayFieldInput | undefined;
 
-  @TypeGraphQL.Field(_type => SampleModelCreateManystringArrayFieldInput, {
+  @TypeGraphQL.Field(_type => SampleModelCreatestringArrayFieldInput, {
     nullable: true
   })
-  stringArrayField?: SampleModelCreateManystringArrayFieldInput | undefined;
-}
-"
-`;
-
-exports[`inputs should properly generate input type classes for creating models and scalar fields: SampleModelCreateManyintArrayFieldInput 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import * as GraphQLScalars from \\"graphql-scalars\\";
-import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
-import { DecimalJSScalar } from \\"../../scalars\\";
-
-@TypeGraphQL.InputType(\\"SampleModelCreateManyintArrayFieldInput\\", {
-  isAbstract: true
-})
-export class SampleModelCreateManyintArrayFieldInput {
-  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
-    nullable: false
-  })
-  set!: number[];
-}
-"
-`;
-
-exports[`inputs should properly generate input type classes for creating models and scalar fields: SampleModelCreateManystringArrayFieldInput 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import * as GraphQLScalars from \\"graphql-scalars\\";
-import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
-import { DecimalJSScalar } from \\"../../scalars\\";
-
-@TypeGraphQL.InputType(\\"SampleModelCreateManystringArrayFieldInput\\", {
-  isAbstract: true
-})
-export class SampleModelCreateManystringArrayFieldInput {
-  @TypeGraphQL.Field(_type => [String], {
-    nullable: false
-  })
-  set!: string[];
+  stringArrayField?: SampleModelCreatestringArrayFieldInput | undefined;
 }
 "
 `;
@@ -1054,8 +1018,6 @@ export { SampleModelAvgOrderByAggregateInput } from \\"./SampleModelAvgOrderByAg
 export { SampleModelCountOrderByAggregateInput } from \\"./SampleModelCountOrderByAggregateInput\\";
 export { SampleModelCreateInput } from \\"./SampleModelCreateInput\\";
 export { SampleModelCreateManyInput } from \\"./SampleModelCreateManyInput\\";
-export { SampleModelCreateManyintArrayFieldInput } from \\"./SampleModelCreateManyintArrayFieldInput\\";
-export { SampleModelCreateManystringArrayFieldInput } from \\"./SampleModelCreateManystringArrayFieldInput\\";
 export { SampleModelCreateintArrayFieldInput } from \\"./SampleModelCreateintArrayFieldInput\\";
 export { SampleModelCreatestringArrayFieldInput } from \\"./SampleModelCreatestringArrayFieldInput\\";
 export { SampleModelMaxOrderByAggregateInput } from \\"./SampleModelMaxOrderByAggregateInput\\";
@@ -2620,8 +2582,6 @@ export { SampleModelAvgOrderByAggregateInput } from \\"./SampleModelAvgOrderByAg
 export { SampleModelCountOrderByAggregateInput } from \\"./SampleModelCountOrderByAggregateInput\\";
 export { SampleModelCreateInput } from \\"./SampleModelCreateInput\\";
 export { SampleModelCreateManyInput } from \\"./SampleModelCreateManyInput\\";
-export { SampleModelCreateManyintArrayFieldInput } from \\"./SampleModelCreateManyintArrayFieldInput\\";
-export { SampleModelCreateManystringArrayFieldInput } from \\"./SampleModelCreateManystringArrayFieldInput\\";
 export { SampleModelCreateintArrayFieldInput } from \\"./SampleModelCreateintArrayFieldInput\\";
 export { SampleModelCreatestringArrayFieldInput } from \\"./SampleModelCreatestringArrayFieldInput\\";
 export { SampleModelMaxOrderByAggregateInput } from \\"./SampleModelMaxOrderByAggregateInput\\";
@@ -4570,8 +4530,6 @@ export { SampleModelAvgOrderByAggregateInput } from \\"./SampleModelAvgOrderByAg
 export { SampleModelCountOrderByAggregateInput } from \\"./SampleModelCountOrderByAggregateInput\\";
 export { SampleModelCreateInput } from \\"./SampleModelCreateInput\\";
 export { SampleModelCreateManyInput } from \\"./SampleModelCreateManyInput\\";
-export { SampleModelCreateManyintArrayFieldInput } from \\"./SampleModelCreateManyintArrayFieldInput\\";
-export { SampleModelCreateManystringArrayFieldInput } from \\"./SampleModelCreateManystringArrayFieldInput\\";
 export { SampleModelCreateintArrayFieldInput } from \\"./SampleModelCreateintArrayFieldInput\\";
 export { SampleModelCreatestringArrayFieldInput } from \\"./SampleModelCreatestringArrayFieldInput\\";
 export { SampleModelMaxOrderByAggregateInput } from \\"./SampleModelMaxOrderByAggregateInput\\";

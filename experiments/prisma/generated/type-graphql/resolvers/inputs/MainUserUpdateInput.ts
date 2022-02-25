@@ -35,10 +35,17 @@ export class MainUserUpdateInput {
   })
   amount?: FloatFieldUpdateOperationsInput | undefined;
 
+  posts?: PostUpdateManyWithoutAuthorInput | undefined;
+
   @TypeGraphQL.Field(_type => EnumRoleFieldUpdateOperationsInput, {
     nullable: true
   })
   role?: EnumRoleFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => PostUpdateManyWithoutEditorInput, {
+    nullable: true
+  })
+  editorPosts?: PostUpdateManyWithoutEditorInput | undefined;
 
   @TypeGraphQL.Field(_type => MainUserUpdategradesInput, {
     nullable: true
@@ -49,13 +56,6 @@ export class MainUserUpdateInput {
     nullable: true
   })
   aliases?: MainUserUpdatealiasesInput | undefined;
-
-  posts?: PostUpdateManyWithoutAuthorInput | undefined;
-
-  @TypeGraphQL.Field(_type => PostUpdateManyWithoutEditorInput, {
-    nullable: true
-  })
-  editorPosts?: PostUpdateManyWithoutEditorInput | undefined;
 
   @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
     nullable: true

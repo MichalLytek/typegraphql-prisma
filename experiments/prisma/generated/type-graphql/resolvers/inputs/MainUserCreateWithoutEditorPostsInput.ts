@@ -30,6 +30,8 @@ export class MainUserCreateWithoutEditorPostsInput {
   })
   amount!: number;
 
+  posts?: PostCreateNestedManyWithoutAuthorInput | undefined;
+
   @TypeGraphQL.Field(_type => Role, {
     nullable: false
   })
@@ -44,8 +46,6 @@ export class MainUserCreateWithoutEditorPostsInput {
     nullable: true
   })
   aliases?: MainUserCreatealiasesInput | undefined;
-
-  posts?: PostCreateNestedManyWithoutAuthorInput | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

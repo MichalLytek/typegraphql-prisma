@@ -995,21 +995,13 @@ input MainUserCreateInput {
 input MainUserCreateManyInput {
   accountBalance: Float!
   age: Int!
-  aliases: MainUserCreateManyaliasesInput
+  aliases: MainUserCreatealiasesInput
   amount: Float!
   email: String!
   firstName: String
-  grades: MainUserCreateManygradesInput
+  grades: MainUserCreategradesInput
   id: Int
   role: Role!
-}
-
-input MainUserCreateManyaliasesInput {
-  set: [String!]!
-}
-
-input MainUserCreateManygradesInput {
-  set: [Int!]!
 }
 
 input MainUserCreateNestedOneWithoutEditorPostsInput {
@@ -2289,7 +2281,6 @@ input PostCreateInput {
   metadata: JSON!
   subtitle: String!
   title: String!
-  updatedAt: DateTime
   uuid: String
 }
 
@@ -2301,7 +2292,6 @@ input PostCreateManyAuthorInput {
   metadata: JSON!
   subtitle: String!
   title: String!
-  updatedAt: DateTime
   uuid: String
 }
 
@@ -2318,7 +2308,6 @@ input PostCreateManyEditorInput {
   metadata: JSON!
   subtitle: String!
   title: String!
-  updatedAt: DateTime
   uuid: String
 }
 
@@ -2359,7 +2348,6 @@ input PostCreateWithoutAuthorInput {
   metadata: JSON!
   subtitle: String!
   title: String!
-  updatedAt: DateTime
   uuid: String
 }
 
@@ -2371,7 +2359,6 @@ input PostCreateWithoutEditorInput {
   metadata: JSON!
   subtitle: String!
   title: String!
-  updatedAt: DateTime
   uuid: String
 }
 
@@ -2569,7 +2556,6 @@ input PostUpdateManyMutationInput {
   metadata: JSON
   subtitle: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
   uuid: StringFieldUpdateOperationsInput
 }
 
@@ -2629,7 +2615,6 @@ input PostUpdateWithoutAuthorInput {
   metadata: JSON
   subtitle: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
   uuid: StringFieldUpdateOperationsInput
 }
 
@@ -2641,7 +2626,6 @@ input PostUpdateWithoutEditorInput {
   metadata: JSON
   subtitle: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
   uuid: StringFieldUpdateOperationsInput
 }
 

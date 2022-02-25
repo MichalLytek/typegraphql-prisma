@@ -39,16 +39,6 @@ export class PostUpdateInput {
   })
   content?: NullableStringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => NullableEnumPostKindFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  kind?: NullableEnumPostKindFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
-    nullable: true
-  })
-  metadata?: Prisma.InputJsonValue | undefined;
-
   @TypeGraphQL.Field(_type => MainUserUpdateOneRequiredWithoutPostsInput, {
     nullable: true
   })
@@ -58,4 +48,14 @@ export class PostUpdateInput {
     nullable: true
   })
   editor?: MainUserUpdateOneWithoutEditorPostsInput | undefined;
+
+  @TypeGraphQL.Field(_type => NullableEnumPostKindFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  kind?: NullableEnumPostKindFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  metadata?: Prisma.InputJsonValue | undefined;
 }

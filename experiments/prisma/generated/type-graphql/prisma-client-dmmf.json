@@ -897,7 +897,8 @@
         "uniqueFields": [],
         "uniqueIndexes": []
       }
-    ]
+    ],
+    "types": []
   },
   "schema": {
     "inputObjectTypes": {
@@ -5861,6 +5862,19 @@
               ]
             },
             {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postCreateNestedManyWithoutAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "role",
               "isRequired": true,
               "isNullable": false,
@@ -5869,6 +5883,19 @@
                   "type": "Role",
                   "namespace": "model",
                   "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postCreateNestedManyWithoutEditorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -5906,32 +5933,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "posts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postCreateNestedManyWithoutAuthorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "editorPosts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postCreateNestedManyWithoutEditorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -6022,6 +6023,19 @@
               ]
             },
             {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUncheckedCreateNestedManyWithoutAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "role",
               "isRequired": true,
               "isNullable": false,
@@ -6030,6 +6044,19 @@
                   "type": "Role",
                   "namespace": "model",
                   "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUncheckedCreateNestedManyWithoutEditorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -6067,32 +6094,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "posts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUncheckedCreateNestedManyWithoutAuthorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "editorPosts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUncheckedCreateNestedManyWithoutEditorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -6201,6 +6202,19 @@
               ]
             },
             {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUpdateManyWithoutAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "role",
               "isRequired": false,
               "isNullable": false,
@@ -6213,6 +6227,19 @@
                 },
                 {
                   "type": "EnumRoleFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUpdateManyWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -6252,32 +6279,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "posts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUpdateManyWithoutAuthorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "editorPosts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUpdateManyWithoutEditorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -6404,6 +6405,19 @@
               ]
             },
             {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUncheckedUpdateManyWithoutAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "role",
               "isRequired": false,
               "isNullable": false,
@@ -6416,6 +6430,19 @@
                 },
                 {
                   "type": "EnumRoleFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUncheckedUpdateManyWithoutEditorInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -6455,32 +6482,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "posts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUncheckedUpdateManyWithoutAuthorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "editorPosts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUncheckedUpdateManyWithoutEditorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -6589,7 +6590,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserCreateManygradesInput",
+                  "type": "UserCreategradesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -6607,7 +6608,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserCreateManyaliasesInput",
+                  "type": "UserCreatealiasesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -7054,6 +7055,32 @@
               ]
             },
             {
+              "name": "author",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserCreateNestedOneWithoutPostsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "editor",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserCreateNestedOneWithoutEditorPostsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "kind",
               "isRequired": false,
               "isNullable": true,
@@ -7085,32 +7112,6 @@
                 {
                   "type": "Json",
                   "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "author",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserCreateNestedOneWithoutPostsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "editor",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserCreateNestedOneWithoutEditorPostsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -7419,6 +7420,32 @@
               ]
             },
             {
+              "name": "author",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserUpdateOneRequiredWithoutPostsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "editor",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserUpdateOneWithoutEditorPostsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "kind",
               "isRequired": false,
               "isNullable": true,
@@ -7456,32 +7483,6 @@
                 {
                   "type": "Json",
                   "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "author",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserUpdateOneRequiredWithoutPostsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "editor",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserUpdateOneWithoutEditorPostsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -9061,18 +9062,6 @@
           },
           "fields": [
             {
-              "name": "title",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "director",
               "isRequired": true,
               "isNullable": false,
@@ -9081,6 +9070,18 @@
                   "type": "DirectorCreateNestedOneWithoutMoviesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "title",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
                   "isList": false
                 }
               ]
@@ -9140,6 +9141,19 @@
           },
           "fields": [
             {
+              "name": "director",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "DirectorUpdateOneRequiredWithoutMoviesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "title",
               "isRequired": false,
               "isNullable": false,
@@ -9151,19 +9165,6 @@
                 },
                 {
                   "type": "StringFieldUpdateOperationsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "director",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "DirectorUpdateOneRequiredWithoutMoviesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9780,6 +9781,19 @@
               ]
             },
             {
+              "name": "likedBy",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorUncheckedCreateNestedManyWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "creatorId",
               "isRequired": false,
               "isNullable": true,
@@ -9888,6 +9902,19 @@
                 },
                 {
                   "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "likedBy",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorUncheckedUpdateManyWithoutLikesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -10143,6 +10170,19 @@
               ]
             },
             {
+              "name": "likes",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemUncheckedCreateNestedManyWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "problems",
               "isRequired": false,
               "isNullable": false,
@@ -10247,6 +10287,19 @@
                 },
                 {
                   "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "likes",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemUncheckedUpdateManyWithoutLikedByInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -17997,48 +18050,6 @@
           ]
         },
         {
-          "name": "UserCreategradesInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "Int",
-                  "location": "scalar",
-                  "isList": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "UserCreatealiasesInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": true
-                }
-              ]
-            }
-          ]
-        },
-        {
           "name": "postCreateNestedManyWithoutAuthorInput",
           "constraints": {
             "maxNumFields": null,
@@ -18214,6 +18225,48 @@
                   "type": "postWhereUniqueInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserCreategradesInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "set",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserCreatealiasesInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "set",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
                   "isList": true
                 }
               ]
@@ -18588,104 +18641,6 @@
           ]
         },
         {
-          "name": "EnumRoleFieldUpdateOperationsInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "Role",
-                  "namespace": "model",
-                  "location": "enumTypes",
-                  "isList": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "UserUpdategradesInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "Int",
-                  "location": "scalar",
-                  "isList": true
-                }
-              ]
-            },
-            {
-              "name": "push",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "Int",
-                  "location": "scalar",
-                  "isList": false
-                },
-                {
-                  "type": "Int",
-                  "location": "scalar",
-                  "isList": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "UserUpdatealiasesInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": true
-                }
-              ]
-            },
-            {
-              "name": "push",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": false
-                },
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": true
-                }
-              ]
-            }
-          ]
-        },
-        {
           "name": "postUpdateManyWithoutAuthorInput",
           "constraints": {
             "maxNumFields": null,
@@ -18910,6 +18865,28 @@
           ]
         },
         {
+          "name": "EnumRoleFieldUpdateOperationsInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "set",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "Role",
+                  "namespace": "model",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "postUpdateManyWithoutEditorInput",
           "constraints": {
             "maxNumFields": null,
@@ -19127,6 +19104,82 @@
                   "type": "postScalarWhereInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserUpdategradesInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "set",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "push",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserUpdatealiasesInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "set",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "push",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
                   "isList": true
                 }
               ]
@@ -19582,48 +19635,6 @@
           ]
         },
         {
-          "name": "UserCreateManygradesInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "Int",
-                  "location": "scalar",
-                  "isList": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "UserCreateManyaliasesInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": true
-                }
-              ]
-            }
-          ]
-        },
-        {
           "name": "UserCreateNestedOneWithoutPostsInput",
           "constraints": {
             "maxNumFields": null,
@@ -19766,33 +19777,6 @@
               "inputTypes": [
                 {
                   "type": "Boolean",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "NullableEnumPostKindFieldUpdateOperationsInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": false,
-              "isNullable": true,
-              "inputTypes": [
-                {
-                  "type": "PostKind",
-                  "namespace": "model",
-                  "location": "enumTypes",
-                  "isList": false
-                },
-                {
-                  "type": "Null",
                   "location": "scalar",
                   "isList": false
                 }
@@ -19990,6 +19974,33 @@
                   "type": "UserUncheckedUpdateWithoutEditorPostsInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "NullableEnumPostKindFieldUpdateOperationsInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "set",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "PostKind",
+                  "namespace": "model",
+                  "location": "enumTypes",
+                  "isList": false
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
                   "isList": false
                 }
               ]
@@ -20973,6 +20984,84 @@
           ]
         },
         {
+          "name": "CreatorUncheckedCreateNestedManyWithoutLikesInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "create",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorCreateWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorCreateWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                },
+                {
+                  "type": "CreatorUncheckedCreateWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorUncheckedCreateWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connectOrCreate",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorCreateOrConnectWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorCreateOrConnectWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "CreatorUpdateManyWithoutLikesInput",
           "constraints": {
             "maxNumFields": null,
@@ -21294,6 +21383,217 @@
           ]
         },
         {
+          "name": "CreatorUncheckedUpdateManyWithoutLikesInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "create",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorCreateWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorCreateWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                },
+                {
+                  "type": "CreatorUncheckedCreateWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorUncheckedCreateWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connectOrCreate",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorCreateOrConnectWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorCreateOrConnectWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "upsert",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorUpsertWithWhereUniqueWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorUpsertWithWhereUniqueWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "set",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "disconnect",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "update",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorUpdateWithWhereUniqueWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorUpdateWithWhereUniqueWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "updateMany",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorUpdateManyWithWhereWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorUpdateManyWithWhereWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "deleteMany",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorScalarWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CreatorScalarWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "ProblemCreateNestedManyWithoutLikedByInput",
           "constraints": {
             "maxNumFields": null,
@@ -21438,6 +21738,84 @@
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
+                }
+              ]
+            },
+            {
+              "name": "connect",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ProblemUncheckedCreateNestedManyWithoutLikedByInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "create",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemCreateWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemCreateWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                },
+                {
+                  "type": "ProblemUncheckedCreateWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemUncheckedCreateWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connectOrCreate",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemCreateOrConnectWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemCreateOrConnectWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
                 }
               ]
             },
@@ -21961,6 +22339,217 @@
                 },
                 {
                   "type": "ProblemUpdateManyWithWhereWithoutCreatorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "deleteMany",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemScalarWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemScalarWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ProblemUncheckedUpdateManyWithoutLikedByInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "create",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemCreateWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemCreateWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                },
+                {
+                  "type": "ProblemUncheckedCreateWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemUncheckedCreateWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connectOrCreate",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemCreateOrConnectWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemCreateOrConnectWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "upsert",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemUpsertWithWhereUniqueWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemUpsertWithWhereUniqueWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "set",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "disconnect",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "connect",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemWhereUniqueInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "update",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemUpdateWithWhereUniqueWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemUpdateWithWhereUniqueWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "updateMany",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemUpdateManyWithWhereWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "ProblemUpdateManyWithWhereWithoutLikedByInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": true
@@ -26084,6 +26673,19 @@
               ]
             },
             {
+              "name": "editor",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserCreateNestedOneWithoutEditorPostsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "kind",
               "isRequired": false,
               "isNullable": true,
@@ -26115,19 +26717,6 @@
                 {
                   "type": "Json",
                   "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "editor",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserCreateNestedOneWithoutEditorPostsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -26457,6 +27046,19 @@
               ]
             },
             {
+              "name": "author",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserCreateNestedOneWithoutPostsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "kind",
               "isRequired": false,
               "isNullable": true,
@@ -26488,19 +27090,6 @@
                 {
                   "type": "Json",
                   "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "author",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserCreateNestedOneWithoutPostsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -27367,6 +27956,19 @@
               ]
             },
             {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postCreateNestedManyWithoutEditorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "grades",
               "isRequired": false,
               "isNullable": false,
@@ -27399,19 +28001,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "editorPosts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postCreateNestedManyWithoutEditorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -27515,6 +28104,19 @@
               ]
             },
             {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUncheckedCreateNestedManyWithoutEditorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "grades",
               "isRequired": false,
               "isNullable": false,
@@ -27547,19 +28149,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "editorPosts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUncheckedCreateNestedManyWithoutEditorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -27679,6 +28268,19 @@
               ]
             },
             {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postCreateNestedManyWithoutAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "role",
               "isRequired": true,
               "isNullable": false,
@@ -27724,19 +28326,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "posts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postCreateNestedManyWithoutAuthorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -27827,6 +28416,19 @@
               ]
             },
             {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUncheckedCreateNestedManyWithoutAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "role",
               "isRequired": true,
               "isNullable": false,
@@ -27872,19 +28474,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "posts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUncheckedCreateNestedManyWithoutAuthorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -28100,6 +28689,19 @@
               ]
             },
             {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUpdateManyWithoutEditorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "grades",
               "isRequired": false,
               "isNullable": false,
@@ -28132,19 +28734,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "editorPosts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUpdateManyWithoutEditorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -28290,6 +28879,19 @@
               ]
             },
             {
+              "name": "editorPosts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUncheckedUpdateManyWithoutEditorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "grades",
               "isRequired": false,
               "isNullable": false,
@@ -28322,19 +28924,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "editorPosts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUncheckedUpdateManyWithoutEditorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -28490,6 +29079,19 @@
               ]
             },
             {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUpdateManyWithoutAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "role",
               "isRequired": false,
               "isNullable": false,
@@ -28541,19 +29143,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "posts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUpdateManyWithoutAuthorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -28680,6 +29269,19 @@
               ]
             },
             {
+              "name": "posts",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "postUncheckedUpdateManyWithoutAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "role",
               "isRequired": false,
               "isNullable": false,
@@ -28731,19 +29333,6 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
-                }
-              ]
-            },
-            {
-              "name": "posts",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "postUncheckedUpdateManyWithoutAuthorInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
                 }
               ]
             }
@@ -29551,6 +30140,19 @@
                   "isList": false
                 }
               ]
+            },
+            {
+              "name": "likes",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemUncheckedCreateNestedManyWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
             }
           ]
         },
@@ -29962,6 +30564,19 @@
                   "isList": false
                 }
               ]
+            },
+            {
+              "name": "likes",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "ProblemUncheckedUpdateManyWithoutLikedByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
             }
           ]
         },
@@ -30151,6 +30766,19 @@
                 {
                   "type": "String",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "likedBy",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorUncheckedCreateNestedManyWithoutLikesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -31071,6 +31699,19 @@
               ]
             },
             {
+              "name": "editor",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserUpdateOneWithoutEditorPostsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "kind",
               "isRequired": false,
               "isNullable": true,
@@ -31108,19 +31749,6 @@
                 {
                   "type": "Json",
                   "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "editor",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserUpdateOneWithoutEditorPostsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -31676,6 +32304,19 @@
               ]
             },
             {
+              "name": "author",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserUpdateOneRequiredWithoutPostsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "kind",
               "isRequired": false,
               "isNullable": true,
@@ -31713,19 +32354,6 @@
                 {
                   "type": "Json",
                   "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "author",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserUpdateOneRequiredWithoutPostsInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -32663,6 +33291,19 @@
                 },
                 {
                   "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "likedBy",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CreatorUncheckedUpdateManyWithoutLikesInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false

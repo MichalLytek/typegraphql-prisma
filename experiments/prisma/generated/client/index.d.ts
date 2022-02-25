@@ -425,8 +425,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.9.2
-   * Query Engine version: bcc2ff906db47790ee902e7bbc76d7ffb1893009
+   * Prisma Client JS version: 3.10.0
+   * Query Engine version: 73e60b76d394f8d37d8ebd1f8918c79029f0db86
    */
   export type PrismaVersion = {
     client: string
@@ -588,7 +588,11 @@ export namespace Prisma {
    * XOR is needed to have a real mutually exclusive union type
    * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
    */
-  type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+  type XOR<T, U> =
+    T extends object ?
+    U extends object ?
+      (Without<T, U> & U) | (Without<U, T> & T)
+    : U : T
 
 
   /**
@@ -997,9 +1001,8 @@ export namespace Prisma {
     ? UserCountOutputType 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof UserCountOutputType ?UserCountOutputType [P]
-  : 
-     never
+    [P in TrueKeys<S['select']>]:
+    P extends keyof UserCountOutputType ? UserCountOutputType[P] : never
   } 
     : UserCountOutputType
   : UserCountOutputType
@@ -1047,9 +1050,8 @@ export namespace Prisma {
     ? DirectorCountOutputType 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof DirectorCountOutputType ?DirectorCountOutputType [P]
-  : 
-     never
+    [P in TrueKeys<S['select']>]:
+    P extends keyof DirectorCountOutputType ? DirectorCountOutputType[P] : never
   } 
     : DirectorCountOutputType
   : DirectorCountOutputType
@@ -1097,9 +1099,8 @@ export namespace Prisma {
     ? ProblemCountOutputType 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof ProblemCountOutputType ?ProblemCountOutputType [P]
-  : 
-     never
+    [P in TrueKeys<S['select']>]:
+    P extends keyof ProblemCountOutputType ? ProblemCountOutputType[P] : never
   } 
     : ProblemCountOutputType
   : ProblemCountOutputType
@@ -1149,9 +1150,8 @@ export namespace Prisma {
     ? CreatorCountOutputType 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof CreatorCountOutputType ?CreatorCountOutputType [P]
-  : 
-     never
+    [P in TrueKeys<S['select']>]:
+    P extends keyof CreatorCountOutputType ? CreatorCountOutputType[P] : never
   } 
     : CreatorCountOutputType
   : CreatorCountOutputType
@@ -1399,7 +1399,7 @@ export namespace Prisma {
     _max: UserMaxAggregateOutputType | null
   }
 
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = Promise<
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = PrismaPromise<
     Array<
       PickArray<UserGroupByOutputType, T['by']> &
         {
@@ -1444,24 +1444,17 @@ export namespace Prisma {
     : S extends UserArgs | UserFindManyArgs
     ?'include' extends U
     ? User  & {
-    [P in TrueKeys<S['include']>]: 
-          P extends 'posts'
-        ? Array < postGetPayload<S['include'][P]>>  :
-        P extends 'editorPosts'
-        ? Array < postGetPayload<S['include'][P]>>  :
-        P extends '_count'
-        ? UserCountOutputTypeGetPayload<S['include'][P]> : never
+    [P in TrueKeys<S['include']>]:
+        P extends 'posts' ? Array < postGetPayload<S['include'][P]>>  :
+        P extends 'editorPosts' ? Array < postGetPayload<S['include'][P]>>  :
+        P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof User ?User [P]
-  : 
-          P extends 'posts'
-        ? Array < postGetPayload<S['select'][P]>>  :
-        P extends 'editorPosts'
-        ? Array < postGetPayload<S['select'][P]>>  :
-        P extends '_count'
-        ? UserCountOutputTypeGetPayload<S['select'][P]> : never
+    [P in TrueKeys<S['select']>]:
+        P extends 'posts' ? Array < postGetPayload<S['select'][P]>>  :
+        P extends 'editorPosts' ? Array < postGetPayload<S['select'][P]>>  :
+        P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
     : User
   : User
@@ -1775,7 +1768,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -2360,7 +2353,7 @@ export namespace Prisma {
     _max: PostMaxAggregateOutputType | null
   }
 
-  type GetPostGroupByPayload<T extends PostGroupByArgs> = Promise<
+  type GetPostGroupByPayload<T extends PostGroupByArgs> = PrismaPromise<
     Array<
       PickArray<PostGroupByOutputType, T['by']> &
         {
@@ -2405,20 +2398,15 @@ export namespace Prisma {
     : S extends postArgs | postFindManyArgs
     ?'include' extends U
     ? post  & {
-    [P in TrueKeys<S['include']>]: 
-          P extends 'author'
-        ? UserGetPayload<S['include'][P]> :
-        P extends 'editor'
-        ? UserGetPayload<S['include'][P]> | null : never
+    [P in TrueKeys<S['include']>]:
+        P extends 'author' ? UserGetPayload<S['include'][P]> :
+        P extends 'editor' ? UserGetPayload<S['include'][P]> | null :  never
   } 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof post ?post [P]
-  : 
-          P extends 'author'
-        ? UserGetPayload<S['select'][P]> :
-        P extends 'editor'
-        ? UserGetPayload<S['select'][P]> | null : never
+    [P in TrueKeys<S['select']>]:
+        P extends 'author' ? UserGetPayload<S['select'][P]> :
+        P extends 'editor' ? UserGetPayload<S['select'][P]> | null :  P extends keyof post ? post[P] : never
   } 
     : post
   : post
@@ -2732,7 +2720,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -3261,7 +3249,7 @@ export namespace Prisma {
     _max: CategoryMaxAggregateOutputType | null
   }
 
-  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = Promise<
+  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = PrismaPromise<
     Array<
       PickArray<CategoryGroupByOutputType, T['by']> &
         {
@@ -3293,9 +3281,8 @@ export namespace Prisma {
     ? Category 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof Category ?Category [P]
-  : 
-     never
+    [P in TrueKeys<S['select']>]:
+    P extends keyof Category ? Category[P] : never
   } 
     : Category
   : Category
@@ -3609,7 +3596,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -4061,7 +4048,7 @@ export namespace Prisma {
     _max: PatientMaxAggregateOutputType | null
   }
 
-  type GetPatientGroupByPayload<T extends PatientGroupByArgs> = Promise<
+  type GetPatientGroupByPayload<T extends PatientGroupByArgs> = PrismaPromise<
     Array<
       PickArray<PatientGroupByOutputType, T['by']> &
         {
@@ -4093,9 +4080,8 @@ export namespace Prisma {
     ? Patient 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof Patient ?Patient [P]
-  : 
-     never
+    [P in TrueKeys<S['select']>]:
+    P extends keyof Patient ? Patient[P] : never
   } 
     : Patient
   : Patient
@@ -4409,7 +4395,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PatientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPatientGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, PatientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPatientGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -4861,7 +4847,7 @@ export namespace Prisma {
     _max: MovieMaxAggregateOutputType | null
   }
 
-  type GetMovieGroupByPayload<T extends MovieGroupByArgs> = Promise<
+  type GetMovieGroupByPayload<T extends MovieGroupByArgs> = PrismaPromise<
     Array<
       PickArray<MovieGroupByOutputType, T['by']> &
         {
@@ -4896,16 +4882,13 @@ export namespace Prisma {
     : S extends MovieArgs | MovieFindManyArgs
     ?'include' extends U
     ? Movie  & {
-    [P in TrueKeys<S['include']>]: 
-          P extends 'director'
-        ? DirectorGetPayload<S['include'][P]> : never
+    [P in TrueKeys<S['include']>]:
+        P extends 'director' ? DirectorGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof Movie ?Movie [P]
-  : 
-          P extends 'director'
-        ? DirectorGetPayload<S['select'][P]> : never
+    [P in TrueKeys<S['select']>]:
+        P extends 'director' ? DirectorGetPayload<S['select'][P]> :  P extends keyof Movie ? Movie[P] : never
   } 
     : Movie
   : Movie
@@ -5219,7 +5202,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, MovieGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMovieGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, MovieGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMovieGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -5705,7 +5688,7 @@ export namespace Prisma {
     _max: DirectorMaxAggregateOutputType | null
   }
 
-  type GetDirectorGroupByPayload<T extends DirectorGroupByArgs> = Promise<
+  type GetDirectorGroupByPayload<T extends DirectorGroupByArgs> = PrismaPromise<
     Array<
       PickArray<DirectorGroupByOutputType, T['by']> &
         {
@@ -5741,20 +5724,15 @@ export namespace Prisma {
     : S extends DirectorArgs | DirectorFindManyArgs
     ?'include' extends U
     ? Director  & {
-    [P in TrueKeys<S['include']>]: 
-          P extends 'movies'
-        ? Array < MovieGetPayload<S['include'][P]>>  :
-        P extends '_count'
-        ? DirectorCountOutputTypeGetPayload<S['include'][P]> : never
+    [P in TrueKeys<S['include']>]:
+        P extends 'movies' ? Array < MovieGetPayload<S['include'][P]>>  :
+        P extends '_count' ? DirectorCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof Director ?Director [P]
-  : 
-          P extends 'movies'
-        ? Array < MovieGetPayload<S['select'][P]>>  :
-        P extends '_count'
-        ? DirectorCountOutputTypeGetPayload<S['select'][P]> : never
+    [P in TrueKeys<S['select']>]:
+        P extends 'movies' ? Array < MovieGetPayload<S['select'][P]>>  :
+        P extends '_count' ? DirectorCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Director ? Director[P] : never
   } 
     : Director
   : Director
@@ -6068,7 +6046,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, DirectorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDirectorGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, DirectorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDirectorGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -6599,7 +6577,7 @@ export namespace Prisma {
     _max: ProblemMaxAggregateOutputType | null
   }
 
-  type GetProblemGroupByPayload<T extends ProblemGroupByArgs> = Promise<
+  type GetProblemGroupByPayload<T extends ProblemGroupByArgs> = PrismaPromise<
     Array<
       PickArray<ProblemGroupByOutputType, T['by']> &
         {
@@ -6638,24 +6616,17 @@ export namespace Prisma {
     : S extends ProblemArgs | ProblemFindManyArgs
     ?'include' extends U
     ? Problem  & {
-    [P in TrueKeys<S['include']>]: 
-          P extends 'likedBy'
-        ? Array < CreatorGetPayload<S['include'][P]>>  :
-        P extends 'creator'
-        ? CreatorGetPayload<S['include'][P]> | null :
-        P extends '_count'
-        ? ProblemCountOutputTypeGetPayload<S['include'][P]> : never
+    [P in TrueKeys<S['include']>]:
+        P extends 'likedBy' ? Array < CreatorGetPayload<S['include'][P]>>  :
+        P extends 'creator' ? CreatorGetPayload<S['include'][P]> | null :
+        P extends '_count' ? ProblemCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof Problem ?Problem [P]
-  : 
-          P extends 'likedBy'
-        ? Array < CreatorGetPayload<S['select'][P]>>  :
-        P extends 'creator'
-        ? CreatorGetPayload<S['select'][P]> | null :
-        P extends '_count'
-        ? ProblemCountOutputTypeGetPayload<S['select'][P]> : never
+    [P in TrueKeys<S['select']>]:
+        P extends 'likedBy' ? Array < CreatorGetPayload<S['select'][P]>>  :
+        P extends 'creator' ? CreatorGetPayload<S['select'][P]> | null :
+        P extends '_count' ? ProblemCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Problem ? Problem[P] : never
   } 
     : Problem
   : Problem
@@ -6969,7 +6940,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProblemGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, ProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProblemGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -7491,7 +7462,7 @@ export namespace Prisma {
     _max: CreatorMaxAggregateOutputType | null
   }
 
-  type GetCreatorGroupByPayload<T extends CreatorGroupByArgs> = Promise<
+  type GetCreatorGroupByPayload<T extends CreatorGroupByArgs> = PrismaPromise<
     Array<
       PickArray<CreatorGroupByOutputType, T['by']> &
         {
@@ -7529,24 +7500,17 @@ export namespace Prisma {
     : S extends CreatorArgs | CreatorFindManyArgs
     ?'include' extends U
     ? Creator  & {
-    [P in TrueKeys<S['include']>]: 
-          P extends 'likes'
-        ? Array < ProblemGetPayload<S['include'][P]>>  :
-        P extends 'problems'
-        ? Array < ProblemGetPayload<S['include'][P]>>  :
-        P extends '_count'
-        ? CreatorCountOutputTypeGetPayload<S['include'][P]> : never
+    [P in TrueKeys<S['include']>]:
+        P extends 'likes' ? Array < ProblemGetPayload<S['include'][P]>>  :
+        P extends 'problems' ? Array < ProblemGetPayload<S['include'][P]>>  :
+        P extends '_count' ? CreatorCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof Creator ?Creator [P]
-  : 
-          P extends 'likes'
-        ? Array < ProblemGetPayload<S['select'][P]>>  :
-        P extends 'problems'
-        ? Array < ProblemGetPayload<S['select'][P]>>  :
-        P extends '_count'
-        ? CreatorCountOutputTypeGetPayload<S['select'][P]> : never
+    [P in TrueKeys<S['select']>]:
+        P extends 'likes' ? Array < ProblemGetPayload<S['select'][P]>>  :
+        P extends 'problems' ? Array < ProblemGetPayload<S['select'][P]>>  :
+        P extends '_count' ? CreatorCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Creator ? Creator[P] : never
   } 
     : Creator
   : Creator
@@ -7860,7 +7824,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CreatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCreatorGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, CreatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCreatorGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -8404,7 +8368,7 @@ export namespace Prisma {
     _max: NativeTypeModelMaxAggregateOutputType | null
   }
 
-  type GetNativeTypeModelGroupByPayload<T extends NativeTypeModelGroupByArgs> = Promise<
+  type GetNativeTypeModelGroupByPayload<T extends NativeTypeModelGroupByArgs> = PrismaPromise<
     Array<
       PickArray<NativeTypeModelGroupByOutputType, T['by']> &
         {
@@ -8437,9 +8401,8 @@ export namespace Prisma {
     ? NativeTypeModel 
     : 'select' extends U
     ? {
-    [P in TrueKeys<S['select']>]: P extends keyof NativeTypeModel ?NativeTypeModel [P]
-  : 
-     never
+    [P in TrueKeys<S['select']>]:
+    P extends keyof NativeTypeModel ? NativeTypeModel[P] : never
   } 
     : NativeTypeModel
   : NativeTypeModel
@@ -8753,7 +8716,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, NativeTypeModelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNativeTypeModelGroupByPayload<T> : Promise<InputErrors>
+    >(args: SubsetIntersection<T, NativeTypeModelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNativeTypeModelGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
@@ -9705,11 +9668,11 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
+    posts?: postCreateNestedManyWithoutAuthorInput
     role: Role
+    editorPosts?: postCreateNestedManyWithoutEditorInput
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
-    posts?: postCreateNestedManyWithoutAuthorInput
-    editorPosts?: postCreateNestedManyWithoutEditorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -9719,11 +9682,11 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
+    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
     role: Role
+    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
-    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
-    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
 
   export type UserUpdateInput = {
@@ -9732,11 +9695,11 @@ export namespace Prisma {
     age?: IntFieldUpdateOperationsInput | number
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
+    posts?: postUpdateManyWithoutAuthorInput
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    editorPosts?: postUpdateManyWithoutEditorInput
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
-    posts?: postUpdateManyWithoutAuthorInput
-    editorPosts?: postUpdateManyWithoutEditorInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -9746,11 +9709,11 @@ export namespace Prisma {
     age?: IntFieldUpdateOperationsInput | number
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
+    posts?: postUncheckedUpdateManyWithoutAuthorInput
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    editorPosts?: postUncheckedUpdateManyWithoutEditorInput
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
-    posts?: postUncheckedUpdateManyWithoutAuthorInput
-    editorPosts?: postUncheckedUpdateManyWithoutEditorInput
   }
 
   export type UserCreateManyInput = {
@@ -9761,8 +9724,8 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    grades?: UserCreateManygradesInput | Enumerable<number>
-    aliases?: UserCreateManyaliasesInput | Enumerable<string>
+    grades?: UserCreategradesInput | Enumerable<number>
+    aliases?: UserCreatealiasesInput | Enumerable<string>
   }
 
   export type UserUpdateManyMutationInput = {
@@ -9796,10 +9759,10 @@ export namespace Prisma {
     title: string
     subtitle: string
     content?: string | null
-    kind?: PostKind | null
-    metadata: JsonNullValueInput | InputJsonValue
     author: UserCreateNestedOneWithoutPostsInput
     editor?: UserCreateNestedOneWithoutEditorPostsInput
+    kind?: PostKind | null
+    metadata: JsonNullValueInput | InputJsonValue
   }
 
   export type postUncheckedCreateInput = {
@@ -9824,10 +9787,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
-    metadata?: JsonNullValueInput | InputJsonValue
     author?: UserUpdateOneRequiredWithoutPostsInput
     editor?: UserUpdateOneWithoutEditorPostsInput
+    kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
+    metadata?: JsonNullValueInput | InputJsonValue
   }
 
   export type postUncheckedUpdateInput = {
@@ -9969,8 +9932,8 @@ export namespace Prisma {
   }
 
   export type MovieCreateInput = {
-    title: string
     director: DirectorCreateNestedOneWithoutMoviesInput
+    title: string
   }
 
   export type MovieUncheckedCreateInput = {
@@ -9980,8 +9943,8 @@ export namespace Prisma {
   }
 
   export type MovieUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string
     director?: DirectorUpdateOneRequiredWithoutMoviesInput
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type MovieUncheckedUpdateInput = {
@@ -10054,6 +10017,7 @@ export namespace Prisma {
   export type ProblemUncheckedCreateInput = {
     id?: number
     problemText: string
+    likedBy?: CreatorUncheckedCreateNestedManyWithoutLikesInput
     creatorId?: number | null
   }
 
@@ -10066,6 +10030,7 @@ export namespace Prisma {
   export type ProblemUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     problemText?: StringFieldUpdateOperationsInput | string
+    likedBy?: CreatorUncheckedUpdateManyWithoutLikesInput
     creatorId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -10094,6 +10059,7 @@ export namespace Prisma {
   export type CreatorUncheckedCreateInput = {
     id?: number
     name: string
+    likes?: ProblemUncheckedCreateNestedManyWithoutLikedByInput
     problems?: ProblemUncheckedCreateNestedManyWithoutCreatorInput
   }
 
@@ -10106,6 +10072,7 @@ export namespace Prisma {
   export type CreatorUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    likes?: ProblemUncheckedUpdateManyWithoutLikedByInput
     problems?: ProblemUncheckedUpdateManyWithoutCreatorInput
   }
 
@@ -10909,14 +10876,6 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter
   }
 
-  export type UserCreategradesInput = {
-    set: Enumerable<number>
-  }
-
-  export type UserCreatealiasesInput = {
-    set: Enumerable<string>
-  }
-
   export type postCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
@@ -10929,6 +10888,14 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
+  }
+
+  export type UserCreategradesInput = {
+    set: Enumerable<number>
+  }
+
+  export type UserCreatealiasesInput = {
+    set: Enumerable<string>
   }
 
   export type postUncheckedCreateNestedManyWithoutAuthorInput = {
@@ -10969,20 +10936,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type EnumRoleFieldUpdateOperationsInput = {
-    set?: Role
-  }
-
-  export type UserUpdategradesInput = {
-    set?: Enumerable<number>
-    push?: number | Enumerable<number>
-  }
-
-  export type UserUpdatealiasesInput = {
-    set?: Enumerable<string>
-    push?: string | Enumerable<string>
-  }
-
   export type postUpdateManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
@@ -10997,6 +10950,10 @@ export namespace Prisma {
     deleteMany?: Enumerable<postScalarWhereInput>
   }
 
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: Role
+  }
+
   export type postUpdateManyWithoutEditorInput = {
     create?: XOR<Enumerable<postCreateWithoutEditorInput>, Enumerable<postUncheckedCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
@@ -11009,6 +10966,16 @@ export namespace Prisma {
     update?: Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutEditorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
+  }
+
+  export type UserUpdategradesInput = {
+    set?: Enumerable<number>
+    push?: number | Enumerable<number>
+  }
+
+  export type UserUpdatealiasesInput = {
+    set?: Enumerable<string>
+    push?: string | Enumerable<string>
   }
 
   export type postUncheckedUpdateManyWithoutAuthorInput = {
@@ -11039,14 +11006,6 @@ export namespace Prisma {
     deleteMany?: Enumerable<postScalarWhereInput>
   }
 
-  export type UserCreateManygradesInput = {
-    set: Enumerable<number>
-  }
-
-  export type UserCreateManyaliasesInput = {
-    set: Enumerable<string>
-  }
-
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
@@ -11067,10 +11026,6 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type NullableEnumPostKindFieldUpdateOperationsInput = {
-    set?: PostKind | null
-  }
-
   export type UserUpdateOneRequiredWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
@@ -11087,6 +11042,10 @@ export namespace Prisma {
     delete?: boolean
     connect?: UserWhereUniqueInput
     update?: XOR<UserUpdateWithoutEditorPostsInput, UserUncheckedUpdateWithoutEditorPostsInput>
+  }
+
+  export type NullableEnumPostKindFieldUpdateOperationsInput = {
+    set?: PostKind | null
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -11165,6 +11124,12 @@ export namespace Prisma {
     connect?: CreatorWhereUniqueInput
   }
 
+  export type CreatorUncheckedCreateNestedManyWithoutLikesInput = {
+    create?: XOR<Enumerable<CreatorCreateWithoutLikesInput>, Enumerable<CreatorUncheckedCreateWithoutLikesInput>>
+    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutLikesInput>
+    connect?: Enumerable<CreatorWhereUniqueInput>
+  }
+
   export type CreatorUpdateManyWithoutLikesInput = {
     create?: XOR<Enumerable<CreatorCreateWithoutLikesInput>, Enumerable<CreatorUncheckedCreateWithoutLikesInput>>
     connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutLikesInput>
@@ -11188,6 +11153,19 @@ export namespace Prisma {
     update?: XOR<CreatorUpdateWithoutProblemsInput, CreatorUncheckedUpdateWithoutProblemsInput>
   }
 
+  export type CreatorUncheckedUpdateManyWithoutLikesInput = {
+    create?: XOR<Enumerable<CreatorCreateWithoutLikesInput>, Enumerable<CreatorUncheckedCreateWithoutLikesInput>>
+    connectOrCreate?: Enumerable<CreatorCreateOrConnectWithoutLikesInput>
+    upsert?: Enumerable<CreatorUpsertWithWhereUniqueWithoutLikesInput>
+    set?: Enumerable<CreatorWhereUniqueInput>
+    disconnect?: Enumerable<CreatorWhereUniqueInput>
+    delete?: Enumerable<CreatorWhereUniqueInput>
+    connect?: Enumerable<CreatorWhereUniqueInput>
+    update?: Enumerable<CreatorUpdateWithWhereUniqueWithoutLikesInput>
+    updateMany?: Enumerable<CreatorUpdateManyWithWhereWithoutLikesInput>
+    deleteMany?: Enumerable<CreatorScalarWhereInput>
+  }
+
   export type ProblemCreateNestedManyWithoutLikedByInput = {
     create?: XOR<Enumerable<ProblemCreateWithoutLikedByInput>, Enumerable<ProblemUncheckedCreateWithoutLikedByInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutLikedByInput>
@@ -11198,6 +11176,12 @@ export namespace Prisma {
     create?: XOR<Enumerable<ProblemCreateWithoutCreatorInput>, Enumerable<ProblemUncheckedCreateWithoutCreatorInput>>
     connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutCreatorInput>
     createMany?: ProblemCreateManyCreatorInputEnvelope
+    connect?: Enumerable<ProblemWhereUniqueInput>
+  }
+
+  export type ProblemUncheckedCreateNestedManyWithoutLikedByInput = {
+    create?: XOR<Enumerable<ProblemCreateWithoutLikedByInput>, Enumerable<ProblemUncheckedCreateWithoutLikedByInput>>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutLikedByInput>
     connect?: Enumerable<ProblemWhereUniqueInput>
   }
 
@@ -11232,6 +11216,19 @@ export namespace Prisma {
     connect?: Enumerable<ProblemWhereUniqueInput>
     update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutCreatorInput>
     updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutCreatorInput>
+    deleteMany?: Enumerable<ProblemScalarWhereInput>
+  }
+
+  export type ProblemUncheckedUpdateManyWithoutLikedByInput = {
+    create?: XOR<Enumerable<ProblemCreateWithoutLikedByInput>, Enumerable<ProblemUncheckedCreateWithoutLikedByInput>>
+    connectOrCreate?: Enumerable<ProblemCreateOrConnectWithoutLikedByInput>
+    upsert?: Enumerable<ProblemUpsertWithWhereUniqueWithoutLikedByInput>
+    set?: Enumerable<ProblemWhereUniqueInput>
+    disconnect?: Enumerable<ProblemWhereUniqueInput>
+    delete?: Enumerable<ProblemWhereUniqueInput>
+    connect?: Enumerable<ProblemWhereUniqueInput>
+    update?: Enumerable<ProblemUpdateWithWhereUniqueWithoutLikedByInput>
+    updateMany?: Enumerable<ProblemUpdateManyWithWhereWithoutLikedByInput>
     deleteMany?: Enumerable<ProblemScalarWhereInput>
   }
 
@@ -11600,9 +11597,9 @@ export namespace Prisma {
     title: string
     subtitle: string
     content?: string | null
+    editor?: UserCreateNestedOneWithoutEditorPostsInput
     kind?: PostKind | null
     metadata: JsonNullValueInput | InputJsonValue
-    editor?: UserCreateNestedOneWithoutEditorPostsInput
   }
 
   export type postUncheckedCreateWithoutAuthorInput = {
@@ -11636,9 +11633,9 @@ export namespace Prisma {
     title: string
     subtitle: string
     content?: string | null
+    author: UserCreateNestedOneWithoutPostsInput
     kind?: PostKind | null
     metadata: JsonNullValueInput | InputJsonValue
-    author: UserCreateNestedOneWithoutPostsInput
   }
 
   export type postUncheckedCreateWithoutEditorInput = {
@@ -11720,9 +11717,9 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    editorPosts?: postCreateNestedManyWithoutEditorInput
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
-    editorPosts?: postCreateNestedManyWithoutEditorInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -11733,9 +11730,9 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
+    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
-    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -11749,10 +11746,10 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
+    posts?: postCreateNestedManyWithoutAuthorInput
     role: Role
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
-    posts?: postCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutEditorPostsInput = {
@@ -11762,10 +11759,10 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
+    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
     role: Role
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
-    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutEditorPostsInput = {
@@ -11785,9 +11782,9 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    editorPosts?: postUpdateManyWithoutEditorInput
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
-    editorPosts?: postUpdateManyWithoutEditorInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -11798,9 +11795,9 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
+    editorPosts?: postUncheckedUpdateManyWithoutEditorInput
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
-    editorPosts?: postUncheckedUpdateManyWithoutEditorInput
   }
 
   export type UserUpsertWithoutEditorPostsInput = {
@@ -11814,10 +11811,10 @@ export namespace Prisma {
     age?: IntFieldUpdateOperationsInput | number
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
+    posts?: postUpdateManyWithoutAuthorInput
     role?: EnumRoleFieldUpdateOperationsInput | Role
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
-    posts?: postUpdateManyWithoutAuthorInput
   }
 
   export type UserUncheckedUpdateWithoutEditorPostsInput = {
@@ -11827,10 +11824,10 @@ export namespace Prisma {
     age?: IntFieldUpdateOperationsInput | number
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
+    posts?: postUncheckedUpdateManyWithoutAuthorInput
     role?: EnumRoleFieldUpdateOperationsInput | Role
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
-    posts?: postUncheckedUpdateManyWithoutAuthorInput
   }
 
   export type DirectorCreateWithoutMoviesInput = {
@@ -11930,6 +11927,7 @@ export namespace Prisma {
   export type CreatorUncheckedCreateWithoutProblemsInput = {
     id?: number
     name: string
+    likes?: ProblemUncheckedCreateNestedManyWithoutLikedByInput
   }
 
   export type CreatorCreateOrConnectWithoutProblemsInput = {
@@ -11974,6 +11972,7 @@ export namespace Prisma {
   export type CreatorUncheckedUpdateWithoutProblemsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    likes?: ProblemUncheckedUpdateManyWithoutLikedByInput
   }
 
   export type ProblemCreateWithoutLikedByInput = {
@@ -12000,6 +11999,7 @@ export namespace Prisma {
   export type ProblemUncheckedCreateWithoutCreatorInput = {
     id?: number
     problemText: string
+    likedBy?: CreatorUncheckedCreateNestedManyWithoutLikesInput
   }
 
   export type ProblemCreateOrConnectWithoutCreatorInput = {
@@ -12087,9 +12087,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
+    editor?: UserUpdateOneWithoutEditorPostsInput
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: JsonNullValueInput | InputJsonValue
-    editor?: UserUpdateOneWithoutEditorPostsInput
   }
 
   export type postUncheckedUpdateWithoutAuthorInput = {
@@ -12126,9 +12126,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
+    author?: UserUpdateOneRequiredWithoutPostsInput
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: JsonNullValueInput | InputJsonValue
-    author?: UserUpdateOneRequiredWithoutPostsInput
   }
 
   export type postUncheckedUpdateWithoutEditorInput = {
@@ -12219,6 +12219,7 @@ export namespace Prisma {
   export type ProblemUncheckedUpdateWithoutCreatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     problemText?: StringFieldUpdateOperationsInput | string
+    likedBy?: CreatorUncheckedUpdateManyWithoutLikesInput
   }
 
   export type ProblemUncheckedUpdateManyWithoutProblemsInput = {

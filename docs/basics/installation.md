@@ -31,7 +31,7 @@ npm i @prisma/client
 :::caution
 Be aware that `typegraphql-prisma` is designed to work with a selected versions of `prisma`.
 
-Please make sure you use `prisma` and `@prisma/client` of version matching `~3.9.2`.
+Please make sure you use `prisma` and `@prisma/client` of version matching `~3.10.0`.
 Otherwise, the runtime check will report an error when you run the generator.
 :::
 

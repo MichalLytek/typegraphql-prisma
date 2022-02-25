@@ -147,17 +147,9 @@ describe("inputs", () => {
     const sampleModelCreateintArrayFieldInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/SampleModelCreateintArrayFieldInput.ts",
     );
-    const sampleModelCreateManyintArrayFieldInputTSFile =
-      await readGeneratedFile(
-        "/resolvers/inputs/SampleModelCreateManyintArrayFieldInput.ts",
-      );
     const sampleModelCreatestringArrayFieldInputTSFile =
       await readGeneratedFile(
         "/resolvers/inputs/SampleModelCreatestringArrayFieldInput.ts",
-      );
-    const sampleModelCreateManystringArrayFieldInputTSFile =
-      await readGeneratedFile(
-        "/resolvers/inputs/SampleModelCreateManystringArrayFieldInput.ts",
       );
 
     const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
@@ -171,14 +163,8 @@ describe("inputs", () => {
     expect(sampleModelCreateintArrayFieldInputTSFile).toMatchSnapshot(
       "SampleModelCreateintArrayFieldInput",
     );
-    expect(sampleModelCreateManyintArrayFieldInputTSFile).toMatchSnapshot(
-      "SampleModelCreateManyintArrayFieldInput",
-    );
     expect(sampleModelCreatestringArrayFieldInputTSFile).toMatchSnapshot(
       "SampleModelCreatestringArrayFieldInput",
-    );
-    expect(sampleModelCreateManystringArrayFieldInputTSFile).toMatchSnapshot(
-      "SampleModelCreateManystringArrayFieldInput",
     );
     expect(indexTSFile).toMatchSnapshot("index");
   });

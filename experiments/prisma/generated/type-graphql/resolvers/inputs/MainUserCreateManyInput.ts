@@ -2,8 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { MainUserCreateManyaliasesInput } from "../inputs/MainUserCreateManyaliasesInput";
-import { MainUserCreateManygradesInput } from "../inputs/MainUserCreateManygradesInput";
+import { MainUserCreatealiasesInput } from "../inputs/MainUserCreatealiasesInput";
+import { MainUserCreategradesInput } from "../inputs/MainUserCreategradesInput";
 import { Role } from "../../enums/Role";
 
 @TypeGraphQL.InputType("MainUserCreateManyInput", {
@@ -39,15 +39,15 @@ export class MainUserCreateManyInput {
   })
   role!: "USER" | "ADMIN";
 
-  @TypeGraphQL.Field(_type => MainUserCreateManygradesInput, {
+  @TypeGraphQL.Field(_type => MainUserCreategradesInput, {
     nullable: true
   })
-  grades?: MainUserCreateManygradesInput | undefined;
+  grades?: MainUserCreategradesInput | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserCreateManyaliasesInput, {
+  @TypeGraphQL.Field(_type => MainUserCreatealiasesInput, {
     nullable: true
   })
-  aliases?: MainUserCreateManyaliasesInput | undefined;
+  aliases?: MainUserCreatealiasesInput | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

@@ -7,7 +7,7 @@ var __export = (target, all) => {
     __defProp(target, name, { get: all[name], enumerable: true });
 };
 
-// runtime/esm/index-browser.mjs
+// esm/runtime/index-browser.mjs
 __export(exports, {
   Decimal: () => decimal_default
 });

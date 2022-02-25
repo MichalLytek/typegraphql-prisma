@@ -40,6 +40,7 @@ export class DmmfDocument implements DMMF.Document {
     this.datamodel = {
       models: this.models,
       enums: datamodel.enums.map(transformEnums(this)),
+      types: [], // TODO: parse `datamodel.types`
     };
     this.schema = {
       ...transformSchema(schema, this),

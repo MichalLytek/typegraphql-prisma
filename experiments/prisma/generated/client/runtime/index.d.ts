@@ -65,9 +65,11 @@ declare interface BinaryTargetsEnvValue {
 }
 
 declare interface Client_2 {
+    /** Only via tx proxy */
+    [TX_ID]?: string;
     _dmmf: DMMFClass;
     _engine: Engine;
-    _fetcher: PrismaClientFetcher;
+    _fetcher: RequestHandler;
     _connectionPromise?: Promise<any>;
     _disconnectionPromise?: Promise<any>;
     _engineConfig: EngineConfig;
@@ -133,8 +135,8 @@ declare type DataLoaderOptions<T> = {
 
 declare interface DataSource {
     name: string;
-    activeProvider: ConnectorType;
-    provider: ConnectorType;
+    activeProvider: ConnectorType_2;
+    provider: ConnectorType_2;
     url: EnvValue;
     config: {
         [key: string]: string;
@@ -467,6 +469,7 @@ export declare namespace DMMF {
     export interface Datamodel {
         models: Model[];
         enums: DatamodelEnum[];
+        types: Model[];
     }
     export interface uniqueIndex {
         name: string;
@@ -498,8 +501,8 @@ export declare namespace DMMF {
         isUnique: boolean;
         isId: boolean;
         isReadOnly: boolean;
-        isGenerated: boolean;
-        isUpdatedAt: boolean;
+        isGenerated?: boolean;
+        isUpdatedAt?: boolean;
         /**
          * Describes the data type in the same the way is is defined in the Prisma schema:
          * BigInt, Boolean, Bytes, DateTime, Decimal, Float, Int, JSON, String, $ModelName
@@ -649,6 +652,8 @@ export declare class DMMFClass implements DMMF.Document {
     enumMap: Dictionary<DMMF.SchemaEnum>;
     datamodelEnumMap: Dictionary<DMMF.DatamodelEnum>;
     modelMap: Dictionary<DMMF.Model>;
+    typeMap: Dictionary<DMMF.Model>;
+    typeAndModelMap: Dictionary<DMMF.Model>;
     mappingsMap: Dictionary<DMMF.ModelMapping>;
     rootFieldMap: Dictionary<DMMF.SchemaField>;
     constructor({ datamodel, schema, mappings }: DMMF.Document);
@@ -666,6 +671,8 @@ export declare class DMMFClass implements DMMF.Document {
     protected getDatamodelEnumMap(): Dictionary<DMMF.DatamodelEnum>;
     protected getEnumMap(): Dictionary<DMMF.SchemaEnum>;
     protected getModelMap(): Dictionary<DMMF.Model>;
+    protected getTypeMap(): Dictionary<DMMF.Model>;
+    protected getTypeModelMap(): Dictionary<DMMF.Model>;
     protected getMergedOutputTypeMap(): Dictionary<DMMF.OutputType>;
     protected getInputTypeMap(): Dictionary<DMMF.InputType>;
     protected getMappingsMap(): Dictionary<DMMF.ModelMapping>;
@@ -929,8 +936,8 @@ declare type InstanceRejectOnNotFound = RejectOnNotFound | Record<string, Reject
 
 declare interface InternalDatasource {
     name: string;
-    activeProvider: ConnectorType_2;
-    provider: ConnectorType_2;
+    activeProvider: ConnectorType;
+    provider: ConnectorType;
     url: EnvValue_2;
     config: any;
 }
@@ -946,9 +953,10 @@ declare type InternalRequestParams = {
     callsite?: string;
     /** Headers metadata that will be passed to the Engine */
     headers?: Record<string, string>;
-    transactionId?: number;
+    transactionId?: string | number;
     unpacker?: Unpacker;
     otelCtx?: Context;
+    lock?: PromiseLike<void>;
 } & QueryMiddlewareParams;
 
 declare type InvalidArgError = InvalidArgNameError | MissingArgError | InvalidArgTypeError | AtLeastOneError | AtMostOneError | InvalidNullArgError;
@@ -1073,23 +1081,6 @@ declare type Options = {
     timeout?: number;
 };
 
-declare class PrismaClientFetcher {
-    prisma: any;
-    debug: boolean;
-    hooks: any;
-    dataloader: DataLoader<{
-        document: Document;
-        runInTransaction?: boolean;
-        transactionId?: number;
-        headers?: Record<string, string>;
-    }>;
-    constructor(prisma: any, enableDebug?: boolean, hooks?: any);
-    get [Symbol.toStringTag](): string;
-    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, showColors, engineHook, args, headers, transactionId, unpacker, }: RequestParams): Promise<any>;
-    sanitizeMessage(message: any): any;
-    unpack(document: Document, data: any, path: string[], rootField: string, unpacker?: Unpacker): any;
-}
-
 export declare class PrismaClientInitializationError extends Error {
     clientVersion: string;
     errorCode?: string;
@@ -1201,6 +1192,24 @@ export declare type RawValue = Value | Sql;
 
 declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
 
+declare type Request_2 = {
+    document: Document;
+    runInTransaction?: boolean;
+    transactionId?: string | number;
+    headers?: Record<string, string>;
+};
+
+declare class RequestHandler {
+    client: Client_2;
+    hooks: any;
+    dataloader: DataLoader<Request_2>;
+    constructor(client: Client_2, hooks?: any);
+    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, showColors, engineHook, args, headers, transactionId, unpacker, }: RequestParams): Promise<any>;
+    sanitizeMessage(message: any): any;
+    unpack(document: any, data: any, path: any, rootField: any, unpacker?: Unpacker): any;
+    get [Symbol.toStringTag](): string;
+}
+
 declare type RequestParams = {
     document: Document;
     dataPath: string[];
@@ -1215,7 +1224,7 @@ declare type RequestParams = {
     engineHook?: EngineMiddleware;
     args: any;
     headers?: Record<string, string>;
-    transactionId?: number;
+    transactionId?: string | number;
     unpacker?: Unpacker;
 };
 
@@ -1261,6 +1270,8 @@ declare namespace Transaction {
 }
 
 export declare function transformDocument(document: Document): Document;
+
+declare const TX_ID: unique symbol;
 
 /**
  * Unpacks the result of a data object and maps DateTime fields to instances of `Date` inplace

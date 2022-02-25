@@ -23,7 +23,7 @@ var __toModule2 = (module2) => {
   return __reExport(__markAsModule2(__defProp2(module2 != null ? __create2(__getProtoOf2(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
 };
 
-// runtime/esm/index.mjs
+// esm/runtime/index.mjs
 __export2(exports, {
   DMMF: () => DMMF,
   DMMFClass: () => DMMFHelper,
@@ -47,21 +47,21 @@ __export2(exports, {
   unpack: () => unpack,
   warnEnvConflicts: () => warnEnvConflicts
 });
+var import_child_process = __toModule2(require("child_process"));
 var import_events = __toModule2(require("events"));
 var import_fs = __toModule2(require("fs"));
-var import_path2 = __toModule2(require("path"));
-var import_fs2 = __toModule2(require("fs"));
-var import_crypto = __toModule2(require("crypto"));
-var import_child_process = __toModule2(require("child_process"));
-var import_events2 = __toModule2(require("events"));
-var import_fs3 = __toModule2(require("fs"));
 var import_net = __toModule2(require("net"));
-var import_path3 = __toModule2(require("path"));
+var import_path2 = __toModule2(require("path"));
 var import_url = __toModule2(require("url"));
 var import_util = __toModule2(require("util"));
+var import_crypto = __toModule2(require("crypto"));
+var import_fs2 = __toModule2(require("fs"));
 var import_stream = __toModule2(require("stream"));
 var import_util2 = __toModule2(require("util"));
+var import_events2 = __toModule2(require("events"));
 var import_events3 = __toModule2(require("events"));
+var import_fs3 = __toModule2(require("fs"));
+var import_path3 = __toModule2(require("path"));
 var import_fs4 = __toModule2(require("fs"));
 var import_path4 = __toModule2(require("path"));
 var import_async_hooks = __toModule2(require("async_hooks"));
@@ -97,521 +97,463 @@ var __reExport2 = /* @__PURE__ */ __name((target, module2, desc) => {
 var __toModule22 = /* @__PURE__ */ __name((module2) => {
   return __reExport2(__markAsModule22(__defProp22(module2 != null ? __create22(__getProtoOf22(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
 }, "__toModule2");
-var require_windows2 = __commonJS2({
-  "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/windows.js"(exports2, module2) {
-    module2.exports = isexe;
-    isexe.sync = sync;
-    var fs7 = require("fs");
-    function checkPathExt(path6, options2) {
-      var pathext = options2.pathExt !== void 0 ? options2.pathExt : process.env.PATHEXT;
-      if (!pathext) {
-        return true;
-      }
-      pathext = pathext.split(";");
-      if (pathext.indexOf("") !== -1) {
-        return true;
-      }
-      for (var i = 0; i < pathext.length; i++) {
-        var p = pathext[i].toLowerCase();
-        if (p && path6.substr(-p.length).toLowerCase() === p) {
-          return true;
+var require_lz_string = __commonJS2({
+  "../../node_modules/.pnpm/lz-string@1.4.4/node_modules/lz-string/libs/lz-string.js"(exports2, module2) {
+    var LZString = function() {
+      var f = String.fromCharCode;
+      var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+      var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+      var baseReverseDic = {};
+      function getBaseValue(alphabet, character) {
+        if (!baseReverseDic[alphabet]) {
+          baseReverseDic[alphabet] = {};
+          for (var i = 0; i < alphabet.length; i++) {
+            baseReverseDic[alphabet][alphabet.charAt(i)] = i;
+          }
         }
+        return baseReverseDic[alphabet][character];
       }
-      return false;
-    }
-    __name(checkPathExt, "checkPathExt");
-    __name2(checkPathExt, "checkPathExt");
-    function checkStat(stat, path6, options2) {
-      if (!stat.isSymbolicLink() && !stat.isFile()) {
-        return false;
-      }
-      return checkPathExt(path6, options2);
-    }
-    __name(checkStat, "checkStat");
-    __name2(checkStat, "checkStat");
-    function isexe(path6, options2, cb) {
-      fs7.stat(path6, function(er, stat) {
-        cb(er, er ? false : checkStat(stat, path6, options2));
-      });
-    }
-    __name(isexe, "isexe");
-    __name2(isexe, "isexe");
-    function sync(path6, options2) {
-      return checkStat(fs7.statSync(path6), path6, options2);
-    }
-    __name(sync, "sync");
-    __name2(sync, "sync");
-  }
-});
-var require_mode2 = __commonJS2({
-  "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/mode.js"(exports2, module2) {
-    module2.exports = isexe;
-    isexe.sync = sync;
-    var fs7 = require("fs");
-    function isexe(path6, options2, cb) {
-      fs7.stat(path6, function(er, stat) {
-        cb(er, er ? false : checkStat(stat, options2));
-      });
-    }
-    __name(isexe, "isexe");
-    __name2(isexe, "isexe");
-    function sync(path6, options2) {
-      return checkStat(fs7.statSync(path6), options2);
-    }
-    __name(sync, "sync");
-    __name2(sync, "sync");
-    function checkStat(stat, options2) {
-      return stat.isFile() && checkMode(stat, options2);
-    }
-    __name(checkStat, "checkStat");
-    __name2(checkStat, "checkStat");
-    function checkMode(stat, options2) {
-      var mod2 = stat.mode;
-      var uid = stat.uid;
-      var gid = stat.gid;
-      var myUid = options2.uid !== void 0 ? options2.uid : process.getuid && process.getuid();
-      var myGid = options2.gid !== void 0 ? options2.gid : process.getgid && process.getgid();
-      var u = parseInt("100", 8);
-      var g = parseInt("010", 8);
-      var o = parseInt("001", 8);
-      var ug = u | g;
-      var ret = mod2 & o || mod2 & g && gid === myGid || mod2 & u && uid === myUid || mod2 & ug && myUid === 0;
-      return ret;
-    }
-    __name(checkMode, "checkMode");
-    __name2(checkMode, "checkMode");
-  }
-});
-var require_isexe2 = __commonJS2({
-  "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/index.js"(exports2, module2) {
-    var fs7 = require("fs");
-    var core;
-    if (process.platform === "win32" || global.TESTING_WINDOWS) {
-      core = require_windows2();
-    } else {
-      core = require_mode2();
-    }
-    module2.exports = isexe;
-    isexe.sync = sync;
-    function isexe(path6, options2, cb) {
-      if (typeof options2 === "function") {
-        cb = options2;
-        options2 = {};
-      }
-      if (!cb) {
-        if (typeof Promise !== "function") {
-          throw new TypeError("callback not provided");
-        }
-        return new Promise(function(resolve2, reject2) {
-          isexe(path6, options2 || {}, function(er, is) {
-            if (er) {
-              reject2(er);
-            } else {
-              resolve2(is);
-            }
+      __name(getBaseValue, "getBaseValue");
+      __name2(getBaseValue, "getBaseValue");
+      var LZString2 = {
+        compressToBase64: function(input) {
+          if (input == null)
+            return "";
+          var res = LZString2._compress(input, 6, function(a) {
+            return keyStrBase64.charAt(a);
           });
-        });
-      }
-      core(path6, options2 || {}, function(er, is) {
-        if (er) {
-          if (er.code === "EACCES" || options2 && options2.ignoreErrors) {
-            er = null;
-            is = false;
+          switch (res.length % 4) {
+            default:
+            case 0:
+              return res;
+            case 1:
+              return res + "===";
+            case 2:
+              return res + "==";
+            case 3:
+              return res + "=";
           }
-        }
-        cb(er, is);
-      });
-    }
-    __name(isexe, "isexe");
-    __name2(isexe, "isexe");
-    function sync(path6, options2) {
-      try {
-        return core.sync(path6, options2 || {});
-      } catch (er) {
-        if (options2 && options2.ignoreErrors || er.code === "EACCES") {
-          return false;
-        } else {
-          throw er;
-        }
-      }
-    }
-    __name(sync, "sync");
-    __name2(sync, "sync");
-  }
-});
-var require_which2 = __commonJS2({
-  "../../node_modules/.pnpm/which@2.0.2/node_modules/which/which.js"(exports2, module2) {
-    var isWindows = process.platform === "win32" || process.env.OSTYPE === "cygwin" || process.env.OSTYPE === "msys";
-    var path6 = require("path");
-    var COLON = isWindows ? ";" : ":";
-    var isexe = require_isexe2();
-    var getNotFoundError = /* @__PURE__ */ __name2((cmd) => Object.assign(new Error(`not found: ${cmd}`), { code: "ENOENT" }), "getNotFoundError");
-    var getPathInfo = /* @__PURE__ */ __name2((cmd, opt) => {
-      const colon = opt.colon || COLON;
-      const pathEnv = cmd.match(/\//) || isWindows && cmd.match(/\\/) ? [""] : [
-        ...isWindows ? [process.cwd()] : [],
-        ...(opt.path || process.env.PATH || "").split(colon)
-      ];
-      const pathExtExe = isWindows ? opt.pathExt || process.env.PATHEXT || ".EXE;.CMD;.BAT;.COM" : "";
-      const pathExt = isWindows ? pathExtExe.split(colon) : [""];
-      if (isWindows) {
-        if (cmd.indexOf(".") !== -1 && pathExt[0] !== "")
-          pathExt.unshift("");
-      }
-      return {
-        pathEnv,
-        pathExt,
-        pathExtExe
-      };
-    }, "getPathInfo");
-    var which = /* @__PURE__ */ __name2((cmd, opt, cb) => {
-      if (typeof opt === "function") {
-        cb = opt;
-        opt = {};
-      }
-      if (!opt)
-        opt = {};
-      const { pathEnv, pathExt, pathExtExe } = getPathInfo(cmd, opt);
-      const found = [];
-      const step = /* @__PURE__ */ __name2((i) => new Promise((resolve2, reject2) => {
-        if (i === pathEnv.length)
-          return opt.all && found.length ? resolve2(found) : reject2(getNotFoundError(cmd));
-        const ppRaw = pathEnv[i];
-        const pathPart = /^".*"$/.test(ppRaw) ? ppRaw.slice(1, -1) : ppRaw;
-        const pCmd = path6.join(pathPart, cmd);
-        const p = !pathPart && /^\.[\\\/]/.test(cmd) ? cmd.slice(0, 2) + pCmd : pCmd;
-        resolve2(subStep(p, i, 0));
-      }), "step");
-      const subStep = /* @__PURE__ */ __name2((p, i, ii) => new Promise((resolve2, reject2) => {
-        if (ii === pathExt.length)
-          return resolve2(step(i + 1));
-        const ext = pathExt[ii];
-        isexe(p + ext, { pathExt: pathExtExe }, (er, is) => {
-          if (!er && is) {
-            if (opt.all)
-              found.push(p + ext);
-            else
-              return resolve2(p + ext);
+        },
+        decompressFromBase64: function(input) {
+          if (input == null)
+            return "";
+          if (input == "")
+            return null;
+          return LZString2._decompress(input.length, 32, function(index) {
+            return getBaseValue(keyStrBase64, input.charAt(index));
+          });
+        },
+        compressToUTF16: function(input) {
+          if (input == null)
+            return "";
+          return LZString2._compress(input, 15, function(a) {
+            return f(a + 32);
+          }) + " ";
+        },
+        decompressFromUTF16: function(compressed) {
+          if (compressed == null)
+            return "";
+          if (compressed == "")
+            return null;
+          return LZString2._decompress(compressed.length, 16384, function(index) {
+            return compressed.charCodeAt(index) - 32;
+          });
+        },
+        compressToUint8Array: function(uncompressed) {
+          var compressed = LZString2.compress(uncompressed);
+          var buf = new Uint8Array(compressed.length * 2);
+          for (var i = 0, TotalLen = compressed.length; i < TotalLen; i++) {
+            var current_value = compressed.charCodeAt(i);
+            buf[i * 2] = current_value >>> 8;
+            buf[i * 2 + 1] = current_value % 256;
           }
-          return resolve2(subStep(p, i, ii + 1));
-        });
-      }), "subStep");
-      return cb ? step(0).then((res) => cb(null, res), cb) : step(0);
-    }, "which");
-    var whichSync = /* @__PURE__ */ __name2((cmd, opt) => {
-      opt = opt || {};
-      const { pathEnv, pathExt, pathExtExe } = getPathInfo(cmd, opt);
-      const found = [];
-      for (let i = 0; i < pathEnv.length; i++) {
-        const ppRaw = pathEnv[i];
-        const pathPart = /^".*"$/.test(ppRaw) ? ppRaw.slice(1, -1) : ppRaw;
-        const pCmd = path6.join(pathPart, cmd);
-        const p = !pathPart && /^\.[\\\/]/.test(cmd) ? cmd.slice(0, 2) + pCmd : pCmd;
-        for (let j = 0; j < pathExt.length; j++) {
-          const cur = p + pathExt[j];
-          try {
-            const is = isexe.sync(cur, { pathExt: pathExtExe });
-            if (is) {
-              if (opt.all)
-                found.push(cur);
-              else
-                return cur;
+          return buf;
+        },
+        decompressFromUint8Array: function(compressed) {
+          if (compressed === null || compressed === void 0) {
+            return LZString2.decompress(compressed);
+          } else {
+            var buf = new Array(compressed.length / 2);
+            for (var i = 0, TotalLen = buf.length; i < TotalLen; i++) {
+              buf[i] = compressed[i * 2] * 256 + compressed[i * 2 + 1];
             }
-          } catch (ex) {
+            var result = [];
+            buf.forEach(function(c) {
+              result.push(f(c));
+            });
+            return LZString2.decompress(result.join(""));
+          }
+        },
+        compressToEncodedURIComponent: function(input) {
+          if (input == null)
+            return "";
+          return LZString2._compress(input, 6, function(a) {
+            return keyStrUriSafe.charAt(a);
+          });
+        },
+        decompressFromEncodedURIComponent: function(input) {
+          if (input == null)
+            return "";
+          if (input == "")
+            return null;
+          input = input.replace(/ /g, "+");
+          return LZString2._decompress(input.length, 32, function(index) {
+            return getBaseValue(keyStrUriSafe, input.charAt(index));
+          });
+        },
+        compress: function(uncompressed) {
+          return LZString2._compress(uncompressed, 16, function(a) {
+            return f(a);
+          });
+        },
+        _compress: function(uncompressed, bitsPerChar, getCharFromInt) {
+          if (uncompressed == null)
+            return "";
+          var i, value, context_dictionary = {}, context_dictionaryToCreate = {}, context_c = "", context_wc = "", context_w = "", context_enlargeIn = 2, context_dictSize = 3, context_numBits = 2, context_data = [], context_data_val = 0, context_data_position = 0, ii;
+          for (ii = 0; ii < uncompressed.length; ii += 1) {
+            context_c = uncompressed.charAt(ii);
+            if (!Object.prototype.hasOwnProperty.call(context_dictionary, context_c)) {
+              context_dictionary[context_c] = context_dictSize++;
+              context_dictionaryToCreate[context_c] = true;
+            }
+            context_wc = context_w + context_c;
+            if (Object.prototype.hasOwnProperty.call(context_dictionary, context_wc)) {
+              context_w = context_wc;
+            } else {
+              if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
+                if (context_w.charCodeAt(0) < 256) {
+                  for (i = 0; i < context_numBits; i++) {
+                    context_data_val = context_data_val << 1;
+                    if (context_data_position == bitsPerChar - 1) {
+                      context_data_position = 0;
+                      context_data.push(getCharFromInt(context_data_val));
+                      context_data_val = 0;
+                    } else {
+                      context_data_position++;
+                    }
+                  }
+                  value = context_w.charCodeAt(0);
+                  for (i = 0; i < 8; i++) {
+                    context_data_val = context_data_val << 1 | value & 1;
+                    if (context_data_position == bitsPerChar - 1) {
+                      context_data_position = 0;
+                      context_data.push(getCharFromInt(context_data_val));
+                      context_data_val = 0;
+                    } else {
+                      context_data_position++;
+                    }
+                    value = value >> 1;
+                  }
+                } else {
+                  value = 1;
+                  for (i = 0; i < context_numBits; i++) {
+                    context_data_val = context_data_val << 1 | value;
+                    if (context_data_position == bitsPerChar - 1) {
+                      context_data_position = 0;
+                      context_data.push(getCharFromInt(context_data_val));
+                      context_data_val = 0;
+                    } else {
+                      context_data_position++;
+                    }
+                    value = 0;
+                  }
+                  value = context_w.charCodeAt(0);
+                  for (i = 0; i < 16; i++) {
+                    context_data_val = context_data_val << 1 | value & 1;
+                    if (context_data_position == bitsPerChar - 1) {
+                      context_data_position = 0;
+                      context_data.push(getCharFromInt(context_data_val));
+                      context_data_val = 0;
+                    } else {
+                      context_data_position++;
+                    }
+                    value = value >> 1;
+                  }
+                }
+                context_enlargeIn--;
+                if (context_enlargeIn == 0) {
+                  context_enlargeIn = Math.pow(2, context_numBits);
+                  context_numBits++;
+                }
+                delete context_dictionaryToCreate[context_w];
+              } else {
+                value = context_dictionary[context_w];
+                for (i = 0; i < context_numBits; i++) {
+                  context_data_val = context_data_val << 1 | value & 1;
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                  value = value >> 1;
+                }
+              }
+              context_enlargeIn--;
+              if (context_enlargeIn == 0) {
+                context_enlargeIn = Math.pow(2, context_numBits);
+                context_numBits++;
+              }
+              context_dictionary[context_wc] = context_dictSize++;
+              context_w = String(context_c);
+            }
+          }
+          if (context_w !== "") {
+            if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
+              if (context_w.charCodeAt(0) < 256) {
+                for (i = 0; i < context_numBits; i++) {
+                  context_data_val = context_data_val << 1;
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                }
+                value = context_w.charCodeAt(0);
+                for (i = 0; i < 8; i++) {
+                  context_data_val = context_data_val << 1 | value & 1;
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                  value = value >> 1;
+                }
+              } else {
+                value = 1;
+                for (i = 0; i < context_numBits; i++) {
+                  context_data_val = context_data_val << 1 | value;
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                  value = 0;
+                }
+                value = context_w.charCodeAt(0);
+                for (i = 0; i < 16; i++) {
+                  context_data_val = context_data_val << 1 | value & 1;
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                  value = value >> 1;
+                }
+              }
+              context_enlargeIn--;
+              if (context_enlargeIn == 0) {
+                context_enlargeIn = Math.pow(2, context_numBits);
+                context_numBits++;
+              }
+              delete context_dictionaryToCreate[context_w];
+            } else {
+              value = context_dictionary[context_w];
+              for (i = 0; i < context_numBits; i++) {
+                context_data_val = context_data_val << 1 | value & 1;
+                if (context_data_position == bitsPerChar - 1) {
+                  context_data_position = 0;
+                  context_data.push(getCharFromInt(context_data_val));
+                  context_data_val = 0;
+                } else {
+                  context_data_position++;
+                }
+                value = value >> 1;
+              }
+            }
+            context_enlargeIn--;
+            if (context_enlargeIn == 0) {
+              context_enlargeIn = Math.pow(2, context_numBits);
+              context_numBits++;
+            }
+          }
+          value = 2;
+          for (i = 0; i < context_numBits; i++) {
+            context_data_val = context_data_val << 1 | value & 1;
+            if (context_data_position == bitsPerChar - 1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+          while (true) {
+            context_data_val = context_data_val << 1;
+            if (context_data_position == bitsPerChar - 1) {
+              context_data.push(getCharFromInt(context_data_val));
+              break;
+            } else
+              context_data_position++;
+          }
+          return context_data.join("");
+        },
+        decompress: function(compressed) {
+          if (compressed == null)
+            return "";
+          if (compressed == "")
+            return null;
+          return LZString2._decompress(compressed.length, 32768, function(index) {
+            return compressed.charCodeAt(index);
+          });
+        },
+        _decompress: function(length, resetValue, getNextValue) {
+          var dictionary = [], next, enlargeIn = 4, dictSize = 4, numBits = 3, entry = "", result = [], i, w, bits, resb, maxpower, power, c, data = { val: getNextValue(0), position: resetValue, index: 1 };
+          for (i = 0; i < 3; i += 1) {
+            dictionary[i] = i;
+          }
+          bits = 0;
+          maxpower = Math.pow(2, 2);
+          power = 1;
+          while (power != maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb > 0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+          switch (next = bits) {
+            case 0:
+              bits = 0;
+              maxpower = Math.pow(2, 8);
+              power = 1;
+              while (power != maxpower) {
+                resb = data.val & data.position;
+                data.position >>= 1;
+                if (data.position == 0) {
+                  data.position = resetValue;
+                  data.val = getNextValue(data.index++);
+                }
+                bits |= (resb > 0 ? 1 : 0) * power;
+                power <<= 1;
+              }
+              c = f(bits);
+              break;
+            case 1:
+              bits = 0;
+              maxpower = Math.pow(2, 16);
+              power = 1;
+              while (power != maxpower) {
+                resb = data.val & data.position;
+                data.position >>= 1;
+                if (data.position == 0) {
+                  data.position = resetValue;
+                  data.val = getNextValue(data.index++);
+                }
+                bits |= (resb > 0 ? 1 : 0) * power;
+                power <<= 1;
+              }
+              c = f(bits);
+              break;
+            case 2:
+              return "";
+          }
+          dictionary[3] = c;
+          w = c;
+          result.push(c);
+          while (true) {
+            if (data.index > length) {
+              return "";
+            }
+            bits = 0;
+            maxpower = Math.pow(2, numBits);
+            power = 1;
+            while (power != maxpower) {
+              resb = data.val & data.position;
+              data.position >>= 1;
+              if (data.position == 0) {
+                data.position = resetValue;
+                data.val = getNextValue(data.index++);
+              }
+              bits |= (resb > 0 ? 1 : 0) * power;
+              power <<= 1;
+            }
+            switch (c = bits) {
+              case 0:
+                bits = 0;
+                maxpower = Math.pow(2, 8);
+                power = 1;
+                while (power != maxpower) {
+                  resb = data.val & data.position;
+                  data.position >>= 1;
+                  if (data.position == 0) {
+                    data.position = resetValue;
+                    data.val = getNextValue(data.index++);
+                  }
+                  bits |= (resb > 0 ? 1 : 0) * power;
+                  power <<= 1;
+                }
+                dictionary[dictSize++] = f(bits);
+                c = dictSize - 1;
+                enlargeIn--;
+                break;
+              case 1:
+                bits = 0;
+                maxpower = Math.pow(2, 16);
+                power = 1;
+                while (power != maxpower) {
+                  resb = data.val & data.position;
+                  data.position >>= 1;
+                  if (data.position == 0) {
+                    data.position = resetValue;
+                    data.val = getNextValue(data.index++);
+                  }
+                  bits |= (resb > 0 ? 1 : 0) * power;
+                  power <<= 1;
+                }
+                dictionary[dictSize++] = f(bits);
+                c = dictSize - 1;
+                enlargeIn--;
+                break;
+              case 2:
+                return result.join("");
+            }
+            if (enlargeIn == 0) {
+              enlargeIn = Math.pow(2, numBits);
+              numBits++;
+            }
+            if (dictionary[c]) {
+              entry = dictionary[c];
+            } else {
+              if (c === dictSize) {
+                entry = w + w.charAt(0);
+              } else {
+                return null;
+              }
+            }
+            result.push(entry);
+            dictionary[dictSize++] = w + entry.charAt(0);
+            enlargeIn--;
+            w = entry;
+            if (enlargeIn == 0) {
+              enlargeIn = Math.pow(2, numBits);
+              numBits++;
+            }
           }
         }
-      }
-      if (opt.all && found.length)
-        return found;
-      if (opt.nothrow)
-        return null;
-      throw getNotFoundError(cmd);
-    }, "whichSync");
-    module2.exports = which;
-    which.sync = whichSync;
-  }
-});
-var require_path_key2 = __commonJS2({
-  "../../node_modules/.pnpm/path-key@3.1.1/node_modules/path-key/index.js"(exports2, module2) {
-    "use strict";
-    var pathKey = /* @__PURE__ */ __name2((options2 = {}) => {
-      const environment = options2.env || process.env;
-      const platform2 = options2.platform || process.platform;
-      if (platform2 !== "win32") {
-        return "PATH";
-      }
-      return Object.keys(environment).reverse().find((key) => key.toUpperCase() === "PATH") || "Path";
-    }, "pathKey");
-    module2.exports = pathKey;
-    module2.exports.default = pathKey;
-  }
-});
-var require_resolveCommand2 = __commonJS2({
-  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/util/resolveCommand.js"(exports2, module2) {
-    "use strict";
-    var path6 = require("path");
-    var which = require_which2();
-    var getPathKey = require_path_key2();
-    function resolveCommandAttempt(parsed, withoutPathExt) {
-      const env = parsed.options.env || process.env;
-      const cwd = process.cwd();
-      const hasCustomCwd = parsed.options.cwd != null;
-      const shouldSwitchCwd = hasCustomCwd && process.chdir !== void 0 && !process.chdir.disabled;
-      if (shouldSwitchCwd) {
-        try {
-          process.chdir(parsed.options.cwd);
-        } catch (err) {
-        }
-      }
-      let resolved;
-      try {
-        resolved = which.sync(parsed.command, {
-          path: env[getPathKey({ env })],
-          pathExt: withoutPathExt ? path6.delimiter : void 0
-        });
-      } catch (e) {
-      } finally {
-        if (shouldSwitchCwd) {
-          process.chdir(cwd);
-        }
-      }
-      if (resolved) {
-        resolved = path6.resolve(hasCustomCwd ? parsed.options.cwd : "", resolved);
-      }
-      return resolved;
-    }
-    __name(resolveCommandAttempt, "resolveCommandAttempt");
-    __name2(resolveCommandAttempt, "resolveCommandAttempt");
-    function resolveCommand(parsed) {
-      return resolveCommandAttempt(parsed) || resolveCommandAttempt(parsed, true);
-    }
-    __name(resolveCommand, "resolveCommand");
-    __name2(resolveCommand, "resolveCommand");
-    module2.exports = resolveCommand;
-  }
-});
-var require_escape2 = __commonJS2({
-  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/util/escape.js"(exports2, module2) {
-    "use strict";
-    var metaCharsRegExp = /([()\][%!^"`<>&|;, *?])/g;
-    function escapeCommand(arg2) {
-      arg2 = arg2.replace(metaCharsRegExp, "^$1");
-      return arg2;
-    }
-    __name(escapeCommand, "escapeCommand");
-    __name2(escapeCommand, "escapeCommand");
-    function escapeArgument(arg2, doubleEscapeMetaChars) {
-      arg2 = `${arg2}`;
-      arg2 = arg2.replace(/(\\*)"/g, '$1$1\\"');
-      arg2 = arg2.replace(/(\\*)$/, "$1$1");
-      arg2 = `"${arg2}"`;
-      arg2 = arg2.replace(metaCharsRegExp, "^$1");
-      if (doubleEscapeMetaChars) {
-        arg2 = arg2.replace(metaCharsRegExp, "^$1");
-      }
-      return arg2;
-    }
-    __name(escapeArgument, "escapeArgument");
-    __name2(escapeArgument, "escapeArgument");
-    module2.exports.command = escapeCommand;
-    module2.exports.argument = escapeArgument;
-  }
-});
-var require_shebang_regex2 = __commonJS2({
-  "../../node_modules/.pnpm/shebang-regex@3.0.0/node_modules/shebang-regex/index.js"(exports2, module2) {
-    "use strict";
-    module2.exports = /^#!(.*)/;
-  }
-});
-var require_shebang_command2 = __commonJS2({
-  "../../node_modules/.pnpm/shebang-command@2.0.0/node_modules/shebang-command/index.js"(exports2, module2) {
-    "use strict";
-    var shebangRegex = require_shebang_regex2();
-    module2.exports = (string = "") => {
-      const match = string.match(shebangRegex);
-      if (!match) {
-        return null;
-      }
-      const [path6, argument] = match[0].replace(/#! ?/, "").split(" ");
-      const binary = path6.split("/").pop();
-      if (binary === "env") {
-        return argument;
-      }
-      return argument ? `${binary} ${argument}` : binary;
-    };
-  }
-});
-var require_readShebang2 = __commonJS2({
-  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/util/readShebang.js"(exports2, module2) {
-    "use strict";
-    var fs7 = require("fs");
-    var shebangCommand = require_shebang_command2();
-    function readShebang(command) {
-      const size = 150;
-      const buffer = Buffer.alloc(size);
-      let fd;
-      try {
-        fd = fs7.openSync(command, "r");
-        fs7.readSync(fd, buffer, 0, size, 0);
-        fs7.closeSync(fd);
-      } catch (e) {
-      }
-      return shebangCommand(buffer.toString());
-    }
-    __name(readShebang, "readShebang");
-    __name2(readShebang, "readShebang");
-    module2.exports = readShebang;
-  }
-});
-var require_parse5 = __commonJS2({
-  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/parse.js"(exports2, module2) {
-    "use strict";
-    var path6 = require("path");
-    var resolveCommand = require_resolveCommand2();
-    var escape = require_escape2();
-    var readShebang = require_readShebang2();
-    var isWin = process.platform === "win32";
-    var isExecutableRegExp = /\.(?:com|exe)$/i;
-    var isCmdShimRegExp = /node_modules[\\/].bin[\\/][^\\/]+\.cmd$/i;
-    function detectShebang(parsed) {
-      parsed.file = resolveCommand(parsed);
-      const shebang = parsed.file && readShebang(parsed.file);
-      if (shebang) {
-        parsed.args.unshift(parsed.file);
-        parsed.command = shebang;
-        return resolveCommand(parsed);
-      }
-      return parsed.file;
-    }
-    __name(detectShebang, "detectShebang");
-    __name2(detectShebang, "detectShebang");
-    function parseNonShell(parsed) {
-      if (!isWin) {
-        return parsed;
-      }
-      const commandFile = detectShebang(parsed);
-      const needsShell = !isExecutableRegExp.test(commandFile);
-      if (parsed.options.forceShell || needsShell) {
-        const needsDoubleEscapeMetaChars = isCmdShimRegExp.test(commandFile);
-        parsed.command = path6.normalize(parsed.command);
-        parsed.command = escape.command(parsed.command);
-        parsed.args = parsed.args.map((arg2) => escape.argument(arg2, needsDoubleEscapeMetaChars));
-        const shellCommand = [parsed.command].concat(parsed.args).join(" ");
-        parsed.args = ["/d", "/s", "/c", `"${shellCommand}"`];
-        parsed.command = process.env.comspec || "cmd.exe";
-        parsed.options.windowsVerbatimArguments = true;
-      }
-      return parsed;
-    }
-    __name(parseNonShell, "parseNonShell");
-    __name2(parseNonShell, "parseNonShell");
-    function parse2(command, args, options2) {
-      if (args && !Array.isArray(args)) {
-        options2 = args;
-        args = null;
-      }
-      args = args ? args.slice(0) : [];
-      options2 = Object.assign({}, options2);
-      const parsed = {
-        command,
-        args,
-        options: options2,
-        file: void 0,
-        original: {
-          command,
-          args
-        }
       };
-      return options2.shell ? parsed : parseNonShell(parsed);
-    }
-    __name(parse2, "parse2");
-    __name2(parse2, "parse");
-    module2.exports = parse2;
-  }
-});
-var require_enoent2 = __commonJS2({
-  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/enoent.js"(exports2, module2) {
-    "use strict";
-    var isWin = process.platform === "win32";
-    function notFoundError(original, syscall) {
-      return Object.assign(new Error(`${syscall} ${original.command} ENOENT`), {
-        code: "ENOENT",
-        errno: "ENOENT",
-        syscall: `${syscall} ${original.command}`,
-        path: original.command,
-        spawnargs: original.args
+      return LZString2;
+    }();
+    if (typeof define === "function" && false) {
+      define(function() {
+        return LZString;
       });
+    } else if (typeof module2 !== "undefined" && module2 != null) {
+      module2.exports = LZString;
     }
-    __name(notFoundError, "notFoundError");
-    __name2(notFoundError, "notFoundError");
-    function hookChildProcess(cp, parsed) {
-      if (!isWin) {
-        return;
-      }
-      const originalEmit = cp.emit;
-      cp.emit = function(name, arg1) {
-        if (name === "exit") {
-          const err = verifyENOENT(arg1, parsed, "spawn");
-          if (err) {
-            return originalEmit.call(cp, "error", err);
-          }
-        }
-        return originalEmit.apply(cp, arguments);
-      };
-    }
-    __name(hookChildProcess, "hookChildProcess");
-    __name2(hookChildProcess, "hookChildProcess");
-    function verifyENOENT(status, parsed) {
-      if (isWin && status === 1 && !parsed.file) {
-        return notFoundError(parsed.original, "spawn");
-      }
-      return null;
-    }
-    __name(verifyENOENT, "verifyENOENT");
-    __name2(verifyENOENT, "verifyENOENT");
-    function verifyENOENTSync(status, parsed) {
-      if (isWin && status === 1 && !parsed.file) {
-        return notFoundError(parsed.original, "spawnSync");
-      }
-      return null;
-    }
-    __name(verifyENOENTSync, "verifyENOENTSync");
-    __name2(verifyENOENTSync, "verifyENOENTSync");
-    module2.exports = {
-      hookChildProcess,
-      verifyENOENT,
-      verifyENOENTSync,
-      notFoundError
-    };
-  }
-});
-var require_cross_spawn2 = __commonJS2({
-  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/index.js"(exports2, module2) {
-    "use strict";
-    var cp = require("child_process");
-    var parse2 = require_parse5();
-    var enoent = require_enoent2();
-    function spawn2(command, args, options2) {
-      const parsed = parse2(command, args, options2);
-      const spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
-      enoent.hookChildProcess(spawned, parsed);
-      return spawned;
-    }
-    __name(spawn2, "spawn2");
-    __name2(spawn2, "spawn");
-    function spawnSync(command, args, options2) {
-      const parsed = parse2(command, args, options2);
-      const result = cp.spawnSync(parsed.command, parsed.args, parsed.options);
-      result.error = result.error || enoent.verifyENOENTSync(result.status, parsed);
-      return result;
-    }
-    __name(spawnSync, "spawnSync");
-    __name2(spawnSync, "spawnSync");
-    module2.exports = spawn2;
-    module2.exports.spawn = spawn2;
-    module2.exports.sync = spawnSync;
-    module2.exports._parse = parse2;
-    module2.exports._enoent = enoent;
   }
 });
 var require_color_name2 = __commonJS2({
@@ -2166,6 +2108,118 @@ var require_source2 = __commonJS2({
     module2.exports = chalk11;
   }
 });
+var require_indent_string2 = __commonJS2({
+  "../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js"(exports2, module2) {
+    "use strict";
+    module2.exports = (string, count2 = 1, options2) => {
+      options2 = {
+        indent: " ",
+        includeEmptyLines: false,
+        ...options2
+      };
+      if (typeof string !== "string") {
+        throw new TypeError(`Expected \`input\` to be a \`string\`, got \`${typeof string}\``);
+      }
+      if (typeof count2 !== "number") {
+        throw new TypeError(`Expected \`count\` to be a \`number\`, got \`${typeof count2}\``);
+      }
+      if (typeof options2.indent !== "string") {
+        throw new TypeError(`Expected \`options.indent\` to be a \`string\`, got \`${typeof options2.indent}\``);
+      }
+      if (count2 === 0) {
+        return string;
+      }
+      const regex = options2.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
+      return string.replace(regex, options2.indent.repeat(count2));
+    };
+  }
+});
+var require_js_levenshtein = __commonJS2({
+  "../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js"(exports2, module2) {
+    "use strict";
+    module2.exports = function() {
+      function _min(d0, d1, d2, bx, ay) {
+        return d0 < d1 || d2 < d1 ? d0 > d2 ? d2 + 1 : d0 + 1 : bx === ay ? d1 : d1 + 1;
+      }
+      __name(_min, "_min");
+      __name2(_min, "_min");
+      return function(a, b) {
+        if (a === b) {
+          return 0;
+        }
+        if (a.length > b.length) {
+          var tmp = a;
+          a = b;
+          b = tmp;
+        }
+        var la = a.length;
+        var lb = b.length;
+        while (la > 0 && a.charCodeAt(la - 1) === b.charCodeAt(lb - 1)) {
+          la--;
+          lb--;
+        }
+        var offset = 0;
+        while (offset < la && a.charCodeAt(offset) === b.charCodeAt(offset)) {
+          offset++;
+        }
+        la -= offset;
+        lb -= offset;
+        if (la === 0 || lb < 3) {
+          return lb;
+        }
+        var x = 0;
+        var y;
+        var d0;
+        var d1;
+        var d2;
+        var d3;
+        var dd;
+        var dy;
+        var ay;
+        var bx0;
+        var bx1;
+        var bx2;
+        var bx3;
+        var vector = [];
+        for (y = 0; y < la; y++) {
+          vector.push(y + 1);
+          vector.push(a.charCodeAt(offset + y));
+        }
+        var len = vector.length - 1;
+        for (; x < lb - 3; ) {
+          bx0 = b.charCodeAt(offset + (d0 = x));
+          bx1 = b.charCodeAt(offset + (d1 = x + 1));
+          bx2 = b.charCodeAt(offset + (d2 = x + 2));
+          bx3 = b.charCodeAt(offset + (d3 = x + 3));
+          dd = x += 4;
+          for (y = 0; y < len; y += 2) {
+            dy = vector[y];
+            ay = vector[y + 1];
+            d0 = _min(dy, d0, d1, bx0, ay);
+            d1 = _min(d0, d1, d2, bx1, ay);
+            d2 = _min(d1, d2, d3, bx2, ay);
+            dd = _min(d2, d3, dd, bx3, ay);
+            vector[y] = dd;
+            d3 = d2;
+            d2 = d1;
+            d1 = d0;
+            d0 = dy;
+          }
+        }
+        for (; x < lb; ) {
+          bx0 = b.charCodeAt(offset + (d0 = x));
+          dd = ++x;
+          for (y = 0; y < len; y += 2) {
+            dy = vector[y];
+            vector[y] = dd = _min(dy, d0, dd, bx0, vector[y + 1]);
+            d0 = dy;
+          }
+        }
+        return dd;
+      };
+    }();
+  }
+});
 var require_ms2 = __commonJS2({
   "../../node_modules/.pnpm/ms@2.1.3/node_modules/ms/index.js"(exports2, module2) {
     var s = 1e3;
@@ -2305,8 +2359,8 @@ var require_common6 = __commonJS2({
         let enableOverride = null;
         let namespacesCache;
         let enabledCache;
-        const debug10 = /* @__PURE__ */ __name210((...args) => {
-          const self2 = debug10;
+        const debug9 = /* @__PURE__ */ __name210((...args) => {
+          const self2 = debug9;
           const curr = Number(new Date());
           const ms = curr - (prevTime || curr);
           self2.diff = ms;
@@ -2336,17 +2390,17 @@ var require_common6 = __commonJS2({
           if (logger2 && typeof logger2 === "function") {
             logger2.apply(self2, args);
           }
-          if (debug10.enabled) {
+          if (debug9.enabled) {
             const logFn = self2.log || createDebug.log;
             logFn.apply(self2, args);
           }
         }, "debug");
-        debug10.namespace = namespace;
-        debug10.useColors = createDebug.useColors();
-        debug10.color = createDebug.selectColor(namespace);
-        debug10.extend = extend;
-        debug10.destroy = createDebug.destroy;
-        Object.defineProperty(debug10, "enabled", {
+        debug9.namespace = namespace;
+        debug9.useColors = createDebug.useColors();
+        debug9.color = createDebug.selectColor(namespace);
+        debug9.extend = extend;
+        debug9.destroy = createDebug.destroy;
+        Object.defineProperty(debug9, "enabled", {
           enumerable: true,
           configurable: false,
           get: () => {
@@ -2364,9 +2418,9 @@ var require_common6 = __commonJS2({
           }
         });
         if (typeof createDebug.init === "function") {
-          createDebug.init(debug10);
+          createDebug.init(debug9);
         }
-        return debug10;
+        return debug9;
       }, "createDebug");
       createDebug.debug = createDebug;
       createDebug.default = createDebug;
@@ -2616,11 +2670,11 @@ var require_node3 = __commonJS2({
     __name2(load, "load");
     __name45(load, "load");
     __name210(load, "load");
-    function init(debug10) {
-      debug10.inspectOpts = {};
+    function init(debug9) {
+      debug9.inspectOpts = {};
       const keys2 = Object.keys(exports2.inspectOpts);
       for (let i = 0; i < keys2.length; i++) {
-        debug10.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
+        debug9.inspectOpts[keys2[i]] = exports2.inspectOpts[keys2[i]];
       }
     }
     __name(init, "init");
@@ -2668,8 +2722,8 @@ var require_dist7 = __commonJS2({
       return __reExport22(__markAsModule3(__defProp46(module22 != null ? __create3(__getProtoOf3(module22)) : {}, "default", module22 && module22.__esModule && "default" in module22 ? { get: () => module22.default, enumerable: true } : { value: module22, enumerable: true })), module22);
     }, "__toModule");
     __export3(exports2, {
-      Debug: () => Debug8,
-      default: () => Debug8,
+      Debug: () => Debug7,
+      default: () => Debug7,
       getLogs: () => getLogs2
     });
     var import_node = __toModule3(require_node3());
@@ -2677,23 +2731,23 @@ var require_dist7 = __commonJS2({
     var __name210 = /* @__PURE__ */ __name45((target, value) => __defProp210(target, "name", { value, configurable: true }), "__name");
     var cache = [];
     var MAX_LOGS = 100;
-    function Debug8(namespace) {
-      const debug10 = (0, import_node.default)(namespace, (...args) => {
+    function Debug7(namespace) {
+      const debug9 = (0, import_node.default)(namespace, (...args) => {
         cache.push(args);
         if (cache.length > MAX_LOGS) {
           cache.shift();
         }
       });
-      return debug10;
+      return debug9;
     }
-    __name(Debug8, "Debug8");
-    __name2(Debug8, "Debug");
-    __name45(Debug8, "Debug");
-    __name210(Debug8, "Debug");
-    Debug8.enable = (namespace) => {
+    __name(Debug7, "Debug7");
+    __name2(Debug7, "Debug");
+    __name45(Debug7, "Debug");
+    __name210(Debug7, "Debug");
+    Debug7.enable = (namespace) => {
       import_node.default.enable(namespace);
     };
-    Debug8.enabled = (namespace) => import_node.default.enabled(namespace);
+    Debug7.enabled = (namespace) => import_node.default.enabled(namespace);
     function getLogs2(numChars = 7500) {
       const output = cache.map((c) => c.map((item) => {
         if (typeof item === "string") {
@@ -2712,187 +2766,525 @@ var require_dist7 = __commonJS2({
     __name210(getLogs2, "getLogs");
   }
 });
-var require_indent_string2 = __commonJS2({
-  "../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js"(exports2, module2) {
-    "use strict";
-    module2.exports = (string, count2 = 1, options2) => {
-      options2 = {
-        indent: " ",
-        includeEmptyLines: false,
-        ...options2
-      };
-      if (typeof string !== "string") {
-        throw new TypeError(`Expected \`input\` to be a \`string\`, got \`${typeof string}\``);
+var require_windows2 = __commonJS2({
+  "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/windows.js"(exports2, module2) {
+    module2.exports = isexe;
+    isexe.sync = sync;
+    var fs7 = require("fs");
+    function checkPathExt(path6, options2) {
+      var pathext = options2.pathExt !== void 0 ? options2.pathExt : process.env.PATHEXT;
+      if (!pathext) {
+        return true;
       }
-      if (typeof count2 !== "number") {
-        throw new TypeError(`Expected \`count\` to be a \`number\`, got \`${typeof count2}\``);
+      pathext = pathext.split(";");
+      if (pathext.indexOf("") !== -1) {
+        return true;
       }
-      if (typeof options2.indent !== "string") {
-        throw new TypeError(`Expected \`options.indent\` to be a \`string\`, got \`${typeof options2.indent}\``);
+      for (var i = 0; i < pathext.length; i++) {
+        var p = pathext[i].toLowerCase();
+        if (p && path6.substr(-p.length).toLowerCase() === p) {
+          return true;
+        }
       }
-      if (count2 === 0) {
-        return string;
+      return false;
+    }
+    __name(checkPathExt, "checkPathExt");
+    __name2(checkPathExt, "checkPathExt");
+    function checkStat(stat, path6, options2) {
+      if (!stat.isSymbolicLink() && !stat.isFile()) {
+        return false;
       }
-      const regex = options2.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
-      return string.replace(regex, options2.indent.repeat(count2));
-    };
+      return checkPathExt(path6, options2);
+    }
+    __name(checkStat, "checkStat");
+    __name2(checkStat, "checkStat");
+    function isexe(path6, options2, cb) {
+      fs7.stat(path6, function(er, stat) {
+        cb(er, er ? false : checkStat(stat, path6, options2));
+      });
+    }
+    __name(isexe, "isexe");
+    __name2(isexe, "isexe");
+    function sync(path6, options2) {
+      return checkStat(fs7.statSync(path6), path6, options2);
+    }
+    __name(sync, "sync");
+    __name2(sync, "sync");
   }
 });
-var require_js_levenshtein = __commonJS2({
-  "../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js"(exports2, module2) {
-    "use strict";
-    module2.exports = function() {
-      function _min(d0, d1, d2, bx, ay) {
-        return d0 < d1 || d2 < d1 ? d0 > d2 ? d2 + 1 : d0 + 1 : bx === ay ? d1 : d1 + 1;
+var require_mode2 = __commonJS2({
+  "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/mode.js"(exports2, module2) {
+    module2.exports = isexe;
+    isexe.sync = sync;
+    var fs7 = require("fs");
+    function isexe(path6, options2, cb) {
+      fs7.stat(path6, function(er, stat) {
+        cb(er, er ? false : checkStat(stat, options2));
+      });
+    }
+    __name(isexe, "isexe");
+    __name2(isexe, "isexe");
+    function sync(path6, options2) {
+      return checkStat(fs7.statSync(path6), options2);
+    }
+    __name(sync, "sync");
+    __name2(sync, "sync");
+    function checkStat(stat, options2) {
+      return stat.isFile() && checkMode(stat, options2);
+    }
+    __name(checkStat, "checkStat");
+    __name2(checkStat, "checkStat");
+    function checkMode(stat, options2) {
+      var mod2 = stat.mode;
+      var uid = stat.uid;
+      var gid = stat.gid;
+      var myUid = options2.uid !== void 0 ? options2.uid : process.getuid && process.getuid();
+      var myGid = options2.gid !== void 0 ? options2.gid : process.getgid && process.getgid();
+      var u = parseInt("100", 8);
+      var g = parseInt("010", 8);
+      var o = parseInt("001", 8);
+      var ug = u | g;
+      var ret = mod2 & o || mod2 & g && gid === myGid || mod2 & u && uid === myUid || mod2 & ug && myUid === 0;
+      return ret;
+    }
+    __name(checkMode, "checkMode");
+    __name2(checkMode, "checkMode");
+  }
+});
+var require_isexe2 = __commonJS2({
+  "../../node_modules/.pnpm/isexe@2.0.0/node_modules/isexe/index.js"(exports2, module2) {
+    var fs7 = require("fs");
+    var core;
+    if (process.platform === "win32" || global.TESTING_WINDOWS) {
+      core = require_windows2();
+    } else {
+      core = require_mode2();
+    }
+    module2.exports = isexe;
+    isexe.sync = sync;
+    function isexe(path6, options2, cb) {
+      if (typeof options2 === "function") {
+        cb = options2;
+        options2 = {};
       }
-      __name(_min, "_min");
-      __name2(_min, "_min");
-      return function(a, b) {
-        if (a === b) {
-          return 0;
+      if (!cb) {
+        if (typeof Promise !== "function") {
+          throw new TypeError("callback not provided");
         }
-        if (a.length > b.length) {
-          var tmp = a;
-          a = b;
-          b = tmp;
-        }
-        var la = a.length;
-        var lb = b.length;
-        while (la > 0 && a.charCodeAt(la - 1) === b.charCodeAt(lb - 1)) {
-          la--;
-          lb--;
-        }
-        var offset = 0;
-        while (offset < la && a.charCodeAt(offset) === b.charCodeAt(offset)) {
-          offset++;
-        }
-        la -= offset;
-        lb -= offset;
-        if (la === 0 || lb < 3) {
-          return lb;
-        }
-        var x = 0;
-        var y;
-        var d0;
-        var d1;
-        var d2;
-        var d3;
-        var dd;
-        var dy;
-        var ay;
-        var bx0;
-        var bx1;
-        var bx2;
-        var bx3;
-        var vector = [];
-        for (y = 0; y < la; y++) {
-          vector.push(y + 1);
-          vector.push(a.charCodeAt(offset + y));
-        }
-        var len = vector.length - 1;
-        for (; x < lb - 3; ) {
-          bx0 = b.charCodeAt(offset + (d0 = x));
-          bx1 = b.charCodeAt(offset + (d1 = x + 1));
-          bx2 = b.charCodeAt(offset + (d2 = x + 2));
-          bx3 = b.charCodeAt(offset + (d3 = x + 3));
-          dd = x += 4;
-          for (y = 0; y < len; y += 2) {
-            dy = vector[y];
-            ay = vector[y + 1];
-            d0 = _min(dy, d0, d1, bx0, ay);
-            d1 = _min(d0, d1, d2, bx1, ay);
-            d2 = _min(d1, d2, d3, bx2, ay);
-            dd = _min(d2, d3, dd, bx3, ay);
-            vector[y] = dd;
-            d3 = d2;
-            d2 = d1;
-            d1 = d0;
-            d0 = dy;
+        return new Promise(function(resolve2, reject2) {
+          isexe(path6, options2 || {}, function(er, is) {
+            if (er) {
+              reject2(er);
+            } else {
+              resolve2(is);
+            }
+          });
+        });
+      }
+      core(path6, options2 || {}, function(er, is) {
+        if (er) {
+          if (er.code === "EACCES" || options2 && options2.ignoreErrors) {
+            er = null;
+            is = false;
           }
         }
-        for (; x < lb; ) {
-          bx0 = b.charCodeAt(offset + (d0 = x));
-          dd = ++x;
-          for (y = 0; y < len; y += 2) {
-            dy = vector[y];
-            vector[y] = dd = _min(dy, d0, dd, bx0, vector[y + 1]);
-            d0 = dy;
+        cb(er, is);
+      });
+    }
+    __name(isexe, "isexe");
+    __name2(isexe, "isexe");
+    function sync(path6, options2) {
+      try {
+        return core.sync(path6, options2 || {});
+      } catch (er) {
+        if (options2 && options2.ignoreErrors || er.code === "EACCES") {
+          return false;
+        } else {
+          throw er;
+        }
+      }
+    }
+    __name(sync, "sync");
+    __name2(sync, "sync");
+  }
+});
+var require_which2 = __commonJS2({
+  "../../node_modules/.pnpm/which@2.0.2/node_modules/which/which.js"(exports2, module2) {
+    var isWindows = process.platform === "win32" || process.env.OSTYPE === "cygwin" || process.env.OSTYPE === "msys";
+    var path6 = require("path");
+    var COLON = isWindows ? ";" : ":";
+    var isexe = require_isexe2();
+    var getNotFoundError = /* @__PURE__ */ __name2((cmd) => Object.assign(new Error(`not found: ${cmd}`), { code: "ENOENT" }), "getNotFoundError");
+    var getPathInfo = /* @__PURE__ */ __name2((cmd, opt) => {
+      const colon = opt.colon || COLON;
+      const pathEnv = cmd.match(/\//) || isWindows && cmd.match(/\\/) ? [""] : [
+        ...isWindows ? [process.cwd()] : [],
+        ...(opt.path || process.env.PATH || "").split(colon)
+      ];
+      const pathExtExe = isWindows ? opt.pathExt || process.env.PATHEXT || ".EXE;.CMD;.BAT;.COM" : "";
+      const pathExt = isWindows ? pathExtExe.split(colon) : [""];
+      if (isWindows) {
+        if (cmd.indexOf(".") !== -1 && pathExt[0] !== "")
+          pathExt.unshift("");
+      }
+      return {
+        pathEnv,
+        pathExt,
+        pathExtExe
+      };
+    }, "getPathInfo");
+    var which = /* @__PURE__ */ __name2((cmd, opt, cb) => {
+      if (typeof opt === "function") {
+        cb = opt;
+        opt = {};
+      }
+      if (!opt)
+        opt = {};
+      const { pathEnv, pathExt, pathExtExe } = getPathInfo(cmd, opt);
+      const found = [];
+      const step = /* @__PURE__ */ __name2((i) => new Promise((resolve2, reject2) => {
+        if (i === pathEnv.length)
+          return opt.all && found.length ? resolve2(found) : reject2(getNotFoundError(cmd));
+        const ppRaw = pathEnv[i];
+        const pathPart = /^".*"$/.test(ppRaw) ? ppRaw.slice(1, -1) : ppRaw;
+        const pCmd = path6.join(pathPart, cmd);
+        const p = !pathPart && /^\.[\\\/]/.test(cmd) ? cmd.slice(0, 2) + pCmd : pCmd;
+        resolve2(subStep(p, i, 0));
+      }), "step");
+      const subStep = /* @__PURE__ */ __name2((p, i, ii) => new Promise((resolve2, reject2) => {
+        if (ii === pathExt.length)
+          return resolve2(step(i + 1));
+        const ext = pathExt[ii];
+        isexe(p + ext, { pathExt: pathExtExe }, (er, is) => {
+          if (!er && is) {
+            if (opt.all)
+              found.push(p + ext);
+            else
+              return resolve2(p + ext);
+          }
+          return resolve2(subStep(p, i, ii + 1));
+        });
+      }), "subStep");
+      return cb ? step(0).then((res) => cb(null, res), cb) : step(0);
+    }, "which");
+    var whichSync = /* @__PURE__ */ __name2((cmd, opt) => {
+      opt = opt || {};
+      const { pathEnv, pathExt, pathExtExe } = getPathInfo(cmd, opt);
+      const found = [];
+      for (let i = 0; i < pathEnv.length; i++) {
+        const ppRaw = pathEnv[i];
+        const pathPart = /^".*"$/.test(ppRaw) ? ppRaw.slice(1, -1) : ppRaw;
+        const pCmd = path6.join(pathPart, cmd);
+        const p = !pathPart && /^\.[\\\/]/.test(cmd) ? cmd.slice(0, 2) + pCmd : pCmd;
+        for (let j = 0; j < pathExt.length; j++) {
+          const cur = p + pathExt[j];
+          try {
+            const is = isexe.sync(cur, { pathExt: pathExtExe });
+            if (is) {
+              if (opt.all)
+                found.push(cur);
+              else
+                return cur;
+            }
+          } catch (ex) {
           }
         }
-        return dd;
-      };
-    }();
+      }
+      if (opt.all && found.length)
+        return found;
+      if (opt.nothrow)
+        return null;
+      throw getNotFoundError(cmd);
+    }, "whichSync");
+    module2.exports = which;
+    which.sync = whichSync;
   }
 });
-var require_ansi_regex = __commonJS2({
-  "../../node_modules/.pnpm/ansi-regex@5.0.1/node_modules/ansi-regex/index.js"(exports2, module2) {
+var require_path_key2 = __commonJS2({
+  "../../node_modules/.pnpm/path-key@3.1.1/node_modules/path-key/index.js"(exports2, module2) {
     "use strict";
-    module2.exports = ({ onlyFirst = false } = {}) => {
-      const pattern = [
-        "[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)",
-        "(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))"
-      ].join("|");
-      return new RegExp(pattern, onlyFirst ? void 0 : "g");
-    };
+    var pathKey = /* @__PURE__ */ __name2((options2 = {}) => {
+      const environment = options2.env || process.env;
+      const platform2 = options2.platform || process.platform;
+      if (platform2 !== "win32") {
+        return "PATH";
+      }
+      return Object.keys(environment).reverse().find((key) => key.toUpperCase() === "PATH") || "Path";
+    }, "pathKey");
+    module2.exports = pathKey;
+    module2.exports.default = pathKey;
   }
 });
-var require_strip_ansi = __commonJS2({
-  "../../node_modules/.pnpm/strip-ansi@6.0.1/node_modules/strip-ansi/index.js"(exports2, module2) {
+var require_resolveCommand2 = __commonJS2({
+  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/util/resolveCommand.js"(exports2, module2) {
     "use strict";
-    var ansiRegex = require_ansi_regex();
-    module2.exports = (string) => typeof string === "string" ? string.replace(ansiRegex(), "") : string;
+    var path6 = require("path");
+    var which = require_which2();
+    var getPathKey = require_path_key2();
+    function resolveCommandAttempt(parsed, withoutPathExt) {
+      const env = parsed.options.env || process.env;
+      const cwd = process.cwd();
+      const hasCustomCwd = parsed.options.cwd != null;
+      const shouldSwitchCwd = hasCustomCwd && process.chdir !== void 0 && !process.chdir.disabled;
+      if (shouldSwitchCwd) {
+        try {
+          process.chdir(parsed.options.cwd);
+        } catch (err) {
+        }
+      }
+      let resolved;
+      try {
+        resolved = which.sync(parsed.command, {
+          path: env[getPathKey({ env })],
+          pathExt: withoutPathExt ? path6.delimiter : void 0
+        });
+      } catch (e) {
+      } finally {
+        if (shouldSwitchCwd) {
+          process.chdir(cwd);
+        }
+      }
+      if (resolved) {
+        resolved = path6.resolve(hasCustomCwd ? parsed.options.cwd : "", resolved);
+      }
+      return resolved;
+    }
+    __name(resolveCommandAttempt, "resolveCommandAttempt");
+    __name2(resolveCommandAttempt, "resolveCommandAttempt");
+    function resolveCommand(parsed) {
+      return resolveCommandAttempt(parsed) || resolveCommandAttempt(parsed, true);
+    }
+    __name(resolveCommand, "resolveCommand");
+    __name2(resolveCommand, "resolveCommand");
+    module2.exports = resolveCommand;
   }
 });
-var require_is_regexp = __commonJS2({
-  "../../node_modules/.pnpm/is-regexp@2.1.0/node_modules/is-regexp/index.js"(exports2, module2) {
+var require_escape2 = __commonJS2({
+  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/util/escape.js"(exports2, module2) {
     "use strict";
-    module2.exports = (input) => Object.prototype.toString.call(input) === "[object RegExp]";
+    var metaCharsRegExp = /([()\][%!^"`<>&|;, *?])/g;
+    function escapeCommand(arg2) {
+      arg2 = arg2.replace(metaCharsRegExp, "^$1");
+      return arg2;
+    }
+    __name(escapeCommand, "escapeCommand");
+    __name2(escapeCommand, "escapeCommand");
+    function escapeArgument(arg2, doubleEscapeMetaChars) {
+      arg2 = `${arg2}`;
+      arg2 = arg2.replace(/(\\*)"/g, '$1$1\\"');
+      arg2 = arg2.replace(/(\\*)$/, "$1$1");
+      arg2 = `"${arg2}"`;
+      arg2 = arg2.replace(metaCharsRegExp, "^$1");
+      if (doubleEscapeMetaChars) {
+        arg2 = arg2.replace(metaCharsRegExp, "^$1");
+      }
+      return arg2;
+    }
+    __name(escapeArgument, "escapeArgument");
+    __name2(escapeArgument, "escapeArgument");
+    module2.exports.command = escapeCommand;
+    module2.exports.argument = escapeArgument;
   }
 });
-var require_is_obj = __commonJS2({
-  "../../node_modules/.pnpm/is-obj@2.0.0/node_modules/is-obj/index.js"(exports2, module2) {
+var require_shebang_regex2 = __commonJS2({
+  "../../node_modules/.pnpm/shebang-regex@3.0.0/node_modules/shebang-regex/index.js"(exports2, module2) {
     "use strict";
-    module2.exports = (value) => {
-      const type = typeof value;
-      return value !== null && (type === "object" || type === "function");
-    };
+    module2.exports = /^#!(.*)/;
   }
 });
-var require_lib3 = __commonJS2({
-  "../../node_modules/.pnpm/get-own-enumerable-property-symbols@3.0.2/node_modules/get-own-enumerable-property-symbols/lib/index.js"(exports2) {
+var require_shebang_command2 = __commonJS2({
+  "../../node_modules/.pnpm/shebang-command@2.0.0/node_modules/shebang-command/index.js"(exports2, module2) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.default = (object) => Object.getOwnPropertySymbols(object).filter((keySymbol) => Object.prototype.propertyIsEnumerable.call(object, keySymbol));
-  }
-});
-var require_min_indent = __commonJS2({
-  "../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js"(exports2, module2) {
-    "use strict";
-    module2.exports = (string) => {
-      const match = string.match(/^[ \t]*(?=\S)/gm);
+    var shebangRegex = require_shebang_regex2();
+    module2.exports = (string = "") => {
+      const match = string.match(shebangRegex);
       if (!match) {
-        return 0;
+        return null;
       }
-      return match.reduce((r, a) => Math.min(r, a.length), Infinity);
+      const [path6, argument] = match[0].replace(/#! ?/, "").split(" ");
+      const binary = path6.split("/").pop();
+      if (binary === "env") {
+        return argument;
+      }
+      return argument ? `${binary} ${argument}` : binary;
     };
   }
 });
-var require_strip_indent = __commonJS2({
-  "../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js"(exports2, module2) {
+var require_readShebang2 = __commonJS2({
+  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/util/readShebang.js"(exports2, module2) {
     "use strict";
-    var minIndent = require_min_indent();
-    module2.exports = (string) => {
-      const indent4 = minIndent(string);
-      if (indent4 === 0) {
-        return string;
+    var fs7 = require("fs");
+    var shebangCommand = require_shebang_command2();
+    function readShebang(command) {
+      const size = 150;
+      const buffer = Buffer.alloc(size);
+      let fd;
+      try {
+        fd = fs7.openSync(command, "r");
+        fs7.readSync(fd, buffer, 0, size, 0);
+        fs7.closeSync(fd);
+      } catch (e) {
       }
-      const regex = new RegExp(`^[ \\t]{${indent4}}`, "gm");
-      return string.replace(regex, "");
+      return shebangCommand(buffer.toString());
+    }
+    __name(readShebang, "readShebang");
+    __name2(readShebang, "readShebang");
+    module2.exports = readShebang;
+  }
+});
+var require_parse5 = __commonJS2({
+  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/parse.js"(exports2, module2) {
+    "use strict";
+    var path6 = require("path");
+    var resolveCommand = require_resolveCommand2();
+    var escape = require_escape2();
+    var readShebang = require_readShebang2();
+    var isWin = process.platform === "win32";
+    var isExecutableRegExp = /\.(?:com|exe)$/i;
+    var isCmdShimRegExp = /node_modules[\\/].bin[\\/][^\\/]+\.cmd$/i;
+    function detectShebang(parsed) {
+      parsed.file = resolveCommand(parsed);
+      const shebang = parsed.file && readShebang(parsed.file);
+      if (shebang) {
+        parsed.args.unshift(parsed.file);
+        parsed.command = shebang;
+        return resolveCommand(parsed);
+      }
+      return parsed.file;
+    }
+    __name(detectShebang, "detectShebang");
+    __name2(detectShebang, "detectShebang");
+    function parseNonShell(parsed) {
+      if (!isWin) {
+        return parsed;
+      }
+      const commandFile = detectShebang(parsed);
+      const needsShell = !isExecutableRegExp.test(commandFile);
+      if (parsed.options.forceShell || needsShell) {
+        const needsDoubleEscapeMetaChars = isCmdShimRegExp.test(commandFile);
+        parsed.command = path6.normalize(parsed.command);
+        parsed.command = escape.command(parsed.command);
+        parsed.args = parsed.args.map((arg2) => escape.argument(arg2, needsDoubleEscapeMetaChars));
+        const shellCommand = [parsed.command].concat(parsed.args).join(" ");
+        parsed.args = ["/d", "/s", "/c", `"${shellCommand}"`];
+        parsed.command = process.env.comspec || "cmd.exe";
+        parsed.options.windowsVerbatimArguments = true;
+      }
+      return parsed;
+    }
+    __name(parseNonShell, "parseNonShell");
+    __name2(parseNonShell, "parseNonShell");
+    function parse2(command, args, options2) {
+      if (args && !Array.isArray(args)) {
+        options2 = args;
+        args = null;
+      }
+      args = args ? args.slice(0) : [];
+      options2 = Object.assign({}, options2);
+      const parsed = {
+        command,
+        args,
+        options: options2,
+        file: void 0,
+        original: {
+          command,
+          args
+        }
+      };
+      return options2.shell ? parsed : parseNonShell(parsed);
+    }
+    __name(parse2, "parse2");
+    __name2(parse2, "parse");
+    module2.exports = parse2;
+  }
+});
+var require_enoent2 = __commonJS2({
+  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/lib/enoent.js"(exports2, module2) {
+    "use strict";
+    var isWin = process.platform === "win32";
+    function notFoundError(original, syscall) {
+      return Object.assign(new Error(`${syscall} ${original.command} ENOENT`), {
+        code: "ENOENT",
+        errno: "ENOENT",
+        syscall: `${syscall} ${original.command}`,
+        path: original.command,
+        spawnargs: original.args
+      });
+    }
+    __name(notFoundError, "notFoundError");
+    __name2(notFoundError, "notFoundError");
+    function hookChildProcess(cp, parsed) {
+      if (!isWin) {
+        return;
+      }
+      const originalEmit = cp.emit;
+      cp.emit = function(name, arg1) {
+        if (name === "exit") {
+          const err = verifyENOENT(arg1, parsed, "spawn");
+          if (err) {
+            return originalEmit.call(cp, "error", err);
+          }
+        }
+        return originalEmit.apply(cp, arguments);
+      };
+    }
+    __name(hookChildProcess, "hookChildProcess");
+    __name2(hookChildProcess, "hookChildProcess");
+    function verifyENOENT(status, parsed) {
+      if (isWin && status === 1 && !parsed.file) {
+        return notFoundError(parsed.original, "spawn");
+      }
+      return null;
+    }
+    __name(verifyENOENT, "verifyENOENT");
+    __name2(verifyENOENT, "verifyENOENT");
+    function verifyENOENTSync(status, parsed) {
+      if (isWin && status === 1 && !parsed.file) {
+        return notFoundError(parsed.original, "spawnSync");
+      }
+      return null;
+    }
+    __name(verifyENOENTSync, "verifyENOENTSync");
+    __name2(verifyENOENTSync, "verifyENOENTSync");
+    module2.exports = {
+      hookChildProcess,
+      verifyENOENT,
+      verifyENOENTSync,
+      notFoundError
     };
+  }
+});
+var require_cross_spawn2 = __commonJS2({
+  "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/index.js"(exports2, module2) {
+    "use strict";
+    var cp = require("child_process");
+    var parse2 = require_parse5();
+    var enoent = require_enoent2();
+    function spawn2(command, args, options2) {
+      const parsed = parse2(command, args, options2);
+      const spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
+      enoent.hookChildProcess(spawned, parsed);
+      return spawned;
+    }
+    __name(spawn2, "spawn2");
+    __name2(spawn2, "spawn");
+    function spawnSync(command, args, options2) {
+      const parsed = parse2(command, args, options2);
+      const result = cp.spawnSync(parsed.command, parsed.args, parsed.options);
+      result.error = result.error || enoent.verifyENOENTSync(result.status, parsed);
+      return result;
+    }
+    __name(spawnSync, "spawnSync");
+    __name2(spawnSync, "spawnSync");
+    module2.exports = spawn2;
+    module2.exports.spawn = spawn2;
+    module2.exports.sync = spawnSync;
+    module2.exports._parse = parse2;
+    module2.exports._enoent = enoent;
   }
 });
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -3465,13 +3857,13 @@ var require_dist8 = __commonJS2({
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009",
+        version: "3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "bcc2ff906db47790ee902e7bbc76d7ffb1893009"
+          enginesVersion: "73e60b76d394f8d37d8ebd1f8918c79029f0db86"
         },
         repository: {
           type: "git",
@@ -3479,7 +3871,7 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "16.11.21",
+          "@types/node": "16.11.25",
           typescript: "4.5.5"
         },
         scripts: {
@@ -24998,7 +25390,7 @@ ${error2.message}` : execaMessage;
   }
 });
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -25021,7 +25413,7 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25203,7 +25595,7 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25226,7 +25618,7 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -25253,7 +25645,7 @@ var require_platforms2 = __commonJS2({
   }
 });
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -25276,265 +25668,6 @@ var require_dist9 = __commonJS2({
     Object.defineProperty(exports2, "platforms", { enumerable: true, get: function() {
       return platforms_1.platforms;
     } });
-  }
-});
-var require_ansi_escapes = __commonJS2({
-  "../../node_modules/.pnpm/ansi-escapes@4.3.2/node_modules/ansi-escapes/index.js"(exports2, module2) {
-    "use strict";
-    var ansiEscapes = module2.exports;
-    module2.exports.default = ansiEscapes;
-    var ESC = "[";
-    var OSC = "]";
-    var BEL = "\x07";
-    var SEP = ";";
-    var isTerminalApp = process.env.TERM_PROGRAM === "Apple_Terminal";
-    ansiEscapes.cursorTo = (x, y) => {
-      if (typeof x !== "number") {
-        throw new TypeError("The `x` argument is required");
-      }
-      if (typeof y !== "number") {
-        return ESC + (x + 1) + "G";
-      }
-      return ESC + (y + 1) + ";" + (x + 1) + "H";
-    };
-    ansiEscapes.cursorMove = (x, y) => {
-      if (typeof x !== "number") {
-        throw new TypeError("The `x` argument is required");
-      }
-      let ret = "";
-      if (x < 0) {
-        ret += ESC + -x + "D";
-      } else if (x > 0) {
-        ret += ESC + x + "C";
-      }
-      if (y < 0) {
-        ret += ESC + -y + "A";
-      } else if (y > 0) {
-        ret += ESC + y + "B";
-      }
-      return ret;
-    };
-    ansiEscapes.cursorUp = (count2 = 1) => ESC + count2 + "A";
-    ansiEscapes.cursorDown = (count2 = 1) => ESC + count2 + "B";
-    ansiEscapes.cursorForward = (count2 = 1) => ESC + count2 + "C";
-    ansiEscapes.cursorBackward = (count2 = 1) => ESC + count2 + "D";
-    ansiEscapes.cursorLeft = ESC + "G";
-    ansiEscapes.cursorSavePosition = isTerminalApp ? "7" : ESC + "s";
-    ansiEscapes.cursorRestorePosition = isTerminalApp ? "8" : ESC + "u";
-    ansiEscapes.cursorGetPosition = ESC + "6n";
-    ansiEscapes.cursorNextLine = ESC + "E";
-    ansiEscapes.cursorPrevLine = ESC + "F";
-    ansiEscapes.cursorHide = ESC + "?25l";
-    ansiEscapes.cursorShow = ESC + "?25h";
-    ansiEscapes.eraseLines = (count2) => {
-      let clear = "";
-      for (let i = 0; i < count2; i++) {
-        clear += ansiEscapes.eraseLine + (i < count2 - 1 ? ansiEscapes.cursorUp() : "");
-      }
-      if (count2) {
-        clear += ansiEscapes.cursorLeft;
-      }
-      return clear;
-    };
-    ansiEscapes.eraseEndLine = ESC + "K";
-    ansiEscapes.eraseStartLine = ESC + "1K";
-    ansiEscapes.eraseLine = ESC + "2K";
-    ansiEscapes.eraseDown = ESC + "J";
-    ansiEscapes.eraseUp = ESC + "1J";
-    ansiEscapes.eraseScreen = ESC + "2J";
-    ansiEscapes.scrollUp = ESC + "S";
-    ansiEscapes.scrollDown = ESC + "T";
-    ansiEscapes.clearScreen = "c";
-    ansiEscapes.clearTerminal = process.platform === "win32" ? `${ansiEscapes.eraseScreen}${ESC}0f` : `${ansiEscapes.eraseScreen}${ESC}3J${ESC}H`;
-    ansiEscapes.beep = BEL;
-    ansiEscapes.link = (text, url2) => {
-      return [
-        OSC,
-        "8",
-        SEP,
-        SEP,
-        url2,
-        BEL,
-        text,
-        OSC,
-        "8",
-        SEP,
-        SEP,
-        BEL
-      ].join("");
-    };
-    ansiEscapes.image = (buffer, options2 = {}) => {
-      let ret = `${OSC}1337;File=inline=1`;
-      if (options2.width) {
-        ret += `;width=${options2.width}`;
-      }
-      if (options2.height) {
-        ret += `;height=${options2.height}`;
-      }
-      if (options2.preserveAspectRatio === false) {
-        ret += ";preserveAspectRatio=0";
-      }
-      return ret + ":" + buffer.toString("base64") + BEL;
-    };
-    ansiEscapes.iTerm = {
-      setCwd: (cwd = process.cwd()) => `${OSC}50;CurrentDir=${cwd}${BEL}`,
-      annotation: (message, options2 = {}) => {
-        let ret = `${OSC}1337;`;
-        const hasX = typeof options2.x !== "undefined";
-        const hasY = typeof options2.y !== "undefined";
-        if ((hasX || hasY) && !(hasX && hasY && typeof options2.length !== "undefined")) {
-          throw new Error("`x`, `y` and `length` must be defined when `x` or `y` is defined");
-        }
-        message = message.replace(/\|/g, "");
-        ret += options2.isHidden ? "AddHiddenAnnotation=" : "AddAnnotation=";
-        if (options2.length > 0) {
-          ret += (hasX ? [message, options2.length, options2.x, options2.y] : [options2.length, message]).join("|");
-        } else {
-          ret += message;
-        }
-        return ret + BEL;
-      }
-    };
-  }
-});
-var require_supports_hyperlinks = __commonJS2({
-  "../../node_modules/.pnpm/supports-hyperlinks@2.2.0/node_modules/supports-hyperlinks/index.js"(exports2, module2) {
-    "use strict";
-    var supportsColor = require_supports_color2();
-    var hasFlag = require_has_flag2();
-    function parseVersion(versionString) {
-      if (/^\d{3,4}$/.test(versionString)) {
-        const m = /(\d{1,2})(\d{2})/.exec(versionString);
-        return {
-          major: 0,
-          minor: parseInt(m[1], 10),
-          patch: parseInt(m[2], 10)
-        };
-      }
-      const versions = (versionString || "").split(".").map((n) => parseInt(n, 10));
-      return {
-        major: versions[0],
-        minor: versions[1],
-        patch: versions[2]
-      };
-    }
-    __name(parseVersion, "parseVersion");
-    __name2(parseVersion, "parseVersion");
-    function supportsHyperlink(stream3) {
-      const { env } = process;
-      if ("FORCE_HYPERLINK" in env) {
-        return !(env.FORCE_HYPERLINK.length > 0 && parseInt(env.FORCE_HYPERLINK, 10) === 0);
-      }
-      if (hasFlag("no-hyperlink") || hasFlag("no-hyperlinks") || hasFlag("hyperlink=false") || hasFlag("hyperlink=never")) {
-        return false;
-      }
-      if (hasFlag("hyperlink=true") || hasFlag("hyperlink=always")) {
-        return true;
-      }
-      if (!supportsColor.supportsColor(stream3)) {
-        return false;
-      }
-      if (stream3 && !stream3.isTTY) {
-        return false;
-      }
-      if (process.platform === "win32") {
-        return false;
-      }
-      if ("NETLIFY" in env) {
-        return true;
-      }
-      if ("CI" in env) {
-        return false;
-      }
-      if ("TEAMCITY_VERSION" in env) {
-        return false;
-      }
-      if ("TERM_PROGRAM" in env) {
-        const version = parseVersion(env.TERM_PROGRAM_VERSION);
-        switch (env.TERM_PROGRAM) {
-          case "iTerm.app":
-            if (version.major === 3) {
-              return version.minor >= 1;
-            }
-            return version.major > 3;
-        }
-      }
-      if ("VTE_VERSION" in env) {
-        if (env.VTE_VERSION === "0.50.0") {
-          return false;
-        }
-        const version = parseVersion(env.VTE_VERSION);
-        return version.major > 0 || version.minor >= 50;
-      }
-      return false;
-    }
-    __name(supportsHyperlink, "supportsHyperlink");
-    __name2(supportsHyperlink, "supportsHyperlink");
-    module2.exports = {
-      supportsHyperlink,
-      stdout: supportsHyperlink(process.stdout),
-      stderr: supportsHyperlink(process.stderr)
-    };
-  }
-});
-var require_terminal_link = __commonJS2({
-  "../../node_modules/.pnpm/terminal-link@2.1.1/node_modules/terminal-link/index.js"(exports2, module2) {
-    "use strict";
-    var ansiEscapes = require_ansi_escapes();
-    var supportsHyperlinks = require_supports_hyperlinks();
-    var terminalLink2 = /* @__PURE__ */ __name2((text, url2, { target = "stdout", ...options2 } = {}) => {
-      if (!supportsHyperlinks[target]) {
-        if (options2.fallback === false) {
-          return text;
-        }
-        return typeof options2.fallback === "function" ? options2.fallback(text, url2) : `${text} (\u200B${url2}\u200B)`;
-      }
-      return ansiEscapes.link(text, url2);
-    }, "terminalLink");
-    module2.exports = (text, url2, options2 = {}) => terminalLink2(text, url2, options2);
-    module2.exports.stderr = (text, url2, options2 = {}) => terminalLink2(text, url2, { target: "stderr", ...options2 });
-    module2.exports.isSupported = supportsHyperlinks.stdout;
-    module2.exports.stderr.isSupported = supportsHyperlinks.stderr;
-  }
-});
-var require_new_github_issue_url = __commonJS2({
-  "../../node_modules/.pnpm/new-github-issue-url@0.2.1/node_modules/new-github-issue-url/index.js"(exports2, module2) {
-    "use strict";
-    module2.exports = (options2 = {}) => {
-      let repoUrl;
-      if (options2.repoUrl) {
-        repoUrl = options2.repoUrl;
-      } else if (options2.user && options2.repo) {
-        repoUrl = `https://github.com/${options2.user}/${options2.repo}`;
-      } else {
-        throw new Error("You need to specify either the `repoUrl` option or both the `user` and `repo` options");
-      }
-      const url2 = new URL(`${repoUrl}/issues/new`);
-      const types = [
-        "body",
-        "title",
-        "labels",
-        "template",
-        "milestone",
-        "assignee",
-        "projects"
-      ];
-      for (const type of types) {
-        let value = options2[type];
-        if (value === void 0) {
-          continue;
-        }
-        if (type === "labels" || type === "projects") {
-          if (!Array.isArray(value)) {
-            throw new TypeError(`The \`${type}\` option should be an array`);
-          }
-          value = value.join(",");
-        }
-        url2.searchParams.set(type, value);
-      }
-      return url2.toString();
-    };
-    module2.exports.default = module2.exports;
   }
 });
 var require_strip_final_newline2 = __commonJS2({
@@ -27233,6 +27366,284 @@ var require_p_retry2 = __commonJS2({
     module2.exports = pRetry2;
     module2.exports.default = pRetry2;
     module2.exports.AbortError = AbortError;
+  }
+});
+var require_ansi_regex = __commonJS2({
+  "../../node_modules/.pnpm/ansi-regex@5.0.1/node_modules/ansi-regex/index.js"(exports2, module2) {
+    "use strict";
+    module2.exports = ({ onlyFirst = false } = {}) => {
+      const pattern = [
+        "[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)",
+        "(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))"
+      ].join("|");
+      return new RegExp(pattern, onlyFirst ? void 0 : "g");
+    };
+  }
+});
+var require_strip_ansi = __commonJS2({
+  "../../node_modules/.pnpm/strip-ansi@6.0.1/node_modules/strip-ansi/index.js"(exports2, module2) {
+    "use strict";
+    var ansiRegex = require_ansi_regex();
+    module2.exports = (string) => typeof string === "string" ? string.replace(ansiRegex(), "") : string;
+  }
+});
+var require_new_github_issue_url = __commonJS2({
+  "../../node_modules/.pnpm/new-github-issue-url@0.2.1/node_modules/new-github-issue-url/index.js"(exports2, module2) {
+    "use strict";
+    module2.exports = (options2 = {}) => {
+      let repoUrl;
+      if (options2.repoUrl) {
+        repoUrl = options2.repoUrl;
+      } else if (options2.user && options2.repo) {
+        repoUrl = `https://github.com/${options2.user}/${options2.repo}`;
+      } else {
+        throw new Error("You need to specify either the `repoUrl` option or both the `user` and `repo` options");
+      }
+      const url2 = new URL(`${repoUrl}/issues/new`);
+      const types = [
+        "body",
+        "title",
+        "labels",
+        "template",
+        "milestone",
+        "assignee",
+        "projects"
+      ];
+      for (const type of types) {
+        let value = options2[type];
+        if (value === void 0) {
+          continue;
+        }
+        if (type === "labels" || type === "projects") {
+          if (!Array.isArray(value)) {
+            throw new TypeError(`The \`${type}\` option should be an array`);
+          }
+          value = value.join(",");
+        }
+        url2.searchParams.set(type, value);
+      }
+      return url2.toString();
+    };
+    module2.exports.default = module2.exports;
+  }
+});
+var require_ansi_escapes = __commonJS2({
+  "../../node_modules/.pnpm/ansi-escapes@4.3.2/node_modules/ansi-escapes/index.js"(exports2, module2) {
+    "use strict";
+    var ansiEscapes = module2.exports;
+    module2.exports.default = ansiEscapes;
+    var ESC = "[";
+    var OSC = "]";
+    var BEL = "\x07";
+    var SEP = ";";
+    var isTerminalApp = process.env.TERM_PROGRAM === "Apple_Terminal";
+    ansiEscapes.cursorTo = (x, y) => {
+      if (typeof x !== "number") {
+        throw new TypeError("The `x` argument is required");
+      }
+      if (typeof y !== "number") {
+        return ESC + (x + 1) + "G";
+      }
+      return ESC + (y + 1) + ";" + (x + 1) + "H";
+    };
+    ansiEscapes.cursorMove = (x, y) => {
+      if (typeof x !== "number") {
+        throw new TypeError("The `x` argument is required");
+      }
+      let ret = "";
+      if (x < 0) {
+        ret += ESC + -x + "D";
+      } else if (x > 0) {
+        ret += ESC + x + "C";
+      }
+      if (y < 0) {
+        ret += ESC + -y + "A";
+      } else if (y > 0) {
+        ret += ESC + y + "B";
+      }
+      return ret;
+    };
+    ansiEscapes.cursorUp = (count2 = 1) => ESC + count2 + "A";
+    ansiEscapes.cursorDown = (count2 = 1) => ESC + count2 + "B";
+    ansiEscapes.cursorForward = (count2 = 1) => ESC + count2 + "C";
+    ansiEscapes.cursorBackward = (count2 = 1) => ESC + count2 + "D";
+    ansiEscapes.cursorLeft = ESC + "G";
+    ansiEscapes.cursorSavePosition = isTerminalApp ? "7" : ESC + "s";
+    ansiEscapes.cursorRestorePosition = isTerminalApp ? "8" : ESC + "u";
+    ansiEscapes.cursorGetPosition = ESC + "6n";
+    ansiEscapes.cursorNextLine = ESC + "E";
+    ansiEscapes.cursorPrevLine = ESC + "F";
+    ansiEscapes.cursorHide = ESC + "?25l";
+    ansiEscapes.cursorShow = ESC + "?25h";
+    ansiEscapes.eraseLines = (count2) => {
+      let clear = "";
+      for (let i = 0; i < count2; i++) {
+        clear += ansiEscapes.eraseLine + (i < count2 - 1 ? ansiEscapes.cursorUp() : "");
+      }
+      if (count2) {
+        clear += ansiEscapes.cursorLeft;
+      }
+      return clear;
+    };
+    ansiEscapes.eraseEndLine = ESC + "K";
+    ansiEscapes.eraseStartLine = ESC + "1K";
+    ansiEscapes.eraseLine = ESC + "2K";
+    ansiEscapes.eraseDown = ESC + "J";
+    ansiEscapes.eraseUp = ESC + "1J";
+    ansiEscapes.eraseScreen = ESC + "2J";
+    ansiEscapes.scrollUp = ESC + "S";
+    ansiEscapes.scrollDown = ESC + "T";
+    ansiEscapes.clearScreen = "c";
+    ansiEscapes.clearTerminal = process.platform === "win32" ? `${ansiEscapes.eraseScreen}${ESC}0f` : `${ansiEscapes.eraseScreen}${ESC}3J${ESC}H`;
+    ansiEscapes.beep = BEL;
+    ansiEscapes.link = (text, url2) => {
+      return [
+        OSC,
+        "8",
+        SEP,
+        SEP,
+        url2,
+        BEL,
+        text,
+        OSC,
+        "8",
+        SEP,
+        SEP,
+        BEL
+      ].join("");
+    };
+    ansiEscapes.image = (buffer, options2 = {}) => {
+      let ret = `${OSC}1337;File=inline=1`;
+      if (options2.width) {
+        ret += `;width=${options2.width}`;
+      }
+      if (options2.height) {
+        ret += `;height=${options2.height}`;
+      }
+      if (options2.preserveAspectRatio === false) {
+        ret += ";preserveAspectRatio=0";
+      }
+      return ret + ":" + buffer.toString("base64") + BEL;
+    };
+    ansiEscapes.iTerm = {
+      setCwd: (cwd = process.cwd()) => `${OSC}50;CurrentDir=${cwd}${BEL}`,
+      annotation: (message, options2 = {}) => {
+        let ret = `${OSC}1337;`;
+        const hasX = typeof options2.x !== "undefined";
+        const hasY = typeof options2.y !== "undefined";
+        if ((hasX || hasY) && !(hasX && hasY && typeof options2.length !== "undefined")) {
+          throw new Error("`x`, `y` and `length` must be defined when `x` or `y` is defined");
+        }
+        message = message.replace(/\|/g, "");
+        ret += options2.isHidden ? "AddHiddenAnnotation=" : "AddAnnotation=";
+        if (options2.length > 0) {
+          ret += (hasX ? [message, options2.length, options2.x, options2.y] : [options2.length, message]).join("|");
+        } else {
+          ret += message;
+        }
+        return ret + BEL;
+      }
+    };
+  }
+});
+var require_supports_hyperlinks = __commonJS2({
+  "../../node_modules/.pnpm/supports-hyperlinks@2.2.0/node_modules/supports-hyperlinks/index.js"(exports2, module2) {
+    "use strict";
+    var supportsColor = require_supports_color2();
+    var hasFlag = require_has_flag2();
+    function parseVersion(versionString) {
+      if (/^\d{3,4}$/.test(versionString)) {
+        const m = /(\d{1,2})(\d{2})/.exec(versionString);
+        return {
+          major: 0,
+          minor: parseInt(m[1], 10),
+          patch: parseInt(m[2], 10)
+        };
+      }
+      const versions = (versionString || "").split(".").map((n) => parseInt(n, 10));
+      return {
+        major: versions[0],
+        minor: versions[1],
+        patch: versions[2]
+      };
+    }
+    __name(parseVersion, "parseVersion");
+    __name2(parseVersion, "parseVersion");
+    function supportsHyperlink(stream3) {
+      const { env } = process;
+      if ("FORCE_HYPERLINK" in env) {
+        return !(env.FORCE_HYPERLINK.length > 0 && parseInt(env.FORCE_HYPERLINK, 10) === 0);
+      }
+      if (hasFlag("no-hyperlink") || hasFlag("no-hyperlinks") || hasFlag("hyperlink=false") || hasFlag("hyperlink=never")) {
+        return false;
+      }
+      if (hasFlag("hyperlink=true") || hasFlag("hyperlink=always")) {
+        return true;
+      }
+      if (!supportsColor.supportsColor(stream3)) {
+        return false;
+      }
+      if (stream3 && !stream3.isTTY) {
+        return false;
+      }
+      if (process.platform === "win32") {
+        return false;
+      }
+      if ("NETLIFY" in env) {
+        return true;
+      }
+      if ("CI" in env) {
+        return false;
+      }
+      if ("TEAMCITY_VERSION" in env) {
+        return false;
+      }
+      if ("TERM_PROGRAM" in env) {
+        const version = parseVersion(env.TERM_PROGRAM_VERSION);
+        switch (env.TERM_PROGRAM) {
+          case "iTerm.app":
+            if (version.major === 3) {
+              return version.minor >= 1;
+            }
+            return version.major > 3;
+        }
+      }
+      if ("VTE_VERSION" in env) {
+        if (env.VTE_VERSION === "0.50.0") {
+          return false;
+        }
+        const version = parseVersion(env.VTE_VERSION);
+        return version.major > 0 || version.minor >= 50;
+      }
+      return false;
+    }
+    __name(supportsHyperlink, "supportsHyperlink");
+    __name2(supportsHyperlink, "supportsHyperlink");
+    module2.exports = {
+      supportsHyperlink,
+      stdout: supportsHyperlink(process.stdout),
+      stderr: supportsHyperlink(process.stderr)
+    };
+  }
+});
+var require_terminal_link = __commonJS2({
+  "../../node_modules/.pnpm/terminal-link@2.1.1/node_modules/terminal-link/index.js"(exports2, module2) {
+    "use strict";
+    var ansiEscapes = require_ansi_escapes();
+    var supportsHyperlinks = require_supports_hyperlinks();
+    var terminalLink2 = /* @__PURE__ */ __name2((text, url2, { target = "stdout", ...options2 } = {}) => {
+      if (!supportsHyperlinks[target]) {
+        if (options2.fallback === false) {
+          return text;
+        }
+        return typeof options2.fallback === "function" ? options2.fallback(text, url2) : `${text} (\u200B${url2}\u200B)`;
+      }
+      return ansiEscapes.link(text, url2);
+    }, "terminalLink");
+    module2.exports = (text, url2, options2 = {}) => terminalLink2(text, url2, options2);
+    module2.exports.stderr = (text, url2, options2 = {}) => terminalLink2(text, url2, { target: "stderr", ...options2 });
+    module2.exports.isSupported = supportsHyperlinks.stdout;
+    module2.exports.stderr.isSupported = supportsHyperlinks.stderr;
   }
 });
 var require_http_parser = __commonJS2({
@@ -29974,12 +30385,38 @@ var require_arg = __commonJS2({
     module2.exports = arg2;
   }
 });
+var require_min_indent = __commonJS2({
+  "../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js"(exports2, module2) {
+    "use strict";
+    module2.exports = (string) => {
+      const match = string.match(/^[ \t]*(?=\S)/gm);
+      if (!match) {
+        return 0;
+      }
+      return match.reduce((r, a) => Math.min(r, a.length), Infinity);
+    };
+  }
+});
+var require_strip_indent = __commonJS2({
+  "../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js"(exports2, module2) {
+    "use strict";
+    var minIndent = require_min_indent();
+    module2.exports = (string) => {
+      const indent4 = minIndent(string);
+      if (indent4 === 0) {
+        return string;
+      }
+      const regex = new RegExp(`^[ \\t]{${indent4}}`, "gm");
+      return string.replace(regex, "");
+    };
+  }
+});
 var require_main3 = __commonJS2({
-  "../../node_modules/.pnpm/dotenv@15.0.0/node_modules/dotenv/lib/main.js"(exports2, module2) {
+  "../../node_modules/.pnpm/dotenv@16.0.0/node_modules/dotenv/lib/main.js"(exports2, module2) {
     var fs7 = require("fs");
     var path6 = require("path");
     var os2 = require("os");
-    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
+    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
     function parse2(src) {
       const obj = {};
       let lines = src.toString();
@@ -29990,7 +30427,7 @@ var require_main3 = __commonJS2({
         let value = match[2] || "";
         value = value.trim();
         const maybeQuote = value[0];
-        value = value.replace(/^(['"])([\s\S]+)\1$/mg, "$2");
+        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
         if (maybeQuote === '"') {
           value = value.replace(/\\n/g, "\n");
           value = value.replace(/\\r/g, "\r");
@@ -30014,7 +30451,7 @@ var require_main3 = __commonJS2({
     function config2(options2) {
       let dotenvPath = path6.resolve(process.cwd(), ".env");
       let encoding = "utf8";
-      const debug10 = Boolean(options2 && options2.debug);
+      const debug9 = Boolean(options2 && options2.debug);
       const override = Boolean(options2 && options2.override);
       if (options2) {
         if (options2.path != null) {
@@ -30033,7 +30470,7 @@ var require_main3 = __commonJS2({
             if (override === true) {
               process.env[key] = parsed[key];
             }
-            if (debug10) {
+            if (debug9) {
               if (override === true) {
                 _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
               } else {
@@ -30044,7 +30481,7 @@ var require_main3 = __commonJS2({
         });
         return { parsed };
       } catch (e) {
-        if (debug10) {
+        if (debug9) {
           _log(`Failed to load ${dotenvPath} ${e.message}`);
         }
         return { error: e };
@@ -30148,11 +30585,33 @@ var require_dist10 = __commonJS2({
     exports2.default = sqltag3;
   }
 });
+var require_is_regexp = __commonJS2({
+  "../../node_modules/.pnpm/is-regexp@2.1.0/node_modules/is-regexp/index.js"(exports2, module2) {
+    "use strict";
+    module2.exports = (input) => Object.prototype.toString.call(input) === "[object RegExp]";
+  }
+});
+var require_is_obj = __commonJS2({
+  "../../node_modules/.pnpm/is-obj@2.0.0/node_modules/is-obj/index.js"(exports2, module2) {
+    "use strict";
+    module2.exports = (value) => {
+      const type = typeof value;
+      return value !== null && (type === "object" || type === "function");
+    };
+  }
+});
+var require_lib3 = __commonJS2({
+  "../../node_modules/.pnpm/get-own-enumerable-property-symbols@3.0.2/node_modules/get-own-enumerable-property-symbols/lib/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.default = (object) => Object.getOwnPropertySymbols(object).filter((keySymbol) => Object.prototype.propertyIsEnumerable.call(object, keySymbol));
+  }
+});
 var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.9.2",
+      version: "3.10.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -30196,14 +30655,10 @@ var require_package2 = __commonJS2({
         build: "node -r esbuild-register helpers/build.ts",
         test: "jest --verbose",
         "test-notypes": "jest --verbose --testPathIgnorePatterns src/__tests__/types/types.test.ts",
-        format: "prettier --write .",
-        lint: "eslint --cache --fix --ext .ts .",
-        "lint-ci": "eslint --ext .ts .",
         generate: "node scripts/postinstall.js",
         postinstall: "node scripts/postinstall.js",
         prepare: "cp scripts/backup-index.js index.js && cp scripts/backup-index.d.ts index.d.ts",
-        prepublishOnly: "pnpm run build",
-        precommit: "lint-staged"
+        prepublishOnly: "pnpm run build"
       },
       files: [
         "README.md",
@@ -30219,31 +30674,24 @@ var require_package2 = __commonJS2({
         "@opentelemetry/api": "1.0.3",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009",
-        "@prisma/fetch-engine": "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009",
+        "@prisma/engines": "3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86",
+        "@prisma/fetch-engine": "3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009",
+        "@prisma/get-platform": "3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@timsuchanek/copy": "1.4.5",
         "@types/debug": "4.1.7",
         "@types/jest": "27.4.0",
         "@types/js-levenshtein": "1.1.1",
-        "@types/mssql": "7.1.4",
-        "@types/node": "12.20.42",
+        "@types/mssql": "7.1.5",
+        "@types/node": "12.20.46",
         "@types/pg": "8.6.4",
-        "@typescript-eslint/eslint-plugin": "5.9.0",
-        "@typescript-eslint/parser": "5.9.0",
         arg: "5.0.1",
         benchmark: "2.1.4",
         chalk: "4.1.2",
         "decimal.js": "10.3.1",
         esbuild: "0.13.14",
-        eslint: "8.6.0",
-        "eslint-config-prettier": "8.3.0",
-        "eslint-plugin-eslint-comments": "3.2.0",
-        "eslint-plugin-jest": "26.0.0",
-        "eslint-plugin-prettier": "4.0.0",
         execa: "5.1.1",
         "flat-map-polyfill": "0.3.8",
         "fs-monkey": "1.0.3",
@@ -30251,10 +30699,9 @@ var require_package2 = __commonJS2({
         "indent-string": "4.0.0",
         "is-obj": "2.0.0",
         "is-regexp": "2.1.0",
-        jest: "27.4.7",
+        jest: "27.5.1",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
-        "lint-staged": "12.1.5",
         "lz-string": "1.4.4",
         "make-dir": "3.1.0",
         mariadb: "2.5.5",
@@ -30262,7 +30709,6 @@ var require_package2 = __commonJS2({
         pg: "8.7.1",
         "pkg-up": "3.1.0",
         pluralize: "8.0.0",
-        prettier: "2.5.1",
         "replace-string": "3.1.0",
         rimraf: "3.0.2",
         "sort-keys": "4.2.0",
@@ -30285,501 +30731,14 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009"
-      },
-      "lint-staged": {
-        "*.ts": [
-          "eslint",
-          "prettier --write"
-        ]
+        "@prisma/engines-version": "3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86"
       },
       sideEffects: false
     };
   }
 });
-var require_lz_string = __commonJS2({
-  "../../node_modules/.pnpm/lz-string@1.4.4/node_modules/lz-string/libs/lz-string.js"(exports2, module2) {
-    var LZString = function() {
-      var f = String.fromCharCode;
-      var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-      var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
-      var baseReverseDic = {};
-      function getBaseValue(alphabet, character) {
-        if (!baseReverseDic[alphabet]) {
-          baseReverseDic[alphabet] = {};
-          for (var i = 0; i < alphabet.length; i++) {
-            baseReverseDic[alphabet][alphabet.charAt(i)] = i;
-          }
-        }
-        return baseReverseDic[alphabet][character];
-      }
-      __name(getBaseValue, "getBaseValue");
-      __name2(getBaseValue, "getBaseValue");
-      var LZString2 = {
-        compressToBase64: function(input) {
-          if (input == null)
-            return "";
-          var res = LZString2._compress(input, 6, function(a) {
-            return keyStrBase64.charAt(a);
-          });
-          switch (res.length % 4) {
-            default:
-            case 0:
-              return res;
-            case 1:
-              return res + "===";
-            case 2:
-              return res + "==";
-            case 3:
-              return res + "=";
-          }
-        },
-        decompressFromBase64: function(input) {
-          if (input == null)
-            return "";
-          if (input == "")
-            return null;
-          return LZString2._decompress(input.length, 32, function(index) {
-            return getBaseValue(keyStrBase64, input.charAt(index));
-          });
-        },
-        compressToUTF16: function(input) {
-          if (input == null)
-            return "";
-          return LZString2._compress(input, 15, function(a) {
-            return f(a + 32);
-          }) + " ";
-        },
-        decompressFromUTF16: function(compressed) {
-          if (compressed == null)
-            return "";
-          if (compressed == "")
-            return null;
-          return LZString2._decompress(compressed.length, 16384, function(index) {
-            return compressed.charCodeAt(index) - 32;
-          });
-        },
-        compressToUint8Array: function(uncompressed) {
-          var compressed = LZString2.compress(uncompressed);
-          var buf = new Uint8Array(compressed.length * 2);
-          for (var i = 0, TotalLen = compressed.length; i < TotalLen; i++) {
-            var current_value = compressed.charCodeAt(i);
-            buf[i * 2] = current_value >>> 8;
-            buf[i * 2 + 1] = current_value % 256;
-          }
-          return buf;
-        },
-        decompressFromUint8Array: function(compressed) {
-          if (compressed === null || compressed === void 0) {
-            return LZString2.decompress(compressed);
-          } else {
-            var buf = new Array(compressed.length / 2);
-            for (var i = 0, TotalLen = buf.length; i < TotalLen; i++) {
-              buf[i] = compressed[i * 2] * 256 + compressed[i * 2 + 1];
-            }
-            var result = [];
-            buf.forEach(function(c) {
-              result.push(f(c));
-            });
-            return LZString2.decompress(result.join(""));
-          }
-        },
-        compressToEncodedURIComponent: function(input) {
-          if (input == null)
-            return "";
-          return LZString2._compress(input, 6, function(a) {
-            return keyStrUriSafe.charAt(a);
-          });
-        },
-        decompressFromEncodedURIComponent: function(input) {
-          if (input == null)
-            return "";
-          if (input == "")
-            return null;
-          input = input.replace(/ /g, "+");
-          return LZString2._decompress(input.length, 32, function(index) {
-            return getBaseValue(keyStrUriSafe, input.charAt(index));
-          });
-        },
-        compress: function(uncompressed) {
-          return LZString2._compress(uncompressed, 16, function(a) {
-            return f(a);
-          });
-        },
-        _compress: function(uncompressed, bitsPerChar, getCharFromInt) {
-          if (uncompressed == null)
-            return "";
-          var i, value, context_dictionary = {}, context_dictionaryToCreate = {}, context_c = "", context_wc = "", context_w = "", context_enlargeIn = 2, context_dictSize = 3, context_numBits = 2, context_data = [], context_data_val = 0, context_data_position = 0, ii;
-          for (ii = 0; ii < uncompressed.length; ii += 1) {
-            context_c = uncompressed.charAt(ii);
-            if (!Object.prototype.hasOwnProperty.call(context_dictionary, context_c)) {
-              context_dictionary[context_c] = context_dictSize++;
-              context_dictionaryToCreate[context_c] = true;
-            }
-            context_wc = context_w + context_c;
-            if (Object.prototype.hasOwnProperty.call(context_dictionary, context_wc)) {
-              context_w = context_wc;
-            } else {
-              if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
-                if (context_w.charCodeAt(0) < 256) {
-                  for (i = 0; i < context_numBits; i++) {
-                    context_data_val = context_data_val << 1;
-                    if (context_data_position == bitsPerChar - 1) {
-                      context_data_position = 0;
-                      context_data.push(getCharFromInt(context_data_val));
-                      context_data_val = 0;
-                    } else {
-                      context_data_position++;
-                    }
-                  }
-                  value = context_w.charCodeAt(0);
-                  for (i = 0; i < 8; i++) {
-                    context_data_val = context_data_val << 1 | value & 1;
-                    if (context_data_position == bitsPerChar - 1) {
-                      context_data_position = 0;
-                      context_data.push(getCharFromInt(context_data_val));
-                      context_data_val = 0;
-                    } else {
-                      context_data_position++;
-                    }
-                    value = value >> 1;
-                  }
-                } else {
-                  value = 1;
-                  for (i = 0; i < context_numBits; i++) {
-                    context_data_val = context_data_val << 1 | value;
-                    if (context_data_position == bitsPerChar - 1) {
-                      context_data_position = 0;
-                      context_data.push(getCharFromInt(context_data_val));
-                      context_data_val = 0;
-                    } else {
-                      context_data_position++;
-                    }
-                    value = 0;
-                  }
-                  value = context_w.charCodeAt(0);
-                  for (i = 0; i < 16; i++) {
-                    context_data_val = context_data_val << 1 | value & 1;
-                    if (context_data_position == bitsPerChar - 1) {
-                      context_data_position = 0;
-                      context_data.push(getCharFromInt(context_data_val));
-                      context_data_val = 0;
-                    } else {
-                      context_data_position++;
-                    }
-                    value = value >> 1;
-                  }
-                }
-                context_enlargeIn--;
-                if (context_enlargeIn == 0) {
-                  context_enlargeIn = Math.pow(2, context_numBits);
-                  context_numBits++;
-                }
-                delete context_dictionaryToCreate[context_w];
-              } else {
-                value = context_dictionary[context_w];
-                for (i = 0; i < context_numBits; i++) {
-                  context_data_val = context_data_val << 1 | value & 1;
-                  if (context_data_position == bitsPerChar - 1) {
-                    context_data_position = 0;
-                    context_data.push(getCharFromInt(context_data_val));
-                    context_data_val = 0;
-                  } else {
-                    context_data_position++;
-                  }
-                  value = value >> 1;
-                }
-              }
-              context_enlargeIn--;
-              if (context_enlargeIn == 0) {
-                context_enlargeIn = Math.pow(2, context_numBits);
-                context_numBits++;
-              }
-              context_dictionary[context_wc] = context_dictSize++;
-              context_w = String(context_c);
-            }
-          }
-          if (context_w !== "") {
-            if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
-              if (context_w.charCodeAt(0) < 256) {
-                for (i = 0; i < context_numBits; i++) {
-                  context_data_val = context_data_val << 1;
-                  if (context_data_position == bitsPerChar - 1) {
-                    context_data_position = 0;
-                    context_data.push(getCharFromInt(context_data_val));
-                    context_data_val = 0;
-                  } else {
-                    context_data_position++;
-                  }
-                }
-                value = context_w.charCodeAt(0);
-                for (i = 0; i < 8; i++) {
-                  context_data_val = context_data_val << 1 | value & 1;
-                  if (context_data_position == bitsPerChar - 1) {
-                    context_data_position = 0;
-                    context_data.push(getCharFromInt(context_data_val));
-                    context_data_val = 0;
-                  } else {
-                    context_data_position++;
-                  }
-                  value = value >> 1;
-                }
-              } else {
-                value = 1;
-                for (i = 0; i < context_numBits; i++) {
-                  context_data_val = context_data_val << 1 | value;
-                  if (context_data_position == bitsPerChar - 1) {
-                    context_data_position = 0;
-                    context_data.push(getCharFromInt(context_data_val));
-                    context_data_val = 0;
-                  } else {
-                    context_data_position++;
-                  }
-                  value = 0;
-                }
-                value = context_w.charCodeAt(0);
-                for (i = 0; i < 16; i++) {
-                  context_data_val = context_data_val << 1 | value & 1;
-                  if (context_data_position == bitsPerChar - 1) {
-                    context_data_position = 0;
-                    context_data.push(getCharFromInt(context_data_val));
-                    context_data_val = 0;
-                  } else {
-                    context_data_position++;
-                  }
-                  value = value >> 1;
-                }
-              }
-              context_enlargeIn--;
-              if (context_enlargeIn == 0) {
-                context_enlargeIn = Math.pow(2, context_numBits);
-                context_numBits++;
-              }
-              delete context_dictionaryToCreate[context_w];
-            } else {
-              value = context_dictionary[context_w];
-              for (i = 0; i < context_numBits; i++) {
-                context_data_val = context_data_val << 1 | value & 1;
-                if (context_data_position == bitsPerChar - 1) {
-                  context_data_position = 0;
-                  context_data.push(getCharFromInt(context_data_val));
-                  context_data_val = 0;
-                } else {
-                  context_data_position++;
-                }
-                value = value >> 1;
-              }
-            }
-            context_enlargeIn--;
-            if (context_enlargeIn == 0) {
-              context_enlargeIn = Math.pow(2, context_numBits);
-              context_numBits++;
-            }
-          }
-          value = 2;
-          for (i = 0; i < context_numBits; i++) {
-            context_data_val = context_data_val << 1 | value & 1;
-            if (context_data_position == bitsPerChar - 1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = value >> 1;
-          }
-          while (true) {
-            context_data_val = context_data_val << 1;
-            if (context_data_position == bitsPerChar - 1) {
-              context_data.push(getCharFromInt(context_data_val));
-              break;
-            } else
-              context_data_position++;
-          }
-          return context_data.join("");
-        },
-        decompress: function(compressed) {
-          if (compressed == null)
-            return "";
-          if (compressed == "")
-            return null;
-          return LZString2._decompress(compressed.length, 32768, function(index) {
-            return compressed.charCodeAt(index);
-          });
-        },
-        _decompress: function(length, resetValue, getNextValue) {
-          var dictionary = [], next, enlargeIn = 4, dictSize = 4, numBits = 3, entry = "", result = [], i, w, bits, resb, maxpower, power, c, data = { val: getNextValue(0), position: resetValue, index: 1 };
-          for (i = 0; i < 3; i += 1) {
-            dictionary[i] = i;
-          }
-          bits = 0;
-          maxpower = Math.pow(2, 2);
-          power = 1;
-          while (power != maxpower) {
-            resb = data.val & data.position;
-            data.position >>= 1;
-            if (data.position == 0) {
-              data.position = resetValue;
-              data.val = getNextValue(data.index++);
-            }
-            bits |= (resb > 0 ? 1 : 0) * power;
-            power <<= 1;
-          }
-          switch (next = bits) {
-            case 0:
-              bits = 0;
-              maxpower = Math.pow(2, 8);
-              power = 1;
-              while (power != maxpower) {
-                resb = data.val & data.position;
-                data.position >>= 1;
-                if (data.position == 0) {
-                  data.position = resetValue;
-                  data.val = getNextValue(data.index++);
-                }
-                bits |= (resb > 0 ? 1 : 0) * power;
-                power <<= 1;
-              }
-              c = f(bits);
-              break;
-            case 1:
-              bits = 0;
-              maxpower = Math.pow(2, 16);
-              power = 1;
-              while (power != maxpower) {
-                resb = data.val & data.position;
-                data.position >>= 1;
-                if (data.position == 0) {
-                  data.position = resetValue;
-                  data.val = getNextValue(data.index++);
-                }
-                bits |= (resb > 0 ? 1 : 0) * power;
-                power <<= 1;
-              }
-              c = f(bits);
-              break;
-            case 2:
-              return "";
-          }
-          dictionary[3] = c;
-          w = c;
-          result.push(c);
-          while (true) {
-            if (data.index > length) {
-              return "";
-            }
-            bits = 0;
-            maxpower = Math.pow(2, numBits);
-            power = 1;
-            while (power != maxpower) {
-              resb = data.val & data.position;
-              data.position >>= 1;
-              if (data.position == 0) {
-                data.position = resetValue;
-                data.val = getNextValue(data.index++);
-              }
-              bits |= (resb > 0 ? 1 : 0) * power;
-              power <<= 1;
-            }
-            switch (c = bits) {
-              case 0:
-                bits = 0;
-                maxpower = Math.pow(2, 8);
-                power = 1;
-                while (power != maxpower) {
-                  resb = data.val & data.position;
-                  data.position >>= 1;
-                  if (data.position == 0) {
-                    data.position = resetValue;
-                    data.val = getNextValue(data.index++);
-                  }
-                  bits |= (resb > 0 ? 1 : 0) * power;
-                  power <<= 1;
-                }
-                dictionary[dictSize++] = f(bits);
-                c = dictSize - 1;
-                enlargeIn--;
-                break;
-              case 1:
-                bits = 0;
-                maxpower = Math.pow(2, 16);
-                power = 1;
-                while (power != maxpower) {
-                  resb = data.val & data.position;
-                  data.position >>= 1;
-                  if (data.position == 0) {
-                    data.position = resetValue;
-                    data.val = getNextValue(data.index++);
-                  }
-                  bits |= (resb > 0 ? 1 : 0) * power;
-                  power <<= 1;
-                }
-                dictionary[dictSize++] = f(bits);
-                c = dictSize - 1;
-                enlargeIn--;
-                break;
-              case 2:
-                return result.join("");
-            }
-            if (enlargeIn == 0) {
-              enlargeIn = Math.pow(2, numBits);
-              numBits++;
-            }
-            if (dictionary[c]) {
-              entry = dictionary[c];
-            } else {
-              if (c === dictSize) {
-                entry = w + w.charAt(0);
-              } else {
-                return null;
-              }
-            }
-            result.push(entry);
-            dictionary[dictSize++] = w + entry.charAt(0);
-            enlargeIn--;
-            w = entry;
-            if (enlargeIn == 0) {
-              enlargeIn = Math.pow(2, numBits);
-              numBits++;
-            }
-          }
-        }
-      };
-      return LZString2;
-    }();
-    if (typeof define === "function" && false) {
-      define(function() {
-        return LZString;
-      });
-    } else if (typeof module2 !== "undefined" && module2 != null) {
-      module2.exports = LZString;
-    }
-  }
-});
-var DMMF;
-(function(DMMF2) {
-  let ModelAction;
-  (function(ModelAction2) {
-    ModelAction2["findUnique"] = "findUnique";
-    ModelAction2["findFirst"] = "findFirst";
-    ModelAction2["findMany"] = "findMany";
-    ModelAction2["create"] = "create";
-    ModelAction2["createMany"] = "createMany";
-    ModelAction2["update"] = "update";
-    ModelAction2["updateMany"] = "updateMany";
-    ModelAction2["upsert"] = "upsert";
-    ModelAction2["delete"] = "delete";
-    ModelAction2["deleteMany"] = "deleteMany";
-    ModelAction2["groupBy"] = "groupBy";
-    ModelAction2["count"] = "count";
-    ModelAction2["aggregate"] = "aggregate";
-    ModelAction2["findRaw"] = "findRaw";
-    ModelAction2["aggregateRaw"] = "aggregateRaw";
-  })(ModelAction = DMMF2.ModelAction || (DMMF2.ModelAction = {}));
-})(DMMF || (DMMF = {}));
+var lzString = __toModule22(require_lz_string());
 var import_chalk = __toModule22(require_source2());
-var import_indent_string = __toModule22(require_indent_string2());
-var import_js_levenshtein = __toModule22(require_js_levenshtein());
 var EXP_LIMIT = 9e15;
 var MAX_DIGITS = 1e9;
 var NUMERALS = "0123456789abcdef";
@@ -33214,6 +33173,8 @@ var Decimal = P.constructor = clone(DEFAULTS);
 LN10 = new Decimal(LN10);
 PI = new Decimal(PI);
 var decimal_default = Decimal;
+var import_indent_string = __toModule22(require_indent_string2());
+var import_js_levenshtein = __toModule22(require_js_levenshtein());
 var keyBy = /* @__PURE__ */ __name2((collection, prop) => {
   const acc = {};
   for (const obj of collection) {
@@ -33222,18 +33183,6 @@ var keyBy = /* @__PURE__ */ __name2((collection, prop) => {
   }
   return acc;
 }, "keyBy");
-var keyBy2 = /* @__PURE__ */ __name2((collection1, collection2, prop) => {
-  const acc = {};
-  for (const obj of collection1) {
-    const key = obj[prop];
-    acc[key] = obj;
-  }
-  for (const obj of collection2) {
-    const key = obj[prop];
-    acc[key] = obj;
-  }
-  return acc;
-}, "keyBy2");
 var ScalarTypeTable = {
   String: true,
   Int: true,
@@ -33465,6 +33414,8 @@ var DMMFHelper = /* @__PURE__ */ __name(class {
     this.queryType = this.getQueryType();
     this.mutationType = this.getMutationType();
     this.modelMap = this.getModelMap();
+    this.typeMap = this.getTypeMap();
+    this.typeAndModelMap = this.getTypeModelMap();
     this.outputTypes = this.getOutputTypes();
     this.outputTypeMap = this.getMergedOutputTypeMap();
     this.resolveOutputTypes();
@@ -33563,7 +33514,13 @@ var DMMFHelper = /* @__PURE__ */ __name(class {
     };
   }
   getModelMap() {
-    return keyBy(this.datamodel.models, "name");
+    return { ...keyBy(this.datamodel.models, "name") };
+  }
+  getTypeMap() {
+    return { ...keyBy(this.datamodel.types, "name") };
+  }
+  getTypeModelMap() {
+    return { ...this.getTypeMap(), ...this.getModelMap() };
   }
   getMergedOutputTypeMap() {
     return {
@@ -33581,2186 +33538,46 @@ var DMMFHelper = /* @__PURE__ */ __name(class {
     return keyBy(this.mappings.modelOperations, "model");
   }
   getRootFieldMap() {
-    return keyBy2(this.queryType.fields, this.mutationType.fields, "name");
+    return { ...keyBy(this.queryType.fields, "name"), ...keyBy(this.mutationType.fields, "name") };
   }
 }, "DMMFHelper");
 __name2(DMMFHelper, "DMMFHelper");
-var import_chalk5 = __toModule22(require_source2());
-var import_indent_string2 = __toModule22(require_indent_string2());
-var import_strip_ansi2 = __toModule22(require_strip_ansi());
-function isSpecificValue(val) {
-  return val instanceof Buffer || val instanceof Date || val instanceof RegExp ? true : false;
-}
-__name(isSpecificValue, "isSpecificValue");
-__name2(isSpecificValue, "isSpecificValue");
-function cloneSpecificValue(val) {
-  if (val instanceof Buffer) {
-    const x = Buffer.alloc ? Buffer.alloc(val.length) : new Buffer(val.length);
-    val.copy(x);
-    return x;
-  } else if (val instanceof Date) {
-    return new Date(val.getTime());
-  } else if (val instanceof RegExp) {
-    return new RegExp(val);
-  } else {
-    throw new Error("Unexpected situation");
-  }
-}
-__name(cloneSpecificValue, "cloneSpecificValue");
-__name2(cloneSpecificValue, "cloneSpecificValue");
-function deepCloneArray(arr) {
-  const clone2 = [];
-  arr.forEach(function(item, index) {
-    if (typeof item === "object" && item !== null) {
-      if (Array.isArray(item)) {
-        clone2[index] = deepCloneArray(item);
-      } else if (isSpecificValue(item)) {
-        clone2[index] = cloneSpecificValue(item);
-      } else {
-        clone2[index] = deepExtend({}, item);
-      }
-    } else {
-      clone2[index] = item;
-    }
-  });
-  return clone2;
-}
-__name(deepCloneArray, "deepCloneArray");
-__name2(deepCloneArray, "deepCloneArray");
-function safeGetProperty(object, property) {
-  return property === "__proto__" ? void 0 : object[property];
-}
-__name(safeGetProperty, "safeGetProperty");
-__name2(safeGetProperty, "safeGetProperty");
-var deepExtend = /* @__PURE__ */ __name2(function(target, ...args) {
-  if (!target || typeof target !== "object") {
-    return false;
-  }
-  if (args.length === 0) {
-    return target;
-  }
-  let val, src;
-  for (const obj of args) {
-    if (typeof obj !== "object" || obj === null || Array.isArray(obj)) {
-      continue;
-    }
-    for (const key of Object.keys(obj)) {
-      src = safeGetProperty(target, key);
-      val = safeGetProperty(obj, key);
-      if (val === target) {
-        continue;
-      } else if (typeof val !== "object" || val === null) {
-        target[key] = val;
-        continue;
-      } else if (Array.isArray(val)) {
-        target[key] = deepCloneArray(val);
-        continue;
-      } else if (isSpecificValue(val)) {
-        target[key] = cloneSpecificValue(val);
-        continue;
-      } else if (typeof src !== "object" || src === null || Array.isArray(src)) {
-        target[key] = deepExtend({}, val);
-        continue;
-      } else {
-        target[key] = deepExtend(src, val);
-        continue;
-      }
-    }
-  }
-  return target;
-}, "deepExtend");
-var keys = /* @__PURE__ */ __name2((ks) => Array.isArray(ks) ? ks : ks.split("."), "keys");
-var deepGet = /* @__PURE__ */ __name2((o, kp) => keys(kp).reduce((o2, k) => o2 && o2[k], o), "deepGet");
-var deepSet = /* @__PURE__ */ __name2((o, kp, v) => keys(kp).reduceRight((v2, k, i, ks) => Object.assign({}, deepGet(o, ks.slice(0, i)), { [k]: v2 }), v), "deepSet");
-function filterObject(obj, cb) {
-  if (!obj || typeof obj !== "object" || typeof obj.hasOwnProperty !== "function") {
-    return obj;
-  }
-  const newObj = {};
-  for (const key in obj) {
-    const value = obj[key];
-    if (Object.hasOwnProperty.call(obj, key) && cb(key, value)) {
-      newObj[key] = value;
-    }
-  }
-  return newObj;
-}
-__name(filterObject, "filterObject");
-__name2(filterObject, "filterObject");
-function flatten(array) {
-  return Array.prototype.concat.apply([], array);
-}
-__name(flatten, "flatten");
-__name2(flatten, "flatten");
-function flatMap(array, callbackFn, thisArg) {
-  return flatten(array.map(callbackFn, thisArg));
-}
-__name(flatMap, "flatMap");
-__name2(flatMap, "flatMap");
-var notReallyObjects = {
-  "[object Date]": true,
-  "[object BitInt]": true,
-  "[object Uint8Array]": true,
-  "[object Function]": true
-};
-function isObject(value) {
-  return value && typeof value === "object" && !notReallyObjects[Object.prototype.toString.call(value)];
-}
-__name(isObject, "isObject");
-__name2(isObject, "isObject");
-function omit(object, path6) {
-  const result = {};
-  const paths = Array.isArray(path6) ? path6 : [path6];
-  for (const key in object) {
-    if (Object.hasOwnProperty.call(object, key) && !paths.includes(key)) {
-      result[key] = object[key];
-    }
-  }
-  return result;
-}
-__name(omit, "omit");
-__name2(omit, "omit");
-var import_chalk2 = __toModule22(require_source2());
-var import_strip_ansi = __toModule22(require_strip_ansi());
-var isRegexp = require_is_regexp();
-var isObj = require_is_obj();
-var getOwnEnumPropSymbols = require_lib3().default;
-var stringifyObject = /* @__PURE__ */ __name2((input, options2, pad) => {
-  const seen = [];
-  return (/* @__PURE__ */ __name2(/* @__PURE__ */ __name(function stringifyObject2(input2, options3 = {}, pad2 = "", path6 = []) {
-    options3.indent = options3.indent || "	";
-    let tokens;
-    if (options3.inlineCharacterLimit === void 0) {
-      tokens = {
-        newLine: "\n",
-        newLineOrSpace: "\n",
-        pad: pad2,
-        indent: pad2 + options3.indent
-      };
-    } else {
-      tokens = {
-        newLine: "@@__STRINGIFY_OBJECT_NEW_LINE__@@",
-        newLineOrSpace: "@@__STRINGIFY_OBJECT_NEW_LINE_OR_SPACE__@@",
-        pad: "@@__STRINGIFY_OBJECT_PAD__@@",
-        indent: "@@__STRINGIFY_OBJECT_INDENT__@@"
-      };
-    }
-    const expandWhiteSpace = /* @__PURE__ */ __name2((string) => {
-      if (options3.inlineCharacterLimit === void 0) {
-        return string;
-      }
-      const oneLined = string.replace(new RegExp(tokens.newLine, "g"), "").replace(new RegExp(tokens.newLineOrSpace, "g"), " ").replace(new RegExp(tokens.pad + "|" + tokens.indent, "g"), "");
-      if (oneLined.length <= options3.inlineCharacterLimit) {
-        return oneLined;
-      }
-      return string.replace(new RegExp(tokens.newLine + "|" + tokens.newLineOrSpace, "g"), "\n").replace(new RegExp(tokens.pad, "g"), pad2).replace(new RegExp(tokens.indent, "g"), pad2 + options3.indent);
-    }, "expandWhiteSpace");
-    if (seen.indexOf(input2) !== -1) {
-      return '"[Circular]"';
-    }
-    if (Buffer.isBuffer(input2)) {
-      return `Buffer(${Buffer.length})`;
-    }
-    if (input2 === null || input2 === void 0 || typeof input2 === "number" || typeof input2 === "boolean" || typeof input2 === "function" || typeof input2 === "symbol" || isRegexp(input2)) {
-      return String(input2);
-    }
-    if (input2 instanceof Date) {
-      return `new Date('${input2.toISOString()}')`;
-    }
-    if (Array.isArray(input2)) {
-      if (input2.length === 0) {
-        return "[]";
-      }
-      seen.push(input2);
-      const ret = "[" + tokens.newLine + input2.map((el, i) => {
-        const eol = input2.length - 1 === i ? tokens.newLine : "," + tokens.newLineOrSpace;
-        let value = stringifyObject2(el, options3, pad2 + options3.indent, [...path6, i]);
-        if (options3.transformValue) {
-          value = options3.transformValue(input2, i, value);
-        }
-        return tokens.indent + value + eol;
-      }).join("") + tokens.pad + "]";
-      seen.pop();
-      return expandWhiteSpace(ret);
-    }
-    if (isObj(input2)) {
-      let objKeys = Object.keys(input2).concat(getOwnEnumPropSymbols(input2));
-      if (options3.filter) {
-        objKeys = objKeys.filter((el) => options3.filter(input2, el));
-      }
-      if (objKeys.length === 0) {
-        return "{}";
-      }
-      seen.push(input2);
-      const ret = "{" + tokens.newLine + objKeys.map((el, i) => {
-        const eol = objKeys.length - 1 === i ? tokens.newLine : "," + tokens.newLineOrSpace;
-        const isSymbol = typeof el === "symbol";
-        const isClassic = !isSymbol && /^[a-z$_][a-z$_0-9]*$/i.test(el);
-        const key = isSymbol || isClassic ? el : stringifyObject2(el, options3, void 0, [...path6, el]);
-        let value = stringifyObject2(input2[el], options3, pad2 + options3.indent, [...path6, el]);
-        if (options3.transformValue) {
-          value = options3.transformValue(input2, el, value);
-        }
-        let line = tokens.indent + String(key) + ": " + value + eol;
-        if (options3.transformLine) {
-          line = options3.transformLine({
-            obj: input2,
-            indent: tokens.indent,
-            key,
-            stringifiedValue: value,
-            value: input2[el],
-            eol,
-            originalLine: line,
-            path: path6.concat(key)
-          });
-        }
-        return line;
-      }).join("") + tokens.pad + "}";
-      seen.pop();
-      return expandWhiteSpace(ret);
-    }
-    input2 = String(input2).replace(/[\r\n]/g, (x) => x === "\n" ? "\\n" : "\\r");
-    if (options3.singleQuotes === false) {
-      input2 = input2.replace(/"/g, '\\"');
-      return `"${input2}"`;
-    }
-    input2 = input2.replace(/\\?'/g, "\\'");
-    return `'${input2}'`;
-  }, "stringifyObject2"), "stringifyObject"))(input, options2, pad);
-}, "stringifyObject");
-var stringifyObject_default = stringifyObject;
-var DIM_TOKEN = "@@__DIM_POINTER__@@";
-function printJsonWithErrors({ ast, keyPaths, valuePaths, missingItems }) {
-  let obj = ast;
-  for (const { path: path6, type } of missingItems) {
-    obj = deepSet(obj, path6, type);
-  }
-  return stringifyObject_default(obj, {
-    indent: "  ",
-    transformLine: ({ indent: indent4, key, value, stringifiedValue, eol, path: path6 }) => {
-      const dottedPath = path6.join(".");
-      const keyError = keyPaths.includes(dottedPath);
-      const valueError = valuePaths.includes(dottedPath);
-      const missingItem = missingItems.find((item) => item.path === dottedPath);
-      let valueStr = stringifiedValue;
-      if (missingItem) {
-        if (typeof value === "string") {
-          valueStr = valueStr.slice(1, valueStr.length - 1);
-        }
-        const isRequiredStr = missingItem.isRequired ? "" : "?";
-        const prefix = missingItem.isRequired ? "+" : "?";
-        const color = missingItem.isRequired ? import_chalk2.default.greenBright : import_chalk2.default.green;
-        let output = color(prefixLines(key + isRequiredStr + ": " + valueStr + eol, indent4, prefix));
-        if (!missingItem.isRequired) {
-          output = import_chalk2.default.dim(output);
-        }
-        return output;
-      } else {
-        const isOnMissingItemPath = missingItems.some((item) => dottedPath.startsWith(item.path));
-        const isOptional = key[key.length - 2] === "?";
-        if (isOptional) {
-          key = key.slice(1, key.length - 1);
-        }
-        if (isOptional && typeof value === "object" && value !== null) {
-          valueStr = valueStr.split("\n").map((line, index, arr) => index === arr.length - 1 ? line + DIM_TOKEN : line).join("\n");
-        }
-        if (isOnMissingItemPath && typeof value === "string") {
-          valueStr = valueStr.slice(1, valueStr.length - 1);
-          if (!isOptional) {
-            valueStr = import_chalk2.default.bold(valueStr);
-          }
-        }
-        if ((typeof value !== "object" || value === null) && !valueError && !isOnMissingItemPath) {
-          valueStr = import_chalk2.default.dim(valueStr);
-        }
-        const keyStr = keyError ? import_chalk2.default.redBright(key) : key;
-        valueStr = valueError ? import_chalk2.default.redBright(valueStr) : valueStr;
-        let output = indent4 + keyStr + ": " + valueStr + (isOnMissingItemPath ? eol : import_chalk2.default.dim(eol));
-        if (keyError || valueError) {
-          const lines = output.split("\n");
-          const keyLength = String(key).length;
-          const keyScribbles = keyError ? import_chalk2.default.redBright("~".repeat(keyLength)) : " ".repeat(keyLength);
-          const valueLength = valueError ? getValueLength(indent4, key, value, stringifiedValue) : 0;
-          const hideValueScribbles = Boolean(valueError && typeof value === "object" && value !== null);
-          const valueScribbles = valueError ? "  " + import_chalk2.default.redBright("~".repeat(valueLength)) : "";
-          if (keyScribbles && keyScribbles.length > 0 && !hideValueScribbles) {
-            lines.splice(1, 0, indent4 + keyScribbles + valueScribbles);
-          }
-          if (keyScribbles && keyScribbles.length > 0 && hideValueScribbles) {
-            lines.splice(lines.length - 1, 0, indent4.slice(0, indent4.length - 2) + valueScribbles);
-          }
-          output = lines.join("\n");
-        }
-        return output;
-      }
-    }
-  });
-}
-__name(printJsonWithErrors, "printJsonWithErrors");
-__name2(printJsonWithErrors, "printJsonWithErrors");
-function getValueLength(indent4, key, value, stringifiedValue) {
-  if (value === null) {
-    return 4;
-  }
-  if (typeof value === "string") {
-    return value.length + 2;
-  }
-  if (typeof value === "object") {
-    return Math.abs(getLongestLine(`${key}: ${(0, import_strip_ansi.default)(stringifiedValue)}`) - indent4.length);
-  }
-  return String(value).length;
-}
-__name(getValueLength, "getValueLength");
-__name2(getValueLength, "getValueLength");
-function getLongestLine(str) {
-  return str.split("\n").reduce((max2, curr) => curr.length > max2 ? curr.length : max2, 0);
-}
-__name(getLongestLine, "getLongestLine");
-__name2(getLongestLine, "getLongestLine");
-function prefixLines(str, indent4, prefix) {
-  return str.split("\n").map((line, index, arr) => index === 0 ? prefix + indent4.slice(1) + line : index < arr.length - 1 ? prefix + line.slice(1) : line).map((line) => {
-    return (0, import_strip_ansi.default)(line).includes(DIM_TOKEN) ? import_chalk2.default.dim(line.replace(DIM_TOKEN, "")) : line.includes("?") ? import_chalk2.default.dim(line) : line;
-  }).join("\n");
-}
-__name(prefixLines, "prefixLines");
-__name2(prefixLines, "prefixLines");
-var import_chalk4 = __toModule22(require_source2());
-var UNKNOWN_FUNCTION = "<unknown>";
-function parse(stackString) {
-  var lines = stackString.split("\n");
-  return lines.reduce(function(stack, line) {
-    var parseResult = parseChrome(line) || parseWinjs(line) || parseGecko(line) || parseNode(line) || parseJSC(line);
-    if (parseResult) {
-      stack.push(parseResult);
-    }
-    return stack;
-  }, []);
-}
-__name(parse, "parse");
-__name2(parse, "parse");
-var chromeRe = /^\s*at (.*?) ?\(((?:file|https?|blob|chrome-extension|native|eval|webpack|<anonymous>|\/|[a-z]:\\|\\\\).*?)(?::(\d+))?(?::(\d+))?\)?\s*$/i;
-var chromeEvalRe = /\((\S*)(?::(\d+))(?::(\d+))\)/;
-function parseChrome(line) {
-  var parts = chromeRe.exec(line);
-  if (!parts) {
-    return null;
-  }
-  var isNative = parts[2] && parts[2].indexOf("native") === 0;
-  var isEval = parts[2] && parts[2].indexOf("eval") === 0;
-  var submatch = chromeEvalRe.exec(parts[2]);
-  if (isEval && submatch != null) {
-    parts[2] = submatch[1];
-    parts[3] = submatch[2];
-    parts[4] = submatch[3];
-  }
-  return {
-    file: !isNative ? parts[2] : null,
-    methodName: parts[1] || UNKNOWN_FUNCTION,
-    arguments: isNative ? [parts[2]] : [],
-    lineNumber: parts[3] ? +parts[3] : null,
-    column: parts[4] ? +parts[4] : null
-  };
-}
-__name(parseChrome, "parseChrome");
-__name2(parseChrome, "parseChrome");
-var winjsRe = /^\s*at (?:((?:\[object object\])?.+) )?\(?((?:file|ms-appx|https?|webpack|blob):.*?):(\d+)(?::(\d+))?\)?\s*$/i;
-function parseWinjs(line) {
-  var parts = winjsRe.exec(line);
-  if (!parts) {
-    return null;
-  }
-  return {
-    file: parts[2],
-    methodName: parts[1] || UNKNOWN_FUNCTION,
-    arguments: [],
-    lineNumber: +parts[3],
-    column: parts[4] ? +parts[4] : null
-  };
-}
-__name(parseWinjs, "parseWinjs");
-__name2(parseWinjs, "parseWinjs");
-var geckoRe = /^\s*(.*?)(?:\((.*?)\))?(?:^|@)((?:file|https?|blob|chrome|webpack|resource|\[native).*?|[^@]*bundle)(?::(\d+))?(?::(\d+))?\s*$/i;
-var geckoEvalRe = /(\S+) line (\d+)(?: > eval line \d+)* > eval/i;
-function parseGecko(line) {
-  var parts = geckoRe.exec(line);
-  if (!parts) {
-    return null;
-  }
-  var isEval = parts[3] && parts[3].indexOf(" > eval") > -1;
-  var submatch = geckoEvalRe.exec(parts[3]);
-  if (isEval && submatch != null) {
-    parts[3] = submatch[1];
-    parts[4] = submatch[2];
-    parts[5] = null;
-  }
-  return {
-    file: parts[3],
-    methodName: parts[1] || UNKNOWN_FUNCTION,
-    arguments: parts[2] ? parts[2].split(",") : [],
-    lineNumber: parts[4] ? +parts[4] : null,
-    column: parts[5] ? +parts[5] : null
-  };
-}
-__name(parseGecko, "parseGecko");
-__name2(parseGecko, "parseGecko");
-var javaScriptCoreRe = /^\s*(?:([^@]*)(?:\((.*?)\))?@)?(\S.*?):(\d+)(?::(\d+))?\s*$/i;
-function parseJSC(line) {
-  var parts = javaScriptCoreRe.exec(line);
-  if (!parts) {
-    return null;
-  }
-  return {
-    file: parts[3],
-    methodName: parts[1] || UNKNOWN_FUNCTION,
-    arguments: [],
-    lineNumber: +parts[4],
-    column: parts[5] ? +parts[5] : null
-  };
-}
-__name(parseJSC, "parseJSC");
-__name2(parseJSC, "parseJSC");
-var nodeRe = /^\s*at (?:((?:\[object object\])?[^\\/]+(?: \[as \S+\])?) )?\(?(.*?):(\d+)(?::(\d+))?\)?\s*$/i;
-function parseNode(line) {
-  var parts = nodeRe.exec(line);
-  if (!parts) {
-    return null;
-  }
-  return {
-    file: parts[2],
-    methodName: parts[1] || UNKNOWN_FUNCTION,
-    arguments: [],
-    lineNumber: +parts[3],
-    column: parts[4] ? +parts[4] : null
-  };
-}
-__name(parseNode, "parseNode");
-__name2(parseNode, "parseNode");
+var DMMF;
+(function(DMMF2) {
+  let ModelAction;
+  (function(ModelAction2) {
+    ModelAction2["findUnique"] = "findUnique";
+    ModelAction2["findFirst"] = "findFirst";
+    ModelAction2["findMany"] = "findMany";
+    ModelAction2["create"] = "create";
+    ModelAction2["createMany"] = "createMany";
+    ModelAction2["update"] = "update";
+    ModelAction2["updateMany"] = "updateMany";
+    ModelAction2["upsert"] = "upsert";
+    ModelAction2["delete"] = "delete";
+    ModelAction2["deleteMany"] = "deleteMany";
+    ModelAction2["groupBy"] = "groupBy";
+    ModelAction2["count"] = "count";
+    ModelAction2["aggregate"] = "aggregate";
+    ModelAction2["findRaw"] = "findRaw";
+    ModelAction2["aggregateRaw"] = "aggregateRaw";
+  })(ModelAction = DMMF2.ModelAction || (DMMF2.ModelAction = {}));
+})(DMMF || (DMMF = {}));
+var import_debug8 = __toModule22(require_dist7());
+var import_debug4 = __toModule22(require_dist7());
+var import_engines = __toModule22(require_dist8());
+var import_get_platform = __toModule22(require_dist9());
 var import_chalk3 = __toModule22(require_source2());
-var orange = import_chalk3.default.rgb(246, 145, 95);
-var darkBrightBlue = import_chalk3.default.rgb(107, 139, 140);
-var blue = import_chalk3.default.cyan;
-var brightBlue = import_chalk3.default.rgb(127, 155, 155);
-var identity = /* @__PURE__ */ __name2((str) => str, "identity");
-var theme = {
-  keyword: blue,
-  entity: blue,
-  value: brightBlue,
-  punctuation: darkBrightBlue,
-  directive: blue,
-  function: blue,
-  variable: brightBlue,
-  string: import_chalk3.default.greenBright,
-  boolean: orange,
-  number: import_chalk3.default.cyan,
-  comment: import_chalk3.default.grey
-};
-var _self = {};
-var uniqueId = 0;
-var Prism = {
-  manual: _self.Prism && _self.Prism.manual,
-  disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
-  util: {
-    encode: function(tokens) {
-      if (tokens instanceof Token) {
-        const anyTokens = tokens;
-        return new Token(anyTokens.type, Prism.util.encode(anyTokens.content), anyTokens.alias);
-      } else if (Array.isArray(tokens)) {
-        return tokens.map(Prism.util.encode);
-      } else {
-        return tokens.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\u00a0/g, " ");
-      }
-    },
-    type: function(o) {
-      return Object.prototype.toString.call(o).slice(8, -1);
-    },
-    objId: function(obj) {
-      if (!obj["__id"]) {
-        Object.defineProperty(obj, "__id", { value: ++uniqueId });
-      }
-      return obj["__id"];
-    },
-    clone: /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function deepClone(o, visited) {
-      let clone2, id, type = Prism.util.type(o);
-      visited = visited || {};
-      switch (type) {
-        case "Object":
-          id = Prism.util.objId(o);
-          if (visited[id]) {
-            return visited[id];
-          }
-          clone2 = {};
-          visited[id] = clone2;
-          for (const key in o) {
-            if (o.hasOwnProperty(key)) {
-              clone2[key] = deepClone(o[key], visited);
-            }
-          }
-          return clone2;
-        case "Array":
-          id = Prism.util.objId(o);
-          if (visited[id]) {
-            return visited[id];
-          }
-          clone2 = [];
-          visited[id] = clone2;
-          o.forEach(function(v, i) {
-            clone2[i] = deepClone(v, visited);
-          });
-          return clone2;
-        default:
-          return o;
-      }
-    }, "deepClone"), "deepClone")
-  },
-  languages: {
-    extend: function(id, redef) {
-      const lang = Prism.util.clone(Prism.languages[id]);
-      for (const key in redef) {
-        lang[key] = redef[key];
-      }
-      return lang;
-    },
-    insertBefore: function(inside, before, insert, root) {
-      root = root || Prism.languages;
-      const grammar = root[inside];
-      const ret = {};
-      for (const token in grammar) {
-        if (grammar.hasOwnProperty(token)) {
-          if (token == before) {
-            for (const newToken in insert) {
-              if (insert.hasOwnProperty(newToken)) {
-                ret[newToken] = insert[newToken];
-              }
-            }
-          }
-          if (!insert.hasOwnProperty(token)) {
-            ret[token] = grammar[token];
-          }
-        }
-      }
-      const old = root[inside];
-      root[inside] = ret;
-      Prism.languages.DFS(Prism.languages, function(key, value) {
-        if (value === old && key != inside) {
-          this[key] = ret;
-        }
-      });
-      return ret;
-    },
-    DFS: /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function DFS(o, callback, type, visited) {
-      visited = visited || {};
-      const objId = Prism.util.objId;
-      for (const i in o) {
-        if (o.hasOwnProperty(i)) {
-          callback.call(o, i, o[i], type || i);
-          const property = o[i], propertyType = Prism.util.type(property);
-          if (propertyType === "Object" && !visited[objId(property)]) {
-            visited[objId(property)] = true;
-            DFS(property, callback, null, visited);
-          } else if (propertyType === "Array" && !visited[objId(property)]) {
-            visited[objId(property)] = true;
-            DFS(property, callback, i, visited);
-          }
-        }
-      }
-    }, "DFS"), "DFS")
-  },
-  plugins: {},
-  highlight: function(text, grammar, language) {
-    const env = {
-      code: text,
-      grammar,
-      language
-    };
-    Prism.hooks.run("before-tokenize", env);
-    env.tokens = Prism.tokenize(env.code, env.grammar);
-    Prism.hooks.run("after-tokenize", env);
-    return Token.stringify(Prism.util.encode(env.tokens), env.language);
-  },
-  matchGrammar: function(text, strarr, grammar, index, startPos, oneshot, target) {
-    for (const token in grammar) {
-      if (!grammar.hasOwnProperty(token) || !grammar[token]) {
-        continue;
-      }
-      if (token == target) {
-        return;
-      }
-      let patterns = grammar[token];
-      patterns = Prism.util.type(patterns) === "Array" ? patterns : [patterns];
-      for (let j = 0; j < patterns.length; ++j) {
-        let pattern = patterns[j], inside = pattern.inside, lookbehind = !!pattern.lookbehind, greedy = !!pattern.greedy, lookbehindLength = 0, alias = pattern.alias;
-        if (greedy && !pattern.pattern.global) {
-          const flags = pattern.pattern.toString().match(/[imuy]*$/)[0];
-          pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
-        }
-        pattern = pattern.pattern || pattern;
-        for (let i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
-          let str = strarr[i];
-          if (strarr.length > text.length) {
-            return;
-          }
-          if (str instanceof Token) {
-            continue;
-          }
-          if (greedy && i != strarr.length - 1) {
-            pattern.lastIndex = pos;
-            var match = pattern.exec(text);
-            if (!match) {
-              break;
-            }
-            var from = match.index + (lookbehind ? match[1].length : 0), to = match.index + match[0].length, k = i, p = pos;
-            for (let len = strarr.length; k < len && (p < to || !strarr[k].type && !strarr[k - 1].greedy); ++k) {
-              p += strarr[k].length;
-              if (from >= p) {
-                ++i;
-                pos = p;
-              }
-            }
-            if (strarr[i] instanceof Token) {
-              continue;
-            }
-            delNum = k - i;
-            str = text.slice(pos, p);
-            match.index -= pos;
-          } else {
-            pattern.lastIndex = 0;
-            var match = pattern.exec(str), delNum = 1;
-          }
-          if (!match) {
-            if (oneshot) {
-              break;
-            }
-            continue;
-          }
-          if (lookbehind) {
-            lookbehindLength = match[1] ? match[1].length : 0;
-          }
-          var from = match.index + lookbehindLength, match = match[0].slice(lookbehindLength), to = from + match.length, before = str.slice(0, from), after = str.slice(to);
-          const args = [i, delNum];
-          if (before) {
-            ++i;
-            pos += before.length;
-            args.push(before);
-          }
-          const wrapped = new Token(token, inside ? Prism.tokenize(match, inside) : match, alias, match, greedy);
-          args.push(wrapped);
-          if (after) {
-            args.push(after);
-          }
-          Array.prototype.splice.apply(strarr, args);
-          if (delNum != 1)
-            Prism.matchGrammar(text, strarr, grammar, i, pos, true, token);
-          if (oneshot)
-            break;
-        }
-      }
-    }
-  },
-  tokenize: function(text, grammar) {
-    const strarr = [text];
-    const rest = grammar.rest;
-    if (rest) {
-      for (const token in rest) {
-        grammar[token] = rest[token];
-      }
-      delete grammar.rest;
-    }
-    Prism.matchGrammar(text, strarr, grammar, 0, 0, false);
-    return strarr;
-  },
-  hooks: {
-    all: {},
-    add: function(name, callback) {
-      const hooks = Prism.hooks.all;
-      hooks[name] = hooks[name] || [];
-      hooks[name].push(callback);
-    },
-    run: function(name, env) {
-      const callbacks = Prism.hooks.all[name];
-      if (!callbacks || !callbacks.length) {
-        return;
-      }
-      for (var i = 0, callback; callback = callbacks[i++]; ) {
-        callback(env);
-      }
-    }
-  },
-  Token
-};
-Prism.languages.clike = {
-  comment: [
-    {
-      pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
-      lookbehind: true
-    },
-    {
-      pattern: /(^|[^\\:])\/\/.*/,
-      lookbehind: true,
-      greedy: true
-    }
-  ],
-  string: {
-    pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
-    greedy: true
-  },
-  "class-name": {
-    pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
-    lookbehind: true,
-    inside: {
-      punctuation: /[.\\]/
-    }
-  },
-  keyword: /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
-  boolean: /\b(?:true|false)\b/,
-  function: /\w+(?=\()/,
-  number: /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
-  operator: /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
-  punctuation: /[{}[\];(),.:]/
-};
-Prism.languages.javascript = Prism.languages.extend("clike", {
-  "class-name": [
-    Prism.languages.clike["class-name"],
-    {
-      pattern: /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
-      lookbehind: true
-    }
-  ],
-  keyword: [
-    {
-      pattern: /((?:^|})\s*)(?:catch|finally)\b/,
-      lookbehind: true
-    },
-    {
-      pattern: /(^|[^.])\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
-      lookbehind: true
-    }
-  ],
-  number: /\b(?:(?:0[xX](?:[\dA-Fa-f](?:_[\dA-Fa-f])?)+|0[bB](?:[01](?:_[01])?)+|0[oO](?:[0-7](?:_[0-7])?)+)n?|(?:\d(?:_\d)?)+n|NaN|Infinity)\b|(?:\b(?:\d(?:_\d)?)+\.?(?:\d(?:_\d)?)*|\B\.(?:\d(?:_\d)?)+)(?:[Ee][+-]?(?:\d(?:_\d)?)+)?/,
-  function: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
-  operator: /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
-});
-Prism.languages.javascript["class-name"][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/;
-Prism.languages.insertBefore("javascript", "keyword", {
-  regex: {
-    pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyus]{0,6}(?=\s*($|[\r\n,.;})\]]))/,
-    lookbehind: true,
-    greedy: true
-  },
-  "function-variable": {
-    pattern: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,
-    alias: "function"
-  },
-  parameter: [
-    {
-      pattern: /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
-      lookbehind: true,
-      inside: Prism.languages.javascript
-    },
-    {
-      pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i,
-      inside: Prism.languages.javascript
-    },
-    {
-      pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,
-      lookbehind: true,
-      inside: Prism.languages.javascript
-    },
-    {
-      pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,
-      lookbehind: true,
-      inside: Prism.languages.javascript
-    }
-  ],
-  constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/
-});
-if (Prism.languages.markup) {
-  Prism.languages.markup.tag.addInlined("script", "javascript");
-}
-Prism.languages.js = Prism.languages.javascript;
-Prism.languages.typescript = Prism.languages.extend("javascript", {
-  keyword: /\b(?:abstract|as|async|await|break|case|catch|class|const|constructor|continue|debugger|declare|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|is|keyof|let|module|namespace|new|null|of|package|private|protected|public|readonly|return|require|set|static|super|switch|this|throw|try|type|typeof|var|void|while|with|yield)\b/,
-  builtin: /\b(?:string|Function|any|number|boolean|Array|symbol|console|Promise|unknown|never)\b/
-});
-Prism.languages.ts = Prism.languages.typescript;
-function Token(type, content, alias, matchedStr, greedy) {
-  this.type = type;
-  this.content = content;
-  this.alias = alias;
-  this.length = (matchedStr || "").length | 0;
-  this.greedy = !!greedy;
-}
-__name(Token, "Token");
-__name2(Token, "Token");
-Token.stringify = function(o, language) {
-  if (typeof o == "string") {
-    return o;
-  }
-  if (Array.isArray(o)) {
-    return o.map(function(element) {
-      return Token.stringify(element, language);
-    }).join("");
-  }
-  return getColorForSyntaxKind(o.type)(o.content);
-};
-function getColorForSyntaxKind(syntaxKind) {
-  return theme[syntaxKind] || identity;
-}
-__name(getColorForSyntaxKind, "getColorForSyntaxKind");
-__name2(getColorForSyntaxKind, "getColorForSyntaxKind");
-function highlightTS(str) {
-  return highlight(str, Prism.languages.javascript);
-}
-__name(highlightTS, "highlightTS");
-__name2(highlightTS, "highlightTS");
-function highlight(str, grammar) {
-  const tokens = Prism.tokenize(str, grammar);
-  return tokens.map((t) => Token.stringify(t)).join("");
-}
-__name(highlight, "highlight");
-__name2(highlight, "highlight");
-var import_strip_indent = __toModule22(require_strip_indent());
-function dedent(str) {
-  return (0, import_strip_indent.default)(str);
-}
-__name(dedent, "dedent");
-__name2(dedent, "dedent");
-function renderN(n, max2) {
-  const wantedLetters = String(max2).length;
-  const hasLetters = String(n).length;
-  if (hasLetters >= wantedLetters) {
-    return String(n);
-  }
-  return " ".repeat(wantedLetters - hasLetters) + n;
-}
-__name(renderN, "renderN");
-__name2(renderN, "renderN");
-function getIndent(line) {
-  let spaceCount = 0;
-  for (let i = 0; i < line.length; i++) {
-    if (line.charAt(i) !== " ") {
-      return spaceCount;
-    }
-    spaceCount++;
-  }
-  return spaceCount;
-}
-__name(getIndent, "getIndent");
-__name2(getIndent, "getIndent");
-function parseStack({
-  callsite,
-  renderPathRelative,
-  originalMethod,
-  onUs,
-  showColors,
-  isValidationError
-}) {
-  const params = {
-    callsiteStr: ":",
-    prevLines: "\n",
-    functionName: `prisma.${originalMethod}()`,
-    afterLines: "",
-    indentValue: 0,
-    lastErrorHeight: 20
-  };
-  if (!callsite || typeof window !== "undefined") {
-    return params;
-  }
-  const stack = parse(callsite);
-  const trace2 = stack.find((t) => {
-    return t.file && t.file !== "<anonymous>" && !t.file.includes("@prisma") && !t.file.includes("getPrismaClient") && !t.file.startsWith("internal/") && !t.methodName.includes("new ") && !t.methodName.includes("getCallSite") && !t.methodName.includes("Proxy.") && t.methodName.split(".").length < 4;
-  });
-  if (process.env.NODE_ENV !== "production" && trace2 && trace2.file && trace2.lineNumber && trace2.column) {
-    const lineNumber = trace2.lineNumber;
-    const printedFileName = renderPathRelative ? require("path").relative(process.cwd(), trace2.file) : trace2.file;
-    const start = Math.max(0, lineNumber - 4);
-    const fs7 = require("fs");
-    const exists4 = fs7.existsSync(trace2.file);
-    if (exists4) {
-      const file2 = fs7.readFileSync(trace2.file, "utf-8");
-      const slicedFile = file2.split("\n").slice(start, lineNumber).map((line) => {
-        if (line.endsWith("\r")) {
-          return line.slice(0, -1);
-        }
-        return line;
-      }).join("\n");
-      const lines = dedent(slicedFile).split("\n");
-      const theLine = lines[lines.length - 1];
-      if (!theLine || theLine.trim() === "") {
-        params.callsiteStr = ":";
-      } else {
-        const prismaClientRegex = /(\S+(create|createMany|updateMany|deleteMany|update|delete|findMany|findUnique)\()/;
-        const match = prismaClientRegex.exec(theLine);
-        if (!match) {
-          return params;
-        }
-        params.functionName = `${match[1]})`;
-        params.callsiteStr = ` in
-${import_chalk4.default.underline(`${printedFileName}:${trace2.lineNumber}:${trace2.column}`)}`;
-        const slicePoint = theLine.indexOf("{");
-        const linesToHighlight = lines.map((l, i, all) => !onUs && i === all.length - 1 ? l.slice(0, slicePoint > -1 ? slicePoint : l.length - 1) : l).join("\n");
-        const highlightedLines = showColors ? highlightTS(linesToHighlight).split("\n") : linesToHighlight.split("\n");
-        params.prevLines = "\n" + highlightedLines.map((l, i) => import_chalk4.default.grey(renderN(i + start + 1, lineNumber + start + 1) + " ") + import_chalk4.default.reset() + l).map((l, i, arr) => i === arr.length - 1 ? `${import_chalk4.default.red.bold("\u2192")} ${import_chalk4.default.dim(l)}` : import_chalk4.default.dim("  " + l)).join("\n");
-        if (!match && !isValidationError) {
-          params.prevLines += "\n\n";
-        }
-        params.afterLines = ")";
-        params.indentValue = String(lineNumber + start + 1).length + getIndent(theLine) + 1 + (match ? 2 : 0);
-      }
-    }
-  }
-  return params;
-}
-__name(parseStack, "parseStack");
-__name2(parseStack, "parseStack");
-var printStack = /* @__PURE__ */ __name2((args) => {
-  const { callsiteStr, prevLines, functionName, afterLines, indentValue, lastErrorHeight } = parseStack(args);
-  const introText = args.onUs ? import_chalk4.default.red(`Oops, an unknown error occured! This is ${import_chalk4.default.bold("on us")}, you did nothing wrong.
-It occured in the ${import_chalk4.default.bold(`\`${functionName}\``)} invocation${callsiteStr}`) : import_chalk4.default.red(`Invalid ${import_chalk4.default.bold(`\`${functionName}\``)} invocation${callsiteStr}`);
-  const stackStr = `
-${introText}
-${prevLines}${import_chalk4.default.reset()}`;
-  return { indent: indentValue, stack: stackStr, afterLines, lastErrorHeight };
-}, "printStack");
-var tab = 2;
-var Document = /* @__PURE__ */ __name(class {
-  constructor(type, children) {
-    this.type = type;
-    this.children = children;
-    this.printFieldError = ({ error: error2 }, missingItems, minimal) => {
-      if (error2.type === "emptySelect") {
-        const additional = minimal ? "" : ` Available options are listed in ${import_chalk5.default.greenBright.dim("green")}.`;
-        return `The ${import_chalk5.default.redBright("`select`")} statement for type ${import_chalk5.default.bold(getOutputTypeName(error2.field.outputType.type))} must not be empty.${additional}`;
-      }
-      if (error2.type === "emptyInclude") {
-        if (missingItems.length === 0) {
-          return `${import_chalk5.default.bold(getOutputTypeName(error2.field.outputType.type))} does not have any relation and therefore can't have an ${import_chalk5.default.redBright("`include`")} statement.`;
-        }
-        const additional = minimal ? "" : ` Available options are listed in ${import_chalk5.default.greenBright.dim("green")}.`;
-        return `The ${import_chalk5.default.redBright("`include`")} statement for type ${import_chalk5.default.bold(getOutputTypeName(error2.field.outputType.type))} must not be empty.${additional}`;
-      }
-      if (error2.type === "noTrueSelect") {
-        return `The ${import_chalk5.default.redBright("`select`")} statement for type ${import_chalk5.default.bold(getOutputTypeName(error2.field.outputType.type))} needs ${import_chalk5.default.bold("at least one truthy value")}.`;
-      }
-      if (error2.type === "includeAndSelect") {
-        return `Please ${import_chalk5.default.bold("either")} use ${import_chalk5.default.greenBright("`include`")} or ${import_chalk5.default.greenBright("`select`")}, but ${import_chalk5.default.redBright("not both")} at the same time.`;
-      }
-      if (error2.type === "invalidFieldName") {
-        const statement = error2.isInclude ? "include" : "select";
-        const wording = error2.isIncludeScalar ? "Invalid scalar" : "Unknown";
-        const additional = minimal ? "" : error2.isInclude && missingItems.length === 0 ? `
-This model has no relations, so you can't use ${import_chalk5.default.redBright("include")} with it.` : ` Available options are listed in ${import_chalk5.default.greenBright.dim("green")}.`;
-        let str = `${wording} field ${import_chalk5.default.redBright(`\`${error2.providedName}\``)} for ${import_chalk5.default.bold(statement)} statement on model ${import_chalk5.default.bold.white(error2.modelName)}.${additional}`;
-        if (error2.didYouMean) {
-          str += ` Did you mean ${import_chalk5.default.greenBright(`\`${error2.didYouMean}\``)}?`;
-        }
-        if (error2.isIncludeScalar) {
-          str += `
-Note, that ${import_chalk5.default.bold("include")} statements only accept relation fields.`;
-        }
-        return str;
-      }
-      if (error2.type === "invalidFieldType") {
-        const str = `Invalid value ${import_chalk5.default.redBright(`${stringifyObject_default(error2.providedValue)}`)} of type ${import_chalk5.default.redBright(getGraphQLType(error2.providedValue, void 0))} for field ${import_chalk5.default.bold(`${error2.fieldName}`)} on model ${import_chalk5.default.bold.white(error2.modelName)}. Expected either ${import_chalk5.default.greenBright("true")} or ${import_chalk5.default.greenBright("false")}.`;
-        return str;
-      }
-      return void 0;
-    };
-    this.printArgError = ({ error: error2, path: path6, id }, hasMissingItems, minimal) => {
-      if (error2.type === "invalidName") {
-        let str = `Unknown arg ${import_chalk5.default.redBright(`\`${error2.providedName}\``)} in ${import_chalk5.default.bold(path6.join("."))} for type ${import_chalk5.default.bold(error2.outputType ? error2.outputType.name : getInputTypeName(error2.originalType))}.`;
-        if (error2.didYouMeanField) {
-          str += `
-\u2192 Did you forget to wrap it with \`${import_chalk5.default.greenBright("select")}\`? ${import_chalk5.default.dim("e.g. " + import_chalk5.default.greenBright(`{ select: { ${error2.providedName}: ${error2.providedValue} } }`))}`;
-        } else if (error2.didYouMeanArg) {
-          str += ` Did you mean \`${import_chalk5.default.greenBright(error2.didYouMeanArg)}\`?`;
-          if (!hasMissingItems && !minimal) {
-            str += ` ${import_chalk5.default.dim("Available args:")}
-` + stringifyInputType(error2.originalType, true);
-          }
-        } else {
-          if (error2.originalType.fields.length === 0) {
-            str += ` The field ${import_chalk5.default.bold(error2.originalType.name)} has no arguments.`;
-          } else if (!hasMissingItems && !minimal) {
-            str += ` Available args:
-
-` + stringifyInputType(error2.originalType, true);
-          }
-        }
-        return str;
-      }
-      if (error2.type === "invalidType") {
-        let valueStr = stringifyObject_default(error2.providedValue, { indent: "  " });
-        const multilineValue = valueStr.split("\n").length > 1;
-        if (multilineValue) {
-          valueStr = `
-${valueStr}
-`;
-        }
-        if (error2.requiredType.bestFittingType.location === "enumTypes") {
-          return `Argument ${import_chalk5.default.bold(error2.argName)}: Provided value ${import_chalk5.default.redBright(valueStr)}${multilineValue ? "" : " "}of type ${import_chalk5.default.redBright(getGraphQLType(error2.providedValue))} on ${import_chalk5.default.bold(`prisma.${this.children[0].name}`)} is not a ${import_chalk5.default.greenBright(wrapWithList(stringifyGraphQLType(error2.requiredType.bestFittingType.location), error2.requiredType.bestFittingType.isList))}.
-\u2192 Possible values: ${error2.requiredType.bestFittingType.type.values.map((v) => import_chalk5.default.greenBright(`${stringifyGraphQLType(error2.requiredType.bestFittingType.type)}.${v}`)).join(", ")}`;
-        }
-        let typeStr = ".";
-        if (isInputArgType(error2.requiredType.bestFittingType.type)) {
-          typeStr = ":\n" + stringifyInputType(error2.requiredType.bestFittingType.type);
-        }
-        let expected = `${error2.requiredType.inputType.map((t) => import_chalk5.default.greenBright(wrapWithList(stringifyGraphQLType(t.type), error2.requiredType.bestFittingType.isList))).join(" or ")}${typeStr}`;
-        const inputType = error2.requiredType.inputType.length === 2 && error2.requiredType.inputType.find((t) => isInputArgType(t.type)) || null;
-        if (inputType) {
-          expected += `
-` + stringifyInputType(inputType.type, true);
-        }
-        return `Argument ${import_chalk5.default.bold(error2.argName)}: Got invalid value ${import_chalk5.default.redBright(valueStr)}${multilineValue ? "" : " "}on ${import_chalk5.default.bold(`prisma.${this.children[0].name}`)}. Provided ${import_chalk5.default.redBright(getGraphQLType(error2.providedValue))}, expected ${expected}`;
-      }
-      if (error2.type === "invalidNullArg") {
-        const forStr = path6.length === 1 && path6[0] === error2.name ? "" : ` for ${import_chalk5.default.bold(`${path6.join(".")}`)}`;
-        const undefinedTip = ` Please use ${import_chalk5.default.bold.greenBright("undefined")} instead.`;
-        return `Argument ${import_chalk5.default.greenBright(error2.name)}${forStr} must not be ${import_chalk5.default.bold("null")}.${undefinedTip}`;
-      }
-      if (error2.type === "missingArg") {
-        const forStr = path6.length === 1 && path6[0] === error2.missingName ? "" : ` for ${import_chalk5.default.bold(`${path6.join(".")}`)}`;
-        return `Argument ${import_chalk5.default.greenBright(error2.missingName)}${forStr} is missing.`;
-      }
-      if (error2.type === "atLeastOne") {
-        const additional = minimal ? "" : ` Available args are listed in ${import_chalk5.default.dim.green("green")}.`;
-        return `Argument ${import_chalk5.default.bold(path6.join("."))} of type ${import_chalk5.default.bold(error2.inputType.name)} needs ${import_chalk5.default.greenBright("at least one")} argument.${additional}`;
-      }
-      if (error2.type === "atMostOne") {
-        const additional = minimal ? "" : ` Please choose one. ${import_chalk5.default.dim("Available args:")} 
-${stringifyInputType(error2.inputType, true)}`;
-        return `Argument ${import_chalk5.default.bold(path6.join("."))} of type ${import_chalk5.default.bold(error2.inputType.name)} needs ${import_chalk5.default.greenBright("exactly one")} argument, but you provided ${error2.providedKeys.map((key) => import_chalk5.default.redBright(key)).join(" and ")}.${additional}`;
-      }
-      return void 0;
-    };
-    this.type = type;
-    this.children = children;
-  }
-  get [Symbol.toStringTag]() {
-    return "Document";
-  }
-  toString() {
-    return `${this.type} {
-${(0, import_indent_string2.default)(this.children.map(String).join("\n"), tab)}
-}`;
-  }
-  validate(select, isTopLevelQuery = false, originalMethod, errorFormat, validationCallsite) {
-    var _a2;
-    if (!select) {
-      select = {};
-    }
-    const invalidChildren = this.children.filter((child) => child.hasInvalidChild || child.hasInvalidArg);
-    if (invalidChildren.length === 0) {
-      return;
-    }
-    const fieldErrors = [];
-    const argErrors = [];
-    const prefix = select && select.select ? "select" : select.include ? "include" : void 0;
-    for (const child of invalidChildren) {
-      const errors2 = child.collectErrors(prefix);
-      fieldErrors.push(...errors2.fieldErrors.map((e) => ({
-        ...e,
-        path: isTopLevelQuery ? e.path : e.path.slice(1)
-      })));
-      argErrors.push(...errors2.argErrors.map((e) => ({
-        ...e,
-        path: isTopLevelQuery ? e.path : e.path.slice(1)
-      })));
-    }
-    const topLevelQueryName = this.children[0].name;
-    const queryName = isTopLevelQuery ? this.type : topLevelQueryName;
-    const keyPaths = [];
-    const valuePaths = [];
-    const missingItems = [];
-    for (const fieldError of fieldErrors) {
-      const path6 = this.normalizePath(fieldError.path, select).join(".");
-      if (fieldError.error.type === "invalidFieldName") {
-        keyPaths.push(path6);
-        const fieldType = fieldError.error.outputType;
-        const { isInclude } = fieldError.error;
-        fieldType.fields.filter((field) => isInclude ? field.outputType.location === "outputObjectTypes" : true).forEach((field) => {
-          const splittedPath = path6.split(".");
-          missingItems.push({
-            path: `${splittedPath.slice(0, splittedPath.length - 1).join(".")}.${field.name}`,
-            type: "true",
-            isRequired: false
-          });
-        });
-      } else if (fieldError.error.type === "includeAndSelect") {
-        keyPaths.push("select");
-        keyPaths.push("include");
-      } else {
-        valuePaths.push(path6);
-      }
-      if (fieldError.error.type === "emptySelect" || fieldError.error.type === "noTrueSelect" || fieldError.error.type === "emptyInclude") {
-        const selectPathArray = this.normalizePath(fieldError.path, select);
-        const selectPath = selectPathArray.slice(0, selectPathArray.length - 1).join(".");
-        const fieldType = fieldError.error.field.outputType.type;
-        (_a2 = fieldType.fields) == null ? void 0 : _a2.filter((field) => fieldError.error.type === "emptyInclude" ? field.outputType.location === "outputObjectTypes" : true).forEach((field) => {
-          missingItems.push({
-            path: `${selectPath}.${field.name}`,
-            type: "true",
-            isRequired: false
-          });
-        });
-      }
-    }
-    for (const argError of argErrors) {
-      const path6 = this.normalizePath(argError.path, select).join(".");
-      if (argError.error.type === "invalidName") {
-        keyPaths.push(path6);
-      } else if (argError.error.type !== "missingArg" && argError.error.type !== "atLeastOne") {
-        valuePaths.push(path6);
-      } else if (argError.error.type === "missingArg") {
-        const type = argError.error.missingArg.inputTypes.length === 1 ? argError.error.missingArg.inputTypes[0].type : argError.error.missingArg.inputTypes.map((t) => {
-          const inputTypeName = getInputTypeName(t.type);
-          if (inputTypeName === "Null") {
-            return "null";
-          }
-          if (t.isList) {
-            return inputTypeName + "[]";
-          }
-          return inputTypeName;
-        }).join(" | ");
-        missingItems.push({
-          path: path6,
-          type: inputTypeToJson(type, true, path6.split("where.").length === 2),
-          isRequired: argError.error.missingArg.isRequired
-        });
-      }
-    }
-    const renderErrorStr = /* @__PURE__ */ __name2((callsite) => {
-      const hasRequiredMissingArgsErrors = argErrors.some((e) => e.error.type === "missingArg" && e.error.missingArg.isRequired);
-      const hasOptionalMissingArgsErrors = Boolean(argErrors.find((e) => e.error.type === "missingArg" && !e.error.missingArg.isRequired));
-      const hasMissingArgsErrors = hasOptionalMissingArgsErrors || hasRequiredMissingArgsErrors;
-      let missingArgsLegend = "";
-      if (hasRequiredMissingArgsErrors) {
-        missingArgsLegend += `
-${import_chalk5.default.dim("Note: Lines with ")}${import_chalk5.default.reset.greenBright("+")} ${import_chalk5.default.dim("are required")}`;
-      }
-      if (hasOptionalMissingArgsErrors) {
-        if (missingArgsLegend.length === 0) {
-          missingArgsLegend = "\n";
-        }
-        if (hasRequiredMissingArgsErrors) {
-          missingArgsLegend += import_chalk5.default.dim(`, lines with ${import_chalk5.default.green("?")} are optional`);
-        } else {
-          missingArgsLegend += import_chalk5.default.dim(`Note: Lines with ${import_chalk5.default.green("?")} are optional`);
-        }
-        missingArgsLegend += import_chalk5.default.dim(".");
-      }
-      const relevantArgErrors = argErrors.filter((e) => e.error.type !== "missingArg" || e.error.missingArg.isRequired);
-      let errorMessages = relevantArgErrors.map((e) => this.printArgError(e, hasMissingArgsErrors, errorFormat === "minimal")).join("\n");
-      errorMessages += `
-${fieldErrors.map((e) => this.printFieldError(e, missingItems, errorFormat === "minimal")).join("\n")}`;
-      if (errorFormat === "minimal") {
-        return (0, import_strip_ansi2.default)(errorMessages);
-      }
-      const {
-        stack,
-        indent: indentValue,
-        afterLines
-      } = printStack({
-        callsite,
-        originalMethod: originalMethod || queryName,
-        showColors: errorFormat && errorFormat === "pretty",
-        isValidationError: true
-      });
-      let printJsonArgs = {
-        ast: isTopLevelQuery ? { [topLevelQueryName]: select } : select,
-        keyPaths,
-        valuePaths,
-        missingItems
-      };
-      if (originalMethod == null ? void 0 : originalMethod.endsWith("aggregate")) {
-        printJsonArgs = transformAggregatePrintJsonArgs(printJsonArgs);
-      }
-      const errorStr = `${stack}${(0, import_indent_string2.default)(printJsonWithErrors(printJsonArgs), indentValue).slice(indentValue)}${import_chalk5.default.dim(afterLines)}
-
-${errorMessages}${missingArgsLegend}
-`;
-      if (process.env.NO_COLOR || errorFormat === "colorless") {
-        return (0, import_strip_ansi2.default)(errorStr);
-      }
-      return errorStr;
-    }, "renderErrorStr");
-    const error2 = new PrismaClientValidationError(renderErrorStr(validationCallsite));
-    if (process.env.NODE_ENV !== "production") {
-      Object.defineProperty(error2, "render", {
-        get: () => renderErrorStr,
-        enumerable: false
-      });
-    }
-    throw error2;
-  }
-  normalizePath(inputPath, select) {
-    const path6 = inputPath.slice();
-    const newPath = [];
-    let key;
-    let pointer = select;
-    while ((key = path6.shift()) !== void 0) {
-      if (!Array.isArray(pointer) && key === 0) {
-        continue;
-      }
-      if (key === "select") {
-        if (!pointer[key]) {
-          pointer = pointer.include;
-        } else {
-          pointer = pointer[key];
-        }
-      } else if (pointer && pointer[key]) {
-        pointer = pointer[key];
-      }
-      newPath.push(key);
-    }
-    return newPath;
-  }
-}, "Document");
-__name2(Document, "Document");
-var PrismaClientValidationError = /* @__PURE__ */ __name(class extends Error {
-  get [Symbol.toStringTag]() {
-    return "PrismaClientValidationError";
-  }
-}, "PrismaClientValidationError");
-__name2(PrismaClientValidationError, "PrismaClientValidationError");
-var PrismaClientConstructorValidationError = /* @__PURE__ */ __name(class extends Error {
-  constructor(message) {
-    super(message + `
-Read more at https://pris.ly/d/client-constructor`);
-  }
-  get [Symbol.toStringTag]() {
-    return "PrismaClientConstructorValidationError";
-  }
-}, "PrismaClientConstructorValidationError");
-__name2(PrismaClientConstructorValidationError, "PrismaClientConstructorValidationError");
-var Field = /* @__PURE__ */ __name(class {
-  constructor({ name, args, children, error: error2, schemaField }) {
-    this.name = name;
-    this.args = args;
-    this.children = children;
-    this.error = error2;
-    this.schemaField = schemaField;
-    this.hasInvalidChild = children ? children.some((child) => Boolean(child.error || child.hasInvalidArg || child.hasInvalidChild)) : false;
-    this.hasInvalidArg = args ? args.hasInvalidArg : false;
-  }
-  get [Symbol.toStringTag]() {
-    return "Field";
-  }
-  toString() {
-    let str = this.name;
-    if (this.error) {
-      return str + " # INVALID_FIELD";
-    }
-    if (this.args && this.args.args && this.args.args.length > 0) {
-      if (this.args.args.length === 1) {
-        str += `(${this.args.toString()})`;
-      } else {
-        str += `(
-${(0, import_indent_string2.default)(this.args.toString(), tab)}
-)`;
-      }
-    }
-    if (this.children) {
-      str += ` {
-${(0, import_indent_string2.default)(this.children.map(String).join("\n"), tab)}
-}`;
-    }
-    return str;
-  }
-  collectErrors(prefix = "select") {
-    const fieldErrors = [];
-    const argErrors = [];
-    if (this.error) {
-      fieldErrors.push({
-        path: [this.name],
-        error: this.error
-      });
-    }
-    if (this.children) {
-      for (const child of this.children) {
-        const errors2 = child.collectErrors(prefix);
-        fieldErrors.push(...errors2.fieldErrors.map((e) => ({
-          ...e,
-          path: [this.name, prefix, ...e.path]
-        })));
-        argErrors.push(...errors2.argErrors.map((e) => ({
-          ...e,
-          path: [this.name, prefix, ...e.path]
-        })));
-      }
-    }
-    if (this.args) {
-      argErrors.push(...this.args.collectErrors().map((e) => ({ ...e, path: [this.name, ...e.path] })));
-    }
-    return {
-      fieldErrors,
-      argErrors
-    };
-  }
-}, "Field");
-__name2(Field, "Field");
-var Args = /* @__PURE__ */ __name(class {
-  constructor(args = []) {
-    this.args = args;
-    this.hasInvalidArg = args ? args.some((arg2) => Boolean(arg2.hasError)) : false;
-  }
-  get [Symbol.toStringTag]() {
-    return "Args";
-  }
-  toString() {
-    if (this.args.length === 0) {
-      return "";
-    }
-    return `${this.args.map((arg2) => arg2.toString()).filter((a) => a).join("\n")}`;
-  }
-  collectErrors() {
-    if (!this.hasInvalidArg) {
-      return [];
-    }
-    return flatMap(this.args, (arg2) => arg2.collectErrors());
-  }
-}, "Args");
-__name2(Args, "Args");
-function stringify(value, inputType) {
-  if (Buffer.isBuffer(value)) {
-    return JSON.stringify(value.toString("base64"));
-  }
-  if (Object.prototype.toString.call(value) === "[object BigInt]") {
-    return value.toString();
-  }
-  if (typeof (inputType == null ? void 0 : inputType.type) === "string" && inputType.type === "Json") {
-    if (value === null) {
-      return "null";
-    }
-    if (value && value.values && value.__prismaRawParamaters__) {
-      return JSON.stringify(value.values);
-    }
-    if ((inputType == null ? void 0 : inputType.isList) && Array.isArray(value)) {
-      return JSON.stringify(value.map((o) => JSON.stringify(o)));
-    }
-    return JSON.stringify(JSON.stringify(value));
-  }
-  if (value === void 0) {
-    return null;
-  }
-  if (value === null) {
-    return "null";
-  }
-  if (decimal_default.isDecimal(value)) {
-    return value.toString();
-  }
-  if ((inputType == null ? void 0 : inputType.location) === "enumTypes" && typeof value === "string") {
-    if (Array.isArray(value)) {
-      return `[${value.join(", ")}]`;
-    }
-    return value;
-  }
-  return JSON.stringify(value, null, 2);
-}
-__name(stringify, "stringify");
-__name2(stringify, "stringify");
-var Arg = /* @__PURE__ */ __name(class {
-  constructor({ key, value, isEnum = false, error: error2, schemaArg, inputType }) {
-    this.inputType = inputType;
-    this.key = key;
-    this.value = value;
-    this.isEnum = isEnum;
-    this.error = error2;
-    this.schemaArg = schemaArg;
-    this.isNullable = (schemaArg == null ? void 0 : schemaArg.inputTypes.reduce((isNullable) => isNullable && schemaArg.isNullable, true)) || false;
-    this.hasError = Boolean(error2) || (value instanceof Args ? value.hasInvalidArg : false) || Array.isArray(value) && value.some((v) => v instanceof Args ? v.hasInvalidArg : false);
-  }
-  get [Symbol.toStringTag]() {
-    return "Arg";
-  }
-  _toString(value, key) {
-    var _a2;
-    if (typeof value === "undefined") {
-      return void 0;
-    }
-    if (value instanceof Args) {
-      return `${key}: {
-${(0, import_indent_string2.default)(value.toString(), 2)}
-}`;
-    }
-    if (Array.isArray(value)) {
-      if (((_a2 = this.inputType) == null ? void 0 : _a2.type) === "Json") {
-        return `${key}: ${stringify(value, this.inputType)}`;
-      }
-      const isScalar = !value.some((v) => typeof v === "object");
-      return `${key}: [${isScalar ? "" : "\n"}${(0, import_indent_string2.default)(value.map((nestedValue) => {
-        if (nestedValue instanceof Args) {
-          return `{
-${(0, import_indent_string2.default)(nestedValue.toString(), tab)}
-}`;
-        }
-        return stringify(nestedValue, this.inputType);
-      }).join(`,${isScalar ? " " : "\n"}`), isScalar ? 0 : tab)}${isScalar ? "" : "\n"}]`;
-    }
-    return `${key}: ${stringify(value, this.inputType)}`;
-  }
-  toString() {
-    return this._toString(this.value, this.key);
-  }
-  collectErrors() {
-    var _a2;
-    if (!this.hasError) {
-      return [];
-    }
-    const errors2 = [];
-    if (this.error) {
-      const id = typeof ((_a2 = this.inputType) == null ? void 0 : _a2.type) === "object" ? `${this.inputType.type.name}${this.inputType.isList ? "[]" : ""}` : void 0;
-      errors2.push({
-        error: this.error,
-        path: [this.key],
-        id
-      });
-    }
-    if (Array.isArray(this.value)) {
-      errors2.push(...flatMap(this.value, (val, index) => {
-        if (!(val == null ? void 0 : val.collectErrors)) {
-          return [];
-        }
-        return val.collectErrors().map((e) => {
-          return { ...e, path: [this.key, index, ...e.path] };
-        });
-      }));
-    }
-    if (this.value instanceof Args) {
-      errors2.push(...this.value.collectErrors().map((e) => ({ ...e, path: [this.key, ...e.path] })));
-    }
-    return errors2;
-  }
-}, "Arg");
-__name2(Arg, "Arg");
-function makeDocument({ dmmf, rootTypeName, rootField, select }) {
-  if (!select) {
-    select = {};
-  }
-  const rootType = rootTypeName === "query" ? dmmf.queryType : dmmf.mutationType;
-  const fakeRootField = {
-    args: [],
-    outputType: {
-      isList: false,
-      type: rootType,
-      location: "outputObjectTypes"
-    },
-    name: rootTypeName
-  };
-  const children = selectionToFields(dmmf, { [rootField]: select }, fakeRootField, [rootTypeName]);
-  return new Document(rootTypeName, children);
-}
-__name(makeDocument, "makeDocument");
-__name2(makeDocument, "makeDocument");
-function transformDocument(document2) {
-  return document2;
-}
-__name(transformDocument, "transformDocument");
-__name2(transformDocument, "transformDocument");
-function selectionToFields(dmmf, selection, schemaField, path6) {
-  const outputType = schemaField.outputType.type;
-  return Object.entries(selection).reduce((acc, [name, value]) => {
-    const field = outputType.fieldMap ? outputType.fieldMap[name] : outputType.fields.find((f) => f.name === name);
-    if (!field) {
-      acc.push(new Field({
-        name,
-        children: [],
-        error: {
-          type: "invalidFieldName",
-          modelName: outputType.name,
-          providedName: name,
-          didYouMean: getSuggestion(name, outputType.fields.map((f) => f.name)),
-          outputType
-        }
-      }));
-      return acc;
-    }
-    if (typeof value !== "boolean" && field.outputType.location === "scalar" && field.name !== "executeRaw" && field.name !== "queryRaw" && field.name !== "runCommandRaw" && outputType.name !== "Query" && !name.startsWith("aggregate") && field.name !== "count") {
-      acc.push(new Field({
-        name,
-        children: [],
-        error: {
-          type: "invalidFieldType",
-          modelName: outputType.name,
-          fieldName: name,
-          providedValue: value
-        }
-      }));
-      return acc;
-    }
-    if (value === false) {
-      return acc;
-    }
-    const transformedField = {
-      name: field.name,
-      fields: field.args,
-      constraints: {
-        minNumFields: null,
-        maxNumFields: null
-      }
-    };
-    const argsWithoutIncludeAndSelect = typeof value === "object" ? omit(value, ["include", "select"]) : void 0;
-    const args = argsWithoutIncludeAndSelect ? objectToArgs(argsWithoutIncludeAndSelect, transformedField, [], typeof field === "string" ? void 0 : field.outputType.type) : void 0;
-    const isRelation = field.outputType.location === "outputObjectTypes";
-    if (value) {
-      if (value.select && value.include) {
-        acc.push(new Field({
-          name,
-          children: [
-            new Field({
-              name: "include",
-              args: new Args(),
-              error: {
-                type: "includeAndSelect",
-                field
-              }
-            })
-          ]
-        }));
-      } else if (value.include) {
-        const keys2 = Object.keys(value.include);
-        if (keys2.length === 0) {
-          acc.push(new Field({
-            name,
-            children: [
-              new Field({
-                name: "include",
-                args: new Args(),
-                error: {
-                  type: "emptyInclude",
-                  field
-                }
-              })
-            ]
-          }));
-          return acc;
-        }
-        if (field.outputType.location === "outputObjectTypes") {
-          const fieldOutputType = field.outputType.type;
-          const allowedKeys = fieldOutputType.fields.filter((f) => f.outputType.location === "outputObjectTypes").map((f) => f.name);
-          const invalidKeys = keys2.filter((key) => !allowedKeys.includes(key));
-          if (invalidKeys.length > 0) {
-            acc.push(...invalidKeys.map((invalidKey) => new Field({
-              name: invalidKey,
-              children: [
-                new Field({
-                  name: invalidKey,
-                  args: new Args(),
-                  error: {
-                    type: "invalidFieldName",
-                    modelName: fieldOutputType.name,
-                    outputType: fieldOutputType,
-                    providedName: invalidKey,
-                    didYouMean: getSuggestion(invalidKey, allowedKeys) || void 0,
-                    isInclude: true,
-                    isIncludeScalar: fieldOutputType.fields.some((f) => f.name === invalidKey)
-                  }
-                })
-              ]
-            })));
-            return acc;
-          }
-        }
-      } else if (value.select) {
-        const values = Object.values(value.select);
-        if (values.length === 0) {
-          acc.push(new Field({
-            name,
-            children: [
-              new Field({
-                name: "select",
-                args: new Args(),
-                error: {
-                  type: "emptySelect",
-                  field
-                }
-              })
-            ]
-          }));
-          return acc;
-        }
-        const truthyValues = values.filter((v) => v);
-        if (truthyValues.length === 0) {
-          acc.push(new Field({
-            name,
-            children: [
-              new Field({
-                name: "select",
-                args: new Args(),
-                error: {
-                  type: "noTrueSelect",
-                  field
-                }
-              })
-            ]
-          }));
-          return acc;
-        }
-      }
-    }
-    const defaultSelection = isRelation ? getDefaultSelection(field.outputType.type) : null;
-    let select = defaultSelection;
-    if (value) {
-      if (value.select) {
-        select = value.select;
-      } else if (value.include) {
-        select = deepExtend(defaultSelection, value.include);
-      } else if (value.by && Array.isArray(value.by) && field.outputType.namespace === "prisma" && field.outputType.location === "outputObjectTypes" && isGroupByOutputName(field.outputType.type.name)) {
-        select = byToSelect(value.by);
-      }
-    }
-    const children = select !== false && isRelation ? selectionToFields(dmmf, select, field, [...path6, name]) : void 0;
-    acc.push(new Field({ name, args, children, schemaField: field }));
-    return acc;
-  }, []);
-}
-__name(selectionToFields, "selectionToFields");
-__name2(selectionToFields, "selectionToFields");
-function byToSelect(by) {
-  const obj = Object.create(null);
-  for (const b of by) {
-    obj[b] = true;
-  }
-  return obj;
-}
-__name(byToSelect, "byToSelect");
-__name2(byToSelect, "byToSelect");
-function getDefaultSelection(outputType) {
-  const acc = Object.create(null);
-  for (const f of outputType.fields) {
-    if (f.outputType.location === "scalar" || f.outputType.location === "enumTypes") {
-      acc[f.name] = true;
-    }
-  }
-  return acc;
-}
-__name(getDefaultSelection, "getDefaultSelection");
-__name2(getDefaultSelection, "getDefaultSelection");
-function getInvalidTypeArg(key, value, arg2, bestFittingType) {
-  const arrg = new Arg({
-    key,
-    value,
-    isEnum: bestFittingType.location === "enumTypes",
-    inputType: bestFittingType,
-    error: {
-      type: "invalidType",
-      providedValue: value,
-      argName: key,
-      requiredType: {
-        inputType: arg2.inputTypes,
-        bestFittingType
-      }
-    }
-  });
-  return arrg;
-}
-__name(getInvalidTypeArg, "getInvalidTypeArg");
-__name2(getInvalidTypeArg, "getInvalidTypeArg");
-function hasCorrectScalarType(value, arg2, inputType) {
-  const { type, isList } = inputType;
-  const expectedType = wrapWithList(stringifyGraphQLType(type), isList);
-  const graphQLType = getGraphQLType(value, type);
-  if (graphQLType === expectedType) {
-    return true;
-  }
-  if (isList && graphQLType === "List<>") {
-    return true;
-  }
-  if (expectedType === "Json") {
-    return true;
-  }
-  if (graphQLType === "Int" && expectedType === "BigInt") {
-    return true;
-  }
-  if (graphQLType === "List<Int>" && expectedType === "List<BigInt>") {
-    return true;
-  }
-  if (graphQLType === "List<BigInt | Int>" && expectedType === "List<BigInt>") {
-    return true;
-  }
-  if (graphQLType === "List<Int | BigInt>" && expectedType === "List<BigInt>") {
-    return true;
-  }
-  if ((graphQLType === "Int" || graphQLType === "Float") && expectedType === "Decimal") {
-    return true;
-  }
-  if ((graphQLType === "List<Int>" || graphQLType === "List<Float>") && expectedType === "List<Decimal>") {
-    return true;
-  }
-  if (graphQLType === "DateTime" && expectedType === "String") {
-    return true;
-  }
-  if (graphQLType === "List<DateTime>" && expectedType === "List<String>") {
-    return true;
-  }
-  if (graphQLType === "UUID" && expectedType === "String") {
-    return true;
-  }
-  if (graphQLType === "List<UUID>" && expectedType === "List<String>") {
-    return true;
-  }
-  if (graphQLType === "String" && expectedType === "ID") {
-    return true;
-  }
-  if (graphQLType === "List<String>" && expectedType === "List<ID>") {
-    return true;
-  }
-  if (graphQLType === "List<String>" && expectedType === "List<Json>") {
-    return true;
-  }
-  if (expectedType === "List<String>" && (graphQLType === "List<String | UUID>" || graphQLType === "List<UUID | String>")) {
-    return true;
-  }
-  if (graphQLType === "Int" && expectedType === "Float") {
-    return true;
-  }
-  if (graphQLType === "List<Int>" && expectedType === "List<Float>") {
-    return true;
-  }
-  if (graphQLType === "Int" && expectedType === "Long") {
-    return true;
-  }
-  if (graphQLType === "List<Int>" && expectedType === "List<Long>") {
-    return true;
-  }
-  if (graphQLType === "String" && expectedType === "Decimal" && /^\-?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i.test(value)) {
-    return true;
-  }
-  if (!arg2.isRequired && value === null) {
-    return true;
-  }
-  return false;
-}
-__name(hasCorrectScalarType, "hasCorrectScalarType");
-__name2(hasCorrectScalarType, "hasCorrectScalarType");
-var cleanObject = /* @__PURE__ */ __name2((obj) => filterObject(obj, (k, v) => v !== void 0), "cleanObject");
-function valueToArg(key, value, arg2) {
-  let maybeArg = null;
-  const argsWithErrors = [];
-  for (const inputType of arg2.inputTypes) {
-    maybeArg = tryInferArgs(key, value, arg2, inputType);
-    if ((maybeArg == null ? void 0 : maybeArg.collectErrors().length) === 0) {
-      return maybeArg;
-    }
-    if (maybeArg && (maybeArg == null ? void 0 : maybeArg.collectErrors())) {
-      const argErrors = maybeArg == null ? void 0 : maybeArg.collectErrors();
-      if (argErrors && argErrors.length > 0) {
-        argsWithErrors.push({ arg: maybeArg, errors: argErrors });
-      }
-    }
-  }
-  if ((maybeArg == null ? void 0 : maybeArg.hasError) && argsWithErrors.length > 0) {
-    const argsWithScores = argsWithErrors.map(({ arg: arg3, errors: errors2 }) => {
-      const errorScores = errors2.map((e) => {
-        let score = 1;
-        if (e.error.type === "invalidType") {
-          score = 2 * Math.exp(getDepth(e.error.providedValue)) + 1;
-        }
-        score += Math.log(e.path.length);
-        if (e.error.type === "missingArg") {
-          if (arg3.inputType && isInputArgType(arg3.inputType.type) && arg3.inputType.type.name.includes("Unchecked")) {
-            score *= 2;
-          }
-        }
-        if (e.error.type === "invalidName") {
-          if (isInputArgType(e.error.originalType)) {
-            if (e.error.originalType.name.includes("Unchecked")) {
-              score *= 2;
-            }
-          }
-        }
-        return score;
-      });
-      return {
-        score: errors2.length + sum2(errorScores),
-        arg: arg3,
-        errors: errors2
-      };
-    });
-    argsWithScores.sort((a, b) => a.score < b.score ? -1 : 1);
-    return argsWithScores[0].arg;
-  }
-  return maybeArg;
-}
-__name(valueToArg, "valueToArg");
-__name2(valueToArg, "valueToArg");
-function getDepth(object) {
-  let level = 1;
-  if (!object || typeof object !== "object") {
-    return level;
-  }
-  for (const key in object) {
-    if (!Object.prototype.hasOwnProperty.call(object, key)) {
-      continue;
-    }
-    if (typeof object[key] === "object") {
-      const depth = getDepth(object[key]) + 1;
-      level = Math.max(depth, level);
-    }
-  }
-  return level;
-}
-__name(getDepth, "getDepth");
-__name2(getDepth, "getDepth");
-function sum2(n) {
-  return n.reduce((acc, curr) => acc + curr, 0);
-}
-__name(sum2, "sum2");
-__name2(sum2, "sum");
-function tryInferArgs(key, value, arg2, inputType) {
-  var _a2, _b2, _c, _d;
-  if (typeof value === "undefined") {
-    if (!arg2.isRequired) {
-      return null;
-    }
-    return new Arg({
-      key,
-      value,
-      isEnum: inputType.location === "enumTypes",
-      inputType,
-      error: {
-        type: "missingArg",
-        missingName: key,
-        missingArg: arg2,
-        atLeastOne: false,
-        atMostOne: false
-      }
-    });
-  }
-  const { isNullable, isRequired } = arg2;
-  if (value === null && !isNullable && !isRequired) {
-    const isAtLeastOne = isInputArgType(inputType.type) ? inputType.type.constraints.minNumFields !== null && inputType.type.constraints.minNumFields > 0 : false;
-    if (!isAtLeastOne) {
-      return new Arg({
-        key,
-        value,
-        isEnum: inputType.location === "enumTypes",
-        inputType,
-        error: {
-          type: "invalidNullArg",
-          name: key,
-          invalidType: arg2.inputTypes,
-          atLeastOne: false,
-          atMostOne: false
-        }
-      });
-    }
-  }
-  if (!inputType.isList) {
-    if (isInputArgType(inputType.type)) {
-      if (typeof value !== "object" || Array.isArray(value) || inputType.location === "inputObjectTypes" && !isObject(value)) {
-        return getInvalidTypeArg(key, value, arg2, inputType);
-      } else {
-        const val = cleanObject(value);
-        let error2;
-        const keys2 = Object.keys(val || {});
-        const numKeys = keys2.length;
-        if (numKeys === 0 && typeof inputType.type.constraints.minNumFields === "number" && inputType.type.constraints.minNumFields > 0) {
-          error2 = {
-            type: "atLeastOne",
-            key,
-            inputType: inputType.type
-          };
-        } else if (numKeys > 1 && typeof inputType.type.constraints.maxNumFields === "number" && inputType.type.constraints.maxNumFields < 2) {
-          error2 = {
-            type: "atMostOne",
-            key,
-            inputType: inputType.type,
-            providedKeys: keys2
-          };
-        }
-        return new Arg({
-          key,
-          value: val === null ? null : objectToArgs(val, inputType.type, arg2.inputTypes),
-          isEnum: inputType.location === "enumTypes",
-          error: error2,
-          inputType,
-          schemaArg: arg2
-        });
-      }
-    } else {
-      return scalarToArg(key, value, arg2, inputType);
-    }
-  }
-  if (!Array.isArray(value) && inputType.isList) {
-    if (key !== "updateMany") {
-      value = [value];
-    }
-  }
-  if (inputType.location === "enumTypes" || inputType.location === "scalar") {
-    return scalarToArg(key, value, arg2, inputType);
-  }
-  const argInputType = inputType.type;
-  const hasAtLeastOneError = typeof ((_a2 = argInputType.constraints) == null ? void 0 : _a2.minNumFields) === "number" && ((_b2 = argInputType.constraints) == null ? void 0 : _b2.minNumFields) > 0 ? Array.isArray(value) && value.some((v) => !v || Object.keys(cleanObject(v)).length === 0) : false;
-  let err = hasAtLeastOneError ? {
-    inputType: argInputType,
-    key,
-    type: "atLeastOne"
-  } : void 0;
-  if (!err) {
-    const hasOneOfError = typeof ((_c = argInputType.constraints) == null ? void 0 : _c.maxNumFields) === "number" && ((_d = argInputType.constraints) == null ? void 0 : _d.maxNumFields) < 2 ? Array.isArray(value) && value.find((v) => !v || Object.keys(cleanObject(v)).length !== 1) : false;
-    if (hasOneOfError) {
-      err = {
-        inputType: argInputType,
-        key,
-        type: "atMostOne",
-        providedKeys: Object.keys(hasOneOfError)
-      };
-    }
-  }
-  if (!Array.isArray(value)) {
-    for (const nestedArgInputType of arg2.inputTypes) {
-      const args = objectToArgs(value, nestedArgInputType.type);
-      if (args.collectErrors().length === 0) {
-        return new Arg({
-          key,
-          value: args,
-          isEnum: false,
-          schemaArg: arg2,
-          inputType: nestedArgInputType
-        });
-      }
-    }
-  }
-  return new Arg({
-    key,
-    value: value.map((v) => {
-      if (inputType.isList && typeof v !== "object") {
-        return v;
-      }
-      if (typeof v !== "object" || !value) {
-        return getInvalidTypeArg(key, v, arg2, inputType);
-      }
-      return objectToArgs(v, argInputType);
-    }),
-    isEnum: false,
-    inputType,
-    schemaArg: arg2,
-    error: err
-  });
-}
-__name(tryInferArgs, "tryInferArgs");
-__name2(tryInferArgs, "tryInferArgs");
-function isInputArgType(argType) {
-  if (typeof argType === "string") {
-    return false;
-  }
-  if (Object.hasOwnProperty.call(argType, "values")) {
-    return false;
-  }
-  return true;
-}
-__name(isInputArgType, "isInputArgType");
-__name2(isInputArgType, "isInputArgType");
-function scalarToArg(key, value, arg2, inputType) {
-  if (hasCorrectScalarType(value, arg2, inputType)) {
-    return new Arg({
-      key,
-      value,
-      isEnum: inputType.location === "enumTypes",
-      schemaArg: arg2,
-      inputType
-    });
-  }
-  return getInvalidTypeArg(key, value, arg2, inputType);
-}
-__name(scalarToArg, "scalarToArg");
-__name2(scalarToArg, "scalarToArg");
-function objectToArgs(initialObj, inputType, possibilities, outputType) {
-  const obj = cleanObject(initialObj);
-  const { fields: args, fieldMap } = inputType;
-  const requiredArgs = args.map((arg2) => [arg2.name, void 0]);
-  const objEntries = Object.entries(obj || {});
-  const entries = unionBy(objEntries, requiredArgs, (a) => a[0]);
-  const argsList = entries.reduce((acc, [argName, value]) => {
-    const schemaArg = fieldMap ? fieldMap[argName] : args.find((a) => a.name === argName);
-    if (!schemaArg) {
-      const didYouMeanField = typeof value === "boolean" && outputType && outputType.fields.some((f) => f.name === argName) ? argName : null;
-      acc.push(new Arg({
-        key: argName,
-        value,
-        error: {
-          type: "invalidName",
-          providedName: argName,
-          providedValue: value,
-          didYouMeanField,
-          didYouMeanArg: !didYouMeanField && getSuggestion(argName, [...args.map((a) => a.name), "select"]) || void 0,
-          originalType: inputType,
-          possibilities,
-          outputType
-        }
-      }));
-      return acc;
-    }
-    const arg2 = valueToArg(argName, value, schemaArg);
-    if (arg2) {
-      acc.push(arg2);
-    }
-    return acc;
-  }, []);
-  if (typeof inputType.constraints.minNumFields === "number" && objEntries.length < inputType.constraints.minNumFields || argsList.find((arg2) => {
-    var _a2, _b2;
-    return ((_a2 = arg2.error) == null ? void 0 : _a2.type) === "missingArg" || ((_b2 = arg2.error) == null ? void 0 : _b2.type) === "atLeastOne";
-  })) {
-    const optionalMissingArgs = inputType.fields.filter((field) => !field.isRequired && obj && (typeof obj[field.name] === "undefined" || obj[field.name] === null));
-    argsList.push(...optionalMissingArgs.map((arg2) => {
-      const argInputType = arg2.inputTypes[0];
-      return new Arg({
-        key: arg2.name,
-        value: void 0,
-        isEnum: argInputType.location === "enumTypes",
-        error: {
-          type: "missingArg",
-          missingName: arg2.name,
-          missingArg: arg2,
-          atLeastOne: Boolean(inputType.constraints.minNumFields) || false,
-          atMostOne: inputType.constraints.maxNumFields === 1 || false
-        },
-        inputType: argInputType
-      });
-    }));
-  }
-  return new Args(argsList);
-}
-__name(objectToArgs, "objectToArgs");
-__name2(objectToArgs, "objectToArgs");
-function unpack({ document: document2, path: path6, data }) {
-  const result = deepGet(data, path6);
-  if (result === "undefined") {
-    return null;
-  }
-  if (typeof result !== "object") {
-    return result;
-  }
-  const field = getField(document2, path6);
-  return mapScalars({ field, data: result });
-}
-__name(unpack, "unpack");
-__name2(unpack, "unpack");
-function mapScalars({ field, data }) {
-  var _a2;
-  if (!data || typeof data !== "object" || !field.children || !field.schemaField) {
-    return data;
-  }
-  const deserializers = {
-    DateTime: (value) => new Date(value),
-    Json: (value) => JSON.parse(value),
-    Bytes: (value) => Buffer.from(value, "base64"),
-    Decimal: (value) => {
-      return new decimal_default(value);
-    },
-    BigInt: (value) => BigInt(value)
-  };
-  for (const child of field.children) {
-    const outputType = (_a2 = child.schemaField) == null ? void 0 : _a2.outputType.type;
-    if (outputType && typeof outputType === "string") {
-      const deserializer = deserializers[outputType];
-      if (deserializer) {
-        if (Array.isArray(data)) {
-          for (const entry of data) {
-            if (typeof entry[child.name] !== "undefined" && entry[child.name] !== null) {
-              if (Array.isArray(entry[child.name])) {
-                entry[child.name] = entry[child.name].map(deserializer);
-              } else {
-                entry[child.name] = deserializer(entry[child.name]);
-              }
-            }
-          }
-        } else {
-          if (typeof data[child.name] !== "undefined" && data[child.name] !== null) {
-            if (Array.isArray(data[child.name])) {
-              data[child.name] = data[child.name].map(deserializer);
-            } else {
-              data[child.name] = deserializer(data[child.name]);
-            }
-          }
-        }
-      }
-    }
-    if (child.schemaField && child.schemaField.outputType.location === "outputObjectTypes") {
-      if (Array.isArray(data)) {
-        for (const entry of data) {
-          mapScalars({ field: child, data: entry[child.name] });
-        }
-      } else {
-        mapScalars({ field: child, data: data[child.name] });
-      }
-    }
-  }
-  return data;
-}
-__name(mapScalars, "mapScalars");
-__name2(mapScalars, "mapScalars");
-function getField(document2, path6) {
-  const todo = path6.slice();
-  const firstElement = todo.shift();
-  let pointer = document2.children.find((c) => c.name === firstElement);
-  if (!pointer) {
-    throw new Error(`Could not find field ${firstElement} in document ${document2}`);
-  }
-  while (todo.length > 0) {
-    const key = todo.shift();
-    if (!pointer.children) {
-      throw new Error(`Can't get children for field ${pointer} with child ${key}`);
-    }
-    const child = pointer.children.find((c) => c.name === key);
-    if (!child) {
-      throw new Error(`Can't find child ${key} of field ${pointer}`);
-    }
-    pointer = child;
-  }
-  return pointer;
-}
-__name(getField, "getField");
-__name2(getField, "getField");
-function removeSelectFromPath(path6) {
-  return path6.split(".").filter((p) => p !== "select").join(".");
-}
-__name(removeSelectFromPath, "removeSelectFromPath");
-__name2(removeSelectFromPath, "removeSelectFromPath");
-function removeSelectFromObject(obj) {
-  const type = Object.prototype.toString.call(obj);
-  if (type === "[object Object]") {
-    const copy = {};
-    for (const key in obj) {
-      if (key === "select") {
-        for (const subKey in obj["select"]) {
-          copy[subKey] = removeSelectFromObject(obj["select"][subKey]);
-        }
-      } else {
-        copy[key] = removeSelectFromObject(obj[key]);
-      }
-    }
-    return copy;
-  }
-  return obj;
-}
-__name(removeSelectFromObject, "removeSelectFromObject");
-__name2(removeSelectFromObject, "removeSelectFromObject");
-function transformAggregatePrintJsonArgs({
-  ast,
-  keyPaths,
-  missingItems,
-  valuePaths
-}) {
-  const newKeyPaths = keyPaths.map(removeSelectFromPath);
-  const newValuePaths = valuePaths.map(removeSelectFromPath);
-  const newMissingItems = missingItems.map((item) => ({
-    path: removeSelectFromPath(item.path),
-    isRequired: item.isRequired,
-    type: item.type
-  }));
-  const newAst = removeSelectFromObject(ast);
-  return {
-    ast: newAst,
-    keyPaths: newKeyPaths,
-    missingItems: newMissingItems,
-    valuePaths: newValuePaths
-  };
-}
-__name(transformAggregatePrintJsonArgs, "transformAggregatePrintJsonArgs");
-__name2(transformAggregatePrintJsonArgs, "transformAggregatePrintJsonArgs");
+var import_execa = __toModule22(require_execa2());
+var import_p_retry = __toModule22(require_p_retry2());
 var __defProp3 = Object.defineProperty;
 var __name22 = /* @__PURE__ */ __name2((target, value) => __defProp3(target, "name", { value, configurable: true }), "__name");
+var Engine = /* @__PURE__ */ __name(class {
+}, "Engine");
+__name2(Engine, "Engine");
+__name22(Engine, "Engine");
+var __defProp4 = Object.defineProperty;
+var __name3 = /* @__PURE__ */ __name2((target, value) => __defProp4(target, "name", { value, configurable: true }), "__name");
 var PrismaClientInitializationError = /* @__PURE__ */ __name(class extends Error {
   constructor(message, clientVersion2, errorCode) {
     super(message);
@@ -35773,9 +33590,9 @@ var PrismaClientInitializationError = /* @__PURE__ */ __name(class extends Error
   }
 }, "PrismaClientInitializationError");
 __name2(PrismaClientInitializationError, "PrismaClientInitializationError");
-__name22(PrismaClientInitializationError, "PrismaClientInitializationError");
-var __defProp4 = Object.defineProperty;
-var __name3 = /* @__PURE__ */ __name2((target, value) => __defProp4(target, "name", { value, configurable: true }), "__name");
+__name3(PrismaClientInitializationError, "PrismaClientInitializationError");
+var __defProp5 = Object.defineProperty;
+var __name4 = /* @__PURE__ */ __name2((target, value) => __defProp5(target, "name", { value, configurable: true }), "__name");
 var PrismaClientKnownRequestError = /* @__PURE__ */ __name(class extends Error {
   constructor(message, code, clientVersion2, meta) {
     super(message);
@@ -35788,9 +33605,123 @@ var PrismaClientKnownRequestError = /* @__PURE__ */ __name(class extends Error {
   }
 }, "PrismaClientKnownRequestError");
 __name2(PrismaClientKnownRequestError, "PrismaClientKnownRequestError");
-__name3(PrismaClientKnownRequestError, "PrismaClientKnownRequestError");
-var __defProp5 = Object.defineProperty;
-var __name4 = /* @__PURE__ */ __name2((target, value) => __defProp5(target, "name", { value, configurable: true }), "__name");
+__name4(PrismaClientKnownRequestError, "PrismaClientKnownRequestError");
+var __defProp6 = Object.defineProperty;
+var __name5 = /* @__PURE__ */ __name2((target, value) => __defProp6(target, "name", { value, configurable: true }), "__name");
+function getMessage(log4) {
+  if (typeof log4 === "string") {
+    return log4;
+  } else if (isRustError(log4)) {
+    return getBacktraceFromRustError(log4);
+  } else if (isRustLog(log4)) {
+    return getBacktraceFromLog(log4);
+  }
+  return JSON.stringify(log4);
+}
+__name(getMessage, "getMessage");
+__name2(getMessage, "getMessage");
+__name5(getMessage, "getMessage");
+function getBacktraceFromLog(log4) {
+  var _a2, _b2, _c, _d, _e, _f, _g;
+  if ((_a2 = log4.fields) == null ? void 0 : _a2.message) {
+    let str = (_b2 = log4.fields) == null ? void 0 : _b2.message;
+    if ((_c = log4.fields) == null ? void 0 : _c.file) {
+      str += ` in ${log4.fields.file}`;
+      if ((_d = log4.fields) == null ? void 0 : _d.line) {
+        str += `:${log4.fields.line}`;
+      }
+      if ((_e = log4.fields) == null ? void 0 : _e.column) {
+        str += `:${log4.fields.column}`;
+      }
+    }
+    if ((_f = log4.fields) == null ? void 0 : _f.reason) {
+      str += `
+${(_g = log4.fields) == null ? void 0 : _g.reason}`;
+    }
+    return str;
+  }
+  return "Unknown error";
+}
+__name(getBacktraceFromLog, "getBacktraceFromLog");
+__name2(getBacktraceFromLog, "getBacktraceFromLog");
+__name5(getBacktraceFromLog, "getBacktraceFromLog");
+function getBacktraceFromRustError(err) {
+  let str = "";
+  if (err.is_panic) {
+    str += `PANIC`;
+  }
+  if (err.backtrace) {
+    str += ` in ${err.backtrace}`;
+  }
+  if (err.message) {
+    str += `
+${err.message}`;
+  }
+  return str;
+}
+__name(getBacktraceFromRustError, "getBacktraceFromRustError");
+__name2(getBacktraceFromRustError, "getBacktraceFromRustError");
+__name5(getBacktraceFromRustError, "getBacktraceFromRustError");
+function isRustLog(e) {
+  return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
+}
+__name(isRustLog, "isRustLog");
+__name2(isRustLog, "isRustLog");
+__name5(isRustLog, "isRustLog");
+function isRustErrorLog(e) {
+  var _a2, _b2;
+  return isRustLog(e) && (e.level === "error" || ((_b2 = (_a2 = e.fields) == null ? void 0 : _a2.message) == null ? void 0 : _b2.includes("fatal error")));
+}
+__name(isRustErrorLog, "isRustErrorLog");
+__name2(isRustErrorLog, "isRustErrorLog");
+__name5(isRustErrorLog, "isRustErrorLog");
+function isRustError(e) {
+  return typeof e.is_panic !== "undefined";
+}
+__name(isRustError, "isRustError");
+__name2(isRustError, "isRustError");
+__name5(isRustError, "isRustError");
+function convertLog(rustLog) {
+  const isQuery = isQueryLog(rustLog.fields);
+  const level = isQuery ? "query" : rustLog.level.toLowerCase();
+  return {
+    ...rustLog,
+    level,
+    timestamp: new Date(rustLog.timestamp)
+  };
+}
+__name(convertLog, "convertLog");
+__name2(convertLog, "convertLog");
+__name5(convertLog, "convertLog");
+function isQueryLog(fields) {
+  return Boolean(fields.query);
+}
+__name(isQueryLog, "isQueryLog");
+__name2(isQueryLog, "isQueryLog");
+__name5(isQueryLog, "isQueryLog");
+var __defProp7 = Object.defineProperty;
+var __name6 = /* @__PURE__ */ __name2((target, value) => __defProp7(target, "name", { value, configurable: true }), "__name");
+var PrismaClientRustError = /* @__PURE__ */ __name(class extends Error {
+  constructor({ clientVersion: clientVersion2, log: log4, error: error2 }) {
+    if (log4) {
+      const backtrace = getBacktraceFromLog(log4);
+      super(backtrace != null ? backtrace : "Unkown error");
+    } else if (error2) {
+      const backtrace = getBacktraceFromRustError(error2);
+      super(backtrace);
+    } else {
+      super(`Unknown error`);
+    }
+    this.clientVersion = clientVersion2;
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientRustPanicError";
+  }
+}, "PrismaClientRustError");
+__name2(PrismaClientRustError, "PrismaClientRustError");
+__name6(PrismaClientRustError, "PrismaClientRustError");
+var __defProp8 = Object.defineProperty;
+var __name7 = /* @__PURE__ */ __name2((target, value) => __defProp8(target, "name", { value, configurable: true }), "__name");
 var PrismaClientRustPanicError = /* @__PURE__ */ __name(class extends Error {
   constructor(message, clientVersion2) {
     super(message);
@@ -35801,9 +33732,9 @@ var PrismaClientRustPanicError = /* @__PURE__ */ __name(class extends Error {
   }
 }, "PrismaClientRustPanicError");
 __name2(PrismaClientRustPanicError, "PrismaClientRustPanicError");
-__name4(PrismaClientRustPanicError, "PrismaClientRustPanicError");
-var __defProp6 = Object.defineProperty;
-var __name5 = /* @__PURE__ */ __name2((target, value) => __defProp6(target, "name", { value, configurable: true }), "__name");
+__name7(PrismaClientRustPanicError, "PrismaClientRustPanicError");
+var __defProp9 = Object.defineProperty;
+var __name8 = /* @__PURE__ */ __name2((target, value) => __defProp9(target, "name", { value, configurable: true }), "__name");
 var PrismaClientUnknownRequestError = /* @__PURE__ */ __name(class extends Error {
   constructor(message, clientVersion2) {
     super(message);
@@ -35814,24 +33745,15 @@ var PrismaClientUnknownRequestError = /* @__PURE__ */ __name(class extends Error
   }
 }, "PrismaClientUnknownRequestError");
 __name2(PrismaClientUnknownRequestError, "PrismaClientUnknownRequestError");
-__name5(PrismaClientUnknownRequestError, "PrismaClientUnknownRequestError");
-var __defProp7 = Object.defineProperty;
-var __name6 = /* @__PURE__ */ __name2((target, value) => __defProp7(target, "name", { value, configurable: true }), "__name");
-var Engine = /* @__PURE__ */ __name(class {
-}, "Engine");
-__name2(Engine, "Engine");
-__name6(Engine, "Engine");
-var import_debug4 = __toModule22(require_dist7());
-var import_engines = __toModule22(require_dist8());
-var import_get_platform = __toModule22(require_dist9());
-var import_chalk7 = __toModule22(require_source2());
+__name8(PrismaClientUnknownRequestError, "PrismaClientUnknownRequestError");
 var import_debug3 = __toModule22(require_dist7());
-var import_terminal_link = __toModule22(require_terminal_link());
-var import_new_github_issue_url = __toModule22(require_new_github_issue_url());
-var import_chalk6 = __toModule22(require_source2());
+var import_strip_ansi = __toModule22(require_strip_ansi());
 var import_debug2 = __toModule22(require_dist7());
-var __defProp8 = Object.defineProperty;
-var __name7 = /* @__PURE__ */ __name2((target, value) => __defProp8(target, "name", { value, configurable: true }), "__name");
+var import_chalk2 = __toModule22(require_source2());
+var import_new_github_issue_url = __toModule22(require_new_github_issue_url());
+var import_terminal_link = __toModule22(require_terminal_link());
+var __defProp10 = Object.defineProperty;
+var __name9 = /* @__PURE__ */ __name2((target, value) => __defProp10(target, "name", { value, configurable: true }), "__name");
 var debug3 = (0, import_debug2.default)("plusX");
 function plusX2(file2) {
   const s = import_fs2.default.statSync(file2);
@@ -35846,13 +33768,13 @@ function plusX2(file2) {
 }
 __name(plusX2, "plusX2");
 __name2(plusX2, "plusX");
-__name7(plusX2, "plusX");
+__name9(plusX2, "plusX");
 function transformPlatformToEnvValue(platform2) {
   return { fromEnvVar: null, value: platform2 };
 }
 __name(transformPlatformToEnvValue, "transformPlatformToEnvValue");
 __name2(transformPlatformToEnvValue, "transformPlatformToEnvValue");
-__name7(transformPlatformToEnvValue, "transformPlatformToEnvValue");
+__name9(transformPlatformToEnvValue, "transformPlatformToEnvValue");
 function fixBinaryTargets(binaryTargets, platform2) {
   binaryTargets = binaryTargets || [];
   if (!binaryTargets.find((object) => object.value === "native")) {
@@ -35862,15 +33784,15 @@ function fixBinaryTargets(binaryTargets, platform2) {
 }
 __name(fixBinaryTargets, "fixBinaryTargets");
 __name2(fixBinaryTargets, "fixBinaryTargets");
-__name7(fixBinaryTargets, "fixBinaryTargets");
+__name9(fixBinaryTargets, "fixBinaryTargets");
 function link(url2) {
   return (0, import_terminal_link.default)(url2, url2, {
-    fallback: (url22) => import_chalk6.default.underline(url22)
+    fallback: (url22) => import_chalk2.default.underline(url22)
   });
 }
 __name(link, "link");
 __name2(link, "link");
-__name7(link, "link");
+__name9(link, "link");
 function getGithubIssueUrl({
   title,
   user = "prisma",
@@ -35888,16 +33810,15 @@ function getGithubIssueUrl({
 }
 __name(getGithubIssueUrl, "getGithubIssueUrl");
 __name2(getGithubIssueUrl, "getGithubIssueUrl");
-__name7(getGithubIssueUrl, "getGithubIssueUrl");
+__name9(getGithubIssueUrl, "getGithubIssueUrl");
 function getRandomString() {
   return import_crypto.default.randomBytes(12).toString("hex");
 }
 __name(getRandomString, "getRandomString");
 __name2(getRandomString, "getRandomString");
-__name7(getRandomString, "getRandomString");
-var import_strip_ansi3 = __toModule22(require_strip_ansi());
-var __defProp9 = Object.defineProperty;
-var __name8 = /* @__PURE__ */ __name2((target, value) => __defProp9(target, "name", { value, configurable: true }), "__name");
+__name9(getRandomString, "getRandomString");
+var __defProp11 = Object.defineProperty;
+var __name10 = /* @__PURE__ */ __name2((target, value) => __defProp11(target, "name", { value, configurable: true }), "__name");
 function maskQuery(query2) {
   if (!query2) {
     return "";
@@ -35908,9 +33829,9 @@ function maskQuery(query2) {
 }
 __name(maskQuery, "maskQuery");
 __name2(maskQuery, "maskQuery");
-__name8(maskQuery, "maskQuery");
-var __defProp10 = Object.defineProperty;
-var __name9 = /* @__PURE__ */ __name2((target, value) => __defProp10(target, "name", { value, configurable: true }), "__name");
+__name10(maskQuery, "maskQuery");
+var __defProp12 = Object.defineProperty;
+var __name11 = /* @__PURE__ */ __name2((target, value) => __defProp12(target, "name", { value, configurable: true }), "__name");
 function normalizeLogs(logs) {
   return logs.split("\n").map((l) => {
     return l.replace(/^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)\s*/, "").replace(/\+\d+\s*ms$/, "");
@@ -35918,9 +33839,9 @@ function normalizeLogs(logs) {
 }
 __name(normalizeLogs, "normalizeLogs");
 __name2(normalizeLogs, "normalizeLogs");
-__name9(normalizeLogs, "normalizeLogs");
-var __defProp11 = Object.defineProperty;
-var __name10 = /* @__PURE__ */ __name2((target, value) => __defProp11(target, "name", { value, configurable: true }), "__name");
+__name11(normalizeLogs, "normalizeLogs");
+var __defProp13 = Object.defineProperty;
+var __name12 = /* @__PURE__ */ __name2((target, value) => __defProp13(target, "name", { value, configurable: true }), "__name");
 function getErrorMessageWithLink({
   version,
   platform: platform2,
@@ -35932,12 +33853,12 @@ function getErrorMessageWithLink({
 }) {
   var _a2, _b2;
   const gotLogs = (0, import_debug3.getLogs)(6e3 - ((_a2 = query2 == null ? void 0 : query2.length) != null ? _a2 : 0));
-  const logs = normalizeLogs((0, import_strip_ansi3.default)(gotLogs));
+  const logs = normalizeLogs((0, import_strip_ansi.default)(gotLogs));
   const moreInfo = description ? `# Description
 \`\`\`
 ${description}
 \`\`\`` : "";
-  const body = (0, import_strip_ansi3.default)(`Hi Prisma Team! My Prisma Client just crashed. This is the report:
+  const body = (0, import_strip_ansi.default)(`Hi Prisma Team! My Prisma Client just crashed. This is the report:
 ## Versions
 
 | Name            | Version            |
@@ -35984,9 +33905,9 @@ how you used Prisma Client in the issue.
 }
 __name(getErrorMessageWithLink, "getErrorMessageWithLink");
 __name2(getErrorMessageWithLink, "getErrorMessageWithLink");
-__name10(getErrorMessageWithLink, "getErrorMessageWithLink");
-var __defProp12 = Object.defineProperty;
-var __name11 = /* @__PURE__ */ __name2((target, value) => __defProp12(target, "name", { value, configurable: true }), "__name");
+__name12(getErrorMessageWithLink, "getErrorMessageWithLink");
+var __defProp14 = Object.defineProperty;
+var __name13 = /* @__PURE__ */ __name2((target, value) => __defProp14(target, "name", { value, configurable: true }), "__name");
 function prismaGraphQLToJSError(error2, clientVersion2) {
   if (error2.user_facing_error.error_code) {
     return new PrismaClientKnownRequestError(error2.user_facing_error.message, error2.user_facing_error.error_code, clientVersion2, error2.user_facing_error.meta);
@@ -35995,16 +33916,16 @@ function prismaGraphQLToJSError(error2, clientVersion2) {
 }
 __name(prismaGraphQLToJSError, "prismaGraphQLToJSError");
 __name2(prismaGraphQLToJSError, "prismaGraphQLToJSError");
-__name11(prismaGraphQLToJSError, "prismaGraphQLToJSError");
-var import_indent_string3 = __toModule22(require_indent_string2());
-var __defProp13 = Object.defineProperty;
-var __name12 = /* @__PURE__ */ __name2((target, value) => __defProp13(target, "name", { value, configurable: true }), "__name");
+__name13(prismaGraphQLToJSError, "prismaGraphQLToJSError");
+var import_indent_string2 = __toModule22(require_indent_string2());
+var __defProp15 = Object.defineProperty;
+var __name14 = /* @__PURE__ */ __name2((target, value) => __defProp15(target, "name", { value, configurable: true }), "__name");
 function printGeneratorConfig(config2) {
   return String(new GeneratorConfigClass(config2));
 }
 __name(printGeneratorConfig, "printGeneratorConfig");
 __name2(printGeneratorConfig, "printGeneratorConfig");
-__name12(printGeneratorConfig, "printGeneratorConfig");
+__name14(printGeneratorConfig, "printGeneratorConfig");
 var GeneratorConfigClass = /* @__PURE__ */ __name(class {
   constructor(config2) {
     this.config = config2;
@@ -36017,12 +33938,12 @@ var GeneratorConfigClass = /* @__PURE__ */ __name(class {
       binaryTargets: getOriginalBinaryTargetsValue(config2.binaryTargets)
     }));
     return `generator ${config2.name} {
-${(0, import_indent_string3.default)(printDatamodelObject(obj), 2)}
+${(0, import_indent_string2.default)(printDatamodelObject(obj), 2)}
 }`;
   }
 }, "GeneratorConfigClass");
 __name2(GeneratorConfigClass, "GeneratorConfigClass");
-__name12(GeneratorConfigClass, "GeneratorConfigClass");
+__name14(GeneratorConfigClass, "GeneratorConfigClass");
 function getOriginalBinaryTargetsValue(binaryTargets) {
   let value;
   if (binaryTargets.length > 0) {
@@ -36039,14 +33960,14 @@ function getOriginalBinaryTargetsValue(binaryTargets) {
 }
 __name(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
 __name2(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
-__name12(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
+__name14(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
 function printDatamodelObject(obj) {
   const maxLength = Object.keys(obj).reduce((max2, curr) => Math.max(max2, curr.length), 0);
   return Object.entries(obj).map(([key, value]) => `${key.padEnd(maxLength)} = ${niceStringify(value)}`).join("\n");
 }
 __name(printDatamodelObject, "printDatamodelObject");
 __name2(printDatamodelObject, "printDatamodelObject");
-__name12(printDatamodelObject, "printDatamodelObject");
+__name14(printDatamodelObject, "printDatamodelObject");
 function niceStringify(value) {
   return JSON.parse(JSON.stringify(value, (_, value2) => {
     if (Array.isArray(value2)) {
@@ -36057,504 +33978,15 @@ function niceStringify(value) {
 }
 __name(niceStringify, "niceStringify");
 __name2(niceStringify, "niceStringify");
-__name12(niceStringify, "niceStringify");
-var __defProp14 = Object.defineProperty;
-var __name13 = /* @__PURE__ */ __name2((target, value) => __defProp14(target, "name", { value, configurable: true }), "__name");
-var debug4 = (0, import_debug4.default)("prisma:client:libraryEngine");
-function isQueryEvent(event) {
-  return event["item_type"] === "query" && "query" in event;
-}
-__name(isQueryEvent, "isQueryEvent");
-__name2(isQueryEvent, "isQueryEvent");
-__name13(isQueryEvent, "isQueryEvent");
-function isPanicEvent(event) {
-  return event.level === "error" && event["message"] === "PANIC";
-}
-__name(isPanicEvent, "isPanicEvent");
-__name2(isPanicEvent, "isPanicEvent");
-__name13(isPanicEvent, "isPanicEvent");
-var knownPlatforms = [...import_get_platform.platforms, "native"];
-var engines = [];
-var LibraryEngine = /* @__PURE__ */ __name(class extends Engine {
-  constructor(config2) {
-    super();
-    var _a2, _b2;
-    this.datamodel = import_fs.default.readFileSync(config2.datamodelPath, "utf-8");
-    this.config = config2;
-    this.libraryStarted = false;
-    this.logQueries = (_a2 = config2.logQueries) != null ? _a2 : false;
-    this.logLevel = (_b2 = config2.logLevel) != null ? _b2 : "error";
-    this.logEmitter = new import_events.default();
-    this.logEmitter.on("error", (e) => {
-    });
-    this.datasourceOverrides = config2.datasources ? this.convertDatasources(config2.datasources) : {};
-    if (config2.enableDebugLogs) {
-      this.logLevel = "debug";
-    }
-    this.libraryInstantiationPromise = this.instantiateLibrary();
-    initHooks();
-    engines.push(this);
-    this.checkForTooManyEngines();
-  }
-  checkForTooManyEngines() {
-    if (engines.length >= 10) {
-      const runningEngines = engines.filter((e) => e.engine);
-      if (runningEngines.length === 10) {
-        console.warn(`${import_chalk7.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`);
-      }
-    }
-  }
-  async transaction(action, arg2) {
-    var _a2, _b2, _c, _d, _e;
-    await this.start();
-    let result;
-    if (action === "start") {
-      const jsonOptions = JSON.stringify({
-        max_wait: (_a2 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a2 : 2e3,
-        timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3
-      });
-      result = await ((_c = this.engine) == null ? void 0 : _c.startTransaction(jsonOptions, "{}"));
-    } else if (action === "commit") {
-      result = await ((_d = this.engine) == null ? void 0 : _d.commitTransaction(arg2.id, "{}"));
-    } else if (action === "rollback") {
-      result = await ((_e = this.engine) == null ? void 0 : _e.rollbackTransaction(arg2.id, "{}"));
-    }
-    const response = this.parseEngineResponse(result);
-    if (response.error_code)
-      throw response;
-    return response;
-  }
-  async instantiateLibrary() {
-    debug4("internalSetup");
-    if (this.libraryInstantiationPromise) {
-      return this.libraryInstantiationPromise;
-    }
-    await (0, import_get_platform.isNodeAPISupported)();
-    this.platform = await this.getPlatform();
-    await this.loadEngine();
-    this.version();
-  }
-  async getPlatform() {
-    if (this.platform)
-      return this.platform;
-    const platform2 = await (0, import_get_platform.getPlatform)();
-    if (!knownPlatforms.includes(platform2)) {
-      throw new PrismaClientInitializationError(`Unknown ${import_chalk7.default.red("PRISMA_QUERY_ENGINE_LIBRARY")} ${import_chalk7.default.redBright.bold(this.platform)}. Possible binaryTargets: ${import_chalk7.default.greenBright(knownPlatforms.join(", "))} or a path to the query engine library.
-You may have to run ${import_chalk7.default.greenBright("prisma generate")} for your changes to take effect.`, this.config.clientVersion);
-    }
-    return platform2;
-  }
-  parseEngineResponse(response) {
-    if (!response) {
-      throw new PrismaClientUnknownRequestError(`Response from the Engine was empty`, this.config.clientVersion);
-    }
-    try {
-      const config2 = JSON.parse(response);
-      return config2;
-    } catch (err) {
-      throw new PrismaClientUnknownRequestError(`Unable to JSON.parse response from engine`, this.config.clientVersion);
-    }
-  }
-  convertDatasources(datasources) {
-    const obj = Object.create(null);
-    for (const { name, url: url2 } of datasources) {
-      obj[name] = url2;
-    }
-    return obj;
-  }
-  async loadEngine() {
-    var _a2;
-    if (!this.libQueryEnginePath) {
-      this.libQueryEnginePath = await this.getLibQueryEnginePath();
-    }
-    debug4(`loadEngine using ${this.libQueryEnginePath}`);
-    if (!this.engine) {
-      if (!this.QueryEngineConstructor) {
-        try {
-          this.library = eval("require")(this.libQueryEnginePath);
-          this.QueryEngineConstructor = this.library.QueryEngine;
-        } catch (e) {
-          if (import_fs.default.existsSync(this.libQueryEnginePath)) {
-            if (this.libQueryEnginePath.endsWith(".node")) {
-              throw new PrismaClientInitializationError(`Unable to load Node-API Library from ${import_chalk7.default.dim(this.libQueryEnginePath)}, Library may be corrupt`, this.config.clientVersion);
-            } else {
-              throw new PrismaClientInitializationError(`Expected an Node-API Library but received ${import_chalk7.default.dim(this.libQueryEnginePath)}`, this.config.clientVersion);
-            }
-          } else {
-            throw new PrismaClientInitializationError(`Unable to load Node-API Library from ${import_chalk7.default.dim(this.libQueryEnginePath)}, It does not exist`, this.config.clientVersion);
-          }
-        }
-      }
-      if (this.QueryEngineConstructor) {
-        try {
-          this.engine = new this.QueryEngineConstructor({
-            datamodel: this.datamodel,
-            env: process.env,
-            logQueries: (_a2 = this.config.logQueries) != null ? _a2 : false,
-            ignoreEnvVarErrors: false,
-            datasourceOverrides: this.datasourceOverrides,
-            logLevel: this.logLevel,
-            configDir: this.config.cwd
-          }, (err, log4) => this.logger(err, log4));
-        } catch (_e) {
-          const e = _e;
-          const error2 = this.parseInitError(e.message);
-          if (typeof error2 === "string") {
-            throw e;
-          } else {
-            throw new PrismaClientInitializationError(error2.message, this.config.clientVersion, error2.error_code);
-          }
-        }
-      }
-    }
-  }
-  logger(err, log4) {
-    var _a2;
-    if (err) {
-      throw err;
-    }
-    const event = this.parseEngineResponse(log4);
-    if (!event)
-      return;
-    event.level = (_a2 = event == null ? void 0 : event.level.toLowerCase()) != null ? _a2 : "unknown";
-    if (isQueryEvent(event)) {
-      this.logEmitter.emit("query", {
-        timestamp: Date.now(),
-        query: event.query,
-        params: event.params,
-        duration: event.duration_ms,
-        target: event.module_path
-      });
-    } else if (isPanicEvent(event)) {
-      this.loggerRustPanic = new PrismaClientRustPanicError(this.getErrorMessageWithLink(`${event.message}: ${event.reason} in ${event.file}:${event.line}:${event.column}`), this.config.clientVersion);
-      this.logEmitter.emit("error", this.loggerRustPanic);
-    } else {
-      this.logEmitter.emit(event.level, event);
-    }
-  }
-  getErrorMessageWithLink(title) {
-    var _a2;
-    return getErrorMessageWithLink({
-      platform: this.platform,
-      title,
-      version: this.config.clientVersion,
-      engineVersion: (_a2 = this.versionInfo) == null ? void 0 : _a2.version,
-      database: this.config.activeProvider,
-      query: this.lastQuery
-    });
-  }
-  parseInitError(str) {
-    try {
-      const error2 = JSON.parse(str);
-      return error2;
-    } catch (e) {
-    }
-    return str;
-  }
-  parseRequestError(str) {
-    try {
-      const error2 = JSON.parse(str);
-      return error2;
-    } catch (e) {
-    }
-    return str;
-  }
-  on(event, listener) {
-    if (event === "beforeExit") {
-      this.beforeExitListener = listener;
-    } else {
-      this.logEmitter.on(event, listener);
-    }
-  }
-  async runBeforeExit() {
-    debug4("runBeforeExit");
-    if (this.beforeExitListener) {
-      try {
-        await this.beforeExitListener();
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }
-  async start() {
-    await this.libraryInstantiationPromise;
-    await this.libraryStoppingPromise;
-    if (this.libraryStartingPromise) {
-      debug4(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
-      return this.libraryStartingPromise;
-    }
-    if (!this.libraryStarted) {
-      this.libraryStartingPromise = new Promise((resolve2, reject2) => {
-        var _a2;
-        debug4("library starting");
-        (_a2 = this.engine) == null ? void 0 : _a2.connect({ enableRawQueries: true }).then(() => {
-          this.libraryStarted = true;
-          this.libraryStartingPromise = void 0;
-          debug4("library started");
-          resolve2();
-        }).catch((err) => {
-          const error2 = this.parseInitError(err.message);
-          if (typeof error2 === "string") {
-            reject2(err);
-          } else {
-            reject2(new PrismaClientInitializationError(error2.message, this.config.clientVersion, error2.error_code));
-          }
-        });
-      });
-      return this.libraryStartingPromise;
-    }
-  }
-  async stop() {
-    await this.libraryStartingPromise;
-    await this.executingQueryPromise;
-    if (this.libraryStoppingPromise) {
-      debug4("library is already stopping");
-      return this.libraryStoppingPromise;
-    }
-    if (this.libraryStarted) {
-      this.libraryStoppingPromise = new Promise(async (resolve2, reject2) => {
-        var _a2;
-        try {
-          await new Promise((r) => setTimeout(r, 5));
-          debug4("library stopping");
-          await ((_a2 = this.engine) == null ? void 0 : _a2.disconnect());
-          this.libraryStarted = false;
-          this.libraryStoppingPromise = void 0;
-          debug4("library stopped");
-          resolve2();
-        } catch (err) {
-          reject2(err);
-        }
-      });
-      return this.libraryStoppingPromise;
-    }
-  }
-  getConfig() {
-    return this.library.getConfig({
-      datamodel: this.datamodel,
-      datasourceOverrides: this.datasourceOverrides,
-      ignoreEnvVarErrors: true,
-      env: process.env
-    });
-  }
-  version() {
-    var _a2, _b2, _c;
-    this.versionInfo = (_a2 = this.library) == null ? void 0 : _a2.version();
-    return (_c = (_b2 = this.versionInfo) == null ? void 0 : _b2.version) != null ? _c : "unknown";
-  }
-  async request(query2, headers = {}, numTry = 1) {
-    var _a2;
-    debug4(`sending request, this.libraryStarted: ${this.libraryStarted}`);
-    const request4 = { query: query2, variables: {} };
-    const headerStr = JSON.stringify(headers);
-    const queryStr = JSON.stringify(request4);
-    try {
-      await this.start();
-      this.executingQueryPromise = (_a2 = this.engine) == null ? void 0 : _a2.query(queryStr, headerStr, headers.transactionId);
-      this.lastQuery = queryStr;
-      const data = this.parseEngineResponse(await this.executingQueryPromise);
-      if (data.errors) {
-        if (data.errors.length === 1) {
-          throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
-        }
-        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
-      } else if (this.loggerRustPanic) {
-        throw this.loggerRustPanic;
-      }
-      return { data, elapsed: 0 };
-    } catch (e) {
-      if (e instanceof PrismaClientInitializationError) {
-        throw e;
-      }
-      const error2 = this.parseRequestError(e.message);
-      if (typeof error2 === "string") {
-        throw e;
-      } else {
-        throw new PrismaClientUnknownRequestError(`${error2.message}
-${error2.backtrace}`, this.config.clientVersion);
-      }
-    }
-  }
-  async requestBatch(queries, headers = {}, transaction = false, numTry = 1) {
-    debug4("requestBatch");
-    const request4 = {
-      batch: queries.map((query2) => ({ query: query2, variables: {} })),
-      transaction
-    };
-    await this.start();
-    this.lastQuery = JSON.stringify(request4);
-    this.executingQueryPromise = this.engine.query(this.lastQuery, JSON.stringify(headers), headers.transactionId);
-    const result = await this.executingQueryPromise;
-    const data = this.parseEngineResponse(result);
-    if (data.errors) {
-      if (data.errors.length === 1) {
-        throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
-      }
-      throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
-    }
-    const { batchResult, errors: errors2 } = data;
-    if (Array.isArray(batchResult)) {
-      return batchResult.map((result2) => {
-        var _a2;
-        if (result2.errors) {
-          return (_a2 = this.loggerRustPanic) != null ? _a2 : prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
-        }
-        return {
-          data: result2,
-          elapsed: 0
-        };
-      });
-    } else {
-      if (errors2 && errors2.length === 1) {
-        throw new Error(errors2[0].error);
-      }
-      throw new Error(JSON.stringify(data));
-    }
-  }
-  async resolveEnginePath() {
-    var _a2, _b2, _c, _d;
-    const searchedLocations = [];
-    let enginePath;
-    if (this.libQueryEnginePath) {
-      return { enginePath: this.libQueryEnginePath, searchedLocations };
-    }
-    this.platform = (_a2 = this.platform) != null ? _a2 : await (0, import_get_platform.getPlatform)();
-    if (__filename.includes("LibraryEngine")) {
-      enginePath = import_path2.default.join((0, import_engines.getEnginesPath)(), (0, import_get_platform.getNodeAPIName)(this.platform, "fs"));
-      return { enginePath, searchedLocations };
-    }
-    const searchLocations = [
-      eval(`require('path').join(__dirname, '../../../.prisma/client')`),
-      (_d = (_c = (_b2 = this.config.generator) == null ? void 0 : _b2.output) == null ? void 0 : _c.value) != null ? _d : eval("__dirname"),
-      import_path2.default.join(eval("__dirname"), ".."),
-      import_path2.default.dirname(this.config.datamodelPath),
-      this.config.cwd,
-      "/tmp/prisma-engines"
-    ];
-    if (this.config.dirname) {
-      searchLocations.push(this.config.dirname);
-    }
-    for (const location of searchLocations) {
-      searchedLocations.push(location);
-      debug4(`Searching for Query Engine Library in ${location}`);
-      enginePath = import_path2.default.join(location, (0, import_get_platform.getNodeAPIName)(this.platform, "fs"));
-      if (import_fs.default.existsSync(enginePath)) {
-        return { enginePath, searchedLocations };
-      }
-    }
-    enginePath = import_path2.default.join(__dirname, (0, import_get_platform.getNodeAPIName)(this.platform, "fs"));
-    return { enginePath: enginePath != null ? enginePath : "", searchedLocations };
-  }
-  async getLibQueryEnginePath() {
-    var _a2, _b2, _c, _d;
-    const libPath = (_a2 = process.env.PRISMA_QUERY_ENGINE_LIBRARY) != null ? _a2 : this.config.prismaPath;
-    if (libPath && import_fs.default.existsSync(libPath) && libPath.endsWith(".node")) {
-      return libPath;
-    }
-    this.platform = (_b2 = this.platform) != null ? _b2 : await (0, import_get_platform.getPlatform)();
-    const { enginePath: enginePath2, searchedLocations: searchedLocations2 } = await this.resolveEnginePath();
-    if (!import_fs.default.existsSync(enginePath2)) {
-      const incorrectPinnedPlatformErrorStr = this.platform ? `
-You incorrectly pinned it to ${import_chalk7.default.redBright.bold(`${this.platform}`)}
-` : "";
-      let errorText = `Query engine library for current platform "${import_chalk7.default.bold(this.platform)}" could not be found.${incorrectPinnedPlatformErrorStr}
-This probably happens, because you built Prisma Client on a different platform.
-(Prisma Client looked in "${import_chalk7.default.underline(enginePath2)}")
-
-Searched Locations:
-
-${searchedLocations2.map((f) => {
-        let msg = `  ${f}`;
-        if (process.env.DEBUG === "node-engine-search-locations" && import_fs.default.existsSync(f)) {
-          const dir2 = import_fs.default.readdirSync(f);
-          msg += dir2.map((d) => `    ${d}`).join("\n");
-        }
-        return msg;
-      }).join("\n" + (process.env.DEBUG === "node-engine-search-locations" ? "\n" : ""))}
-`;
-      if (this.config.generator) {
-        this.platform = (_c = this.platform) != null ? _c : await (0, import_get_platform.getPlatform)();
-        if (this.config.generator.binaryTargets.find((object) => object.value === this.platform) || this.config.generator.binaryTargets.find((object) => object.value === "native")) {
-          errorText += `
-You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t) => `"${import_chalk7.default.bold(t.value)}"`).join(", ")} to the "${import_chalk7.default.underline("generator")}" block
-in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
-but something went wrong. That's suboptimal.
-
-Please create an issue at https://github.com/prisma/prisma/issues/new`;
-          errorText += ``;
-        } else {
-          errorText += `
-
-To solve this problem, add the platform "${this.platform}" to the "${import_chalk7.default.underline("binaryTargets")}" attribute in the "${import_chalk7.default.underline("generator")}" block in the "schema.prisma" file:
-${import_chalk7.default.greenBright(this.getFixedGenerator())}
-
-Then run "${import_chalk7.default.greenBright("prisma generate")}" for your changes to take effect.
-Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
-        }
-      } else {
-        errorText += `
-
-Read more about deploying Prisma Client: https://pris.ly/d/client-generator
-`;
-      }
-      throw new PrismaClientInitializationError(errorText, this.config.clientVersion);
-    }
-    this.platform = (_d = this.platform) != null ? _d : await (0, import_get_platform.getPlatform)();
-    return enginePath2;
-  }
-  getFixedGenerator() {
-    const fixedGenerator = {
-      ...this.config.generator,
-      binaryTargets: fixBinaryTargets(this.config.generator.binaryTargets, this.platform)
-    };
-    return printGeneratorConfig(fixedGenerator);
-  }
-}, "LibraryEngine");
-__name2(LibraryEngine, "LibraryEngine");
-__name13(LibraryEngine, "LibraryEngine");
-function hookProcess(handler, exit = false) {
-  process.once(handler, async () => {
-    debug4(`hookProcess received: ${handler}`);
-    for (const engine of engines) {
-      await engine.runBeforeExit();
-    }
-    engines.splice(0, engines.length);
-    if (exit && process.listenerCount(handler) === 0) {
-      process.exit();
-    }
-  });
-}
-__name(hookProcess, "hookProcess");
-__name2(hookProcess, "hookProcess");
-__name13(hookProcess, "hookProcess");
-var hooksInitialized = false;
-function initHooks() {
-  if (!hooksInitialized) {
-    hookProcess("beforeExit");
-    hookProcess("exit");
-    hookProcess("SIGINT", true);
-    hookProcess("SIGUSR2", true);
-    hookProcess("SIGTERM", true);
-    hooksInitialized = true;
-  }
-}
-__name(initHooks, "initHooks");
-__name2(initHooks, "initHooks");
-__name13(initHooks, "initHooks");
-var import_debug5 = __toModule22(require_dist7());
-var import_engines2 = __toModule22(require_dist8());
-var import_get_platform2 = __toModule22(require_dist9());
-var import_chalk8 = __toModule22(require_source2());
-var import_execa = __toModule22(require_execa2());
-var import_p_retry = __toModule22(require_p_retry2());
-var __defProp15 = Object.defineProperty;
-var __name14 = /* @__PURE__ */ __name2((target, value) => __defProp15(target, "name", { value, configurable: true }), "__name");
+__name14(niceStringify, "niceStringify");
+var __defProp16 = Object.defineProperty;
+var __name15 = /* @__PURE__ */ __name2((target, value) => __defProp16(target, "name", { value, configurable: true }), "__name");
 function byline(readStream, options2) {
   return module.exports.createStream(readStream, options2);
 }
 __name(byline, "byline");
 __name2(byline, "byline");
-__name14(byline, "byline");
+__name15(byline, "byline");
 module.exports.createStream = function(readStream, options2) {
   if (readStream) {
     return createLineStream(readStream, options2);
@@ -36575,7 +34007,7 @@ function createLineStream(readStream, options2) {
 }
 __name(createLineStream, "createLineStream");
 __name2(createLineStream, "createLineStream");
-__name14(createLineStream, "createLineStream");
+__name15(createLineStream, "createLineStream");
 module.exports.LineStream = LineStream;
 function LineStream(options2) {
   import_stream.default.Transform.call(this, options2);
@@ -36594,7 +34026,7 @@ function LineStream(options2) {
 }
 __name(LineStream, "LineStream");
 __name2(LineStream, "LineStream");
-__name14(LineStream, "LineStream");
+__name15(LineStream, "LineStream");
 import_util2.default.inherits(LineStream, import_stream.default.Transform);
 LineStream.prototype._transform = function(chunk, encoding, done) {
   encoding = encoding || "utf8";
@@ -36646,131 +34078,17 @@ LineStream.prototype._reencode = function(line, chunkEncoding) {
     return Buffer.from(line, chunkEncoding);
   }
 };
-var __defProp16 = Object.defineProperty;
-var __name15 = /* @__PURE__ */ __name2((target, value) => __defProp16(target, "name", { value, configurable: true }), "__name");
-function getMessage(log4) {
-  if (typeof log4 === "string") {
-    return log4;
-  } else if (isRustError(log4)) {
-    return getBacktraceFromRustError(log4);
-  } else if (isRustLog(log4)) {
-    return getBacktraceFromLog(log4);
-  }
-  return JSON.stringify(log4);
-}
-__name(getMessage, "getMessage");
-__name2(getMessage, "getMessage");
-__name15(getMessage, "getMessage");
-function getBacktraceFromLog(log4) {
-  var _a2, _b2, _c, _d, _e, _f, _g;
-  if ((_a2 = log4.fields) == null ? void 0 : _a2.message) {
-    let str = (_b2 = log4.fields) == null ? void 0 : _b2.message;
-    if ((_c = log4.fields) == null ? void 0 : _c.file) {
-      str += ` in ${log4.fields.file}`;
-      if ((_d = log4.fields) == null ? void 0 : _d.line) {
-        str += `:${log4.fields.line}`;
-      }
-      if ((_e = log4.fields) == null ? void 0 : _e.column) {
-        str += `:${log4.fields.column}`;
-      }
-    }
-    if ((_f = log4.fields) == null ? void 0 : _f.reason) {
-      str += `
-${(_g = log4.fields) == null ? void 0 : _g.reason}`;
-    }
-    return str;
-  }
-  return "Unknown error";
-}
-__name(getBacktraceFromLog, "getBacktraceFromLog");
-__name2(getBacktraceFromLog, "getBacktraceFromLog");
-__name15(getBacktraceFromLog, "getBacktraceFromLog");
-function getBacktraceFromRustError(err) {
-  let str = "";
-  if (err.is_panic) {
-    str += `PANIC`;
-  }
-  if (err.backtrace) {
-    str += ` in ${err.backtrace}`;
-  }
-  if (err.message) {
-    str += `
-${err.message}`;
-  }
-  return str;
-}
-__name(getBacktraceFromRustError, "getBacktraceFromRustError");
-__name2(getBacktraceFromRustError, "getBacktraceFromRustError");
-__name15(getBacktraceFromRustError, "getBacktraceFromRustError");
-function isRustLog(e) {
-  return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
-}
-__name(isRustLog, "isRustLog");
-__name2(isRustLog, "isRustLog");
-__name15(isRustLog, "isRustLog");
-function isRustErrorLog(e) {
-  var _a2, _b2;
-  return isRustLog(e) && (e.level === "error" || ((_b2 = (_a2 = e.fields) == null ? void 0 : _a2.message) == null ? void 0 : _b2.includes("fatal error")));
-}
-__name(isRustErrorLog, "isRustErrorLog");
-__name2(isRustErrorLog, "isRustErrorLog");
-__name15(isRustErrorLog, "isRustErrorLog");
-function isRustError(e) {
-  return typeof e.is_panic !== "undefined";
-}
-__name(isRustError, "isRustError");
-__name2(isRustError, "isRustError");
-__name15(isRustError, "isRustError");
-function convertLog(rustLog) {
-  const isQuery = isQueryLog(rustLog.fields);
-  const level = isQuery ? "query" : rustLog.level.toLowerCase();
-  return {
-    ...rustLog,
-    level,
-    timestamp: new Date(new Date().getFullYear() + " " + rustLog.timestamp)
-  };
-}
-__name(convertLog, "convertLog");
-__name2(convertLog, "convertLog");
-__name15(convertLog, "convertLog");
-function isQueryLog(fields) {
-  return Boolean(fields.query);
-}
-__name(isQueryLog, "isQueryLog");
-__name2(isQueryLog, "isQueryLog");
-__name15(isQueryLog, "isQueryLog");
 var __defProp17 = Object.defineProperty;
 var __name16 = /* @__PURE__ */ __name2((target, value) => __defProp17(target, "name", { value, configurable: true }), "__name");
-var PrismaClientRustError = /* @__PURE__ */ __name(class extends Error {
-  constructor({ clientVersion: clientVersion2, log: log4, error: error2 }) {
-    if (log4) {
-      const backtrace = getBacktraceFromLog(log4);
-      super(backtrace != null ? backtrace : "Unkown error");
-    } else if (error2) {
-      const backtrace = getBacktraceFromRustError(error2);
-      super(backtrace);
-    } else {
-      super(`Unknown error`);
-    }
-    this.clientVersion = clientVersion2;
-  }
-  get [Symbol.toStringTag]() {
-    return "PrismaClientRustPanicError";
-  }
-}, "PrismaClientRustError");
-__name2(PrismaClientRustError, "PrismaClientRustError");
-__name16(PrismaClientRustError, "PrismaClientRustError");
-var __defProp18 = Object.defineProperty;
-var __name17 = /* @__PURE__ */ __name2((target, value) => __defProp18(target, "name", { value, configurable: true }), "__name");
-function omit2(obj, keys2) {
+function omit(obj, keys2) {
   return Object.keys(obj).filter((key) => !keys2.includes(key)).reduce((result, key) => {
     result[key] = obj[key];
     return result;
   }, {});
 }
-__name(omit2, "omit2");
-__name2(omit2, "omit");
-__name17(omit2, "omit");
+__name(omit, "omit");
+__name2(omit, "omit");
+__name16(omit, "omit");
 var import_get_stream = __toModule22(require_get_stream2());
 var import_index = __toModule22(require_undici());
 var Client = import_index.default.Client;
@@ -36781,8 +34099,8 @@ var request2 = import_index.default.request;
 var stream2 = import_index.default.stream;
 var pipeline = import_index.default.pipeline;
 var setGlobalAgent = import_index.default.setGlobalAgent;
-var __defProp19 = Object.defineProperty;
-var __name18 = /* @__PURE__ */ __name2((target, value) => __defProp19(target, "name", { value, configurable: true }), "__name");
+var __defProp18 = Object.defineProperty;
+var __name17 = /* @__PURE__ */ __name2((target, value) => __defProp18(target, "name", { value, configurable: true }), "__name");
 function assertHasPool(pool) {
   if (pool === void 0) {
     throw new Error("Connection has not been opened");
@@ -36790,7 +34108,7 @@ function assertHasPool(pool) {
 }
 __name(assertHasPool, "assertHasPool");
 __name2(assertHasPool, "assertHasPool");
-__name18(assertHasPool, "assertHasPool");
+__name17(assertHasPool, "assertHasPool");
 var Connection = /* @__PURE__ */ __name(class {
   constructor() {
   }
@@ -36845,15 +34163,15 @@ var Connection = /* @__PURE__ */ __name(class {
   }
 }, "Connection");
 __name2(Connection, "Connection");
-__name18(Connection, "Connection");
-var __defProp20 = Object.defineProperty;
-var __name19 = /* @__PURE__ */ __name2((target, value) => __defProp20(target, "name", { value, configurable: true }), "__name");
-var debug5 = (0, import_debug5.default)("prisma:engine");
-var exists2 = (0, import_util.promisify)(import_fs3.default.exists);
-var logger = /* @__PURE__ */ __name19((...args) => {
+__name17(Connection, "Connection");
+var __defProp19 = Object.defineProperty;
+var __name18 = /* @__PURE__ */ __name2((target, value) => __defProp19(target, "name", { value, configurable: true }), "__name");
+var debug4 = (0, import_debug4.default)("prisma:engine");
+var exists2 = (0, import_util.promisify)(import_fs.default.exists);
+var logger = /* @__PURE__ */ __name18((...args) => {
 }, "logger");
-var knownPlatforms2 = [...import_get_platform2.platforms, "native"];
-var engines2 = [];
+var knownPlatforms = [...import_get_platform.platforms, "native"];
+var engines = [];
 var socketPaths = [];
 var MAX_STARTS = process.env.PRISMA_CLIENT_NO_RETRY ? 1 : 2;
 var MAX_REQUEST_RETRIES = process.env.PRISMA_CLIENT_NO_RETRY ? 1 : 2;
@@ -36884,7 +34202,7 @@ var BinaryEngine = /* @__PURE__ */ __name(class extends Engine {
     this.stderrLogs = "";
     this.handleRequestError = async (error2, graceful = false) => {
       var _a3, _b2;
-      debug5({ error: error2 });
+      debug4({ error: error2 });
       if (this.startPromise) {
         await this.startPromise;
       }
@@ -36924,7 +34242,7 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
     this.prismaPath = (_a2 = process.env.PRISMA_QUERY_ENGINE_BINARY) != null ? _a2 : prismaPath;
     this.generator = generator;
     this.datasources = datasources;
-    this.logEmitter = new import_events2.default();
+    this.logEmitter = new import_events.default();
     this.logEmitter.on("error", () => {
     });
     this.showColors = showColors != null ? showColors : false;
@@ -36935,7 +34253,7 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
     this.previewFeatures = previewFeatures != null ? previewFeatures : [];
     this.activeProvider = activeProvider;
     this.connection = new Connection();
-    initHooks2();
+    initHooks();
     const removedFlags = [
       "middlewares",
       "aggregateApi",
@@ -36955,7 +34273,7 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
     ];
     const removedFlagsUsed = this.previewFeatures.filter((e) => removedFlags.includes(e));
     if (removedFlagsUsed.length > 0 && !process.env.PRISMA_HIDE_PREVIEW_FLAG_WARNINGS) {
-      console.log(`${import_chalk8.default.blueBright("info")} The preview flags \`${removedFlagsUsed.join("`, `")}\` were removed, you can now safely remove them from your schema.prisma.`);
+      console.log(`${import_chalk3.default.blueBright("info")} The preview flags \`${removedFlagsUsed.join("`, `")}\` were removed, you can now safely remove them from your schema.prisma.`);
     }
     this.previewFeatures = this.previewFeatures.filter((e) => !removedFlags.includes(e));
     this.engineEndpoint = engineEndpoint;
@@ -36964,17 +34282,17 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
       this.port = Number(url2.port);
     }
     if (this.platform) {
-      if (!knownPlatforms2.includes(this.platform) && !import_fs3.default.existsSync(this.platform)) {
-        throw new PrismaClientInitializationError(`Unknown ${import_chalk8.default.red("PRISMA_QUERY_ENGINE_BINARY")} ${import_chalk8.default.redBright.bold(this.platform)}. Possible binaryTargets: ${import_chalk8.default.greenBright(knownPlatforms2.join(", "))} or a path to the query engine binary.
-You may have to run ${import_chalk8.default.greenBright("prisma generate")} for your changes to take effect.`, this.clientVersion);
+      if (!knownPlatforms.includes(this.platform) && !import_fs.default.existsSync(this.platform)) {
+        throw new PrismaClientInitializationError(`Unknown ${import_chalk3.default.red("PRISMA_QUERY_ENGINE_BINARY")} ${import_chalk3.default.redBright.bold(this.platform)}. Possible binaryTargets: ${import_chalk3.default.greenBright(knownPlatforms.join(", "))} or a path to the query engine binary.
+You may have to run ${import_chalk3.default.greenBright("prisma generate")} for your changes to take effect.`, this.clientVersion);
       }
     } else {
       void this.getPlatform();
     }
     if (this.enableDebugLogs) {
-      import_debug5.default.enable("*");
+      import_debug4.default.enable("*");
     }
-    engines2.push(this);
+    engines.push(this);
     this.checkForTooManyEngines();
   }
   setError(err) {
@@ -37002,15 +34320,15 @@ You may have to run ${import_chalk8.default.greenBright("prisma generate")} for 
     }
   }
   checkForTooManyEngines() {
-    if (engines2.length >= 10) {
-      const runningEngines = engines2.filter((e) => e.child);
+    if (engines.length >= 10) {
+      const runningEngines = engines.filter((e) => e.child);
       if (runningEngines.length === 10) {
-        console.warn(`${import_chalk8.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`);
+        console.warn(`${import_chalk3.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`);
       }
     }
   }
   resolveCwd(cwd) {
-    if (cwd && import_fs3.default.existsSync(cwd) && import_fs3.default.lstatSync(cwd).isDirectory()) {
+    if (cwd && import_fs.default.existsSync(cwd) && import_fs.default.lstatSync(cwd).isDirectory()) {
       return cwd;
     }
     return process.cwd();
@@ -37035,11 +34353,11 @@ You may have to run ${import_chalk8.default.greenBright("prisma generate")} for 
     if (this.platformPromise) {
       return this.platformPromise;
     }
-    this.platformPromise = (0, import_get_platform2.getPlatform)();
+    this.platformPromise = (0, import_get_platform.getPlatform)();
     return this.platformPromise;
   }
   getQueryEnginePath(platform2, prefix = __dirname) {
-    let queryEnginePath = import_path3.default.join(prefix, `query-engine-${platform2}`);
+    let queryEnginePath = import_path2.default.join(prefix, `query-engine-${platform2}`);
     if (platform2 === "windows") {
       queryEnginePath = `${queryEnginePath}.exe`;
     }
@@ -37065,14 +34383,14 @@ You may have to run ${import_chalk8.default.greenBright("prisma generate")} for 
     }
     this.platform = this.platform || platform;
     if (__filename.includes("BinaryEngine")) {
-      enginePath = this.getQueryEnginePath(this.platform, (0, import_engines2.getEnginesPath)());
+      enginePath = this.getQueryEnginePath(this.platform, (0, import_engines.getEnginesPath)());
       return { prismaPath: enginePath, searchedLocations };
     }
     const searchLocations = [
       eval(`require('path').join(__dirname, '../../../.prisma/client')`),
       (_c = (_b2 = (_a2 = this.generator) == null ? void 0 : _a2.output) == null ? void 0 : _b2.value) != null ? _c : eval("__dirname"),
-      import_path3.default.join(eval("__dirname"), ".."),
-      import_path3.default.dirname(this.datamodelPath),
+      import_path2.default.join(eval("__dirname"), ".."),
+      import_path2.default.dirname(this.datamodelPath),
       this.cwd,
       "/tmp/prisma-engines"
     ];
@@ -37081,9 +34399,9 @@ You may have to run ${import_chalk8.default.greenBright("prisma generate")} for 
     }
     for (const location of searchLocations) {
       searchedLocations.push(location);
-      debug5(`Search for Query Engine in ${location}`);
+      debug4(`Search for Query Engine in ${location}`);
       enginePath = this.getQueryEnginePath(this.platform, location);
-      if (import_fs3.default.existsSync(enginePath)) {
+      if (import_fs.default.existsSync(enginePath)) {
         return { prismaPath: enginePath, searchedLocations };
       }
     }
@@ -37095,18 +34413,18 @@ You may have to run ${import_chalk8.default.greenBright("prisma generate")} for 
     const platform2 = await this.getPlatform();
     if (!await exists2(prismaPath)) {
       const pinnedStr = this.incorrectlyPinnedBinaryTarget ? `
-You incorrectly pinned it to ${import_chalk8.default.redBright.bold(`${this.incorrectlyPinnedBinaryTarget}`)}
+You incorrectly pinned it to ${import_chalk3.default.redBright.bold(`${this.incorrectlyPinnedBinaryTarget}`)}
 ` : "";
-      let errorText = `Query engine binary for current platform "${import_chalk8.default.bold(platform2)}" could not be found.${pinnedStr}
+      let errorText = `Query engine binary for current platform "${import_chalk3.default.bold(platform2)}" could not be found.${pinnedStr}
 This probably happens, because you built Prisma Client on a different platform.
-(Prisma Client looked in "${import_chalk8.default.underline(prismaPath)}")
+(Prisma Client looked in "${import_chalk3.default.underline(prismaPath)}")
 
 Searched Locations:
 
 ${searchedLocations2.map((f) => {
         let msg = `  ${f}`;
-        if (process.env.DEBUG === "node-engine-search-locations" && import_fs3.default.existsSync(f)) {
-          const dir2 = import_fs3.default.readdirSync(f);
+        if (process.env.DEBUG === "node-engine-search-locations" && import_fs.default.existsSync(f)) {
+          const dir2 = import_fs.default.readdirSync(f);
           msg += dir2.map((d) => `    ${d}`).join("\n");
         }
         return msg;
@@ -37115,7 +34433,7 @@ ${searchedLocations2.map((f) => {
       if (this.generator) {
         if (this.generator.binaryTargets.find((object) => object.value === this.platform) || this.generator.binaryTargets.find((object) => object.value === "native")) {
           errorText += `
-You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t) => `"${import_chalk8.default.bold(t.value)}"`).join(", ")} to the "${import_chalk8.default.underline("generator")}" block
+You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t) => `"${import_chalk3.default.bold(t.value)}"`).join(", ")} to the "${import_chalk3.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -37124,10 +34442,10 @@ Please create an issue at https://github.com/prisma/prisma/issues/new`;
         } else {
           errorText += `
 
-To solve this problem, add the platform "${this.platform}" to the "${import_chalk8.default.underline("binaryTargets")}" attribute in the "${import_chalk8.default.underline("generator")}" block in the "schema.prisma" file:
-${import_chalk8.default.greenBright(this.getFixedGenerator())}
+To solve this problem, add the platform "${this.platform}" to the "${import_chalk3.default.underline("binaryTargets")}" attribute in the "${import_chalk3.default.underline("generator")}" block in the "schema.prisma" file:
+${import_chalk3.default.greenBright(this.getFixedGenerator())}
 
-Then run "${import_chalk8.default.greenBright("prisma generate")}" for your changes to take effect.
+Then run "${import_chalk3.default.greenBright("prisma generate")}" for your changes to take effect.
 Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
         }
       } else {
@@ -37139,9 +34457,9 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
       throw new PrismaClientInitializationError(errorText, this.clientVersion);
     }
     if (this.incorrectlyPinnedBinaryTarget) {
-      console.error(`${import_chalk8.default.yellow("Warning:")} You pinned the platform ${import_chalk8.default.bold(this.incorrectlyPinnedBinaryTarget)}, but Prisma Client detects ${import_chalk8.default.bold(await this.getPlatform())}.
-This means you should very likely pin the platform ${import_chalk8.default.greenBright(await this.getPlatform())} instead.
-${import_chalk8.default.dim("In case we're mistaken, please report this to us \u{1F64F}.")}`);
+      console.error(`${import_chalk3.default.yellow("Warning:")} You pinned the platform ${import_chalk3.default.bold(this.incorrectlyPinnedBinaryTarget)}, but Prisma Client detects ${import_chalk3.default.bold(await this.getPlatform())}.
+This means you should very likely pin the platform ${import_chalk3.default.greenBright(await this.getPlatform())} instead.
+${import_chalk3.default.dim("In case we're mistaken, please report this to us \u{1F64F}.")}`);
     }
     if (process.platform !== "win32") {
       plusX2(prismaPath);
@@ -37218,20 +34536,20 @@ ${import_chalk8.default.dim("In case we're mistaken, please report this to us \u
       }
       try {
         if (((_a2 = this.child) == null ? void 0 : _a2.connected) || this.child && !((_b2 = this.child) == null ? void 0 : _b2.killed)) {
-          debug5(`There is a child that still runs and we want to start again`);
+          debug4(`There is a child that still runs and we want to start again`);
         }
         this.lastRustError = void 0;
         this.lastErrorLog = void 0;
         this.lastPanic = void 0;
         logger("startin & resettin");
         this.globalKillSignalReceived = void 0;
-        debug5({ cwd: this.cwd });
+        debug4({ cwd: this.cwd });
         const prismaPath = await this.getPrismaPath();
         const additionalFlag = this.allowTriggerPanic ? ["--debug"] : [];
         const flags = ["--enable-raw-queries", ...this.flags, ...additionalFlag];
         this.port = await this.getFreePort();
         flags.push("--port", String(this.port));
-        debug5({ flags });
+        debug4({ flags });
         const env = this.getEngineEnvVars();
         this.child = (0, import_child_process.spawn)(prismaPath, flags, {
           env,
@@ -37241,11 +34559,11 @@ ${import_chalk8.default.dim("In case we're mistaken, please report this to us \u
         });
         byline(this.child.stderr).on("data", (msg) => {
           const data = String(msg);
-          debug5("stderr", data);
+          debug4("stderr", data);
           try {
             const json = JSON.parse(data);
             if (typeof json.is_panic !== "undefined") {
-              debug5(json);
+              debug4(json);
               this.setError(json);
               if (this.engineStartDeferred) {
                 const err = new PrismaClientInitializationError(json.message, this.clientVersion);
@@ -37263,7 +34581,7 @@ ${import_chalk8.default.dim("In case we're mistaken, please report this to us \u
           const data = String(msg);
           try {
             const json = JSON.parse(data);
-            debug5("stdout", getMessage(json));
+            debug4("stdout", getMessage(json));
             if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b3 = (_a3 = json.fields) == null ? void 0 : _a3.message) == null ? void 0 : _b3.startsWith("Started http server"))) {
               this.connection.open(`http://127.0.0.1:${this.port}`);
               this.engineStartDeferred.resolve();
@@ -37281,7 +34599,7 @@ ${import_chalk8.default.dim("In case we're mistaken, please report this to us \u
               this.setError(json);
             }
           } catch (e) {
-            debug5(e, data);
+            debug4(e, data);
           }
         });
         this.child.on("exit", (code) => {
@@ -37367,11 +34685,11 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         void (async () => {
           try {
             const engineVersion = await this.version(true);
-            debug5(`Client Version: ${this.clientVersion}`);
-            debug5(`Engine Version: ${engineVersion}`);
-            debug5(`Active provider: ${this.activeProvider}`);
+            debug4(`Client Version: ${this.clientVersion}`);
+            debug4(`Engine Version: ${engineVersion}`);
+            debug4(`Active provider: ${this.activeProvider}`);
           } catch (e) {
-            debug5(e);
+            debug4(e);
           }
         })();
         this.stopPromise = void 0;
@@ -37402,12 +34720,12 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     this.getConfigPromise = void 0;
     let stopChildPromise;
     if (this.child) {
-      debug5(`Stopping Prisma engine4`);
+      debug4(`Stopping Prisma engine4`);
       if (this.startPromise) {
-        debug5(`Waiting for start promise`);
+        debug4(`Waiting for start promise`);
         await this.startPromise;
       }
-      debug5(`Done waiting for start promise`);
+      debug4(`Done waiting for start promise`);
       stopChildPromise = new Promise((resolve2, reject2) => {
         this.engineStopDeferred = { resolve: resolve2, reject: reject2 };
       });
@@ -37456,7 +34774,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     const prismaPath = await this.getPrismaPath();
     const env = await this.getEngineEnvVars();
     const result = await (0, import_execa.default)(prismaPath, ["cli", "get-config"], {
-      env: omit2(env, ["PORT"]),
+      env: omit(env, ["PORT"]),
       cwd: this.cwd
     });
     return JSON.parse(result.stdout);
@@ -37593,24 +34911,24 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
   }
 }, "BinaryEngine");
 __name2(BinaryEngine, "BinaryEngine");
-__name19(BinaryEngine, "BinaryEngine");
+__name18(BinaryEngine, "BinaryEngine");
 function stringifyQuery(q) {
   return `{"variables":{},"query":${JSON.stringify(q)}}`;
 }
 __name(stringifyQuery, "stringifyQuery");
 __name2(stringifyQuery, "stringifyQuery");
-__name19(stringifyQuery, "stringifyQuery");
-function hookProcess2(handler, exit = false) {
+__name18(stringifyQuery, "stringifyQuery");
+function hookProcess(handler, exit = false) {
   process.once(handler, async () => {
-    for (const engine of engines2) {
+    for (const engine of engines) {
       await engine.emitExit();
       engine.kill(handler);
     }
-    engines2.splice(0, engines2.length);
+    engines.splice(0, engines.length);
     if (socketPaths.length > 0) {
       for (const socketPath of socketPaths) {
         try {
-          import_fs3.default.unlinkSync(socketPath);
+          import_fs.default.unlinkSync(socketPath);
         } catch (e) {
         }
       }
@@ -37620,29 +34938,29 @@ function hookProcess2(handler, exit = false) {
     }
   });
 }
-__name(hookProcess2, "hookProcess2");
-__name2(hookProcess2, "hookProcess");
-__name19(hookProcess2, "hookProcess");
-var hooksInitialized2 = false;
-function initHooks2() {
-  if (!hooksInitialized2) {
-    hookProcess2("beforeExit");
-    hookProcess2("exit");
-    hookProcess2("SIGINT", true);
-    hookProcess2("SIGUSR2", true);
-    hookProcess2("SIGTERM", true);
-    hooksInitialized2 = true;
+__name(hookProcess, "hookProcess");
+__name2(hookProcess, "hookProcess");
+__name18(hookProcess, "hookProcess");
+var hooksInitialized = false;
+function initHooks() {
+  if (!hooksInitialized) {
+    hookProcess("beforeExit");
+    hookProcess("exit");
+    hookProcess("SIGINT", true);
+    hookProcess("SIGUSR2", true);
+    hookProcess("SIGTERM", true);
+    hooksInitialized = true;
   }
 }
-__name(initHooks2, "initHooks2");
-__name2(initHooks2, "initHooks");
-__name19(initHooks2, "initHooks");
+__name(initHooks, "initHooks");
+__name2(initHooks, "initHooks");
+__name18(initHooks, "initHooks");
 function transactionHttpErrorHandler(result) {
   throw result.data;
 }
 __name(transactionHttpErrorHandler, "transactionHttpErrorHandler");
 __name2(transactionHttpErrorHandler, "transactionHttpErrorHandler");
-__name19(transactionHttpErrorHandler, "transactionHttpErrorHandler");
+__name18(transactionHttpErrorHandler, "transactionHttpErrorHandler");
 function runtimeHeadersToHttpHeaders(headers) {
   return Object.keys(headers).reduce((acc, runtimeHeaderKey) => {
     let httpHeaderKey = runtimeHeaderKey;
@@ -37655,106 +34973,9 @@ function runtimeHeadersToHttpHeaders(headers) {
 }
 __name(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
 __name2(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
-__name19(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
-var __defProp21 = Object.defineProperty;
-var __name20 = /* @__PURE__ */ __name2((target, value) => __defProp21(target, "name", { value, configurable: true }), "__name");
-function getJSRuntimeName() {
-  if (typeof self === "undefined") {
-    return "node";
-  }
-  return "browser";
-}
-__name(getJSRuntimeName, "getJSRuntimeName");
-__name2(getJSRuntimeName, "getJSRuntimeName");
-__name20(getJSRuntimeName, "getJSRuntimeName");
-var __defProp222 = Object.defineProperty;
-var __name21 = /* @__PURE__ */ __name2((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
-async function request3(url2, options2 = {}) {
-  const jsRuntimeName = getJSRuntimeName();
-  if (jsRuntimeName === "browser") {
-    return fetch(url2, options2);
-  } else {
-    return nodeFetch(url2, options2);
-  }
-}
-__name(request3, "request3");
-__name2(request3, "request");
-__name21(request3, "request");
-function buildHeaders(options2) {
-  return {
-    ...JSON.parse(JSON.stringify(options2.headers)),
-    "Content-Type": "application/json"
-  };
-}
-__name(buildHeaders, "buildHeaders");
-__name2(buildHeaders, "buildHeaders");
-__name21(buildHeaders, "buildHeaders");
-function buildOptions(options2) {
-  return {
-    method: options2.method,
-    headers: buildHeaders(options2)
-  };
-}
-__name(buildOptions, "buildOptions");
-__name2(buildOptions, "buildOptions");
-__name21(buildOptions, "buildOptions");
-function buildResponse(incomingData2, response) {
-  return {
-    json: () => JSON.parse(Buffer.concat(incomingData2).toString()),
-    ok: response.statusCode >= 200 && response.statusCode < 300,
-    status: response.statusCode,
-    url: response.url
-  };
-}
-__name(buildResponse, "buildResponse");
-__name2(buildResponse, "buildResponse");
-__name21(buildResponse, "buildResponse");
-function nodeFetch(url, options = {}) {
-  const httpsOptions = buildOptions(options);
-  const incomingData = [];
-  return new Promise((resolve, reject) => {
-    var _a2;
-    const https = eval(`require('https')`);
-    const request = https.request(url, httpsOptions, (response) => {
-      response.on("data", (chunk) => incomingData.push(chunk));
-      response.on("end", () => resolve(buildResponse(incomingData, response)));
-      response.on("error", reject);
-    });
-    request.on("error", reject);
-    request.write((_a2 = options.body) != null ? _a2 : "");
-    request.end();
-  });
-}
-__name(nodeFetch, "nodeFetch");
-__name2(nodeFetch, "nodeFetch");
-__name21(nodeFetch, "nodeFetch");
-var __defProp23 = Object.defineProperty;
-var __name222 = /* @__PURE__ */ __name2((target, value) => __defProp23(target, "name", { value, configurable: true }), "__name");
-var BACKOFF_INTERVAL = 50;
-function backOff(n) {
-  const baseDelay = Math.pow(2, n) * BACKOFF_INTERVAL;
-  const jitter = Math.ceil(Math.random() * baseDelay) - Math.ceil(baseDelay / 2);
-  const total = baseDelay + jitter;
-  return new Promise((done) => setTimeout(() => done(total), total));
-}
-__name(backOff, "backOff");
-__name2(backOff, "backOff");
-__name222(backOff, "backOff");
-var __defProp24 = Object.defineProperty;
-var __name23 = /* @__PURE__ */ __name2((target, value) => __defProp24(target, "name", { value, configurable: true }), "__name");
-function getClientVersion(config2) {
-  var _a2, _b2;
-  const [version, suffix] = (_b2 = (_a2 = config2.clientVersion) == null ? void 0 : _a2.split("-")) != null ? _b2 : [];
-  if (!suffix && /^[1-9][0-9]*\.[0-9]+\.[0-9]+$/.test(version)) {
-    return version;
-  }
-  return "3.4.1";
-}
-__name(getClientVersion, "getClientVersion");
-__name2(getClientVersion, "getClientVersion");
-__name23(getClientVersion, "getClientVersion");
-var __defProp25 = Object.defineProperty;
-var __name24 = /* @__PURE__ */ __name2((target, value) => __defProp25(target, "name", { value, configurable: true }), "__name");
+__name18(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
+var __defProp20 = Object.defineProperty;
+var __name19 = /* @__PURE__ */ __name2((target, value) => __defProp20(target, "name", { value, configurable: true }), "__name");
 var PrismaClientError = /* @__PURE__ */ __name(class extends Error {
   constructor(message, info2) {
     super(message);
@@ -37766,9 +34987,9 @@ var PrismaClientError = /* @__PURE__ */ __name(class extends Error {
   }
 }, "PrismaClientError");
 __name2(PrismaClientError, "PrismaClientError");
-__name24(PrismaClientError, "PrismaClientError");
-var __defProp26 = Object.defineProperty;
-var __name25 = /* @__PURE__ */ __name2((target, value) => __defProp26(target, "name", { value, configurable: true }), "__name");
+__name19(PrismaClientError, "PrismaClientError");
+var __defProp21 = Object.defineProperty;
+var __name20 = /* @__PURE__ */ __name2((target, value) => __defProp21(target, "name", { value, configurable: true }), "__name");
 var DataProxyError = /* @__PURE__ */ __name(class extends PrismaClientError {
   constructor(message, info2) {
     super(message, info2);
@@ -37777,19 +34998,9 @@ var DataProxyError = /* @__PURE__ */ __name(class extends PrismaClientError {
   }
 }, "DataProxyError");
 __name2(DataProxyError, "DataProxyError");
-__name25(DataProxyError, "DataProxyError");
-var __defProp27 = Object.defineProperty;
-var __name26 = /* @__PURE__ */ __name2((target, value) => __defProp27(target, "name", { value, configurable: true }), "__name");
-var DataProxyAPIError = /* @__PURE__ */ __name(class extends DataProxyError {
-  constructor(message, info2) {
-    super(message, info2);
-    this.response = info2.response;
-  }
-}, "DataProxyAPIError");
-__name2(DataProxyAPIError, "DataProxyAPIError");
-__name26(DataProxyAPIError, "DataProxyAPIError");
-var __defProp28 = Object.defineProperty;
-var __name27 = /* @__PURE__ */ __name2((target, value) => __defProp28(target, "name", { value, configurable: true }), "__name");
+__name20(DataProxyError, "DataProxyError");
+var __defProp222 = Object.defineProperty;
+var __name21 = /* @__PURE__ */ __name2((target, value) => __defProp222(target, "name", { value, configurable: true }), "__name");
 function setRetryable(info2, retryable) {
   return {
     ...info2,
@@ -37798,31 +35009,52 @@ function setRetryable(info2, retryable) {
 }
 __name(setRetryable, "setRetryable");
 __name2(setRetryable, "setRetryable");
-__name27(setRetryable, "setRetryable");
-var __defProp29 = Object.defineProperty;
-var __name28 = /* @__PURE__ */ __name2((target, value) => __defProp29(target, "name", { value, configurable: true }), "__name");
-var BadRequestError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+__name21(setRetryable, "setRetryable");
+var __defProp23 = Object.defineProperty;
+var __name222 = /* @__PURE__ */ __name2((target, value) => __defProp23(target, "name", { value, configurable: true }), "__name");
+var ForcedRetryError = /* @__PURE__ */ __name(class extends DataProxyError {
   constructor(info2) {
-    super("This request could not be understood by the server", setRetryable(info2, false));
-    this.name = "BadRequestError";
-    this.code = "P5000";
+    super("This request must be retried", setRetryable(info2, true));
+    this.name = "ForcedRetryError";
+    this.code = "P5001";
   }
-}, "BadRequestError");
-__name2(BadRequestError, "BadRequestError");
-__name28(BadRequestError, "BadRequestError");
-var __defProp30 = Object.defineProperty;
-var __name29 = /* @__PURE__ */ __name2((target, value) => __defProp30(target, "name", { value, configurable: true }), "__name");
-var NotFoundError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
-  constructor(info2) {
-    super("Requested resource does not exist", setRetryable(info2, false));
-    this.name = "NotFoundError";
-    this.code = "P5003";
+}, "ForcedRetryError");
+__name2(ForcedRetryError, "ForcedRetryError");
+__name222(ForcedRetryError, "ForcedRetryError");
+var __defProp24 = Object.defineProperty;
+var __name23 = /* @__PURE__ */ __name2((target, value) => __defProp24(target, "name", { value, configurable: true }), "__name");
+var InvalidDatasourceError = /* @__PURE__ */ __name(class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, setRetryable(info2, false));
+    this.name = "InvalidDatasourceError";
+    this.code = "P5002";
   }
-}, "NotFoundError");
-__name2(NotFoundError, "NotFoundError");
-__name29(NotFoundError, "NotFoundError");
-var __defProp31 = Object.defineProperty;
-var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+}, "InvalidDatasourceError");
+__name2(InvalidDatasourceError, "InvalidDatasourceError");
+__name23(InvalidDatasourceError, "InvalidDatasourceError");
+var __defProp25 = Object.defineProperty;
+var __name24 = /* @__PURE__ */ __name2((target, value) => __defProp25(target, "name", { value, configurable: true }), "__name");
+var NotImplementedYetError = /* @__PURE__ */ __name(class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, setRetryable(info2, false));
+    this.name = "NotImplementedYetError";
+    this.code = "P5004";
+  }
+}, "NotImplementedYetError");
+__name2(NotImplementedYetError, "NotImplementedYetError");
+__name24(NotImplementedYetError, "NotImplementedYetError");
+var __defProp26 = Object.defineProperty;
+var __name25 = /* @__PURE__ */ __name2((target, value) => __defProp26(target, "name", { value, configurable: true }), "__name");
+var DataProxyAPIError = /* @__PURE__ */ __name(class extends DataProxyError {
+  constructor(message, info2) {
+    super(message, info2);
+    this.response = info2.response;
+  }
+}, "DataProxyAPIError");
+__name2(DataProxyAPIError, "DataProxyAPIError");
+__name25(DataProxyAPIError, "DataProxyAPIError");
+var __defProp27 = Object.defineProperty;
+var __name26 = /* @__PURE__ */ __name2((target, value) => __defProp27(target, "name", { value, configurable: true }), "__name");
 var SchemaMissingError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
   constructor(info2) {
     super("Schema needs to be uploaded", setRetryable(info2, true));
@@ -37831,9 +35063,31 @@ var SchemaMissingError = /* @__PURE__ */ __name(class extends DataProxyAPIError 
   }
 }, "SchemaMissingError");
 __name2(SchemaMissingError, "SchemaMissingError");
-__name30(SchemaMissingError, "SchemaMissingError");
-var __defProp32 = Object.defineProperty;
-var __name31 = /* @__PURE__ */ __name2((target, value) => __defProp32(target, "name", { value, configurable: true }), "__name");
+__name26(SchemaMissingError, "SchemaMissingError");
+var __defProp28 = Object.defineProperty;
+var __name27 = /* @__PURE__ */ __name2((target, value) => __defProp28(target, "name", { value, configurable: true }), "__name");
+var BadRequestError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+  constructor(info2) {
+    super("This request could not be understood by the server", setRetryable(info2, false));
+    this.name = "BadRequestError";
+    this.code = "P5000";
+  }
+}, "BadRequestError");
+__name2(BadRequestError, "BadRequestError");
+__name27(BadRequestError, "BadRequestError");
+var __defProp29 = Object.defineProperty;
+var __name28 = /* @__PURE__ */ __name2((target, value) => __defProp29(target, "name", { value, configurable: true }), "__name");
+var NotFoundError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
+  constructor(info2) {
+    super("Requested resource does not exist", setRetryable(info2, false));
+    this.name = "NotFoundError";
+    this.code = "P5003";
+  }
+}, "NotFoundError");
+__name2(NotFoundError, "NotFoundError");
+__name28(NotFoundError, "NotFoundError");
+var __defProp30 = Object.defineProperty;
+var __name29 = /* @__PURE__ */ __name2((target, value) => __defProp30(target, "name", { value, configurable: true }), "__name");
 var ServerError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
   constructor(info2) {
     super("Unknown server error", setRetryable(info2, true));
@@ -37842,9 +35096,9 @@ var ServerError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
   }
 }, "ServerError");
 __name2(ServerError, "ServerError");
-__name31(ServerError, "ServerError");
-var __defProp33 = Object.defineProperty;
-var __name32 = /* @__PURE__ */ __name2((target, value) => __defProp33(target, "name", { value, configurable: true }), "__name");
+__name29(ServerError, "ServerError");
+var __defProp31 = Object.defineProperty;
+var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
 var UnauthorizedError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
   constructor(info2) {
     super("Unauthorized, check your connection string", setRetryable(info2, false));
@@ -37853,9 +35107,9 @@ var UnauthorizedError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
   }
 }, "UnauthorizedError");
 __name2(UnauthorizedError, "UnauthorizedError");
-__name32(UnauthorizedError, "UnauthorizedError");
-var __defProp34 = Object.defineProperty;
-var __name33 = /* @__PURE__ */ __name2((target, value) => __defProp34(target, "name", { value, configurable: true }), "__name");
+__name30(UnauthorizedError, "UnauthorizedError");
+var __defProp32 = Object.defineProperty;
+var __name31 = /* @__PURE__ */ __name2((target, value) => __defProp32(target, "name", { value, configurable: true }), "__name");
 var UsageExceededError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
   constructor(info2) {
     super("Usage exceeded, retry again later", setRetryable(info2, true));
@@ -37864,9 +35118,9 @@ var UsageExceededError = /* @__PURE__ */ __name(class extends DataProxyAPIError 
   }
 }, "UsageExceededError");
 __name2(UsageExceededError, "UsageExceededError");
-__name33(UsageExceededError, "UsageExceededError");
-var __defProp35 = Object.defineProperty;
-var __name34 = /* @__PURE__ */ __name2((target, value) => __defProp35(target, "name", { value, configurable: true }), "__name");
+__name31(UsageExceededError, "UsageExceededError");
+var __defProp33 = Object.defineProperty;
+var __name32 = /* @__PURE__ */ __name2((target, value) => __defProp33(target, "name", { value, configurable: true }), "__name");
 async function responseToError(response, clientVersion2) {
   var _a2;
   if (response.ok)
@@ -37897,42 +35151,106 @@ async function responseToError(response, clientVersion2) {
 }
 __name(responseToError, "responseToError");
 __name2(responseToError, "responseToError");
-__name34(responseToError, "responseToError");
+__name32(responseToError, "responseToError");
+var __defProp34 = Object.defineProperty;
+var __name33 = /* @__PURE__ */ __name2((target, value) => __defProp34(target, "name", { value, configurable: true }), "__name");
+var BACKOFF_INTERVAL = 50;
+function backOff(n) {
+  const baseDelay = Math.pow(2, n) * BACKOFF_INTERVAL;
+  const jitter = Math.ceil(Math.random() * baseDelay) - Math.ceil(baseDelay / 2);
+  const total = baseDelay + jitter;
+  return new Promise((done) => setTimeout(() => done(total), total));
+}
+__name(backOff, "backOff");
+__name2(backOff, "backOff");
+__name33(backOff, "backOff");
+var __defProp35 = Object.defineProperty;
+var __name34 = /* @__PURE__ */ __name2((target, value) => __defProp35(target, "name", { value, configurable: true }), "__name");
+function getClientVersion(config2) {
+  var _a2, _b2;
+  const [version, suffix] = (_b2 = (_a2 = config2.clientVersion) == null ? void 0 : _a2.split("-")) != null ? _b2 : [];
+  if (!suffix && /^[1-9][0-9]*\.[0-9]+\.[0-9]+$/.test(version)) {
+    return version;
+  }
+  return "3.4.1";
+}
+__name(getClientVersion, "getClientVersion");
+__name2(getClientVersion, "getClientVersion");
+__name34(getClientVersion, "getClientVersion");
 var __defProp36 = Object.defineProperty;
 var __name35 = /* @__PURE__ */ __name2((target, value) => __defProp36(target, "name", { value, configurable: true }), "__name");
-var InvalidDatasourceError = /* @__PURE__ */ __name(class extends DataProxyError {
-  constructor(message, info2) {
-    super(message, setRetryable(info2, false));
-    this.name = "InvalidDatasourceError";
-    this.code = "P5002";
+function getJSRuntimeName() {
+  if (typeof self === "undefined") {
+    return "node";
   }
-}, "InvalidDatasourceError");
-__name2(InvalidDatasourceError, "InvalidDatasourceError");
-__name35(InvalidDatasourceError, "InvalidDatasourceError");
+  return "browser";
+}
+__name(getJSRuntimeName, "getJSRuntimeName");
+__name2(getJSRuntimeName, "getJSRuntimeName");
+__name35(getJSRuntimeName, "getJSRuntimeName");
 var __defProp37 = Object.defineProperty;
 var __name36 = /* @__PURE__ */ __name2((target, value) => __defProp37(target, "name", { value, configurable: true }), "__name");
-var NotImplementedYetError = /* @__PURE__ */ __name(class extends DataProxyError {
-  constructor(message, info2) {
-    super(message, setRetryable(info2, false));
-    this.name = "NotImplementedYetError";
-    this.code = "P5004";
+async function request3(url2, options2 = {}) {
+  const jsRuntimeName = getJSRuntimeName();
+  if (jsRuntimeName === "browser") {
+    return fetch(url2, options2);
+  } else {
+    return nodeFetch(url2, options2);
   }
-}, "NotImplementedYetError");
-__name2(NotImplementedYetError, "NotImplementedYetError");
-__name36(NotImplementedYetError, "NotImplementedYetError");
+}
+__name(request3, "request3");
+__name2(request3, "request");
+__name36(request3, "request");
+function buildHeaders(options2) {
+  return {
+    ...JSON.parse(JSON.stringify(options2.headers)),
+    "Content-Type": "application/json"
+  };
+}
+__name(buildHeaders, "buildHeaders");
+__name2(buildHeaders, "buildHeaders");
+__name36(buildHeaders, "buildHeaders");
+function buildOptions(options2) {
+  return {
+    method: options2.method,
+    headers: buildHeaders(options2)
+  };
+}
+__name(buildOptions, "buildOptions");
+__name2(buildOptions, "buildOptions");
+__name36(buildOptions, "buildOptions");
+function buildResponse(incomingData2, response) {
+  return {
+    json: () => JSON.parse(Buffer.concat(incomingData2).toString()),
+    ok: response.statusCode >= 200 && response.statusCode < 300,
+    status: response.statusCode,
+    url: response.url
+  };
+}
+__name(buildResponse, "buildResponse");
+__name2(buildResponse, "buildResponse");
+__name36(buildResponse, "buildResponse");
+function nodeFetch(url, options = {}) {
+  const httpsOptions = buildOptions(options);
+  const incomingData = [];
+  return new Promise((resolve, reject) => {
+    var _a2;
+    const https = eval(`require('https')`);
+    const request = https.request(url, httpsOptions, (response) => {
+      response.on("data", (chunk) => incomingData.push(chunk));
+      response.on("end", () => resolve(buildResponse(incomingData, response)));
+      response.on("error", reject);
+    });
+    request.on("error", reject);
+    request.write((_a2 = options.body) != null ? _a2 : "");
+    request.end();
+  });
+}
+__name(nodeFetch, "nodeFetch");
+__name2(nodeFetch, "nodeFetch");
+__name36(nodeFetch, "nodeFetch");
 var __defProp38 = Object.defineProperty;
 var __name37 = /* @__PURE__ */ __name2((target, value) => __defProp38(target, "name", { value, configurable: true }), "__name");
-var ForcedRetryError = /* @__PURE__ */ __name(class extends DataProxyError {
-  constructor(info2) {
-    super("This request must be retried", setRetryable(info2, true));
-    this.name = "ForcedRetryError";
-    this.code = "P5001";
-  }
-}, "ForcedRetryError");
-__name2(ForcedRetryError, "ForcedRetryError");
-__name37(ForcedRetryError, "ForcedRetryError");
-var __defProp39 = Object.defineProperty;
-var __name38 = /* @__PURE__ */ __name2((target, value) => __defProp39(target, "name", { value, configurable: true }), "__name");
 var MAX_RETRIES = 10;
 var DataProxyEngine = /* @__PURE__ */ __name(class extends Engine {
   constructor(config2) {
@@ -37944,7 +35262,7 @@ var DataProxyEngine = /* @__PURE__ */ __name(class extends Engine {
     this.inlineDatasources = (_c = config2.inlineDatasources) != null ? _c : {};
     this.inlineSchemaHash = (_d = config2.inlineSchemaHash) != null ? _d : "";
     this.clientVersion = (_e = config2.clientVersion) != null ? _e : "unknown";
-    this.logEmitter = new import_events3.default();
+    this.logEmitter = new import_events2.default();
     this.logEmitter.on("error", () => {
     });
     const [host, apiKey] = this.extractHostAndApiKey();
@@ -38112,8 +35430,498 @@ ${queries.join("\n")}`
   }
 }, "DataProxyEngine");
 __name2(DataProxyEngine, "DataProxyEngine");
-__name38(DataProxyEngine, "DataProxyEngine");
-var import_debug9 = __toModule22(require_dist7());
+__name37(DataProxyEngine, "DataProxyEngine");
+var import_debug5 = __toModule22(require_dist7());
+var import_engines2 = __toModule22(require_dist8());
+var import_get_platform2 = __toModule22(require_dist9());
+var import_chalk4 = __toModule22(require_source2());
+var __defProp39 = Object.defineProperty;
+var __name38 = /* @__PURE__ */ __name2((target, value) => __defProp39(target, "name", { value, configurable: true }), "__name");
+var debug5 = (0, import_debug5.default)("prisma:client:libraryEngine");
+function isQueryEvent(event) {
+  return event["item_type"] === "query" && "query" in event;
+}
+__name(isQueryEvent, "isQueryEvent");
+__name2(isQueryEvent, "isQueryEvent");
+__name38(isQueryEvent, "isQueryEvent");
+function isPanicEvent(event) {
+  return event.level === "error" && event["message"] === "PANIC";
+}
+__name(isPanicEvent, "isPanicEvent");
+__name2(isPanicEvent, "isPanicEvent");
+__name38(isPanicEvent, "isPanicEvent");
+var knownPlatforms2 = [...import_get_platform2.platforms, "native"];
+var engines2 = [];
+var LibraryEngine = /* @__PURE__ */ __name(class extends Engine {
+  constructor(config2) {
+    super();
+    var _a2, _b2;
+    this.datamodel = import_fs3.default.readFileSync(config2.datamodelPath, "utf-8");
+    this.config = config2;
+    this.libraryStarted = false;
+    this.logQueries = (_a2 = config2.logQueries) != null ? _a2 : false;
+    this.logLevel = (_b2 = config2.logLevel) != null ? _b2 : "error";
+    this.logEmitter = new import_events3.default();
+    this.logEmitter.on("error", (e) => {
+    });
+    this.datasourceOverrides = config2.datasources ? this.convertDatasources(config2.datasources) : {};
+    if (config2.enableDebugLogs) {
+      this.logLevel = "debug";
+    }
+    this.libraryInstantiationPromise = this.instantiateLibrary();
+    initHooks2();
+    engines2.push(this);
+    this.checkForTooManyEngines();
+  }
+  checkForTooManyEngines() {
+    if (engines2.length >= 10) {
+      const runningEngines = engines2.filter((e) => e.engine);
+      if (runningEngines.length === 10) {
+        console.warn(`${import_chalk4.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`);
+      }
+    }
+  }
+  async transaction(action, arg2) {
+    var _a2, _b2, _c, _d, _e;
+    await this.start();
+    let result;
+    if (action === "start") {
+      const jsonOptions = JSON.stringify({
+        max_wait: (_a2 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a2 : 2e3,
+        timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3
+      });
+      result = await ((_c = this.engine) == null ? void 0 : _c.startTransaction(jsonOptions, "{}"));
+    } else if (action === "commit") {
+      result = await ((_d = this.engine) == null ? void 0 : _d.commitTransaction(arg2.id, "{}"));
+    } else if (action === "rollback") {
+      result = await ((_e = this.engine) == null ? void 0 : _e.rollbackTransaction(arg2.id, "{}"));
+    }
+    const response = this.parseEngineResponse(result);
+    if (response.error_code)
+      throw response;
+    return response;
+  }
+  async instantiateLibrary() {
+    debug5("internalSetup");
+    if (this.libraryInstantiationPromise) {
+      return this.libraryInstantiationPromise;
+    }
+    await (0, import_get_platform2.isNodeAPISupported)();
+    this.platform = await this.getPlatform();
+    await this.loadEngine();
+    this.version();
+  }
+  async getPlatform() {
+    if (this.platform)
+      return this.platform;
+    const platform2 = await (0, import_get_platform2.getPlatform)();
+    if (!knownPlatforms2.includes(platform2)) {
+      throw new PrismaClientInitializationError(`Unknown ${import_chalk4.default.red("PRISMA_QUERY_ENGINE_LIBRARY")} ${import_chalk4.default.redBright.bold(platform2)}. Possible binaryTargets: ${import_chalk4.default.greenBright(knownPlatforms2.join(", "))} or a path to the query engine library.
+You may have to run ${import_chalk4.default.greenBright("prisma generate")} for your changes to take effect.`, this.config.clientVersion);
+    }
+    return platform2;
+  }
+  parseEngineResponse(response) {
+    if (!response) {
+      throw new PrismaClientUnknownRequestError(`Response from the Engine was empty`, this.config.clientVersion);
+    }
+    try {
+      const config2 = JSON.parse(response);
+      return config2;
+    } catch (err) {
+      throw new PrismaClientUnknownRequestError(`Unable to JSON.parse response from engine`, this.config.clientVersion);
+    }
+  }
+  convertDatasources(datasources) {
+    const obj = Object.create(null);
+    for (const { name, url: url2 } of datasources) {
+      obj[name] = url2;
+    }
+    return obj;
+  }
+  async loadEngine() {
+    var _a2;
+    if (!this.libQueryEnginePath) {
+      this.libQueryEnginePath = await this.getLibQueryEnginePath();
+    }
+    debug5(`loadEngine using ${this.libQueryEnginePath}`);
+    if (!this.engine) {
+      if (!this.QueryEngineConstructor) {
+        try {
+          this.library = eval("require")(this.libQueryEnginePath);
+          this.QueryEngineConstructor = this.library.QueryEngine;
+        } catch (e) {
+          if (import_fs3.default.existsSync(this.libQueryEnginePath)) {
+            if (this.libQueryEnginePath.endsWith(".node")) {
+              throw new PrismaClientInitializationError(`Unable to load Node-API Library from ${import_chalk4.default.dim(this.libQueryEnginePath)}, Library may be corrupt`, this.config.clientVersion);
+            } else {
+              throw new PrismaClientInitializationError(`Expected an Node-API Library but received ${import_chalk4.default.dim(this.libQueryEnginePath)}`, this.config.clientVersion);
+            }
+          } else {
+            throw new PrismaClientInitializationError(`Unable to load Node-API Library from ${import_chalk4.default.dim(this.libQueryEnginePath)}, It does not exist`, this.config.clientVersion);
+          }
+        }
+      }
+      if (this.QueryEngineConstructor) {
+        try {
+          this.engine = new this.QueryEngineConstructor({
+            datamodel: this.datamodel,
+            env: process.env,
+            logQueries: (_a2 = this.config.logQueries) != null ? _a2 : false,
+            ignoreEnvVarErrors: false,
+            datasourceOverrides: this.datasourceOverrides,
+            logLevel: this.logLevel,
+            configDir: this.config.cwd
+          }, (err, log4) => this.logger(err, log4));
+        } catch (_e) {
+          const e = _e;
+          const error2 = this.parseInitError(e.message);
+          if (typeof error2 === "string") {
+            throw e;
+          } else {
+            throw new PrismaClientInitializationError(error2.message, this.config.clientVersion, error2.error_code);
+          }
+        }
+      }
+    }
+  }
+  logger(err, log4) {
+    var _a2;
+    if (err) {
+      throw err;
+    }
+    const event = this.parseEngineResponse(log4);
+    if (!event)
+      return;
+    event.level = (_a2 = event == null ? void 0 : event.level.toLowerCase()) != null ? _a2 : "unknown";
+    if (isQueryEvent(event)) {
+      this.logEmitter.emit("query", {
+        timestamp: new Date(),
+        query: event.query,
+        params: event.params,
+        duration: Number(event.duration_ms),
+        target: event.module_path
+      });
+    } else if (isPanicEvent(event)) {
+      this.loggerRustPanic = new PrismaClientRustPanicError(this.getErrorMessageWithLink(`${event.message}: ${event.reason} in ${event.file}:${event.line}:${event.column}`), this.config.clientVersion);
+      this.logEmitter.emit("error", this.loggerRustPanic);
+    } else {
+      this.logEmitter.emit(event.level, {
+        timestamp: new Date(),
+        message: event.message,
+        target: event.module_path
+      });
+    }
+  }
+  getErrorMessageWithLink(title) {
+    var _a2;
+    return getErrorMessageWithLink({
+      platform: this.platform,
+      title,
+      version: this.config.clientVersion,
+      engineVersion: (_a2 = this.versionInfo) == null ? void 0 : _a2.version,
+      database: this.config.activeProvider,
+      query: this.lastQuery
+    });
+  }
+  parseInitError(str) {
+    try {
+      const error2 = JSON.parse(str);
+      return error2;
+    } catch (e) {
+    }
+    return str;
+  }
+  parseRequestError(str) {
+    try {
+      const error2 = JSON.parse(str);
+      return error2;
+    } catch (e) {
+    }
+    return str;
+  }
+  on(event, listener) {
+    if (event === "beforeExit") {
+      this.beforeExitListener = listener;
+    } else {
+      this.logEmitter.on(event, listener);
+    }
+  }
+  async runBeforeExit() {
+    debug5("runBeforeExit");
+    if (this.beforeExitListener) {
+      try {
+        await this.beforeExitListener();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+  async start() {
+    await this.libraryInstantiationPromise;
+    await this.libraryStoppingPromise;
+    if (this.libraryStartingPromise) {
+      debug5(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
+      return this.libraryStartingPromise;
+    }
+    if (!this.libraryStarted) {
+      this.libraryStartingPromise = new Promise((resolve2, reject2) => {
+        var _a2;
+        debug5("library starting");
+        (_a2 = this.engine) == null ? void 0 : _a2.connect({ enableRawQueries: true }).then(() => {
+          this.libraryStarted = true;
+          this.libraryStartingPromise = void 0;
+          debug5("library started");
+          resolve2();
+        }).catch((err) => {
+          const error2 = this.parseInitError(err.message);
+          if (typeof error2 === "string") {
+            reject2(err);
+          } else {
+            reject2(new PrismaClientInitializationError(error2.message, this.config.clientVersion, error2.error_code));
+          }
+        });
+      });
+      return this.libraryStartingPromise;
+    }
+  }
+  async stop() {
+    await this.libraryStartingPromise;
+    await this.executingQueryPromise;
+    if (this.libraryStoppingPromise) {
+      debug5("library is already stopping");
+      return this.libraryStoppingPromise;
+    }
+    if (this.libraryStarted) {
+      this.libraryStoppingPromise = new Promise(async (resolve2, reject2) => {
+        var _a2;
+        try {
+          await new Promise((r) => setTimeout(r, 5));
+          debug5("library stopping");
+          await ((_a2 = this.engine) == null ? void 0 : _a2.disconnect());
+          this.libraryStarted = false;
+          this.libraryStoppingPromise = void 0;
+          debug5("library stopped");
+          resolve2();
+        } catch (err) {
+          reject2(err);
+        }
+      });
+      return this.libraryStoppingPromise;
+    }
+  }
+  getConfig() {
+    return this.library.getConfig({
+      datamodel: this.datamodel,
+      datasourceOverrides: this.datasourceOverrides,
+      ignoreEnvVarErrors: true,
+      env: process.env
+    });
+  }
+  version() {
+    var _a2, _b2, _c;
+    this.versionInfo = (_a2 = this.library) == null ? void 0 : _a2.version();
+    return (_c = (_b2 = this.versionInfo) == null ? void 0 : _b2.version) != null ? _c : "unknown";
+  }
+  async request(query2, headers = {}, numTry = 1) {
+    var _a2;
+    debug5(`sending request, this.libraryStarted: ${this.libraryStarted}`);
+    const request4 = { query: query2, variables: {} };
+    const headerStr = JSON.stringify(headers);
+    const queryStr = JSON.stringify(request4);
+    try {
+      await this.start();
+      this.executingQueryPromise = (_a2 = this.engine) == null ? void 0 : _a2.query(queryStr, headerStr, headers.transactionId);
+      this.lastQuery = queryStr;
+      const data = this.parseEngineResponse(await this.executingQueryPromise);
+      if (data.errors) {
+        if (data.errors.length === 1) {
+          throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
+        }
+        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+      } else if (this.loggerRustPanic) {
+        throw this.loggerRustPanic;
+      }
+      return { data, elapsed: 0 };
+    } catch (e) {
+      if (e instanceof PrismaClientInitializationError) {
+        throw e;
+      }
+      const error2 = this.parseRequestError(e.message);
+      if (typeof error2 === "string") {
+        throw e;
+      } else {
+        throw new PrismaClientUnknownRequestError(`${error2.message}
+${error2.backtrace}`, this.config.clientVersion);
+      }
+    }
+  }
+  async requestBatch(queries, headers = {}, transaction = false, numTry = 1) {
+    debug5("requestBatch");
+    const request4 = {
+      batch: queries.map((query2) => ({ query: query2, variables: {} })),
+      transaction
+    };
+    await this.start();
+    this.lastQuery = JSON.stringify(request4);
+    this.executingQueryPromise = this.engine.query(this.lastQuery, JSON.stringify(headers), headers.transactionId);
+    const result = await this.executingQueryPromise;
+    const data = this.parseEngineResponse(result);
+    if (data.errors) {
+      if (data.errors.length === 1) {
+        throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
+      }
+      throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+    }
+    const { batchResult, errors: errors2 } = data;
+    if (Array.isArray(batchResult)) {
+      return batchResult.map((result2) => {
+        var _a2;
+        if (result2.errors) {
+          return (_a2 = this.loggerRustPanic) != null ? _a2 : prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
+        }
+        return {
+          data: result2,
+          elapsed: 0
+        };
+      });
+    } else {
+      if (errors2 && errors2.length === 1) {
+        throw new Error(errors2[0].error);
+      }
+      throw new Error(JSON.stringify(data));
+    }
+  }
+  async resolveEnginePath() {
+    var _a2, _b2, _c, _d;
+    const searchedLocations = [];
+    let enginePath;
+    if (this.libQueryEnginePath) {
+      return { enginePath: this.libQueryEnginePath, searchedLocations };
+    }
+    this.platform = (_a2 = this.platform) != null ? _a2 : await (0, import_get_platform2.getPlatform)();
+    if (__filename.includes("LibraryEngine")) {
+      enginePath = import_path3.default.join((0, import_engines2.getEnginesPath)(), (0, import_get_platform2.getNodeAPIName)(this.platform, "fs"));
+      return { enginePath, searchedLocations };
+    }
+    const searchLocations = [
+      eval(`require('path').join(__dirname, '../../../.prisma/client')`),
+      (_d = (_c = (_b2 = this.config.generator) == null ? void 0 : _b2.output) == null ? void 0 : _c.value) != null ? _d : eval("__dirname"),
+      import_path3.default.join(eval("__dirname"), ".."),
+      import_path3.default.dirname(this.config.datamodelPath),
+      this.config.cwd,
+      "/tmp/prisma-engines"
+    ];
+    if (this.config.dirname) {
+      searchLocations.push(this.config.dirname);
+    }
+    for (const location of searchLocations) {
+      searchedLocations.push(location);
+      debug5(`Searching for Query Engine Library in ${location}`);
+      enginePath = import_path3.default.join(location, (0, import_get_platform2.getNodeAPIName)(this.platform, "fs"));
+      if (import_fs3.default.existsSync(enginePath)) {
+        return { enginePath, searchedLocations };
+      }
+    }
+    enginePath = import_path3.default.join(__dirname, (0, import_get_platform2.getNodeAPIName)(this.platform, "fs"));
+    return { enginePath: enginePath != null ? enginePath : "", searchedLocations };
+  }
+  async getLibQueryEnginePath() {
+    var _a2, _b2, _c, _d;
+    const libPath = (_a2 = process.env.PRISMA_QUERY_ENGINE_LIBRARY) != null ? _a2 : this.config.prismaPath;
+    if (libPath && import_fs3.default.existsSync(libPath) && libPath.endsWith(".node")) {
+      return libPath;
+    }
+    this.platform = (_b2 = this.platform) != null ? _b2 : await (0, import_get_platform2.getPlatform)();
+    const { enginePath: enginePath2, searchedLocations: searchedLocations2 } = await this.resolveEnginePath();
+    if (!import_fs3.default.existsSync(enginePath2)) {
+      const incorrectPinnedPlatformErrorStr = this.platform ? `
+You incorrectly pinned it to ${import_chalk4.default.redBright.bold(`${this.platform}`)}
+` : "";
+      let errorText = `Query engine library for current platform "${import_chalk4.default.bold(this.platform)}" could not be found.${incorrectPinnedPlatformErrorStr}
+This probably happens, because you built Prisma Client on a different platform.
+(Prisma Client looked in "${import_chalk4.default.underline(enginePath2)}")
+
+Searched Locations:
+
+${searchedLocations2.map((f) => {
+        let msg = `  ${f}`;
+        if (process.env.DEBUG === "node-engine-search-locations" && import_fs3.default.existsSync(f)) {
+          const dir2 = import_fs3.default.readdirSync(f);
+          msg += dir2.map((d) => `    ${d}`).join("\n");
+        }
+        return msg;
+      }).join("\n" + (process.env.DEBUG === "node-engine-search-locations" ? "\n" : ""))}
+`;
+      if (this.config.generator) {
+        this.platform = (_c = this.platform) != null ? _c : await (0, import_get_platform2.getPlatform)();
+        if (this.config.generator.binaryTargets.find((object) => object.value === this.platform) || this.config.generator.binaryTargets.find((object) => object.value === "native")) {
+          errorText += `
+You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t) => `"${import_chalk4.default.bold(t.value)}"`).join(", ")} to the "${import_chalk4.default.underline("generator")}" block
+in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
+but something went wrong. That's suboptimal.
+
+Please create an issue at https://github.com/prisma/prisma/issues/new`;
+          errorText += ``;
+        } else {
+          errorText += `
+
+To solve this problem, add the platform "${this.platform}" to the "${import_chalk4.default.underline("binaryTargets")}" attribute in the "${import_chalk4.default.underline("generator")}" block in the "schema.prisma" file:
+${import_chalk4.default.greenBright(this.getFixedGenerator())}
+
+Then run "${import_chalk4.default.greenBright("prisma generate")}" for your changes to take effect.
+Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
+        }
+      } else {
+        errorText += `
+
+Read more about deploying Prisma Client: https://pris.ly/d/client-generator
+`;
+      }
+      throw new PrismaClientInitializationError(errorText, this.config.clientVersion);
+    }
+    this.platform = (_d = this.platform) != null ? _d : await (0, import_get_platform2.getPlatform)();
+    return enginePath2;
+  }
+  getFixedGenerator() {
+    const fixedGenerator = {
+      ...this.config.generator,
+      binaryTargets: fixBinaryTargets(this.config.generator.binaryTargets, this.platform)
+    };
+    return printGeneratorConfig(fixedGenerator);
+  }
+}, "LibraryEngine");
+__name2(LibraryEngine, "LibraryEngine");
+__name38(LibraryEngine, "LibraryEngine");
+function hookProcess2(handler, exit = false) {
+  process.once(handler, async () => {
+    debug5(`hookProcess received: ${handler}`);
+    for (const engine of engines2) {
+      await engine.runBeforeExit();
+    }
+    engines2.splice(0, engines2.length);
+    if (exit && process.listenerCount(handler) === 0) {
+      process.exit();
+    }
+  });
+}
+__name(hookProcess2, "hookProcess2");
+__name2(hookProcess2, "hookProcess");
+__name38(hookProcess2, "hookProcess");
+var hooksInitialized2 = false;
+function initHooks2() {
+  if (!hooksInitialized2) {
+    hookProcess2("beforeExit");
+    hookProcess2("exit");
+    hookProcess2("SIGINT", true);
+    hookProcess2("SIGUSR2", true);
+    hookProcess2("SIGTERM", true);
+    hooksInitialized2 = true;
+  }
+}
+__name(initHooks2, "initHooks2");
+__name2(initHooks2, "initHooks");
+__name38(initHooks2, "initHooks");
 var __defProp40 = Object.defineProperty;
 var __name39 = /* @__PURE__ */ __name2((target, value) => __defProp40(target, "name", { value, configurable: true }), "__name");
 var ClientEngineType;
@@ -38155,12 +35963,12 @@ function getEngineTypeFromEnvVar() {
 __name(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
 __name2(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
 __name39(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
-var import_strip_indent2 = __toModule22(require_strip_indent());
 var import_arg = __toModule22(require_arg());
+var import_strip_indent = __toModule22(require_strip_indent());
 var __defProp41 = Object.defineProperty;
 var __name40 = /* @__PURE__ */ __name2((target, value) => __defProp41(target, "name", { value, configurable: true }), "__name");
 function format(input = "") {
-  return (0, import_strip_indent2.default)(input).trimRight() + "\n";
+  return (0, import_strip_indent.default)(input).trimRight() + "\n";
 }
 __name(format, "format");
 __name2(format, "format");
@@ -38209,14 +36017,14 @@ __export22(logger_exports, {
   tags: () => tags,
   warn: () => warn
 });
-var import_chalk9 = __toModule22(require_source2());
+var import_chalk5 = __toModule22(require_source2());
 var __defProp43 = Object.defineProperty;
 var __name42 = /* @__PURE__ */ __name2((target, value) => __defProp43(target, "name", { value, configurable: true }), "__name");
 var tags = {
-  error: import_chalk9.default.red("prisma:error"),
-  warn: import_chalk9.default.yellow("prisma:warn"),
-  info: import_chalk9.default.cyan("prisma:info"),
-  query: import_chalk9.default.blue("prisma:query")
+  error: import_chalk5.default.red("prisma:error"),
+  warn: import_chalk5.default.yellow("prisma:warn"),
+  info: import_chalk5.default.cyan("prisma:info"),
+  query: import_chalk5.default.blue("prisma:query")
 };
 var should = {
   warn: !process.env.PRISMA_DISABLE_WARNINGS
@@ -38253,8 +36061,8 @@ function query(message, ...optionalParams) {
 __name(query, "query");
 __name2(query, "query");
 __name42(query, "query");
-var import_chalk10 = __toModule22(require_source2());
 var import_debug6 = __toModule22(require_dist7());
+var import_chalk6 = __toModule22(require_source2());
 var import_dotenv = __toModule22(require_main3());
 var __defProp44 = Object.defineProperty;
 var __name43 = /* @__PURE__ */ __name2((target, value) => __defProp44(target, "name", { value, configurable: true }), "__name");
@@ -38315,7 +36123,7 @@ function tryLoadEnvs({
     debug6("No Environment variables loaded");
   }
   if (schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult.error) {
-    return console.error(import_chalk10.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
+    return console.error(import_chalk6.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
   }
   const messages = [rootEnvInfo == null ? void 0 : rootEnvInfo.message, schemaEnvInfo == null ? void 0 : schemaEnvInfo.message].filter(Boolean);
   return {
@@ -38344,18 +36152,18 @@ function checkForConflicts(rootEnvInfo, envPath, type) {
       const relativeRootEnvPath = import_path4.default.relative(process.cwd(), rootEnvInfo.path);
       const relativeEnvPath = import_path4.default.relative(process.cwd(), envPath);
       if (type === "error") {
-        const message = `There is a conflict between env var${conflicts.length > 1 ? "s" : ""} in ${import_chalk10.default.underline(relativeRootEnvPath)} and ${import_chalk10.default.underline(relativeEnvPath)}
+        const message = `There is a conflict between env var${conflicts.length > 1 ? "s" : ""} in ${import_chalk6.default.underline(relativeRootEnvPath)} and ${import_chalk6.default.underline(relativeEnvPath)}
 Conflicting env vars:
-${conflicts.map((conflict) => `  ${import_chalk10.default.bold(conflict)}`).join("\n")}
+${conflicts.map((conflict) => `  ${import_chalk6.default.bold(conflict)}`).join("\n")}
 
-We suggest to move the contents of ${import_chalk10.default.underline(relativeEnvPath)} to ${import_chalk10.default.underline(relativeRootEnvPath)} to consolidate your env vars.
+We suggest to move the contents of ${import_chalk6.default.underline(relativeEnvPath)} to ${import_chalk6.default.underline(relativeRootEnvPath)} to consolidate your env vars.
 `;
         throw new Error(message);
       } else if (type === "warn") {
-        const message = `Conflict for env var${conflicts.length > 1 ? "s" : ""} ${conflicts.map((c) => import_chalk10.default.bold(c)).join(", ")} in ${import_chalk10.default.underline(relativeRootEnvPath)} and ${import_chalk10.default.underline(relativeEnvPath)}
-Env vars from ${import_chalk10.default.underline(relativeEnvPath)} overwrite the ones from ${import_chalk10.default.underline(relativeRootEnvPath)}
+        const message = `Conflict for env var${conflicts.length > 1 ? "s" : ""} ${conflicts.map((c) => import_chalk6.default.bold(c)).join(", ")} in ${import_chalk6.default.underline(relativeRootEnvPath)} and ${import_chalk6.default.underline(relativeEnvPath)}
+Env vars from ${import_chalk6.default.underline(relativeEnvPath)} overwrite the ones from ${import_chalk6.default.underline(relativeRootEnvPath)}
       `;
-        console.warn(`${import_chalk10.default.yellow("warn(prisma)")} ${message}`);
+        console.warn(`${import_chalk6.default.yellow("warn(prisma)")} ${message}`);
       }
     }
   }
@@ -38371,7 +36179,7 @@ function loadEnv(envPath) {
         path: envPath,
         debug: process.env.DOTENV_CONFIG_DEBUG ? true : void 0
       })),
-      message: import_chalk10.default.dim(`Environment variables loaded from ${import_path4.default.relative(process.cwd(), envPath)}`),
+      message: import_chalk6.default.dim(`Environment variables loaded from ${import_path4.default.relative(process.cwd(), envPath)}`),
       path: envPath
     };
   } else {
@@ -38396,730 +36204,6 @@ __name2(exists3, "exists");
 __name44(exists3, "exists");
 var import_get_platform3 = __toModule22(require_dist9());
 var sqlTemplateTag = __toModule22(require_dist10());
-function getLogLevel(log4) {
-  if (typeof log4 === "string") {
-    return log4;
-  }
-  return log4.reduce((acc, curr) => {
-    const currentLevel = typeof curr === "string" ? curr : curr.level;
-    if (currentLevel === "query") {
-      return acc;
-    }
-    if (!acc) {
-      return currentLevel;
-    }
-    if (curr === "info" || acc === "info") {
-      return "info";
-    }
-    return currentLevel;
-  }, void 0);
-}
-__name(getLogLevel, "getLogLevel");
-__name2(getLogLevel, "getLogLevel");
-function mergeBy(arr1, arr2, cb) {
-  const groupedArr1 = groupBy(arr1, cb);
-  const groupedArr2 = groupBy(arr2, cb);
-  const result = Object.values(groupedArr2).map((value) => value[value.length - 1]);
-  const arr2Keys = Object.keys(groupedArr2);
-  Object.entries(groupedArr1).forEach(([key, value]) => {
-    if (!arr2Keys.includes(key)) {
-      result.push(value[value.length - 1]);
-    }
-  });
-  return result;
-}
-__name(mergeBy, "mergeBy");
-__name2(mergeBy, "mergeBy");
-var groupBy = /* @__PURE__ */ __name2((arr, cb) => {
-  return arr.reduce((acc, curr) => {
-    const key = cb(curr);
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-    acc[key].push(curr);
-    return acc;
-  }, {});
-}, "groupBy");
-var MiddlewareHandler = /* @__PURE__ */ __name(class {
-  constructor() {
-    this._middlewares = [];
-  }
-  use(middleware) {
-    this._middlewares.push(middleware);
-  }
-  get(id) {
-    return this._middlewares[id];
-  }
-  has(id) {
-    return !!this._middlewares[id];
-  }
-  length() {
-    return this._middlewares.length;
-  }
-}, "MiddlewareHandler");
-__name2(MiddlewareHandler, "MiddlewareHandler");
-var Middlewares = /* @__PURE__ */ __name(class {
-  constructor() {
-    this.query = new MiddlewareHandler();
-    this.engine = new MiddlewareHandler();
-  }
-}, "Middlewares");
-__name2(Middlewares, "Middlewares");
-var import_debug7 = __toModule22(require_dist7());
-var import_strip_ansi4 = __toModule22(require_strip_ansi());
-var DataLoader = /* @__PURE__ */ __name(class {
-  constructor(options2) {
-    this.options = options2;
-    this.tickActive = false;
-    this.batches = {};
-  }
-  request(request4) {
-    const hash = this.options.batchBy(request4);
-    if (!hash) {
-      return this.options.singleLoader(request4);
-    }
-    if (!this.batches[hash]) {
-      this.batches[hash] = [];
-      if (!this.tickActive) {
-        this.tickActive = true;
-        process.nextTick(() => {
-          this.dispatchBatches();
-          this.tickActive = false;
-        });
-      }
-    }
-    return new Promise((resolve2, reject2) => {
-      this.batches[hash].push({
-        request: request4,
-        resolve: resolve2,
-        reject: reject2
-      });
-    });
-  }
-  dispatchBatches() {
-    for (const key in this.batches) {
-      const batch = this.batches[key];
-      delete this.batches[key];
-      if (batch.length === 1) {
-        this.options.singleLoader(batch[0].request).then((result) => {
-          if (result instanceof Error) {
-            batch[0].reject(result);
-          } else {
-            batch[0].resolve(result);
-          }
-        }).catch((e) => {
-          batch[0].reject(e);
-        });
-      } else {
-        this.options.batchLoader(batch.map((j) => j.request)).then((results) => {
-          if (results instanceof Error) {
-            for (let i = 0; i < batch.length; i++) {
-              batch[i].reject(results);
-            }
-          } else {
-            for (let i = 0; i < batch.length; i++) {
-              const value = results[i];
-              if (value instanceof Error) {
-                batch[i].reject(value);
-              } else {
-                batch[i].resolve(value);
-              }
-            }
-          }
-        }).catch((e) => {
-          for (let i = 0; i < batch.length; i++) {
-            batch[i].reject(e);
-          }
-        });
-      }
-    }
-  }
-  get [Symbol.toStringTag]() {
-    return "DataLoader";
-  }
-}, "DataLoader");
-__name2(DataLoader, "DataLoader");
-var NotFoundError2 = /* @__PURE__ */ __name(class extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "NotFoundError";
-  }
-}, "NotFoundError2");
-__name2(NotFoundError2, "NotFoundError");
-function getRejectOnNotFound(action, modelName, args, clientInstance) {
-  let rejectOnNotFound;
-  if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
-    rejectOnNotFound = args["rejectOnNotFound"];
-    delete args["rejectOnNotFound"];
-  } else if (typeof clientInstance === "boolean") {
-    rejectOnNotFound = clientInstance;
-  } else if (clientInstance && typeof clientInstance === "object" && action in clientInstance) {
-    const rejectPerOperation = clientInstance[action];
-    if (rejectPerOperation && typeof rejectPerOperation === "object") {
-      if (modelName in rejectPerOperation) {
-        return rejectPerOperation[modelName];
-      }
-      return void 0;
-    }
-    rejectOnNotFound = getRejectOnNotFound(action, modelName, args, rejectPerOperation);
-  } else if (typeof clientInstance === "function") {
-    rejectOnNotFound = clientInstance;
-  } else {
-    rejectOnNotFound = false;
-  }
-  return rejectOnNotFound;
-}
-__name(getRejectOnNotFound, "getRejectOnNotFound");
-__name2(getRejectOnNotFound, "getRejectOnNotFound");
-var REGEX = /(findUnique|findFirst)/;
-function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
-  if (rejectOnNotFound && !data && REGEX.exec(clientMethod)) {
-    if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
-      throw new NotFoundError2(`No ${typeName} found`);
-    } else if (typeof rejectOnNotFound === "function") {
-      throw rejectOnNotFound(new NotFoundError2(`No ${typeName} found`));
-    } else if (isError(rejectOnNotFound)) {
-      throw rejectOnNotFound;
-    }
-    throw new NotFoundError2(`No ${typeName} found`);
-  }
-}
-__name(throwIfNotFound, "throwIfNotFound");
-__name2(throwIfNotFound, "throwIfNotFound");
-var debug7 = (0, import_debug7.default)("prisma:client:fetcher");
-var PrismaClientFetcher = /* @__PURE__ */ __name(class {
-  constructor(prisma, enableDebug = false, hooks) {
-    this.prisma = prisma;
-    this.debug = enableDebug;
-    this.hooks = hooks;
-    this.dataloader = new DataLoader({
-      batchLoader: (requests) => {
-        var _a2;
-        const queries = requests.map((r) => String(r.document));
-        const runInTransaction = requests[0].runInTransaction;
-        const headers = { traceparent: (_a2 = requests[0].headers) == null ? void 0 : _a2.traceparent };
-        return this.prisma._engine.requestBatch(queries, headers, runInTransaction);
-      },
-      singleLoader: (request4) => {
-        const query2 = String(request4.document);
-        return this.prisma._engine.request(query2, request4.headers);
-      },
-      batchBy: (request4) => {
-        var _a2;
-        if (request4.runInTransaction) {
-          if (request4.transactionId) {
-            return `transaction-batch-${request4.transactionId}`;
-          }
-          return "transaction-batch";
-        }
-        if (!request4.document.children[0].name.startsWith("findUnique")) {
-          return void 0;
-        }
-        const selectionSet = request4.document.children[0].children.join(",");
-        const args = (_a2 = request4.document.children[0].args) == null ? void 0 : _a2.args.map((a) => {
-          if (a.value instanceof Args) {
-            return `${a.key}-${a.value.args.map((a2) => a2.key).join(",")}`;
-          }
-          return a.key;
-        }).join(",");
-        return `${request4.document.children[0].name}|${args}|${selectionSet}`;
-      }
-    });
-  }
-  get [Symbol.toStringTag]() {
-    return "PrismaClientFetcher";
-  }
-  async request({
-    document: document2,
-    dataPath = [],
-    rootField,
-    typeName,
-    isList,
-    callsite,
-    rejectOnNotFound,
-    clientMethod,
-    runInTransaction,
-    showColors,
-    engineHook,
-    args,
-    headers,
-    transactionId,
-    unpacker
-  }) {
-    const cb = /* @__PURE__ */ __name2(async () => {
-      if (this.hooks && this.hooks.beforeRequest) {
-        const query2 = String(document2);
-        this.hooks.beforeRequest({
-          query: query2,
-          path: dataPath,
-          rootField,
-          typeName,
-          document: document2,
-          isList,
-          clientMethod,
-          args
-        });
-      }
-      try {
-        let data, elapsed;
-        if (engineHook) {
-          const result = await engineHook({
-            document: document2,
-            runInTransaction
-          }, (params) => this.dataloader.request(params));
-          data = result.data;
-          elapsed = result.elapsed;
-        } else {
-          const result = await this.dataloader.request({
-            document: document2,
-            runInTransaction,
-            headers,
-            transactionId
-          });
-          data = result == null ? void 0 : result.data;
-          elapsed = result == null ? void 0 : result.elapsed;
-        }
-        const unpackResult = this.unpack(document2, data, dataPath, rootField, unpacker);
-        throwIfNotFound(unpackResult, clientMethod, typeName, rejectOnNotFound);
-        if (process.env.PRISMA_CLIENT_GET_TIME) {
-          return { data: unpackResult, elapsed };
-        }
-        return unpackResult;
-      } catch (e) {
-        debug7(e);
-        let message = e.message;
-        if (callsite) {
-          const { stack } = printStack({
-            callsite,
-            originalMethod: clientMethod,
-            onUs: e.isPanic,
-            showColors
-          });
-          message = `${stack}
-  ${e.message}`;
-        }
-        message = this.sanitizeMessage(message);
-        if (e.code) {
-          throw new PrismaClientKnownRequestError(message, e.code, this.prisma._clientVersion, e.meta);
-        } else if (e.isPanic) {
-          throw new PrismaClientRustPanicError(message, this.prisma._clientVersion);
-        } else if (e instanceof PrismaClientUnknownRequestError) {
-          throw new PrismaClientUnknownRequestError(message, this.prisma._clientVersion);
-        } else if (e instanceof PrismaClientInitializationError) {
-          throw new PrismaClientInitializationError(message, this.prisma._clientVersion);
-        } else if (e instanceof PrismaClientRustPanicError) {
-          throw new PrismaClientRustPanicError(message, this.prisma._clientVersion);
-        }
-        e.clientVersion = this.prisma._clientVersion;
-        throw e;
-      }
-    }, "cb");
-    if (transactionId) {
-      return cb;
-    } else {
-      return cb();
-    }
-  }
-  sanitizeMessage(message) {
-    if (this.prisma._errorFormat && this.prisma._errorFormat !== "pretty") {
-      return (0, import_strip_ansi4.default)(message);
-    }
-    return message;
-  }
-  unpack(document2, data, path6, rootField, unpacker) {
-    if (data == null ? void 0 : data.data) {
-      data = data.data;
-    }
-    if (unpacker) {
-      data[rootField] = unpacker(data[rootField]);
-    }
-    const getPath = [];
-    if (rootField) {
-      getPath.push(rootField);
-    }
-    getPath.push(...path6.filter((p) => p !== "select" && p !== "include"));
-    return unpack({ document: document2, data, path: getPath });
-  }
-}, "PrismaClientFetcher");
-__name2(PrismaClientFetcher, "PrismaClientFetcher");
-var clientVersion = require_package2().version;
-var mssqlPreparedStatement = /* @__PURE__ */ __name2((template) => {
-  return template.reduce((acc, str, idx) => `${acc}@P${idx}${str}`);
-}, "mssqlPreparedStatement");
-function serializeRawParameters(data) {
-  return JSON.stringify(serializeBigInt(replaceDates(data)));
-}
-__name(serializeRawParameters, "serializeRawParameters");
-__name2(serializeRawParameters, "serializeRawParameters");
-function replaceDates(data) {
-  const type = Object.prototype.toString.call(data);
-  if (type === "[object Date]") {
-    return {
-      prisma__type: "date",
-      prisma__value: data.toJSON()
-    };
-  }
-  if (type === "[object Object]") {
-    const tmp = {};
-    for (const key in data) {
-      if (key !== "__proto__") {
-        tmp[key] = replaceDates(data[key]);
-      }
-    }
-    return tmp;
-  }
-  if (type === "[object Array]") {
-    let k = data.length;
-    let tmp;
-    for (tmp = new Array(k); k--; ) {
-      tmp[k] = replaceDates(data[k]);
-    }
-    return tmp;
-  }
-  return data;
-}
-__name(replaceDates, "replaceDates");
-__name2(replaceDates, "replaceDates");
-function serializeBigInt(data) {
-  const type = Object.prototype.toString.call(data);
-  if (type === "[object BigInt]") {
-    return data.toString();
-  }
-  if (type === "[object Object]") {
-    const tmp = {};
-    for (const key in data) {
-      if (key !== "__proto__") {
-        tmp[key] = serializeBigInt(data[key]);
-      }
-    }
-    return tmp;
-  }
-  if (type === "[object Array]") {
-    let k = data.length;
-    let tmp;
-    for (tmp = new Array(k); k--; ) {
-      tmp[k] = serializeBigInt(data[k]);
-    }
-    return tmp;
-  }
-  return data;
-}
-__name(serializeBigInt, "serializeBigInt");
-__name2(serializeBigInt, "serializeBigInt");
-var import_js_levenshtein2 = __toModule22(require_js_levenshtein());
-var knownProperties = ["datasources", "errorFormat", "log", "__internal", "rejectOnNotFound"];
-var errorFormats = ["pretty", "colorless", "minimal"];
-var logLevels = ["info", "query", "warn", "error"];
-var validators = {
-  datasources: (options2, datasourceNames) => {
-    if (!options2) {
-      return;
-    }
-    if (typeof options2 !== "object" || Array.isArray(options2)) {
-      throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for "datasources" provided to PrismaClient constructor`);
-    }
-    for (const [key, value] of Object.entries(options2)) {
-      if (!datasourceNames.includes(key)) {
-        const didYouMean = getDidYouMean(key, datasourceNames) || `Available datasources: ${datasourceNames.join(", ")}`;
-        throw new PrismaClientConstructorValidationError(`Unknown datasource ${key} provided to PrismaClient constructor.${didYouMean}`);
-      }
-      if (typeof value !== "object" || Array.isArray(value)) {
-        throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for datasource "${key}" provided to PrismaClient constructor.
-It should have this form: { url: "CONNECTION_STRING" }`);
-      }
-      if (value && typeof value === "object") {
-        for (const [key1, value1] of Object.entries(value)) {
-          if (key1 !== "url") {
-            throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for datasource "${key}" provided to PrismaClient constructor.
-It should have this form: { url: "CONNECTION_STRING" }`);
-          }
-          if (typeof value1 !== "string") {
-            throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(value1)} for datasource "${key}" provided to PrismaClient constructor.
-It should have this form: { url: "CONNECTION_STRING" }`);
-          }
-        }
-      }
-    }
-  },
-  errorFormat: (options2) => {
-    if (!options2) {
-      return;
-    }
-    if (typeof options2 !== "string") {
-      throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for "errorFormat" provided to PrismaClient constructor.`);
-    }
-    if (!errorFormats.includes(options2)) {
-      const didYouMean = getDidYouMean(options2, errorFormats);
-      throw new PrismaClientConstructorValidationError(`Invalid errorFormat ${options2} provided to PrismaClient constructor.${didYouMean}`);
-    }
-  },
-  log: (options2) => {
-    if (!options2) {
-      return;
-    }
-    if (!Array.isArray(options2)) {
-      throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for "log" provided to PrismaClient constructor.`);
-    }
-    function validateLogLevel(level) {
-      if (typeof level === "string") {
-        if (!logLevels.includes(level)) {
-          const didYouMean = getDidYouMean(level, logLevels);
-          throw new PrismaClientConstructorValidationError(`Invalid log level "${level}" provided to PrismaClient constructor.${didYouMean}`);
-        }
-      }
-    }
-    __name(validateLogLevel, "validateLogLevel");
-    __name2(validateLogLevel, "validateLogLevel");
-    for (const option of options2) {
-      validateLogLevel(option);
-      const logValidators = {
-        level: validateLogLevel,
-        emit: (value) => {
-          const emits = ["stdout", "event"];
-          if (!emits.includes(value)) {
-            const didYouMean = getDidYouMean(value, emits);
-            throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(value)} for "emit" in logLevel provided to PrismaClient constructor.${didYouMean}`);
-          }
-        }
-      };
-      if (option && typeof option === "object") {
-        for (const [key, value] of Object.entries(option)) {
-          if (logValidators[key]) {
-            logValidators[key](value);
-          } else {
-            throw new PrismaClientConstructorValidationError(`Invalid property ${key} for "log" provided to PrismaClient constructor`);
-          }
-        }
-      }
-    }
-  },
-  __internal: (value) => {
-    if (!value) {
-      return;
-    }
-    const knownKeys = ["debug", "hooks", "engine", "measurePerformance"];
-    if (typeof value !== "object") {
-      throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(value)} for "__internal" to PrismaClient constructor`);
-    }
-    for (const [key] of Object.entries(value)) {
-      if (!knownKeys.includes(key)) {
-        const didYouMean = getDidYouMean(key, knownKeys);
-        throw new PrismaClientConstructorValidationError(`Invalid property ${JSON.stringify(key)} for "__internal" provided to PrismaClient constructor.${didYouMean}`);
-      }
-    }
-  },
-  rejectOnNotFound: (value) => {
-    if (!value) {
-      return;
-    }
-    if (isError(value) || typeof value === "boolean" || typeof value === "object" || typeof value === "function") {
-      return value;
-    }
-    throw new PrismaClientConstructorValidationError(`Invalid rejectOnNotFound expected a boolean/Error/{[modelName: Error | boolean]} but received ${JSON.stringify(value)}`);
-  }
-};
-function validatePrismaClientOptions(options2, datasourceNames) {
-  for (const [key, value] of Object.entries(options2)) {
-    if (!knownProperties.includes(key)) {
-      const didYouMean = getDidYouMean(key, knownProperties);
-      throw new PrismaClientConstructorValidationError(`Unknown property ${key} provided to PrismaClient constructor.${didYouMean}`);
-    }
-    validators[key](value, datasourceNames);
-  }
-}
-__name(validatePrismaClientOptions, "validatePrismaClientOptions");
-__name2(validatePrismaClientOptions, "validatePrismaClientOptions");
-function getDidYouMean(str, options2) {
-  if (options2.length === 0) {
-    return "";
-  }
-  if (typeof str !== "string") {
-    return "";
-  }
-  const alternative = getAlternative(str, options2);
-  if (!alternative) {
-    return "";
-  }
-  return ` Did you mean "${alternative}"?`;
-}
-__name(getDidYouMean, "getDidYouMean");
-__name2(getDidYouMean, "getDidYouMean");
-function getAlternative(str, options2) {
-  if (options2.length === 0) {
-    return null;
-  }
-  const optionsWithDistances = options2.map((value) => ({
-    value,
-    distance: (0, import_js_levenshtein2.default)(str, value)
-  }));
-  optionsWithDistances.sort((a, b) => {
-    return a.distance < b.distance ? -1 : 1;
-  });
-  const bestAlternative = optionsWithDistances[0];
-  if (bestAlternative.distance < 3) {
-    return bestAlternative.value;
-  }
-  return null;
-}
-__name(getAlternative, "getAlternative");
-__name2(getAlternative, "getAlternative");
-var import_debug8 = __toModule22(require_dist7());
-var import_strip_ansi5 = __toModule22(require_strip_ansi());
-var debug8 = (0, import_debug8.default)("prisma:client:request_handler");
-var RequestHandler = /* @__PURE__ */ __name(class {
-  constructor(client, hooks) {
-    this.client = client;
-    this.hooks = hooks;
-    this.dataloader = new DataLoader({
-      batchLoader: (requests) => {
-        var _a2;
-        const queries = requests.map((r) => String(r.document));
-        const headers = {
-          transactionId: requests[0].transactionId,
-          traceparent: (_a2 = requests[0].headers) == null ? void 0 : _a2.traceparent
-        };
-        return this.client._engine.requestBatch(queries, headers);
-      },
-      singleLoader: (request4) => {
-        const query2 = String(request4.document);
-        return this.client._engine.request(query2, {
-          transactionId: request4.transactionId,
-          ...request4.headers
-        });
-      },
-      batchBy: (request4) => {
-        if (request4.transactionId) {
-          return `transaction-${request4.transactionId}`;
-        }
-        return batchFindUniqueBy(request4);
-      }
-    });
-  }
-  async request({
-    document: document2,
-    dataPath = [],
-    rootField,
-    typeName,
-    isList,
-    callsite,
-    rejectOnNotFound,
-    clientMethod,
-    runInTransaction,
-    showColors,
-    engineHook,
-    args,
-    headers,
-    transactionId,
-    unpacker
-  }) {
-    if (this.hooks && this.hooks.beforeRequest) {
-      const query2 = String(document2);
-      this.hooks.beforeRequest({
-        query: query2,
-        path: dataPath,
-        rootField,
-        typeName,
-        document: document2,
-        isList,
-        clientMethod,
-        args
-      });
-    }
-    try {
-      let data, elapsed;
-      if (engineHook) {
-        const result = await engineHook({
-          document: document2,
-          runInTransaction
-        }, (params) => this.dataloader.request(params));
-        data = result.data;
-        elapsed = result.elapsed;
-      } else {
-        const result = await this.dataloader.request({
-          document: document2,
-          runInTransaction,
-          headers,
-          transactionId
-        });
-        data = result == null ? void 0 : result.data;
-        elapsed = result == null ? void 0 : result.elapsed;
-      }
-      const unpackResult = this.unpack(document2, data, dataPath, rootField, unpacker);
-      throwIfNotFound(unpackResult, clientMethod, typeName, rejectOnNotFound);
-      if (process.env.PRISMA_CLIENT_GET_TIME) {
-        return { data: unpackResult, elapsed };
-      }
-      return unpackResult;
-    } catch (e) {
-      debug8(e);
-      let message = e.message;
-      if (callsite) {
-        const { stack } = printStack({
-          callsite,
-          originalMethod: clientMethod,
-          onUs: e.isPanic,
-          showColors
-        });
-        message = `${stack}
-  ${e.message}`;
-      }
-      message = this.sanitizeMessage(message);
-      if (e.code) {
-        throw new PrismaClientKnownRequestError(message, e.code, this.client._clientVersion, e.meta);
-      } else if (e.isPanic) {
-        throw new PrismaClientRustPanicError(message, this.client._clientVersion);
-      } else if (e instanceof PrismaClientUnknownRequestError) {
-        throw new PrismaClientUnknownRequestError(message, this.client._clientVersion);
-      } else if (e instanceof PrismaClientInitializationError) {
-        throw new PrismaClientInitializationError(message, this.client._clientVersion);
-      } else if (e instanceof PrismaClientRustPanicError) {
-        throw new PrismaClientRustPanicError(message, this.client._clientVersion);
-      }
-      e.clientVersion = this.client._clientVersion;
-      throw e;
-    }
-  }
-  sanitizeMessage(message) {
-    if (this.client._errorFormat && this.client._errorFormat !== "pretty") {
-      return (0, import_strip_ansi5.default)(message);
-    }
-    return message;
-  }
-  unpack(document2, data, path6, rootField, unpacker) {
-    if (data == null ? void 0 : data.data) {
-      data = data.data;
-    }
-    if (unpacker) {
-      data[rootField] = unpacker(data[rootField]);
-    }
-    const getPath = [];
-    if (rootField) {
-      getPath.push(rootField);
-    }
-    getPath.push(...path6.filter((p) => p !== "select" && p !== "include"));
-    return unpack({ document: document2, data, path: getPath });
-  }
-  get [Symbol.toStringTag]() {
-    return "RequestHandler";
-  }
-}, "RequestHandler");
-__name2(RequestHandler, "RequestHandler");
-function batchFindUniqueBy(request4) {
-  var _a2;
-  if (!request4.document.children[0].name.startsWith("findUnique")) {
-    return void 0;
-  }
-  const args = (_a2 = request4.document.children[0].args) == null ? void 0 : _a2.args.map((a) => {
-    if (a.value instanceof Args) {
-      return `${a.key}-${a.value.args.map((a2) => a2.key).join(",")}`;
-    }
-    return a.key;
-  }).join(",");
-  const selectionSet = request4.document.children[0].children.join(",");
-  return `${request4.document.children[0].name}|${args}|${selectionSet}`;
-}
-__name(batchFindUniqueBy, "batchFindUniqueBy");
-__name2(batchFindUniqueBy, "batchFindUniqueBy");
 var _globalThis = typeof globalThis === "object" ? globalThis : global;
 var VERSION = "1.0.3";
 var re = /^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;
@@ -39940,42 +37024,30 @@ var context2 = ContextAPI.getInstance();
 var trace = TraceAPI.getInstance();
 var propagation = PropagationAPI.getInstance();
 var diag2 = DiagAPI.instance();
-async function runInChildSpan(name, parentCtx, cb) {
-  if (parentCtx === void 0)
-    return cb(void 0);
-  const tracer = trace.getTracer("prisma");
-  const childSpan = tracer.startSpan(name, void 0, parentCtx);
-  const childCtx = trace.setSpan(parentCtx, childSpan);
-  const result = await context2.with(childCtx, () => cb(childSpan));
-  childSpan == null ? void 0 : childSpan.end();
-  return result;
-}
-__name(runInChildSpan, "runInChildSpan");
-__name2(runInChildSpan, "runInChildSpan");
 function createPrismaPromise(callback) {
   const otelCtx = context2.active();
   let promise;
-  const _callback = /* @__PURE__ */ __name2((txId, inTx) => {
+  const _callback = /* @__PURE__ */ __name2((txId, lock) => {
     try {
-      return promise != null ? promise : promise = callback(txId, inTx, otelCtx);
+      return promise != null ? promise : promise = callback(txId, lock, otelCtx);
     } catch (error2) {
       return Promise.reject(error2);
     }
   }, "_callback");
   return {
     then(onFulfilled, onRejected, txId) {
-      return _callback(txId, false).then(onFulfilled, onRejected, txId);
+      return _callback(txId).then(onFulfilled, onRejected, txId);
     },
-    catch(onRejected) {
-      return _callback().catch(onRejected);
+    catch(onRejected, txId) {
+      return _callback(txId).catch(onRejected, txId);
     },
-    finally(onFinally) {
-      return _callback().finally(onFinally);
+    finally(onFinally, txId) {
+      return _callback(txId).finally(onFinally, txId);
     },
-    requestTransaction(txId) {
-      const promise2 = _callback(txId, true);
+    requestTransaction(txId, lock) {
+      const promise2 = _callback(txId, lock);
       if (promise2.requestTransaction) {
-        return promise2.requestTransaction(txId);
+        return promise2.requestTransaction(txId, lock);
       }
       return promise2;
     },
@@ -40082,7 +37154,7 @@ function createUnpacker2(userArgs) {
 }
 __name(createUnpacker2, "createUnpacker2");
 __name2(createUnpacker2, "createUnpacker");
-function groupBy2(client, userArgs, modelAction) {
+function groupBy(client, userArgs, modelAction) {
   const groupByArgs = desugarUserArgs2(userArgs != null ? userArgs : {});
   const groupByUnpacker = createUnpacker2(userArgs != null ? userArgs : {});
   return modelAction({
@@ -40090,19 +37162,22 @@ function groupBy2(client, userArgs, modelAction) {
     unpacker: groupByUnpacker
   })(groupByArgs);
 }
-__name(groupBy2, "groupBy2");
-__name2(groupBy2, "groupBy");
+__name(groupBy, "groupBy");
+__name2(groupBy, "groupBy");
 function applyAggregates(client, action, modelAction) {
   if (action === "aggregate")
     return (userArgs) => aggregate(client, userArgs, modelAction);
   if (action === "count")
     return (userArgs) => count(client, userArgs, modelAction);
   if (action === "groupBy")
-    return (userArgs) => groupBy2(client, userArgs, modelAction);
+    return (userArgs) => groupBy(client, userArgs, modelAction);
   return void 0;
 }
 __name(applyAggregates, "applyAggregates");
 __name2(applyAggregates, "applyAggregates");
+var keys = /* @__PURE__ */ __name2((ks) => Array.isArray(ks) ? ks : ks.split("."), "keys");
+var deepGet = /* @__PURE__ */ __name2((o, kp) => keys(kp).reduce((o2, k) => o2 && o2[k], o), "deepGet");
+var deepSet = /* @__PURE__ */ __name2((o, kp, v) => keys(kp).reduceRight((v2, k, i, ks) => Object.assign({}, deepGet(o, ks.slice(0, i)), { [k]: v2 }), v), "deepSet");
 var defaultPropertyDescriptor = {
   enumerable: true,
   configurable: true,
@@ -40139,9 +37214,10 @@ function applyFluent(client, dmmfModelName, modelAction, fluentPropName, prevDat
   const dmmfModel = client._dmmf.modelMap[dmmfModelName];
   const dmmfModelFieldMap = dmmfModel.fields.reduce((acc, field) => ({ ...acc, [field.name]: field }), {});
   return (userArgs) => {
+    const callsite = getCallSite();
     const nextDataPath = getNextDataPath(fluentPropName, prevDataPath);
     const nextUserArgs = getNextUserArgs(userArgs, prevUserArgs, nextDataPath);
-    const prismaPromise = modelAction({ dataPath: nextDataPath })(nextUserArgs);
+    const prismaPromise = modelAction({ dataPath: nextDataPath, callsite })(nextUserArgs);
     const ownKeys = getOwnKeys(client, dmmfModelName);
     return new Proxy(prismaPromise, {
       get(target, prop) {
@@ -40168,6 +37244,8 @@ function dmmfToJSModelName(name) {
 }
 __name(dmmfToJSModelName, "dmmfToJSModelName");
 __name2(dmmfToJSModelName, "dmmfToJSModelName");
+var fluentProps = ["findUnique", "findFirst", "create", "update", "upsert", "delete"];
+var aggregateProps = ["aggregate", "count", "groupBy"];
 function applyModel(client, dmmfModelName) {
   const jsModelName = dmmfToJSModelName(dmmfModelName);
   const ownKeys = getOwnKeys2(client, dmmfModelName);
@@ -40180,20 +37258,20 @@ function applyModel(client, dmmfModelName) {
         return void 0;
       const action = /* @__PURE__ */ __name2((paramOverrides) => (userArgs) => {
         const callSite = getCallSite(client._errorFormat);
-        return createPrismaPromise((txId, inTx, otelCtx) => {
+        return createPrismaPromise((txId, lock, otelCtx) => {
           const data = { args: userArgs, dataPath: [] };
           const action2 = { action: prop, model: dmmfModelName };
           const method = { clientMethod: `${jsModelName}.${prop}` };
-          const tx = { runInTransaction: !!inTx, transactionId: txId };
+          const tx = { runInTransaction: !!txId, transactionId: txId, lock };
           const trace2 = { callsite: callSite, otelCtx };
           const params = { ...data, ...action2, ...method, ...tx, ...trace2 };
           return client._request({ ...params, ...paramOverrides });
         });
       }, "action");
-      if (prop === "findUnique" || prop === "findFirst") {
+      if (fluentProps.includes(prop)) {
         return applyFluent(client, dmmfModelName, action);
       }
-      if (prop === "aggregate" || prop === "count" || prop === "groupBy") {
+      if (aggregateProps.includes(prop)) {
         return applyAggregates(client, prop, action);
       }
       return action({});
@@ -40246,6 +37324,2547 @@ function getOwnKeys3(client) {
 }
 __name(getOwnKeys3, "getOwnKeys3");
 __name2(getOwnKeys3, "getOwnKeys");
+function getLockCountPromise(knock, cb = () => {
+}) {
+  let resolve2;
+  const lock = new Promise((res) => resolve2 = res);
+  return {
+    then(onFulfilled) {
+      if (--knock === 0)
+        resolve2(cb());
+      return onFulfilled == null ? void 0 : onFulfilled(lock);
+    }
+  };
+}
+__name(getLockCountPromise, "getLockCountPromise");
+__name2(getLockCountPromise, "getLockCountPromise");
+function getLogLevel(log4) {
+  if (typeof log4 === "string") {
+    return log4;
+  }
+  return log4.reduce((acc, curr) => {
+    const currentLevel = typeof curr === "string" ? curr : curr.level;
+    if (currentLevel === "query") {
+      return acc;
+    }
+    if (!acc) {
+      return currentLevel;
+    }
+    if (curr === "info" || acc === "info") {
+      return "info";
+    }
+    return currentLevel;
+  }, void 0);
+}
+__name(getLogLevel, "getLogLevel");
+__name2(getLogLevel, "getLogLevel");
+function mergeBy(arr1, arr2, cb) {
+  const groupedArr1 = groupBy2(arr1, cb);
+  const groupedArr2 = groupBy2(arr2, cb);
+  const result = Object.values(groupedArr2).map((value) => value[value.length - 1]);
+  const arr2Keys = Object.keys(groupedArr2);
+  Object.entries(groupedArr1).forEach(([key, value]) => {
+    if (!arr2Keys.includes(key)) {
+      result.push(value[value.length - 1]);
+    }
+  });
+  return result;
+}
+__name(mergeBy, "mergeBy");
+__name2(mergeBy, "mergeBy");
+var groupBy2 = /* @__PURE__ */ __name2((arr, cb) => {
+  return arr.reduce((acc, curr) => {
+    const key = cb(curr);
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(curr);
+    return acc;
+  }, {});
+}, "groupBy");
+var MiddlewareHandler = /* @__PURE__ */ __name(class {
+  constructor() {
+    this._middlewares = [];
+  }
+  use(middleware) {
+    this._middlewares.push(middleware);
+  }
+  get(id) {
+    return this._middlewares[id];
+  }
+  has(id) {
+    return !!this._middlewares[id];
+  }
+  length() {
+    return this._middlewares.length;
+  }
+}, "MiddlewareHandler");
+__name2(MiddlewareHandler, "MiddlewareHandler");
+var Middlewares = /* @__PURE__ */ __name(class {
+  constructor() {
+    this.query = new MiddlewareHandler();
+    this.engine = new MiddlewareHandler();
+  }
+}, "Middlewares");
+__name2(Middlewares, "Middlewares");
+var import_chalk10 = __toModule22(require_source2());
+var import_indent_string3 = __toModule22(require_indent_string2());
+var import_strip_ansi3 = __toModule22(require_strip_ansi());
+function isSpecificValue(val) {
+  return val instanceof Buffer || val instanceof Date || val instanceof RegExp ? true : false;
+}
+__name(isSpecificValue, "isSpecificValue");
+__name2(isSpecificValue, "isSpecificValue");
+function cloneSpecificValue(val) {
+  if (val instanceof Buffer) {
+    const x = Buffer.alloc ? Buffer.alloc(val.length) : new Buffer(val.length);
+    val.copy(x);
+    return x;
+  } else if (val instanceof Date) {
+    return new Date(val.getTime());
+  } else if (val instanceof RegExp) {
+    return new RegExp(val);
+  } else {
+    throw new Error("Unexpected situation");
+  }
+}
+__name(cloneSpecificValue, "cloneSpecificValue");
+__name2(cloneSpecificValue, "cloneSpecificValue");
+function deepCloneArray(arr) {
+  const clone2 = [];
+  arr.forEach(function(item, index) {
+    if (typeof item === "object" && item !== null) {
+      if (Array.isArray(item)) {
+        clone2[index] = deepCloneArray(item);
+      } else if (isSpecificValue(item)) {
+        clone2[index] = cloneSpecificValue(item);
+      } else {
+        clone2[index] = deepExtend({}, item);
+      }
+    } else {
+      clone2[index] = item;
+    }
+  });
+  return clone2;
+}
+__name(deepCloneArray, "deepCloneArray");
+__name2(deepCloneArray, "deepCloneArray");
+function safeGetProperty(object, property) {
+  return property === "__proto__" ? void 0 : object[property];
+}
+__name(safeGetProperty, "safeGetProperty");
+__name2(safeGetProperty, "safeGetProperty");
+var deepExtend = /* @__PURE__ */ __name2(function(target, ...args) {
+  if (!target || typeof target !== "object") {
+    return false;
+  }
+  if (args.length === 0) {
+    return target;
+  }
+  let val, src;
+  for (const obj of args) {
+    if (typeof obj !== "object" || obj === null || Array.isArray(obj)) {
+      continue;
+    }
+    for (const key of Object.keys(obj)) {
+      src = safeGetProperty(target, key);
+      val = safeGetProperty(obj, key);
+      if (val === target) {
+        continue;
+      } else if (typeof val !== "object" || val === null) {
+        target[key] = val;
+        continue;
+      } else if (Array.isArray(val)) {
+        target[key] = deepCloneArray(val);
+        continue;
+      } else if (isSpecificValue(val)) {
+        target[key] = cloneSpecificValue(val);
+        continue;
+      } else if (typeof src !== "object" || src === null || Array.isArray(src)) {
+        target[key] = deepExtend({}, val);
+        continue;
+      } else {
+        target[key] = deepExtend(src, val);
+        continue;
+      }
+    }
+  }
+  return target;
+}, "deepExtend");
+function filterObject(obj, cb) {
+  if (!obj || typeof obj !== "object" || typeof obj.hasOwnProperty !== "function") {
+    return obj;
+  }
+  const newObj = {};
+  for (const key in obj) {
+    const value = obj[key];
+    if (Object.hasOwnProperty.call(obj, key) && cb(key, value)) {
+      newObj[key] = value;
+    }
+  }
+  return newObj;
+}
+__name(filterObject, "filterObject");
+__name2(filterObject, "filterObject");
+function flatten(array) {
+  return Array.prototype.concat.apply([], array);
+}
+__name(flatten, "flatten");
+__name2(flatten, "flatten");
+function flatMap(array, callbackFn, thisArg) {
+  return flatten(array.map(callbackFn, thisArg));
+}
+__name(flatMap, "flatMap");
+__name2(flatMap, "flatMap");
+var notReallyObjects = {
+  "[object Date]": true,
+  "[object BitInt]": true,
+  "[object Uint8Array]": true,
+  "[object Function]": true
+};
+function isObject(value) {
+  return value && typeof value === "object" && !notReallyObjects[Object.prototype.toString.call(value)];
+}
+__name(isObject, "isObject");
+__name2(isObject, "isObject");
+function omit2(object, path6) {
+  const result = {};
+  const paths = Array.isArray(path6) ? path6 : [path6];
+  for (const key in object) {
+    if (Object.hasOwnProperty.call(object, key) && !paths.includes(key)) {
+      result[key] = object[key];
+    }
+  }
+  return result;
+}
+__name(omit2, "omit2");
+__name2(omit2, "omit");
+var import_chalk7 = __toModule22(require_source2());
+var import_strip_ansi2 = __toModule22(require_strip_ansi());
+var isRegexp = require_is_regexp();
+var isObj = require_is_obj();
+var getOwnEnumPropSymbols = require_lib3().default;
+var stringifyObject = /* @__PURE__ */ __name2((input, options2, pad) => {
+  const seen = [];
+  return (/* @__PURE__ */ __name2(/* @__PURE__ */ __name(function stringifyObject2(input2, options3 = {}, pad2 = "", path6 = []) {
+    options3.indent = options3.indent || "	";
+    let tokens;
+    if (options3.inlineCharacterLimit === void 0) {
+      tokens = {
+        newLine: "\n",
+        newLineOrSpace: "\n",
+        pad: pad2,
+        indent: pad2 + options3.indent
+      };
+    } else {
+      tokens = {
+        newLine: "@@__STRINGIFY_OBJECT_NEW_LINE__@@",
+        newLineOrSpace: "@@__STRINGIFY_OBJECT_NEW_LINE_OR_SPACE__@@",
+        pad: "@@__STRINGIFY_OBJECT_PAD__@@",
+        indent: "@@__STRINGIFY_OBJECT_INDENT__@@"
+      };
+    }
+    const expandWhiteSpace = /* @__PURE__ */ __name2((string) => {
+      if (options3.inlineCharacterLimit === void 0) {
+        return string;
+      }
+      const oneLined = string.replace(new RegExp(tokens.newLine, "g"), "").replace(new RegExp(tokens.newLineOrSpace, "g"), " ").replace(new RegExp(tokens.pad + "|" + tokens.indent, "g"), "");
+      if (oneLined.length <= options3.inlineCharacterLimit) {
+        return oneLined;
+      }
+      return string.replace(new RegExp(tokens.newLine + "|" + tokens.newLineOrSpace, "g"), "\n").replace(new RegExp(tokens.pad, "g"), pad2).replace(new RegExp(tokens.indent, "g"), pad2 + options3.indent);
+    }, "expandWhiteSpace");
+    if (seen.indexOf(input2) !== -1) {
+      return '"[Circular]"';
+    }
+    if (Buffer.isBuffer(input2)) {
+      return `Buffer(${Buffer.length})`;
+    }
+    if (input2 === null || input2 === void 0 || typeof input2 === "number" || typeof input2 === "boolean" || typeof input2 === "function" || typeof input2 === "symbol" || isRegexp(input2)) {
+      return String(input2);
+    }
+    if (input2 instanceof Date) {
+      return `new Date('${input2.toISOString()}')`;
+    }
+    if (Array.isArray(input2)) {
+      if (input2.length === 0) {
+        return "[]";
+      }
+      seen.push(input2);
+      const ret = "[" + tokens.newLine + input2.map((el, i) => {
+        const eol = input2.length - 1 === i ? tokens.newLine : "," + tokens.newLineOrSpace;
+        let value = stringifyObject2(el, options3, pad2 + options3.indent, [...path6, i]);
+        if (options3.transformValue) {
+          value = options3.transformValue(input2, i, value);
+        }
+        return tokens.indent + value + eol;
+      }).join("") + tokens.pad + "]";
+      seen.pop();
+      return expandWhiteSpace(ret);
+    }
+    if (isObj(input2)) {
+      let objKeys = Object.keys(input2).concat(getOwnEnumPropSymbols(input2));
+      if (options3.filter) {
+        objKeys = objKeys.filter((el) => options3.filter(input2, el));
+      }
+      if (objKeys.length === 0) {
+        return "{}";
+      }
+      seen.push(input2);
+      const ret = "{" + tokens.newLine + objKeys.map((el, i) => {
+        const eol = objKeys.length - 1 === i ? tokens.newLine : "," + tokens.newLineOrSpace;
+        const isSymbol = typeof el === "symbol";
+        const isClassic = !isSymbol && /^[a-z$_][a-z$_0-9]*$/i.test(el);
+        const key = isSymbol || isClassic ? el : stringifyObject2(el, options3, void 0, [...path6, el]);
+        let value = stringifyObject2(input2[el], options3, pad2 + options3.indent, [...path6, el]);
+        if (options3.transformValue) {
+          value = options3.transformValue(input2, el, value);
+        }
+        let line = tokens.indent + String(key) + ": " + value + eol;
+        if (options3.transformLine) {
+          line = options3.transformLine({
+            obj: input2,
+            indent: tokens.indent,
+            key,
+            stringifiedValue: value,
+            value: input2[el],
+            eol,
+            originalLine: line,
+            path: path6.concat(key)
+          });
+        }
+        return line;
+      }).join("") + tokens.pad + "}";
+      seen.pop();
+      return expandWhiteSpace(ret);
+    }
+    input2 = String(input2).replace(/[\r\n]/g, (x) => x === "\n" ? "\\n" : "\\r");
+    if (options3.singleQuotes === false) {
+      input2 = input2.replace(/"/g, '\\"');
+      return `"${input2}"`;
+    }
+    input2 = input2.replace(/\\?'/g, "\\'");
+    return `'${input2}'`;
+  }, "stringifyObject2"), "stringifyObject"))(input, options2, pad);
+}, "stringifyObject");
+var stringifyObject_default = stringifyObject;
+var DIM_TOKEN = "@@__DIM_POINTER__@@";
+function printJsonWithErrors({ ast, keyPaths, valuePaths, missingItems }) {
+  let obj = ast;
+  for (const { path: path6, type } of missingItems) {
+    obj = deepSet(obj, path6, type);
+  }
+  return stringifyObject_default(obj, {
+    indent: "  ",
+    transformLine: ({ indent: indent4, key, value, stringifiedValue, eol, path: path6 }) => {
+      const dottedPath = path6.join(".");
+      const keyError = keyPaths.includes(dottedPath);
+      const valueError = valuePaths.includes(dottedPath);
+      const missingItem = missingItems.find((item) => item.path === dottedPath);
+      let valueStr = stringifiedValue;
+      if (missingItem) {
+        if (typeof value === "string") {
+          valueStr = valueStr.slice(1, valueStr.length - 1);
+        }
+        const isRequiredStr = missingItem.isRequired ? "" : "?";
+        const prefix = missingItem.isRequired ? "+" : "?";
+        const color = missingItem.isRequired ? import_chalk7.default.greenBright : import_chalk7.default.green;
+        let output = color(prefixLines(key + isRequiredStr + ": " + valueStr + eol, indent4, prefix));
+        if (!missingItem.isRequired) {
+          output = import_chalk7.default.dim(output);
+        }
+        return output;
+      } else {
+        const isOnMissingItemPath = missingItems.some((item) => dottedPath.startsWith(item.path));
+        const isOptional = key[key.length - 2] === "?";
+        if (isOptional) {
+          key = key.slice(1, key.length - 1);
+        }
+        if (isOptional && typeof value === "object" && value !== null) {
+          valueStr = valueStr.split("\n").map((line, index, arr) => index === arr.length - 1 ? line + DIM_TOKEN : line).join("\n");
+        }
+        if (isOnMissingItemPath && typeof value === "string") {
+          valueStr = valueStr.slice(1, valueStr.length - 1);
+          if (!isOptional) {
+            valueStr = import_chalk7.default.bold(valueStr);
+          }
+        }
+        if ((typeof value !== "object" || value === null) && !valueError && !isOnMissingItemPath) {
+          valueStr = import_chalk7.default.dim(valueStr);
+        }
+        const keyStr = keyError ? import_chalk7.default.redBright(key) : key;
+        valueStr = valueError ? import_chalk7.default.redBright(valueStr) : valueStr;
+        let output = indent4 + keyStr + ": " + valueStr + (isOnMissingItemPath ? eol : import_chalk7.default.dim(eol));
+        if (keyError || valueError) {
+          const lines = output.split("\n");
+          const keyLength = String(key).length;
+          const keyScribbles = keyError ? import_chalk7.default.redBright("~".repeat(keyLength)) : " ".repeat(keyLength);
+          const valueLength = valueError ? getValueLength(indent4, key, value, stringifiedValue) : 0;
+          const hideValueScribbles = Boolean(valueError && typeof value === "object" && value !== null);
+          const valueScribbles = valueError ? "  " + import_chalk7.default.redBright("~".repeat(valueLength)) : "";
+          if (keyScribbles && keyScribbles.length > 0 && !hideValueScribbles) {
+            lines.splice(1, 0, indent4 + keyScribbles + valueScribbles);
+          }
+          if (keyScribbles && keyScribbles.length > 0 && hideValueScribbles) {
+            lines.splice(lines.length - 1, 0, indent4.slice(0, indent4.length - 2) + valueScribbles);
+          }
+          output = lines.join("\n");
+        }
+        return output;
+      }
+    }
+  });
+}
+__name(printJsonWithErrors, "printJsonWithErrors");
+__name2(printJsonWithErrors, "printJsonWithErrors");
+function getValueLength(indent4, key, value, stringifiedValue) {
+  if (value === null) {
+    return 4;
+  }
+  if (typeof value === "string") {
+    return value.length + 2;
+  }
+  if (typeof value === "object") {
+    return Math.abs(getLongestLine(`${key}: ${(0, import_strip_ansi2.default)(stringifiedValue)}`) - indent4.length);
+  }
+  return String(value).length;
+}
+__name(getValueLength, "getValueLength");
+__name2(getValueLength, "getValueLength");
+function getLongestLine(str) {
+  return str.split("\n").reduce((max2, curr) => curr.length > max2 ? curr.length : max2, 0);
+}
+__name(getLongestLine, "getLongestLine");
+__name2(getLongestLine, "getLongestLine");
+function prefixLines(str, indent4, prefix) {
+  return str.split("\n").map((line, index, arr) => index === 0 ? prefix + indent4.slice(1) + line : index < arr.length - 1 ? prefix + line.slice(1) : line).map((line) => {
+    return (0, import_strip_ansi2.default)(line).includes(DIM_TOKEN) ? import_chalk7.default.dim(line.replace(DIM_TOKEN, "")) : line.includes("?") ? import_chalk7.default.dim(line) : line;
+  }).join("\n");
+}
+__name(prefixLines, "prefixLines");
+__name2(prefixLines, "prefixLines");
+var import_chalk9 = __toModule22(require_source2());
+var UNKNOWN_FUNCTION = "<unknown>";
+function parse(stackString) {
+  var lines = stackString.split("\n");
+  return lines.reduce(function(stack, line) {
+    var parseResult = parseChrome(line) || parseWinjs(line) || parseGecko(line) || parseNode(line) || parseJSC(line);
+    if (parseResult) {
+      stack.push(parseResult);
+    }
+    return stack;
+  }, []);
+}
+__name(parse, "parse");
+__name2(parse, "parse");
+var chromeRe = /^\s*at (.*?) ?\(((?:file|https?|blob|chrome-extension|native|eval|webpack|<anonymous>|\/|[a-z]:\\|\\\\).*?)(?::(\d+))?(?::(\d+))?\)?\s*$/i;
+var chromeEvalRe = /\((\S*)(?::(\d+))(?::(\d+))\)/;
+function parseChrome(line) {
+  var parts = chromeRe.exec(line);
+  if (!parts) {
+    return null;
+  }
+  var isNative = parts[2] && parts[2].indexOf("native") === 0;
+  var isEval = parts[2] && parts[2].indexOf("eval") === 0;
+  var submatch = chromeEvalRe.exec(parts[2]);
+  if (isEval && submatch != null) {
+    parts[2] = submatch[1];
+    parts[3] = submatch[2];
+    parts[4] = submatch[3];
+  }
+  return {
+    file: !isNative ? parts[2] : null,
+    methodName: parts[1] || UNKNOWN_FUNCTION,
+    arguments: isNative ? [parts[2]] : [],
+    lineNumber: parts[3] ? +parts[3] : null,
+    column: parts[4] ? +parts[4] : null
+  };
+}
+__name(parseChrome, "parseChrome");
+__name2(parseChrome, "parseChrome");
+var winjsRe = /^\s*at (?:((?:\[object object\])?.+) )?\(?((?:file|ms-appx|https?|webpack|blob):.*?):(\d+)(?::(\d+))?\)?\s*$/i;
+function parseWinjs(line) {
+  var parts = winjsRe.exec(line);
+  if (!parts) {
+    return null;
+  }
+  return {
+    file: parts[2],
+    methodName: parts[1] || UNKNOWN_FUNCTION,
+    arguments: [],
+    lineNumber: +parts[3],
+    column: parts[4] ? +parts[4] : null
+  };
+}
+__name(parseWinjs, "parseWinjs");
+__name2(parseWinjs, "parseWinjs");
+var geckoRe = /^\s*(.*?)(?:\((.*?)\))?(?:^|@)((?:file|https?|blob|chrome|webpack|resource|\[native).*?|[^@]*bundle)(?::(\d+))?(?::(\d+))?\s*$/i;
+var geckoEvalRe = /(\S+) line (\d+)(?: > eval line \d+)* > eval/i;
+function parseGecko(line) {
+  var parts = geckoRe.exec(line);
+  if (!parts) {
+    return null;
+  }
+  var isEval = parts[3] && parts[3].indexOf(" > eval") > -1;
+  var submatch = geckoEvalRe.exec(parts[3]);
+  if (isEval && submatch != null) {
+    parts[3] = submatch[1];
+    parts[4] = submatch[2];
+    parts[5] = null;
+  }
+  return {
+    file: parts[3],
+    methodName: parts[1] || UNKNOWN_FUNCTION,
+    arguments: parts[2] ? parts[2].split(",") : [],
+    lineNumber: parts[4] ? +parts[4] : null,
+    column: parts[5] ? +parts[5] : null
+  };
+}
+__name(parseGecko, "parseGecko");
+__name2(parseGecko, "parseGecko");
+var javaScriptCoreRe = /^\s*(?:([^@]*)(?:\((.*?)\))?@)?(\S.*?):(\d+)(?::(\d+))?\s*$/i;
+function parseJSC(line) {
+  var parts = javaScriptCoreRe.exec(line);
+  if (!parts) {
+    return null;
+  }
+  return {
+    file: parts[3],
+    methodName: parts[1] || UNKNOWN_FUNCTION,
+    arguments: [],
+    lineNumber: +parts[4],
+    column: parts[5] ? +parts[5] : null
+  };
+}
+__name(parseJSC, "parseJSC");
+__name2(parseJSC, "parseJSC");
+var nodeRe = /^\s*at (?:((?:\[object object\])?[^\\/]+(?: \[as \S+\])?) )?\(?(.*?):(\d+)(?::(\d+))?\)?\s*$/i;
+function parseNode(line) {
+  var parts = nodeRe.exec(line);
+  if (!parts) {
+    return null;
+  }
+  return {
+    file: parts[2],
+    methodName: parts[1] || UNKNOWN_FUNCTION,
+    arguments: [],
+    lineNumber: +parts[3],
+    column: parts[4] ? +parts[4] : null
+  };
+}
+__name(parseNode, "parseNode");
+__name2(parseNode, "parseNode");
+var import_chalk8 = __toModule22(require_source2());
+var orange = import_chalk8.default.rgb(246, 145, 95);
+var darkBrightBlue = import_chalk8.default.rgb(107, 139, 140);
+var blue = import_chalk8.default.cyan;
+var brightBlue = import_chalk8.default.rgb(127, 155, 155);
+var identity = /* @__PURE__ */ __name2((str) => str, "identity");
+var theme = {
+  keyword: blue,
+  entity: blue,
+  value: brightBlue,
+  punctuation: darkBrightBlue,
+  directive: blue,
+  function: blue,
+  variable: brightBlue,
+  string: import_chalk8.default.greenBright,
+  boolean: orange,
+  number: import_chalk8.default.cyan,
+  comment: import_chalk8.default.grey
+};
+var _self = {};
+var uniqueId = 0;
+var Prism = {
+  manual: _self.Prism && _self.Prism.manual,
+  disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
+  util: {
+    encode: function(tokens) {
+      if (tokens instanceof Token) {
+        const anyTokens = tokens;
+        return new Token(anyTokens.type, Prism.util.encode(anyTokens.content), anyTokens.alias);
+      } else if (Array.isArray(tokens)) {
+        return tokens.map(Prism.util.encode);
+      } else {
+        return tokens.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\u00a0/g, " ");
+      }
+    },
+    type: function(o) {
+      return Object.prototype.toString.call(o).slice(8, -1);
+    },
+    objId: function(obj) {
+      if (!obj["__id"]) {
+        Object.defineProperty(obj, "__id", { value: ++uniqueId });
+      }
+      return obj["__id"];
+    },
+    clone: /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function deepClone(o, visited) {
+      let clone2, id, type = Prism.util.type(o);
+      visited = visited || {};
+      switch (type) {
+        case "Object":
+          id = Prism.util.objId(o);
+          if (visited[id]) {
+            return visited[id];
+          }
+          clone2 = {};
+          visited[id] = clone2;
+          for (const key in o) {
+            if (o.hasOwnProperty(key)) {
+              clone2[key] = deepClone(o[key], visited);
+            }
+          }
+          return clone2;
+        case "Array":
+          id = Prism.util.objId(o);
+          if (visited[id]) {
+            return visited[id];
+          }
+          clone2 = [];
+          visited[id] = clone2;
+          o.forEach(function(v, i) {
+            clone2[i] = deepClone(v, visited);
+          });
+          return clone2;
+        default:
+          return o;
+      }
+    }, "deepClone"), "deepClone")
+  },
+  languages: {
+    extend: function(id, redef) {
+      const lang = Prism.util.clone(Prism.languages[id]);
+      for (const key in redef) {
+        lang[key] = redef[key];
+      }
+      return lang;
+    },
+    insertBefore: function(inside, before, insert, root) {
+      root = root || Prism.languages;
+      const grammar = root[inside];
+      const ret = {};
+      for (const token in grammar) {
+        if (grammar.hasOwnProperty(token)) {
+          if (token == before) {
+            for (const newToken in insert) {
+              if (insert.hasOwnProperty(newToken)) {
+                ret[newToken] = insert[newToken];
+              }
+            }
+          }
+          if (!insert.hasOwnProperty(token)) {
+            ret[token] = grammar[token];
+          }
+        }
+      }
+      const old = root[inside];
+      root[inside] = ret;
+      Prism.languages.DFS(Prism.languages, function(key, value) {
+        if (value === old && key != inside) {
+          this[key] = ret;
+        }
+      });
+      return ret;
+    },
+    DFS: /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function DFS(o, callback, type, visited) {
+      visited = visited || {};
+      const objId = Prism.util.objId;
+      for (const i in o) {
+        if (o.hasOwnProperty(i)) {
+          callback.call(o, i, o[i], type || i);
+          const property = o[i], propertyType = Prism.util.type(property);
+          if (propertyType === "Object" && !visited[objId(property)]) {
+            visited[objId(property)] = true;
+            DFS(property, callback, null, visited);
+          } else if (propertyType === "Array" && !visited[objId(property)]) {
+            visited[objId(property)] = true;
+            DFS(property, callback, i, visited);
+          }
+        }
+      }
+    }, "DFS"), "DFS")
+  },
+  plugins: {},
+  highlight: function(text, grammar, language) {
+    const env = {
+      code: text,
+      grammar,
+      language
+    };
+    Prism.hooks.run("before-tokenize", env);
+    env.tokens = Prism.tokenize(env.code, env.grammar);
+    Prism.hooks.run("after-tokenize", env);
+    return Token.stringify(Prism.util.encode(env.tokens), env.language);
+  },
+  matchGrammar: function(text, strarr, grammar, index, startPos, oneshot, target) {
+    for (const token in grammar) {
+      if (!grammar.hasOwnProperty(token) || !grammar[token]) {
+        continue;
+      }
+      if (token == target) {
+        return;
+      }
+      let patterns = grammar[token];
+      patterns = Prism.util.type(patterns) === "Array" ? patterns : [patterns];
+      for (let j = 0; j < patterns.length; ++j) {
+        let pattern = patterns[j], inside = pattern.inside, lookbehind = !!pattern.lookbehind, greedy = !!pattern.greedy, lookbehindLength = 0, alias = pattern.alias;
+        if (greedy && !pattern.pattern.global) {
+          const flags = pattern.pattern.toString().match(/[imuy]*$/)[0];
+          pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
+        }
+        pattern = pattern.pattern || pattern;
+        for (let i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
+          let str = strarr[i];
+          if (strarr.length > text.length) {
+            return;
+          }
+          if (str instanceof Token) {
+            continue;
+          }
+          if (greedy && i != strarr.length - 1) {
+            pattern.lastIndex = pos;
+            var match = pattern.exec(text);
+            if (!match) {
+              break;
+            }
+            var from = match.index + (lookbehind ? match[1].length : 0), to = match.index + match[0].length, k = i, p = pos;
+            for (let len = strarr.length; k < len && (p < to || !strarr[k].type && !strarr[k - 1].greedy); ++k) {
+              p += strarr[k].length;
+              if (from >= p) {
+                ++i;
+                pos = p;
+              }
+            }
+            if (strarr[i] instanceof Token) {
+              continue;
+            }
+            delNum = k - i;
+            str = text.slice(pos, p);
+            match.index -= pos;
+          } else {
+            pattern.lastIndex = 0;
+            var match = pattern.exec(str), delNum = 1;
+          }
+          if (!match) {
+            if (oneshot) {
+              break;
+            }
+            continue;
+          }
+          if (lookbehind) {
+            lookbehindLength = match[1] ? match[1].length : 0;
+          }
+          var from = match.index + lookbehindLength, match = match[0].slice(lookbehindLength), to = from + match.length, before = str.slice(0, from), after = str.slice(to);
+          const args = [i, delNum];
+          if (before) {
+            ++i;
+            pos += before.length;
+            args.push(before);
+          }
+          const wrapped = new Token(token, inside ? Prism.tokenize(match, inside) : match, alias, match, greedy);
+          args.push(wrapped);
+          if (after) {
+            args.push(after);
+          }
+          Array.prototype.splice.apply(strarr, args);
+          if (delNum != 1)
+            Prism.matchGrammar(text, strarr, grammar, i, pos, true, token);
+          if (oneshot)
+            break;
+        }
+      }
+    }
+  },
+  tokenize: function(text, grammar) {
+    const strarr = [text];
+    const rest = grammar.rest;
+    if (rest) {
+      for (const token in rest) {
+        grammar[token] = rest[token];
+      }
+      delete grammar.rest;
+    }
+    Prism.matchGrammar(text, strarr, grammar, 0, 0, false);
+    return strarr;
+  },
+  hooks: {
+    all: {},
+    add: function(name, callback) {
+      const hooks = Prism.hooks.all;
+      hooks[name] = hooks[name] || [];
+      hooks[name].push(callback);
+    },
+    run: function(name, env) {
+      const callbacks = Prism.hooks.all[name];
+      if (!callbacks || !callbacks.length) {
+        return;
+      }
+      for (var i = 0, callback; callback = callbacks[i++]; ) {
+        callback(env);
+      }
+    }
+  },
+  Token
+};
+Prism.languages.clike = {
+  comment: [
+    {
+      pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
+      lookbehind: true
+    },
+    {
+      pattern: /(^|[^\\:])\/\/.*/,
+      lookbehind: true,
+      greedy: true
+    }
+  ],
+  string: {
+    pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+    greedy: true
+  },
+  "class-name": {
+    pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
+    lookbehind: true,
+    inside: {
+      punctuation: /[.\\]/
+    }
+  },
+  keyword: /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+  boolean: /\b(?:true|false)\b/,
+  function: /\w+(?=\()/,
+  number: /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
+  operator: /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
+  punctuation: /[{}[\];(),.:]/
+};
+Prism.languages.javascript = Prism.languages.extend("clike", {
+  "class-name": [
+    Prism.languages.clike["class-name"],
+    {
+      pattern: /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
+      lookbehind: true
+    }
+  ],
+  keyword: [
+    {
+      pattern: /((?:^|})\s*)(?:catch|finally)\b/,
+      lookbehind: true
+    },
+    {
+      pattern: /(^|[^.])\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+      lookbehind: true
+    }
+  ],
+  number: /\b(?:(?:0[xX](?:[\dA-Fa-f](?:_[\dA-Fa-f])?)+|0[bB](?:[01](?:_[01])?)+|0[oO](?:[0-7](?:_[0-7])?)+)n?|(?:\d(?:_\d)?)+n|NaN|Infinity)\b|(?:\b(?:\d(?:_\d)?)+\.?(?:\d(?:_\d)?)*|\B\.(?:\d(?:_\d)?)+)(?:[Ee][+-]?(?:\d(?:_\d)?)+)?/,
+  function: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+  operator: /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
+});
+Prism.languages.javascript["class-name"][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/;
+Prism.languages.insertBefore("javascript", "keyword", {
+  regex: {
+    pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyus]{0,6}(?=\s*($|[\r\n,.;})\]]))/,
+    lookbehind: true,
+    greedy: true
+  },
+  "function-variable": {
+    pattern: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,
+    alias: "function"
+  },
+  parameter: [
+    {
+      pattern: /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
+      lookbehind: true,
+      inside: Prism.languages.javascript
+    },
+    {
+      pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i,
+      inside: Prism.languages.javascript
+    },
+    {
+      pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,
+      lookbehind: true,
+      inside: Prism.languages.javascript
+    },
+    {
+      pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,
+      lookbehind: true,
+      inside: Prism.languages.javascript
+    }
+  ],
+  constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/
+});
+if (Prism.languages.markup) {
+  Prism.languages.markup.tag.addInlined("script", "javascript");
+}
+Prism.languages.js = Prism.languages.javascript;
+Prism.languages.typescript = Prism.languages.extend("javascript", {
+  keyword: /\b(?:abstract|as|async|await|break|case|catch|class|const|constructor|continue|debugger|declare|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|is|keyof|let|module|namespace|new|null|of|package|private|protected|public|readonly|return|require|set|static|super|switch|this|throw|try|type|typeof|var|void|while|with|yield)\b/,
+  builtin: /\b(?:string|Function|any|number|boolean|Array|symbol|console|Promise|unknown|never)\b/
+});
+Prism.languages.ts = Prism.languages.typescript;
+function Token(type, content, alias, matchedStr, greedy) {
+  this.type = type;
+  this.content = content;
+  this.alias = alias;
+  this.length = (matchedStr || "").length | 0;
+  this.greedy = !!greedy;
+}
+__name(Token, "Token");
+__name2(Token, "Token");
+Token.stringify = function(o, language) {
+  if (typeof o == "string") {
+    return o;
+  }
+  if (Array.isArray(o)) {
+    return o.map(function(element) {
+      return Token.stringify(element, language);
+    }).join("");
+  }
+  return getColorForSyntaxKind(o.type)(o.content);
+};
+function getColorForSyntaxKind(syntaxKind) {
+  return theme[syntaxKind] || identity;
+}
+__name(getColorForSyntaxKind, "getColorForSyntaxKind");
+__name2(getColorForSyntaxKind, "getColorForSyntaxKind");
+function highlightTS(str) {
+  return highlight(str, Prism.languages.javascript);
+}
+__name(highlightTS, "highlightTS");
+__name2(highlightTS, "highlightTS");
+function highlight(str, grammar) {
+  const tokens = Prism.tokenize(str, grammar);
+  return tokens.map((t) => Token.stringify(t)).join("");
+}
+__name(highlight, "highlight");
+__name2(highlight, "highlight");
+var import_strip_indent2 = __toModule22(require_strip_indent());
+function dedent2(str) {
+  return (0, import_strip_indent2.default)(str);
+}
+__name(dedent2, "dedent2");
+__name2(dedent2, "dedent");
+function renderN(n, max2) {
+  const wantedLetters = String(max2).length;
+  const hasLetters = String(n).length;
+  if (hasLetters >= wantedLetters) {
+    return String(n);
+  }
+  return " ".repeat(wantedLetters - hasLetters) + n;
+}
+__name(renderN, "renderN");
+__name2(renderN, "renderN");
+function getIndent(line) {
+  let spaceCount = 0;
+  for (let i = 0; i < line.length; i++) {
+    if (line.charAt(i) !== " ") {
+      return spaceCount;
+    }
+    spaceCount++;
+  }
+  return spaceCount;
+}
+__name(getIndent, "getIndent");
+__name2(getIndent, "getIndent");
+function parseStack({
+  callsite,
+  renderPathRelative,
+  originalMethod,
+  onUs,
+  showColors,
+  isValidationError
+}) {
+  const params = {
+    callsiteStr: ":",
+    prevLines: "\n",
+    functionName: `prisma.${originalMethod}()`,
+    afterLines: "",
+    indentValue: 0,
+    lastErrorHeight: 20
+  };
+  if (!callsite || typeof window !== "undefined") {
+    return params;
+  }
+  const stack = parse(callsite);
+  const trace2 = stack.find((t) => {
+    return t.file && t.file !== "<anonymous>" && !t.file.includes("@prisma") && !t.file.includes("getPrismaClient") && !t.file.startsWith("internal/") && !t.methodName.includes("new ") && !t.methodName.includes("getCallSite") && !t.methodName.includes("Proxy.") && t.methodName.split(".").length < 4;
+  });
+  if (process.env.NODE_ENV !== "production" && trace2 && trace2.file && trace2.lineNumber && trace2.column) {
+    const lineNumber = trace2.lineNumber;
+    const printedFileName = renderPathRelative ? require("path").relative(process.cwd(), trace2.file) : trace2.file;
+    const start = Math.max(0, lineNumber - 4);
+    const fs7 = require("fs");
+    const exists4 = fs7.existsSync(trace2.file);
+    if (exists4) {
+      const file2 = fs7.readFileSync(trace2.file, "utf-8");
+      const slicedFile = file2.split("\n").slice(start, lineNumber).map((line) => {
+        if (line.endsWith("\r")) {
+          return line.slice(0, -1);
+        }
+        return line;
+      }).join("\n");
+      const lines = dedent2(slicedFile).split("\n");
+      const theLine = lines[lines.length - 1];
+      if (!theLine || theLine.trim() === "") {
+        params.callsiteStr = ":";
+      } else {
+        const prismaClientRegex = /(\S+(create|createMany|updateMany|deleteMany|update|delete|findMany|findUnique)\()/;
+        const match = prismaClientRegex.exec(theLine);
+        if (!match) {
+          return params;
+        }
+        params.functionName = `${match[1]})`;
+        params.callsiteStr = ` in
+${import_chalk9.default.underline(`${printedFileName}:${trace2.lineNumber}:${trace2.column}`)}`;
+        const slicePoint = theLine.indexOf("{");
+        const linesToHighlight = lines.map((l, i, all) => !onUs && i === all.length - 1 ? l.slice(0, slicePoint > -1 ? slicePoint : l.length - 1) : l).join("\n");
+        const highlightedLines = showColors ? highlightTS(linesToHighlight).split("\n") : linesToHighlight.split("\n");
+        params.prevLines = "\n" + highlightedLines.map((l, i) => import_chalk9.default.grey(renderN(i + start + 1, lineNumber + start + 1) + " ") + import_chalk9.default.reset() + l).map((l, i, arr) => i === arr.length - 1 ? `${import_chalk9.default.red.bold("\u2192")} ${import_chalk9.default.dim(l)}` : import_chalk9.default.dim("  " + l)).join("\n");
+        if (!match && !isValidationError) {
+          params.prevLines += "\n\n";
+        }
+        params.afterLines = ")";
+        params.indentValue = String(lineNumber + start + 1).length + getIndent(theLine) + 1 + (match ? 2 : 0);
+      }
+    }
+  }
+  return params;
+}
+__name(parseStack, "parseStack");
+__name2(parseStack, "parseStack");
+var printStack = /* @__PURE__ */ __name2((args) => {
+  const { callsiteStr, prevLines, functionName, afterLines, indentValue, lastErrorHeight } = parseStack(args);
+  const introText = args.onUs ? import_chalk9.default.red(`Oops, an unknown error occured! This is ${import_chalk9.default.bold("on us")}, you did nothing wrong.
+It occured in the ${import_chalk9.default.bold(`\`${functionName}\``)} invocation${callsiteStr}`) : import_chalk9.default.red(`Invalid ${import_chalk9.default.bold(`\`${functionName}\``)} invocation${callsiteStr}`);
+  const stackStr = `
+${introText}
+${prevLines}${import_chalk9.default.reset()}`;
+  return { indent: indentValue, stack: stackStr, afterLines, lastErrorHeight };
+}, "printStack");
+var tab = 2;
+var Document = /* @__PURE__ */ __name(class {
+  constructor(type, children) {
+    this.type = type;
+    this.children = children;
+    this.printFieldError = ({ error: error2 }, missingItems, minimal) => {
+      if (error2.type === "emptySelect") {
+        const additional = minimal ? "" : ` Available options are listed in ${import_chalk10.default.greenBright.dim("green")}.`;
+        return `The ${import_chalk10.default.redBright("`select`")} statement for type ${import_chalk10.default.bold(getOutputTypeName(error2.field.outputType.type))} must not be empty.${additional}`;
+      }
+      if (error2.type === "emptyInclude") {
+        if (missingItems.length === 0) {
+          return `${import_chalk10.default.bold(getOutputTypeName(error2.field.outputType.type))} does not have any relation and therefore can't have an ${import_chalk10.default.redBright("`include`")} statement.`;
+        }
+        const additional = minimal ? "" : ` Available options are listed in ${import_chalk10.default.greenBright.dim("green")}.`;
+        return `The ${import_chalk10.default.redBright("`include`")} statement for type ${import_chalk10.default.bold(getOutputTypeName(error2.field.outputType.type))} must not be empty.${additional}`;
+      }
+      if (error2.type === "noTrueSelect") {
+        return `The ${import_chalk10.default.redBright("`select`")} statement for type ${import_chalk10.default.bold(getOutputTypeName(error2.field.outputType.type))} needs ${import_chalk10.default.bold("at least one truthy value")}.`;
+      }
+      if (error2.type === "includeAndSelect") {
+        return `Please ${import_chalk10.default.bold("either")} use ${import_chalk10.default.greenBright("`include`")} or ${import_chalk10.default.greenBright("`select`")}, but ${import_chalk10.default.redBright("not both")} at the same time.`;
+      }
+      if (error2.type === "invalidFieldName") {
+        const statement = error2.isInclude ? "include" : "select";
+        const wording = error2.isIncludeScalar ? "Invalid scalar" : "Unknown";
+        const additional = minimal ? "" : error2.isInclude && missingItems.length === 0 ? `
+This model has no relations, so you can't use ${import_chalk10.default.redBright("include")} with it.` : ` Available options are listed in ${import_chalk10.default.greenBright.dim("green")}.`;
+        let str = `${wording} field ${import_chalk10.default.redBright(`\`${error2.providedName}\``)} for ${import_chalk10.default.bold(statement)} statement on model ${import_chalk10.default.bold.white(error2.modelName)}.${additional}`;
+        if (error2.didYouMean) {
+          str += ` Did you mean ${import_chalk10.default.greenBright(`\`${error2.didYouMean}\``)}?`;
+        }
+        if (error2.isIncludeScalar) {
+          str += `
+Note, that ${import_chalk10.default.bold("include")} statements only accept relation fields.`;
+        }
+        return str;
+      }
+      if (error2.type === "invalidFieldType") {
+        const str = `Invalid value ${import_chalk10.default.redBright(`${stringifyObject_default(error2.providedValue)}`)} of type ${import_chalk10.default.redBright(getGraphQLType(error2.providedValue, void 0))} for field ${import_chalk10.default.bold(`${error2.fieldName}`)} on model ${import_chalk10.default.bold.white(error2.modelName)}. Expected either ${import_chalk10.default.greenBright("true")} or ${import_chalk10.default.greenBright("false")}.`;
+        return str;
+      }
+      return void 0;
+    };
+    this.printArgError = ({ error: error2, path: path6, id }, hasMissingItems, minimal) => {
+      if (error2.type === "invalidName") {
+        let str = `Unknown arg ${import_chalk10.default.redBright(`\`${error2.providedName}\``)} in ${import_chalk10.default.bold(path6.join("."))} for type ${import_chalk10.default.bold(error2.outputType ? error2.outputType.name : getInputTypeName(error2.originalType))}.`;
+        if (error2.didYouMeanField) {
+          str += `
+\u2192 Did you forget to wrap it with \`${import_chalk10.default.greenBright("select")}\`? ${import_chalk10.default.dim("e.g. " + import_chalk10.default.greenBright(`{ select: { ${error2.providedName}: ${error2.providedValue} } }`))}`;
+        } else if (error2.didYouMeanArg) {
+          str += ` Did you mean \`${import_chalk10.default.greenBright(error2.didYouMeanArg)}\`?`;
+          if (!hasMissingItems && !minimal) {
+            str += ` ${import_chalk10.default.dim("Available args:")}
+` + stringifyInputType(error2.originalType, true);
+          }
+        } else {
+          if (error2.originalType.fields.length === 0) {
+            str += ` The field ${import_chalk10.default.bold(error2.originalType.name)} has no arguments.`;
+          } else if (!hasMissingItems && !minimal) {
+            str += ` Available args:
+
+` + stringifyInputType(error2.originalType, true);
+          }
+        }
+        return str;
+      }
+      if (error2.type === "invalidType") {
+        let valueStr = stringifyObject_default(error2.providedValue, { indent: "  " });
+        const multilineValue = valueStr.split("\n").length > 1;
+        if (multilineValue) {
+          valueStr = `
+${valueStr}
+`;
+        }
+        if (error2.requiredType.bestFittingType.location === "enumTypes") {
+          return `Argument ${import_chalk10.default.bold(error2.argName)}: Provided value ${import_chalk10.default.redBright(valueStr)}${multilineValue ? "" : " "}of type ${import_chalk10.default.redBright(getGraphQLType(error2.providedValue))} on ${import_chalk10.default.bold(`prisma.${this.children[0].name}`)} is not a ${import_chalk10.default.greenBright(wrapWithList(stringifyGraphQLType(error2.requiredType.bestFittingType.location), error2.requiredType.bestFittingType.isList))}.
+\u2192 Possible values: ${error2.requiredType.bestFittingType.type.values.map((v) => import_chalk10.default.greenBright(`${stringifyGraphQLType(error2.requiredType.bestFittingType.type)}.${v}`)).join(", ")}`;
+        }
+        let typeStr = ".";
+        if (isInputArgType(error2.requiredType.bestFittingType.type)) {
+          typeStr = ":\n" + stringifyInputType(error2.requiredType.bestFittingType.type);
+        }
+        let expected = `${error2.requiredType.inputType.map((t) => import_chalk10.default.greenBright(wrapWithList(stringifyGraphQLType(t.type), error2.requiredType.bestFittingType.isList))).join(" or ")}${typeStr}`;
+        const inputType = error2.requiredType.inputType.length === 2 && error2.requiredType.inputType.find((t) => isInputArgType(t.type)) || null;
+        if (inputType) {
+          expected += `
+` + stringifyInputType(inputType.type, true);
+        }
+        return `Argument ${import_chalk10.default.bold(error2.argName)}: Got invalid value ${import_chalk10.default.redBright(valueStr)}${multilineValue ? "" : " "}on ${import_chalk10.default.bold(`prisma.${this.children[0].name}`)}. Provided ${import_chalk10.default.redBright(getGraphQLType(error2.providedValue))}, expected ${expected}`;
+      }
+      if (error2.type === "invalidNullArg") {
+        const forStr = path6.length === 1 && path6[0] === error2.name ? "" : ` for ${import_chalk10.default.bold(`${path6.join(".")}`)}`;
+        const undefinedTip = ` Please use ${import_chalk10.default.bold.greenBright("undefined")} instead.`;
+        return `Argument ${import_chalk10.default.greenBright(error2.name)}${forStr} must not be ${import_chalk10.default.bold("null")}.${undefinedTip}`;
+      }
+      if (error2.type === "missingArg") {
+        const forStr = path6.length === 1 && path6[0] === error2.missingName ? "" : ` for ${import_chalk10.default.bold(`${path6.join(".")}`)}`;
+        return `Argument ${import_chalk10.default.greenBright(error2.missingName)}${forStr} is missing.`;
+      }
+      if (error2.type === "atLeastOne") {
+        const additional = minimal ? "" : ` Available args are listed in ${import_chalk10.default.dim.green("green")}.`;
+        return `Argument ${import_chalk10.default.bold(path6.join("."))} of type ${import_chalk10.default.bold(error2.inputType.name)} needs ${import_chalk10.default.greenBright("at least one")} argument.${additional}`;
+      }
+      if (error2.type === "atMostOne") {
+        const additional = minimal ? "" : ` Please choose one. ${import_chalk10.default.dim("Available args:")} 
+${stringifyInputType(error2.inputType, true)}`;
+        return `Argument ${import_chalk10.default.bold(path6.join("."))} of type ${import_chalk10.default.bold(error2.inputType.name)} needs ${import_chalk10.default.greenBright("exactly one")} argument, but you provided ${error2.providedKeys.map((key) => import_chalk10.default.redBright(key)).join(" and ")}.${additional}`;
+      }
+      return void 0;
+    };
+    this.type = type;
+    this.children = children;
+  }
+  get [Symbol.toStringTag]() {
+    return "Document";
+  }
+  toString() {
+    return `${this.type} {
+${(0, import_indent_string3.default)(this.children.map(String).join("\n"), tab)}
+}`;
+  }
+  validate(select, isTopLevelQuery = false, originalMethod, errorFormat, validationCallsite) {
+    var _a2;
+    if (!select) {
+      select = {};
+    }
+    const invalidChildren = this.children.filter((child) => child.hasInvalidChild || child.hasInvalidArg);
+    if (invalidChildren.length === 0) {
+      return;
+    }
+    const fieldErrors = [];
+    const argErrors = [];
+    const prefix = select && select.select ? "select" : select.include ? "include" : void 0;
+    for (const child of invalidChildren) {
+      const errors2 = child.collectErrors(prefix);
+      fieldErrors.push(...errors2.fieldErrors.map((e) => ({
+        ...e,
+        path: isTopLevelQuery ? e.path : e.path.slice(1)
+      })));
+      argErrors.push(...errors2.argErrors.map((e) => ({
+        ...e,
+        path: isTopLevelQuery ? e.path : e.path.slice(1)
+      })));
+    }
+    const topLevelQueryName = this.children[0].name;
+    const queryName = isTopLevelQuery ? this.type : topLevelQueryName;
+    const keyPaths = [];
+    const valuePaths = [];
+    const missingItems = [];
+    for (const fieldError of fieldErrors) {
+      const path6 = this.normalizePath(fieldError.path, select).join(".");
+      if (fieldError.error.type === "invalidFieldName") {
+        keyPaths.push(path6);
+        const fieldType = fieldError.error.outputType;
+        const { isInclude } = fieldError.error;
+        fieldType.fields.filter((field) => isInclude ? field.outputType.location === "outputObjectTypes" : true).forEach((field) => {
+          const splittedPath = path6.split(".");
+          missingItems.push({
+            path: `${splittedPath.slice(0, splittedPath.length - 1).join(".")}.${field.name}`,
+            type: "true",
+            isRequired: false
+          });
+        });
+      } else if (fieldError.error.type === "includeAndSelect") {
+        keyPaths.push("select");
+        keyPaths.push("include");
+      } else {
+        valuePaths.push(path6);
+      }
+      if (fieldError.error.type === "emptySelect" || fieldError.error.type === "noTrueSelect" || fieldError.error.type === "emptyInclude") {
+        const selectPathArray = this.normalizePath(fieldError.path, select);
+        const selectPath = selectPathArray.slice(0, selectPathArray.length - 1).join(".");
+        const fieldType = fieldError.error.field.outputType.type;
+        (_a2 = fieldType.fields) == null ? void 0 : _a2.filter((field) => fieldError.error.type === "emptyInclude" ? field.outputType.location === "outputObjectTypes" : true).forEach((field) => {
+          missingItems.push({
+            path: `${selectPath}.${field.name}`,
+            type: "true",
+            isRequired: false
+          });
+        });
+      }
+    }
+    for (const argError of argErrors) {
+      const path6 = this.normalizePath(argError.path, select).join(".");
+      if (argError.error.type === "invalidName") {
+        keyPaths.push(path6);
+      } else if (argError.error.type !== "missingArg" && argError.error.type !== "atLeastOne") {
+        valuePaths.push(path6);
+      } else if (argError.error.type === "missingArg") {
+        const type = argError.error.missingArg.inputTypes.length === 1 ? argError.error.missingArg.inputTypes[0].type : argError.error.missingArg.inputTypes.map((t) => {
+          const inputTypeName = getInputTypeName(t.type);
+          if (inputTypeName === "Null") {
+            return "null";
+          }
+          if (t.isList) {
+            return inputTypeName + "[]";
+          }
+          return inputTypeName;
+        }).join(" | ");
+        missingItems.push({
+          path: path6,
+          type: inputTypeToJson(type, true, path6.split("where.").length === 2),
+          isRequired: argError.error.missingArg.isRequired
+        });
+      }
+    }
+    const renderErrorStr = /* @__PURE__ */ __name2((callsite) => {
+      const hasRequiredMissingArgsErrors = argErrors.some((e) => e.error.type === "missingArg" && e.error.missingArg.isRequired);
+      const hasOptionalMissingArgsErrors = Boolean(argErrors.find((e) => e.error.type === "missingArg" && !e.error.missingArg.isRequired));
+      const hasMissingArgsErrors = hasOptionalMissingArgsErrors || hasRequiredMissingArgsErrors;
+      let missingArgsLegend = "";
+      if (hasRequiredMissingArgsErrors) {
+        missingArgsLegend += `
+${import_chalk10.default.dim("Note: Lines with ")}${import_chalk10.default.reset.greenBright("+")} ${import_chalk10.default.dim("are required")}`;
+      }
+      if (hasOptionalMissingArgsErrors) {
+        if (missingArgsLegend.length === 0) {
+          missingArgsLegend = "\n";
+        }
+        if (hasRequiredMissingArgsErrors) {
+          missingArgsLegend += import_chalk10.default.dim(`, lines with ${import_chalk10.default.green("?")} are optional`);
+        } else {
+          missingArgsLegend += import_chalk10.default.dim(`Note: Lines with ${import_chalk10.default.green("?")} are optional`);
+        }
+        missingArgsLegend += import_chalk10.default.dim(".");
+      }
+      const relevantArgErrors = argErrors.filter((e) => e.error.type !== "missingArg" || e.error.missingArg.isRequired);
+      let errorMessages = relevantArgErrors.map((e) => this.printArgError(e, hasMissingArgsErrors, errorFormat === "minimal")).join("\n");
+      errorMessages += `
+${fieldErrors.map((e) => this.printFieldError(e, missingItems, errorFormat === "minimal")).join("\n")}`;
+      if (errorFormat === "minimal") {
+        return (0, import_strip_ansi3.default)(errorMessages);
+      }
+      const {
+        stack,
+        indent: indentValue,
+        afterLines
+      } = printStack({
+        callsite,
+        originalMethod: originalMethod || queryName,
+        showColors: errorFormat && errorFormat === "pretty",
+        isValidationError: true
+      });
+      let printJsonArgs = {
+        ast: isTopLevelQuery ? { [topLevelQueryName]: select } : select,
+        keyPaths,
+        valuePaths,
+        missingItems
+      };
+      if (originalMethod == null ? void 0 : originalMethod.endsWith("aggregate")) {
+        printJsonArgs = transformAggregatePrintJsonArgs(printJsonArgs);
+      }
+      const errorStr = `${stack}${(0, import_indent_string3.default)(printJsonWithErrors(printJsonArgs), indentValue).slice(indentValue)}${import_chalk10.default.dim(afterLines)}
+
+${errorMessages}${missingArgsLegend}
+`;
+      if (process.env.NO_COLOR || errorFormat === "colorless") {
+        return (0, import_strip_ansi3.default)(errorStr);
+      }
+      return errorStr;
+    }, "renderErrorStr");
+    const error2 = new PrismaClientValidationError(renderErrorStr(validationCallsite));
+    if (process.env.NODE_ENV !== "production") {
+      Object.defineProperty(error2, "render", {
+        get: () => renderErrorStr,
+        enumerable: false
+      });
+    }
+    throw error2;
+  }
+  normalizePath(inputPath, select) {
+    const path6 = inputPath.slice();
+    const newPath = [];
+    let key;
+    let pointer = select;
+    while ((key = path6.shift()) !== void 0) {
+      if (!Array.isArray(pointer) && key === 0) {
+        continue;
+      }
+      if (key === "select") {
+        if (!pointer[key]) {
+          pointer = pointer.include;
+        } else {
+          pointer = pointer[key];
+        }
+      } else if (pointer && pointer[key]) {
+        pointer = pointer[key];
+      }
+      newPath.push(key);
+    }
+    return newPath;
+  }
+}, "Document");
+__name2(Document, "Document");
+var PrismaClientValidationError = /* @__PURE__ */ __name(class extends Error {
+  get [Symbol.toStringTag]() {
+    return "PrismaClientValidationError";
+  }
+}, "PrismaClientValidationError");
+__name2(PrismaClientValidationError, "PrismaClientValidationError");
+var PrismaClientConstructorValidationError = /* @__PURE__ */ __name(class extends Error {
+  constructor(message) {
+    super(message + `
+Read more at https://pris.ly/d/client-constructor`);
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientConstructorValidationError";
+  }
+}, "PrismaClientConstructorValidationError");
+__name2(PrismaClientConstructorValidationError, "PrismaClientConstructorValidationError");
+var Field = /* @__PURE__ */ __name(class {
+  constructor({ name, args, children, error: error2, schemaField }) {
+    this.name = name;
+    this.args = args;
+    this.children = children;
+    this.error = error2;
+    this.schemaField = schemaField;
+    this.hasInvalidChild = children ? children.some((child) => Boolean(child.error || child.hasInvalidArg || child.hasInvalidChild)) : false;
+    this.hasInvalidArg = args ? args.hasInvalidArg : false;
+  }
+  get [Symbol.toStringTag]() {
+    return "Field";
+  }
+  toString() {
+    let str = this.name;
+    if (this.error) {
+      return str + " # INVALID_FIELD";
+    }
+    if (this.args && this.args.args && this.args.args.length > 0) {
+      if (this.args.args.length === 1) {
+        str += `(${this.args.toString()})`;
+      } else {
+        str += `(
+${(0, import_indent_string3.default)(this.args.toString(), tab)}
+)`;
+      }
+    }
+    if (this.children) {
+      str += ` {
+${(0, import_indent_string3.default)(this.children.map(String).join("\n"), tab)}
+}`;
+    }
+    return str;
+  }
+  collectErrors(prefix = "select") {
+    const fieldErrors = [];
+    const argErrors = [];
+    if (this.error) {
+      fieldErrors.push({
+        path: [this.name],
+        error: this.error
+      });
+    }
+    if (this.children) {
+      for (const child of this.children) {
+        const errors2 = child.collectErrors(prefix);
+        fieldErrors.push(...errors2.fieldErrors.map((e) => ({
+          ...e,
+          path: [this.name, prefix, ...e.path]
+        })));
+        argErrors.push(...errors2.argErrors.map((e) => ({
+          ...e,
+          path: [this.name, prefix, ...e.path]
+        })));
+      }
+    }
+    if (this.args) {
+      argErrors.push(...this.args.collectErrors().map((e) => ({ ...e, path: [this.name, ...e.path] })));
+    }
+    return {
+      fieldErrors,
+      argErrors
+    };
+  }
+}, "Field");
+__name2(Field, "Field");
+var Args = /* @__PURE__ */ __name(class {
+  constructor(args = []) {
+    this.args = args;
+    this.hasInvalidArg = args ? args.some((arg2) => Boolean(arg2.hasError)) : false;
+  }
+  get [Symbol.toStringTag]() {
+    return "Args";
+  }
+  toString() {
+    if (this.args.length === 0) {
+      return "";
+    }
+    return `${this.args.map((arg2) => arg2.toString()).filter((a) => a).join("\n")}`;
+  }
+  collectErrors() {
+    if (!this.hasInvalidArg) {
+      return [];
+    }
+    return flatMap(this.args, (arg2) => arg2.collectErrors());
+  }
+}, "Args");
+__name2(Args, "Args");
+function stringify(value, inputType) {
+  if (Buffer.isBuffer(value)) {
+    return JSON.stringify(value.toString("base64"));
+  }
+  if (Object.prototype.toString.call(value) === "[object BigInt]") {
+    return value.toString();
+  }
+  if (typeof (inputType == null ? void 0 : inputType.type) === "string" && inputType.type === "Json") {
+    if (value === null) {
+      return "null";
+    }
+    if (value && value.values && value.__prismaRawParamaters__) {
+      return JSON.stringify(value.values);
+    }
+    if ((inputType == null ? void 0 : inputType.isList) && Array.isArray(value)) {
+      return JSON.stringify(value.map((o) => JSON.stringify(o)));
+    }
+    return JSON.stringify(JSON.stringify(value));
+  }
+  if (value === void 0) {
+    return null;
+  }
+  if (value === null) {
+    return "null";
+  }
+  if (decimal_default.isDecimal(value)) {
+    return value.toString();
+  }
+  if ((inputType == null ? void 0 : inputType.location) === "enumTypes" && typeof value === "string") {
+    if (Array.isArray(value)) {
+      return `[${value.join(", ")}]`;
+    }
+    return value;
+  }
+  return JSON.stringify(value, null, 2);
+}
+__name(stringify, "stringify");
+__name2(stringify, "stringify");
+var Arg2 = /* @__PURE__ */ __name(class {
+  constructor({ key, value, isEnum = false, error: error2, schemaArg, inputType }) {
+    this.inputType = inputType;
+    this.key = key;
+    this.value = value;
+    this.isEnum = isEnum;
+    this.error = error2;
+    this.schemaArg = schemaArg;
+    this.isNullable = (schemaArg == null ? void 0 : schemaArg.inputTypes.reduce((isNullable) => isNullable && schemaArg.isNullable, true)) || false;
+    this.hasError = Boolean(error2) || (value instanceof Args ? value.hasInvalidArg : false) || Array.isArray(value) && value.some((v) => v instanceof Args ? v.hasInvalidArg : false);
+  }
+  get [Symbol.toStringTag]() {
+    return "Arg";
+  }
+  _toString(value, key) {
+    var _a2;
+    if (typeof value === "undefined") {
+      return void 0;
+    }
+    if (value instanceof Args) {
+      return `${key}: {
+${(0, import_indent_string3.default)(value.toString(), 2)}
+}`;
+    }
+    if (Array.isArray(value)) {
+      if (((_a2 = this.inputType) == null ? void 0 : _a2.type) === "Json") {
+        return `${key}: ${stringify(value, this.inputType)}`;
+      }
+      const isScalar = !value.some((v) => typeof v === "object");
+      return `${key}: [${isScalar ? "" : "\n"}${(0, import_indent_string3.default)(value.map((nestedValue) => {
+        if (nestedValue instanceof Args) {
+          return `{
+${(0, import_indent_string3.default)(nestedValue.toString(), tab)}
+}`;
+        }
+        return stringify(nestedValue, this.inputType);
+      }).join(`,${isScalar ? " " : "\n"}`), isScalar ? 0 : tab)}${isScalar ? "" : "\n"}]`;
+    }
+    return `${key}: ${stringify(value, this.inputType)}`;
+  }
+  toString() {
+    return this._toString(this.value, this.key);
+  }
+  collectErrors() {
+    var _a2;
+    if (!this.hasError) {
+      return [];
+    }
+    const errors2 = [];
+    if (this.error) {
+      const id = typeof ((_a2 = this.inputType) == null ? void 0 : _a2.type) === "object" ? `${this.inputType.type.name}${this.inputType.isList ? "[]" : ""}` : void 0;
+      errors2.push({
+        error: this.error,
+        path: [this.key],
+        id
+      });
+    }
+    if (Array.isArray(this.value)) {
+      errors2.push(...flatMap(this.value, (val, index) => {
+        if (!(val == null ? void 0 : val.collectErrors)) {
+          return [];
+        }
+        return val.collectErrors().map((e) => {
+          return { ...e, path: [this.key, index, ...e.path] };
+        });
+      }));
+    }
+    if (this.value instanceof Args) {
+      errors2.push(...this.value.collectErrors().map((e) => ({ ...e, path: [this.key, ...e.path] })));
+    }
+    return errors2;
+  }
+}, "Arg2");
+__name2(Arg2, "Arg");
+function makeDocument({ dmmf, rootTypeName, rootField, select }) {
+  if (!select) {
+    select = {};
+  }
+  const rootType = rootTypeName === "query" ? dmmf.queryType : dmmf.mutationType;
+  const fakeRootField = {
+    args: [],
+    outputType: {
+      isList: false,
+      type: rootType,
+      location: "outputObjectTypes"
+    },
+    name: rootTypeName
+  };
+  const children = selectionToFields(dmmf, { [rootField]: select }, fakeRootField, [rootTypeName]);
+  return new Document(rootTypeName, children);
+}
+__name(makeDocument, "makeDocument");
+__name2(makeDocument, "makeDocument");
+function transformDocument(document2) {
+  return document2;
+}
+__name(transformDocument, "transformDocument");
+__name2(transformDocument, "transformDocument");
+function selectionToFields(dmmf, selection, schemaField, path6) {
+  const outputType = schemaField.outputType.type;
+  return Object.entries(selection).reduce((acc, [name, value]) => {
+    const field = outputType.fieldMap ? outputType.fieldMap[name] : outputType.fields.find((f) => f.name === name);
+    if (!field) {
+      acc.push(new Field({
+        name,
+        children: [],
+        error: {
+          type: "invalidFieldName",
+          modelName: outputType.name,
+          providedName: name,
+          didYouMean: getSuggestion(name, outputType.fields.map((f) => f.name)),
+          outputType
+        }
+      }));
+      return acc;
+    }
+    if (typeof value !== "boolean" && field.outputType.location === "scalar" && field.name !== "executeRaw" && field.name !== "queryRaw" && field.name !== "runCommandRaw" && outputType.name !== "Query" && !name.startsWith("aggregate") && field.name !== "count") {
+      acc.push(new Field({
+        name,
+        children: [],
+        error: {
+          type: "invalidFieldType",
+          modelName: outputType.name,
+          fieldName: name,
+          providedValue: value
+        }
+      }));
+      return acc;
+    }
+    if (value === false) {
+      return acc;
+    }
+    const transformedField = {
+      name: field.name,
+      fields: field.args,
+      constraints: {
+        minNumFields: null,
+        maxNumFields: null
+      }
+    };
+    const argsWithoutIncludeAndSelect = typeof value === "object" ? omit2(value, ["include", "select"]) : void 0;
+    const args = argsWithoutIncludeAndSelect ? objectToArgs(argsWithoutIncludeAndSelect, transformedField, [], typeof field === "string" ? void 0 : field.outputType.type) : void 0;
+    const isRelation = field.outputType.location === "outputObjectTypes";
+    if (value) {
+      if (value.select && value.include) {
+        acc.push(new Field({
+          name,
+          children: [
+            new Field({
+              name: "include",
+              args: new Args(),
+              error: {
+                type: "includeAndSelect",
+                field
+              }
+            })
+          ]
+        }));
+      } else if (value.include) {
+        const keys2 = Object.keys(value.include);
+        if (keys2.length === 0) {
+          acc.push(new Field({
+            name,
+            children: [
+              new Field({
+                name: "include",
+                args: new Args(),
+                error: {
+                  type: "emptyInclude",
+                  field
+                }
+              })
+            ]
+          }));
+          return acc;
+        }
+        if (field.outputType.location === "outputObjectTypes") {
+          const fieldOutputType = field.outputType.type;
+          const allowedKeys = fieldOutputType.fields.filter((f) => f.outputType.location === "outputObjectTypes").map((f) => f.name);
+          const invalidKeys = keys2.filter((key) => !allowedKeys.includes(key));
+          if (invalidKeys.length > 0) {
+            acc.push(...invalidKeys.map((invalidKey) => new Field({
+              name: invalidKey,
+              children: [
+                new Field({
+                  name: invalidKey,
+                  args: new Args(),
+                  error: {
+                    type: "invalidFieldName",
+                    modelName: fieldOutputType.name,
+                    outputType: fieldOutputType,
+                    providedName: invalidKey,
+                    didYouMean: getSuggestion(invalidKey, allowedKeys) || void 0,
+                    isInclude: true,
+                    isIncludeScalar: fieldOutputType.fields.some((f) => f.name === invalidKey)
+                  }
+                })
+              ]
+            })));
+            return acc;
+          }
+        }
+      } else if (value.select) {
+        const values = Object.values(value.select);
+        if (values.length === 0) {
+          acc.push(new Field({
+            name,
+            children: [
+              new Field({
+                name: "select",
+                args: new Args(),
+                error: {
+                  type: "emptySelect",
+                  field
+                }
+              })
+            ]
+          }));
+          return acc;
+        }
+        const truthyValues = values.filter((v) => v);
+        if (truthyValues.length === 0) {
+          acc.push(new Field({
+            name,
+            children: [
+              new Field({
+                name: "select",
+                args: new Args(),
+                error: {
+                  type: "noTrueSelect",
+                  field
+                }
+              })
+            ]
+          }));
+          return acc;
+        }
+      }
+    }
+    const defaultSelection = isRelation ? getDefaultSelection(dmmf, field.outputType.type) : null;
+    let select = defaultSelection;
+    if (value) {
+      if (value.select) {
+        select = value.select;
+      } else if (value.include) {
+        select = deepExtend(defaultSelection, value.include);
+      } else if (value.by && Array.isArray(value.by) && field.outputType.namespace === "prisma" && field.outputType.location === "outputObjectTypes" && isGroupByOutputName(field.outputType.type.name)) {
+        select = byToSelect(value.by);
+      }
+    }
+    const children = select !== false && isRelation ? selectionToFields(dmmf, select, field, [...path6, name]) : void 0;
+    acc.push(new Field({ name, args, children, schemaField: field }));
+    return acc;
+  }, []);
+}
+__name(selectionToFields, "selectionToFields");
+__name2(selectionToFields, "selectionToFields");
+function byToSelect(by) {
+  const obj = Object.create(null);
+  for (const b of by) {
+    obj[b] = true;
+  }
+  return obj;
+}
+__name(byToSelect, "byToSelect");
+__name2(byToSelect, "byToSelect");
+function getDefaultSelection(dmmf, outputType) {
+  const acc = Object.create(null);
+  for (const f of outputType.fields) {
+    if (dmmf.typeMap[f.outputType.type.name] !== void 0) {
+      acc[f.name] = true;
+    }
+    if (f.outputType.location === "scalar" || f.outputType.location === "enumTypes") {
+      acc[f.name] = true;
+    }
+  }
+  return acc;
+}
+__name(getDefaultSelection, "getDefaultSelection");
+__name2(getDefaultSelection, "getDefaultSelection");
+function getInvalidTypeArg(key, value, arg2, bestFittingType) {
+  const arrg = new Arg2({
+    key,
+    value,
+    isEnum: bestFittingType.location === "enumTypes",
+    inputType: bestFittingType,
+    error: {
+      type: "invalidType",
+      providedValue: value,
+      argName: key,
+      requiredType: {
+        inputType: arg2.inputTypes,
+        bestFittingType
+      }
+    }
+  });
+  return arrg;
+}
+__name(getInvalidTypeArg, "getInvalidTypeArg");
+__name2(getInvalidTypeArg, "getInvalidTypeArg");
+function hasCorrectScalarType(value, arg2, inputType) {
+  const { type, isList } = inputType;
+  const expectedType = wrapWithList(stringifyGraphQLType(type), isList);
+  const graphQLType = getGraphQLType(value, type);
+  if (graphQLType === expectedType) {
+    return true;
+  }
+  if (isList && graphQLType === "List<>") {
+    return true;
+  }
+  if (expectedType === "Json") {
+    return true;
+  }
+  if (graphQLType === "Int" && expectedType === "BigInt") {
+    return true;
+  }
+  if (graphQLType === "List<Int>" && expectedType === "List<BigInt>") {
+    return true;
+  }
+  if (graphQLType === "List<BigInt | Int>" && expectedType === "List<BigInt>") {
+    return true;
+  }
+  if (graphQLType === "List<Int | BigInt>" && expectedType === "List<BigInt>") {
+    return true;
+  }
+  if ((graphQLType === "Int" || graphQLType === "Float") && expectedType === "Decimal") {
+    return true;
+  }
+  if ((graphQLType === "List<Int>" || graphQLType === "List<Float>") && expectedType === "List<Decimal>") {
+    return true;
+  }
+  if (graphQLType === "DateTime" && expectedType === "String") {
+    return true;
+  }
+  if (graphQLType === "List<DateTime>" && expectedType === "List<String>") {
+    return true;
+  }
+  if (graphQLType === "UUID" && expectedType === "String") {
+    return true;
+  }
+  if (graphQLType === "List<UUID>" && expectedType === "List<String>") {
+    return true;
+  }
+  if (graphQLType === "String" && expectedType === "ID") {
+    return true;
+  }
+  if (graphQLType === "List<String>" && expectedType === "List<ID>") {
+    return true;
+  }
+  if (graphQLType === "List<String>" && expectedType === "List<Json>") {
+    return true;
+  }
+  if (expectedType === "List<String>" && (graphQLType === "List<String | UUID>" || graphQLType === "List<UUID | String>")) {
+    return true;
+  }
+  if (graphQLType === "Int" && expectedType === "Float") {
+    return true;
+  }
+  if (graphQLType === "List<Int>" && expectedType === "List<Float>") {
+    return true;
+  }
+  if (graphQLType === "Int" && expectedType === "Long") {
+    return true;
+  }
+  if (graphQLType === "List<Int>" && expectedType === "List<Long>") {
+    return true;
+  }
+  if (graphQLType === "String" && expectedType === "Decimal" && /^\-?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i.test(value)) {
+    return true;
+  }
+  if (value === null) {
+    return true;
+  }
+  return false;
+}
+__name(hasCorrectScalarType, "hasCorrectScalarType");
+__name2(hasCorrectScalarType, "hasCorrectScalarType");
+var cleanObject = /* @__PURE__ */ __name2((obj) => filterObject(obj, (k, v) => v !== void 0), "cleanObject");
+function valueToArg(key, value, arg2) {
+  let maybeArg = null;
+  const argsWithErrors = [];
+  for (const inputType of arg2.inputTypes) {
+    maybeArg = tryInferArgs(key, value, arg2, inputType);
+    if ((maybeArg == null ? void 0 : maybeArg.collectErrors().length) === 0) {
+      return maybeArg;
+    }
+    if (maybeArg && (maybeArg == null ? void 0 : maybeArg.collectErrors())) {
+      const argErrors = maybeArg == null ? void 0 : maybeArg.collectErrors();
+      if (argErrors && argErrors.length > 0) {
+        argsWithErrors.push({ arg: maybeArg, errors: argErrors });
+      }
+    }
+  }
+  if ((maybeArg == null ? void 0 : maybeArg.hasError) && argsWithErrors.length > 0) {
+    const argsWithScores = argsWithErrors.map(({ arg: arg3, errors: errors2 }) => {
+      const errorScores = errors2.map((e) => {
+        let score = 1;
+        if (e.error.type === "invalidType") {
+          score = 2 * Math.exp(getDepth(e.error.providedValue)) + 1;
+        }
+        score += Math.log(e.path.length);
+        if (e.error.type === "missingArg") {
+          if (arg3.inputType && isInputArgType(arg3.inputType.type) && arg3.inputType.type.name.includes("Unchecked")) {
+            score *= 2;
+          }
+        }
+        if (e.error.type === "invalidName") {
+          if (isInputArgType(e.error.originalType)) {
+            if (e.error.originalType.name.includes("Unchecked")) {
+              score *= 2;
+            }
+          }
+        }
+        return score;
+      });
+      return {
+        score: errors2.length + sum2(errorScores),
+        arg: arg3,
+        errors: errors2
+      };
+    });
+    argsWithScores.sort((a, b) => a.score < b.score ? -1 : 1);
+    return argsWithScores[0].arg;
+  }
+  return maybeArg;
+}
+__name(valueToArg, "valueToArg");
+__name2(valueToArg, "valueToArg");
+function getDepth(object) {
+  let level = 1;
+  if (!object || typeof object !== "object") {
+    return level;
+  }
+  for (const key in object) {
+    if (!Object.prototype.hasOwnProperty.call(object, key)) {
+      continue;
+    }
+    if (typeof object[key] === "object") {
+      const depth = getDepth(object[key]) + 1;
+      level = Math.max(depth, level);
+    }
+  }
+  return level;
+}
+__name(getDepth, "getDepth");
+__name2(getDepth, "getDepth");
+function sum2(n) {
+  return n.reduce((acc, curr) => acc + curr, 0);
+}
+__name(sum2, "sum2");
+__name2(sum2, "sum");
+function tryInferArgs(key, value, arg2, inputType) {
+  var _a2, _b2, _c, _d;
+  if (typeof value === "undefined") {
+    if (!arg2.isRequired) {
+      return null;
+    }
+    return new Arg2({
+      key,
+      value,
+      isEnum: inputType.location === "enumTypes",
+      inputType,
+      error: {
+        type: "missingArg",
+        missingName: key,
+        missingArg: arg2,
+        atLeastOne: false,
+        atMostOne: false
+      }
+    });
+  }
+  const { isNullable, isRequired } = arg2;
+  if (value === null && !isNullable && !isRequired) {
+    const isAtLeastOne = isInputArgType(inputType.type) ? inputType.type.constraints.minNumFields !== null && inputType.type.constraints.minNumFields > 0 : false;
+    if (!isAtLeastOne) {
+      return new Arg2({
+        key,
+        value,
+        isEnum: inputType.location === "enumTypes",
+        inputType,
+        error: {
+          type: "invalidNullArg",
+          name: key,
+          invalidType: arg2.inputTypes,
+          atLeastOne: false,
+          atMostOne: false
+        }
+      });
+    }
+  }
+  if (!inputType.isList) {
+    if (isInputArgType(inputType.type)) {
+      if (typeof value !== "object" || Array.isArray(value) || inputType.location === "inputObjectTypes" && !isObject(value)) {
+        return getInvalidTypeArg(key, value, arg2, inputType);
+      } else {
+        const val = cleanObject(value);
+        let error2;
+        const keys2 = Object.keys(val || {});
+        const numKeys = keys2.length;
+        if (numKeys === 0 && typeof inputType.type.constraints.minNumFields === "number" && inputType.type.constraints.minNumFields > 0) {
+          error2 = {
+            type: "atLeastOne",
+            key,
+            inputType: inputType.type
+          };
+        } else if (numKeys > 1 && typeof inputType.type.constraints.maxNumFields === "number" && inputType.type.constraints.maxNumFields < 2) {
+          error2 = {
+            type: "atMostOne",
+            key,
+            inputType: inputType.type,
+            providedKeys: keys2
+          };
+        }
+        return new Arg2({
+          key,
+          value: val === null ? null : objectToArgs(val, inputType.type, arg2.inputTypes),
+          isEnum: inputType.location === "enumTypes",
+          error: error2,
+          inputType,
+          schemaArg: arg2
+        });
+      }
+    } else {
+      return scalarToArg(key, value, arg2, inputType);
+    }
+  }
+  if (!Array.isArray(value) && inputType.isList) {
+    if (key !== "updateMany") {
+      value = [value];
+    }
+  }
+  if (inputType.location === "enumTypes" || inputType.location === "scalar") {
+    return scalarToArg(key, value, arg2, inputType);
+  }
+  const argInputType = inputType.type;
+  const hasAtLeastOneError = typeof ((_a2 = argInputType.constraints) == null ? void 0 : _a2.minNumFields) === "number" && ((_b2 = argInputType.constraints) == null ? void 0 : _b2.minNumFields) > 0 ? Array.isArray(value) && value.some((v) => !v || Object.keys(cleanObject(v)).length === 0) : false;
+  let err = hasAtLeastOneError ? {
+    inputType: argInputType,
+    key,
+    type: "atLeastOne"
+  } : void 0;
+  if (!err) {
+    const hasOneOfError = typeof ((_c = argInputType.constraints) == null ? void 0 : _c.maxNumFields) === "number" && ((_d = argInputType.constraints) == null ? void 0 : _d.maxNumFields) < 2 ? Array.isArray(value) && value.find((v) => !v || Object.keys(cleanObject(v)).length !== 1) : false;
+    if (hasOneOfError) {
+      err = {
+        inputType: argInputType,
+        key,
+        type: "atMostOne",
+        providedKeys: Object.keys(hasOneOfError)
+      };
+    }
+  }
+  if (!Array.isArray(value)) {
+    for (const nestedArgInputType of arg2.inputTypes) {
+      const args = objectToArgs(value, nestedArgInputType.type);
+      if (args.collectErrors().length === 0) {
+        return new Arg2({
+          key,
+          value: args,
+          isEnum: false,
+          schemaArg: arg2,
+          inputType: nestedArgInputType
+        });
+      }
+    }
+  }
+  return new Arg2({
+    key,
+    value: value.map((v) => {
+      if (inputType.isList && typeof v !== "object") {
+        return v;
+      }
+      if (typeof v !== "object" || !value) {
+        return getInvalidTypeArg(key, v, arg2, inputType);
+      }
+      return objectToArgs(v, argInputType);
+    }),
+    isEnum: false,
+    inputType,
+    schemaArg: arg2,
+    error: err
+  });
+}
+__name(tryInferArgs, "tryInferArgs");
+__name2(tryInferArgs, "tryInferArgs");
+function isInputArgType(argType) {
+  if (typeof argType === "string") {
+    return false;
+  }
+  if (Object.hasOwnProperty.call(argType, "values")) {
+    return false;
+  }
+  return true;
+}
+__name(isInputArgType, "isInputArgType");
+__name2(isInputArgType, "isInputArgType");
+function scalarToArg(key, value, arg2, inputType) {
+  if (hasCorrectScalarType(value, arg2, inputType)) {
+    return new Arg2({
+      key,
+      value,
+      isEnum: inputType.location === "enumTypes",
+      schemaArg: arg2,
+      inputType
+    });
+  }
+  return getInvalidTypeArg(key, value, arg2, inputType);
+}
+__name(scalarToArg, "scalarToArg");
+__name2(scalarToArg, "scalarToArg");
+function objectToArgs(initialObj, inputType, possibilities, outputType) {
+  const obj = cleanObject(initialObj);
+  const { fields: args, fieldMap } = inputType;
+  const requiredArgs = args.map((arg2) => [arg2.name, void 0]);
+  const objEntries = Object.entries(obj || {});
+  const entries = unionBy(objEntries, requiredArgs, (a) => a[0]);
+  const argsList = entries.reduce((acc, [argName, value]) => {
+    const schemaArg = fieldMap ? fieldMap[argName] : args.find((a) => a.name === argName);
+    if (!schemaArg) {
+      const didYouMeanField = typeof value === "boolean" && outputType && outputType.fields.some((f) => f.name === argName) ? argName : null;
+      acc.push(new Arg2({
+        key: argName,
+        value,
+        error: {
+          type: "invalidName",
+          providedName: argName,
+          providedValue: value,
+          didYouMeanField,
+          didYouMeanArg: !didYouMeanField && getSuggestion(argName, [...args.map((a) => a.name), "select"]) || void 0,
+          originalType: inputType,
+          possibilities,
+          outputType
+        }
+      }));
+      return acc;
+    }
+    const arg2 = valueToArg(argName, value, schemaArg);
+    if (arg2) {
+      acc.push(arg2);
+    }
+    return acc;
+  }, []);
+  if (typeof inputType.constraints.minNumFields === "number" && objEntries.length < inputType.constraints.minNumFields || argsList.find((arg2) => {
+    var _a2, _b2;
+    return ((_a2 = arg2.error) == null ? void 0 : _a2.type) === "missingArg" || ((_b2 = arg2.error) == null ? void 0 : _b2.type) === "atLeastOne";
+  })) {
+    const optionalMissingArgs = inputType.fields.filter((field) => !field.isRequired && obj && (typeof obj[field.name] === "undefined" || obj[field.name] === null));
+    argsList.push(...optionalMissingArgs.map((arg2) => {
+      const argInputType = arg2.inputTypes[0];
+      return new Arg2({
+        key: arg2.name,
+        value: void 0,
+        isEnum: argInputType.location === "enumTypes",
+        error: {
+          type: "missingArg",
+          missingName: arg2.name,
+          missingArg: arg2,
+          atLeastOne: Boolean(inputType.constraints.minNumFields) || false,
+          atMostOne: inputType.constraints.maxNumFields === 1 || false
+        },
+        inputType: argInputType
+      });
+    }));
+  }
+  return new Args(argsList);
+}
+__name(objectToArgs, "objectToArgs");
+__name2(objectToArgs, "objectToArgs");
+function unpack({ document: document2, path: path6, data }) {
+  const result = deepGet(data, path6);
+  if (result === "undefined") {
+    return null;
+  }
+  if (typeof result !== "object") {
+    return result;
+  }
+  const field = getField(document2, path6);
+  return mapScalars({ field, data: result });
+}
+__name(unpack, "unpack");
+__name2(unpack, "unpack");
+function mapScalars({ field, data }) {
+  var _a2;
+  if (!data || typeof data !== "object" || !field.children || !field.schemaField) {
+    return data;
+  }
+  const deserializers = {
+    DateTime: (value) => new Date(value),
+    Json: (value) => JSON.parse(value),
+    Bytes: (value) => Buffer.from(value, "base64"),
+    Decimal: (value) => {
+      return new decimal_default(value);
+    },
+    BigInt: (value) => BigInt(value)
+  };
+  for (const child of field.children) {
+    const outputType = (_a2 = child.schemaField) == null ? void 0 : _a2.outputType.type;
+    if (outputType && typeof outputType === "string") {
+      const deserializer = deserializers[outputType];
+      if (deserializer) {
+        if (Array.isArray(data)) {
+          for (const entry of data) {
+            if (typeof entry[child.name] !== "undefined" && entry[child.name] !== null) {
+              if (Array.isArray(entry[child.name])) {
+                entry[child.name] = entry[child.name].map(deserializer);
+              } else {
+                entry[child.name] = deserializer(entry[child.name]);
+              }
+            }
+          }
+        } else {
+          if (typeof data[child.name] !== "undefined" && data[child.name] !== null) {
+            if (Array.isArray(data[child.name])) {
+              data[child.name] = data[child.name].map(deserializer);
+            } else {
+              data[child.name] = deserializer(data[child.name]);
+            }
+          }
+        }
+      }
+    }
+    if (child.schemaField && child.schemaField.outputType.location === "outputObjectTypes") {
+      if (Array.isArray(data)) {
+        for (const entry of data) {
+          mapScalars({ field: child, data: entry[child.name] });
+        }
+      } else {
+        mapScalars({ field: child, data: data[child.name] });
+      }
+    }
+  }
+  return data;
+}
+__name(mapScalars, "mapScalars");
+__name2(mapScalars, "mapScalars");
+function getField(document2, path6) {
+  const todo = path6.slice();
+  const firstElement = todo.shift();
+  let pointer = document2.children.find((c) => c.name === firstElement);
+  if (!pointer) {
+    throw new Error(`Could not find field ${firstElement} in document ${document2}`);
+  }
+  while (todo.length > 0) {
+    const key = todo.shift();
+    if (!pointer.children) {
+      throw new Error(`Can't get children for field ${pointer} with child ${key}`);
+    }
+    const child = pointer.children.find((c) => c.name === key);
+    if (!child) {
+      throw new Error(`Can't find child ${key} of field ${pointer}`);
+    }
+    pointer = child;
+  }
+  return pointer;
+}
+__name(getField, "getField");
+__name2(getField, "getField");
+function removeSelectFromPath(path6) {
+  return path6.split(".").filter((p) => p !== "select").join(".");
+}
+__name(removeSelectFromPath, "removeSelectFromPath");
+__name2(removeSelectFromPath, "removeSelectFromPath");
+function removeSelectFromObject(obj) {
+  const type = Object.prototype.toString.call(obj);
+  if (type === "[object Object]") {
+    const copy = {};
+    for (const key in obj) {
+      if (key === "select") {
+        for (const subKey in obj["select"]) {
+          copy[subKey] = removeSelectFromObject(obj["select"][subKey]);
+        }
+      } else {
+        copy[key] = removeSelectFromObject(obj[key]);
+      }
+    }
+    return copy;
+  }
+  return obj;
+}
+__name(removeSelectFromObject, "removeSelectFromObject");
+__name2(removeSelectFromObject, "removeSelectFromObject");
+function transformAggregatePrintJsonArgs({
+  ast,
+  keyPaths,
+  missingItems,
+  valuePaths
+}) {
+  const newKeyPaths = keyPaths.map(removeSelectFromPath);
+  const newValuePaths = valuePaths.map(removeSelectFromPath);
+  const newMissingItems = missingItems.map((item) => ({
+    path: removeSelectFromPath(item.path),
+    isRequired: item.isRequired,
+    type: item.type
+  }));
+  const newAst = removeSelectFromObject(ast);
+  return {
+    ast: newAst,
+    keyPaths: newKeyPaths,
+    missingItems: newMissingItems,
+    valuePaths: newValuePaths
+  };
+}
+__name(transformAggregatePrintJsonArgs, "transformAggregatePrintJsonArgs");
+__name2(transformAggregatePrintJsonArgs, "transformAggregatePrintJsonArgs");
+var import_debug7 = __toModule22(require_dist7());
+var import_strip_ansi4 = __toModule22(require_strip_ansi());
+var DataLoader = /* @__PURE__ */ __name(class {
+  constructor(options2) {
+    this.options = options2;
+    this.tickActive = false;
+    this.batches = {};
+  }
+  request(request4) {
+    const hash = this.options.batchBy(request4);
+    if (!hash) {
+      return this.options.singleLoader(request4);
+    }
+    if (!this.batches[hash]) {
+      this.batches[hash] = [];
+      if (!this.tickActive) {
+        this.tickActive = true;
+        process.nextTick(() => {
+          this.dispatchBatches();
+          this.tickActive = false;
+        });
+      }
+    }
+    return new Promise((resolve2, reject2) => {
+      this.batches[hash].push({
+        request: request4,
+        resolve: resolve2,
+        reject: reject2
+      });
+    });
+  }
+  dispatchBatches() {
+    for (const key in this.batches) {
+      const batch = this.batches[key];
+      delete this.batches[key];
+      if (batch.length === 1) {
+        this.options.singleLoader(batch[0].request).then((result) => {
+          if (result instanceof Error) {
+            batch[0].reject(result);
+          } else {
+            batch[0].resolve(result);
+          }
+        }).catch((e) => {
+          batch[0].reject(e);
+        });
+      } else {
+        this.options.batchLoader(batch.map((j) => j.request)).then((results) => {
+          if (results instanceof Error) {
+            for (let i = 0; i < batch.length; i++) {
+              batch[i].reject(results);
+            }
+          } else {
+            for (let i = 0; i < batch.length; i++) {
+              const value = results[i];
+              if (value instanceof Error) {
+                batch[i].reject(value);
+              } else {
+                batch[i].resolve(value);
+              }
+            }
+          }
+        }).catch((e) => {
+          for (let i = 0; i < batch.length; i++) {
+            batch[i].reject(e);
+          }
+        });
+      }
+    }
+  }
+  get [Symbol.toStringTag]() {
+    return "DataLoader";
+  }
+}, "DataLoader");
+__name2(DataLoader, "DataLoader");
+var NotFoundError2 = /* @__PURE__ */ __name(class extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "NotFoundError";
+  }
+}, "NotFoundError2");
+__name2(NotFoundError2, "NotFoundError");
+function getRejectOnNotFound(action, modelName, args, clientInstance) {
+  let rejectOnNotFound;
+  if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
+    rejectOnNotFound = args["rejectOnNotFound"];
+    delete args["rejectOnNotFound"];
+  } else if (typeof clientInstance === "boolean") {
+    rejectOnNotFound = clientInstance;
+  } else if (clientInstance && typeof clientInstance === "object" && action in clientInstance) {
+    const rejectPerOperation = clientInstance[action];
+    if (rejectPerOperation && typeof rejectPerOperation === "object") {
+      if (modelName in rejectPerOperation) {
+        return rejectPerOperation[modelName];
+      }
+      return void 0;
+    }
+    rejectOnNotFound = getRejectOnNotFound(action, modelName, args, rejectPerOperation);
+  } else if (typeof clientInstance === "function") {
+    rejectOnNotFound = clientInstance;
+  } else {
+    rejectOnNotFound = false;
+  }
+  return rejectOnNotFound;
+}
+__name(getRejectOnNotFound, "getRejectOnNotFound");
+__name2(getRejectOnNotFound, "getRejectOnNotFound");
+var REGEX = /(findUnique|findFirst)/;
+function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
+  if (rejectOnNotFound && !data && REGEX.exec(clientMethod)) {
+    if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
+      throw new NotFoundError2(`No ${typeName} found`);
+    } else if (typeof rejectOnNotFound === "function") {
+      throw rejectOnNotFound(new NotFoundError2(`No ${typeName} found`));
+    } else if (isError(rejectOnNotFound)) {
+      throw rejectOnNotFound;
+    }
+    throw new NotFoundError2(`No ${typeName} found`);
+  }
+}
+__name(throwIfNotFound, "throwIfNotFound");
+__name2(throwIfNotFound, "throwIfNotFound");
+var debug7 = (0, import_debug7.default)("prisma:client:request_handler");
+function getRequestInfo(requests) {
+  const txId = requests[0].transactionId;
+  const inTx = requests[0].runInTransaction;
+  const headers = requests[0].headers;
+  const _inTx = typeof txId === "number" && inTx ? true : void 0;
+  const _txId = typeof txId === "string" && inTx ? txId : void 0;
+  return { inTx: _inTx, headers: { transactionId: _txId, ...headers } };
+}
+__name(getRequestInfo, "getRequestInfo");
+__name2(getRequestInfo, "getRequestInfo");
+var RequestHandler = /* @__PURE__ */ __name(class {
+  constructor(client, hooks) {
+    this.client = client;
+    this.hooks = hooks;
+    this.dataloader = new DataLoader({
+      batchLoader: (requests) => {
+        const info2 = getRequestInfo(requests);
+        const queries = requests.map((r) => String(r.document));
+        return this.client._engine.requestBatch(queries, info2.headers, info2.inTx);
+      },
+      singleLoader: (request4) => {
+        const info2 = getRequestInfo([request4]);
+        const query2 = String(request4.document);
+        return this.client._engine.request(query2, info2.headers);
+      },
+      batchBy: (request4) => {
+        if (request4.transactionId) {
+          return `transaction-${request4.transactionId}`;
+        }
+        return batchFindUniqueBy(request4);
+      }
+    });
+  }
+  async request({
+    document: document2,
+    dataPath = [],
+    rootField,
+    typeName,
+    isList,
+    callsite,
+    rejectOnNotFound,
+    clientMethod,
+    runInTransaction,
+    showColors,
+    engineHook,
+    args,
+    headers,
+    transactionId,
+    unpacker
+  }) {
+    if (this.hooks && this.hooks.beforeRequest) {
+      const query2 = String(document2);
+      this.hooks.beforeRequest({
+        query: query2,
+        path: dataPath,
+        rootField,
+        typeName,
+        document: document2,
+        isList,
+        clientMethod,
+        args
+      });
+    }
+    try {
+      let data, elapsed;
+      if (engineHook) {
+        const result = await engineHook({
+          document: document2,
+          runInTransaction
+        }, (params) => this.dataloader.request(params));
+        data = result.data;
+        elapsed = result.elapsed;
+      } else {
+        const result = await this.dataloader.request({
+          document: document2,
+          runInTransaction,
+          headers,
+          transactionId
+        });
+        data = result == null ? void 0 : result.data;
+        elapsed = result == null ? void 0 : result.elapsed;
+      }
+      const unpackResult = this.unpack(document2, data, dataPath, rootField, unpacker);
+      throwIfNotFound(unpackResult, clientMethod, typeName, rejectOnNotFound);
+      if (process.env.PRISMA_CLIENT_GET_TIME) {
+        return { data: unpackResult, elapsed };
+      }
+      return unpackResult;
+    } catch (e) {
+      debug7(e);
+      let message = e.message;
+      if (callsite) {
+        const { stack } = printStack({
+          callsite,
+          originalMethod: clientMethod,
+          onUs: e.isPanic,
+          showColors
+        });
+        message = `${stack}
+  ${e.message}`;
+      }
+      message = this.sanitizeMessage(message);
+      if (e.code) {
+        throw new PrismaClientKnownRequestError(message, e.code, this.client._clientVersion, e.meta);
+      } else if (e.isPanic) {
+        throw new PrismaClientRustPanicError(message, this.client._clientVersion);
+      } else if (e instanceof PrismaClientUnknownRequestError) {
+        throw new PrismaClientUnknownRequestError(message, this.client._clientVersion);
+      } else if (e instanceof PrismaClientInitializationError) {
+        throw new PrismaClientInitializationError(message, this.client._clientVersion);
+      } else if (e instanceof PrismaClientRustPanicError) {
+        throw new PrismaClientRustPanicError(message, this.client._clientVersion);
+      }
+      e.clientVersion = this.client._clientVersion;
+      throw e;
+    }
+  }
+  sanitizeMessage(message) {
+    if (this.client._errorFormat && this.client._errorFormat !== "pretty") {
+      return (0, import_strip_ansi4.default)(message);
+    }
+    return message;
+  }
+  unpack(document2, data, path6, rootField, unpacker) {
+    if (data == null ? void 0 : data.data) {
+      data = data.data;
+    }
+    if (unpacker) {
+      data[rootField] = unpacker(data[rootField]);
+    }
+    const getPath = [];
+    if (rootField) {
+      getPath.push(rootField);
+    }
+    getPath.push(...path6.filter((p) => p !== "select" && p !== "include"));
+    return unpack({ document: document2, data, path: getPath });
+  }
+  get [Symbol.toStringTag]() {
+    return "RequestHandler";
+  }
+}, "RequestHandler");
+__name2(RequestHandler, "RequestHandler");
+function batchFindUniqueBy(request4) {
+  var _a2;
+  if (!request4.document.children[0].name.startsWith("findUnique")) {
+    return void 0;
+  }
+  const args = (_a2 = request4.document.children[0].args) == null ? void 0 : _a2.args.map((a) => {
+    if (a.value instanceof Args) {
+      return `${a.key}-${a.value.args.map((a2) => a2.key).join(",")}`;
+    }
+    return a.key;
+  }).join(",");
+  const selectionSet = request4.document.children[0].children.join(",");
+  return `${request4.document.children[0].name}|${args}|${selectionSet}`;
+}
+__name(batchFindUniqueBy, "batchFindUniqueBy");
+__name2(batchFindUniqueBy, "batchFindUniqueBy");
+var clientVersion = require_package2().version;
+var mssqlPreparedStatement = /* @__PURE__ */ __name2((template) => {
+  return template.reduce((acc, str, idx) => `${acc}@P${idx}${str}`);
+}, "mssqlPreparedStatement");
 function applyTracingHeaders(headers, otelCtx) {
   const span = otelCtx && trace.getSpanContext(otelCtx);
   if ((span == null ? void 0 : span.traceFlags) === 1) {
@@ -40258,7 +39877,236 @@ function applyTracingHeaders(headers, otelCtx) {
 }
 __name(applyTracingHeaders, "applyTracingHeaders");
 __name2(applyTracingHeaders, "applyTracingHeaders");
-var debug9 = (0, import_debug9.default)("prisma:client");
+async function runInChildSpan(name, parentCtx, cb) {
+  if (parentCtx === void 0)
+    return cb(void 0);
+  const tracer = trace.getTracer("prisma");
+  const childSpan = tracer.startSpan(name, void 0, parentCtx);
+  const childCtx = trace.setSpan(parentCtx, childSpan);
+  const result = await context2.with(childCtx, () => cb(childSpan));
+  childSpan == null ? void 0 : childSpan.end();
+  return result;
+}
+__name(runInChildSpan, "runInChildSpan");
+__name2(runInChildSpan, "runInChildSpan");
+function serializeRawParameters(data) {
+  return JSON.stringify(serializeBigInt(replaceDates(data)));
+}
+__name(serializeRawParameters, "serializeRawParameters");
+__name2(serializeRawParameters, "serializeRawParameters");
+function replaceDates(data) {
+  const type = Object.prototype.toString.call(data);
+  if (type === "[object Date]") {
+    return {
+      prisma__type: "date",
+      prisma__value: data.toJSON()
+    };
+  }
+  if (type === "[object Object]") {
+    const tmp = {};
+    for (const key in data) {
+      if (key !== "__proto__") {
+        tmp[key] = replaceDates(data[key]);
+      }
+    }
+    return tmp;
+  }
+  if (type === "[object Array]") {
+    let k = data.length;
+    let tmp;
+    for (tmp = new Array(k); k--; ) {
+      tmp[k] = replaceDates(data[k]);
+    }
+    return tmp;
+  }
+  return data;
+}
+__name(replaceDates, "replaceDates");
+__name2(replaceDates, "replaceDates");
+function serializeBigInt(data) {
+  const type = Object.prototype.toString.call(data);
+  if (type === "[object BigInt]") {
+    return data.toString();
+  }
+  if (type === "[object Object]") {
+    const tmp = {};
+    for (const key in data) {
+      if (key !== "__proto__") {
+        tmp[key] = serializeBigInt(data[key]);
+      }
+    }
+    return tmp;
+  }
+  if (type === "[object Array]") {
+    let k = data.length;
+    let tmp;
+    for (tmp = new Array(k); k--; ) {
+      tmp[k] = serializeBigInt(data[k]);
+    }
+    return tmp;
+  }
+  return data;
+}
+__name(serializeBigInt, "serializeBigInt");
+__name2(serializeBigInt, "serializeBigInt");
+var import_js_levenshtein2 = __toModule22(require_js_levenshtein());
+var knownProperties = ["datasources", "errorFormat", "log", "__internal", "rejectOnNotFound"];
+var errorFormats = ["pretty", "colorless", "minimal"];
+var logLevels = ["info", "query", "warn", "error"];
+var validators = {
+  datasources: (options2, datasourceNames) => {
+    if (!options2) {
+      return;
+    }
+    if (typeof options2 !== "object" || Array.isArray(options2)) {
+      throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for "datasources" provided to PrismaClient constructor`);
+    }
+    for (const [key, value] of Object.entries(options2)) {
+      if (!datasourceNames.includes(key)) {
+        const didYouMean = getDidYouMean(key, datasourceNames) || `Available datasources: ${datasourceNames.join(", ")}`;
+        throw new PrismaClientConstructorValidationError(`Unknown datasource ${key} provided to PrismaClient constructor.${didYouMean}`);
+      }
+      if (typeof value !== "object" || Array.isArray(value)) {
+        throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for datasource "${key}" provided to PrismaClient constructor.
+It should have this form: { url: "CONNECTION_STRING" }`);
+      }
+      if (value && typeof value === "object") {
+        for (const [key1, value1] of Object.entries(value)) {
+          if (key1 !== "url") {
+            throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for datasource "${key}" provided to PrismaClient constructor.
+It should have this form: { url: "CONNECTION_STRING" }`);
+          }
+          if (typeof value1 !== "string") {
+            throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(value1)} for datasource "${key}" provided to PrismaClient constructor.
+It should have this form: { url: "CONNECTION_STRING" }`);
+          }
+        }
+      }
+    }
+  },
+  errorFormat: (options2) => {
+    if (!options2) {
+      return;
+    }
+    if (typeof options2 !== "string") {
+      throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for "errorFormat" provided to PrismaClient constructor.`);
+    }
+    if (!errorFormats.includes(options2)) {
+      const didYouMean = getDidYouMean(options2, errorFormats);
+      throw new PrismaClientConstructorValidationError(`Invalid errorFormat ${options2} provided to PrismaClient constructor.${didYouMean}`);
+    }
+  },
+  log: (options2) => {
+    if (!options2) {
+      return;
+    }
+    if (!Array.isArray(options2)) {
+      throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(options2)} for "log" provided to PrismaClient constructor.`);
+    }
+    function validateLogLevel(level) {
+      if (typeof level === "string") {
+        if (!logLevels.includes(level)) {
+          const didYouMean = getDidYouMean(level, logLevels);
+          throw new PrismaClientConstructorValidationError(`Invalid log level "${level}" provided to PrismaClient constructor.${didYouMean}`);
+        }
+      }
+    }
+    __name(validateLogLevel, "validateLogLevel");
+    __name2(validateLogLevel, "validateLogLevel");
+    for (const option of options2) {
+      validateLogLevel(option);
+      const logValidators = {
+        level: validateLogLevel,
+        emit: (value) => {
+          const emits = ["stdout", "event"];
+          if (!emits.includes(value)) {
+            const didYouMean = getDidYouMean(value, emits);
+            throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(value)} for "emit" in logLevel provided to PrismaClient constructor.${didYouMean}`);
+          }
+        }
+      };
+      if (option && typeof option === "object") {
+        for (const [key, value] of Object.entries(option)) {
+          if (logValidators[key]) {
+            logValidators[key](value);
+          } else {
+            throw new PrismaClientConstructorValidationError(`Invalid property ${key} for "log" provided to PrismaClient constructor`);
+          }
+        }
+      }
+    }
+  },
+  __internal: (value) => {
+    if (!value) {
+      return;
+    }
+    const knownKeys = ["debug", "hooks", "engine", "measurePerformance"];
+    if (typeof value !== "object") {
+      throw new PrismaClientConstructorValidationError(`Invalid value ${JSON.stringify(value)} for "__internal" to PrismaClient constructor`);
+    }
+    for (const [key] of Object.entries(value)) {
+      if (!knownKeys.includes(key)) {
+        const didYouMean = getDidYouMean(key, knownKeys);
+        throw new PrismaClientConstructorValidationError(`Invalid property ${JSON.stringify(key)} for "__internal" provided to PrismaClient constructor.${didYouMean}`);
+      }
+    }
+  },
+  rejectOnNotFound: (value) => {
+    if (!value) {
+      return;
+    }
+    if (isError(value) || typeof value === "boolean" || typeof value === "object" || typeof value === "function") {
+      return value;
+    }
+    throw new PrismaClientConstructorValidationError(`Invalid rejectOnNotFound expected a boolean/Error/{[modelName: Error | boolean]} but received ${JSON.stringify(value)}`);
+  }
+};
+function validatePrismaClientOptions(options2, datasourceNames) {
+  for (const [key, value] of Object.entries(options2)) {
+    if (!knownProperties.includes(key)) {
+      const didYouMean = getDidYouMean(key, knownProperties);
+      throw new PrismaClientConstructorValidationError(`Unknown property ${key} provided to PrismaClient constructor.${didYouMean}`);
+    }
+    validators[key](value, datasourceNames);
+  }
+}
+__name(validatePrismaClientOptions, "validatePrismaClientOptions");
+__name2(validatePrismaClientOptions, "validatePrismaClientOptions");
+function getDidYouMean(str, options2) {
+  if (options2.length === 0) {
+    return "";
+  }
+  if (typeof str !== "string") {
+    return "";
+  }
+  const alternative = getAlternative(str, options2);
+  if (!alternative) {
+    return "";
+  }
+  return ` Did you mean "${alternative}"?`;
+}
+__name(getDidYouMean, "getDidYouMean");
+__name2(getDidYouMean, "getDidYouMean");
+function getAlternative(str, options2) {
+  if (options2.length === 0) {
+    return null;
+  }
+  const optionsWithDistances = options2.map((value) => ({
+    value,
+    distance: (0, import_js_levenshtein2.default)(str, value)
+  }));
+  optionsWithDistances.sort((a, b) => {
+    return a.distance < b.distance ? -1 : 1;
+  });
+  const bestAlternative = optionsWithDistances[0];
+  if (bestAlternative.distance < 3) {
+    return bestAlternative.value;
+  }
+  return null;
+}
+__name(getAlternative, "getAlternative");
+__name2(getAlternative, "getAlternative");
+var debug8 = (0, import_debug8.default)("prisma:client");
 var ALTER_RE = /^(\s*alter\s)/i;
 (globalThis = globalThis).NOT_PRISMA_DATA_PROXY = true;
 function isReadonlyArray(arg2) {
@@ -40300,6 +40148,7 @@ var actionOperationMap = {
   findRaw: "query",
   aggregateRaw: "query"
 };
+var TX_ID = Symbol.for("prisma.client.transaction.id");
 function getPrismaClient(config2) {
   class PrismaClient {
     constructor(optionsArg) {
@@ -40323,7 +40172,7 @@ function getPrismaClient(config2) {
         const internal = (_b2 = options2.__internal) != null ? _b2 : {};
         const useDebug = internal.debug === true;
         if (useDebug) {
-          import_debug9.default.enable("prisma:client");
+          import_debug8.default.enable("prisma:client");
         }
         if (internal.hooks) {
           this._hooks = internal.hooks;
@@ -40378,15 +40227,11 @@ function getPrismaClient(config2) {
           const previewFeatures = this._engineConfig.previewFeatures ? this._engineConfig.previewFeatures.concat("mongodb") : ["mongodb"];
           this._engineConfig.previewFeatures = previewFeatures;
         }
-        debug9(`clientVersion: ${config2.clientVersion}`);
-        debug9(`clientEngineType: ${this._clientEngineType}`);
+        debug8(`clientVersion: ${config2.clientVersion}`);
+        debug8(`clientEngineType: ${this._clientEngineType}`);
         this._engine = this.getEngine();
         void this._getActiveProvider();
-        if (!this._hasPreviewFlag("interactiveTransactions")) {
-          this._fetcher = new PrismaClientFetcher(this, false, this._hooks);
-        } else {
-          this._fetcher = new RequestHandler(this, this._hooks);
-        }
+        this._fetcher = new RequestHandler(this, this._hooks);
         if (options2.log) {
           for (const log4 of options2.log) {
             const level = typeof log4 === "string" ? log4 : log4.emit === "stdout" ? log4.level : null;
@@ -40482,7 +40327,7 @@ function getPrismaClient(config2) {
       } catch (e) {
       }
     }
-    $executeRawInternal(txId, inTx, otelCtx, query2, ...values) {
+    $executeRawInternal(txId, lock, otelCtx, query2, ...values) {
       let queryString = "";
       let parameters = void 0;
       if (typeof query2 === "string") {
@@ -40550,40 +40395,28 @@ function getPrismaClient(config2) {
         };
       }
       if (parameters == null ? void 0 : parameters.values) {
-        debug9(`prisma.$executeRaw(${queryString}, ${parameters.values})`);
+        debug8(`prisma.$executeRaw(${queryString}, ${parameters.values})`);
       } else {
-        debug9(`prisma.$executeRaw(${queryString})`);
+        debug8(`prisma.$executeRaw(${queryString})`);
       }
       const args = { query: queryString, parameters };
-      debug9(`Prisma Client call:`);
+      debug8(`Prisma Client call:`);
       return this._request({
         args,
         clientMethod: "executeRaw",
         dataPath: [],
         action: "executeRaw",
         callsite: getCallSite(this._errorFormat),
-        runInTransaction: inTx != null ? inTx : false,
+        runInTransaction: !!txId,
         transactionId: txId,
-        otelCtx
+        otelCtx,
+        lock
       });
     }
-    $executeRawRequest(query2, ...values) {
-      const request4 = /* @__PURE__ */ __name2((txId, inTx, otelCtx) => {
-        try {
-          const promise = this.$executeRawInternal(txId, inTx, otelCtx, query2, ...values);
-          promise.isExecuteRaw = true;
-          return promise;
-        } catch (e) {
-          e.clientVersion = this._clientVersion;
-          throw e;
-        }
-      }, "request");
-      return createPrismaPromise(request4);
-    }
     $executeRaw(query2, ...values) {
-      return createPrismaPromise(() => {
+      return createPrismaPromise((txId, lock, otelCtx) => {
         if (query2.raw || query2.sql) {
-          return this.$executeRawRequest(query2, ...values);
+          return this.$executeRawInternal(txId, lock, otelCtx, query2, ...values);
         }
         throw new PrismaClientValidationError(`\`$executeRaw\` is a tag function, please use it like the following:
 \`\`\`
@@ -40594,27 +40427,30 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
 `);
       });
     }
+    $executeRawUnsafe(query2, ...values) {
+      return createPrismaPromise((txId, lock, otelCtx) => {
+        return this.$executeRawInternal(txId, lock, otelCtx, query2, ...values);
+      });
+    }
     $runCommandRaw(command) {
       if (config2.activeProvider !== "mongodb") {
         throw new PrismaClientValidationError(`The ${config2.activeProvider} provider does not support $runCommandRaw. Use the mongodb provider.`);
       }
-      return createPrismaPromise((txId, inTx, otelCtx) => {
+      return createPrismaPromise((txId, lock, otelCtx) => {
         return this._request({
           args: { command },
           clientMethod: "runCommandRaw",
           dataPath: [],
           action: "runCommandRaw",
           callsite: getCallSite(),
-          runInTransaction: inTx != null ? inTx : false,
+          runInTransaction: !!txId,
           transactionId: txId,
-          otelCtx
+          otelCtx,
+          lock
         });
       });
     }
-    $executeRawUnsafe(query2, ...values) {
-      return this.$executeRawRequest(query2, ...values);
-    }
-    $queryRawInternal(txId, inTx, otelCtx, query2, ...values) {
+    $queryRawInternal(txId, lock, otelCtx, query2, ...values) {
       let queryString = "";
       let parameters = void 0;
       if (typeof query2 === "string") {
@@ -40681,40 +40517,28 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
         };
       }
       if (parameters == null ? void 0 : parameters.values) {
-        debug9(`prisma.queryRaw(${queryString}, ${parameters.values})`);
+        debug8(`prisma.queryRaw(${queryString}, ${parameters.values})`);
       } else {
-        debug9(`prisma.queryRaw(${queryString})`);
+        debug8(`prisma.queryRaw(${queryString})`);
       }
       const args = { query: queryString, parameters };
-      debug9(`Prisma Client call:`);
+      debug8(`Prisma Client call:`);
       return this._request({
         args,
         clientMethod: "queryRaw",
         dataPath: [],
         action: "queryRaw",
         callsite: getCallSite(this._errorFormat),
-        runInTransaction: inTx != null ? inTx : false,
+        runInTransaction: !!txId,
         transactionId: txId,
-        otelCtx
+        otelCtx,
+        lock
       });
     }
-    $queryRawRequest(query2, ...values) {
-      const request4 = /* @__PURE__ */ __name2((txId, inTx, otelCtx) => {
-        try {
-          const promise = this.$queryRawInternal(txId, inTx, otelCtx, query2, ...values);
-          promise.isQueryRaw = true;
-          return promise;
-        } catch (e) {
-          e.clientVersion = this._clientVersion;
-          throw e;
-        }
-      }, "request");
-      return createPrismaPromise(request4);
-    }
     $queryRaw(query2, ...values) {
-      return createPrismaPromise(() => {
+      return createPrismaPromise((txId, lock, otelCtx) => {
         if (query2.raw || query2.sql) {
-          return this.$queryRawRequest(query2, ...values);
+          return this.$queryRawInternal(txId, lock, otelCtx, query2, ...values);
         }
         throw new PrismaClientValidationError(`\`$queryRaw\` is a tag function, please use it like the following:
 \`\`\`
@@ -40726,7 +40550,9 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
       });
     }
     $queryRawUnsafe(query2, ...values) {
-      return this.$queryRawRequest(query2, ...values);
+      return createPrismaPromise((txId, lock, otelCtx) => {
+        return this.$queryRawInternal(txId, lock, otelCtx, query2, ...values);
+      });
     }
     __internal_triggerPanic(fatal) {
       if (!this._engineConfig.allowTriggerPanic) {
@@ -40753,60 +40579,17 @@ new PrismaClient({
         callsite: getCallSite(this._errorFormat)
       });
     }
-    ___getTransactionId() {
-      return this._transactionId++;
-    }
-    async $___transactionInternal(promises) {
-      for (const p of promises) {
-        if (!p) {
+    _transactionWithArray(promises) {
+      const txId = this._transactionId++;
+      const lock = getLockCountPromise(promises.length);
+      const _requests = promises.map((request4) => {
+        var _a2;
+        if ((request4 == null ? void 0 : request4[Symbol.toStringTag]) !== "PrismaPromise") {
           throw new Error(`All elements of the array need to be Prisma Client promises. Hint: Please make sure you are not awaiting the Prisma client calls you intended to pass in the $transaction function.`);
         }
-        if ((!p.requestTransaction || typeof p.requestTransaction !== "function") && !(p == null ? void 0 : p.isQueryRaw) && !(p == null ? void 0 : p.isExecuteRaw)) {
-          throw new Error(`All elements of the array need to be Prisma Client promises. Hint: Please make sure you are not awaiting the Prisma client calls you intended to pass in the $transaction function.`);
-        }
-      }
-      const transactionId = this.___getTransactionId();
-      const requests = await Promise.all(promises.map((p) => {
-        if (p.requestTransaction) {
-          return p.requestTransaction(transactionId);
-        } else {
-        }
-        return p;
-      }));
-      return Promise.all(requests.map((r) => {
-        if (Object.prototype.toString.call(r) === "[object Promise]") {
-          return r;
-        }
-        if (r && typeof r === "function") {
-          return r();
-        }
-        return r;
-      }));
-    }
-    async $___transaction(promises) {
-      try {
-        return this.$___transactionInternal(promises);
-      } catch (e) {
-        e.clientVersion = this._clientVersion;
-        throw e;
-      }
-    }
-    $transaction(input, options2) {
-      if (!this._hasPreviewFlag("interactiveTransactions")) {
-        return this.$___transaction(input);
-      }
-      try {
-        return this._transaction(input, options2);
-      } catch (e) {
-        e.clientVersion = this._clientVersion;
-        throw e;
-      }
-    }
-    async _transaction(input, options2) {
-      if (typeof input === "function") {
-        return this._transactionWithCallback(input, options2);
-      }
-      return this._transactionWithRequests(input, options2);
+        return (_a2 = request4.requestTransaction) == null ? void 0 : _a2.call(request4, txId, lock);
+      });
+      return Promise.all(_requests);
     }
     async _transactionWithCallback(callback, options2) {
       const info2 = await this._engine.transaction("start", options2);
@@ -40817,21 +40600,19 @@ new PrismaClient({
       } catch (e) {
         await this._engine.transaction("rollback", info2).catch(() => {
         });
+        e.clientVersion = this._clientVersion;
         throw e;
       }
       return result;
     }
-    async _transactionWithRequests(requests, options2) {
-      return this._transactionWithCallback(async (prisma) => {
-        const transactionId = prisma[TX_ID];
-        const _requests = requests.map((request4) => {
-          return new Promise((resolve2, reject2) => {
-            ;
-            request4.then(resolve2, reject2, transactionId);
-          });
-        });
-        return Promise.all(_requests);
-      }, options2);
+    async $transaction(input, options2) {
+      if (!this._hasPreviewFlag("interactiveTransactions")) {
+        return this._transactionWithArray(input);
+      }
+      if (typeof input === "function") {
+        return this._transactionWithCallback(input, options2);
+      }
+      return this._transactionWithArray(input);
     }
     async _request(internalParams) {
       if (!this._hasPreviewFlag("tracing"))
@@ -40850,9 +40631,6 @@ new PrismaClient({
           if (nextMiddleware)
             return nextMiddleware(changedParams, consumer);
           const changedInternalParams = { ...internalParams, ...changedParams };
-          if (index > 0 && !this._hasPreviewFlag("interactiveTransactions")) {
-            delete changedInternalParams["transactionId"];
-          }
           return this._executeRequest(changedInternalParams);
         }, "consumer");
         if (true) {
@@ -40866,7 +40644,7 @@ new PrismaClient({
         throw e;
       }
     }
-    _executeRequest({
+    async _executeRequest({
       args,
       clientMethod,
       dataPath,
@@ -40877,6 +40655,7 @@ new PrismaClient({
       headers,
       transactionId,
       otelCtx,
+      lock,
       unpacker
     }) {
       let rootField;
@@ -40910,19 +40689,20 @@ new PrismaClient({
       });
       document2.validate(args, false, clientMethod, this._errorFormat, callsite);
       document2 = transformDocument(document2);
-      if (import_debug9.default.enabled("prisma:client")) {
+      if (import_debug8.default.enabled("prisma:client")) {
         const query2 = String(document2);
-        debug9(`Prisma Client call:`);
-        debug9(`prisma.${clientMethod}(${printJsonWithErrors({
+        debug8(`Prisma Client call:`);
+        debug8(`prisma.${clientMethod}(${printJsonWithErrors({
           ast: args,
           keyPaths: [],
           valuePaths: [],
           missingItems: []
         })})`);
-        debug9(`Generated request:`);
-        debug9(query2 + "\n");
+        debug8(`Generated request:`);
+        debug8(query2 + "\n");
       }
       headers = applyTracingHeaders(headers, otelCtx);
+      await lock;
       return this._fetcher.request({
         document: document2,
         clientMethod,
@@ -40952,9 +40732,8 @@ new PrismaClient({
 }
 __name(getPrismaClient, "getPrismaClient");
 __name2(getPrismaClient, "getPrismaClient");
-var TX_ID = Symbol.for("prisma.client.transaction.id");
 var forbidden = ["$connect", "$disconnect", "$on", "$transaction", "$use"];
-function transactionProxy(thing, transactionId) {
+function transactionProxy(thing, txId) {
   if (typeof thing !== "object")
     return thing;
   return new Proxy(thing, {
@@ -40962,27 +40741,24 @@ function transactionProxy(thing, transactionId) {
       if (forbidden.includes(prop))
         return void 0;
       if (prop === TX_ID)
-        return transactionId;
+        return txId;
       if (typeof target[prop] === "function") {
         return (...args) => {
-          if (prop === "then") {
-            return target[prop](...args, transactionId);
-          }
-          return transactionProxy(target[prop](...args), transactionId);
+          if (prop === "then")
+            return target[prop](args[0], args[1], txId);
+          if (prop === "catch")
+            return target[prop](args[0], txId);
+          if (prop === "finally")
+            return target[prop](args[0], txId);
+          return transactionProxy(target[prop](...args), txId);
         };
       }
-      return transactionProxy(target[prop], transactionId);
+      return transactionProxy(target[prop], txId);
     }
   });
 }
 __name(transactionProxy, "transactionProxy");
 __name2(transactionProxy, "transactionProxy");
-var import_sql_template_tag = __toModule22(require_dist10());
-function warnEnvConflicts(envPaths) {
-  tryLoadEnvs(envPaths, { conflictCheck: "warn" });
-}
-__name(warnEnvConflicts, "warnEnvConflicts");
-__name2(warnEnvConflicts, "warnEnvConflicts");
 var readdirAsync = (0, import_util3.promisify)(import_fs6.default.readdir);
 var realpathAsync = (0, import_util3.promisify)(import_fs6.default.realpath);
 var statAsync = (0, import_util3.promisify)(import_fs6.default.stat);
@@ -41046,7 +40822,12 @@ function findSync(root, match, types = ["f", "d", "l"], deep = [], limit = Infin
 }
 __name(findSync, "findSync");
 __name2(findSync, "findSync");
-var lzString = __toModule22(require_lz_string());
+function warnEnvConflicts(envPaths) {
+  tryLoadEnvs(envPaths, { conflictCheck: "warn" });
+}
+__name(warnEnvConflicts, "warnEnvConflicts");
+__name2(warnEnvConflicts, "warnEnvConflicts");
+var import_sql_template_tag = __toModule22(require_dist10());
 var decompressFromBase642 = lzString.decompressFromBase64;
 var export_Sql = import_sql_template_tag.Sql;
 var export_empty = import_sql_template_tag.empty;

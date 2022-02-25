@@ -61,7 +61,6 @@ describe("custom resolvers execution", () => {
       resolvers: [PostCrudResolver],
       validate: false,
       authChecker: () => false,
-      emitSchemaFile: outputDirPath + "/schema.graphql",
     });
     const { errors } = await graphql(graphQLSchema, document, null, {
       prisma: {},
@@ -106,8 +105,7 @@ describe("custom resolvers execution", () => {
     const graphQLSchema = await buildSchema({
       resolvers: [PostCrudResolver],
       validate: false,
-      authChecker: () => false,
-      emitSchemaFile: outputDirPath + "/schema.graphql",
+      authChecker: () => true,
     });
     const { data, errors } = await graphql(graphQLSchema, document, null, {
       prisma: {},
@@ -116,5 +114,5 @@ describe("custom resolvers execution", () => {
     expect(errors).toBeUndefined();
     expect(data?.post).toBeNull();
     expect(descriptorCalledFlag).toBe(true);
-  }, 10000);
+  }, 30000);
 });

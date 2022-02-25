@@ -100,8 +100,6 @@ export { MainUserAvgOrderByAggregateInput } from "./MainUserAvgOrderByAggregateI
 export { MainUserCountOrderByAggregateInput } from "./MainUserCountOrderByAggregateInput";
 export { MainUserCreateInput } from "./MainUserCreateInput";
 export { MainUserCreateManyInput } from "./MainUserCreateManyInput";
-export { MainUserCreateManyaliasesInput } from "./MainUserCreateManyaliasesInput";
-export { MainUserCreateManygradesInput } from "./MainUserCreateManygradesInput";
 export { MainUserCreateNestedOneWithoutEditorPostsInput } from "./MainUserCreateNestedOneWithoutEditorPostsInput";
 export { MainUserCreateNestedOneWithoutPostsInput } from "./MainUserCreateNestedOneWithoutPostsInput";
 export { MainUserCreateOrConnectWithoutEditorPostsInput } from "./MainUserCreateOrConnectWithoutEditorPostsInput";

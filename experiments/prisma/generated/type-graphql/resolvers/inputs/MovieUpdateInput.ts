@@ -9,13 +9,13 @@ import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOpe
   isAbstract: true
 })
 export class MovieUpdateInput {
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  title?: StringFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => DirectorUpdateOneRequiredWithoutMoviesInput, {
     nullable: true
   })
   director?: DirectorUpdateOneRequiredWithoutMoviesInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  title?: StringFieldUpdateOperationsInput | undefined;
 }
