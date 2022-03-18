@@ -22,12 +22,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 3.10.0
- * Query Engine version: 73e60b76d394f8d37d8ebd1f8918c79029f0db86
+ * Prisma Client JS version: 3.11.0
+ * Query Engine version: b371888aaf8f51357c7457d836b86d12da91658b
  */
 Prisma.prismaVersion = {
-  client: "3.10.0",
-  engine: "73e60b76d394f8d37d8ebd1f8918c79029f0db86"
+  client: "3.11.0",
+  engine: "b371888aaf8f51357c7457d836b86d12da91658b"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -262,8 +262,8 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "3.10.0",
-  "engineVersion": "73e60b76d394f8d37d8ebd1f8918c79029f0db86",
+  "clientVersion": "3.11.0",
+  "engineVersion": "b371888aaf8f51357c7457d836b86d12da91658b",
   "datasourceNames": [
     "postgres"
   ],

@@ -425,8 +425,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.10.0
-   * Query Engine version: 73e60b76d394f8d37d8ebd1f8918c79029f0db86
+   * Prisma Client JS version: 3.11.0
+   * Query Engine version: b371888aaf8f51357c7457d836b86d12da91658b
    */
   export type PrismaVersion = {
     client: string
@@ -841,7 +841,7 @@ export namespace Prisma {
     ? IsReject<LocalRejectSettings>
     : GlobalRejectSettings extends RejectPerOperation
     ? Action extends keyof GlobalRejectSettings
-      ? GlobalRejectSettings[Action] extends boolean
+      ? GlobalRejectSettings[Action] extends RejectOnNotFound
         ? IsReject<GlobalRejectSettings[Action]>
         : GlobalRejectSettings[Action] extends RejectPerModel
         ? Model extends keyof GlobalRejectSettings[Action]
