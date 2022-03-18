@@ -245,7 +245,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/majkel/development/typegraphql-prisma/experiments/prisma/generated/client",
+      "value": "/home/majkel/development/typegraphql-prisma/experiments/postgres/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {

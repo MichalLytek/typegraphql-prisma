@@ -6,7 +6,7 @@
     "package:build": "./package.sh",
     "package:publish": "cd package *&& npm publish",
     "check:type": "tsc --noEmit",
-    "check:experiments": "cd ./experiments && tsc --noEmit",
+    "check:experiments:postgres": "cd ./experiments/postgres && tsc --noEmit",
     "check:format": "prettier --check ./**/*.{js,json,ts,tsx}",
     "test": "ts-node ./tests/helpers/setup-tests.ts && jest --watch --verbose",
     "test:integration": "ts-node ./tests/helpers/setup-tests.ts && env-cmd jest --watch --verbose --config ./jest.config.integration.ts",

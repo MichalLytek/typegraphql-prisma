@@ -1,4 +1,4 @@
-import generateCode from "../src/generator/generate-code";
+import generateCode from "../../src/generator/generate-code";
 import { Prisma } from "./prisma/generated/client";
 
 generateCode(
