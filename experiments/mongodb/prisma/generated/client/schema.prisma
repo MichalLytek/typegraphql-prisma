@@ -1,0 +1,53 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  // binaryTargets   = ["windows", "debian-openssl-1.1.x"]
+  output   = "../prisma/generated/client"
+}
+
+generator typegraphql {
+  provider               = "node ../../src/cli/dev.ts"
+  output                 = "../prisma/generated/type-graphql"
+  emitDMMF               = true
+  // emitTranspiledCode       = true
+  // simpleResolvers          = false
+  // useOriginalMapping       = true
+  // useUncheckedScalarInputs = false
+  // emitIdAsIDType           = true
+  customPrismaImportPath = "../client"
+}
+
+model Post {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  slug     String    @unique
+  title    String
+  body     String
+  comments Comment[]
+  author   User      @relation(fields: [authorId], references: [id])
+  authorId String    @db.ObjectId
+}
+
+model Comment {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  post    Post   @relation(fields: [postId], references: [id])
+  postId  String @db.ObjectId
+  comment String
+}
+
+model User {
+  id      String      @id @default(auto()) @map("_id") @db.ObjectId
+  email   String      @unique
+  age     Int?
+  address UserAddress
+  posts   Post[]
+}
+
+type UserAddress {
+  street String
+  number Int?
+  city   String
+}
