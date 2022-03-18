@@ -2054,8 +2054,8 @@ exports[`crud when emitTranspiledCode is set to true should properly generate im
 Object.defineProperty(exports, \\"__esModule\\", { value: true });
 exports.UserCrudResolver = void 0;
 const tslib_1 = require(\\"tslib\\");
-const TypeGraphQL = (0, tslib_1.__importStar)(require(\\"type-graphql\\"));
-const graphql_fields_1 = (0, tslib_1.__importDefault)(require(\\"graphql-fields\\"));
+const TypeGraphQL = tslib_1.__importStar(require(\\"type-graphql\\"));
+const graphql_fields_1 = tslib_1.__importDefault(require(\\"graphql-fields\\"));
 const AggregateUserArgs_1 = require(\\"./args/AggregateUserArgs\\");
 const CreateManyUserArgs_1 = require(\\"./args/CreateManyUserArgs\\");
 const CreateUserArgs_1 = require(\\"./args/CreateUserArgs\\");
@@ -2158,139 +2158,139 @@ let UserCrudResolver = class UserCrudResolver {
         });
     }
 };
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Query(_returns => User_1.User, {
         nullable: true
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, FindUniqueUserArgs_1.FindUniqueUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, FindUniqueUserArgs_1.FindUniqueUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"user\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Query(_returns => User_1.User, {
         nullable: true
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, FindFirstUserArgs_1.FindFirstUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, FindFirstUserArgs_1.FindFirstUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"findFirstUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Query(_returns => [User_1.User], {
         nullable: false
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, FindManyUserArgs_1.FindManyUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, FindManyUserArgs_1.FindManyUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"users\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: false
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, CreateUserArgs_1.CreateUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, CreateUserArgs_1.CreateUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"createUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => AffectedRowsOutput_1.AffectedRowsOutput, {
         nullable: false
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, CreateManyUserArgs_1.CreateManyUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, CreateManyUserArgs_1.CreateManyUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"createManyUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: true
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, DeleteUserArgs_1.DeleteUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, DeleteUserArgs_1.DeleteUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"deleteUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: true
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, UpdateUserArgs_1.UpdateUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, UpdateUserArgs_1.UpdateUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"updateUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => AffectedRowsOutput_1.AffectedRowsOutput, {
         nullable: false
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, DeleteManyUserArgs_1.DeleteManyUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, DeleteManyUserArgs_1.DeleteManyUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"deleteManyUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => AffectedRowsOutput_1.AffectedRowsOutput, {
         nullable: false
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, UpdateManyUserArgs_1.UpdateManyUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, UpdateManyUserArgs_1.UpdateManyUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"updateManyUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: false
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, UpsertUserArgs_1.UpsertUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, UpsertUserArgs_1.UpsertUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"upsertUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Query(_returns => AggregateUser_1.AggregateUser, {
         nullable: false
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, AggregateUserArgs_1.AggregateUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, AggregateUserArgs_1.AggregateUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"aggregateUser\\", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     TypeGraphQL.Query(_returns => [UserGroupBy_1.UserGroupBy], {
         nullable: false
     }),
-    (0, tslib_1.__param)(0, TypeGraphQL.Ctx()),
-    (0, tslib_1.__param)(1, TypeGraphQL.Info()),
-    (0, tslib_1.__param)(2, TypeGraphQL.Args()),
-    (0, tslib_1.__metadata)(\\"design:type\\", Function),
-    (0, tslib_1.__metadata)(\\"design:paramtypes\\", [Object, Object, GroupByUserArgs_1.GroupByUserArgs]),
-    (0, tslib_1.__metadata)(\\"design:returntype\\", Promise)
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, GroupByUserArgs_1.GroupByUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"groupByUser\\", null);
-UserCrudResolver = (0, tslib_1.__decorate)([
+UserCrudResolver = tslib_1.__decorate([
     TypeGraphQL.Resolver(_of => User_1.User)
 ], UserCrudResolver);
 exports.UserCrudResolver = UserCrudResolver;
