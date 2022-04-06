@@ -1,6 +1,6 @@
 {
   "name": "typegraphql-prisma",
-  "version": "0.19.2",
+  "version": "0.20.0",
   "scripts": {
     "build": "tsc",
     "package:build": "./package.sh",
