@@ -22,12 +22,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 3.11.0
- * Query Engine version: b371888aaf8f51357c7457d836b86d12da91658b
+ * Prisma Client JS version: 3.12.0
+ * Query Engine version: 22b822189f46ef0dc5c5b503368d1bee01213980
  */
 Prisma.prismaVersion = {
-  client: "3.11.0",
-  engine: "b371888aaf8f51357c7457d836b86d12da91658b"
+  client: "3.12.0",
+  engine: "22b822189f46ef0dc5c5b503368d1bee01213980"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -57,11 +57,21 @@ Prisma.AnyNull = 'AnyNull'
 const path = require('path')
 
 const { findSync } = require('./runtime')
+const fs = require('fs')
 
-const dirname = findSync(process.cwd(), [
+// some frameworks or bundlers replace or totally remove __dirname
+const hasDirname = typeof __dirname !== 'undefined' && __dirname !== '/'
+
+// will work in most cases, ie. if the client has not been bundled
+const regularDirname = hasDirname && fs.existsSync(path.join(__dirname, 'schema.prisma')) && __dirname
+
+// if the client has been bundled, we need to look for the folders
+const foundDirname = !regularDirname && findSync(process.cwd(), [
     "prisma/generated/client",
     "generated/client",
-], ['d'], ['d'], 1)[0] || __dirname
+], ['d'], ['d'], 1)[0]
+
+const dirname = regularDirname || foundDirname || __dirname
 /**
  * Enums
  */
@@ -258,12 +268,11 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../..",
-  "clientVersion": "3.11.0",
-  "engineVersion": "b371888aaf8f51357c7457d836b86d12da91658b",
+  "clientVersion": "3.12.0",
+  "engineVersion": "22b822189f46ef0dc5c5b503368d1bee01213980",
   "datasourceNames": [
     "postgres"
   ],
