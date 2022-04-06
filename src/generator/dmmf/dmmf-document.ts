@@ -27,13 +27,14 @@ export class DmmfDocument implements DMMF.Document {
       ...(schema.enumTypes.prisma ?? []),
       ...(schema.enumTypes.model ?? []),
     ];
+    const models = [...datamodel.models, ...datamodel.types];
 
     // transform bare model without fields
-    this.models = datamodel.models.map(transformBareModel);
+    this.models = models.map(transformBareModel);
     // transform enums before model fields to map enum types to enum values string union
     this.enums = enumTypes.map(transformEnums(this));
     // then transform once again to map the fields (it requires mapped model type names)
-    this.models = datamodel.models.map(transformModelWithFields(this));
+    this.models = models.map(transformModelWithFields(this));
     // transform enums again to map renamed fields
     this.enums = enumTypes.map(transformEnums(this));
 

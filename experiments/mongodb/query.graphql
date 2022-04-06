@@ -1,0 +1,22 @@
+query GetUsersWithAddressAndPostsAndComments {
+  users {
+    id
+    email
+    age
+    address {
+      city
+      number
+      street
+    }
+    posts {
+      id
+      slug
+      title
+      body
+      comments {
+        id
+        comment
+      }
+    }
+  }
+}

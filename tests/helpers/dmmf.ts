@@ -9,11 +9,12 @@ function getDMMF(options: GetDMMFOptions): Promise<PrismaDMMF.Document> {
 export default async function getPrismaClientDmmfFromPrismaSchema(
   prismaSchema: string,
   previewFeatures: string[] = [],
+  provider = "postgresql",
 ): Promise<PrismaDMMF.Document> {
   const previewFeaturesToEmit = [...previewFeatures];
   const datamodelWithGeneratorBlock = /* prisma */ `
     datasource db {
-      provider = "postgresql"
+      provider = "${provider}"
       url      = env("DATABASE_URL")
     }
     generator client {

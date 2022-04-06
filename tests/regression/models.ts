@@ -243,6 +243,30 @@ describe("models", () => {
     expect(nativeTypeModelTSFile).toMatchSnapshot("NativeTypeModel");
   });
 
+  it("should properly generate object type class for mongo prisma model with nested types", async () => {
+    const schema = /* prisma */ `
+      model User {
+        id      String      @id @default(auto()) @map("_id") @db.ObjectId
+        age     Int?
+        address UserAddress
+      }
+      type UserAddress {
+        street String
+        number Int?
+        city   String
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath }, "mongodb");
+    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+    const userAddressTypeTSFile = await readGeneratedFile(
+      "/models/UserAddress.ts",
+    );
+
+    expect(userModelTSFile).toMatchSnapshot("User");
+    expect(userAddressTypeTSFile).toMatchSnapshot("UserAddress");
+  });
+
   describe("when emitIdAsIDType is set to true", () => {
     it("should properly generate model object type class", async () => {
       const schema = /* prisma */ `

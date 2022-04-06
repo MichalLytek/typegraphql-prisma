@@ -18,9 +18,14 @@ interface GenerateCodeFromSchemaOptions
 export async function generateCodeFromSchema(
   schema: string,
   options: GenerateCodeFromSchemaOptions,
+  provider?: string,
 ): Promise<void> {
   await generateCode(
-    await getPrismaClientDmmfFromPrismaSchema(schema, options.previewFeatures),
+    await getPrismaClientDmmfFromPrismaSchema(
+      schema,
+      options.previewFeatures,
+      provider,
+    ),
     {
       ...options,
       relativePrismaOutputPath: "../../helpers/prisma-client-mock",
