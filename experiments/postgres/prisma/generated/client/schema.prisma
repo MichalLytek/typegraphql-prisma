@@ -21,6 +21,7 @@ generator typegraphql {
   emitIdAsIDType           = true
   // emitOnly                 = "crudResolvers"
   customPrismaImportPath   = "../client"
+  contextPrismaKey         = "prismaClient"
 }
 
 // Role enum comment

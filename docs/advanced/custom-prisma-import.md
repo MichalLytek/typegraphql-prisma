@@ -1,6 +1,6 @@
 ---
-title: Custom Prisma import path
-sidebar_label: Prisma path
+title: Custom Prisma Client import path
+sidebar_label: Prisma import path
 sidebar_position: 12
 ---
 

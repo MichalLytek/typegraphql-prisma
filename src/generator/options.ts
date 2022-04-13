@@ -9,6 +9,7 @@ export interface ExternalGeneratorOptions {
   emitIdAsIDType?: boolean;
   emitOnly?: EmitBlockKind[];
   customPrismaImportPath?: string;
+  contextPrismaKey?: string;
 }
 
 export interface InternalGeneratorOptions {
@@ -18,7 +19,8 @@ export interface InternalGeneratorOptions {
 }
 
 export interface GeneratorOptions
-  extends Omit<ExternalGeneratorOptions, "emitOnly">,
+  extends Omit<ExternalGeneratorOptions, "emitOnly" | "contextPrismaKey">,
     InternalGeneratorOptions {
   blocksToEmit: EmitBlockKind[];
+  contextPrismaKey: string;
 }

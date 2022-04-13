@@ -67,6 +67,7 @@ export default async function generateCode(
   const options: GeneratorOptions = {
     ...baseOptions,
     blocksToEmit: getBlocksToEmit(baseOptions.emitOnly),
+    contextPrismaKey: baseOptions.contextPrismaKey ?? "prisma",
   };
 
   const baseDirPath = options.outputDirPath;
@@ -503,7 +504,7 @@ export default async function generateCode(
     undefined,
     { overwrite: true },
   );
-  generateHelpersFile(helpersSourceFile);
+  generateHelpersFile(helpersSourceFile, dmmfDocument.options);
 
   log("Generating index file");
   const indexSourceFile = project.createSourceFile(

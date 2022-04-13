@@ -1,6 +1,10 @@
 import { SourceFile } from "ts-morph";
+import { GeneratorOptions } from "./options";
 
-export function generateHelpersFile(sourceFile: SourceFile) {
+export function generateHelpersFile(
+  sourceFile: SourceFile,
+  options: GeneratorOptions,
+) {
   sourceFile.addStatements(/* ts */ `
     export function transformFields(fields: Record<string, any>): Record<string, any> {
       return Object.fromEntries(
@@ -19,9 +23,9 @@ export function generateHelpersFile(sourceFile: SourceFile) {
 
   sourceFile.addStatements(/* ts */ `
     export function getPrismaFromContext(context: any) {
-      const prismaClient = context.prisma;
+      const prismaClient = context["${options.contextPrismaKey}"];
       if (!prismaClient) {
-        throw new Error("Unable to find Prisma Client in GraphQL context. Please provide it under the \`context.prisma\` key.");
+        throw new Error("Unable to find Prisma Client in GraphQL context. Please provide it under the \`context[\\"${options.contextPrismaKey}\\"]\` key.");
       }
       return prismaClient;
     }

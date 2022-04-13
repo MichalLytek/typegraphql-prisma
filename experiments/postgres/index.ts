@@ -193,22 +193,22 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
 applyResolversEnhanceMap(resolversEnhanceMap);
 
 interface Context {
-  prisma: Prisma.PrismaClient;
+  prismaClient: Prisma.PrismaClient;
 }
 
 @Resolver(of => MainUser)
 class MainUserResolver {
   @Query(returns => [MainUser])
-  async allMainUsers(@Ctx() { prisma }: Context): Promise<Prisma.User[]> {
-    return await prisma.user.findMany();
+  async allMainUsers(@Ctx() { prismaClient }: Context): Promise<Prisma.User[]> {
+    return await prismaClient.user.findMany();
   }
 
   @Query(returns => [MainUser])
   async customFindMainUsersWithArgs(
     @Args() args: FindManyMainUserArgs,
-    @Ctx() { prisma }: Context,
+    @Ctx() { prismaClient }: Context,
   ): Promise<Prisma.User[]> {
-    return prisma.user.findMany(args);
+    return prismaClient.user.findMany(args);
   }
 
   @FieldResolver()
@@ -220,16 +220,16 @@ class MainUserResolver {
 @Resolver(of => Post)
 class PostResolver {
   @Query(returns => [Post])
-  async allPosts(@Ctx() { prisma }: Context): Promise<Post[]> {
-    return (await prisma.post.findMany()) as Post[];
+  async allPosts(@Ctx() { prismaClient }: Context): Promise<Post[]> {
+    return (await prismaClient.post.findMany()) as Post[];
   }
 
   @Mutation(returns => Post)
   async customCreatePost(
-    @Ctx() { prisma }: Context,
+    @Ctx() { prismaClient }: Context,
     @Args() args: CreatePostArgs,
   ): Promise<Post> {
-    return await prisma.post.create(args);
+    return await prismaClient.post.create(args);
   }
 }
 
@@ -279,7 +279,7 @@ async function main() {
 
   const server = new ApolloServer({
     schema,
-    context: (): Context => ({ prisma }),
+    context: (): Context => ({ prismaClient: prisma }),
   });
   const { port } = await server.listen(4000);
   console.log(`GraphQL is listening on ${port}!`);

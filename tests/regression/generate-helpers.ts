@@ -28,4 +28,23 @@ describe("helpers", () => {
 
     expect(helpersTSFile).toMatchSnapshot("helpers");
   });
+
+  describe("when contextPrismaKey generator option is set", () => {
+    it("should properly generate `getPrismaFromContext`", async () => {
+      const schema = /* prisma */ `
+        model Sample {
+          id    Int     @id @default(autoincrement())
+          text  String
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        contextPrismaKey: "samplePrisma",
+      });
+      const helpersTSFile = await readGeneratedFile("/helpers.ts");
+
+      expect(helpersTSFile).toMatchSnapshot("helpers");
+    });
+  });
 });

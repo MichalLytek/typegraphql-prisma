@@ -48,7 +48,7 @@ describe("errors", () => {
 
       expect(errors).toMatchInlineSnapshot(`
         Array [
-          [GraphQLError: Unable to find Prisma Client in GraphQL context. Please provide it under the \`context.prisma\` key.],
+          [GraphQLError: Unable to find Prisma Client in GraphQL context. Please provide it under the \`context["prisma"]\` key.],
         ]
       `);
     });

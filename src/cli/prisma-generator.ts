@@ -42,6 +42,7 @@ export async function generate(options: GeneratorOptions) {
       ALL_EMIT_BLOCK_KINDS,
     ),
     customPrismaImportPath: generatorConfig.customPrismaImportPath,
+    contextPrismaKey: generatorConfig.contextPrismaKey,
   };
   const internalConfig: InternalGeneratorOptions = {
     outputDirPath: outputDir,
