@@ -1,5 +1,11 @@
 import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
-import { Project, ScriptTarget, ModuleKind, CompilerOptions } from "ts-morph";
+import {
+  Project,
+  ScriptTarget,
+  ModuleKind,
+  CompilerOptions,
+  IndentationText,
+} from "ts-morph";
 import path from "path";
 
 import { noop } from "./helpers";
@@ -81,6 +87,9 @@ export default async function generateCode(
         declaration: true,
         importHelpers: true,
       }),
+    },
+    manipulationSettings: {
+      indentationText: IndentationText.TwoSpaces,
     },
   });
   const resolversDirPath = path.resolve(baseDirPath, resolversFolderName);
@@ -522,9 +531,6 @@ export default async function generateCode(
   if (emitTranspiledCode) {
     await project.emit();
   } else {
-    for (const file of project.getSourceFiles()) {
-      file.formatText({ indentSize: 2 });
-    }
     await project.save();
   }
 }
