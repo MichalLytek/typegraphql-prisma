@@ -224,8 +224,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.12.0
-   * Query Engine version: 22b822189f46ef0dc5c5b503368d1bee01213980
+   * Prisma Client JS version: 3.13.0
+   * Query Engine version: efdf9b1183dddfd4258cd181a72125755215ab7b
    */
   export type PrismaVersion = {
     client: string
@@ -757,7 +757,8 @@ export namespace Prisma {
   ) => Promise<T>
 
   // tested in getLogLevel.test.ts
-  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined; 
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
+
   export type Datasource = {
     url?: string
   }

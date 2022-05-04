@@ -2472,7 +2472,7 @@ var require_common6 = __commonJS2({
           }
           namespaces = split[i].replace(/\*/g, ".*?");
           if (namespaces[0] === "-") {
-            createDebug.skips.push(new RegExp("^" + namespaces.substr(1) + "$"));
+            createDebug.skips.push(new RegExp("^" + namespaces.slice(1) + "$"));
           } else {
             createDebug.names.push(new RegExp("^" + namespaces + "$"));
           }
@@ -3284,7 +3284,7 @@ var require_cross_spawn2 = __commonJS2({
   }
 });
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -3857,13 +3857,13 @@ var require_dist8 = __commonJS2({
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980",
+        version: "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "22b822189f46ef0dc5c5b503368d1bee01213980"
+          enginesVersion: "efdf9b1183dddfd4258cd181a72125755215ab7b"
         },
         repository: {
           type: "git",
@@ -3871,7 +3871,7 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "16.11.26",
+          "@types/node": "16.11.27",
           typescript: "4.6.3"
         },
         scripts: {
@@ -3900,12 +3900,10 @@ var require_dist8 = __commonJS2({
         const isUrl = type === "url";
         if (platform2.includes("windows")) {
           return isUrl ? `query_engine.dll.node` : `query_engine-${platform2}.dll.node`;
-        } else if (platform2.includes("linux") || platform2.includes("debian") || platform2.includes("rhel")) {
-          return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.so.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform2}.so.node`;
         } else if (platform2.includes("darwin")) {
           return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.dylib.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform2}.dylib.node`;
         } else {
-          throw new Error(`Node API is currently not supported on your platform: ${platform2}`);
+          return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.so.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform2}.so.node`;
         }
       }
       __name(getNodeAPIName3, "getNodeAPIName3");
@@ -4122,12 +4120,16 @@ var require_dist8 = __commonJS2({
         "darwin-arm64",
         "debian-openssl-1.0.x",
         "debian-openssl-1.1.x",
+        "debian-openssl-3.0.x",
         "rhel-openssl-1.0.x",
         "rhel-openssl-1.1.x",
+        "rhel-openssl-3.0.x",
         "linux-arm64-openssl-1.1.x",
         "linux-arm64-openssl-1.0.x",
+        "linux-arm64-openssl-3.0.x",
         "linux-arm-openssl-1.1.x",
         "linux-arm-openssl-1.0.x",
+        "linux-arm-openssl-3.0.x",
         "linux-musl",
         "linux-nixos",
         "windows",
@@ -17306,11 +17308,8 @@ ${error2.message}` : execaMessage;
             if (statusCode === 200) {
               req.once("socket", resume);
               if (opts2.secureEndpoint) {
-                const servername = opts2.servername || opts2.host;
-                if (!servername) {
-                  throw new Error('Could not determine "servername"');
-                }
                 debug32("Upgrading socket connection to TLS");
+                const servername = opts2.servername || opts2.host;
                 return tls_1.default.connect(Object.assign(Object.assign({}, omit3(opts2, "host", "hostname", "path", "port")), {
                   socket,
                   servername
@@ -17319,7 +17318,7 @@ ${error2.message}` : execaMessage;
               return socket;
             }
             socket.destroy();
-            const fakeSocket = new net_1.default.Socket();
+            const fakeSocket = new net_1.default.Socket({ writable: false });
             fakeSocket.readable = true;
             req.once("socket", (s) => {
               debug32("replaying proxy buffer for failed request");
@@ -24629,6 +24628,7 @@ ${error2.message}` : execaMessage;
           "linux-nixos",
           "linux-arm-openssl-1.1.x",
           "linux-arm-openssl-1.0.x",
+          "linux-arm-openssl-3.0.x",
           "openbsd",
           "netbsd",
           "freebsd11",
@@ -25379,26 +25379,35 @@ ${error2.message}` : execaMessage;
     import_path.default.join(__dirname, "../query-engine-debian-openssl-1.1.x");
     import_path.default.join(__dirname, "../introspection-engine-debian-openssl-1.1.x");
     import_path.default.join(__dirname, "../prisma-fmt-debian-openssl-1.1.x");
+    import_path.default.join(__dirname, "../query-engine-debian-openssl-3.0.x");
+    import_path.default.join(__dirname, "../introspection-engine-debian-openssl-3.0.x");
+    import_path.default.join(__dirname, "../prisma-fmt-debian-openssl-3.0.x");
     import_path.default.join(__dirname, "../query-engine-rhel-openssl-1.0.x");
     import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-1.0.x");
     import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.0.x");
     import_path.default.join(__dirname, "../query-engine-rhel-openssl-1.1.x");
     import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-1.1.x");
     import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.1.x");
+    import_path.default.join(__dirname, "../query-engine-rhel-openssl-3.0.x");
+    import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-3.0.x");
+    import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-3.0.x");
     import_path.default.join(__dirname, "../libquery_engine-darwin.dylib.node");
     import_path.default.join(__dirname, "../libquery_engine-darwin-arm64.dylib.node");
     import_path.default.join(__dirname, "../libquery_engine-debian-openssl-1.0.x.so.node");
     import_path.default.join(__dirname, "../libquery_engine-debian-openssl-1.1.x.so.node");
+    import_path.default.join(__dirname, "../libquery_engine-debian-openssl-3.0.x.so.node");
     import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.0.x.so.node");
     import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.1.x.so.node");
+    import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-3.0.x.so.node");
     import_path.default.join(__dirname, "../libquery_engine-linux-musl.so.node");
     import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-1.0.x.so.node");
     import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-1.1.x.so.node");
+    import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-3.0.x.so.node");
     import_path.default.join(__dirname, "../query_engine-windows.dll.node");
   }
 });
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -25407,12 +25416,10 @@ var require_getNodeAPIName2 = __commonJS2({
       const isUrl = type === "url";
       if (platform2.includes("windows")) {
         return isUrl ? `query_engine.dll.node` : `query_engine-${platform2}.dll.node`;
-      } else if (platform2.includes("linux") || platform2.includes("debian") || platform2.includes("rhel")) {
-        return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.so.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform2}.so.node`;
       } else if (platform2.includes("darwin")) {
         return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.dylib.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform2}.dylib.node`;
       } else {
-        throw new Error(`Node API is currently not supported on your platform: ${platform2}`);
+        return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.so.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform2}.so.node`;
       }
     }
     __name(getNodeAPIName3, "getNodeAPIName3");
@@ -25421,7 +25428,7 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25603,7 +25610,7 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25626,7 +25633,7 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -25635,12 +25642,16 @@ var require_platforms2 = __commonJS2({
       "darwin-arm64",
       "debian-openssl-1.0.x",
       "debian-openssl-1.1.x",
+      "debian-openssl-3.0.x",
       "rhel-openssl-1.0.x",
       "rhel-openssl-1.1.x",
+      "rhel-openssl-3.0.x",
       "linux-arm64-openssl-1.1.x",
       "linux-arm64-openssl-1.0.x",
+      "linux-arm64-openssl-3.0.x",
       "linux-arm-openssl-1.1.x",
       "linux-arm-openssl-1.0.x",
+      "linux-arm-openssl-3.0.x",
       "linux-musl",
       "linux-nixos",
       "windows",
@@ -25653,7 +25664,7 @@ var require_platforms2 = __commonJS2({
   }
 });
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -36370,7 +36381,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.12.0",
+      version: "3.13.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -36413,6 +36424,9 @@ var require_package2 = __commonJS2({
         dev: "DEV=true node -r esbuild-register helpers/build.ts",
         build: "node -r esbuild-register helpers/build.ts",
         test: "jest --verbose",
+        "test:functional": "pnpm run test:functional:code && pnpm run test:functional:types",
+        "test:functional:code": "jest --verbose --config=tests/functional/jest.config.js --testPathIgnorePatterns typescript",
+        "test:functional:types": "jest --verbose --config=tests/functional/jest.config.js -- typescript",
         "test-notypes": "jest --verbose --testPathIgnorePatterns src/__tests__/types/types.test.ts",
         generate: "node scripts/postinstall.js",
         postinstall: "node scripts/postinstall.js",
@@ -36429,22 +36443,25 @@ var require_package2 = __commonJS2({
         "index-browser.js"
       ],
       devDependencies: {
+        "@jest/test-sequencer": "27.5.1",
         "@microsoft/api-extractor": "7.19.3",
         "@opentelemetry/api": "1.0.3",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980",
-        "@prisma/fetch-engine": "3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980",
+        "@prisma/engines": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b",
+        "@prisma/fetch-engine": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980",
+        "@prisma/get-platform": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
+        "@swc/core": "1.2.141",
+        "@swc/jest": "0.2.17",
         "@timsuchanek/copy": "1.4.5",
         "@types/debug": "4.1.7",
         "@types/jest": "27.4.1",
         "@types/js-levenshtein": "1.1.1",
         "@types/mssql": "7.1.5",
-        "@types/node": "12.20.47",
+        "@types/node": "12.20.48",
         "@types/pg": "8.6.5",
         arg: "5.0.1",
         benchmark: "2.1.4",
@@ -36453,8 +36470,10 @@ var require_package2 = __commonJS2({
         esbuild: "0.13.14",
         execa: "5.1.1",
         "flat-map-polyfill": "0.3.8",
+        "fs-extra": "10.0.0",
         "fs-monkey": "1.0.3",
         "get-own-enumerable-property-symbols": "3.0.2",
+        globby: "11.1.0",
         "indent-string": "4.0.0",
         "is-obj": "2.0.0",
         "is-regexp": "2.1.0",
@@ -36492,7 +36511,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980"
+        "@prisma/engines-version": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b"
       },
       sideEffects: false
     };
@@ -40820,11 +40839,14 @@ __name2(SchemaMissingError, "SchemaMissingError");
 __name26(SchemaMissingError, "SchemaMissingError");
 var __defProp28 = Object.defineProperty;
 var __name27 = /* @__PURE__ */ __name2((target, value) => __defProp28(target, "name", { value, configurable: true }), "__name");
+var BAD_REQUEST_DEFAULT_MESSAGE = "This request could not be understood by the server";
 var BadRequestError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
-  constructor(info2) {
-    super("This request could not be understood by the server", setRetryable(info2, false));
+  constructor(info2, message, code) {
+    super(message || BAD_REQUEST_DEFAULT_MESSAGE, setRetryable(info2, false));
     this.name = "BadRequestError";
     this.code = "P5000";
+    if (code)
+      this.code = code;
   }
 }, "BadRequestError");
 __name2(BadRequestError, "BadRequestError");
@@ -40853,11 +40875,13 @@ __name2(NotFoundError, "NotFoundError");
 __name29(NotFoundError, "NotFoundError");
 var __defProp31 = Object.defineProperty;
 var __name30 = /* @__PURE__ */ __name2((target, value) => __defProp31(target, "name", { value, configurable: true }), "__name");
+var SERVER_ERROR_DEFAULT_MESSAGE = "Unknown server error";
 var ServerError = /* @__PURE__ */ __name(class extends DataProxyAPIError {
-  constructor(info2) {
-    super("Unknown server error", setRetryable(info2, true));
+  constructor(info2, message, logs) {
+    super(message || SERVER_ERROR_DEFAULT_MESSAGE, setRetryable(info2, true));
     this.name = "ServerError";
     this.code = "P5006";
+    this.logs = logs;
   }
 }, "ServerError");
 __name2(ServerError, "ServerError");
@@ -40887,17 +40911,28 @@ __name32(UsageExceededError, "UsageExceededError");
 var __defProp34 = Object.defineProperty;
 var __name33 = /* @__PURE__ */ __name2((target, value) => __defProp34(target, "name", { value, configurable: true }), "__name");
 async function responseToError(response, clientVersion2) {
-  var _a2;
+  var _a2, _b2, _c, _d, _e;
   if (response.ok)
     return void 0;
   const info2 = { clientVersion: clientVersion2, response };
+  if (response.status === 400) {
+    let knownError;
+    try {
+      const body = await response.json();
+      knownError = (_b2 = (_a2 = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _a2.reason) == null ? void 0 : _b2.KnownEngineStartupError;
+    } catch (_) {
+    }
+    if (knownError) {
+      throw new BadRequestError(info2, knownError.msg, knownError.error_code);
+    }
+  }
   if (response.status === 401) {
     throw new UnauthorizedError(info2);
   }
   if (response.status === 404) {
     try {
       const body = await response.json();
-      const isSchemaMissing = ((_a2 = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _a2.reason) === "SchemaMissing";
+      const isSchemaMissing = ((_c = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _c.reason) === "SchemaMissing";
       return isSchemaMissing ? new SchemaMissingError(info2) : new NotFoundError(info2);
     } catch (err) {
       return new NotFoundError(info2);
@@ -40910,6 +40945,22 @@ async function responseToError(response, clientVersion2) {
     throw new GatewayTimeoutError(info2);
   }
   if (response.status >= 500) {
+    let body;
+    try {
+      body = await response.json();
+    } catch (err) {
+      throw new ServerError(info2);
+    }
+    if (typeof ((_d = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _d.reason) === "string") {
+      throw new ServerError(info2, body.EngineNotStarted.reason);
+    } else if (typeof ((_e = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _e.reason) === "object") {
+      const keys2 = Object.keys(body.EngineNotStarted.reason);
+      if (keys2.length > 0) {
+        const reason = body.EngineNotStarted.reason;
+        const content = reason[keys2[0]];
+        throw new ServerError(info2, keys2[0], content.logs);
+      }
+    }
     throw new ServerError(info2);
   }
   if (response.status >= 400) {
@@ -41184,7 +41235,7 @@ ${queries.join("\n")}`
     }
     const { protocol, host, searchParams } = url2;
     if (protocol !== "prisma:") {
-      throw new InvalidDatasourceError("Datasource URL should use prisma:// protocol", {
+      throw new InvalidDatasourceError("Datasource URL should use prisma:// protocol. If you are not using the Data Proxy, remove the `dataProxy` from the `previewFeatures` in your schema and ensure that `PRISMA_CLIENT_ENGINE_TYPE` environment variable is not set to `dataproxy`.", {
         clientVersion: this.clientVersion
       });
     }
