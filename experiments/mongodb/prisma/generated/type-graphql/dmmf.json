@@ -14,8 +14,8 @@
             "isUnique": false,
             "isId": true,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": true,
+            "type": "String",
             "default": {
               "name": "auto",
               "args": []
@@ -31,8 +31,8 @@
             "isUnique": true,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -44,8 +44,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -57,8 +57,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -70,8 +70,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Comment",
             "hasDefaultValue": false,
+            "type": "Comment",
             "relationName": "CommentToPost",
             "relationFromFields": [],
             "relationToFields": [],
@@ -86,8 +86,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "User",
             "hasDefaultValue": false,
+            "type": "User",
             "relationName": "PostToUser",
             "relationFromFields": [
               "authorId"
@@ -106,16 +106,16 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": true,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": null,
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       },
       {
         "name": "Comment",
@@ -129,8 +129,8 @@
             "isUnique": false,
             "isId": true,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": true,
+            "type": "String",
             "default": {
               "name": "auto",
               "args": []
@@ -146,8 +146,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Post",
             "hasDefaultValue": false,
+            "type": "Post",
             "relationName": "CommentToPost",
             "relationFromFields": [
               "postId"
@@ -166,8 +166,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": true,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -179,16 +179,16 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": null,
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       },
       {
         "name": "User",
@@ -202,8 +202,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "UserAddress",
             "hasDefaultValue": false,
+            "type": "UserAddress",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -215,8 +215,8 @@
             "isUnique": false,
             "isId": true,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": true,
+            "type": "String",
             "default": {
               "name": "auto",
               "args": []
@@ -232,8 +232,8 @@
             "isUnique": true,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -245,8 +245,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Int",
             "hasDefaultValue": false,
+            "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -258,8 +258,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Post",
             "hasDefaultValue": false,
+            "type": "Post",
             "relationName": "PostToUser",
             "relationFromFields": [],
             "relationToFields": [],
@@ -267,10 +267,10 @@
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": null,
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       }
     ],
     "types": [
@@ -286,8 +286,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
-            "hasDefaultValue": false
+            "hasDefaultValue": false,
+            "type": "String"
           },
           {
             "name": "number",
@@ -297,8 +297,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Int",
-            "hasDefaultValue": false
+            "hasDefaultValue": false,
+            "type": "Int"
           },
           {
             "name": "city",
@@ -308,8 +308,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
-            "hasDefaultValue": false
+            "hasDefaultValue": false,
+            "type": "String"
           }
         ],
         "primaryKey": null,

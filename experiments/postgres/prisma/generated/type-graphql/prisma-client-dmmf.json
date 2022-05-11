@@ -44,8 +44,8 @@
             "isUnique": false,
             "isId": true,
             "isReadOnly": false,
-            "type": "Int",
             "hasDefaultValue": true,
+            "type": "Int",
             "default": {
               "name": "autoincrement",
               "args": []
@@ -62,8 +62,8 @@
             "isUnique": true,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -75,8 +75,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false,
             "documentation": "renamed field doc\\n@TypeGraphQL.field(name: \"firstName\")"
@@ -89,8 +89,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Int",
             "hasDefaultValue": false,
+            "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -102,8 +102,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Float",
             "hasDefaultValue": false,
+            "type": "Float",
             "isGenerated": false,
             "isUpdatedAt": false,
             "documentation": "@TypeGraphQL.field(name: \"accountBalance\")"
@@ -116,8 +116,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Float",
             "hasDefaultValue": false,
+            "type": "Float",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -129,8 +129,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "post",
             "hasDefaultValue": false,
+            "type": "post",
             "relationName": "posts",
             "relationFromFields": [],
             "relationToFields": [],
@@ -146,8 +146,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Role",
             "hasDefaultValue": false,
+            "type": "Role",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -159,8 +159,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "post",
             "hasDefaultValue": false,
+            "type": "post",
             "relationName": "editorPosts",
             "relationFromFields": [],
             "relationToFields": [],
@@ -176,8 +176,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Int",
             "hasDefaultValue": false,
+            "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -189,17 +189,17 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
-        "documentation": "User model doc\\n@@TypeGraphQL.type(name: \"MainUser\")",
         "primaryKey": null,
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false,
+        "documentation": "User model doc\\n@@TypeGraphQL.type(name: \"MainUser\")"
       },
       {
         "name": "post",
@@ -213,8 +213,8 @@
             "isUnique": false,
             "isId": true,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": true,
+            "type": "String",
             "default": {
               "name": "uuid",
               "args": []
@@ -231,8 +231,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "DateTime",
             "hasDefaultValue": true,
+            "type": "DateTime",
             "default": {
               "name": "now",
               "args": []
@@ -248,8 +248,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "DateTime",
             "hasDefaultValue": false,
+            "type": "DateTime",
             "isGenerated": false,
             "isUpdatedAt": true,
             "documentation": "@TypeGraphQL.omit(input: [\"create\", \"update\"])"
@@ -262,8 +262,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Boolean",
             "hasDefaultValue": true,
+            "type": "Boolean",
             "default": false,
             "isGenerated": false,
             "isUpdatedAt": false,
@@ -277,8 +277,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -290,8 +290,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false,
             "documentation": "@TypeGraphQL.omit(output: true)"
@@ -304,8 +304,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -317,8 +317,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "User",
             "hasDefaultValue": false,
+            "type": "User",
             "relationName": "posts",
             "relationFromFields": [
               "authorId"
@@ -338,8 +338,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": true,
-            "type": "Int",
             "hasDefaultValue": false,
+            "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -351,8 +351,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "User",
             "hasDefaultValue": false,
+            "type": "User",
             "relationName": "editorPosts",
             "relationFromFields": [
               "editorId"
@@ -373,8 +373,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": true,
-            "type": "Int",
             "hasDefaultValue": false,
+            "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false,
             "documentation": "@TypeGraphQL.omit(output: true)"
@@ -387,8 +387,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "PostKind",
             "hasDefaultValue": false,
+            "type": "PostKind",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -400,16 +400,16 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Json",
             "hasDefaultValue": false,
+            "type": "Json",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": null,
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       },
       {
         "name": "Category",
@@ -423,8 +423,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -436,8 +436,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -449,13 +449,12 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Int",
             "hasDefaultValue": false,
+            "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": null,
         "uniqueFields": [
           [
@@ -471,7 +470,8 @@
               "number"
             ]
           }
-        ]
+        ],
+        "isGenerated": false
       },
       {
         "name": "Patient",
@@ -485,8 +485,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -498,8 +498,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -511,13 +511,12 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": {
           "name": null,
           "fields": [
@@ -526,7 +525,8 @@
           ]
         },
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       },
       {
         "name": "Movie",
@@ -540,8 +540,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": true,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -553,8 +553,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": true,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -566,8 +566,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Director",
             "hasDefaultValue": false,
+            "type": "Director",
             "relationName": "DirectorToMovie",
             "relationFromFields": [
               "directorFirstName",
@@ -589,13 +589,12 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": {
           "name": "movieCompoundId",
           "fields": [
@@ -605,7 +604,8 @@
           ]
         },
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       },
       {
         "name": "Director",
@@ -619,8 +619,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -632,8 +632,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -645,8 +645,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Movie",
             "hasDefaultValue": false,
+            "type": "Movie",
             "relationName": "DirectorToMovie",
             "relationFromFields": [],
             "relationToFields": [],
@@ -654,7 +654,6 @@
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": {
           "name": null,
           "fields": [
@@ -663,7 +662,8 @@
           ]
         },
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       },
       {
         "name": "Problem",
@@ -677,8 +677,8 @@
             "isUnique": false,
             "isId": true,
             "isReadOnly": false,
-            "type": "Int",
             "hasDefaultValue": true,
+            "type": "Int",
             "default": {
               "name": "autoincrement",
               "args": []
@@ -694,8 +694,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -707,8 +707,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Creator",
             "hasDefaultValue": false,
+            "type": "Creator",
             "relationName": "CreatorToProblem",
             "relationFromFields": [],
             "relationToFields": [
@@ -725,8 +725,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Creator",
             "hasDefaultValue": false,
+            "type": "Creator",
             "relationName": "creator",
             "relationFromFields": [
               "creatorId"
@@ -746,16 +746,16 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": true,
-            "type": "Int",
             "hasDefaultValue": false,
+            "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": null,
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       },
       {
         "name": "Creator",
@@ -769,8 +769,8 @@
             "isUnique": false,
             "isId": true,
             "isReadOnly": false,
-            "type": "Int",
             "hasDefaultValue": true,
+            "type": "Int",
             "default": {
               "name": "autoincrement",
               "args": []
@@ -786,8 +786,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "String",
             "hasDefaultValue": false,
+            "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -799,8 +799,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Problem",
             "hasDefaultValue": false,
+            "type": "Problem",
             "relationName": "CreatorToProblem",
             "relationFromFields": [],
             "relationToFields": [
@@ -817,8 +817,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Problem",
             "hasDefaultValue": false,
+            "type": "Problem",
             "relationName": "creator",
             "relationFromFields": [],
             "relationToFields": [],
@@ -826,10 +826,10 @@
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": null,
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       },
       {
         "name": "NativeTypeModel",
@@ -843,8 +843,8 @@
             "isUnique": false,
             "isId": true,
             "isReadOnly": false,
-            "type": "Int",
             "hasDefaultValue": true,
+            "type": "Int",
             "default": {
               "name": "autoincrement",
               "args": []
@@ -860,8 +860,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "BigInt",
             "hasDefaultValue": false,
+            "type": "BigInt",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -873,8 +873,8 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Bytes",
             "hasDefaultValue": false,
+            "type": "Bytes",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -886,16 +886,16 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Decimal",
             "hasDefaultValue": false,
+            "type": "Decimal",
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
-        "isGenerated": false,
         "primaryKey": null,
         "uniqueFields": [],
-        "uniqueIndexes": []
+        "uniqueIndexes": [],
+        "isGenerated": false
       }
     ],
     "types": []

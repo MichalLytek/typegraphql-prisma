@@ -1419,20 +1419,20 @@ var require_route2 = __commonJS2({
     }
     __name(deriveBFS, "deriveBFS");
     __name2(deriveBFS, "deriveBFS");
-    function link2(from, to) {
+    function link(from, to) {
       return function(args) {
         return to(from(args));
       };
     }
-    __name(link2, "link2");
-    __name2(link2, "link");
+    __name(link, "link");
+    __name2(link, "link");
     function wrapConversion(toModel, graph) {
       const path6 = [graph[toModel].parent, toModel];
       let fn = conversions[graph[toModel].parent][toModel];
       let cur = graph[toModel].parent;
       while (graph[cur].parent) {
         path6.unshift(graph[cur].parent);
-        fn = link2(conversions[graph[cur].parent][cur], fn);
+        fn = link(conversions[graph[cur].parent][cur], fn);
         cur = graph[cur].parent;
       }
       fn.conversion = path6;
@@ -3284,7 +3284,7 @@ var require_cross_spawn2 = __commonJS2({
   }
 });
 var require_dist8 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+engines@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/engines/dist/index.js"(exports, module) {
+  "../../node_modules/.pnpm/@prisma+engines@3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a/node_modules/@prisma/engines/dist/index.js"(exports, module) {
     var __create = Object.create;
     var __defProp = Object.defineProperty;
     var __getProtoOf = Object.getPrototypeOf;
@@ -3565,7 +3565,7 @@ var require_dist8 = __commonJS2({
             }
             namespaces = split[i].replace(/\*/g, ".*?");
             if (namespaces[0] === "-") {
-              createDebug.skips.push(new RegExp("^" + namespaces.substr(1) + "$"));
+              createDebug.skips.push(new RegExp("^" + namespaces.slice(1) + "$"));
             } else {
               createDebug.names.push(new RegExp("^" + namespaces + "$"));
             }
@@ -3857,13 +3857,13 @@ var require_dist8 = __commonJS2({
     var require_package = __commonJS((exports2, module2) => {
       module2.exports = {
         name: "@prisma/engines-version",
-        version: "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b",
+        version: "3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a",
         main: "index.js",
         types: "index.d.ts",
         license: "Apache-2.0",
         author: "Tim Suchanek <suchanek@prisma.io>",
         prisma: {
-          enginesVersion: "efdf9b1183dddfd4258cd181a72125755215ab7b"
+          enginesVersion: "2b0c12756921c891fec4f68d9444e18c7d5d4a6a"
         },
         repository: {
           type: "git",
@@ -3871,8 +3871,8 @@ var require_dist8 = __commonJS2({
           directory: "packages/engines-version"
         },
         devDependencies: {
-          "@types/node": "16.11.27",
-          typescript: "4.6.3"
+          "@types/node": "16.11.33",
+          typescript: "4.6.4"
         },
         scripts: {
           build: "tsc -d",
@@ -4135,6 +4135,7 @@ var require_dist8 = __commonJS2({
         "windows",
         "freebsd11",
         "freebsd12",
+        "freebsd13",
         "openbsd",
         "netbsd",
         "arm"
@@ -5022,20 +5023,20 @@ var require_dist8 = __commonJS2({
       }
       __name(deriveBFS, "deriveBFS");
       __name2(deriveBFS, "deriveBFS");
-      function link2(from, to) {
+      function link(from, to) {
         return function(args) {
           return to(from(args));
         };
       }
-      __name(link2, "link2");
-      __name2(link2, "link");
+      __name(link, "link");
+      __name2(link, "link");
       function wrapConversion(toModel, graph) {
         const path22 = [graph[toModel].parent, toModel];
         let fn = conversions[graph[toModel].parent][toModel];
         let cur = graph[toModel].parent;
         while (graph[cur].parent) {
           path22.unshift(graph[cur].parent);
-          fn = link2(conversions[graph[cur].parent][cur], fn);
+          fn = link(conversions[graph[cur].parent][cur], fn);
           cur = graph[cur].parent;
         }
         fn.conversion = path22;
@@ -24632,7 +24633,8 @@ ${error2.message}` : execaMessage;
           "openbsd",
           "netbsd",
           "freebsd11",
-          "freebsd12"
+          "freebsd12",
+          "freebsd13"
         ];
         const relevantPlatforms = get_platform_12.platforms.filter((p) => !excludedPlatforms.includes(p));
         for (const platform2 of relevantPlatforms) {
@@ -24945,9 +24947,9 @@ ${error2.message}` : execaMessage;
         const platform = await (0, get_platform_1.getPlatform)();
         const os = await (0, get_platform_1.getos)();
         if (os.distro && ["nixos"].includes(os.distro)) {
-          console.error(`${chalk_1.default.yellow("Warning")} Precompiled binaries are not available for ${os.distro}.`);
-        } else if (["freebsd11", "freebsd12", "openbsd", "netbsd"].includes(platform)) {
-          console.error(`${chalk_1.default.yellow("Warning")} Precompiled binaries are not available for ${platform}. Read more about building your own binaries at https://pris.ly/d/build-binaries`);
+          console.error(`${chalk_1.default.yellow("Warning")} Precompiled engine files are not available for ${os.distro}.`);
+        } else if (["freebsd11", "freebsd12", "freebsd13", "openbsd", "netbsd"].includes(platform)) {
+          console.error(`${chalk_1.default.yellow("Warning")} Precompiled engine files are not available for ${platform}. Read more about building your own engines at https://pris.ly/d/build-engines`);
         } else if (BinaryType.libqueryEngine in options.binaries) {
           await (0, get_platform_1.isNodeAPISupported)();
         }
@@ -24986,7 +24988,7 @@ ${error2.message}` : execaMessage;
           const isSupported = get_platform_1.platforms.includes(job.binaryTarget);
           const shouldDownload = isSupported && !job.envVarPath && (opts.ignoreCache || needsToBeDownloaded);
           if (needsToBeDownloaded && !isSupported) {
-            throw new Error(`Unknown binaryTarget ${job.binaryTarget} and no custom binaries were provided`);
+            throw new Error(`Unknown binaryTarget ${job.binaryTarget} and no custom engine files were provided`);
           }
           return shouldDownload;
         });
@@ -25407,7 +25409,7 @@ ${error2.message}` : execaMessage;
   }
 });
 var require_getNodeAPIName2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a/node_modules/@prisma/get-platform/dist/getNodeAPIName.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getNodeAPIName = void 0;
@@ -25428,7 +25430,7 @@ var require_getNodeAPIName2 = __commonJS2({
   }
 });
 var require_getPlatform2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a/node_modules/@prisma/get-platform/dist/getPlatform.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25610,7 +25612,7 @@ var require_getPlatform2 = __commonJS2({
   }
 });
 var require_isNodeAPISupported2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a/node_modules/@prisma/get-platform/dist/isNodeAPISupported.js"(exports2) {
     "use strict";
     var __importDefault2 = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -25633,7 +25635,7 @@ var require_isNodeAPISupported2 = __commonJS2({
   }
 });
 var require_platforms2 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a/node_modules/@prisma/get-platform/dist/platforms.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = void 0;
@@ -25657,6 +25659,7 @@ var require_platforms2 = __commonJS2({
       "windows",
       "freebsd11",
       "freebsd12",
+      "freebsd13",
       "openbsd",
       "netbsd",
       "arm"
@@ -25664,7 +25667,7 @@ var require_platforms2 = __commonJS2({
   }
 });
 var require_dist9 = __commonJS2({
-  "../../node_modules/.pnpm/@prisma+get-platform@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
+  "../../node_modules/.pnpm/@prisma+get-platform@3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a/node_modules/@prisma/get-platform/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.platforms = exports2.isNodeAPISupported = exports2.getPlatform = exports2.getos = exports2.getNodeAPIName = void 0;
@@ -27317,7 +27320,7 @@ var require_retry4 = __commonJS2({
   }
 });
 var require_p_retry2 = __commonJS2({
-  "../../node_modules/.pnpm/p-retry@4.6.1/node_modules/p-retry/index.js"(exports2, module2) {
+  "../../node_modules/.pnpm/p-retry@4.6.2/node_modules/p-retry/index.js"(exports2, module2) {
     "use strict";
     var retry = require_retry4();
     var networkErrorMsgs = [
@@ -27447,225 +27450,6 @@ var require_new_github_issue_url = __commonJS2({
       return url2.toString();
     };
     module2.exports.default = module2.exports;
-  }
-});
-var require_ansi_escapes = __commonJS2({
-  "../../node_modules/.pnpm/ansi-escapes@4.3.2/node_modules/ansi-escapes/index.js"(exports2, module2) {
-    "use strict";
-    var ansiEscapes = module2.exports;
-    module2.exports.default = ansiEscapes;
-    var ESC = "[";
-    var OSC = "]";
-    var BEL = "\x07";
-    var SEP = ";";
-    var isTerminalApp = process.env.TERM_PROGRAM === "Apple_Terminal";
-    ansiEscapes.cursorTo = (x, y) => {
-      if (typeof x !== "number") {
-        throw new TypeError("The `x` argument is required");
-      }
-      if (typeof y !== "number") {
-        return ESC + (x + 1) + "G";
-      }
-      return ESC + (y + 1) + ";" + (x + 1) + "H";
-    };
-    ansiEscapes.cursorMove = (x, y) => {
-      if (typeof x !== "number") {
-        throw new TypeError("The `x` argument is required");
-      }
-      let ret = "";
-      if (x < 0) {
-        ret += ESC + -x + "D";
-      } else if (x > 0) {
-        ret += ESC + x + "C";
-      }
-      if (y < 0) {
-        ret += ESC + -y + "A";
-      } else if (y > 0) {
-        ret += ESC + y + "B";
-      }
-      return ret;
-    };
-    ansiEscapes.cursorUp = (count2 = 1) => ESC + count2 + "A";
-    ansiEscapes.cursorDown = (count2 = 1) => ESC + count2 + "B";
-    ansiEscapes.cursorForward = (count2 = 1) => ESC + count2 + "C";
-    ansiEscapes.cursorBackward = (count2 = 1) => ESC + count2 + "D";
-    ansiEscapes.cursorLeft = ESC + "G";
-    ansiEscapes.cursorSavePosition = isTerminalApp ? "7" : ESC + "s";
-    ansiEscapes.cursorRestorePosition = isTerminalApp ? "8" : ESC + "u";
-    ansiEscapes.cursorGetPosition = ESC + "6n";
-    ansiEscapes.cursorNextLine = ESC + "E";
-    ansiEscapes.cursorPrevLine = ESC + "F";
-    ansiEscapes.cursorHide = ESC + "?25l";
-    ansiEscapes.cursorShow = ESC + "?25h";
-    ansiEscapes.eraseLines = (count2) => {
-      let clear = "";
-      for (let i = 0; i < count2; i++) {
-        clear += ansiEscapes.eraseLine + (i < count2 - 1 ? ansiEscapes.cursorUp() : "");
-      }
-      if (count2) {
-        clear += ansiEscapes.cursorLeft;
-      }
-      return clear;
-    };
-    ansiEscapes.eraseEndLine = ESC + "K";
-    ansiEscapes.eraseStartLine = ESC + "1K";
-    ansiEscapes.eraseLine = ESC + "2K";
-    ansiEscapes.eraseDown = ESC + "J";
-    ansiEscapes.eraseUp = ESC + "1J";
-    ansiEscapes.eraseScreen = ESC + "2J";
-    ansiEscapes.scrollUp = ESC + "S";
-    ansiEscapes.scrollDown = ESC + "T";
-    ansiEscapes.clearScreen = "c";
-    ansiEscapes.clearTerminal = process.platform === "win32" ? `${ansiEscapes.eraseScreen}${ESC}0f` : `${ansiEscapes.eraseScreen}${ESC}3J${ESC}H`;
-    ansiEscapes.beep = BEL;
-    ansiEscapes.link = (text, url2) => {
-      return [
-        OSC,
-        "8",
-        SEP,
-        SEP,
-        url2,
-        BEL,
-        text,
-        OSC,
-        "8",
-        SEP,
-        SEP,
-        BEL
-      ].join("");
-    };
-    ansiEscapes.image = (buffer, options2 = {}) => {
-      let ret = `${OSC}1337;File=inline=1`;
-      if (options2.width) {
-        ret += `;width=${options2.width}`;
-      }
-      if (options2.height) {
-        ret += `;height=${options2.height}`;
-      }
-      if (options2.preserveAspectRatio === false) {
-        ret += ";preserveAspectRatio=0";
-      }
-      return ret + ":" + buffer.toString("base64") + BEL;
-    };
-    ansiEscapes.iTerm = {
-      setCwd: (cwd = process.cwd()) => `${OSC}50;CurrentDir=${cwd}${BEL}`,
-      annotation: (message, options2 = {}) => {
-        let ret = `${OSC}1337;`;
-        const hasX = typeof options2.x !== "undefined";
-        const hasY = typeof options2.y !== "undefined";
-        if ((hasX || hasY) && !(hasX && hasY && typeof options2.length !== "undefined")) {
-          throw new Error("`x`, `y` and `length` must be defined when `x` or `y` is defined");
-        }
-        message = message.replace(/\|/g, "");
-        ret += options2.isHidden ? "AddHiddenAnnotation=" : "AddAnnotation=";
-        if (options2.length > 0) {
-          ret += (hasX ? [message, options2.length, options2.x, options2.y] : [options2.length, message]).join("|");
-        } else {
-          ret += message;
-        }
-        return ret + BEL;
-      }
-    };
-  }
-});
-var require_supports_hyperlinks = __commonJS2({
-  "../../node_modules/.pnpm/supports-hyperlinks@2.2.0/node_modules/supports-hyperlinks/index.js"(exports2, module2) {
-    "use strict";
-    var supportsColor = require_supports_color2();
-    var hasFlag = require_has_flag2();
-    function parseVersion(versionString) {
-      if (/^\d{3,4}$/.test(versionString)) {
-        const m = /(\d{1,2})(\d{2})/.exec(versionString);
-        return {
-          major: 0,
-          minor: parseInt(m[1], 10),
-          patch: parseInt(m[2], 10)
-        };
-      }
-      const versions = (versionString || "").split(".").map((n) => parseInt(n, 10));
-      return {
-        major: versions[0],
-        minor: versions[1],
-        patch: versions[2]
-      };
-    }
-    __name(parseVersion, "parseVersion");
-    __name2(parseVersion, "parseVersion");
-    function supportsHyperlink(stream2) {
-      const { env } = process;
-      if ("FORCE_HYPERLINK" in env) {
-        return !(env.FORCE_HYPERLINK.length > 0 && parseInt(env.FORCE_HYPERLINK, 10) === 0);
-      }
-      if (hasFlag("no-hyperlink") || hasFlag("no-hyperlinks") || hasFlag("hyperlink=false") || hasFlag("hyperlink=never")) {
-        return false;
-      }
-      if (hasFlag("hyperlink=true") || hasFlag("hyperlink=always")) {
-        return true;
-      }
-      if (!supportsColor.supportsColor(stream2)) {
-        return false;
-      }
-      if (stream2 && !stream2.isTTY) {
-        return false;
-      }
-      if (process.platform === "win32") {
-        return false;
-      }
-      if ("NETLIFY" in env) {
-        return true;
-      }
-      if ("CI" in env) {
-        return false;
-      }
-      if ("TEAMCITY_VERSION" in env) {
-        return false;
-      }
-      if ("TERM_PROGRAM" in env) {
-        const version = parseVersion(env.TERM_PROGRAM_VERSION);
-        switch (env.TERM_PROGRAM) {
-          case "iTerm.app":
-            if (version.major === 3) {
-              return version.minor >= 1;
-            }
-            return version.major > 3;
-        }
-      }
-      if ("VTE_VERSION" in env) {
-        if (env.VTE_VERSION === "0.50.0") {
-          return false;
-        }
-        const version = parseVersion(env.VTE_VERSION);
-        return version.major > 0 || version.minor >= 50;
-      }
-      return false;
-    }
-    __name(supportsHyperlink, "supportsHyperlink");
-    __name2(supportsHyperlink, "supportsHyperlink");
-    module2.exports = {
-      supportsHyperlink,
-      stdout: supportsHyperlink(process.stdout),
-      stderr: supportsHyperlink(process.stderr)
-    };
-  }
-});
-var require_terminal_link = __commonJS2({
-  "../../node_modules/.pnpm/terminal-link@2.1.1/node_modules/terminal-link/index.js"(exports2, module2) {
-    "use strict";
-    var ansiEscapes = require_ansi_escapes();
-    var supportsHyperlinks = require_supports_hyperlinks();
-    var terminalLink2 = /* @__PURE__ */ __name2((text, url2, { target = "stdout", ...options2 } = {}) => {
-      if (!supportsHyperlinks[target]) {
-        if (options2.fallback === false) {
-          return text;
-        }
-        return typeof options2.fallback === "function" ? options2.fallback(text, url2) : `${text} (\u200B${url2}\u200B)`;
-      }
-      return ansiEscapes.link(text, url2);
-    }, "terminalLink");
-    module2.exports = (text, url2, options2 = {}) => terminalLink2(text, url2, options2);
-    module2.exports.stderr = (text, url2, options2 = {}) => terminalLink2(text, url2, { target: "stderr", ...options2 });
-    module2.exports.isSupported = supportsHyperlinks.stdout;
-    module2.exports.stderr.isSupported = supportsHyperlinks.stderr;
   }
 });
 var require_symbols = __commonJS2({
@@ -36381,7 +36165,7 @@ var require_package2 = __commonJS2({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "3.13.0",
+      version: "3.14.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -36425,12 +36209,11 @@ var require_package2 = __commonJS2({
         build: "node -r esbuild-register helpers/build.ts",
         test: "jest --verbose",
         "test:functional": "pnpm run test:functional:code && pnpm run test:functional:types",
-        "test:functional:code": "jest --verbose --config=tests/functional/jest.config.js --testPathIgnorePatterns typescript",
+        "test:functional:code": "jest --verbose --config=tests/functional/jest.config.js --testPathIgnorePatterns typescript --",
         "test:functional:types": "jest --verbose --config=tests/functional/jest.config.js -- typescript",
         "test-notypes": "jest --verbose --testPathIgnorePatterns src/__tests__/types/types.test.ts",
         generate: "node scripts/postinstall.js",
         postinstall: "node scripts/postinstall.js",
-        prepare: "cp scripts/backup-index.js index.js && cp scripts/backup-index.d.ts index.d.ts",
         prepublishOnly: "pnpm run build"
       },
       files: [
@@ -36443,25 +36226,25 @@ var require_package2 = __commonJS2({
         "index-browser.js"
       ],
       devDependencies: {
-        "@jest/test-sequencer": "27.5.1",
+        "@jest/test-sequencer": "28.1.0",
         "@microsoft/api-extractor": "7.19.3",
         "@opentelemetry/api": "1.0.3",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
-        "@prisma/engines": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b",
-        "@prisma/fetch-engine": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b",
+        "@prisma/engines": "3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a",
+        "@prisma/fetch-engine": "3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a",
         "@prisma/generator-helper": "workspace:*",
-        "@prisma/get-platform": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b",
+        "@prisma/get-platform": "3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a",
         "@prisma/migrate": "workspace:*",
         "@prisma/sdk": "workspace:*",
         "@swc/core": "1.2.141",
-        "@swc/jest": "0.2.17",
+        "@swc/jest": "0.2.20",
         "@timsuchanek/copy": "1.4.5",
         "@types/debug": "4.1.7",
-        "@types/jest": "27.4.1",
+        "@types/jest": "27.5.0",
         "@types/js-levenshtein": "1.1.1",
         "@types/mssql": "7.1.5",
-        "@types/node": "12.20.48",
+        "@types/node": "12.20.50",
         "@types/pg": "8.6.5",
         arg: "5.0.1",
         benchmark: "2.1.4",
@@ -36477,8 +36260,8 @@ var require_package2 = __commonJS2({
         "indent-string": "4.0.0",
         "is-obj": "2.0.0",
         "is-regexp": "2.1.0",
-        jest: "27.5.1",
-        "jest-junit": "13.0.0",
+        jest: "28.1.0",
+        "jest-junit": "13.2.0",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
         "lz-string": "1.4.4",
@@ -36497,7 +36280,7 @@ var require_package2 = __commonJS2({
         "stacktrace-parser": "0.1.10",
         "strip-ansi": "6.0.1",
         "strip-indent": "3.0.0",
-        "ts-jest": "27.1.4",
+        "ts-jest": "28.0.2",
         "ts-node": "10.4.0",
         tsd: "0.19.1",
         typescript: "4.5.4"
@@ -36511,7 +36294,7 @@ var require_package2 = __commonJS2({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b"
+        "@prisma/engines-version": "3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a"
       },
       sideEffects: false
     };
@@ -39527,11 +39310,10 @@ var PrismaClientUnknownRequestError = /* @__PURE__ */ __name(class extends Error
 __name2(PrismaClientUnknownRequestError, "PrismaClientUnknownRequestError");
 __name8(PrismaClientUnknownRequestError, "PrismaClientUnknownRequestError");
 var import_debug3 = __toModule22(require_dist7());
+var import_chalk2 = __toModule22(require_source2());
 var import_strip_ansi = __toModule22(require_strip_ansi());
 var import_debug2 = __toModule22(require_dist7());
-var import_chalk2 = __toModule22(require_source2());
 var import_new_github_issue_url = __toModule22(require_new_github_issue_url());
-var import_terminal_link = __toModule22(require_terminal_link());
 var __defProp10 = Object.defineProperty;
 var __name9 = /* @__PURE__ */ __name2((target, value) => __defProp10(target, "name", { value, configurable: true }), "__name");
 var debug3 = (0, import_debug2.default)("plusX");
@@ -39565,14 +39347,6 @@ function fixBinaryTargets(binaryTargets, platform2) {
 __name(fixBinaryTargets, "fixBinaryTargets");
 __name2(fixBinaryTargets, "fixBinaryTargets");
 __name9(fixBinaryTargets, "fixBinaryTargets");
-function link(url2) {
-  return (0, import_terminal_link.default)(url2, url2, {
-    fallback: (url22) => import_chalk2.default.underline(url22)
-  });
-}
-__name(link, "link");
-__name2(link, "link");
-__name9(link, "link");
 function getGithubIssueUrl({
   title,
   user = "prisma",
@@ -39676,7 +39450,7 @@ ${query2 ? maskQuery(query2) : ""}
 
 This is a non-recoverable error which probably happens when the Prisma Query Engine has a panic.
 
-${link(url2)}
+${import_chalk2.default.underline(url2)}
 
 If you want the Prisma team to look into it, please open the link above \u{1F64F}
 To increase the chance of success, please post your schema and a snippet of
@@ -43338,12 +43112,14 @@ __name(flatMap, "flatMap");
 __name2(flatMap, "flatMap");
 var notReallyObjects = {
   "[object Date]": true,
-  "[object BitInt]": true,
   "[object Uint8Array]": true,
-  "[object Function]": true
+  "[object Decimal]": true
 };
 function isObject(value) {
-  return value && typeof value === "object" && !notReallyObjects[Object.prototype.toString.call(value)];
+  if (!value) {
+    return false;
+  }
+  return typeof value === "object" && !notReallyObjects[Object.prototype.toString.call(value)];
 }
 __name(isObject, "isObject");
 __name2(isObject, "isObject");
@@ -45682,6 +45458,38 @@ function batchFindUniqueBy(request3) {
 __name(batchFindUniqueBy, "batchFindUniqueBy");
 __name2(batchFindUniqueBy, "batchFindUniqueBy");
 var clientVersion = require_package2().version;
+function deserializeRawResults(rows) {
+  return rows.map((row) => {
+    const mappedRow = {};
+    for (const key of Object.keys(row)) {
+      mappedRow[key] = deserializeValue(row[key]);
+    }
+    return mappedRow;
+  });
+}
+__name(deserializeRawResults, "deserializeRawResults");
+__name2(deserializeRawResults, "deserializeRawResults");
+function deserializeValue({ prisma__type: type, prisma__value: value }) {
+  switch (type) {
+    case "bigint":
+      return BigInt(value);
+    case "bytes":
+      return Buffer.from(value, "base64");
+    case "decimal":
+      return new decimal_default(value);
+    case "datetime":
+    case "date":
+      return new Date(value);
+    case "time":
+      return new Date(`1970-01-01T${value}Z`);
+    case "array":
+      return value.map(deserializeValue);
+    default:
+      return value;
+  }
+}
+__name(deserializeValue, "deserializeValue");
+__name2(deserializeValue, "deserializeValue");
 var mssqlPreparedStatement = /* @__PURE__ */ __name2((template) => {
   return template.reduce((acc, str, idx) => `${acc}@P${idx}${str}`);
 }, "mssqlPreparedStatement");
@@ -45709,66 +45517,103 @@ async function runInChildSpan(name, parentCtx, cb) {
 }
 __name(runInChildSpan, "runInChildSpan");
 __name2(runInChildSpan, "runInChildSpan");
-function serializeRawParameters(data) {
-  return JSON.stringify(serializeBigInt(replaceDates(data)));
+function serializeRawParameters(parameters) {
+  try {
+    return serializeRawParametersInternal(parameters, "fast");
+  } catch (error2) {
+    return serializeRawParametersInternal(parameters, "slow");
+  }
 }
 __name(serializeRawParameters, "serializeRawParameters");
 __name2(serializeRawParameters, "serializeRawParameters");
-function replaceDates(data) {
-  const type = Object.prototype.toString.call(data);
-  if (type === "[object Date]") {
+function serializeRawParametersInternal(parameters, objectSerialization) {
+  return JSON.stringify(parameters.map((parameter) => encodeParameter(parameter, objectSerialization)));
+}
+__name(serializeRawParametersInternal, "serializeRawParametersInternal");
+__name2(serializeRawParametersInternal, "serializeRawParametersInternal");
+function encodeParameter(parameter, objectSerialization) {
+  if (typeof parameter === "bigint") {
     return {
-      prisma__type: "date",
-      prisma__value: data.toJSON()
+      prisma__type: "bigint",
+      prisma__value: parameter.toString()
     };
   }
-  if (type === "[object Object]") {
-    const tmp = {};
-    for (const key in data) {
-      if (key !== "__proto__") {
-        tmp[key] = replaceDates(data[key]);
-      }
-    }
-    return tmp;
+  if (isDate(parameter)) {
+    return {
+      prisma__type: "date",
+      prisma__value: parameter.toJSON()
+    };
   }
-  if (type === "[object Array]") {
-    let k = data.length;
-    let tmp;
-    for (tmp = new Array(k); k--; ) {
-      tmp[k] = replaceDates(data[k]);
-    }
-    return tmp;
+  if (decimal_default.isDecimal(parameter)) {
+    return {
+      prisma__type: "decimal",
+      prisma__value: parameter.toJSON()
+    };
   }
-  return data;
+  if (Buffer.isBuffer(parameter)) {
+    return {
+      prisma__type: "bytes",
+      prisma__value: parameter.toString("base64")
+    };
+  }
+  if (isArrayBufferLike(parameter) || ArrayBuffer.isView(parameter)) {
+    return {
+      prisma__type: "bytes",
+      prisma__value: Buffer.from(parameter).toString("base64")
+    };
+  }
+  if (typeof parameter === "object" && objectSerialization === "slow") {
+    return preprocessObject(parameter);
+  }
+  return parameter;
 }
-__name(replaceDates, "replaceDates");
-__name2(replaceDates, "replaceDates");
-function serializeBigInt(data) {
-  const type = Object.prototype.toString.call(data);
-  if (type === "[object BigInt]") {
-    return data.toString();
+__name(encodeParameter, "encodeParameter");
+__name2(encodeParameter, "encodeParameter");
+function isDate(value) {
+  if (value instanceof Date) {
+    return true;
   }
-  if (type === "[object Object]") {
-    const tmp = {};
-    for (const key in data) {
-      if (key !== "__proto__") {
-        tmp[key] = serializeBigInt(data[key]);
-      }
-    }
-    return tmp;
-  }
-  if (type === "[object Array]") {
-    let k = data.length;
-    let tmp;
-    for (tmp = new Array(k); k--; ) {
-      tmp[k] = serializeBigInt(data[k]);
-    }
-    return tmp;
-  }
-  return data;
+  return Object.prototype.toString.call(value) === "[object Date]" && typeof value.toJSON === "function";
 }
-__name(serializeBigInt, "serializeBigInt");
-__name2(serializeBigInt, "serializeBigInt");
+__name(isDate, "isDate");
+__name2(isDate, "isDate");
+function isArrayBufferLike(value) {
+  if (value instanceof ArrayBuffer || value instanceof SharedArrayBuffer) {
+    return true;
+  }
+  if (typeof value === "object" && value !== null) {
+    return value[Symbol.toStringTag] === "ArrayBuffer" || value[Symbol.toStringTag] === "SharedArrayBuffer";
+  }
+  return false;
+}
+__name(isArrayBufferLike, "isArrayBufferLike");
+__name2(isArrayBufferLike, "isArrayBufferLike");
+function preprocessObject(obj) {
+  if (typeof obj !== "object" || obj === null) {
+    return obj;
+  }
+  if (typeof obj.toJSON === "function") {
+    return obj.toJSON();
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(preprocessValueInObject);
+  }
+  const result = {};
+  for (const key of Object.keys(obj)) {
+    result[key] = preprocessValueInObject(obj[key]);
+  }
+  return result;
+}
+__name(preprocessObject, "preprocessObject");
+__name2(preprocessObject, "preprocessObject");
+function preprocessValueInObject(value) {
+  if (typeof value === "bigint") {
+    return value.toString();
+  }
+  return preprocessObject(value);
+}
+__name(preprocessValueInObject, "preprocessValueInObject");
+__name2(preprocessValueInObject, "preprocessValueInObject");
 var import_js_levenshtein2 = __toModule22(require_js_levenshtein());
 var knownProperties = ["datasources", "errorFormat", "log", "__internal", "rejectOnNotFound"];
 var errorFormats = ["pretty", "colorless", "minimal"];
@@ -46222,7 +46067,7 @@ function getPrismaClient(config2) {
       debug8(`Prisma Client call:`);
       return this._request({
         args,
-        clientMethod: "executeRaw",
+        clientMethod: "$executeRaw",
         dataPath: [],
         action: "executeRaw",
         callsite: getCallSite(this._errorFormat),
@@ -46258,7 +46103,7 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
       return createPrismaPromise((txId, lock, otelCtx) => {
         return this._request({
           args: { command },
-          clientMethod: "runCommandRaw",
+          clientMethod: "$runCommandRaw",
           dataPath: [],
           action: "runCommandRaw",
           callsite: getCallSite(this._errorFormat),
@@ -46344,7 +46189,7 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
       debug8(`Prisma Client call:`);
       return this._request({
         args,
-        clientMethod: "queryRaw",
+        clientMethod: "$queryRaw",
         dataPath: [],
         action: "queryRaw",
         callsite: getCallSite(this._errorFormat),
@@ -46352,7 +46197,7 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
         transactionId: txId,
         otelCtx,
         lock
-      });
+      }).then(deserializeRawResults);
     }
     $queryRaw(query2, ...values) {
       return createPrismaPromise((txId, lock, otelCtx) => {

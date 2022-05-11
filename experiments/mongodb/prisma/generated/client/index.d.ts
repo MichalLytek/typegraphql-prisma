@@ -224,8 +224,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.13.0
-   * Query Engine version: efdf9b1183dddfd4258cd181a72125755215ab7b
+   * Prisma Client JS version: 3.14.0
+   * Query Engine version: 2b0c12756921c891fec4f68d9444e18c7d5d4a6a
    */
   export type PrismaVersion = {
     client: string
@@ -736,6 +736,7 @@ export namespace Prisma {
     | 'aggregate'
     | 'count'
     | 'runCommandRaw'
+    | 'findRaw'
 
   /**
    * These options are being passed in to the middleware as "params"
