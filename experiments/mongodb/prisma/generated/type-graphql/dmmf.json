@@ -195,19 +195,6 @@
         "dbName": null,
         "fields": [
           {
-            "name": "address",
-            "kind": "object",
-            "isList": false,
-            "isRequired": true,
-            "isUnique": false,
-            "isId": false,
-            "isReadOnly": false,
-            "hasDefaultValue": false,
-            "type": "UserAddress",
-            "isGenerated": false,
-            "isUpdatedAt": false
-          },
-          {
             "name": "id",
             "kind": "scalar",
             "isList": false,
@@ -247,6 +234,19 @@
             "isReadOnly": false,
             "hasDefaultValue": false,
             "type": "Int",
+            "isGenerated": false,
+            "isUpdatedAt": false
+          },
+          {
+            "name": "address",
+            "kind": "object",
+            "isList": false,
+            "isRequired": true,
+            "isUnique": false,
+            "isId": false,
+            "isReadOnly": false,
+            "hasDefaultValue": false,
+            "type": "UserAddress",
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -1374,25 +1374,6 @@
               ]
             },
             {
-              "name": "address",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressCompositeFilter",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressObjectEqualityInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "id",
               "isRequired": false,
               "isNullable": false,
@@ -1452,6 +1433,25 @@
               ]
             },
             {
+              "name": "address",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressCompositeFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressObjectEqualityInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "posts",
               "isRequired": false,
               "isNullable": false,
@@ -1473,19 +1473,6 @@
             "minNumFields": 0
           },
           "fields": [
-            {
-              "name": "address",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressOrderByInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
             {
               "name": "id",
               "isRequired": false,
@@ -1521,6 +1508,19 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressOrderByInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -2667,25 +2667,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressCreateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "id",
               "isRequired": false,
               "isNullable": false,
@@ -2722,6 +2703,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressCreateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -2749,25 +2749,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressCreateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "id",
               "isRequired": false,
               "isNullable": false,
@@ -2804,6 +2785,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressCreateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -2831,25 +2831,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressUpdateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "email",
               "isRequired": false,
               "isNullable": false,
@@ -2886,6 +2867,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressUpdateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -2913,25 +2913,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressUpdateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "email",
               "isRequired": false,
               "isNullable": false,
@@ -2973,6 +2954,25 @@
               ]
             },
             {
+              "name": "address",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressUpdateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "posts",
               "isRequired": false,
               "isNullable": false,
@@ -2994,25 +2994,6 @@
             "minNumFields": null
           },
           "fields": [
-            {
-              "name": "address",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressCreateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
             {
               "name": "id",
               "isRequired": false,
@@ -3053,23 +3034,14 @@
                   "isList": false
                 }
               ]
-            }
-          ]
-        },
-        {
-          "name": "UserUpdateManyMutationInput",
-          "constraints": {
-            "maxNumFields": null,
-            "minNumFields": null
-          },
-          "fields": [
+            },
             {
               "name": "address",
-              "isRequired": false,
+              "isRequired": true,
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserAddressUpdateEnvelopeInput",
+                  "type": "UserAddressCreateEnvelopeInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -3081,7 +3053,16 @@
                   "isList": false
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "name": "UserUpdateManyMutationInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
             {
               "name": "email",
               "isRequired": false,
@@ -3119,6 +3100,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressUpdateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -3133,25 +3133,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressUpdateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "email",
               "isRequired": false,
               "isNullable": false,
@@ -3188,6 +3169,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressUpdateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -4060,104 +4060,6 @@
           ]
         },
         {
-          "name": "UserAddressCompositeFilter",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "equals",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressObjectEqualityInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "is",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressWhereInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "isNot",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressWhereInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "UserAddressObjectEqualityInput",
-          "constraints": {
-            "maxNumFields": null,
-            "minNumFields": null
-          },
-          "fields": [
-            {
-              "name": "street",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "number",
-              "isRequired": false,
-              "isNullable": true,
-              "inputTypes": [
-                {
-                  "type": "Int",
-                  "location": "scalar",
-                  "isList": false
-                },
-                {
-                  "type": "Null",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "city",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            }
-          ]
-        },
-        {
           "name": "IntNullableFilter",
           "constraints": {
             "maxNumFields": null,
@@ -4293,6 +4195,104 @@
               "inputTypes": [
                 {
                   "type": "Boolean",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserAddressCompositeFilter",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "equals",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressObjectEqualityInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "is",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "isNot",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserAddressObjectEqualityInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "street",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "number",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "city",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
                   "location": "scalar",
                   "isList": false
                 }
@@ -6000,41 +6000,6 @@
           ]
         },
         {
-          "name": "UserAddressUpdateEnvelopeInput",
-          "constraints": {
-            "maxNumFields": 1,
-            "minNumFields": 1
-          },
-          "fields": [
-            {
-              "name": "set",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "update",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressUpdateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            }
-          ]
-        },
-        {
           "name": "NullableIntFieldUpdateOperationsInput",
           "constraints": {
             "maxNumFields": 1,
@@ -6114,6 +6079,41 @@
                 {
                   "type": "Boolean",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserAddressUpdateEnvelopeInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "set",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "update",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressUpdateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -7013,125 +7013,6 @@
           ]
         },
         {
-          "name": "UserAddressWhereInput",
-          "constraints": {
-            "maxNumFields": null,
-            "minNumFields": null
-          },
-          "fields": [
-            {
-              "name": "AND",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressWhereInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressWhereInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
-              "name": "OR",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressWhereInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
-              "name": "NOT",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressWhereInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressWhereInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": true
-                }
-              ]
-            },
-            {
-              "name": "street",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "StringFilter",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "number",
-              "isRequired": false,
-              "isNullable": true,
-              "inputTypes": [
-                {
-                  "type": "IntNullableFilter",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "Int",
-                  "location": "scalar",
-                  "isList": false
-                },
-                {
-                  "type": "Null",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "city",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "StringFilter",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "String",
-                  "location": "scalar",
-                  "isList": false
-                }
-              ]
-            }
-          ]
-        },
-        {
           "name": "NestedIntNullableFilter",
           "constraints": {
             "maxNumFields": null,
@@ -7267,6 +7148,125 @@
               "inputTypes": [
                 {
                   "type": "Boolean",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UserAddressWhereInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "AND",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "OR",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "NOT",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "street",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "StringFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "number",
+              "isRequired": false,
+              "isNullable": true,
+              "inputTypes": [
+                {
+                  "type": "IntNullableFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
+                  "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "city",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "StringFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "String",
                   "location": "scalar",
                   "isList": false
                 }
@@ -7762,25 +7762,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressCreateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "id",
               "isRequired": false,
               "isNullable": false,
@@ -7817,6 +7798,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressCreateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -7831,25 +7831,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressCreateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "id",
               "isRequired": false,
               "isNullable": false,
@@ -7886,6 +7867,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressCreateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -8244,25 +8244,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressUpdateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "email",
               "isRequired": false,
               "isNullable": false,
@@ -8299,6 +8280,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressUpdateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -8313,25 +8313,6 @@
           },
           "fields": [
             {
-              "name": "address",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "UserAddressUpdateEnvelopeInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "UserAddressCreateInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "email",
               "isRequired": false,
               "isNullable": false,
@@ -8368,6 +8349,25 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "address",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "UserAddressUpdateEnvelopeInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "UserAddressCreateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -12992,17 +12992,6 @@
           "name": "User",
           "fields": [
             {
-              "name": "address",
-              "args": [],
-              "isNullable": false,
-              "outputType": {
-                "type": "UserAddress",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              }
-            },
-            {
               "name": "id",
               "args": [],
               "isNullable": false,
@@ -13029,6 +13018,17 @@
               "outputType": {
                 "type": "Int",
                 "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "address",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "UserAddress",
+                "namespace": "model",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             },

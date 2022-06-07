@@ -10,11 +10,6 @@ import { UserAddressUpdateEnvelopeInput } from "../inputs/UserAddressUpdateEnvel
   isAbstract: true
 })
 export class UserUpdateManyMutationInput {
-  @TypeGraphQL.Field(_type => UserAddressUpdateEnvelopeInput, {
-    nullable: true
-  })
-  address?: UserAddressUpdateEnvelopeInput | undefined;
-
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -24,4 +19,9 @@ export class UserUpdateManyMutationInput {
     nullable: true
   })
   age?: NullableIntFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserAddressUpdateEnvelopeInput, {
+    nullable: true
+  })
+  address?: UserAddressUpdateEnvelopeInput | undefined;
 }

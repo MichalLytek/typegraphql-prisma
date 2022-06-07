@@ -10,11 +10,6 @@ import { SortOrder } from "../../enums/SortOrder";
   isAbstract: true
 })
 export class UserOrderByWithRelationInput {
-  @TypeGraphQL.Field(_type => UserAddressOrderByInput, {
-    nullable: true
-  })
-  address?: UserAddressOrderByInput | undefined;
-
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -29,6 +24,11 @@ export class UserOrderByWithRelationInput {
     nullable: true
   })
   age?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => UserAddressOrderByInput, {
+    nullable: true
+  })
+  address?: UserAddressOrderByInput | undefined;
 
   @TypeGraphQL.Field(_type => PostOrderByRelationAggregateInput, {
     nullable: true

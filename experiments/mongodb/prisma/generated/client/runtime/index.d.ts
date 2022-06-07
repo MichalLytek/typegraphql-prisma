@@ -64,7 +64,7 @@ declare interface BinaryTargetsEnvValue {
     value: string;
 }
 
-declare interface Client_2 {
+declare interface Client {
     /** Only via tx proxy */
     [TX_ID]?: string;
     _dmmf: DMMFClass;
@@ -75,6 +75,7 @@ declare interface Client_2 {
     _engineConfig: EngineConfig;
     _clientVersion: string;
     _errorFormat: ErrorFormat;
+    readonly $metrics: MetricsClient;
     $use<T>(arg0: Namespace | QueryMiddleware<T>, arg1?: QueryMiddleware | EngineMiddleware<T>): any;
     $on(eventType: EngineEventType, callback: (event: any) => void): any;
     $connect(): any;
@@ -135,8 +136,8 @@ declare type DataLoaderOptions<T> = {
 
 declare interface DataSource {
     name: string;
-    activeProvider: ConnectorType_2;
-    provider: ConnectorType_2;
+    activeProvider: ConnectorType;
+    provider: ConnectorType;
     url: EnvValue;
     config: {
         [key: string]: string;
@@ -425,15 +426,26 @@ export declare class Decimal {
     static readonly EUCLID: 9;
 }
 
-export declare const decompressFromBase64: any;
-
-declare interface Dictionary<T> {
-    [key: string]: T;
+/**
+ * Interface for any Decimal.js-like library
+ * Allows us to accept Decimal.js from different
+ * versions and some compatible alternatives
+ */
+export declare interface DecimalJsLike {
+    d: number[];
+    e: number;
+    s: number;
 }
 
-declare type Dictionary_2<T> = {
+export declare const decompressFromBase64: any;
+
+declare type Dictionary<T> = {
     [key: string]: T;
 };
+
+declare interface Dictionary_2<T> {
+    [key: string]: T;
+}
 
 export declare namespace DMMF {
     export interface Document {
@@ -643,19 +655,19 @@ export declare class DMMFClass implements DMMF.Document {
         model: DMMF.OutputType[];
         prisma: DMMF.OutputType[];
     };
-    outputTypeMap: Dictionary<DMMF.OutputType>;
+    outputTypeMap: Dictionary_2<DMMF.OutputType>;
     inputObjectTypes: {
         model?: DMMF.InputType[];
         prisma: DMMF.InputType[];
     };
-    inputTypeMap: Dictionary<DMMF.InputType>;
-    enumMap: Dictionary<DMMF.SchemaEnum>;
-    datamodelEnumMap: Dictionary<DMMF.DatamodelEnum>;
-    modelMap: Dictionary<DMMF.Model>;
-    typeMap: Dictionary<DMMF.Model>;
-    typeAndModelMap: Dictionary<DMMF.Model>;
-    mappingsMap: Dictionary<DMMF.ModelMapping>;
-    rootFieldMap: Dictionary<DMMF.SchemaField>;
+    inputTypeMap: Dictionary_2<DMMF.InputType>;
+    enumMap: Dictionary_2<DMMF.SchemaEnum>;
+    datamodelEnumMap: Dictionary_2<DMMF.DatamodelEnum>;
+    modelMap: Dictionary_2<DMMF.Model>;
+    typeMap: Dictionary_2<DMMF.Model>;
+    typeAndModelMap: Dictionary_2<DMMF.Model>;
+    mappingsMap: Dictionary_2<DMMF.ModelMapping>;
+    rootFieldMap: Dictionary_2<DMMF.SchemaField>;
     constructor({ datamodel, schema, mappings }: DMMF.Document);
     get [Symbol.toStringTag](): string;
     protected outputTypeToMergedOutputType: (outputType: DMMF.OutputType) => DMMF.OutputType;
@@ -668,18 +680,18 @@ export declare class DMMFClass implements DMMF.Document {
         model: DMMF.OutputType[];
         prisma: DMMF.OutputType[];
     };
-    protected getDatamodelEnumMap(): Dictionary<DMMF.DatamodelEnum>;
-    protected getEnumMap(): Dictionary<DMMF.SchemaEnum>;
-    protected getModelMap(): Dictionary<DMMF.Model>;
-    protected getTypeMap(): Dictionary<DMMF.Model>;
-    protected getTypeModelMap(): Dictionary<DMMF.Model>;
-    protected getMergedOutputTypeMap(): Dictionary<DMMF.OutputType>;
-    protected getInputTypeMap(): Dictionary<DMMF.InputType>;
-    protected getMappingsMap(): Dictionary<DMMF.ModelMapping>;
-    protected getRootFieldMap(): Dictionary<DMMF.SchemaField>;
+    protected getDatamodelEnumMap(): Dictionary_2<DMMF.DatamodelEnum>;
+    protected getEnumMap(): Dictionary_2<DMMF.SchemaEnum>;
+    protected getModelMap(): Dictionary_2<DMMF.Model>;
+    protected getTypeMap(): Dictionary_2<DMMF.Model>;
+    protected getTypeModelMap(): Dictionary_2<DMMF.Model>;
+    protected getMergedOutputTypeMap(): Dictionary_2<DMMF.OutputType>;
+    protected getInputTypeMap(): Dictionary_2<DMMF.InputType>;
+    protected getMappingsMap(): Dictionary_2<DMMF.ModelMapping>;
+    protected getRootFieldMap(): Dictionary_2<DMMF.SchemaField>;
 }
 
-declare class Document {
+declare class Document_2 {
     readonly type: 'query' | 'mutation';
     readonly children: Field[];
     constructor(type: 'query' | 'mutation', children: Field[]);
@@ -730,6 +742,8 @@ export declare abstract class Engine {
     abstract transaction(action: 'start', options?: Transaction.Options): Promise<Transaction.Info>;
     abstract transaction(action: 'commit', info: Transaction.Info): Promise<void>;
     abstract transaction(action: 'rollback', info: Transaction.Info): Promise<void>;
+    abstract metrics(options: MetricsOptionsJson): Promise<Metrics>;
+    abstract metrics(options: MetricsOptionsPrometheus): Promise<string>;
 }
 
 declare interface EngineConfig {
@@ -748,7 +762,7 @@ declare interface EngineConfig {
     showColors?: boolean;
     logQueries?: boolean;
     logLevel?: 'info' | 'warn';
-    env?: Record<string, string>;
+    env: Record<string, string>;
     flags?: string[];
     clientVersion?: string;
     previewFeatures?: string[];
@@ -782,7 +796,7 @@ declare type EngineMiddleware<T = unknown> = (params: EngineMiddlewareParams, ne
 }>;
 
 declare type EngineMiddlewareParams = {
-    document: Document;
+    document: Document_2;
     runInTransaction?: boolean;
 };
 
@@ -847,7 +861,7 @@ declare interface GeneratorConfig {
     output: EnvValue | null;
     isCustomOutput?: boolean;
     provider: EnvValue;
-    config: Dictionary_2<string>;
+    config: Dictionary<string>;
     binaryTargets: BinaryTargetsEnvValue[];
     previewFeatures: string[];
 }
@@ -857,7 +871,7 @@ declare type GetConfigResult = {
     generators: GeneratorConfig[];
 };
 
-export declare function getPrismaClient(config: GetPrismaClientConfig): new (optionsArg?: PrismaClientOptions | undefined) => Client_2;
+export declare function getPrismaClient(config: GetPrismaClientConfig): new (optionsArg?: PrismaClientOptions) => Client;
 
 /**
  * Config that is stored into the generated client. When the generated client is
@@ -880,17 +894,27 @@ declare interface GetPrismaClientConfig {
     datasourceNames: string[];
     activeProvider: string;
     /**
+     * True when `--data-proxy` is passed to `prisma generate`
+     * If enabled, we disregard the generator config engineType.
+     * It means that `--data-proxy` binds you to the Data Proxy.
+     */
+    dataProxy: boolean;
+    /**
      * The contents of the schema encoded into a string
      * @remarks only used for the purpose of data proxy
      */
     inlineSchema?: string;
     /**
-     * The contents of the env saved into a special object
+     * A special env object just for the data proxy edge runtime.
+     * Allows bundlers to inject their own env variables (Vercel).
+     * Allows platforms to declare global variables as env (Workers).
      * @remarks only used for the purpose of data proxy
      */
-    inlineEnv?: LoadedEnv;
+    injectableEdgeEnv?: LoadedEnv;
     /**
-     * The contents of the datasource url saved in a string
+     * The contents of the datasource url saved in a string.
+     * This can either be an env var name or connection string.
+     * It is needed by the client to connect to the Data Proxy.
      * @remarks only used for the purpose of data proxy
      */
     inlineDatasources?: InlineDatasources;
@@ -936,8 +960,8 @@ declare type InstanceRejectOnNotFound = RejectOnNotFound | Record<string, Reject
 
 declare interface InternalDatasource {
     name: string;
-    activeProvider: ConnectorType;
-    provider: ConnectorType;
+    activeProvider: ConnectorType_2;
+    provider: ConnectorType_2;
     url: EnvValue_2;
     config: any;
 }
@@ -1045,7 +1069,67 @@ declare type LogDefinition = {
 
 declare type LogLevel = 'info' | 'query' | 'warn' | 'error';
 
-export declare function makeDocument({ dmmf, rootTypeName, rootField, select }: DocumentInput): Document;
+export declare function makeDocument({ dmmf, rootTypeName, rootField, select }: DocumentInput): Document_2;
+
+declare type Metric<T> = {
+    key: string;
+    value: T;
+    labels: Record<string, string>;
+    description: string;
+};
+
+declare type MetricHistogram = {
+    buckets: MetricHistogramBucket[];
+    sum: number;
+    count: number;
+};
+
+declare type MetricHistogramBucket = [maxValue: number, count: number];
+
+declare type Metrics = {
+    counters: Metric<number>[];
+    gauges: Metric<number>[];
+    histograms: Metric<MetricHistogram>[];
+};
+
+export declare class MetricsClient {
+    private _engine;
+    constructor(engine: Engine);
+    /**
+     * Returns all metrics gathered up to this point in prometheus format.
+     * Result of this call can be exposed directly to prometheus scraping endpoint
+     *
+     * @param options
+     * @returns
+     */
+    prometheus(options?: MetricsOptions): Promise<string>;
+    /**
+     * Returns all metrics gathered up to this point in prometheus format.
+     *
+     * @param options
+     * @returns
+     */
+    json(options?: MetricsOptions): Promise<Metrics>;
+}
+
+declare type MetricsOptions = {
+    /**
+     * Labels to add to every metrics in key-value format
+     */
+    globalLabels?: Record<string, string>;
+};
+
+declare type MetricsOptionsCommon = {
+    globalLabels?: Record<string, string>;
+};
+
+declare type MetricsOptionsJson = {
+    format: 'json';
+} & MetricsOptionsCommon;
+
+declare type MetricsOptionsPrometheus = {
+    format: 'prometheus';
+} & MetricsOptionsCommon;
 
 /**
  * Opposite of InvalidArgNameError - if the user *doesn't* provide an arg that should be provided
@@ -1193,17 +1277,17 @@ export declare type RawValue = Value | Sql;
 declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
 
 declare type Request_2 = {
-    document: Document;
+    document: Document_2;
     runInTransaction?: boolean;
     transactionId?: string | number;
     headers?: Record<string, string>;
 };
 
 declare class RequestHandler {
-    client: Client_2;
+    client: Client;
     hooks: any;
     dataloader: DataLoader<Request_2>;
-    constructor(client: Client_2, hooks?: any);
+    constructor(client: Client, hooks?: any);
     request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, showColors, engineHook, args, headers, transactionId, unpacker, }: RequestParams): Promise<any>;
     sanitizeMessage(message: any): any;
     unpack(document: any, data: any, path: any, rootField: any, unpacker?: Unpacker): any;
@@ -1211,7 +1295,7 @@ declare class RequestHandler {
 }
 
 declare type RequestParams = {
-    document: Document;
+    document: Document_2;
     dataPath: string[];
     rootField: string;
     typeName: string;
@@ -1269,7 +1353,7 @@ declare namespace Transaction {
     }
 }
 
-export declare function transformDocument(document: Document): Document;
+export declare function transformDocument(document: Document_2): Document_2;
 
 declare const TX_ID: unique symbol;
 
@@ -1282,7 +1366,7 @@ export declare function unpack({ document, path, data }: UnpackOptions): any;
 declare type Unpacker = (data: any) => any;
 
 declare interface UnpackOptions {
-    document: Document;
+    document: Document_2;
     path: string[];
     data: any;
 }

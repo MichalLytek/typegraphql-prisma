@@ -8,11 +8,6 @@ import { UserAddressCreateEnvelopeInput } from "../inputs/UserAddressCreateEnvel
   isAbstract: true
 })
 export class UserCreateWithoutPostsInput {
-  @TypeGraphQL.Field(_type => UserAddressCreateEnvelopeInput, {
-    nullable: false
-  })
-  address!: UserAddressCreateEnvelopeInput;
-
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
@@ -27,4 +22,9 @@ export class UserCreateWithoutPostsInput {
     nullable: true
   })
   age?: number | undefined;
+
+  @TypeGraphQL.Field(_type => UserAddressCreateEnvelopeInput, {
+    nullable: false
+  })
+  address!: UserAddressCreateEnvelopeInput;
 }

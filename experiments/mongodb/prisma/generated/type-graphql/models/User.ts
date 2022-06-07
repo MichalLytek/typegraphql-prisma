@@ -10,11 +10,6 @@ import { UserCount } from "../resolvers/outputs/UserCount";
   isAbstract: true
 })
 export class User {
-  @TypeGraphQL.Field(_type => UserAddress, {
-    nullable: false
-  })
-  address!: UserAddress;
-
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
@@ -29,6 +24,11 @@ export class User {
     nullable: true
   })
   age?: number | null;
+
+  @TypeGraphQL.Field(_type => UserAddress, {
+    nullable: false
+  })
+  address!: UserAddress;
 
   posts?: Post[];
 

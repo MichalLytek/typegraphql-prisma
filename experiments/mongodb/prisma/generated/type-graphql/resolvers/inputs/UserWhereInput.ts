@@ -26,11 +26,6 @@ export class UserWhereInput {
   })
   NOT?: UserWhereInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => UserAddressCompositeFilter, {
-    nullable: true
-  })
-  address?: UserAddressCompositeFilter | undefined;
-
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
@@ -45,6 +40,11 @@ export class UserWhereInput {
     nullable: true
   })
   age?: IntNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => UserAddressCompositeFilter, {
+    nullable: true
+  })
+  address?: UserAddressCompositeFilter | undefined;
 
   @TypeGraphQL.Field(_type => PostListRelationFilter, {
     nullable: true

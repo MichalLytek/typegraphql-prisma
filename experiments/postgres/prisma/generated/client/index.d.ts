@@ -424,9 +424,11 @@ export namespace Prisma {
    */
   export import Decimal = runtime.Decimal
 
+  export type DecimalJsLike = runtime.DecimalJsLike
+
   /**
-   * Prisma Client JS version: 3.14.0
-   * Query Engine version: 2b0c12756921c891fec4f68d9444e18c7d5d4a6a
+   * Prisma Client JS version: 3.15.0
+   * Query Engine version: b9297dc3a59307060c1c39d7e4f5765066f38372
    */
   export type PrismaVersion = {
     client: string
@@ -9628,7 +9630,7 @@ export namespace Prisma {
     id?: IntFilter | number
     bigInt?: BigIntNullableFilter | bigint | number | null
     byteA?: BytesNullableFilter | Buffer | null
-    decimal?: DecimalNullableFilter | Decimal | number | string | null
+    decimal?: DecimalNullableFilter | Decimal | DecimalJsLike | number | string | null
   }
 
   export type NativeTypeModelOrderByWithRelationAndSearchRelevanceInput = {
@@ -9661,7 +9663,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter | number
     bigInt?: BigIntNullableWithAggregatesFilter | bigint | number | null
     byteA?: BytesNullableWithAggregatesFilter | Buffer | null
-    decimal?: DecimalNullableWithAggregatesFilter | Decimal | number | string | null
+    decimal?: DecimalNullableWithAggregatesFilter | Decimal | DecimalJsLike | number | string | null
   }
 
   export type UserCreateInput = {
@@ -10095,47 +10097,47 @@ export namespace Prisma {
   export type NativeTypeModelCreateInput = {
     bigInt?: bigint | number | null
     byteA?: Buffer | null
-    decimal?: Decimal | number | string | null
+    decimal?: Decimal | DecimalJsLike | number | string | null
   }
 
   export type NativeTypeModelUncheckedCreateInput = {
     id?: number
     bigInt?: bigint | number | null
     byteA?: Buffer | null
-    decimal?: Decimal | number | string | null
+    decimal?: Decimal | DecimalJsLike | number | string | null
   }
 
   export type NativeTypeModelUpdateInput = {
     bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
-    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
+    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
   export type NativeTypeModelUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
-    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
+    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
   export type NativeTypeModelCreateManyInput = {
     id?: number
     bigInt?: bigint | number | null
     byteA?: Buffer | null
-    decimal?: Decimal | number | string | null
+    decimal?: Decimal | DecimalJsLike | number | string | null
   }
 
   export type NativeTypeModelUpdateManyMutationInput = {
     bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
-    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
+    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
   export type NativeTypeModelUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
-    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | number | string | null
+    decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
   export type IntFilter = {
@@ -10793,14 +10795,14 @@ export namespace Prisma {
   }
 
   export type DecimalNullableFilter = {
-    equals?: Decimal | number | string | null
-    in?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
-    notIn?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
-    lt?: Decimal | number | string
-    lte?: Decimal | number | string
-    gt?: Decimal | number | string
-    gte?: Decimal | number | string
-    not?: NestedDecimalNullableFilter | Decimal | number | string | null
+    equals?: Decimal | DecimalJsLike | number | string | null
+    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    lt?: Decimal | DecimalJsLike | number | string
+    lte?: Decimal | DecimalJsLike | number | string
+    gt?: Decimal | DecimalJsLike | number | string
+    gte?: Decimal | DecimalJsLike | number | string
+    not?: NestedDecimalNullableFilter | Decimal | DecimalJsLike | number | string | null
   }
 
   export type NativeTypeModelCountOrderByAggregateInput = {
@@ -10863,14 +10865,14 @@ export namespace Prisma {
   }
 
   export type DecimalNullableWithAggregatesFilter = {
-    equals?: Decimal | number | string | null
-    in?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
-    notIn?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
-    lt?: Decimal | number | string
-    lte?: Decimal | number | string
-    gt?: Decimal | number | string
-    gte?: Decimal | number | string
-    not?: NestedDecimalNullableWithAggregatesFilter | Decimal | number | string | null
+    equals?: Decimal | DecimalJsLike | number | string | null
+    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    lt?: Decimal | DecimalJsLike | number | string
+    lte?: Decimal | DecimalJsLike | number | string
+    gt?: Decimal | DecimalJsLike | number | string
+    gte?: Decimal | DecimalJsLike | number | string
+    not?: NestedDecimalNullableWithAggregatesFilter | Decimal | DecimalJsLike | number | string | null
     _count?: NestedIntNullableFilter
     _avg?: NestedDecimalNullableFilter
     _sum?: NestedDecimalNullableFilter
@@ -11261,11 +11263,11 @@ export namespace Prisma {
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | number | string | null
-    increment?: Decimal | number | string
-    decrement?: Decimal | number | string
-    multiply?: Decimal | number | string
-    divide?: Decimal | number | string
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type NestedIntFilter = {
@@ -11539,14 +11541,14 @@ export namespace Prisma {
   }
 
   export type NestedDecimalNullableFilter = {
-    equals?: Decimal | number | string | null
-    in?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
-    notIn?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
-    lt?: Decimal | number | string
-    lte?: Decimal | number | string
-    gt?: Decimal | number | string
-    gte?: Decimal | number | string
-    not?: NestedDecimalNullableFilter | Decimal | number | string | null
+    equals?: Decimal | DecimalJsLike | number | string | null
+    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    lt?: Decimal | DecimalJsLike | number | string
+    lte?: Decimal | DecimalJsLike | number | string
+    gt?: Decimal | DecimalJsLike | number | string
+    gte?: Decimal | DecimalJsLike | number | string
+    not?: NestedDecimalNullableFilter | Decimal | DecimalJsLike | number | string | null
   }
 
   export type NestedBigIntNullableWithAggregatesFilter = {
@@ -11576,14 +11578,14 @@ export namespace Prisma {
   }
 
   export type NestedDecimalNullableWithAggregatesFilter = {
-    equals?: Decimal | number | string | null
-    in?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
-    notIn?: Enumerable<Decimal> | Enumerable<number> | Enumerable<string> | null
-    lt?: Decimal | number | string
-    lte?: Decimal | number | string
-    gt?: Decimal | number | string
-    gte?: Decimal | number | string
-    not?: NestedDecimalNullableWithAggregatesFilter | Decimal | number | string | null
+    equals?: Decimal | DecimalJsLike | number | string | null
+    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    lt?: Decimal | DecimalJsLike | number | string
+    lte?: Decimal | DecimalJsLike | number | string
+    gt?: Decimal | DecimalJsLike | number | string
+    gte?: Decimal | DecimalJsLike | number | string
+    not?: NestedDecimalNullableWithAggregatesFilter | Decimal | DecimalJsLike | number | string | null
     _count?: NestedIntNullableFilter
     _avg?: NestedDecimalNullableFilter
     _sum?: NestedDecimalNullableFilter

@@ -49,10 +49,10 @@ export type Comment = {
  * 
  */
 export type User = {
-  address: UserAddress
   id: string
   email: string
   age: number | null
+  address: UserAddress
 }
 
 
@@ -223,9 +223,11 @@ export namespace Prisma {
    */
   export import Decimal = runtime.Decimal
 
+  export type DecimalJsLike = runtime.DecimalJsLike
+
   /**
-   * Prisma Client JS version: 3.14.0
-   * Query Engine version: 2b0c12756921c891fec4f68d9444e18c7d5d4a6a
+   * Prisma Client JS version: 3.15.0
+   * Query Engine version: b9297dc3a59307060c1c39d7e4f5765066f38372
    */
   export type PrismaVersion = {
     client: string
@@ -3003,10 +3005,10 @@ export namespace Prisma {
 
 
   export type UserSelect = {
-    address?: boolean | UserAddressArgs
     id?: boolean
     email?: boolean
     age?: boolean
+    address?: boolean | UserAddressArgs
     posts?: boolean | PostFindManyArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
@@ -3918,18 +3920,18 @@ export namespace Prisma {
     AND?: Enumerable<UserWhereInput>
     OR?: Enumerable<UserWhereInput>
     NOT?: Enumerable<UserWhereInput>
-    address?: XOR<UserAddressCompositeFilter, UserAddressObjectEqualityInput>
     id?: StringFilter | string
     email?: StringFilter | string
     age?: IntNullableFilter | number | null
+    address?: XOR<UserAddressCompositeFilter, UserAddressObjectEqualityInput>
     posts?: PostListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
-    address?: UserAddressOrderByInput
     id?: SortOrder
     email?: SortOrder
     age?: SortOrder
+    address?: UserAddressOrderByInput
     posts?: PostOrderByRelationAggregateInput
   }
 
@@ -4051,52 +4053,52 @@ export namespace Prisma {
   }
 
   export type UserCreateInput = {
-    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
     id?: string
     email: string
     age?: number | null
+    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
     posts?: PostCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateInput = {
-    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
     id?: string
     email: string
     age?: number | null
+    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUpdateInput = {
-    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
     email?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
+    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
     posts?: PostUpdateManyWithoutAuthorInput
   }
 
   export type UserUncheckedUpdateInput = {
-    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
     email?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
+    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
     posts?: PostUncheckedUpdateManyWithoutAuthorInput
   }
 
   export type UserCreateManyInput = {
-    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
     id?: string
     email: string
     age?: number | null
+    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
   }
 
   export type UserUpdateManyMutationInput = {
-    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
     email?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
+    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
   }
 
   export type UserUncheckedUpdateManyInput = {
-    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
     email?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
+    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
   }
 
   export type StringFilter = {
@@ -4194,18 +4196,6 @@ export namespace Prisma {
     comment?: SortOrder
   }
 
-  export type UserAddressCompositeFilter = {
-    equals?: UserAddressObjectEqualityInput
-    is?: UserAddressWhereInput
-    isNot?: UserAddressWhereInput
-  }
-
-  export type UserAddressObjectEqualityInput = {
-    street: string
-    number?: number | null
-    city: string
-  }
-
   export type IntNullableFilter = {
     equals?: number | null
     in?: Enumerable<number> | null
@@ -4216,6 +4206,18 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntNullableFilter | number | null
     isSet?: boolean
+  }
+
+  export type UserAddressCompositeFilter = {
+    equals?: UserAddressObjectEqualityInput
+    is?: UserAddressWhereInput
+    isNot?: UserAddressWhereInput
+  }
+
+  export type UserAddressObjectEqualityInput = {
+    street: string
+    number?: number | null
+    city: string
   }
 
   export type PostListRelationFilter = {
@@ -4375,11 +4377,6 @@ export namespace Prisma {
     connect?: Enumerable<PostWhereUniqueInput>
   }
 
-  export type UserAddressUpdateEnvelopeInput = {
-    set?: UserAddressCreateInput
-    update?: UserAddressUpdateInput
-  }
-
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
@@ -4387,6 +4384,11 @@ export namespace Prisma {
     multiply?: number
     divide?: number
     unset?: boolean
+  }
+
+  export type UserAddressUpdateEnvelopeInput = {
+    set?: UserAddressCreateInput
+    update?: UserAddressUpdateInput
   }
 
   export type PostUpdateManyWithoutAuthorInput = {
@@ -4459,15 +4461,6 @@ export namespace Prisma {
     not?: NestedIntFilter | number
   }
 
-  export type UserAddressWhereInput = {
-    AND?: Enumerable<UserAddressWhereInput>
-    OR?: Enumerable<UserAddressWhereInput>
-    NOT?: Enumerable<UserAddressWhereInput>
-    street?: StringFilter | string
-    number?: IntNullableFilter | number | null
-    city?: StringFilter | string
-  }
-
   export type NestedIntNullableFilter = {
     equals?: number | null
     in?: Enumerable<number> | null
@@ -4478,6 +4471,15 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntNullableFilter | number | null
     isSet?: boolean
+  }
+
+  export type UserAddressWhereInput = {
+    AND?: Enumerable<UserAddressWhereInput>
+    OR?: Enumerable<UserAddressWhereInput>
+    NOT?: Enumerable<UserAddressWhereInput>
+    street?: StringFilter | string
+    number?: IntNullableFilter | number | null
+    city?: StringFilter | string
   }
 
   export type NestedIntNullableWithAggregatesFilter = {
@@ -4529,17 +4531,17 @@ export namespace Prisma {
   }
 
   export type UserCreateWithoutPostsInput = {
-    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
     id?: string
     email: string
     age?: number | null
+    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
-    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
     id?: string
     email: string
     age?: number | null
+    address: XOR<UserAddressCreateEnvelopeInput, UserAddressCreateInput>
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -4578,15 +4580,15 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutPostsInput = {
-    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
     email?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
+    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
-    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
     email?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
+    address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
   }
 
   export type PostCreateWithoutCommentsInput = {

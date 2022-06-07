@@ -13,7 +13,8 @@ const {
   empty,
   join,
   raw,
-  Decimal
+  Decimal,
+  DecimalJsLike
 } = require('./runtime/index')
 
 
@@ -22,12 +23,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 3.14.0
- * Query Engine version: 2b0c12756921c891fec4f68d9444e18c7d5d4a6a
+ * Prisma Client JS version: 3.15.0
+ * Query Engine version: b9297dc3a59307060c1c39d7e4f5765066f38372
  */
 Prisma.prismaVersion = {
-  client: "3.14.0",
-  engine: "2b0c12756921c891fec4f68d9444e18c7d5d4a6a"
+  client: "3.15.0",
+  engine: "b9297dc3a59307060c1c39d7e4f5765066f38372"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -54,7 +55,7 @@ Prisma.JsonNull = 'JsonNull'
 Prisma.AnyNull = 'AnyNull'
 
 
-const path = require('path')
+  const path = require('path')
 
 const { findSync } = require('./runtime')
 const fs = require('fs')
@@ -272,12 +273,13 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "3.14.0",
-  "engineVersion": "2b0c12756921c891fec4f68d9444e18c7d5d4a6a",
+  "clientVersion": "3.15.0",
+  "engineVersion": "b9297dc3a59307060c1c39d7e4f5765066f38372",
   "datasourceNames": [
     "postgres"
   ],
-  "activeProvider": "postgresql"
+  "activeProvider": "postgresql",
+  "dataProxy": false
 }
 config.document = dmmf
 config.dirname = dirname
