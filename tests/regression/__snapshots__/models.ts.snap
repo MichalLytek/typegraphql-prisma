@@ -127,8 +127,7 @@ export class User {
    */
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: false,
-    description: \\"multiline doc 1
-            multiline doc 2\\"
+    description: \\"multiline doc 1\\\\nmultiline doc 2\\"
   })
   boolField!: boolean;
 
@@ -213,11 +212,6 @@ export class User {
     nullable: false
   })
   intIdField!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false
-  })
-  aliasField!: number;
 
   @TypeGraphQL.Field(_type => Sample, {
     nullable: false

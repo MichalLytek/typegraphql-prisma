@@ -4,6 +4,9 @@ import { inspect } from 'util';
 
 declare type Action = keyof typeof DMMF.ModelAction | 'executeRaw' | 'queryRaw' | 'runCommandRaw';
 
+declare class AnyNull extends NullTypesEnumValue {
+}
+
 declare class Arg {
     key: string;
     value: ArgValue;
@@ -59,6 +62,15 @@ declare interface AtMostOneError {
     providedKeys: string[];
 }
 
+export declare type BaseDMMF = Pick<DMMF.Document, 'datamodel' | 'mappings'>;
+
+declare interface BaseDMMFHelper extends DMMFDatamodelHelper, DMMFMappingsHelper {
+}
+
+declare class BaseDMMFHelper {
+    constructor(dmmf: BaseDMMF);
+}
+
 declare interface BinaryTargetsEnvValue {
     fromEnvVar: null | string;
     value: string;
@@ -67,7 +79,8 @@ declare interface BinaryTargetsEnvValue {
 declare interface Client {
     /** Only via tx proxy */
     [TX_ID]?: string;
-    _dmmf: DMMFClass;
+    _baseDmmf: BaseDMMFHelper;
+    _dmmf?: DMMFClass;
     _engine: Engine;
     _fetcher: RequestHandler;
     _connectionPromise?: Promise<any>;
@@ -157,6 +170,9 @@ declare interface DatasourceOverwrite {
 declare type Datasources = {
     [name in string]: Datasource;
 };
+
+declare class DbNull extends NullTypesEnumValue {
+}
 
 export declare namespace Decimal {
     export type Constructor = typeof Decimal;
@@ -522,7 +538,7 @@ export declare namespace DMMF {
         type: string;
         dbNames?: string[] | null;
         hasDefaultValue: boolean;
-        default?: FieldDefault | string | boolean | number;
+        default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
         relationFromFields?: string[];
         relationToFields?: any[];
         relationOnDelete?: string;
@@ -534,6 +550,7 @@ export declare namespace DMMF {
         name: string;
         args: any[];
     }
+    export type FieldDefaultScalar = string | boolean | number;
     export interface Schema {
         rootQueryType?: string;
         rootMutationType?: string;
@@ -645,10 +662,35 @@ export declare namespace DMMF {
     }
 }
 
-export declare class DMMFClass implements DMMF.Document {
+export declare interface DMMFClass extends BaseDMMFHelper, DMMFSchemaHelper {
+}
+
+export declare class DMMFClass {
+    constructor(dmmf: DMMF.Document);
+}
+
+declare class DMMFDatamodelHelper implements Pick<DMMF.Document, 'datamodel'> {
     datamodel: DMMF.Datamodel;
-    schema: DMMF.Schema;
+    datamodelEnumMap: Dictionary_2<DMMF.DatamodelEnum>;
+    modelMap: Dictionary_2<DMMF.Model>;
+    typeMap: Dictionary_2<DMMF.Model>;
+    typeAndModelMap: Dictionary_2<DMMF.Model>;
+    constructor({ datamodel }: Pick<DMMF.Document, 'datamodel'>);
+    getDatamodelEnumMap(): Dictionary_2<DMMF.DatamodelEnum>;
+    getModelMap(): Dictionary_2<DMMF.Model>;
+    getTypeMap(): Dictionary_2<DMMF.Model>;
+    getTypeModelMap(): Dictionary_2<DMMF.Model>;
+}
+
+declare class DMMFMappingsHelper implements Pick<DMMF.Document, 'mappings'> {
     mappings: DMMF.Mappings;
+    mappingsMap: Dictionary_2<DMMF.ModelMapping>;
+    constructor({ mappings }: Pick<DMMF.Document, 'mappings'>);
+    getMappingsMap(): Dictionary_2<DMMF.ModelMapping>;
+}
+
+declare class DMMFSchemaHelper implements Pick<DMMF.Document, 'schema'> {
+    schema: DMMF.Schema;
     queryType: DMMF.OutputType;
     mutationType: DMMF.OutputType;
     outputTypes: {
@@ -662,33 +704,23 @@ export declare class DMMFClass implements DMMF.Document {
     };
     inputTypeMap: Dictionary_2<DMMF.InputType>;
     enumMap: Dictionary_2<DMMF.SchemaEnum>;
-    datamodelEnumMap: Dictionary_2<DMMF.DatamodelEnum>;
-    modelMap: Dictionary_2<DMMF.Model>;
-    typeMap: Dictionary_2<DMMF.Model>;
-    typeAndModelMap: Dictionary_2<DMMF.Model>;
-    mappingsMap: Dictionary_2<DMMF.ModelMapping>;
     rootFieldMap: Dictionary_2<DMMF.SchemaField>;
-    constructor({ datamodel, schema, mappings }: DMMF.Document);
+    constructor({ schema }: Pick<DMMF.Document, 'schema'>);
     get [Symbol.toStringTag](): string;
-    protected outputTypeToMergedOutputType: (outputType: DMMF.OutputType) => DMMF.OutputType;
-    protected resolveOutputTypes(): void;
-    protected resolveInputTypes(): void;
-    protected resolveFieldArgumentTypes(): void;
-    protected getQueryType(): DMMF.OutputType;
-    protected getMutationType(): DMMF.OutputType;
-    protected getOutputTypes(): {
+    outputTypeToMergedOutputType: (outputType: DMMF.OutputType) => DMMF.OutputType;
+    resolveOutputTypes(): void;
+    resolveInputTypes(): void;
+    resolveFieldArgumentTypes(): void;
+    getQueryType(): DMMF.OutputType;
+    getMutationType(): DMMF.OutputType;
+    getOutputTypes(): {
         model: DMMF.OutputType[];
         prisma: DMMF.OutputType[];
     };
-    protected getDatamodelEnumMap(): Dictionary_2<DMMF.DatamodelEnum>;
-    protected getEnumMap(): Dictionary_2<DMMF.SchemaEnum>;
-    protected getModelMap(): Dictionary_2<DMMF.Model>;
-    protected getTypeMap(): Dictionary_2<DMMF.Model>;
-    protected getTypeModelMap(): Dictionary_2<DMMF.Model>;
-    protected getMergedOutputTypeMap(): Dictionary_2<DMMF.OutputType>;
-    protected getInputTypeMap(): Dictionary_2<DMMF.InputType>;
-    protected getMappingsMap(): Dictionary_2<DMMF.ModelMapping>;
-    protected getRootFieldMap(): Dictionary_2<DMMF.SchemaField>;
+    getEnumMap(): Dictionary_2<DMMF.SchemaEnum>;
+    getMergedOutputTypeMap(): Dictionary_2<DMMF.OutputType>;
+    getInputTypeMap(): Dictionary_2<DMMF.InputType>;
+    getRootFieldMap(): Dictionary_2<DMMF.SchemaField>;
 }
 
 declare class Document_2 {
@@ -736,6 +768,7 @@ export declare abstract class Engine {
     abstract start(): Promise<void>;
     abstract stop(): Promise<void>;
     abstract getConfig(): Promise<GetConfigResult>;
+    abstract getDmmf(): Promise<DMMF.Document>;
     abstract version(forceRun?: boolean): Promise<string> | string;
     abstract request<T>(query: string, headers?: QueryEngineRequestHeaders, numTry?: number): Promise<QueryEngineResult<T>>;
     abstract requestBatch<T>(queries: string[], headers?: QueryEngineRequestHeaders, transaction?: boolean, numTry?: number): Promise<QueryEngineResult<T>[]>;
@@ -879,7 +912,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): new (opt
  * closure with that config around a non-instantiated [[PrismaClient]].
  */
 declare interface GetPrismaClientConfig {
-    document: DMMF.Document;
+    document: Omit<DMMF.Document, 'schema'>;
     generator?: GeneratorConfig;
     sqliteDatasourceOverrides?: DatasourceOverwrite[];
     relativeEnvPaths: {
@@ -924,6 +957,12 @@ declare interface GetPrismaClientConfig {
      */
     inlineSchemaHash?: string;
 }
+
+declare type HandleErrorParams = {
+    error: any;
+    clientMethod: string;
+    callsite?: string;
+};
 
 declare type Handler = (base: string, item: string, type: ItemType) => boolean | string;
 
@@ -974,6 +1013,11 @@ declare type InternalRequestParams = {
      * code looks like
      */
     clientMethod: string;
+    /**
+     * Name of js model that triggered the request. Might be used
+     * for warnings or error messages
+     */
+    jsModelName?: string;
     callsite?: string;
     /** Headers metadata that will be passed to the Engine */
     headers?: Record<string, string>;
@@ -1055,6 +1099,9 @@ declare interface Job {
  */
 export declare function join(values: RawValue[], separator?: string): Sql;
 
+declare class JsonNull extends NullTypesEnumValue {
+}
+
 declare type LoadedEnv = {
     message?: string;
     parsed: {
@@ -1071,22 +1118,22 @@ declare type LogLevel = 'info' | 'query' | 'warn' | 'error';
 
 export declare function makeDocument({ dmmf, rootTypeName, rootField, select }: DocumentInput): Document_2;
 
-declare type Metric<T> = {
+export declare type Metric<T> = {
     key: string;
     value: T;
     labels: Record<string, string>;
     description: string;
 };
 
-declare type MetricHistogram = {
+export declare type MetricHistogram = {
     buckets: MetricHistogramBucket[];
     sum: number;
     count: number;
 };
 
-declare type MetricHistogramBucket = [maxValue: number, count: number];
+export declare type MetricHistogramBucket = [maxValue: number, count: number];
 
-declare type Metrics = {
+export declare type Metrics = {
     counters: Metric<number>[];
     gauges: Metric<number>[];
     histograms: Metric<MetricHistogram>[];
@@ -1155,6 +1202,33 @@ declare interface NoTrueSelectError {
     type: 'noTrueSelect';
     field: DMMF.SchemaField;
 }
+
+declare class NullTypesEnumValue extends ObjectEnumValue {
+    _getNamespace(): string;
+}
+
+/**
+ * Base class for unique values of object-valued enums.
+ */
+declare abstract class ObjectEnumValue {
+    constructor(arg?: symbol);
+    abstract _getNamespace(): string;
+    _getName(): string;
+    toString(): string;
+}
+
+export declare const objectEnumValues: {
+    classes: {
+        DbNull: typeof DbNull;
+        JsonNull: typeof JsonNull;
+        AnyNull: typeof AnyNull;
+    };
+    instances: {
+        DbNull: DbNull;
+        JsonNull: JsonNull;
+        AnyNull: AnyNull;
+    };
+};
 
 /**
  * maxWait ?= 2000
@@ -1288,7 +1362,8 @@ declare class RequestHandler {
     hooks: any;
     dataloader: DataLoader<Request_2>;
     constructor(client: Client, hooks?: any);
-    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, showColors, engineHook, args, headers, transactionId, unpacker, }: RequestParams): Promise<any>;
+    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, engineHook, args, headers, transactionId, unpacker, }: RequestParams): Promise<any>;
+    handleRequestError({ error, clientMethod, callsite }: HandleErrorParams): never;
     sanitizeMessage(message: any): any;
     unpack(document: any, data: any, path: any, rootField: any, unpacker?: Unpacker): any;
     get [Symbol.toStringTag](): string;
@@ -1304,7 +1379,6 @@ declare type RequestParams = {
     callsite?: string;
     rejectOnNotFound?: RejectOnNotFound;
     runInTransaction?: boolean;
-    showColors?: boolean;
     engineHook?: EngineMiddleware;
     args: any;
     headers?: Record<string, string>;

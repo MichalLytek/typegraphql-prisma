@@ -28,7 +28,7 @@ describe("relations resolvers generation", () => {
         id     Int    @id @default(autoincrement())
         email  String
         user   User   @relation(fields: [userId], references: [id])
-        userId Int
+        userId Int    @unique
       }
     `;
 
@@ -116,7 +116,7 @@ describe("relations resolvers generation", () => {
         uuid      String  @id @default(cuid())
         content   String
         user      User    @relation(fields: [userId], references: [id])
-        userId    Int
+        userId    Int     @unique
       }
     `;
 

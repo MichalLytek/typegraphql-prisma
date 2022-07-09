@@ -1,7 +1,9 @@
 import { DMMF } from "./dmmf/types";
 
-export type BaseKeys = keyof Pick<DMMF.ModelMapping, "model" | "plural">;
-export const baseKeys: BaseKeys[] = ["model", "plural"];
+// export type BaseKeys = keyof Pick<DMMF.ModelMapping, "model" | "plural">;
+// export const baseKeys: BaseKeys[] = ["model", "plural"];
+export type BaseKeys = keyof Pick<DMMF.ModelMapping, "model">;
+export const baseKeys: BaseKeys[] = ["model"];
 
 export type ModelKeys = keyof Exclude<DMMF.ModelMapping, BaseKeys>;
 
@@ -19,22 +21,22 @@ export const supportedQueryActions: SupportedQueries[] = [
 
 export type SupportedMutations = keyof Pick<
   typeof DMMF.ModelAction,
-  | "create"
+  | "createOne"
   | "createMany"
-  | "delete"
-  | "update"
+  | "deleteOne"
+  | "updateOne"
   | "deleteMany"
   | "updateMany"
-  | "upsert"
+  | "upsertOne"
 >;
 export const supportedMutationActions: SupportedMutations[] = [
-  "create",
+  "createOne",
   "createMany",
-  "delete",
-  "update",
+  "deleteOne",
+  "updateOne",
   "deleteMany",
   "updateMany",
-  "upsert",
+  "upsertOne",
 ];
 
 export const modelsFolderName = "models";

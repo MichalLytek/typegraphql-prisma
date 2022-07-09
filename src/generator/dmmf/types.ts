@@ -64,7 +64,7 @@ export namespace DMMF {
     // type: string;
     dbNames?: string[] | null;
     hasDefaultValue: boolean;
-    default?: FieldDefault | string | boolean | number;
+    default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
     relationToFields?: any[];
     relationOnDelete?: string;
     relationName?: string;
@@ -83,6 +83,7 @@ export namespace DMMF {
     name: string;
     args: any[];
   }
+  export type FieldDefaultScalar = string | boolean | number;
   export interface Schema {
     rootQueryType?: string;
     rootMutationType?: string;
@@ -145,6 +146,7 @@ export namespace DMMF {
     outputType: TypeInfo;
     args: SchemaArg[];
     deprecation?: Deprecation;
+    documentation?: string;
     // additional props
     typeGraphQLType: string;
     fieldTSType: string;
@@ -181,20 +183,22 @@ export namespace DMMF {
   }
   export interface ModelMapping {
     model: string;
-    plural: string;
+    // plural: string;
     // findUnique?: string | null;
     // findFirst?: string | null;
     // findMany?: string | null;
-    // create?: string | null;
+    // createOne?: string | null;
     // createMany?: string | null;
-    // update?: string | null;
+    // updateOne?: string | null;
     // updateMany?: string | null;
-    // upsert?: string | null;
-    // delete?: string | null;
+    // upsertOne?: string | null;
+    // deleteOne?: string | null;
     // deleteMany?: string | null;
     // aggregate?: string | null;
     // groupBy?: string | null;
     // count?: string | null;
+    // findRaw?: string | null;
+    // aggregateRaw?: string | null;
 
     // additional props
     actions: Action[];
@@ -206,16 +210,18 @@ export namespace DMMF {
     findUnique = "findUnique",
     findFirst = "findFirst",
     findMany = "findMany",
-    create = "create",
+    createOne = "createOne",
     createMany = "createMany",
-    update = "update",
+    updateOne = "updateOne",
     updateMany = "updateMany",
-    upsert = "upsert",
-    delete = "delete",
+    upsertOne = "upsertOne",
+    deleteOne = "deleteOne",
     deleteMany = "deleteMany",
     groupBy = "groupBy",
     // count = "count",
     aggregate = "aggregate",
+    findRaw = "findRaw",
+    aggregateRaw = "aggregateRaw",
   }
   // additional type
   export interface Action {
@@ -223,6 +229,7 @@ export namespace DMMF {
     fieldName: string;
     kind: ModelAction;
     operation: "Query" | "Mutation";
+    prismaMethod: string;
     method: OutputSchemaField;
     argsTypeName: string | undefined;
     outputTypeName: string;

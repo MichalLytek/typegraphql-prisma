@@ -4,8 +4,8 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
-import { MainUserUpdateOneRequiredWithoutPostsInput } from "../inputs/MainUserUpdateOneRequiredWithoutPostsInput";
-import { MainUserUpdateOneWithoutEditorPostsInput } from "../inputs/MainUserUpdateOneWithoutEditorPostsInput";
+import { MainUserUpdateOneRequiredWithoutPostsNestedInput } from "../inputs/MainUserUpdateOneRequiredWithoutPostsNestedInput";
+import { MainUserUpdateOneWithoutEditorPostsNestedInput } from "../inputs/MainUserUpdateOneWithoutEditorPostsNestedInput";
 import { NullableEnumPostKindFieldUpdateOperationsInput } from "../inputs/NullableEnumPostKindFieldUpdateOperationsInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
@@ -39,15 +39,15 @@ export class PostUpdateInput {
   })
   content?: NullableStringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserUpdateOneRequiredWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => MainUserUpdateOneRequiredWithoutPostsNestedInput, {
     nullable: true
   })
-  author?: MainUserUpdateOneRequiredWithoutPostsInput | undefined;
+  author?: MainUserUpdateOneRequiredWithoutPostsNestedInput | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserUpdateOneWithoutEditorPostsInput, {
+  @TypeGraphQL.Field(_type => MainUserUpdateOneWithoutEditorPostsNestedInput, {
     nullable: true
   })
-  editor?: MainUserUpdateOneWithoutEditorPostsInput | undefined;
+  editor?: MainUserUpdateOneWithoutEditorPostsNestedInput | undefined;
 
   @TypeGraphQL.Field(_type => NullableEnumPostKindFieldUpdateOperationsInput, {
     nullable: true

@@ -1,12 +1,12 @@
 export { AggregateDirectorArgs } from "./AggregateDirectorArgs";
-export { CreateDirectorArgs } from "./CreateDirectorArgs";
 export { CreateManyDirectorArgs } from "./CreateManyDirectorArgs";
-export { DeleteDirectorArgs } from "./DeleteDirectorArgs";
+export { CreateOneDirectorArgs } from "./CreateOneDirectorArgs";
 export { DeleteManyDirectorArgs } from "./DeleteManyDirectorArgs";
+export { DeleteOneDirectorArgs } from "./DeleteOneDirectorArgs";
 export { FindFirstDirectorArgs } from "./FindFirstDirectorArgs";
 export { FindManyDirectorArgs } from "./FindManyDirectorArgs";
 export { FindUniqueDirectorArgs } from "./FindUniqueDirectorArgs";
 export { GroupByDirectorArgs } from "./GroupByDirectorArgs";
-export { UpdateDirectorArgs } from "./UpdateDirectorArgs";
 export { UpdateManyDirectorArgs } from "./UpdateManyDirectorArgs";
-export { UpsertDirectorArgs } from "./UpsertDirectorArgs";
+export { UpdateOneDirectorArgs } from "./UpdateOneDirectorArgs";
+export { UpsertOneDirectorArgs } from "./UpsertOneDirectorArgs";

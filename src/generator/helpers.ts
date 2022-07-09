@@ -233,6 +233,7 @@ export function cleanDocsString(
   cleanedDocs = cleanedDocs.replace(modelAttributeRegex, "");
   cleanedDocs = cleanedDocs.replace(fieldAttributeRegex, "");
   cleanedDocs = cleanedDocs.split('"').join('\\"');
+  cleanedDocs = cleanedDocs.split("\n").join("\\n");
   if (cleanedDocs.endsWith("\r")) {
     cleanedDocs = cleanedDocs.slice(0, -1);
   }

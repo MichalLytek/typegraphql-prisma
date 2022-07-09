@@ -419,9 +419,9 @@ input CreatorSumOrderByAggregateInput {
 }
 
 input CreatorUpdateInput {
-  likes: ProblemUpdateManyWithoutLikedByInput
+  likes: ProblemUpdateManyWithoutLikedByNestedInput
   name: StringFieldUpdateOperationsInput
-  problems: ProblemUpdateManyWithoutCreatorInput
+  problems: ProblemUpdateManyWithoutCreatorNestedInput
 }
 
 input CreatorUpdateManyMutationInput {
@@ -433,7 +433,7 @@ input CreatorUpdateManyWithWhereWithoutLikesInput {
   where: CreatorScalarWhereInput!
 }
 
-input CreatorUpdateManyWithoutLikesInput {
+input CreatorUpdateManyWithoutLikesNestedInput {
   connect: [CreatorWhereUniqueInput!]
   connectOrCreate: [CreatorCreateOrConnectWithoutLikesInput!]
   create: [CreatorCreateWithoutLikesInput!]
@@ -446,7 +446,7 @@ input CreatorUpdateManyWithoutLikesInput {
   upsert: [CreatorUpsertWithWhereUniqueWithoutLikesInput!]
 }
 
-input CreatorUpdateOneWithoutProblemsInput {
+input CreatorUpdateOneWithoutProblemsNestedInput {
   connect: CreatorWhereUniqueInput
   connectOrCreate: CreatorCreateOrConnectWithoutProblemsInput
   create: CreatorCreateWithoutProblemsInput
@@ -463,11 +463,11 @@ input CreatorUpdateWithWhereUniqueWithoutLikesInput {
 
 input CreatorUpdateWithoutLikesInput {
   name: StringFieldUpdateOperationsInput
-  problems: ProblemUpdateManyWithoutCreatorInput
+  problems: ProblemUpdateManyWithoutCreatorNestedInput
 }
 
 input CreatorUpdateWithoutProblemsInput {
-  likes: ProblemUpdateManyWithoutLikedByInput
+  likes: ProblemUpdateManyWithoutLikedByNestedInput
   name: StringFieldUpdateOperationsInput
 }
 
@@ -691,7 +691,7 @@ input DirectorScalarWhereWithAggregatesInput {
 input DirectorUpdateInput {
   firstName: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
-  movies: MovieUpdateManyWithoutDirectorInput
+  movies: MovieUpdateManyWithoutDirectorNestedInput
 }
 
 input DirectorUpdateManyMutationInput {
@@ -699,7 +699,7 @@ input DirectorUpdateManyMutationInput {
   lastName: StringFieldUpdateOperationsInput
 }
 
-input DirectorUpdateOneRequiredWithoutMoviesInput {
+input DirectorUpdateOneRequiredWithoutMoviesNestedInput {
   connect: DirectorWhereUniqueInput
   connectOrCreate: DirectorCreateOrConnectWithoutMoviesInput
   create: DirectorCreateWithoutMoviesInput
@@ -1212,8 +1212,8 @@ input MainUserUpdateInput {
   age: IntFieldUpdateOperationsInput
   aliases: MainUserUpdatealiasesInput
   amount: FloatFieldUpdateOperationsInput
-  clientPosts: PostUpdateManyWithoutAuthorInput
-  editorPosts: PostUpdateManyWithoutEditorInput
+  clientPosts: PostUpdateManyWithoutAuthorNestedInput
+  editorPosts: PostUpdateManyWithoutEditorNestedInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
   grades: MainUserUpdategradesInput
@@ -1231,7 +1231,7 @@ input MainUserUpdateManyMutationInput {
   role: EnumRoleFieldUpdateOperationsInput
 }
 
-input MainUserUpdateOneRequiredWithoutPostsInput {
+input MainUserUpdateOneRequiredWithoutPostsNestedInput {
   connect: MainUserWhereUniqueInput
   connectOrCreate: MainUserCreateOrConnectWithoutPostsInput
   create: MainUserCreateWithoutPostsInput
@@ -1239,7 +1239,7 @@ input MainUserUpdateOneRequiredWithoutPostsInput {
   upsert: MainUserUpsertWithoutPostsInput
 }
 
-input MainUserUpdateOneWithoutEditorPostsInput {
+input MainUserUpdateOneWithoutEditorPostsNestedInput {
   connect: MainUserWhereUniqueInput
   connectOrCreate: MainUserCreateOrConnectWithoutEditorPostsInput
   create: MainUserCreateWithoutEditorPostsInput
@@ -1254,7 +1254,7 @@ input MainUserUpdateWithoutEditorPostsInput {
   age: IntFieldUpdateOperationsInput
   aliases: MainUserUpdatealiasesInput
   amount: FloatFieldUpdateOperationsInput
-  clientPosts: PostUpdateManyWithoutAuthorInput
+  clientPosts: PostUpdateManyWithoutAuthorNestedInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
   grades: MainUserUpdategradesInput
@@ -1266,7 +1266,7 @@ input MainUserUpdateWithoutPostsInput {
   age: IntFieldUpdateOperationsInput
   aliases: MainUserUpdatealiasesInput
   amount: FloatFieldUpdateOperationsInput
-  editorPosts: PostUpdateManyWithoutEditorInput
+  editorPosts: PostUpdateManyWithoutEditorNestedInput
   email: StringFieldUpdateOperationsInput
   firstName: NullableStringFieldUpdateOperationsInput
   grades: MainUserUpdategradesInput
@@ -1474,7 +1474,7 @@ input MovieScalarWhereWithAggregatesInput {
 }
 
 input MovieUpdateInput {
-  director: DirectorUpdateOneRequiredWithoutMoviesInput
+  director: DirectorUpdateOneRequiredWithoutMoviesNestedInput
   title: StringFieldUpdateOperationsInput
 }
 
@@ -1487,7 +1487,7 @@ input MovieUpdateManyWithWhereWithoutDirectorInput {
   where: MovieScalarWhereInput!
 }
 
-input MovieUpdateManyWithoutDirectorInput {
+input MovieUpdateManyWithoutDirectorNestedInput {
   connect: [MovieWhereUniqueInput!]
   connectOrCreate: [MovieCreateOrConnectWithoutDirectorInput!]
   create: [MovieCreateWithoutDirectorInput!]
@@ -1531,9 +1531,6 @@ input MovieWhereUniqueInput {
 }
 
 type Mutation {
-  createCreator(data: CreatorCreateInput!): Creator!
-  createDirector(data: DirectorCreateInput!): Director!
-  createMainUser(data: MainUserCreateInput!): MainUser!
   createManyCreator(data: [CreatorCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyDirector(data: [DirectorCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyMainUser(data: [MainUserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
@@ -1541,15 +1538,15 @@ type Mutation {
   createManyNativeTypeModel(data: [NativeTypeModelCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyPatient(data: [PatientCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyProblem(data: [ProblemCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
-  createMovie(data: MovieCreateInput!): Movie!
-  createNativeTypeModel(data: NativeTypeModelCreateInput!): NativeTypeModel!
-  createPatient(data: PatientCreateInput!): Patient!
-  createPost(data: PostCreateInput!): Post!
-  createProblem(data: ProblemCreateInput!): Problem!
+  createOneCreator(data: CreatorCreateInput!): Creator!
+  createOneDirector(data: DirectorCreateInput!): Director!
+  createOneMainUser(data: MainUserCreateInput!): MainUser!
+  createOneMovie(data: MovieCreateInput!): Movie!
+  createOneNativeTypeModel(data: NativeTypeModelCreateInput!): NativeTypeModel!
+  createOnePatient(data: PatientCreateInput!): Patient!
+  createOnePost(data: PostCreateInput!): Post!
+  createOneProblem(data: ProblemCreateInput!): Problem!
   customCreatePost(data: PostCreateInput!): Post!
-  deleteCreator(where: CreatorWhereUniqueInput!): Creator
-  deleteDirector(where: DirectorWhereUniqueInput!): Director
-  deleteMainUser(where: MainUserWhereUniqueInput!): MainUser
   deleteManyCreator(where: CreatorWhereInput): AffectedRowsOutput!
   deleteManyDirector(where: DirectorWhereInput): AffectedRowsOutput!
   deleteManyMainUser(where: MainUserWhereInput): AffectedRowsOutput!
@@ -1557,13 +1554,13 @@ type Mutation {
   deleteManyNativeTypeModel(where: NativeTypeModelWhereInput): AffectedRowsOutput!
   deleteManyPatient(where: PatientWhereInput): AffectedRowsOutput!
   deleteManyProblem(where: ProblemWhereInput): AffectedRowsOutput!
-  deleteMovie(where: MovieWhereUniqueInput!): Movie
-  deleteNativeTypeModel(where: NativeTypeModelWhereUniqueInput!): NativeTypeModel
-  deletePatient(where: PatientWhereUniqueInput!): Patient
-  deleteProblem(where: ProblemWhereUniqueInput!): Problem
-  updateCreator(data: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator
-  updateDirector(data: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director
-  updateMainUser(data: MainUserUpdateInput!, where: MainUserWhereUniqueInput!): MainUser
+  deleteOneCreator(where: CreatorWhereUniqueInput!): Creator
+  deleteOneDirector(where: DirectorWhereUniqueInput!): Director
+  deleteOneMainUser(where: MainUserWhereUniqueInput!): MainUser
+  deleteOneMovie(where: MovieWhereUniqueInput!): Movie
+  deleteOneNativeTypeModel(where: NativeTypeModelWhereUniqueInput!): NativeTypeModel
+  deleteOnePatient(where: PatientWhereUniqueInput!): Patient
+  deleteOneProblem(where: ProblemWhereUniqueInput!): Problem
   updateManyCreator(data: CreatorUpdateManyMutationInput!, where: CreatorWhereInput): AffectedRowsOutput!
   updateManyDirector(data: DirectorUpdateManyMutationInput!, where: DirectorWhereInput): AffectedRowsOutput!
   updateManyMainUser(data: MainUserUpdateManyMutationInput!, where: MainUserWhereInput): AffectedRowsOutput!
@@ -1572,17 +1569,20 @@ type Mutation {
   updateManyPatient(data: PatientUpdateManyMutationInput!, where: PatientWhereInput): AffectedRowsOutput!
   updateManyPost(data: PostUpdateManyMutationInput!, where: PostWhereInput): AffectedRowsOutput!
   updateManyProblem(data: ProblemUpdateManyMutationInput!, where: ProblemWhereInput): AffectedRowsOutput!
-  updateMovie(data: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie
-  updateNativeTypeModel(data: NativeTypeModelUpdateInput!, where: NativeTypeModelWhereUniqueInput!): NativeTypeModel
-  updatePatient(data: PatientUpdateInput!, where: PatientWhereUniqueInput!): Patient
-  updateProblem(data: ProblemUpdateInput!, where: ProblemWhereUniqueInput!): Problem
-  upsertCreator(create: CreatorCreateInput!, update: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator!
-  upsertDirector(create: DirectorCreateInput!, update: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director!
-  upsertMainUser(create: MainUserCreateInput!, update: MainUserUpdateInput!, where: MainUserWhereUniqueInput!): MainUser!
-  upsertMovie(create: MovieCreateInput!, update: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie!
-  upsertNativeTypeModel(create: NativeTypeModelCreateInput!, update: NativeTypeModelUpdateInput!, where: NativeTypeModelWhereUniqueInput!): NativeTypeModel!
-  upsertPatient(create: PatientCreateInput!, update: PatientUpdateInput!, where: PatientWhereUniqueInput!): Patient!
-  upsertProblem(create: ProblemCreateInput!, update: ProblemUpdateInput!, where: ProblemWhereUniqueInput!): Problem!
+  updateOneCreator(data: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator
+  updateOneDirector(data: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director
+  updateOneMainUser(data: MainUserUpdateInput!, where: MainUserWhereUniqueInput!): MainUser
+  updateOneMovie(data: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie
+  updateOneNativeTypeModel(data: NativeTypeModelUpdateInput!, where: NativeTypeModelWhereUniqueInput!): NativeTypeModel
+  updateOnePatient(data: PatientUpdateInput!, where: PatientWhereUniqueInput!): Patient
+  updateOneProblem(data: ProblemUpdateInput!, where: ProblemWhereUniqueInput!): Problem
+  upsertOneCreator(create: CreatorCreateInput!, update: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator!
+  upsertOneDirector(create: DirectorCreateInput!, update: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director!
+  upsertOneMainUser(create: MainUserCreateInput!, update: MainUserUpdateInput!, where: MainUserWhereUniqueInput!): MainUser!
+  upsertOneMovie(create: MovieCreateInput!, update: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie!
+  upsertOneNativeTypeModel(create: NativeTypeModelCreateInput!, update: NativeTypeModelUpdateInput!, where: NativeTypeModelWhereUniqueInput!): NativeTypeModel!
+  upsertOnePatient(create: PatientCreateInput!, update: PatientUpdateInput!, where: PatientWhereUniqueInput!): Patient!
+  upsertOneProblem(create: ProblemCreateInput!, update: ProblemUpdateInput!, where: ProblemWhereUniqueInput!): Problem!
 }
 
 type NativeTypeModel {
@@ -2569,7 +2569,7 @@ input PostUpdateManyWithWhereWithoutEditorInput {
   where: PostScalarWhereInput!
 }
 
-input PostUpdateManyWithoutAuthorInput {
+input PostUpdateManyWithoutAuthorNestedInput {
   connect: [PostWhereUniqueInput!]
   connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
@@ -2583,7 +2583,7 @@ input PostUpdateManyWithoutAuthorInput {
   upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
-input PostUpdateManyWithoutEditorInput {
+input PostUpdateManyWithoutEditorNestedInput {
   connect: [PostWhereUniqueInput!]
   connectOrCreate: [PostCreateOrConnectWithoutEditorInput!]
   create: [PostCreateWithoutEditorInput!]
@@ -2610,7 +2610,7 @@ input PostUpdateWithWhereUniqueWithoutEditorInput {
 input PostUpdateWithoutAuthorInput {
   content: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  editor: MainUserUpdateOneWithoutEditorPostsInput
+  editor: MainUserUpdateOneWithoutEditorPostsNestedInput
   kind: NullableEnumPostKindFieldUpdateOperationsInput
   metadata: JSON
   subtitle: StringFieldUpdateOperationsInput
@@ -2619,7 +2619,7 @@ input PostUpdateWithoutAuthorInput {
 }
 
 input PostUpdateWithoutEditorInput {
-  author: MainUserUpdateOneRequiredWithoutPostsInput
+  author: MainUserUpdateOneRequiredWithoutPostsNestedInput
   content: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   kind: NullableEnumPostKindFieldUpdateOperationsInput
@@ -2864,8 +2864,8 @@ input ProblemSumOrderByAggregateInput {
 }
 
 input ProblemUpdateInput {
-  creator: CreatorUpdateOneWithoutProblemsInput
-  likedBy: CreatorUpdateManyWithoutLikesInput
+  creator: CreatorUpdateOneWithoutProblemsNestedInput
+  likedBy: CreatorUpdateManyWithoutLikesNestedInput
   problemText: StringFieldUpdateOperationsInput
 }
 
@@ -2883,7 +2883,7 @@ input ProblemUpdateManyWithWhereWithoutLikedByInput {
   where: ProblemScalarWhereInput!
 }
 
-input ProblemUpdateManyWithoutCreatorInput {
+input ProblemUpdateManyWithoutCreatorNestedInput {
   connect: [ProblemWhereUniqueInput!]
   connectOrCreate: [ProblemCreateOrConnectWithoutCreatorInput!]
   create: [ProblemCreateWithoutCreatorInput!]
@@ -2897,7 +2897,7 @@ input ProblemUpdateManyWithoutCreatorInput {
   upsert: [ProblemUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
-input ProblemUpdateManyWithoutLikedByInput {
+input ProblemUpdateManyWithoutLikedByNestedInput {
   connect: [ProblemWhereUniqueInput!]
   connectOrCreate: [ProblemCreateOrConnectWithoutLikedByInput!]
   create: [ProblemCreateWithoutLikedByInput!]
@@ -2921,12 +2921,12 @@ input ProblemUpdateWithWhereUniqueWithoutLikedByInput {
 }
 
 input ProblemUpdateWithoutCreatorInput {
-  likedBy: CreatorUpdateManyWithoutLikesInput
+  likedBy: CreatorUpdateManyWithoutLikesNestedInput
   problemText: StringFieldUpdateOperationsInput
 }
 
 input ProblemUpdateWithoutLikedByInput {
-  creator: CreatorUpdateOneWithoutProblemsInput
+  creator: CreatorUpdateOneWithoutProblemsNestedInput
   problemText: StringFieldUpdateOperationsInput
 }
 

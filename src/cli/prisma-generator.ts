@@ -1,6 +1,5 @@
 import { GeneratorOptions } from "@prisma/generator-helper";
-import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
-import { parseEnvValue } from "@prisma/sdk";
+import { getDMMF, parseEnvValue } from "@prisma/internals";
 import { promises as asyncFs } from "fs";
 import path from "path";
 
@@ -23,8 +22,10 @@ export async function generate(options: GeneratorOptions) {
     it => parseEnvValue(it.provider) === "prisma-client-js",
   )!;
   const prismaClientPath = parseEnvValue(prismaClientProvider.output!);
-  const prismaClientDmmf = require(prismaClientPath)
-    .dmmf as PrismaDMMF.Document;
+  const prismaClientDmmf = await getDMMF({
+    datamodel: options.datamodel,
+    previewFeatures: prismaClientProvider.previewFeatures,
+  });
 
   const generatorConfig = options.generator.config;
   const externalConfig: ExternalGeneratorOptions = {

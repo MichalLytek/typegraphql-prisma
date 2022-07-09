@@ -8,8 +8,8 @@ import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperation
 import { MainUserUpdatealiasesInput } from "../inputs/MainUserUpdatealiasesInput";
 import { MainUserUpdategradesInput } from "../inputs/MainUserUpdategradesInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
-import { PostUpdateManyWithoutAuthorInput } from "../inputs/PostUpdateManyWithoutAuthorInput";
-import { PostUpdateManyWithoutEditorInput } from "../inputs/PostUpdateManyWithoutEditorInput";
+import { PostUpdateManyWithoutAuthorNestedInput } from "../inputs/PostUpdateManyWithoutAuthorNestedInput";
+import { PostUpdateManyWithoutEditorNestedInput } from "../inputs/PostUpdateManyWithoutEditorNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("MainUserUpdateInput", {
@@ -35,17 +35,17 @@ export class MainUserUpdateInput {
   })
   amount?: FloatFieldUpdateOperationsInput | undefined;
 
-  posts?: PostUpdateManyWithoutAuthorInput | undefined;
+  posts?: PostUpdateManyWithoutAuthorNestedInput | undefined;
 
   @TypeGraphQL.Field(_type => EnumRoleFieldUpdateOperationsInput, {
     nullable: true
   })
   role?: EnumRoleFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostUpdateManyWithoutEditorInput, {
+  @TypeGraphQL.Field(_type => PostUpdateManyWithoutEditorNestedInput, {
     nullable: true
   })
-  editorPosts?: PostUpdateManyWithoutEditorInput | undefined;
+  editorPosts?: PostUpdateManyWithoutEditorNestedInput | undefined;
 
   @TypeGraphQL.Field(_type => MainUserUpdategradesInput, {
     nullable: true
@@ -79,14 +79,14 @@ export class MainUserUpdateInput {
     this.balance = balance;
   }
 
-  @TypeGraphQL.Field(_type => PostUpdateManyWithoutAuthorInput, {
+  @TypeGraphQL.Field(_type => PostUpdateManyWithoutAuthorNestedInput, {
     nullable: true
   })
   get clientPosts() {
     return this.posts;
   }
 
-  set clientPosts(posts: PostUpdateManyWithoutAuthorInput | undefined) {
+  set clientPosts(posts: PostUpdateManyWithoutAuthorNestedInput | undefined) {
     this.posts = posts;
   }
 }

@@ -194,7 +194,7 @@ Array [
 
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`create\` action: createUser mocked response 1`] = `
 Object {
-  "createUser": Object {
+  "createOneUser": Object {
     "dateField": "2019-12-31T14:16:02.572Z",
     "intIdField": 1,
   },
@@ -215,7 +215,7 @@ Array [
 
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`delete\` action: deleteUser mocked response 1`] = `
 Object {
-  "deleteUser": Object {
+  "deleteOneUser": Object {
     "dateField": "2019-12-31T14:16:02.572Z",
     "intIdField": 1,
   },
@@ -316,7 +316,7 @@ Array [
 
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`update\` action: updateUser mocked response 1`] = `
 Object {
-  "updateUser": Object {
+  "updateOneUser": Object {
     "dateField": "2019-12-31T14:16:02.572Z",
     "intIdField": 1,
   },
@@ -370,7 +370,7 @@ Array [
 
 exports[`crud resolvers execution basic operations should properly call PrismaClient on \`upsert\` action: upsertUser mocked response 1`] = `
 Object {
-  "upsertUser": Object {
+  "upsertOneUser": Object {
     "dateField": "2019-12-31T14:16:02.572Z",
     "intIdField": 1,
     "optionalStringField": "optional",

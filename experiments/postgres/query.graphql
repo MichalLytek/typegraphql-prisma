@@ -25,7 +25,7 @@ query GetMainUsersAndPosts {
 }
 
 mutation AddMainUser {
-  createMainUser(
+  createOneMainUser(
     data: {
       age: 50
       amount: 123
@@ -135,7 +135,7 @@ query GetDirector {
 query GetMovie {
   movie(
     where: {
-      directorFirstName_directorLastName_title: {
+      movieCompoundId: {
         directorFirstName: "Bob"
         directorLastName: "Nolan"
         title: "Hello World 2"
@@ -240,7 +240,7 @@ query AggregateMainUser {
 # }
 
 mutation AtomicNumberOperations {
-  updateMainUser(
+  updateOneMainUser(
     data: { accountBalance: { increment: 100 } }
     where: { email: "test1@test.test" }
   ) {
@@ -293,7 +293,7 @@ query GetNativeTypesFields {
 }
 
 mutation InsertNativeTypesFields {
-  createNativeTypeModel(
+  createOneNativeTypeModel(
     data: { bigInt: "987654321000000", decimal: "73.12", byteA: "BAgPEBcq" }
   ) {
     id
@@ -304,7 +304,7 @@ mutation InsertNativeTypesFields {
 }
 
 mutation AddGrade {
-  updateMainUser(where: { id: 1 }, data: { grades: { push: 5 } }) {
+  updateOneMainUser(where: { id: 1 }, data: { grades: { push: 5 } }) {
     ...MainUserData
   }
 }
@@ -320,7 +320,7 @@ query CountByRelations {
 }
 
 query OrderByRelation {
-  mainUsers(orderBy: { mainUserPosts: { _count: desc } }) {
+  mainUsers(orderBy: { clientPosts: { _count: desc } }) {
     id
     email
     _count {
@@ -330,10 +330,10 @@ query OrderByRelation {
 }
 
 query OrderByAggregateGroup {
-  groupByPost(by: published, orderBy: { published: desc }) {
-    published
+  groupByPost(by: kind, orderBy: { kind: desc }) {
+    kind
     _count {
-      published
+      kind
     }
   }
 }

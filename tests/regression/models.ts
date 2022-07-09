@@ -38,15 +38,12 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model with enum and alias fields types", async () => {
     const schema = /* prisma */ `
-      type Numeric = Float
-
       enum Sample {
         SAMPLE
       }
 
       model User {
         intIdField  Int     @id @default(autoincrement())
-        aliasField  Numeric
         enumField   Sample
       }
     `;

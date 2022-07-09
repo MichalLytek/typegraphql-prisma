@@ -16,63 +16,63 @@ const crudResolversMap = {
 };
 const actionResolversMap = {
   User: {
-    user: actionResolvers.FindUniqueUserResolver,
+    aggregateUser: actionResolvers.AggregateUserResolver,
+    createManyUser: actionResolvers.CreateManyUserResolver,
+    createOneUser: actionResolvers.CreateOneUserResolver,
+    deleteManyUser: actionResolvers.DeleteManyUserResolver,
+    deleteOneUser: actionResolvers.DeleteOneUserResolver,
     findFirstUser: actionResolvers.FindFirstUserResolver,
     users: actionResolvers.FindManyUserResolver,
-    createUser: actionResolvers.CreateUserResolver,
-    createManyUser: actionResolvers.CreateManyUserResolver,
-    deleteUser: actionResolvers.DeleteUserResolver,
-    updateUser: actionResolvers.UpdateUserResolver,
-    deleteManyUser: actionResolvers.DeleteManyUserResolver,
+    user: actionResolvers.FindUniqueUserResolver,
+    groupByUser: actionResolvers.GroupByUserResolver,
     updateManyUser: actionResolvers.UpdateManyUserResolver,
-    upsertUser: actionResolvers.UpsertUserResolver,
-    aggregateUser: actionResolvers.AggregateUserResolver,
-    groupByUser: actionResolvers.GroupByUserResolver
+    updateOneUser: actionResolvers.UpdateOneUserResolver,
+    upsertOneUser: actionResolvers.UpsertOneUserResolver
   },
   Post: {
-    post: actionResolvers.FindUniquePostResolver,
+    aggregatePost: actionResolvers.AggregatePostResolver,
+    createManyPost: actionResolvers.CreateManyPostResolver,
+    createOnePost: actionResolvers.CreateOnePostResolver,
+    deleteManyPost: actionResolvers.DeleteManyPostResolver,
+    deleteOnePost: actionResolvers.DeleteOnePostResolver,
     findFirstPost: actionResolvers.FindFirstPostResolver,
     posts: actionResolvers.FindManyPostResolver,
-    createPost: actionResolvers.CreatePostResolver,
-    createManyPost: actionResolvers.CreateManyPostResolver,
-    deletePost: actionResolvers.DeletePostResolver,
-    updatePost: actionResolvers.UpdatePostResolver,
-    deleteManyPost: actionResolvers.DeleteManyPostResolver,
+    post: actionResolvers.FindUniquePostResolver,
+    groupByPost: actionResolvers.GroupByPostResolver,
     updateManyPost: actionResolvers.UpdateManyPostResolver,
-    upsertPost: actionResolvers.UpsertPostResolver,
-    aggregatePost: actionResolvers.AggregatePostResolver,
-    groupByPost: actionResolvers.GroupByPostResolver
+    updateOnePost: actionResolvers.UpdateOnePostResolver,
+    upsertOnePost: actionResolvers.UpsertOnePostResolver
   }
 };
 const crudResolversInfo = {
-  User: [\\"user\\", \\"findFirstUser\\", \\"users\\", \\"createUser\\", \\"createManyUser\\", \\"deleteUser\\", \\"updateUser\\", \\"deleteManyUser\\", \\"updateManyUser\\", \\"upsertUser\\", \\"aggregateUser\\", \\"groupByUser\\"],
-  Post: [\\"post\\", \\"findFirstPost\\", \\"posts\\", \\"createPost\\", \\"createManyPost\\", \\"deletePost\\", \\"updatePost\\", \\"deleteManyPost\\", \\"updateManyPost\\", \\"upsertPost\\", \\"aggregatePost\\", \\"groupByPost\\"]
+  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"users\\", \\"user\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"posts\\", \\"post\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
-  FindUniqueUserArgs: [\\"where\\"],
+  AggregateUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
+  CreateManyUserArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateOneUserArgs: [\\"data\\"],
+  DeleteManyUserArgs: [\\"where\\"],
+  DeleteOneUserArgs: [\\"where\\"],
   FindFirstUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
-  CreateUserArgs: [\\"data\\"],
-  CreateManyUserArgs: [\\"data\\", \\"skipDuplicates\\"],
-  DeleteUserArgs: [\\"where\\"],
-  UpdateUserArgs: [\\"data\\", \\"where\\"],
-  DeleteManyUserArgs: [\\"where\\"],
-  UpdateManyUserArgs: [\\"data\\", \\"where\\"],
-  UpsertUserArgs: [\\"where\\", \\"create\\", \\"update\\"],
-  AggregateUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
+  FindUniqueUserArgs: [\\"where\\"],
   GroupByUserArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
-  FindUniquePostArgs: [\\"where\\"],
+  UpdateManyUserArgs: [\\"data\\", \\"where\\"],
+  UpdateOneUserArgs: [\\"data\\", \\"where\\"],
+  UpsertOneUserArgs: [\\"where\\", \\"create\\", \\"update\\"],
+  AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
+  CreateManyPostArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateOnePostArgs: [\\"data\\"],
+  DeleteManyPostArgs: [\\"where\\"],
+  DeleteOnePostArgs: [\\"where\\"],
   FindFirstPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
-  CreatePostArgs: [\\"data\\"],
-  CreateManyPostArgs: [\\"data\\", \\"skipDuplicates\\"],
-  DeletePostArgs: [\\"where\\"],
-  UpdatePostArgs: [\\"data\\", \\"where\\"],
-  DeleteManyPostArgs: [\\"where\\"],
+  FindUniquePostArgs: [\\"where\\"],
+  GroupByPostArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyPostArgs: [\\"data\\", \\"where\\"],
-  UpsertPostArgs: [\\"where\\", \\"create\\", \\"update\\"],
-  AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
-  GroupByPostArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"]
+  UpdateOnePostArgs: [\\"data\\", \\"where\\"],
+  UpsertOnePostArgs: [\\"where\\", \\"create\\", \\"update\\"]
 };
 
 type ResolverModelNames = keyof typeof crudResolversMap;
@@ -329,7 +329,7 @@ const inputsInfo = {
   BoolFilter: [\\"equals\\", \\"not\\"],
   StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
   UserRelationFilter: [\\"is\\", \\"isNot\\"],
-  JsonFilter: [\\"equals\\", \\"not\\"],
+  JsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostAvgOrderByAggregateInput: [\\"authorId\\"],
   PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
@@ -338,16 +338,16 @@ const inputsInfo = {
   DateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   BoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   StringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  JsonWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  JsonWithAggregatesFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   PostCreateNestedManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"createMany\\", \\"connect\\"],
   StringFieldUpdateOperationsInput: [\\"set\\"],
-  PostUpdateManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"connect\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
+  PostUpdateManyWithoutAuthorNestedInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"connect\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
   IntFieldUpdateOperationsInput: [\\"set\\", \\"increment\\", \\"decrement\\", \\"multiply\\", \\"divide\\"],
   UserCreateNestedOneWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"connect\\"],
   DateTimeFieldUpdateOperationsInput: [\\"set\\"],
   BoolFieldUpdateOperationsInput: [\\"set\\"],
   NullableStringFieldUpdateOperationsInput: [\\"set\\"],
-  UserUpdateOneRequiredWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
+  UserUpdateOneRequiredWithoutPostsNestedInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
   NestedIntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   NestedStringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
   NestedIntWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
@@ -360,7 +360,7 @@ const inputsInfo = {
   NestedBoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   NestedStringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   NestedIntNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedJsonFilter: [\\"equals\\", \\"not\\"],
+  NestedJsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   PostCreateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
   PostCreateOrConnectWithoutAuthorInput: [\\"where\\", \\"create\\"],
   PostCreateManyAuthorInputEnvelope: [\\"data\\", \\"skipDuplicates\\"],
@@ -461,58 +461,58 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
       [Post]
         AggregatePostResolver.ts
         CreateManyPostResolver.ts
-        CreatePostResolver.ts
+        CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
-        DeletePostResolver.ts
+        DeleteOnePostResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
         UpdateManyPostResolver.ts
-        UpdatePostResolver.ts
-        UpsertPostResolver.ts
+        UpdateOnePostResolver.ts
+        UpsertOnePostResolver.ts
         [args]
           AggregatePostArgs.ts
           CreateManyPostArgs.ts
-          CreatePostArgs.ts
+          CreateOnePostArgs.ts
           DeleteManyPostArgs.ts
-          DeletePostArgs.ts
+          DeleteOnePostArgs.ts
           FindFirstPostArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
           GroupByPostArgs.ts
           UpdateManyPostArgs.ts
-          UpdatePostArgs.ts
-          UpsertPostArgs.ts
+          UpdateOnePostArgs.ts
+          UpsertOnePostArgs.ts
           index.ts
       [User]
         AggregateUserResolver.ts
         CreateManyUserResolver.ts
-        CreateUserResolver.ts
+        CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
-        DeleteUserResolver.ts
+        DeleteOneUserResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
         UpdateManyUserResolver.ts
-        UpdateUserResolver.ts
-        UpsertUserResolver.ts
+        UpdateOneUserResolver.ts
+        UpsertOneUserResolver.ts
         UserCrudResolver.ts
         [args]
           AggregateUserArgs.ts
           CreateManyUserArgs.ts
-          CreateUserArgs.ts
+          CreateOneUserArgs.ts
           DeleteManyUserArgs.ts
-          DeleteUserArgs.ts
+          DeleteOneUserArgs.ts
           FindFirstUserArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
           GroupByUserArgs.ts
           UpdateManyUserArgs.ts
-          UpdateUserArgs.ts
-          UpsertUserArgs.ts
+          UpdateOneUserArgs.ts
+          UpsertOneUserArgs.ts
           index.ts
       args.index.ts
       index.ts
@@ -565,7 +565,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
-      PostUpdateManyWithoutAuthorInput.ts
+      PostUpdateManyWithoutAuthorNestedInput.ts
       PostUpdateWithWhereUniqueWithoutAuthorInput.ts
       PostUpdateWithoutAuthorInput.ts
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
@@ -592,7 +592,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
       UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
-      UserUpdateOneRequiredWithoutPostsInput.ts
+      UserUpdateOneRequiredWithoutPostsNestedInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts
@@ -636,63 +636,63 @@ const crudResolversMap = {
 };
 const actionResolversMap = {
   User: {
-    user: actionResolvers.FindUniqueUserResolver,
+    aggregateUser: actionResolvers.AggregateUserResolver,
+    createManyUser: actionResolvers.CreateManyUserResolver,
+    createOneUser: actionResolvers.CreateOneUserResolver,
+    deleteManyUser: actionResolvers.DeleteManyUserResolver,
+    deleteOneUser: actionResolvers.DeleteOneUserResolver,
     findFirstUser: actionResolvers.FindFirstUserResolver,
     users: actionResolvers.FindManyUserResolver,
-    createUser: actionResolvers.CreateUserResolver,
-    createManyUser: actionResolvers.CreateManyUserResolver,
-    deleteUser: actionResolvers.DeleteUserResolver,
-    updateUser: actionResolvers.UpdateUserResolver,
-    deleteManyUser: actionResolvers.DeleteManyUserResolver,
+    user: actionResolvers.FindUniqueUserResolver,
+    groupByUser: actionResolvers.GroupByUserResolver,
     updateManyUser: actionResolvers.UpdateManyUserResolver,
-    upsertUser: actionResolvers.UpsertUserResolver,
-    aggregateUser: actionResolvers.AggregateUserResolver,
-    groupByUser: actionResolvers.GroupByUserResolver
+    updateOneUser: actionResolvers.UpdateOneUserResolver,
+    upsertOneUser: actionResolvers.UpsertOneUserResolver
   },
   Post: {
-    post: actionResolvers.FindUniquePostResolver,
+    aggregatePost: actionResolvers.AggregatePostResolver,
+    createManyPost: actionResolvers.CreateManyPostResolver,
+    createOnePost: actionResolvers.CreateOnePostResolver,
+    deleteManyPost: actionResolvers.DeleteManyPostResolver,
+    deleteOnePost: actionResolvers.DeleteOnePostResolver,
     findFirstPost: actionResolvers.FindFirstPostResolver,
     posts: actionResolvers.FindManyPostResolver,
-    createPost: actionResolvers.CreatePostResolver,
-    createManyPost: actionResolvers.CreateManyPostResolver,
-    deletePost: actionResolvers.DeletePostResolver,
-    updatePost: actionResolvers.UpdatePostResolver,
-    deleteManyPost: actionResolvers.DeleteManyPostResolver,
+    post: actionResolvers.FindUniquePostResolver,
+    groupByPost: actionResolvers.GroupByPostResolver,
     updateManyPost: actionResolvers.UpdateManyPostResolver,
-    upsertPost: actionResolvers.UpsertPostResolver,
-    aggregatePost: actionResolvers.AggregatePostResolver,
-    groupByPost: actionResolvers.GroupByPostResolver
+    updateOnePost: actionResolvers.UpdateOnePostResolver,
+    upsertOnePost: actionResolvers.UpsertOnePostResolver
   }
 };
 const crudResolversInfo = {
-  User: [\\"user\\", \\"findFirstUser\\", \\"users\\", \\"createUser\\", \\"createManyUser\\", \\"deleteUser\\", \\"updateUser\\", \\"deleteManyUser\\", \\"updateManyUser\\", \\"upsertUser\\", \\"aggregateUser\\", \\"groupByUser\\"],
-  Post: [\\"post\\", \\"findFirstPost\\", \\"posts\\", \\"createPost\\", \\"createManyPost\\", \\"deletePost\\", \\"updatePost\\", \\"deleteManyPost\\", \\"updateManyPost\\", \\"upsertPost\\", \\"aggregatePost\\", \\"groupByPost\\"]
+  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"users\\", \\"user\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"posts\\", \\"post\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
-  FindUniqueUserArgs: [\\"where\\"],
+  AggregateUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
+  CreateManyUserArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateOneUserArgs: [\\"data\\"],
+  DeleteManyUserArgs: [\\"where\\"],
+  DeleteOneUserArgs: [\\"where\\"],
   FindFirstUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
-  CreateUserArgs: [\\"data\\"],
-  CreateManyUserArgs: [\\"data\\", \\"skipDuplicates\\"],
-  DeleteUserArgs: [\\"where\\"],
-  UpdateUserArgs: [\\"data\\", \\"where\\"],
-  DeleteManyUserArgs: [\\"where\\"],
-  UpdateManyUserArgs: [\\"data\\", \\"where\\"],
-  UpsertUserArgs: [\\"where\\", \\"create\\", \\"update\\"],
-  AggregateUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
+  FindUniqueUserArgs: [\\"where\\"],
   GroupByUserArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
-  FindUniquePostArgs: [\\"where\\"],
+  UpdateManyUserArgs: [\\"data\\", \\"where\\"],
+  UpdateOneUserArgs: [\\"data\\", \\"where\\"],
+  UpsertOneUserArgs: [\\"where\\", \\"create\\", \\"update\\"],
+  AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
+  CreateManyPostArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateOnePostArgs: [\\"data\\"],
+  DeleteManyPostArgs: [\\"where\\"],
+  DeleteOnePostArgs: [\\"where\\"],
   FindFirstPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
-  CreatePostArgs: [\\"data\\"],
-  CreateManyPostArgs: [\\"data\\", \\"skipDuplicates\\"],
-  DeletePostArgs: [\\"where\\"],
-  UpdatePostArgs: [\\"data\\", \\"where\\"],
-  DeleteManyPostArgs: [\\"where\\"],
+  FindUniquePostArgs: [\\"where\\"],
+  GroupByPostArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyPostArgs: [\\"data\\", \\"where\\"],
-  UpsertPostArgs: [\\"where\\", \\"create\\", \\"update\\"],
-  AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
-  GroupByPostArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"]
+  UpdateOnePostArgs: [\\"data\\", \\"where\\"],
+  UpsertOnePostArgs: [\\"where\\", \\"create\\", \\"update\\"]
 };
 
 type ResolverModelNames = keyof typeof crudResolversMap;
@@ -949,7 +949,7 @@ const inputsInfo = {
   BoolFilter: [\\"equals\\", \\"not\\"],
   StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
   UserRelationFilter: [\\"is\\", \\"isNot\\"],
-  JsonFilter: [\\"equals\\", \\"not\\"],
+  JsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostAvgOrderByAggregateInput: [\\"authorId\\"],
   PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
@@ -958,16 +958,16 @@ const inputsInfo = {
   DateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   BoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   StringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  JsonWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  JsonWithAggregatesFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   PostCreateNestedManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"createMany\\", \\"connect\\"],
   StringFieldUpdateOperationsInput: [\\"set\\"],
-  PostUpdateManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"connect\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
+  PostUpdateManyWithoutAuthorNestedInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"connect\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
   IntFieldUpdateOperationsInput: [\\"set\\", \\"increment\\", \\"decrement\\", \\"multiply\\", \\"divide\\"],
   UserCreateNestedOneWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"connect\\"],
   DateTimeFieldUpdateOperationsInput: [\\"set\\"],
   BoolFieldUpdateOperationsInput: [\\"set\\"],
   NullableStringFieldUpdateOperationsInput: [\\"set\\"],
-  UserUpdateOneRequiredWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
+  UserUpdateOneRequiredWithoutPostsNestedInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
   NestedIntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   NestedStringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
   NestedIntWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
@@ -980,7 +980,7 @@ const inputsInfo = {
   NestedBoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   NestedStringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   NestedIntNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedJsonFilter: [\\"equals\\", \\"not\\"],
+  NestedJsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   PostCreateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
   PostCreateOrConnectWithoutAuthorInput: [\\"where\\", \\"create\\"],
   PostCreateManyAuthorInputEnvelope: [\\"data\\", \\"skipDuplicates\\"],
@@ -1081,58 +1081,58 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
       [Post]
         AggregatePostResolver.ts
         CreateManyPostResolver.ts
-        CreatePostResolver.ts
+        CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
-        DeletePostResolver.ts
+        DeleteOnePostResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
         UpdateManyPostResolver.ts
-        UpdatePostResolver.ts
-        UpsertPostResolver.ts
+        UpdateOnePostResolver.ts
+        UpsertOnePostResolver.ts
         [args]
           AggregatePostArgs.ts
           CreateManyPostArgs.ts
-          CreatePostArgs.ts
+          CreateOnePostArgs.ts
           DeleteManyPostArgs.ts
-          DeletePostArgs.ts
+          DeleteOnePostArgs.ts
           FindFirstPostArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
           GroupByPostArgs.ts
           UpdateManyPostArgs.ts
-          UpdatePostArgs.ts
-          UpsertPostArgs.ts
+          UpdateOnePostArgs.ts
+          UpsertOnePostArgs.ts
           index.ts
       [User]
         AggregateUserResolver.ts
         CreateManyUserResolver.ts
-        CreateUserResolver.ts
+        CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
-        DeleteUserResolver.ts
+        DeleteOneUserResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
         UpdateManyUserResolver.ts
-        UpdateUserResolver.ts
-        UpsertUserResolver.ts
+        UpdateOneUserResolver.ts
+        UpsertOneUserResolver.ts
         UserCrudResolver.ts
         [args]
           AggregateUserArgs.ts
           CreateManyUserArgs.ts
-          CreateUserArgs.ts
+          CreateOneUserArgs.ts
           DeleteManyUserArgs.ts
-          DeleteUserArgs.ts
+          DeleteOneUserArgs.ts
           FindFirstUserArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
           GroupByUserArgs.ts
           UpdateManyUserArgs.ts
-          UpdateUserArgs.ts
-          UpsertUserArgs.ts
+          UpdateOneUserArgs.ts
+          UpsertOneUserArgs.ts
           index.ts
       args.index.ts
       index.ts
@@ -1185,7 +1185,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
-      PostUpdateManyWithoutAuthorInput.ts
+      PostUpdateManyWithoutAuthorNestedInput.ts
       PostUpdateWithWhereUniqueWithoutAuthorInput.ts
       PostUpdateWithoutAuthorInput.ts
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
@@ -1212,7 +1212,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
       UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
-      UserUpdateOneRequiredWithoutPostsInput.ts
+      UserUpdateOneRequiredWithoutPostsNestedInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts
@@ -1350,7 +1350,7 @@ const inputsInfo = {
   BoolFilter: [\\"equals\\", \\"not\\"],
   StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
   UserRelationFilter: [\\"is\\", \\"isNot\\"],
-  JsonFilter: [\\"equals\\", \\"not\\"],
+  JsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostAvgOrderByAggregateInput: [\\"authorId\\"],
   PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
@@ -1359,16 +1359,16 @@ const inputsInfo = {
   DateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   BoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   StringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  JsonWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  JsonWithAggregatesFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   PostCreateNestedManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"createMany\\", \\"connect\\"],
   StringFieldUpdateOperationsInput: [\\"set\\"],
-  PostUpdateManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"connect\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
+  PostUpdateManyWithoutAuthorNestedInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"connect\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
   IntFieldUpdateOperationsInput: [\\"set\\", \\"increment\\", \\"decrement\\", \\"multiply\\", \\"divide\\"],
   UserCreateNestedOneWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"connect\\"],
   DateTimeFieldUpdateOperationsInput: [\\"set\\"],
   BoolFieldUpdateOperationsInput: [\\"set\\"],
   NullableStringFieldUpdateOperationsInput: [\\"set\\"],
-  UserUpdateOneRequiredWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
+  UserUpdateOneRequiredWithoutPostsNestedInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
   NestedIntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   NestedStringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
   NestedIntWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
@@ -1381,7 +1381,7 @@ const inputsInfo = {
   NestedBoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   NestedStringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   NestedIntNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedJsonFilter: [\\"equals\\", \\"not\\"],
+  NestedJsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   PostCreateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
   PostCreateOrConnectWithoutAuthorInput: [\\"where\\", \\"create\\"],
   PostCreateManyAuthorInputEnvelope: [\\"data\\", \\"skipDuplicates\\"],
@@ -1509,7 +1509,7 @@ exports[`emitOnly generator option when only 'inputs' is set should generate pro
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
-      PostUpdateManyWithoutAuthorInput.ts
+      PostUpdateManyWithoutAuthorNestedInput.ts
       PostUpdateWithWhereUniqueWithoutAuthorInput.ts
       PostUpdateWithoutAuthorInput.ts
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
@@ -1536,7 +1536,7 @@ exports[`emitOnly generator option when only 'inputs' is set should generate pro
       UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
-      UserUpdateOneRequiredWithoutPostsInput.ts
+      UserUpdateOneRequiredWithoutPostsNestedInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts
@@ -2006,7 +2006,7 @@ const inputsInfo = {
   BoolFilter: [\\"equals\\", \\"not\\"],
   StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
   UserRelationFilter: [\\"is\\", \\"isNot\\"],
-  JsonFilter: [\\"equals\\", \\"not\\"],
+  JsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostAvgOrderByAggregateInput: [\\"authorId\\"],
   PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
@@ -2015,16 +2015,16 @@ const inputsInfo = {
   DateTimeWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   BoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   StringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
-  JsonWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
+  JsonWithAggregatesFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   PostCreateNestedManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"createMany\\", \\"connect\\"],
   StringFieldUpdateOperationsInput: [\\"set\\"],
-  PostUpdateManyWithoutAuthorInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"connect\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
+  PostUpdateManyWithoutAuthorNestedInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"createMany\\", \\"set\\", \\"disconnect\\", \\"delete\\", \\"connect\\", \\"update\\", \\"updateMany\\", \\"deleteMany\\"],
   IntFieldUpdateOperationsInput: [\\"set\\", \\"increment\\", \\"decrement\\", \\"multiply\\", \\"divide\\"],
   UserCreateNestedOneWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"connect\\"],
   DateTimeFieldUpdateOperationsInput: [\\"set\\"],
   BoolFieldUpdateOperationsInput: [\\"set\\"],
   NullableStringFieldUpdateOperationsInput: [\\"set\\"],
-  UserUpdateOneRequiredWithoutPostsInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
+  UserUpdateOneRequiredWithoutPostsNestedInput: [\\"create\\", \\"connectOrCreate\\", \\"upsert\\", \\"connect\\", \\"update\\"],
   NestedIntFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   NestedStringFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\"],
   NestedIntWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\", \\"_count\\", \\"_avg\\", \\"_sum\\", \\"_min\\", \\"_max\\"],
@@ -2037,7 +2037,7 @@ const inputsInfo = {
   NestedBoolWithAggregatesFilter: [\\"equals\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   NestedStringNullableWithAggregatesFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"not\\", \\"_count\\", \\"_min\\", \\"_max\\"],
   NestedIntNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
-  NestedJsonFilter: [\\"equals\\", \\"not\\"],
+  NestedJsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   PostCreateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
   PostCreateOrConnectWithoutAuthorInput: [\\"where\\", \\"create\\"],
   PostCreateManyAuthorInputEnvelope: [\\"data\\", \\"skipDuplicates\\"],
@@ -2180,7 +2180,7 @@ exports[`emitOnly generator option when only 'relationResolvers' is set should g
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
-      PostUpdateManyWithoutAuthorInput.ts
+      PostUpdateManyWithoutAuthorNestedInput.ts
       PostUpdateWithWhereUniqueWithoutAuthorInput.ts
       PostUpdateWithoutAuthorInput.ts
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
@@ -2207,7 +2207,7 @@ exports[`emitOnly generator option when only 'relationResolvers' is set should g
       UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
-      UserUpdateOneRequiredWithoutPostsInput.ts
+      UserUpdateOneRequiredWithoutPostsNestedInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts

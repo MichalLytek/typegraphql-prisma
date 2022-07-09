@@ -79,7 +79,7 @@
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false,
-            "documentation": "renamed field doc\\n@TypeGraphQL.field(name: \"firstName\")"
+            "documentation": "renamed field doc\n@TypeGraphQL.field(name: \"firstName\")"
           },
           {
             "name": "age",
@@ -199,7 +199,7 @@
         "uniqueFields": [],
         "uniqueIndexes": [],
         "isGenerated": false,
-        "documentation": "User model doc\\n@@TypeGraphQL.type(name: \"MainUser\")"
+        "documentation": "User model doc\n@@TypeGraphQL.type(name: \"MainUser\")"
       },
       {
         "name": "post",
@@ -221,7 +221,7 @@
             },
             "isGenerated": false,
             "isUpdatedAt": false,
-            "documentation": "first line of comment\\nsecond line of comment\\nthird line of comment"
+            "documentation": "first line of comment\nsecond line of comment\nthird line of comment"
           },
           {
             "name": "createdAt",
@@ -6207,7 +6207,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postUpdateManyWithoutAuthorInput",
+                  "type": "postUpdateManyWithoutAuthorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -6239,7 +6239,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postUpdateManyWithoutEditorInput",
+                  "type": "postUpdateManyWithoutEditorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -6410,7 +6410,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postUncheckedUpdateManyWithoutAuthorInput",
+                  "type": "postUncheckedUpdateManyWithoutAuthorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -6442,7 +6442,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postUncheckedUpdateManyWithoutEditorInput",
+                  "type": "postUncheckedUpdateManyWithoutEditorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -7425,7 +7425,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserUpdateOneRequiredWithoutPostsInput",
+                  "type": "UserUpdateOneRequiredWithoutPostsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -7438,7 +7438,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserUpdateOneWithoutEditorPostsInput",
+                  "type": "UserUpdateOneWithoutEditorPostsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9146,7 +9146,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "DirectorUpdateOneRequiredWithoutMoviesInput",
+                  "type": "DirectorUpdateOneRequiredWithoutMoviesNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9512,7 +9512,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "MovieUpdateManyWithoutDirectorInput",
+                  "type": "MovieUpdateManyWithoutDirectorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9570,7 +9570,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "MovieUncheckedUpdateManyWithoutDirectorInput",
+                  "type": "MovieUncheckedUpdateManyWithoutDirectorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9843,7 +9843,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorUpdateManyWithoutLikesInput",
+                  "type": "CreatorUpdateManyWithoutLikesNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9856,7 +9856,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorUpdateOneWithoutProblemsInput",
+                  "type": "CreatorUpdateOneWithoutProblemsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9914,7 +9914,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorUncheckedUpdateManyWithoutLikesInput",
+                  "type": "CreatorUncheckedUpdateManyWithoutLikesNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -10228,7 +10228,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemUpdateManyWithoutLikedByInput",
+                  "type": "ProblemUpdateManyWithoutLikedByNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -10241,7 +10241,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemUpdateManyWithoutCreatorInput",
+                  "type": "ProblemUpdateManyWithoutCreatorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -10299,7 +10299,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemUncheckedUpdateManyWithoutLikedByInput",
+                  "type": "ProblemUncheckedUpdateManyWithoutLikedByNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -10312,7 +10312,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemUncheckedUpdateManyWithoutCreatorInput",
+                  "type": "ProblemUncheckedUpdateManyWithoutCreatorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -18641,7 +18641,7 @@
           ]
         },
         {
-          "name": "postUpdateManyWithoutAuthorInput",
+          "name": "postUpdateManyWithoutAuthorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -18887,7 +18887,7 @@
           ]
         },
         {
-          "name": "postUpdateManyWithoutEditorInput",
+          "name": "postUpdateManyWithoutEditorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -19187,7 +19187,7 @@
           ]
         },
         {
-          "name": "postUncheckedUpdateManyWithoutAuthorInput",
+          "name": "postUncheckedUpdateManyWithoutAuthorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -19411,7 +19411,7 @@
           ]
         },
         {
-          "name": "postUncheckedUpdateManyWithoutEditorInput",
+          "name": "postUncheckedUpdateManyWithoutEditorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -19785,7 +19785,7 @@
           ]
         },
         {
-          "name": "UserUpdateOneRequiredWithoutPostsInput",
+          "name": "UserUpdateOneRequiredWithoutPostsNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -19871,7 +19871,7 @@
           ]
         },
         {
-          "name": "UserUpdateOneWithoutEditorPostsInput",
+          "name": "UserUpdateOneWithoutEditorPostsNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -20136,7 +20136,7 @@
           ]
         },
         {
-          "name": "DirectorUpdateOneRequiredWithoutMoviesInput",
+          "name": "DirectorUpdateOneRequiredWithoutMoviesNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -20404,7 +20404,7 @@
           ]
         },
         {
-          "name": "MovieUpdateManyWithoutDirectorInput",
+          "name": "MovieUpdateManyWithoutDirectorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -20628,7 +20628,7 @@
           ]
         },
         {
-          "name": "MovieUncheckedUpdateManyWithoutDirectorInput",
+          "name": "MovieUncheckedUpdateManyWithoutDirectorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -21062,7 +21062,7 @@
           ]
         },
         {
-          "name": "CreatorUpdateManyWithoutLikesInput",
+          "name": "CreatorUpdateManyWithoutLikesNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -21273,7 +21273,7 @@
           ]
         },
         {
-          "name": "CreatorUpdateOneWithoutProblemsInput",
+          "name": "CreatorUpdateOneWithoutProblemsNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -21383,7 +21383,7 @@
           ]
         },
         {
-          "name": "CreatorUncheckedUpdateManyWithoutLikesInput",
+          "name": "CreatorUncheckedUpdateManyWithoutLikesNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -21932,7 +21932,7 @@
           ]
         },
         {
-          "name": "ProblemUpdateManyWithoutLikedByInput",
+          "name": "ProblemUpdateManyWithoutLikedByNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -22143,7 +22143,7 @@
           ]
         },
         {
-          "name": "ProblemUpdateManyWithoutCreatorInput",
+          "name": "ProblemUpdateManyWithoutCreatorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -22367,7 +22367,7 @@
           ]
         },
         {
-          "name": "ProblemUncheckedUpdateManyWithoutLikedByInput",
+          "name": "ProblemUncheckedUpdateManyWithoutLikedByNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -22578,7 +22578,7 @@
           ]
         },
         {
-          "name": "ProblemUncheckedUpdateManyWithoutCreatorInput",
+          "name": "ProblemUncheckedUpdateManyWithoutCreatorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -28694,7 +28694,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postUpdateManyWithoutEditorInput",
+                  "type": "postUpdateManyWithoutEditorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -28884,7 +28884,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postUncheckedUpdateManyWithoutEditorInput",
+                  "type": "postUncheckedUpdateManyWithoutEditorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -29084,7 +29084,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postUpdateManyWithoutAuthorInput",
+                  "type": "postUpdateManyWithoutAuthorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -29274,7 +29274,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "postUncheckedUpdateManyWithoutAuthorInput",
+                  "type": "postUncheckedUpdateManyWithoutAuthorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -30513,7 +30513,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemUpdateManyWithoutLikedByInput",
+                  "type": "ProblemUpdateManyWithoutLikedByNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -30571,7 +30571,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemUncheckedUpdateManyWithoutLikedByInput",
+                  "type": "ProblemUncheckedUpdateManyWithoutLikedByNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -31704,7 +31704,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserUpdateOneWithoutEditorPostsInput",
+                  "type": "UserUpdateOneWithoutEditorPostsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -32309,7 +32309,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserUpdateOneRequiredWithoutPostsInput",
+                  "type": "UserUpdateOneRequiredWithoutPostsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -32893,7 +32893,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemUpdateManyWithoutCreatorInput",
+                  "type": "ProblemUpdateManyWithoutCreatorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -32951,7 +32951,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "ProblemUncheckedUpdateManyWithoutCreatorInput",
+                  "type": "ProblemUncheckedUpdateManyWithoutCreatorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -33069,7 +33069,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorUpdateOneWithoutProblemsInput",
+                  "type": "CreatorUpdateOneWithoutProblemsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -33245,7 +33245,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorUpdateManyWithoutLikesInput",
+                  "type": "CreatorUpdateManyWithoutLikesNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -33303,7 +33303,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorUncheckedUpdateManyWithoutLikesInput",
+                  "type": "CreatorUncheckedUpdateManyWithoutLikesNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -43862,147 +43862,138 @@
     "modelOperations": [
       {
         "model": "User",
-        "plural": "users",
-        "findUnique": "findUniqueUser",
+        "aggregate": "aggregateUser",
+        "createMany": "createManyUser",
+        "createOne": "createOneUser",
+        "deleteMany": "deleteManyUser",
+        "deleteOne": "deleteOneUser",
         "findFirst": "findFirstUser",
         "findMany": "findManyUser",
-        "create": "createOneUser",
-        "createMany": "createManyUser",
-        "delete": "deleteOneUser",
-        "update": "updateOneUser",
-        "deleteMany": "deleteManyUser",
+        "findUnique": "findUniqueUser",
+        "groupBy": "groupByUser",
         "updateMany": "updateManyUser",
-        "upsert": "upsertOneUser",
-        "aggregate": "aggregateUser",
-        "groupBy": "groupByUser"
+        "updateOne": "updateOneUser",
+        "upsertOne": "upsertOneUser"
       },
       {
         "model": "post",
-        "plural": "posts",
-        "findUnique": "findUniquepost",
+        "aggregate": "aggregatepost",
+        "createMany": "createManypost",
+        "createOne": "createOnepost",
+        "deleteMany": "deleteManypost",
+        "deleteOne": "deleteOnepost",
         "findFirst": "findFirstpost",
         "findMany": "findManypost",
-        "create": "createOnepost",
-        "createMany": "createManypost",
-        "delete": "deleteOnepost",
-        "update": "updateOnepost",
-        "deleteMany": "deleteManypost",
+        "findUnique": "findUniquepost",
+        "groupBy": "groupBypost",
         "updateMany": "updateManypost",
-        "upsert": "upsertOnepost",
-        "aggregate": "aggregatepost",
-        "groupBy": "groupBypost"
+        "updateOne": "updateOnepost",
+        "upsertOne": "upsertOnepost"
       },
       {
         "model": "Category",
-        "plural": "categories",
-        "findUnique": "findUniqueCategory",
+        "aggregate": "aggregateCategory",
+        "createMany": "createManyCategory",
+        "createOne": "createOneCategory",
+        "deleteMany": "deleteManyCategory",
+        "deleteOne": "deleteOneCategory",
         "findFirst": "findFirstCategory",
         "findMany": "findManyCategory",
-        "create": "createOneCategory",
-        "createMany": "createManyCategory",
-        "delete": "deleteOneCategory",
-        "update": "updateOneCategory",
-        "deleteMany": "deleteManyCategory",
+        "findUnique": "findUniqueCategory",
+        "groupBy": "groupByCategory",
         "updateMany": "updateManyCategory",
-        "upsert": "upsertOneCategory",
-        "aggregate": "aggregateCategory",
-        "groupBy": "groupByCategory"
+        "updateOne": "updateOneCategory",
+        "upsertOne": "upsertOneCategory"
       },
       {
         "model": "Patient",
-        "plural": "patients",
-        "findUnique": "findUniquePatient",
+        "aggregate": "aggregatePatient",
+        "createMany": "createManyPatient",
+        "createOne": "createOnePatient",
+        "deleteMany": "deleteManyPatient",
+        "deleteOne": "deleteOnePatient",
         "findFirst": "findFirstPatient",
         "findMany": "findManyPatient",
-        "create": "createOnePatient",
-        "createMany": "createManyPatient",
-        "delete": "deleteOnePatient",
-        "update": "updateOnePatient",
-        "deleteMany": "deleteManyPatient",
+        "findUnique": "findUniquePatient",
+        "groupBy": "groupByPatient",
         "updateMany": "updateManyPatient",
-        "upsert": "upsertOnePatient",
-        "aggregate": "aggregatePatient",
-        "groupBy": "groupByPatient"
+        "updateOne": "updateOnePatient",
+        "upsertOne": "upsertOnePatient"
       },
       {
         "model": "Movie",
-        "plural": "movies",
-        "findUnique": "findUniqueMovie",
+        "aggregate": "aggregateMovie",
+        "createMany": "createManyMovie",
+        "createOne": "createOneMovie",
+        "deleteMany": "deleteManyMovie",
+        "deleteOne": "deleteOneMovie",
         "findFirst": "findFirstMovie",
         "findMany": "findManyMovie",
-        "create": "createOneMovie",
-        "createMany": "createManyMovie",
-        "delete": "deleteOneMovie",
-        "update": "updateOneMovie",
-        "deleteMany": "deleteManyMovie",
+        "findUnique": "findUniqueMovie",
+        "groupBy": "groupByMovie",
         "updateMany": "updateManyMovie",
-        "upsert": "upsertOneMovie",
-        "aggregate": "aggregateMovie",
-        "groupBy": "groupByMovie"
+        "updateOne": "updateOneMovie",
+        "upsertOne": "upsertOneMovie"
       },
       {
         "model": "Director",
-        "plural": "directors",
-        "findUnique": "findUniqueDirector",
+        "aggregate": "aggregateDirector",
+        "createMany": "createManyDirector",
+        "createOne": "createOneDirector",
+        "deleteMany": "deleteManyDirector",
+        "deleteOne": "deleteOneDirector",
         "findFirst": "findFirstDirector",
         "findMany": "findManyDirector",
-        "create": "createOneDirector",
-        "createMany": "createManyDirector",
-        "delete": "deleteOneDirector",
-        "update": "updateOneDirector",
-        "deleteMany": "deleteManyDirector",
+        "findUnique": "findUniqueDirector",
+        "groupBy": "groupByDirector",
         "updateMany": "updateManyDirector",
-        "upsert": "upsertOneDirector",
-        "aggregate": "aggregateDirector",
-        "groupBy": "groupByDirector"
+        "updateOne": "updateOneDirector",
+        "upsertOne": "upsertOneDirector"
       },
       {
         "model": "Problem",
-        "plural": "problems",
-        "findUnique": "findUniqueProblem",
+        "aggregate": "aggregateProblem",
+        "createMany": "createManyProblem",
+        "createOne": "createOneProblem",
+        "deleteMany": "deleteManyProblem",
+        "deleteOne": "deleteOneProblem",
         "findFirst": "findFirstProblem",
         "findMany": "findManyProblem",
-        "create": "createOneProblem",
-        "createMany": "createManyProblem",
-        "delete": "deleteOneProblem",
-        "update": "updateOneProblem",
-        "deleteMany": "deleteManyProblem",
+        "findUnique": "findUniqueProblem",
+        "groupBy": "groupByProblem",
         "updateMany": "updateManyProblem",
-        "upsert": "upsertOneProblem",
-        "aggregate": "aggregateProblem",
-        "groupBy": "groupByProblem"
+        "updateOne": "updateOneProblem",
+        "upsertOne": "upsertOneProblem"
       },
       {
         "model": "Creator",
-        "plural": "creators",
-        "findUnique": "findUniqueCreator",
+        "aggregate": "aggregateCreator",
+        "createMany": "createManyCreator",
+        "createOne": "createOneCreator",
+        "deleteMany": "deleteManyCreator",
+        "deleteOne": "deleteOneCreator",
         "findFirst": "findFirstCreator",
         "findMany": "findManyCreator",
-        "create": "createOneCreator",
-        "createMany": "createManyCreator",
-        "delete": "deleteOneCreator",
-        "update": "updateOneCreator",
-        "deleteMany": "deleteManyCreator",
+        "findUnique": "findUniqueCreator",
+        "groupBy": "groupByCreator",
         "updateMany": "updateManyCreator",
-        "upsert": "upsertOneCreator",
-        "aggregate": "aggregateCreator",
-        "groupBy": "groupByCreator"
+        "updateOne": "updateOneCreator",
+        "upsertOne": "upsertOneCreator"
       },
       {
         "model": "NativeTypeModel",
-        "plural": "nativeTypeModels",
-        "findUnique": "findUniqueNativeTypeModel",
+        "aggregate": "aggregateNativeTypeModel",
+        "createMany": "createManyNativeTypeModel",
+        "createOne": "createOneNativeTypeModel",
+        "deleteMany": "deleteManyNativeTypeModel",
+        "deleteOne": "deleteOneNativeTypeModel",
         "findFirst": "findFirstNativeTypeModel",
         "findMany": "findManyNativeTypeModel",
-        "create": "createOneNativeTypeModel",
-        "createMany": "createManyNativeTypeModel",
-        "delete": "deleteOneNativeTypeModel",
-        "update": "updateOneNativeTypeModel",
-        "deleteMany": "deleteManyNativeTypeModel",
+        "findUnique": "findUniqueNativeTypeModel",
+        "groupBy": "groupByNativeTypeModel",
         "updateMany": "updateManyNativeTypeModel",
-        "upsert": "upsertOneNativeTypeModel",
-        "aggregate": "aggregateNativeTypeModel",
-        "groupBy": "groupByNativeTypeModel"
+        "updateOne": "updateOneNativeTypeModel",
+        "upsertOne": "upsertOneNativeTypeModel"
       }
     ],
     "otherOperations": {

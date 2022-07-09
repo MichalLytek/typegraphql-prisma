@@ -2,17 +2,17 @@ import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateMainUserArgs } from "./args/AggregateMainUserArgs";
-import { CreateMainUserArgs } from "./args/CreateMainUserArgs";
 import { CreateManyMainUserArgs } from "./args/CreateManyMainUserArgs";
-import { DeleteMainUserArgs } from "./args/DeleteMainUserArgs";
+import { CreateOneMainUserArgs } from "./args/CreateOneMainUserArgs";
 import { DeleteManyMainUserArgs } from "./args/DeleteManyMainUserArgs";
+import { DeleteOneMainUserArgs } from "./args/DeleteOneMainUserArgs";
 import { FindFirstMainUserArgs } from "./args/FindFirstMainUserArgs";
 import { FindManyMainUserArgs } from "./args/FindManyMainUserArgs";
 import { FindUniqueMainUserArgs } from "./args/FindUniqueMainUserArgs";
 import { GroupByMainUserArgs } from "./args/GroupByMainUserArgs";
-import { UpdateMainUserArgs } from "./args/UpdateMainUserArgs";
 import { UpdateManyMainUserArgs } from "./args/UpdateManyMainUserArgs";
-import { UpsertMainUserArgs } from "./args/UpsertMainUserArgs";
+import { UpdateOneMainUserArgs } from "./args/UpdateOneMainUserArgs";
+import { UpsertOneMainUserArgs } from "./args/UpsertOneMainUserArgs";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 import { MainUser } from "../../../models/MainUser";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
@@ -21,14 +21,63 @@ import { MainUserGroupBy } from "../../outputs/MainUserGroupBy";
 
 @TypeGraphQL.Resolver(_of => MainUser)
 export class MainUserCrudResolver {
-  @TypeGraphQL.Query(_returns => MainUser, {
-    nullable: true
+  @TypeGraphQL.Query(_returns => AggregateMainUser, {
+    nullable: false
   })
-  async mainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueMainUserArgs): Promise<MainUser | null> {
+  async aggregateMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateMainUserArgs): Promise<AggregateMainUser> {
+    return getPrismaFromContext(ctx).user.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyMainUserArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformFields(
       graphqlFields(info as any)
     );
-    return getPrismaFromContext(ctx).user.findUnique({
+    return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => MainUser, {
+    nullable: false
+  })
+  async createOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneMainUserArgs): Promise<MainUser> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.create({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async deleteManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyMainUserArgs): Promise<AffectedRowsOutput> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.deleteMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => MainUser, {
+    nullable: true
+  })
+  async deleteOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneMainUserArgs): Promise<MainUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
@@ -60,68 +109,31 @@ export class MainUserCrudResolver {
     });
   }
 
-  @TypeGraphQL.Mutation(_returns => MainUser, {
-    nullable: false
-  })
-  async createMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateMainUserArgs): Promise<MainUser> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
-    return getPrismaFromContext(ctx).user.create({
-      ...args,
-      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-    });
-  }
-
-  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
-    nullable: false
-  })
-  async createManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyMainUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
-    return getPrismaFromContext(ctx).user.createMany({
-      ...args,
-      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-    });
-  }
-
-  @TypeGraphQL.Mutation(_returns => MainUser, {
+  @TypeGraphQL.Query(_returns => MainUser, {
     nullable: true
   })
-  async deleteMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteMainUserArgs): Promise<MainUser | null> {
+  async mainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueMainUserArgs): Promise<MainUser | null> {
     const { _count } = transformFields(
       graphqlFields(info as any)
     );
-    return getPrismaFromContext(ctx).user.delete({
+    return getPrismaFromContext(ctx).user.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }
 
-  @TypeGraphQL.Mutation(_returns => MainUser, {
-    nullable: true
-  })
-  async updateMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateMainUserArgs): Promise<MainUser | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
-    return getPrismaFromContext(ctx).user.update({
-      ...args,
-      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-    });
-  }
-
-  @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
+  @TypeGraphQL.Query(_returns => [MainUserGroupBy], {
     nullable: false
   })
-  async deleteManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyMainUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
+  async groupByMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByMainUserArgs): Promise<MainUserGroupBy[]> {
+    const { _count, _avg, _sum, _min, _max } = transformFields(
       graphqlFields(info as any)
     );
-    return getPrismaFromContext(ctx).user.deleteMany({
+    return getPrismaFromContext(ctx).user.groupBy({
       ...args,
-      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+      ...Object.fromEntries(
+        Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)
+      ),
     });
   }
 
@@ -139,40 +151,28 @@ export class MainUserCrudResolver {
   }
 
   @TypeGraphQL.Mutation(_returns => MainUser, {
+    nullable: true
+  })
+  async updateOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneMainUserArgs): Promise<MainUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.update({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => MainUser, {
     nullable: false
   })
-  async upsertMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertMainUserArgs): Promise<MainUser> {
+  async upsertOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneMainUserArgs): Promise<MainUser> {
     const { _count } = transformFields(
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).user.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-    });
-  }
-
-  @TypeGraphQL.Query(_returns => AggregateMainUser, {
-    nullable: false
-  })
-  async aggregateMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateMainUserArgs): Promise<AggregateMainUser> {
-    return getPrismaFromContext(ctx).user.aggregate({
-      ...args,
-      ...transformFields(graphqlFields(info as any)),
-    });
-  }
-
-  @TypeGraphQL.Query(_returns => [MainUserGroupBy], {
-    nullable: false
-  })
-  async groupByMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByMainUserArgs): Promise<MainUserGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
-    return getPrismaFromContext(ctx).user.groupBy({
-      ...args,
-      ...Object.fromEntries(
-        Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)
-      ),
     });
   }
 }

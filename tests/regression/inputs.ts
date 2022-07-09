@@ -572,9 +572,9 @@ describe("inputs", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const userUpdateOneRequiredWithoutPostsFieldInputTSFile =
+    const userUpdateOneRequiredWithoutPostsFieldNestedInputTSFile =
       await readGeneratedFile(
-        "/resolvers/inputs/UserUpdateOneRequiredWithoutPostsFieldInput.ts",
+        "/resolvers/inputs/UserUpdateOneRequiredWithoutPostsFieldNestedInput.ts",
       );
     const userCreateOrConnectWithoutPostsFieldInputTSFile =
       await readGeneratedFile(
@@ -585,9 +585,9 @@ describe("inputs", () => {
         "/resolvers/inputs/UserCreateNestedOneWithoutPostsFieldInput.ts",
       );
 
-    expect(userUpdateOneRequiredWithoutPostsFieldInputTSFile).toMatchSnapshot(
-      "UserUpdateOneRequiredWithoutPostsFieldInput",
-    );
+    expect(
+      userUpdateOneRequiredWithoutPostsFieldNestedInputTSFile,
+    ).toMatchSnapshot("UserUpdateOneRequiredWithoutPostsFieldNestedInput");
     expect(userCreateOrConnectWithoutPostsFieldInputTSFile).toMatchSnapshot(
       "UserCreateOrConnectWithoutPostsFieldInput",
     );
@@ -1149,9 +1149,9 @@ describe("inputs", () => {
         await readGeneratedFile(
           "/resolvers/inputs/FirstModelCreateWithoutSecondModelsFieldInput.ts",
         );
-      const firstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile =
+      const firstModelUpdateOneRequiredWithoutSecondModelsFieldNestedInputTSFile =
         await readGeneratedFile(
-          "/resolvers/inputs/FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput.ts",
+          "/resolvers/inputs/FirstModelUpdateOneRequiredWithoutSecondModelsFieldNestedInput.ts",
         );
       const firstModelUpdateWithoutSecondModelsFieldInputTSFile =
         await readGeneratedFile(
@@ -1196,9 +1196,9 @@ describe("inputs", () => {
         firstModelCreateWithoutSecondModelsFieldInputTSFile,
       ).toMatchSnapshot("FirstModelCreateWithoutSecondModelsFieldInputTSFile");
       expect(
-        firstModelUpdateOneRequiredWithoutSecondModelsFieldInputTSFile,
+        firstModelUpdateOneRequiredWithoutSecondModelsFieldNestedInputTSFile,
       ).toMatchSnapshot(
-        "FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput",
+        "FirstModelUpdateOneRequiredWithoutSecondModelsFieldNestedInput",
       );
       expect(
         firstModelUpdateWithoutSecondModelsFieldInputTSFile,

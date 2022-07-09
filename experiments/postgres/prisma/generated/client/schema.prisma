@@ -7,7 +7,7 @@ generator client {
   provider        = "prisma-client-js"
   binaryTargets   = ["windows", "debian-openssl-1.1.x"]
   output          = "../prisma/generated/client"
-  previewFeatures = ["filterJson", "fullTextSearch"]
+  previewFeatures = ["fullTextSearch"]
 }
 
 generator typegraphql {

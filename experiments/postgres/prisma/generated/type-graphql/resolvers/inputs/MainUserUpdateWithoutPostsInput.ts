@@ -8,7 +8,7 @@ import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperation
 import { MainUserUpdatealiasesInput } from "../inputs/MainUserUpdatealiasesInput";
 import { MainUserUpdategradesInput } from "../inputs/MainUserUpdategradesInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
-import { PostUpdateManyWithoutEditorInput } from "../inputs/PostUpdateManyWithoutEditorInput";
+import { PostUpdateManyWithoutEditorNestedInput } from "../inputs/PostUpdateManyWithoutEditorNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("MainUserUpdateWithoutPostsInput", {
@@ -39,10 +39,10 @@ export class MainUserUpdateWithoutPostsInput {
   })
   role?: EnumRoleFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostUpdateManyWithoutEditorInput, {
+  @TypeGraphQL.Field(_type => PostUpdateManyWithoutEditorNestedInput, {
     nullable: true
   })
-  editorPosts?: PostUpdateManyWithoutEditorInput | undefined;
+  editorPosts?: PostUpdateManyWithoutEditorNestedInput | undefined;
 
   @TypeGraphQL.Field(_type => MainUserUpdategradesInput, {
     nullable: true

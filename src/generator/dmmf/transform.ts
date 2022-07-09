@@ -307,6 +307,7 @@ function transformMapping(
     const { model, plural, ...availableActions } = mapping;
     const modelTypeName = dmmfDocument.getModelTypeName(model) ?? model;
     const actions = Object.entries(availableActions)
+      .sort(([a], [b]) => a.localeCompare(b))
       .filter(
         ([actionKind, fieldName]) =>
           fieldName && getOperationKindName(actionKind),
@@ -354,6 +355,7 @@ function transformMapping(
           fieldName,
           kind: kind,
           operation: getOperationKindName(kind)!,
+          prismaMethod: getPrismaMethodName(kind),
           method,
           argsTypeName,
           outputTypeName,
@@ -366,7 +368,6 @@ function transformMapping(
     return {
       model,
       modelTypeName,
-      plural,
       actions,
       collectionName: camelCase(mapping.model),
       resolverName,
@@ -453,6 +454,21 @@ function getOperationKindName(actionName: string) {
     return "Mutation";
   }
   // throw new Error(`Unsupported operation kind: '${actionName}'`);
+}
+
+function getPrismaMethodName(actionKind: DMMF.ModelAction) {
+  switch (actionKind) {
+    case DMMF.ModelAction.createOne:
+      return "create";
+    case DMMF.ModelAction.updateOne:
+      return "update";
+    case DMMF.ModelAction.upsertOne:
+      return "upsert";
+    case DMMF.ModelAction.deleteOne:
+      return "delete";
+    default:
+      return actionKind;
+  }
 }
 
 const ENUM_SUFFIXES = ["OrderByRelevanceFieldEnum", "ScalarFieldEnum"] as const;

@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
-import { MainUserUpdateOneRequiredWithoutPostsInput } from "../inputs/MainUserUpdateOneRequiredWithoutPostsInput";
+import { MainUserUpdateOneRequiredWithoutPostsNestedInput } from "../inputs/MainUserUpdateOneRequiredWithoutPostsNestedInput";
 import { NullableEnumPostKindFieldUpdateOperationsInput } from "../inputs/NullableEnumPostKindFieldUpdateOperationsInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
@@ -38,10 +38,10 @@ export class PostUpdateWithoutEditorInput {
   })
   content?: NullableStringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserUpdateOneRequiredWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => MainUserUpdateOneRequiredWithoutPostsNestedInput, {
     nullable: true
   })
-  author?: MainUserUpdateOneRequiredWithoutPostsInput | undefined;
+  author?: MainUserUpdateOneRequiredWithoutPostsNestedInput | undefined;
 
   @TypeGraphQL.Field(_type => NullableEnumPostKindFieldUpdateOperationsInput, {
     nullable: true

@@ -100,7 +100,7 @@ describe("crud resolvers execution", () => {
     it("should properly call PrismaClient on `create` action", async () => {
       const document = /* graphql */ `
         mutation {
-          createUser(
+          createOneUser(
             data: {
               uniqueStringField: "unique"
               optionalStringField: "optional"
@@ -135,7 +135,7 @@ describe("crud resolvers execution", () => {
     it("should properly call PrismaClient on `delete` action", async () => {
       const document = /* graphql */ `
         mutation {
-          deleteUser(
+          deleteOneUser(
             where: {
               uniqueStringField: "unique"
             }
@@ -168,7 +168,7 @@ describe("crud resolvers execution", () => {
     it("should properly call PrismaClient on `update` action", async () => {
       const document = /* graphql */ `
         mutation {
-          updateUser(
+          updateOneUser(
             data: {
               dateField: {
                 set: "2019-12-31T14:16:02.572Z",
@@ -271,7 +271,7 @@ describe("crud resolvers execution", () => {
     it("should properly call PrismaClient on `upsert` action", async () => {
       const document = /* graphql */ `
         mutation {
-          upsertUser(
+          upsertOneUser(
             where: {
               uniqueStringField: "unique"
             }

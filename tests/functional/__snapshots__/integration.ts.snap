@@ -83,18 +83,18 @@ input IntWithAggregatesFilter {
 type Mutation {
   createManyPost(data: [PostCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyUser(data: [UserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
-  createPost(data: PostCreateInput!): Post!
-  createUser(data: UserCreateInput!): User!
+  createOnePost(data: PostCreateInput!): Post!
+  createOneUser(data: UserCreateInput!): User!
   deleteManyPost(where: PostWhereInput): AffectedRowsOutput!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
-  deletePost(where: PostWhereUniqueInput!): Post
-  deleteUser(where: UserWhereUniqueInput!): User
+  deleteOnePost(where: PostWhereUniqueInput!): Post
+  deleteOneUser(where: UserWhereUniqueInput!): User
   updateManyPost(data: PostUpdateManyMutationInput!, where: PostWhereInput): AffectedRowsOutput!
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
-  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  upsertPost(create: PostCreateInput!, update: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
-  upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  updateOnePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  upsertOnePost(create: PostCreateInput!, update: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
+  upsertOneUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
 input NestedEnumColorFilter {
@@ -409,7 +409,7 @@ input PostSumOrderByAggregateInput {
 }
 
 input PostUpdateInput {
-  author: UserUpdateOneRequiredWithoutPostsInput
+  author: UserUpdateOneRequiredWithoutPostsNestedInput
   color: EnumColorFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
   uuid: StringFieldUpdateOperationsInput
@@ -426,7 +426,7 @@ input PostUpdateManyWithWhereWithoutAuthorInput {
   where: PostScalarWhereInput!
 }
 
-input PostUpdateManyWithoutAuthorInput {
+input PostUpdateManyWithoutAuthorNestedInput {
   connect: [PostWhereUniqueInput!]
   connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
@@ -694,14 +694,14 @@ input UserSumOrderByAggregateInput {
 
 input UserUpdateInput {
   name: NullableStringFieldUpdateOperationsInput
-  posts: PostUpdateManyWithoutAuthorInput
+  posts: PostUpdateManyWithoutAuthorNestedInput
 }
 
 input UserUpdateManyMutationInput {
   name: NullableStringFieldUpdateOperationsInput
 }
 
-input UserUpdateOneRequiredWithoutPostsInput {
+input UserUpdateOneRequiredWithoutPostsNestedInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutPostsInput
   create: UserCreateWithoutPostsInput
@@ -755,58 +755,58 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       [Post]
         AggregatePostResolver.ts
         CreateManyPostResolver.ts
-        CreatePostResolver.ts
+        CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
-        DeletePostResolver.ts
+        DeleteOnePostResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
         UpdateManyPostResolver.ts
-        UpdatePostResolver.ts
-        UpsertPostResolver.ts
+        UpdateOnePostResolver.ts
+        UpsertOnePostResolver.ts
         [args]
           AggregatePostArgs.ts
           CreateManyPostArgs.ts
-          CreatePostArgs.ts
+          CreateOnePostArgs.ts
           DeleteManyPostArgs.ts
-          DeletePostArgs.ts
+          DeleteOnePostArgs.ts
           FindFirstPostArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
           GroupByPostArgs.ts
           UpdateManyPostArgs.ts
-          UpdatePostArgs.ts
-          UpsertPostArgs.ts
+          UpdateOnePostArgs.ts
+          UpsertOnePostArgs.ts
           index.ts
       [User]
         AggregateUserResolver.ts
         CreateManyUserResolver.ts
-        CreateUserResolver.ts
+        CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
-        DeleteUserResolver.ts
+        DeleteOneUserResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
         UpdateManyUserResolver.ts
-        UpdateUserResolver.ts
-        UpsertUserResolver.ts
+        UpdateOneUserResolver.ts
+        UpsertOneUserResolver.ts
         UserCrudResolver.ts
         [args]
           AggregateUserArgs.ts
           CreateManyUserArgs.ts
-          CreateUserArgs.ts
+          CreateOneUserArgs.ts
           DeleteManyUserArgs.ts
-          DeleteUserArgs.ts
+          DeleteOneUserArgs.ts
           FindFirstUserArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
           GroupByUserArgs.ts
           UpdateManyUserArgs.ts
-          UpdateUserArgs.ts
-          UpsertUserArgs.ts
+          UpdateOneUserArgs.ts
+          UpsertOneUserArgs.ts
           index.ts
       args.index.ts
       index.ts
@@ -851,7 +851,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       PostUpdateInput.ts
       PostUpdateManyMutationInput.ts
       PostUpdateManyWithWhereWithoutAuthorInput.ts
-      PostUpdateManyWithoutAuthorInput.ts
+      PostUpdateManyWithoutAuthorNestedInput.ts
       PostUpdateWithWhereUniqueWithoutAuthorInput.ts
       PostUpdateWithoutAuthorInput.ts
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
@@ -878,7 +878,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
-      UserUpdateOneRequiredWithoutPostsInput.ts
+      UserUpdateOneRequiredWithoutPostsNestedInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts

@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { CreatorUpdateManyWithoutLikesInput } from "../inputs/CreatorUpdateManyWithoutLikesInput";
+import { CreatorUpdateManyWithoutLikesNestedInput } from "../inputs/CreatorUpdateManyWithoutLikesNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("ProblemUpdateWithoutCreatorInput", {
@@ -14,8 +14,8 @@ export class ProblemUpdateWithoutCreatorInput {
   })
   problemText?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorUpdateManyWithoutLikesInput, {
+  @TypeGraphQL.Field(_type => CreatorUpdateManyWithoutLikesNestedInput, {
     nullable: true
   })
-  likedBy?: CreatorUpdateManyWithoutLikesInput | undefined;
+  likedBy?: CreatorUpdateManyWithoutLikesNestedInput | undefined;
 }

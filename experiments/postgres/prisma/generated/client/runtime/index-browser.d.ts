@@ -1,3 +1,9 @@
+declare class AnyNull extends NullTypesEnumValue {
+}
+
+declare class DbNull extends NullTypesEnumValue {
+}
+
 export declare namespace Decimal {
     export type Constructor = typeof Decimal;
     export type Instance = Decimal;
@@ -265,5 +271,35 @@ export declare class Decimal {
     static readonly ROUND_HALF_FLOOR: 8;
     static readonly EUCLID: 9;
 }
+
+declare class JsonNull extends NullTypesEnumValue {
+}
+
+declare class NullTypesEnumValue extends ObjectEnumValue {
+    _getNamespace(): string;
+}
+
+/**
+ * Base class for unique values of object-valued enums.
+ */
+declare abstract class ObjectEnumValue {
+    constructor(arg?: symbol);
+    abstract _getNamespace(): string;
+    _getName(): string;
+    toString(): string;
+}
+
+export declare const objectEnumValues: {
+    classes: {
+        DbNull: typeof DbNull;
+        JsonNull: typeof JsonNull;
+        AnyNull: typeof AnyNull;
+    };
+    instances: {
+        DbNull: DbNull;
+        JsonNull: JsonNull;
+        AnyNull: AnyNull;
+    };
+};
 
 export { }

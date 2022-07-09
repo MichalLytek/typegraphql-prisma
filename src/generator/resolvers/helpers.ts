@@ -48,7 +48,7 @@ export function generateCrudResolverClassMethodDeclaration(
     statements:
       action.kind === DMMF.ModelAction.aggregate
         ? [
-            /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}({
+            /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.prismaMethod}({
               ...args,
               ...transformFields(graphqlFields(info as any)),
             });`,
@@ -58,7 +58,7 @@ export function generateCrudResolverClassMethodDeclaration(
             /* ts */ ` const { _count, _avg, _sum, _min, _max } = transformFields(
               graphqlFields(info as any)
             );`,
-            /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}({
+            /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.prismaMethod}({
               ...args,
               ...Object.fromEntries(
                 Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)
@@ -69,7 +69,7 @@ export function generateCrudResolverClassMethodDeclaration(
             /* ts */ ` const { _count } = transformFields(
               graphqlFields(info as any)
             );
-            return getPrismaFromContext(ctx).${mapping.collectionName}.${action.kind}({
+            return getPrismaFromContext(ctx).${mapping.collectionName}.${action.prismaMethod}({
               ...args,
               ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
             });`,

@@ -2,8 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { ProblemUpdateManyWithoutCreatorInput } from "../inputs/ProblemUpdateManyWithoutCreatorInput";
-import { ProblemUpdateManyWithoutLikedByInput } from "../inputs/ProblemUpdateManyWithoutLikedByInput";
+import { ProblemUpdateManyWithoutCreatorNestedInput } from "../inputs/ProblemUpdateManyWithoutCreatorNestedInput";
+import { ProblemUpdateManyWithoutLikedByNestedInput } from "../inputs/ProblemUpdateManyWithoutLikedByNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("CreatorUpdateInput", {
@@ -15,13 +15,13 @@ export class CreatorUpdateInput {
   })
   name?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => ProblemUpdateManyWithoutLikedByInput, {
+  @TypeGraphQL.Field(_type => ProblemUpdateManyWithoutLikedByNestedInput, {
     nullable: true
   })
-  likes?: ProblemUpdateManyWithoutLikedByInput | undefined;
+  likes?: ProblemUpdateManyWithoutLikedByNestedInput | undefined;
 
-  @TypeGraphQL.Field(_type => ProblemUpdateManyWithoutCreatorInput, {
+  @TypeGraphQL.Field(_type => ProblemUpdateManyWithoutCreatorNestedInput, {
     nullable: true
   })
-  problems?: ProblemUpdateManyWithoutCreatorInput | undefined;
+  problems?: ProblemUpdateManyWithoutCreatorNestedInput | undefined;
 }

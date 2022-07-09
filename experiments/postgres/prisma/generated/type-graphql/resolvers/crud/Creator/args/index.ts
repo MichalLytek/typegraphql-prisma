@@ -1,12 +1,12 @@
 export { AggregateCreatorArgs } from "./AggregateCreatorArgs";
-export { CreateCreatorArgs } from "./CreateCreatorArgs";
 export { CreateManyCreatorArgs } from "./CreateManyCreatorArgs";
-export { DeleteCreatorArgs } from "./DeleteCreatorArgs";
+export { CreateOneCreatorArgs } from "./CreateOneCreatorArgs";
 export { DeleteManyCreatorArgs } from "./DeleteManyCreatorArgs";
+export { DeleteOneCreatorArgs } from "./DeleteOneCreatorArgs";
 export { FindFirstCreatorArgs } from "./FindFirstCreatorArgs";
 export { FindManyCreatorArgs } from "./FindManyCreatorArgs";
 export { FindUniqueCreatorArgs } from "./FindUniqueCreatorArgs";
 export { GroupByCreatorArgs } from "./GroupByCreatorArgs";
-export { UpdateCreatorArgs } from "./UpdateCreatorArgs";
 export { UpdateManyCreatorArgs } from "./UpdateManyCreatorArgs";
-export { UpsertCreatorArgs } from "./UpsertCreatorArgs";
+export { UpdateOneCreatorArgs } from "./UpdateOneCreatorArgs";
+export { UpsertOneCreatorArgs } from "./UpsertOneCreatorArgs";

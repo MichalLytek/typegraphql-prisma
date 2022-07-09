@@ -1,3 +1,4 @@
+"use strict";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -20,9 +21,57 @@ var __toCommonJS = (mod2) => __copyProps(__defProp({}, "__esModule", { value: tr
 // src/runtime/index-browser.ts
 var index_browser_exports = {};
 __export(index_browser_exports, {
-  Decimal: () => decimal_default
+  Decimal: () => decimal_default,
+  objectEnumValues: () => objectEnumValues
 });
 module.exports = __toCommonJS(index_browser_exports);
+
+// src/runtime/object-enums.ts
+var secret = Symbol();
+var representations = /* @__PURE__ */ new WeakMap();
+var ObjectEnumValue = class {
+  constructor(arg) {
+    if (arg === secret) {
+      representations.set(this, `Prisma.${this._getName()}`);
+    } else {
+      representations.set(this, `new Prisma.${this._getNamespace()}.${this._getName()}()`);
+    }
+  }
+  _getName() {
+    return this.constructor.name;
+  }
+  toString() {
+    return representations.get(this);
+  }
+};
+__name(ObjectEnumValue, "ObjectEnumValue");
+var NullTypesEnumValue = class extends ObjectEnumValue {
+  _getNamespace() {
+    return "NullTypes";
+  }
+};
+__name(NullTypesEnumValue, "NullTypesEnumValue");
+var DbNull = class extends NullTypesEnumValue {
+};
+__name(DbNull, "DbNull");
+var JsonNull = class extends NullTypesEnumValue {
+};
+__name(JsonNull, "JsonNull");
+var AnyNull = class extends NullTypesEnumValue {
+};
+__name(AnyNull, "AnyNull");
+var objectEnumValues = {
+  classes: {
+    DbNull,
+    JsonNull,
+    AnyNull
+  },
+  instances: {
+    DbNull: new DbNull(secret),
+    JsonNull: new JsonNull(secret),
+    AnyNull: new AnyNull(secret)
+  }
+};
 
 // ../../node_modules/.pnpm/decimal.js@10.3.1/node_modules/decimal.js/decimal.mjs
 var EXP_LIMIT = 9e15;
@@ -2390,5 +2439,6 @@ PI = new Decimal(PI);
 var decimal_default = Decimal;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  Decimal
+  Decimal,
+  objectEnumValues
 });

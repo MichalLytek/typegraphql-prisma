@@ -28,7 +28,7 @@ import {
   Post,
   PostRelationsResolver,
   FindUniquePostResolver,
-  CreatePostResolver,
+  CreateOnePostResolver,
   UpdateManyPostResolver,
   // Category,
   // Patient,
@@ -41,7 +41,7 @@ import {
   FindManyMainUserArgs,
   ProblemRelationsResolver,
   CreatorRelationsResolver,
-  CreatePostArgs,
+  CreateOnePostArgs,
   ResolversEnhanceMap,
   applyResolversEnhanceMap,
   ResolverActionsConfig,
@@ -111,7 +111,7 @@ applyOutputTypesEnhanceMap({
 });
 
 applyArgsTypesEnhanceMap({
-  CreateProblemArgs: {
+  CreateOneProblemArgs: {
     fields: {
       data: [ValidateNested()],
     },
@@ -158,7 +158,7 @@ applyRelationResolversEnhanceMap({
 });
 
 const directorActionsConfig: ResolverActionsConfig<"Director"> = {
-  createDirector: [Authorized()],
+  createOneDirector: [Authorized()],
 };
 const resolversEnhanceMap: ResolversEnhanceMap = {
   MainUser: {
@@ -227,7 +227,7 @@ class PostResolver {
   @Mutation(returns => Post)
   async customCreatePost(
     @Ctx() { prismaClient }: Context,
-    @Args() args: CreatePostArgs,
+    @Args() args: CreateOnePostArgs,
   ): Promise<Post> {
     return await prismaClient.post.create(args);
   }
@@ -242,7 +242,7 @@ async function main() {
       PostResolver,
       PostRelationsResolver,
       FindUniquePostResolver,
-      CreatePostResolver,
+      CreateOnePostResolver,
       UpdateManyPostResolver,
       // CategoryCrudResolver,
       FindManyCategoryResolver,

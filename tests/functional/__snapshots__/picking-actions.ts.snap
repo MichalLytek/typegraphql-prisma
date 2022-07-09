@@ -34,7 +34,7 @@ input IntFilter {
 }
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
+  createOneUser(data: UserCreateInput!): User!
 }
 
 input NestedDateTimeFilter {

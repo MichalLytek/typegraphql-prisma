@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { MovieUpdateManyWithoutDirectorInput } from "../inputs/MovieUpdateManyWithoutDirectorInput";
+import { MovieUpdateManyWithoutDirectorNestedInput } from "../inputs/MovieUpdateManyWithoutDirectorNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("DirectorUpdateInput", {
@@ -19,8 +19,8 @@ export class DirectorUpdateInput {
   })
   lastName?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => MovieUpdateManyWithoutDirectorInput, {
+  @TypeGraphQL.Field(_type => MovieUpdateManyWithoutDirectorNestedInput, {
     nullable: true
   })
-  movies?: MovieUpdateManyWithoutDirectorInput | undefined;
+  movies?: MovieUpdateManyWithoutDirectorNestedInput | undefined;
 }
