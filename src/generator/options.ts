@@ -8,6 +8,7 @@ export interface ExternalGeneratorOptions {
   useUncheckedScalarInputs?: boolean;
   emitIdAsIDType?: boolean;
   emitOnly?: EmitBlockKind[];
+  emitRedundantDecoratorArgs?: boolean;
   customPrismaImportPath?: string;
   contextPrismaKey?: string;
   useSimpleInputs?: boolean;

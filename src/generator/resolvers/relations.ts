@@ -16,12 +16,14 @@ import {
 } from "../imports";
 import { DmmfDocument } from "../dmmf/dmmf-document";
 import { DMMF } from "../dmmf/types";
+import { GeneratorOptions } from "../options";
 
 export default function generateRelationsResolverClassesFromModel(
   project: Project,
   baseDirPath: string,
   dmmfDocument: DmmfDocument,
   { model, relationFields, resolverName }: DMMF.RelationModel,
+  generatorOptions: GeneratorOptions,
 ) {
   const rootArgName = camelCase(model.typeName);
   const singleIdField = model.fields.find(field => field.isId);
@@ -133,7 +135,14 @@ export default function generateRelationsResolverClassesFromModel(
                   {
                     name: "args",
                     type: field.argsTypeName,
-                    decorators: [{ name: "TypeGraphQL.Args", arguments: [] }],
+                    decorators: [
+                      {
+                        name: "TypeGraphQL.Args",
+                        arguments: generatorOptions.emitRedundantDecoratorArgs
+                          ? [`_returns => ${field.argsTypeName}`]
+                          : undefined,
+                      },
+                    ],
                   },
                 ]),
           ],
