@@ -7,6 +7,7 @@ const {
   PrismaClientRustPanicError,
   PrismaClientInitializationError,
   PrismaClientValidationError,
+  NotFoundError,
   decompressFromBase64,
   getPrismaClient,
   sqltag,
@@ -14,7 +15,6 @@ const {
   join,
   raw,
   Decimal,
-  DecimalJsLike,
   objectEnumValues
 } = require('./runtime/index')
 
@@ -24,12 +24,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.0.0
- * Query Engine version: da41d2bb3406da22087b849f0e911199ba4fbf11
+ * Prisma Client JS version: 4.1.0
+ * Query Engine version: 8d8414deb360336e4698a65aa45a1fbaf1ce13d8
  */
 Prisma.prismaVersion = {
-  client: "4.0.0",
-  engine: "da41d2bb3406da22087b849f0e911199ba4fbf11"
+  client: "4.1.0",
+  engine: "8d8414deb360336e4698a65aa45a1fbaf1ce13d8"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -37,6 +37,7 @@ Prisma.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError
 Prisma.PrismaClientRustPanicError = PrismaClientRustPanicError
 Prisma.PrismaClientInitializationError = PrismaClientInitializationError
 Prisma.PrismaClientValidationError = PrismaClientValidationError
+Prisma.NotFoundError = NotFoundError
 Prisma.Decimal = Decimal
 
 /**
@@ -169,6 +170,11 @@ exports.Prisma.QueryMode = makeEnum({
   insensitive: 'insensitive'
 });
 
+exports.Prisma.NullsOrder = makeEnum({
+  first: 'first',
+  last: 'last'
+});
+
 exports.Prisma.UserOrderByRelevanceFieldEnum = makeEnum({
   email: 'email',
   name: 'name',
@@ -271,6 +277,7 @@ const config = {
       }
     ],
     "previewFeatures": [
+      "orderByNulls",
       "fullTextSearch"
     ],
     "isCustomOutput": true
@@ -280,8 +287,8 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "4.0.0",
-  "engineVersion": "da41d2bb3406da22087b849f0e911199ba4fbf11",
+  "clientVersion": "4.1.0",
+  "engineVersion": "8d8414deb360336e4698a65aa45a1fbaf1ce13d8",
   "datasourceNames": [
     "postgres"
   ],

@@ -12,12 +12,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.0.0
- * Query Engine version: da41d2bb3406da22087b849f0e911199ba4fbf11
+ * Prisma Client JS version: 4.1.0
+ * Query Engine version: 8d8414deb360336e4698a65aa45a1fbaf1ce13d8
  */
 Prisma.prismaVersion = {
-  client: "4.0.0",
-  engine: "da41d2bb3406da22087b849f0e911199ba4fbf11"
+  client: "4.1.0",
+  engine: "8d8414deb360336e4698a65aa45a1fbaf1ce13d8"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -38,6 +38,10 @@ In case this error is unexpected for you, please report it in https://github.com
 )}
 Prisma.PrismaClientValidationError = () => {
   throw new Error(`PrismaClientValidationError is unable to be run in the browser.
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
+)}
+Prisma.NotFoundError = () => {
+  throw new Error(`NotFoundError is unable to be run in the browser.
 In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
 )}
 Prisma.Decimal = Decimal
@@ -162,6 +166,11 @@ exports.Prisma.JsonNullValueInput = makeEnum({
 exports.Prisma.QueryMode = makeEnum({
   default: 'default',
   insensitive: 'insensitive'
+});
+
+exports.Prisma.NullsOrder = makeEnum({
+  first: 'first',
+  last: 'last'
 });
 
 exports.Prisma.UserOrderByRelevanceFieldEnum = makeEnum({

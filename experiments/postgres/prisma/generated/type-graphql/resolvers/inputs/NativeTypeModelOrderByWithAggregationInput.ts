@@ -7,6 +7,7 @@ import { NativeTypeModelCountOrderByAggregateInput } from "../inputs/NativeTypeM
 import { NativeTypeModelMaxOrderByAggregateInput } from "../inputs/NativeTypeModelMaxOrderByAggregateInput";
 import { NativeTypeModelMinOrderByAggregateInput } from "../inputs/NativeTypeModelMinOrderByAggregateInput";
 import { NativeTypeModelSumOrderByAggregateInput } from "../inputs/NativeTypeModelSumOrderByAggregateInput";
+import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("NativeTypeModelOrderByWithAggregationInput", {
@@ -18,20 +19,20 @@ export class NativeTypeModelOrderByWithAggregationInput {
   })
   id?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  bigInt?: "asc" | "desc" | undefined;
+  bigInt?: SortOrderInput | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  byteA?: "asc" | "desc" | undefined;
+  byteA?: SortOrderInput | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  decimal?: "asc" | "desc" | undefined;
+  decimal?: SortOrderInput | undefined;
 
   @TypeGraphQL.Field(_type => NativeTypeModelCountOrderByAggregateInput, {
     nullable: true

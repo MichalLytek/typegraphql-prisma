@@ -289,6 +289,7 @@ export { ProblemUpsertWithWhereUniqueWithoutCreatorInput } from "./ProblemUpsert
 export { ProblemUpsertWithWhereUniqueWithoutLikedByInput } from "./ProblemUpsertWithWhereUniqueWithoutLikedByInput";
 export { ProblemWhereInput } from "./ProblemWhereInput";
 export { ProblemWhereUniqueInput } from "./ProblemWhereUniqueInput";
+export { SortOrderInput } from "./SortOrderInput";
 export { StringFieldUpdateOperationsInput } from "./StringFieldUpdateOperationsInput";
 export { StringFilter } from "./StringFilter";
 export { StringNullableFilter } from "./StringNullableFilter";

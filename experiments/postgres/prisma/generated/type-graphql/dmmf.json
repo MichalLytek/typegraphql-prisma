@@ -1190,6 +1190,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -1387,6 +1393,12 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
+                  "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -2161,6 +2173,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -2213,6 +2231,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -2225,6 +2249,12 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
+                  "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -2373,6 +2403,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -2399,6 +2435,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -2411,6 +2453,12 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
+                  "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -4603,6 +4651,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -4684,6 +4738,12 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
+                  "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -5464,6 +5524,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -5477,6 +5543,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -5489,6 +5561,12 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
+                  "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -5546,6 +5624,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -5559,6 +5643,12 @@
                   "namespace": "prisma",
                   "location": "enumTypes",
                   "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
                 }
               ]
             },
@@ -5571,6 +5661,12 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
+                  "isList": false
+                },
+                {
+                  "type": "SortOrderInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -11831,6 +11927,41 @@
                 {
                   "type": "Boolean",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SortOrderInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "sort",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "nulls",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "NullsOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -43770,6 +43901,13 @@
           "values": [
             "default",
             "insensitive"
+          ]
+        },
+        {
+          "name": "NullsOrder",
+          "values": [
+            "first",
+            "last"
           ]
         },
         {

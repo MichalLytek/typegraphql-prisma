@@ -105,30 +105,6 @@ declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sq
 
 declare type ConnectorType_2 = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
 
-declare interface Context {
-    /**
-     * Get a value from the context.
-     *
-     * @param key key which identifies a context value
-     */
-    getValue(key: symbol): unknown;
-    /**
-     * Create a new context which inherits from this context and has
-     * the given key set to the given value.
-     *
-     * @param key context key for which to set the value
-     * @param value value to set for the given key
-     */
-    setValue(key: symbol, value: unknown): Context;
-    /**
-     * Return a new context which inherits from this context but does
-     * not contain a value for the given key.
-     *
-     * @param key context key for which to clear a value
-     */
-    deleteValue(key: symbol): Context;
-}
-
 declare class DataLoader<T = unknown> {
     private options;
     batches: {
@@ -772,11 +748,12 @@ export declare abstract class Engine {
     abstract version(forceRun?: boolean): Promise<string> | string;
     abstract request<T>(query: string, headers?: QueryEngineRequestHeaders, numTry?: number): Promise<QueryEngineResult<T>>;
     abstract requestBatch<T>(queries: string[], headers?: QueryEngineRequestHeaders, transaction?: boolean, numTry?: number): Promise<QueryEngineResult<T>[]>;
-    abstract transaction(action: 'start', options?: Transaction.Options): Promise<Transaction.Info>;
-    abstract transaction(action: 'commit', info: Transaction.Info): Promise<void>;
-    abstract transaction(action: 'rollback', info: Transaction.Info): Promise<void>;
+    abstract transaction(action: 'start', headers: Transaction.TransactionHeaders, options: Transaction.Options): Promise<Transaction.Info>;
+    abstract transaction(action: 'commit', headers: Transaction.TransactionHeaders, info: Transaction.Info): Promise<void>;
+    abstract transaction(action: 'rollback', headers: Transaction.TransactionHeaders, info: Transaction.Info): Promise<void>;
     abstract metrics(options: MetricsOptionsJson): Promise<Metrics>;
     abstract metrics(options: MetricsOptionsPrometheus): Promise<string>;
+    abstract _hasPreviewFlag(feature: string): Boolean;
 }
 
 declare interface EngineConfig {
@@ -1023,7 +1000,6 @@ declare type InternalRequestParams = {
     headers?: Record<string, string>;
     transactionId?: string | number;
     unpacker?: Unpacker;
-    otelCtx?: Context;
     lock?: PromiseLike<void>;
 } & QueryMiddlewareParams;
 
@@ -1197,6 +1173,10 @@ declare interface MissingItem {
 }
 
 declare type Namespace = 'all' | 'engine';
+
+export declare class NotFoundError extends Error {
+    constructor(message: string);
+}
 
 declare interface NoTrueSelectError {
     type: 'noTrueSelect';
@@ -1423,9 +1403,14 @@ declare namespace sqlTemplateTag {
 declare namespace Transaction {
     export {
         Options,
-        Info
+        Info,
+        TransactionHeaders
     }
 }
+
+declare type TransactionHeaders = {
+    traceparent?: string;
+};
 
 export declare function transformDocument(document: Document_2): Document_2;
 

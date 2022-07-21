@@ -688,6 +688,7 @@ const inputsInfo = {
   EnumRoleFilter: ["equals", "in", "notIn", "not"],
   IntNullableListFilter: ["equals", "has", "hasEvery", "hasSome", "isEmpty"],
   StringNullableListFilter: ["equals", "has", "hasEvery", "hasSome", "isEmpty"],
+  SortOrderInput: ["sort", "nulls"],
   PostOrderByRelationAggregateInput: ["_count"],
   MainUserOrderByRelevanceInput: ["fields", "sort", "search"],
   MainUserCountOrderByAggregateInput: ["id", "email", "firstName", "age", "accountBalance", "amount", "role", "grades", "aliases"],

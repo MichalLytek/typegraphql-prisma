@@ -5,7 +5,7 @@ import {
 } from "../../src/generator/options";
 import getPrismaClientDmmfFromPrismaSchema from "./dmmf";
 
-type SupportedPreviewFeatures = "filterJson" | "fullTextSearch";
+type SupportedPreviewFeatures = "orderByNulls" | "fullTextSearch";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<

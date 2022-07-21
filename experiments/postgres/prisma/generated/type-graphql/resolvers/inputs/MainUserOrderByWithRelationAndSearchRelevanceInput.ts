@@ -4,6 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { MainUserOrderByRelevanceInput } from "../inputs/MainUserOrderByRelevanceInput";
 import { PostOrderByRelationAggregateInput } from "../inputs/PostOrderByRelationAggregateInput";
+import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("MainUserOrderByWithRelationAndSearchRelevanceInput", {
@@ -20,7 +21,7 @@ export class MainUserOrderByWithRelationAndSearchRelevanceInput {
   })
   email?: "asc" | "desc" | undefined;
 
-  name?: "asc" | "desc" | undefined;
+  name?: SortOrderInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -61,14 +62,14 @@ export class MainUserOrderByWithRelationAndSearchRelevanceInput {
   })
   _relevance?: MainUserOrderByRelevanceInput | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
   get firstName() {
     return this.name;
   }
 
-  set firstName(name: "asc" | "desc" | undefined) {
+  set firstName(name: SortOrderInput | undefined) {
     this.name = name;
   }
 

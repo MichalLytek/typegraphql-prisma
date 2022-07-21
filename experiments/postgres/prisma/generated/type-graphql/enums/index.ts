@@ -11,6 +11,7 @@ export { MainUserScalarFieldEnum } from "./MainUserScalarFieldEnum";
 export { MovieOrderByRelevanceFieldEnum } from "./MovieOrderByRelevanceFieldEnum";
 export { MovieScalarFieldEnum } from "./MovieScalarFieldEnum";
 export { NativeTypeModelScalarFieldEnum } from "./NativeTypeModelScalarFieldEnum";
+export { NullsOrder } from "./NullsOrder";
 export { PatientOrderByRelevanceFieldEnum } from "./PatientOrderByRelevanceFieldEnum";
 export { PatientScalarFieldEnum } from "./PatientScalarFieldEnum";
 export { PostKind } from "./PostKind";

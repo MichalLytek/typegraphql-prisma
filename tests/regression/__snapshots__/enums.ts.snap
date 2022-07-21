@@ -192,3 +192,26 @@ TypeGraphQL.registerEnumType(SampleRenamedModelOrderByRelevanceFieldEnum, {
 });
 "
 `;
+
+exports[`enums when \`orderByNulls\` preview feature is enabled should properly generate NullsOrder enum type: NullsOrder 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+
+export enum NullsOrder {
+  first = \\"first\\",
+  last = \\"last\\"
+}
+TypeGraphQL.registerEnumType(NullsOrder, {
+  name: \\"NullsOrder\\",
+  description: undefined,
+});
+"
+`;
+
+exports[`enums when \`orderByNulls\` preview feature is enabled should properly generate NullsOrder enum type: enums index 1`] = `
+"export { FirstModelScalarFieldEnum } from \\"./FirstModelScalarFieldEnum\\";
+export { NullsOrder } from \\"./NullsOrder\\";
+export { QueryMode } from \\"./QueryMode\\";
+export { SecondModelScalarFieldEnum } from \\"./SecondModelScalarFieldEnum\\";
+export { SortOrder } from \\"./SortOrder\\";
+"
+`;

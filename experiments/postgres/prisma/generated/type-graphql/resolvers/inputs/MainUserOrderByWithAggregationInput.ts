@@ -7,6 +7,7 @@ import { MainUserCountOrderByAggregateInput } from "../inputs/MainUserCountOrder
 import { MainUserMaxOrderByAggregateInput } from "../inputs/MainUserMaxOrderByAggregateInput";
 import { MainUserMinOrderByAggregateInput } from "../inputs/MainUserMinOrderByAggregateInput";
 import { MainUserSumOrderByAggregateInput } from "../inputs/MainUserSumOrderByAggregateInput";
+import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("MainUserOrderByWithAggregationInput", {
@@ -23,7 +24,7 @@ export class MainUserOrderByWithAggregationInput {
   })
   email?: "asc" | "desc" | undefined;
 
-  name?: "asc" | "desc" | undefined;
+  name?: SortOrderInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -77,14 +78,14 @@ export class MainUserOrderByWithAggregationInput {
   })
   _sum?: MainUserSumOrderByAggregateInput | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
   get firstName() {
     return this.name;
   }
 
-  set firstName(name: "asc" | "desc" | undefined) {
+  set firstName(name: SortOrderInput | undefined) {
     this.name = name;
   }
 

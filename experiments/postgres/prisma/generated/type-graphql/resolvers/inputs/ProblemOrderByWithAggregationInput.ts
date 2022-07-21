@@ -7,6 +7,7 @@ import { ProblemCountOrderByAggregateInput } from "../inputs/ProblemCountOrderBy
 import { ProblemMaxOrderByAggregateInput } from "../inputs/ProblemMaxOrderByAggregateInput";
 import { ProblemMinOrderByAggregateInput } from "../inputs/ProblemMinOrderByAggregateInput";
 import { ProblemSumOrderByAggregateInput } from "../inputs/ProblemSumOrderByAggregateInput";
+import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("ProblemOrderByWithAggregationInput", {
@@ -23,10 +24,10 @@ export class ProblemOrderByWithAggregationInput {
   })
   problemText?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  creatorId?: "asc" | "desc" | undefined;
+  creatorId?: SortOrderInput | undefined;
 
   @TypeGraphQL.Field(_type => ProblemCountOrderByAggregateInput, {
     nullable: true

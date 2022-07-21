@@ -409,6 +409,7 @@ export namespace Prisma {
   export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
   export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
   export import PrismaClientValidationError = runtime.PrismaClientValidationError
+  export import NotFoundError = runtime.NotFoundError
 
   /**
    * Re-export of sql-template-tag
@@ -435,8 +436,8 @@ export namespace Prisma {
   export import MetricHistogramBucket = runtime.MetricHistogramBucket
 
   /**
-   * Prisma Client JS version: 4.0.0
-   * Query Engine version: da41d2bb3406da22087b849f0e911199ba4fbf11
+   * Prisma Client JS version: 4.1.0
+   * Query Engine version: 8d8414deb360336e4698a65aa45a1fbaf1ce13d8
    */
   export type PrismaVersion = {
     client: string
@@ -9733,6 +9734,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   export const UserOrderByRelevanceFieldEnum: {
     email: 'email',
     name: 'name',
@@ -9834,7 +9843,7 @@ export namespace Prisma {
   export type UserOrderByWithRelationAndSearchRelevanceInput = {
     id?: SortOrder
     email?: SortOrder
-    name?: SortOrder
+    name?: SortOrderInput | SortOrder
     age?: SortOrder
     balance?: SortOrder
     amount?: SortOrder
@@ -9854,7 +9863,7 @@ export namespace Prisma {
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
-    name?: SortOrder
+    name?: SortOrderInput | SortOrder
     age?: SortOrder
     balance?: SortOrder
     amount?: SortOrder
@@ -9909,12 +9918,12 @@ export namespace Prisma {
     published?: SortOrder
     title?: SortOrder
     subtitle?: SortOrder
-    content?: SortOrder
+    content?: SortOrderInput | SortOrder
     author?: UserOrderByWithRelationAndSearchRelevanceInput
     authorId?: SortOrder
     editor?: UserOrderByWithRelationAndSearchRelevanceInput
-    editorId?: SortOrder
-    kind?: SortOrder
+    editorId?: SortOrderInput | SortOrder
+    kind?: SortOrderInput | SortOrder
     metadata?: SortOrder
     _relevance?: postOrderByRelevanceInput
   }
@@ -9930,10 +9939,10 @@ export namespace Prisma {
     published?: SortOrder
     title?: SortOrder
     subtitle?: SortOrder
-    content?: SortOrder
+    content?: SortOrderInput | SortOrder
     authorId?: SortOrder
-    editorId?: SortOrder
-    kind?: SortOrder
+    editorId?: SortOrderInput | SortOrder
+    kind?: SortOrderInput | SortOrder
     metadata?: SortOrder
     _count?: postCountOrderByAggregateInput
     _avg?: postAvgOrderByAggregateInput
@@ -10129,7 +10138,7 @@ export namespace Prisma {
     problemText?: SortOrder
     likedBy?: CreatorOrderByRelationAggregateInput
     creator?: CreatorOrderByWithRelationAndSearchRelevanceInput
-    creatorId?: SortOrder
+    creatorId?: SortOrderInput | SortOrder
     _relevance?: ProblemOrderByRelevanceInput
   }
 
@@ -10140,7 +10149,7 @@ export namespace Prisma {
   export type ProblemOrderByWithAggregationInput = {
     id?: SortOrder
     problemText?: SortOrder
-    creatorId?: SortOrder
+    creatorId?: SortOrderInput | SortOrder
     _count?: ProblemCountOrderByAggregateInput
     _avg?: ProblemAvgOrderByAggregateInput
     _max?: ProblemMaxOrderByAggregateInput
@@ -10209,9 +10218,9 @@ export namespace Prisma {
 
   export type NativeTypeModelOrderByWithRelationAndSearchRelevanceInput = {
     id?: SortOrder
-    bigInt?: SortOrder
-    byteA?: SortOrder
-    decimal?: SortOrder
+    bigInt?: SortOrderInput | SortOrder
+    byteA?: SortOrderInput | SortOrder
+    decimal?: SortOrderInput | SortOrder
   }
 
   export type NativeTypeModelWhereUniqueInput = {
@@ -10220,9 +10229,9 @@ export namespace Prisma {
 
   export type NativeTypeModelOrderByWithAggregationInput = {
     id?: SortOrder
-    bigInt?: SortOrder
-    byteA?: SortOrder
-    decimal?: SortOrder
+    bigInt?: SortOrderInput | SortOrder
+    byteA?: SortOrderInput | SortOrder
+    decimal?: SortOrderInput | SortOrder
     _count?: NativeTypeModelCountOrderByAggregateInput
     _avg?: NativeTypeModelAvgOrderByAggregateInput
     _max?: NativeTypeModelMaxOrderByAggregateInput
@@ -10795,6 +10804,11 @@ export namespace Prisma {
     hasEvery?: Enumerable<string>
     hasSome?: Enumerable<string>
     isEmpty?: boolean
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type postOrderByRelationAggregateInput = {

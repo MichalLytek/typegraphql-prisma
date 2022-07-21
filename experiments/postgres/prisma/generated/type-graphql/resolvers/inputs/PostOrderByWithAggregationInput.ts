@@ -7,6 +7,7 @@ import { PostCountOrderByAggregateInput } from "../inputs/PostCountOrderByAggreg
 import { PostMaxOrderByAggregateInput } from "../inputs/PostMaxOrderByAggregateInput";
 import { PostMinOrderByAggregateInput } from "../inputs/PostMinOrderByAggregateInput";
 import { PostSumOrderByAggregateInput } from "../inputs/PostSumOrderByAggregateInput";
+import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("PostOrderByWithAggregationInput", {
@@ -38,25 +39,25 @@ export class PostOrderByWithAggregationInput {
   })
   subtitle?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  content?: "asc" | "desc" | undefined;
+  content?: SortOrderInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   authorId?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  editorId?: "asc" | "desc" | undefined;
+  editorId?: SortOrderInput | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  kind?: "asc" | "desc" | undefined;
+  kind?: SortOrderInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
