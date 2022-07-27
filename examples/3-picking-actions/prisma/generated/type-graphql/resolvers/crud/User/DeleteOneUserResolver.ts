@@ -1,20 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
-import { CreateUserArgs } from "./args/CreateUserArgs";
+import { DeleteOneUserArgs } from "./args/DeleteOneUserArgs";
 import { User } from "../../../models/User";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => User)
-export class CreateUserResolver {
+export class DeleteOneUserResolver {
   @TypeGraphQL.Mutation(_returns => User, {
-    nullable: false
+    nullable: true
   })
-  async createUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateUserArgs): Promise<User> {
+  async deleteOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneUserArgs): Promise<User | null> {
     const { _count } = transformFields(
       graphqlFields(info as any)
     );
-    return getPrismaFromContext(ctx).user.create({
+    return getPrismaFromContext(ctx).user.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

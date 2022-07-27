@@ -10,10 +10,10 @@ import { PostUpdateWithWhereUniqueWithoutAuthorInput } from "../inputs/PostUpdat
 import { PostUpsertWithWhereUniqueWithoutAuthorInput } from "../inputs/PostUpsertWithWhereUniqueWithoutAuthorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PostUpdateManyWithoutAuthorNestedInput", {
   isAbstract: true
 })
-export class PostUpdateManyWithoutAuthorInput {
+export class PostUpdateManyWithoutAuthorNestedInput {
   @TypeGraphQL.Field(_type => [PostCreateWithoutAuthorInput], {
     nullable: true
   })
@@ -32,11 +32,6 @@ export class PostUpdateManyWithoutAuthorInput {
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
     nullable: true
   })
-  connect?: PostWhereUniqueInput[] | undefined;
-
-  @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
-    nullable: true
-  })
   set?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
@@ -48,6 +43,11 @@ export class PostUpdateManyWithoutAuthorInput {
     nullable: true
   })
   delete?: PostWhereUniqueInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
+    nullable: true
+  })
+  connect?: PostWhereUniqueInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [PostUpdateWithWhereUniqueWithoutAuthorInput], {
     nullable: true

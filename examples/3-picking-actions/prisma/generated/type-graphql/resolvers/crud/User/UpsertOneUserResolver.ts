@@ -1,20 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
-import { UpsertPostArgs } from "./args/UpsertPostArgs";
-import { Post } from "../../../models/Post";
+import { UpsertOneUserArgs } from "./args/UpsertOneUserArgs";
+import { User } from "../../../models/User";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
-@TypeGraphQL.Resolver(_of => Post)
-export class UpsertPostResolver {
-  @TypeGraphQL.Mutation(_returns => Post, {
+@TypeGraphQL.Resolver(_of => User)
+export class UpsertOneUserResolver {
+  @TypeGraphQL.Mutation(_returns => User, {
     nullable: false
   })
-  async upsertPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertPostArgs): Promise<Post> {
+  async upsertOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneUserArgs): Promise<User> {
     const { _count } = transformFields(
       graphqlFields(info as any)
     );
-    return getPrismaFromContext(ctx).post.upsert({
+    return getPrismaFromContext(ctx).user.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

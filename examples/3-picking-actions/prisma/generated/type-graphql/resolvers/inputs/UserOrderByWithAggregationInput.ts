@@ -7,7 +7,7 @@ import { UserMaxOrderByAggregateInput } from "../inputs/UserMaxOrderByAggregateI
 import { UserMinOrderByAggregateInput } from "../inputs/UserMinOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("UserOrderByWithAggregationInput", {
   isAbstract: true
 })
 export class UserOrderByWithAggregationInput {
