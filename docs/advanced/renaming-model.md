@@ -20,6 +20,6 @@ Be aware that this feature changes the name everywhere in the schema, so you can
 
 ```graphql
 type Mutation {
-  createClient(data: ClientCreateInput!): Client!
+  createOneClient(data: ClientCreateInput!): Client!
 }
 ```
