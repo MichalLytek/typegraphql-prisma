@@ -6,9 +6,9 @@ import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperati
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserUpdateOneWithoutPostsInput } from "../inputs/UserUpdateOneWithoutPostsInput";
+import { UserUpdateOneWithoutPostsNestedInput } from "../inputs/UserUpdateOneWithoutPostsNestedInput";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PostUpdateInput", {
   isAbstract: true
 })
 export class PostUpdateInput {
@@ -42,8 +42,8 @@ export class PostUpdateInput {
   })
   content?: NullableStringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => UserUpdateOneWithoutPostsNestedInput, {
     nullable: true
   })
-  author?: UserUpdateOneWithoutPostsInput | undefined;
+  author?: UserUpdateOneWithoutPostsNestedInput | undefined;
 }
