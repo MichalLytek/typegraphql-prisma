@@ -14,8 +14,7 @@ export interface ExternalGeneratorOptions {
 
 export interface InternalGeneratorOptions {
   outputDirPath: string;
-  relativePrismaOutputPath: string;
-  absolutePrismaOutputPath?: string;
+  prismaClientPath: string;
 }
 
 export interface GeneratorOptions
@@ -23,4 +22,6 @@ export interface GeneratorOptions
     InternalGeneratorOptions {
   blocksToEmit: EmitBlockKind[];
   contextPrismaKey: string;
+  relativePrismaOutputPath: string;
+  absolutePrismaOutputPath: string | undefined;
 }

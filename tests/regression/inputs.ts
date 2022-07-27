@@ -1086,7 +1086,7 @@ describe("inputs", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        absolutePrismaOutputPath: "@prisma/client",
+        prismaClientPath: "/home/test/project/node_modules/@prisma/client",
       });
       const sampleWhereInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/SampleWhereInput.ts",

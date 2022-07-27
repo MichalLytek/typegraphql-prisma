@@ -1,3 +1,4 @@
+import path from "path";
 import generateCode from "../../src/generator/generate-code";
 import {
   ExternalGeneratorOptions,
@@ -10,9 +11,10 @@ type SupportedPreviewFeatures = "orderByNulls" | "fullTextSearch";
 interface GenerateCodeFromSchemaOptions
   extends Omit<
     ExternalGeneratorOptions & InternalGeneratorOptions,
-    "relativePrismaOutputPath"
+    "prismaClientPath"
   > {
   previewFeatures?: SupportedPreviewFeatures[];
+  prismaClientPath?: string;
 }
 
 export async function generateCodeFromSchema(
@@ -27,8 +29,8 @@ export async function generateCodeFromSchema(
       provider,
     ),
     {
+      prismaClientPath: path.resolve(__dirname, "./prisma-client-mock"),
       ...options,
-      relativePrismaOutputPath: "../../helpers/prisma-client-mock",
     },
   );
 }

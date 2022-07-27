@@ -293,7 +293,7 @@ describe("models", () => {
     });
   });
 
-  describe("when customPrismaImportPath is set", () => {
+  describe("when customPrismaImportPath is set to custom repository directory", () => {
     it("should properly generate Prisma import path for model object type class", async () => {
       const schema = /* prisma */ `
         model SampleModel {
@@ -306,6 +306,29 @@ describe("models", () => {
       await generateCodeFromSchema(schema, {
         outputDirPath,
         customPrismaImportPath: "../test/import",
+      });
+      const firstModelTSFile = await readGeneratedFile(
+        "/models/SampleModel.ts",
+      );
+
+      expect(firstModelTSFile).toMatchSnapshot("SampleModel");
+    });
+  });
+
+  describe("when customPrismaImportPath is set to custom directory in node_modules", () => {
+    it("should properly generate Prisma import path for model object type class", async () => {
+      const schema = /* prisma */ `
+        model SampleModel {
+          intIdField Int   @id @default(autoincrement())
+          intField   Int   @unique
+          floatField Float
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        customPrismaImportPath: "../prisma-client",
+        prismaClientPath: "../node_modules/@generated/prisma-client",
       });
       const firstModelTSFile = await readGeneratedFile(
         "/models/SampleModel.ts",

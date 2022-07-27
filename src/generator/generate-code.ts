@@ -2,7 +2,7 @@ import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
 import { Project, ScriptTarget, ModuleKind, CompilerOptions } from "ts-morph";
 import path from "path";
 
-import { noop } from "./helpers";
+import { noop, toUnixPath } from "./helpers";
 import generateEnumFromDef from "./enum";
 import generateObjectTypeClassFromModel from "./model-type-class";
 import generateRelationsResolverClassesFromModel from "./resolvers/relations";
@@ -68,6 +68,14 @@ export default async function generateCode(
     ...baseOptions,
     blocksToEmit: getBlocksToEmit(baseOptions.emitOnly),
     contextPrismaKey: baseOptions.contextPrismaKey ?? "prisma",
+    relativePrismaOutputPath: toUnixPath(
+      path.relative(baseOptions.outputDirPath, baseOptions.prismaClientPath),
+    ),
+    absolutePrismaOutputPath:
+      !baseOptions.customPrismaImportPath &&
+      baseOptions.prismaClientPath.includes("node_modules")
+        ? "@prisma/client"
+        : undefined,
   };
 
   const baseDirPath = options.outputDirPath;

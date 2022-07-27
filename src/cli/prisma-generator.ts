@@ -47,12 +47,7 @@ export async function generate(options: GeneratorOptions) {
   };
   const internalConfig: InternalGeneratorOptions = {
     outputDirPath: outputDir,
-    relativePrismaOutputPath: toUnixPath(
-      path.relative(outputDir, prismaClientPath),
-    ),
-    absolutePrismaOutputPath: prismaClientPath.includes("node_modules")
-      ? "@prisma/client"
-      : undefined,
+    prismaClientPath,
   };
 
   if (externalConfig.emitDMMF) {
