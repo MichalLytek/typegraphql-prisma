@@ -3,7 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { PostCreateInput } from "../../../inputs/PostCreateInput";
 
 @TypeGraphQL.ArgsType()
-export class CreatePostArgs {
+export class CreateOnePostArgs {
   @TypeGraphQL.Field(_type => PostCreateInput, {
     nullable: false
   })

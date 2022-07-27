@@ -1,20 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
-import { DeletePostArgs } from "./args/DeletePostArgs";
+import { UpsertOnePostArgs } from "./args/UpsertOnePostArgs";
 import { Post } from "../../../models/Post";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
-export class DeletePostResolver {
+export class UpsertOnePostResolver {
   @TypeGraphQL.Mutation(_returns => Post, {
-    nullable: true
+    nullable: false
   })
-  async deletePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeletePostArgs): Promise<Post | null> {
+  async upsertOnePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOnePostArgs): Promise<Post> {
     const { _count } = transformFields(
       graphqlFields(info as any)
     );
-    return getPrismaFromContext(ctx).post.delete({
+    return getPrismaFromContext(ctx).post.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

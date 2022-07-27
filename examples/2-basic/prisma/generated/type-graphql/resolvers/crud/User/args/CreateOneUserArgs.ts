@@ -3,7 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { UserCreateInput } from "../../../inputs/UserCreateInput";
 
 @TypeGraphQL.ArgsType()
-export class CreateUserArgs {
+export class CreateOneUserArgs {
   @TypeGraphQL.Field(_type => UserCreateInput, {
     nullable: false
   })

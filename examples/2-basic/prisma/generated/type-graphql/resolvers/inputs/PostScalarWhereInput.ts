@@ -7,7 +7,7 @@ import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("PostScalarWhereInput", {
   isAbstract: true
 })
 export class PostScalarWhereInput {

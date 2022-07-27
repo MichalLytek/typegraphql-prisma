@@ -31,7 +31,7 @@ export { PostScalarWhereWithAggregatesInput } from "./PostScalarWhereWithAggrega
 export { PostUpdateInput } from "./PostUpdateInput";
 export { PostUpdateManyMutationInput } from "./PostUpdateManyMutationInput";
 export { PostUpdateManyWithWhereWithoutAuthorInput } from "./PostUpdateManyWithWhereWithoutAuthorInput";
-export { PostUpdateManyWithoutAuthorInput } from "./PostUpdateManyWithoutAuthorInput";
+export { PostUpdateManyWithoutAuthorNestedInput } from "./PostUpdateManyWithoutAuthorNestedInput";
 export { PostUpdateWithWhereUniqueWithoutAuthorInput } from "./PostUpdateWithWhereUniqueWithoutAuthorInput";
 export { PostUpdateWithoutAuthorInput } from "./PostUpdateWithoutAuthorInput";
 export { PostUpsertWithWhereUniqueWithoutAuthorInput } from "./PostUpsertWithWhereUniqueWithoutAuthorInput";
@@ -55,7 +55,7 @@ export { UserRelationFilter } from "./UserRelationFilter";
 export { UserScalarWhereWithAggregatesInput } from "./UserScalarWhereWithAggregatesInput";
 export { UserUpdateInput } from "./UserUpdateInput";
 export { UserUpdateManyMutationInput } from "./UserUpdateManyMutationInput";
-export { UserUpdateOneWithoutPostsInput } from "./UserUpdateOneWithoutPostsInput";
+export { UserUpdateOneWithoutPostsNestedInput } from "./UserUpdateOneWithoutPostsNestedInput";
 export { UserUpdateWithoutPostsInput } from "./UserUpdateWithoutPostsInput";
 export { UserUpsertWithoutPostsInput } from "./UserUpsertWithoutPostsInput";
 export { UserWhereInput } from "./UserWhereInput";

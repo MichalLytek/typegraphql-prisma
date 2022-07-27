@@ -14,7 +14,7 @@ query GetAllUsersAndPosts {
 }
 
 query GetSelectedPost {
-  post(where: { id: "ckqjj2a8g0009ixtp7vuzmki4" }) {
+  post(where: { id: "cl63gk3ig0009cutpq4be4zh0" }) {
     ...PostData
     author {
       ...UserData
@@ -41,8 +41,8 @@ query CustomResolversQuery {
 }
 
 mutation UpdatePost {
-  updatePost(
-    where: { id: "ckqjj2a8h0010ixtp2vq12j7c" }
+  updateOnePost(
+    where: { id: "cl63gk3ig0010cutpkn5u5pp5" }
     data: { published: { set: true } }
   ) {
     ...PostData
@@ -50,13 +50,13 @@ mutation UpdatePost {
 }
 
 mutation AddUser {
-  createUser(data: { email: "test@test.test", name: "Test" }) {
+  createOneUser(data: { email: "test@test.test", name: "Test" }) {
     ...UserData
   }
 }
 
 mutation AddUserWithPost {
-  createUser(
+  createOneUser(
     data: {
       email: "test2@test.test"
       name: "Test2"
