@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktypegraphql_prisma_website=self.webpackChunktypegraphql_prisma_website||[]).push([[945],{6945:(e,p,s)=>{s.r(p)}}]);
