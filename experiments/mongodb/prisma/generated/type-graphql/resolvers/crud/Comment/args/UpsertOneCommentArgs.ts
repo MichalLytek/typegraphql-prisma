@@ -5,7 +5,7 @@ import { CommentUpdateInput } from "../../../inputs/CommentUpdateInput";
 import { CommentWhereUniqueInput } from "../../../inputs/CommentWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
-export class UpsertCommentArgs {
+export class UpsertOneCommentArgs {
   @TypeGraphQL.Field(_type => CommentWhereUniqueInput, {
     nullable: false
   })

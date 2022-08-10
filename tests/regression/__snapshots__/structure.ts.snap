@@ -14,6 +14,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
     QueryMode.js
     SortOrder.d.ts
     SortOrder.js
+    TransactionIsolationLevel.d.ts
+    TransactionIsolationLevel.js
     UserScalarFieldEnum.d.ts
     UserScalarFieldEnum.js
     index.d.ts
@@ -358,6 +360,7 @@ exports[`structure should generate proper folders and file names when model is r
     RenamedPostScalarFieldEnum.ts
     RenamedUserScalarFieldEnum.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     index.ts
   helpers.ts
   index.ts
@@ -541,6 +544,7 @@ exports[`structure should generate proper folders structure and file names for c
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts

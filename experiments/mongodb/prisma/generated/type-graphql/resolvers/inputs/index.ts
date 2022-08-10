@@ -17,7 +17,7 @@ export { CommentScalarWhereWithAggregatesInput } from "./CommentScalarWhereWithA
 export { CommentUpdateInput } from "./CommentUpdateInput";
 export { CommentUpdateManyMutationInput } from "./CommentUpdateManyMutationInput";
 export { CommentUpdateManyWithWhereWithoutPostInput } from "./CommentUpdateManyWithWhereWithoutPostInput";
-export { CommentUpdateManyWithoutPostInput } from "./CommentUpdateManyWithoutPostInput";
+export { CommentUpdateManyWithoutPostNestedInput } from "./CommentUpdateManyWithoutPostNestedInput";
 export { CommentUpdateWithWhereUniqueWithoutPostInput } from "./CommentUpdateWithWhereUniqueWithoutPostInput";
 export { CommentUpdateWithoutPostInput } from "./CommentUpdateWithoutPostInput";
 export { CommentUpsertWithWhereUniqueWithoutPostInput } from "./CommentUpsertWithWhereUniqueWithoutPostInput";
@@ -55,8 +55,8 @@ export { PostScalarWhereWithAggregatesInput } from "./PostScalarWhereWithAggrega
 export { PostUpdateInput } from "./PostUpdateInput";
 export { PostUpdateManyMutationInput } from "./PostUpdateManyMutationInput";
 export { PostUpdateManyWithWhereWithoutAuthorInput } from "./PostUpdateManyWithWhereWithoutAuthorInput";
-export { PostUpdateManyWithoutAuthorInput } from "./PostUpdateManyWithoutAuthorInput";
-export { PostUpdateOneRequiredWithoutCommentsInput } from "./PostUpdateOneRequiredWithoutCommentsInput";
+export { PostUpdateManyWithoutAuthorNestedInput } from "./PostUpdateManyWithoutAuthorNestedInput";
+export { PostUpdateOneRequiredWithoutCommentsNestedInput } from "./PostUpdateOneRequiredWithoutCommentsNestedInput";
 export { PostUpdateWithWhereUniqueWithoutAuthorInput } from "./PostUpdateWithWhereUniqueWithoutAuthorInput";
 export { PostUpdateWithoutAuthorInput } from "./PostUpdateWithoutAuthorInput";
 export { PostUpdateWithoutCommentsInput } from "./PostUpdateWithoutCommentsInput";
@@ -91,7 +91,7 @@ export { UserScalarWhereWithAggregatesInput } from "./UserScalarWhereWithAggrega
 export { UserSumOrderByAggregateInput } from "./UserSumOrderByAggregateInput";
 export { UserUpdateInput } from "./UserUpdateInput";
 export { UserUpdateManyMutationInput } from "./UserUpdateManyMutationInput";
-export { UserUpdateOneRequiredWithoutPostsInput } from "./UserUpdateOneRequiredWithoutPostsInput";
+export { UserUpdateOneRequiredWithoutPostsNestedInput } from "./UserUpdateOneRequiredWithoutPostsNestedInput";
 export { UserUpdateWithoutPostsInput } from "./UserUpdateWithoutPostsInput";
 export { UserUpsertWithoutPostsInput } from "./UserUpsertWithoutPostsInput";
 export { UserWhereInput } from "./UserWhereInput";

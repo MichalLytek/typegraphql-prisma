@@ -1,20 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
 import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
-import { CreateCommentArgs } from "./args/CreateCommentArgs";
-import { Comment } from "../../../models/Comment";
+import { CreateOneUserArgs } from "./args/CreateOneUserArgs";
+import { User } from "../../../models/User";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
-@TypeGraphQL.Resolver(_of => Comment)
-export class CreateCommentResolver {
-  @TypeGraphQL.Mutation(_returns => Comment, {
+@TypeGraphQL.Resolver(_of => User)
+export class CreateOneUserResolver {
+  @TypeGraphQL.Mutation(_returns => User, {
     nullable: false
   })
-  async createComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateCommentArgs): Promise<Comment> {
+  async createOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneUserArgs): Promise<User> {
     const { _count } = transformFields(
       graphqlFields(info as any)
     );
-    return getPrismaFromContext(ctx).comment.create({
+    return getPrismaFromContext(ctx).user.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

@@ -151,20 +151,20 @@ export type NativeTypeModel = {
 // Based on
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
-export const Role: {
-  USER: 'USER',
-  ADMIN: 'ADMIN'
-};
-
-export type Role = (typeof Role)[keyof typeof Role]
-
-
 export const PostKind: {
   BLOG: 'BLOG',
   ADVERT: 'ADVERT'
 };
 
 export type PostKind = (typeof PostKind)[keyof typeof PostKind]
+
+
+export const Role: {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
+
+export type Role = (typeof Role)[keyof typeof Role]
 
 
 /**
@@ -436,8 +436,8 @@ export namespace Prisma {
   export import MetricHistogramBucket = runtime.MetricHistogramBucket
 
   /**
-   * Prisma Client JS version: 4.1.0
-   * Query Engine version: 8d8414deb360336e4698a65aa45a1fbaf1ce13d8
+   * Prisma Client JS version: 4.2.0
+   * Query Engine version: 2920a97877e12e055c1333079b8d19cee7f33826
    */
   export type PrismaVersion = {
     client: string
@@ -922,7 +922,7 @@ export namespace Prisma {
      */
     rejectOnNotFound?: RejectOnNotFound | RejectPerOperation
     /**
-     * Overwrites the datasource url from your prisma.schema file
+     * Overwrites the datasource url from your schema.prisma file
      */
     datasources?: Datasources
 
@@ -9617,19 +9617,122 @@ export namespace Prisma {
   // Based on
   // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
-  export const UserScalarFieldEnum: {
-    id: 'id',
-    email: 'email',
+  export const CategoryOrderByRelevanceFieldEnum: {
     name: 'name',
-    age: 'age',
-    balance: 'balance',
-    amount: 'amount',
-    role: 'role',
-    grades: 'grades',
-    aliases: 'aliases'
+    slug: 'slug'
   };
 
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+  export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevanceFieldEnum)[keyof typeof CategoryOrderByRelevanceFieldEnum]
+
+
+  export const CategoryScalarFieldEnum: {
+    name: 'name',
+    slug: 'slug',
+    number: 'number'
+  };
+
+  export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+  export const CreatorOrderByRelevanceFieldEnum: {
+    name: 'name'
+  };
+
+  export type CreatorOrderByRelevanceFieldEnum = (typeof CreatorOrderByRelevanceFieldEnum)[keyof typeof CreatorOrderByRelevanceFieldEnum]
+
+
+  export const CreatorScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type CreatorScalarFieldEnum = (typeof CreatorScalarFieldEnum)[keyof typeof CreatorScalarFieldEnum]
+
+
+  export const DirectorOrderByRelevanceFieldEnum: {
+    firstName: 'firstName',
+    lastName: 'lastName'
+  };
+
+  export type DirectorOrderByRelevanceFieldEnum = (typeof DirectorOrderByRelevanceFieldEnum)[keyof typeof DirectorOrderByRelevanceFieldEnum]
+
+
+  export const DirectorScalarFieldEnum: {
+    firstName: 'firstName',
+    lastName: 'lastName'
+  };
+
+  export type DirectorScalarFieldEnum = (typeof DirectorScalarFieldEnum)[keyof typeof DirectorScalarFieldEnum]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+  export const MovieOrderByRelevanceFieldEnum: {
+    directorFirstName: 'directorFirstName',
+    directorLastName: 'directorLastName',
+    title: 'title'
+  };
+
+  export type MovieOrderByRelevanceFieldEnum = (typeof MovieOrderByRelevanceFieldEnum)[keyof typeof MovieOrderByRelevanceFieldEnum]
+
+
+  export const MovieScalarFieldEnum: {
+    directorFirstName: 'directorFirstName',
+    directorLastName: 'directorLastName',
+    title: 'title'
+  };
+
+  export type MovieScalarFieldEnum = (typeof MovieScalarFieldEnum)[keyof typeof MovieScalarFieldEnum]
+
+
+  export const NativeTypeModelScalarFieldEnum: {
+    id: 'id',
+    bigInt: 'bigInt',
+    byteA: 'byteA',
+    decimal: 'decimal'
+  };
+
+  export type NativeTypeModelScalarFieldEnum = (typeof NativeTypeModelScalarFieldEnum)[keyof typeof NativeTypeModelScalarFieldEnum]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const PatientOrderByRelevanceFieldEnum: {
+    firstName: 'firstName',
+    lastName: 'lastName',
+    email: 'email'
+  };
+
+  export type PatientOrderByRelevanceFieldEnum = (typeof PatientOrderByRelevanceFieldEnum)[keyof typeof PatientOrderByRelevanceFieldEnum]
+
+
+  export const PatientScalarFieldEnum: {
+    firstName: 'firstName',
+    lastName: 'lastName',
+    email: 'email'
+  };
+
+  export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeof PatientScalarFieldEnum]
 
 
   export const PostScalarFieldEnum: {
@@ -9649,39 +9752,11 @@ export namespace Prisma {
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
-  export const CategoryScalarFieldEnum: {
-    name: 'name',
-    slug: 'slug',
-    number: 'number'
+  export const ProblemOrderByRelevanceFieldEnum: {
+    problemText: 'problemText'
   };
 
-  export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
-
-
-  export const PatientScalarFieldEnum: {
-    firstName: 'firstName',
-    lastName: 'lastName',
-    email: 'email'
-  };
-
-  export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeof PatientScalarFieldEnum]
-
-
-  export const MovieScalarFieldEnum: {
-    directorFirstName: 'directorFirstName',
-    directorLastName: 'directorLastName',
-    title: 'title'
-  };
-
-  export type MovieScalarFieldEnum = (typeof MovieScalarFieldEnum)[keyof typeof MovieScalarFieldEnum]
-
-
-  export const DirectorScalarFieldEnum: {
-    firstName: 'firstName',
-    lastName: 'lastName'
-  };
-
-  export type DirectorScalarFieldEnum = (typeof DirectorScalarFieldEnum)[keyof typeof DirectorScalarFieldEnum]
+  export type ProblemOrderByRelevanceFieldEnum = (typeof ProblemOrderByRelevanceFieldEnum)[keyof typeof ProblemOrderByRelevanceFieldEnum]
 
 
   export const ProblemScalarFieldEnum: {
@@ -9693,22 +9768,12 @@ export namespace Prisma {
   export type ProblemScalarFieldEnum = (typeof ProblemScalarFieldEnum)[keyof typeof ProblemScalarFieldEnum]
 
 
-  export const CreatorScalarFieldEnum: {
-    id: 'id',
-    name: 'name'
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
   };
 
-  export type CreatorScalarFieldEnum = (typeof CreatorScalarFieldEnum)[keyof typeof CreatorScalarFieldEnum]
-
-
-  export const NativeTypeModelScalarFieldEnum: {
-    id: 'id',
-    bigInt: 'bigInt',
-    byteA: 'byteA',
-    decimal: 'decimal'
-  };
-
-  export type NativeTypeModelScalarFieldEnum = (typeof NativeTypeModelScalarFieldEnum)[keyof typeof NativeTypeModelScalarFieldEnum]
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
   export const SortOrder: {
@@ -9719,27 +9784,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-  export const JsonNullValueInput: {
-    JsonNull: typeof JsonNull
+  export const TransactionIsolationLevel: {
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
+    Serializable: 'Serializable'
   };
 
-  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
-  export const QueryMode: {
-    default: 'default',
-    insensitive: 'insensitive'
-  };
-
-  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
   export const UserOrderByRelevanceFieldEnum: {
@@ -9751,13 +9803,19 @@ export namespace Prisma {
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
 
 
-  export const JsonNullValueFilter: {
-    DbNull: typeof DbNull,
-    JsonNull: typeof JsonNull,
-    AnyNull: typeof AnyNull
+  export const UserScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    name: 'name',
+    age: 'age',
+    balance: 'balance',
+    amount: 'amount',
+    role: 'role',
+    grades: 'grades',
+    aliases: 'aliases'
   };
 
-  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   export const postOrderByRelevanceFieldEnum: {
@@ -9768,54 +9826,6 @@ export namespace Prisma {
   };
 
   export type postOrderByRelevanceFieldEnum = (typeof postOrderByRelevanceFieldEnum)[keyof typeof postOrderByRelevanceFieldEnum]
-
-
-  export const CategoryOrderByRelevanceFieldEnum: {
-    name: 'name',
-    slug: 'slug'
-  };
-
-  export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevanceFieldEnum)[keyof typeof CategoryOrderByRelevanceFieldEnum]
-
-
-  export const PatientOrderByRelevanceFieldEnum: {
-    firstName: 'firstName',
-    lastName: 'lastName',
-    email: 'email'
-  };
-
-  export type PatientOrderByRelevanceFieldEnum = (typeof PatientOrderByRelevanceFieldEnum)[keyof typeof PatientOrderByRelevanceFieldEnum]
-
-
-  export const MovieOrderByRelevanceFieldEnum: {
-    directorFirstName: 'directorFirstName',
-    directorLastName: 'directorLastName',
-    title: 'title'
-  };
-
-  export type MovieOrderByRelevanceFieldEnum = (typeof MovieOrderByRelevanceFieldEnum)[keyof typeof MovieOrderByRelevanceFieldEnum]
-
-
-  export const DirectorOrderByRelevanceFieldEnum: {
-    firstName: 'firstName',
-    lastName: 'lastName'
-  };
-
-  export type DirectorOrderByRelevanceFieldEnum = (typeof DirectorOrderByRelevanceFieldEnum)[keyof typeof DirectorOrderByRelevanceFieldEnum]
-
-
-  export const ProblemOrderByRelevanceFieldEnum: {
-    problemText: 'problemText'
-  };
-
-  export type ProblemOrderByRelevanceFieldEnum = (typeof ProblemOrderByRelevanceFieldEnum)[keyof typeof ProblemOrderByRelevanceFieldEnum]
-
-
-  export const CreatorOrderByRelevanceFieldEnum: {
-    name: 'name'
-  };
-
-  export type CreatorOrderByRelevanceFieldEnum = (typeof CreatorOrderByRelevanceFieldEnum)[keyof typeof CreatorOrderByRelevanceFieldEnum]
 
 
   /**

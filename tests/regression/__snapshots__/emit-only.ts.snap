@@ -448,6 +448,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts
@@ -1068,6 +1069,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts
@@ -1265,6 +1267,7 @@ exports[`emitOnly generator option when only 'enums' is set should generate prop
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts
@@ -1457,6 +1460,7 @@ exports[`emitOnly generator option when only 'inputs' is set should generate pro
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts
@@ -1678,6 +1682,7 @@ exports[`emitOnly generator option when only 'models' is set should generate mod
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts
@@ -1812,6 +1817,7 @@ exports[`emitOnly generator option when only 'outputs' is set should generate pr
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts
@@ -2124,6 +2130,7 @@ exports[`emitOnly generator option when only 'relationResolvers' is set should g
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts

@@ -360,3 +360,12 @@ query getUsersByRelevance {
     role
   }
 }
+
+query OrderByNulls {
+  posts(orderBy: { kind: { nulls: first, sort: asc } }) {
+    uuid
+    title
+    content
+    kind
+  }
+}

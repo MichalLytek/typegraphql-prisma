@@ -3,7 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { NullableIntFieldUpdateOperationsInput } from "../inputs/NullableIntFieldUpdateOperationsInput";
-import { PostUpdateManyWithoutAuthorInput } from "../inputs/PostUpdateManyWithoutAuthorInput";
+import { PostUpdateManyWithoutAuthorNestedInput } from "../inputs/PostUpdateManyWithoutAuthorNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserAddressUpdateEnvelopeInput } from "../inputs/UserAddressUpdateEnvelopeInput";
 
@@ -26,8 +26,8 @@ export class UserUpdateInput {
   })
   address?: UserAddressUpdateEnvelopeInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostUpdateManyWithoutAuthorInput, {
+  @TypeGraphQL.Field(_type => PostUpdateManyWithoutAuthorNestedInput, {
     nullable: true
   })
-  posts?: PostUpdateManyWithoutAuthorInput | undefined;
+  posts?: PostUpdateManyWithoutAuthorNestedInput | undefined;
 }

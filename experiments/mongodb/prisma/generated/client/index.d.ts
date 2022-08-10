@@ -208,6 +208,7 @@ export namespace Prisma {
   export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
   export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
   export import PrismaClientValidationError = runtime.PrismaClientValidationError
+  export import NotFoundError = runtime.NotFoundError
 
   /**
    * Re-export of sql-template-tag
@@ -226,8 +227,16 @@ export namespace Prisma {
   export type DecimalJsLike = runtime.DecimalJsLike
 
   /**
-   * Prisma Client JS version: 3.15.0
-   * Query Engine version: b9297dc3a59307060c1c39d7e4f5765066f38372
+   * Metrics 
+   */
+  export import Metrics = runtime.Metrics
+  export import Metric = runtime.Metric
+  export import MetricHistogram = runtime.MetricHistogram
+  export import MetricHistogramBucket = runtime.MetricHistogramBucket
+
+  /**
+   * Prisma Client JS version: 4.2.0
+   * Query Engine version: 2920a97877e12e055c1333079b8d19cee7f33826
    */
   export type PrismaVersion = {
     client: string
@@ -286,25 +295,68 @@ export namespace Prisma {
   export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray
 
   /**
+   * Types of the values used to represent different kinds of `null` values when working with JSON fields.
+   * 
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  namespace NullTypes {
+    /**
+    * Type of `Prisma.DbNull`.
+    * 
+    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+    * 
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class DbNull {
+      private DbNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.JsonNull`.
+    * 
+    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+    * 
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class JsonNull {
+      private JsonNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.AnyNull`.
+    * 
+    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+    * 
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class AnyNull {
+      private AnyNull: never
+      private constructor()
+    }
+  }
+
+  /**
    * Helper for filtering JSON entries that have `null` on the database (empty on the db)
    * 
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const DbNull: 'DbNull'
+  export const DbNull: NullTypes.DbNull
 
   /**
    * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
    * 
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const JsonNull: 'JsonNull'
+  export const JsonNull: NullTypes.JsonNull
 
   /**
    * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
    * 
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const AnyNull: 'AnyNull'
+  export const AnyNull: NullTypes.AnyNull
 
   type SelectAndInclude = {
     select: any
@@ -650,7 +702,8 @@ export namespace Prisma {
   export interface PrismaClientOptions {
     /**
      * Configure findUnique/findFirst to throw an error if the query returns null. 
-     *  * @example
+     * @deprecated since 4.0.0. Use `findUniqueOrThrow`/`findFirstOrThrow` methods instead.
+     * @example
      * ```
      * // Reject on both findUnique/findFirst
      * rejectOnNotFound: true
@@ -662,7 +715,7 @@ export namespace Prisma {
      */
     rejectOnNotFound?: RejectOnNotFound | RejectPerOperation
     /**
-     * Overwrites the datasource url from your prisma.schema file
+     * Overwrites the datasource url from your schema.prisma file
      */
     datasources?: Datasources
 
@@ -1397,6 +1450,40 @@ export namespace Prisma {
     ): PrismaPromise<JsonObject>
 
     /**
+     * Find one Post that matches the filter or throw
+     * `NotFoundError` if no matches were found.
+     * @param {PostFindUniqueOrThrowArgs} args - Arguments to find a Post
+     * @example
+     * // Get one Post
+     * const post = await prisma.post.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends PostFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, PostFindUniqueOrThrowArgs>
+    ): CheckSelect<T, Prisma__PostClient<Post>, Prisma__PostClient<PostGetPayload<T>>>
+
+    /**
+     * Find the first Post that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostFindFirstOrThrowArgs} args - Arguments to find a Post
+     * @example
+     * // Get one Post
+     * const post = await prisma.post.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends PostFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, PostFindFirstOrThrowArgs>
+    ): CheckSelect<T, Prisma__PostClient<Post>, Prisma__PostClient<PostGetPayload<T>>>
+
+    /**
      * Count the number of Posts.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
@@ -1576,9 +1663,9 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * Post findUnique
+   * Post base type for findUnique actions
    */
-  export type PostFindUniqueArgs = {
+  export type PostFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Post
      * 
@@ -1589,11 +1676,6 @@ export namespace Prisma {
      * 
     **/
     include?: PostInclude | null
-    /**
-     * Throw an Error if a Post can't be found
-     * 
-    **/
-    rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which Post to fetch.
      * 
@@ -1601,11 +1683,22 @@ export namespace Prisma {
     where: PostWhereUniqueInput
   }
 
+  /**
+   * Post: findUnique
+   */
+  export interface PostFindUniqueArgs extends PostFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
-   * Post findFirst
+   * Post base type for findFirst actions
    */
-  export type PostFindFirstArgs = {
+  export type PostFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Post
      * 
@@ -1616,11 +1709,6 @@ export namespace Prisma {
      * 
     **/
     include?: PostInclude | null
-    /**
-     * Throw an Error if a Post can't be found
-     * 
-    **/
-    rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which Post to fetch.
      * 
@@ -1663,6 +1751,17 @@ export namespace Prisma {
     distinct?: Enumerable<PostScalarFieldEnum>
   }
 
+  /**
+   * Post: findFirst
+   */
+  export interface PostFindFirstArgs extends PostFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Post findMany
@@ -1892,6 +1991,18 @@ export namespace Prisma {
     options?: InputJsonValue
   }
 
+
+  /**
+   * Post: findUniqueOrThrow
+   */
+  export type PostFindUniqueOrThrowArgs = PostFindUniqueArgsBase
+      
+
+  /**
+   * Post: findFirstOrThrow
+   */
+  export type PostFindFirstOrThrowArgs = PostFindFirstArgsBase
+      
 
   /**
    * Post without action
@@ -2307,6 +2418,40 @@ export namespace Prisma {
     ): PrismaPromise<JsonObject>
 
     /**
+     * Find one Comment that matches the filter or throw
+     * `NotFoundError` if no matches were found.
+     * @param {CommentFindUniqueOrThrowArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends CommentFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, CommentFindUniqueOrThrowArgs>
+    ): CheckSelect<T, Prisma__CommentClient<Comment>, Prisma__CommentClient<CommentGetPayload<T>>>
+
+    /**
+     * Find the first Comment that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindFirstOrThrowArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends CommentFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, CommentFindFirstOrThrowArgs>
+    ): CheckSelect<T, Prisma__CommentClient<Comment>, Prisma__CommentClient<CommentGetPayload<T>>>
+
+    /**
      * Count the number of Comments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
@@ -2484,9 +2629,9 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * Comment findUnique
+   * Comment base type for findUnique actions
    */
-  export type CommentFindUniqueArgs = {
+  export type CommentFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the Comment
      * 
@@ -2497,11 +2642,6 @@ export namespace Prisma {
      * 
     **/
     include?: CommentInclude | null
-    /**
-     * Throw an Error if a Comment can't be found
-     * 
-    **/
-    rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which Comment to fetch.
      * 
@@ -2509,11 +2649,22 @@ export namespace Prisma {
     where: CommentWhereUniqueInput
   }
 
+  /**
+   * Comment: findUnique
+   */
+  export interface CommentFindUniqueArgs extends CommentFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
-   * Comment findFirst
+   * Comment base type for findFirst actions
    */
-  export type CommentFindFirstArgs = {
+  export type CommentFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the Comment
      * 
@@ -2524,11 +2675,6 @@ export namespace Prisma {
      * 
     **/
     include?: CommentInclude | null
-    /**
-     * Throw an Error if a Comment can't be found
-     * 
-    **/
-    rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which Comment to fetch.
      * 
@@ -2571,6 +2717,17 @@ export namespace Prisma {
     distinct?: Enumerable<CommentScalarFieldEnum>
   }
 
+  /**
+   * Comment: findFirst
+   */
+  export interface CommentFindFirstArgs extends CommentFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * Comment findMany
@@ -2800,6 +2957,18 @@ export namespace Prisma {
     options?: InputJsonValue
   }
 
+
+  /**
+   * Comment: findUniqueOrThrow
+   */
+  export type CommentFindUniqueOrThrowArgs = CommentFindUniqueArgsBase
+      
+
+  /**
+   * Comment: findFirstOrThrow
+   */
+  export type CommentFindFirstOrThrowArgs = CommentFindFirstArgsBase
+      
 
   /**
    * Comment without action
@@ -3256,6 +3425,40 @@ export namespace Prisma {
     ): PrismaPromise<JsonObject>
 
     /**
+     * Find one User that matches the filter or throw
+     * `NotFoundError` if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, UserFindUniqueOrThrowArgs>
+    ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs>
+    ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+
+    /**
      * Count the number of Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
@@ -3435,9 +3638,9 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * User findUnique
+   * User base type for findUnique actions
    */
-  export type UserFindUniqueArgs = {
+  export type UserFindUniqueArgsBase = {
     /**
      * Select specific fields to fetch from the User
      * 
@@ -3448,11 +3651,6 @@ export namespace Prisma {
      * 
     **/
     include?: UserInclude | null
-    /**
-     * Throw an Error if a User can't be found
-     * 
-    **/
-    rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which User to fetch.
      * 
@@ -3460,11 +3658,22 @@ export namespace Prisma {
     where: UserWhereUniqueInput
   }
 
+  /**
+   * User: findUnique
+   */
+  export interface UserFindUniqueArgs extends UserFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
-   * User findFirst
+   * User base type for findFirst actions
    */
-  export type UserFindFirstArgs = {
+  export type UserFindFirstArgsBase = {
     /**
      * Select specific fields to fetch from the User
      * 
@@ -3475,11 +3684,6 @@ export namespace Prisma {
      * 
     **/
     include?: UserInclude | null
-    /**
-     * Throw an Error if a User can't be found
-     * 
-    **/
-    rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which User to fetch.
      * 
@@ -3522,6 +3726,17 @@ export namespace Prisma {
     distinct?: Enumerable<UserScalarFieldEnum>
   }
 
+  /**
+   * User: findFirst
+   */
+  export interface UserFindFirstArgs extends UserFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
 
   /**
    * User findMany
@@ -3753,6 +3968,18 @@ export namespace Prisma {
 
 
   /**
+   * User: findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs = UserFindUniqueArgsBase
+      
+
+  /**
+   * User: findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs = UserFindFirstArgsBase
+      
+
+  /**
    * User without action
    */
   export type UserArgs = {
@@ -3777,6 +4004,15 @@ export namespace Prisma {
   // Based on
   // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
+  export const CommentScalarFieldEnum: {
+    id: 'id',
+    postId: 'postId',
+    comment: 'comment'
+  };
+
+  export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
   export const PostScalarFieldEnum: {
     id: 'id',
     slug: 'slug',
@@ -3788,22 +4024,12 @@ export namespace Prisma {
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
-  export const CommentScalarFieldEnum: {
-    id: 'id',
-    postId: 'postId',
-    comment: 'comment'
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
   };
 
-  export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
-
-
-  export const UserScalarFieldEnum: {
-    id: 'id',
-    email: 'email',
-    age: 'age'
-  };
-
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
   export const SortOrder: {
@@ -3814,12 +4040,13 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-  export const QueryMode: {
-    default: 'default',
-    insensitive: 'insensitive'
+  export const UserScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    age: 'age'
   };
 
-  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   /**
@@ -3982,15 +4209,15 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
-    comments?: CommentUpdateManyWithoutPostInput
-    author?: UserUpdateOneRequiredWithoutPostsInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
     slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
-    comments?: CommentUncheckedUpdateManyWithoutPostInput
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     authorId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -4028,7 +4255,7 @@ export namespace Prisma {
   }
 
   export type CommentUpdateInput = {
-    post?: PostUpdateOneRequiredWithoutCommentsInput
+    post?: PostUpdateOneRequiredWithoutCommentsNestedInput
     comment?: StringFieldUpdateOperationsInput | string
   }
 
@@ -4072,14 +4299,14 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
-    posts?: PostUpdateManyWithoutAuthorInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     address?: XOR<UserAddressUpdateEnvelopeInput, UserAddressCreateInput>
-    posts?: PostUncheckedUpdateManyWithoutAuthorInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -4303,7 +4530,7 @@ export namespace Prisma {
     set?: string
   }
 
-  export type CommentUpdateManyWithoutPostInput = {
+  export type CommentUpdateManyWithoutPostNestedInput = {
     create?: XOR<Enumerable<CommentCreateWithoutPostInput>, Enumerable<CommentUncheckedCreateWithoutPostInput>>
     connectOrCreate?: Enumerable<CommentCreateOrConnectWithoutPostInput>
     upsert?: Enumerable<CommentUpsertWithWhereUniqueWithoutPostInput>
@@ -4317,7 +4544,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<CommentScalarWhereInput>
   }
 
-  export type UserUpdateOneRequiredWithoutPostsInput = {
+  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     upsert?: UserUpsertWithoutPostsInput
@@ -4325,7 +4552,7 @@ export namespace Prisma {
     update?: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
   }
 
-  export type CommentUncheckedUpdateManyWithoutPostInput = {
+  export type CommentUncheckedUpdateManyWithoutPostNestedInput = {
     create?: XOR<Enumerable<CommentCreateWithoutPostInput>, Enumerable<CommentUncheckedCreateWithoutPostInput>>
     connectOrCreate?: Enumerable<CommentCreateOrConnectWithoutPostInput>
     upsert?: Enumerable<CommentUpsertWithWhereUniqueWithoutPostInput>
@@ -4345,7 +4572,7 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput
   }
 
-  export type PostUpdateOneRequiredWithoutCommentsInput = {
+  export type PostUpdateOneRequiredWithoutCommentsNestedInput = {
     create?: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
     connectOrCreate?: PostCreateOrConnectWithoutCommentsInput
     upsert?: PostUpsertWithoutCommentsInput
@@ -4391,7 +4618,7 @@ export namespace Prisma {
     update?: UserAddressUpdateInput
   }
 
-  export type PostUpdateManyWithoutAuthorInput = {
+  export type PostUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<Enumerable<PostCreateWithoutAuthorInput>, Enumerable<PostUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>
     upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutAuthorInput>
@@ -4405,7 +4632,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<PostScalarWhereInput>
   }
 
-  export type PostUncheckedUpdateManyWithoutAuthorInput = {
+  export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<Enumerable<PostCreateWithoutAuthorInput>, Enumerable<PostUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>
     upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutAuthorInput>
@@ -4621,7 +4848,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
-    author?: UserUpdateOneRequiredWithoutPostsInput
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
   }
 
   export type PostUncheckedUpdateWithoutCommentsInput = {
@@ -4717,14 +4944,14 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
-    comments?: CommentUpdateManyWithoutPostInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutAuthorInput = {
     slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
-    comments?: CommentUncheckedUpdateManyWithoutPostInput
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateManyWithoutPostsInput = {
@@ -4746,5 +4973,5 @@ export namespace Prisma {
   /**
    * DMMF
    */
-  export const dmmf: runtime.DMMF.Document;
+  export const dmmf: runtime.BaseDMMF
 }

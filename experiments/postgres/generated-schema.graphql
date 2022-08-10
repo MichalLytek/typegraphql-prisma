@@ -1138,7 +1138,7 @@ input MainUserOrderByWithAggregationInput {
   aliases: SortOrder
   amount: SortOrder
   email: SortOrder
-  firstName: SortOrder
+  firstName: SortOrderInput
   grades: SortOrder
   id: SortOrder
   role: SortOrder
@@ -1153,7 +1153,7 @@ input MainUserOrderByWithRelationAndSearchRelevanceInput {
   clientPosts: PostOrderByRelationAggregateInput
   editorPosts: PostOrderByRelationAggregateInput
   email: SortOrder
-  firstName: SortOrder
+  firstName: SortOrderInput
   grades: SortOrder
   id: SortOrder
   role: SortOrder
@@ -1678,16 +1678,16 @@ input NativeTypeModelOrderByWithAggregationInput {
   _max: NativeTypeModelMaxOrderByAggregateInput
   _min: NativeTypeModelMinOrderByAggregateInput
   _sum: NativeTypeModelSumOrderByAggregateInput
-  bigInt: SortOrder
-  byteA: SortOrder
-  decimal: SortOrder
+  bigInt: SortOrderInput
+  byteA: SortOrderInput
+  decimal: SortOrderInput
   id: SortOrder
 }
 
 input NativeTypeModelOrderByWithRelationAndSearchRelevanceInput {
-  bigInt: SortOrder
-  byteA: SortOrder
-  decimal: SortOrder
+  bigInt: SortOrderInput
+  byteA: SortOrderInput
+  decimal: SortOrderInput
   id: SortOrder
 }
 
@@ -2078,6 +2078,11 @@ input NullableStringFieldUpdateOperationsInput {
   set: String
 }
 
+enum NullsOrder {
+  first
+  last
+}
+
 type Patient {
   email: String!
   firstName: String!
@@ -2466,10 +2471,10 @@ input PostOrderByWithAggregationInput {
   _min: PostMinOrderByAggregateInput
   _sum: PostSumOrderByAggregateInput
   authorId: SortOrder
-  content: SortOrder
+  content: SortOrderInput
   createdAt: SortOrder
-  editorId: SortOrder
-  kind: SortOrder
+  editorId: SortOrderInput
+  kind: SortOrderInput
   metadata: SortOrder
   subtitle: SortOrder
   title: SortOrder
@@ -2481,11 +2486,11 @@ input PostOrderByWithRelationAndSearchRelevanceInput {
   _relevance: PostOrderByRelevanceInput
   author: MainUserOrderByWithRelationAndSearchRelevanceInput
   authorId: SortOrder
-  content: SortOrder
+  content: SortOrderInput
   createdAt: SortOrder
   editor: MainUserOrderByWithRelationAndSearchRelevanceInput
-  editorId: SortOrder
-  kind: SortOrder
+  editorId: SortOrderInput
+  kind: SortOrderInput
   metadata: SortOrder
   subtitle: SortOrder
   title: SortOrder
@@ -2815,7 +2820,7 @@ input ProblemOrderByWithAggregationInput {
   _max: ProblemMaxOrderByAggregateInput
   _min: ProblemMinOrderByAggregateInput
   _sum: ProblemSumOrderByAggregateInput
-  creatorId: SortOrder
+  creatorId: SortOrderInput
   id: SortOrder
   problemText: SortOrder
 }
@@ -2823,7 +2828,7 @@ input ProblemOrderByWithAggregationInput {
 input ProblemOrderByWithRelationAndSearchRelevanceInput {
   _relevance: ProblemOrderByRelevanceInput
   creator: CreatorOrderByWithRelationAndSearchRelevanceInput
-  creatorId: SortOrder
+  creatorId: SortOrderInput
   id: SortOrder
   likedBy: CreatorOrderByRelationAggregateInput
   problemText: SortOrder
@@ -3017,6 +3022,11 @@ enum Role {
 enum SortOrder {
   asc
   desc
+}
+
+input SortOrderInput {
+  nulls: NullsOrder
+  sort: SortOrder!
 }
 
 input StringFieldUpdateOperationsInput {

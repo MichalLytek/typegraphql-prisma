@@ -2037,7 +2037,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CommentUpdateManyWithoutPostInput",
+                  "type": "CommentUpdateManyWithoutPostNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -2050,7 +2050,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserUpdateOneRequiredWithoutPostsInput",
+                  "type": "UserUpdateOneRequiredWithoutPostsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -2126,7 +2126,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CommentUncheckedUpdateManyWithoutPostInput",
+                  "type": "CommentUncheckedUpdateManyWithoutPostNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -2470,7 +2470,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "PostUpdateOneRequiredWithoutCommentsInput",
+                  "type": "PostUpdateOneRequiredWithoutCommentsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -2896,7 +2896,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "PostUpdateManyWithoutAuthorInput",
+                  "type": "PostUpdateManyWithoutAuthorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -2978,7 +2978,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "PostUncheckedUpdateManyWithoutAuthorInput",
+                  "type": "PostUncheckedUpdateManyWithoutAuthorNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -5072,7 +5072,7 @@
           ]
         },
         {
-          "name": "CommentUpdateManyWithoutPostInput",
+          "name": "CommentUpdateManyWithoutPostNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -5296,7 +5296,7 @@
           ]
         },
         {
-          "name": "UserUpdateOneRequiredWithoutPostsInput",
+          "name": "UserUpdateOneRequiredWithoutPostsNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -5382,7 +5382,7 @@
           ]
         },
         {
-          "name": "CommentUncheckedUpdateManyWithoutPostInput",
+          "name": "CommentUncheckedUpdateManyWithoutPostNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -5660,7 +5660,7 @@
           ]
         },
         {
-          "name": "PostUpdateOneRequiredWithoutCommentsInput",
+          "name": "PostUpdateOneRequiredWithoutCommentsNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -6121,7 +6121,7 @@
           ]
         },
         {
-          "name": "PostUpdateManyWithoutAuthorInput",
+          "name": "PostUpdateManyWithoutAuthorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -6345,7 +6345,7 @@
           ]
         },
         {
-          "name": "PostUncheckedUpdateManyWithoutAuthorInput",
+          "name": "PostUncheckedUpdateManyWithoutAuthorNestedInput",
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -8668,7 +8668,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserUpdateOneRequiredWithoutPostsInput",
+                  "type": "UserUpdateOneRequiredWithoutPostsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9559,7 +9559,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CommentUpdateManyWithoutPostInput",
+                  "type": "CommentUpdateManyWithoutPostNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -9635,7 +9635,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CommentUncheckedUpdateManyWithoutPostInput",
+                  "type": "CommentUncheckedUpdateManyWithoutPostNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -13179,6 +13179,14 @@
     "enumTypes": {
       "prisma": [
         {
+          "name": "CommentScalarFieldEnum",
+          "values": [
+            "id",
+            "postId",
+            "comment"
+          ]
+        },
+        {
           "name": "PostScalarFieldEnum",
           "values": [
             "id",
@@ -13189,19 +13197,10 @@
           ]
         },
         {
-          "name": "CommentScalarFieldEnum",
+          "name": "QueryMode",
           "values": [
-            "id",
-            "postId",
-            "comment"
-          ]
-        },
-        {
-          "name": "UserScalarFieldEnum",
-          "values": [
-            "id",
-            "email",
-            "age"
+            "default",
+            "insensitive"
           ]
         },
         {
@@ -13212,10 +13211,11 @@
           ]
         },
         {
-          "name": "QueryMode",
+          "name": "UserScalarFieldEnum",
           "values": [
-            "default",
-            "insensitive"
+            "id",
+            "email",
+            "age"
           ]
         }
       ]

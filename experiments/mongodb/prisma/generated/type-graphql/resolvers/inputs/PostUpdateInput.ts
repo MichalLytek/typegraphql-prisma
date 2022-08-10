@@ -2,9 +2,9 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { CommentUpdateManyWithoutPostInput } from "../inputs/CommentUpdateManyWithoutPostInput";
+import { CommentUpdateManyWithoutPostNestedInput } from "../inputs/CommentUpdateManyWithoutPostNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserUpdateOneRequiredWithoutPostsInput } from "../inputs/UserUpdateOneRequiredWithoutPostsInput";
+import { UserUpdateOneRequiredWithoutPostsNestedInput } from "../inputs/UserUpdateOneRequiredWithoutPostsNestedInput";
 
 @TypeGraphQL.InputType("PostUpdateInput", {
   isAbstract: true
@@ -25,13 +25,13 @@ export class PostUpdateInput {
   })
   body?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => CommentUpdateManyWithoutPostInput, {
+  @TypeGraphQL.Field(_type => CommentUpdateManyWithoutPostNestedInput, {
     nullable: true
   })
-  comments?: CommentUpdateManyWithoutPostInput | undefined;
+  comments?: CommentUpdateManyWithoutPostNestedInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutPostsNestedInput, {
     nullable: true
   })
-  author?: UserUpdateOneRequiredWithoutPostsInput | undefined;
+  author?: UserUpdateOneRequiredWithoutPostsNestedInput | undefined;
 }

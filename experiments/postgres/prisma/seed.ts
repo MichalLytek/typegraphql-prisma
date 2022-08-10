@@ -91,7 +91,6 @@ async function main() {
             title: "Post title 5",
             subtitle: "Post subtitle 5",
             content: "Content 5",
-            kind: PostKind.BLOG,
             createdAt: new Date("2019-08-16"),
             published: true,
             updatedAt: new Date("2019-08-17"),

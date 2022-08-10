@@ -43799,17 +43799,107 @@
     "enumTypes": {
       "prisma": [
         {
-          "name": "UserScalarFieldEnum",
+          "name": "CategoryOrderByRelevanceFieldEnum",
+          "values": [
+            "name",
+            "slug"
+          ]
+        },
+        {
+          "name": "CategoryScalarFieldEnum",
+          "values": [
+            "name",
+            "slug",
+            "number"
+          ]
+        },
+        {
+          "name": "CreatorOrderByRelevanceFieldEnum",
+          "values": [
+            "name"
+          ]
+        },
+        {
+          "name": "CreatorScalarFieldEnum",
           "values": [
             "id",
-            "email",
-            "name",
-            "age",
-            "balance",
-            "amount",
-            "role",
-            "grades",
-            "aliases"
+            "name"
+          ]
+        },
+        {
+          "name": "DirectorOrderByRelevanceFieldEnum",
+          "values": [
+            "firstName",
+            "lastName"
+          ]
+        },
+        {
+          "name": "DirectorScalarFieldEnum",
+          "values": [
+            "firstName",
+            "lastName"
+          ]
+        },
+        {
+          "name": "JsonNullValueFilter",
+          "values": [
+            "DbNull",
+            "JsonNull",
+            "AnyNull"
+          ]
+        },
+        {
+          "name": "JsonNullValueInput",
+          "values": [
+            "JsonNull"
+          ]
+        },
+        {
+          "name": "MovieOrderByRelevanceFieldEnum",
+          "values": [
+            "directorFirstName",
+            "directorLastName",
+            "title"
+          ]
+        },
+        {
+          "name": "MovieScalarFieldEnum",
+          "values": [
+            "directorFirstName",
+            "directorLastName",
+            "title"
+          ]
+        },
+        {
+          "name": "NativeTypeModelScalarFieldEnum",
+          "values": [
+            "id",
+            "bigInt",
+            "byteA",
+            "decimal"
+          ]
+        },
+        {
+          "name": "NullsOrder",
+          "values": [
+            "first",
+            "last"
+          ]
+        },
+        {
+          "name": "PatientOrderByRelevanceFieldEnum",
+          "values": [
+            "firstName",
+            "lastName",
+            "email"
+          ]
+        },
+        {
+          "name": "PatientScalarFieldEnum",
+          "values": [
+            "firstName",
+            "lastName",
+            "email"
           ]
         },
         {
@@ -43829,34 +43919,9 @@
           ]
         },
         {
-          "name": "CategoryScalarFieldEnum",
+          "name": "ProblemOrderByRelevanceFieldEnum",
           "values": [
-            "name",
-            "slug",
-            "number"
-          ]
-        },
-        {
-          "name": "PatientScalarFieldEnum",
-          "values": [
-            "firstName",
-            "lastName",
-            "email"
-          ]
-        },
-        {
-          "name": "MovieScalarFieldEnum",
-          "values": [
-            "directorFirstName",
-            "directorLastName",
-            "title"
-          ]
-        },
-        {
-          "name": "DirectorScalarFieldEnum",
-          "values": [
-            "firstName",
-            "lastName"
+            "problemText"
           ]
         },
         {
@@ -43868,19 +43933,10 @@
           ]
         },
         {
-          "name": "CreatorScalarFieldEnum",
+          "name": "QueryMode",
           "values": [
-            "id",
-            "name"
-          ]
-        },
-        {
-          "name": "NativeTypeModelScalarFieldEnum",
-          "values": [
-            "id",
-            "bigInt",
-            "byteA",
-            "decimal"
+            "default",
+            "insensitive"
           ]
         },
         {
@@ -43891,23 +43947,12 @@
           ]
         },
         {
-          "name": "JsonNullValueInput",
+          "name": "TransactionIsolationLevel",
           "values": [
-            "JsonNull"
-          ]
-        },
-        {
-          "name": "QueryMode",
-          "values": [
-            "default",
-            "insensitive"
-          ]
-        },
-        {
-          "name": "NullsOrder",
-          "values": [
-            "first",
-            "last"
+            "ReadUncommitted",
+            "ReadCommitted",
+            "RepeatableRead",
+            "Serializable"
           ]
         },
         {
@@ -43919,11 +43964,17 @@
           ]
         },
         {
-          "name": "JsonNullValueFilter",
+          "name": "UserScalarFieldEnum",
           "values": [
-            "DbNull",
-            "JsonNull",
-            "AnyNull"
+            "id",
+            "email",
+            "name",
+            "age",
+            "balance",
+            "amount",
+            "role",
+            "grades",
+            "aliases"
           ]
         },
         {
@@ -43934,63 +43985,21 @@
             "subtitle",
             "content"
           ]
-        },
-        {
-          "name": "CategoryOrderByRelevanceFieldEnum",
-          "values": [
-            "name",
-            "slug"
-          ]
-        },
-        {
-          "name": "PatientOrderByRelevanceFieldEnum",
-          "values": [
-            "firstName",
-            "lastName",
-            "email"
-          ]
-        },
-        {
-          "name": "MovieOrderByRelevanceFieldEnum",
-          "values": [
-            "directorFirstName",
-            "directorLastName",
-            "title"
-          ]
-        },
-        {
-          "name": "DirectorOrderByRelevanceFieldEnum",
-          "values": [
-            "firstName",
-            "lastName"
-          ]
-        },
-        {
-          "name": "ProblemOrderByRelevanceFieldEnum",
-          "values": [
-            "problemText"
-          ]
-        },
-        {
-          "name": "CreatorOrderByRelevanceFieldEnum",
-          "values": [
-            "name"
-          ]
         }
       ],
       "model": [
-        {
-          "name": "Role",
-          "values": [
-            "USER",
-            "ADMIN"
-          ]
-        },
         {
           "name": "PostKind",
           "values": [
             "BLOG",
             "ADVERT"
+          ]
+        },
+        {
+          "name": "Role",
+          "values": [
+            "USER",
+            "ADMIN"
           ]
         }
       ]

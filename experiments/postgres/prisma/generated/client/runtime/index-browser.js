@@ -22,6 +22,7 @@ var __toCommonJS = (mod2) => __copyProps(__defProp({}, "__esModule", { value: tr
 var index_browser_exports = {};
 __export(index_browser_exports, {
   Decimal: () => decimal_default,
+  makeStrictEnum: () => makeStrictEnum,
   objectEnumValues: () => objectEnumValues
 });
 module.exports = __toCommonJS(index_browser_exports);
@@ -72,6 +73,30 @@ var objectEnumValues = {
     AnyNull: new AnyNull(secret)
   }
 };
+
+// src/runtime/strictEnum.ts
+var allowList = /* @__PURE__ */ new Set([
+  "toJSON",
+  "asymmetricMatch",
+  Symbol.iterator,
+  Symbol.toStringTag,
+  Symbol.isConcatSpreadable,
+  Symbol.toPrimitive
+]);
+function makeStrictEnum(definition) {
+  return new Proxy(definition, {
+    get(target, property) {
+      if (property in target) {
+        return target[property];
+      }
+      if (allowList.has(property)) {
+        return void 0;
+      }
+      throw new TypeError(`Invalid enum value: ${String(property)}`);
+    }
+  });
+}
+__name(makeStrictEnum, "makeStrictEnum");
 
 // ../../node_modules/.pnpm/decimal.js@10.3.1/node_modules/decimal.js/decimal.mjs
 var EXP_LIMIT = 9e15;
@@ -2440,5 +2465,6 @@ var decimal_default = Decimal;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Decimal,
+  makeStrictEnum,
   objectEnumValues
 });

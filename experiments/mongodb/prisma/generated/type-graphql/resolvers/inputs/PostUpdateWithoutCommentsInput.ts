@@ -3,7 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserUpdateOneRequiredWithoutPostsInput } from "../inputs/UserUpdateOneRequiredWithoutPostsInput";
+import { UserUpdateOneRequiredWithoutPostsNestedInput } from "../inputs/UserUpdateOneRequiredWithoutPostsNestedInput";
 
 @TypeGraphQL.InputType("PostUpdateWithoutCommentsInput", {
   isAbstract: true
@@ -24,8 +24,8 @@ export class PostUpdateWithoutCommentsInput {
   })
   body?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutPostsNestedInput, {
     nullable: true
   })
-  author?: UserUpdateOneRequiredWithoutPostsInput | undefined;
+  author?: UserUpdateOneRequiredWithoutPostsNestedInput | undefined;
 }

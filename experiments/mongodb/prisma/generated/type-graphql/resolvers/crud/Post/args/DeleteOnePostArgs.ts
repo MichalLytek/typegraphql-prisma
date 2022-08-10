@@ -3,7 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
-export class DeletePostArgs {
+export class DeleteOnePostArgs {
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
     nullable: false
   })

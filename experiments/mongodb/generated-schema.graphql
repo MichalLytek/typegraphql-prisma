@@ -170,7 +170,7 @@ input CommentScalarWhereWithAggregatesInput {
 
 input CommentUpdateInput {
   comment: StringFieldUpdateOperationsInput
-  post: PostUpdateOneRequiredWithoutCommentsInput
+  post: PostUpdateOneRequiredWithoutCommentsNestedInput
 }
 
 input CommentUpdateManyMutationInput {
@@ -182,7 +182,7 @@ input CommentUpdateManyWithWhereWithoutPostInput {
   where: CommentScalarWhereInput!
 }
 
-input CommentUpdateManyWithoutPostInput {
+input CommentUpdateManyWithoutPostNestedInput {
   connect: [CommentWhereUniqueInput!]
   connectOrCreate: [CommentCreateOrConnectWithoutPostInput!]
   create: [CommentCreateWithoutPostInput!]
@@ -255,27 +255,27 @@ input IntNullableWithAggregatesFilter {
 }
 
 type Mutation {
-  createComment(data: CommentCreateInput!): Comment!
   createManyComment(data: [CommentCreateManyInput!]!): AffectedRowsOutput!
   createManyPost(data: [PostCreateManyInput!]!): AffectedRowsOutput!
   createManyUser(data: [UserCreateManyInput!]!): AffectedRowsOutput!
-  createPost(data: PostCreateInput!): Post!
-  createUser(data: UserCreateInput!): User!
-  deleteComment(where: CommentWhereUniqueInput!): Comment
+  createOneComment(data: CommentCreateInput!): Comment!
+  createOnePost(data: PostCreateInput!): Post!
+  createOneUser(data: UserCreateInput!): User!
   deleteManyComment(where: CommentWhereInput): AffectedRowsOutput!
   deleteManyPost(where: PostWhereInput): AffectedRowsOutput!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
-  deletePost(where: PostWhereUniqueInput!): Post
-  deleteUser(where: UserWhereUniqueInput!): User
-  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  deleteOneComment(where: CommentWhereUniqueInput!): Comment
+  deleteOnePost(where: PostWhereUniqueInput!): Post
+  deleteOneUser(where: UserWhereUniqueInput!): User
   updateManyComment(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): AffectedRowsOutput!
   updateManyPost(data: PostUpdateManyMutationInput!, where: PostWhereInput): AffectedRowsOutput!
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
-  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  upsertComment(create: CommentCreateInput!, update: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment!
-  upsertPost(create: PostCreateInput!, update: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
-  upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  updateOneComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateOnePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  upsertOneComment(create: CommentCreateInput!, update: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment!
+  upsertOnePost(create: PostCreateInput!, update: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
+  upsertOneUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
 input NestedFloatNullableFilter {
@@ -579,9 +579,9 @@ input PostScalarWhereWithAggregatesInput {
 }
 
 input PostUpdateInput {
-  author: UserUpdateOneRequiredWithoutPostsInput
+  author: UserUpdateOneRequiredWithoutPostsNestedInput
   body: StringFieldUpdateOperationsInput
-  comments: CommentUpdateManyWithoutPostInput
+  comments: CommentUpdateManyWithoutPostNestedInput
   slug: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
 }
@@ -597,7 +597,7 @@ input PostUpdateManyWithWhereWithoutAuthorInput {
   where: PostScalarWhereInput!
 }
 
-input PostUpdateManyWithoutAuthorInput {
+input PostUpdateManyWithoutAuthorNestedInput {
   connect: [PostWhereUniqueInput!]
   connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
   create: [PostCreateWithoutAuthorInput!]
@@ -611,7 +611,7 @@ input PostUpdateManyWithoutAuthorInput {
   upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
-input PostUpdateOneRequiredWithoutCommentsInput {
+input PostUpdateOneRequiredWithoutCommentsNestedInput {
   connect: PostWhereUniqueInput
   connectOrCreate: PostCreateOrConnectWithoutCommentsInput
   create: PostCreateWithoutCommentsInput
@@ -626,13 +626,13 @@ input PostUpdateWithWhereUniqueWithoutAuthorInput {
 
 input PostUpdateWithoutAuthorInput {
   body: StringFieldUpdateOperationsInput
-  comments: CommentUpdateManyWithoutPostInput
+  comments: CommentUpdateManyWithoutPostNestedInput
   slug: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
 }
 
 input PostUpdateWithoutCommentsInput {
-  author: UserUpdateOneRequiredWithoutPostsInput
+  author: UserUpdateOneRequiredWithoutPostsNestedInput
   body: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -939,7 +939,7 @@ input UserUpdateInput {
   address: UserAddressUpdateEnvelopeInput
   age: NullableIntFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  posts: PostUpdateManyWithoutAuthorInput
+  posts: PostUpdateManyWithoutAuthorNestedInput
 }
 
 input UserUpdateManyMutationInput {
@@ -948,7 +948,7 @@ input UserUpdateManyMutationInput {
   email: StringFieldUpdateOperationsInput
 }
 
-input UserUpdateOneRequiredWithoutPostsInput {
+input UserUpdateOneRequiredWithoutPostsNestedInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutPostsInput
   create: UserCreateWithoutPostsInput

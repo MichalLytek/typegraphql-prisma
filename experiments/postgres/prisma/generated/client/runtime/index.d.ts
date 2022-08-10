@@ -88,6 +88,7 @@ declare interface Client {
     _engineConfig: EngineConfig;
     _clientVersion: string;
     _errorFormat: ErrorFormat;
+    _tracingConfig: TracingConfig;
     readonly $metrics: MetricsClient;
     $use<T>(arg0: Namespace | QueryMiddleware<T>, arg1?: QueryMiddleware | EngineMiddleware<T>): any;
     $on(eventType: EngineEventType, callback: (event: any) => void): any;
@@ -104,6 +105,30 @@ declare interface Client {
 declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
 
 declare type ConnectorType_2 = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
+
+declare interface Context {
+    /**
+     * Get a value from the context.
+     *
+     * @param key key which identifies a context value
+     */
+    getValue(key: symbol): unknown;
+    /**
+     * Create a new context which inherits from this context and has
+     * the given key set to the given value.
+     *
+     * @param key context key for which to set the value
+     * @param value value to set for the given key
+     */
+    setValue(key: symbol, value: unknown): Context;
+    /**
+     * Return a new context which inherits from this context but does
+     * not contain a value for the given key.
+     *
+     * @param key context key for which to clear a value
+     */
+    deleteValue(key: symbol): Context;
+}
 
 declare class DataLoader<T = unknown> {
     private options;
@@ -148,6 +173,24 @@ declare type Datasources = {
 };
 
 declare class DbNull extends NullTypesEnumValue {
+}
+
+export declare interface Debug {
+    (namespace: string): Debugger;
+    disable: () => string;
+    enable: (namespace: string) => void;
+    enabled: (namespace: string) => boolean;
+    log: (...args: any[]) => any;
+    formatters: Record<string, ((value: any) => string) | undefined>;
+}
+
+declare interface Debugger {
+    (format: any, ...args: any[]): void;
+    log: (...args: any[]) => any;
+    extend: (namespace: string, delimiter?: string) => Debugger;
+    color: string | number;
+    enabled: boolean;
+    namespace: string;
 }
 
 export declare namespace Decimal {
@@ -694,6 +737,7 @@ declare class DMMFSchemaHelper implements Pick<DMMF.Document, 'schema'> {
         prisma: DMMF.OutputType[];
     };
     getEnumMap(): Dictionary_2<DMMF.SchemaEnum>;
+    hasEnumInNamespace(enumName: string, namespace: 'prisma' | 'model'): boolean;
     getMergedOutputTypeMap(): Dictionary_2<DMMF.OutputType>;
     getInputTypeMap(): Dictionary_2<DMMF.InputType>;
     getRootFieldMap(): Dictionary_2<DMMF.SchemaField>;
@@ -748,12 +792,11 @@ export declare abstract class Engine {
     abstract version(forceRun?: boolean): Promise<string> | string;
     abstract request<T>(query: string, headers?: QueryEngineRequestHeaders, numTry?: number): Promise<QueryEngineResult<T>>;
     abstract requestBatch<T>(queries: string[], headers?: QueryEngineRequestHeaders, transaction?: boolean, numTry?: number): Promise<QueryEngineResult<T>[]>;
-    abstract transaction(action: 'start', headers: Transaction.TransactionHeaders, options: Transaction.Options): Promise<Transaction.Info>;
+    abstract transaction(action: 'start', headers: Transaction.TransactionHeaders, options?: Transaction.Options): Promise<Transaction.Info>;
     abstract transaction(action: 'commit', headers: Transaction.TransactionHeaders, info: Transaction.Info): Promise<void>;
     abstract transaction(action: 'rollback', headers: Transaction.TransactionHeaders, info: Transaction.Info): Promise<void>;
     abstract metrics(options: MetricsOptionsJson): Promise<Metrics>;
     abstract metrics(options: MetricsOptionsPrometheus): Promise<string>;
-    abstract _hasPreviewFlag(feature: string): Boolean;
 }
 
 declare interface EngineConfig {
@@ -787,12 +830,17 @@ declare interface EngineConfig {
      * The contents of the datasource url saved in a string
      * @remarks only used for the purpose of data proxy
      */
-    inlineDatasources?: any;
+    inlineDatasources?: Record<string, InlineDatasource>;
     /**
      * The string hash that was produced for a given schema
      * @remarks only used for the purpose of data proxy
      */
     inlineSchemaHash?: string;
+    /**
+     * The configuration object for enabling tracing
+     * @remarks enabling is determined by the client
+     */
+    tracingConfig: TracingConfig;
 }
 
 declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
@@ -966,6 +1014,10 @@ declare type Info = {
     id: string;
 };
 
+declare type InlineDatasource = {
+    url: NullableEnvValue;
+};
+
 declare type InlineDatasources = {
     [name in InternalDatasource['name']]: {
         url: InternalDatasource['url'];
@@ -1001,6 +1053,7 @@ declare type InternalRequestParams = {
     transactionId?: string | number;
     unpacker?: Unpacker;
     lock?: PromiseLike<void>;
+    otelParentCtx?: Context;
 } & QueryMiddlewareParams;
 
 declare type InvalidArgError = InvalidArgNameError | MissingArgError | InvalidArgTypeError | AtLeastOneError | AtMostOneError | InvalidNullArgError;
@@ -1062,6 +1115,14 @@ declare interface InvalidNullArgError {
     atMostOne: boolean;
 }
 
+declare enum IsolationLevel {
+    ReadUncommitted = "ReadUncommitted",
+    ReadCommitted = "ReadCommitted",
+    RepeatableRead = "RepeatableRead",
+    Snapshot = "Snapshot",
+    Serializable = "Serializable"
+}
+
 declare type ItemType = 'd' | 'f' | 'l';
 
 declare interface Job {
@@ -1093,6 +1154,24 @@ declare type LogDefinition = {
 declare type LogLevel = 'info' | 'query' | 'warn' | 'error';
 
 export declare function makeDocument({ dmmf, rootTypeName, rootField, select }: DocumentInput): Document_2;
+
+/**
+ * Generates more strict variant of an enum which, unlike regular enum,
+ * throws on non-existing property access. This can be useful in following situations:
+ * - we have an API, that accepts both `undefined` and `SomeEnumType` as an input
+ * - enum values are generated dynamically from DMMF.
+ *
+ * In that case, if using normal enums and no compile-time typechecking, using non-existing property
+ * will result in `undefined` value being used, which will be accepted. Using strict enum
+ * in this case will help to have a runtime exception, telling you that you are probably doing something wrong.
+ *
+ * Note: if you need to check for existence of a value in the enum you can still use either
+ * `in` operator or `hasOwnProperty` function.
+ *
+ * @param definition
+ * @returns
+ */
+export declare function makeStrictEnum<T extends Record<PropertyKey, string | number>>(definition: T): T;
 
 export declare type Metric<T> = {
     key: string;
@@ -1183,6 +1262,11 @@ declare interface NoTrueSelectError {
     field: DMMF.SchemaField;
 }
 
+declare type NullableEnvValue = {
+    fromEnvVar: string | null;
+    value?: string | null;
+};
+
 declare class NullTypesEnumValue extends ObjectEnumValue {
     _getNamespace(): string;
 }
@@ -1217,6 +1301,7 @@ export declare const objectEnumValues: {
 declare type Options = {
     maxWait?: number;
     timeout?: number;
+    isolationLevel?: IsolationLevel;
 };
 
 export declare class PrismaClientInitializationError extends Error {
@@ -1240,7 +1325,7 @@ export declare interface PrismaClientOptions {
      */
     rejectOnNotFound?: InstanceRejectOnNotFound;
     /**
-     * Overwrites the datasource url from your prisma.schema file
+     * Overwrites the datasource url from your schema.prisma file
      */
     datasources?: Datasources;
     /**
@@ -1335,6 +1420,8 @@ declare type Request_2 = {
     runInTransaction?: boolean;
     transactionId?: string | number;
     headers?: Record<string, string>;
+    otelParentCtx?: Context;
+    otelChildCtx?: Context;
 };
 
 declare class RequestHandler {
@@ -1342,7 +1429,7 @@ declare class RequestHandler {
     hooks: any;
     dataloader: DataLoader<Request_2>;
     constructor(client: Client, hooks?: any);
-    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, engineHook, args, headers, transactionId, unpacker, }: RequestParams): Promise<any>;
+    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, engineHook, args, headers, transactionId, unpacker, otelParentCtx, otelChildCtx, }: RequestParams): Promise<any>;
     handleRequestError({ error, clientMethod, callsite }: HandleErrorParams): never;
     sanitizeMessage(message: any): any;
     unpack(document: any, data: any, path: any, rootField: any, unpacker?: Unpacker): any;
@@ -1364,6 +1451,8 @@ declare type RequestParams = {
     headers?: Record<string, string>;
     transactionId?: string | number;
     unpacker?: Unpacker;
+    otelParentCtx?: Context;
+    otelChildCtx?: Context;
 };
 
 /**
@@ -1400,8 +1489,14 @@ declare namespace sqlTemplateTag {
     }
 }
 
+declare type TracingConfig = {
+    enabled: boolean;
+    middleware: boolean;
+};
+
 declare namespace Transaction {
     export {
+        IsolationLevel,
         Options,
         Info,
         TransactionHeaders

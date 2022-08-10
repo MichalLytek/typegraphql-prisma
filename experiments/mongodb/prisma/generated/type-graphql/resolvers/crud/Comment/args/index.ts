@@ -1,12 +1,12 @@
 export { AggregateCommentArgs } from "./AggregateCommentArgs";
-export { CreateCommentArgs } from "./CreateCommentArgs";
 export { CreateManyCommentArgs } from "./CreateManyCommentArgs";
-export { DeleteCommentArgs } from "./DeleteCommentArgs";
+export { CreateOneCommentArgs } from "./CreateOneCommentArgs";
 export { DeleteManyCommentArgs } from "./DeleteManyCommentArgs";
+export { DeleteOneCommentArgs } from "./DeleteOneCommentArgs";
 export { FindFirstCommentArgs } from "./FindFirstCommentArgs";
 export { FindManyCommentArgs } from "./FindManyCommentArgs";
 export { FindUniqueCommentArgs } from "./FindUniqueCommentArgs";
 export { GroupByCommentArgs } from "./GroupByCommentArgs";
-export { UpdateCommentArgs } from "./UpdateCommentArgs";
 export { UpdateManyCommentArgs } from "./UpdateManyCommentArgs";
-export { UpsertCommentArgs } from "./UpsertCommentArgs";
+export { UpdateOneCommentArgs } from "./UpdateOneCommentArgs";
+export { UpsertOneCommentArgs } from "./UpsertOneCommentArgs";
