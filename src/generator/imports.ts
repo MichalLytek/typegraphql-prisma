@@ -34,6 +34,7 @@ export function generateGraphQLFieldsImport(sourceFile: SourceFile) {
   });
   sourceFile.addImportDeclaration({
     moduleSpecifier: "graphql",
+    isTypeOnly: true,
     namedImports: ["GraphQLResolveInfo"],
   });
 }
