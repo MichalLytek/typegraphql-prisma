@@ -3,5 +3,6 @@
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/.hg/store/**": true
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -98,7 +98,7 @@ function makeStrictEnum(definition) {
 }
 __name(makeStrictEnum, "makeStrictEnum");
 
-// ../../node_modules/.pnpm/decimal.js@10.3.1/node_modules/decimal.js/decimal.mjs
+// ../../node_modules/.pnpm/decimal.js@10.4.0/node_modules/decimal.js/decimal.mjs
 var EXP_LIMIT = 9e15;
 var MAX_DIGITS = 1e9;
 var NUMERALS = "0123456789abcdef";
@@ -1251,7 +1251,9 @@ var divide = function() {
   return function(x, y, pr, rm, dp, base) {
     var cmp, e, i, k, logBase, more, prod, prodL, q, qd, rem, remL, rem0, sd, t, xi, xL, yd0, yL, yz, Ctor = x.constructor, sign2 = x.s == y.s ? 1 : -1, xd = x.d, yd = y.d;
     if (!xd || !xd[0] || !yd || !yd[0]) {
-      return new Ctor(!x.s || !y.s || (xd ? yd && xd[0] == yd[0] : !yd) ? NaN : xd && xd[0] == 0 || !yd ? sign2 * 0 : sign2 / 0);
+      return new Ctor(
+        !x.s || !y.s || (xd ? yd && xd[0] == yd[0] : !yd) ? NaN : xd && xd[0] == 0 || !yd ? sign2 * 0 : sign2 / 0
+      );
     }
     if (base) {
       logBase = 1;
@@ -2468,3 +2470,10 @@ var decimal_default = Decimal;
   makeStrictEnum,
   objectEnumValues
 });
+/*!
+ *  decimal.js v10.4.0
+ *  An arbitrary-precision Decimal type for JavaScript.
+ *  https://github.com/MikeMcl/decimal.js
+ *  Copyright (c) 2022 Michael Mclaughlin <M8ch88l@gmail.com>
+ *  MIT Licence
+ */

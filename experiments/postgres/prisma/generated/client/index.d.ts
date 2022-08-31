@@ -436,8 +436,8 @@ export namespace Prisma {
   export import MetricHistogramBucket = runtime.MetricHistogramBucket
 
   /**
-   * Prisma Client JS version: 4.2.0
-   * Query Engine version: 2920a97877e12e055c1333079b8d19cee7f33826
+   * Prisma Client JS version: 4.3.0
+   * Query Engine version: c875e43600dfe042452e0b868f7a48b817b9640b
    */
   export type PrismaVersion = {
     client: string
@@ -852,6 +852,11 @@ export namespace Prisma {
    * Exclude all keys with underscores
    */
   type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
+
+  export import FieldRef = runtime.FieldRef
+
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
 
   class PrismaClientFetcher {
     private readonly prisma;
@@ -1860,6 +1865,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -1911,6 +1917,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -2870,6 +2878,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -2921,6 +2930,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -3804,6 +3815,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -3852,6 +3864,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -4661,6 +4675,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, PatientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPatientGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -4709,6 +4724,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -5526,6 +5543,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, MovieGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMovieGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -5575,6 +5593,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -6428,6 +6448,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, DirectorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDirectorGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -6477,6 +6498,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -7380,6 +7403,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, ProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProblemGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -7431,6 +7455,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -8322,6 +8348,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, CreatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCreatorGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -8373,6 +8400,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -9272,6 +9301,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, NativeTypeModelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNativeTypeModelGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -9320,6 +9350,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -11005,7 +11037,7 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<JsonFilterBase>, 'path'>>
 
   export type JsonFilterBase = {
-    equals?: JsonNullValueFilter | InputJsonValue
+    equals?: InputJsonValue | JsonNullValueFilter
     path?: Array<string>
     string_contains?: string
     string_starts_with?: string
@@ -11017,7 +11049,7 @@ export namespace Prisma {
     lte?: InputJsonValue
     gt?: InputJsonValue
     gte?: InputJsonValue
-    not?: JsonNullValueFilter | InputJsonValue
+    not?: InputJsonValue | JsonNullValueFilter
   }
 
   export type postOrderByRelevanceInput = {
@@ -11131,7 +11163,7 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase>, 'path'>>
 
   export type JsonWithAggregatesFilterBase = {
-    equals?: JsonNullValueFilter | InputJsonValue
+    equals?: InputJsonValue | JsonNullValueFilter
     path?: Array<string>
     string_contains?: string
     string_starts_with?: string
@@ -11143,7 +11175,7 @@ export namespace Prisma {
     lte?: InputJsonValue
     gt?: InputJsonValue
     gte?: InputJsonValue
-    not?: JsonNullValueFilter | InputJsonValue
+    not?: InputJsonValue | JsonNullValueFilter
     _count?: NestedIntFilter
     _min?: NestedJsonFilter
     _max?: NestedJsonFilter
@@ -12105,7 +12137,7 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<NestedJsonFilterBase>, 'path'>>
 
   export type NestedJsonFilterBase = {
-    equals?: JsonNullValueFilter | InputJsonValue
+    equals?: InputJsonValue | JsonNullValueFilter
     path?: Array<string>
     string_contains?: string
     string_starts_with?: string
@@ -12117,7 +12149,7 @@ export namespace Prisma {
     lte?: InputJsonValue
     gt?: InputJsonValue
     gte?: InputJsonValue
-    not?: JsonNullValueFilter | InputJsonValue
+    not?: InputJsonValue | JsonNullValueFilter
   }
 
   export type NestedBigIntNullableFilter = {

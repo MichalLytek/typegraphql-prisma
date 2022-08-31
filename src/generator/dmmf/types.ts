@@ -49,7 +49,8 @@ export namespace DMMF {
     | "scalar"
     | "inputObjectTypes"
     | "outputObjectTypes"
-    | "enumTypes";
+    | "enumTypes"
+    | "fieldRefTypes";
   // Field
   export interface ModelField {
     // kind: FieldKind;
@@ -65,6 +66,7 @@ export namespace DMMF {
     dbNames?: string[] | null;
     hasDefaultValue: boolean;
     default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
+    relationFromFields?: string[];
     relationToFields?: any[];
     relationOnDelete?: string;
     relationName?: string;
@@ -175,6 +177,9 @@ export namespace DMMF {
     constraints: {
       maxNumFields: number | null;
       minNumFields: number | null;
+    };
+    meta?: {
+      source?: string;
     };
     fields: SchemaArg[];
     // fieldMap?: Record<string, SchemaArg>;

@@ -1,7 +1,3 @@
-/// <reference types="node" />
-
-import { inspect } from 'util';
-
 declare type Action = keyof typeof DMMF.ModelAction | 'executeRaw' | 'queryRaw' | 'runCommandRaw';
 
 declare class AnyNull extends NullTypesEnumValue {
@@ -76,6 +72,10 @@ declare interface BinaryTargetsEnvValue {
     value: string;
 }
 
+declare interface CallSite {
+    getLocation(): LocationInFile | null;
+}
+
 declare interface Client {
     /** Only via tx proxy */
     [TX_ID]?: string;
@@ -95,8 +95,8 @@ declare interface Client {
     $connect(): any;
     $disconnect(): any;
     _runDisconnect(): any;
-    $executeRaw(query: TemplateStringsArray | sqlTemplateTag.Sql, ...values: any[]): any;
-    $queryRaw(query: TemplateStringsArray | sqlTemplateTag.Sql, ...values: any[]): any;
+    $executeRaw(query: TemplateStringsArray | Sql, ...values: any[]): any;
+    $queryRaw(query: TemplateStringsArray | Sql, ...values: any[]): any;
     __internal_triggerPanic(fatal: boolean): any;
     $transaction(input: any, options?: any): any;
     _request(internalParams: InternalRequestParams): Promise<any>;
@@ -413,7 +413,7 @@ export declare class Decimal {
     static exp(n: Decimal.Value): Decimal;
     static floor(n: Decimal.Value): Decimal;
     static hypot(...n: Decimal.Value[]): Decimal;
-    static isDecimal(object: any): boolean
+    static isDecimal(object: any): object is Decimal;
     static ln(n: Decimal.Value): Decimal;
     static log(n: Decimal.Value, base?: Decimal.Value): Decimal;
     static log2(n: Decimal.Value): Decimal;
@@ -530,7 +530,6 @@ export declare namespace DMMF {
         name: string;
         dbName: string | null;
         fields: Field[];
-        fieldMap?: Record<string, Field>;
         uniqueFields: string[][];
         uniqueIndexes: uniqueIndex[];
         documentation?: string;
@@ -539,7 +538,7 @@ export declare namespace DMMF {
     }
     export type FieldKind = 'scalar' | 'object' | 'enum' | 'unsupported';
     export type FieldNamespace = 'model' | 'prisma';
-    export type FieldLocation = 'scalar' | 'inputObjectTypes' | 'outputObjectTypes' | 'enumTypes';
+    export type FieldLocation = 'scalar' | 'inputObjectTypes' | 'outputObjectTypes' | 'enumTypes' | 'fieldRefTypes';
     export interface Field {
         kind: FieldKind;
         name: string;
@@ -585,6 +584,9 @@ export declare namespace DMMF {
             model?: SchemaEnum[];
             prisma: SchemaEnum[];
         };
+        fieldRefTypes: {
+            prisma?: FieldRefType[];
+        };
     }
     export interface Query {
         name: string;
@@ -619,16 +621,28 @@ export declare namespace DMMF {
     export interface SchemaField {
         name: string;
         isNullable?: boolean;
-        outputType: {
-            type: string | OutputType | SchemaEnum;
-            isList: boolean;
-            location: FieldLocation;
-            namespace?: FieldNamespace;
-        };
+        outputType: OutputTypeRef;
         args: SchemaArg[];
         deprecation?: Deprecation;
         documentation?: string;
     }
+    export type TypeRefCommon = {
+        isList: boolean;
+        namespace?: FieldNamespace;
+    };
+    export type TypeRefScalar = TypeRefCommon & {
+        location: 'scalar';
+        type: string;
+    };
+    export type TypeRefOutputObject = TypeRefCommon & {
+        location: 'outputObjectTypes';
+        type: OutputType | string;
+    };
+    export type TypeRefEnum = TypeRefCommon & {
+        location: 'enumTypes';
+        type: SchemaEnum | string;
+    };
+    export type OutputTypeRef = TypeRefScalar | TypeRefOutputObject | TypeRefEnum;
     export interface Deprecation {
         sinceVersion: string;
         reason: string;
@@ -640,9 +654,18 @@ export declare namespace DMMF {
             maxNumFields: number | null;
             minNumFields: number | null;
         };
+        meta?: {
+            source?: string;
+        };
         fields: SchemaArg[];
         fieldMap?: Record<string, SchemaArg>;
     }
+    export interface FieldRefType {
+        name: string;
+        allowTypes: FieldRefAllowType[];
+        fields: SchemaArg[];
+    }
+    export type FieldRefAllowType = TypeRefScalar | TypeRefEnum;
     export interface ModelMapping {
         model: string;
         plural: string;
@@ -766,6 +789,7 @@ declare interface DocumentInput {
     rootTypeName: 'query' | 'mutation';
     rootField: string;
     select?: any;
+    modelName?: string;
 }
 
 /**
@@ -901,6 +925,16 @@ declare interface FieldError {
 }
 
 /**
+ * A reference to a specific field of a specific model
+ */
+export declare interface FieldRef<Model, FieldType> {
+    readonly modelName: Model;
+    readonly name: string;
+    readonly typeName: FieldType;
+    readonly isList: boolean;
+}
+
+/**
  * Find paths that match a set of regexes
  * @param root to start from
  * @param match to match against
@@ -986,7 +1020,7 @@ declare interface GetPrismaClientConfig {
 declare type HandleErrorParams = {
     error: any;
     clientMethod: string;
-    callsite?: string;
+    callsite?: CallSite;
 };
 
 declare type Handler = (base: string, item: string, type: ItemType) => boolean | string;
@@ -1047,7 +1081,7 @@ declare type InternalRequestParams = {
      * for warnings or error messages
      */
     jsModelName?: string;
-    callsite?: string;
+    callsite?: CallSite;
     /** Headers metadata that will be passed to the Engine */
     headers?: Record<string, string>;
     transactionId?: string | number;
@@ -1134,7 +1168,7 @@ declare interface Job {
 /**
  * Create a SQL query for a list of values.
  */
-export declare function join(values: RawValue[], separator?: string): Sql;
+export declare function join(values: RawValue[], separator?: string, prefix?: string, suffix?: string): Sql;
 
 declare class JsonNull extends NullTypesEnumValue {
 }
@@ -1146,6 +1180,12 @@ declare type LoadedEnv = {
     };
 } | undefined;
 
+declare type LocationInFile = {
+    fileName: string;
+    lineNumber: number | null;
+    columnNumber: number | null;
+};
+
 declare type LogDefinition = {
     level: LogLevel;
     emit: 'stdout' | 'event';
@@ -1153,7 +1193,7 @@ declare type LogDefinition = {
 
 declare type LogLevel = 'info' | 'query' | 'warn' | 'error';
 
-export declare function makeDocument({ dmmf, rootTypeName, rootField, select }: DocumentInput): Document_2;
+export declare function makeDocument({ dmmf, rootTypeName, rootField, select, modelName }: DocumentInput): Document_2;
 
 /**
  * Generates more strict variant of an enum which, unlike regular enum,
@@ -1411,6 +1451,9 @@ declare type QueryMiddlewareParams = {
  */
 export declare function raw(value: string): Sql;
 
+/**
+ * Supported value or SQL instance.
+ */
 export declare type RawValue = Value | Sql;
 
 declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
@@ -1422,6 +1465,7 @@ declare type Request_2 = {
     headers?: Record<string, string>;
     otelParentCtx?: Context;
     otelChildCtx?: Context;
+    tracingConfig?: TracingConfig;
 };
 
 declare class RequestHandler {
@@ -1443,7 +1487,7 @@ declare type RequestParams = {
     typeName: string;
     isList: boolean;
     clientMethod: string;
-    callsite?: string;
+    callsite?: CallSite;
     rejectOnNotFound?: RejectOnNotFound;
     runInTransaction?: boolean;
     engineHook?: EngineMiddleware;
@@ -1464,10 +1508,10 @@ export declare class Sql {
     constructor(rawStrings: ReadonlyArray<string>, rawValues: ReadonlyArray<RawValue>);
     get text(): string;
     get sql(): string;
-    [inspect.custom](): {
+    inspect(): {
         text: string;
         sql: string;
-        values: Value[];
+        values: unknown[];
     };
 }
 
@@ -1475,19 +1519,6 @@ export declare class Sql {
  * Create a SQL object from a template string.
  */
 export declare function sqltag(strings: ReadonlyArray<string>, ...values: RawValue[]): Sql;
-
-declare namespace sqlTemplateTag {
-    export {
-        join,
-        raw,
-        sqltag,
-        Value,
-        RawValue,
-        Sql,
-        empty,
-        sqltag as default
-    }
-}
 
 declare type TracingConfig = {
     enabled: boolean;
@@ -1525,7 +1556,10 @@ declare interface UnpackOptions {
     data: any;
 }
 
-export declare type Value = string | number | boolean | object | null | undefined;
+/**
+ * Values supported by SQL engine.
+ */
+export declare type Value = unknown;
 
 export declare function warnEnvConflicts(envPaths: any): void;
 

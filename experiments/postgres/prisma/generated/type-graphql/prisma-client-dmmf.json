@@ -905,6 +905,9 @@
       "prisma": [
         {
           "name": "UserWhereInput",
+          "meta": {
+            "source": "User"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -1550,6 +1553,9 @@
         },
         {
           "name": "UserScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "User"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -1768,6 +1774,9 @@
         },
         {
           "name": "postWhereInput",
+          "meta": {
+            "source": "post"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -2545,6 +2554,9 @@
         },
         {
           "name": "postScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "post"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -2814,6 +2826,9 @@
         },
         {
           "name": "CategoryWhereInput",
+          "meta": {
+            "source": "Category"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -3124,6 +3139,9 @@
         },
         {
           "name": "CategoryScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Category"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -3238,6 +3256,9 @@
         },
         {
           "name": "PatientWhereInput",
+          "meta": {
+            "source": "Patient"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -3522,6 +3543,9 @@
         },
         {
           "name": "PatientScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Patient"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -3636,6 +3660,9 @@
         },
         {
           "name": "MovieWhereInput",
+          "meta": {
+            "source": "Movie"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -3952,6 +3979,9 @@
         },
         {
           "name": "MovieScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Movie"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -4066,6 +4096,9 @@
         },
         {
           "name": "DirectorWhereInput",
+          "meta": {
+            "source": "Director"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -4332,6 +4365,9 @@
         },
         {
           "name": "DirectorScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Director"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -4428,6 +4464,9 @@
         },
         {
           "name": "ProblemWhereInput",
+          "meta": {
+            "source": "Problem"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -4817,6 +4856,9 @@
         },
         {
           "name": "ProblemScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Problem"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -4936,6 +4978,9 @@
         },
         {
           "name": "CreatorWhereInput",
+          "meta": {
+            "source": "Creator"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -5253,6 +5298,9 @@
         },
         {
           "name": "CreatorScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Creator"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -5349,6 +5397,9 @@
         },
         {
           "name": "NativeTypeModelWhereInput",
+          "meta": {
+            "source": "NativeTypeModel"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -5740,6 +5791,9 @@
         },
         {
           "name": "NativeTypeModelScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "NativeTypeModel"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -13833,14 +13887,14 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "JsonNullValueFilter",
-                  "namespace": "prisma",
-                  "location": "enumTypes",
+                  "type": "Json",
+                  "location": "scalar",
                   "isList": false
                 },
                 {
-                  "type": "Json",
-                  "location": "scalar",
+                  "type": "JsonNullValueFilter",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -13998,14 +14052,14 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "JsonNullValueFilter",
-                  "namespace": "prisma",
-                  "location": "enumTypes",
+                  "type": "Json",
+                  "location": "scalar",
                   "isList": false
                 },
                 {
-                  "type": "Json",
-                  "location": "scalar",
+                  "type": "JsonNullValueFilter",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -15128,14 +15182,14 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "JsonNullValueFilter",
-                  "namespace": "prisma",
-                  "location": "enumTypes",
+                  "type": "Json",
+                  "location": "scalar",
                   "isList": false
                 },
                 {
-                  "type": "Json",
-                  "location": "scalar",
+                  "type": "JsonNullValueFilter",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -15293,14 +15347,14 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "JsonNullValueFilter",
-                  "namespace": "prisma",
-                  "location": "enumTypes",
+                  "type": "Json",
+                  "location": "scalar",
                   "isList": false
                 },
                 {
-                  "type": "Json",
-                  "location": "scalar",
+                  "type": "JsonNullValueFilter",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -25669,14 +25723,14 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "JsonNullValueFilter",
-                  "namespace": "prisma",
-                  "location": "enumTypes",
+                  "type": "Json",
+                  "location": "scalar",
                   "isList": false
                 },
                 {
-                  "type": "Json",
-                  "location": "scalar",
+                  "type": "JsonNullValueFilter",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -25834,14 +25888,14 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "JsonNullValueFilter",
-                  "namespace": "prisma",
-                  "location": "enumTypes",
+                  "type": "Json",
+                  "location": "scalar",
                   "isList": false
                 },
                 {
-                  "type": "Json",
-                  "location": "scalar",
+                  "type": "JsonNullValueFilter",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -27592,6 +27646,9 @@
         },
         {
           "name": "postScalarWhereInput",
+          "meta": {
+            "source": "post"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -29974,6 +30031,9 @@
         },
         {
           "name": "MovieScalarWhereInput",
+          "meta": {
+            "source": "Movie"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -30472,6 +30532,9 @@
         },
         {
           "name": "CreatorScalarWhereInput",
+          "meta": {
+            "source": "Creator"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -31135,6 +31198,9 @@
         },
         {
           "name": "ProblemScalarWhereInput",
+          "meta": {
+            "source": "Problem"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -44003,7 +44069,8 @@
           ]
         }
       ]
-    }
+    },
+    "fieldRefTypes": {}
   },
   "mappings": {
     "modelOperations": [

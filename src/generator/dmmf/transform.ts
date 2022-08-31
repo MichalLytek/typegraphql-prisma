@@ -306,64 +306,63 @@ function transformMapping(
   return (mapping: PrismaDMMF.ModelMapping): DMMF.ModelMapping => {
     const { model, plural, ...availableActions } = mapping;
     const modelTypeName = dmmfDocument.getModelTypeName(model) ?? model;
-    const actions = Object.entries(availableActions)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .filter(
-        ([actionKind, fieldName]) =>
-          fieldName && getOperationKindName(actionKind),
-      )
-      .map<DMMF.Action>(([modelAction, fieldName]) => {
-        const kind = modelAction as DMMF.ModelAction;
-        const actionOutputType = dmmfDocument.schema.outputTypes.find(type =>
-          type.fields.some(field => field.name === fieldName),
+    const actions = (
+      Object.entries(availableActions)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .filter(
+          ([actionKind, fieldName]) =>
+            fieldName && getOperationKindName(actionKind),
+        ) as [string, string][]
+    ).map<DMMF.Action>(([modelAction, fieldName]) => {
+      const kind = modelAction as DMMF.ModelAction;
+      const actionOutputType = dmmfDocument.schema.outputTypes.find(type =>
+        type.fields.some(field => field.name === fieldName),
+      );
+      if (!actionOutputType) {
+        throw new Error(
+          `Cannot find type with field ${fieldName} in root types definitions!`,
         );
-        if (!actionOutputType) {
-          throw new Error(
-            `Cannot find type with field ${fieldName} in root types definitions!`,
-          );
-        }
-        const method = actionOutputType.fields.find(
-          field => field.name === fieldName,
-        )!;
-        const argsTypeName =
-          method.args.length > 0
-            ? `${pascalCase(
-                `${kind}${dmmfDocument.getModelTypeName(mapping.model)}`,
-              )}Args`
-            : undefined;
-        const outputTypeName = method.outputType.type as string;
-        const actionResolverName = `${pascalCase(
-          kind,
-        )}${modelTypeName}Resolver`;
-        const returnTSType = getFieldTSType(
-          dmmfDocument,
-          method.outputType,
-          method.isRequired,
-          false,
-          mapping.model,
-          modelTypeName,
-        );
-        const typeGraphQLType = getTypeGraphQLType(
-          method.outputType,
-          dmmfDocument,
-          mapping.model,
-          modelTypeName,
-        );
+      }
+      const method = actionOutputType.fields.find(
+        field => field.name === fieldName,
+      )!;
+      const argsTypeName =
+        method.args.length > 0
+          ? `${pascalCase(
+              `${kind}${dmmfDocument.getModelTypeName(mapping.model)}`,
+            )}Args`
+          : undefined;
+      const outputTypeName = method.outputType.type as string;
+      const actionResolverName = `${pascalCase(kind)}${modelTypeName}Resolver`;
+      const returnTSType = getFieldTSType(
+        dmmfDocument,
+        method.outputType,
+        method.isRequired,
+        false,
+        mapping.model,
+        modelTypeName,
+      );
+      const typeGraphQLType = getTypeGraphQLType(
+        method.outputType,
+        dmmfDocument,
+        mapping.model,
+        modelTypeName,
+      );
 
-        return {
-          name: getMappedActionName(kind, modelTypeName, options),
-          fieldName,
-          kind: kind,
-          operation: getOperationKindName(kind)!,
-          prismaMethod: getPrismaMethodName(kind),
-          method,
-          argsTypeName,
-          outputTypeName,
-          actionResolverName,
-          returnTSType,
-          typeGraphQLType,
-        };
-      });
+      return {
+        name: getMappedActionName(kind, modelTypeName, options),
+        fieldName,
+        kind: kind,
+        operation: getOperationKindName(kind)!,
+        prismaMethod: getPrismaMethodName(kind),
+        method,
+        argsTypeName,
+        outputTypeName,
+        actionResolverName,
+        returnTSType,
+        typeGraphQLType,
+      };
+    });
     const resolverName = `${modelTypeName}CrudResolver`;
     return {
       model,
