@@ -426,6 +426,9 @@ function getMappedActionName(
   if (options.useOriginalMapping) {
     return defaultMappedActionName;
   }
+  if (options.customMappingFn) {
+    return options.customMappingFn(actionName, typeName, options);
+  }
 
   const hasNoPlural = typeName === pluralize(typeName);
   if (hasNoPlural) {

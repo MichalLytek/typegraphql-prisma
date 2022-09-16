@@ -97,6 +97,43 @@ describe("crud", () => {
     expect(staffCrudResolverTSFile).toMatchSnapshot("StaffCrudResolver");
   });
 
+  it("should properly generate resolver class when customMappingFn is used", async () => {
+    const schema = /* prisma */ `
+      model User {
+        intIdField          Int     @id @default(autoincrement())
+        uniqueStringField   String  @unique
+        optionalStringField String?
+        dateField           DateTime
+      }
+    `;
+
+    await generateCodeFromSchema(schema, {
+      outputDirPath,
+      customMappingFn: (actionName, typeName, options) => {
+        const defaultMappedActionName = `${actionName}${typeName}`;
+        switch (actionName) {
+          case "findUnique": {
+            return typeName;
+          }
+          default: {
+            return defaultMappedActionName;
+          }
+        }
+      },
+    });
+    const userCrudResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/UserCrudResolver.ts",
+    );
+    const findUniqueUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/FindUniqueUserResolver.ts",
+    );
+
+    expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+    expect(findUniqueUserResolverTSFile).toMatchSnapshot(
+      "FindUniqueUserResolver",
+    );
+  });
+
   it("should properly generate args classes for every method of crud resolver", async () => {
     const schema = /* prisma */ `
       model User {

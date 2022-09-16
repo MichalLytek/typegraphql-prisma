@@ -11,7 +11,11 @@ import {
 } from "../generator/options";
 import { toUnixPath } from "../generator/helpers";
 import { ALL_EMIT_BLOCK_KINDS } from "../generator/emit-block";
-import { parseStringBoolean, parseStringArray } from "./helpers";
+import {
+  loadFileCallback,
+  parseStringBoolean,
+  parseStringArray,
+} from "./helpers";
 
 export async function generate(options: GeneratorOptions) {
   const outputDir = parseEnvValue(options.generator.output!);
@@ -33,6 +37,7 @@ export async function generate(options: GeneratorOptions) {
     emitTranspiledCode: parseStringBoolean(generatorConfig.emitTranspiledCode),
     simpleResolvers: parseStringBoolean(generatorConfig.simpleResolvers),
     useOriginalMapping: parseStringBoolean(generatorConfig.useOriginalMapping),
+    customMappingFn: await loadFileCallback(generatorConfig.customMappingFn),
     useUncheckedScalarInputs: parseStringBoolean(
       generatorConfig.useUncheckedScalarInputs,
     ),

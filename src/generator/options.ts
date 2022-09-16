@@ -1,10 +1,16 @@
 import { EmitBlockKind } from "./emit-block";
+import { DMMF } from "./types";
 
 export interface ExternalGeneratorOptions {
   emitDMMF?: boolean;
   emitTranspiledCode?: boolean;
   simpleResolvers?: boolean;
   useOriginalMapping?: boolean;
+  customMappingFn?: (
+    actionName: DMMF.ModelAction,
+    typeName: string,
+    options: GeneratorOptions,
+  ) => string;
   useUncheckedScalarInputs?: boolean;
   emitIdAsIDType?: boolean;
   emitOnly?: EmitBlockKind[];
