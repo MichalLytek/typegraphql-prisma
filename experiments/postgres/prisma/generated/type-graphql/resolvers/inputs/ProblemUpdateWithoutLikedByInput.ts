@@ -3,16 +3,15 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CreatorUpdateOneWithoutProblemsNestedInput } from "../inputs/CreatorUpdateOneWithoutProblemsNestedInput";
-import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("ProblemUpdateWithoutLikedByInput", {
   isAbstract: true
 })
 export class ProblemUpdateWithoutLikedByInput {
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  problemText?: StringFieldUpdateOperationsInput | undefined;
+  problemText?: string | undefined;
 
   @TypeGraphQL.Field(_type => CreatorUpdateOneWithoutProblemsNestedInput, {
     nullable: true

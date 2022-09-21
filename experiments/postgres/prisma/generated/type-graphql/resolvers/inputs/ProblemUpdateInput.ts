@@ -4,16 +4,15 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CreatorUpdateManyWithoutLikesNestedInput } from "../inputs/CreatorUpdateManyWithoutLikesNestedInput";
 import { CreatorUpdateOneWithoutProblemsNestedInput } from "../inputs/CreatorUpdateOneWithoutProblemsNestedInput";
-import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("ProblemUpdateInput", {
   isAbstract: true
 })
 export class ProblemUpdateInput {
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  problemText?: StringFieldUpdateOperationsInput | undefined;
+  problemText?: string | undefined;
 
   @TypeGraphQL.Field(_type => CreatorUpdateManyWithoutLikesNestedInput, {
     nullable: true

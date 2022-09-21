@@ -2,26 +2,23 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { NullableBigIntFieldUpdateOperationsInput } from "../inputs/NullableBigIntFieldUpdateOperationsInput";
-import { NullableBytesFieldUpdateOperationsInput } from "../inputs/NullableBytesFieldUpdateOperationsInput";
-import { NullableDecimalFieldUpdateOperationsInput } from "../inputs/NullableDecimalFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("NativeTypeModelUpdateInput", {
   isAbstract: true
 })
 export class NativeTypeModelUpdateInput {
-  @TypeGraphQL.Field(_type => NullableBigIntFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.BigIntResolver, {
     nullable: true
   })
-  bigInt?: NullableBigIntFieldUpdateOperationsInput | undefined;
+  bigInt?: bigint | undefined;
 
-  @TypeGraphQL.Field(_type => NullableBytesFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.ByteResolver, {
     nullable: true
   })
-  byteA?: NullableBytesFieldUpdateOperationsInput | undefined;
+  byteA?: Buffer | undefined;
 
-  @TypeGraphQL.Field(_type => NullableDecimalFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => DecimalJSScalar, {
     nullable: true
   })
-  decimal?: NullableDecimalFieldUpdateOperationsInput | undefined;
+  decimal?: Prisma.Decimal | undefined;
 }

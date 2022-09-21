@@ -2,41 +2,37 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { EnumRoleFieldUpdateOperationsInput } from "../inputs/EnumRoleFieldUpdateOperationsInput";
-import { FloatFieldUpdateOperationsInput } from "../inputs/FloatFieldUpdateOperationsInput";
-import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
 import { MainUserUpdatealiasesInput } from "../inputs/MainUserUpdatealiasesInput";
 import { MainUserUpdategradesInput } from "../inputs/MainUserUpdategradesInput";
-import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
-import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
+import { Role } from "../../enums/Role";
 
 @TypeGraphQL.InputType("MainUserUpdateManyMutationInput", {
   isAbstract: true
 })
 export class MainUserUpdateManyMutationInput {
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  email?: StringFieldUpdateOperationsInput | undefined;
+  email?: string | undefined;
 
-  name?: NullableStringFieldUpdateOperationsInput | undefined;
+  name?: string | undefined;
 
-  @TypeGraphQL.Field(_type => IntFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
   })
-  age?: IntFieldUpdateOperationsInput | undefined;
+  age?: number | undefined;
 
-  balance?: FloatFieldUpdateOperationsInput | undefined;
+  balance?: number | undefined;
 
-  @TypeGraphQL.Field(_type => FloatFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true
   })
-  amount?: FloatFieldUpdateOperationsInput | undefined;
+  amount?: number | undefined;
 
-  @TypeGraphQL.Field(_type => EnumRoleFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => Role, {
     nullable: true
   })
-  role?: EnumRoleFieldUpdateOperationsInput | undefined;
+  role?: "USER" | "ADMIN" | undefined;
 
   @TypeGraphQL.Field(_type => MainUserUpdategradesInput, {
     nullable: true
@@ -48,25 +44,25 @@ export class MainUserUpdateManyMutationInput {
   })
   aliases?: MainUserUpdatealiasesInput | undefined;
 
-  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   get firstName() {
     return this.name;
   }
 
-  set firstName(name: NullableStringFieldUpdateOperationsInput | undefined) {
+  set firstName(name: string | undefined) {
     this.name = name;
   }
 
-  @TypeGraphQL.Field(_type => FloatFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true
   })
   get accountBalance() {
     return this.balance;
   }
 
-  set accountBalance(balance: FloatFieldUpdateOperationsInput | undefined) {
+  set accountBalance(balance: number | undefined) {
     this.balance = balance;
   }
 }

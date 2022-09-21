@@ -420,12 +420,12 @@ input CreatorSumOrderByAggregateInput {
 
 input CreatorUpdateInput {
   likes: ProblemUpdateManyWithoutLikedByNestedInput
-  name: StringFieldUpdateOperationsInput
+  name: String
   problems: ProblemUpdateManyWithoutCreatorNestedInput
 }
 
 input CreatorUpdateManyMutationInput {
-  name: StringFieldUpdateOperationsInput
+  name: String
 }
 
 input CreatorUpdateManyWithWhereWithoutLikesInput {
@@ -462,13 +462,13 @@ input CreatorUpdateWithWhereUniqueWithoutLikesInput {
 }
 
 input CreatorUpdateWithoutLikesInput {
-  name: StringFieldUpdateOperationsInput
+  name: String
   problems: ProblemUpdateManyWithoutCreatorNestedInput
 }
 
 input CreatorUpdateWithoutProblemsInput {
   likes: ProblemUpdateManyWithoutLikedByNestedInput
-  name: StringFieldUpdateOperationsInput
+  name: String
 }
 
 input CreatorUpsertWithWhereUniqueWithoutLikesInput {
@@ -500,10 +500,6 @@ input CreatorWhereUniqueInput {
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
-
-input DateTimeFieldUpdateOperationsInput {
-  set: DateTime
-}
 
 input DateTimeFilter {
   equals: DateTime
@@ -689,14 +685,14 @@ input DirectorScalarWhereWithAggregatesInput {
 }
 
 input DirectorUpdateInput {
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
+  firstName: String
+  lastName: String
   movies: MovieUpdateManyWithoutDirectorNestedInput
 }
 
 input DirectorUpdateManyMutationInput {
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
+  firstName: String
+  lastName: String
 }
 
 input DirectorUpdateOneRequiredWithoutMoviesNestedInput {
@@ -708,8 +704,8 @@ input DirectorUpdateOneRequiredWithoutMoviesNestedInput {
 }
 
 input DirectorUpdateWithoutMoviesInput {
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
+  firstName: String
+  lastName: String
 }
 
 input DirectorUpsertWithoutMoviesInput {
@@ -747,10 +743,6 @@ input EnumPostKindNullableWithAggregatesFilter {
   notIn: [PostKind!]
 }
 
-input EnumRoleFieldUpdateOperationsInput {
-  set: Role
-}
-
 input EnumRoleFilter {
   equals: Role
   in: [Role!]
@@ -766,14 +758,6 @@ input EnumRoleWithAggregatesFilter {
   in: [Role!]
   not: NestedEnumRoleWithAggregatesFilter
   notIn: [Role!]
-}
-
-input FloatFieldUpdateOperationsInput {
-  decrement: Float
-  divide: Float
-  increment: Float
-  multiply: Float
-  set: Float
 }
 
 input FloatFilter {
@@ -801,14 +785,6 @@ input FloatWithAggregatesFilter {
   lte: Float
   not: NestedFloatWithAggregatesFilter
   notIn: [Float!]
-}
-
-input IntFieldUpdateOperationsInput {
-  decrement: Int
-  divide: Int
-  increment: Int
-  multiply: Int
-  set: Int
 }
 
 input IntFilter {
@@ -1208,27 +1184,27 @@ input MainUserSumOrderByAggregateInput {
 }
 
 input MainUserUpdateInput {
-  accountBalance: FloatFieldUpdateOperationsInput
-  age: IntFieldUpdateOperationsInput
+  accountBalance: Float
+  age: Int
   aliases: MainUserUpdatealiasesInput
-  amount: FloatFieldUpdateOperationsInput
+  amount: Float
   clientPosts: PostUpdateManyWithoutAuthorNestedInput
   editorPosts: PostUpdateManyWithoutEditorNestedInput
-  email: StringFieldUpdateOperationsInput
-  firstName: NullableStringFieldUpdateOperationsInput
+  email: String
+  firstName: String
   grades: MainUserUpdategradesInput
-  role: EnumRoleFieldUpdateOperationsInput
+  role: Role
 }
 
 input MainUserUpdateManyMutationInput {
-  accountBalance: FloatFieldUpdateOperationsInput
-  age: IntFieldUpdateOperationsInput
+  accountBalance: Float
+  age: Int
   aliases: MainUserUpdatealiasesInput
-  amount: FloatFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  firstName: NullableStringFieldUpdateOperationsInput
+  amount: Float
+  email: String
+  firstName: String
   grades: MainUserUpdategradesInput
-  role: EnumRoleFieldUpdateOperationsInput
+  role: Role
 }
 
 input MainUserUpdateOneRequiredWithoutPostsNestedInput {
@@ -1250,27 +1226,27 @@ input MainUserUpdateOneWithoutEditorPostsNestedInput {
 }
 
 input MainUserUpdateWithoutEditorPostsInput {
-  accountBalance: FloatFieldUpdateOperationsInput
-  age: IntFieldUpdateOperationsInput
+  accountBalance: Float
+  age: Int
   aliases: MainUserUpdatealiasesInput
-  amount: FloatFieldUpdateOperationsInput
+  amount: Float
   clientPosts: PostUpdateManyWithoutAuthorNestedInput
-  email: StringFieldUpdateOperationsInput
-  firstName: NullableStringFieldUpdateOperationsInput
+  email: String
+  firstName: String
   grades: MainUserUpdategradesInput
-  role: EnumRoleFieldUpdateOperationsInput
+  role: Role
 }
 
 input MainUserUpdateWithoutPostsInput {
-  accountBalance: FloatFieldUpdateOperationsInput
-  age: IntFieldUpdateOperationsInput
+  accountBalance: Float
+  age: Int
   aliases: MainUserUpdatealiasesInput
-  amount: FloatFieldUpdateOperationsInput
+  amount: Float
   editorPosts: PostUpdateManyWithoutEditorNestedInput
-  email: StringFieldUpdateOperationsInput
-  firstName: NullableStringFieldUpdateOperationsInput
+  email: String
+  firstName: String
   grades: MainUserUpdategradesInput
-  role: EnumRoleFieldUpdateOperationsInput
+  role: Role
 }
 
 input MainUserUpdatealiasesInput {
@@ -1475,11 +1451,11 @@ input MovieScalarWhereWithAggregatesInput {
 
 input MovieUpdateInput {
   director: DirectorUpdateOneRequiredWithoutMoviesNestedInput
-  title: StringFieldUpdateOperationsInput
+  title: String
 }
 
 input MovieUpdateManyMutationInput {
-  title: StringFieldUpdateOperationsInput
+  title: String
 }
 
 input MovieUpdateManyWithWhereWithoutDirectorInput {
@@ -1507,7 +1483,7 @@ input MovieUpdateWithWhereUniqueWithoutDirectorInput {
 }
 
 input MovieUpdateWithoutDirectorInput {
-  title: StringFieldUpdateOperationsInput
+  title: String
 }
 
 input MovieUpsertWithWhereUniqueWithoutDirectorInput {
@@ -1721,15 +1697,15 @@ input NativeTypeModelSumOrderByAggregateInput {
 }
 
 input NativeTypeModelUpdateInput {
-  bigInt: NullableBigIntFieldUpdateOperationsInput
-  byteA: NullableBytesFieldUpdateOperationsInput
-  decimal: NullableDecimalFieldUpdateOperationsInput
+  bigInt: BigInt
+  byteA: Byte
+  decimal: Decimal
 }
 
 input NativeTypeModelUpdateManyMutationInput {
-  bigInt: NullableBigIntFieldUpdateOperationsInput
-  byteA: NullableBytesFieldUpdateOperationsInput
-  decimal: NullableDecimalFieldUpdateOperationsInput
+  bigInt: BigInt
+  byteA: Byte
+  decimal: Decimal
 }
 
 input NativeTypeModelWhereInput {
@@ -2050,34 +2026,6 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
 }
 
-input NullableBigIntFieldUpdateOperationsInput {
-  decrement: BigInt
-  divide: BigInt
-  increment: BigInt
-  multiply: BigInt
-  set: BigInt
-}
-
-input NullableBytesFieldUpdateOperationsInput {
-  set: Byte
-}
-
-input NullableDecimalFieldUpdateOperationsInput {
-  decrement: Decimal
-  divide: Decimal
-  increment: Decimal
-  multiply: Decimal
-  set: Decimal
-}
-
-input NullableEnumPostKindFieldUpdateOperationsInput {
-  set: PostKind
-}
-
-input NullableStringFieldUpdateOperationsInput {
-  set: String
-}
-
 enum NullsOrder {
   first
   last
@@ -2196,15 +2144,15 @@ input PatientScalarWhereWithAggregatesInput {
 }
 
 input PatientUpdateInput {
-  email: StringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
+  email: String
+  firstName: String
+  lastName: String
 }
 
 input PatientUpdateManyMutationInput {
-  email: StringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
+  email: String
+  firstName: String
+  lastName: String
 }
 
 input PatientWhereInput {
@@ -2555,13 +2503,13 @@ input PostSumOrderByAggregateInput {
 }
 
 input PostUpdateManyMutationInput {
-  content: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  kind: NullableEnumPostKindFieldUpdateOperationsInput
+  content: String
+  createdAt: DateTime
+  kind: PostKind
   metadata: JSON
-  subtitle: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  uuid: StringFieldUpdateOperationsInput
+  subtitle: String
+  title: String
+  uuid: String
 }
 
 input PostUpdateManyWithWhereWithoutAuthorInput {
@@ -2613,25 +2561,25 @@ input PostUpdateWithWhereUniqueWithoutEditorInput {
 }
 
 input PostUpdateWithoutAuthorInput {
-  content: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
+  content: String
+  createdAt: DateTime
   editor: MainUserUpdateOneWithoutEditorPostsNestedInput
-  kind: NullableEnumPostKindFieldUpdateOperationsInput
+  kind: PostKind
   metadata: JSON
-  subtitle: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  uuid: StringFieldUpdateOperationsInput
+  subtitle: String
+  title: String
+  uuid: String
 }
 
 input PostUpdateWithoutEditorInput {
   author: MainUserUpdateOneRequiredWithoutPostsNestedInput
-  content: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  kind: NullableEnumPostKindFieldUpdateOperationsInput
+  content: String
+  createdAt: DateTime
+  kind: PostKind
   metadata: JSON
-  subtitle: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  uuid: StringFieldUpdateOperationsInput
+  subtitle: String
+  title: String
+  uuid: String
 }
 
 input PostUpsertWithWhereUniqueWithoutAuthorInput {
@@ -2871,11 +2819,11 @@ input ProblemSumOrderByAggregateInput {
 input ProblemUpdateInput {
   creator: CreatorUpdateOneWithoutProblemsNestedInput
   likedBy: CreatorUpdateManyWithoutLikesNestedInput
-  problemText: StringFieldUpdateOperationsInput
+  problemText: String
 }
 
 input ProblemUpdateManyMutationInput {
-  problemText: StringFieldUpdateOperationsInput
+  problemText: String
 }
 
 input ProblemUpdateManyWithWhereWithoutCreatorInput {
@@ -2927,12 +2875,12 @@ input ProblemUpdateWithWhereUniqueWithoutLikedByInput {
 
 input ProblemUpdateWithoutCreatorInput {
   likedBy: CreatorUpdateManyWithoutLikesNestedInput
-  problemText: StringFieldUpdateOperationsInput
+  problemText: String
 }
 
 input ProblemUpdateWithoutLikedByInput {
   creator: CreatorUpdateOneWithoutProblemsNestedInput
-  problemText: StringFieldUpdateOperationsInput
+  problemText: String
 }
 
 input ProblemUpsertWithWhereUniqueWithoutCreatorInput {
@@ -3027,10 +2975,6 @@ enum SortOrder {
 input SortOrderInput {
   nulls: NullsOrder
   sort: SortOrder!
-}
-
-input StringFieldUpdateOperationsInput {
-  set: String
 }
 
 input StringFilter {

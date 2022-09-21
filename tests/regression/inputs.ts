@@ -1457,4 +1457,56 @@ describe("inputs", () => {
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });
+
+  describe("when useSimpleUpdateInputs config option is set to true", () => {
+    it("should properly generate input type classes for updating scalar fields", async () => {
+      const schema = /* prisma */ `
+        enum Color {
+          RED
+          GREEN
+          BLUE
+        }
+        model SampleModel {
+          intIdField            Int     @id @default(autoincrement())
+          stringField           String  @unique
+          optionalStringField   String?
+          intField              Int
+          optionalIntField      Int?
+          floatField            Float
+          optionalFloatField    Float?
+          booleanField          Boolean
+          optionalBooleanField  Boolean?
+          dateField             DateTime
+          optionalDateField     DateTime?
+          jsonField             Json
+          optionalJsonField     Json?
+          enumField             Color
+          optionalEnumField     Color?
+          intArrayField         Int[]
+          stringArrayField      String[]
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        useSimpleUpdateInputs: true,
+      });
+      const sampleModelUpdateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleModelUpdateInput.ts",
+      );
+      const sampleModelUpdateManyMutationInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/SampleModelUpdateManyMutationInput.ts",
+      );
+
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(sampleModelUpdateInputTSFile).toMatchSnapshot(
+        "SampleModelUpdateInput",
+      );
+      expect(sampleModelUpdateManyMutationInputTSFile).toMatchSnapshot(
+        "SampleModelUpdateManyMutationInput",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
 });

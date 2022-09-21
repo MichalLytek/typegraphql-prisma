@@ -378,10 +378,15 @@ function selectInputTypeFromTypes(dmmfDocument: DmmfDocument) {
   return (
     inputTypes: PrismaDMMF.SchemaArgInputType[],
   ): DMMF.SchemaArgInputType => {
-    const { useUncheckedScalarInputs } = dmmfDocument.options;
+    const { useUncheckedScalarInputs, useSimpleUpdateInputs } =
+      dmmfDocument.options;
     let possibleInputTypes: PrismaDMMF.SchemaArgInputType[];
     possibleInputTypes = inputTypes.filter(
-      it => it.location === "inputObjectTypes",
+      it =>
+        it.location === "inputObjectTypes" &&
+        // skip `XYZOperationsInput` when simple/flat inputs are enabled
+        (!useSimpleUpdateInputs ||
+          !(it.type as string).includes("OperationsInput")),
     );
     if (possibleInputTypes.length === 0) {
       possibleInputTypes = inputTypes.filter(

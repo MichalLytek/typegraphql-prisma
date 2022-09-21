@@ -7193,6 +7193,288 @@ export { StringWithAggregatesFilter } from \\"./StringWithAggregatesFilter\\";
 "
 `;
 
+exports[`inputs when useSimpleUpdateInputs config option is set to true should properly generate input type classes for updating scalar fields: SampleModelUpdateInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SampleModelUpdateintArrayFieldInput } from \\"../inputs/SampleModelUpdateintArrayFieldInput\\";
+import { SampleModelUpdatestringArrayFieldInput } from \\"../inputs/SampleModelUpdatestringArrayFieldInput\\";
+import { Color } from \\"../../enums/Color\\";
+
+@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\", {
+  isAbstract: true
+})
+export class SampleModelUpdateInput {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  stringField?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  optionalStringField?: string | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  intField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  optionalIntField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  floatField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  optionalFloatField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  booleanField?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  optionalBooleanField?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  dateField?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  optionalDateField?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  jsonField?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  optionalJsonField?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => Color, {
+    nullable: true
+  })
+  enumField?: \\"RED\\" | \\"GREEN\\" | \\"BLUE\\" | undefined;
+
+  @TypeGraphQL.Field(_type => Color, {
+    nullable: true
+  })
+  optionalEnumField?: \\"RED\\" | \\"GREEN\\" | \\"BLUE\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SampleModelUpdateintArrayFieldInput, {
+    nullable: true
+  })
+  intArrayField?: SampleModelUpdateintArrayFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => SampleModelUpdatestringArrayFieldInput, {
+    nullable: true
+  })
+  stringArrayField?: SampleModelUpdatestringArrayFieldInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useSimpleUpdateInputs config option is set to true should properly generate input type classes for updating scalar fields: SampleModelUpdateManyMutationInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SampleModelUpdateintArrayFieldInput } from \\"../inputs/SampleModelUpdateintArrayFieldInput\\";
+import { SampleModelUpdatestringArrayFieldInput } from \\"../inputs/SampleModelUpdatestringArrayFieldInput\\";
+import { Color } from \\"../../enums/Color\\";
+
+@TypeGraphQL.InputType(\\"SampleModelUpdateManyMutationInput\\", {
+  isAbstract: true
+})
+export class SampleModelUpdateManyMutationInput {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  stringField?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  optionalStringField?: string | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  intField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  optionalIntField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  floatField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  optionalFloatField?: number | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  booleanField?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  optionalBooleanField?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  dateField?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  optionalDateField?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  jsonField?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: true
+  })
+  optionalJsonField?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => Color, {
+    nullable: true
+  })
+  enumField?: \\"RED\\" | \\"GREEN\\" | \\"BLUE\\" | undefined;
+
+  @TypeGraphQL.Field(_type => Color, {
+    nullable: true
+  })
+  optionalEnumField?: \\"RED\\" | \\"GREEN\\" | \\"BLUE\\" | undefined;
+
+  @TypeGraphQL.Field(_type => SampleModelUpdateintArrayFieldInput, {
+    nullable: true
+  })
+  intArrayField?: SampleModelUpdateintArrayFieldInput | undefined;
+
+  @TypeGraphQL.Field(_type => SampleModelUpdatestringArrayFieldInput, {
+    nullable: true
+  })
+  stringArrayField?: SampleModelUpdatestringArrayFieldInput | undefined;
+}
+"
+`;
+
+exports[`inputs when useSimpleUpdateInputs config option is set to true should properly generate input type classes for updating scalar fields: index 1`] = `
+"export { BoolFieldUpdateOperationsInput } from \\"./BoolFieldUpdateOperationsInput\\";
+export { BoolFilter } from \\"./BoolFilter\\";
+export { BoolNullableFilter } from \\"./BoolNullableFilter\\";
+export { BoolNullableWithAggregatesFilter } from \\"./BoolNullableWithAggregatesFilter\\";
+export { BoolWithAggregatesFilter } from \\"./BoolWithAggregatesFilter\\";
+export { DateTimeFieldUpdateOperationsInput } from \\"./DateTimeFieldUpdateOperationsInput\\";
+export { DateTimeFilter } from \\"./DateTimeFilter\\";
+export { DateTimeNullableFilter } from \\"./DateTimeNullableFilter\\";
+export { DateTimeNullableWithAggregatesFilter } from \\"./DateTimeNullableWithAggregatesFilter\\";
+export { DateTimeWithAggregatesFilter } from \\"./DateTimeWithAggregatesFilter\\";
+export { EnumColorFieldUpdateOperationsInput } from \\"./EnumColorFieldUpdateOperationsInput\\";
+export { EnumColorFilter } from \\"./EnumColorFilter\\";
+export { EnumColorNullableFilter } from \\"./EnumColorNullableFilter\\";
+export { EnumColorNullableWithAggregatesFilter } from \\"./EnumColorNullableWithAggregatesFilter\\";
+export { EnumColorWithAggregatesFilter } from \\"./EnumColorWithAggregatesFilter\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { FloatNullableFilter } from \\"./FloatNullableFilter\\";
+export { FloatNullableWithAggregatesFilter } from \\"./FloatNullableWithAggregatesFilter\\";
+export { FloatWithAggregatesFilter } from \\"./FloatWithAggregatesFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { IntNullableFilter } from \\"./IntNullableFilter\\";
+export { IntNullableListFilter } from \\"./IntNullableListFilter\\";
+export { IntNullableWithAggregatesFilter } from \\"./IntNullableWithAggregatesFilter\\";
+export { IntWithAggregatesFilter } from \\"./IntWithAggregatesFilter\\";
+export { JsonFilter } from \\"./JsonFilter\\";
+export { JsonNullableFilter } from \\"./JsonNullableFilter\\";
+export { JsonNullableWithAggregatesFilter } from \\"./JsonNullableWithAggregatesFilter\\";
+export { JsonWithAggregatesFilter } from \\"./JsonWithAggregatesFilter\\";
+export { NestedBoolFilter } from \\"./NestedBoolFilter\\";
+export { NestedBoolNullableFilter } from \\"./NestedBoolNullableFilter\\";
+export { NestedBoolNullableWithAggregatesFilter } from \\"./NestedBoolNullableWithAggregatesFilter\\";
+export { NestedBoolWithAggregatesFilter } from \\"./NestedBoolWithAggregatesFilter\\";
+export { NestedDateTimeFilter } from \\"./NestedDateTimeFilter\\";
+export { NestedDateTimeNullableFilter } from \\"./NestedDateTimeNullableFilter\\";
+export { NestedDateTimeNullableWithAggregatesFilter } from \\"./NestedDateTimeNullableWithAggregatesFilter\\";
+export { NestedDateTimeWithAggregatesFilter } from \\"./NestedDateTimeWithAggregatesFilter\\";
+export { NestedEnumColorFilter } from \\"./NestedEnumColorFilter\\";
+export { NestedEnumColorNullableFilter } from \\"./NestedEnumColorNullableFilter\\";
+export { NestedEnumColorNullableWithAggregatesFilter } from \\"./NestedEnumColorNullableWithAggregatesFilter\\";
+export { NestedEnumColorWithAggregatesFilter } from \\"./NestedEnumColorWithAggregatesFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedFloatNullableFilter } from \\"./NestedFloatNullableFilter\\";
+export { NestedFloatNullableWithAggregatesFilter } from \\"./NestedFloatNullableWithAggregatesFilter\\";
+export { NestedFloatWithAggregatesFilter } from \\"./NestedFloatWithAggregatesFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedIntNullableFilter } from \\"./NestedIntNullableFilter\\";
+export { NestedIntNullableWithAggregatesFilter } from \\"./NestedIntNullableWithAggregatesFilter\\";
+export { NestedIntWithAggregatesFilter } from \\"./NestedIntWithAggregatesFilter\\";
+export { NestedJsonFilter } from \\"./NestedJsonFilter\\";
+export { NestedJsonNullableFilter } from \\"./NestedJsonNullableFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { NestedStringNullableFilter } from \\"./NestedStringNullableFilter\\";
+export { NestedStringNullableWithAggregatesFilter } from \\"./NestedStringNullableWithAggregatesFilter\\";
+export { NestedStringWithAggregatesFilter } from \\"./NestedStringWithAggregatesFilter\\";
+export { NullableBoolFieldUpdateOperationsInput } from \\"./NullableBoolFieldUpdateOperationsInput\\";
+export { NullableDateTimeFieldUpdateOperationsInput } from \\"./NullableDateTimeFieldUpdateOperationsInput\\";
+export { NullableEnumColorFieldUpdateOperationsInput } from \\"./NullableEnumColorFieldUpdateOperationsInput\\";
+export { NullableFloatFieldUpdateOperationsInput } from \\"./NullableFloatFieldUpdateOperationsInput\\";
+export { NullableIntFieldUpdateOperationsInput } from \\"./NullableIntFieldUpdateOperationsInput\\";
+export { NullableStringFieldUpdateOperationsInput } from \\"./NullableStringFieldUpdateOperationsInput\\";
+export { SampleModelAvgOrderByAggregateInput } from \\"./SampleModelAvgOrderByAggregateInput\\";
+export { SampleModelCountOrderByAggregateInput } from \\"./SampleModelCountOrderByAggregateInput\\";
+export { SampleModelCreateInput } from \\"./SampleModelCreateInput\\";
+export { SampleModelCreateManyInput } from \\"./SampleModelCreateManyInput\\";
+export { SampleModelCreateintArrayFieldInput } from \\"./SampleModelCreateintArrayFieldInput\\";
+export { SampleModelCreatestringArrayFieldInput } from \\"./SampleModelCreatestringArrayFieldInput\\";
+export { SampleModelMaxOrderByAggregateInput } from \\"./SampleModelMaxOrderByAggregateInput\\";
+export { SampleModelMinOrderByAggregateInput } from \\"./SampleModelMinOrderByAggregateInput\\";
+export { SampleModelOrderByWithAggregationInput } from \\"./SampleModelOrderByWithAggregationInput\\";
+export { SampleModelOrderByWithRelationInput } from \\"./SampleModelOrderByWithRelationInput\\";
+export { SampleModelScalarWhereWithAggregatesInput } from \\"./SampleModelScalarWhereWithAggregatesInput\\";
+export { SampleModelSumOrderByAggregateInput } from \\"./SampleModelSumOrderByAggregateInput\\";
+export { SampleModelUpdateInput } from \\"./SampleModelUpdateInput\\";
+export { SampleModelUpdateManyMutationInput } from \\"./SampleModelUpdateManyMutationInput\\";
+export { SampleModelUpdateintArrayFieldInput } from \\"./SampleModelUpdateintArrayFieldInput\\";
+export { SampleModelUpdatestringArrayFieldInput } from \\"./SampleModelUpdatestringArrayFieldInput\\";
+export { SampleModelWhereInput } from \\"./SampleModelWhereInput\\";
+export { SampleModelWhereUniqueInput } from \\"./SampleModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+export { StringNullableFilter } from \\"./StringNullableFilter\\";
+export { StringNullableListFilter } from \\"./StringNullableListFilter\\";
+export { StringNullableWithAggregatesFilter } from \\"./StringNullableWithAggregatesFilter\\";
+export { StringWithAggregatesFilter } from \\"./StringWithAggregatesFilter\\";
+"
+`;
+
 exports[`inputs when useUncheckedScalarInputs mode is enabled should properly generate input type classes for filtering models by one to many relation fields: FirstModelCreateNestedOneWithoutSecondModelsFieldInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

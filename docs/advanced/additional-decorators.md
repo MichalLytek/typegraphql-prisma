@@ -1,7 +1,7 @@
 ---
 title: Additional decorators for CRUD resolvers and Prisma classes and fields
 sidebar_label: Applying decorators
-sidebar_position: 9
+sidebar_position: 10
 ---
 
 #### Additional decorators for Prisma schema resolvers

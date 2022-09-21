@@ -1,7 +1,7 @@
 ---
 title: Custom Prisma Client context key
 sidebar_label: Prisma context key
-sidebar_position: 13
+sidebar_position: 14
 ---
 
 By default, `typegraphql-prisma` looks in runtime for Prisma Client in the GraphQL context under the `prisma` key.

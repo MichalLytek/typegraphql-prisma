@@ -2,19 +2,18 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("DirectorUpdateWithoutMoviesInput", {
   isAbstract: true
 })
 export class DirectorUpdateWithoutMoviesInput {
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  firstName?: StringFieldUpdateOperationsInput | undefined;
+  firstName?: string | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  lastName?: StringFieldUpdateOperationsInput | undefined;
+  lastName?: string | undefined;
 }

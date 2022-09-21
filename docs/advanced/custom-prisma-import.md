@@ -1,7 +1,7 @@
 ---
 title: Custom Prisma Client import path
 sidebar_label: Prisma import path
-sidebar_position: 12
+sidebar_position: 13
 ---
 
 If you have a complex repository structure, e.g. with multiple Prisma clients generated, you can provide a custom Prisma import path as a generator option:

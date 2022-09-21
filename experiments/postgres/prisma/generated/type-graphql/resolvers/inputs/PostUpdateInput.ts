@@ -2,42 +2,38 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
-import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { MainUserUpdateOneRequiredWithoutPostsNestedInput } from "../inputs/MainUserUpdateOneRequiredWithoutPostsNestedInput";
 import { MainUserUpdateOneWithoutEditorPostsNestedInput } from "../inputs/MainUserUpdateOneWithoutEditorPostsNestedInput";
-import { NullableEnumPostKindFieldUpdateOperationsInput } from "../inputs/NullableEnumPostKindFieldUpdateOperationsInput";
-import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
-import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
+import { PostKind } from "../../enums/PostKind";
 
 @TypeGraphQL.InputType("PostUpdateInput", {
   isAbstract: true
 })
 export class PostUpdateInput {
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  uuid?: StringFieldUpdateOperationsInput | undefined;
+  uuid?: string | undefined;
 
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => Date, {
     nullable: true
   })
-  createdAt?: DateTimeFieldUpdateOperationsInput | undefined;
+  createdAt?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  title?: StringFieldUpdateOperationsInput | undefined;
+  title?: string | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  subtitle?: StringFieldUpdateOperationsInput | undefined;
+  subtitle?: string | undefined;
 
-  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  content?: NullableStringFieldUpdateOperationsInput | undefined;
+  content?: string | undefined;
 
   @TypeGraphQL.Field(_type => MainUserUpdateOneRequiredWithoutPostsNestedInput, {
     nullable: true
@@ -49,10 +45,10 @@ export class PostUpdateInput {
   })
   editor?: MainUserUpdateOneWithoutEditorPostsNestedInput | undefined;
 
-  @TypeGraphQL.Field(_type => NullableEnumPostKindFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => PostKind, {
     nullable: true
   })
-  kind?: NullableEnumPostKindFieldUpdateOperationsInput | undefined;
+  kind?: "BLOG" | "ADVERT" | undefined;
 
   @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: true
