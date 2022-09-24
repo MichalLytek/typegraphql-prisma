@@ -50,3 +50,19 @@ generator typegraphql {
   emitTranspiledCode = true
 }
 ```
+
+## Emitting ID
+
+By default, the system generate the next schema `id:BigInt!` based on your schema.prisma `
+model Person {
+  id  BigInt    @id
+}
+`. You can overwrite that behavior by explicitly setting `emitIdAsIDType` config option:
+
+```prisma {4}
+generator typegraphql {
+  provider           = "typegraphql-prisma"
+  emitIdAsIDType     = true
+}
+```
+As a result, you will get `id:ID!` graphql schema for the same schema.prisma
