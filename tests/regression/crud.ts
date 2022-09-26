@@ -97,6 +97,27 @@ describe("crud", () => {
     expect(staffCrudResolverTSFile).toMatchSnapshot("StaffCrudResolver");
   });
 
+  it("should properly generate resolver class when cannot pluralize model name and provided overriding plural", async () => {
+    const schema = /* prisma */ `
+      /// @@TypeGraphQL.type(plural: "StaffMembers")
+      model Staff {
+        intIdField          Int     @id @default(autoincrement())
+        uniqueStringField   String  @unique
+        optionalStringField String?
+        dateField           DateTime
+      }
+    `;
+
+    await generateCodeFromSchema(schema, {
+      outputDirPath,
+    });
+    const staffCrudResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/Staff/StaffCrudResolver.ts",
+    );
+
+    expect(staffCrudResolverTSFile).toMatchSnapshot("StaffCrudResolver");
+  });
+
   it("should properly generate args classes for every method of crud resolver", async () => {
     const schema = /* prisma */ `
       model User {

@@ -50,16 +50,16 @@ export function transformMappings(
 }
 
 export function transformBareModel(model: PrismaDMMF.Model): DMMF.Model {
-  const attributeArgs = parseDocumentationAttributes<{ name: string }>(
-    model.documentation,
-    "type",
-    "model",
-  );
+  const attributeArgs = parseDocumentationAttributes<{
+    name: string;
+    plural: string;
+  }>(model.documentation, "type", "model");
   return {
     ...model,
     typeName: attributeArgs.name ?? pascalCase(model.name),
     fields: [],
     docs: cleanDocsString(model.documentation),
+    plural: attributeArgs.plural,
   };
 }
 
@@ -304,8 +304,11 @@ function transformMapping(
   options: GeneratorOptions,
 ) {
   return (mapping: PrismaDMMF.ModelMapping): DMMF.ModelMapping => {
-    const { model, plural, ...availableActions } = mapping;
-    const modelTypeName = dmmfDocument.getModelTypeName(model) ?? model;
+    const { model: modelName, ...availableActions } = mapping;
+    const modelTypeName = dmmfDocument.getModelTypeName(modelName) ?? modelName;
+    const model = dmmfDocument.datamodel.models.find(
+      it => it.name === modelName,
+    )!;
     const actions = (
       Object.entries(availableActions)
         .sort(([a], [b]) => a.localeCompare(b))
@@ -350,7 +353,7 @@ function transformMapping(
       );
 
       return {
-        name: getMappedActionName(kind, modelTypeName, options),
+        name: getMappedActionName(kind, modelTypeName, model.plural, options),
         fieldName,
         kind: kind,
         operation: getOperationKindName(kind)!,
@@ -365,7 +368,7 @@ function transformMapping(
     });
     const resolverName = `${modelTypeName}CrudResolver`;
     return {
-      model,
+      modelName,
       modelTypeName,
       actions,
       collectionName: camelCase(mapping.model),
@@ -425,6 +428,7 @@ function selectInputTypeFromTypes(dmmfDocument: DmmfDocument) {
 function getMappedActionName(
   actionName: DMMF.ModelAction,
   typeName: string,
+  overriddenPlural: string | undefined,
   options: GeneratorOptions,
 ): string {
   const defaultMappedActionName = `${actionName}${typeName}`;
@@ -432,7 +436,7 @@ function getMappedActionName(
     return defaultMappedActionName;
   }
 
-  const hasNoPlural = typeName === pluralize(typeName);
+  const hasNoPlural = !overriddenPlural && typeName === pluralize(typeName);
   if (hasNoPlural) {
     return defaultMappedActionName;
   }
@@ -442,7 +446,7 @@ function getMappedActionName(
       return camelCase(typeName);
     }
     case "findMany": {
-      return pluralize(camelCase(typeName));
+      return camelCase(overriddenPlural ?? pluralize(typeName));
     }
     default: {
       return defaultMappedActionName;

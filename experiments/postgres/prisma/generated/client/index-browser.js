@@ -118,6 +118,14 @@ exports.Prisma.DirectorScalarFieldEnum = makeEnum({
   lastName: 'lastName'
 });
 
+exports.Prisma.EquipmentOrderByRelevanceFieldEnum = makeEnum({
+  id: 'id'
+});
+
+exports.Prisma.EquipmentScalarFieldEnum = makeEnum({
+  id: 'id'
+});
+
 exports.Prisma.JsonNullValueFilter = makeEnum({
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
@@ -248,7 +256,8 @@ exports.Prisma.ModelName = makeEnum({
   Director: 'Director',
   Problem: 'Problem',
   Creator: 'Creator',
-  NativeTypeModel: 'NativeTypeModel'
+  NativeTypeModel: 'NativeTypeModel',
+  Equipment: 'Equipment'
 });
 
 /**

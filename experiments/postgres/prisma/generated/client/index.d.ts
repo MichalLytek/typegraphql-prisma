@@ -143,6 +143,14 @@ export type NativeTypeModel = {
   decimal: Prisma.Decimal | null
 }
 
+/**
+ * Model Equipment
+ * @@TypeGraphQL.plural(form: "equipments")
+ */
+export type Equipment = {
+  id: string
+}
+
 
 /**
  * Enums
@@ -396,6 +404,16 @@ export class PrismaClient<
     * ```
     */
   get nativeTypeModel(): Prisma.NativeTypeModelDelegate<GlobalReject>;
+
+  /**
+   * `prisma.equipment`: Exposes CRUD operations for the **Equipment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Equipment
+    * const equipment = await prisma.equipment.findMany()
+    * ```
+    */
+  get equipment(): Prisma.EquipmentDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -877,7 +895,8 @@ export namespace Prisma {
     Director: 'Director',
     Problem: 'Problem',
     Creator: 'Creator',
-    NativeTypeModel: 'NativeTypeModel'
+    NativeTypeModel: 'NativeTypeModel',
+    Equipment: 'Equipment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -9643,6 +9662,850 @@ export namespace Prisma {
 
 
   /**
+   * Model Equipment
+   */
+
+
+  export type AggregateEquipment = {
+    _count: EquipmentCountAggregateOutputType | null
+    _min: EquipmentMinAggregateOutputType | null
+    _max: EquipmentMaxAggregateOutputType | null
+  }
+
+  export type EquipmentMinAggregateOutputType = {
+    id: string | null
+  }
+
+  export type EquipmentMaxAggregateOutputType = {
+    id: string | null
+  }
+
+  export type EquipmentCountAggregateOutputType = {
+    id: number
+    _all: number
+  }
+
+
+  export type EquipmentMinAggregateInputType = {
+    id?: true
+  }
+
+  export type EquipmentMaxAggregateInputType = {
+    id?: true
+  }
+
+  export type EquipmentCountAggregateInputType = {
+    id?: true
+    _all?: true
+  }
+
+  export type EquipmentAggregateArgs = {
+    /**
+     * Filter which Equipment to aggregate.
+     * 
+    **/
+    where?: EquipmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Equipment to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<EquipmentOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     * 
+    **/
+    cursor?: EquipmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Equipment from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Equipment.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Equipment
+    **/
+    _count?: true | EquipmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EquipmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EquipmentMaxAggregateInputType
+  }
+
+  export type GetEquipmentAggregateType<T extends EquipmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateEquipment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEquipment[P]>
+      : GetScalarType<T[P], AggregateEquipment[P]>
+  }
+
+
+
+
+  export type EquipmentGroupByArgs = {
+    where?: EquipmentWhereInput
+    orderBy?: Enumerable<EquipmentOrderByWithAggregationInput>
+    by: Array<EquipmentScalarFieldEnum>
+    having?: EquipmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EquipmentCountAggregateInputType | true
+    _min?: EquipmentMinAggregateInputType
+    _max?: EquipmentMaxAggregateInputType
+  }
+
+
+  export type EquipmentGroupByOutputType = {
+    id: string
+    _count: EquipmentCountAggregateOutputType | null
+    _min: EquipmentMinAggregateOutputType | null
+    _max: EquipmentMaxAggregateOutputType | null
+  }
+
+  type GetEquipmentGroupByPayload<T extends EquipmentGroupByArgs> = PrismaPromise<
+    Array<
+      PickArray<EquipmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EquipmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EquipmentGroupByOutputType[P]>
+            : GetScalarType<T[P], EquipmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EquipmentSelect = {
+    id?: boolean
+  }
+
+  export type EquipmentGetPayload<
+    S extends boolean | null | undefined | EquipmentArgs,
+    U = keyof S
+      > = S extends true
+        ? Equipment
+    : S extends undefined
+    ? never
+    : S extends EquipmentArgs | EquipmentFindManyArgs
+    ?'include' extends U
+    ? Equipment 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]:
+    P extends keyof Equipment ? Equipment[P] : never
+  } 
+    : Equipment
+  : Equipment
+
+
+  type EquipmentCountArgs = Merge<
+    Omit<EquipmentFindManyArgs, 'select' | 'include'> & {
+      select?: EquipmentCountAggregateInputType | true
+    }
+  >
+
+  export interface EquipmentDelegate<GlobalRejectSettings> {
+    /**
+     * Find zero or one Equipment that matches the filter.
+     * @param {EquipmentFindUniqueArgs} args - Arguments to find a Equipment
+     * @example
+     * // Get one Equipment
+     * const equipment = await prisma.equipment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends EquipmentFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, EquipmentFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Equipment'> extends True ? CheckSelect<T, Prisma__EquipmentClient<Equipment>, Prisma__EquipmentClient<EquipmentGetPayload<T>>> : CheckSelect<T, Prisma__EquipmentClient<Equipment | null >, Prisma__EquipmentClient<EquipmentGetPayload<T> | null >>
+
+    /**
+     * Find the first Equipment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentFindFirstArgs} args - Arguments to find a Equipment
+     * @example
+     * // Get one Equipment
+     * const equipment = await prisma.equipment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends EquipmentFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, EquipmentFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Equipment'> extends True ? CheckSelect<T, Prisma__EquipmentClient<Equipment>, Prisma__EquipmentClient<EquipmentGetPayload<T>>> : CheckSelect<T, Prisma__EquipmentClient<Equipment | null >, Prisma__EquipmentClient<EquipmentGetPayload<T> | null >>
+
+    /**
+     * Find zero or more Equipment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Equipment
+     * const equipment = await prisma.equipment.findMany()
+     * 
+     * // Get first 10 Equipment
+     * const equipment = await prisma.equipment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const equipmentWithIdOnly = await prisma.equipment.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends EquipmentFindManyArgs>(
+      args?: SelectSubset<T, EquipmentFindManyArgs>
+    ): CheckSelect<T, PrismaPromise<Array<Equipment>>, PrismaPromise<Array<EquipmentGetPayload<T>>>>
+
+    /**
+     * Create a Equipment.
+     * @param {EquipmentCreateArgs} args - Arguments to create a Equipment.
+     * @example
+     * // Create one Equipment
+     * const Equipment = await prisma.equipment.create({
+     *   data: {
+     *     // ... data to create a Equipment
+     *   }
+     * })
+     * 
+    **/
+    create<T extends EquipmentCreateArgs>(
+      args: SelectSubset<T, EquipmentCreateArgs>
+    ): CheckSelect<T, Prisma__EquipmentClient<Equipment>, Prisma__EquipmentClient<EquipmentGetPayload<T>>>
+
+    /**
+     * Create many Equipment.
+     *     @param {EquipmentCreateManyArgs} args - Arguments to create many Equipment.
+     *     @example
+     *     // Create many Equipment
+     *     const equipment = await prisma.equipment.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends EquipmentCreateManyArgs>(
+      args?: SelectSubset<T, EquipmentCreateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Equipment.
+     * @param {EquipmentDeleteArgs} args - Arguments to delete one Equipment.
+     * @example
+     * // Delete one Equipment
+     * const Equipment = await prisma.equipment.delete({
+     *   where: {
+     *     // ... filter to delete one Equipment
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends EquipmentDeleteArgs>(
+      args: SelectSubset<T, EquipmentDeleteArgs>
+    ): CheckSelect<T, Prisma__EquipmentClient<Equipment>, Prisma__EquipmentClient<EquipmentGetPayload<T>>>
+
+    /**
+     * Update one Equipment.
+     * @param {EquipmentUpdateArgs} args - Arguments to update one Equipment.
+     * @example
+     * // Update one Equipment
+     * const equipment = await prisma.equipment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends EquipmentUpdateArgs>(
+      args: SelectSubset<T, EquipmentUpdateArgs>
+    ): CheckSelect<T, Prisma__EquipmentClient<Equipment>, Prisma__EquipmentClient<EquipmentGetPayload<T>>>
+
+    /**
+     * Delete zero or more Equipment.
+     * @param {EquipmentDeleteManyArgs} args - Arguments to filter Equipment to delete.
+     * @example
+     * // Delete a few Equipment
+     * const { count } = await prisma.equipment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends EquipmentDeleteManyArgs>(
+      args?: SelectSubset<T, EquipmentDeleteManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Equipment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Equipment
+     * const equipment = await prisma.equipment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends EquipmentUpdateManyArgs>(
+      args: SelectSubset<T, EquipmentUpdateManyArgs>
+    ): PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Equipment.
+     * @param {EquipmentUpsertArgs} args - Arguments to update or create a Equipment.
+     * @example
+     * // Update or create a Equipment
+     * const equipment = await prisma.equipment.upsert({
+     *   create: {
+     *     // ... data to create a Equipment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Equipment we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends EquipmentUpsertArgs>(
+      args: SelectSubset<T, EquipmentUpsertArgs>
+    ): CheckSelect<T, Prisma__EquipmentClient<Equipment>, Prisma__EquipmentClient<EquipmentGetPayload<T>>>
+
+    /**
+     * Find one Equipment that matches the filter or throw
+     * `NotFoundError` if no matches were found.
+     * @param {EquipmentFindUniqueOrThrowArgs} args - Arguments to find a Equipment
+     * @example
+     * // Get one Equipment
+     * const equipment = await prisma.equipment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends EquipmentFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, EquipmentFindUniqueOrThrowArgs>
+    ): CheckSelect<T, Prisma__EquipmentClient<Equipment>, Prisma__EquipmentClient<EquipmentGetPayload<T>>>
+
+    /**
+     * Find the first Equipment that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentFindFirstOrThrowArgs} args - Arguments to find a Equipment
+     * @example
+     * // Get one Equipment
+     * const equipment = await prisma.equipment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends EquipmentFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, EquipmentFindFirstOrThrowArgs>
+    ): CheckSelect<T, Prisma__EquipmentClient<Equipment>, Prisma__EquipmentClient<EquipmentGetPayload<T>>>
+
+    /**
+     * Count the number of Equipment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentCountArgs} args - Arguments to filter Equipment to count.
+     * @example
+     * // Count the number of Equipment
+     * const count = await prisma.equipment.count({
+     *   where: {
+     *     // ... the filter for the Equipment we want to count
+     *   }
+     * })
+    **/
+    count<T extends EquipmentCountArgs>(
+      args?: Subset<T, EquipmentCountArgs>,
+    ): PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EquipmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Equipment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EquipmentAggregateArgs>(args: Subset<T, EquipmentAggregateArgs>): PrismaPromise<GetEquipmentAggregateType<T>>
+
+    /**
+     * Group by Equipment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EquipmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EquipmentGroupByArgs['orderBy'] }
+        : { orderBy?: EquipmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EquipmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEquipmentGroupByPayload<T> : PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Equipment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__EquipmentClient<T> implements PrismaPromise<T> {
+    [prisma]: true;
+    private readonly _dmmf;
+    private readonly _fetcher;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Equipment base type for findUnique actions
+   */
+  export type EquipmentFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect | null
+    /**
+     * Filter, which Equipment to fetch.
+     * 
+    **/
+    where: EquipmentWhereUniqueInput
+  }
+
+  /**
+   * Equipment: findUnique
+   */
+  export interface EquipmentFindUniqueArgs extends EquipmentFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Equipment base type for findFirst actions
+   */
+  export type EquipmentFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect | null
+    /**
+     * Filter, which Equipment to fetch.
+     * 
+    **/
+    where?: EquipmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Equipment to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<EquipmentOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Equipment.
+     * 
+    **/
+    cursor?: EquipmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Equipment from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Equipment.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Equipment.
+     * 
+    **/
+    distinct?: Enumerable<EquipmentScalarFieldEnum>
+  }
+
+  /**
+   * Equipment: findFirst
+   */
+  export interface EquipmentFindFirstArgs extends EquipmentFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Equipment findMany
+   */
+  export type EquipmentFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect | null
+    /**
+     * Filter, which Equipment to fetch.
+     * 
+    **/
+    where?: EquipmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Equipment to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<EquipmentOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Equipment.
+     * 
+    **/
+    cursor?: EquipmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Equipment from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Equipment.
+     * 
+    **/
+    skip?: number
+    distinct?: Enumerable<EquipmentScalarFieldEnum>
+  }
+
+
+  /**
+   * Equipment create
+   */
+  export type EquipmentCreateArgs = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect | null
+    /**
+     * The data needed to create a Equipment.
+     * 
+    **/
+    data: XOR<EquipmentCreateInput, EquipmentUncheckedCreateInput>
+  }
+
+
+  /**
+   * Equipment createMany
+   */
+  export type EquipmentCreateManyArgs = {
+    /**
+     * The data used to create many Equipment.
+     * 
+    **/
+    data: Enumerable<EquipmentCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Equipment update
+   */
+  export type EquipmentUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect | null
+    /**
+     * The data needed to update a Equipment.
+     * 
+    **/
+    data: XOR<EquipmentUpdateInput, EquipmentUncheckedUpdateInput>
+    /**
+     * Choose, which Equipment to update.
+     * 
+    **/
+    where: EquipmentWhereUniqueInput
+  }
+
+
+  /**
+   * Equipment updateMany
+   */
+  export type EquipmentUpdateManyArgs = {
+    /**
+     * The data used to update Equipment.
+     * 
+    **/
+    data: XOR<EquipmentUpdateManyMutationInput, EquipmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Equipment to update
+     * 
+    **/
+    where?: EquipmentWhereInput
+  }
+
+
+  /**
+   * Equipment upsert
+   */
+  export type EquipmentUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect | null
+    /**
+     * The filter to search for the Equipment to update in case it exists.
+     * 
+    **/
+    where: EquipmentWhereUniqueInput
+    /**
+     * In case the Equipment found by the `where` argument doesn't exist, create a new Equipment with this data.
+     * 
+    **/
+    create: XOR<EquipmentCreateInput, EquipmentUncheckedCreateInput>
+    /**
+     * In case the Equipment was found with the provided `where` argument, update it with this data.
+     * 
+    **/
+    update: XOR<EquipmentUpdateInput, EquipmentUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Equipment delete
+   */
+  export type EquipmentDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect | null
+    /**
+     * Filter which Equipment to delete.
+     * 
+    **/
+    where: EquipmentWhereUniqueInput
+  }
+
+
+  /**
+   * Equipment deleteMany
+   */
+  export type EquipmentDeleteManyArgs = {
+    /**
+     * Filter which Equipment to delete
+     * 
+    **/
+    where?: EquipmentWhereInput
+  }
+
+
+  /**
+   * Equipment: findUniqueOrThrow
+   */
+  export type EquipmentFindUniqueOrThrowArgs = EquipmentFindUniqueArgsBase
+      
+
+  /**
+   * Equipment: findFirstOrThrow
+   */
+  export type EquipmentFindFirstOrThrowArgs = EquipmentFindFirstArgsBase
+      
+
+  /**
+   * Equipment without action
+   */
+  export type EquipmentArgs = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -9695,6 +10558,20 @@ export namespace Prisma {
   };
 
   export type DirectorScalarFieldEnum = (typeof DirectorScalarFieldEnum)[keyof typeof DirectorScalarFieldEnum]
+
+
+  export const EquipmentOrderByRelevanceFieldEnum: {
+    id: 'id'
+  };
+
+  export type EquipmentOrderByRelevanceFieldEnum = (typeof EquipmentOrderByRelevanceFieldEnum)[keyof typeof EquipmentOrderByRelevanceFieldEnum]
+
+
+  export const EquipmentScalarFieldEnum: {
+    id: 'id'
+  };
+
+  export type EquipmentScalarFieldEnum = (typeof EquipmentScalarFieldEnum)[keyof typeof EquipmentScalarFieldEnum]
 
 
   export const JsonNullValueFilter: {
@@ -10291,6 +11168,36 @@ export namespace Prisma {
     decimal?: DecimalNullableWithAggregatesFilter | Decimal | DecimalJsLike | number | string | null
   }
 
+  export type EquipmentWhereInput = {
+    AND?: Enumerable<EquipmentWhereInput>
+    OR?: Enumerable<EquipmentWhereInput>
+    NOT?: Enumerable<EquipmentWhereInput>
+    id?: StringFilter | string
+  }
+
+  export type EquipmentOrderByWithRelationAndSearchRelevanceInput = {
+    id?: SortOrder
+    _relevance?: EquipmentOrderByRelevanceInput
+  }
+
+  export type EquipmentWhereUniqueInput = {
+    id?: string
+  }
+
+  export type EquipmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    _count?: EquipmentCountOrderByAggregateInput
+    _max?: EquipmentMaxOrderByAggregateInput
+    _min?: EquipmentMinOrderByAggregateInput
+  }
+
+  export type EquipmentScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<EquipmentScalarWhereWithAggregatesInput>
+    OR?: Enumerable<EquipmentScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<EquipmentScalarWhereWithAggregatesInput>
+    id?: StringWithAggregatesFilter | string
+  }
+
   export type UserCreateInput = {
     email: string
     name?: string | null
@@ -10763,6 +11670,34 @@ export namespace Prisma {
     bigInt?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     byteA?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     decimal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type EquipmentCreateInput = {
+    id?: string
+  }
+
+  export type EquipmentUncheckedCreateInput = {
+    id?: string
+  }
+
+  export type EquipmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EquipmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EquipmentCreateManyInput = {
+    id?: string
+  }
+
+  export type EquipmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EquipmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter = {
@@ -11508,6 +12443,24 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter
     _min?: NestedDecimalNullableFilter
     _max?: NestedDecimalNullableFilter
+  }
+
+  export type EquipmentOrderByRelevanceInput = {
+    fields: Enumerable<EquipmentOrderByRelevanceFieldEnum>
+    sort: SortOrder
+    search: string
+  }
+
+  export type EquipmentCountOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EquipmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EquipmentMinOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type postCreateNestedManyWithoutAuthorInput = {

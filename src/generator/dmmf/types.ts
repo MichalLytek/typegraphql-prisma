@@ -42,6 +42,7 @@ export namespace DMMF {
     // additional props
     typeName: string;
     docs: string | undefined;
+    plural: string | undefined;
   }
   export type FieldKind = "scalar" | "object" | "enum" | "unsupported";
   export type FieldNamespace = "model" | "prisma";
@@ -187,7 +188,7 @@ export namespace DMMF {
     typeName: string;
   }
   export interface ModelMapping {
-    model: string;
+    // model: string;
     // plural: string;
     // findUnique?: string | null;
     // findFirst?: string | null;
@@ -206,6 +207,7 @@ export namespace DMMF {
     // aggregateRaw?: string | null;
 
     // additional props
+    modelName: string;
     actions: Action[];
     collectionName: string;
     resolverName: string;

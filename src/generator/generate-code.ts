@@ -352,7 +352,7 @@ export default async function generateCode(
     log("Generating crud resolvers...");
     dmmfDocument.modelMappings.forEach(async mapping => {
       const model = dmmfDocument.datamodel.models.find(
-        model => model.name === mapping.model,
+        model => model.name === mapping.modelName,
       )!;
       generateCrudResolverClassFromMapping(
         project,
@@ -363,7 +363,7 @@ export default async function generateCode(
       );
       mapping.actions.forEach(async action => {
         const model = dmmfDocument.datamodel.models.find(
-          model => model.name === mapping.model,
+          model => model.name === mapping.modelName,
         )!;
         generateActionResolverClass(
           project,
@@ -378,7 +378,7 @@ export default async function generateCode(
     const generateMappingData =
       dmmfDocument.modelMappings.map<GenerateMappingData>(mapping => {
         const model = dmmfDocument.datamodel.models.find(
-          model => model.name === mapping.model,
+          model => model.name === mapping.modelName,
         )!;
         return {
           modelName: model.typeName,
@@ -434,7 +434,7 @@ export default async function generateCode(
 
       if (actionsWithArgs.length) {
         const model = dmmfDocument.datamodel.models.find(
-          model => model.name === mapping.model,
+          model => model.name === mapping.modelName,
         )!;
         const resolverDirPath = path.resolve(
           baseDirPath,

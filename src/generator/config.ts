@@ -2,8 +2,8 @@ import { DMMF } from "./dmmf/types";
 
 // export type BaseKeys = keyof Pick<DMMF.ModelMapping, "model" | "plural">;
 // export const baseKeys: BaseKeys[] = ["model", "plural"];
-export type BaseKeys = keyof Pick<DMMF.ModelMapping, "model">;
-export const baseKeys: BaseKeys[] = ["model"];
+export type BaseKeys = keyof Pick<DMMF.ModelMapping, "modelName">;
+export const baseKeys: BaseKeys[] = ["modelName"];
 
 export type ModelKeys = keyof Exclude<DMMF.ModelMapping, BaseKeys>;
 

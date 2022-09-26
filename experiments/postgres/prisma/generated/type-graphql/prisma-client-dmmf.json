@@ -896,6 +896,34 @@
         "uniqueFields": [],
         "uniqueIndexes": [],
         "isGenerated": false
+      },
+      {
+        "name": "Equipment",
+        "dbName": null,
+        "fields": [
+          {
+            "name": "id",
+            "kind": "scalar",
+            "isList": false,
+            "isRequired": true,
+            "isUnique": false,
+            "isId": true,
+            "isReadOnly": false,
+            "hasDefaultValue": true,
+            "type": "String",
+            "default": {
+              "name": "cuid",
+              "args": []
+            },
+            "isGenerated": false,
+            "isUpdatedAt": false
+          }
+        ],
+        "primaryKey": null,
+        "uniqueFields": [],
+        "uniqueIndexes": [],
+        "isGenerated": false,
+        "documentation": "@@TypeGraphQL.plural(form: \"equipments\")"
       }
     ],
     "types": []
@@ -5932,6 +5960,285 @@
                 },
                 {
                   "type": "Null",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentWhereInput",
+          "meta": {
+            "source": "Equipment"
+          },
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "AND",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "EquipmentWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "OR",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "NOT",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "EquipmentWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "StringFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "_relevance",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentOrderByRelevanceInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentWhereUniqueInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentOrderByWithAggregationInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 0
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "_count",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentCountOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "_max",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentMaxOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "_min",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentMinOrderByAggregateInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Equipment"
+          },
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "AND",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentScalarWhereWithAggregatesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "EquipmentScalarWhereWithAggregatesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "OR",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentScalarWhereWithAggregatesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "NOT",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentScalarWhereWithAggregatesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "EquipmentScalarWhereWithAggregatesInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "StringWithAggregatesFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "String",
                   "location": "scalar",
                   "isList": false
                 }
@@ -11122,6 +11429,177 @@
                 {
                   "type": "Null",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentCreateInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentUncheckedCreateInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentUpdateInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
+                  "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentUncheckedUpdateInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
+                  "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentCreateManyInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentUpdateManyMutationInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
+                  "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentUncheckedUpdateManyInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
+                  "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -18228,6 +18706,125 @@
                   "type": "NestedDecimalNullableFilter",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentOrderByRelevanceInput",
+          "constraints": {
+            "maxNumFields": null,
+            "minNumFields": null
+          },
+          "fields": [
+            {
+              "name": "fields",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "EquipmentOrderByRelevanceFieldEnum",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                },
+                {
+                  "type": "EquipmentOrderByRelevanceFieldEnum",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": true
+                }
+              ]
+            },
+            {
+              "name": "sort",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "search",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentCountOrderByAggregateInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentMaxOrderByAggregateInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EquipmentMinOrderByAggregateInput",
+          "constraints": {
+            "maxNumFields": 1,
+            "minNumFields": 1
+          },
+          "fields": [
+            {
+              "name": "id",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -37106,6 +37703,400 @@
                 "location": "outputObjectTypes",
                 "isList": false
               }
+            },
+            {
+              "name": "findFirstEquipment",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "distinct",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentScalarFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    }
+                  ]
+                }
+              ],
+              "isNullable": true,
+              "outputType": {
+                "type": "Equipment",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "findManyEquipment",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "distinct",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentScalarFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "Equipment",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
+              "name": "aggregateEquipment",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "cursor",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "AggregateEquipment",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "groupByEquipment",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "orderBy",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentOrderByWithAggregationInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "EquipmentOrderByWithAggregationInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "by",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentScalarFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": true
+                    },
+                    {
+                      "type": "EquipmentScalarFieldEnum",
+                      "namespace": "prisma",
+                      "location": "enumTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "having",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentScalarWhereWithAggregatesInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "take",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "skip",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Int",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "EquipmentGroupByOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
+              "name": "findUniqueEquipment",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": true,
+              "outputType": {
+                "type": "Equipment",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
             }
           ]
         },
@@ -39534,6 +40525,275 @@
               }
             },
             {
+              "name": "createOneEquipment",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentCreateInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "EquipmentUncheckedCreateInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "Equipment",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "upsertOneEquipment",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "create",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentCreateInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "EquipmentUncheckedCreateInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "update",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentUpdateInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "EquipmentUncheckedUpdateInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "Equipment",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "createManyEquipment",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "AffectedRowsOutput",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "deleteOneEquipment",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": true,
+              "outputType": {
+                "type": "Equipment",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "updateOneEquipment",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentUpdateInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "EquipmentUncheckedUpdateInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "where",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereUniqueInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": true,
+              "outputType": {
+                "type": "Equipment",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "updateManyEquipment",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentUpdateManyMutationInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "EquipmentUncheckedUpdateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                },
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "AffectedRowsOutput",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "deleteManyEquipment",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "AffectedRowsOutput",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
               "name": "executeRaw",
               "args": [
                 {
@@ -40948,6 +42208,92 @@
               "isNullable": true,
               "outputType": {
                 "type": "NativeTypeModelMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "AggregateEquipment",
+          "fields": [
+            {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "EquipmentCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "EquipmentMinAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "EquipmentMaxAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "EquipmentGroupByOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_count",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "EquipmentCountAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "_min",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "EquipmentMinAggregateOutputType",
+                "namespace": "prisma",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "_max",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "EquipmentMaxAggregateOutputType",
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
@@ -42758,6 +44104,61 @@
               }
             }
           ]
+        },
+        {
+          "name": "EquipmentCountAggregateOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "_all",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "EquipmentMinAggregateOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "EquipmentMaxAggregateOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
         }
       ],
       "model": [
@@ -43859,6 +45260,21 @@
               }
             }
           ]
+        },
+        {
+          "name": "Equipment",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
         }
       ]
     },
@@ -43904,6 +45320,18 @@
           "values": [
             "firstName",
             "lastName"
+          ]
+        },
+        {
+          "name": "EquipmentOrderByRelevanceFieldEnum",
+          "values": [
+            "id"
+          ]
+        },
+        {
+          "name": "EquipmentScalarFieldEnum",
+          "values": [
+            "id"
           ]
         },
         {
@@ -44208,6 +45636,21 @@
         "updateMany": "updateManyNativeTypeModel",
         "updateOne": "updateOneNativeTypeModel",
         "upsertOne": "upsertOneNativeTypeModel"
+      },
+      {
+        "model": "Equipment",
+        "aggregate": "aggregateEquipment",
+        "createMany": "createManyEquipment",
+        "createOne": "createOneEquipment",
+        "deleteMany": "deleteManyEquipment",
+        "deleteOne": "deleteOneEquipment",
+        "findFirst": "findFirstEquipment",
+        "findMany": "findManyEquipment",
+        "findUnique": "findUniqueEquipment",
+        "groupBy": "groupByEquipment",
+        "updateMany": "updateManyEquipment",
+        "updateOne": "updateOneEquipment",
+        "upsertOne": "upsertOneEquipment"
       }
     ],
     "otherOperations": {

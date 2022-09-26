@@ -1,0 +1,104 @@
+---
+title: Overriding plural form of model name
+sidebar_label: Custom plural form
+sidebar_position: 15
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+In some cases, the noun used as the model name might not have a proper plural form. For example, the word "fish" is not pluralized to "fishes". In such cases, you can override the plural form by adding a `plural` argument to the `@@TypeGraphQL.type` comment attribute, e.g.:
+
+```prisma
+// highlight-next-line
+/// @@TypeGraphQL.type(plural: "StaffMembers")
+model Staff {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+```
+
+This way, the generated resolvers for `Staff` model will use the plural form of `StaffMembers`, so that it won't generate anymore actions named `findManyStaff` or `findUniqueStaff` as it would do by default, e.g.:
+
+<Tabs>
+<TabItem value="plural" label="Overridden plural">
+
+```ts
+@TypeGraphQL.Resolver(_of => Staff)
+export class StaffCrudResolver {
+  @TypeGraphQL.Query(_returns => [Staff], {
+    nullable: false,
+  })
+  // highlight-next-line
+  async staffMembers(
+    @TypeGraphQL.Ctx() ctx: any,
+    @TypeGraphQL.Info() info: GraphQLResolveInfo,
+    @TypeGraphQL.Args() args: FindManyStaffArgs,
+  ): Promise<Staff[]> {
+    const { _count } = transformFields(graphqlFields(info as any));
+    return getPrismaFromContext(ctx).staff.findMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Staff, {
+    nullable: true,
+  })
+  // highlight-next-line
+  async staff(
+    @TypeGraphQL.Ctx() ctx: any,
+    @TypeGraphQL.Info() info: GraphQLResolveInfo,
+    @TypeGraphQL.Args() args: FindUniqueStaffArgs,
+  ): Promise<Staff | null> {
+    const { _count } = transformFields(graphqlFields(info as any));
+    return getPrismaFromContext(ctx).staff.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+```
+
+</TabItem>
+<TabItem value="default" label="Default">
+
+```ts
+@TypeGraphQL.Resolver(_of => Staff)
+export class StaffCrudResolver {
+  @TypeGraphQL.Query(_returns => [Staff], {
+    nullable: false,
+  })
+  // highlight-next-line
+  async findManyStaff(
+    @TypeGraphQL.Ctx() ctx: any,
+    @TypeGraphQL.Info() info: GraphQLResolveInfo,
+    @TypeGraphQL.Args() args: FindManyStaffArgs,
+  ): Promise<Staff[]> {
+    const { _count } = transformFields(graphqlFields(info as any));
+    return getPrismaFromContext(ctx).staff.findMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Staff, {
+    nullable: true,
+  })
+  // highlight-next-line
+  async findUniqueStaff(
+    @TypeGraphQL.Ctx() ctx: any,
+    @TypeGraphQL.Info() info: GraphQLResolveInfo,
+    @TypeGraphQL.Args() args: FindUniqueStaffArgs,
+  ): Promise<Staff | null> {
+    const { _count } = transformFields(graphqlFields(info as any));
+    return getPrismaFromContext(ctx).staff.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+}
+```
+
+</TabItem>
+</Tabs>

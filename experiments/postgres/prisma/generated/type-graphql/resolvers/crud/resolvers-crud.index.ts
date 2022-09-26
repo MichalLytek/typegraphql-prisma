@@ -1,6 +1,7 @@
 export { CategoryCrudResolver } from "./Category/CategoryCrudResolver";
 export { CreatorCrudResolver } from "./Creator/CreatorCrudResolver";
 export { DirectorCrudResolver } from "./Director/DirectorCrudResolver";
+export { EquipmentCrudResolver } from "./Equipment/EquipmentCrudResolver";
 export { MainUserCrudResolver } from "./MainUser/MainUserCrudResolver";
 export { MovieCrudResolver } from "./Movie/MovieCrudResolver";
 export { NativeTypeModelCrudResolver } from "./NativeTypeModel/NativeTypeModelCrudResolver";
