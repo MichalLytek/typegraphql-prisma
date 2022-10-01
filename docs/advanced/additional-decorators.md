@@ -155,7 +155,7 @@ applyRelationResolversEnhanceMap({
 });
 ```
 
-In case of other output types like `AggregateFooBar`, you can use the same pattern but this time using the `applyOutputTypeEnhanceMap` function and `OutputTypeConfig` or `OutputTypesEnhanceMap` types:
+In case of other output types like `AggregateFooBar`, you can use the same pattern but this time using the `applyOutputTypesEnhanceMap` function and `OutputTypeConfig` or `OutputTypesEnhanceMap` types:
 
 ```ts
 const aggregateClientConfig: OutputTypeConfig<"AggregateClient"> = {
@@ -164,7 +164,7 @@ const aggregateClientConfig: OutputTypeConfig<"AggregateClient"> = {
   },
 };
 
-applyOutputTypeEnhanceMap({
+applyOutputTypesEnhanceMap({
   // separate config
   AggregateClient: aggregateClientConfig,
   // or an inline one
