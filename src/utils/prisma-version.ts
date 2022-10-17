@@ -31,7 +31,7 @@ export function ensureInstalledCorrectPrismaPackage() {
         `so please ensure that you have installed a version of Prisma ` +
         `that meets the requirement: "${versionRequirement}". ` +
         `Find out more about that requirement in the docs: ` +
-        `https://prisma.typegraphql.com/docs/advanced/prisma-version`,
+        `https://prisma.typegraphql.com/docs/basics/prisma-version`,
     );
   }
 }
