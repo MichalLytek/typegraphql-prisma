@@ -38,5 +38,5 @@ describe("picking prisma actions", () => {
     );
 
     expect(graphQLSchemaSDL).toMatchSnapshot("graphQLSchemaSDL");
-  }, 30000);
+  }, 60000);
 });
