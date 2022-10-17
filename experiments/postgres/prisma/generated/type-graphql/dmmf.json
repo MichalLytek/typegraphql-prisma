@@ -923,7 +923,7 @@
         "uniqueFields": [],
         "uniqueIndexes": [],
         "isGenerated": false,
-        "documentation": "@@TypeGraphQL.plural(form: \"equipments\")"
+        "documentation": "@@TypeGraphQL.type(plural: \"equipments\")"
       }
     ],
     "types": []

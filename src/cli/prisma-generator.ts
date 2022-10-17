@@ -43,9 +43,7 @@ export async function generate(options: GeneratorOptions) {
       "emitOnly",
       ALL_EMIT_BLOCK_KINDS,
     ),
-    useSimpleUpdateInputs: parseStringBoolean(
-      generatorConfig.useSimpleUpdateInputs,
-    ),
+    useSimpleInputs: parseStringBoolean(generatorConfig.useSimpleInputs),
     customPrismaImportPath: generatorConfig.customPrismaImportPath,
     contextPrismaKey: generatorConfig.contextPrismaKey,
   };

@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { UserAddressCreateEnvelopeInput } from "../inputs/UserAddressCreateEnvelopeInput";
+import { UserAddressCreateInput } from "../inputs/UserAddressCreateInput";
 
 @TypeGraphQL.InputType("UserCreateManyInput", {
   isAbstract: true
@@ -23,8 +23,8 @@ export class UserCreateManyInput {
   })
   age?: number | undefined;
 
-  @TypeGraphQL.Field(_type => UserAddressCreateEnvelopeInput, {
+  @TypeGraphQL.Field(_type => UserAddressCreateInput, {
     nullable: false
   })
-  address!: UserAddressCreateEnvelopeInput;
+  address!: UserAddressCreateInput;
 }

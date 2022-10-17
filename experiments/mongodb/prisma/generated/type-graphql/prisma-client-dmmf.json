@@ -323,6 +323,9 @@
       "prisma": [
         {
           "name": "PostWhereInput",
+          "meta": {
+            "source": "Post"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -751,6 +754,9 @@
         },
         {
           "name": "PostScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Post"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -901,6 +907,9 @@
         },
         {
           "name": "CommentWhereInput",
+          "meta": {
+            "source": "Comment"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -1203,6 +1212,9 @@
         },
         {
           "name": "CommentScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "Comment"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -1317,6 +1329,9 @@
         },
         {
           "name": "UserWhereInput",
+          "meta": {
+            "source": "User"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -1688,6 +1703,9 @@
         },
         {
           "name": "UserScalarWhereWithAggregatesInput",
+          "meta": {
+            "source": "User"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -7157,6 +7175,9 @@
         },
         {
           "name": "UserAddressWhereInput",
+          "meta": {
+            "source": "UserAddress"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -8077,6 +8098,9 @@
         },
         {
           "name": "CommentScalarWhereInput",
+          "meta": {
+            "source": "Comment"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -9173,6 +9197,9 @@
         },
         {
           "name": "PostScalarWhereInput",
+          "meta": {
+            "source": "Post"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": null
@@ -13219,7 +13246,8 @@
           ]
         }
       ]
-    }
+    },
+    "fieldRefTypes": {}
   },
   "mappings": {
     "modelOperations": [

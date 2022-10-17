@@ -381,15 +381,20 @@ function selectInputTypeFromTypes(dmmfDocument: DmmfDocument) {
   return (
     inputTypes: PrismaDMMF.SchemaArgInputType[],
   ): DMMF.SchemaArgInputType => {
-    const { useUncheckedScalarInputs, useSimpleUpdateInputs } =
-      dmmfDocument.options;
+    const { useUncheckedScalarInputs, useSimpleInputs } = dmmfDocument.options;
     let possibleInputTypes: PrismaDMMF.SchemaArgInputType[];
     possibleInputTypes = inputTypes.filter(
       it =>
         it.location === "inputObjectTypes" &&
-        // skip `XYZOperationsInput` when simple/flat inputs are enabled
-        (!useSimpleUpdateInputs ||
-          !(it.type as string).includes("OperationsInput")),
+        // skip inputs with `set` and other fields when simple/flat inputs are enabled
+        (!useSimpleInputs ||
+          !(
+            (it.type as string).includes("OperationsInput") || // postgres specific
+            // mongo specific
+            (it.type as string).includes("CreateEnvelopeInput") ||
+            /.+Create.+Input/.test(it.type as string) ||
+            /.+Update.+Input/.test(it.type as string)
+          )),
     );
     if (possibleInputTypes.length === 0) {
       possibleInputTypes = inputTypes.filter(

@@ -73,7 +73,7 @@ export type User = {
 export class PrismaClient<
   T extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
   U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never,
-  GlobalReject = 'rejectOnNotFound' extends keyof T
+  GlobalReject extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined = 'rejectOnNotFound' extends keyof T
     ? T['rejectOnNotFound']
     : false
       > {
@@ -235,8 +235,8 @@ export namespace Prisma {
   export import MetricHistogramBucket = runtime.MetricHistogramBucket
 
   /**
-   * Prisma Client JS version: 4.2.0
-   * Query Engine version: 2920a97877e12e055c1333079b8d19cee7f33826
+   * Prisma Client JS version: 4.3.1
+   * Query Engine version: c875e43600dfe042452e0b868f7a48b817b9640b
    */
   export type PrismaVersion = {
     client: string
@@ -455,7 +455,7 @@ export namespace Prisma {
   ? False
   : T extends Date
   ? False
-  : T extends Buffer
+  : T extends Uint8Array
   ? False
   : T extends BigInt
   ? False
@@ -651,6 +651,11 @@ export namespace Prisma {
    * Exclude all keys with underscores
    */
   type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
+
+  export import FieldRef = runtime.FieldRef
+
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
 
   class PrismaClientFetcher {
     private readonly prisma;
@@ -960,7 +965,8 @@ export namespace Prisma {
 
 
 
-  export interface UserAddressDelegate<GlobalRejectSettings> {
+  export interface UserAddressDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
 
 
 
@@ -1014,6 +1020,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -1223,16 +1231,16 @@ export namespace Prisma {
     ?'include' extends U
     ? Post  & {
     [P in TrueKeys<S['include']>]:
-        P extends 'comments' ? Array < CommentGetPayload<S['include'][P]>>  :
-        P extends 'author' ? UserGetPayload<S['include'][P]> :
-        P extends '_count' ? PostCountOutputTypeGetPayload<S['include'][P]> :  never
+        P extends 'comments' ? Array < CommentGetPayload<Exclude<S['include'], undefined | null>[P]>>  :
+        P extends 'author' ? UserGetPayload<Exclude<S['include'], undefined | null>[P]> :
+        P extends '_count' ? PostCountOutputTypeGetPayload<Exclude<S['include'], undefined | null>[P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-        P extends 'comments' ? Array < CommentGetPayload<S['select'][P]>>  :
-        P extends 'author' ? UserGetPayload<S['select'][P]> :
-        P extends '_count' ? PostCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Post ? Post[P] : never
+        P extends 'comments' ? Array < CommentGetPayload<Exclude<S['select'], undefined | null>[P]>>  :
+        P extends 'author' ? UserGetPayload<Exclude<S['select'], undefined | null>[P]> :
+        P extends '_count' ? PostCountOutputTypeGetPayload<Exclude<S['select'], undefined | null>[P]> :  P extends keyof Post ? Post[P] : never
   } 
     : Post
   : Post
@@ -1244,7 +1252,7 @@ export namespace Prisma {
     }
   >
 
-  export interface PostDelegate<GlobalRejectSettings> {
+  export interface PostDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
     /**
      * Find zero or one Post that matches the filter.
      * @param {PostFindUniqueArgs} args - Arguments to find a Post
@@ -1608,6 +1616,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -1659,6 +1668,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -2195,12 +2206,12 @@ export namespace Prisma {
     ?'include' extends U
     ? Comment  & {
     [P in TrueKeys<S['include']>]:
-        P extends 'post' ? PostGetPayload<S['include'][P]> :  never
+        P extends 'post' ? PostGetPayload<Exclude<S['include'], undefined | null>[P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-        P extends 'post' ? PostGetPayload<S['select'][P]> :  P extends keyof Comment ? Comment[P] : never
+        P extends 'post' ? PostGetPayload<Exclude<S['select'], undefined | null>[P]> :  P extends keyof Comment ? Comment[P] : never
   } 
     : Comment
   : Comment
@@ -2212,7 +2223,7 @@ export namespace Prisma {
     }
   >
 
-  export interface CommentDelegate<GlobalRejectSettings> {
+  export interface CommentDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
     /**
      * Find zero or one Comment that matches the filter.
      * @param {CommentFindUniqueArgs} args - Arguments to find a Comment
@@ -2576,6 +2587,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, CommentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommentGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -2625,6 +2637,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 
@@ -3198,16 +3212,15 @@ export namespace Prisma {
     ?'include' extends U
     ? User  & {
     [P in TrueKeys<S['include']>]:
-        P extends 'address' ? UserAddressGetPayload<S['include'][P]> :
-        P extends 'posts' ? Array < PostGetPayload<S['include'][P]>>  :
-        P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
+        P extends 'posts' ? Array < PostGetPayload<Exclude<S['include'], undefined | null>[P]>>  :
+        P extends '_count' ? UserCountOutputTypeGetPayload<Exclude<S['include'], undefined | null>[P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-        P extends 'address' ? UserAddressGetPayload<S['select'][P]> :
-        P extends 'posts' ? Array < PostGetPayload<S['select'][P]>>  :
-        P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
+        P extends 'address' ? UserAddressGetPayload<Exclude<S['select'], undefined | null>[P]> :
+        P extends 'posts' ? Array < PostGetPayload<Exclude<S['select'], undefined | null>[P]>>  :
+        P extends '_count' ? UserCountOutputTypeGetPayload<Exclude<S['select'], undefined | null>[P]> :  P extends keyof User ? User[P] : never
   } 
     : User
   : User
@@ -3219,7 +3232,7 @@ export namespace Prisma {
     }
   >
 
-  export interface UserDelegate<GlobalRejectSettings> {
+  export interface UserDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -3583,6 +3596,7 @@ export namespace Prisma {
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
     >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : PrismaPromise<InputErrors>
+
   }
 
   /**
@@ -3634,6 +3648,8 @@ export namespace Prisma {
      */
     finally(onfinally?: (() => void) | undefined | null): Promise<T>;
   }
+
+
 
   // Custom InputTypes
 

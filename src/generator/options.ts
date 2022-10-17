@@ -10,7 +10,7 @@ export interface ExternalGeneratorOptions {
   emitOnly?: EmitBlockKind[];
   customPrismaImportPath?: string;
   contextPrismaKey?: string;
-  useSimpleUpdateInputs?: boolean;
+  useSimpleInputs?: boolean;
 }
 
 export interface InternalGeneratorOptions {

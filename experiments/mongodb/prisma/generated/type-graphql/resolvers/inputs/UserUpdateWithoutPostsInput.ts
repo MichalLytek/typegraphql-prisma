@@ -2,26 +2,24 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { NullableIntFieldUpdateOperationsInput } from "../inputs/NullableIntFieldUpdateOperationsInput";
-import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserAddressUpdateEnvelopeInput } from "../inputs/UserAddressUpdateEnvelopeInput";
+import { UserAddressCreateInput } from "../inputs/UserAddressCreateInput";
 
 @TypeGraphQL.InputType("UserUpdateWithoutPostsInput", {
   isAbstract: true
 })
 export class UserUpdateWithoutPostsInput {
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  email?: StringFieldUpdateOperationsInput | undefined;
+  email?: string | undefined;
 
-  @TypeGraphQL.Field(_type => NullableIntFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
   })
-  age?: NullableIntFieldUpdateOperationsInput | undefined;
+  age?: number | undefined;
 
-  @TypeGraphQL.Field(_type => UserAddressUpdateEnvelopeInput, {
+  @TypeGraphQL.Field(_type => UserAddressCreateInput, {
     nullable: true
   })
-  address?: UserAddressUpdateEnvelopeInput | undefined;
+  address?: UserAddressCreateInput | undefined;
 }

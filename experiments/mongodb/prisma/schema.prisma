@@ -19,6 +19,7 @@ generator typegraphql {
   // useUncheckedScalarInputs = false
   // emitIdAsIDType           = true
   customPrismaImportPath = "../client"
+  useSimpleInputs        = true
 }
 
 model Post {

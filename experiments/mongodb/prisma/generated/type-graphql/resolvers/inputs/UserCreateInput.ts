@@ -3,7 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { PostCreateNestedManyWithoutAuthorInput } from "../inputs/PostCreateNestedManyWithoutAuthorInput";
-import { UserAddressCreateEnvelopeInput } from "../inputs/UserAddressCreateEnvelopeInput";
+import { UserAddressCreateInput } from "../inputs/UserAddressCreateInput";
 
 @TypeGraphQL.InputType("UserCreateInput", {
   isAbstract: true
@@ -24,10 +24,10 @@ export class UserCreateInput {
   })
   age?: number | undefined;
 
-  @TypeGraphQL.Field(_type => UserAddressCreateEnvelopeInput, {
+  @TypeGraphQL.Field(_type => UserAddressCreateInput, {
     nullable: false
   })
-  address!: UserAddressCreateEnvelopeInput;
+  address!: UserAddressCreateInput;
 
   @TypeGraphQL.Field(_type => PostCreateNestedManyWithoutAuthorInput, {
     nullable: true

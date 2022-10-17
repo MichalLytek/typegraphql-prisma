@@ -2,8 +2,6 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { MainUserUpdatealiasesInput } from "../inputs/MainUserUpdatealiasesInput";
-import { MainUserUpdategradesInput } from "../inputs/MainUserUpdategradesInput";
 import { PostUpdateManyWithoutAuthorNestedInput } from "../inputs/PostUpdateManyWithoutAuthorNestedInput";
 import { Role } from "../../enums/Role";
 
@@ -37,15 +35,15 @@ export class MainUserUpdateWithoutEditorPostsInput {
   })
   role?: "USER" | "ADMIN" | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserUpdategradesInput, {
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: true
   })
-  grades?: MainUserUpdategradesInput | undefined;
+  grades?: number[] | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserUpdatealiasesInput, {
+  @TypeGraphQL.Field(_type => [String], {
     nullable: true
   })
-  aliases?: MainUserUpdatealiasesInput | undefined;
+  aliases?: string[] | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
