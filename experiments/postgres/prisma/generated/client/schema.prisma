@@ -22,7 +22,7 @@ generator typegraphql {
   // emitOnly                 = "crudResolvers"
   customPrismaImportPath   = "../client"
   contextPrismaKey         = "prismaClient"
-  useSimpleUpdateInputs    = true
+  useSimpleInputs          = true
 }
 
 // Role enum comment
@@ -140,7 +140,7 @@ model NativeTypeModel {
   decimal Decimal? @postgres.Decimal
 }
 
-/// @@TypeGraphQL.model(plurar: "equipments")
+/// @@TypeGraphQL.type(plural: "equipments")
 model Equipment {
   id String @id @default(cuid())
 }

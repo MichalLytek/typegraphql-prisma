@@ -105,11 +105,11 @@ type ResolverModelNames = keyof typeof crudResolversMap;
 
 type ModelResolverActionNames<
   TModel extends ResolverModelNames
-  > = keyof typeof crudResolversMap[TModel]["prototype"];
+> = keyof typeof crudResolversMap[TModel]["prototype"];
 
 export type ResolverActionsConfig<
   TModel extends ResolverModelNames
-  > = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
+> = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
 
 export type ResolversEnhanceMap = {
   [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
@@ -159,7 +159,7 @@ type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
 
 type ArgFieldsConfig<
   TArgsType extends ArgsTypesNames
-  > = FieldsConfig<ArgFieldNames<TArgsType>>;
+> = FieldsConfig<ArgFieldNames<TArgsType>>;
 
 export type ArgConfig<TArgsType extends ArgsTypesNames> = {
   class?: ClassDecorator[];
@@ -202,7 +202,7 @@ type RelationResolverModelNames = keyof typeof relationResolversMap;
 
 type RelationResolverActionNames<
   TModel extends RelationResolverModelNames
-  > = keyof typeof relationResolversMap[TModel]["prototype"];
+> = keyof typeof relationResolversMap[TModel]["prototype"];
 
 export type RelationResolverActionsConfig<TModel extends RelationResolverModelNames>
   = Partial<Record<RelationResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
@@ -349,7 +349,7 @@ type OutputTypeFieldNames<TOutput extends OutputTypesNames> = Exclude<
 
 type OutputTypeFieldsConfig<
   TOutput extends OutputTypesNames
-  > = FieldsConfig<OutputTypeFieldNames<TOutput>>;
+> = FieldsConfig<OutputTypeFieldNames<TOutput>>;
 
 export type OutputTypeConfig<TOutput extends OutputTypesNames> = {
   class?: ClassDecorator[];
@@ -487,7 +487,7 @@ type InputTypeFieldNames<TInput extends InputTypesNames> = Exclude<
 
 type InputTypeFieldsConfig<
   TInput extends InputTypesNames
-  > = FieldsConfig<InputTypeFieldNames<TInput>>;
+> = FieldsConfig<InputTypeFieldNames<TInput>>;
 
 export type InputTypeConfig<TInput extends InputTypesNames> = {
   class?: ClassDecorator[];

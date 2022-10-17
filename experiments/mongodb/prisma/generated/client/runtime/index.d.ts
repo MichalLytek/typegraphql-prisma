@@ -67,6 +67,10 @@ declare class BaseDMMFHelper {
     constructor(dmmf: BaseDMMF);
 }
 
+declare type BatchTransactionOptions = {
+    isolationLevel?: Transaction.IsolationLevel;
+};
+
 declare interface BinaryTargetsEnvValue {
     fromEnvVar: null | string;
     value: string;
@@ -815,7 +819,7 @@ export declare abstract class Engine {
     abstract getDmmf(): Promise<DMMF.Document>;
     abstract version(forceRun?: boolean): Promise<string> | string;
     abstract request<T>(query: string, headers?: QueryEngineRequestHeaders, numTry?: number): Promise<QueryEngineResult<T>>;
-    abstract requestBatch<T>(queries: string[], headers?: QueryEngineRequestHeaders, transaction?: boolean, numTry?: number): Promise<QueryEngineResult<T>[]>;
+    abstract requestBatch<T>(queries: string[], headers?: QueryEngineRequestHeaders, transaction?: BatchTransactionOptions, numTry?: number): Promise<QueryEngineResult<T>[]>;
     abstract transaction(action: 'start', headers: Transaction.TransactionHeaders, options?: Transaction.Options): Promise<Transaction.Info>;
     abstract transaction(action: 'commit', headers: Transaction.TransactionHeaders, info: Transaction.Info): Promise<void>;
     abstract transaction(action: 'rollback', headers: Transaction.TransactionHeaders, info: Transaction.Info): Promise<void>;
@@ -1084,11 +1088,11 @@ declare type InternalRequestParams = {
     callsite?: CallSite;
     /** Headers metadata that will be passed to the Engine */
     headers?: Record<string, string>;
-    transactionId?: string | number;
+    transaction?: PrismaPromiseTransaction;
     unpacker?: Unpacker;
     lock?: PromiseLike<void>;
     otelParentCtx?: Context;
-} & QueryMiddlewareParams;
+} & Omit<QueryMiddlewareParams, 'runInTransaction'>;
 
 declare type InvalidArgError = InvalidArgNameError | MissingArgError | InvalidArgTypeError | AtLeastOneError | AtMostOneError | InvalidNullArgError;
 
@@ -1420,6 +1424,19 @@ export declare class PrismaClientValidationError extends Error {
     get [Symbol.toStringTag](): string;
 }
 
+declare type PrismaPromiseBatchTransaction = {
+    kind: 'batch';
+    id: number;
+    isolationLevel?: IsolationLevel;
+};
+
+declare type PrismaPromiseInteractiveTransaction = {
+    kind: 'itx';
+    id: string;
+};
+
+declare type PrismaPromiseTransaction = PrismaPromiseBatchTransaction | PrismaPromiseInteractiveTransaction;
+
 declare type QueryEngineRequestHeaders = {
     traceparent?: string;
     transactionId?: string;
@@ -1460,8 +1477,7 @@ declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
 
 declare type Request_2 = {
     document: Document_2;
-    runInTransaction?: boolean;
-    transactionId?: string | number;
+    transaction?: PrismaPromiseTransaction;
     headers?: Record<string, string>;
     otelParentCtx?: Context;
     otelChildCtx?: Context;
@@ -1473,7 +1489,7 @@ declare class RequestHandler {
     hooks: any;
     dataloader: DataLoader<Request_2>;
     constructor(client: Client, hooks?: any);
-    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, runInTransaction, engineHook, args, headers, transactionId, unpacker, otelParentCtx, otelChildCtx, }: RequestParams): Promise<any>;
+    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, engineHook, args, headers, transaction, unpacker, otelParentCtx, otelChildCtx, }: RequestParams): Promise<any>;
     handleRequestError({ error, clientMethod, callsite }: HandleErrorParams): never;
     sanitizeMessage(message: any): any;
     unpack(document: any, data: any, path: any, rootField: any, unpacker?: Unpacker): any;
@@ -1489,11 +1505,10 @@ declare type RequestParams = {
     clientMethod: string;
     callsite?: CallSite;
     rejectOnNotFound?: RejectOnNotFound;
-    runInTransaction?: boolean;
+    transaction?: PrismaPromiseTransaction;
     engineHook?: EngineMiddleware;
     args: any;
     headers?: Record<string, string>;
-    transactionId?: string | number;
     unpacker?: Unpacker;
     otelParentCtx?: Context;
     otelChildCtx?: Context;
