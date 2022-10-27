@@ -82,8 +82,10 @@ describe("custom resolvers execution", () => {
       { encoding: "utf8" },
     );
 
-    const { data, errors } = await graphql(graphQLSchema, document, null, {
-      prisma: prismaMock,
+    const { data, errors } = await graphql({
+      schema: graphQLSchema,
+      source: document,
+      contextValue: { prisma: prismaMock },
     });
 
     expect(errors).toBeUndefined();

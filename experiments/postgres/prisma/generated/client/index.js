@@ -26,12 +26,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.4.0
- * Query Engine version: f352a33b70356f46311da8b00d83386dd9f145d6
+ * Prisma Client JS version: 4.5.0
+ * Query Engine version: 0362da9eebca54d94c8ef5edd3b2e90af99ba452
  */
 Prisma.prismaVersion = {
-  client: "4.4.0",
-  engine: "f352a33b70356f46311da8b00d83386dd9f145d6"
+  client: "4.5.0",
+  engine: "0362da9eebca54d94c8ef5edd3b2e90af99ba452"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -284,16 +284,7 @@ const config = {
     "config": {
       "engineType": "library"
     },
-    "binaryTargets": [
-      {
-        "fromEnvVar": null,
-        "value": "windows"
-      },
-      {
-        "fromEnvVar": null,
-        "value": "debian-openssl-1.1.x"
-      }
-    ],
+    "binaryTargets": [],
     "previewFeatures": [
       "fullTextSearch",
       "orderByNulls"
@@ -305,8 +296,8 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "4.4.0",
-  "engineVersion": "f352a33b70356f46311da8b00d83386dd9f145d6",
+  "clientVersion": "4.5.0",
+  "engineVersion": "0362da9eebca54d94c8ef5edd3b2e90af99ba452",
   "datasourceNames": [
     "postgres"
   ],
@@ -330,10 +321,7 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
-path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "prisma/generated/client/query_engine-windows.dll.node")
-
-path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
-path.join(process.cwd(), "prisma/generated/client/libquery_engine-debian-openssl-1.1.x.so.node")
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "prisma/generated/client/libquery_engine-debian-openssl-3.0.x.so.node")
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma/generated/client/schema.prisma")

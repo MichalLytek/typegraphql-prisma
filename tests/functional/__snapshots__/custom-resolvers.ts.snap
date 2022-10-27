@@ -134,6 +134,5 @@ input StringFilter {
   not: NestedStringFilter
   notIn: [String!]
   startsWith: String
-}
-"
+}"
 `;

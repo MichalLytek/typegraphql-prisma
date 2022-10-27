@@ -42,8 +42,12 @@ describe("errors", () => {
         }
       `;
 
-      const { errors } = await graphql(graphQLSchema, document, null, {
-        // prisma: undefined,
+      const { errors } = await graphql({
+        schema: graphQLSchema,
+        source: document,
+        contextValue: {
+          // prisma: undefined,
+        },
       });
 
       expect(errors).toMatchInlineSnapshot(`

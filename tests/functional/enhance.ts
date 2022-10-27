@@ -62,8 +62,10 @@ describe("custom resolvers execution", () => {
       validate: false,
       authChecker: () => false,
     });
-    const { errors } = await graphql(graphQLSchema, document, null, {
-      prisma: {},
+    const { errors } = await graphql({
+      schema: graphQLSchema,
+      source: document,
+      contextValue: { prisma: {} },
     });
 
     expect(errors).toMatchInlineSnapshot(`
@@ -107,8 +109,10 @@ describe("custom resolvers execution", () => {
       validate: false,
       authChecker: () => true,
     });
-    const { data, errors } = await graphql(graphQLSchema, document, null, {
-      prisma: {},
+    const { data, errors } = await graphql({
+      schema: graphQLSchema,
+      source: document,
+      contextValue: { prisma: {} },
     });
 
     expect(errors).toBeUndefined();

@@ -224,8 +224,10 @@ describe("generator integration", () => {
         }
       }
     `;
-    const { data, errors } = await graphql(graphQLSchema, query, null, {
-      prisma,
+    const { data, errors } = await graphql({
+      schema: graphQLSchema,
+      source: query,
+      contextValue: { prisma },
     });
     await prisma.$disconnect();
 

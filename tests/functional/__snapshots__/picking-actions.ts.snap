@@ -171,6 +171,5 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   intIdField: Int
   uniqueStringField: String
-}
-"
+}"
 `;

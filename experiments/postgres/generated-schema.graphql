@@ -958,24 +958,24 @@ input MainUserCountOrderByAggregateInput {
 input MainUserCreateInput {
   accountBalance: Float!
   age: Int!
-  aliases: MainUserCreatealiasesInput
+  aliases: [String!]
   amount: Float!
   clientPosts: PostCreateNestedManyWithoutAuthorInput
   editorPosts: PostCreateNestedManyWithoutEditorInput
   email: String!
   firstName: String
-  grades: MainUserCreategradesInput
+  grades: [Int!]
   role: Role!
 }
 
 input MainUserCreateManyInput {
   accountBalance: Float!
   age: Int!
-  aliases: MainUserCreatealiasesInput
+  aliases: [String!]
   amount: Float!
   email: String!
   firstName: String
-  grades: MainUserCreategradesInput
+  grades: [Int!]
   id: Int
   role: Role!
 }
@@ -1005,33 +1005,25 @@ input MainUserCreateOrConnectWithoutPostsInput {
 input MainUserCreateWithoutEditorPostsInput {
   accountBalance: Float!
   age: Int!
-  aliases: MainUserCreatealiasesInput
+  aliases: [String!]
   amount: Float!
   clientPosts: PostCreateNestedManyWithoutAuthorInput
   email: String!
   firstName: String
-  grades: MainUserCreategradesInput
+  grades: [Int!]
   role: Role!
 }
 
 input MainUserCreateWithoutPostsInput {
   accountBalance: Float!
   age: Int!
-  aliases: MainUserCreatealiasesInput
+  aliases: [String!]
   amount: Float!
   editorPosts: PostCreateNestedManyWithoutEditorInput
   email: String!
   firstName: String
-  grades: MainUserCreategradesInput
+  grades: [Int!]
   role: Role!
-}
-
-input MainUserCreatealiasesInput {
-  set: [String!]!
-}
-
-input MainUserCreategradesInput {
-  set: [Int!]!
 }
 
 type MainUserGroupBy {
@@ -1186,24 +1178,24 @@ input MainUserSumOrderByAggregateInput {
 input MainUserUpdateInput {
   accountBalance: Float
   age: Int
-  aliases: MainUserUpdatealiasesInput
+  aliases: [String!]
   amount: Float
   clientPosts: PostUpdateManyWithoutAuthorNestedInput
   editorPosts: PostUpdateManyWithoutEditorNestedInput
   email: String
   firstName: String
-  grades: MainUserUpdategradesInput
+  grades: [Int!]
   role: Role
 }
 
 input MainUserUpdateManyMutationInput {
   accountBalance: Float
   age: Int
-  aliases: MainUserUpdatealiasesInput
+  aliases: [String!]
   amount: Float
   email: String
   firstName: String
-  grades: MainUserUpdategradesInput
+  grades: [Int!]
   role: Role
 }
 
@@ -1228,35 +1220,25 @@ input MainUserUpdateOneWithoutEditorPostsNestedInput {
 input MainUserUpdateWithoutEditorPostsInput {
   accountBalance: Float
   age: Int
-  aliases: MainUserUpdatealiasesInput
+  aliases: [String!]
   amount: Float
   clientPosts: PostUpdateManyWithoutAuthorNestedInput
   email: String
   firstName: String
-  grades: MainUserUpdategradesInput
+  grades: [Int!]
   role: Role
 }
 
 input MainUserUpdateWithoutPostsInput {
   accountBalance: Float
   age: Int
-  aliases: MainUserUpdatealiasesInput
+  aliases: [String!]
   amount: Float
   editorPosts: PostUpdateManyWithoutEditorNestedInput
   email: String
   firstName: String
-  grades: MainUserUpdategradesInput
+  grades: [Int!]
   role: Role
-}
-
-input MainUserUpdatealiasesInput {
-  push: [String!]
-  set: [String!]
-}
-
-input MainUserUpdategradesInput {
-  push: [Int!]
-  set: [Int!]
 }
 
 input MainUserUpsertWithoutEditorPostsInput {

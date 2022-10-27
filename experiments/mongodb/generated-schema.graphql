@@ -169,12 +169,12 @@ input CommentScalarWhereWithAggregatesInput {
 }
 
 input CommentUpdateInput {
-  comment: StringFieldUpdateOperationsInput
+  comment: String
   post: PostUpdateOneRequiredWithoutCommentsNestedInput
 }
 
 input CommentUpdateManyMutationInput {
-  comment: StringFieldUpdateOperationsInput
+  comment: String
 }
 
 input CommentUpdateManyWithWhereWithoutPostInput {
@@ -202,7 +202,7 @@ input CommentUpdateWithWhereUniqueWithoutPostInput {
 }
 
 input CommentUpdateWithoutPostInput {
-  comment: StringFieldUpdateOperationsInput
+  comment: String
 }
 
 input CommentUpsertWithWhereUniqueWithoutPostInput {
@@ -359,15 +359,6 @@ input NestedStringWithAggregatesFilter {
   not: NestedStringWithAggregatesFilter
   notIn: [String!]
   startsWith: String
-}
-
-input NullableIntFieldUpdateOperationsInput {
-  decrement: Int
-  divide: Int
-  increment: Int
-  multiply: Int
-  set: Int
-  unset: Boolean
 }
 
 type Post {
@@ -580,16 +571,16 @@ input PostScalarWhereWithAggregatesInput {
 
 input PostUpdateInput {
   author: UserUpdateOneRequiredWithoutPostsNestedInput
-  body: StringFieldUpdateOperationsInput
+  body: String
   comments: CommentUpdateManyWithoutPostNestedInput
-  slug: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
+  slug: String
+  title: String
 }
 
 input PostUpdateManyMutationInput {
-  body: StringFieldUpdateOperationsInput
-  slug: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
+  body: String
+  slug: String
+  title: String
 }
 
 input PostUpdateManyWithWhereWithoutAuthorInput {
@@ -625,17 +616,17 @@ input PostUpdateWithWhereUniqueWithoutAuthorInput {
 }
 
 input PostUpdateWithoutAuthorInput {
-  body: StringFieldUpdateOperationsInput
+  body: String
   comments: CommentUpdateManyWithoutPostNestedInput
-  slug: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
+  slug: String
+  title: String
 }
 
 input PostUpdateWithoutCommentsInput {
   author: UserUpdateOneRequiredWithoutPostsNestedInput
-  body: StringFieldUpdateOperationsInput
-  slug: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
+  body: String
+  slug: String
+  title: String
 }
 
 input PostUpsertWithWhereUniqueWithoutAuthorInput {
@@ -695,10 +686,6 @@ enum SortOrder {
   desc
 }
 
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
 input StringFilter {
   contains: String
   endsWith: String
@@ -753,10 +740,6 @@ input UserAddressCompositeFilter {
   isNot: UserAddressWhereInput
 }
 
-input UserAddressCreateEnvelopeInput {
-  set: UserAddressCreateInput
-}
-
 input UserAddressCreateInput {
   city: String!
   number: Int
@@ -773,17 +756,6 @@ input UserAddressOrderByInput {
   city: SortOrder
   number: SortOrder
   street: SortOrder
-}
-
-input UserAddressUpdateEnvelopeInput {
-  set: UserAddressCreateInput
-  update: UserAddressUpdateInput
-}
-
-input UserAddressUpdateInput {
-  city: StringFieldUpdateOperationsInput
-  number: NullableIntFieldUpdateOperationsInput
-  street: StringFieldUpdateOperationsInput
 }
 
 input UserAddressWhereInput {
@@ -821,7 +793,7 @@ input UserCountOrderByAggregateInput {
 }
 
 input UserCreateInput {
-  address: UserAddressCreateEnvelopeInput!
+  address: UserAddressCreateInput!
   age: Int
   email: String!
   id: String
@@ -829,7 +801,7 @@ input UserCreateInput {
 }
 
 input UserCreateManyInput {
-  address: UserAddressCreateEnvelopeInput!
+  address: UserAddressCreateInput!
   age: Int
   email: String!
   id: String
@@ -847,7 +819,7 @@ input UserCreateOrConnectWithoutPostsInput {
 }
 
 input UserCreateWithoutPostsInput {
-  address: UserAddressCreateEnvelopeInput!
+  address: UserAddressCreateInput!
   age: Int
   email: String!
   id: String
@@ -936,16 +908,16 @@ input UserSumOrderByAggregateInput {
 }
 
 input UserUpdateInput {
-  address: UserAddressUpdateEnvelopeInput
-  age: NullableIntFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
+  address: UserAddressCreateInput
+  age: Int
+  email: String
   posts: PostUpdateManyWithoutAuthorNestedInput
 }
 
 input UserUpdateManyMutationInput {
-  address: UserAddressUpdateEnvelopeInput
-  age: NullableIntFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
+  address: UserAddressCreateInput
+  age: Int
+  email: String
 }
 
 input UserUpdateOneRequiredWithoutPostsNestedInput {
@@ -957,9 +929,9 @@ input UserUpdateOneRequiredWithoutPostsNestedInput {
 }
 
 input UserUpdateWithoutPostsInput {
-  address: UserAddressUpdateEnvelopeInput
-  age: NullableIntFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
+  address: UserAddressCreateInput
+  age: Int
+  email: String
 }
 
 input UserUpsertWithoutPostsInput {
