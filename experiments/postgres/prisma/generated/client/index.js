@@ -287,7 +287,8 @@ const config = {
     "binaryTargets": [],
     "previewFeatures": [
       "fullTextSearch",
-      "orderByNulls"
+      "orderByNulls",
+      "extendedWhereUnique"
     ],
     "isCustomOutput": true
   },

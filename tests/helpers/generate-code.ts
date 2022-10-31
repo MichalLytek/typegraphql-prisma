@@ -6,7 +6,10 @@ import {
 } from "../../src/generator/options";
 import getPrismaClientDmmfFromPrismaSchema from "./dmmf";
 
-type SupportedPreviewFeatures = "orderByNulls" | "fullTextSearch";
+type SupportedPreviewFeatures =
+  | "orderByNulls"
+  | "fullTextSearch"
+  | "extendedWhereUnique";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<

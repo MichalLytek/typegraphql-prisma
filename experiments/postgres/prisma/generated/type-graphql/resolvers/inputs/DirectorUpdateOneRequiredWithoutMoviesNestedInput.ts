@@ -4,7 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { DirectorCreateOrConnectWithoutMoviesInput } from "../inputs/DirectorCreateOrConnectWithoutMoviesInput";
 import { DirectorCreateWithoutMoviesInput } from "../inputs/DirectorCreateWithoutMoviesInput";
-import { DirectorUpdateWithoutMoviesInput } from "../inputs/DirectorUpdateWithoutMoviesInput";
+import { DirectorUpdateToOneWithWhereWithoutMoviesInput } from "../inputs/DirectorUpdateToOneWithWhereWithoutMoviesInput";
 import { DirectorUpsertWithoutMoviesInput } from "../inputs/DirectorUpsertWithoutMoviesInput";
 import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 
@@ -32,8 +32,8 @@ export class DirectorUpdateOneRequiredWithoutMoviesNestedInput {
   })
   connect?: DirectorWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorUpdateWithoutMoviesInput, {
+  @TypeGraphQL.Field(_type => DirectorUpdateToOneWithWhereWithoutMoviesInput, {
     nullable: true
   })
-  update?: DirectorUpdateWithoutMoviesInput | undefined;
+  update?: DirectorUpdateToOneWithWhereWithoutMoviesInput | undefined;
 }

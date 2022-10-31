@@ -10789,10 +10789,22 @@ export namespace Prisma {
     _relevance?: UserOrderByRelevanceInput
   }
 
-  export type UserWhereUniqueInput = {
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     email?: string
-  }
+    AND?: Enumerable<UserWhereInput>
+    OR?: Enumerable<UserWhereInput>
+    NOT?: Enumerable<UserWhereInput>
+    name?: StringNullableFilter | string | null
+    age?: IntFilter | number
+    balance?: FloatFilter | number
+    amount?: FloatFilter | number
+    posts?: PostListRelationFilter
+    role?: EnumRoleFilter | Role
+    editorPosts?: PostListRelationFilter
+    grades?: IntNullableListFilter
+    aliases?: StringNullableListFilter
+  }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10862,9 +10874,24 @@ export namespace Prisma {
     _relevance?: postOrderByRelevanceInput
   }
 
-  export type postWhereUniqueInput = {
+  export type postWhereUniqueInput = Prisma.AtLeast<{
     uuid?: string
-  }
+    AND?: Enumerable<postWhereInput>
+    OR?: Enumerable<postWhereInput>
+    NOT?: Enumerable<postWhereInput>
+    createdAt?: DateTimeFilter | Date | string
+    updatedAt?: DateTimeFilter | Date | string
+    published?: BoolFilter | boolean
+    title?: StringFilter | string
+    subtitle?: StringFilter | string
+    content?: StringNullableFilter | string | null
+    author?: XOR<UserRelationFilter, UserWhereInput>
+    authorId?: IntFilter | number
+    editor?: XOR<UserRelationFilter, UserWhereInput> | null
+    editorId?: IntNullableFilter | number | null
+    kind?: EnumPostKindNullableFilter | PostKind | null
+    metadata?: JsonFilter
+  }, "uuid">
 
   export type postOrderByWithAggregationInput = {
     uuid?: SortOrder
@@ -10918,9 +10945,15 @@ export namespace Prisma {
     _relevance?: CategoryOrderByRelevanceInput
   }
 
-  export type CategoryWhereUniqueInput = {
+  export type CategoryWhereUniqueInput = Prisma.AtLeast<{
     categoryCompoundUnique?: CategoryCategoryCompoundUniqueCompoundUniqueInput
-  }
+    AND?: Enumerable<CategoryWhereInput>
+    OR?: Enumerable<CategoryWhereInput>
+    NOT?: Enumerable<CategoryWhereInput>
+    name?: StringFilter | string
+    slug?: StringFilter | string
+    number?: IntFilter | number
+  }, "categoryCompoundUnique">
 
   export type CategoryOrderByWithAggregationInput = {
     name?: SortOrder
@@ -10958,9 +10991,15 @@ export namespace Prisma {
     _relevance?: PatientOrderByRelevanceInput
   }
 
-  export type PatientWhereUniqueInput = {
+  export type PatientWhereUniqueInput = Prisma.AtLeast<{
     firstName_lastName?: PatientFirstNameLastNameCompoundUniqueInput
-  }
+    AND?: Enumerable<PatientWhereInput>
+    OR?: Enumerable<PatientWhereInput>
+    NOT?: Enumerable<PatientWhereInput>
+    firstName?: StringFilter | string
+    lastName?: StringFilter | string
+    email?: StringFilter | string
+  }, "firstName_lastName">
 
   export type PatientOrderByWithAggregationInput = {
     firstName?: SortOrder
@@ -10998,9 +11037,16 @@ export namespace Prisma {
     _relevance?: MovieOrderByRelevanceInput
   }
 
-  export type MovieWhereUniqueInput = {
+  export type MovieWhereUniqueInput = Prisma.AtLeast<{
     movieCompoundId?: MovieMovieCompoundIdCompoundUniqueInput
-  }
+    AND?: Enumerable<MovieWhereInput>
+    OR?: Enumerable<MovieWhereInput>
+    NOT?: Enumerable<MovieWhereInput>
+    directorFirstName?: StringFilter | string
+    directorLastName?: StringFilter | string
+    director?: XOR<DirectorRelationFilter, DirectorWhereInput>
+    title?: StringFilter | string
+  }, "movieCompoundId">
 
   export type MovieOrderByWithAggregationInput = {
     directorFirstName?: SortOrder
@@ -11036,9 +11082,15 @@ export namespace Prisma {
     _relevance?: DirectorOrderByRelevanceInput
   }
 
-  export type DirectorWhereUniqueInput = {
+  export type DirectorWhereUniqueInput = Prisma.AtLeast<{
     firstName_lastName?: DirectorFirstNameLastNameCompoundUniqueInput
-  }
+    AND?: Enumerable<DirectorWhereInput>
+    OR?: Enumerable<DirectorWhereInput>
+    NOT?: Enumerable<DirectorWhereInput>
+    firstName?: StringFilter | string
+    lastName?: StringFilter | string
+    movies?: MovieListRelationFilter
+  }, "firstName_lastName">
 
   export type DirectorOrderByWithAggregationInput = {
     firstName?: SortOrder
@@ -11076,9 +11128,16 @@ export namespace Prisma {
     _relevance?: ProblemOrderByRelevanceInput
   }
 
-  export type ProblemWhereUniqueInput = {
+  export type ProblemWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-  }
+    AND?: Enumerable<ProblemWhereInput>
+    OR?: Enumerable<ProblemWhereInput>
+    NOT?: Enumerable<ProblemWhereInput>
+    problemText?: StringFilter | string
+    likedBy?: CreatorListRelationFilter
+    creator?: XOR<CreatorRelationFilter, CreatorWhereInput> | null
+    creatorId?: IntNullableFilter | number | null
+  }, "id">
 
   export type ProblemOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11118,9 +11177,15 @@ export namespace Prisma {
     _relevance?: CreatorOrderByRelevanceInput
   }
 
-  export type CreatorWhereUniqueInput = {
+  export type CreatorWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-  }
+    AND?: Enumerable<CreatorWhereInput>
+    OR?: Enumerable<CreatorWhereInput>
+    NOT?: Enumerable<CreatorWhereInput>
+    name?: StringFilter | string
+    likes?: ProblemListRelationFilter
+    problems?: ProblemListRelationFilter
+  }, "id">
 
   export type CreatorOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11157,9 +11222,15 @@ export namespace Prisma {
     decimal?: SortOrderInput | SortOrder
   }
 
-  export type NativeTypeModelWhereUniqueInput = {
+  export type NativeTypeModelWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-  }
+    AND?: Enumerable<NativeTypeModelWhereInput>
+    OR?: Enumerable<NativeTypeModelWhereInput>
+    NOT?: Enumerable<NativeTypeModelWhereInput>
+    bigInt?: BigIntNullableFilter | bigint | number | null
+    byteA?: BytesNullableFilter | Buffer | null
+    decimal?: DecimalNullableFilter | Decimal | DecimalJsLike | number | string | null
+  }, "id">
 
   export type NativeTypeModelOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11195,9 +11266,12 @@ export namespace Prisma {
     _relevance?: EquipmentOrderByRelevanceInput
   }
 
-  export type EquipmentWhereUniqueInput = {
+  export type EquipmentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-  }
+    AND?: Enumerable<EquipmentWhereInput>
+    OR?: Enumerable<EquipmentWhereInput>
+    NOT?: Enumerable<EquipmentWhereInput>
+  }, "id">
 
   export type EquipmentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -12633,17 +12707,17 @@ export namespace Prisma {
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     upsert?: UserUpsertWithoutPostsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
   }
 
   export type UserUpdateOneWithoutEditorPostsNestedInput = {
     create?: XOR<UserCreateWithoutEditorPostsInput, UserUncheckedCreateWithoutEditorPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEditorPostsInput
     upsert?: UserUpsertWithoutEditorPostsInput
-    disconnect?: boolean
-    delete?: boolean
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutEditorPostsInput, UserUncheckedUpdateWithoutEditorPostsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEditorPostsInput, UserUpdateWithoutEditorPostsInput>, UserUncheckedUpdateWithoutEditorPostsInput>
   }
 
   export type NullableEnumPostKindFieldUpdateOperationsInput = {
@@ -12669,7 +12743,7 @@ export namespace Prisma {
     connectOrCreate?: DirectorCreateOrConnectWithoutMoviesInput
     upsert?: DirectorUpsertWithoutMoviesInput
     connect?: DirectorWhereUniqueInput
-    update?: XOR<DirectorUpdateWithoutMoviesInput, DirectorUncheckedUpdateWithoutMoviesInput>
+    update?: XOR<XOR<DirectorUpdateToOneWithWhereWithoutMoviesInput, DirectorUpdateWithoutMoviesInput>, DirectorUncheckedUpdateWithoutMoviesInput>
   }
 
   export type MovieCreateNestedManyWithoutDirectorInput = {
@@ -12749,10 +12823,10 @@ export namespace Prisma {
     create?: XOR<CreatorCreateWithoutProblemsInput, CreatorUncheckedCreateWithoutProblemsInput>
     connectOrCreate?: CreatorCreateOrConnectWithoutProblemsInput
     upsert?: CreatorUpsertWithoutProblemsInput
-    disconnect?: boolean
-    delete?: boolean
+    disconnect?: CreatorWhereInput | boolean
+    delete?: CreatorWhereInput | boolean
     connect?: CreatorWhereUniqueInput
-    update?: XOR<CreatorUpdateWithoutProblemsInput, CreatorUncheckedUpdateWithoutProblemsInput>
+    update?: XOR<XOR<CreatorUpdateToOneWithWhereWithoutProblemsInput, CreatorUpdateWithoutProblemsInput>, CreatorUncheckedUpdateWithoutProblemsInput>
   }
 
   export type CreatorUncheckedUpdateManyWithoutLikesNestedInput = {
@@ -13375,6 +13449,12 @@ export namespace Prisma {
   export type UserUpsertWithoutPostsInput = {
     update: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPostsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
   }
 
   export type UserUpdateWithoutPostsInput = {
@@ -13405,6 +13485,12 @@ export namespace Prisma {
   export type UserUpsertWithoutEditorPostsInput = {
     update: XOR<UserUpdateWithoutEditorPostsInput, UserUncheckedUpdateWithoutEditorPostsInput>
     create: XOR<UserCreateWithoutEditorPostsInput, UserUncheckedCreateWithoutEditorPostsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEditorPostsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEditorPostsInput, UserUncheckedUpdateWithoutEditorPostsInput>
   }
 
   export type UserUpdateWithoutEditorPostsInput = {
@@ -13450,6 +13536,12 @@ export namespace Prisma {
   export type DirectorUpsertWithoutMoviesInput = {
     update: XOR<DirectorUpdateWithoutMoviesInput, DirectorUncheckedUpdateWithoutMoviesInput>
     create: XOR<DirectorCreateWithoutMoviesInput, DirectorUncheckedCreateWithoutMoviesInput>
+    where?: DirectorWhereInput
+  }
+
+  export type DirectorUpdateToOneWithWhereWithoutMoviesInput = {
+    where?: DirectorWhereInput
+    data: XOR<DirectorUpdateWithoutMoviesInput, DirectorUncheckedUpdateWithoutMoviesInput>
   }
 
   export type DirectorUpdateWithoutMoviesInput = {
@@ -13564,6 +13656,12 @@ export namespace Prisma {
   export type CreatorUpsertWithoutProblemsInput = {
     update: XOR<CreatorUpdateWithoutProblemsInput, CreatorUncheckedUpdateWithoutProblemsInput>
     create: XOR<CreatorCreateWithoutProblemsInput, CreatorUncheckedCreateWithoutProblemsInput>
+    where?: CreatorWhereInput
+  }
+
+  export type CreatorUpdateToOneWithWhereWithoutProblemsInput = {
+    where?: CreatorWhereInput
+    data: XOR<CreatorUpdateWithoutProblemsInput, CreatorUncheckedUpdateWithoutProblemsInput>
   }
 
   export type CreatorUpdateWithoutProblemsInput = {

@@ -238,7 +238,13 @@ input CategoryWhereInput {
 }
 
 input CategoryWhereUniqueInput {
+  AND: [CategoryWhereInput!]
+  NOT: [CategoryWhereInput!]
+  OR: [CategoryWhereInput!]
   categoryCompoundUnique: CategoryCategoryCompoundUniqueCompoundUniqueInput
+  name: StringFilter
+  number: IntFilter
+  slug: StringFilter
 }
 
 type Creator {
@@ -450,10 +456,15 @@ input CreatorUpdateOneWithoutProblemsNestedInput {
   connect: CreatorWhereUniqueInput
   connectOrCreate: CreatorCreateOrConnectWithoutProblemsInput
   create: CreatorCreateWithoutProblemsInput
-  delete: Boolean
-  disconnect: Boolean
-  update: CreatorUpdateWithoutProblemsInput
+  delete: CreatorWhereInput
+  disconnect: CreatorWhereInput
+  update: CreatorUpdateToOneWithWhereWithoutProblemsInput
   upsert: CreatorUpsertWithoutProblemsInput
+}
+
+input CreatorUpdateToOneWithWhereWithoutProblemsInput {
+  data: CreatorUpdateWithoutProblemsInput!
+  where: CreatorWhereInput
 }
 
 input CreatorUpdateWithWhereUniqueWithoutLikesInput {
@@ -480,6 +491,7 @@ input CreatorUpsertWithWhereUniqueWithoutLikesInput {
 input CreatorUpsertWithoutProblemsInput {
   create: CreatorCreateWithoutProblemsInput!
   update: CreatorUpdateWithoutProblemsInput!
+  where: CreatorWhereInput
 }
 
 input CreatorWhereInput {
@@ -493,7 +505,13 @@ input CreatorWhereInput {
 }
 
 input CreatorWhereUniqueInput {
+  AND: [CreatorWhereInput!]
+  NOT: [CreatorWhereInput!]
+  OR: [CreatorWhereInput!]
   id: Int
+  likes: ProblemListRelationFilter
+  name: StringFilter
+  problems: ProblemListRelationFilter
 }
 
 """
@@ -699,8 +717,13 @@ input DirectorUpdateOneRequiredWithoutMoviesNestedInput {
   connect: DirectorWhereUniqueInput
   connectOrCreate: DirectorCreateOrConnectWithoutMoviesInput
   create: DirectorCreateWithoutMoviesInput
-  update: DirectorUpdateWithoutMoviesInput
+  update: DirectorUpdateToOneWithWhereWithoutMoviesInput
   upsert: DirectorUpsertWithoutMoviesInput
+}
+
+input DirectorUpdateToOneWithWhereWithoutMoviesInput {
+  data: DirectorUpdateWithoutMoviesInput!
+  where: DirectorWhereInput
 }
 
 input DirectorUpdateWithoutMoviesInput {
@@ -711,6 +734,7 @@ input DirectorUpdateWithoutMoviesInput {
 input DirectorUpsertWithoutMoviesInput {
   create: DirectorCreateWithoutMoviesInput!
   update: DirectorUpdateWithoutMoviesInput!
+  where: DirectorWhereInput
 }
 
 input DirectorWhereInput {
@@ -723,7 +747,13 @@ input DirectorWhereInput {
 }
 
 input DirectorWhereUniqueInput {
+  AND: [DirectorWhereInput!]
+  NOT: [DirectorWhereInput!]
+  OR: [DirectorWhereInput!]
+  firstName: StringFilter
   firstName_lastName: DirectorFirstNameLastNameCompoundUniqueInput
+  lastName: StringFilter
+  movies: MovieListRelationFilter
 }
 
 input EnumPostKindNullableFilter {
@@ -1203,7 +1233,7 @@ input MainUserUpdateOneRequiredWithoutPostsNestedInput {
   connect: MainUserWhereUniqueInput
   connectOrCreate: MainUserCreateOrConnectWithoutPostsInput
   create: MainUserCreateWithoutPostsInput
-  update: MainUserUpdateWithoutPostsInput
+  update: MainUserUpdateToOneWithWhereWithoutPostsInput
   upsert: MainUserUpsertWithoutPostsInput
 }
 
@@ -1211,10 +1241,20 @@ input MainUserUpdateOneWithoutEditorPostsNestedInput {
   connect: MainUserWhereUniqueInput
   connectOrCreate: MainUserCreateOrConnectWithoutEditorPostsInput
   create: MainUserCreateWithoutEditorPostsInput
-  delete: Boolean
-  disconnect: Boolean
-  update: MainUserUpdateWithoutEditorPostsInput
+  delete: MainUserWhereInput
+  disconnect: MainUserWhereInput
+  update: MainUserUpdateToOneWithWhereWithoutEditorPostsInput
   upsert: MainUserUpsertWithoutEditorPostsInput
+}
+
+input MainUserUpdateToOneWithWhereWithoutEditorPostsInput {
+  data: MainUserUpdateWithoutEditorPostsInput!
+  where: MainUserWhereInput
+}
+
+input MainUserUpdateToOneWithWhereWithoutPostsInput {
+  data: MainUserUpdateWithoutPostsInput!
+  where: MainUserWhereInput
 }
 
 input MainUserUpdateWithoutEditorPostsInput {
@@ -1244,11 +1284,13 @@ input MainUserUpdateWithoutPostsInput {
 input MainUserUpsertWithoutEditorPostsInput {
   create: MainUserCreateWithoutEditorPostsInput!
   update: MainUserUpdateWithoutEditorPostsInput!
+  where: MainUserWhereInput
 }
 
 input MainUserUpsertWithoutPostsInput {
   create: MainUserCreateWithoutPostsInput!
   update: MainUserUpdateWithoutPostsInput!
+  where: MainUserWhereInput
 }
 
 input MainUserWhereInput {
@@ -1269,8 +1311,20 @@ input MainUserWhereInput {
 }
 
 input MainUserWhereUniqueInput {
+  AND: [MainUserWhereInput!]
+  NOT: [MainUserWhereInput!]
+  OR: [MainUserWhereInput!]
+  accountBalance: FloatFilter
+  age: IntFilter
+  aliases: StringNullableListFilter
+  amount: FloatFilter
+  clientPosts: PostListRelationFilter
+  editorPosts: PostListRelationFilter
   email: String
+  firstName: StringNullableFilter
+  grades: IntNullableListFilter
   id: Int
+  role: EnumRoleFilter
 }
 
 type Movie {
@@ -1485,7 +1539,14 @@ input MovieWhereInput {
 }
 
 input MovieWhereUniqueInput {
+  AND: [MovieWhereInput!]
+  NOT: [MovieWhereInput!]
+  OR: [MovieWhereInput!]
+  director: DirectorRelationFilter
+  directorFirstName: StringFilter
+  directorLastName: StringFilter
   movieCompoundId: MovieMovieCompoundIdCompoundUniqueInput
+  title: StringFilter
 }
 
 type Mutation {
@@ -1701,6 +1762,12 @@ input NativeTypeModelWhereInput {
 }
 
 input NativeTypeModelWhereUniqueInput {
+  AND: [NativeTypeModelWhereInput!]
+  NOT: [NativeTypeModelWhereInput!]
+  OR: [NativeTypeModelWhereInput!]
+  bigInt: BigIntNullableFilter
+  byteA: BytesNullableFilter
+  decimal: DecimalNullableFilter
   id: Int
 }
 
@@ -2147,7 +2214,13 @@ input PatientWhereInput {
 }
 
 input PatientWhereUniqueInput {
+  AND: [PatientWhereInput!]
+  NOT: [PatientWhereInput!]
+  OR: [PatientWhereInput!]
+  email: StringFilter
+  firstName: StringFilter
   firstName_lastName: PatientFirstNameLastNameCompoundUniqueInput
+  lastName: StringFilter
 }
 
 type Post {
@@ -2595,6 +2668,20 @@ input PostWhereInput {
 }
 
 input PostWhereUniqueInput {
+  AND: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  author: MainUserRelationFilter
+  authorId: IntFilter
+  content: StringNullableFilter
+  createdAt: DateTimeFilter
+  editor: MainUserRelationFilter
+  editorId: IntNullableFilter
+  kind: EnumPostKindNullableFilter
+  metadata: JsonFilter
+  subtitle: StringFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
   uuid: String
 }
 
@@ -2889,7 +2976,14 @@ input ProblemWhereInput {
 }
 
 input ProblemWhereUniqueInput {
+  AND: [ProblemWhereInput!]
+  NOT: [ProblemWhereInput!]
+  OR: [ProblemWhereInput!]
+  creator: CreatorRelationFilter
+  creatorId: IntNullableFilter
   id: Int
+  likedBy: CreatorListRelationFilter
+  problemText: StringFilter
 }
 
 type Query {

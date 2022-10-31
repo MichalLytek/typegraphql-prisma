@@ -4,8 +4,9 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CreatorCreateOrConnectWithoutProblemsInput } from "../inputs/CreatorCreateOrConnectWithoutProblemsInput";
 import { CreatorCreateWithoutProblemsInput } from "../inputs/CreatorCreateWithoutProblemsInput";
-import { CreatorUpdateWithoutProblemsInput } from "../inputs/CreatorUpdateWithoutProblemsInput";
+import { CreatorUpdateToOneWithWhereWithoutProblemsInput } from "../inputs/CreatorUpdateToOneWithWhereWithoutProblemsInput";
 import { CreatorUpsertWithoutProblemsInput } from "../inputs/CreatorUpsertWithoutProblemsInput";
+import { CreatorWhereInput } from "../inputs/CreatorWhereInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
 @TypeGraphQL.InputType("CreatorUpdateOneWithoutProblemsNestedInput", {
@@ -27,23 +28,23 @@ export class CreatorUpdateOneWithoutProblemsNestedInput {
   })
   upsert?: CreatorUpsertWithoutProblemsInput | undefined;
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @TypeGraphQL.Field(_type => CreatorWhereInput, {
     nullable: true
   })
-  disconnect?: boolean | undefined;
+  disconnect?: CreatorWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @TypeGraphQL.Field(_type => CreatorWhereInput, {
     nullable: true
   })
-  delete?: boolean | undefined;
+  delete?: CreatorWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
     nullable: true
   })
   connect?: CreatorWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => CreatorUpdateWithoutProblemsInput, {
+  @TypeGraphQL.Field(_type => CreatorUpdateToOneWithWhereWithoutProblemsInput, {
     nullable: true
   })
-  update?: CreatorUpdateWithoutProblemsInput | undefined;
+  update?: CreatorUpdateToOneWithWhereWithoutProblemsInput | undefined;
 }

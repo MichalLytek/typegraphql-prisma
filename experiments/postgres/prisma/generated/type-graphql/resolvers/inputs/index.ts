@@ -47,6 +47,7 @@ export { CreatorUpdateManyMutationInput } from "./CreatorUpdateManyMutationInput
 export { CreatorUpdateManyWithWhereWithoutLikesInput } from "./CreatorUpdateManyWithWhereWithoutLikesInput";
 export { CreatorUpdateManyWithoutLikesNestedInput } from "./CreatorUpdateManyWithoutLikesNestedInput";
 export { CreatorUpdateOneWithoutProblemsNestedInput } from "./CreatorUpdateOneWithoutProblemsNestedInput";
+export { CreatorUpdateToOneWithWhereWithoutProblemsInput } from "./CreatorUpdateToOneWithWhereWithoutProblemsInput";
 export { CreatorUpdateWithWhereUniqueWithoutLikesInput } from "./CreatorUpdateWithWhereUniqueWithoutLikesInput";
 export { CreatorUpdateWithoutLikesInput } from "./CreatorUpdateWithoutLikesInput";
 export { CreatorUpdateWithoutProblemsInput } from "./CreatorUpdateWithoutProblemsInput";
@@ -76,6 +77,7 @@ export { DirectorScalarWhereWithAggregatesInput } from "./DirectorScalarWhereWit
 export { DirectorUpdateInput } from "./DirectorUpdateInput";
 export { DirectorUpdateManyMutationInput } from "./DirectorUpdateManyMutationInput";
 export { DirectorUpdateOneRequiredWithoutMoviesNestedInput } from "./DirectorUpdateOneRequiredWithoutMoviesNestedInput";
+export { DirectorUpdateToOneWithWhereWithoutMoviesInput } from "./DirectorUpdateToOneWithWhereWithoutMoviesInput";
 export { DirectorUpdateWithoutMoviesInput } from "./DirectorUpdateWithoutMoviesInput";
 export { DirectorUpsertWithoutMoviesInput } from "./DirectorUpsertWithoutMoviesInput";
 export { DirectorWhereInput } from "./DirectorWhereInput";
@@ -133,6 +135,8 @@ export { MainUserUpdateInput } from "./MainUserUpdateInput";
 export { MainUserUpdateManyMutationInput } from "./MainUserUpdateManyMutationInput";
 export { MainUserUpdateOneRequiredWithoutPostsNestedInput } from "./MainUserUpdateOneRequiredWithoutPostsNestedInput";
 export { MainUserUpdateOneWithoutEditorPostsNestedInput } from "./MainUserUpdateOneWithoutEditorPostsNestedInput";
+export { MainUserUpdateToOneWithWhereWithoutEditorPostsInput } from "./MainUserUpdateToOneWithWhereWithoutEditorPostsInput";
+export { MainUserUpdateToOneWithWhereWithoutPostsInput } from "./MainUserUpdateToOneWithWhereWithoutPostsInput";
 export { MainUserUpdateWithoutEditorPostsInput } from "./MainUserUpdateWithoutEditorPostsInput";
 export { MainUserUpdateWithoutPostsInput } from "./MainUserUpdateWithoutPostsInput";
 export { MainUserUpdatealiasesInput } from "./MainUserUpdatealiasesInput";

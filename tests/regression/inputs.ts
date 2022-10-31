@@ -1590,4 +1590,65 @@ describe("inputs", () => {
     );
     expect(indexTSFile).toMatchSnapshot("index");
   });
+
+  describe("when `extendedWhereUnique` preview feature is enabled", () => {
+    it("should properly generate input type classes with SortOrderInput type fields", async () => {
+      const schema = /* prisma */ `
+        model FirstModel {
+          idField             Int            @id @default(autoincrement())
+          uniqueStringField   String         @unique
+          optionalFloatField  Float?
+          secondModelsField   SecondModel[]
+        }
+        model SecondModel {
+          idField             Int          @id @default(autoincrement())
+          uniqueStringField   String       @unique
+          optionalFloatField  Float?
+          firstModelFieldId   Int
+          firstModelField     FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["extendedWhereUnique"],
+      });
+      const firstModelWhereUniqueInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelWhereUniqueInput.ts",
+      );
+      const firstModelUpdateOneRequiredWithoutSecondModelsFieldNestedInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelUpdateOneRequiredWithoutSecondModelsFieldNestedInput.ts",
+        );
+      const firstModelUpdateToOneWithWhereWithoutSecondModelsFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/FirstModelUpdateToOneWithWhereWithoutSecondModelsFieldInput.ts",
+        );
+      const secondModelUpsertWithWhereUniqueWithoutFirstModelFieldInputTSFile =
+        await readGeneratedFile(
+          "/resolvers/inputs/SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput.ts",
+        );
+      const indexTSFile = await readGeneratedFile("/resolvers/inputs/index.ts");
+
+      expect(firstModelWhereUniqueInputTSFile).toMatchSnapshot(
+        "FirstModelWhereUniqueInput",
+      );
+      expect(
+        firstModelUpdateOneRequiredWithoutSecondModelsFieldNestedInputTSFile,
+      ).toMatchSnapshot(
+        "FirstModelUpdateOneRequiredWithoutSecondModelsFieldNestedInput",
+      );
+      expect(
+        firstModelUpdateToOneWithWhereWithoutSecondModelsFieldInputTSFile,
+      ).toMatchSnapshot(
+        "FirstModelUpdateToOneWithWhereWithoutSecondModelsFieldInput",
+      );
+      expect(
+        secondModelUpsertWithWhereUniqueWithoutFirstModelFieldInputTSFile,
+      ).toMatchSnapshot(
+        "SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput",
+      );
+      expect(indexTSFile).toMatchSnapshot("index");
+    });
+  });
 });

@@ -4,8 +4,9 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { MainUserCreateOrConnectWithoutEditorPostsInput } from "../inputs/MainUserCreateOrConnectWithoutEditorPostsInput";
 import { MainUserCreateWithoutEditorPostsInput } from "../inputs/MainUserCreateWithoutEditorPostsInput";
-import { MainUserUpdateWithoutEditorPostsInput } from "../inputs/MainUserUpdateWithoutEditorPostsInput";
+import { MainUserUpdateToOneWithWhereWithoutEditorPostsInput } from "../inputs/MainUserUpdateToOneWithWhereWithoutEditorPostsInput";
 import { MainUserUpsertWithoutEditorPostsInput } from "../inputs/MainUserUpsertWithoutEditorPostsInput";
+import { MainUserWhereInput } from "../inputs/MainUserWhereInput";
 import { MainUserWhereUniqueInput } from "../inputs/MainUserWhereUniqueInput";
 
 @TypeGraphQL.InputType("MainUserUpdateOneWithoutEditorPostsNestedInput", {
@@ -27,23 +28,23 @@ export class MainUserUpdateOneWithoutEditorPostsNestedInput {
   })
   upsert?: MainUserUpsertWithoutEditorPostsInput | undefined;
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @TypeGraphQL.Field(_type => MainUserWhereInput, {
     nullable: true
   })
-  disconnect?: boolean | undefined;
+  disconnect?: MainUserWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @TypeGraphQL.Field(_type => MainUserWhereInput, {
     nullable: true
   })
-  delete?: boolean | undefined;
+  delete?: MainUserWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => MainUserWhereUniqueInput, {
     nullable: true
   })
   connect?: MainUserWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserUpdateWithoutEditorPostsInput, {
+  @TypeGraphQL.Field(_type => MainUserUpdateToOneWithWhereWithoutEditorPostsInput, {
     nullable: true
   })
-  update?: MainUserUpdateWithoutEditorPostsInput | undefined;
+  update?: MainUserUpdateToOneWithWhereWithoutEditorPostsInput | undefined;
 }
