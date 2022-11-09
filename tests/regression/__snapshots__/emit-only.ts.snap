@@ -22,8 +22,10 @@ const actionResolversMap = {
     deleteManyUser: actionResolvers.DeleteManyUserResolver,
     deleteOneUser: actionResolvers.DeleteOneUserResolver,
     findFirstUser: actionResolvers.FindFirstUserResolver,
+    findFirstUserOrThrow: actionResolvers.FindFirstUserOrThrowResolver,
     users: actionResolvers.FindManyUserResolver,
     user: actionResolvers.FindUniqueUserResolver,
+    getUser: actionResolvers.FindUniqueUserOrThrowResolver,
     groupByUser: actionResolvers.GroupByUserResolver,
     updateManyUser: actionResolvers.UpdateManyUserResolver,
     updateOneUser: actionResolvers.UpdateOneUserResolver,
@@ -36,8 +38,10 @@ const actionResolversMap = {
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     deleteOnePost: actionResolvers.DeleteOnePostResolver,
     findFirstPost: actionResolvers.FindFirstPostResolver,
+    findFirstPostOrThrow: actionResolvers.FindFirstPostOrThrowResolver,
     posts: actionResolvers.FindManyPostResolver,
     post: actionResolvers.FindUniquePostResolver,
+    getPost: actionResolvers.FindUniquePostOrThrowResolver,
     groupByPost: actionResolvers.GroupByPostResolver,
     updateManyPost: actionResolvers.UpdateManyPostResolver,
     updateOnePost: actionResolvers.UpdateOnePostResolver,
@@ -45,8 +49,8 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"users\\", \\"user\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
-  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"posts\\", \\"post\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
+  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"findFirstUserOrThrow\\", \\"users\\", \\"user\\", \\"getUser\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
   AggregateUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
@@ -55,8 +59,10 @@ const argsInfo = {
   DeleteManyUserArgs: [\\"where\\"],
   DeleteOneUserArgs: [\\"where\\"],
   FindFirstUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
+  FindFirstUserOrThrowArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindUniqueUserArgs: [\\"where\\"],
+  FindUniqueUserOrThrowArgs: [\\"where\\"],
   GroupByUserArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyUserArgs: [\\"data\\", \\"where\\"],
   UpdateOneUserArgs: [\\"data\\", \\"where\\"],
@@ -67,8 +73,10 @@ const argsInfo = {
   DeleteManyPostArgs: [\\"where\\"],
   DeleteOnePostArgs: [\\"where\\"],
   FindFirstPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
+  FindFirstPostOrThrowArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindUniquePostArgs: [\\"where\\"],
+  FindUniquePostOrThrowArgs: [\\"where\\"],
   GroupByPostArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyPostArgs: [\\"data\\", \\"where\\"],
   UpdateOnePostArgs: [\\"data\\", \\"where\\"],
@@ -465,8 +473,10 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
         CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
         DeleteOnePostResolver.ts
+        FindFirstPostOrThrowResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
+        FindUniquePostOrThrowResolver.ts
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
@@ -480,8 +490,10 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
           DeleteManyPostArgs.ts
           DeleteOnePostArgs.ts
           FindFirstPostArgs.ts
+          FindFirstPostOrThrowArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
+          FindUniquePostOrThrowArgs.ts
           GroupByPostArgs.ts
           UpdateManyPostArgs.ts
           UpdateOnePostArgs.ts
@@ -493,8 +505,10 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
         CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
         DeleteOneUserResolver.ts
+        FindFirstUserOrThrowResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
+        FindUniqueUserOrThrowResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
         UpdateManyUserResolver.ts
@@ -508,8 +522,10 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
           DeleteManyUserArgs.ts
           DeleteOneUserArgs.ts
           FindFirstUserArgs.ts
+          FindFirstUserOrThrowArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
+          FindUniqueUserOrThrowArgs.ts
           GroupByUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateOneUserArgs.ts
@@ -643,8 +659,10 @@ const actionResolversMap = {
     deleteManyUser: actionResolvers.DeleteManyUserResolver,
     deleteOneUser: actionResolvers.DeleteOneUserResolver,
     findFirstUser: actionResolvers.FindFirstUserResolver,
+    findFirstUserOrThrow: actionResolvers.FindFirstUserOrThrowResolver,
     users: actionResolvers.FindManyUserResolver,
     user: actionResolvers.FindUniqueUserResolver,
+    getUser: actionResolvers.FindUniqueUserOrThrowResolver,
     groupByUser: actionResolvers.GroupByUserResolver,
     updateManyUser: actionResolvers.UpdateManyUserResolver,
     updateOneUser: actionResolvers.UpdateOneUserResolver,
@@ -657,8 +675,10 @@ const actionResolversMap = {
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     deleteOnePost: actionResolvers.DeleteOnePostResolver,
     findFirstPost: actionResolvers.FindFirstPostResolver,
+    findFirstPostOrThrow: actionResolvers.FindFirstPostOrThrowResolver,
     posts: actionResolvers.FindManyPostResolver,
     post: actionResolvers.FindUniquePostResolver,
+    getPost: actionResolvers.FindUniquePostOrThrowResolver,
     groupByPost: actionResolvers.GroupByPostResolver,
     updateManyPost: actionResolvers.UpdateManyPostResolver,
     updateOnePost: actionResolvers.UpdateOnePostResolver,
@@ -666,8 +686,8 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"users\\", \\"user\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
-  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"posts\\", \\"post\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
+  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"findFirstUserOrThrow\\", \\"users\\", \\"user\\", \\"getUser\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
   AggregateUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
@@ -676,8 +696,10 @@ const argsInfo = {
   DeleteManyUserArgs: [\\"where\\"],
   DeleteOneUserArgs: [\\"where\\"],
   FindFirstUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
+  FindFirstUserOrThrowArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindUniqueUserArgs: [\\"where\\"],
+  FindUniqueUserOrThrowArgs: [\\"where\\"],
   GroupByUserArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyUserArgs: [\\"data\\", \\"where\\"],
   UpdateOneUserArgs: [\\"data\\", \\"where\\"],
@@ -688,8 +710,10 @@ const argsInfo = {
   DeleteManyPostArgs: [\\"where\\"],
   DeleteOnePostArgs: [\\"where\\"],
   FindFirstPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
+  FindFirstPostOrThrowArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindUniquePostArgs: [\\"where\\"],
+  FindUniquePostOrThrowArgs: [\\"where\\"],
   GroupByPostArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyPostArgs: [\\"data\\", \\"where\\"],
   UpdateOnePostArgs: [\\"data\\", \\"where\\"],
@@ -1086,8 +1110,10 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
         CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
         DeleteOnePostResolver.ts
+        FindFirstPostOrThrowResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
+        FindUniquePostOrThrowResolver.ts
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
@@ -1101,8 +1127,10 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
           DeleteManyPostArgs.ts
           DeleteOnePostArgs.ts
           FindFirstPostArgs.ts
+          FindFirstPostOrThrowArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
+          FindUniquePostOrThrowArgs.ts
           GroupByPostArgs.ts
           UpdateManyPostArgs.ts
           UpdateOnePostArgs.ts
@@ -1114,8 +1142,10 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
         CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
         DeleteOneUserResolver.ts
+        FindFirstUserOrThrowResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
+        FindUniqueUserOrThrowResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
         UpdateManyUserResolver.ts
@@ -1129,8 +1159,10 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
           DeleteManyUserArgs.ts
           DeleteOneUserArgs.ts
           FindFirstUserArgs.ts
+          FindFirstUserOrThrowArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
+          FindUniqueUserOrThrowArgs.ts
           GroupByUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateOneUserArgs.ts

@@ -9,7 +9,6 @@ import {
   ExternalGeneratorOptions,
   InternalGeneratorOptions,
 } from "../generator/options";
-import { toUnixPath } from "../generator/helpers";
 import { ALL_EMIT_BLOCK_KINDS } from "../generator/emit-block";
 import { parseStringBoolean, parseStringArray } from "./helpers";
 

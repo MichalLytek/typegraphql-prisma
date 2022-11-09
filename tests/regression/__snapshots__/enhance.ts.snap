@@ -23,8 +23,10 @@ const actionResolversMap = {
     deleteManyClient: actionResolvers.DeleteManyClientResolver,
     deleteOneClient: actionResolvers.DeleteOneClientResolver,
     findFirstClient: actionResolvers.FindFirstClientResolver,
+    findFirstClientOrThrow: actionResolvers.FindFirstClientOrThrowResolver,
     clients: actionResolvers.FindManyClientResolver,
     client: actionResolvers.FindUniqueClientResolver,
+    getClient: actionResolvers.FindUniqueClientOrThrowResolver,
     groupByClient: actionResolvers.GroupByClientResolver,
     updateManyClient: actionResolvers.UpdateManyClientResolver,
     updateOneClient: actionResolvers.UpdateOneClientResolver,
@@ -37,8 +39,10 @@ const actionResolversMap = {
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     deleteOnePost: actionResolvers.DeleteOnePostResolver,
     findFirstPost: actionResolvers.FindFirstPostResolver,
+    findFirstPostOrThrow: actionResolvers.FindFirstPostOrThrowResolver,
     posts: actionResolvers.FindManyPostResolver,
     post: actionResolvers.FindUniquePostResolver,
+    getPost: actionResolvers.FindUniquePostOrThrowResolver,
     groupByPost: actionResolvers.GroupByPostResolver,
     updateManyPost: actionResolvers.UpdateManyPostResolver,
     updateOnePost: actionResolvers.UpdateOnePostResolver,
@@ -46,8 +50,8 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  Client: [\\"aggregateClient\\", \\"createManyClient\\", \\"createOneClient\\", \\"deleteManyClient\\", \\"deleteOneClient\\", \\"findFirstClient\\", \\"clients\\", \\"client\\", \\"groupByClient\\", \\"updateManyClient\\", \\"updateOneClient\\", \\"upsertOneClient\\"],
-  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"posts\\", \\"post\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
+  Client: [\\"aggregateClient\\", \\"createManyClient\\", \\"createOneClient\\", \\"deleteManyClient\\", \\"deleteOneClient\\", \\"findFirstClient\\", \\"findFirstClientOrThrow\\", \\"clients\\", \\"client\\", \\"getClient\\", \\"groupByClient\\", \\"updateManyClient\\", \\"updateOneClient\\", \\"upsertOneClient\\"],
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
   AggregateClientArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
@@ -56,8 +60,10 @@ const argsInfo = {
   DeleteManyClientArgs: [\\"where\\"],
   DeleteOneClientArgs: [\\"where\\"],
   FindFirstClientArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
+  FindFirstClientOrThrowArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyClientArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindUniqueClientArgs: [\\"where\\"],
+  FindUniqueClientOrThrowArgs: [\\"where\\"],
   GroupByClientArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyClientArgs: [\\"data\\", \\"where\\"],
   UpdateOneClientArgs: [\\"data\\", \\"where\\"],
@@ -68,8 +74,10 @@ const argsInfo = {
   DeleteManyPostArgs: [\\"where\\"],
   DeleteOnePostArgs: [\\"where\\"],
   FindFirstPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
+  FindFirstPostOrThrowArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindUniquePostArgs: [\\"where\\"],
+  FindUniquePostOrThrowArgs: [\\"where\\"],
   GroupByPostArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyPostArgs: [\\"data\\", \\"where\\"],
   UpdateOnePostArgs: [\\"data\\", \\"where\\"],
@@ -513,8 +521,10 @@ const actionResolversMap = {
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     deleteOnePost: actionResolvers.DeleteOnePostResolver,
     findFirstPost: actionResolvers.FindFirstPostResolver,
+    findFirstPostOrThrow: actionResolvers.FindFirstPostOrThrowResolver,
     posts: actionResolvers.FindManyPostResolver,
     post: actionResolvers.FindUniquePostResolver,
+    getPost: actionResolvers.FindUniquePostOrThrowResolver,
     groupByPost: actionResolvers.GroupByPostResolver,
     updateManyPost: actionResolvers.UpdateManyPostResolver,
     updateOnePost: actionResolvers.UpdateOnePostResolver,
@@ -522,7 +532,7 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"posts\\", \\"post\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
   AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
@@ -531,8 +541,10 @@ const argsInfo = {
   DeleteManyPostArgs: [\\"where\\"],
   DeleteOnePostArgs: [\\"where\\"],
   FindFirstPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
+  FindFirstPostOrThrowArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindManyPostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\", \\"distinct\\"],
   FindUniquePostArgs: [\\"where\\"],
+  FindUniquePostOrThrowArgs: [\\"where\\"],
   GroupByPostArgs: [\\"where\\", \\"orderBy\\", \\"by\\", \\"having\\", \\"take\\", \\"skip\\"],
   UpdateManyPostArgs: [\\"data\\", \\"where\\"],
   UpdateOnePostArgs: [\\"data\\", \\"where\\"],

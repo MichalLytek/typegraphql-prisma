@@ -7,8 +7,10 @@ import { CreateOneCreatorArgs } from "./args/CreateOneCreatorArgs";
 import { DeleteManyCreatorArgs } from "./args/DeleteManyCreatorArgs";
 import { DeleteOneCreatorArgs } from "./args/DeleteOneCreatorArgs";
 import { FindFirstCreatorArgs } from "./args/FindFirstCreatorArgs";
+import { FindFirstCreatorOrThrowArgs } from "./args/FindFirstCreatorOrThrowArgs";
 import { FindManyCreatorArgs } from "./args/FindManyCreatorArgs";
 import { FindUniqueCreatorArgs } from "./args/FindUniqueCreatorArgs";
+import { FindUniqueCreatorOrThrowArgs } from "./args/FindUniqueCreatorOrThrowArgs";
 import { GroupByCreatorArgs } from "./args/GroupByCreatorArgs";
 import { UpdateManyCreatorArgs } from "./args/UpdateManyCreatorArgs";
 import { UpdateOneCreatorArgs } from "./args/UpdateOneCreatorArgs";
@@ -96,6 +98,19 @@ export class CreatorCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => Creator, {
+    nullable: true
+  })
+  async findFirstCreatorOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstCreatorOrThrowArgs): Promise<Creator | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).creator.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [Creator], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class CreatorCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).creator.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Creator, {
+    nullable: true
+  })
+  async getCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueCreatorOrThrowArgs): Promise<Creator | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).creator.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

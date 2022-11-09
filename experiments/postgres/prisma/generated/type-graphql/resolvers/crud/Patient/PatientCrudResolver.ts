@@ -7,8 +7,10 @@ import { CreateOnePatientArgs } from "./args/CreateOnePatientArgs";
 import { DeleteManyPatientArgs } from "./args/DeleteManyPatientArgs";
 import { DeleteOnePatientArgs } from "./args/DeleteOnePatientArgs";
 import { FindFirstPatientArgs } from "./args/FindFirstPatientArgs";
+import { FindFirstPatientOrThrowArgs } from "./args/FindFirstPatientOrThrowArgs";
 import { FindManyPatientArgs } from "./args/FindManyPatientArgs";
 import { FindUniquePatientArgs } from "./args/FindUniquePatientArgs";
+import { FindUniquePatientOrThrowArgs } from "./args/FindUniquePatientOrThrowArgs";
 import { GroupByPatientArgs } from "./args/GroupByPatientArgs";
 import { UpdateManyPatientArgs } from "./args/UpdateManyPatientArgs";
 import { UpdateOnePatientArgs } from "./args/UpdateOnePatientArgs";
@@ -96,6 +98,19 @@ export class PatientCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => Patient, {
+    nullable: true
+  })
+  async findFirstPatientOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstPatientOrThrowArgs): Promise<Patient | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).patient.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [Patient], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class PatientCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).patient.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Patient, {
+    nullable: true
+  })
+  async getPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniquePatientOrThrowArgs): Promise<Patient | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).patient.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

@@ -13,12 +13,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.5.0
- * Query Engine version: 0362da9eebca54d94c8ef5edd3b2e90af99ba452
+ * Prisma Client JS version: 4.6.0
+ * Query Engine version: 2e719efb80b56a3f32d18a62489de95bb9c130e3
  */
 Prisma.prismaVersion = {
-  client: "4.5.0",
-  engine: "0362da9eebca54d94c8ef5edd3b2e90af99ba452"
+  client: "4.6.0",
+  engine: "2e719efb80b56a3f32d18a62489de95bb9c130e3"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -67,6 +67,7 @@ Prisma.raw = () => {
 In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
 )}
 Prisma.validator = () => (val) => val
+
 
 /**
  * Shorthand utilities for JSON filtering

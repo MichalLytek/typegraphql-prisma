@@ -44,10 +44,14 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         DeleteManyPostResolver.js
         DeleteOnePostResolver.d.ts
         DeleteOnePostResolver.js
+        FindFirstPostOrThrowResolver.d.ts
+        FindFirstPostOrThrowResolver.js
         FindFirstPostResolver.d.ts
         FindFirstPostResolver.js
         FindManyPostResolver.d.ts
         FindManyPostResolver.js
+        FindUniquePostOrThrowResolver.d.ts
+        FindUniquePostOrThrowResolver.js
         FindUniquePostResolver.d.ts
         FindUniquePostResolver.js
         GroupByPostResolver.d.ts
@@ -73,10 +77,14 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           DeleteOnePostArgs.js
           FindFirstPostArgs.d.ts
           FindFirstPostArgs.js
+          FindFirstPostOrThrowArgs.d.ts
+          FindFirstPostOrThrowArgs.js
           FindManyPostArgs.d.ts
           FindManyPostArgs.js
           FindUniquePostArgs.d.ts
           FindUniquePostArgs.js
+          FindUniquePostOrThrowArgs.d.ts
+          FindUniquePostOrThrowArgs.js
           GroupByPostArgs.d.ts
           GroupByPostArgs.js
           UpdateManyPostArgs.d.ts
@@ -98,10 +106,14 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         DeleteManyUserResolver.js
         DeleteOneUserResolver.d.ts
         DeleteOneUserResolver.js
+        FindFirstUserOrThrowResolver.d.ts
+        FindFirstUserOrThrowResolver.js
         FindFirstUserResolver.d.ts
         FindFirstUserResolver.js
         FindManyUserResolver.d.ts
         FindManyUserResolver.js
+        FindUniqueUserOrThrowResolver.d.ts
+        FindUniqueUserOrThrowResolver.js
         FindUniqueUserResolver.d.ts
         FindUniqueUserResolver.js
         GroupByUserResolver.d.ts
@@ -127,10 +139,14 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           DeleteOneUserArgs.js
           FindFirstUserArgs.d.ts
           FindFirstUserArgs.js
+          FindFirstUserOrThrowArgs.d.ts
+          FindFirstUserOrThrowArgs.js
           FindManyUserArgs.d.ts
           FindManyUserArgs.js
           FindUniqueUserArgs.d.ts
           FindUniqueUserArgs.js
+          FindUniqueUserOrThrowArgs.d.ts
+          FindUniqueUserOrThrowArgs.js
           GroupByUserArgs.d.ts
           GroupByUserArgs.js
           UpdateManyUserArgs.d.ts
@@ -376,8 +392,10 @@ exports[`structure should generate proper folders and file names when model is r
         CreateOneRenamedPostResolver.ts
         DeleteManyRenamedPostResolver.ts
         DeleteOneRenamedPostResolver.ts
+        FindFirstRenamedPostOrThrowResolver.ts
         FindFirstRenamedPostResolver.ts
         FindManyRenamedPostResolver.ts
+        FindUniqueRenamedPostOrThrowResolver.ts
         FindUniqueRenamedPostResolver.ts
         GroupByRenamedPostResolver.ts
         RenamedPostCrudResolver.ts
@@ -391,8 +409,10 @@ exports[`structure should generate proper folders and file names when model is r
           DeleteManyRenamedPostArgs.ts
           DeleteOneRenamedPostArgs.ts
           FindFirstRenamedPostArgs.ts
+          FindFirstRenamedPostOrThrowArgs.ts
           FindManyRenamedPostArgs.ts
           FindUniqueRenamedPostArgs.ts
+          FindUniqueRenamedPostOrThrowArgs.ts
           GroupByRenamedPostArgs.ts
           UpdateManyRenamedPostArgs.ts
           UpdateOneRenamedPostArgs.ts
@@ -404,8 +424,10 @@ exports[`structure should generate proper folders and file names when model is r
         CreateOneRenamedUserResolver.ts
         DeleteManyRenamedUserResolver.ts
         DeleteOneRenamedUserResolver.ts
+        FindFirstRenamedUserOrThrowResolver.ts
         FindFirstRenamedUserResolver.ts
         FindManyRenamedUserResolver.ts
+        FindUniqueRenamedUserOrThrowResolver.ts
         FindUniqueRenamedUserResolver.ts
         GroupByRenamedUserResolver.ts
         RenamedUserCrudResolver.ts
@@ -419,8 +441,10 @@ exports[`structure should generate proper folders and file names when model is r
           DeleteManyRenamedUserArgs.ts
           DeleteOneRenamedUserArgs.ts
           FindFirstRenamedUserArgs.ts
+          FindFirstRenamedUserOrThrowArgs.ts
           FindManyRenamedUserArgs.ts
           FindUniqueRenamedUserArgs.ts
+          FindUniqueRenamedUserOrThrowArgs.ts
           GroupByRenamedUserArgs.ts
           UpdateManyRenamedUserArgs.ts
           UpdateOneRenamedUserArgs.ts
@@ -561,8 +585,10 @@ exports[`structure should generate proper folders structure and file names for c
         CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
         DeleteOnePostResolver.ts
+        FindFirstPostOrThrowResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
+        FindUniquePostOrThrowResolver.ts
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
@@ -576,8 +602,10 @@ exports[`structure should generate proper folders structure and file names for c
           DeleteManyPostArgs.ts
           DeleteOnePostArgs.ts
           FindFirstPostArgs.ts
+          FindFirstPostOrThrowArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
+          FindUniquePostOrThrowArgs.ts
           GroupByPostArgs.ts
           UpdateManyPostArgs.ts
           UpdateOnePostArgs.ts
@@ -589,8 +617,10 @@ exports[`structure should generate proper folders structure and file names for c
         CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
         DeleteOneUserResolver.ts
+        FindFirstUserOrThrowResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
+        FindUniqueUserOrThrowResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
         UpdateManyUserResolver.ts
@@ -604,8 +634,10 @@ exports[`structure should generate proper folders structure and file names for c
           DeleteManyUserArgs.ts
           DeleteOneUserArgs.ts
           FindFirstUserArgs.ts
+          FindFirstUserOrThrowArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
+          FindUniqueUserOrThrowArgs.ts
           GroupByUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateOneUserArgs.ts

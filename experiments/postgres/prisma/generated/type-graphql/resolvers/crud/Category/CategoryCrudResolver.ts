@@ -7,8 +7,10 @@ import { CreateOneCategoryArgs } from "./args/CreateOneCategoryArgs";
 import { DeleteManyCategoryArgs } from "./args/DeleteManyCategoryArgs";
 import { DeleteOneCategoryArgs } from "./args/DeleteOneCategoryArgs";
 import { FindFirstCategoryArgs } from "./args/FindFirstCategoryArgs";
+import { FindFirstCategoryOrThrowArgs } from "./args/FindFirstCategoryOrThrowArgs";
 import { FindManyCategoryArgs } from "./args/FindManyCategoryArgs";
 import { FindUniqueCategoryArgs } from "./args/FindUniqueCategoryArgs";
+import { FindUniqueCategoryOrThrowArgs } from "./args/FindUniqueCategoryOrThrowArgs";
 import { GroupByCategoryArgs } from "./args/GroupByCategoryArgs";
 import { UpdateManyCategoryArgs } from "./args/UpdateManyCategoryArgs";
 import { UpdateOneCategoryArgs } from "./args/UpdateOneCategoryArgs";
@@ -96,6 +98,19 @@ export class CategoryCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => Category, {
+    nullable: true
+  })
+  async findFirstCategoryOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstCategoryOrThrowArgs): Promise<Category | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).category.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [Category], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class CategoryCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).category.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Category, {
+    nullable: true
+  })
+  async getCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueCategoryOrThrowArgs): Promise<Category | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).category.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

@@ -7,8 +7,10 @@ import { CreateOneCommentArgs } from "./args/CreateOneCommentArgs";
 import { DeleteManyCommentArgs } from "./args/DeleteManyCommentArgs";
 import { DeleteOneCommentArgs } from "./args/DeleteOneCommentArgs";
 import { FindFirstCommentArgs } from "./args/FindFirstCommentArgs";
+import { FindFirstCommentOrThrowArgs } from "./args/FindFirstCommentOrThrowArgs";
 import { FindManyCommentArgs } from "./args/FindManyCommentArgs";
 import { FindUniqueCommentArgs } from "./args/FindUniqueCommentArgs";
+import { FindUniqueCommentOrThrowArgs } from "./args/FindUniqueCommentOrThrowArgs";
 import { GroupByCommentArgs } from "./args/GroupByCommentArgs";
 import { UpdateManyCommentArgs } from "./args/UpdateManyCommentArgs";
 import { UpdateOneCommentArgs } from "./args/UpdateOneCommentArgs";
@@ -96,6 +98,19 @@ export class CommentCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => Comment, {
+    nullable: true
+  })
+  async findFirstCommentOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstCommentOrThrowArgs): Promise<Comment | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).comment.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [Comment], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class CommentCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).comment.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Comment, {
+    nullable: true
+  })
+  async getComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueCommentOrThrowArgs): Promise<Comment | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).comment.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

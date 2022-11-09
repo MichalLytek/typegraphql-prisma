@@ -476,7 +476,11 @@ type Query {
   aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): Post
+  findFirstPostOrThrow(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByWithRelationInput!], skip: Int, take: Int, where: PostWhereInput): Post
   findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): User
+  findFirstUserOrThrow(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): User
+  getPost(where: PostWhereUniqueInput!): Post
+  getUser(where: UserWhereUniqueInput!): User
   groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByWithAggregationInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
   post(where: PostWhereUniqueInput!): Post
@@ -729,8 +733,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: Int
-}
-"
+}"
 `;
 
 exports[`generator integration should generates TypeGraphQL classes files to output folder by running \`prisma generate\`: files structure 1`] = `
@@ -742,6 +745,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
+    TransactionIsolationLevel.ts
     UserScalarFieldEnum.ts
     index.ts
   helpers.ts
@@ -758,8 +762,10 @@ exports[`generator integration should generates TypeGraphQL classes files to out
         CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
         DeleteOnePostResolver.ts
+        FindFirstPostOrThrowResolver.ts
         FindFirstPostResolver.ts
         FindManyPostResolver.ts
+        FindUniquePostOrThrowResolver.ts
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
@@ -773,8 +779,10 @@ exports[`generator integration should generates TypeGraphQL classes files to out
           DeleteManyPostArgs.ts
           DeleteOnePostArgs.ts
           FindFirstPostArgs.ts
+          FindFirstPostOrThrowArgs.ts
           FindManyPostArgs.ts
           FindUniquePostArgs.ts
+          FindUniquePostOrThrowArgs.ts
           GroupByPostArgs.ts
           UpdateManyPostArgs.ts
           UpdateOnePostArgs.ts
@@ -786,8 +794,10 @@ exports[`generator integration should generates TypeGraphQL classes files to out
         CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
         DeleteOneUserResolver.ts
+        FindFirstUserOrThrowResolver.ts
         FindFirstUserResolver.ts
         FindManyUserResolver.ts
+        FindUniqueUserOrThrowResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
         UpdateManyUserResolver.ts
@@ -801,8 +811,10 @@ exports[`generator integration should generates TypeGraphQL classes files to out
           DeleteManyUserArgs.ts
           DeleteOneUserArgs.ts
           FindFirstUserArgs.ts
+          FindFirstUserOrThrowArgs.ts
           FindManyUserArgs.ts
           FindUniqueUserArgs.ts
+          FindUniqueUserOrThrowArgs.ts
           GroupByUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateOneUserArgs.ts

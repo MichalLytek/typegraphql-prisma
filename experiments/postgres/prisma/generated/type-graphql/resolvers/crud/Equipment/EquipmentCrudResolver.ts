@@ -7,8 +7,10 @@ import { CreateOneEquipmentArgs } from "./args/CreateOneEquipmentArgs";
 import { DeleteManyEquipmentArgs } from "./args/DeleteManyEquipmentArgs";
 import { DeleteOneEquipmentArgs } from "./args/DeleteOneEquipmentArgs";
 import { FindFirstEquipmentArgs } from "./args/FindFirstEquipmentArgs";
+import { FindFirstEquipmentOrThrowArgs } from "./args/FindFirstEquipmentOrThrowArgs";
 import { FindManyEquipmentArgs } from "./args/FindManyEquipmentArgs";
 import { FindUniqueEquipmentArgs } from "./args/FindUniqueEquipmentArgs";
+import { FindUniqueEquipmentOrThrowArgs } from "./args/FindUniqueEquipmentOrThrowArgs";
 import { GroupByEquipmentArgs } from "./args/GroupByEquipmentArgs";
 import { UpdateManyEquipmentArgs } from "./args/UpdateManyEquipmentArgs";
 import { UpdateOneEquipmentArgs } from "./args/UpdateOneEquipmentArgs";
@@ -96,6 +98,19 @@ export class EquipmentCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => Equipment, {
+    nullable: true
+  })
+  async findFirstEquipmentOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstEquipmentOrThrowArgs): Promise<Equipment | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).equipment.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [Equipment], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class EquipmentCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).equipment.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Equipment, {
+    nullable: true
+  })
+  async getEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueEquipmentOrThrowArgs): Promise<Equipment | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).equipment.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

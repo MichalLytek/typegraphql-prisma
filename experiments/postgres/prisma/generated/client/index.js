@@ -17,7 +17,8 @@ const {
   Decimal,
   Debug,
   objectEnumValues,
-  makeStrictEnum
+  makeStrictEnum,
+  Extensions
 } = require('./runtime/index')
 
 
@@ -26,12 +27,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.5.0
- * Query Engine version: 0362da9eebca54d94c8ef5edd3b2e90af99ba452
+ * Prisma Client JS version: 4.6.0
+ * Query Engine version: 2e719efb80b56a3f32d18a62489de95bb9c130e3
  */
 Prisma.prismaVersion = {
-  client: "4.5.0",
-  engine: "0362da9eebca54d94c8ef5edd3b2e90af99ba452"
+  client: "4.6.0",
+  engine: "2e719efb80b56a3f32d18a62489de95bb9c130e3"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -50,6 +51,7 @@ Prisma.empty = empty
 Prisma.join = join
 Prisma.raw = raw
 Prisma.validator = () => (val) => val
+
 
 /**
  * Shorthand utilities for JSON filtering
@@ -297,8 +299,8 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "4.5.0",
-  "engineVersion": "0362da9eebca54d94c8ef5edd3b2e90af99ba452",
+  "clientVersion": "4.6.0",
+  "engineVersion": "2e719efb80b56a3f32d18a62489de95bb9c130e3",
   "datasourceNames": [
     "postgres"
   ],

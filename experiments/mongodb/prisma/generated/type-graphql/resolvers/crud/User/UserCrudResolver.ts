@@ -7,8 +7,10 @@ import { CreateOneUserArgs } from "./args/CreateOneUserArgs";
 import { DeleteManyUserArgs } from "./args/DeleteManyUserArgs";
 import { DeleteOneUserArgs } from "./args/DeleteOneUserArgs";
 import { FindFirstUserArgs } from "./args/FindFirstUserArgs";
+import { FindFirstUserOrThrowArgs } from "./args/FindFirstUserOrThrowArgs";
 import { FindManyUserArgs } from "./args/FindManyUserArgs";
 import { FindUniqueUserArgs } from "./args/FindUniqueUserArgs";
+import { FindUniqueUserOrThrowArgs } from "./args/FindUniqueUserOrThrowArgs";
 import { GroupByUserArgs } from "./args/GroupByUserArgs";
 import { UpdateManyUserArgs } from "./args/UpdateManyUserArgs";
 import { UpdateOneUserArgs } from "./args/UpdateOneUserArgs";
@@ -96,6 +98,19 @@ export class UserCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => User, {
+    nullable: true
+  })
+  async findFirstUserOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUserOrThrowArgs): Promise<User | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [User], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class UserCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).user.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => User, {
+    nullable: true
+  })
+  async getUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserOrThrowArgs): Promise<User | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

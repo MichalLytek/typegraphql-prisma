@@ -7,8 +7,10 @@ import { CreateOneMovieArgs } from "./args/CreateOneMovieArgs";
 import { DeleteManyMovieArgs } from "./args/DeleteManyMovieArgs";
 import { DeleteOneMovieArgs } from "./args/DeleteOneMovieArgs";
 import { FindFirstMovieArgs } from "./args/FindFirstMovieArgs";
+import { FindFirstMovieOrThrowArgs } from "./args/FindFirstMovieOrThrowArgs";
 import { FindManyMovieArgs } from "./args/FindManyMovieArgs";
 import { FindUniqueMovieArgs } from "./args/FindUniqueMovieArgs";
+import { FindUniqueMovieOrThrowArgs } from "./args/FindUniqueMovieOrThrowArgs";
 import { GroupByMovieArgs } from "./args/GroupByMovieArgs";
 import { UpdateManyMovieArgs } from "./args/UpdateManyMovieArgs";
 import { UpdateOneMovieArgs } from "./args/UpdateOneMovieArgs";
@@ -96,6 +98,19 @@ export class MovieCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => Movie, {
+    nullable: true
+  })
+  async findFirstMovieOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstMovieOrThrowArgs): Promise<Movie | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).movie.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [Movie], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class MovieCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).movie.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Movie, {
+    nullable: true
+  })
+  async getMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueMovieOrThrowArgs): Promise<Movie | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).movie.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

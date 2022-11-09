@@ -9,11 +9,19 @@ export type ModelKeys = keyof Exclude<DMMF.ModelMapping, BaseKeys>;
 
 export type SupportedQueries = keyof Pick<
   typeof DMMF.ModelAction,
-  "findUnique" | "findFirst" | "findMany" | "aggregate" | "groupBy"
+  | "findUnique"
+  | "findUniqueOrThrow"
+  | "findFirst"
+  | "findFirstOrThrow"
+  | "findMany"
+  | "aggregate"
+  | "groupBy"
 >;
 export const supportedQueryActions: SupportedQueries[] = [
   "findUnique",
+  "findUniqueOrThrow",
   "findFirst",
+  "findFirstOrThrow",
   "findMany",
   "aggregate",
   "groupBy",

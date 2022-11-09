@@ -7,8 +7,10 @@ import { CreateOneProblemArgs } from "./args/CreateOneProblemArgs";
 import { DeleteManyProblemArgs } from "./args/DeleteManyProblemArgs";
 import { DeleteOneProblemArgs } from "./args/DeleteOneProblemArgs";
 import { FindFirstProblemArgs } from "./args/FindFirstProblemArgs";
+import { FindFirstProblemOrThrowArgs } from "./args/FindFirstProblemOrThrowArgs";
 import { FindManyProblemArgs } from "./args/FindManyProblemArgs";
 import { FindUniqueProblemArgs } from "./args/FindUniqueProblemArgs";
+import { FindUniqueProblemOrThrowArgs } from "./args/FindUniqueProblemOrThrowArgs";
 import { GroupByProblemArgs } from "./args/GroupByProblemArgs";
 import { UpdateManyProblemArgs } from "./args/UpdateManyProblemArgs";
 import { UpdateOneProblemArgs } from "./args/UpdateOneProblemArgs";
@@ -96,6 +98,19 @@ export class ProblemCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => Problem, {
+    nullable: true
+  })
+  async findFirstProblemOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstProblemOrThrowArgs): Promise<Problem | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).problem.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [Problem], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class ProblemCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).problem.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Problem, {
+    nullable: true
+  })
+  async getProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueProblemOrThrowArgs): Promise<Problem | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).problem.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

@@ -7,8 +7,10 @@ import { CreateOneDirectorArgs } from "./args/CreateOneDirectorArgs";
 import { DeleteManyDirectorArgs } from "./args/DeleteManyDirectorArgs";
 import { DeleteOneDirectorArgs } from "./args/DeleteOneDirectorArgs";
 import { FindFirstDirectorArgs } from "./args/FindFirstDirectorArgs";
+import { FindFirstDirectorOrThrowArgs } from "./args/FindFirstDirectorOrThrowArgs";
 import { FindManyDirectorArgs } from "./args/FindManyDirectorArgs";
 import { FindUniqueDirectorArgs } from "./args/FindUniqueDirectorArgs";
+import { FindUniqueDirectorOrThrowArgs } from "./args/FindUniqueDirectorOrThrowArgs";
 import { GroupByDirectorArgs } from "./args/GroupByDirectorArgs";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { UpdateOneDirectorArgs } from "./args/UpdateOneDirectorArgs";
@@ -96,6 +98,19 @@ export class DirectorCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => Director, {
+    nullable: true
+  })
+  async findFirstDirectorOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstDirectorOrThrowArgs): Promise<Director | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).director.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [Director], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class DirectorCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).director.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => Director, {
+    nullable: true
+  })
+  async getDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueDirectorOrThrowArgs): Promise<Director | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).director.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

@@ -7,8 +7,10 @@ import { CreateOneMainUserArgs } from "./args/CreateOneMainUserArgs";
 import { DeleteManyMainUserArgs } from "./args/DeleteManyMainUserArgs";
 import { DeleteOneMainUserArgs } from "./args/DeleteOneMainUserArgs";
 import { FindFirstMainUserArgs } from "./args/FindFirstMainUserArgs";
+import { FindFirstMainUserOrThrowArgs } from "./args/FindFirstMainUserOrThrowArgs";
 import { FindManyMainUserArgs } from "./args/FindManyMainUserArgs";
 import { FindUniqueMainUserArgs } from "./args/FindUniqueMainUserArgs";
+import { FindUniqueMainUserOrThrowArgs } from "./args/FindUniqueMainUserOrThrowArgs";
 import { GroupByMainUserArgs } from "./args/GroupByMainUserArgs";
 import { UpdateManyMainUserArgs } from "./args/UpdateManyMainUserArgs";
 import { UpdateOneMainUserArgs } from "./args/UpdateOneMainUserArgs";
@@ -96,6 +98,19 @@ export class MainUserCrudResolver {
     });
   }
 
+  @TypeGraphQL.Query(_returns => MainUser, {
+    nullable: true
+  })
+  async findFirstMainUserOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstMainUserOrThrowArgs): Promise<MainUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findFirstOrThrow({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Query(_returns => [MainUser], {
     nullable: false
   })
@@ -117,6 +132,19 @@ export class MainUserCrudResolver {
       graphqlFields(info as any)
     );
     return getPrismaFromContext(ctx).user.findUnique({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Query(_returns => MainUser, {
+    nullable: true
+  })
+  async getMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueMainUserOrThrowArgs): Promise<MainUser | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

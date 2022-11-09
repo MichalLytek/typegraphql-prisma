@@ -3003,12 +3003,26 @@ type Query {
   director(where: DirectorWhereUniqueInput!): Director
   directors(cursor: DirectorWhereUniqueInput, distinct: [DirectorScalarFieldEnum!], orderBy: [DirectorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: DirectorWhereInput): [Director!]!
   findFirstCreator(cursor: CreatorWhereUniqueInput, distinct: [CreatorScalarFieldEnum!], orderBy: [CreatorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CreatorWhereInput): Creator
+  findFirstCreatorOrThrow(cursor: CreatorWhereUniqueInput, distinct: [CreatorScalarFieldEnum!], orderBy: [CreatorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CreatorWhereInput): Creator
   findFirstDirector(cursor: DirectorWhereUniqueInput, distinct: [DirectorScalarFieldEnum!], orderBy: [DirectorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: DirectorWhereInput): Director
+  findFirstDirectorOrThrow(cursor: DirectorWhereUniqueInput, distinct: [DirectorScalarFieldEnum!], orderBy: [DirectorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: DirectorWhereInput): Director
   findFirstMainUser(cursor: MainUserWhereUniqueInput, distinct: [MainUserScalarFieldEnum!], orderBy: [MainUserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MainUserWhereInput): MainUser
+  findFirstMainUserOrThrow(cursor: MainUserWhereUniqueInput, distinct: [MainUserScalarFieldEnum!], orderBy: [MainUserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MainUserWhereInput): MainUser
   findFirstMovie(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MovieWhereInput): Movie
+  findFirstMovieOrThrow(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MovieWhereInput): Movie
   findFirstNativeTypeModel(cursor: NativeTypeModelWhereUniqueInput, distinct: [NativeTypeModelScalarFieldEnum!], orderBy: [NativeTypeModelOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: NativeTypeModelWhereInput): NativeTypeModel
+  findFirstNativeTypeModelOrThrow(cursor: NativeTypeModelWhereUniqueInput, distinct: [NativeTypeModelScalarFieldEnum!], orderBy: [NativeTypeModelOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: NativeTypeModelWhereInput): NativeTypeModel
   findFirstPatient(cursor: PatientWhereUniqueInput, distinct: [PatientScalarFieldEnum!], orderBy: [PatientOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: PatientWhereInput): Patient
+  findFirstPatientOrThrow(cursor: PatientWhereUniqueInput, distinct: [PatientScalarFieldEnum!], orderBy: [PatientOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: PatientWhereInput): Patient
   findFirstProblem(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ProblemWhereInput): Problem
+  findFirstProblemOrThrow(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ProblemWhereInput): Problem
+  getCreator(where: CreatorWhereUniqueInput!): Creator
+  getDirector(where: DirectorWhereUniqueInput!): Director
+  getMainUser(where: MainUserWhereUniqueInput!): MainUser
+  getMovie(where: MovieWhereUniqueInput!): Movie
+  getNativeTypeModel(where: NativeTypeModelWhereUniqueInput!): NativeTypeModel
+  getPatient(where: PatientWhereUniqueInput!): Patient
+  getProblem(where: ProblemWhereUniqueInput!): Problem
   groupByCategory(by: [CategoryScalarFieldEnum!]!, having: CategoryScalarWhereWithAggregatesInput, orderBy: [CategoryOrderByWithAggregationInput!], skip: Int, take: Int, where: CategoryWhereInput): [CategoryGroupBy!]!
   groupByCreator(by: [CreatorScalarFieldEnum!]!, having: CreatorScalarWhereWithAggregatesInput, orderBy: [CreatorOrderByWithAggregationInput!], skip: Int, take: Int, where: CreatorWhereInput): [CreatorGroupBy!]!
   groupByDirector(by: [DirectorScalarFieldEnum!]!, having: DirectorScalarWhereWithAggregatesInput, orderBy: [DirectorOrderByWithAggregationInput!], skip: Int, take: Int, where: DirectorWhereInput): [DirectorGroupBy!]!
