@@ -1077,8 +1077,8 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect = {
-    posts?: boolean
-    editorPosts?: boolean
+    posts?: boolean | UserCountOutputTypeCountPostsArgs
+    editorPosts?: boolean | UserCountOutputTypeCountEditorPostsArgs
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs, U = keyof S> =
@@ -1111,6 +1111,22 @@ export namespace Prisma {
   }
 
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPostsArgs = {
+    where?: postWhereInput
+  }
+
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEditorPostsArgs = {
+    where?: postWhereInput
+  }
+
+
 
   /**
    * Count Type DirectorCountOutputType
@@ -1122,7 +1138,7 @@ export namespace Prisma {
   }
 
   export type DirectorCountOutputTypeSelect = {
-    movies?: boolean
+    movies?: boolean | DirectorCountOutputTypeCountMoviesArgs
   }
 
   export type DirectorCountOutputTypeGetPayload<S extends boolean | null | undefined | DirectorCountOutputTypeArgs, U = keyof S> =
@@ -1155,6 +1171,14 @@ export namespace Prisma {
   }
 
 
+  /**
+   * DirectorCountOutputType without action
+   */
+  export type DirectorCountOutputTypeCountMoviesArgs = {
+    where?: MovieWhereInput
+  }
+
+
 
   /**
    * Count Type ProblemCountOutputType
@@ -1166,7 +1190,7 @@ export namespace Prisma {
   }
 
   export type ProblemCountOutputTypeSelect = {
-    likedBy?: boolean
+    likedBy?: boolean | ProblemCountOutputTypeCountLikedByArgs
   }
 
   export type ProblemCountOutputTypeGetPayload<S extends boolean | null | undefined | ProblemCountOutputTypeArgs, U = keyof S> =
@@ -1199,6 +1223,14 @@ export namespace Prisma {
   }
 
 
+  /**
+   * ProblemCountOutputType without action
+   */
+  export type ProblemCountOutputTypeCountLikedByArgs = {
+    where?: CreatorWhereInput
+  }
+
+
 
   /**
    * Count Type CreatorCountOutputType
@@ -1211,8 +1243,8 @@ export namespace Prisma {
   }
 
   export type CreatorCountOutputTypeSelect = {
-    likes?: boolean
-    problems?: boolean
+    likes?: boolean | CreatorCountOutputTypeCountLikesArgs
+    problems?: boolean | CreatorCountOutputTypeCountProblemsArgs
   }
 
   export type CreatorCountOutputTypeGetPayload<S extends boolean | null | undefined | CreatorCountOutputTypeArgs, U = keyof S> =
@@ -1242,6 +1274,22 @@ export namespace Prisma {
      * 
     **/
     select?: CreatorCountOutputTypeSelect | null
+  }
+
+
+  /**
+   * CreatorCountOutputType without action
+   */
+  export type CreatorCountOutputTypeCountLikesArgs = {
+    where?: ProblemWhereInput
+  }
+
+
+  /**
+   * CreatorCountOutputType without action
+   */
+  export type CreatorCountOutputTypeCountProblemsArgs = {
+    where?: ProblemWhereInput
   }
 
 

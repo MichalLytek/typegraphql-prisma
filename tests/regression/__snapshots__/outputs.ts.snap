@@ -804,6 +804,94 @@ export { SampleSumAggregate } from \\"./SampleSumAggregate\\";
 "
 `;
 
+exports[`outputs when customPrismaImportPath option is set should properly generate output type classes: AggregateSample 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../test/import\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { SampleAvgAggregate } from \\"../outputs/SampleAvgAggregate\\";
+import { SampleCountAggregate } from \\"../outputs/SampleCountAggregate\\";
+import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
+import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
+import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
+
+@TypeGraphQL.ObjectType(\\"AggregateSample\\", {
+  isAbstract: true
+})
+export class AggregateSample {
+  @TypeGraphQL.Field(_type => SampleCountAggregate, {
+    nullable: true
+  })
+  _count!: SampleCountAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleAvgAggregate, {
+    nullable: true
+  })
+  _avg!: SampleAvgAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleSumAggregate, {
+    nullable: true
+  })
+  _sum!: SampleSumAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleMinAggregate, {
+    nullable: true
+  })
+  _min!: SampleMinAggregate | null;
+
+  @TypeGraphQL.Field(_type => SampleMaxAggregate, {
+    nullable: true
+  })
+  _max!: SampleMaxAggregate | null;
+}
+"
+`;
+
+exports[`outputs when filteredRelationCount preview feature is enabled should properly generate count classes for relation fields with args: FirstModelCount 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { FirstModelCountSecondModelsFieldArgs } from \\"./args/FirstModelCountSecondModelsFieldArgs\\";
+
+@TypeGraphQL.ObjectType(\\"FirstModelCount\\", {
+  isAbstract: true
+})
+export class FirstModelCount {
+  secondModelsField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    name: \\"secondModelsField\\",
+    nullable: false
+  })
+  getSecondModelsField(@TypeGraphQL.Root() root: FirstModelCount, @TypeGraphQL.Args() args: FirstModelCountSecondModelsFieldArgs): number {
+    return root.secondModelsField;
+  }
+}
+"
+`;
+
+exports[`outputs when filteredRelationCount preview feature is enabled should properly generate count classes for relation fields with args: outputs index 1`] = `
+"export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
+export { AggregateFirstModel } from \\"./AggregateFirstModel\\";
+export { AggregateSecondModel } from \\"./AggregateSecondModel\\";
+export { FirstModelAvgAggregate } from \\"./FirstModelAvgAggregate\\";
+export { FirstModelCount } from \\"./FirstModelCount\\";
+export { FirstModelCountAggregate } from \\"./FirstModelCountAggregate\\";
+export { FirstModelGroupBy } from \\"./FirstModelGroupBy\\";
+export { FirstModelMaxAggregate } from \\"./FirstModelMaxAggregate\\";
+export { FirstModelMinAggregate } from \\"./FirstModelMinAggregate\\";
+export { FirstModelSumAggregate } from \\"./FirstModelSumAggregate\\";
+export { SecondModelAvgAggregate } from \\"./SecondModelAvgAggregate\\";
+export { SecondModelCountAggregate } from \\"./SecondModelCountAggregate\\";
+export { SecondModelGroupBy } from \\"./SecondModelGroupBy\\";
+export { SecondModelMaxAggregate } from \\"./SecondModelMaxAggregate\\";
+export { SecondModelMinAggregate } from \\"./SecondModelMinAggregate\\";
+export { SecondModelSumAggregate } from \\"./SecondModelSumAggregate\\";
+export * from \\"./args\\";
+"
+`;
+
 exports[`outputs when simpleResolvers option is enabled should properly generate output type classes: AffectedRowsOutput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
@@ -837,49 +925,6 @@ import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
 @TypeGraphQL.ObjectType(\\"AggregateSample\\", {
   isAbstract: true,
   simpleResolvers: true
-})
-export class AggregateSample {
-  @TypeGraphQL.Field(_type => SampleCountAggregate, {
-    nullable: true
-  })
-  _count!: SampleCountAggregate | null;
-
-  @TypeGraphQL.Field(_type => SampleAvgAggregate, {
-    nullable: true
-  })
-  _avg!: SampleAvgAggregate | null;
-
-  @TypeGraphQL.Field(_type => SampleSumAggregate, {
-    nullable: true
-  })
-  _sum!: SampleSumAggregate | null;
-
-  @TypeGraphQL.Field(_type => SampleMinAggregate, {
-    nullable: true
-  })
-  _min!: SampleMinAggregate | null;
-
-  @TypeGraphQL.Field(_type => SampleMaxAggregate, {
-    nullable: true
-  })
-  _max!: SampleMaxAggregate | null;
-}
-"
-`;
-
-exports[`outputs when simpleResolvers option is enabled should properly generate output type classes: AggregateSample 2`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import * as GraphQLScalars from \\"graphql-scalars\\";
-import { Prisma } from \\"../../../test/import\\";
-import { DecimalJSScalar } from \\"../../scalars\\";
-import { SampleAvgAggregate } from \\"../outputs/SampleAvgAggregate\\";
-import { SampleCountAggregate } from \\"../outputs/SampleCountAggregate\\";
-import { SampleMaxAggregate } from \\"../outputs/SampleMaxAggregate\\";
-import { SampleMinAggregate } from \\"../outputs/SampleMinAggregate\\";
-import { SampleSumAggregate } from \\"../outputs/SampleSumAggregate\\";
-
-@TypeGraphQL.ObjectType(\\"AggregateSample\\", {
-  isAbstract: true
 })
 export class AggregateSample {
   @TypeGraphQL.Field(_type => SampleCountAggregate, {

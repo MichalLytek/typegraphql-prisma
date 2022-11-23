@@ -2,12 +2,11 @@
 
 exports[`crud should properly generate actions resolver classes for prisma model: CreateManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class CreateManyUserResolver {
@@ -15,9 +14,7 @@ export class CreateManyUserResolver {
     nullable: false
   })
   async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -29,11 +26,10 @@ export class CreateManyUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: CreateOneUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class CreateOneUserResolver {
@@ -41,9 +37,7 @@ export class CreateOneUserResolver {
     nullable: false
   })
   async createOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneUserArgs): Promise<User> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -55,12 +49,11 @@ export class CreateOneUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: DeleteManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class DeleteManyUserResolver {
@@ -68,9 +61,7 @@ export class DeleteManyUserResolver {
     nullable: false
   })
   async deleteManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -82,11 +73,10 @@ export class DeleteManyUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: DeleteOneUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { DeleteOneUserArgs } from \\"./args/DeleteOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class DeleteOneUserResolver {
@@ -94,9 +84,7 @@ export class DeleteOneUserResolver {
     nullable: true
   })
   async deleteOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -108,11 +96,10 @@ export class DeleteOneUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindFirstUserOrThrowResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindFirstUserOrThrowArgs } from \\"./args/FindFirstUserOrThrowArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindFirstUserOrThrowResolver {
@@ -120,9 +107,7 @@ export class FindFirstUserOrThrowResolver {
     nullable: true
   })
   async findFirstUserOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUserOrThrowArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -134,11 +119,10 @@ export class FindFirstUserOrThrowResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindFirstUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindFirstUserArgs } from \\"./args/FindFirstUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindFirstUserResolver {
@@ -146,9 +130,7 @@ export class FindFirstUserResolver {
     nullable: true
   })
   async findFirstUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -160,11 +142,10 @@ export class FindFirstUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindManyUserResolver {
@@ -172,9 +153,7 @@ export class FindManyUserResolver {
     nullable: false
   })
   async users(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyUserArgs): Promise<User[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -186,11 +165,10 @@ export class FindManyUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindUniqueUserOrThrowResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindUniqueUserOrThrowResolver {
@@ -198,9 +176,7 @@ export class FindUniqueUserOrThrowResolver {
     nullable: true
   })
   async getUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserOrThrowArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -212,11 +188,10 @@ export class FindUniqueUserOrThrowResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindUniqueUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindUniqueUserResolver {
@@ -224,9 +199,7 @@ export class FindUniqueUserResolver {
     nullable: true
   })
   async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -238,12 +211,11 @@ export class FindUniqueUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: GroupByUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class GroupByUserResolver {
@@ -251,9 +223,7 @@ export class GroupByUserResolver {
     nullable: false
   })
   async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -274,12 +244,11 @@ export * from \\"./args.index\\";
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpdateManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UpdateManyUserResolver {
@@ -287,9 +256,7 @@ export class UpdateManyUserResolver {
     nullable: false
   })
   async updateManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -301,11 +268,10 @@ export class UpdateManyUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpdateOneUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UpdateOneUserResolver {
@@ -313,9 +279,7 @@ export class UpdateOneUserResolver {
     nullable: true
   })
   async updateOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -327,11 +291,10 @@ export class UpdateOneUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpsertOneUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UpsertOneUserResolver {
@@ -339,9 +302,7 @@ export class UpsertOneUserResolver {
     nullable: false
   })
   async upsertOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneUserArgs): Promise<User> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1104,7 +1065,6 @@ export * from \\"./args.index\\";
 
 exports[`crud should properly generate resolver class for single prisma model: UserCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
@@ -1120,7 +1080,7 @@ import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
@@ -1134,7 +1094,7 @@ export class UserCrudResolver {
   async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
     return getPrismaFromContext(ctx).user.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 
@@ -1142,9 +1102,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1155,9 +1113,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async createOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneUserArgs): Promise<User> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1168,9 +1124,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async deleteManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1181,9 +1135,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async deleteOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1194,9 +1146,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async findFirstUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1207,9 +1157,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async findFirstUserOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUserOrThrowArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1220,9 +1168,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async users(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyUserArgs): Promise<User[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1233,9 +1179,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1246,9 +1190,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async getUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserOrThrowArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1259,9 +1201,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -1274,9 +1214,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async updateManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1287,9 +1225,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async updateOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1300,9 +1236,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async upsertOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneUserArgs): Promise<User> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1364,7 +1298,6 @@ export const resolvers = [
 
 exports[`crud should properly generate resolver class when cannot pluralize model name and provided overriding plural: StaffCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateStaffArgs } from \\"./args/AggregateStaffArgs\\";
 import { CreateManyStaffArgs } from \\"./args/CreateManyStaffArgs\\";
@@ -1380,7 +1313,7 @@ import { GroupByStaffArgs } from \\"./args/GroupByStaffArgs\\";
 import { UpdateManyStaffArgs } from \\"./args/UpdateManyStaffArgs\\";
 import { UpdateOneStaffArgs } from \\"./args/UpdateOneStaffArgs\\";
 import { UpsertOneStaffArgs } from \\"./args/UpsertOneStaffArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 import { Staff } from \\"../../../models/Staff\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
@@ -1394,7 +1327,7 @@ export class StaffCrudResolver {
   async aggregateStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateStaffArgs): Promise<AggregateStaff> {
     return getPrismaFromContext(ctx).staff.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 
@@ -1402,9 +1335,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async createManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyStaffArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1415,9 +1346,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async createOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneStaffArgs): Promise<Staff> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1428,9 +1357,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async deleteManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyStaffArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1441,9 +1368,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async deleteOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneStaffArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1454,9 +1379,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async findFirstStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstStaffArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1467,9 +1390,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async findFirstStaffOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstStaffOrThrowArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1480,9 +1401,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async staffMembers(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyStaffArgs): Promise<Staff[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1493,9 +1412,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async staff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueStaffArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1506,9 +1423,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async getStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueStaffOrThrowArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1519,9 +1434,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async groupByStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByStaffArgs): Promise<StaffGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -1534,9 +1447,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async updateManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyStaffArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1547,9 +1458,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async updateOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneStaffArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1560,9 +1469,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async upsertOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneStaffArgs): Promise<Staff> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1574,7 +1481,6 @@ export class StaffCrudResolver {
 
 exports[`crud should properly generate resolver class when cannot pluralize model name: StaffCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateStaffArgs } from \\"./args/AggregateStaffArgs\\";
 import { CreateManyStaffArgs } from \\"./args/CreateManyStaffArgs\\";
@@ -1590,7 +1496,7 @@ import { GroupByStaffArgs } from \\"./args/GroupByStaffArgs\\";
 import { UpdateManyStaffArgs } from \\"./args/UpdateManyStaffArgs\\";
 import { UpdateOneStaffArgs } from \\"./args/UpdateOneStaffArgs\\";
 import { UpsertOneStaffArgs } from \\"./args/UpsertOneStaffArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 import { Staff } from \\"../../../models/Staff\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
@@ -1604,7 +1510,7 @@ export class StaffCrudResolver {
   async aggregateStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateStaffArgs): Promise<AggregateStaff> {
     return getPrismaFromContext(ctx).staff.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 
@@ -1612,9 +1518,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async createManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyStaffArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1625,9 +1529,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async createOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneStaffArgs): Promise<Staff> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1638,9 +1540,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async deleteManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyStaffArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1651,9 +1551,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async deleteOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneStaffArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1664,9 +1562,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async findFirstStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstStaffArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1677,9 +1573,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async findFirstStaffOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstStaffOrThrowArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1690,9 +1584,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async findManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyStaffArgs): Promise<Staff[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1703,9 +1595,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async findUniqueStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueStaffArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1716,9 +1606,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async findUniqueStaffOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueStaffOrThrowArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1729,9 +1617,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async groupByStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByStaffArgs): Promise<StaffGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -1744,9 +1630,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async updateManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyStaffArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1757,9 +1641,7 @@ export class StaffCrudResolver {
     nullable: true
   })
   async updateOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneStaffArgs): Promise<Staff | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1770,9 +1652,7 @@ export class StaffCrudResolver {
     nullable: false
   })
   async upsertOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneStaffArgs): Promise<Staff> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1784,11 +1664,10 @@ export class StaffCrudResolver {
 
 exports[`crud should properly generate resolver class when useOriginalMapping is used: FindUniqueUserOrThrowResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindUniqueUserOrThrowResolver {
@@ -1796,9 +1675,7 @@ export class FindUniqueUserOrThrowResolver {
     nullable: true
   })
   async findUniqueUserOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserOrThrowArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1810,11 +1687,10 @@ export class FindUniqueUserOrThrowResolver {
 
 exports[`crud should properly generate resolver class when useOriginalMapping is used: FindUniqueUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindUniqueUserResolver {
@@ -1822,9 +1698,7 @@ export class FindUniqueUserResolver {
     nullable: true
   })
   async findUniqueUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1836,7 +1710,6 @@ export class FindUniqueUserResolver {
 
 exports[`crud should properly generate resolver class when useOriginalMapping is used: UserCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
@@ -1852,7 +1725,7 @@ import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
@@ -1866,7 +1739,7 @@ export class UserCrudResolver {
   async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
     return getPrismaFromContext(ctx).user.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 
@@ -1874,9 +1747,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1887,9 +1758,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async createOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneUserArgs): Promise<User> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1900,9 +1769,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async deleteManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1913,9 +1780,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async deleteOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1926,9 +1791,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async findFirstUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1939,9 +1802,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async findFirstUserOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUserOrThrowArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1952,9 +1813,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async findManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyUserArgs): Promise<User[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1965,9 +1824,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async findUniqueUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1978,9 +1835,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async findUniqueUserOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueUserOrThrowArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -1991,9 +1846,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async groupByUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -2006,9 +1859,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async updateManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2019,9 +1870,7 @@ export class UserCrudResolver {
     nullable: true
   })
   async updateOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2032,9 +1881,7 @@ export class UserCrudResolver {
     nullable: false
   })
   async upsertOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneUserArgs): Promise<User> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2050,7 +1897,6 @@ Object.defineProperty(exports, \\"__esModule\\", { value: true });
 exports.UserCrudResolver = void 0;
 const tslib_1 = require(\\"tslib\\");
 const TypeGraphQL = tslib_1.__importStar(require(\\"type-graphql\\"));
-const graphql_fields_1 = tslib_1.__importDefault(require(\\"graphql-fields\\"));
 const AggregateUserArgs_1 = require(\\"./args/AggregateUserArgs\\");
 const CreateManyUserArgs_1 = require(\\"./args/CreateManyUserArgs\\");
 const CreateOneUserArgs_1 = require(\\"./args/CreateOneUserArgs\\");
@@ -2074,95 +1920,95 @@ let UserCrudResolver = class UserCrudResolver {
     async aggregateUser(ctx, info, args) {
         return (0, helpers_1.getPrismaFromContext)(ctx).user.aggregate({
             ...args,
-            ...(0, helpers_1.transformFields)((0, graphql_fields_1.default)(info)),
+            ...(0, helpers_1.transformInfoIntoPrismaArgs)(info),
         });
     }
     async createManyUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.createMany({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async createOneUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.create({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async deleteManyUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.deleteMany({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async deleteOneUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.delete({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async findFirstUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.findFirst({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async findFirstUserOrThrow(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.findFirstOrThrow({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async users(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.findMany({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async user(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.findUnique({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async getUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.findUniqueOrThrow({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async groupByUser(ctx, info, args) {
-        const { _count, _avg, _sum, _min, _max } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count, _avg, _sum, _min, _max } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.groupBy({
             ...args,
             ...Object.fromEntries(Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)),
         });
     }
     async updateManyUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.updateMany({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async updateOneUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.update({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
     }
     async upsertOneUser(ctx, info, args) {
-        const { _count } = (0, helpers_1.transformFields)((0, graphql_fields_1.default)(info));
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.upsert({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
@@ -2332,12 +2178,11 @@ exports.UserCrudResolver = UserCrudResolver;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: AggregateClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateClientArgs } from \\"./args/AggregateClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AggregateClient } from \\"../../outputs/AggregateClient\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class AggregateClientResolver {
@@ -2347,7 +2192,7 @@ export class AggregateClientResolver {
   async aggregateClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateClientArgs): Promise<AggregateClient> {
     return getPrismaFromContext(ctx).user.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 }
@@ -2356,12 +2201,11 @@ export class AggregateClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: CreateManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { CreateManyClientArgs } from \\"./args/CreateManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class CreateManyClientResolver {
@@ -2369,9 +2213,7 @@ export class CreateManyClientResolver {
     nullable: false
   })
   async createManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyClientArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2383,11 +2225,10 @@ export class CreateManyClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: CreateOneClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { CreateOneClientArgs } from \\"./args/CreateOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class CreateOneClientResolver {
@@ -2395,9 +2236,7 @@ export class CreateOneClientResolver {
     nullable: false
   })
   async createOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneClientArgs): Promise<Client> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2409,12 +2248,11 @@ export class CreateOneClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: DeleteManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { DeleteManyClientArgs } from \\"./args/DeleteManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class DeleteManyClientResolver {
@@ -2422,9 +2260,7 @@ export class DeleteManyClientResolver {
     nullable: false
   })
   async deleteManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyClientArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2436,11 +2272,10 @@ export class DeleteManyClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: DeleteOneClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { DeleteOneClientArgs } from \\"./args/DeleteOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class DeleteOneClientResolver {
@@ -2448,9 +2283,7 @@ export class DeleteOneClientResolver {
     nullable: true
   })
   async deleteOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneClientArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2462,11 +2295,10 @@ export class DeleteOneClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindFirstClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindFirstClientArgs } from \\"./args/FindFirstClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class FindFirstClientResolver {
@@ -2474,9 +2306,7 @@ export class FindFirstClientResolver {
     nullable: true
   })
   async findFirstClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstClientArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2488,11 +2318,10 @@ export class FindFirstClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindManyClientArgs } from \\"./args/FindManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class FindManyClientResolver {
@@ -2500,9 +2329,7 @@ export class FindManyClientResolver {
     nullable: false
   })
   async clients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyClientArgs): Promise<Client[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2514,11 +2341,10 @@ export class FindManyClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindUniqueClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueClientArgs } from \\"./args/FindUniqueClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class FindUniqueClientResolver {
@@ -2526,9 +2352,7 @@ export class FindUniqueClientResolver {
     nullable: true
   })
   async client(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueClientArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2540,12 +2364,11 @@ export class FindUniqueClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: GroupByClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { GroupByClientArgs } from \\"./args/GroupByClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { ClientGroupBy } from \\"../../outputs/ClientGroupBy\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class GroupByClientResolver {
@@ -2553,9 +2376,7 @@ export class GroupByClientResolver {
     nullable: false
   })
   async groupByClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByClientArgs): Promise<ClientGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -2569,12 +2390,11 @@ export class GroupByClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpdateManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class UpdateManyClientResolver {
@@ -2582,9 +2402,7 @@ export class UpdateManyClientResolver {
     nullable: false
   })
   async updateManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyClientArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2596,11 +2414,10 @@ export class UpdateManyClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpdateOneClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { UpdateOneClientArgs } from \\"./args/UpdateOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class UpdateOneClientResolver {
@@ -2608,9 +2425,7 @@ export class UpdateOneClientResolver {
     nullable: true
   })
   async updateOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneClientArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2622,11 +2437,10 @@ export class UpdateOneClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpsertOneClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { UpsertOneClientArgs } from \\"./args/UpsertOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class UpsertOneClientResolver {
@@ -2634,9 +2448,7 @@ export class UpsertOneClientResolver {
     nullable: false
   })
   async upsertOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneClientArgs): Promise<Client> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -2981,12 +2793,11 @@ export class UpsertOneClientArgs {
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: AggregateMainUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateMainUserArgs } from \\"./args/AggregateMainUserArgs\\";
 import { MainUser } from \\"../../../models/MainUser\\";
 import { AggregateMainUser } from \\"../../outputs/AggregateMainUser\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => MainUser)
 export class AggregateMainUserResolver {
@@ -2996,7 +2807,7 @@ export class AggregateMainUserResolver {
   async aggregateMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateMainUserArgs): Promise<AggregateMainUser> {
     return getPrismaFromContext(ctx).user.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 }
@@ -3005,7 +2816,6 @@ export class AggregateMainUserResolver {
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: ClientCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateClientArgs } from \\"./args/AggregateClientArgs\\";
 import { CreateManyClientArgs } from \\"./args/CreateManyClientArgs\\";
@@ -3021,7 +2831,7 @@ import { GroupByClientArgs } from \\"./args/GroupByClientArgs\\";
 import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
 import { UpdateOneClientArgs } from \\"./args/UpdateOneClientArgs\\";
 import { UpsertOneClientArgs } from \\"./args/UpsertOneClientArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateClient } from \\"../../outputs/AggregateClient\\";
@@ -3035,7 +2845,7 @@ export class ClientCrudResolver {
   async aggregateClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateClientArgs): Promise<AggregateClient> {
     return getPrismaFromContext(ctx).user.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 
@@ -3043,9 +2853,7 @@ export class ClientCrudResolver {
     nullable: false
   })
   async createManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyClientArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3056,9 +2864,7 @@ export class ClientCrudResolver {
     nullable: false
   })
   async createOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneClientArgs): Promise<Client> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3069,9 +2875,7 @@ export class ClientCrudResolver {
     nullable: false
   })
   async deleteManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyClientArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3082,9 +2886,7 @@ export class ClientCrudResolver {
     nullable: true
   })
   async deleteOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneClientArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3095,9 +2897,7 @@ export class ClientCrudResolver {
     nullable: true
   })
   async findFirstClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstClientArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3108,9 +2908,7 @@ export class ClientCrudResolver {
     nullable: true
   })
   async findFirstClientOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstClientOrThrowArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3121,9 +2919,7 @@ export class ClientCrudResolver {
     nullable: false
   })
   async findManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyClientArgs): Promise<Client[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3134,9 +2930,7 @@ export class ClientCrudResolver {
     nullable: true
   })
   async findUniqueClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueClientArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3147,9 +2941,7 @@ export class ClientCrudResolver {
     nullable: true
   })
   async findUniqueClientOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueClientOrThrowArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3160,9 +2952,7 @@ export class ClientCrudResolver {
     nullable: false
   })
   async groupByClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByClientArgs): Promise<ClientGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -3175,9 +2965,7 @@ export class ClientCrudResolver {
     nullable: false
   })
   async updateManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyClientArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3188,9 +2976,7 @@ export class ClientCrudResolver {
     nullable: true
   })
   async updateOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneClientArgs): Promise<Client | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3201,9 +2987,7 @@ export class ClientCrudResolver {
     nullable: false
   })
   async upsertOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneClientArgs): Promise<Client> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3215,12 +2999,11 @@ export class ClientCrudResolver {
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: GroupByMainUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { GroupByMainUserArgs } from \\"./args/GroupByMainUserArgs\\";
 import { MainUser } from \\"../../../models/MainUser\\";
 import { MainUserGroupBy } from \\"../../outputs/MainUserGroupBy\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => MainUser)
 export class GroupByMainUserResolver {
@@ -3228,9 +3011,7 @@ export class GroupByMainUserResolver {
     nullable: false
   })
   async groupByMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByMainUserArgs): Promise<MainUserGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -3244,7 +3025,6 @@ export class GroupByMainUserResolver {
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: MainUserCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateMainUserArgs } from \\"./args/AggregateMainUserArgs\\";
 import { CreateManyMainUserArgs } from \\"./args/CreateManyMainUserArgs\\";
@@ -3260,7 +3040,7 @@ import { GroupByMainUserArgs } from \\"./args/GroupByMainUserArgs\\";
 import { UpdateManyMainUserArgs } from \\"./args/UpdateManyMainUserArgs\\";
 import { UpdateOneMainUserArgs } from \\"./args/UpdateOneMainUserArgs\\";
 import { UpsertOneMainUserArgs } from \\"./args/UpsertOneMainUserArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 import { MainUser } from \\"../../../models/MainUser\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateMainUser } from \\"../../outputs/AggregateMainUser\\";
@@ -3274,7 +3054,7 @@ export class MainUserCrudResolver {
   async aggregateMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateMainUserArgs): Promise<AggregateMainUser> {
     return getPrismaFromContext(ctx).user.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 
@@ -3282,9 +3062,7 @@ export class MainUserCrudResolver {
     nullable: false
   })
   async createManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyMainUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3295,9 +3073,7 @@ export class MainUserCrudResolver {
     nullable: false
   })
   async createOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneMainUserArgs): Promise<MainUser> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3308,9 +3084,7 @@ export class MainUserCrudResolver {
     nullable: false
   })
   async deleteManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyMainUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3321,9 +3095,7 @@ export class MainUserCrudResolver {
     nullable: true
   })
   async deleteOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneMainUserArgs): Promise<MainUser | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3334,9 +3106,7 @@ export class MainUserCrudResolver {
     nullable: true
   })
   async findFirstMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstMainUserArgs): Promise<MainUser | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3347,9 +3117,7 @@ export class MainUserCrudResolver {
     nullable: true
   })
   async findFirstMainUserOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstMainUserOrThrowArgs): Promise<MainUser | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3360,9 +3128,7 @@ export class MainUserCrudResolver {
     nullable: false
   })
   async mainUsers(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyMainUserArgs): Promise<MainUser[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3373,9 +3139,7 @@ export class MainUserCrudResolver {
     nullable: true
   })
   async mainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueMainUserArgs): Promise<MainUser | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3386,9 +3150,7 @@ export class MainUserCrudResolver {
     nullable: true
   })
   async getMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueMainUserOrThrowArgs): Promise<MainUser | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3399,9 +3161,7 @@ export class MainUserCrudResolver {
     nullable: false
   })
   async groupByMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByMainUserArgs): Promise<MainUserGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -3414,9 +3174,7 @@ export class MainUserCrudResolver {
     nullable: false
   })
   async updateManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyMainUserArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3427,9 +3185,7 @@ export class MainUserCrudResolver {
     nullable: true
   })
   async updateOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneMainUserArgs): Promise<MainUser | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -3440,9 +3196,7 @@ export class MainUserCrudResolver {
     nullable: false
   })
   async upsertOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneMainUserArgs): Promise<MainUser> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),

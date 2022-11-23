@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import { MainUser } from "../../../models/MainUser";
 import { Post } from "../../../models/Post";
 import { MainUserPostsArgs } from "./args/MainUserPostsArgs";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => MainUser)
 export class MainUserRelationsResolver {

@@ -216,7 +216,7 @@ describe("outputs", () => {
     });
   });
 
-  describe("when simpleResolvers option is enabled", () => {
+  describe("when customPrismaImportPath option is set", () => {
     it("should properly generate output type classes", async () => {
       const schema = /* prisma */ `
         model Sample {
@@ -237,6 +237,40 @@ describe("outputs", () => {
       );
 
       expect(aggregateSampleTSFile).toMatchSnapshot("AggregateSample");
+    });
+  });
+
+  describe("when filteredRelationCount preview feature is enabled", () => {
+    it("should properly generate count classes for relation fields with args", async () => {
+      const schema = /* prisma */ `
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        previewFeatures: ["filteredRelationCount"],
+      });
+      const firstModelCountTSFile = await readGeneratedFile(
+        "/resolvers/outputs/FirstModelCount.ts",
+      );
+      const outputsIndexTSFile = await readGeneratedFile(
+        "/resolvers/outputs/index.ts",
+      );
+
+      expect(firstModelCountTSFile).toMatchSnapshot("FirstModelCount");
+      expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
     });
   });
 });

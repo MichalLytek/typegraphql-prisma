@@ -290,6 +290,7 @@ const config = {
     "previewFeatures": [
       "fullTextSearch",
       "orderByNulls",
+      "filteredRelationCount",
       "extendedWhereUnique"
     ],
     "isCustomOutput": true

@@ -1,9 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
-import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { UpdateOnePatientArgs } from "./args/UpdateOnePatientArgs";
 import { Patient } from "../../../models/Patient";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Patient)
 export class UpdateOnePatientResolver {
@@ -11,9 +10,7 @@ export class UpdateOnePatientResolver {
     nullable: true
   })
   async updateOnePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOnePatientArgs): Promise<Patient | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).patient.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),

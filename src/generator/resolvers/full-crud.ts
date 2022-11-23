@@ -7,7 +7,7 @@ import {
   generateArgsImports,
   generateModelsImports,
   generateOutputsImports,
-  generateGraphQLFieldsImport,
+  generateGraphQLInfoImport,
   generateHelpersFileImport,
 } from "../imports";
 import { generateCrudResolverClassMethodDeclaration } from "./helpers";
@@ -33,7 +33,7 @@ export default function generateCrudResolverClassFromMapping(
   });
 
   generateTypeGraphQLImport(sourceFile);
-  generateGraphQLFieldsImport(sourceFile);
+  generateGraphQLInfoImport(sourceFile);
   generateArgsImports(
     sourceFile,
     mapping.actions

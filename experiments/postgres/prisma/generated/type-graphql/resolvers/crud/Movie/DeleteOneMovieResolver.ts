@@ -1,9 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
-import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { DeleteOneMovieArgs } from "./args/DeleteOneMovieArgs";
 import { Movie } from "../../../models/Movie";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class DeleteOneMovieResolver {
@@ -11,9 +10,7 @@ export class DeleteOneMovieResolver {
     nullable: true
   })
   async deleteOneMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneMovieArgs): Promise<Movie | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).movie.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),

@@ -369,3 +369,21 @@ query OrderByNulls {
     kind
   }
 }
+
+query UsersWithPostsCount {
+  mainUsers {
+    firstName
+    _count {
+      posts
+    }
+  }
+}
+
+query UsersWithAdvertKindPostsCount {
+  mainUsers {
+    firstName
+    _count {
+      posts(where: { kind: { equals: ADVERT } })
+    }
+  }
+}

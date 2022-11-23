@@ -3,7 +3,7 @@ import { Creator } from "../../../models/Creator";
 import { Problem } from "../../../models/Problem";
 import { CreatorLikesArgs } from "./args/CreatorLikesArgs";
 import { CreatorProblemsArgs } from "./args/CreatorProblemsArgs";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Creator)
 export class CreatorRelationsResolver {

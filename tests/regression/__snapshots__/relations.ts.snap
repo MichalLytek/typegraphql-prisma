@@ -5,7 +5,7 @@ exports[`relations resolvers generation should not emit relation resolver when r
 import { Point } from \\"../../../models/Point\\";
 import { User } from \\"../../../models/User\\";
 import { UserPointsArgs } from \\"./args/UserPointsArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -120,7 +120,7 @@ exports[`relations resolvers generation should properly generate composite keys 
 import { Project } from \\"../../../models/Project\\";
 import { User } from \\"../../../models/User\\";
 import { UsersOnProjects } from \\"../../../models/UsersOnProjects\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => UsersOnProjects)
 export class UsersOnProjectsRelationsResolver {
@@ -241,7 +241,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class MovieRelationsResolver {
@@ -267,7 +267,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class MovieRelationsResolver {
@@ -293,7 +293,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Movie)
 export class MovieRelationsResolver {
@@ -320,7 +320,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
 import { DirectorMoviesArgs } from \\"./args/DirectorMoviesArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Director)
 export class DirectorRelationsResolver {
@@ -345,7 +345,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {
@@ -368,7 +368,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -390,7 +390,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {
@@ -414,7 +414,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -480,7 +480,7 @@ exports[`relations resolvers generation should properly generate resolver and ar
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -502,7 +502,7 @@ exports[`relations resolvers generation should properly generate resolver class 
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Address } from \\"../../../models/Address\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
@@ -524,7 +524,7 @@ exports[`relations resolvers generation should properly generate resolvers class
 "import * as TypeGraphQL from \\"type-graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {
@@ -548,7 +548,7 @@ exports[`relations resolvers generation should properly generate resolvers class
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {

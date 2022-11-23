@@ -264,8 +264,8 @@ input CreatorAvgOrderByAggregateInput {
 }
 
 type CreatorCount {
-  likes: Int!
-  problems: Int!
+  likes(where: ProblemWhereInput): Int!
+  problems(where: ProblemWhereInput): Int!
 }
 
 type CreatorCountAggregate {
@@ -584,7 +584,7 @@ type Director {
 }
 
 type DirectorCount {
-  movies: Int!
+  movies(where: MovieWhereInput): Int!
 }
 
 type DirectorCountAggregate {
@@ -956,8 +956,8 @@ input MainUserAvgOrderByAggregateInput {
 }
 
 type MainUserCount {
-  editorPosts: Int!
-  posts: Int!
+  editorPosts(where: PostWhereInput): Int!
+  posts(where: PostWhereInput): Int!
 }
 
 type MainUserCountAggregate {
@@ -2705,7 +2705,7 @@ input ProblemAvgOrderByAggregateInput {
 }
 
 type ProblemCount {
-  likedBy: Int!
+  likedBy(where: CreatorWhereInput): Int!
 }
 
 type ProblemCountAggregate {

@@ -7,7 +7,7 @@ import {
   generateArgsImports,
   generateModelsImports,
   generateOutputsImports,
-  generateGraphQLFieldsImport,
+  generateGraphQLInfoImport,
   generateHelpersFileImport,
 } from "../imports";
 import { generateCrudResolverClassMethodDeclaration } from "./helpers";
@@ -35,7 +35,7 @@ export default function generateActionResolverClass(
   );
 
   generateTypeGraphQLImport(sourceFile);
-  generateGraphQLFieldsImport(sourceFile);
+  generateGraphQLInfoImport(sourceFile);
   if (action.argsTypeName) {
     generateArgsImports(sourceFile, [action.argsTypeName], 0);
   }

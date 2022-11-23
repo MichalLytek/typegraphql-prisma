@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`relation counts querying when \`filteredRelationCount\` preview feature is enabled should properly call PrismaClient on getting relation count with args: findManyUser - relation count with args - call args 1`] = `
+Array [
+  Array [
+    Object {
+      "include": Object {
+        "_count": Object {
+          "select": Object {
+            "posts": Object {
+              "where": Object {
+                "color": Object {
+                  "equals": "RED",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
+]
+`;
+
+exports[`relation counts querying when \`filteredRelationCount\` preview feature is enabled should properly call PrismaClient on getting relation count with args: users with posts count - mocked response 1`] = `
+Object {
+  "users": Array [
+    Object {
+      "_count": Object {
+        "posts": 5,
+      },
+      "name": "Test",
+    },
+  ],
+}
+`;

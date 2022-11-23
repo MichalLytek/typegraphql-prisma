@@ -9,7 +9,8 @@ import getPrismaClientDmmfFromPrismaSchema from "./dmmf";
 type SupportedPreviewFeatures =
   | "orderByNulls"
   | "fullTextSearch"
-  | "extendedWhereUnique";
+  | "extendedWhereUnique"
+  | "filteredRelationCount";
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<

@@ -45119,7 +45119,21 @@
           "fields": [
             {
               "name": "posts",
-              "args": [],
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
               "isNullable": false,
               "outputType": {
                 "type": "Int",
@@ -45129,7 +45143,21 @@
             },
             {
               "name": "editorPosts",
-              "args": [],
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
               "isNullable": false,
               "outputType": {
                 "type": "Int",
@@ -46273,7 +46301,21 @@
           "fields": [
             {
               "name": "movies",
-              "args": [],
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "MovieWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
               "isNullable": false,
               "outputType": {
                 "type": "Int",
@@ -46373,7 +46415,21 @@
           "fields": [
             {
               "name": "likedBy",
-              "args": [],
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CreatorWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
               "isNullable": false,
               "outputType": {
                 "type": "Int",
@@ -46553,7 +46609,21 @@
           "fields": [
             {
               "name": "likes",
-              "args": [],
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
               "isNullable": false,
               "outputType": {
                 "type": "Int",
@@ -46563,7 +46633,21 @@
             },
             {
               "name": "problems",
-              "args": [],
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
               "isNullable": false,
               "outputType": {
                 "type": "Int",

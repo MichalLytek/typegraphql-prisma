@@ -50,14 +50,12 @@ export function generateCrudResolverClassMethodDeclaration(
         ? [
             /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.prismaMethod}({
               ...args,
-              ...transformFields(graphqlFields(info as any)),
+              ...transformInfoIntoPrismaArgs(info),
             });`,
           ]
         : action.kind === DMMF.ModelAction.groupBy
         ? [
-            /* ts */ ` const { _count, _avg, _sum, _min, _max } = transformFields(
-              graphqlFields(info as any)
-            );`,
+            /* ts */ ` const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);`,
             /* ts */ ` return getPrismaFromContext(ctx).${mapping.collectionName}.${action.prismaMethod}({
               ...args,
               ...Object.fromEntries(
@@ -66,9 +64,7 @@ export function generateCrudResolverClassMethodDeclaration(
             });`,
           ]
         : [
-            /* ts */ ` const { _count } = transformFields(
-              graphqlFields(info as any)
-            );
+            /* ts */ ` const { _count } = transformInfoIntoPrismaArgs(info);
             return getPrismaFromContext(ctx).${mapping.collectionName}.${action.prismaMethod}({
               ...args,
               ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),

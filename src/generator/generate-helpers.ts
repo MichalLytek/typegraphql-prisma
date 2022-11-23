@@ -1,19 +1,47 @@
 import { SourceFile } from "ts-morph";
+import {
+  generateGraphQLFieldsImport,
+  generateGraphQLInfoImport,
+} from "./imports";
 import { GeneratorOptions } from "./options";
 
 export function generateHelpersFile(
   sourceFile: SourceFile,
   options: GeneratorOptions,
 ) {
+  generateGraphQLInfoImport(sourceFile);
+  generateGraphQLFieldsImport(sourceFile);
+
   sourceFile.addStatements(/* ts */ `
-    export function transformFields(fields: Record<string, any>): Record<string, any> {
+    export function transformInfoIntoPrismaArgs(info: GraphQLResolveInfo): Record<string, any> {
+      const fields: Record<string, any> = graphqlFields(
+        // suppress GraphQLResolveInfo types issue
+        info as any,
+        {},
+        {
+          excludedFields: ['__typename'],
+          processArguments: true,
+        }
+      );
+      return transformFields(fields);
+    }
+  `);
+
+  sourceFile.addStatements(/* ts */ `
+    function transformFields(fields: Record<string, any>): Record<string, any> {
       return Object.fromEntries(
         Object.entries(fields)
-          // remove __typename and others
-          .filter(([key, value]) => !key.startsWith("__"))
           .map<[string, any]>(([key, value]) => {
             if (Object.keys(value).length === 0) {
               return [key, true];
+            }
+            if ("__arguments" in value) {
+              return [key, Object.fromEntries(
+                value.__arguments.map((argument: object) => {
+                  const [[key, { value }]] = Object.entries(argument);
+                  return [key, value];
+                })
+              )];
             }
             return [key, transformFields(value)];
           }),
