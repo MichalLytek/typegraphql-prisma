@@ -194,33 +194,9 @@ export class PrismaClient<
   U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never,
   GlobalReject extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined = 'rejectOnNotFound' extends keyof T
     ? T['rejectOnNotFound']
-    : false
+    : false,
+  ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs
       > {
-      /**
-       * @private
-       */
-      private fetcher;
-      /**
-       * @private
-       */
-      private readonly dmmf;
-      /**
-       * @private
-       */
-      private connectionPromise?;
-      /**
-       * @private
-       */
-      private disconnectionPromise?;
-      /**
-       * @private
-       */
-      private readonly engineConfig;
-      /**
-       * @private
-       */
-      private readonly measurePerformance;
-
     /**
    * ##  Prisma Client ʲˢ
    * 
@@ -315,6 +291,166 @@ export class PrismaClient<
    */
   $transaction<P extends PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<UnwrapTuple<P>>;
 
+  $transaction<R>(fn: (prisma: Prisma.TransactionClient) => Promise<R>, options?: {maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel}): Promise<R>;
+
+
+  $extends: { extArgs: ExtArgs } & (<
+    R_User_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.UserSelectScalar, ExtArgs['result']['user']>>,
+    R_post_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.postSelectScalar, ExtArgs['result']['post']>>,
+    R_Category_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.CategorySelectScalar, ExtArgs['result']['category']>>,
+    R_Patient_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.PatientSelectScalar, ExtArgs['result']['patient']>>,
+    R_Movie_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.MovieSelectScalar, ExtArgs['result']['movie']>>,
+    R_Director_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.DirectorSelectScalar, ExtArgs['result']['director']>>,
+    R_Problem_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.ProblemSelectScalar, ExtArgs['result']['problem']>>,
+    R_Creator_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.CreatorSelectScalar, ExtArgs['result']['creator']>>,
+    R_NativeTypeModel_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.NativeTypeModelSelectScalar, ExtArgs['result']['nativeTypeModel']>>,
+    R_Equipment_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.EquipmentSelectScalar, ExtArgs['result']['equipment']>>,
+    R extends runtime.Types.Extensions.Args['result'] = {},
+    M extends runtime.Types.Extensions.Args['model'] = {},
+    Q extends runtime.Types.Extensions.Args['query'] = {},
+    C extends runtime.Types.Extensions.Args['client'] = {},
+    Args extends runtime.Types.Extensions.Args = { result: R, model: M, query: Q, client: C },
+  >(extension: ((client: this) => { $extends: { extArgs: Args } }) | {
+    name?: string,
+    result?: R & {
+      $allModels?: Record<string, {
+        compute: (data: unknown) => unknown
+      }>
+      user?: {
+        [K in keyof R_User_Needs]: {
+          needs: R_User_Needs[K]
+          compute: (data: Prisma.UserGetPayload<{ select: R_User_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      post?: {
+        [K in keyof R_post_Needs]: {
+          needs: R_post_Needs[K]
+          compute: (data: Prisma.postGetPayload<{ select: R_post_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      category?: {
+        [K in keyof R_Category_Needs]: {
+          needs: R_Category_Needs[K]
+          compute: (data: Prisma.CategoryGetPayload<{ select: R_Category_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      patient?: {
+        [K in keyof R_Patient_Needs]: {
+          needs: R_Patient_Needs[K]
+          compute: (data: Prisma.PatientGetPayload<{ select: R_Patient_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      movie?: {
+        [K in keyof R_Movie_Needs]: {
+          needs: R_Movie_Needs[K]
+          compute: (data: Prisma.MovieGetPayload<{ select: R_Movie_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      director?: {
+        [K in keyof R_Director_Needs]: {
+          needs: R_Director_Needs[K]
+          compute: (data: Prisma.DirectorGetPayload<{ select: R_Director_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      problem?: {
+        [K in keyof R_Problem_Needs]: {
+          needs: R_Problem_Needs[K]
+          compute: (data: Prisma.ProblemGetPayload<{ select: R_Problem_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      creator?: {
+        [K in keyof R_Creator_Needs]: {
+          needs: R_Creator_Needs[K]
+          compute: (data: Prisma.CreatorGetPayload<{ select: R_Creator_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      nativeTypeModel?: {
+        [K in keyof R_NativeTypeModel_Needs]: {
+          needs: R_NativeTypeModel_Needs[K]
+          compute: (data: Prisma.NativeTypeModelGetPayload<{ select: R_NativeTypeModel_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+      equipment?: {
+        [K in keyof R_Equipment_Needs]: {
+          needs: R_Equipment_Needs[K]
+          compute: (data: Prisma.EquipmentGetPayload<{ select: R_Equipment_Needs[K] }, ExtArgs>) => unknown
+        }
+      }
+    }
+    model?: M & {
+      $allModels?: Record<string, unknown>
+      user?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['user'] }
+      post?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['post'] }
+      category?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['category'] }
+      patient?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['patient'] }
+      movie?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['movie'] }
+      director?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['director'] }
+      problem?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['problem'] }
+      creator?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['creator'] }
+      nativeTypeModel?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['nativeTypeModel'] }
+      equipment?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['equipment'] }
+    }
+    query?: {
+      $allModels?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]?: (args: Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]['result']
+      }
+    } & {
+      user?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['User']]?: (args: Prisma.TypeMap<ExtArgs>['User'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['User'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['User'][keyof Prisma.TypeMap<ExtArgs>['User']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['User'][keyof Prisma.TypeMap<ExtArgs>['User']]['result']
+      }
+      post?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['post']]?: (args: Prisma.TypeMap<ExtArgs>['post'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['post'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['post'][keyof Prisma.TypeMap<ExtArgs>['post']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['post'][keyof Prisma.TypeMap<ExtArgs>['post']]['result']
+      }
+      category?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['Category']]?: (args: Prisma.TypeMap<ExtArgs>['Category'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Category'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Category'][keyof Prisma.TypeMap<ExtArgs>['Category']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Category'][keyof Prisma.TypeMap<ExtArgs>['Category']]['result']
+      }
+      patient?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['Patient']]?: (args: Prisma.TypeMap<ExtArgs>['Patient'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Patient'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Patient'][keyof Prisma.TypeMap<ExtArgs>['Patient']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Patient'][keyof Prisma.TypeMap<ExtArgs>['Patient']]['result']
+      }
+      movie?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['Movie']]?: (args: Prisma.TypeMap<ExtArgs>['Movie'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Movie'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Movie'][keyof Prisma.TypeMap<ExtArgs>['Movie']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Movie'][keyof Prisma.TypeMap<ExtArgs>['Movie']]['result']
+      }
+      director?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['Director']]?: (args: Prisma.TypeMap<ExtArgs>['Director'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Director'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Director'][keyof Prisma.TypeMap<ExtArgs>['Director']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Director'][keyof Prisma.TypeMap<ExtArgs>['Director']]['result']
+      }
+      problem?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['Problem']]?: (args: Prisma.TypeMap<ExtArgs>['Problem'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Problem'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Problem'][keyof Prisma.TypeMap<ExtArgs>['Problem']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Problem'][keyof Prisma.TypeMap<ExtArgs>['Problem']]['result']
+      }
+      creator?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['Creator']]?: (args: Prisma.TypeMap<ExtArgs>['Creator'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Creator'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Creator'][keyof Prisma.TypeMap<ExtArgs>['Creator']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Creator'][keyof Prisma.TypeMap<ExtArgs>['Creator']]['result']
+      }
+      nativeTypeModel?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]?: (args: Prisma.TypeMap<ExtArgs>['NativeTypeModel'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['NativeTypeModel'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['NativeTypeModel'][keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['NativeTypeModel'][keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]['result']
+      }
+      equipment?: {
+        [K in keyof Prisma.TypeMap<ExtArgs>['Equipment']]?: (args: Prisma.TypeMap<ExtArgs>['Equipment'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Equipment'][K]['result']
+      } & {
+        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Equipment'][keyof Prisma.TypeMap<ExtArgs>['Equipment']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Equipment'][keyof Prisma.TypeMap<ExtArgs>['Equipment']]['result']
+      }
+    }
+    client?: C & { [K: symbol]: runtime.Types.Extensions.GetClient<PrismaClient<never, never, false, ExtArgs>, ExtArgs['client'], {}> }
+  })=> runtime.Types.Extensions.GetClient<PrismaClient<T, U, GlobalReject, runtime.Types.Extensions.MergeArgs<Args, ExtArgs, 'user' | 'post' | 'category' | 'patient' | 'movie' | 'director' | 'problem' | 'creator' | 'nativeTypeModel' | 'equipment'>>, Args['client'], ExtArgs['client']>);
+
       /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
@@ -323,7 +459,7 @@ export class PrismaClient<
     * const users = await prisma.user.findMany()
     * ```
     */
-  get user(): Prisma.UserDelegate<GlobalReject>;
+  get user(): runtime.Types.Extensions.GetModel<Prisma.UserDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['user']>;
 
   /**
    * `prisma.post`: Exposes CRUD operations for the **post** model.
@@ -333,7 +469,7 @@ export class PrismaClient<
     * const posts = await prisma.post.findMany()
     * ```
     */
-  get post(): Prisma.postDelegate<GlobalReject>;
+  get post(): runtime.Types.Extensions.GetModel<Prisma.postDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['post']>;
 
   /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
@@ -343,7 +479,7 @@ export class PrismaClient<
     * const categories = await prisma.category.findMany()
     * ```
     */
-  get category(): Prisma.CategoryDelegate<GlobalReject>;
+  get category(): runtime.Types.Extensions.GetModel<Prisma.CategoryDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['category']>;
 
   /**
    * `prisma.patient`: Exposes CRUD operations for the **Patient** model.
@@ -353,7 +489,7 @@ export class PrismaClient<
     * const patients = await prisma.patient.findMany()
     * ```
     */
-  get patient(): Prisma.PatientDelegate<GlobalReject>;
+  get patient(): runtime.Types.Extensions.GetModel<Prisma.PatientDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['patient']>;
 
   /**
    * `prisma.movie`: Exposes CRUD operations for the **Movie** model.
@@ -363,7 +499,7 @@ export class PrismaClient<
     * const movies = await prisma.movie.findMany()
     * ```
     */
-  get movie(): Prisma.MovieDelegate<GlobalReject>;
+  get movie(): runtime.Types.Extensions.GetModel<Prisma.MovieDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['movie']>;
 
   /**
    * `prisma.director`: Exposes CRUD operations for the **Director** model.
@@ -373,7 +509,7 @@ export class PrismaClient<
     * const directors = await prisma.director.findMany()
     * ```
     */
-  get director(): Prisma.DirectorDelegate<GlobalReject>;
+  get director(): runtime.Types.Extensions.GetModel<Prisma.DirectorDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['director']>;
 
   /**
    * `prisma.problem`: Exposes CRUD operations for the **Problem** model.
@@ -383,7 +519,7 @@ export class PrismaClient<
     * const problems = await prisma.problem.findMany()
     * ```
     */
-  get problem(): Prisma.ProblemDelegate<GlobalReject>;
+  get problem(): runtime.Types.Extensions.GetModel<Prisma.ProblemDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['problem']>;
 
   /**
    * `prisma.creator`: Exposes CRUD operations for the **Creator** model.
@@ -393,7 +529,7 @@ export class PrismaClient<
     * const creators = await prisma.creator.findMany()
     * ```
     */
-  get creator(): Prisma.CreatorDelegate<GlobalReject>;
+  get creator(): runtime.Types.Extensions.GetModel<Prisma.CreatorDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['creator']>;
 
   /**
    * `prisma.nativeTypeModel`: Exposes CRUD operations for the **NativeTypeModel** model.
@@ -403,7 +539,7 @@ export class PrismaClient<
     * const nativeTypeModels = await prisma.nativeTypeModel.findMany()
     * ```
     */
-  get nativeTypeModel(): Prisma.NativeTypeModelDelegate<GlobalReject>;
+  get nativeTypeModel(): runtime.Types.Extensions.GetModel<Prisma.NativeTypeModelDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['nativeTypeModel']>;
 
   /**
    * `prisma.equipment`: Exposes CRUD operations for the **Equipment** model.
@@ -413,7 +549,7 @@ export class PrismaClient<
     * const equipment = await prisma.equipment.findMany()
     * ```
     */
-  get equipment(): Prisma.EquipmentDelegate<GlobalReject>;
+  get equipment(): runtime.Types.Extensions.GetModel<Prisma.EquipmentDelegate<GlobalReject, ExtArgs>, ExtArgs['model']['equipment']>;
 }
 
 export namespace Prisma {
@@ -453,10 +589,16 @@ export namespace Prisma {
   export type MetricHistogram = runtime.MetricHistogram
   export type MetricHistogramBucket = runtime.MetricHistogramBucket
 
+  /**
+  * Extensions
+  */
+  export type Extension = runtime.Types.Extensions.Args
+  export import getExtensionContext = runtime.Extensions.getExtensionContext
+
 
   /**
-   * Prisma Client JS version: 4.6.0
-   * Query Engine version: 2e719efb80b56a3f32d18a62489de95bb9c130e3
+   * Prisma Client JS version: 4.7.0
+   * Query Engine version: 39190b250ebc338586e25e6da45e5e783bc8a635
    */
   export type PrismaVersion = {
     client: string
@@ -620,9 +762,9 @@ export namespace Prisma {
     [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
   }[keyof T]
 
-  export type TruthyKeys<T> = {
-    [key in keyof T]: T[key] extends false | undefined | null ? never : key
-  }[keyof T]
+  export type TruthyKeys<T> = keyof {
+    [K in keyof T as T[K] extends false | undefined | null ? never : K]: K
+  }
 
   export type TrueKeys<T> = TruthyKeys<Prisma__Pick<T, RequiredKeys<T>>>
 
@@ -917,6 +1059,935 @@ export namespace Prisma {
     postgres?: Datasource
   }
 
+  export function defineExtension<
+      R_User_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.UserSelectScalar, ExtArgs['result']['user']>>,
+      R_post_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.postSelectScalar, ExtArgs['result']['post']>>,
+      R_Category_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.CategorySelectScalar, ExtArgs['result']['category']>>,
+      R_Patient_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.PatientSelectScalar, ExtArgs['result']['patient']>>,
+      R_Movie_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.MovieSelectScalar, ExtArgs['result']['movie']>>,
+      R_Director_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.DirectorSelectScalar, ExtArgs['result']['director']>>,
+      R_Problem_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.ProblemSelectScalar, ExtArgs['result']['problem']>>,
+      R_Creator_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.CreatorSelectScalar, ExtArgs['result']['creator']>>,
+      R_NativeTypeModel_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.NativeTypeModelSelectScalar, ExtArgs['result']['nativeTypeModel']>>,
+      R_Equipment_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.EquipmentSelectScalar, ExtArgs['result']['equipment']>>,
+      R extends runtime.Types.Extensions.Args['result'] = {},
+      M extends runtime.Types.Extensions.Args['model'] = {},
+      Q extends runtime.Types.Extensions.Args['query'] = {},
+      C extends runtime.Types.Extensions.Args['client'] = {},
+      Args extends runtime.Types.Extensions.Args = { result: R, model: M, query: Q, client: C },
+      ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs,
+    >(extension: ((client: PrismaClient) => { $extends: { extArgs: Args } }) | {
+      name?: string,
+      result?: R & {
+        $allModels?: Record<string, {
+          compute: (data: unknown) => unknown
+        }>
+        user?: {
+          [K in keyof R_User_Needs]: {
+            needs: R_User_Needs[K]
+            compute: (data: Prisma.UserGetPayload<{ select: R_User_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        post?: {
+          [K in keyof R_post_Needs]: {
+            needs: R_post_Needs[K]
+            compute: (data: Prisma.postGetPayload<{ select: R_post_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        category?: {
+          [K in keyof R_Category_Needs]: {
+            needs: R_Category_Needs[K]
+            compute: (data: Prisma.CategoryGetPayload<{ select: R_Category_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        patient?: {
+          [K in keyof R_Patient_Needs]: {
+            needs: R_Patient_Needs[K]
+            compute: (data: Prisma.PatientGetPayload<{ select: R_Patient_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        movie?: {
+          [K in keyof R_Movie_Needs]: {
+            needs: R_Movie_Needs[K]
+            compute: (data: Prisma.MovieGetPayload<{ select: R_Movie_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        director?: {
+          [K in keyof R_Director_Needs]: {
+            needs: R_Director_Needs[K]
+            compute: (data: Prisma.DirectorGetPayload<{ select: R_Director_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        problem?: {
+          [K in keyof R_Problem_Needs]: {
+            needs: R_Problem_Needs[K]
+            compute: (data: Prisma.ProblemGetPayload<{ select: R_Problem_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        creator?: {
+          [K in keyof R_Creator_Needs]: {
+            needs: R_Creator_Needs[K]
+            compute: (data: Prisma.CreatorGetPayload<{ select: R_Creator_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        nativeTypeModel?: {
+          [K in keyof R_NativeTypeModel_Needs]: {
+            needs: R_NativeTypeModel_Needs[K]
+            compute: (data: Prisma.NativeTypeModelGetPayload<{ select: R_NativeTypeModel_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+        equipment?: {
+          [K in keyof R_Equipment_Needs]: {
+            needs: R_Equipment_Needs[K]
+            compute: (data: Prisma.EquipmentGetPayload<{ select: R_Equipment_Needs[K] }, ExtArgs>) => unknown
+          }
+        }
+      }
+      model?: M & {
+        $allModels?: Record<string, unknown>
+        user?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['user'] }
+        post?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['post'] }
+        category?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['category'] }
+        patient?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['patient'] }
+        movie?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['movie'] }
+        director?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['director'] }
+        problem?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['problem'] }
+        creator?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['creator'] }
+        nativeTypeModel?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['nativeTypeModel'] }
+        equipment?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['equipment'] }
+      }
+      query?: {
+        $allModels?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]?: (args: Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]['result']
+        }
+      } & {
+        user?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['User']]?: (args: Prisma.TypeMap<ExtArgs>['User'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['User'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['User'][keyof Prisma.TypeMap<ExtArgs>['User']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['User'][keyof Prisma.TypeMap<ExtArgs>['User']]['result']
+        }
+        post?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['post']]?: (args: Prisma.TypeMap<ExtArgs>['post'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['post'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['post'][keyof Prisma.TypeMap<ExtArgs>['post']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['post'][keyof Prisma.TypeMap<ExtArgs>['post']]['result']
+        }
+        category?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['Category']]?: (args: Prisma.TypeMap<ExtArgs>['Category'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Category'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Category'][keyof Prisma.TypeMap<ExtArgs>['Category']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Category'][keyof Prisma.TypeMap<ExtArgs>['Category']]['result']
+        }
+        patient?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['Patient']]?: (args: Prisma.TypeMap<ExtArgs>['Patient'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Patient'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Patient'][keyof Prisma.TypeMap<ExtArgs>['Patient']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Patient'][keyof Prisma.TypeMap<ExtArgs>['Patient']]['result']
+        }
+        movie?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['Movie']]?: (args: Prisma.TypeMap<ExtArgs>['Movie'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Movie'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Movie'][keyof Prisma.TypeMap<ExtArgs>['Movie']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Movie'][keyof Prisma.TypeMap<ExtArgs>['Movie']]['result']
+        }
+        director?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['Director']]?: (args: Prisma.TypeMap<ExtArgs>['Director'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Director'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Director'][keyof Prisma.TypeMap<ExtArgs>['Director']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Director'][keyof Prisma.TypeMap<ExtArgs>['Director']]['result']
+        }
+        problem?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['Problem']]?: (args: Prisma.TypeMap<ExtArgs>['Problem'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Problem'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Problem'][keyof Prisma.TypeMap<ExtArgs>['Problem']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Problem'][keyof Prisma.TypeMap<ExtArgs>['Problem']]['result']
+        }
+        creator?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['Creator']]?: (args: Prisma.TypeMap<ExtArgs>['Creator'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Creator'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Creator'][keyof Prisma.TypeMap<ExtArgs>['Creator']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Creator'][keyof Prisma.TypeMap<ExtArgs>['Creator']]['result']
+        }
+        nativeTypeModel?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]?: (args: Prisma.TypeMap<ExtArgs>['NativeTypeModel'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['NativeTypeModel'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['NativeTypeModel'][keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['NativeTypeModel'][keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]['result']
+        }
+        equipment?: {
+          [K in keyof Prisma.TypeMap<ExtArgs>['Equipment']]?: (args: Prisma.TypeMap<ExtArgs>['Equipment'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Equipment'][K]['result']
+        } & {
+          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Equipment'][keyof Prisma.TypeMap<ExtArgs>['Equipment']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Equipment'][keyof Prisma.TypeMap<ExtArgs>['Equipment']]['result']
+        }
+      }
+      client?: C & { [K: symbol]: runtime.Types.Extensions.GetClient<PrismaClient<never, never, false, ExtArgs>, ExtArgs['client'], {}> }
+    }): (client: any) => PrismaClient<any, any, any, Args>;
+  export type TypeMap<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    User: {
+      findUnique: {
+        args: Prisma.UserFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      findFirst: {
+        args: Prisma.UserFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      findMany: {
+        args: Prisma.UserFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      create: {
+        args: Prisma.UserCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      createMany: {
+        args: Prisma.UserCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      delete: {
+        args: Prisma.UserDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      update: {
+        args: Prisma.UserUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      deleteMany: {
+        args: Prisma.UserDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      updateMany: {
+        args: Prisma.UserUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      upsert: {
+        args: Prisma.UserUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      aggregate: {
+        args: Prisma.UserAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      groupBy: {
+        args: Prisma.UserGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+      count: {
+        args: Prisma.UserCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
+        queryExtCbArgs: { model: 'User', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
+      }
+    }
+    post: {
+      findUnique: {
+        args: Prisma.postFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.postFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      findFirst: {
+        args: Prisma.postFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.postFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      findMany: {
+        args: Prisma.postFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      create: {
+        args: Prisma.postCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      createMany: {
+        args: Prisma.postCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      delete: {
+        args: Prisma.postDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      update: {
+        args: Prisma.postUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      deleteMany: {
+        args: Prisma.postDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      updateMany: {
+        args: Prisma.postUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      upsert: {
+        args: Prisma.postUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      aggregate: {
+        args: Prisma.PostAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      groupBy: {
+        args: Prisma.postGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+      count: {
+        args: Prisma.postCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
+        queryExtCbArgs: { model: 'post', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
+      }
+    }
+    Category: {
+      findUnique: {
+        args: Prisma.CategoryFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      findFirst: {
+        args: Prisma.CategoryFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      findMany: {
+        args: Prisma.CategoryFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      create: {
+        args: Prisma.CategoryCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      createMany: {
+        args: Prisma.CategoryCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      delete: {
+        args: Prisma.CategoryDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      update: {
+        args: Prisma.CategoryUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      deleteMany: {
+        args: Prisma.CategoryDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      updateMany: {
+        args: Prisma.CategoryUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      upsert: {
+        args: Prisma.CategoryUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      aggregate: {
+        args: Prisma.CategoryAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      groupBy: {
+        args: Prisma.CategoryGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+      count: {
+        args: Prisma.CategoryCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
+        queryExtCbArgs: { model: 'Category', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
+      }
+    }
+    Patient: {
+      findUnique: {
+        args: Prisma.PatientFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.PatientFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      findFirst: {
+        args: Prisma.PatientFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.PatientFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      findMany: {
+        args: Prisma.PatientFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      create: {
+        args: Prisma.PatientCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      createMany: {
+        args: Prisma.PatientCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      delete: {
+        args: Prisma.PatientDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      update: {
+        args: Prisma.PatientUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      deleteMany: {
+        args: Prisma.PatientDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      updateMany: {
+        args: Prisma.PatientUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      upsert: {
+        args: Prisma.PatientUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      aggregate: {
+        args: Prisma.PatientAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      groupBy: {
+        args: Prisma.PatientGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+      count: {
+        args: Prisma.PatientCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
+        queryExtCbArgs: { model: 'Patient', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
+      }
+    }
+    Movie: {
+      findUnique: {
+        args: Prisma.MovieFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.MovieFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      findFirst: {
+        args: Prisma.MovieFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.MovieFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      findMany: {
+        args: Prisma.MovieFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      create: {
+        args: Prisma.MovieCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      createMany: {
+        args: Prisma.MovieCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      delete: {
+        args: Prisma.MovieDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      update: {
+        args: Prisma.MovieUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      deleteMany: {
+        args: Prisma.MovieDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      updateMany: {
+        args: Prisma.MovieUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      upsert: {
+        args: Prisma.MovieUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      aggregate: {
+        args: Prisma.MovieAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      groupBy: {
+        args: Prisma.MovieGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+      count: {
+        args: Prisma.MovieCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
+        queryExtCbArgs: { model: 'Movie', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
+      }
+    }
+    Director: {
+      findUnique: {
+        args: Prisma.DirectorFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.DirectorFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      findFirst: {
+        args: Prisma.DirectorFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.DirectorFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      findMany: {
+        args: Prisma.DirectorFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      create: {
+        args: Prisma.DirectorCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      createMany: {
+        args: Prisma.DirectorCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      delete: {
+        args: Prisma.DirectorDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      update: {
+        args: Prisma.DirectorUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      deleteMany: {
+        args: Prisma.DirectorDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      updateMany: {
+        args: Prisma.DirectorUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      upsert: {
+        args: Prisma.DirectorUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      aggregate: {
+        args: Prisma.DirectorAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      groupBy: {
+        args: Prisma.DirectorGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+      count: {
+        args: Prisma.DirectorCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
+        queryExtCbArgs: { model: 'Director', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
+      }
+    }
+    Problem: {
+      findUnique: {
+        args: Prisma.ProblemFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.ProblemFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      findFirst: {
+        args: Prisma.ProblemFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.ProblemFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      findMany: {
+        args: Prisma.ProblemFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      create: {
+        args: Prisma.ProblemCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      createMany: {
+        args: Prisma.ProblemCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      delete: {
+        args: Prisma.ProblemDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      update: {
+        args: Prisma.ProblemUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      deleteMany: {
+        args: Prisma.ProblemDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      updateMany: {
+        args: Prisma.ProblemUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      upsert: {
+        args: Prisma.ProblemUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      aggregate: {
+        args: Prisma.ProblemAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      groupBy: {
+        args: Prisma.ProblemGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+      count: {
+        args: Prisma.ProblemCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
+        queryExtCbArgs: { model: 'Problem', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
+      }
+    }
+    Creator: {
+      findUnique: {
+        args: Prisma.CreatorFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.CreatorFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      findFirst: {
+        args: Prisma.CreatorFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.CreatorFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      findMany: {
+        args: Prisma.CreatorFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      create: {
+        args: Prisma.CreatorCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      createMany: {
+        args: Prisma.CreatorCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      delete: {
+        args: Prisma.CreatorDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      update: {
+        args: Prisma.CreatorUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      deleteMany: {
+        args: Prisma.CreatorDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      updateMany: {
+        args: Prisma.CreatorUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      upsert: {
+        args: Prisma.CreatorUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      aggregate: {
+        args: Prisma.CreatorAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      groupBy: {
+        args: Prisma.CreatorGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+      count: {
+        args: Prisma.CreatorCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
+        queryExtCbArgs: { model: 'Creator', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
+      }
+    }
+    NativeTypeModel: {
+      findUnique: {
+        args: Prisma.NativeTypeModelFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.NativeTypeModelFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      findFirst: {
+        args: Prisma.NativeTypeModelFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.NativeTypeModelFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      findMany: {
+        args: Prisma.NativeTypeModelFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      create: {
+        args: Prisma.NativeTypeModelCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      createMany: {
+        args: Prisma.NativeTypeModelCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      delete: {
+        args: Prisma.NativeTypeModelDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      update: {
+        args: Prisma.NativeTypeModelUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      deleteMany: {
+        args: Prisma.NativeTypeModelDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      updateMany: {
+        args: Prisma.NativeTypeModelUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      upsert: {
+        args: Prisma.NativeTypeModelUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      aggregate: {
+        args: Prisma.NativeTypeModelAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      groupBy: {
+        args: Prisma.NativeTypeModelGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+      count: {
+        args: Prisma.NativeTypeModelCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
+        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
+      }
+    }
+    Equipment: {
+      findUnique: {
+        args: Prisma.EquipmentFindUniqueArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      findUniqueOrThrow: {
+        args: Prisma.EquipmentFindUniqueOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      findFirst: {
+        args: Prisma.EquipmentFindFirstArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      findFirstOrThrow: {
+        args: Prisma.EquipmentFindFirstOrThrowArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      findMany: {
+        args: Prisma.EquipmentFindManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      create: {
+        args: Prisma.EquipmentCreateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      createMany: {
+        args: Prisma.EquipmentCreateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      delete: {
+        args: Prisma.EquipmentDeleteArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      update: {
+        args: Prisma.EquipmentUpdateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      deleteMany: {
+        args: Prisma.EquipmentDeleteManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      updateMany: {
+        args: Prisma.EquipmentUpdateManyArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      upsert: {
+        args: Prisma.EquipmentUpsertArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      aggregate: {
+        args: Prisma.EquipmentAggregateArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      groupBy: {
+        args: Prisma.EquipmentGroupByArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+      count: {
+        args: Prisma.EquipmentCountArgs<ExtArgs>,
+        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
+        queryExtCbArgs: { model: 'Equipment', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
+      }
+    }
+  }
   export type RejectOnNotFound = boolean | ((error: Error) => Error)
   export type RejectPerModel = { [P in ModelName]?: RejectOnNotFound }
   export type RejectPerOperation =  { [P in "findUnique" | "findFirst"]?: RejectPerModel | RejectOnNotFound } 
@@ -1057,6 +2128,11 @@ export namespace Prisma {
   // tested in getLogLevel.test.ts
   export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
 
+  /**
+   * `PrismaClient` proxy available in interactive transactions.
+   */
+  export type TransactionClient = Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>
+
   export type Datasource = {
     url?: string
   }
@@ -1076,23 +2152,23 @@ export namespace Prisma {
     editorPosts: number
   }
 
-  export type UserCountOutputTypeSelect = {
+  export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     posts?: boolean | UserCountOutputTypeCountPostsArgs
     editorPosts?: boolean | UserCountOutputTypeCountEditorPostsArgs
   }
 
-  export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs, U = keyof S> =
+  export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _UserCountOutputType = runtime.Types.Extensions.GetResultPayload<UserCountOutputType, ExtArgs['result']['userCountOutputType']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? UserCountOutputType :
+    S extends true ? _UserCountOutputType :
     S extends undefined ? never :
     S extends { include: any } & (UserCountOutputTypeArgs)
-    ? UserCountOutputType 
+    ? _UserCountOutputType 
     : S extends { select: any } & (UserCountOutputTypeArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-    P extends keyof UserCountOutputType ? UserCountOutputType[P] : never
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof _UserCountOutputType ? _UserCountOutputType[P] : never
   } 
-      : UserCountOutputType
+      : _UserCountOutputType
 
 
 
@@ -1102,19 +2178,19 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeArgs = {
+  export type UserCountOutputTypeArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserCountOutputType
      * 
     **/
-    select?: UserCountOutputTypeSelect | null
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
   }
 
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountPostsArgs = {
+  export type UserCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: postWhereInput
   }
 
@@ -1122,7 +2198,7 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountEditorPostsArgs = {
+  export type UserCountOutputTypeCountEditorPostsArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: postWhereInput
   }
 
@@ -1137,22 +2213,22 @@ export namespace Prisma {
     movies: number
   }
 
-  export type DirectorCountOutputTypeSelect = {
+  export type DirectorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     movies?: boolean | DirectorCountOutputTypeCountMoviesArgs
   }
 
-  export type DirectorCountOutputTypeGetPayload<S extends boolean | null | undefined | DirectorCountOutputTypeArgs, U = keyof S> =
+  export type DirectorCountOutputTypeGetPayload<S extends boolean | null | undefined | DirectorCountOutputTypeArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _DirectorCountOutputType = runtime.Types.Extensions.GetResultPayload<DirectorCountOutputType, ExtArgs['result']['directorCountOutputType']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? DirectorCountOutputType :
+    S extends true ? _DirectorCountOutputType :
     S extends undefined ? never :
     S extends { include: any } & (DirectorCountOutputTypeArgs)
-    ? DirectorCountOutputType 
+    ? _DirectorCountOutputType 
     : S extends { select: any } & (DirectorCountOutputTypeArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-    P extends keyof DirectorCountOutputType ? DirectorCountOutputType[P] : never
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof _DirectorCountOutputType ? _DirectorCountOutputType[P] : never
   } 
-      : DirectorCountOutputType
+      : _DirectorCountOutputType
 
 
 
@@ -1162,19 +2238,19 @@ export namespace Prisma {
   /**
    * DirectorCountOutputType without action
    */
-  export type DirectorCountOutputTypeArgs = {
+  export type DirectorCountOutputTypeArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the DirectorCountOutputType
      * 
     **/
-    select?: DirectorCountOutputTypeSelect | null
+    select?: DirectorCountOutputTypeSelect<ExtArgs> | null
   }
 
 
   /**
    * DirectorCountOutputType without action
    */
-  export type DirectorCountOutputTypeCountMoviesArgs = {
+  export type DirectorCountOutputTypeCountMoviesArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: MovieWhereInput
   }
 
@@ -1189,22 +2265,22 @@ export namespace Prisma {
     likedBy: number
   }
 
-  export type ProblemCountOutputTypeSelect = {
+  export type ProblemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     likedBy?: boolean | ProblemCountOutputTypeCountLikedByArgs
   }
 
-  export type ProblemCountOutputTypeGetPayload<S extends boolean | null | undefined | ProblemCountOutputTypeArgs, U = keyof S> =
+  export type ProblemCountOutputTypeGetPayload<S extends boolean | null | undefined | ProblemCountOutputTypeArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _ProblemCountOutputType = runtime.Types.Extensions.GetResultPayload<ProblemCountOutputType, ExtArgs['result']['problemCountOutputType']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? ProblemCountOutputType :
+    S extends true ? _ProblemCountOutputType :
     S extends undefined ? never :
     S extends { include: any } & (ProblemCountOutputTypeArgs)
-    ? ProblemCountOutputType 
+    ? _ProblemCountOutputType 
     : S extends { select: any } & (ProblemCountOutputTypeArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-    P extends keyof ProblemCountOutputType ? ProblemCountOutputType[P] : never
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof _ProblemCountOutputType ? _ProblemCountOutputType[P] : never
   } 
-      : ProblemCountOutputType
+      : _ProblemCountOutputType
 
 
 
@@ -1214,19 +2290,19 @@ export namespace Prisma {
   /**
    * ProblemCountOutputType without action
    */
-  export type ProblemCountOutputTypeArgs = {
+  export type ProblemCountOutputTypeArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProblemCountOutputType
      * 
     **/
-    select?: ProblemCountOutputTypeSelect | null
+    select?: ProblemCountOutputTypeSelect<ExtArgs> | null
   }
 
 
   /**
    * ProblemCountOutputType without action
    */
-  export type ProblemCountOutputTypeCountLikedByArgs = {
+  export type ProblemCountOutputTypeCountLikedByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: CreatorWhereInput
   }
 
@@ -1242,23 +2318,23 @@ export namespace Prisma {
     problems: number
   }
 
-  export type CreatorCountOutputTypeSelect = {
+  export type CreatorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     likes?: boolean | CreatorCountOutputTypeCountLikesArgs
     problems?: boolean | CreatorCountOutputTypeCountProblemsArgs
   }
 
-  export type CreatorCountOutputTypeGetPayload<S extends boolean | null | undefined | CreatorCountOutputTypeArgs, U = keyof S> =
+  export type CreatorCountOutputTypeGetPayload<S extends boolean | null | undefined | CreatorCountOutputTypeArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _CreatorCountOutputType = runtime.Types.Extensions.GetResultPayload<CreatorCountOutputType, ExtArgs['result']['creatorCountOutputType']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? CreatorCountOutputType :
+    S extends true ? _CreatorCountOutputType :
     S extends undefined ? never :
     S extends { include: any } & (CreatorCountOutputTypeArgs)
-    ? CreatorCountOutputType 
+    ? _CreatorCountOutputType 
     : S extends { select: any } & (CreatorCountOutputTypeArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-    P extends keyof CreatorCountOutputType ? CreatorCountOutputType[P] : never
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof _CreatorCountOutputType ? _CreatorCountOutputType[P] : never
   } 
-      : CreatorCountOutputType
+      : _CreatorCountOutputType
 
 
 
@@ -1268,19 +2344,19 @@ export namespace Prisma {
   /**
    * CreatorCountOutputType without action
    */
-  export type CreatorCountOutputTypeArgs = {
+  export type CreatorCountOutputTypeArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the CreatorCountOutputType
      * 
     **/
-    select?: CreatorCountOutputTypeSelect | null
+    select?: CreatorCountOutputTypeSelect<ExtArgs> | null
   }
 
 
   /**
    * CreatorCountOutputType without action
    */
-  export type CreatorCountOutputTypeCountLikesArgs = {
+  export type CreatorCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: ProblemWhereInput
   }
 
@@ -1288,7 +2364,7 @@ export namespace Prisma {
   /**
    * CreatorCountOutputType without action
    */
-  export type CreatorCountOutputTypeCountProblemsArgs = {
+  export type CreatorCountOutputTypeCountProblemsArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: ProblemWhereInput
   }
 
@@ -1410,7 +2486,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type UserAggregateArgs = {
+  export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which User to aggregate.
      * 
@@ -1487,7 +2563,7 @@ export namespace Prisma {
 
 
 
-  export type UserGroupByArgs = {
+  export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: UserWhereInput
     orderBy?: Enumerable<UserOrderByWithAggregationInput>
     by: Array<UserScalarFieldEnum>
@@ -1533,56 +2609,57 @@ export namespace Prisma {
     >
 
 
-  export type UserSelect = {
+  export type UserSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+    posts?: boolean | postFindManyArgs<ExtArgs>
+    editorPosts?: boolean | postFindManyArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
+  } & UserSelectScalar, ExtArgs['result']['user']>
+
+  export type UserSelectScalar = {
     id?: boolean
     email?: boolean
     name?: boolean
     age?: boolean
     balance?: boolean
     amount?: boolean
-    posts?: boolean | postFindManyArgs
-    role?: boolean
-    editorPosts?: boolean | postFindManyArgs
     grades?: boolean
     aliases?: boolean
-    _count?: boolean | UserCountOutputTypeArgs
   }
 
-
-  export type UserInclude = {
-    posts?: boolean | postFindManyArgs
-    editorPosts?: boolean | postFindManyArgs
-    _count?: boolean | UserCountOutputTypeArgs
+  export type UserInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    posts?: boolean | postFindManyArgs<ExtArgs>
+    editorPosts?: boolean | postFindManyArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
   } 
 
-  export type UserGetPayload<S extends boolean | null | undefined | UserArgs, U = keyof S> =
+  export type UserGetPayload<S extends boolean | null | undefined | UserArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _User = runtime.Types.Extensions.GetResultPayload<User, ExtArgs['result']['user']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? User :
+    S extends true ? _User :
     S extends undefined ? never :
     S extends { include: any } & (UserArgs | UserFindManyArgs)
-    ? User  & {
-    [P in TrueKeys<S['include']>]:
-        P extends 'posts' ? Array < postGetPayload<Exclude<S['include'], undefined | null>[P]>>  :
-        P extends 'editorPosts' ? Array < postGetPayload<Exclude<S['include'], undefined | null>[P]>>  :
-        P extends '_count' ? UserCountOutputTypeGetPayload<Exclude<S['include'], undefined | null>[P]> :  never
+    ? _User & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'posts' ? Array < postGetPayload<S['include'][P], ExtArgs>>  :
+        P extends 'editorPosts' ? Array < postGetPayload<S['include'][P], ExtArgs>>  :
+        P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P], ExtArgs> :  never
   } 
     : S extends { select: any } & (UserArgs | UserFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-        P extends 'posts' ? Array < postGetPayload<Exclude<S['select'], undefined | null>[P]>>  :
-        P extends 'editorPosts' ? Array < postGetPayload<Exclude<S['select'], undefined | null>[P]>>  :
-        P extends '_count' ? UserCountOutputTypeGetPayload<Exclude<S['select'], undefined | null>[P]> :  P extends keyof User ? User[P] : never
+    [P in TruthyKeys<S['select']>]:
+        P extends 'posts' ? Array < postGetPayload<S['select'][P], ExtArgs>>  :
+        P extends 'editorPosts' ? Array < postGetPayload<S['select'][P], ExtArgs>>  :
+        P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P], ExtArgs> :  P extends keyof _User ? _User[P] : never
   } 
-      : User
+      : _User
 
 
-  type UserCountArgs = Merge<
+  type UserCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<UserFindManyArgs, 'select' | 'include'> & {
       select?: UserCountAggregateInputType | true
     }
   >
 
-  export interface UserDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface UserDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -1594,9 +2671,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends UserFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, UserFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'User'> extends True ? Prisma__UserClient<UserGetPayload<T>> : Prisma__UserClient<UserGetPayload<T> | null, null>
+    findUnique<T extends UserFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'User'> extends True ? Prisma__UserClient<UserGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__UserClient<UserGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one User that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<UserGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first User that matches the filter.
@@ -1611,9 +2704,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends UserFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, UserFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'User'> extends True ? Prisma__UserClient<UserGetPayload<T>> : Prisma__UserClient<UserGetPayload<T> | null, null>
+    findFirst<T extends UserFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'User'> extends True ? Prisma__UserClient<UserGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__UserClient<UserGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<UserGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Users that matches the filter.
@@ -1631,9 +2742,9 @@ export namespace Prisma {
      * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends UserFindManyArgs>(
-      args?: SelectSubset<T, UserFindManyArgs>
-    ): PrismaPromise<Array<UserGetPayload<T>>>
+    findMany<T extends UserFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<UserGetPayload<T, ExtArgs>>>
 
     /**
      * Create a User.
@@ -1647,9 +2758,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends UserCreateArgs>(
-      args: SelectSubset<T, UserCreateArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    create<T extends UserCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
+    ): Prisma__UserClient<UserGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Users.
@@ -1663,8 +2774,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends UserCreateManyArgs>(
-      args?: SelectSubset<T, UserCreateManyArgs>
+    createMany<T extends UserCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -1679,9 +2790,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends UserDeleteArgs>(
-      args: SelectSubset<T, UserDeleteArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    delete<T extends UserDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
+    ): Prisma__UserClient<UserGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one User.
@@ -1698,9 +2809,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends UserUpdateArgs>(
-      args: SelectSubset<T, UserUpdateArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    update<T extends UserUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
+    ): Prisma__UserClient<UserGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Users.
@@ -1714,8 +2825,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends UserDeleteManyArgs>(
-      args?: SelectSubset<T, UserDeleteManyArgs>
+    deleteMany<T extends UserDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -1735,8 +2846,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends UserUpdateManyArgs>(
-      args: SelectSubset<T, UserUpdateManyArgs>
+    updateMany<T extends UserUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -1756,43 +2867,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends UserUpsertArgs>(
-      args: SelectSubset<T, UserUpsertArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
-
-    /**
-     * Find one User that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, UserFindUniqueOrThrowArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
-
-    /**
-     * Find the first User that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, UserFindFirstOrThrowArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    upsert<T extends UserUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
+    ): Prisma__UserClient<UserGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Users.
@@ -1928,7 +3005,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__UserClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -1945,9 +3022,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    posts<T extends postFindManyArgs= {}>(args?: Subset<T, postFindManyArgs>): PrismaPromise<Array<postGetPayload<T>>| Null>;
+    posts<T extends postFindManyArgs<ExtArgs> = {}>(args?: Subset<T, postFindManyArgs<ExtArgs>>): PrismaPromise<Array<postGetPayload<T, ExtArgs>>| Null>;
 
-    editorPosts<T extends postFindManyArgs= {}>(args?: Subset<T, postFindManyArgs>): PrismaPromise<Array<postGetPayload<T>>| Null>;
+    editorPosts<T extends postFindManyArgs<ExtArgs> = {}>(args?: Subset<T, postFindManyArgs<ExtArgs>>): PrismaPromise<Array<postGetPayload<T, ExtArgs>>| Null>;
 
     private get _document();
     /**
@@ -1979,17 +3056,17 @@ export namespace Prisma {
   /**
    * User base type for findUnique actions
    */
-  export type UserFindUniqueArgsBase = {
+  export type UserFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      * 
     **/
-    select?: UserSelect | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: UserInclude | null
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      * 
@@ -2000,7 +3077,7 @@ export namespace Prisma {
   /**
    * User: findUnique
    */
-  export interface UserFindUniqueArgs extends UserFindUniqueArgsBase {
+  export interface UserFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends UserFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -2010,19 +3087,41 @@ export namespace Prisma {
       
 
   /**
-   * User base type for findFirst actions
+   * User findUniqueOrThrow
    */
-  export type UserFindFirstArgsBase = {
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      * 
     **/
-    select?: UserSelect | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: UserInclude | null
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     * 
+    **/
+    where: UserWhereUniqueInput
+  }
+
+
+  /**
+   * User base type for findFirst actions
+   */
+  export type UserFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     * 
+    **/
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      * 
@@ -2068,7 +3167,7 @@ export namespace Prisma {
   /**
    * User: findFirst
    */
-  export interface UserFindFirstArgs extends UserFindFirstArgsBase {
+  export interface UserFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends UserFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -2078,19 +3177,76 @@ export namespace Prisma {
       
 
   /**
-   * User findMany
+   * User findFirstOrThrow
    */
-  export type UserFindManyArgs = {
+  export type UserFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      * 
     **/
-    select?: UserSelect | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: UserInclude | null
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     * 
+    **/
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<UserOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     * 
+    **/
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     * 
+    **/
+    distinct?: Enumerable<UserScalarFieldEnum>
+  }
+
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     * 
+    **/
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which Users to fetch.
      * 
@@ -2131,17 +3287,17 @@ export namespace Prisma {
   /**
    * User create
    */
-  export type UserCreateArgs = {
+  export type UserCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      * 
     **/
-    select?: UserSelect | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: UserInclude | null
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      * 
@@ -2153,7 +3309,7 @@ export namespace Prisma {
   /**
    * User createMany
    */
-  export type UserCreateManyArgs = {
+  export type UserCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many Users.
      * 
@@ -2166,17 +3322,17 @@ export namespace Prisma {
   /**
    * User update
    */
-  export type UserUpdateArgs = {
+  export type UserUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      * 
     **/
-    select?: UserSelect | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: UserInclude | null
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      * 
@@ -2193,7 +3349,7 @@ export namespace Prisma {
   /**
    * User updateMany
    */
-  export type UserUpdateManyArgs = {
+  export type UserUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update Users.
      * 
@@ -2210,17 +3366,17 @@ export namespace Prisma {
   /**
    * User upsert
    */
-  export type UserUpsertArgs = {
+  export type UserUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      * 
     **/
-    select?: UserSelect | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: UserInclude | null
+    include?: UserInclude<ExtArgs> | null
     /**
      * The filter to search for the User to update in case it exists.
      * 
@@ -2242,17 +3398,17 @@ export namespace Prisma {
   /**
    * User delete
    */
-  export type UserDeleteArgs = {
+  export type UserDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      * 
     **/
-    select?: UserSelect | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: UserInclude | null
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter which User to delete.
      * 
@@ -2264,7 +3420,7 @@ export namespace Prisma {
   /**
    * User deleteMany
    */
-  export type UserDeleteManyArgs = {
+  export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Users to delete
      * 
@@ -2274,31 +3430,19 @@ export namespace Prisma {
 
 
   /**
-   * User: findUniqueOrThrow
-   */
-  export type UserFindUniqueOrThrowArgs = UserFindUniqueArgsBase
-      
-
-  /**
-   * User: findFirstOrThrow
-   */
-  export type UserFindFirstOrThrowArgs = UserFindFirstArgsBase
-      
-
-  /**
    * User without action
    */
-  export type UserArgs = {
+  export type UserArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      * 
     **/
-    select?: UserSelect | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: UserInclude | null
+    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -2419,7 +3563,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type PostAggregateArgs = {
+  export type PostAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which post to aggregate.
      * 
@@ -2496,7 +3640,7 @@ export namespace Prisma {
 
 
 
-  export type PostGroupByArgs = {
+  export type PostGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: postWhereInput
     orderBy?: Enumerable<postOrderByWithAggregationInput>
     by: Array<PostScalarFieldEnum>
@@ -2544,7 +3688,12 @@ export namespace Prisma {
     >
 
 
-  export type postSelect = {
+  export type postSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+    author?: boolean | UserArgs<ExtArgs>
+    editor?: boolean | UserArgs<ExtArgs>
+  } & postSelectScalar, ExtArgs['result']['post']>
+
+  export type postSelectScalar = {
     uuid?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2552,46 +3701,42 @@ export namespace Prisma {
     title?: boolean
     subtitle?: boolean
     content?: boolean
-    author?: boolean | UserArgs
     authorId?: boolean
-    editor?: boolean | UserArgs
     editorId?: boolean
-    kind?: boolean
     metadata?: boolean
   }
 
-
-  export type postInclude = {
-    author?: boolean | UserArgs
-    editor?: boolean | UserArgs
+  export type postInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    author?: boolean | UserArgs<ExtArgs>
+    editor?: boolean | UserArgs<ExtArgs>
   } 
 
-  export type postGetPayload<S extends boolean | null | undefined | postArgs, U = keyof S> =
+  export type postGetPayload<S extends boolean | null | undefined | postArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _post = runtime.Types.Extensions.GetResultPayload<post, ExtArgs['result']['post']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? post :
+    S extends true ? _post :
     S extends undefined ? never :
     S extends { include: any } & (postArgs | postFindManyArgs)
-    ? post  & {
-    [P in TrueKeys<S['include']>]:
-        P extends 'author' ? UserGetPayload<Exclude<S['include'], undefined | null>[P]> :
-        P extends 'editor' ? UserGetPayload<Exclude<S['include'], undefined | null>[P]> | null :  never
+    ? _post & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'author' ? UserGetPayload<S['include'][P], ExtArgs> :
+        P extends 'editor' ? UserGetPayload<S['include'][P], ExtArgs> | null :  never
   } 
     : S extends { select: any } & (postArgs | postFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-        P extends 'author' ? UserGetPayload<Exclude<S['select'], undefined | null>[P]> :
-        P extends 'editor' ? UserGetPayload<Exclude<S['select'], undefined | null>[P]> | null :  P extends keyof post ? post[P] : never
+    [P in TruthyKeys<S['select']>]:
+        P extends 'author' ? UserGetPayload<S['select'][P], ExtArgs> :
+        P extends 'editor' ? UserGetPayload<S['select'][P], ExtArgs> | null :  P extends keyof _post ? _post[P] : never
   } 
-      : post
+      : _post
 
 
-  type postCountArgs = Merge<
+  type postCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<postFindManyArgs, 'select' | 'include'> & {
       select?: PostCountAggregateInputType | true
     }
   >
 
-  export interface postDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface postDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one Post that matches the filter.
      * @param {postFindUniqueArgs} args - Arguments to find a Post
@@ -2603,9 +3748,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends postFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, postFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'post'> extends True ? Prisma__postClient<postGetPayload<T>> : Prisma__postClient<postGetPayload<T> | null, null>
+    findUnique<T extends postFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, postFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'post'> extends True ? Prisma__postClient<postGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__postClient<postGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one Post that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {postFindUniqueOrThrowArgs} args - Arguments to find a Post
+     * @example
+     * // Get one Post
+     * const post = await prisma.post.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends postFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, postFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__postClient<postGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first Post that matches the filter.
@@ -2620,9 +3781,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends postFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, postFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'post'> extends True ? Prisma__postClient<postGetPayload<T>> : Prisma__postClient<postGetPayload<T> | null, null>
+    findFirst<T extends postFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, postFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'post'> extends True ? Prisma__postClient<postGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__postClient<postGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first Post that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {postFindFirstOrThrowArgs} args - Arguments to find a Post
+     * @example
+     * // Get one Post
+     * const post = await prisma.post.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends postFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, postFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__postClient<postGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Posts that matches the filter.
@@ -2640,9 +3819,9 @@ export namespace Prisma {
      * const postWithUuidOnly = await prisma.post.findMany({ select: { uuid: true } })
      * 
     **/
-    findMany<T extends postFindManyArgs>(
-      args?: SelectSubset<T, postFindManyArgs>
-    ): PrismaPromise<Array<postGetPayload<T>>>
+    findMany<T extends postFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, postFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<postGetPayload<T, ExtArgs>>>
 
     /**
      * Create a Post.
@@ -2656,9 +3835,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends postCreateArgs>(
-      args: SelectSubset<T, postCreateArgs>
-    ): Prisma__postClient<postGetPayload<T>>
+    create<T extends postCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, postCreateArgs<ExtArgs>>
+    ): Prisma__postClient<postGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Posts.
@@ -2672,8 +3851,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends postCreateManyArgs>(
-      args?: SelectSubset<T, postCreateManyArgs>
+    createMany<T extends postCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, postCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -2688,9 +3867,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends postDeleteArgs>(
-      args: SelectSubset<T, postDeleteArgs>
-    ): Prisma__postClient<postGetPayload<T>>
+    delete<T extends postDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, postDeleteArgs<ExtArgs>>
+    ): Prisma__postClient<postGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one Post.
@@ -2707,9 +3886,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends postUpdateArgs>(
-      args: SelectSubset<T, postUpdateArgs>
-    ): Prisma__postClient<postGetPayload<T>>
+    update<T extends postUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, postUpdateArgs<ExtArgs>>
+    ): Prisma__postClient<postGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Posts.
@@ -2723,8 +3902,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends postDeleteManyArgs>(
-      args?: SelectSubset<T, postDeleteManyArgs>
+    deleteMany<T extends postDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, postDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -2744,8 +3923,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends postUpdateManyArgs>(
-      args: SelectSubset<T, postUpdateManyArgs>
+    updateMany<T extends postUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, postUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -2765,43 +3944,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends postUpsertArgs>(
-      args: SelectSubset<T, postUpsertArgs>
-    ): Prisma__postClient<postGetPayload<T>>
-
-    /**
-     * Find one Post that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {postFindUniqueOrThrowArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends postFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, postFindUniqueOrThrowArgs>
-    ): Prisma__postClient<postGetPayload<T>>
-
-    /**
-     * Find the first Post that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {postFindFirstOrThrowArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends postFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, postFindFirstOrThrowArgs>
-    ): Prisma__postClient<postGetPayload<T>>
+    upsert<T extends postUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, postUpsertArgs<ExtArgs>>
+    ): Prisma__postClient<postGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Posts.
@@ -2937,7 +4082,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__postClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__postClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -2954,9 +4099,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    author<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+    author<T extends UserArgs<ExtArgs> = {}>(args?: Subset<T, UserArgs<ExtArgs>>): Prisma__UserClient<UserGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
 
-    editor<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+    editor<T extends UserArgs<ExtArgs> = {}>(args?: Subset<T, UserArgs<ExtArgs>>): Prisma__UserClient<UserGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
 
     private get _document();
     /**
@@ -2988,17 +4133,17 @@ export namespace Prisma {
   /**
    * post base type for findUnique actions
    */
-  export type postFindUniqueArgsBase = {
+  export type postFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the post
      * 
     **/
-    select?: postSelect | null
+    select?: postSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: postInclude | null
+    include?: postInclude<ExtArgs> | null
     /**
      * Filter, which post to fetch.
      * 
@@ -3009,7 +4154,7 @@ export namespace Prisma {
   /**
    * post: findUnique
    */
-  export interface postFindUniqueArgs extends postFindUniqueArgsBase {
+  export interface postFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends postFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -3019,19 +4164,41 @@ export namespace Prisma {
       
 
   /**
-   * post base type for findFirst actions
+   * post findUniqueOrThrow
    */
-  export type postFindFirstArgsBase = {
+  export type postFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the post
      * 
     **/
-    select?: postSelect | null
+    select?: postSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: postInclude | null
+    include?: postInclude<ExtArgs> | null
+    /**
+     * Filter, which post to fetch.
+     * 
+    **/
+    where: postWhereUniqueInput
+  }
+
+
+  /**
+   * post base type for findFirst actions
+   */
+  export type postFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the post
+     * 
+    **/
+    select?: postSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: postInclude<ExtArgs> | null
     /**
      * Filter, which post to fetch.
      * 
@@ -3077,7 +4244,7 @@ export namespace Prisma {
   /**
    * post: findFirst
    */
-  export interface postFindFirstArgs extends postFindFirstArgsBase {
+  export interface postFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends postFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -3087,19 +4254,76 @@ export namespace Prisma {
       
 
   /**
-   * post findMany
+   * post findFirstOrThrow
    */
-  export type postFindManyArgs = {
+  export type postFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the post
      * 
     **/
-    select?: postSelect | null
+    select?: postSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: postInclude | null
+    include?: postInclude<ExtArgs> | null
+    /**
+     * Filter, which post to fetch.
+     * 
+    **/
+    where?: postWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of posts to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<postOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for posts.
+     * 
+    **/
+    cursor?: postWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` posts from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` posts.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of posts.
+     * 
+    **/
+    distinct?: Enumerable<PostScalarFieldEnum>
+  }
+
+
+  /**
+   * post findMany
+   */
+  export type postFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the post
+     * 
+    **/
+    select?: postSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: postInclude<ExtArgs> | null
     /**
      * Filter, which posts to fetch.
      * 
@@ -3140,17 +4364,17 @@ export namespace Prisma {
   /**
    * post create
    */
-  export type postCreateArgs = {
+  export type postCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the post
      * 
     **/
-    select?: postSelect | null
+    select?: postSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: postInclude | null
+    include?: postInclude<ExtArgs> | null
     /**
      * The data needed to create a post.
      * 
@@ -3162,7 +4386,7 @@ export namespace Prisma {
   /**
    * post createMany
    */
-  export type postCreateManyArgs = {
+  export type postCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many posts.
      * 
@@ -3175,17 +4399,17 @@ export namespace Prisma {
   /**
    * post update
    */
-  export type postUpdateArgs = {
+  export type postUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the post
      * 
     **/
-    select?: postSelect | null
+    select?: postSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: postInclude | null
+    include?: postInclude<ExtArgs> | null
     /**
      * The data needed to update a post.
      * 
@@ -3202,7 +4426,7 @@ export namespace Prisma {
   /**
    * post updateMany
    */
-  export type postUpdateManyArgs = {
+  export type postUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update posts.
      * 
@@ -3219,17 +4443,17 @@ export namespace Prisma {
   /**
    * post upsert
    */
-  export type postUpsertArgs = {
+  export type postUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the post
      * 
     **/
-    select?: postSelect | null
+    select?: postSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: postInclude | null
+    include?: postInclude<ExtArgs> | null
     /**
      * The filter to search for the post to update in case it exists.
      * 
@@ -3251,17 +4475,17 @@ export namespace Prisma {
   /**
    * post delete
    */
-  export type postDeleteArgs = {
+  export type postDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the post
      * 
     **/
-    select?: postSelect | null
+    select?: postSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: postInclude | null
+    include?: postInclude<ExtArgs> | null
     /**
      * Filter which post to delete.
      * 
@@ -3273,7 +4497,7 @@ export namespace Prisma {
   /**
    * post deleteMany
    */
-  export type postDeleteManyArgs = {
+  export type postDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which posts to delete
      * 
@@ -3283,31 +4507,19 @@ export namespace Prisma {
 
 
   /**
-   * post: findUniqueOrThrow
-   */
-  export type postFindUniqueOrThrowArgs = postFindUniqueArgsBase
-      
-
-  /**
-   * post: findFirstOrThrow
-   */
-  export type postFindFirstOrThrowArgs = postFindFirstArgsBase
-      
-
-  /**
    * post without action
    */
-  export type postArgs = {
+  export type postArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the post
      * 
     **/
-    select?: postSelect | null
+    select?: postSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: postInclude | null
+    include?: postInclude<ExtArgs> | null
   }
 
 
@@ -3380,7 +4592,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type CategoryAggregateArgs = {
+  export type CategoryAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Category to aggregate.
      * 
@@ -3457,7 +4669,7 @@ export namespace Prisma {
 
 
 
-  export type CategoryGroupByArgs = {
+  export type CategoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: CategoryWhereInput
     orderBy?: Enumerable<CategoryOrderByWithAggregationInput>
     by: Array<CategoryScalarFieldEnum>
@@ -3497,34 +4709,37 @@ export namespace Prisma {
     >
 
 
-  export type CategorySelect = {
+  export type CategorySelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+
+  } & CategorySelectScalar, ExtArgs['result']['category']>
+
+  export type CategorySelectScalar = {
     name?: boolean
     slug?: boolean
     number?: boolean
   }
 
-
-  export type CategoryGetPayload<S extends boolean | null | undefined | CategoryArgs, U = keyof S> =
+  export type CategoryGetPayload<S extends boolean | null | undefined | CategoryArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _Category = runtime.Types.Extensions.GetResultPayload<Category, ExtArgs['result']['category']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Category :
+    S extends true ? _Category :
     S extends undefined ? never :
     S extends { include: any } & (CategoryArgs | CategoryFindManyArgs)
-    ? Category 
+    ? _Category 
     : S extends { select: any } & (CategoryArgs | CategoryFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-    P extends keyof Category ? Category[P] : never
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof _Category ? _Category[P] : never
   } 
-      : Category
+      : _Category
 
 
-  type CategoryCountArgs = Merge<
+  type CategoryCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<CategoryFindManyArgs, 'select' | 'include'> & {
       select?: CategoryCountAggregateInputType | true
     }
   >
 
-  export interface CategoryDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface CategoryDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one Category that matches the filter.
      * @param {CategoryFindUniqueArgs} args - Arguments to find a Category
@@ -3536,9 +4751,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends CategoryFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, CategoryFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Category'> extends True ? Prisma__CategoryClient<CategoryGetPayload<T>> : Prisma__CategoryClient<CategoryGetPayload<T> | null, null>
+    findUnique<T extends CategoryFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, CategoryFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Category'> extends True ? Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one Category that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {CategoryFindUniqueOrThrowArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends CategoryFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, CategoryFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first Category that matches the filter.
@@ -3553,9 +4784,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends CategoryFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, CategoryFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Category'> extends True ? Prisma__CategoryClient<CategoryGetPayload<T>> : Prisma__CategoryClient<CategoryGetPayload<T> | null, null>
+    findFirst<T extends CategoryFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, CategoryFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Category'> extends True ? Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first Category that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindFirstOrThrowArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends CategoryFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, CategoryFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Categories that matches the filter.
@@ -3573,9 +4822,9 @@ export namespace Prisma {
      * const categoryWithNameOnly = await prisma.category.findMany({ select: { name: true } })
      * 
     **/
-    findMany<T extends CategoryFindManyArgs>(
-      args?: SelectSubset<T, CategoryFindManyArgs>
-    ): PrismaPromise<Array<CategoryGetPayload<T>>>
+    findMany<T extends CategoryFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CategoryFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<CategoryGetPayload<T, ExtArgs>>>
 
     /**
      * Create a Category.
@@ -3589,9 +4838,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends CategoryCreateArgs>(
-      args: SelectSubset<T, CategoryCreateArgs>
-    ): Prisma__CategoryClient<CategoryGetPayload<T>>
+    create<T extends CategoryCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, CategoryCreateArgs<ExtArgs>>
+    ): Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Categories.
@@ -3605,8 +4854,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends CategoryCreateManyArgs>(
-      args?: SelectSubset<T, CategoryCreateManyArgs>
+    createMany<T extends CategoryCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CategoryCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -3621,9 +4870,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends CategoryDeleteArgs>(
-      args: SelectSubset<T, CategoryDeleteArgs>
-    ): Prisma__CategoryClient<CategoryGetPayload<T>>
+    delete<T extends CategoryDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, CategoryDeleteArgs<ExtArgs>>
+    ): Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one Category.
@@ -3640,9 +4889,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends CategoryUpdateArgs>(
-      args: SelectSubset<T, CategoryUpdateArgs>
-    ): Prisma__CategoryClient<CategoryGetPayload<T>>
+    update<T extends CategoryUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, CategoryUpdateArgs<ExtArgs>>
+    ): Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Categories.
@@ -3656,8 +4905,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends CategoryDeleteManyArgs>(
-      args?: SelectSubset<T, CategoryDeleteManyArgs>
+    deleteMany<T extends CategoryDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CategoryDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -3677,8 +4926,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends CategoryUpdateManyArgs>(
-      args: SelectSubset<T, CategoryUpdateManyArgs>
+    updateMany<T extends CategoryUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, CategoryUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -3698,43 +4947,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends CategoryUpsertArgs>(
-      args: SelectSubset<T, CategoryUpsertArgs>
-    ): Prisma__CategoryClient<CategoryGetPayload<T>>
-
-    /**
-     * Find one Category that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {CategoryFindUniqueOrThrowArgs} args - Arguments to find a Category
-     * @example
-     * // Get one Category
-     * const category = await prisma.category.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends CategoryFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, CategoryFindUniqueOrThrowArgs>
-    ): Prisma__CategoryClient<CategoryGetPayload<T>>
-
-    /**
-     * Find the first Category that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CategoryFindFirstOrThrowArgs} args - Arguments to find a Category
-     * @example
-     * // Get one Category
-     * const category = await prisma.category.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends CategoryFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, CategoryFindFirstOrThrowArgs>
-    ): Prisma__CategoryClient<CategoryGetPayload<T>>
+    upsert<T extends CategoryUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, CategoryUpsertArgs<ExtArgs>>
+    ): Prisma__CategoryClient<CategoryGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Categories.
@@ -3870,7 +5085,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__CategoryClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__CategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -3918,12 +5133,12 @@ export namespace Prisma {
   /**
    * Category base type for findUnique actions
    */
-  export type CategoryFindUniqueArgsBase = {
+  export type CategoryFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Category
      * 
     **/
-    select?: CategorySelect | null
+    select?: CategorySelect<ExtArgs> | null
     /**
      * Filter, which Category to fetch.
      * 
@@ -3934,7 +5149,7 @@ export namespace Prisma {
   /**
    * Category: findUnique
    */
-  export interface CategoryFindUniqueArgs extends CategoryFindUniqueArgsBase {
+  export interface CategoryFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends CategoryFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -3944,14 +5159,31 @@ export namespace Prisma {
       
 
   /**
-   * Category base type for findFirst actions
+   * Category findUniqueOrThrow
    */
-  export type CategoryFindFirstArgsBase = {
+  export type CategoryFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Category
      * 
     **/
-    select?: CategorySelect | null
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     * 
+    **/
+    where: CategoryWhereUniqueInput
+  }
+
+
+  /**
+   * Category base type for findFirst actions
+   */
+  export type CategoryFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     * 
+    **/
+    select?: CategorySelect<ExtArgs> | null
     /**
      * Filter, which Category to fetch.
      * 
@@ -3997,7 +5229,7 @@ export namespace Prisma {
   /**
    * Category: findFirst
    */
-  export interface CategoryFindFirstArgs extends CategoryFindFirstArgsBase {
+  export interface CategoryFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends CategoryFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -4007,14 +5239,66 @@ export namespace Prisma {
       
 
   /**
-   * Category findMany
+   * Category findFirstOrThrow
    */
-  export type CategoryFindManyArgs = {
+  export type CategoryFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Category
      * 
     **/
-    select?: CategorySelect | null
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     * 
+    **/
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<CategoryOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     * 
+    **/
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     * 
+    **/
+    distinct?: Enumerable<CategoryScalarFieldEnum>
+  }
+
+
+  /**
+   * Category findMany
+   */
+  export type CategoryFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     * 
+    **/
+    select?: CategorySelect<ExtArgs> | null
     /**
      * Filter, which Categories to fetch.
      * 
@@ -4055,12 +5339,12 @@ export namespace Prisma {
   /**
    * Category create
    */
-  export type CategoryCreateArgs = {
+  export type CategoryCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Category
      * 
     **/
-    select?: CategorySelect | null
+    select?: CategorySelect<ExtArgs> | null
     /**
      * The data needed to create a Category.
      * 
@@ -4072,7 +5356,7 @@ export namespace Prisma {
   /**
    * Category createMany
    */
-  export type CategoryCreateManyArgs = {
+  export type CategoryCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many Categories.
      * 
@@ -4085,12 +5369,12 @@ export namespace Prisma {
   /**
    * Category update
    */
-  export type CategoryUpdateArgs = {
+  export type CategoryUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Category
      * 
     **/
-    select?: CategorySelect | null
+    select?: CategorySelect<ExtArgs> | null
     /**
      * The data needed to update a Category.
      * 
@@ -4107,7 +5391,7 @@ export namespace Prisma {
   /**
    * Category updateMany
    */
-  export type CategoryUpdateManyArgs = {
+  export type CategoryUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update Categories.
      * 
@@ -4124,12 +5408,12 @@ export namespace Prisma {
   /**
    * Category upsert
    */
-  export type CategoryUpsertArgs = {
+  export type CategoryUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Category
      * 
     **/
-    select?: CategorySelect | null
+    select?: CategorySelect<ExtArgs> | null
     /**
      * The filter to search for the Category to update in case it exists.
      * 
@@ -4151,12 +5435,12 @@ export namespace Prisma {
   /**
    * Category delete
    */
-  export type CategoryDeleteArgs = {
+  export type CategoryDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Category
      * 
     **/
-    select?: CategorySelect | null
+    select?: CategorySelect<ExtArgs> | null
     /**
      * Filter which Category to delete.
      * 
@@ -4168,7 +5452,7 @@ export namespace Prisma {
   /**
    * Category deleteMany
    */
-  export type CategoryDeleteManyArgs = {
+  export type CategoryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Categories to delete
      * 
@@ -4178,26 +5462,14 @@ export namespace Prisma {
 
 
   /**
-   * Category: findUniqueOrThrow
-   */
-  export type CategoryFindUniqueOrThrowArgs = CategoryFindUniqueArgsBase
-      
-
-  /**
-   * Category: findFirstOrThrow
-   */
-  export type CategoryFindFirstOrThrowArgs = CategoryFindFirstArgsBase
-      
-
-  /**
    * Category without action
    */
-  export type CategoryArgs = {
+  export type CategoryArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Category
      * 
     **/
-    select?: CategorySelect | null
+    select?: CategorySelect<ExtArgs> | null
   }
 
 
@@ -4252,7 +5524,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type PatientAggregateArgs = {
+  export type PatientAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Patient to aggregate.
      * 
@@ -4317,7 +5589,7 @@ export namespace Prisma {
 
 
 
-  export type PatientGroupByArgs = {
+  export type PatientGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: PatientWhereInput
     orderBy?: Enumerable<PatientOrderByWithAggregationInput>
     by: Array<PatientScalarFieldEnum>
@@ -4353,34 +5625,37 @@ export namespace Prisma {
     >
 
 
-  export type PatientSelect = {
+  export type PatientSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+
+  } & PatientSelectScalar, ExtArgs['result']['patient']>
+
+  export type PatientSelectScalar = {
     firstName?: boolean
     lastName?: boolean
     email?: boolean
   }
 
-
-  export type PatientGetPayload<S extends boolean | null | undefined | PatientArgs, U = keyof S> =
+  export type PatientGetPayload<S extends boolean | null | undefined | PatientArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _Patient = runtime.Types.Extensions.GetResultPayload<Patient, ExtArgs['result']['patient']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Patient :
+    S extends true ? _Patient :
     S extends undefined ? never :
     S extends { include: any } & (PatientArgs | PatientFindManyArgs)
-    ? Patient 
+    ? _Patient 
     : S extends { select: any } & (PatientArgs | PatientFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-    P extends keyof Patient ? Patient[P] : never
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof _Patient ? _Patient[P] : never
   } 
-      : Patient
+      : _Patient
 
 
-  type PatientCountArgs = Merge<
+  type PatientCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<PatientFindManyArgs, 'select' | 'include'> & {
       select?: PatientCountAggregateInputType | true
     }
   >
 
-  export interface PatientDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface PatientDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one Patient that matches the filter.
      * @param {PatientFindUniqueArgs} args - Arguments to find a Patient
@@ -4392,9 +5667,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends PatientFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, PatientFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Patient'> extends True ? Prisma__PatientClient<PatientGetPayload<T>> : Prisma__PatientClient<PatientGetPayload<T> | null, null>
+    findUnique<T extends PatientFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, PatientFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Patient'> extends True ? Prisma__PatientClient<PatientGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__PatientClient<PatientGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one Patient that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {PatientFindUniqueOrThrowArgs} args - Arguments to find a Patient
+     * @example
+     * // Get one Patient
+     * const patient = await prisma.patient.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends PatientFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, PatientFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__PatientClient<PatientGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first Patient that matches the filter.
@@ -4409,9 +5700,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends PatientFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, PatientFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Patient'> extends True ? Prisma__PatientClient<PatientGetPayload<T>> : Prisma__PatientClient<PatientGetPayload<T> | null, null>
+    findFirst<T extends PatientFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, PatientFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Patient'> extends True ? Prisma__PatientClient<PatientGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__PatientClient<PatientGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first Patient that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PatientFindFirstOrThrowArgs} args - Arguments to find a Patient
+     * @example
+     * // Get one Patient
+     * const patient = await prisma.patient.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends PatientFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, PatientFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__PatientClient<PatientGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Patients that matches the filter.
@@ -4429,9 +5738,9 @@ export namespace Prisma {
      * const patientWithFirstNameOnly = await prisma.patient.findMany({ select: { firstName: true } })
      * 
     **/
-    findMany<T extends PatientFindManyArgs>(
-      args?: SelectSubset<T, PatientFindManyArgs>
-    ): PrismaPromise<Array<PatientGetPayload<T>>>
+    findMany<T extends PatientFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PatientFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<PatientGetPayload<T, ExtArgs>>>
 
     /**
      * Create a Patient.
@@ -4445,9 +5754,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends PatientCreateArgs>(
-      args: SelectSubset<T, PatientCreateArgs>
-    ): Prisma__PatientClient<PatientGetPayload<T>>
+    create<T extends PatientCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, PatientCreateArgs<ExtArgs>>
+    ): Prisma__PatientClient<PatientGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Patients.
@@ -4461,8 +5770,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends PatientCreateManyArgs>(
-      args?: SelectSubset<T, PatientCreateManyArgs>
+    createMany<T extends PatientCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PatientCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -4477,9 +5786,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends PatientDeleteArgs>(
-      args: SelectSubset<T, PatientDeleteArgs>
-    ): Prisma__PatientClient<PatientGetPayload<T>>
+    delete<T extends PatientDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, PatientDeleteArgs<ExtArgs>>
+    ): Prisma__PatientClient<PatientGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one Patient.
@@ -4496,9 +5805,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends PatientUpdateArgs>(
-      args: SelectSubset<T, PatientUpdateArgs>
-    ): Prisma__PatientClient<PatientGetPayload<T>>
+    update<T extends PatientUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, PatientUpdateArgs<ExtArgs>>
+    ): Prisma__PatientClient<PatientGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Patients.
@@ -4512,8 +5821,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends PatientDeleteManyArgs>(
-      args?: SelectSubset<T, PatientDeleteManyArgs>
+    deleteMany<T extends PatientDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PatientDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -4533,8 +5842,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends PatientUpdateManyArgs>(
-      args: SelectSubset<T, PatientUpdateManyArgs>
+    updateMany<T extends PatientUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, PatientUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -4554,43 +5863,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends PatientUpsertArgs>(
-      args: SelectSubset<T, PatientUpsertArgs>
-    ): Prisma__PatientClient<PatientGetPayload<T>>
-
-    /**
-     * Find one Patient that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {PatientFindUniqueOrThrowArgs} args - Arguments to find a Patient
-     * @example
-     * // Get one Patient
-     * const patient = await prisma.patient.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends PatientFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, PatientFindUniqueOrThrowArgs>
-    ): Prisma__PatientClient<PatientGetPayload<T>>
-
-    /**
-     * Find the first Patient that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PatientFindFirstOrThrowArgs} args - Arguments to find a Patient
-     * @example
-     * // Get one Patient
-     * const patient = await prisma.patient.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends PatientFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, PatientFindFirstOrThrowArgs>
-    ): Prisma__PatientClient<PatientGetPayload<T>>
+    upsert<T extends PatientUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, PatientUpsertArgs<ExtArgs>>
+    ): Prisma__PatientClient<PatientGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Patients.
@@ -4726,7 +6001,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__PatientClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__PatientClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -4774,12 +6049,12 @@ export namespace Prisma {
   /**
    * Patient base type for findUnique actions
    */
-  export type PatientFindUniqueArgsBase = {
+  export type PatientFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Patient
      * 
     **/
-    select?: PatientSelect | null
+    select?: PatientSelect<ExtArgs> | null
     /**
      * Filter, which Patient to fetch.
      * 
@@ -4790,7 +6065,7 @@ export namespace Prisma {
   /**
    * Patient: findUnique
    */
-  export interface PatientFindUniqueArgs extends PatientFindUniqueArgsBase {
+  export interface PatientFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends PatientFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -4800,14 +6075,31 @@ export namespace Prisma {
       
 
   /**
-   * Patient base type for findFirst actions
+   * Patient findUniqueOrThrow
    */
-  export type PatientFindFirstArgsBase = {
+  export type PatientFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Patient
      * 
     **/
-    select?: PatientSelect | null
+    select?: PatientSelect<ExtArgs> | null
+    /**
+     * Filter, which Patient to fetch.
+     * 
+    **/
+    where: PatientWhereUniqueInput
+  }
+
+
+  /**
+   * Patient base type for findFirst actions
+   */
+  export type PatientFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Patient
+     * 
+    **/
+    select?: PatientSelect<ExtArgs> | null
     /**
      * Filter, which Patient to fetch.
      * 
@@ -4853,7 +6145,7 @@ export namespace Prisma {
   /**
    * Patient: findFirst
    */
-  export interface PatientFindFirstArgs extends PatientFindFirstArgsBase {
+  export interface PatientFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends PatientFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -4863,14 +6155,66 @@ export namespace Prisma {
       
 
   /**
-   * Patient findMany
+   * Patient findFirstOrThrow
    */
-  export type PatientFindManyArgs = {
+  export type PatientFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Patient
      * 
     **/
-    select?: PatientSelect | null
+    select?: PatientSelect<ExtArgs> | null
+    /**
+     * Filter, which Patient to fetch.
+     * 
+    **/
+    where?: PatientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Patients to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<PatientOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Patients.
+     * 
+    **/
+    cursor?: PatientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Patients from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Patients.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Patients.
+     * 
+    **/
+    distinct?: Enumerable<PatientScalarFieldEnum>
+  }
+
+
+  /**
+   * Patient findMany
+   */
+  export type PatientFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Patient
+     * 
+    **/
+    select?: PatientSelect<ExtArgs> | null
     /**
      * Filter, which Patients to fetch.
      * 
@@ -4911,12 +6255,12 @@ export namespace Prisma {
   /**
    * Patient create
    */
-  export type PatientCreateArgs = {
+  export type PatientCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Patient
      * 
     **/
-    select?: PatientSelect | null
+    select?: PatientSelect<ExtArgs> | null
     /**
      * The data needed to create a Patient.
      * 
@@ -4928,7 +6272,7 @@ export namespace Prisma {
   /**
    * Patient createMany
    */
-  export type PatientCreateManyArgs = {
+  export type PatientCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many Patients.
      * 
@@ -4941,12 +6285,12 @@ export namespace Prisma {
   /**
    * Patient update
    */
-  export type PatientUpdateArgs = {
+  export type PatientUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Patient
      * 
     **/
-    select?: PatientSelect | null
+    select?: PatientSelect<ExtArgs> | null
     /**
      * The data needed to update a Patient.
      * 
@@ -4963,7 +6307,7 @@ export namespace Prisma {
   /**
    * Patient updateMany
    */
-  export type PatientUpdateManyArgs = {
+  export type PatientUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update Patients.
      * 
@@ -4980,12 +6324,12 @@ export namespace Prisma {
   /**
    * Patient upsert
    */
-  export type PatientUpsertArgs = {
+  export type PatientUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Patient
      * 
     **/
-    select?: PatientSelect | null
+    select?: PatientSelect<ExtArgs> | null
     /**
      * The filter to search for the Patient to update in case it exists.
      * 
@@ -5007,12 +6351,12 @@ export namespace Prisma {
   /**
    * Patient delete
    */
-  export type PatientDeleteArgs = {
+  export type PatientDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Patient
      * 
     **/
-    select?: PatientSelect | null
+    select?: PatientSelect<ExtArgs> | null
     /**
      * Filter which Patient to delete.
      * 
@@ -5024,7 +6368,7 @@ export namespace Prisma {
   /**
    * Patient deleteMany
    */
-  export type PatientDeleteManyArgs = {
+  export type PatientDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Patients to delete
      * 
@@ -5034,26 +6378,14 @@ export namespace Prisma {
 
 
   /**
-   * Patient: findUniqueOrThrow
-   */
-  export type PatientFindUniqueOrThrowArgs = PatientFindUniqueArgsBase
-      
-
-  /**
-   * Patient: findFirstOrThrow
-   */
-  export type PatientFindFirstOrThrowArgs = PatientFindFirstArgsBase
-      
-
-  /**
    * Patient without action
    */
-  export type PatientArgs = {
+  export type PatientArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Patient
      * 
     **/
-    select?: PatientSelect | null
+    select?: PatientSelect<ExtArgs> | null
   }
 
 
@@ -5108,7 +6440,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type MovieAggregateArgs = {
+  export type MovieAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Movie to aggregate.
      * 
@@ -5173,7 +6505,7 @@ export namespace Prisma {
 
 
 
-  export type MovieGroupByArgs = {
+  export type MovieGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: MovieWhereInput
     orderBy?: Enumerable<MovieOrderByWithAggregationInput>
     by: Array<MovieScalarFieldEnum>
@@ -5209,42 +6541,44 @@ export namespace Prisma {
     >
 
 
-  export type MovieSelect = {
+  export type MovieSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+    director?: boolean | DirectorArgs<ExtArgs>
+  } & MovieSelectScalar, ExtArgs['result']['movie']>
+
+  export type MovieSelectScalar = {
     directorFirstName?: boolean
     directorLastName?: boolean
-    director?: boolean | DirectorArgs
     title?: boolean
   }
 
-
-  export type MovieInclude = {
-    director?: boolean | DirectorArgs
+  export type MovieInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    director?: boolean | DirectorArgs<ExtArgs>
   } 
 
-  export type MovieGetPayload<S extends boolean | null | undefined | MovieArgs, U = keyof S> =
+  export type MovieGetPayload<S extends boolean | null | undefined | MovieArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _Movie = runtime.Types.Extensions.GetResultPayload<Movie, ExtArgs['result']['movie']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Movie :
+    S extends true ? _Movie :
     S extends undefined ? never :
     S extends { include: any } & (MovieArgs | MovieFindManyArgs)
-    ? Movie  & {
-    [P in TrueKeys<S['include']>]:
-        P extends 'director' ? DirectorGetPayload<Exclude<S['include'], undefined | null>[P]> :  never
+    ? _Movie & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'director' ? DirectorGetPayload<S['include'][P], ExtArgs> :  never
   } 
     : S extends { select: any } & (MovieArgs | MovieFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-        P extends 'director' ? DirectorGetPayload<Exclude<S['select'], undefined | null>[P]> :  P extends keyof Movie ? Movie[P] : never
+    [P in TruthyKeys<S['select']>]:
+        P extends 'director' ? DirectorGetPayload<S['select'][P], ExtArgs> :  P extends keyof _Movie ? _Movie[P] : never
   } 
-      : Movie
+      : _Movie
 
 
-  type MovieCountArgs = Merge<
+  type MovieCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<MovieFindManyArgs, 'select' | 'include'> & {
       select?: MovieCountAggregateInputType | true
     }
   >
 
-  export interface MovieDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface MovieDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one Movie that matches the filter.
      * @param {MovieFindUniqueArgs} args - Arguments to find a Movie
@@ -5256,9 +6590,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends MovieFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, MovieFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Movie'> extends True ? Prisma__MovieClient<MovieGetPayload<T>> : Prisma__MovieClient<MovieGetPayload<T> | null, null>
+    findUnique<T extends MovieFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, MovieFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Movie'> extends True ? Prisma__MovieClient<MovieGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__MovieClient<MovieGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one Movie that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {MovieFindUniqueOrThrowArgs} args - Arguments to find a Movie
+     * @example
+     * // Get one Movie
+     * const movie = await prisma.movie.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends MovieFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, MovieFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__MovieClient<MovieGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first Movie that matches the filter.
@@ -5273,9 +6623,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends MovieFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, MovieFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Movie'> extends True ? Prisma__MovieClient<MovieGetPayload<T>> : Prisma__MovieClient<MovieGetPayload<T> | null, null>
+    findFirst<T extends MovieFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, MovieFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Movie'> extends True ? Prisma__MovieClient<MovieGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__MovieClient<MovieGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first Movie that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MovieFindFirstOrThrowArgs} args - Arguments to find a Movie
+     * @example
+     * // Get one Movie
+     * const movie = await prisma.movie.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends MovieFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, MovieFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__MovieClient<MovieGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Movies that matches the filter.
@@ -5293,9 +6661,9 @@ export namespace Prisma {
      * const movieWithDirectorFirstNameOnly = await prisma.movie.findMany({ select: { directorFirstName: true } })
      * 
     **/
-    findMany<T extends MovieFindManyArgs>(
-      args?: SelectSubset<T, MovieFindManyArgs>
-    ): PrismaPromise<Array<MovieGetPayload<T>>>
+    findMany<T extends MovieFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MovieFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<MovieGetPayload<T, ExtArgs>>>
 
     /**
      * Create a Movie.
@@ -5309,9 +6677,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends MovieCreateArgs>(
-      args: SelectSubset<T, MovieCreateArgs>
-    ): Prisma__MovieClient<MovieGetPayload<T>>
+    create<T extends MovieCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, MovieCreateArgs<ExtArgs>>
+    ): Prisma__MovieClient<MovieGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Movies.
@@ -5325,8 +6693,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends MovieCreateManyArgs>(
-      args?: SelectSubset<T, MovieCreateManyArgs>
+    createMany<T extends MovieCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MovieCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -5341,9 +6709,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends MovieDeleteArgs>(
-      args: SelectSubset<T, MovieDeleteArgs>
-    ): Prisma__MovieClient<MovieGetPayload<T>>
+    delete<T extends MovieDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, MovieDeleteArgs<ExtArgs>>
+    ): Prisma__MovieClient<MovieGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one Movie.
@@ -5360,9 +6728,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends MovieUpdateArgs>(
-      args: SelectSubset<T, MovieUpdateArgs>
-    ): Prisma__MovieClient<MovieGetPayload<T>>
+    update<T extends MovieUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, MovieUpdateArgs<ExtArgs>>
+    ): Prisma__MovieClient<MovieGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Movies.
@@ -5376,8 +6744,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends MovieDeleteManyArgs>(
-      args?: SelectSubset<T, MovieDeleteManyArgs>
+    deleteMany<T extends MovieDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MovieDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -5397,8 +6765,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends MovieUpdateManyArgs>(
-      args: SelectSubset<T, MovieUpdateManyArgs>
+    updateMany<T extends MovieUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, MovieUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -5418,43 +6786,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends MovieUpsertArgs>(
-      args: SelectSubset<T, MovieUpsertArgs>
-    ): Prisma__MovieClient<MovieGetPayload<T>>
-
-    /**
-     * Find one Movie that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {MovieFindUniqueOrThrowArgs} args - Arguments to find a Movie
-     * @example
-     * // Get one Movie
-     * const movie = await prisma.movie.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends MovieFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, MovieFindUniqueOrThrowArgs>
-    ): Prisma__MovieClient<MovieGetPayload<T>>
-
-    /**
-     * Find the first Movie that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MovieFindFirstOrThrowArgs} args - Arguments to find a Movie
-     * @example
-     * // Get one Movie
-     * const movie = await prisma.movie.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends MovieFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, MovieFindFirstOrThrowArgs>
-    ): Prisma__MovieClient<MovieGetPayload<T>>
+    upsert<T extends MovieUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, MovieUpsertArgs<ExtArgs>>
+    ): Prisma__MovieClient<MovieGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Movies.
@@ -5590,7 +6924,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__MovieClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__MovieClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -5607,7 +6941,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    director<T extends DirectorArgs= {}>(args?: Subset<T, DirectorArgs>): Prisma__DirectorClient<DirectorGetPayload<T> | Null>;
+    director<T extends DirectorArgs<ExtArgs> = {}>(args?: Subset<T, DirectorArgs<ExtArgs>>): Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
 
     private get _document();
     /**
@@ -5639,17 +6973,17 @@ export namespace Prisma {
   /**
    * Movie base type for findUnique actions
    */
-  export type MovieFindUniqueArgsBase = {
+  export type MovieFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movie
      * 
     **/
-    select?: MovieSelect | null
+    select?: MovieSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: MovieInclude | null
+    include?: MovieInclude<ExtArgs> | null
     /**
      * Filter, which Movie to fetch.
      * 
@@ -5660,7 +6994,7 @@ export namespace Prisma {
   /**
    * Movie: findUnique
    */
-  export interface MovieFindUniqueArgs extends MovieFindUniqueArgsBase {
+  export interface MovieFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends MovieFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -5670,19 +7004,41 @@ export namespace Prisma {
       
 
   /**
-   * Movie base type for findFirst actions
+   * Movie findUniqueOrThrow
    */
-  export type MovieFindFirstArgsBase = {
+  export type MovieFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movie
      * 
     **/
-    select?: MovieSelect | null
+    select?: MovieSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: MovieInclude | null
+    include?: MovieInclude<ExtArgs> | null
+    /**
+     * Filter, which Movie to fetch.
+     * 
+    **/
+    where: MovieWhereUniqueInput
+  }
+
+
+  /**
+   * Movie base type for findFirst actions
+   */
+  export type MovieFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Movie
+     * 
+    **/
+    select?: MovieSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: MovieInclude<ExtArgs> | null
     /**
      * Filter, which Movie to fetch.
      * 
@@ -5728,7 +7084,7 @@ export namespace Prisma {
   /**
    * Movie: findFirst
    */
-  export interface MovieFindFirstArgs extends MovieFindFirstArgsBase {
+  export interface MovieFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends MovieFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -5738,19 +7094,76 @@ export namespace Prisma {
       
 
   /**
-   * Movie findMany
+   * Movie findFirstOrThrow
    */
-  export type MovieFindManyArgs = {
+  export type MovieFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movie
      * 
     **/
-    select?: MovieSelect | null
+    select?: MovieSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: MovieInclude | null
+    include?: MovieInclude<ExtArgs> | null
+    /**
+     * Filter, which Movie to fetch.
+     * 
+    **/
+    where?: MovieWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Movies to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<MovieOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Movies.
+     * 
+    **/
+    cursor?: MovieWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Movies from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Movies.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Movies.
+     * 
+    **/
+    distinct?: Enumerable<MovieScalarFieldEnum>
+  }
+
+
+  /**
+   * Movie findMany
+   */
+  export type MovieFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Movie
+     * 
+    **/
+    select?: MovieSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: MovieInclude<ExtArgs> | null
     /**
      * Filter, which Movies to fetch.
      * 
@@ -5791,17 +7204,17 @@ export namespace Prisma {
   /**
    * Movie create
    */
-  export type MovieCreateArgs = {
+  export type MovieCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movie
      * 
     **/
-    select?: MovieSelect | null
+    select?: MovieSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: MovieInclude | null
+    include?: MovieInclude<ExtArgs> | null
     /**
      * The data needed to create a Movie.
      * 
@@ -5813,7 +7226,7 @@ export namespace Prisma {
   /**
    * Movie createMany
    */
-  export type MovieCreateManyArgs = {
+  export type MovieCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many Movies.
      * 
@@ -5826,17 +7239,17 @@ export namespace Prisma {
   /**
    * Movie update
    */
-  export type MovieUpdateArgs = {
+  export type MovieUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movie
      * 
     **/
-    select?: MovieSelect | null
+    select?: MovieSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: MovieInclude | null
+    include?: MovieInclude<ExtArgs> | null
     /**
      * The data needed to update a Movie.
      * 
@@ -5853,7 +7266,7 @@ export namespace Prisma {
   /**
    * Movie updateMany
    */
-  export type MovieUpdateManyArgs = {
+  export type MovieUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update Movies.
      * 
@@ -5870,17 +7283,17 @@ export namespace Prisma {
   /**
    * Movie upsert
    */
-  export type MovieUpsertArgs = {
+  export type MovieUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movie
      * 
     **/
-    select?: MovieSelect | null
+    select?: MovieSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: MovieInclude | null
+    include?: MovieInclude<ExtArgs> | null
     /**
      * The filter to search for the Movie to update in case it exists.
      * 
@@ -5902,17 +7315,17 @@ export namespace Prisma {
   /**
    * Movie delete
    */
-  export type MovieDeleteArgs = {
+  export type MovieDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movie
      * 
     **/
-    select?: MovieSelect | null
+    select?: MovieSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: MovieInclude | null
+    include?: MovieInclude<ExtArgs> | null
     /**
      * Filter which Movie to delete.
      * 
@@ -5924,7 +7337,7 @@ export namespace Prisma {
   /**
    * Movie deleteMany
    */
-  export type MovieDeleteManyArgs = {
+  export type MovieDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Movies to delete
      * 
@@ -5934,31 +7347,19 @@ export namespace Prisma {
 
 
   /**
-   * Movie: findUniqueOrThrow
-   */
-  export type MovieFindUniqueOrThrowArgs = MovieFindUniqueArgsBase
-      
-
-  /**
-   * Movie: findFirstOrThrow
-   */
-  export type MovieFindFirstOrThrowArgs = MovieFindFirstArgsBase
-      
-
-  /**
    * Movie without action
    */
-  export type MovieArgs = {
+  export type MovieArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movie
      * 
     **/
-    select?: MovieSelect | null
+    select?: MovieSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: MovieInclude | null
+    include?: MovieInclude<ExtArgs> | null
   }
 
 
@@ -6007,7 +7408,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type DirectorAggregateArgs = {
+  export type DirectorAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Director to aggregate.
      * 
@@ -6072,7 +7473,7 @@ export namespace Prisma {
 
 
 
-  export type DirectorGroupByArgs = {
+  export type DirectorGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: DirectorWhereInput
     orderBy?: Enumerable<DirectorOrderByWithAggregationInput>
     by: Array<DirectorScalarFieldEnum>
@@ -6107,45 +7508,47 @@ export namespace Prisma {
     >
 
 
-  export type DirectorSelect = {
+  export type DirectorSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+    movies?: boolean | MovieFindManyArgs<ExtArgs>
+    _count?: boolean | DirectorCountOutputTypeArgs<ExtArgs>
+  } & DirectorSelectScalar, ExtArgs['result']['director']>
+
+  export type DirectorSelectScalar = {
     firstName?: boolean
     lastName?: boolean
-    movies?: boolean | MovieFindManyArgs
-    _count?: boolean | DirectorCountOutputTypeArgs
   }
 
-
-  export type DirectorInclude = {
-    movies?: boolean | MovieFindManyArgs
-    _count?: boolean | DirectorCountOutputTypeArgs
+  export type DirectorInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    movies?: boolean | MovieFindManyArgs<ExtArgs>
+    _count?: boolean | DirectorCountOutputTypeArgs<ExtArgs>
   } 
 
-  export type DirectorGetPayload<S extends boolean | null | undefined | DirectorArgs, U = keyof S> =
+  export type DirectorGetPayload<S extends boolean | null | undefined | DirectorArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _Director = runtime.Types.Extensions.GetResultPayload<Director, ExtArgs['result']['director']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Director :
+    S extends true ? _Director :
     S extends undefined ? never :
     S extends { include: any } & (DirectorArgs | DirectorFindManyArgs)
-    ? Director  & {
-    [P in TrueKeys<S['include']>]:
-        P extends 'movies' ? Array < MovieGetPayload<Exclude<S['include'], undefined | null>[P]>>  :
-        P extends '_count' ? DirectorCountOutputTypeGetPayload<Exclude<S['include'], undefined | null>[P]> :  never
+    ? _Director & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'movies' ? Array < MovieGetPayload<S['include'][P], ExtArgs>>  :
+        P extends '_count' ? DirectorCountOutputTypeGetPayload<S['include'][P], ExtArgs> :  never
   } 
     : S extends { select: any } & (DirectorArgs | DirectorFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-        P extends 'movies' ? Array < MovieGetPayload<Exclude<S['select'], undefined | null>[P]>>  :
-        P extends '_count' ? DirectorCountOutputTypeGetPayload<Exclude<S['select'], undefined | null>[P]> :  P extends keyof Director ? Director[P] : never
+    [P in TruthyKeys<S['select']>]:
+        P extends 'movies' ? Array < MovieGetPayload<S['select'][P], ExtArgs>>  :
+        P extends '_count' ? DirectorCountOutputTypeGetPayload<S['select'][P], ExtArgs> :  P extends keyof _Director ? _Director[P] : never
   } 
-      : Director
+      : _Director
 
 
-  type DirectorCountArgs = Merge<
+  type DirectorCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<DirectorFindManyArgs, 'select' | 'include'> & {
       select?: DirectorCountAggregateInputType | true
     }
   >
 
-  export interface DirectorDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface DirectorDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one Director that matches the filter.
      * @param {DirectorFindUniqueArgs} args - Arguments to find a Director
@@ -6157,9 +7560,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends DirectorFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, DirectorFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Director'> extends True ? Prisma__DirectorClient<DirectorGetPayload<T>> : Prisma__DirectorClient<DirectorGetPayload<T> | null, null>
+    findUnique<T extends DirectorFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, DirectorFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Director'> extends True ? Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one Director that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {DirectorFindUniqueOrThrowArgs} args - Arguments to find a Director
+     * @example
+     * // Get one Director
+     * const director = await prisma.director.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends DirectorFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, DirectorFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first Director that matches the filter.
@@ -6174,9 +7593,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends DirectorFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, DirectorFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Director'> extends True ? Prisma__DirectorClient<DirectorGetPayload<T>> : Prisma__DirectorClient<DirectorGetPayload<T> | null, null>
+    findFirst<T extends DirectorFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, DirectorFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Director'> extends True ? Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first Director that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DirectorFindFirstOrThrowArgs} args - Arguments to find a Director
+     * @example
+     * // Get one Director
+     * const director = await prisma.director.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends DirectorFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, DirectorFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Directors that matches the filter.
@@ -6194,9 +7631,9 @@ export namespace Prisma {
      * const directorWithFirstNameOnly = await prisma.director.findMany({ select: { firstName: true } })
      * 
     **/
-    findMany<T extends DirectorFindManyArgs>(
-      args?: SelectSubset<T, DirectorFindManyArgs>
-    ): PrismaPromise<Array<DirectorGetPayload<T>>>
+    findMany<T extends DirectorFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, DirectorFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<DirectorGetPayload<T, ExtArgs>>>
 
     /**
      * Create a Director.
@@ -6210,9 +7647,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends DirectorCreateArgs>(
-      args: SelectSubset<T, DirectorCreateArgs>
-    ): Prisma__DirectorClient<DirectorGetPayload<T>>
+    create<T extends DirectorCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, DirectorCreateArgs<ExtArgs>>
+    ): Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Directors.
@@ -6226,8 +7663,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends DirectorCreateManyArgs>(
-      args?: SelectSubset<T, DirectorCreateManyArgs>
+    createMany<T extends DirectorCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, DirectorCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -6242,9 +7679,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends DirectorDeleteArgs>(
-      args: SelectSubset<T, DirectorDeleteArgs>
-    ): Prisma__DirectorClient<DirectorGetPayload<T>>
+    delete<T extends DirectorDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, DirectorDeleteArgs<ExtArgs>>
+    ): Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one Director.
@@ -6261,9 +7698,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends DirectorUpdateArgs>(
-      args: SelectSubset<T, DirectorUpdateArgs>
-    ): Prisma__DirectorClient<DirectorGetPayload<T>>
+    update<T extends DirectorUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, DirectorUpdateArgs<ExtArgs>>
+    ): Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Directors.
@@ -6277,8 +7714,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends DirectorDeleteManyArgs>(
-      args?: SelectSubset<T, DirectorDeleteManyArgs>
+    deleteMany<T extends DirectorDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, DirectorDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -6298,8 +7735,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends DirectorUpdateManyArgs>(
-      args: SelectSubset<T, DirectorUpdateManyArgs>
+    updateMany<T extends DirectorUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, DirectorUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -6319,43 +7756,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends DirectorUpsertArgs>(
-      args: SelectSubset<T, DirectorUpsertArgs>
-    ): Prisma__DirectorClient<DirectorGetPayload<T>>
-
-    /**
-     * Find one Director that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {DirectorFindUniqueOrThrowArgs} args - Arguments to find a Director
-     * @example
-     * // Get one Director
-     * const director = await prisma.director.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends DirectorFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, DirectorFindUniqueOrThrowArgs>
-    ): Prisma__DirectorClient<DirectorGetPayload<T>>
-
-    /**
-     * Find the first Director that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DirectorFindFirstOrThrowArgs} args - Arguments to find a Director
-     * @example
-     * // Get one Director
-     * const director = await prisma.director.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends DirectorFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, DirectorFindFirstOrThrowArgs>
-    ): Prisma__DirectorClient<DirectorGetPayload<T>>
+    upsert<T extends DirectorUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, DirectorUpsertArgs<ExtArgs>>
+    ): Prisma__DirectorClient<DirectorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Directors.
@@ -6491,7 +7894,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__DirectorClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__DirectorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -6508,7 +7911,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    movies<T extends MovieFindManyArgs= {}>(args?: Subset<T, MovieFindManyArgs>): PrismaPromise<Array<MovieGetPayload<T>>| Null>;
+    movies<T extends MovieFindManyArgs<ExtArgs> = {}>(args?: Subset<T, MovieFindManyArgs<ExtArgs>>): PrismaPromise<Array<MovieGetPayload<T, ExtArgs>>| Null>;
 
     private get _document();
     /**
@@ -6540,17 +7943,17 @@ export namespace Prisma {
   /**
    * Director base type for findUnique actions
    */
-  export type DirectorFindUniqueArgsBase = {
+  export type DirectorFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Director
      * 
     **/
-    select?: DirectorSelect | null
+    select?: DirectorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: DirectorInclude | null
+    include?: DirectorInclude<ExtArgs> | null
     /**
      * Filter, which Director to fetch.
      * 
@@ -6561,7 +7964,7 @@ export namespace Prisma {
   /**
    * Director: findUnique
    */
-  export interface DirectorFindUniqueArgs extends DirectorFindUniqueArgsBase {
+  export interface DirectorFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends DirectorFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -6571,19 +7974,41 @@ export namespace Prisma {
       
 
   /**
-   * Director base type for findFirst actions
+   * Director findUniqueOrThrow
    */
-  export type DirectorFindFirstArgsBase = {
+  export type DirectorFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Director
      * 
     **/
-    select?: DirectorSelect | null
+    select?: DirectorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: DirectorInclude | null
+    include?: DirectorInclude<ExtArgs> | null
+    /**
+     * Filter, which Director to fetch.
+     * 
+    **/
+    where: DirectorWhereUniqueInput
+  }
+
+
+  /**
+   * Director base type for findFirst actions
+   */
+  export type DirectorFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Director
+     * 
+    **/
+    select?: DirectorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: DirectorInclude<ExtArgs> | null
     /**
      * Filter, which Director to fetch.
      * 
@@ -6629,7 +8054,7 @@ export namespace Prisma {
   /**
    * Director: findFirst
    */
-  export interface DirectorFindFirstArgs extends DirectorFindFirstArgsBase {
+  export interface DirectorFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends DirectorFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -6639,19 +8064,76 @@ export namespace Prisma {
       
 
   /**
-   * Director findMany
+   * Director findFirstOrThrow
    */
-  export type DirectorFindManyArgs = {
+  export type DirectorFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Director
      * 
     **/
-    select?: DirectorSelect | null
+    select?: DirectorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: DirectorInclude | null
+    include?: DirectorInclude<ExtArgs> | null
+    /**
+     * Filter, which Director to fetch.
+     * 
+    **/
+    where?: DirectorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Directors to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<DirectorOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Directors.
+     * 
+    **/
+    cursor?: DirectorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Directors from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Directors.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Directors.
+     * 
+    **/
+    distinct?: Enumerable<DirectorScalarFieldEnum>
+  }
+
+
+  /**
+   * Director findMany
+   */
+  export type DirectorFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Director
+     * 
+    **/
+    select?: DirectorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: DirectorInclude<ExtArgs> | null
     /**
      * Filter, which Directors to fetch.
      * 
@@ -6692,17 +8174,17 @@ export namespace Prisma {
   /**
    * Director create
    */
-  export type DirectorCreateArgs = {
+  export type DirectorCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Director
      * 
     **/
-    select?: DirectorSelect | null
+    select?: DirectorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: DirectorInclude | null
+    include?: DirectorInclude<ExtArgs> | null
     /**
      * The data needed to create a Director.
      * 
@@ -6714,7 +8196,7 @@ export namespace Prisma {
   /**
    * Director createMany
    */
-  export type DirectorCreateManyArgs = {
+  export type DirectorCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many Directors.
      * 
@@ -6727,17 +8209,17 @@ export namespace Prisma {
   /**
    * Director update
    */
-  export type DirectorUpdateArgs = {
+  export type DirectorUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Director
      * 
     **/
-    select?: DirectorSelect | null
+    select?: DirectorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: DirectorInclude | null
+    include?: DirectorInclude<ExtArgs> | null
     /**
      * The data needed to update a Director.
      * 
@@ -6754,7 +8236,7 @@ export namespace Prisma {
   /**
    * Director updateMany
    */
-  export type DirectorUpdateManyArgs = {
+  export type DirectorUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update Directors.
      * 
@@ -6771,17 +8253,17 @@ export namespace Prisma {
   /**
    * Director upsert
    */
-  export type DirectorUpsertArgs = {
+  export type DirectorUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Director
      * 
     **/
-    select?: DirectorSelect | null
+    select?: DirectorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: DirectorInclude | null
+    include?: DirectorInclude<ExtArgs> | null
     /**
      * The filter to search for the Director to update in case it exists.
      * 
@@ -6803,17 +8285,17 @@ export namespace Prisma {
   /**
    * Director delete
    */
-  export type DirectorDeleteArgs = {
+  export type DirectorDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Director
      * 
     **/
-    select?: DirectorSelect | null
+    select?: DirectorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: DirectorInclude | null
+    include?: DirectorInclude<ExtArgs> | null
     /**
      * Filter which Director to delete.
      * 
@@ -6825,7 +8307,7 @@ export namespace Prisma {
   /**
    * Director deleteMany
    */
-  export type DirectorDeleteManyArgs = {
+  export type DirectorDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Directors to delete
      * 
@@ -6835,31 +8317,19 @@ export namespace Prisma {
 
 
   /**
-   * Director: findUniqueOrThrow
-   */
-  export type DirectorFindUniqueOrThrowArgs = DirectorFindUniqueArgsBase
-      
-
-  /**
-   * Director: findFirstOrThrow
-   */
-  export type DirectorFindFirstOrThrowArgs = DirectorFindFirstArgsBase
-      
-
-  /**
    * Director without action
    */
-  export type DirectorArgs = {
+  export type DirectorArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Director
      * 
     **/
-    select?: DirectorSelect | null
+    select?: DirectorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: DirectorInclude | null
+    include?: DirectorInclude<ExtArgs> | null
   }
 
 
@@ -6936,7 +8406,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type ProblemAggregateArgs = {
+  export type ProblemAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Problem to aggregate.
      * 
@@ -7013,7 +8483,7 @@ export namespace Prisma {
 
 
 
-  export type ProblemGroupByArgs = {
+  export type ProblemGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: ProblemWhereInput
     orderBy?: Enumerable<ProblemOrderByWithAggregationInput>
     by: Array<ProblemScalarFieldEnum>
@@ -7053,50 +8523,52 @@ export namespace Prisma {
     >
 
 
-  export type ProblemSelect = {
+  export type ProblemSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+    likedBy?: boolean | CreatorFindManyArgs<ExtArgs>
+    creator?: boolean | CreatorArgs<ExtArgs>
+    _count?: boolean | ProblemCountOutputTypeArgs<ExtArgs>
+  } & ProblemSelectScalar, ExtArgs['result']['problem']>
+
+  export type ProblemSelectScalar = {
     id?: boolean
     problemText?: boolean
-    likedBy?: boolean | CreatorFindManyArgs
-    creator?: boolean | CreatorArgs
     creatorId?: boolean
-    _count?: boolean | ProblemCountOutputTypeArgs
   }
 
-
-  export type ProblemInclude = {
-    likedBy?: boolean | CreatorFindManyArgs
-    creator?: boolean | CreatorArgs
-    _count?: boolean | ProblemCountOutputTypeArgs
+  export type ProblemInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    likedBy?: boolean | CreatorFindManyArgs<ExtArgs>
+    creator?: boolean | CreatorArgs<ExtArgs>
+    _count?: boolean | ProblemCountOutputTypeArgs<ExtArgs>
   } 
 
-  export type ProblemGetPayload<S extends boolean | null | undefined | ProblemArgs, U = keyof S> =
+  export type ProblemGetPayload<S extends boolean | null | undefined | ProblemArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _Problem = runtime.Types.Extensions.GetResultPayload<Problem, ExtArgs['result']['problem']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Problem :
+    S extends true ? _Problem :
     S extends undefined ? never :
     S extends { include: any } & (ProblemArgs | ProblemFindManyArgs)
-    ? Problem  & {
-    [P in TrueKeys<S['include']>]:
-        P extends 'likedBy' ? Array < CreatorGetPayload<Exclude<S['include'], undefined | null>[P]>>  :
-        P extends 'creator' ? CreatorGetPayload<Exclude<S['include'], undefined | null>[P]> | null :
-        P extends '_count' ? ProblemCountOutputTypeGetPayload<Exclude<S['include'], undefined | null>[P]> :  never
+    ? _Problem & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'likedBy' ? Array < CreatorGetPayload<S['include'][P], ExtArgs>>  :
+        P extends 'creator' ? CreatorGetPayload<S['include'][P], ExtArgs> | null :
+        P extends '_count' ? ProblemCountOutputTypeGetPayload<S['include'][P], ExtArgs> :  never
   } 
     : S extends { select: any } & (ProblemArgs | ProblemFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-        P extends 'likedBy' ? Array < CreatorGetPayload<Exclude<S['select'], undefined | null>[P]>>  :
-        P extends 'creator' ? CreatorGetPayload<Exclude<S['select'], undefined | null>[P]> | null :
-        P extends '_count' ? ProblemCountOutputTypeGetPayload<Exclude<S['select'], undefined | null>[P]> :  P extends keyof Problem ? Problem[P] : never
+    [P in TruthyKeys<S['select']>]:
+        P extends 'likedBy' ? Array < CreatorGetPayload<S['select'][P], ExtArgs>>  :
+        P extends 'creator' ? CreatorGetPayload<S['select'][P], ExtArgs> | null :
+        P extends '_count' ? ProblemCountOutputTypeGetPayload<S['select'][P], ExtArgs> :  P extends keyof _Problem ? _Problem[P] : never
   } 
-      : Problem
+      : _Problem
 
 
-  type ProblemCountArgs = Merge<
+  type ProblemCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<ProblemFindManyArgs, 'select' | 'include'> & {
       select?: ProblemCountAggregateInputType | true
     }
   >
 
-  export interface ProblemDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface ProblemDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one Problem that matches the filter.
      * @param {ProblemFindUniqueArgs} args - Arguments to find a Problem
@@ -7108,9 +8580,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends ProblemFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, ProblemFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Problem'> extends True ? Prisma__ProblemClient<ProblemGetPayload<T>> : Prisma__ProblemClient<ProblemGetPayload<T> | null, null>
+    findUnique<T extends ProblemFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, ProblemFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Problem'> extends True ? Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one Problem that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ProblemFindUniqueOrThrowArgs} args - Arguments to find a Problem
+     * @example
+     * // Get one Problem
+     * const problem = await prisma.problem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ProblemFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ProblemFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first Problem that matches the filter.
@@ -7125,9 +8613,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends ProblemFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, ProblemFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Problem'> extends True ? Prisma__ProblemClient<ProblemGetPayload<T>> : Prisma__ProblemClient<ProblemGetPayload<T> | null, null>
+    findFirst<T extends ProblemFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, ProblemFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Problem'> extends True ? Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first Problem that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProblemFindFirstOrThrowArgs} args - Arguments to find a Problem
+     * @example
+     * // Get one Problem
+     * const problem = await prisma.problem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ProblemFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ProblemFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Problems that matches the filter.
@@ -7145,9 +8651,9 @@ export namespace Prisma {
      * const problemWithIdOnly = await prisma.problem.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends ProblemFindManyArgs>(
-      args?: SelectSubset<T, ProblemFindManyArgs>
-    ): PrismaPromise<Array<ProblemGetPayload<T>>>
+    findMany<T extends ProblemFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ProblemFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<ProblemGetPayload<T, ExtArgs>>>
 
     /**
      * Create a Problem.
@@ -7161,9 +8667,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends ProblemCreateArgs>(
-      args: SelectSubset<T, ProblemCreateArgs>
-    ): Prisma__ProblemClient<ProblemGetPayload<T>>
+    create<T extends ProblemCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ProblemCreateArgs<ExtArgs>>
+    ): Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Problems.
@@ -7177,8 +8683,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends ProblemCreateManyArgs>(
-      args?: SelectSubset<T, ProblemCreateManyArgs>
+    createMany<T extends ProblemCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ProblemCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -7193,9 +8699,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends ProblemDeleteArgs>(
-      args: SelectSubset<T, ProblemDeleteArgs>
-    ): Prisma__ProblemClient<ProblemGetPayload<T>>
+    delete<T extends ProblemDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ProblemDeleteArgs<ExtArgs>>
+    ): Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one Problem.
@@ -7212,9 +8718,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends ProblemUpdateArgs>(
-      args: SelectSubset<T, ProblemUpdateArgs>
-    ): Prisma__ProblemClient<ProblemGetPayload<T>>
+    update<T extends ProblemUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ProblemUpdateArgs<ExtArgs>>
+    ): Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Problems.
@@ -7228,8 +8734,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends ProblemDeleteManyArgs>(
-      args?: SelectSubset<T, ProblemDeleteManyArgs>
+    deleteMany<T extends ProblemDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ProblemDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -7249,8 +8755,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends ProblemUpdateManyArgs>(
-      args: SelectSubset<T, ProblemUpdateManyArgs>
+    updateMany<T extends ProblemUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ProblemUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -7270,43 +8776,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends ProblemUpsertArgs>(
-      args: SelectSubset<T, ProblemUpsertArgs>
-    ): Prisma__ProblemClient<ProblemGetPayload<T>>
-
-    /**
-     * Find one Problem that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {ProblemFindUniqueOrThrowArgs} args - Arguments to find a Problem
-     * @example
-     * // Get one Problem
-     * const problem = await prisma.problem.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends ProblemFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, ProblemFindUniqueOrThrowArgs>
-    ): Prisma__ProblemClient<ProblemGetPayload<T>>
-
-    /**
-     * Find the first Problem that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProblemFindFirstOrThrowArgs} args - Arguments to find a Problem
-     * @example
-     * // Get one Problem
-     * const problem = await prisma.problem.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends ProblemFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, ProblemFindFirstOrThrowArgs>
-    ): Prisma__ProblemClient<ProblemGetPayload<T>>
+    upsert<T extends ProblemUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ProblemUpsertArgs<ExtArgs>>
+    ): Prisma__ProblemClient<ProblemGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Problems.
@@ -7442,7 +8914,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__ProblemClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__ProblemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -7459,9 +8931,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    likedBy<T extends CreatorFindManyArgs= {}>(args?: Subset<T, CreatorFindManyArgs>): PrismaPromise<Array<CreatorGetPayload<T>>| Null>;
+    likedBy<T extends CreatorFindManyArgs<ExtArgs> = {}>(args?: Subset<T, CreatorFindManyArgs<ExtArgs>>): PrismaPromise<Array<CreatorGetPayload<T, ExtArgs>>| Null>;
 
-    creator<T extends CreatorArgs= {}>(args?: Subset<T, CreatorArgs>): Prisma__CreatorClient<CreatorGetPayload<T> | Null>;
+    creator<T extends CreatorArgs<ExtArgs> = {}>(args?: Subset<T, CreatorArgs<ExtArgs>>): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
 
     private get _document();
     /**
@@ -7493,17 +8965,17 @@ export namespace Prisma {
   /**
    * Problem base type for findUnique actions
    */
-  export type ProblemFindUniqueArgsBase = {
+  export type ProblemFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Problem
      * 
     **/
-    select?: ProblemSelect | null
+    select?: ProblemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: ProblemInclude | null
+    include?: ProblemInclude<ExtArgs> | null
     /**
      * Filter, which Problem to fetch.
      * 
@@ -7514,7 +8986,7 @@ export namespace Prisma {
   /**
    * Problem: findUnique
    */
-  export interface ProblemFindUniqueArgs extends ProblemFindUniqueArgsBase {
+  export interface ProblemFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends ProblemFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -7524,19 +8996,41 @@ export namespace Prisma {
       
 
   /**
-   * Problem base type for findFirst actions
+   * Problem findUniqueOrThrow
    */
-  export type ProblemFindFirstArgsBase = {
+  export type ProblemFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Problem
      * 
     **/
-    select?: ProblemSelect | null
+    select?: ProblemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: ProblemInclude | null
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which Problem to fetch.
+     * 
+    **/
+    where: ProblemWhereUniqueInput
+  }
+
+
+  /**
+   * Problem base type for findFirst actions
+   */
+  export type ProblemFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     * 
+    **/
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: ProblemInclude<ExtArgs> | null
     /**
      * Filter, which Problem to fetch.
      * 
@@ -7582,7 +9076,7 @@ export namespace Prisma {
   /**
    * Problem: findFirst
    */
-  export interface ProblemFindFirstArgs extends ProblemFindFirstArgsBase {
+  export interface ProblemFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends ProblemFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -7592,19 +9086,76 @@ export namespace Prisma {
       
 
   /**
-   * Problem findMany
+   * Problem findFirstOrThrow
    */
-  export type ProblemFindManyArgs = {
+  export type ProblemFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Problem
      * 
     **/
-    select?: ProblemSelect | null
+    select?: ProblemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: ProblemInclude | null
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which Problem to fetch.
+     * 
+    **/
+    where?: ProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Problems to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<ProblemOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Problems.
+     * 
+    **/
+    cursor?: ProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Problems from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Problems.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Problems.
+     * 
+    **/
+    distinct?: Enumerable<ProblemScalarFieldEnum>
+  }
+
+
+  /**
+   * Problem findMany
+   */
+  export type ProblemFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     * 
+    **/
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: ProblemInclude<ExtArgs> | null
     /**
      * Filter, which Problems to fetch.
      * 
@@ -7645,17 +9196,17 @@ export namespace Prisma {
   /**
    * Problem create
    */
-  export type ProblemCreateArgs = {
+  export type ProblemCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Problem
      * 
     **/
-    select?: ProblemSelect | null
+    select?: ProblemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: ProblemInclude | null
+    include?: ProblemInclude<ExtArgs> | null
     /**
      * The data needed to create a Problem.
      * 
@@ -7667,7 +9218,7 @@ export namespace Prisma {
   /**
    * Problem createMany
    */
-  export type ProblemCreateManyArgs = {
+  export type ProblemCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many Problems.
      * 
@@ -7680,17 +9231,17 @@ export namespace Prisma {
   /**
    * Problem update
    */
-  export type ProblemUpdateArgs = {
+  export type ProblemUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Problem
      * 
     **/
-    select?: ProblemSelect | null
+    select?: ProblemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: ProblemInclude | null
+    include?: ProblemInclude<ExtArgs> | null
     /**
      * The data needed to update a Problem.
      * 
@@ -7707,7 +9258,7 @@ export namespace Prisma {
   /**
    * Problem updateMany
    */
-  export type ProblemUpdateManyArgs = {
+  export type ProblemUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update Problems.
      * 
@@ -7724,17 +9275,17 @@ export namespace Prisma {
   /**
    * Problem upsert
    */
-  export type ProblemUpsertArgs = {
+  export type ProblemUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Problem
      * 
     **/
-    select?: ProblemSelect | null
+    select?: ProblemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: ProblemInclude | null
+    include?: ProblemInclude<ExtArgs> | null
     /**
      * The filter to search for the Problem to update in case it exists.
      * 
@@ -7756,17 +9307,17 @@ export namespace Prisma {
   /**
    * Problem delete
    */
-  export type ProblemDeleteArgs = {
+  export type ProblemDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Problem
      * 
     **/
-    select?: ProblemSelect | null
+    select?: ProblemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: ProblemInclude | null
+    include?: ProblemInclude<ExtArgs> | null
     /**
      * Filter which Problem to delete.
      * 
@@ -7778,7 +9329,7 @@ export namespace Prisma {
   /**
    * Problem deleteMany
    */
-  export type ProblemDeleteManyArgs = {
+  export type ProblemDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Problems to delete
      * 
@@ -7788,31 +9339,19 @@ export namespace Prisma {
 
 
   /**
-   * Problem: findUniqueOrThrow
-   */
-  export type ProblemFindUniqueOrThrowArgs = ProblemFindUniqueArgsBase
-      
-
-  /**
-   * Problem: findFirstOrThrow
-   */
-  export type ProblemFindFirstOrThrowArgs = ProblemFindFirstArgsBase
-      
-
-  /**
    * Problem without action
    */
-  export type ProblemArgs = {
+  export type ProblemArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Problem
      * 
     **/
-    select?: ProblemSelect | null
+    select?: ProblemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: ProblemInclude | null
+    include?: ProblemInclude<ExtArgs> | null
   }
 
 
@@ -7879,7 +9418,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type CreatorAggregateArgs = {
+  export type CreatorAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Creator to aggregate.
      * 
@@ -7956,7 +9495,7 @@ export namespace Prisma {
 
 
 
-  export type CreatorGroupByArgs = {
+  export type CreatorGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: CreatorWhereInput
     orderBy?: Enumerable<CreatorOrderByWithAggregationInput>
     by: Array<CreatorScalarFieldEnum>
@@ -7995,49 +9534,51 @@ export namespace Prisma {
     >
 
 
-  export type CreatorSelect = {
+  export type CreatorSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+    likes?: boolean | ProblemFindManyArgs<ExtArgs>
+    problems?: boolean | ProblemFindManyArgs<ExtArgs>
+    _count?: boolean | CreatorCountOutputTypeArgs<ExtArgs>
+  } & CreatorSelectScalar, ExtArgs['result']['creator']>
+
+  export type CreatorSelectScalar = {
     id?: boolean
     name?: boolean
-    likes?: boolean | ProblemFindManyArgs
-    problems?: boolean | ProblemFindManyArgs
-    _count?: boolean | CreatorCountOutputTypeArgs
   }
 
-
-  export type CreatorInclude = {
-    likes?: boolean | ProblemFindManyArgs
-    problems?: boolean | ProblemFindManyArgs
-    _count?: boolean | CreatorCountOutputTypeArgs
+  export type CreatorInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    likes?: boolean | ProblemFindManyArgs<ExtArgs>
+    problems?: boolean | ProblemFindManyArgs<ExtArgs>
+    _count?: boolean | CreatorCountOutputTypeArgs<ExtArgs>
   } 
 
-  export type CreatorGetPayload<S extends boolean | null | undefined | CreatorArgs, U = keyof S> =
+  export type CreatorGetPayload<S extends boolean | null | undefined | CreatorArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _Creator = runtime.Types.Extensions.GetResultPayload<Creator, ExtArgs['result']['creator']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Creator :
+    S extends true ? _Creator :
     S extends undefined ? never :
     S extends { include: any } & (CreatorArgs | CreatorFindManyArgs)
-    ? Creator  & {
-    [P in TrueKeys<S['include']>]:
-        P extends 'likes' ? Array < ProblemGetPayload<Exclude<S['include'], undefined | null>[P]>>  :
-        P extends 'problems' ? Array < ProblemGetPayload<Exclude<S['include'], undefined | null>[P]>>  :
-        P extends '_count' ? CreatorCountOutputTypeGetPayload<Exclude<S['include'], undefined | null>[P]> :  never
+    ? _Creator & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'likes' ? Array < ProblemGetPayload<S['include'][P], ExtArgs>>  :
+        P extends 'problems' ? Array < ProblemGetPayload<S['include'][P], ExtArgs>>  :
+        P extends '_count' ? CreatorCountOutputTypeGetPayload<S['include'][P], ExtArgs> :  never
   } 
     : S extends { select: any } & (CreatorArgs | CreatorFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-        P extends 'likes' ? Array < ProblemGetPayload<Exclude<S['select'], undefined | null>[P]>>  :
-        P extends 'problems' ? Array < ProblemGetPayload<Exclude<S['select'], undefined | null>[P]>>  :
-        P extends '_count' ? CreatorCountOutputTypeGetPayload<Exclude<S['select'], undefined | null>[P]> :  P extends keyof Creator ? Creator[P] : never
+    [P in TruthyKeys<S['select']>]:
+        P extends 'likes' ? Array < ProblemGetPayload<S['select'][P], ExtArgs>>  :
+        P extends 'problems' ? Array < ProblemGetPayload<S['select'][P], ExtArgs>>  :
+        P extends '_count' ? CreatorCountOutputTypeGetPayload<S['select'][P], ExtArgs> :  P extends keyof _Creator ? _Creator[P] : never
   } 
-      : Creator
+      : _Creator
 
 
-  type CreatorCountArgs = Merge<
+  type CreatorCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<CreatorFindManyArgs, 'select' | 'include'> & {
       select?: CreatorCountAggregateInputType | true
     }
   >
 
-  export interface CreatorDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface CreatorDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one Creator that matches the filter.
      * @param {CreatorFindUniqueArgs} args - Arguments to find a Creator
@@ -8049,9 +9590,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends CreatorFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, CreatorFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Creator'> extends True ? Prisma__CreatorClient<CreatorGetPayload<T>> : Prisma__CreatorClient<CreatorGetPayload<T> | null, null>
+    findUnique<T extends CreatorFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, CreatorFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Creator'> extends True ? Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one Creator that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {CreatorFindUniqueOrThrowArgs} args - Arguments to find a Creator
+     * @example
+     * // Get one Creator
+     * const creator = await prisma.creator.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends CreatorFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, CreatorFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first Creator that matches the filter.
@@ -8066,9 +9623,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends CreatorFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, CreatorFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Creator'> extends True ? Prisma__CreatorClient<CreatorGetPayload<T>> : Prisma__CreatorClient<CreatorGetPayload<T> | null, null>
+    findFirst<T extends CreatorFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, CreatorFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Creator'> extends True ? Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first Creator that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CreatorFindFirstOrThrowArgs} args - Arguments to find a Creator
+     * @example
+     * // Get one Creator
+     * const creator = await prisma.creator.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends CreatorFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, CreatorFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Creators that matches the filter.
@@ -8086,9 +9661,9 @@ export namespace Prisma {
      * const creatorWithIdOnly = await prisma.creator.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends CreatorFindManyArgs>(
-      args?: SelectSubset<T, CreatorFindManyArgs>
-    ): PrismaPromise<Array<CreatorGetPayload<T>>>
+    findMany<T extends CreatorFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CreatorFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<CreatorGetPayload<T, ExtArgs>>>
 
     /**
      * Create a Creator.
@@ -8102,9 +9677,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends CreatorCreateArgs>(
-      args: SelectSubset<T, CreatorCreateArgs>
-    ): Prisma__CreatorClient<CreatorGetPayload<T>>
+    create<T extends CreatorCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, CreatorCreateArgs<ExtArgs>>
+    ): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Creators.
@@ -8118,8 +9693,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends CreatorCreateManyArgs>(
-      args?: SelectSubset<T, CreatorCreateManyArgs>
+    createMany<T extends CreatorCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CreatorCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -8134,9 +9709,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends CreatorDeleteArgs>(
-      args: SelectSubset<T, CreatorDeleteArgs>
-    ): Prisma__CreatorClient<CreatorGetPayload<T>>
+    delete<T extends CreatorDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, CreatorDeleteArgs<ExtArgs>>
+    ): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one Creator.
@@ -8153,9 +9728,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends CreatorUpdateArgs>(
-      args: SelectSubset<T, CreatorUpdateArgs>
-    ): Prisma__CreatorClient<CreatorGetPayload<T>>
+    update<T extends CreatorUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, CreatorUpdateArgs<ExtArgs>>
+    ): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Creators.
@@ -8169,8 +9744,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends CreatorDeleteManyArgs>(
-      args?: SelectSubset<T, CreatorDeleteManyArgs>
+    deleteMany<T extends CreatorDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CreatorDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -8190,8 +9765,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends CreatorUpdateManyArgs>(
-      args: SelectSubset<T, CreatorUpdateManyArgs>
+    updateMany<T extends CreatorUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, CreatorUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -8211,43 +9786,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends CreatorUpsertArgs>(
-      args: SelectSubset<T, CreatorUpsertArgs>
-    ): Prisma__CreatorClient<CreatorGetPayload<T>>
-
-    /**
-     * Find one Creator that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {CreatorFindUniqueOrThrowArgs} args - Arguments to find a Creator
-     * @example
-     * // Get one Creator
-     * const creator = await prisma.creator.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends CreatorFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, CreatorFindUniqueOrThrowArgs>
-    ): Prisma__CreatorClient<CreatorGetPayload<T>>
-
-    /**
-     * Find the first Creator that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CreatorFindFirstOrThrowArgs} args - Arguments to find a Creator
-     * @example
-     * // Get one Creator
-     * const creator = await prisma.creator.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends CreatorFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, CreatorFindFirstOrThrowArgs>
-    ): Prisma__CreatorClient<CreatorGetPayload<T>>
+    upsert<T extends CreatorUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, CreatorUpsertArgs<ExtArgs>>
+    ): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Creators.
@@ -8383,7 +9924,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__CreatorClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__CreatorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -8400,9 +9941,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    likes<T extends ProblemFindManyArgs= {}>(args?: Subset<T, ProblemFindManyArgs>): PrismaPromise<Array<ProblemGetPayload<T>>| Null>;
+    likes<T extends ProblemFindManyArgs<ExtArgs> = {}>(args?: Subset<T, ProblemFindManyArgs<ExtArgs>>): PrismaPromise<Array<ProblemGetPayload<T, ExtArgs>>| Null>;
 
-    problems<T extends ProblemFindManyArgs= {}>(args?: Subset<T, ProblemFindManyArgs>): PrismaPromise<Array<ProblemGetPayload<T>>| Null>;
+    problems<T extends ProblemFindManyArgs<ExtArgs> = {}>(args?: Subset<T, ProblemFindManyArgs<ExtArgs>>): PrismaPromise<Array<ProblemGetPayload<T, ExtArgs>>| Null>;
 
     private get _document();
     /**
@@ -8434,17 +9975,17 @@ export namespace Prisma {
   /**
    * Creator base type for findUnique actions
    */
-  export type CreatorFindUniqueArgsBase = {
+  export type CreatorFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Creator
      * 
     **/
-    select?: CreatorSelect | null
+    select?: CreatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: CreatorInclude | null
+    include?: CreatorInclude<ExtArgs> | null
     /**
      * Filter, which Creator to fetch.
      * 
@@ -8455,7 +9996,7 @@ export namespace Prisma {
   /**
    * Creator: findUnique
    */
-  export interface CreatorFindUniqueArgs extends CreatorFindUniqueArgsBase {
+  export interface CreatorFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends CreatorFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -8465,19 +10006,41 @@ export namespace Prisma {
       
 
   /**
-   * Creator base type for findFirst actions
+   * Creator findUniqueOrThrow
    */
-  export type CreatorFindFirstArgsBase = {
+  export type CreatorFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Creator
      * 
     **/
-    select?: CreatorSelect | null
+    select?: CreatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: CreatorInclude | null
+    include?: CreatorInclude<ExtArgs> | null
+    /**
+     * Filter, which Creator to fetch.
+     * 
+    **/
+    where: CreatorWhereUniqueInput
+  }
+
+
+  /**
+   * Creator base type for findFirst actions
+   */
+  export type CreatorFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     * 
+    **/
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: CreatorInclude<ExtArgs> | null
     /**
      * Filter, which Creator to fetch.
      * 
@@ -8523,7 +10086,7 @@ export namespace Prisma {
   /**
    * Creator: findFirst
    */
-  export interface CreatorFindFirstArgs extends CreatorFindFirstArgsBase {
+  export interface CreatorFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends CreatorFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -8533,19 +10096,76 @@ export namespace Prisma {
       
 
   /**
-   * Creator findMany
+   * Creator findFirstOrThrow
    */
-  export type CreatorFindManyArgs = {
+  export type CreatorFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Creator
      * 
     **/
-    select?: CreatorSelect | null
+    select?: CreatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: CreatorInclude | null
+    include?: CreatorInclude<ExtArgs> | null
+    /**
+     * Filter, which Creator to fetch.
+     * 
+    **/
+    where?: CreatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Creators to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<CreatorOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Creators.
+     * 
+    **/
+    cursor?: CreatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Creators from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Creators.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Creators.
+     * 
+    **/
+    distinct?: Enumerable<CreatorScalarFieldEnum>
+  }
+
+
+  /**
+   * Creator findMany
+   */
+  export type CreatorFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     * 
+    **/
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: CreatorInclude<ExtArgs> | null
     /**
      * Filter, which Creators to fetch.
      * 
@@ -8586,17 +10206,17 @@ export namespace Prisma {
   /**
    * Creator create
    */
-  export type CreatorCreateArgs = {
+  export type CreatorCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Creator
      * 
     **/
-    select?: CreatorSelect | null
+    select?: CreatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: CreatorInclude | null
+    include?: CreatorInclude<ExtArgs> | null
     /**
      * The data needed to create a Creator.
      * 
@@ -8608,7 +10228,7 @@ export namespace Prisma {
   /**
    * Creator createMany
    */
-  export type CreatorCreateManyArgs = {
+  export type CreatorCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many Creators.
      * 
@@ -8621,17 +10241,17 @@ export namespace Prisma {
   /**
    * Creator update
    */
-  export type CreatorUpdateArgs = {
+  export type CreatorUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Creator
      * 
     **/
-    select?: CreatorSelect | null
+    select?: CreatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: CreatorInclude | null
+    include?: CreatorInclude<ExtArgs> | null
     /**
      * The data needed to update a Creator.
      * 
@@ -8648,7 +10268,7 @@ export namespace Prisma {
   /**
    * Creator updateMany
    */
-  export type CreatorUpdateManyArgs = {
+  export type CreatorUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update Creators.
      * 
@@ -8665,17 +10285,17 @@ export namespace Prisma {
   /**
    * Creator upsert
    */
-  export type CreatorUpsertArgs = {
+  export type CreatorUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Creator
      * 
     **/
-    select?: CreatorSelect | null
+    select?: CreatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: CreatorInclude | null
+    include?: CreatorInclude<ExtArgs> | null
     /**
      * The filter to search for the Creator to update in case it exists.
      * 
@@ -8697,17 +10317,17 @@ export namespace Prisma {
   /**
    * Creator delete
    */
-  export type CreatorDeleteArgs = {
+  export type CreatorDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Creator
      * 
     **/
-    select?: CreatorSelect | null
+    select?: CreatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: CreatorInclude | null
+    include?: CreatorInclude<ExtArgs> | null
     /**
      * Filter which Creator to delete.
      * 
@@ -8719,7 +10339,7 @@ export namespace Prisma {
   /**
    * Creator deleteMany
    */
-  export type CreatorDeleteManyArgs = {
+  export type CreatorDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Creators to delete
      * 
@@ -8729,31 +10349,19 @@ export namespace Prisma {
 
 
   /**
-   * Creator: findUniqueOrThrow
-   */
-  export type CreatorFindUniqueOrThrowArgs = CreatorFindUniqueArgsBase
-      
-
-  /**
-   * Creator: findFirstOrThrow
-   */
-  export type CreatorFindFirstOrThrowArgs = CreatorFindFirstArgsBase
-      
-
-  /**
    * Creator without action
    */
-  export type CreatorArgs = {
+  export type CreatorArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Creator
      * 
     **/
-    select?: CreatorSelect | null
+    select?: CreatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: CreatorInclude | null
+    include?: CreatorInclude<ExtArgs> | null
   }
 
 
@@ -8840,7 +10448,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type NativeTypeModelAggregateArgs = {
+  export type NativeTypeModelAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which NativeTypeModel to aggregate.
      * 
@@ -8917,7 +10525,7 @@ export namespace Prisma {
 
 
 
-  export type NativeTypeModelGroupByArgs = {
+  export type NativeTypeModelGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: NativeTypeModelWhereInput
     orderBy?: Enumerable<NativeTypeModelOrderByWithAggregationInput>
     by: Array<NativeTypeModelScalarFieldEnum>
@@ -8958,35 +10566,38 @@ export namespace Prisma {
     >
 
 
-  export type NativeTypeModelSelect = {
+  export type NativeTypeModelSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+
+  } & NativeTypeModelSelectScalar, ExtArgs['result']['nativeTypeModel']>
+
+  export type NativeTypeModelSelectScalar = {
     id?: boolean
     bigInt?: boolean
     byteA?: boolean
     decimal?: boolean
   }
 
-
-  export type NativeTypeModelGetPayload<S extends boolean | null | undefined | NativeTypeModelArgs, U = keyof S> =
+  export type NativeTypeModelGetPayload<S extends boolean | null | undefined | NativeTypeModelArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _NativeTypeModel = runtime.Types.Extensions.GetResultPayload<NativeTypeModel, ExtArgs['result']['nativeTypeModel']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? NativeTypeModel :
+    S extends true ? _NativeTypeModel :
     S extends undefined ? never :
     S extends { include: any } & (NativeTypeModelArgs | NativeTypeModelFindManyArgs)
-    ? NativeTypeModel 
+    ? _NativeTypeModel 
     : S extends { select: any } & (NativeTypeModelArgs | NativeTypeModelFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-    P extends keyof NativeTypeModel ? NativeTypeModel[P] : never
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof _NativeTypeModel ? _NativeTypeModel[P] : never
   } 
-      : NativeTypeModel
+      : _NativeTypeModel
 
 
-  type NativeTypeModelCountArgs = Merge<
+  type NativeTypeModelCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<NativeTypeModelFindManyArgs, 'select' | 'include'> & {
       select?: NativeTypeModelCountAggregateInputType | true
     }
   >
 
-  export interface NativeTypeModelDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface NativeTypeModelDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one NativeTypeModel that matches the filter.
      * @param {NativeTypeModelFindUniqueArgs} args - Arguments to find a NativeTypeModel
@@ -8998,9 +10609,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends NativeTypeModelFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, NativeTypeModelFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'NativeTypeModel'> extends True ? Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>> : Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T> | null, null>
+    findUnique<T extends NativeTypeModelFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, NativeTypeModelFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'NativeTypeModel'> extends True ? Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one NativeTypeModel that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {NativeTypeModelFindUniqueOrThrowArgs} args - Arguments to find a NativeTypeModel
+     * @example
+     * // Get one NativeTypeModel
+     * const nativeTypeModel = await prisma.nativeTypeModel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends NativeTypeModelFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, NativeTypeModelFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first NativeTypeModel that matches the filter.
@@ -9015,9 +10642,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends NativeTypeModelFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, NativeTypeModelFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'NativeTypeModel'> extends True ? Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>> : Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T> | null, null>
+    findFirst<T extends NativeTypeModelFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, NativeTypeModelFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'NativeTypeModel'> extends True ? Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first NativeTypeModel that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NativeTypeModelFindFirstOrThrowArgs} args - Arguments to find a NativeTypeModel
+     * @example
+     * // Get one NativeTypeModel
+     * const nativeTypeModel = await prisma.nativeTypeModel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends NativeTypeModelFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, NativeTypeModelFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more NativeTypeModels that matches the filter.
@@ -9035,9 +10680,9 @@ export namespace Prisma {
      * const nativeTypeModelWithIdOnly = await prisma.nativeTypeModel.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends NativeTypeModelFindManyArgs>(
-      args?: SelectSubset<T, NativeTypeModelFindManyArgs>
-    ): PrismaPromise<Array<NativeTypeModelGetPayload<T>>>
+    findMany<T extends NativeTypeModelFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, NativeTypeModelFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<NativeTypeModelGetPayload<T, ExtArgs>>>
 
     /**
      * Create a NativeTypeModel.
@@ -9051,9 +10696,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends NativeTypeModelCreateArgs>(
-      args: SelectSubset<T, NativeTypeModelCreateArgs>
-    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>
+    create<T extends NativeTypeModelCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, NativeTypeModelCreateArgs<ExtArgs>>
+    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many NativeTypeModels.
@@ -9067,8 +10712,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends NativeTypeModelCreateManyArgs>(
-      args?: SelectSubset<T, NativeTypeModelCreateManyArgs>
+    createMany<T extends NativeTypeModelCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, NativeTypeModelCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -9083,9 +10728,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends NativeTypeModelDeleteArgs>(
-      args: SelectSubset<T, NativeTypeModelDeleteArgs>
-    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>
+    delete<T extends NativeTypeModelDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, NativeTypeModelDeleteArgs<ExtArgs>>
+    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one NativeTypeModel.
@@ -9102,9 +10747,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends NativeTypeModelUpdateArgs>(
-      args: SelectSubset<T, NativeTypeModelUpdateArgs>
-    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>
+    update<T extends NativeTypeModelUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, NativeTypeModelUpdateArgs<ExtArgs>>
+    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more NativeTypeModels.
@@ -9118,8 +10763,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends NativeTypeModelDeleteManyArgs>(
-      args?: SelectSubset<T, NativeTypeModelDeleteManyArgs>
+    deleteMany<T extends NativeTypeModelDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, NativeTypeModelDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -9139,8 +10784,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends NativeTypeModelUpdateManyArgs>(
-      args: SelectSubset<T, NativeTypeModelUpdateManyArgs>
+    updateMany<T extends NativeTypeModelUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, NativeTypeModelUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -9160,43 +10805,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends NativeTypeModelUpsertArgs>(
-      args: SelectSubset<T, NativeTypeModelUpsertArgs>
-    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>
-
-    /**
-     * Find one NativeTypeModel that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {NativeTypeModelFindUniqueOrThrowArgs} args - Arguments to find a NativeTypeModel
-     * @example
-     * // Get one NativeTypeModel
-     * const nativeTypeModel = await prisma.nativeTypeModel.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends NativeTypeModelFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, NativeTypeModelFindUniqueOrThrowArgs>
-    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>
-
-    /**
-     * Find the first NativeTypeModel that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NativeTypeModelFindFirstOrThrowArgs} args - Arguments to find a NativeTypeModel
-     * @example
-     * // Get one NativeTypeModel
-     * const nativeTypeModel = await prisma.nativeTypeModel.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends NativeTypeModelFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, NativeTypeModelFindFirstOrThrowArgs>
-    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T>>
+    upsert<T extends NativeTypeModelUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, NativeTypeModelUpsertArgs<ExtArgs>>
+    ): Prisma__NativeTypeModelClient<NativeTypeModelGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of NativeTypeModels.
@@ -9332,7 +10943,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__NativeTypeModelClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__NativeTypeModelClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -9380,12 +10991,12 @@ export namespace Prisma {
   /**
    * NativeTypeModel base type for findUnique actions
    */
-  export type NativeTypeModelFindUniqueArgsBase = {
+  export type NativeTypeModelFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NativeTypeModel
      * 
     **/
-    select?: NativeTypeModelSelect | null
+    select?: NativeTypeModelSelect<ExtArgs> | null
     /**
      * Filter, which NativeTypeModel to fetch.
      * 
@@ -9396,7 +11007,7 @@ export namespace Prisma {
   /**
    * NativeTypeModel: findUnique
    */
-  export interface NativeTypeModelFindUniqueArgs extends NativeTypeModelFindUniqueArgsBase {
+  export interface NativeTypeModelFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends NativeTypeModelFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -9406,14 +11017,31 @@ export namespace Prisma {
       
 
   /**
-   * NativeTypeModel base type for findFirst actions
+   * NativeTypeModel findUniqueOrThrow
    */
-  export type NativeTypeModelFindFirstArgsBase = {
+  export type NativeTypeModelFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NativeTypeModel
      * 
     **/
-    select?: NativeTypeModelSelect | null
+    select?: NativeTypeModelSelect<ExtArgs> | null
+    /**
+     * Filter, which NativeTypeModel to fetch.
+     * 
+    **/
+    where: NativeTypeModelWhereUniqueInput
+  }
+
+
+  /**
+   * NativeTypeModel base type for findFirst actions
+   */
+  export type NativeTypeModelFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+     * 
+    **/
+    select?: NativeTypeModelSelect<ExtArgs> | null
     /**
      * Filter, which NativeTypeModel to fetch.
      * 
@@ -9459,7 +11087,7 @@ export namespace Prisma {
   /**
    * NativeTypeModel: findFirst
    */
-  export interface NativeTypeModelFindFirstArgs extends NativeTypeModelFindFirstArgsBase {
+  export interface NativeTypeModelFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends NativeTypeModelFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -9469,14 +11097,66 @@ export namespace Prisma {
       
 
   /**
-   * NativeTypeModel findMany
+   * NativeTypeModel findFirstOrThrow
    */
-  export type NativeTypeModelFindManyArgs = {
+  export type NativeTypeModelFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NativeTypeModel
      * 
     **/
-    select?: NativeTypeModelSelect | null
+    select?: NativeTypeModelSelect<ExtArgs> | null
+    /**
+     * Filter, which NativeTypeModel to fetch.
+     * 
+    **/
+    where?: NativeTypeModelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NativeTypeModels to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<NativeTypeModelOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NativeTypeModels.
+     * 
+    **/
+    cursor?: NativeTypeModelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NativeTypeModels from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NativeTypeModels.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NativeTypeModels.
+     * 
+    **/
+    distinct?: Enumerable<NativeTypeModelScalarFieldEnum>
+  }
+
+
+  /**
+   * NativeTypeModel findMany
+   */
+  export type NativeTypeModelFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NativeTypeModel
+     * 
+    **/
+    select?: NativeTypeModelSelect<ExtArgs> | null
     /**
      * Filter, which NativeTypeModels to fetch.
      * 
@@ -9517,12 +11197,12 @@ export namespace Prisma {
   /**
    * NativeTypeModel create
    */
-  export type NativeTypeModelCreateArgs = {
+  export type NativeTypeModelCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NativeTypeModel
      * 
     **/
-    select?: NativeTypeModelSelect | null
+    select?: NativeTypeModelSelect<ExtArgs> | null
     /**
      * The data needed to create a NativeTypeModel.
      * 
@@ -9534,7 +11214,7 @@ export namespace Prisma {
   /**
    * NativeTypeModel createMany
    */
-  export type NativeTypeModelCreateManyArgs = {
+  export type NativeTypeModelCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many NativeTypeModels.
      * 
@@ -9547,12 +11227,12 @@ export namespace Prisma {
   /**
    * NativeTypeModel update
    */
-  export type NativeTypeModelUpdateArgs = {
+  export type NativeTypeModelUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NativeTypeModel
      * 
     **/
-    select?: NativeTypeModelSelect | null
+    select?: NativeTypeModelSelect<ExtArgs> | null
     /**
      * The data needed to update a NativeTypeModel.
      * 
@@ -9569,7 +11249,7 @@ export namespace Prisma {
   /**
    * NativeTypeModel updateMany
    */
-  export type NativeTypeModelUpdateManyArgs = {
+  export type NativeTypeModelUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update NativeTypeModels.
      * 
@@ -9586,12 +11266,12 @@ export namespace Prisma {
   /**
    * NativeTypeModel upsert
    */
-  export type NativeTypeModelUpsertArgs = {
+  export type NativeTypeModelUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NativeTypeModel
      * 
     **/
-    select?: NativeTypeModelSelect | null
+    select?: NativeTypeModelSelect<ExtArgs> | null
     /**
      * The filter to search for the NativeTypeModel to update in case it exists.
      * 
@@ -9613,12 +11293,12 @@ export namespace Prisma {
   /**
    * NativeTypeModel delete
    */
-  export type NativeTypeModelDeleteArgs = {
+  export type NativeTypeModelDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NativeTypeModel
      * 
     **/
-    select?: NativeTypeModelSelect | null
+    select?: NativeTypeModelSelect<ExtArgs> | null
     /**
      * Filter which NativeTypeModel to delete.
      * 
@@ -9630,7 +11310,7 @@ export namespace Prisma {
   /**
    * NativeTypeModel deleteMany
    */
-  export type NativeTypeModelDeleteManyArgs = {
+  export type NativeTypeModelDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which NativeTypeModels to delete
      * 
@@ -9640,26 +11320,14 @@ export namespace Prisma {
 
 
   /**
-   * NativeTypeModel: findUniqueOrThrow
-   */
-  export type NativeTypeModelFindUniqueOrThrowArgs = NativeTypeModelFindUniqueArgsBase
-      
-
-  /**
-   * NativeTypeModel: findFirstOrThrow
-   */
-  export type NativeTypeModelFindFirstOrThrowArgs = NativeTypeModelFindFirstArgsBase
-      
-
-  /**
    * NativeTypeModel without action
    */
-  export type NativeTypeModelArgs = {
+  export type NativeTypeModelArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NativeTypeModel
      * 
     **/
-    select?: NativeTypeModelSelect | null
+    select?: NativeTypeModelSelect<ExtArgs> | null
   }
 
 
@@ -9702,7 +11370,7 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type EquipmentAggregateArgs = {
+  export type EquipmentAggregateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Equipment to aggregate.
      * 
@@ -9767,7 +11435,7 @@ export namespace Prisma {
 
 
 
-  export type EquipmentGroupByArgs = {
+  export type EquipmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     where?: EquipmentWhereInput
     orderBy?: Enumerable<EquipmentOrderByWithAggregationInput>
     by: Array<EquipmentScalarFieldEnum>
@@ -9801,32 +11469,35 @@ export namespace Prisma {
     >
 
 
-  export type EquipmentSelect = {
+  export type EquipmentSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+
+  } & EquipmentSelectScalar, ExtArgs['result']['equipment']>
+
+  export type EquipmentSelectScalar = {
     id?: boolean
   }
 
-
-  export type EquipmentGetPayload<S extends boolean | null | undefined | EquipmentArgs, U = keyof S> =
+  export type EquipmentGetPayload<S extends boolean | null | undefined | EquipmentArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _Equipment = runtime.Types.Extensions.GetResultPayload<Equipment, ExtArgs['result']['equipment']>> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Equipment :
+    S extends true ? _Equipment :
     S extends undefined ? never :
     S extends { include: any } & (EquipmentArgs | EquipmentFindManyArgs)
-    ? Equipment 
+    ? _Equipment 
     : S extends { select: any } & (EquipmentArgs | EquipmentFindManyArgs)
       ? {
-    [P in TrueKeys<S['select']>]:
-    P extends keyof Equipment ? Equipment[P] : never
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof _Equipment ? _Equipment[P] : never
   } 
-      : Equipment
+      : _Equipment
 
 
-  type EquipmentCountArgs = Merge<
+  type EquipmentCountArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = Merge<
     Omit<EquipmentFindManyArgs, 'select' | 'include'> & {
       select?: EquipmentCountAggregateInputType | true
     }
   >
 
-  export interface EquipmentDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface EquipmentDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> {
     /**
      * Find zero or one Equipment that matches the filter.
      * @param {EquipmentFindUniqueArgs} args - Arguments to find a Equipment
@@ -9838,9 +11509,25 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findUnique<T extends EquipmentFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, EquipmentFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Equipment'> extends True ? Prisma__EquipmentClient<EquipmentGetPayload<T>> : Prisma__EquipmentClient<EquipmentGetPayload<T> | null, null>
+    findUnique<T extends EquipmentFindUniqueArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, EquipmentFindUniqueArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Equipment'> extends True ? Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find one Equipment that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {EquipmentFindUniqueOrThrowArgs} args - Arguments to find a Equipment
+     * @example
+     * // Get one Equipment
+     * const equipment = await prisma.equipment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends EquipmentFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, EquipmentFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find the first Equipment that matches the filter.
@@ -9855,9 +11542,27 @@ export namespace Prisma {
      *   }
      * })
     **/
-    findFirst<T extends EquipmentFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, EquipmentFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Equipment'> extends True ? Prisma__EquipmentClient<EquipmentGetPayload<T>> : Prisma__EquipmentClient<EquipmentGetPayload<T> | null, null>
+    findFirst<T extends EquipmentFindFirstArgs<ExtArgs>,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, EquipmentFindFirstArgs<ExtArgs>>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Equipment'> extends True ? Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs>, never, ExtArgs> : Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs> | null, null, ExtArgs>
+
+    /**
+     * Find the first Equipment that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentFindFirstOrThrowArgs} args - Arguments to find a Equipment
+     * @example
+     * // Get one Equipment
+     * const equipment = await prisma.equipment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends EquipmentFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, EquipmentFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Find zero or more Equipment that matches the filter.
@@ -9875,9 +11580,9 @@ export namespace Prisma {
      * const equipmentWithIdOnly = await prisma.equipment.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends EquipmentFindManyArgs>(
-      args?: SelectSubset<T, EquipmentFindManyArgs>
-    ): PrismaPromise<Array<EquipmentGetPayload<T>>>
+    findMany<T extends EquipmentFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, EquipmentFindManyArgs<ExtArgs>>
+    ): PrismaPromise<Array<EquipmentGetPayload<T, ExtArgs>>>
 
     /**
      * Create a Equipment.
@@ -9891,9 +11596,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    create<T extends EquipmentCreateArgs>(
-      args: SelectSubset<T, EquipmentCreateArgs>
-    ): Prisma__EquipmentClient<EquipmentGetPayload<T>>
+    create<T extends EquipmentCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, EquipmentCreateArgs<ExtArgs>>
+    ): Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Create many Equipment.
@@ -9907,8 +11612,8 @@ export namespace Prisma {
      *     })
      *     
     **/
-    createMany<T extends EquipmentCreateManyArgs>(
-      args?: SelectSubset<T, EquipmentCreateManyArgs>
+    createMany<T extends EquipmentCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, EquipmentCreateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -9923,9 +11628,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    delete<T extends EquipmentDeleteArgs>(
-      args: SelectSubset<T, EquipmentDeleteArgs>
-    ): Prisma__EquipmentClient<EquipmentGetPayload<T>>
+    delete<T extends EquipmentDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, EquipmentDeleteArgs<ExtArgs>>
+    ): Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Update one Equipment.
@@ -9942,9 +11647,9 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends EquipmentUpdateArgs>(
-      args: SelectSubset<T, EquipmentUpdateArgs>
-    ): Prisma__EquipmentClient<EquipmentGetPayload<T>>
+    update<T extends EquipmentUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, EquipmentUpdateArgs<ExtArgs>>
+    ): Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Delete zero or more Equipment.
@@ -9958,8 +11663,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    deleteMany<T extends EquipmentDeleteManyArgs>(
-      args?: SelectSubset<T, EquipmentDeleteManyArgs>
+    deleteMany<T extends EquipmentDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, EquipmentDeleteManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -9979,8 +11684,8 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends EquipmentUpdateManyArgs>(
-      args: SelectSubset<T, EquipmentUpdateManyArgs>
+    updateMany<T extends EquipmentUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, EquipmentUpdateManyArgs<ExtArgs>>
     ): PrismaPromise<BatchPayload>
 
     /**
@@ -10000,43 +11705,9 @@ export namespace Prisma {
      *   }
      * })
     **/
-    upsert<T extends EquipmentUpsertArgs>(
-      args: SelectSubset<T, EquipmentUpsertArgs>
-    ): Prisma__EquipmentClient<EquipmentGetPayload<T>>
-
-    /**
-     * Find one Equipment that matches the filter or throw
-     * `NotFoundError` if no matches were found.
-     * @param {EquipmentFindUniqueOrThrowArgs} args - Arguments to find a Equipment
-     * @example
-     * // Get one Equipment
-     * const equipment = await prisma.equipment.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends EquipmentFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, EquipmentFindUniqueOrThrowArgs>
-    ): Prisma__EquipmentClient<EquipmentGetPayload<T>>
-
-    /**
-     * Find the first Equipment that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EquipmentFindFirstOrThrowArgs} args - Arguments to find a Equipment
-     * @example
-     * // Get one Equipment
-     * const equipment = await prisma.equipment.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends EquipmentFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, EquipmentFindFirstOrThrowArgs>
-    ): Prisma__EquipmentClient<EquipmentGetPayload<T>>
+    upsert<T extends EquipmentUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, EquipmentUpsertArgs<ExtArgs>>
+    ): Prisma__EquipmentClient<EquipmentGetPayload<T, ExtArgs>, never, ExtArgs>
 
     /**
      * Count the number of Equipment.
@@ -10172,7 +11843,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__EquipmentClient<T, Null = never> implements PrismaPromise<T> {
+  export class Prisma__EquipmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -10220,12 +11891,12 @@ export namespace Prisma {
   /**
    * Equipment base type for findUnique actions
    */
-  export type EquipmentFindUniqueArgsBase = {
+  export type EquipmentFindUniqueArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Equipment
      * 
     **/
-    select?: EquipmentSelect | null
+    select?: EquipmentSelect<ExtArgs> | null
     /**
      * Filter, which Equipment to fetch.
      * 
@@ -10236,7 +11907,7 @@ export namespace Prisma {
   /**
    * Equipment: findUnique
    */
-  export interface EquipmentFindUniqueArgs extends EquipmentFindUniqueArgsBase {
+  export interface EquipmentFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends EquipmentFindUniqueArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -10246,14 +11917,31 @@ export namespace Prisma {
       
 
   /**
-   * Equipment base type for findFirst actions
+   * Equipment findUniqueOrThrow
    */
-  export type EquipmentFindFirstArgsBase = {
+  export type EquipmentFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Equipment
      * 
     **/
-    select?: EquipmentSelect | null
+    select?: EquipmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Equipment to fetch.
+     * 
+    **/
+    where: EquipmentWhereUniqueInput
+  }
+
+
+  /**
+   * Equipment base type for findFirst actions
+   */
+  export type EquipmentFindFirstArgsBase<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect<ExtArgs> | null
     /**
      * Filter, which Equipment to fetch.
      * 
@@ -10299,7 +11987,7 @@ export namespace Prisma {
   /**
    * Equipment: findFirst
    */
-  export interface EquipmentFindFirstArgs extends EquipmentFindFirstArgsBase {
+  export interface EquipmentFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends EquipmentFindFirstArgsBase<ExtArgs> {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -10309,14 +11997,66 @@ export namespace Prisma {
       
 
   /**
-   * Equipment findMany
+   * Equipment findFirstOrThrow
    */
-  export type EquipmentFindManyArgs = {
+  export type EquipmentFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Equipment
      * 
     **/
-    select?: EquipmentSelect | null
+    select?: EquipmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Equipment to fetch.
+     * 
+    **/
+    where?: EquipmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Equipment to fetch.
+     * 
+    **/
+    orderBy?: Enumerable<EquipmentOrderByWithRelationAndSearchRelevanceInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Equipment.
+     * 
+    **/
+    cursor?: EquipmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Equipment from the position of the cursor.
+     * 
+    **/
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Equipment.
+     * 
+    **/
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Equipment.
+     * 
+    **/
+    distinct?: Enumerable<EquipmentScalarFieldEnum>
+  }
+
+
+  /**
+   * Equipment findMany
+   */
+  export type EquipmentFindManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Equipment
+     * 
+    **/
+    select?: EquipmentSelect<ExtArgs> | null
     /**
      * Filter, which Equipment to fetch.
      * 
@@ -10357,12 +12097,12 @@ export namespace Prisma {
   /**
    * Equipment create
    */
-  export type EquipmentCreateArgs = {
+  export type EquipmentCreateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Equipment
      * 
     **/
-    select?: EquipmentSelect | null
+    select?: EquipmentSelect<ExtArgs> | null
     /**
      * The data needed to create a Equipment.
      * 
@@ -10374,7 +12114,7 @@ export namespace Prisma {
   /**
    * Equipment createMany
    */
-  export type EquipmentCreateManyArgs = {
+  export type EquipmentCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to create many Equipment.
      * 
@@ -10387,12 +12127,12 @@ export namespace Prisma {
   /**
    * Equipment update
    */
-  export type EquipmentUpdateArgs = {
+  export type EquipmentUpdateArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Equipment
      * 
     **/
-    select?: EquipmentSelect | null
+    select?: EquipmentSelect<ExtArgs> | null
     /**
      * The data needed to update a Equipment.
      * 
@@ -10409,7 +12149,7 @@ export namespace Prisma {
   /**
    * Equipment updateMany
    */
-  export type EquipmentUpdateManyArgs = {
+  export type EquipmentUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * The data used to update Equipment.
      * 
@@ -10426,12 +12166,12 @@ export namespace Prisma {
   /**
    * Equipment upsert
    */
-  export type EquipmentUpsertArgs = {
+  export type EquipmentUpsertArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Equipment
      * 
     **/
-    select?: EquipmentSelect | null
+    select?: EquipmentSelect<ExtArgs> | null
     /**
      * The filter to search for the Equipment to update in case it exists.
      * 
@@ -10453,12 +12193,12 @@ export namespace Prisma {
   /**
    * Equipment delete
    */
-  export type EquipmentDeleteArgs = {
+  export type EquipmentDeleteArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Equipment
      * 
     **/
-    select?: EquipmentSelect | null
+    select?: EquipmentSelect<ExtArgs> | null
     /**
      * Filter which Equipment to delete.
      * 
@@ -10470,7 +12210,7 @@ export namespace Prisma {
   /**
    * Equipment deleteMany
    */
-  export type EquipmentDeleteManyArgs = {
+  export type EquipmentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Filter which Equipment to delete
      * 
@@ -10480,26 +12220,14 @@ export namespace Prisma {
 
 
   /**
-   * Equipment: findUniqueOrThrow
-   */
-  export type EquipmentFindUniqueOrThrowArgs = EquipmentFindUniqueArgsBase
-      
-
-  /**
-   * Equipment: findFirstOrThrow
-   */
-  export type EquipmentFindFirstOrThrowArgs = EquipmentFindFirstArgsBase
-      
-
-  /**
    * Equipment without action
    */
-  export type EquipmentArgs = {
+  export type EquipmentArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Equipment
      * 
     **/
-    select?: EquipmentSelect | null
+    select?: EquipmentSelect<ExtArgs> | null
   }
 
 

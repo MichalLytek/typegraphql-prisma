@@ -13,12 +13,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.6.0
- * Query Engine version: 2e719efb80b56a3f32d18a62489de95bb9c130e3
+ * Prisma Client JS version: 4.7.0
+ * Query Engine version: 39190b250ebc338586e25e6da45e5e783bc8a635
  */
 Prisma.prismaVersion = {
-  client: "4.6.0",
-  engine: "2e719efb80b56a3f32d18a62489de95bb9c130e3"
+  client: "4.7.0",
+  engine: "39190b250ebc338586e25e6da45e5e783bc8a635"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -67,6 +67,18 @@ Prisma.raw = () => {
 In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
 )}
 Prisma.validator = () => (val) => val
+
+/**
+* Extensions
+*/
+Prisma.getExtensionContext = () => {
+  throw new Error(`Extensions.getExtensionContext is unable to be run in the browser.
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
+)}
+Prisma.defineExtension = () => {
+  throw new Error(`Extensions.defineExtension is unable to be run in the browser.
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
+)}
 
 
 /**

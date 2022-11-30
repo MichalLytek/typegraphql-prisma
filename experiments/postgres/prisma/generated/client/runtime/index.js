@@ -2051,127 +2051,6 @@ var require_source = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js
-var require_indent_string = __commonJS({
-  "../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js"(exports, module2) {
-    "use strict";
-    module2.exports = (string, count2 = 1, options) => {
-      options = {
-        indent: " ",
-        includeEmptyLines: false,
-        ...options
-      };
-      if (typeof string !== "string") {
-        throw new TypeError(
-          `Expected \`input\` to be a \`string\`, got \`${typeof string}\``
-        );
-      }
-      if (typeof count2 !== "number") {
-        throw new TypeError(
-          `Expected \`count\` to be a \`number\`, got \`${typeof count2}\``
-        );
-      }
-      if (typeof options.indent !== "string") {
-        throw new TypeError(
-          `Expected \`options.indent\` to be a \`string\`, got \`${typeof options.indent}\``
-        );
-      }
-      if (count2 === 0) {
-        return string;
-      }
-      const regex = options.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
-      return string.replace(regex, options.indent.repeat(count2));
-    };
-  }
-});
-
-// ../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js
-var require_js_levenshtein = __commonJS({
-  "../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js"(exports, module2) {
-    "use strict";
-    module2.exports = function() {
-      function _min(d0, d1, d2, bx, ay) {
-        return d0 < d1 || d2 < d1 ? d0 > d2 ? d2 + 1 : d0 + 1 : bx === ay ? d1 : d1 + 1;
-      }
-      __name(_min, "_min");
-      return function(a, b) {
-        if (a === b) {
-          return 0;
-        }
-        if (a.length > b.length) {
-          var tmp = a;
-          a = b;
-          b = tmp;
-        }
-        var la = a.length;
-        var lb = b.length;
-        while (la > 0 && a.charCodeAt(la - 1) === b.charCodeAt(lb - 1)) {
-          la--;
-          lb--;
-        }
-        var offset = 0;
-        while (offset < la && a.charCodeAt(offset) === b.charCodeAt(offset)) {
-          offset++;
-        }
-        la -= offset;
-        lb -= offset;
-        if (la === 0 || lb < 3) {
-          return lb;
-        }
-        var x = 0;
-        var y;
-        var d0;
-        var d1;
-        var d2;
-        var d3;
-        var dd;
-        var dy;
-        var ay;
-        var bx0;
-        var bx1;
-        var bx2;
-        var bx3;
-        var vector = [];
-        for (y = 0; y < la; y++) {
-          vector.push(y + 1);
-          vector.push(a.charCodeAt(offset + y));
-        }
-        var len = vector.length - 1;
-        for (; x < lb - 3; ) {
-          bx0 = b.charCodeAt(offset + (d0 = x));
-          bx1 = b.charCodeAt(offset + (d1 = x + 1));
-          bx2 = b.charCodeAt(offset + (d2 = x + 2));
-          bx3 = b.charCodeAt(offset + (d3 = x + 3));
-          dd = x += 4;
-          for (y = 0; y < len; y += 2) {
-            dy = vector[y];
-            ay = vector[y + 1];
-            d0 = _min(dy, d0, d1, bx0, ay);
-            d1 = _min(d0, d1, d2, bx1, ay);
-            d2 = _min(d1, d2, d3, bx2, ay);
-            dd = _min(d2, d3, dd, bx3, ay);
-            vector[y] = dd;
-            d3 = d2;
-            d2 = d1;
-            d1 = d0;
-            d0 = dy;
-          }
-        }
-        for (; x < lb; ) {
-          bx0 = b.charCodeAt(offset + (d0 = x));
-          dd = ++x;
-          for (y = 0; y < len; y += 2) {
-            dy = vector[y];
-            vector[y] = dd = _min(dy, d0, dd, bx0, vector[y + 1]);
-            d0 = dy;
-          }
-        }
-        return dd;
-      };
-    }();
-  }
-});
-
 // ../../node_modules/.pnpm/ms@2.1.2/node_modules/ms/index.js
 var require_ms = __commonJS({
   "../../node_modules/.pnpm/ms@2.1.2/node_modules/ms/index.js"(exports, module2) {
@@ -2642,7 +2521,7 @@ var require_node = __commonJS({
     var tty = require("tty");
     var util2 = require("util");
     exports.init = init;
-    exports.log = log4;
+    exports.log = log3;
     exports.formatArgs = formatArgs;
     exports.save = save;
     exports.load = load;
@@ -2780,10 +2659,10 @@ var require_node = __commonJS({
       return new Date().toISOString() + " ";
     }
     __name(getDate, "getDate");
-    function log4(...args) {
+    function log3(...args) {
       return process.stderr.write(util2.format(...args) + "\n");
     }
-    __name(log4, "log");
+    __name(log3, "log");
     function save(namespaces) {
       if (namespaces) {
         process.env.DEBUG = namespaces;
@@ -3344,49 +3223,6 @@ var require_cross_spawn = __commonJS({
     module2.exports.sync = spawnSync;
     module2.exports._parse = parse2;
     module2.exports._enoent = enoent;
-  }
-});
-
-// ../../node_modules/.pnpm/@prisma+engines-version@4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3/node_modules/@prisma/engines-version/package.json
-var require_package = __commonJS({
-  "../../node_modules/.pnpm/@prisma+engines-version@4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3/node_modules/@prisma/engines-version/package.json"(exports, module2) {
-    module2.exports = {
-      name: "@prisma/engines-version",
-      version: "4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3",
-      main: "index.js",
-      types: "index.d.ts",
-      license: "Apache-2.0",
-      author: "Tim Suchanek <suchanek@prisma.io>",
-      prisma: {
-        enginesVersion: "2e719efb80b56a3f32d18a62489de95bb9c130e3"
-      },
-      repository: {
-        type: "git",
-        url: "https://github.com/prisma/engines-wrapper.git",
-        directory: "packages/engines-version"
-      },
-      devDependencies: {
-        "@types/node": "16.11.64",
-        typescript: "4.8.4"
-      },
-      files: [
-        "index.js",
-        "index.d.ts"
-      ],
-      scripts: {
-        build: "tsc -d"
-      }
-    };
-  }
-});
-
-// ../../node_modules/.pnpm/@prisma+engines-version@4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3/node_modules/@prisma/engines-version/index.js
-var require_engines_version = __commonJS({
-  "../../node_modules/.pnpm/@prisma+engines-version@4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3/node_modules/@prisma/engines-version/index.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.enginesVersion = void 0;
-    exports.enginesVersion = require_package().prisma.enginesVersion;
   }
 });
 
@@ -4850,6 +4686,377 @@ var require_execa = __commonJS({
   }
 });
 
+// ../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/package.json
+var require_package = __commonJS({
+  "../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/package.json"(exports, module2) {
+    module2.exports = {
+      name: "dotenv",
+      version: "16.0.3",
+      description: "Loads environment variables from .env file",
+      main: "lib/main.js",
+      types: "lib/main.d.ts",
+      exports: {
+        ".": {
+          require: "./lib/main.js",
+          types: "./lib/main.d.ts",
+          default: "./lib/main.js"
+        },
+        "./config": "./config.js",
+        "./config.js": "./config.js",
+        "./lib/env-options": "./lib/env-options.js",
+        "./lib/env-options.js": "./lib/env-options.js",
+        "./lib/cli-options": "./lib/cli-options.js",
+        "./lib/cli-options.js": "./lib/cli-options.js",
+        "./package.json": "./package.json"
+      },
+      scripts: {
+        "dts-check": "tsc --project tests/types/tsconfig.json",
+        lint: "standard",
+        "lint-readme": "standard-markdown",
+        pretest: "npm run lint && npm run dts-check",
+        test: "tap tests/*.js --100 -Rspec",
+        prerelease: "npm test",
+        release: "standard-version"
+      },
+      repository: {
+        type: "git",
+        url: "git://github.com/motdotla/dotenv.git"
+      },
+      keywords: [
+        "dotenv",
+        "env",
+        ".env",
+        "environment",
+        "variables",
+        "config",
+        "settings"
+      ],
+      readmeFilename: "README.md",
+      license: "BSD-2-Clause",
+      devDependencies: {
+        "@types/node": "^17.0.9",
+        decache: "^4.6.1",
+        dtslint: "^3.7.0",
+        sinon: "^12.0.1",
+        standard: "^16.0.4",
+        "standard-markdown": "^7.1.0",
+        "standard-version": "^9.3.2",
+        tap: "^15.1.6",
+        tar: "^6.1.11",
+        typescript: "^4.5.4"
+      },
+      engines: {
+        node: ">=12"
+      }
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/lib/main.js
+var require_main2 = __commonJS({
+  "../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/lib/main.js"(exports, module2) {
+    var fs11 = require("fs");
+    var path7 = require("path");
+    var os3 = require("os");
+    var packageJson = require_package();
+    var version = packageJson.version;
+    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
+    function parse2(src) {
+      const obj = {};
+      let lines = src.toString();
+      lines = lines.replace(/\r\n?/mg, "\n");
+      let match;
+      while ((match = LINE.exec(lines)) != null) {
+        const key = match[1];
+        let value = match[2] || "";
+        value = value.trim();
+        const maybeQuote = value[0];
+        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
+        if (maybeQuote === '"') {
+          value = value.replace(/\\n/g, "\n");
+          value = value.replace(/\\r/g, "\r");
+        }
+        obj[key] = value;
+      }
+      return obj;
+    }
+    __name(parse2, "parse");
+    function _log(message) {
+      console.log(`[dotenv@${version}][DEBUG] ${message}`);
+    }
+    __name(_log, "_log");
+    function _resolveHome(envPath) {
+      return envPath[0] === "~" ? path7.join(os3.homedir(), envPath.slice(1)) : envPath;
+    }
+    __name(_resolveHome, "_resolveHome");
+    function config2(options) {
+      let dotenvPath = path7.resolve(process.cwd(), ".env");
+      let encoding = "utf8";
+      const debug13 = Boolean(options && options.debug);
+      const override = Boolean(options && options.override);
+      if (options) {
+        if (options.path != null) {
+          dotenvPath = _resolveHome(options.path);
+        }
+        if (options.encoding != null) {
+          encoding = options.encoding;
+        }
+      }
+      try {
+        const parsed = DotenvModule.parse(fs11.readFileSync(dotenvPath, { encoding }));
+        Object.keys(parsed).forEach(function(key) {
+          if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
+            process.env[key] = parsed[key];
+          } else {
+            if (override === true) {
+              process.env[key] = parsed[key];
+            }
+            if (debug13) {
+              if (override === true) {
+                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
+              } else {
+                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
+              }
+            }
+          }
+        });
+        return { parsed };
+      } catch (e) {
+        if (debug13) {
+          _log(`Failed to load ${dotenvPath} ${e.message}`);
+        }
+        return { error: e };
+      }
+    }
+    __name(config2, "config");
+    var DotenvModule = {
+      config: config2,
+      parse: parse2
+    };
+    module2.exports.config = DotenvModule.config;
+    module2.exports.parse = DotenvModule.parse;
+    module2.exports = DotenvModule;
+  }
+});
+
+// ../../node_modules/.pnpm/arg@5.0.2/node_modules/arg/index.js
+var require_arg = __commonJS({
+  "../../node_modules/.pnpm/arg@5.0.2/node_modules/arg/index.js"(exports, module2) {
+    var flagSymbol = Symbol("arg flag");
+    var ArgError = class extends Error {
+      constructor(msg, code) {
+        super(msg);
+        this.name = "ArgError";
+        this.code = code;
+        Object.setPrototypeOf(this, ArgError.prototype);
+      }
+    };
+    __name(ArgError, "ArgError");
+    function arg2(opts, {
+      argv = process.argv.slice(2),
+      permissive = false,
+      stopAtPositional = false
+    } = {}) {
+      if (!opts) {
+        throw new ArgError(
+          "argument specification object is required",
+          "ARG_CONFIG_NO_SPEC"
+        );
+      }
+      const result = { _: [] };
+      const aliases = {};
+      const handlers = {};
+      for (const key of Object.keys(opts)) {
+        if (!key) {
+          throw new ArgError(
+            "argument key cannot be an empty string",
+            "ARG_CONFIG_EMPTY_KEY"
+          );
+        }
+        if (key[0] !== "-") {
+          throw new ArgError(
+            `argument key must start with '-' but found: '${key}'`,
+            "ARG_CONFIG_NONOPT_KEY"
+          );
+        }
+        if (key.length === 1) {
+          throw new ArgError(
+            `argument key must have a name; singular '-' keys are not allowed: ${key}`,
+            "ARG_CONFIG_NONAME_KEY"
+          );
+        }
+        if (typeof opts[key] === "string") {
+          aliases[key] = opts[key];
+          continue;
+        }
+        let type = opts[key];
+        let isFlag = false;
+        if (Array.isArray(type) && type.length === 1 && typeof type[0] === "function") {
+          const [fn] = type;
+          type = /* @__PURE__ */ __name((value, name, prev = []) => {
+            prev.push(fn(value, name, prev[prev.length - 1]));
+            return prev;
+          }, "type");
+          isFlag = fn === Boolean || fn[flagSymbol] === true;
+        } else if (typeof type === "function") {
+          isFlag = type === Boolean || type[flagSymbol] === true;
+        } else {
+          throw new ArgError(
+            `type missing or not a function or valid array type: ${key}`,
+            "ARG_CONFIG_VAD_TYPE"
+          );
+        }
+        if (key[1] !== "-" && key.length > 2) {
+          throw new ArgError(
+            `short argument keys (with a single hyphen) must have only one character: ${key}`,
+            "ARG_CONFIG_SHORTOPT_TOOLONG"
+          );
+        }
+        handlers[key] = [type, isFlag];
+      }
+      for (let i = 0, len = argv.length; i < len; i++) {
+        const wholeArg = argv[i];
+        if (stopAtPositional && result._.length > 0) {
+          result._ = result._.concat(argv.slice(i));
+          break;
+        }
+        if (wholeArg === "--") {
+          result._ = result._.concat(argv.slice(i + 1));
+          break;
+        }
+        if (wholeArg.length > 1 && wholeArg[0] === "-") {
+          const separatedArguments = wholeArg[1] === "-" || wholeArg.length === 2 ? [wholeArg] : wholeArg.slice(1).split("").map((a) => `-${a}`);
+          for (let j = 0; j < separatedArguments.length; j++) {
+            const arg3 = separatedArguments[j];
+            const [originalArgName, argStr] = arg3[1] === "-" ? arg3.split(/=(.*)/, 2) : [arg3, void 0];
+            let argName = originalArgName;
+            while (argName in aliases) {
+              argName = aliases[argName];
+            }
+            if (!(argName in handlers)) {
+              if (permissive) {
+                result._.push(arg3);
+                continue;
+              } else {
+                throw new ArgError(
+                  `unknown or unexpected option: ${originalArgName}`,
+                  "ARG_UNKNOWN_OPTION"
+                );
+              }
+            }
+            const [type, isFlag] = handlers[argName];
+            if (!isFlag && j + 1 < separatedArguments.length) {
+              throw new ArgError(
+                `option requires argument (but was followed by another short argument): ${originalArgName}`,
+                "ARG_MISSING_REQUIRED_SHORTARG"
+              );
+            }
+            if (isFlag) {
+              result[argName] = type(true, argName, result[argName]);
+            } else if (argStr === void 0) {
+              if (argv.length < i + 2 || argv[i + 1].length > 1 && argv[i + 1][0] === "-" && !(argv[i + 1].match(/^-?\d*(\.(?=\d))?\d*$/) && (type === Number || typeof BigInt !== "undefined" && type === BigInt))) {
+                const extended = originalArgName === argName ? "" : ` (alias for ${argName})`;
+                throw new ArgError(
+                  `option requires argument: ${originalArgName}${extended}`,
+                  "ARG_MISSING_REQUIRED_LONGARG"
+                );
+              }
+              result[argName] = type(argv[i + 1], argName, result[argName]);
+              ++i;
+            } else {
+              result[argName] = type(argStr, argName, result[argName]);
+            }
+          }
+        } else {
+          result._.push(wholeArg);
+        }
+      }
+      return result;
+    }
+    __name(arg2, "arg");
+    arg2.flag = (fn) => {
+      fn[flagSymbol] = true;
+      return fn;
+    };
+    arg2.COUNT = arg2.flag((v, name, existingCount) => (existingCount || 0) + 1);
+    arg2.ArgError = ArgError;
+    module2.exports = arg2;
+  }
+});
+
+// ../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js
+var require_min_indent = __commonJS({
+  "../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js"(exports, module2) {
+    "use strict";
+    module2.exports = (string) => {
+      const match = string.match(/^[ \t]*(?=\S)/gm);
+      if (!match) {
+        return 0;
+      }
+      return match.reduce((r, a) => Math.min(r, a.length), Infinity);
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js
+var require_strip_indent = __commonJS({
+  "../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js"(exports, module2) {
+    "use strict";
+    var minIndent = require_min_indent();
+    module2.exports = (string) => {
+      const indent4 = minIndent(string);
+      if (indent4 === 0) {
+        return string;
+      }
+      const regex = new RegExp(`^[ \\t]{${indent4}}`, "gm");
+      return string.replace(regex, "");
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/@prisma+engines-version@4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635/node_modules/@prisma/engines-version/package.json
+var require_package2 = __commonJS({
+  "../../node_modules/.pnpm/@prisma+engines-version@4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635/node_modules/@prisma/engines-version/package.json"(exports, module2) {
+    module2.exports = {
+      name: "@prisma/engines-version",
+      version: "4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635",
+      main: "index.js",
+      types: "index.d.ts",
+      license: "Apache-2.0",
+      author: "Tim Suchanek <suchanek@prisma.io>",
+      prisma: {
+        enginesVersion: "39190b250ebc338586e25e6da45e5e783bc8a635"
+      },
+      repository: {
+        type: "git",
+        url: "https://github.com/prisma/engines-wrapper.git",
+        directory: "packages/engines-version"
+      },
+      devDependencies: {
+        "@types/node": "16.11.64",
+        typescript: "4.8.4"
+      },
+      files: [
+        "index.js",
+        "index.d.ts"
+      ],
+      scripts: {
+        build: "tsc -d"
+      }
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/@prisma+engines-version@4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635/node_modules/@prisma/engines-version/index.js
+var require_engines_version = __commonJS({
+  "../../node_modules/.pnpm/@prisma+engines-version@4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635/node_modules/@prisma/engines-version/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.enginesVersion = void 0;
+    exports.enginesVersion = require_package2().prisma.enginesVersion;
+  }
+});
+
 // ../../node_modules/.pnpm/retry@0.13.1/node_modules/retry/lib/retry_operation.js
 var require_retry_operation = __commonJS({
   "../../node_modules/.pnpm/retry@0.13.1/node_modules/retry/lib/retry_operation.js"(exports, module2) {
@@ -5217,6 +5424,40 @@ var require_new_github_issue_url = __commonJS({
       return url.toString();
     };
     module2.exports.default = module2.exports;
+  }
+});
+
+// ../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js
+var require_indent_string = __commonJS({
+  "../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js"(exports, module2) {
+    "use strict";
+    module2.exports = (string, count2 = 1, options) => {
+      options = {
+        indent: " ",
+        includeEmptyLines: false,
+        ...options
+      };
+      if (typeof string !== "string") {
+        throw new TypeError(
+          `Expected \`input\` to be a \`string\`, got \`${typeof string}\``
+        );
+      }
+      if (typeof count2 !== "number") {
+        throw new TypeError(
+          `Expected \`count\` to be a \`number\`, got \`${typeof count2}\``
+        );
+      }
+      if (typeof options.indent !== "string") {
+        throw new TypeError(
+          `Expected \`options.indent\` to be a \`string\`, got \`${typeof options.indent}\``
+        );
+      }
+      if (count2 === 0) {
+        return string;
+      }
+      const regex = options.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
+      return string.replace(regex, options.indent.repeat(count2));
+    };
   }
 });
 
@@ -11533,8 +11774,8 @@ var require_request = __commonJS({
 var require_dispatcher = __commonJS({
   "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/dispatcher.js"(exports, module2) {
     "use strict";
-    var EventEmitter4 = require("events");
-    var Dispatcher = class extends EventEmitter4 {
+    var EventEmitter3 = require("events");
+    var Dispatcher = class extends EventEmitter3 {
       dispatch() {
         throw new Error("not implemented");
       }
@@ -19007,331 +19248,90 @@ var require_undici = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/package.json
-var require_package2 = __commonJS({
-  "../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/package.json"(exports, module2) {
-    module2.exports = {
-      name: "dotenv",
-      version: "16.0.3",
-      description: "Loads environment variables from .env file",
-      main: "lib/main.js",
-      types: "lib/main.d.ts",
-      exports: {
-        ".": {
-          require: "./lib/main.js",
-          types: "./lib/main.d.ts",
-          default: "./lib/main.js"
-        },
-        "./config": "./config.js",
-        "./config.js": "./config.js",
-        "./lib/env-options": "./lib/env-options.js",
-        "./lib/env-options.js": "./lib/env-options.js",
-        "./lib/cli-options": "./lib/cli-options.js",
-        "./lib/cli-options.js": "./lib/cli-options.js",
-        "./package.json": "./package.json"
-      },
-      scripts: {
-        "dts-check": "tsc --project tests/types/tsconfig.json",
-        lint: "standard",
-        "lint-readme": "standard-markdown",
-        pretest: "npm run lint && npm run dts-check",
-        test: "tap tests/*.js --100 -Rspec",
-        prerelease: "npm test",
-        release: "standard-version"
-      },
-      repository: {
-        type: "git",
-        url: "git://github.com/motdotla/dotenv.git"
-      },
-      keywords: [
-        "dotenv",
-        "env",
-        ".env",
-        "environment",
-        "variables",
-        "config",
-        "settings"
-      ],
-      readmeFilename: "README.md",
-      license: "BSD-2-Clause",
-      devDependencies: {
-        "@types/node": "^17.0.9",
-        decache: "^4.6.1",
-        dtslint: "^3.7.0",
-        sinon: "^12.0.1",
-        standard: "^16.0.4",
-        "standard-markdown": "^7.1.0",
-        "standard-version": "^9.3.2",
-        tap: "^15.1.6",
-        tar: "^6.1.11",
-        typescript: "^4.5.4"
-      },
-      engines: {
-        node: ">=12"
-      }
-    };
-  }
-});
-
-// ../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/lib/main.js
-var require_main2 = __commonJS({
-  "../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/lib/main.js"(exports, module2) {
-    var fs11 = require("fs");
-    var path7 = require("path");
-    var os3 = require("os");
-    var packageJson = require_package2();
-    var version = packageJson.version;
-    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
-    function parse2(src) {
-      const obj = {};
-      let lines = src.toString();
-      lines = lines.replace(/\r\n?/mg, "\n");
-      let match;
-      while ((match = LINE.exec(lines)) != null) {
-        const key = match[1];
-        let value = match[2] || "";
-        value = value.trim();
-        const maybeQuote = value[0];
-        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
-        if (maybeQuote === '"') {
-          value = value.replace(/\\n/g, "\n");
-          value = value.replace(/\\r/g, "\r");
-        }
-        obj[key] = value;
-      }
-      return obj;
-    }
-    __name(parse2, "parse");
-    function _log(message) {
-      console.log(`[dotenv@${version}][DEBUG] ${message}`);
-    }
-    __name(_log, "_log");
-    function _resolveHome(envPath) {
-      return envPath[0] === "~" ? path7.join(os3.homedir(), envPath.slice(1)) : envPath;
-    }
-    __name(_resolveHome, "_resolveHome");
-    function config2(options) {
-      let dotenvPath = path7.resolve(process.cwd(), ".env");
-      let encoding = "utf8";
-      const debug13 = Boolean(options && options.debug);
-      const override = Boolean(options && options.override);
-      if (options) {
-        if (options.path != null) {
-          dotenvPath = _resolveHome(options.path);
-        }
-        if (options.encoding != null) {
-          encoding = options.encoding;
-        }
-      }
-      try {
-        const parsed = DotenvModule.parse(fs11.readFileSync(dotenvPath, { encoding }));
-        Object.keys(parsed).forEach(function(key) {
-          if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
-            process.env[key] = parsed[key];
-          } else {
-            if (override === true) {
-              process.env[key] = parsed[key];
-            }
-            if (debug13) {
-              if (override === true) {
-                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
-              } else {
-                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
-              }
-            }
-          }
-        });
-        return { parsed };
-      } catch (e) {
-        if (debug13) {
-          _log(`Failed to load ${dotenvPath} ${e.message}`);
-        }
-        return { error: e };
-      }
-    }
-    __name(config2, "config");
-    var DotenvModule = {
-      config: config2,
-      parse: parse2
-    };
-    module2.exports.config = DotenvModule.config;
-    module2.exports.parse = DotenvModule.parse;
-    module2.exports = DotenvModule;
-  }
-});
-
-// ../../node_modules/.pnpm/arg@5.0.2/node_modules/arg/index.js
-var require_arg = __commonJS({
-  "../../node_modules/.pnpm/arg@5.0.2/node_modules/arg/index.js"(exports, module2) {
-    var flagSymbol = Symbol("arg flag");
-    var ArgError = class extends Error {
-      constructor(msg, code) {
-        super(msg);
-        this.name = "ArgError";
-        this.code = code;
-        Object.setPrototypeOf(this, ArgError.prototype);
-      }
-    };
-    __name(ArgError, "ArgError");
-    function arg2(opts, {
-      argv = process.argv.slice(2),
-      permissive = false,
-      stopAtPositional = false
-    } = {}) {
-      if (!opts) {
-        throw new ArgError(
-          "argument specification object is required",
-          "ARG_CONFIG_NO_SPEC"
-        );
-      }
-      const result = { _: [] };
-      const aliases = {};
-      const handlers = {};
-      for (const key of Object.keys(opts)) {
-        if (!key) {
-          throw new ArgError(
-            "argument key cannot be an empty string",
-            "ARG_CONFIG_EMPTY_KEY"
-          );
-        }
-        if (key[0] !== "-") {
-          throw new ArgError(
-            `argument key must start with '-' but found: '${key}'`,
-            "ARG_CONFIG_NONOPT_KEY"
-          );
-        }
-        if (key.length === 1) {
-          throw new ArgError(
-            `argument key must have a name; singular '-' keys are not allowed: ${key}`,
-            "ARG_CONFIG_NONAME_KEY"
-          );
-        }
-        if (typeof opts[key] === "string") {
-          aliases[key] = opts[key];
-          continue;
-        }
-        let type = opts[key];
-        let isFlag = false;
-        if (Array.isArray(type) && type.length === 1 && typeof type[0] === "function") {
-          const [fn] = type;
-          type = /* @__PURE__ */ __name((value, name, prev = []) => {
-            prev.push(fn(value, name, prev[prev.length - 1]));
-            return prev;
-          }, "type");
-          isFlag = fn === Boolean || fn[flagSymbol] === true;
-        } else if (typeof type === "function") {
-          isFlag = type === Boolean || type[flagSymbol] === true;
-        } else {
-          throw new ArgError(
-            `type missing or not a function or valid array type: ${key}`,
-            "ARG_CONFIG_VAD_TYPE"
-          );
-        }
-        if (key[1] !== "-" && key.length > 2) {
-          throw new ArgError(
-            `short argument keys (with a single hyphen) must have only one character: ${key}`,
-            "ARG_CONFIG_SHORTOPT_TOOLONG"
-          );
-        }
-        handlers[key] = [type, isFlag];
-      }
-      for (let i = 0, len = argv.length; i < len; i++) {
-        const wholeArg = argv[i];
-        if (stopAtPositional && result._.length > 0) {
-          result._ = result._.concat(argv.slice(i));
-          break;
-        }
-        if (wholeArg === "--") {
-          result._ = result._.concat(argv.slice(i + 1));
-          break;
-        }
-        if (wholeArg.length > 1 && wholeArg[0] === "-") {
-          const separatedArguments = wholeArg[1] === "-" || wholeArg.length === 2 ? [wholeArg] : wholeArg.slice(1).split("").map((a) => `-${a}`);
-          for (let j = 0; j < separatedArguments.length; j++) {
-            const arg3 = separatedArguments[j];
-            const [originalArgName, argStr] = arg3[1] === "-" ? arg3.split(/=(.*)/, 2) : [arg3, void 0];
-            let argName = originalArgName;
-            while (argName in aliases) {
-              argName = aliases[argName];
-            }
-            if (!(argName in handlers)) {
-              if (permissive) {
-                result._.push(arg3);
-                continue;
-              } else {
-                throw new ArgError(
-                  `unknown or unexpected option: ${originalArgName}`,
-                  "ARG_UNKNOWN_OPTION"
-                );
-              }
-            }
-            const [type, isFlag] = handlers[argName];
-            if (!isFlag && j + 1 < separatedArguments.length) {
-              throw new ArgError(
-                `option requires argument (but was followed by another short argument): ${originalArgName}`,
-                "ARG_MISSING_REQUIRED_SHORTARG"
-              );
-            }
-            if (isFlag) {
-              result[argName] = type(true, argName, result[argName]);
-            } else if (argStr === void 0) {
-              if (argv.length < i + 2 || argv[i + 1].length > 1 && argv[i + 1][0] === "-" && !(argv[i + 1].match(/^-?\d*(\.(?=\d))?\d*$/) && (type === Number || typeof BigInt !== "undefined" && type === BigInt))) {
-                const extended = originalArgName === argName ? "" : ` (alias for ${argName})`;
-                throw new ArgError(
-                  `option requires argument: ${originalArgName}${extended}`,
-                  "ARG_MISSING_REQUIRED_LONGARG"
-                );
-              }
-              result[argName] = type(argv[i + 1], argName, result[argName]);
-              ++i;
-            } else {
-              result[argName] = type(argStr, argName, result[argName]);
-            }
-          }
-        } else {
-          result._.push(wholeArg);
-        }
-      }
-      return result;
-    }
-    __name(arg2, "arg");
-    arg2.flag = (fn) => {
-      fn[flagSymbol] = true;
-      return fn;
-    };
-    arg2.COUNT = arg2.flag((v, name, existingCount) => (existingCount || 0) + 1);
-    arg2.ArgError = ArgError;
-    module2.exports = arg2;
-  }
-});
-
-// ../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js
-var require_min_indent = __commonJS({
-  "../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js"(exports, module2) {
+// ../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js
+var require_js_levenshtein = __commonJS({
+  "../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js"(exports, module2) {
     "use strict";
-    module2.exports = (string) => {
-      const match = string.match(/^[ \t]*(?=\S)/gm);
-      if (!match) {
-        return 0;
+    module2.exports = function() {
+      function _min(d0, d1, d2, bx, ay) {
+        return d0 < d1 || d2 < d1 ? d0 > d2 ? d2 + 1 : d0 + 1 : bx === ay ? d1 : d1 + 1;
       }
-      return match.reduce((r, a) => Math.min(r, a.length), Infinity);
-    };
-  }
-});
-
-// ../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js
-var require_strip_indent = __commonJS({
-  "../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js"(exports, module2) {
-    "use strict";
-    var minIndent = require_min_indent();
-    module2.exports = (string) => {
-      const indent4 = minIndent(string);
-      if (indent4 === 0) {
-        return string;
-      }
-      const regex = new RegExp(`^[ \\t]{${indent4}}`, "gm");
-      return string.replace(regex, "");
-    };
+      __name(_min, "_min");
+      return function(a, b) {
+        if (a === b) {
+          return 0;
+        }
+        if (a.length > b.length) {
+          var tmp = a;
+          a = b;
+          b = tmp;
+        }
+        var la = a.length;
+        var lb = b.length;
+        while (la > 0 && a.charCodeAt(la - 1) === b.charCodeAt(lb - 1)) {
+          la--;
+          lb--;
+        }
+        var offset = 0;
+        while (offset < la && a.charCodeAt(offset) === b.charCodeAt(offset)) {
+          offset++;
+        }
+        la -= offset;
+        lb -= offset;
+        if (la === 0 || lb < 3) {
+          return lb;
+        }
+        var x = 0;
+        var y;
+        var d0;
+        var d1;
+        var d2;
+        var d3;
+        var dd;
+        var dy;
+        var ay;
+        var bx0;
+        var bx1;
+        var bx2;
+        var bx3;
+        var vector = [];
+        for (y = 0; y < la; y++) {
+          vector.push(y + 1);
+          vector.push(a.charCodeAt(offset + y));
+        }
+        var len = vector.length - 1;
+        for (; x < lb - 3; ) {
+          bx0 = b.charCodeAt(offset + (d0 = x));
+          bx1 = b.charCodeAt(offset + (d1 = x + 1));
+          bx2 = b.charCodeAt(offset + (d2 = x + 2));
+          bx3 = b.charCodeAt(offset + (d3 = x + 3));
+          dd = x += 4;
+          for (y = 0; y < len; y += 2) {
+            dy = vector[y];
+            ay = vector[y + 1];
+            d0 = _min(dy, d0, d1, bx0, ay);
+            d1 = _min(d0, d1, d2, bx1, ay);
+            d2 = _min(d1, d2, d3, bx2, ay);
+            dd = _min(d2, d3, dd, bx3, ay);
+            vector[y] = dd;
+            d3 = d2;
+            d2 = d1;
+            d1 = d0;
+            d0 = dy;
+          }
+        }
+        for (; x < lb; ) {
+          bx0 = b.charCodeAt(offset + (d0 = x));
+          dd = ++x;
+          for (y = 0; y < len; y += 2) {
+            dy = vector[y];
+            vector[y] = dd = _min(dy, d0, dd, bx0, vector[y + 1]);
+            d0 = dy;
+          }
+        }
+        return dd;
+      };
+    }();
   }
 });
 
@@ -19721,7 +19721,7 @@ var require_package3 = __commonJS({
   "package.json"(exports, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "4.6.0",
+      version: "4.7.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -19782,7 +19782,7 @@ var require_package3 = __commonJS({
       ],
       devDependencies: {
         "@faker-js/faker": "7.6.0",
-        "@fast-check/jest": "1.3.1",
+        "@fast-check/jest": "1.4.0",
         "@jest/globals": "28.1.3",
         "@jest/test-sequencer": "28.1.3",
         "@opentelemetry/api": "1.2.0",
@@ -19791,15 +19791,15 @@ var require_package3 = __commonJS({
         "@opentelemetry/resources": "1.7.0",
         "@opentelemetry/sdk-trace-base": "1.7.0",
         "@opentelemetry/semantic-conventions": "1.7.0",
-        "@prisma/debug": "workspace:4.6.0",
-        "@prisma/engine-core": "workspace:4.6.0",
-        "@prisma/engines": "workspace:4.6.0",
-        "@prisma/fetch-engine": "workspace:4.6.0",
-        "@prisma/generator-helper": "workspace:4.6.0",
-        "@prisma/get-platform": "workspace:4.6.0",
-        "@prisma/instrumentation": "workspace:4.6.0",
-        "@prisma/internals": "workspace:4.6.0",
-        "@prisma/migrate": "workspace:4.6.0",
+        "@prisma/debug": "workspace:4.7.0",
+        "@prisma/engine-core": "workspace:4.7.0",
+        "@prisma/engines": "workspace:4.7.0",
+        "@prisma/fetch-engine": "workspace:4.7.0",
+        "@prisma/generator-helper": "workspace:4.7.0",
+        "@prisma/get-platform": "workspace:4.7.0",
+        "@prisma/instrumentation": "workspace:4.7.0",
+        "@prisma/internals": "workspace:4.7.0",
+        "@prisma/migrate": "workspace:4.7.0",
         "@prisma/mini-proxy": "0.3.0",
         "@swc-node/register": "1.5.4",
         "@swc/core": "1.3.14",
@@ -19837,7 +19837,7 @@ var require_package3 = __commonJS({
         "lz-string": "1.4.4",
         "make-dir": "3.1.0",
         mariadb: "3.0.2",
-        memfs: "3.4.9",
+        memfs: "3.4.10",
         mssql: "9.0.1",
         "node-fetch": "2.6.7",
         pg: "8.8.0",
@@ -19859,7 +19859,7 @@ var require_package3 = __commonJS({
         tsd: "0.21.0",
         typescript: "4.8.4",
         "yeoman-generator": "5.7.0",
-        yo: "4.3.0"
+        yo: "4.3.1"
       },
       peerDependencies: {
         prisma: "*"
@@ -19870,7 +19870,7 @@ var require_package3 = __commonJS({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3"
+        "@prisma/engines-version": "4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635"
       },
       sideEffects: false
     };
@@ -19888,6 +19888,7 @@ __export(runtime_exports, {
   Extensions: () => extensions_exports,
   MetricsClient: () => MetricsClient,
   NotFoundError: () => NotFoundError2,
+  PrismaClientExtensionError: () => PrismaClientExtensionError,
   PrismaClientInitializationError: () => PrismaClientInitializationError,
   PrismaClientKnownRequestError: () => PrismaClientKnownRequestError,
   PrismaClientRustPanicError: () => PrismaClientRustPanicError,
@@ -19915,8 +19916,18 @@ var lzString = __toESM(require_lz_string());
 // src/runtime/core/extensions/index.ts
 var extensions_exports = {};
 __export(extensions_exports, {
+  defineExtension: () => defineExtension,
   getExtensionContext: () => getExtensionContext
 });
+
+// src/runtime/core/extensions/defineExtension.ts
+function defineExtension(ext) {
+  if (typeof ext === "function") {
+    return ext;
+  }
+  return (client) => client.$extends(ext);
+}
+__name(defineExtension, "defineExtension");
 
 // src/runtime/core/extensions/getExtensionContext.ts
 function getExtensionContext(that) {
@@ -19926,2948 +19937,16 @@ __name(getExtensionContext, "getExtensionContext");
 
 // src/runtime/core/types/index.ts
 var types_exports = {};
+__export(types_exports, {
+  Extensions: () => Extensions_exports,
+  Utils: () => Utils_exports
+});
 
-// src/runtime/core/metrics/MetricsClient.ts
-var MetricsClient = class {
-  constructor(engine) {
-    this._engine = engine;
-  }
-  prometheus(options) {
-    return this._engine.metrics({ format: "prometheus", ...options });
-  }
-  json(options) {
-    return this._engine.metrics({ format: "json", ...options });
-  }
-};
-__name(MetricsClient, "MetricsClient");
+// src/runtime/core/types/Extensions.ts
+var Extensions_exports = {};
 
-// src/runtime/utils/applyMixins.ts
-function applyMixins(derivedCtor, constructors) {
-  var _a3;
-  for (const baseCtor of constructors) {
-    for (const name of Object.getOwnPropertyNames(baseCtor.prototype)) {
-      Object.defineProperty(
-        derivedCtor.prototype,
-        name,
-        (_a3 = Object.getOwnPropertyDescriptor(baseCtor.prototype, name)) != null ? _a3 : /* @__PURE__ */ Object.create(null)
-      );
-    }
-  }
-}
-__name(applyMixins, "applyMixins");
-
-// src/runtime/utils/common.ts
-var import_chalk = __toESM(require_source());
-
-// ../../node_modules/.pnpm/decimal.js@10.4.2/node_modules/decimal.js/decimal.mjs
-var EXP_LIMIT = 9e15;
-var MAX_DIGITS = 1e9;
-var NUMERALS = "0123456789abcdef";
-var LN10 = "2.3025850929940456840179914546843642076011014886287729760333279009675726096773524802359972050895982983419677840422862486334095254650828067566662873690987816894829072083255546808437998948262331985283935053089653777326288461633662222876982198867465436674744042432743651550489343149393914796194044002221051017141748003688084012647080685567743216228355220114804663715659121373450747856947683463616792101806445070648000277502684916746550586856935673420670581136429224554405758925724208241314695689016758940256776311356919292033376587141660230105703089634572075440370847469940168269282808481184289314848524948644871927809676271275775397027668605952496716674183485704422507197965004714951050492214776567636938662976979522110718264549734772662425709429322582798502585509785265383207606726317164309505995087807523710333101197857547331541421808427543863591778117054309827482385045648019095610299291824318237525357709750539565187697510374970888692180205189339507238539205144634197265287286965110862571492198849978748873771345686209167058";
-var PI = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632789";
-var DEFAULTS = {
-  precision: 20,
-  rounding: 4,
-  modulo: 1,
-  toExpNeg: -7,
-  toExpPos: 21,
-  minE: -EXP_LIMIT,
-  maxE: EXP_LIMIT,
-  crypto: false
-};
-var inexact;
-var quadrant;
-var external = true;
-var decimalError = "[DecimalError] ";
-var invalidArgument = decimalError + "Invalid argument: ";
-var precisionLimitExceeded = decimalError + "Precision limit exceeded";
-var cryptoUnavailable = decimalError + "crypto unavailable";
-var tag = "[object Decimal]";
-var mathfloor = Math.floor;
-var mathpow = Math.pow;
-var isBinary = /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i;
-var isHex = /^0x([0-9a-f]+(\.[0-9a-f]*)?|\.[0-9a-f]+)(p[+-]?\d+)?$/i;
-var isOctal = /^0o([0-7]+(\.[0-7]*)?|\.[0-7]+)(p[+-]?\d+)?$/i;
-var isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i;
-var BASE = 1e7;
-var LOG_BASE = 7;
-var MAX_SAFE_INTEGER = 9007199254740991;
-var LN10_PRECISION = LN10.length - 1;
-var PI_PRECISION = PI.length - 1;
-var P = { toStringTag: tag };
-P.absoluteValue = P.abs = function() {
-  var x = new this.constructor(this);
-  if (x.s < 0)
-    x.s = 1;
-  return finalise(x);
-};
-P.ceil = function() {
-  return finalise(new this.constructor(this), this.e + 1, 2);
-};
-P.clampedTo = P.clamp = function(min2, max2) {
-  var k, x = this, Ctor = x.constructor;
-  min2 = new Ctor(min2);
-  max2 = new Ctor(max2);
-  if (!min2.s || !max2.s)
-    return new Ctor(NaN);
-  if (min2.gt(max2))
-    throw Error(invalidArgument + max2);
-  k = x.cmp(min2);
-  return k < 0 ? min2 : x.cmp(max2) > 0 ? max2 : new Ctor(x);
-};
-P.comparedTo = P.cmp = function(y) {
-  var i, j, xdL, ydL, x = this, xd = x.d, yd = (y = new x.constructor(y)).d, xs = x.s, ys = y.s;
-  if (!xd || !yd) {
-    return !xs || !ys ? NaN : xs !== ys ? xs : xd === yd ? 0 : !xd ^ xs < 0 ? 1 : -1;
-  }
-  if (!xd[0] || !yd[0])
-    return xd[0] ? xs : yd[0] ? -ys : 0;
-  if (xs !== ys)
-    return xs;
-  if (x.e !== y.e)
-    return x.e > y.e ^ xs < 0 ? 1 : -1;
-  xdL = xd.length;
-  ydL = yd.length;
-  for (i = 0, j = xdL < ydL ? xdL : ydL; i < j; ++i) {
-    if (xd[i] !== yd[i])
-      return xd[i] > yd[i] ^ xs < 0 ? 1 : -1;
-  }
-  return xdL === ydL ? 0 : xdL > ydL ^ xs < 0 ? 1 : -1;
-};
-P.cosine = P.cos = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.d)
-    return new Ctor(NaN);
-  if (!x.d[0])
-    return new Ctor(1);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
-  Ctor.rounding = 1;
-  x = cosine(Ctor, toLessThanHalfPi(Ctor, x));
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return finalise(quadrant == 2 || quadrant == 3 ? x.neg() : x, pr, rm, true);
-};
-P.cubeRoot = P.cbrt = function() {
-  var e, m, n, r, rep, s, sd, t, t3, t3plusx, x = this, Ctor = x.constructor;
-  if (!x.isFinite() || x.isZero())
-    return new Ctor(x);
-  external = false;
-  s = x.s * mathpow(x.s * x, 1 / 3);
-  if (!s || Math.abs(s) == 1 / 0) {
-    n = digitsToString(x.d);
-    e = x.e;
-    if (s = (e - n.length + 1) % 3)
-      n += s == 1 || s == -2 ? "0" : "00";
-    s = mathpow(n, 1 / 3);
-    e = mathfloor((e + 1) / 3) - (e % 3 == (e < 0 ? -1 : 2));
-    if (s == 1 / 0) {
-      n = "5e" + e;
-    } else {
-      n = s.toExponential();
-      n = n.slice(0, n.indexOf("e") + 1) + e;
-    }
-    r = new Ctor(n);
-    r.s = x.s;
-  } else {
-    r = new Ctor(s.toString());
-  }
-  sd = (e = Ctor.precision) + 3;
-  for (; ; ) {
-    t = r;
-    t3 = t.times(t).times(t);
-    t3plusx = t3.plus(x);
-    r = divide(t3plusx.plus(x).times(t), t3plusx.plus(t3), sd + 2, 1);
-    if (digitsToString(t.d).slice(0, sd) === (n = digitsToString(r.d)).slice(0, sd)) {
-      n = n.slice(sd - 3, sd + 1);
-      if (n == "9999" || !rep && n == "4999") {
-        if (!rep) {
-          finalise(t, e + 1, 0);
-          if (t.times(t).times(t).eq(x)) {
-            r = t;
-            break;
-          }
-        }
-        sd += 4;
-        rep = 1;
-      } else {
-        if (!+n || !+n.slice(1) && n.charAt(0) == "5") {
-          finalise(r, e + 1, 1);
-          m = !r.times(r).times(r).eq(x);
-        }
-        break;
-      }
-    }
-  }
-  external = true;
-  return finalise(r, e, Ctor.rounding, m);
-};
-P.decimalPlaces = P.dp = function() {
-  var w, d = this.d, n = NaN;
-  if (d) {
-    w = d.length - 1;
-    n = (w - mathfloor(this.e / LOG_BASE)) * LOG_BASE;
-    w = d[w];
-    if (w)
-      for (; w % 10 == 0; w /= 10)
-        n--;
-    if (n < 0)
-      n = 0;
-  }
-  return n;
-};
-P.dividedBy = P.div = function(y) {
-  return divide(this, new this.constructor(y));
-};
-P.dividedToIntegerBy = P.divToInt = function(y) {
-  var x = this, Ctor = x.constructor;
-  return finalise(divide(x, new Ctor(y), 0, 1, 1), Ctor.precision, Ctor.rounding);
-};
-P.equals = P.eq = function(y) {
-  return this.cmp(y) === 0;
-};
-P.floor = function() {
-  return finalise(new this.constructor(this), this.e + 1, 3);
-};
-P.greaterThan = P.gt = function(y) {
-  return this.cmp(y) > 0;
-};
-P.greaterThanOrEqualTo = P.gte = function(y) {
-  var k = this.cmp(y);
-  return k == 1 || k === 0;
-};
-P.hyperbolicCosine = P.cosh = function() {
-  var k, n, pr, rm, len, x = this, Ctor = x.constructor, one = new Ctor(1);
-  if (!x.isFinite())
-    return new Ctor(x.s ? 1 / 0 : NaN);
-  if (x.isZero())
-    return one;
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
-  Ctor.rounding = 1;
-  len = x.d.length;
-  if (len < 32) {
-    k = Math.ceil(len / 3);
-    n = (1 / tinyPow(4, k)).toString();
-  } else {
-    k = 16;
-    n = "2.3283064365386962890625e-10";
-  }
-  x = taylorSeries(Ctor, 1, x.times(n), new Ctor(1), true);
-  var cosh2_x, i = k, d8 = new Ctor(8);
-  for (; i--; ) {
-    cosh2_x = x.times(x);
-    x = one.minus(cosh2_x.times(d8.minus(cosh2_x.times(d8))));
-  }
-  return finalise(x, Ctor.precision = pr, Ctor.rounding = rm, true);
-};
-P.hyperbolicSine = P.sinh = function() {
-  var k, pr, rm, len, x = this, Ctor = x.constructor;
-  if (!x.isFinite() || x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
-  Ctor.rounding = 1;
-  len = x.d.length;
-  if (len < 3) {
-    x = taylorSeries(Ctor, 2, x, x, true);
-  } else {
-    k = 1.4 * Math.sqrt(len);
-    k = k > 16 ? 16 : k | 0;
-    x = x.times(1 / tinyPow(5, k));
-    x = taylorSeries(Ctor, 2, x, x, true);
-    var sinh2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
-    for (; k--; ) {
-      sinh2_x = x.times(x);
-      x = x.times(d5.plus(sinh2_x.times(d16.times(sinh2_x).plus(d20))));
-    }
-  }
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return finalise(x, pr, rm, true);
-};
-P.hyperbolicTangent = P.tanh = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.isFinite())
-    return new Ctor(x.s);
-  if (x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + 7;
-  Ctor.rounding = 1;
-  return divide(x.sinh(), x.cosh(), Ctor.precision = pr, Ctor.rounding = rm);
-};
-P.inverseCosine = P.acos = function() {
-  var halfPi, x = this, Ctor = x.constructor, k = x.abs().cmp(1), pr = Ctor.precision, rm = Ctor.rounding;
-  if (k !== -1) {
-    return k === 0 ? x.isNeg() ? getPi(Ctor, pr, rm) : new Ctor(0) : new Ctor(NaN);
-  }
-  if (x.isZero())
-    return getPi(Ctor, pr + 4, rm).times(0.5);
-  Ctor.precision = pr + 6;
-  Ctor.rounding = 1;
-  x = x.asin();
-  halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return halfPi.minus(x);
-};
-P.inverseHyperbolicCosine = P.acosh = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (x.lte(1))
-    return new Ctor(x.eq(1) ? 0 : NaN);
-  if (!x.isFinite())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(Math.abs(x.e), x.sd()) + 4;
-  Ctor.rounding = 1;
-  external = false;
-  x = x.times(x).minus(1).sqrt().plus(x);
-  external = true;
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return x.ln();
-};
-P.inverseHyperbolicSine = P.asinh = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.isFinite() || x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + 2 * Math.max(Math.abs(x.e), x.sd()) + 6;
-  Ctor.rounding = 1;
-  external = false;
-  x = x.times(x).plus(1).sqrt().plus(x);
-  external = true;
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return x.ln();
-};
-P.inverseHyperbolicTangent = P.atanh = function() {
-  var pr, rm, wpr, xsd, x = this, Ctor = x.constructor;
-  if (!x.isFinite())
-    return new Ctor(NaN);
-  if (x.e >= 0)
-    return new Ctor(x.abs().eq(1) ? x.s / 0 : x.isZero() ? x : NaN);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  xsd = x.sd();
-  if (Math.max(xsd, pr) < 2 * -x.e - 1)
-    return finalise(new Ctor(x), pr, rm, true);
-  Ctor.precision = wpr = xsd - x.e;
-  x = divide(x.plus(1), new Ctor(1).minus(x), wpr + pr, 1);
-  Ctor.precision = pr + 4;
-  Ctor.rounding = 1;
-  x = x.ln();
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return x.times(0.5);
-};
-P.inverseSine = P.asin = function() {
-  var halfPi, k, pr, rm, x = this, Ctor = x.constructor;
-  if (x.isZero())
-    return new Ctor(x);
-  k = x.abs().cmp(1);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  if (k !== -1) {
-    if (k === 0) {
-      halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
-      halfPi.s = x.s;
-      return halfPi;
-    }
-    return new Ctor(NaN);
-  }
-  Ctor.precision = pr + 6;
-  Ctor.rounding = 1;
-  x = x.div(new Ctor(1).minus(x.times(x)).sqrt().plus(1)).atan();
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return x.times(2);
-};
-P.inverseTangent = P.atan = function() {
-  var i, j, k, n, px, t, r, wpr, x2, x = this, Ctor = x.constructor, pr = Ctor.precision, rm = Ctor.rounding;
-  if (!x.isFinite()) {
-    if (!x.s)
-      return new Ctor(NaN);
-    if (pr + 4 <= PI_PRECISION) {
-      r = getPi(Ctor, pr + 4, rm).times(0.5);
-      r.s = x.s;
-      return r;
-    }
-  } else if (x.isZero()) {
-    return new Ctor(x);
-  } else if (x.abs().eq(1) && pr + 4 <= PI_PRECISION) {
-    r = getPi(Ctor, pr + 4, rm).times(0.25);
-    r.s = x.s;
-    return r;
-  }
-  Ctor.precision = wpr = pr + 10;
-  Ctor.rounding = 1;
-  k = Math.min(28, wpr / LOG_BASE + 2 | 0);
-  for (i = k; i; --i)
-    x = x.div(x.times(x).plus(1).sqrt().plus(1));
-  external = false;
-  j = Math.ceil(wpr / LOG_BASE);
-  n = 1;
-  x2 = x.times(x);
-  r = new Ctor(x);
-  px = x;
-  for (; i !== -1; ) {
-    px = px.times(x2);
-    t = r.minus(px.div(n += 2));
-    px = px.times(x2);
-    r = t.plus(px.div(n += 2));
-    if (r.d[j] !== void 0)
-      for (i = j; r.d[i] === t.d[i] && i--; )
-        ;
-  }
-  if (k)
-    r = r.times(2 << k - 1);
-  external = true;
-  return finalise(r, Ctor.precision = pr, Ctor.rounding = rm, true);
-};
-P.isFinite = function() {
-  return !!this.d;
-};
-P.isInteger = P.isInt = function() {
-  return !!this.d && mathfloor(this.e / LOG_BASE) > this.d.length - 2;
-};
-P.isNaN = function() {
-  return !this.s;
-};
-P.isNegative = P.isNeg = function() {
-  return this.s < 0;
-};
-P.isPositive = P.isPos = function() {
-  return this.s > 0;
-};
-P.isZero = function() {
-  return !!this.d && this.d[0] === 0;
-};
-P.lessThan = P.lt = function(y) {
-  return this.cmp(y) < 0;
-};
-P.lessThanOrEqualTo = P.lte = function(y) {
-  return this.cmp(y) < 1;
-};
-P.logarithm = P.log = function(base) {
-  var isBase10, d, denominator, k, inf, num, sd, r, arg2 = this, Ctor = arg2.constructor, pr = Ctor.precision, rm = Ctor.rounding, guard = 5;
-  if (base == null) {
-    base = new Ctor(10);
-    isBase10 = true;
-  } else {
-    base = new Ctor(base);
-    d = base.d;
-    if (base.s < 0 || !d || !d[0] || base.eq(1))
-      return new Ctor(NaN);
-    isBase10 = base.eq(10);
-  }
-  d = arg2.d;
-  if (arg2.s < 0 || !d || !d[0] || arg2.eq(1)) {
-    return new Ctor(d && !d[0] ? -1 / 0 : arg2.s != 1 ? NaN : d ? 0 : 1 / 0);
-  }
-  if (isBase10) {
-    if (d.length > 1) {
-      inf = true;
-    } else {
-      for (k = d[0]; k % 10 === 0; )
-        k /= 10;
-      inf = k !== 1;
-    }
-  }
-  external = false;
-  sd = pr + guard;
-  num = naturalLogarithm(arg2, sd);
-  denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
-  r = divide(num, denominator, sd, 1);
-  if (checkRoundingDigits(r.d, k = pr, rm)) {
-    do {
-      sd += 10;
-      num = naturalLogarithm(arg2, sd);
-      denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
-      r = divide(num, denominator, sd, 1);
-      if (!inf) {
-        if (+digitsToString(r.d).slice(k + 1, k + 15) + 1 == 1e14) {
-          r = finalise(r, pr + 1, 0);
-        }
-        break;
-      }
-    } while (checkRoundingDigits(r.d, k += 10, rm));
-  }
-  external = true;
-  return finalise(r, pr, rm);
-};
-P.minus = P.sub = function(y) {
-  var d, e, i, j, k, len, pr, rm, xd, xe, xLTy, yd, x = this, Ctor = x.constructor;
-  y = new Ctor(y);
-  if (!x.d || !y.d) {
-    if (!x.s || !y.s)
-      y = new Ctor(NaN);
-    else if (x.d)
-      y.s = -y.s;
-    else
-      y = new Ctor(y.d || x.s !== y.s ? x : NaN);
-    return y;
-  }
-  if (x.s != y.s) {
-    y.s = -y.s;
-    return x.plus(y);
-  }
-  xd = x.d;
-  yd = y.d;
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  if (!xd[0] || !yd[0]) {
-    if (yd[0])
-      y.s = -y.s;
-    else if (xd[0])
-      y = new Ctor(x);
-    else
-      return new Ctor(rm === 3 ? -0 : 0);
-    return external ? finalise(y, pr, rm) : y;
-  }
-  e = mathfloor(y.e / LOG_BASE);
-  xe = mathfloor(x.e / LOG_BASE);
-  xd = xd.slice();
-  k = xe - e;
-  if (k) {
-    xLTy = k < 0;
-    if (xLTy) {
-      d = xd;
-      k = -k;
-      len = yd.length;
-    } else {
-      d = yd;
-      e = xe;
-      len = xd.length;
-    }
-    i = Math.max(Math.ceil(pr / LOG_BASE), len) + 2;
-    if (k > i) {
-      k = i;
-      d.length = 1;
-    }
-    d.reverse();
-    for (i = k; i--; )
-      d.push(0);
-    d.reverse();
-  } else {
-    i = xd.length;
-    len = yd.length;
-    xLTy = i < len;
-    if (xLTy)
-      len = i;
-    for (i = 0; i < len; i++) {
-      if (xd[i] != yd[i]) {
-        xLTy = xd[i] < yd[i];
-        break;
-      }
-    }
-    k = 0;
-  }
-  if (xLTy) {
-    d = xd;
-    xd = yd;
-    yd = d;
-    y.s = -y.s;
-  }
-  len = xd.length;
-  for (i = yd.length - len; i > 0; --i)
-    xd[len++] = 0;
-  for (i = yd.length; i > k; ) {
-    if (xd[--i] < yd[i]) {
-      for (j = i; j && xd[--j] === 0; )
-        xd[j] = BASE - 1;
-      --xd[j];
-      xd[i] += BASE;
-    }
-    xd[i] -= yd[i];
-  }
-  for (; xd[--len] === 0; )
-    xd.pop();
-  for (; xd[0] === 0; xd.shift())
-    --e;
-  if (!xd[0])
-    return new Ctor(rm === 3 ? -0 : 0);
-  y.d = xd;
-  y.e = getBase10Exponent(xd, e);
-  return external ? finalise(y, pr, rm) : y;
-};
-P.modulo = P.mod = function(y) {
-  var q, x = this, Ctor = x.constructor;
-  y = new Ctor(y);
-  if (!x.d || !y.s || y.d && !y.d[0])
-    return new Ctor(NaN);
-  if (!y.d || x.d && !x.d[0]) {
-    return finalise(new Ctor(x), Ctor.precision, Ctor.rounding);
-  }
-  external = false;
-  if (Ctor.modulo == 9) {
-    q = divide(x, y.abs(), 0, 3, 1);
-    q.s *= y.s;
-  } else {
-    q = divide(x, y, 0, Ctor.modulo, 1);
-  }
-  q = q.times(y);
-  external = true;
-  return x.minus(q);
-};
-P.naturalExponential = P.exp = function() {
-  return naturalExponential(this);
-};
-P.naturalLogarithm = P.ln = function() {
-  return naturalLogarithm(this);
-};
-P.negated = P.neg = function() {
-  var x = new this.constructor(this);
-  x.s = -x.s;
-  return finalise(x);
-};
-P.plus = P.add = function(y) {
-  var carry, d, e, i, k, len, pr, rm, xd, yd, x = this, Ctor = x.constructor;
-  y = new Ctor(y);
-  if (!x.d || !y.d) {
-    if (!x.s || !y.s)
-      y = new Ctor(NaN);
-    else if (!x.d)
-      y = new Ctor(y.d || x.s === y.s ? x : NaN);
-    return y;
-  }
-  if (x.s != y.s) {
-    y.s = -y.s;
-    return x.minus(y);
-  }
-  xd = x.d;
-  yd = y.d;
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  if (!xd[0] || !yd[0]) {
-    if (!yd[0])
-      y = new Ctor(x);
-    return external ? finalise(y, pr, rm) : y;
-  }
-  k = mathfloor(x.e / LOG_BASE);
-  e = mathfloor(y.e / LOG_BASE);
-  xd = xd.slice();
-  i = k - e;
-  if (i) {
-    if (i < 0) {
-      d = xd;
-      i = -i;
-      len = yd.length;
-    } else {
-      d = yd;
-      e = k;
-      len = xd.length;
-    }
-    k = Math.ceil(pr / LOG_BASE);
-    len = k > len ? k + 1 : len + 1;
-    if (i > len) {
-      i = len;
-      d.length = 1;
-    }
-    d.reverse();
-    for (; i--; )
-      d.push(0);
-    d.reverse();
-  }
-  len = xd.length;
-  i = yd.length;
-  if (len - i < 0) {
-    i = len;
-    d = yd;
-    yd = xd;
-    xd = d;
-  }
-  for (carry = 0; i; ) {
-    carry = (xd[--i] = xd[i] + yd[i] + carry) / BASE | 0;
-    xd[i] %= BASE;
-  }
-  if (carry) {
-    xd.unshift(carry);
-    ++e;
-  }
-  for (len = xd.length; xd[--len] == 0; )
-    xd.pop();
-  y.d = xd;
-  y.e = getBase10Exponent(xd, e);
-  return external ? finalise(y, pr, rm) : y;
-};
-P.precision = P.sd = function(z) {
-  var k, x = this;
-  if (z !== void 0 && z !== !!z && z !== 1 && z !== 0)
-    throw Error(invalidArgument + z);
-  if (x.d) {
-    k = getPrecision(x.d);
-    if (z && x.e + 1 > k)
-      k = x.e + 1;
-  } else {
-    k = NaN;
-  }
-  return k;
-};
-P.round = function() {
-  var x = this, Ctor = x.constructor;
-  return finalise(new Ctor(x), x.e + 1, Ctor.rounding);
-};
-P.sine = P.sin = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.isFinite())
-    return new Ctor(NaN);
-  if (x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
-  Ctor.rounding = 1;
-  x = sine(Ctor, toLessThanHalfPi(Ctor, x));
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return finalise(quadrant > 2 ? x.neg() : x, pr, rm, true);
-};
-P.squareRoot = P.sqrt = function() {
-  var m, n, sd, r, rep, t, x = this, d = x.d, e = x.e, s = x.s, Ctor = x.constructor;
-  if (s !== 1 || !d || !d[0]) {
-    return new Ctor(!s || s < 0 && (!d || d[0]) ? NaN : d ? x : 1 / 0);
-  }
-  external = false;
-  s = Math.sqrt(+x);
-  if (s == 0 || s == 1 / 0) {
-    n = digitsToString(d);
-    if ((n.length + e) % 2 == 0)
-      n += "0";
-    s = Math.sqrt(n);
-    e = mathfloor((e + 1) / 2) - (e < 0 || e % 2);
-    if (s == 1 / 0) {
-      n = "5e" + e;
-    } else {
-      n = s.toExponential();
-      n = n.slice(0, n.indexOf("e") + 1) + e;
-    }
-    r = new Ctor(n);
-  } else {
-    r = new Ctor(s.toString());
-  }
-  sd = (e = Ctor.precision) + 3;
-  for (; ; ) {
-    t = r;
-    r = t.plus(divide(x, t, sd + 2, 1)).times(0.5);
-    if (digitsToString(t.d).slice(0, sd) === (n = digitsToString(r.d)).slice(0, sd)) {
-      n = n.slice(sd - 3, sd + 1);
-      if (n == "9999" || !rep && n == "4999") {
-        if (!rep) {
-          finalise(t, e + 1, 0);
-          if (t.times(t).eq(x)) {
-            r = t;
-            break;
-          }
-        }
-        sd += 4;
-        rep = 1;
-      } else {
-        if (!+n || !+n.slice(1) && n.charAt(0) == "5") {
-          finalise(r, e + 1, 1);
-          m = !r.times(r).eq(x);
-        }
-        break;
-      }
-    }
-  }
-  external = true;
-  return finalise(r, e, Ctor.rounding, m);
-};
-P.tangent = P.tan = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.isFinite())
-    return new Ctor(NaN);
-  if (x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + 10;
-  Ctor.rounding = 1;
-  x = x.sin();
-  x.s = 1;
-  x = divide(x, new Ctor(1).minus(x.times(x)).sqrt(), pr + 10, 0);
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return finalise(quadrant == 2 || quadrant == 4 ? x.neg() : x, pr, rm, true);
-};
-P.times = P.mul = function(y) {
-  var carry, e, i, k, r, rL, t, xdL, ydL, x = this, Ctor = x.constructor, xd = x.d, yd = (y = new Ctor(y)).d;
-  y.s *= x.s;
-  if (!xd || !xd[0] || !yd || !yd[0]) {
-    return new Ctor(!y.s || xd && !xd[0] && !yd || yd && !yd[0] && !xd ? NaN : !xd || !yd ? y.s / 0 : y.s * 0);
-  }
-  e = mathfloor(x.e / LOG_BASE) + mathfloor(y.e / LOG_BASE);
-  xdL = xd.length;
-  ydL = yd.length;
-  if (xdL < ydL) {
-    r = xd;
-    xd = yd;
-    yd = r;
-    rL = xdL;
-    xdL = ydL;
-    ydL = rL;
-  }
-  r = [];
-  rL = xdL + ydL;
-  for (i = rL; i--; )
-    r.push(0);
-  for (i = ydL; --i >= 0; ) {
-    carry = 0;
-    for (k = xdL + i; k > i; ) {
-      t = r[k] + yd[i] * xd[k - i - 1] + carry;
-      r[k--] = t % BASE | 0;
-      carry = t / BASE | 0;
-    }
-    r[k] = (r[k] + carry) % BASE | 0;
-  }
-  for (; !r[--rL]; )
-    r.pop();
-  if (carry)
-    ++e;
-  else
-    r.shift();
-  y.d = r;
-  y.e = getBase10Exponent(r, e);
-  return external ? finalise(y, Ctor.precision, Ctor.rounding) : y;
-};
-P.toBinary = function(sd, rm) {
-  return toStringBinary(this, 2, sd, rm);
-};
-P.toDecimalPlaces = P.toDP = function(dp, rm) {
-  var x = this, Ctor = x.constructor;
-  x = new Ctor(x);
-  if (dp === void 0)
-    return x;
-  checkInt32(dp, 0, MAX_DIGITS);
-  if (rm === void 0)
-    rm = Ctor.rounding;
-  else
-    checkInt32(rm, 0, 8);
-  return finalise(x, dp + x.e + 1, rm);
-};
-P.toExponential = function(dp, rm) {
-  var str, x = this, Ctor = x.constructor;
-  if (dp === void 0) {
-    str = finiteToString(x, true);
-  } else {
-    checkInt32(dp, 0, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-    x = finalise(new Ctor(x), dp + 1, rm);
-    str = finiteToString(x, true, dp + 1);
-  }
-  return x.isNeg() && !x.isZero() ? "-" + str : str;
-};
-P.toFixed = function(dp, rm) {
-  var str, y, x = this, Ctor = x.constructor;
-  if (dp === void 0) {
-    str = finiteToString(x);
-  } else {
-    checkInt32(dp, 0, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-    y = finalise(new Ctor(x), dp + x.e + 1, rm);
-    str = finiteToString(y, false, dp + y.e + 1);
-  }
-  return x.isNeg() && !x.isZero() ? "-" + str : str;
-};
-P.toFraction = function(maxD) {
-  var d, d0, d1, d2, e, k, n, n0, n1, pr, q, r, x = this, xd = x.d, Ctor = x.constructor;
-  if (!xd)
-    return new Ctor(x);
-  n1 = d0 = new Ctor(1);
-  d1 = n0 = new Ctor(0);
-  d = new Ctor(d1);
-  e = d.e = getPrecision(xd) - x.e - 1;
-  k = e % LOG_BASE;
-  d.d[0] = mathpow(10, k < 0 ? LOG_BASE + k : k);
-  if (maxD == null) {
-    maxD = e > 0 ? d : n1;
-  } else {
-    n = new Ctor(maxD);
-    if (!n.isInt() || n.lt(n1))
-      throw Error(invalidArgument + n);
-    maxD = n.gt(d) ? e > 0 ? d : n1 : n;
-  }
-  external = false;
-  n = new Ctor(digitsToString(xd));
-  pr = Ctor.precision;
-  Ctor.precision = e = xd.length * LOG_BASE * 2;
-  for (; ; ) {
-    q = divide(n, d, 0, 1, 1);
-    d2 = d0.plus(q.times(d1));
-    if (d2.cmp(maxD) == 1)
-      break;
-    d0 = d1;
-    d1 = d2;
-    d2 = n1;
-    n1 = n0.plus(q.times(d2));
-    n0 = d2;
-    d2 = d;
-    d = n.minus(q.times(d2));
-    n = d2;
-  }
-  d2 = divide(maxD.minus(d0), d1, 0, 1, 1);
-  n0 = n0.plus(d2.times(n1));
-  d0 = d0.plus(d2.times(d1));
-  n0.s = n1.s = x.s;
-  r = divide(n1, d1, e, 1).minus(x).abs().cmp(divide(n0, d0, e, 1).minus(x).abs()) < 1 ? [n1, d1] : [n0, d0];
-  Ctor.precision = pr;
-  external = true;
-  return r;
-};
-P.toHexadecimal = P.toHex = function(sd, rm) {
-  return toStringBinary(this, 16, sd, rm);
-};
-P.toNearest = function(y, rm) {
-  var x = this, Ctor = x.constructor;
-  x = new Ctor(x);
-  if (y == null) {
-    if (!x.d)
-      return x;
-    y = new Ctor(1);
-    rm = Ctor.rounding;
-  } else {
-    y = new Ctor(y);
-    if (rm === void 0) {
-      rm = Ctor.rounding;
-    } else {
-      checkInt32(rm, 0, 8);
-    }
-    if (!x.d)
-      return y.s ? x : y;
-    if (!y.d) {
-      if (y.s)
-        y.s = x.s;
-      return y;
-    }
-  }
-  if (y.d[0]) {
-    external = false;
-    x = divide(x, y, 0, rm, 1).times(y);
-    external = true;
-    finalise(x);
-  } else {
-    y.s = x.s;
-    x = y;
-  }
-  return x;
-};
-P.toNumber = function() {
-  return +this;
-};
-P.toOctal = function(sd, rm) {
-  return toStringBinary(this, 8, sd, rm);
-};
-P.toPower = P.pow = function(y) {
-  var e, k, pr, r, rm, s, x = this, Ctor = x.constructor, yn = +(y = new Ctor(y));
-  if (!x.d || !y.d || !x.d[0] || !y.d[0])
-    return new Ctor(mathpow(+x, yn));
-  x = new Ctor(x);
-  if (x.eq(1))
-    return x;
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  if (y.eq(1))
-    return finalise(x, pr, rm);
-  e = mathfloor(y.e / LOG_BASE);
-  if (e >= y.d.length - 1 && (k = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER) {
-    r = intPow(Ctor, x, k, pr);
-    return y.s < 0 ? new Ctor(1).div(r) : finalise(r, pr, rm);
-  }
-  s = x.s;
-  if (s < 0) {
-    if (e < y.d.length - 1)
-      return new Ctor(NaN);
-    if ((y.d[e] & 1) == 0)
-      s = 1;
-    if (x.e == 0 && x.d[0] == 1 && x.d.length == 1) {
-      x.s = s;
-      return x;
-    }
-  }
-  k = mathpow(+x, yn);
-  e = k == 0 || !isFinite(k) ? mathfloor(yn * (Math.log("0." + digitsToString(x.d)) / Math.LN10 + x.e + 1)) : new Ctor(k + "").e;
-  if (e > Ctor.maxE + 1 || e < Ctor.minE - 1)
-    return new Ctor(e > 0 ? s / 0 : 0);
-  external = false;
-  Ctor.rounding = x.s = 1;
-  k = Math.min(12, (e + "").length);
-  r = naturalExponential(y.times(naturalLogarithm(x, pr + k)), pr);
-  if (r.d) {
-    r = finalise(r, pr + 5, 1);
-    if (checkRoundingDigits(r.d, pr, rm)) {
-      e = pr + 10;
-      r = finalise(naturalExponential(y.times(naturalLogarithm(x, e + k)), e), e + 5, 1);
-      if (+digitsToString(r.d).slice(pr + 1, pr + 15) + 1 == 1e14) {
-        r = finalise(r, pr + 1, 0);
-      }
-    }
-  }
-  r.s = s;
-  external = true;
-  Ctor.rounding = rm;
-  return finalise(r, pr, rm);
-};
-P.toPrecision = function(sd, rm) {
-  var str, x = this, Ctor = x.constructor;
-  if (sd === void 0) {
-    str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
-  } else {
-    checkInt32(sd, 1, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-    x = finalise(new Ctor(x), sd, rm);
-    str = finiteToString(x, sd <= x.e || x.e <= Ctor.toExpNeg, sd);
-  }
-  return x.isNeg() && !x.isZero() ? "-" + str : str;
-};
-P.toSignificantDigits = P.toSD = function(sd, rm) {
-  var x = this, Ctor = x.constructor;
-  if (sd === void 0) {
-    sd = Ctor.precision;
-    rm = Ctor.rounding;
-  } else {
-    checkInt32(sd, 1, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-  }
-  return finalise(new Ctor(x), sd, rm);
-};
-P.toString = function() {
-  var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
-  return x.isNeg() && !x.isZero() ? "-" + str : str;
-};
-P.truncated = P.trunc = function() {
-  return finalise(new this.constructor(this), this.e + 1, 1);
-};
-P.valueOf = P.toJSON = function() {
-  var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
-  return x.isNeg() ? "-" + str : str;
-};
-function digitsToString(d) {
-  var i, k, ws, indexOfLastWord = d.length - 1, str = "", w = d[0];
-  if (indexOfLastWord > 0) {
-    str += w;
-    for (i = 1; i < indexOfLastWord; i++) {
-      ws = d[i] + "";
-      k = LOG_BASE - ws.length;
-      if (k)
-        str += getZeroString(k);
-      str += ws;
-    }
-    w = d[i];
-    ws = w + "";
-    k = LOG_BASE - ws.length;
-    if (k)
-      str += getZeroString(k);
-  } else if (w === 0) {
-    return "0";
-  }
-  for (; w % 10 === 0; )
-    w /= 10;
-  return str + w;
-}
-__name(digitsToString, "digitsToString");
-function checkInt32(i, min2, max2) {
-  if (i !== ~~i || i < min2 || i > max2) {
-    throw Error(invalidArgument + i);
-  }
-}
-__name(checkInt32, "checkInt32");
-function checkRoundingDigits(d, i, rm, repeating) {
-  var di, k, r, rd;
-  for (k = d[0]; k >= 10; k /= 10)
-    --i;
-  if (--i < 0) {
-    i += LOG_BASE;
-    di = 0;
-  } else {
-    di = Math.ceil((i + 1) / LOG_BASE);
-    i %= LOG_BASE;
-  }
-  k = mathpow(10, LOG_BASE - i);
-  rd = d[di] % k | 0;
-  if (repeating == null) {
-    if (i < 3) {
-      if (i == 0)
-        rd = rd / 100 | 0;
-      else if (i == 1)
-        rd = rd / 10 | 0;
-      r = rm < 4 && rd == 99999 || rm > 3 && rd == 49999 || rd == 5e4 || rd == 0;
-    } else {
-      r = (rm < 4 && rd + 1 == k || rm > 3 && rd + 1 == k / 2) && (d[di + 1] / k / 100 | 0) == mathpow(10, i - 2) - 1 || (rd == k / 2 || rd == 0) && (d[di + 1] / k / 100 | 0) == 0;
-    }
-  } else {
-    if (i < 4) {
-      if (i == 0)
-        rd = rd / 1e3 | 0;
-      else if (i == 1)
-        rd = rd / 100 | 0;
-      else if (i == 2)
-        rd = rd / 10 | 0;
-      r = (repeating || rm < 4) && rd == 9999 || !repeating && rm > 3 && rd == 4999;
-    } else {
-      r = ((repeating || rm < 4) && rd + 1 == k || !repeating && rm > 3 && rd + 1 == k / 2) && (d[di + 1] / k / 1e3 | 0) == mathpow(10, i - 3) - 1;
-    }
-  }
-  return r;
-}
-__name(checkRoundingDigits, "checkRoundingDigits");
-function convertBase(str, baseIn, baseOut) {
-  var j, arr = [0], arrL, i = 0, strL = str.length;
-  for (; i < strL; ) {
-    for (arrL = arr.length; arrL--; )
-      arr[arrL] *= baseIn;
-    arr[0] += NUMERALS.indexOf(str.charAt(i++));
-    for (j = 0; j < arr.length; j++) {
-      if (arr[j] > baseOut - 1) {
-        if (arr[j + 1] === void 0)
-          arr[j + 1] = 0;
-        arr[j + 1] += arr[j] / baseOut | 0;
-        arr[j] %= baseOut;
-      }
-    }
-  }
-  return arr.reverse();
-}
-__name(convertBase, "convertBase");
-function cosine(Ctor, x) {
-  var k, len, y;
-  if (x.isZero())
-    return x;
-  len = x.d.length;
-  if (len < 32) {
-    k = Math.ceil(len / 3);
-    y = (1 / tinyPow(4, k)).toString();
-  } else {
-    k = 16;
-    y = "2.3283064365386962890625e-10";
-  }
-  Ctor.precision += k;
-  x = taylorSeries(Ctor, 1, x.times(y), new Ctor(1));
-  for (var i = k; i--; ) {
-    var cos2x = x.times(x);
-    x = cos2x.times(cos2x).minus(cos2x).times(8).plus(1);
-  }
-  Ctor.precision -= k;
-  return x;
-}
-__name(cosine, "cosine");
-var divide = function() {
-  function multiplyInteger(x, k, base) {
-    var temp, carry = 0, i = x.length;
-    for (x = x.slice(); i--; ) {
-      temp = x[i] * k + carry;
-      x[i] = temp % base | 0;
-      carry = temp / base | 0;
-    }
-    if (carry)
-      x.unshift(carry);
-    return x;
-  }
-  __name(multiplyInteger, "multiplyInteger");
-  function compare(a, b, aL, bL) {
-    var i, r;
-    if (aL != bL) {
-      r = aL > bL ? 1 : -1;
-    } else {
-      for (i = r = 0; i < aL; i++) {
-        if (a[i] != b[i]) {
-          r = a[i] > b[i] ? 1 : -1;
-          break;
-        }
-      }
-    }
-    return r;
-  }
-  __name(compare, "compare");
-  function subtract(a, b, aL, base) {
-    var i = 0;
-    for (; aL--; ) {
-      a[aL] -= i;
-      i = a[aL] < b[aL] ? 1 : 0;
-      a[aL] = i * base + a[aL] - b[aL];
-    }
-    for (; !a[0] && a.length > 1; )
-      a.shift();
-  }
-  __name(subtract, "subtract");
-  return function(x, y, pr, rm, dp, base) {
-    var cmp, e, i, k, logBase, more, prod, prodL, q, qd, rem, remL, rem0, sd, t, xi, xL, yd0, yL, yz, Ctor = x.constructor, sign2 = x.s == y.s ? 1 : -1, xd = x.d, yd = y.d;
-    if (!xd || !xd[0] || !yd || !yd[0]) {
-      return new Ctor(
-        !x.s || !y.s || (xd ? yd && xd[0] == yd[0] : !yd) ? NaN : xd && xd[0] == 0 || !yd ? sign2 * 0 : sign2 / 0
-      );
-    }
-    if (base) {
-      logBase = 1;
-      e = x.e - y.e;
-    } else {
-      base = BASE;
-      logBase = LOG_BASE;
-      e = mathfloor(x.e / logBase) - mathfloor(y.e / logBase);
-    }
-    yL = yd.length;
-    xL = xd.length;
-    q = new Ctor(sign2);
-    qd = q.d = [];
-    for (i = 0; yd[i] == (xd[i] || 0); i++)
-      ;
-    if (yd[i] > (xd[i] || 0))
-      e--;
-    if (pr == null) {
-      sd = pr = Ctor.precision;
-      rm = Ctor.rounding;
-    } else if (dp) {
-      sd = pr + (x.e - y.e) + 1;
-    } else {
-      sd = pr;
-    }
-    if (sd < 0) {
-      qd.push(1);
-      more = true;
-    } else {
-      sd = sd / logBase + 2 | 0;
-      i = 0;
-      if (yL == 1) {
-        k = 0;
-        yd = yd[0];
-        sd++;
-        for (; (i < xL || k) && sd--; i++) {
-          t = k * base + (xd[i] || 0);
-          qd[i] = t / yd | 0;
-          k = t % yd | 0;
-        }
-        more = k || i < xL;
-      } else {
-        k = base / (yd[0] + 1) | 0;
-        if (k > 1) {
-          yd = multiplyInteger(yd, k, base);
-          xd = multiplyInteger(xd, k, base);
-          yL = yd.length;
-          xL = xd.length;
-        }
-        xi = yL;
-        rem = xd.slice(0, yL);
-        remL = rem.length;
-        for (; remL < yL; )
-          rem[remL++] = 0;
-        yz = yd.slice();
-        yz.unshift(0);
-        yd0 = yd[0];
-        if (yd[1] >= base / 2)
-          ++yd0;
-        do {
-          k = 0;
-          cmp = compare(yd, rem, yL, remL);
-          if (cmp < 0) {
-            rem0 = rem[0];
-            if (yL != remL)
-              rem0 = rem0 * base + (rem[1] || 0);
-            k = rem0 / yd0 | 0;
-            if (k > 1) {
-              if (k >= base)
-                k = base - 1;
-              prod = multiplyInteger(yd, k, base);
-              prodL = prod.length;
-              remL = rem.length;
-              cmp = compare(prod, rem, prodL, remL);
-              if (cmp == 1) {
-                k--;
-                subtract(prod, yL < prodL ? yz : yd, prodL, base);
-              }
-            } else {
-              if (k == 0)
-                cmp = k = 1;
-              prod = yd.slice();
-            }
-            prodL = prod.length;
-            if (prodL < remL)
-              prod.unshift(0);
-            subtract(rem, prod, remL, base);
-            if (cmp == -1) {
-              remL = rem.length;
-              cmp = compare(yd, rem, yL, remL);
-              if (cmp < 1) {
-                k++;
-                subtract(rem, yL < remL ? yz : yd, remL, base);
-              }
-            }
-            remL = rem.length;
-          } else if (cmp === 0) {
-            k++;
-            rem = [0];
-          }
-          qd[i++] = k;
-          if (cmp && rem[0]) {
-            rem[remL++] = xd[xi] || 0;
-          } else {
-            rem = [xd[xi]];
-            remL = 1;
-          }
-        } while ((xi++ < xL || rem[0] !== void 0) && sd--);
-        more = rem[0] !== void 0;
-      }
-      if (!qd[0])
-        qd.shift();
-    }
-    if (logBase == 1) {
-      q.e = e;
-      inexact = more;
-    } else {
-      for (i = 1, k = qd[0]; k >= 10; k /= 10)
-        i++;
-      q.e = i + e * logBase - 1;
-      finalise(q, dp ? pr + q.e + 1 : pr, rm, more);
-    }
-    return q;
-  };
-}();
-function finalise(x, sd, rm, isTruncated) {
-  var digits, i, j, k, rd, roundUp, w, xd, xdi, Ctor = x.constructor;
-  out:
-    if (sd != null) {
-      xd = x.d;
-      if (!xd)
-        return x;
-      for (digits = 1, k = xd[0]; k >= 10; k /= 10)
-        digits++;
-      i = sd - digits;
-      if (i < 0) {
-        i += LOG_BASE;
-        j = sd;
-        w = xd[xdi = 0];
-        rd = w / mathpow(10, digits - j - 1) % 10 | 0;
-      } else {
-        xdi = Math.ceil((i + 1) / LOG_BASE);
-        k = xd.length;
-        if (xdi >= k) {
-          if (isTruncated) {
-            for (; k++ <= xdi; )
-              xd.push(0);
-            w = rd = 0;
-            digits = 1;
-            i %= LOG_BASE;
-            j = i - LOG_BASE + 1;
-          } else {
-            break out;
-          }
-        } else {
-          w = k = xd[xdi];
-          for (digits = 1; k >= 10; k /= 10)
-            digits++;
-          i %= LOG_BASE;
-          j = i - LOG_BASE + digits;
-          rd = j < 0 ? 0 : w / mathpow(10, digits - j - 1) % 10 | 0;
-        }
-      }
-      isTruncated = isTruncated || sd < 0 || xd[xdi + 1] !== void 0 || (j < 0 ? w : w % mathpow(10, digits - j - 1));
-      roundUp = rm < 4 ? (rd || isTruncated) && (rm == 0 || rm == (x.s < 0 ? 3 : 2)) : rd > 5 || rd == 5 && (rm == 4 || isTruncated || rm == 6 && (i > 0 ? j > 0 ? w / mathpow(10, digits - j) : 0 : xd[xdi - 1]) % 10 & 1 || rm == (x.s < 0 ? 8 : 7));
-      if (sd < 1 || !xd[0]) {
-        xd.length = 0;
-        if (roundUp) {
-          sd -= x.e + 1;
-          xd[0] = mathpow(10, (LOG_BASE - sd % LOG_BASE) % LOG_BASE);
-          x.e = -sd || 0;
-        } else {
-          xd[0] = x.e = 0;
-        }
-        return x;
-      }
-      if (i == 0) {
-        xd.length = xdi;
-        k = 1;
-        xdi--;
-      } else {
-        xd.length = xdi + 1;
-        k = mathpow(10, LOG_BASE - i);
-        xd[xdi] = j > 0 ? (w / mathpow(10, digits - j) % mathpow(10, j) | 0) * k : 0;
-      }
-      if (roundUp) {
-        for (; ; ) {
-          if (xdi == 0) {
-            for (i = 1, j = xd[0]; j >= 10; j /= 10)
-              i++;
-            j = xd[0] += k;
-            for (k = 1; j >= 10; j /= 10)
-              k++;
-            if (i != k) {
-              x.e++;
-              if (xd[0] == BASE)
-                xd[0] = 1;
-            }
-            break;
-          } else {
-            xd[xdi] += k;
-            if (xd[xdi] != BASE)
-              break;
-            xd[xdi--] = 0;
-            k = 1;
-          }
-        }
-      }
-      for (i = xd.length; xd[--i] === 0; )
-        xd.pop();
-    }
-  if (external) {
-    if (x.e > Ctor.maxE) {
-      x.d = null;
-      x.e = NaN;
-    } else if (x.e < Ctor.minE) {
-      x.e = 0;
-      x.d = [0];
-    }
-  }
-  return x;
-}
-__name(finalise, "finalise");
-function finiteToString(x, isExp, sd) {
-  if (!x.isFinite())
-    return nonFiniteToString(x);
-  var k, e = x.e, str = digitsToString(x.d), len = str.length;
-  if (isExp) {
-    if (sd && (k = sd - len) > 0) {
-      str = str.charAt(0) + "." + str.slice(1) + getZeroString(k);
-    } else if (len > 1) {
-      str = str.charAt(0) + "." + str.slice(1);
-    }
-    str = str + (x.e < 0 ? "e" : "e+") + x.e;
-  } else if (e < 0) {
-    str = "0." + getZeroString(-e - 1) + str;
-    if (sd && (k = sd - len) > 0)
-      str += getZeroString(k);
-  } else if (e >= len) {
-    str += getZeroString(e + 1 - len);
-    if (sd && (k = sd - e - 1) > 0)
-      str = str + "." + getZeroString(k);
-  } else {
-    if ((k = e + 1) < len)
-      str = str.slice(0, k) + "." + str.slice(k);
-    if (sd && (k = sd - len) > 0) {
-      if (e + 1 === len)
-        str += ".";
-      str += getZeroString(k);
-    }
-  }
-  return str;
-}
-__name(finiteToString, "finiteToString");
-function getBase10Exponent(digits, e) {
-  var w = digits[0];
-  for (e *= LOG_BASE; w >= 10; w /= 10)
-    e++;
-  return e;
-}
-__name(getBase10Exponent, "getBase10Exponent");
-function getLn10(Ctor, sd, pr) {
-  if (sd > LN10_PRECISION) {
-    external = true;
-    if (pr)
-      Ctor.precision = pr;
-    throw Error(precisionLimitExceeded);
-  }
-  return finalise(new Ctor(LN10), sd, 1, true);
-}
-__name(getLn10, "getLn10");
-function getPi(Ctor, sd, rm) {
-  if (sd > PI_PRECISION)
-    throw Error(precisionLimitExceeded);
-  return finalise(new Ctor(PI), sd, rm, true);
-}
-__name(getPi, "getPi");
-function getPrecision(digits) {
-  var w = digits.length - 1, len = w * LOG_BASE + 1;
-  w = digits[w];
-  if (w) {
-    for (; w % 10 == 0; w /= 10)
-      len--;
-    for (w = digits[0]; w >= 10; w /= 10)
-      len++;
-  }
-  return len;
-}
-__name(getPrecision, "getPrecision");
-function getZeroString(k) {
-  var zs = "";
-  for (; k--; )
-    zs += "0";
-  return zs;
-}
-__name(getZeroString, "getZeroString");
-function intPow(Ctor, x, n, pr) {
-  var isTruncated, r = new Ctor(1), k = Math.ceil(pr / LOG_BASE + 4);
-  external = false;
-  for (; ; ) {
-    if (n % 2) {
-      r = r.times(x);
-      if (truncate(r.d, k))
-        isTruncated = true;
-    }
-    n = mathfloor(n / 2);
-    if (n === 0) {
-      n = r.d.length - 1;
-      if (isTruncated && r.d[n] === 0)
-        ++r.d[n];
-      break;
-    }
-    x = x.times(x);
-    truncate(x.d, k);
-  }
-  external = true;
-  return r;
-}
-__name(intPow, "intPow");
-function isOdd(n) {
-  return n.d[n.d.length - 1] & 1;
-}
-__name(isOdd, "isOdd");
-function maxOrMin(Ctor, args, ltgt) {
-  var y, x = new Ctor(args[0]), i = 0;
-  for (; ++i < args.length; ) {
-    y = new Ctor(args[i]);
-    if (!y.s) {
-      x = y;
-      break;
-    } else if (x[ltgt](y)) {
-      x = y;
-    }
-  }
-  return x;
-}
-__name(maxOrMin, "maxOrMin");
-function naturalExponential(x, sd) {
-  var denominator, guard, j, pow2, sum3, t, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
-  if (!x.d || !x.d[0] || x.e > 17) {
-    return new Ctor(x.d ? !x.d[0] ? 1 : x.s < 0 ? 0 : 1 / 0 : x.s ? x.s < 0 ? 0 : x : 0 / 0);
-  }
-  if (sd == null) {
-    external = false;
-    wpr = pr;
-  } else {
-    wpr = sd;
-  }
-  t = new Ctor(0.03125);
-  while (x.e > -2) {
-    x = x.times(t);
-    k += 5;
-  }
-  guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
-  wpr += guard;
-  denominator = pow2 = sum3 = new Ctor(1);
-  Ctor.precision = wpr;
-  for (; ; ) {
-    pow2 = finalise(pow2.times(x), wpr, 1);
-    denominator = denominator.times(++i);
-    t = sum3.plus(divide(pow2, denominator, wpr, 1));
-    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
-      j = k;
-      while (j--)
-        sum3 = finalise(sum3.times(sum3), wpr, 1);
-      if (sd == null) {
-        if (rep < 3 && checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
-          Ctor.precision = wpr += 10;
-          denominator = pow2 = t = new Ctor(1);
-          i = 0;
-          rep++;
-        } else {
-          return finalise(sum3, Ctor.precision = pr, rm, external = true);
-        }
-      } else {
-        Ctor.precision = pr;
-        return sum3;
-      }
-    }
-    sum3 = t;
-  }
-}
-__name(naturalExponential, "naturalExponential");
-function naturalLogarithm(y, sd) {
-  var c, c0, denominator, e, numerator, rep, sum3, t, wpr, x1, x2, n = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
-  if (x.s < 0 || !xd || !xd[0] || !x.e && xd[0] == 1 && xd.length == 1) {
-    return new Ctor(xd && !xd[0] ? -1 / 0 : x.s != 1 ? NaN : xd ? 0 : x);
-  }
-  if (sd == null) {
-    external = false;
-    wpr = pr;
-  } else {
-    wpr = sd;
-  }
-  Ctor.precision = wpr += guard;
-  c = digitsToString(xd);
-  c0 = c.charAt(0);
-  if (Math.abs(e = x.e) < 15e14) {
-    while (c0 < 7 && c0 != 1 || c0 == 1 && c.charAt(1) > 3) {
-      x = x.times(y);
-      c = digitsToString(x.d);
-      c0 = c.charAt(0);
-      n++;
-    }
-    e = x.e;
-    if (c0 > 1) {
-      x = new Ctor("0." + c);
-      e++;
-    } else {
-      x = new Ctor(c0 + "." + c.slice(1));
-    }
-  } else {
-    t = getLn10(Ctor, wpr + 2, pr).times(e + "");
-    x = naturalLogarithm(new Ctor(c0 + "." + c.slice(1)), wpr - guard).plus(t);
-    Ctor.precision = pr;
-    return sd == null ? finalise(x, pr, rm, external = true) : x;
-  }
-  x1 = x;
-  sum3 = numerator = x = divide(x.minus(1), x.plus(1), wpr, 1);
-  x2 = finalise(x.times(x), wpr, 1);
-  denominator = 3;
-  for (; ; ) {
-    numerator = finalise(numerator.times(x2), wpr, 1);
-    t = sum3.plus(divide(numerator, new Ctor(denominator), wpr, 1));
-    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
-      sum3 = sum3.times(2);
-      if (e !== 0)
-        sum3 = sum3.plus(getLn10(Ctor, wpr + 2, pr).times(e + ""));
-      sum3 = divide(sum3, new Ctor(n), wpr, 1);
-      if (sd == null) {
-        if (checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
-          Ctor.precision = wpr += guard;
-          t = numerator = x = divide(x1.minus(1), x1.plus(1), wpr, 1);
-          x2 = finalise(x.times(x), wpr, 1);
-          denominator = rep = 1;
-        } else {
-          return finalise(sum3, Ctor.precision = pr, rm, external = true);
-        }
-      } else {
-        Ctor.precision = pr;
-        return sum3;
-      }
-    }
-    sum3 = t;
-    denominator += 2;
-  }
-}
-__name(naturalLogarithm, "naturalLogarithm");
-function nonFiniteToString(x) {
-  return String(x.s * x.s / 0);
-}
-__name(nonFiniteToString, "nonFiniteToString");
-function parseDecimal(x, str) {
-  var e, i, len;
-  if ((e = str.indexOf(".")) > -1)
-    str = str.replace(".", "");
-  if ((i = str.search(/e/i)) > 0) {
-    if (e < 0)
-      e = i;
-    e += +str.slice(i + 1);
-    str = str.substring(0, i);
-  } else if (e < 0) {
-    e = str.length;
-  }
-  for (i = 0; str.charCodeAt(i) === 48; i++)
-    ;
-  for (len = str.length; str.charCodeAt(len - 1) === 48; --len)
-    ;
-  str = str.slice(i, len);
-  if (str) {
-    len -= i;
-    x.e = e = e - i - 1;
-    x.d = [];
-    i = (e + 1) % LOG_BASE;
-    if (e < 0)
-      i += LOG_BASE;
-    if (i < len) {
-      if (i)
-        x.d.push(+str.slice(0, i));
-      for (len -= LOG_BASE; i < len; )
-        x.d.push(+str.slice(i, i += LOG_BASE));
-      str = str.slice(i);
-      i = LOG_BASE - str.length;
-    } else {
-      i -= len;
-    }
-    for (; i--; )
-      str += "0";
-    x.d.push(+str);
-    if (external) {
-      if (x.e > x.constructor.maxE) {
-        x.d = null;
-        x.e = NaN;
-      } else if (x.e < x.constructor.minE) {
-        x.e = 0;
-        x.d = [0];
-      }
-    }
-  } else {
-    x.e = 0;
-    x.d = [0];
-  }
-  return x;
-}
-__name(parseDecimal, "parseDecimal");
-function parseOther(x, str) {
-  var base, Ctor, divisor, i, isFloat, len, p, xd, xe;
-  if (str.indexOf("_") > -1) {
-    str = str.replace(/(\d)_(?=\d)/g, "$1");
-    if (isDecimal.test(str))
-      return parseDecimal(x, str);
-  } else if (str === "Infinity" || str === "NaN") {
-    if (!+str)
-      x.s = NaN;
-    x.e = NaN;
-    x.d = null;
-    return x;
-  }
-  if (isHex.test(str)) {
-    base = 16;
-    str = str.toLowerCase();
-  } else if (isBinary.test(str)) {
-    base = 2;
-  } else if (isOctal.test(str)) {
-    base = 8;
-  } else {
-    throw Error(invalidArgument + str);
-  }
-  i = str.search(/p/i);
-  if (i > 0) {
-    p = +str.slice(i + 1);
-    str = str.substring(2, i);
-  } else {
-    str = str.slice(2);
-  }
-  i = str.indexOf(".");
-  isFloat = i >= 0;
-  Ctor = x.constructor;
-  if (isFloat) {
-    str = str.replace(".", "");
-    len = str.length;
-    i = len - i;
-    divisor = intPow(Ctor, new Ctor(base), i, i * 2);
-  }
-  xd = convertBase(str, base, BASE);
-  xe = xd.length - 1;
-  for (i = xe; xd[i] === 0; --i)
-    xd.pop();
-  if (i < 0)
-    return new Ctor(x.s * 0);
-  x.e = getBase10Exponent(xd, xe);
-  x.d = xd;
-  external = false;
-  if (isFloat)
-    x = divide(x, divisor, len * 4);
-  if (p)
-    x = x.times(Math.abs(p) < 54 ? mathpow(2, p) : Decimal.pow(2, p));
-  external = true;
-  return x;
-}
-__name(parseOther, "parseOther");
-function sine(Ctor, x) {
-  var k, len = x.d.length;
-  if (len < 3) {
-    return x.isZero() ? x : taylorSeries(Ctor, 2, x, x);
-  }
-  k = 1.4 * Math.sqrt(len);
-  k = k > 16 ? 16 : k | 0;
-  x = x.times(1 / tinyPow(5, k));
-  x = taylorSeries(Ctor, 2, x, x);
-  var sin2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
-  for (; k--; ) {
-    sin2_x = x.times(x);
-    x = x.times(d5.plus(sin2_x.times(d16.times(sin2_x).minus(d20))));
-  }
-  return x;
-}
-__name(sine, "sine");
-function taylorSeries(Ctor, n, x, y, isHyperbolic) {
-  var j, t, u, x2, i = 1, pr = Ctor.precision, k = Math.ceil(pr / LOG_BASE);
-  external = false;
-  x2 = x.times(x);
-  u = new Ctor(y);
-  for (; ; ) {
-    t = divide(u.times(x2), new Ctor(n++ * n++), pr, 1);
-    u = isHyperbolic ? y.plus(t) : y.minus(t);
-    y = divide(t.times(x2), new Ctor(n++ * n++), pr, 1);
-    t = u.plus(y);
-    if (t.d[k] !== void 0) {
-      for (j = k; t.d[j] === u.d[j] && j--; )
-        ;
-      if (j == -1)
-        break;
-    }
-    j = u;
-    u = y;
-    y = t;
-    t = j;
-    i++;
-  }
-  external = true;
-  t.d.length = k + 1;
-  return t;
-}
-__name(taylorSeries, "taylorSeries");
-function tinyPow(b, e) {
-  var n = b;
-  while (--e)
-    n *= b;
-  return n;
-}
-__name(tinyPow, "tinyPow");
-function toLessThanHalfPi(Ctor, x) {
-  var t, isNeg = x.s < 0, pi = getPi(Ctor, Ctor.precision, 1), halfPi = pi.times(0.5);
-  x = x.abs();
-  if (x.lte(halfPi)) {
-    quadrant = isNeg ? 4 : 1;
-    return x;
-  }
-  t = x.divToInt(pi);
-  if (t.isZero()) {
-    quadrant = isNeg ? 3 : 2;
-  } else {
-    x = x.minus(t.times(pi));
-    if (x.lte(halfPi)) {
-      quadrant = isOdd(t) ? isNeg ? 2 : 3 : isNeg ? 4 : 1;
-      return x;
-    }
-    quadrant = isOdd(t) ? isNeg ? 1 : 4 : isNeg ? 3 : 2;
-  }
-  return x.minus(pi).abs();
-}
-__name(toLessThanHalfPi, "toLessThanHalfPi");
-function toStringBinary(x, baseOut, sd, rm) {
-  var base, e, i, k, len, roundUp, str, xd, y, Ctor = x.constructor, isExp = sd !== void 0;
-  if (isExp) {
-    checkInt32(sd, 1, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-  } else {
-    sd = Ctor.precision;
-    rm = Ctor.rounding;
-  }
-  if (!x.isFinite()) {
-    str = nonFiniteToString(x);
-  } else {
-    str = finiteToString(x);
-    i = str.indexOf(".");
-    if (isExp) {
-      base = 2;
-      if (baseOut == 16) {
-        sd = sd * 4 - 3;
-      } else if (baseOut == 8) {
-        sd = sd * 3 - 2;
-      }
-    } else {
-      base = baseOut;
-    }
-    if (i >= 0) {
-      str = str.replace(".", "");
-      y = new Ctor(1);
-      y.e = str.length - i;
-      y.d = convertBase(finiteToString(y), 10, base);
-      y.e = y.d.length;
-    }
-    xd = convertBase(str, 10, base);
-    e = len = xd.length;
-    for (; xd[--len] == 0; )
-      xd.pop();
-    if (!xd[0]) {
-      str = isExp ? "0p+0" : "0";
-    } else {
-      if (i < 0) {
-        e--;
-      } else {
-        x = new Ctor(x);
-        x.d = xd;
-        x.e = e;
-        x = divide(x, y, sd, rm, 0, base);
-        xd = x.d;
-        e = x.e;
-        roundUp = inexact;
-      }
-      i = xd[sd];
-      k = base / 2;
-      roundUp = roundUp || xd[sd + 1] !== void 0;
-      roundUp = rm < 4 ? (i !== void 0 || roundUp) && (rm === 0 || rm === (x.s < 0 ? 3 : 2)) : i > k || i === k && (rm === 4 || roundUp || rm === 6 && xd[sd - 1] & 1 || rm === (x.s < 0 ? 8 : 7));
-      xd.length = sd;
-      if (roundUp) {
-        for (; ++xd[--sd] > base - 1; ) {
-          xd[sd] = 0;
-          if (!sd) {
-            ++e;
-            xd.unshift(1);
-          }
-        }
-      }
-      for (len = xd.length; !xd[len - 1]; --len)
-        ;
-      for (i = 0, str = ""; i < len; i++)
-        str += NUMERALS.charAt(xd[i]);
-      if (isExp) {
-        if (len > 1) {
-          if (baseOut == 16 || baseOut == 8) {
-            i = baseOut == 16 ? 4 : 3;
-            for (--len; len % i; len++)
-              str += "0";
-            xd = convertBase(str, base, baseOut);
-            for (len = xd.length; !xd[len - 1]; --len)
-              ;
-            for (i = 1, str = "1."; i < len; i++)
-              str += NUMERALS.charAt(xd[i]);
-          } else {
-            str = str.charAt(0) + "." + str.slice(1);
-          }
-        }
-        str = str + (e < 0 ? "p" : "p+") + e;
-      } else if (e < 0) {
-        for (; ++e; )
-          str = "0" + str;
-        str = "0." + str;
-      } else {
-        if (++e > len)
-          for (e -= len; e--; )
-            str += "0";
-        else if (e < len)
-          str = str.slice(0, e) + "." + str.slice(e);
-      }
-    }
-    str = (baseOut == 16 ? "0x" : baseOut == 2 ? "0b" : baseOut == 8 ? "0o" : "") + str;
-  }
-  return x.s < 0 ? "-" + str : str;
-}
-__name(toStringBinary, "toStringBinary");
-function truncate(arr, len) {
-  if (arr.length > len) {
-    arr.length = len;
-    return true;
-  }
-}
-__name(truncate, "truncate");
-function abs(x) {
-  return new this(x).abs();
-}
-__name(abs, "abs");
-function acos(x) {
-  return new this(x).acos();
-}
-__name(acos, "acos");
-function acosh(x) {
-  return new this(x).acosh();
-}
-__name(acosh, "acosh");
-function add(x, y) {
-  return new this(x).plus(y);
-}
-__name(add, "add");
-function asin(x) {
-  return new this(x).asin();
-}
-__name(asin, "asin");
-function asinh(x) {
-  return new this(x).asinh();
-}
-__name(asinh, "asinh");
-function atan(x) {
-  return new this(x).atan();
-}
-__name(atan, "atan");
-function atanh(x) {
-  return new this(x).atanh();
-}
-__name(atanh, "atanh");
-function atan2(y, x) {
-  y = new this(y);
-  x = new this(x);
-  var r, pr = this.precision, rm = this.rounding, wpr = pr + 4;
-  if (!y.s || !x.s) {
-    r = new this(NaN);
-  } else if (!y.d && !x.d) {
-    r = getPi(this, wpr, 1).times(x.s > 0 ? 0.25 : 0.75);
-    r.s = y.s;
-  } else if (!x.d || y.isZero()) {
-    r = x.s < 0 ? getPi(this, pr, rm) : new this(0);
-    r.s = y.s;
-  } else if (!y.d || x.isZero()) {
-    r = getPi(this, wpr, 1).times(0.5);
-    r.s = y.s;
-  } else if (x.s < 0) {
-    this.precision = wpr;
-    this.rounding = 1;
-    r = this.atan(divide(y, x, wpr, 1));
-    x = getPi(this, wpr, 1);
-    this.precision = pr;
-    this.rounding = rm;
-    r = y.s < 0 ? r.minus(x) : r.plus(x);
-  } else {
-    r = this.atan(divide(y, x, wpr, 1));
-  }
-  return r;
-}
-__name(atan2, "atan2");
-function cbrt(x) {
-  return new this(x).cbrt();
-}
-__name(cbrt, "cbrt");
-function ceil(x) {
-  return finalise(x = new this(x), x.e + 1, 2);
-}
-__name(ceil, "ceil");
-function clamp(x, min2, max2) {
-  return new this(x).clamp(min2, max2);
-}
-__name(clamp, "clamp");
-function config(obj) {
-  if (!obj || typeof obj !== "object")
-    throw Error(decimalError + "Object expected");
-  var i, p, v, useDefaults = obj.defaults === true, ps = [
-    "precision",
-    1,
-    MAX_DIGITS,
-    "rounding",
-    0,
-    8,
-    "toExpNeg",
-    -EXP_LIMIT,
-    0,
-    "toExpPos",
-    0,
-    EXP_LIMIT,
-    "maxE",
-    0,
-    EXP_LIMIT,
-    "minE",
-    -EXP_LIMIT,
-    0,
-    "modulo",
-    0,
-    9
-  ];
-  for (i = 0; i < ps.length; i += 3) {
-    if (p = ps[i], useDefaults)
-      this[p] = DEFAULTS[p];
-    if ((v = obj[p]) !== void 0) {
-      if (mathfloor(v) === v && v >= ps[i + 1] && v <= ps[i + 2])
-        this[p] = v;
-      else
-        throw Error(invalidArgument + p + ": " + v);
-    }
-  }
-  if (p = "crypto", useDefaults)
-    this[p] = DEFAULTS[p];
-  if ((v = obj[p]) !== void 0) {
-    if (v === true || v === false || v === 0 || v === 1) {
-      if (v) {
-        if (typeof crypto != "undefined" && crypto && (crypto.getRandomValues || crypto.randomBytes)) {
-          this[p] = true;
-        } else {
-          throw Error(cryptoUnavailable);
-        }
-      } else {
-        this[p] = false;
-      }
-    } else {
-      throw Error(invalidArgument + p + ": " + v);
-    }
-  }
-  return this;
-}
-__name(config, "config");
-function cos(x) {
-  return new this(x).cos();
-}
-__name(cos, "cos");
-function cosh(x) {
-  return new this(x).cosh();
-}
-__name(cosh, "cosh");
-function clone(obj) {
-  var i, p, ps;
-  function Decimal2(v) {
-    var e, i2, t, x = this;
-    if (!(x instanceof Decimal2))
-      return new Decimal2(v);
-    x.constructor = Decimal2;
-    if (isDecimalInstance(v)) {
-      x.s = v.s;
-      if (external) {
-        if (!v.d || v.e > Decimal2.maxE) {
-          x.e = NaN;
-          x.d = null;
-        } else if (v.e < Decimal2.minE) {
-          x.e = 0;
-          x.d = [0];
-        } else {
-          x.e = v.e;
-          x.d = v.d.slice();
-        }
-      } else {
-        x.e = v.e;
-        x.d = v.d ? v.d.slice() : v.d;
-      }
-      return;
-    }
-    t = typeof v;
-    if (t === "number") {
-      if (v === 0) {
-        x.s = 1 / v < 0 ? -1 : 1;
-        x.e = 0;
-        x.d = [0];
-        return;
-      }
-      if (v < 0) {
-        v = -v;
-        x.s = -1;
-      } else {
-        x.s = 1;
-      }
-      if (v === ~~v && v < 1e7) {
-        for (e = 0, i2 = v; i2 >= 10; i2 /= 10)
-          e++;
-        if (external) {
-          if (e > Decimal2.maxE) {
-            x.e = NaN;
-            x.d = null;
-          } else if (e < Decimal2.minE) {
-            x.e = 0;
-            x.d = [0];
-          } else {
-            x.e = e;
-            x.d = [v];
-          }
-        } else {
-          x.e = e;
-          x.d = [v];
-        }
-        return;
-      } else if (v * 0 !== 0) {
-        if (!v)
-          x.s = NaN;
-        x.e = NaN;
-        x.d = null;
-        return;
-      }
-      return parseDecimal(x, v.toString());
-    } else if (t !== "string") {
-      throw Error(invalidArgument + v);
-    }
-    if ((i2 = v.charCodeAt(0)) === 45) {
-      v = v.slice(1);
-      x.s = -1;
-    } else {
-      if (i2 === 43)
-        v = v.slice(1);
-      x.s = 1;
-    }
-    return isDecimal.test(v) ? parseDecimal(x, v) : parseOther(x, v);
-  }
-  __name(Decimal2, "Decimal");
-  Decimal2.prototype = P;
-  Decimal2.ROUND_UP = 0;
-  Decimal2.ROUND_DOWN = 1;
-  Decimal2.ROUND_CEIL = 2;
-  Decimal2.ROUND_FLOOR = 3;
-  Decimal2.ROUND_HALF_UP = 4;
-  Decimal2.ROUND_HALF_DOWN = 5;
-  Decimal2.ROUND_HALF_EVEN = 6;
-  Decimal2.ROUND_HALF_CEIL = 7;
-  Decimal2.ROUND_HALF_FLOOR = 8;
-  Decimal2.EUCLID = 9;
-  Decimal2.config = Decimal2.set = config;
-  Decimal2.clone = clone;
-  Decimal2.isDecimal = isDecimalInstance;
-  Decimal2.abs = abs;
-  Decimal2.acos = acos;
-  Decimal2.acosh = acosh;
-  Decimal2.add = add;
-  Decimal2.asin = asin;
-  Decimal2.asinh = asinh;
-  Decimal2.atan = atan;
-  Decimal2.atanh = atanh;
-  Decimal2.atan2 = atan2;
-  Decimal2.cbrt = cbrt;
-  Decimal2.ceil = ceil;
-  Decimal2.clamp = clamp;
-  Decimal2.cos = cos;
-  Decimal2.cosh = cosh;
-  Decimal2.div = div;
-  Decimal2.exp = exp;
-  Decimal2.floor = floor;
-  Decimal2.hypot = hypot;
-  Decimal2.ln = ln;
-  Decimal2.log = log;
-  Decimal2.log10 = log10;
-  Decimal2.log2 = log2;
-  Decimal2.max = max;
-  Decimal2.min = min;
-  Decimal2.mod = mod;
-  Decimal2.mul = mul;
-  Decimal2.pow = pow;
-  Decimal2.random = random;
-  Decimal2.round = round;
-  Decimal2.sign = sign;
-  Decimal2.sin = sin;
-  Decimal2.sinh = sinh;
-  Decimal2.sqrt = sqrt;
-  Decimal2.sub = sub;
-  Decimal2.sum = sum;
-  Decimal2.tan = tan;
-  Decimal2.tanh = tanh;
-  Decimal2.trunc = trunc;
-  if (obj === void 0)
-    obj = {};
-  if (obj) {
-    if (obj.defaults !== true) {
-      ps = ["precision", "rounding", "toExpNeg", "toExpPos", "maxE", "minE", "modulo", "crypto"];
-      for (i = 0; i < ps.length; )
-        if (!obj.hasOwnProperty(p = ps[i++]))
-          obj[p] = this[p];
-    }
-  }
-  Decimal2.config(obj);
-  return Decimal2;
-}
-__name(clone, "clone");
-function div(x, y) {
-  return new this(x).div(y);
-}
-__name(div, "div");
-function exp(x) {
-  return new this(x).exp();
-}
-__name(exp, "exp");
-function floor(x) {
-  return finalise(x = new this(x), x.e + 1, 3);
-}
-__name(floor, "floor");
-function hypot() {
-  var i, n, t = new this(0);
-  external = false;
-  for (i = 0; i < arguments.length; ) {
-    n = new this(arguments[i++]);
-    if (!n.d) {
-      if (n.s) {
-        external = true;
-        return new this(1 / 0);
-      }
-      t = n;
-    } else if (t.d) {
-      t = t.plus(n.times(n));
-    }
-  }
-  external = true;
-  return t.sqrt();
-}
-__name(hypot, "hypot");
-function isDecimalInstance(obj) {
-  return obj instanceof Decimal || obj && obj.toStringTag === tag || false;
-}
-__name(isDecimalInstance, "isDecimalInstance");
-function ln(x) {
-  return new this(x).ln();
-}
-__name(ln, "ln");
-function log(x, y) {
-  return new this(x).log(y);
-}
-__name(log, "log");
-function log2(x) {
-  return new this(x).log(2);
-}
-__name(log2, "log2");
-function log10(x) {
-  return new this(x).log(10);
-}
-__name(log10, "log10");
-function max() {
-  return maxOrMin(this, arguments, "lt");
-}
-__name(max, "max");
-function min() {
-  return maxOrMin(this, arguments, "gt");
-}
-__name(min, "min");
-function mod(x, y) {
-  return new this(x).mod(y);
-}
-__name(mod, "mod");
-function mul(x, y) {
-  return new this(x).mul(y);
-}
-__name(mul, "mul");
-function pow(x, y) {
-  return new this(x).pow(y);
-}
-__name(pow, "pow");
-function random(sd) {
-  var d, e, k, n, i = 0, r = new this(1), rd = [];
-  if (sd === void 0)
-    sd = this.precision;
-  else
-    checkInt32(sd, 1, MAX_DIGITS);
-  k = Math.ceil(sd / LOG_BASE);
-  if (!this.crypto) {
-    for (; i < k; )
-      rd[i++] = Math.random() * 1e7 | 0;
-  } else if (crypto.getRandomValues) {
-    d = crypto.getRandomValues(new Uint32Array(k));
-    for (; i < k; ) {
-      n = d[i];
-      if (n >= 429e7) {
-        d[i] = crypto.getRandomValues(new Uint32Array(1))[0];
-      } else {
-        rd[i++] = n % 1e7;
-      }
-    }
-  } else if (crypto.randomBytes) {
-    d = crypto.randomBytes(k *= 4);
-    for (; i < k; ) {
-      n = d[i] + (d[i + 1] << 8) + (d[i + 2] << 16) + ((d[i + 3] & 127) << 24);
-      if (n >= 214e7) {
-        crypto.randomBytes(4).copy(d, i);
-      } else {
-        rd.push(n % 1e7);
-        i += 4;
-      }
-    }
-    i = k / 4;
-  } else {
-    throw Error(cryptoUnavailable);
-  }
-  k = rd[--i];
-  sd %= LOG_BASE;
-  if (k && sd) {
-    n = mathpow(10, LOG_BASE - sd);
-    rd[i] = (k / n | 0) * n;
-  }
-  for (; rd[i] === 0; i--)
-    rd.pop();
-  if (i < 0) {
-    e = 0;
-    rd = [0];
-  } else {
-    e = -1;
-    for (; rd[0] === 0; e -= LOG_BASE)
-      rd.shift();
-    for (k = 1, n = rd[0]; n >= 10; n /= 10)
-      k++;
-    if (k < LOG_BASE)
-      e -= LOG_BASE - k;
-  }
-  r.e = e;
-  r.d = rd;
-  return r;
-}
-__name(random, "random");
-function round(x) {
-  return finalise(x = new this(x), x.e + 1, this.rounding);
-}
-__name(round, "round");
-function sign(x) {
-  x = new this(x);
-  return x.d ? x.d[0] ? x.s : 0 * x.s : x.s || NaN;
-}
-__name(sign, "sign");
-function sin(x) {
-  return new this(x).sin();
-}
-__name(sin, "sin");
-function sinh(x) {
-  return new this(x).sinh();
-}
-__name(sinh, "sinh");
-function sqrt(x) {
-  return new this(x).sqrt();
-}
-__name(sqrt, "sqrt");
-function sub(x, y) {
-  return new this(x).sub(y);
-}
-__name(sub, "sub");
-function sum() {
-  var i = 0, args = arguments, x = new this(args[i]);
-  external = false;
-  for (; x.s && ++i < args.length; )
-    x = x.plus(args[i]);
-  external = true;
-  return finalise(x, this.precision, this.rounding);
-}
-__name(sum, "sum");
-function tan(x) {
-  return new this(x).tan();
-}
-__name(tan, "tan");
-function tanh(x) {
-  return new this(x).tanh();
-}
-__name(tanh, "tanh");
-function trunc(x) {
-  return finalise(x = new this(x), x.e + 1, 1);
-}
-__name(trunc, "trunc");
-P[Symbol.for("nodejs.util.inspect.custom")] = P.toString;
-P[Symbol.toStringTag] = "Decimal";
-var Decimal = P.constructor = clone(DEFAULTS);
-LN10 = new Decimal(LN10);
-PI = new Decimal(PI);
-var decimal_default = Decimal;
-
-// src/runtime/utils/common.ts
-var import_indent_string = __toESM(require_indent_string());
-var import_js_levenshtein = __toESM(require_js_levenshtein());
-
-// src/runtime/core/model/FieldRef.ts
-var FieldRefImpl = class {
-  constructor(modelName, name, fieldType, isList) {
-    this.modelName = modelName;
-    this.name = name;
-    this.typeName = fieldType;
-    this.isList = isList;
-  }
-  _toGraphQLInputType() {
-    const prefix = this.isList ? `List${this.typeName}` : this.typeName;
-    return `${prefix}FieldRefInput<${this.modelName}>`;
-  }
-};
-__name(FieldRefImpl, "FieldRefImpl");
-
-// src/runtime/object-enums.ts
-var objectEnumNames = ["JsonNullValueInput", "NullableJsonNullValueInput", "JsonNullValueFilter"];
-var secret = Symbol();
-var representations = /* @__PURE__ */ new WeakMap();
-var ObjectEnumValue = class {
-  constructor(arg2) {
-    if (arg2 === secret) {
-      representations.set(this, `Prisma.${this._getName()}`);
-    } else {
-      representations.set(this, `new Prisma.${this._getNamespace()}.${this._getName()}()`);
-    }
-  }
-  _getName() {
-    return this.constructor.name;
-  }
-  toString() {
-    return representations.get(this);
-  }
-};
-__name(ObjectEnumValue, "ObjectEnumValue");
-var NullTypesEnumValue = class extends ObjectEnumValue {
-  _getNamespace() {
-    return "NullTypes";
-  }
-};
-__name(NullTypesEnumValue, "NullTypesEnumValue");
-var DbNull = class extends NullTypesEnumValue {
-};
-__name(DbNull, "DbNull");
-var JsonNull = class extends NullTypesEnumValue {
-};
-__name(JsonNull, "JsonNull");
-var AnyNull = class extends NullTypesEnumValue {
-};
-__name(AnyNull, "AnyNull");
-var objectEnumValues = {
-  classes: {
-    DbNull,
-    JsonNull,
-    AnyNull
-  },
-  instances: {
-    DbNull: new DbNull(secret),
-    JsonNull: new JsonNull(secret),
-    AnyNull: new AnyNull(secret)
-  }
-};
-
-// src/runtime/utils/decimalJsLike.ts
-function isDecimalJsLike(value) {
-  if (Decimal.isDecimal(value)) {
-    return true;
-  }
-  return value !== null && typeof value === "object" && typeof value.s === "number" && typeof value.e === "number" && Array.isArray(value.d);
-}
-__name(isDecimalJsLike, "isDecimalJsLike");
-function stringifyDecimalJsLike(value) {
-  if (Decimal.isDecimal(value)) {
-    return JSON.stringify(String(value));
-  }
-  const tmpDecimal = new Decimal(0);
-  tmpDecimal.d = value.d;
-  tmpDecimal.e = value.e;
-  tmpDecimal.s = value.s;
-  return JSON.stringify(String(tmpDecimal));
-}
-__name(stringifyDecimalJsLike, "stringifyDecimalJsLike");
-
-// src/runtime/utils/common.ts
-var keyBy = /* @__PURE__ */ __name((collection, prop) => {
-  const acc = {};
-  for (const obj of collection) {
-    const key = obj[prop];
-    acc[key] = obj;
-  }
-  return acc;
-}, "keyBy");
-var ScalarTypeTable = {
-  String: true,
-  Int: true,
-  Float: true,
-  Boolean: true,
-  Long: true,
-  DateTime: true,
-  ID: true,
-  UUID: true,
-  Json: true,
-  Bytes: true,
-  Decimal: true,
-  BigInt: true
-};
-var JSTypeToGraphQLType = {
-  string: "String",
-  boolean: "Boolean",
-  object: "Json",
-  symbol: "Symbol"
-};
-function stringifyGraphQLType(type) {
-  if (typeof type === "string") {
-    return type;
-  }
-  return type.name;
-}
-__name(stringifyGraphQLType, "stringifyGraphQLType");
-function wrapWithList(str, isList) {
-  if (isList) {
-    return `List<${str}>`;
-  }
-  return str;
-}
-__name(wrapWithList, "wrapWithList");
-var RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60))(\.\d{1,})?(([Z])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
-var UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-function getGraphQLType(value, inputType) {
-  const potentialType = inputType == null ? void 0 : inputType.type;
-  if (value === null) {
-    return "null";
-  }
-  if (Object.prototype.toString.call(value) === "[object BigInt]") {
-    return "BigInt";
-  }
-  if (decimal_default.isDecimal(value)) {
-    return "Decimal";
-  }
-  if (potentialType === "Decimal" && isDecimalJsLike(value)) {
-    return "Decimal";
-  }
-  if (Buffer.isBuffer(value)) {
-    return "Bytes";
-  }
-  if (isValidEnumValue(value, inputType)) {
-    return potentialType.name;
-  }
-  if (value instanceof ObjectEnumValue) {
-    return value._getName();
-  }
-  if (value instanceof FieldRefImpl) {
-    return value._toGraphQLInputType();
-  }
-  if (Array.isArray(value)) {
-    let scalarTypes = value.reduce((acc, val) => {
-      const type = getGraphQLType(val, inputType);
-      if (!acc.includes(type)) {
-        acc.push(type);
-      }
-      return acc;
-    }, []);
-    if (scalarTypes.includes("Float") && scalarTypes.includes("Int")) {
-      scalarTypes = ["Float"];
-    }
-    return `List<${scalarTypes.join(" | ")}>`;
-  }
-  const jsType = typeof value;
-  if (jsType === "number") {
-    if (Math.trunc(value) === value) {
-      return "Int";
-    } else {
-      return "Float";
-    }
-  }
-  if (Object.prototype.toString.call(value) === "[object Date]") {
-    return "DateTime";
-  }
-  if (jsType === "string") {
-    if (UUID_REGEX.test(value)) {
-      return "UUID";
-    }
-    const date = new Date(value);
-    if (date.toString() === "Invalid Date") {
-      return "String";
-    }
-    if (RFC_3339_REGEX.test(value)) {
-      return "DateTime";
-    }
-  }
-  return JSTypeToGraphQLType[jsType];
-}
-__name(getGraphQLType, "getGraphQLType");
-function isValidEnumValue(value, inputType) {
-  var _a3;
-  const enumType = inputType == null ? void 0 : inputType.type;
-  if (!isSchemaEnum(enumType)) {
-    return false;
-  }
-  if ((inputType == null ? void 0 : inputType.namespace) === "prisma" && objectEnumNames.includes(enumType.name)) {
-    const name = (_a3 = value == null ? void 0 : value.constructor) == null ? void 0 : _a3.name;
-    return typeof name === "string" && objectEnumValues.instances[name] === value && enumType.values.includes(name);
-  }
-  return typeof value === "string" && enumType.values.includes(value);
-}
-__name(isValidEnumValue, "isValidEnumValue");
-function getSuggestion(str, possibilities) {
-  const bestMatch = possibilities.reduce(
-    (acc, curr) => {
-      const distance = (0, import_js_levenshtein.default)(str, curr);
-      if (distance < acc.distance) {
-        return {
-          distance,
-          str: curr
-        };
-      }
-      return acc;
-    },
-    {
-      distance: Math.min(Math.floor(str.length) * 1.1, ...possibilities.map((p) => p.length * 3)),
-      str: null
-    }
-  );
-  return bestMatch.str;
-}
-__name(getSuggestion, "getSuggestion");
-function stringifyInputType(input, greenKeys = false) {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (input.values) {
-    return `enum ${input.name} {
-${(0, import_indent_string.default)(input.values.join(", "), 2)}
-}`;
-  } else {
-    const body = (0, import_indent_string.default)(
-      input.fields.map((arg2) => {
-        const key = `${arg2.name}`;
-        const str = `${greenKeys ? import_chalk.default.green(key) : key}${arg2.isRequired ? "" : "?"}: ${import_chalk.default.white(
-          arg2.inputTypes.map((argType) => {
-            return wrapWithList(
-              argIsInputType(argType.type) ? argType.type.name : stringifyGraphQLType(argType.type),
-              argType.isList
-            );
-          }).join(" | ")
-        )}`;
-        if (!arg2.isRequired) {
-          return import_chalk.default.dim(str);
-        }
-        return str;
-      }).join("\n"),
-      2
-    );
-    return `${import_chalk.default.dim("type")} ${import_chalk.default.bold.dim(input.name)} ${import_chalk.default.dim("{")}
-${body}
-${import_chalk.default.dim("}")}`;
-  }
-}
-__name(stringifyInputType, "stringifyInputType");
-function argIsInputType(arg2) {
-  if (typeof arg2 === "string") {
-    return false;
-  }
-  return true;
-}
-__name(argIsInputType, "argIsInputType");
-function getInputTypeName(input) {
-  if (typeof input === "string") {
-    if (input === "Null") {
-      return "null";
-    }
-    return input;
-  }
-  return input.name;
-}
-__name(getInputTypeName, "getInputTypeName");
-function getOutputTypeName(input) {
-  if (typeof input === "string") {
-    return input;
-  }
-  return input.name;
-}
-__name(getOutputTypeName, "getOutputTypeName");
-function inputTypeToJson(input, isRequired, nameOnly = false) {
-  if (typeof input === "string") {
-    if (input === "Null") {
-      return "null";
-    }
-    return input;
-  }
-  if (input.values) {
-    return input.values.join(" | ");
-  }
-  const inputType = input;
-  const showDeepType = isRequired && inputType.fields.every(
-    (arg2) => {
-      var _a3;
-      return arg2.inputTypes[0].location === "inputObjectTypes" || ((_a3 = arg2.inputTypes[1]) == null ? void 0 : _a3.location) === "inputObjectTypes";
-    }
-  );
-  if (nameOnly) {
-    return getInputTypeName(input);
-  }
-  return inputType.fields.reduce((acc, curr) => {
-    let str = "";
-    if (!showDeepType && !curr.isRequired) {
-      str = curr.inputTypes.map((argType) => getInputTypeName(argType.type)).join(" | ");
-    } else {
-      str = curr.inputTypes.map((argInputType) => inputTypeToJson(argInputType.type, curr.isRequired, true)).join(" | ");
-    }
-    acc[curr.name + (curr.isRequired ? "" : "?")] = str;
-    return acc;
-  }, {});
-}
-__name(inputTypeToJson, "inputTypeToJson");
-function unionBy(arr1, arr2, iteratee) {
-  const map = {};
-  for (const element of arr1) {
-    map[iteratee(element)] = element;
-  }
-  for (const element of arr2) {
-    const key = iteratee(element);
-    if (!map[key]) {
-      map[key] = element;
-    }
-  }
-  return Object.values(map);
-}
-__name(unionBy, "unionBy");
-function lowerCase(name) {
-  return name.substring(0, 1).toLowerCase() + name.substring(1);
-}
-__name(lowerCase, "lowerCase");
-function isGroupByOutputName(type) {
-  return type.endsWith("GroupByOutputType");
-}
-__name(isGroupByOutputName, "isGroupByOutputName");
-function isSchemaEnum(type) {
-  return typeof type === "object" && type !== null && typeof type.name === "string" && Array.isArray(type.values);
-}
-__name(isSchemaEnum, "isSchemaEnum");
-
-// src/runtime/dmmf.ts
-var DMMFDatamodelHelper = class {
-  constructor({ datamodel }) {
-    this.datamodel = datamodel;
-    this.datamodelEnumMap = this.getDatamodelEnumMap();
-    this.modelMap = this.getModelMap();
-    this.typeMap = this.getTypeMap();
-    this.typeAndModelMap = this.getTypeModelMap();
-  }
-  getDatamodelEnumMap() {
-    return keyBy(this.datamodel.enums, "name");
-  }
-  getModelMap() {
-    return { ...keyBy(this.datamodel.models, "name") };
-  }
-  getTypeMap() {
-    return { ...keyBy(this.datamodel.types, "name") };
-  }
-  getTypeModelMap() {
-    return { ...this.getTypeMap(), ...this.getModelMap() };
-  }
-};
-__name(DMMFDatamodelHelper, "DMMFDatamodelHelper");
-var DMMFMappingsHelper = class {
-  constructor({ mappings }) {
-    this.mappings = mappings;
-    this.mappingsMap = this.getMappingsMap();
-  }
-  getMappingsMap() {
-    return keyBy(this.mappings.modelOperations, "model");
-  }
-};
-__name(DMMFMappingsHelper, "DMMFMappingsHelper");
-var DMMFSchemaHelper = class {
-  constructor({ schema }) {
-    this.outputTypeToMergedOutputType = /* @__PURE__ */ __name((outputType) => {
-      return {
-        ...outputType,
-        fields: outputType.fields
-      };
-    }, "outputTypeToMergedOutputType");
-    this.schema = schema;
-    this.enumMap = this.getEnumMap();
-    this.queryType = this.getQueryType();
-    this.mutationType = this.getMutationType();
-    this.outputTypes = this.getOutputTypes();
-    this.outputTypeMap = this.getMergedOutputTypeMap();
-    this.resolveOutputTypes();
-    this.inputObjectTypes = this.schema.inputObjectTypes;
-    this.inputTypeMap = this.getInputTypeMap();
-    this.resolveInputTypes();
-    this.resolveFieldArgumentTypes();
-    this.queryType = this.outputTypeMap.Query;
-    this.mutationType = this.outputTypeMap.Mutation;
-    this.rootFieldMap = this.getRootFieldMap();
-  }
-  get [Symbol.toStringTag]() {
-    return "DMMFClass";
-  }
-  resolveOutputTypes() {
-    for (const type of this.outputTypes.model) {
-      for (const field of type.fields) {
-        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
-          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
-        }
-      }
-      type.fieldMap = keyBy(type.fields, "name");
-    }
-    for (const type of this.outputTypes.prisma) {
-      for (const field of type.fields) {
-        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
-          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
-        }
-      }
-      type.fieldMap = keyBy(type.fields, "name");
-    }
-  }
-  resolveInputTypes() {
-    const inputTypes = this.inputObjectTypes.prisma;
-    if (this.inputObjectTypes.model) {
-      inputTypes.push(...this.inputObjectTypes.model);
-    }
-    for (const type of inputTypes) {
-      for (const field of type.fields) {
-        for (const fieldInputType of field.inputTypes) {
-          const fieldType = fieldInputType.type;
-          if (typeof fieldType === "string" && !ScalarTypeTable[fieldType] && (this.inputTypeMap[fieldType] || this.enumMap[fieldType])) {
-            fieldInputType.type = this.inputTypeMap[fieldType] || this.enumMap[fieldType] || fieldType;
-          }
-        }
-      }
-      type.fieldMap = keyBy(type.fields, "name");
-    }
-  }
-  resolveFieldArgumentTypes() {
-    for (const type of this.outputTypes.prisma) {
-      for (const field of type.fields) {
-        for (const arg2 of field.args) {
-          for (const argInputType of arg2.inputTypes) {
-            const argType = argInputType.type;
-            if (typeof argType === "string" && !ScalarTypeTable[argType]) {
-              argInputType.type = this.inputTypeMap[argType] || this.enumMap[argType] || argType;
-            }
-          }
-        }
-      }
-    }
-    for (const type of this.outputTypes.model) {
-      for (const field of type.fields) {
-        for (const arg2 of field.args) {
-          for (const argInputType of arg2.inputTypes) {
-            const argType = argInputType.type;
-            if (typeof argType === "string" && !ScalarTypeTable[argType]) {
-              argInputType.type = this.inputTypeMap[argType] || this.enumMap[argType] || argInputType.type;
-            }
-          }
-        }
-      }
-    }
-  }
-  getQueryType() {
-    return this.schema.outputObjectTypes.prisma.find((t) => t.name === "Query");
-  }
-  getMutationType() {
-    return this.schema.outputObjectTypes.prisma.find((t) => t.name === "Mutation");
-  }
-  getOutputTypes() {
-    return {
-      model: this.schema.outputObjectTypes.model.map(this.outputTypeToMergedOutputType),
-      prisma: this.schema.outputObjectTypes.prisma.map(this.outputTypeToMergedOutputType)
-    };
-  }
-  getEnumMap() {
-    return {
-      ...keyBy(this.schema.enumTypes.prisma, "name"),
-      ...this.schema.enumTypes.model ? keyBy(this.schema.enumTypes.model, "name") : void 0
-    };
-  }
-  hasEnumInNamespace(enumName, namespace) {
-    var _a3;
-    return ((_a3 = this.schema.enumTypes[namespace]) == null ? void 0 : _a3.find((schemaEnum) => schemaEnum.name === enumName)) !== void 0;
-  }
-  getMergedOutputTypeMap() {
-    return {
-      ...keyBy(this.outputTypes.model, "name"),
-      ...keyBy(this.outputTypes.prisma, "name")
-    };
-  }
-  getInputTypeMap() {
-    return {
-      ...this.schema.inputObjectTypes.model ? keyBy(this.schema.inputObjectTypes.model, "name") : void 0,
-      ...keyBy(this.schema.inputObjectTypes.prisma, "name")
-    };
-  }
-  getRootFieldMap() {
-    return { ...keyBy(this.queryType.fields, "name"), ...keyBy(this.mutationType.fields, "name") };
-  }
-};
-__name(DMMFSchemaHelper, "DMMFSchemaHelper");
-var BaseDMMFHelper = class {
-  constructor(dmmf) {
-    return Object.assign(this, new DMMFDatamodelHelper(dmmf), new DMMFMappingsHelper(dmmf));
-  }
-};
-__name(BaseDMMFHelper, "BaseDMMFHelper");
-applyMixins(BaseDMMFHelper, [DMMFDatamodelHelper, DMMFMappingsHelper]);
-var DMMFHelper = class {
-  constructor(dmmf) {
-    return Object.assign(this, new BaseDMMFHelper(dmmf), new DMMFSchemaHelper(dmmf));
-  }
-};
-__name(DMMFHelper, "DMMFHelper");
-applyMixins(DMMFHelper, [BaseDMMFHelper, DMMFSchemaHelper]);
-
-// ../generator-helper/src/dmmf.ts
-var DMMF;
-((DMMF2) => {
-  let ModelAction;
-  ((ModelAction2) => {
-    ModelAction2["findUnique"] = "findUnique";
-    ModelAction2["findFirst"] = "findFirst";
-    ModelAction2["findMany"] = "findMany";
-    ModelAction2["create"] = "create";
-    ModelAction2["createMany"] = "createMany";
-    ModelAction2["update"] = "update";
-    ModelAction2["updateMany"] = "updateMany";
-    ModelAction2["upsert"] = "upsert";
-    ModelAction2["delete"] = "delete";
-    ModelAction2["deleteMany"] = "deleteMany";
-    ModelAction2["groupBy"] = "groupBy";
-    ModelAction2["count"] = "count";
-    ModelAction2["aggregate"] = "aggregate";
-    ModelAction2["findRaw"] = "findRaw";
-    ModelAction2["aggregateRaw"] = "aggregateRaw";
-  })(ModelAction = DMMF2.ModelAction || (DMMF2.ModelAction = {}));
-})(DMMF || (DMMF = {}));
+// src/runtime/core/types/Utils.ts
+var Utils_exports = {};
 
 // ../debug/src/index.ts
 var import_debug = __toESM(require_src());
@@ -22909,6 +19988,905 @@ function getLogs(numChars = 7500) {
 }
 __name(getLogs, "getLogs");
 var src_default = Debug;
+
+// ../internals/src/utils/tryLoadEnvs.ts
+var import_chalk = __toESM(require_source());
+var import_dotenv = __toESM(require_main2());
+var import_fs = __toESM(require("fs"));
+var import_path = __toESM(require("path"));
+
+// ../internals/src/dotenvExpand.ts
+function dotenvExpand(config2) {
+  const environment = config2.ignoreProcessEnv ? {} : process.env;
+  const interpolate = /* @__PURE__ */ __name((envValue) => {
+    const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g) || [];
+    return matches.reduce(function(newEnv, match) {
+      const parts = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(match);
+      if (!parts) {
+        return newEnv;
+      }
+      const prefix = parts[1];
+      let value, replacePart;
+      if (prefix === "\\") {
+        replacePart = parts[0];
+        value = replacePart.replace("\\$", "$");
+      } else {
+        const key = parts[2];
+        replacePart = parts[0].substring(prefix.length);
+        value = Object.hasOwnProperty.call(environment, key) ? environment[key] : config2.parsed[key] || "";
+        value = interpolate(value);
+      }
+      return newEnv.replace(replacePart, value);
+    }, envValue);
+  }, "interpolate");
+  for (const configKey in config2.parsed) {
+    const value = Object.hasOwnProperty.call(environment, configKey) ? environment[configKey] : config2.parsed[configKey];
+    config2.parsed[configKey] = interpolate(value);
+  }
+  for (const processKey in config2.parsed) {
+    environment[processKey] = config2.parsed[processKey];
+  }
+  return config2;
+}
+__name(dotenvExpand, "dotenvExpand");
+
+// ../internals/src/utils/tryLoadEnvs.ts
+var debug2 = src_default("prisma:tryLoadEnv");
+function tryLoadEnvs({
+  rootEnvPath,
+  schemaEnvPath
+}, opts = {
+  conflictCheck: "none"
+}) {
+  var _a3, _b2;
+  const rootEnvInfo = loadEnv(rootEnvPath);
+  if (opts.conflictCheck !== "none") {
+    checkForConflicts(rootEnvInfo, schemaEnvPath, opts.conflictCheck);
+  }
+  let schemaEnvInfo = null;
+  if (!pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, schemaEnvPath)) {
+    schemaEnvInfo = loadEnv(schemaEnvPath);
+  }
+  if (!rootEnvInfo && !schemaEnvInfo) {
+    debug2("No Environment variables loaded");
+  }
+  if (schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult.error) {
+    return console.error(import_chalk.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
+  }
+  const messages = [rootEnvInfo == null ? void 0 : rootEnvInfo.message, schemaEnvInfo == null ? void 0 : schemaEnvInfo.message].filter(Boolean);
+  return {
+    message: messages.join("\n"),
+    parsed: {
+      ...(_a3 = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult) == null ? void 0 : _a3.parsed,
+      ...(_b2 = schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult) == null ? void 0 : _b2.parsed
+    }
+  };
+}
+__name(tryLoadEnvs, "tryLoadEnvs");
+function checkForConflicts(rootEnvInfo, envPath, type) {
+  const parsedRootEnv = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult.parsed;
+  const areNotTheSame = !pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, envPath);
+  if (parsedRootEnv && envPath && areNotTheSame && import_fs.default.existsSync(envPath)) {
+    const envConfig = import_dotenv.default.parse(import_fs.default.readFileSync(envPath));
+    const conflicts = [];
+    for (const k in envConfig) {
+      if (parsedRootEnv[k] === envConfig[k]) {
+        conflicts.push(k);
+      }
+    }
+    if (conflicts.length > 0) {
+      const relativeRootEnvPath = import_path.default.relative(process.cwd(), rootEnvInfo.path);
+      const relativeEnvPath = import_path.default.relative(process.cwd(), envPath);
+      if (type === "error") {
+        const message = `There is a conflict between env var${conflicts.length > 1 ? "s" : ""} in ${import_chalk.default.underline(
+          relativeRootEnvPath
+        )} and ${import_chalk.default.underline(relativeEnvPath)}
+Conflicting env vars:
+${conflicts.map((conflict) => `  ${import_chalk.default.bold(conflict)}`).join("\n")}
+
+We suggest to move the contents of ${import_chalk.default.underline(relativeEnvPath)} to ${import_chalk.default.underline(
+          relativeRootEnvPath
+        )} to consolidate your env vars.
+`;
+        throw new Error(message);
+      } else if (type === "warn") {
+        const message = `Conflict for env var${conflicts.length > 1 ? "s" : ""} ${conflicts.map((c) => import_chalk.default.bold(c)).join(", ")} in ${import_chalk.default.underline(relativeRootEnvPath)} and ${import_chalk.default.underline(relativeEnvPath)}
+Env vars from ${import_chalk.default.underline(relativeEnvPath)} overwrite the ones from ${import_chalk.default.underline(relativeRootEnvPath)}
+      `;
+        console.warn(`${import_chalk.default.yellow("warn(prisma)")} ${message}`);
+      }
+    }
+  }
+}
+__name(checkForConflicts, "checkForConflicts");
+function loadEnv(envPath) {
+  if (exists(envPath)) {
+    debug2(`Environment variables loaded from ${envPath}`);
+    return {
+      dotenvResult: dotenvExpand(
+        import_dotenv.default.config({
+          path: envPath,
+          debug: process.env.DOTENV_CONFIG_DEBUG ? true : void 0
+        })
+      ),
+      message: import_chalk.default.dim(`Environment variables loaded from ${import_path.default.relative(process.cwd(), envPath)}`),
+      path: envPath
+    };
+  } else {
+    debug2(`Environment variables not found at ${envPath}`);
+  }
+  return null;
+}
+__name(loadEnv, "loadEnv");
+function pathsEqual(path1, path22) {
+  return path1 && path22 && import_path.default.resolve(path1) === import_path.default.resolve(path22);
+}
+__name(pathsEqual, "pathsEqual");
+function exists(p) {
+  return Boolean(p && import_fs.default.existsSync(p));
+}
+__name(exists, "exists");
+
+// ../internals/src/client/getClientEngineType.ts
+var DEFAULT_CLIENT_ENGINE_TYPE = "library" /* Library */;
+function getClientEngineType(generatorConfig) {
+  const engineTypeFromEnvVar = getEngineTypeFromEnvVar();
+  if (engineTypeFromEnvVar)
+    return engineTypeFromEnvVar;
+  if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "library" /* Library */) {
+    return "library" /* Library */;
+  } else if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "binary" /* Binary */) {
+    return "binary" /* Binary */;
+  } else {
+    return DEFAULT_CLIENT_ENGINE_TYPE;
+  }
+}
+__name(getClientEngineType, "getClientEngineType");
+function getEngineTypeFromEnvVar() {
+  const engineType = process.env.PRISMA_CLIENT_ENGINE_TYPE;
+  if (engineType === "library" /* Library */) {
+    return "library" /* Library */;
+  } else if (engineType === "binary" /* Binary */) {
+    return "binary" /* Binary */;
+  } else {
+    return void 0;
+  }
+}
+__name(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
+
+// ../internals/src/cli/utils.ts
+var import_arg = __toESM(require_arg());
+var import_strip_indent = __toESM(require_strip_indent());
+function isError(result) {
+  return result instanceof Error;
+}
+__name(isError, "isError");
+
+// ../engines/src/index.ts
+var import_engines_version = __toESM(require_engines_version());
+
+// ../get-platform/src/getNodeAPIName.ts
+var NODE_API_QUERY_ENGINE_URL_BASE = "libquery_engine";
+function getNodeAPIName(platform3, type) {
+  const isUrl = type === "url";
+  if (platform3.includes("windows")) {
+    return isUrl ? `query_engine.dll.node` : `query_engine-${platform3}.dll.node`;
+  } else if (platform3.includes("darwin")) {
+    return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.dylib.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform3}.dylib.node`;
+  } else {
+    return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.so.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform3}.so.node`;
+  }
+}
+__name(getNodeAPIName, "getNodeAPIName");
+
+// ../get-platform/src/getPlatform.ts
+var import_child_process = require("child_process");
+var import_fs2 = __toESM(require("fs"));
+var import_os = __toESM(require("os"));
+var import_util = require("util");
+var readFile = (0, import_util.promisify)(import_fs2.default.readFile);
+var exists2 = (0, import_util.promisify)(import_fs2.default.exists);
+async function getos() {
+  const platform3 = import_os.default.platform();
+  const arch2 = process.arch;
+  if (platform3 === "freebsd") {
+    const version = await gracefulExec(`freebsd-version`);
+    if (version && version.trim().length > 0) {
+      const regex = /^(\d+)\.?/;
+      const match = regex.exec(version);
+      if (match) {
+        return {
+          platform: "freebsd",
+          distro: `freebsd${match[1]}`,
+          arch: arch2
+        };
+      }
+    }
+  }
+  if (platform3 !== "linux") {
+    return {
+      platform: platform3,
+      arch: arch2
+    };
+  }
+  return {
+    platform: "linux",
+    libssl: await getOpenSSLVersion(),
+    distro: await resolveDistro(),
+    arch: arch2
+  };
+}
+__name(getos, "getos");
+function parseDistro(input) {
+  const idRegex = /^ID="?([^"\n]*)"?$/im;
+  const idLikeRegex = /^ID_LIKE="?([^"\n]*)"?$/im;
+  const idMatch = idRegex.exec(input);
+  const id = idMatch && idMatch[1] && idMatch[1].toLowerCase() || "";
+  const idLikeMatch = idLikeRegex.exec(input);
+  const idLike = idLikeMatch && idLikeMatch[1] && idLikeMatch[1].toLowerCase() || "";
+  if (id === "raspbian") {
+    return "arm";
+  }
+  if (id === "nixos") {
+    return "nixos";
+  }
+  if (idLike.includes("centos") || idLike.includes("fedora") || idLike.includes("rhel") || id === "fedora") {
+    return "rhel";
+  }
+  if (idLike.includes("debian") || idLike.includes("ubuntu") || id === "debian") {
+    return "debian";
+  }
+  return;
+}
+__name(parseDistro, "parseDistro");
+async function resolveDistro() {
+  const osReleaseFile = "/etc/os-release";
+  const alpineReleaseFile = "/etc/alpine-release";
+  if (await exists2(alpineReleaseFile)) {
+    return "musl";
+  } else if (await exists2(osReleaseFile)) {
+    return parseDistro(await readFile(osReleaseFile, "utf-8"));
+  } else {
+    return;
+  }
+}
+__name(resolveDistro, "resolveDistro");
+function parseOpenSSLVersion(input) {
+  const match = /^OpenSSL\s(\d+\.\d+)\.\d+/.exec(input);
+  if (match) {
+    return match[1] + ".x";
+  }
+  return;
+}
+__name(parseOpenSSLVersion, "parseOpenSSLVersion");
+async function getOpenSSLVersion() {
+  const [version, ls] = await Promise.all([
+    gracefulExec(`openssl version -v`),
+    gracefulExec(`
+      ls -l /lib64 | grep ssl;
+      ls -l /usr/lib64 | grep ssl;
+    `)
+  ]);
+  if (version) {
+    const v = parseOpenSSLVersion(version);
+    if (v) {
+      return v;
+    }
+  }
+  if (ls) {
+    const match = /libssl\.so\.(\d+\.\d+)\.\d+/.exec(ls);
+    if (match) {
+      return match[1] + ".x";
+    }
+  }
+  return void 0;
+}
+__name(getOpenSSLVersion, "getOpenSSLVersion");
+async function gracefulExec(cmd) {
+  return new Promise((resolve) => {
+    try {
+      (0, import_child_process.exec)(cmd, (err, stdout) => {
+        resolve(String(stdout));
+      });
+    } catch (e) {
+      resolve(void 0);
+      return void 0;
+    }
+    return void 0;
+  });
+}
+__name(gracefulExec, "gracefulExec");
+async function getPlatform() {
+  const { platform: platform3, libssl, distro, arch: arch2 } = await getos();
+  if (platform3 === "darwin" && arch2 === "arm64") {
+    return "darwin-arm64";
+  }
+  if (platform3 === "darwin") {
+    return "darwin";
+  }
+  if (platform3 === "win32") {
+    return "windows";
+  }
+  if (platform3 === "freebsd") {
+    return distro;
+  }
+  if (platform3 === "openbsd") {
+    return "openbsd";
+  }
+  if (platform3 === "netbsd") {
+    return "netbsd";
+  }
+  if (platform3 === "linux" && distro === "nixos") {
+    return "linux-nixos";
+  }
+  if (platform3 === "linux" && arch2 === "arm64") {
+    return `linux-arm64-openssl-${libssl}`;
+  }
+  if (platform3 === "linux" && arch2 === "arm") {
+    return `linux-arm-openssl-${libssl}`;
+  }
+  if (platform3 === "linux" && distro === "musl") {
+    return "linux-musl";
+  }
+  if (platform3 === "linux" && distro && libssl) {
+    return distro + "-openssl-" + libssl;
+  }
+  if (libssl) {
+    return "debian-openssl-" + libssl;
+  }
+  if (distro) {
+    return distro + "-openssl-1.1.x";
+  }
+  return "debian-openssl-1.1.x";
+}
+__name(getPlatform, "getPlatform");
+
+// ../get-platform/src/isNodeAPISupported.ts
+var import_fs3 = __toESM(require("fs"));
+async function isNodeAPISupported() {
+  const customLibraryPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
+  const customLibraryExists = customLibraryPath && import_fs3.default.existsSync(customLibraryPath);
+  const os3 = await getos();
+  if (!customLibraryExists && (os3.arch === "x32" || os3.arch === "ia32")) {
+    throw new Error(
+      `The default query engine type (Node-API, "library") is currently not supported for 32bit Node. Please set \`engineType = "binary"\` in the "generator" block of your "schema.prisma" file (or use the environment variables "PRISMA_CLIENT_ENGINE_TYPE=binary" and/or "PRISMA_CLI_QUERY_ENGINE_TYPE=binary".)`
+    );
+  }
+}
+__name(isNodeAPISupported, "isNodeAPISupported");
+
+// ../get-platform/src/platforms.ts
+var platforms = [
+  "darwin",
+  "darwin-arm64",
+  "debian-openssl-1.0.x",
+  "debian-openssl-1.1.x",
+  "debian-openssl-3.0.x",
+  "rhel-openssl-1.0.x",
+  "rhel-openssl-1.1.x",
+  "rhel-openssl-3.0.x",
+  "linux-arm64-openssl-1.1.x",
+  "linux-arm64-openssl-1.0.x",
+  "linux-arm64-openssl-3.0.x",
+  "linux-arm-openssl-1.1.x",
+  "linux-arm-openssl-1.0.x",
+  "linux-arm-openssl-3.0.x",
+  "linux-musl",
+  "linux-nixos",
+  "windows",
+  "freebsd11",
+  "freebsd12",
+  "freebsd13",
+  "openbsd",
+  "netbsd",
+  "arm"
+];
+
+// ../engines/src/index.ts
+var import_path2 = __toESM(require("path"));
+var import_engines_version2 = __toESM(require_engines_version());
+var debug3 = src_default("prisma:engines");
+function getEnginesPath() {
+  return import_path2.default.join(__dirname, "../");
+}
+__name(getEnginesPath, "getEnginesPath");
+var DEFAULT_CLI_QUERY_ENGINE_BINARY_TYPE = "libquery-engine" /* libqueryEngine */;
+import_path2.default.join(__dirname, "../query-engine-darwin");
+import_path2.default.join(__dirname, "../introspection-engine-darwin");
+import_path2.default.join(__dirname, "../prisma-fmt-darwin");
+import_path2.default.join(__dirname, "../query-engine-darwin-arm64");
+import_path2.default.join(__dirname, "../introspection-engine-darwin-arm64");
+import_path2.default.join(__dirname, "../prisma-fmt-darwin-arm64");
+import_path2.default.join(__dirname, "../query-engine-debian-openssl-1.0.x");
+import_path2.default.join(__dirname, "../introspection-engine-debian-openssl-1.0.x");
+import_path2.default.join(__dirname, "../prisma-fmt-debian-openssl-1.0.x");
+import_path2.default.join(__dirname, "../query-engine-debian-openssl-1.1.x");
+import_path2.default.join(__dirname, "../introspection-engine-debian-openssl-1.1.x");
+import_path2.default.join(__dirname, "../prisma-fmt-debian-openssl-1.1.x");
+import_path2.default.join(__dirname, "../query-engine-debian-openssl-3.0.x");
+import_path2.default.join(__dirname, "../introspection-engine-debian-openssl-3.0.x");
+import_path2.default.join(__dirname, "../prisma-fmt-debian-openssl-3.0.x");
+import_path2.default.join(__dirname, "../query-engine-rhel-openssl-1.0.x");
+import_path2.default.join(__dirname, "../introspection-engine-rhel-openssl-1.0.x");
+import_path2.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.0.x");
+import_path2.default.join(__dirname, "../query-engine-rhel-openssl-1.1.x");
+import_path2.default.join(__dirname, "../introspection-engine-rhel-openssl-1.1.x");
+import_path2.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.1.x");
+import_path2.default.join(__dirname, "../query-engine-rhel-openssl-3.0.x");
+import_path2.default.join(__dirname, "../introspection-engine-rhel-openssl-3.0.x");
+import_path2.default.join(__dirname, "../prisma-fmt-rhel-openssl-3.0.x");
+import_path2.default.join(__dirname, "../libquery_engine-darwin.dylib.node");
+import_path2.default.join(__dirname, "../libquery_engine-darwin-arm64.dylib.node");
+import_path2.default.join(__dirname, "../libquery_engine-debian-openssl-1.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-debian-openssl-1.1.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-debian-openssl-3.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.1.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-3.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-musl.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-rhel-openssl-1.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-rhel-openssl-1.1.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-rhel-openssl-3.0.x.so.node");
+import_path2.default.join(__dirname, "../query_engine-windows.dll.node");
+
+// ../engine-core/src/binary/BinaryEngine.ts
+var import_chalk3 = __toESM(require_source());
+var import_child_process2 = require("child_process");
+var import_execa = __toESM(require_execa());
+var import_fs5 = __toESM(require("fs"));
+var import_net = __toESM(require("net"));
+var import_p_retry = __toESM(require_p_retry());
+var import_path3 = __toESM(require("path"));
+var import_url = require("url");
+var import_util4 = require("util");
+
+// ../engine-core/src/common/Engine.ts
+var Engine = class {
+};
+__name(Engine, "Engine");
+
+// ../engine-core/src/common/errors/PrismaClientInitializationError.ts
+var PrismaClientInitializationError = class extends Error {
+  constructor(message, clientVersion2, errorCode) {
+    super(message);
+    this.clientVersion = clientVersion2;
+    this.errorCode = errorCode;
+    Error.captureStackTrace(PrismaClientInitializationError);
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientInitializationError";
+  }
+};
+__name(PrismaClientInitializationError, "PrismaClientInitializationError");
+
+// ../engine-core/src/common/errors/PrismaClientKnownRequestError.ts
+var PrismaClientKnownRequestError = class extends Error {
+  constructor(message, { code, clientVersion: clientVersion2, meta, batchRequestIdx }) {
+    super(message);
+    this.code = code;
+    this.clientVersion = clientVersion2;
+    this.meta = meta;
+    this.batchRequestIdx = batchRequestIdx;
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientKnownRequestError";
+  }
+};
+__name(PrismaClientKnownRequestError, "PrismaClientKnownRequestError");
+
+// ../engine-core/src/common/errors/utils/log.ts
+function getMessage(log3) {
+  if (typeof log3 === "string") {
+    return log3;
+  } else {
+    return log3.message;
+  }
+}
+__name(getMessage, "getMessage");
+function getBacktrace(log3) {
+  var _a3, _b2, _c, _d, _e, _f, _g;
+  if ((_a3 = log3.fields) == null ? void 0 : _a3.message) {
+    let str = (_b2 = log3.fields) == null ? void 0 : _b2.message;
+    if ((_c = log3.fields) == null ? void 0 : _c.file) {
+      str += ` in ${log3.fields.file}`;
+      if ((_d = log3.fields) == null ? void 0 : _d.line) {
+        str += `:${log3.fields.line}`;
+      }
+      if ((_e = log3.fields) == null ? void 0 : _e.column) {
+        str += `:${log3.fields.column}`;
+      }
+    }
+    if ((_f = log3.fields) == null ? void 0 : _f.reason) {
+      str += `
+${(_g = log3.fields) == null ? void 0 : _g.reason}`;
+    }
+    return str;
+  }
+  return "Unknown error";
+}
+__name(getBacktrace, "getBacktrace");
+function isPanic(err) {
+  var _a3;
+  return ((_a3 = err.fields) == null ? void 0 : _a3.message) === "PANIC";
+}
+__name(isPanic, "isPanic");
+function isRustLog(e) {
+  return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
+}
+__name(isRustLog, "isRustLog");
+function isRustErrorLog(e) {
+  var _a3, _b2;
+  return isRustLog(e) && (e.level === "error" || ((_b2 = (_a3 = e.fields) == null ? void 0 : _a3.message) == null ? void 0 : _b2.includes("fatal error")));
+}
+__name(isRustErrorLog, "isRustErrorLog");
+function convertLog(rustLog) {
+  const isQuery = isQueryLog(rustLog.fields);
+  const level = isQuery ? "query" : rustLog.level.toLowerCase();
+  return {
+    ...rustLog,
+    level,
+    timestamp: new Date(rustLog.timestamp)
+  };
+}
+__name(convertLog, "convertLog");
+function isQueryLog(fields) {
+  return Boolean(fields.query);
+}
+__name(isQueryLog, "isQueryLog");
+
+// ../engine-core/src/common/errors/PrismaClientRustError.ts
+var PrismaClientRustError = class extends Error {
+  constructor({ clientVersion: clientVersion2, error: error2 }) {
+    const backtrace = getBacktrace(error2);
+    super(backtrace != null ? backtrace : "Unknown error");
+    this._isPanic = isPanic(error2);
+    this.clientVersion = clientVersion2;
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientRustPanicError";
+  }
+  isPanic() {
+    return this._isPanic;
+  }
+};
+__name(PrismaClientRustError, "PrismaClientRustError");
+
+// ../engine-core/src/common/errors/PrismaClientRustPanicError.ts
+var PrismaClientRustPanicError = class extends Error {
+  constructor(message, clientVersion2) {
+    super(message);
+    this.clientVersion = clientVersion2;
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientRustPanicError";
+  }
+};
+__name(PrismaClientRustPanicError, "PrismaClientRustPanicError");
+
+// ../engine-core/src/common/errors/PrismaClientUnknownRequestError.ts
+var PrismaClientUnknownRequestError = class extends Error {
+  constructor(message, { clientVersion: clientVersion2, batchRequestIdx }) {
+    super(message);
+    this.clientVersion = clientVersion2;
+    this.batchRequestIdx = batchRequestIdx;
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientUnknownRequestError";
+  }
+};
+__name(PrismaClientUnknownRequestError, "PrismaClientUnknownRequestError");
+
+// ../engine-core/src/common/errors/utils/getErrorMessageWithLink.ts
+var import_chalk2 = __toESM(require_source());
+var import_strip_ansi = __toESM(require_strip_ansi());
+
+// ../engine-core/src/common/utils/util.ts
+var import_fs4 = __toESM(require("fs"));
+var import_new_github_issue_url = __toESM(require_new_github_issue_url());
+var debug4 = src_default("plusX");
+function plusX(file) {
+  const s = import_fs4.default.statSync(file);
+  const newMode = s.mode | 64 | 8 | 1;
+  if (s.mode === newMode) {
+    debug4(`Execution permissions of ${file} are fine`);
+    return;
+  }
+  const base8 = newMode.toString(8).slice(-3);
+  debug4(`Have to call plusX on ${file}`);
+  import_fs4.default.chmodSync(file, base8);
+}
+__name(plusX, "plusX");
+function transformPlatformToEnvValue(platform3) {
+  return { fromEnvVar: null, value: platform3 };
+}
+__name(transformPlatformToEnvValue, "transformPlatformToEnvValue");
+function fixBinaryTargets(binaryTargets, platform3) {
+  binaryTargets = binaryTargets || [];
+  if (!binaryTargets.find((object) => object.value === "native")) {
+    return [transformPlatformToEnvValue("native"), ...binaryTargets];
+  }
+  return [...binaryTargets, transformPlatformToEnvValue(platform3)];
+}
+__name(fixBinaryTargets, "fixBinaryTargets");
+function getGitHubIssueUrl({
+  title,
+  user = "prisma",
+  repo = "prisma",
+  template = "bug_report.md",
+  body
+}) {
+  return (0, import_new_github_issue_url.default)({
+    user,
+    repo,
+    template,
+    title,
+    body
+  });
+}
+__name(getGitHubIssueUrl, "getGitHubIssueUrl");
+
+// ../engine-core/src/common/errors/utils/maskQuery.ts
+function maskQuery(query2) {
+  if (!query2) {
+    return "";
+  }
+  return query2.replace(/".*"/g, '"X"').replace(/[\s:\[]([+-]?([0-9]*[.])?[0-9]+)/g, (substr) => {
+    return `${substr[0]}5`;
+  });
+}
+__name(maskQuery, "maskQuery");
+
+// ../engine-core/src/common/errors/utils/normalizeLogs.ts
+function normalizeLogs(logs) {
+  return logs.split("\n").map((l) => {
+    return l.replace(/^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)\s*/, "").replace(/\+\d+\s*ms$/, "");
+  }).join("\n");
+}
+__name(normalizeLogs, "normalizeLogs");
+
+// ../engine-core/src/common/errors/utils/getErrorMessageWithLink.ts
+function getErrorMessageWithLink({
+  version,
+  platform: platform3,
+  title,
+  description,
+  engineVersion,
+  database,
+  query: query2
+}) {
+  var _a3, _b2;
+  const gotLogs = getLogs(6e3 - ((_a3 = query2 == null ? void 0 : query2.length) != null ? _a3 : 0));
+  const logs = normalizeLogs((0, import_strip_ansi.default)(gotLogs));
+  const moreInfo = description ? `# Description
+\`\`\`
+${description}
+\`\`\`` : "";
+  const body = (0, import_strip_ansi.default)(
+    `Hi Prisma Team! My Prisma Client just crashed. This is the report:
+## Versions
+
+| Name            | Version            |
+|-----------------|--------------------|
+| Node            | ${(_b2 = process.version) == null ? void 0 : _b2.padEnd(19)}| 
+| OS              | ${platform3 == null ? void 0 : platform3.padEnd(19)}|
+| Prisma Client   | ${version == null ? void 0 : version.padEnd(19)}|
+| Query Engine    | ${engineVersion == null ? void 0 : engineVersion.padEnd(19)}|
+| Database        | ${database == null ? void 0 : database.padEnd(19)}|
+
+${moreInfo}
+
+## Logs
+\`\`\`
+${logs}
+\`\`\`
+
+## Client Snippet
+\`\`\`ts
+// PLEASE FILL YOUR CODE SNIPPET HERE
+\`\`\`
+
+## Schema
+\`\`\`prisma
+// PLEASE ADD YOUR SCHEMA HERE IF POSSIBLE
+\`\`\`
+
+## Prisma Engine Query
+\`\`\`
+${query2 ? maskQuery(query2) : ""}
+\`\`\`
+`
+  );
+  const url = getGitHubIssueUrl({ title, body });
+  return `${title}
+
+This is a non-recoverable error which probably happens when the Prisma Query Engine has a panic.
+
+${import_chalk2.default.underline(url)}
+
+If you want the Prisma team to look into it, please open the link above \u{1F64F}
+To increase the chance of success, please post your schema and a snippet of
+how you used Prisma Client in the issue. 
+`;
+}
+__name(getErrorMessageWithLink, "getErrorMessageWithLink");
+
+// ../engine-core/src/common/errors/utils/prismaGraphQLToJSError.ts
+function prismaGraphQLToJSError({ error: error2, user_facing_error }, clientVersion2) {
+  if (user_facing_error.error_code) {
+    return new PrismaClientKnownRequestError(user_facing_error.message, {
+      code: user_facing_error.error_code,
+      clientVersion: clientVersion2,
+      meta: user_facing_error.meta,
+      batchRequestIdx: user_facing_error.batch_request_idx
+    });
+  }
+  return new PrismaClientUnknownRequestError(error2, {
+    clientVersion: clientVersion2,
+    batchRequestIdx: user_facing_error.batch_request_idx
+  });
+}
+__name(prismaGraphQLToJSError, "prismaGraphQLToJSError");
+
+// ../engine-core/src/common/utils/printGeneratorConfig.ts
+var import_indent_string = __toESM(require_indent_string());
+function printGeneratorConfig(config2) {
+  return String(new GeneratorConfigClass(config2));
+}
+__name(printGeneratorConfig, "printGeneratorConfig");
+var GeneratorConfigClass = class {
+  constructor(config2) {
+    this.config = config2;
+  }
+  toString() {
+    const { config: config2 } = this;
+    const provider = config2.provider.fromEnvVar ? `env("${config2.provider.fromEnvVar}")` : config2.provider.value;
+    const obj = JSON.parse(
+      JSON.stringify({
+        provider,
+        binaryTargets: getOriginalBinaryTargetsValue(config2.binaryTargets)
+      })
+    );
+    return `generator ${config2.name} {
+${(0, import_indent_string.default)(printDatamodelObject(obj), 2)}
+}`;
+  }
+};
+__name(GeneratorConfigClass, "GeneratorConfigClass");
+function getOriginalBinaryTargetsValue(binaryTargets) {
+  let value;
+  if (binaryTargets.length > 0) {
+    const binaryTargetsFromEnvVar = binaryTargets.find((object) => object.fromEnvVar !== null);
+    if (binaryTargetsFromEnvVar) {
+      value = `env("${binaryTargetsFromEnvVar.fromEnvVar}")`;
+    } else {
+      value = binaryTargets.map((object) => object.value);
+    }
+  } else {
+    value = void 0;
+  }
+  return value;
+}
+__name(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
+function printDatamodelObject(obj) {
+  const maxLength = Object.keys(obj).reduce((max2, curr) => Math.max(max2, curr.length), 0);
+  return Object.entries(obj).map(([key, value]) => `${key.padEnd(maxLength)} = ${niceStringify(value)}`).join("\n");
+}
+__name(printDatamodelObject, "printDatamodelObject");
+function niceStringify(value) {
+  return JSON.parse(
+    JSON.stringify(value, (_, value2) => {
+      if (Array.isArray(value2)) {
+        return `[${value2.map((element) => JSON.stringify(element)).join(", ")}]`;
+      }
+      return JSON.stringify(value2);
+    })
+  );
+}
+__name(niceStringify, "niceStringify");
+
+// ../engine-core/src/tools/byline.ts
+var import_stream = __toESM(require("stream"));
+var import_util3 = __toESM(require("util"));
+function byline(readStream, options) {
+  return createStream(readStream, options);
+}
+__name(byline, "byline");
+function createStream(readStream, options) {
+  if (readStream) {
+    return createLineStream(readStream, options);
+  } else {
+    return new LineStream(options);
+  }
+}
+__name(createStream, "createStream");
+function createLineStream(readStream, options) {
+  if (!readStream) {
+    throw new Error("expected readStream");
+  }
+  if (!readStream.readable) {
+    throw new Error("readStream must be readable");
+  }
+  const ls = new LineStream(options);
+  readStream.pipe(ls);
+  return ls;
+}
+__name(createLineStream, "createLineStream");
+function LineStream(options) {
+  import_stream.default.Transform.call(this, options);
+  options = options || {};
+  this._readableState.objectMode = true;
+  this._lineBuffer = [];
+  this._keepEmptyLines = options.keepEmptyLines || false;
+  this._lastChunkEndedWithCR = false;
+  this.on("pipe", function(src) {
+    if (!this.encoding) {
+      if (src instanceof import_stream.default.Readable) {
+        this.encoding = src._readableState.encoding;
+      }
+    }
+  });
+}
+__name(LineStream, "LineStream");
+import_util3.default.inherits(LineStream, import_stream.default.Transform);
+LineStream.prototype._transform = function(chunk, encoding, done) {
+  encoding = encoding || "utf8";
+  if (Buffer.isBuffer(chunk)) {
+    if (encoding == "buffer") {
+      chunk = chunk.toString();
+      encoding = "utf8";
+    } else {
+      chunk = chunk.toString(encoding);
+    }
+  }
+  this._chunkEncoding = encoding;
+  const lines = chunk.split(/\r\n|\r|\n/g);
+  if (this._lastChunkEndedWithCR && chunk[0] == "\n") {
+    lines.shift();
+  }
+  if (this._lineBuffer.length > 0) {
+    this._lineBuffer[this._lineBuffer.length - 1] += lines[0];
+    lines.shift();
+  }
+  this._lastChunkEndedWithCR = chunk[chunk.length - 1] == "\r";
+  this._lineBuffer = this._lineBuffer.concat(lines);
+  this._pushBuffer(encoding, 1, done);
+};
+LineStream.prototype._pushBuffer = function(encoding, keep, done) {
+  while (this._lineBuffer.length > keep) {
+    const line = this._lineBuffer.shift();
+    if (this._keepEmptyLines || line.length > 0) {
+      if (!this.push(this._reencode(line, encoding))) {
+        const self2 = this;
+        setImmediate(function() {
+          self2._pushBuffer(encoding, keep, done);
+        });
+        return;
+      }
+    }
+  }
+  done();
+};
+LineStream.prototype._flush = function(done) {
+  this._pushBuffer(this._chunkEncoding, 0, done);
+};
+LineStream.prototype._reencode = function(line, chunkEncoding) {
+  if (this.encoding && this.encoding != chunkEncoding) {
+    return Buffer.from(line, chunkEncoding).toString(this.encoding);
+  } else if (this.encoding) {
+    return line;
+  } else {
+    return Buffer.from(line, chunkEncoding);
+  }
+};
+
+// ../engine-core/src/tools/omit.ts
+function omit(obj, keys2) {
+  return Object.keys(obj).filter((key) => !keys2.includes(key)).reduce((result, key) => {
+    result[key] = obj[key];
+    return result;
+  }, {});
+}
+__name(omit, "omit");
 
 // ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/platform/node/globalThis.js
 var _globalThis = typeof globalThis === "object" ? globalThis : global;
@@ -23862,762 +21840,6 @@ var context2 = ContextAPI.getInstance();
 var trace = TraceAPI.getInstance();
 var propagation = PropagationAPI.getInstance();
 var diag2 = DiagAPI.instance();
-
-// ../engines/src/index.ts
-var import_engines_version = __toESM(require_engines_version());
-
-// ../get-platform/src/getNodeAPIName.ts
-var NODE_API_QUERY_ENGINE_URL_BASE = "libquery_engine";
-function getNodeAPIName(platform3, type) {
-  const isUrl = type === "url";
-  if (platform3.includes("windows")) {
-    return isUrl ? `query_engine.dll.node` : `query_engine-${platform3}.dll.node`;
-  } else if (platform3.includes("darwin")) {
-    return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.dylib.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform3}.dylib.node`;
-  } else {
-    return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.so.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform3}.so.node`;
-  }
-}
-__name(getNodeAPIName, "getNodeAPIName");
-
-// ../get-platform/src/getPlatform.ts
-var import_child_process = require("child_process");
-var import_fs = __toESM(require("fs"));
-var import_os = __toESM(require("os"));
-var import_util = require("util");
-var readFile = (0, import_util.promisify)(import_fs.default.readFile);
-var exists = (0, import_util.promisify)(import_fs.default.exists);
-async function getos() {
-  const platform3 = import_os.default.platform();
-  const arch2 = process.arch;
-  if (platform3 === "freebsd") {
-    const version = await gracefulExec(`freebsd-version`);
-    if (version && version.trim().length > 0) {
-      const regex = /^(\d+)\.?/;
-      const match = regex.exec(version);
-      if (match) {
-        return {
-          platform: "freebsd",
-          distro: `freebsd${match[1]}`,
-          arch: arch2
-        };
-      }
-    }
-  }
-  if (platform3 !== "linux") {
-    return {
-      platform: platform3,
-      arch: arch2
-    };
-  }
-  return {
-    platform: "linux",
-    libssl: await getOpenSSLVersion(),
-    distro: await resolveDistro(),
-    arch: arch2
-  };
-}
-__name(getos, "getos");
-function parseDistro(input) {
-  const idRegex = /^ID="?([^"\n]*)"?$/im;
-  const idLikeRegex = /^ID_LIKE="?([^"\n]*)"?$/im;
-  const idMatch = idRegex.exec(input);
-  const id = idMatch && idMatch[1] && idMatch[1].toLowerCase() || "";
-  const idLikeMatch = idLikeRegex.exec(input);
-  const idLike = idLikeMatch && idLikeMatch[1] && idLikeMatch[1].toLowerCase() || "";
-  if (id === "raspbian") {
-    return "arm";
-  }
-  if (id === "nixos") {
-    return "nixos";
-  }
-  if (idLike.includes("centos") || idLike.includes("fedora") || idLike.includes("rhel") || id === "fedora") {
-    return "rhel";
-  }
-  if (idLike.includes("debian") || idLike.includes("ubuntu") || id === "debian") {
-    return "debian";
-  }
-  return;
-}
-__name(parseDistro, "parseDistro");
-async function resolveDistro() {
-  const osReleaseFile = "/etc/os-release";
-  const alpineReleaseFile = "/etc/alpine-release";
-  if (await exists(alpineReleaseFile)) {
-    return "musl";
-  } else if (await exists(osReleaseFile)) {
-    return parseDistro(await readFile(osReleaseFile, "utf-8"));
-  } else {
-    return;
-  }
-}
-__name(resolveDistro, "resolveDistro");
-function parseOpenSSLVersion(input) {
-  const match = /^OpenSSL\s(\d+\.\d+)\.\d+/.exec(input);
-  if (match) {
-    return match[1] + ".x";
-  }
-  return;
-}
-__name(parseOpenSSLVersion, "parseOpenSSLVersion");
-async function getOpenSSLVersion() {
-  const [version, ls] = await Promise.all([
-    gracefulExec(`openssl version -v`),
-    gracefulExec(`
-      ls -l /lib64 | grep ssl;
-      ls -l /usr/lib64 | grep ssl;
-    `)
-  ]);
-  if (version) {
-    const v = parseOpenSSLVersion(version);
-    if (v) {
-      return v;
-    }
-  }
-  if (ls) {
-    const match = /libssl\.so\.(\d+\.\d+)\.\d+/.exec(ls);
-    if (match) {
-      return match[1] + ".x";
-    }
-  }
-  return void 0;
-}
-__name(getOpenSSLVersion, "getOpenSSLVersion");
-async function gracefulExec(cmd) {
-  return new Promise((resolve) => {
-    try {
-      (0, import_child_process.exec)(cmd, (err, stdout) => {
-        resolve(String(stdout));
-      });
-    } catch (e) {
-      resolve(void 0);
-      return void 0;
-    }
-    return void 0;
-  });
-}
-__name(gracefulExec, "gracefulExec");
-async function getPlatform() {
-  const { platform: platform3, libssl, distro, arch: arch2 } = await getos();
-  if (platform3 === "darwin" && arch2 === "arm64") {
-    return "darwin-arm64";
-  }
-  if (platform3 === "darwin") {
-    return "darwin";
-  }
-  if (platform3 === "win32") {
-    return "windows";
-  }
-  if (platform3 === "freebsd") {
-    return distro;
-  }
-  if (platform3 === "openbsd") {
-    return "openbsd";
-  }
-  if (platform3 === "netbsd") {
-    return "netbsd";
-  }
-  if (platform3 === "linux" && distro === "nixos") {
-    return "linux-nixos";
-  }
-  if (platform3 === "linux" && arch2 === "arm64") {
-    return `linux-arm64-openssl-${libssl}`;
-  }
-  if (platform3 === "linux" && arch2 === "arm") {
-    return `linux-arm-openssl-${libssl}`;
-  }
-  if (platform3 === "linux" && distro === "musl") {
-    return "linux-musl";
-  }
-  if (platform3 === "linux" && distro && libssl) {
-    return distro + "-openssl-" + libssl;
-  }
-  if (libssl) {
-    return "debian-openssl-" + libssl;
-  }
-  if (distro) {
-    return distro + "-openssl-1.1.x";
-  }
-  return "debian-openssl-1.1.x";
-}
-__name(getPlatform, "getPlatform");
-
-// ../get-platform/src/isNodeAPISupported.ts
-var import_fs2 = __toESM(require("fs"));
-async function isNodeAPISupported() {
-  const customLibraryPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
-  const customLibraryExists = customLibraryPath && import_fs2.default.existsSync(customLibraryPath);
-  const os3 = await getos();
-  if (!customLibraryExists && (os3.arch === "x32" || os3.arch === "ia32")) {
-    throw new Error(
-      `The default query engine type (Node-API, "library") is currently not supported for 32bit Node. Please set \`engineType = "binary"\` in the "generator" block of your "schema.prisma" file (or use the environment variables "PRISMA_CLIENT_ENGINE_TYPE=binary" and/or "PRISMA_CLI_QUERY_ENGINE_TYPE=binary".)`
-    );
-  }
-}
-__name(isNodeAPISupported, "isNodeAPISupported");
-
-// ../get-platform/src/platforms.ts
-var platforms = [
-  "darwin",
-  "darwin-arm64",
-  "debian-openssl-1.0.x",
-  "debian-openssl-1.1.x",
-  "debian-openssl-3.0.x",
-  "rhel-openssl-1.0.x",
-  "rhel-openssl-1.1.x",
-  "rhel-openssl-3.0.x",
-  "linux-arm64-openssl-1.1.x",
-  "linux-arm64-openssl-1.0.x",
-  "linux-arm64-openssl-3.0.x",
-  "linux-arm-openssl-1.1.x",
-  "linux-arm-openssl-1.0.x",
-  "linux-arm-openssl-3.0.x",
-  "linux-musl",
-  "linux-nixos",
-  "windows",
-  "freebsd11",
-  "freebsd12",
-  "freebsd13",
-  "openbsd",
-  "netbsd",
-  "arm"
-];
-
-// ../engines/src/index.ts
-var import_path = __toESM(require("path"));
-var import_engines_version2 = __toESM(require_engines_version());
-var debug2 = src_default("prisma:engines");
-function getEnginesPath() {
-  return import_path.default.join(__dirname, "../");
-}
-__name(getEnginesPath, "getEnginesPath");
-var DEFAULT_CLI_QUERY_ENGINE_BINARY_TYPE = "libquery-engine" /* libqueryEngine */;
-import_path.default.join(__dirname, "../query-engine-darwin");
-import_path.default.join(__dirname, "../introspection-engine-darwin");
-import_path.default.join(__dirname, "../prisma-fmt-darwin");
-import_path.default.join(__dirname, "../query-engine-darwin-arm64");
-import_path.default.join(__dirname, "../introspection-engine-darwin-arm64");
-import_path.default.join(__dirname, "../prisma-fmt-darwin-arm64");
-import_path.default.join(__dirname, "../query-engine-debian-openssl-1.0.x");
-import_path.default.join(__dirname, "../introspection-engine-debian-openssl-1.0.x");
-import_path.default.join(__dirname, "../prisma-fmt-debian-openssl-1.0.x");
-import_path.default.join(__dirname, "../query-engine-debian-openssl-1.1.x");
-import_path.default.join(__dirname, "../introspection-engine-debian-openssl-1.1.x");
-import_path.default.join(__dirname, "../prisma-fmt-debian-openssl-1.1.x");
-import_path.default.join(__dirname, "../query-engine-debian-openssl-3.0.x");
-import_path.default.join(__dirname, "../introspection-engine-debian-openssl-3.0.x");
-import_path.default.join(__dirname, "../prisma-fmt-debian-openssl-3.0.x");
-import_path.default.join(__dirname, "../query-engine-rhel-openssl-1.0.x");
-import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-1.0.x");
-import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.0.x");
-import_path.default.join(__dirname, "../query-engine-rhel-openssl-1.1.x");
-import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-1.1.x");
-import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.1.x");
-import_path.default.join(__dirname, "../query-engine-rhel-openssl-3.0.x");
-import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-3.0.x");
-import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-3.0.x");
-import_path.default.join(__dirname, "../libquery_engine-darwin.dylib.node");
-import_path.default.join(__dirname, "../libquery_engine-darwin-arm64.dylib.node");
-import_path.default.join(__dirname, "../libquery_engine-debian-openssl-1.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-debian-openssl-1.1.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-debian-openssl-3.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.1.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-3.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-linux-musl.so.node");
-import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-1.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-1.1.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-3.0.x.so.node");
-import_path.default.join(__dirname, "../query_engine-windows.dll.node");
-
-// ../engine-core/src/binary/BinaryEngine.ts
-var import_chalk3 = __toESM(require_source());
-var import_child_process2 = require("child_process");
-var import_events = __toESM(require("events"));
-var import_execa = __toESM(require_execa());
-var import_fs4 = __toESM(require("fs"));
-var import_net = __toESM(require("net"));
-var import_p_retry = __toESM(require_p_retry());
-var import_path2 = __toESM(require("path"));
-var import_url = require("url");
-var import_util4 = require("util");
-
-// ../engine-core/src/common/Engine.ts
-var Engine = class {
-};
-__name(Engine, "Engine");
-
-// ../engine-core/src/common/errors/PrismaClientInitializationError.ts
-var PrismaClientInitializationError = class extends Error {
-  constructor(message, clientVersion2, errorCode) {
-    super(message);
-    this.clientVersion = clientVersion2;
-    this.errorCode = errorCode;
-    Error.captureStackTrace(PrismaClientInitializationError);
-  }
-  get [Symbol.toStringTag]() {
-    return "PrismaClientInitializationError";
-  }
-};
-__name(PrismaClientInitializationError, "PrismaClientInitializationError");
-
-// ../engine-core/src/common/errors/PrismaClientKnownRequestError.ts
-var PrismaClientKnownRequestError = class extends Error {
-  constructor(message, code, clientVersion2, meta) {
-    super(message);
-    this.code = code;
-    this.clientVersion = clientVersion2;
-    this.meta = meta;
-  }
-  get [Symbol.toStringTag]() {
-    return "PrismaClientKnownRequestError";
-  }
-};
-__name(PrismaClientKnownRequestError, "PrismaClientKnownRequestError");
-
-// ../engine-core/src/common/errors/utils/log.ts
-function getMessage(log4) {
-  if (typeof log4 === "string") {
-    return log4;
-  } else if (isRustError(log4)) {
-    return getBacktraceFromRustError(log4);
-  } else if (isRustLog(log4)) {
-    return getBacktraceFromLog(log4);
-  }
-  return JSON.stringify(log4);
-}
-__name(getMessage, "getMessage");
-function getBacktraceFromLog(log4) {
-  var _a3, _b2, _c, _d, _e, _f, _g;
-  if ((_a3 = log4.fields) == null ? void 0 : _a3.message) {
-    let str = (_b2 = log4.fields) == null ? void 0 : _b2.message;
-    if ((_c = log4.fields) == null ? void 0 : _c.file) {
-      str += ` in ${log4.fields.file}`;
-      if ((_d = log4.fields) == null ? void 0 : _d.line) {
-        str += `:${log4.fields.line}`;
-      }
-      if ((_e = log4.fields) == null ? void 0 : _e.column) {
-        str += `:${log4.fields.column}`;
-      }
-    }
-    if ((_f = log4.fields) == null ? void 0 : _f.reason) {
-      str += `
-${(_g = log4.fields) == null ? void 0 : _g.reason}`;
-    }
-    return str;
-  }
-  return "Unknown error";
-}
-__name(getBacktraceFromLog, "getBacktraceFromLog");
-function getBacktraceFromRustError(err) {
-  let str = "";
-  if (err.is_panic) {
-    str += `PANIC`;
-  }
-  if (err.backtrace) {
-    str += ` in ${err.backtrace}`;
-  }
-  if (err.message) {
-    str += `
-${err.message}`;
-  }
-  return str;
-}
-__name(getBacktraceFromRustError, "getBacktraceFromRustError");
-function isRustLog(e) {
-  return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
-}
-__name(isRustLog, "isRustLog");
-function isRustErrorLog(e) {
-  var _a3, _b2;
-  return isRustLog(e) && (e.level === "error" || ((_b2 = (_a3 = e.fields) == null ? void 0 : _a3.message) == null ? void 0 : _b2.includes("fatal error")));
-}
-__name(isRustErrorLog, "isRustErrorLog");
-function isRustError(e) {
-  return typeof e.is_panic !== "undefined";
-}
-__name(isRustError, "isRustError");
-function convertLog(rustLog) {
-  const isQuery = isQueryLog(rustLog.fields);
-  const level = isQuery ? "query" : rustLog.level.toLowerCase();
-  return {
-    ...rustLog,
-    level,
-    timestamp: new Date(rustLog.timestamp)
-  };
-}
-__name(convertLog, "convertLog");
-function isQueryLog(fields) {
-  return Boolean(fields.query);
-}
-__name(isQueryLog, "isQueryLog");
-
-// ../engine-core/src/common/errors/PrismaClientRustError.ts
-var PrismaClientRustError = class extends Error {
-  constructor({ clientVersion: clientVersion2, log: log4, error: error2 }) {
-    var __super = (...args) => {
-      super(...args);
-    };
-    if (log4) {
-      const backtrace = getBacktraceFromLog(log4);
-      __super(backtrace != null ? backtrace : "Unknown error");
-    } else if (error2) {
-      const backtrace = getBacktraceFromRustError(error2);
-      __super(backtrace);
-    } else {
-      __super(`Unknown error`);
-    }
-    this.clientVersion = clientVersion2;
-  }
-  get [Symbol.toStringTag]() {
-    return "PrismaClientRustPanicError";
-  }
-};
-__name(PrismaClientRustError, "PrismaClientRustError");
-
-// ../engine-core/src/common/errors/PrismaClientRustPanicError.ts
-var PrismaClientRustPanicError = class extends Error {
-  constructor(message, clientVersion2) {
-    super(message);
-    this.clientVersion = clientVersion2;
-  }
-  get [Symbol.toStringTag]() {
-    return "PrismaClientRustPanicError";
-  }
-};
-__name(PrismaClientRustPanicError, "PrismaClientRustPanicError");
-
-// ../engine-core/src/common/errors/PrismaClientUnknownRequestError.ts
-var PrismaClientUnknownRequestError = class extends Error {
-  constructor(message, clientVersion2) {
-    super(message);
-    this.clientVersion = clientVersion2;
-  }
-  get [Symbol.toStringTag]() {
-    return "PrismaClientUnknownRequestError";
-  }
-};
-__name(PrismaClientUnknownRequestError, "PrismaClientUnknownRequestError");
-
-// ../engine-core/src/common/errors/utils/getErrorMessageWithLink.ts
-var import_chalk2 = __toESM(require_source());
-var import_strip_ansi = __toESM(require_strip_ansi());
-
-// ../engine-core/src/common/utils/util.ts
-var import_fs3 = __toESM(require("fs"));
-var import_new_github_issue_url = __toESM(require_new_github_issue_url());
-var debug3 = src_default("plusX");
-function plusX(file) {
-  const s = import_fs3.default.statSync(file);
-  const newMode = s.mode | 64 | 8 | 1;
-  if (s.mode === newMode) {
-    debug3(`Execution permissions of ${file} are fine`);
-    return;
-  }
-  const base8 = newMode.toString(8).slice(-3);
-  debug3(`Have to call plusX on ${file}`);
-  import_fs3.default.chmodSync(file, base8);
-}
-__name(plusX, "plusX");
-function transformPlatformToEnvValue(platform3) {
-  return { fromEnvVar: null, value: platform3 };
-}
-__name(transformPlatformToEnvValue, "transformPlatformToEnvValue");
-function fixBinaryTargets(binaryTargets, platform3) {
-  binaryTargets = binaryTargets || [];
-  if (!binaryTargets.find((object) => object.value === "native")) {
-    return [transformPlatformToEnvValue("native"), ...binaryTargets];
-  }
-  return [...binaryTargets, transformPlatformToEnvValue(platform3)];
-}
-__name(fixBinaryTargets, "fixBinaryTargets");
-function getGitHubIssueUrl({
-  title,
-  user = "prisma",
-  repo = "prisma",
-  template = "bug_report.md",
-  body
-}) {
-  return (0, import_new_github_issue_url.default)({
-    user,
-    repo,
-    template,
-    title,
-    body
-  });
-}
-__name(getGitHubIssueUrl, "getGitHubIssueUrl");
-
-// ../engine-core/src/common/errors/utils/maskQuery.ts
-function maskQuery(query2) {
-  if (!query2) {
-    return "";
-  }
-  return query2.replace(/".*"/g, '"X"').replace(/[\s:\[]([+-]?([0-9]*[.])?[0-9]+)/g, (substr) => {
-    return `${substr[0]}5`;
-  });
-}
-__name(maskQuery, "maskQuery");
-
-// ../engine-core/src/common/errors/utils/normalizeLogs.ts
-function normalizeLogs(logs) {
-  return logs.split("\n").map((l) => {
-    return l.replace(/^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)\s*/, "").replace(/\+\d+\s*ms$/, "");
-  }).join("\n");
-}
-__name(normalizeLogs, "normalizeLogs");
-
-// ../engine-core/src/common/errors/utils/getErrorMessageWithLink.ts
-function getErrorMessageWithLink({
-  version,
-  platform: platform3,
-  title,
-  description,
-  engineVersion,
-  database,
-  query: query2
-}) {
-  var _a3, _b2;
-  const gotLogs = getLogs(6e3 - ((_a3 = query2 == null ? void 0 : query2.length) != null ? _a3 : 0));
-  const logs = normalizeLogs((0, import_strip_ansi.default)(gotLogs));
-  const moreInfo = description ? `# Description
-\`\`\`
-${description}
-\`\`\`` : "";
-  const body = (0, import_strip_ansi.default)(
-    `Hi Prisma Team! My Prisma Client just crashed. This is the report:
-## Versions
-
-| Name            | Version            |
-|-----------------|--------------------|
-| Node            | ${(_b2 = process.version) == null ? void 0 : _b2.padEnd(19)}| 
-| OS              | ${platform3 == null ? void 0 : platform3.padEnd(19)}|
-| Prisma Client   | ${version == null ? void 0 : version.padEnd(19)}|
-| Query Engine    | ${engineVersion == null ? void 0 : engineVersion.padEnd(19)}|
-| Database        | ${database == null ? void 0 : database.padEnd(19)}|
-
-${moreInfo}
-
-## Logs
-\`\`\`
-${logs}
-\`\`\`
-
-## Client Snippet
-\`\`\`ts
-// PLEASE FILL YOUR CODE SNIPPET HERE
-\`\`\`
-
-## Schema
-\`\`\`prisma
-// PLEASE ADD YOUR SCHEMA HERE IF POSSIBLE
-\`\`\`
-
-## Prisma Engine Query
-\`\`\`
-${query2 ? maskQuery(query2) : ""}
-\`\`\`
-`
-  );
-  const url = getGitHubIssueUrl({ title, body });
-  return `${title}
-
-This is a non-recoverable error which probably happens when the Prisma Query Engine has a panic.
-
-${import_chalk2.default.underline(url)}
-
-If you want the Prisma team to look into it, please open the link above \u{1F64F}
-To increase the chance of success, please post your schema and a snippet of
-how you used Prisma Client in the issue. 
-`;
-}
-__name(getErrorMessageWithLink, "getErrorMessageWithLink");
-
-// ../engine-core/src/common/errors/utils/prismaGraphQLToJSError.ts
-function prismaGraphQLToJSError(error2, clientVersion2) {
-  if (error2.user_facing_error.error_code) {
-    return new PrismaClientKnownRequestError(
-      error2.user_facing_error.message,
-      error2.user_facing_error.error_code,
-      clientVersion2,
-      error2.user_facing_error.meta
-    );
-  }
-  return new PrismaClientUnknownRequestError(error2.error, clientVersion2);
-}
-__name(prismaGraphQLToJSError, "prismaGraphQLToJSError");
-
-// ../engine-core/src/common/utils/printGeneratorConfig.ts
-var import_indent_string2 = __toESM(require_indent_string());
-function printGeneratorConfig(config2) {
-  return String(new GeneratorConfigClass(config2));
-}
-__name(printGeneratorConfig, "printGeneratorConfig");
-var GeneratorConfigClass = class {
-  constructor(config2) {
-    this.config = config2;
-  }
-  toString() {
-    const { config: config2 } = this;
-    const provider = config2.provider.fromEnvVar ? `env("${config2.provider.fromEnvVar}")` : config2.provider.value;
-    const obj = JSON.parse(
-      JSON.stringify({
-        provider,
-        binaryTargets: getOriginalBinaryTargetsValue(config2.binaryTargets)
-      })
-    );
-    return `generator ${config2.name} {
-${(0, import_indent_string2.default)(printDatamodelObject(obj), 2)}
-}`;
-  }
-};
-__name(GeneratorConfigClass, "GeneratorConfigClass");
-function getOriginalBinaryTargetsValue(binaryTargets) {
-  let value;
-  if (binaryTargets.length > 0) {
-    const binaryTargetsFromEnvVar = binaryTargets.find((object) => object.fromEnvVar !== null);
-    if (binaryTargetsFromEnvVar) {
-      value = `env("${binaryTargetsFromEnvVar.fromEnvVar}")`;
-    } else {
-      value = binaryTargets.map((object) => object.value);
-    }
-  } else {
-    value = void 0;
-  }
-  return value;
-}
-__name(getOriginalBinaryTargetsValue, "getOriginalBinaryTargetsValue");
-function printDatamodelObject(obj) {
-  const maxLength = Object.keys(obj).reduce((max2, curr) => Math.max(max2, curr.length), 0);
-  return Object.entries(obj).map(([key, value]) => `${key.padEnd(maxLength)} = ${niceStringify(value)}`).join("\n");
-}
-__name(printDatamodelObject, "printDatamodelObject");
-function niceStringify(value) {
-  return JSON.parse(
-    JSON.stringify(value, (_, value2) => {
-      if (Array.isArray(value2)) {
-        return `[${value2.map((element) => JSON.stringify(element)).join(", ")}]`;
-      }
-      return JSON.stringify(value2);
-    })
-  );
-}
-__name(niceStringify, "niceStringify");
-
-// ../engine-core/src/common/utils/runtimeHeadersToHttpHeaders.ts
-function runtimeHeadersToHttpHeaders(headers) {
-  if (headers.transactionId) {
-    const { transactionId, ...httpHeaders } = headers;
-    httpHeaders["X-transaction-id"] = transactionId;
-    return httpHeaders;
-  }
-  return headers;
-}
-__name(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
-
-// ../engine-core/src/tools/byline.ts
-var import_stream = __toESM(require("stream"));
-var import_util3 = __toESM(require("util"));
-function byline(readStream, options) {
-  return createStream(readStream, options);
-}
-__name(byline, "byline");
-function createStream(readStream, options) {
-  if (readStream) {
-    return createLineStream(readStream, options);
-  } else {
-    return new LineStream(options);
-  }
-}
-__name(createStream, "createStream");
-function createLineStream(readStream, options) {
-  if (!readStream) {
-    throw new Error("expected readStream");
-  }
-  if (!readStream.readable) {
-    throw new Error("readStream must be readable");
-  }
-  const ls = new LineStream(options);
-  readStream.pipe(ls);
-  return ls;
-}
-__name(createLineStream, "createLineStream");
-function LineStream(options) {
-  import_stream.default.Transform.call(this, options);
-  options = options || {};
-  this._readableState.objectMode = true;
-  this._lineBuffer = [];
-  this._keepEmptyLines = options.keepEmptyLines || false;
-  this._lastChunkEndedWithCR = false;
-  this.on("pipe", function(src) {
-    if (!this.encoding) {
-      if (src instanceof import_stream.default.Readable) {
-        this.encoding = src._readableState.encoding;
-      }
-    }
-  });
-}
-__name(LineStream, "LineStream");
-import_util3.default.inherits(LineStream, import_stream.default.Transform);
-LineStream.prototype._transform = function(chunk, encoding, done) {
-  encoding = encoding || "utf8";
-  if (Buffer.isBuffer(chunk)) {
-    if (encoding == "buffer") {
-      chunk = chunk.toString();
-      encoding = "utf8";
-    } else {
-      chunk = chunk.toString(encoding);
-    }
-  }
-  this._chunkEncoding = encoding;
-  const lines = chunk.split(/\r\n|\r|\n/g);
-  if (this._lastChunkEndedWithCR && chunk[0] == "\n") {
-    lines.shift();
-  }
-  if (this._lineBuffer.length > 0) {
-    this._lineBuffer[this._lineBuffer.length - 1] += lines[0];
-    lines.shift();
-  }
-  this._lastChunkEndedWithCR = chunk[chunk.length - 1] == "\r";
-  this._lineBuffer = this._lineBuffer.concat(lines);
-  this._pushBuffer(encoding, 1, done);
-};
-LineStream.prototype._pushBuffer = function(encoding, keep, done) {
-  while (this._lineBuffer.length > keep) {
-    const line = this._lineBuffer.shift();
-    if (this._keepEmptyLines || line.length > 0) {
-      if (!this.push(this._reencode(line, encoding))) {
-        const self2 = this;
-        setImmediate(function() {
-          self2._pushBuffer(encoding, keep, done);
-        });
-        return;
-      }
-    }
-  }
-  done();
-};
-LineStream.prototype._flush = function(done) {
-  this._pushBuffer(this._chunkEncoding, 0, done);
-};
-LineStream.prototype._reencode = function(line, chunkEncoding) {
-  if (this.encoding && this.encoding != chunkEncoding) {
-    return Buffer.from(line, chunkEncoding).toString(this.encoding);
-  } else if (this.encoding) {
-    return line;
-  } else {
-    return Buffer.from(line, chunkEncoding);
-  }
-};
-
-// ../engine-core/src/tools/omit.ts
-function omit(obj, keys2) {
-  return Object.keys(obj).filter((key) => !keys2.includes(key)).reduce((result, key) => {
-    result[key] = obj[key];
-    return result;
-  }, {});
-}
-__name(omit, "omit");
 
 // ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/suppress-tracing.js
 var SUPPRESS_TRACING_KEY = createContextKey("OpenTelemetry SDK Context Key SUPPRESS_TRACING");
@@ -28292,8 +25514,8 @@ var Connection = class {
 __name(Connection, "Connection");
 
 // ../engine-core/src/binary/BinaryEngine.ts
-var debug4 = src_default("prisma:engine");
-var exists2 = (0, import_util4.promisify)(import_fs4.default.exists);
+var debug5 = src_default("prisma:engine");
+var exists3 = (0, import_util4.promisify)(import_fs5.default.exists);
 var logger = /* @__PURE__ */ __name((...args) => {
 }, "logger");
 var knownPlatforms = [...platforms, "native"];
@@ -28309,7 +25531,6 @@ var BinaryEngine = class extends Engine {
     generator,
     datasources,
     showColors,
-    logLevel,
     logQueries,
     env: env2,
     flags,
@@ -28320,51 +25541,61 @@ var BinaryEngine = class extends Engine {
     allowTriggerPanic,
     dirname: dirname2,
     activeProvider,
-    tracingConfig
+    tracingConfig,
+    logEmitter
   }) {
     var _a3;
     super();
     this.startCount = 0;
     this.previewFeatures = [];
     this.stderrLogs = "";
-    this.handleRequestError = /* @__PURE__ */ __name(async (error2, graceful = false) => {
+    this.handleRequestError = /* @__PURE__ */ __name(async (error2) => {
       var _a3, _b2;
-      debug4({ error: error2 });
+      debug5({ error: error2 });
       if (this.startPromise) {
         await this.startPromise;
       }
+      const isNetworkError = [
+        "ECONNRESET",
+        "ECONNREFUSED",
+        "UND_ERR_CLOSED",
+        "UND_ERR_SOCKET",
+        "UND_ERR_DESTROYED",
+        "UND_ERR_ABORTED"
+      ].includes(error2.code);
       if (error2 instanceof PrismaClientKnownRequestError) {
-        throw error2;
+        return { error: error2, shouldRetry: false };
       }
-      this.throwAsyncErrorIfExists();
-      if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.isCanceled) {
+      try {
         this.throwAsyncErrorIfExists();
-      } else if (error2.code === "ECONNRESET" || error2.code === "ECONNREFUSED" || error2.code === "UND_ERR_CLOSED" || error2.code === "UND_ERR_SOCKET" || error2.code === "UND_ERR_DESTROYED" || error2.code === "UND_ERR_ABORTED" || error2.message.toLowerCase().includes("client is destroyed") || error2.message.toLowerCase().includes("other side closed") || error2.message.toLowerCase().includes("the client is closed")) {
-        if (this.globalKillSignalReceived && !((_b2 = this.child) == null ? void 0 : _b2.connected)) {
-          throw new PrismaClientUnknownRequestError(
-            `The Node.js process already received a ${this.globalKillSignalReceived} signal, therefore the Prisma query engine exited
-and your request can't be processed.
-You probably have some open handle that prevents your process from exiting.
-It could be an open http server or stream that didn't close yet.
-We recommend using the \`wtfnode\` package to debug open handles.`,
-            this.clientVersion
-          );
-        }
-        this.throwAsyncErrorIfExists();
-        if (this.startCount > MAX_STARTS) {
-          for (let i = 0; i < 5; i++) {
-            await new Promise((r) => setTimeout(r, 50));
-            this.throwAsyncErrorIfExists(true);
+        if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.isCanceled) {
+          this.throwAsyncErrorIfExists();
+        } else if (isNetworkError) {
+          if (this.globalKillSignalReceived && !((_b2 = this.child) == null ? void 0 : _b2.connected)) {
+            throw new PrismaClientUnknownRequestError(
+              `The Node.js process already received a ${this.globalKillSignalReceived} signal, therefore the Prisma query engine exited
+  and your request can't be processed.
+  You probably have some open handle that prevents your process from exiting.
+  It could be an open http server or stream that didn't close yet.
+  We recommend using the \`wtfnode\` package to debug open handles.`,
+              { clientVersion: this.clientVersion }
+            );
           }
-          throw new Error(`Query engine is trying to restart, but can't.
-Please look into the logs or turn on the env var DEBUG=* to debug the constantly restarting query engine.`);
+          this.throwAsyncErrorIfExists();
+          if (this.startCount > MAX_STARTS) {
+            for (let i = 0; i < 5; i++) {
+              await new Promise((r) => setTimeout(r, 50));
+              this.throwAsyncErrorIfExists(true);
+            }
+            throw new Error(`Query engine is trying to restart, but can't.
+  Please look into the logs or turn on the env var DEBUG=* to debug the constantly restarting query engine.`);
+          }
         }
-      }
-      if (!graceful) {
         this.throwAsyncErrorIfExists(true);
         throw error2;
+      } catch (e) {
+        return { error: e, shouldRetry: isNetworkError };
       }
-      return false;
     }, "handleRequestError");
     this.dirname = dirname2;
     this.env = env2;
@@ -28376,11 +25607,8 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
     this.generator = generator;
     this.datasources = datasources;
     this.tracingConfig = tracingConfig;
-    this.logEmitter = new import_events.default();
-    this.logEmitter.on("error", () => {
-    });
+    this.logEmitter = logEmitter;
     this.showColors = showColors != null ? showColors : false;
-    this.logLevel = logLevel;
     this.logQueries = logQueries != null ? logQueries : false;
     this.clientVersion = clientVersion2;
     this.flags = flags != null ? flags : [];
@@ -28420,7 +25648,7 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
       this.port = Number(url.port);
     }
     if (this.platform) {
-      if (!knownPlatforms.includes(this.platform) && !import_fs4.default.existsSync(this.platform)) {
+      if (!knownPlatforms.includes(this.platform) && !import_fs5.default.existsSync(this.platform)) {
         throw new PrismaClientInitializationError(
           `Unknown ${import_chalk3.default.red("PRISMA_QUERY_ENGINE_BINARY")} ${import_chalk3.default.redBright.bold(
             this.platform
@@ -28442,32 +25670,19 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
   }
   setError(err) {
     var _a3;
-    if (isRustError(err)) {
-      this.lastRustError = err;
-      this.logEmitter.emit(
-        "error",
-        new PrismaClientRustError({
-          clientVersion: this.clientVersion,
-          error: err
-        })
-      );
-      if (err.is_panic) {
-        this.handlePanic();
+    if (isRustErrorLog(err)) {
+      this.lastError = new PrismaClientRustError({
+        clientVersion: this.clientVersion,
+        error: err
+      });
+      if (this.lastError.isPanic()) {
+        if (this.child) {
+          this.stopPromise = killProcessAndWait(this.child);
+        }
+        if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.cancel) {
+          this.currentRequestPromise.cancel();
+        }
       }
-    } else if (isRustErrorLog(err)) {
-      this.lastErrorLog = err;
-      this.logEmitter.emit(
-        "error",
-        new PrismaClientRustError({
-          clientVersion: this.clientVersion,
-          log: err
-        })
-      );
-      if (((_a3 = err.fields) == null ? void 0 : _a3.message) === "PANIC") {
-        this.handlePanic();
-      }
-    } else {
-      this.logEmitter.emit("error", err);
     }
   }
   checkForTooManyEngines() {
@@ -28481,7 +25696,7 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     }
   }
   resolveCwd(cwd) {
-    if (cwd && import_fs4.default.existsSync(cwd) && import_fs4.default.lstatSync(cwd).isDirectory()) {
+    if (cwd && import_fs5.default.existsSync(cwd) && import_fs5.default.lstatSync(cwd).isDirectory()) {
       return cwd;
     }
     return process.cwd();
@@ -28510,20 +25725,11 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     return this.platformPromise;
   }
   getQueryEnginePath(platform3, prefix = __dirname) {
-    let queryEnginePath = import_path2.default.join(prefix, `query-engine-${platform3}`);
+    let queryEnginePath = import_path3.default.join(prefix, `query-engine-${platform3}`);
     if (platform3 === "windows") {
       queryEnginePath = `${queryEnginePath}.exe`;
     }
     return queryEnginePath;
-  }
-  handlePanic() {
-    var _a3;
-    if (this.child) {
-      this.stopPromise = killProcessAndWait(this.child);
-    }
-    if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.cancel) {
-      this.currentRequestPromise.cancel();
-    }
   }
   async resolvePrismaPath() {
     var _a3, _b2, _c;
@@ -28544,8 +25750,8 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     const searchLocations = [
       eval(`require('path').join(__dirname, '../../../.prisma/client')`),
       (_c = (_b2 = (_a3 = this.generator) == null ? void 0 : _a3.output) == null ? void 0 : _b2.value) != null ? _c : eval("__dirname"),
-      import_path2.default.join(eval("__dirname"), ".."),
-      import_path2.default.dirname(this.datamodelPath),
+      import_path3.default.join(eval("__dirname"), ".."),
+      import_path3.default.dirname(this.datamodelPath),
       this.cwd,
       "/tmp/prisma-engines"
     ];
@@ -28554,9 +25760,9 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     }
     for (const location of searchLocations) {
       searchedLocations.push(location);
-      debug4(`Search for Query Engine in ${location}`);
+      debug5(`Search for Query Engine in ${location}`);
       enginePath = this.getQueryEnginePath(this.platform, location);
-      if (import_fs4.default.existsSync(enginePath)) {
+      if (import_fs5.default.existsSync(enginePath)) {
         return { prismaPath: enginePath, searchedLocations };
       }
     }
@@ -28566,7 +25772,7 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
   async getPrismaPath() {
     const { prismaPath, searchedLocations: searchedLocations2 } = await this.resolvePrismaPath();
     const platform3 = await this.getPlatform();
-    if (!await exists2(prismaPath)) {
+    if (!await exists3(prismaPath)) {
       const pinnedStr = this.incorrectlyPinnedBinaryTarget ? `
 You incorrectly pinned it to ${import_chalk3.default.redBright.bold(`${this.incorrectlyPinnedBinaryTarget}`)}
 ` : "";
@@ -28580,8 +25786,8 @@ Searched Locations:
 
 ${searchedLocations2.map((f) => {
         let msg = `  ${f}`;
-        if (process.env.DEBUG === "node-engine-search-locations" && import_fs4.default.existsSync(f)) {
-          const dir = import_fs4.default.readdirSync(f);
+        if (process.env.DEBUG === "node-engine-search-locations" && import_fs5.default.existsSync(f)) {
+          const dir = import_fs5.default.readdirSync(f);
           msg += dir.map((d) => `    ${d}`).join("\n");
         }
         return msg;
@@ -28651,10 +25857,9 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
       }
       await this.startPromise;
       if (!this.child && !this.engineEndpoint) {
-        throw new PrismaClientUnknownRequestError(
-          `Can't perform request, as the Engine has already been stopped`,
-          this.clientVersion
-        );
+        throw new PrismaClientUnknownRequestError(`Can't perform request, as the Engine has already been stopped`, {
+          clientVersion: this.clientVersion
+        });
       }
     }, "startFn");
     const spanOptions = {
@@ -28705,14 +25910,12 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
       }
       try {
         if (((_a3 = this.child) == null ? void 0 : _a3.connected) || this.child && !((_b2 = this.child) == null ? void 0 : _b2.killed)) {
-          debug4(`There is a child that still runs and we want to start again`);
+          debug5(`There is a child that still runs and we want to start again`);
         }
-        this.lastRustError = void 0;
-        this.lastErrorLog = void 0;
-        this.lastPanic = void 0;
+        this.lastError = void 0;
         logger("startin & resettin");
         this.globalKillSignalReceived = void 0;
-        debug4({ cwd: this.cwd });
+        debug5({ cwd: this.cwd });
         const prismaPath = await this.getPrismaPath();
         const additionalFlag = this.allowTriggerPanic ? ["--debug"] : [];
         const flags = [
@@ -28724,7 +25927,7 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
         ];
         this.port = await this.getFreePort();
         flags.push("--port", String(this.port));
-        debug4({ flags });
+        debug5({ flags });
         const env2 = this.getEngineEnvVars();
         this.child = (0, import_child_process2.spawn)(prismaPath, flags, {
           env: env2,
@@ -28734,11 +25937,11 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
         });
         byline(this.child.stderr).on("data", (msg) => {
           const data = String(msg);
-          debug4("stderr", data);
+          debug5("stderr", data);
           try {
             const json = JSON.parse(data);
             if (typeof json.is_panic !== "undefined") {
-              debug4(json);
+              debug5(json);
               this.setError(json);
               if (this.engineStartDeferred) {
                 const err = new PrismaClientInitializationError(json.message, this.clientVersion, json.error_code);
@@ -28756,7 +25959,7 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
           const data = String(msg);
           try {
             const json = JSON.parse(data);
-            debug4("stdout", getMessage(json));
+            debug5("stdout", getMessage(json));
             if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b3 = (_a4 = json.fields) == null ? void 0 : _a4.message) == null ? void 0 : _b3.startsWith("Started query engine http server"))) {
               this.connection.open(`http://127.0.0.1:${this.port}`);
               this.engineStartDeferred.resolve();
@@ -28769,18 +25972,18 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
                 }
                 return;
               }
-              const log4 = convertLog(json);
-              const logIsRustErrorLog = isRustErrorLog(log4);
+              const log3 = convertLog(json);
+              const logIsRustErrorLog = isRustErrorLog(log3);
               if (logIsRustErrorLog) {
-                this.setError(log4);
+                this.setError(log3);
               } else {
-                this.logEmitter.emit(log4.level, log4);
+                this.logEmitter.emit(log3.level, log3);
               }
             } else {
               this.setError(json);
             }
           } catch (e) {
-            debug4(e, data);
+            debug5(e, data);
           }
         });
         this.child.on("exit", (code) => {
@@ -28795,10 +25998,8 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
           if (code !== 0 && this.engineStartDeferred && this.startCount === 1) {
             let err;
             let msg = this.stderrLogs;
-            if (this.lastRustError) {
-              msg = getMessage(this.lastRustError);
-            } else if (this.lastErrorLog) {
-              msg = getMessage(this.lastErrorLog);
+            if (this.lastError) {
+              msg = getMessage(this.lastError);
             }
             if (code !== null) {
               err = new PrismaClientInitializationError(
@@ -28821,13 +26022,13 @@ Make sure that the engine binary at ${prismaPath} is not corrupt.
           if (!this.child) {
             return;
           }
-          if (this.lastRustError) {
+          if (this.lastError) {
             return;
           }
           if (code === 126) {
             this.setError({
               timestamp: new Date(),
-              target: "exit",
+              target: "binary engine process exit",
               level: "error",
               fields: {
                 message: `Couldn't start query engine as it's not executable on this operating system.
@@ -28838,36 +26039,36 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         });
         this.child.on("error", (err) => {
           this.setError({
-            message: err.message,
-            backtrace: "Could not start query engine",
-            is_panic: false
+            timestamp: new Date(),
+            target: "binary engine process error",
+            level: "error",
+            fields: {
+              message: `Couldn't start query engine: ${err}`
+            }
           });
           reject(err);
         });
         this.child.on("close", (code, signal) => {
-          var _a4;
           this.connection.close();
+          let toEmit;
           if (code === null && signal === "SIGABRT" && this.child) {
-            const error2 = new PrismaClientRustPanicError(
+            toEmit = new PrismaClientRustPanicError(
               this.getErrorMessageWithLink("Panic in Query Engine with SIGABRT signal"),
               this.clientVersion
             );
-            this.logEmitter.emit("error", error2);
-          } else if (code === 255 && signal === null && ((_a4 = this.lastErrorLog) == null ? void 0 : _a4.fields.message) === "PANIC" && !this.lastPanic) {
-            const error2 = new PrismaClientRustPanicError(
-              this.getErrorMessageWithLink(
-                `${this.lastErrorLog.fields.message}: ${this.lastErrorLog.fields.reason} in ${this.lastErrorLog.fields.file}:${this.lastErrorLog.fields.line}:${this.lastErrorLog.fields.column}`
-              ),
-              this.clientVersion
-            );
-            this.setError(error2);
+          } else if (code === 255 && signal === null && this.lastError) {
+            toEmit = this.lastError;
+          }
+          if (toEmit) {
+            this.logEmitter.emit("error", {
+              message: toEmit.message,
+              timestamp: new Date(),
+              target: "binary engine process close"
+            });
           }
         });
-        if (this.lastRustError) {
-          return reject(new PrismaClientInitializationError(getMessage(this.lastRustError), this.clientVersion));
-        }
-        if (this.lastErrorLog) {
-          return reject(new PrismaClientInitializationError(getMessage(this.lastErrorLog), this.clientVersion));
+        if (this.lastError) {
+          return reject(new PrismaClientInitializationError(getMessage(this.lastError), this.clientVersion));
         }
         try {
           await new Promise((resolve2, reject2) => {
@@ -28880,11 +26081,11 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         void (async () => {
           try {
             const engineVersion = await this.version(true);
-            debug4(`Client Version: ${this.clientVersion}`);
-            debug4(`Engine Version: ${engineVersion}`);
-            debug4(`Active provider: ${this.activeProvider}`);
+            debug5(`Client Version: ${this.clientVersion}`);
+            debug5(`Engine Version: ${engineVersion}`);
+            debug5(`Active provider: ${this.activeProvider}`);
           } catch (e) {
-            debug4(e);
+            debug5(e);
           }
         })();
         this.stopPromise = void 0;
@@ -28921,18 +26122,18 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     this.getConfigPromise = void 0;
     let stopChildPromise;
     if (this.child) {
-      debug4(`Stopping Prisma engine`);
+      debug5(`Stopping Prisma engine`);
       if (this.startPromise) {
-        debug4(`Waiting for start promise`);
+        debug5(`Waiting for start promise`);
         await this.startPromise;
       }
-      debug4(`Done waiting for start promise`);
+      debug5(`Done waiting for start promise`);
       if (this.child.exitCode === null) {
         stopChildPromise = new Promise((resolve, reject) => {
           this.engineStopDeferred = { resolve, reject };
         });
       } else {
-        debug4("Child already exited with code", this.child.exitCode);
+        debug5("Child already exited with code", this.child.exitCode);
       }
       this.connection.close();
       this.child.kill();
@@ -29012,7 +26213,13 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     this.lastVersion = result.stdout;
     return this.lastVersion;
   }
-  async request(query2, headers = {}, _transaction, numTry = 1) {
+  async request({
+    query: query2,
+    headers = {},
+    numTry = 1,
+    isWrite,
+    transaction
+  }) {
     await this.start();
     this.currentRequestPromise = this.connection.post("/", stringifyQuery(query2), runtimeHeadersToHttpHeaders(headers));
     this.lastQuery = query2;
@@ -29022,7 +26229,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         if (data.errors.length === 1) {
           throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
         }
-        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.clientVersion);
+        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), { clientVersion: this.clientVersion });
       }
       const elapsed = parseInt(headers2["x-elapsed"]) / 1e3;
       if (this.startCount > 0) {
@@ -29032,15 +26239,21 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       return { data, elapsed };
     } catch (e) {
       logger("req - e", e);
-      await this.handleRequestError(e, numTry <= MAX_REQUEST_RETRIES);
-      if (numTry <= MAX_REQUEST_RETRIES) {
+      const { error: error2, shouldRetry } = await this.handleRequestError(e);
+      if (numTry <= MAX_REQUEST_RETRIES && shouldRetry && !isWrite) {
         logger("trying a retry now");
-        return this.request(query2, headers, _transaction, numTry + 1);
+        return this.request({ query: query2, headers, numTry: numTry + 1, isWrite, transaction });
       }
+      throw error2;
     }
-    return null;
   }
-  async requestBatch(queries, headers = {}, transaction, numTry = 1) {
+  async requestBatch({
+    queries,
+    headers = {},
+    transaction,
+    numTry = 1,
+    containsWrite
+  }) {
     await this.start();
     const request2 = {
       batch: queries.map((query2) => ({ query: query2, variables: {} })),
@@ -29066,13 +26279,19 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
       }
     }).catch(async (e) => {
-      const isError2 = await this.handleRequestError(e, numTry < 3);
-      if (!isError2) {
+      const { error: error2, shouldRetry } = await this.handleRequestError(e);
+      if (shouldRetry && !containsWrite) {
         if (numTry <= MAX_REQUEST_RETRIES) {
-          return this.requestBatch(queries, headers, transaction, numTry + 1);
+          return this.requestBatch({
+            queries,
+            headers,
+            transaction,
+            numTry: numTry + 1,
+            containsWrite
+          });
         }
       }
-      throw isError2;
+      throw error2;
     });
   }
   async transaction(action, headers, arg2) {
@@ -29110,30 +26329,16 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     return this.startCount >= MAX_STARTS;
   }
   throwAsyncErrorIfExists(forceThrow = false) {
-    var _a3, _b2;
     logger("throwAsyncErrorIfExists", this.startCount, this.hasMaxRestarts);
-    if (this.lastRustError) {
-      const err = new PrismaClientRustPanicError(
-        this.getErrorMessageWithLink(getMessage(this.lastRustError)),
-        this.clientVersion
-      );
-      if (this.lastRustError.is_panic) {
-        this.lastPanic = err;
-      }
-      if (this.hasMaxRestarts || forceThrow) {
-        throw err;
-      }
-    }
-    if (this.lastErrorLog && isRustErrorLog(this.lastErrorLog)) {
-      const err = new PrismaClientUnknownRequestError(
-        this.getErrorMessageWithLink(getMessage(this.lastErrorLog)),
-        this.clientVersion
-      );
-      if (((_b2 = (_a3 = this.lastErrorLog) == null ? void 0 : _a3.fields) == null ? void 0 : _b2.message) === "PANIC") {
-        this.lastPanic = err;
-      }
-      if (this.hasMaxRestarts || forceThrow) {
-        throw err;
+    if (this.lastError && (this.hasMaxRestarts || forceThrow)) {
+      const lastError = this.lastError;
+      this.lastError = void 0;
+      if (lastError.isPanic()) {
+        throw new PrismaClientRustPanicError(this.getErrorMessageWithLink(getMessage(lastError)), this.clientVersion);
+      } else {
+        throw new PrismaClientUnknownRequestError(this.getErrorMessageWithLink(getMessage(lastError)), {
+          clientVersion: this.clientVersion
+        });
       }
     }
   }
@@ -29160,12 +26365,11 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
   }
   transactionHttpErrorHandler(result) {
     const response = result.data;
-    throw new PrismaClientKnownRequestError(
-      response.message,
-      response.error_code,
-      this.clientVersion,
-      response.meta
-    );
+    throw new PrismaClientKnownRequestError(response.message, {
+      code: response.error_code,
+      clientVersion: this.clientVersion,
+      meta: response.meta
+    });
   }
 };
 __name(BinaryEngine, "BinaryEngine");
@@ -29173,6 +26377,15 @@ function stringifyQuery(q) {
   return `{"variables":{},"query":${JSON.stringify(q)}}`;
 }
 __name(stringifyQuery, "stringifyQuery");
+function runtimeHeadersToHttpHeaders(headers) {
+  if (headers.transactionId) {
+    const { transactionId, ...httpHeaders } = headers;
+    httpHeaders["X-transaction-id"] = transactionId;
+    return httpHeaders;
+  }
+  return headers;
+}
+__name(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
 function hookProcess(handler, exit = false) {
   process.once(handler, async () => {
     for (const engine of engines) {
@@ -29183,7 +26396,7 @@ function hookProcess(handler, exit = false) {
     if (socketPaths.length > 0) {
       for (const socketPath of socketPaths) {
         try {
-          import_fs4.default.unlinkSync(socketPath);
+          import_fs5.default.unlinkSync(socketPath);
         } catch (e) {
         }
       }
@@ -29214,8 +26427,11 @@ function killProcessAndWait(childProcess) {
 }
 __name(killProcessAndWait, "killProcessAndWait");
 
-// ../engine-core/src/data-proxy/DataProxyEngine.ts
-var import_events2 = __toESM(require("events"));
+// ../engine-core/src/common/errors/ErrorWithBatchIndex.ts
+function hasBatchIndex(value) {
+  return typeof value["batchRequestIdx"] === "number";
+}
+__name(hasBatchIndex, "hasBatchIndex");
 
 // ../engine-core/src/common/errors/PrismaClientError.ts
 var PrismaClientError = class extends Error {
@@ -29469,7 +26685,7 @@ async function responseToError(response, clientVersion2) {
   const info2 = { clientVersion: clientVersion2, response };
   const error2 = await getResponseErrorBody(response);
   if (error2.type === "QueryEngineError") {
-    throw new PrismaClientKnownRequestError(error2.body.message, error2.body.error_code, clientVersion2);
+    throw new PrismaClientKnownRequestError(error2.body.message, { code: error2.body.error_code, clientVersion: clientVersion2 });
   }
   if (error2.type === "DataProxyError") {
     if (error2.body === "InternalDataProxyError") {
@@ -29548,10 +26764,10 @@ __name(backOff, "backOff");
 
 // ../engines/package.json
 var devDependencies = {
-  "@prisma/debug": "workspace:4.6.0",
-  "@prisma/engines-version": "4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3",
-  "@prisma/fetch-engine": "workspace:4.6.0",
-  "@prisma/get-platform": "workspace:4.6.0",
+  "@prisma/debug": "workspace:4.7.0",
+  "@prisma/engines-version": "4.7.0-74.39190b250ebc338586e25e6da45e5e783bc8a635",
+  "@prisma/fetch-engine": "workspace:4.7.0",
+  "@prisma/get-platform": "workspace:4.7.0",
   "@swc/core": "1.3.14",
   "@swc/jest": "0.2.23",
   "@types/jest": "28.1.8",
@@ -29653,7 +26869,7 @@ var include = typeof require !== "undefined" ? require : () => {
 
 // ../engine-core/src/data-proxy/utils/getClientVersion.ts
 var semverRegex = /^[1-9][0-9]*\.[0-9]+\.[0-9]+$/;
-var debug5 = src_default("prisma:client:dataproxyEngine");
+var debug6 = src_default("prisma:client:dataproxyEngine");
 async function _getClientVersion(config2) {
   var _a3, _b2, _c;
   const engineVersion = devDependencies["@prisma/engines-version"];
@@ -29676,7 +26892,7 @@ async function _getClientVersion(config2) {
       );
     }
     const bodyAsText = await res.text();
-    debug5("length of body fetched from unpkg.com", bodyAsText.length);
+    debug6("length of body fetched from unpkg.com", bodyAsText.length);
     let bodyAsJson;
     try {
       bodyAsJson = JSON.parse(bodyAsText);
@@ -29693,7 +26909,7 @@ async function _getClientVersion(config2) {
 __name(_getClientVersion, "_getClientVersion");
 async function getClientVersion(config2) {
   const version = await _getClientVersion(config2);
-  debug5("version", version);
+  debug6("version", version);
   return version;
 }
 __name(getClientVersion, "getClientVersion");
@@ -29704,8 +26920,8 @@ __name(prismaPkgURL, "prismaPkgURL");
 
 // ../engine-core/src/data-proxy/DataProxyEngine.ts
 var MAX_RETRIES = 10;
-var P2 = Promise.resolve();
-var debug6 = src_default("prisma:client:dataproxyEngine");
+var P = Promise.resolve();
+var debug7 = src_default("prisma:client:dataproxyEngine");
 var DataProxyEngine = class extends Engine {
   constructor(config2) {
     var _a3, _b2, _c, _d;
@@ -29716,14 +26932,12 @@ var DataProxyEngine = class extends Engine {
     this.inlineDatasources = (_b2 = config2.inlineDatasources) != null ? _b2 : {};
     this.inlineSchemaHash = (_c = config2.inlineSchemaHash) != null ? _c : "";
     this.clientVersion = (_d = config2.clientVersion) != null ? _d : "unknown";
-    this.logEmitter = new import_events2.default();
-    this.logEmitter.on("error", () => {
-    });
+    this.logEmitter = config2.logEmitter;
     const [host, apiKey] = this.extractHostAndApiKey();
-    this.remoteClientVersion = P2.then(() => getClientVersion(this.config));
+    this.remoteClientVersion = P.then(() => getClientVersion(this.config));
     this.headers = { Authorization: `Bearer ${apiKey}` };
     this.host = host;
-    debug6("host", this.host);
+    debug7("host", this.host);
   }
   version() {
     return "unknown";
@@ -29766,7 +26980,7 @@ var DataProxyEngine = class extends Engine {
       clientVersion: this.clientVersion
     });
     if (!response.ok) {
-      debug6("schema response status", response.status);
+      debug7("schema response status", response.status);
     }
     const err = await responseToError(response, this.clientVersion);
     if (err) {
@@ -29778,11 +26992,11 @@ var DataProxyEngine = class extends Engine {
       });
     }
   }
-  request(query2, headers = {}, transaction) {
+  request({ query: query2, headers = {}, transaction }) {
     this.logEmitter.emit("query", { query: query2 });
     return this.requestInternal({ query: query2, variables: {} }, headers, transaction);
   }
-  async requestBatch(queries, headers = {}, transaction) {
+  async requestBatch({ queries, headers = {}, transaction }) {
     const isTransaction = Boolean(transaction);
     this.logEmitter.emit("query", {
       query: `Batch${isTransaction ? " in transaction" : ""} (${queries.length}):
@@ -29804,12 +27018,12 @@ ${queries.join("\n")}`
         logHttpCall(url);
         const response = await request(url, {
           method: "POST",
-          headers: { ...runtimeHeadersToHttpHeaders(headers), ...this.headers },
+          headers: { ...runtimeHeadersToHttpHeaders2(headers), ...this.headers },
           body: JSON.stringify(body),
           clientVersion: this.clientVersion
         });
         if (!response.ok) {
-          debug6("graphql response status", response.status);
+          debug7("graphql response status", response.status);
         }
         const e = await responseToError(response, this.clientVersion);
         await this.handleError(e);
@@ -29818,7 +27032,7 @@ ${queries.join("\n")}`
           if (data.errors.length === 1) {
             throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
           } else {
-            throw new PrismaClientUnknownRequestError(data.errors, this.config.clientVersion);
+            throw new PrismaClientUnknownRequestError(data.errors, { clientVersion: this.config.clientVersion });
           }
         }
         return data;
@@ -29845,7 +27059,7 @@ ${queries.join("\n")}`
           logHttpCall(url);
           const response = await request(url, {
             method: "POST",
-            headers: { ...runtimeHeadersToHttpHeaders(headers), ...this.headers },
+            headers: { ...runtimeHeadersToHttpHeaders2(headers), ...this.headers },
             body,
             clientVersion: this.clientVersion
           });
@@ -29860,7 +27074,7 @@ ${queries.join("\n")}`
           logHttpCall(url);
           const response = await request(url, {
             method: "POST",
-            headers: { ...runtimeHeadersToHttpHeaders(headers), ...this.headers },
+            headers: { ...runtimeHeadersToHttpHeaders2(headers), ...this.headers },
             clientVersion: this.clientVersion
           });
           const err = await responseToError(response, this.clientVersion);
@@ -29955,9 +27169,6 @@ ${queries.join("\n")}`
       try {
         return await args.callback({ logHttpCall });
       } catch (e) {
-        this.logEmitter.emit("error", {
-          message: `Error while ${args.actionGerund}: ${(_a3 = e.message) != null ? _a3 : "(unknown)"}`
-        });
         if (!(e instanceof DataProxyError))
           throw e;
         if (!e.isRetryable)
@@ -29969,7 +27180,9 @@ ${queries.join("\n")}`
             throw e;
           }
         }
-        this.logEmitter.emit("warn", { message: "This request can be retried" });
+        this.logEmitter.emit("warn", {
+          message: `Attempt ${attempt + 1}/${MAX_RETRIES} failed for ${args.actionGerund}: ${(_a3 = e.message) != null ? _a3 : "(unknown)"}`
+        });
         const delay = await backOff(attempt);
         this.logEmitter.emit("warn", { message: `Retrying after ${delay}ms` });
       }
@@ -29988,17 +27201,25 @@ ${queries.join("\n")}`
   }
 };
 __name(DataProxyEngine, "DataProxyEngine");
+function runtimeHeadersToHttpHeaders2(headers) {
+  if (headers.transactionId) {
+    const httpHeaders = { ...headers };
+    delete httpHeaders.transactionId;
+    return httpHeaders;
+  }
+  return headers;
+}
+__name(runtimeHeadersToHttpHeaders2, "runtimeHeadersToHttpHeaders");
 
 // ../engine-core/src/library/LibraryEngine.ts
 var import_chalk5 = __toESM(require_source());
-var import_events3 = __toESM(require("events"));
-var import_fs6 = __toESM(require("fs"));
+var import_fs7 = __toESM(require("fs"));
 
 // ../engine-core/src/library/DefaultLibraryLoader.ts
 var import_chalk4 = __toESM(require_source());
-var import_fs5 = __toESM(require("fs"));
-var import_path3 = __toESM(require("path"));
-var debug7 = src_default("prisma:client:libraryEngine:loader");
+var import_fs6 = __toESM(require("fs"));
+var import_path4 = __toESM(require("path"));
+var debug8 = src_default("prisma:client:libraryEngine:loader");
 var DefaultLibraryLoader = class {
   constructor(config2) {
     this.libQueryEnginePath = null;
@@ -30009,11 +27230,11 @@ var DefaultLibraryLoader = class {
     if (!this.libQueryEnginePath) {
       this.libQueryEnginePath = await this.getLibQueryEnginePath();
     }
-    debug7(`loadEngine using ${this.libQueryEnginePath}`);
+    debug8(`loadEngine using ${this.libQueryEnginePath}`);
     try {
       return eval("require")(this.libQueryEnginePath);
     } catch (e) {
-      if (import_fs5.default.existsSync(this.libQueryEnginePath)) {
+      if (import_fs6.default.existsSync(this.libQueryEnginePath)) {
         if (this.libQueryEnginePath.endsWith(".node")) {
           throw new PrismaClientInitializationError(
             `Unable to load Node-API Library from ${import_chalk4.default.dim(this.libQueryEnginePath)}, Library may be corrupt`,
@@ -30036,12 +27257,12 @@ var DefaultLibraryLoader = class {
   async getLibQueryEnginePath() {
     var _a3, _b2, _c, _d;
     const libPath = (_a3 = process.env.PRISMA_QUERY_ENGINE_LIBRARY) != null ? _a3 : this.config.prismaPath;
-    if (libPath && import_fs5.default.existsSync(libPath) && libPath.endsWith(".node")) {
+    if (libPath && import_fs6.default.existsSync(libPath) && libPath.endsWith(".node")) {
       return libPath;
     }
     this.platform = (_b2 = this.platform) != null ? _b2 : await getPlatform();
     const { enginePath: enginePath2, searchedLocations: searchedLocations2 } = await this.resolveEnginePath();
-    if (!import_fs5.default.existsSync(enginePath2)) {
+    if (!import_fs6.default.existsSync(enginePath2)) {
       const incorrectPinnedPlatformErrorStr = this.platform ? `
 You incorrectly pinned it to ${import_chalk4.default.redBright.bold(`${this.platform}`)}
 ` : "";
@@ -30055,8 +27276,8 @@ Searched Locations:
 
 ${searchedLocations2.map((f) => {
         let msg = `  ${f}`;
-        if (process.env.DEBUG === "node-engine-search-locations" && import_fs5.default.existsSync(f)) {
-          const dir = import_fs5.default.readdirSync(f);
+        if (process.env.DEBUG === "node-engine-search-locations" && import_fs6.default.existsSync(f)) {
+          const dir = import_fs6.default.readdirSync(f);
           msg += dir.map((d) => `    ${d}`).join("\n");
         }
         return msg;
@@ -30103,15 +27324,15 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
     }
     this.platform = (_a3 = this.platform) != null ? _a3 : await getPlatform();
     if (__filename.includes("DefaultLibraryLoader")) {
-      enginePath = import_path3.default.join(getEnginesPath(), getNodeAPIName(this.platform, "fs"));
+      enginePath = import_path4.default.join(getEnginesPath(), getNodeAPIName(this.platform, "fs"));
       return { enginePath, searchedLocations };
     }
     const dirname = eval("__dirname");
     const searchLocations = [
-      import_path3.default.resolve(dirname, "../../../.prisma/client"),
+      import_path4.default.resolve(dirname, "../../../.prisma/client"),
       (_d = (_c = (_b2 = this.config.generator) == null ? void 0 : _b2.output) == null ? void 0 : _c.value) != null ? _d : dirname,
-      import_path3.default.resolve(dirname, ".."),
-      import_path3.default.dirname(this.config.datamodelPath),
+      import_path4.default.resolve(dirname, ".."),
+      import_path4.default.dirname(this.config.datamodelPath),
       this.config.cwd,
       "/tmp/prisma-engines"
     ];
@@ -30120,13 +27341,13 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
     }
     for (const location of searchLocations) {
       searchedLocations.push(location);
-      debug7(`Searching for Query Engine Library in ${location}`);
-      enginePath = import_path3.default.join(location, getNodeAPIName(this.platform, "fs"));
-      if (import_fs5.default.existsSync(enginePath)) {
+      debug8(`Searching for Query Engine Library in ${location}`);
+      enginePath = import_path4.default.join(location, getNodeAPIName(this.platform, "fs"));
+      if (import_fs6.default.existsSync(enginePath)) {
         return { enginePath, searchedLocations };
       }
     }
-    enginePath = import_path3.default.join(__dirname, getNodeAPIName(this.platform, "fs"));
+    enginePath = import_path4.default.join(__dirname, getNodeAPIName(this.platform, "fs"));
     return { enginePath: enginePath != null ? enginePath : "", searchedLocations };
   }
   getFixedGenerator() {
@@ -30140,7 +27361,7 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
 __name(DefaultLibraryLoader, "DefaultLibraryLoader");
 
 // ../engine-core/src/library/ExitHooks.ts
-var debug8 = src_default("prisma:client:libraryEngine:exitHooks");
+var debug9 = src_default("prisma:client:libraryEngine:exitHooks");
 var ExitHooks = class {
   constructor() {
     this.nextOwnerId = 1;
@@ -30184,7 +27405,7 @@ var ExitHooks = class {
   }
   installHook(event, shouldExit = false) {
     process.once(event, async (code) => {
-      debug8(`exit event received: ${event}`);
+      debug9(`exit event received: ${event}`);
       for (const listener of this.idToListenerMap.values()) {
         await listener();
       }
@@ -30198,7 +27419,7 @@ var ExitHooks = class {
 __name(ExitHooks, "ExitHooks");
 
 // ../engine-core/src/library/LibraryEngine.ts
-var debug9 = src_default("prisma:client:libraryEngine");
+var debug10 = src_default("prisma:client:libraryEngine");
 function isQueryEvent(event) {
   return event["item_type"] === "query" && "query" in event;
 }
@@ -30218,15 +27439,13 @@ var LibraryEngine = class extends Engine {
   constructor(config2, loader = new DefaultLibraryLoader(config2)) {
     var _a3, _b2;
     super();
-    this.datamodel = import_fs6.default.readFileSync(config2.datamodelPath, "utf-8");
+    this.datamodel = import_fs7.default.readFileSync(config2.datamodelPath, "utf-8");
     this.config = config2;
     this.libraryStarted = false;
     this.logQueries = (_a3 = config2.logQueries) != null ? _a3 : false;
     this.logLevel = (_b2 = config2.logLevel) != null ? _b2 : "error";
     this.libraryLoader = loader;
-    this.logEmitter = new import_events3.default();
-    this.logEmitter.on("error", (e) => {
-    });
+    this.logEmitter = config2.logEmitter;
     this.datasourceOverrides = config2.datasources ? this.convertDatasources(config2.datasources) : {};
     if (config2.enableDebugLogs) {
       this.logLevel = "debug";
@@ -30267,17 +27486,16 @@ var LibraryEngine = class extends Engine {
     }
     const response = this.parseEngineResponse(result);
     if (response.error_code) {
-      throw new PrismaClientKnownRequestError(
-        response.message,
-        response.error_code,
-        this.config.clientVersion,
-        response.meta
-      );
+      throw new PrismaClientKnownRequestError(response.message, {
+        code: response.error_code,
+        clientVersion: this.config.clientVersion,
+        meta: response.meta
+      });
     }
     return response;
   }
   async instantiateLibrary() {
-    debug9("internalSetup");
+    debug10("internalSetup");
     if (this.libraryInstantiationPromise) {
       return this.libraryInstantiationPromise;
     }
@@ -30305,13 +27523,17 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
   }
   parseEngineResponse(response) {
     if (!response) {
-      throw new PrismaClientUnknownRequestError(`Response from the Engine was empty`, this.config.clientVersion);
+      throw new PrismaClientUnknownRequestError(`Response from the Engine was empty`, {
+        clientVersion: this.config.clientVersion
+      });
     }
     try {
       const config2 = JSON.parse(response);
       return config2;
     } catch (err) {
-      throw new PrismaClientUnknownRequestError(`Unable to JSON.parse response from engine`, this.config.clientVersion);
+      throw new PrismaClientUnknownRequestError(`Unable to JSON.parse response from engine`, {
+        clientVersion: this.config.clientVersion
+      });
     }
   }
   convertDatasources(datasources) {
@@ -30340,9 +27562,9 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
             logLevel: this.logLevel,
             configDir: this.config.cwd
           },
-          (log4) => {
+          (log3) => {
             var _a4;
-            (_a4 = weakThis.deref()) == null ? void 0 : _a4.logger(log4);
+            (_a4 = weakThis.deref()) == null ? void 0 : _a4.logger(log3);
           }
         );
         engineInstanceCount++;
@@ -30357,9 +27579,9 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
       }
     }
   }
-  logger(log4) {
+  logger(log3) {
     var _a3;
-    const event = this.parseEngineResponse(log4);
+    const event = this.parseEngineResponse(log3);
     if (!event)
       return;
     if ("span" in event) {
@@ -30384,7 +27606,6 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
         ),
         this.config.clientVersion
       );
-      this.logEmitter.emit("error", this.loggerRustPanic);
     } else {
       this.logEmitter.emit(event.level, {
         timestamp: new Date(),
@@ -30431,7 +27652,7 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     await this.libraryInstantiationPromise;
     await this.libraryStoppingPromise;
     if (this.libraryStartingPromise) {
-      debug9(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
+      debug10(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
       return this.libraryStartingPromise;
     }
     if (this.libraryStarted) {
@@ -30439,14 +27660,14 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     }
     const startFn = /* @__PURE__ */ __name(async () => {
       var _a3;
-      debug9("library starting");
+      debug10("library starting");
       try {
         const headers = {
           traceparent: getTraceParent({ tracingConfig: this.config.tracingConfig })
         };
         await ((_a3 = this.engine) == null ? void 0 : _a3.connect(JSON.stringify(headers)));
         this.libraryStarted = true;
-        debug9("library started");
+        debug10("library started");
       } catch (err) {
         const error2 = this.parseInitError(err.message);
         if (typeof error2 === "string") {
@@ -30469,7 +27690,7 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     await this.libraryStartingPromise;
     await this.executingQueryPromise;
     if (this.libraryStoppingPromise) {
-      debug9("library is already stopping");
+      debug10("library is already stopping");
       return this.libraryStoppingPromise;
     }
     if (!this.libraryStarted) {
@@ -30478,14 +27699,14 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     const stopFn = /* @__PURE__ */ __name(async () => {
       var _a3;
       await new Promise((r) => setTimeout(r, 5));
-      debug9("library stopping");
+      debug10("library stopping");
       const headers = {
         traceparent: getTraceParent({ tracingConfig: this.config.tracingConfig })
       };
       await ((_a3 = this.engine) == null ? void 0 : _a3.disconnect(JSON.stringify(headers)));
       this.libraryStarted = false;
       this.libraryStoppingPromise = void 0;
-      debug9("library stopped");
+      debug10("library stopped");
     }, "stopFn");
     const spanConfig = {
       name: "disconnect",
@@ -30516,9 +27737,9 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     var _a3;
     return (_a3 = this.library) == null ? void 0 : _a3.debugPanic(message);
   }
-  async request(query2, headers = {}) {
+  async request({ query: query2, headers = {} }) {
     var _a3, _b2;
-    debug9(`sending request, this.libraryStarted: ${this.libraryStarted}`);
+    debug10(`sending request, this.libraryStarted: ${this.libraryStarted}`);
     const request2 = { query: query2, variables: {} };
     const headerStr = JSON.stringify(headers);
     const queryStr = JSON.stringify(request2);
@@ -30531,7 +27752,9 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
         if (data.errors.length === 1) {
           throw this.buildQueryError(data.errors[0]);
         }
-        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), {
+          clientVersion: this.config.clientVersion
+        });
       } else if (this.loggerRustPanic) {
         throw this.loggerRustPanic;
       }
@@ -30548,12 +27771,14 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
         throw e;
       } else {
         throw new PrismaClientUnknownRequestError(`${error2.message}
-${error2.backtrace}`, this.config.clientVersion);
+${error2.backtrace}`, {
+          clientVersion: this.config.clientVersion
+        });
       }
     }
   }
-  async requestBatch(queries, headers = {}, transaction) {
-    debug9("requestBatch");
+  async requestBatch({ queries, headers = {}, transaction }) {
+    debug10("requestBatch");
     const request2 = {
       batch: queries.map((query2) => ({ query: query2, variables: {} })),
       transaction: Boolean(transaction),
@@ -30568,7 +27793,9 @@ ${error2.backtrace}`, this.config.clientVersion);
       if (data.errors.length === 1) {
         throw this.buildQueryError(data.errors[0]);
       }
-      throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+      throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), {
+        clientVersion: this.config.clientVersion
+      });
     }
     const { batchResult, errors } = data;
     if (Array.isArray(batchResult)) {
@@ -30609,206 +27836,58 @@ ${error2.backtrace}`, this.config.clientVersion);
 };
 __name(LibraryEngine, "LibraryEngine");
 
-// ../internals/src/utils/tryLoadEnvs.ts
-var import_chalk6 = __toESM(require_source());
-var import_dotenv = __toESM(require_main2());
-var import_fs7 = __toESM(require("fs"));
-var import_path4 = __toESM(require("path"));
-
-// ../internals/src/dotenvExpand.ts
-function dotenvExpand(config2) {
-  const environment = config2.ignoreProcessEnv ? {} : process.env;
-  const interpolate = /* @__PURE__ */ __name((envValue) => {
-    const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g) || [];
-    return matches.reduce(function(newEnv, match) {
-      const parts = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(match);
-      if (!parts) {
-        return newEnv;
-      }
-      const prefix = parts[1];
-      let value, replacePart;
-      if (prefix === "\\") {
-        replacePart = parts[0];
-        value = replacePart.replace("\\$", "$");
-      } else {
-        const key = parts[2];
-        replacePart = parts[0].substring(prefix.length);
-        value = Object.hasOwnProperty.call(environment, key) ? environment[key] : config2.parsed[key] || "";
-        value = interpolate(value);
-      }
-      return newEnv.replace(replacePart, value);
-    }, envValue);
-  }, "interpolate");
-  for (const configKey in config2.parsed) {
-    const value = Object.hasOwnProperty.call(environment, configKey) ? environment[configKey] : config2.parsed[configKey];
-    config2.parsed[configKey] = interpolate(value);
-  }
-  for (const processKey in config2.parsed) {
-    environment[processKey] = config2.parsed[processKey];
-  }
-  return config2;
-}
-__name(dotenvExpand, "dotenvExpand");
-
-// ../internals/src/utils/tryLoadEnvs.ts
-var debug10 = src_default("prisma:tryLoadEnv");
-function tryLoadEnvs({
-  rootEnvPath,
-  schemaEnvPath
-}, opts = {
-  conflictCheck: "none"
-}) {
-  var _a3, _b2;
-  const rootEnvInfo = loadEnv(rootEnvPath);
-  if (opts.conflictCheck !== "none") {
-    checkForConflicts(rootEnvInfo, schemaEnvPath, opts.conflictCheck);
-  }
-  let schemaEnvInfo = null;
-  if (!pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, schemaEnvPath)) {
-    schemaEnvInfo = loadEnv(schemaEnvPath);
-  }
-  if (!rootEnvInfo && !schemaEnvInfo) {
-    debug10("No Environment variables loaded");
-  }
-  if (schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult.error) {
-    return console.error(import_chalk6.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
-  }
-  const messages = [rootEnvInfo == null ? void 0 : rootEnvInfo.message, schemaEnvInfo == null ? void 0 : schemaEnvInfo.message].filter(Boolean);
-  return {
-    message: messages.join("\n"),
-    parsed: {
-      ...(_a3 = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult) == null ? void 0 : _a3.parsed,
-      ...(_b2 = schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult) == null ? void 0 : _b2.parsed
-    }
-  };
-}
-__name(tryLoadEnvs, "tryLoadEnvs");
-function checkForConflicts(rootEnvInfo, envPath, type) {
-  const parsedRootEnv = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult.parsed;
-  const areNotTheSame = !pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, envPath);
-  if (parsedRootEnv && envPath && areNotTheSame && import_fs7.default.existsSync(envPath)) {
-    const envConfig = import_dotenv.default.parse(import_fs7.default.readFileSync(envPath));
-    const conflicts = [];
-    for (const k in envConfig) {
-      if (parsedRootEnv[k] === envConfig[k]) {
-        conflicts.push(k);
-      }
-    }
-    if (conflicts.length > 0) {
-      const relativeRootEnvPath = import_path4.default.relative(process.cwd(), rootEnvInfo.path);
-      const relativeEnvPath = import_path4.default.relative(process.cwd(), envPath);
-      if (type === "error") {
-        const message = `There is a conflict between env var${conflicts.length > 1 ? "s" : ""} in ${import_chalk6.default.underline(
-          relativeRootEnvPath
-        )} and ${import_chalk6.default.underline(relativeEnvPath)}
-Conflicting env vars:
-${conflicts.map((conflict) => `  ${import_chalk6.default.bold(conflict)}`).join("\n")}
-
-We suggest to move the contents of ${import_chalk6.default.underline(relativeEnvPath)} to ${import_chalk6.default.underline(
-          relativeRootEnvPath
-        )} to consolidate your env vars.
-`;
-        throw new Error(message);
-      } else if (type === "warn") {
-        const message = `Conflict for env var${conflicts.length > 1 ? "s" : ""} ${conflicts.map((c) => import_chalk6.default.bold(c)).join(", ")} in ${import_chalk6.default.underline(relativeRootEnvPath)} and ${import_chalk6.default.underline(relativeEnvPath)}
-Env vars from ${import_chalk6.default.underline(relativeEnvPath)} overwrite the ones from ${import_chalk6.default.underline(relativeRootEnvPath)}
-      `;
-        console.warn(`${import_chalk6.default.yellow("warn(prisma)")} ${message}`);
-      }
-    }
-  }
-}
-__name(checkForConflicts, "checkForConflicts");
-function loadEnv(envPath) {
-  if (exists3(envPath)) {
-    debug10(`Environment variables loaded from ${envPath}`);
-    return {
-      dotenvResult: dotenvExpand(
-        import_dotenv.default.config({
-          path: envPath,
-          debug: process.env.DOTENV_CONFIG_DEBUG ? true : void 0
-        })
-      ),
-      message: import_chalk6.default.dim(`Environment variables loaded from ${import_path4.default.relative(process.cwd(), envPath)}`),
-      path: envPath
-    };
-  } else {
-    debug10(`Environment variables not found at ${envPath}`);
-  }
-  return null;
-}
-__name(loadEnv, "loadEnv");
-function pathsEqual(path1, path22) {
-  return path1 && path22 && import_path4.default.resolve(path1) === import_path4.default.resolve(path22);
-}
-__name(pathsEqual, "pathsEqual");
-function exists3(p) {
-  return Boolean(p && import_fs7.default.existsSync(p));
-}
-__name(exists3, "exists");
-
-// ../internals/src/client/getClientEngineType.ts
-var DEFAULT_CLIENT_ENGINE_TYPE = "library" /* Library */;
-function getClientEngineType(generatorConfig) {
-  const engineTypeFromEnvVar = getEngineTypeFromEnvVar();
-  if (engineTypeFromEnvVar)
-    return engineTypeFromEnvVar;
-  if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "library" /* Library */) {
-    return "library" /* Library */;
-  } else if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "binary" /* Binary */) {
-    return "binary" /* Binary */;
-  } else {
-    return DEFAULT_CLIENT_ENGINE_TYPE;
-  }
-}
-__name(getClientEngineType, "getClientEngineType");
-function getEngineTypeFromEnvVar() {
-  const engineType = process.env.PRISMA_CLIENT_ENGINE_TYPE;
-  if (engineType === "library" /* Library */) {
-    return "library" /* Library */;
-  } else if (engineType === "binary" /* Binary */) {
-    return "binary" /* Binary */;
-  } else {
-    return void 0;
-  }
-}
-__name(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
-
-// ../internals/src/cli/utils.ts
-var import_arg = __toESM(require_arg());
-var import_strip_indent = __toESM(require_strip_indent());
-function isError(result) {
-  return result instanceof Error;
-}
-__name(isError, "isError");
+// ../generator-helper/src/dmmf.ts
+var DMMF;
+((DMMF2) => {
+  let ModelAction;
+  ((ModelAction2) => {
+    ModelAction2["findUnique"] = "findUnique";
+    ModelAction2["findUniqueOrThrow"] = "findUniqueOrThrow";
+    ModelAction2["findFirst"] = "findFirst";
+    ModelAction2["findFirstOrThrow"] = "findFirstOrThrow";
+    ModelAction2["findMany"] = "findMany";
+    ModelAction2["create"] = "create";
+    ModelAction2["createMany"] = "createMany";
+    ModelAction2["update"] = "update";
+    ModelAction2["updateMany"] = "updateMany";
+    ModelAction2["upsert"] = "upsert";
+    ModelAction2["delete"] = "delete";
+    ModelAction2["deleteMany"] = "deleteMany";
+    ModelAction2["groupBy"] = "groupBy";
+    ModelAction2["count"] = "count";
+    ModelAction2["aggregate"] = "aggregate";
+    ModelAction2["findRaw"] = "findRaw";
+    ModelAction2["aggregateRaw"] = "aggregateRaw";
+  })(ModelAction = DMMF2.ModelAction || (DMMF2.ModelAction = {}));
+})(DMMF || (DMMF = {}));
 
 // ../internals/src/logger.ts
 var logger_exports = {};
 __export(logger_exports, {
   error: () => error,
   info: () => info,
-  log: () => log3,
+  log: () => log,
   query: () => query,
   should: () => should,
   tags: () => tags,
   warn: () => warn
 });
-var import_chalk7 = __toESM(require_source());
+var import_chalk6 = __toESM(require_source());
 var tags = {
-  error: import_chalk7.default.red("prisma:error"),
-  warn: import_chalk7.default.yellow("prisma:warn"),
-  info: import_chalk7.default.cyan("prisma:info"),
-  query: import_chalk7.default.blue("prisma:query")
+  error: import_chalk6.default.red("prisma:error"),
+  warn: import_chalk6.default.yellow("prisma:warn"),
+  info: import_chalk6.default.cyan("prisma:info"),
+  query: import_chalk6.default.blue("prisma:query")
 };
 var should = {
-  warn: !process.env.PRISMA_DISABLE_WARNINGS
+  warn: () => !process.env.PRISMA_DISABLE_WARNINGS
 };
-function log3(...data) {
+function log(...data) {
   console.log(...data);
 }
-__name(log3, "log");
+__name(log, "log");
 function warn(message, ...optionalParams) {
-  if (should.warn) {
+  if (should.warn()) {
     console.warn(`${tags.warn} ${message}`, ...optionalParams);
   }
 }
@@ -30826,12 +27905,6 @@ function query(message, ...optionalParams) {
 }
 __name(query, "query");
 
-// ../internals/src/utils/assertNever.ts
-function assertNever(arg2, errorMessage) {
-  throw new Error(errorMessage);
-}
-__name(assertNever, "assertNever");
-
 // ../internals/src/utils/callOnce.ts
 function callOnce(fn) {
   let result;
@@ -30839,13 +27912,33 @@ function callOnce(fn) {
 }
 __name(callOnce, "callOnce");
 
+// ../internals/src/utils/hasOwnProperty.ts
+function hasOwnProperty2(object, key) {
+  return Object.prototype.hasOwnProperty.call(object, key);
+}
+__name(hasOwnProperty2, "hasOwnProperty");
+
+// ../internals/src/utils/isPromiseLike.ts
+function isPromiseLike(value) {
+  return value != null && typeof value["then"] === "function";
+}
+__name(isPromiseLike, "isPromiseLike");
+
 // ../internals/src/utils/keyBy.ts
-var keyBy2 = /* @__PURE__ */ __name((collection, iteratee) => {
+var keyBy = /* @__PURE__ */ __name((collection, iteratee) => {
   return collection.reduce((acc, curr) => {
     acc[iteratee(curr)] = curr;
     return acc;
   }, {});
 }, "keyBy");
+
+// ../internals/src/utils/mapObjectValues.ts
+function mapObjectValues(object, mapper) {
+  return Object.fromEntries(
+    Object.entries(object).map(([key, value]) => [key, mapper(value, key)])
+  );
+}
+__name(mapObjectValues, "mapObjectValues");
 
 // ../internals/src/warnOnce.ts
 var alreadyWarned = /* @__PURE__ */ new Set();
@@ -30856,8 +27949,2985 @@ var warnOnce = /* @__PURE__ */ __name((key, message, ...args) => {
   }
 }, "warnOnce");
 
+// src/runtime/core/extensions/wrapExtensionCallback.ts
+var PrismaClientExtensionError = class extends Error {
+  constructor(extensionName, cause) {
+    super(`${getTitleFromExtensionName(extensionName)}: ${getMessageFromCause(cause)}`, { cause });
+    this.extensionName = extensionName;
+    this.name = "PrismaClientExtensionError";
+    if (!this.cause) {
+      this.cause = cause;
+    }
+    if (typeof Error.captureStackTrace === "function") {
+      Error.captureStackTrace(this, PrismaClientExtensionError);
+    }
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientExtensionError";
+  }
+};
+__name(PrismaClientExtensionError, "PrismaClientExtensionError");
+function getTitleFromExtensionName(extensionName) {
+  if (extensionName) {
+    return `Error caused by extension "${extensionName}"`;
+  }
+  return "Error caused by an extension";
+}
+__name(getTitleFromExtensionName, "getTitleFromExtensionName");
+function getMessageFromCause(cause) {
+  if (cause instanceof Error) {
+    return cause.message;
+  }
+  return `${cause}`;
+}
+__name(getMessageFromCause, "getMessageFromCause");
+function wrapExtensionCallback(name, fn) {
+  return function(...args) {
+    try {
+      const result = fn.apply(this, args);
+      if (isPromiseLike(result)) {
+        return result.then(void 0, (error2) => Promise.reject(new PrismaClientExtensionError(name, error2)));
+      }
+      return result;
+    } catch (error2) {
+      throw new PrismaClientExtensionError(name, error2);
+    }
+  };
+}
+__name(wrapExtensionCallback, "wrapExtensionCallback");
+function wrapAllExtensionCallbacks(name, object) {
+  if (!object) {
+    return object;
+  }
+  return mapObjectValues(
+    object,
+    (prop) => typeof prop === "function" ? wrapExtensionCallback(name, prop) : prop
+  );
+}
+__name(wrapAllExtensionCallbacks, "wrapAllExtensionCallbacks");
+
+// src/runtime/core/metrics/MetricsClient.ts
+var MetricsClient = class {
+  constructor(engine) {
+    this._engine = engine;
+  }
+  prometheus(options) {
+    return this._engine.metrics({ format: "prometheus", ...options });
+  }
+  json(options) {
+    return this._engine.metrics({ format: "json", ...options });
+  }
+};
+__name(MetricsClient, "MetricsClient");
+
+// src/runtime/utils/applyMixins.ts
+function applyMixins(derivedCtor, constructors) {
+  var _a3;
+  for (const baseCtor of constructors) {
+    for (const name of Object.getOwnPropertyNames(baseCtor.prototype)) {
+      Object.defineProperty(
+        derivedCtor.prototype,
+        name,
+        (_a3 = Object.getOwnPropertyDescriptor(baseCtor.prototype, name)) != null ? _a3 : /* @__PURE__ */ Object.create(null)
+      );
+    }
+  }
+}
+__name(applyMixins, "applyMixins");
+
+// src/runtime/utils/common.ts
+var import_chalk7 = __toESM(require_source());
+
+// ../../node_modules/.pnpm/decimal.js@10.4.2/node_modules/decimal.js/decimal.mjs
+var EXP_LIMIT = 9e15;
+var MAX_DIGITS = 1e9;
+var NUMERALS = "0123456789abcdef";
+var LN10 = "2.3025850929940456840179914546843642076011014886287729760333279009675726096773524802359972050895982983419677840422862486334095254650828067566662873690987816894829072083255546808437998948262331985283935053089653777326288461633662222876982198867465436674744042432743651550489343149393914796194044002221051017141748003688084012647080685567743216228355220114804663715659121373450747856947683463616792101806445070648000277502684916746550586856935673420670581136429224554405758925724208241314695689016758940256776311356919292033376587141660230105703089634572075440370847469940168269282808481184289314848524948644871927809676271275775397027668605952496716674183485704422507197965004714951050492214776567636938662976979522110718264549734772662425709429322582798502585509785265383207606726317164309505995087807523710333101197857547331541421808427543863591778117054309827482385045648019095610299291824318237525357709750539565187697510374970888692180205189339507238539205144634197265287286965110862571492198849978748873771345686209167058";
+var PI = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632789";
+var DEFAULTS = {
+  precision: 20,
+  rounding: 4,
+  modulo: 1,
+  toExpNeg: -7,
+  toExpPos: 21,
+  minE: -EXP_LIMIT,
+  maxE: EXP_LIMIT,
+  crypto: false
+};
+var inexact;
+var quadrant;
+var external = true;
+var decimalError = "[DecimalError] ";
+var invalidArgument = decimalError + "Invalid argument: ";
+var precisionLimitExceeded = decimalError + "Precision limit exceeded";
+var cryptoUnavailable = decimalError + "crypto unavailable";
+var tag = "[object Decimal]";
+var mathfloor = Math.floor;
+var mathpow = Math.pow;
+var isBinary = /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i;
+var isHex = /^0x([0-9a-f]+(\.[0-9a-f]*)?|\.[0-9a-f]+)(p[+-]?\d+)?$/i;
+var isOctal = /^0o([0-7]+(\.[0-7]*)?|\.[0-7]+)(p[+-]?\d+)?$/i;
+var isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i;
+var BASE = 1e7;
+var LOG_BASE = 7;
+var MAX_SAFE_INTEGER = 9007199254740991;
+var LN10_PRECISION = LN10.length - 1;
+var PI_PRECISION = PI.length - 1;
+var P2 = { toStringTag: tag };
+P2.absoluteValue = P2.abs = function() {
+  var x = new this.constructor(this);
+  if (x.s < 0)
+    x.s = 1;
+  return finalise(x);
+};
+P2.ceil = function() {
+  return finalise(new this.constructor(this), this.e + 1, 2);
+};
+P2.clampedTo = P2.clamp = function(min2, max2) {
+  var k, x = this, Ctor = x.constructor;
+  min2 = new Ctor(min2);
+  max2 = new Ctor(max2);
+  if (!min2.s || !max2.s)
+    return new Ctor(NaN);
+  if (min2.gt(max2))
+    throw Error(invalidArgument + max2);
+  k = x.cmp(min2);
+  return k < 0 ? min2 : x.cmp(max2) > 0 ? max2 : new Ctor(x);
+};
+P2.comparedTo = P2.cmp = function(y) {
+  var i, j, xdL, ydL, x = this, xd = x.d, yd = (y = new x.constructor(y)).d, xs = x.s, ys = y.s;
+  if (!xd || !yd) {
+    return !xs || !ys ? NaN : xs !== ys ? xs : xd === yd ? 0 : !xd ^ xs < 0 ? 1 : -1;
+  }
+  if (!xd[0] || !yd[0])
+    return xd[0] ? xs : yd[0] ? -ys : 0;
+  if (xs !== ys)
+    return xs;
+  if (x.e !== y.e)
+    return x.e > y.e ^ xs < 0 ? 1 : -1;
+  xdL = xd.length;
+  ydL = yd.length;
+  for (i = 0, j = xdL < ydL ? xdL : ydL; i < j; ++i) {
+    if (xd[i] !== yd[i])
+      return xd[i] > yd[i] ^ xs < 0 ? 1 : -1;
+  }
+  return xdL === ydL ? 0 : xdL > ydL ^ xs < 0 ? 1 : -1;
+};
+P2.cosine = P2.cos = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.d)
+    return new Ctor(NaN);
+  if (!x.d[0])
+    return new Ctor(1);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
+  Ctor.rounding = 1;
+  x = cosine(Ctor, toLessThanHalfPi(Ctor, x));
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return finalise(quadrant == 2 || quadrant == 3 ? x.neg() : x, pr, rm, true);
+};
+P2.cubeRoot = P2.cbrt = function() {
+  var e, m, n, r, rep, s, sd, t, t3, t3plusx, x = this, Ctor = x.constructor;
+  if (!x.isFinite() || x.isZero())
+    return new Ctor(x);
+  external = false;
+  s = x.s * mathpow(x.s * x, 1 / 3);
+  if (!s || Math.abs(s) == 1 / 0) {
+    n = digitsToString(x.d);
+    e = x.e;
+    if (s = (e - n.length + 1) % 3)
+      n += s == 1 || s == -2 ? "0" : "00";
+    s = mathpow(n, 1 / 3);
+    e = mathfloor((e + 1) / 3) - (e % 3 == (e < 0 ? -1 : 2));
+    if (s == 1 / 0) {
+      n = "5e" + e;
+    } else {
+      n = s.toExponential();
+      n = n.slice(0, n.indexOf("e") + 1) + e;
+    }
+    r = new Ctor(n);
+    r.s = x.s;
+  } else {
+    r = new Ctor(s.toString());
+  }
+  sd = (e = Ctor.precision) + 3;
+  for (; ; ) {
+    t = r;
+    t3 = t.times(t).times(t);
+    t3plusx = t3.plus(x);
+    r = divide(t3plusx.plus(x).times(t), t3plusx.plus(t3), sd + 2, 1);
+    if (digitsToString(t.d).slice(0, sd) === (n = digitsToString(r.d)).slice(0, sd)) {
+      n = n.slice(sd - 3, sd + 1);
+      if (n == "9999" || !rep && n == "4999") {
+        if (!rep) {
+          finalise(t, e + 1, 0);
+          if (t.times(t).times(t).eq(x)) {
+            r = t;
+            break;
+          }
+        }
+        sd += 4;
+        rep = 1;
+      } else {
+        if (!+n || !+n.slice(1) && n.charAt(0) == "5") {
+          finalise(r, e + 1, 1);
+          m = !r.times(r).times(r).eq(x);
+        }
+        break;
+      }
+    }
+  }
+  external = true;
+  return finalise(r, e, Ctor.rounding, m);
+};
+P2.decimalPlaces = P2.dp = function() {
+  var w, d = this.d, n = NaN;
+  if (d) {
+    w = d.length - 1;
+    n = (w - mathfloor(this.e / LOG_BASE)) * LOG_BASE;
+    w = d[w];
+    if (w)
+      for (; w % 10 == 0; w /= 10)
+        n--;
+    if (n < 0)
+      n = 0;
+  }
+  return n;
+};
+P2.dividedBy = P2.div = function(y) {
+  return divide(this, new this.constructor(y));
+};
+P2.dividedToIntegerBy = P2.divToInt = function(y) {
+  var x = this, Ctor = x.constructor;
+  return finalise(divide(x, new Ctor(y), 0, 1, 1), Ctor.precision, Ctor.rounding);
+};
+P2.equals = P2.eq = function(y) {
+  return this.cmp(y) === 0;
+};
+P2.floor = function() {
+  return finalise(new this.constructor(this), this.e + 1, 3);
+};
+P2.greaterThan = P2.gt = function(y) {
+  return this.cmp(y) > 0;
+};
+P2.greaterThanOrEqualTo = P2.gte = function(y) {
+  var k = this.cmp(y);
+  return k == 1 || k === 0;
+};
+P2.hyperbolicCosine = P2.cosh = function() {
+  var k, n, pr, rm, len, x = this, Ctor = x.constructor, one = new Ctor(1);
+  if (!x.isFinite())
+    return new Ctor(x.s ? 1 / 0 : NaN);
+  if (x.isZero())
+    return one;
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
+  Ctor.rounding = 1;
+  len = x.d.length;
+  if (len < 32) {
+    k = Math.ceil(len / 3);
+    n = (1 / tinyPow(4, k)).toString();
+  } else {
+    k = 16;
+    n = "2.3283064365386962890625e-10";
+  }
+  x = taylorSeries(Ctor, 1, x.times(n), new Ctor(1), true);
+  var cosh2_x, i = k, d8 = new Ctor(8);
+  for (; i--; ) {
+    cosh2_x = x.times(x);
+    x = one.minus(cosh2_x.times(d8.minus(cosh2_x.times(d8))));
+  }
+  return finalise(x, Ctor.precision = pr, Ctor.rounding = rm, true);
+};
+P2.hyperbolicSine = P2.sinh = function() {
+  var k, pr, rm, len, x = this, Ctor = x.constructor;
+  if (!x.isFinite() || x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
+  Ctor.rounding = 1;
+  len = x.d.length;
+  if (len < 3) {
+    x = taylorSeries(Ctor, 2, x, x, true);
+  } else {
+    k = 1.4 * Math.sqrt(len);
+    k = k > 16 ? 16 : k | 0;
+    x = x.times(1 / tinyPow(5, k));
+    x = taylorSeries(Ctor, 2, x, x, true);
+    var sinh2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
+    for (; k--; ) {
+      sinh2_x = x.times(x);
+      x = x.times(d5.plus(sinh2_x.times(d16.times(sinh2_x).plus(d20))));
+    }
+  }
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return finalise(x, pr, rm, true);
+};
+P2.hyperbolicTangent = P2.tanh = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.isFinite())
+    return new Ctor(x.s);
+  if (x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + 7;
+  Ctor.rounding = 1;
+  return divide(x.sinh(), x.cosh(), Ctor.precision = pr, Ctor.rounding = rm);
+};
+P2.inverseCosine = P2.acos = function() {
+  var halfPi, x = this, Ctor = x.constructor, k = x.abs().cmp(1), pr = Ctor.precision, rm = Ctor.rounding;
+  if (k !== -1) {
+    return k === 0 ? x.isNeg() ? getPi(Ctor, pr, rm) : new Ctor(0) : new Ctor(NaN);
+  }
+  if (x.isZero())
+    return getPi(Ctor, pr + 4, rm).times(0.5);
+  Ctor.precision = pr + 6;
+  Ctor.rounding = 1;
+  x = x.asin();
+  halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return halfPi.minus(x);
+};
+P2.inverseHyperbolicCosine = P2.acosh = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (x.lte(1))
+    return new Ctor(x.eq(1) ? 0 : NaN);
+  if (!x.isFinite())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(Math.abs(x.e), x.sd()) + 4;
+  Ctor.rounding = 1;
+  external = false;
+  x = x.times(x).minus(1).sqrt().plus(x);
+  external = true;
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return x.ln();
+};
+P2.inverseHyperbolicSine = P2.asinh = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.isFinite() || x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + 2 * Math.max(Math.abs(x.e), x.sd()) + 6;
+  Ctor.rounding = 1;
+  external = false;
+  x = x.times(x).plus(1).sqrt().plus(x);
+  external = true;
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return x.ln();
+};
+P2.inverseHyperbolicTangent = P2.atanh = function() {
+  var pr, rm, wpr, xsd, x = this, Ctor = x.constructor;
+  if (!x.isFinite())
+    return new Ctor(NaN);
+  if (x.e >= 0)
+    return new Ctor(x.abs().eq(1) ? x.s / 0 : x.isZero() ? x : NaN);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  xsd = x.sd();
+  if (Math.max(xsd, pr) < 2 * -x.e - 1)
+    return finalise(new Ctor(x), pr, rm, true);
+  Ctor.precision = wpr = xsd - x.e;
+  x = divide(x.plus(1), new Ctor(1).minus(x), wpr + pr, 1);
+  Ctor.precision = pr + 4;
+  Ctor.rounding = 1;
+  x = x.ln();
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return x.times(0.5);
+};
+P2.inverseSine = P2.asin = function() {
+  var halfPi, k, pr, rm, x = this, Ctor = x.constructor;
+  if (x.isZero())
+    return new Ctor(x);
+  k = x.abs().cmp(1);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  if (k !== -1) {
+    if (k === 0) {
+      halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
+      halfPi.s = x.s;
+      return halfPi;
+    }
+    return new Ctor(NaN);
+  }
+  Ctor.precision = pr + 6;
+  Ctor.rounding = 1;
+  x = x.div(new Ctor(1).minus(x.times(x)).sqrt().plus(1)).atan();
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return x.times(2);
+};
+P2.inverseTangent = P2.atan = function() {
+  var i, j, k, n, px, t, r, wpr, x2, x = this, Ctor = x.constructor, pr = Ctor.precision, rm = Ctor.rounding;
+  if (!x.isFinite()) {
+    if (!x.s)
+      return new Ctor(NaN);
+    if (pr + 4 <= PI_PRECISION) {
+      r = getPi(Ctor, pr + 4, rm).times(0.5);
+      r.s = x.s;
+      return r;
+    }
+  } else if (x.isZero()) {
+    return new Ctor(x);
+  } else if (x.abs().eq(1) && pr + 4 <= PI_PRECISION) {
+    r = getPi(Ctor, pr + 4, rm).times(0.25);
+    r.s = x.s;
+    return r;
+  }
+  Ctor.precision = wpr = pr + 10;
+  Ctor.rounding = 1;
+  k = Math.min(28, wpr / LOG_BASE + 2 | 0);
+  for (i = k; i; --i)
+    x = x.div(x.times(x).plus(1).sqrt().plus(1));
+  external = false;
+  j = Math.ceil(wpr / LOG_BASE);
+  n = 1;
+  x2 = x.times(x);
+  r = new Ctor(x);
+  px = x;
+  for (; i !== -1; ) {
+    px = px.times(x2);
+    t = r.minus(px.div(n += 2));
+    px = px.times(x2);
+    r = t.plus(px.div(n += 2));
+    if (r.d[j] !== void 0)
+      for (i = j; r.d[i] === t.d[i] && i--; )
+        ;
+  }
+  if (k)
+    r = r.times(2 << k - 1);
+  external = true;
+  return finalise(r, Ctor.precision = pr, Ctor.rounding = rm, true);
+};
+P2.isFinite = function() {
+  return !!this.d;
+};
+P2.isInteger = P2.isInt = function() {
+  return !!this.d && mathfloor(this.e / LOG_BASE) > this.d.length - 2;
+};
+P2.isNaN = function() {
+  return !this.s;
+};
+P2.isNegative = P2.isNeg = function() {
+  return this.s < 0;
+};
+P2.isPositive = P2.isPos = function() {
+  return this.s > 0;
+};
+P2.isZero = function() {
+  return !!this.d && this.d[0] === 0;
+};
+P2.lessThan = P2.lt = function(y) {
+  return this.cmp(y) < 0;
+};
+P2.lessThanOrEqualTo = P2.lte = function(y) {
+  return this.cmp(y) < 1;
+};
+P2.logarithm = P2.log = function(base) {
+  var isBase10, d, denominator, k, inf, num, sd, r, arg2 = this, Ctor = arg2.constructor, pr = Ctor.precision, rm = Ctor.rounding, guard = 5;
+  if (base == null) {
+    base = new Ctor(10);
+    isBase10 = true;
+  } else {
+    base = new Ctor(base);
+    d = base.d;
+    if (base.s < 0 || !d || !d[0] || base.eq(1))
+      return new Ctor(NaN);
+    isBase10 = base.eq(10);
+  }
+  d = arg2.d;
+  if (arg2.s < 0 || !d || !d[0] || arg2.eq(1)) {
+    return new Ctor(d && !d[0] ? -1 / 0 : arg2.s != 1 ? NaN : d ? 0 : 1 / 0);
+  }
+  if (isBase10) {
+    if (d.length > 1) {
+      inf = true;
+    } else {
+      for (k = d[0]; k % 10 === 0; )
+        k /= 10;
+      inf = k !== 1;
+    }
+  }
+  external = false;
+  sd = pr + guard;
+  num = naturalLogarithm(arg2, sd);
+  denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
+  r = divide(num, denominator, sd, 1);
+  if (checkRoundingDigits(r.d, k = pr, rm)) {
+    do {
+      sd += 10;
+      num = naturalLogarithm(arg2, sd);
+      denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
+      r = divide(num, denominator, sd, 1);
+      if (!inf) {
+        if (+digitsToString(r.d).slice(k + 1, k + 15) + 1 == 1e14) {
+          r = finalise(r, pr + 1, 0);
+        }
+        break;
+      }
+    } while (checkRoundingDigits(r.d, k += 10, rm));
+  }
+  external = true;
+  return finalise(r, pr, rm);
+};
+P2.minus = P2.sub = function(y) {
+  var d, e, i, j, k, len, pr, rm, xd, xe, xLTy, yd, x = this, Ctor = x.constructor;
+  y = new Ctor(y);
+  if (!x.d || !y.d) {
+    if (!x.s || !y.s)
+      y = new Ctor(NaN);
+    else if (x.d)
+      y.s = -y.s;
+    else
+      y = new Ctor(y.d || x.s !== y.s ? x : NaN);
+    return y;
+  }
+  if (x.s != y.s) {
+    y.s = -y.s;
+    return x.plus(y);
+  }
+  xd = x.d;
+  yd = y.d;
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  if (!xd[0] || !yd[0]) {
+    if (yd[0])
+      y.s = -y.s;
+    else if (xd[0])
+      y = new Ctor(x);
+    else
+      return new Ctor(rm === 3 ? -0 : 0);
+    return external ? finalise(y, pr, rm) : y;
+  }
+  e = mathfloor(y.e / LOG_BASE);
+  xe = mathfloor(x.e / LOG_BASE);
+  xd = xd.slice();
+  k = xe - e;
+  if (k) {
+    xLTy = k < 0;
+    if (xLTy) {
+      d = xd;
+      k = -k;
+      len = yd.length;
+    } else {
+      d = yd;
+      e = xe;
+      len = xd.length;
+    }
+    i = Math.max(Math.ceil(pr / LOG_BASE), len) + 2;
+    if (k > i) {
+      k = i;
+      d.length = 1;
+    }
+    d.reverse();
+    for (i = k; i--; )
+      d.push(0);
+    d.reverse();
+  } else {
+    i = xd.length;
+    len = yd.length;
+    xLTy = i < len;
+    if (xLTy)
+      len = i;
+    for (i = 0; i < len; i++) {
+      if (xd[i] != yd[i]) {
+        xLTy = xd[i] < yd[i];
+        break;
+      }
+    }
+    k = 0;
+  }
+  if (xLTy) {
+    d = xd;
+    xd = yd;
+    yd = d;
+    y.s = -y.s;
+  }
+  len = xd.length;
+  for (i = yd.length - len; i > 0; --i)
+    xd[len++] = 0;
+  for (i = yd.length; i > k; ) {
+    if (xd[--i] < yd[i]) {
+      for (j = i; j && xd[--j] === 0; )
+        xd[j] = BASE - 1;
+      --xd[j];
+      xd[i] += BASE;
+    }
+    xd[i] -= yd[i];
+  }
+  for (; xd[--len] === 0; )
+    xd.pop();
+  for (; xd[0] === 0; xd.shift())
+    --e;
+  if (!xd[0])
+    return new Ctor(rm === 3 ? -0 : 0);
+  y.d = xd;
+  y.e = getBase10Exponent(xd, e);
+  return external ? finalise(y, pr, rm) : y;
+};
+P2.modulo = P2.mod = function(y) {
+  var q, x = this, Ctor = x.constructor;
+  y = new Ctor(y);
+  if (!x.d || !y.s || y.d && !y.d[0])
+    return new Ctor(NaN);
+  if (!y.d || x.d && !x.d[0]) {
+    return finalise(new Ctor(x), Ctor.precision, Ctor.rounding);
+  }
+  external = false;
+  if (Ctor.modulo == 9) {
+    q = divide(x, y.abs(), 0, 3, 1);
+    q.s *= y.s;
+  } else {
+    q = divide(x, y, 0, Ctor.modulo, 1);
+  }
+  q = q.times(y);
+  external = true;
+  return x.minus(q);
+};
+P2.naturalExponential = P2.exp = function() {
+  return naturalExponential(this);
+};
+P2.naturalLogarithm = P2.ln = function() {
+  return naturalLogarithm(this);
+};
+P2.negated = P2.neg = function() {
+  var x = new this.constructor(this);
+  x.s = -x.s;
+  return finalise(x);
+};
+P2.plus = P2.add = function(y) {
+  var carry, d, e, i, k, len, pr, rm, xd, yd, x = this, Ctor = x.constructor;
+  y = new Ctor(y);
+  if (!x.d || !y.d) {
+    if (!x.s || !y.s)
+      y = new Ctor(NaN);
+    else if (!x.d)
+      y = new Ctor(y.d || x.s === y.s ? x : NaN);
+    return y;
+  }
+  if (x.s != y.s) {
+    y.s = -y.s;
+    return x.minus(y);
+  }
+  xd = x.d;
+  yd = y.d;
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  if (!xd[0] || !yd[0]) {
+    if (!yd[0])
+      y = new Ctor(x);
+    return external ? finalise(y, pr, rm) : y;
+  }
+  k = mathfloor(x.e / LOG_BASE);
+  e = mathfloor(y.e / LOG_BASE);
+  xd = xd.slice();
+  i = k - e;
+  if (i) {
+    if (i < 0) {
+      d = xd;
+      i = -i;
+      len = yd.length;
+    } else {
+      d = yd;
+      e = k;
+      len = xd.length;
+    }
+    k = Math.ceil(pr / LOG_BASE);
+    len = k > len ? k + 1 : len + 1;
+    if (i > len) {
+      i = len;
+      d.length = 1;
+    }
+    d.reverse();
+    for (; i--; )
+      d.push(0);
+    d.reverse();
+  }
+  len = xd.length;
+  i = yd.length;
+  if (len - i < 0) {
+    i = len;
+    d = yd;
+    yd = xd;
+    xd = d;
+  }
+  for (carry = 0; i; ) {
+    carry = (xd[--i] = xd[i] + yd[i] + carry) / BASE | 0;
+    xd[i] %= BASE;
+  }
+  if (carry) {
+    xd.unshift(carry);
+    ++e;
+  }
+  for (len = xd.length; xd[--len] == 0; )
+    xd.pop();
+  y.d = xd;
+  y.e = getBase10Exponent(xd, e);
+  return external ? finalise(y, pr, rm) : y;
+};
+P2.precision = P2.sd = function(z) {
+  var k, x = this;
+  if (z !== void 0 && z !== !!z && z !== 1 && z !== 0)
+    throw Error(invalidArgument + z);
+  if (x.d) {
+    k = getPrecision(x.d);
+    if (z && x.e + 1 > k)
+      k = x.e + 1;
+  } else {
+    k = NaN;
+  }
+  return k;
+};
+P2.round = function() {
+  var x = this, Ctor = x.constructor;
+  return finalise(new Ctor(x), x.e + 1, Ctor.rounding);
+};
+P2.sine = P2.sin = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.isFinite())
+    return new Ctor(NaN);
+  if (x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
+  Ctor.rounding = 1;
+  x = sine(Ctor, toLessThanHalfPi(Ctor, x));
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return finalise(quadrant > 2 ? x.neg() : x, pr, rm, true);
+};
+P2.squareRoot = P2.sqrt = function() {
+  var m, n, sd, r, rep, t, x = this, d = x.d, e = x.e, s = x.s, Ctor = x.constructor;
+  if (s !== 1 || !d || !d[0]) {
+    return new Ctor(!s || s < 0 && (!d || d[0]) ? NaN : d ? x : 1 / 0);
+  }
+  external = false;
+  s = Math.sqrt(+x);
+  if (s == 0 || s == 1 / 0) {
+    n = digitsToString(d);
+    if ((n.length + e) % 2 == 0)
+      n += "0";
+    s = Math.sqrt(n);
+    e = mathfloor((e + 1) / 2) - (e < 0 || e % 2);
+    if (s == 1 / 0) {
+      n = "5e" + e;
+    } else {
+      n = s.toExponential();
+      n = n.slice(0, n.indexOf("e") + 1) + e;
+    }
+    r = new Ctor(n);
+  } else {
+    r = new Ctor(s.toString());
+  }
+  sd = (e = Ctor.precision) + 3;
+  for (; ; ) {
+    t = r;
+    r = t.plus(divide(x, t, sd + 2, 1)).times(0.5);
+    if (digitsToString(t.d).slice(0, sd) === (n = digitsToString(r.d)).slice(0, sd)) {
+      n = n.slice(sd - 3, sd + 1);
+      if (n == "9999" || !rep && n == "4999") {
+        if (!rep) {
+          finalise(t, e + 1, 0);
+          if (t.times(t).eq(x)) {
+            r = t;
+            break;
+          }
+        }
+        sd += 4;
+        rep = 1;
+      } else {
+        if (!+n || !+n.slice(1) && n.charAt(0) == "5") {
+          finalise(r, e + 1, 1);
+          m = !r.times(r).eq(x);
+        }
+        break;
+      }
+    }
+  }
+  external = true;
+  return finalise(r, e, Ctor.rounding, m);
+};
+P2.tangent = P2.tan = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.isFinite())
+    return new Ctor(NaN);
+  if (x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + 10;
+  Ctor.rounding = 1;
+  x = x.sin();
+  x.s = 1;
+  x = divide(x, new Ctor(1).minus(x.times(x)).sqrt(), pr + 10, 0);
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return finalise(quadrant == 2 || quadrant == 4 ? x.neg() : x, pr, rm, true);
+};
+P2.times = P2.mul = function(y) {
+  var carry, e, i, k, r, rL, t, xdL, ydL, x = this, Ctor = x.constructor, xd = x.d, yd = (y = new Ctor(y)).d;
+  y.s *= x.s;
+  if (!xd || !xd[0] || !yd || !yd[0]) {
+    return new Ctor(!y.s || xd && !xd[0] && !yd || yd && !yd[0] && !xd ? NaN : !xd || !yd ? y.s / 0 : y.s * 0);
+  }
+  e = mathfloor(x.e / LOG_BASE) + mathfloor(y.e / LOG_BASE);
+  xdL = xd.length;
+  ydL = yd.length;
+  if (xdL < ydL) {
+    r = xd;
+    xd = yd;
+    yd = r;
+    rL = xdL;
+    xdL = ydL;
+    ydL = rL;
+  }
+  r = [];
+  rL = xdL + ydL;
+  for (i = rL; i--; )
+    r.push(0);
+  for (i = ydL; --i >= 0; ) {
+    carry = 0;
+    for (k = xdL + i; k > i; ) {
+      t = r[k] + yd[i] * xd[k - i - 1] + carry;
+      r[k--] = t % BASE | 0;
+      carry = t / BASE | 0;
+    }
+    r[k] = (r[k] + carry) % BASE | 0;
+  }
+  for (; !r[--rL]; )
+    r.pop();
+  if (carry)
+    ++e;
+  else
+    r.shift();
+  y.d = r;
+  y.e = getBase10Exponent(r, e);
+  return external ? finalise(y, Ctor.precision, Ctor.rounding) : y;
+};
+P2.toBinary = function(sd, rm) {
+  return toStringBinary(this, 2, sd, rm);
+};
+P2.toDecimalPlaces = P2.toDP = function(dp, rm) {
+  var x = this, Ctor = x.constructor;
+  x = new Ctor(x);
+  if (dp === void 0)
+    return x;
+  checkInt32(dp, 0, MAX_DIGITS);
+  if (rm === void 0)
+    rm = Ctor.rounding;
+  else
+    checkInt32(rm, 0, 8);
+  return finalise(x, dp + x.e + 1, rm);
+};
+P2.toExponential = function(dp, rm) {
+  var str, x = this, Ctor = x.constructor;
+  if (dp === void 0) {
+    str = finiteToString(x, true);
+  } else {
+    checkInt32(dp, 0, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+    x = finalise(new Ctor(x), dp + 1, rm);
+    str = finiteToString(x, true, dp + 1);
+  }
+  return x.isNeg() && !x.isZero() ? "-" + str : str;
+};
+P2.toFixed = function(dp, rm) {
+  var str, y, x = this, Ctor = x.constructor;
+  if (dp === void 0) {
+    str = finiteToString(x);
+  } else {
+    checkInt32(dp, 0, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+    y = finalise(new Ctor(x), dp + x.e + 1, rm);
+    str = finiteToString(y, false, dp + y.e + 1);
+  }
+  return x.isNeg() && !x.isZero() ? "-" + str : str;
+};
+P2.toFraction = function(maxD) {
+  var d, d0, d1, d2, e, k, n, n0, n1, pr, q, r, x = this, xd = x.d, Ctor = x.constructor;
+  if (!xd)
+    return new Ctor(x);
+  n1 = d0 = new Ctor(1);
+  d1 = n0 = new Ctor(0);
+  d = new Ctor(d1);
+  e = d.e = getPrecision(xd) - x.e - 1;
+  k = e % LOG_BASE;
+  d.d[0] = mathpow(10, k < 0 ? LOG_BASE + k : k);
+  if (maxD == null) {
+    maxD = e > 0 ? d : n1;
+  } else {
+    n = new Ctor(maxD);
+    if (!n.isInt() || n.lt(n1))
+      throw Error(invalidArgument + n);
+    maxD = n.gt(d) ? e > 0 ? d : n1 : n;
+  }
+  external = false;
+  n = new Ctor(digitsToString(xd));
+  pr = Ctor.precision;
+  Ctor.precision = e = xd.length * LOG_BASE * 2;
+  for (; ; ) {
+    q = divide(n, d, 0, 1, 1);
+    d2 = d0.plus(q.times(d1));
+    if (d2.cmp(maxD) == 1)
+      break;
+    d0 = d1;
+    d1 = d2;
+    d2 = n1;
+    n1 = n0.plus(q.times(d2));
+    n0 = d2;
+    d2 = d;
+    d = n.minus(q.times(d2));
+    n = d2;
+  }
+  d2 = divide(maxD.minus(d0), d1, 0, 1, 1);
+  n0 = n0.plus(d2.times(n1));
+  d0 = d0.plus(d2.times(d1));
+  n0.s = n1.s = x.s;
+  r = divide(n1, d1, e, 1).minus(x).abs().cmp(divide(n0, d0, e, 1).minus(x).abs()) < 1 ? [n1, d1] : [n0, d0];
+  Ctor.precision = pr;
+  external = true;
+  return r;
+};
+P2.toHexadecimal = P2.toHex = function(sd, rm) {
+  return toStringBinary(this, 16, sd, rm);
+};
+P2.toNearest = function(y, rm) {
+  var x = this, Ctor = x.constructor;
+  x = new Ctor(x);
+  if (y == null) {
+    if (!x.d)
+      return x;
+    y = new Ctor(1);
+    rm = Ctor.rounding;
+  } else {
+    y = new Ctor(y);
+    if (rm === void 0) {
+      rm = Ctor.rounding;
+    } else {
+      checkInt32(rm, 0, 8);
+    }
+    if (!x.d)
+      return y.s ? x : y;
+    if (!y.d) {
+      if (y.s)
+        y.s = x.s;
+      return y;
+    }
+  }
+  if (y.d[0]) {
+    external = false;
+    x = divide(x, y, 0, rm, 1).times(y);
+    external = true;
+    finalise(x);
+  } else {
+    y.s = x.s;
+    x = y;
+  }
+  return x;
+};
+P2.toNumber = function() {
+  return +this;
+};
+P2.toOctal = function(sd, rm) {
+  return toStringBinary(this, 8, sd, rm);
+};
+P2.toPower = P2.pow = function(y) {
+  var e, k, pr, r, rm, s, x = this, Ctor = x.constructor, yn = +(y = new Ctor(y));
+  if (!x.d || !y.d || !x.d[0] || !y.d[0])
+    return new Ctor(mathpow(+x, yn));
+  x = new Ctor(x);
+  if (x.eq(1))
+    return x;
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  if (y.eq(1))
+    return finalise(x, pr, rm);
+  e = mathfloor(y.e / LOG_BASE);
+  if (e >= y.d.length - 1 && (k = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER) {
+    r = intPow(Ctor, x, k, pr);
+    return y.s < 0 ? new Ctor(1).div(r) : finalise(r, pr, rm);
+  }
+  s = x.s;
+  if (s < 0) {
+    if (e < y.d.length - 1)
+      return new Ctor(NaN);
+    if ((y.d[e] & 1) == 0)
+      s = 1;
+    if (x.e == 0 && x.d[0] == 1 && x.d.length == 1) {
+      x.s = s;
+      return x;
+    }
+  }
+  k = mathpow(+x, yn);
+  e = k == 0 || !isFinite(k) ? mathfloor(yn * (Math.log("0." + digitsToString(x.d)) / Math.LN10 + x.e + 1)) : new Ctor(k + "").e;
+  if (e > Ctor.maxE + 1 || e < Ctor.minE - 1)
+    return new Ctor(e > 0 ? s / 0 : 0);
+  external = false;
+  Ctor.rounding = x.s = 1;
+  k = Math.min(12, (e + "").length);
+  r = naturalExponential(y.times(naturalLogarithm(x, pr + k)), pr);
+  if (r.d) {
+    r = finalise(r, pr + 5, 1);
+    if (checkRoundingDigits(r.d, pr, rm)) {
+      e = pr + 10;
+      r = finalise(naturalExponential(y.times(naturalLogarithm(x, e + k)), e), e + 5, 1);
+      if (+digitsToString(r.d).slice(pr + 1, pr + 15) + 1 == 1e14) {
+        r = finalise(r, pr + 1, 0);
+      }
+    }
+  }
+  r.s = s;
+  external = true;
+  Ctor.rounding = rm;
+  return finalise(r, pr, rm);
+};
+P2.toPrecision = function(sd, rm) {
+  var str, x = this, Ctor = x.constructor;
+  if (sd === void 0) {
+    str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+  } else {
+    checkInt32(sd, 1, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+    x = finalise(new Ctor(x), sd, rm);
+    str = finiteToString(x, sd <= x.e || x.e <= Ctor.toExpNeg, sd);
+  }
+  return x.isNeg() && !x.isZero() ? "-" + str : str;
+};
+P2.toSignificantDigits = P2.toSD = function(sd, rm) {
+  var x = this, Ctor = x.constructor;
+  if (sd === void 0) {
+    sd = Ctor.precision;
+    rm = Ctor.rounding;
+  } else {
+    checkInt32(sd, 1, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+  }
+  return finalise(new Ctor(x), sd, rm);
+};
+P2.toString = function() {
+  var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+  return x.isNeg() && !x.isZero() ? "-" + str : str;
+};
+P2.truncated = P2.trunc = function() {
+  return finalise(new this.constructor(this), this.e + 1, 1);
+};
+P2.valueOf = P2.toJSON = function() {
+  var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+  return x.isNeg() ? "-" + str : str;
+};
+function digitsToString(d) {
+  var i, k, ws, indexOfLastWord = d.length - 1, str = "", w = d[0];
+  if (indexOfLastWord > 0) {
+    str += w;
+    for (i = 1; i < indexOfLastWord; i++) {
+      ws = d[i] + "";
+      k = LOG_BASE - ws.length;
+      if (k)
+        str += getZeroString(k);
+      str += ws;
+    }
+    w = d[i];
+    ws = w + "";
+    k = LOG_BASE - ws.length;
+    if (k)
+      str += getZeroString(k);
+  } else if (w === 0) {
+    return "0";
+  }
+  for (; w % 10 === 0; )
+    w /= 10;
+  return str + w;
+}
+__name(digitsToString, "digitsToString");
+function checkInt32(i, min2, max2) {
+  if (i !== ~~i || i < min2 || i > max2) {
+    throw Error(invalidArgument + i);
+  }
+}
+__name(checkInt32, "checkInt32");
+function checkRoundingDigits(d, i, rm, repeating) {
+  var di, k, r, rd;
+  for (k = d[0]; k >= 10; k /= 10)
+    --i;
+  if (--i < 0) {
+    i += LOG_BASE;
+    di = 0;
+  } else {
+    di = Math.ceil((i + 1) / LOG_BASE);
+    i %= LOG_BASE;
+  }
+  k = mathpow(10, LOG_BASE - i);
+  rd = d[di] % k | 0;
+  if (repeating == null) {
+    if (i < 3) {
+      if (i == 0)
+        rd = rd / 100 | 0;
+      else if (i == 1)
+        rd = rd / 10 | 0;
+      r = rm < 4 && rd == 99999 || rm > 3 && rd == 49999 || rd == 5e4 || rd == 0;
+    } else {
+      r = (rm < 4 && rd + 1 == k || rm > 3 && rd + 1 == k / 2) && (d[di + 1] / k / 100 | 0) == mathpow(10, i - 2) - 1 || (rd == k / 2 || rd == 0) && (d[di + 1] / k / 100 | 0) == 0;
+    }
+  } else {
+    if (i < 4) {
+      if (i == 0)
+        rd = rd / 1e3 | 0;
+      else if (i == 1)
+        rd = rd / 100 | 0;
+      else if (i == 2)
+        rd = rd / 10 | 0;
+      r = (repeating || rm < 4) && rd == 9999 || !repeating && rm > 3 && rd == 4999;
+    } else {
+      r = ((repeating || rm < 4) && rd + 1 == k || !repeating && rm > 3 && rd + 1 == k / 2) && (d[di + 1] / k / 1e3 | 0) == mathpow(10, i - 3) - 1;
+    }
+  }
+  return r;
+}
+__name(checkRoundingDigits, "checkRoundingDigits");
+function convertBase(str, baseIn, baseOut) {
+  var j, arr = [0], arrL, i = 0, strL = str.length;
+  for (; i < strL; ) {
+    for (arrL = arr.length; arrL--; )
+      arr[arrL] *= baseIn;
+    arr[0] += NUMERALS.indexOf(str.charAt(i++));
+    for (j = 0; j < arr.length; j++) {
+      if (arr[j] > baseOut - 1) {
+        if (arr[j + 1] === void 0)
+          arr[j + 1] = 0;
+        arr[j + 1] += arr[j] / baseOut | 0;
+        arr[j] %= baseOut;
+      }
+    }
+  }
+  return arr.reverse();
+}
+__name(convertBase, "convertBase");
+function cosine(Ctor, x) {
+  var k, len, y;
+  if (x.isZero())
+    return x;
+  len = x.d.length;
+  if (len < 32) {
+    k = Math.ceil(len / 3);
+    y = (1 / tinyPow(4, k)).toString();
+  } else {
+    k = 16;
+    y = "2.3283064365386962890625e-10";
+  }
+  Ctor.precision += k;
+  x = taylorSeries(Ctor, 1, x.times(y), new Ctor(1));
+  for (var i = k; i--; ) {
+    var cos2x = x.times(x);
+    x = cos2x.times(cos2x).minus(cos2x).times(8).plus(1);
+  }
+  Ctor.precision -= k;
+  return x;
+}
+__name(cosine, "cosine");
+var divide = function() {
+  function multiplyInteger(x, k, base) {
+    var temp, carry = 0, i = x.length;
+    for (x = x.slice(); i--; ) {
+      temp = x[i] * k + carry;
+      x[i] = temp % base | 0;
+      carry = temp / base | 0;
+    }
+    if (carry)
+      x.unshift(carry);
+    return x;
+  }
+  __name(multiplyInteger, "multiplyInteger");
+  function compare(a, b, aL, bL) {
+    var i, r;
+    if (aL != bL) {
+      r = aL > bL ? 1 : -1;
+    } else {
+      for (i = r = 0; i < aL; i++) {
+        if (a[i] != b[i]) {
+          r = a[i] > b[i] ? 1 : -1;
+          break;
+        }
+      }
+    }
+    return r;
+  }
+  __name(compare, "compare");
+  function subtract(a, b, aL, base) {
+    var i = 0;
+    for (; aL--; ) {
+      a[aL] -= i;
+      i = a[aL] < b[aL] ? 1 : 0;
+      a[aL] = i * base + a[aL] - b[aL];
+    }
+    for (; !a[0] && a.length > 1; )
+      a.shift();
+  }
+  __name(subtract, "subtract");
+  return function(x, y, pr, rm, dp, base) {
+    var cmp, e, i, k, logBase, more, prod, prodL, q, qd, rem, remL, rem0, sd, t, xi, xL, yd0, yL, yz, Ctor = x.constructor, sign2 = x.s == y.s ? 1 : -1, xd = x.d, yd = y.d;
+    if (!xd || !xd[0] || !yd || !yd[0]) {
+      return new Ctor(
+        !x.s || !y.s || (xd ? yd && xd[0] == yd[0] : !yd) ? NaN : xd && xd[0] == 0 || !yd ? sign2 * 0 : sign2 / 0
+      );
+    }
+    if (base) {
+      logBase = 1;
+      e = x.e - y.e;
+    } else {
+      base = BASE;
+      logBase = LOG_BASE;
+      e = mathfloor(x.e / logBase) - mathfloor(y.e / logBase);
+    }
+    yL = yd.length;
+    xL = xd.length;
+    q = new Ctor(sign2);
+    qd = q.d = [];
+    for (i = 0; yd[i] == (xd[i] || 0); i++)
+      ;
+    if (yd[i] > (xd[i] || 0))
+      e--;
+    if (pr == null) {
+      sd = pr = Ctor.precision;
+      rm = Ctor.rounding;
+    } else if (dp) {
+      sd = pr + (x.e - y.e) + 1;
+    } else {
+      sd = pr;
+    }
+    if (sd < 0) {
+      qd.push(1);
+      more = true;
+    } else {
+      sd = sd / logBase + 2 | 0;
+      i = 0;
+      if (yL == 1) {
+        k = 0;
+        yd = yd[0];
+        sd++;
+        for (; (i < xL || k) && sd--; i++) {
+          t = k * base + (xd[i] || 0);
+          qd[i] = t / yd | 0;
+          k = t % yd | 0;
+        }
+        more = k || i < xL;
+      } else {
+        k = base / (yd[0] + 1) | 0;
+        if (k > 1) {
+          yd = multiplyInteger(yd, k, base);
+          xd = multiplyInteger(xd, k, base);
+          yL = yd.length;
+          xL = xd.length;
+        }
+        xi = yL;
+        rem = xd.slice(0, yL);
+        remL = rem.length;
+        for (; remL < yL; )
+          rem[remL++] = 0;
+        yz = yd.slice();
+        yz.unshift(0);
+        yd0 = yd[0];
+        if (yd[1] >= base / 2)
+          ++yd0;
+        do {
+          k = 0;
+          cmp = compare(yd, rem, yL, remL);
+          if (cmp < 0) {
+            rem0 = rem[0];
+            if (yL != remL)
+              rem0 = rem0 * base + (rem[1] || 0);
+            k = rem0 / yd0 | 0;
+            if (k > 1) {
+              if (k >= base)
+                k = base - 1;
+              prod = multiplyInteger(yd, k, base);
+              prodL = prod.length;
+              remL = rem.length;
+              cmp = compare(prod, rem, prodL, remL);
+              if (cmp == 1) {
+                k--;
+                subtract(prod, yL < prodL ? yz : yd, prodL, base);
+              }
+            } else {
+              if (k == 0)
+                cmp = k = 1;
+              prod = yd.slice();
+            }
+            prodL = prod.length;
+            if (prodL < remL)
+              prod.unshift(0);
+            subtract(rem, prod, remL, base);
+            if (cmp == -1) {
+              remL = rem.length;
+              cmp = compare(yd, rem, yL, remL);
+              if (cmp < 1) {
+                k++;
+                subtract(rem, yL < remL ? yz : yd, remL, base);
+              }
+            }
+            remL = rem.length;
+          } else if (cmp === 0) {
+            k++;
+            rem = [0];
+          }
+          qd[i++] = k;
+          if (cmp && rem[0]) {
+            rem[remL++] = xd[xi] || 0;
+          } else {
+            rem = [xd[xi]];
+            remL = 1;
+          }
+        } while ((xi++ < xL || rem[0] !== void 0) && sd--);
+        more = rem[0] !== void 0;
+      }
+      if (!qd[0])
+        qd.shift();
+    }
+    if (logBase == 1) {
+      q.e = e;
+      inexact = more;
+    } else {
+      for (i = 1, k = qd[0]; k >= 10; k /= 10)
+        i++;
+      q.e = i + e * logBase - 1;
+      finalise(q, dp ? pr + q.e + 1 : pr, rm, more);
+    }
+    return q;
+  };
+}();
+function finalise(x, sd, rm, isTruncated) {
+  var digits, i, j, k, rd, roundUp, w, xd, xdi, Ctor = x.constructor;
+  out:
+    if (sd != null) {
+      xd = x.d;
+      if (!xd)
+        return x;
+      for (digits = 1, k = xd[0]; k >= 10; k /= 10)
+        digits++;
+      i = sd - digits;
+      if (i < 0) {
+        i += LOG_BASE;
+        j = sd;
+        w = xd[xdi = 0];
+        rd = w / mathpow(10, digits - j - 1) % 10 | 0;
+      } else {
+        xdi = Math.ceil((i + 1) / LOG_BASE);
+        k = xd.length;
+        if (xdi >= k) {
+          if (isTruncated) {
+            for (; k++ <= xdi; )
+              xd.push(0);
+            w = rd = 0;
+            digits = 1;
+            i %= LOG_BASE;
+            j = i - LOG_BASE + 1;
+          } else {
+            break out;
+          }
+        } else {
+          w = k = xd[xdi];
+          for (digits = 1; k >= 10; k /= 10)
+            digits++;
+          i %= LOG_BASE;
+          j = i - LOG_BASE + digits;
+          rd = j < 0 ? 0 : w / mathpow(10, digits - j - 1) % 10 | 0;
+        }
+      }
+      isTruncated = isTruncated || sd < 0 || xd[xdi + 1] !== void 0 || (j < 0 ? w : w % mathpow(10, digits - j - 1));
+      roundUp = rm < 4 ? (rd || isTruncated) && (rm == 0 || rm == (x.s < 0 ? 3 : 2)) : rd > 5 || rd == 5 && (rm == 4 || isTruncated || rm == 6 && (i > 0 ? j > 0 ? w / mathpow(10, digits - j) : 0 : xd[xdi - 1]) % 10 & 1 || rm == (x.s < 0 ? 8 : 7));
+      if (sd < 1 || !xd[0]) {
+        xd.length = 0;
+        if (roundUp) {
+          sd -= x.e + 1;
+          xd[0] = mathpow(10, (LOG_BASE - sd % LOG_BASE) % LOG_BASE);
+          x.e = -sd || 0;
+        } else {
+          xd[0] = x.e = 0;
+        }
+        return x;
+      }
+      if (i == 0) {
+        xd.length = xdi;
+        k = 1;
+        xdi--;
+      } else {
+        xd.length = xdi + 1;
+        k = mathpow(10, LOG_BASE - i);
+        xd[xdi] = j > 0 ? (w / mathpow(10, digits - j) % mathpow(10, j) | 0) * k : 0;
+      }
+      if (roundUp) {
+        for (; ; ) {
+          if (xdi == 0) {
+            for (i = 1, j = xd[0]; j >= 10; j /= 10)
+              i++;
+            j = xd[0] += k;
+            for (k = 1; j >= 10; j /= 10)
+              k++;
+            if (i != k) {
+              x.e++;
+              if (xd[0] == BASE)
+                xd[0] = 1;
+            }
+            break;
+          } else {
+            xd[xdi] += k;
+            if (xd[xdi] != BASE)
+              break;
+            xd[xdi--] = 0;
+            k = 1;
+          }
+        }
+      }
+      for (i = xd.length; xd[--i] === 0; )
+        xd.pop();
+    }
+  if (external) {
+    if (x.e > Ctor.maxE) {
+      x.d = null;
+      x.e = NaN;
+    } else if (x.e < Ctor.minE) {
+      x.e = 0;
+      x.d = [0];
+    }
+  }
+  return x;
+}
+__name(finalise, "finalise");
+function finiteToString(x, isExp, sd) {
+  if (!x.isFinite())
+    return nonFiniteToString(x);
+  var k, e = x.e, str = digitsToString(x.d), len = str.length;
+  if (isExp) {
+    if (sd && (k = sd - len) > 0) {
+      str = str.charAt(0) + "." + str.slice(1) + getZeroString(k);
+    } else if (len > 1) {
+      str = str.charAt(0) + "." + str.slice(1);
+    }
+    str = str + (x.e < 0 ? "e" : "e+") + x.e;
+  } else if (e < 0) {
+    str = "0." + getZeroString(-e - 1) + str;
+    if (sd && (k = sd - len) > 0)
+      str += getZeroString(k);
+  } else if (e >= len) {
+    str += getZeroString(e + 1 - len);
+    if (sd && (k = sd - e - 1) > 0)
+      str = str + "." + getZeroString(k);
+  } else {
+    if ((k = e + 1) < len)
+      str = str.slice(0, k) + "." + str.slice(k);
+    if (sd && (k = sd - len) > 0) {
+      if (e + 1 === len)
+        str += ".";
+      str += getZeroString(k);
+    }
+  }
+  return str;
+}
+__name(finiteToString, "finiteToString");
+function getBase10Exponent(digits, e) {
+  var w = digits[0];
+  for (e *= LOG_BASE; w >= 10; w /= 10)
+    e++;
+  return e;
+}
+__name(getBase10Exponent, "getBase10Exponent");
+function getLn10(Ctor, sd, pr) {
+  if (sd > LN10_PRECISION) {
+    external = true;
+    if (pr)
+      Ctor.precision = pr;
+    throw Error(precisionLimitExceeded);
+  }
+  return finalise(new Ctor(LN10), sd, 1, true);
+}
+__name(getLn10, "getLn10");
+function getPi(Ctor, sd, rm) {
+  if (sd > PI_PRECISION)
+    throw Error(precisionLimitExceeded);
+  return finalise(new Ctor(PI), sd, rm, true);
+}
+__name(getPi, "getPi");
+function getPrecision(digits) {
+  var w = digits.length - 1, len = w * LOG_BASE + 1;
+  w = digits[w];
+  if (w) {
+    for (; w % 10 == 0; w /= 10)
+      len--;
+    for (w = digits[0]; w >= 10; w /= 10)
+      len++;
+  }
+  return len;
+}
+__name(getPrecision, "getPrecision");
+function getZeroString(k) {
+  var zs = "";
+  for (; k--; )
+    zs += "0";
+  return zs;
+}
+__name(getZeroString, "getZeroString");
+function intPow(Ctor, x, n, pr) {
+  var isTruncated, r = new Ctor(1), k = Math.ceil(pr / LOG_BASE + 4);
+  external = false;
+  for (; ; ) {
+    if (n % 2) {
+      r = r.times(x);
+      if (truncate(r.d, k))
+        isTruncated = true;
+    }
+    n = mathfloor(n / 2);
+    if (n === 0) {
+      n = r.d.length - 1;
+      if (isTruncated && r.d[n] === 0)
+        ++r.d[n];
+      break;
+    }
+    x = x.times(x);
+    truncate(x.d, k);
+  }
+  external = true;
+  return r;
+}
+__name(intPow, "intPow");
+function isOdd(n) {
+  return n.d[n.d.length - 1] & 1;
+}
+__name(isOdd, "isOdd");
+function maxOrMin(Ctor, args, ltgt) {
+  var y, x = new Ctor(args[0]), i = 0;
+  for (; ++i < args.length; ) {
+    y = new Ctor(args[i]);
+    if (!y.s) {
+      x = y;
+      break;
+    } else if (x[ltgt](y)) {
+      x = y;
+    }
+  }
+  return x;
+}
+__name(maxOrMin, "maxOrMin");
+function naturalExponential(x, sd) {
+  var denominator, guard, j, pow2, sum3, t, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+  if (!x.d || !x.d[0] || x.e > 17) {
+    return new Ctor(x.d ? !x.d[0] ? 1 : x.s < 0 ? 0 : 1 / 0 : x.s ? x.s < 0 ? 0 : x : 0 / 0);
+  }
+  if (sd == null) {
+    external = false;
+    wpr = pr;
+  } else {
+    wpr = sd;
+  }
+  t = new Ctor(0.03125);
+  while (x.e > -2) {
+    x = x.times(t);
+    k += 5;
+  }
+  guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
+  wpr += guard;
+  denominator = pow2 = sum3 = new Ctor(1);
+  Ctor.precision = wpr;
+  for (; ; ) {
+    pow2 = finalise(pow2.times(x), wpr, 1);
+    denominator = denominator.times(++i);
+    t = sum3.plus(divide(pow2, denominator, wpr, 1));
+    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
+      j = k;
+      while (j--)
+        sum3 = finalise(sum3.times(sum3), wpr, 1);
+      if (sd == null) {
+        if (rep < 3 && checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
+          Ctor.precision = wpr += 10;
+          denominator = pow2 = t = new Ctor(1);
+          i = 0;
+          rep++;
+        } else {
+          return finalise(sum3, Ctor.precision = pr, rm, external = true);
+        }
+      } else {
+        Ctor.precision = pr;
+        return sum3;
+      }
+    }
+    sum3 = t;
+  }
+}
+__name(naturalExponential, "naturalExponential");
+function naturalLogarithm(y, sd) {
+  var c, c0, denominator, e, numerator, rep, sum3, t, wpr, x1, x2, n = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+  if (x.s < 0 || !xd || !xd[0] || !x.e && xd[0] == 1 && xd.length == 1) {
+    return new Ctor(xd && !xd[0] ? -1 / 0 : x.s != 1 ? NaN : xd ? 0 : x);
+  }
+  if (sd == null) {
+    external = false;
+    wpr = pr;
+  } else {
+    wpr = sd;
+  }
+  Ctor.precision = wpr += guard;
+  c = digitsToString(xd);
+  c0 = c.charAt(0);
+  if (Math.abs(e = x.e) < 15e14) {
+    while (c0 < 7 && c0 != 1 || c0 == 1 && c.charAt(1) > 3) {
+      x = x.times(y);
+      c = digitsToString(x.d);
+      c0 = c.charAt(0);
+      n++;
+    }
+    e = x.e;
+    if (c0 > 1) {
+      x = new Ctor("0." + c);
+      e++;
+    } else {
+      x = new Ctor(c0 + "." + c.slice(1));
+    }
+  } else {
+    t = getLn10(Ctor, wpr + 2, pr).times(e + "");
+    x = naturalLogarithm(new Ctor(c0 + "." + c.slice(1)), wpr - guard).plus(t);
+    Ctor.precision = pr;
+    return sd == null ? finalise(x, pr, rm, external = true) : x;
+  }
+  x1 = x;
+  sum3 = numerator = x = divide(x.minus(1), x.plus(1), wpr, 1);
+  x2 = finalise(x.times(x), wpr, 1);
+  denominator = 3;
+  for (; ; ) {
+    numerator = finalise(numerator.times(x2), wpr, 1);
+    t = sum3.plus(divide(numerator, new Ctor(denominator), wpr, 1));
+    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
+      sum3 = sum3.times(2);
+      if (e !== 0)
+        sum3 = sum3.plus(getLn10(Ctor, wpr + 2, pr).times(e + ""));
+      sum3 = divide(sum3, new Ctor(n), wpr, 1);
+      if (sd == null) {
+        if (checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
+          Ctor.precision = wpr += guard;
+          t = numerator = x = divide(x1.minus(1), x1.plus(1), wpr, 1);
+          x2 = finalise(x.times(x), wpr, 1);
+          denominator = rep = 1;
+        } else {
+          return finalise(sum3, Ctor.precision = pr, rm, external = true);
+        }
+      } else {
+        Ctor.precision = pr;
+        return sum3;
+      }
+    }
+    sum3 = t;
+    denominator += 2;
+  }
+}
+__name(naturalLogarithm, "naturalLogarithm");
+function nonFiniteToString(x) {
+  return String(x.s * x.s / 0);
+}
+__name(nonFiniteToString, "nonFiniteToString");
+function parseDecimal(x, str) {
+  var e, i, len;
+  if ((e = str.indexOf(".")) > -1)
+    str = str.replace(".", "");
+  if ((i = str.search(/e/i)) > 0) {
+    if (e < 0)
+      e = i;
+    e += +str.slice(i + 1);
+    str = str.substring(0, i);
+  } else if (e < 0) {
+    e = str.length;
+  }
+  for (i = 0; str.charCodeAt(i) === 48; i++)
+    ;
+  for (len = str.length; str.charCodeAt(len - 1) === 48; --len)
+    ;
+  str = str.slice(i, len);
+  if (str) {
+    len -= i;
+    x.e = e = e - i - 1;
+    x.d = [];
+    i = (e + 1) % LOG_BASE;
+    if (e < 0)
+      i += LOG_BASE;
+    if (i < len) {
+      if (i)
+        x.d.push(+str.slice(0, i));
+      for (len -= LOG_BASE; i < len; )
+        x.d.push(+str.slice(i, i += LOG_BASE));
+      str = str.slice(i);
+      i = LOG_BASE - str.length;
+    } else {
+      i -= len;
+    }
+    for (; i--; )
+      str += "0";
+    x.d.push(+str);
+    if (external) {
+      if (x.e > x.constructor.maxE) {
+        x.d = null;
+        x.e = NaN;
+      } else if (x.e < x.constructor.minE) {
+        x.e = 0;
+        x.d = [0];
+      }
+    }
+  } else {
+    x.e = 0;
+    x.d = [0];
+  }
+  return x;
+}
+__name(parseDecimal, "parseDecimal");
+function parseOther(x, str) {
+  var base, Ctor, divisor, i, isFloat, len, p, xd, xe;
+  if (str.indexOf("_") > -1) {
+    str = str.replace(/(\d)_(?=\d)/g, "$1");
+    if (isDecimal.test(str))
+      return parseDecimal(x, str);
+  } else if (str === "Infinity" || str === "NaN") {
+    if (!+str)
+      x.s = NaN;
+    x.e = NaN;
+    x.d = null;
+    return x;
+  }
+  if (isHex.test(str)) {
+    base = 16;
+    str = str.toLowerCase();
+  } else if (isBinary.test(str)) {
+    base = 2;
+  } else if (isOctal.test(str)) {
+    base = 8;
+  } else {
+    throw Error(invalidArgument + str);
+  }
+  i = str.search(/p/i);
+  if (i > 0) {
+    p = +str.slice(i + 1);
+    str = str.substring(2, i);
+  } else {
+    str = str.slice(2);
+  }
+  i = str.indexOf(".");
+  isFloat = i >= 0;
+  Ctor = x.constructor;
+  if (isFloat) {
+    str = str.replace(".", "");
+    len = str.length;
+    i = len - i;
+    divisor = intPow(Ctor, new Ctor(base), i, i * 2);
+  }
+  xd = convertBase(str, base, BASE);
+  xe = xd.length - 1;
+  for (i = xe; xd[i] === 0; --i)
+    xd.pop();
+  if (i < 0)
+    return new Ctor(x.s * 0);
+  x.e = getBase10Exponent(xd, xe);
+  x.d = xd;
+  external = false;
+  if (isFloat)
+    x = divide(x, divisor, len * 4);
+  if (p)
+    x = x.times(Math.abs(p) < 54 ? mathpow(2, p) : Decimal.pow(2, p));
+  external = true;
+  return x;
+}
+__name(parseOther, "parseOther");
+function sine(Ctor, x) {
+  var k, len = x.d.length;
+  if (len < 3) {
+    return x.isZero() ? x : taylorSeries(Ctor, 2, x, x);
+  }
+  k = 1.4 * Math.sqrt(len);
+  k = k > 16 ? 16 : k | 0;
+  x = x.times(1 / tinyPow(5, k));
+  x = taylorSeries(Ctor, 2, x, x);
+  var sin2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
+  for (; k--; ) {
+    sin2_x = x.times(x);
+    x = x.times(d5.plus(sin2_x.times(d16.times(sin2_x).minus(d20))));
+  }
+  return x;
+}
+__name(sine, "sine");
+function taylorSeries(Ctor, n, x, y, isHyperbolic) {
+  var j, t, u, x2, i = 1, pr = Ctor.precision, k = Math.ceil(pr / LOG_BASE);
+  external = false;
+  x2 = x.times(x);
+  u = new Ctor(y);
+  for (; ; ) {
+    t = divide(u.times(x2), new Ctor(n++ * n++), pr, 1);
+    u = isHyperbolic ? y.plus(t) : y.minus(t);
+    y = divide(t.times(x2), new Ctor(n++ * n++), pr, 1);
+    t = u.plus(y);
+    if (t.d[k] !== void 0) {
+      for (j = k; t.d[j] === u.d[j] && j--; )
+        ;
+      if (j == -1)
+        break;
+    }
+    j = u;
+    u = y;
+    y = t;
+    t = j;
+    i++;
+  }
+  external = true;
+  t.d.length = k + 1;
+  return t;
+}
+__name(taylorSeries, "taylorSeries");
+function tinyPow(b, e) {
+  var n = b;
+  while (--e)
+    n *= b;
+  return n;
+}
+__name(tinyPow, "tinyPow");
+function toLessThanHalfPi(Ctor, x) {
+  var t, isNeg = x.s < 0, pi = getPi(Ctor, Ctor.precision, 1), halfPi = pi.times(0.5);
+  x = x.abs();
+  if (x.lte(halfPi)) {
+    quadrant = isNeg ? 4 : 1;
+    return x;
+  }
+  t = x.divToInt(pi);
+  if (t.isZero()) {
+    quadrant = isNeg ? 3 : 2;
+  } else {
+    x = x.minus(t.times(pi));
+    if (x.lte(halfPi)) {
+      quadrant = isOdd(t) ? isNeg ? 2 : 3 : isNeg ? 4 : 1;
+      return x;
+    }
+    quadrant = isOdd(t) ? isNeg ? 1 : 4 : isNeg ? 3 : 2;
+  }
+  return x.minus(pi).abs();
+}
+__name(toLessThanHalfPi, "toLessThanHalfPi");
+function toStringBinary(x, baseOut, sd, rm) {
+  var base, e, i, k, len, roundUp, str, xd, y, Ctor = x.constructor, isExp = sd !== void 0;
+  if (isExp) {
+    checkInt32(sd, 1, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+  } else {
+    sd = Ctor.precision;
+    rm = Ctor.rounding;
+  }
+  if (!x.isFinite()) {
+    str = nonFiniteToString(x);
+  } else {
+    str = finiteToString(x);
+    i = str.indexOf(".");
+    if (isExp) {
+      base = 2;
+      if (baseOut == 16) {
+        sd = sd * 4 - 3;
+      } else if (baseOut == 8) {
+        sd = sd * 3 - 2;
+      }
+    } else {
+      base = baseOut;
+    }
+    if (i >= 0) {
+      str = str.replace(".", "");
+      y = new Ctor(1);
+      y.e = str.length - i;
+      y.d = convertBase(finiteToString(y), 10, base);
+      y.e = y.d.length;
+    }
+    xd = convertBase(str, 10, base);
+    e = len = xd.length;
+    for (; xd[--len] == 0; )
+      xd.pop();
+    if (!xd[0]) {
+      str = isExp ? "0p+0" : "0";
+    } else {
+      if (i < 0) {
+        e--;
+      } else {
+        x = new Ctor(x);
+        x.d = xd;
+        x.e = e;
+        x = divide(x, y, sd, rm, 0, base);
+        xd = x.d;
+        e = x.e;
+        roundUp = inexact;
+      }
+      i = xd[sd];
+      k = base / 2;
+      roundUp = roundUp || xd[sd + 1] !== void 0;
+      roundUp = rm < 4 ? (i !== void 0 || roundUp) && (rm === 0 || rm === (x.s < 0 ? 3 : 2)) : i > k || i === k && (rm === 4 || roundUp || rm === 6 && xd[sd - 1] & 1 || rm === (x.s < 0 ? 8 : 7));
+      xd.length = sd;
+      if (roundUp) {
+        for (; ++xd[--sd] > base - 1; ) {
+          xd[sd] = 0;
+          if (!sd) {
+            ++e;
+            xd.unshift(1);
+          }
+        }
+      }
+      for (len = xd.length; !xd[len - 1]; --len)
+        ;
+      for (i = 0, str = ""; i < len; i++)
+        str += NUMERALS.charAt(xd[i]);
+      if (isExp) {
+        if (len > 1) {
+          if (baseOut == 16 || baseOut == 8) {
+            i = baseOut == 16 ? 4 : 3;
+            for (--len; len % i; len++)
+              str += "0";
+            xd = convertBase(str, base, baseOut);
+            for (len = xd.length; !xd[len - 1]; --len)
+              ;
+            for (i = 1, str = "1."; i < len; i++)
+              str += NUMERALS.charAt(xd[i]);
+          } else {
+            str = str.charAt(0) + "." + str.slice(1);
+          }
+        }
+        str = str + (e < 0 ? "p" : "p+") + e;
+      } else if (e < 0) {
+        for (; ++e; )
+          str = "0" + str;
+        str = "0." + str;
+      } else {
+        if (++e > len)
+          for (e -= len; e--; )
+            str += "0";
+        else if (e < len)
+          str = str.slice(0, e) + "." + str.slice(e);
+      }
+    }
+    str = (baseOut == 16 ? "0x" : baseOut == 2 ? "0b" : baseOut == 8 ? "0o" : "") + str;
+  }
+  return x.s < 0 ? "-" + str : str;
+}
+__name(toStringBinary, "toStringBinary");
+function truncate(arr, len) {
+  if (arr.length > len) {
+    arr.length = len;
+    return true;
+  }
+}
+__name(truncate, "truncate");
+function abs(x) {
+  return new this(x).abs();
+}
+__name(abs, "abs");
+function acos(x) {
+  return new this(x).acos();
+}
+__name(acos, "acos");
+function acosh(x) {
+  return new this(x).acosh();
+}
+__name(acosh, "acosh");
+function add(x, y) {
+  return new this(x).plus(y);
+}
+__name(add, "add");
+function asin(x) {
+  return new this(x).asin();
+}
+__name(asin, "asin");
+function asinh(x) {
+  return new this(x).asinh();
+}
+__name(asinh, "asinh");
+function atan(x) {
+  return new this(x).atan();
+}
+__name(atan, "atan");
+function atanh(x) {
+  return new this(x).atanh();
+}
+__name(atanh, "atanh");
+function atan2(y, x) {
+  y = new this(y);
+  x = new this(x);
+  var r, pr = this.precision, rm = this.rounding, wpr = pr + 4;
+  if (!y.s || !x.s) {
+    r = new this(NaN);
+  } else if (!y.d && !x.d) {
+    r = getPi(this, wpr, 1).times(x.s > 0 ? 0.25 : 0.75);
+    r.s = y.s;
+  } else if (!x.d || y.isZero()) {
+    r = x.s < 0 ? getPi(this, pr, rm) : new this(0);
+    r.s = y.s;
+  } else if (!y.d || x.isZero()) {
+    r = getPi(this, wpr, 1).times(0.5);
+    r.s = y.s;
+  } else if (x.s < 0) {
+    this.precision = wpr;
+    this.rounding = 1;
+    r = this.atan(divide(y, x, wpr, 1));
+    x = getPi(this, wpr, 1);
+    this.precision = pr;
+    this.rounding = rm;
+    r = y.s < 0 ? r.minus(x) : r.plus(x);
+  } else {
+    r = this.atan(divide(y, x, wpr, 1));
+  }
+  return r;
+}
+__name(atan2, "atan2");
+function cbrt(x) {
+  return new this(x).cbrt();
+}
+__name(cbrt, "cbrt");
+function ceil(x) {
+  return finalise(x = new this(x), x.e + 1, 2);
+}
+__name(ceil, "ceil");
+function clamp(x, min2, max2) {
+  return new this(x).clamp(min2, max2);
+}
+__name(clamp, "clamp");
+function config(obj) {
+  if (!obj || typeof obj !== "object")
+    throw Error(decimalError + "Object expected");
+  var i, p, v, useDefaults = obj.defaults === true, ps = [
+    "precision",
+    1,
+    MAX_DIGITS,
+    "rounding",
+    0,
+    8,
+    "toExpNeg",
+    -EXP_LIMIT,
+    0,
+    "toExpPos",
+    0,
+    EXP_LIMIT,
+    "maxE",
+    0,
+    EXP_LIMIT,
+    "minE",
+    -EXP_LIMIT,
+    0,
+    "modulo",
+    0,
+    9
+  ];
+  for (i = 0; i < ps.length; i += 3) {
+    if (p = ps[i], useDefaults)
+      this[p] = DEFAULTS[p];
+    if ((v = obj[p]) !== void 0) {
+      if (mathfloor(v) === v && v >= ps[i + 1] && v <= ps[i + 2])
+        this[p] = v;
+      else
+        throw Error(invalidArgument + p + ": " + v);
+    }
+  }
+  if (p = "crypto", useDefaults)
+    this[p] = DEFAULTS[p];
+  if ((v = obj[p]) !== void 0) {
+    if (v === true || v === false || v === 0 || v === 1) {
+      if (v) {
+        if (typeof crypto != "undefined" && crypto && (crypto.getRandomValues || crypto.randomBytes)) {
+          this[p] = true;
+        } else {
+          throw Error(cryptoUnavailable);
+        }
+      } else {
+        this[p] = false;
+      }
+    } else {
+      throw Error(invalidArgument + p + ": " + v);
+    }
+  }
+  return this;
+}
+__name(config, "config");
+function cos(x) {
+  return new this(x).cos();
+}
+__name(cos, "cos");
+function cosh(x) {
+  return new this(x).cosh();
+}
+__name(cosh, "cosh");
+function clone(obj) {
+  var i, p, ps;
+  function Decimal2(v) {
+    var e, i2, t, x = this;
+    if (!(x instanceof Decimal2))
+      return new Decimal2(v);
+    x.constructor = Decimal2;
+    if (isDecimalInstance(v)) {
+      x.s = v.s;
+      if (external) {
+        if (!v.d || v.e > Decimal2.maxE) {
+          x.e = NaN;
+          x.d = null;
+        } else if (v.e < Decimal2.minE) {
+          x.e = 0;
+          x.d = [0];
+        } else {
+          x.e = v.e;
+          x.d = v.d.slice();
+        }
+      } else {
+        x.e = v.e;
+        x.d = v.d ? v.d.slice() : v.d;
+      }
+      return;
+    }
+    t = typeof v;
+    if (t === "number") {
+      if (v === 0) {
+        x.s = 1 / v < 0 ? -1 : 1;
+        x.e = 0;
+        x.d = [0];
+        return;
+      }
+      if (v < 0) {
+        v = -v;
+        x.s = -1;
+      } else {
+        x.s = 1;
+      }
+      if (v === ~~v && v < 1e7) {
+        for (e = 0, i2 = v; i2 >= 10; i2 /= 10)
+          e++;
+        if (external) {
+          if (e > Decimal2.maxE) {
+            x.e = NaN;
+            x.d = null;
+          } else if (e < Decimal2.minE) {
+            x.e = 0;
+            x.d = [0];
+          } else {
+            x.e = e;
+            x.d = [v];
+          }
+        } else {
+          x.e = e;
+          x.d = [v];
+        }
+        return;
+      } else if (v * 0 !== 0) {
+        if (!v)
+          x.s = NaN;
+        x.e = NaN;
+        x.d = null;
+        return;
+      }
+      return parseDecimal(x, v.toString());
+    } else if (t !== "string") {
+      throw Error(invalidArgument + v);
+    }
+    if ((i2 = v.charCodeAt(0)) === 45) {
+      v = v.slice(1);
+      x.s = -1;
+    } else {
+      if (i2 === 43)
+        v = v.slice(1);
+      x.s = 1;
+    }
+    return isDecimal.test(v) ? parseDecimal(x, v) : parseOther(x, v);
+  }
+  __name(Decimal2, "Decimal");
+  Decimal2.prototype = P2;
+  Decimal2.ROUND_UP = 0;
+  Decimal2.ROUND_DOWN = 1;
+  Decimal2.ROUND_CEIL = 2;
+  Decimal2.ROUND_FLOOR = 3;
+  Decimal2.ROUND_HALF_UP = 4;
+  Decimal2.ROUND_HALF_DOWN = 5;
+  Decimal2.ROUND_HALF_EVEN = 6;
+  Decimal2.ROUND_HALF_CEIL = 7;
+  Decimal2.ROUND_HALF_FLOOR = 8;
+  Decimal2.EUCLID = 9;
+  Decimal2.config = Decimal2.set = config;
+  Decimal2.clone = clone;
+  Decimal2.isDecimal = isDecimalInstance;
+  Decimal2.abs = abs;
+  Decimal2.acos = acos;
+  Decimal2.acosh = acosh;
+  Decimal2.add = add;
+  Decimal2.asin = asin;
+  Decimal2.asinh = asinh;
+  Decimal2.atan = atan;
+  Decimal2.atanh = atanh;
+  Decimal2.atan2 = atan2;
+  Decimal2.cbrt = cbrt;
+  Decimal2.ceil = ceil;
+  Decimal2.clamp = clamp;
+  Decimal2.cos = cos;
+  Decimal2.cosh = cosh;
+  Decimal2.div = div;
+  Decimal2.exp = exp;
+  Decimal2.floor = floor;
+  Decimal2.hypot = hypot;
+  Decimal2.ln = ln;
+  Decimal2.log = log2;
+  Decimal2.log10 = log10;
+  Decimal2.log2 = log22;
+  Decimal2.max = max;
+  Decimal2.min = min;
+  Decimal2.mod = mod;
+  Decimal2.mul = mul;
+  Decimal2.pow = pow;
+  Decimal2.random = random;
+  Decimal2.round = round;
+  Decimal2.sign = sign;
+  Decimal2.sin = sin;
+  Decimal2.sinh = sinh;
+  Decimal2.sqrt = sqrt;
+  Decimal2.sub = sub;
+  Decimal2.sum = sum;
+  Decimal2.tan = tan;
+  Decimal2.tanh = tanh;
+  Decimal2.trunc = trunc;
+  if (obj === void 0)
+    obj = {};
+  if (obj) {
+    if (obj.defaults !== true) {
+      ps = ["precision", "rounding", "toExpNeg", "toExpPos", "maxE", "minE", "modulo", "crypto"];
+      for (i = 0; i < ps.length; )
+        if (!obj.hasOwnProperty(p = ps[i++]))
+          obj[p] = this[p];
+    }
+  }
+  Decimal2.config(obj);
+  return Decimal2;
+}
+__name(clone, "clone");
+function div(x, y) {
+  return new this(x).div(y);
+}
+__name(div, "div");
+function exp(x) {
+  return new this(x).exp();
+}
+__name(exp, "exp");
+function floor(x) {
+  return finalise(x = new this(x), x.e + 1, 3);
+}
+__name(floor, "floor");
+function hypot() {
+  var i, n, t = new this(0);
+  external = false;
+  for (i = 0; i < arguments.length; ) {
+    n = new this(arguments[i++]);
+    if (!n.d) {
+      if (n.s) {
+        external = true;
+        return new this(1 / 0);
+      }
+      t = n;
+    } else if (t.d) {
+      t = t.plus(n.times(n));
+    }
+  }
+  external = true;
+  return t.sqrt();
+}
+__name(hypot, "hypot");
+function isDecimalInstance(obj) {
+  return obj instanceof Decimal || obj && obj.toStringTag === tag || false;
+}
+__name(isDecimalInstance, "isDecimalInstance");
+function ln(x) {
+  return new this(x).ln();
+}
+__name(ln, "ln");
+function log2(x, y) {
+  return new this(x).log(y);
+}
+__name(log2, "log");
+function log22(x) {
+  return new this(x).log(2);
+}
+__name(log22, "log2");
+function log10(x) {
+  return new this(x).log(10);
+}
+__name(log10, "log10");
+function max() {
+  return maxOrMin(this, arguments, "lt");
+}
+__name(max, "max");
+function min() {
+  return maxOrMin(this, arguments, "gt");
+}
+__name(min, "min");
+function mod(x, y) {
+  return new this(x).mod(y);
+}
+__name(mod, "mod");
+function mul(x, y) {
+  return new this(x).mul(y);
+}
+__name(mul, "mul");
+function pow(x, y) {
+  return new this(x).pow(y);
+}
+__name(pow, "pow");
+function random(sd) {
+  var d, e, k, n, i = 0, r = new this(1), rd = [];
+  if (sd === void 0)
+    sd = this.precision;
+  else
+    checkInt32(sd, 1, MAX_DIGITS);
+  k = Math.ceil(sd / LOG_BASE);
+  if (!this.crypto) {
+    for (; i < k; )
+      rd[i++] = Math.random() * 1e7 | 0;
+  } else if (crypto.getRandomValues) {
+    d = crypto.getRandomValues(new Uint32Array(k));
+    for (; i < k; ) {
+      n = d[i];
+      if (n >= 429e7) {
+        d[i] = crypto.getRandomValues(new Uint32Array(1))[0];
+      } else {
+        rd[i++] = n % 1e7;
+      }
+    }
+  } else if (crypto.randomBytes) {
+    d = crypto.randomBytes(k *= 4);
+    for (; i < k; ) {
+      n = d[i] + (d[i + 1] << 8) + (d[i + 2] << 16) + ((d[i + 3] & 127) << 24);
+      if (n >= 214e7) {
+        crypto.randomBytes(4).copy(d, i);
+      } else {
+        rd.push(n % 1e7);
+        i += 4;
+      }
+    }
+    i = k / 4;
+  } else {
+    throw Error(cryptoUnavailable);
+  }
+  k = rd[--i];
+  sd %= LOG_BASE;
+  if (k && sd) {
+    n = mathpow(10, LOG_BASE - sd);
+    rd[i] = (k / n | 0) * n;
+  }
+  for (; rd[i] === 0; i--)
+    rd.pop();
+  if (i < 0) {
+    e = 0;
+    rd = [0];
+  } else {
+    e = -1;
+    for (; rd[0] === 0; e -= LOG_BASE)
+      rd.shift();
+    for (k = 1, n = rd[0]; n >= 10; n /= 10)
+      k++;
+    if (k < LOG_BASE)
+      e -= LOG_BASE - k;
+  }
+  r.e = e;
+  r.d = rd;
+  return r;
+}
+__name(random, "random");
+function round(x) {
+  return finalise(x = new this(x), x.e + 1, this.rounding);
+}
+__name(round, "round");
+function sign(x) {
+  x = new this(x);
+  return x.d ? x.d[0] ? x.s : 0 * x.s : x.s || NaN;
+}
+__name(sign, "sign");
+function sin(x) {
+  return new this(x).sin();
+}
+__name(sin, "sin");
+function sinh(x) {
+  return new this(x).sinh();
+}
+__name(sinh, "sinh");
+function sqrt(x) {
+  return new this(x).sqrt();
+}
+__name(sqrt, "sqrt");
+function sub(x, y) {
+  return new this(x).sub(y);
+}
+__name(sub, "sub");
+function sum() {
+  var i = 0, args = arguments, x = new this(args[i]);
+  external = false;
+  for (; x.s && ++i < args.length; )
+    x = x.plus(args[i]);
+  external = true;
+  return finalise(x, this.precision, this.rounding);
+}
+__name(sum, "sum");
+function tan(x) {
+  return new this(x).tan();
+}
+__name(tan, "tan");
+function tanh(x) {
+  return new this(x).tanh();
+}
+__name(tanh, "tanh");
+function trunc(x) {
+  return finalise(x = new this(x), x.e + 1, 1);
+}
+__name(trunc, "trunc");
+P2[Symbol.for("nodejs.util.inspect.custom")] = P2.toString;
+P2[Symbol.toStringTag] = "Decimal";
+var Decimal = P2.constructor = clone(DEFAULTS);
+LN10 = new Decimal(LN10);
+PI = new Decimal(PI);
+var decimal_default = Decimal;
+
+// src/runtime/utils/common.ts
+var import_indent_string2 = __toESM(require_indent_string());
+var import_js_levenshtein = __toESM(require_js_levenshtein());
+
+// src/runtime/core/model/FieldRef.ts
+var FieldRefImpl = class {
+  constructor(modelName, name, fieldType, isList) {
+    this.modelName = modelName;
+    this.name = name;
+    this.typeName = fieldType;
+    this.isList = isList;
+  }
+  _toGraphQLInputType() {
+    const prefix = this.isList ? `List${this.typeName}` : this.typeName;
+    return `${prefix}FieldRefInput<${this.modelName}>`;
+  }
+};
+__name(FieldRefImpl, "FieldRefImpl");
+
+// src/runtime/object-enums.ts
+var objectEnumNames = ["JsonNullValueInput", "NullableJsonNullValueInput", "JsonNullValueFilter"];
+var secret = Symbol();
+var representations = /* @__PURE__ */ new WeakMap();
+var ObjectEnumValue = class {
+  constructor(arg2) {
+    if (arg2 === secret) {
+      representations.set(this, `Prisma.${this._getName()}`);
+    } else {
+      representations.set(this, `new Prisma.${this._getNamespace()}.${this._getName()}()`);
+    }
+  }
+  _getName() {
+    return this.constructor.name;
+  }
+  toString() {
+    return representations.get(this);
+  }
+};
+__name(ObjectEnumValue, "ObjectEnumValue");
+var NullTypesEnumValue = class extends ObjectEnumValue {
+  _getNamespace() {
+    return "NullTypes";
+  }
+};
+__name(NullTypesEnumValue, "NullTypesEnumValue");
+var DbNull = class extends NullTypesEnumValue {
+};
+__name(DbNull, "DbNull");
+var JsonNull = class extends NullTypesEnumValue {
+};
+__name(JsonNull, "JsonNull");
+var AnyNull = class extends NullTypesEnumValue {
+};
+__name(AnyNull, "AnyNull");
+var objectEnumValues = {
+  classes: {
+    DbNull,
+    JsonNull,
+    AnyNull
+  },
+  instances: {
+    DbNull: new DbNull(secret),
+    JsonNull: new JsonNull(secret),
+    AnyNull: new AnyNull(secret)
+  }
+};
+
+// src/runtime/utils/decimalJsLike.ts
+function isDecimalJsLike(value) {
+  if (Decimal.isDecimal(value)) {
+    return true;
+  }
+  return value !== null && typeof value === "object" && typeof value.s === "number" && typeof value.e === "number" && Array.isArray(value.d);
+}
+__name(isDecimalJsLike, "isDecimalJsLike");
+function stringifyDecimalJsLike(value) {
+  if (Decimal.isDecimal(value)) {
+    return JSON.stringify(String(value));
+  }
+  const tmpDecimal = new Decimal(0);
+  tmpDecimal.d = value.d;
+  tmpDecimal.e = value.e;
+  tmpDecimal.s = value.s;
+  return JSON.stringify(String(tmpDecimal));
+}
+__name(stringifyDecimalJsLike, "stringifyDecimalJsLike");
+
+// src/runtime/utils/common.ts
+var keyBy2 = /* @__PURE__ */ __name((collection, prop) => {
+  const acc = {};
+  for (const obj of collection) {
+    const key = obj[prop];
+    acc[key] = obj;
+  }
+  return acc;
+}, "keyBy");
+var ScalarTypeTable = {
+  String: true,
+  Int: true,
+  Float: true,
+  Boolean: true,
+  Long: true,
+  DateTime: true,
+  ID: true,
+  UUID: true,
+  Json: true,
+  Bytes: true,
+  Decimal: true,
+  BigInt: true
+};
+var JSTypeToGraphQLType = {
+  string: "String",
+  boolean: "Boolean",
+  object: "Json",
+  symbol: "Symbol"
+};
+function stringifyGraphQLType(type) {
+  if (typeof type === "string") {
+    return type;
+  }
+  return type.name;
+}
+__name(stringifyGraphQLType, "stringifyGraphQLType");
+function wrapWithList(str, isList) {
+  if (isList) {
+    return `List<${str}>`;
+  }
+  return str;
+}
+__name(wrapWithList, "wrapWithList");
+var RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60))(\.\d{1,})?(([Z])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
+var UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+function getGraphQLType(value, inputType) {
+  const potentialType = inputType == null ? void 0 : inputType.type;
+  if (value === null) {
+    return "null";
+  }
+  if (Object.prototype.toString.call(value) === "[object BigInt]") {
+    return "BigInt";
+  }
+  if (decimal_default.isDecimal(value)) {
+    return "Decimal";
+  }
+  if (potentialType === "Decimal" && isDecimalJsLike(value)) {
+    return "Decimal";
+  }
+  if (Buffer.isBuffer(value)) {
+    return "Bytes";
+  }
+  if (isValidEnumValue(value, inputType)) {
+    return potentialType.name;
+  }
+  if (value instanceof ObjectEnumValue) {
+    return value._getName();
+  }
+  if (value instanceof FieldRefImpl) {
+    return value._toGraphQLInputType();
+  }
+  if (Array.isArray(value)) {
+    let scalarTypes = value.reduce((acc, val) => {
+      const type = getGraphQLType(val, inputType);
+      if (!acc.includes(type)) {
+        acc.push(type);
+      }
+      return acc;
+    }, []);
+    if (scalarTypes.includes("Float") && scalarTypes.includes("Int")) {
+      scalarTypes = ["Float"];
+    }
+    return `List<${scalarTypes.join(" | ")}>`;
+  }
+  const jsType = typeof value;
+  if (jsType === "number") {
+    if (Math.trunc(value) === value) {
+      return "Int";
+    } else {
+      return "Float";
+    }
+  }
+  if (Object.prototype.toString.call(value) === "[object Date]") {
+    return "DateTime";
+  }
+  if (jsType === "string") {
+    if (UUID_REGEX.test(value)) {
+      return "UUID";
+    }
+    const date = new Date(value);
+    if (date.toString() === "Invalid Date") {
+      return "String";
+    }
+    if (RFC_3339_REGEX.test(value)) {
+      return "DateTime";
+    }
+  }
+  return JSTypeToGraphQLType[jsType];
+}
+__name(getGraphQLType, "getGraphQLType");
+function isValidEnumValue(value, inputType) {
+  var _a3;
+  const enumType = inputType == null ? void 0 : inputType.type;
+  if (!isSchemaEnum(enumType)) {
+    return false;
+  }
+  if ((inputType == null ? void 0 : inputType.namespace) === "prisma" && objectEnumNames.includes(enumType.name)) {
+    const name = (_a3 = value == null ? void 0 : value.constructor) == null ? void 0 : _a3.name;
+    return typeof name === "string" && objectEnumValues.instances[name] === value && enumType.values.includes(name);
+  }
+  return typeof value === "string" && enumType.values.includes(value);
+}
+__name(isValidEnumValue, "isValidEnumValue");
+function getSuggestion(str, possibilities) {
+  const bestMatch = possibilities.reduce(
+    (acc, curr) => {
+      const distance = (0, import_js_levenshtein.default)(str, curr);
+      if (distance < acc.distance) {
+        return {
+          distance,
+          str: curr
+        };
+      }
+      return acc;
+    },
+    {
+      distance: Math.min(Math.floor(str.length) * 1.1, ...possibilities.map((p) => p.length * 3)),
+      str: null
+    }
+  );
+  return bestMatch.str;
+}
+__name(getSuggestion, "getSuggestion");
+function stringifyInputType(input, greenKeys = false) {
+  if (typeof input === "string") {
+    return input;
+  }
+  if (input.values) {
+    return `enum ${input.name} {
+${(0, import_indent_string2.default)(input.values.join(", "), 2)}
+}`;
+  } else {
+    const body = (0, import_indent_string2.default)(
+      input.fields.map((arg2) => {
+        const key = `${arg2.name}`;
+        const str = `${greenKeys ? import_chalk7.default.green(key) : key}${arg2.isRequired ? "" : "?"}: ${import_chalk7.default.white(
+          arg2.inputTypes.map((argType) => {
+            return wrapWithList(
+              argIsInputType(argType.type) ? argType.type.name : stringifyGraphQLType(argType.type),
+              argType.isList
+            );
+          }).join(" | ")
+        )}`;
+        if (!arg2.isRequired) {
+          return import_chalk7.default.dim(str);
+        }
+        return str;
+      }).join("\n"),
+      2
+    );
+    return `${import_chalk7.default.dim("type")} ${import_chalk7.default.bold.dim(input.name)} ${import_chalk7.default.dim("{")}
+${body}
+${import_chalk7.default.dim("}")}`;
+  }
+}
+__name(stringifyInputType, "stringifyInputType");
+function argIsInputType(arg2) {
+  if (typeof arg2 === "string") {
+    return false;
+  }
+  return true;
+}
+__name(argIsInputType, "argIsInputType");
+function getInputTypeName(input) {
+  if (typeof input === "string") {
+    if (input === "Null") {
+      return "null";
+    }
+    return input;
+  }
+  return input.name;
+}
+__name(getInputTypeName, "getInputTypeName");
+function getOutputTypeName(input) {
+  if (typeof input === "string") {
+    return input;
+  }
+  return input.name;
+}
+__name(getOutputTypeName, "getOutputTypeName");
+function inputTypeToJson(input, isRequired, nameOnly = false) {
+  if (typeof input === "string") {
+    if (input === "Null") {
+      return "null";
+    }
+    return input;
+  }
+  if (input.values) {
+    return input.values.join(" | ");
+  }
+  const inputType = input;
+  const showDeepType = isRequired && inputType.fields.every(
+    (arg2) => {
+      var _a3;
+      return arg2.inputTypes[0].location === "inputObjectTypes" || ((_a3 = arg2.inputTypes[1]) == null ? void 0 : _a3.location) === "inputObjectTypes";
+    }
+  );
+  if (nameOnly) {
+    return getInputTypeName(input);
+  }
+  return inputType.fields.reduce((acc, curr) => {
+    let str = "";
+    if (!showDeepType && !curr.isRequired) {
+      str = curr.inputTypes.map((argType) => getInputTypeName(argType.type)).join(" | ");
+    } else {
+      str = curr.inputTypes.map((argInputType) => inputTypeToJson(argInputType.type, curr.isRequired, true)).join(" | ");
+    }
+    acc[curr.name + (curr.isRequired ? "" : "?")] = str;
+    return acc;
+  }, {});
+}
+__name(inputTypeToJson, "inputTypeToJson");
+function unionBy(arr1, arr2, iteratee) {
+  const map = {};
+  for (const element of arr1) {
+    map[iteratee(element)] = element;
+  }
+  for (const element of arr2) {
+    const key = iteratee(element);
+    if (!map[key]) {
+      map[key] = element;
+    }
+  }
+  return Object.values(map);
+}
+__name(unionBy, "unionBy");
+function lowerCase(name) {
+  return name.substring(0, 1).toLowerCase() + name.substring(1);
+}
+__name(lowerCase, "lowerCase");
+function isGroupByOutputName(type) {
+  return type.endsWith("GroupByOutputType");
+}
+__name(isGroupByOutputName, "isGroupByOutputName");
+function isSchemaEnum(type) {
+  return typeof type === "object" && type !== null && typeof type.name === "string" && Array.isArray(type.values);
+}
+__name(isSchemaEnum, "isSchemaEnum");
+
+// src/runtime/dmmf.ts
+var DMMFDatamodelHelper = class {
+  constructor({ datamodel }) {
+    this.datamodel = datamodel;
+    this.datamodelEnumMap = this.getDatamodelEnumMap();
+    this.modelMap = this.getModelMap();
+    this.typeMap = this.getTypeMap();
+    this.typeAndModelMap = this.getTypeModelMap();
+  }
+  getDatamodelEnumMap() {
+    return keyBy2(this.datamodel.enums, "name");
+  }
+  getModelMap() {
+    return { ...keyBy2(this.datamodel.models, "name") };
+  }
+  getTypeMap() {
+    return { ...keyBy2(this.datamodel.types, "name") };
+  }
+  getTypeModelMap() {
+    return { ...this.getTypeMap(), ...this.getModelMap() };
+  }
+};
+__name(DMMFDatamodelHelper, "DMMFDatamodelHelper");
+var DMMFMappingsHelper = class {
+  constructor({ mappings }) {
+    this.mappings = mappings;
+    this.mappingsMap = this.getMappingsMap();
+  }
+  getMappingsMap() {
+    return keyBy2(this.mappings.modelOperations, "model");
+  }
+};
+__name(DMMFMappingsHelper, "DMMFMappingsHelper");
+var DMMFSchemaHelper = class {
+  constructor({ schema }) {
+    this.outputTypeToMergedOutputType = /* @__PURE__ */ __name((outputType) => {
+      return {
+        ...outputType,
+        fields: outputType.fields
+      };
+    }, "outputTypeToMergedOutputType");
+    this.schema = schema;
+    this.enumMap = this.getEnumMap();
+    this.queryType = this.getQueryType();
+    this.mutationType = this.getMutationType();
+    this.outputTypes = this.getOutputTypes();
+    this.outputTypeMap = this.getMergedOutputTypeMap();
+    this.resolveOutputTypes();
+    this.inputObjectTypes = this.schema.inputObjectTypes;
+    this.inputTypeMap = this.getInputTypeMap();
+    this.resolveInputTypes();
+    this.resolveFieldArgumentTypes();
+    this.queryType = this.outputTypeMap.Query;
+    this.mutationType = this.outputTypeMap.Mutation;
+    this.rootFieldMap = this.getRootFieldMap();
+  }
+  get [Symbol.toStringTag]() {
+    return "DMMFClass";
+  }
+  resolveOutputTypes() {
+    for (const type of this.outputTypes.model) {
+      for (const field of type.fields) {
+        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
+          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
+        }
+      }
+      type.fieldMap = keyBy2(type.fields, "name");
+    }
+    for (const type of this.outputTypes.prisma) {
+      for (const field of type.fields) {
+        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
+          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
+        }
+      }
+      type.fieldMap = keyBy2(type.fields, "name");
+    }
+  }
+  resolveInputTypes() {
+    const inputTypes = this.inputObjectTypes.prisma;
+    if (this.inputObjectTypes.model) {
+      inputTypes.push(...this.inputObjectTypes.model);
+    }
+    for (const type of inputTypes) {
+      for (const field of type.fields) {
+        for (const fieldInputType of field.inputTypes) {
+          const fieldType = fieldInputType.type;
+          if (typeof fieldType === "string" && !ScalarTypeTable[fieldType] && (this.inputTypeMap[fieldType] || this.enumMap[fieldType])) {
+            fieldInputType.type = this.inputTypeMap[fieldType] || this.enumMap[fieldType] || fieldType;
+          }
+        }
+      }
+      type.fieldMap = keyBy2(type.fields, "name");
+    }
+  }
+  resolveFieldArgumentTypes() {
+    for (const type of this.outputTypes.prisma) {
+      for (const field of type.fields) {
+        for (const arg2 of field.args) {
+          for (const argInputType of arg2.inputTypes) {
+            const argType = argInputType.type;
+            if (typeof argType === "string" && !ScalarTypeTable[argType]) {
+              argInputType.type = this.inputTypeMap[argType] || this.enumMap[argType] || argType;
+            }
+          }
+        }
+      }
+    }
+    for (const type of this.outputTypes.model) {
+      for (const field of type.fields) {
+        for (const arg2 of field.args) {
+          for (const argInputType of arg2.inputTypes) {
+            const argType = argInputType.type;
+            if (typeof argType === "string" && !ScalarTypeTable[argType]) {
+              argInputType.type = this.inputTypeMap[argType] || this.enumMap[argType] || argInputType.type;
+            }
+          }
+        }
+      }
+    }
+  }
+  getQueryType() {
+    return this.schema.outputObjectTypes.prisma.find((t) => t.name === "Query");
+  }
+  getMutationType() {
+    return this.schema.outputObjectTypes.prisma.find((t) => t.name === "Mutation");
+  }
+  getOutputTypes() {
+    return {
+      model: this.schema.outputObjectTypes.model.map(this.outputTypeToMergedOutputType),
+      prisma: this.schema.outputObjectTypes.prisma.map(this.outputTypeToMergedOutputType)
+    };
+  }
+  getEnumMap() {
+    return {
+      ...keyBy2(this.schema.enumTypes.prisma, "name"),
+      ...this.schema.enumTypes.model ? keyBy2(this.schema.enumTypes.model, "name") : void 0
+    };
+  }
+  hasEnumInNamespace(enumName, namespace) {
+    var _a3;
+    return ((_a3 = this.schema.enumTypes[namespace]) == null ? void 0 : _a3.find((schemaEnum) => schemaEnum.name === enumName)) !== void 0;
+  }
+  getMergedOutputTypeMap() {
+    return {
+      ...keyBy2(this.outputTypes.model, "name"),
+      ...keyBy2(this.outputTypes.prisma, "name")
+    };
+  }
+  getInputTypeMap() {
+    return {
+      ...this.schema.inputObjectTypes.model ? keyBy2(this.schema.inputObjectTypes.model, "name") : void 0,
+      ...keyBy2(this.schema.inputObjectTypes.prisma, "name")
+    };
+  }
+  getRootFieldMap() {
+    return { ...keyBy2(this.queryType.fields, "name"), ...keyBy2(this.mutationType.fields, "name") };
+  }
+};
+__name(DMMFSchemaHelper, "DMMFSchemaHelper");
+var BaseDMMFHelper = class {
+  constructor(dmmf) {
+    return Object.assign(this, new DMMFDatamodelHelper(dmmf), new DMMFMappingsHelper(dmmf));
+  }
+};
+__name(BaseDMMFHelper, "BaseDMMFHelper");
+applyMixins(BaseDMMFHelper, [DMMFDatamodelHelper, DMMFMappingsHelper]);
+var DMMFHelper = class {
+  constructor(dmmf) {
+    return Object.assign(this, new BaseDMMFHelper(dmmf), new DMMFSchemaHelper(dmmf));
+  }
+};
+__name(DMMFHelper, "DMMFHelper");
+applyMixins(DMMFHelper, [BaseDMMFHelper, DMMFSchemaHelper]);
+
 // src/runtime/getPrismaClient.ts
 var import_async_hooks = require("async_hooks");
+var import_events = require("events");
 var import_fs9 = __toESM(require("fs"));
 var import_path5 = __toESM(require("path"));
 
@@ -30950,7 +31020,9 @@ function getMappings(mappings, datamodel) {
     model: mapping.model,
     plural: (0, import_pluralize.default)(lowerCase(mapping.model)),
     findUnique: mapping.findUnique || mapping.findSingle,
+    findUniqueOrThrow: mapping.findUniqueOrThrow,
     findFirst: mapping.findFirst,
+    findFirstOrThrow: mapping.findFirstOrThrow,
     findMany: mapping.findMany,
     create: mapping.createOne || mapping.createSingle || mapping.create,
     createMany: mapping.createMany,
@@ -30982,33 +31054,98 @@ var import_chalk11 = __toESM(require_source());
 var import_indent_string4 = __toESM(require_indent_string());
 var import_strip_ansi3 = __toESM(require_strip_ansi());
 
+// src/generation/Cache.ts
+var Cache = class {
+  constructor() {
+    this._map = /* @__PURE__ */ new Map();
+  }
+  get(key) {
+    var _a3;
+    return (_a3 = this._map.get(key)) == null ? void 0 : _a3.value;
+  }
+  set(key, value) {
+    this._map.set(key, { value });
+  }
+  getOrCreate(key, create) {
+    const cached = this._map.get(key);
+    if (cached) {
+      return cached.value;
+    }
+    const value = create();
+    this.set(key, value);
+    return value;
+  }
+};
+__name(Cache, "Cache");
+
+// src/runtime/core/model/utils/dmmfToJSModelName.ts
+function dmmfToJSModelName(name) {
+  return name.replace(/^./, (str) => str.toLowerCase());
+}
+__name(dmmfToJSModelName, "dmmfToJSModelName");
+
+// src/runtime/core/extensions/resultUtils.ts
+function getComputedFields(previousComputedFields, extension, dmmfModelName) {
+  const jsName = dmmfToJSModelName(dmmfModelName);
+  if (!extension.result || !(extension.result.$allModels || extension.result[jsName])) {
+    return previousComputedFields;
+  }
+  return resolveDependencies({
+    ...previousComputedFields,
+    ...getComputedFieldsFromModel(extension.name, extension.result.$allModels),
+    ...getComputedFieldsFromModel(extension.name, extension.result[jsName])
+  });
+}
+__name(getComputedFields, "getComputedFields");
+function resolveDependencies(computedFields) {
+  const cache = new Cache();
+  const resolveNeeds = /* @__PURE__ */ __name((fieldName) => {
+    return cache.getOrCreate(fieldName, () => {
+      if (computedFields[fieldName]) {
+        return computedFields[fieldName].needs.flatMap(resolveNeeds);
+      }
+      return [fieldName];
+    });
+  }, "resolveNeeds");
+  return mapObjectValues(computedFields, (field) => {
+    return {
+      ...field,
+      needs: resolveNeeds(field.name)
+    };
+  });
+}
+__name(resolveDependencies, "resolveDependencies");
+function getComputedFieldsFromModel(name, modelResult) {
+  if (!modelResult) {
+    return {};
+  }
+  return mapObjectValues(modelResult, ({ needs, compute }, fieldName) => ({
+    name: fieldName,
+    needs: needs ? Object.keys(needs).filter((key) => needs[key]) : [],
+    compute: wrapExtensionCallback(name, compute)
+  }));
+}
+__name(getComputedFieldsFromModel, "getComputedFieldsFromModel");
+function applyComputedFieldsToSelection(selection, computedFields) {
+  if (!computedFields) {
+    return selection;
+  }
+  const result = { ...selection };
+  for (const field of Object.values(computedFields)) {
+    if (!selection[field.name]) {
+      continue;
+    }
+    for (const dependency of field.needs) {
+      result[dependency] = true;
+    }
+  }
+  return result;
+}
+__name(applyComputedFieldsToSelection, "applyComputedFieldsToSelection");
+
 // src/runtime/utils/createErrorMessageWithContext.ts
 var import_chalk9 = __toESM(require_source());
 var import_indent_string3 = __toESM(require_indent_string());
-
-// src/runtime/clientActions.ts
-var clientOnlyActions = {
-  findUniqueOrThrow: {
-    wrappedAction: DMMF.ModelAction.findUnique
-  },
-  findFirstOrThrow: {
-    wrappedAction: DMMF.ModelAction.findFirst
-  }
-};
-function getDmmfActionName(name) {
-  if (isClientOnlyAction(name)) {
-    return clientOnlyActions[name].wrappedAction;
-  }
-  return name;
-}
-__name(getDmmfActionName, "getDmmfActionName");
-function isClientOnlyAction(action) {
-  return Object.prototype.hasOwnProperty.call(clientOnlyActions, action);
-}
-__name(isClientOnlyAction, "isClientOnlyAction");
-var allClientModelActions = Object.keys(DMMF.ModelAction).concat(
-  Object.keys(clientOnlyActions)
-);
 
 // src/runtime/utils/SourceFileSlice.ts
 var import_fs8 = __toESM(require("fs"));
@@ -31484,12 +31621,12 @@ var colorsDisabled = {
   underline: (str) => str,
   highlightSource: (source) => source
 };
-function getTemplateParameters({ callsite, message, originalMethod, isPanic, callArguments }, colors) {
+function getTemplateParameters({ callsite, message, originalMethod, isPanic: isPanic2, callArguments }, colors) {
   var _a3;
   const templateParameters = {
     functionName: `prisma.${originalMethod}()`,
     message,
-    isPanic: isPanic != null ? isPanic : false,
+    isPanic: isPanic2 != null ? isPanic2 : false,
     callArguments
   };
   if (!callsite || typeof window !== "undefined") {
@@ -31513,7 +31650,7 @@ function getTemplateParameters({ callsite, message, originalMethod, isPanic, cal
     }
     templateParameters.functionName = `${invocationCallCode.code})`;
     templateParameters.location = callLocation;
-    if (!isPanic) {
+    if (!isPanic2) {
       source = source.mapLineAt(callLocation.lineNumber, (line) => line.slice(0, invocationCallCode.openingBraceIndex));
     }
     source = colors.highlightSource(source);
@@ -31529,7 +31666,7 @@ function getTemplateParameters({ callsite, message, originalMethod, isPanic, cal
 }
 __name(getTemplateParameters, "getTemplateParameters");
 function findPrismaActionCall(str) {
-  const allActions = allClientModelActions.join("|");
+  const allActions = Object.keys(DMMF.ModelAction).join("|");
   const regexp = new RegExp(String.raw`\S+(${allActions})\(`);
   const match = regexp.exec(str);
   if (match) {
@@ -31552,10 +31689,10 @@ function getIndent(line) {
   return spaceCount;
 }
 __name(getIndent, "getIndent");
-function stringifyErrorMessage({ functionName, location, message, isPanic, contextLines, callArguments }, colors) {
+function stringifyErrorMessage({ functionName, location, message, isPanic: isPanic2, contextLines, callArguments }, colors) {
   const lines = [""];
   const introSuffix = location ? " in" : ":";
-  if (isPanic) {
+  if (isPanic2) {
     lines.push(colors.red(`Oops, an unknown error occurred! This is ${colors.bold("on us")}, you did nothing wrong.`));
     lines.push(colors.red(`It occurred in the ${colors.bold(`\`${functionName}\``)} invocation${introSuffix}`));
   } else {
@@ -32516,7 +32653,14 @@ ${(0, import_indent_string4.default)(nestedValue.toString(), tab)}
   }
 };
 __name(Arg2, "Arg");
-function makeDocument({ dmmf, rootTypeName, rootField, select, modelName }) {
+function makeDocument({
+  dmmf,
+  rootTypeName,
+  rootField,
+  select,
+  modelName,
+  extensions
+}) {
   if (!select) {
     select = {};
   }
@@ -32533,7 +32677,14 @@ function makeDocument({ dmmf, rootTypeName, rootField, select, modelName }) {
   const context3 = {
     modelName
   };
-  const children = selectionToFields(dmmf, { [rootField]: select }, fakeRootField, [rootTypeName], context3);
+  const children = selectionToFields({
+    dmmf,
+    selection: { [rootField]: select },
+    schemaField: fakeRootField,
+    path: [rootTypeName],
+    context: context3,
+    extensions
+  });
   return new Document(rootTypeName, children);
 }
 __name(makeDocument, "makeDocument");
@@ -32541,10 +32692,22 @@ function transformDocument(document2) {
   return document2;
 }
 __name(transformDocument, "transformDocument");
-function selectionToFields(dmmf, selection, schemaField, path7, context3) {
+function selectionToFields({
+  dmmf,
+  selection,
+  schemaField,
+  path: path7,
+  context: context3,
+  extensions
+}) {
   const outputType = schemaField.outputType.type;
+  const computedFields = context3.modelName ? extensions.getAllComputedFields(context3.modelName) : {};
+  selection = applyComputedFieldsToSelection(selection, computedFields);
   return Object.entries(selection).reduce((acc, [name, value]) => {
     const field = outputType.fieldMap ? outputType.fieldMap[name] : outputType.fields.find((f) => f.name === name);
+    if (computedFields == null ? void 0 : computedFields[name]) {
+      return acc;
+    }
     if (!field) {
       acc.push(
         new Field({
@@ -32556,7 +32719,7 @@ function selectionToFields(dmmf, selection, schemaField, path7, context3) {
             providedName: name,
             didYouMean: getSuggestion(
               name,
-              outputType.fields.map((f) => f.name)
+              outputType.fields.map((f) => f.name).concat(Object.keys(computedFields != null ? computedFields : {}))
             ),
             outputType
           }
@@ -32718,7 +32881,21 @@ function selectionToFields(dmmf, selection, schemaField, path7, context3) {
         select = byToSelect(value.by);
       }
     }
-    const children = select !== false && isRelation ? selectionToFields(dmmf, select, field, [...path7, name], context3) : void 0;
+    let children;
+    if (select !== false && isRelation) {
+      let modelName = context3.modelName;
+      if (typeof field.outputType.type === "object" && field.outputType.namespace === "model" && field.outputType.location === "outputObjectTypes") {
+        modelName = field.outputType.type.name;
+      }
+      children = selectionToFields({
+        dmmf,
+        selection: select,
+        schemaField: field,
+        path: [...path7, name],
+        context: { modelName },
+        extensions
+      });
+    }
     acc.push(new Field({ name, args, children, schemaField: field }));
     return acc;
   }, []);
@@ -33274,30 +33451,6 @@ function addProperty(key, factory) {
 }
 __name(addProperty, "addProperty");
 
-// src/generation/Cache.ts
-var Cache = class {
-  constructor() {
-    this._map = /* @__PURE__ */ new Map();
-  }
-  get(key) {
-    var _a3;
-    return (_a3 = this._map.get(key)) == null ? void 0 : _a3.value;
-  }
-  set(key, value) {
-    this._map.set(key, { value });
-  }
-  getOrCreate(key, create) {
-    const cached = this._map.get(key);
-    if (cached) {
-      return cached.value;
-    }
-    const value = create();
-    this.set(key, value);
-    return value;
-  }
-};
-__name(Cache, "Cache");
-
 // src/runtime/core/compositeProxy/cacheProperties.ts
 function cacheProperties(baseLayer) {
   const cache = new Cache();
@@ -33338,11 +33491,8 @@ __name(defaultProxyHandlers, "defaultProxyHandlers");
 // src/runtime/core/compositeProxy/createCompositeProxy.ts
 function createCompositeProxy(target, layers) {
   const keysToLayerMap = mapKeysToLayers(layers);
-  const ownKeys = getOwnKeys(target, Array.from(keysToLayerMap.keys()));
   const overwrittenKeys = /* @__PURE__ */ new Set();
-  const defaultHandlers = defaultProxyHandlers(ownKeys);
   return new Proxy(target, {
-    ...defaultHandlers,
     get(target2, prop) {
       if (overwrittenKeys.has(prop)) {
         return target2[prop];
@@ -33353,6 +33503,22 @@ function createCompositeProxy(target, layers) {
       }
       return target2[prop];
     },
+    has(target2, prop) {
+      var _a3, _b2;
+      if (overwrittenKeys.has(prop)) {
+        return true;
+      }
+      const layer = keysToLayerMap.get(prop);
+      if (layer) {
+        return (_b2 = (_a3 = layer.has) == null ? void 0 : _a3.call(layer, prop)) != null ? _b2 : true;
+      }
+      return Reflect.has(target2, prop);
+    },
+    ownKeys(target2) {
+      const targetKeys = getExistingKeys(Reflect.ownKeys(target2), keysToLayerMap);
+      const layerKeys = getExistingKeys(Array.from(keysToLayerMap.keys()), keysToLayerMap);
+      return [.../* @__PURE__ */ new Set([...targetKeys, ...layerKeys, ...overwrittenKeys])];
+    },
     set(target2, prop, value) {
       var _a3, _b2;
       const layer = keysToLayerMap.get(prop);
@@ -33360,7 +33526,7 @@ function createCompositeProxy(target, layers) {
         return false;
       }
       overwrittenKeys.add(prop);
-      return defaultHandlers.set(target2, prop, value);
+      return Reflect.set(target2, prop, value);
     },
     getOwnPropertyDescriptor(target2, prop) {
       const layer = keysToLayerMap.get(prop);
@@ -33386,10 +33552,30 @@ function mapKeysToLayers(layers) {
   return keysToLayerMap;
 }
 __name(mapKeysToLayers, "mapKeysToLayers");
-function getOwnKeys(target, layerKeys) {
-  return [.../* @__PURE__ */ new Set([...Object.keys(target), ...layerKeys])];
+function getExistingKeys(keys2, keysToLayerMap) {
+  return keys2.filter((key) => {
+    var _a3, _b2;
+    const layer = keysToLayerMap.get(key);
+    return (_b2 = (_a3 = layer == null ? void 0 : layer.has) == null ? void 0 : _a3.call(layer, key)) != null ? _b2 : true;
+  });
 }
-__name(getOwnKeys, "getOwnKeys");
+__name(getExistingKeys, "getExistingKeys");
+
+// src/runtime/core/compositeProxy/removeProperties.ts
+function removeProperties(keys2) {
+  return {
+    getKeys() {
+      return keys2;
+    },
+    has() {
+      return false;
+    },
+    getPropertyValue() {
+      return void 0;
+    }
+  };
+}
+__name(removeProperties, "removeProperties");
 
 // ../../node_modules/.pnpm/stacktrace-parser@0.1.10/node_modules/stacktrace-parser/dist/stack-trace-parser.esm.js
 var UNKNOWN_FUNCTION = "<unknown>";
@@ -33542,9 +33728,9 @@ function createPrismaPromise(callback) {
   const _callback = /* @__PURE__ */ __name((transaction, lock, cached = true) => {
     try {
       if (cached === true) {
-        return promise != null ? promise : promise = callback(transaction, lock);
+        return promise != null ? promise : promise = valueToPromise(callback(transaction, lock));
       }
-      return callback(transaction, lock);
+      return valueToPromise(callback(transaction, lock));
     } catch (error2) {
       return Promise.reject(error2);
     }
@@ -33578,6 +33764,13 @@ function createItx(transaction) {
   return void 0;
 }
 __name(createItx, "createItx");
+function valueToPromise(thing) {
+  if (typeof thing["then"] === "function") {
+    return thing;
+  }
+  return Promise.resolve(thing);
+}
+__name(valueToPromise, "valueToPromise");
 
 // src/runtime/core/model/aggregates/utils/aggregateMap.ts
 var aggregateMap = {
@@ -33589,9 +33782,9 @@ var aggregateMap = {
 };
 
 // src/runtime/core/model/aggregates/aggregate.ts
-function desugarUserArgs(userArgs) {
-  const _userArgs = desugarCountInUserArgs(userArgs);
-  const userArgsEntries = Object.entries(_userArgs);
+function desugarUserArgs(args = {}) {
+  const _args = desugarCountInUserArgs(args);
+  const userArgsEntries = Object.entries(_args);
   return userArgsEntries.reduce(
     (aggregateArgs, [key, value]) => {
       if (aggregateMap[key] !== void 0) {
@@ -33605,73 +33798,75 @@ function desugarUserArgs(userArgs) {
   );
 }
 __name(desugarUserArgs, "desugarUserArgs");
-function desugarCountInUserArgs(userArgs) {
-  if (typeof userArgs["_count"] === "boolean") {
-    return { ...userArgs, _count: { _all: userArgs["_count"] } };
+function desugarCountInUserArgs(args = {}) {
+  if (typeof args["_count"] === "boolean") {
+    return { ...args, _count: { _all: args["_count"] } };
   }
-  return userArgs;
+  return args;
 }
 __name(desugarCountInUserArgs, "desugarCountInUserArgs");
-function createUnpacker(userArgs) {
+function createUnpacker(args = {}) {
   return (data) => {
-    if (typeof userArgs["_count"] === "boolean") {
+    if (typeof args["_count"] === "boolean") {
       data["_count"] = data["_count"]["_all"];
     }
     return data;
   };
 }
 __name(createUnpacker, "createUnpacker");
-function aggregate(client, userArgs, modelAction) {
-  const aggregateArgs = desugarUserArgs(userArgs != null ? userArgs : {});
-  const aggregateUnpacker = createUnpacker(userArgs != null ? userArgs : {});
+function aggregate(args, modelAction) {
+  const aggregateUnpacker = createUnpacker(args);
   return modelAction({
     action: "aggregate",
-    unpacker: aggregateUnpacker
-  })(aggregateArgs);
+    unpacker: aggregateUnpacker,
+    argsMapper: desugarUserArgs
+  })(args);
 }
 __name(aggregate, "aggregate");
 
 // src/runtime/core/model/aggregates/count.ts
-function count(client, userArgs, modelAction) {
-  const { select, ..._userArgs } = userArgs != null ? userArgs : {};
+function desugarUserArgs2(args = {}) {
+  const { select, ..._args } = args;
   if (typeof select === "object") {
-    return aggregate(
-      client,
-      { ..._userArgs, _count: select },
-      (p) => modelAction({ ...p, action: "count", unpacker: (data) => {
-        var _a3;
-        return (_a3 = p.unpacker) == null ? void 0 : _a3.call(p, data)["_count"];
-      } })
-    );
+    return desugarUserArgs({ ..._args, _count: select });
   } else {
-    return aggregate(
-      client,
-      { ..._userArgs, _count: { _all: true } },
-      (p) => modelAction({ ...p, action: "count", unpacker: (data) => {
-        var _a3;
-        return (_a3 = p.unpacker) == null ? void 0 : _a3.call(p, data)["_count"]["_all"];
-      } })
-    );
+    return desugarUserArgs({ ..._args, _count: { _all: true } });
   }
+}
+__name(desugarUserArgs2, "desugarUserArgs");
+function createUnpacker2(args = {}) {
+  if (typeof args["select"] === "object") {
+    return (data) => createUnpacker(args)(data)["_count"];
+  } else {
+    return (data) => createUnpacker(args)(data)["_count"]["_all"];
+  }
+}
+__name(createUnpacker2, "createUnpacker");
+function count(args, modelAction) {
+  return modelAction({
+    action: "count",
+    unpacker: createUnpacker2(args),
+    argsMapper: desugarUserArgs2
+  })(args);
 }
 __name(count, "count");
 
 // src/runtime/core/model/aggregates/groupBy.ts
-function desugarUserArgs2(userArgs) {
-  const _userArgs = desugarUserArgs(userArgs);
-  if (Array.isArray(userArgs["by"])) {
-    for (const key of userArgs["by"]) {
+function desugarUserArgs3(args = {}) {
+  const _args = desugarUserArgs(args);
+  if (Array.isArray(_args["by"])) {
+    for (const key of _args["by"]) {
       if (typeof key === "string") {
-        _userArgs["select"][key] = true;
+        _args["select"][key] = true;
       }
     }
   }
-  return _userArgs;
+  return _args;
 }
-__name(desugarUserArgs2, "desugarUserArgs");
-function createUnpacker2(userArgs) {
+__name(desugarUserArgs3, "desugarUserArgs");
+function createUnpacker3(args = {}) {
   return (data) => {
-    if (typeof userArgs["_count"] === "boolean") {
+    if (typeof (args == null ? void 0 : args["_count"]) === "boolean") {
       data.forEach((row) => {
         row["_count"] = row["_count"]["_all"];
       });
@@ -33679,107 +33874,32 @@ function createUnpacker2(userArgs) {
     return data;
   };
 }
-__name(createUnpacker2, "createUnpacker");
-function groupBy(client, userArgs, modelAction) {
-  const groupByArgs = desugarUserArgs2(userArgs != null ? userArgs : {});
-  const groupByUnpacker = createUnpacker2(userArgs != null ? userArgs : {});
+__name(createUnpacker3, "createUnpacker");
+function groupBy(args, modelAction) {
   return modelAction({
     action: "groupBy",
-    unpacker: groupByUnpacker
-  })(groupByArgs);
+    unpacker: createUnpacker3(args),
+    argsMapper: desugarUserArgs3
+  })(args);
 }
 __name(groupBy, "groupBy");
 
 // src/runtime/core/model/applyAggregates.ts
 function applyAggregates(client, action, modelAction) {
   if (action === "aggregate")
-    return (userArgs) => aggregate(client, userArgs, modelAction);
+    return (userArgs) => aggregate(userArgs, modelAction);
   if (action === "count")
-    return (userArgs) => count(client, userArgs, modelAction);
+    return (userArgs) => count(userArgs, modelAction);
   if (action === "groupBy")
-    return (userArgs) => groupBy(client, userArgs, modelAction);
+    return (userArgs) => groupBy(userArgs, modelAction);
   return void 0;
 }
 __name(applyAggregates, "applyAggregates");
 
-// src/runtime/utils/rejectOnNotFound.ts
-var NotFoundError2 = class extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "NotFoundError";
-  }
-};
-__name(NotFoundError2, "NotFoundError");
-function getRejectOnNotFound(action, modelName, args, clientInstance) {
-  let rejectOnNotFound;
-  if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
-    rejectOnNotFound = args["rejectOnNotFound"];
-    delete args["rejectOnNotFound"];
-  } else if (typeof clientInstance === "boolean") {
-    rejectOnNotFound = clientInstance;
-  } else if (clientInstance && typeof clientInstance === "object" && action in clientInstance) {
-    const rejectPerOperation = clientInstance[action];
-    if (rejectPerOperation && typeof rejectPerOperation === "object") {
-      if (modelName in rejectPerOperation) {
-        return rejectPerOperation[modelName];
-      }
-      return void 0;
-    }
-    rejectOnNotFound = getRejectOnNotFound(action, modelName, args, rejectPerOperation);
-  } else if (typeof clientInstance === "function") {
-    rejectOnNotFound = clientInstance;
-  } else {
-    rejectOnNotFound = false;
-  }
-  return rejectOnNotFound;
-}
-__name(getRejectOnNotFound, "getRejectOnNotFound");
-var REGEX = /(findUnique|findFirst)/;
-function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
-  if (rejectOnNotFound && !data && REGEX.exec(clientMethod)) {
-    if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
-      throw new NotFoundError2(`No ${typeName} found`);
-    } else if (typeof rejectOnNotFound === "function") {
-      throw rejectOnNotFound(new NotFoundError2(`No ${typeName} found`));
-    } else if (isError(rejectOnNotFound)) {
-      throw rejectOnNotFound;
-    }
-    throw new NotFoundError2(`No ${typeName} found`);
-  }
-}
-__name(throwIfNotFound, "throwIfNotFound");
-
-// src/runtime/core/model/applyClientOnlyWrapper.ts
-function wrapRequest(prop, dmmfModelName, requestCallback) {
-  if (prop === "findFirstOrThrow" || prop === "findUniqueOrThrow") {
-    return applyOrThrowWrapper(dmmfModelName, requestCallback);
-  }
-  assertNever(prop, "Unknown wrapper name");
-}
-__name(wrapRequest, "wrapRequest");
-function applyOrThrowWrapper(dmmfModelName, requestCallback) {
-  return async (requestParams) => {
-    if ("rejectOnNotFound" in requestParams.args) {
-      const message = createErrorMessageWithContext({
-        originalMethod: requestParams.clientMethod,
-        callsite: requestParams.callsite,
-        message: "'rejectOnNotFound' option is not supported"
-      });
-      throw new PrismaClientValidationError(message);
-    }
-    const result = await requestCallback(requestParams);
-    if (result === null || result === void 0) {
-      throw new NotFoundError2(`No ${dmmfModelName} found`);
-    }
-    return result;
-  };
-}
-__name(applyOrThrowWrapper, "applyOrThrowWrapper");
-
 // src/runtime/core/model/applyFieldsProxy.ts
 function applyFieldsProxy(model) {
   const scalarFieldsList = model.fields.filter((field) => !field.relationName);
-  const scalarFields = keyBy2(scalarFieldsList, (field) => field.name);
+  const scalarFields = keyBy(scalarFieldsList, (field) => field.name);
   return new Proxy(
     {},
     {
@@ -33823,7 +33943,7 @@ function applyFluent(client, dmmfModelName, modelAction, fluentPropName, prevDat
     const nextDataPath = getNextDataPath(fluentPropName, prevDataPath);
     const nextUserArgs = getNextUserArgs(userArgs, prevUserArgs, nextDataPath);
     const prismaPromise = modelAction({ dataPath: nextDataPath, callsite })(nextUserArgs);
-    const ownKeys = getOwnKeys2(client, dmmfModelName);
+    const ownKeys = getOwnKeys(client, dmmfModelName);
     return new Proxy(prismaPromise, {
       get(target, prop) {
         if (!ownKeys.includes(prop))
@@ -33838,19 +33958,102 @@ function applyFluent(client, dmmfModelName, modelAction, fluentPropName, prevDat
   };
 }
 __name(applyFluent, "applyFluent");
-function getOwnKeys2(client, dmmfModelName) {
+function getOwnKeys(client, dmmfModelName) {
   return client._baseDmmf.modelMap[dmmfModelName].fields.filter((field) => field.kind === "object").map((field) => field.name);
 }
-__name(getOwnKeys2, "getOwnKeys");
+__name(getOwnKeys, "getOwnKeys");
 
-// src/runtime/core/model/utils/dmmfToJSModelName.ts
-function dmmfToJSModelName(name) {
-  return name.replace(/^./, (str) => str.toLowerCase());
+// src/runtime/utils/clientVersion.ts
+var clientVersion = require_package3().version;
+
+// src/runtime/utils/rejectOnNotFound.ts
+var NotFoundError2 = class extends PrismaClientKnownRequestError {
+  constructor(message) {
+    super(message, { code: "P2025", clientVersion });
+    this.name = "NotFoundError";
+  }
+};
+__name(NotFoundError2, "NotFoundError");
+function getRejectOnNotFound(action, modelName, args, clientInstance) {
+  let rejectOnNotFound;
+  if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
+    rejectOnNotFound = args["rejectOnNotFound"];
+    delete args["rejectOnNotFound"];
+  } else if (typeof clientInstance === "boolean") {
+    rejectOnNotFound = clientInstance;
+  } else if (clientInstance && typeof clientInstance === "object" && action in clientInstance) {
+    const rejectPerOperation = clientInstance[action];
+    if (rejectPerOperation && typeof rejectPerOperation === "object") {
+      if (modelName in rejectPerOperation) {
+        return rejectPerOperation[modelName];
+      }
+      return void 0;
+    }
+    rejectOnNotFound = getRejectOnNotFound(action, modelName, args, rejectPerOperation);
+  } else if (typeof clientInstance === "function") {
+    rejectOnNotFound = clientInstance;
+  } else {
+    rejectOnNotFound = false;
+  }
+  return rejectOnNotFound;
 }
-__name(dmmfToJSModelName, "dmmfToJSModelName");
+__name(getRejectOnNotFound, "getRejectOnNotFound");
+var REGEX = /(findUnique|findFirst)/;
+function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
+  if (rejectOnNotFound && !data && REGEX.exec(clientMethod)) {
+    if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
+      throw new NotFoundError2(`No ${typeName} found`);
+    } else if (typeof rejectOnNotFound === "function") {
+      throw rejectOnNotFound(new NotFoundError2(`No ${typeName} found`));
+    } else if (isError(rejectOnNotFound)) {
+      throw rejectOnNotFound;
+    }
+    throw new NotFoundError2(`No ${typeName} found`);
+  }
+}
+__name(throwIfNotFound, "throwIfNotFound");
+
+// src/runtime/core/model/applyOrThrowErrorAdapter.ts
+function adaptErrors(action, dmmfModelName, requestCallback) {
+  if (action === DMMF.ModelAction.findFirstOrThrow || action === DMMF.ModelAction.findUniqueOrThrow) {
+    return applyOrThrowWrapper(dmmfModelName, requestCallback);
+  }
+  return requestCallback;
+}
+__name(adaptErrors, "adaptErrors");
+function applyOrThrowWrapper(dmmfModelName, requestCallback) {
+  return async (requestParams) => {
+    if ("rejectOnNotFound" in requestParams.args) {
+      const message = createErrorMessageWithContext({
+        originalMethod: requestParams.clientMethod,
+        callsite: requestParams.callsite,
+        message: "'rejectOnNotFound' option is not supported"
+      });
+      throw new PrismaClientValidationError(message);
+    }
+    const result = await requestCallback(requestParams).catch((e) => {
+      if (e instanceof PrismaClientKnownRequestError && e.code === "P2025") {
+        throw new NotFoundError2(`No ${dmmfModelName} found`);
+      } else {
+        throw e;
+      }
+    });
+    return result;
+  };
+}
+__name(applyOrThrowWrapper, "applyOrThrowWrapper");
 
 // src/runtime/core/model/applyModel.ts
-var fluentProps = ["findUnique", "findFirst", "create", "update", "upsert", "delete"];
+var fluentProps = [
+  "findUnique",
+  "findUniqueOrThrow",
+  "findFirst",
+  "findFirstOrThrow",
+  "create",
+  "update",
+  "upsert",
+  "delete"
+];
 var aggregateProps = ["aggregate", "count", "groupBy"];
 function applyModel(client, dmmfModelName) {
   var _a3;
@@ -33858,34 +34061,24 @@ function applyModel(client, dmmfModelName) {
   if ((_a3 = client._engineConfig.previewFeatures) == null ? void 0 : _a3.includes("fieldReference")) {
     layers.push(fieldsPropertyLayer(client, dmmfModelName));
   }
-  const jsModelName = dmmfToJSModelName(dmmfModelName);
-  for (const { model } of client._extensions) {
-    if (!model) {
-      continue;
-    }
-    if (model.$allModels) {
-      layers.push(addObjectProperties(model.$allModels));
-    }
-    if (model[jsModelName]) {
-      layers.push(addObjectProperties(model[jsModelName]));
-    }
+  const modelExtensions = client._extensions.getAllModelExtensions(dmmfModelName);
+  if (modelExtensions) {
+    layers.push(addObjectProperties(modelExtensions));
   }
   return createCompositeProxy({}, layers);
 }
 __name(applyModel, "applyModel");
 function modelActionsLayer(client, dmmfModelName) {
   const jsModelName = dmmfToJSModelName(dmmfModelName);
-  const ownKeys = getOwnKeys3(client, dmmfModelName);
+  const ownKeys = getOwnKeys2(client, dmmfModelName);
   return {
     getKeys() {
       return ownKeys;
     },
     getPropertyValue(key) {
-      const dmmfActionName = getDmmfActionName(key);
+      const dmmfActionName = key;
       let requestFn = /* @__PURE__ */ __name((params) => client._request(params), "requestFn");
-      if (isClientOnlyAction(key)) {
-        requestFn = wrapRequest(key, dmmfModelName, requestFn);
-      }
+      requestFn = adaptErrors(dmmfActionName, dmmfModelName, requestFn);
       const action = /* @__PURE__ */ __name((paramOverrides) => (userArgs) => {
         const callSite = getCallSite(client._errorFormat);
         return createPrismaPromise((transaction, lock) => {
@@ -33914,17 +34107,14 @@ function modelActionsLayer(client, dmmfModelName) {
   };
 }
 __name(modelActionsLayer, "modelActionsLayer");
-function getOwnKeys3(client, dmmfModelName) {
+function getOwnKeys2(client, dmmfModelName) {
   const actionKeys = Object.keys(client._baseDmmf.mappingsMap[dmmfModelName]).filter(
     (key) => key !== "model" && key !== "plural"
   );
   actionKeys.push("count");
-  const clientOnlyActionKeys = Object.keys(clientOnlyActions).filter(
-    (actionKey) => actionKeys.includes(clientOnlyActions[actionKey].wrappedAction)
-  );
-  return actionKeys.concat(clientOnlyActionKeys);
+  return actionKeys;
 }
-__name(getOwnKeys3, "getOwnKeys");
+__name(getOwnKeys2, "getOwnKeys");
 function isValidAggregateName(action) {
   return aggregateProps.includes(action);
 }
@@ -33949,10 +34139,9 @@ __name(jsToDMMFModelName, "jsToDMMFModelName");
 var rawClient = Symbol();
 function applyModelsAndClientExtensions(client) {
   const layers = [modelsLayer(client), addProperty(rawClient, () => client)];
-  for (const extension of client._extensions) {
-    if (extension.client) {
-      layers.push(addObjectProperties(extension.client));
-    }
+  const clientExtensions = client._extensions.getAllClientExtensions();
+  if (clientExtensions) {
+    layers.push(addObjectProperties(clientExtensions));
   }
   return createCompositeProxy(client, layers);
 }
@@ -33995,22 +34184,251 @@ __name(unapplyModelsAndClientExtensions, "unapplyModelsAndClientExtensions");
 // src/runtime/core/extensions/$extends.ts
 function $extends(extension) {
   if (!this._hasPreviewFlag("clientExtensions")) {
-    throw new PrismaClientValidationError("Extensions are not yet available");
+    throw new PrismaClientValidationError(
+      "Extensions are not yet generally available, please add `clientExtensions` to the `previewFeatures` field in the `generator` block in the `schema.prisma` file."
+    );
+  }
+  if (typeof extension === "function") {
+    return extension(this);
   }
   const oldClient = unapplyModelsAndClientExtensions(this);
   const newClient = Object.create(oldClient, {
     _extensions: {
-      get: () => {
-        if (typeof extension === "function") {
-          return this._extensions.concat(extension());
-        }
-        return this._extensions.concat(extension);
-      }
+      value: this._extensions.append(extension)
     }
   });
   return applyModelsAndClientExtensions(newClient);
 }
 __name($extends, "$extends");
+
+// ../../node_modules/.pnpm/klona@2.0.5/node_modules/klona/dist/index.mjs
+function klona(x) {
+  if (typeof x !== "object")
+    return x;
+  var k, tmp, str = Object.prototype.toString.call(x);
+  if (str === "[object Object]") {
+    if (x.constructor !== Object && typeof x.constructor === "function") {
+      tmp = new x.constructor();
+      for (k in x) {
+        if (x.hasOwnProperty(k) && tmp[k] !== x[k]) {
+          tmp[k] = klona(x[k]);
+        }
+      }
+    } else {
+      tmp = {};
+      for (k in x) {
+        if (k === "__proto__") {
+          Object.defineProperty(tmp, k, {
+            value: klona(x[k]),
+            configurable: true,
+            enumerable: true,
+            writable: true
+          });
+        } else {
+          tmp[k] = klona(x[k]);
+        }
+      }
+    }
+    return tmp;
+  }
+  if (str === "[object Array]") {
+    k = x.length;
+    for (tmp = Array(k); k--; ) {
+      tmp[k] = klona(x[k]);
+    }
+    return tmp;
+  }
+  if (str === "[object Set]") {
+    tmp = /* @__PURE__ */ new Set();
+    x.forEach(function(val) {
+      tmp.add(klona(val));
+    });
+    return tmp;
+  }
+  if (str === "[object Map]") {
+    tmp = /* @__PURE__ */ new Map();
+    x.forEach(function(val, key) {
+      tmp.set(klona(key), klona(val));
+    });
+    return tmp;
+  }
+  if (str === "[object Date]") {
+    return new Date(+x);
+  }
+  if (str === "[object RegExp]") {
+    tmp = new RegExp(x.source, x.flags);
+    tmp.lastIndex = x.lastIndex;
+    return tmp;
+  }
+  if (str === "[object DataView]") {
+    return new x.constructor(klona(x.buffer));
+  }
+  if (str === "[object ArrayBuffer]") {
+    return x.slice(0);
+  }
+  if (str.slice(-6) === "Array]") {
+    return new x.constructor(x);
+  }
+  return x;
+}
+__name(klona, "klona");
+
+// src/runtime/core/extensions/applyQueryExtensions.ts
+function iterateAndCallQueryCallbacks(client, params, queryCbs, i = 0) {
+  if (queryCbs.length === 0)
+    return client._executeRequest(params);
+  return createPrismaPromise((transaction, lock) => {
+    var _a3;
+    if (transaction !== void 0) {
+      void ((_a3 = params.lock) == null ? void 0 : _a3.then());
+      params.transaction = transaction;
+      params.lock = lock;
+    }
+    if (i === queryCbs.length) {
+      return client._executeRequest(params);
+    }
+    return queryCbs[i]({
+      model: params.model,
+      operation: params.action,
+      args: klona(params.args),
+      query: (args) => {
+        params.args = args;
+        return iterateAndCallQueryCallbacks(client, params, queryCbs, i + 1);
+      }
+    });
+  });
+}
+__name(iterateAndCallQueryCallbacks, "iterateAndCallQueryCallbacks");
+function applyQueryExtensions(client, params) {
+  const { jsModelName, action } = params;
+  if (jsModelName === void 0 || client._extensions.isEmpty()) {
+    return client._executeRequest(params);
+  }
+  return iterateAndCallQueryCallbacks(client, params, client._extensions.getAllQueryCallbacks(jsModelName, action));
+}
+__name(applyQueryExtensions, "applyQueryExtensions");
+
+// src/generation/lazyProperty.ts
+function lazyProperty(compute) {
+  let resultContainer;
+  return {
+    get() {
+      if (resultContainer) {
+        return resultContainer.value;
+      }
+      resultContainer = { value: compute() };
+      return resultContainer.value;
+    }
+  };
+}
+__name(lazyProperty, "lazyProperty");
+
+// src/runtime/core/extensions/MergedExtensionsList.ts
+var MergedExtensionsListNode = class {
+  constructor(extension, previous) {
+    this.extension = extension;
+    this.previous = previous;
+    this.computedFieldsCache = new Cache();
+    this.modelExtensionsCache = new Cache();
+    this.queryCallbacksCache = new Cache();
+    this.clientExtensions = lazyProperty(() => {
+      var _a3, _b2;
+      if (!this.extension.client) {
+        return (_a3 = this.previous) == null ? void 0 : _a3.getAllClientExtensions();
+      }
+      return {
+        ...(_b2 = this.previous) == null ? void 0 : _b2.getAllClientExtensions(),
+        ...wrapAllExtensionCallbacks(this.extension.name, this.extension.client)
+      };
+    });
+  }
+  getAllComputedFields(dmmfModelName) {
+    return this.computedFieldsCache.getOrCreate(dmmfModelName, () => {
+      var _a3;
+      return getComputedFields((_a3 = this.previous) == null ? void 0 : _a3.getAllComputedFields(dmmfModelName), this.extension, dmmfModelName);
+    });
+  }
+  getAllClientExtensions() {
+    return this.clientExtensions.get();
+  }
+  getAllModelExtensions(dmmfModelName) {
+    return this.modelExtensionsCache.getOrCreate(dmmfModelName, () => {
+      var _a3, _b2;
+      const jsModelName = dmmfToJSModelName(dmmfModelName);
+      if (!this.extension.model || !(this.extension.model[jsModelName] || this.extension.model.$allModels)) {
+        return (_a3 = this.previous) == null ? void 0 : _a3.getAllModelExtensions(dmmfModelName);
+      }
+      return {
+        ...(_b2 = this.previous) == null ? void 0 : _b2.getAllModelExtensions(dmmfModelName),
+        ...wrapAllExtensionCallbacks(this.extension.name, this.extension.model.$allModels),
+        ...wrapAllExtensionCallbacks(this.extension.name, this.extension.model[jsModelName])
+      };
+    });
+  }
+  getAllQueryCallbacks(jsModelName, action) {
+    return this.queryCallbacksCache.getOrCreate(`${jsModelName}:${action}`, () => {
+      var _a3, _b2;
+      const previous = (_b2 = (_a3 = this.previous) == null ? void 0 : _a3.getAllQueryCallbacks(jsModelName, action)) != null ? _b2 : [];
+      const query2 = this.extension.query;
+      if (!query2 || !(query2[jsModelName] || query2.$allModels)) {
+        return previous;
+      }
+      const newCallbacks = [];
+      if (query2[jsModelName] !== void 0) {
+        if (query2[jsModelName][action] !== void 0) {
+          newCallbacks.push(query2[jsModelName][action]);
+        }
+        if (query2[jsModelName]["$allOperations"] !== void 0) {
+          newCallbacks.push(query2[jsModelName]["$allOperations"]);
+        }
+      }
+      if (query2["$allModels"] !== void 0) {
+        if (query2["$allModels"][action] !== void 0) {
+          newCallbacks.push(query2["$allModels"][action]);
+        }
+        if (query2["$allModels"]["$allOperations"] !== void 0) {
+          newCallbacks.push(query2["$allModels"]["$allOperations"]);
+        }
+      }
+      return previous.concat(newCallbacks.map((callback) => wrapExtensionCallback(this.extension.name, callback)));
+    });
+  }
+};
+__name(MergedExtensionsListNode, "MergedExtensionsListNode");
+var MergedExtensionsList = class {
+  constructor(head) {
+    this.head = head;
+  }
+  static empty() {
+    return new MergedExtensionsList();
+  }
+  static single(extension) {
+    return new MergedExtensionsList(new MergedExtensionsListNode(extension));
+  }
+  isEmpty() {
+    return this.head === void 0;
+  }
+  append(extension) {
+    return new MergedExtensionsList(new MergedExtensionsListNode(extension, this.head));
+  }
+  getAllComputedFields(dmmfModelName) {
+    var _a3;
+    return (_a3 = this.head) == null ? void 0 : _a3.getAllComputedFields(dmmfModelName);
+  }
+  getAllClientExtensions() {
+    var _a3;
+    return (_a3 = this.head) == null ? void 0 : _a3.getAllClientExtensions();
+  }
+  getAllModelExtensions(dmmfModelName) {
+    var _a3;
+    return (_a3 = this.head) == null ? void 0 : _a3.getAllModelExtensions(dmmfModelName);
+  }
+  getAllQueryCallbacks(jsModelName, action) {
+    var _a3, _b2;
+    return (_b2 = (_a3 = this.head) == null ? void 0 : _a3.getAllQueryCallbacks(jsModelName, action)) != null ? _b2 : [];
+  }
+};
+__name(MergedExtensionsList, "MergedExtensionsList");
 
 // src/runtime/core/transaction/utils/createLockCountPromise.ts
 function getLockCountPromise(knock, cb = () => {
@@ -34028,11 +34446,11 @@ function getLockCountPromise(knock, cb = () => {
 __name(getLockCountPromise, "getLockCountPromise");
 
 // src/runtime/getLogLevel.ts
-function getLogLevel(log4) {
-  if (typeof log4 === "string") {
-    return log4;
+function getLogLevel(log3) {
+  if (typeof log3 === "string") {
+    return log3;
   }
-  return log4.reduce((acc, curr) => {
+  return log3.reduce((acc, curr) => {
     const currentLevel = typeof curr === "string" ? curr : curr.level;
     if (currentLevel === "query") {
       return acc;
@@ -34102,6 +34520,91 @@ __name(Middlewares, "Middlewares");
 
 // src/runtime/RequestHandler.ts
 var import_strip_ansi4 = __toESM(require_strip_ansi());
+
+// src/runtime/core/extensions/applyResultExtensions.ts
+function applyResultExtensions({ result, modelName, select, extensions }) {
+  const computedFields = extensions.getAllComputedFields(modelName);
+  if (!computedFields) {
+    return result;
+  }
+  const computedPropertiesLayers = [];
+  const maskingLayers = [];
+  for (const field of Object.values(computedFields)) {
+    if (select) {
+      if (!select[field.name]) {
+        continue;
+      }
+      const toMask = field.needs.filter((prop) => !select[prop]);
+      if (toMask.length > 0) {
+        maskingLayers.push(removeProperties(toMask));
+      }
+    }
+    if (areNeedsMet(result, field.needs)) {
+      computedPropertiesLayers.push(
+        computedPropertyLayer(field, createCompositeProxy(result, computedPropertiesLayers))
+      );
+    }
+  }
+  if (computedPropertiesLayers.length > 0 || maskingLayers.length > 0) {
+    return createCompositeProxy(result, [...computedPropertiesLayers, ...maskingLayers]);
+  }
+  return result;
+}
+__name(applyResultExtensions, "applyResultExtensions");
+function areNeedsMet(result, neededProperties) {
+  return neededProperties.every((property) => hasOwnProperty2(result, property));
+}
+__name(areNeedsMet, "areNeedsMet");
+function computedPropertyLayer(field, result) {
+  return cacheProperties(addProperty(field.name, () => field.compute(result)));
+}
+__name(computedPropertyLayer, "computedPropertyLayer");
+
+// src/runtime/core/extensions/visitQueryResult.ts
+function visitQueryResult({ visitor, result, args, dmmf, model }) {
+  var _a3;
+  if (Array.isArray(result)) {
+    for (let i = 0; i < result.length; i++) {
+      result[i] = visitQueryResult({
+        result: result[i],
+        args,
+        model,
+        dmmf,
+        visitor
+      });
+    }
+    return result;
+  }
+  const visitResult = (_a3 = visitor(result, model, args)) != null ? _a3 : result;
+  if (args.include) {
+    visitNested({ includeOrSelect: args.include, result: visitResult, parentModel: model, dmmf, visitor });
+  }
+  if (args.select) {
+    visitNested({ includeOrSelect: args.select, result: visitResult, parentModel: model, dmmf, visitor });
+  }
+  return visitResult;
+}
+__name(visitQueryResult, "visitQueryResult");
+function visitNested({ includeOrSelect, result, parentModel, dmmf, visitor }) {
+  for (const [fieldName, subConfig] of Object.entries(includeOrSelect)) {
+    if (!subConfig || result[fieldName] == null) {
+      continue;
+    }
+    const field = parentModel.fields.find((field2) => field2.name === fieldName);
+    if (!field || field.kind !== "object" || !field.relationName) {
+      continue;
+    }
+    const args = typeof subConfig === "object" ? subConfig : {};
+    result[fieldName] = visitQueryResult({
+      visitor,
+      result: result[fieldName],
+      args,
+      model: dmmf.getModelMap()[field.type],
+      dmmf
+    });
+  }
+}
+__name(visitNested, "visitNested");
 
 // src/runtime/DataLoader.ts
 var DataLoader = class {
@@ -34197,7 +34700,8 @@ function getRequestInfo(request2) {
 }
 __name(getRequestInfo, "getRequestInfo");
 var RequestHandler = class {
-  constructor(client, hooks) {
+  constructor(client, hooks, logEmitter) {
+    this.logEmmitter = logEmitter;
     this.client = client;
     this.hooks = hooks;
     this.dataloader = new DataLoader({
@@ -34208,15 +34712,26 @@ var RequestHandler = class {
         const traceparent = getTraceParent({ context: requests[0].otelParentCtx, tracingConfig: client._tracingConfig });
         if (traceparent)
           info2.headers.traceparent = traceparent;
+        const containsWrite = requests.some((r) => r.document.type === "mutation");
         const batchTransaction = ((_a3 = info2.transaction) == null ? void 0 : _a3.kind) === "batch" ? info2.transaction : void 0;
-        return this.client._engine.requestBatch(queries, info2.headers, batchTransaction);
+        return this.client._engine.requestBatch({
+          queries,
+          headers: info2.headers,
+          transaction: batchTransaction,
+          containsWrite
+        });
       },
       singleLoader: (request2) => {
         var _a3;
         const info2 = getRequestInfo(request2);
         const query2 = String(request2.document);
         const interactiveTransaction = ((_a3 = info2.transaction) == null ? void 0 : _a3.kind) === "itx" ? info2.transaction : void 0;
-        return this.client._engine.request(query2, info2.headers, interactiveTransaction);
+        return this.client._engine.request({
+          query: query2,
+          headers: info2.headers,
+          transaction: interactiveTransaction,
+          isWrite: request2.document.type === "mutation"
+        });
       },
       batchBy: (request2) => {
         var _a3;
@@ -34241,6 +34756,7 @@ var RequestHandler = class {
     headers,
     transaction,
     unpacker,
+    extensions,
     otelParentCtx,
     otelChildCtx
   }) {
@@ -34285,16 +34801,33 @@ var RequestHandler = class {
       }
       const unpackResult = this.unpack(document2, data, dataPath, rootField, unpacker);
       throwIfNotFound(unpackResult, clientMethod, typeName, rejectOnNotFound);
+      const extendedResult = this.applyResultExtensions({ result: unpackResult, modelName: typeName, args, extensions });
       if (process.env.PRISMA_CLIENT_GET_TIME) {
-        return { data: unpackResult, elapsed };
+        return { data: extendedResult, elapsed };
       }
-      return unpackResult;
+      return extendedResult;
     } catch (error2) {
-      this.handleRequestError({ error: error2, clientMethod, callsite });
+      this.handleAndLogRequestError({ error: error2, clientMethod, callsite, transaction });
     }
   }
-  handleRequestError({ error: error2, clientMethod, callsite }) {
+  handleAndLogRequestError({ error: error2, clientMethod, callsite, transaction }) {
+    try {
+      this.handleRequestError({ error: error2, clientMethod, callsite, transaction });
+    } catch (err) {
+      if (this.logEmmitter) {
+        this.logEmmitter.emit("error", { message: err.message, target: clientMethod, timestamp: new Date() });
+      }
+      throw err;
+    }
+  }
+  handleRequestError({ error: error2, clientMethod, callsite, transaction }) {
     debug11(error2);
+    if (isMismatchingBatchIndex(error2, transaction)) {
+      throw error2;
+    }
+    if (error2 instanceof NotFoundError2) {
+      throw error2;
+    }
     let message = error2.message;
     if (callsite) {
       message = createErrorMessageWithContext({
@@ -34307,11 +34840,19 @@ var RequestHandler = class {
     }
     message = this.sanitizeMessage(message);
     if (error2.code) {
-      throw new PrismaClientKnownRequestError(message, error2.code, this.client._clientVersion, error2.meta);
+      throw new PrismaClientKnownRequestError(message, {
+        code: error2.code,
+        clientVersion: this.client._clientVersion,
+        meta: error2.meta,
+        batchRequestIdx: error2.batchRequestIdx
+      });
     } else if (error2.isPanic) {
       throw new PrismaClientRustPanicError(message, this.client._clientVersion);
     } else if (error2 instanceof PrismaClientUnknownRequestError) {
-      throw new PrismaClientUnknownRequestError(message, this.client._clientVersion);
+      throw new PrismaClientUnknownRequestError(message, {
+        clientVersion: this.client._clientVersion,
+        batchRequestIdx: error2.batchRequestIdx
+      });
     } else if (error2 instanceof PrismaClientInitializationError) {
       throw new PrismaClientInitializationError(message, this.client._clientVersion);
     } else if (error2 instanceof PrismaClientRustPanicError) {
@@ -34340,11 +34881,34 @@ var RequestHandler = class {
     getPath.push(...path7.filter((p) => p !== "select" && p !== "include"));
     return unpack({ document: document2, data, path: getPath });
   }
+  applyResultExtensions({ result, modelName, args, extensions }) {
+    if (extensions.isEmpty() || result == null) {
+      return result;
+    }
+    const model = this.client._baseDmmf.getModelMap()[modelName];
+    if (!model) {
+      return result;
+    }
+    return visitQueryResult({
+      result,
+      args: args != null ? args : {},
+      model,
+      dmmf: this.client._baseDmmf,
+      visitor(value, model2, args2) {
+        const modelName2 = dmmfToJSModelName(model2.name);
+        return applyResultExtensions({ result: value, modelName: modelName2, select: args2.select, extensions });
+      }
+    });
+  }
   get [Symbol.toStringTag]() {
     return "RequestHandler";
   }
 };
 __name(RequestHandler, "RequestHandler");
+function isMismatchingBatchIndex(error2, transaction) {
+  return hasBatchIndex(error2) && (transaction == null ? void 0 : transaction.kind) === "batch" && error2.batchRequestIdx !== transaction.index;
+}
+__name(isMismatchingBatchIndex, "isMismatchingBatchIndex");
 function batchFindUniqueBy(request2) {
   var _a3;
   if (!request2.document.children[0].name.startsWith("findUnique")) {
@@ -34360,9 +34924,6 @@ function batchFindUniqueBy(request2) {
   return `${request2.document.children[0].name}|${args}|${selectionSet}`;
 }
 __name(batchFindUniqueBy, "batchFindUniqueBy");
-
-// src/runtime/utils/clientVersion.ts
-var clientVersion = require_package3().version;
 
 // src/runtime/utils/deserializeRawResults.ts
 function deserializeRawResults(rows) {
@@ -34682,6 +35243,62 @@ function getAlternative(str, options) {
 }
 __name(getAlternative, "getAlternative");
 
+// src/runtime/utils/waitForBatch.ts
+function waitForBatch(promises) {
+  if (promises.length === 0) {
+    return Promise.resolve([]);
+  }
+  return new Promise((resolve, reject) => {
+    const successfulResults = new Array(promises.length);
+    let bestError = null;
+    let done = false;
+    let settledPromisesCount = 0;
+    const settleOnePromise = /* @__PURE__ */ __name(() => {
+      if (done) {
+        return;
+      }
+      settledPromisesCount++;
+      if (settledPromisesCount === promises.length) {
+        done = true;
+        if (bestError) {
+          reject(bestError);
+        } else {
+          resolve(successfulResults);
+        }
+      }
+    }, "settleOnePromise");
+    const immediatelyReject = /* @__PURE__ */ __name((error2) => {
+      if (!done) {
+        done = true;
+        reject(error2);
+      }
+    }, "immediatelyReject");
+    for (let i = 0; i < promises.length; i++) {
+      promises[i].then(
+        (result) => {
+          successfulResults[i] = result;
+          settleOnePromise();
+        },
+        (error2) => {
+          if (!hasBatchIndex(error2)) {
+            immediatelyReject(error2);
+            return;
+          }
+          if (error2.batchRequestIdx === i) {
+            immediatelyReject(error2);
+          } else {
+            if (!bestError) {
+              bestError = error2;
+            }
+            settleOnePromise();
+          }
+        }
+      );
+    }
+  });
+}
+__name(waitForBatch, "waitForBatch");
+
 // src/runtime/getPrismaClient.ts
 var debug12 = src_default("prisma:client");
 var ALTER_RE = /^(\s*alter\s)/i;
@@ -34705,7 +35322,9 @@ More Information: https://pris.ly/d/execute-raw
 __name(checkAlter, "checkAlter");
 var actionOperationMap = {
   findUnique: "query",
+  findUniqueOrThrow: "query",
   findFirst: "query",
+  findFirstOrThrow: "query",
   findMany: "query",
   count: "query",
   create: "mutation",
@@ -34724,17 +35343,22 @@ var actionOperationMap = {
   aggregateRaw: "query"
 };
 var TX_ID = Symbol.for("prisma.client.transaction.id");
+var BatchTxIdCounter = {
+  id: 0,
+  nextId() {
+    return ++this.id;
+  }
+};
 function getPrismaClient(config2) {
   class PrismaClient {
     constructor(optionsArg) {
       this._middlewares = new Middlewares();
-      this._transactionId = 1;
       this._getDmmf = callOnce(async (params) => {
         try {
           const dmmf = await this._engine.getDmmf();
           return new DMMFHelper(getPrismaClientDMMF(dmmf));
         } catch (error2) {
-          this._fetcher.handleRequestError({ ...params, error: error2 });
+          this._fetcher.handleAndLogRequestError({ ...params, error: error2 });
         }
       });
       this.$extends = $extends;
@@ -34742,7 +35366,9 @@ function getPrismaClient(config2) {
       if (optionsArg) {
         validatePrismaClientOptions(optionsArg, config2.datasourceNames);
       }
-      this._extensions = [];
+      const logEmitter = new import_events.EventEmitter().on("error", (e) => {
+      });
+      this._extensions = MergedExtensionsList.empty();
       this._previewFeatures = (_b2 = (_a3 = config2.generator) == null ? void 0 : _a3.previewFeatures) != null ? _b2 : [];
       this._rejectOnNotFound = optionsArg == null ? void 0 : optionsArg.rejectOnNotFound;
       this._clientVersion = (_c = config2.clientVersion) != null ? _c : clientVersion;
@@ -34818,7 +35444,8 @@ function getPrismaClient(config2) {
           inlineSchema: config2.inlineSchema,
           inlineDatasources: config2.inlineDatasources,
           inlineSchemaHash: config2.inlineSchemaHash,
-          tracingConfig: this._tracingConfig
+          tracingConfig: this._tracingConfig,
+          logEmitter
         };
         debug12("clientVersion", config2.clientVersion);
         debug12("clientEngineType", this._dataProxy ? "dataproxy" : this._clientEngineType);
@@ -34828,10 +35455,10 @@ function getPrismaClient(config2) {
         }
         this._engine = this.getEngine();
         void this._getActiveProvider();
-        this._fetcher = new RequestHandler(this, this._hooks);
+        this._fetcher = new RequestHandler(this, this._hooks, logEmitter);
         if (options.log) {
-          for (const log4 of options.log) {
-            const level = typeof log4 === "string" ? log4 : log4.emit === "stdout" ? log4.level : null;
+          for (const log3 of options.log) {
+            const level = typeof log3 === "string" ? log3 : log3.emit === "stdout" ? log3.level : null;
             if (level) {
               this.$on(level, (event) => {
                 var _a4;
@@ -35181,18 +35808,18 @@ new PrismaClient({
       promises,
       options
     }) {
-      const txId = this._transactionId++;
+      const id = BatchTxIdCounter.nextId();
       const lock = getLockCountPromise(promises.length);
-      const requests = promises.map((request2) => {
-        var _a3;
+      const requests = promises.map((request2, index) => {
+        var _a3, _b2;
         if ((request2 == null ? void 0 : request2[Symbol.toStringTag]) !== "PrismaPromise") {
           throw new Error(
             `All elements of the array need to be Prisma Client promises. Hint: Please make sure you are not awaiting the Prisma client calls you intended to pass in the $transaction function.`
           );
         }
-        return (_a3 = request2.requestTransaction) == null ? void 0 : _a3.call(request2, { id: txId, isolationLevel: options == null ? void 0 : options.isolationLevel }, lock);
+        return (_b2 = (_a3 = request2.requestTransaction) == null ? void 0 : _a3.call(request2, { id, index, isolationLevel: options == null ? void 0 : options.isolationLevel }, lock)) != null ? _b2 : request2;
       });
-      return Promise.all(requests);
+      return waitForBatch(requests);
     }
     async _transactionWithCallback({
       callback,
@@ -35213,7 +35840,7 @@ new PrismaClient({
     }
     $transaction(input, options) {
       let callback;
-      if (typeof input === "function" && this._hasPreviewFlag("interactiveTransactions")) {
+      if (typeof input === "function") {
         callback = /* @__PURE__ */ __name(() => this._transactionWithCallback({ callback: input, options }), "callback");
       } else {
         callback = /* @__PURE__ */ __name(() => this._transactionWithArray({ promises: input, options }), "callback");
@@ -35268,7 +35895,7 @@ new PrismaClient({
           if (!runInTransaction) {
             requestParams.transaction = void 0;
           }
-          return this._executeRequest(requestParams);
+          return applyQueryExtensions(this, requestParams);
         }, "consumer");
         return await runInChildSpan(spanOptions.operation, () => {
           if (true) {
@@ -35291,6 +35918,7 @@ new PrismaClient({
       action,
       model,
       headers,
+      argsMapper,
       transaction,
       lock,
       unpacker,
@@ -35300,6 +35928,7 @@ new PrismaClient({
       if (this._dmmf === void 0) {
         this._dmmf = await this._getDmmf({ clientMethod, callsite });
       }
+      args = argsMapper ? argsMapper(args) : args;
       let rootField;
       const operation = actionOperationMap[action];
       if (action === "executeRaw" || action === "queryRaw" || action === "runCommandRaw") {
@@ -35332,7 +35961,8 @@ new PrismaClient({
           rootField,
           rootTypeName: operation,
           select: args,
-          modelName: model
+          modelName: model,
+          extensions: this._extensions
         });
         document3.validate(args, false, clientMethod, this._errorFormat, callsite);
         return transformDocument(document3);
@@ -35368,6 +35998,7 @@ new PrismaClient({
         callsite,
         args,
         engineHook: this._middlewares.engine.get(0),
+        extensions: this._extensions,
         headers,
         transaction,
         unpacker,
@@ -35414,6 +36045,12 @@ function transactionProxy(thing, transaction) {
         };
       }
       return transactionProxy(target[prop], transaction);
+    },
+    has(target, prop) {
+      if (forbidden.includes(prop)) {
+        return false;
+      }
+      return Reflect.has(target, prop);
     }
   });
 }
@@ -35542,6 +36179,7 @@ var decompressFromBase642 = lzString.decompressFromBase64;
   Extensions,
   MetricsClient,
   NotFoundError,
+  PrismaClientExtensionError,
   PrismaClientInitializationError,
   PrismaClientKnownRequestError,
   PrismaClientRustPanicError,
