@@ -37,6 +37,7 @@ export function generateGraphQLFieldsImport(sourceFile: SourceFile) {
 export function generateGraphQLInfoImport(sourceFile: SourceFile) {
   sourceFile.addImportDeclaration({
     moduleSpecifier: "graphql",
+    isTypeOnly: true,
     namedImports: ["GraphQLResolveInfo"],
   });
 }
