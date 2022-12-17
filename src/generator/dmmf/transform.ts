@@ -53,6 +53,7 @@ export function transformBareModel(model: PrismaDMMF.Model): DMMF.Model {
   const attributeArgs = parseDocumentationAttributes<{
     name: string;
     plural: string;
+    omitObjectDecorator: boolean;
   }>(model.documentation, "type", "model");
   return {
     ...model,
@@ -60,6 +61,7 @@ export function transformBareModel(model: PrismaDMMF.Model): DMMF.Model {
     fields: [],
     docs: cleanDocsString(model.documentation),
     plural: attributeArgs.plural,
+    omitObjectDecorator: attributeArgs.omitObjectDecorator,
   };
 }
 

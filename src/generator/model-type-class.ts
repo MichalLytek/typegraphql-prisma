@@ -67,21 +67,23 @@ export default function generateObjectTypeClassFromModel(
   sourceFile.addClass({
     name: model.typeName,
     isExported: true,
-    decorators: [
-      {
-        name: "TypeGraphQL.ObjectType",
-        arguments: [
-          `"${model.typeName}"`,
-          Writers.object({
-            isAbstract: "true",
-            ...(model.docs && { description: `"${model.docs}"` }),
-            ...(dmmfDocument.options.simpleResolvers && {
-              simpleResolvers: "true",
-            }),
-          }),
+    decorators: model.omitObjectDecorator
+      ? []
+      : [
+          {
+            name: "TypeGraphQL.ObjectType",
+            arguments: [
+              `"${model.typeName}"`,
+              Writers.object({
+                isAbstract: "true",
+                ...(model.docs && { description: `"${model.docs}"` }),
+                ...(dmmfDocument.options.simpleResolvers && {
+                  simpleResolvers: "true",
+                }),
+              }),
+            ],
+          },
         ],
-      },
-    ],
     properties: [
       ...model.fields.map<OptionalKind<PropertyDeclarationStructure>>(field => {
         const isOptional =
