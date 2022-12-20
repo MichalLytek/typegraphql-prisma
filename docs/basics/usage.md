@@ -228,3 +228,7 @@ const server = new ApolloServer({
   context: () => ({ prisma }),
 });
 ```
+
+:::caution
+Be aware that depending on apollo-version installed you might need to pass the `context` function to `startStandaloneServer`. You can read more about it in the [Migrating to Apollo Server 4](https://www.apollographql.com/docs/apollo-server/migration/#migrate-from-apollo-server) guide.
+:::
