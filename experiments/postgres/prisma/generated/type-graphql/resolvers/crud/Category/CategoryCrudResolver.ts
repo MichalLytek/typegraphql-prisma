@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { AggregateCategoryArgs } from "./args/AggregateCategoryArgs";
 import { CreateManyCategoryArgs } from "./args/CreateManyCategoryArgs";
 import { CreateOneCategoryArgs } from "./args/CreateOneCategoryArgs";

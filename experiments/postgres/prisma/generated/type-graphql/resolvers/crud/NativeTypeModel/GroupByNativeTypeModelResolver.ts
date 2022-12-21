@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByNativeTypeModelArgs } from "./args/GroupByNativeTypeModelArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
 import { NativeTypeModelGroupBy } from "../../outputs/NativeTypeModelGroupBy";

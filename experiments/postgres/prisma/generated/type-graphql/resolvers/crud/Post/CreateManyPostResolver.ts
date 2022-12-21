@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { CreateManyPostArgs } from "./args/CreateManyPostArgs";
 import { Post } from "../../../models/Post";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";

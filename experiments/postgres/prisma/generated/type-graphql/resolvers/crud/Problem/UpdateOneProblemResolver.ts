@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { UpdateOneProblemArgs } from "./args/UpdateOneProblemArgs";
 import { Problem } from "../../../models/Problem";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";

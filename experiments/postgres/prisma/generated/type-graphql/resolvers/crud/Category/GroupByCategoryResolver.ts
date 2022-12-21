@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByCategoryArgs } from "./args/GroupByCategoryArgs";
 import { Category } from "../../../models/Category";
 import { CategoryGroupBy } from "../../outputs/CategoryGroupBy";

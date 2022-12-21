@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { AggregateNativeTypeModelArgs } from "./args/AggregateNativeTypeModelArgs";
 import { CreateManyNativeTypeModelArgs } from "./args/CreateManyNativeTypeModelArgs";
 import { CreateOneNativeTypeModelArgs } from "./args/CreateOneNativeTypeModelArgs";

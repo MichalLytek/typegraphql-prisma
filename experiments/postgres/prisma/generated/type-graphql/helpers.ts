@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import graphqlFields from "graphql-fields";
 
 export function transformInfoIntoPrismaArgs(info: GraphQLResolveInfo): Record<string, any> {

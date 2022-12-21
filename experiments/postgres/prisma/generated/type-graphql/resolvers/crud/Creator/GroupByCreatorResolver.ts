@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByCreatorArgs } from "./args/GroupByCreatorArgs";
 import { Creator } from "../../../models/Creator";
 import { CreatorGroupBy } from "../../outputs/CreatorGroupBy";

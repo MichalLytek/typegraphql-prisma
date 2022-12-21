@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByPostArgs } from "./args/GroupByPostArgs";
 import { Post } from "../../../models/Post";
 import { PostGroupBy } from "../../outputs/PostGroupBy";

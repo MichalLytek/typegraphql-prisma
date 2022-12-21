@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { AggregateEquipmentArgs } from "./args/AggregateEquipmentArgs";
 import { Equipment } from "../../../models/Equipment";
 import { AggregateEquipment } from "../../outputs/AggregateEquipment";

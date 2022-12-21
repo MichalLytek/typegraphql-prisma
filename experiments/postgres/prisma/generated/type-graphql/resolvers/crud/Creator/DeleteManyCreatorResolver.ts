@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { DeleteManyCreatorArgs } from "./args/DeleteManyCreatorArgs";
 import { Creator } from "../../../models/Creator";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";

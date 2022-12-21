@@ -2,7 +2,7 @@
 
 exports[`crud should properly generate actions resolver classes for prisma model: CreateManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
@@ -26,7 +26,7 @@ export class CreateManyUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: CreateOneUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -49,7 +49,7 @@ export class CreateOneUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: DeleteManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
@@ -73,7 +73,7 @@ export class DeleteManyUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: DeleteOneUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { DeleteOneUserArgs } from \\"./args/DeleteOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -96,7 +96,7 @@ export class DeleteOneUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindFirstUserOrThrowResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindFirstUserOrThrowArgs } from \\"./args/FindFirstUserOrThrowArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -119,7 +119,7 @@ export class FindFirstUserOrThrowResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindFirstUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindFirstUserArgs } from \\"./args/FindFirstUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -142,7 +142,7 @@ export class FindFirstUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -165,7 +165,7 @@ export class FindManyUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindUniqueUserOrThrowResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -188,7 +188,7 @@ export class FindUniqueUserOrThrowResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindUniqueUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -211,7 +211,7 @@ export class FindUniqueUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: GroupByUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
@@ -244,7 +244,7 @@ export * from \\"./args.index\\";
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpdateManyUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
@@ -268,7 +268,7 @@ export class UpdateManyUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpdateOneUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -291,7 +291,7 @@ export class UpdateOneUserResolver {
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpsertOneUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -1065,7 +1065,7 @@ export * from \\"./args.index\\";
 
 exports[`crud should properly generate resolver class for single prisma model: UserCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
@@ -1298,7 +1298,7 @@ export const resolvers = [
 
 exports[`crud should properly generate resolver class when cannot pluralize model name and provided overriding plural: StaffCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateStaffArgs } from \\"./args/AggregateStaffArgs\\";
 import { CreateManyStaffArgs } from \\"./args/CreateManyStaffArgs\\";
 import { CreateOneStaffArgs } from \\"./args/CreateOneStaffArgs\\";
@@ -1481,7 +1481,7 @@ export class StaffCrudResolver {
 
 exports[`crud should properly generate resolver class when cannot pluralize model name: StaffCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateStaffArgs } from \\"./args/AggregateStaffArgs\\";
 import { CreateManyStaffArgs } from \\"./args/CreateManyStaffArgs\\";
 import { CreateOneStaffArgs } from \\"./args/CreateOneStaffArgs\\";
@@ -1664,7 +1664,7 @@ export class StaffCrudResolver {
 
 exports[`crud should properly generate resolver class when useOriginalMapping is used: FindUniqueUserOrThrowResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -1687,7 +1687,7 @@ export class FindUniqueUserOrThrowResolver {
 
 exports[`crud should properly generate resolver class when useOriginalMapping is used: FindUniqueUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -1710,7 +1710,7 @@ export class FindUniqueUserResolver {
 
 exports[`crud should properly generate resolver class when useOriginalMapping is used: UserCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
@@ -2178,7 +2178,7 @@ exports.UserCrudResolver = UserCrudResolver;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: AggregateClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateClientArgs } from \\"./args/AggregateClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AggregateClient } from \\"../../outputs/AggregateClient\\";
@@ -2201,7 +2201,7 @@ export class AggregateClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: CreateManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { CreateManyClientArgs } from \\"./args/CreateManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
@@ -2225,7 +2225,7 @@ export class CreateManyClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: CreateOneClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { CreateOneClientArgs } from \\"./args/CreateOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -2248,7 +2248,7 @@ export class CreateOneClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: DeleteManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { DeleteManyClientArgs } from \\"./args/DeleteManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
@@ -2272,7 +2272,7 @@ export class DeleteManyClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: DeleteOneClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { DeleteOneClientArgs } from \\"./args/DeleteOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -2295,7 +2295,7 @@ export class DeleteOneClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindFirstClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindFirstClientArgs } from \\"./args/FindFirstClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -2318,7 +2318,7 @@ export class FindFirstClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindManyClientArgs } from \\"./args/FindManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -2341,7 +2341,7 @@ export class FindManyClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindUniqueClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { FindUniqueClientArgs } from \\"./args/FindUniqueClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -2364,7 +2364,7 @@ export class FindUniqueClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: GroupByClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { GroupByClientArgs } from \\"./args/GroupByClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { ClientGroupBy } from \\"../../outputs/ClientGroupBy\\";
@@ -2390,7 +2390,7 @@ export class GroupByClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpdateManyClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
@@ -2414,7 +2414,7 @@ export class UpdateManyClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpdateOneClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { UpdateOneClientArgs } from \\"./args/UpdateOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -2437,7 +2437,7 @@ export class UpdateOneClientResolver {
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpsertOneClientResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { UpsertOneClientArgs } from \\"./args/UpsertOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
@@ -2793,7 +2793,7 @@ export class UpsertOneClientArgs {
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: AggregateMainUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateMainUserArgs } from \\"./args/AggregateMainUserArgs\\";
 import { MainUser } from \\"../../../models/MainUser\\";
 import { AggregateMainUser } from \\"../../outputs/AggregateMainUser\\";
@@ -2816,7 +2816,7 @@ export class AggregateMainUserResolver {
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: ClientCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateClientArgs } from \\"./args/AggregateClientArgs\\";
 import { CreateManyClientArgs } from \\"./args/CreateManyClientArgs\\";
 import { CreateOneClientArgs } from \\"./args/CreateOneClientArgs\\";
@@ -2999,7 +2999,7 @@ export class ClientCrudResolver {
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: GroupByMainUserResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { GroupByMainUserArgs } from \\"./args/GroupByMainUserArgs\\";
 import { MainUser } from \\"../../../models/MainUser\\";
 import { MainUserGroupBy } from \\"../../outputs/MainUserGroupBy\\";
@@ -3025,7 +3025,7 @@ export class GroupByMainUserResolver {
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: MainUserCrudResolver 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
-import { GraphQLResolveInfo } from \\"graphql\\";
+import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateMainUserArgs } from \\"./args/AggregateMainUserArgs\\";
 import { CreateManyMainUserArgs } from \\"./args/CreateManyMainUserArgs\\";
 import { CreateOneMainUserArgs } from \\"./args/CreateOneMainUserArgs\\";

@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { AggregatePatientArgs } from "./args/AggregatePatientArgs";
 import { Patient } from "../../../models/Patient";
 import { AggregatePatient } from "../../outputs/AggregatePatient";

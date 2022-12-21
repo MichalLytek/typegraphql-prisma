@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByDirectorArgs } from "./args/GroupByDirectorArgs";
 import { Director } from "../../../models/Director";
 import { DirectorGroupBy } from "../../outputs/DirectorGroupBy";

@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByProblemArgs } from "./args/GroupByProblemArgs";
 import { Problem } from "../../../models/Problem";
 import { ProblemGroupBy } from "../../outputs/ProblemGroupBy";

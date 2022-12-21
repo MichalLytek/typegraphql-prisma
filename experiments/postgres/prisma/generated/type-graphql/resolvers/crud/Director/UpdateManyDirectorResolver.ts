@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { Director } from "../../../models/Director";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";

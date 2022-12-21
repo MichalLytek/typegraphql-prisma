@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByMovieArgs } from "./args/GroupByMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { MovieGroupBy } from "../../outputs/MovieGroupBy";
