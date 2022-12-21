@@ -310,146 +310,32 @@ export class PrismaClient<
     Q extends runtime.Types.Extensions.Args['query'] = {},
     C extends runtime.Types.Extensions.Args['client'] = {},
     Args extends runtime.Types.Extensions.Args = { result: R, model: M, query: Q, client: C },
-  >(extension: ((client: this) => { $extends: { extArgs: Args } }) | {
-    name?: string,
-    result?: R & {
-      $allModels?: Record<string, {
-        compute: (data: unknown) => unknown
-      }>
-      user?: {
-        [K in keyof R_User_Needs]: {
-          needs: R_User_Needs[K]
-          compute: (data: Prisma.UserGetPayload<{ select: R_User_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      post?: {
-        [K in keyof R_post_Needs]: {
-          needs: R_post_Needs[K]
-          compute: (data: Prisma.postGetPayload<{ select: R_post_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      category?: {
-        [K in keyof R_Category_Needs]: {
-          needs: R_Category_Needs[K]
-          compute: (data: Prisma.CategoryGetPayload<{ select: R_Category_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      patient?: {
-        [K in keyof R_Patient_Needs]: {
-          needs: R_Patient_Needs[K]
-          compute: (data: Prisma.PatientGetPayload<{ select: R_Patient_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      movie?: {
-        [K in keyof R_Movie_Needs]: {
-          needs: R_Movie_Needs[K]
-          compute: (data: Prisma.MovieGetPayload<{ select: R_Movie_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      director?: {
-        [K in keyof R_Director_Needs]: {
-          needs: R_Director_Needs[K]
-          compute: (data: Prisma.DirectorGetPayload<{ select: R_Director_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      problem?: {
-        [K in keyof R_Problem_Needs]: {
-          needs: R_Problem_Needs[K]
-          compute: (data: Prisma.ProblemGetPayload<{ select: R_Problem_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      creator?: {
-        [K in keyof R_Creator_Needs]: {
-          needs: R_Creator_Needs[K]
-          compute: (data: Prisma.CreatorGetPayload<{ select: R_Creator_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      nativeTypeModel?: {
-        [K in keyof R_NativeTypeModel_Needs]: {
-          needs: R_NativeTypeModel_Needs[K]
-          compute: (data: Prisma.NativeTypeModelGetPayload<{ select: R_NativeTypeModel_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-      equipment?: {
-        [K in keyof R_Equipment_Needs]: {
-          needs: R_Equipment_Needs[K]
-          compute: (data: Prisma.EquipmentGetPayload<{ select: R_Equipment_Needs[K] }, ExtArgs>) => unknown
-        }
-      }
-    }
-    model?: M & {
-      $allModels?: Record<string, unknown>
-      user?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['user'] }
-      post?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['post'] }
-      category?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['category'] }
-      patient?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['patient'] }
-      movie?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['movie'] }
-      director?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['director'] }
-      problem?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['problem'] }
-      creator?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['creator'] }
-      nativeTypeModel?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['nativeTypeModel'] }
-      equipment?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['equipment'] }
-    }
-    query?: {
-      $allModels?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]?: (args: Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]['result']
-      }
-    } & {
-      user?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['User']]?: (args: Prisma.TypeMap<ExtArgs>['User'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['User'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['User'][keyof Prisma.TypeMap<ExtArgs>['User']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['User'][keyof Prisma.TypeMap<ExtArgs>['User']]['result']
-      }
-      post?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['post']]?: (args: Prisma.TypeMap<ExtArgs>['post'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['post'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['post'][keyof Prisma.TypeMap<ExtArgs>['post']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['post'][keyof Prisma.TypeMap<ExtArgs>['post']]['result']
-      }
-      category?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['Category']]?: (args: Prisma.TypeMap<ExtArgs>['Category'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Category'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Category'][keyof Prisma.TypeMap<ExtArgs>['Category']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Category'][keyof Prisma.TypeMap<ExtArgs>['Category']]['result']
-      }
-      patient?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['Patient']]?: (args: Prisma.TypeMap<ExtArgs>['Patient'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Patient'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Patient'][keyof Prisma.TypeMap<ExtArgs>['Patient']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Patient'][keyof Prisma.TypeMap<ExtArgs>['Patient']]['result']
-      }
-      movie?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['Movie']]?: (args: Prisma.TypeMap<ExtArgs>['Movie'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Movie'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Movie'][keyof Prisma.TypeMap<ExtArgs>['Movie']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Movie'][keyof Prisma.TypeMap<ExtArgs>['Movie']]['result']
-      }
-      director?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['Director']]?: (args: Prisma.TypeMap<ExtArgs>['Director'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Director'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Director'][keyof Prisma.TypeMap<ExtArgs>['Director']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Director'][keyof Prisma.TypeMap<ExtArgs>['Director']]['result']
-      }
-      problem?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['Problem']]?: (args: Prisma.TypeMap<ExtArgs>['Problem'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Problem'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Problem'][keyof Prisma.TypeMap<ExtArgs>['Problem']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Problem'][keyof Prisma.TypeMap<ExtArgs>['Problem']]['result']
-      }
-      creator?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['Creator']]?: (args: Prisma.TypeMap<ExtArgs>['Creator'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Creator'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Creator'][keyof Prisma.TypeMap<ExtArgs>['Creator']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Creator'][keyof Prisma.TypeMap<ExtArgs>['Creator']]['result']
-      }
-      nativeTypeModel?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]?: (args: Prisma.TypeMap<ExtArgs>['NativeTypeModel'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['NativeTypeModel'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['NativeTypeModel'][keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['NativeTypeModel'][keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]['result']
-      }
-      equipment?: {
-        [K in keyof Prisma.TypeMap<ExtArgs>['Equipment']]?: (args: Prisma.TypeMap<ExtArgs>['Equipment'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Equipment'][K]['result']
-      } & {
-        $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Equipment'][keyof Prisma.TypeMap<ExtArgs>['Equipment']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Equipment'][keyof Prisma.TypeMap<ExtArgs>['Equipment']]['result']
-      }
-    }
-    client?: C & { [K: symbol]: runtime.Types.Extensions.GetClient<PrismaClient<never, never, false, ExtArgs>, ExtArgs['client'], {}> }
-  })=> runtime.Types.Extensions.GetClient<PrismaClient<T, U, GlobalReject, runtime.Types.Extensions.MergeArgs<Args, ExtArgs, 'user' | 'post' | 'category' | 'patient' | 'movie' | 'director' | 'problem' | 'creator' | 'nativeTypeModel' | 'equipment'>>, Args['client'], ExtArgs['client']>);
+  >(extension: ((client: this) => { $extends: { extArgs: Args } }) | Prisma.ExtensionArgs<
+    ExtArgs,
+    R_User_Needs,
+    R_post_Needs,
+    R_Category_Needs,
+    R_Patient_Needs,
+    R_Movie_Needs,
+    R_Director_Needs,
+    R_Problem_Needs,
+    R_Creator_Needs,
+    R_NativeTypeModel_Needs,
+    R_Equipment_Needs,
+    R,
+    M,
+    Q,
+    C
+  >) => runtime.Types.Extensions.GetClient<PrismaClient<T, U, GlobalReject, {
+  result: '$allModels' extends keyof Args['result']
+  ? { [K in 'user' | 'post' | 'category' | 'patient' | 'movie' | 'director' | 'problem' | 'creator' | 'nativeTypeModel' | 'equipment']: (Args['result'][K]) & { [P in keyof (Args['result']['$allModels']) as P extends keyof (Args['result'][K]) ? never : P]: (Args['result']['$allModels'])[P] } & { [P in keyof (ExtArgs['result'][K]) as P extends keyof (Args['result'][K]) | keyof (Args['result']['$allModels']) ? never : P]: (ExtArgs['result'][K])[P] } }
+  : { [K in (keyof Args['result'] | keyof ExtArgs['result'])]: (Args['result'][K]) & { [P in keyof (ExtArgs['result'][K]) as P extends keyof (Args['result'][K]) ? never : P]: (ExtArgs['result'][K])[P] } }
+  model: '$allModels' extends keyof Args['model']
+  ? { [K in 'user' | 'post' | 'category' | 'patient' | 'movie' | 'director' | 'problem' | 'creator' | 'nativeTypeModel' | 'equipment']: (Args['model'][K]) & { [P in keyof (Args['model']['$allModels']) as P extends keyof (Args['model'][K]) ? never : P]: (Args['model']['$allModels'])[P] } & { [P in keyof (ExtArgs['model'][K]) as P extends keyof (Args['model'][K]) | keyof (Args['model']['$allModels']) ? never : P]: (ExtArgs['model'][K])[P] } }
+  : { [K in (keyof Args['model'] | keyof ExtArgs['model'])]: (Args['model'][K]) & { [P in keyof (ExtArgs['model'][K]) as P extends keyof (Args['model'][K]) ? never : P]: (ExtArgs['model'][K])[P] } }
+  client: (Args['client']) & { [P in keyof (ExtArgs['client']) as P extends keyof (Args['client']) ? never : P]: (ExtArgs['client'])[P] }
+  query: {}
+  }>, Args['client'], ExtArgs['client']>);
 
       /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -597,8 +483,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.7.0
-   * Query Engine version: 39190b250ebc338586e25e6da45e5e783bc8a635
+   * Prisma Client JS version: 4.8.0
+   * Query Engine version: d6e67a83f971b175a593ccc12e15c4a757f93ffe
    */
   export type PrismaVersion = {
     client: string
@@ -1076,9 +962,666 @@ export namespace Prisma {
       C extends runtime.Types.Extensions.Args['client'] = {},
       Args extends runtime.Types.Extensions.Args = { result: R, model: M, query: Q, client: C },
       ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs,
-    >(extension: ((client: PrismaClient) => { $extends: { extArgs: Args } }) | {
-      name?: string,
-      result?: R & {
+    >(extension: ((client: Prisma.DefaultPrismaClient) => { $extends: { extArgs: Args } }) | Prisma.ExtensionArgs<
+      ExtArgs,
+      R_User_Needs,
+      R_post_Needs,
+      R_Category_Needs,
+      R_Patient_Needs,
+      R_Movie_Needs,
+      R_Director_Needs,
+      R_Problem_Needs,
+      R_Creator_Needs,
+      R_NativeTypeModel_Needs,
+      R_Equipment_Needs,
+      R,
+      M,
+      Q,
+      C
+    >) : (client: any) => PrismaClient<any, any, any, Args>;
+  export type TypeMap<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+      model: {
+      User: {
+        findUnique: {
+          args: Prisma.UserFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        findFirst: {
+          args: Prisma.UserFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        findMany: {
+          args: Prisma.UserFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        create: {
+          args: Prisma.UserCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        createMany: {
+          args: Prisma.UserCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        delete: {
+          args: Prisma.UserDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        update: {
+          args: Prisma.UserUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        deleteMany: {
+          args: Prisma.UserDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        updateMany: {
+          args: Prisma.UserUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        upsert: {
+          args: Prisma.UserUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        aggregate: {
+          args: Prisma.UserAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        groupBy: {
+          args: Prisma.UserGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+        count: {
+          args: Prisma.UserCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<User>
+        }
+      }
+      post: {
+        findUnique: {
+          args: Prisma.postFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.postFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        findFirst: {
+          args: Prisma.postFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        findFirstOrThrow: {
+          args: Prisma.postFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        findMany: {
+          args: Prisma.postFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        create: {
+          args: Prisma.postCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        createMany: {
+          args: Prisma.postCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        delete: {
+          args: Prisma.postDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        update: {
+          args: Prisma.postUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        deleteMany: {
+          args: Prisma.postDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        updateMany: {
+          args: Prisma.postUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        upsert: {
+          args: Prisma.postUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        aggregate: {
+          args: Prisma.PostAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        groupBy: {
+          args: Prisma.postGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+        count: {
+          args: Prisma.postCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<post>
+        }
+      }
+      Category: {
+        findUnique: {
+          args: Prisma.CategoryFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        findFirst: {
+          args: Prisma.CategoryFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        findFirstOrThrow: {
+          args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        findMany: {
+          args: Prisma.CategoryFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        create: {
+          args: Prisma.CategoryCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        createMany: {
+          args: Prisma.CategoryCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        delete: {
+          args: Prisma.CategoryDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        update: {
+          args: Prisma.CategoryUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        deleteMany: {
+          args: Prisma.CategoryDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        updateMany: {
+          args: Prisma.CategoryUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        upsert: {
+          args: Prisma.CategoryUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        aggregate: {
+          args: Prisma.CategoryAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        groupBy: {
+          args: Prisma.CategoryGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+        count: {
+          args: Prisma.CategoryCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Category>
+        }
+      }
+      Patient: {
+        findUnique: {
+          args: Prisma.PatientFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PatientFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        findFirst: {
+          args: Prisma.PatientFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        findFirstOrThrow: {
+          args: Prisma.PatientFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        findMany: {
+          args: Prisma.PatientFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        create: {
+          args: Prisma.PatientCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        createMany: {
+          args: Prisma.PatientCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        delete: {
+          args: Prisma.PatientDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        update: {
+          args: Prisma.PatientUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        deleteMany: {
+          args: Prisma.PatientDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        updateMany: {
+          args: Prisma.PatientUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        upsert: {
+          args: Prisma.PatientUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        aggregate: {
+          args: Prisma.PatientAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        groupBy: {
+          args: Prisma.PatientGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+        count: {
+          args: Prisma.PatientCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Patient>
+        }
+      }
+      Movie: {
+        findUnique: {
+          args: Prisma.MovieFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MovieFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        findFirst: {
+          args: Prisma.MovieFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        findFirstOrThrow: {
+          args: Prisma.MovieFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        findMany: {
+          args: Prisma.MovieFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        create: {
+          args: Prisma.MovieCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        createMany: {
+          args: Prisma.MovieCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        delete: {
+          args: Prisma.MovieDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        update: {
+          args: Prisma.MovieUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        deleteMany: {
+          args: Prisma.MovieDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        updateMany: {
+          args: Prisma.MovieUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        upsert: {
+          args: Prisma.MovieUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        aggregate: {
+          args: Prisma.MovieAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        groupBy: {
+          args: Prisma.MovieGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+        count: {
+          args: Prisma.MovieCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Movie>
+        }
+      }
+      Director: {
+        findUnique: {
+          args: Prisma.DirectorFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DirectorFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        findFirst: {
+          args: Prisma.DirectorFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        findFirstOrThrow: {
+          args: Prisma.DirectorFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        findMany: {
+          args: Prisma.DirectorFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        create: {
+          args: Prisma.DirectorCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        createMany: {
+          args: Prisma.DirectorCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        delete: {
+          args: Prisma.DirectorDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        update: {
+          args: Prisma.DirectorUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        deleteMany: {
+          args: Prisma.DirectorDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        updateMany: {
+          args: Prisma.DirectorUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        upsert: {
+          args: Prisma.DirectorUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        aggregate: {
+          args: Prisma.DirectorAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        groupBy: {
+          args: Prisma.DirectorGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+        count: {
+          args: Prisma.DirectorCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Director>
+        }
+      }
+      Problem: {
+        findUnique: {
+          args: Prisma.ProblemFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProblemFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        findFirst: {
+          args: Prisma.ProblemFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProblemFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        findMany: {
+          args: Prisma.ProblemFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        create: {
+          args: Prisma.ProblemCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        createMany: {
+          args: Prisma.ProblemCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        delete: {
+          args: Prisma.ProblemDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        update: {
+          args: Prisma.ProblemUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        deleteMany: {
+          args: Prisma.ProblemDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        updateMany: {
+          args: Prisma.ProblemUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        upsert: {
+          args: Prisma.ProblemUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        aggregate: {
+          args: Prisma.ProblemAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        groupBy: {
+          args: Prisma.ProblemGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+        count: {
+          args: Prisma.ProblemCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Problem>
+        }
+      }
+      Creator: {
+        findUnique: {
+          args: Prisma.CreatorFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CreatorFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        findFirst: {
+          args: Prisma.CreatorFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        findFirstOrThrow: {
+          args: Prisma.CreatorFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        findMany: {
+          args: Prisma.CreatorFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        create: {
+          args: Prisma.CreatorCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        createMany: {
+          args: Prisma.CreatorCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        delete: {
+          args: Prisma.CreatorDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        update: {
+          args: Prisma.CreatorUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        deleteMany: {
+          args: Prisma.CreatorDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        updateMany: {
+          args: Prisma.CreatorUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        upsert: {
+          args: Prisma.CreatorUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        aggregate: {
+          args: Prisma.CreatorAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        groupBy: {
+          args: Prisma.CreatorGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+        count: {
+          args: Prisma.CreatorCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Creator>
+        }
+      }
+      NativeTypeModel: {
+        findUnique: {
+          args: Prisma.NativeTypeModelFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NativeTypeModelFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        findFirst: {
+          args: Prisma.NativeTypeModelFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        findFirstOrThrow: {
+          args: Prisma.NativeTypeModelFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        findMany: {
+          args: Prisma.NativeTypeModelFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        create: {
+          args: Prisma.NativeTypeModelCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        createMany: {
+          args: Prisma.NativeTypeModelCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        delete: {
+          args: Prisma.NativeTypeModelDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        update: {
+          args: Prisma.NativeTypeModelUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        deleteMany: {
+          args: Prisma.NativeTypeModelDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        updateMany: {
+          args: Prisma.NativeTypeModelUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        upsert: {
+          args: Prisma.NativeTypeModelUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        aggregate: {
+          args: Prisma.NativeTypeModelAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        groupBy: {
+          args: Prisma.NativeTypeModelGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+        count: {
+          args: Prisma.NativeTypeModelCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<NativeTypeModel>
+        }
+      }
+      Equipment: {
+        findUnique: {
+          args: Prisma.EquipmentFindUniqueArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EquipmentFindUniqueOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        findFirst: {
+          args: Prisma.EquipmentFindFirstArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        findFirstOrThrow: {
+          args: Prisma.EquipmentFindFirstOrThrowArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        findMany: {
+          args: Prisma.EquipmentFindManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        create: {
+          args: Prisma.EquipmentCreateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        createMany: {
+          args: Prisma.EquipmentCreateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        delete: {
+          args: Prisma.EquipmentDeleteArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        update: {
+          args: Prisma.EquipmentUpdateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        deleteMany: {
+          args: Prisma.EquipmentDeleteManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        updateMany: {
+          args: Prisma.EquipmentUpdateManyArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        upsert: {
+          args: Prisma.EquipmentUpsertArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        aggregate: {
+          args: Prisma.EquipmentAggregateArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        groupBy: {
+          args: Prisma.EquipmentGroupByArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+        count: {
+          args: Prisma.EquipmentCountArgs<ExtArgs>,
+          result: runtime.Types.Utils.OptionalFlat<Equipment>
+        }
+      }
+    }
+  }
+  export type ExtensionArgs<
+      ExtArgs extends runtime.Types.Extensions.Args,
+      R_User_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.UserSelectScalar, ExtArgs['result']['user']>>,
+      R_post_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.postSelectScalar, ExtArgs['result']['post']>>,
+      R_Category_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.CategorySelectScalar, ExtArgs['result']['category']>>,
+      R_Patient_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.PatientSelectScalar, ExtArgs['result']['patient']>>,
+      R_Movie_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.MovieSelectScalar, ExtArgs['result']['movie']>>,
+      R_Director_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.DirectorSelectScalar, ExtArgs['result']['director']>>,
+      R_Problem_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.ProblemSelectScalar, ExtArgs['result']['problem']>>,
+      R_Creator_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.CreatorSelectScalar, ExtArgs['result']['creator']>>,
+      R_NativeTypeModel_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.NativeTypeModelSelectScalar, ExtArgs['result']['nativeTypeModel']>>,
+      R_Equipment_Needs extends Record<string, runtime.Types.Extensions.GetResultSelect<Prisma.EquipmentSelectScalar, ExtArgs['result']['equipment']>>,
+      R extends runtime.Types.Extensions.Args['result'] = {},
+      M extends runtime.Types.Extensions.Args['model'] = {},
+      Q extends runtime.Types.Extensions.Args['query'] = {},
+      C extends runtime.Types.Extensions.Args['client'] = {}
+  > = {
+    name?: string,
+    result?: R & {
         $allModels?: Record<string, {
           compute: (data: unknown) => unknown
         }>
@@ -1143,7 +1686,7 @@ export namespace Prisma {
           }
         }
       }
-      model?: M & {
+    model?: M & {
         $allModels?: Record<string, unknown>
         user?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['user'] }
         post?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['post'] }
@@ -1156,838 +1699,67 @@ export namespace Prisma {
         nativeTypeModel?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['nativeTypeModel'] }
         equipment?: { [K: symbol]: PrismaClient<never, never, false, ExtArgs>['equipment'] }
       }
-      query?: {
+    query?: {
         $allModels?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]?: (args: Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][K]['result']
+          [K in keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]?: (args: { model: 'User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>][keyof Prisma.TypeMap<ExtArgs>[keyof Prisma.TypeMap<ExtArgs>]]['result']
+          $allOperations?: (args: { model: 'User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment', operation: keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['result']>
         }
       } & {
         user?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['User']]?: (args: Prisma.TypeMap<ExtArgs>['User'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['User'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['User']]?: (args: { model: 'User', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['User'][keyof Prisma.TypeMap<ExtArgs>['User']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['User'][keyof Prisma.TypeMap<ExtArgs>['User']]['result']
+          $allOperations?: (args: { model: 'User', operation: keyof Prisma.TypeMap['model']['User'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['result']>
         }
         post?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['post']]?: (args: Prisma.TypeMap<ExtArgs>['post'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['post'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['post']]?: (args: { model: 'post', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['post'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['post'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['post'][keyof Prisma.TypeMap<ExtArgs>['post']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['post'][keyof Prisma.TypeMap<ExtArgs>['post']]['result']
+          $allOperations?: (args: { model: 'post', operation: keyof Prisma.TypeMap['model']['post'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['result']>
         }
         category?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['Category']]?: (args: Prisma.TypeMap<ExtArgs>['Category'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Category'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['Category']]?: (args: { model: 'Category', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Category'][keyof Prisma.TypeMap<ExtArgs>['Category']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Category'][keyof Prisma.TypeMap<ExtArgs>['Category']]['result']
+          $allOperations?: (args: { model: 'Category', operation: keyof Prisma.TypeMap['model']['Category'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['result']>
         }
         patient?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['Patient']]?: (args: Prisma.TypeMap<ExtArgs>['Patient'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Patient'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['Patient']]?: (args: { model: 'Patient', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Patient'][keyof Prisma.TypeMap<ExtArgs>['Patient']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Patient'][keyof Prisma.TypeMap<ExtArgs>['Patient']]['result']
+          $allOperations?: (args: { model: 'Patient', operation: keyof Prisma.TypeMap['model']['Patient'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['result']>
         }
         movie?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['Movie']]?: (args: Prisma.TypeMap<ExtArgs>['Movie'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Movie'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['Movie']]?: (args: { model: 'Movie', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Movie'][keyof Prisma.TypeMap<ExtArgs>['Movie']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Movie'][keyof Prisma.TypeMap<ExtArgs>['Movie']]['result']
+          $allOperations?: (args: { model: 'Movie', operation: keyof Prisma.TypeMap['model']['Movie'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['result']>
         }
         director?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['Director']]?: (args: Prisma.TypeMap<ExtArgs>['Director'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Director'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['Director']]?: (args: { model: 'Director', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Director'][keyof Prisma.TypeMap<ExtArgs>['Director']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Director'][keyof Prisma.TypeMap<ExtArgs>['Director']]['result']
+          $allOperations?: (args: { model: 'Director', operation: keyof Prisma.TypeMap['model']['Director'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['result']>
         }
         problem?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['Problem']]?: (args: Prisma.TypeMap<ExtArgs>['Problem'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Problem'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['Problem']]?: (args: { model: 'Problem', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Problem'][keyof Prisma.TypeMap<ExtArgs>['Problem']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Problem'][keyof Prisma.TypeMap<ExtArgs>['Problem']]['result']
+          $allOperations?: (args: { model: 'Problem', operation: keyof Prisma.TypeMap['model']['Problem'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['result']>
         }
         creator?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['Creator']]?: (args: Prisma.TypeMap<ExtArgs>['Creator'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Creator'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['Creator']]?: (args: { model: 'Creator', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Creator'][keyof Prisma.TypeMap<ExtArgs>['Creator']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Creator'][keyof Prisma.TypeMap<ExtArgs>['Creator']]['result']
+          $allOperations?: (args: { model: 'Creator', operation: keyof Prisma.TypeMap['model']['Creator'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['result']>
         }
         nativeTypeModel?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]?: (args: Prisma.TypeMap<ExtArgs>['NativeTypeModel'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['NativeTypeModel'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['NativeTypeModel']]?: (args: { model: 'NativeTypeModel', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['NativeTypeModel'][keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['NativeTypeModel'][keyof Prisma.TypeMap<ExtArgs>['NativeTypeModel']]['result']
+          $allOperations?: (args: { model: 'NativeTypeModel', operation: keyof Prisma.TypeMap['model']['NativeTypeModel'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['result']>
         }
         equipment?: {
-          [K in keyof Prisma.TypeMap<ExtArgs>['Equipment']]?: (args: Prisma.TypeMap<ExtArgs>['Equipment'][K]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Equipment'][K]['result']
+          [K in keyof Prisma.TypeMap['model']['Equipment']]?: (args: { model: 'Equipment', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['result']>
         } & {
-          $allOperations?: (args: Prisma.TypeMap<ExtArgs>['Equipment'][keyof Prisma.TypeMap<ExtArgs>['Equipment']]['queryExtCbArgs']) => Prisma.TypeMap<ExtArgs>['Equipment'][keyof Prisma.TypeMap<ExtArgs>['Equipment']]['result']
+          $allOperations?: (args: { model: 'Equipment', operation: keyof Prisma.TypeMap['model']['Equipment'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['result']>
         }
       }
-      client?: C & { [K: symbol]: runtime.Types.Extensions.GetClient<PrismaClient<never, never, false, ExtArgs>, ExtArgs['client'], {}> }
-    }): (client: any) => PrismaClient<any, any, any, Args>;
-  export type TypeMap<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
-    User: {
-      findUnique: {
-        args: Prisma.UserFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      findFirst: {
-        args: Prisma.UserFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      findMany: {
-        args: Prisma.UserFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      create: {
-        args: Prisma.UserCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      createMany: {
-        args: Prisma.UserCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      delete: {
-        args: Prisma.UserDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      update: {
-        args: Prisma.UserUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      deleteMany: {
-        args: Prisma.UserDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      updateMany: {
-        args: Prisma.UserUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      upsert: {
-        args: Prisma.UserUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      aggregate: {
-        args: Prisma.UserAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      groupBy: {
-        args: Prisma.UserGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-      count: {
-        args: Prisma.UserCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<User>>
-        queryExtCbArgs: { model: 'User', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['User']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<User>> },
-      }
-    }
-    post: {
-      findUnique: {
-        args: Prisma.postFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.postFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      findFirst: {
-        args: Prisma.postFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.postFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      findMany: {
-        args: Prisma.postFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      create: {
-        args: Prisma.postCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      createMany: {
-        args: Prisma.postCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      delete: {
-        args: Prisma.postDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      update: {
-        args: Prisma.postUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      deleteMany: {
-        args: Prisma.postDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      updateMany: {
-        args: Prisma.postUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      upsert: {
-        args: Prisma.postUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      aggregate: {
-        args: Prisma.PostAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      groupBy: {
-        args: Prisma.postGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-      count: {
-        args: Prisma.postCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<post>>
-        queryExtCbArgs: { model: 'post', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['post']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<post>> },
-      }
-    }
-    Category: {
-      findUnique: {
-        args: Prisma.CategoryFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      findFirst: {
-        args: Prisma.CategoryFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      findMany: {
-        args: Prisma.CategoryFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      create: {
-        args: Prisma.CategoryCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      createMany: {
-        args: Prisma.CategoryCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      delete: {
-        args: Prisma.CategoryDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      update: {
-        args: Prisma.CategoryUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      deleteMany: {
-        args: Prisma.CategoryDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      updateMany: {
-        args: Prisma.CategoryUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      upsert: {
-        args: Prisma.CategoryUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      aggregate: {
-        args: Prisma.CategoryAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      groupBy: {
-        args: Prisma.CategoryGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-      count: {
-        args: Prisma.CategoryCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Category>>
-        queryExtCbArgs: { model: 'Category', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Category']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Category>> },
-      }
-    }
-    Patient: {
-      findUnique: {
-        args: Prisma.PatientFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.PatientFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      findFirst: {
-        args: Prisma.PatientFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.PatientFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      findMany: {
-        args: Prisma.PatientFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      create: {
-        args: Prisma.PatientCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      createMany: {
-        args: Prisma.PatientCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      delete: {
-        args: Prisma.PatientDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      update: {
-        args: Prisma.PatientUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      deleteMany: {
-        args: Prisma.PatientDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      updateMany: {
-        args: Prisma.PatientUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      upsert: {
-        args: Prisma.PatientUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      aggregate: {
-        args: Prisma.PatientAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      groupBy: {
-        args: Prisma.PatientGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-      count: {
-        args: Prisma.PatientCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Patient>>
-        queryExtCbArgs: { model: 'Patient', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Patient']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Patient>> },
-      }
-    }
-    Movie: {
-      findUnique: {
-        args: Prisma.MovieFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.MovieFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      findFirst: {
-        args: Prisma.MovieFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.MovieFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      findMany: {
-        args: Prisma.MovieFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      create: {
-        args: Prisma.MovieCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      createMany: {
-        args: Prisma.MovieCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      delete: {
-        args: Prisma.MovieDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      update: {
-        args: Prisma.MovieUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      deleteMany: {
-        args: Prisma.MovieDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      updateMany: {
-        args: Prisma.MovieUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      upsert: {
-        args: Prisma.MovieUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      aggregate: {
-        args: Prisma.MovieAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      groupBy: {
-        args: Prisma.MovieGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-      count: {
-        args: Prisma.MovieCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Movie>>
-        queryExtCbArgs: { model: 'Movie', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Movie']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Movie>> },
-      }
-    }
-    Director: {
-      findUnique: {
-        args: Prisma.DirectorFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.DirectorFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      findFirst: {
-        args: Prisma.DirectorFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.DirectorFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      findMany: {
-        args: Prisma.DirectorFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      create: {
-        args: Prisma.DirectorCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      createMany: {
-        args: Prisma.DirectorCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      delete: {
-        args: Prisma.DirectorDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      update: {
-        args: Prisma.DirectorUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      deleteMany: {
-        args: Prisma.DirectorDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      updateMany: {
-        args: Prisma.DirectorUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      upsert: {
-        args: Prisma.DirectorUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      aggregate: {
-        args: Prisma.DirectorAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      groupBy: {
-        args: Prisma.DirectorGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-      count: {
-        args: Prisma.DirectorCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Director>>
-        queryExtCbArgs: { model: 'Director', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Director']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Director>> },
-      }
-    }
-    Problem: {
-      findUnique: {
-        args: Prisma.ProblemFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.ProblemFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      findFirst: {
-        args: Prisma.ProblemFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.ProblemFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      findMany: {
-        args: Prisma.ProblemFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      create: {
-        args: Prisma.ProblemCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      createMany: {
-        args: Prisma.ProblemCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      delete: {
-        args: Prisma.ProblemDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      update: {
-        args: Prisma.ProblemUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      deleteMany: {
-        args: Prisma.ProblemDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      updateMany: {
-        args: Prisma.ProblemUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      upsert: {
-        args: Prisma.ProblemUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      aggregate: {
-        args: Prisma.ProblemAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      groupBy: {
-        args: Prisma.ProblemGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-      count: {
-        args: Prisma.ProblemCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Problem>>
-        queryExtCbArgs: { model: 'Problem', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Problem']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Problem>> },
-      }
-    }
-    Creator: {
-      findUnique: {
-        args: Prisma.CreatorFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.CreatorFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      findFirst: {
-        args: Prisma.CreatorFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.CreatorFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      findMany: {
-        args: Prisma.CreatorFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      create: {
-        args: Prisma.CreatorCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      createMany: {
-        args: Prisma.CreatorCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      delete: {
-        args: Prisma.CreatorDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      update: {
-        args: Prisma.CreatorUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      deleteMany: {
-        args: Prisma.CreatorDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      updateMany: {
-        args: Prisma.CreatorUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      upsert: {
-        args: Prisma.CreatorUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      aggregate: {
-        args: Prisma.CreatorAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      groupBy: {
-        args: Prisma.CreatorGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-      count: {
-        args: Prisma.CreatorCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Creator>>
-        queryExtCbArgs: { model: 'Creator', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Creator']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Creator>> },
-      }
-    }
-    NativeTypeModel: {
-      findUnique: {
-        args: Prisma.NativeTypeModelFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.NativeTypeModelFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      findFirst: {
-        args: Prisma.NativeTypeModelFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.NativeTypeModelFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      findMany: {
-        args: Prisma.NativeTypeModelFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      create: {
-        args: Prisma.NativeTypeModelCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      createMany: {
-        args: Prisma.NativeTypeModelCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      delete: {
-        args: Prisma.NativeTypeModelDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      update: {
-        args: Prisma.NativeTypeModelUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      deleteMany: {
-        args: Prisma.NativeTypeModelDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      updateMany: {
-        args: Prisma.NativeTypeModelUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      upsert: {
-        args: Prisma.NativeTypeModelUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      aggregate: {
-        args: Prisma.NativeTypeModelAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      groupBy: {
-        args: Prisma.NativeTypeModelGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-      count: {
-        args: Prisma.NativeTypeModelCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>>
-        queryExtCbArgs: { model: 'NativeTypeModel', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['NativeTypeModel']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<NativeTypeModel>> },
-      }
-    }
-    Equipment: {
-      findUnique: {
-        args: Prisma.EquipmentFindUniqueArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'findUnique', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findUnique']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      findUniqueOrThrow: {
-        args: Prisma.EquipmentFindUniqueOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'findUniqueOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findUniqueOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      findFirst: {
-        args: Prisma.EquipmentFindFirstArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'findFirst', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findFirst']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      findFirstOrThrow: {
-        args: Prisma.EquipmentFindFirstOrThrowArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'findFirstOrThrow', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findFirstOrThrow']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      findMany: {
-        args: Prisma.EquipmentFindManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'findMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['findMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      create: {
-        args: Prisma.EquipmentCreateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'create', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['create']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      createMany: {
-        args: Prisma.EquipmentCreateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'createMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['createMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      delete: {
-        args: Prisma.EquipmentDeleteArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'delete', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['delete']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      update: {
-        args: Prisma.EquipmentUpdateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'update', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['update']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      deleteMany: {
-        args: Prisma.EquipmentDeleteManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'deleteMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['deleteMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      updateMany: {
-        args: Prisma.EquipmentUpdateManyArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'updateMany', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['updateMany']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      upsert: {
-        args: Prisma.EquipmentUpsertArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'upsert', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['upsert']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      aggregate: {
-        args: Prisma.EquipmentAggregateArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'aggregate', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['aggregate']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      groupBy: {
-        args: Prisma.EquipmentGroupByArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'groupBy', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['groupBy']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-      count: {
-        args: Prisma.EquipmentCountArgs<ExtArgs>,
-        result: Promise<runtime.Types.Utils.OptionalFlat<Equipment>>
-        queryExtCbArgs: { model: 'Equipment', operation: 'count', args: runtime.Types.Extensions.ReadonlySelector<TypeMap<ExtArgs>['Equipment']['count']['args']>, query: (args: object) => PrismaPromise<runtime.Types.Utils.OptionalFlat<Equipment>> },
-      }
-    }
+    client?: C & { [K: symbol]: runtime.Types.Extensions.GetClient<PrismaClient<never, never, false, ExtArgs>, ExtArgs['client'], {}> }
   }
+  export type DefaultPrismaClient = PrismaClient
   export type RejectOnNotFound = boolean | ((error: Error) => Error)
   export type RejectPerModel = { [P in ModelName]?: RejectOnNotFound }
   export type RejectPerOperation =  { [P in "findUnique" | "findFirst"]?: RejectPerModel | RejectOnNotFound } 
@@ -2131,7 +1903,7 @@ export namespace Prisma {
   /**
    * `PrismaClient` proxy available in interactive transactions.
    */
-  export type TransactionClient = Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>
 
   export type Datasource = {
     url?: string
@@ -2610,10 +2382,19 @@ export namespace Prisma {
 
 
   export type UserSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
-    posts?: boolean | postFindManyArgs<ExtArgs>
-    editorPosts?: boolean | postFindManyArgs<ExtArgs>
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    age?: boolean
+    balance?: boolean
+    amount?: boolean
+    posts?: boolean | UserPostsArgs<ExtArgs>
+    role?: boolean
+    editorPosts?: boolean | UserEditorPostsArgs<ExtArgs>
+    grades?: boolean
+    aliases?: boolean
     _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
-  } & UserSelectScalar, ExtArgs['result']['user']>
+  }, ExtArgs['result']['user']>
 
   export type UserSelectScalar = {
     id?: boolean
@@ -2622,13 +2403,14 @@ export namespace Prisma {
     age?: boolean
     balance?: boolean
     amount?: boolean
+    role?: boolean
     grades?: boolean
     aliases?: boolean
   }
 
   export type UserInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
-    posts?: boolean | postFindManyArgs<ExtArgs>
-    editorPosts?: boolean | postFindManyArgs<ExtArgs>
+    posts?: boolean | UserPostsArgs<ExtArgs>
+    editorPosts?: boolean | UserEditorPostsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
   } 
 
@@ -3022,9 +2804,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    posts<T extends postFindManyArgs<ExtArgs> = {}>(args?: Subset<T, postFindManyArgs<ExtArgs>>): PrismaPromise<Array<postGetPayload<T, ExtArgs>>| Null>;
+    posts<T extends UserPostsArgs<ExtArgs> = {}>(args?: Subset<T, UserPostsArgs<ExtArgs>>): PrismaPromise<Array<postGetPayload<T, ExtArgs>>| Null>;
 
-    editorPosts<T extends postFindManyArgs<ExtArgs> = {}>(args?: Subset<T, postFindManyArgs<ExtArgs>>): PrismaPromise<Array<postGetPayload<T, ExtArgs>>| Null>;
+    editorPosts<T extends UserEditorPostsArgs<ExtArgs> = {}>(args?: Subset<T, UserEditorPostsArgs<ExtArgs>>): PrismaPromise<Array<postGetPayload<T, ExtArgs>>| Null>;
 
     private get _document();
     /**
@@ -3075,7 +2857,7 @@ export namespace Prisma {
   }
 
   /**
-   * User: findUnique
+   * User findUnique
    */
   export interface UserFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends UserFindUniqueArgsBase<ExtArgs> {
    /**
@@ -3165,7 +2947,7 @@ export namespace Prisma {
   }
 
   /**
-   * User: findFirst
+   * User findFirst
    */
   export interface UserFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends UserFindFirstArgsBase<ExtArgs> {
    /**
@@ -3430,6 +3212,52 @@ export namespace Prisma {
 
 
   /**
+   * User.posts
+   */
+  export type UserPostsArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the post
+     * 
+    **/
+    select?: postSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: postInclude<ExtArgs> | null
+    where?: postWhereInput
+    orderBy?: Enumerable<postOrderByWithRelationAndSearchRelevanceInput>
+    cursor?: postWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<PostScalarFieldEnum>
+  }
+
+
+  /**
+   * User.editorPosts
+   */
+  export type UserEditorPostsArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the post
+     * 
+    **/
+    select?: postSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: postInclude<ExtArgs> | null
+    where?: postWhereInput
+    orderBy?: Enumerable<postOrderByWithRelationAndSearchRelevanceInput>
+    cursor?: postWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<PostScalarFieldEnum>
+  }
+
+
+  /**
    * User without action
    */
   export type UserArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
@@ -3689,9 +3517,20 @@ export namespace Prisma {
 
 
   export type postSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+    uuid?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    published?: boolean
+    title?: boolean
+    subtitle?: boolean
+    content?: boolean
     author?: boolean | UserArgs<ExtArgs>
-    editor?: boolean | UserArgs<ExtArgs>
-  } & postSelectScalar, ExtArgs['result']['post']>
+    authorId?: boolean
+    editor?: boolean | postEditorArgs<ExtArgs>
+    editorId?: boolean
+    kind?: boolean
+    metadata?: boolean
+  }, ExtArgs['result']['post']>
 
   export type postSelectScalar = {
     uuid?: boolean
@@ -3703,12 +3542,13 @@ export namespace Prisma {
     content?: boolean
     authorId?: boolean
     editorId?: boolean
+    kind?: boolean
     metadata?: boolean
   }
 
   export type postInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
     author?: boolean | UserArgs<ExtArgs>
-    editor?: boolean | UserArgs<ExtArgs>
+    editor?: boolean | postEditorArgs<ExtArgs>
   } 
 
   export type postGetPayload<S extends boolean | null | undefined | postArgs, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs, _post = runtime.Types.Extensions.GetResultPayload<post, ExtArgs['result']['post']>> =
@@ -4101,7 +3941,7 @@ export namespace Prisma {
 
     author<T extends UserArgs<ExtArgs> = {}>(args?: Subset<T, UserArgs<ExtArgs>>): Prisma__UserClient<UserGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
 
-    editor<T extends UserArgs<ExtArgs> = {}>(args?: Subset<T, UserArgs<ExtArgs>>): Prisma__UserClient<UserGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
+    editor<T extends postEditorArgs<ExtArgs> = {}>(args?: Subset<T, postEditorArgs<ExtArgs>>): Prisma__UserClient<UserGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
 
     private get _document();
     /**
@@ -4152,7 +3992,7 @@ export namespace Prisma {
   }
 
   /**
-   * post: findUnique
+   * post findUnique
    */
   export interface postFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends postFindUniqueArgsBase<ExtArgs> {
    /**
@@ -4242,7 +4082,7 @@ export namespace Prisma {
   }
 
   /**
-   * post: findFirst
+   * post findFirst
    */
   export interface postFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends postFindFirstArgsBase<ExtArgs> {
    /**
@@ -4507,6 +4347,24 @@ export namespace Prisma {
 
 
   /**
+   * post.editor
+   */
+  export type postEditorArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     * 
+    **/
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+
+  /**
    * post without action
    */
   export type postArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
@@ -4710,8 +4568,10 @@ export namespace Prisma {
 
 
   export type CategorySelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
-
-  } & CategorySelectScalar, ExtArgs['result']['category']>
+    name?: boolean
+    slug?: boolean
+    number?: boolean
+  }, ExtArgs['result']['category']>
 
   export type CategorySelectScalar = {
     name?: boolean
@@ -5147,7 +5007,7 @@ export namespace Prisma {
   }
 
   /**
-   * Category: findUnique
+   * Category findUnique
    */
   export interface CategoryFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends CategoryFindUniqueArgsBase<ExtArgs> {
    /**
@@ -5227,7 +5087,7 @@ export namespace Prisma {
   }
 
   /**
-   * Category: findFirst
+   * Category findFirst
    */
   export interface CategoryFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends CategoryFindFirstArgsBase<ExtArgs> {
    /**
@@ -5626,8 +5486,10 @@ export namespace Prisma {
 
 
   export type PatientSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
-
-  } & PatientSelectScalar, ExtArgs['result']['patient']>
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+  }, ExtArgs['result']['patient']>
 
   export type PatientSelectScalar = {
     firstName?: boolean
@@ -6063,7 +5925,7 @@ export namespace Prisma {
   }
 
   /**
-   * Patient: findUnique
+   * Patient findUnique
    */
   export interface PatientFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends PatientFindUniqueArgsBase<ExtArgs> {
    /**
@@ -6143,7 +6005,7 @@ export namespace Prisma {
   }
 
   /**
-   * Patient: findFirst
+   * Patient findFirst
    */
   export interface PatientFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends PatientFindFirstArgsBase<ExtArgs> {
    /**
@@ -6542,8 +6404,11 @@ export namespace Prisma {
 
 
   export type MovieSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
+    directorFirstName?: boolean
+    directorLastName?: boolean
     director?: boolean | DirectorArgs<ExtArgs>
-  } & MovieSelectScalar, ExtArgs['result']['movie']>
+    title?: boolean
+  }, ExtArgs['result']['movie']>
 
   export type MovieSelectScalar = {
     directorFirstName?: boolean
@@ -6992,7 +6857,7 @@ export namespace Prisma {
   }
 
   /**
-   * Movie: findUnique
+   * Movie findUnique
    */
   export interface MovieFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends MovieFindUniqueArgsBase<ExtArgs> {
    /**
@@ -7082,7 +6947,7 @@ export namespace Prisma {
   }
 
   /**
-   * Movie: findFirst
+   * Movie findFirst
    */
   export interface MovieFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends MovieFindFirstArgsBase<ExtArgs> {
    /**
@@ -7509,9 +7374,11 @@ export namespace Prisma {
 
 
   export type DirectorSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
-    movies?: boolean | MovieFindManyArgs<ExtArgs>
+    firstName?: boolean
+    lastName?: boolean
+    movies?: boolean | DirectorMoviesArgs<ExtArgs>
     _count?: boolean | DirectorCountOutputTypeArgs<ExtArgs>
-  } & DirectorSelectScalar, ExtArgs['result']['director']>
+  }, ExtArgs['result']['director']>
 
   export type DirectorSelectScalar = {
     firstName?: boolean
@@ -7519,7 +7386,7 @@ export namespace Prisma {
   }
 
   export type DirectorInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
-    movies?: boolean | MovieFindManyArgs<ExtArgs>
+    movies?: boolean | DirectorMoviesArgs<ExtArgs>
     _count?: boolean | DirectorCountOutputTypeArgs<ExtArgs>
   } 
 
@@ -7911,7 +7778,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    movies<T extends MovieFindManyArgs<ExtArgs> = {}>(args?: Subset<T, MovieFindManyArgs<ExtArgs>>): PrismaPromise<Array<MovieGetPayload<T, ExtArgs>>| Null>;
+    movies<T extends DirectorMoviesArgs<ExtArgs> = {}>(args?: Subset<T, DirectorMoviesArgs<ExtArgs>>): PrismaPromise<Array<MovieGetPayload<T, ExtArgs>>| Null>;
 
     private get _document();
     /**
@@ -7962,7 +7829,7 @@ export namespace Prisma {
   }
 
   /**
-   * Director: findUnique
+   * Director findUnique
    */
   export interface DirectorFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends DirectorFindUniqueArgsBase<ExtArgs> {
    /**
@@ -8052,7 +7919,7 @@ export namespace Prisma {
   }
 
   /**
-   * Director: findFirst
+   * Director findFirst
    */
   export interface DirectorFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends DirectorFindFirstArgsBase<ExtArgs> {
    /**
@@ -8317,6 +8184,29 @@ export namespace Prisma {
 
 
   /**
+   * Director.movies
+   */
+  export type DirectorMoviesArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Movie
+     * 
+    **/
+    select?: MovieSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: MovieInclude<ExtArgs> | null
+    where?: MovieWhereInput
+    orderBy?: Enumerable<MovieOrderByWithRelationAndSearchRelevanceInput>
+    cursor?: MovieWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<MovieScalarFieldEnum>
+  }
+
+
+  /**
    * Director without action
    */
   export type DirectorArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
@@ -8524,10 +8414,13 @@ export namespace Prisma {
 
 
   export type ProblemSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
-    likedBy?: boolean | CreatorFindManyArgs<ExtArgs>
-    creator?: boolean | CreatorArgs<ExtArgs>
+    id?: boolean
+    problemText?: boolean
+    likedBy?: boolean | ProblemLikedByArgs<ExtArgs>
+    creator?: boolean | ProblemCreatorArgs<ExtArgs>
+    creatorId?: boolean
     _count?: boolean | ProblemCountOutputTypeArgs<ExtArgs>
-  } & ProblemSelectScalar, ExtArgs['result']['problem']>
+  }, ExtArgs['result']['problem']>
 
   export type ProblemSelectScalar = {
     id?: boolean
@@ -8536,8 +8429,8 @@ export namespace Prisma {
   }
 
   export type ProblemInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
-    likedBy?: boolean | CreatorFindManyArgs<ExtArgs>
-    creator?: boolean | CreatorArgs<ExtArgs>
+    likedBy?: boolean | ProblemLikedByArgs<ExtArgs>
+    creator?: boolean | ProblemCreatorArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeArgs<ExtArgs>
   } 
 
@@ -8931,9 +8824,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    likedBy<T extends CreatorFindManyArgs<ExtArgs> = {}>(args?: Subset<T, CreatorFindManyArgs<ExtArgs>>): PrismaPromise<Array<CreatorGetPayload<T, ExtArgs>>| Null>;
+    likedBy<T extends ProblemLikedByArgs<ExtArgs> = {}>(args?: Subset<T, ProblemLikedByArgs<ExtArgs>>): PrismaPromise<Array<CreatorGetPayload<T, ExtArgs>>| Null>;
 
-    creator<T extends CreatorArgs<ExtArgs> = {}>(args?: Subset<T, CreatorArgs<ExtArgs>>): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
+    creator<T extends ProblemCreatorArgs<ExtArgs> = {}>(args?: Subset<T, ProblemCreatorArgs<ExtArgs>>): Prisma__CreatorClient<CreatorGetPayload<T, ExtArgs> | Null, never, ExtArgs>;
 
     private get _document();
     /**
@@ -8984,7 +8877,7 @@ export namespace Prisma {
   }
 
   /**
-   * Problem: findUnique
+   * Problem findUnique
    */
   export interface ProblemFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends ProblemFindUniqueArgsBase<ExtArgs> {
    /**
@@ -9074,7 +8967,7 @@ export namespace Prisma {
   }
 
   /**
-   * Problem: findFirst
+   * Problem findFirst
    */
   export interface ProblemFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends ProblemFindFirstArgsBase<ExtArgs> {
    /**
@@ -9339,6 +9232,47 @@ export namespace Prisma {
 
 
   /**
+   * Problem.likedBy
+   */
+  export type ProblemLikedByArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     * 
+    **/
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: CreatorInclude<ExtArgs> | null
+    where?: CreatorWhereInput
+    orderBy?: Enumerable<CreatorOrderByWithRelationAndSearchRelevanceInput>
+    cursor?: CreatorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<CreatorScalarFieldEnum>
+  }
+
+
+  /**
+   * Problem.creator
+   */
+  export type ProblemCreatorArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     * 
+    **/
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: CreatorInclude<ExtArgs> | null
+    where?: CreatorWhereInput
+  }
+
+
+  /**
    * Problem without action
    */
   export type ProblemArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
@@ -9535,10 +9469,12 @@ export namespace Prisma {
 
 
   export type CreatorSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
-    likes?: boolean | ProblemFindManyArgs<ExtArgs>
-    problems?: boolean | ProblemFindManyArgs<ExtArgs>
+    id?: boolean
+    name?: boolean
+    likes?: boolean | CreatorLikesArgs<ExtArgs>
+    problems?: boolean | CreatorProblemsArgs<ExtArgs>
     _count?: boolean | CreatorCountOutputTypeArgs<ExtArgs>
-  } & CreatorSelectScalar, ExtArgs['result']['creator']>
+  }, ExtArgs['result']['creator']>
 
   export type CreatorSelectScalar = {
     id?: boolean
@@ -9546,8 +9482,8 @@ export namespace Prisma {
   }
 
   export type CreatorInclude<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
-    likes?: boolean | ProblemFindManyArgs<ExtArgs>
-    problems?: boolean | ProblemFindManyArgs<ExtArgs>
+    likes?: boolean | CreatorLikesArgs<ExtArgs>
+    problems?: boolean | CreatorProblemsArgs<ExtArgs>
     _count?: boolean | CreatorCountOutputTypeArgs<ExtArgs>
   } 
 
@@ -9941,9 +9877,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    likes<T extends ProblemFindManyArgs<ExtArgs> = {}>(args?: Subset<T, ProblemFindManyArgs<ExtArgs>>): PrismaPromise<Array<ProblemGetPayload<T, ExtArgs>>| Null>;
+    likes<T extends CreatorLikesArgs<ExtArgs> = {}>(args?: Subset<T, CreatorLikesArgs<ExtArgs>>): PrismaPromise<Array<ProblemGetPayload<T, ExtArgs>>| Null>;
 
-    problems<T extends ProblemFindManyArgs<ExtArgs> = {}>(args?: Subset<T, ProblemFindManyArgs<ExtArgs>>): PrismaPromise<Array<ProblemGetPayload<T, ExtArgs>>| Null>;
+    problems<T extends CreatorProblemsArgs<ExtArgs> = {}>(args?: Subset<T, CreatorProblemsArgs<ExtArgs>>): PrismaPromise<Array<ProblemGetPayload<T, ExtArgs>>| Null>;
 
     private get _document();
     /**
@@ -9994,7 +9930,7 @@ export namespace Prisma {
   }
 
   /**
-   * Creator: findUnique
+   * Creator findUnique
    */
   export interface CreatorFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends CreatorFindUniqueArgsBase<ExtArgs> {
    /**
@@ -10084,7 +10020,7 @@ export namespace Prisma {
   }
 
   /**
-   * Creator: findFirst
+   * Creator findFirst
    */
   export interface CreatorFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends CreatorFindFirstArgsBase<ExtArgs> {
    /**
@@ -10349,6 +10285,52 @@ export namespace Prisma {
 
 
   /**
+   * Creator.likes
+   */
+  export type CreatorLikesArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     * 
+    **/
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: ProblemInclude<ExtArgs> | null
+    where?: ProblemWhereInput
+    orderBy?: Enumerable<ProblemOrderByWithRelationAndSearchRelevanceInput>
+    cursor?: ProblemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<ProblemScalarFieldEnum>
+  }
+
+
+  /**
+   * Creator.problems
+   */
+  export type CreatorProblemsArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     * 
+    **/
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     * 
+    **/
+    include?: ProblemInclude<ExtArgs> | null
+    where?: ProblemWhereInput
+    orderBy?: Enumerable<ProblemOrderByWithRelationAndSearchRelevanceInput>
+    cursor?: ProblemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<ProblemScalarFieldEnum>
+  }
+
+
+  /**
    * Creator without action
    */
   export type CreatorArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = {
@@ -10567,8 +10549,11 @@ export namespace Prisma {
 
 
   export type NativeTypeModelSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
-
-  } & NativeTypeModelSelectScalar, ExtArgs['result']['nativeTypeModel']>
+    id?: boolean
+    bigInt?: boolean
+    byteA?: boolean
+    decimal?: boolean
+  }, ExtArgs['result']['nativeTypeModel']>
 
   export type NativeTypeModelSelectScalar = {
     id?: boolean
@@ -11005,7 +10990,7 @@ export namespace Prisma {
   }
 
   /**
-   * NativeTypeModel: findUnique
+   * NativeTypeModel findUnique
    */
   export interface NativeTypeModelFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends NativeTypeModelFindUniqueArgsBase<ExtArgs> {
    /**
@@ -11085,7 +11070,7 @@ export namespace Prisma {
   }
 
   /**
-   * NativeTypeModel: findFirst
+   * NativeTypeModel findFirst
    */
   export interface NativeTypeModelFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends NativeTypeModelFindFirstArgsBase<ExtArgs> {
    /**
@@ -11470,8 +11455,8 @@ export namespace Prisma {
 
 
   export type EquipmentSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetResultSelect<{
-
-  } & EquipmentSelectScalar, ExtArgs['result']['equipment']>
+    id?: boolean
+  }, ExtArgs['result']['equipment']>
 
   export type EquipmentSelectScalar = {
     id?: boolean
@@ -11905,7 +11890,7 @@ export namespace Prisma {
   }
 
   /**
-   * Equipment: findUnique
+   * Equipment findUnique
    */
   export interface EquipmentFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends EquipmentFindUniqueArgsBase<ExtArgs> {
    /**
@@ -11985,7 +11970,7 @@ export namespace Prisma {
   }
 
   /**
-   * Equipment: findFirst
+   * Equipment findFirst
    */
   export interface EquipmentFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> extends EquipmentFindFirstArgsBase<ExtArgs> {
    /**

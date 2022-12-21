@@ -260,7 +260,7 @@ async function main() {
       GroupByPostResolver,
       NativeTypeModelCrudResolver,
     ],
-    validate: true,
+    validate: { forbidUnknownValues: false },
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
     authChecker: ({ info }) => {
       console.log(

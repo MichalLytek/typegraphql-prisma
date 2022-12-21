@@ -83,6 +83,8 @@ declare class BaseDMMFHelper {
     constructor(dmmf: BaseDMMF);
 }
 
+declare type BatchQueryEngineResult<T> = QueryEngineResult<T> | Error;
+
 declare type BatchTransactionOptions = {
     isolationLevel?: Transaction.IsolationLevel;
 };
@@ -857,7 +859,7 @@ export declare abstract class Engine {
     abstract getDmmf(): Promise<DMMF.Document>;
     abstract version(forceRun?: boolean): Promise<string> | string;
     abstract request<T>(options: RequestOptions<unknown>): Promise<QueryEngineResult<T>>;
-    abstract requestBatch<T>(options: RequestBatchOptions): Promise<QueryEngineResult<T>[]>;
+    abstract requestBatch<T>(options: RequestBatchOptions): Promise<BatchQueryEngineResult<T>[]>;
     abstract transaction(action: 'start', headers: Transaction.TransactionHeaders, options?: Transaction.Options): Promise<Transaction.Info<unknown>>;
     abstract transaction(action: 'commit', headers: Transaction.TransactionHeaders, info: Transaction.Info<unknown>): Promise<void>;
     abstract transaction(action: 'rollback', headers: Transaction.TransactionHeaders, info: Transaction.Info<unknown>): Promise<void>;
@@ -962,7 +964,6 @@ declare namespace Extensions_2 {
         GetModel,
         GetClient,
         ReadonlySelector,
-        MergeArgs,
         RequiredArgs as Args
     }
 }
@@ -1031,7 +1032,7 @@ declare interface GeneratorConfig {
     previewFeatures: string[];
 }
 
-declare type GetClient<Base extends object, C extends RequiredArgs['client'], CP extends RequiredArgs['client']> = PatchFlat3<C, CP, Omit_2<Base, '$use'>>;
+declare type GetClient<Base extends object, C extends RequiredArgs['client'], CP extends RequiredArgs['client']> = C & Omit_2<CP, keyof C> & Omit_2<Base, '$use' | keyof C | keyof CP>;
 
 declare type GetConfigResult = {
     datasources: DataSource[];
@@ -1042,7 +1043,7 @@ declare function getExtensionContext<T>(that: {
     [K: symbol]: T;
 }): T;
 
-declare type GetModel<Base extends object, M extends RequiredArgs['model'][string]> = PatchFlat3<M, Base, {}>;
+declare type GetModel<Base extends object, M extends RequiredArgs['model'][string]> = M & Omit_2<Base, keyof M>;
 
 export declare function getPrismaClient(config: GetPrismaClientConfig): {
     new (optionsArg?: PrismaClientOptions): {
@@ -1246,13 +1247,15 @@ declare interface GetPrismaClientConfig {
     inlineSchemaHash?: string;
 }
 
-declare type GetResultPayload<Base extends object, R extends RequiredArgs['result'][string]> = PatchFlat3<{}, {
+declare type GetResultPayload<Base extends object, R extends RequiredArgs['result'][string]> = {} extends R ? Base : {
     [K in keyof R]: ReturnType<R[K]['compute']>;
-}, Base>;
-
-declare type GetResultSelect<Base extends object, R extends RequiredArgs['result'][string]> = Base & {
-    [K in keyof R]?: true;
+} & {
+    [K in Exclude<keyof Base, keyof R>]: Base[K];
 };
+
+declare type GetResultSelect<Base extends object, R extends RequiredArgs['result'][string]> = R extends unknown ? Base & {
+    [K in keyof R]?: boolean;
+} : never;
 
 declare type HandleErrorParams = {
     error: any;
@@ -1477,25 +1480,6 @@ export declare function makeDocument({ dmmf, rootTypeName, rootField, select, mo
  * @returns
  */
 export declare function makeStrictEnum<T extends Record<PropertyKey, string | number>>(definition: T): T;
-
-declare type MergeArgs<ExtArgs extends RequiredArgs, PrevExtArgs extends RequiredArgs, ModelNames extends string, ApplyAllModels extends boolean = true> = {
-    result: '$allModels' extends keyof ExtArgs['result'] ? ApplyAllModels extends true ? {
-        [K in ModelNames]: PatchFlat3<ExtArgs['result'][K], ExtArgs['result']['$allModels'], PrevExtArgs['result'][K]>;
-    } : {
-        [K in keyof ExtArgs['result'] | keyof PrevExtArgs['result']]: PatchFlat3<ExtArgs['result'][K], PrevExtArgs['result'][K], {}>;
-    } : {
-        [K in keyof ExtArgs['result'] | keyof PrevExtArgs['result']]: PatchFlat3<ExtArgs['result'][K], PrevExtArgs['result'][K], {}>;
-    };
-    model: '$allModels' extends keyof ExtArgs['model'] ? ApplyAllModels extends true ? {
-        [K in ModelNames]: PatchFlat3<ExtArgs['model'][K], ExtArgs['model']['$allModels'], PrevExtArgs['model'][K]>;
-    } : {
-        [K in keyof ExtArgs['model'] | keyof PrevExtArgs['model']]: PatchFlat3<ExtArgs['model'][K], PrevExtArgs['model'][K], {}>;
-    } : {
-        [K in keyof ExtArgs['model'] | keyof PrevExtArgs['model']]: PatchFlat3<ExtArgs['model'][K], PrevExtArgs['model'][K], {}>;
-    };
-    client: Pick_2<PatchFlat3<ExtArgs['client'], PrevExtArgs['client'], {}>, `$${string}`>;
-    query: {};
-};
 
 /**
  * Class that holds the list of all extensions, applied to particular instance, as well
@@ -1891,11 +1875,15 @@ export declare function raw(value: string): Sql;
  */
 export declare type RawValue = Value | Sql;
 
-declare type ReadonlySelector<T> = {
-    readonly [K in keyof T as K extends 'include' | 'select' ? K : never]: ReadonlySelector<T[K]>;
+declare type ReadonlyDeep<T> = {
+    readonly [K in keyof T]: ReadonlyDeep<T[K]>;
+};
+
+declare type ReadonlySelector<T> = T extends unknown ? {
+    readonly [K in keyof T as K extends 'include' | 'select' ? K : never]: ReadonlyDeep<T[K]>;
 } & {
     [K in keyof T as K extends 'include' | 'select' ? never : K]: T[K];
-};
+} : never;
 
 declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
 
@@ -2072,7 +2060,8 @@ declare namespace Utils {
         Pick_2 as Pick,
         PatchFlat3,
         Compute,
-        OptionalFlat
+        OptionalFlat,
+        ReadonlyDeep
     }
 }
 

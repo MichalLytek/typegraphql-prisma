@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { Creator } from "../../../models/Creator";
 import { Problem } from "../../../models/Problem";
+import { ProblemCreatorArgs } from "./args/ProblemCreatorArgs";
 import { ProblemLikedByArgs } from "./args/ProblemLikedByArgs";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
@@ -20,11 +21,11 @@ export class ProblemRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => Creator, {
     nullable: true
   })
-  async creator(@TypeGraphQL.Root() problem: Problem, @TypeGraphQL.Ctx() ctx: any): Promise<Creator | null> {
+  async creator(@TypeGraphQL.Root() problem: Problem, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ProblemCreatorArgs): Promise<Creator | null> {
     return getPrismaFromContext(ctx).problem.findUnique({
       where: {
         id: problem.id,
       },
-    }).creator({});
+    }).creator(args);
   }
 }

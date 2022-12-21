@@ -97,6 +97,13 @@ CREATE TABLE "NativeTypeModel" (
 );
 
 -- CreateTable
+CREATE TABLE "Equipment" (
+    "id" TEXT NOT NULL,
+
+    CONSTRAINT "Equipment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_CreatorToProblem" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
@@ -127,7 +134,7 @@ ALTER TABLE "Movie" ADD CONSTRAINT "Movie_directorFirstName_directorLastName_fke
 ALTER TABLE "Problem" ADD CONSTRAINT "Problem_creatorId_fkey" FOREIGN KEY ("creatorId") REFERENCES "Creator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_CreatorToProblem" ADD FOREIGN KEY ("A") REFERENCES "Creator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_CreatorToProblem" ADD CONSTRAINT "_CreatorToProblem_A_fkey" FOREIGN KEY ("A") REFERENCES "Creator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_CreatorToProblem" ADD FOREIGN KEY ("B") REFERENCES "Problem"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_CreatorToProblem" ADD CONSTRAINT "_CreatorToProblem_B_fkey" FOREIGN KEY ("B") REFERENCES "Problem"("id") ON DELETE CASCADE ON UPDATE CASCADE;

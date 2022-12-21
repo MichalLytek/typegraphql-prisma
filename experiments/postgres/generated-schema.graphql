@@ -2687,7 +2687,7 @@ input PostWhereUniqueInput {
 
 type Problem {
   _count: ProblemCount
-  creator: Creator
+  creator(where: CreatorWhereInput): Creator
   creatorId: Int
   id: ID!
   likedBy(cursor: CreatorWhereUniqueInput, distinct: [CreatorScalarFieldEnum!], orderBy: [CreatorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CreatorWhereInput): [Creator!]!
