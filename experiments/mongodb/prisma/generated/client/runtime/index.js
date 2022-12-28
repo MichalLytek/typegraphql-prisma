@@ -36,7 +36,7 @@ var __publicField = (obj, key, value) => {
 var require_lz_string = __commonJS({
   "../../node_modules/.pnpm/lz-string@1.4.4/node_modules/lz-string/libs/lz-string.js"(exports, module2) {
     var LZString = function() {
-      var f = String.fromCharCode;
+      var f2 = String.fromCharCode;
       var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
       var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
       var baseReverseDic = {};
@@ -82,7 +82,7 @@ var require_lz_string = __commonJS({
           if (input == null)
             return "";
           return LZString2._compress(input, 15, function(a) {
-            return f(a + 32);
+            return f2(a + 32);
           }) + " ";
         },
         decompressFromUTF16: function(compressed) {
@@ -114,7 +114,7 @@ var require_lz_string = __commonJS({
             }
             var result = [];
             buf.forEach(function(c) {
-              result.push(f(c));
+              result.push(f2(c));
             });
             return LZString2.decompress(result.join(""));
           }
@@ -138,7 +138,7 @@ var require_lz_string = __commonJS({
         },
         compress: function(uncompressed) {
           return LZString2._compress(uncompressed, 16, function(a) {
-            return f(a);
+            return f2(a);
           });
         },
         _compress: function(uncompressed, bitsPerChar, getCharFromInt) {
@@ -343,7 +343,7 @@ var require_lz_string = __commonJS({
           });
         },
         _decompress: function(length, resetValue, getNextValue) {
-          var dictionary = [], next, enlargeIn = 4, dictSize = 4, numBits = 3, entry = "", result = [], i, w, bits, resb, maxpower, power, c, data = { val: getNextValue(0), position: resetValue, index: 1 };
+          var dictionary = [], next, enlargeIn = 4, dictSize = 4, numBits = 3, entry = "", result = [], i, w2, bits, resb, maxpower, power, c, data = { val: getNextValue(0), position: resetValue, index: 1 };
           for (i = 0; i < 3; i += 1) {
             dictionary[i] = i;
           }
@@ -375,7 +375,7 @@ var require_lz_string = __commonJS({
                 bits |= (resb > 0 ? 1 : 0) * power;
                 power <<= 1;
               }
-              c = f(bits);
+              c = f2(bits);
               break;
             case 1:
               bits = 0;
@@ -391,13 +391,13 @@ var require_lz_string = __commonJS({
                 bits |= (resb > 0 ? 1 : 0) * power;
                 power <<= 1;
               }
-              c = f(bits);
+              c = f2(bits);
               break;
             case 2:
               return "";
           }
           dictionary[3] = c;
-          w = c;
+          w2 = c;
           result.push(c);
           while (true) {
             if (data.index > length) {
@@ -431,7 +431,7 @@ var require_lz_string = __commonJS({
                   bits |= (resb > 0 ? 1 : 0) * power;
                   power <<= 1;
                 }
-                dictionary[dictSize++] = f(bits);
+                dictionary[dictSize++] = f2(bits);
                 c = dictSize - 1;
                 enlargeIn--;
                 break;
@@ -449,7 +449,7 @@ var require_lz_string = __commonJS({
                   bits |= (resb > 0 ? 1 : 0) * power;
                   power <<= 1;
                 }
-                dictionary[dictSize++] = f(bits);
+                dictionary[dictSize++] = f2(bits);
                 c = dictSize - 1;
                 enlargeIn--;
                 break;
@@ -464,15 +464,15 @@ var require_lz_string = __commonJS({
               entry = dictionary[c];
             } else {
               if (c === dictSize) {
-                entry = w + w.charAt(0);
+                entry = w2 + w2.charAt(0);
               } else {
                 return null;
               }
             }
             result.push(entry);
-            dictionary[dictSize++] = w + entry.charAt(0);
+            dictionary[dictSize++] = w2 + entry.charAt(0);
             enlargeIn--;
-            w = entry;
+            w2 = entry;
             if (enlargeIn == 0) {
               enlargeIn = Math.pow(2, numBits);
               numBits++;
@@ -692,22 +692,22 @@ var require_conversions = __commonJS({
       Object.defineProperty(convert[model], "labels", { value: labels });
     }
     convert.rgb.hsl = function(rgb) {
-      const r = rgb[0] / 255;
-      const g = rgb[1] / 255;
-      const b = rgb[2] / 255;
-      const min2 = Math.min(r, g, b);
-      const max2 = Math.max(r, g, b);
+      const r2 = rgb[0] / 255;
+      const g2 = rgb[1] / 255;
+      const b2 = rgb[2] / 255;
+      const min2 = Math.min(r2, g2, b2);
+      const max2 = Math.max(r2, g2, b2);
       const delta = max2 - min2;
       let h;
       let s;
       if (max2 === min2) {
         h = 0;
-      } else if (r === max2) {
-        h = (g - b) / delta;
-      } else if (g === max2) {
-        h = 2 + (b - r) / delta;
-      } else if (b === max2) {
-        h = 4 + (r - g) / delta;
+      } else if (r2 === max2) {
+        h = (g2 - b2) / delta;
+      } else if (g2 === max2) {
+        h = 2 + (b2 - r2) / delta;
+      } else if (b2 === max2) {
+        h = 4 + (r2 - g2) / delta;
       }
       h = Math.min(h * 60, 360);
       if (h < 0) {
@@ -729,11 +729,11 @@ var require_conversions = __commonJS({
       let bdif;
       let h;
       let s;
-      const r = rgb[0] / 255;
-      const g = rgb[1] / 255;
-      const b = rgb[2] / 255;
-      const v = Math.max(r, g, b);
-      const diff = v - Math.min(r, g, b);
+      const r2 = rgb[0] / 255;
+      const g2 = rgb[1] / 255;
+      const b2 = rgb[2] / 255;
+      const v = Math.max(r2, g2, b2);
+      const diff = v - Math.min(r2, g2, b2);
       const diffc = /* @__PURE__ */ __name(function(c) {
         return (v - c) / 6 / diff + 1 / 2;
       }, "diffc");
@@ -742,14 +742,14 @@ var require_conversions = __commonJS({
         s = 0;
       } else {
         s = diff / v;
-        rdif = diffc(r);
-        gdif = diffc(g);
-        bdif = diffc(b);
-        if (r === v) {
+        rdif = diffc(r2);
+        gdif = diffc(g2);
+        bdif = diffc(b2);
+        if (r2 === v) {
           h = bdif - gdif;
-        } else if (g === v) {
+        } else if (g2 === v) {
           h = 1 / 3 + rdif - bdif;
-        } else if (b === v) {
+        } else if (b2 === v) {
           h = 2 / 3 + gdif - rdif;
         }
         if (h < 0) {
@@ -765,23 +765,23 @@ var require_conversions = __commonJS({
       ];
     };
     convert.rgb.hwb = function(rgb) {
-      const r = rgb[0];
-      const g = rgb[1];
-      let b = rgb[2];
+      const r2 = rgb[0];
+      const g2 = rgb[1];
+      let b2 = rgb[2];
       const h = convert.rgb.hsl(rgb)[0];
-      const w = 1 / 255 * Math.min(r, Math.min(g, b));
-      b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
-      return [h, w * 100, b * 100];
+      const w2 = 1 / 255 * Math.min(r2, Math.min(g2, b2));
+      b2 = 1 - 1 / 255 * Math.max(r2, Math.max(g2, b2));
+      return [h, w2 * 100, b2 * 100];
     };
     convert.rgb.cmyk = function(rgb) {
-      const r = rgb[0] / 255;
-      const g = rgb[1] / 255;
-      const b = rgb[2] / 255;
-      const k = Math.min(1 - r, 1 - g, 1 - b);
-      const c = (1 - r - k) / (1 - k) || 0;
-      const m = (1 - g - k) / (1 - k) || 0;
-      const y = (1 - b - k) / (1 - k) || 0;
-      return [c * 100, m * 100, y * 100, k * 100];
+      const r2 = rgb[0] / 255;
+      const g2 = rgb[1] / 255;
+      const b2 = rgb[2] / 255;
+      const k = Math.min(1 - r2, 1 - g2, 1 - b2);
+      const c = (1 - r2 - k) / (1 - k) || 0;
+      const m2 = (1 - g2 - k) / (1 - k) || 0;
+      const y = (1 - b2 - k) / (1 - k) || 0;
+      return [c * 100, m2 * 100, y * 100, k * 100];
     };
     function comparativeDistance(x, y) {
       return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
@@ -808,15 +808,15 @@ var require_conversions = __commonJS({
       return cssKeywords[keyword];
     };
     convert.rgb.xyz = function(rgb) {
-      let r = rgb[0] / 255;
-      let g = rgb[1] / 255;
-      let b = rgb[2] / 255;
-      r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
-      g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
-      b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
-      const x = r * 0.4124 + g * 0.3576 + b * 0.1805;
-      const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
-      const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
+      let r2 = rgb[0] / 255;
+      let g2 = rgb[1] / 255;
+      let b2 = rgb[2] / 255;
+      r2 = r2 > 0.04045 ? ((r2 + 0.055) / 1.055) ** 2.4 : r2 / 12.92;
+      g2 = g2 > 0.04045 ? ((g2 + 0.055) / 1.055) ** 2.4 : g2 / 12.92;
+      b2 = b2 > 0.04045 ? ((b2 + 0.055) / 1.055) ** 2.4 : b2 / 12.92;
+      const x = r2 * 0.4124 + g2 * 0.3576 + b2 * 0.1805;
+      const y = r2 * 0.2126 + g2 * 0.7152 + b2 * 0.0722;
+      const z = r2 * 0.0193 + g2 * 0.1192 + b2 * 0.9505;
       return [x * 100, y * 100, z * 100];
     };
     convert.rgb.lab = function(rgb) {
@@ -832,8 +832,8 @@ var require_conversions = __commonJS({
       z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
       const l = 116 * y - 16;
       const a = 500 * (x - y);
-      const b = 200 * (y - z);
-      return [l, a, b];
+      const b2 = 200 * (y - z);
+      return [l, a, b2];
     };
     convert.hsl.rgb = function(hsl) {
       const h = hsl[0] / 360;
@@ -892,24 +892,24 @@ var require_conversions = __commonJS({
       const s = hsv[1] / 100;
       let v = hsv[2] / 100;
       const hi = Math.floor(h) % 6;
-      const f = h - Math.floor(h);
-      const p = 255 * v * (1 - s);
-      const q = 255 * v * (1 - s * f);
-      const t = 255 * v * (1 - s * (1 - f));
+      const f2 = h - Math.floor(h);
+      const p2 = 255 * v * (1 - s);
+      const q = 255 * v * (1 - s * f2);
+      const t2 = 255 * v * (1 - s * (1 - f2));
       v *= 255;
       switch (hi) {
         case 0:
-          return [v, t, p];
+          return [v, t2, p2];
         case 1:
-          return [q, v, p];
+          return [q, v, p2];
         case 2:
-          return [p, v, t];
+          return [p2, v, t2];
         case 3:
-          return [p, q, v];
+          return [p2, q, v];
         case 4:
-          return [t, p, v];
+          return [t2, p2, v];
         case 5:
-          return [v, p, q];
+          return [v, p2, q];
       }
     };
     convert.hsv.hsl = function(hsv) {
@@ -932,84 +932,84 @@ var require_conversions = __commonJS({
       let wh = hwb[1] / 100;
       let bl = hwb[2] / 100;
       const ratio = wh + bl;
-      let f;
+      let f2;
       if (ratio > 1) {
         wh /= ratio;
         bl /= ratio;
       }
       const i = Math.floor(6 * h);
       const v = 1 - bl;
-      f = 6 * h - i;
+      f2 = 6 * h - i;
       if ((i & 1) !== 0) {
-        f = 1 - f;
+        f2 = 1 - f2;
       }
-      const n = wh + f * (v - wh);
-      let r;
-      let g;
-      let b;
+      const n2 = wh + f2 * (v - wh);
+      let r2;
+      let g2;
+      let b2;
       switch (i) {
         default:
         case 6:
         case 0:
-          r = v;
-          g = n;
-          b = wh;
+          r2 = v;
+          g2 = n2;
+          b2 = wh;
           break;
         case 1:
-          r = n;
-          g = v;
-          b = wh;
+          r2 = n2;
+          g2 = v;
+          b2 = wh;
           break;
         case 2:
-          r = wh;
-          g = v;
-          b = n;
+          r2 = wh;
+          g2 = v;
+          b2 = n2;
           break;
         case 3:
-          r = wh;
-          g = n;
-          b = v;
+          r2 = wh;
+          g2 = n2;
+          b2 = v;
           break;
         case 4:
-          r = n;
-          g = wh;
-          b = v;
+          r2 = n2;
+          g2 = wh;
+          b2 = v;
           break;
         case 5:
-          r = v;
-          g = wh;
-          b = n;
+          r2 = v;
+          g2 = wh;
+          b2 = n2;
           break;
       }
-      return [r * 255, g * 255, b * 255];
+      return [r2 * 255, g2 * 255, b2 * 255];
     };
     convert.cmyk.rgb = function(cmyk) {
       const c = cmyk[0] / 100;
-      const m = cmyk[1] / 100;
+      const m2 = cmyk[1] / 100;
       const y = cmyk[2] / 100;
       const k = cmyk[3] / 100;
-      const r = 1 - Math.min(1, c * (1 - k) + k);
-      const g = 1 - Math.min(1, m * (1 - k) + k);
-      const b = 1 - Math.min(1, y * (1 - k) + k);
-      return [r * 255, g * 255, b * 255];
+      const r2 = 1 - Math.min(1, c * (1 - k) + k);
+      const g2 = 1 - Math.min(1, m2 * (1 - k) + k);
+      const b2 = 1 - Math.min(1, y * (1 - k) + k);
+      return [r2 * 255, g2 * 255, b2 * 255];
     };
     convert.xyz.rgb = function(xyz) {
       const x = xyz[0] / 100;
       const y = xyz[1] / 100;
       const z = xyz[2] / 100;
-      let r;
-      let g;
-      let b;
-      r = x * 3.2406 + y * -1.5372 + z * -0.4986;
-      g = x * -0.9689 + y * 1.8758 + z * 0.0415;
-      b = x * 0.0557 + y * -0.204 + z * 1.057;
-      r = r > 31308e-7 ? 1.055 * r ** (1 / 2.4) - 0.055 : r * 12.92;
-      g = g > 31308e-7 ? 1.055 * g ** (1 / 2.4) - 0.055 : g * 12.92;
-      b = b > 31308e-7 ? 1.055 * b ** (1 / 2.4) - 0.055 : b * 12.92;
-      r = Math.min(Math.max(0, r), 1);
-      g = Math.min(Math.max(0, g), 1);
-      b = Math.min(Math.max(0, b), 1);
-      return [r * 255, g * 255, b * 255];
+      let r2;
+      let g2;
+      let b2;
+      r2 = x * 3.2406 + y * -1.5372 + z * -0.4986;
+      g2 = x * -0.9689 + y * 1.8758 + z * 0.0415;
+      b2 = x * 0.0557 + y * -0.204 + z * 1.057;
+      r2 = r2 > 31308e-7 ? 1.055 * r2 ** (1 / 2.4) - 0.055 : r2 * 12.92;
+      g2 = g2 > 31308e-7 ? 1.055 * g2 ** (1 / 2.4) - 0.055 : g2 * 12.92;
+      b2 = b2 > 31308e-7 ? 1.055 * b2 ** (1 / 2.4) - 0.055 : b2 * 12.92;
+      r2 = Math.min(Math.max(0, r2), 1);
+      g2 = Math.min(Math.max(0, g2), 1);
+      b2 = Math.min(Math.max(0, b2), 1);
+      return [r2 * 255, g2 * 255, b2 * 255];
     };
     convert.xyz.lab = function(xyz) {
       let x = xyz[0];
@@ -1023,19 +1023,19 @@ var require_conversions = __commonJS({
       z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
       const l = 116 * y - 16;
       const a = 500 * (x - y);
-      const b = 200 * (y - z);
-      return [l, a, b];
+      const b2 = 200 * (y - z);
+      return [l, a, b2];
     };
     convert.lab.xyz = function(lab) {
       const l = lab[0];
       const a = lab[1];
-      const b = lab[2];
+      const b2 = lab[2];
       let x;
       let y;
       let z;
       y = (l + 16) / 116;
       x = a / 500 + y;
-      z = y - b / 200;
+      z = y - b2 / 200;
       const y2 = y ** 3;
       const x2 = x ** 3;
       const z2 = z ** 3;
@@ -1050,14 +1050,14 @@ var require_conversions = __commonJS({
     convert.lab.lch = function(lab) {
       const l = lab[0];
       const a = lab[1];
-      const b = lab[2];
+      const b2 = lab[2];
       let h;
-      const hr = Math.atan2(b, a);
+      const hr = Math.atan2(b2, a);
       h = hr * 360 / 2 / Math.PI;
       if (h < 0) {
         h += 360;
       }
-      const c = Math.sqrt(a * a + b * b);
+      const c = Math.sqrt(a * a + b2 * b2);
       return [l, c, h];
     };
     convert.lch.lab = function(lch) {
@@ -1066,17 +1066,17 @@ var require_conversions = __commonJS({
       const h = lch[2];
       const hr = h / 360 * 2 * Math.PI;
       const a = c * Math.cos(hr);
-      const b = c * Math.sin(hr);
-      return [l, a, b];
+      const b2 = c * Math.sin(hr);
+      return [l, a, b2];
     };
     convert.rgb.ansi16 = function(args, saturation = null) {
-      const [r, g, b] = args;
+      const [r2, g2, b2] = args;
       let value = saturation === null ? convert.rgb.hsv(args)[2] : saturation;
       value = Math.round(value / 50);
       if (value === 0) {
         return 30;
       }
-      let ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
+      let ansi = 30 + (Math.round(b2 / 255) << 2 | Math.round(g2 / 255) << 1 | Math.round(r2 / 255));
       if (value === 2) {
         ansi += 60;
       }
@@ -1086,19 +1086,19 @@ var require_conversions = __commonJS({
       return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
     };
     convert.rgb.ansi256 = function(args) {
-      const r = args[0];
-      const g = args[1];
-      const b = args[2];
-      if (r === g && g === b) {
-        if (r < 8) {
+      const r2 = args[0];
+      const g2 = args[1];
+      const b2 = args[2];
+      if (r2 === g2 && g2 === b2) {
+        if (r2 < 8) {
           return 16;
         }
-        if (r > 248) {
+        if (r2 > 248) {
           return 231;
         }
-        return Math.round((r - 8) / 247 * 24) + 232;
+        return Math.round((r2 - 8) / 247 * 24) + 232;
       }
-      const ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
+      const ansi = 16 + 36 * Math.round(r2 / 255 * 5) + 6 * Math.round(g2 / 255 * 5) + Math.round(b2 / 255 * 5);
       return ansi;
     };
     convert.ansi16.rgb = function(args) {
@@ -1111,10 +1111,10 @@ var require_conversions = __commonJS({
         return [color, color, color];
       }
       const mult = (~~(args > 50) + 1) * 0.5;
-      const r = (color & 1) * mult * 255;
-      const g = (color >> 1 & 1) * mult * 255;
-      const b = (color >> 2 & 1) * mult * 255;
-      return [r, g, b];
+      const r2 = (color & 1) * mult * 255;
+      const g2 = (color >> 1 & 1) * mult * 255;
+      const b2 = (color >> 2 & 1) * mult * 255;
+      return [r2, g2, b2];
     };
     convert.ansi256.rgb = function(args) {
       if (args >= 232) {
@@ -1123,10 +1123,10 @@ var require_conversions = __commonJS({
       }
       args -= 16;
       let rem;
-      const r = Math.floor(args / 36) / 5 * 255;
-      const g = Math.floor((rem = args % 36) / 6) / 5 * 255;
-      const b = rem % 6 / 5 * 255;
-      return [r, g, b];
+      const r2 = Math.floor(args / 36) / 5 * 255;
+      const g2 = Math.floor((rem = args % 36) / 6) / 5 * 255;
+      const b2 = rem % 6 / 5 * 255;
+      return [r2, g2, b2];
     };
     convert.rgb.hex = function(args) {
       const integer = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
@@ -1145,17 +1145,17 @@ var require_conversions = __commonJS({
         }).join("");
       }
       const integer = parseInt(colorString, 16);
-      const r = integer >> 16 & 255;
-      const g = integer >> 8 & 255;
-      const b = integer & 255;
-      return [r, g, b];
+      const r2 = integer >> 16 & 255;
+      const g2 = integer >> 8 & 255;
+      const b2 = integer & 255;
+      return [r2, g2, b2];
     };
     convert.rgb.hcg = function(rgb) {
-      const r = rgb[0] / 255;
-      const g = rgb[1] / 255;
-      const b = rgb[2] / 255;
-      const max2 = Math.max(Math.max(r, g), b);
-      const min2 = Math.min(Math.min(r, g), b);
+      const r2 = rgb[0] / 255;
+      const g2 = rgb[1] / 255;
+      const b2 = rgb[2] / 255;
+      const max2 = Math.max(Math.max(r2, g2), b2);
+      const min2 = Math.min(Math.min(r2, g2), b2);
       const chroma = max2 - min2;
       let grayscale;
       let hue;
@@ -1166,12 +1166,12 @@ var require_conversions = __commonJS({
       }
       if (chroma <= 0) {
         hue = 0;
-      } else if (max2 === r) {
-        hue = (g - b) / chroma % 6;
-      } else if (max2 === g) {
-        hue = 2 + (b - r) / chroma;
+      } else if (max2 === r2) {
+        hue = (g2 - b2) / chroma % 6;
+      } else if (max2 === g2) {
+        hue = 2 + (b2 - r2) / chroma;
       } else {
-        hue = 4 + (r - g) / chroma;
+        hue = 4 + (r2 - g2) / chroma;
       }
       hue /= 6;
       hue %= 1;
@@ -1181,33 +1181,33 @@ var require_conversions = __commonJS({
       const s = hsl[1] / 100;
       const l = hsl[2] / 100;
       const c = l < 0.5 ? 2 * s * l : 2 * s * (1 - l);
-      let f = 0;
+      let f2 = 0;
       if (c < 1) {
-        f = (l - 0.5 * c) / (1 - c);
+        f2 = (l - 0.5 * c) / (1 - c);
       }
-      return [hsl[0], c * 100, f * 100];
+      return [hsl[0], c * 100, f2 * 100];
     };
     convert.hsv.hcg = function(hsv) {
       const s = hsv[1] / 100;
       const v = hsv[2] / 100;
       const c = s * v;
-      let f = 0;
+      let f2 = 0;
       if (c < 1) {
-        f = (v - c) / (1 - c);
+        f2 = (v - c) / (1 - c);
       }
-      return [hsv[0], c * 100, f * 100];
+      return [hsv[0], c * 100, f2 * 100];
     };
     convert.hcg.rgb = function(hcg) {
       const h = hcg[0] / 360;
       const c = hcg[1] / 100;
-      const g = hcg[2] / 100;
+      const g2 = hcg[2] / 100;
       if (c === 0) {
-        return [g * 255, g * 255, g * 255];
+        return [g2 * 255, g2 * 255, g2 * 255];
       }
       const pure = [0, 0, 0];
       const hi = h % 1 * 6;
       const v = hi % 1;
-      const w = 1 - v;
+      const w2 = 1 - v;
       let mg = 0;
       switch (Math.floor(hi)) {
         case 0:
@@ -1216,7 +1216,7 @@ var require_conversions = __commonJS({
           pure[2] = 0;
           break;
         case 1:
-          pure[0] = w;
+          pure[0] = w2;
           pure[1] = 1;
           pure[2] = 0;
           break;
@@ -1227,7 +1227,7 @@ var require_conversions = __commonJS({
           break;
         case 3:
           pure[0] = 0;
-          pure[1] = w;
+          pure[1] = w2;
           pure[2] = 1;
           break;
         case 4:
@@ -1238,9 +1238,9 @@ var require_conversions = __commonJS({
         default:
           pure[0] = 1;
           pure[1] = 0;
-          pure[2] = w;
+          pure[2] = w2;
       }
-      mg = (1 - c) * g;
+      mg = (1 - c) * g2;
       return [
         (c * pure[0] + mg) * 255,
         (c * pure[1] + mg) * 255,
@@ -1249,18 +1249,18 @@ var require_conversions = __commonJS({
     };
     convert.hcg.hsv = function(hcg) {
       const c = hcg[1] / 100;
-      const g = hcg[2] / 100;
-      const v = c + g * (1 - c);
-      let f = 0;
+      const g2 = hcg[2] / 100;
+      const v = c + g2 * (1 - c);
+      let f2 = 0;
       if (v > 0) {
-        f = c / v;
+        f2 = c / v;
       }
-      return [hcg[0], f * 100, v * 100];
+      return [hcg[0], f2 * 100, v * 100];
     };
     convert.hcg.hsl = function(hcg) {
       const c = hcg[1] / 100;
-      const g = hcg[2] / 100;
-      const l = g * (1 - c) + 0.5 * c;
+      const g2 = hcg[2] / 100;
+      const l = g2 * (1 - c) + 0.5 * c;
       let s = 0;
       if (l > 0 && l < 0.5) {
         s = c / (2 * l);
@@ -1271,20 +1271,20 @@ var require_conversions = __commonJS({
     };
     convert.hcg.hwb = function(hcg) {
       const c = hcg[1] / 100;
-      const g = hcg[2] / 100;
-      const v = c + g * (1 - c);
+      const g2 = hcg[2] / 100;
+      const v = c + g2 * (1 - c);
       return [hcg[0], (v - c) * 100, (1 - v) * 100];
     };
     convert.hwb.hcg = function(hwb) {
-      const w = hwb[1] / 100;
-      const b = hwb[2] / 100;
-      const v = 1 - b;
-      const c = v - w;
-      let g = 0;
+      const w2 = hwb[1] / 100;
+      const b2 = hwb[2] / 100;
+      const v = 1 - b2;
+      const c = v - w2;
+      let g2 = 0;
       if (c < 1) {
-        g = (v - c) / (1 - c);
+        g2 = (v - c) / (1 - c);
       }
-      return [hwb[0], c * 100, g * 100];
+      return [hwb[0], c * 100, g2 * 100];
     };
     convert.apple.rgb = function(apple) {
       return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
@@ -1472,8 +1472,8 @@ var require_ansi_styles = __commonJS({
       const rgb = fn(...args);
       return `\x1B[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
     }, "wrapAnsi16m");
-    var ansi2ansi = /* @__PURE__ */ __name((n) => n, "ansi2ansi");
-    var rgb2rgb = /* @__PURE__ */ __name((r, g, b) => [r, g, b], "rgb2rgb");
+    var ansi2ansi = /* @__PURE__ */ __name((n2) => n2, "ansi2ansi");
+    var rgb2rgb = /* @__PURE__ */ __name((r2, g2, b2) => [r2, g2, b2], "rgb2rgb");
     var setLazyProperty = /* @__PURE__ */ __name((object, property, get) => {
       Object.defineProperty(object, property, {
         get: () => {
@@ -1794,7 +1794,7 @@ var require_templates = __commonJS({
         if (!Number.isNaN(number)) {
           results.push(number);
         } else if (matches = chunk.match(STRING_REGEX)) {
-          results.push(matches[2].replace(ESCAPE_REGEX, (m, escape, character) => escape ? unescape(escape) : character));
+          results.push(matches[2].replace(ESCAPE_REGEX, (m2, escape, character) => escape ? unescape(escape) : character));
         } else {
           throw new Error(`Invalid Chalk template style argument: ${chunk} (in style '${name}')`);
         }
@@ -1842,7 +1842,7 @@ var require_templates = __commonJS({
       const styles = [];
       const chunks = [];
       let chunk = [];
-      temporary.replace(TEMPLATE_REGEX, (m, escapeCharacter, inverse, style, close, character) => {
+      temporary.replace(TEMPLATE_REGEX, (m2, escapeCharacter, inverse, style, close, character) => {
         if (escapeCharacter) {
           chunk.push(unescape(escapeCharacter));
         } else if (style) {
@@ -2051,136 +2051,15 @@ var require_source = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js
-var require_indent_string = __commonJS({
-  "../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js"(exports, module2) {
-    "use strict";
-    module2.exports = (string, count2 = 1, options) => {
-      options = {
-        indent: " ",
-        includeEmptyLines: false,
-        ...options
-      };
-      if (typeof string !== "string") {
-        throw new TypeError(
-          `Expected \`input\` to be a \`string\`, got \`${typeof string}\``
-        );
-      }
-      if (typeof count2 !== "number") {
-        throw new TypeError(
-          `Expected \`count\` to be a \`number\`, got \`${typeof count2}\``
-        );
-      }
-      if (typeof options.indent !== "string") {
-        throw new TypeError(
-          `Expected \`options.indent\` to be a \`string\`, got \`${typeof options.indent}\``
-        );
-      }
-      if (count2 === 0) {
-        return string;
-      }
-      const regex = options.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
-      return string.replace(regex, options.indent.repeat(count2));
-    };
-  }
-});
-
-// ../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js
-var require_js_levenshtein = __commonJS({
-  "../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js"(exports, module2) {
-    "use strict";
-    module2.exports = function() {
-      function _min(d0, d1, d2, bx, ay) {
-        return d0 < d1 || d2 < d1 ? d0 > d2 ? d2 + 1 : d0 + 1 : bx === ay ? d1 : d1 + 1;
-      }
-      __name(_min, "_min");
-      return function(a, b) {
-        if (a === b) {
-          return 0;
-        }
-        if (a.length > b.length) {
-          var tmp = a;
-          a = b;
-          b = tmp;
-        }
-        var la = a.length;
-        var lb = b.length;
-        while (la > 0 && a.charCodeAt(la - 1) === b.charCodeAt(lb - 1)) {
-          la--;
-          lb--;
-        }
-        var offset = 0;
-        while (offset < la && a.charCodeAt(offset) === b.charCodeAt(offset)) {
-          offset++;
-        }
-        la -= offset;
-        lb -= offset;
-        if (la === 0 || lb < 3) {
-          return lb;
-        }
-        var x = 0;
-        var y;
-        var d0;
-        var d1;
-        var d2;
-        var d3;
-        var dd;
-        var dy;
-        var ay;
-        var bx0;
-        var bx1;
-        var bx2;
-        var bx3;
-        var vector = [];
-        for (y = 0; y < la; y++) {
-          vector.push(y + 1);
-          vector.push(a.charCodeAt(offset + y));
-        }
-        var len = vector.length - 1;
-        for (; x < lb - 3; ) {
-          bx0 = b.charCodeAt(offset + (d0 = x));
-          bx1 = b.charCodeAt(offset + (d1 = x + 1));
-          bx2 = b.charCodeAt(offset + (d2 = x + 2));
-          bx3 = b.charCodeAt(offset + (d3 = x + 3));
-          dd = x += 4;
-          for (y = 0; y < len; y += 2) {
-            dy = vector[y];
-            ay = vector[y + 1];
-            d0 = _min(dy, d0, d1, bx0, ay);
-            d1 = _min(d0, d1, d2, bx1, ay);
-            d2 = _min(d1, d2, d3, bx2, ay);
-            dd = _min(d2, d3, dd, bx3, ay);
-            vector[y] = dd;
-            d3 = d2;
-            d2 = d1;
-            d1 = d0;
-            d0 = dy;
-          }
-        }
-        for (; x < lb; ) {
-          bx0 = b.charCodeAt(offset + (d0 = x));
-          dd = ++x;
-          for (y = 0; y < len; y += 2) {
-            dy = vector[y];
-            vector[y] = dd = _min(dy, d0, dd, bx0, vector[y + 1]);
-            d0 = dy;
-          }
-        }
-        return dd;
-      };
-    }();
-  }
-});
-
 // ../../node_modules/.pnpm/ms@2.1.2/node_modules/ms/index.js
 var require_ms = __commonJS({
   "../../node_modules/.pnpm/ms@2.1.2/node_modules/ms/index.js"(exports, module2) {
     var s = 1e3;
-    var m = s * 60;
-    var h = m * 60;
-    var d = h * 24;
-    var w = d * 7;
-    var y = d * 365.25;
+    var m2 = s * 60;
+    var h = m2 * 60;
+    var d2 = h * 24;
+    var w2 = d2 * 7;
+    var y = d2 * 365.25;
     module2.exports = function(val, options) {
       options = options || {};
       var type = typeof val;
@@ -2204,7 +2083,7 @@ var require_ms = __commonJS({
       if (!match) {
         return;
       }
-      var n = parseFloat(match[1]);
+      var n2 = parseFloat(match[1]);
       var type = (match[2] || "ms").toLowerCase();
       switch (type) {
         case "years":
@@ -2212,39 +2091,39 @@ var require_ms = __commonJS({
         case "yrs":
         case "yr":
         case "y":
-          return n * y;
+          return n2 * y;
         case "weeks":
         case "week":
         case "w":
-          return n * w;
+          return n2 * w2;
         case "days":
         case "day":
         case "d":
-          return n * d;
+          return n2 * d2;
         case "hours":
         case "hour":
         case "hrs":
         case "hr":
         case "h":
-          return n * h;
+          return n2 * h;
         case "minutes":
         case "minute":
         case "mins":
         case "min":
         case "m":
-          return n * m;
+          return n2 * m2;
         case "seconds":
         case "second":
         case "secs":
         case "sec":
         case "s":
-          return n * s;
+          return n2 * s;
         case "milliseconds":
         case "millisecond":
         case "msecs":
         case "msec":
         case "ms":
-          return n;
+          return n2;
         default:
           return void 0;
       }
@@ -2252,14 +2131,14 @@ var require_ms = __commonJS({
     __name(parse2, "parse");
     function fmtShort(ms) {
       var msAbs = Math.abs(ms);
-      if (msAbs >= d) {
-        return Math.round(ms / d) + "d";
+      if (msAbs >= d2) {
+        return Math.round(ms / d2) + "d";
       }
       if (msAbs >= h) {
         return Math.round(ms / h) + "h";
       }
-      if (msAbs >= m) {
-        return Math.round(ms / m) + "m";
+      if (msAbs >= m2) {
+        return Math.round(ms / m2) + "m";
       }
       if (msAbs >= s) {
         return Math.round(ms / s) + "s";
@@ -2269,14 +2148,14 @@ var require_ms = __commonJS({
     __name(fmtShort, "fmtShort");
     function fmtLong(ms) {
       var msAbs = Math.abs(ms);
-      if (msAbs >= d) {
-        return plural(ms, msAbs, d, "day");
+      if (msAbs >= d2) {
+        return plural(ms, msAbs, d2, "day");
       }
       if (msAbs >= h) {
         return plural(ms, msAbs, h, "hour");
       }
-      if (msAbs >= m) {
-        return plural(ms, msAbs, m, "minute");
+      if (msAbs >= m2) {
+        return plural(ms, msAbs, m2, "minute");
       }
       if (msAbs >= s) {
         return plural(ms, msAbs, s, "second");
@@ -2284,9 +2163,9 @@ var require_ms = __commonJS({
       return ms + " ms";
     }
     __name(fmtLong, "fmtLong");
-    function plural(ms, msAbs, n, name) {
-      var isPlural = msAbs >= n * 1.5;
-      return Math.round(ms / n) + " " + name + (isPlural ? "s" : "");
+    function plural(ms, msAbs, n2, name) {
+      var isPlural = msAbs >= n2 * 1.5;
+      return Math.round(ms / n2) + " " + name + (isPlural ? "s" : "");
     }
     __name(plural, "plural");
   }
@@ -2606,15 +2485,15 @@ var require_browser = __commonJS({
     }
     __name(save, "save");
     function load() {
-      let r;
+      let r2;
       try {
-        r = exports.storage.getItem("debug");
+        r2 = exports.storage.getItem("debug");
       } catch (error2) {
       }
-      if (!r && typeof process !== "undefined" && "env" in process) {
-        r = process.env.DEBUG;
+      if (!r2 && typeof process !== "undefined" && "env" in process) {
+        r2 = process.env.DEBUG;
       }
-      return r;
+      return r2;
     }
     __name(load, "load");
     function localstorage() {
@@ -2642,7 +2521,7 @@ var require_node = __commonJS({
     var tty = require("tty");
     var util2 = require("util");
     exports.init = init;
-    exports.log = log4;
+    exports.log = log3;
     exports.formatArgs = formatArgs;
     exports.save = save;
     exports.load = load;
@@ -2780,10 +2659,10 @@ var require_node = __commonJS({
       return new Date().toISOString() + " ";
     }
     __name(getDate, "getDate");
-    function log4(...args) {
+    function log3(...args) {
       return process.stderr.write(util2.format(...args) + "\n");
     }
-    __name(log4, "log");
+    __name(log3, "log");
     function save(namespaces) {
       if (namespaces) {
         process.env.DEBUG = namespaces;
@@ -2844,8 +2723,8 @@ var require_windows = __commonJS({
         return true;
       }
       for (var i = 0; i < pathext.length; i++) {
-        var p = pathext[i].toLowerCase();
-        if (p && path7.substr(-p.length).toLowerCase() === p) {
+        var p2 = pathext[i].toLowerCase();
+        if (p2 && path7.substr(-p2.length).toLowerCase() === p2) {
           return true;
         }
       }
@@ -2899,10 +2778,10 @@ var require_mode = __commonJS({
       var myUid = options.uid !== void 0 ? options.uid : process.getuid && process.getuid();
       var myGid = options.gid !== void 0 ? options.gid : process.getgid && process.getgid();
       var u = parseInt("100", 8);
-      var g = parseInt("010", 8);
-      var o = parseInt("001", 8);
-      var ug = u | g;
-      var ret = mod2 & o || mod2 & g && gid === myGid || mod2 & u && uid === myUid || mod2 & ug && myUid === 0;
+      var g2 = parseInt("010", 8);
+      var o2 = parseInt("001", 8);
+      var ug = u | g2;
+      var ret = mod2 & o2 || mod2 & g2 && gid === myGid || mod2 & u && uid === myUid || mod2 & ug && myUid === 0;
       return ret;
     }
     __name(checkMode, "checkMode");
@@ -3007,21 +2886,21 @@ var require_which = __commonJS({
         const ppRaw = pathEnv[i];
         const pathPart = /^".*"$/.test(ppRaw) ? ppRaw.slice(1, -1) : ppRaw;
         const pCmd = path7.join(pathPart, cmd);
-        const p = !pathPart && /^\.[\\\/]/.test(cmd) ? cmd.slice(0, 2) + pCmd : pCmd;
-        resolve(subStep(p, i, 0));
+        const p2 = !pathPart && /^\.[\\\/]/.test(cmd) ? cmd.slice(0, 2) + pCmd : pCmd;
+        resolve(subStep(p2, i, 0));
       }), "step");
-      const subStep = /* @__PURE__ */ __name((p, i, ii) => new Promise((resolve, reject) => {
+      const subStep = /* @__PURE__ */ __name((p2, i, ii) => new Promise((resolve, reject) => {
         if (ii === pathExt.length)
           return resolve(step(i + 1));
         const ext = pathExt[ii];
-        isexe(p + ext, { pathExt: pathExtExe }, (er, is) => {
+        isexe(p2 + ext, { pathExt: pathExtExe }, (er, is) => {
           if (!er && is) {
             if (opt.all)
-              found.push(p + ext);
+              found.push(p2 + ext);
             else
-              return resolve(p + ext);
+              return resolve(p2 + ext);
           }
-          return resolve(subStep(p, i, ii + 1));
+          return resolve(subStep(p2, i, ii + 1));
         });
       }), "subStep");
       return cb ? step(0).then((res) => cb(null, res), cb) : step(0);
@@ -3034,9 +2913,9 @@ var require_which = __commonJS({
         const ppRaw = pathEnv[i];
         const pathPart = /^".*"$/.test(ppRaw) ? ppRaw.slice(1, -1) : ppRaw;
         const pCmd = path7.join(pathPart, cmd);
-        const p = !pathPart && /^\.[\\\/]/.test(cmd) ? cmd.slice(0, 2) + pCmd : pCmd;
+        const p2 = !pathPart && /^\.[\\\/]/.test(cmd) ? cmd.slice(0, 2) + pCmd : pCmd;
         for (let j = 0; j < pathExt.length; j++) {
-          const cur = p + pathExt[j];
+          const cur = p2 + pathExt[j];
           try {
             const is = isexe.sync(cur, { pathExt: pathExtExe });
             if (is) {
@@ -3101,7 +2980,7 @@ var require_resolveCommand = __commonJS({
           path: env2[getPathKey({ env: env2 })],
           pathExt: withoutPathExt ? path7.delimiter : void 0
         });
-      } catch (e) {
+      } catch (e2) {
       } finally {
         if (shouldSwitchCwd) {
           process.chdir(cwd);
@@ -3190,7 +3069,7 @@ var require_readShebang = __commonJS({
         fd = fs11.openSync(command, "r");
         fs11.readSync(fd, buffer, 0, size, 0);
         fs11.closeSync(fd);
-      } catch (e) {
+      } catch (e2) {
       }
       return shebangCommand(buffer.toString());
     }
@@ -3279,19 +3158,19 @@ var require_enoent = __commonJS({
       });
     }
     __name(notFoundError, "notFoundError");
-    function hookChildProcess(cp, parsed) {
+    function hookChildProcess(cp2, parsed) {
       if (!isWin) {
         return;
       }
-      const originalEmit = cp.emit;
-      cp.emit = function(name, arg1) {
+      const originalEmit = cp2.emit;
+      cp2.emit = function(name, arg1) {
         if (name === "exit") {
           const err = verifyENOENT(arg1, parsed, "spawn");
           if (err) {
-            return originalEmit.call(cp, "error", err);
+            return originalEmit.call(cp2, "error", err);
           }
         }
-        return originalEmit.apply(cp, arguments);
+        return originalEmit.apply(cp2, arguments);
       };
     }
     __name(hookChildProcess, "hookChildProcess");
@@ -3322,19 +3201,19 @@ var require_enoent = __commonJS({
 var require_cross_spawn = __commonJS({
   "../../node_modules/.pnpm/cross-spawn@7.0.3/node_modules/cross-spawn/index.js"(exports, module2) {
     "use strict";
-    var cp = require("child_process");
+    var cp2 = require("child_process");
     var parse2 = require_parse();
     var enoent = require_enoent();
     function spawn2(command, args, options) {
       const parsed = parse2(command, args, options);
-      const spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
+      const spawned = cp2.spawn(parsed.command, parsed.args, parsed.options);
       enoent.hookChildProcess(spawned, parsed);
       return spawned;
     }
     __name(spawn2, "spawn");
     function spawnSync(command, args, options) {
       const parsed = parse2(command, args, options);
-      const result = cp.spawnSync(parsed.command, parsed.args, parsed.options);
+      const result = cp2.spawnSync(parsed.command, parsed.args, parsed.options);
       result.error = result.error || enoent.verifyENOENTSync(result.status, parsed);
       return result;
     }
@@ -3344,49 +3223,6 @@ var require_cross_spawn = __commonJS({
     module2.exports.sync = spawnSync;
     module2.exports._parse = parse2;
     module2.exports._enoent = enoent;
-  }
-});
-
-// ../../node_modules/.pnpm/@prisma+engines-version@4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452/node_modules/@prisma/engines-version/package.json
-var require_package = __commonJS({
-  "../../node_modules/.pnpm/@prisma+engines-version@4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452/node_modules/@prisma/engines-version/package.json"(exports, module2) {
-    module2.exports = {
-      name: "@prisma/engines-version",
-      version: "4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452",
-      main: "index.js",
-      types: "index.d.ts",
-      license: "Apache-2.0",
-      author: "Tim Suchanek <suchanek@prisma.io>",
-      prisma: {
-        enginesVersion: "0362da9eebca54d94c8ef5edd3b2e90af99ba452"
-      },
-      repository: {
-        type: "git",
-        url: "https://github.com/prisma/engines-wrapper.git",
-        directory: "packages/engines-version"
-      },
-      devDependencies: {
-        "@types/node": "16.11.64",
-        typescript: "4.8.4"
-      },
-      files: [
-        "index.js",
-        "index.d.ts"
-      ],
-      scripts: {
-        build: "tsc -d"
-      }
-    };
-  }
-});
-
-// ../../node_modules/.pnpm/@prisma+engines-version@4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452/node_modules/@prisma/engines-version/index.js
-var require_engines_version = __commonJS({
-  "../../node_modules/.pnpm/@prisma+engines-version@4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452/node_modules/@prisma/engines-version/index.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.enginesVersion = void 0;
-    exports.enginesVersion = require_package().prisma.enginesVersion;
   }
 });
 
@@ -4228,11 +4064,11 @@ var require_kill = __commonJS({
         return;
       }
       const timeout = getForceKillAfterTimeout(options);
-      const t = setTimeout(() => {
+      const t2 = setTimeout(() => {
         kill("SIGKILL");
       }, timeout);
-      if (t.unref) {
-        t.unref();
+      if (t2.unref) {
+        t2.unref();
       }
     }, "setKillTimeout");
     var shouldForceKill = /* @__PURE__ */ __name((signal, { forceKillAfterTimeout }, killResult) => {
@@ -4250,10 +4086,10 @@ var require_kill = __commonJS({
       }
       return forceKillAfterTimeout;
     }, "getForceKillAfterTimeout");
-    var spawnedCancel = /* @__PURE__ */ __name((spawned, context5) => {
+    var spawnedCancel = /* @__PURE__ */ __name((spawned, context3) => {
       const killResult = spawned.kill();
       if (killResult) {
-        context5.isCanceled = true;
+        context3.isCanceled = true;
       }
     }, "spawnedCancel");
     var timeoutKill = /* @__PURE__ */ __name((spawned, signal, reject) => {
@@ -4709,9 +4545,9 @@ var require_execa = __commonJS({
       const spawnedPromise = getSpawnedPromise(spawned);
       const timedPromise = setupTimeout(spawned, parsed.options, spawnedPromise);
       const processDone = setExitHandler(spawned, parsed.options, timedPromise);
-      const context5 = { isCanceled: false };
+      const context3 = { isCanceled: false };
       spawned.kill = spawnedKill.bind(null, spawned.kill.bind(spawned));
-      spawned.cancel = spawnedCancel.bind(null, spawned, context5);
+      spawned.cancel = spawnedCancel.bind(null, spawned, context3);
       const handlePromise = /* @__PURE__ */ __name(async () => {
         const [{ error: error2, exitCode, signal, timedOut }, stdoutResult, stderrResult, allResult] = await getSpawnedResult(spawned, parsed.options, processDone);
         const stdout = handleOutput(parsed.options, stdoutResult);
@@ -4729,7 +4565,7 @@ var require_execa = __commonJS({
             escapedCommand,
             parsed,
             timedOut,
-            isCanceled: context5.isCanceled,
+            isCanceled: context3.isCanceled,
             killed: spawned.killed
           });
           if (!parsed.options.reject) {
@@ -4847,6 +4683,377 @@ var require_execa = __commonJS({
         }
       );
     };
+  }
+});
+
+// ../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/package.json
+var require_package = __commonJS({
+  "../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/package.json"(exports, module2) {
+    module2.exports = {
+      name: "dotenv",
+      version: "16.0.3",
+      description: "Loads environment variables from .env file",
+      main: "lib/main.js",
+      types: "lib/main.d.ts",
+      exports: {
+        ".": {
+          require: "./lib/main.js",
+          types: "./lib/main.d.ts",
+          default: "./lib/main.js"
+        },
+        "./config": "./config.js",
+        "./config.js": "./config.js",
+        "./lib/env-options": "./lib/env-options.js",
+        "./lib/env-options.js": "./lib/env-options.js",
+        "./lib/cli-options": "./lib/cli-options.js",
+        "./lib/cli-options.js": "./lib/cli-options.js",
+        "./package.json": "./package.json"
+      },
+      scripts: {
+        "dts-check": "tsc --project tests/types/tsconfig.json",
+        lint: "standard",
+        "lint-readme": "standard-markdown",
+        pretest: "npm run lint && npm run dts-check",
+        test: "tap tests/*.js --100 -Rspec",
+        prerelease: "npm test",
+        release: "standard-version"
+      },
+      repository: {
+        type: "git",
+        url: "git://github.com/motdotla/dotenv.git"
+      },
+      keywords: [
+        "dotenv",
+        "env",
+        ".env",
+        "environment",
+        "variables",
+        "config",
+        "settings"
+      ],
+      readmeFilename: "README.md",
+      license: "BSD-2-Clause",
+      devDependencies: {
+        "@types/node": "^17.0.9",
+        decache: "^4.6.1",
+        dtslint: "^3.7.0",
+        sinon: "^12.0.1",
+        standard: "^16.0.4",
+        "standard-markdown": "^7.1.0",
+        "standard-version": "^9.3.2",
+        tap: "^15.1.6",
+        tar: "^6.1.11",
+        typescript: "^4.5.4"
+      },
+      engines: {
+        node: ">=12"
+      }
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/lib/main.js
+var require_main2 = __commonJS({
+  "../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/lib/main.js"(exports, module2) {
+    var fs11 = require("fs");
+    var path7 = require("path");
+    var os3 = require("os");
+    var packageJson = require_package();
+    var version = packageJson.version;
+    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
+    function parse2(src) {
+      const obj = {};
+      let lines = src.toString();
+      lines = lines.replace(/\r\n?/mg, "\n");
+      let match;
+      while ((match = LINE.exec(lines)) != null) {
+        const key = match[1];
+        let value = match[2] || "";
+        value = value.trim();
+        const maybeQuote = value[0];
+        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
+        if (maybeQuote === '"') {
+          value = value.replace(/\\n/g, "\n");
+          value = value.replace(/\\r/g, "\r");
+        }
+        obj[key] = value;
+      }
+      return obj;
+    }
+    __name(parse2, "parse");
+    function _log(message) {
+      console.log(`[dotenv@${version}][DEBUG] ${message}`);
+    }
+    __name(_log, "_log");
+    function _resolveHome(envPath) {
+      return envPath[0] === "~" ? path7.join(os3.homedir(), envPath.slice(1)) : envPath;
+    }
+    __name(_resolveHome, "_resolveHome");
+    function config2(options) {
+      let dotenvPath = path7.resolve(process.cwd(), ".env");
+      let encoding = "utf8";
+      const debug13 = Boolean(options && options.debug);
+      const override = Boolean(options && options.override);
+      if (options) {
+        if (options.path != null) {
+          dotenvPath = _resolveHome(options.path);
+        }
+        if (options.encoding != null) {
+          encoding = options.encoding;
+        }
+      }
+      try {
+        const parsed = DotenvModule.parse(fs11.readFileSync(dotenvPath, { encoding }));
+        Object.keys(parsed).forEach(function(key) {
+          if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
+            process.env[key] = parsed[key];
+          } else {
+            if (override === true) {
+              process.env[key] = parsed[key];
+            }
+            if (debug13) {
+              if (override === true) {
+                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
+              } else {
+                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
+              }
+            }
+          }
+        });
+        return { parsed };
+      } catch (e2) {
+        if (debug13) {
+          _log(`Failed to load ${dotenvPath} ${e2.message}`);
+        }
+        return { error: e2 };
+      }
+    }
+    __name(config2, "config");
+    var DotenvModule = {
+      config: config2,
+      parse: parse2
+    };
+    module2.exports.config = DotenvModule.config;
+    module2.exports.parse = DotenvModule.parse;
+    module2.exports = DotenvModule;
+  }
+});
+
+// ../../node_modules/.pnpm/arg@5.0.2/node_modules/arg/index.js
+var require_arg = __commonJS({
+  "../../node_modules/.pnpm/arg@5.0.2/node_modules/arg/index.js"(exports, module2) {
+    var flagSymbol = Symbol("arg flag");
+    var ArgError = class extends Error {
+      constructor(msg, code) {
+        super(msg);
+        this.name = "ArgError";
+        this.code = code;
+        Object.setPrototypeOf(this, ArgError.prototype);
+      }
+    };
+    __name(ArgError, "ArgError");
+    function arg2(opts, {
+      argv = process.argv.slice(2),
+      permissive = false,
+      stopAtPositional = false
+    } = {}) {
+      if (!opts) {
+        throw new ArgError(
+          "argument specification object is required",
+          "ARG_CONFIG_NO_SPEC"
+        );
+      }
+      const result = { _: [] };
+      const aliases = {};
+      const handlers = {};
+      for (const key of Object.keys(opts)) {
+        if (!key) {
+          throw new ArgError(
+            "argument key cannot be an empty string",
+            "ARG_CONFIG_EMPTY_KEY"
+          );
+        }
+        if (key[0] !== "-") {
+          throw new ArgError(
+            `argument key must start with '-' but found: '${key}'`,
+            "ARG_CONFIG_NONOPT_KEY"
+          );
+        }
+        if (key.length === 1) {
+          throw new ArgError(
+            `argument key must have a name; singular '-' keys are not allowed: ${key}`,
+            "ARG_CONFIG_NONAME_KEY"
+          );
+        }
+        if (typeof opts[key] === "string") {
+          aliases[key] = opts[key];
+          continue;
+        }
+        let type = opts[key];
+        let isFlag = false;
+        if (Array.isArray(type) && type.length === 1 && typeof type[0] === "function") {
+          const [fn] = type;
+          type = /* @__PURE__ */ __name((value, name, prev = []) => {
+            prev.push(fn(value, name, prev[prev.length - 1]));
+            return prev;
+          }, "type");
+          isFlag = fn === Boolean || fn[flagSymbol] === true;
+        } else if (typeof type === "function") {
+          isFlag = type === Boolean || type[flagSymbol] === true;
+        } else {
+          throw new ArgError(
+            `type missing or not a function or valid array type: ${key}`,
+            "ARG_CONFIG_VAD_TYPE"
+          );
+        }
+        if (key[1] !== "-" && key.length > 2) {
+          throw new ArgError(
+            `short argument keys (with a single hyphen) must have only one character: ${key}`,
+            "ARG_CONFIG_SHORTOPT_TOOLONG"
+          );
+        }
+        handlers[key] = [type, isFlag];
+      }
+      for (let i = 0, len = argv.length; i < len; i++) {
+        const wholeArg = argv[i];
+        if (stopAtPositional && result._.length > 0) {
+          result._ = result._.concat(argv.slice(i));
+          break;
+        }
+        if (wholeArg === "--") {
+          result._ = result._.concat(argv.slice(i + 1));
+          break;
+        }
+        if (wholeArg.length > 1 && wholeArg[0] === "-") {
+          const separatedArguments = wholeArg[1] === "-" || wholeArg.length === 2 ? [wholeArg] : wholeArg.slice(1).split("").map((a) => `-${a}`);
+          for (let j = 0; j < separatedArguments.length; j++) {
+            const arg3 = separatedArguments[j];
+            const [originalArgName, argStr] = arg3[1] === "-" ? arg3.split(/=(.*)/, 2) : [arg3, void 0];
+            let argName = originalArgName;
+            while (argName in aliases) {
+              argName = aliases[argName];
+            }
+            if (!(argName in handlers)) {
+              if (permissive) {
+                result._.push(arg3);
+                continue;
+              } else {
+                throw new ArgError(
+                  `unknown or unexpected option: ${originalArgName}`,
+                  "ARG_UNKNOWN_OPTION"
+                );
+              }
+            }
+            const [type, isFlag] = handlers[argName];
+            if (!isFlag && j + 1 < separatedArguments.length) {
+              throw new ArgError(
+                `option requires argument (but was followed by another short argument): ${originalArgName}`,
+                "ARG_MISSING_REQUIRED_SHORTARG"
+              );
+            }
+            if (isFlag) {
+              result[argName] = type(true, argName, result[argName]);
+            } else if (argStr === void 0) {
+              if (argv.length < i + 2 || argv[i + 1].length > 1 && argv[i + 1][0] === "-" && !(argv[i + 1].match(/^-?\d*(\.(?=\d))?\d*$/) && (type === Number || typeof BigInt !== "undefined" && type === BigInt))) {
+                const extended = originalArgName === argName ? "" : ` (alias for ${argName})`;
+                throw new ArgError(
+                  `option requires argument: ${originalArgName}${extended}`,
+                  "ARG_MISSING_REQUIRED_LONGARG"
+                );
+              }
+              result[argName] = type(argv[i + 1], argName, result[argName]);
+              ++i;
+            } else {
+              result[argName] = type(argStr, argName, result[argName]);
+            }
+          }
+        } else {
+          result._.push(wholeArg);
+        }
+      }
+      return result;
+    }
+    __name(arg2, "arg");
+    arg2.flag = (fn) => {
+      fn[flagSymbol] = true;
+      return fn;
+    };
+    arg2.COUNT = arg2.flag((v, name, existingCount) => (existingCount || 0) + 1);
+    arg2.ArgError = ArgError;
+    module2.exports = arg2;
+  }
+});
+
+// ../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js
+var require_min_indent = __commonJS({
+  "../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js"(exports, module2) {
+    "use strict";
+    module2.exports = (string) => {
+      const match = string.match(/^[ \t]*(?=\S)/gm);
+      if (!match) {
+        return 0;
+      }
+      return match.reduce((r2, a) => Math.min(r2, a.length), Infinity);
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js
+var require_strip_indent = __commonJS({
+  "../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js"(exports, module2) {
+    "use strict";
+    var minIndent = require_min_indent();
+    module2.exports = (string) => {
+      const indent4 = minIndent(string);
+      if (indent4 === 0) {
+        return string;
+      }
+      const regex = new RegExp(`^[ \\t]{${indent4}}`, "gm");
+      return string.replace(regex, "");
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/@prisma+engines-version@4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe/node_modules/@prisma/engines-version/package.json
+var require_package2 = __commonJS({
+  "../../node_modules/.pnpm/@prisma+engines-version@4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe/node_modules/@prisma/engines-version/package.json"(exports, module2) {
+    module2.exports = {
+      name: "@prisma/engines-version",
+      version: "4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe",
+      main: "index.js",
+      types: "index.d.ts",
+      license: "Apache-2.0",
+      author: "Tim Suchanek <suchanek@prisma.io>",
+      prisma: {
+        enginesVersion: "d6e67a83f971b175a593ccc12e15c4a757f93ffe"
+      },
+      repository: {
+        type: "git",
+        url: "https://github.com/prisma/engines-wrapper.git",
+        directory: "packages/engines-version"
+      },
+      devDependencies: {
+        "@types/node": "16.11.64",
+        typescript: "4.8.4"
+      },
+      files: [
+        "index.js",
+        "index.d.ts"
+      ],
+      scripts: {
+        build: "tsc -d"
+      }
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/@prisma+engines-version@4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe/node_modules/@prisma/engines-version/index.js
+var require_engines_version = __commonJS({
+  "../../node_modules/.pnpm/@prisma+engines-version@4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe/node_modules/@prisma/engines-version/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.enginesVersion = void 0;
+    exports.enginesVersion = require_package2().prisma.enginesVersion;
   }
 });
 
@@ -5022,8 +5229,8 @@ var require_retry = __commonJS({
       if (options && options.forever && !timeouts.length) {
         timeouts.push(this.createTimeout(i, opts));
       }
-      timeouts.sort(function(a, b) {
-        return a - b;
+      timeouts.sort(function(a, b2) {
+        return a - b2;
       });
       return timeouts;
     };
@@ -5220,9 +5427,43 @@ var require_new_github_issue_url = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/symbols.js
+// ../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js
+var require_indent_string = __commonJS({
+  "../../node_modules/.pnpm/indent-string@4.0.0/node_modules/indent-string/index.js"(exports, module2) {
+    "use strict";
+    module2.exports = (string, count2 = 1, options) => {
+      options = {
+        indent: " ",
+        includeEmptyLines: false,
+        ...options
+      };
+      if (typeof string !== "string") {
+        throw new TypeError(
+          `Expected \`input\` to be a \`string\`, got \`${typeof string}\``
+        );
+      }
+      if (typeof count2 !== "number") {
+        throw new TypeError(
+          `Expected \`count\` to be a \`number\`, got \`${typeof count2}\``
+        );
+      }
+      if (typeof options.indent !== "string") {
+        throw new TypeError(
+          `Expected \`options.indent\` to be a \`string\`, got \`${typeof options.indent}\``
+        );
+      }
+      if (count2 === 0) {
+        return string;
+      }
+      const regex = options.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
+      return string.replace(regex, options.indent.repeat(count2));
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/symbols.js
 var require_symbols = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/symbols.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/symbols.js"(exports, module2) {
     module2.exports = {
       kClose: Symbol("close"),
       kDestroy: Symbol("destroy"),
@@ -5273,14 +5514,15 @@ var require_symbols = __commonJS({
       kMaxRedirections: Symbol("maxRedirections"),
       kMaxRequests: Symbol("maxRequestsPerClient"),
       kProxy: Symbol("proxy agent options"),
-      kCounter: Symbol("socket request counter")
+      kCounter: Symbol("socket request counter"),
+      kInterceptors: Symbol("dispatch interceptors")
     };
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/errors.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/errors.js
 var require_errors = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/errors.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/errors.js"(exports, module2) {
     "use strict";
     var UndiciError = class extends Error {
       constructor(message) {
@@ -5488,9 +5730,9 @@ var require_errors = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/util.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/util.js
 var require_util2 = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/util.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/util.js"(exports, module2) {
     "use strict";
     var assert = require("assert");
     var { kDestroyed, kBodyUsed } = require_symbols();
@@ -5500,6 +5742,7 @@ var require_util2 = __commonJS({
     var { InvalidArgumentError } = require_errors();
     var { Blob } = require("buffer");
     var nodeUtil = require("util");
+    var { stringify: stringify2 } = require("querystring");
     function nop() {
     }
     __name(nop, "nop");
@@ -5511,39 +5754,13 @@ var require_util2 = __commonJS({
       return Blob && object instanceof Blob || object && typeof object === "object" && (typeof object.stream === "function" || typeof object.arrayBuffer === "function") && /^(Blob|File)$/.test(object[Symbol.toStringTag]);
     }
     __name(isBlobLike, "isBlobLike");
-    function isObject3(val) {
-      return val !== null && typeof val === "object";
-    }
-    __name(isObject3, "isObject");
-    function encode(val) {
-      return encodeURIComponent(val);
-    }
-    __name(encode, "encode");
     function buildURL(url, queryParams) {
       if (url.includes("?") || url.includes("#")) {
         throw new Error('Query params cannot be passed when url already contains "?" or "#".');
       }
-      if (!isObject3(queryParams)) {
-        throw new Error("Query params must be an object");
-      }
-      const parts = [];
-      for (let [key, val] of Object.entries(queryParams)) {
-        if (val === null || typeof val === "undefined") {
-          continue;
-        }
-        if (!Array.isArray(val)) {
-          val = [val];
-        }
-        for (const v of val) {
-          if (isObject3(v)) {
-            throw new Error("Passing object as a query param is not supported, please serialize to string up-front");
-          }
-          parts.push(encode(key) + "=" + encode(v));
-        }
-      }
-      const serializedParams = parts.join("&");
-      if (serializedParams) {
-        url += "?" + serializedParams;
+      const stringified = stringify2(queryParams);
+      if (stringified) {
+        url += "?" + stringified;
       }
       return url;
     }
@@ -5676,8 +5893,8 @@ var require_util2 = __commonJS({
     __name(destroy, "destroy");
     var KEEPALIVE_TIMEOUT_EXPR = /timeout=(\d+)/;
     function parseKeepAliveTimeout(val) {
-      const m = val.toString().match(KEEPALIVE_TIMEOUT_EXPR);
-      return m ? parseInt(m[1], 10) * 1e3 : null;
+      const m2 = val.toString().match(KEEPALIVE_TIMEOUT_EXPR);
+      return m2 ? parseInt(m2[1], 10) * 1e3 : null;
     }
     __name(parseKeepAliveTimeout, "parseKeepAliveTimeout");
     function parseHeaders(headers, obj = {}) {
@@ -5840,9 +6057,3761 @@ var require_util2 = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/constants.js
+// ../../node_modules/.pnpm/busboy@1.6.0/node_modules/busboy/lib/utils.js
+var require_utils = __commonJS({
+  "../../node_modules/.pnpm/busboy@1.6.0/node_modules/busboy/lib/utils.js"(exports, module2) {
+    "use strict";
+    function parseContentType(str) {
+      if (str.length === 0)
+        return;
+      const params = /* @__PURE__ */ Object.create(null);
+      let i = 0;
+      for (; i < str.length; ++i) {
+        const code = str.charCodeAt(i);
+        if (TOKEN[code] !== 1) {
+          if (code !== 47 || i === 0)
+            return;
+          break;
+        }
+      }
+      if (i === str.length)
+        return;
+      const type = str.slice(0, i).toLowerCase();
+      const subtypeStart = ++i;
+      for (; i < str.length; ++i) {
+        const code = str.charCodeAt(i);
+        if (TOKEN[code] !== 1) {
+          if (i === subtypeStart)
+            return;
+          if (parseContentTypeParams(str, i, params) === void 0)
+            return;
+          break;
+        }
+      }
+      if (i === subtypeStart)
+        return;
+      const subtype = str.slice(subtypeStart, i).toLowerCase();
+      return { type, subtype, params };
+    }
+    __name(parseContentType, "parseContentType");
+    function parseContentTypeParams(str, i, params) {
+      while (i < str.length) {
+        for (; i < str.length; ++i) {
+          const code = str.charCodeAt(i);
+          if (code !== 32 && code !== 9)
+            break;
+        }
+        if (i === str.length)
+          break;
+        if (str.charCodeAt(i++) !== 59)
+          return;
+        for (; i < str.length; ++i) {
+          const code = str.charCodeAt(i);
+          if (code !== 32 && code !== 9)
+            break;
+        }
+        if (i === str.length)
+          return;
+        let name;
+        const nameStart = i;
+        for (; i < str.length; ++i) {
+          const code = str.charCodeAt(i);
+          if (TOKEN[code] !== 1) {
+            if (code !== 61)
+              return;
+            break;
+          }
+        }
+        if (i === str.length)
+          return;
+        name = str.slice(nameStart, i);
+        ++i;
+        if (i === str.length)
+          return;
+        let value = "";
+        let valueStart;
+        if (str.charCodeAt(i) === 34) {
+          valueStart = ++i;
+          let escaping = false;
+          for (; i < str.length; ++i) {
+            const code = str.charCodeAt(i);
+            if (code === 92) {
+              if (escaping) {
+                valueStart = i;
+                escaping = false;
+              } else {
+                value += str.slice(valueStart, i);
+                escaping = true;
+              }
+              continue;
+            }
+            if (code === 34) {
+              if (escaping) {
+                valueStart = i;
+                escaping = false;
+                continue;
+              }
+              value += str.slice(valueStart, i);
+              break;
+            }
+            if (escaping) {
+              valueStart = i - 1;
+              escaping = false;
+            }
+            if (QDTEXT[code] !== 1)
+              return;
+          }
+          if (i === str.length)
+            return;
+          ++i;
+        } else {
+          valueStart = i;
+          for (; i < str.length; ++i) {
+            const code = str.charCodeAt(i);
+            if (TOKEN[code] !== 1) {
+              if (i === valueStart)
+                return;
+              break;
+            }
+          }
+          value = str.slice(valueStart, i);
+        }
+        name = name.toLowerCase();
+        if (params[name] === void 0)
+          params[name] = value;
+      }
+      return params;
+    }
+    __name(parseContentTypeParams, "parseContentTypeParams");
+    function parseDisposition(str, defDecoder) {
+      if (str.length === 0)
+        return;
+      const params = /* @__PURE__ */ Object.create(null);
+      let i = 0;
+      for (; i < str.length; ++i) {
+        const code = str.charCodeAt(i);
+        if (TOKEN[code] !== 1) {
+          if (parseDispositionParams(str, i, params, defDecoder) === void 0)
+            return;
+          break;
+        }
+      }
+      const type = str.slice(0, i).toLowerCase();
+      return { type, params };
+    }
+    __name(parseDisposition, "parseDisposition");
+    function parseDispositionParams(str, i, params, defDecoder) {
+      while (i < str.length) {
+        for (; i < str.length; ++i) {
+          const code = str.charCodeAt(i);
+          if (code !== 32 && code !== 9)
+            break;
+        }
+        if (i === str.length)
+          break;
+        if (str.charCodeAt(i++) !== 59)
+          return;
+        for (; i < str.length; ++i) {
+          const code = str.charCodeAt(i);
+          if (code !== 32 && code !== 9)
+            break;
+        }
+        if (i === str.length)
+          return;
+        let name;
+        const nameStart = i;
+        for (; i < str.length; ++i) {
+          const code = str.charCodeAt(i);
+          if (TOKEN[code] !== 1) {
+            if (code === 61)
+              break;
+            return;
+          }
+        }
+        if (i === str.length)
+          return;
+        let value = "";
+        let valueStart;
+        let charset;
+        name = str.slice(nameStart, i);
+        if (name.charCodeAt(name.length - 1) === 42) {
+          const charsetStart = ++i;
+          for (; i < str.length; ++i) {
+            const code = str.charCodeAt(i);
+            if (CHARSET[code] !== 1) {
+              if (code !== 39)
+                return;
+              break;
+            }
+          }
+          if (i === str.length)
+            return;
+          charset = str.slice(charsetStart, i);
+          ++i;
+          for (; i < str.length; ++i) {
+            const code = str.charCodeAt(i);
+            if (code === 39)
+              break;
+          }
+          if (i === str.length)
+            return;
+          ++i;
+          if (i === str.length)
+            return;
+          valueStart = i;
+          let encode = 0;
+          for (; i < str.length; ++i) {
+            const code = str.charCodeAt(i);
+            if (EXTENDED_VALUE[code] !== 1) {
+              if (code === 37) {
+                let hexUpper;
+                let hexLower;
+                if (i + 2 < str.length && (hexUpper = HEX_VALUES[str.charCodeAt(i + 1)]) !== -1 && (hexLower = HEX_VALUES[str.charCodeAt(i + 2)]) !== -1) {
+                  const byteVal = (hexUpper << 4) + hexLower;
+                  value += str.slice(valueStart, i);
+                  value += String.fromCharCode(byteVal);
+                  i += 2;
+                  valueStart = i + 1;
+                  if (byteVal >= 128)
+                    encode = 2;
+                  else if (encode === 0)
+                    encode = 1;
+                  continue;
+                }
+                return;
+              }
+              break;
+            }
+          }
+          value += str.slice(valueStart, i);
+          value = convertToUTF8(value, charset, encode);
+          if (value === void 0)
+            return;
+        } else {
+          ++i;
+          if (i === str.length)
+            return;
+          if (str.charCodeAt(i) === 34) {
+            valueStart = ++i;
+            let escaping = false;
+            for (; i < str.length; ++i) {
+              const code = str.charCodeAt(i);
+              if (code === 92) {
+                if (escaping) {
+                  valueStart = i;
+                  escaping = false;
+                } else {
+                  value += str.slice(valueStart, i);
+                  escaping = true;
+                }
+                continue;
+              }
+              if (code === 34) {
+                if (escaping) {
+                  valueStart = i;
+                  escaping = false;
+                  continue;
+                }
+                value += str.slice(valueStart, i);
+                break;
+              }
+              if (escaping) {
+                valueStart = i - 1;
+                escaping = false;
+              }
+              if (QDTEXT[code] !== 1)
+                return;
+            }
+            if (i === str.length)
+              return;
+            ++i;
+          } else {
+            valueStart = i;
+            for (; i < str.length; ++i) {
+              const code = str.charCodeAt(i);
+              if (TOKEN[code] !== 1) {
+                if (i === valueStart)
+                  return;
+                break;
+              }
+            }
+            value = str.slice(valueStart, i);
+          }
+          value = defDecoder(value, 2);
+          if (value === void 0)
+            return;
+        }
+        name = name.toLowerCase();
+        if (params[name] === void 0)
+          params[name] = value;
+      }
+      return params;
+    }
+    __name(parseDispositionParams, "parseDispositionParams");
+    function getDecoder(charset) {
+      let lc;
+      while (true) {
+        switch (charset) {
+          case "utf-8":
+          case "utf8":
+            return decoders.utf8;
+          case "latin1":
+          case "ascii":
+          case "us-ascii":
+          case "iso-8859-1":
+          case "iso8859-1":
+          case "iso88591":
+          case "iso_8859-1":
+          case "windows-1252":
+          case "iso_8859-1:1987":
+          case "cp1252":
+          case "x-cp1252":
+            return decoders.latin1;
+          case "utf16le":
+          case "utf-16le":
+          case "ucs2":
+          case "ucs-2":
+            return decoders.utf16le;
+          case "base64":
+            return decoders.base64;
+          default:
+            if (lc === void 0) {
+              lc = true;
+              charset = charset.toLowerCase();
+              continue;
+            }
+            return decoders.other.bind(charset);
+        }
+      }
+    }
+    __name(getDecoder, "getDecoder");
+    var decoders = {
+      utf8: (data, hint) => {
+        if (data.length === 0)
+          return "";
+        if (typeof data === "string") {
+          if (hint < 2)
+            return data;
+          data = Buffer.from(data, "latin1");
+        }
+        return data.utf8Slice(0, data.length);
+      },
+      latin1: (data, hint) => {
+        if (data.length === 0)
+          return "";
+        if (typeof data === "string")
+          return data;
+        return data.latin1Slice(0, data.length);
+      },
+      utf16le: (data, hint) => {
+        if (data.length === 0)
+          return "";
+        if (typeof data === "string")
+          data = Buffer.from(data, "latin1");
+        return data.ucs2Slice(0, data.length);
+      },
+      base64: (data, hint) => {
+        if (data.length === 0)
+          return "";
+        if (typeof data === "string")
+          data = Buffer.from(data, "latin1");
+        return data.base64Slice(0, data.length);
+      },
+      other: (data, hint) => {
+        if (data.length === 0)
+          return "";
+        if (typeof data === "string")
+          data = Buffer.from(data, "latin1");
+        try {
+          const decoder = new TextDecoder(exports);
+          return decoder.decode(data);
+        } catch (e2) {
+        }
+      }
+    };
+    function convertToUTF8(data, charset, hint) {
+      const decode = getDecoder(charset);
+      if (decode)
+        return decode(data, hint);
+    }
+    __name(convertToUTF8, "convertToUTF8");
+    function basename(path7) {
+      if (typeof path7 !== "string")
+        return "";
+      for (let i = path7.length - 1; i >= 0; --i) {
+        switch (path7.charCodeAt(i)) {
+          case 47:
+          case 92:
+            path7 = path7.slice(i + 1);
+            return path7 === ".." || path7 === "." ? "" : path7;
+        }
+      }
+      return path7 === ".." || path7 === "." ? "" : path7;
+    }
+    __name(basename, "basename");
+    var TOKEN = [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ];
+    var QDTEXT = [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ];
+    var CHARSET = [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ];
+    var EXTENDED_VALUE = [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ];
+    var HEX_VALUES = [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1
+    ];
+    module2.exports = {
+      basename,
+      convertToUTF8,
+      getDecoder,
+      parseContentType,
+      parseDisposition
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/streamsearch@1.1.0/node_modules/streamsearch/lib/sbmh.js
+var require_sbmh = __commonJS({
+  "../../node_modules/.pnpm/streamsearch@1.1.0/node_modules/streamsearch/lib/sbmh.js"(exports, module2) {
+    "use strict";
+    function memcmp(buf1, pos1, buf2, pos2, num) {
+      for (let i = 0; i < num; ++i) {
+        if (buf1[pos1 + i] !== buf2[pos2 + i])
+          return false;
+      }
+      return true;
+    }
+    __name(memcmp, "memcmp");
+    var SBMH = class {
+      constructor(needle, cb) {
+        if (typeof cb !== "function")
+          throw new Error("Missing match callback");
+        if (typeof needle === "string")
+          needle = Buffer.from(needle);
+        else if (!Buffer.isBuffer(needle))
+          throw new Error(`Expected Buffer for needle, got ${typeof needle}`);
+        const needleLen = needle.length;
+        this.maxMatches = Infinity;
+        this.matches = 0;
+        this._cb = cb;
+        this._lookbehindSize = 0;
+        this._needle = needle;
+        this._bufPos = 0;
+        this._lookbehind = Buffer.allocUnsafe(needleLen);
+        this._occ = [
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen,
+          needleLen
+        ];
+        if (needleLen > 1) {
+          for (let i = 0; i < needleLen - 1; ++i)
+            this._occ[needle[i]] = needleLen - 1 - i;
+        }
+      }
+      reset() {
+        this.matches = 0;
+        this._lookbehindSize = 0;
+        this._bufPos = 0;
+      }
+      push(chunk, pos) {
+        let result;
+        if (!Buffer.isBuffer(chunk))
+          chunk = Buffer.from(chunk, "latin1");
+        const chunkLen = chunk.length;
+        this._bufPos = pos || 0;
+        while (result !== chunkLen && this.matches < this.maxMatches)
+          result = feed(this, chunk);
+        return result;
+      }
+      destroy() {
+        const lbSize = this._lookbehindSize;
+        if (lbSize)
+          this._cb(false, this._lookbehind, 0, lbSize, false);
+        this.reset();
+      }
+    };
+    __name(SBMH, "SBMH");
+    function feed(self2, data) {
+      const len = data.length;
+      const needle = self2._needle;
+      const needleLen = needle.length;
+      let pos = -self2._lookbehindSize;
+      const lastNeedleCharPos = needleLen - 1;
+      const lastNeedleChar = needle[lastNeedleCharPos];
+      const end = len - needleLen;
+      const occ = self2._occ;
+      const lookbehind = self2._lookbehind;
+      if (pos < 0) {
+        while (pos < 0 && pos <= end) {
+          const nextPos = pos + lastNeedleCharPos;
+          const ch = nextPos < 0 ? lookbehind[self2._lookbehindSize + nextPos] : data[nextPos];
+          if (ch === lastNeedleChar && matchNeedle(self2, data, pos, lastNeedleCharPos)) {
+            self2._lookbehindSize = 0;
+            ++self2.matches;
+            if (pos > -self2._lookbehindSize)
+              self2._cb(true, lookbehind, 0, self2._lookbehindSize + pos, false);
+            else
+              self2._cb(true, void 0, 0, 0, true);
+            return self2._bufPos = pos + needleLen;
+          }
+          pos += occ[ch];
+        }
+        while (pos < 0 && !matchNeedle(self2, data, pos, len - pos))
+          ++pos;
+        if (pos < 0) {
+          const bytesToCutOff = self2._lookbehindSize + pos;
+          if (bytesToCutOff > 0) {
+            self2._cb(false, lookbehind, 0, bytesToCutOff, false);
+          }
+          self2._lookbehindSize -= bytesToCutOff;
+          lookbehind.copy(lookbehind, 0, bytesToCutOff, self2._lookbehindSize);
+          lookbehind.set(data, self2._lookbehindSize);
+          self2._lookbehindSize += len;
+          self2._bufPos = len;
+          return len;
+        }
+        self2._cb(false, lookbehind, 0, self2._lookbehindSize, false);
+        self2._lookbehindSize = 0;
+      }
+      pos += self2._bufPos;
+      const firstNeedleChar = needle[0];
+      while (pos <= end) {
+        const ch = data[pos + lastNeedleCharPos];
+        if (ch === lastNeedleChar && data[pos] === firstNeedleChar && memcmp(needle, 0, data, pos, lastNeedleCharPos)) {
+          ++self2.matches;
+          if (pos > 0)
+            self2._cb(true, data, self2._bufPos, pos, true);
+          else
+            self2._cb(true, void 0, 0, 0, true);
+          return self2._bufPos = pos + needleLen;
+        }
+        pos += occ[ch];
+      }
+      while (pos < len) {
+        if (data[pos] !== firstNeedleChar || !memcmp(data, pos, needle, 0, len - pos)) {
+          ++pos;
+          continue;
+        }
+        data.copy(lookbehind, 0, pos, len);
+        self2._lookbehindSize = len - pos;
+        break;
+      }
+      if (pos > 0)
+        self2._cb(false, data, self2._bufPos, pos < len ? pos : len, true);
+      self2._bufPos = len;
+      return len;
+    }
+    __name(feed, "feed");
+    function matchNeedle(self2, data, pos, len) {
+      const lb = self2._lookbehind;
+      const lbSize = self2._lookbehindSize;
+      const needle = self2._needle;
+      for (let i = 0; i < len; ++i, ++pos) {
+        const ch = pos < 0 ? lb[lbSize + pos] : data[pos];
+        if (ch !== needle[i])
+          return false;
+      }
+      return true;
+    }
+    __name(matchNeedle, "matchNeedle");
+    module2.exports = SBMH;
+  }
+});
+
+// ../../node_modules/.pnpm/busboy@1.6.0/node_modules/busboy/lib/types/multipart.js
+var require_multipart = __commonJS({
+  "../../node_modules/.pnpm/busboy@1.6.0/node_modules/busboy/lib/types/multipart.js"(exports, module2) {
+    "use strict";
+    var { Readable, Writable } = require("stream");
+    var StreamSearch = require_sbmh();
+    var {
+      basename,
+      convertToUTF8,
+      getDecoder,
+      parseContentType,
+      parseDisposition
+    } = require_utils();
+    var BUF_CRLF = Buffer.from("\r\n");
+    var BUF_CR = Buffer.from("\r");
+    var BUF_DASH = Buffer.from("-");
+    function noop() {
+    }
+    __name(noop, "noop");
+    var MAX_HEADER_PAIRS = 2e3;
+    var MAX_HEADER_SIZE = 16 * 1024;
+    var HPARSER_NAME = 0;
+    var HPARSER_PRE_OWS = 1;
+    var HPARSER_VALUE = 2;
+    var HeaderParser = class {
+      constructor(cb) {
+        this.header = /* @__PURE__ */ Object.create(null);
+        this.pairCount = 0;
+        this.byteCount = 0;
+        this.state = HPARSER_NAME;
+        this.name = "";
+        this.value = "";
+        this.crlf = 0;
+        this.cb = cb;
+      }
+      reset() {
+        this.header = /* @__PURE__ */ Object.create(null);
+        this.pairCount = 0;
+        this.byteCount = 0;
+        this.state = HPARSER_NAME;
+        this.name = "";
+        this.value = "";
+        this.crlf = 0;
+      }
+      push(chunk, pos, end) {
+        let start = pos;
+        while (pos < end) {
+          switch (this.state) {
+            case HPARSER_NAME: {
+              let done = false;
+              for (; pos < end; ++pos) {
+                if (this.byteCount === MAX_HEADER_SIZE)
+                  return -1;
+                ++this.byteCount;
+                const code = chunk[pos];
+                if (TOKEN[code] !== 1) {
+                  if (code !== 58)
+                    return -1;
+                  this.name += chunk.latin1Slice(start, pos);
+                  if (this.name.length === 0)
+                    return -1;
+                  ++pos;
+                  done = true;
+                  this.state = HPARSER_PRE_OWS;
+                  break;
+                }
+              }
+              if (!done) {
+                this.name += chunk.latin1Slice(start, pos);
+                break;
+              }
+            }
+            case HPARSER_PRE_OWS: {
+              let done = false;
+              for (; pos < end; ++pos) {
+                if (this.byteCount === MAX_HEADER_SIZE)
+                  return -1;
+                ++this.byteCount;
+                const code = chunk[pos];
+                if (code !== 32 && code !== 9) {
+                  start = pos;
+                  done = true;
+                  this.state = HPARSER_VALUE;
+                  break;
+                }
+              }
+              if (!done)
+                break;
+            }
+            case HPARSER_VALUE:
+              switch (this.crlf) {
+                case 0:
+                  for (; pos < end; ++pos) {
+                    if (this.byteCount === MAX_HEADER_SIZE)
+                      return -1;
+                    ++this.byteCount;
+                    const code = chunk[pos];
+                    if (FIELD_VCHAR[code] !== 1) {
+                      if (code !== 13)
+                        return -1;
+                      ++this.crlf;
+                      break;
+                    }
+                  }
+                  this.value += chunk.latin1Slice(start, pos++);
+                  break;
+                case 1:
+                  if (this.byteCount === MAX_HEADER_SIZE)
+                    return -1;
+                  ++this.byteCount;
+                  if (chunk[pos++] !== 10)
+                    return -1;
+                  ++this.crlf;
+                  break;
+                case 2: {
+                  if (this.byteCount === MAX_HEADER_SIZE)
+                    return -1;
+                  ++this.byteCount;
+                  const code = chunk[pos];
+                  if (code === 32 || code === 9) {
+                    start = pos;
+                    this.crlf = 0;
+                  } else {
+                    if (++this.pairCount < MAX_HEADER_PAIRS) {
+                      this.name = this.name.toLowerCase();
+                      if (this.header[this.name] === void 0)
+                        this.header[this.name] = [this.value];
+                      else
+                        this.header[this.name].push(this.value);
+                    }
+                    if (code === 13) {
+                      ++this.crlf;
+                      ++pos;
+                    } else {
+                      start = pos;
+                      this.crlf = 0;
+                      this.state = HPARSER_NAME;
+                      this.name = "";
+                      this.value = "";
+                    }
+                  }
+                  break;
+                }
+                case 3: {
+                  if (this.byteCount === MAX_HEADER_SIZE)
+                    return -1;
+                  ++this.byteCount;
+                  if (chunk[pos++] !== 10)
+                    return -1;
+                  const header = this.header;
+                  this.reset();
+                  this.cb(header);
+                  return pos;
+                }
+              }
+              break;
+          }
+        }
+        return pos;
+      }
+    };
+    __name(HeaderParser, "HeaderParser");
+    var FileStream = class extends Readable {
+      constructor(opts, owner) {
+        super(opts);
+        this.truncated = false;
+        this._readcb = null;
+        this.once("end", () => {
+          this._read();
+          if (--owner._fileEndsLeft === 0 && owner._finalcb) {
+            const cb = owner._finalcb;
+            owner._finalcb = null;
+            process.nextTick(cb);
+          }
+        });
+      }
+      _read(n2) {
+        const cb = this._readcb;
+        if (cb) {
+          this._readcb = null;
+          cb();
+        }
+      }
+    };
+    __name(FileStream, "FileStream");
+    var ignoreData = {
+      push: (chunk, pos) => {
+      },
+      destroy: () => {
+      }
+    };
+    function callAndUnsetCb(self2, err) {
+      const cb = self2._writecb;
+      self2._writecb = null;
+      if (err)
+        self2.destroy(err);
+      else if (cb)
+        cb();
+    }
+    __name(callAndUnsetCb, "callAndUnsetCb");
+    function nullDecoder(val, hint) {
+      return val;
+    }
+    __name(nullDecoder, "nullDecoder");
+    var Multipart = class extends Writable {
+      constructor(cfg) {
+        const streamOpts = {
+          autoDestroy: true,
+          emitClose: true,
+          highWaterMark: typeof cfg.highWaterMark === "number" ? cfg.highWaterMark : void 0
+        };
+        super(streamOpts);
+        if (!cfg.conType.params || typeof cfg.conType.params.boundary !== "string")
+          throw new Error("Multipart: Boundary not found");
+        const boundary = cfg.conType.params.boundary;
+        const paramDecoder = typeof cfg.defParamCharset === "string" && cfg.defParamCharset ? getDecoder(cfg.defParamCharset) : nullDecoder;
+        const defCharset = cfg.defCharset || "utf8";
+        const preservePath = cfg.preservePath;
+        const fileOpts = {
+          autoDestroy: true,
+          emitClose: true,
+          highWaterMark: typeof cfg.fileHwm === "number" ? cfg.fileHwm : void 0
+        };
+        const limits = cfg.limits;
+        const fieldSizeLimit = limits && typeof limits.fieldSize === "number" ? limits.fieldSize : 1 * 1024 * 1024;
+        const fileSizeLimit = limits && typeof limits.fileSize === "number" ? limits.fileSize : Infinity;
+        const filesLimit = limits && typeof limits.files === "number" ? limits.files : Infinity;
+        const fieldsLimit = limits && typeof limits.fields === "number" ? limits.fields : Infinity;
+        const partsLimit = limits && typeof limits.parts === "number" ? limits.parts : Infinity;
+        let parts = -1;
+        let fields = 0;
+        let files = 0;
+        let skipPart = false;
+        this._fileEndsLeft = 0;
+        this._fileStream = void 0;
+        this._complete = false;
+        let fileSize = 0;
+        let field;
+        let fieldSize = 0;
+        let partCharset;
+        let partEncoding;
+        let partType;
+        let partName;
+        let partTruncated = false;
+        let hitFilesLimit = false;
+        let hitFieldsLimit = false;
+        this._hparser = null;
+        const hparser = new HeaderParser((header) => {
+          this._hparser = null;
+          skipPart = false;
+          partType = "text/plain";
+          partCharset = defCharset;
+          partEncoding = "7bit";
+          partName = void 0;
+          partTruncated = false;
+          let filename;
+          if (!header["content-disposition"]) {
+            skipPart = true;
+            return;
+          }
+          const disp = parseDisposition(
+            header["content-disposition"][0],
+            paramDecoder
+          );
+          if (!disp || disp.type !== "form-data") {
+            skipPart = true;
+            return;
+          }
+          if (disp.params) {
+            if (disp.params.name)
+              partName = disp.params.name;
+            if (disp.params["filename*"])
+              filename = disp.params["filename*"];
+            else if (disp.params.filename)
+              filename = disp.params.filename;
+            if (filename !== void 0 && !preservePath)
+              filename = basename(filename);
+          }
+          if (header["content-type"]) {
+            const conType = parseContentType(header["content-type"][0]);
+            if (conType) {
+              partType = `${conType.type}/${conType.subtype}`;
+              if (conType.params && typeof conType.params.charset === "string")
+                partCharset = conType.params.charset.toLowerCase();
+            }
+          }
+          if (header["content-transfer-encoding"])
+            partEncoding = header["content-transfer-encoding"][0].toLowerCase();
+          if (partType === "application/octet-stream" || filename !== void 0) {
+            if (files === filesLimit) {
+              if (!hitFilesLimit) {
+                hitFilesLimit = true;
+                this.emit("filesLimit");
+              }
+              skipPart = true;
+              return;
+            }
+            ++files;
+            if (this.listenerCount("file") === 0) {
+              skipPart = true;
+              return;
+            }
+            fileSize = 0;
+            this._fileStream = new FileStream(fileOpts, this);
+            ++this._fileEndsLeft;
+            this.emit(
+              "file",
+              partName,
+              this._fileStream,
+              {
+                filename,
+                encoding: partEncoding,
+                mimeType: partType
+              }
+            );
+          } else {
+            if (fields === fieldsLimit) {
+              if (!hitFieldsLimit) {
+                hitFieldsLimit = true;
+                this.emit("fieldsLimit");
+              }
+              skipPart = true;
+              return;
+            }
+            ++fields;
+            if (this.listenerCount("field") === 0) {
+              skipPart = true;
+              return;
+            }
+            field = [];
+            fieldSize = 0;
+          }
+        });
+        let matchPostBoundary = 0;
+        const ssCb = /* @__PURE__ */ __name((isMatch, data, start, end, isDataSafe) => {
+          retrydata:
+            while (data) {
+              if (this._hparser !== null) {
+                const ret = this._hparser.push(data, start, end);
+                if (ret === -1) {
+                  this._hparser = null;
+                  hparser.reset();
+                  this.emit("error", new Error("Malformed part header"));
+                  break;
+                }
+                start = ret;
+              }
+              if (start === end)
+                break;
+              if (matchPostBoundary !== 0) {
+                if (matchPostBoundary === 1) {
+                  switch (data[start]) {
+                    case 45:
+                      matchPostBoundary = 2;
+                      ++start;
+                      break;
+                    case 13:
+                      matchPostBoundary = 3;
+                      ++start;
+                      break;
+                    default:
+                      matchPostBoundary = 0;
+                  }
+                  if (start === end)
+                    return;
+                }
+                if (matchPostBoundary === 2) {
+                  matchPostBoundary = 0;
+                  if (data[start] === 45) {
+                    this._complete = true;
+                    this._bparser = ignoreData;
+                    return;
+                  }
+                  const writecb = this._writecb;
+                  this._writecb = noop;
+                  ssCb(false, BUF_DASH, 0, 1, false);
+                  this._writecb = writecb;
+                } else if (matchPostBoundary === 3) {
+                  matchPostBoundary = 0;
+                  if (data[start] === 10) {
+                    ++start;
+                    if (parts >= partsLimit)
+                      break;
+                    this._hparser = hparser;
+                    if (start === end)
+                      break;
+                    continue retrydata;
+                  } else {
+                    const writecb = this._writecb;
+                    this._writecb = noop;
+                    ssCb(false, BUF_CR, 0, 1, false);
+                    this._writecb = writecb;
+                  }
+                }
+              }
+              if (!skipPart) {
+                if (this._fileStream) {
+                  let chunk;
+                  const actualLen = Math.min(end - start, fileSizeLimit - fileSize);
+                  if (!isDataSafe) {
+                    chunk = Buffer.allocUnsafe(actualLen);
+                    data.copy(chunk, 0, start, start + actualLen);
+                  } else {
+                    chunk = data.slice(start, start + actualLen);
+                  }
+                  fileSize += chunk.length;
+                  if (fileSize === fileSizeLimit) {
+                    if (chunk.length > 0)
+                      this._fileStream.push(chunk);
+                    this._fileStream.emit("limit");
+                    this._fileStream.truncated = true;
+                    skipPart = true;
+                  } else if (!this._fileStream.push(chunk)) {
+                    if (this._writecb)
+                      this._fileStream._readcb = this._writecb;
+                    this._writecb = null;
+                  }
+                } else if (field !== void 0) {
+                  let chunk;
+                  const actualLen = Math.min(
+                    end - start,
+                    fieldSizeLimit - fieldSize
+                  );
+                  if (!isDataSafe) {
+                    chunk = Buffer.allocUnsafe(actualLen);
+                    data.copy(chunk, 0, start, start + actualLen);
+                  } else {
+                    chunk = data.slice(start, start + actualLen);
+                  }
+                  fieldSize += actualLen;
+                  field.push(chunk);
+                  if (fieldSize === fieldSizeLimit) {
+                    skipPart = true;
+                    partTruncated = true;
+                  }
+                }
+              }
+              break;
+            }
+          if (isMatch) {
+            matchPostBoundary = 1;
+            if (this._fileStream) {
+              this._fileStream.push(null);
+              this._fileStream = null;
+            } else if (field !== void 0) {
+              let data2;
+              switch (field.length) {
+                case 0:
+                  data2 = "";
+                  break;
+                case 1:
+                  data2 = convertToUTF8(field[0], partCharset, 0);
+                  break;
+                default:
+                  data2 = convertToUTF8(
+                    Buffer.concat(field, fieldSize),
+                    partCharset,
+                    0
+                  );
+              }
+              field = void 0;
+              fieldSize = 0;
+              this.emit(
+                "field",
+                partName,
+                data2,
+                {
+                  nameTruncated: false,
+                  valueTruncated: partTruncated,
+                  encoding: partEncoding,
+                  mimeType: partType
+                }
+              );
+            }
+            if (++parts === partsLimit)
+              this.emit("partsLimit");
+          }
+        }, "ssCb");
+        this._bparser = new StreamSearch(`\r
+--${boundary}`, ssCb);
+        this._writecb = null;
+        this._finalcb = null;
+        this.write(BUF_CRLF);
+      }
+      static detect(conType) {
+        return conType.type === "multipart" && conType.subtype === "form-data";
+      }
+      _write(chunk, enc, cb) {
+        this._writecb = cb;
+        this._bparser.push(chunk, 0);
+        if (this._writecb)
+          callAndUnsetCb(this);
+      }
+      _destroy(err, cb) {
+        this._hparser = null;
+        this._bparser = ignoreData;
+        if (!err)
+          err = checkEndState(this);
+        const fileStream = this._fileStream;
+        if (fileStream) {
+          this._fileStream = null;
+          fileStream.destroy(err);
+        }
+        cb(err);
+      }
+      _final(cb) {
+        this._bparser.destroy();
+        if (!this._complete)
+          return cb(new Error("Unexpected end of form"));
+        if (this._fileEndsLeft)
+          this._finalcb = finalcb.bind(null, this, cb);
+        else
+          finalcb(this, cb);
+      }
+    };
+    __name(Multipart, "Multipart");
+    function finalcb(self2, cb, err) {
+      if (err)
+        return cb(err);
+      err = checkEndState(self2);
+      cb(err);
+    }
+    __name(finalcb, "finalcb");
+    function checkEndState(self2) {
+      if (self2._hparser)
+        return new Error("Malformed part header");
+      const fileStream = self2._fileStream;
+      if (fileStream) {
+        self2._fileStream = null;
+        fileStream.destroy(new Error("Unexpected end of file"));
+      }
+      if (!self2._complete)
+        return new Error("Unexpected end of form");
+    }
+    __name(checkEndState, "checkEndState");
+    var TOKEN = [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ];
+    var FIELD_VCHAR = [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ];
+    module2.exports = Multipart;
+  }
+});
+
+// ../../node_modules/.pnpm/busboy@1.6.0/node_modules/busboy/lib/types/urlencoded.js
+var require_urlencoded = __commonJS({
+  "../../node_modules/.pnpm/busboy@1.6.0/node_modules/busboy/lib/types/urlencoded.js"(exports, module2) {
+    "use strict";
+    var { Writable } = require("stream");
+    var { getDecoder } = require_utils();
+    var URLEncoded = class extends Writable {
+      constructor(cfg) {
+        const streamOpts = {
+          autoDestroy: true,
+          emitClose: true,
+          highWaterMark: typeof cfg.highWaterMark === "number" ? cfg.highWaterMark : void 0
+        };
+        super(streamOpts);
+        let charset = cfg.defCharset || "utf8";
+        if (cfg.conType.params && typeof cfg.conType.params.charset === "string")
+          charset = cfg.conType.params.charset;
+        this.charset = charset;
+        const limits = cfg.limits;
+        this.fieldSizeLimit = limits && typeof limits.fieldSize === "number" ? limits.fieldSize : 1 * 1024 * 1024;
+        this.fieldsLimit = limits && typeof limits.fields === "number" ? limits.fields : Infinity;
+        this.fieldNameSizeLimit = limits && typeof limits.fieldNameSize === "number" ? limits.fieldNameSize : 100;
+        this._inKey = true;
+        this._keyTrunc = false;
+        this._valTrunc = false;
+        this._bytesKey = 0;
+        this._bytesVal = 0;
+        this._fields = 0;
+        this._key = "";
+        this._val = "";
+        this._byte = -2;
+        this._lastPos = 0;
+        this._encode = 0;
+        this._decoder = getDecoder(charset);
+      }
+      static detect(conType) {
+        return conType.type === "application" && conType.subtype === "x-www-form-urlencoded";
+      }
+      _write(chunk, enc, cb) {
+        if (this._fields >= this.fieldsLimit)
+          return cb();
+        let i = 0;
+        const len = chunk.length;
+        this._lastPos = 0;
+        if (this._byte !== -2) {
+          i = readPctEnc(this, chunk, i, len);
+          if (i === -1)
+            return cb(new Error("Malformed urlencoded form"));
+          if (i >= len)
+            return cb();
+          if (this._inKey)
+            ++this._bytesKey;
+          else
+            ++this._bytesVal;
+        }
+        main:
+          while (i < len) {
+            if (this._inKey) {
+              i = skipKeyBytes(this, chunk, i, len);
+              while (i < len) {
+                switch (chunk[i]) {
+                  case 61:
+                    if (this._lastPos < i)
+                      this._key += chunk.latin1Slice(this._lastPos, i);
+                    this._lastPos = ++i;
+                    this._key = this._decoder(this._key, this._encode);
+                    this._encode = 0;
+                    this._inKey = false;
+                    continue main;
+                  case 38:
+                    if (this._lastPos < i)
+                      this._key += chunk.latin1Slice(this._lastPos, i);
+                    this._lastPos = ++i;
+                    this._key = this._decoder(this._key, this._encode);
+                    this._encode = 0;
+                    if (this._bytesKey > 0) {
+                      this.emit(
+                        "field",
+                        this._key,
+                        "",
+                        {
+                          nameTruncated: this._keyTrunc,
+                          valueTruncated: false,
+                          encoding: this.charset,
+                          mimeType: "text/plain"
+                        }
+                      );
+                    }
+                    this._key = "";
+                    this._val = "";
+                    this._keyTrunc = false;
+                    this._valTrunc = false;
+                    this._bytesKey = 0;
+                    this._bytesVal = 0;
+                    if (++this._fields >= this.fieldsLimit) {
+                      this.emit("fieldsLimit");
+                      return cb();
+                    }
+                    continue;
+                  case 43:
+                    if (this._lastPos < i)
+                      this._key += chunk.latin1Slice(this._lastPos, i);
+                    this._key += " ";
+                    this._lastPos = i + 1;
+                    break;
+                  case 37:
+                    if (this._encode === 0)
+                      this._encode = 1;
+                    if (this._lastPos < i)
+                      this._key += chunk.latin1Slice(this._lastPos, i);
+                    this._lastPos = i + 1;
+                    this._byte = -1;
+                    i = readPctEnc(this, chunk, i + 1, len);
+                    if (i === -1)
+                      return cb(new Error("Malformed urlencoded form"));
+                    if (i >= len)
+                      return cb();
+                    ++this._bytesKey;
+                    i = skipKeyBytes(this, chunk, i, len);
+                    continue;
+                }
+                ++i;
+                ++this._bytesKey;
+                i = skipKeyBytes(this, chunk, i, len);
+              }
+              if (this._lastPos < i)
+                this._key += chunk.latin1Slice(this._lastPos, i);
+            } else {
+              i = skipValBytes(this, chunk, i, len);
+              while (i < len) {
+                switch (chunk[i]) {
+                  case 38:
+                    if (this._lastPos < i)
+                      this._val += chunk.latin1Slice(this._lastPos, i);
+                    this._lastPos = ++i;
+                    this._inKey = true;
+                    this._val = this._decoder(this._val, this._encode);
+                    this._encode = 0;
+                    if (this._bytesKey > 0 || this._bytesVal > 0) {
+                      this.emit(
+                        "field",
+                        this._key,
+                        this._val,
+                        {
+                          nameTruncated: this._keyTrunc,
+                          valueTruncated: this._valTrunc,
+                          encoding: this.charset,
+                          mimeType: "text/plain"
+                        }
+                      );
+                    }
+                    this._key = "";
+                    this._val = "";
+                    this._keyTrunc = false;
+                    this._valTrunc = false;
+                    this._bytesKey = 0;
+                    this._bytesVal = 0;
+                    if (++this._fields >= this.fieldsLimit) {
+                      this.emit("fieldsLimit");
+                      return cb();
+                    }
+                    continue main;
+                  case 43:
+                    if (this._lastPos < i)
+                      this._val += chunk.latin1Slice(this._lastPos, i);
+                    this._val += " ";
+                    this._lastPos = i + 1;
+                    break;
+                  case 37:
+                    if (this._encode === 0)
+                      this._encode = 1;
+                    if (this._lastPos < i)
+                      this._val += chunk.latin1Slice(this._lastPos, i);
+                    this._lastPos = i + 1;
+                    this._byte = -1;
+                    i = readPctEnc(this, chunk, i + 1, len);
+                    if (i === -1)
+                      return cb(new Error("Malformed urlencoded form"));
+                    if (i >= len)
+                      return cb();
+                    ++this._bytesVal;
+                    i = skipValBytes(this, chunk, i, len);
+                    continue;
+                }
+                ++i;
+                ++this._bytesVal;
+                i = skipValBytes(this, chunk, i, len);
+              }
+              if (this._lastPos < i)
+                this._val += chunk.latin1Slice(this._lastPos, i);
+            }
+          }
+        cb();
+      }
+      _final(cb) {
+        if (this._byte !== -2)
+          return cb(new Error("Malformed urlencoded form"));
+        if (!this._inKey || this._bytesKey > 0 || this._bytesVal > 0) {
+          if (this._inKey)
+            this._key = this._decoder(this._key, this._encode);
+          else
+            this._val = this._decoder(this._val, this._encode);
+          this.emit(
+            "field",
+            this._key,
+            this._val,
+            {
+              nameTruncated: this._keyTrunc,
+              valueTruncated: this._valTrunc,
+              encoding: this.charset,
+              mimeType: "text/plain"
+            }
+          );
+        }
+        cb();
+      }
+    };
+    __name(URLEncoded, "URLEncoded");
+    function readPctEnc(self2, chunk, pos, len) {
+      if (pos >= len)
+        return len;
+      if (self2._byte === -1) {
+        const hexUpper = HEX_VALUES[chunk[pos++]];
+        if (hexUpper === -1)
+          return -1;
+        if (hexUpper >= 8)
+          self2._encode = 2;
+        if (pos < len) {
+          const hexLower = HEX_VALUES[chunk[pos++]];
+          if (hexLower === -1)
+            return -1;
+          if (self2._inKey)
+            self2._key += String.fromCharCode((hexUpper << 4) + hexLower);
+          else
+            self2._val += String.fromCharCode((hexUpper << 4) + hexLower);
+          self2._byte = -2;
+          self2._lastPos = pos;
+        } else {
+          self2._byte = hexUpper;
+        }
+      } else {
+        const hexLower = HEX_VALUES[chunk[pos++]];
+        if (hexLower === -1)
+          return -1;
+        if (self2._inKey)
+          self2._key += String.fromCharCode((self2._byte << 4) + hexLower);
+        else
+          self2._val += String.fromCharCode((self2._byte << 4) + hexLower);
+        self2._byte = -2;
+        self2._lastPos = pos;
+      }
+      return pos;
+    }
+    __name(readPctEnc, "readPctEnc");
+    function skipKeyBytes(self2, chunk, pos, len) {
+      if (self2._bytesKey > self2.fieldNameSizeLimit) {
+        if (!self2._keyTrunc) {
+          if (self2._lastPos < pos)
+            self2._key += chunk.latin1Slice(self2._lastPos, pos - 1);
+        }
+        self2._keyTrunc = true;
+        for (; pos < len; ++pos) {
+          const code = chunk[pos];
+          if (code === 61 || code === 38)
+            break;
+          ++self2._bytesKey;
+        }
+        self2._lastPos = pos;
+      }
+      return pos;
+    }
+    __name(skipKeyBytes, "skipKeyBytes");
+    function skipValBytes(self2, chunk, pos, len) {
+      if (self2._bytesVal > self2.fieldSizeLimit) {
+        if (!self2._valTrunc) {
+          if (self2._lastPos < pos)
+            self2._val += chunk.latin1Slice(self2._lastPos, pos - 1);
+        }
+        self2._valTrunc = true;
+        for (; pos < len; ++pos) {
+          if (chunk[pos] === 38)
+            break;
+          ++self2._bytesVal;
+        }
+        self2._lastPos = pos;
+      }
+      return pos;
+    }
+    __name(skipValBytes, "skipValBytes");
+    var HEX_VALUES = [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1
+    ];
+    module2.exports = URLEncoded;
+  }
+});
+
+// ../../node_modules/.pnpm/busboy@1.6.0/node_modules/busboy/lib/index.js
+var require_lib = __commonJS({
+  "../../node_modules/.pnpm/busboy@1.6.0/node_modules/busboy/lib/index.js"(exports, module2) {
+    "use strict";
+    var { parseContentType } = require_utils();
+    function getInstance(cfg) {
+      const headers = cfg.headers;
+      const conType = parseContentType(headers["content-type"]);
+      if (!conType)
+        throw new Error("Malformed content type");
+      for (const type of TYPES) {
+        const matched = type.detect(conType);
+        if (!matched)
+          continue;
+        const instanceCfg = {
+          limits: cfg.limits,
+          headers,
+          conType,
+          highWaterMark: void 0,
+          fileHwm: void 0,
+          defCharset: void 0,
+          defParamCharset: void 0,
+          preservePath: false
+        };
+        if (cfg.highWaterMark)
+          instanceCfg.highWaterMark = cfg.highWaterMark;
+        if (cfg.fileHwm)
+          instanceCfg.fileHwm = cfg.fileHwm;
+        instanceCfg.defCharset = cfg.defCharset;
+        instanceCfg.defParamCharset = cfg.defParamCharset;
+        instanceCfg.preservePath = cfg.preservePath;
+        return new type(instanceCfg);
+      }
+      throw new Error(`Unsupported content type: ${headers["content-type"]}`);
+    }
+    __name(getInstance, "getInstance");
+    var TYPES = [
+      require_multipart(),
+      require_urlencoded()
+    ].filter(function(typemod) {
+      return typeof typemod.detect === "function";
+    });
+    module2.exports = (cfg) => {
+      if (typeof cfg !== "object" || cfg === null)
+        cfg = {};
+      if (typeof cfg.headers !== "object" || cfg.headers === null || typeof cfg.headers["content-type"] !== "string") {
+        throw new Error("Missing Content-Type");
+      }
+      return getInstance(cfg);
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/constants.js
 var require_constants = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/constants.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/constants.js"(exports, module2) {
     "use strict";
     var corsSafeListedMethods = ["GET", "HEAD", "POST"];
     var nullBodyStatus = [101, 204, 205, 304];
@@ -5917,9 +9886,529 @@ var require_constants = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/symbols.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/util.js
+var require_util3 = __commonJS({
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/util.js"(exports, module2) {
+    "use strict";
+    var { redirectStatus } = require_constants();
+    var { performance: performance3 } = require("perf_hooks");
+    var { isBlobLike, toUSVString, ReadableStreamFrom } = require_util2();
+    var assert = require("assert");
+    var { isUint8Array } = require("util/types");
+    var crypto2;
+    try {
+      crypto2 = require("crypto");
+    } catch (e2) {
+    }
+    var badPorts = [
+      "1",
+      "7",
+      "9",
+      "11",
+      "13",
+      "15",
+      "17",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "25",
+      "37",
+      "42",
+      "43",
+      "53",
+      "69",
+      "77",
+      "79",
+      "87",
+      "95",
+      "101",
+      "102",
+      "103",
+      "104",
+      "109",
+      "110",
+      "111",
+      "113",
+      "115",
+      "117",
+      "119",
+      "123",
+      "135",
+      "137",
+      "139",
+      "143",
+      "161",
+      "179",
+      "389",
+      "427",
+      "465",
+      "512",
+      "513",
+      "514",
+      "515",
+      "526",
+      "530",
+      "531",
+      "532",
+      "540",
+      "548",
+      "554",
+      "556",
+      "563",
+      "587",
+      "601",
+      "636",
+      "989",
+      "990",
+      "993",
+      "995",
+      "1719",
+      "1720",
+      "1723",
+      "2049",
+      "3659",
+      "4045",
+      "5060",
+      "5061",
+      "6000",
+      "6566",
+      "6665",
+      "6666",
+      "6667",
+      "6668",
+      "6669",
+      "6697",
+      "10080"
+    ];
+    function responseURL(response) {
+      const urlList = response.urlList;
+      const length = urlList.length;
+      return length === 0 ? null : urlList[length - 1].toString();
+    }
+    __name(responseURL, "responseURL");
+    function responseLocationURL(response, requestFragment) {
+      if (!redirectStatus.includes(response.status)) {
+        return null;
+      }
+      let location = response.headersList.get("location");
+      location = location ? new URL(location, responseURL(response)) : null;
+      if (location && !location.hash) {
+        location.hash = requestFragment;
+      }
+      return location;
+    }
+    __name(responseLocationURL, "responseLocationURL");
+    function requestCurrentURL(request2) {
+      return request2.urlList[request2.urlList.length - 1];
+    }
+    __name(requestCurrentURL, "requestCurrentURL");
+    function requestBadPort(request2) {
+      const url = requestCurrentURL(request2);
+      if (/^https?:/.test(url.protocol) && badPorts.includes(url.port)) {
+        return "blocked";
+      }
+      return "allowed";
+    }
+    __name(requestBadPort, "requestBadPort");
+    function isErrorLike(object) {
+      var _a3, _b2;
+      return object instanceof Error || (((_a3 = object == null ? void 0 : object.constructor) == null ? void 0 : _a3.name) === "Error" || ((_b2 = object == null ? void 0 : object.constructor) == null ? void 0 : _b2.name) === "DOMException");
+    }
+    __name(isErrorLike, "isErrorLike");
+    function isValidReasonPhrase(statusText) {
+      for (let i = 0; i < statusText.length; ++i) {
+        const c = statusText.charCodeAt(i);
+        if (!(c === 9 || c >= 32 && c <= 126 || c >= 128 && c <= 255)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    __name(isValidReasonPhrase, "isValidReasonPhrase");
+    function isTokenChar(c) {
+      return !(c >= 127 || c <= 32 || c === "(" || c === ")" || c === "<" || c === ">" || c === "@" || c === "," || c === ";" || c === ":" || c === "\\" || c === '"' || c === "/" || c === "[" || c === "]" || c === "?" || c === "=" || c === "{" || c === "}");
+    }
+    __name(isTokenChar, "isTokenChar");
+    function isValidHTTPToken(characters) {
+      if (!characters || typeof characters !== "string") {
+        return false;
+      }
+      for (let i = 0; i < characters.length; ++i) {
+        const c = characters.charCodeAt(i);
+        if (c > 127 || !isTokenChar(c)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    __name(isValidHTTPToken, "isValidHTTPToken");
+    function isValidHeaderName(potentialValue) {
+      if (potentialValue.length === 0) {
+        return false;
+      }
+      for (const char of potentialValue) {
+        if (!isValidHTTPToken(char)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    __name(isValidHeaderName, "isValidHeaderName");
+    function isValidHeaderValue(potentialValue) {
+      if (potentialValue.startsWith("	") || potentialValue.startsWith(" ") || potentialValue.endsWith("	") || potentialValue.endsWith(" ")) {
+        return false;
+      }
+      if (potentialValue.includes("\0") || potentialValue.includes("\r") || potentialValue.includes("\n")) {
+        return false;
+      }
+      return true;
+    }
+    __name(isValidHeaderValue, "isValidHeaderValue");
+    function setRequestReferrerPolicyOnRedirect(request2, actualResponse) {
+      const policy = "";
+      if (policy !== "") {
+        request2.referrerPolicy = policy;
+      }
+    }
+    __name(setRequestReferrerPolicyOnRedirect, "setRequestReferrerPolicyOnRedirect");
+    function crossOriginResourcePolicyCheck() {
+      return "allowed";
+    }
+    __name(crossOriginResourcePolicyCheck, "crossOriginResourcePolicyCheck");
+    function corsCheck() {
+      return "success";
+    }
+    __name(corsCheck, "corsCheck");
+    function TAOCheck() {
+      return "success";
+    }
+    __name(TAOCheck, "TAOCheck");
+    function appendFetchMetadata(httpRequest) {
+      let header = null;
+      header = httpRequest.mode;
+      httpRequest.headersList.set("sec-fetch-mode", header);
+    }
+    __name(appendFetchMetadata, "appendFetchMetadata");
+    function appendRequestOriginHeader(request2) {
+      let serializedOrigin = request2.origin;
+      if (request2.responseTainting === "cors" || request2.mode === "websocket") {
+        if (serializedOrigin) {
+          request2.headersList.append("Origin", serializedOrigin);
+        }
+      } else if (request2.method !== "GET" && request2.method !== "HEAD") {
+        switch (request2.referrerPolicy) {
+          case "no-referrer":
+            serializedOrigin = null;
+            break;
+          case "no-referrer-when-downgrade":
+          case "strict-origin":
+          case "strict-origin-when-cross-origin":
+            if (/^https:/.test(request2.origin) && !/^https:/.test(requestCurrentURL(request2))) {
+              serializedOrigin = null;
+            }
+            break;
+          case "same-origin":
+            if (!sameOrigin(request2, requestCurrentURL(request2))) {
+              serializedOrigin = null;
+            }
+            break;
+          default:
+        }
+        if (serializedOrigin) {
+          request2.headersList.append("Origin", serializedOrigin);
+        }
+      }
+    }
+    __name(appendRequestOriginHeader, "appendRequestOriginHeader");
+    function coarsenedSharedCurrentTime(crossOriginIsolatedCapability) {
+      return performance3.now();
+    }
+    __name(coarsenedSharedCurrentTime, "coarsenedSharedCurrentTime");
+    function createOpaqueTimingInfo(timingInfo) {
+      var _a3, _b2;
+      return {
+        startTime: (_a3 = timingInfo.startTime) != null ? _a3 : 0,
+        redirectStartTime: 0,
+        redirectEndTime: 0,
+        postRedirectStartTime: (_b2 = timingInfo.startTime) != null ? _b2 : 0,
+        finalServiceWorkerStartTime: 0,
+        finalNetworkResponseStartTime: 0,
+        finalNetworkRequestStartTime: 0,
+        endTime: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        finalConnectionTimingInfo: null
+      };
+    }
+    __name(createOpaqueTimingInfo, "createOpaqueTimingInfo");
+    function makePolicyContainer() {
+      return {};
+    }
+    __name(makePolicyContainer, "makePolicyContainer");
+    function clonePolicyContainer() {
+      return {};
+    }
+    __name(clonePolicyContainer, "clonePolicyContainer");
+    function determineRequestsReferrer(request2) {
+      var _a3, _b2, _c, _d, _e, _f, _g;
+      const policy = request2.referrerPolicy;
+      if (policy == null || policy === "" || policy === "no-referrer") {
+        return "no-referrer";
+      }
+      const environment = request2.client;
+      let referrerSource = null;
+      if (request2.referrer === "client") {
+        if (((_c = (_b2 = (_a3 = request2.client) == null ? void 0 : _a3.globalObject) == null ? void 0 : _b2.constructor) == null ? void 0 : _c.name) === "Window") {
+          const origin = (_f = (_d = environment.globalObject.self) == null ? void 0 : _d.origin) != null ? _f : (_e = environment.globalObject.location) == null ? void 0 : _e.origin;
+          if (origin == null || origin === "null")
+            return "no-referrer";
+          referrerSource = new URL(environment.globalObject.location.href);
+        } else {
+          if (((_g = environment == null ? void 0 : environment.globalObject) == null ? void 0 : _g.location) == null) {
+            return "no-referrer";
+          }
+          referrerSource = new URL(environment.globalObject.location.href);
+        }
+      } else if (request2.referrer instanceof URL) {
+        referrerSource = request2.referrer;
+      } else {
+        return "no-referrer";
+      }
+      const urlProtocol = referrerSource.protocol;
+      if (urlProtocol === "about:" || urlProtocol === "data:" || urlProtocol === "blob:") {
+        return "no-referrer";
+      }
+      let temp;
+      let referrerOrigin;
+      const referrerUrl = (temp = stripURLForReferrer(referrerSource)).length > 4096 ? referrerOrigin = stripURLForReferrer(referrerSource, true) : temp;
+      const areSameOrigin = sameOrigin(request2, referrerUrl);
+      const isNonPotentiallyTrustWorthy = isURLPotentiallyTrustworthy(referrerUrl) && !isURLPotentiallyTrustworthy(request2.url);
+      switch (policy) {
+        case "origin":
+          return referrerOrigin != null ? referrerOrigin : stripURLForReferrer(referrerSource, true);
+        case "unsafe-url":
+          return referrerUrl;
+        case "same-origin":
+          return areSameOrigin ? referrerOrigin : "no-referrer";
+        case "origin-when-cross-origin":
+          return areSameOrigin ? referrerUrl : referrerOrigin;
+        case "strict-origin-when-cross-origin":
+          if (areSameOrigin)
+            return referrerOrigin;
+        case "strict-origin":
+        case "no-referrer-when-downgrade":
+        default:
+          return isNonPotentiallyTrustWorthy ? "no-referrer" : referrerOrigin;
+      }
+      function stripURLForReferrer(url, originOnly = false) {
+        const urlObject = new URL(url.href);
+        urlObject.username = "";
+        urlObject.password = "";
+        urlObject.hash = "";
+        return originOnly ? urlObject.origin : urlObject.href;
+      }
+      __name(stripURLForReferrer, "stripURLForReferrer");
+    }
+    __name(determineRequestsReferrer, "determineRequestsReferrer");
+    function isURLPotentiallyTrustworthy(url) {
+      if (!(url instanceof URL)) {
+        return false;
+      }
+      if (url.href === "about:blank" || url.href === "about:srcdoc") {
+        return true;
+      }
+      if (url.protocol === "data:")
+        return true;
+      if (url.protocol === "file:")
+        return true;
+      return isOriginPotentiallyTrustworthy(url.origin);
+      function isOriginPotentiallyTrustworthy(origin) {
+        if (origin == null || origin === "null")
+          return false;
+        const originAsURL = new URL(origin);
+        if (originAsURL.protocol === "https:" || originAsURL.protocol === "wss:") {
+          return true;
+        }
+        if (/^127(?:\.[0-9]+){0,2}\.[0-9]+$|^\[(?:0*:)*?:?0*1\]$/.test(originAsURL.hostname) || (originAsURL.hostname === "localhost" || originAsURL.hostname.includes("localhost.")) || originAsURL.hostname.endsWith(".localhost")) {
+          return true;
+        }
+        return false;
+      }
+      __name(isOriginPotentiallyTrustworthy, "isOriginPotentiallyTrustworthy");
+    }
+    __name(isURLPotentiallyTrustworthy, "isURLPotentiallyTrustworthy");
+    function bytesMatch(bytes, metadataList) {
+      if (crypto2 === void 0) {
+        return true;
+      }
+      const parsedMetadata = parseMetadata(metadataList);
+      if (parsedMetadata === "no metadata") {
+        return true;
+      }
+      if (parsedMetadata.length === 0) {
+        return true;
+      }
+      const metadata = parsedMetadata.sort((c, d2) => d2.algo.localeCompare(c.algo));
+      for (const item of metadata) {
+        const algorithm = item.algo;
+        const expectedValue = item.hash;
+        const actualValue = crypto2.createHash(algorithm).update(bytes).digest("base64");
+        if (actualValue === expectedValue) {
+          return true;
+        }
+      }
+      return false;
+    }
+    __name(bytesMatch, "bytesMatch");
+    var parseHashWithOptions = /((?<algo>sha256|sha384|sha512)-(?<hash>[A-z0-9+/]{1}.*={1,2}))( +[\x21-\x7e]?)?/i;
+    function parseMetadata(metadata) {
+      const result = [];
+      let empty2 = true;
+      const supportedHashes = crypto2.getHashes();
+      for (const token of metadata.split(" ")) {
+        empty2 = false;
+        const parsedToken = parseHashWithOptions.exec(token);
+        if (parsedToken === null || parsedToken.groups === void 0) {
+          continue;
+        }
+        const algorithm = parsedToken.groups.algo;
+        if (supportedHashes.includes(algorithm.toLowerCase())) {
+          result.push(parsedToken.groups);
+        }
+      }
+      if (empty2 === true) {
+        return "no metadata";
+      }
+      return result;
+    }
+    __name(parseMetadata, "parseMetadata");
+    function tryUpgradeRequestToAPotentiallyTrustworthyURL(request2) {
+    }
+    __name(tryUpgradeRequestToAPotentiallyTrustworthyURL, "tryUpgradeRequestToAPotentiallyTrustworthyURL");
+    function sameOrigin(A2, B) {
+      if (A2.protocol === B.protocol && A2.hostname === B.hostname && A2.port === B.port) {
+        return true;
+      }
+      return false;
+    }
+    __name(sameOrigin, "sameOrigin");
+    function createDeferredPromise() {
+      let res;
+      let rej;
+      const promise = new Promise((resolve, reject) => {
+        res = resolve;
+        rej = reject;
+      });
+      return { promise, resolve: res, reject: rej };
+    }
+    __name(createDeferredPromise, "createDeferredPromise");
+    function isAborted(fetchParams) {
+      return fetchParams.controller.state === "aborted";
+    }
+    __name(isAborted, "isAborted");
+    function isCancelled(fetchParams) {
+      return fetchParams.controller.state === "aborted" || fetchParams.controller.state === "terminated";
+    }
+    __name(isCancelled, "isCancelled");
+    function normalizeMethod(method) {
+      return /^(DELETE|GET|HEAD|OPTIONS|POST|PUT)$/i.test(method) ? method.toUpperCase() : method;
+    }
+    __name(normalizeMethod, "normalizeMethod");
+    function serializeJavascriptValueToJSONString(value) {
+      const result = JSON.stringify(value);
+      if (result === void 0) {
+        throw new TypeError("Value is not JSON serializable");
+      }
+      assert(typeof result === "string");
+      return result;
+    }
+    __name(serializeJavascriptValueToJSONString, "serializeJavascriptValueToJSONString");
+    var esIteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf([][Symbol.iterator]()));
+    function makeIterator(iterator, name) {
+      const i = {
+        next() {
+          if (Object.getPrototypeOf(this) !== i) {
+            throw new TypeError(
+              `'next' called on an object that does not implement interface ${name} Iterator.`
+            );
+          }
+          return iterator.next();
+        },
+        [Symbol.toStringTag]: `${name} Iterator`
+      };
+      Object.setPrototypeOf(i, esIteratorPrototype);
+      return Object.setPrototypeOf({}, i);
+    }
+    __name(makeIterator, "makeIterator");
+    async function fullyReadBody(body, processBody, processBodyError) {
+      try {
+        const chunks = [];
+        let length = 0;
+        const reader = body.stream.getReader();
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done === true) {
+            break;
+          }
+          assert(isUint8Array(value));
+          chunks.push(value);
+          length += value.byteLength;
+        }
+        const fulfilledSteps = /* @__PURE__ */ __name((bytes) => queueMicrotask(() => {
+          processBody(bytes);
+        }), "fulfilledSteps");
+        fulfilledSteps(Buffer.concat(chunks, length));
+      } catch (err) {
+        queueMicrotask(() => processBodyError(err));
+      }
+    }
+    __name(fullyReadBody, "fullyReadBody");
+    var hasOwn = Object.hasOwn || ((dict, key) => Object.prototype.hasOwnProperty.call(dict, key));
+    module2.exports = {
+      isAborted,
+      isCancelled,
+      createDeferredPromise,
+      ReadableStreamFrom,
+      toUSVString,
+      tryUpgradeRequestToAPotentiallyTrustworthyURL,
+      coarsenedSharedCurrentTime,
+      determineRequestsReferrer,
+      makePolicyContainer,
+      clonePolicyContainer,
+      appendFetchMetadata,
+      appendRequestOriginHeader,
+      TAOCheck,
+      corsCheck,
+      crossOriginResourcePolicyCheck,
+      createOpaqueTimingInfo,
+      setRequestReferrerPolicyOnRedirect,
+      isValidHTTPToken,
+      requestBadPort,
+      requestCurrentURL,
+      responseURL,
+      responseLocationURL,
+      isBlobLike,
+      isURLPotentiallyTrustworthy,
+      isValidReasonPhrase,
+      sameOrigin,
+      normalizeMethod,
+      serializeJavascriptValueToJSONString,
+      makeIterator,
+      isValidHeaderName,
+      isValidHeaderValue,
+      hasOwn,
+      isErrorLike,
+      fullyReadBody,
+      bytesMatch
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/symbols.js
 var require_symbols2 = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/symbols.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/symbols.js"(exports, module2) {
     "use strict";
     module2.exports = {
       kUrl: Symbol("url"),
@@ -5932,9 +10421,9 @@ var require_symbols2 = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/webidl.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/webidl.js
 var require_webidl = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/webidl.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/webidl.js"(exports, module2) {
     "use strict";
     var { types } = require("util");
     var { hasOwn, toUSVString } = require_util3();
@@ -5945,18 +10434,18 @@ var require_webidl = __commonJS({
     webidl.errors.exception = function(message) {
       throw new TypeError(`${message.header}: ${message.message}`);
     };
-    webidl.errors.conversionFailed = function(context5) {
-      const plural = context5.types.length === 1 ? "" : " one of";
-      const message = `${context5.argument} could not be converted to${plural}: ${context5.types.join(", ")}.`;
+    webidl.errors.conversionFailed = function(context3) {
+      const plural = context3.types.length === 1 ? "" : " one of";
+      const message = `${context3.argument} could not be converted to${plural}: ${context3.types.join(", ")}.`;
       return webidl.errors.exception({
-        header: context5.prefix,
+        header: context3.prefix,
         message
       });
     };
-    webidl.errors.invalidArgument = function(context5) {
+    webidl.errors.invalidArgument = function(context3) {
       return webidl.errors.exception({
-        header: context5.prefix,
-        message: `"${context5.value}" is an invalid ${context5.type}.`
+        header: context3.prefix,
+        message: `"${context3.value}" is an invalid ${context3.type}.`
       });
     };
     webidl.util.Type = function(V) {
@@ -6038,12 +10527,12 @@ var require_webidl = __commonJS({
       }
       return x;
     };
-    webidl.util.IntegerPart = function(n) {
-      const r = Math.floor(Math.abs(n));
-      if (n < 0) {
-        return -1 * r;
+    webidl.util.IntegerPart = function(n2) {
+      const r2 = Math.floor(Math.abs(n2));
+      if (n2 < 0) {
+        return -1 * r2;
       }
-      return r;
+      return r2;
     };
     webidl.sequenceConverter = function(converter) {
       return (V) => {
@@ -6263,9 +10752,9 @@ var require_webidl = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/file.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/file.js
 var require_file = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/file.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/file.js"(exports, module2) {
     "use strict";
     var { Blob } = require("buffer");
     var { types } = require("util");
@@ -6280,12 +10769,12 @@ var require_file = __commonJS({
         fileBits = webidl.converters["sequence<BlobPart>"](fileBits);
         fileName = webidl.converters.USVString(fileName);
         options = webidl.converters.FilePropertyBag(options);
-        const n = fileName;
-        const d = options.lastModified;
+        const n2 = fileName;
+        const d2 = options.lastModified;
         super(processBlobParts(fileBits, options), { type: options.type });
         this[kState] = {
-          name: n,
-          lastModified: d
+          name: n2,
+          lastModified: d2
         };
       }
       get name() {
@@ -6308,14 +10797,14 @@ var require_file = __commonJS({
     var FileLike = class {
       constructor(blobLike, fileName, options = {}) {
         var _a3;
-        const n = fileName;
-        const t = options.type;
-        const d = (_a3 = options.lastModified) != null ? _a3 : Date.now();
+        const n2 = fileName;
+        const t2 = options.type;
+        const d2 = (_a3 = options.lastModified) != null ? _a3 : Date.now();
         this[kState] = {
           blobLike,
-          name: n,
-          type: t,
-          lastModified: d
+          name: n2,
+          type: t2,
+          lastModified: d2
         };
       }
       stream(...args) {
@@ -6443,461 +10932,21 @@ var require_file = __commonJS({
       return s.replace(/\r?\n/g, nativeLineEnding);
     }
     __name(convertLineEndingsNative, "convertLineEndingsNative");
-    module2.exports = { File, FileLike };
-  }
-});
-
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/util.js
-var require_util3 = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/util.js"(exports, module2) {
-    "use strict";
-    var { redirectStatus } = require_constants();
-    var { performance: performance3 } = require("perf_hooks");
-    var { isBlobLike, toUSVString, ReadableStreamFrom } = require_util2();
-    var assert = require("assert");
-    var { isUint8Array } = require("util/types");
-    var File;
-    var crypto2;
-    try {
-      crypto2 = require("crypto");
-    } catch (e) {
-    }
-    var badPorts = [
-      "1",
-      "7",
-      "9",
-      "11",
-      "13",
-      "15",
-      "17",
-      "19",
-      "20",
-      "21",
-      "22",
-      "23",
-      "25",
-      "37",
-      "42",
-      "43",
-      "53",
-      "69",
-      "77",
-      "79",
-      "87",
-      "95",
-      "101",
-      "102",
-      "103",
-      "104",
-      "109",
-      "110",
-      "111",
-      "113",
-      "115",
-      "117",
-      "119",
-      "123",
-      "135",
-      "137",
-      "139",
-      "143",
-      "161",
-      "179",
-      "389",
-      "427",
-      "465",
-      "512",
-      "513",
-      "514",
-      "515",
-      "526",
-      "530",
-      "531",
-      "532",
-      "540",
-      "548",
-      "554",
-      "556",
-      "563",
-      "587",
-      "601",
-      "636",
-      "989",
-      "990",
-      "993",
-      "995",
-      "1719",
-      "1720",
-      "1723",
-      "2049",
-      "3659",
-      "4045",
-      "5060",
-      "5061",
-      "6000",
-      "6566",
-      "6665",
-      "6666",
-      "6667",
-      "6668",
-      "6669",
-      "6697",
-      "10080"
-    ];
-    function responseURL(response) {
-      const urlList = response.urlList;
-      const length = urlList.length;
-      return length === 0 ? null : urlList[length - 1].toString();
-    }
-    __name(responseURL, "responseURL");
-    function responseLocationURL(response, requestFragment) {
-      if (!redirectStatus.includes(response.status)) {
-        return null;
-      }
-      let location = response.headersList.get("location");
-      location = location ? new URL(location, responseURL(response)) : null;
-      if (location && !location.hash) {
-        location.hash = requestFragment;
-      }
-      return location;
-    }
-    __name(responseLocationURL, "responseLocationURL");
-    function requestCurrentURL(request2) {
-      return request2.urlList[request2.urlList.length - 1];
-    }
-    __name(requestCurrentURL, "requestCurrentURL");
-    function requestBadPort(request2) {
-      const url = requestCurrentURL(request2);
-      if (/^https?:/.test(url.protocol) && badPorts.includes(url.port)) {
-        return "blocked";
-      }
-      return "allowed";
-    }
-    __name(requestBadPort, "requestBadPort");
     function isFileLike(object) {
-      if (!File) {
-        File = require_file().File;
-      }
-      return object instanceof File || object && (typeof object.stream === "function" || typeof object.arrayBuffer === "function") && /^(File)$/.test(object[Symbol.toStringTag]);
+      return object instanceof File || object && (typeof object.stream === "function" || typeof object.arrayBuffer === "function") && object[Symbol.toStringTag] === "File";
     }
     __name(isFileLike, "isFileLike");
-    function isErrorLike(object) {
-      var _a3, _b2;
-      return object instanceof Error || (((_a3 = object == null ? void 0 : object.constructor) == null ? void 0 : _a3.name) === "Error" || ((_b2 = object == null ? void 0 : object.constructor) == null ? void 0 : _b2.name) === "DOMException");
-    }
-    __name(isErrorLike, "isErrorLike");
-    function isValidReasonPhrase(statusText) {
-      for (let i = 0; i < statusText.length; ++i) {
-        const c = statusText.charCodeAt(i);
-        if (!(c === 9 || c >= 32 && c <= 126 || c >= 128 && c <= 255)) {
-          return false;
-        }
-      }
-      return true;
-    }
-    __name(isValidReasonPhrase, "isValidReasonPhrase");
-    function isTokenChar(c) {
-      return !(c >= 127 || c <= 32 || c === "(" || c === ")" || c === "<" || c === ">" || c === "@" || c === "," || c === ";" || c === ":" || c === "\\" || c === '"' || c === "/" || c === "[" || c === "]" || c === "?" || c === "=" || c === "{" || c === "}");
-    }
-    __name(isTokenChar, "isTokenChar");
-    function isValidHTTPToken(characters) {
-      if (!characters || typeof characters !== "string") {
-        return false;
-      }
-      for (let i = 0; i < characters.length; ++i) {
-        const c = characters.charCodeAt(i);
-        if (c > 127 || !isTokenChar(c)) {
-          return false;
-        }
-      }
-      return true;
-    }
-    __name(isValidHTTPToken, "isValidHTTPToken");
-    function isValidHeaderName(potentialValue) {
-      if (potentialValue.length === 0) {
-        return false;
-      }
-      for (const char of potentialValue) {
-        if (!isValidHTTPToken(char)) {
-          return false;
-        }
-      }
-      return true;
-    }
-    __name(isValidHeaderName, "isValidHeaderName");
-    function isValidHeaderValue(potentialValue) {
-      if (potentialValue.startsWith("	") || potentialValue.startsWith(" ") || potentialValue.endsWith("	") || potentialValue.endsWith(" ")) {
-        return false;
-      }
-      if (potentialValue.includes("\0") || potentialValue.includes("\r") || potentialValue.includes("\n")) {
-        return false;
-      }
-      return true;
-    }
-    __name(isValidHeaderValue, "isValidHeaderValue");
-    function setRequestReferrerPolicyOnRedirect(request2, actualResponse) {
-      const policy = "";
-      if (policy !== "") {
-        request2.referrerPolicy = policy;
-      }
-    }
-    __name(setRequestReferrerPolicyOnRedirect, "setRequestReferrerPolicyOnRedirect");
-    function crossOriginResourcePolicyCheck() {
-      return "allowed";
-    }
-    __name(crossOriginResourcePolicyCheck, "crossOriginResourcePolicyCheck");
-    function corsCheck() {
-      return "success";
-    }
-    __name(corsCheck, "corsCheck");
-    function TAOCheck() {
-      return "success";
-    }
-    __name(TAOCheck, "TAOCheck");
-    function appendFetchMetadata(httpRequest) {
-      let header = null;
-      header = httpRequest.mode;
-      httpRequest.headersList.set("sec-fetch-mode", header);
-    }
-    __name(appendFetchMetadata, "appendFetchMetadata");
-    function appendRequestOriginHeader(request2) {
-      let serializedOrigin = request2.origin;
-      if (request2.responseTainting === "cors" || request2.mode === "websocket") {
-        if (serializedOrigin) {
-          request2.headersList.append("Origin", serializedOrigin);
-        }
-      } else if (request2.method !== "GET" && request2.method !== "HEAD") {
-        switch (request2.referrerPolicy) {
-          case "no-referrer":
-            serializedOrigin = null;
-            break;
-          case "no-referrer-when-downgrade":
-          case "strict-origin":
-          case "strict-origin-when-cross-origin":
-            if (/^https:/.test(request2.origin) && !/^https:/.test(requestCurrentURL(request2))) {
-              serializedOrigin = null;
-            }
-            break;
-          case "same-origin":
-            if (!sameOrigin(request2, requestCurrentURL(request2))) {
-              serializedOrigin = null;
-            }
-            break;
-          default:
-        }
-        if (serializedOrigin) {
-          request2.headersList.append("Origin", serializedOrigin);
-        }
-      }
-    }
-    __name(appendRequestOriginHeader, "appendRequestOriginHeader");
-    function coarsenedSharedCurrentTime(crossOriginIsolatedCapability) {
-      return performance3.now();
-    }
-    __name(coarsenedSharedCurrentTime, "coarsenedSharedCurrentTime");
-    function createOpaqueTimingInfo(timingInfo) {
-      var _a3, _b2;
-      return {
-        startTime: (_a3 = timingInfo.startTime) != null ? _a3 : 0,
-        redirectStartTime: 0,
-        redirectEndTime: 0,
-        postRedirectStartTime: (_b2 = timingInfo.startTime) != null ? _b2 : 0,
-        finalServiceWorkerStartTime: 0,
-        finalNetworkResponseStartTime: 0,
-        finalNetworkRequestStartTime: 0,
-        endTime: 0,
-        encodedBodySize: 0,
-        decodedBodySize: 0,
-        finalConnectionTimingInfo: null
-      };
-    }
-    __name(createOpaqueTimingInfo, "createOpaqueTimingInfo");
-    function makePolicyContainer() {
-      return {};
-    }
-    __name(makePolicyContainer, "makePolicyContainer");
-    function clonePolicyContainer() {
-      return {};
-    }
-    __name(clonePolicyContainer, "clonePolicyContainer");
-    function determineRequestsReferrer(request2) {
-      return "no-referrer";
-    }
-    __name(determineRequestsReferrer, "determineRequestsReferrer");
-    function bytesMatch(bytes, metadataList) {
-      if (crypto2 === void 0) {
-        return true;
-      }
-      const parsedMetadata = parseMetadata(metadataList);
-      if (parsedMetadata === "no metadata") {
-        return true;
-      }
-      if (parsedMetadata.length === 0) {
-        return true;
-      }
-      const metadata = parsedMetadata.sort((c, d) => d.algo.localeCompare(c.algo));
-      for (const item of metadata) {
-        const algorithm = item.algo;
-        const expectedValue = item.hash;
-        const actualValue = crypto2.createHash(algorithm).update(bytes).digest("base64");
-        if (actualValue === expectedValue) {
-          return true;
-        }
-      }
-      return false;
-    }
-    __name(bytesMatch, "bytesMatch");
-    var parseHashWithOptions = /((?<algo>sha256|sha384|sha512)-(?<hash>[A-z0-9+/]{1}.*={1,2}))( +[\x21-\x7e]?)?/i;
-    function parseMetadata(metadata) {
-      const result = [];
-      let empty2 = true;
-      const supportedHashes = crypto2.getHashes();
-      for (const token of metadata.split(" ")) {
-        empty2 = false;
-        const parsedToken = parseHashWithOptions.exec(token);
-        if (parsedToken === null || parsedToken.groups === void 0) {
-          continue;
-        }
-        const algorithm = parsedToken.groups.algo;
-        if (supportedHashes.includes(algorithm.toLowerCase())) {
-          result.push(parsedToken.groups);
-        }
-      }
-      if (empty2 === true) {
-        return "no metadata";
-      }
-      return result;
-    }
-    __name(parseMetadata, "parseMetadata");
-    function tryUpgradeRequestToAPotentiallyTrustworthyURL(request2) {
-    }
-    __name(tryUpgradeRequestToAPotentiallyTrustworthyURL, "tryUpgradeRequestToAPotentiallyTrustworthyURL");
-    function sameOrigin(A, B) {
-      if (A.protocol === B.protocol && A.hostname === B.hostname && A.port === B.port) {
-        return true;
-      }
-      return false;
-    }
-    __name(sameOrigin, "sameOrigin");
-    function createDeferredPromise() {
-      let res;
-      let rej;
-      const promise = new Promise((resolve, reject) => {
-        res = resolve;
-        rej = reject;
-      });
-      return { promise, resolve: res, reject: rej };
-    }
-    __name(createDeferredPromise, "createDeferredPromise");
-    function isAborted(fetchParams) {
-      return fetchParams.controller.state === "aborted";
-    }
-    __name(isAborted, "isAborted");
-    function isCancelled(fetchParams) {
-      return fetchParams.controller.state === "aborted" || fetchParams.controller.state === "terminated";
-    }
-    __name(isCancelled, "isCancelled");
-    function normalizeMethod(method) {
-      return /^(DELETE|GET|HEAD|OPTIONS|POST|PUT)$/i.test(method) ? method.toUpperCase() : method;
-    }
-    __name(normalizeMethod, "normalizeMethod");
-    function serializeJavascriptValueToJSONString(value) {
-      const result = JSON.stringify(value);
-      if (result === void 0) {
-        throw new TypeError("Value is not JSON serializable");
-      }
-      assert(typeof result === "string");
-      return result;
-    }
-    __name(serializeJavascriptValueToJSONString, "serializeJavascriptValueToJSONString");
-    var esIteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf([][Symbol.iterator]()));
-    function makeIterator(iterator, name) {
-      const i = {
-        next() {
-          if (Object.getPrototypeOf(this) !== i) {
-            throw new TypeError(
-              `'next' called on an object that does not implement interface ${name} Iterator.`
-            );
-          }
-          return iterator.next();
-        },
-        [Symbol.toStringTag]: `${name} Iterator`
-      };
-      Object.setPrototypeOf(i, esIteratorPrototype);
-      return Object.setPrototypeOf({}, i);
-    }
-    __name(makeIterator, "makeIterator");
-    async function fullyReadBody(body, processBody, processBodyError) {
-      try {
-        const chunks = [];
-        let length = 0;
-        const reader = body.stream.getReader();
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done === true) {
-            break;
-          }
-          assert(isUint8Array(value));
-          chunks.push(value);
-          length += value.byteLength;
-        }
-        const fulfilledSteps = /* @__PURE__ */ __name((bytes) => queueMicrotask(() => {
-          processBody(bytes);
-        }), "fulfilledSteps");
-        fulfilledSteps(Buffer.concat(chunks, length));
-      } catch (err) {
-        queueMicrotask(() => processBodyError(err));
-      }
-    }
-    __name(fullyReadBody, "fullyReadBody");
-    var hasOwn = Object.hasOwn || ((dict, key) => Object.prototype.hasOwnProperty.call(dict, key));
-    module2.exports = {
-      isAborted,
-      isCancelled,
-      createDeferredPromise,
-      ReadableStreamFrom,
-      toUSVString,
-      tryUpgradeRequestToAPotentiallyTrustworthyURL,
-      coarsenedSharedCurrentTime,
-      determineRequestsReferrer,
-      makePolicyContainer,
-      clonePolicyContainer,
-      appendFetchMetadata,
-      appendRequestOriginHeader,
-      TAOCheck,
-      corsCheck,
-      crossOriginResourcePolicyCheck,
-      createOpaqueTimingInfo,
-      setRequestReferrerPolicyOnRedirect,
-      isValidHTTPToken,
-      requestBadPort,
-      requestCurrentURL,
-      responseURL,
-      responseLocationURL,
-      isBlobLike,
-      isFileLike,
-      isValidReasonPhrase,
-      sameOrigin,
-      normalizeMethod,
-      serializeJavascriptValueToJSONString,
-      makeIterator,
-      isValidHeaderName,
-      isValidHeaderValue,
-      hasOwn,
-      isErrorLike,
-      fullyReadBody,
-      bytesMatch
-    };
+    module2.exports = { File, FileLike, isFileLike };
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/formdata.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/formdata.js
 var require_formdata = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/formdata.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/formdata.js"(exports, module2) {
     "use strict";
-    var { isBlobLike, isFileLike, toUSVString, makeIterator } = require_util3();
+    var { isBlobLike, toUSVString, makeIterator } = require_util3();
     var { kState } = require_symbols2();
-    var { File, FileLike } = require_file();
+    var { File, FileLike, isFileLike } = require_file();
     var { webidl } = require_webidl();
     var { Blob } = require("buffer");
     var _FormData = class {
@@ -7102,21 +11151,23 @@ var require_formdata = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/body.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/body.js
 var require_body = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/body.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/body.js"(exports, module2) {
     "use strict";
+    var Busboy = require_lib();
     var util2 = require_util2();
     var { ReadableStreamFrom, toUSVString, isBlobLike } = require_util3();
     var { FormData } = require_formdata();
     var { kState } = require_symbols2();
     var { webidl } = require_webidl();
+    var { DOMException } = require_constants();
     var { Blob } = require("buffer");
     var { kBodyUsed } = require_symbols();
     var assert = require("assert");
-    var { NotSupportedError } = require_errors();
     var { isErrored } = require_util2();
     var { isUint8Array, isArrayBuffer } = require("util/types");
+    var { File } = require_file();
     var ReadableStream;
     async function* blobGen(blob) {
       yield* blob.stream();
@@ -7238,8 +11289,8 @@ Content-Type: ${value.type || "application/octet-stream"}\r
         ReadableStream = require("stream/web").ReadableStream;
       }
       if (object instanceof ReadableStream) {
-        assert(!util2.isDisturbed(object), "disturbed");
-        assert(!object.locked, "locked");
+        assert(!util2.isDisturbed(object), "The body has already been consumed.");
+        assert(!object.locked, "The stream is locked.");
       }
       return extractBody(object, keepalive);
     }
@@ -7261,10 +11312,10 @@ Content-Type: ${value.type || "application/octet-stream"}\r
         } else {
           const stream2 = body.stream;
           if (util2.isDisturbed(stream2)) {
-            throw new TypeError("disturbed");
+            throw new TypeError("The body has already been consumed.");
           }
           if (stream2.locked) {
-            throw new TypeError("locked");
+            throw new TypeError("The stream is locked.");
           }
           stream2[kBodyUsed] = true;
           yield* stream2;
@@ -7272,12 +11323,19 @@ Content-Type: ${value.type || "application/octet-stream"}\r
       }
     }
     __name(consumeBody, "consumeBody");
+    function throwIfAborted(state) {
+      if (state.aborted) {
+        throw new DOMException("The operation was aborted.", "AbortError");
+      }
+    }
+    __name(throwIfAborted, "throwIfAborted");
     function bodyMixinMethods(instance) {
       const methods = {
         async blob() {
           if (!(this instanceof instance)) {
             throw new TypeError("Illegal invocation");
           }
+          throwIfAborted(this[kState]);
           const chunks = [];
           for await (const chunk of consumeBody(this[kState].body)) {
             if (!isUint8Array(chunk)) {
@@ -7291,6 +11349,7 @@ Content-Type: ${value.type || "application/octet-stream"}\r
           if (!(this instanceof instance)) {
             throw new TypeError("Illegal invocation");
           }
+          throwIfAborted(this[kState]);
           const contentLength = this.headers.get("content-length");
           const encoded = this.headers.has("content-encoding");
           if (!encoded && contentLength) {
@@ -7326,6 +11385,7 @@ Content-Type: ${value.type || "application/octet-stream"}\r
           if (!(this instanceof instance)) {
             throw new TypeError("Illegal invocation");
           }
+          throwIfAborted(this[kState]);
           let result = "";
           const textDecoder = new TextDecoder();
           for await (const chunk of consumeBody(this[kState].body)) {
@@ -7341,15 +11401,63 @@ Content-Type: ${value.type || "application/octet-stream"}\r
           if (!(this instanceof instance)) {
             throw new TypeError("Illegal invocation");
           }
+          throwIfAborted(this[kState]);
           return JSON.parse(await this.text());
         },
         async formData() {
           if (!(this instanceof instance)) {
             throw new TypeError("Illegal invocation");
           }
+          throwIfAborted(this[kState]);
           const contentType = this.headers.get("Content-Type");
           if (/multipart\/form-data/.test(contentType)) {
-            throw new NotSupportedError("multipart/form-data not supported");
+            const headers = {};
+            for (const [key, value] of this.headers)
+              headers[key.toLowerCase()] = value;
+            const responseFormData = new FormData();
+            let busboy;
+            try {
+              busboy = Busboy({ headers });
+            } catch (err) {
+              throw Object.assign(new TypeError(), { cause: err });
+            }
+            busboy.on("field", (name, value) => {
+              responseFormData.append(name, value);
+            });
+            busboy.on("file", (name, value, info2) => {
+              const { filename, encoding, mimeType } = info2;
+              const chunks = [];
+              if (encoding.toLowerCase() === "base64") {
+                let base64chunk = "";
+                value.on("data", (chunk) => {
+                  base64chunk += chunk.toString().replace(/[\r\n]/gm, "");
+                  const end = base64chunk.length - base64chunk.length % 4;
+                  chunks.push(Buffer.from(base64chunk.slice(0, end), "base64"));
+                  base64chunk = base64chunk.slice(end);
+                });
+                value.on("end", () => {
+                  chunks.push(Buffer.from(base64chunk, "base64"));
+                  responseFormData.append(name, new File(chunks, filename, { type: mimeType }));
+                });
+              } else {
+                value.on("data", (chunk) => {
+                  chunks.push(chunk);
+                });
+                value.on("end", () => {
+                  responseFormData.append(name, new File(chunks, filename, { type: mimeType }));
+                });
+              }
+            });
+            const busboyResolve = new Promise((resolve, reject) => {
+              busboy.on("finish", resolve);
+              busboy.on("error", (err) => reject(err));
+            });
+            if (this.body !== null)
+              for await (const chunk of consumeBody(this[kState].body))
+                busboy.write(chunk);
+            busboy.end();
+            await busboyResolve;
+            return responseFormData;
           } else if (/application\/x-www-form-urlencoded/.test(contentType)) {
             let entries;
             try {
@@ -7372,9 +11480,11 @@ Content-Type: ${value.type || "application/octet-stream"}\r
             }
             return formData;
           } else {
+            await Promise.resolve();
+            throwIfAborted(this[kState]);
             webidl.errors.exception({
               header: `${instance.name}.formData`,
-              value: "Could not parse content as FormData."
+              message: "Could not parse content as FormData."
             });
           }
         }
@@ -7416,9 +11526,9 @@ Content-Type: ${value.type || "application/octet-stream"}\r
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/request.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/request.js
 var require_request = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/request.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/request.js"(exports, module2) {
     "use strict";
     var {
       InvalidArgumentError,
@@ -7442,7 +11552,7 @@ var require_request = __commonJS({
       channels.headers = diagnosticsChannel.channel("undici:request:headers");
       channels.trailers = diagnosticsChannel.channel("undici:request:trailers");
       channels.error = diagnosticsChannel.channel("undici:request:error");
-    } catch (e) {
+    } catch (e2) {
       channels.create = { hasSubscribers: false };
       channels.bodySent = { hasSubscribers: false };
       channels.headers = { hasSubscribers: false };
@@ -7660,12 +11770,12 @@ var require_request = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/dispatcher.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/dispatcher.js
 var require_dispatcher = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/dispatcher.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/dispatcher.js"(exports, module2) {
     "use strict";
-    var EventEmitter4 = require("events");
-    var Dispatcher = class extends EventEmitter4 {
+    var EventEmitter3 = require("events");
+    var Dispatcher = class extends EventEmitter3 {
       dispatch() {
         throw new Error("not implemented");
       }
@@ -7681,9 +11791,9 @@ var require_dispatcher = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/dispatcher-base.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/dispatcher-base.js
 var require_dispatcher_base = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/dispatcher-base.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/dispatcher-base.js"(exports, module2) {
     "use strict";
     var Dispatcher = require_dispatcher();
     var {
@@ -7691,11 +11801,12 @@ var require_dispatcher_base = __commonJS({
       ClientClosedError,
       InvalidArgumentError
     } = require_errors();
-    var { kDestroy, kClose, kDispatch } = require_symbols();
+    var { kDestroy, kClose, kDispatch, kInterceptors } = require_symbols();
     var kDestroyed = Symbol("destroyed");
     var kClosed = Symbol("closed");
     var kOnDestroyed = Symbol("onDestroyed");
     var kOnClosed = Symbol("onClosed");
+    var kInterceptedDispatch = Symbol("Intercepted Dispatch");
     var DispatcherBase = class extends Dispatcher {
       constructor() {
         super();
@@ -7709,6 +11820,20 @@ var require_dispatcher_base = __commonJS({
       }
       get closed() {
         return this[kClosed];
+      }
+      get interceptors() {
+        return this[kInterceptors];
+      }
+      set interceptors(newInterceptors) {
+        if (newInterceptors) {
+          for (let i = newInterceptors.length - 1; i >= 0; i--) {
+            const interceptor = this[kInterceptors][i];
+            if (typeof interceptor !== "function") {
+              throw new InvalidArgumentError("interceptor must be an function");
+            }
+          }
+        }
+        this[kInterceptors] = newInterceptors;
       }
       close(callback) {
         if (callback === void 0) {
@@ -7785,6 +11910,18 @@ var require_dispatcher_base = __commonJS({
           queueMicrotask(onDestroyed);
         });
       }
+      [kInterceptedDispatch](opts, handler) {
+        if (!this[kInterceptors] || this[kInterceptors].length === 0) {
+          this[kInterceptedDispatch] = this[kDispatch];
+          return this[kDispatch](opts, handler);
+        }
+        let dispatch = this[kDispatch].bind(this);
+        for (let i = this[kInterceptors].length - 1; i >= 0; i--) {
+          dispatch = this[kInterceptors][i](dispatch);
+        }
+        this[kInterceptedDispatch] = dispatch;
+        return dispatch(opts, handler);
+      }
       dispatch(opts, handler) {
         if (!handler || typeof handler !== "object") {
           throw new InvalidArgumentError("handler must be an object");
@@ -7799,7 +11936,7 @@ var require_dispatcher_base = __commonJS({
           if (this[kClosed]) {
             throw new ClientClosedError();
           }
-          return this[kDispatch](opts, handler);
+          return this[kInterceptedDispatch](opts, handler);
         } catch (err) {
           if (typeof handler.onError !== "function") {
             throw new InvalidArgumentError("invalid onError method");
@@ -7814,153 +11951,9 @@ var require_dispatcher_base = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/handler/redirect.js
-var require_redirect = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/handler/redirect.js"(exports, module2) {
-    "use strict";
-    var util2 = require_util2();
-    var { kBodyUsed } = require_symbols();
-    var assert = require("assert");
-    var { InvalidArgumentError } = require_errors();
-    var EE = require("events");
-    var redirectableStatusCodes = [300, 301, 302, 303, 307, 308];
-    var kBody = Symbol("body");
-    var BodyAsyncIterable = class {
-      constructor(body) {
-        this[kBody] = body;
-        this[kBodyUsed] = false;
-      }
-      async *[Symbol.asyncIterator]() {
-        assert(!this[kBodyUsed], "disturbed");
-        this[kBodyUsed] = true;
-        yield* this[kBody];
-      }
-    };
-    __name(BodyAsyncIterable, "BodyAsyncIterable");
-    var RedirectHandler = class {
-      constructor(dispatcher, maxRedirections, opts, handler) {
-        if (maxRedirections != null && (!Number.isInteger(maxRedirections) || maxRedirections < 0)) {
-          throw new InvalidArgumentError("maxRedirections must be a positive number");
-        }
-        util2.validateHandler(handler, opts.method, opts.upgrade);
-        this.dispatcher = dispatcher;
-        this.location = null;
-        this.abort = null;
-        this.opts = { ...opts, maxRedirections: 0 };
-        this.maxRedirections = maxRedirections;
-        this.handler = handler;
-        this.history = [];
-        if (util2.isStream(this.opts.body)) {
-          if (util2.bodyLength(this.opts.body) === 0) {
-            this.opts.body.on("data", function() {
-              assert(false);
-            });
-          }
-          if (typeof this.opts.body.readableDidRead !== "boolean") {
-            this.opts.body[kBodyUsed] = false;
-            EE.prototype.on.call(this.opts.body, "data", function() {
-              this[kBodyUsed] = true;
-            });
-          }
-        } else if (this.opts.body && typeof this.opts.body.pipeTo === "function") {
-          this.opts.body = new BodyAsyncIterable(this.opts.body);
-        } else if (this.opts.body && typeof this.opts.body !== "string" && !ArrayBuffer.isView(this.opts.body) && util2.isIterable(this.opts.body)) {
-          this.opts.body = new BodyAsyncIterable(this.opts.body);
-        }
-      }
-      onConnect(abort) {
-        this.abort = abort;
-        this.handler.onConnect(abort, { history: this.history });
-      }
-      onUpgrade(statusCode, headers, socket) {
-        this.handler.onUpgrade(statusCode, headers, socket);
-      }
-      onError(error2) {
-        this.handler.onError(error2);
-      }
-      onHeaders(statusCode, headers, resume, statusText) {
-        this.location = this.history.length >= this.maxRedirections || util2.isDisturbed(this.opts.body) ? null : parseLocation(statusCode, headers);
-        if (this.opts.origin) {
-          this.history.push(new URL(this.opts.path, this.opts.origin));
-        }
-        if (!this.location) {
-          return this.handler.onHeaders(statusCode, headers, resume, statusText);
-        }
-        const { origin, pathname, search } = util2.parseURL(new URL(this.location, this.opts.origin && new URL(this.opts.path, this.opts.origin)));
-        const path7 = search ? `${pathname}${search}` : pathname;
-        this.opts.headers = cleanRequestHeaders(this.opts.headers, statusCode === 303, this.opts.origin !== origin);
-        this.opts.path = path7;
-        this.opts.origin = origin;
-        this.opts.maxRedirections = 0;
-        if (statusCode === 303 && this.opts.method !== "HEAD") {
-          this.opts.method = "GET";
-          this.opts.body = null;
-        }
-      }
-      onData(chunk) {
-        if (this.location) {
-        } else {
-          return this.handler.onData(chunk);
-        }
-      }
-      onComplete(trailers) {
-        if (this.location) {
-          this.location = null;
-          this.abort = null;
-          this.dispatcher.dispatch(this.opts, this);
-        } else {
-          this.handler.onComplete(trailers);
-        }
-      }
-      onBodySent(chunk) {
-        if (this.handler.onBodySent) {
-          this.handler.onBodySent(chunk);
-        }
-      }
-    };
-    __name(RedirectHandler, "RedirectHandler");
-    function parseLocation(statusCode, headers) {
-      if (redirectableStatusCodes.indexOf(statusCode) === -1) {
-        return null;
-      }
-      for (let i = 0; i < headers.length; i += 2) {
-        if (headers[i].toString().toLowerCase() === "location") {
-          return headers[i + 1];
-        }
-      }
-    }
-    __name(parseLocation, "parseLocation");
-    function shouldRemoveHeader(header, removeContent, unknownOrigin) {
-      return header.length === 4 && header.toString().toLowerCase() === "host" || removeContent && header.toString().toLowerCase().indexOf("content-") === 0 || unknownOrigin && header.length === 13 && header.toString().toLowerCase() === "authorization" || unknownOrigin && header.length === 6 && header.toString().toLowerCase() === "cookie";
-    }
-    __name(shouldRemoveHeader, "shouldRemoveHeader");
-    function cleanRequestHeaders(headers, removeContent, unknownOrigin) {
-      const ret = [];
-      if (Array.isArray(headers)) {
-        for (let i = 0; i < headers.length; i += 2) {
-          if (!shouldRemoveHeader(headers[i], removeContent, unknownOrigin)) {
-            ret.push(headers[i], headers[i + 1]);
-          }
-        }
-      } else if (headers && typeof headers === "object") {
-        for (const key of Object.keys(headers)) {
-          if (!shouldRemoveHeader(key, removeContent, unknownOrigin)) {
-            ret.push(key, headers[key]);
-          }
-        }
-      } else {
-        assert(headers == null, "headers must be an object or an array");
-      }
-      return ret;
-    }
-    __name(cleanRequestHeaders, "cleanRequestHeaders");
-    module2.exports = RedirectHandler;
-  }
-});
-
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/connect.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/connect.js
 var require_connect = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/core/connect.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/core/connect.js"(exports, module2) {
     "use strict";
     var net2 = require("net");
     var assert = require("assert");
@@ -8068,9 +12061,9 @@ var require_connect = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/llhttp/utils.js
-var require_utils = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/llhttp/utils.js"(exports) {
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/llhttp/utils.js
+var require_utils2 = __commonJS({
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/llhttp/utils.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.enumToMap = void 0;
@@ -8089,13 +12082,13 @@ var require_utils = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/llhttp/constants.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/llhttp/constants.js
 var require_constants2 = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/llhttp/constants.js"(exports) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/llhttp/constants.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.SPECIAL_HEADERS = exports.HEADER_STATE = exports.MINOR = exports.MAJOR = exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS = exports.TOKEN = exports.STRICT_TOKEN = exports.HEX = exports.URL_CHAR = exports.STRICT_URL_CHAR = exports.USERINFO_CHARS = exports.MARK = exports.ALPHANUM = exports.NUM = exports.HEX_MAP = exports.NUM_MAP = exports.ALPHA = exports.FINISH = exports.H_METHOD_MAP = exports.METHOD_MAP = exports.METHODS_RTSP = exports.METHODS_ICE = exports.METHODS_HTTP = exports.METHODS = exports.LENIENT_FLAGS = exports.FLAGS = exports.TYPE = exports.ERROR = void 0;
-    var utils_1 = require_utils();
+    var utils_1 = require_utils2();
     var ERROR;
     (function(ERROR2) {
       ERROR2[ERROR2["OK"] = 0] = "OK";
@@ -8408,30 +12401,196 @@ var require_constants2 = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/llhttp/llhttp.wasm.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/handler/RedirectHandler.js
+var require_RedirectHandler = __commonJS({
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/handler/RedirectHandler.js"(exports, module2) {
+    "use strict";
+    var util2 = require_util2();
+    var { kBodyUsed } = require_symbols();
+    var assert = require("assert");
+    var { InvalidArgumentError } = require_errors();
+    var EE = require("events");
+    var redirectableStatusCodes = [300, 301, 302, 303, 307, 308];
+    var kBody = Symbol("body");
+    var BodyAsyncIterable = class {
+      constructor(body) {
+        this[kBody] = body;
+        this[kBodyUsed] = false;
+      }
+      async *[Symbol.asyncIterator]() {
+        assert(!this[kBodyUsed], "disturbed");
+        this[kBodyUsed] = true;
+        yield* this[kBody];
+      }
+    };
+    __name(BodyAsyncIterable, "BodyAsyncIterable");
+    var RedirectHandler = class {
+      constructor(dispatch, maxRedirections, opts, handler) {
+        if (maxRedirections != null && (!Number.isInteger(maxRedirections) || maxRedirections < 0)) {
+          throw new InvalidArgumentError("maxRedirections must be a positive number");
+        }
+        util2.validateHandler(handler, opts.method, opts.upgrade);
+        this.dispatch = dispatch;
+        this.location = null;
+        this.abort = null;
+        this.opts = { ...opts, maxRedirections: 0 };
+        this.maxRedirections = maxRedirections;
+        this.handler = handler;
+        this.history = [];
+        if (util2.isStream(this.opts.body)) {
+          if (util2.bodyLength(this.opts.body) === 0) {
+            this.opts.body.on("data", function() {
+              assert(false);
+            });
+          }
+          if (typeof this.opts.body.readableDidRead !== "boolean") {
+            this.opts.body[kBodyUsed] = false;
+            EE.prototype.on.call(this.opts.body, "data", function() {
+              this[kBodyUsed] = true;
+            });
+          }
+        } else if (this.opts.body && typeof this.opts.body.pipeTo === "function") {
+          this.opts.body = new BodyAsyncIterable(this.opts.body);
+        } else if (this.opts.body && typeof this.opts.body !== "string" && !ArrayBuffer.isView(this.opts.body) && util2.isIterable(this.opts.body)) {
+          this.opts.body = new BodyAsyncIterable(this.opts.body);
+        }
+      }
+      onConnect(abort) {
+        this.abort = abort;
+        this.handler.onConnect(abort, { history: this.history });
+      }
+      onUpgrade(statusCode, headers, socket) {
+        this.handler.onUpgrade(statusCode, headers, socket);
+      }
+      onError(error2) {
+        this.handler.onError(error2);
+      }
+      onHeaders(statusCode, headers, resume, statusText) {
+        this.location = this.history.length >= this.maxRedirections || util2.isDisturbed(this.opts.body) ? null : parseLocation(statusCode, headers);
+        if (this.opts.origin) {
+          this.history.push(new URL(this.opts.path, this.opts.origin));
+        }
+        if (!this.location) {
+          return this.handler.onHeaders(statusCode, headers, resume, statusText);
+        }
+        const { origin, pathname, search } = util2.parseURL(new URL(this.location, this.opts.origin && new URL(this.opts.path, this.opts.origin)));
+        const path7 = search ? `${pathname}${search}` : pathname;
+        this.opts.headers = cleanRequestHeaders(this.opts.headers, statusCode === 303, this.opts.origin !== origin);
+        this.opts.path = path7;
+        this.opts.origin = origin;
+        this.opts.maxRedirections = 0;
+        if (statusCode === 303 && this.opts.method !== "HEAD") {
+          this.opts.method = "GET";
+          this.opts.body = null;
+        }
+      }
+      onData(chunk) {
+        if (this.location) {
+        } else {
+          return this.handler.onData(chunk);
+        }
+      }
+      onComplete(trailers) {
+        if (this.location) {
+          this.location = null;
+          this.abort = null;
+          this.dispatch(this.opts, this);
+        } else {
+          this.handler.onComplete(trailers);
+        }
+      }
+      onBodySent(chunk) {
+        if (this.handler.onBodySent) {
+          this.handler.onBodySent(chunk);
+        }
+      }
+    };
+    __name(RedirectHandler, "RedirectHandler");
+    function parseLocation(statusCode, headers) {
+      if (redirectableStatusCodes.indexOf(statusCode) === -1) {
+        return null;
+      }
+      for (let i = 0; i < headers.length; i += 2) {
+        if (headers[i].toString().toLowerCase() === "location") {
+          return headers[i + 1];
+        }
+      }
+    }
+    __name(parseLocation, "parseLocation");
+    function shouldRemoveHeader(header, removeContent, unknownOrigin) {
+      return header.length === 4 && header.toString().toLowerCase() === "host" || removeContent && header.toString().toLowerCase().indexOf("content-") === 0 || unknownOrigin && header.length === 13 && header.toString().toLowerCase() === "authorization" || unknownOrigin && header.length === 6 && header.toString().toLowerCase() === "cookie";
+    }
+    __name(shouldRemoveHeader, "shouldRemoveHeader");
+    function cleanRequestHeaders(headers, removeContent, unknownOrigin) {
+      const ret = [];
+      if (Array.isArray(headers)) {
+        for (let i = 0; i < headers.length; i += 2) {
+          if (!shouldRemoveHeader(headers[i], removeContent, unknownOrigin)) {
+            ret.push(headers[i], headers[i + 1]);
+          }
+        }
+      } else if (headers && typeof headers === "object") {
+        for (const key of Object.keys(headers)) {
+          if (!shouldRemoveHeader(key, removeContent, unknownOrigin)) {
+            ret.push(key, headers[key]);
+          }
+        }
+      } else {
+        assert(headers == null, "headers must be an object or an array");
+      }
+      return ret;
+    }
+    __name(cleanRequestHeaders, "cleanRequestHeaders");
+    module2.exports = RedirectHandler;
+  }
+});
+
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/interceptor/redirectInterceptor.js
+var require_redirectInterceptor = __commonJS({
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/interceptor/redirectInterceptor.js"(exports, module2) {
+    "use strict";
+    var RedirectHandler = require_RedirectHandler();
+    function createRedirectInterceptor({ maxRedirections: defaultMaxRedirections }) {
+      return (dispatch) => {
+        return /* @__PURE__ */ __name(function Intercept(opts, handler) {
+          const { maxRedirections = defaultMaxRedirections } = opts;
+          if (!maxRedirections) {
+            return dispatch(opts, handler);
+          }
+          const redirectHandler = new RedirectHandler(dispatch, maxRedirections, opts, handler);
+          opts = { ...opts, maxRedirections: 0 };
+          return dispatch(opts, redirectHandler);
+        }, "Intercept");
+      };
+    }
+    __name(createRedirectInterceptor, "createRedirectInterceptor");
+    module2.exports = createRedirectInterceptor;
+  }
+});
+
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/llhttp/llhttp.wasm.js
 var require_llhttp_wasm = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/llhttp/llhttp.wasm.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/llhttp/llhttp.wasm.js"(exports, module2) {
     module2.exports = "AGFzbQEAAAABMAhgAX8Bf2ADf39/AX9gBH9/f38Bf2AAAGADf39/AGABfwBgAn9/AGAGf39/f39/AALLAQgDZW52GHdhc21fb25faGVhZGVyc19jb21wbGV0ZQACA2VudhV3YXNtX29uX21lc3NhZ2VfYmVnaW4AAANlbnYLd2FzbV9vbl91cmwAAQNlbnYOd2FzbV9vbl9zdGF0dXMAAQNlbnYUd2FzbV9vbl9oZWFkZXJfZmllbGQAAQNlbnYUd2FzbV9vbl9oZWFkZXJfdmFsdWUAAQNlbnYMd2FzbV9vbl9ib2R5AAEDZW52GHdhc21fb25fbWVzc2FnZV9jb21wbGV0ZQAAAzk4AwMEAAAFAAAAAAAABQEFAAUFBQAABgAAAAYGAQEBAQEBAQEBAQEBAQEBAQABAAABAQcAAAUFAAMEBQFwAQ4OBQMBAAIGCAF/AUGAuAQLB/UEHwZtZW1vcnkCAAtfaW5pdGlhbGl6ZQAJGV9faW5kaXJlY3RfZnVuY3Rpb25fdGFibGUBAAtsbGh0dHBfaW5pdAAKGGxsaHR0cF9zaG91bGRfa2VlcF9hbGl2ZQA1DGxsaHR0cF9hbGxvYwAMBm1hbGxvYwA6C2xsaHR0cF9mcmVlAA0EZnJlZQA8D2xsaHR0cF9nZXRfdHlwZQAOFWxsaHR0cF9nZXRfaHR0cF9tYWpvcgAPFWxsaHR0cF9nZXRfaHR0cF9taW5vcgAQEWxsaHR0cF9nZXRfbWV0aG9kABEWbGxodHRwX2dldF9zdGF0dXNfY29kZQASEmxsaHR0cF9nZXRfdXBncmFkZQATDGxsaHR0cF9yZXNldAAUDmxsaHR0cF9leGVjdXRlABUUbGxodHRwX3NldHRpbmdzX2luaXQAFg1sbGh0dHBfZmluaXNoABcMbGxodHRwX3BhdXNlABgNbGxodHRwX3Jlc3VtZQAZG2xsaHR0cF9yZXN1bWVfYWZ0ZXJfdXBncmFkZQAaEGxsaHR0cF9nZXRfZXJybm8AGxdsbGh0dHBfZ2V0X2Vycm9yX3JlYXNvbgAcF2xsaHR0cF9zZXRfZXJyb3JfcmVhc29uAB0UbGxodHRwX2dldF9lcnJvcl9wb3MAHhFsbGh0dHBfZXJybm9fbmFtZQAfEmxsaHR0cF9tZXRob2RfbmFtZQAgGmxsaHR0cF9zZXRfbGVu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f2pB5ABJDQAgAEHMAUYNACAAQbACRg0AQQQhBSAEQYgEcUGABEYNAiAEQShxRQ0CC0EADwtBAEEDIAApAyBQGyEFCyAFC10BAn9BACEBAkAgAC0AKEEBRg0AIAAvATIiAkGcf2pB5ABJDQAgAkHMAUYNACACQbACRg0AIAAvATAiAEHAAHENAEEBIQEgAEGIBHFBgARGDQAgAEEocUUhAQsgAQuiAQEDfwJAAkACQCAALQAqRQ0AIAAtACtFDQBBACEDIAAvATAiBEECcUUNAQwCC0EAIQMgAC8BMCIEQQFxRQ0BC0EBIQMgAC0AKEEBRg0AIAAvATIiBUGcf2pB5ABJDQAgBUHMAUYNACAFQbACRg0AIARBwABxDQBBACEDIARBiARxQYAERg0AIARBKHFBAEchAwsgAEEAOwEwIABBADoALyADC5QBAQJ/AkACQAJAIAAtACpFDQAgAC0AK0UNAEEAIQEgAC8BMCICQQJxRQ0BDAILQQAhASAALwEwIgJBAXFFDQELQQEhASAALQAoQQFGDQAgAC8BMiIAQZx/akHkAEkNACAAQcwBRg0AIABBsAJGDQAgAkHAAHENAEEAIQEgAkGIBHFBgARGDQAgAkEocUEARyEBCyABC08AIABBGGpCADcDACAAQgA3AwAgAEEwakIANwMAIABBKGpCADcDACAAQSBqQgA3AwAgAEEQakIANwMAIABBCGpCADcDACAAQbwBNgIcQQALewEBfwJAIAAoAgwiAw0AAkAgACgCBEUNACAAIAE2AgQLAkAgACABIAIQuICAgAAiAw0AIAAoAgwPCyAAIAM2AhxBACEDIAAoAgQiAUUNACAAIAEgAiAAKAIIEYGAgIAAACIBRQ0AIAAgAjYCFCAAIAE2AgwgASEDCyADC9POAQMcfwN+BX8jgICAgABBEGsiAySAgICAACABIQQgASEFIAEhBiABIQcgASEIIAEhCSABIQogASELIAEhDCABIQ0gASEOIAEhDyABIRAgASERIAEhEiABIRMgASEUIAEhFSABIRYgASEXIAEhGCABIRkgASEaIAEhGyABIRwgASEdAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkAC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HgwTC0GZASEeDBILQZ0BIR4MEQtBmgEhHgwQC0EBIR4MDwtBmwEhHgwOC0GcASEeDA0LQZ4BIR4MDAtBoAEhHgwLC0GfASEeDAoLQaEBIR4MCQtBogEhHgwIC0GjASEeDAcLQaQBIR4MBgtBpQEhHgwFC0GmASEeDAQLQacBIR4MAwtBqAEhHgwCC0GpASEeDAELQa8BIR4LA0ACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkAC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AbsBuwG7AbsBuwG7AbsBuwG7AQG7AQsgCEEBaiEBQdQAIR4MmAILIAhBAWohAUHVACEeDJcCC0HnACEeIAEiIiACRg2mAiACICJrIAAoAgAiJmohIyAiIQggJiEBAkADQCAILQAAIAFB7bOAgABqLQAARw25ASABQQJGDQEgAUEBaiEBIAhBAWoiCCACRw0ACyAAICM2AgAMpwILIABBADYCACAiICZrQQNqIQFBECEeDLYBC0HoACEeIAEiIiACRg2lAiACICJrIAAoAgAiJmohIyAiIQggJiEBAkADQCAILQAAIAFB9rKAgABqLQAARw24ASABQQVGDQEgAUEBaiEBIAhBAWoiCCACRw0ACyAAICM2AgAMpgILIABBADYCACAiICZrQQZqIQFBFiEeDLUBC0HpACEeIAEiIiACRg2kAiACICJrIAAoAgAiJmohIyAiIQggJiEBAkADQCAILQAAIAFB/LKAgABqLQAARw23ASABQQNGDQEgAUEBaiEBIAhBAWoiCCACRw0ACyAAICM2AgAMpQILIABBADYCACAiICZrQQRqIQFBBSEeDLQBCwJAIAEiCCACRw0AQeoAIR4MpAILIAgtAABB2QBHDbUBIAhBAWohAUEIIR4MswELAkAgASIIIAJHDQBB6wAhHgyjAgsCQAJAIAgtAABBsn9qDgMAtgEBtgELIAhBAWohAUHZACEeDJMCCyAIQQFqIQFB2gAhHgySAgsCQCABIgggAkcNAEHsACEeDKICCwJAAkAgCC0AAEG4f2oOCAC1AbUBtQG1AbUBtQEBtQELIAhBAWohAUHYACEeDJICCyAIQQFqIQFB2wAhHgyRAgtB7QAhHiABIiIgAkYNoAIgAiAiayAAKAIAIiZqISMgIiEIICYhAQJAA0AgCC0AACABQYCzgIAAai0AAEcNswEgAUECRg0BIAFBAWohASAIQQFqIgggAkcNAAsgACAjNgIADKECC0EAIR4gAEEANgIAICIgJmtBA2ohAQywAQtB7gAhHiABIiIgAkYNnwIgAiAiayAAKAIAIiZqISMgIiEIICYhAQJAA0AgCC0AACABQYOzgIAAai0AAEcNsgEgAUEERg0BIAFBAWohASAIQQFqIgggAkcNAAsgACAjNgIADKACCyAAQQA2AgAgIiAma0EFaiEBQSMhHgyvAQsCQCABIgggAkcN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ImohJiAeIQggIiEBAkADQCAILQAAIAFBp7OAgABqLQAARw2gASABQQFGDQEgAUEBaiEBIAhBAWoiCCACRw0ACyAAICY2AgBBgAEhHgyOAgsgAEEANgIAIB4gImtBAmohAUELIR4MnQELAkAgASIIIAJHDQBBgQEhHgyNAgsCQAJAAkACQCAILQAAQVNqDiMAogGiAaIBogGiAaIBogGiAaIBogGiAaIBogGiAaIBogGiAaIBogGiAaIBogGiAQGiAaIBogGiAaIBAqIBogGiAQOiAQsgCEEBaiEBQekAIR4M/wELIAhBAWohAUHqACEeDP4BCyAIQQFqIQFB7wAhHgz9AQsgCEEBaiEBQfAAIR4M/AELAkAgASIeIAJHDQBBggEhHgyMAgsgAiAeayAAKAIAIiJqISYgHiEIICIhAQJAA0AgCC0AACABQamzgIAAai0AAEcNngEgAUEERg0BIAFBAWohASAIQQFqIgggAkcNAAsgACAmNgIAQYIBIR4MjAILIABBADYCACAeICJrQQVqIQFBGSEeDJsBCwJAIAEiIiACRw0AQYMBIR4MiwILIAIgImsgACgCACImaiEeICIhCCAmIQECQANAIAgtAAAgAUGus4CAAGotAABHDZ0BIAFBBUYNASABQQFqIQEgCEEBaiIIIAJHDQALIAAgHjYCAEGDASEeDIsCCyAAQQA2AgBBBiEeICIgJmtBBmohAQyaAQsCQCABIh4gAkcNAEGEASEeDIoCCyACIB5rIAAoAgAiImohJiAeIQggIiEBAkADQCAILQAAIAFBtLOAgABqLQAARw2cASABQQFGDQEgAUEBaiEBIAhBAWoiCCACRw0ACyAAICY2AgBBhAEhHgyKAgsgAEEANgIAIB4gImtBAmohAUEcIR4MmQELAkAgASIeIAJHDQBBhQEhHgyJAgsgAiAeayAAKAIAIiJqISYgHiEIICIhAQJAA0AgCC0AACABQbazgIAAai0AAEcNmwEgAUEBRg0BIAFBAWohASAIQQFqIgggAkcNAAsgACAmNgIAQYUBIR4MiQILIABBADYCACAeICJrQQJqIQFBJyEeDJgBCwJAIAEiCCACRw0AQYYBIR4MiAILAkACQCAILQAAQax/ag4CAAGbAQsgCEEBaiEBQfQAIR4M+AELIAhBAWohAUH1ACEeDPcBCwJAIAEiHiAC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IiEBDDELIABBxAA2AhwgACAiNgIUIAAgATYCDEEAIR4MeQsgACgCBCEBIABBADYCBAJAIAAgASAiEKSAgIAAIgENACAiIQEMMQsgAEHFADYCHCAAICI2AhQgACABNgIMQQAhHgx4CyAAKAIEIQEgAEEANgIEAkAgACABICIQpICAgAAiAQ0AICIhAQw1CyAAQdAANgIcIAAgIjYCFCAAIAE2AgxBACEeDHcLIABBADYCHCAAICI2AhQgAEHQjICAADYCECAAQQc2AgxBACEeDHYLIABBADYCHCAAIAE2AhQgAEHQjICAADYCECAAQQc2AgxBACEeDHULQQAhHiAAQQA2AhwgACAiNgIUIABBv5SAgAA2AhAgAEEHNgIMDHQLIABBADYCHCAAICI2AhQgAEG/lICAADYCECAAQQc2AgxBACEeDHMLIABBADYCHCAAICI2AhQgAEHUjoCAADYCECAAQQc2AgxBACEeDHILIABBADYCHCAAIAE2AhQgAEHBk4CAADYCECAAQQY2AgxBACEeDHELIABBADYCACAiICZrQQZqIQFBJCEeCyAAIB46ACkgASEBDE4LIABBADYCAAtBACEeIABBADYCHCAAIAg2AhQgAEGklICAADYCECAAQQY2AgwMbQsgACgCBCETIABBADYCBCAAIBMgHhCmgICAACITDQEgHkEBaiETC0GdASEeDFsLIABBqgE2AhwgACATNgIMIAAgHkEBajYCFEEAIR4MagsgACgCBCEUIABBADYCBCAAIBQgHhCmgICAACIUDQEgHkEBaiEUC0GaASEeDFgLIABBqwE2AhwgACAUNgIMIAAgHkEBajYCFEEAIR4MZwsgAEEANgIcIAAgFTYCFCAAQfOKgIAANgIQIABBDTYCDEEAIR4MZgsgAEEANgIcIAAgFjYCFCAAQc6NgIAANgIQIABBCTYCDEEAIR4MZQtBASEeCyAAIB46ACsgF0EBaiEWDC4LIABBADYCHCAAIBc2AhQgAEGijYCAADYCECAAQQk2AgxBACEeDGILIABBADYCHCAAIBg2AhQgAEHFioCAADYCECAAQQk2AgxBACEeDGELQQEhHgsgACAeOgAqIBlBAWohGAwsCyAAQQA2AhwgACAZNgIUIABBuI2AgAA2AhAgAEEJNgIMQQAhHgxeCyAAQQA2AhwgACAZNgIUIABB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QR9GG3QhAiAEKAIAIQYCQANAIAYiBCgCBEF4cSAARg0BIAJBHXYhBiACQQF0IQIgBCAGQQRxakEQaiIDKAIAIgYNAAsgAyABNgIAIAFBGGogBDYCACABIAE2AgwgASABNgIIDAELIAQoAggiACABNgIMIAQgATYCCCABQRhqQQA2AgAgASAENgIMIAEgADYCCAtBAEEAKAKotICAAEF/aiIBQX8gARs2Aqi0gIAACwtOAAJAIAANAD8AQRB0DwsCQCAAQf//A3ENACAAQX9MDQACQCAAQRB2QAAiAEF/Rw0AQQBBMDYC+LeAgABBfw8LIABBEHQPCxC/gICAAAALBAAAAAsLjiwBAEGACAuGLAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW52YWxpZCBjaGFyIGluIHVybCBxdWVyeQBTcGFuIGNhbGxiYWNrIGVycm9yIGluIG9uX2JvZHkAQ29udGVudC1MZW5ndGggb3ZlcmZsb3cAQ2h1bmsgc2l6ZSBvdmVyZmxvdwBSZXNwb25zZSBvdmVyZmxvdwBJbnZhbGlkIG1ldGhvZCBmb3IgSFRUUC94LnggcmVxdWVzdABJbnZhbGlkIG1ldGhvZCBmb3IgUlRTUC94LnggcmVxdWVzdABFeHBlY3RlZCBTT1VSQ0UgbWV0aG9kIGZvciBJQ0UveC54IHJlcXVlc3QASW52YWxpZCBjaGFyIGluIHVybCBmcmFnbWVudCBzdGFydABFeHBlY3RlZCBkb3QAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9zdGF0dXMASW52YWxpZCByZXNwb25zZSBzdGF0dXMASW52YWxpZCBjaGFyYWN0ZXIgaW4gY2h1bmsgcGFyYW1ldGVycwBVc2VyIGNhbGxiYWNrIGVycm9yAGBvbl9jaHVua19oZWFkZXJgIGNhbGxiYWNrIGVycm9yAGBvbl9tZXNzYWdlX2JlZ2luYCBjYWxsYmFjayBlcnJvcgBgb25fY2h1bmtfY29tcGxldGVgIGNhbGxiYWNrIGVycm9yAGBvbl9tZXNzYWdlX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBVbmV4cGVjdGVkIGNoYXIgaW4gdXJsIHNlcnZlcgBJbnZhbGlkIGhlYWRlciB2YWx1ZSBjaGFyAEludmFsaWQgaGVhZGVyIGZpZWxkIGNoYXIASW52YWxpZCBtaW5vciB2ZXJzaW9uAEludmFsaWQgbWFqb3IgdmVyc2lvbgBFeHBlY3RlZCBzcGFjZSBhZnRlciB2ZXJzaW9uAEV4cGVjdGVkIENSTEYgYWZ0ZXIgdmVyc2lvbgBJbnZhbGlkIGhlYWRlciB0b2tlbgBTcGFuIGNhbGxiYWNrIGVycm9yIGluIG9uX3VybABJbnZhbGlkIGNoYXJhY3RlcnMgaW4gdXJsAFVuZXhwZWN0ZWQgc3RhcnQgY2hhciBpbiB1cmwARG91YmxlIEAgaW4gdXJsAEVtcHR5IENvbnRlbnQtTGVuZ3RoAEludmFsaWQgY2hhcmFjdGVyIGluIENvbnRlbnQtTGVuZ3RoAER1cGxpY2F0ZSBDb250ZW50LUxlbmd0aABJbnZhbGlkIGNoYXIgaW4gdXJsIHBhdGgAQ29udGVudC1MZW5ndGggY2FuJ3QgYmUgcHJlc2VudCB3aXRoIFRyYW5zZmVyLUVuY29kaW5nAEludmFsaWQgY2hhcmFjdGVyIGluIGNodW5rIHNpemUAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9oZWFkZXJfdmFsdWUATWlzc2luZyBleHBlY3RlZCBDUiBhZnRlciBoZWFkZXIgdmFsdWUATWlzc2luZyBleHBlY3RlZCBMRiBhZnRlciBoZWFkZXIgdmFsdWUASW52YWxpZCBgVHJhbnNmZXItRW5jb2RpbmdgIGhlYWRlciB2YWx1ZQBQYXVzZWQgYnkgb25faGVhZGVyc19jb21wbGV0ZQBJbnZhbGlkIEVPRiBzdGF0ZQBvbl9jaHVua19oZWFkZXIgcGF1c2UAb25fbWVzc2FnZV9iZWdpbiBwYXVzZQBvbl9jaHVua19jb21wbGV0ZSBwYXVzZQBvbl9tZXNzYWdlX2NvbXBsZXRlIHBhdXNlAFBhdXNlIG9uIENPTk5FQ1QvVXBncmFkZQBQYXVzZSBvbiBQUkkvVXBncmFkZQBFeHBlY3RlZCBIVFRQLzIgQ29ubmVjdGlvbiBQcmVmYWNlAEV4cGVjdGVkIHNwYWNlIGFmdGVyIG1ldGhvZABTcGFuIGNhbGxiYWNrIGVycm9yIGluIG9uX2hlYWRlcl9maWVsZABQYXVzZWQASW52YWxpZCB3b3JkIGVuY291bnRlcmVkAEludmFsaWQgbWV0aG9kIGVuY291bnRlcmVkAFVuZXhwZWN0ZWQgY2hhciBpbiB1cmwgc2NoZW1hAFJlcXVlc3QgaGFzIGludmFsaWQgYFRyYW5zZmVyLUVuY29kaW5nYABNS0FDVElWSVRZAENPUFkATk9USUZZAFBMQVkAUFVUAENIRUNLT1VUAFBPU1QAUkVQT1JUAEhQRV9JTlZBTElEX0NPTlNUQU5UAEdFVABIUEVfU1RSSUNUAFJFRElSRUNUAENPTk5FQ1QASFBFX0lOVkFMSURfU1RBVFVTAE9QVElPTlMAU0VUX1BBUkFNRVRFUgBHRVRfUEFSQU1FVEVSAEhQRV9VU0VSAEhQRV9DQl9DSFVOS19IRUFERVIATUtDQUxFTkRBUgBTRVRVUABURUFSRE9XTgBIUEVfQ0xPU0VEX0NPTk5FQ1RJT04ASFBFX0lOVkFMSURfVkVSU0lPTgBIUEVfQ0JfTUVTU0FHRV9CRUdJTgBIUEVfSU5WQUxJRF9IRUFERVJfVE9LRU4ASFBFX0lOVkFMSURfVVJMAE1LQ09MAEFDTABIUEVfSU5URVJOQUwASFBFX09LAFVOTElOSwBVTkxPQ0sAUFJJAEhQRV9JTlZBTElEX0NPTlRFTlRfTEVOR1RIAEhQRV9VTkVYUEVDVEVEX0NPTlRFTlRfTEVOR1RIAEZMVVNIAFBST1BQQVRDSABNLVNFQVJDSABIUEVfSU5WQUxJRF9UUkFOU0ZFUl9FTkNPRElORwBFeHBlY3RlZCBDUkxGAEhQRV9JTlZBTElEX0NIVU5LX1NJWkUATU9WRQBIUEVfQ0JfSEVBREVSU19DT01QTEVURQBIUEVfQ0JfQ0hVTktfQ09NUExFVEUASFBFX0NCX01FU1NBR0VfQ09NUExFVEUAREVMRVRFAEhQRV9JTlZBTElEX0VPRl9TVEFURQBQQVVTRQBQVVJHRQBNRVJHRQBIUEVfUEFVU0VEX1VQR1JBREUASFBFX1BBVVNFRF9IMl9VUEdSQURFAFNPVVJDRQBBTk5PVU5DRQBUUkFDRQBERVNDUklCRQBVTlNVQlNDUklCRQBSRUNPUkQASFBFX0lOVkFMSURfTUVUSE9EAFBST1BGSU5EAFVO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AAAAAAAAAAAAAAAEAQEFAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAAAAAAAAAAAAAMEAAAEBAQEBAQEBAQEBAUEBAQEBAQEBAQEBAQABAAGBwQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAEAAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABOT1VOQ0VFQ0tPVVRORUNURVRFQ1JJQkVMVVNIRVRFQURTRUFSQ0hSR0VDVElWSVRZTEVOREFSVkVPVElGWVBUSU9OU0NIU0VBWVNUQVRDSEdFT1JESVJFQ1RPUlRSQ0hQQVJBTUVURVJVUkNFQlNDUklCRUFSRE9XTkFDRUlORE5LQ0tVQlNDUklCRUhUVFAvQURUUC8=";
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/llhttp/llhttp_simd.wasm.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/llhttp/llhttp_simd.wasm.js
 var require_llhttp_simd_wasm = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/llhttp/llhttp_simd.wasm.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/llhttp/llhttp_simd.wasm.js"(exports, module2) {
     module2.exports = "AGFzbQEAAAABMAhgAX8Bf2ADf39/AX9gBH9/f38Bf2AAAGADf39/AGABfwBgAn9/AGAGf39/f39/AALLAQgDZW52GHdhc21fb25faGVhZGVyc19jb21wbGV0ZQACA2VudhV3YXNtX29uX21lc3NhZ2VfYmVnaW4AAANlbnYLd2FzbV9vbl91cmwAAQNlbnYOd2FzbV9vbl9zdGF0dXMAAQNlbnYUd2FzbV9vbl9oZWFkZXJfZmllbGQAAQNlbnYUd2FzbV9vbl9oZWFkZXJfdmFsdWUAAQNlbnYMd2FzbV9vbl9ib2R5AAEDZW52GHdhc21fb25fbWVzc2FnZV9jb21wbGV0ZQAAAzk4AwMEAAAFAAAAAAAABQEFAAUFBQAABgAAAAYGAQEBAQEBAQEBAQEBAQEBAQABAAABAQcAAAUFAAMEBQFwAQ4OBQMBAAIGCAF/AUGAuAQLB/UEHwZtZW1vcnkCAAtfaW5pdGlhbGl6ZQAJGV9faW5kaXJlY3RfZnVuY3Rpb25fdGFibGUBAAtsbGh0dHBfaW5pdAAKGGxsaHR0cF9zaG91bGRfa2VlcF9hbGl2ZQA1DGxsaHR0cF9hbGxvYwAMBm1hbGxvYwA6C2xsaHR0cF9mcmVlAA0EZnJlZQA8D2xsaHR0cF9nZXRfdHlwZQAOFWxsaHR0cF9nZXRfaHR0cF9tYWpvcgAPFWxsaHR0cF9nZXRfaHR0cF9taW5vcgAQEWxsaHR0cF9nZXRfbWV0aG9kABEWbGxodHRwX2dldF9zdGF0dXNfY29kZQASEmxsaHR0cF9nZXRfdXBncmFkZQATDGxsaHR0cF9yZXNldAAUDmxsaHR0cF9leGVjdXRlABUUbGxodHRwX3NldHRpbmdzX2luaXQAFg1sbGh0dHBfZmluaXNoABcMbGxodHRwX3BhdXNlABgNbGxodHRwX3Jlc3VtZQAZG2xsaHR0cF9yZXN1bWVfYWZ0ZXJfdXBncmFkZQAaEGxsaHR0cF9nZXRfZXJybm8AGxdsbGh0dHBfZ2V0X2Vycm9yX3JlYXNvbgAcF2xsaHR0cF9zZXRfZXJyb3JfcmVhc29uAB0UbGxodHRwX2dldF9lcnJvcl9wb3MAHhFsbGh0dHBfZXJybm9fbmFtZQAfEmxsaHR0cF9tZXRob2RfbmFtZQAgGmxsaHR0cF9zZXRfbGVu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ASEeDBELQZoBIR4MEAtBASEeDA8LQZsBIR4MDgtBnAEhHgwNC0GeASEeDAwLQaABIR4MCwtBnwEhHgwKC0GhASEeDAkLQaIBIR4MCAtBowEhHgwHC0GkASEeDAYLQaUBIR4MBQtBpgEhHgwEC0GnASEeDAMLQagBIR4MAgtBqQEhHgwBC0GvASEeCwNAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkAC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IAgtAABBtH9qDggAsgGyAbIBsgGyAbIBAbIBCyAIQQFqIQFB3QAhHgyPAgsgCEEBaiEBQd4AIR4MjgILAkAgASIIIAJHDQBB8AAhHgyeAgsgCC0AAEHFAEcNrwEgCEEBaiEBDN4BC0HxACEeIAEiIiACRg2cAiACICJrIAAoAgAiJmohIyAiIQggJiEBAkADQCAILQAAIAFBiLOAgABqLQAARw2vASABQQNGDQEgAUEBaiEBIAhBAWoiCCACRw0ACyAAICM2AgAMnQILIABBADYCACAiICZrQQRqIQFBLSEeDKwBC0HyACEeIAEiIiACRg2bAiACICJrIAAoAgAiJmohIyAiIQggJiEBAkADQCAILQAAIAFB0LOAgABqLQAARw2uASABQQhGDQEgAUEBaiEBIAhBAWoiCCACRw0ACyAAICM2AgAMnAILIABBADYCACAiICZrQQlqIQFBKSEeDKsBCwJAIAEiASACRw0AQfMAIR4MmwILQQEhHiABLQAAQd8ARw2qASABQQFqIQEM3AELQfQAIR4gASIiIAJGDZkCIAIgImsgACgCACImaiEjICIhCCAmIQEDQCAILQAAIAFBjLOAgABqLQAARw2rASABQQFGDfcBIAFBAWohASAIQQFqIgggAkcNAAsgACAjNgIADJkCCwJAIAEiHiACRw0AQfUAIR4MmQILIAIgHmsgACgCACIiaiEmIB4hCCAiIQECQANAIAgtAAAgAUGOs4CAAGotAABHDasBIAFBAkYNASABQQFqIQEgCEEBaiIIIAJHDQALIAAgJjYCAEH1ACEeDJkCCyAAQQA2AgAgHiAia0EDaiEBQQIhHgyoAQsCQCABIh4gAkcNAEH2ACEeDJgCCyACIB5rIAAoAgAiImohJiAeIQggIiEBAkADQCAILQAAIAFB8LOAgABqLQAARw2qASABQQFGDQEgAUEBaiEBIAhBAWoiCCACRw0ACyAAICY2AgBB9gAhHgyYAgsgAEEANgIAIB4gImtBAmohAUEfIR4MpwELAkAgASIeIAJHDQBB9wAhHgyXAgsgAiAeayAAKAIAIiJqISYgHiEIICIhAQJAA0AgCC0AACABQfKzgIAAai0AAEcNqQEgAUEBRg0BIAFBAWohASAIQQFqIgggAkcNAAsgACAmNgIAQfcAIR4MlwILIABBADYCACAeICJrQQJq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LwEwQRByOwEwDIcBCyAAQTY2AhwgACABNgIMIAAgHEEBajYCFEEAIR4MoAELIAEtAABBOkcNAiAAKAIEIR4gAEEANgIEIAAgHiABEKiAgIAAIh4NASABQQFqIQELQTEhHgyOAQsgAEE2NgIcIAAgHjYCDCAAIAFBAWo2AhRBACEeDJ0BCyAAQQA2AhwgACABNgIUIABBh46AgAA2AhAgAEEKNgIMQQAhHgycAQsgAUEBaiEBCyAAQYASOwEqIAAgASACEKWAgIAAGiABIQELQawBIR4MiQELIAAoAgQhHiAAQQA2AgQCQCAAIB4gARCkgICAACIeDQAgASEBDFALIABBxAA2AhwgACABNgIUIAAgHjYCDEEAIR4MmAELIABBADYCHCAAICI2AhQgAEHlmICAADYCECAAQQc2AgwgAEEANgIAQQAhHgyXAQsgACgCBCEeIABBADYCBAJAIAAgHiABEKSAgIAAIh4NACABIQEMTwsgAEHFADYCHCAAIAE2AhQgACAeNgIMQQAhHgyWAQtBACEeIABBADYCHCAAIAE2AhQgAEHrjYCAADYCECAAQQk2AgwMlQELQQEhHgsgACAeOgArIAFBAWohASAALQApQSJGDYsBDEwLIABBADYCHCAAIAE2AhQgAEGijYCAADYCECAAQQk2AgxBACEeDJIBCyAAQQA2AhwgACABNgIUIABBxYqAgAA2AhAgAEEJNgIMQQAhHgyRAQtBASEeCyAAIB46ACogAUEBaiEBDEoLIABBADYCHCAAIAE2AhQgAEG4jYCAADYCECAAQQk2AgxBACEeDI4BCyAAQQA2AgAgJiAja0EEaiEBAkAgAC0AKUEjTw0AIAEhAQxKCyAAQQA2AhwgACABNgIUIABBr4mAgAA2AhAgAEEINgIMQQAhHgyNAQsgAEEANgIAC0EAIR4gAEEANgIcIAAgATYCFCAAQbmbgIAANgIQIABBCDYCDAyLAQsgAEEANgIAICYgI2tBA2ohAQJAIAAtAClBIUcNACABIQEMRwsgAEEANgIcIAAgATYCFCAAQfeJgIAANgIQIABBCDYCDEEAIR4MigELIABBADYCACAmICNrQQRqIQECQCAALQApIh5BXWpBC08NACABIQEMRgsCQCAeQQZLDQBBASAedEHKAHFFDQAgASEBDEYLQQAhHiAAQQA2AhwgACAB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HiAAQQA2AhwgACABNgIUIABB6pCAgAA2AhAgAEEZNgIMDAILIABBIDYCHCAAIAg2AgwgACABQQFqNgIUQQAhHgwBCwJAIAEiASACRw0AQRQhHgwBCyAAQYmAgIAANgIIIAAgATYCBEETIR4LIANBEGokgICAgAAgHguvAQECfyABKAIAIQYCQAJAIAIgA0YNACAEIAZqIQQgBiADaiACayEHIAIgBkF/cyAFaiIGaiEFA0ACQCACLQAAIAQtAABGDQBBAiEEDAMLAkAgBg0AQQAhBCAFIQIMAwsgBkF/aiEGIARBAWohBCACQQFqIgIgA0cNAAsgByEGIAMhAgsgAEEBNgIAIAEgBjYCACAAIAI2AgQPCyABQQA2AgAgACAENgIAIAAgAjYCBAsKACAAELuAgIAAC5U3AQt/I4CAgIAAQRBrIgEkgICAgAACQEEAKAKgtICAAA0AQQAQvoCAgABBgLiEgABrIgJB2QBJDQBBACEDAkBBACgC4LeAgAAiBA0AQQBCfzcC7LeAgABBAEKAgISAgIDAADcC5LeAgABBACABQQhqQXBxQdiq1aoFcyIENgLgt4CAAEEAQQA2AvS3gIAAQQBBADYCxLeAgAALQQAgAjYCzLeAgABBAEGAuISAADYCyLeAgABBAEGAuISAADYCmLSAgABBACAENgKstICAAEEAQX82Aqi0gIAAA0AgA0HEtICAAGogA0G4tICAAGoiBDYCACAEIANBsLSAgABqIgU2AgAgA0G8tICAAGogBTYCACADQcy0gIAAaiADQcC0gIAAaiIFNgIAIAUgBDYCACADQdS0gIAAaiADQci0gIAAaiIENgIAIAQgBTYCACADQdC0gIAAaiAENgIAIANBIGoiA0GAAkcNAAtBgLiEgABBeEGAuISAAGtBD3FBAEGAuISAAEEIakEPcRsiA2oiBEEEaiACIANrQUhqIgNBAXI2AgBBAEEAKALwt4CAADYCpLSAgABBACAENgKgtICAAEEAIAM2ApS0gIAAIAJBgLiEgABqQUxqQTg2AgALAkACQAJAAkACQAJAAkACQAJAAkACQAJAIABB7AFLDQACQEEAKAKItICAACIGQRAgAEETakFwcSAAQQtJGyICQQN2IgR2IgNBA3FFDQAgA0EBcSAEckEBcyIFQQN0IgBBuLSAgABqKAIAIgRBCGohAwJA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AkADQCAGIgQoAgRBeHEgAEYNASACQR12IQYgAkEBdCECIAQgBkEEcWpBEGoiAygCACIGDQALIAMgATYCACABQRhqIAQ2AgAgASABNgIMIAEgATYCCAwBCyAEKAIIIgAgATYCDCAEIAE2AgggAUEYakEANgIAIAEgBDYCDCABIAA2AggLQQBBACgCqLSAgABBf2oiAUF/IAEbNgKotICAAAsLTgACQCAADQA/AEEQdA8LAkAgAEH//wNxDQAgAEF/TA0AAkAgAEEQdkAAIgBBf0cNAEEAQTA2Avi3gIAAQX8PCyAAQRB0DwsQv4CAgAAACwQAAAALC44sAQBBgAgLhiwBAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEludmFsaWQgY2hhciBpbiB1cmwgcXVlcnkAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9ib2R5AENvbnRlbnQtTGVuZ3RoIG92ZXJmbG93AENodW5rIHNpemUgb3ZlcmZsb3cAUmVzcG9uc2Ugb3ZlcmZsb3cASW52YWxpZCBtZXRob2QgZm9yIEhUVFAveC54IHJlcXVlc3QASW52YWxpZCBtZXRob2QgZm9yIFJUU1AveC54IHJlcXVlc3QARXhwZWN0ZWQgU09VUkNFIG1ldGhvZCBmb3IgSUNFL3gueCByZXF1ZXN0AEludmFsaWQgY2hhciBpbiB1cmwgZnJhZ21lbnQgc3RhcnQARXhwZWN0ZWQgZG90AFNwYW4gY2FsbGJhY2sgZXJyb3IgaW4gb25fc3RhdHVzAEludmFsaWQgcmVzcG9uc2Ugc3RhdHVzAEludmFsaWQgY2hhcmFjdGVyIGluIGNodW5rIHBhcmFtZXRlcnMAVXNlciBjYWxsYmFjayBlcnJvcgBgb25fY2h1bmtfaGVhZGVyYCBjYWxsYmFjayBlcnJvcgBgb25fbWVzc2FnZV9iZWdpbmAgY2FsbGJhY2sgZXJyb3IAYG9uX2NodW5rX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25fbWVzc2FnZV9jb21wbGV0ZWAgY2FsbGJhY2sgZXJyb3IAVW5leHBlY3RlZCBjaGFyIGluIHVybCBzZXJ2ZXIASW52YWxpZCBoZWFkZXIgdmFsdWUgY2hhcgBJbnZhbGlkIGhlYWRlciBmaWVsZCBjaGFyAEludmFsaWQgbWlub3IgdmVyc2lvbgBJbnZhbGlkIG1ham9yIHZlcnNpb24ARXhwZWN0ZWQgc3BhY2UgYWZ0ZXIgdmVyc2lvbgBFeHBlY3RlZCBDUkxGIGFmdGVyIHZlcnNpb24ASW52YWxpZCBoZWFkZXIgdG9rZW4AU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl91cmwASW52YWxpZCBjaGFyYWN0ZXJzIGluIHVybABVbmV4cGVjdGVkIHN0YXJ0IGNoYXIgaW4gdXJsAERvdWJsZSBAIGluIHVybABFbXB0eSBDb250ZW50LUxlbmd0aABJbnZhbGlkIGNoYXJhY3RlciBpbiBDb250ZW50LUxlbmd0aABEdXBsaWNhdGUgQ29udGVudC1MZW5ndGgASW52YWxpZCBjaGFyIGluIHVybCBwYXRoAENvbnRlbnQtTGVuZ3RoIGNhbid0IGJlIHByZXNlbnQgd2l0aCBUcmFuc2Zlci1FbmNvZGluZwBJbnZhbGlkIGNoYXJhY3RlciBpbiBjaHVuayBzaXplAFNwYW4gY2FsbGJhY2sgZXJyb3IgaW4gb25faGVhZGVyX3ZhbHVlAE1pc3NpbmcgZXhwZWN0ZWQgQ1IgYWZ0ZXIgaGVhZGVyIHZhbHVlAE1pc3NpbmcgZXhwZWN0ZWQgTEYgYWZ0ZXIgaGVhZGVyIHZhbHVlAEludmFsaWQgYFRyYW5zZmVyLUVuY29kaW5nYCBoZWFkZXIgdmFsdWUAUGF1c2VkIGJ5IG9uX2hlYWRlcnNfY29tcGxldGUASW52YWxpZCBFT0Ygc3RhdGUAb25fY2h1bmtfaGVhZGVyIHBhdXNlAG9uX21lc3NhZ2VfYmVnaW4gcGF1c2UAb25fY2h1bmtfY29tcGxldGUgcGF1c2UAb25fbWVzc2FnZV9jb21wbGV0ZSBwYXVzZQBQYXVzZSBvbiBDT05ORUNUL1VwZ3JhZGUAUGF1c2Ugb24gUFJJL1VwZ3JhZGUARXhwZWN0ZWQgSFRUUC8yIENvbm5lY3Rpb24gUHJlZmFjZQBFeHBlY3RlZCBzcGFjZSBhZnRlciBtZXRob2QAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9oZWFkZXJfZmllbGQAUGF1c2VkAEludmFsaWQgd29yZCBlbmNvdW50ZXJlZABJbnZhbGlkIG1ldGhvZCBlbmNvdW50ZXJlZABVbmV4cGVjdGVkIGNoYXIgaW4gdXJsIHNjaGVtYQBSZXF1ZXN0IGhhcyBpbnZhbGlkIGBUcmFuc2Zlci1FbmNvZGluZ2AATUtBQ1RJVklUWQBDT1BZAE5PVElGWQBQTEFZAFBVVABDSEVDS09VVABQT1NUAFJFUE9SVABIUEVfSU5WQUxJRF9DT05TVEFOVABHRVQASFBFX1NUUklDVABSRURJUkVDVABDT05ORUNUAEhQRV9JTlZBTElEX1NUQVRVUwBPUFRJT05TAFNFVF9QQVJBTUVURVIAR0VUX1BBUkFNRVRFUgBIUEVfVVNFUgBIUEVfQ0JfQ0hVTktfSEVBREVSAE1LQ0FMRU5EQVIAU0VUVVAAVEVBUkRPV04ASFBFX0NMT1NFRF9DT05ORUNUSU9OAEhQRV9JTlZBTElEX1ZFUlNJT04ASFBFX0NCX01FU1NBR0VfQkVHSU4ASFBFX0lOVkFMSURfSEVBREVSX1RPS0VOAEhQRV9JTlZBTElEX1VSTABNS0NPTABBQ0wASFBFX0lOVEVSTkFMAEhQRV9PSwBVTkxJTksAVU5MT0NLAFBSSQBIUEVfSU5WQUxJRF9DT05URU5UX0xFTkdUSABIUEVfVU5FWFBFQ1RFRF9DT05URU5UX0xFTkdUSABGTFVTSABQUk9QUEFUQ0gATS1TRUFSQ0gASFBFX0lOVkFMSURfVFJBTlNGRVJfRU5DT0RJTkcARXhwZWN0ZWQgQ1JMRgBIUEVfSU5WQUxJRF9DSFVOS19TSVpFAE1PVkUASFBFX0NCX0hFQURFUlNfQ09NUExFVEUASFBFX0NCX0NIVU5LX0NPTVBMRVRFAEhQRV9DQl9NRVNTQUdFX0NPTVBMRVRFAERFTEVURQBIUEVfSU5WQUxJRF9FT0ZfU1RBVEUAUEFVU0UAUFVSR0UATUVSR0UASFBFX1BBVVNFRF9VUEdSQURFAEhQRV9QQVVTRURfSDJfVVBHUkFERQBTT1VSQ0UAQU5OT1VOQ0UAVFJBQ0UAREVTQ1JJQkUAVU5TVUJTQ1JJQkUAUkVDT1JEAEhQRV9JTlZBTElEX01FVEhPRABQUk9QRklORABVTkJJTkQAUkVCSU5EAEhQ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BQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAAAADBAAABAQEBAQEBAQEBAQFBAQEBAQEBAQEBAQEAAQABgcEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAAEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAAAAAAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATk9VTkNFRUNLT1VUTkVDVEVURUNSSUJFTFVTSEVURUFEU0VBUkNIUkdFQ1RJVklUWUxFTkRBUlZFT1RJRllQVElPTlNDSFNFQVlTVEFUQ0hHRU9SRElSRUNUT1JUUkNIUEFSQU1FVEVSVVJDRUJTQ1JJQkVBUkRPV05BQ0VJTkROS0NLVUJTQ1JJQkVIVFRQL0FEVFAv";
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/client.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/client.js
 var require_client = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/client.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/client.js"(exports, module2) {
     "use strict";
     var assert = require("assert");
     var net2 = require("net");
     var util2 = require_util2();
     var Request = require_request();
     var DispatcherBase = require_dispatcher_base();
-    var RedirectHandler = require_redirect();
     var {
       RequestContentLengthMismatchError,
       ResponseContentLengthMismatchError,
@@ -8484,7 +12643,8 @@ var require_client = __commonJS({
       kCounter,
       kClose,
       kDestroy,
-      kDispatch
+      kDispatch,
+      kInterceptors
     } = require_symbols();
     var kClosedResolve = Symbol("kClosedResolve");
     var channels = {};
@@ -8494,7 +12654,7 @@ var require_client = __commonJS({
       channels.beforeConnect = diagnosticsChannel.channel("undici:client:beforeConnect");
       channels.connectError = diagnosticsChannel.channel("undici:client:connectError");
       channels.connected = diagnosticsChannel.channel("undici:client:connected");
-    } catch (e) {
+    } catch (e2) {
       channels.sendHeaders = { hasSubscribers: false };
       channels.beforeConnect = { hasSubscribers: false };
       channels.connectError = { hasSubscribers: false };
@@ -8502,6 +12662,7 @@ var require_client = __commonJS({
     }
     var Client = class extends DispatcherBase {
       constructor(url, {
+        interceptors,
         maxHeaderSize,
         headersTimeout,
         socketTimeout,
@@ -8581,6 +12742,7 @@ var require_client = __commonJS({
             ...connect2
           });
         }
+        this[kInterceptors] = interceptors && interceptors.Client && Array.isArray(interceptors.Client) ? interceptors.Client : [createRedirectInterceptor({ maxRedirections })];
         this[kUrl] = util2.parseOrigin(url);
         this[kConnector] = connect2;
         this[kSocket] = null;
@@ -8633,10 +12795,6 @@ var require_client = __commonJS({
         this.once("connect", cb);
       }
       [kDispatch](opts, handler) {
-        const { maxRedirections = this[kMaxRedirections] } = opts;
-        if (maxRedirections) {
-          handler = new RedirectHandler(this, maxRedirections, opts, handler);
-        }
         const origin = opts.origin || this[kUrl].origin;
         const request2 = new Request(origin, opts, handler);
         this[kQueue].push(request2);
@@ -8686,54 +12844,55 @@ var require_client = __commonJS({
     };
     __name(Client, "Client");
     var constants = require_constants2();
+    var createRedirectInterceptor = require_redirectInterceptor();
     var EMPTY_BUF = Buffer.alloc(0);
     async function lazyllhttp() {
       const llhttpWasmData = process.env.JEST_WORKER_ID ? require_llhttp_wasm() : void 0;
       let mod2;
       try {
         mod2 = await WebAssembly.compile(Buffer.from(require_llhttp_simd_wasm(), "base64"));
-      } catch (e) {
+      } catch (e2) {
         mod2 = await WebAssembly.compile(Buffer.from(llhttpWasmData || require_llhttp_wasm(), "base64"));
       }
       return await WebAssembly.instantiate(mod2, {
         env: {
-          wasm_on_url: (p, at, len) => {
+          wasm_on_url: (p2, at, len) => {
             return 0;
           },
-          wasm_on_status: (p, at, len) => {
-            assert.strictEqual(currentParser.ptr, p);
+          wasm_on_status: (p2, at, len) => {
+            assert.strictEqual(currentParser.ptr, p2);
             const start = at - currentBufferPtr;
             const end = start + len;
             return currentParser.onStatus(currentBufferRef.slice(start, end)) || 0;
           },
-          wasm_on_message_begin: (p) => {
-            assert.strictEqual(currentParser.ptr, p);
+          wasm_on_message_begin: (p2) => {
+            assert.strictEqual(currentParser.ptr, p2);
             return currentParser.onMessageBegin() || 0;
           },
-          wasm_on_header_field: (p, at, len) => {
-            assert.strictEqual(currentParser.ptr, p);
+          wasm_on_header_field: (p2, at, len) => {
+            assert.strictEqual(currentParser.ptr, p2);
             const start = at - currentBufferPtr;
             const end = start + len;
             return currentParser.onHeaderField(currentBufferRef.slice(start, end)) || 0;
           },
-          wasm_on_header_value: (p, at, len) => {
-            assert.strictEqual(currentParser.ptr, p);
+          wasm_on_header_value: (p2, at, len) => {
+            assert.strictEqual(currentParser.ptr, p2);
             const start = at - currentBufferPtr;
             const end = start + len;
             return currentParser.onHeaderValue(currentBufferRef.slice(start, end)) || 0;
           },
-          wasm_on_headers_complete: (p, statusCode, upgrade, shouldKeepAlive) => {
-            assert.strictEqual(currentParser.ptr, p);
+          wasm_on_headers_complete: (p2, statusCode, upgrade, shouldKeepAlive) => {
+            assert.strictEqual(currentParser.ptr, p2);
             return currentParser.onHeadersComplete(statusCode, Boolean(upgrade), Boolean(shouldKeepAlive)) || 0;
           },
-          wasm_on_body: (p, at, len) => {
-            assert.strictEqual(currentParser.ptr, p);
+          wasm_on_body: (p2, at, len) => {
+            assert.strictEqual(currentParser.ptr, p2);
             const start = at - currentBufferPtr;
             const end = start + len;
             return currentParser.onBody(currentBufferRef.slice(start, end)) || 0;
           },
-          wasm_on_message_complete: (p) => {
-            assert.strictEqual(currentParser.ptr, p);
+          wasm_on_message_complete: (p2) => {
+            assert.strictEqual(currentParser.ptr, p2);
             return currentParser.onMessageComplete() || 0;
           }
         }
@@ -9751,9 +13910,9 @@ ${len.toString(16)}\r
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/node/fixed-queue.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/node/fixed-queue.js
 var require_fixed_queue = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/node/fixed-queue.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/node/fixed-queue.js"(exports, module2) {
     "use strict";
     var kSize = 2048;
     var kMask = kSize - 1;
@@ -9809,9 +13968,9 @@ var require_fixed_queue = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/pool-stats.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/pool-stats.js
 var require_pool_stats = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/pool-stats.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/pool-stats.js"(exports, module2) {
     var { kFree, kConnected, kPending, kQueued, kRunning, kSize } = require_symbols();
     var kPool = Symbol("pool");
     var PoolStats = class {
@@ -9842,9 +14001,9 @@ var require_pool_stats = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/pool-base.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/pool-base.js
 var require_pool_base = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/pool-base.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/pool-base.js"(exports, module2) {
     "use strict";
     var DispatcherBase = require_dispatcher_base();
     var FixedQueue = require_fixed_queue();
@@ -9998,9 +14157,9 @@ var require_pool_base = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/pool.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/pool.js
 var require_pool = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/pool.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/pool.js"(exports, module2) {
     "use strict";
     var {
       PoolBase,
@@ -10014,7 +14173,7 @@ var require_pool = __commonJS({
       InvalidArgumentError
     } = require_errors();
     var util2 = require_util2();
-    var { kUrl } = require_symbols();
+    var { kUrl, kInterceptors } = require_symbols();
     var buildConnector = require_connect();
     var kOptions = Symbol("options");
     var kConnections = Symbol("connections");
@@ -10053,9 +14212,11 @@ var require_pool = __commonJS({
             ...connect
           });
         }
+        this[kInterceptors] = options.interceptors && options.interceptors.Pool && Array.isArray(options.interceptors.Pool) ? options.interceptors.Pool : [];
         this[kConnections] = connections || null;
         this[kUrl] = util2.parseOrigin(origin);
         this[kOptions] = { ...util2.deepClone(options), connect };
+        this[kOptions].interceptors = options.interceptors ? { ...options.interceptors } : void 0;
         this[kFactory] = factory;
       }
       [kGetDispatcher]() {
@@ -10075,9 +14236,9 @@ var require_pool = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/balanced-pool.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/balanced-pool.js
 var require_balanced_pool = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/balanced-pool.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/balanced-pool.js"(exports, module2) {
     "use strict";
     var {
       BalancedPoolMissingUpstreamError,
@@ -10092,7 +14253,7 @@ var require_balanced_pool = __commonJS({
       kGetDispatcher
     } = require_pool_base();
     var Pool = require_pool();
-    var { kUrl } = require_symbols();
+    var { kUrl, kInterceptors } = require_symbols();
     var { parseOrigin } = require_util2();
     var kFactory = Symbol("factory");
     var kOptions = Symbol("options");
@@ -10102,10 +14263,10 @@ var require_balanced_pool = __commonJS({
     var kWeight = Symbol("kWeight");
     var kMaxWeightPerServer = Symbol("kMaxWeightPerServer");
     var kErrorPenalty = Symbol("kErrorPenalty");
-    function getGreatestCommonDivisor(a, b) {
-      if (b === 0)
+    function getGreatestCommonDivisor(a, b2) {
+      if (b2 === 0)
         return a;
-      return getGreatestCommonDivisor(b, a % b);
+      return getGreatestCommonDivisor(b2, a % b2);
     }
     __name(getGreatestCommonDivisor, "getGreatestCommonDivisor");
     function defaultFactory(origin, opts) {
@@ -10126,6 +14287,7 @@ var require_balanced_pool = __commonJS({
         if (typeof factory !== "function") {
           throw new InvalidArgumentError("factory must be a function.");
         }
+        this[kInterceptors] = opts.interceptors && opts.interceptors.BalancedPool && Array.isArray(opts.interceptors.BalancedPool) ? opts.interceptors.BalancedPool : [];
         this[kFactory] = factory;
         for (const upstream of upstreams) {
           this.addUpstream(upstream);
@@ -10160,7 +14322,7 @@ var require_balanced_pool = __commonJS({
         return this;
       }
       _updateBalancedPoolStats() {
-        this[kGreatestCommonDivisor] = this[kClients].map((p) => p[kWeight]).reduce(getGreatestCommonDivisor, 0);
+        this[kGreatestCommonDivisor] = this[kClients].map((p2) => p2[kWeight]).reduce(getGreatestCommonDivisor, 0);
       }
       removeUpstream(upstream) {
         const upstreamOrigin = parseOrigin(upstream).origin;
@@ -10171,7 +14333,7 @@ var require_balanced_pool = __commonJS({
         return this;
       }
       get upstreams() {
-        return this[kClients].filter((dispatcher) => dispatcher.closed !== true && dispatcher.destroyed !== true).map((p) => p[kUrl].origin);
+        return this[kClients].filter((dispatcher) => dispatcher.closed !== true && dispatcher.destroyed !== true).map((p2) => p2[kUrl].origin);
       }
       [kGetDispatcher]() {
         if (this[kClients].length === 0) {
@@ -10181,7 +14343,7 @@ var require_balanced_pool = __commonJS({
         if (!dispatcher) {
           return;
         }
-        const allClientsBusy = this[kClients].map((pool) => pool[kNeedDrain]).reduce((a, b) => a && b, true);
+        const allClientsBusy = this[kClients].map((pool) => pool[kNeedDrain]).reduce((a, b2) => a && b2, true);
         if (allClientsBusy) {
           return;
         }
@@ -10213,9 +14375,9 @@ var require_balanced_pool = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/compat/dispatcher-weakref.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/compat/dispatcher-weakref.js
 var require_dispatcher_weakref = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/compat/dispatcher-weakref.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/compat/dispatcher-weakref.js"(exports, module2) {
     "use strict";
     var { kConnected, kSize } = require_symbols();
     var CompatWeakRef = class {
@@ -10249,17 +14411,17 @@ var require_dispatcher_weakref = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/agent.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/agent.js
 var require_agent = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/agent.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/agent.js"(exports, module2) {
     "use strict";
     var { InvalidArgumentError } = require_errors();
-    var { kClients, kRunning, kClose, kDestroy, kDispatch } = require_symbols();
+    var { kClients, kRunning, kClose, kDestroy, kDispatch, kInterceptors } = require_symbols();
     var DispatcherBase = require_dispatcher_base();
     var Pool = require_pool();
     var Client = require_client();
     var util2 = require_util2();
-    var RedirectHandler = require_redirect();
+    var createRedirectInterceptor = require_redirectInterceptor();
     var { WeakRef: WeakRef2, FinalizationRegistry } = require_dispatcher_weakref()();
     var kOnConnect = Symbol("onConnect");
     var kOnDisconnect = Symbol("onDisconnect");
@@ -10288,7 +14450,9 @@ var require_agent = __commonJS({
         if (connect && typeof connect !== "function") {
           connect = { ...connect };
         }
+        this[kInterceptors] = options.interceptors && options.interceptors.Agent && Array.isArray(options.interceptors.Agent) ? options.interceptors.Agent : [createRedirectInterceptor({ maxRedirections })];
         this[kOptions] = { ...util2.deepClone(options), connect };
+        this[kOptions].interceptors = options.interceptors ? { ...options.interceptors } : void 0;
         this[kMaxRedirections] = maxRedirections;
         this[kFactory] = factory;
         this[kClients] = /* @__PURE__ */ new Map();
@@ -10336,11 +14500,6 @@ var require_agent = __commonJS({
           this[kClients].set(key, new WeakRef2(dispatcher));
           this[kFinalizer].register(dispatcher, key);
         }
-        const { maxRedirections = this[kMaxRedirections] } = opts;
-        if (maxRedirections != null && maxRedirections !== 0) {
-          opts = { ...opts, maxRedirections: 0 };
-          handler = new RedirectHandler(this, maxRedirections, opts, handler);
-        }
         return dispatcher.dispatch(opts, handler);
       }
       async [kClose]() {
@@ -10369,9 +14528,9 @@ var require_agent = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/readable.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/readable.js
 var require_readable = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/readable.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/readable.js"(exports, module2) {
     "use strict";
     var assert = require("assert");
     var { Readable } = require("stream");
@@ -10481,7 +14640,7 @@ var require_readable = __commonJS({
               return;
             }
           }
-        } catch (e) {
+        } catch (e2) {
         }
       }
     }, "BodyReadable");
@@ -10590,9 +14749,9 @@ var require_readable = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/abort-signal.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/abort-signal.js
 var require_abort_signal = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/abort-signal.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/abort-signal.js"(exports, module2) {
     var { RequestAbortedError } = require_errors();
     var kListener = Symbol("kListener");
     var kSignal = Symbol("kSignal");
@@ -10645,9 +14804,9 @@ var require_abort_signal = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-request.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-request.js
 var require_api_request = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-request.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-request.js"(exports, module2) {
     "use strict";
     var Readable = require_readable();
     var {
@@ -10701,15 +14860,15 @@ var require_api_request = __commonJS({
         }
         addSignal(this, signal);
       }
-      onConnect(abort, context5) {
+      onConnect(abort, context3) {
         if (!this.callback) {
           throw new RequestAbortedError();
         }
         this.abort = abort;
-        this.context = context5;
+        this.context = context3;
       }
       onHeaders(statusCode, rawHeaders, resume, statusMessage) {
-        const { callback, opaque, abort, context: context5 } = this;
+        const { callback, opaque, abort, context: context3 } = this;
         if (statusCode < 200) {
           if (this.onInfo) {
             const headers2 = this.responseHeaders === "raw" ? util2.parseRawHeaders(rawHeaders) : util2.parseHeaders(rawHeaders);
@@ -10738,7 +14897,7 @@ var require_api_request = __commonJS({
             trailers: this.trailers,
             opaque,
             body,
-            context: context5
+            context: context3
           });
         }
       }
@@ -10820,9 +14979,9 @@ var require_api_request = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-stream.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-stream.js
 var require_api_stream = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-stream.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-stream.js"(exports, module2) {
     "use strict";
     var { finished } = require("stream");
     var {
@@ -10879,15 +15038,15 @@ var require_api_stream = __commonJS({
         }
         addSignal(this, signal);
       }
-      onConnect(abort, context5) {
+      onConnect(abort, context3) {
         if (!this.callback) {
           throw new RequestAbortedError();
         }
         this.abort = abort;
-        this.context = context5;
+        this.context = context3;
       }
       onHeaders(statusCode, rawHeaders, resume) {
-        const { factory, opaque, context: context5 } = this;
+        const { factory, opaque, context: context3 } = this;
         if (statusCode < 200) {
           if (this.onInfo) {
             const headers2 = this.responseHeaders === "raw" ? util2.parseRawHeaders(rawHeaders) : util2.parseHeaders(rawHeaders);
@@ -10901,7 +15060,7 @@ var require_api_stream = __commonJS({
           statusCode,
           headers,
           opaque,
-          context: context5
+          context: context3
         });
         if (!res || typeof res.write !== "function" || typeof res.end !== "function" || typeof res.on !== "function") {
           throw new InvalidReturnValueError("expected Writable");
@@ -10976,9 +15135,9 @@ var require_api_stream = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-pipeline.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-pipeline.js
 var require_api_pipeline = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-pipeline.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-pipeline.js"(exports, module2) {
     "use strict";
     var {
       Readable,
@@ -11093,17 +15252,17 @@ var require_api_pipeline = __commonJS({
         this.res = null;
         addSignal(this, signal);
       }
-      onConnect(abort, context5) {
+      onConnect(abort, context3) {
         const { ret, res } = this;
         assert(!res, "pipeline cannot be retried");
         if (ret.destroyed) {
           throw new RequestAbortedError();
         }
         this.abort = abort;
-        this.context = context5;
+        this.context = context3;
       }
       onHeaders(statusCode, rawHeaders, resume) {
-        const { opaque, handler, context: context5 } = this;
+        const { opaque, handler, context: context3 } = this;
         if (statusCode < 200) {
           if (this.onInfo) {
             const headers = this.responseHeaders === "raw" ? util2.parseRawHeaders(rawHeaders) : util2.parseHeaders(rawHeaders);
@@ -11121,7 +15280,7 @@ var require_api_pipeline = __commonJS({
             headers,
             opaque,
             body: this.res,
-            context: context5
+            context: context3
           });
         } catch (err) {
           this.res.on("error", util2.nop);
@@ -11178,9 +15337,9 @@ var require_api_pipeline = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-upgrade.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-upgrade.js
 var require_api_upgrade = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-upgrade.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-upgrade.js"(exports, module2) {
     "use strict";
     var { InvalidArgumentError, RequestAbortedError, SocketError } = require_errors();
     var { AsyncResource: AsyncResource2 } = require("async_hooks");
@@ -11207,7 +15366,7 @@ var require_api_upgrade = __commonJS({
         this.context = null;
         addSignal(this, signal);
       }
-      onConnect(abort, context5) {
+      onConnect(abort, context3) {
         if (!this.callback) {
           throw new RequestAbortedError();
         }
@@ -11218,7 +15377,7 @@ var require_api_upgrade = __commonJS({
         throw new SocketError("bad upgrade", null);
       }
       onUpgrade(statusCode, rawHeaders, socket) {
-        const { callback, opaque, context: context5 } = this;
+        const { callback, opaque, context: context3 } = this;
         assert.strictEqual(statusCode, 101);
         removeSignal(this);
         this.callback = null;
@@ -11227,7 +15386,7 @@ var require_api_upgrade = __commonJS({
           headers,
           socket,
           opaque,
-          context: context5
+          context: context3
         });
       }
       onError(err) {
@@ -11270,9 +15429,9 @@ var require_api_upgrade = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-connect.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-connect.js
 var require_api_connect = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/api-connect.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/api-connect.js"(exports, module2) {
     "use strict";
     var { InvalidArgumentError, RequestAbortedError, SocketError } = require_errors();
     var { AsyncResource: AsyncResource2 } = require("async_hooks");
@@ -11297,18 +15456,18 @@ var require_api_connect = __commonJS({
         this.abort = null;
         addSignal(this, signal);
       }
-      onConnect(abort, context5) {
+      onConnect(abort, context3) {
         if (!this.callback) {
           throw new RequestAbortedError();
         }
         this.abort = abort;
-        this.context = context5;
+        this.context = context3;
       }
       onHeaders() {
         throw new SocketError("bad connect", null);
       }
       onUpgrade(statusCode, rawHeaders, socket) {
-        const { callback, opaque, context: context5 } = this;
+        const { callback, opaque, context: context3 } = this;
         removeSignal(this);
         this.callback = null;
         const headers = this.responseHeaders === "raw" ? util2.parseRawHeaders(rawHeaders) : util2.parseHeaders(rawHeaders);
@@ -11317,7 +15476,7 @@ var require_api_connect = __commonJS({
           headers,
           socket,
           opaque,
-          context: context5
+          context: context3
         });
       }
       onError(err) {
@@ -11356,9 +15515,9 @@ var require_api_connect = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/index.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/index.js
 var require_api = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/api/index.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/api/index.js"(exports, module2) {
     "use strict";
     module2.exports.request = require_api_request();
     module2.exports.stream = require_api_stream();
@@ -11368,9 +15527,9 @@ var require_api = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-errors.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-errors.js
 var require_mock_errors = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-errors.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-errors.js"(exports, module2) {
     "use strict";
     var { UndiciError } = require_errors();
     var MockNotMatchedError = class extends UndiciError {
@@ -11389,9 +15548,9 @@ var require_mock_errors = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-symbols.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-symbols.js
 var require_mock_symbols = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-symbols.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-symbols.js"(exports, module2) {
     "use strict";
     module2.exports = {
       kAgent: Symbol("agent"),
@@ -11417,9 +15576,9 @@ var require_mock_symbols = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-utils.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-utils.js
 var require_mock_utils = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-utils.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-utils.js"(exports, module2) {
     "use strict";
     var { MockNotMatchedError } = require_mock_errors();
     var {
@@ -11430,6 +15589,7 @@ var require_mock_utils = __commonJS({
       kGetNetConnect
     } = require_mock_symbols();
     var { buildURL, nop } = require_util2();
+    var { STATUS_CODES } = require("http");
     function matchValue(match, value) {
       if (typeof match === "string") {
         return match === value;
@@ -11586,136 +15746,7 @@ var require_mock_utils = __commonJS({
     }
     __name(generateKeyValues, "generateKeyValues");
     function getStatusText(statusCode) {
-      switch (statusCode) {
-        case 100:
-          return "Continue";
-        case 101:
-          return "Switching Protocols";
-        case 102:
-          return "Processing";
-        case 103:
-          return "Early Hints";
-        case 200:
-          return "OK";
-        case 201:
-          return "Created";
-        case 202:
-          return "Accepted";
-        case 203:
-          return "Non-Authoritative Information";
-        case 204:
-          return "No Content";
-        case 205:
-          return "Reset Content";
-        case 206:
-          return "Partial Content";
-        case 207:
-          return "Multi-Status";
-        case 208:
-          return "Already Reported";
-        case 226:
-          return "IM Used";
-        case 300:
-          return "Multiple Choice";
-        case 301:
-          return "Moved Permanently";
-        case 302:
-          return "Found";
-        case 303:
-          return "See Other";
-        case 304:
-          return "Not Modified";
-        case 305:
-          return "Use Proxy";
-        case 306:
-          return "unused";
-        case 307:
-          return "Temporary Redirect";
-        case 308:
-          return "Permanent Redirect";
-        case 400:
-          return "Bad Request";
-        case 401:
-          return "Unauthorized";
-        case 402:
-          return "Payment Required";
-        case 403:
-          return "Forbidden";
-        case 404:
-          return "Not Found";
-        case 405:
-          return "Method Not Allowed";
-        case 406:
-          return "Not Acceptable";
-        case 407:
-          return "Proxy Authentication Required";
-        case 408:
-          return "Request Timeout";
-        case 409:
-          return "Conflict";
-        case 410:
-          return "Gone";
-        case 411:
-          return "Length Required";
-        case 412:
-          return "Precondition Failed";
-        case 413:
-          return "Payload Too Large";
-        case 414:
-          return "URI Too Large";
-        case 415:
-          return "Unsupported Media Type";
-        case 416:
-          return "Range Not Satisfiable";
-        case 417:
-          return "Expectation Failed";
-        case 418:
-          return "I'm a teapot";
-        case 421:
-          return "Misdirected Request";
-        case 422:
-          return "Unprocessable Entity";
-        case 423:
-          return "Locked";
-        case 424:
-          return "Failed Dependency";
-        case 425:
-          return "Too Early";
-        case 426:
-          return "Upgrade Required";
-        case 428:
-          return "Precondition Required";
-        case 429:
-          return "Too Many Requests";
-        case 431:
-          return "Request Header Fields Too Large";
-        case 451:
-          return "Unavailable For Legal Reasons";
-        case 500:
-          return "Internal Server Error";
-        case 501:
-          return "Not Implemented";
-        case 502:
-          return "Bad Gateway";
-        case 503:
-          return "Service Unavailable";
-        case 504:
-          return "Gateway Timeout";
-        case 505:
-          return "HTTP Version Not Supported";
-        case 506:
-          return "Variant Also Negotiates";
-        case 507:
-          return "Insufficient Storage";
-        case 508:
-          return "Loop Detected";
-        case 510:
-          return "Not Extended";
-        case 511:
-          return "Network Authentication Required";
-        default:
-          return "unknown";
-      }
+      return STATUS_CODES[statusCode] || "unknown";
     }
     __name(getStatusText, "getStatusText");
     async function getResponse(body) {
@@ -11834,9 +15865,9 @@ var require_mock_utils = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-interceptor.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-interceptor.js
 var require_mock_interceptor = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-interceptor.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-interceptor.js"(exports, module2) {
     "use strict";
     var { getResponseData, buildKey, addMockDispatch } = require_mock_utils();
     var {
@@ -11973,9 +16004,9 @@ var require_mock_interceptor = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-client.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-client.js
 var require_mock_client = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-client.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-client.js"(exports, module2) {
     "use strict";
     var { promisify: promisify4 } = require("util");
     var Client = require_client();
@@ -12024,9 +16055,9 @@ var require_mock_client = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-pool.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-pool.js
 var require_mock_pool = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-pool.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-pool.js"(exports, module2) {
     "use strict";
     var { promisify: promisify4 } = require("util");
     var Pool = require_pool();
@@ -12075,9 +16106,9 @@ var require_mock_pool = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/pluralizer.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/pluralizer.js
 var require_pluralizer = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/pluralizer.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/pluralizer.js"(exports, module2) {
     "use strict";
     var singulars = {
       pronoun: "it",
@@ -12106,9 +16137,9 @@ var require_pluralizer = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/pending-interceptors-formatter.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/pending-interceptors-formatter.js
 var require_pending_interceptors_formatter = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/pending-interceptors-formatter.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/pending-interceptors-formatter.js"(exports, module2) {
     "use strict";
     var { Transform } = require("stream");
     var { Console } = require("console");
@@ -12145,9 +16176,9 @@ var require_pending_interceptors_formatter = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-agent.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-agent.js
 var require_mock_agent = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/mock/mock-agent.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/mock/mock-agent.js"(exports, module2) {
     "use strict";
     var { kClients } = require_symbols();
     var Agent = require_agent();
@@ -12284,13 +16315,14 @@ ${pendingInterceptorsFormatter.format(pending)}
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/proxy-agent.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/proxy-agent.js
 var require_proxy_agent = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/proxy-agent.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/proxy-agent.js"(exports, module2) {
     "use strict";
-    var { kClose, kDestroy } = require_symbols();
-    var Client = require_agent();
+    var { kProxy, kClose, kDestroy, kInterceptors } = require_symbols();
+    var { URL: URL3 } = require("url");
     var Agent = require_agent();
+    var Client = require_client();
     var DispatcherBase = require_dispatcher_base();
     var { InvalidArgumentError, RequestAbortedError } = require_errors();
     var buildConnector = require_connect();
@@ -12304,9 +16336,25 @@ var require_proxy_agent = __commonJS({
       return protocol === "https:" ? 443 : 80;
     }
     __name(defaultProtocolPort, "defaultProtocolPort");
+    function buildProxyOptions(opts) {
+      if (typeof opts === "string") {
+        opts = { uri: opts };
+      }
+      if (!opts || !opts.uri) {
+        throw new InvalidArgumentError("Proxy opts.uri is mandatory");
+      }
+      return {
+        uri: opts.uri,
+        protocol: opts.protocol || "https"
+      };
+    }
+    __name(buildProxyOptions, "buildProxyOptions");
     var ProxyAgent = class extends DispatcherBase {
       constructor(opts) {
         super(opts);
+        this[kProxy] = buildProxyOptions(opts);
+        this[kAgent] = new Agent(opts);
+        this[kInterceptors] = opts.interceptors && opts.interceptors.ProxyAgent && Array.isArray(opts.interceptors.ProxyAgent) ? opts.interceptors.ProxyAgent : [];
         if (typeof opts === "string") {
           opts = { uri: opts };
         }
@@ -12319,10 +16367,11 @@ var require_proxy_agent = __commonJS({
         if (opts.auth) {
           this[kProxyHeaders]["proxy-authorization"] = `Basic ${opts.auth}`;
         }
-        const { origin, port } = new URL(opts.uri);
+        const resolvedUrl = new URL3(opts.uri);
+        const { origin, port, host } = resolvedUrl;
         const connect = buildConnector({ ...opts.proxyTls });
         this[kConnectEndpoint] = buildConnector({ ...opts.requestTls });
-        this[kClient] = new Client({ origin: opts.origin, connect });
+        this[kClient] = new Client(resolvedUrl, { connect });
         this[kAgent] = new Agent({
           ...opts,
           connect: async (opts2, callback) => {
@@ -12338,7 +16387,7 @@ var require_proxy_agent = __commonJS({
                 signal: opts2.signal,
                 headers: {
                   ...this[kProxyHeaders],
-                  host: opts2.host
+                  host
                 }
               });
               if (statusCode !== 200) {
@@ -12364,7 +16413,7 @@ var require_proxy_agent = __commonJS({
         });
       }
       dispatch(opts, handler) {
-        const { host } = new URL(opts.origin);
+        const { host } = new URL3(opts.origin);
         const headers = buildHeaders2(opts.headers);
         throwIfProxyAuthIsSent(headers);
         return this[kAgent].dispatch(
@@ -12410,9 +16459,9 @@ var require_proxy_agent = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/global.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/global.js
 var require_global = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/global.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/global.js"(exports, module2) {
     "use strict";
     var globalDispatcher = Symbol.for("undici.globalDispatcher.1");
     var { InvalidArgumentError } = require_errors();
@@ -12443,9 +16492,42 @@ var require_global = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/headers.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/handler/DecoratorHandler.js
+var require_DecoratorHandler = __commonJS({
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/handler/DecoratorHandler.js"(exports, module2) {
+    "use strict";
+    module2.exports = /* @__PURE__ */ __name(class DecoratorHandler {
+      constructor(handler) {
+        this.handler = handler;
+      }
+      onConnect(...args) {
+        return this.handler.onConnect(...args);
+      }
+      onError(...args) {
+        return this.handler.onError(...args);
+      }
+      onUpgrade(...args) {
+        return this.handler.onUpgrade(...args);
+      }
+      onHeaders(...args) {
+        return this.handler.onHeaders(...args);
+      }
+      onData(...args) {
+        return this.handler.onData(...args);
+      }
+      onComplete(...args) {
+        return this.handler.onComplete(...args);
+      }
+      onBodySent(...args) {
+        return this.handler.onBodySent(...args);
+      }
+    }, "DecoratorHandler");
+  }
+});
+
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/headers.js
 var require_headers = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/headers.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/headers.js"(exports, module2) {
     "use strict";
     var { kHeadersList } = require_symbols();
     var { kGuard } = require_symbols2();
@@ -12692,8 +16774,9 @@ var require_headers = __commonJS({
         return this[kHeadersList].set(name, value);
       }
       get [kHeadersSortedMap]() {
-        var _a3, _b2;
-        (_b2 = (_a3 = this[kHeadersList])[kHeadersSortedMap]) != null ? _b2 : _a3[kHeadersSortedMap] = new Map([...this[kHeadersList]].sort((a, b) => a[0] < b[0] ? -1 : 1));
+        if (!this[kHeadersList][kHeadersSortedMap]) {
+          this[kHeadersList][kHeadersSortedMap] = new Map([...this[kHeadersList]].sort((a, b2) => a[0] < b2[0] ? -1 : 1));
+        }
         return this[kHeadersList][kHeadersSortedMap];
       }
       keys() {
@@ -12773,9 +16856,50 @@ var require_headers = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/response.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/global.js
+var require_global2 = __commonJS({
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/global.js"(exports, module2) {
+    "use strict";
+    var globalOrigin = Symbol.for("undici.globalOrigin.1");
+    function getGlobalOrigin() {
+      return globalThis[globalOrigin];
+    }
+    __name(getGlobalOrigin, "getGlobalOrigin");
+    function setGlobalOrigin(newOrigin) {
+      if (newOrigin !== void 0 && typeof newOrigin !== "string" && !(newOrigin instanceof URL)) {
+        throw new Error("Invalid base url");
+      }
+      if (newOrigin === void 0) {
+        Object.defineProperty(globalThis, globalOrigin, {
+          value: void 0,
+          writable: true,
+          enumerable: false,
+          configurable: false
+        });
+        return;
+      }
+      const parsedURL = new URL(newOrigin);
+      if (parsedURL.protocol !== "http:" && parsedURL.protocol !== "https:") {
+        throw new TypeError(`Only http & https urls are allowed, received ${parsedURL.protocol}`);
+      }
+      Object.defineProperty(globalThis, globalOrigin, {
+        value: parsedURL,
+        writable: true,
+        enumerable: false,
+        configurable: false
+      });
+    }
+    __name(setGlobalOrigin, "setGlobalOrigin");
+    module2.exports = {
+      getGlobalOrigin,
+      setGlobalOrigin
+    };
+  }
+});
+
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/response.js
 var require_response = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/response.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/response.js"(exports, module2) {
     "use strict";
     var { Headers, HeadersList, fill } = require_headers();
     var { extractBody, cloneBody, mixinBody } = require_body();
@@ -12798,6 +16922,7 @@ var require_response = __commonJS({
     var { kState, kHeaders, kGuard, kRealm } = require_symbols2();
     var { webidl } = require_webidl();
     var { FormData } = require_formdata();
+    var { getGlobalOrigin } = require_global2();
     var { kHeadersList } = require_symbols();
     var assert = require("assert");
     var { types } = require("util");
@@ -12845,7 +16970,7 @@ var require_response = __commonJS({
         status = webidl.converters["unsigned short"](status);
         let parsedURL;
         try {
-          parsedURL = new URL(url);
+          parsedURL = new URL(url, getGlobalOrigin());
         } catch (err) {
           throw Object.assign(new TypeError("Failed to parse URL from " + url), {
             cause: err
@@ -13015,12 +17140,12 @@ var require_response = __commonJS({
         ...state
       };
       return new Proxy(response, {
-        get(target, p) {
-          return p in state ? state[p] : target[p];
+        get(target, p2) {
+          return p2 in state ? state[p2] : target[p2];
         },
-        set(target, p, value) {
-          assert(!(p in state));
-          target[p] = value;
+        set(target, p2, value) {
+          assert(!(p2 in state));
+          target[p2] = value;
           return true;
         }
       });
@@ -13109,13 +17234,13 @@ var require_response = __commonJS({
         return webidl.converters.USVString(V);
       }
       if (isBlobLike(V)) {
-        return webidl.converters.Blob(V);
+        return webidl.converters.Blob(V, { strict: false });
       }
       if (types.isAnyArrayBuffer(V) || types.isTypedArray(V) || types.isDataView(V)) {
         return webidl.converters.BufferSource(V);
       }
-      if (V instanceof FormData) {
-        return webidl.converters.FormData(V);
+      if (util2.isFormDataLike(V)) {
+        return webidl.converters.FormData(V, { strict: false });
       }
       if (V instanceof URLSearchParams) {
         return webidl.converters.URLSearchParams(V);
@@ -13157,9 +17282,9 @@ var require_response = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/request.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/request.js
 var require_request2 = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/request.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/request.js"(exports, module2) {
     "use strict";
     var { extractBody, mixinBody, cloneBody } = require_body();
     var { Headers, fill: fillHeaders, HeadersList } = require_headers();
@@ -13182,6 +17307,7 @@ var require_request2 = __commonJS({
     var { kEnumerableProperty } = util2;
     var { kHeaders, kSignal, kState, kGuard, kRealm } = require_symbols2();
     var { webidl } = require_webidl();
+    var { getGlobalOrigin } = require_global2();
     var { kHeadersList } = require_symbols();
     var assert = require("assert");
     var TransformStream;
@@ -13202,7 +17328,11 @@ var require_request2 = __commonJS({
         }
         input = webidl.converters.RequestInfo(input);
         init = webidl.converters.RequestInit(init);
-        this[kRealm] = { settingsObject: {} };
+        this[kRealm] = {
+          settingsObject: {
+            baseUrl: getGlobalOrigin()
+          }
+        };
         let request2 = null;
         let fallbackMode = null;
         const baseUrl = this[kRealm].settingsObject.baseUrl;
@@ -13754,11 +17884,12 @@ var require_request2 = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/dataURL.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/dataURL.js
 var require_dataURL = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/dataURL.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/dataURL.js"(exports, module2) {
     var assert = require("assert");
     var { atob: atob2 } = require("buffer");
+    var { isValidHTTPToken } = require_util3();
     var encoder = new TextEncoder();
     function dataURLProcessor(dataURL) {
       assert(dataURL.protocol === "data:");
@@ -13912,7 +18043,7 @@ var require_dataURL = __commonJS({
         }
         let parameterValue = null;
         if (input[position.position] === '"') {
-          parameterValue = collectAnHTTPQuotedString(input, position);
+          parameterValue = collectAnHTTPQuotedString(input, position, true);
           collectASequenceOfCodePoints(
             (char) => char !== ";",
             input,
@@ -13924,7 +18055,7 @@ var require_dataURL = __commonJS({
             input,
             position
           );
-          parameterValue = parameterValue.trim();
+          parameterValue = parameterValue.trimEnd();
           if (parameterValue.length === 0) {
             continue;
           }
@@ -13989,20 +18120,39 @@ var require_dataURL = __commonJS({
       return input.slice(positionStart, position.position);
     }
     __name(collectAnHTTPQuotedString, "collectAnHTTPQuotedString");
+    function serializeAMimeType(mimeType) {
+      assert(mimeType !== "failure");
+      const { type, subtype, parameters } = mimeType;
+      let serialization = `${type}/${subtype}`;
+      for (let [name, value] of parameters.entries()) {
+        serialization += ";";
+        serialization += name;
+        serialization += "=";
+        if (!isValidHTTPToken(value)) {
+          value = value.replace(/(\\|")/g, "\\$1");
+          value = '"' + value;
+          value += '"';
+        }
+        serialization += value;
+      }
+      return serialization;
+    }
+    __name(serializeAMimeType, "serializeAMimeType");
     module2.exports = {
       dataURLProcessor,
       URLSerializer,
       collectASequenceOfCodePoints,
       stringPercentDecode,
       parseMIMEType,
-      collectAnHTTPQuotedString
+      collectAnHTTPQuotedString,
+      serializeAMimeType
     };
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/index.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/index.js
 var require_fetch = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/lib/fetch/index.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/lib/fetch/index.js"(exports, module2) {
     "use strict";
     var {
       Response,
@@ -14054,7 +18204,7 @@ var require_fetch = __commonJS({
     var EE = require("events");
     var { Readable, pipeline } = require("stream");
     var { isErrored, isReadable } = require_util2();
-    var { dataURLProcessor } = require_dataURL();
+    var { dataURLProcessor, serializeAMimeType } = require_dataURL();
     var { TransformStream } = require("stream/web");
     var resolveObjectURL;
     var ReadableStream;
@@ -14097,18 +18247,18 @@ var require_fetch = __commonJS({
           `Failed to execute 'fetch' on 'Window': 1 argument required, but only ${arguments.length} present.`
         );
       }
-      const p = createDeferredPromise();
+      const p2 = createDeferredPromise();
       let requestObject;
       try {
         requestObject = new Request(input, init);
-      } catch (e) {
-        p.reject(e);
-        return p.promise;
+      } catch (e2) {
+        p2.reject(e2);
+        return p2.promise;
       }
       const request2 = requestObject[kState];
       if (requestObject.signal.aborted) {
-        abortFetch(p, request2, null);
-        return p.promise;
+        abortFetch(p2, request2, null);
+        return p2.promise;
       }
       const globalObject = request2.client.globalObject;
       if (((_a3 = globalObject == null ? void 0 : globalObject.constructor) == null ? void 0 : _a3.name) === "ServiceWorkerGlobalScope") {
@@ -14122,7 +18272,7 @@ var require_fetch = __commonJS({
         "abort",
         () => {
           locallyAborted = true;
-          abortFetch(p, request2, responseObject);
+          abortFetch(p2, request2, responseObject);
           if (controller != null) {
             controller.abort();
           }
@@ -14135,11 +18285,11 @@ var require_fetch = __commonJS({
           return;
         }
         if (response.aborted) {
-          abortFetch(p, request2, responseObject);
+          abortFetch(p2, request2, responseObject);
           return;
         }
         if (response.type === "error") {
-          p.reject(
+          p2.reject(
             Object.assign(new TypeError("fetch failed"), { cause: response.error })
           );
           return;
@@ -14150,7 +18300,7 @@ var require_fetch = __commonJS({
         responseObject[kHeaders][kHeadersList] = response.headersList;
         responseObject[kHeaders][kGuard] = "immutable";
         responseObject[kHeaders][kRealm] = relevantRealm;
-        p.resolve(responseObject);
+        p2.resolve(responseObject);
       }, "processResponse");
       controller = fetching({
         request: request2,
@@ -14158,7 +18308,7 @@ var require_fetch = __commonJS({
         processResponse,
         dispatcher: this
       });
-      return p.promise;
+      return p2.promise;
     }
     __name(fetch2, "fetch");
     function finalizeAndReportTiming(response, initiatorType = "other") {
@@ -14201,10 +18351,10 @@ var require_fetch = __commonJS({
       }
     }
     __name(markResourceTiming, "markResourceTiming");
-    function abortFetch(p, request2, responseObject) {
+    function abortFetch(p2, request2, responseObject) {
       var _a3, _b2;
       const error2 = new DOMException("The operation was aborted.", "AbortError");
-      p.reject(error2);
+      p2.reject(error2);
       if (request2.body != null && isReadable((_a3 = request2.body) == null ? void 0 : _a3.stream)) {
         request2.body.stream.cancel(error2).catch((err) => {
           if (err.code === "ERR_INVALID_STATE") {
@@ -14427,24 +18577,11 @@ var require_fetch = __commonJS({
           if (dataURLStruct === "failure") {
             return makeNetworkError("failed to fetch the data URL");
           }
-          const { mimeType } = dataURLStruct;
-          let contentType = `${mimeType.type}/${mimeType.subtype}`;
-          const contentTypeParams = [];
-          if (mimeType.parameters.size > 0) {
-            contentType += ";";
-          }
-          for (const [key, value] of mimeType.parameters) {
-            if (value.length > 0) {
-              contentTypeParams.push(`${key}=${value}`);
-            } else {
-              contentTypeParams.push(key);
-            }
-          }
-          contentType += contentTypeParams.join(",");
+          const mimeType = serializeAMimeType(dataURLStruct.mimeType);
           return makeResponse({
             statusText: "OK",
             headersList: [
-              ["content-type", contentType]
+              ["content-type", mimeType]
             ],
             body: extractBody(dataURLStruct.body)[0]
           });
@@ -14538,7 +18675,9 @@ var require_fetch = __commonJS({
         return makeNetworkError("blocked");
       }
       if (redirectStatus.includes(actualResponse.status)) {
-        fetchParams.controller.connection.destroy();
+        if (request2.redirect !== "manual") {
+          fetchParams.controller.connection.destroy();
+        }
         if (request2.redirect === "error") {
           response = makeNetworkError("unexpected redirect");
         } else if (request2.redirect === "manual") {
@@ -14766,14 +18905,14 @@ var require_fetch = __commonJS({
             fetchParams.processRequestEndOfBody();
           }
         }, "processEndOfBody");
-        const processBodyError = /* @__PURE__ */ __name((e) => {
+        const processBodyError = /* @__PURE__ */ __name((e2) => {
           if (isCancelled(fetchParams)) {
             return;
           }
-          if (e.name === "AbortError") {
+          if (e2.name === "AbortError") {
             fetchParams.controller.abort();
           } else {
-            fetchParams.controller.terminate(e);
+            fetchParams.controller.terminate(e2);
           }
         }, "processBodyError");
         requestBody = async function* () {
@@ -14918,9 +19057,9 @@ var require_fetch = __commonJS({
               let codings = [];
               let location = "";
               const headers = new Headers();
-              for (let n = 0; n < headersList.length; n += 2) {
-                const key = headersList[n + 0].toString("latin1");
-                const val = headersList[n + 1].toString("latin1");
+              for (let n2 = 0; n2 < headersList.length; n2 += 2) {
+                const key = headersList[n2 + 0].toString("latin1");
+                const val = headersList[n2 + 1].toString("latin1");
                 if (key.toLowerCase() === "content-encoding") {
                   codings = val.split(",").map((x) => x.trim());
                 } else if (key.toLowerCase() === "location") {
@@ -14930,7 +19069,8 @@ var require_fetch = __commonJS({
               }
               this.body = new Readable({ read: resume });
               const decoders = [];
-              if (request2.method !== "HEAD" && request2.method !== "CONNECT" && !nullBodyStatus.includes(status) && !(request2.redirect === "follow" && location)) {
+              const willFollow = request2.redirect === "follow" && location && redirectStatus.includes(status);
+              if (request2.method !== "HEAD" && request2.method !== "CONNECT" && !nullBodyStatus.includes(status) && !willFollow) {
                 for (const coding of codings) {
                   if (/(x-)?gzip/.test(coding)) {
                     decoders.push(zlib.createGunzip());
@@ -14984,13 +19124,18 @@ var require_fetch = __commonJS({
       __name(dispatch, "dispatch");
     }
     __name(httpNetworkFetch, "httpNetworkFetch");
-    module2.exports = fetch2;
+    module2.exports = {
+      fetch: fetch2,
+      Fetch,
+      fetching,
+      finalizeAndReportTiming
+    };
   }
 });
 
-// ../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/index.js
+// ../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/index.js
 var require_undici = __commonJS({
-  "../../node_modules/.pnpm/undici@5.10.0/node_modules/undici/index.js"(exports, module2) {
+  "../../node_modules/.pnpm/undici@5.11.0/node_modules/undici/index.js"(exports, module2) {
     "use strict";
     var Client = require_client();
     var Dispatcher = require_dispatcher();
@@ -15008,6 +19153,9 @@ var require_undici = __commonJS({
     var mockErrors = require_mock_errors();
     var ProxyAgent = require_proxy_agent();
     var { getGlobalDispatcher, setGlobalDispatcher } = require_global();
+    var DecoratorHandler = require_DecoratorHandler();
+    var RedirectHandler = require_RedirectHandler();
+    var createRedirectInterceptor = require_redirectInterceptor();
     var nodeVersion = process.versions.node.split(".");
     var nodeMajor = Number(nodeVersion[0]);
     var nodeMinor = Number(nodeVersion[1]);
@@ -15018,6 +19166,9 @@ var require_undici = __commonJS({
     module2.exports.BalancedPool = BalancedPool;
     module2.exports.Agent = Agent;
     module2.exports.ProxyAgent = ProxyAgent;
+    module2.exports.DecoratorHandler = DecoratorHandler;
+    module2.exports.RedirectHandler = RedirectHandler;
+    module2.exports.createRedirectInterceptor = createRedirectInterceptor;
     module2.exports.buildConnector = buildConnector;
     module2.exports.errors = errors;
     function makeDispatcher(fn) {
@@ -15066,16 +19217,24 @@ var require_undici = __commonJS({
       let fetchImpl = null;
       module2.exports.fetch = /* @__PURE__ */ __name(async function fetch2(resource) {
         if (!fetchImpl) {
-          fetchImpl = require_fetch();
+          fetchImpl = require_fetch().fetch;
         }
         const dispatcher = arguments[1] && arguments[1].dispatcher || getGlobalDispatcher();
-        return fetchImpl.apply(dispatcher, arguments);
+        try {
+          return await fetchImpl.apply(dispatcher, arguments);
+        } catch (err) {
+          Error.captureStackTrace(err, this);
+          throw err;
+        }
       }, "fetch");
       module2.exports.Headers = require_headers().Headers;
       module2.exports.Response = require_response().Response;
       module2.exports.Request = require_request2().Request;
       module2.exports.FormData = require_formdata().FormData;
       module2.exports.File = require_file().File;
+      const { setGlobalOrigin, getGlobalOrigin } = require_global2();
+      module2.exports.setGlobalOrigin = setGlobalOrigin;
+      module2.exports.getGlobalOrigin = getGlobalOrigin;
     }
     module2.exports.request = makeDispatcher(api.request);
     module2.exports.stream = makeDispatcher(api.stream);
@@ -15089,263 +19248,90 @@ var require_undici = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/dotenv@16.0.2/node_modules/dotenv/lib/main.js
-var require_main2 = __commonJS({
-  "../../node_modules/.pnpm/dotenv@16.0.2/node_modules/dotenv/lib/main.js"(exports, module2) {
-    var fs11 = require("fs");
-    var path7 = require("path");
-    var os3 = require("os");
-    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
-    function parse2(src) {
-      const obj = {};
-      let lines = src.toString();
-      lines = lines.replace(/\r\n?/mg, "\n");
-      let match;
-      while ((match = LINE.exec(lines)) != null) {
-        const key = match[1];
-        let value = match[2] || "";
-        value = value.trim();
-        const maybeQuote = value[0];
-        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
-        if (maybeQuote === '"') {
-          value = value.replace(/\\n/g, "\n");
-          value = value.replace(/\\r/g, "\r");
-        }
-        obj[key] = value;
-      }
-      return obj;
-    }
-    __name(parse2, "parse");
-    function _log(message) {
-      console.log(`[dotenv][DEBUG] ${message}`);
-    }
-    __name(_log, "_log");
-    function _resolveHome(envPath) {
-      return envPath[0] === "~" ? path7.join(os3.homedir(), envPath.slice(1)) : envPath;
-    }
-    __name(_resolveHome, "_resolveHome");
-    function config2(options) {
-      let dotenvPath = path7.resolve(process.cwd(), ".env");
-      let encoding = "utf8";
-      const debug13 = Boolean(options && options.debug);
-      const override = Boolean(options && options.override);
-      if (options) {
-        if (options.path != null) {
-          dotenvPath = _resolveHome(options.path);
-        }
-        if (options.encoding != null) {
-          encoding = options.encoding;
-        }
-      }
-      try {
-        const parsed = DotenvModule.parse(fs11.readFileSync(dotenvPath, { encoding }));
-        Object.keys(parsed).forEach(function(key) {
-          if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
-            process.env[key] = parsed[key];
-          } else {
-            if (override === true) {
-              process.env[key] = parsed[key];
-            }
-            if (debug13) {
-              if (override === true) {
-                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
-              } else {
-                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
-              }
-            }
-          }
-        });
-        return { parsed };
-      } catch (e) {
-        if (debug13) {
-          _log(`Failed to load ${dotenvPath} ${e.message}`);
-        }
-        return { error: e };
-      }
-    }
-    __name(config2, "config");
-    var DotenvModule = {
-      config: config2,
-      parse: parse2
-    };
-    module2.exports.config = DotenvModule.config;
-    module2.exports.parse = DotenvModule.parse;
-    module2.exports = DotenvModule;
-  }
-});
-
-// ../../node_modules/.pnpm/arg@5.0.2/node_modules/arg/index.js
-var require_arg = __commonJS({
-  "../../node_modules/.pnpm/arg@5.0.2/node_modules/arg/index.js"(exports, module2) {
-    var flagSymbol = Symbol("arg flag");
-    var ArgError = class extends Error {
-      constructor(msg, code) {
-        super(msg);
-        this.name = "ArgError";
-        this.code = code;
-        Object.setPrototypeOf(this, ArgError.prototype);
-      }
-    };
-    __name(ArgError, "ArgError");
-    function arg2(opts, {
-      argv = process.argv.slice(2),
-      permissive = false,
-      stopAtPositional = false
-    } = {}) {
-      if (!opts) {
-        throw new ArgError(
-          "argument specification object is required",
-          "ARG_CONFIG_NO_SPEC"
-        );
-      }
-      const result = { _: [] };
-      const aliases = {};
-      const handlers = {};
-      for (const key of Object.keys(opts)) {
-        if (!key) {
-          throw new ArgError(
-            "argument key cannot be an empty string",
-            "ARG_CONFIG_EMPTY_KEY"
-          );
-        }
-        if (key[0] !== "-") {
-          throw new ArgError(
-            `argument key must start with '-' but found: '${key}'`,
-            "ARG_CONFIG_NONOPT_KEY"
-          );
-        }
-        if (key.length === 1) {
-          throw new ArgError(
-            `argument key must have a name; singular '-' keys are not allowed: ${key}`,
-            "ARG_CONFIG_NONAME_KEY"
-          );
-        }
-        if (typeof opts[key] === "string") {
-          aliases[key] = opts[key];
-          continue;
-        }
-        let type = opts[key];
-        let isFlag = false;
-        if (Array.isArray(type) && type.length === 1 && typeof type[0] === "function") {
-          const [fn] = type;
-          type = /* @__PURE__ */ __name((value, name, prev = []) => {
-            prev.push(fn(value, name, prev[prev.length - 1]));
-            return prev;
-          }, "type");
-          isFlag = fn === Boolean || fn[flagSymbol] === true;
-        } else if (typeof type === "function") {
-          isFlag = type === Boolean || type[flagSymbol] === true;
-        } else {
-          throw new ArgError(
-            `type missing or not a function or valid array type: ${key}`,
-            "ARG_CONFIG_VAD_TYPE"
-          );
-        }
-        if (key[1] !== "-" && key.length > 2) {
-          throw new ArgError(
-            `short argument keys (with a single hyphen) must have only one character: ${key}`,
-            "ARG_CONFIG_SHORTOPT_TOOLONG"
-          );
-        }
-        handlers[key] = [type, isFlag];
-      }
-      for (let i = 0, len = argv.length; i < len; i++) {
-        const wholeArg = argv[i];
-        if (stopAtPositional && result._.length > 0) {
-          result._ = result._.concat(argv.slice(i));
-          break;
-        }
-        if (wholeArg === "--") {
-          result._ = result._.concat(argv.slice(i + 1));
-          break;
-        }
-        if (wholeArg.length > 1 && wholeArg[0] === "-") {
-          const separatedArguments = wholeArg[1] === "-" || wholeArg.length === 2 ? [wholeArg] : wholeArg.slice(1).split("").map((a) => `-${a}`);
-          for (let j = 0; j < separatedArguments.length; j++) {
-            const arg3 = separatedArguments[j];
-            const [originalArgName, argStr] = arg3[1] === "-" ? arg3.split(/=(.*)/, 2) : [arg3, void 0];
-            let argName = originalArgName;
-            while (argName in aliases) {
-              argName = aliases[argName];
-            }
-            if (!(argName in handlers)) {
-              if (permissive) {
-                result._.push(arg3);
-                continue;
-              } else {
-                throw new ArgError(
-                  `unknown or unexpected option: ${originalArgName}`,
-                  "ARG_UNKNOWN_OPTION"
-                );
-              }
-            }
-            const [type, isFlag] = handlers[argName];
-            if (!isFlag && j + 1 < separatedArguments.length) {
-              throw new ArgError(
-                `option requires argument (but was followed by another short argument): ${originalArgName}`,
-                "ARG_MISSING_REQUIRED_SHORTARG"
-              );
-            }
-            if (isFlag) {
-              result[argName] = type(true, argName, result[argName]);
-            } else if (argStr === void 0) {
-              if (argv.length < i + 2 || argv[i + 1].length > 1 && argv[i + 1][0] === "-" && !(argv[i + 1].match(/^-?\d*(\.(?=\d))?\d*$/) && (type === Number || typeof BigInt !== "undefined" && type === BigInt))) {
-                const extended = originalArgName === argName ? "" : ` (alias for ${argName})`;
-                throw new ArgError(
-                  `option requires argument: ${originalArgName}${extended}`,
-                  "ARG_MISSING_REQUIRED_LONGARG"
-                );
-              }
-              result[argName] = type(argv[i + 1], argName, result[argName]);
-              ++i;
-            } else {
-              result[argName] = type(argStr, argName, result[argName]);
-            }
-          }
-        } else {
-          result._.push(wholeArg);
-        }
-      }
-      return result;
-    }
-    __name(arg2, "arg");
-    arg2.flag = (fn) => {
-      fn[flagSymbol] = true;
-      return fn;
-    };
-    arg2.COUNT = arg2.flag((v, name, existingCount) => (existingCount || 0) + 1);
-    arg2.ArgError = ArgError;
-    module2.exports = arg2;
-  }
-});
-
-// ../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js
-var require_min_indent = __commonJS({
-  "../../node_modules/.pnpm/min-indent@1.0.1/node_modules/min-indent/index.js"(exports, module2) {
+// ../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js
+var require_js_levenshtein = __commonJS({
+  "../../node_modules/.pnpm/js-levenshtein@1.1.6/node_modules/js-levenshtein/index.js"(exports, module2) {
     "use strict";
-    module2.exports = (string) => {
-      const match = string.match(/^[ \t]*(?=\S)/gm);
-      if (!match) {
-        return 0;
+    module2.exports = function() {
+      function _min(d0, d1, d2, bx, ay) {
+        return d0 < d1 || d2 < d1 ? d0 > d2 ? d2 + 1 : d0 + 1 : bx === ay ? d1 : d1 + 1;
       }
-      return match.reduce((r, a) => Math.min(r, a.length), Infinity);
-    };
-  }
-});
-
-// ../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js
-var require_strip_indent = __commonJS({
-  "../../node_modules/.pnpm/strip-indent@3.0.0/node_modules/strip-indent/index.js"(exports, module2) {
-    "use strict";
-    var minIndent = require_min_indent();
-    module2.exports = (string) => {
-      const indent4 = minIndent(string);
-      if (indent4 === 0) {
-        return string;
-      }
-      const regex = new RegExp(`^[ \\t]{${indent4}}`, "gm");
-      return string.replace(regex, "");
-    };
+      __name(_min, "_min");
+      return function(a, b2) {
+        if (a === b2) {
+          return 0;
+        }
+        if (a.length > b2.length) {
+          var tmp = a;
+          a = b2;
+          b2 = tmp;
+        }
+        var la = a.length;
+        var lb = b2.length;
+        while (la > 0 && a.charCodeAt(la - 1) === b2.charCodeAt(lb - 1)) {
+          la--;
+          lb--;
+        }
+        var offset = 0;
+        while (offset < la && a.charCodeAt(offset) === b2.charCodeAt(offset)) {
+          offset++;
+        }
+        la -= offset;
+        lb -= offset;
+        if (la === 0 || lb < 3) {
+          return lb;
+        }
+        var x = 0;
+        var y;
+        var d0;
+        var d1;
+        var d2;
+        var d3;
+        var dd;
+        var dy;
+        var ay;
+        var bx0;
+        var bx1;
+        var bx2;
+        var bx3;
+        var vector = [];
+        for (y = 0; y < la; y++) {
+          vector.push(y + 1);
+          vector.push(a.charCodeAt(offset + y));
+        }
+        var len = vector.length - 1;
+        for (; x < lb - 3; ) {
+          bx0 = b2.charCodeAt(offset + (d0 = x));
+          bx1 = b2.charCodeAt(offset + (d1 = x + 1));
+          bx2 = b2.charCodeAt(offset + (d2 = x + 2));
+          bx3 = b2.charCodeAt(offset + (d3 = x + 3));
+          dd = x += 4;
+          for (y = 0; y < len; y += 2) {
+            dy = vector[y];
+            ay = vector[y + 1];
+            d0 = _min(dy, d0, d1, bx0, ay);
+            d1 = _min(d0, d1, d2, bx1, ay);
+            d2 = _min(d1, d2, d3, bx2, ay);
+            dd = _min(d2, d3, dd, bx3, ay);
+            vector[y] = dd;
+            d3 = d2;
+            d2 = d1;
+            d1 = d0;
+            d0 = dy;
+          }
+        }
+        for (; x < lb; ) {
+          bx0 = b2.charCodeAt(offset + (d0 = x));
+          dd = ++x;
+          for (y = 0; y < len; y += 2) {
+            dy = vector[y];
+            vector[y] = dd = _min(dy, d0, dd, bx0, vector[y + 1]);
+            d0 = dy;
+          }
+        }
+        return dd;
+      };
+    }();
   }
 });
 
@@ -15722,7 +19708,7 @@ var require_is_obj = __commonJS({
 });
 
 // ../../node_modules/.pnpm/get-own-enumerable-property-symbols@3.0.2/node_modules/get-own-enumerable-property-symbols/lib/index.js
-var require_lib = __commonJS({
+var require_lib2 = __commonJS({
   "../../node_modules/.pnpm/get-own-enumerable-property-symbols@3.0.2/node_modules/get-own-enumerable-property-symbols/lib/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -15731,11 +19717,11 @@ var require_lib = __commonJS({
 });
 
 // package.json
-var require_package2 = __commonJS({
+var require_package3 = __commonJS({
   "package.json"(exports, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "4.5.0",
+      version: "4.8.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -15796,35 +19782,35 @@ var require_package2 = __commonJS({
       ],
       devDependencies: {
         "@faker-js/faker": "7.6.0",
-        "@fast-check/jest": "1.0.1",
-        "@jest/test-sequencer": "28.1.3",
-        "@microsoft/api-extractor": "7.33.1",
+        "@fast-check/jest": "1.4.0",
+        "@jest/globals": "29.3.1",
+        "@jest/test-sequencer": "29.3.1",
         "@opentelemetry/api": "1.2.0",
         "@opentelemetry/context-async-hooks": "1.7.0",
         "@opentelemetry/instrumentation": "0.33.0",
         "@opentelemetry/resources": "1.7.0",
         "@opentelemetry/sdk-trace-base": "1.7.0",
         "@opentelemetry/semantic-conventions": "1.7.0",
-        "@prisma/debug": "workspace:4.5.0",
-        "@prisma/engine-core": "workspace:4.5.0",
-        "@prisma/engines": "workspace:4.5.0",
-        "@prisma/fetch-engine": "workspace:4.5.0",
-        "@prisma/generator-helper": "workspace:4.5.0",
-        "@prisma/get-platform": "workspace:4.5.0",
-        "@prisma/instrumentation": "workspace:4.5.0",
-        "@prisma/internals": "workspace:4.5.0",
-        "@prisma/migrate": "workspace:4.5.0",
-        "@prisma/mini-proxy": "0.2.0",
+        "@prisma/debug": "workspace:*",
+        "@prisma/engine-core": "workspace:*",
+        "@prisma/engines": "workspace:*",
+        "@prisma/fetch-engine": "workspace:*",
+        "@prisma/generator-helper": "workspace:*",
+        "@prisma/get-platform": "workspace:*",
+        "@prisma/instrumentation": "workspace:*",
+        "@prisma/internals": "workspace:*",
+        "@prisma/migrate": "workspace:*",
+        "@prisma/mini-proxy": "0.3.0",
         "@swc-node/register": "1.5.4",
-        "@swc/core": "1.3.8",
-        "@swc/jest": "0.2.22",
+        "@swc/core": "1.3.14",
+        "@swc/jest": "0.2.23",
         "@timsuchanek/copy": "1.4.5",
         "@types/debug": "4.1.7",
         "@types/fs-extra": "9.0.13",
-        "@types/jest": "28.1.8",
+        "@types/jest": "29.2.4",
         "@types/js-levenshtein": "1.1.1",
         "@types/mssql": "8.1.1",
-        "@types/node": "14.18.32",
+        "@types/node": "14.18.34",
         "@types/pg": "8.6.5",
         "@types/yeoman-generator": "5.2.11",
         arg: "5.0.2",
@@ -15832,26 +19818,26 @@ var require_package2 = __commonJS({
         chalk: "4.1.2",
         cuid: "2.1.8",
         "decimal.js": "10.4.2",
-        esbuild: "0.15.10",
+        esbuild: "0.15.13",
         execa: "5.1.1",
-        "expect-type": "0.14.2",
+        "expect-type": "0.15.0",
         "flat-map-polyfill": "0.3.8",
-        "fs-extra": "10.1.0",
+        "fs-extra": "11.1.0",
         "fs-monkey": "1.0.3",
         "get-own-enumerable-property-symbols": "3.0.2",
         globby: "11.1.0",
         "indent-string": "4.0.0",
         "is-obj": "2.0.0",
         "is-regexp": "2.1.0",
-        jest: "28.1.3",
-        "jest-junit": "14.0.1",
-        "jest-snapshot": "28.1.3",
+        jest: "29.3.1",
+        "jest-junit": "15.0.0",
+        "jest-snapshot": "29.3.1",
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
         "lz-string": "1.4.4",
         "make-dir": "3.1.0",
-        mariadb: "3.0.1",
-        memfs: "3.4.7",
+        mariadb: "3.0.2",
+        memfs: "3.4.10",
         mssql: "9.0.1",
         "node-fetch": "2.6.7",
         pg: "8.8.0",
@@ -15860,20 +19846,20 @@ var require_package2 = __commonJS({
         "replace-string": "3.1.0",
         resolve: "1.22.1",
         rimraf: "3.0.2",
-        "simple-statistics": "7.7.6",
+        "simple-statistics": "7.8.0",
         "sort-keys": "4.2.0",
         "source-map-support": "0.5.21",
         "sql-template-tag": "5.0.3",
         "stacktrace-parser": "0.1.10",
         "strip-ansi": "6.0.1",
         "strip-indent": "3.0.0",
-        "ts-jest": "28.0.8",
+        "ts-jest": "29.0.3",
         "ts-node": "10.9.1",
         "ts-pattern": "4.0.5",
         tsd: "0.21.0",
         typescript: "4.8.4",
         "yeoman-generator": "5.7.0",
-        yo: "4.3.0"
+        yo: "4.3.1"
       },
       peerDependencies: {
         prisma: "*"
@@ -15884,7 +19870,7 @@ var require_package2 = __commonJS({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452"
+        "@prisma/engines-version": "4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe"
       },
       sideEffects: false
     };
@@ -15899,14 +19885,17 @@ __export(runtime_exports, {
   Debug: () => Debug,
   Decimal: () => decimal_default,
   Engine: () => Engine,
+  Extensions: () => extensions_exports,
   MetricsClient: () => MetricsClient,
   NotFoundError: () => NotFoundError2,
+  PrismaClientExtensionError: () => PrismaClientExtensionError,
   PrismaClientInitializationError: () => PrismaClientInitializationError,
   PrismaClientKnownRequestError: () => PrismaClientKnownRequestError,
   PrismaClientRustPanicError: () => PrismaClientRustPanicError,
   PrismaClientUnknownRequestError: () => PrismaClientUnknownRequestError,
   PrismaClientValidationError: () => PrismaClientValidationError,
   Sql: () => Sql,
+  Types: () => types_exports,
   decompressFromBase64: () => decompressFromBase642,
   empty: () => empty,
   findSync: () => findSync,
@@ -15924,2947 +19913,40 @@ __export(runtime_exports, {
 module.exports = __toCommonJS(runtime_exports);
 var lzString = __toESM(require_lz_string());
 
-// src/runtime/core/metrics/MetricsClient.ts
-var MetricsClient = class {
-  constructor(engine) {
-    this._engine = engine;
-  }
-  prometheus(options) {
-    return this._engine.metrics({ format: "prometheus", ...options });
-  }
-  json(options) {
-    return this._engine.metrics({ format: "json", ...options });
-  }
-};
-__name(MetricsClient, "MetricsClient");
+// src/runtime/core/extensions/index.ts
+var extensions_exports = {};
+__export(extensions_exports, {
+  defineExtension: () => defineExtension,
+  getExtensionContext: () => getExtensionContext
+});
 
-// src/runtime/utils/applyMixins.ts
-function applyMixins(derivedCtor, constructors) {
-  var _a3;
-  for (const baseCtor of constructors) {
-    for (const name of Object.getOwnPropertyNames(baseCtor.prototype)) {
-      Object.defineProperty(
-        derivedCtor.prototype,
-        name,
-        (_a3 = Object.getOwnPropertyDescriptor(baseCtor.prototype, name)) != null ? _a3 : /* @__PURE__ */ Object.create(null)
-      );
-    }
+// src/runtime/core/extensions/defineExtension.ts
+function defineExtension(ext) {
+  if (typeof ext === "function") {
+    return ext;
   }
+  return (client) => client.$extends(ext);
 }
-__name(applyMixins, "applyMixins");
+__name(defineExtension, "defineExtension");
 
-// src/runtime/utils/common.ts
-var import_chalk = __toESM(require_source());
+// src/runtime/core/extensions/getExtensionContext.ts
+function getExtensionContext(that) {
+  return that;
+}
+__name(getExtensionContext, "getExtensionContext");
 
-// ../../node_modules/.pnpm/decimal.js@10.4.2/node_modules/decimal.js/decimal.mjs
-var EXP_LIMIT = 9e15;
-var MAX_DIGITS = 1e9;
-var NUMERALS = "0123456789abcdef";
-var LN10 = "2.3025850929940456840179914546843642076011014886287729760333279009675726096773524802359972050895982983419677840422862486334095254650828067566662873690987816894829072083255546808437998948262331985283935053089653777326288461633662222876982198867465436674744042432743651550489343149393914796194044002221051017141748003688084012647080685567743216228355220114804663715659121373450747856947683463616792101806445070648000277502684916746550586856935673420670581136429224554405758925724208241314695689016758940256776311356919292033376587141660230105703089634572075440370847469940168269282808481184289314848524948644871927809676271275775397027668605952496716674183485704422507197965004714951050492214776567636938662976979522110718264549734772662425709429322582798502585509785265383207606726317164309505995087807523710333101197857547331541421808427543863591778117054309827482385045648019095610299291824318237525357709750539565187697510374970888692180205189339507238539205144634197265287286965110862571492198849978748873771345686209167058";
-var PI = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632789";
-var DEFAULTS = {
-  precision: 20,
-  rounding: 4,
-  modulo: 1,
-  toExpNeg: -7,
-  toExpPos: 21,
-  minE: -EXP_LIMIT,
-  maxE: EXP_LIMIT,
-  crypto: false
-};
-var inexact;
-var quadrant;
-var external = true;
-var decimalError = "[DecimalError] ";
-var invalidArgument = decimalError + "Invalid argument: ";
-var precisionLimitExceeded = decimalError + "Precision limit exceeded";
-var cryptoUnavailable = decimalError + "crypto unavailable";
-var tag = "[object Decimal]";
-var mathfloor = Math.floor;
-var mathpow = Math.pow;
-var isBinary = /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i;
-var isHex = /^0x([0-9a-f]+(\.[0-9a-f]*)?|\.[0-9a-f]+)(p[+-]?\d+)?$/i;
-var isOctal = /^0o([0-7]+(\.[0-7]*)?|\.[0-7]+)(p[+-]?\d+)?$/i;
-var isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i;
-var BASE = 1e7;
-var LOG_BASE = 7;
-var MAX_SAFE_INTEGER = 9007199254740991;
-var LN10_PRECISION = LN10.length - 1;
-var PI_PRECISION = PI.length - 1;
-var P = { toStringTag: tag };
-P.absoluteValue = P.abs = function() {
-  var x = new this.constructor(this);
-  if (x.s < 0)
-    x.s = 1;
-  return finalise(x);
-};
-P.ceil = function() {
-  return finalise(new this.constructor(this), this.e + 1, 2);
-};
-P.clampedTo = P.clamp = function(min2, max2) {
-  var k, x = this, Ctor = x.constructor;
-  min2 = new Ctor(min2);
-  max2 = new Ctor(max2);
-  if (!min2.s || !max2.s)
-    return new Ctor(NaN);
-  if (min2.gt(max2))
-    throw Error(invalidArgument + max2);
-  k = x.cmp(min2);
-  return k < 0 ? min2 : x.cmp(max2) > 0 ? max2 : new Ctor(x);
-};
-P.comparedTo = P.cmp = function(y) {
-  var i, j, xdL, ydL, x = this, xd = x.d, yd = (y = new x.constructor(y)).d, xs = x.s, ys = y.s;
-  if (!xd || !yd) {
-    return !xs || !ys ? NaN : xs !== ys ? xs : xd === yd ? 0 : !xd ^ xs < 0 ? 1 : -1;
-  }
-  if (!xd[0] || !yd[0])
-    return xd[0] ? xs : yd[0] ? -ys : 0;
-  if (xs !== ys)
-    return xs;
-  if (x.e !== y.e)
-    return x.e > y.e ^ xs < 0 ? 1 : -1;
-  xdL = xd.length;
-  ydL = yd.length;
-  for (i = 0, j = xdL < ydL ? xdL : ydL; i < j; ++i) {
-    if (xd[i] !== yd[i])
-      return xd[i] > yd[i] ^ xs < 0 ? 1 : -1;
-  }
-  return xdL === ydL ? 0 : xdL > ydL ^ xs < 0 ? 1 : -1;
-};
-P.cosine = P.cos = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.d)
-    return new Ctor(NaN);
-  if (!x.d[0])
-    return new Ctor(1);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
-  Ctor.rounding = 1;
-  x = cosine(Ctor, toLessThanHalfPi(Ctor, x));
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return finalise(quadrant == 2 || quadrant == 3 ? x.neg() : x, pr, rm, true);
-};
-P.cubeRoot = P.cbrt = function() {
-  var e, m, n, r, rep, s, sd, t, t3, t3plusx, x = this, Ctor = x.constructor;
-  if (!x.isFinite() || x.isZero())
-    return new Ctor(x);
-  external = false;
-  s = x.s * mathpow(x.s * x, 1 / 3);
-  if (!s || Math.abs(s) == 1 / 0) {
-    n = digitsToString(x.d);
-    e = x.e;
-    if (s = (e - n.length + 1) % 3)
-      n += s == 1 || s == -2 ? "0" : "00";
-    s = mathpow(n, 1 / 3);
-    e = mathfloor((e + 1) / 3) - (e % 3 == (e < 0 ? -1 : 2));
-    if (s == 1 / 0) {
-      n = "5e" + e;
-    } else {
-      n = s.toExponential();
-      n = n.slice(0, n.indexOf("e") + 1) + e;
-    }
-    r = new Ctor(n);
-    r.s = x.s;
-  } else {
-    r = new Ctor(s.toString());
-  }
-  sd = (e = Ctor.precision) + 3;
-  for (; ; ) {
-    t = r;
-    t3 = t.times(t).times(t);
-    t3plusx = t3.plus(x);
-    r = divide(t3plusx.plus(x).times(t), t3plusx.plus(t3), sd + 2, 1);
-    if (digitsToString(t.d).slice(0, sd) === (n = digitsToString(r.d)).slice(0, sd)) {
-      n = n.slice(sd - 3, sd + 1);
-      if (n == "9999" || !rep && n == "4999") {
-        if (!rep) {
-          finalise(t, e + 1, 0);
-          if (t.times(t).times(t).eq(x)) {
-            r = t;
-            break;
-          }
-        }
-        sd += 4;
-        rep = 1;
-      } else {
-        if (!+n || !+n.slice(1) && n.charAt(0) == "5") {
-          finalise(r, e + 1, 1);
-          m = !r.times(r).times(r).eq(x);
-        }
-        break;
-      }
-    }
-  }
-  external = true;
-  return finalise(r, e, Ctor.rounding, m);
-};
-P.decimalPlaces = P.dp = function() {
-  var w, d = this.d, n = NaN;
-  if (d) {
-    w = d.length - 1;
-    n = (w - mathfloor(this.e / LOG_BASE)) * LOG_BASE;
-    w = d[w];
-    if (w)
-      for (; w % 10 == 0; w /= 10)
-        n--;
-    if (n < 0)
-      n = 0;
-  }
-  return n;
-};
-P.dividedBy = P.div = function(y) {
-  return divide(this, new this.constructor(y));
-};
-P.dividedToIntegerBy = P.divToInt = function(y) {
-  var x = this, Ctor = x.constructor;
-  return finalise(divide(x, new Ctor(y), 0, 1, 1), Ctor.precision, Ctor.rounding);
-};
-P.equals = P.eq = function(y) {
-  return this.cmp(y) === 0;
-};
-P.floor = function() {
-  return finalise(new this.constructor(this), this.e + 1, 3);
-};
-P.greaterThan = P.gt = function(y) {
-  return this.cmp(y) > 0;
-};
-P.greaterThanOrEqualTo = P.gte = function(y) {
-  var k = this.cmp(y);
-  return k == 1 || k === 0;
-};
-P.hyperbolicCosine = P.cosh = function() {
-  var k, n, pr, rm, len, x = this, Ctor = x.constructor, one = new Ctor(1);
-  if (!x.isFinite())
-    return new Ctor(x.s ? 1 / 0 : NaN);
-  if (x.isZero())
-    return one;
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
-  Ctor.rounding = 1;
-  len = x.d.length;
-  if (len < 32) {
-    k = Math.ceil(len / 3);
-    n = (1 / tinyPow(4, k)).toString();
-  } else {
-    k = 16;
-    n = "2.3283064365386962890625e-10";
-  }
-  x = taylorSeries(Ctor, 1, x.times(n), new Ctor(1), true);
-  var cosh2_x, i = k, d8 = new Ctor(8);
-  for (; i--; ) {
-    cosh2_x = x.times(x);
-    x = one.minus(cosh2_x.times(d8.minus(cosh2_x.times(d8))));
-  }
-  return finalise(x, Ctor.precision = pr, Ctor.rounding = rm, true);
-};
-P.hyperbolicSine = P.sinh = function() {
-  var k, pr, rm, len, x = this, Ctor = x.constructor;
-  if (!x.isFinite() || x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
-  Ctor.rounding = 1;
-  len = x.d.length;
-  if (len < 3) {
-    x = taylorSeries(Ctor, 2, x, x, true);
-  } else {
-    k = 1.4 * Math.sqrt(len);
-    k = k > 16 ? 16 : k | 0;
-    x = x.times(1 / tinyPow(5, k));
-    x = taylorSeries(Ctor, 2, x, x, true);
-    var sinh2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
-    for (; k--; ) {
-      sinh2_x = x.times(x);
-      x = x.times(d5.plus(sinh2_x.times(d16.times(sinh2_x).plus(d20))));
-    }
-  }
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return finalise(x, pr, rm, true);
-};
-P.hyperbolicTangent = P.tanh = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.isFinite())
-    return new Ctor(x.s);
-  if (x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + 7;
-  Ctor.rounding = 1;
-  return divide(x.sinh(), x.cosh(), Ctor.precision = pr, Ctor.rounding = rm);
-};
-P.inverseCosine = P.acos = function() {
-  var halfPi, x = this, Ctor = x.constructor, k = x.abs().cmp(1), pr = Ctor.precision, rm = Ctor.rounding;
-  if (k !== -1) {
-    return k === 0 ? x.isNeg() ? getPi(Ctor, pr, rm) : new Ctor(0) : new Ctor(NaN);
-  }
-  if (x.isZero())
-    return getPi(Ctor, pr + 4, rm).times(0.5);
-  Ctor.precision = pr + 6;
-  Ctor.rounding = 1;
-  x = x.asin();
-  halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return halfPi.minus(x);
-};
-P.inverseHyperbolicCosine = P.acosh = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (x.lte(1))
-    return new Ctor(x.eq(1) ? 0 : NaN);
-  if (!x.isFinite())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(Math.abs(x.e), x.sd()) + 4;
-  Ctor.rounding = 1;
-  external = false;
-  x = x.times(x).minus(1).sqrt().plus(x);
-  external = true;
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return x.ln();
-};
-P.inverseHyperbolicSine = P.asinh = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.isFinite() || x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + 2 * Math.max(Math.abs(x.e), x.sd()) + 6;
-  Ctor.rounding = 1;
-  external = false;
-  x = x.times(x).plus(1).sqrt().plus(x);
-  external = true;
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return x.ln();
-};
-P.inverseHyperbolicTangent = P.atanh = function() {
-  var pr, rm, wpr, xsd, x = this, Ctor = x.constructor;
-  if (!x.isFinite())
-    return new Ctor(NaN);
-  if (x.e >= 0)
-    return new Ctor(x.abs().eq(1) ? x.s / 0 : x.isZero() ? x : NaN);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  xsd = x.sd();
-  if (Math.max(xsd, pr) < 2 * -x.e - 1)
-    return finalise(new Ctor(x), pr, rm, true);
-  Ctor.precision = wpr = xsd - x.e;
-  x = divide(x.plus(1), new Ctor(1).minus(x), wpr + pr, 1);
-  Ctor.precision = pr + 4;
-  Ctor.rounding = 1;
-  x = x.ln();
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return x.times(0.5);
-};
-P.inverseSine = P.asin = function() {
-  var halfPi, k, pr, rm, x = this, Ctor = x.constructor;
-  if (x.isZero())
-    return new Ctor(x);
-  k = x.abs().cmp(1);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  if (k !== -1) {
-    if (k === 0) {
-      halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
-      halfPi.s = x.s;
-      return halfPi;
-    }
-    return new Ctor(NaN);
-  }
-  Ctor.precision = pr + 6;
-  Ctor.rounding = 1;
-  x = x.div(new Ctor(1).minus(x.times(x)).sqrt().plus(1)).atan();
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return x.times(2);
-};
-P.inverseTangent = P.atan = function() {
-  var i, j, k, n, px, t, r, wpr, x2, x = this, Ctor = x.constructor, pr = Ctor.precision, rm = Ctor.rounding;
-  if (!x.isFinite()) {
-    if (!x.s)
-      return new Ctor(NaN);
-    if (pr + 4 <= PI_PRECISION) {
-      r = getPi(Ctor, pr + 4, rm).times(0.5);
-      r.s = x.s;
-      return r;
-    }
-  } else if (x.isZero()) {
-    return new Ctor(x);
-  } else if (x.abs().eq(1) && pr + 4 <= PI_PRECISION) {
-    r = getPi(Ctor, pr + 4, rm).times(0.25);
-    r.s = x.s;
-    return r;
-  }
-  Ctor.precision = wpr = pr + 10;
-  Ctor.rounding = 1;
-  k = Math.min(28, wpr / LOG_BASE + 2 | 0);
-  for (i = k; i; --i)
-    x = x.div(x.times(x).plus(1).sqrt().plus(1));
-  external = false;
-  j = Math.ceil(wpr / LOG_BASE);
-  n = 1;
-  x2 = x.times(x);
-  r = new Ctor(x);
-  px = x;
-  for (; i !== -1; ) {
-    px = px.times(x2);
-    t = r.minus(px.div(n += 2));
-    px = px.times(x2);
-    r = t.plus(px.div(n += 2));
-    if (r.d[j] !== void 0)
-      for (i = j; r.d[i] === t.d[i] && i--; )
-        ;
-  }
-  if (k)
-    r = r.times(2 << k - 1);
-  external = true;
-  return finalise(r, Ctor.precision = pr, Ctor.rounding = rm, true);
-};
-P.isFinite = function() {
-  return !!this.d;
-};
-P.isInteger = P.isInt = function() {
-  return !!this.d && mathfloor(this.e / LOG_BASE) > this.d.length - 2;
-};
-P.isNaN = function() {
-  return !this.s;
-};
-P.isNegative = P.isNeg = function() {
-  return this.s < 0;
-};
-P.isPositive = P.isPos = function() {
-  return this.s > 0;
-};
-P.isZero = function() {
-  return !!this.d && this.d[0] === 0;
-};
-P.lessThan = P.lt = function(y) {
-  return this.cmp(y) < 0;
-};
-P.lessThanOrEqualTo = P.lte = function(y) {
-  return this.cmp(y) < 1;
-};
-P.logarithm = P.log = function(base) {
-  var isBase10, d, denominator, k, inf, num, sd, r, arg2 = this, Ctor = arg2.constructor, pr = Ctor.precision, rm = Ctor.rounding, guard = 5;
-  if (base == null) {
-    base = new Ctor(10);
-    isBase10 = true;
-  } else {
-    base = new Ctor(base);
-    d = base.d;
-    if (base.s < 0 || !d || !d[0] || base.eq(1))
-      return new Ctor(NaN);
-    isBase10 = base.eq(10);
-  }
-  d = arg2.d;
-  if (arg2.s < 0 || !d || !d[0] || arg2.eq(1)) {
-    return new Ctor(d && !d[0] ? -1 / 0 : arg2.s != 1 ? NaN : d ? 0 : 1 / 0);
-  }
-  if (isBase10) {
-    if (d.length > 1) {
-      inf = true;
-    } else {
-      for (k = d[0]; k % 10 === 0; )
-        k /= 10;
-      inf = k !== 1;
-    }
-  }
-  external = false;
-  sd = pr + guard;
-  num = naturalLogarithm(arg2, sd);
-  denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
-  r = divide(num, denominator, sd, 1);
-  if (checkRoundingDigits(r.d, k = pr, rm)) {
-    do {
-      sd += 10;
-      num = naturalLogarithm(arg2, sd);
-      denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
-      r = divide(num, denominator, sd, 1);
-      if (!inf) {
-        if (+digitsToString(r.d).slice(k + 1, k + 15) + 1 == 1e14) {
-          r = finalise(r, pr + 1, 0);
-        }
-        break;
-      }
-    } while (checkRoundingDigits(r.d, k += 10, rm));
-  }
-  external = true;
-  return finalise(r, pr, rm);
-};
-P.minus = P.sub = function(y) {
-  var d, e, i, j, k, len, pr, rm, xd, xe, xLTy, yd, x = this, Ctor = x.constructor;
-  y = new Ctor(y);
-  if (!x.d || !y.d) {
-    if (!x.s || !y.s)
-      y = new Ctor(NaN);
-    else if (x.d)
-      y.s = -y.s;
-    else
-      y = new Ctor(y.d || x.s !== y.s ? x : NaN);
-    return y;
-  }
-  if (x.s != y.s) {
-    y.s = -y.s;
-    return x.plus(y);
-  }
-  xd = x.d;
-  yd = y.d;
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  if (!xd[0] || !yd[0]) {
-    if (yd[0])
-      y.s = -y.s;
-    else if (xd[0])
-      y = new Ctor(x);
-    else
-      return new Ctor(rm === 3 ? -0 : 0);
-    return external ? finalise(y, pr, rm) : y;
-  }
-  e = mathfloor(y.e / LOG_BASE);
-  xe = mathfloor(x.e / LOG_BASE);
-  xd = xd.slice();
-  k = xe - e;
-  if (k) {
-    xLTy = k < 0;
-    if (xLTy) {
-      d = xd;
-      k = -k;
-      len = yd.length;
-    } else {
-      d = yd;
-      e = xe;
-      len = xd.length;
-    }
-    i = Math.max(Math.ceil(pr / LOG_BASE), len) + 2;
-    if (k > i) {
-      k = i;
-      d.length = 1;
-    }
-    d.reverse();
-    for (i = k; i--; )
-      d.push(0);
-    d.reverse();
-  } else {
-    i = xd.length;
-    len = yd.length;
-    xLTy = i < len;
-    if (xLTy)
-      len = i;
-    for (i = 0; i < len; i++) {
-      if (xd[i] != yd[i]) {
-        xLTy = xd[i] < yd[i];
-        break;
-      }
-    }
-    k = 0;
-  }
-  if (xLTy) {
-    d = xd;
-    xd = yd;
-    yd = d;
-    y.s = -y.s;
-  }
-  len = xd.length;
-  for (i = yd.length - len; i > 0; --i)
-    xd[len++] = 0;
-  for (i = yd.length; i > k; ) {
-    if (xd[--i] < yd[i]) {
-      for (j = i; j && xd[--j] === 0; )
-        xd[j] = BASE - 1;
-      --xd[j];
-      xd[i] += BASE;
-    }
-    xd[i] -= yd[i];
-  }
-  for (; xd[--len] === 0; )
-    xd.pop();
-  for (; xd[0] === 0; xd.shift())
-    --e;
-  if (!xd[0])
-    return new Ctor(rm === 3 ? -0 : 0);
-  y.d = xd;
-  y.e = getBase10Exponent(xd, e);
-  return external ? finalise(y, pr, rm) : y;
-};
-P.modulo = P.mod = function(y) {
-  var q, x = this, Ctor = x.constructor;
-  y = new Ctor(y);
-  if (!x.d || !y.s || y.d && !y.d[0])
-    return new Ctor(NaN);
-  if (!y.d || x.d && !x.d[0]) {
-    return finalise(new Ctor(x), Ctor.precision, Ctor.rounding);
-  }
-  external = false;
-  if (Ctor.modulo == 9) {
-    q = divide(x, y.abs(), 0, 3, 1);
-    q.s *= y.s;
-  } else {
-    q = divide(x, y, 0, Ctor.modulo, 1);
-  }
-  q = q.times(y);
-  external = true;
-  return x.minus(q);
-};
-P.naturalExponential = P.exp = function() {
-  return naturalExponential(this);
-};
-P.naturalLogarithm = P.ln = function() {
-  return naturalLogarithm(this);
-};
-P.negated = P.neg = function() {
-  var x = new this.constructor(this);
-  x.s = -x.s;
-  return finalise(x);
-};
-P.plus = P.add = function(y) {
-  var carry, d, e, i, k, len, pr, rm, xd, yd, x = this, Ctor = x.constructor;
-  y = new Ctor(y);
-  if (!x.d || !y.d) {
-    if (!x.s || !y.s)
-      y = new Ctor(NaN);
-    else if (!x.d)
-      y = new Ctor(y.d || x.s === y.s ? x : NaN);
-    return y;
-  }
-  if (x.s != y.s) {
-    y.s = -y.s;
-    return x.minus(y);
-  }
-  xd = x.d;
-  yd = y.d;
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  if (!xd[0] || !yd[0]) {
-    if (!yd[0])
-      y = new Ctor(x);
-    return external ? finalise(y, pr, rm) : y;
-  }
-  k = mathfloor(x.e / LOG_BASE);
-  e = mathfloor(y.e / LOG_BASE);
-  xd = xd.slice();
-  i = k - e;
-  if (i) {
-    if (i < 0) {
-      d = xd;
-      i = -i;
-      len = yd.length;
-    } else {
-      d = yd;
-      e = k;
-      len = xd.length;
-    }
-    k = Math.ceil(pr / LOG_BASE);
-    len = k > len ? k + 1 : len + 1;
-    if (i > len) {
-      i = len;
-      d.length = 1;
-    }
-    d.reverse();
-    for (; i--; )
-      d.push(0);
-    d.reverse();
-  }
-  len = xd.length;
-  i = yd.length;
-  if (len - i < 0) {
-    i = len;
-    d = yd;
-    yd = xd;
-    xd = d;
-  }
-  for (carry = 0; i; ) {
-    carry = (xd[--i] = xd[i] + yd[i] + carry) / BASE | 0;
-    xd[i] %= BASE;
-  }
-  if (carry) {
-    xd.unshift(carry);
-    ++e;
-  }
-  for (len = xd.length; xd[--len] == 0; )
-    xd.pop();
-  y.d = xd;
-  y.e = getBase10Exponent(xd, e);
-  return external ? finalise(y, pr, rm) : y;
-};
-P.precision = P.sd = function(z) {
-  var k, x = this;
-  if (z !== void 0 && z !== !!z && z !== 1 && z !== 0)
-    throw Error(invalidArgument + z);
-  if (x.d) {
-    k = getPrecision(x.d);
-    if (z && x.e + 1 > k)
-      k = x.e + 1;
-  } else {
-    k = NaN;
-  }
-  return k;
-};
-P.round = function() {
-  var x = this, Ctor = x.constructor;
-  return finalise(new Ctor(x), x.e + 1, Ctor.rounding);
-};
-P.sine = P.sin = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.isFinite())
-    return new Ctor(NaN);
-  if (x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
-  Ctor.rounding = 1;
-  x = sine(Ctor, toLessThanHalfPi(Ctor, x));
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return finalise(quadrant > 2 ? x.neg() : x, pr, rm, true);
-};
-P.squareRoot = P.sqrt = function() {
-  var m, n, sd, r, rep, t, x = this, d = x.d, e = x.e, s = x.s, Ctor = x.constructor;
-  if (s !== 1 || !d || !d[0]) {
-    return new Ctor(!s || s < 0 && (!d || d[0]) ? NaN : d ? x : 1 / 0);
-  }
-  external = false;
-  s = Math.sqrt(+x);
-  if (s == 0 || s == 1 / 0) {
-    n = digitsToString(d);
-    if ((n.length + e) % 2 == 0)
-      n += "0";
-    s = Math.sqrt(n);
-    e = mathfloor((e + 1) / 2) - (e < 0 || e % 2);
-    if (s == 1 / 0) {
-      n = "5e" + e;
-    } else {
-      n = s.toExponential();
-      n = n.slice(0, n.indexOf("e") + 1) + e;
-    }
-    r = new Ctor(n);
-  } else {
-    r = new Ctor(s.toString());
-  }
-  sd = (e = Ctor.precision) + 3;
-  for (; ; ) {
-    t = r;
-    r = t.plus(divide(x, t, sd + 2, 1)).times(0.5);
-    if (digitsToString(t.d).slice(0, sd) === (n = digitsToString(r.d)).slice(0, sd)) {
-      n = n.slice(sd - 3, sd + 1);
-      if (n == "9999" || !rep && n == "4999") {
-        if (!rep) {
-          finalise(t, e + 1, 0);
-          if (t.times(t).eq(x)) {
-            r = t;
-            break;
-          }
-        }
-        sd += 4;
-        rep = 1;
-      } else {
-        if (!+n || !+n.slice(1) && n.charAt(0) == "5") {
-          finalise(r, e + 1, 1);
-          m = !r.times(r).eq(x);
-        }
-        break;
-      }
-    }
-  }
-  external = true;
-  return finalise(r, e, Ctor.rounding, m);
-};
-P.tangent = P.tan = function() {
-  var pr, rm, x = this, Ctor = x.constructor;
-  if (!x.isFinite())
-    return new Ctor(NaN);
-  if (x.isZero())
-    return new Ctor(x);
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  Ctor.precision = pr + 10;
-  Ctor.rounding = 1;
-  x = x.sin();
-  x.s = 1;
-  x = divide(x, new Ctor(1).minus(x.times(x)).sqrt(), pr + 10, 0);
-  Ctor.precision = pr;
-  Ctor.rounding = rm;
-  return finalise(quadrant == 2 || quadrant == 4 ? x.neg() : x, pr, rm, true);
-};
-P.times = P.mul = function(y) {
-  var carry, e, i, k, r, rL, t, xdL, ydL, x = this, Ctor = x.constructor, xd = x.d, yd = (y = new Ctor(y)).d;
-  y.s *= x.s;
-  if (!xd || !xd[0] || !yd || !yd[0]) {
-    return new Ctor(!y.s || xd && !xd[0] && !yd || yd && !yd[0] && !xd ? NaN : !xd || !yd ? y.s / 0 : y.s * 0);
-  }
-  e = mathfloor(x.e / LOG_BASE) + mathfloor(y.e / LOG_BASE);
-  xdL = xd.length;
-  ydL = yd.length;
-  if (xdL < ydL) {
-    r = xd;
-    xd = yd;
-    yd = r;
-    rL = xdL;
-    xdL = ydL;
-    ydL = rL;
-  }
-  r = [];
-  rL = xdL + ydL;
-  for (i = rL; i--; )
-    r.push(0);
-  for (i = ydL; --i >= 0; ) {
-    carry = 0;
-    for (k = xdL + i; k > i; ) {
-      t = r[k] + yd[i] * xd[k - i - 1] + carry;
-      r[k--] = t % BASE | 0;
-      carry = t / BASE | 0;
-    }
-    r[k] = (r[k] + carry) % BASE | 0;
-  }
-  for (; !r[--rL]; )
-    r.pop();
-  if (carry)
-    ++e;
-  else
-    r.shift();
-  y.d = r;
-  y.e = getBase10Exponent(r, e);
-  return external ? finalise(y, Ctor.precision, Ctor.rounding) : y;
-};
-P.toBinary = function(sd, rm) {
-  return toStringBinary(this, 2, sd, rm);
-};
-P.toDecimalPlaces = P.toDP = function(dp, rm) {
-  var x = this, Ctor = x.constructor;
-  x = new Ctor(x);
-  if (dp === void 0)
-    return x;
-  checkInt32(dp, 0, MAX_DIGITS);
-  if (rm === void 0)
-    rm = Ctor.rounding;
-  else
-    checkInt32(rm, 0, 8);
-  return finalise(x, dp + x.e + 1, rm);
-};
-P.toExponential = function(dp, rm) {
-  var str, x = this, Ctor = x.constructor;
-  if (dp === void 0) {
-    str = finiteToString(x, true);
-  } else {
-    checkInt32(dp, 0, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-    x = finalise(new Ctor(x), dp + 1, rm);
-    str = finiteToString(x, true, dp + 1);
-  }
-  return x.isNeg() && !x.isZero() ? "-" + str : str;
-};
-P.toFixed = function(dp, rm) {
-  var str, y, x = this, Ctor = x.constructor;
-  if (dp === void 0) {
-    str = finiteToString(x);
-  } else {
-    checkInt32(dp, 0, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-    y = finalise(new Ctor(x), dp + x.e + 1, rm);
-    str = finiteToString(y, false, dp + y.e + 1);
-  }
-  return x.isNeg() && !x.isZero() ? "-" + str : str;
-};
-P.toFraction = function(maxD) {
-  var d, d0, d1, d2, e, k, n, n0, n1, pr, q, r, x = this, xd = x.d, Ctor = x.constructor;
-  if (!xd)
-    return new Ctor(x);
-  n1 = d0 = new Ctor(1);
-  d1 = n0 = new Ctor(0);
-  d = new Ctor(d1);
-  e = d.e = getPrecision(xd) - x.e - 1;
-  k = e % LOG_BASE;
-  d.d[0] = mathpow(10, k < 0 ? LOG_BASE + k : k);
-  if (maxD == null) {
-    maxD = e > 0 ? d : n1;
-  } else {
-    n = new Ctor(maxD);
-    if (!n.isInt() || n.lt(n1))
-      throw Error(invalidArgument + n);
-    maxD = n.gt(d) ? e > 0 ? d : n1 : n;
-  }
-  external = false;
-  n = new Ctor(digitsToString(xd));
-  pr = Ctor.precision;
-  Ctor.precision = e = xd.length * LOG_BASE * 2;
-  for (; ; ) {
-    q = divide(n, d, 0, 1, 1);
-    d2 = d0.plus(q.times(d1));
-    if (d2.cmp(maxD) == 1)
-      break;
-    d0 = d1;
-    d1 = d2;
-    d2 = n1;
-    n1 = n0.plus(q.times(d2));
-    n0 = d2;
-    d2 = d;
-    d = n.minus(q.times(d2));
-    n = d2;
-  }
-  d2 = divide(maxD.minus(d0), d1, 0, 1, 1);
-  n0 = n0.plus(d2.times(n1));
-  d0 = d0.plus(d2.times(d1));
-  n0.s = n1.s = x.s;
-  r = divide(n1, d1, e, 1).minus(x).abs().cmp(divide(n0, d0, e, 1).minus(x).abs()) < 1 ? [n1, d1] : [n0, d0];
-  Ctor.precision = pr;
-  external = true;
-  return r;
-};
-P.toHexadecimal = P.toHex = function(sd, rm) {
-  return toStringBinary(this, 16, sd, rm);
-};
-P.toNearest = function(y, rm) {
-  var x = this, Ctor = x.constructor;
-  x = new Ctor(x);
-  if (y == null) {
-    if (!x.d)
-      return x;
-    y = new Ctor(1);
-    rm = Ctor.rounding;
-  } else {
-    y = new Ctor(y);
-    if (rm === void 0) {
-      rm = Ctor.rounding;
-    } else {
-      checkInt32(rm, 0, 8);
-    }
-    if (!x.d)
-      return y.s ? x : y;
-    if (!y.d) {
-      if (y.s)
-        y.s = x.s;
-      return y;
-    }
-  }
-  if (y.d[0]) {
-    external = false;
-    x = divide(x, y, 0, rm, 1).times(y);
-    external = true;
-    finalise(x);
-  } else {
-    y.s = x.s;
-    x = y;
-  }
-  return x;
-};
-P.toNumber = function() {
-  return +this;
-};
-P.toOctal = function(sd, rm) {
-  return toStringBinary(this, 8, sd, rm);
-};
-P.toPower = P.pow = function(y) {
-  var e, k, pr, r, rm, s, x = this, Ctor = x.constructor, yn = +(y = new Ctor(y));
-  if (!x.d || !y.d || !x.d[0] || !y.d[0])
-    return new Ctor(mathpow(+x, yn));
-  x = new Ctor(x);
-  if (x.eq(1))
-    return x;
-  pr = Ctor.precision;
-  rm = Ctor.rounding;
-  if (y.eq(1))
-    return finalise(x, pr, rm);
-  e = mathfloor(y.e / LOG_BASE);
-  if (e >= y.d.length - 1 && (k = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER) {
-    r = intPow(Ctor, x, k, pr);
-    return y.s < 0 ? new Ctor(1).div(r) : finalise(r, pr, rm);
-  }
-  s = x.s;
-  if (s < 0) {
-    if (e < y.d.length - 1)
-      return new Ctor(NaN);
-    if ((y.d[e] & 1) == 0)
-      s = 1;
-    if (x.e == 0 && x.d[0] == 1 && x.d.length == 1) {
-      x.s = s;
-      return x;
-    }
-  }
-  k = mathpow(+x, yn);
-  e = k == 0 || !isFinite(k) ? mathfloor(yn * (Math.log("0." + digitsToString(x.d)) / Math.LN10 + x.e + 1)) : new Ctor(k + "").e;
-  if (e > Ctor.maxE + 1 || e < Ctor.minE - 1)
-    return new Ctor(e > 0 ? s / 0 : 0);
-  external = false;
-  Ctor.rounding = x.s = 1;
-  k = Math.min(12, (e + "").length);
-  r = naturalExponential(y.times(naturalLogarithm(x, pr + k)), pr);
-  if (r.d) {
-    r = finalise(r, pr + 5, 1);
-    if (checkRoundingDigits(r.d, pr, rm)) {
-      e = pr + 10;
-      r = finalise(naturalExponential(y.times(naturalLogarithm(x, e + k)), e), e + 5, 1);
-      if (+digitsToString(r.d).slice(pr + 1, pr + 15) + 1 == 1e14) {
-        r = finalise(r, pr + 1, 0);
-      }
-    }
-  }
-  r.s = s;
-  external = true;
-  Ctor.rounding = rm;
-  return finalise(r, pr, rm);
-};
-P.toPrecision = function(sd, rm) {
-  var str, x = this, Ctor = x.constructor;
-  if (sd === void 0) {
-    str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
-  } else {
-    checkInt32(sd, 1, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-    x = finalise(new Ctor(x), sd, rm);
-    str = finiteToString(x, sd <= x.e || x.e <= Ctor.toExpNeg, sd);
-  }
-  return x.isNeg() && !x.isZero() ? "-" + str : str;
-};
-P.toSignificantDigits = P.toSD = function(sd, rm) {
-  var x = this, Ctor = x.constructor;
-  if (sd === void 0) {
-    sd = Ctor.precision;
-    rm = Ctor.rounding;
-  } else {
-    checkInt32(sd, 1, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-  }
-  return finalise(new Ctor(x), sd, rm);
-};
-P.toString = function() {
-  var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
-  return x.isNeg() && !x.isZero() ? "-" + str : str;
-};
-P.truncated = P.trunc = function() {
-  return finalise(new this.constructor(this), this.e + 1, 1);
-};
-P.valueOf = P.toJSON = function() {
-  var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
-  return x.isNeg() ? "-" + str : str;
-};
-function digitsToString(d) {
-  var i, k, ws, indexOfLastWord = d.length - 1, str = "", w = d[0];
-  if (indexOfLastWord > 0) {
-    str += w;
-    for (i = 1; i < indexOfLastWord; i++) {
-      ws = d[i] + "";
-      k = LOG_BASE - ws.length;
-      if (k)
-        str += getZeroString(k);
-      str += ws;
-    }
-    w = d[i];
-    ws = w + "";
-    k = LOG_BASE - ws.length;
-    if (k)
-      str += getZeroString(k);
-  } else if (w === 0) {
-    return "0";
-  }
-  for (; w % 10 === 0; )
-    w /= 10;
-  return str + w;
-}
-__name(digitsToString, "digitsToString");
-function checkInt32(i, min2, max2) {
-  if (i !== ~~i || i < min2 || i > max2) {
-    throw Error(invalidArgument + i);
-  }
-}
-__name(checkInt32, "checkInt32");
-function checkRoundingDigits(d, i, rm, repeating) {
-  var di, k, r, rd;
-  for (k = d[0]; k >= 10; k /= 10)
-    --i;
-  if (--i < 0) {
-    i += LOG_BASE;
-    di = 0;
-  } else {
-    di = Math.ceil((i + 1) / LOG_BASE);
-    i %= LOG_BASE;
-  }
-  k = mathpow(10, LOG_BASE - i);
-  rd = d[di] % k | 0;
-  if (repeating == null) {
-    if (i < 3) {
-      if (i == 0)
-        rd = rd / 100 | 0;
-      else if (i == 1)
-        rd = rd / 10 | 0;
-      r = rm < 4 && rd == 99999 || rm > 3 && rd == 49999 || rd == 5e4 || rd == 0;
-    } else {
-      r = (rm < 4 && rd + 1 == k || rm > 3 && rd + 1 == k / 2) && (d[di + 1] / k / 100 | 0) == mathpow(10, i - 2) - 1 || (rd == k / 2 || rd == 0) && (d[di + 1] / k / 100 | 0) == 0;
-    }
-  } else {
-    if (i < 4) {
-      if (i == 0)
-        rd = rd / 1e3 | 0;
-      else if (i == 1)
-        rd = rd / 100 | 0;
-      else if (i == 2)
-        rd = rd / 10 | 0;
-      r = (repeating || rm < 4) && rd == 9999 || !repeating && rm > 3 && rd == 4999;
-    } else {
-      r = ((repeating || rm < 4) && rd + 1 == k || !repeating && rm > 3 && rd + 1 == k / 2) && (d[di + 1] / k / 1e3 | 0) == mathpow(10, i - 3) - 1;
-    }
-  }
-  return r;
-}
-__name(checkRoundingDigits, "checkRoundingDigits");
-function convertBase(str, baseIn, baseOut) {
-  var j, arr = [0], arrL, i = 0, strL = str.length;
-  for (; i < strL; ) {
-    for (arrL = arr.length; arrL--; )
-      arr[arrL] *= baseIn;
-    arr[0] += NUMERALS.indexOf(str.charAt(i++));
-    for (j = 0; j < arr.length; j++) {
-      if (arr[j] > baseOut - 1) {
-        if (arr[j + 1] === void 0)
-          arr[j + 1] = 0;
-        arr[j + 1] += arr[j] / baseOut | 0;
-        arr[j] %= baseOut;
-      }
-    }
-  }
-  return arr.reverse();
-}
-__name(convertBase, "convertBase");
-function cosine(Ctor, x) {
-  var k, len, y;
-  if (x.isZero())
-    return x;
-  len = x.d.length;
-  if (len < 32) {
-    k = Math.ceil(len / 3);
-    y = (1 / tinyPow(4, k)).toString();
-  } else {
-    k = 16;
-    y = "2.3283064365386962890625e-10";
-  }
-  Ctor.precision += k;
-  x = taylorSeries(Ctor, 1, x.times(y), new Ctor(1));
-  for (var i = k; i--; ) {
-    var cos2x = x.times(x);
-    x = cos2x.times(cos2x).minus(cos2x).times(8).plus(1);
-  }
-  Ctor.precision -= k;
-  return x;
-}
-__name(cosine, "cosine");
-var divide = function() {
-  function multiplyInteger(x, k, base) {
-    var temp, carry = 0, i = x.length;
-    for (x = x.slice(); i--; ) {
-      temp = x[i] * k + carry;
-      x[i] = temp % base | 0;
-      carry = temp / base | 0;
-    }
-    if (carry)
-      x.unshift(carry);
-    return x;
-  }
-  __name(multiplyInteger, "multiplyInteger");
-  function compare(a, b, aL, bL) {
-    var i, r;
-    if (aL != bL) {
-      r = aL > bL ? 1 : -1;
-    } else {
-      for (i = r = 0; i < aL; i++) {
-        if (a[i] != b[i]) {
-          r = a[i] > b[i] ? 1 : -1;
-          break;
-        }
-      }
-    }
-    return r;
-  }
-  __name(compare, "compare");
-  function subtract(a, b, aL, base) {
-    var i = 0;
-    for (; aL--; ) {
-      a[aL] -= i;
-      i = a[aL] < b[aL] ? 1 : 0;
-      a[aL] = i * base + a[aL] - b[aL];
-    }
-    for (; !a[0] && a.length > 1; )
-      a.shift();
-  }
-  __name(subtract, "subtract");
-  return function(x, y, pr, rm, dp, base) {
-    var cmp, e, i, k, logBase, more, prod, prodL, q, qd, rem, remL, rem0, sd, t, xi, xL, yd0, yL, yz, Ctor = x.constructor, sign2 = x.s == y.s ? 1 : -1, xd = x.d, yd = y.d;
-    if (!xd || !xd[0] || !yd || !yd[0]) {
-      return new Ctor(
-        !x.s || !y.s || (xd ? yd && xd[0] == yd[0] : !yd) ? NaN : xd && xd[0] == 0 || !yd ? sign2 * 0 : sign2 / 0
-      );
-    }
-    if (base) {
-      logBase = 1;
-      e = x.e - y.e;
-    } else {
-      base = BASE;
-      logBase = LOG_BASE;
-      e = mathfloor(x.e / logBase) - mathfloor(y.e / logBase);
-    }
-    yL = yd.length;
-    xL = xd.length;
-    q = new Ctor(sign2);
-    qd = q.d = [];
-    for (i = 0; yd[i] == (xd[i] || 0); i++)
-      ;
-    if (yd[i] > (xd[i] || 0))
-      e--;
-    if (pr == null) {
-      sd = pr = Ctor.precision;
-      rm = Ctor.rounding;
-    } else if (dp) {
-      sd = pr + (x.e - y.e) + 1;
-    } else {
-      sd = pr;
-    }
-    if (sd < 0) {
-      qd.push(1);
-      more = true;
-    } else {
-      sd = sd / logBase + 2 | 0;
-      i = 0;
-      if (yL == 1) {
-        k = 0;
-        yd = yd[0];
-        sd++;
-        for (; (i < xL || k) && sd--; i++) {
-          t = k * base + (xd[i] || 0);
-          qd[i] = t / yd | 0;
-          k = t % yd | 0;
-        }
-        more = k || i < xL;
-      } else {
-        k = base / (yd[0] + 1) | 0;
-        if (k > 1) {
-          yd = multiplyInteger(yd, k, base);
-          xd = multiplyInteger(xd, k, base);
-          yL = yd.length;
-          xL = xd.length;
-        }
-        xi = yL;
-        rem = xd.slice(0, yL);
-        remL = rem.length;
-        for (; remL < yL; )
-          rem[remL++] = 0;
-        yz = yd.slice();
-        yz.unshift(0);
-        yd0 = yd[0];
-        if (yd[1] >= base / 2)
-          ++yd0;
-        do {
-          k = 0;
-          cmp = compare(yd, rem, yL, remL);
-          if (cmp < 0) {
-            rem0 = rem[0];
-            if (yL != remL)
-              rem0 = rem0 * base + (rem[1] || 0);
-            k = rem0 / yd0 | 0;
-            if (k > 1) {
-              if (k >= base)
-                k = base - 1;
-              prod = multiplyInteger(yd, k, base);
-              prodL = prod.length;
-              remL = rem.length;
-              cmp = compare(prod, rem, prodL, remL);
-              if (cmp == 1) {
-                k--;
-                subtract(prod, yL < prodL ? yz : yd, prodL, base);
-              }
-            } else {
-              if (k == 0)
-                cmp = k = 1;
-              prod = yd.slice();
-            }
-            prodL = prod.length;
-            if (prodL < remL)
-              prod.unshift(0);
-            subtract(rem, prod, remL, base);
-            if (cmp == -1) {
-              remL = rem.length;
-              cmp = compare(yd, rem, yL, remL);
-              if (cmp < 1) {
-                k++;
-                subtract(rem, yL < remL ? yz : yd, remL, base);
-              }
-            }
-            remL = rem.length;
-          } else if (cmp === 0) {
-            k++;
-            rem = [0];
-          }
-          qd[i++] = k;
-          if (cmp && rem[0]) {
-            rem[remL++] = xd[xi] || 0;
-          } else {
-            rem = [xd[xi]];
-            remL = 1;
-          }
-        } while ((xi++ < xL || rem[0] !== void 0) && sd--);
-        more = rem[0] !== void 0;
-      }
-      if (!qd[0])
-        qd.shift();
-    }
-    if (logBase == 1) {
-      q.e = e;
-      inexact = more;
-    } else {
-      for (i = 1, k = qd[0]; k >= 10; k /= 10)
-        i++;
-      q.e = i + e * logBase - 1;
-      finalise(q, dp ? pr + q.e + 1 : pr, rm, more);
-    }
-    return q;
-  };
-}();
-function finalise(x, sd, rm, isTruncated) {
-  var digits, i, j, k, rd, roundUp, w, xd, xdi, Ctor = x.constructor;
-  out:
-    if (sd != null) {
-      xd = x.d;
-      if (!xd)
-        return x;
-      for (digits = 1, k = xd[0]; k >= 10; k /= 10)
-        digits++;
-      i = sd - digits;
-      if (i < 0) {
-        i += LOG_BASE;
-        j = sd;
-        w = xd[xdi = 0];
-        rd = w / mathpow(10, digits - j - 1) % 10 | 0;
-      } else {
-        xdi = Math.ceil((i + 1) / LOG_BASE);
-        k = xd.length;
-        if (xdi >= k) {
-          if (isTruncated) {
-            for (; k++ <= xdi; )
-              xd.push(0);
-            w = rd = 0;
-            digits = 1;
-            i %= LOG_BASE;
-            j = i - LOG_BASE + 1;
-          } else {
-            break out;
-          }
-        } else {
-          w = k = xd[xdi];
-          for (digits = 1; k >= 10; k /= 10)
-            digits++;
-          i %= LOG_BASE;
-          j = i - LOG_BASE + digits;
-          rd = j < 0 ? 0 : w / mathpow(10, digits - j - 1) % 10 | 0;
-        }
-      }
-      isTruncated = isTruncated || sd < 0 || xd[xdi + 1] !== void 0 || (j < 0 ? w : w % mathpow(10, digits - j - 1));
-      roundUp = rm < 4 ? (rd || isTruncated) && (rm == 0 || rm == (x.s < 0 ? 3 : 2)) : rd > 5 || rd == 5 && (rm == 4 || isTruncated || rm == 6 && (i > 0 ? j > 0 ? w / mathpow(10, digits - j) : 0 : xd[xdi - 1]) % 10 & 1 || rm == (x.s < 0 ? 8 : 7));
-      if (sd < 1 || !xd[0]) {
-        xd.length = 0;
-        if (roundUp) {
-          sd -= x.e + 1;
-          xd[0] = mathpow(10, (LOG_BASE - sd % LOG_BASE) % LOG_BASE);
-          x.e = -sd || 0;
-        } else {
-          xd[0] = x.e = 0;
-        }
-        return x;
-      }
-      if (i == 0) {
-        xd.length = xdi;
-        k = 1;
-        xdi--;
-      } else {
-        xd.length = xdi + 1;
-        k = mathpow(10, LOG_BASE - i);
-        xd[xdi] = j > 0 ? (w / mathpow(10, digits - j) % mathpow(10, j) | 0) * k : 0;
-      }
-      if (roundUp) {
-        for (; ; ) {
-          if (xdi == 0) {
-            for (i = 1, j = xd[0]; j >= 10; j /= 10)
-              i++;
-            j = xd[0] += k;
-            for (k = 1; j >= 10; j /= 10)
-              k++;
-            if (i != k) {
-              x.e++;
-              if (xd[0] == BASE)
-                xd[0] = 1;
-            }
-            break;
-          } else {
-            xd[xdi] += k;
-            if (xd[xdi] != BASE)
-              break;
-            xd[xdi--] = 0;
-            k = 1;
-          }
-        }
-      }
-      for (i = xd.length; xd[--i] === 0; )
-        xd.pop();
-    }
-  if (external) {
-    if (x.e > Ctor.maxE) {
-      x.d = null;
-      x.e = NaN;
-    } else if (x.e < Ctor.minE) {
-      x.e = 0;
-      x.d = [0];
-    }
-  }
-  return x;
-}
-__name(finalise, "finalise");
-function finiteToString(x, isExp, sd) {
-  if (!x.isFinite())
-    return nonFiniteToString(x);
-  var k, e = x.e, str = digitsToString(x.d), len = str.length;
-  if (isExp) {
-    if (sd && (k = sd - len) > 0) {
-      str = str.charAt(0) + "." + str.slice(1) + getZeroString(k);
-    } else if (len > 1) {
-      str = str.charAt(0) + "." + str.slice(1);
-    }
-    str = str + (x.e < 0 ? "e" : "e+") + x.e;
-  } else if (e < 0) {
-    str = "0." + getZeroString(-e - 1) + str;
-    if (sd && (k = sd - len) > 0)
-      str += getZeroString(k);
-  } else if (e >= len) {
-    str += getZeroString(e + 1 - len);
-    if (sd && (k = sd - e - 1) > 0)
-      str = str + "." + getZeroString(k);
-  } else {
-    if ((k = e + 1) < len)
-      str = str.slice(0, k) + "." + str.slice(k);
-    if (sd && (k = sd - len) > 0) {
-      if (e + 1 === len)
-        str += ".";
-      str += getZeroString(k);
-    }
-  }
-  return str;
-}
-__name(finiteToString, "finiteToString");
-function getBase10Exponent(digits, e) {
-  var w = digits[0];
-  for (e *= LOG_BASE; w >= 10; w /= 10)
-    e++;
-  return e;
-}
-__name(getBase10Exponent, "getBase10Exponent");
-function getLn10(Ctor, sd, pr) {
-  if (sd > LN10_PRECISION) {
-    external = true;
-    if (pr)
-      Ctor.precision = pr;
-    throw Error(precisionLimitExceeded);
-  }
-  return finalise(new Ctor(LN10), sd, 1, true);
-}
-__name(getLn10, "getLn10");
-function getPi(Ctor, sd, rm) {
-  if (sd > PI_PRECISION)
-    throw Error(precisionLimitExceeded);
-  return finalise(new Ctor(PI), sd, rm, true);
-}
-__name(getPi, "getPi");
-function getPrecision(digits) {
-  var w = digits.length - 1, len = w * LOG_BASE + 1;
-  w = digits[w];
-  if (w) {
-    for (; w % 10 == 0; w /= 10)
-      len--;
-    for (w = digits[0]; w >= 10; w /= 10)
-      len++;
-  }
-  return len;
-}
-__name(getPrecision, "getPrecision");
-function getZeroString(k) {
-  var zs = "";
-  for (; k--; )
-    zs += "0";
-  return zs;
-}
-__name(getZeroString, "getZeroString");
-function intPow(Ctor, x, n, pr) {
-  var isTruncated, r = new Ctor(1), k = Math.ceil(pr / LOG_BASE + 4);
-  external = false;
-  for (; ; ) {
-    if (n % 2) {
-      r = r.times(x);
-      if (truncate(r.d, k))
-        isTruncated = true;
-    }
-    n = mathfloor(n / 2);
-    if (n === 0) {
-      n = r.d.length - 1;
-      if (isTruncated && r.d[n] === 0)
-        ++r.d[n];
-      break;
-    }
-    x = x.times(x);
-    truncate(x.d, k);
-  }
-  external = true;
-  return r;
-}
-__name(intPow, "intPow");
-function isOdd(n) {
-  return n.d[n.d.length - 1] & 1;
-}
-__name(isOdd, "isOdd");
-function maxOrMin(Ctor, args, ltgt) {
-  var y, x = new Ctor(args[0]), i = 0;
-  for (; ++i < args.length; ) {
-    y = new Ctor(args[i]);
-    if (!y.s) {
-      x = y;
-      break;
-    } else if (x[ltgt](y)) {
-      x = y;
-    }
-  }
-  return x;
-}
-__name(maxOrMin, "maxOrMin");
-function naturalExponential(x, sd) {
-  var denominator, guard, j, pow2, sum3, t, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
-  if (!x.d || !x.d[0] || x.e > 17) {
-    return new Ctor(x.d ? !x.d[0] ? 1 : x.s < 0 ? 0 : 1 / 0 : x.s ? x.s < 0 ? 0 : x : 0 / 0);
-  }
-  if (sd == null) {
-    external = false;
-    wpr = pr;
-  } else {
-    wpr = sd;
-  }
-  t = new Ctor(0.03125);
-  while (x.e > -2) {
-    x = x.times(t);
-    k += 5;
-  }
-  guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
-  wpr += guard;
-  denominator = pow2 = sum3 = new Ctor(1);
-  Ctor.precision = wpr;
-  for (; ; ) {
-    pow2 = finalise(pow2.times(x), wpr, 1);
-    denominator = denominator.times(++i);
-    t = sum3.plus(divide(pow2, denominator, wpr, 1));
-    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
-      j = k;
-      while (j--)
-        sum3 = finalise(sum3.times(sum3), wpr, 1);
-      if (sd == null) {
-        if (rep < 3 && checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
-          Ctor.precision = wpr += 10;
-          denominator = pow2 = t = new Ctor(1);
-          i = 0;
-          rep++;
-        } else {
-          return finalise(sum3, Ctor.precision = pr, rm, external = true);
-        }
-      } else {
-        Ctor.precision = pr;
-        return sum3;
-      }
-    }
-    sum3 = t;
-  }
-}
-__name(naturalExponential, "naturalExponential");
-function naturalLogarithm(y, sd) {
-  var c, c0, denominator, e, numerator, rep, sum3, t, wpr, x1, x2, n = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
-  if (x.s < 0 || !xd || !xd[0] || !x.e && xd[0] == 1 && xd.length == 1) {
-    return new Ctor(xd && !xd[0] ? -1 / 0 : x.s != 1 ? NaN : xd ? 0 : x);
-  }
-  if (sd == null) {
-    external = false;
-    wpr = pr;
-  } else {
-    wpr = sd;
-  }
-  Ctor.precision = wpr += guard;
-  c = digitsToString(xd);
-  c0 = c.charAt(0);
-  if (Math.abs(e = x.e) < 15e14) {
-    while (c0 < 7 && c0 != 1 || c0 == 1 && c.charAt(1) > 3) {
-      x = x.times(y);
-      c = digitsToString(x.d);
-      c0 = c.charAt(0);
-      n++;
-    }
-    e = x.e;
-    if (c0 > 1) {
-      x = new Ctor("0." + c);
-      e++;
-    } else {
-      x = new Ctor(c0 + "." + c.slice(1));
-    }
-  } else {
-    t = getLn10(Ctor, wpr + 2, pr).times(e + "");
-    x = naturalLogarithm(new Ctor(c0 + "." + c.slice(1)), wpr - guard).plus(t);
-    Ctor.precision = pr;
-    return sd == null ? finalise(x, pr, rm, external = true) : x;
-  }
-  x1 = x;
-  sum3 = numerator = x = divide(x.minus(1), x.plus(1), wpr, 1);
-  x2 = finalise(x.times(x), wpr, 1);
-  denominator = 3;
-  for (; ; ) {
-    numerator = finalise(numerator.times(x2), wpr, 1);
-    t = sum3.plus(divide(numerator, new Ctor(denominator), wpr, 1));
-    if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
-      sum3 = sum3.times(2);
-      if (e !== 0)
-        sum3 = sum3.plus(getLn10(Ctor, wpr + 2, pr).times(e + ""));
-      sum3 = divide(sum3, new Ctor(n), wpr, 1);
-      if (sd == null) {
-        if (checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
-          Ctor.precision = wpr += guard;
-          t = numerator = x = divide(x1.minus(1), x1.plus(1), wpr, 1);
-          x2 = finalise(x.times(x), wpr, 1);
-          denominator = rep = 1;
-        } else {
-          return finalise(sum3, Ctor.precision = pr, rm, external = true);
-        }
-      } else {
-        Ctor.precision = pr;
-        return sum3;
-      }
-    }
-    sum3 = t;
-    denominator += 2;
-  }
-}
-__name(naturalLogarithm, "naturalLogarithm");
-function nonFiniteToString(x) {
-  return String(x.s * x.s / 0);
-}
-__name(nonFiniteToString, "nonFiniteToString");
-function parseDecimal(x, str) {
-  var e, i, len;
-  if ((e = str.indexOf(".")) > -1)
-    str = str.replace(".", "");
-  if ((i = str.search(/e/i)) > 0) {
-    if (e < 0)
-      e = i;
-    e += +str.slice(i + 1);
-    str = str.substring(0, i);
-  } else if (e < 0) {
-    e = str.length;
-  }
-  for (i = 0; str.charCodeAt(i) === 48; i++)
-    ;
-  for (len = str.length; str.charCodeAt(len - 1) === 48; --len)
-    ;
-  str = str.slice(i, len);
-  if (str) {
-    len -= i;
-    x.e = e = e - i - 1;
-    x.d = [];
-    i = (e + 1) % LOG_BASE;
-    if (e < 0)
-      i += LOG_BASE;
-    if (i < len) {
-      if (i)
-        x.d.push(+str.slice(0, i));
-      for (len -= LOG_BASE; i < len; )
-        x.d.push(+str.slice(i, i += LOG_BASE));
-      str = str.slice(i);
-      i = LOG_BASE - str.length;
-    } else {
-      i -= len;
-    }
-    for (; i--; )
-      str += "0";
-    x.d.push(+str);
-    if (external) {
-      if (x.e > x.constructor.maxE) {
-        x.d = null;
-        x.e = NaN;
-      } else if (x.e < x.constructor.minE) {
-        x.e = 0;
-        x.d = [0];
-      }
-    }
-  } else {
-    x.e = 0;
-    x.d = [0];
-  }
-  return x;
-}
-__name(parseDecimal, "parseDecimal");
-function parseOther(x, str) {
-  var base, Ctor, divisor, i, isFloat, len, p, xd, xe;
-  if (str.indexOf("_") > -1) {
-    str = str.replace(/(\d)_(?=\d)/g, "$1");
-    if (isDecimal.test(str))
-      return parseDecimal(x, str);
-  } else if (str === "Infinity" || str === "NaN") {
-    if (!+str)
-      x.s = NaN;
-    x.e = NaN;
-    x.d = null;
-    return x;
-  }
-  if (isHex.test(str)) {
-    base = 16;
-    str = str.toLowerCase();
-  } else if (isBinary.test(str)) {
-    base = 2;
-  } else if (isOctal.test(str)) {
-    base = 8;
-  } else {
-    throw Error(invalidArgument + str);
-  }
-  i = str.search(/p/i);
-  if (i > 0) {
-    p = +str.slice(i + 1);
-    str = str.substring(2, i);
-  } else {
-    str = str.slice(2);
-  }
-  i = str.indexOf(".");
-  isFloat = i >= 0;
-  Ctor = x.constructor;
-  if (isFloat) {
-    str = str.replace(".", "");
-    len = str.length;
-    i = len - i;
-    divisor = intPow(Ctor, new Ctor(base), i, i * 2);
-  }
-  xd = convertBase(str, base, BASE);
-  xe = xd.length - 1;
-  for (i = xe; xd[i] === 0; --i)
-    xd.pop();
-  if (i < 0)
-    return new Ctor(x.s * 0);
-  x.e = getBase10Exponent(xd, xe);
-  x.d = xd;
-  external = false;
-  if (isFloat)
-    x = divide(x, divisor, len * 4);
-  if (p)
-    x = x.times(Math.abs(p) < 54 ? mathpow(2, p) : Decimal.pow(2, p));
-  external = true;
-  return x;
-}
-__name(parseOther, "parseOther");
-function sine(Ctor, x) {
-  var k, len = x.d.length;
-  if (len < 3) {
-    return x.isZero() ? x : taylorSeries(Ctor, 2, x, x);
-  }
-  k = 1.4 * Math.sqrt(len);
-  k = k > 16 ? 16 : k | 0;
-  x = x.times(1 / tinyPow(5, k));
-  x = taylorSeries(Ctor, 2, x, x);
-  var sin2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
-  for (; k--; ) {
-    sin2_x = x.times(x);
-    x = x.times(d5.plus(sin2_x.times(d16.times(sin2_x).minus(d20))));
-  }
-  return x;
-}
-__name(sine, "sine");
-function taylorSeries(Ctor, n, x, y, isHyperbolic) {
-  var j, t, u, x2, i = 1, pr = Ctor.precision, k = Math.ceil(pr / LOG_BASE);
-  external = false;
-  x2 = x.times(x);
-  u = new Ctor(y);
-  for (; ; ) {
-    t = divide(u.times(x2), new Ctor(n++ * n++), pr, 1);
-    u = isHyperbolic ? y.plus(t) : y.minus(t);
-    y = divide(t.times(x2), new Ctor(n++ * n++), pr, 1);
-    t = u.plus(y);
-    if (t.d[k] !== void 0) {
-      for (j = k; t.d[j] === u.d[j] && j--; )
-        ;
-      if (j == -1)
-        break;
-    }
-    j = u;
-    u = y;
-    y = t;
-    t = j;
-    i++;
-  }
-  external = true;
-  t.d.length = k + 1;
-  return t;
-}
-__name(taylorSeries, "taylorSeries");
-function tinyPow(b, e) {
-  var n = b;
-  while (--e)
-    n *= b;
-  return n;
-}
-__name(tinyPow, "tinyPow");
-function toLessThanHalfPi(Ctor, x) {
-  var t, isNeg = x.s < 0, pi = getPi(Ctor, Ctor.precision, 1), halfPi = pi.times(0.5);
-  x = x.abs();
-  if (x.lte(halfPi)) {
-    quadrant = isNeg ? 4 : 1;
-    return x;
-  }
-  t = x.divToInt(pi);
-  if (t.isZero()) {
-    quadrant = isNeg ? 3 : 2;
-  } else {
-    x = x.minus(t.times(pi));
-    if (x.lte(halfPi)) {
-      quadrant = isOdd(t) ? isNeg ? 2 : 3 : isNeg ? 4 : 1;
-      return x;
-    }
-    quadrant = isOdd(t) ? isNeg ? 1 : 4 : isNeg ? 3 : 2;
-  }
-  return x.minus(pi).abs();
-}
-__name(toLessThanHalfPi, "toLessThanHalfPi");
-function toStringBinary(x, baseOut, sd, rm) {
-  var base, e, i, k, len, roundUp, str, xd, y, Ctor = x.constructor, isExp = sd !== void 0;
-  if (isExp) {
-    checkInt32(sd, 1, MAX_DIGITS);
-    if (rm === void 0)
-      rm = Ctor.rounding;
-    else
-      checkInt32(rm, 0, 8);
-  } else {
-    sd = Ctor.precision;
-    rm = Ctor.rounding;
-  }
-  if (!x.isFinite()) {
-    str = nonFiniteToString(x);
-  } else {
-    str = finiteToString(x);
-    i = str.indexOf(".");
-    if (isExp) {
-      base = 2;
-      if (baseOut == 16) {
-        sd = sd * 4 - 3;
-      } else if (baseOut == 8) {
-        sd = sd * 3 - 2;
-      }
-    } else {
-      base = baseOut;
-    }
-    if (i >= 0) {
-      str = str.replace(".", "");
-      y = new Ctor(1);
-      y.e = str.length - i;
-      y.d = convertBase(finiteToString(y), 10, base);
-      y.e = y.d.length;
-    }
-    xd = convertBase(str, 10, base);
-    e = len = xd.length;
-    for (; xd[--len] == 0; )
-      xd.pop();
-    if (!xd[0]) {
-      str = isExp ? "0p+0" : "0";
-    } else {
-      if (i < 0) {
-        e--;
-      } else {
-        x = new Ctor(x);
-        x.d = xd;
-        x.e = e;
-        x = divide(x, y, sd, rm, 0, base);
-        xd = x.d;
-        e = x.e;
-        roundUp = inexact;
-      }
-      i = xd[sd];
-      k = base / 2;
-      roundUp = roundUp || xd[sd + 1] !== void 0;
-      roundUp = rm < 4 ? (i !== void 0 || roundUp) && (rm === 0 || rm === (x.s < 0 ? 3 : 2)) : i > k || i === k && (rm === 4 || roundUp || rm === 6 && xd[sd - 1] & 1 || rm === (x.s < 0 ? 8 : 7));
-      xd.length = sd;
-      if (roundUp) {
-        for (; ++xd[--sd] > base - 1; ) {
-          xd[sd] = 0;
-          if (!sd) {
-            ++e;
-            xd.unshift(1);
-          }
-        }
-      }
-      for (len = xd.length; !xd[len - 1]; --len)
-        ;
-      for (i = 0, str = ""; i < len; i++)
-        str += NUMERALS.charAt(xd[i]);
-      if (isExp) {
-        if (len > 1) {
-          if (baseOut == 16 || baseOut == 8) {
-            i = baseOut == 16 ? 4 : 3;
-            for (--len; len % i; len++)
-              str += "0";
-            xd = convertBase(str, base, baseOut);
-            for (len = xd.length; !xd[len - 1]; --len)
-              ;
-            for (i = 1, str = "1."; i < len; i++)
-              str += NUMERALS.charAt(xd[i]);
-          } else {
-            str = str.charAt(0) + "." + str.slice(1);
-          }
-        }
-        str = str + (e < 0 ? "p" : "p+") + e;
-      } else if (e < 0) {
-        for (; ++e; )
-          str = "0" + str;
-        str = "0." + str;
-      } else {
-        if (++e > len)
-          for (e -= len; e--; )
-            str += "0";
-        else if (e < len)
-          str = str.slice(0, e) + "." + str.slice(e);
-      }
-    }
-    str = (baseOut == 16 ? "0x" : baseOut == 2 ? "0b" : baseOut == 8 ? "0o" : "") + str;
-  }
-  return x.s < 0 ? "-" + str : str;
-}
-__name(toStringBinary, "toStringBinary");
-function truncate(arr, len) {
-  if (arr.length > len) {
-    arr.length = len;
-    return true;
-  }
-}
-__name(truncate, "truncate");
-function abs(x) {
-  return new this(x).abs();
-}
-__name(abs, "abs");
-function acos(x) {
-  return new this(x).acos();
-}
-__name(acos, "acos");
-function acosh(x) {
-  return new this(x).acosh();
-}
-__name(acosh, "acosh");
-function add(x, y) {
-  return new this(x).plus(y);
-}
-__name(add, "add");
-function asin(x) {
-  return new this(x).asin();
-}
-__name(asin, "asin");
-function asinh(x) {
-  return new this(x).asinh();
-}
-__name(asinh, "asinh");
-function atan(x) {
-  return new this(x).atan();
-}
-__name(atan, "atan");
-function atanh(x) {
-  return new this(x).atanh();
-}
-__name(atanh, "atanh");
-function atan2(y, x) {
-  y = new this(y);
-  x = new this(x);
-  var r, pr = this.precision, rm = this.rounding, wpr = pr + 4;
-  if (!y.s || !x.s) {
-    r = new this(NaN);
-  } else if (!y.d && !x.d) {
-    r = getPi(this, wpr, 1).times(x.s > 0 ? 0.25 : 0.75);
-    r.s = y.s;
-  } else if (!x.d || y.isZero()) {
-    r = x.s < 0 ? getPi(this, pr, rm) : new this(0);
-    r.s = y.s;
-  } else if (!y.d || x.isZero()) {
-    r = getPi(this, wpr, 1).times(0.5);
-    r.s = y.s;
-  } else if (x.s < 0) {
-    this.precision = wpr;
-    this.rounding = 1;
-    r = this.atan(divide(y, x, wpr, 1));
-    x = getPi(this, wpr, 1);
-    this.precision = pr;
-    this.rounding = rm;
-    r = y.s < 0 ? r.minus(x) : r.plus(x);
-  } else {
-    r = this.atan(divide(y, x, wpr, 1));
-  }
-  return r;
-}
-__name(atan2, "atan2");
-function cbrt(x) {
-  return new this(x).cbrt();
-}
-__name(cbrt, "cbrt");
-function ceil(x) {
-  return finalise(x = new this(x), x.e + 1, 2);
-}
-__name(ceil, "ceil");
-function clamp(x, min2, max2) {
-  return new this(x).clamp(min2, max2);
-}
-__name(clamp, "clamp");
-function config(obj) {
-  if (!obj || typeof obj !== "object")
-    throw Error(decimalError + "Object expected");
-  var i, p, v, useDefaults = obj.defaults === true, ps = [
-    "precision",
-    1,
-    MAX_DIGITS,
-    "rounding",
-    0,
-    8,
-    "toExpNeg",
-    -EXP_LIMIT,
-    0,
-    "toExpPos",
-    0,
-    EXP_LIMIT,
-    "maxE",
-    0,
-    EXP_LIMIT,
-    "minE",
-    -EXP_LIMIT,
-    0,
-    "modulo",
-    0,
-    9
-  ];
-  for (i = 0; i < ps.length; i += 3) {
-    if (p = ps[i], useDefaults)
-      this[p] = DEFAULTS[p];
-    if ((v = obj[p]) !== void 0) {
-      if (mathfloor(v) === v && v >= ps[i + 1] && v <= ps[i + 2])
-        this[p] = v;
-      else
-        throw Error(invalidArgument + p + ": " + v);
-    }
-  }
-  if (p = "crypto", useDefaults)
-    this[p] = DEFAULTS[p];
-  if ((v = obj[p]) !== void 0) {
-    if (v === true || v === false || v === 0 || v === 1) {
-      if (v) {
-        if (typeof crypto != "undefined" && crypto && (crypto.getRandomValues || crypto.randomBytes)) {
-          this[p] = true;
-        } else {
-          throw Error(cryptoUnavailable);
-        }
-      } else {
-        this[p] = false;
-      }
-    } else {
-      throw Error(invalidArgument + p + ": " + v);
-    }
-  }
-  return this;
-}
-__name(config, "config");
-function cos(x) {
-  return new this(x).cos();
-}
-__name(cos, "cos");
-function cosh(x) {
-  return new this(x).cosh();
-}
-__name(cosh, "cosh");
-function clone(obj) {
-  var i, p, ps;
-  function Decimal2(v) {
-    var e, i2, t, x = this;
-    if (!(x instanceof Decimal2))
-      return new Decimal2(v);
-    x.constructor = Decimal2;
-    if (isDecimalInstance(v)) {
-      x.s = v.s;
-      if (external) {
-        if (!v.d || v.e > Decimal2.maxE) {
-          x.e = NaN;
-          x.d = null;
-        } else if (v.e < Decimal2.minE) {
-          x.e = 0;
-          x.d = [0];
-        } else {
-          x.e = v.e;
-          x.d = v.d.slice();
-        }
-      } else {
-        x.e = v.e;
-        x.d = v.d ? v.d.slice() : v.d;
-      }
-      return;
-    }
-    t = typeof v;
-    if (t === "number") {
-      if (v === 0) {
-        x.s = 1 / v < 0 ? -1 : 1;
-        x.e = 0;
-        x.d = [0];
-        return;
-      }
-      if (v < 0) {
-        v = -v;
-        x.s = -1;
-      } else {
-        x.s = 1;
-      }
-      if (v === ~~v && v < 1e7) {
-        for (e = 0, i2 = v; i2 >= 10; i2 /= 10)
-          e++;
-        if (external) {
-          if (e > Decimal2.maxE) {
-            x.e = NaN;
-            x.d = null;
-          } else if (e < Decimal2.minE) {
-            x.e = 0;
-            x.d = [0];
-          } else {
-            x.e = e;
-            x.d = [v];
-          }
-        } else {
-          x.e = e;
-          x.d = [v];
-        }
-        return;
-      } else if (v * 0 !== 0) {
-        if (!v)
-          x.s = NaN;
-        x.e = NaN;
-        x.d = null;
-        return;
-      }
-      return parseDecimal(x, v.toString());
-    } else if (t !== "string") {
-      throw Error(invalidArgument + v);
-    }
-    if ((i2 = v.charCodeAt(0)) === 45) {
-      v = v.slice(1);
-      x.s = -1;
-    } else {
-      if (i2 === 43)
-        v = v.slice(1);
-      x.s = 1;
-    }
-    return isDecimal.test(v) ? parseDecimal(x, v) : parseOther(x, v);
-  }
-  __name(Decimal2, "Decimal");
-  Decimal2.prototype = P;
-  Decimal2.ROUND_UP = 0;
-  Decimal2.ROUND_DOWN = 1;
-  Decimal2.ROUND_CEIL = 2;
-  Decimal2.ROUND_FLOOR = 3;
-  Decimal2.ROUND_HALF_UP = 4;
-  Decimal2.ROUND_HALF_DOWN = 5;
-  Decimal2.ROUND_HALF_EVEN = 6;
-  Decimal2.ROUND_HALF_CEIL = 7;
-  Decimal2.ROUND_HALF_FLOOR = 8;
-  Decimal2.EUCLID = 9;
-  Decimal2.config = Decimal2.set = config;
-  Decimal2.clone = clone;
-  Decimal2.isDecimal = isDecimalInstance;
-  Decimal2.abs = abs;
-  Decimal2.acos = acos;
-  Decimal2.acosh = acosh;
-  Decimal2.add = add;
-  Decimal2.asin = asin;
-  Decimal2.asinh = asinh;
-  Decimal2.atan = atan;
-  Decimal2.atanh = atanh;
-  Decimal2.atan2 = atan2;
-  Decimal2.cbrt = cbrt;
-  Decimal2.ceil = ceil;
-  Decimal2.clamp = clamp;
-  Decimal2.cos = cos;
-  Decimal2.cosh = cosh;
-  Decimal2.div = div;
-  Decimal2.exp = exp;
-  Decimal2.floor = floor;
-  Decimal2.hypot = hypot;
-  Decimal2.ln = ln;
-  Decimal2.log = log;
-  Decimal2.log10 = log10;
-  Decimal2.log2 = log2;
-  Decimal2.max = max;
-  Decimal2.min = min;
-  Decimal2.mod = mod;
-  Decimal2.mul = mul;
-  Decimal2.pow = pow;
-  Decimal2.random = random;
-  Decimal2.round = round;
-  Decimal2.sign = sign;
-  Decimal2.sin = sin;
-  Decimal2.sinh = sinh;
-  Decimal2.sqrt = sqrt;
-  Decimal2.sub = sub;
-  Decimal2.sum = sum;
-  Decimal2.tan = tan;
-  Decimal2.tanh = tanh;
-  Decimal2.trunc = trunc;
-  if (obj === void 0)
-    obj = {};
-  if (obj) {
-    if (obj.defaults !== true) {
-      ps = ["precision", "rounding", "toExpNeg", "toExpPos", "maxE", "minE", "modulo", "crypto"];
-      for (i = 0; i < ps.length; )
-        if (!obj.hasOwnProperty(p = ps[i++]))
-          obj[p] = this[p];
-    }
-  }
-  Decimal2.config(obj);
-  return Decimal2;
-}
-__name(clone, "clone");
-function div(x, y) {
-  return new this(x).div(y);
-}
-__name(div, "div");
-function exp(x) {
-  return new this(x).exp();
-}
-__name(exp, "exp");
-function floor(x) {
-  return finalise(x = new this(x), x.e + 1, 3);
-}
-__name(floor, "floor");
-function hypot() {
-  var i, n, t = new this(0);
-  external = false;
-  for (i = 0; i < arguments.length; ) {
-    n = new this(arguments[i++]);
-    if (!n.d) {
-      if (n.s) {
-        external = true;
-        return new this(1 / 0);
-      }
-      t = n;
-    } else if (t.d) {
-      t = t.plus(n.times(n));
-    }
-  }
-  external = true;
-  return t.sqrt();
-}
-__name(hypot, "hypot");
-function isDecimalInstance(obj) {
-  return obj instanceof Decimal || obj && obj.toStringTag === tag || false;
-}
-__name(isDecimalInstance, "isDecimalInstance");
-function ln(x) {
-  return new this(x).ln();
-}
-__name(ln, "ln");
-function log(x, y) {
-  return new this(x).log(y);
-}
-__name(log, "log");
-function log2(x) {
-  return new this(x).log(2);
-}
-__name(log2, "log2");
-function log10(x) {
-  return new this(x).log(10);
-}
-__name(log10, "log10");
-function max() {
-  return maxOrMin(this, arguments, "lt");
-}
-__name(max, "max");
-function min() {
-  return maxOrMin(this, arguments, "gt");
-}
-__name(min, "min");
-function mod(x, y) {
-  return new this(x).mod(y);
-}
-__name(mod, "mod");
-function mul(x, y) {
-  return new this(x).mul(y);
-}
-__name(mul, "mul");
-function pow(x, y) {
-  return new this(x).pow(y);
-}
-__name(pow, "pow");
-function random(sd) {
-  var d, e, k, n, i = 0, r = new this(1), rd = [];
-  if (sd === void 0)
-    sd = this.precision;
-  else
-    checkInt32(sd, 1, MAX_DIGITS);
-  k = Math.ceil(sd / LOG_BASE);
-  if (!this.crypto) {
-    for (; i < k; )
-      rd[i++] = Math.random() * 1e7 | 0;
-  } else if (crypto.getRandomValues) {
-    d = crypto.getRandomValues(new Uint32Array(k));
-    for (; i < k; ) {
-      n = d[i];
-      if (n >= 429e7) {
-        d[i] = crypto.getRandomValues(new Uint32Array(1))[0];
-      } else {
-        rd[i++] = n % 1e7;
-      }
-    }
-  } else if (crypto.randomBytes) {
-    d = crypto.randomBytes(k *= 4);
-    for (; i < k; ) {
-      n = d[i] + (d[i + 1] << 8) + (d[i + 2] << 16) + ((d[i + 3] & 127) << 24);
-      if (n >= 214e7) {
-        crypto.randomBytes(4).copy(d, i);
-      } else {
-        rd.push(n % 1e7);
-        i += 4;
-      }
-    }
-    i = k / 4;
-  } else {
-    throw Error(cryptoUnavailable);
-  }
-  k = rd[--i];
-  sd %= LOG_BASE;
-  if (k && sd) {
-    n = mathpow(10, LOG_BASE - sd);
-    rd[i] = (k / n | 0) * n;
-  }
-  for (; rd[i] === 0; i--)
-    rd.pop();
-  if (i < 0) {
-    e = 0;
-    rd = [0];
-  } else {
-    e = -1;
-    for (; rd[0] === 0; e -= LOG_BASE)
-      rd.shift();
-    for (k = 1, n = rd[0]; n >= 10; n /= 10)
-      k++;
-    if (k < LOG_BASE)
-      e -= LOG_BASE - k;
-  }
-  r.e = e;
-  r.d = rd;
-  return r;
-}
-__name(random, "random");
-function round(x) {
-  return finalise(x = new this(x), x.e + 1, this.rounding);
-}
-__name(round, "round");
-function sign(x) {
-  x = new this(x);
-  return x.d ? x.d[0] ? x.s : 0 * x.s : x.s || NaN;
-}
-__name(sign, "sign");
-function sin(x) {
-  return new this(x).sin();
-}
-__name(sin, "sin");
-function sinh(x) {
-  return new this(x).sinh();
-}
-__name(sinh, "sinh");
-function sqrt(x) {
-  return new this(x).sqrt();
-}
-__name(sqrt, "sqrt");
-function sub(x, y) {
-  return new this(x).sub(y);
-}
-__name(sub, "sub");
-function sum() {
-  var i = 0, args = arguments, x = new this(args[i]);
-  external = false;
-  for (; x.s && ++i < args.length; )
-    x = x.plus(args[i]);
-  external = true;
-  return finalise(x, this.precision, this.rounding);
-}
-__name(sum, "sum");
-function tan(x) {
-  return new this(x).tan();
-}
-__name(tan, "tan");
-function tanh(x) {
-  return new this(x).tanh();
-}
-__name(tanh, "tanh");
-function trunc(x) {
-  return finalise(x = new this(x), x.e + 1, 1);
-}
-__name(trunc, "trunc");
-P[Symbol.for("nodejs.util.inspect.custom")] = P.toString;
-P[Symbol.toStringTag] = "Decimal";
-var Decimal = P.constructor = clone(DEFAULTS);
-LN10 = new Decimal(LN10);
-PI = new Decimal(PI);
-var decimal_default = Decimal;
+// src/runtime/core/types/index.ts
+var types_exports = {};
+__export(types_exports, {
+  Extensions: () => Extensions_exports,
+  Utils: () => Utils_exports
+});
 
-// src/runtime/utils/common.ts
-var import_indent_string = __toESM(require_indent_string());
-var import_js_levenshtein = __toESM(require_js_levenshtein());
+// src/runtime/core/types/Extensions.ts
+var Extensions_exports = {};
 
-// src/runtime/core/model/FieldRef.ts
-var FieldRefImpl = class {
-  constructor(modelName, name, fieldType, isList) {
-    this.modelName = modelName;
-    this.name = name;
-    this.typeName = fieldType;
-    this.isList = isList;
-  }
-  _toGraphQLInputType() {
-    const prefix = this.isList ? `List${this.typeName}` : this.typeName;
-    return `${prefix}FieldRefInput<${this.modelName}>`;
-  }
-};
-__name(FieldRefImpl, "FieldRefImpl");
-
-// src/runtime/object-enums.ts
-var objectEnumNames = ["JsonNullValueInput", "NullableJsonNullValueInput", "JsonNullValueFilter"];
-var secret = Symbol();
-var representations = /* @__PURE__ */ new WeakMap();
-var ObjectEnumValue = class {
-  constructor(arg2) {
-    if (arg2 === secret) {
-      representations.set(this, `Prisma.${this._getName()}`);
-    } else {
-      representations.set(this, `new Prisma.${this._getNamespace()}.${this._getName()}()`);
-    }
-  }
-  _getName() {
-    return this.constructor.name;
-  }
-  toString() {
-    return representations.get(this);
-  }
-};
-__name(ObjectEnumValue, "ObjectEnumValue");
-var NullTypesEnumValue = class extends ObjectEnumValue {
-  _getNamespace() {
-    return "NullTypes";
-  }
-};
-__name(NullTypesEnumValue, "NullTypesEnumValue");
-var DbNull = class extends NullTypesEnumValue {
-};
-__name(DbNull, "DbNull");
-var JsonNull = class extends NullTypesEnumValue {
-};
-__name(JsonNull, "JsonNull");
-var AnyNull = class extends NullTypesEnumValue {
-};
-__name(AnyNull, "AnyNull");
-var objectEnumValues = {
-  classes: {
-    DbNull,
-    JsonNull,
-    AnyNull
-  },
-  instances: {
-    DbNull: new DbNull(secret),
-    JsonNull: new JsonNull(secret),
-    AnyNull: new AnyNull(secret)
-  }
-};
-
-// src/runtime/utils/decimalJsLike.ts
-function isDecimalJsLike(value) {
-  if (Decimal.isDecimal(value)) {
-    return true;
-  }
-  return value !== null && typeof value === "object" && typeof value.s === "number" && typeof value.e === "number" && Array.isArray(value.d);
-}
-__name(isDecimalJsLike, "isDecimalJsLike");
-function stringifyDecimalJsLike(value) {
-  if (Decimal.isDecimal(value)) {
-    return JSON.stringify(String(value));
-  }
-  const tmpDecimal = new Decimal(0);
-  tmpDecimal.d = value.d;
-  tmpDecimal.e = value.e;
-  tmpDecimal.s = value.s;
-  return JSON.stringify(String(tmpDecimal));
-}
-__name(stringifyDecimalJsLike, "stringifyDecimalJsLike");
-
-// src/runtime/utils/common.ts
-var keyBy = /* @__PURE__ */ __name((collection, prop) => {
-  const acc = {};
-  for (const obj of collection) {
-    const key = obj[prop];
-    acc[key] = obj;
-  }
-  return acc;
-}, "keyBy");
-var ScalarTypeTable = {
-  String: true,
-  Int: true,
-  Float: true,
-  Boolean: true,
-  Long: true,
-  DateTime: true,
-  ID: true,
-  UUID: true,
-  Json: true,
-  Bytes: true,
-  Decimal: true,
-  BigInt: true
-};
-var JSTypeToGraphQLType = {
-  string: "String",
-  boolean: "Boolean",
-  object: "Json",
-  symbol: "Symbol"
-};
-function stringifyGraphQLType(type) {
-  if (typeof type === "string") {
-    return type;
-  }
-  return type.name;
-}
-__name(stringifyGraphQLType, "stringifyGraphQLType");
-function wrapWithList(str, isList) {
-  if (isList) {
-    return `List<${str}>`;
-  }
-  return str;
-}
-__name(wrapWithList, "wrapWithList");
-var RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60))(\.\d{1,})?(([Z])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
-var UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-function getGraphQLType(value, inputType) {
-  const potentialType = inputType == null ? void 0 : inputType.type;
-  if (value === null) {
-    return "null";
-  }
-  if (Object.prototype.toString.call(value) === "[object BigInt]") {
-    return "BigInt";
-  }
-  if (decimal_default.isDecimal(value)) {
-    return "Decimal";
-  }
-  if (potentialType === "Decimal" && isDecimalJsLike(value)) {
-    return "Decimal";
-  }
-  if (Buffer.isBuffer(value)) {
-    return "Bytes";
-  }
-  if (isValidEnumValue(value, inputType)) {
-    return potentialType.name;
-  }
-  if (value instanceof ObjectEnumValue) {
-    return value._getName();
-  }
-  if (value instanceof FieldRefImpl) {
-    return value._toGraphQLInputType();
-  }
-  if (Array.isArray(value)) {
-    let scalarTypes = value.reduce((acc, val) => {
-      const type = getGraphQLType(val, inputType);
-      if (!acc.includes(type)) {
-        acc.push(type);
-      }
-      return acc;
-    }, []);
-    if (scalarTypes.includes("Float") && scalarTypes.includes("Int")) {
-      scalarTypes = ["Float"];
-    }
-    return `List<${scalarTypes.join(" | ")}>`;
-  }
-  const jsType = typeof value;
-  if (jsType === "number") {
-    if (Math.trunc(value) === value) {
-      return "Int";
-    } else {
-      return "Float";
-    }
-  }
-  if (Object.prototype.toString.call(value) === "[object Date]") {
-    return "DateTime";
-  }
-  if (jsType === "string") {
-    if (UUID_REGEX.test(value)) {
-      return "UUID";
-    }
-    const date = new Date(value);
-    if (date.toString() === "Invalid Date") {
-      return "String";
-    }
-    if (RFC_3339_REGEX.test(value)) {
-      return "DateTime";
-    }
-  }
-  return JSTypeToGraphQLType[jsType];
-}
-__name(getGraphQLType, "getGraphQLType");
-function isValidEnumValue(value, inputType) {
-  var _a3;
-  const enumType = inputType == null ? void 0 : inputType.type;
-  if (!isSchemaEnum(enumType)) {
-    return false;
-  }
-  if ((inputType == null ? void 0 : inputType.namespace) === "prisma" && objectEnumNames.includes(enumType.name)) {
-    const name = (_a3 = value == null ? void 0 : value.constructor) == null ? void 0 : _a3.name;
-    return typeof name === "string" && objectEnumValues.instances[name] === value && enumType.values.includes(name);
-  }
-  return typeof value === "string" && enumType.values.includes(value);
-}
-__name(isValidEnumValue, "isValidEnumValue");
-function getSuggestion(str, possibilities) {
-  const bestMatch = possibilities.reduce(
-    (acc, curr) => {
-      const distance = (0, import_js_levenshtein.default)(str, curr);
-      if (distance < acc.distance) {
-        return {
-          distance,
-          str: curr
-        };
-      }
-      return acc;
-    },
-    {
-      distance: Math.min(Math.floor(str.length) * 1.1, ...possibilities.map((p) => p.length * 3)),
-      str: null
-    }
-  );
-  return bestMatch.str;
-}
-__name(getSuggestion, "getSuggestion");
-function stringifyInputType(input, greenKeys = false) {
-  if (typeof input === "string") {
-    return input;
-  }
-  if (input.values) {
-    return `enum ${input.name} {
-${(0, import_indent_string.default)(input.values.join(", "), 2)}
-}`;
-  } else {
-    const body = (0, import_indent_string.default)(
-      input.fields.map((arg2) => {
-        const key = `${arg2.name}`;
-        const str = `${greenKeys ? import_chalk.default.green(key) : key}${arg2.isRequired ? "" : "?"}: ${import_chalk.default.white(
-          arg2.inputTypes.map((argType) => {
-            return wrapWithList(
-              argIsInputType(argType.type) ? argType.type.name : stringifyGraphQLType(argType.type),
-              argType.isList
-            );
-          }).join(" | ")
-        )}`;
-        if (!arg2.isRequired) {
-          return import_chalk.default.dim(str);
-        }
-        return str;
-      }).join("\n"),
-      2
-    );
-    return `${import_chalk.default.dim("type")} ${import_chalk.default.bold.dim(input.name)} ${import_chalk.default.dim("{")}
-${body}
-${import_chalk.default.dim("}")}`;
-  }
-}
-__name(stringifyInputType, "stringifyInputType");
-function argIsInputType(arg2) {
-  if (typeof arg2 === "string") {
-    return false;
-  }
-  return true;
-}
-__name(argIsInputType, "argIsInputType");
-function getInputTypeName(input) {
-  if (typeof input === "string") {
-    if (input === "Null") {
-      return "null";
-    }
-    return input;
-  }
-  return input.name;
-}
-__name(getInputTypeName, "getInputTypeName");
-function getOutputTypeName(input) {
-  if (typeof input === "string") {
-    return input;
-  }
-  return input.name;
-}
-__name(getOutputTypeName, "getOutputTypeName");
-function inputTypeToJson(input, isRequired, nameOnly = false) {
-  if (typeof input === "string") {
-    if (input === "Null") {
-      return "null";
-    }
-    return input;
-  }
-  if (input.values) {
-    return input.values.join(" | ");
-  }
-  const inputType = input;
-  const showDeepType = isRequired && inputType.fields.every(
-    (arg2) => {
-      var _a3;
-      return arg2.inputTypes[0].location === "inputObjectTypes" || ((_a3 = arg2.inputTypes[1]) == null ? void 0 : _a3.location) === "inputObjectTypes";
-    }
-  );
-  if (nameOnly) {
-    return getInputTypeName(input);
-  }
-  return inputType.fields.reduce((acc, curr) => {
-    let str = "";
-    if (!showDeepType && !curr.isRequired) {
-      str = curr.inputTypes.map((argType) => getInputTypeName(argType.type)).join(" | ");
-    } else {
-      str = curr.inputTypes.map((argInputType) => inputTypeToJson(argInputType.type, curr.isRequired, true)).join(" | ");
-    }
-    acc[curr.name + (curr.isRequired ? "" : "?")] = str;
-    return acc;
-  }, {});
-}
-__name(inputTypeToJson, "inputTypeToJson");
-function unionBy(arr1, arr2, iteratee) {
-  const map = {};
-  for (const element of arr1) {
-    map[iteratee(element)] = element;
-  }
-  for (const element of arr2) {
-    const key = iteratee(element);
-    if (!map[key]) {
-      map[key] = element;
-    }
-  }
-  return Object.values(map);
-}
-__name(unionBy, "unionBy");
-function lowerCase(name) {
-  return name.substring(0, 1).toLowerCase() + name.substring(1);
-}
-__name(lowerCase, "lowerCase");
-function isGroupByOutputName(type) {
-  return type.endsWith("GroupByOutputType");
-}
-__name(isGroupByOutputName, "isGroupByOutputName");
-function isSchemaEnum(type) {
-  return typeof type === "object" && type !== null && typeof type.name === "string" && Array.isArray(type.values);
-}
-__name(isSchemaEnum, "isSchemaEnum");
-
-// src/runtime/dmmf.ts
-var DMMFDatamodelHelper = class {
-  constructor({ datamodel }) {
-    this.datamodel = datamodel;
-    this.datamodelEnumMap = this.getDatamodelEnumMap();
-    this.modelMap = this.getModelMap();
-    this.typeMap = this.getTypeMap();
-    this.typeAndModelMap = this.getTypeModelMap();
-  }
-  getDatamodelEnumMap() {
-    return keyBy(this.datamodel.enums, "name");
-  }
-  getModelMap() {
-    return { ...keyBy(this.datamodel.models, "name") };
-  }
-  getTypeMap() {
-    return { ...keyBy(this.datamodel.types, "name") };
-  }
-  getTypeModelMap() {
-    return { ...this.getTypeMap(), ...this.getModelMap() };
-  }
-};
-__name(DMMFDatamodelHelper, "DMMFDatamodelHelper");
-var DMMFMappingsHelper = class {
-  constructor({ mappings }) {
-    this.mappings = mappings;
-    this.mappingsMap = this.getMappingsMap();
-  }
-  getMappingsMap() {
-    return keyBy(this.mappings.modelOperations, "model");
-  }
-};
-__name(DMMFMappingsHelper, "DMMFMappingsHelper");
-var DMMFSchemaHelper = class {
-  constructor({ schema }) {
-    this.outputTypeToMergedOutputType = /* @__PURE__ */ __name((outputType) => {
-      return {
-        ...outputType,
-        fields: outputType.fields
-      };
-    }, "outputTypeToMergedOutputType");
-    this.schema = schema;
-    this.enumMap = this.getEnumMap();
-    this.queryType = this.getQueryType();
-    this.mutationType = this.getMutationType();
-    this.outputTypes = this.getOutputTypes();
-    this.outputTypeMap = this.getMergedOutputTypeMap();
-    this.resolveOutputTypes();
-    this.inputObjectTypes = this.schema.inputObjectTypes;
-    this.inputTypeMap = this.getInputTypeMap();
-    this.resolveInputTypes();
-    this.resolveFieldArgumentTypes();
-    this.queryType = this.outputTypeMap.Query;
-    this.mutationType = this.outputTypeMap.Mutation;
-    this.rootFieldMap = this.getRootFieldMap();
-  }
-  get [Symbol.toStringTag]() {
-    return "DMMFClass";
-  }
-  resolveOutputTypes() {
-    for (const type of this.outputTypes.model) {
-      for (const field of type.fields) {
-        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
-          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
-        }
-      }
-      type.fieldMap = keyBy(type.fields, "name");
-    }
-    for (const type of this.outputTypes.prisma) {
-      for (const field of type.fields) {
-        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
-          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
-        }
-      }
-      type.fieldMap = keyBy(type.fields, "name");
-    }
-  }
-  resolveInputTypes() {
-    const inputTypes = this.inputObjectTypes.prisma;
-    if (this.inputObjectTypes.model) {
-      inputTypes.push(...this.inputObjectTypes.model);
-    }
-    for (const type of inputTypes) {
-      for (const field of type.fields) {
-        for (const fieldInputType of field.inputTypes) {
-          const fieldType = fieldInputType.type;
-          if (typeof fieldType === "string" && !ScalarTypeTable[fieldType] && (this.inputTypeMap[fieldType] || this.enumMap[fieldType])) {
-            fieldInputType.type = this.inputTypeMap[fieldType] || this.enumMap[fieldType] || fieldType;
-          }
-        }
-      }
-      type.fieldMap = keyBy(type.fields, "name");
-    }
-  }
-  resolveFieldArgumentTypes() {
-    for (const type of this.outputTypes.prisma) {
-      for (const field of type.fields) {
-        for (const arg2 of field.args) {
-          for (const argInputType of arg2.inputTypes) {
-            const argType = argInputType.type;
-            if (typeof argType === "string" && !ScalarTypeTable[argType]) {
-              argInputType.type = this.inputTypeMap[argType] || this.enumMap[argType] || argType;
-            }
-          }
-        }
-      }
-    }
-    for (const type of this.outputTypes.model) {
-      for (const field of type.fields) {
-        for (const arg2 of field.args) {
-          for (const argInputType of arg2.inputTypes) {
-            const argType = argInputType.type;
-            if (typeof argType === "string" && !ScalarTypeTable[argType]) {
-              argInputType.type = this.inputTypeMap[argType] || this.enumMap[argType] || argInputType.type;
-            }
-          }
-        }
-      }
-    }
-  }
-  getQueryType() {
-    return this.schema.outputObjectTypes.prisma.find((t) => t.name === "Query");
-  }
-  getMutationType() {
-    return this.schema.outputObjectTypes.prisma.find((t) => t.name === "Mutation");
-  }
-  getOutputTypes() {
-    return {
-      model: this.schema.outputObjectTypes.model.map(this.outputTypeToMergedOutputType),
-      prisma: this.schema.outputObjectTypes.prisma.map(this.outputTypeToMergedOutputType)
-    };
-  }
-  getEnumMap() {
-    return {
-      ...keyBy(this.schema.enumTypes.prisma, "name"),
-      ...this.schema.enumTypes.model ? keyBy(this.schema.enumTypes.model, "name") : void 0
-    };
-  }
-  hasEnumInNamespace(enumName, namespace) {
-    var _a3;
-    return ((_a3 = this.schema.enumTypes[namespace]) == null ? void 0 : _a3.find((schemaEnum) => schemaEnum.name === enumName)) !== void 0;
-  }
-  getMergedOutputTypeMap() {
-    return {
-      ...keyBy(this.outputTypes.model, "name"),
-      ...keyBy(this.outputTypes.prisma, "name")
-    };
-  }
-  getInputTypeMap() {
-    return {
-      ...this.schema.inputObjectTypes.model ? keyBy(this.schema.inputObjectTypes.model, "name") : void 0,
-      ...keyBy(this.schema.inputObjectTypes.prisma, "name")
-    };
-  }
-  getRootFieldMap() {
-    return { ...keyBy(this.queryType.fields, "name"), ...keyBy(this.mutationType.fields, "name") };
-  }
-};
-__name(DMMFSchemaHelper, "DMMFSchemaHelper");
-var BaseDMMFHelper = class {
-  constructor(dmmf) {
-    return Object.assign(this, new DMMFDatamodelHelper(dmmf), new DMMFMappingsHelper(dmmf));
-  }
-};
-__name(BaseDMMFHelper, "BaseDMMFHelper");
-applyMixins(BaseDMMFHelper, [DMMFDatamodelHelper, DMMFMappingsHelper]);
-var DMMFHelper = class {
-  constructor(dmmf) {
-    return Object.assign(this, new BaseDMMFHelper(dmmf), new DMMFSchemaHelper(dmmf));
-  }
-};
-__name(DMMFHelper, "DMMFHelper");
-applyMixins(DMMFHelper, [BaseDMMFHelper, DMMFSchemaHelper]);
-
-// ../generator-helper/src/dmmf.ts
-var DMMF;
-((DMMF2) => {
-  let ModelAction;
-  ((ModelAction2) => {
-    ModelAction2["findUnique"] = "findUnique";
-    ModelAction2["findFirst"] = "findFirst";
-    ModelAction2["findMany"] = "findMany";
-    ModelAction2["create"] = "create";
-    ModelAction2["createMany"] = "createMany";
-    ModelAction2["update"] = "update";
-    ModelAction2["updateMany"] = "updateMany";
-    ModelAction2["upsert"] = "upsert";
-    ModelAction2["delete"] = "delete";
-    ModelAction2["deleteMany"] = "deleteMany";
-    ModelAction2["groupBy"] = "groupBy";
-    ModelAction2["count"] = "count";
-    ModelAction2["aggregate"] = "aggregate";
-    ModelAction2["findRaw"] = "findRaw";
-    ModelAction2["aggregateRaw"] = "aggregateRaw";
-  })(ModelAction = DMMF2.ModelAction || (DMMF2.ModelAction = {}));
-})(DMMF || (DMMF = {}));
+// src/runtime/core/types/Utils.ts
+var Utils_exports = {};
 
 // ../debug/src/index.ts
 var import_debug = __toESM(require_src());
@@ -18905,947 +19987,184 @@ function getLogs(numChars = 7500) {
   return output.slice(-numChars);
 }
 __name(getLogs, "getLogs");
+function clearLogs() {
+  debugArgsHistory.length = 0;
+}
+__name(clearLogs, "clearLogs");
 var src_default = Debug;
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/platform/node/globalThis.js
-var _globalThis = typeof globalThis === "object" ? globalThis : global;
+// ../internals/src/utils/tryLoadEnvs.ts
+var import_chalk = __toESM(require_source());
+var import_dotenv = __toESM(require_main2());
+var import_fs = __toESM(require("fs"));
+var import_path = __toESM(require("path"));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/version.js
-var VERSION = "1.2.0";
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/internal/semver.js
-var re = /^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;
-function _makeCompatibilityCheck(ownVersion) {
-  var acceptedVersions = /* @__PURE__ */ new Set([ownVersion]);
-  var rejectedVersions = /* @__PURE__ */ new Set();
-  var myVersionMatch = ownVersion.match(re);
-  if (!myVersionMatch) {
-    return function() {
-      return false;
-    };
-  }
-  var ownVersionParsed = {
-    major: +myVersionMatch[1],
-    minor: +myVersionMatch[2],
-    patch: +myVersionMatch[3],
-    prerelease: myVersionMatch[4]
-  };
-  if (ownVersionParsed.prerelease != null) {
-    return /* @__PURE__ */ __name(function isExactmatch(globalVersion) {
-      return globalVersion === ownVersion;
-    }, "isExactmatch");
-  }
-  function _reject(v) {
-    rejectedVersions.add(v);
-    return false;
-  }
-  __name(_reject, "_reject");
-  function _accept(v) {
-    acceptedVersions.add(v);
-    return true;
-  }
-  __name(_accept, "_accept");
-  return /* @__PURE__ */ __name(function isCompatible3(globalVersion) {
-    if (acceptedVersions.has(globalVersion)) {
-      return true;
-    }
-    if (rejectedVersions.has(globalVersion)) {
-      return false;
-    }
-    var globalVersionMatch = globalVersion.match(re);
-    if (!globalVersionMatch) {
-      return _reject(globalVersion);
-    }
-    var globalVersionParsed = {
-      major: +globalVersionMatch[1],
-      minor: +globalVersionMatch[2],
-      patch: +globalVersionMatch[3],
-      prerelease: globalVersionMatch[4]
-    };
-    if (globalVersionParsed.prerelease != null) {
-      return _reject(globalVersion);
-    }
-    if (ownVersionParsed.major !== globalVersionParsed.major) {
-      return _reject(globalVersion);
-    }
-    if (ownVersionParsed.major === 0) {
-      if (ownVersionParsed.minor === globalVersionParsed.minor && ownVersionParsed.patch <= globalVersionParsed.patch) {
-        return _accept(globalVersion);
+// ../internals/src/dotenvExpand.ts
+function dotenvExpand(config2) {
+  const environment = config2.ignoreProcessEnv ? {} : process.env;
+  const interpolate = /* @__PURE__ */ __name((envValue) => {
+    const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g) || [];
+    return matches.reduce(function(newEnv, match) {
+      const parts = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(match);
+      if (!parts) {
+        return newEnv;
       }
-      return _reject(globalVersion);
-    }
-    if (ownVersionParsed.minor <= globalVersionParsed.minor) {
-      return _accept(globalVersion);
-    }
-    return _reject(globalVersion);
-  }, "isCompatible");
+      const prefix = parts[1];
+      let value, replacePart;
+      if (prefix === "\\") {
+        replacePart = parts[0];
+        value = replacePart.replace("\\$", "$");
+      } else {
+        const key = parts[2];
+        replacePart = parts[0].substring(prefix.length);
+        value = Object.hasOwnProperty.call(environment, key) ? environment[key] : config2.parsed[key] || "";
+        value = interpolate(value);
+      }
+      return newEnv.replace(replacePart, value);
+    }, envValue);
+  }, "interpolate");
+  for (const configKey in config2.parsed) {
+    const value = Object.hasOwnProperty.call(environment, configKey) ? environment[configKey] : config2.parsed[configKey];
+    config2.parsed[configKey] = interpolate(value);
+  }
+  for (const processKey in config2.parsed) {
+    environment[processKey] = config2.parsed[processKey];
+  }
+  return config2;
 }
-__name(_makeCompatibilityCheck, "_makeCompatibilityCheck");
-var isCompatible = _makeCompatibilityCheck(VERSION);
+__name(dotenvExpand, "dotenvExpand");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/internal/global-utils.js
-var major = VERSION.split(".")[0];
-var GLOBAL_OPENTELEMETRY_API_KEY = Symbol.for("opentelemetry.js.api." + major);
-var _global = _globalThis;
-function registerGlobal(type, instance, diag5, allowOverride) {
-  var _a3;
-  if (allowOverride === void 0) {
-    allowOverride = false;
-  }
-  var api = _global[GLOBAL_OPENTELEMETRY_API_KEY] = (_a3 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) !== null && _a3 !== void 0 ? _a3 : {
-    version: VERSION
-  };
-  if (!allowOverride && api[type]) {
-    var err = new Error("@opentelemetry/api: Attempted duplicate registration of API: " + type);
-    diag5.error(err.stack || err.message);
-    return false;
-  }
-  if (api.version !== VERSION) {
-    var err = new Error("@opentelemetry/api: All API registration versions must match");
-    diag5.error(err.stack || err.message);
-    return false;
-  }
-  api[type] = instance;
-  diag5.debug("@opentelemetry/api: Registered a global for " + type + " v" + VERSION + ".");
-  return true;
-}
-__name(registerGlobal, "registerGlobal");
-function getGlobal(type) {
+// ../internals/src/utils/tryLoadEnvs.ts
+var debug2 = src_default("prisma:tryLoadEnv");
+function tryLoadEnvs({
+  rootEnvPath,
+  schemaEnvPath
+}, opts = {
+  conflictCheck: "none"
+}) {
   var _a3, _b2;
-  var globalVersion = (_a3 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _a3 === void 0 ? void 0 : _a3.version;
-  if (!globalVersion || !isCompatible(globalVersion)) {
-    return;
+  const rootEnvInfo = loadEnv(rootEnvPath);
+  if (opts.conflictCheck !== "none") {
+    checkForConflicts(rootEnvInfo, schemaEnvPath, opts.conflictCheck);
   }
-  return (_b2 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _b2 === void 0 ? void 0 : _b2[type];
-}
-__name(getGlobal, "getGlobal");
-function unregisterGlobal(type, diag5) {
-  diag5.debug("@opentelemetry/api: Unregistering a global for " + type + " v" + VERSION + ".");
-  var api = _global[GLOBAL_OPENTELEMETRY_API_KEY];
-  if (api) {
-    delete api[type];
+  let schemaEnvInfo = null;
+  if (!pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, schemaEnvPath)) {
+    schemaEnvInfo = loadEnv(schemaEnvPath);
   }
-}
-__name(unregisterGlobal, "unregisterGlobal");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/ComponentLogger.js
-var DiagComponentLogger = function() {
-  function DiagComponentLogger3(props) {
-    this._namespace = props.namespace || "DiagComponentLogger";
+  if (!rootEnvInfo && !schemaEnvInfo) {
+    debug2("No Environment variables loaded");
   }
-  __name(DiagComponentLogger3, "DiagComponentLogger");
-  DiagComponentLogger3.prototype.debug = function() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      args[_i] = arguments[_i];
-    }
-    return logProxy("debug", this._namespace, args);
-  };
-  DiagComponentLogger3.prototype.error = function() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      args[_i] = arguments[_i];
-    }
-    return logProxy("error", this._namespace, args);
-  };
-  DiagComponentLogger3.prototype.info = function() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      args[_i] = arguments[_i];
-    }
-    return logProxy("info", this._namespace, args);
-  };
-  DiagComponentLogger3.prototype.warn = function() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      args[_i] = arguments[_i];
-    }
-    return logProxy("warn", this._namespace, args);
-  };
-  DiagComponentLogger3.prototype.verbose = function() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      args[_i] = arguments[_i];
-    }
-    return logProxy("verbose", this._namespace, args);
-  };
-  return DiagComponentLogger3;
-}();
-function logProxy(funcName, namespace, args) {
-  var logger2 = getGlobal("diag");
-  if (!logger2) {
-    return;
+  if (schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult.error) {
+    return console.error(import_chalk.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
   }
-  args.unshift(namespace);
-  return logger2[funcName].apply(logger2, args);
-}
-__name(logProxy, "logProxy");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/types.js
-var DiagLogLevel;
-(function(DiagLogLevel3) {
-  DiagLogLevel3[DiagLogLevel3["NONE"] = 0] = "NONE";
-  DiagLogLevel3[DiagLogLevel3["ERROR"] = 30] = "ERROR";
-  DiagLogLevel3[DiagLogLevel3["WARN"] = 50] = "WARN";
-  DiagLogLevel3[DiagLogLevel3["INFO"] = 60] = "INFO";
-  DiagLogLevel3[DiagLogLevel3["DEBUG"] = 70] = "DEBUG";
-  DiagLogLevel3[DiagLogLevel3["VERBOSE"] = 80] = "VERBOSE";
-  DiagLogLevel3[DiagLogLevel3["ALL"] = 9999] = "ALL";
-})(DiagLogLevel || (DiagLogLevel = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/internal/logLevelLogger.js
-function createLogLevelDiagLogger(maxLevel, logger2) {
-  if (maxLevel < DiagLogLevel.NONE) {
-    maxLevel = DiagLogLevel.NONE;
-  } else if (maxLevel > DiagLogLevel.ALL) {
-    maxLevel = DiagLogLevel.ALL;
-  }
-  logger2 = logger2 || {};
-  function _filterFunc(funcName, theLevel) {
-    var theFunc = logger2[funcName];
-    if (typeof theFunc === "function" && maxLevel >= theLevel) {
-      return theFunc.bind(logger2);
-    }
-    return function() {
-    };
-  }
-  __name(_filterFunc, "_filterFunc");
+  const messages = [rootEnvInfo == null ? void 0 : rootEnvInfo.message, schemaEnvInfo == null ? void 0 : schemaEnvInfo.message].filter(Boolean);
   return {
-    error: _filterFunc("error", DiagLogLevel.ERROR),
-    warn: _filterFunc("warn", DiagLogLevel.WARN),
-    info: _filterFunc("info", DiagLogLevel.INFO),
-    debug: _filterFunc("debug", DiagLogLevel.DEBUG),
-    verbose: _filterFunc("verbose", DiagLogLevel.VERBOSE)
+    message: messages.join("\n"),
+    parsed: {
+      ...(_a3 = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult) == null ? void 0 : _a3.parsed,
+      ...(_b2 = schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult) == null ? void 0 : _b2.parsed
+    }
   };
 }
-__name(createLogLevelDiagLogger, "createLogLevelDiagLogger");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/diag.js
-var API_NAME = "diag";
-var DiagAPI = function() {
-  function DiagAPI3() {
-    function _logProxy(funcName) {
-      return function() {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-          args[_i] = arguments[_i];
-        }
-        var logger2 = getGlobal("diag");
-        if (!logger2)
-          return;
-        return logger2[funcName].apply(logger2, args);
-      };
-    }
-    __name(_logProxy, "_logProxy");
-    var self2 = this;
-    self2.setLogger = function(logger2, logLevel) {
-      var _a3, _b2;
-      if (logLevel === void 0) {
-        logLevel = DiagLogLevel.INFO;
+__name(tryLoadEnvs, "tryLoadEnvs");
+function checkForConflicts(rootEnvInfo, envPath, type) {
+  const parsedRootEnv = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult.parsed;
+  const areNotTheSame = !pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, envPath);
+  if (parsedRootEnv && envPath && areNotTheSame && import_fs.default.existsSync(envPath)) {
+    const envConfig = import_dotenv.default.parse(import_fs.default.readFileSync(envPath));
+    const conflicts = [];
+    for (const k in envConfig) {
+      if (parsedRootEnv[k] === envConfig[k]) {
+        conflicts.push(k);
       }
-      if (logger2 === self2) {
-        var err = new Error("Cannot use diag as the logger for itself. Please use a DiagLogger implementation like ConsoleDiagLogger or a custom implementation");
-        self2.error((_a3 = err.stack) !== null && _a3 !== void 0 ? _a3 : err.message);
-        return false;
+    }
+    if (conflicts.length > 0) {
+      const relativeRootEnvPath = import_path.default.relative(process.cwd(), rootEnvInfo.path);
+      const relativeEnvPath = import_path.default.relative(process.cwd(), envPath);
+      if (type === "error") {
+        const message = `There is a conflict between env var${conflicts.length > 1 ? "s" : ""} in ${import_chalk.default.underline(
+          relativeRootEnvPath
+        )} and ${import_chalk.default.underline(relativeEnvPath)}
+Conflicting env vars:
+${conflicts.map((conflict) => `  ${import_chalk.default.bold(conflict)}`).join("\n")}
+
+We suggest to move the contents of ${import_chalk.default.underline(relativeEnvPath)} to ${import_chalk.default.underline(
+          relativeRootEnvPath
+        )} to consolidate your env vars.
+`;
+        throw new Error(message);
+      } else if (type === "warn") {
+        const message = `Conflict for env var${conflicts.length > 1 ? "s" : ""} ${conflicts.map((c) => import_chalk.default.bold(c)).join(", ")} in ${import_chalk.default.underline(relativeRootEnvPath)} and ${import_chalk.default.underline(relativeEnvPath)}
+Env vars from ${import_chalk.default.underline(relativeEnvPath)} overwrite the ones from ${import_chalk.default.underline(relativeRootEnvPath)}
+      `;
+        console.warn(`${import_chalk.default.yellow("warn(prisma)")} ${message}`);
       }
-      var oldLogger = getGlobal("diag");
-      var newLogger = createLogLevelDiagLogger(logLevel, logger2);
-      if (oldLogger) {
-        var stack = (_b2 = new Error().stack) !== null && _b2 !== void 0 ? _b2 : "<failed to generate stacktrace>";
-        oldLogger.warn("Current logger will be overwritten from " + stack);
-        newLogger.warn("Current logger will overwrite one already registered from " + stack);
-      }
-      return registerGlobal("diag", newLogger, self2, true);
+    }
+  }
+}
+__name(checkForConflicts, "checkForConflicts");
+function loadEnv(envPath) {
+  if (exists(envPath)) {
+    debug2(`Environment variables loaded from ${envPath}`);
+    return {
+      dotenvResult: dotenvExpand(
+        import_dotenv.default.config({
+          path: envPath,
+          debug: process.env.DOTENV_CONFIG_DEBUG ? true : void 0
+        })
+      ),
+      message: import_chalk.default.dim(`Environment variables loaded from ${import_path.default.relative(process.cwd(), envPath)}`),
+      path: envPath
     };
-    self2.disable = function() {
-      unregisterGlobal(API_NAME, self2);
-    };
-    self2.createComponentLogger = function(options) {
-      return new DiagComponentLogger(options);
-    };
-    self2.verbose = _logProxy("verbose");
-    self2.debug = _logProxy("debug");
-    self2.info = _logProxy("info");
-    self2.warn = _logProxy("warn");
-    self2.error = _logProxy("error");
+  } else {
+    debug2(`Environment variables not found at ${envPath}`);
   }
-  __name(DiagAPI3, "DiagAPI");
-  DiagAPI3.instance = function() {
-    if (!this._instance) {
-      this._instance = new DiagAPI3();
-    }
-    return this._instance;
-  };
-  return DiagAPI3;
-}();
+  return null;
+}
+__name(loadEnv, "loadEnv");
+function pathsEqual(path1, path22) {
+  return path1 && path22 && import_path.default.resolve(path1) === import_path.default.resolve(path22);
+}
+__name(pathsEqual, "pathsEqual");
+function exists(p2) {
+  return Boolean(p2 && import_fs.default.existsSync(p2));
+}
+__name(exists, "exists");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/internal/baggage-impl.js
-var BaggageImpl = function() {
-  function BaggageImpl3(entries) {
-    this._entries = entries ? new Map(entries) : /* @__PURE__ */ new Map();
+// ../internals/src/client/getClientEngineType.ts
+var DEFAULT_CLIENT_ENGINE_TYPE = "library" /* Library */;
+function getClientEngineType(generatorConfig) {
+  const engineTypeFromEnvVar = getEngineTypeFromEnvVar();
+  if (engineTypeFromEnvVar)
+    return engineTypeFromEnvVar;
+  if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "library" /* Library */) {
+    return "library" /* Library */;
+  } else if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "binary" /* Binary */) {
+    return "binary" /* Binary */;
+  } else {
+    return DEFAULT_CLIENT_ENGINE_TYPE;
   }
-  __name(BaggageImpl3, "BaggageImpl");
-  BaggageImpl3.prototype.getEntry = function(key) {
-    var entry = this._entries.get(key);
-    if (!entry) {
-      return void 0;
-    }
-    return Object.assign({}, entry);
-  };
-  BaggageImpl3.prototype.getAllEntries = function() {
-    return Array.from(this._entries.entries()).map(function(_a3) {
-      var k = _a3[0], v = _a3[1];
-      return [k, v];
-    });
-  };
-  BaggageImpl3.prototype.setEntry = function(key, entry) {
-    var newBaggage = new BaggageImpl3(this._entries);
-    newBaggage._entries.set(key, entry);
-    return newBaggage;
-  };
-  BaggageImpl3.prototype.removeEntry = function(key) {
-    var newBaggage = new BaggageImpl3(this._entries);
-    newBaggage._entries.delete(key);
-    return newBaggage;
-  };
-  BaggageImpl3.prototype.removeEntries = function() {
-    var keys2 = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      keys2[_i] = arguments[_i];
-    }
-    var newBaggage = new BaggageImpl3(this._entries);
-    for (var _a3 = 0, keys_1 = keys2; _a3 < keys_1.length; _a3++) {
-      var key = keys_1[_a3];
-      newBaggage._entries.delete(key);
-    }
-    return newBaggage;
-  };
-  BaggageImpl3.prototype.clear = function() {
-    return new BaggageImpl3();
-  };
-  return BaggageImpl3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/internal/symbol.js
-var baggageEntryMetadataSymbol = Symbol("BaggageEntryMetadata");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/utils.js
-var diag = DiagAPI.instance();
-function createBaggage(entries) {
-  if (entries === void 0) {
-    entries = {};
+}
+__name(getClientEngineType, "getClientEngineType");
+function getEngineTypeFromEnvVar() {
+  const engineType = process.env.PRISMA_CLIENT_ENGINE_TYPE;
+  if (engineType === "library" /* Library */) {
+    return "library" /* Library */;
+  } else if (engineType === "binary" /* Binary */) {
+    return "binary" /* Binary */;
+  } else {
+    return void 0;
   }
-  return new BaggageImpl(new Map(Object.entries(entries)));
 }
-__name(createBaggage, "createBaggage");
+__name(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/consoleLogger.js
-var consoleMap = [
-  { n: "error", c: "error" },
-  { n: "warn", c: "warn" },
-  { n: "info", c: "info" },
-  { n: "debug", c: "debug" },
-  { n: "verbose", c: "trace" }
-];
-var DiagConsoleLogger = function() {
-  function DiagConsoleLogger3() {
-    function _consoleFunc(funcName) {
-      return function() {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-          args[_i] = arguments[_i];
-        }
-        if (console) {
-          var theFunc = console[funcName];
-          if (typeof theFunc !== "function") {
-            theFunc = console.log;
-          }
-          if (typeof theFunc === "function") {
-            return theFunc.apply(console, args);
-          }
-        }
-      };
-    }
-    __name(_consoleFunc, "_consoleFunc");
-    for (var i = 0; i < consoleMap.length; i++) {
-      this[consoleMap[i].n] = _consoleFunc(consoleMap[i].c);
-    }
-  }
-  __name(DiagConsoleLogger3, "DiagConsoleLogger");
-  return DiagConsoleLogger3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/propagation/TextMapPropagator.js
-var defaultTextMapGetter = {
-  get: function(carrier, key) {
-    if (carrier == null) {
-      return void 0;
-    }
-    return carrier[key];
-  },
-  keys: function(carrier) {
-    if (carrier == null) {
-      return [];
-    }
-    return Object.keys(carrier);
-  }
-};
-var defaultTextMapSetter = {
-  set: function(carrier, key, value) {
-    if (carrier == null) {
-      return;
-    }
-    carrier[key] = value;
-  }
-};
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/context/context.js
-function createContextKey(description) {
-  return Symbol.for(description);
+// ../internals/src/cli/utils.ts
+var import_arg = __toESM(require_arg());
+var import_strip_indent = __toESM(require_strip_indent());
+function isError(result) {
+  return result instanceof Error;
 }
-__name(createContextKey, "createContextKey");
-var BaseContext = function() {
-  function BaseContext3(parentContext) {
-    var self2 = this;
-    self2._currentContext = parentContext ? new Map(parentContext) : /* @__PURE__ */ new Map();
-    self2.getValue = function(key) {
-      return self2._currentContext.get(key);
-    };
-    self2.setValue = function(key, value) {
-      var context5 = new BaseContext3(self2._currentContext);
-      context5._currentContext.set(key, value);
-      return context5;
-    };
-    self2.deleteValue = function(key) {
-      var context5 = new BaseContext3(self2._currentContext);
-      context5._currentContext.delete(key);
-      return context5;
-    };
-  }
-  __name(BaseContext3, "BaseContext");
-  return BaseContext3;
-}();
-var ROOT_CONTEXT = new BaseContext();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/context/NoopContextManager.js
-var __spreadArray = function(to, from) {
-  for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-    to[j] = from[i];
-  return to;
-};
-var NoopContextManager = function() {
-  function NoopContextManager3() {
-  }
-  __name(NoopContextManager3, "NoopContextManager");
-  NoopContextManager3.prototype.active = function() {
-    return ROOT_CONTEXT;
-  };
-  NoopContextManager3.prototype.with = function(_context, fn, thisArg) {
-    var args = [];
-    for (var _i = 3; _i < arguments.length; _i++) {
-      args[_i - 3] = arguments[_i];
-    }
-    return fn.call.apply(fn, __spreadArray([thisArg], args));
-  };
-  NoopContextManager3.prototype.bind = function(_context, target) {
-    return target;
-  };
-  NoopContextManager3.prototype.enable = function() {
-    return this;
-  };
-  NoopContextManager3.prototype.disable = function() {
-    return this;
-  };
-  return NoopContextManager3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/context.js
-var __spreadArray2 = function(to, from) {
-  for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-    to[j] = from[i];
-  return to;
-};
-var API_NAME2 = "context";
-var NOOP_CONTEXT_MANAGER = new NoopContextManager();
-var ContextAPI = function() {
-  function ContextAPI3() {
-  }
-  __name(ContextAPI3, "ContextAPI");
-  ContextAPI3.getInstance = function() {
-    if (!this._instance) {
-      this._instance = new ContextAPI3();
-    }
-    return this._instance;
-  };
-  ContextAPI3.prototype.setGlobalContextManager = function(contextManager) {
-    return registerGlobal(API_NAME2, contextManager, DiagAPI.instance());
-  };
-  ContextAPI3.prototype.active = function() {
-    return this._getContextManager().active();
-  };
-  ContextAPI3.prototype.with = function(context5, fn, thisArg) {
-    var _a3;
-    var args = [];
-    for (var _i = 3; _i < arguments.length; _i++) {
-      args[_i - 3] = arguments[_i];
-    }
-    return (_a3 = this._getContextManager()).with.apply(_a3, __spreadArray2([context5, fn, thisArg], args));
-  };
-  ContextAPI3.prototype.bind = function(context5, target) {
-    return this._getContextManager().bind(context5, target);
-  };
-  ContextAPI3.prototype._getContextManager = function() {
-    return getGlobal(API_NAME2) || NOOP_CONTEXT_MANAGER;
-  };
-  ContextAPI3.prototype.disable = function() {
-    this._getContextManager().disable();
-    unregisterGlobal(API_NAME2, DiagAPI.instance());
-  };
-  return ContextAPI3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/trace_flags.js
-var TraceFlags;
-(function(TraceFlags3) {
-  TraceFlags3[TraceFlags3["NONE"] = 0] = "NONE";
-  TraceFlags3[TraceFlags3["SAMPLED"] = 1] = "SAMPLED";
-})(TraceFlags || (TraceFlags = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/invalid-span-constants.js
-var INVALID_SPANID = "0000000000000000";
-var INVALID_TRACEID = "00000000000000000000000000000000";
-var INVALID_SPAN_CONTEXT = {
-  traceId: INVALID_TRACEID,
-  spanId: INVALID_SPANID,
-  traceFlags: TraceFlags.NONE
-};
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NonRecordingSpan.js
-var NonRecordingSpan = function() {
-  function NonRecordingSpan3(_spanContext) {
-    if (_spanContext === void 0) {
-      _spanContext = INVALID_SPAN_CONTEXT;
-    }
-    this._spanContext = _spanContext;
-  }
-  __name(NonRecordingSpan3, "NonRecordingSpan");
-  NonRecordingSpan3.prototype.spanContext = function() {
-    return this._spanContext;
-  };
-  NonRecordingSpan3.prototype.setAttribute = function(_key, _value) {
-    return this;
-  };
-  NonRecordingSpan3.prototype.setAttributes = function(_attributes) {
-    return this;
-  };
-  NonRecordingSpan3.prototype.addEvent = function(_name, _attributes) {
-    return this;
-  };
-  NonRecordingSpan3.prototype.setStatus = function(_status) {
-    return this;
-  };
-  NonRecordingSpan3.prototype.updateName = function(_name) {
-    return this;
-  };
-  NonRecordingSpan3.prototype.end = function(_endTime) {
-  };
-  NonRecordingSpan3.prototype.isRecording = function() {
-    return false;
-  };
-  NonRecordingSpan3.prototype.recordException = function(_exception, _time) {
-  };
-  return NonRecordingSpan3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/context-utils.js
-var SPAN_KEY = createContextKey("OpenTelemetry Context Key SPAN");
-function getSpan(context5) {
-  return context5.getValue(SPAN_KEY) || void 0;
-}
-__name(getSpan, "getSpan");
-function getActiveSpan() {
-  return getSpan(ContextAPI.getInstance().active());
-}
-__name(getActiveSpan, "getActiveSpan");
-function setSpan(context5, span) {
-  return context5.setValue(SPAN_KEY, span);
-}
-__name(setSpan, "setSpan");
-function deleteSpan(context5) {
-  return context5.deleteValue(SPAN_KEY);
-}
-__name(deleteSpan, "deleteSpan");
-function setSpanContext(context5, spanContext) {
-  return setSpan(context5, new NonRecordingSpan(spanContext));
-}
-__name(setSpanContext, "setSpanContext");
-function getSpanContext(context5) {
-  var _a3;
-  return (_a3 = getSpan(context5)) === null || _a3 === void 0 ? void 0 : _a3.spanContext();
-}
-__name(getSpanContext, "getSpanContext");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/spancontext-utils.js
-var VALID_TRACEID_REGEX = /^([0-9a-f]{32})$/i;
-var VALID_SPANID_REGEX = /^[0-9a-f]{16}$/i;
-function isValidTraceId(traceId) {
-  return VALID_TRACEID_REGEX.test(traceId) && traceId !== INVALID_TRACEID;
-}
-__name(isValidTraceId, "isValidTraceId");
-function isValidSpanId(spanId) {
-  return VALID_SPANID_REGEX.test(spanId) && spanId !== INVALID_SPANID;
-}
-__name(isValidSpanId, "isValidSpanId");
-function isSpanContextValid(spanContext) {
-  return isValidTraceId(spanContext.traceId) && isValidSpanId(spanContext.spanId);
-}
-__name(isSpanContextValid, "isSpanContextValid");
-function wrapSpanContext(spanContext) {
-  return new NonRecordingSpan(spanContext);
-}
-__name(wrapSpanContext, "wrapSpanContext");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracer.js
-var context = ContextAPI.getInstance();
-var NoopTracer = function() {
-  function NoopTracer3() {
-  }
-  __name(NoopTracer3, "NoopTracer");
-  NoopTracer3.prototype.startSpan = function(name, options, context5) {
-    var root = Boolean(options === null || options === void 0 ? void 0 : options.root);
-    if (root) {
-      return new NonRecordingSpan();
-    }
-    var parentFromContext = context5 && getSpanContext(context5);
-    if (isSpanContext(parentFromContext) && isSpanContextValid(parentFromContext)) {
-      return new NonRecordingSpan(parentFromContext);
-    } else {
-      return new NonRecordingSpan();
-    }
-  };
-  NoopTracer3.prototype.startActiveSpan = function(name, arg2, arg3, arg4) {
-    var opts;
-    var ctx;
-    var fn;
-    if (arguments.length < 2) {
-      return;
-    } else if (arguments.length === 2) {
-      fn = arg2;
-    } else if (arguments.length === 3) {
-      opts = arg2;
-      fn = arg3;
-    } else {
-      opts = arg2;
-      ctx = arg3;
-      fn = arg4;
-    }
-    var parentContext = ctx !== null && ctx !== void 0 ? ctx : context.active();
-    var span = this.startSpan(name, opts, parentContext);
-    var contextWithSpanSet = setSpan(parentContext, span);
-    return context.with(contextWithSpanSet, fn, void 0, span);
-  };
-  return NoopTracer3;
-}();
-function isSpanContext(spanContext) {
-  return typeof spanContext === "object" && typeof spanContext["spanId"] === "string" && typeof spanContext["traceId"] === "string" && typeof spanContext["traceFlags"] === "number";
-}
-__name(isSpanContext, "isSpanContext");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracer.js
-var NOOP_TRACER = new NoopTracer();
-var ProxyTracer = function() {
-  function ProxyTracer3(_provider, name, version, options) {
-    this._provider = _provider;
-    this.name = name;
-    this.version = version;
-    this.options = options;
-  }
-  __name(ProxyTracer3, "ProxyTracer");
-  ProxyTracer3.prototype.startSpan = function(name, options, context5) {
-    return this._getTracer().startSpan(name, options, context5);
-  };
-  ProxyTracer3.prototype.startActiveSpan = function(_name, _options, _context, _fn) {
-    var tracer = this._getTracer();
-    return Reflect.apply(tracer.startActiveSpan, tracer, arguments);
-  };
-  ProxyTracer3.prototype._getTracer = function() {
-    if (this._delegate) {
-      return this._delegate;
-    }
-    var tracer = this._provider.getDelegateTracer(this.name, this.version, this.options);
-    if (!tracer) {
-      return NOOP_TRACER;
-    }
-    this._delegate = tracer;
-    return this._delegate;
-  };
-  return ProxyTracer3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracerProvider.js
-var NoopTracerProvider = function() {
-  function NoopTracerProvider3() {
-  }
-  __name(NoopTracerProvider3, "NoopTracerProvider");
-  NoopTracerProvider3.prototype.getTracer = function(_name, _version, _options) {
-    return new NoopTracer();
-  };
-  return NoopTracerProvider3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracerProvider.js
-var NOOP_TRACER_PROVIDER = new NoopTracerProvider();
-var ProxyTracerProvider = function() {
-  function ProxyTracerProvider3() {
-  }
-  __name(ProxyTracerProvider3, "ProxyTracerProvider");
-  ProxyTracerProvider3.prototype.getTracer = function(name, version, options) {
-    var _a3;
-    return (_a3 = this.getDelegateTracer(name, version, options)) !== null && _a3 !== void 0 ? _a3 : new ProxyTracer(this, name, version, options);
-  };
-  ProxyTracerProvider3.prototype.getDelegate = function() {
-    var _a3;
-    return (_a3 = this._delegate) !== null && _a3 !== void 0 ? _a3 : NOOP_TRACER_PROVIDER;
-  };
-  ProxyTracerProvider3.prototype.setDelegate = function(delegate) {
-    this._delegate = delegate;
-  };
-  ProxyTracerProvider3.prototype.getDelegateTracer = function(name, version, options) {
-    var _a3;
-    return (_a3 = this._delegate) === null || _a3 === void 0 ? void 0 : _a3.getTracer(name, version, options);
-  };
-  return ProxyTracerProvider3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/SamplingResult.js
-var SamplingDecision;
-(function(SamplingDecision4) {
-  SamplingDecision4[SamplingDecision4["NOT_RECORD"] = 0] = "NOT_RECORD";
-  SamplingDecision4[SamplingDecision4["RECORD"] = 1] = "RECORD";
-  SamplingDecision4[SamplingDecision4["RECORD_AND_SAMPLED"] = 2] = "RECORD_AND_SAMPLED";
-})(SamplingDecision || (SamplingDecision = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/span_kind.js
-var SpanKind;
-(function(SpanKind3) {
-  SpanKind3[SpanKind3["INTERNAL"] = 0] = "INTERNAL";
-  SpanKind3[SpanKind3["SERVER"] = 1] = "SERVER";
-  SpanKind3[SpanKind3["CLIENT"] = 2] = "CLIENT";
-  SpanKind3[SpanKind3["PRODUCER"] = 3] = "PRODUCER";
-  SpanKind3[SpanKind3["CONSUMER"] = 4] = "CONSUMER";
-})(SpanKind || (SpanKind = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/status.js
-var SpanStatusCode;
-(function(SpanStatusCode3) {
-  SpanStatusCode3[SpanStatusCode3["UNSET"] = 0] = "UNSET";
-  SpanStatusCode3[SpanStatusCode3["OK"] = 1] = "OK";
-  SpanStatusCode3[SpanStatusCode3["ERROR"] = 2] = "ERROR";
-})(SpanStatusCode || (SpanStatusCode = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/internal/tracestate-validators.js
-var VALID_KEY_CHAR_RANGE = "[_0-9a-z-*/]";
-var VALID_KEY = "[a-z]" + VALID_KEY_CHAR_RANGE + "{0,255}";
-var VALID_VENDOR_KEY = "[a-z0-9]" + VALID_KEY_CHAR_RANGE + "{0,240}@[a-z]" + VALID_KEY_CHAR_RANGE + "{0,13}";
-var VALID_KEY_REGEX = new RegExp("^(?:" + VALID_KEY + "|" + VALID_VENDOR_KEY + ")$");
-var VALID_VALUE_BASE_REGEX = /^[ -~]{0,255}[!-~]$/;
-var INVALID_VALUE_COMMA_EQUAL_REGEX = /,|=/;
-function validateKey(key) {
-  return VALID_KEY_REGEX.test(key);
-}
-__name(validateKey, "validateKey");
-function validateValue(value) {
-  return VALID_VALUE_BASE_REGEX.test(value) && !INVALID_VALUE_COMMA_EQUAL_REGEX.test(value);
-}
-__name(validateValue, "validateValue");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/internal/tracestate-impl.js
-var MAX_TRACE_STATE_ITEMS = 32;
-var MAX_TRACE_STATE_LEN = 512;
-var LIST_MEMBERS_SEPARATOR = ",";
-var LIST_MEMBER_KEY_VALUE_SPLITTER = "=";
-var TraceStateImpl = function() {
-  function TraceStateImpl3(rawTraceState) {
-    this._internalState = /* @__PURE__ */ new Map();
-    if (rawTraceState)
-      this._parse(rawTraceState);
-  }
-  __name(TraceStateImpl3, "TraceStateImpl");
-  TraceStateImpl3.prototype.set = function(key, value) {
-    var traceState = this._clone();
-    if (traceState._internalState.has(key)) {
-      traceState._internalState.delete(key);
-    }
-    traceState._internalState.set(key, value);
-    return traceState;
-  };
-  TraceStateImpl3.prototype.unset = function(key) {
-    var traceState = this._clone();
-    traceState._internalState.delete(key);
-    return traceState;
-  };
-  TraceStateImpl3.prototype.get = function(key) {
-    return this._internalState.get(key);
-  };
-  TraceStateImpl3.prototype.serialize = function() {
-    var _this = this;
-    return this._keys().reduce(function(agg, key) {
-      agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER + _this.get(key));
-      return agg;
-    }, []).join(LIST_MEMBERS_SEPARATOR);
-  };
-  TraceStateImpl3.prototype._parse = function(rawTraceState) {
-    if (rawTraceState.length > MAX_TRACE_STATE_LEN)
-      return;
-    this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR).reverse().reduce(function(agg, part) {
-      var listMember = part.trim();
-      var i = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER);
-      if (i !== -1) {
-        var key = listMember.slice(0, i);
-        var value = listMember.slice(i + 1, part.length);
-        if (validateKey(key) && validateValue(value)) {
-          agg.set(key, value);
-        } else {
-        }
-      }
-      return agg;
-    }, /* @__PURE__ */ new Map());
-    if (this._internalState.size > MAX_TRACE_STATE_ITEMS) {
-      this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS));
-    }
-  };
-  TraceStateImpl3.prototype._keys = function() {
-    return Array.from(this._internalState.keys()).reverse();
-  };
-  TraceStateImpl3.prototype._clone = function() {
-    var traceState = new TraceStateImpl3();
-    traceState._internalState = new Map(this._internalState);
-    return traceState;
-  };
-  return TraceStateImpl3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/trace.js
-var API_NAME3 = "trace";
-var TraceAPI = function() {
-  function TraceAPI3() {
-    this._proxyTracerProvider = new ProxyTracerProvider();
-    this.wrapSpanContext = wrapSpanContext;
-    this.isSpanContextValid = isSpanContextValid;
-    this.deleteSpan = deleteSpan;
-    this.getSpan = getSpan;
-    this.getActiveSpan = getActiveSpan;
-    this.getSpanContext = getSpanContext;
-    this.setSpan = setSpan;
-    this.setSpanContext = setSpanContext;
-  }
-  __name(TraceAPI3, "TraceAPI");
-  TraceAPI3.getInstance = function() {
-    if (!this._instance) {
-      this._instance = new TraceAPI3();
-    }
-    return this._instance;
-  };
-  TraceAPI3.prototype.setGlobalTracerProvider = function(provider) {
-    var success = registerGlobal(API_NAME3, this._proxyTracerProvider, DiagAPI.instance());
-    if (success) {
-      this._proxyTracerProvider.setDelegate(provider);
-    }
-    return success;
-  };
-  TraceAPI3.prototype.getTracerProvider = function() {
-    return getGlobal(API_NAME3) || this._proxyTracerProvider;
-  };
-  TraceAPI3.prototype.getTracer = function(name, version) {
-    return this.getTracerProvider().getTracer(name, version);
-  };
-  TraceAPI3.prototype.disable = function() {
-    unregisterGlobal(API_NAME3, DiagAPI.instance());
-    this._proxyTracerProvider = new ProxyTracerProvider();
-  };
-  return TraceAPI3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/propagation/NoopTextMapPropagator.js
-var NoopTextMapPropagator = function() {
-  function NoopTextMapPropagator3() {
-  }
-  __name(NoopTextMapPropagator3, "NoopTextMapPropagator");
-  NoopTextMapPropagator3.prototype.inject = function(_context, _carrier) {
-  };
-  NoopTextMapPropagator3.prototype.extract = function(context5, _carrier) {
-    return context5;
-  };
-  NoopTextMapPropagator3.prototype.fields = function() {
-    return [];
-  };
-  return NoopTextMapPropagator3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/context-helpers.js
-var BAGGAGE_KEY = createContextKey("OpenTelemetry Baggage Key");
-function getBaggage(context5) {
-  return context5.getValue(BAGGAGE_KEY) || void 0;
-}
-__name(getBaggage, "getBaggage");
-function setBaggage(context5, baggage) {
-  return context5.setValue(BAGGAGE_KEY, baggage);
-}
-__name(setBaggage, "setBaggage");
-function deleteBaggage(context5) {
-  return context5.deleteValue(BAGGAGE_KEY);
-}
-__name(deleteBaggage, "deleteBaggage");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/propagation.js
-var API_NAME4 = "propagation";
-var NOOP_TEXT_MAP_PROPAGATOR = new NoopTextMapPropagator();
-var PropagationAPI = function() {
-  function PropagationAPI3() {
-    this.createBaggage = createBaggage;
-    this.getBaggage = getBaggage;
-    this.setBaggage = setBaggage;
-    this.deleteBaggage = deleteBaggage;
-  }
-  __name(PropagationAPI3, "PropagationAPI");
-  PropagationAPI3.getInstance = function() {
-    if (!this._instance) {
-      this._instance = new PropagationAPI3();
-    }
-    return this._instance;
-  };
-  PropagationAPI3.prototype.setGlobalPropagator = function(propagator) {
-    return registerGlobal(API_NAME4, propagator, DiagAPI.instance());
-  };
-  PropagationAPI3.prototype.inject = function(context5, carrier, setter) {
-    if (setter === void 0) {
-      setter = defaultTextMapSetter;
-    }
-    return this._getGlobalPropagator().inject(context5, carrier, setter);
-  };
-  PropagationAPI3.prototype.extract = function(context5, carrier, getter) {
-    if (getter === void 0) {
-      getter = defaultTextMapGetter;
-    }
-    return this._getGlobalPropagator().extract(context5, carrier, getter);
-  };
-  PropagationAPI3.prototype.fields = function() {
-    return this._getGlobalPropagator().fields();
-  };
-  PropagationAPI3.prototype.disable = function() {
-    unregisterGlobal(API_NAME4, DiagAPI.instance());
-  };
-  PropagationAPI3.prototype._getGlobalPropagator = function() {
-    return getGlobal(API_NAME4) || NOOP_TEXT_MAP_PROPAGATOR;
-  };
-  return PropagationAPI3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/index.js
-var context2 = ContextAPI.getInstance();
-var trace = TraceAPI.getInstance();
-var propagation = PropagationAPI.getInstance();
-var diag2 = DiagAPI.instance();
+__name(isError, "isError");
 
 // ../engines/src/index.ts
 var import_engines_version = __toESM(require_engines_version());
@@ -19865,17 +20184,128 @@ function getNodeAPIName(platform3, type) {
 __name(getNodeAPIName, "getNodeAPIName");
 
 // ../get-platform/src/getPlatform.ts
-var import_child_process = require("child_process");
-var import_fs = __toESM(require("fs"));
+var import_child_process = __toESM(require("child_process"));
+var import_fs2 = __toESM(require("fs"));
 var import_os = __toESM(require("os"));
+
+// ../../node_modules/.pnpm/ts-pattern@4.0.6/node_modules/ts-pattern/dist/index.modern.js
+var e = Symbol("@ts-pattern/matcher");
+var t = "@ts-pattern/anonymous-select-key";
+var n = /* @__PURE__ */ __name((e2) => Boolean(e2 && "object" == typeof e2), "n");
+var r = /* @__PURE__ */ __name((t2) => t2 && !!t2[e], "r");
+var o = /* @__PURE__ */ __name((t2, c, a) => {
+  if (n(t2)) {
+    if (r(t2)) {
+      const n2 = t2[e](), { matched: r2, selections: o2 } = n2.match(c);
+      return r2 && o2 && Object.keys(o2).forEach((e2) => a(e2, o2[e2])), r2;
+    }
+    if (!n(c))
+      return false;
+    if (Array.isArray(t2))
+      return !!Array.isArray(c) && t2.length === c.length && t2.every((e2, t3) => o(e2, c[t3], a));
+    if (t2 instanceof Map)
+      return c instanceof Map && Array.from(t2.keys()).every((e2) => o(t2.get(e2), c.get(e2), a));
+    if (t2 instanceof Set) {
+      if (!(c instanceof Set))
+        return false;
+      if (0 === t2.size)
+        return 0 === c.size;
+      if (1 === t2.size) {
+        const [e2] = Array.from(t2.values());
+        return r(e2) ? Array.from(c.values()).every((t3) => o(e2, t3, a)) : c.has(e2);
+      }
+      return Array.from(t2.values()).every((e2) => c.has(e2));
+    }
+    return Object.keys(t2).every((n2) => {
+      const s = t2[n2];
+      return (n2 in c || r(i = s) && "optional" === i[e]().matcherType) && o(s, c[n2], a);
+      var i;
+    });
+  }
+  return Object.is(c, t2);
+}, "o");
+function f(t2) {
+  return { [e]: () => ({ match: (e2) => ({ matched: Boolean(t2(e2)) }) }) };
+}
+__name(f, "f");
+var m = f(function(e2) {
+  return true;
+});
+var d = f(function(e2) {
+  return "string" == typeof e2;
+});
+var g = f(function(e2) {
+  return "number" == typeof e2;
+});
+var p = f(function(e2) {
+  return "boolean" == typeof e2;
+});
+var b = f(function(e2) {
+  return "bigint" == typeof e2;
+});
+var w = f(function(e2) {
+  return "symbol" == typeof e2;
+});
+var A = f(function(e2) {
+  return null == e2;
+});
+var K = /* @__PURE__ */ __name((e2) => new O(e2, []), "K");
+var O = class {
+  constructor(e2, t2) {
+    this.value = void 0, this.cases = void 0, this.value = e2, this.cases = t2;
+  }
+  with(...e2) {
+    const n2 = e2[e2.length - 1], r2 = [e2[0]], c = [];
+    return 3 === e2.length && "function" == typeof e2[1] ? (r2.push(e2[0]), c.push(e2[1])) : e2.length > 2 && r2.push(...e2.slice(1, e2.length - 1)), new O(this.value, this.cases.concat([{ match: (e3) => {
+      let n3 = {};
+      const a = Boolean(r2.some((t2) => o(t2, e3, (e4, t3) => {
+        n3[e4] = t3;
+      })) && c.every((t2) => t2(e3)));
+      return { matched: a, value: a && Object.keys(n3).length ? t in n3 ? n3[t] : n3 : e3 };
+    }, handler: n2 }]));
+  }
+  when(e2, t2) {
+    return new O(this.value, this.cases.concat([{ match: (t3) => ({ matched: Boolean(e2(t3)), value: t3 }), handler: t2 }]));
+  }
+  otherwise(e2) {
+    return new O(this.value, this.cases.concat([{ match: (e3) => ({ matched: true, value: e3 }), handler: e2 }])).run();
+  }
+  exhaustive() {
+    return this.run();
+  }
+  run() {
+    let e2, t2 = this.value;
+    for (let n2 = 0; n2 < this.cases.length; n2++) {
+      const r2 = this.cases[n2], o2 = r2.match(this.value);
+      if (o2.matched) {
+        t2 = o2.value, e2 = r2.handler;
+        break;
+      }
+    }
+    if (!e2) {
+      let e3;
+      try {
+        e3 = JSON.stringify(this.value);
+      } catch (t3) {
+        e3 = this.value;
+      }
+      throw new Error(`Pattern matching error: no pattern matches value ${e3}`);
+    }
+    return e2(t2, this.value);
+  }
+};
+__name(O, "O");
+
+// ../get-platform/src/getPlatform.ts
 var import_util = require("util");
-var readFile = (0, import_util.promisify)(import_fs.default.readFile);
-var exists = (0, import_util.promisify)(import_fs.default.exists);
+var readFile = (0, import_util.promisify)(import_fs2.default.readFile);
+var exists2 = (0, import_util.promisify)(import_fs2.default.exists);
+var exec = (0, import_util.promisify)(import_child_process.default.exec);
 async function getos() {
   const platform3 = import_os.default.platform();
   const arch2 = process.arch;
   if (platform3 === "freebsd") {
-    const version = await gracefulExec(`freebsd-version`);
+    const version = await getFirstSuccessfulExec([`freebsd-version`]);
     if (version && version.trim().length > 0) {
       const regex = /^(\d+)\.?/;
       const match = regex.exec(version);
@@ -19894,10 +20324,11 @@ async function getos() {
       arch: arch2
     };
   }
+  const distro = await resolveDistro();
   return {
     platform: "linux",
-    libssl: await getOpenSSLVersion(),
-    distro: await resolveDistro(),
+    libssl: await getSSLVersion({ arch: arch2, distro }),
+    distro,
     arch: arch2
   };
 }
@@ -19927,9 +20358,9 @@ __name(parseDistro, "parseDistro");
 async function resolveDistro() {
   const osReleaseFile = "/etc/os-release";
   const alpineReleaseFile = "/etc/alpine-release";
-  if (await exists(alpineReleaseFile)) {
+  if (await exists2(alpineReleaseFile)) {
     return "musl";
-  } else if (await exists(osReleaseFile)) {
+  } else if (await exists2(osReleaseFile)) {
     return parseDistro(await readFile(osReleaseFile, "utf-8"));
   } else {
     return;
@@ -19939,48 +20370,53 @@ __name(resolveDistro, "resolveDistro");
 function parseOpenSSLVersion(input) {
   const match = /^OpenSSL\s(\d+\.\d+)\.\d+/.exec(input);
   if (match) {
-    return match[1] + ".x";
+    const partialVersion = `${match[1]}.x`;
+    return sanitiseSSLVersion(partialVersion);
   }
-  return;
+  return void 0;
 }
 __name(parseOpenSSLVersion, "parseOpenSSLVersion");
-async function getOpenSSLVersion() {
-  const [version, ls] = await Promise.all([
-    gracefulExec(`openssl version -v`),
-    gracefulExec(`
-      ls -l /lib64 | grep ssl;
-      ls -l /usr/lib64 | grep ssl;
-    `)
-  ]);
-  if (version) {
-    const v = parseOpenSSLVersion(version);
-    if (v) {
-      return v;
+function parseLibSSLVersion(input) {
+  var _a3;
+  const match = /libssl\.so\.(\d)(\.\d)?/.exec(input);
+  if (match) {
+    const partialVersion = `${match[1]}${(_a3 = match[2]) != null ? _a3 : ".0"}.x`;
+    return sanitiseSSLVersion(partialVersion);
+  }
+  return void 0;
+}
+__name(parseLibSSLVersion, "parseLibSSLVersion");
+function sanitiseSSLVersion(version) {
+  if (isLibssl1x(version)) {
+    return version;
+  }
+  const versionSplit = version.split(".");
+  versionSplit[1] = "0";
+  return versionSplit.join(".");
+}
+__name(sanitiseSSLVersion, "sanitiseSSLVersion");
+async function getSSLVersion(args) {
+  const libsslVersion = await K(args).with({ distro: "musl" }, () => {
+    return getFirstSuccessfulExec(["ls -l /lib/libssl.so.3", "ls -l /lib/libssl.so.1.1"]);
+  }).otherwise(() => {
+    return getFirstSuccessfulExec(["ls -l /lib64 | grep ssl", "ls -l /usr/lib64 | grep ssl"]);
+  });
+  if (libsslVersion) {
+    const matchedVersion = parseLibSSLVersion(libsslVersion);
+    if (matchedVersion) {
+      return matchedVersion;
     }
   }
-  if (ls) {
-    const match = /libssl\.so\.(\d+\.\d+)\.\d+/.exec(ls);
-    if (match) {
-      return match[1] + ".x";
+  const openSSLVersion = await getFirstSuccessfulExec(["openssl version -v"]);
+  if (openSSLVersion) {
+    const matchedVersion = parseOpenSSLVersion(openSSLVersion);
+    if (matchedVersion) {
+      return matchedVersion;
     }
   }
   return void 0;
 }
-__name(getOpenSSLVersion, "getOpenSSLVersion");
-async function gracefulExec(cmd) {
-  return new Promise((resolve) => {
-    try {
-      (0, import_child_process.exec)(cmd, (err, stdout) => {
-        resolve(String(stdout));
-      });
-    } catch (e) {
-      resolve(void 0);
-      return void 0;
-    }
-    return void 0;
-  });
-}
-__name(gracefulExec, "gracefulExec");
+__name(getSSLVersion, "getSSLVersion");
 async function getPlatform() {
   const { platform: platform3, libssl, distro, arch: arch2 } = await getos();
   if (platform3 === "darwin" && arch2 === "arm64") {
@@ -20011,7 +20447,15 @@ async function getPlatform() {
     return `linux-arm-openssl-${libssl}`;
   }
   if (platform3 === "linux" && distro === "musl") {
-    return "linux-musl";
+    const base = "linux-musl";
+    if (!libssl) {
+      return base;
+    }
+    if (isLibssl1x(libssl)) {
+      return base;
+    } else {
+      return `${base}-openssl-${libssl}`;
+    }
   }
   if (platform3 === "linux" && distro && libssl) {
     return distro + "-openssl-" + libssl;
@@ -20025,12 +20469,32 @@ async function getPlatform() {
   return "debian-openssl-1.1.x";
 }
 __name(getPlatform, "getPlatform");
+async function discardError(runPromise) {
+  try {
+    return await runPromise();
+  } catch (e2) {
+    return void 0;
+  }
+}
+__name(discardError, "discardError");
+function getFirstSuccessfulExec(commands) {
+  return discardError(async () => {
+    const results = await Promise.allSettled(commands.map((cmd) => exec(cmd)));
+    const { value } = results.find(({ status }) => status === "fulfilled");
+    return String(value.stdout);
+  });
+}
+__name(getFirstSuccessfulExec, "getFirstSuccessfulExec");
+function isLibssl1x(libssl) {
+  return libssl.startsWith("1.");
+}
+__name(isLibssl1x, "isLibssl1x");
 
 // ../get-platform/src/isNodeAPISupported.ts
-var import_fs2 = __toESM(require("fs"));
+var import_fs3 = __toESM(require("fs"));
 async function isNodeAPISupported() {
   const customLibraryPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
-  const customLibraryExists = customLibraryPath && import_fs2.default.existsSync(customLibraryPath);
+  const customLibraryExists = customLibraryPath && import_fs3.default.existsSync(customLibraryPath);
   const os3 = await getos();
   if (!customLibraryExists && (os3.arch === "x32" || os3.arch === "ia32")) {
     throw new Error(
@@ -20057,6 +20521,7 @@ var platforms = [
   "linux-arm-openssl-1.0.x",
   "linux-arm-openssl-3.0.x",
   "linux-musl",
+  "linux-musl-openssl-3.0.x",
   "linux-nixos",
   "windows",
   "freebsd11",
@@ -20068,61 +20533,61 @@ var platforms = [
 ];
 
 // ../engines/src/index.ts
-var import_path = __toESM(require("path"));
+var import_path2 = __toESM(require("path"));
 var import_engines_version2 = __toESM(require_engines_version());
-var debug2 = src_default("prisma:engines");
+var debug3 = src_default("prisma:engines");
 function getEnginesPath() {
-  return import_path.default.join(__dirname, "../");
+  return import_path2.default.join(__dirname, "../");
 }
 __name(getEnginesPath, "getEnginesPath");
 var DEFAULT_CLI_QUERY_ENGINE_BINARY_TYPE = "libquery-engine" /* libqueryEngine */;
-import_path.default.join(__dirname, "../query-engine-darwin");
-import_path.default.join(__dirname, "../introspection-engine-darwin");
-import_path.default.join(__dirname, "../prisma-fmt-darwin");
-import_path.default.join(__dirname, "../query-engine-darwin-arm64");
-import_path.default.join(__dirname, "../introspection-engine-darwin-arm64");
-import_path.default.join(__dirname, "../prisma-fmt-darwin-arm64");
-import_path.default.join(__dirname, "../query-engine-debian-openssl-1.0.x");
-import_path.default.join(__dirname, "../introspection-engine-debian-openssl-1.0.x");
-import_path.default.join(__dirname, "../prisma-fmt-debian-openssl-1.0.x");
-import_path.default.join(__dirname, "../query-engine-debian-openssl-1.1.x");
-import_path.default.join(__dirname, "../introspection-engine-debian-openssl-1.1.x");
-import_path.default.join(__dirname, "../prisma-fmt-debian-openssl-1.1.x");
-import_path.default.join(__dirname, "../query-engine-debian-openssl-3.0.x");
-import_path.default.join(__dirname, "../introspection-engine-debian-openssl-3.0.x");
-import_path.default.join(__dirname, "../prisma-fmt-debian-openssl-3.0.x");
-import_path.default.join(__dirname, "../query-engine-rhel-openssl-1.0.x");
-import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-1.0.x");
-import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.0.x");
-import_path.default.join(__dirname, "../query-engine-rhel-openssl-1.1.x");
-import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-1.1.x");
-import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.1.x");
-import_path.default.join(__dirname, "../query-engine-rhel-openssl-3.0.x");
-import_path.default.join(__dirname, "../introspection-engine-rhel-openssl-3.0.x");
-import_path.default.join(__dirname, "../prisma-fmt-rhel-openssl-3.0.x");
-import_path.default.join(__dirname, "../libquery_engine-darwin.dylib.node");
-import_path.default.join(__dirname, "../libquery_engine-darwin-arm64.dylib.node");
-import_path.default.join(__dirname, "../libquery_engine-debian-openssl-1.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-debian-openssl-1.1.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-debian-openssl-3.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.1.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-3.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-linux-musl.so.node");
-import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-1.0.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-1.1.x.so.node");
-import_path.default.join(__dirname, "../libquery_engine-rhel-openssl-3.0.x.so.node");
-import_path.default.join(__dirname, "../query_engine-windows.dll.node");
+import_path2.default.join(__dirname, "../query-engine-darwin");
+import_path2.default.join(__dirname, "../introspection-engine-darwin");
+import_path2.default.join(__dirname, "../prisma-fmt-darwin");
+import_path2.default.join(__dirname, "../query-engine-darwin-arm64");
+import_path2.default.join(__dirname, "../introspection-engine-darwin-arm64");
+import_path2.default.join(__dirname, "../prisma-fmt-darwin-arm64");
+import_path2.default.join(__dirname, "../query-engine-debian-openssl-1.0.x");
+import_path2.default.join(__dirname, "../introspection-engine-debian-openssl-1.0.x");
+import_path2.default.join(__dirname, "../prisma-fmt-debian-openssl-1.0.x");
+import_path2.default.join(__dirname, "../query-engine-debian-openssl-1.1.x");
+import_path2.default.join(__dirname, "../introspection-engine-debian-openssl-1.1.x");
+import_path2.default.join(__dirname, "../prisma-fmt-debian-openssl-1.1.x");
+import_path2.default.join(__dirname, "../query-engine-debian-openssl-3.0.x");
+import_path2.default.join(__dirname, "../introspection-engine-debian-openssl-3.0.x");
+import_path2.default.join(__dirname, "../prisma-fmt-debian-openssl-3.0.x");
+import_path2.default.join(__dirname, "../query-engine-rhel-openssl-1.0.x");
+import_path2.default.join(__dirname, "../introspection-engine-rhel-openssl-1.0.x");
+import_path2.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.0.x");
+import_path2.default.join(__dirname, "../query-engine-rhel-openssl-1.1.x");
+import_path2.default.join(__dirname, "../introspection-engine-rhel-openssl-1.1.x");
+import_path2.default.join(__dirname, "../prisma-fmt-rhel-openssl-1.1.x");
+import_path2.default.join(__dirname, "../query-engine-rhel-openssl-3.0.x");
+import_path2.default.join(__dirname, "../introspection-engine-rhel-openssl-3.0.x");
+import_path2.default.join(__dirname, "../prisma-fmt-rhel-openssl-3.0.x");
+import_path2.default.join(__dirname, "../libquery_engine-darwin.dylib.node");
+import_path2.default.join(__dirname, "../libquery_engine-darwin-arm64.dylib.node");
+import_path2.default.join(__dirname, "../libquery_engine-debian-openssl-1.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-debian-openssl-1.1.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-debian-openssl-3.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-1.1.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-arm64-openssl-3.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-musl.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-linux-musl-openssl-3.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-rhel-openssl-1.0.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-rhel-openssl-1.1.x.so.node");
+import_path2.default.join(__dirname, "../libquery_engine-rhel-openssl-3.0.x.so.node");
+import_path2.default.join(__dirname, "../query_engine-windows.dll.node");
 
 // ../engine-core/src/binary/BinaryEngine.ts
 var import_chalk3 = __toESM(require_source());
 var import_child_process2 = require("child_process");
-var import_events = __toESM(require("events"));
 var import_execa = __toESM(require_execa());
-var import_fs4 = __toESM(require("fs"));
+var import_fs5 = __toESM(require("fs"));
 var import_net = __toESM(require("net"));
 var import_p_retry = __toESM(require_p_retry());
-var import_path2 = __toESM(require("path"));
+var import_path3 = __toESM(require("path"));
 var import_url = require("url");
 var import_util4 = require("util");
 
@@ -20147,11 +20612,12 @@ __name(PrismaClientInitializationError, "PrismaClientInitializationError");
 
 // ../engine-core/src/common/errors/PrismaClientKnownRequestError.ts
 var PrismaClientKnownRequestError = class extends Error {
-  constructor(message, code, clientVersion2, meta) {
+  constructor(message, { code, clientVersion: clientVersion2, meta, batchRequestIdx }) {
     super(message);
     this.code = code;
     this.clientVersion = clientVersion2;
     this.meta = meta;
+    this.batchRequestIdx = batchRequestIdx;
   }
   get [Symbol.toStringTag]() {
     return "PrismaClientKnownRequestError";
@@ -20160,67 +20626,50 @@ var PrismaClientKnownRequestError = class extends Error {
 __name(PrismaClientKnownRequestError, "PrismaClientKnownRequestError");
 
 // ../engine-core/src/common/errors/utils/log.ts
-function getMessage(log4) {
-  if (typeof log4 === "string") {
-    return log4;
-  } else if (isRustError(log4)) {
-    return getBacktraceFromRustError(log4);
-  } else if (isRustLog(log4)) {
-    return getBacktraceFromLog(log4);
+function getMessage(log3) {
+  if (typeof log3 === "string") {
+    return log3;
+  } else {
+    return log3.message;
   }
-  return JSON.stringify(log4);
 }
 __name(getMessage, "getMessage");
-function getBacktraceFromLog(log4) {
+function getBacktrace(log3) {
   var _a3, _b2, _c, _d, _e, _f, _g;
-  if ((_a3 = log4.fields) == null ? void 0 : _a3.message) {
-    let str = (_b2 = log4.fields) == null ? void 0 : _b2.message;
-    if ((_c = log4.fields) == null ? void 0 : _c.file) {
-      str += ` in ${log4.fields.file}`;
-      if ((_d = log4.fields) == null ? void 0 : _d.line) {
-        str += `:${log4.fields.line}`;
+  if ((_a3 = log3.fields) == null ? void 0 : _a3.message) {
+    let str = (_b2 = log3.fields) == null ? void 0 : _b2.message;
+    if ((_c = log3.fields) == null ? void 0 : _c.file) {
+      str += ` in ${log3.fields.file}`;
+      if ((_d = log3.fields) == null ? void 0 : _d.line) {
+        str += `:${log3.fields.line}`;
       }
-      if ((_e = log4.fields) == null ? void 0 : _e.column) {
-        str += `:${log4.fields.column}`;
+      if ((_e = log3.fields) == null ? void 0 : _e.column) {
+        str += `:${log3.fields.column}`;
       }
     }
-    if ((_f = log4.fields) == null ? void 0 : _f.reason) {
+    if ((_f = log3.fields) == null ? void 0 : _f.reason) {
       str += `
-${(_g = log4.fields) == null ? void 0 : _g.reason}`;
+${(_g = log3.fields) == null ? void 0 : _g.reason}`;
     }
     return str;
   }
   return "Unknown error";
 }
-__name(getBacktraceFromLog, "getBacktraceFromLog");
-function getBacktraceFromRustError(err) {
-  let str = "";
-  if (err.is_panic) {
-    str += `PANIC`;
-  }
-  if (err.backtrace) {
-    str += ` in ${err.backtrace}`;
-  }
-  if (err.message) {
-    str += `
-${err.message}`;
-  }
-  return str;
+__name(getBacktrace, "getBacktrace");
+function isPanic(err) {
+  var _a3;
+  return ((_a3 = err.fields) == null ? void 0 : _a3.message) === "PANIC";
 }
-__name(getBacktraceFromRustError, "getBacktraceFromRustError");
-function isRustLog(e) {
-  return e.timestamp && typeof e.level === "string" && typeof e.target === "string";
+__name(isPanic, "isPanic");
+function isRustLog(e2) {
+  return e2.timestamp && typeof e2.level === "string" && typeof e2.target === "string";
 }
 __name(isRustLog, "isRustLog");
-function isRustErrorLog(e) {
+function isRustErrorLog(e2) {
   var _a3, _b2;
-  return isRustLog(e) && (e.level === "error" || ((_b2 = (_a3 = e.fields) == null ? void 0 : _a3.message) == null ? void 0 : _b2.includes("fatal error")));
+  return isRustLog(e2) && (e2.level === "error" || ((_b2 = (_a3 = e2.fields) == null ? void 0 : _a3.message) == null ? void 0 : _b2.includes("fatal error")));
 }
 __name(isRustErrorLog, "isRustErrorLog");
-function isRustError(e) {
-  return typeof e.is_panic !== "undefined";
-}
-__name(isRustError, "isRustError");
 function convertLog(rustLog) {
   const isQuery = isQueryLog(rustLog.fields);
   const level = isQuery ? "query" : rustLog.level.toLowerCase();
@@ -20238,23 +20687,17 @@ __name(isQueryLog, "isQueryLog");
 
 // ../engine-core/src/common/errors/PrismaClientRustError.ts
 var PrismaClientRustError = class extends Error {
-  constructor({ clientVersion: clientVersion2, log: log4, error: error2 }) {
-    var __super = (...args) => {
-      super(...args);
-    };
-    if (log4) {
-      const backtrace = getBacktraceFromLog(log4);
-      __super(backtrace != null ? backtrace : "Unknown error");
-    } else if (error2) {
-      const backtrace = getBacktraceFromRustError(error2);
-      __super(backtrace);
-    } else {
-      __super(`Unknown error`);
-    }
+  constructor({ clientVersion: clientVersion2, error: error2 }) {
+    const backtrace = getBacktrace(error2);
+    super(backtrace != null ? backtrace : "Unknown error");
+    this._isPanic = isPanic(error2);
     this.clientVersion = clientVersion2;
   }
   get [Symbol.toStringTag]() {
     return "PrismaClientRustPanicError";
+  }
+  isPanic() {
+    return this._isPanic;
   }
 };
 __name(PrismaClientRustError, "PrismaClientRustError");
@@ -20273,9 +20716,10 @@ __name(PrismaClientRustPanicError, "PrismaClientRustPanicError");
 
 // ../engine-core/src/common/errors/PrismaClientUnknownRequestError.ts
 var PrismaClientUnknownRequestError = class extends Error {
-  constructor(message, clientVersion2) {
+  constructor(message, { clientVersion: clientVersion2, batchRequestIdx }) {
     super(message);
     this.clientVersion = clientVersion2;
+    this.batchRequestIdx = batchRequestIdx;
   }
   get [Symbol.toStringTag]() {
     return "PrismaClientUnknownRequestError";
@@ -20288,19 +20732,19 @@ var import_chalk2 = __toESM(require_source());
 var import_strip_ansi = __toESM(require_strip_ansi());
 
 // ../engine-core/src/common/utils/util.ts
-var import_fs3 = __toESM(require("fs"));
+var import_fs4 = __toESM(require("fs"));
 var import_new_github_issue_url = __toESM(require_new_github_issue_url());
-var debug3 = src_default("plusX");
+var debug4 = src_default("plusX");
 function plusX(file) {
-  const s = import_fs3.default.statSync(file);
+  const s = import_fs4.default.statSync(file);
   const newMode = s.mode | 64 | 8 | 1;
   if (s.mode === newMode) {
-    debug3(`Execution permissions of ${file} are fine`);
+    debug4(`Execution permissions of ${file} are fine`);
     return;
   }
   const base8 = newMode.toString(8).slice(-3);
-  debug3(`Have to call plusX on ${file}`);
-  import_fs3.default.chmodSync(file, base8);
+  debug4(`Have to call plusX on ${file}`);
+  import_fs4.default.chmodSync(file, base8);
 }
 __name(plusX, "plusX");
 function transformPlatformToEnvValue(platform3) {
@@ -20418,21 +20862,24 @@ how you used Prisma Client in the issue.
 __name(getErrorMessageWithLink, "getErrorMessageWithLink");
 
 // ../engine-core/src/common/errors/utils/prismaGraphQLToJSError.ts
-function prismaGraphQLToJSError(error2, clientVersion2) {
-  if (error2.user_facing_error.error_code) {
-    return new PrismaClientKnownRequestError(
-      error2.user_facing_error.message,
-      error2.user_facing_error.error_code,
-      clientVersion2,
-      error2.user_facing_error.meta
-    );
+function prismaGraphQLToJSError({ error: error2, user_facing_error }, clientVersion2) {
+  if (user_facing_error.error_code) {
+    return new PrismaClientKnownRequestError(user_facing_error.message, {
+      code: user_facing_error.error_code,
+      clientVersion: clientVersion2,
+      meta: user_facing_error.meta,
+      batchRequestIdx: user_facing_error.batch_request_idx
+    });
   }
-  return new PrismaClientUnknownRequestError(error2.error, clientVersion2);
+  return new PrismaClientUnknownRequestError(error2, {
+    clientVersion: clientVersion2,
+    batchRequestIdx: user_facing_error.batch_request_idx
+  });
 }
 __name(prismaGraphQLToJSError, "prismaGraphQLToJSError");
 
 // ../engine-core/src/common/utils/printGeneratorConfig.ts
-var import_indent_string2 = __toESM(require_indent_string());
+var import_indent_string = __toESM(require_indent_string());
 function printGeneratorConfig(config2) {
   return String(new GeneratorConfigClass(config2));
 }
@@ -20451,7 +20898,7 @@ var GeneratorConfigClass = class {
       })
     );
     return `generator ${config2.name} {
-${(0, import_indent_string2.default)(printDatamodelObject(obj), 2)}
+${(0, import_indent_string.default)(printDatamodelObject(obj), 2)}
 }`;
   }
 };
@@ -20592,18 +21039,18 @@ function omit(obj, keys2) {
 }
 __name(omit, "omit");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/platform/node/globalThis.js
-var _globalThis2 = typeof globalThis === "object" ? globalThis : global;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/platform/node/globalThis.js
+var _globalThis = typeof globalThis === "object" ? globalThis : global;
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/version.js
-var VERSION2 = "1.1.0";
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/version.js
+var VERSION = "1.2.0";
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/internal/semver.js
-var re2 = /^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;
-function _makeCompatibilityCheck2(ownVersion) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/internal/semver.js
+var re = /^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;
+function _makeCompatibilityCheck(ownVersion) {
   var acceptedVersions = /* @__PURE__ */ new Set([ownVersion]);
   var rejectedVersions = /* @__PURE__ */ new Set();
-  var myVersionMatch = ownVersion.match(re2);
+  var myVersionMatch = ownVersion.match(re);
   if (!myVersionMatch) {
     return function() {
       return false;
@@ -20630,14 +21077,14 @@ function _makeCompatibilityCheck2(ownVersion) {
     return true;
   }
   __name(_accept, "_accept");
-  return /* @__PURE__ */ __name(function isCompatible3(globalVersion) {
+  return /* @__PURE__ */ __name(function isCompatible2(globalVersion) {
     if (acceptedVersions.has(globalVersion)) {
       return true;
     }
     if (rejectedVersions.has(globalVersion)) {
       return false;
     }
-    var globalVersionMatch = globalVersion.match(re2);
+    var globalVersionMatch = globalVersion.match(re);
     if (!globalVersionMatch) {
       return _reject(globalVersion);
     }
@@ -20665,125 +21112,125 @@ function _makeCompatibilityCheck2(ownVersion) {
     return _reject(globalVersion);
   }, "isCompatible");
 }
-__name(_makeCompatibilityCheck2, "_makeCompatibilityCheck");
-var isCompatible2 = _makeCompatibilityCheck2(VERSION2);
+__name(_makeCompatibilityCheck, "_makeCompatibilityCheck");
+var isCompatible = _makeCompatibilityCheck(VERSION);
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/internal/global-utils.js
-var major2 = VERSION2.split(".")[0];
-var GLOBAL_OPENTELEMETRY_API_KEY2 = Symbol.for("opentelemetry.js.api." + major2);
-var _global2 = _globalThis2;
-function registerGlobal2(type, instance, diag5, allowOverride) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/internal/global-utils.js
+var major = VERSION.split(".")[0];
+var GLOBAL_OPENTELEMETRY_API_KEY = Symbol.for("opentelemetry.js.api." + major);
+var _global = _globalThis;
+function registerGlobal(type, instance, diag3, allowOverride) {
   var _a3;
   if (allowOverride === void 0) {
     allowOverride = false;
   }
-  var api = _global2[GLOBAL_OPENTELEMETRY_API_KEY2] = (_a3 = _global2[GLOBAL_OPENTELEMETRY_API_KEY2]) !== null && _a3 !== void 0 ? _a3 : {
-    version: VERSION2
+  var api = _global[GLOBAL_OPENTELEMETRY_API_KEY] = (_a3 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) !== null && _a3 !== void 0 ? _a3 : {
+    version: VERSION
   };
   if (!allowOverride && api[type]) {
     var err = new Error("@opentelemetry/api: Attempted duplicate registration of API: " + type);
-    diag5.error(err.stack || err.message);
+    diag3.error(err.stack || err.message);
     return false;
   }
-  if (api.version !== VERSION2) {
+  if (api.version !== VERSION) {
     var err = new Error("@opentelemetry/api: All API registration versions must match");
-    diag5.error(err.stack || err.message);
+    diag3.error(err.stack || err.message);
     return false;
   }
   api[type] = instance;
-  diag5.debug("@opentelemetry/api: Registered a global for " + type + " v" + VERSION2 + ".");
+  diag3.debug("@opentelemetry/api: Registered a global for " + type + " v" + VERSION + ".");
   return true;
 }
-__name(registerGlobal2, "registerGlobal");
-function getGlobal2(type) {
+__name(registerGlobal, "registerGlobal");
+function getGlobal(type) {
   var _a3, _b2;
-  var globalVersion = (_a3 = _global2[GLOBAL_OPENTELEMETRY_API_KEY2]) === null || _a3 === void 0 ? void 0 : _a3.version;
-  if (!globalVersion || !isCompatible2(globalVersion)) {
+  var globalVersion = (_a3 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _a3 === void 0 ? void 0 : _a3.version;
+  if (!globalVersion || !isCompatible(globalVersion)) {
     return;
   }
-  return (_b2 = _global2[GLOBAL_OPENTELEMETRY_API_KEY2]) === null || _b2 === void 0 ? void 0 : _b2[type];
+  return (_b2 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _b2 === void 0 ? void 0 : _b2[type];
 }
-__name(getGlobal2, "getGlobal");
-function unregisterGlobal2(type, diag5) {
-  diag5.debug("@opentelemetry/api: Unregistering a global for " + type + " v" + VERSION2 + ".");
-  var api = _global2[GLOBAL_OPENTELEMETRY_API_KEY2];
+__name(getGlobal, "getGlobal");
+function unregisterGlobal(type, diag3) {
+  diag3.debug("@opentelemetry/api: Unregistering a global for " + type + " v" + VERSION + ".");
+  var api = _global[GLOBAL_OPENTELEMETRY_API_KEY];
   if (api) {
     delete api[type];
   }
 }
-__name(unregisterGlobal2, "unregisterGlobal");
+__name(unregisterGlobal, "unregisterGlobal");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/diag/ComponentLogger.js
-var DiagComponentLogger2 = function() {
-  function DiagComponentLogger3(props) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/ComponentLogger.js
+var DiagComponentLogger = function() {
+  function DiagComponentLogger2(props) {
     this._namespace = props.namespace || "DiagComponentLogger";
   }
-  __name(DiagComponentLogger3, "DiagComponentLogger");
-  DiagComponentLogger3.prototype.debug = function() {
+  __name(DiagComponentLogger2, "DiagComponentLogger");
+  DiagComponentLogger2.prototype.debug = function() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
       args[_i] = arguments[_i];
     }
-    return logProxy2("debug", this._namespace, args);
+    return logProxy("debug", this._namespace, args);
   };
-  DiagComponentLogger3.prototype.error = function() {
+  DiagComponentLogger2.prototype.error = function() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
       args[_i] = arguments[_i];
     }
-    return logProxy2("error", this._namespace, args);
+    return logProxy("error", this._namespace, args);
   };
-  DiagComponentLogger3.prototype.info = function() {
+  DiagComponentLogger2.prototype.info = function() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
       args[_i] = arguments[_i];
     }
-    return logProxy2("info", this._namespace, args);
+    return logProxy("info", this._namespace, args);
   };
-  DiagComponentLogger3.prototype.warn = function() {
+  DiagComponentLogger2.prototype.warn = function() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
       args[_i] = arguments[_i];
     }
-    return logProxy2("warn", this._namespace, args);
+    return logProxy("warn", this._namespace, args);
   };
-  DiagComponentLogger3.prototype.verbose = function() {
+  DiagComponentLogger2.prototype.verbose = function() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
       args[_i] = arguments[_i];
     }
-    return logProxy2("verbose", this._namespace, args);
+    return logProxy("verbose", this._namespace, args);
   };
-  return DiagComponentLogger3;
+  return DiagComponentLogger2;
 }();
-function logProxy2(funcName, namespace, args) {
-  var logger2 = getGlobal2("diag");
+function logProxy(funcName, namespace, args) {
+  var logger2 = getGlobal("diag");
   if (!logger2) {
     return;
   }
   args.unshift(namespace);
   return logger2[funcName].apply(logger2, args);
 }
-__name(logProxy2, "logProxy");
+__name(logProxy, "logProxy");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/diag/types.js
-var DiagLogLevel2;
-(function(DiagLogLevel3) {
-  DiagLogLevel3[DiagLogLevel3["NONE"] = 0] = "NONE";
-  DiagLogLevel3[DiagLogLevel3["ERROR"] = 30] = "ERROR";
-  DiagLogLevel3[DiagLogLevel3["WARN"] = 50] = "WARN";
-  DiagLogLevel3[DiagLogLevel3["INFO"] = 60] = "INFO";
-  DiagLogLevel3[DiagLogLevel3["DEBUG"] = 70] = "DEBUG";
-  DiagLogLevel3[DiagLogLevel3["VERBOSE"] = 80] = "VERBOSE";
-  DiagLogLevel3[DiagLogLevel3["ALL"] = 9999] = "ALL";
-})(DiagLogLevel2 || (DiagLogLevel2 = {}));
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/types.js
+var DiagLogLevel;
+(function(DiagLogLevel2) {
+  DiagLogLevel2[DiagLogLevel2["NONE"] = 0] = "NONE";
+  DiagLogLevel2[DiagLogLevel2["ERROR"] = 30] = "ERROR";
+  DiagLogLevel2[DiagLogLevel2["WARN"] = 50] = "WARN";
+  DiagLogLevel2[DiagLogLevel2["INFO"] = 60] = "INFO";
+  DiagLogLevel2[DiagLogLevel2["DEBUG"] = 70] = "DEBUG";
+  DiagLogLevel2[DiagLogLevel2["VERBOSE"] = 80] = "VERBOSE";
+  DiagLogLevel2[DiagLogLevel2["ALL"] = 9999] = "ALL";
+})(DiagLogLevel || (DiagLogLevel = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/diag/internal/logLevelLogger.js
-function createLogLevelDiagLogger2(maxLevel, logger2) {
-  if (maxLevel < DiagLogLevel2.NONE) {
-    maxLevel = DiagLogLevel2.NONE;
-  } else if (maxLevel > DiagLogLevel2.ALL) {
-    maxLevel = DiagLogLevel2.ALL;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/internal/logLevelLogger.js
+function createLogLevelDiagLogger(maxLevel, logger2) {
+  if (maxLevel < DiagLogLevel.NONE) {
+    maxLevel = DiagLogLevel.NONE;
+  } else if (maxLevel > DiagLogLevel.ALL) {
+    maxLevel = DiagLogLevel.ALL;
   }
   logger2 = logger2 || {};
   function _filterFunc(funcName, theLevel) {
@@ -20796,26 +21243,26 @@ function createLogLevelDiagLogger2(maxLevel, logger2) {
   }
   __name(_filterFunc, "_filterFunc");
   return {
-    error: _filterFunc("error", DiagLogLevel2.ERROR),
-    warn: _filterFunc("warn", DiagLogLevel2.WARN),
-    info: _filterFunc("info", DiagLogLevel2.INFO),
-    debug: _filterFunc("debug", DiagLogLevel2.DEBUG),
-    verbose: _filterFunc("verbose", DiagLogLevel2.VERBOSE)
+    error: _filterFunc("error", DiagLogLevel.ERROR),
+    warn: _filterFunc("warn", DiagLogLevel.WARN),
+    info: _filterFunc("info", DiagLogLevel.INFO),
+    debug: _filterFunc("debug", DiagLogLevel.DEBUG),
+    verbose: _filterFunc("verbose", DiagLogLevel.VERBOSE)
   };
 }
-__name(createLogLevelDiagLogger2, "createLogLevelDiagLogger");
+__name(createLogLevelDiagLogger, "createLogLevelDiagLogger");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/api/diag.js
-var API_NAME5 = "diag";
-var DiagAPI2 = function() {
-  function DiagAPI3() {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/diag.js
+var API_NAME = "diag";
+var DiagAPI = function() {
+  function DiagAPI2() {
     function _logProxy(funcName) {
       return function() {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
           args[_i] = arguments[_i];
         }
-        var logger2 = getGlobal2("diag");
+        var logger2 = getGlobal("diag");
         if (!logger2)
           return;
         return logger2[funcName].apply(logger2, args);
@@ -20826,27 +21273,27 @@ var DiagAPI2 = function() {
     self2.setLogger = function(logger2, logLevel) {
       var _a3, _b2;
       if (logLevel === void 0) {
-        logLevel = DiagLogLevel2.INFO;
+        logLevel = DiagLogLevel.INFO;
       }
       if (logger2 === self2) {
         var err = new Error("Cannot use diag as the logger for itself. Please use a DiagLogger implementation like ConsoleDiagLogger or a custom implementation");
         self2.error((_a3 = err.stack) !== null && _a3 !== void 0 ? _a3 : err.message);
         return false;
       }
-      var oldLogger = getGlobal2("diag");
-      var newLogger = createLogLevelDiagLogger2(logLevel, logger2);
+      var oldLogger = getGlobal("diag");
+      var newLogger = createLogLevelDiagLogger(logLevel, logger2);
       if (oldLogger) {
         var stack = (_b2 = new Error().stack) !== null && _b2 !== void 0 ? _b2 : "<failed to generate stacktrace>";
         oldLogger.warn("Current logger will be overwritten from " + stack);
         newLogger.warn("Current logger will overwrite one already registered from " + stack);
       }
-      return registerGlobal2("diag", newLogger, self2, true);
+      return registerGlobal("diag", newLogger, self2, true);
     };
     self2.disable = function() {
-      unregisterGlobal2(API_NAME5, self2);
+      unregisterGlobal(API_NAME, self2);
     };
     self2.createComponentLogger = function(options) {
-      return new DiagComponentLogger2(options);
+      return new DiagComponentLogger(options);
     };
     self2.verbose = _logProxy("verbose");
     self2.debug = _logProxy("debug");
@@ -20854,99 +21301,99 @@ var DiagAPI2 = function() {
     self2.warn = _logProxy("warn");
     self2.error = _logProxy("error");
   }
-  __name(DiagAPI3, "DiagAPI");
-  DiagAPI3.instance = function() {
+  __name(DiagAPI2, "DiagAPI");
+  DiagAPI2.instance = function() {
     if (!this._instance) {
-      this._instance = new DiagAPI3();
+      this._instance = new DiagAPI2();
     }
     return this._instance;
   };
-  return DiagAPI3;
+  return DiagAPI2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/baggage/internal/baggage-impl.js
-var BaggageImpl2 = function() {
-  function BaggageImpl3(entries) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/internal/baggage-impl.js
+var BaggageImpl = function() {
+  function BaggageImpl2(entries) {
     this._entries = entries ? new Map(entries) : /* @__PURE__ */ new Map();
   }
-  __name(BaggageImpl3, "BaggageImpl");
-  BaggageImpl3.prototype.getEntry = function(key) {
+  __name(BaggageImpl2, "BaggageImpl");
+  BaggageImpl2.prototype.getEntry = function(key) {
     var entry = this._entries.get(key);
     if (!entry) {
       return void 0;
     }
     return Object.assign({}, entry);
   };
-  BaggageImpl3.prototype.getAllEntries = function() {
+  BaggageImpl2.prototype.getAllEntries = function() {
     return Array.from(this._entries.entries()).map(function(_a3) {
       var k = _a3[0], v = _a3[1];
       return [k, v];
     });
   };
-  BaggageImpl3.prototype.setEntry = function(key, entry) {
-    var newBaggage = new BaggageImpl3(this._entries);
+  BaggageImpl2.prototype.setEntry = function(key, entry) {
+    var newBaggage = new BaggageImpl2(this._entries);
     newBaggage._entries.set(key, entry);
     return newBaggage;
   };
-  BaggageImpl3.prototype.removeEntry = function(key) {
-    var newBaggage = new BaggageImpl3(this._entries);
+  BaggageImpl2.prototype.removeEntry = function(key) {
+    var newBaggage = new BaggageImpl2(this._entries);
     newBaggage._entries.delete(key);
     return newBaggage;
   };
-  BaggageImpl3.prototype.removeEntries = function() {
+  BaggageImpl2.prototype.removeEntries = function() {
     var keys2 = [];
     for (var _i = 0; _i < arguments.length; _i++) {
       keys2[_i] = arguments[_i];
     }
-    var newBaggage = new BaggageImpl3(this._entries);
+    var newBaggage = new BaggageImpl2(this._entries);
     for (var _a3 = 0, keys_1 = keys2; _a3 < keys_1.length; _a3++) {
       var key = keys_1[_a3];
       newBaggage._entries.delete(key);
     }
     return newBaggage;
   };
-  BaggageImpl3.prototype.clear = function() {
-    return new BaggageImpl3();
+  BaggageImpl2.prototype.clear = function() {
+    return new BaggageImpl2();
   };
-  return BaggageImpl3;
+  return BaggageImpl2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/baggage/internal/symbol.js
-var baggageEntryMetadataSymbol2 = Symbol("BaggageEntryMetadata");
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/internal/symbol.js
+var baggageEntryMetadataSymbol = Symbol("BaggageEntryMetadata");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/baggage/utils.js
-var diag3 = DiagAPI2.instance();
-function createBaggage2(entries) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/utils.js
+var diag = DiagAPI.instance();
+function createBaggage(entries) {
   if (entries === void 0) {
     entries = {};
   }
-  return new BaggageImpl2(new Map(Object.entries(entries)));
+  return new BaggageImpl(new Map(Object.entries(entries)));
 }
-__name(createBaggage2, "createBaggage");
-function baggageEntryMetadataFromString2(str) {
+__name(createBaggage, "createBaggage");
+function baggageEntryMetadataFromString(str) {
   if (typeof str !== "string") {
-    diag3.error("Cannot create baggage metadata from unknown type: " + typeof str);
+    diag.error("Cannot create baggage metadata from unknown type: " + typeof str);
     str = "";
   }
   return {
-    __TYPE__: baggageEntryMetadataSymbol2,
+    __TYPE__: baggageEntryMetadataSymbol,
     toString: function() {
       return str;
     }
   };
 }
-__name(baggageEntryMetadataFromString2, "baggageEntryMetadataFromString");
+__name(baggageEntryMetadataFromString, "baggageEntryMetadataFromString");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/diag/consoleLogger.js
-var consoleMap2 = [
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/consoleLogger.js
+var consoleMap = [
   { n: "error", c: "error" },
   { n: "warn", c: "warn" },
   { n: "info", c: "info" },
   { n: "debug", c: "debug" },
   { n: "verbose", c: "trace" }
 ];
-var DiagConsoleLogger2 = function() {
-  function DiagConsoleLogger3() {
+var DiagConsoleLogger = function() {
+  function DiagConsoleLogger2() {
     function _consoleFunc(funcName) {
       return function() {
         var args = [];
@@ -20965,16 +21412,16 @@ var DiagConsoleLogger2 = function() {
       };
     }
     __name(_consoleFunc, "_consoleFunc");
-    for (var i = 0; i < consoleMap2.length; i++) {
-      this[consoleMap2[i].n] = _consoleFunc(consoleMap2[i].c);
+    for (var i = 0; i < consoleMap.length; i++) {
+      this[consoleMap[i].n] = _consoleFunc(consoleMap[i].c);
     }
   }
-  __name(DiagConsoleLogger3, "DiagConsoleLogger");
-  return DiagConsoleLogger3;
+  __name(DiagConsoleLogger2, "DiagConsoleLogger");
+  return DiagConsoleLogger2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/propagation/TextMapPropagator.js
-var defaultTextMapGetter2 = {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/propagation/TextMapPropagator.js
+var defaultTextMapGetter = {
   get: function(carrier, key) {
     if (carrier == null) {
       return void 0;
@@ -20988,7 +21435,7 @@ var defaultTextMapGetter2 = {
     return Object.keys(carrier);
   }
 };
-var defaultTextMapSetter2 = {
+var defaultTextMapSetter = {
   set: function(carrier, key, value) {
     if (carrier == null) {
       return;
@@ -20997,227 +21444,231 @@ var defaultTextMapSetter2 = {
   }
 };
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/context/context.js
-function createContextKey2(description) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/context/context.js
+function createContextKey(description) {
   return Symbol.for(description);
 }
-__name(createContextKey2, "createContextKey");
-var BaseContext2 = function() {
-  function BaseContext3(parentContext) {
+__name(createContextKey, "createContextKey");
+var BaseContext = function() {
+  function BaseContext2(parentContext) {
     var self2 = this;
     self2._currentContext = parentContext ? new Map(parentContext) : /* @__PURE__ */ new Map();
     self2.getValue = function(key) {
       return self2._currentContext.get(key);
     };
     self2.setValue = function(key, value) {
-      var context5 = new BaseContext3(self2._currentContext);
-      context5._currentContext.set(key, value);
-      return context5;
+      var context3 = new BaseContext2(self2._currentContext);
+      context3._currentContext.set(key, value);
+      return context3;
     };
     self2.deleteValue = function(key) {
-      var context5 = new BaseContext3(self2._currentContext);
-      context5._currentContext.delete(key);
-      return context5;
+      var context3 = new BaseContext2(self2._currentContext);
+      context3._currentContext.delete(key);
+      return context3;
     };
   }
-  __name(BaseContext3, "BaseContext");
-  return BaseContext3;
+  __name(BaseContext2, "BaseContext");
+  return BaseContext2;
 }();
-var ROOT_CONTEXT2 = new BaseContext2();
+var ROOT_CONTEXT = new BaseContext();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/context/NoopContextManager.js
-var __spreadArray3 = function(to, from) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/context/NoopContextManager.js
+var __spreadArray = function(to, from) {
   for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
     to[j] = from[i];
   return to;
 };
-var NoopContextManager2 = function() {
-  function NoopContextManager3() {
+var NoopContextManager = function() {
+  function NoopContextManager2() {
   }
-  __name(NoopContextManager3, "NoopContextManager");
-  NoopContextManager3.prototype.active = function() {
-    return ROOT_CONTEXT2;
+  __name(NoopContextManager2, "NoopContextManager");
+  NoopContextManager2.prototype.active = function() {
+    return ROOT_CONTEXT;
   };
-  NoopContextManager3.prototype.with = function(_context, fn, thisArg) {
+  NoopContextManager2.prototype.with = function(_context, fn, thisArg) {
     var args = [];
     for (var _i = 3; _i < arguments.length; _i++) {
       args[_i - 3] = arguments[_i];
     }
-    return fn.call.apply(fn, __spreadArray3([thisArg], args));
+    return fn.call.apply(fn, __spreadArray([thisArg], args));
   };
-  NoopContextManager3.prototype.bind = function(_context, target) {
+  NoopContextManager2.prototype.bind = function(_context, target) {
     return target;
   };
-  NoopContextManager3.prototype.enable = function() {
+  NoopContextManager2.prototype.enable = function() {
     return this;
   };
-  NoopContextManager3.prototype.disable = function() {
+  NoopContextManager2.prototype.disable = function() {
     return this;
   };
-  return NoopContextManager3;
+  return NoopContextManager2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/api/context.js
-var __spreadArray4 = function(to, from) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/context.js
+var __spreadArray2 = function(to, from) {
   for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
     to[j] = from[i];
   return to;
 };
-var API_NAME6 = "context";
-var NOOP_CONTEXT_MANAGER2 = new NoopContextManager2();
-var ContextAPI2 = function() {
-  function ContextAPI3() {
+var API_NAME2 = "context";
+var NOOP_CONTEXT_MANAGER = new NoopContextManager();
+var ContextAPI = function() {
+  function ContextAPI2() {
   }
-  __name(ContextAPI3, "ContextAPI");
-  ContextAPI3.getInstance = function() {
+  __name(ContextAPI2, "ContextAPI");
+  ContextAPI2.getInstance = function() {
     if (!this._instance) {
-      this._instance = new ContextAPI3();
+      this._instance = new ContextAPI2();
     }
     return this._instance;
   };
-  ContextAPI3.prototype.setGlobalContextManager = function(contextManager) {
-    return registerGlobal2(API_NAME6, contextManager, DiagAPI2.instance());
+  ContextAPI2.prototype.setGlobalContextManager = function(contextManager) {
+    return registerGlobal(API_NAME2, contextManager, DiagAPI.instance());
   };
-  ContextAPI3.prototype.active = function() {
+  ContextAPI2.prototype.active = function() {
     return this._getContextManager().active();
   };
-  ContextAPI3.prototype.with = function(context5, fn, thisArg) {
+  ContextAPI2.prototype.with = function(context3, fn, thisArg) {
     var _a3;
     var args = [];
     for (var _i = 3; _i < arguments.length; _i++) {
       args[_i - 3] = arguments[_i];
     }
-    return (_a3 = this._getContextManager()).with.apply(_a3, __spreadArray4([context5, fn, thisArg], args));
+    return (_a3 = this._getContextManager()).with.apply(_a3, __spreadArray2([context3, fn, thisArg], args));
   };
-  ContextAPI3.prototype.bind = function(context5, target) {
-    return this._getContextManager().bind(context5, target);
+  ContextAPI2.prototype.bind = function(context3, target) {
+    return this._getContextManager().bind(context3, target);
   };
-  ContextAPI3.prototype._getContextManager = function() {
-    return getGlobal2(API_NAME6) || NOOP_CONTEXT_MANAGER2;
+  ContextAPI2.prototype._getContextManager = function() {
+    return getGlobal(API_NAME2) || NOOP_CONTEXT_MANAGER;
   };
-  ContextAPI3.prototype.disable = function() {
+  ContextAPI2.prototype.disable = function() {
     this._getContextManager().disable();
-    unregisterGlobal2(API_NAME6, DiagAPI2.instance());
+    unregisterGlobal(API_NAME2, DiagAPI.instance());
   };
-  return ContextAPI3;
+  return ContextAPI2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/trace_flags.js
-var TraceFlags2;
-(function(TraceFlags3) {
-  TraceFlags3[TraceFlags3["NONE"] = 0] = "NONE";
-  TraceFlags3[TraceFlags3["SAMPLED"] = 1] = "SAMPLED";
-})(TraceFlags2 || (TraceFlags2 = {}));
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/trace_flags.js
+var TraceFlags;
+(function(TraceFlags2) {
+  TraceFlags2[TraceFlags2["NONE"] = 0] = "NONE";
+  TraceFlags2[TraceFlags2["SAMPLED"] = 1] = "SAMPLED";
+})(TraceFlags || (TraceFlags = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/invalid-span-constants.js
-var INVALID_SPANID2 = "0000000000000000";
-var INVALID_TRACEID2 = "00000000000000000000000000000000";
-var INVALID_SPAN_CONTEXT2 = {
-  traceId: INVALID_TRACEID2,
-  spanId: INVALID_SPANID2,
-  traceFlags: TraceFlags2.NONE
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/invalid-span-constants.js
+var INVALID_SPANID = "0000000000000000";
+var INVALID_TRACEID = "00000000000000000000000000000000";
+var INVALID_SPAN_CONTEXT = {
+  traceId: INVALID_TRACEID,
+  spanId: INVALID_SPANID,
+  traceFlags: TraceFlags.NONE
 };
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/NonRecordingSpan.js
-var NonRecordingSpan2 = function() {
-  function NonRecordingSpan3(_spanContext) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NonRecordingSpan.js
+var NonRecordingSpan = function() {
+  function NonRecordingSpan2(_spanContext) {
     if (_spanContext === void 0) {
-      _spanContext = INVALID_SPAN_CONTEXT2;
+      _spanContext = INVALID_SPAN_CONTEXT;
     }
     this._spanContext = _spanContext;
   }
-  __name(NonRecordingSpan3, "NonRecordingSpan");
-  NonRecordingSpan3.prototype.spanContext = function() {
+  __name(NonRecordingSpan2, "NonRecordingSpan");
+  NonRecordingSpan2.prototype.spanContext = function() {
     return this._spanContext;
   };
-  NonRecordingSpan3.prototype.setAttribute = function(_key, _value) {
+  NonRecordingSpan2.prototype.setAttribute = function(_key, _value) {
     return this;
   };
-  NonRecordingSpan3.prototype.setAttributes = function(_attributes) {
+  NonRecordingSpan2.prototype.setAttributes = function(_attributes) {
     return this;
   };
-  NonRecordingSpan3.prototype.addEvent = function(_name, _attributes) {
+  NonRecordingSpan2.prototype.addEvent = function(_name, _attributes) {
     return this;
   };
-  NonRecordingSpan3.prototype.setStatus = function(_status) {
+  NonRecordingSpan2.prototype.setStatus = function(_status) {
     return this;
   };
-  NonRecordingSpan3.prototype.updateName = function(_name) {
+  NonRecordingSpan2.prototype.updateName = function(_name) {
     return this;
   };
-  NonRecordingSpan3.prototype.end = function(_endTime) {
+  NonRecordingSpan2.prototype.end = function(_endTime) {
   };
-  NonRecordingSpan3.prototype.isRecording = function() {
+  NonRecordingSpan2.prototype.isRecording = function() {
     return false;
   };
-  NonRecordingSpan3.prototype.recordException = function(_exception, _time) {
+  NonRecordingSpan2.prototype.recordException = function(_exception, _time) {
   };
-  return NonRecordingSpan3;
+  return NonRecordingSpan2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/context-utils.js
-var SPAN_KEY2 = createContextKey2("OpenTelemetry Context Key SPAN");
-function getSpan2(context5) {
-  return context5.getValue(SPAN_KEY2) || void 0;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/context-utils.js
+var SPAN_KEY = createContextKey("OpenTelemetry Context Key SPAN");
+function getSpan(context3) {
+  return context3.getValue(SPAN_KEY) || void 0;
 }
-__name(getSpan2, "getSpan");
-function setSpan2(context5, span) {
-  return context5.setValue(SPAN_KEY2, span);
+__name(getSpan, "getSpan");
+function getActiveSpan() {
+  return getSpan(ContextAPI.getInstance().active());
 }
-__name(setSpan2, "setSpan");
-function deleteSpan2(context5) {
-  return context5.deleteValue(SPAN_KEY2);
+__name(getActiveSpan, "getActiveSpan");
+function setSpan(context3, span) {
+  return context3.setValue(SPAN_KEY, span);
 }
-__name(deleteSpan2, "deleteSpan");
-function setSpanContext2(context5, spanContext) {
-  return setSpan2(context5, new NonRecordingSpan2(spanContext));
+__name(setSpan, "setSpan");
+function deleteSpan(context3) {
+  return context3.deleteValue(SPAN_KEY);
 }
-__name(setSpanContext2, "setSpanContext");
-function getSpanContext2(context5) {
+__name(deleteSpan, "deleteSpan");
+function setSpanContext(context3, spanContext) {
+  return setSpan(context3, new NonRecordingSpan(spanContext));
+}
+__name(setSpanContext, "setSpanContext");
+function getSpanContext(context3) {
   var _a3;
-  return (_a3 = getSpan2(context5)) === null || _a3 === void 0 ? void 0 : _a3.spanContext();
+  return (_a3 = getSpan(context3)) === null || _a3 === void 0 ? void 0 : _a3.spanContext();
 }
-__name(getSpanContext2, "getSpanContext");
+__name(getSpanContext, "getSpanContext");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/spancontext-utils.js
-var VALID_TRACEID_REGEX2 = /^([0-9a-f]{32})$/i;
-var VALID_SPANID_REGEX2 = /^[0-9a-f]{16}$/i;
-function isValidTraceId2(traceId) {
-  return VALID_TRACEID_REGEX2.test(traceId) && traceId !== INVALID_TRACEID2;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/spancontext-utils.js
+var VALID_TRACEID_REGEX = /^([0-9a-f]{32})$/i;
+var VALID_SPANID_REGEX = /^[0-9a-f]{16}$/i;
+function isValidTraceId(traceId) {
+  return VALID_TRACEID_REGEX.test(traceId) && traceId !== INVALID_TRACEID;
 }
-__name(isValidTraceId2, "isValidTraceId");
-function isValidSpanId2(spanId) {
-  return VALID_SPANID_REGEX2.test(spanId) && spanId !== INVALID_SPANID2;
+__name(isValidTraceId, "isValidTraceId");
+function isValidSpanId(spanId) {
+  return VALID_SPANID_REGEX.test(spanId) && spanId !== INVALID_SPANID;
 }
-__name(isValidSpanId2, "isValidSpanId");
-function isSpanContextValid2(spanContext) {
-  return isValidTraceId2(spanContext.traceId) && isValidSpanId2(spanContext.spanId);
+__name(isValidSpanId, "isValidSpanId");
+function isSpanContextValid(spanContext) {
+  return isValidTraceId(spanContext.traceId) && isValidSpanId(spanContext.spanId);
 }
-__name(isSpanContextValid2, "isSpanContextValid");
-function wrapSpanContext2(spanContext) {
-  return new NonRecordingSpan2(spanContext);
+__name(isSpanContextValid, "isSpanContextValid");
+function wrapSpanContext(spanContext) {
+  return new NonRecordingSpan(spanContext);
 }
-__name(wrapSpanContext2, "wrapSpanContext");
+__name(wrapSpanContext, "wrapSpanContext");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracer.js
-var context3 = ContextAPI2.getInstance();
-var NoopTracer2 = function() {
-  function NoopTracer3() {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracer.js
+var context = ContextAPI.getInstance();
+var NoopTracer = function() {
+  function NoopTracer2() {
   }
-  __name(NoopTracer3, "NoopTracer");
-  NoopTracer3.prototype.startSpan = function(name, options, context5) {
+  __name(NoopTracer2, "NoopTracer");
+  NoopTracer2.prototype.startSpan = function(name, options, context3) {
     var root = Boolean(options === null || options === void 0 ? void 0 : options.root);
     if (root) {
-      return new NonRecordingSpan2();
+      return new NonRecordingSpan();
     }
-    var parentFromContext = context5 && getSpanContext2(context5);
-    if (isSpanContext2(parentFromContext) && isSpanContextValid2(parentFromContext)) {
-      return new NonRecordingSpan2(parentFromContext);
+    var parentFromContext = context3 && getSpanContext(context3);
+    if (isSpanContext(parentFromContext) && isSpanContextValid(parentFromContext)) {
+      return new NonRecordingSpan(parentFromContext);
     } else {
-      return new NonRecordingSpan2();
+      return new NonRecordingSpan();
     }
   };
-  NoopTracer3.prototype.startActiveSpan = function(name, arg2, arg3, arg4) {
+  NoopTracer2.prototype.startActiveSpan = function(name, arg2, arg3, arg4) {
     var opts;
     var ctx;
     var fn;
@@ -21233,139 +21684,139 @@ var NoopTracer2 = function() {
       ctx = arg3;
       fn = arg4;
     }
-    var parentContext = ctx !== null && ctx !== void 0 ? ctx : context3.active();
+    var parentContext = ctx !== null && ctx !== void 0 ? ctx : context.active();
     var span = this.startSpan(name, opts, parentContext);
-    var contextWithSpanSet = setSpan2(parentContext, span);
-    return context3.with(contextWithSpanSet, fn, void 0, span);
+    var contextWithSpanSet = setSpan(parentContext, span);
+    return context.with(contextWithSpanSet, fn, void 0, span);
   };
-  return NoopTracer3;
+  return NoopTracer2;
 }();
-function isSpanContext2(spanContext) {
+function isSpanContext(spanContext) {
   return typeof spanContext === "object" && typeof spanContext["spanId"] === "string" && typeof spanContext["traceId"] === "string" && typeof spanContext["traceFlags"] === "number";
 }
-__name(isSpanContext2, "isSpanContext");
+__name(isSpanContext, "isSpanContext");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracer.js
-var NOOP_TRACER2 = new NoopTracer2();
-var ProxyTracer2 = function() {
-  function ProxyTracer3(_provider, name, version, options) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracer.js
+var NOOP_TRACER = new NoopTracer();
+var ProxyTracer = function() {
+  function ProxyTracer2(_provider, name, version, options) {
     this._provider = _provider;
     this.name = name;
     this.version = version;
     this.options = options;
   }
-  __name(ProxyTracer3, "ProxyTracer");
-  ProxyTracer3.prototype.startSpan = function(name, options, context5) {
-    return this._getTracer().startSpan(name, options, context5);
+  __name(ProxyTracer2, "ProxyTracer");
+  ProxyTracer2.prototype.startSpan = function(name, options, context3) {
+    return this._getTracer().startSpan(name, options, context3);
   };
-  ProxyTracer3.prototype.startActiveSpan = function(_name, _options, _context, _fn) {
+  ProxyTracer2.prototype.startActiveSpan = function(_name, _options, _context, _fn) {
     var tracer = this._getTracer();
     return Reflect.apply(tracer.startActiveSpan, tracer, arguments);
   };
-  ProxyTracer3.prototype._getTracer = function() {
+  ProxyTracer2.prototype._getTracer = function() {
     if (this._delegate) {
       return this._delegate;
     }
     var tracer = this._provider.getDelegateTracer(this.name, this.version, this.options);
     if (!tracer) {
-      return NOOP_TRACER2;
+      return NOOP_TRACER;
     }
     this._delegate = tracer;
     return this._delegate;
   };
-  return ProxyTracer3;
+  return ProxyTracer2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracerProvider.js
-var NoopTracerProvider2 = function() {
-  function NoopTracerProvider3() {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracerProvider.js
+var NoopTracerProvider = function() {
+  function NoopTracerProvider2() {
   }
-  __name(NoopTracerProvider3, "NoopTracerProvider");
-  NoopTracerProvider3.prototype.getTracer = function(_name, _version, _options) {
-    return new NoopTracer2();
+  __name(NoopTracerProvider2, "NoopTracerProvider");
+  NoopTracerProvider2.prototype.getTracer = function(_name, _version, _options) {
+    return new NoopTracer();
   };
-  return NoopTracerProvider3;
+  return NoopTracerProvider2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracerProvider.js
-var NOOP_TRACER_PROVIDER2 = new NoopTracerProvider2();
-var ProxyTracerProvider2 = function() {
-  function ProxyTracerProvider3() {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracerProvider.js
+var NOOP_TRACER_PROVIDER = new NoopTracerProvider();
+var ProxyTracerProvider = function() {
+  function ProxyTracerProvider2() {
   }
-  __name(ProxyTracerProvider3, "ProxyTracerProvider");
-  ProxyTracerProvider3.prototype.getTracer = function(name, version, options) {
+  __name(ProxyTracerProvider2, "ProxyTracerProvider");
+  ProxyTracerProvider2.prototype.getTracer = function(name, version, options) {
     var _a3;
-    return (_a3 = this.getDelegateTracer(name, version, options)) !== null && _a3 !== void 0 ? _a3 : new ProxyTracer2(this, name, version, options);
+    return (_a3 = this.getDelegateTracer(name, version, options)) !== null && _a3 !== void 0 ? _a3 : new ProxyTracer(this, name, version, options);
   };
-  ProxyTracerProvider3.prototype.getDelegate = function() {
+  ProxyTracerProvider2.prototype.getDelegate = function() {
     var _a3;
-    return (_a3 = this._delegate) !== null && _a3 !== void 0 ? _a3 : NOOP_TRACER_PROVIDER2;
+    return (_a3 = this._delegate) !== null && _a3 !== void 0 ? _a3 : NOOP_TRACER_PROVIDER;
   };
-  ProxyTracerProvider3.prototype.setDelegate = function(delegate) {
+  ProxyTracerProvider2.prototype.setDelegate = function(delegate) {
     this._delegate = delegate;
   };
-  ProxyTracerProvider3.prototype.getDelegateTracer = function(name, version, options) {
+  ProxyTracerProvider2.prototype.getDelegateTracer = function(name, version, options) {
     var _a3;
     return (_a3 = this._delegate) === null || _a3 === void 0 ? void 0 : _a3.getTracer(name, version, options);
   };
-  return ProxyTracerProvider3;
+  return ProxyTracerProvider2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/SamplingResult.js
-var SamplingDecision2;
-(function(SamplingDecision4) {
-  SamplingDecision4[SamplingDecision4["NOT_RECORD"] = 0] = "NOT_RECORD";
-  SamplingDecision4[SamplingDecision4["RECORD"] = 1] = "RECORD";
-  SamplingDecision4[SamplingDecision4["RECORD_AND_SAMPLED"] = 2] = "RECORD_AND_SAMPLED";
-})(SamplingDecision2 || (SamplingDecision2 = {}));
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/SamplingResult.js
+var SamplingDecision;
+(function(SamplingDecision3) {
+  SamplingDecision3[SamplingDecision3["NOT_RECORD"] = 0] = "NOT_RECORD";
+  SamplingDecision3[SamplingDecision3["RECORD"] = 1] = "RECORD";
+  SamplingDecision3[SamplingDecision3["RECORD_AND_SAMPLED"] = 2] = "RECORD_AND_SAMPLED";
+})(SamplingDecision || (SamplingDecision = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/span_kind.js
-var SpanKind2;
-(function(SpanKind3) {
-  SpanKind3[SpanKind3["INTERNAL"] = 0] = "INTERNAL";
-  SpanKind3[SpanKind3["SERVER"] = 1] = "SERVER";
-  SpanKind3[SpanKind3["CLIENT"] = 2] = "CLIENT";
-  SpanKind3[SpanKind3["PRODUCER"] = 3] = "PRODUCER";
-  SpanKind3[SpanKind3["CONSUMER"] = 4] = "CONSUMER";
-})(SpanKind2 || (SpanKind2 = {}));
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/span_kind.js
+var SpanKind;
+(function(SpanKind2) {
+  SpanKind2[SpanKind2["INTERNAL"] = 0] = "INTERNAL";
+  SpanKind2[SpanKind2["SERVER"] = 1] = "SERVER";
+  SpanKind2[SpanKind2["CLIENT"] = 2] = "CLIENT";
+  SpanKind2[SpanKind2["PRODUCER"] = 3] = "PRODUCER";
+  SpanKind2[SpanKind2["CONSUMER"] = 4] = "CONSUMER";
+})(SpanKind || (SpanKind = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/status.js
-var SpanStatusCode2;
-(function(SpanStatusCode3) {
-  SpanStatusCode3[SpanStatusCode3["UNSET"] = 0] = "UNSET";
-  SpanStatusCode3[SpanStatusCode3["OK"] = 1] = "OK";
-  SpanStatusCode3[SpanStatusCode3["ERROR"] = 2] = "ERROR";
-})(SpanStatusCode2 || (SpanStatusCode2 = {}));
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/status.js
+var SpanStatusCode;
+(function(SpanStatusCode2) {
+  SpanStatusCode2[SpanStatusCode2["UNSET"] = 0] = "UNSET";
+  SpanStatusCode2[SpanStatusCode2["OK"] = 1] = "OK";
+  SpanStatusCode2[SpanStatusCode2["ERROR"] = 2] = "ERROR";
+})(SpanStatusCode || (SpanStatusCode = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/internal/tracestate-validators.js
-var VALID_KEY_CHAR_RANGE2 = "[_0-9a-z-*/]";
-var VALID_KEY2 = "[a-z]" + VALID_KEY_CHAR_RANGE2 + "{0,255}";
-var VALID_VENDOR_KEY2 = "[a-z0-9]" + VALID_KEY_CHAR_RANGE2 + "{0,240}@[a-z]" + VALID_KEY_CHAR_RANGE2 + "{0,13}";
-var VALID_KEY_REGEX2 = new RegExp("^(?:" + VALID_KEY2 + "|" + VALID_VENDOR_KEY2 + ")$");
-var VALID_VALUE_BASE_REGEX2 = /^[ -~]{0,255}[!-~]$/;
-var INVALID_VALUE_COMMA_EQUAL_REGEX2 = /,|=/;
-function validateKey2(key) {
-  return VALID_KEY_REGEX2.test(key);
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/internal/tracestate-validators.js
+var VALID_KEY_CHAR_RANGE = "[_0-9a-z-*/]";
+var VALID_KEY = "[a-z]" + VALID_KEY_CHAR_RANGE + "{0,255}";
+var VALID_VENDOR_KEY = "[a-z0-9]" + VALID_KEY_CHAR_RANGE + "{0,240}@[a-z]" + VALID_KEY_CHAR_RANGE + "{0,13}";
+var VALID_KEY_REGEX = new RegExp("^(?:" + VALID_KEY + "|" + VALID_VENDOR_KEY + ")$");
+var VALID_VALUE_BASE_REGEX = /^[ -~]{0,255}[!-~]$/;
+var INVALID_VALUE_COMMA_EQUAL_REGEX = /,|=/;
+function validateKey(key) {
+  return VALID_KEY_REGEX.test(key);
 }
-__name(validateKey2, "validateKey");
-function validateValue2(value) {
-  return VALID_VALUE_BASE_REGEX2.test(value) && !INVALID_VALUE_COMMA_EQUAL_REGEX2.test(value);
+__name(validateKey, "validateKey");
+function validateValue(value) {
+  return VALID_VALUE_BASE_REGEX.test(value) && !INVALID_VALUE_COMMA_EQUAL_REGEX.test(value);
 }
-__name(validateValue2, "validateValue");
+__name(validateValue, "validateValue");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/trace/internal/tracestate-impl.js
-var MAX_TRACE_STATE_ITEMS2 = 32;
-var MAX_TRACE_STATE_LEN2 = 512;
-var LIST_MEMBERS_SEPARATOR2 = ",";
-var LIST_MEMBER_KEY_VALUE_SPLITTER2 = "=";
-var TraceStateImpl2 = function() {
-  function TraceStateImpl3(rawTraceState) {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/internal/tracestate-impl.js
+var MAX_TRACE_STATE_ITEMS = 32;
+var MAX_TRACE_STATE_LEN = 512;
+var LIST_MEMBERS_SEPARATOR = ",";
+var LIST_MEMBER_KEY_VALUE_SPLITTER = "=";
+var TraceStateImpl = function() {
+  function TraceStateImpl2(rawTraceState) {
     this._internalState = /* @__PURE__ */ new Map();
     if (rawTraceState)
       this._parse(rawTraceState);
   }
-  __name(TraceStateImpl3, "TraceStateImpl");
-  TraceStateImpl3.prototype.set = function(key, value) {
+  __name(TraceStateImpl2, "TraceStateImpl");
+  TraceStateImpl2.prototype.set = function(key, value) {
     var traceState = this._clone();
     if (traceState._internalState.has(key)) {
       traceState._internalState.delete(key);
@@ -21373,185 +21824,186 @@ var TraceStateImpl2 = function() {
     traceState._internalState.set(key, value);
     return traceState;
   };
-  TraceStateImpl3.prototype.unset = function(key) {
+  TraceStateImpl2.prototype.unset = function(key) {
     var traceState = this._clone();
     traceState._internalState.delete(key);
     return traceState;
   };
-  TraceStateImpl3.prototype.get = function(key) {
+  TraceStateImpl2.prototype.get = function(key) {
     return this._internalState.get(key);
   };
-  TraceStateImpl3.prototype.serialize = function() {
+  TraceStateImpl2.prototype.serialize = function() {
     var _this = this;
     return this._keys().reduce(function(agg, key) {
-      agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER2 + _this.get(key));
+      agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER + _this.get(key));
       return agg;
-    }, []).join(LIST_MEMBERS_SEPARATOR2);
+    }, []).join(LIST_MEMBERS_SEPARATOR);
   };
-  TraceStateImpl3.prototype._parse = function(rawTraceState) {
-    if (rawTraceState.length > MAX_TRACE_STATE_LEN2)
+  TraceStateImpl2.prototype._parse = function(rawTraceState) {
+    if (rawTraceState.length > MAX_TRACE_STATE_LEN)
       return;
-    this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR2).reverse().reduce(function(agg, part) {
+    this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR).reverse().reduce(function(agg, part) {
       var listMember = part.trim();
-      var i = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER2);
+      var i = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER);
       if (i !== -1) {
         var key = listMember.slice(0, i);
         var value = listMember.slice(i + 1, part.length);
-        if (validateKey2(key) && validateValue2(value)) {
+        if (validateKey(key) && validateValue(value)) {
           agg.set(key, value);
         } else {
         }
       }
       return agg;
     }, /* @__PURE__ */ new Map());
-    if (this._internalState.size > MAX_TRACE_STATE_ITEMS2) {
-      this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS2));
+    if (this._internalState.size > MAX_TRACE_STATE_ITEMS) {
+      this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS));
     }
   };
-  TraceStateImpl3.prototype._keys = function() {
+  TraceStateImpl2.prototype._keys = function() {
     return Array.from(this._internalState.keys()).reverse();
   };
-  TraceStateImpl3.prototype._clone = function() {
-    var traceState = new TraceStateImpl3();
+  TraceStateImpl2.prototype._clone = function() {
+    var traceState = new TraceStateImpl2();
     traceState._internalState = new Map(this._internalState);
     return traceState;
   };
-  return TraceStateImpl3;
+  return TraceStateImpl2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/api/trace.js
-var API_NAME7 = "trace";
-var TraceAPI2 = function() {
-  function TraceAPI3() {
-    this._proxyTracerProvider = new ProxyTracerProvider2();
-    this.wrapSpanContext = wrapSpanContext2;
-    this.isSpanContextValid = isSpanContextValid2;
-    this.deleteSpan = deleteSpan2;
-    this.getSpan = getSpan2;
-    this.getSpanContext = getSpanContext2;
-    this.setSpan = setSpan2;
-    this.setSpanContext = setSpanContext2;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/trace.js
+var API_NAME3 = "trace";
+var TraceAPI = function() {
+  function TraceAPI2() {
+    this._proxyTracerProvider = new ProxyTracerProvider();
+    this.wrapSpanContext = wrapSpanContext;
+    this.isSpanContextValid = isSpanContextValid;
+    this.deleteSpan = deleteSpan;
+    this.getSpan = getSpan;
+    this.getActiveSpan = getActiveSpan;
+    this.getSpanContext = getSpanContext;
+    this.setSpan = setSpan;
+    this.setSpanContext = setSpanContext;
   }
-  __name(TraceAPI3, "TraceAPI");
-  TraceAPI3.getInstance = function() {
+  __name(TraceAPI2, "TraceAPI");
+  TraceAPI2.getInstance = function() {
     if (!this._instance) {
-      this._instance = new TraceAPI3();
+      this._instance = new TraceAPI2();
     }
     return this._instance;
   };
-  TraceAPI3.prototype.setGlobalTracerProvider = function(provider) {
-    var success = registerGlobal2(API_NAME7, this._proxyTracerProvider, DiagAPI2.instance());
+  TraceAPI2.prototype.setGlobalTracerProvider = function(provider) {
+    var success = registerGlobal(API_NAME3, this._proxyTracerProvider, DiagAPI.instance());
     if (success) {
       this._proxyTracerProvider.setDelegate(provider);
     }
     return success;
   };
-  TraceAPI3.prototype.getTracerProvider = function() {
-    return getGlobal2(API_NAME7) || this._proxyTracerProvider;
+  TraceAPI2.prototype.getTracerProvider = function() {
+    return getGlobal(API_NAME3) || this._proxyTracerProvider;
   };
-  TraceAPI3.prototype.getTracer = function(name, version) {
+  TraceAPI2.prototype.getTracer = function(name, version) {
     return this.getTracerProvider().getTracer(name, version);
   };
-  TraceAPI3.prototype.disable = function() {
-    unregisterGlobal2(API_NAME7, DiagAPI2.instance());
-    this._proxyTracerProvider = new ProxyTracerProvider2();
+  TraceAPI2.prototype.disable = function() {
+    unregisterGlobal(API_NAME3, DiagAPI.instance());
+    this._proxyTracerProvider = new ProxyTracerProvider();
   };
-  return TraceAPI3;
+  return TraceAPI2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/propagation/NoopTextMapPropagator.js
-var NoopTextMapPropagator2 = function() {
-  function NoopTextMapPropagator3() {
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/propagation/NoopTextMapPropagator.js
+var NoopTextMapPropagator = function() {
+  function NoopTextMapPropagator2() {
   }
-  __name(NoopTextMapPropagator3, "NoopTextMapPropagator");
-  NoopTextMapPropagator3.prototype.inject = function(_context, _carrier) {
+  __name(NoopTextMapPropagator2, "NoopTextMapPropagator");
+  NoopTextMapPropagator2.prototype.inject = function(_context, _carrier) {
   };
-  NoopTextMapPropagator3.prototype.extract = function(context5, _carrier) {
-    return context5;
+  NoopTextMapPropagator2.prototype.extract = function(context3, _carrier) {
+    return context3;
   };
-  NoopTextMapPropagator3.prototype.fields = function() {
+  NoopTextMapPropagator2.prototype.fields = function() {
     return [];
   };
-  return NoopTextMapPropagator3;
+  return NoopTextMapPropagator2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/baggage/context-helpers.js
-var BAGGAGE_KEY2 = createContextKey2("OpenTelemetry Baggage Key");
-function getBaggage2(context5) {
-  return context5.getValue(BAGGAGE_KEY2) || void 0;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/context-helpers.js
+var BAGGAGE_KEY = createContextKey("OpenTelemetry Baggage Key");
+function getBaggage(context3) {
+  return context3.getValue(BAGGAGE_KEY) || void 0;
 }
-__name(getBaggage2, "getBaggage");
-function setBaggage2(context5, baggage) {
-  return context5.setValue(BAGGAGE_KEY2, baggage);
+__name(getBaggage, "getBaggage");
+function setBaggage(context3, baggage) {
+  return context3.setValue(BAGGAGE_KEY, baggage);
 }
-__name(setBaggage2, "setBaggage");
-function deleteBaggage2(context5) {
-  return context5.deleteValue(BAGGAGE_KEY2);
+__name(setBaggage, "setBaggage");
+function deleteBaggage(context3) {
+  return context3.deleteValue(BAGGAGE_KEY);
 }
-__name(deleteBaggage2, "deleteBaggage");
+__name(deleteBaggage, "deleteBaggage");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/api/propagation.js
-var API_NAME8 = "propagation";
-var NOOP_TEXT_MAP_PROPAGATOR2 = new NoopTextMapPropagator2();
-var PropagationAPI2 = function() {
-  function PropagationAPI3() {
-    this.createBaggage = createBaggage2;
-    this.getBaggage = getBaggage2;
-    this.setBaggage = setBaggage2;
-    this.deleteBaggage = deleteBaggage2;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/propagation.js
+var API_NAME4 = "propagation";
+var NOOP_TEXT_MAP_PROPAGATOR = new NoopTextMapPropagator();
+var PropagationAPI = function() {
+  function PropagationAPI2() {
+    this.createBaggage = createBaggage;
+    this.getBaggage = getBaggage;
+    this.setBaggage = setBaggage;
+    this.deleteBaggage = deleteBaggage;
   }
-  __name(PropagationAPI3, "PropagationAPI");
-  PropagationAPI3.getInstance = function() {
+  __name(PropagationAPI2, "PropagationAPI");
+  PropagationAPI2.getInstance = function() {
     if (!this._instance) {
-      this._instance = new PropagationAPI3();
+      this._instance = new PropagationAPI2();
     }
     return this._instance;
   };
-  PropagationAPI3.prototype.setGlobalPropagator = function(propagator) {
-    return registerGlobal2(API_NAME8, propagator, DiagAPI2.instance());
+  PropagationAPI2.prototype.setGlobalPropagator = function(propagator) {
+    return registerGlobal(API_NAME4, propagator, DiagAPI.instance());
   };
-  PropagationAPI3.prototype.inject = function(context5, carrier, setter) {
+  PropagationAPI2.prototype.inject = function(context3, carrier, setter) {
     if (setter === void 0) {
-      setter = defaultTextMapSetter2;
+      setter = defaultTextMapSetter;
     }
-    return this._getGlobalPropagator().inject(context5, carrier, setter);
+    return this._getGlobalPropagator().inject(context3, carrier, setter);
   };
-  PropagationAPI3.prototype.extract = function(context5, carrier, getter) {
+  PropagationAPI2.prototype.extract = function(context3, carrier, getter) {
     if (getter === void 0) {
-      getter = defaultTextMapGetter2;
+      getter = defaultTextMapGetter;
     }
-    return this._getGlobalPropagator().extract(context5, carrier, getter);
+    return this._getGlobalPropagator().extract(context3, carrier, getter);
   };
-  PropagationAPI3.prototype.fields = function() {
+  PropagationAPI2.prototype.fields = function() {
     return this._getGlobalPropagator().fields();
   };
-  PropagationAPI3.prototype.disable = function() {
-    unregisterGlobal2(API_NAME8, DiagAPI2.instance());
+  PropagationAPI2.prototype.disable = function() {
+    unregisterGlobal(API_NAME4, DiagAPI.instance());
   };
-  PropagationAPI3.prototype._getGlobalPropagator = function() {
-    return getGlobal2(API_NAME8) || NOOP_TEXT_MAP_PROPAGATOR2;
+  PropagationAPI2.prototype._getGlobalPropagator = function() {
+    return getGlobal(API_NAME4) || NOOP_TEXT_MAP_PROPAGATOR;
   };
-  return PropagationAPI3;
+  return PropagationAPI2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/build/esm/index.js
-var context4 = ContextAPI2.getInstance();
-var trace2 = TraceAPI2.getInstance();
-var propagation2 = PropagationAPI2.getInstance();
-var diag4 = DiagAPI2.instance();
+// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/index.js
+var context2 = ContextAPI.getInstance();
+var trace = TraceAPI.getInstance();
+var propagation = PropagationAPI.getInstance();
+var diag2 = DiagAPI.instance();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/trace/suppress-tracing.js
-var SUPPRESS_TRACING_KEY = createContextKey2("OpenTelemetry SDK Context Key SUPPRESS_TRACING");
-function suppressTracing(context5) {
-  return context5.setValue(SUPPRESS_TRACING_KEY, true);
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/suppress-tracing.js
+var SUPPRESS_TRACING_KEY = createContextKey("OpenTelemetry SDK Context Key SUPPRESS_TRACING");
+function suppressTracing(context3) {
+  return context3.setValue(SUPPRESS_TRACING_KEY, true);
 }
 __name(suppressTracing, "suppressTracing");
-function isTracingSuppressed(context5) {
-  return context5.getValue(SUPPRESS_TRACING_KEY) === true;
+function isTracingSuppressed(context3) {
+  return context3.getValue(SUPPRESS_TRACING_KEY) === true;
 }
 __name(isTracingSuppressed, "isTracingSuppressed");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/baggage/constants.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/baggage/constants.js
 var BAGGAGE_KEY_PAIR_SEPARATOR = "=";
 var BAGGAGE_PROPERTIES_SEPARATOR = ";";
 var BAGGAGE_ITEMS_SEPARATOR = ",";
@@ -21560,24 +22012,24 @@ var BAGGAGE_MAX_NAME_VALUE_PAIRS = 180;
 var BAGGAGE_MAX_PER_NAME_VALUE_PAIRS = 4096;
 var BAGGAGE_MAX_TOTAL_LENGTH = 8192;
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/baggage/utils.js
-var __read = function(o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m)
-    return o;
-  var i = m.call(o), r, ar = [], e;
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/baggage/utils.js
+var __read = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
   try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-      ar.push(r.value);
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
   } catch (error2) {
-    e = { error: error2 };
+    e2 = { error: error2 };
   } finally {
     try {
-      if (r && !r.done && (m = i["return"]))
-        m.call(i);
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
     } finally {
-      if (e)
-        throw e.error;
+      if (e2)
+        throw e2.error;
     }
   }
   return ar;
@@ -21614,20 +22066,20 @@ function parsePairKeyValue(entry) {
   var value = decodeURIComponent(keyPair[1].trim());
   var metadata;
   if (valueProps.length > 0) {
-    metadata = baggageEntryMetadataFromString2(valueProps.join(BAGGAGE_PROPERTIES_SEPARATOR));
+    metadata = baggageEntryMetadataFromString(valueProps.join(BAGGAGE_PROPERTIES_SEPARATOR));
   }
   return { key, value, metadata };
 }
 __name(parsePairKeyValue, "parsePairKeyValue");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/baggage/propagation/W3CBaggagePropagator.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/baggage/propagation/W3CBaggagePropagator.js
 var W3CBaggagePropagator = function() {
   function W3CBaggagePropagator2() {
   }
   __name(W3CBaggagePropagator2, "W3CBaggagePropagator");
-  W3CBaggagePropagator2.prototype.inject = function(context5, carrier, setter) {
-    var baggage = propagation2.getBaggage(context5);
-    if (!baggage || isTracingSuppressed(context5))
+  W3CBaggagePropagator2.prototype.inject = function(context3, carrier, setter) {
+    var baggage = propagation.getBaggage(context3);
+    if (!baggage || isTracingSuppressed(context3))
       return;
     var keyPairs = getKeyPairs(baggage).filter(function(pair) {
       return pair.length <= BAGGAGE_MAX_PER_NAME_VALUE_PAIRS;
@@ -21637,14 +22089,14 @@ var W3CBaggagePropagator = function() {
       setter.set(carrier, BAGGAGE_HEADER, headerValue);
     }
   };
-  W3CBaggagePropagator2.prototype.extract = function(context5, carrier, getter) {
+  W3CBaggagePropagator2.prototype.extract = function(context3, carrier, getter) {
     var headerValue = getter.get(carrier, BAGGAGE_HEADER);
     var baggageString = Array.isArray(headerValue) ? headerValue.join(BAGGAGE_ITEMS_SEPARATOR) : headerValue;
     if (!baggageString)
-      return context5;
+      return context3;
     var baggage = {};
     if (baggageString.length === 0) {
-      return context5;
+      return context3;
     }
     var pairs = baggageString.split(BAGGAGE_ITEMS_SEPARATOR);
     pairs.forEach(function(entry) {
@@ -21658,9 +22110,9 @@ var W3CBaggagePropagator = function() {
       }
     });
     if (Object.entries(baggage).length === 0) {
-      return context5;
+      return context3;
     }
-    return propagation2.setBaggage(context5, propagation2.createBaggage(baggage));
+    return propagation.setBaggage(context3, propagation.createBaggage(baggage));
   };
   W3CBaggagePropagator2.prototype.fields = function() {
     return [BAGGAGE_HEADER];
@@ -21668,38 +22120,53 @@ var W3CBaggagePropagator = function() {
   return W3CBaggagePropagator2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/common/attributes.js
-var __values = function(o) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-  if (m)
-    return m.call(o);
-  if (o && typeof o.length === "number")
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/anchored-clock.js
+var AnchoredClock = function() {
+  function AnchoredClock2(systemClock, monotonicClock) {
+    this._monotonicClock = monotonicClock;
+    this._epochMillis = systemClock.now();
+    this._performanceMillis = monotonicClock.now();
+  }
+  __name(AnchoredClock2, "AnchoredClock");
+  AnchoredClock2.prototype.now = function() {
+    var delta = this._monotonicClock.now() - this._performanceMillis;
+    return this._epochMillis + delta;
+  };
+  return AnchoredClock2;
+}();
+
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/attributes.js
+var __values = function(o2) {
+  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
+  if (m2)
+    return m2.call(o2);
+  if (o2 && typeof o2.length === "number")
     return {
       next: function() {
-        if (o && i >= o.length)
-          o = void 0;
-        return { value: o && o[i++], done: !o };
+        if (o2 && i >= o2.length)
+          o2 = void 0;
+        return { value: o2 && o2[i++], done: !o2 };
       }
     };
   throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-var __read2 = function(o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m)
-    return o;
-  var i = m.call(o), r, ar = [], e;
+var __read2 = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
   try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-      ar.push(r.value);
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
   } catch (error2) {
-    e = { error: error2 };
+    e2 = { error: error2 };
   } finally {
     try {
-      if (r && !r.done && (m = i["return"]))
-        m.call(i);
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
     } finally {
-      if (e)
-        throw e.error;
+      if (e2)
+        throw e2.error;
     }
   }
   return ar;
@@ -21714,11 +22181,11 @@ function sanitizeAttributes(attributes) {
     for (var _b2 = __values(Object.entries(attributes)), _c = _b2.next(); !_c.done; _c = _b2.next()) {
       var _d = __read2(_c.value, 2), key = _d[0], val = _d[1];
       if (!isAttributeKey(key)) {
-        diag4.warn("Invalid attribute key: " + key);
+        diag2.warn("Invalid attribute key: " + key);
         continue;
       }
       if (!isAttributeValue(val)) {
-        diag4.warn("Invalid attribute value set for key: " + key);
+        diag2.warn("Invalid attribute value set for key: " + key);
         continue;
       }
       if (Array.isArray(val)) {
@@ -21800,10 +22267,10 @@ function isValidPrimitiveAttributeValue(val) {
 }
 __name(isValidPrimitiveAttributeValue, "isValidPrimitiveAttributeValue");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/common/logging-error-handler.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/logging-error-handler.js
 function loggingErrorHandler() {
   return function(ex) {
-    diag4.error(stringifyException(ex));
+    diag2.error(stringifyException(ex));
   };
 }
 __name(loggingErrorHandler, "loggingErrorHandler");
@@ -21833,7 +22300,7 @@ function flattenException(ex) {
 }
 __name(flattenException, "flattenException");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/common/global-error-handler.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/global-error-handler.js
 var delegateHandler = loggingErrorHandler();
 function globalErrorHandler(ex) {
   try {
@@ -21843,10 +22310,10 @@ function globalErrorHandler(ex) {
 }
 __name(globalErrorHandler, "globalErrorHandler");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/node/environment.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/environment.js
 var os2 = __toESM(require("os"));
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/utils/sampling.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/sampling.js
 var TracesSamplerValues;
 (function(TracesSamplerValues2) {
   TracesSamplerValues2["AlwaysOff"] = "always_off";
@@ -21857,10 +22324,10 @@ var TracesSamplerValues;
   TracesSamplerValues2["TraceIdRatio"] = "traceidratio";
 })(TracesSamplerValues || (TracesSamplerValues = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/browser/globalThis.js
-var _globalThis3 = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/browser/globalThis.js
+var _globalThis2 = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/utils/environment.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/environment.js
 var DEFAULT_LIST_SEPARATOR = ",";
 var ENVIRONMENT_NUMBERS_KEYS = [
   "OTEL_BSP_EXPORT_TIMEOUT",
@@ -21918,7 +22385,7 @@ var DEFAULT_ENVIRONMENT = {
   OTEL_EXPORTER_OTLP_TRACES_TIMEOUT: 1e4,
   OTEL_EXPORTER_OTLP_METRICS_TIMEOUT: 1e4,
   OTEL_EXPORTER_ZIPKIN_ENDPOINT: "http://localhost:9411/api/v2/spans",
-  OTEL_LOG_LEVEL: DiagLogLevel2.INFO,
+  OTEL_LOG_LEVEL: DiagLogLevel.INFO,
   OTEL_NO_PATCH_MODULES: [],
   OTEL_PROPAGATORS: ["tracecontext", "baggage"],
   OTEL_RESOURCE_ATTRIBUTES: "",
@@ -21982,13 +22449,13 @@ function parseStringList(name, output, input, separator) {
 }
 __name(parseStringList, "parseStringList");
 var logLevelMap = {
-  ALL: DiagLogLevel2.ALL,
-  VERBOSE: DiagLogLevel2.VERBOSE,
-  DEBUG: DiagLogLevel2.DEBUG,
-  INFO: DiagLogLevel2.INFO,
-  WARN: DiagLogLevel2.WARN,
-  ERROR: DiagLogLevel2.ERROR,
-  NONE: DiagLogLevel2.NONE
+  ALL: DiagLogLevel.ALL,
+  VERBOSE: DiagLogLevel.VERBOSE,
+  DEBUG: DiagLogLevel.DEBUG,
+  INFO: DiagLogLevel.INFO,
+  WARN: DiagLogLevel.WARN,
+  ERROR: DiagLogLevel.ERROR,
+  NONE: DiagLogLevel.NONE
 };
 function setLogLevelFromEnv(key, environment, values) {
   var value = values[key];
@@ -22025,11 +22492,11 @@ function parseEnvironment(values) {
 }
 __name(parseEnvironment, "parseEnvironment");
 function getEnvWithoutDefaults() {
-  return typeof process !== "undefined" ? parseEnvironment(process.env) : parseEnvironment(_globalThis3);
+  return typeof process !== "undefined" ? parseEnvironment(process.env) : parseEnvironment(_globalThis2);
 }
 __name(getEnvWithoutDefaults, "getEnvWithoutDefaults");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/node/environment.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/environment.js
 function getEnv() {
   var processEnv = parseEnvironment(process.env);
   return Object.assign({
@@ -22038,14 +22505,14 @@ function getEnv() {
 }
 __name(getEnv, "getEnv");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/node/globalThis.js
-var _globalThis4 = typeof globalThis === "object" ? globalThis : global;
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/globalThis.js
+var _globalThis3 = typeof globalThis === "object" ? globalThis : global;
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/node/hex-to-base64.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/hex-to-base64.js
 var buf8 = Buffer.alloc(8);
 var buf16 = Buffer.alloc(16);
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/node/RandomIdGenerator.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/RandomIdGenerator.js
 var SPAN_ID_BYTES = 8;
 var TRACE_ID_BYTES = 16;
 var RandomIdGenerator = function() {
@@ -22074,14 +22541,14 @@ function getIdGenerator(bytes) {
 }
 __name(getIdGenerator, "getIdGenerator");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/node/performance.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/performance.js
 var import_perf_hooks = require("perf_hooks");
 var otperformance = import_perf_hooks.performance;
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/version.js
-var VERSION3 = "1.6.0";
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/version.js
+var VERSION2 = "1.7.0";
 
-// ../../node_modules/.pnpm/@opentelemetry+semantic-conventions@1.6.0/node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
+// ../../node_modules/.pnpm/@opentelemetry+semantic-conventions@1.7.0/node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
 var SemanticAttributes = {
   AWS_LAMBDA_INVOKED_ARN: "aws.lambda.invoked_arn",
   DB_SYSTEM: "db.system",
@@ -22213,7 +22680,7 @@ var SemanticAttributes = {
   MESSAGE_UNCOMPRESSED_SIZE: "message.uncompressed_size"
 };
 
-// ../../node_modules/.pnpm/@opentelemetry+semantic-conventions@1.6.0/node_modules/@opentelemetry/semantic-conventions/build/esm/resource/SemanticResourceAttributes.js
+// ../../node_modules/.pnpm/@opentelemetry+semantic-conventions@1.7.0/node_modules/@opentelemetry/semantic-conventions/build/esm/resource/SemanticResourceAttributes.js
 var SemanticResourceAttributes = {
   CLOUD_PROVIDER: "cloud.provider",
   CLOUD_ACCOUNT_ID: "cloud.account.id",
@@ -22310,17 +22777,17 @@ var TelemetrySdkLanguageValues = {
   WEBJS: "webjs"
 };
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/node/sdk-info.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/sdk-info.js
 var _a2;
-var SDK_INFO = (_a2 = {}, _a2[SemanticResourceAttributes.TELEMETRY_SDK_NAME] = "opentelemetry", _a2[SemanticResourceAttributes.PROCESS_RUNTIME_NAME] = "node", _a2[SemanticResourceAttributes.TELEMETRY_SDK_LANGUAGE] = TelemetrySdkLanguageValues.NODEJS, _a2[SemanticResourceAttributes.TELEMETRY_SDK_VERSION] = VERSION3, _a2);
+var SDK_INFO = (_a2 = {}, _a2[SemanticResourceAttributes.TELEMETRY_SDK_NAME] = "opentelemetry", _a2[SemanticResourceAttributes.PROCESS_RUNTIME_NAME] = "node", _a2[SemanticResourceAttributes.TELEMETRY_SDK_LANGUAGE] = TelemetrySdkLanguageValues.NODEJS, _a2[SemanticResourceAttributes.TELEMETRY_SDK_VERSION] = VERSION2, _a2);
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/platform/node/timer-util.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/timer-util.js
 function unrefTimer(timer) {
   timer.unref();
 }
 __name(unrefTimer, "unrefTimer");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/common/time.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/time.js
 var NANOSECOND_DIGITS = 9;
 var SECOND_TO_NANOSECONDS = Math.pow(10, NANOSECOND_DIGITS);
 function numberToHrtime(epochMillis) {
@@ -22390,24 +22857,24 @@ function isTimeInput(value) {
 }
 __name(isTimeInput, "isTimeInput");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/ExportResult.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/ExportResult.js
 var ExportResultCode;
 (function(ExportResultCode2) {
   ExportResultCode2[ExportResultCode2["SUCCESS"] = 0] = "SUCCESS";
   ExportResultCode2[ExportResultCode2["FAILED"] = 1] = "FAILED";
 })(ExportResultCode || (ExportResultCode = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/propagation/composite.js
-var __values2 = function(o) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-  if (m)
-    return m.call(o);
-  if (o && typeof o.length === "number")
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/propagation/composite.js
+var __values2 = function(o2) {
+  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
+  if (m2)
+    return m2.call(o2);
+  if (o2 && typeof o2.length === "number")
     return {
       next: function() {
-        if (o && i >= o.length)
-          o = void 0;
-        return { value: o && o[i++], done: !o };
+        if (o2 && i >= o2.length)
+          o2 = void 0;
+        return { value: o2 && o2[i++], done: !o2 };
       }
     };
   throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
@@ -22419,22 +22886,22 @@ var CompositePropagator = function() {
     }
     var _a3;
     this._propagators = (_a3 = config2.propagators) !== null && _a3 !== void 0 ? _a3 : [];
-    this._fields = Array.from(new Set(this._propagators.map(function(p) {
-      return typeof p.fields === "function" ? p.fields() : [];
+    this._fields = Array.from(new Set(this._propagators.map(function(p2) {
+      return typeof p2.fields === "function" ? p2.fields() : [];
     }).reduce(function(x, y) {
       return x.concat(y);
     }, [])));
   }
   __name(CompositePropagator2, "CompositePropagator");
-  CompositePropagator2.prototype.inject = function(context5, carrier, setter) {
+  CompositePropagator2.prototype.inject = function(context3, carrier, setter) {
     var e_1, _a3;
     try {
       for (var _b2 = __values2(this._propagators), _c = _b2.next(); !_c.done; _c = _b2.next()) {
         var propagator = _c.value;
         try {
-          propagator.inject(context5, carrier, setter);
+          propagator.inject(context3, carrier, setter);
         } catch (err) {
-          diag4.warn("Failed to inject with " + propagator.constructor.name + ". Err: " + err.message);
+          diag2.warn("Failed to inject with " + propagator.constructor.name + ". Err: " + err.message);
         }
       }
     } catch (e_1_1) {
@@ -22449,15 +22916,15 @@ var CompositePropagator = function() {
       }
     }
   };
-  CompositePropagator2.prototype.extract = function(context5, carrier, getter) {
+  CompositePropagator2.prototype.extract = function(context3, carrier, getter) {
     return this._propagators.reduce(function(ctx, propagator) {
       try {
         return propagator.extract(ctx, carrier, getter);
       } catch (err) {
-        diag4.warn("Failed to inject with " + propagator.constructor.name + ". Err: " + err.message);
+        diag2.warn("Failed to inject with " + propagator.constructor.name + ". Err: " + err.message);
       }
       return ctx;
-    }, context5);
+    }, context3);
   };
   CompositePropagator2.prototype.fields = function() {
     return this._fields.slice();
@@ -22465,27 +22932,27 @@ var CompositePropagator = function() {
   return CompositePropagator2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/internal/validators.js
-var VALID_KEY_CHAR_RANGE3 = "[_0-9a-z-*/]";
-var VALID_KEY3 = "[a-z]" + VALID_KEY_CHAR_RANGE3 + "{0,255}";
-var VALID_VENDOR_KEY3 = "[a-z0-9]" + VALID_KEY_CHAR_RANGE3 + "{0,240}@[a-z]" + VALID_KEY_CHAR_RANGE3 + "{0,13}";
-var VALID_KEY_REGEX3 = new RegExp("^(?:" + VALID_KEY3 + "|" + VALID_VENDOR_KEY3 + ")$");
-var VALID_VALUE_BASE_REGEX3 = /^[ -~]{0,255}[!-~]$/;
-var INVALID_VALUE_COMMA_EQUAL_REGEX3 = /,|=/;
-function validateKey3(key) {
-  return VALID_KEY_REGEX3.test(key);
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/internal/validators.js
+var VALID_KEY_CHAR_RANGE2 = "[_0-9a-z-*/]";
+var VALID_KEY2 = "[a-z]" + VALID_KEY_CHAR_RANGE2 + "{0,255}";
+var VALID_VENDOR_KEY2 = "[a-z0-9]" + VALID_KEY_CHAR_RANGE2 + "{0,240}@[a-z]" + VALID_KEY_CHAR_RANGE2 + "{0,13}";
+var VALID_KEY_REGEX2 = new RegExp("^(?:" + VALID_KEY2 + "|" + VALID_VENDOR_KEY2 + ")$");
+var VALID_VALUE_BASE_REGEX2 = /^[ -~]{0,255}[!-~]$/;
+var INVALID_VALUE_COMMA_EQUAL_REGEX2 = /,|=/;
+function validateKey2(key) {
+  return VALID_KEY_REGEX2.test(key);
 }
-__name(validateKey3, "validateKey");
-function validateValue3(value) {
-  return VALID_VALUE_BASE_REGEX3.test(value) && !INVALID_VALUE_COMMA_EQUAL_REGEX3.test(value);
+__name(validateKey2, "validateKey");
+function validateValue2(value) {
+  return VALID_VALUE_BASE_REGEX2.test(value) && !INVALID_VALUE_COMMA_EQUAL_REGEX2.test(value);
 }
-__name(validateValue3, "validateValue");
+__name(validateValue2, "validateValue");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/trace/TraceState.js
-var MAX_TRACE_STATE_ITEMS3 = 32;
-var MAX_TRACE_STATE_LEN3 = 512;
-var LIST_MEMBERS_SEPARATOR3 = ",";
-var LIST_MEMBER_KEY_VALUE_SPLITTER3 = "=";
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/TraceState.js
+var MAX_TRACE_STATE_ITEMS2 = 32;
+var MAX_TRACE_STATE_LEN2 = 512;
+var LIST_MEMBERS_SEPARATOR2 = ",";
+var LIST_MEMBER_KEY_VALUE_SPLITTER2 = "=";
 var TraceState = function() {
   function TraceState2(rawTraceState) {
     this._internalState = /* @__PURE__ */ new Map();
@@ -22512,28 +22979,28 @@ var TraceState = function() {
   TraceState2.prototype.serialize = function() {
     var _this = this;
     return this._keys().reduce(function(agg, key) {
-      agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER3 + _this.get(key));
+      agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER2 + _this.get(key));
       return agg;
-    }, []).join(LIST_MEMBERS_SEPARATOR3);
+    }, []).join(LIST_MEMBERS_SEPARATOR2);
   };
   TraceState2.prototype._parse = function(rawTraceState) {
-    if (rawTraceState.length > MAX_TRACE_STATE_LEN3)
+    if (rawTraceState.length > MAX_TRACE_STATE_LEN2)
       return;
-    this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR3).reverse().reduce(function(agg, part) {
+    this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR2).reverse().reduce(function(agg, part) {
       var listMember = part.trim();
-      var i = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER3);
+      var i = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER2);
       if (i !== -1) {
         var key = listMember.slice(0, i);
         var value = listMember.slice(i + 1, part.length);
-        if (validateKey3(key) && validateValue3(value)) {
+        if (validateKey2(key) && validateValue2(value)) {
           agg.set(key, value);
         } else {
         }
       }
       return agg;
     }, /* @__PURE__ */ new Map());
-    if (this._internalState.size > MAX_TRACE_STATE_ITEMS3) {
-      this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS3));
+    if (this._internalState.size > MAX_TRACE_STATE_ITEMS2) {
+      this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS2));
     }
   };
   TraceState2.prototype._keys = function() {
@@ -22547,10 +23014,10 @@ var TraceState = function() {
   return TraceState2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/trace/W3CTraceContextPropagator.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/W3CTraceContextPropagator.js
 var TRACE_PARENT_HEADER = "traceparent";
 var TRACE_STATE_HEADER = "tracestate";
-var VERSION4 = "00";
+var VERSION3 = "00";
 var VERSION_PART = "(?!ff)[\\da-f]{2}";
 var TRACE_ID_PART = "(?![0]{32})[\\da-f]{32}";
 var PARENT_ID_PART = "(?![0]{16})[\\da-f]{16}";
@@ -22573,33 +23040,33 @@ var W3CTraceContextPropagator = function() {
   function W3CTraceContextPropagator2() {
   }
   __name(W3CTraceContextPropagator2, "W3CTraceContextPropagator");
-  W3CTraceContextPropagator2.prototype.inject = function(context5, carrier, setter) {
-    var spanContext = trace2.getSpanContext(context5);
-    if (!spanContext || isTracingSuppressed(context5) || !isSpanContextValid2(spanContext))
+  W3CTraceContextPropagator2.prototype.inject = function(context3, carrier, setter) {
+    var spanContext = trace.getSpanContext(context3);
+    if (!spanContext || isTracingSuppressed(context3) || !isSpanContextValid(spanContext))
       return;
-    var traceParent = VERSION4 + "-" + spanContext.traceId + "-" + spanContext.spanId + "-0" + Number(spanContext.traceFlags || TraceFlags2.NONE).toString(16);
+    var traceParent = VERSION3 + "-" + spanContext.traceId + "-" + spanContext.spanId + "-0" + Number(spanContext.traceFlags || TraceFlags.NONE).toString(16);
     setter.set(carrier, TRACE_PARENT_HEADER, traceParent);
     if (spanContext.traceState) {
       setter.set(carrier, TRACE_STATE_HEADER, spanContext.traceState.serialize());
     }
   };
-  W3CTraceContextPropagator2.prototype.extract = function(context5, carrier, getter) {
+  W3CTraceContextPropagator2.prototype.extract = function(context3, carrier, getter) {
     var traceParentHeader = getter.get(carrier, TRACE_PARENT_HEADER);
     if (!traceParentHeader)
-      return context5;
+      return context3;
     var traceParent = Array.isArray(traceParentHeader) ? traceParentHeader[0] : traceParentHeader;
     if (typeof traceParent !== "string")
-      return context5;
+      return context3;
     var spanContext = parseTraceParent(traceParent);
     if (!spanContext)
-      return context5;
+      return context3;
     spanContext.isRemote = true;
     var traceStateHeader = getter.get(carrier, TRACE_STATE_HEADER);
     if (traceStateHeader) {
       var state = Array.isArray(traceStateHeader) ? traceStateHeader.join(",") : traceStateHeader;
       spanContext.traceState = new TraceState(typeof state === "string" ? state : void 0);
     }
-    return trace2.setSpanContext(context5, spanContext);
+    return trace.setSpanContext(context3, spanContext);
   };
   W3CTraceContextPropagator2.prototype.fields = function() {
     return [TRACE_PARENT_HEADER, TRACE_STATE_HEADER];
@@ -22607,21 +23074,21 @@ var W3CTraceContextPropagator = function() {
   return W3CTraceContextPropagator2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/trace/rpc-metadata.js
-var RPC_METADATA_KEY = createContextKey2("OpenTelemetry SDK Context Key RPC_METADATA");
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/rpc-metadata.js
+var RPC_METADATA_KEY = createContextKey("OpenTelemetry SDK Context Key RPC_METADATA");
 var RPCType;
 (function(RPCType2) {
   RPCType2["HTTP"] = "http";
 })(RPCType || (RPCType = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/AlwaysOffSampler.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/AlwaysOffSampler.js
 var AlwaysOffSampler = function() {
   function AlwaysOffSampler3() {
   }
   __name(AlwaysOffSampler3, "AlwaysOffSampler");
   AlwaysOffSampler3.prototype.shouldSample = function() {
     return {
-      decision: SamplingDecision2.NOT_RECORD
+      decision: SamplingDecision.NOT_RECORD
     };
   };
   AlwaysOffSampler3.prototype.toString = function() {
@@ -22630,14 +23097,14 @@ var AlwaysOffSampler = function() {
   return AlwaysOffSampler3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/AlwaysOnSampler.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/AlwaysOnSampler.js
 var AlwaysOnSampler = function() {
   function AlwaysOnSampler3() {
   }
   __name(AlwaysOnSampler3, "AlwaysOnSampler");
   AlwaysOnSampler3.prototype.shouldSample = function() {
     return {
-      decision: SamplingDecision2.RECORD_AND_SAMPLED
+      decision: SamplingDecision.RECORD_AND_SAMPLED
     };
   };
   AlwaysOnSampler3.prototype.toString = function() {
@@ -22646,7 +23113,7 @@ var AlwaysOnSampler = function() {
   return AlwaysOnSampler3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/ParentBasedSampler.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/ParentBasedSampler.js
 var ParentBasedSampler = function() {
   function ParentBasedSampler3(config2) {
     var _a3, _b2, _c, _d;
@@ -22661,21 +23128,21 @@ var ParentBasedSampler = function() {
     this._localParentNotSampled = (_d = config2.localParentNotSampled) !== null && _d !== void 0 ? _d : new AlwaysOffSampler();
   }
   __name(ParentBasedSampler3, "ParentBasedSampler");
-  ParentBasedSampler3.prototype.shouldSample = function(context5, traceId, spanName, spanKind, attributes, links) {
-    var parentContext = trace2.getSpanContext(context5);
-    if (!parentContext || !isSpanContextValid2(parentContext)) {
-      return this._root.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+  ParentBasedSampler3.prototype.shouldSample = function(context3, traceId, spanName, spanKind, attributes, links) {
+    var parentContext = trace.getSpanContext(context3);
+    if (!parentContext || !isSpanContextValid(parentContext)) {
+      return this._root.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
     }
     if (parentContext.isRemote) {
-      if (parentContext.traceFlags & TraceFlags2.SAMPLED) {
-        return this._remoteParentSampled.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+      if (parentContext.traceFlags & TraceFlags.SAMPLED) {
+        return this._remoteParentSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
       }
-      return this._remoteParentNotSampled.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+      return this._remoteParentNotSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
     }
-    if (parentContext.traceFlags & TraceFlags2.SAMPLED) {
-      return this._localParentSampled.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+    if (parentContext.traceFlags & TraceFlags.SAMPLED) {
+      return this._localParentSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
     }
-    return this._localParentNotSampled.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+    return this._localParentNotSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
   };
   ParentBasedSampler3.prototype.toString = function() {
     return "ParentBased{root=" + this._root.toString() + ", remoteParentSampled=" + this._remoteParentSampled.toString() + ", remoteParentNotSampled=" + this._remoteParentNotSampled.toString() + ", localParentSampled=" + this._localParentSampled.toString() + ", localParentNotSampled=" + this._localParentNotSampled.toString() + "}";
@@ -22683,7 +23150,7 @@ var ParentBasedSampler = function() {
   return ParentBasedSampler3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/TraceIdRatioBasedSampler.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/TraceIdRatioBasedSampler.js
 var TraceIdRatioBasedSampler = function() {
   function TraceIdRatioBasedSampler3(_ratio) {
     if (_ratio === void 0) {
@@ -22694,9 +23161,9 @@ var TraceIdRatioBasedSampler = function() {
     this._upperBound = Math.floor(this._ratio * 4294967295);
   }
   __name(TraceIdRatioBasedSampler3, "TraceIdRatioBasedSampler");
-  TraceIdRatioBasedSampler3.prototype.shouldSample = function(context5, traceId) {
+  TraceIdRatioBasedSampler3.prototype.shouldSample = function(context3, traceId) {
     return {
-      decision: isValidTraceId2(traceId) && this._accumulate(traceId) < this._upperBound ? SamplingDecision2.RECORD_AND_SAMPLED : SamplingDecision2.NOT_RECORD
+      decision: isValidTraceId(traceId) && this._accumulate(traceId) < this._upperBound ? SamplingDecision.RECORD_AND_SAMPLED : SamplingDecision.NOT_RECORD
     };
   };
   TraceIdRatioBasedSampler3.prototype.toString = function() {
@@ -22719,7 +23186,7 @@ var TraceIdRatioBasedSampler = function() {
   return TraceIdRatioBasedSampler3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/utils/lodash.merge.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/lodash.merge.js
 var objectTag = "[object Object]";
 var nullTag = "[object Null]";
 var undefinedTag = "[object Undefined]";
@@ -22766,7 +23233,7 @@ function getRawTag(value) {
   try {
     value[symToStringTag] = void 0;
     unmasked = true;
-  } catch (e) {
+  } catch (e2) {
   }
   var result = nativeObjectToString.call(value);
   if (unmasked) {
@@ -22784,7 +23251,7 @@ function objectToString(value) {
 }
 __name(objectToString, "objectToString");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/utils/merge.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/merge.js
 var MAX_LEVEL = 20;
 function merge() {
   var args = [];
@@ -22906,7 +23373,7 @@ function shouldMerge(one, two) {
 }
 __name(shouldMerge, "shouldMerge");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/utils/promise.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/promise.js
 var Deferred = function() {
   function Deferred2() {
     var _this = this;
@@ -22932,29 +23399,29 @@ var Deferred = function() {
   return Deferred2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/core/build/esm/utils/callback.js
-var __read3 = function(o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m)
-    return o;
-  var i = m.call(o), r, ar = [], e;
+// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/callback.js
+var __read3 = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
   try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-      ar.push(r.value);
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
   } catch (error2) {
-    e = { error: error2 };
+    e2 = { error: error2 };
   } finally {
     try {
-      if (r && !r.done && (m = i["return"]))
-        m.call(i);
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
     } finally {
-      if (e)
-        throw e.error;
+      if (e2)
+        throw e2.error;
     }
   }
   return ar;
 };
-var __spreadArray5 = function(to, from, pack) {
+var __spreadArray3 = function(to, from, pack) {
   if (pack || arguments.length === 2)
     for (var i = 0, l = from.length, ar; i < l; i++) {
       if (ar || !(i in from)) {
@@ -22997,7 +23464,7 @@ var BindOnceFuture = function() {
     if (!this._isCalled) {
       this._isCalled = true;
       try {
-        Promise.resolve((_a3 = this._callback).call.apply(_a3, __spreadArray5([this._that], __read3(args), false))).then(function(val) {
+        Promise.resolve((_a3 = this._callback).call.apply(_a3, __spreadArray3([this._that], __read3(args), false))).then(function(val) {
           return _this._deferred.resolve(val);
         }, function(err) {
           return _this._deferred.reject(err);
@@ -23011,73 +23478,74 @@ var BindOnceFuture = function() {
   return BindOnceFuture2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/enums.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/enums.js
 var ExceptionEventName = "exception";
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Span.js
-var __values3 = function(o) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-  if (m)
-    return m.call(o);
-  if (o && typeof o.length === "number")
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Span.js
+var __values3 = function(o2) {
+  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
+  if (m2)
+    return m2.call(o2);
+  if (o2 && typeof o2.length === "number")
     return {
       next: function() {
-        if (o && i >= o.length)
-          o = void 0;
-        return { value: o && o[i++], done: !o };
+        if (o2 && i >= o2.length)
+          o2 = void 0;
+        return { value: o2 && o2[i++], done: !o2 };
       }
     };
   throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-var __read4 = function(o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m)
-    return o;
-  var i = m.call(o), r, ar = [], e;
+var __read4 = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
   try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-      ar.push(r.value);
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
   } catch (error2) {
-    e = { error: error2 };
+    e2 = { error: error2 };
   } finally {
     try {
-      if (r && !r.done && (m = i["return"]))
-        m.call(i);
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
     } finally {
-      if (e)
-        throw e.error;
+      if (e2)
+        throw e2.error;
     }
   }
   return ar;
 };
 var Span = function() {
-  function Span3(parentTracer, context5, spanName, spanContext, kind, parentSpanId, links, startTime) {
+  function Span3(parentTracer, context3, spanName, spanContext, kind, parentSpanId, links, startTime, clock) {
     if (links === void 0) {
       links = [];
     }
-    if (startTime === void 0) {
-      startTime = hrTime();
+    if (clock === void 0) {
+      clock = otperformance;
     }
     this.attributes = {};
     this.links = [];
     this.events = [];
     this.status = {
-      code: SpanStatusCode2.UNSET
+      code: SpanStatusCode.UNSET
     };
     this.endTime = [0, 0];
     this._ended = false;
     this._duration = [-1, -1];
+    this._clock = clock;
     this.name = spanName;
     this._spanContext = spanContext;
     this.parentSpanId = parentSpanId;
     this.kind = kind;
     this.links = links;
-    this.startTime = timeInputToHrTime(startTime);
+    this.startTime = timeInputToHrTime(startTime !== null && startTime !== void 0 ? startTime : clock.now());
     this.resource = parentTracer.resource;
     this.instrumentationLibrary = parentTracer.instrumentationLibrary;
     this._spanLimits = parentTracer.getSpanLimits();
     this._spanProcessor = parentTracer.getActiveSpanProcessor();
-    this._spanProcessor.onStart(this, context5);
+    this._spanProcessor.onStart(this, context3);
     this._attributeValueLengthLimit = this._spanLimits.attributeValueLengthLimit || 0;
   }
   __name(Span3, "Span");
@@ -23088,11 +23556,11 @@ var Span = function() {
     if (value == null || this._isSpanEnded())
       return this;
     if (key.length === 0) {
-      diag4.warn("Invalid attribute key: " + key);
+      diag2.warn("Invalid attribute key: " + key);
       return this;
     }
     if (!isAttributeValue(value)) {
-      diag4.warn("Invalid attribute value set for key: " + key);
+      diag2.warn("Invalid attribute value set for key: " + key);
       return this;
     }
     if (Object.keys(this.attributes).length >= this._spanLimits.attributeCountLimit && !Object.prototype.hasOwnProperty.call(this.attributes, key)) {
@@ -23125,11 +23593,11 @@ var Span = function() {
     if (this._isSpanEnded())
       return this;
     if (this._spanLimits.eventCountLimit === 0) {
-      diag4.warn("No events allowed.");
+      diag2.warn("No events allowed.");
       return this;
     }
     if (this.events.length >= this._spanLimits.eventCountLimit) {
-      diag4.warn("Dropping extra events.");
+      diag2.warn("Dropping extra events.");
       this.events.shift();
     }
     if (isTimeInput(attributesOrStartTime)) {
@@ -23139,7 +23607,7 @@ var Span = function() {
       attributesOrStartTime = void 0;
     }
     if (typeof startTime === "undefined") {
-      startTime = hrTime();
+      startTime = this._clock.now();
     }
     var attributes = sanitizeAttributes(attributesOrStartTime);
     this.events.push({
@@ -23162,18 +23630,15 @@ var Span = function() {
     return this;
   };
   Span3.prototype.end = function(endTime) {
-    if (endTime === void 0) {
-      endTime = hrTime();
-    }
     if (this._isSpanEnded()) {
-      diag4.error("You can only call end() on a span once.");
+      diag2.error("You can only call end() on a span once.");
       return;
     }
     this._ended = true;
-    this.endTime = timeInputToHrTime(endTime);
+    this.endTime = timeInputToHrTime(endTime !== null && endTime !== void 0 ? endTime : this._clock.now());
     this._duration = hrTimeDuration(this.startTime, this.endTime);
     if (this._duration[0] < 0) {
-      diag4.warn("Inconsistent start and end time, startTime > endTime", this.startTime, this.endTime);
+      diag2.warn("Inconsistent start and end time, startTime > endTime", this.startTime, this.endTime);
     }
     this._spanProcessor.onEnd(this);
   };
@@ -23182,7 +23647,7 @@ var Span = function() {
   };
   Span3.prototype.recordException = function(exception, time) {
     if (time === void 0) {
-      time = hrTime();
+      time = this._clock.now();
     }
     var attributes = {};
     if (typeof exception === "string") {
@@ -23203,7 +23668,7 @@ var Span = function() {
     if (attributes[SemanticAttributes.EXCEPTION_TYPE] || attributes[SemanticAttributes.EXCEPTION_MESSAGE]) {
       this.addEvent(ExceptionEventName, attributes, time);
     } else {
-      diag4.warn("Failed to record an exception " + exception);
+      diag2.warn("Failed to record an exception " + exception);
     }
   };
   Object.defineProperty(Span3.prototype, "duration", {
@@ -23222,7 +23687,7 @@ var Span = function() {
   });
   Span3.prototype._isSpanEnded = function() {
     if (this._ended) {
-      diag4.warn("Can not execute the operation on ended Span {traceId: " + this._spanContext.traceId + ", spanId: " + this._spanContext.spanId + "}");
+      diag2.warn("Can not execute the operation on ended Span {traceId: " + this._spanContext.traceId + ", spanId: " + this._spanContext.spanId + "}");
     }
     return this._ended;
   };
@@ -23236,7 +23701,7 @@ var Span = function() {
     var _this = this;
     var limit = this._attributeValueLengthLimit;
     if (limit <= 0) {
-      diag4.warn("Attribute value limit must be positive, got " + limit);
+      diag2.warn("Attribute value limit must be positive, got " + limit);
       return value;
     }
     if (typeof value === "string") {
@@ -23252,22 +23717,22 @@ var Span = function() {
   return Span3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Sampler.js
-var SamplingDecision3;
-(function(SamplingDecision4) {
-  SamplingDecision4[SamplingDecision4["NOT_RECORD"] = 0] = "NOT_RECORD";
-  SamplingDecision4[SamplingDecision4["RECORD"] = 1] = "RECORD";
-  SamplingDecision4[SamplingDecision4["RECORD_AND_SAMPLED"] = 2] = "RECORD_AND_SAMPLED";
-})(SamplingDecision3 || (SamplingDecision3 = {}));
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Sampler.js
+var SamplingDecision2;
+(function(SamplingDecision3) {
+  SamplingDecision3[SamplingDecision3["NOT_RECORD"] = 0] = "NOT_RECORD";
+  SamplingDecision3[SamplingDecision3["RECORD"] = 1] = "RECORD";
+  SamplingDecision3[SamplingDecision3["RECORD_AND_SAMPLED"] = 2] = "RECORD_AND_SAMPLED";
+})(SamplingDecision2 || (SamplingDecision2 = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/AlwaysOffSampler.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/AlwaysOffSampler.js
 var AlwaysOffSampler2 = function() {
   function AlwaysOffSampler3() {
   }
   __name(AlwaysOffSampler3, "AlwaysOffSampler");
   AlwaysOffSampler3.prototype.shouldSample = function() {
     return {
-      decision: SamplingDecision3.NOT_RECORD
+      decision: SamplingDecision2.NOT_RECORD
     };
   };
   AlwaysOffSampler3.prototype.toString = function() {
@@ -23276,14 +23741,14 @@ var AlwaysOffSampler2 = function() {
   return AlwaysOffSampler3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/AlwaysOnSampler.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/AlwaysOnSampler.js
 var AlwaysOnSampler2 = function() {
   function AlwaysOnSampler3() {
   }
   __name(AlwaysOnSampler3, "AlwaysOnSampler");
   AlwaysOnSampler3.prototype.shouldSample = function() {
     return {
-      decision: SamplingDecision3.RECORD_AND_SAMPLED
+      decision: SamplingDecision2.RECORD_AND_SAMPLED
     };
   };
   AlwaysOnSampler3.prototype.toString = function() {
@@ -23292,7 +23757,7 @@ var AlwaysOnSampler2 = function() {
   return AlwaysOnSampler3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/ParentBasedSampler.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/ParentBasedSampler.js
 var ParentBasedSampler2 = function() {
   function ParentBasedSampler3(config2) {
     var _a3, _b2, _c, _d;
@@ -23307,21 +23772,21 @@ var ParentBasedSampler2 = function() {
     this._localParentNotSampled = (_d = config2.localParentNotSampled) !== null && _d !== void 0 ? _d : new AlwaysOffSampler2();
   }
   __name(ParentBasedSampler3, "ParentBasedSampler");
-  ParentBasedSampler3.prototype.shouldSample = function(context5, traceId, spanName, spanKind, attributes, links) {
-    var parentContext = trace2.getSpanContext(context5);
-    if (!parentContext || !isSpanContextValid2(parentContext)) {
-      return this._root.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+  ParentBasedSampler3.prototype.shouldSample = function(context3, traceId, spanName, spanKind, attributes, links) {
+    var parentContext = trace.getSpanContext(context3);
+    if (!parentContext || !isSpanContextValid(parentContext)) {
+      return this._root.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
     }
     if (parentContext.isRemote) {
-      if (parentContext.traceFlags & TraceFlags2.SAMPLED) {
-        return this._remoteParentSampled.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+      if (parentContext.traceFlags & TraceFlags.SAMPLED) {
+        return this._remoteParentSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
       }
-      return this._remoteParentNotSampled.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+      return this._remoteParentNotSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
     }
-    if (parentContext.traceFlags & TraceFlags2.SAMPLED) {
-      return this._localParentSampled.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+    if (parentContext.traceFlags & TraceFlags.SAMPLED) {
+      return this._localParentSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
     }
-    return this._localParentNotSampled.shouldSample(context5, traceId, spanName, spanKind, attributes, links);
+    return this._localParentNotSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
   };
   ParentBasedSampler3.prototype.toString = function() {
     return "ParentBased{root=" + this._root.toString() + ", remoteParentSampled=" + this._remoteParentSampled.toString() + ", remoteParentNotSampled=" + this._remoteParentNotSampled.toString() + ", localParentSampled=" + this._localParentSampled.toString() + ", localParentNotSampled=" + this._localParentNotSampled.toString() + "}";
@@ -23329,7 +23794,7 @@ var ParentBasedSampler2 = function() {
   return ParentBasedSampler3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/TraceIdRatioBasedSampler.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/TraceIdRatioBasedSampler.js
 var TraceIdRatioBasedSampler2 = function() {
   function TraceIdRatioBasedSampler3(_ratio) {
     if (_ratio === void 0) {
@@ -23340,9 +23805,9 @@ var TraceIdRatioBasedSampler2 = function() {
     this._upperBound = Math.floor(this._ratio * 4294967295);
   }
   __name(TraceIdRatioBasedSampler3, "TraceIdRatioBasedSampler");
-  TraceIdRatioBasedSampler3.prototype.shouldSample = function(context5, traceId) {
+  TraceIdRatioBasedSampler3.prototype.shouldSample = function(context3, traceId) {
     return {
-      decision: isValidTraceId2(traceId) && this._accumulate(traceId) < this._upperBound ? SamplingDecision3.RECORD_AND_SAMPLED : SamplingDecision3.NOT_RECORD
+      decision: isValidTraceId(traceId) && this._accumulate(traceId) < this._upperBound ? SamplingDecision2.RECORD_AND_SAMPLED : SamplingDecision2.NOT_RECORD
     };
   };
   TraceIdRatioBasedSampler3.prototype.toString = function() {
@@ -23365,7 +23830,7 @@ var TraceIdRatioBasedSampler2 = function() {
   return TraceIdRatioBasedSampler3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/config.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/config.js
 var env = getEnv();
 var FALLBACK_OTEL_TRACES_SAMPLER = TracesSamplerValues.AlwaysOn;
 var DEFAULT_RATIO = 1;
@@ -23410,30 +23875,30 @@ function buildSamplerFromEnv(environment) {
         root: new TraceIdRatioBasedSampler2(getSamplerProbabilityFromEnv(environment))
       });
     default:
-      diag4.error('OTEL_TRACES_SAMPLER value "' + environment.OTEL_TRACES_SAMPLER + " invalid, defaulting to " + FALLBACK_OTEL_TRACES_SAMPLER + '".');
+      diag2.error('OTEL_TRACES_SAMPLER value "' + environment.OTEL_TRACES_SAMPLER + " invalid, defaulting to " + FALLBACK_OTEL_TRACES_SAMPLER + '".');
       return new AlwaysOnSampler2();
   }
 }
 __name(buildSamplerFromEnv, "buildSamplerFromEnv");
 function getSamplerProbabilityFromEnv(environment) {
   if (environment.OTEL_TRACES_SAMPLER_ARG === void 0 || environment.OTEL_TRACES_SAMPLER_ARG === "") {
-    diag4.error("OTEL_TRACES_SAMPLER_ARG is blank, defaulting to " + DEFAULT_RATIO + ".");
+    diag2.error("OTEL_TRACES_SAMPLER_ARG is blank, defaulting to " + DEFAULT_RATIO + ".");
     return DEFAULT_RATIO;
   }
   var probability = Number(environment.OTEL_TRACES_SAMPLER_ARG);
   if (isNaN(probability)) {
-    diag4.error("OTEL_TRACES_SAMPLER_ARG=" + environment.OTEL_TRACES_SAMPLER_ARG + " was given, but it is invalid, defaulting to " + DEFAULT_RATIO + ".");
+    diag2.error("OTEL_TRACES_SAMPLER_ARG=" + environment.OTEL_TRACES_SAMPLER_ARG + " was given, but it is invalid, defaulting to " + DEFAULT_RATIO + ".");
     return DEFAULT_RATIO;
   }
   if (probability < 0 || probability > 1) {
-    diag4.error("OTEL_TRACES_SAMPLER_ARG=" + environment.OTEL_TRACES_SAMPLER_ARG + " was given, but it is out of range ([0..1]), defaulting to " + DEFAULT_RATIO + ".");
+    diag2.error("OTEL_TRACES_SAMPLER_ARG=" + environment.OTEL_TRACES_SAMPLER_ARG + " was given, but it is out of range ([0..1]), defaulting to " + DEFAULT_RATIO + ".");
     return DEFAULT_RATIO;
   }
   return probability;
 }
 __name(getSamplerProbabilityFromEnv, "getSamplerProbabilityFromEnv");
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/utility.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/utility.js
 function mergeConfig(userConfig) {
   var perInstanceDefaults = {
     sampler: buildSamplerFromEnv()
@@ -23455,7 +23920,7 @@ function reconfigureLimits(userConfig) {
 }
 __name(reconfigureLimits, "reconfigureLimits");
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/BatchSpanProcessorBase.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/BatchSpanProcessorBase.js
 var BatchSpanProcessorBase = function() {
   function BatchSpanProcessorBase2(_exporter, config2) {
     this._exporter = _exporter;
@@ -23480,7 +23945,7 @@ var BatchSpanProcessorBase = function() {
     if (this._shutdownOnce.isCalled) {
       return;
     }
-    if ((span.spanContext().traceFlags & TraceFlags2.SAMPLED) === 0) {
+    if ((span.spanContext().traceFlags & TraceFlags.SAMPLED) === 0) {
       return;
     }
     this._addToBuffer(span);
@@ -23528,7 +23993,7 @@ var BatchSpanProcessorBase = function() {
       var timer = setTimeout(function() {
         reject(new Error("Timeout"));
       }, _this._exportTimeoutMillis);
-      context4.with(suppressTracing(context4.active()), function() {
+      context2.with(suppressTracing(context2.active()), function() {
         _this._exporter.export(_this._finishedSpans.splice(0, _this._maxExportBatchSize), function(result) {
           var _a3;
           clearTimeout(timer);
@@ -23551,8 +24016,8 @@ var BatchSpanProcessorBase = function() {
           _this._clearTimer();
           _this._maybeStartTimer();
         }
-      }).catch(function(e) {
-        globalErrorHandler(e);
+      }).catch(function(e2) {
+        globalErrorHandler(e2);
       });
     }, this._scheduledDelayMillis);
     unrefTimer(this._timer);
@@ -23566,27 +24031,27 @@ var BatchSpanProcessorBase = function() {
   return BatchSpanProcessorBase2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/platform/node/export/BatchSpanProcessor.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/platform/node/export/BatchSpanProcessor.js
 var __extends = function() {
-  var extendStatics = /* @__PURE__ */ __name(function(d, b) {
-    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
-      d2.__proto__ = b2;
-    } || function(d2, b2) {
-      for (var p in b2)
-        if (Object.prototype.hasOwnProperty.call(b2, p))
-          d2[p] = b2[p];
+  var extendStatics = /* @__PURE__ */ __name(function(d2, b2) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
+      d3.__proto__ = b3;
+    } || function(d3, b3) {
+      for (var p2 in b3)
+        if (Object.prototype.hasOwnProperty.call(b3, p2))
+          d3[p2] = b3[p2];
     };
-    return extendStatics(d, b);
+    return extendStatics(d2, b2);
   }, "extendStatics");
-  return function(d, b) {
-    if (typeof b !== "function" && b !== null)
-      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d, b);
+  return function(d2, b2) {
+    if (typeof b2 !== "function" && b2 !== null)
+      throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
+    extendStatics(d2, b2);
     function __() {
-      this.constructor = d;
+      this.constructor = d2;
     }
     __name(__, "__");
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
   };
 }();
 var BatchSpanProcessor = function(_super) {
@@ -23600,7 +24065,7 @@ var BatchSpanProcessor = function(_super) {
   return BatchSpanProcessor2;
 }(BatchSpanProcessorBase);
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/platform/node/RandomIdGenerator.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/platform/node/RandomIdGenerator.js
 var SPAN_ID_BYTES2 = 8;
 var TRACE_ID_BYTES2 = 16;
 var RandomIdGenerator2 = function() {
@@ -23629,7 +24094,7 @@ function getIdGenerator2(bytes) {
 }
 __name(getIdGenerator2, "getIdGenerator");
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Tracer.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Tracer.js
 var Tracer = function() {
   function Tracer3(instrumentationLibrary, config2, _tracerProvider) {
     this._tracerProvider = _tracerProvider;
@@ -23642,34 +24107,47 @@ var Tracer = function() {
     this.instrumentationLibrary = instrumentationLibrary;
   }
   __name(Tracer3, "Tracer");
-  Tracer3.prototype.startSpan = function(name, options, context5) {
+  Tracer3.prototype.startSpan = function(name, options, context3) {
     var _a3, _b2;
     if (options === void 0) {
       options = {};
     }
-    if (context5 === void 0) {
-      context5 = context4.active();
-    }
-    if (isTracingSuppressed(context5)) {
-      diag4.debug("Instrumentation suppressed, returning Noop Span");
-      return trace2.wrapSpanContext(INVALID_SPAN_CONTEXT2);
+    if (context3 === void 0) {
+      context3 = context2.active();
     }
     if (options.root) {
-      context5 = trace2.deleteSpan(context5);
+      context3 = trace.deleteSpan(context3);
     }
-    var parentSpanContext = trace2.getSpanContext(context5);
+    var parentSpan = trace.getSpan(context3);
+    var clock;
+    if (parentSpan) {
+      clock = parentSpan["_clock"];
+    }
+    if (!clock) {
+      clock = new AnchoredClock(Date, otperformance);
+      if (parentSpan) {
+        parentSpan["_clock"] = clock;
+      }
+    }
+    if (isTracingSuppressed(context3)) {
+      diag2.debug("Instrumentation suppressed, returning Noop Span");
+      var nonRecordingSpan = trace.wrapSpanContext(INVALID_SPAN_CONTEXT);
+      nonRecordingSpan["_clock"] = clock;
+      return nonRecordingSpan;
+    }
+    var parentSpanContext = parentSpan === null || parentSpan === void 0 ? void 0 : parentSpan.spanContext();
     var spanId = this._idGenerator.generateSpanId();
     var traceId;
     var traceState;
     var parentSpanId;
-    if (!parentSpanContext || !trace2.isSpanContextValid(parentSpanContext)) {
+    if (!parentSpanContext || !trace.isSpanContextValid(parentSpanContext)) {
       traceId = this._idGenerator.generateTraceId();
     } else {
       traceId = parentSpanContext.traceId;
       traceState = parentSpanContext.traceState;
       parentSpanId = parentSpanContext.spanId;
     }
-    var spanKind = (_a3 = options.kind) !== null && _a3 !== void 0 ? _a3 : SpanKind2.INTERNAL;
+    var spanKind = (_a3 = options.kind) !== null && _a3 !== void 0 ? _a3 : SpanKind.INTERNAL;
     var links = ((_b2 = options.links) !== null && _b2 !== void 0 ? _b2 : []).map(function(link) {
       return {
         context: link.context,
@@ -23677,14 +24155,16 @@ var Tracer = function() {
       };
     });
     var attributes = sanitizeAttributes(options.attributes);
-    var samplingResult = this._sampler.shouldSample(context5, traceId, name, spanKind, attributes, links);
-    var traceFlags = samplingResult.decision === SamplingDecision2.RECORD_AND_SAMPLED ? TraceFlags2.SAMPLED : TraceFlags2.NONE;
+    var samplingResult = this._sampler.shouldSample(context3, traceId, name, spanKind, attributes, links);
+    var traceFlags = samplingResult.decision === SamplingDecision.RECORD_AND_SAMPLED ? TraceFlags.SAMPLED : TraceFlags.NONE;
     var spanContext = { traceId, spanId, traceFlags, traceState };
-    if (samplingResult.decision === SamplingDecision2.NOT_RECORD) {
-      diag4.debug("Recording is off, propagating context in a non-recording span");
-      return trace2.wrapSpanContext(spanContext);
+    if (samplingResult.decision === SamplingDecision.NOT_RECORD) {
+      diag2.debug("Recording is off, propagating context in a non-recording span");
+      var nonRecordingSpan = trace.wrapSpanContext(spanContext);
+      nonRecordingSpan["_clock"] = clock;
+      return nonRecordingSpan;
     }
-    var span = new Span(this, context5, name, spanContext, spanKind, parentSpanId, links, options.startTime);
+    var span = new Span(this, context3, name, spanContext, spanKind, parentSpanId, links, options.startTime, clock);
     var initAttributes = sanitizeAttributes(Object.assign(attributes, samplingResult.attributes));
     span.setAttributes(initAttributes);
     return span;
@@ -23705,10 +24185,10 @@ var Tracer = function() {
       ctx = arg3;
       fn = arg4;
     }
-    var parentContext = ctx !== null && ctx !== void 0 ? ctx : context4.active();
+    var parentContext = ctx !== null && ctx !== void 0 ? ctx : context2.active();
     var span = this.startSpan(name, opts, parentContext);
-    var contextWithSpanSet = trace2.setSpan(parentContext, span);
-    return context4.with(contextWithSpanSet, fn, void 0, span);
+    var contextWithSpanSet = trace.setSpan(parentContext, span);
+    return context2.with(contextWithSpanSet, fn, void 0, span);
   };
   Tracer3.prototype.getGeneralLimits = function() {
     return this._generalLimits;
@@ -23722,13 +24202,13 @@ var Tracer = function() {
   return Tracer3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/resources/build/esm/platform/node/default-service-name.js
+// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/platform/node/default-service-name.js
 function defaultServiceName() {
   return "unknown_service:" + process.argv0;
 }
 __name(defaultServiceName, "defaultServiceName");
 
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/resources/build/esm/platform/node/HostDetector.js
+// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/platform/node/HostDetector.js
 var import_os2 = require("os");
 var __awaiter = function(thisArg, _arguments, P3, generator) {
   function adopt(value) {
@@ -23741,16 +24221,16 @@ var __awaiter = function(thisArg, _arguments, P3, generator) {
     function fulfilled(value) {
       try {
         step(generator.next(value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(fulfilled, "fulfilled");
     function rejected(value) {
       try {
         step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(rejected, "rejected");
@@ -23763,32 +24243,32 @@ var __awaiter = function(thisArg, _arguments, P3, generator) {
 };
 var __generator = function(thisArg, body) {
   var _ = { label: 0, sent: function() {
-    if (t[0] & 1)
-      throw t[1];
-    return t[1];
-  }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+    if (t2[0] & 1)
+      throw t2[1];
+    return t2[1];
+  }, trys: [], ops: [] }, f2, y, t2, g2;
+  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
     return this;
-  }), g;
-  function verb(n) {
+  }), g2;
+  function verb(n2) {
     return function(v) {
-      return step([n, v]);
+      return step([n2, v]);
     };
   }
   __name(verb, "verb");
   function step(op) {
-    if (f)
+    if (f2)
       throw new TypeError("Generator is already executing.");
     while (_)
       try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-          return t;
-        if (y = 0, t)
-          op = [op[0] & 2, t.value];
+        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
+          return t2;
+        if (y = 0, t2)
+          op = [op[0] & 2, t2.value];
         switch (op[0]) {
           case 0:
           case 1:
-            t = op;
+            t2 = op;
             break;
           case 4:
             _.label++;
@@ -23803,35 +24283,35 @@ var __generator = function(thisArg, body) {
             _.trys.pop();
             continue;
           default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
               _ = 0;
               continue;
             }
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
               _.label = op[1];
               break;
             }
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
+            if (op[0] === 6 && _.label < t2[1]) {
+              _.label = t2[1];
+              t2 = op;
               break;
             }
-            if (t && _.label < t[2]) {
-              _.label = t[2];
+            if (t2 && _.label < t2[2]) {
+              _.label = t2[2];
               _.ops.push(op);
               break;
             }
-            if (t[2])
+            if (t2[2])
               _.ops.pop();
             _.trys.pop();
             continue;
         }
         op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
+      } catch (e2) {
+        op = [6, e2];
         y = 0;
       } finally {
-        f = t = 0;
+        f2 = t2 = 0;
       }
     if (op[0] & 5)
       throw op[1];
@@ -23869,7 +24349,7 @@ var HostDetector = function() {
 }();
 var hostDetector = new HostDetector();
 
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/resources/build/esm/platform/node/OSDetector.js
+// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/platform/node/OSDetector.js
 var import_os3 = require("os");
 var __awaiter2 = function(thisArg, _arguments, P3, generator) {
   function adopt(value) {
@@ -23882,16 +24362,16 @@ var __awaiter2 = function(thisArg, _arguments, P3, generator) {
     function fulfilled(value) {
       try {
         step(generator.next(value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(fulfilled, "fulfilled");
     function rejected(value) {
       try {
         step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(rejected, "rejected");
@@ -23904,32 +24384,32 @@ var __awaiter2 = function(thisArg, _arguments, P3, generator) {
 };
 var __generator2 = function(thisArg, body) {
   var _ = { label: 0, sent: function() {
-    if (t[0] & 1)
-      throw t[1];
-    return t[1];
-  }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+    if (t2[0] & 1)
+      throw t2[1];
+    return t2[1];
+  }, trys: [], ops: [] }, f2, y, t2, g2;
+  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
     return this;
-  }), g;
-  function verb(n) {
+  }), g2;
+  function verb(n2) {
     return function(v) {
-      return step([n, v]);
+      return step([n2, v]);
     };
   }
   __name(verb, "verb");
   function step(op) {
-    if (f)
+    if (f2)
       throw new TypeError("Generator is already executing.");
     while (_)
       try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-          return t;
-        if (y = 0, t)
-          op = [op[0] & 2, t.value];
+        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
+          return t2;
+        if (y = 0, t2)
+          op = [op[0] & 2, t2.value];
         switch (op[0]) {
           case 0:
           case 1:
-            t = op;
+            t2 = op;
             break;
           case 4:
             _.label++;
@@ -23944,35 +24424,35 @@ var __generator2 = function(thisArg, body) {
             _.trys.pop();
             continue;
           default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
               _ = 0;
               continue;
             }
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
               _.label = op[1];
               break;
             }
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
+            if (op[0] === 6 && _.label < t2[1]) {
+              _.label = t2[1];
+              t2 = op;
               break;
             }
-            if (t && _.label < t[2]) {
-              _.label = t[2];
+            if (t2 && _.label < t2[2]) {
+              _.label = t2[2];
               _.ops.push(op);
               break;
             }
-            if (t[2])
+            if (t2[2])
               _.ops.pop();
             _.trys.pop();
             continue;
         }
         op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
+      } catch (e2) {
+        op = [6, e2];
         y = 0;
       } finally {
-        f = t = 0;
+        f2 = t2 = 0;
       }
     if (op[0] & 5)
       throw op[1];
@@ -24008,7 +24488,7 @@ var OSDetector = function() {
 }();
 var osDetector = new OSDetector();
 
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/resources/build/esm/Resource.js
+// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/Resource.js
 var Resource = function() {
   function Resource2(attributes) {
     this.attributes = attributes;
@@ -24031,16 +24511,16 @@ var Resource = function() {
   return Resource2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/resources/build/esm/detectors/BrowserDetector.js
+// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/detectors/BrowserDetector.js
 var __assign = function() {
-  __assign = Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
+  __assign = Object.assign || function(t2) {
+    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
       s = arguments[i];
-      for (var p in s)
-        if (Object.prototype.hasOwnProperty.call(s, p))
-          t[p] = s[p];
+      for (var p2 in s)
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
     }
-    return t;
+    return t2;
   };
   return __assign.apply(this, arguments);
 };
@@ -24055,16 +24535,16 @@ var __awaiter3 = function(thisArg, _arguments, P3, generator) {
     function fulfilled(value) {
       try {
         step(generator.next(value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(fulfilled, "fulfilled");
     function rejected(value) {
       try {
         step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(rejected, "rejected");
@@ -24077,32 +24557,32 @@ var __awaiter3 = function(thisArg, _arguments, P3, generator) {
 };
 var __generator3 = function(thisArg, body) {
   var _ = { label: 0, sent: function() {
-    if (t[0] & 1)
-      throw t[1];
-    return t[1];
-  }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+    if (t2[0] & 1)
+      throw t2[1];
+    return t2[1];
+  }, trys: [], ops: [] }, f2, y, t2, g2;
+  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
     return this;
-  }), g;
-  function verb(n) {
+  }), g2;
+  function verb(n2) {
     return function(v) {
-      return step([n, v]);
+      return step([n2, v]);
     };
   }
   __name(verb, "verb");
   function step(op) {
-    if (f)
+    if (f2)
       throw new TypeError("Generator is already executing.");
     while (_)
       try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-          return t;
-        if (y = 0, t)
-          op = [op[0] & 2, t.value];
+        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
+          return t2;
+        if (y = 0, t2)
+          op = [op[0] & 2, t2.value];
         switch (op[0]) {
           case 0:
           case 1:
-            t = op;
+            t2 = op;
             break;
           case 4:
             _.label++;
@@ -24117,35 +24597,35 @@ var __generator3 = function(thisArg, body) {
             _.trys.pop();
             continue;
           default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
               _ = 0;
               continue;
             }
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
               _.label = op[1];
               break;
             }
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
+            if (op[0] === 6 && _.label < t2[1]) {
+              _.label = t2[1];
+              t2 = op;
               break;
             }
-            if (t && _.label < t[2]) {
-              _.label = t[2];
+            if (t2 && _.label < t2[2]) {
+              _.label = t2[2];
               _.ops.push(op);
               break;
             }
-            if (t[2])
+            if (t2[2])
               _.ops.pop();
             _.trys.pop();
             continue;
         }
         op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
+      } catch (e2) {
+        op = [6, e2];
         y = 0;
       } finally {
-        f = t = 0;
+        f2 = t2 = 0;
       }
     if (op[0] & 5)
       throw op[1];
@@ -24173,7 +24653,7 @@ var BrowserDetector = function() {
   };
   BrowserDetector2.prototype._getResourceAttributes = function(browserResource, _config) {
     if (browserResource[SemanticResourceAttributes.PROCESS_RUNTIME_VERSION] === "") {
-      diag4.debug("BrowserDetector failed: Unable to find required browser resources. ");
+      diag2.debug("BrowserDetector failed: Unable to find required browser resources. ");
       return Resource.empty();
     } else {
       return new Resource(__assign({}, browserResource));
@@ -24183,7 +24663,7 @@ var BrowserDetector = function() {
 }();
 var browserDetector = new BrowserDetector();
 
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/resources/build/esm/detectors/EnvDetector.js
+// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/detectors/EnvDetector.js
 var __awaiter4 = function(thisArg, _arguments, P3, generator) {
   function adopt(value) {
     return value instanceof P3 ? value : new P3(function(resolve) {
@@ -24195,16 +24675,16 @@ var __awaiter4 = function(thisArg, _arguments, P3, generator) {
     function fulfilled(value) {
       try {
         step(generator.next(value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(fulfilled, "fulfilled");
     function rejected(value) {
       try {
         step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(rejected, "rejected");
@@ -24217,32 +24697,32 @@ var __awaiter4 = function(thisArg, _arguments, P3, generator) {
 };
 var __generator4 = function(thisArg, body) {
   var _ = { label: 0, sent: function() {
-    if (t[0] & 1)
-      throw t[1];
-    return t[1];
-  }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+    if (t2[0] & 1)
+      throw t2[1];
+    return t2[1];
+  }, trys: [], ops: [] }, f2, y, t2, g2;
+  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
     return this;
-  }), g;
-  function verb(n) {
+  }), g2;
+  function verb(n2) {
     return function(v) {
-      return step([n, v]);
+      return step([n2, v]);
     };
   }
   __name(verb, "verb");
   function step(op) {
-    if (f)
+    if (f2)
       throw new TypeError("Generator is already executing.");
     while (_)
       try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-          return t;
-        if (y = 0, t)
-          op = [op[0] & 2, t.value];
+        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
+          return t2;
+        if (y = 0, t2)
+          op = [op[0] & 2, t2.value];
         switch (op[0]) {
           case 0:
           case 1:
-            t = op;
+            t2 = op;
             break;
           case 4:
             _.label++;
@@ -24257,35 +24737,35 @@ var __generator4 = function(thisArg, body) {
             _.trys.pop();
             continue;
           default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
               _ = 0;
               continue;
             }
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
               _.label = op[1];
               break;
             }
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
+            if (op[0] === 6 && _.label < t2[1]) {
+              _.label = t2[1];
+              t2 = op;
               break;
             }
-            if (t && _.label < t[2]) {
-              _.label = t[2];
+            if (t2 && _.label < t2[2]) {
+              _.label = t2[2];
               _.ops.push(op);
               break;
             }
-            if (t[2])
+            if (t2[2])
               _.ops.pop();
             _.trys.pop();
             continue;
         }
         op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
+      } catch (e2) {
+        op = [6, e2];
         y = 0;
       } finally {
-        f = t = 0;
+        f2 = t2 = 0;
       }
     if (op[0] & 5)
       throw op[1];
@@ -24293,37 +24773,37 @@ var __generator4 = function(thisArg, body) {
   }
   __name(step, "step");
 };
-var __values4 = function(o) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-  if (m)
-    return m.call(o);
-  if (o && typeof o.length === "number")
+var __values4 = function(o2) {
+  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
+  if (m2)
+    return m2.call(o2);
+  if (o2 && typeof o2.length === "number")
     return {
       next: function() {
-        if (o && i >= o.length)
-          o = void 0;
-        return { value: o && o[i++], done: !o };
+        if (o2 && i >= o2.length)
+          o2 = void 0;
+        return { value: o2 && o2[i++], done: !o2 };
       }
     };
   throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-var __read5 = function(o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m)
-    return o;
-  var i = m.call(o), r, ar = [], e;
+var __read5 = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
   try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-      ar.push(r.value);
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
   } catch (error2) {
-    e = { error: error2 };
+    e2 = { error: error2 };
   } finally {
     try {
-      if (r && !r.done && (m = i["return"]))
-        m.call(i);
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
     } finally {
-      if (e)
-        throw e.error;
+      if (e2)
+        throw e2.error;
     }
   }
   return ar;
@@ -24349,8 +24829,8 @@ var EnvDetector = function() {
           try {
             parsedAttributes = this._parseResourceAttributes(rawAttributes);
             Object.assign(attributes, parsedAttributes);
-          } catch (e) {
-            diag4.debug("EnvDetector failed: " + e.message);
+          } catch (e2) {
+            diag2.debug("EnvDetector failed: " + e2.message);
           }
         }
         if (serviceName) {
@@ -24416,16 +24896,16 @@ var EnvDetector = function() {
 }();
 var envDetector = new EnvDetector();
 
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/resources/build/esm/detectors/ProcessDetector.js
+// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/detectors/ProcessDetector.js
 var __assign2 = function() {
-  __assign2 = Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
+  __assign2 = Object.assign || function(t2) {
+    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
       s = arguments[i];
-      for (var p in s)
-        if (Object.prototype.hasOwnProperty.call(s, p))
-          t[p] = s[p];
+      for (var p2 in s)
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
     }
-    return t;
+    return t2;
   };
   return __assign2.apply(this, arguments);
 };
@@ -24440,16 +24920,16 @@ var __awaiter5 = function(thisArg, _arguments, P3, generator) {
     function fulfilled(value) {
       try {
         step(generator.next(value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(fulfilled, "fulfilled");
     function rejected(value) {
       try {
         step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     }
     __name(rejected, "rejected");
@@ -24462,32 +24942,32 @@ var __awaiter5 = function(thisArg, _arguments, P3, generator) {
 };
 var __generator5 = function(thisArg, body) {
   var _ = { label: 0, sent: function() {
-    if (t[0] & 1)
-      throw t[1];
-    return t[1];
-  }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+    if (t2[0] & 1)
+      throw t2[1];
+    return t2[1];
+  }, trys: [], ops: [] }, f2, y, t2, g2;
+  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
     return this;
-  }), g;
-  function verb(n) {
+  }), g2;
+  function verb(n2) {
     return function(v) {
-      return step([n, v]);
+      return step([n2, v]);
     };
   }
   __name(verb, "verb");
   function step(op) {
-    if (f)
+    if (f2)
       throw new TypeError("Generator is already executing.");
     while (_)
       try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-          return t;
-        if (y = 0, t)
-          op = [op[0] & 2, t.value];
+        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
+          return t2;
+        if (y = 0, t2)
+          op = [op[0] & 2, t2.value];
         switch (op[0]) {
           case 0:
           case 1:
-            t = op;
+            t2 = op;
             break;
           case 4:
             _.label++;
@@ -24502,35 +24982,35 @@ var __generator5 = function(thisArg, body) {
             _.trys.pop();
             continue;
           default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
               _ = 0;
               continue;
             }
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
               _.label = op[1];
               break;
             }
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
+            if (op[0] === 6 && _.label < t2[1]) {
+              _.label = t2[1];
+              t2 = op;
               break;
             }
-            if (t && _.label < t[2]) {
-              _.label = t[2];
+            if (t2 && _.label < t2[2]) {
+              _.label = t2[2];
               _.ops.push(op);
               break;
             }
-            if (t[2])
+            if (t2[2])
               _.ops.pop();
             _.trys.pop();
             continue;
         }
         op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
+      } catch (e2) {
+        op = [6, e2];
         y = 0;
       } finally {
-        f = t = 0;
+        f2 = t2 = 0;
       }
     if (op[0] & 5)
       throw op[1];
@@ -24557,7 +25037,7 @@ var ProcessDetector = function() {
   };
   ProcessDetector2.prototype._getResourceAttributes = function(processResource, _config) {
     if (processResource[SemanticResourceAttributes.PROCESS_EXECUTABLE_NAME] === "" || processResource[SemanticResourceAttributes.PROCESS_EXECUTABLE_PATH] === "" || processResource[SemanticResourceAttributes.PROCESS_COMMAND] === "" || processResource[SemanticResourceAttributes.PROCESS_COMMAND_LINE] === "" || processResource[SemanticResourceAttributes.PROCESS_RUNTIME_VERSION] === "") {
-      diag4.debug("ProcessDetector failed: Unable to find required process resources. ");
+      diag2.debug("ProcessDetector failed: Unable to find required process resources. ");
       return Resource.empty();
     } else {
       return new Resource(__assign2({}, processResource));
@@ -24567,17 +25047,17 @@ var ProcessDetector = function() {
 }();
 var processDetector = new ProcessDetector();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/MultiSpanProcessor.js
-var __values5 = function(o) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-  if (m)
-    return m.call(o);
-  if (o && typeof o.length === "number")
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/MultiSpanProcessor.js
+var __values5 = function(o2) {
+  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
+  if (m2)
+    return m2.call(o2);
+  if (o2 && typeof o2.length === "number")
     return {
       next: function() {
-        if (o && i >= o.length)
-          o = void 0;
-        return { value: o && o[i++], done: !o };
+        if (o2 && i >= o2.length)
+          o2 = void 0;
+        return { value: o2 && o2[i++], done: !o2 };
       }
     };
   throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
@@ -24615,12 +25095,12 @@ var MultiSpanProcessor = function() {
       });
     });
   };
-  MultiSpanProcessor2.prototype.onStart = function(span, context5) {
+  MultiSpanProcessor2.prototype.onStart = function(span, context3) {
     var e_2, _a3;
     try {
       for (var _b2 = __values5(this._spanProcessors), _c = _b2.next(); !_c.done; _c = _b2.next()) {
         var spanProcessor = _c.value;
-        spanProcessor.onStart(span, context5);
+        spanProcessor.onStart(span, context3);
       }
     } catch (e_2_1) {
       e_2 = { error: e_2_1 };
@@ -24681,7 +25161,7 @@ var MultiSpanProcessor = function() {
   return MultiSpanProcessor2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/NoopSpanProcessor.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/NoopSpanProcessor.js
 var NoopSpanProcessor = function() {
   function NoopSpanProcessor2() {
   }
@@ -24699,7 +25179,7 @@ var NoopSpanProcessor = function() {
   return NoopSpanProcessor2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/BasicTracerProvider.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/BasicTracerProvider.js
 var ForceFlushState;
 (function(ForceFlushState2) {
   ForceFlushState2[ForceFlushState2["resolved"] = 0] = "resolved";
@@ -24740,7 +25220,7 @@ var BasicTracerProvider = function() {
   BasicTracerProvider2.prototype.addSpanProcessor = function(spanProcessor) {
     if (this._registeredSpanProcessors.length === 0) {
       this.activeSpanProcessor.shutdown().catch(function(err) {
-        return diag4.error("Error while trying to shutdown current span processor", err);
+        return diag2.error("Error while trying to shutdown current span processor", err);
       });
     }
     this._registeredSpanProcessors.push(spanProcessor);
@@ -24753,15 +25233,15 @@ var BasicTracerProvider = function() {
     if (config2 === void 0) {
       config2 = {};
     }
-    trace2.setGlobalTracerProvider(this);
+    trace.setGlobalTracerProvider(this);
     if (config2.propagator === void 0) {
       config2.propagator = this._buildPropagatorFromEnv();
     }
     if (config2.contextManager) {
-      context4.setGlobalContextManager(config2.contextManager);
+      context2.setGlobalContextManager(config2.contextManager);
     }
     if (config2.propagator) {
-      propagation2.setGlobalPropagator(config2.propagator);
+      propagation.setGlobalPropagator(config2.propagator);
     }
   };
   BasicTracerProvider2.prototype.forceFlush = function() {
@@ -24818,7 +25298,7 @@ var BasicTracerProvider = function() {
     var propagators = uniquePropagatorNames.map(function(name) {
       var propagator = _this._getPropagator(name);
       if (!propagator) {
-        diag4.warn('Propagator "' + name + '" requested through environment variable is unavailable.');
+        diag2.warn('Propagator "' + name + '" requested through environment variable is unavailable.');
       }
       return propagator;
     });
@@ -24844,7 +25324,7 @@ var BasicTracerProvider = function() {
       return;
     var exporter = this._getSpanExporter(exporterName);
     if (!exporter) {
-      diag4.error('Exporter "' + exporterName + '" requested through environment variable is unavailable.');
+      diag2.error('Exporter "' + exporterName + '" requested through environment variable is unavailable.');
     }
     return exporter;
   };
@@ -24860,17 +25340,17 @@ var BasicTracerProvider = function() {
   return BasicTracerProvider2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/ConsoleSpanExporter.js
-var __values6 = function(o) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-  if (m)
-    return m.call(o);
-  if (o && typeof o.length === "number")
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/ConsoleSpanExporter.js
+var __values6 = function(o2) {
+  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
+  if (m2)
+    return m2.call(o2);
+  if (o2 && typeof o2.length === "number")
     return {
       next: function() {
-        if (o && i >= o.length)
-          o = void 0;
-        return { value: o && o[i++], done: !o };
+        if (o2 && i >= o2.length)
+          o2 = void 0;
+        return { value: o2 && o2[i++], done: !o2 };
       }
     };
   throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
@@ -24926,29 +25406,29 @@ var ConsoleSpanExporter = function() {
   return ConsoleSpanExporter2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/InMemorySpanExporter.js
-var __read6 = function(o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m)
-    return o;
-  var i = m.call(o), r, ar = [], e;
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/InMemorySpanExporter.js
+var __read6 = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
   try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-      ar.push(r.value);
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
   } catch (error2) {
-    e = { error: error2 };
+    e2 = { error: error2 };
   } finally {
     try {
-      if (r && !r.done && (m = i["return"]))
-        m.call(i);
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
     } finally {
-      if (e)
-        throw e.error;
+      if (e2)
+        throw e2.error;
     }
   }
   return ar;
 };
-var __spreadArray6 = function(to, from, pack) {
+var __spreadArray4 = function(to, from, pack) {
   if (pack || arguments.length === 2)
     for (var i = 0, l = from.length, ar; i < l; i++) {
       if (ar || !(i in from)) {
@@ -24972,7 +25452,7 @@ var InMemorySpanExporter = function() {
         code: ExportResultCode.FAILED,
         error: new Error("Exporter has been stopped")
       });
-    (_a3 = this._finishedSpans).push.apply(_a3, __spreadArray6([], __read6(spans), false));
+    (_a3 = this._finishedSpans).push.apply(_a3, __spreadArray4([], __read6(spans), false));
     setTimeout(function() {
       return resultCallback({ code: ExportResultCode.SUCCESS });
     }, 0);
@@ -24991,7 +25471,7 @@ var InMemorySpanExporter = function() {
   return InMemorySpanExporter2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.6.0_@opentelemetry+api@1.1.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/SimpleSpanProcessor.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/SimpleSpanProcessor.js
 var SimpleSpanProcessor = function() {
   function SimpleSpanProcessor2(_exporter) {
     this._exporter = _exporter;
@@ -25008,10 +25488,10 @@ var SimpleSpanProcessor = function() {
     if (this._shutdownOnce.isCalled) {
       return;
     }
-    if ((span.spanContext().traceFlags & TraceFlags2.SAMPLED) === 0) {
+    if ((span.spanContext().traceFlags & TraceFlags.SAMPLED) === 0) {
       return;
     }
-    context4.with(suppressTracing(context4.active()), function() {
+    context2.with(suppressTracing(context2.active()), function() {
       _this._exporter.export([span], function(result) {
         var _a3;
         if (result.code !== ExportResultCode.SUCCESS) {
@@ -25032,29 +25512,29 @@ var SimpleSpanProcessor = function() {
 // ../engine-core/src/tracing/createSpan.ts
 async function createSpan(engineSpanEvent) {
   await new Promise((res) => setTimeout(res, 0));
-  const tracer = trace2.getTracer("prisma");
+  const tracer = trace.getTracer("prisma");
   engineSpanEvent.spans.forEach((engineSpan) => {
     var _a3;
     const spanContext = {
       traceId: engineSpan.trace_id,
       spanId: engineSpan.span_id,
-      traceFlags: TraceFlags2.SAMPLED
+      traceFlags: TraceFlags.SAMPLED
     };
     const links = (_a3 = engineSpan.links) == null ? void 0 : _a3.map((link) => {
       return {
         context: {
           traceId: link.trace_id,
           spanId: link.span_id,
-          traceFlags: TraceFlags2.SAMPLED
+          traceFlags: TraceFlags.SAMPLED
         }
       };
     });
     const span = new Span(
       tracer,
-      ROOT_CONTEXT2,
+      ROOT_CONTEXT,
       engineSpan.name,
       spanContext,
-      SpanKind2.INTERNAL,
+      SpanKind.INTERNAL,
       engineSpan.parent_span_id,
       links,
       engineSpan.start_time
@@ -25069,10 +25549,10 @@ __name(createSpan, "createSpan");
 
 // ../engine-core/src/tracing/getTraceParent.ts
 function getTraceParent({
-  context: context5,
+  context: context3,
   tracingConfig
 }) {
-  const span = trace2.getSpanContext(context5 != null ? context5 : context4.active());
+  const span = trace.getSpanContext(context3 != null ? context3 : context2.active());
   if ((tracingConfig == null ? void 0 : tracingConfig.enabled) && span) {
     return `00-${span.traceId}-${span.spanId}-0${span.traceFlags}`;
   } else {
@@ -25100,19 +25580,19 @@ async function runInChildSpan(options, cb) {
   var _a3;
   if (options.enabled === false)
     return cb();
-  const tracer = trace2.getTracer("prisma");
-  const context5 = (_a3 = options.context) != null ? _a3 : context4.active();
+  const tracer = trace.getTracer("prisma");
+  const context3 = (_a3 = options.context) != null ? _a3 : context2.active();
   if (options.active === false) {
-    const span = tracer.startSpan(`prisma:client:${options.name}`, options, context5);
+    const span = tracer.startSpan(`prisma:client:${options.name}`, options, context3);
     try {
-      return await cb(span, context5);
+      return await cb(span, context3);
     } finally {
       span.end();
     }
   }
-  return tracer.startActiveSpan(`prisma:client:${options.name}`, options, context5, async (span) => {
+  return tracer.startActiveSpan(`prisma:client:${options.name}`, options, context3, async (span) => {
     try {
-      return await cb(span, context4.active());
+      return await cb(span, context2.active());
     } finally {
       span.end();
     }
@@ -25185,8 +25665,8 @@ var Connection = class {
 __name(Connection, "Connection");
 
 // ../engine-core/src/binary/BinaryEngine.ts
-var debug4 = src_default("prisma:engine");
-var exists2 = (0, import_util4.promisify)(import_fs4.default.exists);
+var debug5 = src_default("prisma:engine");
+var exists3 = (0, import_util4.promisify)(import_fs5.default.exists);
 var logger = /* @__PURE__ */ __name((...args) => {
 }, "logger");
 var knownPlatforms = [...platforms, "native"];
@@ -25202,7 +25682,6 @@ var BinaryEngine = class extends Engine {
     generator,
     datasources,
     showColors,
-    logLevel,
     logQueries,
     env: env2,
     flags,
@@ -25213,51 +25692,61 @@ var BinaryEngine = class extends Engine {
     allowTriggerPanic,
     dirname: dirname2,
     activeProvider,
-    tracingConfig
+    tracingConfig,
+    logEmitter
   }) {
     var _a3;
     super();
     this.startCount = 0;
     this.previewFeatures = [];
     this.stderrLogs = "";
-    this.handleRequestError = /* @__PURE__ */ __name(async (error2, graceful = false) => {
+    this.handleRequestError = /* @__PURE__ */ __name(async (error2) => {
       var _a3, _b2;
-      debug4({ error: error2 });
+      debug5({ error: error2 });
       if (this.startPromise) {
         await this.startPromise;
       }
+      const isNetworkError = [
+        "ECONNRESET",
+        "ECONNREFUSED",
+        "UND_ERR_CLOSED",
+        "UND_ERR_SOCKET",
+        "UND_ERR_DESTROYED",
+        "UND_ERR_ABORTED"
+      ].includes(error2.code);
       if (error2 instanceof PrismaClientKnownRequestError) {
-        throw error2;
+        return { error: error2, shouldRetry: false };
       }
-      this.throwAsyncErrorIfExists();
-      if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.isCanceled) {
+      try {
         this.throwAsyncErrorIfExists();
-      } else if (error2.code === "ECONNRESET" || error2.code === "ECONNREFUSED" || error2.code === "UND_ERR_CLOSED" || error2.code === "UND_ERR_SOCKET" || error2.code === "UND_ERR_DESTROYED" || error2.code === "UND_ERR_ABORTED" || error2.message.toLowerCase().includes("client is destroyed") || error2.message.toLowerCase().includes("other side closed") || error2.message.toLowerCase().includes("the client is closed")) {
-        if (this.globalKillSignalReceived && !((_b2 = this.child) == null ? void 0 : _b2.connected)) {
-          throw new PrismaClientUnknownRequestError(
-            `The Node.js process already received a ${this.globalKillSignalReceived} signal, therefore the Prisma query engine exited
-and your request can't be processed.
-You probably have some open handle that prevents your process from exiting.
-It could be an open http server or stream that didn't close yet.
-We recommend using the \`wtfnode\` package to debug open handles.`,
-            this.clientVersion
-          );
-        }
-        this.throwAsyncErrorIfExists();
-        if (this.startCount > MAX_STARTS) {
-          for (let i = 0; i < 5; i++) {
-            await new Promise((r) => setTimeout(r, 50));
-            this.throwAsyncErrorIfExists(true);
+        if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.isCanceled) {
+          this.throwAsyncErrorIfExists();
+        } else if (isNetworkError) {
+          if (this.globalKillSignalReceived && !((_b2 = this.child) == null ? void 0 : _b2.connected)) {
+            throw new PrismaClientUnknownRequestError(
+              `The Node.js process already received a ${this.globalKillSignalReceived} signal, therefore the Prisma query engine exited
+  and your request can't be processed.
+  You probably have some open handle that prevents your process from exiting.
+  It could be an open http server or stream that didn't close yet.
+  We recommend using the \`wtfnode\` package to debug open handles.`,
+              { clientVersion: this.clientVersion }
+            );
           }
-          throw new Error(`Query engine is trying to restart, but can't.
-Please look into the logs or turn on the env var DEBUG=* to debug the constantly restarting query engine.`);
+          this.throwAsyncErrorIfExists();
+          if (this.startCount > MAX_STARTS) {
+            for (let i = 0; i < 5; i++) {
+              await new Promise((r2) => setTimeout(r2, 50));
+              this.throwAsyncErrorIfExists(true);
+            }
+            throw new Error(`Query engine is trying to restart, but can't.
+  Please look into the logs or turn on the env var DEBUG=* to debug the constantly restarting query engine.`);
+          }
         }
-      }
-      if (!graceful) {
         this.throwAsyncErrorIfExists(true);
         throw error2;
+      } catch (e2) {
+        return { error: e2, shouldRetry: isNetworkError };
       }
-      return false;
     }, "handleRequestError");
     this.dirname = dirname2;
     this.env = env2;
@@ -25269,11 +25758,8 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
     this.generator = generator;
     this.datasources = datasources;
     this.tracingConfig = tracingConfig;
-    this.logEmitter = new import_events.default();
-    this.logEmitter.on("error", () => {
-    });
+    this.logEmitter = logEmitter;
     this.showColors = showColors != null ? showColors : false;
-    this.logLevel = logLevel;
     this.logQueries = logQueries != null ? logQueries : false;
     this.clientVersion = clientVersion2;
     this.flags = flags != null ? flags : [];
@@ -25298,7 +25784,7 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
       "referentialActions",
       "microsoftSqlServer"
     ];
-    const removedFlagsUsed = this.previewFeatures.filter((e) => removedFlags.includes(e));
+    const removedFlagsUsed = this.previewFeatures.filter((e2) => removedFlags.includes(e2));
     if (removedFlagsUsed.length > 0 && !process.env.PRISMA_HIDE_PREVIEW_FLAG_WARNINGS) {
       console.log(
         `${import_chalk3.default.blueBright("info")} The preview flags \`${removedFlagsUsed.join(
@@ -25306,14 +25792,14 @@ Please look into the logs or turn on the env var DEBUG=* to debug the constantly
         )}\` were removed, you can now safely remove them from your schema.prisma.`
       );
     }
-    this.previewFeatures = this.previewFeatures.filter((e) => !removedFlags.includes(e));
+    this.previewFeatures = this.previewFeatures.filter((e2) => !removedFlags.includes(e2));
     this.engineEndpoint = engineEndpoint;
     if (engineEndpoint) {
       const url = new import_url.URL(engineEndpoint);
       this.port = Number(url.port);
     }
     if (this.platform) {
-      if (!knownPlatforms.includes(this.platform) && !import_fs4.default.existsSync(this.platform)) {
+      if (!knownPlatforms.includes(this.platform) && !import_fs5.default.existsSync(this.platform)) {
         throw new PrismaClientInitializationError(
           `Unknown ${import_chalk3.default.red("PRISMA_QUERY_ENGINE_BINARY")} ${import_chalk3.default.redBright.bold(
             this.platform
@@ -25335,37 +25821,24 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
   }
   setError(err) {
     var _a3;
-    if (isRustError(err)) {
-      this.lastRustError = err;
-      this.logEmitter.emit(
-        "error",
-        new PrismaClientRustError({
-          clientVersion: this.clientVersion,
-          error: err
-        })
-      );
-      if (err.is_panic) {
-        this.handlePanic();
+    if (isRustErrorLog(err)) {
+      this.lastError = new PrismaClientRustError({
+        clientVersion: this.clientVersion,
+        error: err
+      });
+      if (this.lastError.isPanic()) {
+        if (this.child) {
+          this.stopPromise = killProcessAndWait(this.child);
+        }
+        if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.cancel) {
+          this.currentRequestPromise.cancel();
+        }
       }
-    } else if (isRustErrorLog(err)) {
-      this.lastErrorLog = err;
-      this.logEmitter.emit(
-        "error",
-        new PrismaClientRustError({
-          clientVersion: this.clientVersion,
-          log: err
-        })
-      );
-      if (((_a3 = err.fields) == null ? void 0 : _a3.message) === "PANIC") {
-        this.handlePanic();
-      }
-    } else {
-      this.logEmitter.emit("error", err);
     }
   }
   checkForTooManyEngines() {
     if (engines.length >= 10) {
-      const runningEngines = engines.filter((e) => e.child);
+      const runningEngines = engines.filter((e2) => e2.child);
       if (runningEngines.length === 10) {
         console.warn(
           `${import_chalk3.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`
@@ -25374,7 +25847,7 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     }
   }
   resolveCwd(cwd) {
-    if (cwd && import_fs4.default.existsSync(cwd) && import_fs4.default.lstatSync(cwd).isDirectory()) {
+    if (cwd && import_fs5.default.existsSync(cwd) && import_fs5.default.lstatSync(cwd).isDirectory()) {
       return cwd;
     }
     return process.cwd();
@@ -25390,8 +25863,8 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     if (this.beforeExitListener) {
       try {
         await this.beforeExitListener();
-      } catch (e) {
-        console.error(e);
+      } catch (e2) {
+        console.error(e2);
       }
     }
   }
@@ -25403,20 +25876,11 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     return this.platformPromise;
   }
   getQueryEnginePath(platform3, prefix = __dirname) {
-    let queryEnginePath = import_path2.default.join(prefix, `query-engine-${platform3}`);
+    let queryEnginePath = import_path3.default.join(prefix, `query-engine-${platform3}`);
     if (platform3 === "windows") {
       queryEnginePath = `${queryEnginePath}.exe`;
     }
     return queryEnginePath;
-  }
-  handlePanic() {
-    var _a3;
-    if (this.child) {
-      this.stopPromise = killProcessAndWait(this.child);
-    }
-    if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.cancel) {
-      this.currentRequestPromise.cancel();
-    }
   }
   async resolvePrismaPath() {
     var _a3, _b2, _c;
@@ -25437,8 +25901,8 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     const searchLocations = [
       eval(`require('path').join(__dirname, '../../../.prisma/client')`),
       (_c = (_b2 = (_a3 = this.generator) == null ? void 0 : _a3.output) == null ? void 0 : _b2.value) != null ? _c : eval("__dirname"),
-      import_path2.default.join(eval("__dirname"), ".."),
-      import_path2.default.dirname(this.datamodelPath),
+      import_path3.default.join(eval("__dirname"), ".."),
+      import_path3.default.dirname(this.datamodelPath),
       this.cwd,
       "/tmp/prisma-engines"
     ];
@@ -25447,9 +25911,9 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     }
     for (const location of searchLocations) {
       searchedLocations.push(location);
-      debug4(`Search for Query Engine in ${location}`);
+      debug5(`Search for Query Engine in ${location}`);
       enginePath = this.getQueryEnginePath(this.platform, location);
-      if (import_fs4.default.existsSync(enginePath)) {
+      if (import_fs5.default.existsSync(enginePath)) {
         return { prismaPath: enginePath, searchedLocations };
       }
     }
@@ -25459,7 +25923,7 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
   async getPrismaPath() {
     const { prismaPath, searchedLocations: searchedLocations2 } = await this.resolvePrismaPath();
     const platform3 = await this.getPlatform();
-    if (!await exists2(prismaPath)) {
+    if (!await exists3(prismaPath)) {
       const pinnedStr = this.incorrectlyPinnedBinaryTarget ? `
 You incorrectly pinned it to ${import_chalk3.default.redBright.bold(`${this.incorrectlyPinnedBinaryTarget}`)}
 ` : "";
@@ -25471,11 +25935,11 @@ This probably happens, because you built Prisma Client on a different platform.
 
 Searched Locations:
 
-${searchedLocations2.map((f) => {
-        let msg = `  ${f}`;
-        if (process.env.DEBUG === "node-engine-search-locations" && import_fs4.default.existsSync(f)) {
-          const dir = import_fs4.default.readdirSync(f);
-          msg += dir.map((d) => `    ${d}`).join("\n");
+${searchedLocations2.map((f2) => {
+        let msg = `  ${f2}`;
+        if (process.env.DEBUG === "node-engine-search-locations" && import_fs5.default.existsSync(f2)) {
+          const dir = import_fs5.default.readdirSync(f2);
+          msg += dir.map((d2) => `    ${d2}`).join("\n");
         }
         return msg;
       }).join("\n" + (process.env.DEBUG === "node-engine-search-locations" ? "\n" : ""))}
@@ -25483,7 +25947,7 @@ ${searchedLocations2.map((f) => {
       if (this.generator) {
         if (this.generator.binaryTargets.find((object) => object.value === this.platform) || this.generator.binaryTargets.find((object) => object.value === "native")) {
           errorText += `
-You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t) => `"${import_chalk3.default.bold(t.value)}"`).join(", ")} to the "${import_chalk3.default.underline("generator")}" block
+You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t2) => `"${import_chalk3.default.bold(t2.value)}"`).join(", ")} to the "${import_chalk3.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -25544,10 +26008,9 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
       }
       await this.startPromise;
       if (!this.child && !this.engineEndpoint) {
-        throw new PrismaClientUnknownRequestError(
-          `Can't perform request, as the Engine has already been stopped`,
-          this.clientVersion
-        );
+        throw new PrismaClientUnknownRequestError(`Can't perform request, as the Engine has already been stopped`, {
+          clientVersion: this.clientVersion
+        });
       }
     }, "startFn");
     const spanOptions = {
@@ -25561,10 +26024,8 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
     const env2 = {
       PRISMA_DML_PATH: this.datamodelPath
     };
-    if (this.logQueries || this.logLevel === "info") {
-      if (this.logQueries) {
-        env2.LOG_QUERIES = "true";
-      }
+    if (this.logQueries) {
+      env2.LOG_QUERIES = "true";
     }
     if (this.datasources) {
       env2.OVERWRITE_DATASOURCES = this.printDatasources();
@@ -25583,7 +26044,7 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
   internalStart() {
     return new Promise(async (resolve, reject) => {
       var _a3, _b2, _c;
-      await new Promise((r) => process.nextTick(r));
+      await new Promise((r2) => process.nextTick(r2));
       if (this.stopPromise) {
         await this.stopPromise;
       }
@@ -25593,21 +26054,19 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
           await (0, import_p_retry.default)(() => this.connection.get("/status"), {
             retries: 10
           });
-        } catch (e) {
-          return reject(e);
+        } catch (e2) {
+          return reject(e2);
         }
         return resolve();
       }
       try {
         if (((_a3 = this.child) == null ? void 0 : _a3.connected) || this.child && !((_b2 = this.child) == null ? void 0 : _b2.killed)) {
-          debug4(`There is a child that still runs and we want to start again`);
+          debug5(`There is a child that still runs and we want to start again`);
         }
-        this.lastRustError = void 0;
-        this.lastErrorLog = void 0;
-        this.lastPanic = void 0;
+        this.lastError = void 0;
         logger("startin & resettin");
         this.globalKillSignalReceived = void 0;
-        debug4({ cwd: this.cwd });
+        debug5({ cwd: this.cwd });
         const prismaPath = await this.getPrismaPath();
         const additionalFlag = this.allowTriggerPanic ? ["--debug"] : [];
         const flags = [
@@ -25619,7 +26078,7 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
         ];
         this.port = await this.getFreePort();
         flags.push("--port", String(this.port));
-        debug4({ flags });
+        debug5({ flags });
         const env2 = this.getEngineEnvVars();
         this.child = (0, import_child_process2.spawn)(prismaPath, flags, {
           env: env2,
@@ -25629,18 +26088,18 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
         });
         byline(this.child.stderr).on("data", (msg) => {
           const data = String(msg);
-          debug4("stderr", data);
+          debug5("stderr", data);
           try {
             const json = JSON.parse(data);
             if (typeof json.is_panic !== "undefined") {
-              debug4(json);
+              debug5(json);
               this.setError(json);
               if (this.engineStartDeferred) {
                 const err = new PrismaClientInitializationError(json.message, this.clientVersion, json.error_code);
                 this.engineStartDeferred.reject(err);
               }
             }
-          } catch (e) {
+          } catch (e2) {
             if (!data.includes("Printing to stderr") && !data.includes("Listening on ")) {
               this.stderrLogs += "\n" + data;
             }
@@ -25651,7 +26110,7 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
           const data = String(msg);
           try {
             const json = JSON.parse(data);
-            debug4("stdout", getMessage(json));
+            debug5("stdout", getMessage(json));
             if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b3 = (_a4 = json.fields) == null ? void 0 : _a4.message) == null ? void 0 : _b3.startsWith("Started query engine http server"))) {
               this.connection.open(`http://127.0.0.1:${this.port}`);
               this.engineStartDeferred.resolve();
@@ -25664,18 +26123,18 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
                 }
                 return;
               }
-              const log4 = convertLog(json);
-              const logIsRustErrorLog = isRustErrorLog(log4);
+              const log3 = convertLog(json);
+              const logIsRustErrorLog = isRustErrorLog(log3);
               if (logIsRustErrorLog) {
-                this.setError(log4);
+                this.setError(log3);
               } else {
-                this.logEmitter.emit(log4.level, log4);
+                this.logEmitter.emit(log3.level, log3);
               }
             } else {
               this.setError(json);
             }
-          } catch (e) {
-            debug4(e, data);
+          } catch (e2) {
+            debug5(e2, data);
           }
         });
         this.child.on("exit", (code) => {
@@ -25690,10 +26149,8 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
           if (code !== 0 && this.engineStartDeferred && this.startCount === 1) {
             let err;
             let msg = this.stderrLogs;
-            if (this.lastRustError) {
-              msg = getMessage(this.lastRustError);
-            } else if (this.lastErrorLog) {
-              msg = getMessage(this.lastErrorLog);
+            if (this.lastError) {
+              msg = getMessage(this.lastError);
             }
             if (code !== null) {
               err = new PrismaClientInitializationError(
@@ -25716,13 +26173,13 @@ Make sure that the engine binary at ${prismaPath} is not corrupt.
           if (!this.child) {
             return;
           }
-          if (this.lastRustError) {
+          if (this.lastError) {
             return;
           }
           if (code === 126) {
             this.setError({
               timestamp: new Date(),
-              target: "exit",
+              target: "binary engine process exit",
               level: "error",
               fields: {
                 message: `Couldn't start query engine as it's not executable on this operating system.
@@ -25733,36 +26190,36 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         });
         this.child.on("error", (err) => {
           this.setError({
-            message: err.message,
-            backtrace: "Could not start query engine",
-            is_panic: false
+            timestamp: new Date(),
+            target: "binary engine process error",
+            level: "error",
+            fields: {
+              message: `Couldn't start query engine: ${err}`
+            }
           });
           reject(err);
         });
         this.child.on("close", (code, signal) => {
-          var _a4;
           this.connection.close();
+          let toEmit;
           if (code === null && signal === "SIGABRT" && this.child) {
-            const error2 = new PrismaClientRustPanicError(
+            toEmit = new PrismaClientRustPanicError(
               this.getErrorMessageWithLink("Panic in Query Engine with SIGABRT signal"),
               this.clientVersion
             );
-            this.logEmitter.emit("error", error2);
-          } else if (code === 255 && signal === null && ((_a4 = this.lastErrorLog) == null ? void 0 : _a4.fields.message) === "PANIC" && !this.lastPanic) {
-            const error2 = new PrismaClientRustPanicError(
-              this.getErrorMessageWithLink(
-                `${this.lastErrorLog.fields.message}: ${this.lastErrorLog.fields.reason} in ${this.lastErrorLog.fields.file}:${this.lastErrorLog.fields.line}:${this.lastErrorLog.fields.column}`
-              ),
-              this.clientVersion
-            );
-            this.setError(error2);
+          } else if (code === 255 && signal === null && this.lastError) {
+            toEmit = this.lastError;
+          }
+          if (toEmit) {
+            this.logEmitter.emit("error", {
+              message: toEmit.message,
+              timestamp: new Date(),
+              target: "binary engine process close"
+            });
           }
         });
-        if (this.lastRustError) {
-          return reject(new PrismaClientInitializationError(getMessage(this.lastRustError), this.clientVersion));
-        }
-        if (this.lastErrorLog) {
-          return reject(new PrismaClientInitializationError(getMessage(this.lastErrorLog), this.clientVersion));
+        if (this.lastError) {
+          return reject(new PrismaClientInitializationError(getMessage(this.lastError), this.clientVersion));
         }
         try {
           await new Promise((resolve2, reject2) => {
@@ -25775,17 +26232,17 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         void (async () => {
           try {
             const engineVersion = await this.version(true);
-            debug4(`Client Version: ${this.clientVersion}`);
-            debug4(`Engine Version: ${engineVersion}`);
-            debug4(`Active provider: ${this.activeProvider}`);
-          } catch (e) {
-            debug4(e);
+            debug5(`Client Version: ${this.clientVersion}`);
+            debug5(`Engine Version: ${engineVersion}`);
+            debug5(`Active provider: ${this.activeProvider}`);
+          } catch (e2) {
+            debug5(e2);
           }
         })();
         this.stopPromise = void 0;
         resolve();
-      } catch (e) {
-        reject(e);
+      } catch (e2) {
+        reject(e2);
       }
     });
   }
@@ -25810,24 +26267,24 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     if (this.currentRequestPromise) {
       try {
         await this.currentRequestPromise;
-      } catch (e) {
+      } catch (e2) {
       }
     }
     this.getConfigPromise = void 0;
     let stopChildPromise;
     if (this.child) {
-      debug4(`Stopping Prisma engine`);
+      debug5(`Stopping Prisma engine`);
       if (this.startPromise) {
-        debug4(`Waiting for start promise`);
+        debug5(`Waiting for start promise`);
         await this.startPromise;
       }
-      debug4(`Done waiting for start promise`);
+      debug5(`Done waiting for start promise`);
       if (this.child.exitCode === null) {
         stopChildPromise = new Promise((resolve, reject) => {
           this.engineStopDeferred = { resolve, reject };
         });
       } else {
-        debug4("Child already exited with code", this.child.exitCode);
+        debug5("Child already exited with code", this.child.exitCode);
       }
       this.connection.close();
       this.child.kill();
@@ -25836,7 +26293,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     if (stopChildPromise) {
       await stopChildPromise;
     }
-    await new Promise((r) => process.nextTick(r));
+    await new Promise((r2) => process.nextTick(r2));
     this.startPromise = void 0;
     this.engineStopDeferred = void 0;
   }
@@ -25855,9 +26312,9 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       server.listen(0, () => {
         const address = server.address();
         const port = typeof address === "string" ? parseInt(address.split(":").slice(-1)[0], 10) : address.port;
-        server.close((e) => {
-          if (e) {
-            reject(e);
+        server.close((e2) => {
+          if (e2) {
+            reject(e2);
           }
           resolve(port);
         });
@@ -25907,7 +26364,13 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     this.lastVersion = result.stdout;
     return this.lastVersion;
   }
-  async request(query2, headers = {}, numTry = 1) {
+  async request({
+    query: query2,
+    headers = {},
+    numTry = 1,
+    isWrite,
+    transaction
+  }) {
     await this.start();
     this.currentRequestPromise = this.connection.post("/", stringifyQuery(query2), runtimeHeadersToHttpHeaders(headers));
     this.lastQuery = query2;
@@ -25917,7 +26380,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         if (data.errors.length === 1) {
           throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
         }
-        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.clientVersion);
+        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), { clientVersion: this.clientVersion });
       }
       const elapsed = parseInt(headers2["x-elapsed"]) / 1e3;
       if (this.startCount > 0) {
@@ -25925,17 +26388,23 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       }
       this.currentRequestPromise = void 0;
       return { data, elapsed };
-    } catch (e) {
-      logger("req - e", e);
-      await this.handleRequestError(e, numTry <= MAX_REQUEST_RETRIES);
-      if (numTry <= MAX_REQUEST_RETRIES) {
+    } catch (e2) {
+      logger("req - e", e2);
+      const { error: error2, shouldRetry } = await this.handleRequestError(e2);
+      if (numTry <= MAX_REQUEST_RETRIES && shouldRetry && !isWrite) {
         logger("trying a retry now");
-        return this.request(query2, headers, numTry + 1);
+        return this.request({ query: query2, headers, numTry: numTry + 1, isWrite, transaction });
       }
+      throw error2;
     }
-    return null;
   }
-  async requestBatch(queries, headers = {}, transaction, numTry = 1) {
+  async requestBatch({
+    queries,
+    headers = {},
+    transaction,
+    numTry = 1,
+    containsWrite
+  }) {
     await this.start();
     const request2 = {
       batch: queries.map((query2) => ({ query: query2, variables: {} })),
@@ -25949,8 +26418,8 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       const { batchResult, errors } = data;
       if (Array.isArray(batchResult)) {
         return batchResult.map((result) => {
-          if (result.errors) {
-            throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
+          if (result.errors && result.errors.length > 0) {
+            return prismaGraphQLToJSError(result.errors[0], this.clientVersion);
           }
           return {
             data: result,
@@ -25960,14 +26429,20 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
       } else {
         throw prismaGraphQLToJSError(data.errors[0], this.clientVersion);
       }
-    }).catch(async (e) => {
-      const isError2 = await this.handleRequestError(e, numTry < 3);
-      if (!isError2) {
+    }).catch(async (e2) => {
+      const { error: error2, shouldRetry } = await this.handleRequestError(e2);
+      if (shouldRetry && !containsWrite) {
         if (numTry <= MAX_REQUEST_RETRIES) {
-          return this.requestBatch(queries, headers, transaction, numTry + 1);
+          return this.requestBatch({
+            queries,
+            headers,
+            transaction,
+            numTry: numTry + 1,
+            containsWrite
+          });
         }
       }
-      throw isError2;
+      throw error2;
     });
   }
   async transaction(action, headers, arg2) {
@@ -25980,7 +26455,11 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
         isolation_level: arg2 == null ? void 0 : arg2.isolationLevel
       });
       const result = await Connection.onHttpError(
-        this.connection.post("/transaction/start", jsonOptions, runtimeHeadersToHttpHeaders(headers)),
+        this.connection.post(
+          "/transaction/start",
+          jsonOptions,
+          runtimeHeadersToHttpHeaders(headers)
+        ),
         (result2) => this.transactionHttpErrorHandler(result2)
       );
       return result.data;
@@ -26001,30 +26480,16 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     return this.startCount >= MAX_STARTS;
   }
   throwAsyncErrorIfExists(forceThrow = false) {
-    var _a3, _b2;
     logger("throwAsyncErrorIfExists", this.startCount, this.hasMaxRestarts);
-    if (this.lastRustError) {
-      const err = new PrismaClientRustPanicError(
-        this.getErrorMessageWithLink(getMessage(this.lastRustError)),
-        this.clientVersion
-      );
-      if (this.lastRustError.is_panic) {
-        this.lastPanic = err;
-      }
-      if (this.hasMaxRestarts || forceThrow) {
-        throw err;
-      }
-    }
-    if (this.lastErrorLog && isRustErrorLog(this.lastErrorLog)) {
-      const err = new PrismaClientUnknownRequestError(
-        this.getErrorMessageWithLink(getMessage(this.lastErrorLog)),
-        this.clientVersion
-      );
-      if (((_b2 = (_a3 = this.lastErrorLog) == null ? void 0 : _a3.fields) == null ? void 0 : _b2.message) === "PANIC") {
-        this.lastPanic = err;
-      }
-      if (this.hasMaxRestarts || forceThrow) {
-        throw err;
+    if (this.lastError && (this.hasMaxRestarts || forceThrow)) {
+      const lastError = this.lastError;
+      this.lastError = void 0;
+      if (lastError.isPanic()) {
+        throw new PrismaClientRustPanicError(this.getErrorMessageWithLink(getMessage(lastError)), this.clientVersion);
+      } else {
+        throw new PrismaClientUnknownRequestError(this.getErrorMessageWithLink(getMessage(lastError)), {
+          clientVersion: this.clientVersion
+        });
       }
     }
   }
@@ -26051,12 +26516,11 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
   }
   transactionHttpErrorHandler(result) {
     const response = result.data;
-    throw new PrismaClientKnownRequestError(
-      response.message,
-      response.error_code,
-      this.clientVersion,
-      response.meta
-    );
+    throw new PrismaClientKnownRequestError(response.message, {
+      code: response.error_code,
+      clientVersion: this.clientVersion,
+      meta: response.meta
+    });
   }
 };
 __name(BinaryEngine, "BinaryEngine");
@@ -26064,6 +26528,15 @@ function stringifyQuery(q) {
   return `{"variables":{},"query":${JSON.stringify(q)}}`;
 }
 __name(stringifyQuery, "stringifyQuery");
+function runtimeHeadersToHttpHeaders(headers) {
+  if (headers.transactionId) {
+    const { transactionId, ...httpHeaders } = headers;
+    httpHeaders["X-transaction-id"] = transactionId;
+    return httpHeaders;
+  }
+  return headers;
+}
+__name(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
 function hookProcess(handler, exit = false) {
   process.once(handler, async () => {
     for (const engine of engines) {
@@ -26074,8 +26547,8 @@ function hookProcess(handler, exit = false) {
     if (socketPaths.length > 0) {
       for (const socketPath of socketPaths) {
         try {
-          import_fs4.default.unlinkSync(socketPath);
-        } catch (e) {
+          import_fs5.default.unlinkSync(socketPath);
+        } catch (e2) {
         }
       }
     }
@@ -26097,17 +26570,6 @@ function initHooks() {
   }
 }
 __name(initHooks, "initHooks");
-function runtimeHeadersToHttpHeaders(headers) {
-  return Object.keys(headers).reduce((acc, runtimeHeaderKey) => {
-    let httpHeaderKey = runtimeHeaderKey;
-    if (runtimeHeaderKey === "transactionId") {
-      httpHeaderKey = "X-transaction-id";
-    }
-    acc[httpHeaderKey] = headers[runtimeHeaderKey];
-    return acc;
-  }, {});
-}
-__name(runtimeHeadersToHttpHeaders, "runtimeHeadersToHttpHeaders");
 function killProcessAndWait(childProcess) {
   return new Promise((resolve) => {
     childProcess.once("exit", resolve);
@@ -26116,8 +26578,11 @@ function killProcessAndWait(childProcess) {
 }
 __name(killProcessAndWait, "killProcessAndWait");
 
-// ../engine-core/src/data-proxy/DataProxyEngine.ts
-var import_events2 = __toESM(require("events"));
+// ../engine-core/src/common/errors/ErrorWithBatchIndex.ts
+function hasBatchIndex(value) {
+  return typeof value["batchRequestIdx"] === "number";
+}
+__name(hasBatchIndex, "hasBatchIndex");
 
 // ../engine-core/src/common/errors/PrismaClientError.ts
 var PrismaClientError = class extends Error {
@@ -26219,20 +26684,76 @@ var BadRequestError = class extends DataProxyAPIError {
 };
 __name(BadRequestError, "BadRequestError");
 
-// ../engine-core/src/data-proxy/errors/GatewayTimeoutError.ts
-var GatewayTimeoutError = class extends DataProxyAPIError {
+// ../engine-core/src/data-proxy/errors/EngineHealthcheckTimeoutError.ts
+var HealthcheckTimeoutError = class extends DataProxyAPIError {
+  constructor(info2, logs) {
+    super("Engine not started: healthcheck timeout", setRetryable(info2, true));
+    this.name = "HealthcheckTimeoutError";
+    this.code = "P5013";
+    this.logs = logs;
+  }
+};
+__name(HealthcheckTimeoutError, "HealthcheckTimeoutError");
+
+// ../engine-core/src/data-proxy/errors/EngineStartupError.ts
+var EngineStartupError = class extends DataProxyAPIError {
+  constructor(info2, message, logs) {
+    super(message, setRetryable(info2, true));
+    this.name = "EngineStartupError";
+    this.code = "P5014";
+    this.logs = logs;
+  }
+};
+__name(EngineStartupError, "EngineStartupError");
+
+// ../engine-core/src/data-proxy/errors/EngineVersionNotSupportedError.ts
+var EngineVersionNotSupportedError = class extends DataProxyAPIError {
   constructor(info2) {
-    super("Request timed out", setRetryable(info2, false));
+    super("Engine version is not supported", setRetryable(info2, false));
+    this.name = "EngineVersionNotSupportedError";
+    this.code = "P5012";
+  }
+};
+__name(EngineVersionNotSupportedError, "EngineVersionNotSupportedError");
+
+// ../engine-core/src/data-proxy/errors/GatewayTimeoutError.ts
+var GATEWAY_TIMEOUT_DEFAULT_MESSAGE = "Request timed out";
+var GatewayTimeoutError = class extends DataProxyAPIError {
+  constructor(info2, message = GATEWAY_TIMEOUT_DEFAULT_MESSAGE) {
+    super(message, setRetryable(info2, false));
     this.name = "GatewayTimeoutError";
     this.code = "P5009";
   }
 };
 __name(GatewayTimeoutError, "GatewayTimeoutError");
 
+// ../engine-core/src/data-proxy/errors/InteractiveTransactionError.ts
+var INTERACTIVE_TRANSACTION_ERROR_DEFAULT_MESSAGE = "Interactive transaction error";
+var InteractiveTransactionError = class extends DataProxyAPIError {
+  constructor(info2, message = INTERACTIVE_TRANSACTION_ERROR_DEFAULT_MESSAGE) {
+    super(message, setRetryable(info2, false));
+    this.name = "InteractiveTransactionError";
+    this.code = "P5015";
+  }
+};
+__name(InteractiveTransactionError, "InteractiveTransactionError");
+
+// ../engine-core/src/data-proxy/errors/InvalidRequestError.ts
+var INVALID_REQUEST_DEFAULT_MESSAGE = "Request parameters are invalid";
+var InvalidRequestError = class extends DataProxyAPIError {
+  constructor(info2, message = INVALID_REQUEST_DEFAULT_MESSAGE) {
+    super(message, setRetryable(info2, false));
+    this.name = "InvalidRequestError";
+    this.code = "P5011";
+  }
+};
+__name(InvalidRequestError, "InvalidRequestError");
+
 // ../engine-core/src/data-proxy/errors/NotFoundError.ts
+var NOT_FOUND_DEFAULT_MESSAGE = "Requested resource does not exist";
 var NotFoundError = class extends DataProxyAPIError {
-  constructor(info2) {
-    super("Requested resource does not exist", setRetryable(info2, false));
+  constructor(info2, message = NOT_FOUND_DEFAULT_MESSAGE) {
+    super(message, setRetryable(info2, false));
     this.name = "NotFoundError";
     this.code = "P5003";
   }
@@ -26252,9 +26773,10 @@ var ServerError = class extends DataProxyAPIError {
 __name(ServerError, "ServerError");
 
 // ../engine-core/src/data-proxy/errors/UnauthorizedError.ts
+var UNAUTHORIZED_DEFAULT_MESSAGE = "Unauthorized, check your connection string";
 var UnauthorizedError = class extends DataProxyAPIError {
-  constructor(info2) {
-    super("Unauthorized, check your connection string", setRetryable(info2, false));
+  constructor(info2, message = UNAUTHORIZED_DEFAULT_MESSAGE) {
+    super(message, setRetryable(info2, false));
     this.name = "UnauthorizedError";
     this.code = "P5007";
   }
@@ -26262,9 +26784,10 @@ var UnauthorizedError = class extends DataProxyAPIError {
 __name(UnauthorizedError, "UnauthorizedError");
 
 // ../engine-core/src/data-proxy/errors/UsageExceededError.ts
+var USAGE_EXCEEDED_DEFAULT_MESSAGE = "Usage exceeded, retry again later";
 var UsageExceededError = class extends DataProxyAPIError {
-  constructor(info2) {
-    super("Usage exceeded, retry again later", setRetryable(info2, true));
+  constructor(info2, message = USAGE_EXCEEDED_DEFAULT_MESSAGE) {
+    super(message, setRetryable(info2, true));
     this.name = "UsageExceededError";
     this.code = "P5008";
   }
@@ -26272,70 +26795,118 @@ var UsageExceededError = class extends DataProxyAPIError {
 __name(UsageExceededError, "UsageExceededError");
 
 // ../engine-core/src/data-proxy/errors/utils/responseToError.ts
+async function getResponseErrorBody(response) {
+  let text;
+  try {
+    text = await response.text();
+  } catch (e2) {
+    return { type: "EmptyError" };
+  }
+  try {
+    const error2 = JSON.parse(text);
+    if (typeof error2 === "string") {
+      switch (error2) {
+        case "InternalDataProxyError":
+          return { type: "DataProxyError", body: error2 };
+        default:
+          return { type: "UnknownTextError", body: error2 };
+      }
+    }
+    if (typeof error2 === "object" && error2 !== null) {
+      if ("is_panic" in error2 && "message" in error2 && "error_code" in error2) {
+        return { type: "QueryEngineError", body: error2 };
+      }
+      if ("EngineNotStarted" in error2 || "InteractiveTransactionMisrouted" in error2 || "InvalidRequestError" in error2) {
+        const reason = Object.values(error2)[0].reason;
+        if (typeof reason === "string" && !["SchemaMissing", "EngineVersionNotSupported"].includes(reason)) {
+          return { type: "UnknownJsonError", body: error2 };
+        }
+        return { type: "DataProxyError", body: error2 };
+      }
+    }
+    return { type: "UnknownJsonError", body: error2 };
+  } catch (e2) {
+    return text === "" ? { type: "EmptyError" } : { type: "UnknownTextError", body: text };
+  }
+}
+__name(getResponseErrorBody, "getResponseErrorBody");
 async function responseToError(response, clientVersion2) {
-  var _a3, _b2, _c, _d, _e;
   if (response.ok)
     return void 0;
   const info2 = { clientVersion: clientVersion2, response };
-  if (response.status === 400) {
-    let knownError;
-    try {
-      const body = await response.json();
-      knownError = (_b2 = (_a3 = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _a3.reason) == null ? void 0 : _b2.KnownEngineStartupError;
-    } catch (_) {
+  const error2 = await getResponseErrorBody(response);
+  if (error2.type === "QueryEngineError") {
+    throw new PrismaClientKnownRequestError(error2.body.message, { code: error2.body.error_code, clientVersion: clientVersion2 });
+  }
+  if (error2.type === "DataProxyError") {
+    if (error2.body === "InternalDataProxyError") {
+      throw new ServerError(info2, "Internal Data Proxy error");
     }
-    if (knownError) {
-      throw new BadRequestError(info2, knownError.msg, knownError.error_code);
-    }
-  }
-  if (response.status === 401) {
-    throw new UnauthorizedError(info2);
-  }
-  if (response.status === 404) {
-    try {
-      const body = await response.json();
-      const isSchemaMissing = ((_c = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _c.reason) === "SchemaMissing";
-      return isSchemaMissing ? new SchemaMissingError(info2) : new NotFoundError(info2);
-    } catch (err) {
-      return new NotFoundError(info2);
-    }
-  }
-  if (response.status === 429) {
-    throw new UsageExceededError(info2);
-  }
-  if (response.status === 504) {
-    throw new GatewayTimeoutError(info2);
-  }
-  if (response.status >= 500) {
-    let body;
-    try {
-      body = await response.json();
-    } catch (err) {
-      throw new ServerError(info2);
-    }
-    if (typeof ((_d = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _d.reason) === "string") {
-      throw new ServerError(info2, body.EngineNotStarted.reason);
-    } else if (typeof ((_e = body == null ? void 0 : body.EngineNotStarted) == null ? void 0 : _e.reason) === "object") {
-      const keys2 = Object.keys(body.EngineNotStarted.reason);
-      if (keys2.length > 0) {
-        const reason = body.EngineNotStarted.reason;
-        const content = reason[keys2[0]];
-        throw new ServerError(info2, keys2[0], content.logs);
+    if ("EngineNotStarted" in error2.body) {
+      if (error2.body.EngineNotStarted.reason === "SchemaMissing") {
+        return new SchemaMissingError(info2);
+      }
+      if (error2.body.EngineNotStarted.reason === "EngineVersionNotSupported") {
+        throw new EngineVersionNotSupportedError(info2);
+      }
+      if ("EngineStartupError" in error2.body.EngineNotStarted.reason) {
+        const { msg, logs } = error2.body.EngineNotStarted.reason.EngineStartupError;
+        throw new EngineStartupError(info2, msg, logs);
+      }
+      if ("KnownEngineStartupError" in error2.body.EngineNotStarted.reason) {
+        const { msg, error_code } = error2.body.EngineNotStarted.reason.KnownEngineStartupError;
+        throw new PrismaClientInitializationError(msg, clientVersion2, error_code);
+      }
+      if ("HealthcheckTimeout" in error2.body.EngineNotStarted.reason) {
+        const { logs } = error2.body.EngineNotStarted.reason.HealthcheckTimeout;
+        throw new HealthcheckTimeoutError(info2, logs);
       }
     }
-    throw new ServerError(info2);
+    if ("InteractiveTransactionMisrouted" in error2.body) {
+      const messageByReason = {
+        IDParseError: "Could not parse interactive transaction ID",
+        NoQueryEngineFoundError: "Could not find Query Engine for the specified host and transaction ID",
+        TransactionStartError: "Could not start interactive transaction"
+      };
+      throw new InteractiveTransactionError(info2, messageByReason[error2.body.InteractiveTransactionMisrouted.reason]);
+    }
+    if ("InvalidRequestError" in error2.body) {
+      throw new InvalidRequestError(info2, error2.body.InvalidRequestError.reason);
+    }
+  }
+  if (response.status === 401 || response.status === 403) {
+    throw new UnauthorizedError(info2, buildErrorMessage(UNAUTHORIZED_DEFAULT_MESSAGE, error2));
+  }
+  if (response.status === 404) {
+    return new NotFoundError(info2, buildErrorMessage(NOT_FOUND_DEFAULT_MESSAGE, error2));
+  }
+  if (response.status === 429) {
+    throw new UsageExceededError(info2, buildErrorMessage(USAGE_EXCEEDED_DEFAULT_MESSAGE, error2));
+  }
+  if (response.status === 504) {
+    throw new GatewayTimeoutError(info2, buildErrorMessage(GATEWAY_TIMEOUT_DEFAULT_MESSAGE, error2));
+  }
+  if (response.status >= 500) {
+    throw new ServerError(info2, buildErrorMessage(SERVER_ERROR_DEFAULT_MESSAGE, error2));
   }
   if (response.status >= 400) {
-    throw new BadRequestError(info2);
+    throw new BadRequestError(info2, buildErrorMessage(BAD_REQUEST_DEFAULT_MESSAGE, error2));
   }
   return void 0;
 }
 __name(responseToError, "responseToError");
+function buildErrorMessage(defaultMessage, errorBody) {
+  if (errorBody.type === "EmptyError") {
+    return defaultMessage;
+  }
+  return `${defaultMessage}: ${JSON.stringify(errorBody)}`;
+}
+__name(buildErrorMessage, "buildErrorMessage");
 
 // ../engine-core/src/data-proxy/utils/backOff.ts
 var BACKOFF_INTERVAL = 50;
-function backOff(n) {
-  const baseDelay = Math.pow(2, n) * BACKOFF_INTERVAL;
+function backOff(n2) {
+  const baseDelay = Math.pow(2, n2) * BACKOFF_INTERVAL;
   const jitter = Math.ceil(Math.random() * baseDelay) - Math.ceil(baseDelay / 2);
   const total = baseDelay + jitter;
   return new Promise((done) => setTimeout(() => done(total), total));
@@ -26344,16 +26915,16 @@ __name(backOff, "backOff");
 
 // ../engines/package.json
 var devDependencies = {
-  "@prisma/debug": "workspace:4.5.0",
-  "@prisma/engines-version": "4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452",
-  "@prisma/fetch-engine": "workspace:4.5.0",
-  "@prisma/get-platform": "workspace:4.5.0",
-  "@swc/core": "1.3.8",
-  "@swc/jest": "0.2.22",
-  "@types/jest": "28.1.8",
-  "@types/node": "16.11.65",
+  "@prisma/debug": "workspace:*",
+  "@prisma/engines-version": "4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe",
+  "@prisma/fetch-engine": "workspace:*",
+  "@prisma/get-platform": "workspace:*",
+  "@swc/core": "1.3.14",
+  "@swc/jest": "0.2.23",
+  "@types/jest": "29.2.4",
+  "@types/node": "16.18.9",
   execa: "5.1.1",
-  jest: "28.1.3",
+  jest: "29.3.1",
   typescript: "4.8.4"
 };
 
@@ -26388,8 +26959,8 @@ async function request(url, options) {
     } else {
       return await nodeFetch(url, options);
     }
-  } catch (e) {
-    const message = (_a3 = e.message) != null ? _a3 : "Unknown error";
+  } catch (e2) {
+    const message = (_a3 = e2.message) != null ? _a3 : "Unknown error";
     throw new RequestError(message, { clientVersion: clientVersion2 });
   }
 }
@@ -26449,7 +27020,7 @@ var include = typeof require !== "undefined" ? require : () => {
 
 // ../engine-core/src/data-proxy/utils/getClientVersion.ts
 var semverRegex = /^[1-9][0-9]*\.[0-9]+\.[0-9]+$/;
-var debug5 = src_default("prisma:client:dataproxyEngine");
+var debug6 = src_default("prisma:client:dataproxyEngine");
 async function _getClientVersion(config2) {
   var _a3, _b2, _c;
   const engineVersion = devDependencies["@prisma/engines-version"];
@@ -26463,17 +27034,22 @@ async function _getClientVersion(config2) {
   }
   if (suffix !== void 0 || clientVersion2 === "0.0.0") {
     const [version2] = (_c = engineVersion.split("-")) != null ? _c : [];
-    const [major3, minor, patch] = version2.split(".");
-    const pkgURL = prismaPkgURL(`<=${major3}.${minor}.${patch}`);
+    const [major2, minor, patch] = version2.split(".");
+    const pkgURL = prismaPkgURL(`<=${major2}.${minor}.${patch}`);
     const res = await request(pkgURL, { clientVersion: clientVersion2 });
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch stable Prisma version, unpkg.com status ${res.status} ${res.statusText}, response body: ${await res.text() || "<empty body>"}`
+      );
+    }
     const bodyAsText = await res.text();
-    debug5("length of body fetched from unpkg.com", bodyAsText.length);
+    debug6("length of body fetched from unpkg.com", bodyAsText.length);
     let bodyAsJson;
     try {
       bodyAsJson = JSON.parse(bodyAsText);
-    } catch (e) {
+    } catch (e2) {
       console.error("JSON.parse error: body fetched from unpkg.com: ", bodyAsText);
-      throw e;
+      throw e2;
     }
     return bodyAsJson["version"];
   }
@@ -26484,7 +27060,7 @@ async function _getClientVersion(config2) {
 __name(_getClientVersion, "_getClientVersion");
 async function getClientVersion(config2) {
   const version = await _getClientVersion(config2);
-  debug5("version", version);
+  debug6("version", version);
   return version;
 }
 __name(getClientVersion, "getClientVersion");
@@ -26495,8 +27071,8 @@ __name(prismaPkgURL, "prismaPkgURL");
 
 // ../engine-core/src/data-proxy/DataProxyEngine.ts
 var MAX_RETRIES = 10;
-var P2 = Promise.resolve();
-var debug6 = src_default("prisma:client:dataproxyEngine");
+var P = Promise.resolve();
+var debug7 = src_default("prisma:client:dataproxyEngine");
 var DataProxyEngine = class extends Engine {
   constructor(config2) {
     var _a3, _b2, _c, _d;
@@ -26507,14 +27083,12 @@ var DataProxyEngine = class extends Engine {
     this.inlineDatasources = (_b2 = config2.inlineDatasources) != null ? _b2 : {};
     this.inlineSchemaHash = (_c = config2.inlineSchemaHash) != null ? _c : "";
     this.clientVersion = (_d = config2.clientVersion) != null ? _d : "unknown";
-    this.logEmitter = new import_events2.default();
-    this.logEmitter.on("error", () => {
-    });
+    this.logEmitter = config2.logEmitter;
     const [host, apiKey] = this.extractHostAndApiKey();
-    this.remoteClientVersion = P2.then(() => getClientVersion(this.config));
+    this.remoteClientVersion = P.then(() => getClientVersion(this.config));
     this.headers = { Authorization: `Bearer ${apiKey}` };
     this.host = host;
-    debug6("host", this.host);
+    debug7("host", this.host);
   }
   version() {
     return "unknown";
@@ -26557,7 +27131,7 @@ var DataProxyEngine = class extends Engine {
       clientVersion: this.clientVersion
     });
     if (!response.ok) {
-      debug6("schema response status", response.status);
+      debug7("schema response status", response.status);
     }
     const err = await responseToError(response, this.clientVersion);
     if (err) {
@@ -26569,11 +27143,15 @@ var DataProxyEngine = class extends Engine {
       });
     }
   }
-  request(query2, headers, attempt = 0) {
+  request({ query: query2, headers = {}, transaction }) {
     this.logEmitter.emit("query", { query: query2 });
-    return this.requestInternal({ query: query2, variables: {} }, headers, attempt);
+    return this.requestInternal({ query: query2, variables: {} }, headers, transaction);
   }
-  async requestBatch(queries, headers, transaction, attempt = 0) {
+  async requestBatch({
+    queries,
+    headers = {},
+    transaction
+  }) {
     const isTransaction = Boolean(transaction);
     this.logEmitter.emit("query", {
       query: `Batch${isTransaction ? " in transaction" : ""} (${queries.length}):
@@ -26584,65 +27162,89 @@ ${queries.join("\n")}`
       transaction: isTransaction,
       isolationLevel: transaction == null ? void 0 : transaction.isolationLevel
     };
-    const { batchResult } = await this.requestInternal(body, headers, attempt);
-    return batchResult;
-  }
-  async requestInternal(body, headers, attempt) {
-    var _a3;
-    try {
-      this.logEmitter.emit("info", {
-        message: `Calling ${await this.url("graphql")} (n=${attempt})`
-      });
-      const response = await request(await this.url("graphql"), {
-        method: "POST",
-        headers: { ...headers, ...this.headers },
-        body: JSON.stringify(body),
-        clientVersion: this.clientVersion
-      });
-      if (!response.ok) {
-        debug6("graphql response status", response.status);
+    const { batchResult, elapsed } = await this.requestInternal(body, headers);
+    return batchResult.map((result) => {
+      if ("errors" in result && result.errors.length > 0) {
+        return prismaGraphQLToJSError(result.errors[0], this.clientVersion);
       }
-      const e = await responseToError(response, this.clientVersion);
-      if (e instanceof SchemaMissingError) {
-        await this.uploadSchema();
-        throw new ForcedRetryError({
-          clientVersion: this.clientVersion,
-          cause: e
+      return {
+        data: result,
+        elapsed
+      };
+    });
+  }
+  requestInternal(body, headers, itx) {
+    return this.withRetry({
+      actionGerund: "querying",
+      callback: async ({ logHttpCall }) => {
+        const url = itx ? `${itx.payload.endpoint}/graphql` : await this.url("graphql");
+        logHttpCall(url);
+        const response = await request(url, {
+          method: "POST",
+          headers: { ...runtimeHeadersToHttpHeaders2(headers), ...this.headers },
+          body: JSON.stringify(body),
+          clientVersion: this.clientVersion
         });
-      }
-      if (e)
-        throw e;
-      const data = await response.json();
-      if (data.errors) {
-        if (data.errors.length === 1) {
-          throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
+        if (!response.ok) {
+          debug7("graphql response status", response.status);
         }
-      }
-      return data;
-    } catch (e) {
-      this.logEmitter.emit("error", {
-        message: `Error while querying: ${(_a3 = e.message) != null ? _a3 : "(unknown)"}`
-      });
-      if (!(e instanceof DataProxyError))
-        throw e;
-      if (!e.isRetryable)
-        throw e;
-      if (attempt >= MAX_RETRIES) {
-        if (e instanceof ForcedRetryError) {
-          throw e.cause;
-        } else {
-          throw e;
+        const e2 = await responseToError(response, this.clientVersion);
+        await this.handleError(e2);
+        const data = await response.json();
+        if (data.errors) {
+          if (data.errors.length === 1) {
+            throw prismaGraphQLToJSError(data.errors[0], this.config.clientVersion);
+          } else {
+            throw new PrismaClientUnknownRequestError(data.errors, { clientVersion: this.config.clientVersion });
+          }
         }
+        return data;
       }
-      this.logEmitter.emit("warn", { message: "This request can be retried" });
-      const delay = await backOff(attempt);
-      this.logEmitter.emit("warn", { message: `Retrying after ${delay}ms` });
-      return this.requestInternal(body, headers, attempt + 1);
-    }
+    });
   }
-  transaction() {
-    throw new NotImplementedYetError("Interactive transactions are not yet supported", {
-      clientVersion: this.clientVersion
+  async transaction(action, headers, arg2) {
+    const actionToGerund = {
+      start: "starting",
+      commit: "committing",
+      rollback: "rolling back"
+    };
+    return this.withRetry({
+      actionGerund: `${actionToGerund[action]} transaction`,
+      callback: async ({ logHttpCall }) => {
+        var _a3, _b2;
+        if (action === "start") {
+          const body = JSON.stringify({
+            max_wait: (_a3 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a3 : 2e3,
+            timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3,
+            isolation_level: arg2 == null ? void 0 : arg2.isolationLevel
+          });
+          const url = await this.url("transaction/start");
+          logHttpCall(url);
+          const response = await request(url, {
+            method: "POST",
+            headers: { ...runtimeHeadersToHttpHeaders2(headers), ...this.headers },
+            body,
+            clientVersion: this.clientVersion
+          });
+          const err = await responseToError(response, this.clientVersion);
+          await this.handleError(err);
+          const json = await response.json();
+          const id = json.id;
+          const endpoint = json["data-proxy"].endpoint;
+          return { id, payload: { endpoint } };
+        } else {
+          const url = `${arg2.payload.endpoint}/${action}`;
+          logHttpCall(url);
+          const response = await request(url, {
+            method: "POST",
+            headers: { ...runtimeHeadersToHttpHeaders2(headers), ...this.headers },
+            clientVersion: this.clientVersion
+          });
+          const err = await responseToError(response, this.clientVersion);
+          await this.handleError(err);
+          return void 0;
+        }
+      }
     });
   }
   extractHostAndApiKey() {
@@ -26653,7 +27255,7 @@ ${queries.join("\n")}`
     let url;
     try {
       url = new URL(dataProxyURL);
-    } catch (e) {
+    } catch (e2) {
       throw new InvalidDatasourceError("Could not parse URL of the datasource", {
         clientVersion: this.clientVersion
       });
@@ -26719,19 +27321,68 @@ ${queries.join("\n")}`
       clientVersion: this.clientVersion
     });
   }
+  async withRetry(args) {
+    var _a3;
+    for (let attempt = 0; ; attempt++) {
+      const logHttpCall = /* @__PURE__ */ __name((url) => {
+        this.logEmitter.emit("info", {
+          message: `Calling ${url} (n=${attempt})`
+        });
+      }, "logHttpCall");
+      try {
+        return await args.callback({ logHttpCall });
+      } catch (e2) {
+        if (!(e2 instanceof DataProxyError))
+          throw e2;
+        if (!e2.isRetryable)
+          throw e2;
+        if (attempt >= MAX_RETRIES) {
+          if (e2 instanceof ForcedRetryError) {
+            throw e2.cause;
+          } else {
+            throw e2;
+          }
+        }
+        this.logEmitter.emit("warn", {
+          message: `Attempt ${attempt + 1}/${MAX_RETRIES} failed for ${args.actionGerund}: ${(_a3 = e2.message) != null ? _a3 : "(unknown)"}`
+        });
+        const delay = await backOff(attempt);
+        this.logEmitter.emit("warn", { message: `Retrying after ${delay}ms` });
+      }
+    }
+  }
+  async handleError(error2) {
+    if (error2 instanceof SchemaMissingError) {
+      await this.uploadSchema();
+      throw new ForcedRetryError({
+        clientVersion: this.clientVersion,
+        cause: error2
+      });
+    } else if (error2) {
+      throw error2;
+    }
+  }
 };
 __name(DataProxyEngine, "DataProxyEngine");
+function runtimeHeadersToHttpHeaders2(headers) {
+  if (headers.transactionId) {
+    const httpHeaders = { ...headers };
+    delete httpHeaders.transactionId;
+    return httpHeaders;
+  }
+  return headers;
+}
+__name(runtimeHeadersToHttpHeaders2, "runtimeHeadersToHttpHeaders");
 
 // ../engine-core/src/library/LibraryEngine.ts
 var import_chalk5 = __toESM(require_source());
-var import_events3 = __toESM(require("events"));
-var import_fs6 = __toESM(require("fs"));
+var import_fs7 = __toESM(require("fs"));
 
 // ../engine-core/src/library/DefaultLibraryLoader.ts
 var import_chalk4 = __toESM(require_source());
-var import_fs5 = __toESM(require("fs"));
-var import_path3 = __toESM(require("path"));
-var debug7 = src_default("prisma:client:libraryEngine:loader");
+var import_fs6 = __toESM(require("fs"));
+var import_path4 = __toESM(require("path"));
+var debug8 = src_default("prisma:client:libraryEngine:loader");
 var DefaultLibraryLoader = class {
   constructor(config2) {
     this.libQueryEnginePath = null;
@@ -26742,14 +27393,14 @@ var DefaultLibraryLoader = class {
     if (!this.libQueryEnginePath) {
       this.libQueryEnginePath = await this.getLibQueryEnginePath();
     }
-    debug7(`loadEngine using ${this.libQueryEnginePath}`);
+    debug8(`loadEngine using ${this.libQueryEnginePath}`);
     try {
       return eval("require")(this.libQueryEnginePath);
-    } catch (e) {
-      if (import_fs5.default.existsSync(this.libQueryEnginePath)) {
+    } catch (e2) {
+      if (import_fs6.default.existsSync(this.libQueryEnginePath)) {
         if (this.libQueryEnginePath.endsWith(".node")) {
           throw new PrismaClientInitializationError(
-            `Unable to load Node-API Library from ${import_chalk4.default.dim(this.libQueryEnginePath)}, Library may be corrupt`,
+            `Unable to load Node-API Library from ${import_chalk4.default.dim(this.libQueryEnginePath)}, Library may be corrupt: ${e2.message}`,
             this.config.clientVersion
           );
         } else {
@@ -26769,12 +27420,12 @@ var DefaultLibraryLoader = class {
   async getLibQueryEnginePath() {
     var _a3, _b2, _c, _d;
     const libPath = (_a3 = process.env.PRISMA_QUERY_ENGINE_LIBRARY) != null ? _a3 : this.config.prismaPath;
-    if (libPath && import_fs5.default.existsSync(libPath) && libPath.endsWith(".node")) {
+    if (libPath && import_fs6.default.existsSync(libPath) && libPath.endsWith(".node")) {
       return libPath;
     }
     this.platform = (_b2 = this.platform) != null ? _b2 : await getPlatform();
     const { enginePath: enginePath2, searchedLocations: searchedLocations2 } = await this.resolveEnginePath();
-    if (!import_fs5.default.existsSync(enginePath2)) {
+    if (!import_fs6.default.existsSync(enginePath2)) {
       const incorrectPinnedPlatformErrorStr = this.platform ? `
 You incorrectly pinned it to ${import_chalk4.default.redBright.bold(`${this.platform}`)}
 ` : "";
@@ -26786,11 +27437,11 @@ This probably happens, because you built Prisma Client on a different platform.
 
 Searched Locations:
 
-${searchedLocations2.map((f) => {
-        let msg = `  ${f}`;
-        if (process.env.DEBUG === "node-engine-search-locations" && import_fs5.default.existsSync(f)) {
-          const dir = import_fs5.default.readdirSync(f);
-          msg += dir.map((d) => `    ${d}`).join("\n");
+${searchedLocations2.map((f2) => {
+        let msg = `  ${f2}`;
+        if (process.env.DEBUG === "node-engine-search-locations" && import_fs6.default.existsSync(f2)) {
+          const dir = import_fs6.default.readdirSync(f2);
+          msg += dir.map((d2) => `    ${d2}`).join("\n");
         }
         return msg;
       }).join("\n" + (process.env.DEBUG === "node-engine-search-locations" ? "\n" : ""))}
@@ -26799,7 +27450,7 @@ ${searchedLocations2.map((f) => {
         this.platform = (_c = this.platform) != null ? _c : await getPlatform();
         if (this.config.generator.binaryTargets.find((object) => object.value === this.platform) || this.config.generator.binaryTargets.find((object) => object.value === "native")) {
           errorText += `
-You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t) => `"${import_chalk4.default.bold(t.value)}"`).join(", ")} to the "${import_chalk4.default.underline("generator")}" block
+You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t2) => `"${import_chalk4.default.bold(t2.value)}"`).join(", ")} to the "${import_chalk4.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -26836,15 +27487,15 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
     }
     this.platform = (_a3 = this.platform) != null ? _a3 : await getPlatform();
     if (__filename.includes("DefaultLibraryLoader")) {
-      enginePath = import_path3.default.join(getEnginesPath(), getNodeAPIName(this.platform, "fs"));
+      enginePath = import_path4.default.join(getEnginesPath(), getNodeAPIName(this.platform, "fs"));
       return { enginePath, searchedLocations };
     }
     const dirname = eval("__dirname");
     const searchLocations = [
-      import_path3.default.resolve(dirname, "../../../.prisma/client"),
+      import_path4.default.resolve(dirname, "../../../.prisma/client"),
       (_d = (_c = (_b2 = this.config.generator) == null ? void 0 : _b2.output) == null ? void 0 : _c.value) != null ? _d : dirname,
-      import_path3.default.resolve(dirname, ".."),
-      import_path3.default.dirname(this.config.datamodelPath),
+      import_path4.default.resolve(dirname, ".."),
+      import_path4.default.dirname(this.config.datamodelPath),
       this.config.cwd,
       "/tmp/prisma-engines"
     ];
@@ -26853,13 +27504,13 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
     }
     for (const location of searchLocations) {
       searchedLocations.push(location);
-      debug7(`Searching for Query Engine Library in ${location}`);
-      enginePath = import_path3.default.join(location, getNodeAPIName(this.platform, "fs"));
-      if (import_fs5.default.existsSync(enginePath)) {
+      debug8(`Searching for Query Engine Library in ${location}`);
+      enginePath = import_path4.default.join(location, getNodeAPIName(this.platform, "fs"));
+      if (import_fs6.default.existsSync(enginePath)) {
         return { enginePath, searchedLocations };
       }
     }
-    enginePath = import_path3.default.join(__dirname, getNodeAPIName(this.platform, "fs"));
+    enginePath = import_path4.default.join(__dirname, getNodeAPIName(this.platform, "fs"));
     return { enginePath: enginePath != null ? enginePath : "", searchedLocations };
   }
   getFixedGenerator() {
@@ -26873,7 +27524,7 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
 __name(DefaultLibraryLoader, "DefaultLibraryLoader");
 
 // ../engine-core/src/library/ExitHooks.ts
-var debug8 = src_default("prisma:client:libraryEngine:exitHooks");
+var debug9 = src_default("prisma:client:libraryEngine:exitHooks");
 var ExitHooks = class {
   constructor() {
     this.nextOwnerId = 1;
@@ -26917,7 +27568,7 @@ var ExitHooks = class {
   }
   installHook(event, shouldExit = false) {
     process.once(event, async (code) => {
-      debug8(`exit event received: ${event}`);
+      debug9(`exit event received: ${event}`);
       for (const listener of this.idToListenerMap.values()) {
         await listener();
       }
@@ -26931,7 +27582,7 @@ var ExitHooks = class {
 __name(ExitHooks, "ExitHooks");
 
 // ../engine-core/src/library/LibraryEngine.ts
-var debug9 = src_default("prisma:client:libraryEngine");
+var debug10 = src_default("prisma:client:libraryEngine");
 function isQueryEvent(event) {
   return event["item_type"] === "query" && "query" in event;
 }
@@ -26951,15 +27602,13 @@ var LibraryEngine = class extends Engine {
   constructor(config2, loader = new DefaultLibraryLoader(config2)) {
     var _a3, _b2;
     super();
-    this.datamodel = import_fs6.default.readFileSync(config2.datamodelPath, "utf-8");
+    this.datamodel = import_fs7.default.readFileSync(config2.datamodelPath, "utf-8");
     this.config = config2;
     this.libraryStarted = false;
     this.logQueries = (_a3 = config2.logQueries) != null ? _a3 : false;
     this.logLevel = (_b2 = config2.logLevel) != null ? _b2 : "error";
     this.libraryLoader = loader;
-    this.logEmitter = new import_events3.default();
-    this.logEmitter.on("error", (e) => {
-    });
+    this.logEmitter = config2.logEmitter;
     this.datasourceOverrides = config2.datasources ? this.convertDatasources(config2.datasources) : {};
     if (config2.enableDebugLogs) {
       this.logLevel = "debug";
@@ -27000,17 +27649,16 @@ var LibraryEngine = class extends Engine {
     }
     const response = this.parseEngineResponse(result);
     if (response.error_code) {
-      throw new PrismaClientKnownRequestError(
-        response.message,
-        response.error_code,
-        this.config.clientVersion,
-        response.meta
-      );
+      throw new PrismaClientKnownRequestError(response.message, {
+        code: response.error_code,
+        clientVersion: this.config.clientVersion,
+        meta: response.meta
+      });
     }
     return response;
   }
   async instantiateLibrary() {
-    debug9("internalSetup");
+    debug10("internalSetup");
     if (this.libraryInstantiationPromise) {
       return this.libraryInstantiationPromise;
     }
@@ -27038,13 +27686,17 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
   }
   parseEngineResponse(response) {
     if (!response) {
-      throw new PrismaClientUnknownRequestError(`Response from the Engine was empty`, this.config.clientVersion);
+      throw new PrismaClientUnknownRequestError(`Response from the Engine was empty`, {
+        clientVersion: this.config.clientVersion
+      });
     }
     try {
       const config2 = JSON.parse(response);
       return config2;
     } catch (err) {
-      throw new PrismaClientUnknownRequestError(`Unable to JSON.parse response from engine`, this.config.clientVersion);
+      throw new PrismaClientUnknownRequestError(`Unable to JSON.parse response from engine`, {
+        clientVersion: this.config.clientVersion
+      });
     }
   }
   convertDatasources(datasources) {
@@ -27073,26 +27725,26 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
             logLevel: this.logLevel,
             configDir: this.config.cwd
           },
-          (log4) => {
+          (log3) => {
             var _a4;
-            (_a4 = weakThis.deref()) == null ? void 0 : _a4.logger(log4);
+            (_a4 = weakThis.deref()) == null ? void 0 : _a4.logger(log3);
           }
         );
         engineInstanceCount++;
       } catch (_e) {
-        const e = _e;
-        const error2 = this.parseInitError(e.message);
+        const e2 = _e;
+        const error2 = this.parseInitError(e2.message);
         if (typeof error2 === "string") {
-          throw e;
+          throw e2;
         } else {
           throw new PrismaClientInitializationError(error2.message, this.config.clientVersion, error2.error_code);
         }
       }
     }
   }
-  logger(log4) {
+  logger(log3) {
     var _a3;
-    const event = this.parseEngineResponse(log4);
+    const event = this.parseEngineResponse(log3);
     if (!event)
       return;
     if ("span" in event) {
@@ -27117,7 +27769,6 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
         ),
         this.config.clientVersion
       );
-      this.logEmitter.emit("error", this.loggerRustPanic);
     } else {
       this.logEmitter.emit(event.level, {
         timestamp: new Date(),
@@ -27141,7 +27792,7 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     try {
       const error2 = JSON.parse(str);
       return error2;
-    } catch (e) {
+    } catch (e2) {
     }
     return str;
   }
@@ -27149,7 +27800,7 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     try {
       const error2 = JSON.parse(str);
       return error2;
-    } catch (e) {
+    } catch (e2) {
     }
     return str;
   }
@@ -27164,7 +27815,7 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     await this.libraryInstantiationPromise;
     await this.libraryStoppingPromise;
     if (this.libraryStartingPromise) {
-      debug9(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
+      debug10(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
       return this.libraryStartingPromise;
     }
     if (this.libraryStarted) {
@@ -27172,14 +27823,14 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     }
     const startFn = /* @__PURE__ */ __name(async () => {
       var _a3;
-      debug9("library starting");
+      debug10("library starting");
       try {
         const headers = {
           traceparent: getTraceParent({ tracingConfig: this.config.tracingConfig })
         };
         await ((_a3 = this.engine) == null ? void 0 : _a3.connect(JSON.stringify(headers)));
         this.libraryStarted = true;
-        debug9("library started");
+        debug10("library started");
       } catch (err) {
         const error2 = this.parseInitError(err.message);
         if (typeof error2 === "string") {
@@ -27202,7 +27853,7 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     await this.libraryStartingPromise;
     await this.executingQueryPromise;
     if (this.libraryStoppingPromise) {
-      debug9("library is already stopping");
+      debug10("library is already stopping");
       return this.libraryStoppingPromise;
     }
     if (!this.libraryStarted) {
@@ -27210,15 +27861,15 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     }
     const stopFn = /* @__PURE__ */ __name(async () => {
       var _a3;
-      await new Promise((r) => setTimeout(r, 5));
-      debug9("library stopping");
+      await new Promise((r2) => setTimeout(r2, 5));
+      debug10("library stopping");
       const headers = {
         traceparent: getTraceParent({ tracingConfig: this.config.tracingConfig })
       };
       await ((_a3 = this.engine) == null ? void 0 : _a3.disconnect(JSON.stringify(headers)));
       this.libraryStarted = false;
       this.libraryStoppingPromise = void 0;
-      debug9("library stopped");
+      debug10("library stopped");
     }, "stopFn");
     const spanConfig = {
       name: "disconnect",
@@ -27237,8 +27888,8 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     });
   }
   async getDmmf() {
-    await this.libraryInstantiationPromise;
-    return JSON.parse(await this.library.dmmf(this.datamodel));
+    await this.start();
+    return JSON.parse(await this.engine.dmmf());
   }
   version() {
     var _a3, _b2, _c;
@@ -27249,9 +27900,9 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     var _a3;
     return (_a3 = this.library) == null ? void 0 : _a3.debugPanic(message);
   }
-  async request(query2, headers = {}, numTry = 1) {
+  async request({ query: query2, headers = {} }) {
     var _a3, _b2;
-    debug9(`sending request, this.libraryStarted: ${this.libraryStarted}`);
+    debug10(`sending request, this.libraryStarted: ${this.libraryStarted}`);
     const request2 = { query: query2, variables: {} };
     const headerStr = JSON.stringify(headers);
     const queryStr = JSON.stringify(request2);
@@ -27264,29 +27915,37 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
         if (data.errors.length === 1) {
           throw this.buildQueryError(data.errors[0]);
         }
-        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+        throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), {
+          clientVersion: this.config.clientVersion
+        });
       } else if (this.loggerRustPanic) {
         throw this.loggerRustPanic;
       }
       return { data, elapsed: 0 };
-    } catch (e) {
-      if (e instanceof PrismaClientInitializationError) {
-        throw e;
+    } catch (e2) {
+      if (e2 instanceof PrismaClientInitializationError) {
+        throw e2;
       }
-      if (e.code === "GenericFailure" && ((_b2 = e.message) == null ? void 0 : _b2.startsWith("PANIC:"))) {
-        throw new PrismaClientRustPanicError(this.getErrorMessageWithLink(e.message), this.config.clientVersion);
+      if (e2.code === "GenericFailure" && ((_b2 = e2.message) == null ? void 0 : _b2.startsWith("PANIC:"))) {
+        throw new PrismaClientRustPanicError(this.getErrorMessageWithLink(e2.message), this.config.clientVersion);
       }
-      const error2 = this.parseRequestError(e.message);
+      const error2 = this.parseRequestError(e2.message);
       if (typeof error2 === "string") {
-        throw e;
+        throw e2;
       } else {
         throw new PrismaClientUnknownRequestError(`${error2.message}
-${error2.backtrace}`, this.config.clientVersion);
+${error2.backtrace}`, {
+          clientVersion: this.config.clientVersion
+        });
       }
     }
   }
-  async requestBatch(queries, headers = {}, transaction) {
-    debug9("requestBatch");
+  async requestBatch({
+    queries,
+    headers = {},
+    transaction
+  }) {
+    debug10("requestBatch");
     const request2 = {
       batch: queries.map((query2) => ({ query: query2, variables: {} })),
       transaction: Boolean(transaction),
@@ -27301,14 +27960,16 @@ ${error2.backtrace}`, this.config.clientVersion);
       if (data.errors.length === 1) {
         throw this.buildQueryError(data.errors[0]);
       }
-      throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), this.config.clientVersion);
+      throw new PrismaClientUnknownRequestError(JSON.stringify(data.errors), {
+        clientVersion: this.config.clientVersion
+      });
     }
     const { batchResult, errors } = data;
     if (Array.isArray(batchResult)) {
       return batchResult.map((result2) => {
         var _a3;
-        if (result2.errors) {
-          return (_a3 = this.loggerRustPanic) != null ? _a3 : this.buildQueryError(data.errors[0]);
+        if (result2.errors && result2.errors.length > 0) {
+          return (_a3 = this.loggerRustPanic) != null ? _a3 : this.buildQueryError(result2.errors[0]);
         }
         return {
           data: result2,
@@ -27342,206 +28003,58 @@ ${error2.backtrace}`, this.config.clientVersion);
 };
 __name(LibraryEngine, "LibraryEngine");
 
-// ../internals/src/utils/tryLoadEnvs.ts
-var import_chalk6 = __toESM(require_source());
-var import_dotenv = __toESM(require_main2());
-var import_fs7 = __toESM(require("fs"));
-var import_path4 = __toESM(require("path"));
-
-// ../internals/src/dotenvExpand.ts
-function dotenvExpand(config2) {
-  const environment = config2.ignoreProcessEnv ? {} : process.env;
-  const interpolate = /* @__PURE__ */ __name((envValue) => {
-    const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g) || [];
-    return matches.reduce(function(newEnv, match) {
-      const parts = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(match);
-      if (!parts) {
-        return newEnv;
-      }
-      const prefix = parts[1];
-      let value, replacePart;
-      if (prefix === "\\") {
-        replacePart = parts[0];
-        value = replacePart.replace("\\$", "$");
-      } else {
-        const key = parts[2];
-        replacePart = parts[0].substring(prefix.length);
-        value = Object.hasOwnProperty.call(environment, key) ? environment[key] : config2.parsed[key] || "";
-        value = interpolate(value);
-      }
-      return newEnv.replace(replacePart, value);
-    }, envValue);
-  }, "interpolate");
-  for (const configKey in config2.parsed) {
-    const value = Object.hasOwnProperty.call(environment, configKey) ? environment[configKey] : config2.parsed[configKey];
-    config2.parsed[configKey] = interpolate(value);
-  }
-  for (const processKey in config2.parsed) {
-    environment[processKey] = config2.parsed[processKey];
-  }
-  return config2;
-}
-__name(dotenvExpand, "dotenvExpand");
-
-// ../internals/src/utils/tryLoadEnvs.ts
-var debug10 = src_default("prisma:tryLoadEnv");
-function tryLoadEnvs({
-  rootEnvPath,
-  schemaEnvPath
-}, opts = {
-  conflictCheck: "none"
-}) {
-  var _a3, _b2;
-  const rootEnvInfo = loadEnv(rootEnvPath);
-  if (opts.conflictCheck !== "none") {
-    checkForConflicts(rootEnvInfo, schemaEnvPath, opts.conflictCheck);
-  }
-  let schemaEnvInfo = null;
-  if (!pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, schemaEnvPath)) {
-    schemaEnvInfo = loadEnv(schemaEnvPath);
-  }
-  if (!rootEnvInfo && !schemaEnvInfo) {
-    debug10("No Environment variables loaded");
-  }
-  if (schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult.error) {
-    return console.error(import_chalk6.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
-  }
-  const messages = [rootEnvInfo == null ? void 0 : rootEnvInfo.message, schemaEnvInfo == null ? void 0 : schemaEnvInfo.message].filter(Boolean);
-  return {
-    message: messages.join("\n"),
-    parsed: {
-      ...(_a3 = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult) == null ? void 0 : _a3.parsed,
-      ...(_b2 = schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult) == null ? void 0 : _b2.parsed
-    }
-  };
-}
-__name(tryLoadEnvs, "tryLoadEnvs");
-function checkForConflicts(rootEnvInfo, envPath, type) {
-  const parsedRootEnv = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult.parsed;
-  const areNotTheSame = !pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, envPath);
-  if (parsedRootEnv && envPath && areNotTheSame && import_fs7.default.existsSync(envPath)) {
-    const envConfig = import_dotenv.default.parse(import_fs7.default.readFileSync(envPath));
-    const conflicts = [];
-    for (const k in envConfig) {
-      if (parsedRootEnv[k] === envConfig[k]) {
-        conflicts.push(k);
-      }
-    }
-    if (conflicts.length > 0) {
-      const relativeRootEnvPath = import_path4.default.relative(process.cwd(), rootEnvInfo.path);
-      const relativeEnvPath = import_path4.default.relative(process.cwd(), envPath);
-      if (type === "error") {
-        const message = `There is a conflict between env var${conflicts.length > 1 ? "s" : ""} in ${import_chalk6.default.underline(
-          relativeRootEnvPath
-        )} and ${import_chalk6.default.underline(relativeEnvPath)}
-Conflicting env vars:
-${conflicts.map((conflict) => `  ${import_chalk6.default.bold(conflict)}`).join("\n")}
-
-We suggest to move the contents of ${import_chalk6.default.underline(relativeEnvPath)} to ${import_chalk6.default.underline(
-          relativeRootEnvPath
-        )} to consolidate your env vars.
-`;
-        throw new Error(message);
-      } else if (type === "warn") {
-        const message = `Conflict for env var${conflicts.length > 1 ? "s" : ""} ${conflicts.map((c) => import_chalk6.default.bold(c)).join(", ")} in ${import_chalk6.default.underline(relativeRootEnvPath)} and ${import_chalk6.default.underline(relativeEnvPath)}
-Env vars from ${import_chalk6.default.underline(relativeEnvPath)} overwrite the ones from ${import_chalk6.default.underline(relativeRootEnvPath)}
-      `;
-        console.warn(`${import_chalk6.default.yellow("warn(prisma)")} ${message}`);
-      }
-    }
-  }
-}
-__name(checkForConflicts, "checkForConflicts");
-function loadEnv(envPath) {
-  if (exists3(envPath)) {
-    debug10(`Environment variables loaded from ${envPath}`);
-    return {
-      dotenvResult: dotenvExpand(
-        import_dotenv.default.config({
-          path: envPath,
-          debug: process.env.DOTENV_CONFIG_DEBUG ? true : void 0
-        })
-      ),
-      message: import_chalk6.default.dim(`Environment variables loaded from ${import_path4.default.relative(process.cwd(), envPath)}`),
-      path: envPath
-    };
-  } else {
-    debug10(`Environment variables not found at ${envPath}`);
-  }
-  return null;
-}
-__name(loadEnv, "loadEnv");
-function pathsEqual(path1, path22) {
-  return path1 && path22 && import_path4.default.resolve(path1) === import_path4.default.resolve(path22);
-}
-__name(pathsEqual, "pathsEqual");
-function exists3(p) {
-  return Boolean(p && import_fs7.default.existsSync(p));
-}
-__name(exists3, "exists");
-
-// ../internals/src/client/getClientEngineType.ts
-var DEFAULT_CLIENT_ENGINE_TYPE = "library" /* Library */;
-function getClientEngineType(generatorConfig) {
-  const engineTypeFromEnvVar = getEngineTypeFromEnvVar();
-  if (engineTypeFromEnvVar)
-    return engineTypeFromEnvVar;
-  if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "library" /* Library */) {
-    return "library" /* Library */;
-  } else if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "binary" /* Binary */) {
-    return "binary" /* Binary */;
-  } else {
-    return DEFAULT_CLIENT_ENGINE_TYPE;
-  }
-}
-__name(getClientEngineType, "getClientEngineType");
-function getEngineTypeFromEnvVar() {
-  const engineType = process.env.PRISMA_CLIENT_ENGINE_TYPE;
-  if (engineType === "library" /* Library */) {
-    return "library" /* Library */;
-  } else if (engineType === "binary" /* Binary */) {
-    return "binary" /* Binary */;
-  } else {
-    return void 0;
-  }
-}
-__name(getEngineTypeFromEnvVar, "getEngineTypeFromEnvVar");
-
-// ../internals/src/cli/utils.ts
-var import_arg = __toESM(require_arg());
-var import_strip_indent = __toESM(require_strip_indent());
-function isError(result) {
-  return result instanceof Error;
-}
-__name(isError, "isError");
+// ../generator-helper/src/dmmf.ts
+var DMMF;
+((DMMF2) => {
+  let ModelAction;
+  ((ModelAction2) => {
+    ModelAction2["findUnique"] = "findUnique";
+    ModelAction2["findUniqueOrThrow"] = "findUniqueOrThrow";
+    ModelAction2["findFirst"] = "findFirst";
+    ModelAction2["findFirstOrThrow"] = "findFirstOrThrow";
+    ModelAction2["findMany"] = "findMany";
+    ModelAction2["create"] = "create";
+    ModelAction2["createMany"] = "createMany";
+    ModelAction2["update"] = "update";
+    ModelAction2["updateMany"] = "updateMany";
+    ModelAction2["upsert"] = "upsert";
+    ModelAction2["delete"] = "delete";
+    ModelAction2["deleteMany"] = "deleteMany";
+    ModelAction2["groupBy"] = "groupBy";
+    ModelAction2["count"] = "count";
+    ModelAction2["aggregate"] = "aggregate";
+    ModelAction2["findRaw"] = "findRaw";
+    ModelAction2["aggregateRaw"] = "aggregateRaw";
+  })(ModelAction = DMMF2.ModelAction || (DMMF2.ModelAction = {}));
+})(DMMF || (DMMF = {}));
 
 // ../internals/src/logger.ts
 var logger_exports = {};
 __export(logger_exports, {
   error: () => error,
   info: () => info,
-  log: () => log3,
+  log: () => log,
   query: () => query,
   should: () => should,
   tags: () => tags,
   warn: () => warn
 });
-var import_chalk7 = __toESM(require_source());
+var import_chalk6 = __toESM(require_source());
 var tags = {
-  error: import_chalk7.default.red("prisma:error"),
-  warn: import_chalk7.default.yellow("prisma:warn"),
-  info: import_chalk7.default.cyan("prisma:info"),
-  query: import_chalk7.default.blue("prisma:query")
+  error: import_chalk6.default.red("prisma:error"),
+  warn: import_chalk6.default.yellow("prisma:warn"),
+  info: import_chalk6.default.cyan("prisma:info"),
+  query: import_chalk6.default.blue("prisma:query")
 };
 var should = {
-  warn: !process.env.PRISMA_DISABLE_WARNINGS
+  warn: () => !process.env.PRISMA_DISABLE_WARNINGS
 };
-function log3(...data) {
+function log(...data) {
   console.log(...data);
 }
-__name(log3, "log");
+__name(log, "log");
 function warn(message, ...optionalParams) {
-  if (should.warn) {
+  if (should.warn()) {
     console.warn(`${tags.warn} ${message}`, ...optionalParams);
   }
 }
@@ -27559,12 +28072,6 @@ function query(message, ...optionalParams) {
 }
 __name(query, "query");
 
-// ../internals/src/utils/assertNever.ts
-function assertNever(arg2, errorMessage) {
-  throw new Error(errorMessage);
-}
-__name(assertNever, "assertNever");
-
 // ../internals/src/utils/callOnce.ts
 function callOnce(fn) {
   let result;
@@ -27572,13 +28079,33 @@ function callOnce(fn) {
 }
 __name(callOnce, "callOnce");
 
+// ../internals/src/utils/hasOwnProperty.ts
+function hasOwnProperty2(object, key) {
+  return Object.prototype.hasOwnProperty.call(object, key);
+}
+__name(hasOwnProperty2, "hasOwnProperty");
+
+// ../internals/src/utils/isPromiseLike.ts
+function isPromiseLike(value) {
+  return value != null && typeof value["then"] === "function";
+}
+__name(isPromiseLike, "isPromiseLike");
+
 // ../internals/src/utils/keyBy.ts
-var keyBy2 = /* @__PURE__ */ __name((collection, iteratee) => {
+var keyBy = /* @__PURE__ */ __name((collection, iteratee) => {
   return collection.reduce((acc, curr) => {
     acc[iteratee(curr)] = curr;
     return acc;
   }, {});
 }, "keyBy");
+
+// ../internals/src/utils/mapObjectValues.ts
+function mapObjectValues(object, mapper) {
+  return Object.fromEntries(
+    Object.entries(object).map(([key, value]) => [key, mapper(value, key)])
+  );
+}
+__name(mapObjectValues, "mapObjectValues");
 
 // ../internals/src/warnOnce.ts
 var alreadyWarned = /* @__PURE__ */ new Set();
@@ -27589,8 +28116,2985 @@ var warnOnce = /* @__PURE__ */ __name((key, message, ...args) => {
   }
 }, "warnOnce");
 
+// src/runtime/core/extensions/wrapExtensionCallback.ts
+var PrismaClientExtensionError = class extends Error {
+  constructor(extensionName, cause) {
+    super(`${getTitleFromExtensionName(extensionName)}: ${getMessageFromCause(cause)}`, { cause });
+    this.extensionName = extensionName;
+    this.name = "PrismaClientExtensionError";
+    if (!this.cause) {
+      this.cause = cause;
+    }
+    if (typeof Error.captureStackTrace === "function") {
+      Error.captureStackTrace(this, PrismaClientExtensionError);
+    }
+  }
+  get [Symbol.toStringTag]() {
+    return "PrismaClientExtensionError";
+  }
+};
+__name(PrismaClientExtensionError, "PrismaClientExtensionError");
+function getTitleFromExtensionName(extensionName) {
+  if (extensionName) {
+    return `Error caused by extension "${extensionName}"`;
+  }
+  return "Error caused by an extension";
+}
+__name(getTitleFromExtensionName, "getTitleFromExtensionName");
+function getMessageFromCause(cause) {
+  if (cause instanceof Error) {
+    return cause.message;
+  }
+  return `${cause}`;
+}
+__name(getMessageFromCause, "getMessageFromCause");
+function wrapExtensionCallback(name, fn) {
+  return function(...args) {
+    try {
+      const result = fn.apply(this, args);
+      if (isPromiseLike(result)) {
+        return result.then(void 0, (error2) => Promise.reject(new PrismaClientExtensionError(name, error2)));
+      }
+      return result;
+    } catch (error2) {
+      throw new PrismaClientExtensionError(name, error2);
+    }
+  };
+}
+__name(wrapExtensionCallback, "wrapExtensionCallback");
+function wrapAllExtensionCallbacks(name, object) {
+  if (!object) {
+    return object;
+  }
+  return mapObjectValues(
+    object,
+    (prop) => typeof prop === "function" ? wrapExtensionCallback(name, prop) : prop
+  );
+}
+__name(wrapAllExtensionCallbacks, "wrapAllExtensionCallbacks");
+
+// src/runtime/core/metrics/MetricsClient.ts
+var MetricsClient = class {
+  constructor(engine) {
+    this._engine = engine;
+  }
+  prometheus(options) {
+    return this._engine.metrics({ format: "prometheus", ...options });
+  }
+  json(options) {
+    return this._engine.metrics({ format: "json", ...options });
+  }
+};
+__name(MetricsClient, "MetricsClient");
+
+// src/runtime/utils/applyMixins.ts
+function applyMixins(derivedCtor, constructors) {
+  var _a3;
+  for (const baseCtor of constructors) {
+    for (const name of Object.getOwnPropertyNames(baseCtor.prototype)) {
+      Object.defineProperty(
+        derivedCtor.prototype,
+        name,
+        (_a3 = Object.getOwnPropertyDescriptor(baseCtor.prototype, name)) != null ? _a3 : /* @__PURE__ */ Object.create(null)
+      );
+    }
+  }
+}
+__name(applyMixins, "applyMixins");
+
+// src/runtime/utils/common.ts
+var import_chalk7 = __toESM(require_source());
+
+// ../../node_modules/.pnpm/decimal.js@10.4.2/node_modules/decimal.js/decimal.mjs
+var EXP_LIMIT = 9e15;
+var MAX_DIGITS = 1e9;
+var NUMERALS = "0123456789abcdef";
+var LN10 = "2.3025850929940456840179914546843642076011014886287729760333279009675726096773524802359972050895982983419677840422862486334095254650828067566662873690987816894829072083255546808437998948262331985283935053089653777326288461633662222876982198867465436674744042432743651550489343149393914796194044002221051017141748003688084012647080685567743216228355220114804663715659121373450747856947683463616792101806445070648000277502684916746550586856935673420670581136429224554405758925724208241314695689016758940256776311356919292033376587141660230105703089634572075440370847469940168269282808481184289314848524948644871927809676271275775397027668605952496716674183485704422507197965004714951050492214776567636938662976979522110718264549734772662425709429322582798502585509785265383207606726317164309505995087807523710333101197857547331541421808427543863591778117054309827482385045648019095610299291824318237525357709750539565187697510374970888692180205189339507238539205144634197265287286965110862571492198849978748873771345686209167058";
+var PI = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632789";
+var DEFAULTS = {
+  precision: 20,
+  rounding: 4,
+  modulo: 1,
+  toExpNeg: -7,
+  toExpPos: 21,
+  minE: -EXP_LIMIT,
+  maxE: EXP_LIMIT,
+  crypto: false
+};
+var inexact;
+var quadrant;
+var external = true;
+var decimalError = "[DecimalError] ";
+var invalidArgument = decimalError + "Invalid argument: ";
+var precisionLimitExceeded = decimalError + "Precision limit exceeded";
+var cryptoUnavailable = decimalError + "crypto unavailable";
+var tag = "[object Decimal]";
+var mathfloor = Math.floor;
+var mathpow = Math.pow;
+var isBinary = /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i;
+var isHex = /^0x([0-9a-f]+(\.[0-9a-f]*)?|\.[0-9a-f]+)(p[+-]?\d+)?$/i;
+var isOctal = /^0o([0-7]+(\.[0-7]*)?|\.[0-7]+)(p[+-]?\d+)?$/i;
+var isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i;
+var BASE = 1e7;
+var LOG_BASE = 7;
+var MAX_SAFE_INTEGER = 9007199254740991;
+var LN10_PRECISION = LN10.length - 1;
+var PI_PRECISION = PI.length - 1;
+var P2 = { toStringTag: tag };
+P2.absoluteValue = P2.abs = function() {
+  var x = new this.constructor(this);
+  if (x.s < 0)
+    x.s = 1;
+  return finalise(x);
+};
+P2.ceil = function() {
+  return finalise(new this.constructor(this), this.e + 1, 2);
+};
+P2.clampedTo = P2.clamp = function(min2, max2) {
+  var k, x = this, Ctor = x.constructor;
+  min2 = new Ctor(min2);
+  max2 = new Ctor(max2);
+  if (!min2.s || !max2.s)
+    return new Ctor(NaN);
+  if (min2.gt(max2))
+    throw Error(invalidArgument + max2);
+  k = x.cmp(min2);
+  return k < 0 ? min2 : x.cmp(max2) > 0 ? max2 : new Ctor(x);
+};
+P2.comparedTo = P2.cmp = function(y) {
+  var i, j, xdL, ydL, x = this, xd = x.d, yd = (y = new x.constructor(y)).d, xs = x.s, ys = y.s;
+  if (!xd || !yd) {
+    return !xs || !ys ? NaN : xs !== ys ? xs : xd === yd ? 0 : !xd ^ xs < 0 ? 1 : -1;
+  }
+  if (!xd[0] || !yd[0])
+    return xd[0] ? xs : yd[0] ? -ys : 0;
+  if (xs !== ys)
+    return xs;
+  if (x.e !== y.e)
+    return x.e > y.e ^ xs < 0 ? 1 : -1;
+  xdL = xd.length;
+  ydL = yd.length;
+  for (i = 0, j = xdL < ydL ? xdL : ydL; i < j; ++i) {
+    if (xd[i] !== yd[i])
+      return xd[i] > yd[i] ^ xs < 0 ? 1 : -1;
+  }
+  return xdL === ydL ? 0 : xdL > ydL ^ xs < 0 ? 1 : -1;
+};
+P2.cosine = P2.cos = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.d)
+    return new Ctor(NaN);
+  if (!x.d[0])
+    return new Ctor(1);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
+  Ctor.rounding = 1;
+  x = cosine(Ctor, toLessThanHalfPi(Ctor, x));
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return finalise(quadrant == 2 || quadrant == 3 ? x.neg() : x, pr, rm, true);
+};
+P2.cubeRoot = P2.cbrt = function() {
+  var e2, m2, n2, r2, rep, s, sd, t2, t3, t3plusx, x = this, Ctor = x.constructor;
+  if (!x.isFinite() || x.isZero())
+    return new Ctor(x);
+  external = false;
+  s = x.s * mathpow(x.s * x, 1 / 3);
+  if (!s || Math.abs(s) == 1 / 0) {
+    n2 = digitsToString(x.d);
+    e2 = x.e;
+    if (s = (e2 - n2.length + 1) % 3)
+      n2 += s == 1 || s == -2 ? "0" : "00";
+    s = mathpow(n2, 1 / 3);
+    e2 = mathfloor((e2 + 1) / 3) - (e2 % 3 == (e2 < 0 ? -1 : 2));
+    if (s == 1 / 0) {
+      n2 = "5e" + e2;
+    } else {
+      n2 = s.toExponential();
+      n2 = n2.slice(0, n2.indexOf("e") + 1) + e2;
+    }
+    r2 = new Ctor(n2);
+    r2.s = x.s;
+  } else {
+    r2 = new Ctor(s.toString());
+  }
+  sd = (e2 = Ctor.precision) + 3;
+  for (; ; ) {
+    t2 = r2;
+    t3 = t2.times(t2).times(t2);
+    t3plusx = t3.plus(x);
+    r2 = divide(t3plusx.plus(x).times(t2), t3plusx.plus(t3), sd + 2, 1);
+    if (digitsToString(t2.d).slice(0, sd) === (n2 = digitsToString(r2.d)).slice(0, sd)) {
+      n2 = n2.slice(sd - 3, sd + 1);
+      if (n2 == "9999" || !rep && n2 == "4999") {
+        if (!rep) {
+          finalise(t2, e2 + 1, 0);
+          if (t2.times(t2).times(t2).eq(x)) {
+            r2 = t2;
+            break;
+          }
+        }
+        sd += 4;
+        rep = 1;
+      } else {
+        if (!+n2 || !+n2.slice(1) && n2.charAt(0) == "5") {
+          finalise(r2, e2 + 1, 1);
+          m2 = !r2.times(r2).times(r2).eq(x);
+        }
+        break;
+      }
+    }
+  }
+  external = true;
+  return finalise(r2, e2, Ctor.rounding, m2);
+};
+P2.decimalPlaces = P2.dp = function() {
+  var w2, d2 = this.d, n2 = NaN;
+  if (d2) {
+    w2 = d2.length - 1;
+    n2 = (w2 - mathfloor(this.e / LOG_BASE)) * LOG_BASE;
+    w2 = d2[w2];
+    if (w2)
+      for (; w2 % 10 == 0; w2 /= 10)
+        n2--;
+    if (n2 < 0)
+      n2 = 0;
+  }
+  return n2;
+};
+P2.dividedBy = P2.div = function(y) {
+  return divide(this, new this.constructor(y));
+};
+P2.dividedToIntegerBy = P2.divToInt = function(y) {
+  var x = this, Ctor = x.constructor;
+  return finalise(divide(x, new Ctor(y), 0, 1, 1), Ctor.precision, Ctor.rounding);
+};
+P2.equals = P2.eq = function(y) {
+  return this.cmp(y) === 0;
+};
+P2.floor = function() {
+  return finalise(new this.constructor(this), this.e + 1, 3);
+};
+P2.greaterThan = P2.gt = function(y) {
+  return this.cmp(y) > 0;
+};
+P2.greaterThanOrEqualTo = P2.gte = function(y) {
+  var k = this.cmp(y);
+  return k == 1 || k === 0;
+};
+P2.hyperbolicCosine = P2.cosh = function() {
+  var k, n2, pr, rm, len, x = this, Ctor = x.constructor, one = new Ctor(1);
+  if (!x.isFinite())
+    return new Ctor(x.s ? 1 / 0 : NaN);
+  if (x.isZero())
+    return one;
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
+  Ctor.rounding = 1;
+  len = x.d.length;
+  if (len < 32) {
+    k = Math.ceil(len / 3);
+    n2 = (1 / tinyPow(4, k)).toString();
+  } else {
+    k = 16;
+    n2 = "2.3283064365386962890625e-10";
+  }
+  x = taylorSeries(Ctor, 1, x.times(n2), new Ctor(1), true);
+  var cosh2_x, i = k, d8 = new Ctor(8);
+  for (; i--; ) {
+    cosh2_x = x.times(x);
+    x = one.minus(cosh2_x.times(d8.minus(cosh2_x.times(d8))));
+  }
+  return finalise(x, Ctor.precision = pr, Ctor.rounding = rm, true);
+};
+P2.hyperbolicSine = P2.sinh = function() {
+  var k, pr, rm, len, x = this, Ctor = x.constructor;
+  if (!x.isFinite() || x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
+  Ctor.rounding = 1;
+  len = x.d.length;
+  if (len < 3) {
+    x = taylorSeries(Ctor, 2, x, x, true);
+  } else {
+    k = 1.4 * Math.sqrt(len);
+    k = k > 16 ? 16 : k | 0;
+    x = x.times(1 / tinyPow(5, k));
+    x = taylorSeries(Ctor, 2, x, x, true);
+    var sinh2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
+    for (; k--; ) {
+      sinh2_x = x.times(x);
+      x = x.times(d5.plus(sinh2_x.times(d16.times(sinh2_x).plus(d20))));
+    }
+  }
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return finalise(x, pr, rm, true);
+};
+P2.hyperbolicTangent = P2.tanh = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.isFinite())
+    return new Ctor(x.s);
+  if (x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + 7;
+  Ctor.rounding = 1;
+  return divide(x.sinh(), x.cosh(), Ctor.precision = pr, Ctor.rounding = rm);
+};
+P2.inverseCosine = P2.acos = function() {
+  var halfPi, x = this, Ctor = x.constructor, k = x.abs().cmp(1), pr = Ctor.precision, rm = Ctor.rounding;
+  if (k !== -1) {
+    return k === 0 ? x.isNeg() ? getPi(Ctor, pr, rm) : new Ctor(0) : new Ctor(NaN);
+  }
+  if (x.isZero())
+    return getPi(Ctor, pr + 4, rm).times(0.5);
+  Ctor.precision = pr + 6;
+  Ctor.rounding = 1;
+  x = x.asin();
+  halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return halfPi.minus(x);
+};
+P2.inverseHyperbolicCosine = P2.acosh = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (x.lte(1))
+    return new Ctor(x.eq(1) ? 0 : NaN);
+  if (!x.isFinite())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(Math.abs(x.e), x.sd()) + 4;
+  Ctor.rounding = 1;
+  external = false;
+  x = x.times(x).minus(1).sqrt().plus(x);
+  external = true;
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return x.ln();
+};
+P2.inverseHyperbolicSine = P2.asinh = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.isFinite() || x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + 2 * Math.max(Math.abs(x.e), x.sd()) + 6;
+  Ctor.rounding = 1;
+  external = false;
+  x = x.times(x).plus(1).sqrt().plus(x);
+  external = true;
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return x.ln();
+};
+P2.inverseHyperbolicTangent = P2.atanh = function() {
+  var pr, rm, wpr, xsd, x = this, Ctor = x.constructor;
+  if (!x.isFinite())
+    return new Ctor(NaN);
+  if (x.e >= 0)
+    return new Ctor(x.abs().eq(1) ? x.s / 0 : x.isZero() ? x : NaN);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  xsd = x.sd();
+  if (Math.max(xsd, pr) < 2 * -x.e - 1)
+    return finalise(new Ctor(x), pr, rm, true);
+  Ctor.precision = wpr = xsd - x.e;
+  x = divide(x.plus(1), new Ctor(1).minus(x), wpr + pr, 1);
+  Ctor.precision = pr + 4;
+  Ctor.rounding = 1;
+  x = x.ln();
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return x.times(0.5);
+};
+P2.inverseSine = P2.asin = function() {
+  var halfPi, k, pr, rm, x = this, Ctor = x.constructor;
+  if (x.isZero())
+    return new Ctor(x);
+  k = x.abs().cmp(1);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  if (k !== -1) {
+    if (k === 0) {
+      halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
+      halfPi.s = x.s;
+      return halfPi;
+    }
+    return new Ctor(NaN);
+  }
+  Ctor.precision = pr + 6;
+  Ctor.rounding = 1;
+  x = x.div(new Ctor(1).minus(x.times(x)).sqrt().plus(1)).atan();
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return x.times(2);
+};
+P2.inverseTangent = P2.atan = function() {
+  var i, j, k, n2, px, t2, r2, wpr, x2, x = this, Ctor = x.constructor, pr = Ctor.precision, rm = Ctor.rounding;
+  if (!x.isFinite()) {
+    if (!x.s)
+      return new Ctor(NaN);
+    if (pr + 4 <= PI_PRECISION) {
+      r2 = getPi(Ctor, pr + 4, rm).times(0.5);
+      r2.s = x.s;
+      return r2;
+    }
+  } else if (x.isZero()) {
+    return new Ctor(x);
+  } else if (x.abs().eq(1) && pr + 4 <= PI_PRECISION) {
+    r2 = getPi(Ctor, pr + 4, rm).times(0.25);
+    r2.s = x.s;
+    return r2;
+  }
+  Ctor.precision = wpr = pr + 10;
+  Ctor.rounding = 1;
+  k = Math.min(28, wpr / LOG_BASE + 2 | 0);
+  for (i = k; i; --i)
+    x = x.div(x.times(x).plus(1).sqrt().plus(1));
+  external = false;
+  j = Math.ceil(wpr / LOG_BASE);
+  n2 = 1;
+  x2 = x.times(x);
+  r2 = new Ctor(x);
+  px = x;
+  for (; i !== -1; ) {
+    px = px.times(x2);
+    t2 = r2.minus(px.div(n2 += 2));
+    px = px.times(x2);
+    r2 = t2.plus(px.div(n2 += 2));
+    if (r2.d[j] !== void 0)
+      for (i = j; r2.d[i] === t2.d[i] && i--; )
+        ;
+  }
+  if (k)
+    r2 = r2.times(2 << k - 1);
+  external = true;
+  return finalise(r2, Ctor.precision = pr, Ctor.rounding = rm, true);
+};
+P2.isFinite = function() {
+  return !!this.d;
+};
+P2.isInteger = P2.isInt = function() {
+  return !!this.d && mathfloor(this.e / LOG_BASE) > this.d.length - 2;
+};
+P2.isNaN = function() {
+  return !this.s;
+};
+P2.isNegative = P2.isNeg = function() {
+  return this.s < 0;
+};
+P2.isPositive = P2.isPos = function() {
+  return this.s > 0;
+};
+P2.isZero = function() {
+  return !!this.d && this.d[0] === 0;
+};
+P2.lessThan = P2.lt = function(y) {
+  return this.cmp(y) < 0;
+};
+P2.lessThanOrEqualTo = P2.lte = function(y) {
+  return this.cmp(y) < 1;
+};
+P2.logarithm = P2.log = function(base) {
+  var isBase10, d2, denominator, k, inf, num, sd, r2, arg2 = this, Ctor = arg2.constructor, pr = Ctor.precision, rm = Ctor.rounding, guard = 5;
+  if (base == null) {
+    base = new Ctor(10);
+    isBase10 = true;
+  } else {
+    base = new Ctor(base);
+    d2 = base.d;
+    if (base.s < 0 || !d2 || !d2[0] || base.eq(1))
+      return new Ctor(NaN);
+    isBase10 = base.eq(10);
+  }
+  d2 = arg2.d;
+  if (arg2.s < 0 || !d2 || !d2[0] || arg2.eq(1)) {
+    return new Ctor(d2 && !d2[0] ? -1 / 0 : arg2.s != 1 ? NaN : d2 ? 0 : 1 / 0);
+  }
+  if (isBase10) {
+    if (d2.length > 1) {
+      inf = true;
+    } else {
+      for (k = d2[0]; k % 10 === 0; )
+        k /= 10;
+      inf = k !== 1;
+    }
+  }
+  external = false;
+  sd = pr + guard;
+  num = naturalLogarithm(arg2, sd);
+  denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
+  r2 = divide(num, denominator, sd, 1);
+  if (checkRoundingDigits(r2.d, k = pr, rm)) {
+    do {
+      sd += 10;
+      num = naturalLogarithm(arg2, sd);
+      denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
+      r2 = divide(num, denominator, sd, 1);
+      if (!inf) {
+        if (+digitsToString(r2.d).slice(k + 1, k + 15) + 1 == 1e14) {
+          r2 = finalise(r2, pr + 1, 0);
+        }
+        break;
+      }
+    } while (checkRoundingDigits(r2.d, k += 10, rm));
+  }
+  external = true;
+  return finalise(r2, pr, rm);
+};
+P2.minus = P2.sub = function(y) {
+  var d2, e2, i, j, k, len, pr, rm, xd, xe, xLTy, yd, x = this, Ctor = x.constructor;
+  y = new Ctor(y);
+  if (!x.d || !y.d) {
+    if (!x.s || !y.s)
+      y = new Ctor(NaN);
+    else if (x.d)
+      y.s = -y.s;
+    else
+      y = new Ctor(y.d || x.s !== y.s ? x : NaN);
+    return y;
+  }
+  if (x.s != y.s) {
+    y.s = -y.s;
+    return x.plus(y);
+  }
+  xd = x.d;
+  yd = y.d;
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  if (!xd[0] || !yd[0]) {
+    if (yd[0])
+      y.s = -y.s;
+    else if (xd[0])
+      y = new Ctor(x);
+    else
+      return new Ctor(rm === 3 ? -0 : 0);
+    return external ? finalise(y, pr, rm) : y;
+  }
+  e2 = mathfloor(y.e / LOG_BASE);
+  xe = mathfloor(x.e / LOG_BASE);
+  xd = xd.slice();
+  k = xe - e2;
+  if (k) {
+    xLTy = k < 0;
+    if (xLTy) {
+      d2 = xd;
+      k = -k;
+      len = yd.length;
+    } else {
+      d2 = yd;
+      e2 = xe;
+      len = xd.length;
+    }
+    i = Math.max(Math.ceil(pr / LOG_BASE), len) + 2;
+    if (k > i) {
+      k = i;
+      d2.length = 1;
+    }
+    d2.reverse();
+    for (i = k; i--; )
+      d2.push(0);
+    d2.reverse();
+  } else {
+    i = xd.length;
+    len = yd.length;
+    xLTy = i < len;
+    if (xLTy)
+      len = i;
+    for (i = 0; i < len; i++) {
+      if (xd[i] != yd[i]) {
+        xLTy = xd[i] < yd[i];
+        break;
+      }
+    }
+    k = 0;
+  }
+  if (xLTy) {
+    d2 = xd;
+    xd = yd;
+    yd = d2;
+    y.s = -y.s;
+  }
+  len = xd.length;
+  for (i = yd.length - len; i > 0; --i)
+    xd[len++] = 0;
+  for (i = yd.length; i > k; ) {
+    if (xd[--i] < yd[i]) {
+      for (j = i; j && xd[--j] === 0; )
+        xd[j] = BASE - 1;
+      --xd[j];
+      xd[i] += BASE;
+    }
+    xd[i] -= yd[i];
+  }
+  for (; xd[--len] === 0; )
+    xd.pop();
+  for (; xd[0] === 0; xd.shift())
+    --e2;
+  if (!xd[0])
+    return new Ctor(rm === 3 ? -0 : 0);
+  y.d = xd;
+  y.e = getBase10Exponent(xd, e2);
+  return external ? finalise(y, pr, rm) : y;
+};
+P2.modulo = P2.mod = function(y) {
+  var q, x = this, Ctor = x.constructor;
+  y = new Ctor(y);
+  if (!x.d || !y.s || y.d && !y.d[0])
+    return new Ctor(NaN);
+  if (!y.d || x.d && !x.d[0]) {
+    return finalise(new Ctor(x), Ctor.precision, Ctor.rounding);
+  }
+  external = false;
+  if (Ctor.modulo == 9) {
+    q = divide(x, y.abs(), 0, 3, 1);
+    q.s *= y.s;
+  } else {
+    q = divide(x, y, 0, Ctor.modulo, 1);
+  }
+  q = q.times(y);
+  external = true;
+  return x.minus(q);
+};
+P2.naturalExponential = P2.exp = function() {
+  return naturalExponential(this);
+};
+P2.naturalLogarithm = P2.ln = function() {
+  return naturalLogarithm(this);
+};
+P2.negated = P2.neg = function() {
+  var x = new this.constructor(this);
+  x.s = -x.s;
+  return finalise(x);
+};
+P2.plus = P2.add = function(y) {
+  var carry, d2, e2, i, k, len, pr, rm, xd, yd, x = this, Ctor = x.constructor;
+  y = new Ctor(y);
+  if (!x.d || !y.d) {
+    if (!x.s || !y.s)
+      y = new Ctor(NaN);
+    else if (!x.d)
+      y = new Ctor(y.d || x.s === y.s ? x : NaN);
+    return y;
+  }
+  if (x.s != y.s) {
+    y.s = -y.s;
+    return x.minus(y);
+  }
+  xd = x.d;
+  yd = y.d;
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  if (!xd[0] || !yd[0]) {
+    if (!yd[0])
+      y = new Ctor(x);
+    return external ? finalise(y, pr, rm) : y;
+  }
+  k = mathfloor(x.e / LOG_BASE);
+  e2 = mathfloor(y.e / LOG_BASE);
+  xd = xd.slice();
+  i = k - e2;
+  if (i) {
+    if (i < 0) {
+      d2 = xd;
+      i = -i;
+      len = yd.length;
+    } else {
+      d2 = yd;
+      e2 = k;
+      len = xd.length;
+    }
+    k = Math.ceil(pr / LOG_BASE);
+    len = k > len ? k + 1 : len + 1;
+    if (i > len) {
+      i = len;
+      d2.length = 1;
+    }
+    d2.reverse();
+    for (; i--; )
+      d2.push(0);
+    d2.reverse();
+  }
+  len = xd.length;
+  i = yd.length;
+  if (len - i < 0) {
+    i = len;
+    d2 = yd;
+    yd = xd;
+    xd = d2;
+  }
+  for (carry = 0; i; ) {
+    carry = (xd[--i] = xd[i] + yd[i] + carry) / BASE | 0;
+    xd[i] %= BASE;
+  }
+  if (carry) {
+    xd.unshift(carry);
+    ++e2;
+  }
+  for (len = xd.length; xd[--len] == 0; )
+    xd.pop();
+  y.d = xd;
+  y.e = getBase10Exponent(xd, e2);
+  return external ? finalise(y, pr, rm) : y;
+};
+P2.precision = P2.sd = function(z) {
+  var k, x = this;
+  if (z !== void 0 && z !== !!z && z !== 1 && z !== 0)
+    throw Error(invalidArgument + z);
+  if (x.d) {
+    k = getPrecision(x.d);
+    if (z && x.e + 1 > k)
+      k = x.e + 1;
+  } else {
+    k = NaN;
+  }
+  return k;
+};
+P2.round = function() {
+  var x = this, Ctor = x.constructor;
+  return finalise(new Ctor(x), x.e + 1, Ctor.rounding);
+};
+P2.sine = P2.sin = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.isFinite())
+    return new Ctor(NaN);
+  if (x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
+  Ctor.rounding = 1;
+  x = sine(Ctor, toLessThanHalfPi(Ctor, x));
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return finalise(quadrant > 2 ? x.neg() : x, pr, rm, true);
+};
+P2.squareRoot = P2.sqrt = function() {
+  var m2, n2, sd, r2, rep, t2, x = this, d2 = x.d, e2 = x.e, s = x.s, Ctor = x.constructor;
+  if (s !== 1 || !d2 || !d2[0]) {
+    return new Ctor(!s || s < 0 && (!d2 || d2[0]) ? NaN : d2 ? x : 1 / 0);
+  }
+  external = false;
+  s = Math.sqrt(+x);
+  if (s == 0 || s == 1 / 0) {
+    n2 = digitsToString(d2);
+    if ((n2.length + e2) % 2 == 0)
+      n2 += "0";
+    s = Math.sqrt(n2);
+    e2 = mathfloor((e2 + 1) / 2) - (e2 < 0 || e2 % 2);
+    if (s == 1 / 0) {
+      n2 = "5e" + e2;
+    } else {
+      n2 = s.toExponential();
+      n2 = n2.slice(0, n2.indexOf("e") + 1) + e2;
+    }
+    r2 = new Ctor(n2);
+  } else {
+    r2 = new Ctor(s.toString());
+  }
+  sd = (e2 = Ctor.precision) + 3;
+  for (; ; ) {
+    t2 = r2;
+    r2 = t2.plus(divide(x, t2, sd + 2, 1)).times(0.5);
+    if (digitsToString(t2.d).slice(0, sd) === (n2 = digitsToString(r2.d)).slice(0, sd)) {
+      n2 = n2.slice(sd - 3, sd + 1);
+      if (n2 == "9999" || !rep && n2 == "4999") {
+        if (!rep) {
+          finalise(t2, e2 + 1, 0);
+          if (t2.times(t2).eq(x)) {
+            r2 = t2;
+            break;
+          }
+        }
+        sd += 4;
+        rep = 1;
+      } else {
+        if (!+n2 || !+n2.slice(1) && n2.charAt(0) == "5") {
+          finalise(r2, e2 + 1, 1);
+          m2 = !r2.times(r2).eq(x);
+        }
+        break;
+      }
+    }
+  }
+  external = true;
+  return finalise(r2, e2, Ctor.rounding, m2);
+};
+P2.tangent = P2.tan = function() {
+  var pr, rm, x = this, Ctor = x.constructor;
+  if (!x.isFinite())
+    return new Ctor(NaN);
+  if (x.isZero())
+    return new Ctor(x);
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  Ctor.precision = pr + 10;
+  Ctor.rounding = 1;
+  x = x.sin();
+  x.s = 1;
+  x = divide(x, new Ctor(1).minus(x.times(x)).sqrt(), pr + 10, 0);
+  Ctor.precision = pr;
+  Ctor.rounding = rm;
+  return finalise(quadrant == 2 || quadrant == 4 ? x.neg() : x, pr, rm, true);
+};
+P2.times = P2.mul = function(y) {
+  var carry, e2, i, k, r2, rL, t2, xdL, ydL, x = this, Ctor = x.constructor, xd = x.d, yd = (y = new Ctor(y)).d;
+  y.s *= x.s;
+  if (!xd || !xd[0] || !yd || !yd[0]) {
+    return new Ctor(!y.s || xd && !xd[0] && !yd || yd && !yd[0] && !xd ? NaN : !xd || !yd ? y.s / 0 : y.s * 0);
+  }
+  e2 = mathfloor(x.e / LOG_BASE) + mathfloor(y.e / LOG_BASE);
+  xdL = xd.length;
+  ydL = yd.length;
+  if (xdL < ydL) {
+    r2 = xd;
+    xd = yd;
+    yd = r2;
+    rL = xdL;
+    xdL = ydL;
+    ydL = rL;
+  }
+  r2 = [];
+  rL = xdL + ydL;
+  for (i = rL; i--; )
+    r2.push(0);
+  for (i = ydL; --i >= 0; ) {
+    carry = 0;
+    for (k = xdL + i; k > i; ) {
+      t2 = r2[k] + yd[i] * xd[k - i - 1] + carry;
+      r2[k--] = t2 % BASE | 0;
+      carry = t2 / BASE | 0;
+    }
+    r2[k] = (r2[k] + carry) % BASE | 0;
+  }
+  for (; !r2[--rL]; )
+    r2.pop();
+  if (carry)
+    ++e2;
+  else
+    r2.shift();
+  y.d = r2;
+  y.e = getBase10Exponent(r2, e2);
+  return external ? finalise(y, Ctor.precision, Ctor.rounding) : y;
+};
+P2.toBinary = function(sd, rm) {
+  return toStringBinary(this, 2, sd, rm);
+};
+P2.toDecimalPlaces = P2.toDP = function(dp, rm) {
+  var x = this, Ctor = x.constructor;
+  x = new Ctor(x);
+  if (dp === void 0)
+    return x;
+  checkInt32(dp, 0, MAX_DIGITS);
+  if (rm === void 0)
+    rm = Ctor.rounding;
+  else
+    checkInt32(rm, 0, 8);
+  return finalise(x, dp + x.e + 1, rm);
+};
+P2.toExponential = function(dp, rm) {
+  var str, x = this, Ctor = x.constructor;
+  if (dp === void 0) {
+    str = finiteToString(x, true);
+  } else {
+    checkInt32(dp, 0, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+    x = finalise(new Ctor(x), dp + 1, rm);
+    str = finiteToString(x, true, dp + 1);
+  }
+  return x.isNeg() && !x.isZero() ? "-" + str : str;
+};
+P2.toFixed = function(dp, rm) {
+  var str, y, x = this, Ctor = x.constructor;
+  if (dp === void 0) {
+    str = finiteToString(x);
+  } else {
+    checkInt32(dp, 0, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+    y = finalise(new Ctor(x), dp + x.e + 1, rm);
+    str = finiteToString(y, false, dp + y.e + 1);
+  }
+  return x.isNeg() && !x.isZero() ? "-" + str : str;
+};
+P2.toFraction = function(maxD) {
+  var d2, d0, d1, d22, e2, k, n2, n0, n1, pr, q, r2, x = this, xd = x.d, Ctor = x.constructor;
+  if (!xd)
+    return new Ctor(x);
+  n1 = d0 = new Ctor(1);
+  d1 = n0 = new Ctor(0);
+  d2 = new Ctor(d1);
+  e2 = d2.e = getPrecision(xd) - x.e - 1;
+  k = e2 % LOG_BASE;
+  d2.d[0] = mathpow(10, k < 0 ? LOG_BASE + k : k);
+  if (maxD == null) {
+    maxD = e2 > 0 ? d2 : n1;
+  } else {
+    n2 = new Ctor(maxD);
+    if (!n2.isInt() || n2.lt(n1))
+      throw Error(invalidArgument + n2);
+    maxD = n2.gt(d2) ? e2 > 0 ? d2 : n1 : n2;
+  }
+  external = false;
+  n2 = new Ctor(digitsToString(xd));
+  pr = Ctor.precision;
+  Ctor.precision = e2 = xd.length * LOG_BASE * 2;
+  for (; ; ) {
+    q = divide(n2, d2, 0, 1, 1);
+    d22 = d0.plus(q.times(d1));
+    if (d22.cmp(maxD) == 1)
+      break;
+    d0 = d1;
+    d1 = d22;
+    d22 = n1;
+    n1 = n0.plus(q.times(d22));
+    n0 = d22;
+    d22 = d2;
+    d2 = n2.minus(q.times(d22));
+    n2 = d22;
+  }
+  d22 = divide(maxD.minus(d0), d1, 0, 1, 1);
+  n0 = n0.plus(d22.times(n1));
+  d0 = d0.plus(d22.times(d1));
+  n0.s = n1.s = x.s;
+  r2 = divide(n1, d1, e2, 1).minus(x).abs().cmp(divide(n0, d0, e2, 1).minus(x).abs()) < 1 ? [n1, d1] : [n0, d0];
+  Ctor.precision = pr;
+  external = true;
+  return r2;
+};
+P2.toHexadecimal = P2.toHex = function(sd, rm) {
+  return toStringBinary(this, 16, sd, rm);
+};
+P2.toNearest = function(y, rm) {
+  var x = this, Ctor = x.constructor;
+  x = new Ctor(x);
+  if (y == null) {
+    if (!x.d)
+      return x;
+    y = new Ctor(1);
+    rm = Ctor.rounding;
+  } else {
+    y = new Ctor(y);
+    if (rm === void 0) {
+      rm = Ctor.rounding;
+    } else {
+      checkInt32(rm, 0, 8);
+    }
+    if (!x.d)
+      return y.s ? x : y;
+    if (!y.d) {
+      if (y.s)
+        y.s = x.s;
+      return y;
+    }
+  }
+  if (y.d[0]) {
+    external = false;
+    x = divide(x, y, 0, rm, 1).times(y);
+    external = true;
+    finalise(x);
+  } else {
+    y.s = x.s;
+    x = y;
+  }
+  return x;
+};
+P2.toNumber = function() {
+  return +this;
+};
+P2.toOctal = function(sd, rm) {
+  return toStringBinary(this, 8, sd, rm);
+};
+P2.toPower = P2.pow = function(y) {
+  var e2, k, pr, r2, rm, s, x = this, Ctor = x.constructor, yn = +(y = new Ctor(y));
+  if (!x.d || !y.d || !x.d[0] || !y.d[0])
+    return new Ctor(mathpow(+x, yn));
+  x = new Ctor(x);
+  if (x.eq(1))
+    return x;
+  pr = Ctor.precision;
+  rm = Ctor.rounding;
+  if (y.eq(1))
+    return finalise(x, pr, rm);
+  e2 = mathfloor(y.e / LOG_BASE);
+  if (e2 >= y.d.length - 1 && (k = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER) {
+    r2 = intPow(Ctor, x, k, pr);
+    return y.s < 0 ? new Ctor(1).div(r2) : finalise(r2, pr, rm);
+  }
+  s = x.s;
+  if (s < 0) {
+    if (e2 < y.d.length - 1)
+      return new Ctor(NaN);
+    if ((y.d[e2] & 1) == 0)
+      s = 1;
+    if (x.e == 0 && x.d[0] == 1 && x.d.length == 1) {
+      x.s = s;
+      return x;
+    }
+  }
+  k = mathpow(+x, yn);
+  e2 = k == 0 || !isFinite(k) ? mathfloor(yn * (Math.log("0." + digitsToString(x.d)) / Math.LN10 + x.e + 1)) : new Ctor(k + "").e;
+  if (e2 > Ctor.maxE + 1 || e2 < Ctor.minE - 1)
+    return new Ctor(e2 > 0 ? s / 0 : 0);
+  external = false;
+  Ctor.rounding = x.s = 1;
+  k = Math.min(12, (e2 + "").length);
+  r2 = naturalExponential(y.times(naturalLogarithm(x, pr + k)), pr);
+  if (r2.d) {
+    r2 = finalise(r2, pr + 5, 1);
+    if (checkRoundingDigits(r2.d, pr, rm)) {
+      e2 = pr + 10;
+      r2 = finalise(naturalExponential(y.times(naturalLogarithm(x, e2 + k)), e2), e2 + 5, 1);
+      if (+digitsToString(r2.d).slice(pr + 1, pr + 15) + 1 == 1e14) {
+        r2 = finalise(r2, pr + 1, 0);
+      }
+    }
+  }
+  r2.s = s;
+  external = true;
+  Ctor.rounding = rm;
+  return finalise(r2, pr, rm);
+};
+P2.toPrecision = function(sd, rm) {
+  var str, x = this, Ctor = x.constructor;
+  if (sd === void 0) {
+    str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+  } else {
+    checkInt32(sd, 1, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+    x = finalise(new Ctor(x), sd, rm);
+    str = finiteToString(x, sd <= x.e || x.e <= Ctor.toExpNeg, sd);
+  }
+  return x.isNeg() && !x.isZero() ? "-" + str : str;
+};
+P2.toSignificantDigits = P2.toSD = function(sd, rm) {
+  var x = this, Ctor = x.constructor;
+  if (sd === void 0) {
+    sd = Ctor.precision;
+    rm = Ctor.rounding;
+  } else {
+    checkInt32(sd, 1, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+  }
+  return finalise(new Ctor(x), sd, rm);
+};
+P2.toString = function() {
+  var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+  return x.isNeg() && !x.isZero() ? "-" + str : str;
+};
+P2.truncated = P2.trunc = function() {
+  return finalise(new this.constructor(this), this.e + 1, 1);
+};
+P2.valueOf = P2.toJSON = function() {
+  var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+  return x.isNeg() ? "-" + str : str;
+};
+function digitsToString(d2) {
+  var i, k, ws, indexOfLastWord = d2.length - 1, str = "", w2 = d2[0];
+  if (indexOfLastWord > 0) {
+    str += w2;
+    for (i = 1; i < indexOfLastWord; i++) {
+      ws = d2[i] + "";
+      k = LOG_BASE - ws.length;
+      if (k)
+        str += getZeroString(k);
+      str += ws;
+    }
+    w2 = d2[i];
+    ws = w2 + "";
+    k = LOG_BASE - ws.length;
+    if (k)
+      str += getZeroString(k);
+  } else if (w2 === 0) {
+    return "0";
+  }
+  for (; w2 % 10 === 0; )
+    w2 /= 10;
+  return str + w2;
+}
+__name(digitsToString, "digitsToString");
+function checkInt32(i, min2, max2) {
+  if (i !== ~~i || i < min2 || i > max2) {
+    throw Error(invalidArgument + i);
+  }
+}
+__name(checkInt32, "checkInt32");
+function checkRoundingDigits(d2, i, rm, repeating) {
+  var di, k, r2, rd;
+  for (k = d2[0]; k >= 10; k /= 10)
+    --i;
+  if (--i < 0) {
+    i += LOG_BASE;
+    di = 0;
+  } else {
+    di = Math.ceil((i + 1) / LOG_BASE);
+    i %= LOG_BASE;
+  }
+  k = mathpow(10, LOG_BASE - i);
+  rd = d2[di] % k | 0;
+  if (repeating == null) {
+    if (i < 3) {
+      if (i == 0)
+        rd = rd / 100 | 0;
+      else if (i == 1)
+        rd = rd / 10 | 0;
+      r2 = rm < 4 && rd == 99999 || rm > 3 && rd == 49999 || rd == 5e4 || rd == 0;
+    } else {
+      r2 = (rm < 4 && rd + 1 == k || rm > 3 && rd + 1 == k / 2) && (d2[di + 1] / k / 100 | 0) == mathpow(10, i - 2) - 1 || (rd == k / 2 || rd == 0) && (d2[di + 1] / k / 100 | 0) == 0;
+    }
+  } else {
+    if (i < 4) {
+      if (i == 0)
+        rd = rd / 1e3 | 0;
+      else if (i == 1)
+        rd = rd / 100 | 0;
+      else if (i == 2)
+        rd = rd / 10 | 0;
+      r2 = (repeating || rm < 4) && rd == 9999 || !repeating && rm > 3 && rd == 4999;
+    } else {
+      r2 = ((repeating || rm < 4) && rd + 1 == k || !repeating && rm > 3 && rd + 1 == k / 2) && (d2[di + 1] / k / 1e3 | 0) == mathpow(10, i - 3) - 1;
+    }
+  }
+  return r2;
+}
+__name(checkRoundingDigits, "checkRoundingDigits");
+function convertBase(str, baseIn, baseOut) {
+  var j, arr = [0], arrL, i = 0, strL = str.length;
+  for (; i < strL; ) {
+    for (arrL = arr.length; arrL--; )
+      arr[arrL] *= baseIn;
+    arr[0] += NUMERALS.indexOf(str.charAt(i++));
+    for (j = 0; j < arr.length; j++) {
+      if (arr[j] > baseOut - 1) {
+        if (arr[j + 1] === void 0)
+          arr[j + 1] = 0;
+        arr[j + 1] += arr[j] / baseOut | 0;
+        arr[j] %= baseOut;
+      }
+    }
+  }
+  return arr.reverse();
+}
+__name(convertBase, "convertBase");
+function cosine(Ctor, x) {
+  var k, len, y;
+  if (x.isZero())
+    return x;
+  len = x.d.length;
+  if (len < 32) {
+    k = Math.ceil(len / 3);
+    y = (1 / tinyPow(4, k)).toString();
+  } else {
+    k = 16;
+    y = "2.3283064365386962890625e-10";
+  }
+  Ctor.precision += k;
+  x = taylorSeries(Ctor, 1, x.times(y), new Ctor(1));
+  for (var i = k; i--; ) {
+    var cos2x = x.times(x);
+    x = cos2x.times(cos2x).minus(cos2x).times(8).plus(1);
+  }
+  Ctor.precision -= k;
+  return x;
+}
+__name(cosine, "cosine");
+var divide = function() {
+  function multiplyInteger(x, k, base) {
+    var temp, carry = 0, i = x.length;
+    for (x = x.slice(); i--; ) {
+      temp = x[i] * k + carry;
+      x[i] = temp % base | 0;
+      carry = temp / base | 0;
+    }
+    if (carry)
+      x.unshift(carry);
+    return x;
+  }
+  __name(multiplyInteger, "multiplyInteger");
+  function compare(a, b2, aL, bL) {
+    var i, r2;
+    if (aL != bL) {
+      r2 = aL > bL ? 1 : -1;
+    } else {
+      for (i = r2 = 0; i < aL; i++) {
+        if (a[i] != b2[i]) {
+          r2 = a[i] > b2[i] ? 1 : -1;
+          break;
+        }
+      }
+    }
+    return r2;
+  }
+  __name(compare, "compare");
+  function subtract(a, b2, aL, base) {
+    var i = 0;
+    for (; aL--; ) {
+      a[aL] -= i;
+      i = a[aL] < b2[aL] ? 1 : 0;
+      a[aL] = i * base + a[aL] - b2[aL];
+    }
+    for (; !a[0] && a.length > 1; )
+      a.shift();
+  }
+  __name(subtract, "subtract");
+  return function(x, y, pr, rm, dp, base) {
+    var cmp, e2, i, k, logBase, more, prod, prodL, q, qd, rem, remL, rem0, sd, t2, xi, xL, yd0, yL, yz, Ctor = x.constructor, sign2 = x.s == y.s ? 1 : -1, xd = x.d, yd = y.d;
+    if (!xd || !xd[0] || !yd || !yd[0]) {
+      return new Ctor(
+        !x.s || !y.s || (xd ? yd && xd[0] == yd[0] : !yd) ? NaN : xd && xd[0] == 0 || !yd ? sign2 * 0 : sign2 / 0
+      );
+    }
+    if (base) {
+      logBase = 1;
+      e2 = x.e - y.e;
+    } else {
+      base = BASE;
+      logBase = LOG_BASE;
+      e2 = mathfloor(x.e / logBase) - mathfloor(y.e / logBase);
+    }
+    yL = yd.length;
+    xL = xd.length;
+    q = new Ctor(sign2);
+    qd = q.d = [];
+    for (i = 0; yd[i] == (xd[i] || 0); i++)
+      ;
+    if (yd[i] > (xd[i] || 0))
+      e2--;
+    if (pr == null) {
+      sd = pr = Ctor.precision;
+      rm = Ctor.rounding;
+    } else if (dp) {
+      sd = pr + (x.e - y.e) + 1;
+    } else {
+      sd = pr;
+    }
+    if (sd < 0) {
+      qd.push(1);
+      more = true;
+    } else {
+      sd = sd / logBase + 2 | 0;
+      i = 0;
+      if (yL == 1) {
+        k = 0;
+        yd = yd[0];
+        sd++;
+        for (; (i < xL || k) && sd--; i++) {
+          t2 = k * base + (xd[i] || 0);
+          qd[i] = t2 / yd | 0;
+          k = t2 % yd | 0;
+        }
+        more = k || i < xL;
+      } else {
+        k = base / (yd[0] + 1) | 0;
+        if (k > 1) {
+          yd = multiplyInteger(yd, k, base);
+          xd = multiplyInteger(xd, k, base);
+          yL = yd.length;
+          xL = xd.length;
+        }
+        xi = yL;
+        rem = xd.slice(0, yL);
+        remL = rem.length;
+        for (; remL < yL; )
+          rem[remL++] = 0;
+        yz = yd.slice();
+        yz.unshift(0);
+        yd0 = yd[0];
+        if (yd[1] >= base / 2)
+          ++yd0;
+        do {
+          k = 0;
+          cmp = compare(yd, rem, yL, remL);
+          if (cmp < 0) {
+            rem0 = rem[0];
+            if (yL != remL)
+              rem0 = rem0 * base + (rem[1] || 0);
+            k = rem0 / yd0 | 0;
+            if (k > 1) {
+              if (k >= base)
+                k = base - 1;
+              prod = multiplyInteger(yd, k, base);
+              prodL = prod.length;
+              remL = rem.length;
+              cmp = compare(prod, rem, prodL, remL);
+              if (cmp == 1) {
+                k--;
+                subtract(prod, yL < prodL ? yz : yd, prodL, base);
+              }
+            } else {
+              if (k == 0)
+                cmp = k = 1;
+              prod = yd.slice();
+            }
+            prodL = prod.length;
+            if (prodL < remL)
+              prod.unshift(0);
+            subtract(rem, prod, remL, base);
+            if (cmp == -1) {
+              remL = rem.length;
+              cmp = compare(yd, rem, yL, remL);
+              if (cmp < 1) {
+                k++;
+                subtract(rem, yL < remL ? yz : yd, remL, base);
+              }
+            }
+            remL = rem.length;
+          } else if (cmp === 0) {
+            k++;
+            rem = [0];
+          }
+          qd[i++] = k;
+          if (cmp && rem[0]) {
+            rem[remL++] = xd[xi] || 0;
+          } else {
+            rem = [xd[xi]];
+            remL = 1;
+          }
+        } while ((xi++ < xL || rem[0] !== void 0) && sd--);
+        more = rem[0] !== void 0;
+      }
+      if (!qd[0])
+        qd.shift();
+    }
+    if (logBase == 1) {
+      q.e = e2;
+      inexact = more;
+    } else {
+      for (i = 1, k = qd[0]; k >= 10; k /= 10)
+        i++;
+      q.e = i + e2 * logBase - 1;
+      finalise(q, dp ? pr + q.e + 1 : pr, rm, more);
+    }
+    return q;
+  };
+}();
+function finalise(x, sd, rm, isTruncated) {
+  var digits, i, j, k, rd, roundUp, w2, xd, xdi, Ctor = x.constructor;
+  out:
+    if (sd != null) {
+      xd = x.d;
+      if (!xd)
+        return x;
+      for (digits = 1, k = xd[0]; k >= 10; k /= 10)
+        digits++;
+      i = sd - digits;
+      if (i < 0) {
+        i += LOG_BASE;
+        j = sd;
+        w2 = xd[xdi = 0];
+        rd = w2 / mathpow(10, digits - j - 1) % 10 | 0;
+      } else {
+        xdi = Math.ceil((i + 1) / LOG_BASE);
+        k = xd.length;
+        if (xdi >= k) {
+          if (isTruncated) {
+            for (; k++ <= xdi; )
+              xd.push(0);
+            w2 = rd = 0;
+            digits = 1;
+            i %= LOG_BASE;
+            j = i - LOG_BASE + 1;
+          } else {
+            break out;
+          }
+        } else {
+          w2 = k = xd[xdi];
+          for (digits = 1; k >= 10; k /= 10)
+            digits++;
+          i %= LOG_BASE;
+          j = i - LOG_BASE + digits;
+          rd = j < 0 ? 0 : w2 / mathpow(10, digits - j - 1) % 10 | 0;
+        }
+      }
+      isTruncated = isTruncated || sd < 0 || xd[xdi + 1] !== void 0 || (j < 0 ? w2 : w2 % mathpow(10, digits - j - 1));
+      roundUp = rm < 4 ? (rd || isTruncated) && (rm == 0 || rm == (x.s < 0 ? 3 : 2)) : rd > 5 || rd == 5 && (rm == 4 || isTruncated || rm == 6 && (i > 0 ? j > 0 ? w2 / mathpow(10, digits - j) : 0 : xd[xdi - 1]) % 10 & 1 || rm == (x.s < 0 ? 8 : 7));
+      if (sd < 1 || !xd[0]) {
+        xd.length = 0;
+        if (roundUp) {
+          sd -= x.e + 1;
+          xd[0] = mathpow(10, (LOG_BASE - sd % LOG_BASE) % LOG_BASE);
+          x.e = -sd || 0;
+        } else {
+          xd[0] = x.e = 0;
+        }
+        return x;
+      }
+      if (i == 0) {
+        xd.length = xdi;
+        k = 1;
+        xdi--;
+      } else {
+        xd.length = xdi + 1;
+        k = mathpow(10, LOG_BASE - i);
+        xd[xdi] = j > 0 ? (w2 / mathpow(10, digits - j) % mathpow(10, j) | 0) * k : 0;
+      }
+      if (roundUp) {
+        for (; ; ) {
+          if (xdi == 0) {
+            for (i = 1, j = xd[0]; j >= 10; j /= 10)
+              i++;
+            j = xd[0] += k;
+            for (k = 1; j >= 10; j /= 10)
+              k++;
+            if (i != k) {
+              x.e++;
+              if (xd[0] == BASE)
+                xd[0] = 1;
+            }
+            break;
+          } else {
+            xd[xdi] += k;
+            if (xd[xdi] != BASE)
+              break;
+            xd[xdi--] = 0;
+            k = 1;
+          }
+        }
+      }
+      for (i = xd.length; xd[--i] === 0; )
+        xd.pop();
+    }
+  if (external) {
+    if (x.e > Ctor.maxE) {
+      x.d = null;
+      x.e = NaN;
+    } else if (x.e < Ctor.minE) {
+      x.e = 0;
+      x.d = [0];
+    }
+  }
+  return x;
+}
+__name(finalise, "finalise");
+function finiteToString(x, isExp, sd) {
+  if (!x.isFinite())
+    return nonFiniteToString(x);
+  var k, e2 = x.e, str = digitsToString(x.d), len = str.length;
+  if (isExp) {
+    if (sd && (k = sd - len) > 0) {
+      str = str.charAt(0) + "." + str.slice(1) + getZeroString(k);
+    } else if (len > 1) {
+      str = str.charAt(0) + "." + str.slice(1);
+    }
+    str = str + (x.e < 0 ? "e" : "e+") + x.e;
+  } else if (e2 < 0) {
+    str = "0." + getZeroString(-e2 - 1) + str;
+    if (sd && (k = sd - len) > 0)
+      str += getZeroString(k);
+  } else if (e2 >= len) {
+    str += getZeroString(e2 + 1 - len);
+    if (sd && (k = sd - e2 - 1) > 0)
+      str = str + "." + getZeroString(k);
+  } else {
+    if ((k = e2 + 1) < len)
+      str = str.slice(0, k) + "." + str.slice(k);
+    if (sd && (k = sd - len) > 0) {
+      if (e2 + 1 === len)
+        str += ".";
+      str += getZeroString(k);
+    }
+  }
+  return str;
+}
+__name(finiteToString, "finiteToString");
+function getBase10Exponent(digits, e2) {
+  var w2 = digits[0];
+  for (e2 *= LOG_BASE; w2 >= 10; w2 /= 10)
+    e2++;
+  return e2;
+}
+__name(getBase10Exponent, "getBase10Exponent");
+function getLn10(Ctor, sd, pr) {
+  if (sd > LN10_PRECISION) {
+    external = true;
+    if (pr)
+      Ctor.precision = pr;
+    throw Error(precisionLimitExceeded);
+  }
+  return finalise(new Ctor(LN10), sd, 1, true);
+}
+__name(getLn10, "getLn10");
+function getPi(Ctor, sd, rm) {
+  if (sd > PI_PRECISION)
+    throw Error(precisionLimitExceeded);
+  return finalise(new Ctor(PI), sd, rm, true);
+}
+__name(getPi, "getPi");
+function getPrecision(digits) {
+  var w2 = digits.length - 1, len = w2 * LOG_BASE + 1;
+  w2 = digits[w2];
+  if (w2) {
+    for (; w2 % 10 == 0; w2 /= 10)
+      len--;
+    for (w2 = digits[0]; w2 >= 10; w2 /= 10)
+      len++;
+  }
+  return len;
+}
+__name(getPrecision, "getPrecision");
+function getZeroString(k) {
+  var zs = "";
+  for (; k--; )
+    zs += "0";
+  return zs;
+}
+__name(getZeroString, "getZeroString");
+function intPow(Ctor, x, n2, pr) {
+  var isTruncated, r2 = new Ctor(1), k = Math.ceil(pr / LOG_BASE + 4);
+  external = false;
+  for (; ; ) {
+    if (n2 % 2) {
+      r2 = r2.times(x);
+      if (truncate(r2.d, k))
+        isTruncated = true;
+    }
+    n2 = mathfloor(n2 / 2);
+    if (n2 === 0) {
+      n2 = r2.d.length - 1;
+      if (isTruncated && r2.d[n2] === 0)
+        ++r2.d[n2];
+      break;
+    }
+    x = x.times(x);
+    truncate(x.d, k);
+  }
+  external = true;
+  return r2;
+}
+__name(intPow, "intPow");
+function isOdd(n2) {
+  return n2.d[n2.d.length - 1] & 1;
+}
+__name(isOdd, "isOdd");
+function maxOrMin(Ctor, args, ltgt) {
+  var y, x = new Ctor(args[0]), i = 0;
+  for (; ++i < args.length; ) {
+    y = new Ctor(args[i]);
+    if (!y.s) {
+      x = y;
+      break;
+    } else if (x[ltgt](y)) {
+      x = y;
+    }
+  }
+  return x;
+}
+__name(maxOrMin, "maxOrMin");
+function naturalExponential(x, sd) {
+  var denominator, guard, j, pow2, sum3, t2, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+  if (!x.d || !x.d[0] || x.e > 17) {
+    return new Ctor(x.d ? !x.d[0] ? 1 : x.s < 0 ? 0 : 1 / 0 : x.s ? x.s < 0 ? 0 : x : 0 / 0);
+  }
+  if (sd == null) {
+    external = false;
+    wpr = pr;
+  } else {
+    wpr = sd;
+  }
+  t2 = new Ctor(0.03125);
+  while (x.e > -2) {
+    x = x.times(t2);
+    k += 5;
+  }
+  guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
+  wpr += guard;
+  denominator = pow2 = sum3 = new Ctor(1);
+  Ctor.precision = wpr;
+  for (; ; ) {
+    pow2 = finalise(pow2.times(x), wpr, 1);
+    denominator = denominator.times(++i);
+    t2 = sum3.plus(divide(pow2, denominator, wpr, 1));
+    if (digitsToString(t2.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
+      j = k;
+      while (j--)
+        sum3 = finalise(sum3.times(sum3), wpr, 1);
+      if (sd == null) {
+        if (rep < 3 && checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
+          Ctor.precision = wpr += 10;
+          denominator = pow2 = t2 = new Ctor(1);
+          i = 0;
+          rep++;
+        } else {
+          return finalise(sum3, Ctor.precision = pr, rm, external = true);
+        }
+      } else {
+        Ctor.precision = pr;
+        return sum3;
+      }
+    }
+    sum3 = t2;
+  }
+}
+__name(naturalExponential, "naturalExponential");
+function naturalLogarithm(y, sd) {
+  var c, c0, denominator, e2, numerator, rep, sum3, t2, wpr, x1, x2, n2 = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+  if (x.s < 0 || !xd || !xd[0] || !x.e && xd[0] == 1 && xd.length == 1) {
+    return new Ctor(xd && !xd[0] ? -1 / 0 : x.s != 1 ? NaN : xd ? 0 : x);
+  }
+  if (sd == null) {
+    external = false;
+    wpr = pr;
+  } else {
+    wpr = sd;
+  }
+  Ctor.precision = wpr += guard;
+  c = digitsToString(xd);
+  c0 = c.charAt(0);
+  if (Math.abs(e2 = x.e) < 15e14) {
+    while (c0 < 7 && c0 != 1 || c0 == 1 && c.charAt(1) > 3) {
+      x = x.times(y);
+      c = digitsToString(x.d);
+      c0 = c.charAt(0);
+      n2++;
+    }
+    e2 = x.e;
+    if (c0 > 1) {
+      x = new Ctor("0." + c);
+      e2++;
+    } else {
+      x = new Ctor(c0 + "." + c.slice(1));
+    }
+  } else {
+    t2 = getLn10(Ctor, wpr + 2, pr).times(e2 + "");
+    x = naturalLogarithm(new Ctor(c0 + "." + c.slice(1)), wpr - guard).plus(t2);
+    Ctor.precision = pr;
+    return sd == null ? finalise(x, pr, rm, external = true) : x;
+  }
+  x1 = x;
+  sum3 = numerator = x = divide(x.minus(1), x.plus(1), wpr, 1);
+  x2 = finalise(x.times(x), wpr, 1);
+  denominator = 3;
+  for (; ; ) {
+    numerator = finalise(numerator.times(x2), wpr, 1);
+    t2 = sum3.plus(divide(numerator, new Ctor(denominator), wpr, 1));
+    if (digitsToString(t2.d).slice(0, wpr) === digitsToString(sum3.d).slice(0, wpr)) {
+      sum3 = sum3.times(2);
+      if (e2 !== 0)
+        sum3 = sum3.plus(getLn10(Ctor, wpr + 2, pr).times(e2 + ""));
+      sum3 = divide(sum3, new Ctor(n2), wpr, 1);
+      if (sd == null) {
+        if (checkRoundingDigits(sum3.d, wpr - guard, rm, rep)) {
+          Ctor.precision = wpr += guard;
+          t2 = numerator = x = divide(x1.minus(1), x1.plus(1), wpr, 1);
+          x2 = finalise(x.times(x), wpr, 1);
+          denominator = rep = 1;
+        } else {
+          return finalise(sum3, Ctor.precision = pr, rm, external = true);
+        }
+      } else {
+        Ctor.precision = pr;
+        return sum3;
+      }
+    }
+    sum3 = t2;
+    denominator += 2;
+  }
+}
+__name(naturalLogarithm, "naturalLogarithm");
+function nonFiniteToString(x) {
+  return String(x.s * x.s / 0);
+}
+__name(nonFiniteToString, "nonFiniteToString");
+function parseDecimal(x, str) {
+  var e2, i, len;
+  if ((e2 = str.indexOf(".")) > -1)
+    str = str.replace(".", "");
+  if ((i = str.search(/e/i)) > 0) {
+    if (e2 < 0)
+      e2 = i;
+    e2 += +str.slice(i + 1);
+    str = str.substring(0, i);
+  } else if (e2 < 0) {
+    e2 = str.length;
+  }
+  for (i = 0; str.charCodeAt(i) === 48; i++)
+    ;
+  for (len = str.length; str.charCodeAt(len - 1) === 48; --len)
+    ;
+  str = str.slice(i, len);
+  if (str) {
+    len -= i;
+    x.e = e2 = e2 - i - 1;
+    x.d = [];
+    i = (e2 + 1) % LOG_BASE;
+    if (e2 < 0)
+      i += LOG_BASE;
+    if (i < len) {
+      if (i)
+        x.d.push(+str.slice(0, i));
+      for (len -= LOG_BASE; i < len; )
+        x.d.push(+str.slice(i, i += LOG_BASE));
+      str = str.slice(i);
+      i = LOG_BASE - str.length;
+    } else {
+      i -= len;
+    }
+    for (; i--; )
+      str += "0";
+    x.d.push(+str);
+    if (external) {
+      if (x.e > x.constructor.maxE) {
+        x.d = null;
+        x.e = NaN;
+      } else if (x.e < x.constructor.minE) {
+        x.e = 0;
+        x.d = [0];
+      }
+    }
+  } else {
+    x.e = 0;
+    x.d = [0];
+  }
+  return x;
+}
+__name(parseDecimal, "parseDecimal");
+function parseOther(x, str) {
+  var base, Ctor, divisor, i, isFloat, len, p2, xd, xe;
+  if (str.indexOf("_") > -1) {
+    str = str.replace(/(\d)_(?=\d)/g, "$1");
+    if (isDecimal.test(str))
+      return parseDecimal(x, str);
+  } else if (str === "Infinity" || str === "NaN") {
+    if (!+str)
+      x.s = NaN;
+    x.e = NaN;
+    x.d = null;
+    return x;
+  }
+  if (isHex.test(str)) {
+    base = 16;
+    str = str.toLowerCase();
+  } else if (isBinary.test(str)) {
+    base = 2;
+  } else if (isOctal.test(str)) {
+    base = 8;
+  } else {
+    throw Error(invalidArgument + str);
+  }
+  i = str.search(/p/i);
+  if (i > 0) {
+    p2 = +str.slice(i + 1);
+    str = str.substring(2, i);
+  } else {
+    str = str.slice(2);
+  }
+  i = str.indexOf(".");
+  isFloat = i >= 0;
+  Ctor = x.constructor;
+  if (isFloat) {
+    str = str.replace(".", "");
+    len = str.length;
+    i = len - i;
+    divisor = intPow(Ctor, new Ctor(base), i, i * 2);
+  }
+  xd = convertBase(str, base, BASE);
+  xe = xd.length - 1;
+  for (i = xe; xd[i] === 0; --i)
+    xd.pop();
+  if (i < 0)
+    return new Ctor(x.s * 0);
+  x.e = getBase10Exponent(xd, xe);
+  x.d = xd;
+  external = false;
+  if (isFloat)
+    x = divide(x, divisor, len * 4);
+  if (p2)
+    x = x.times(Math.abs(p2) < 54 ? mathpow(2, p2) : Decimal.pow(2, p2));
+  external = true;
+  return x;
+}
+__name(parseOther, "parseOther");
+function sine(Ctor, x) {
+  var k, len = x.d.length;
+  if (len < 3) {
+    return x.isZero() ? x : taylorSeries(Ctor, 2, x, x);
+  }
+  k = 1.4 * Math.sqrt(len);
+  k = k > 16 ? 16 : k | 0;
+  x = x.times(1 / tinyPow(5, k));
+  x = taylorSeries(Ctor, 2, x, x);
+  var sin2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
+  for (; k--; ) {
+    sin2_x = x.times(x);
+    x = x.times(d5.plus(sin2_x.times(d16.times(sin2_x).minus(d20))));
+  }
+  return x;
+}
+__name(sine, "sine");
+function taylorSeries(Ctor, n2, x, y, isHyperbolic) {
+  var j, t2, u, x2, i = 1, pr = Ctor.precision, k = Math.ceil(pr / LOG_BASE);
+  external = false;
+  x2 = x.times(x);
+  u = new Ctor(y);
+  for (; ; ) {
+    t2 = divide(u.times(x2), new Ctor(n2++ * n2++), pr, 1);
+    u = isHyperbolic ? y.plus(t2) : y.minus(t2);
+    y = divide(t2.times(x2), new Ctor(n2++ * n2++), pr, 1);
+    t2 = u.plus(y);
+    if (t2.d[k] !== void 0) {
+      for (j = k; t2.d[j] === u.d[j] && j--; )
+        ;
+      if (j == -1)
+        break;
+    }
+    j = u;
+    u = y;
+    y = t2;
+    t2 = j;
+    i++;
+  }
+  external = true;
+  t2.d.length = k + 1;
+  return t2;
+}
+__name(taylorSeries, "taylorSeries");
+function tinyPow(b2, e2) {
+  var n2 = b2;
+  while (--e2)
+    n2 *= b2;
+  return n2;
+}
+__name(tinyPow, "tinyPow");
+function toLessThanHalfPi(Ctor, x) {
+  var t2, isNeg = x.s < 0, pi = getPi(Ctor, Ctor.precision, 1), halfPi = pi.times(0.5);
+  x = x.abs();
+  if (x.lte(halfPi)) {
+    quadrant = isNeg ? 4 : 1;
+    return x;
+  }
+  t2 = x.divToInt(pi);
+  if (t2.isZero()) {
+    quadrant = isNeg ? 3 : 2;
+  } else {
+    x = x.minus(t2.times(pi));
+    if (x.lte(halfPi)) {
+      quadrant = isOdd(t2) ? isNeg ? 2 : 3 : isNeg ? 4 : 1;
+      return x;
+    }
+    quadrant = isOdd(t2) ? isNeg ? 1 : 4 : isNeg ? 3 : 2;
+  }
+  return x.minus(pi).abs();
+}
+__name(toLessThanHalfPi, "toLessThanHalfPi");
+function toStringBinary(x, baseOut, sd, rm) {
+  var base, e2, i, k, len, roundUp, str, xd, y, Ctor = x.constructor, isExp = sd !== void 0;
+  if (isExp) {
+    checkInt32(sd, 1, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+  } else {
+    sd = Ctor.precision;
+    rm = Ctor.rounding;
+  }
+  if (!x.isFinite()) {
+    str = nonFiniteToString(x);
+  } else {
+    str = finiteToString(x);
+    i = str.indexOf(".");
+    if (isExp) {
+      base = 2;
+      if (baseOut == 16) {
+        sd = sd * 4 - 3;
+      } else if (baseOut == 8) {
+        sd = sd * 3 - 2;
+      }
+    } else {
+      base = baseOut;
+    }
+    if (i >= 0) {
+      str = str.replace(".", "");
+      y = new Ctor(1);
+      y.e = str.length - i;
+      y.d = convertBase(finiteToString(y), 10, base);
+      y.e = y.d.length;
+    }
+    xd = convertBase(str, 10, base);
+    e2 = len = xd.length;
+    for (; xd[--len] == 0; )
+      xd.pop();
+    if (!xd[0]) {
+      str = isExp ? "0p+0" : "0";
+    } else {
+      if (i < 0) {
+        e2--;
+      } else {
+        x = new Ctor(x);
+        x.d = xd;
+        x.e = e2;
+        x = divide(x, y, sd, rm, 0, base);
+        xd = x.d;
+        e2 = x.e;
+        roundUp = inexact;
+      }
+      i = xd[sd];
+      k = base / 2;
+      roundUp = roundUp || xd[sd + 1] !== void 0;
+      roundUp = rm < 4 ? (i !== void 0 || roundUp) && (rm === 0 || rm === (x.s < 0 ? 3 : 2)) : i > k || i === k && (rm === 4 || roundUp || rm === 6 && xd[sd - 1] & 1 || rm === (x.s < 0 ? 8 : 7));
+      xd.length = sd;
+      if (roundUp) {
+        for (; ++xd[--sd] > base - 1; ) {
+          xd[sd] = 0;
+          if (!sd) {
+            ++e2;
+            xd.unshift(1);
+          }
+        }
+      }
+      for (len = xd.length; !xd[len - 1]; --len)
+        ;
+      for (i = 0, str = ""; i < len; i++)
+        str += NUMERALS.charAt(xd[i]);
+      if (isExp) {
+        if (len > 1) {
+          if (baseOut == 16 || baseOut == 8) {
+            i = baseOut == 16 ? 4 : 3;
+            for (--len; len % i; len++)
+              str += "0";
+            xd = convertBase(str, base, baseOut);
+            for (len = xd.length; !xd[len - 1]; --len)
+              ;
+            for (i = 1, str = "1."; i < len; i++)
+              str += NUMERALS.charAt(xd[i]);
+          } else {
+            str = str.charAt(0) + "." + str.slice(1);
+          }
+        }
+        str = str + (e2 < 0 ? "p" : "p+") + e2;
+      } else if (e2 < 0) {
+        for (; ++e2; )
+          str = "0" + str;
+        str = "0." + str;
+      } else {
+        if (++e2 > len)
+          for (e2 -= len; e2--; )
+            str += "0";
+        else if (e2 < len)
+          str = str.slice(0, e2) + "." + str.slice(e2);
+      }
+    }
+    str = (baseOut == 16 ? "0x" : baseOut == 2 ? "0b" : baseOut == 8 ? "0o" : "") + str;
+  }
+  return x.s < 0 ? "-" + str : str;
+}
+__name(toStringBinary, "toStringBinary");
+function truncate(arr, len) {
+  if (arr.length > len) {
+    arr.length = len;
+    return true;
+  }
+}
+__name(truncate, "truncate");
+function abs(x) {
+  return new this(x).abs();
+}
+__name(abs, "abs");
+function acos(x) {
+  return new this(x).acos();
+}
+__name(acos, "acos");
+function acosh(x) {
+  return new this(x).acosh();
+}
+__name(acosh, "acosh");
+function add(x, y) {
+  return new this(x).plus(y);
+}
+__name(add, "add");
+function asin(x) {
+  return new this(x).asin();
+}
+__name(asin, "asin");
+function asinh(x) {
+  return new this(x).asinh();
+}
+__name(asinh, "asinh");
+function atan(x) {
+  return new this(x).atan();
+}
+__name(atan, "atan");
+function atanh(x) {
+  return new this(x).atanh();
+}
+__name(atanh, "atanh");
+function atan2(y, x) {
+  y = new this(y);
+  x = new this(x);
+  var r2, pr = this.precision, rm = this.rounding, wpr = pr + 4;
+  if (!y.s || !x.s) {
+    r2 = new this(NaN);
+  } else if (!y.d && !x.d) {
+    r2 = getPi(this, wpr, 1).times(x.s > 0 ? 0.25 : 0.75);
+    r2.s = y.s;
+  } else if (!x.d || y.isZero()) {
+    r2 = x.s < 0 ? getPi(this, pr, rm) : new this(0);
+    r2.s = y.s;
+  } else if (!y.d || x.isZero()) {
+    r2 = getPi(this, wpr, 1).times(0.5);
+    r2.s = y.s;
+  } else if (x.s < 0) {
+    this.precision = wpr;
+    this.rounding = 1;
+    r2 = this.atan(divide(y, x, wpr, 1));
+    x = getPi(this, wpr, 1);
+    this.precision = pr;
+    this.rounding = rm;
+    r2 = y.s < 0 ? r2.minus(x) : r2.plus(x);
+  } else {
+    r2 = this.atan(divide(y, x, wpr, 1));
+  }
+  return r2;
+}
+__name(atan2, "atan2");
+function cbrt(x) {
+  return new this(x).cbrt();
+}
+__name(cbrt, "cbrt");
+function ceil(x) {
+  return finalise(x = new this(x), x.e + 1, 2);
+}
+__name(ceil, "ceil");
+function clamp(x, min2, max2) {
+  return new this(x).clamp(min2, max2);
+}
+__name(clamp, "clamp");
+function config(obj) {
+  if (!obj || typeof obj !== "object")
+    throw Error(decimalError + "Object expected");
+  var i, p2, v, useDefaults = obj.defaults === true, ps = [
+    "precision",
+    1,
+    MAX_DIGITS,
+    "rounding",
+    0,
+    8,
+    "toExpNeg",
+    -EXP_LIMIT,
+    0,
+    "toExpPos",
+    0,
+    EXP_LIMIT,
+    "maxE",
+    0,
+    EXP_LIMIT,
+    "minE",
+    -EXP_LIMIT,
+    0,
+    "modulo",
+    0,
+    9
+  ];
+  for (i = 0; i < ps.length; i += 3) {
+    if (p2 = ps[i], useDefaults)
+      this[p2] = DEFAULTS[p2];
+    if ((v = obj[p2]) !== void 0) {
+      if (mathfloor(v) === v && v >= ps[i + 1] && v <= ps[i + 2])
+        this[p2] = v;
+      else
+        throw Error(invalidArgument + p2 + ": " + v);
+    }
+  }
+  if (p2 = "crypto", useDefaults)
+    this[p2] = DEFAULTS[p2];
+  if ((v = obj[p2]) !== void 0) {
+    if (v === true || v === false || v === 0 || v === 1) {
+      if (v) {
+        if (typeof crypto != "undefined" && crypto && (crypto.getRandomValues || crypto.randomBytes)) {
+          this[p2] = true;
+        } else {
+          throw Error(cryptoUnavailable);
+        }
+      } else {
+        this[p2] = false;
+      }
+    } else {
+      throw Error(invalidArgument + p2 + ": " + v);
+    }
+  }
+  return this;
+}
+__name(config, "config");
+function cos(x) {
+  return new this(x).cos();
+}
+__name(cos, "cos");
+function cosh(x) {
+  return new this(x).cosh();
+}
+__name(cosh, "cosh");
+function clone(obj) {
+  var i, p2, ps;
+  function Decimal2(v) {
+    var e2, i2, t2, x = this;
+    if (!(x instanceof Decimal2))
+      return new Decimal2(v);
+    x.constructor = Decimal2;
+    if (isDecimalInstance(v)) {
+      x.s = v.s;
+      if (external) {
+        if (!v.d || v.e > Decimal2.maxE) {
+          x.e = NaN;
+          x.d = null;
+        } else if (v.e < Decimal2.minE) {
+          x.e = 0;
+          x.d = [0];
+        } else {
+          x.e = v.e;
+          x.d = v.d.slice();
+        }
+      } else {
+        x.e = v.e;
+        x.d = v.d ? v.d.slice() : v.d;
+      }
+      return;
+    }
+    t2 = typeof v;
+    if (t2 === "number") {
+      if (v === 0) {
+        x.s = 1 / v < 0 ? -1 : 1;
+        x.e = 0;
+        x.d = [0];
+        return;
+      }
+      if (v < 0) {
+        v = -v;
+        x.s = -1;
+      } else {
+        x.s = 1;
+      }
+      if (v === ~~v && v < 1e7) {
+        for (e2 = 0, i2 = v; i2 >= 10; i2 /= 10)
+          e2++;
+        if (external) {
+          if (e2 > Decimal2.maxE) {
+            x.e = NaN;
+            x.d = null;
+          } else if (e2 < Decimal2.minE) {
+            x.e = 0;
+            x.d = [0];
+          } else {
+            x.e = e2;
+            x.d = [v];
+          }
+        } else {
+          x.e = e2;
+          x.d = [v];
+        }
+        return;
+      } else if (v * 0 !== 0) {
+        if (!v)
+          x.s = NaN;
+        x.e = NaN;
+        x.d = null;
+        return;
+      }
+      return parseDecimal(x, v.toString());
+    } else if (t2 !== "string") {
+      throw Error(invalidArgument + v);
+    }
+    if ((i2 = v.charCodeAt(0)) === 45) {
+      v = v.slice(1);
+      x.s = -1;
+    } else {
+      if (i2 === 43)
+        v = v.slice(1);
+      x.s = 1;
+    }
+    return isDecimal.test(v) ? parseDecimal(x, v) : parseOther(x, v);
+  }
+  __name(Decimal2, "Decimal");
+  Decimal2.prototype = P2;
+  Decimal2.ROUND_UP = 0;
+  Decimal2.ROUND_DOWN = 1;
+  Decimal2.ROUND_CEIL = 2;
+  Decimal2.ROUND_FLOOR = 3;
+  Decimal2.ROUND_HALF_UP = 4;
+  Decimal2.ROUND_HALF_DOWN = 5;
+  Decimal2.ROUND_HALF_EVEN = 6;
+  Decimal2.ROUND_HALF_CEIL = 7;
+  Decimal2.ROUND_HALF_FLOOR = 8;
+  Decimal2.EUCLID = 9;
+  Decimal2.config = Decimal2.set = config;
+  Decimal2.clone = clone;
+  Decimal2.isDecimal = isDecimalInstance;
+  Decimal2.abs = abs;
+  Decimal2.acos = acos;
+  Decimal2.acosh = acosh;
+  Decimal2.add = add;
+  Decimal2.asin = asin;
+  Decimal2.asinh = asinh;
+  Decimal2.atan = atan;
+  Decimal2.atanh = atanh;
+  Decimal2.atan2 = atan2;
+  Decimal2.cbrt = cbrt;
+  Decimal2.ceil = ceil;
+  Decimal2.clamp = clamp;
+  Decimal2.cos = cos;
+  Decimal2.cosh = cosh;
+  Decimal2.div = div;
+  Decimal2.exp = exp;
+  Decimal2.floor = floor;
+  Decimal2.hypot = hypot;
+  Decimal2.ln = ln;
+  Decimal2.log = log2;
+  Decimal2.log10 = log10;
+  Decimal2.log2 = log22;
+  Decimal2.max = max;
+  Decimal2.min = min;
+  Decimal2.mod = mod;
+  Decimal2.mul = mul;
+  Decimal2.pow = pow;
+  Decimal2.random = random;
+  Decimal2.round = round;
+  Decimal2.sign = sign;
+  Decimal2.sin = sin;
+  Decimal2.sinh = sinh;
+  Decimal2.sqrt = sqrt;
+  Decimal2.sub = sub;
+  Decimal2.sum = sum;
+  Decimal2.tan = tan;
+  Decimal2.tanh = tanh;
+  Decimal2.trunc = trunc;
+  if (obj === void 0)
+    obj = {};
+  if (obj) {
+    if (obj.defaults !== true) {
+      ps = ["precision", "rounding", "toExpNeg", "toExpPos", "maxE", "minE", "modulo", "crypto"];
+      for (i = 0; i < ps.length; )
+        if (!obj.hasOwnProperty(p2 = ps[i++]))
+          obj[p2] = this[p2];
+    }
+  }
+  Decimal2.config(obj);
+  return Decimal2;
+}
+__name(clone, "clone");
+function div(x, y) {
+  return new this(x).div(y);
+}
+__name(div, "div");
+function exp(x) {
+  return new this(x).exp();
+}
+__name(exp, "exp");
+function floor(x) {
+  return finalise(x = new this(x), x.e + 1, 3);
+}
+__name(floor, "floor");
+function hypot() {
+  var i, n2, t2 = new this(0);
+  external = false;
+  for (i = 0; i < arguments.length; ) {
+    n2 = new this(arguments[i++]);
+    if (!n2.d) {
+      if (n2.s) {
+        external = true;
+        return new this(1 / 0);
+      }
+      t2 = n2;
+    } else if (t2.d) {
+      t2 = t2.plus(n2.times(n2));
+    }
+  }
+  external = true;
+  return t2.sqrt();
+}
+__name(hypot, "hypot");
+function isDecimalInstance(obj) {
+  return obj instanceof Decimal || obj && obj.toStringTag === tag || false;
+}
+__name(isDecimalInstance, "isDecimalInstance");
+function ln(x) {
+  return new this(x).ln();
+}
+__name(ln, "ln");
+function log2(x, y) {
+  return new this(x).log(y);
+}
+__name(log2, "log");
+function log22(x) {
+  return new this(x).log(2);
+}
+__name(log22, "log2");
+function log10(x) {
+  return new this(x).log(10);
+}
+__name(log10, "log10");
+function max() {
+  return maxOrMin(this, arguments, "lt");
+}
+__name(max, "max");
+function min() {
+  return maxOrMin(this, arguments, "gt");
+}
+__name(min, "min");
+function mod(x, y) {
+  return new this(x).mod(y);
+}
+__name(mod, "mod");
+function mul(x, y) {
+  return new this(x).mul(y);
+}
+__name(mul, "mul");
+function pow(x, y) {
+  return new this(x).pow(y);
+}
+__name(pow, "pow");
+function random(sd) {
+  var d2, e2, k, n2, i = 0, r2 = new this(1), rd = [];
+  if (sd === void 0)
+    sd = this.precision;
+  else
+    checkInt32(sd, 1, MAX_DIGITS);
+  k = Math.ceil(sd / LOG_BASE);
+  if (!this.crypto) {
+    for (; i < k; )
+      rd[i++] = Math.random() * 1e7 | 0;
+  } else if (crypto.getRandomValues) {
+    d2 = crypto.getRandomValues(new Uint32Array(k));
+    for (; i < k; ) {
+      n2 = d2[i];
+      if (n2 >= 429e7) {
+        d2[i] = crypto.getRandomValues(new Uint32Array(1))[0];
+      } else {
+        rd[i++] = n2 % 1e7;
+      }
+    }
+  } else if (crypto.randomBytes) {
+    d2 = crypto.randomBytes(k *= 4);
+    for (; i < k; ) {
+      n2 = d2[i] + (d2[i + 1] << 8) + (d2[i + 2] << 16) + ((d2[i + 3] & 127) << 24);
+      if (n2 >= 214e7) {
+        crypto.randomBytes(4).copy(d2, i);
+      } else {
+        rd.push(n2 % 1e7);
+        i += 4;
+      }
+    }
+    i = k / 4;
+  } else {
+    throw Error(cryptoUnavailable);
+  }
+  k = rd[--i];
+  sd %= LOG_BASE;
+  if (k && sd) {
+    n2 = mathpow(10, LOG_BASE - sd);
+    rd[i] = (k / n2 | 0) * n2;
+  }
+  for (; rd[i] === 0; i--)
+    rd.pop();
+  if (i < 0) {
+    e2 = 0;
+    rd = [0];
+  } else {
+    e2 = -1;
+    for (; rd[0] === 0; e2 -= LOG_BASE)
+      rd.shift();
+    for (k = 1, n2 = rd[0]; n2 >= 10; n2 /= 10)
+      k++;
+    if (k < LOG_BASE)
+      e2 -= LOG_BASE - k;
+  }
+  r2.e = e2;
+  r2.d = rd;
+  return r2;
+}
+__name(random, "random");
+function round(x) {
+  return finalise(x = new this(x), x.e + 1, this.rounding);
+}
+__name(round, "round");
+function sign(x) {
+  x = new this(x);
+  return x.d ? x.d[0] ? x.s : 0 * x.s : x.s || NaN;
+}
+__name(sign, "sign");
+function sin(x) {
+  return new this(x).sin();
+}
+__name(sin, "sin");
+function sinh(x) {
+  return new this(x).sinh();
+}
+__name(sinh, "sinh");
+function sqrt(x) {
+  return new this(x).sqrt();
+}
+__name(sqrt, "sqrt");
+function sub(x, y) {
+  return new this(x).sub(y);
+}
+__name(sub, "sub");
+function sum() {
+  var i = 0, args = arguments, x = new this(args[i]);
+  external = false;
+  for (; x.s && ++i < args.length; )
+    x = x.plus(args[i]);
+  external = true;
+  return finalise(x, this.precision, this.rounding);
+}
+__name(sum, "sum");
+function tan(x) {
+  return new this(x).tan();
+}
+__name(tan, "tan");
+function tanh(x) {
+  return new this(x).tanh();
+}
+__name(tanh, "tanh");
+function trunc(x) {
+  return finalise(x = new this(x), x.e + 1, 1);
+}
+__name(trunc, "trunc");
+P2[Symbol.for("nodejs.util.inspect.custom")] = P2.toString;
+P2[Symbol.toStringTag] = "Decimal";
+var Decimal = P2.constructor = clone(DEFAULTS);
+LN10 = new Decimal(LN10);
+PI = new Decimal(PI);
+var decimal_default = Decimal;
+
+// src/runtime/utils/common.ts
+var import_indent_string2 = __toESM(require_indent_string());
+var import_js_levenshtein = __toESM(require_js_levenshtein());
+
+// src/runtime/core/model/FieldRef.ts
+var FieldRefImpl = class {
+  constructor(modelName, name, fieldType, isList) {
+    this.modelName = modelName;
+    this.name = name;
+    this.typeName = fieldType;
+    this.isList = isList;
+  }
+  _toGraphQLInputType() {
+    const prefix = this.isList ? `List${this.typeName}` : this.typeName;
+    return `${prefix}FieldRefInput<${this.modelName}>`;
+  }
+};
+__name(FieldRefImpl, "FieldRefImpl");
+
+// src/runtime/object-enums.ts
+var objectEnumNames = ["JsonNullValueInput", "NullableJsonNullValueInput", "JsonNullValueFilter"];
+var secret = Symbol();
+var representations = /* @__PURE__ */ new WeakMap();
+var ObjectEnumValue = class {
+  constructor(arg2) {
+    if (arg2 === secret) {
+      representations.set(this, `Prisma.${this._getName()}`);
+    } else {
+      representations.set(this, `new Prisma.${this._getNamespace()}.${this._getName()}()`);
+    }
+  }
+  _getName() {
+    return this.constructor.name;
+  }
+  toString() {
+    return representations.get(this);
+  }
+};
+__name(ObjectEnumValue, "ObjectEnumValue");
+var NullTypesEnumValue = class extends ObjectEnumValue {
+  _getNamespace() {
+    return "NullTypes";
+  }
+};
+__name(NullTypesEnumValue, "NullTypesEnumValue");
+var DbNull = class extends NullTypesEnumValue {
+};
+__name(DbNull, "DbNull");
+var JsonNull = class extends NullTypesEnumValue {
+};
+__name(JsonNull, "JsonNull");
+var AnyNull = class extends NullTypesEnumValue {
+};
+__name(AnyNull, "AnyNull");
+var objectEnumValues = {
+  classes: {
+    DbNull,
+    JsonNull,
+    AnyNull
+  },
+  instances: {
+    DbNull: new DbNull(secret),
+    JsonNull: new JsonNull(secret),
+    AnyNull: new AnyNull(secret)
+  }
+};
+
+// src/runtime/utils/decimalJsLike.ts
+function isDecimalJsLike(value) {
+  if (Decimal.isDecimal(value)) {
+    return true;
+  }
+  return value !== null && typeof value === "object" && typeof value.s === "number" && typeof value.e === "number" && Array.isArray(value.d);
+}
+__name(isDecimalJsLike, "isDecimalJsLike");
+function stringifyDecimalJsLike(value) {
+  if (Decimal.isDecimal(value)) {
+    return JSON.stringify(String(value));
+  }
+  const tmpDecimal = new Decimal(0);
+  tmpDecimal.d = value.d;
+  tmpDecimal.e = value.e;
+  tmpDecimal.s = value.s;
+  return JSON.stringify(String(tmpDecimal));
+}
+__name(stringifyDecimalJsLike, "stringifyDecimalJsLike");
+
+// src/runtime/utils/common.ts
+var keyBy2 = /* @__PURE__ */ __name((collection, prop) => {
+  const acc = {};
+  for (const obj of collection) {
+    const key = obj[prop];
+    acc[key] = obj;
+  }
+  return acc;
+}, "keyBy");
+var ScalarTypeTable = {
+  String: true,
+  Int: true,
+  Float: true,
+  Boolean: true,
+  Long: true,
+  DateTime: true,
+  ID: true,
+  UUID: true,
+  Json: true,
+  Bytes: true,
+  Decimal: true,
+  BigInt: true
+};
+var JSTypeToGraphQLType = {
+  string: "String",
+  boolean: "Boolean",
+  object: "Json",
+  symbol: "Symbol"
+};
+function stringifyGraphQLType(type) {
+  if (typeof type === "string") {
+    return type;
+  }
+  return type.name;
+}
+__name(stringifyGraphQLType, "stringifyGraphQLType");
+function wrapWithList(str, isList) {
+  if (isList) {
+    return `List<${str}>`;
+  }
+  return str;
+}
+__name(wrapWithList, "wrapWithList");
+var RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60))(\.\d{1,})?(([Z])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
+var UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+function getGraphQLType(value, inputType) {
+  const potentialType = inputType == null ? void 0 : inputType.type;
+  if (value === null) {
+    return "null";
+  }
+  if (Object.prototype.toString.call(value) === "[object BigInt]") {
+    return "BigInt";
+  }
+  if (decimal_default.isDecimal(value)) {
+    return "Decimal";
+  }
+  if (potentialType === "Decimal" && isDecimalJsLike(value)) {
+    return "Decimal";
+  }
+  if (Buffer.isBuffer(value)) {
+    return "Bytes";
+  }
+  if (isValidEnumValue(value, inputType)) {
+    return potentialType.name;
+  }
+  if (value instanceof ObjectEnumValue) {
+    return value._getName();
+  }
+  if (value instanceof FieldRefImpl) {
+    return value._toGraphQLInputType();
+  }
+  if (Array.isArray(value)) {
+    let scalarTypes = value.reduce((acc, val) => {
+      const type = getGraphQLType(val, inputType);
+      if (!acc.includes(type)) {
+        acc.push(type);
+      }
+      return acc;
+    }, []);
+    if (scalarTypes.includes("Float") && scalarTypes.includes("Int")) {
+      scalarTypes = ["Float"];
+    }
+    return `List<${scalarTypes.join(" | ")}>`;
+  }
+  const jsType = typeof value;
+  if (jsType === "number") {
+    if (Math.trunc(value) === value) {
+      return "Int";
+    } else {
+      return "Float";
+    }
+  }
+  if (Object.prototype.toString.call(value) === "[object Date]") {
+    return "DateTime";
+  }
+  if (jsType === "string") {
+    if (UUID_REGEX.test(value)) {
+      return "UUID";
+    }
+    const date = new Date(value);
+    if (date.toString() === "Invalid Date") {
+      return "String";
+    }
+    if (RFC_3339_REGEX.test(value)) {
+      return "DateTime";
+    }
+  }
+  return JSTypeToGraphQLType[jsType];
+}
+__name(getGraphQLType, "getGraphQLType");
+function isValidEnumValue(value, inputType) {
+  var _a3;
+  const enumType = inputType == null ? void 0 : inputType.type;
+  if (!isSchemaEnum(enumType)) {
+    return false;
+  }
+  if ((inputType == null ? void 0 : inputType.namespace) === "prisma" && objectEnumNames.includes(enumType.name)) {
+    const name = (_a3 = value == null ? void 0 : value.constructor) == null ? void 0 : _a3.name;
+    return typeof name === "string" && objectEnumValues.instances[name] === value && enumType.values.includes(name);
+  }
+  return typeof value === "string" && enumType.values.includes(value);
+}
+__name(isValidEnumValue, "isValidEnumValue");
+function getSuggestion(str, possibilities) {
+  const bestMatch = possibilities.reduce(
+    (acc, curr) => {
+      const distance = (0, import_js_levenshtein.default)(str, curr);
+      if (distance < acc.distance) {
+        return {
+          distance,
+          str: curr
+        };
+      }
+      return acc;
+    },
+    {
+      distance: Math.min(Math.floor(str.length) * 1.1, ...possibilities.map((p2) => p2.length * 3)),
+      str: null
+    }
+  );
+  return bestMatch.str;
+}
+__name(getSuggestion, "getSuggestion");
+function stringifyInputType(input, greenKeys = false) {
+  if (typeof input === "string") {
+    return input;
+  }
+  if (input.values) {
+    return `enum ${input.name} {
+${(0, import_indent_string2.default)(input.values.join(", "), 2)}
+}`;
+  } else {
+    const body = (0, import_indent_string2.default)(
+      input.fields.map((arg2) => {
+        const key = `${arg2.name}`;
+        const str = `${greenKeys ? import_chalk7.default.green(key) : key}${arg2.isRequired ? "" : "?"}: ${import_chalk7.default.white(
+          arg2.inputTypes.map((argType) => {
+            return wrapWithList(
+              argIsInputType(argType.type) ? argType.type.name : stringifyGraphQLType(argType.type),
+              argType.isList
+            );
+          }).join(" | ")
+        )}`;
+        if (!arg2.isRequired) {
+          return import_chalk7.default.dim(str);
+        }
+        return str;
+      }).join("\n"),
+      2
+    );
+    return `${import_chalk7.default.dim("type")} ${import_chalk7.default.bold.dim(input.name)} ${import_chalk7.default.dim("{")}
+${body}
+${import_chalk7.default.dim("}")}`;
+  }
+}
+__name(stringifyInputType, "stringifyInputType");
+function argIsInputType(arg2) {
+  if (typeof arg2 === "string") {
+    return false;
+  }
+  return true;
+}
+__name(argIsInputType, "argIsInputType");
+function getInputTypeName(input) {
+  if (typeof input === "string") {
+    if (input === "Null") {
+      return "null";
+    }
+    return input;
+  }
+  return input.name;
+}
+__name(getInputTypeName, "getInputTypeName");
+function getOutputTypeName(input) {
+  if (typeof input === "string") {
+    return input;
+  }
+  return input.name;
+}
+__name(getOutputTypeName, "getOutputTypeName");
+function inputTypeToJson(input, isRequired, nameOnly = false) {
+  if (typeof input === "string") {
+    if (input === "Null") {
+      return "null";
+    }
+    return input;
+  }
+  if (input.values) {
+    return input.values.join(" | ");
+  }
+  const inputType = input;
+  const showDeepType = isRequired && inputType.fields.every(
+    (arg2) => {
+      var _a3;
+      return arg2.inputTypes[0].location === "inputObjectTypes" || ((_a3 = arg2.inputTypes[1]) == null ? void 0 : _a3.location) === "inputObjectTypes";
+    }
+  );
+  if (nameOnly) {
+    return getInputTypeName(input);
+  }
+  return inputType.fields.reduce((acc, curr) => {
+    let str = "";
+    if (!showDeepType && !curr.isRequired) {
+      str = curr.inputTypes.map((argType) => getInputTypeName(argType.type)).join(" | ");
+    } else {
+      str = curr.inputTypes.map((argInputType) => inputTypeToJson(argInputType.type, curr.isRequired, true)).join(" | ");
+    }
+    acc[curr.name + (curr.isRequired ? "" : "?")] = str;
+    return acc;
+  }, {});
+}
+__name(inputTypeToJson, "inputTypeToJson");
+function unionBy(arr1, arr2, iteratee) {
+  const map = {};
+  for (const element of arr1) {
+    map[iteratee(element)] = element;
+  }
+  for (const element of arr2) {
+    const key = iteratee(element);
+    if (!map[key]) {
+      map[key] = element;
+    }
+  }
+  return Object.values(map);
+}
+__name(unionBy, "unionBy");
+function lowerCase(name) {
+  return name.substring(0, 1).toLowerCase() + name.substring(1);
+}
+__name(lowerCase, "lowerCase");
+function isGroupByOutputName(type) {
+  return type.endsWith("GroupByOutputType");
+}
+__name(isGroupByOutputName, "isGroupByOutputName");
+function isSchemaEnum(type) {
+  return typeof type === "object" && type !== null && typeof type.name === "string" && Array.isArray(type.values);
+}
+__name(isSchemaEnum, "isSchemaEnum");
+
+// src/runtime/dmmf.ts
+var DMMFDatamodelHelper = class {
+  constructor({ datamodel }) {
+    this.datamodel = datamodel;
+    this.datamodelEnumMap = this.getDatamodelEnumMap();
+    this.modelMap = this.getModelMap();
+    this.typeMap = this.getTypeMap();
+    this.typeAndModelMap = this.getTypeModelMap();
+  }
+  getDatamodelEnumMap() {
+    return keyBy2(this.datamodel.enums, "name");
+  }
+  getModelMap() {
+    return { ...keyBy2(this.datamodel.models, "name") };
+  }
+  getTypeMap() {
+    return { ...keyBy2(this.datamodel.types, "name") };
+  }
+  getTypeModelMap() {
+    return { ...this.getTypeMap(), ...this.getModelMap() };
+  }
+};
+__name(DMMFDatamodelHelper, "DMMFDatamodelHelper");
+var DMMFMappingsHelper = class {
+  constructor({ mappings }) {
+    this.mappings = mappings;
+    this.mappingsMap = this.getMappingsMap();
+  }
+  getMappingsMap() {
+    return keyBy2(this.mappings.modelOperations, "model");
+  }
+};
+__name(DMMFMappingsHelper, "DMMFMappingsHelper");
+var DMMFSchemaHelper = class {
+  constructor({ schema }) {
+    this.outputTypeToMergedOutputType = /* @__PURE__ */ __name((outputType) => {
+      return {
+        ...outputType,
+        fields: outputType.fields
+      };
+    }, "outputTypeToMergedOutputType");
+    this.schema = schema;
+    this.enumMap = this.getEnumMap();
+    this.queryType = this.getQueryType();
+    this.mutationType = this.getMutationType();
+    this.outputTypes = this.getOutputTypes();
+    this.outputTypeMap = this.getMergedOutputTypeMap();
+    this.resolveOutputTypes();
+    this.inputObjectTypes = this.schema.inputObjectTypes;
+    this.inputTypeMap = this.getInputTypeMap();
+    this.resolveInputTypes();
+    this.resolveFieldArgumentTypes();
+    this.queryType = this.outputTypeMap.Query;
+    this.mutationType = this.outputTypeMap.Mutation;
+    this.rootFieldMap = this.getRootFieldMap();
+  }
+  get [Symbol.toStringTag]() {
+    return "DMMFClass";
+  }
+  resolveOutputTypes() {
+    for (const type of this.outputTypes.model) {
+      for (const field of type.fields) {
+        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
+          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
+        }
+      }
+      type.fieldMap = keyBy2(type.fields, "name");
+    }
+    for (const type of this.outputTypes.prisma) {
+      for (const field of type.fields) {
+        if (typeof field.outputType.type === "string" && !ScalarTypeTable[field.outputType.type]) {
+          field.outputType.type = this.outputTypeMap[field.outputType.type] || this.outputTypeMap[field.outputType.type] || this.enumMap[field.outputType.type] || field.outputType.type;
+        }
+      }
+      type.fieldMap = keyBy2(type.fields, "name");
+    }
+  }
+  resolveInputTypes() {
+    const inputTypes = this.inputObjectTypes.prisma;
+    if (this.inputObjectTypes.model) {
+      inputTypes.push(...this.inputObjectTypes.model);
+    }
+    for (const type of inputTypes) {
+      for (const field of type.fields) {
+        for (const fieldInputType of field.inputTypes) {
+          const fieldType = fieldInputType.type;
+          if (typeof fieldType === "string" && !ScalarTypeTable[fieldType] && (this.inputTypeMap[fieldType] || this.enumMap[fieldType])) {
+            fieldInputType.type = this.inputTypeMap[fieldType] || this.enumMap[fieldType] || fieldType;
+          }
+        }
+      }
+      type.fieldMap = keyBy2(type.fields, "name");
+    }
+  }
+  resolveFieldArgumentTypes() {
+    for (const type of this.outputTypes.prisma) {
+      for (const field of type.fields) {
+        for (const arg2 of field.args) {
+          for (const argInputType of arg2.inputTypes) {
+            const argType = argInputType.type;
+            if (typeof argType === "string" && !ScalarTypeTable[argType]) {
+              argInputType.type = this.inputTypeMap[argType] || this.enumMap[argType] || argType;
+            }
+          }
+        }
+      }
+    }
+    for (const type of this.outputTypes.model) {
+      for (const field of type.fields) {
+        for (const arg2 of field.args) {
+          for (const argInputType of arg2.inputTypes) {
+            const argType = argInputType.type;
+            if (typeof argType === "string" && !ScalarTypeTable[argType]) {
+              argInputType.type = this.inputTypeMap[argType] || this.enumMap[argType] || argInputType.type;
+            }
+          }
+        }
+      }
+    }
+  }
+  getQueryType() {
+    return this.schema.outputObjectTypes.prisma.find((t2) => t2.name === "Query");
+  }
+  getMutationType() {
+    return this.schema.outputObjectTypes.prisma.find((t2) => t2.name === "Mutation");
+  }
+  getOutputTypes() {
+    return {
+      model: this.schema.outputObjectTypes.model.map(this.outputTypeToMergedOutputType),
+      prisma: this.schema.outputObjectTypes.prisma.map(this.outputTypeToMergedOutputType)
+    };
+  }
+  getEnumMap() {
+    return {
+      ...keyBy2(this.schema.enumTypes.prisma, "name"),
+      ...this.schema.enumTypes.model ? keyBy2(this.schema.enumTypes.model, "name") : void 0
+    };
+  }
+  hasEnumInNamespace(enumName, namespace) {
+    var _a3;
+    return ((_a3 = this.schema.enumTypes[namespace]) == null ? void 0 : _a3.find((schemaEnum) => schemaEnum.name === enumName)) !== void 0;
+  }
+  getMergedOutputTypeMap() {
+    return {
+      ...keyBy2(this.outputTypes.model, "name"),
+      ...keyBy2(this.outputTypes.prisma, "name")
+    };
+  }
+  getInputTypeMap() {
+    return {
+      ...this.schema.inputObjectTypes.model ? keyBy2(this.schema.inputObjectTypes.model, "name") : void 0,
+      ...keyBy2(this.schema.inputObjectTypes.prisma, "name")
+    };
+  }
+  getRootFieldMap() {
+    return { ...keyBy2(this.queryType.fields, "name"), ...keyBy2(this.mutationType.fields, "name") };
+  }
+};
+__name(DMMFSchemaHelper, "DMMFSchemaHelper");
+var BaseDMMFHelper = class {
+  constructor(dmmf) {
+    return Object.assign(this, new DMMFDatamodelHelper(dmmf), new DMMFMappingsHelper(dmmf));
+  }
+};
+__name(BaseDMMFHelper, "BaseDMMFHelper");
+applyMixins(BaseDMMFHelper, [DMMFDatamodelHelper, DMMFMappingsHelper]);
+var DMMFHelper = class {
+  constructor(dmmf) {
+    return Object.assign(this, new BaseDMMFHelper(dmmf), new DMMFSchemaHelper(dmmf));
+  }
+};
+__name(DMMFHelper, "DMMFHelper");
+applyMixins(DMMFHelper, [BaseDMMFHelper, DMMFSchemaHelper]);
+
 // src/runtime/getPrismaClient.ts
 var import_async_hooks = require("async_hooks");
+var import_events = require("events");
 var import_fs9 = __toESM(require("fs"));
 var import_path5 = __toESM(require("path"));
 
@@ -27674,16 +31178,18 @@ function externalToInternalDmmf(document2) {
 __name(externalToInternalDmmf, "externalToInternalDmmf");
 function getMappings(mappings, datamodel) {
   const modelOperations = mappings.modelOperations.filter((mapping) => {
-    const model = datamodel.models.find((m) => m.name === mapping.model);
+    const model = datamodel.models.find((m2) => m2.name === mapping.model);
     if (!model) {
       throw new Error(`Mapping without model ${mapping.model}`);
     }
-    return model.fields.some((f) => f.kind !== "object");
+    return model.fields.some((f2) => f2.kind !== "object");
   }).map((mapping) => ({
     model: mapping.model,
     plural: (0, import_pluralize.default)(lowerCase(mapping.model)),
     findUnique: mapping.findUnique || mapping.findSingle,
+    findUniqueOrThrow: mapping.findUniqueOrThrow,
     findFirst: mapping.findFirst,
+    findFirstOrThrow: mapping.findFirstOrThrow,
     findMany: mapping.findMany,
     create: mapping.createOne || mapping.createSingle || mapping.create,
     createMany: mapping.createMany,
@@ -27715,33 +31221,98 @@ var import_chalk11 = __toESM(require_source());
 var import_indent_string4 = __toESM(require_indent_string());
 var import_strip_ansi3 = __toESM(require_strip_ansi());
 
+// src/generation/Cache.ts
+var Cache = class {
+  constructor() {
+    this._map = /* @__PURE__ */ new Map();
+  }
+  get(key) {
+    var _a3;
+    return (_a3 = this._map.get(key)) == null ? void 0 : _a3.value;
+  }
+  set(key, value) {
+    this._map.set(key, { value });
+  }
+  getOrCreate(key, create) {
+    const cached = this._map.get(key);
+    if (cached) {
+      return cached.value;
+    }
+    const value = create();
+    this.set(key, value);
+    return value;
+  }
+};
+__name(Cache, "Cache");
+
+// src/runtime/core/model/utils/dmmfToJSModelName.ts
+function dmmfToJSModelName(name) {
+  return name.replace(/^./, (str) => str.toLowerCase());
+}
+__name(dmmfToJSModelName, "dmmfToJSModelName");
+
+// src/runtime/core/extensions/resultUtils.ts
+function getComputedFields(previousComputedFields, extension, dmmfModelName) {
+  const jsName = dmmfToJSModelName(dmmfModelName);
+  if (!extension.result || !(extension.result.$allModels || extension.result[jsName])) {
+    return previousComputedFields;
+  }
+  return resolveDependencies({
+    ...previousComputedFields,
+    ...getComputedFieldsFromModel(extension.name, extension.result.$allModels),
+    ...getComputedFieldsFromModel(extension.name, extension.result[jsName])
+  });
+}
+__name(getComputedFields, "getComputedFields");
+function resolveDependencies(computedFields) {
+  const cache = new Cache();
+  const resolveNeeds = /* @__PURE__ */ __name((fieldName) => {
+    return cache.getOrCreate(fieldName, () => {
+      if (computedFields[fieldName]) {
+        return computedFields[fieldName].needs.flatMap(resolveNeeds);
+      }
+      return [fieldName];
+    });
+  }, "resolveNeeds");
+  return mapObjectValues(computedFields, (field) => {
+    return {
+      ...field,
+      needs: resolveNeeds(field.name)
+    };
+  });
+}
+__name(resolveDependencies, "resolveDependencies");
+function getComputedFieldsFromModel(name, modelResult) {
+  if (!modelResult) {
+    return {};
+  }
+  return mapObjectValues(modelResult, ({ needs, compute }, fieldName) => ({
+    name: fieldName,
+    needs: needs ? Object.keys(needs).filter((key) => needs[key]) : [],
+    compute: wrapExtensionCallback(name, compute)
+  }));
+}
+__name(getComputedFieldsFromModel, "getComputedFieldsFromModel");
+function applyComputedFieldsToSelection(selection, computedFields) {
+  if (!computedFields) {
+    return selection;
+  }
+  const result = { ...selection };
+  for (const field of Object.values(computedFields)) {
+    if (!selection[field.name]) {
+      continue;
+    }
+    for (const dependency of field.needs) {
+      result[dependency] = true;
+    }
+  }
+  return result;
+}
+__name(applyComputedFieldsToSelection, "applyComputedFieldsToSelection");
+
 // src/runtime/utils/createErrorMessageWithContext.ts
 var import_chalk9 = __toESM(require_source());
 var import_indent_string3 = __toESM(require_indent_string());
-
-// src/runtime/clientActions.ts
-var clientOnlyActions = {
-  findUniqueOrThrow: {
-    wrappedAction: DMMF.ModelAction.findUnique
-  },
-  findFirstOrThrow: {
-    wrappedAction: DMMF.ModelAction.findFirst
-  }
-};
-function getDmmfActionName(name) {
-  if (isClientOnlyAction(name)) {
-    return clientOnlyActions[name].wrappedAction;
-  }
-  return name;
-}
-__name(getDmmfActionName, "getDmmfActionName");
-function isClientOnlyAction(action) {
-  return Object.prototype.hasOwnProperty.call(clientOnlyActions, action);
-}
-__name(isClientOnlyAction, "isClientOnlyAction");
-var allClientModelActions = Object.keys(DMMF.ModelAction).concat(
-  Object.keys(clientOnlyActions)
-);
 
 // src/runtime/utils/SourceFileSlice.ts
 var import_fs8 = __toESM(require("fs"));
@@ -27784,8 +31355,8 @@ var Prism = {
         return tokens.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\u00a0/g, " ");
       }
     },
-    type: function(o) {
-      return Object.prototype.toString.call(o).slice(8, -1);
+    type: function(o2) {
+      return Object.prototype.toString.call(o2).slice(8, -1);
     },
     objId: function(obj) {
       if (!obj["__id"]) {
@@ -27793,36 +31364,36 @@ var Prism = {
       }
       return obj["__id"];
     },
-    clone: /* @__PURE__ */ __name(function deepClone(o, visited) {
-      let clone2, id, type = Prism.util.type(o);
+    clone: /* @__PURE__ */ __name(function deepClone(o2, visited) {
+      let clone2, id, type = Prism.util.type(o2);
       visited = visited || {};
       switch (type) {
         case "Object":
-          id = Prism.util.objId(o);
+          id = Prism.util.objId(o2);
           if (visited[id]) {
             return visited[id];
           }
           clone2 = {};
           visited[id] = clone2;
-          for (const key in o) {
-            if (o.hasOwnProperty(key)) {
-              clone2[key] = deepClone(o[key], visited);
+          for (const key in o2) {
+            if (o2.hasOwnProperty(key)) {
+              clone2[key] = deepClone(o2[key], visited);
             }
           }
           return clone2;
         case "Array":
-          id = Prism.util.objId(o);
+          id = Prism.util.objId(o2);
           if (visited[id]) {
             return visited[id];
           }
           clone2 = [];
           visited[id] = clone2;
-          o.forEach(function(v, i) {
+          o2.forEach(function(v, i) {
             clone2[i] = deepClone(v, visited);
           });
           return clone2;
         default:
-          return o;
+          return o2;
       }
     }, "deepClone")
   },
@@ -27861,13 +31432,13 @@ var Prism = {
       });
       return ret;
     },
-    DFS: /* @__PURE__ */ __name(function DFS(o, callback, type, visited) {
+    DFS: /* @__PURE__ */ __name(function DFS(o2, callback, type, visited) {
       visited = visited || {};
       const objId = Prism.util.objId;
-      for (const i in o) {
-        if (o.hasOwnProperty(i)) {
-          callback.call(o, i, o[i], type || i);
-          const property = o[i], propertyType = Prism.util.type(property);
+      for (const i in o2) {
+        if (o2.hasOwnProperty(i)) {
+          callback.call(o2, i, o2[i], type || i);
+          const property = o2[i], propertyType = Prism.util.type(property);
           if (propertyType === "Object" && !visited[objId(property)]) {
             visited[objId(property)] = true;
             DFS(property, callback, null, visited);
@@ -27922,19 +31493,19 @@ var Prism = {
             if (!match) {
               break;
             }
-            var from = match.index + (lookbehind ? match[1].length : 0), to = match.index + match[0].length, k = i, p = pos;
-            for (let len = strarr.length; k < len && (p < to || !strarr[k].type && !strarr[k - 1].greedy); ++k) {
-              p += strarr[k].length;
-              if (from >= p) {
+            var from = match.index + (lookbehind ? match[1].length : 0), to = match.index + match[0].length, k = i, p2 = pos;
+            for (let len = strarr.length; k < len && (p2 < to || !strarr[k].type && !strarr[k - 1].greedy); ++k) {
+              p2 += strarr[k].length;
+              if (from >= p2) {
                 ++i;
-                pos = p;
+                pos = p2;
               }
             }
             if (strarr[i] instanceof Token) {
               continue;
             }
             delNum = k - i;
-            str = text.slice(pos, p);
+            str = text.slice(pos, p2);
             match.index -= pos;
           } else {
             pattern.lastIndex = 0;
@@ -28104,16 +31675,16 @@ function Token(type, content, alias, matchedStr, greedy) {
   this.greedy = !!greedy;
 }
 __name(Token, "Token");
-Token.stringify = function(o, language) {
-  if (typeof o == "string") {
-    return o;
+Token.stringify = function(o2, language) {
+  if (typeof o2 == "string") {
+    return o2;
   }
-  if (Array.isArray(o)) {
-    return o.map(function(element) {
+  if (Array.isArray(o2)) {
+    return o2.map(function(element) {
       return Token.stringify(element, language);
     }).join("");
   }
-  return getColorForSyntaxKind(o.type)(o.content);
+  return getColorForSyntaxKind(o2.type)(o2.content);
 };
 function getColorForSyntaxKind(syntaxKind) {
   return theme[syntaxKind] || identity;
@@ -28127,7 +31698,7 @@ function highlightTS(str) {
 __name(highlightTS, "highlightTS");
 function highlight(str, grammar) {
   const tokens = Prism.tokenize(str, grammar);
-  return tokens.map((t) => Token.stringify(t)).join("");
+  return tokens.map((t2) => Token.stringify(t2)).join("");
 }
 __name(highlight, "highlight");
 
@@ -28144,7 +31715,7 @@ var SourceFileSlice = class {
     let content;
     try {
       content = import_fs8.default.readFileSync(filePath, "utf-8");
-    } catch (e) {
+    } catch (e2) {
       return null;
     }
     return SourceFileSlice.fromContent(content);
@@ -28217,12 +31788,12 @@ var colorsDisabled = {
   underline: (str) => str,
   highlightSource: (source) => source
 };
-function getTemplateParameters({ callsite, message, originalMethod, isPanic, callArguments }, colors) {
+function getTemplateParameters({ callsite, message, originalMethod, isPanic: isPanic2, callArguments }, colors) {
   var _a3;
   const templateParameters = {
     functionName: `prisma.${originalMethod}()`,
     message,
-    isPanic: isPanic != null ? isPanic : false,
+    isPanic: isPanic2 != null ? isPanic2 : false,
     callArguments
   };
   if (!callsite || typeof window !== "undefined") {
@@ -28246,7 +31817,7 @@ function getTemplateParameters({ callsite, message, originalMethod, isPanic, cal
     }
     templateParameters.functionName = `${invocationCallCode.code})`;
     templateParameters.location = callLocation;
-    if (!isPanic) {
+    if (!isPanic2) {
       source = source.mapLineAt(callLocation.lineNumber, (line) => line.slice(0, invocationCallCode.openingBraceIndex));
     }
     source = colors.highlightSource(source);
@@ -28262,7 +31833,7 @@ function getTemplateParameters({ callsite, message, originalMethod, isPanic, cal
 }
 __name(getTemplateParameters, "getTemplateParameters");
 function findPrismaActionCall(str) {
-  const allActions = allClientModelActions.join("|");
+  const allActions = Object.keys(DMMF.ModelAction).join("|");
   const regexp = new RegExp(String.raw`\S+(${allActions})\(`);
   const match = regexp.exec(str);
   if (match) {
@@ -28285,10 +31856,10 @@ function getIndent(line) {
   return spaceCount;
 }
 __name(getIndent, "getIndent");
-function stringifyErrorMessage({ functionName, location, message, isPanic, contextLines, callArguments }, colors) {
+function stringifyErrorMessage({ functionName, location, message, isPanic: isPanic2, contextLines, callArguments }, colors) {
   const lines = [""];
   const introSuffix = location ? " in" : ":";
-  if (isPanic) {
+  if (isPanic2) {
     lines.push(colors.red(`Oops, an unknown error occurred! This is ${colors.bold("on us")}, you did nothing wrong.`));
     lines.push(colors.red(`It occurred in the ${colors.bold(`\`${functionName}\``)} invocation${introSuffix}`));
   } else {
@@ -28418,8 +31989,8 @@ var deepExtend = /* @__PURE__ */ __name(function(target, ...args) {
 
 // src/runtime/utils/deep-set.ts
 var keys = /* @__PURE__ */ __name((ks) => Array.isArray(ks) ? ks : ks.split("."), "keys");
-var deepGet = /* @__PURE__ */ __name((o, kp) => keys(kp).reduce((o2, k) => o2 && o2[k], o), "deepGet");
-var deepSet = /* @__PURE__ */ __name((o, kp, v) => keys(kp).reduceRight((v2, k, i, ks) => Object.assign({}, deepGet(o, ks.slice(0, i)), { [k]: v2 }), v), "deepSet");
+var deepGet = /* @__PURE__ */ __name((o2, kp) => keys(kp).reduce((o3, k) => o3 && o3[k], o2), "deepGet");
+var deepSet = /* @__PURE__ */ __name((o2, kp, v) => keys(kp).reduceRight((v2, k, i, ks) => Object.assign({}, deepGet(o2, ks.slice(0, i)), { [k]: v2 }), v), "deepSet");
 
 // src/runtime/utils/filterObject.ts
 function filterObject(obj, cb) {
@@ -28471,7 +32042,7 @@ var import_strip_ansi2 = __toESM(require_strip_ansi());
 // src/runtime/utils/stringifyObject.ts
 var isRegexp = require_is_regexp();
 var isObj = require_is_obj();
-var getOwnEnumPropSymbols = require_lib().default;
+var getOwnEnumPropSymbols = require_lib2().default;
 var stringifyObject = /* @__PURE__ */ __name((input, options, pad) => {
   const seen = [];
   return (/* @__PURE__ */ __name(function stringifyObject2(input2, options2 = {}, pad2 = "", path7 = []) {
@@ -28793,9 +32364,9 @@ ${valueStr}
           typeStr = ":\n" + stringifyInputType(error2.requiredType.bestFittingType.type);
         }
         let expected = `${error2.requiredType.inputType.map(
-          (t) => import_chalk11.default.greenBright(wrapWithList(stringifyGraphQLType(t.type), error2.requiredType.bestFittingType.isList))
+          (t2) => import_chalk11.default.greenBright(wrapWithList(stringifyGraphQLType(t2.type), error2.requiredType.bestFittingType.isList))
         ).join(" or ")}${typeStr}`;
-        const inputType = error2.requiredType.inputType.length === 2 && error2.requiredType.inputType.find((t) => isInputArgType(t.type)) || null;
+        const inputType = error2.requiredType.inputType.length === 2 && error2.requiredType.inputType.find((t2) => isInputArgType(t2.type)) || null;
         if (inputType) {
           expected += `
 ` + stringifyInputType(inputType.type, true);
@@ -28855,15 +32426,15 @@ ${(0, import_indent_string4.default)(this.children.map(String).join("\n"), tab)}
     for (const child of invalidChildren) {
       const errors = child.collectErrors(prefix);
       fieldErrors.push(
-        ...errors.fieldErrors.map((e) => ({
-          ...e,
-          path: isTopLevelQuery ? e.path : e.path.slice(1)
+        ...errors.fieldErrors.map((e2) => ({
+          ...e2,
+          path: isTopLevelQuery ? e2.path : e2.path.slice(1)
         }))
       );
       argErrors.push(
-        ...errors.argErrors.map((e) => ({
-          ...e,
-          path: isTopLevelQuery ? e.path : e.path.slice(1)
+        ...errors.argErrors.map((e2) => ({
+          ...e2,
+          path: isTopLevelQuery ? e2.path : e2.path.slice(1)
         }))
       );
     }
@@ -28914,12 +32485,12 @@ ${(0, import_indent_string4.default)(this.children.map(String).join("\n"), tab)}
       } else if (argError.error.type !== "missingArg" && argError.error.type !== "atLeastOne") {
         valuePaths.push(path7);
       } else if (argError.error.type === "missingArg") {
-        const type = argError.error.missingArg.inputTypes.length === 1 ? argError.error.missingArg.inputTypes[0].type : argError.error.missingArg.inputTypes.map((t) => {
-          const inputTypeName = getInputTypeName(t.type);
+        const type = argError.error.missingArg.inputTypes.length === 1 ? argError.error.missingArg.inputTypes[0].type : argError.error.missingArg.inputTypes.map((t2) => {
+          const inputTypeName = getInputTypeName(t2.type);
           if (inputTypeName === "Null") {
             return "null";
           }
-          if (t.isList) {
+          if (t2.isList) {
             return inputTypeName + "[]";
           }
           return inputTypeName;
@@ -28933,10 +32504,10 @@ ${(0, import_indent_string4.default)(this.children.map(String).join("\n"), tab)}
     }
     const renderErrorStr = /* @__PURE__ */ __name((callsite) => {
       const hasRequiredMissingArgsErrors = argErrors.some(
-        (e) => e.error.type === "missingArg" && e.error.missingArg.isRequired
+        (e2) => e2.error.type === "missingArg" && e2.error.missingArg.isRequired
       );
       const hasOptionalMissingArgsErrors = Boolean(
-        argErrors.find((e) => e.error.type === "missingArg" && !e.error.missingArg.isRequired)
+        argErrors.find((e2) => e2.error.type === "missingArg" && !e2.error.missingArg.isRequired)
       );
       const hasMissingArgsErrors = hasOptionalMissingArgsErrors || hasRequiredMissingArgsErrors;
       let missingArgsLegend = "";
@@ -28957,10 +32528,10 @@ ${import_chalk11.default.dim("Note: Lines with ")}${import_chalk11.default.reset
         }
         missingArgsLegend += import_chalk11.default.dim(".");
       }
-      const relevantArgErrors = argErrors.filter((e) => e.error.type !== "missingArg" || e.error.missingArg.isRequired);
-      let errorMessages = relevantArgErrors.map((e) => this.printArgError(e, hasMissingArgsErrors, errorFormat === "minimal")).join("\n");
+      const relevantArgErrors = argErrors.filter((e2) => e2.error.type !== "missingArg" || e2.error.missingArg.isRequired);
+      let errorMessages = relevantArgErrors.map((e2) => this.printArgError(e2, hasMissingArgsErrors, errorFormat === "minimal")).join("\n");
       errorMessages += `
-${fieldErrors.map((e) => this.printFieldError(e, missingItems, errorFormat === "minimal")).join("\n")}`;
+${fieldErrors.map((e2) => this.printFieldError(e2, missingItems, errorFormat === "minimal")).join("\n")}`;
       if (errorFormat === "minimal") {
         return (0, import_strip_ansi3.default)(errorMessages);
       }
@@ -29082,21 +32653,21 @@ ${(0, import_indent_string4.default)(this.children.map(String).join("\n"), tab)}
       for (const child of this.children) {
         const errors = child.collectErrors(prefix);
         fieldErrors.push(
-          ...errors.fieldErrors.map((e) => ({
-            ...e,
-            path: [this.name, prefix, ...e.path]
+          ...errors.fieldErrors.map((e2) => ({
+            ...e2,
+            path: [this.name, prefix, ...e2.path]
           }))
         );
         argErrors.push(
-          ...errors.argErrors.map((e) => ({
-            ...e,
-            path: [this.name, prefix, ...e.path]
+          ...errors.argErrors.map((e2) => ({
+            ...e2,
+            path: [this.name, prefix, ...e2.path]
           }))
         );
       }
     }
     if (this.args) {
-      argErrors.push(...this.args.collectErrors().map((e) => ({ ...e, path: [this.name, ...e.path] })));
+      argErrors.push(...this.args.collectErrors().map((e2) => ({ ...e2, path: [this.name, ...e2.path] })));
     }
     return {
       fieldErrors,
@@ -29145,7 +32716,7 @@ function stringify(value, inputType) {
       return JSON.stringify(value.values);
     }
     if ((inputType == null ? void 0 : inputType.isList) && Array.isArray(value)) {
-      return JSON.stringify(value.map((o) => JSON.stringify(o)));
+      return JSON.stringify(value.map((o2) => JSON.stringify(o2)));
     }
     return JSON.stringify(JSON.stringify(value));
   }
@@ -29163,6 +32734,9 @@ function stringify(value, inputType) {
       return `[${value.join(", ")}]`;
     }
     return value;
+  }
+  if (typeof value === "number" && (inputType == null ? void 0 : inputType.type) === "Float") {
+    return value.toExponential();
   }
   return JSON.stringify(value, null, 2);
 }
@@ -29233,20 +32807,27 @@ ${(0, import_indent_string4.default)(nestedValue.toString(), tab)}
           if (!(val == null ? void 0 : val.collectErrors)) {
             return [];
           }
-          return val.collectErrors().map((e) => {
-            return { ...e, path: [this.key, index, ...e.path] };
+          return val.collectErrors().map((e2) => {
+            return { ...e2, path: [this.key, index, ...e2.path] };
           });
         })
       );
     }
     if (this.value instanceof Args) {
-      return errors.concat(this.value.collectErrors().map((e) => ({ ...e, path: [this.key, ...e.path] })));
+      return errors.concat(this.value.collectErrors().map((e2) => ({ ...e2, path: [this.key, ...e2.path] })));
     }
     return errors;
   }
 };
 __name(Arg2, "Arg");
-function makeDocument({ dmmf, rootTypeName, rootField, select, modelName }) {
+function makeDocument({
+  dmmf,
+  rootTypeName,
+  rootField,
+  select,
+  modelName,
+  extensions
+}) {
   if (!select) {
     select = {};
   }
@@ -29260,10 +32841,17 @@ function makeDocument({ dmmf, rootTypeName, rootField, select, modelName }) {
     },
     name: rootTypeName
   };
-  const context5 = {
+  const context3 = {
     modelName
   };
-  const children = selectionToFields(dmmf, { [rootField]: select }, fakeRootField, [rootTypeName], context5);
+  const children = selectionToFields({
+    dmmf,
+    selection: { [rootField]: select },
+    schemaField: fakeRootField,
+    path: [rootTypeName],
+    context: context3,
+    extensions
+  });
   return new Document(rootTypeName, children);
 }
 __name(makeDocument, "makeDocument");
@@ -29271,10 +32859,22 @@ function transformDocument(document2) {
   return document2;
 }
 __name(transformDocument, "transformDocument");
-function selectionToFields(dmmf, selection, schemaField, path7, context5) {
+function selectionToFields({
+  dmmf,
+  selection,
+  schemaField,
+  path: path7,
+  context: context3,
+  extensions
+}) {
   const outputType = schemaField.outputType.type;
+  const computedFields = context3.modelName ? extensions.getAllComputedFields(context3.modelName) : {};
+  selection = applyComputedFieldsToSelection(selection, computedFields);
   return Object.entries(selection).reduce((acc, [name, value]) => {
-    const field = outputType.fieldMap ? outputType.fieldMap[name] : outputType.fields.find((f) => f.name === name);
+    const field = outputType.fieldMap ? outputType.fieldMap[name] : outputType.fields.find((f2) => f2.name === name);
+    if (computedFields == null ? void 0 : computedFields[name]) {
+      return acc;
+    }
     if (!field) {
       acc.push(
         new Field({
@@ -29286,7 +32886,7 @@ function selectionToFields(dmmf, selection, schemaField, path7, context5) {
             providedName: name,
             didYouMean: getSuggestion(
               name,
-              outputType.fields.map((f) => f.name)
+              outputType.fields.map((f2) => f2.name).concat(Object.keys(computedFields != null ? computedFields : {}))
             ),
             outputType
           }
@@ -29324,7 +32924,7 @@ function selectionToFields(dmmf, selection, schemaField, path7, context5) {
     const args = argsWithoutIncludeAndSelect ? objectToArgs(
       argsWithoutIncludeAndSelect,
       transformedField,
-      context5,
+      context3,
       [],
       typeof field === "string" ? void 0 : field.outputType.type
     ) : void 0;
@@ -29368,7 +32968,7 @@ function selectionToFields(dmmf, selection, schemaField, path7, context5) {
         }
         if (field.outputType.location === "outputObjectTypes") {
           const fieldOutputType = field.outputType.type;
-          const allowedKeys = fieldOutputType.fields.filter((f) => f.outputType.location === "outputObjectTypes").map((f) => f.name);
+          const allowedKeys = fieldOutputType.fields.filter((f2) => f2.outputType.location === "outputObjectTypes").map((f2) => f2.name);
           const invalidKeys = keys2.filter((key) => !allowedKeys.includes(key));
           if (invalidKeys.length > 0) {
             acc.push(
@@ -29386,7 +32986,7 @@ function selectionToFields(dmmf, selection, schemaField, path7, context5) {
                         providedName: invalidKey,
                         didYouMean: getSuggestion(invalidKey, allowedKeys) || void 0,
                         isInclude: true,
-                        isIncludeScalar: fieldOutputType.fields.some((f) => f.name === invalidKey)
+                        isIncludeScalar: fieldOutputType.fields.some((f2) => f2.name === invalidKey)
                       }
                     })
                   ]
@@ -29448,7 +33048,21 @@ function selectionToFields(dmmf, selection, schemaField, path7, context5) {
         select = byToSelect(value.by);
       }
     }
-    const children = select !== false && isRelation ? selectionToFields(dmmf, select, field, [...path7, name], context5) : void 0;
+    let children;
+    if (select !== false && isRelation) {
+      let modelName = context3.modelName;
+      if (typeof field.outputType.type === "object" && field.outputType.namespace === "model" && field.outputType.location === "outputObjectTypes") {
+        modelName = field.outputType.type.name;
+      }
+      children = selectionToFields({
+        dmmf,
+        selection: select,
+        schemaField: field,
+        path: [...path7, name],
+        context: { modelName },
+        extensions
+      });
+    }
     acc.push(new Field({ name, args, children, schemaField: field }));
     return acc;
   }, []);
@@ -29456,20 +33070,20 @@ function selectionToFields(dmmf, selection, schemaField, path7, context5) {
 __name(selectionToFields, "selectionToFields");
 function byToSelect(by) {
   const obj = /* @__PURE__ */ Object.create(null);
-  for (const b of by) {
-    obj[b] = true;
+  for (const b2 of by) {
+    obj[b2] = true;
   }
   return obj;
 }
 __name(byToSelect, "byToSelect");
 function getDefaultSelection(dmmf, outputType) {
   const acc = /* @__PURE__ */ Object.create(null);
-  for (const f of outputType.fields) {
-    if (dmmf.typeMap[f.outputType.type.name] !== void 0) {
-      acc[f.name] = true;
+  for (const f2 of outputType.fields) {
+    if (dmmf.typeMap[f2.outputType.type.name] !== void 0) {
+      acc[f2.name] = true;
     }
-    if (f.outputType.location === "scalar" || f.outputType.location === "enumTypes") {
-      acc[f.name] = true;
+    if (f2.outputType.location === "scalar" || f2.outputType.location === "enumTypes") {
+      acc[f2.name] = true;
     }
   }
   return acc;
@@ -29494,9 +33108,9 @@ function getInvalidTypeArg(key, value, arg2, bestFittingType) {
   return arrg;
 }
 __name(getInvalidTypeArg, "getInvalidTypeArg");
-function hasCorrectScalarType(value, inputType, context5) {
+function hasCorrectScalarType(value, inputType, context3) {
   const { isList } = inputType;
-  const expectedType = getExpectedType(inputType, context5);
+  const expectedType = getExpectedType(inputType, context3);
   const graphQLType = getGraphQLType(value, inputType);
   if (graphQLType === expectedType) {
     return true;
@@ -29535,15 +33149,15 @@ function hasCorrectScalarType(value, inputType, context5) {
     return true;
   }
   if (inputType.isList && Array.isArray(value)) {
-    return value.every((v) => hasCorrectScalarType(v, { ...inputType, isList: false }, context5));
+    return value.every((v) => hasCorrectScalarType(v, { ...inputType, isList: false }, context3));
   }
   return false;
 }
 __name(hasCorrectScalarType, "hasCorrectScalarType");
-function getExpectedType(inputType, context5, isList = inputType.isList) {
+function getExpectedType(inputType, context3, isList = inputType.isList) {
   let type = stringifyGraphQLType(inputType.type);
-  if (inputType.location === "fieldRefTypes" && context5.modelName) {
-    type += `<${context5.modelName}>`;
+  if (inputType.location === "fieldRefTypes" && context3.modelName) {
+    type += `<${context3.modelName}>`;
   }
   return wrapWithList(type, isList);
 }
@@ -29553,11 +33167,11 @@ function isDecimalString(value) {
   return /^\-?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i.test(value);
 }
 __name(isDecimalString, "isDecimalString");
-function valueToArg(key, value, arg2, context5) {
+function valueToArg(key, value, arg2, context3) {
   let maybeArg = null;
   const argsWithErrors = [];
   for (const inputType of arg2.inputTypes) {
-    maybeArg = tryInferArgs(key, value, arg2, inputType, context5);
+    maybeArg = tryInferArgs(key, value, arg2, inputType, context3);
     if ((maybeArg == null ? void 0 : maybeArg.collectErrors().length) === 0) {
       return maybeArg;
     }
@@ -29570,20 +33184,20 @@ function valueToArg(key, value, arg2, context5) {
   }
   if ((maybeArg == null ? void 0 : maybeArg.hasError) && argsWithErrors.length > 0) {
     const argsWithScores = argsWithErrors.map(({ arg: arg3, errors }) => {
-      const errorScores = errors.map((e) => {
+      const errorScores = errors.map((e2) => {
         let score = 1;
-        if (e.error.type === "invalidType") {
-          score = 2 * Math.exp(getDepth(e.error.providedValue)) + 1;
+        if (e2.error.type === "invalidType") {
+          score = 2 * Math.exp(getDepth(e2.error.providedValue)) + 1;
         }
-        score += Math.log(e.path.length);
-        if (e.error.type === "missingArg") {
+        score += Math.log(e2.path.length);
+        if (e2.error.type === "missingArg") {
           if (arg3.inputType && isInputArgType(arg3.inputType.type) && arg3.inputType.type.name.includes("Unchecked")) {
             score *= 2;
           }
         }
-        if (e.error.type === "invalidName") {
-          if (isInputArgType(e.error.originalType)) {
-            if (e.error.originalType.name.includes("Unchecked")) {
+        if (e2.error.type === "invalidName") {
+          if (isInputArgType(e2.error.originalType)) {
+            if (e2.error.originalType.name.includes("Unchecked")) {
               score *= 2;
             }
           }
@@ -29596,7 +33210,7 @@ function valueToArg(key, value, arg2, context5) {
         errors
       };
     });
-    argsWithScores.sort((a, b) => a.score < b.score ? -1 : 1);
+    argsWithScores.sort((a, b2) => a.score < b2.score ? -1 : 1);
     return argsWithScores[0].arg;
   }
   return maybeArg;
@@ -29619,11 +33233,11 @@ function getDepth(object) {
   return level;
 }
 __name(getDepth, "getDepth");
-function sum2(n) {
-  return n.reduce((acc, curr) => acc + curr, 0);
+function sum2(n2) {
+  return n2.reduce((acc, curr) => acc + curr, 0);
 }
 __name(sum2, "sum");
-function tryInferArgs(key, value, arg2, inputType, context5) {
+function tryInferArgs(key, value, arg2, inputType, context3) {
   var _a3, _b2, _c, _d, _e;
   if (typeof value === "undefined") {
     if (!arg2.isRequired) {
@@ -29688,7 +33302,7 @@ function tryInferArgs(key, value, arg2, inputType, context5) {
         }
         return new Arg2({
           key,
-          value: val === null ? null : objectToArgs(val, inputType.type, context5, arg2.inputTypes),
+          value: val === null ? null : objectToArgs(val, inputType.type, context3, arg2.inputTypes),
           isEnum: inputType.location === "enumTypes",
           error: error2,
           inputType,
@@ -29696,7 +33310,7 @@ function tryInferArgs(key, value, arg2, inputType, context5) {
         });
       }
     } else {
-      return scalarToArg(key, value, arg2, inputType, context5);
+      return scalarToArg(key, value, arg2, inputType, context3);
     }
   }
   if (!Array.isArray(value) && inputType.isList) {
@@ -29705,7 +33319,7 @@ function tryInferArgs(key, value, arg2, inputType, context5) {
     }
   }
   if (inputType.location === "enumTypes" || inputType.location === "scalar") {
-    return scalarToArg(key, value, arg2, inputType, context5);
+    return scalarToArg(key, value, arg2, inputType, context3);
   }
   const argInputType = inputType.type;
   const hasAtLeastOneError = typeof ((_b2 = argInputType.constraints) == null ? void 0 : _b2.minNumFields) === "number" && ((_c = argInputType.constraints) == null ? void 0 : _c.minNumFields) > 0 ? Array.isArray(value) && value.some((v) => !v || Object.keys(cleanObject(v)).length === 0) : false;
@@ -29727,7 +33341,7 @@ function tryInferArgs(key, value, arg2, inputType, context5) {
   }
   if (!Array.isArray(value)) {
     for (const nestedArgInputType of arg2.inputTypes) {
-      const args = objectToArgs(value, nestedArgInputType.type, context5);
+      const args = objectToArgs(value, nestedArgInputType.type, context3);
       if (args.collectErrors().length === 0) {
         return new Arg2({
           key,
@@ -29748,7 +33362,7 @@ function tryInferArgs(key, value, arg2, inputType, context5) {
       if (typeof v !== "object" || !value) {
         return getInvalidTypeArg(key, v, arg2, inputType);
       }
-      return objectToArgs(v, argInputType, context5);
+      return objectToArgs(v, argInputType, context3);
     }),
     isEnum: false,
     inputType,
@@ -29767,8 +33381,8 @@ function isInputArgType(argType) {
   return true;
 }
 __name(isInputArgType, "isInputArgType");
-function scalarToArg(key, value, arg2, inputType, context5) {
-  if (hasCorrectScalarType(value, inputType, context5)) {
+function scalarToArg(key, value, arg2, inputType, context3) {
+  if (hasCorrectScalarType(value, inputType, context3)) {
     return new Arg2({
       key,
       value,
@@ -29780,10 +33394,10 @@ function scalarToArg(key, value, arg2, inputType, context5) {
   return getInvalidTypeArg(key, value, arg2, inputType);
 }
 __name(scalarToArg, "scalarToArg");
-function objectToArgs(initialObj, inputType, context5, possibilities, outputType) {
+function objectToArgs(initialObj, inputType, context3, possibilities, outputType) {
   var _a3;
   if ((_a3 = inputType.meta) == null ? void 0 : _a3.source) {
-    context5 = { modelName: inputType.meta.source };
+    context3 = { modelName: inputType.meta.source };
   }
   const obj = cleanObject(initialObj);
   const { fields: args, fieldMap } = inputType;
@@ -29793,7 +33407,7 @@ function objectToArgs(initialObj, inputType, context5, possibilities, outputType
   const argsList = entries.reduce((acc, [argName, value]) => {
     const schemaArg = fieldMap ? fieldMap[argName] : args.find((a) => a.name === argName);
     if (!schemaArg) {
-      const didYouMeanField = typeof value === "boolean" && outputType && outputType.fields.some((f) => f.name === argName) ? argName : null;
+      const didYouMeanField = typeof value === "boolean" && outputType && outputType.fields.some((f2) => f2.name === argName) ? argName : null;
       acc.push(
         new Arg2({
           key: argName,
@@ -29812,7 +33426,7 @@ function objectToArgs(initialObj, inputType, context5, possibilities, outputType
       );
       return acc;
     }
-    const arg2 = valueToArg(argName, value, schemaArg, context5);
+    const arg2 = valueToArg(argName, value, schemaArg, context3);
     if (arg2) {
       acc.push(arg2);
     }
@@ -29934,7 +33548,7 @@ function getField(document2, path7) {
 }
 __name(getField, "getField");
 function removeSelectFromPath(path7) {
-  return path7.split(".").filter((p) => p !== "select").join(".");
+  return path7.split(".").filter((p2) => p2 !== "select").join(".");
 }
 __name(removeSelectFromPath, "removeSelectFromPath");
 function removeSelectFromObject(obj) {
@@ -29978,23 +33592,171 @@ function transformAggregatePrintJsonArgs({
 }
 __name(transformAggregatePrintJsonArgs, "transformAggregatePrintJsonArgs");
 
-// src/runtime/core/extensions/$extends.ts
-function $extends(extension) {
-  if (!this._hasPreviewFlag("clientExtensions")) {
-    throw new PrismaClientValidationError("Extensions are not yet available");
-  }
-  return Object.create(this, {
-    _extensions: {
-      get: () => {
-        if (typeof extension === "function") {
-          return this._extensions.concat(extension());
-        }
-        return this._extensions.concat(extension);
+// src/runtime/core/compositeProxy/addObjectProperties.ts
+function addObjectProperties(object) {
+  return {
+    getKeys() {
+      return Object.keys(object);
+    },
+    getPropertyValue(key) {
+      return object[key];
+    }
+  };
+}
+__name(addObjectProperties, "addObjectProperties");
+
+// src/runtime/core/compositeProxy/addProperty.ts
+function addProperty(key, factory) {
+  return {
+    getKeys() {
+      return [key];
+    },
+    getPropertyValue() {
+      return factory();
+    }
+  };
+}
+__name(addProperty, "addProperty");
+
+// src/runtime/core/compositeProxy/cacheProperties.ts
+function cacheProperties(baseLayer) {
+  const cache = new Cache();
+  return {
+    getKeys() {
+      return baseLayer.getKeys();
+    },
+    getPropertyValue(key) {
+      return cache.getOrCreate(key, () => baseLayer.getPropertyValue(key));
+    },
+    getPropertyDescriptor(key) {
+      var _a3;
+      return (_a3 = baseLayer.getPropertyDescriptor) == null ? void 0 : _a3.call(baseLayer, key);
+    }
+  };
+}
+__name(cacheProperties, "cacheProperties");
+
+// src/runtime/core/compositeProxy/createCompositeProxy.ts
+var import_util7 = require("util");
+
+// src/runtime/core/model/utils/defaultProxyHandlers.ts
+var defaultPropertyDescriptor = {
+  enumerable: true,
+  configurable: true,
+  writable: true
+};
+function defaultProxyHandlers(ownKeys) {
+  const _ownKeys = new Set(ownKeys);
+  return {
+    getOwnPropertyDescriptor: () => defaultPropertyDescriptor,
+    has: (target, prop) => _ownKeys.has(prop),
+    set: (target, prop, value) => {
+      return _ownKeys.add(prop) && Reflect.set(target, prop, value);
+    },
+    ownKeys: () => [..._ownKeys]
+  };
+}
+__name(defaultProxyHandlers, "defaultProxyHandlers");
+
+// src/runtime/core/compositeProxy/createCompositeProxy.ts
+var customInspect = Symbol.for("nodejs.util.inspect.custom");
+function createCompositeProxy(target, layers) {
+  const keysToLayerMap = mapKeysToLayers(layers);
+  const overwrittenKeys = /* @__PURE__ */ new Set();
+  const proxy = new Proxy(target, {
+    get(target2, prop) {
+      if (overwrittenKeys.has(prop)) {
+        return target2[prop];
       }
+      const layer = keysToLayerMap.get(prop);
+      if (layer) {
+        return layer.getPropertyValue(prop);
+      }
+      return target2[prop];
+    },
+    has(target2, prop) {
+      var _a3, _b2;
+      if (overwrittenKeys.has(prop)) {
+        return true;
+      }
+      const layer = keysToLayerMap.get(prop);
+      if (layer) {
+        return (_b2 = (_a3 = layer.has) == null ? void 0 : _a3.call(layer, prop)) != null ? _b2 : true;
+      }
+      return Reflect.has(target2, prop);
+    },
+    ownKeys(target2) {
+      const targetKeys = getExistingKeys(Reflect.ownKeys(target2), keysToLayerMap);
+      const layerKeys = getExistingKeys(Array.from(keysToLayerMap.keys()), keysToLayerMap);
+      return [.../* @__PURE__ */ new Set([...targetKeys, ...layerKeys, ...overwrittenKeys])];
+    },
+    set(target2, prop, value) {
+      var _a3, _b2;
+      const layer = keysToLayerMap.get(prop);
+      if (((_b2 = (_a3 = layer == null ? void 0 : layer.getPropertyDescriptor) == null ? void 0 : _a3.call(layer, prop)) == null ? void 0 : _b2.writable) === false) {
+        return false;
+      }
+      overwrittenKeys.add(prop);
+      return Reflect.set(target2, prop, value);
+    },
+    getOwnPropertyDescriptor(target2, prop) {
+      const layer = keysToLayerMap.get(prop);
+      if (layer && layer.getPropertyDescriptor) {
+        return {
+          ...defaultPropertyDescriptor,
+          ...layer.getPropertyDescriptor(prop)
+        };
+      }
+      return defaultPropertyDescriptor;
+    },
+    defineProperty(target2, property, attributes) {
+      overwrittenKeys.add(property);
+      return Reflect.defineProperty(target2, property, attributes);
     }
   });
+  proxy[customInspect] = function(depth, options, defaultInspect = import_util7.inspect) {
+    const toLog = { ...this };
+    delete toLog[customInspect];
+    return defaultInspect(toLog, options);
+  };
+  return proxy;
 }
-__name($extends, "$extends");
+__name(createCompositeProxy, "createCompositeProxy");
+function mapKeysToLayers(layers) {
+  const keysToLayerMap = /* @__PURE__ */ new Map();
+  for (const layer of layers) {
+    const keys2 = layer.getKeys();
+    for (const key of keys2) {
+      keysToLayerMap.set(key, layer);
+    }
+  }
+  return keysToLayerMap;
+}
+__name(mapKeysToLayers, "mapKeysToLayers");
+function getExistingKeys(keys2, keysToLayerMap) {
+  return keys2.filter((key) => {
+    var _a3, _b2;
+    const layer = keysToLayerMap.get(key);
+    return (_b2 = (_a3 = layer == null ? void 0 : layer.has) == null ? void 0 : _a3.call(layer, key)) != null ? _b2 : true;
+  });
+}
+__name(getExistingKeys, "getExistingKeys");
+
+// src/runtime/core/compositeProxy/removeProperties.ts
+function removeProperties(keys2) {
+  return {
+    getKeys() {
+      return keys2;
+    },
+    has() {
+      return false;
+    },
+    getPropertyValue() {
+      return void 0;
+    }
+  };
+}
+__name(removeProperties, "removeProperties");
 
 // ../../node_modules/.pnpm/stacktrace-parser@0.1.10/node_modules/stacktrace-parser/dist/stack-trace-parser.esm.js
 var UNKNOWN_FUNCTION = "<unknown>";
@@ -30119,8 +33881,8 @@ var EnabledCallSite = class {
       return null;
     }
     const stackFrames = parse(stack);
-    const frame = stackFrames.find((t) => {
-      return t.file && t.file !== "<anonymous>" && !t.file.includes("@prisma") && !t.file.includes("getPrismaClient") && !t.file.startsWith("internal/") && !t.methodName.includes("new ") && !t.methodName.includes("getCallSite") && !t.methodName.includes("Proxy.") && t.methodName.split(".").length < 4;
+    const frame = stackFrames.find((t2) => {
+      return t2.file && t2.file !== "<anonymous>" && !t2.file.includes("@prisma") && !t2.file.includes("getPrismaClient") && !t2.file.startsWith("internal/") && !t2.methodName.includes("new ") && !t2.methodName.includes("getCallSite") && !t2.methodName.includes("Proxy.") && t2.methodName.split(".").length < 4;
     });
     if (!frame || !frame.file) {
       return null;
@@ -30147,9 +33909,9 @@ function createPrismaPromise(callback) {
   const _callback = /* @__PURE__ */ __name((transaction, lock, cached = true) => {
     try {
       if (cached === true) {
-        return promise != null ? promise : promise = callback(transaction, lock);
+        return promise != null ? promise : promise = valueToPromise(callback(transaction, lock));
       }
-      return callback(transaction, lock);
+      return valueToPromise(callback(transaction, lock));
     } catch (error2) {
       return Promise.reject(error2);
     }
@@ -30183,6 +33945,13 @@ function createItx(transaction) {
   return void 0;
 }
 __name(createItx, "createItx");
+function valueToPromise(thing) {
+  if (typeof thing["then"] === "function") {
+    return thing;
+  }
+  return Promise.resolve(thing);
+}
+__name(valueToPromise, "valueToPromise");
 
 // src/runtime/core/model/aggregates/utils/aggregateMap.ts
 var aggregateMap = {
@@ -30194,9 +33963,9 @@ var aggregateMap = {
 };
 
 // src/runtime/core/model/aggregates/aggregate.ts
-function desugarUserArgs(userArgs) {
-  const _userArgs = desugarCountInUserArgs(userArgs);
-  const userArgsEntries = Object.entries(_userArgs);
+function desugarUserArgs(args = {}) {
+  const _args = desugarCountInUserArgs(args);
+  const userArgsEntries = Object.entries(_args);
   return userArgsEntries.reduce(
     (aggregateArgs, [key, value]) => {
       if (aggregateMap[key] !== void 0) {
@@ -30210,73 +33979,75 @@ function desugarUserArgs(userArgs) {
   );
 }
 __name(desugarUserArgs, "desugarUserArgs");
-function desugarCountInUserArgs(userArgs) {
-  if (typeof userArgs["_count"] === "boolean") {
-    return { ...userArgs, _count: { _all: userArgs["_count"] } };
+function desugarCountInUserArgs(args = {}) {
+  if (typeof args["_count"] === "boolean") {
+    return { ...args, _count: { _all: args["_count"] } };
   }
-  return userArgs;
+  return args;
 }
 __name(desugarCountInUserArgs, "desugarCountInUserArgs");
-function createUnpacker(userArgs) {
+function createUnpacker(args = {}) {
   return (data) => {
-    if (typeof userArgs["_count"] === "boolean") {
+    if (typeof args["_count"] === "boolean") {
       data["_count"] = data["_count"]["_all"];
     }
     return data;
   };
 }
 __name(createUnpacker, "createUnpacker");
-function aggregate(client, userArgs, modelAction) {
-  const aggregateArgs = desugarUserArgs(userArgs != null ? userArgs : {});
-  const aggregateUnpacker = createUnpacker(userArgs != null ? userArgs : {});
+function aggregate(args, modelAction) {
+  const aggregateUnpacker = createUnpacker(args);
   return modelAction({
     action: "aggregate",
-    unpacker: aggregateUnpacker
-  })(aggregateArgs);
+    unpacker: aggregateUnpacker,
+    argsMapper: desugarUserArgs
+  })(args);
 }
 __name(aggregate, "aggregate");
 
 // src/runtime/core/model/aggregates/count.ts
-function count(client, userArgs, modelAction) {
-  const { select, ..._userArgs } = userArgs != null ? userArgs : {};
+function desugarUserArgs2(args = {}) {
+  const { select, ..._args } = args;
   if (typeof select === "object") {
-    return aggregate(
-      client,
-      { ..._userArgs, _count: select },
-      (p) => modelAction({ ...p, action: "count", unpacker: (data) => {
-        var _a3;
-        return (_a3 = p.unpacker) == null ? void 0 : _a3.call(p, data)["_count"];
-      } })
-    );
+    return desugarUserArgs({ ..._args, _count: select });
   } else {
-    return aggregate(
-      client,
-      { ..._userArgs, _count: { _all: true } },
-      (p) => modelAction({ ...p, action: "count", unpacker: (data) => {
-        var _a3;
-        return (_a3 = p.unpacker) == null ? void 0 : _a3.call(p, data)["_count"]["_all"];
-      } })
-    );
+    return desugarUserArgs({ ..._args, _count: { _all: true } });
   }
+}
+__name(desugarUserArgs2, "desugarUserArgs");
+function createUnpacker2(args = {}) {
+  if (typeof args["select"] === "object") {
+    return (data) => createUnpacker(args)(data)["_count"];
+  } else {
+    return (data) => createUnpacker(args)(data)["_count"]["_all"];
+  }
+}
+__name(createUnpacker2, "createUnpacker");
+function count(args, modelAction) {
+  return modelAction({
+    action: "count",
+    unpacker: createUnpacker2(args),
+    argsMapper: desugarUserArgs2
+  })(args);
 }
 __name(count, "count");
 
 // src/runtime/core/model/aggregates/groupBy.ts
-function desugarUserArgs2(userArgs) {
-  const _userArgs = desugarUserArgs(userArgs);
-  if (Array.isArray(userArgs["by"])) {
-    for (const key of userArgs["by"]) {
+function desugarUserArgs3(args = {}) {
+  const _args = desugarUserArgs(args);
+  if (Array.isArray(_args["by"])) {
+    for (const key of _args["by"]) {
       if (typeof key === "string") {
-        _userArgs["select"][key] = true;
+        _args["select"][key] = true;
       }
     }
   }
-  return _userArgs;
+  return _args;
 }
-__name(desugarUserArgs2, "desugarUserArgs");
-function createUnpacker2(userArgs) {
+__name(desugarUserArgs3, "desugarUserArgs");
+function createUnpacker3(args = {}) {
   return (data) => {
-    if (typeof userArgs["_count"] === "boolean") {
+    if (typeof (args == null ? void 0 : args["_count"]) === "boolean") {
       data.forEach((row) => {
         row["_count"] = row["_count"]["_all"];
       });
@@ -30284,126 +34055,32 @@ function createUnpacker2(userArgs) {
     return data;
   };
 }
-__name(createUnpacker2, "createUnpacker");
-function groupBy(client, userArgs, modelAction) {
-  const groupByArgs = desugarUserArgs2(userArgs != null ? userArgs : {});
-  const groupByUnpacker = createUnpacker2(userArgs != null ? userArgs : {});
+__name(createUnpacker3, "createUnpacker");
+function groupBy(args, modelAction) {
   return modelAction({
     action: "groupBy",
-    unpacker: groupByUnpacker
-  })(groupByArgs);
+    unpacker: createUnpacker3(args),
+    argsMapper: desugarUserArgs3
+  })(args);
 }
 __name(groupBy, "groupBy");
 
 // src/runtime/core/model/applyAggregates.ts
 function applyAggregates(client, action, modelAction) {
   if (action === "aggregate")
-    return (userArgs) => aggregate(client, userArgs, modelAction);
+    return (userArgs) => aggregate(userArgs, modelAction);
   if (action === "count")
-    return (userArgs) => count(client, userArgs, modelAction);
+    return (userArgs) => count(userArgs, modelAction);
   if (action === "groupBy")
-    return (userArgs) => groupBy(client, userArgs, modelAction);
+    return (userArgs) => groupBy(userArgs, modelAction);
   return void 0;
 }
 __name(applyAggregates, "applyAggregates");
 
-// src/runtime/utils/rejectOnNotFound.ts
-var NotFoundError2 = class extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "NotFoundError";
-  }
-};
-__name(NotFoundError2, "NotFoundError");
-function getRejectOnNotFound(action, modelName, args, clientInstance) {
-  let rejectOnNotFound;
-  if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
-    rejectOnNotFound = args["rejectOnNotFound"];
-    delete args["rejectOnNotFound"];
-  } else if (typeof clientInstance === "boolean") {
-    rejectOnNotFound = clientInstance;
-  } else if (clientInstance && typeof clientInstance === "object" && action in clientInstance) {
-    const rejectPerOperation = clientInstance[action];
-    if (rejectPerOperation && typeof rejectPerOperation === "object") {
-      if (modelName in rejectPerOperation) {
-        return rejectPerOperation[modelName];
-      }
-      return void 0;
-    }
-    rejectOnNotFound = getRejectOnNotFound(action, modelName, args, rejectPerOperation);
-  } else if (typeof clientInstance === "function") {
-    rejectOnNotFound = clientInstance;
-  } else {
-    rejectOnNotFound = false;
-  }
-  return rejectOnNotFound;
-}
-__name(getRejectOnNotFound, "getRejectOnNotFound");
-var REGEX = /(findUnique|findFirst)/;
-function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
-  if (rejectOnNotFound && !data && REGEX.exec(clientMethod)) {
-    if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
-      throw new NotFoundError2(`No ${typeName} found`);
-    } else if (typeof rejectOnNotFound === "function") {
-      throw rejectOnNotFound(new NotFoundError2(`No ${typeName} found`));
-    } else if (isError(rejectOnNotFound)) {
-      throw rejectOnNotFound;
-    }
-    throw new NotFoundError2(`No ${typeName} found`);
-  }
-}
-__name(throwIfNotFound, "throwIfNotFound");
-
-// src/runtime/core/model/applyClientOnlyWrapper.ts
-function wrapRequest(prop, dmmfModelName, requestCallback) {
-  if (prop === "findFirstOrThrow" || prop === "findUniqueOrThrow") {
-    return applyOrThrowWrapper(dmmfModelName, requestCallback);
-  }
-  assertNever(prop, "Unknown wrapper name");
-}
-__name(wrapRequest, "wrapRequest");
-function applyOrThrowWrapper(dmmfModelName, requestCallback) {
-  return async (requestParams) => {
-    if ("rejectOnNotFound" in requestParams.args) {
-      const message = createErrorMessageWithContext({
-        originalMethod: requestParams.clientMethod,
-        callsite: requestParams.callsite,
-        message: "'rejectOnNotFound' option is not supported"
-      });
-      throw new PrismaClientValidationError(message);
-    }
-    const result = await requestCallback(requestParams);
-    if (result === null || result === void 0) {
-      throw new NotFoundError2(`No ${dmmfModelName} found`);
-    }
-    return result;
-  };
-}
-__name(applyOrThrowWrapper, "applyOrThrowWrapper");
-
-// src/runtime/core/model/utils/defaultProxyHandlers.ts
-var defaultPropertyDescriptor = {
-  enumerable: true,
-  configurable: true,
-  writable: true
-};
-function defaultProxyHandlers(ownKeys) {
-  const _ownKeys = new Set(ownKeys);
-  return {
-    getOwnPropertyDescriptor: () => defaultPropertyDescriptor,
-    has: (target, prop) => _ownKeys.has(prop),
-    set: (target, prop, value) => {
-      return _ownKeys.add(prop) && Reflect.set(target, prop, value);
-    },
-    ownKeys: () => [..._ownKeys]
-  };
-}
-__name(defaultProxyHandlers, "defaultProxyHandlers");
-
 // src/runtime/core/model/applyFieldsProxy.ts
 function applyFieldsProxy(model) {
   const scalarFieldsList = model.fields.filter((field) => !field.relationName);
-  const scalarFields = keyBy2(scalarFieldsList, (field) => field.name);
+  const scalarFields = keyBy(scalarFieldsList, (field) => field.name);
   return new Proxy(
     {},
     {
@@ -30467,37 +34144,122 @@ function getOwnKeys(client, dmmfModelName) {
 }
 __name(getOwnKeys, "getOwnKeys");
 
-// src/runtime/core/model/utils/dmmfToJSModelName.ts
-function dmmfToJSModelName(name) {
-  return name.replace(/^./, (str) => str.toLowerCase());
+// src/runtime/utils/clientVersion.ts
+var clientVersion = require_package3().version;
+
+// src/runtime/utils/rejectOnNotFound.ts
+var NotFoundError2 = class extends PrismaClientKnownRequestError {
+  constructor(message) {
+    super(message, { code: "P2025", clientVersion });
+    this.name = "NotFoundError";
+  }
+};
+__name(NotFoundError2, "NotFoundError");
+function getRejectOnNotFound(action, modelName, args, clientInstance) {
+  let rejectOnNotFound;
+  if (args && typeof args === "object" && "rejectOnNotFound" in args && args["rejectOnNotFound"] !== void 0) {
+    rejectOnNotFound = args["rejectOnNotFound"];
+    delete args["rejectOnNotFound"];
+  } else if (typeof clientInstance === "boolean") {
+    rejectOnNotFound = clientInstance;
+  } else if (clientInstance && typeof clientInstance === "object" && action in clientInstance) {
+    const rejectPerOperation = clientInstance[action];
+    if (rejectPerOperation && typeof rejectPerOperation === "object") {
+      if (modelName in rejectPerOperation) {
+        return rejectPerOperation[modelName];
+      }
+      return void 0;
+    }
+    rejectOnNotFound = getRejectOnNotFound(action, modelName, args, rejectPerOperation);
+  } else if (typeof clientInstance === "function") {
+    rejectOnNotFound = clientInstance;
+  } else {
+    rejectOnNotFound = false;
+  }
+  return rejectOnNotFound;
 }
-__name(dmmfToJSModelName, "dmmfToJSModelName");
+__name(getRejectOnNotFound, "getRejectOnNotFound");
+var REGEX = /(findUnique|findFirst)/;
+function throwIfNotFound(data, clientMethod, typeName, rejectOnNotFound) {
+  if (rejectOnNotFound && !data && REGEX.exec(clientMethod)) {
+    if (typeof rejectOnNotFound === "boolean" && rejectOnNotFound) {
+      throw new NotFoundError2(`No ${typeName} found`);
+    } else if (typeof rejectOnNotFound === "function") {
+      throw rejectOnNotFound(new NotFoundError2(`No ${typeName} found`));
+    } else if (isError(rejectOnNotFound)) {
+      throw rejectOnNotFound;
+    }
+    throw new NotFoundError2(`No ${typeName} found`);
+  }
+}
+__name(throwIfNotFound, "throwIfNotFound");
+
+// src/runtime/core/model/applyOrThrowErrorAdapter.ts
+function adaptErrors(action, dmmfModelName, requestCallback) {
+  if (action === DMMF.ModelAction.findFirstOrThrow || action === DMMF.ModelAction.findUniqueOrThrow) {
+    return applyOrThrowWrapper(dmmfModelName, requestCallback);
+  }
+  return requestCallback;
+}
+__name(adaptErrors, "adaptErrors");
+function applyOrThrowWrapper(dmmfModelName, requestCallback) {
+  return async (requestParams) => {
+    if ("rejectOnNotFound" in requestParams.args) {
+      const message = createErrorMessageWithContext({
+        originalMethod: requestParams.clientMethod,
+        callsite: requestParams.callsite,
+        message: "'rejectOnNotFound' option is not supported"
+      });
+      throw new PrismaClientValidationError(message);
+    }
+    const result = await requestCallback(requestParams).catch((e2) => {
+      if (e2 instanceof PrismaClientKnownRequestError && e2.code === "P2025") {
+        throw new NotFoundError2(`No ${dmmfModelName} found`);
+      } else {
+        throw e2;
+      }
+    });
+    return result;
+  };
+}
+__name(applyOrThrowWrapper, "applyOrThrowWrapper");
 
 // src/runtime/core/model/applyModel.ts
-var fluentProps = ["findUnique", "findFirst", "create", "update", "upsert", "delete"];
+var fluentProps = [
+  "findUnique",
+  "findUniqueOrThrow",
+  "findFirst",
+  "findFirstOrThrow",
+  "create",
+  "update",
+  "upsert",
+  "delete"
+];
 var aggregateProps = ["aggregate", "count", "groupBy"];
 function applyModel(client, dmmfModelName) {
   var _a3;
+  const layers = [modelActionsLayer(client, dmmfModelName)];
+  if ((_a3 = client._engineConfig.previewFeatures) == null ? void 0 : _a3.includes("fieldReference")) {
+    layers.push(fieldsPropertyLayer(client, dmmfModelName));
+  }
+  const modelExtensions = client._extensions.getAllModelExtensions(dmmfModelName);
+  if (modelExtensions) {
+    layers.push(addObjectProperties(modelExtensions));
+  }
+  return createCompositeProxy({}, layers);
+}
+__name(applyModel, "applyModel");
+function modelActionsLayer(client, dmmfModelName) {
   const jsModelName = dmmfToJSModelName(dmmfModelName);
-  const model = client._baseDmmf.modelMap[dmmfModelName];
-  const fieldsProxyEnabled = (_a3 = client._engineConfig.previewFeatures) == null ? void 0 : _a3.includes("fieldReference");
   const ownKeys = getOwnKeys2(client, dmmfModelName);
-  const baseObject = {};
-  let fieldsProxy;
-  return new Proxy(baseObject, {
-    get(target, prop) {
-      if (prop in target || typeof prop === "symbol")
-        return target[prop];
-      if (prop === "fields" && fieldsProxyEnabled) {
-        return fieldsProxy != null ? fieldsProxy : fieldsProxy = applyFieldsProxy(model);
-      }
-      if (!isValidActionName(client, dmmfModelName, prop))
-        return void 0;
-      const dmmfActionName = getDmmfActionName(prop);
+  return {
+    getKeys() {
+      return ownKeys;
+    },
+    getPropertyValue(key) {
+      const dmmfActionName = key;
       let requestFn = /* @__PURE__ */ __name((params) => client._request(params), "requestFn");
-      if (isClientOnlyAction(prop)) {
-        requestFn = wrapRequest(prop, dmmfModelName, requestFn);
-      }
+      requestFn = adaptErrors(dmmfActionName, dmmfModelName, requestFn);
       const action = /* @__PURE__ */ __name((paramOverrides) => (userArgs) => {
         const callSite = getCallSite(client._errorFormat);
         return createPrismaPromise((transaction, lock) => {
@@ -30506,7 +34268,7 @@ function applyModel(client, dmmfModelName) {
             dataPath: [],
             action: dmmfActionName,
             model: dmmfModelName,
-            clientMethod: `${jsModelName}.${prop}`,
+            clientMethod: `${jsModelName}.${key}`,
             jsModelName,
             transaction,
             lock,
@@ -30518,32 +34280,35 @@ function applyModel(client, dmmfModelName) {
       if (fluentProps.includes(dmmfActionName)) {
         return applyFluent(client, dmmfModelName, action);
       }
-      if (isValidAggregateName(prop)) {
-        return applyAggregates(client, prop, action);
+      if (isValidAggregateName(key)) {
+        return applyAggregates(client, key, action);
       }
       return action({});
-    },
-    ...defaultProxyHandlers(ownKeys)
-  });
+    }
+  };
 }
-__name(applyModel, "applyModel");
+__name(modelActionsLayer, "modelActionsLayer");
 function getOwnKeys2(client, dmmfModelName) {
-  return [...Object.keys(client._baseDmmf.mappingsMap[dmmfModelName]), "count"].filter(
-    (key) => !["model", "plural"].includes(key)
+  const actionKeys = Object.keys(client._baseDmmf.mappingsMap[dmmfModelName]).filter(
+    (key) => key !== "model" && key !== "plural"
   );
+  actionKeys.push("count");
+  return actionKeys;
 }
 __name(getOwnKeys2, "getOwnKeys");
-function isValidActionName(client, dmmfModelName, action) {
-  if (isClientOnlyAction(action)) {
-    return isValidActionName(client, dmmfModelName, clientOnlyActions[action].wrappedAction);
-  }
-  return getOwnKeys2(client, dmmfModelName).includes(action);
-}
-__name(isValidActionName, "isValidActionName");
 function isValidAggregateName(action) {
   return aggregateProps.includes(action);
 }
 __name(isValidAggregateName, "isValidAggregateName");
+function fieldsPropertyLayer(client, dmmfModelName) {
+  return cacheProperties(
+    addProperty("fields", () => {
+      const model = client._baseDmmf.modelMap[dmmfModelName];
+      return applyFieldsProxy(model);
+    })
+  );
+}
+__name(fieldsPropertyLayer, "fieldsPropertyLayer");
 
 // src/runtime/core/model/utils/jsToDMMFModelName.ts
 function jsToDMMFModelName(name) {
@@ -30551,33 +34316,300 @@ function jsToDMMFModelName(name) {
 }
 __name(jsToDMMFModelName, "jsToDMMFModelName");
 
-// src/runtime/core/model/applyModels.ts
-function applyModels(client) {
-  const modelCache = {};
-  const ownKeys = getOwnKeys3(client);
-  return new Proxy(client, {
-    get(target, prop) {
-      if (prop in target || typeof prop === "symbol")
-        return target[prop];
+// src/runtime/core/model/applyModelsAndClientExtensions.ts
+var rawClient = Symbol();
+function applyModelsAndClientExtensions(client) {
+  const layers = [modelsLayer(client), addProperty(rawClient, () => client)];
+  const clientExtensions = client._extensions.getAllClientExtensions();
+  if (clientExtensions) {
+    layers.push(addObjectProperties(clientExtensions));
+  }
+  return createCompositeProxy(client, layers);
+}
+__name(applyModelsAndClientExtensions, "applyModelsAndClientExtensions");
+function modelsLayer(client) {
+  const dmmfModelKeys = Object.keys(client._baseDmmf.modelMap);
+  const jsModelKeys = dmmfModelKeys.map(dmmfToJSModelName);
+  const allKeys = [...new Set(dmmfModelKeys.concat(jsModelKeys))];
+  return cacheProperties({
+    getKeys() {
+      return allKeys;
+    },
+    getPropertyValue(prop) {
       const dmmfModelName = jsToDMMFModelName(prop);
-      if (modelCache[dmmfModelName] !== void 0) {
-        return modelCache[dmmfModelName];
-      }
       if (client._baseDmmf.modelMap[dmmfModelName] !== void 0) {
-        return modelCache[dmmfModelName] = applyModel(client, dmmfModelName);
+        return applyModel(client, dmmfModelName);
       }
       if (client._baseDmmf.modelMap[prop] !== void 0) {
-        return modelCache[dmmfModelName] = applyModel(client, prop);
+        return applyModel(client, prop);
       }
+      return void 0;
     },
-    ...defaultProxyHandlers(ownKeys)
+    getPropertyDescriptor(key) {
+      if (!jsModelKeys.includes(key)) {
+        return { enumerable: false };
+      }
+      return void 0;
+    }
   });
 }
-__name(applyModels, "applyModels");
-function getOwnKeys3(client) {
-  return [...Object.keys(client._baseDmmf.modelMap).map(dmmfToJSModelName), ...Object.keys(client)];
+__name(modelsLayer, "modelsLayer");
+function unapplyModelsAndClientExtensions(client) {
+  if (client[rawClient]) {
+    return client[rawClient];
+  }
+  return client;
 }
-__name(getOwnKeys3, "getOwnKeys");
+__name(unapplyModelsAndClientExtensions, "unapplyModelsAndClientExtensions");
+
+// src/runtime/core/extensions/$extends.ts
+function $extends(extension) {
+  if (!this._hasPreviewFlag("clientExtensions")) {
+    throw new PrismaClientValidationError(
+      "Extensions are not yet generally available, please add `clientExtensions` to the `previewFeatures` field in the `generator` block in the `schema.prisma` file."
+    );
+  }
+  if (typeof extension === "function") {
+    return extension(this);
+  }
+  const oldClient = unapplyModelsAndClientExtensions(this);
+  const newClient = Object.create(oldClient, {
+    _extensions: {
+      value: this._extensions.append(extension)
+    }
+  });
+  return applyModelsAndClientExtensions(newClient);
+}
+__name($extends, "$extends");
+
+// ../../node_modules/.pnpm/klona@2.0.5/node_modules/klona/dist/index.mjs
+function klona(x) {
+  if (typeof x !== "object")
+    return x;
+  var k, tmp, str = Object.prototype.toString.call(x);
+  if (str === "[object Object]") {
+    if (x.constructor !== Object && typeof x.constructor === "function") {
+      tmp = new x.constructor();
+      for (k in x) {
+        if (x.hasOwnProperty(k) && tmp[k] !== x[k]) {
+          tmp[k] = klona(x[k]);
+        }
+      }
+    } else {
+      tmp = {};
+      for (k in x) {
+        if (k === "__proto__") {
+          Object.defineProperty(tmp, k, {
+            value: klona(x[k]),
+            configurable: true,
+            enumerable: true,
+            writable: true
+          });
+        } else {
+          tmp[k] = klona(x[k]);
+        }
+      }
+    }
+    return tmp;
+  }
+  if (str === "[object Array]") {
+    k = x.length;
+    for (tmp = Array(k); k--; ) {
+      tmp[k] = klona(x[k]);
+    }
+    return tmp;
+  }
+  if (str === "[object Set]") {
+    tmp = /* @__PURE__ */ new Set();
+    x.forEach(function(val) {
+      tmp.add(klona(val));
+    });
+    return tmp;
+  }
+  if (str === "[object Map]") {
+    tmp = /* @__PURE__ */ new Map();
+    x.forEach(function(val, key) {
+      tmp.set(klona(key), klona(val));
+    });
+    return tmp;
+  }
+  if (str === "[object Date]") {
+    return new Date(+x);
+  }
+  if (str === "[object RegExp]") {
+    tmp = new RegExp(x.source, x.flags);
+    tmp.lastIndex = x.lastIndex;
+    return tmp;
+  }
+  if (str === "[object DataView]") {
+    return new x.constructor(klona(x.buffer));
+  }
+  if (str === "[object ArrayBuffer]") {
+    return x.slice(0);
+  }
+  if (str.slice(-6) === "Array]") {
+    return new x.constructor(x);
+  }
+  return x;
+}
+__name(klona, "klona");
+
+// src/runtime/core/extensions/applyQueryExtensions.ts
+function iterateAndCallQueryCallbacks(client, params, queryCbs, i = 0) {
+  if (queryCbs.length === 0)
+    return client._executeRequest(params);
+  return createPrismaPromise((transaction, lock) => {
+    var _a3, _b2;
+    if (transaction !== void 0) {
+      void ((_a3 = params.lock) == null ? void 0 : _a3.then());
+      params.transaction = transaction;
+      params.lock = lock;
+    }
+    if (i === queryCbs.length) {
+      return client._executeRequest(params);
+    }
+    return queryCbs[i]({
+      model: params.model,
+      operation: params.action,
+      args: klona((_b2 = params.args) != null ? _b2 : {}),
+      query: (args) => {
+        params.args = args;
+        return iterateAndCallQueryCallbacks(client, params, queryCbs, i + 1);
+      }
+    });
+  });
+}
+__name(iterateAndCallQueryCallbacks, "iterateAndCallQueryCallbacks");
+function applyQueryExtensions(client, params) {
+  const { jsModelName, action } = params;
+  if (jsModelName === void 0 || client._extensions.isEmpty()) {
+    return client._executeRequest(params);
+  }
+  return iterateAndCallQueryCallbacks(client, params, client._extensions.getAllQueryCallbacks(jsModelName, action));
+}
+__name(applyQueryExtensions, "applyQueryExtensions");
+
+// src/generation/lazyProperty.ts
+function lazyProperty(compute) {
+  let resultContainer;
+  return {
+    get() {
+      if (resultContainer) {
+        return resultContainer.value;
+      }
+      resultContainer = { value: compute() };
+      return resultContainer.value;
+    }
+  };
+}
+__name(lazyProperty, "lazyProperty");
+
+// src/runtime/core/extensions/MergedExtensionsList.ts
+var MergedExtensionsListNode = class {
+  constructor(extension, previous) {
+    this.extension = extension;
+    this.previous = previous;
+    this.computedFieldsCache = new Cache();
+    this.modelExtensionsCache = new Cache();
+    this.queryCallbacksCache = new Cache();
+    this.clientExtensions = lazyProperty(() => {
+      var _a3, _b2;
+      if (!this.extension.client) {
+        return (_a3 = this.previous) == null ? void 0 : _a3.getAllClientExtensions();
+      }
+      return {
+        ...(_b2 = this.previous) == null ? void 0 : _b2.getAllClientExtensions(),
+        ...wrapAllExtensionCallbacks(this.extension.name, this.extension.client)
+      };
+    });
+  }
+  getAllComputedFields(dmmfModelName) {
+    return this.computedFieldsCache.getOrCreate(dmmfModelName, () => {
+      var _a3;
+      return getComputedFields((_a3 = this.previous) == null ? void 0 : _a3.getAllComputedFields(dmmfModelName), this.extension, dmmfModelName);
+    });
+  }
+  getAllClientExtensions() {
+    return this.clientExtensions.get();
+  }
+  getAllModelExtensions(dmmfModelName) {
+    return this.modelExtensionsCache.getOrCreate(dmmfModelName, () => {
+      var _a3, _b2;
+      const jsModelName = dmmfToJSModelName(dmmfModelName);
+      if (!this.extension.model || !(this.extension.model[jsModelName] || this.extension.model.$allModels)) {
+        return (_a3 = this.previous) == null ? void 0 : _a3.getAllModelExtensions(dmmfModelName);
+      }
+      return {
+        ...(_b2 = this.previous) == null ? void 0 : _b2.getAllModelExtensions(dmmfModelName),
+        ...wrapAllExtensionCallbacks(this.extension.name, this.extension.model.$allModels),
+        ...wrapAllExtensionCallbacks(this.extension.name, this.extension.model[jsModelName])
+      };
+    });
+  }
+  getAllQueryCallbacks(jsModelName, action) {
+    return this.queryCallbacksCache.getOrCreate(`${jsModelName}:${action}`, () => {
+      var _a3, _b2;
+      const previous = (_b2 = (_a3 = this.previous) == null ? void 0 : _a3.getAllQueryCallbacks(jsModelName, action)) != null ? _b2 : [];
+      const query2 = this.extension.query;
+      if (!query2 || !(query2[jsModelName] || query2.$allModels)) {
+        return previous;
+      }
+      const newCallbacks = [];
+      if (query2[jsModelName] !== void 0) {
+        if (query2[jsModelName][action] !== void 0) {
+          newCallbacks.push(query2[jsModelName][action]);
+        }
+        if (query2[jsModelName]["$allOperations"] !== void 0) {
+          newCallbacks.push(query2[jsModelName]["$allOperations"]);
+        }
+      }
+      if (query2["$allModels"] !== void 0) {
+        if (query2["$allModels"][action] !== void 0) {
+          newCallbacks.push(query2["$allModels"][action]);
+        }
+        if (query2["$allModels"]["$allOperations"] !== void 0) {
+          newCallbacks.push(query2["$allModels"]["$allOperations"]);
+        }
+      }
+      return previous.concat(newCallbacks.map((callback) => wrapExtensionCallback(this.extension.name, callback)));
+    });
+  }
+};
+__name(MergedExtensionsListNode, "MergedExtensionsListNode");
+var MergedExtensionsList = class {
+  constructor(head) {
+    this.head = head;
+  }
+  static empty() {
+    return new MergedExtensionsList();
+  }
+  static single(extension) {
+    return new MergedExtensionsList(new MergedExtensionsListNode(extension));
+  }
+  isEmpty() {
+    return this.head === void 0;
+  }
+  append(extension) {
+    return new MergedExtensionsList(new MergedExtensionsListNode(extension, this.head));
+  }
+  getAllComputedFields(dmmfModelName) {
+    var _a3;
+    return (_a3 = this.head) == null ? void 0 : _a3.getAllComputedFields(dmmfModelName);
+  }
+  getAllClientExtensions() {
+    var _a3;
+    return (_a3 = this.head) == null ? void 0 : _a3.getAllClientExtensions();
+  }
+  getAllModelExtensions(dmmfModelName) {
+    var _a3;
+    return (_a3 = this.head) == null ? void 0 : _a3.getAllModelExtensions(dmmfModelName);
+  }
+  getAllQueryCallbacks(jsModelName, action) {
+    var _a3, _b2;
+    return (_b2 = (_a3 = this.head) == null ? void 0 : _a3.getAllQueryCallbacks(jsModelName, action)) != null ? _b2 : [];
+  }
+};
+__name(MergedExtensionsList, "MergedExtensionsList");
 
 // src/runtime/core/transaction/utils/createLockCountPromise.ts
 function getLockCountPromise(knock, cb = () => {
@@ -30595,11 +34627,11 @@ function getLockCountPromise(knock, cb = () => {
 __name(getLockCountPromise, "getLockCountPromise");
 
 // src/runtime/getLogLevel.ts
-function getLogLevel(log4) {
-  if (typeof log4 === "string") {
-    return log4;
+function getLogLevel(log3) {
+  if (typeof log3 === "string") {
+    return log3;
   }
-  return log4.reduce((acc, curr) => {
+  return log3.reduce((acc, curr) => {
     const currentLevel = typeof curr === "string" ? curr : curr.level;
     if (currentLevel === "query") {
       return acc;
@@ -30670,6 +34702,91 @@ __name(Middlewares, "Middlewares");
 // src/runtime/RequestHandler.ts
 var import_strip_ansi4 = __toESM(require_strip_ansi());
 
+// src/runtime/core/extensions/applyResultExtensions.ts
+function applyResultExtensions({ result, modelName, select, extensions }) {
+  const computedFields = extensions.getAllComputedFields(modelName);
+  if (!computedFields) {
+    return result;
+  }
+  const computedPropertiesLayers = [];
+  const maskingLayers = [];
+  for (const field of Object.values(computedFields)) {
+    if (select) {
+      if (!select[field.name]) {
+        continue;
+      }
+      const toMask = field.needs.filter((prop) => !select[prop]);
+      if (toMask.length > 0) {
+        maskingLayers.push(removeProperties(toMask));
+      }
+    }
+    if (areNeedsMet(result, field.needs)) {
+      computedPropertiesLayers.push(
+        computedPropertyLayer(field, createCompositeProxy(result, computedPropertiesLayers))
+      );
+    }
+  }
+  if (computedPropertiesLayers.length > 0 || maskingLayers.length > 0) {
+    return createCompositeProxy(result, [...computedPropertiesLayers, ...maskingLayers]);
+  }
+  return result;
+}
+__name(applyResultExtensions, "applyResultExtensions");
+function areNeedsMet(result, neededProperties) {
+  return neededProperties.every((property) => hasOwnProperty2(result, property));
+}
+__name(areNeedsMet, "areNeedsMet");
+function computedPropertyLayer(field, result) {
+  return cacheProperties(addProperty(field.name, () => field.compute(result)));
+}
+__name(computedPropertyLayer, "computedPropertyLayer");
+
+// src/runtime/core/extensions/visitQueryResult.ts
+function visitQueryResult({ visitor, result, args, dmmf, model }) {
+  var _a3;
+  if (Array.isArray(result)) {
+    for (let i = 0; i < result.length; i++) {
+      result[i] = visitQueryResult({
+        result: result[i],
+        args,
+        model,
+        dmmf,
+        visitor
+      });
+    }
+    return result;
+  }
+  const visitResult = (_a3 = visitor(result, model, args)) != null ? _a3 : result;
+  if (args.include) {
+    visitNested({ includeOrSelect: args.include, result: visitResult, parentModel: model, dmmf, visitor });
+  }
+  if (args.select) {
+    visitNested({ includeOrSelect: args.select, result: visitResult, parentModel: model, dmmf, visitor });
+  }
+  return visitResult;
+}
+__name(visitQueryResult, "visitQueryResult");
+function visitNested({ includeOrSelect, result, parentModel, dmmf, visitor }) {
+  for (const [fieldName, subConfig] of Object.entries(includeOrSelect)) {
+    if (!subConfig || result[fieldName] == null) {
+      continue;
+    }
+    const field = parentModel.fields.find((field2) => field2.name === fieldName);
+    if (!field || field.kind !== "object" || !field.relationName) {
+      continue;
+    }
+    const args = typeof subConfig === "object" ? subConfig : {};
+    result[fieldName] = visitQueryResult({
+      visitor,
+      result: result[fieldName],
+      args,
+      model: dmmf.getModelMap()[field.type],
+      dmmf
+    });
+  }
+}
+__name(visitNested, "visitNested");
+
 // src/runtime/DataLoader.ts
 var DataLoader = class {
   constructor(options) {
@@ -30711,8 +34828,8 @@ var DataLoader = class {
           } else {
             batch[0].resolve(result);
           }
-        }).catch((e) => {
-          batch[0].reject(e);
+        }).catch((e2) => {
+          batch[0].reject(e2);
         });
       } else {
         this.options.batchLoader(batch.map((j) => j.request)).then((results) => {
@@ -30730,9 +34847,9 @@ var DataLoader = class {
               }
             }
           }
-        }).catch((e) => {
+        }).catch((e2) => {
           for (let i = 0; i < batch.length; i++) {
-            batch[i].reject(e);
+            batch[i].reject(e2);
           }
         });
       }
@@ -30758,28 +34875,44 @@ function getRequestInfo(request2) {
     headers.traceparent = traceparent;
   }
   return {
-    batchTransaction: (transaction == null ? void 0 : transaction.kind) === "batch" ? transaction : void 0,
+    transaction,
     headers
   };
 }
 __name(getRequestInfo, "getRequestInfo");
 var RequestHandler = class {
-  constructor(client, hooks) {
+  constructor(client, hooks, logEmitter) {
+    this.logEmmitter = logEmitter;
     this.client = client;
     this.hooks = hooks;
     this.dataloader = new DataLoader({
       batchLoader: (requests) => {
+        var _a3;
         const info2 = getRequestInfo(requests[0]);
-        const queries = requests.map((r) => String(r.document));
+        const queries = requests.map((r2) => String(r2.document));
         const traceparent = getTraceParent({ context: requests[0].otelParentCtx, tracingConfig: client._tracingConfig });
         if (traceparent)
           info2.headers.traceparent = traceparent;
-        return this.client._engine.requestBatch(queries, info2.headers, info2.batchTransaction);
+        const containsWrite = requests.some((r2) => r2.document.type === "mutation");
+        const batchTransaction = ((_a3 = info2.transaction) == null ? void 0 : _a3.kind) === "batch" ? info2.transaction : void 0;
+        return this.client._engine.requestBatch({
+          queries,
+          headers: info2.headers,
+          transaction: batchTransaction,
+          containsWrite
+        });
       },
       singleLoader: (request2) => {
+        var _a3;
         const info2 = getRequestInfo(request2);
         const query2 = String(request2.document);
-        return this.client._engine.request(query2, info2.headers);
+        const interactiveTransaction = ((_a3 = info2.transaction) == null ? void 0 : _a3.kind) === "itx" ? info2.transaction : void 0;
+        return this.client._engine.request({
+          query: query2,
+          headers: info2.headers,
+          transaction: interactiveTransaction,
+          isWrite: request2.document.type === "mutation"
+        });
       },
       batchBy: (request2) => {
         var _a3;
@@ -30804,6 +34937,7 @@ var RequestHandler = class {
     headers,
     transaction,
     unpacker,
+    extensions,
     otelParentCtx,
     otelChildCtx
   }) {
@@ -30848,16 +34982,33 @@ var RequestHandler = class {
       }
       const unpackResult = this.unpack(document2, data, dataPath, rootField, unpacker);
       throwIfNotFound(unpackResult, clientMethod, typeName, rejectOnNotFound);
+      const extendedResult = this.applyResultExtensions({ result: unpackResult, modelName: typeName, args, extensions });
       if (process.env.PRISMA_CLIENT_GET_TIME) {
-        return { data: unpackResult, elapsed };
+        return { data: extendedResult, elapsed };
       }
-      return unpackResult;
+      return extendedResult;
     } catch (error2) {
-      this.handleRequestError({ error: error2, clientMethod, callsite });
+      this.handleAndLogRequestError({ error: error2, clientMethod, callsite, transaction });
     }
   }
-  handleRequestError({ error: error2, clientMethod, callsite }) {
+  handleAndLogRequestError({ error: error2, clientMethod, callsite, transaction }) {
+    try {
+      this.handleRequestError({ error: error2, clientMethod, callsite, transaction });
+    } catch (err) {
+      if (this.logEmmitter) {
+        this.logEmmitter.emit("error", { message: err.message, target: clientMethod, timestamp: new Date() });
+      }
+      throw err;
+    }
+  }
+  handleRequestError({ error: error2, clientMethod, callsite, transaction }) {
     debug11(error2);
+    if (isMismatchingBatchIndex(error2, transaction)) {
+      throw error2;
+    }
+    if (error2 instanceof NotFoundError2) {
+      throw error2;
+    }
     let message = error2.message;
     if (callsite) {
       message = createErrorMessageWithContext({
@@ -30870,11 +35021,19 @@ var RequestHandler = class {
     }
     message = this.sanitizeMessage(message);
     if (error2.code) {
-      throw new PrismaClientKnownRequestError(message, error2.code, this.client._clientVersion, error2.meta);
+      throw new PrismaClientKnownRequestError(message, {
+        code: error2.code,
+        clientVersion: this.client._clientVersion,
+        meta: error2.meta,
+        batchRequestIdx: error2.batchRequestIdx
+      });
     } else if (error2.isPanic) {
       throw new PrismaClientRustPanicError(message, this.client._clientVersion);
     } else if (error2 instanceof PrismaClientUnknownRequestError) {
-      throw new PrismaClientUnknownRequestError(message, this.client._clientVersion);
+      throw new PrismaClientUnknownRequestError(message, {
+        clientVersion: this.client._clientVersion,
+        batchRequestIdx: error2.batchRequestIdx
+      });
     } else if (error2 instanceof PrismaClientInitializationError) {
       throw new PrismaClientInitializationError(message, this.client._clientVersion);
     } else if (error2 instanceof PrismaClientRustPanicError) {
@@ -30900,14 +35059,37 @@ var RequestHandler = class {
     if (rootField) {
       getPath.push(rootField);
     }
-    getPath.push(...path7.filter((p) => p !== "select" && p !== "include"));
+    getPath.push(...path7.filter((p2) => p2 !== "select" && p2 !== "include"));
     return unpack({ document: document2, data, path: getPath });
+  }
+  applyResultExtensions({ result, modelName, args, extensions }) {
+    if (extensions.isEmpty() || result == null) {
+      return result;
+    }
+    const model = this.client._baseDmmf.getModelMap()[modelName];
+    if (!model) {
+      return result;
+    }
+    return visitQueryResult({
+      result,
+      args: args != null ? args : {},
+      model,
+      dmmf: this.client._baseDmmf,
+      visitor(value, model2, args2) {
+        const modelName2 = dmmfToJSModelName(model2.name);
+        return applyResultExtensions({ result: value, modelName: modelName2, select: args2.select, extensions });
+      }
+    });
   }
   get [Symbol.toStringTag]() {
     return "RequestHandler";
   }
 };
 __name(RequestHandler, "RequestHandler");
+function isMismatchingBatchIndex(error2, transaction) {
+  return hasBatchIndex(error2) && (transaction == null ? void 0 : transaction.kind) === "batch" && error2.batchRequestIdx !== transaction.index;
+}
+__name(isMismatchingBatchIndex, "isMismatchingBatchIndex");
 function batchFindUniqueBy(request2) {
   var _a3;
   if (!request2.document.children[0].name.startsWith("findUnique")) {
@@ -30923,9 +35105,6 @@ function batchFindUniqueBy(request2) {
   return `${request2.document.children[0].name}|${args}|${selectionSet}`;
 }
 __name(batchFindUniqueBy, "batchFindUniqueBy");
-
-// src/runtime/utils/clientVersion.ts
-var clientVersion = require_package2().version;
 
 // src/runtime/utils/deserializeRawResults.ts
 function deserializeRawResults(rows) {
@@ -31234,8 +35413,8 @@ function getAlternative(str, options) {
     value,
     distance: (0, import_js_levenshtein2.default)(str, value)
   }));
-  optionsWithDistances.sort((a, b) => {
-    return a.distance < b.distance ? -1 : 1;
+  optionsWithDistances.sort((a, b2) => {
+    return a.distance < b2.distance ? -1 : 1;
   });
   const bestAlternative = optionsWithDistances[0];
   if (bestAlternative.distance < 3) {
@@ -31244,6 +35423,62 @@ function getAlternative(str, options) {
   return null;
 }
 __name(getAlternative, "getAlternative");
+
+// src/runtime/utils/waitForBatch.ts
+function waitForBatch(promises) {
+  if (promises.length === 0) {
+    return Promise.resolve([]);
+  }
+  return new Promise((resolve, reject) => {
+    const successfulResults = new Array(promises.length);
+    let bestError = null;
+    let done = false;
+    let settledPromisesCount = 0;
+    const settleOnePromise = /* @__PURE__ */ __name(() => {
+      if (done) {
+        return;
+      }
+      settledPromisesCount++;
+      if (settledPromisesCount === promises.length) {
+        done = true;
+        if (bestError) {
+          reject(bestError);
+        } else {
+          resolve(successfulResults);
+        }
+      }
+    }, "settleOnePromise");
+    const immediatelyReject = /* @__PURE__ */ __name((error2) => {
+      if (!done) {
+        done = true;
+        reject(error2);
+      }
+    }, "immediatelyReject");
+    for (let i = 0; i < promises.length; i++) {
+      promises[i].then(
+        (result) => {
+          successfulResults[i] = result;
+          settleOnePromise();
+        },
+        (error2) => {
+          if (!hasBatchIndex(error2)) {
+            immediatelyReject(error2);
+            return;
+          }
+          if (error2.batchRequestIdx === i) {
+            immediatelyReject(error2);
+          } else {
+            if (!bestError) {
+              bestError = error2;
+            }
+            settleOnePromise();
+          }
+        }
+      );
+    }
+  });
+}
+__name(waitForBatch, "waitForBatch");
 
 // src/runtime/getPrismaClient.ts
 var debug12 = src_default("prisma:client");
@@ -31268,7 +35503,9 @@ More Information: https://pris.ly/d/execute-raw
 __name(checkAlter, "checkAlter");
 var actionOperationMap = {
   findUnique: "query",
+  findUniqueOrThrow: "query",
   findFirst: "query",
+  findFirstOrThrow: "query",
   findMany: "query",
   count: "query",
   create: "mutation",
@@ -31287,17 +35524,22 @@ var actionOperationMap = {
   aggregateRaw: "query"
 };
 var TX_ID = Symbol.for("prisma.client.transaction.id");
+var BatchTxIdCounter = {
+  id: 0,
+  nextId() {
+    return ++this.id;
+  }
+};
 function getPrismaClient(config2) {
   class PrismaClient {
     constructor(optionsArg) {
       this._middlewares = new Middlewares();
-      this._transactionId = 1;
       this._getDmmf = callOnce(async (params) => {
         try {
           const dmmf = await this._engine.getDmmf();
           return new DMMFHelper(getPrismaClientDMMF(dmmf));
         } catch (error2) {
-          this._fetcher.handleRequestError({ ...params, error: error2 });
+          this._fetcher.handleAndLogRequestError({ ...params, error: error2 });
         }
       });
       this.$extends = $extends;
@@ -31305,7 +35547,9 @@ function getPrismaClient(config2) {
       if (optionsArg) {
         validatePrismaClientOptions(optionsArg, config2.datasourceNames);
       }
-      this._extensions = [];
+      const logEmitter = new import_events.EventEmitter().on("error", (e2) => {
+      });
+      this._extensions = MergedExtensionsList.empty();
       this._previewFeatures = (_b2 = (_a3 = config2.generator) == null ? void 0 : _a3.previewFeatures) != null ? _b2 : [];
       this._rejectOnNotFound = optionsArg == null ? void 0 : optionsArg.rejectOnNotFound;
       this._clientVersion = (_c = config2.clientVersion) != null ? _c : clientVersion;
@@ -31371,7 +35615,7 @@ function getPrismaClient(config2) {
           showColors: this._errorFormat === "pretty",
           logLevel: options.log && getLogLevel(options.log),
           logQueries: options.log && Boolean(
-            typeof options.log === "string" ? options.log === "query" : options.log.find((o) => typeof o === "string" ? o === "query" : o.level === "query")
+            typeof options.log === "string" ? options.log === "query" : options.log.find((o2) => typeof o2 === "string" ? o2 === "query" : o2.level === "query")
           ),
           env: (_i = (_h = loadedEnv == null ? void 0 : loadedEnv.parsed) != null ? _h : (_g = config2.injectableEdgeEnv) == null ? void 0 : _g.parsed) != null ? _i : {},
           flags: [],
@@ -31381,7 +35625,8 @@ function getPrismaClient(config2) {
           inlineSchema: config2.inlineSchema,
           inlineDatasources: config2.inlineDatasources,
           inlineSchemaHash: config2.inlineSchemaHash,
-          tracingConfig: this._tracingConfig
+          tracingConfig: this._tracingConfig,
+          logEmitter
         };
         debug12("clientVersion", config2.clientVersion);
         debug12("clientEngineType", this._dataProxy ? "dataproxy" : this._clientEngineType);
@@ -31391,10 +35636,10 @@ function getPrismaClient(config2) {
         }
         this._engine = this.getEngine();
         void this._getActiveProvider();
-        this._fetcher = new RequestHandler(this, this._hooks);
+        this._fetcher = new RequestHandler(this, this._hooks, logEmitter);
         if (options.log) {
-          for (const log4 of options.log) {
-            const level = typeof log4 === "string" ? log4 : log4.emit === "stdout" ? log4.level : null;
+          for (const log3 of options.log) {
+            const level = typeof log3 === "string" ? log3 : log3.emit === "stdout" ? log3.level : null;
             if (level) {
               this.$on(level, (event) => {
                 var _a4;
@@ -31404,11 +35649,11 @@ function getPrismaClient(config2) {
           }
         }
         this._metrics = new MetricsClient(this._engine);
-      } catch (e) {
-        e.clientVersion = this._clientVersion;
-        throw e;
+      } catch (e2) {
+        e2.clientVersion = this._clientVersion;
+        throw e2;
       }
-      return applyModels(this);
+      return applyModelsAndClientExtensions(this);
     }
     get [Symbol.toStringTag]() {
       return "PrismaClient";
@@ -31462,9 +35707,9 @@ function getPrismaClient(config2) {
     $connect() {
       try {
         return this._engine.start();
-      } catch (e) {
-        e.clientVersion = this._clientVersion;
-        throw e;
+      } catch (e2) {
+        e2.clientVersion = this._clientVersion;
+        throw e2;
       }
     }
     async _runDisconnect() {
@@ -31477,10 +35722,11 @@ function getPrismaClient(config2) {
     async $disconnect() {
       try {
         await this._engine.stop();
-      } catch (e) {
-        e.clientVersion = this._clientVersion;
-        throw e;
+      } catch (e2) {
+        e2.clientVersion = this._clientVersion;
+        throw e2;
       } finally {
+        clearLogs();
         if (!this._dataProxy) {
           this._dmmf = void 0;
         }
@@ -31490,7 +35736,7 @@ function getPrismaClient(config2) {
       try {
         const configResult = await this._engine.getConfig();
         this._activeProvider = configResult.datasources[0].activeProvider;
-      } catch (e) {
+      } catch (e2) {
       }
     }
     $executeRawInternal(transaction, lock, query2, ...values) {
@@ -31744,18 +35990,18 @@ new PrismaClient({
       promises,
       options
     }) {
-      const txId = this._transactionId++;
+      const id = BatchTxIdCounter.nextId();
       const lock = getLockCountPromise(promises.length);
-      const requests = promises.map((request2) => {
-        var _a3;
+      const requests = promises.map((request2, index) => {
+        var _a3, _b2;
         if ((request2 == null ? void 0 : request2[Symbol.toStringTag]) !== "PrismaPromise") {
           throw new Error(
             `All elements of the array need to be Prisma Client promises. Hint: Please make sure you are not awaiting the Prisma client calls you intended to pass in the $transaction function.`
           );
         }
-        return (_a3 = request2.requestTransaction) == null ? void 0 : _a3.call(request2, { id: txId, isolationLevel: options == null ? void 0 : options.isolationLevel }, lock);
+        return (_b2 = (_a3 = request2.requestTransaction) == null ? void 0 : _a3.call(request2, { id, index, isolationLevel: options == null ? void 0 : options.isolationLevel }, lock)) != null ? _b2 : request2;
       });
-      return Promise.all(requests);
+      return waitForBatch(requests);
     }
     async _transactionWithCallback({
       callback,
@@ -31765,18 +36011,18 @@ new PrismaClient({
       const info2 = await this._engine.transaction("start", headers, options);
       let result;
       try {
-        result = await callback(transactionProxy(this, { id: info2.id }));
+        result = await callback(transactionProxy(this, { id: info2.id, payload: info2.payload }));
         await this._engine.transaction("commit", headers, info2);
-      } catch (e) {
+      } catch (e2) {
         await this._engine.transaction("rollback", headers, info2).catch(() => {
         });
-        throw e;
+        throw e2;
       }
       return result;
     }
     $transaction(input, options) {
       let callback;
-      if (typeof input === "function" && this._hasPreviewFlag("interactiveTransactions")) {
+      if (typeof input === "function") {
         callback = /* @__PURE__ */ __name(() => this._transactionWithCallback({ callback: input, options }), "callback");
       } else {
         callback = /* @__PURE__ */ __name(() => this._transactionWithArray({ promises: input, options }), "callback");
@@ -31820,7 +36066,7 @@ new PrismaClient({
           const nextMiddleware = this._middlewares.query.get(++index);
           if (nextMiddleware) {
             return runInChildSpan(spanOptions.middleware, async (span) => {
-              return nextMiddleware(changedMiddlewareParams, (p) => (span == null ? void 0 : span.end(), consumer(p)));
+              return nextMiddleware(changedMiddlewareParams, (p2) => (span == null ? void 0 : span.end(), consumer(p2)));
             });
           }
           const { runInTransaction, ...changedRequestParams } = changedMiddlewareParams;
@@ -31831,7 +36077,7 @@ new PrismaClient({
           if (!runInTransaction) {
             requestParams.transaction = void 0;
           }
-          return this._executeRequest(requestParams);
+          return applyQueryExtensions(this, requestParams);
         }, "consumer");
         return await runInChildSpan(spanOptions.operation, () => {
           if (true) {
@@ -31840,9 +36086,9 @@ new PrismaClient({
           }
           return consumer(params);
         });
-      } catch (e) {
-        e.clientVersion = this._clientVersion;
-        throw e;
+      } catch (e2) {
+        e2.clientVersion = this._clientVersion;
+        throw e2;
       }
     }
     async _executeRequest({
@@ -31854,6 +36100,7 @@ new PrismaClient({
       action,
       model,
       headers,
+      argsMapper,
       transaction,
       lock,
       unpacker,
@@ -31863,6 +36110,7 @@ new PrismaClient({
       if (this._dmmf === void 0) {
         this._dmmf = await this._getDmmf({ clientMethod, callsite });
       }
+      args = argsMapper ? argsMapper(args) : args;
       let rootField;
       const operation = actionOperationMap[action];
       if (action === "executeRaw" || action === "queryRaw" || action === "runCommandRaw") {
@@ -31895,7 +36143,8 @@ new PrismaClient({
           rootField,
           rootTypeName: operation,
           select: args,
-          modelName: model
+          modelName: model,
+          extensions: this._extensions
         });
         document3.validate(args, false, clientMethod, this._errorFormat, callsite);
         return transformDocument(document3);
@@ -31931,6 +36180,7 @@ new PrismaClient({
         callsite,
         args,
         engineHook: this._middlewares.engine.get(0),
+        extensions: this._extensions,
         headers,
         transaction,
         unpacker,
@@ -31977,6 +36227,12 @@ function transactionProxy(thing, transaction) {
         };
       }
       return transactionProxy(target[prop], transaction);
+    },
+    has(target, prop) {
+      if (forbidden.includes(prop)) {
+        return false;
+      }
+      return Reflect.has(target, prop);
     }
   });
 }
@@ -32025,10 +36281,10 @@ __name(makeStrictEnum, "makeStrictEnum");
 // src/runtime/utils/find.ts
 var import_fs10 = __toESM(require("fs"));
 var import_path6 = __toESM(require("path"));
-var import_util7 = require("util");
-var readdirAsync = (0, import_util7.promisify)(import_fs10.default.readdir);
-var realpathAsync = (0, import_util7.promisify)(import_fs10.default.realpath);
-var statAsync = (0, import_util7.promisify)(import_fs10.default.stat);
+var import_util8 = require("util");
+var readdirAsync = (0, import_util8.promisify)(import_fs10.default.readdir);
+var realpathAsync = (0, import_util8.promisify)(import_fs10.default.realpath);
+var statAsync = (0, import_util8.promisify)(import_fs10.default.stat);
 var readdirSync = import_fs10.default.readdirSync;
 var realpathSync = import_fs10.default.realpathSync;
 var statSync = import_fs10.default.statSync;
@@ -32081,7 +36337,7 @@ function findSync(root, match, types = ["f", "d", "l"], deep = [], limit = Infin
         findSync(itemPath, match, types, deep, limit, handler, found, seen);
       }
     }
-  } catch (e) {
+  } catch (e2) {
   }
   return found;
 }
@@ -32102,14 +36358,17 @@ var decompressFromBase642 = lzString.decompressFromBase64;
   Debug,
   Decimal,
   Engine,
+  Extensions,
   MetricsClient,
   NotFoundError,
+  PrismaClientExtensionError,
   PrismaClientInitializationError,
   PrismaClientKnownRequestError,
   PrismaClientRustPanicError,
   PrismaClientUnknownRequestError,
   PrismaClientValidationError,
   Sql,
+  Types,
   decompressFromBase64,
   empty,
   findSync,
