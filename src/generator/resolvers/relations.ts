@@ -140,7 +140,7 @@ export default function generateRelationsResolverClassesFromModel(
                         name: "TypeGraphQL.Args",
                         arguments: generatorOptions.emitRedundantDecoratorArgs
                           ? [`_returns => ${field.argsTypeName}`]
-                          : undefined,
+                          : [],
                       },
                     ],
                   },

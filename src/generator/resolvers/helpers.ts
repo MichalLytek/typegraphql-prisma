@@ -48,7 +48,7 @@ export function generateCrudResolverClassMethodDeclaration(
                   name: "TypeGraphQL.Args",
                   arguments: generatorOptions.emitRedundantDecoratorArgs
                     ? [`_returns => ${action.argsTypeName}`]
-                    : undefined,
+                    : [],
                 },
               ],
             },
