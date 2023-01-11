@@ -43,7 +43,7 @@ export async function generate(options: GeneratorOptions) {
       ALL_EMIT_BLOCK_KINDS,
     ),
     useSimpleInputs: parseStringBoolean(generatorConfig.useSimpleInputs),
-    emitRedundantDecoratorArgs: parseStringBoolean(
+    emitRedundantTypesInfo: parseStringBoolean(
       generatorConfig.emitRedundantDecoratorArgs,
     ),
     customPrismaImportPath: generatorConfig.customPrismaImportPath,
