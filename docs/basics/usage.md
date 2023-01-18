@@ -216,14 +216,34 @@ to even transform them dynamically (e.g. excluding all with `User` in name).
 
 ## Context configuration
 
-When using the generated resolvers, you have to first provide the `PrismaClient` instance into the context under `prisma` key, to make it available for the crud and relations resolvers:
+When using the generated resolvers, you have to first provide the `PrismaClient` instance into the context under `prisma` key, to make it available for the crud and relations resolvers.
 
-```ts {3,8}
+Below you can find an example using Apollo Server V4:
+
+```ts {5,11}
+import { PrismaClient } from "@prisma/client";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+
+const prisma = new PrismaClient();
+
+const server = new ApolloServer<MyContext>({
+  schema, // from previous step
+});
+const { url } = await startStandaloneServer(server, {
+  context: () => ({ prisma }),
+  listen: { port: 4000 },
+});
+```
+
+But you can also use any other GraphQL server library, like `graphql-yoga` v3:
+
+```ts {3,7}
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const server = new ApolloServer({
+const yoga = createYoga<{}, MyContext>({
   schema, // from previous step
   context: () => ({ prisma }),
 });
