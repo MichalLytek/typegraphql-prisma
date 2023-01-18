@@ -9,7 +9,7 @@ export class UpsertOnePostResolver {
   @TypeGraphQL.Mutation(_returns => Post, {
     nullable: false
   })
-  async upsertOnePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOnePostArgs): Promise<Post> {
+  async upsertOnePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpsertOnePostArgs) args: UpsertOnePostArgs): Promise<Post> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.upsert({
       ...args,

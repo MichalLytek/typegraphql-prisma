@@ -9,7 +9,7 @@ export class CreateOneCategoryResolver {
   @TypeGraphQL.Mutation(_returns => Category, {
     nullable: false
   })
-  async createOneCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneCategoryArgs): Promise<Category> {
+  async createOneCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => CreateOneCategoryArgs) args: CreateOneCategoryArgs): Promise<Category> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).category.create({
       ...args,

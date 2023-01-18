@@ -254,6 +254,7 @@ export default async function generateCode(
         baseDirPath,
         dmmfDocument,
         relationModel,
+        options,
       ),
     );
     const relationResolversBarrelExportSourceFile = project.createSourceFile(
@@ -360,6 +361,7 @@ export default async function generateCode(
         mapping,
         model,
         dmmfDocument,
+        options,
       );
       mapping.actions.forEach(async action => {
         const model = dmmfDocument.datamodel.models.find(
@@ -372,6 +374,7 @@ export default async function generateCode(
           action,
           mapping,
           dmmfDocument,
+          options,
         );
       });
     });

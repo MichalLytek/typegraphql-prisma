@@ -9,7 +9,7 @@ export class UpdateOneDirectorResolver {
   @TypeGraphQL.Mutation(_returns => Director, {
     nullable: true
   })
-  async updateOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneDirectorArgs): Promise<Director | null> {
+  async updateOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpdateOneDirectorArgs) args: UpdateOneDirectorArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.update({
       ...args,

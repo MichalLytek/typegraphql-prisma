@@ -9,7 +9,7 @@ export class FindUniquePatientOrThrowResolver {
   @TypeGraphQL.Query(_returns => Patient, {
     nullable: true
   })
-  async getPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniquePatientOrThrowArgs): Promise<Patient | null> {
+  async getPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindUniquePatientOrThrowArgs) args: FindUniquePatientOrThrowArgs): Promise<Patient | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).patient.findUniqueOrThrow({
       ...args,

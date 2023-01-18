@@ -9,7 +9,7 @@ export class DeleteOnePostResolver {
   @TypeGraphQL.Mutation(_returns => Post, {
     nullable: true
   })
-  async deleteOnePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOnePostArgs): Promise<Post | null> {
+  async deleteOnePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteOnePostArgs) args: DeleteOnePostArgs): Promise<Post | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.delete({
       ...args,

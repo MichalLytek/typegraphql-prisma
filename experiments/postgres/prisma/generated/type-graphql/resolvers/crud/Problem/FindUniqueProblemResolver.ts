@@ -9,7 +9,7 @@ export class FindUniqueProblemResolver {
   @TypeGraphQL.Query(_returns => Problem, {
     nullable: true
   })
-  async problem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueProblemArgs): Promise<Problem | null> {
+  async problem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindUniqueProblemArgs) args: FindUniqueProblemArgs): Promise<Problem | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).problem.findUnique({
       ...args,

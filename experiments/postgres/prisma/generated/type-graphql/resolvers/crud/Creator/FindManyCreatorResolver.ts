@@ -9,7 +9,7 @@ export class FindManyCreatorResolver {
   @TypeGraphQL.Query(_returns => [Creator], {
     nullable: false
   })
-  async creators(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyCreatorArgs): Promise<Creator[]> {
+  async creators(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyCreatorArgs) args: FindManyCreatorArgs): Promise<Creator[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).creator.findMany({
       ...args,

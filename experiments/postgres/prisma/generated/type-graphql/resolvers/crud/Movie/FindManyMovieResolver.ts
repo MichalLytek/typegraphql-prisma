@@ -9,7 +9,7 @@ export class FindManyMovieResolver {
   @TypeGraphQL.Query(_returns => [Movie], {
     nullable: false
   })
-  async movies(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyMovieArgs): Promise<Movie[]> {
+  async movies(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyMovieArgs) args: FindManyMovieArgs): Promise<Movie[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).movie.findMany({
       ...args,

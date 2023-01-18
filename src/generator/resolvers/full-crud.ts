@@ -13,6 +13,7 @@ import {
 import { generateCrudResolverClassMethodDeclaration } from "./helpers";
 import { DmmfDocument } from "../dmmf/dmmf-document";
 import { DMMF } from "../dmmf/types";
+import { GeneratorOptions } from "../options";
 
 export default function generateCrudResolverClassFromMapping(
   project: Project,
@@ -20,6 +21,7 @@ export default function generateCrudResolverClassFromMapping(
   mapping: DMMF.ModelMapping,
   model: DMMF.Model,
   dmmfDocument: DmmfDocument,
+  generatorOptions: GeneratorOptions,
 ) {
   const resolverDirPath = path.resolve(
     baseDirPath,
@@ -70,6 +72,7 @@ export default function generateCrudResolverClassFromMapping(
           action,
           mapping,
           dmmfDocument,
+          generatorOptions,
         ),
     ),
   });

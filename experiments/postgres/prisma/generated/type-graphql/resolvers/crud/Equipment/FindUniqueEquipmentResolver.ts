@@ -9,7 +9,7 @@ export class FindUniqueEquipmentResolver {
   @TypeGraphQL.Query(_returns => Equipment, {
     nullable: true
   })
-  async equipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueEquipmentArgs): Promise<Equipment | null> {
+  async equipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindUniqueEquipmentArgs) args: FindUniqueEquipmentArgs): Promise<Equipment | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).equipment.findUnique({
       ...args,

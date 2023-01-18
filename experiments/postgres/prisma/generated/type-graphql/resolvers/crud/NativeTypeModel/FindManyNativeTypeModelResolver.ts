@@ -9,7 +9,7 @@ export class FindManyNativeTypeModelResolver {
   @TypeGraphQL.Query(_returns => [NativeTypeModel], {
     nullable: false
   })
-  async nativeTypeModels(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyNativeTypeModelArgs): Promise<NativeTypeModel[]> {
+  async nativeTypeModels(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyNativeTypeModelArgs) args: FindManyNativeTypeModelArgs): Promise<NativeTypeModel[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).nativeTypeModel.findMany({
       ...args,

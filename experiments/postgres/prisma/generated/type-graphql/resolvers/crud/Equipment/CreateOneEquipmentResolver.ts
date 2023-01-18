@@ -9,7 +9,7 @@ export class CreateOneEquipmentResolver {
   @TypeGraphQL.Mutation(_returns => Equipment, {
     nullable: false
   })
-  async createOneEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneEquipmentArgs): Promise<Equipment> {
+  async createOneEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => CreateOneEquipmentArgs) args: CreateOneEquipmentArgs): Promise<Equipment> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).equipment.create({
       ...args,

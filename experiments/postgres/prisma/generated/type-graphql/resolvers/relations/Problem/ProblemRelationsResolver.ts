@@ -10,7 +10,7 @@ export class ProblemRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Creator], {
     nullable: false
   })
-  async likedBy(@TypeGraphQL.Root() problem: Problem, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ProblemLikedByArgs): Promise<Creator[]> {
+  async likedBy(@TypeGraphQL.Root() problem: Problem, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args(_returns => ProblemLikedByArgs) args: ProblemLikedByArgs): Promise<Creator[]> {
     return getPrismaFromContext(ctx).problem.findUnique({
       where: {
         id: problem.id,
@@ -21,7 +21,7 @@ export class ProblemRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => Creator, {
     nullable: true
   })
-  async creator(@TypeGraphQL.Root() problem: Problem, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ProblemCreatorArgs): Promise<Creator | null> {
+  async creator(@TypeGraphQL.Root() problem: Problem, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args(_returns => ProblemCreatorArgs) args: ProblemCreatorArgs): Promise<Creator | null> {
     return getPrismaFromContext(ctx).problem.findUnique({
       where: {
         id: problem.id,

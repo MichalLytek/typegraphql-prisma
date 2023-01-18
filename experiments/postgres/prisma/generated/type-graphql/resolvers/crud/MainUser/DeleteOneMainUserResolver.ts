@@ -9,7 +9,7 @@ export class DeleteOneMainUserResolver {
   @TypeGraphQL.Mutation(_returns => MainUser, {
     nullable: true
   })
-  async deleteOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneMainUserArgs): Promise<MainUser | null> {
+  async deleteOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteOneMainUserArgs) args: DeleteOneMainUserArgs): Promise<MainUser | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.delete({
       ...args,

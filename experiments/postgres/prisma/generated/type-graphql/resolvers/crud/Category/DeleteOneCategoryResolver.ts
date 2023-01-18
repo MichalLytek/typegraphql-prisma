@@ -9,7 +9,7 @@ export class DeleteOneCategoryResolver {
   @TypeGraphQL.Mutation(_returns => Category, {
     nullable: true
   })
-  async deleteOneCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneCategoryArgs): Promise<Category | null> {
+  async deleteOneCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteOneCategoryArgs) args: DeleteOneCategoryArgs): Promise<Category | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).category.delete({
       ...args,

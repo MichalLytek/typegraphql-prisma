@@ -10,7 +10,7 @@ export class GroupByProblemResolver {
   @TypeGraphQL.Query(_returns => [ProblemGroupBy], {
     nullable: false
   })
-  async groupByProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByProblemArgs): Promise<ProblemGroupBy[]> {
+  async groupByProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => GroupByProblemArgs) args: GroupByProblemArgs): Promise<ProblemGroupBy[]> {
     const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).problem.groupBy({
       ...args,

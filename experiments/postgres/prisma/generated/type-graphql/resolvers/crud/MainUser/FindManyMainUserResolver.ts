@@ -9,7 +9,7 @@ export class FindManyMainUserResolver {
   @TypeGraphQL.Query(_returns => [MainUser], {
     nullable: false
   })
-  async mainUsers(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyMainUserArgs): Promise<MainUser[]> {
+  async mainUsers(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyMainUserArgs) args: FindManyMainUserArgs): Promise<MainUser[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findMany({
       ...args,

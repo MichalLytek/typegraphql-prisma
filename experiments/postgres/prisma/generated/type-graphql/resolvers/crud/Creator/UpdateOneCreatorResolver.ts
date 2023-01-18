@@ -9,7 +9,7 @@ export class UpdateOneCreatorResolver {
   @TypeGraphQL.Mutation(_returns => Creator, {
     nullable: true
   })
-  async updateOneCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneCreatorArgs): Promise<Creator | null> {
+  async updateOneCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpdateOneCreatorArgs) args: UpdateOneCreatorArgs): Promise<Creator | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).creator.update({
       ...args,

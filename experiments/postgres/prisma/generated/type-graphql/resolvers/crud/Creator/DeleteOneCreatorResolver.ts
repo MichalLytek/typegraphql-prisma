@@ -9,7 +9,7 @@ export class DeleteOneCreatorResolver {
   @TypeGraphQL.Mutation(_returns => Creator, {
     nullable: true
   })
-  async deleteOneCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneCreatorArgs): Promise<Creator | null> {
+  async deleteOneCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteOneCreatorArgs) args: DeleteOneCreatorArgs): Promise<Creator | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).creator.delete({
       ...args,

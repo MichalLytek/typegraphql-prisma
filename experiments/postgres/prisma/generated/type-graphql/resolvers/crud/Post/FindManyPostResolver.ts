@@ -9,7 +9,7 @@ export class FindManyPostResolver {
   @TypeGraphQL.Query(_returns => [Post], {
     nullable: false
   })
-  async posts(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyPostArgs): Promise<Post[]> {
+  async posts(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyPostArgs) args: FindManyPostArgs): Promise<Post[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.findMany({
       ...args,

@@ -9,7 +9,7 @@ export class UpsertOneNativeTypeModelResolver {
   @TypeGraphQL.Mutation(_returns => NativeTypeModel, {
     nullable: false
   })
-  async upsertOneNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneNativeTypeModelArgs): Promise<NativeTypeModel> {
+  async upsertOneNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpsertOneNativeTypeModelArgs) args: UpsertOneNativeTypeModelArgs): Promise<NativeTypeModel> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).nativeTypeModel.upsert({
       ...args,

@@ -2,11 +2,13 @@ import { OptionalKind, MethodDeclarationStructure, Writers } from "ts-morph";
 
 import { DmmfDocument } from "../dmmf/dmmf-document";
 import { DMMF } from "../dmmf/types";
+import { GeneratorOptions } from "../options";
 
 export function generateCrudResolverClassMethodDeclaration(
   action: DMMF.Action,
   mapping: DMMF.ModelMapping,
   dmmfDocument: DmmfDocument,
+  generatorOptions: GeneratorOptions,
 ): OptionalKind<MethodDeclarationStructure> {
   return {
     name: action.name,
@@ -41,7 +43,14 @@ export function generateCrudResolverClassMethodDeclaration(
             {
               name: "args",
               type: action.argsTypeName,
-              decorators: [{ name: "TypeGraphQL.Args", arguments: [] }],
+              decorators: [
+                {
+                  name: "TypeGraphQL.Args",
+                  arguments: generatorOptions.emitRedundantTypesInfo
+                    ? [`_returns => ${action.argsTypeName}`]
+                    : [],
+                },
+              ],
             },
           ]),
     ],

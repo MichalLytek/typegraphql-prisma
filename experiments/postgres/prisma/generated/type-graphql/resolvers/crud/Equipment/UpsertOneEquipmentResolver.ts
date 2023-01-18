@@ -9,7 +9,7 @@ export class UpsertOneEquipmentResolver {
   @TypeGraphQL.Mutation(_returns => Equipment, {
     nullable: false
   })
-  async upsertOneEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneEquipmentArgs): Promise<Equipment> {
+  async upsertOneEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpsertOneEquipmentArgs) args: UpsertOneEquipmentArgs): Promise<Equipment> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).equipment.upsert({
       ...args,

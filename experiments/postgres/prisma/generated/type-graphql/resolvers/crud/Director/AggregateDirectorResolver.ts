@@ -10,7 +10,7 @@ export class AggregateDirectorResolver {
   @TypeGraphQL.Query(_returns => AggregateDirector, {
     nullable: false
   })
-  async aggregateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateDirectorArgs): Promise<AggregateDirector> {
+  async aggregateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => AggregateDirectorArgs) args: AggregateDirectorArgs): Promise<AggregateDirector> {
     return getPrismaFromContext(ctx).director.aggregate({
       ...args,
       ...transformInfoIntoPrismaArgs(info),

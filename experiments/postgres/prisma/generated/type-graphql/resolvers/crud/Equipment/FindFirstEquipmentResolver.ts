@@ -9,7 +9,7 @@ export class FindFirstEquipmentResolver {
   @TypeGraphQL.Query(_returns => Equipment, {
     nullable: true
   })
-  async findFirstEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstEquipmentArgs): Promise<Equipment | null> {
+  async findFirstEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindFirstEquipmentArgs) args: FindFirstEquipmentArgs): Promise<Equipment | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).equipment.findFirst({
       ...args,
