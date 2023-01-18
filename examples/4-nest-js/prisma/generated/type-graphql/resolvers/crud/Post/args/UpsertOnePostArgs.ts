@@ -5,7 +5,7 @@ import { PostUpdateInput } from "../../../inputs/PostUpdateInput";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
-export class UpsertPostArgs {
+export class UpsertOnePostArgs {
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
     nullable: false
   })

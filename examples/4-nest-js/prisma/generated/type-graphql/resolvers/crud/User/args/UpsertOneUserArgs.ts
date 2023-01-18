@@ -5,7 +5,7 @@ import { UserUpdateInput } from "../../../inputs/UserUpdateInput";
 import { UserWhereUniqueInput } from "../../../inputs/UserWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
-export class UpsertUserArgs {
+export class UpsertOneUserArgs {
   @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
     nullable: false
   })

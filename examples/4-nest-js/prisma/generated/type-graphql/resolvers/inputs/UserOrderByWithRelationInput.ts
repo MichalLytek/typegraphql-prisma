@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { PostOrderByRelationAggregateInput } from "../inputs/PostOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType({
+@TypeGraphQL.InputType("UserOrderByWithRelationInput", {
   isAbstract: true
 })
 export class UserOrderByWithRelationInput {

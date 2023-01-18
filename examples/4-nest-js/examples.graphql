@@ -41,7 +41,7 @@ query CustomResolversQuery {
 }
 
 mutation UpdatePost {
-  updatePost(
+  updateOnePost(
     where: { id: "ckqjmnrzs0010ietp9v164vh4" }
     data: { published: { set: true } }
   ) {
@@ -50,13 +50,13 @@ mutation UpdatePost {
 }
 
 mutation AddUser {
-  createUser(data: { email: "test@test.test", name: "Test" }) {
+  createOneUser(data: { email: "test@test.test", name: "Test" }) {
     ...UserData
   }
 }
 
 mutation AddUserWithPost {
-  createUser(
+  createOneUser(
     data: {
       email: "test2@test.test"
       name: "Test2"

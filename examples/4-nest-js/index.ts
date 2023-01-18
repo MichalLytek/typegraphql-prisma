@@ -5,6 +5,7 @@ import { Resolver, Query, FieldResolver, Ctx, Root } from "type-graphql";
 import { TypeGraphQLModule } from "typegraphql-nestjs";
 import { NestFactory } from "@nestjs/core";
 import { Module } from "@nestjs/common";
+import { ApolloDriver } from "@nestjs/apollo";
 import {
   NestExpressApplication,
   ExpressAdapter,
@@ -53,8 +54,7 @@ async function main() {
     imports: [
       // use the TypeGraphQLModule to expose Prisma by GraphQL
       TypeGraphQLModule.forRoot({
-        playground: true,
-        introspection: true,
+        driver: ApolloDriver,
         path: "/",
         emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
         validate: false,
