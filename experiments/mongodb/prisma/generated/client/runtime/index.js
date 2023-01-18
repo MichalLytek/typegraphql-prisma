@@ -1613,23 +1613,23 @@ var require_has_flag = __commonJS({
 var require_supports_color = __commonJS({
   "../../node_modules/.pnpm/supports-color@7.2.0/node_modules/supports-color/index.js"(exports, module2) {
     "use strict";
-    var os3 = require("os");
+    var os2 = require("os");
     var tty = require("tty");
     var hasFlag = require_has_flag();
-    var { env: env2 } = process;
+    var { env } = process;
     var forceColor;
     if (hasFlag("no-color") || hasFlag("no-colors") || hasFlag("color=false") || hasFlag("color=never")) {
       forceColor = 0;
     } else if (hasFlag("color") || hasFlag("colors") || hasFlag("color=true") || hasFlag("color=always")) {
       forceColor = 1;
     }
-    if ("FORCE_COLOR" in env2) {
-      if (env2.FORCE_COLOR === "true") {
+    if ("FORCE_COLOR" in env) {
+      if (env.FORCE_COLOR === "true") {
         forceColor = 1;
-      } else if (env2.FORCE_COLOR === "false") {
+      } else if (env.FORCE_COLOR === "false") {
         forceColor = 0;
       } else {
-        forceColor = env2.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env2.FORCE_COLOR, 10), 3);
+        forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
       }
     }
     function translateLevel(level) {
@@ -1658,44 +1658,44 @@ var require_supports_color = __commonJS({
         return 0;
       }
       const min2 = forceColor || 0;
-      if (env2.TERM === "dumb") {
+      if (env.TERM === "dumb") {
         return min2;
       }
       if (process.platform === "win32") {
-        const osRelease = os3.release().split(".");
+        const osRelease = os2.release().split(".");
         if (Number(osRelease[0]) >= 10 && Number(osRelease[2]) >= 10586) {
           return Number(osRelease[2]) >= 14931 ? 3 : 2;
         }
         return 1;
       }
-      if ("CI" in env2) {
-        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE"].some((sign2) => sign2 in env2) || env2.CI_NAME === "codeship") {
+      if ("CI" in env) {
+        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE"].some((sign2) => sign2 in env) || env.CI_NAME === "codeship") {
           return 1;
         }
         return min2;
       }
-      if ("TEAMCITY_VERSION" in env2) {
-        return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env2.TEAMCITY_VERSION) ? 1 : 0;
+      if ("TEAMCITY_VERSION" in env) {
+        return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
       }
-      if (env2.COLORTERM === "truecolor") {
+      if (env.COLORTERM === "truecolor") {
         return 3;
       }
-      if ("TERM_PROGRAM" in env2) {
-        const version = parseInt((env2.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
-        switch (env2.TERM_PROGRAM) {
+      if ("TERM_PROGRAM" in env) {
+        const version = parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
+        switch (env.TERM_PROGRAM) {
           case "iTerm.app":
             return version >= 3 ? 3 : 2;
           case "Apple_Terminal":
             return 2;
         }
       }
-      if (/-256(color)?$/i.test(env2.TERM)) {
+      if (/-256(color)?$/i.test(env.TERM)) {
         return 2;
       }
-      if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env2.TERM)) {
+      if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
         return 1;
       }
-      if ("COLORTERM" in env2) {
+      if ("COLORTERM" in env) {
         return 1;
       }
       return min2;
@@ -1818,14 +1818,14 @@ var require_templates = __commonJS({
       return results;
     }
     __name(parseStyle, "parseStyle");
-    function buildStyle(chalk12, styles) {
+    function buildStyle(chalk13, styles) {
       const enabled = {};
       for (const layer of styles) {
         for (const style of layer.styles) {
           enabled[style[0]] = layer.inverse ? null : style.slice(1);
         }
       }
-      let current = chalk12;
+      let current = chalk13;
       for (const [styleName, styles2] of Object.entries(enabled)) {
         if (!Array.isArray(styles2)) {
           continue;
@@ -1838,7 +1838,7 @@ var require_templates = __commonJS({
       return current;
     }
     __name(buildStyle, "buildStyle");
-    module2.exports = (chalk12, temporary) => {
+    module2.exports = (chalk13, temporary) => {
       const styles = [];
       const chunks = [];
       let chunk = [];
@@ -1848,13 +1848,13 @@ var require_templates = __commonJS({
         } else if (style) {
           const string = chunk.join("");
           chunk = [];
-          chunks.push(styles.length === 0 ? string : buildStyle(chalk12, styles)(string));
+          chunks.push(styles.length === 0 ? string : buildStyle(chalk13, styles)(string));
           styles.push({ inverse, styles: parseStyle(style) });
         } else if (close) {
           if (styles.length === 0) {
             throw new Error("Found extraneous } in Chalk template literal");
           }
-          chunks.push(buildStyle(chalk12, styles)(chunk.join("")));
+          chunks.push(buildStyle(chalk13, styles)(chunk.join("")));
           chunk = [];
           styles.pop();
         } else {
@@ -1881,7 +1881,7 @@ var require_source = __commonJS({
       stringReplaceAll,
       stringEncaseCRLFWithFirstIndex
     } = require_util();
-    var { isArray: isArray2 } = Array;
+    var { isArray } = Array;
     var levelMapping = [
       "ansi",
       "ansi",
@@ -1903,16 +1903,16 @@ var require_source = __commonJS({
     };
     __name(ChalkClass, "ChalkClass");
     var chalkFactory = /* @__PURE__ */ __name((options) => {
-      const chalk13 = {};
-      applyOptions(chalk13, options);
-      chalk13.template = (...arguments_) => chalkTag(chalk13.template, ...arguments_);
-      Object.setPrototypeOf(chalk13, Chalk.prototype);
-      Object.setPrototypeOf(chalk13.template, chalk13);
-      chalk13.template.constructor = () => {
+      const chalk14 = {};
+      applyOptions(chalk14, options);
+      chalk14.template = (...arguments_) => chalkTag(chalk14.template, ...arguments_);
+      Object.setPrototypeOf(chalk14, Chalk.prototype);
+      Object.setPrototypeOf(chalk14.template, chalk14);
+      chalk14.template.constructor = () => {
         throw new Error("`chalk.constructor()` is deprecated. Use `new chalk.Instance()` instead.");
       };
-      chalk13.template.Instance = ChalkClass;
-      return chalk13.template;
+      chalk14.template.Instance = ChalkClass;
+      return chalk14.template;
     }, "chalkFactory");
     function Chalk(options) {
       return chalkFactory(options);
@@ -1991,7 +1991,7 @@ var require_source = __commonJS({
     }, "createStyler");
     var createBuilder = /* @__PURE__ */ __name((self2, _styler, _isEmpty) => {
       const builder = /* @__PURE__ */ __name((...arguments_) => {
-        if (isArray2(arguments_[0]) && isArray2(arguments_[0].raw)) {
+        if (isArray(arguments_[0]) && isArray(arguments_[0].raw)) {
           return applyStyle(builder, chalkTag(builder, ...arguments_));
         }
         return applyStyle(builder, arguments_.length === 1 ? "" + arguments_[0] : arguments_.join(" "));
@@ -2024,9 +2024,9 @@ var require_source = __commonJS({
       return openAll + string + closeAll;
     }, "applyStyle");
     var template;
-    var chalkTag = /* @__PURE__ */ __name((chalk13, ...strings) => {
+    var chalkTag = /* @__PURE__ */ __name((chalk14, ...strings) => {
       const [firstString] = strings;
-      if (!isArray2(firstString) || !isArray2(firstString.raw)) {
+      if (!isArray(firstString) || !isArray(firstString.raw)) {
         return strings.join(" ");
       }
       const arguments_ = strings.slice(1);
@@ -2040,14 +2040,14 @@ var require_source = __commonJS({
       if (template === void 0) {
         template = require_templates();
       }
-      return template(chalk13, parts.join(""));
+      return template(chalk14, parts.join(""));
     }, "chalkTag");
     Object.defineProperties(Chalk.prototype, styles);
-    var chalk12 = Chalk();
-    chalk12.supportsColor = stdoutColor;
-    chalk12.stderr = Chalk({ level: stderrColor ? stderrColor.level : 0 });
-    chalk12.stderr.supportsColor = stderrColor;
-    module2.exports = chalk12;
+    var chalk13 = Chalk();
+    chalk13.supportsColor = stdoutColor;
+    chalk13.stderr = Chalk({ level: stderrColor ? stderrColor.level : 0 });
+    chalk13.stderr.supportsColor = stderrColor;
+    module2.exports = chalk13;
   }
 });
 
@@ -2174,7 +2174,7 @@ var require_ms = __commonJS({
 // ../../node_modules/.pnpm/debug@4.3.4/node_modules/debug/src/common.js
 var require_common = __commonJS({
   "../../node_modules/.pnpm/debug@4.3.4/node_modules/debug/src/common.js"(exports, module2) {
-    function setup(env2) {
+    function setup(env) {
       createDebug.debug = createDebug;
       createDebug.default = createDebug;
       createDebug.coerce = coerce;
@@ -2183,8 +2183,8 @@ var require_common = __commonJS({
       createDebug.enabled = enabled;
       createDebug.humanize = require_ms();
       createDebug.destroy = destroy;
-      Object.keys(env2).forEach((key) => {
-        createDebug[key] = env2[key];
+      Object.keys(env).forEach((key) => {
+        createDebug[key] = env[key];
       });
       createDebug.names = [];
       createDebug.skips = [];
@@ -2204,11 +2204,11 @@ var require_common = __commonJS({
         let enableOverride = null;
         let namespacesCache;
         let enabledCache;
-        function debug13(...args) {
-          if (!debug13.enabled) {
+        function debug14(...args) {
+          if (!debug14.enabled) {
             return;
           }
-          const self2 = debug13;
+          const self2 = debug14;
           const curr = Number(new Date());
           const ms = curr - (prevTime || curr);
           self2.diff = ms;
@@ -2238,13 +2238,13 @@ var require_common = __commonJS({
           const logFn = self2.log || createDebug.log;
           logFn.apply(self2, args);
         }
-        __name(debug13, "debug");
-        debug13.namespace = namespace;
-        debug13.useColors = createDebug.useColors();
-        debug13.color = createDebug.selectColor(namespace);
-        debug13.extend = extend;
-        debug13.destroy = createDebug.destroy;
-        Object.defineProperty(debug13, "enabled", {
+        __name(debug14, "debug");
+        debug14.namespace = namespace;
+        debug14.useColors = createDebug.useColors();
+        debug14.color = createDebug.selectColor(namespace);
+        debug14.extend = extend;
+        debug14.destroy = createDebug.destroy;
+        Object.defineProperty(debug14, "enabled", {
           enumerable: true,
           configurable: false,
           get: () => {
@@ -2262,9 +2262,9 @@ var require_common = __commonJS({
           }
         });
         if (typeof createDebug.init === "function") {
-          createDebug.init(debug13);
+          createDebug.init(debug14);
         }
-        return debug13;
+        return debug14;
       }
       __name(createDebug, "createDebug");
       function extend(namespace, delimiter) {
@@ -2675,11 +2675,11 @@ var require_node = __commonJS({
       return process.env.DEBUG;
     }
     __name(load, "load");
-    function init(debug13) {
-      debug13.inspectOpts = {};
+    function init(debug14) {
+      debug14.inspectOpts = {};
       const keys2 = Object.keys(exports.inspectOpts);
       for (let i = 0; i < keys2.length; i++) {
-        debug13.inspectOpts[keys2[i]] = exports.inspectOpts[keys2[i]];
+        debug14.inspectOpts[keys2[i]] = exports.inspectOpts[keys2[i]];
       }
     }
     __name(init, "init");
@@ -2945,8 +2945,8 @@ var require_path_key = __commonJS({
     "use strict";
     var pathKey = /* @__PURE__ */ __name((options = {}) => {
       const environment = options.env || process.env;
-      const platform3 = options.platform || process.platform;
-      if (platform3 !== "win32") {
+      const platform2 = options.platform || process.platform;
+      if (platform2 !== "win32") {
         return "PATH";
       }
       return Object.keys(environment).reverse().find((key) => key.toUpperCase() === "PATH") || "Path";
@@ -2964,7 +2964,7 @@ var require_resolveCommand = __commonJS({
     var which = require_which();
     var getPathKey = require_path_key();
     function resolveCommandAttempt(parsed, withoutPathExt) {
-      const env2 = parsed.options.env || process.env;
+      const env = parsed.options.env || process.env;
       const cwd = process.cwd();
       const hasCustomCwd = parsed.options.cwd != null;
       const shouldSwitchCwd = hasCustomCwd && process.chdir !== void 0 && !process.chdir.disabled;
@@ -2977,7 +2977,7 @@ var require_resolveCommand = __commonJS({
       let resolved;
       try {
         resolved = which.sync(parsed.command, {
-          path: env2[getPathKey({ env: env2 })],
+          path: env[getPathKey({ env })],
           pathExt: withoutPathExt ? path7.delimiter : void 0
         });
       } catch (e2) {
@@ -3276,11 +3276,11 @@ var require_npm_run_path = __commonJS({
         env: process.env,
         ...options
       };
-      const env2 = { ...options.env };
-      const path8 = pathKey({ env: env2 });
-      options.path = env2[path8];
-      env2[path8] = module2.exports(options);
-      return env2;
+      const env = { ...options.env };
+      const path8 = pathKey({ env });
+      options.path = env[path8];
+      env[path8] = module2.exports(options);
+      return env;
     };
   }
 });
@@ -4051,7 +4051,7 @@ var require_signal_exit = __commonJS({
 var require_kill = __commonJS({
   "../../node_modules/.pnpm/execa@5.1.1/node_modules/execa/lib/kill.js"(exports, module2) {
     "use strict";
-    var os3 = require("os");
+    var os2 = require("os");
     var onExit = require_signal_exit();
     var DEFAULT_FORCE_KILL_TIMEOUT = 1e3 * 5;
     var spawnedKill = /* @__PURE__ */ __name((kill, signal = "SIGTERM", options = {}) => {
@@ -4075,7 +4075,7 @@ var require_kill = __commonJS({
       return isSigterm(signal) && forceKillAfterTimeout !== false && killResult;
     }, "shouldForceKill");
     var isSigterm = /* @__PURE__ */ __name((signal) => {
-      return signal === os3.constants.signals.SIGTERM || typeof signal === "string" && signal.toUpperCase() === "SIGTERM";
+      return signal === os2.constants.signals.SIGTERM || typeof signal === "string" && signal.toUpperCase() === "SIGTERM";
     }, "isSigterm");
     var getForceKillAfterTimeout = /* @__PURE__ */ __name(({ forceKillAfterTimeout = true }) => {
       if (forceKillAfterTimeout === true) {
@@ -4086,10 +4086,10 @@ var require_kill = __commonJS({
       }
       return forceKillAfterTimeout;
     }, "getForceKillAfterTimeout");
-    var spawnedCancel = /* @__PURE__ */ __name((spawned, context3) => {
+    var spawnedCancel = /* @__PURE__ */ __name((spawned, context2) => {
       const killResult = spawned.kill();
       if (killResult) {
-        context3.isCanceled = true;
+        context2.isCanceled = true;
       }
     }, "spawnedCancel");
     var timeoutKill = /* @__PURE__ */ __name((spawned, signal, reject) => {
@@ -4475,12 +4475,12 @@ var require_execa = __commonJS({
     var { mergePromise, getSpawnedPromise } = require_promise();
     var { joinCommand, parseCommand, getEscapedCommand } = require_command();
     var DEFAULT_MAX_BUFFER = 1e3 * 1e3 * 100;
-    var getEnv2 = /* @__PURE__ */ __name(({ env: envOption, extendEnv, preferLocal, localDir, execPath }) => {
-      const env2 = extendEnv ? { ...process.env, ...envOption } : envOption;
+    var getEnv = /* @__PURE__ */ __name(({ env: envOption, extendEnv, preferLocal, localDir, execPath }) => {
+      const env = extendEnv ? { ...process.env, ...envOption } : envOption;
       if (preferLocal) {
-        return npmRunPath.env({ env: env2, cwd: localDir, execPath });
+        return npmRunPath.env({ env, cwd: localDir, execPath });
       }
-      return env2;
+      return env;
     }, "getEnv");
     var handleArguments = /* @__PURE__ */ __name((file, args, options = {}) => {
       const parsed = crossSpawn._parse(file, args, options);
@@ -4502,7 +4502,7 @@ var require_execa = __commonJS({
         windowsHide: true,
         ...options
       };
-      options.env = getEnv2(options);
+      options.env = getEnv(options);
       options.stdio = normalizeStdio(options);
       if (process.platform === "win32" && path7.basename(file, ".exe") === "cmd") {
         args.unshift("/q");
@@ -4545,9 +4545,9 @@ var require_execa = __commonJS({
       const spawnedPromise = getSpawnedPromise(spawned);
       const timedPromise = setupTimeout(spawned, parsed.options, spawnedPromise);
       const processDone = setExitHandler(spawned, parsed.options, timedPromise);
-      const context3 = { isCanceled: false };
+      const context2 = { isCanceled: false };
       spawned.kill = spawnedKill.bind(null, spawned.kill.bind(spawned));
-      spawned.cancel = spawnedCancel.bind(null, spawned, context3);
+      spawned.cancel = spawnedCancel.bind(null, spawned, context2);
       const handlePromise = /* @__PURE__ */ __name(async () => {
         const [{ error: error2, exitCode, signal, timedOut }, stdoutResult, stderrResult, allResult] = await getSpawnedResult(spawned, parsed.options, processDone);
         const stdout = handleOutput(parsed.options, stdoutResult);
@@ -4565,7 +4565,7 @@ var require_execa = __commonJS({
             escapedCommand,
             parsed,
             timedOut,
-            isCanceled: context3.isCanceled,
+            isCanceled: context2.isCanceled,
             killed: spawned.killed
           });
           if (!parsed.options.reject) {
@@ -4757,7 +4757,7 @@ var require_main2 = __commonJS({
   "../../node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv/lib/main.js"(exports, module2) {
     var fs11 = require("fs");
     var path7 = require("path");
-    var os3 = require("os");
+    var os2 = require("os");
     var packageJson = require_package();
     var version = packageJson.version;
     var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
@@ -4786,13 +4786,13 @@ var require_main2 = __commonJS({
     }
     __name(_log, "_log");
     function _resolveHome(envPath) {
-      return envPath[0] === "~" ? path7.join(os3.homedir(), envPath.slice(1)) : envPath;
+      return envPath[0] === "~" ? path7.join(os2.homedir(), envPath.slice(1)) : envPath;
     }
     __name(_resolveHome, "_resolveHome");
     function config2(options) {
       let dotenvPath = path7.resolve(process.cwd(), ".env");
       let encoding = "utf8";
-      const debug13 = Boolean(options && options.debug);
+      const debug14 = Boolean(options && options.debug);
       const override = Boolean(options && options.override);
       if (options) {
         if (options.path != null) {
@@ -4811,7 +4811,7 @@ var require_main2 = __commonJS({
             if (override === true) {
               process.env[key] = parsed[key];
             }
-            if (debug13) {
+            if (debug14) {
               if (override === true) {
                 _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
               } else {
@@ -4822,7 +4822,7 @@ var require_main2 = __commonJS({
         });
         return { parsed };
       } catch (e2) {
-        if (debug13) {
+        if (debug14) {
           _log(`Failed to load ${dotenvPath} ${e2.message}`);
         }
         return { error: e2 };
@@ -5014,18 +5014,18 @@ var require_strip_indent = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+engines-version@4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe/node_modules/@prisma/engines-version/package.json
+// ../../node_modules/.pnpm/@prisma+engines-version@4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5/node_modules/@prisma/engines-version/package.json
 var require_package2 = __commonJS({
-  "../../node_modules/.pnpm/@prisma+engines-version@4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe/node_modules/@prisma/engines-version/package.json"(exports, module2) {
+  "../../node_modules/.pnpm/@prisma+engines-version@4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5/node_modules/@prisma/engines-version/package.json"(exports, module2) {
     module2.exports = {
       name: "@prisma/engines-version",
-      version: "4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe",
+      version: "4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5",
       main: "index.js",
       types: "index.d.ts",
       license: "Apache-2.0",
       author: "Tim Suchanek <suchanek@prisma.io>",
       prisma: {
-        enginesVersion: "d6e67a83f971b175a593ccc12e15c4a757f93ffe"
+        enginesVersion: "ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5"
       },
       repository: {
         type: "git",
@@ -5047,9 +5047,9 @@ var require_package2 = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/@prisma+engines-version@4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe/node_modules/@prisma/engines-version/index.js
+// ../../node_modules/.pnpm/@prisma+engines-version@4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5/node_modules/@prisma/engines-version/index.js
 var require_engines_version = __commonJS({
-  "../../node_modules/.pnpm/@prisma+engines-version@4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe/node_modules/@prisma/engines-version/index.js"(exports) {
+  "../../node_modules/.pnpm/@prisma+engines-version@4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5/node_modules/@prisma/engines-version/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.enginesVersion = void 0;
@@ -6425,7 +6425,7 @@ var require_utils = __commonJS({
         try {
           const decoder = new TextDecoder(exports);
           return decoder.decode(data);
-        } catch (e2) {
+        } catch {
         }
       }
     };
@@ -9860,8 +9860,7 @@ var require_constants = __commonJS({
       "xslt",
       ""
     ];
-    var _a3;
-    var DOMException = (_a3 = globalThis.DOMException) != null ? _a3 : (() => {
+    var DOMException = globalThis.DOMException ?? (() => {
       try {
         atob("~");
       } catch (err) {
@@ -9898,7 +9897,7 @@ var require_util3 = __commonJS({
     var crypto2;
     try {
       crypto2 = require("crypto");
-    } catch (e2) {
+    } catch {
     }
     var badPorts = [
       "1",
@@ -10013,8 +10012,7 @@ var require_util3 = __commonJS({
     }
     __name(requestBadPort, "requestBadPort");
     function isErrorLike(object) {
-      var _a3, _b2;
-      return object instanceof Error || (((_a3 = object == null ? void 0 : object.constructor) == null ? void 0 : _a3.name) === "Error" || ((_b2 = object == null ? void 0 : object.constructor) == null ? void 0 : _b2.name) === "DOMException");
+      return object instanceof Error || (object?.constructor?.name === "Error" || object?.constructor?.name === "DOMException");
     }
     __name(isErrorLike, "isErrorLike");
     function isValidReasonPhrase(statusText) {
@@ -10127,12 +10125,11 @@ var require_util3 = __commonJS({
     }
     __name(coarsenedSharedCurrentTime, "coarsenedSharedCurrentTime");
     function createOpaqueTimingInfo(timingInfo) {
-      var _a3, _b2;
       return {
-        startTime: (_a3 = timingInfo.startTime) != null ? _a3 : 0,
+        startTime: timingInfo.startTime ?? 0,
         redirectStartTime: 0,
         redirectEndTime: 0,
-        postRedirectStartTime: (_b2 = timingInfo.startTime) != null ? _b2 : 0,
+        postRedirectStartTime: timingInfo.startTime ?? 0,
         finalServiceWorkerStartTime: 0,
         finalNetworkResponseStartTime: 0,
         finalNetworkRequestStartTime: 0,
@@ -10152,7 +10149,6 @@ var require_util3 = __commonJS({
     }
     __name(clonePolicyContainer, "clonePolicyContainer");
     function determineRequestsReferrer(request2) {
-      var _a3, _b2, _c, _d, _e, _f, _g;
       const policy = request2.referrerPolicy;
       if (policy == null || policy === "" || policy === "no-referrer") {
         return "no-referrer";
@@ -10160,13 +10156,13 @@ var require_util3 = __commonJS({
       const environment = request2.client;
       let referrerSource = null;
       if (request2.referrer === "client") {
-        if (((_c = (_b2 = (_a3 = request2.client) == null ? void 0 : _a3.globalObject) == null ? void 0 : _b2.constructor) == null ? void 0 : _c.name) === "Window") {
-          const origin = (_f = (_d = environment.globalObject.self) == null ? void 0 : _d.origin) != null ? _f : (_e = environment.globalObject.location) == null ? void 0 : _e.origin;
+        if (request2.client?.globalObject?.constructor?.name === "Window") {
+          const origin = environment.globalObject.self?.origin ?? environment.globalObject.location?.origin;
           if (origin == null || origin === "null")
             return "no-referrer";
           referrerSource = new URL(environment.globalObject.location.href);
         } else {
-          if (((_g = environment == null ? void 0 : environment.globalObject) == null ? void 0 : _g.location) == null) {
+          if (environment?.globalObject?.location == null) {
             return "no-referrer";
           }
           referrerSource = new URL(environment.globalObject.location.href);
@@ -10434,18 +10430,18 @@ var require_webidl = __commonJS({
     webidl.errors.exception = function(message) {
       throw new TypeError(`${message.header}: ${message.message}`);
     };
-    webidl.errors.conversionFailed = function(context3) {
-      const plural = context3.types.length === 1 ? "" : " one of";
-      const message = `${context3.argument} could not be converted to${plural}: ${context3.types.join(", ")}.`;
+    webidl.errors.conversionFailed = function(context2) {
+      const plural = context2.types.length === 1 ? "" : " one of";
+      const message = `${context2.argument} could not be converted to${plural}: ${context2.types.join(", ")}.`;
       return webidl.errors.exception({
-        header: context3.prefix,
+        header: context2.prefix,
         message
       });
     };
-    webidl.errors.invalidArgument = function(context3) {
+    webidl.errors.invalidArgument = function(context2) {
       return webidl.errors.exception({
-        header: context3.prefix,
-        message: `"${context3.value}" is an invalid ${context3.type}.`
+        header: context2.prefix,
+        message: `"${context2.value}" is an invalid ${context2.type}.`
       });
     };
     webidl.util.Type = function(V) {
@@ -10536,14 +10532,13 @@ var require_webidl = __commonJS({
     };
     webidl.sequenceConverter = function(converter) {
       return (V) => {
-        var _a3;
         if (webidl.util.Type(V) !== "Object") {
           webidl.errors.exception({
             header: "Sequence",
             message: `Value of type ${webidl.util.Type(V)} is not an Object.`
           });
         }
-        const method = (_a3 = V == null ? void 0 : V[Symbol.iterator]) == null ? void 0 : _a3.call(V);
+        const method = V?.[Symbol.iterator]?.();
         const seq = [];
         if (method === void 0 || typeof method.next !== "function") {
           webidl.errors.exception({
@@ -10616,7 +10611,7 @@ var require_webidl = __commonJS({
           let value = dictionary[key];
           const hasDefault = hasOwn(options, "defaultValue");
           if (hasDefault && value !== null) {
-            value = value != null ? value : defaultValue;
+            value = value ?? defaultValue;
           }
           if (required || hasDefault || value !== void 0) {
             value = converter(value);
@@ -10796,10 +10791,9 @@ var require_file = __commonJS({
     __name(File, "File");
     var FileLike = class {
       constructor(blobLike, fileName, options = {}) {
-        var _a3;
         const n2 = fileName;
         const t2 = options.type;
-        const d2 = (_a3 = options.lastModified) != null ? _a3 : Date.now();
+        const d2 = options.lastModified ?? Date.now();
         this[kState] = {
           blobLike,
           name: n2,
@@ -11552,7 +11546,7 @@ var require_request = __commonJS({
       channels.headers = diagnosticsChannel.channel("undici:request:headers");
       channels.trailers = diagnosticsChannel.channel("undici:request:trailers");
       channels.error = diagnosticsChannel.channel("undici:request:error");
-    } catch (e2) {
+    } catch {
       channels.create = { hasSubscribers: false };
       channels.bodySent = { hasSubscribers: false };
       channels.headers = { hasSubscribers: false };
@@ -11968,14 +11962,14 @@ var require_connect = __commonJS({
       const sessionCache = /* @__PURE__ */ new Map();
       timeout = timeout == null ? 1e4 : timeout;
       maxCachedSessions = maxCachedSessions == null ? 100 : maxCachedSessions;
-      return /* @__PURE__ */ __name(function connect({ hostname: hostname3, host, protocol, port, servername, httpSocket }, callback) {
+      return /* @__PURE__ */ __name(function connect({ hostname, host, protocol, port, servername, httpSocket }, callback) {
         let socket;
         if (protocol === "https:") {
           if (!tls) {
             tls = require("tls");
           }
           servername = servername || options.servername || util2.getServerName(host) || null;
-          const sessionKey = servername || hostname3;
+          const sessionKey = servername || hostname;
           const session = sessionCache.get(sessionKey) || null;
           assert(sessionKey);
           socket = tls.connect({
@@ -11985,7 +11979,7 @@ var require_connect = __commonJS({
             session,
             socket: httpSocket,
             port: port || 443,
-            host: hostname3
+            host: hostname
           });
           socket.on("session", function(session2) {
             if (maxCachedSessions === 0) {
@@ -12007,7 +12001,7 @@ var require_connect = __commonJS({
             highWaterMark: 64 * 1024,
             ...options,
             port: port || 80,
-            host: hostname3
+            host: hostname
           });
         }
         const cancelTimeout = setupTimeout(() => onConnectTimeout(socket), timeout);
@@ -12654,7 +12648,7 @@ var require_client = __commonJS({
       channels.beforeConnect = diagnosticsChannel.channel("undici:client:beforeConnect");
       channels.connectError = diagnosticsChannel.channel("undici:client:connectError");
       channels.connected = diagnosticsChannel.channel("undici:client:connected");
-    } catch (e2) {
+    } catch {
       channels.sendHeaders = { hasSubscribers: false };
       channels.beforeConnect = { hasSubscribers: false };
       channels.connectError = { hasSubscribers: false };
@@ -13354,20 +13348,20 @@ var require_client = __commonJS({
     async function connect(client) {
       assert(!client[kConnecting]);
       assert(!client[kSocket]);
-      let { host, hostname: hostname3, protocol, port } = client[kUrl];
-      if (hostname3[0] === "[") {
-        const idx = hostname3.indexOf("]");
+      let { host, hostname, protocol, port } = client[kUrl];
+      if (hostname[0] === "[") {
+        const idx = hostname.indexOf("]");
         assert(idx !== -1);
-        const ip = hostname3.substr(1, idx - 1);
+        const ip = hostname.substr(1, idx - 1);
         assert(net2.isIP(ip));
-        hostname3 = ip;
+        hostname = ip;
       }
       client[kConnecting] = true;
       if (channels.beforeConnect.hasSubscribers) {
         channels.beforeConnect.publish({
           connectParams: {
             host,
-            hostname: hostname3,
+            hostname,
             protocol,
             port,
             servername: client[kServerName]
@@ -13379,7 +13373,7 @@ var require_client = __commonJS({
         const socket = await new Promise((resolve, reject) => {
           client[kConnector]({
             host,
-            hostname: hostname3,
+            hostname,
             protocol,
             port,
             servername: client[kServerName]
@@ -13412,7 +13406,7 @@ var require_client = __commonJS({
           channels.connected.publish({
             connectParams: {
               host,
-              hostname: hostname3,
+              hostname,
               protocol,
               port,
               servername: client[kServerName]
@@ -13428,7 +13422,7 @@ var require_client = __commonJS({
           channels.connectError.publish({
             connectParams: {
               host,
-              hostname: hostname3,
+              hostname,
               protocol,
               port,
               servername: client[kServerName]
@@ -14640,7 +14634,7 @@ var require_readable = __commonJS({
               return;
             }
           }
-        } catch (e2) {
+        } catch {
         }
       }
     }, "BodyReadable");
@@ -14860,15 +14854,15 @@ var require_api_request = __commonJS({
         }
         addSignal(this, signal);
       }
-      onConnect(abort, context3) {
+      onConnect(abort, context2) {
         if (!this.callback) {
           throw new RequestAbortedError();
         }
         this.abort = abort;
-        this.context = context3;
+        this.context = context2;
       }
       onHeaders(statusCode, rawHeaders, resume, statusMessage) {
-        const { callback, opaque, abort, context: context3 } = this;
+        const { callback, opaque, abort, context: context2 } = this;
         if (statusCode < 200) {
           if (this.onInfo) {
             const headers2 = this.responseHeaders === "raw" ? util2.parseRawHeaders(rawHeaders) : util2.parseHeaders(rawHeaders);
@@ -14897,7 +14891,7 @@ var require_api_request = __commonJS({
             trailers: this.trailers,
             opaque,
             body,
-            context: context3
+            context: context2
           });
         }
       }
@@ -15038,15 +15032,15 @@ var require_api_stream = __commonJS({
         }
         addSignal(this, signal);
       }
-      onConnect(abort, context3) {
+      onConnect(abort, context2) {
         if (!this.callback) {
           throw new RequestAbortedError();
         }
         this.abort = abort;
-        this.context = context3;
+        this.context = context2;
       }
       onHeaders(statusCode, rawHeaders, resume) {
-        const { factory, opaque, context: context3 } = this;
+        const { factory, opaque, context: context2 } = this;
         if (statusCode < 200) {
           if (this.onInfo) {
             const headers2 = this.responseHeaders === "raw" ? util2.parseRawHeaders(rawHeaders) : util2.parseHeaders(rawHeaders);
@@ -15060,7 +15054,7 @@ var require_api_stream = __commonJS({
           statusCode,
           headers,
           opaque,
-          context: context3
+          context: context2
         });
         if (!res || typeof res.write !== "function" || typeof res.end !== "function" || typeof res.on !== "function") {
           throw new InvalidReturnValueError("expected Writable");
@@ -15252,17 +15246,17 @@ var require_api_pipeline = __commonJS({
         this.res = null;
         addSignal(this, signal);
       }
-      onConnect(abort, context3) {
+      onConnect(abort, context2) {
         const { ret, res } = this;
         assert(!res, "pipeline cannot be retried");
         if (ret.destroyed) {
           throw new RequestAbortedError();
         }
         this.abort = abort;
-        this.context = context3;
+        this.context = context2;
       }
       onHeaders(statusCode, rawHeaders, resume) {
-        const { opaque, handler, context: context3 } = this;
+        const { opaque, handler, context: context2 } = this;
         if (statusCode < 200) {
           if (this.onInfo) {
             const headers = this.responseHeaders === "raw" ? util2.parseRawHeaders(rawHeaders) : util2.parseHeaders(rawHeaders);
@@ -15280,7 +15274,7 @@ var require_api_pipeline = __commonJS({
             headers,
             opaque,
             body: this.res,
-            context: context3
+            context: context2
           });
         } catch (err) {
           this.res.on("error", util2.nop);
@@ -15366,7 +15360,7 @@ var require_api_upgrade = __commonJS({
         this.context = null;
         addSignal(this, signal);
       }
-      onConnect(abort, context3) {
+      onConnect(abort, context2) {
         if (!this.callback) {
           throw new RequestAbortedError();
         }
@@ -15377,7 +15371,7 @@ var require_api_upgrade = __commonJS({
         throw new SocketError("bad upgrade", null);
       }
       onUpgrade(statusCode, rawHeaders, socket) {
-        const { callback, opaque, context: context3 } = this;
+        const { callback, opaque, context: context2 } = this;
         assert.strictEqual(statusCode, 101);
         removeSignal(this);
         this.callback = null;
@@ -15386,7 +15380,7 @@ var require_api_upgrade = __commonJS({
           headers,
           socket,
           opaque,
-          context: context3
+          context: context2
         });
       }
       onError(err) {
@@ -15456,18 +15450,18 @@ var require_api_connect = __commonJS({
         this.abort = null;
         addSignal(this, signal);
       }
-      onConnect(abort, context3) {
+      onConnect(abort, context2) {
         if (!this.callback) {
           throw new RequestAbortedError();
         }
         this.abort = abort;
-        this.context = context3;
+        this.context = context2;
       }
       onHeaders() {
         throw new SocketError("bad connect", null);
       }
       onUpgrade(statusCode, rawHeaders, socket) {
-        const { callback, opaque, context: context3 } = this;
+        const { callback, opaque, context: context2 } = this;
         removeSignal(this);
         this.callback = null;
         const headers = this.responseHeaders === "raw" ? util2.parseRawHeaders(rawHeaders) : util2.parseHeaders(rawHeaders);
@@ -15476,7 +15470,7 @@ var require_api_connect = __commonJS({
           headers,
           socket,
           opaque,
-          context: context3
+          context: context2
         });
       }
       onError(err) {
@@ -16610,12 +16604,11 @@ var require_headers = __commonJS({
         return this[kHeadersMap].delete(name);
       }
       get(name) {
-        var _a3;
         name = name.toLowerCase();
         if (!this.contains(name)) {
           return null;
         }
-        return (_a3 = this[kHeadersMap].get(name)) != null ? _a3 : null;
+        return this[kHeadersMap].get(name) ?? null;
       }
       has(name) {
         name = name.toLowerCase();
@@ -17251,7 +17244,7 @@ var require_response = __commonJS({
       if (V instanceof ReadableStream) {
         return webidl.converters.ReadableStream(V);
       }
-      if (V == null ? void 0 : V[Symbol.asyncIterator]) {
+      if (V?.[Symbol.asyncIterator]) {
         return V;
       }
       return webidl.converters.XMLHttpRequestBodyInit(V);
@@ -17317,7 +17310,6 @@ var require_request2 = __commonJS({
     });
     var Request = class {
       constructor(input, init = {}) {
-        var _a3, _b2;
         if (input === kInit) {
           return;
         }
@@ -17358,7 +17350,7 @@ var require_request2 = __commonJS({
         }
         const origin = this[kRealm].settingsObject.origin;
         let window2 = "client";
-        if (((_b2 = (_a3 = request2.window) == null ? void 0 : _a3.constructor) == null ? void 0 : _b2.name) === "EnvironmentSettingsObject" && sameOrigin(request2.window, origin)) {
+        if (request2.window?.constructor?.name === "EnvironmentSettingsObject" && sameOrigin(request2.window, origin)) {
           window2 = request2.window;
         }
         if (init.window !== void 0 && init.window != null) {
@@ -17549,7 +17541,7 @@ var require_request2 = __commonJS({
             this[kHeaders].append("content-type", contentType);
           }
         }
-        const inputOrInitBody = initBody != null ? initBody : inputBody;
+        const inputOrInitBody = initBody ?? inputBody;
         if (inputOrInitBody != null && inputOrInitBody.source == null) {
           if (request2.mode !== "same-origin" && request2.mode !== "cors") {
             throw new TypeError(
@@ -17675,11 +17667,10 @@ var require_request2 = __commonJS({
         return this[kSignal];
       }
       clone() {
-        var _a3;
         if (!(this instanceof Request)) {
           throw new TypeError("Illegal invocation");
         }
-        if (this.bodyUsed || ((_a3 = this.body) == null ? void 0 : _a3.locked)) {
+        if (this.bodyUsed || this.body?.locked) {
           throw new TypeError("unusable");
         }
         const clonedRequest = cloneRequest(this[kState]);
@@ -18220,28 +18211,25 @@ var require_fetch = __commonJS({
         this.state = "ongoing";
       }
       terminate(reason) {
-        var _a3;
         if (this.state !== "ongoing") {
           return;
         }
         this.state = "terminated";
-        (_a3 = this.connection) == null ? void 0 : _a3.destroy(reason);
+        this.connection?.destroy(reason);
         this.emit("terminated", reason);
       }
       abort() {
-        var _a3;
         if (this.state !== "ongoing") {
           return;
         }
         const reason = new DOMException("The operation was aborted.", "AbortError");
         this.state = "aborted";
-        (_a3 = this.connection) == null ? void 0 : _a3.destroy(reason);
+        this.connection?.destroy(reason);
         this.emit("terminated", reason);
       }
     };
     __name(Fetch, "Fetch");
     async function fetch2(input, init = {}) {
-      var _a3;
       if (arguments.length < 1) {
         throw new TypeError(
           `Failed to execute 'fetch' on 'Window': 1 argument required, but only ${arguments.length} present.`
@@ -18261,7 +18249,7 @@ var require_fetch = __commonJS({
         return p2.promise;
       }
       const globalObject = request2.client.globalObject;
-      if (((_a3 = globalObject == null ? void 0 : globalObject.constructor) == null ? void 0 : _a3.name) === "ServiceWorkerGlobalScope") {
+      if (globalObject?.constructor?.name === "ServiceWorkerGlobalScope") {
         request2.serviceWorkers = "none";
       }
       let responseObject = null;
@@ -18312,11 +18300,10 @@ var require_fetch = __commonJS({
     }
     __name(fetch2, "fetch");
     function finalizeAndReportTiming(response, initiatorType = "other") {
-      var _a3;
       if (response.type === "error" && response.aborted) {
         return;
       }
-      if (!((_a3 = response.urlList) == null ? void 0 : _a3.length)) {
+      if (!response.urlList?.length) {
         return;
       }
       const originalURL = response.urlList[0];
@@ -18352,10 +18339,9 @@ var require_fetch = __commonJS({
     }
     __name(markResourceTiming, "markResourceTiming");
     function abortFetch(p2, request2, responseObject) {
-      var _a3, _b2;
       const error2 = new DOMException("The operation was aborted.", "AbortError");
       p2.reject(error2);
-      if (request2.body != null && isReadable((_a3 = request2.body) == null ? void 0 : _a3.stream)) {
+      if (request2.body != null && isReadable(request2.body?.stream)) {
         request2.body.stream.cancel(error2).catch((err) => {
           if (err.code === "ERR_INVALID_STATE") {
             return;
@@ -18367,7 +18353,7 @@ var require_fetch = __commonJS({
         return;
       }
       const response = responseObject[kState];
-      if (response.body != null && isReadable((_b2 = response.body) == null ? void 0 : _b2.stream)) {
+      if (response.body != null && isReadable(response.body?.stream)) {
         response.body.stream.cancel(error2).catch((err) => {
           if (err.code === "ERR_INVALID_STATE") {
             return;
@@ -18387,7 +18373,6 @@ var require_fetch = __commonJS({
       useParallelQueue = false,
       dispatcher
     }) {
-      var _a3, _b2, _c, _d;
       let taskDestination = null;
       let crossOriginIsolatedCapability = false;
       if (request2.client != null) {
@@ -18412,10 +18397,10 @@ var require_fetch = __commonJS({
       };
       assert(!request2.body || request2.body.stream);
       if (request2.window === "client") {
-        request2.window = ((_c = (_b2 = (_a3 = request2.client) == null ? void 0 : _a3.globalObject) == null ? void 0 : _b2.constructor) == null ? void 0 : _c.name) === "Window" ? request2.client : "no-window";
+        request2.window = request2.client?.globalObject?.constructor?.name === "Window" ? request2.client : "no-window";
       }
       if (request2.origin === "client") {
-        request2.origin = (_d = request2.client) == null ? void 0 : _d.origin;
+        request2.origin = request2.client?.origin;
       }
       if (request2.policyContainer === "client") {
         if (request2.client != null) {
@@ -18867,10 +18852,9 @@ var require_fetch = __commonJS({
         abort: null,
         destroyed: false,
         destroy(err) {
-          var _a3;
           if (!this.destroyed) {
             this.destroyed = true;
-            (_a3 = this.abort) == null ? void 0 : _a3.call(this, err != null ? err : new DOMException("The operation was aborted.", "AbortError"));
+            this.abort?.(err ?? new DOMException("The operation was aborted.", "AbortError"));
           }
         }
       };
@@ -18890,12 +18874,11 @@ var require_fetch = __commonJS({
         queueMicrotask(() => fetchParams.processRequestEndOfBody());
       } else if (request2.body != null) {
         const processBodyChunk = /* @__PURE__ */ __name(async function* (bytes) {
-          var _a3;
           if (isCancelled(fetchParams)) {
             return;
           }
           yield bytes;
-          (_a3 = fetchParams.processRequestBodyChunkLength) == null ? void 0 : _a3.call(fetchParams, bytes.byteLength);
+          fetchParams.processRequestBodyChunkLength?.(bytes.byteLength);
         }, "processBodyChunk");
         const processEndOfBody = /* @__PURE__ */ __name(() => {
           if (isCancelled(fetchParams)) {
@@ -18964,7 +18947,6 @@ var require_fetch = __commonJS({
       response.body = { stream: stream2 };
       fetchParams.controller.on("terminated", onAborted);
       fetchParams.controller.resume = async () => {
-        var _a3;
         while (true) {
           let bytes;
           try {
@@ -18991,7 +18973,7 @@ var require_fetch = __commonJS({
             finalizeResponse(fetchParams, response);
             return;
           }
-          timingInfo.decodedBodySize += (_a3 = bytes == null ? void 0 : bytes.byteLength) != null ? _a3 : 0;
+          timingInfo.decodedBodySize += bytes?.byteLength ?? 0;
           if (isErrorLike(bytes)) {
             fetchParams.controller.terminate(bytes);
             return;
@@ -19110,11 +19092,10 @@ var require_fetch = __commonJS({
               this.body.push(null);
             },
             onError(error2) {
-              var _a3;
               if (this.abort) {
                 fetchParams.controller.off("terminated", this.abort);
               }
-              (_a3 = this.body) == null ? void 0 : _a3.destroy(error2);
+              this.body?.destroy(error2);
               fetchParams.controller.terminate(error2);
               reject(error2);
             }
@@ -19721,7 +19702,7 @@ var require_package3 = __commonJS({
   "package.json"(exports, module2) {
     module2.exports = {
       name: "@prisma/client",
-      version: "4.8.0",
+      version: "4.9.0",
       description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
       keywords: [
         "orm",
@@ -19759,6 +19740,7 @@ var require_package3 = __commonJS({
         dev: "DEV=true node -r esbuild-register helpers/build.ts",
         build: "node -r esbuild-register helpers/build.ts",
         test: "jest --verbose",
+        "test:e2e": "node -r esbuild-register tests/e2e/_utils/run.ts",
         "test:functional": "node -r esbuild-register helpers/functional-test/run-tests.ts",
         "test:memory": "node -r esbuild-register helpers/memory-tests.ts",
         "test:functional:code": "node -r esbuild-register helpers/functional-test/run-tests.ts --no-types",
@@ -19782,15 +19764,15 @@ var require_package3 = __commonJS({
       ],
       devDependencies: {
         "@faker-js/faker": "7.6.0",
-        "@fast-check/jest": "1.4.0",
+        "@fast-check/jest": "1.6.0",
         "@jest/globals": "29.3.1",
         "@jest/test-sequencer": "29.3.1",
-        "@opentelemetry/api": "1.2.0",
-        "@opentelemetry/context-async-hooks": "1.7.0",
-        "@opentelemetry/instrumentation": "0.33.0",
-        "@opentelemetry/resources": "1.7.0",
-        "@opentelemetry/sdk-trace-base": "1.7.0",
-        "@opentelemetry/semantic-conventions": "1.7.0",
+        "@opentelemetry/api": "1.3.0",
+        "@opentelemetry/context-async-hooks": "1.8.0",
+        "@opentelemetry/instrumentation": "0.34.0",
+        "@opentelemetry/resources": "1.8.0",
+        "@opentelemetry/sdk-trace-base": "1.8.0",
+        "@opentelemetry/semantic-conventions": "1.8.0",
         "@prisma/debug": "workspace:*",
         "@prisma/engine-core": "workspace:*",
         "@prisma/engines": "workspace:*",
@@ -19803,20 +19785,19 @@ var require_package3 = __commonJS({
         "@prisma/mini-proxy": "0.3.0",
         "@swc-node/register": "1.5.4",
         "@swc/core": "1.3.14",
-        "@swc/jest": "0.2.23",
+        "@swc/jest": "0.2.24",
         "@timsuchanek/copy": "1.4.5",
         "@types/debug": "4.1.7",
         "@types/fs-extra": "9.0.13",
         "@types/jest": "29.2.4",
         "@types/js-levenshtein": "1.1.1",
         "@types/mssql": "8.1.1",
-        "@types/node": "14.18.34",
-        "@types/pg": "8.6.5",
+        "@types/node": "14.18.36",
+        "@types/pg": "8.6.6",
         "@types/yeoman-generator": "5.2.11",
         arg: "5.0.2",
         benchmark: "2.1.4",
         chalk: "4.1.2",
-        cuid: "2.1.8",
         "decimal.js": "10.4.2",
         esbuild: "0.15.13",
         execa: "5.1.1",
@@ -19835,7 +19816,6 @@ var require_package3 = __commonJS({
         "js-levenshtein": "1.1.6",
         klona: "2.0.5",
         "lz-string": "1.4.4",
-        "make-dir": "3.1.0",
         mariadb: "3.0.2",
         memfs: "3.4.10",
         mssql: "9.0.1",
@@ -19843,7 +19823,6 @@ var require_package3 = __commonJS({
         pg: "8.8.0",
         "pkg-up": "3.1.0",
         pluralize: "8.0.0",
-        "replace-string": "3.1.0",
         resolve: "1.22.1",
         rimraf: "3.0.2",
         "simple-statistics": "7.8.0",
@@ -19859,7 +19838,8 @@ var require_package3 = __commonJS({
         tsd: "0.21.0",
         typescript: "4.8.4",
         "yeoman-generator": "5.7.0",
-        yo: "4.3.1"
+        yo: "4.3.1",
+        zx: "7.1.1"
       },
       peerDependencies: {
         prisma: "*"
@@ -19870,7 +19850,7 @@ var require_package3 = __commonJS({
         }
       },
       dependencies: {
-        "@prisma/engines-version": "4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe"
+        "@prisma/engines-version": "4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5"
       },
       sideEffects: false
     };
@@ -19939,11 +19919,15 @@ __name(getExtensionContext, "getExtensionContext");
 var types_exports = {};
 __export(types_exports, {
   Extensions: () => Extensions_exports,
+  Public: () => Public_exports,
   Utils: () => Utils_exports
 });
 
 // src/runtime/core/types/Extensions.ts
 var Extensions_exports = {};
+
+// src/runtime/core/types/Public.ts
+var Public_exports = {};
 
 // src/runtime/core/types/Utils.ts
 var Utils_exports = {};
@@ -19952,9 +19936,8 @@ var Utils_exports = {};
 var import_debug = __toESM(require_src());
 var MAX_LOGS = 100;
 var debugArgsHistory = [];
-var _a, _b;
-if (typeof process !== "undefined" && typeof ((_a = process.stderr) == null ? void 0 : _a.write) !== "function") {
-  import_debug.default.log = (_b = console.debug) != null ? _b : console.log;
+if (typeof process !== "undefined" && typeof process.stderr?.write !== "function") {
+  import_debug.default.log = console.debug ?? console.log;
 }
 function debugCall(namespace) {
   const debugNamespace = (0, import_debug.default)(namespace);
@@ -20003,8 +19986,8 @@ var import_path = __toESM(require("path"));
 function dotenvExpand(config2) {
   const environment = config2.ignoreProcessEnv ? {} : process.env;
   const interpolate = /* @__PURE__ */ __name((envValue) => {
-    const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g) || [];
-    return matches.reduce(function(newEnv, match) {
+    const matches = envValue.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g);
+    return matches?.reduce(function(newEnv, match) {
       const parts = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(match);
       if (!parts) {
         return newEnv;
@@ -20021,7 +20004,7 @@ function dotenvExpand(config2) {
         value = interpolate(value);
       }
       return newEnv.replace(replacePart, value);
-    }, envValue);
+    }, envValue) ?? envValue;
   }, "interpolate");
   for (const configKey in config2.parsed) {
     const value = Object.hasOwnProperty.call(environment, configKey) ? environment[configKey] : config2.parsed[configKey];
@@ -20042,34 +20025,33 @@ function tryLoadEnvs({
 }, opts = {
   conflictCheck: "none"
 }) {
-  var _a3, _b2;
   const rootEnvInfo = loadEnv(rootEnvPath);
   if (opts.conflictCheck !== "none") {
     checkForConflicts(rootEnvInfo, schemaEnvPath, opts.conflictCheck);
   }
   let schemaEnvInfo = null;
-  if (!pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, schemaEnvPath)) {
+  if (!pathsEqual(rootEnvInfo?.path, schemaEnvPath)) {
     schemaEnvInfo = loadEnv(schemaEnvPath);
   }
   if (!rootEnvInfo && !schemaEnvInfo) {
     debug2("No Environment variables loaded");
   }
-  if (schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult.error) {
+  if (schemaEnvInfo?.dotenvResult.error) {
     return console.error(import_chalk.default.redBright.bold("Schema Env Error: ") + schemaEnvInfo.dotenvResult.error);
   }
-  const messages = [rootEnvInfo == null ? void 0 : rootEnvInfo.message, schemaEnvInfo == null ? void 0 : schemaEnvInfo.message].filter(Boolean);
+  const messages = [rootEnvInfo?.message, schemaEnvInfo?.message].filter(Boolean);
   return {
     message: messages.join("\n"),
     parsed: {
-      ...(_a3 = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult) == null ? void 0 : _a3.parsed,
-      ...(_b2 = schemaEnvInfo == null ? void 0 : schemaEnvInfo.dotenvResult) == null ? void 0 : _b2.parsed
+      ...rootEnvInfo?.dotenvResult?.parsed,
+      ...schemaEnvInfo?.dotenvResult?.parsed
     }
   };
 }
 __name(tryLoadEnvs, "tryLoadEnvs");
 function checkForConflicts(rootEnvInfo, envPath, type) {
-  const parsedRootEnv = rootEnvInfo == null ? void 0 : rootEnvInfo.dotenvResult.parsed;
-  const areNotTheSame = !pathsEqual(rootEnvInfo == null ? void 0 : rootEnvInfo.path, envPath);
+  const parsedRootEnv = rootEnvInfo?.dotenvResult.parsed;
+  const areNotTheSame = !pathsEqual(rootEnvInfo?.path, envPath);
   if (parsedRootEnv && envPath && areNotTheSame && import_fs.default.existsSync(envPath)) {
     const envConfig = import_dotenv.default.parse(import_fs.default.readFileSync(envPath));
     const conflicts = [];
@@ -20137,9 +20119,9 @@ function getClientEngineType(generatorConfig) {
   const engineTypeFromEnvVar = getEngineTypeFromEnvVar();
   if (engineTypeFromEnvVar)
     return engineTypeFromEnvVar;
-  if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "library" /* Library */) {
+  if (generatorConfig?.config.engineType === "library" /* Library */) {
     return "library" /* Library */;
-  } else if ((generatorConfig == null ? void 0 : generatorConfig.config.engineType) === "binary" /* Binary */) {
+  } else if (generatorConfig?.config.engineType === "binary" /* Binary */) {
     return "binary" /* Binary */;
   } else {
     return DEFAULT_CLIENT_ENGINE_TYPE;
@@ -20171,14 +20153,14 @@ var import_engines_version = __toESM(require_engines_version());
 
 // ../get-platform/src/getNodeAPIName.ts
 var NODE_API_QUERY_ENGINE_URL_BASE = "libquery_engine";
-function getNodeAPIName(platform3, type) {
+function getNodeAPIName(platform2, type) {
   const isUrl = type === "url";
-  if (platform3.includes("windows")) {
-    return isUrl ? `query_engine.dll.node` : `query_engine-${platform3}.dll.node`;
-  } else if (platform3.includes("darwin")) {
-    return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.dylib.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform3}.dylib.node`;
+  if (platform2.includes("windows")) {
+    return isUrl ? `query_engine.dll.node` : `query_engine-${platform2}.dll.node`;
+  } else if (platform2.includes("darwin")) {
+    return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.dylib.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform2}.dylib.node`;
   } else {
-    return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.so.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform3}.so.node`;
+    return isUrl ? `${NODE_API_QUERY_ENGINE_URL_BASE}.so.node` : `${NODE_API_QUERY_ENGINE_URL_BASE}-${platform2}.so.node`;
   }
 }
 __name(getNodeAPIName, "getNodeAPIName");
@@ -20298,13 +20280,40 @@ __name(O, "O");
 
 // ../get-platform/src/getPlatform.ts
 var import_util = require("util");
+
+// ../get-platform/src/logger.ts
+var import_chalk2 = __toESM(require_source());
+var tags = {
+  warn: import_chalk2.default.yellow("prisma:warn")
+};
+var should = {
+  warn: () => !process.env.PRISMA_DISABLE_WARNINGS
+};
+function warn(message, ...optionalParams) {
+  if (should.warn()) {
+    console.warn(`${tags.warn} ${message}`, ...optionalParams);
+  }
+}
+__name(warn, "warn");
+
+// ../get-platform/src/warnOnce.ts
+var alreadyWarned = /* @__PURE__ */ new Set();
+var warnOnce = /* @__PURE__ */ __name((key, message, ...args) => {
+  if (!alreadyWarned.has(key)) {
+    alreadyWarned.add(key);
+    warn(message, ...args);
+  }
+}, "warnOnce");
+
+// ../get-platform/src/getPlatform.ts
 var readFile = (0, import_util.promisify)(import_fs2.default.readFile);
 var exists2 = (0, import_util.promisify)(import_fs2.default.exists);
 var exec = (0, import_util.promisify)(import_child_process.default.exec);
+var debug3 = src_default("prisma:get-platform");
 async function getos() {
-  const platform3 = import_os.default.platform();
-  const arch2 = process.arch;
-  if (platform3 === "freebsd") {
+  const platform2 = import_os.default.platform();
+  const arch = process.arch;
+  if (platform2 === "freebsd") {
     const version = await getFirstSuccessfulExec([`freebsd-version`]);
     if (version && version.trim().length > 0) {
       const regex = /^(\d+)\.?/;
@@ -20313,23 +20322,29 @@ async function getos() {
         return {
           platform: "freebsd",
           distro: `freebsd${match[1]}`,
-          arch: arch2
+          arch
         };
       }
     }
   }
-  if (platform3 !== "linux") {
+  if (platform2 !== "linux") {
     return {
-      platform: platform3,
-      arch: arch2
+      platform: platform2,
+      arch
     };
   }
   const distro = await resolveDistro();
+  if (distro === "musl" && arch !== "x64") {
+    throw new Error(
+      `Prisma only supports Linux Alpine on the amd64 (x86_64) system architecture. If you're running Prisma on Docker, please use Docker Buildx to simulate the amd64 architecture on your device as explained by this comment: https://github.com/prisma/prisma/issues/8478#issuecomment-1355209706`
+    );
+  }
+  const libssl = await getSSLVersion({ arch, distro });
   return {
     platform: "linux",
-    libssl: await getSSLVersion({ arch: arch2, distro }),
+    libssl,
     distro,
-    arch: arch2
+    arch
   };
 }
 __name(getos, "getos");
@@ -20377,10 +20392,9 @@ function parseOpenSSLVersion(input) {
 }
 __name(parseOpenSSLVersion, "parseOpenSSLVersion");
 function parseLibSSLVersion(input) {
-  var _a3;
   const match = /libssl\.so\.(\d)(\.\d)?/.exec(input);
   if (match) {
-    const partialVersion = `${match[1]}${(_a3 = match[2]) != null ? _a3 : ".0"}.x`;
+    const partialVersion = `${match[1]}${match[2] ?? ".0"}.x`;
     return sanitiseSSLVersion(partialVersion);
   }
   return void 0;
@@ -20396,15 +20410,50 @@ function sanitiseSSLVersion(version) {
 }
 __name(sanitiseSSLVersion, "sanitiseSSLVersion");
 async function getSSLVersion(args) {
-  const libsslVersion = await K(args).with({ distro: "musl" }, () => {
-    return getFirstSuccessfulExec(["ls -l /lib/libssl.so.3", "ls -l /lib/libssl.so.1.1"]);
-  }).otherwise(() => {
-    return getFirstSuccessfulExec(["ls -l /lib64 | grep ssl", "ls -l /usr/lib64 | grep ssl"]);
+  const archFromUname = await getArchFromUname();
+  const libsslSpecificPaths = K(args).with({ distro: "musl" }, () => {
+    debug3('Trying platform-specific paths for "alpine"');
+    return ["/lib"];
+  }).with({ distro: "debian" }, () => {
+    debug3('Trying platform-specific paths for "debian" (and "ubuntu")');
+    return [`/usr/lib/${archFromUname}-linux-gnu`, `/lib/${archFromUname}-linux-gnu`];
+  }).with({ distro: "rhel" }, () => {
+    debug3('Trying platform-specific paths for "rhel"');
+    return ["/lib64", "/usr/lib64"];
+  }).otherwise(({ distro, arch }) => {
+    debug3(`Don't know any platform-specific paths for "${distro}" on ${arch}`);
+    return [];
   });
-  if (libsslVersion) {
-    const matchedVersion = parseLibSSLVersion(libsslVersion);
-    if (matchedVersion) {
-      return matchedVersion;
+  const libsslSpecificCommands = libsslSpecificPaths.map((path7) => `ls ${path7} | grep libssl.so`);
+  const libsslFilenameFromSpecificPath = await getFirstSuccessfulExec(libsslSpecificCommands);
+  if (libsslFilenameFromSpecificPath) {
+    debug3(`Found libssl.so file using platform-specific paths: ${libsslFilenameFromSpecificPath}`);
+    const libsslVersion = parseLibSSLVersion(libsslFilenameFromSpecificPath);
+    debug3(`The parsed libssl version is: ${libsslVersion}`);
+    if (libsslVersion) {
+      return libsslVersion;
+    }
+  }
+  debug3('Falling back to "ldconfig" and other generic paths');
+  const libsslFilename = await getFirstSuccessfulExec([
+    'ldconfig -p | sed "s/.*=>s*//" | sed "s|.*/||" | grep ssl | sort',
+    "ls /lib64 | grep ssl",
+    "ls /usr/lib64 | grep ssl"
+  ]);
+  if (libsslFilename) {
+    debug3(`Found libssl.so file using "ldconfig" or other generic paths: ${libsslFilenameFromSpecificPath}`);
+    const libsslVersion = parseLibSSLVersion(libsslFilename);
+    if (libsslVersion) {
+      return libsslVersion;
+    }
+  }
+  const openSSLVersionLine = await getFirstSuccessfulExec(["openssl version -v"]);
+  if (openSSLVersionLine) {
+    debug3(`Found openssl binary with version: ${openSSLVersionLine}`);
+    const openSSLVersion2 = parseOpenSSLVersion(openSSLVersionLine);
+    debug3(`The parsed openssl version is: ${openSSLVersion2}`);
+    if (openSSLVersion2) {
+      return openSSLVersion2;
     }
   }
   const openSSLVersion = await getFirstSuccessfulExec(["openssl version -v"]);
@@ -20414,39 +20463,60 @@ async function getSSLVersion(args) {
       return matchedVersion;
     }
   }
+  debug3(`Couldn't find any version of libssl or OpenSSL in the system`);
   return void 0;
 }
 __name(getSSLVersion, "getSSLVersion");
 async function getPlatform() {
-  const { platform: platform3, libssl, distro, arch: arch2 } = await getos();
-  if (platform3 === "darwin" && arch2 === "arm64") {
+  const { platform: platform2, distro, arch, libssl } = await getos();
+  const defaultLibssl = "1.1.x";
+  if (platform2 === "linux" && libssl === void 0) {
+    const additionalMessage = K({ distro }).with({ distro: "debian" }, () => {
+      return "Please manually install OpenSSL via `apt-get update -y && apt-get install -y openssl` and try installing Prisma again. If you're running Prisma on Docker, you may also try to replace your base image with `node:lts-slim`, which already ships with OpenSSL installed.";
+    }).otherwise(() => {
+      return "Please manually install OpenSSL and try installing Prisma again.";
+    });
+    warnOnce(
+      "libssl:undefined",
+      `Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-${defaultLibssl}".
+${additionalMessage}`
+    );
+  }
+  const defaultDistro = "debian";
+  if (platform2 === "linux" && distro === void 0) {
+    warnOnce(
+      "distro:undefined",
+      `Prisma failed to detect the Linux distro in use, and may not work as expected. Defaulting to "${defaultDistro}".`
+    );
+  }
+  if (platform2 === "darwin" && arch === "arm64") {
     return "darwin-arm64";
   }
-  if (platform3 === "darwin") {
+  if (platform2 === "darwin") {
     return "darwin";
   }
-  if (platform3 === "win32") {
+  if (platform2 === "win32") {
     return "windows";
   }
-  if (platform3 === "freebsd") {
+  if (platform2 === "freebsd") {
     return distro;
   }
-  if (platform3 === "openbsd") {
+  if (platform2 === "openbsd") {
     return "openbsd";
   }
-  if (platform3 === "netbsd") {
+  if (platform2 === "netbsd") {
     return "netbsd";
   }
-  if (platform3 === "linux" && distro === "nixos") {
+  if (platform2 === "linux" && distro === "nixos") {
     return "linux-nixos";
   }
-  if (platform3 === "linux" && arch2 === "arm64") {
-    return `linux-arm64-openssl-${libssl}`;
+  if (platform2 === "linux" && arch === "arm64") {
+    return `linux-arm64-openssl-${libssl || defaultLibssl}`;
   }
-  if (platform3 === "linux" && arch2 === "arm") {
-    return `linux-arm-openssl-${libssl}`;
+  if (platform2 === "linux" && arch === "arm") {
+    return `linux-arm-openssl-${libssl || defaultLibssl}`;
   }
-  if (platform3 === "linux" && distro === "musl") {
+  if (platform2 === "linux" && distro === "musl") {
     const base = "linux-musl";
     if (!libssl) {
       return base;
@@ -20457,16 +20527,22 @@ async function getPlatform() {
       return `${base}-openssl-${libssl}`;
     }
   }
-  if (platform3 === "linux" && distro && libssl) {
-    return distro + "-openssl-" + libssl;
+  if (platform2 === "linux" && distro && libssl) {
+    return `${distro}-openssl-${libssl}`;
+  }
+  if (platform2 !== "linux") {
+    warnOnce(
+      "platform:undefined",
+      `Prisma detected unknown OS "${platform2}" and may not work as expected. Defaulting to "linux".`
+    );
   }
   if (libssl) {
-    return "debian-openssl-" + libssl;
+    return `${defaultDistro}-openssl-${libssl}`;
   }
   if (distro) {
-    return distro + "-openssl-1.1.x";
+    return `${distro}-openssl-${defaultLibssl}`;
   }
-  return "debian-openssl-1.1.x";
+  return `${defaultDistro}-openssl-${defaultLibssl}`;
 }
 __name(getPlatform, "getPlatform");
 async function discardError(runPromise) {
@@ -20480,11 +20556,22 @@ __name(discardError, "discardError");
 function getFirstSuccessfulExec(commands) {
   return discardError(async () => {
     const results = await Promise.allSettled(commands.map((cmd) => exec(cmd)));
-    const { value } = results.find(({ status }) => status === "fulfilled");
-    return String(value.stdout);
+    const idx = results.findIndex(({ status }) => status === "fulfilled");
+    if (idx === -1) {
+      return void 0;
+    }
+    const { value } = results[idx];
+    const output = String(value.stdout);
+    debug3(`Command "${commands[idx]}" successfully returned "${output}"`);
+    return output;
   });
 }
 __name(getFirstSuccessfulExec, "getFirstSuccessfulExec");
+async function getArchFromUname() {
+  const arch = await getFirstSuccessfulExec(["uname -m"]);
+  return arch?.trim();
+}
+__name(getArchFromUname, "getArchFromUname");
 function isLibssl1x(libssl) {
   return libssl.startsWith("1.");
 }
@@ -20495,8 +20582,8 @@ var import_fs3 = __toESM(require("fs"));
 async function isNodeAPISupported() {
   const customLibraryPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
   const customLibraryExists = customLibraryPath && import_fs3.default.existsSync(customLibraryPath);
-  const os3 = await getos();
-  if (!customLibraryExists && (os3.arch === "x32" || os3.arch === "ia32")) {
+  const os2 = await getos();
+  if (!customLibraryExists && (os2.arch === "x32" || os2.arch === "ia32")) {
     throw new Error(
       `The default query engine type (Node-API, "library") is currently not supported for 32bit Node. Please set \`engineType = "binary"\` in the "generator" block of your "schema.prisma" file (or use the environment variables "PRISMA_CLIENT_ENGINE_TYPE=binary" and/or "PRISMA_CLI_QUERY_ENGINE_TYPE=binary".)`
     );
@@ -20535,7 +20622,7 @@ var platforms = [
 // ../engines/src/index.ts
 var import_path2 = __toESM(require("path"));
 var import_engines_version2 = __toESM(require_engines_version());
-var debug3 = src_default("prisma:engines");
+var debug4 = src_default("prisma:engines");
 function getEnginesPath() {
   return import_path2.default.join(__dirname, "../");
 }
@@ -20581,7 +20668,7 @@ import_path2.default.join(__dirname, "../libquery_engine-rhel-openssl-3.0.x.so.n
 import_path2.default.join(__dirname, "../query_engine-windows.dll.node");
 
 // ../engine-core/src/binary/BinaryEngine.ts
-var import_chalk3 = __toESM(require_source());
+var import_chalk4 = __toESM(require_source());
 var import_child_process2 = require("child_process");
 var import_execa = __toESM(require_execa());
 var import_fs5 = __toESM(require("fs"));
@@ -20635,21 +20722,20 @@ function getMessage(log3) {
 }
 __name(getMessage, "getMessage");
 function getBacktrace(log3) {
-  var _a3, _b2, _c, _d, _e, _f, _g;
-  if ((_a3 = log3.fields) == null ? void 0 : _a3.message) {
-    let str = (_b2 = log3.fields) == null ? void 0 : _b2.message;
-    if ((_c = log3.fields) == null ? void 0 : _c.file) {
+  if (log3.fields?.message) {
+    let str = log3.fields?.message;
+    if (log3.fields?.file) {
       str += ` in ${log3.fields.file}`;
-      if ((_d = log3.fields) == null ? void 0 : _d.line) {
+      if (log3.fields?.line) {
         str += `:${log3.fields.line}`;
       }
-      if ((_e = log3.fields) == null ? void 0 : _e.column) {
+      if (log3.fields?.column) {
         str += `:${log3.fields.column}`;
       }
     }
-    if ((_f = log3.fields) == null ? void 0 : _f.reason) {
+    if (log3.fields?.reason) {
       str += `
-${(_g = log3.fields) == null ? void 0 : _g.reason}`;
+${log3.fields?.reason}`;
     }
     return str;
   }
@@ -20657,8 +20743,7 @@ ${(_g = log3.fields) == null ? void 0 : _g.reason}`;
 }
 __name(getBacktrace, "getBacktrace");
 function isPanic(err) {
-  var _a3;
-  return ((_a3 = err.fields) == null ? void 0 : _a3.message) === "PANIC";
+  return err.fields?.message === "PANIC";
 }
 __name(isPanic, "isPanic");
 function isRustLog(e2) {
@@ -20666,8 +20751,7 @@ function isRustLog(e2) {
 }
 __name(isRustLog, "isRustLog");
 function isRustErrorLog(e2) {
-  var _a3, _b2;
-  return isRustLog(e2) && (e2.level === "error" || ((_b2 = (_a3 = e2.fields) == null ? void 0 : _a3.message) == null ? void 0 : _b2.includes("fatal error")));
+  return isRustLog(e2) && (e2.level === "error" || e2.fields?.message?.includes("fatal error"));
 }
 __name(isRustErrorLog, "isRustErrorLog");
 function convertLog(rustLog) {
@@ -20689,7 +20773,7 @@ __name(isQueryLog, "isQueryLog");
 var PrismaClientRustError = class extends Error {
   constructor({ clientVersion: clientVersion2, error: error2 }) {
     const backtrace = getBacktrace(error2);
-    super(backtrace != null ? backtrace : "Unknown error");
+    super(backtrace ?? "Unknown error");
     this._isPanic = isPanic(error2);
     this.clientVersion = clientVersion2;
   }
@@ -20728,35 +20812,35 @@ var PrismaClientUnknownRequestError = class extends Error {
 __name(PrismaClientUnknownRequestError, "PrismaClientUnknownRequestError");
 
 // ../engine-core/src/common/errors/utils/getErrorMessageWithLink.ts
-var import_chalk2 = __toESM(require_source());
+var import_chalk3 = __toESM(require_source());
 var import_strip_ansi = __toESM(require_strip_ansi());
 
 // ../engine-core/src/common/utils/util.ts
 var import_fs4 = __toESM(require("fs"));
 var import_new_github_issue_url = __toESM(require_new_github_issue_url());
-var debug4 = src_default("plusX");
+var debug5 = src_default("plusX");
 function plusX(file) {
   const s = import_fs4.default.statSync(file);
   const newMode = s.mode | 64 | 8 | 1;
   if (s.mode === newMode) {
-    debug4(`Execution permissions of ${file} are fine`);
+    debug5(`Execution permissions of ${file} are fine`);
     return;
   }
   const base8 = newMode.toString(8).slice(-3);
-  debug4(`Have to call plusX on ${file}`);
+  debug5(`Have to call plusX on ${file}`);
   import_fs4.default.chmodSync(file, base8);
 }
 __name(plusX, "plusX");
-function transformPlatformToEnvValue(platform3) {
-  return { fromEnvVar: null, value: platform3 };
+function transformPlatformToEnvValue(platform2) {
+  return { fromEnvVar: null, value: platform2 };
 }
 __name(transformPlatformToEnvValue, "transformPlatformToEnvValue");
-function fixBinaryTargets(binaryTargets, platform3) {
+function fixBinaryTargets(binaryTargets, platform2) {
   binaryTargets = binaryTargets || [];
   if (!binaryTargets.find((object) => object.value === "native")) {
     return [transformPlatformToEnvValue("native"), ...binaryTargets];
   }
-  return [...binaryTargets, transformPlatformToEnvValue(platform3)];
+  return [...binaryTargets, transformPlatformToEnvValue(platform2)];
 }
 __name(fixBinaryTargets, "fixBinaryTargets");
 function getGitHubIssueUrl({
@@ -20798,15 +20882,14 @@ __name(normalizeLogs, "normalizeLogs");
 // ../engine-core/src/common/errors/utils/getErrorMessageWithLink.ts
 function getErrorMessageWithLink({
   version,
-  platform: platform3,
+  platform: platform2,
   title,
   description,
   engineVersion,
   database,
   query: query2
 }) {
-  var _a3, _b2;
-  const gotLogs = getLogs(6e3 - ((_a3 = query2 == null ? void 0 : query2.length) != null ? _a3 : 0));
+  const gotLogs = getLogs(6e3 - (query2?.length ?? 0));
   const logs = normalizeLogs((0, import_strip_ansi.default)(gotLogs));
   const moreInfo = description ? `# Description
 \`\`\`
@@ -20818,11 +20901,11 @@ ${description}
 
 | Name            | Version            |
 |-----------------|--------------------|
-| Node            | ${(_b2 = process.version) == null ? void 0 : _b2.padEnd(19)}| 
-| OS              | ${platform3 == null ? void 0 : platform3.padEnd(19)}|
-| Prisma Client   | ${version == null ? void 0 : version.padEnd(19)}|
-| Query Engine    | ${engineVersion == null ? void 0 : engineVersion.padEnd(19)}|
-| Database        | ${database == null ? void 0 : database.padEnd(19)}|
+| Node            | ${process.version?.padEnd(19)}| 
+| OS              | ${platform2?.padEnd(19)}|
+| Prisma Client   | ${version?.padEnd(19)}|
+| Query Engine    | ${engineVersion?.padEnd(19)}|
+| Database        | ${database?.padEnd(19)}|
 
 ${moreInfo}
 
@@ -20852,7 +20935,7 @@ ${query2 ? maskQuery(query2) : ""}
 
 This is a non-recoverable error which probably happens when the Prisma Query Engine has a panic.
 
-${import_chalk2.default.underline(url)}
+${import_chalk3.default.underline(url)}
 
 If you want the Prisma team to look into it, please open the link above \u{1F64F}
 To increase the chance of success, please post your schema and a snippet of
@@ -21039,13 +21122,13 @@ function omit(obj, keys2) {
 }
 __name(omit, "omit");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/platform/node/globalThis.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/platform/node/globalThis.js
 var _globalThis = typeof globalThis === "object" ? globalThis : global;
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/version.js
-var VERSION = "1.2.0";
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/version.js
+var VERSION = "1.3.0";
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/internal/semver.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/internal/semver.js
 var re = /^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;
 function _makeCompatibilityCheck(ownVersion) {
   var acceptedVersions = /* @__PURE__ */ new Set([ownVersion]);
@@ -21115,44 +21198,44 @@ function _makeCompatibilityCheck(ownVersion) {
 __name(_makeCompatibilityCheck, "_makeCompatibilityCheck");
 var isCompatible = _makeCompatibilityCheck(VERSION);
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/internal/global-utils.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/internal/global-utils.js
 var major = VERSION.split(".")[0];
 var GLOBAL_OPENTELEMETRY_API_KEY = Symbol.for("opentelemetry.js.api." + major);
 var _global = _globalThis;
-function registerGlobal(type, instance, diag3, allowOverride) {
-  var _a3;
+function registerGlobal(type, instance, diag2, allowOverride) {
+  var _a;
   if (allowOverride === void 0) {
     allowOverride = false;
   }
-  var api = _global[GLOBAL_OPENTELEMETRY_API_KEY] = (_a3 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) !== null && _a3 !== void 0 ? _a3 : {
+  var api = _global[GLOBAL_OPENTELEMETRY_API_KEY] = (_a = _global[GLOBAL_OPENTELEMETRY_API_KEY]) !== null && _a !== void 0 ? _a : {
     version: VERSION
   };
   if (!allowOverride && api[type]) {
     var err = new Error("@opentelemetry/api: Attempted duplicate registration of API: " + type);
-    diag3.error(err.stack || err.message);
+    diag2.error(err.stack || err.message);
     return false;
   }
   if (api.version !== VERSION) {
     var err = new Error("@opentelemetry/api: All API registration versions must match");
-    diag3.error(err.stack || err.message);
+    diag2.error(err.stack || err.message);
     return false;
   }
   api[type] = instance;
-  diag3.debug("@opentelemetry/api: Registered a global for " + type + " v" + VERSION + ".");
+  diag2.debug("@opentelemetry/api: Registered a global for " + type + " v" + VERSION + ".");
   return true;
 }
 __name(registerGlobal, "registerGlobal");
 function getGlobal(type) {
-  var _a3, _b2;
-  var globalVersion = (_a3 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _a3 === void 0 ? void 0 : _a3.version;
+  var _a, _b;
+  var globalVersion = (_a = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _a === void 0 ? void 0 : _a.version;
   if (!globalVersion || !isCompatible(globalVersion)) {
     return;
   }
-  return (_b2 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _b2 === void 0 ? void 0 : _b2[type];
+  return (_b = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _b === void 0 ? void 0 : _b[type];
 }
 __name(getGlobal, "getGlobal");
-function unregisterGlobal(type, diag3) {
-  diag3.debug("@opentelemetry/api: Unregistering a global for " + type + " v" + VERSION + ".");
+function unregisterGlobal(type, diag2) {
+  diag2.debug("@opentelemetry/api: Unregistering a global for " + type + " v" + VERSION + ".");
   var api = _global[GLOBAL_OPENTELEMETRY_API_KEY];
   if (api) {
     delete api[type];
@@ -21160,7 +21243,39 @@ function unregisterGlobal(type, diag3) {
 }
 __name(unregisterGlobal, "unregisterGlobal");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/ComponentLogger.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/diag/ComponentLogger.js
+var __read = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
+  } catch (error2) {
+    e2 = { error: error2 };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+var __spreadArray = function(to, from, pack) {
+  if (pack || arguments.length === 2)
+    for (var i = 0, l = from.length, ar; i < l; i++) {
+      if (ar || !(i in from)) {
+        if (!ar)
+          ar = Array.prototype.slice.call(from, 0, i);
+        ar[i] = from[i];
+      }
+    }
+  return to.concat(ar || Array.prototype.slice.call(from));
+};
 var DiagComponentLogger = function() {
   function DiagComponentLogger2(props) {
     this._namespace = props.namespace || "DiagComponentLogger";
@@ -21209,11 +21324,11 @@ function logProxy(funcName, namespace, args) {
     return;
   }
   args.unshift(namespace);
-  return logger2[funcName].apply(logger2, args);
+  return logger2[funcName].apply(logger2, __spreadArray([], __read(args), false));
 }
 __name(logProxy, "logProxy");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/types.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/diag/types.js
 var DiagLogLevel;
 (function(DiagLogLevel2) {
   DiagLogLevel2[DiagLogLevel2["NONE"] = 0] = "NONE";
@@ -21225,7 +21340,7 @@ var DiagLogLevel;
   DiagLogLevel2[DiagLogLevel2["ALL"] = 9999] = "ALL";
 })(DiagLogLevel || (DiagLogLevel = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/internal/logLevelLogger.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/diag/internal/logLevelLogger.js
 function createLogLevelDiagLogger(maxLevel, logger2) {
   if (maxLevel < DiagLogLevel.NONE) {
     maxLevel = DiagLogLevel.NONE;
@@ -21252,7 +21367,39 @@ function createLogLevelDiagLogger(maxLevel, logger2) {
 }
 __name(createLogLevelDiagLogger, "createLogLevelDiagLogger");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/diag.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/api/diag.js
+var __read2 = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
+  } catch (error2) {
+    e2 = { error: error2 };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+var __spreadArray2 = function(to, from, pack) {
+  if (pack || arguments.length === 2)
+    for (var i = 0, l = from.length, ar; i < l; i++) {
+      if (ar || !(i in from)) {
+        if (!ar)
+          ar = Array.prototype.slice.call(from, 0, i);
+        ar[i] = from[i];
+      }
+    }
+  return to.concat(ar || Array.prototype.slice.call(from));
+};
 var API_NAME = "diag";
 var DiagAPI = function() {
   function DiagAPI2() {
@@ -21265,30 +21412,36 @@ var DiagAPI = function() {
         var logger2 = getGlobal("diag");
         if (!logger2)
           return;
-        return logger2[funcName].apply(logger2, args);
+        return logger2[funcName].apply(logger2, __spreadArray2([], __read2(args), false));
       };
     }
     __name(_logProxy, "_logProxy");
     var self2 = this;
-    self2.setLogger = function(logger2, logLevel) {
-      var _a3, _b2;
-      if (logLevel === void 0) {
-        logLevel = DiagLogLevel.INFO;
+    var setLogger = /* @__PURE__ */ __name(function(logger2, optionsOrLogLevel) {
+      var _a, _b, _c;
+      if (optionsOrLogLevel === void 0) {
+        optionsOrLogLevel = { logLevel: DiagLogLevel.INFO };
       }
       if (logger2 === self2) {
         var err = new Error("Cannot use diag as the logger for itself. Please use a DiagLogger implementation like ConsoleDiagLogger or a custom implementation");
-        self2.error((_a3 = err.stack) !== null && _a3 !== void 0 ? _a3 : err.message);
+        self2.error((_a = err.stack) !== null && _a !== void 0 ? _a : err.message);
         return false;
       }
+      if (typeof optionsOrLogLevel === "number") {
+        optionsOrLogLevel = {
+          logLevel: optionsOrLogLevel
+        };
+      }
       var oldLogger = getGlobal("diag");
-      var newLogger = createLogLevelDiagLogger(logLevel, logger2);
-      if (oldLogger) {
-        var stack = (_b2 = new Error().stack) !== null && _b2 !== void 0 ? _b2 : "<failed to generate stacktrace>";
+      var newLogger = createLogLevelDiagLogger((_b = optionsOrLogLevel.logLevel) !== null && _b !== void 0 ? _b : DiagLogLevel.INFO, logger2);
+      if (oldLogger && !optionsOrLogLevel.suppressOverrideMessage) {
+        var stack = (_c = new Error().stack) !== null && _c !== void 0 ? _c : "<failed to generate stacktrace>";
         oldLogger.warn("Current logger will be overwritten from " + stack);
         newLogger.warn("Current logger will overwrite one already registered from " + stack);
       }
       return registerGlobal("diag", newLogger, self2, true);
-    };
+    }, "setLogger");
+    self2.setLogger = setLogger;
     self2.disable = function() {
       unregisterGlobal(API_NAME, self2);
     };
@@ -21311,140 +21464,7 @@ var DiagAPI = function() {
   return DiagAPI2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/internal/baggage-impl.js
-var BaggageImpl = function() {
-  function BaggageImpl2(entries) {
-    this._entries = entries ? new Map(entries) : /* @__PURE__ */ new Map();
-  }
-  __name(BaggageImpl2, "BaggageImpl");
-  BaggageImpl2.prototype.getEntry = function(key) {
-    var entry = this._entries.get(key);
-    if (!entry) {
-      return void 0;
-    }
-    return Object.assign({}, entry);
-  };
-  BaggageImpl2.prototype.getAllEntries = function() {
-    return Array.from(this._entries.entries()).map(function(_a3) {
-      var k = _a3[0], v = _a3[1];
-      return [k, v];
-    });
-  };
-  BaggageImpl2.prototype.setEntry = function(key, entry) {
-    var newBaggage = new BaggageImpl2(this._entries);
-    newBaggage._entries.set(key, entry);
-    return newBaggage;
-  };
-  BaggageImpl2.prototype.removeEntry = function(key) {
-    var newBaggage = new BaggageImpl2(this._entries);
-    newBaggage._entries.delete(key);
-    return newBaggage;
-  };
-  BaggageImpl2.prototype.removeEntries = function() {
-    var keys2 = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      keys2[_i] = arguments[_i];
-    }
-    var newBaggage = new BaggageImpl2(this._entries);
-    for (var _a3 = 0, keys_1 = keys2; _a3 < keys_1.length; _a3++) {
-      var key = keys_1[_a3];
-      newBaggage._entries.delete(key);
-    }
-    return newBaggage;
-  };
-  BaggageImpl2.prototype.clear = function() {
-    return new BaggageImpl2();
-  };
-  return BaggageImpl2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/internal/symbol.js
-var baggageEntryMetadataSymbol = Symbol("BaggageEntryMetadata");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/utils.js
-var diag = DiagAPI.instance();
-function createBaggage(entries) {
-  if (entries === void 0) {
-    entries = {};
-  }
-  return new BaggageImpl(new Map(Object.entries(entries)));
-}
-__name(createBaggage, "createBaggage");
-function baggageEntryMetadataFromString(str) {
-  if (typeof str !== "string") {
-    diag.error("Cannot create baggage metadata from unknown type: " + typeof str);
-    str = "";
-  }
-  return {
-    __TYPE__: baggageEntryMetadataSymbol,
-    toString: function() {
-      return str;
-    }
-  };
-}
-__name(baggageEntryMetadataFromString, "baggageEntryMetadataFromString");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/diag/consoleLogger.js
-var consoleMap = [
-  { n: "error", c: "error" },
-  { n: "warn", c: "warn" },
-  { n: "info", c: "info" },
-  { n: "debug", c: "debug" },
-  { n: "verbose", c: "trace" }
-];
-var DiagConsoleLogger = function() {
-  function DiagConsoleLogger2() {
-    function _consoleFunc(funcName) {
-      return function() {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-          args[_i] = arguments[_i];
-        }
-        if (console) {
-          var theFunc = console[funcName];
-          if (typeof theFunc !== "function") {
-            theFunc = console.log;
-          }
-          if (typeof theFunc === "function") {
-            return theFunc.apply(console, args);
-          }
-        }
-      };
-    }
-    __name(_consoleFunc, "_consoleFunc");
-    for (var i = 0; i < consoleMap.length; i++) {
-      this[consoleMap[i].n] = _consoleFunc(consoleMap[i].c);
-    }
-  }
-  __name(DiagConsoleLogger2, "DiagConsoleLogger");
-  return DiagConsoleLogger2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/propagation/TextMapPropagator.js
-var defaultTextMapGetter = {
-  get: function(carrier, key) {
-    if (carrier == null) {
-      return void 0;
-    }
-    return carrier[key];
-  },
-  keys: function(carrier) {
-    if (carrier == null) {
-      return [];
-    }
-    return Object.keys(carrier);
-  }
-};
-var defaultTextMapSetter = {
-  set: function(carrier, key, value) {
-    if (carrier == null) {
-      return;
-    }
-    carrier[key] = value;
-  }
-};
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/context/context.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/context/context.js
 function createContextKey(description) {
   return Symbol.for(description);
 }
@@ -21457,14 +21477,14 @@ var BaseContext = function() {
       return self2._currentContext.get(key);
     };
     self2.setValue = function(key, value) {
-      var context3 = new BaseContext2(self2._currentContext);
-      context3._currentContext.set(key, value);
-      return context3;
+      var context2 = new BaseContext2(self2._currentContext);
+      context2._currentContext.set(key, value);
+      return context2;
     };
     self2.deleteValue = function(key) {
-      var context3 = new BaseContext2(self2._currentContext);
-      context3._currentContext.delete(key);
-      return context3;
+      var context2 = new BaseContext2(self2._currentContext);
+      context2._currentContext.delete(key);
+      return context2;
     };
   }
   __name(BaseContext2, "BaseContext");
@@ -21472,11 +21492,38 @@ var BaseContext = function() {
 }();
 var ROOT_CONTEXT = new BaseContext();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/context/NoopContextManager.js
-var __spreadArray = function(to, from) {
-  for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-    to[j] = from[i];
-  return to;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/context/NoopContextManager.js
+var __read3 = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
+  } catch (error2) {
+    e2 = { error: error2 };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+var __spreadArray3 = function(to, from, pack) {
+  if (pack || arguments.length === 2)
+    for (var i = 0, l = from.length, ar; i < l; i++) {
+      if (ar || !(i in from)) {
+        if (!ar)
+          ar = Array.prototype.slice.call(from, 0, i);
+        ar[i] = from[i];
+      }
+    }
+  return to.concat(ar || Array.prototype.slice.call(from));
 };
 var NoopContextManager = function() {
   function NoopContextManager2() {
@@ -21490,7 +21537,7 @@ var NoopContextManager = function() {
     for (var _i = 3; _i < arguments.length; _i++) {
       args[_i - 3] = arguments[_i];
     }
-    return fn.call.apply(fn, __spreadArray([thisArg], args));
+    return fn.call.apply(fn, __spreadArray3([thisArg], __read3(args), false));
   };
   NoopContextManager2.prototype.bind = function(_context, target) {
     return target;
@@ -21504,11 +21551,38 @@ var NoopContextManager = function() {
   return NoopContextManager2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/context.js
-var __spreadArray2 = function(to, from) {
-  for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-    to[j] = from[i];
-  return to;
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/api/context.js
+var __read4 = function(o2, n2) {
+  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
+  if (!m2)
+    return o2;
+  var i = m2.call(o2), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
+      ar.push(r2.value);
+  } catch (error2) {
+    e2 = { error: error2 };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+var __spreadArray4 = function(to, from, pack) {
+  if (pack || arguments.length === 2)
+    for (var i = 0, l = from.length, ar; i < l; i++) {
+      if (ar || !(i in from)) {
+        if (!ar)
+          ar = Array.prototype.slice.call(from, 0, i);
+        ar[i] = from[i];
+      }
+    }
+  return to.concat(ar || Array.prototype.slice.call(from));
 };
 var API_NAME2 = "context";
 var NOOP_CONTEXT_MANAGER = new NoopContextManager();
@@ -21528,16 +21602,16 @@ var ContextAPI = function() {
   ContextAPI2.prototype.active = function() {
     return this._getContextManager().active();
   };
-  ContextAPI2.prototype.with = function(context3, fn, thisArg) {
-    var _a3;
+  ContextAPI2.prototype.with = function(context2, fn, thisArg) {
+    var _a;
     var args = [];
     for (var _i = 3; _i < arguments.length; _i++) {
       args[_i - 3] = arguments[_i];
     }
-    return (_a3 = this._getContextManager()).with.apply(_a3, __spreadArray2([context3, fn, thisArg], args));
+    return (_a = this._getContextManager()).with.apply(_a, __spreadArray4([context2, fn, thisArg], __read4(args), false));
   };
-  ContextAPI2.prototype.bind = function(context3, target) {
-    return this._getContextManager().bind(context3, target);
+  ContextAPI2.prototype.bind = function(context2, target) {
+    return this._getContextManager().bind(context2, target);
   };
   ContextAPI2.prototype._getContextManager = function() {
     return getGlobal(API_NAME2) || NOOP_CONTEXT_MANAGER;
@@ -21549,14 +21623,14 @@ var ContextAPI = function() {
   return ContextAPI2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/trace_flags.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/trace_flags.js
 var TraceFlags;
 (function(TraceFlags2) {
   TraceFlags2[TraceFlags2["NONE"] = 0] = "NONE";
   TraceFlags2[TraceFlags2["SAMPLED"] = 1] = "SAMPLED";
 })(TraceFlags || (TraceFlags = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/invalid-span-constants.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/invalid-span-constants.js
 var INVALID_SPANID = "0000000000000000";
 var INVALID_TRACEID = "00000000000000000000000000000000";
 var INVALID_SPAN_CONTEXT = {
@@ -21565,7 +21639,7 @@ var INVALID_SPAN_CONTEXT = {
   traceFlags: TraceFlags.NONE
 };
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NonRecordingSpan.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/NonRecordingSpan.js
 var NonRecordingSpan = function() {
   function NonRecordingSpan2(_spanContext) {
     if (_spanContext === void 0) {
@@ -21602,35 +21676,35 @@ var NonRecordingSpan = function() {
   return NonRecordingSpan2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/context-utils.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/context-utils.js
 var SPAN_KEY = createContextKey("OpenTelemetry Context Key SPAN");
-function getSpan(context3) {
-  return context3.getValue(SPAN_KEY) || void 0;
+function getSpan(context2) {
+  return context2.getValue(SPAN_KEY) || void 0;
 }
 __name(getSpan, "getSpan");
 function getActiveSpan() {
   return getSpan(ContextAPI.getInstance().active());
 }
 __name(getActiveSpan, "getActiveSpan");
-function setSpan(context3, span) {
-  return context3.setValue(SPAN_KEY, span);
+function setSpan(context2, span) {
+  return context2.setValue(SPAN_KEY, span);
 }
 __name(setSpan, "setSpan");
-function deleteSpan(context3) {
-  return context3.deleteValue(SPAN_KEY);
+function deleteSpan(context2) {
+  return context2.deleteValue(SPAN_KEY);
 }
 __name(deleteSpan, "deleteSpan");
-function setSpanContext(context3, spanContext) {
-  return setSpan(context3, new NonRecordingSpan(spanContext));
+function setSpanContext(context2, spanContext) {
+  return setSpan(context2, new NonRecordingSpan(spanContext));
 }
 __name(setSpanContext, "setSpanContext");
-function getSpanContext(context3) {
-  var _a3;
-  return (_a3 = getSpan(context3)) === null || _a3 === void 0 ? void 0 : _a3.spanContext();
+function getSpanContext(context2) {
+  var _a;
+  return (_a = getSpan(context2)) === null || _a === void 0 ? void 0 : _a.spanContext();
 }
 __name(getSpanContext, "getSpanContext");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/spancontext-utils.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/spancontext-utils.js
 var VALID_TRACEID_REGEX = /^([0-9a-f]{32})$/i;
 var VALID_SPANID_REGEX = /^[0-9a-f]{16}$/i;
 function isValidTraceId(traceId) {
@@ -21650,18 +21724,18 @@ function wrapSpanContext(spanContext) {
 }
 __name(wrapSpanContext, "wrapSpanContext");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracer.js
-var context = ContextAPI.getInstance();
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracer.js
+var contextApi = ContextAPI.getInstance();
 var NoopTracer = function() {
   function NoopTracer2() {
   }
   __name(NoopTracer2, "NoopTracer");
-  NoopTracer2.prototype.startSpan = function(name, options, context3) {
+  NoopTracer2.prototype.startSpan = function(name, options, context2) {
     var root = Boolean(options === null || options === void 0 ? void 0 : options.root);
     if (root) {
       return new NonRecordingSpan();
     }
-    var parentFromContext = context3 && getSpanContext(context3);
+    var parentFromContext = context2 && getSpanContext(context2);
     if (isSpanContext(parentFromContext) && isSpanContextValid(parentFromContext)) {
       return new NonRecordingSpan(parentFromContext);
     } else {
@@ -21684,10 +21758,10 @@ var NoopTracer = function() {
       ctx = arg3;
       fn = arg4;
     }
-    var parentContext = ctx !== null && ctx !== void 0 ? ctx : context.active();
+    var parentContext = ctx !== null && ctx !== void 0 ? ctx : contextApi.active();
     var span = this.startSpan(name, opts, parentContext);
     var contextWithSpanSet = setSpan(parentContext, span);
-    return context.with(contextWithSpanSet, fn, void 0, span);
+    return contextApi.with(contextWithSpanSet, fn, void 0, span);
   };
   return NoopTracer2;
 }();
@@ -21696,7 +21770,7 @@ function isSpanContext(spanContext) {
 }
 __name(isSpanContext, "isSpanContext");
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracer.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracer.js
 var NOOP_TRACER = new NoopTracer();
 var ProxyTracer = function() {
   function ProxyTracer2(_provider, name, version, options) {
@@ -21706,8 +21780,8 @@ var ProxyTracer = function() {
     this.options = options;
   }
   __name(ProxyTracer2, "ProxyTracer");
-  ProxyTracer2.prototype.startSpan = function(name, options, context3) {
-    return this._getTracer().startSpan(name, options, context3);
+  ProxyTracer2.prototype.startSpan = function(name, options, context2) {
+    return this._getTracer().startSpan(name, options, context2);
   };
   ProxyTracer2.prototype.startActiveSpan = function(_name, _options, _context, _fn) {
     var tracer = this._getTracer();
@@ -21727,7 +21801,7 @@ var ProxyTracer = function() {
   return ProxyTracer2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracerProvider.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/NoopTracerProvider.js
 var NoopTracerProvider = function() {
   function NoopTracerProvider2() {
   }
@@ -21738,39 +21812,31 @@ var NoopTracerProvider = function() {
   return NoopTracerProvider2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracerProvider.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/ProxyTracerProvider.js
 var NOOP_TRACER_PROVIDER = new NoopTracerProvider();
 var ProxyTracerProvider = function() {
   function ProxyTracerProvider2() {
   }
   __name(ProxyTracerProvider2, "ProxyTracerProvider");
   ProxyTracerProvider2.prototype.getTracer = function(name, version, options) {
-    var _a3;
-    return (_a3 = this.getDelegateTracer(name, version, options)) !== null && _a3 !== void 0 ? _a3 : new ProxyTracer(this, name, version, options);
+    var _a;
+    return (_a = this.getDelegateTracer(name, version, options)) !== null && _a !== void 0 ? _a : new ProxyTracer(this, name, version, options);
   };
   ProxyTracerProvider2.prototype.getDelegate = function() {
-    var _a3;
-    return (_a3 = this._delegate) !== null && _a3 !== void 0 ? _a3 : NOOP_TRACER_PROVIDER;
+    var _a;
+    return (_a = this._delegate) !== null && _a !== void 0 ? _a : NOOP_TRACER_PROVIDER;
   };
   ProxyTracerProvider2.prototype.setDelegate = function(delegate) {
     this._delegate = delegate;
   };
   ProxyTracerProvider2.prototype.getDelegateTracer = function(name, version, options) {
-    var _a3;
-    return (_a3 = this._delegate) === null || _a3 === void 0 ? void 0 : _a3.getTracer(name, version, options);
+    var _a;
+    return (_a = this._delegate) === null || _a === void 0 ? void 0 : _a.getTracer(name, version, options);
   };
   return ProxyTracerProvider2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/SamplingResult.js
-var SamplingDecision;
-(function(SamplingDecision3) {
-  SamplingDecision3[SamplingDecision3["NOT_RECORD"] = 0] = "NOT_RECORD";
-  SamplingDecision3[SamplingDecision3["RECORD"] = 1] = "RECORD";
-  SamplingDecision3[SamplingDecision3["RECORD_AND_SAMPLED"] = 2] = "RECORD_AND_SAMPLED";
-})(SamplingDecision || (SamplingDecision = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/span_kind.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/span_kind.js
 var SpanKind;
 (function(SpanKind2) {
   SpanKind2[SpanKind2["INTERNAL"] = 0] = "INTERNAL";
@@ -21780,7 +21846,7 @@ var SpanKind;
   SpanKind2[SpanKind2["CONSUMER"] = 4] = "CONSUMER";
 })(SpanKind || (SpanKind = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/status.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace/status.js
 var SpanStatusCode;
 (function(SpanStatusCode2) {
   SpanStatusCode2[SpanStatusCode2["UNSET"] = 0] = "UNSET";
@@ -21788,89 +21854,13 @@ var SpanStatusCode;
   SpanStatusCode2[SpanStatusCode2["ERROR"] = 2] = "ERROR";
 })(SpanStatusCode || (SpanStatusCode = {}));
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/internal/tracestate-validators.js
-var VALID_KEY_CHAR_RANGE = "[_0-9a-z-*/]";
-var VALID_KEY = "[a-z]" + VALID_KEY_CHAR_RANGE + "{0,255}";
-var VALID_VENDOR_KEY = "[a-z0-9]" + VALID_KEY_CHAR_RANGE + "{0,240}@[a-z]" + VALID_KEY_CHAR_RANGE + "{0,13}";
-var VALID_KEY_REGEX = new RegExp("^(?:" + VALID_KEY + "|" + VALID_VENDOR_KEY + ")$");
-var VALID_VALUE_BASE_REGEX = /^[ -~]{0,255}[!-~]$/;
-var INVALID_VALUE_COMMA_EQUAL_REGEX = /,|=/;
-function validateKey(key) {
-  return VALID_KEY_REGEX.test(key);
-}
-__name(validateKey, "validateKey");
-function validateValue(value) {
-  return VALID_VALUE_BASE_REGEX.test(value) && !INVALID_VALUE_COMMA_EQUAL_REGEX.test(value);
-}
-__name(validateValue, "validateValue");
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/context-api.js
+var context = ContextAPI.getInstance();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/trace/internal/tracestate-impl.js
-var MAX_TRACE_STATE_ITEMS = 32;
-var MAX_TRACE_STATE_LEN = 512;
-var LIST_MEMBERS_SEPARATOR = ",";
-var LIST_MEMBER_KEY_VALUE_SPLITTER = "=";
-var TraceStateImpl = function() {
-  function TraceStateImpl2(rawTraceState) {
-    this._internalState = /* @__PURE__ */ new Map();
-    if (rawTraceState)
-      this._parse(rawTraceState);
-  }
-  __name(TraceStateImpl2, "TraceStateImpl");
-  TraceStateImpl2.prototype.set = function(key, value) {
-    var traceState = this._clone();
-    if (traceState._internalState.has(key)) {
-      traceState._internalState.delete(key);
-    }
-    traceState._internalState.set(key, value);
-    return traceState;
-  };
-  TraceStateImpl2.prototype.unset = function(key) {
-    var traceState = this._clone();
-    traceState._internalState.delete(key);
-    return traceState;
-  };
-  TraceStateImpl2.prototype.get = function(key) {
-    return this._internalState.get(key);
-  };
-  TraceStateImpl2.prototype.serialize = function() {
-    var _this = this;
-    return this._keys().reduce(function(agg, key) {
-      agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER + _this.get(key));
-      return agg;
-    }, []).join(LIST_MEMBERS_SEPARATOR);
-  };
-  TraceStateImpl2.prototype._parse = function(rawTraceState) {
-    if (rawTraceState.length > MAX_TRACE_STATE_LEN)
-      return;
-    this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR).reverse().reduce(function(agg, part) {
-      var listMember = part.trim();
-      var i = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER);
-      if (i !== -1) {
-        var key = listMember.slice(0, i);
-        var value = listMember.slice(i + 1, part.length);
-        if (validateKey(key) && validateValue(value)) {
-          agg.set(key, value);
-        } else {
-        }
-      }
-      return agg;
-    }, /* @__PURE__ */ new Map());
-    if (this._internalState.size > MAX_TRACE_STATE_ITEMS) {
-      this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS));
-    }
-  };
-  TraceStateImpl2.prototype._keys = function() {
-    return Array.from(this._internalState.keys()).reverse();
-  };
-  TraceStateImpl2.prototype._clone = function() {
-    var traceState = new TraceStateImpl2();
-    traceState._internalState = new Map(this._internalState);
-    return traceState;
-  };
-  return TraceStateImpl2;
-}();
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/diag-api.js
+var diag = DiagAPI.instance();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/trace.js
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/api/trace.js
 var API_NAME3 = "trace";
 var TraceAPI = function() {
   function TraceAPI2() {
@@ -21911,231 +21901,10 @@ var TraceAPI = function() {
   return TraceAPI2;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/propagation/NoopTextMapPropagator.js
-var NoopTextMapPropagator = function() {
-  function NoopTextMapPropagator2() {
-  }
-  __name(NoopTextMapPropagator2, "NoopTextMapPropagator");
-  NoopTextMapPropagator2.prototype.inject = function(_context, _carrier) {
-  };
-  NoopTextMapPropagator2.prototype.extract = function(context3, _carrier) {
-    return context3;
-  };
-  NoopTextMapPropagator2.prototype.fields = function() {
-    return [];
-  };
-  return NoopTextMapPropagator2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/baggage/context-helpers.js
-var BAGGAGE_KEY = createContextKey("OpenTelemetry Baggage Key");
-function getBaggage(context3) {
-  return context3.getValue(BAGGAGE_KEY) || void 0;
-}
-__name(getBaggage, "getBaggage");
-function setBaggage(context3, baggage) {
-  return context3.setValue(BAGGAGE_KEY, baggage);
-}
-__name(setBaggage, "setBaggage");
-function deleteBaggage(context3) {
-  return context3.deleteValue(BAGGAGE_KEY);
-}
-__name(deleteBaggage, "deleteBaggage");
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/api/propagation.js
-var API_NAME4 = "propagation";
-var NOOP_TEXT_MAP_PROPAGATOR = new NoopTextMapPropagator();
-var PropagationAPI = function() {
-  function PropagationAPI2() {
-    this.createBaggage = createBaggage;
-    this.getBaggage = getBaggage;
-    this.setBaggage = setBaggage;
-    this.deleteBaggage = deleteBaggage;
-  }
-  __name(PropagationAPI2, "PropagationAPI");
-  PropagationAPI2.getInstance = function() {
-    if (!this._instance) {
-      this._instance = new PropagationAPI2();
-    }
-    return this._instance;
-  };
-  PropagationAPI2.prototype.setGlobalPropagator = function(propagator) {
-    return registerGlobal(API_NAME4, propagator, DiagAPI.instance());
-  };
-  PropagationAPI2.prototype.inject = function(context3, carrier, setter) {
-    if (setter === void 0) {
-      setter = defaultTextMapSetter;
-    }
-    return this._getGlobalPropagator().inject(context3, carrier, setter);
-  };
-  PropagationAPI2.prototype.extract = function(context3, carrier, getter) {
-    if (getter === void 0) {
-      getter = defaultTextMapGetter;
-    }
-    return this._getGlobalPropagator().extract(context3, carrier, getter);
-  };
-  PropagationAPI2.prototype.fields = function() {
-    return this._getGlobalPropagator().fields();
-  };
-  PropagationAPI2.prototype.disable = function() {
-    unregisterGlobal(API_NAME4, DiagAPI.instance());
-  };
-  PropagationAPI2.prototype._getGlobalPropagator = function() {
-    return getGlobal(API_NAME4) || NOOP_TEXT_MAP_PROPAGATOR;
-  };
-  return PropagationAPI2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+api@1.2.0/node_modules/@opentelemetry/api/build/esm/index.js
-var context2 = ContextAPI.getInstance();
+// ../../node_modules/.pnpm/@opentelemetry+api@1.3.0/node_modules/@opentelemetry/api/build/esm/trace-api.js
 var trace = TraceAPI.getInstance();
-var propagation = PropagationAPI.getInstance();
-var diag2 = DiagAPI.instance();
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/suppress-tracing.js
-var SUPPRESS_TRACING_KEY = createContextKey("OpenTelemetry SDK Context Key SUPPRESS_TRACING");
-function suppressTracing(context3) {
-  return context3.setValue(SUPPRESS_TRACING_KEY, true);
-}
-__name(suppressTracing, "suppressTracing");
-function isTracingSuppressed(context3) {
-  return context3.getValue(SUPPRESS_TRACING_KEY) === true;
-}
-__name(isTracingSuppressed, "isTracingSuppressed");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/baggage/constants.js
-var BAGGAGE_KEY_PAIR_SEPARATOR = "=";
-var BAGGAGE_PROPERTIES_SEPARATOR = ";";
-var BAGGAGE_ITEMS_SEPARATOR = ",";
-var BAGGAGE_HEADER = "baggage";
-var BAGGAGE_MAX_NAME_VALUE_PAIRS = 180;
-var BAGGAGE_MAX_PER_NAME_VALUE_PAIRS = 4096;
-var BAGGAGE_MAX_TOTAL_LENGTH = 8192;
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/baggage/utils.js
-var __read = function(o2, n2) {
-  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-  if (!m2)
-    return o2;
-  var i = m2.call(o2), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
-      ar.push(r2.value);
-  } catch (error2) {
-    e2 = { error: error2 };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-function serializeKeyPairs(keyPairs) {
-  return keyPairs.reduce(function(hValue, current) {
-    var value = "" + hValue + (hValue !== "" ? BAGGAGE_ITEMS_SEPARATOR : "") + current;
-    return value.length > BAGGAGE_MAX_TOTAL_LENGTH ? hValue : value;
-  }, "");
-}
-__name(serializeKeyPairs, "serializeKeyPairs");
-function getKeyPairs(baggage) {
-  return baggage.getAllEntries().map(function(_a3) {
-    var _b2 = __read(_a3, 2), key = _b2[0], value = _b2[1];
-    var entry = encodeURIComponent(key) + "=" + encodeURIComponent(value.value);
-    if (value.metadata !== void 0) {
-      entry += BAGGAGE_PROPERTIES_SEPARATOR + value.metadata.toString();
-    }
-    return entry;
-  });
-}
-__name(getKeyPairs, "getKeyPairs");
-function parsePairKeyValue(entry) {
-  var valueProps = entry.split(BAGGAGE_PROPERTIES_SEPARATOR);
-  if (valueProps.length <= 0)
-    return;
-  var keyPairPart = valueProps.shift();
-  if (!keyPairPart)
-    return;
-  var keyPair = keyPairPart.split(BAGGAGE_KEY_PAIR_SEPARATOR);
-  if (keyPair.length !== 2)
-    return;
-  var key = decodeURIComponent(keyPair[0].trim());
-  var value = decodeURIComponent(keyPair[1].trim());
-  var metadata;
-  if (valueProps.length > 0) {
-    metadata = baggageEntryMetadataFromString(valueProps.join(BAGGAGE_PROPERTIES_SEPARATOR));
-  }
-  return { key, value, metadata };
-}
-__name(parsePairKeyValue, "parsePairKeyValue");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/baggage/propagation/W3CBaggagePropagator.js
-var W3CBaggagePropagator = function() {
-  function W3CBaggagePropagator2() {
-  }
-  __name(W3CBaggagePropagator2, "W3CBaggagePropagator");
-  W3CBaggagePropagator2.prototype.inject = function(context3, carrier, setter) {
-    var baggage = propagation.getBaggage(context3);
-    if (!baggage || isTracingSuppressed(context3))
-      return;
-    var keyPairs = getKeyPairs(baggage).filter(function(pair) {
-      return pair.length <= BAGGAGE_MAX_PER_NAME_VALUE_PAIRS;
-    }).slice(0, BAGGAGE_MAX_NAME_VALUE_PAIRS);
-    var headerValue = serializeKeyPairs(keyPairs);
-    if (headerValue.length > 0) {
-      setter.set(carrier, BAGGAGE_HEADER, headerValue);
-    }
-  };
-  W3CBaggagePropagator2.prototype.extract = function(context3, carrier, getter) {
-    var headerValue = getter.get(carrier, BAGGAGE_HEADER);
-    var baggageString = Array.isArray(headerValue) ? headerValue.join(BAGGAGE_ITEMS_SEPARATOR) : headerValue;
-    if (!baggageString)
-      return context3;
-    var baggage = {};
-    if (baggageString.length === 0) {
-      return context3;
-    }
-    var pairs = baggageString.split(BAGGAGE_ITEMS_SEPARATOR);
-    pairs.forEach(function(entry) {
-      var keyPair = parsePairKeyValue(entry);
-      if (keyPair) {
-        var baggageEntry = { value: keyPair.value };
-        if (keyPair.metadata) {
-          baggageEntry.metadata = keyPair.metadata;
-        }
-        baggage[keyPair.key] = baggageEntry;
-      }
-    });
-    if (Object.entries(baggage).length === 0) {
-      return context3;
-    }
-    return propagation.setBaggage(context3, propagation.createBaggage(baggage));
-  };
-  W3CBaggagePropagator2.prototype.fields = function() {
-    return [BAGGAGE_HEADER];
-  };
-  return W3CBaggagePropagator2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/anchored-clock.js
-var AnchoredClock = function() {
-  function AnchoredClock2(systemClock, monotonicClock) {
-    this._monotonicClock = monotonicClock;
-    this._epochMillis = systemClock.now();
-    this._performanceMillis = monotonicClock.now();
-  }
-  __name(AnchoredClock2, "AnchoredClock");
-  AnchoredClock2.prototype.now = function() {
-    var delta = this._monotonicClock.now() - this._performanceMillis;
-    return this._epochMillis + delta;
-  };
-  return AnchoredClock2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/attributes.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.8.0_@opentelemetry+api@1.3.0/node_modules/@opentelemetry/core/build/esm/common/attributes.js
 var __values = function(o2) {
   var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
   if (m2)
@@ -22150,7 +21919,7 @@ var __values = function(o2) {
     };
   throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-var __read2 = function(o2, n2) {
+var __read5 = function(o2, n2) {
   var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
   if (!m2)
     return o2;
@@ -22172,20 +21941,20 @@ var __read2 = function(o2, n2) {
   return ar;
 };
 function sanitizeAttributes(attributes) {
-  var e_1, _a3;
+  var e_1, _a;
   var out = {};
   if (typeof attributes !== "object" || attributes == null) {
     return out;
   }
   try {
-    for (var _b2 = __values(Object.entries(attributes)), _c = _b2.next(); !_c.done; _c = _b2.next()) {
-      var _d = __read2(_c.value, 2), key = _d[0], val = _d[1];
+    for (var _b = __values(Object.entries(attributes)), _c = _b.next(); !_c.done; _c = _b.next()) {
+      var _d = __read5(_c.value, 2), key = _d[0], val = _d[1];
       if (!isAttributeKey(key)) {
-        diag2.warn("Invalid attribute key: " + key);
+        diag.warn("Invalid attribute key: " + key);
         continue;
       }
       if (!isAttributeValue(val)) {
-        diag2.warn("Invalid attribute value set for key: " + key);
+        diag.warn("Invalid attribute value set for key: " + key);
         continue;
       }
       if (Array.isArray(val)) {
@@ -22198,8 +21967,8 @@ function sanitizeAttributes(attributes) {
     e_1 = { error: e_1_1 };
   } finally {
     try {
-      if (_c && !_c.done && (_a3 = _b2.return))
-        _a3.call(_b2);
+      if (_c && !_c.done && (_a = _b.return))
+        _a.call(_b);
     } finally {
       if (e_1)
         throw e_1.error;
@@ -22223,7 +21992,7 @@ function isAttributeValue(val) {
 }
 __name(isAttributeValue, "isAttributeValue");
 function isHomogeneousAttributeValueArray(arr) {
-  var e_2, _a3;
+  var e_2, _a;
   var type;
   try {
     for (var arr_1 = __values(arr), arr_1_1 = arr_1.next(); !arr_1_1.done; arr_1_1 = arr_1.next()) {
@@ -22246,8 +22015,8 @@ function isHomogeneousAttributeValueArray(arr) {
     e_2 = { error: e_2_1 };
   } finally {
     try {
-      if (arr_1_1 && !arr_1_1.done && (_a3 = arr_1.return))
-        _a3.call(arr_1);
+      if (arr_1_1 && !arr_1_1.done && (_a = arr_1.return))
+        _a.call(arr_1);
     } finally {
       if (e_2)
         throw e_2.error;
@@ -22267,288 +22036,11 @@ function isValidPrimitiveAttributeValue(val) {
 }
 __name(isValidPrimitiveAttributeValue, "isValidPrimitiveAttributeValue");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/logging-error-handler.js
-function loggingErrorHandler() {
-  return function(ex) {
-    diag2.error(stringifyException(ex));
-  };
-}
-__name(loggingErrorHandler, "loggingErrorHandler");
-function stringifyException(ex) {
-  if (typeof ex === "string") {
-    return ex;
-  } else {
-    return JSON.stringify(flattenException(ex));
-  }
-}
-__name(stringifyException, "stringifyException");
-function flattenException(ex) {
-  var result = {};
-  var current = ex;
-  while (current !== null) {
-    Object.getOwnPropertyNames(current).forEach(function(propertyName) {
-      if (result[propertyName])
-        return;
-      var value = current[propertyName];
-      if (value) {
-        result[propertyName] = String(value);
-      }
-    });
-    current = Object.getPrototypeOf(current);
-  }
-  return result;
-}
-__name(flattenException, "flattenException");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/global-error-handler.js
-var delegateHandler = loggingErrorHandler();
-function globalErrorHandler(ex) {
-  try {
-    delegateHandler(ex);
-  } catch (_a3) {
-  }
-}
-__name(globalErrorHandler, "globalErrorHandler");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/environment.js
-var os2 = __toESM(require("os"));
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/sampling.js
-var TracesSamplerValues;
-(function(TracesSamplerValues2) {
-  TracesSamplerValues2["AlwaysOff"] = "always_off";
-  TracesSamplerValues2["AlwaysOn"] = "always_on";
-  TracesSamplerValues2["ParentBasedAlwaysOff"] = "parentbased_always_off";
-  TracesSamplerValues2["ParentBasedAlwaysOn"] = "parentbased_always_on";
-  TracesSamplerValues2["ParentBasedTraceIdRatio"] = "parentbased_traceidratio";
-  TracesSamplerValues2["TraceIdRatio"] = "traceidratio";
-})(TracesSamplerValues || (TracesSamplerValues = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/browser/globalThis.js
-var _globalThis2 = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/environment.js
-var DEFAULT_LIST_SEPARATOR = ",";
-var ENVIRONMENT_NUMBERS_KEYS = [
-  "OTEL_BSP_EXPORT_TIMEOUT",
-  "OTEL_BSP_MAX_EXPORT_BATCH_SIZE",
-  "OTEL_BSP_MAX_QUEUE_SIZE",
-  "OTEL_BSP_SCHEDULE_DELAY",
-  "OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT",
-  "OTEL_ATTRIBUTE_COUNT_LIMIT",
-  "OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT",
-  "OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT",
-  "OTEL_SPAN_EVENT_COUNT_LIMIT",
-  "OTEL_SPAN_LINK_COUNT_LIMIT",
-  "OTEL_EXPORTER_OTLP_TIMEOUT",
-  "OTEL_EXPORTER_OTLP_TRACES_TIMEOUT",
-  "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT",
-  "OTEL_EXPORTER_JAEGER_AGENT_PORT"
-];
-function isEnvVarANumber(key) {
-  return ENVIRONMENT_NUMBERS_KEYS.indexOf(key) > -1;
-}
-__name(isEnvVarANumber, "isEnvVarANumber");
-var ENVIRONMENT_LISTS_KEYS = [
-  "OTEL_NO_PATCH_MODULES",
-  "OTEL_PROPAGATORS"
-];
-function isEnvVarAList(key) {
-  return ENVIRONMENT_LISTS_KEYS.indexOf(key) > -1;
-}
-__name(isEnvVarAList, "isEnvVarAList");
-var DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT = Infinity;
-var DEFAULT_ATTRIBUTE_COUNT_LIMIT = 128;
-var DEFAULT_ENVIRONMENT = {
-  CONTAINER_NAME: "",
-  ECS_CONTAINER_METADATA_URI_V4: "",
-  ECS_CONTAINER_METADATA_URI: "",
-  HOSTNAME: "",
-  KUBERNETES_SERVICE_HOST: "",
-  NAMESPACE: "",
-  OTEL_BSP_EXPORT_TIMEOUT: 3e4,
-  OTEL_BSP_MAX_EXPORT_BATCH_SIZE: 512,
-  OTEL_BSP_MAX_QUEUE_SIZE: 2048,
-  OTEL_BSP_SCHEDULE_DELAY: 5e3,
-  OTEL_EXPORTER_JAEGER_AGENT_HOST: "",
-  OTEL_EXPORTER_JAEGER_AGENT_PORT: 6832,
-  OTEL_EXPORTER_JAEGER_ENDPOINT: "",
-  OTEL_EXPORTER_JAEGER_PASSWORD: "",
-  OTEL_EXPORTER_JAEGER_USER: "",
-  OTEL_EXPORTER_OTLP_ENDPOINT: "",
-  OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "",
-  OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: "",
-  OTEL_EXPORTER_OTLP_HEADERS: "",
-  OTEL_EXPORTER_OTLP_TRACES_HEADERS: "",
-  OTEL_EXPORTER_OTLP_METRICS_HEADERS: "",
-  OTEL_EXPORTER_OTLP_TIMEOUT: 1e4,
-  OTEL_EXPORTER_OTLP_TRACES_TIMEOUT: 1e4,
-  OTEL_EXPORTER_OTLP_METRICS_TIMEOUT: 1e4,
-  OTEL_EXPORTER_ZIPKIN_ENDPOINT: "http://localhost:9411/api/v2/spans",
-  OTEL_LOG_LEVEL: DiagLogLevel.INFO,
-  OTEL_NO_PATCH_MODULES: [],
-  OTEL_PROPAGATORS: ["tracecontext", "baggage"],
-  OTEL_RESOURCE_ATTRIBUTES: "",
-  OTEL_SERVICE_NAME: "",
-  OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT: DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-  OTEL_ATTRIBUTE_COUNT_LIMIT: DEFAULT_ATTRIBUTE_COUNT_LIMIT,
-  OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT: DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-  OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT: DEFAULT_ATTRIBUTE_COUNT_LIMIT,
-  OTEL_SPAN_EVENT_COUNT_LIMIT: 128,
-  OTEL_SPAN_LINK_COUNT_LIMIT: 128,
-  OTEL_TRACES_EXPORTER: "none",
-  OTEL_TRACES_SAMPLER: TracesSamplerValues.ParentBasedAlwaysOn,
-  OTEL_TRACES_SAMPLER_ARG: "",
-  OTEL_EXPORTER_OTLP_INSECURE: "",
-  OTEL_EXPORTER_OTLP_TRACES_INSECURE: "",
-  OTEL_EXPORTER_OTLP_METRICS_INSECURE: "",
-  OTEL_EXPORTER_OTLP_CERTIFICATE: "",
-  OTEL_EXPORTER_OTLP_TRACES_CERTIFICATE: "",
-  OTEL_EXPORTER_OTLP_METRICS_CERTIFICATE: "",
-  OTEL_EXPORTER_OTLP_COMPRESSION: "",
-  OTEL_EXPORTER_OTLP_TRACES_COMPRESSION: "",
-  OTEL_EXPORTER_OTLP_METRICS_COMPRESSION: "",
-  OTEL_EXPORTER_OTLP_CLIENT_KEY: "",
-  OTEL_EXPORTER_OTLP_TRACES_CLIENT_KEY: "",
-  OTEL_EXPORTER_OTLP_METRICS_CLIENT_KEY: "",
-  OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE: "",
-  OTEL_EXPORTER_OTLP_TRACES_CLIENT_CERTIFICATE: "",
-  OTEL_EXPORTER_OTLP_METRICS_CLIENT_CERTIFICATE: ""
-};
-function parseNumber(name, environment, values, min2, max2) {
-  if (min2 === void 0) {
-    min2 = -Infinity;
-  }
-  if (max2 === void 0) {
-    max2 = Infinity;
-  }
-  if (typeof values[name] !== "undefined") {
-    var value = Number(values[name]);
-    if (!isNaN(value)) {
-      if (value < min2) {
-        environment[name] = min2;
-      } else if (value > max2) {
-        environment[name] = max2;
-      } else {
-        environment[name] = value;
-      }
-    }
-  }
-}
-__name(parseNumber, "parseNumber");
-function parseStringList(name, output, input, separator) {
-  if (separator === void 0) {
-    separator = DEFAULT_LIST_SEPARATOR;
-  }
-  var givenValue = input[name];
-  if (typeof givenValue === "string") {
-    output[name] = givenValue.split(separator).map(function(v) {
-      return v.trim();
-    });
-  }
-}
-__name(parseStringList, "parseStringList");
-var logLevelMap = {
-  ALL: DiagLogLevel.ALL,
-  VERBOSE: DiagLogLevel.VERBOSE,
-  DEBUG: DiagLogLevel.DEBUG,
-  INFO: DiagLogLevel.INFO,
-  WARN: DiagLogLevel.WARN,
-  ERROR: DiagLogLevel.ERROR,
-  NONE: DiagLogLevel.NONE
-};
-function setLogLevelFromEnv(key, environment, values) {
-  var value = values[key];
-  if (typeof value === "string") {
-    var theLevel = logLevelMap[value.toUpperCase()];
-    if (theLevel != null) {
-      environment[key] = theLevel;
-    }
-  }
-}
-__name(setLogLevelFromEnv, "setLogLevelFromEnv");
-function parseEnvironment(values) {
-  var environment = {};
-  for (var env2 in DEFAULT_ENVIRONMENT) {
-    var key = env2;
-    switch (key) {
-      case "OTEL_LOG_LEVEL":
-        setLogLevelFromEnv(key, environment, values);
-        break;
-      default:
-        if (isEnvVarANumber(key)) {
-          parseNumber(key, environment, values);
-        } else if (isEnvVarAList(key)) {
-          parseStringList(key, environment, values);
-        } else {
-          var value = values[key];
-          if (typeof value !== "undefined" && value !== null) {
-            environment[key] = String(value);
-          }
-        }
-    }
-  }
-  return environment;
-}
-__name(parseEnvironment, "parseEnvironment");
-function getEnvWithoutDefaults() {
-  return typeof process !== "undefined" ? parseEnvironment(process.env) : parseEnvironment(_globalThis2);
-}
-__name(getEnvWithoutDefaults, "getEnvWithoutDefaults");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/environment.js
-function getEnv() {
-  var processEnv = parseEnvironment(process.env);
-  return Object.assign({
-    HOSTNAME: os2.hostname()
-  }, DEFAULT_ENVIRONMENT, processEnv);
-}
-__name(getEnv, "getEnv");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/globalThis.js
-var _globalThis3 = typeof globalThis === "object" ? globalThis : global;
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/hex-to-base64.js
-var buf8 = Buffer.alloc(8);
-var buf16 = Buffer.alloc(16);
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/RandomIdGenerator.js
-var SPAN_ID_BYTES = 8;
-var TRACE_ID_BYTES = 16;
-var RandomIdGenerator = function() {
-  function RandomIdGenerator3() {
-    this.generateTraceId = getIdGenerator(TRACE_ID_BYTES);
-    this.generateSpanId = getIdGenerator(SPAN_ID_BYTES);
-  }
-  __name(RandomIdGenerator3, "RandomIdGenerator");
-  return RandomIdGenerator3;
-}();
-var SHARED_BUFFER = Buffer.allocUnsafe(TRACE_ID_BYTES);
-function getIdGenerator(bytes) {
-  return /* @__PURE__ */ __name(function generateId() {
-    for (var i = 0; i < bytes / 4; i++) {
-      SHARED_BUFFER.writeUInt32BE(Math.random() * Math.pow(2, 32) >>> 0, i * 4);
-    }
-    for (var i = 0; i < bytes; i++) {
-      if (SHARED_BUFFER[i] > 0) {
-        break;
-      } else if (i === bytes - 1) {
-        SHARED_BUFFER[bytes - 1] = 1;
-      }
-    }
-    return SHARED_BUFFER.toString("hex", 0, bytes);
-  }, "generateId");
-}
-__name(getIdGenerator, "getIdGenerator");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/performance.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.8.0_@opentelemetry+api@1.3.0/node_modules/@opentelemetry/core/build/esm/platform/node/performance.js
 var import_perf_hooks = require("perf_hooks");
 var otperformance = import_perf_hooks.performance;
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/version.js
-var VERSION2 = "1.7.0";
-
-// ../../node_modules/.pnpm/@opentelemetry+semantic-conventions@1.7.0/node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
+// ../../node_modules/.pnpm/@opentelemetry+semantic-conventions@1.8.0/node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
 var SemanticAttributes = {
   AWS_LAMBDA_INVOKED_ARN: "aws.lambda.invoked_arn",
   DB_SYSTEM: "db.system",
@@ -22680,114 +22172,7 @@ var SemanticAttributes = {
   MESSAGE_UNCOMPRESSED_SIZE: "message.uncompressed_size"
 };
 
-// ../../node_modules/.pnpm/@opentelemetry+semantic-conventions@1.7.0/node_modules/@opentelemetry/semantic-conventions/build/esm/resource/SemanticResourceAttributes.js
-var SemanticResourceAttributes = {
-  CLOUD_PROVIDER: "cloud.provider",
-  CLOUD_ACCOUNT_ID: "cloud.account.id",
-  CLOUD_REGION: "cloud.region",
-  CLOUD_AVAILABILITY_ZONE: "cloud.availability_zone",
-  CLOUD_PLATFORM: "cloud.platform",
-  AWS_ECS_CONTAINER_ARN: "aws.ecs.container.arn",
-  AWS_ECS_CLUSTER_ARN: "aws.ecs.cluster.arn",
-  AWS_ECS_LAUNCHTYPE: "aws.ecs.launchtype",
-  AWS_ECS_TASK_ARN: "aws.ecs.task.arn",
-  AWS_ECS_TASK_FAMILY: "aws.ecs.task.family",
-  AWS_ECS_TASK_REVISION: "aws.ecs.task.revision",
-  AWS_EKS_CLUSTER_ARN: "aws.eks.cluster.arn",
-  AWS_LOG_GROUP_NAMES: "aws.log.group.names",
-  AWS_LOG_GROUP_ARNS: "aws.log.group.arns",
-  AWS_LOG_STREAM_NAMES: "aws.log.stream.names",
-  AWS_LOG_STREAM_ARNS: "aws.log.stream.arns",
-  CONTAINER_NAME: "container.name",
-  CONTAINER_ID: "container.id",
-  CONTAINER_RUNTIME: "container.runtime",
-  CONTAINER_IMAGE_NAME: "container.image.name",
-  CONTAINER_IMAGE_TAG: "container.image.tag",
-  DEPLOYMENT_ENVIRONMENT: "deployment.environment",
-  DEVICE_ID: "device.id",
-  DEVICE_MODEL_IDENTIFIER: "device.model.identifier",
-  DEVICE_MODEL_NAME: "device.model.name",
-  FAAS_NAME: "faas.name",
-  FAAS_ID: "faas.id",
-  FAAS_VERSION: "faas.version",
-  FAAS_INSTANCE: "faas.instance",
-  FAAS_MAX_MEMORY: "faas.max_memory",
-  HOST_ID: "host.id",
-  HOST_NAME: "host.name",
-  HOST_TYPE: "host.type",
-  HOST_ARCH: "host.arch",
-  HOST_IMAGE_NAME: "host.image.name",
-  HOST_IMAGE_ID: "host.image.id",
-  HOST_IMAGE_VERSION: "host.image.version",
-  K8S_CLUSTER_NAME: "k8s.cluster.name",
-  K8S_NODE_NAME: "k8s.node.name",
-  K8S_NODE_UID: "k8s.node.uid",
-  K8S_NAMESPACE_NAME: "k8s.namespace.name",
-  K8S_POD_UID: "k8s.pod.uid",
-  K8S_POD_NAME: "k8s.pod.name",
-  K8S_CONTAINER_NAME: "k8s.container.name",
-  K8S_REPLICASET_UID: "k8s.replicaset.uid",
-  K8S_REPLICASET_NAME: "k8s.replicaset.name",
-  K8S_DEPLOYMENT_UID: "k8s.deployment.uid",
-  K8S_DEPLOYMENT_NAME: "k8s.deployment.name",
-  K8S_STATEFULSET_UID: "k8s.statefulset.uid",
-  K8S_STATEFULSET_NAME: "k8s.statefulset.name",
-  K8S_DAEMONSET_UID: "k8s.daemonset.uid",
-  K8S_DAEMONSET_NAME: "k8s.daemonset.name",
-  K8S_JOB_UID: "k8s.job.uid",
-  K8S_JOB_NAME: "k8s.job.name",
-  K8S_CRONJOB_UID: "k8s.cronjob.uid",
-  K8S_CRONJOB_NAME: "k8s.cronjob.name",
-  OS_TYPE: "os.type",
-  OS_DESCRIPTION: "os.description",
-  OS_NAME: "os.name",
-  OS_VERSION: "os.version",
-  PROCESS_PID: "process.pid",
-  PROCESS_EXECUTABLE_NAME: "process.executable.name",
-  PROCESS_EXECUTABLE_PATH: "process.executable.path",
-  PROCESS_COMMAND: "process.command",
-  PROCESS_COMMAND_LINE: "process.command_line",
-  PROCESS_COMMAND_ARGS: "process.command_args",
-  PROCESS_OWNER: "process.owner",
-  PROCESS_RUNTIME_NAME: "process.runtime.name",
-  PROCESS_RUNTIME_VERSION: "process.runtime.version",
-  PROCESS_RUNTIME_DESCRIPTION: "process.runtime.description",
-  SERVICE_NAME: "service.name",
-  SERVICE_NAMESPACE: "service.namespace",
-  SERVICE_INSTANCE_ID: "service.instance.id",
-  SERVICE_VERSION: "service.version",
-  TELEMETRY_SDK_NAME: "telemetry.sdk.name",
-  TELEMETRY_SDK_LANGUAGE: "telemetry.sdk.language",
-  TELEMETRY_SDK_VERSION: "telemetry.sdk.version",
-  TELEMETRY_AUTO_VERSION: "telemetry.auto.version",
-  WEBENGINE_NAME: "webengine.name",
-  WEBENGINE_VERSION: "webengine.version",
-  WEBENGINE_DESCRIPTION: "webengine.description"
-};
-var TelemetrySdkLanguageValues = {
-  CPP: "cpp",
-  DOTNET: "dotnet",
-  ERLANG: "erlang",
-  GO: "go",
-  JAVA: "java",
-  NODEJS: "nodejs",
-  PHP: "php",
-  PYTHON: "python",
-  RUBY: "ruby",
-  WEBJS: "webjs"
-};
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/sdk-info.js
-var _a2;
-var SDK_INFO = (_a2 = {}, _a2[SemanticResourceAttributes.TELEMETRY_SDK_NAME] = "opentelemetry", _a2[SemanticResourceAttributes.PROCESS_RUNTIME_NAME] = "node", _a2[SemanticResourceAttributes.TELEMETRY_SDK_LANGUAGE] = TelemetrySdkLanguageValues.NODEJS, _a2[SemanticResourceAttributes.TELEMETRY_SDK_VERSION] = VERSION2, _a2);
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/platform/node/timer-util.js
-function unrefTimer(timer) {
-  timer.unref();
-}
-__name(unrefTimer, "unrefTimer");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/common/time.js
+// ../../node_modules/.pnpm/@opentelemetry+core@1.8.0_@opentelemetry+api@1.3.0/node_modules/@opentelemetry/core/build/esm/common/time.js
 var NANOSECOND_DIGITS = 9;
 var SECOND_TO_NANOSECONDS = Math.pow(10, NANOSECOND_DIGITS);
 function numberToHrtime(epochMillis) {
@@ -22844,10 +22229,6 @@ function hrTimeDuration(startTime, endTime) {
   return [seconds, nanos];
 }
 __name(hrTimeDuration, "hrTimeDuration");
-function hrTimeToMicroseconds(time) {
-  return Math.round(time[0] * 1e6 + time[1] / 1e3);
-}
-__name(hrTimeToMicroseconds, "hrTimeToMicroseconds");
 function isTimeInputHrTime(value) {
   return Array.isArray(value) && value.length === 2 && typeof value[0] === "number" && typeof value[1] === "number";
 }
@@ -22857,14 +22238,10 @@ function isTimeInput(value) {
 }
 __name(isTimeInput, "isTimeInput");
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/ExportResult.js
-var ExportResultCode;
-(function(ExportResultCode2) {
-  ExportResultCode2[ExportResultCode2["SUCCESS"] = 0] = "SUCCESS";
-  ExportResultCode2[ExportResultCode2["FAILED"] = 1] = "FAILED";
-})(ExportResultCode || (ExportResultCode = {}));
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.8.0_@opentelemetry+api@1.3.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/enums.js
+var ExceptionEventName = "exception";
 
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/propagation/composite.js
+// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.8.0_@opentelemetry+api@1.3.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Span.js
 var __values2 = function(o2) {
   var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
   if (m2)
@@ -22879,624 +22256,7 @@ var __values2 = function(o2) {
     };
   throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-var CompositePropagator = function() {
-  function CompositePropagator2(config2) {
-    if (config2 === void 0) {
-      config2 = {};
-    }
-    var _a3;
-    this._propagators = (_a3 = config2.propagators) !== null && _a3 !== void 0 ? _a3 : [];
-    this._fields = Array.from(new Set(this._propagators.map(function(p2) {
-      return typeof p2.fields === "function" ? p2.fields() : [];
-    }).reduce(function(x, y) {
-      return x.concat(y);
-    }, [])));
-  }
-  __name(CompositePropagator2, "CompositePropagator");
-  CompositePropagator2.prototype.inject = function(context3, carrier, setter) {
-    var e_1, _a3;
-    try {
-      for (var _b2 = __values2(this._propagators), _c = _b2.next(); !_c.done; _c = _b2.next()) {
-        var propagator = _c.value;
-        try {
-          propagator.inject(context3, carrier, setter);
-        } catch (err) {
-          diag2.warn("Failed to inject with " + propagator.constructor.name + ". Err: " + err.message);
-        }
-      }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a3 = _b2.return))
-          _a3.call(_b2);
-      } finally {
-        if (e_1)
-          throw e_1.error;
-      }
-    }
-  };
-  CompositePropagator2.prototype.extract = function(context3, carrier, getter) {
-    return this._propagators.reduce(function(ctx, propagator) {
-      try {
-        return propagator.extract(ctx, carrier, getter);
-      } catch (err) {
-        diag2.warn("Failed to inject with " + propagator.constructor.name + ". Err: " + err.message);
-      }
-      return ctx;
-    }, context3);
-  };
-  CompositePropagator2.prototype.fields = function() {
-    return this._fields.slice();
-  };
-  return CompositePropagator2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/internal/validators.js
-var VALID_KEY_CHAR_RANGE2 = "[_0-9a-z-*/]";
-var VALID_KEY2 = "[a-z]" + VALID_KEY_CHAR_RANGE2 + "{0,255}";
-var VALID_VENDOR_KEY2 = "[a-z0-9]" + VALID_KEY_CHAR_RANGE2 + "{0,240}@[a-z]" + VALID_KEY_CHAR_RANGE2 + "{0,13}";
-var VALID_KEY_REGEX2 = new RegExp("^(?:" + VALID_KEY2 + "|" + VALID_VENDOR_KEY2 + ")$");
-var VALID_VALUE_BASE_REGEX2 = /^[ -~]{0,255}[!-~]$/;
-var INVALID_VALUE_COMMA_EQUAL_REGEX2 = /,|=/;
-function validateKey2(key) {
-  return VALID_KEY_REGEX2.test(key);
-}
-__name(validateKey2, "validateKey");
-function validateValue2(value) {
-  return VALID_VALUE_BASE_REGEX2.test(value) && !INVALID_VALUE_COMMA_EQUAL_REGEX2.test(value);
-}
-__name(validateValue2, "validateValue");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/TraceState.js
-var MAX_TRACE_STATE_ITEMS2 = 32;
-var MAX_TRACE_STATE_LEN2 = 512;
-var LIST_MEMBERS_SEPARATOR2 = ",";
-var LIST_MEMBER_KEY_VALUE_SPLITTER2 = "=";
-var TraceState = function() {
-  function TraceState2(rawTraceState) {
-    this._internalState = /* @__PURE__ */ new Map();
-    if (rawTraceState)
-      this._parse(rawTraceState);
-  }
-  __name(TraceState2, "TraceState");
-  TraceState2.prototype.set = function(key, value) {
-    var traceState = this._clone();
-    if (traceState._internalState.has(key)) {
-      traceState._internalState.delete(key);
-    }
-    traceState._internalState.set(key, value);
-    return traceState;
-  };
-  TraceState2.prototype.unset = function(key) {
-    var traceState = this._clone();
-    traceState._internalState.delete(key);
-    return traceState;
-  };
-  TraceState2.prototype.get = function(key) {
-    return this._internalState.get(key);
-  };
-  TraceState2.prototype.serialize = function() {
-    var _this = this;
-    return this._keys().reduce(function(agg, key) {
-      agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER2 + _this.get(key));
-      return agg;
-    }, []).join(LIST_MEMBERS_SEPARATOR2);
-  };
-  TraceState2.prototype._parse = function(rawTraceState) {
-    if (rawTraceState.length > MAX_TRACE_STATE_LEN2)
-      return;
-    this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR2).reverse().reduce(function(agg, part) {
-      var listMember = part.trim();
-      var i = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER2);
-      if (i !== -1) {
-        var key = listMember.slice(0, i);
-        var value = listMember.slice(i + 1, part.length);
-        if (validateKey2(key) && validateValue2(value)) {
-          agg.set(key, value);
-        } else {
-        }
-      }
-      return agg;
-    }, /* @__PURE__ */ new Map());
-    if (this._internalState.size > MAX_TRACE_STATE_ITEMS2) {
-      this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS2));
-    }
-  };
-  TraceState2.prototype._keys = function() {
-    return Array.from(this._internalState.keys()).reverse();
-  };
-  TraceState2.prototype._clone = function() {
-    var traceState = new TraceState2();
-    traceState._internalState = new Map(this._internalState);
-    return traceState;
-  };
-  return TraceState2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/W3CTraceContextPropagator.js
-var TRACE_PARENT_HEADER = "traceparent";
-var TRACE_STATE_HEADER = "tracestate";
-var VERSION3 = "00";
-var VERSION_PART = "(?!ff)[\\da-f]{2}";
-var TRACE_ID_PART = "(?![0]{32})[\\da-f]{32}";
-var PARENT_ID_PART = "(?![0]{16})[\\da-f]{16}";
-var FLAGS_PART = "[\\da-f]{2}";
-var TRACE_PARENT_REGEX = new RegExp("^\\s?(" + VERSION_PART + ")-(" + TRACE_ID_PART + ")-(" + PARENT_ID_PART + ")-(" + FLAGS_PART + ")(-.*)?\\s?$");
-function parseTraceParent(traceParent) {
-  var match = TRACE_PARENT_REGEX.exec(traceParent);
-  if (!match)
-    return null;
-  if (match[1] === "00" && match[5])
-    return null;
-  return {
-    traceId: match[2],
-    spanId: match[3],
-    traceFlags: parseInt(match[4], 16)
-  };
-}
-__name(parseTraceParent, "parseTraceParent");
-var W3CTraceContextPropagator = function() {
-  function W3CTraceContextPropagator2() {
-  }
-  __name(W3CTraceContextPropagator2, "W3CTraceContextPropagator");
-  W3CTraceContextPropagator2.prototype.inject = function(context3, carrier, setter) {
-    var spanContext = trace.getSpanContext(context3);
-    if (!spanContext || isTracingSuppressed(context3) || !isSpanContextValid(spanContext))
-      return;
-    var traceParent = VERSION3 + "-" + spanContext.traceId + "-" + spanContext.spanId + "-0" + Number(spanContext.traceFlags || TraceFlags.NONE).toString(16);
-    setter.set(carrier, TRACE_PARENT_HEADER, traceParent);
-    if (spanContext.traceState) {
-      setter.set(carrier, TRACE_STATE_HEADER, spanContext.traceState.serialize());
-    }
-  };
-  W3CTraceContextPropagator2.prototype.extract = function(context3, carrier, getter) {
-    var traceParentHeader = getter.get(carrier, TRACE_PARENT_HEADER);
-    if (!traceParentHeader)
-      return context3;
-    var traceParent = Array.isArray(traceParentHeader) ? traceParentHeader[0] : traceParentHeader;
-    if (typeof traceParent !== "string")
-      return context3;
-    var spanContext = parseTraceParent(traceParent);
-    if (!spanContext)
-      return context3;
-    spanContext.isRemote = true;
-    var traceStateHeader = getter.get(carrier, TRACE_STATE_HEADER);
-    if (traceStateHeader) {
-      var state = Array.isArray(traceStateHeader) ? traceStateHeader.join(",") : traceStateHeader;
-      spanContext.traceState = new TraceState(typeof state === "string" ? state : void 0);
-    }
-    return trace.setSpanContext(context3, spanContext);
-  };
-  W3CTraceContextPropagator2.prototype.fields = function() {
-    return [TRACE_PARENT_HEADER, TRACE_STATE_HEADER];
-  };
-  return W3CTraceContextPropagator2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/rpc-metadata.js
-var RPC_METADATA_KEY = createContextKey("OpenTelemetry SDK Context Key RPC_METADATA");
-var RPCType;
-(function(RPCType2) {
-  RPCType2["HTTP"] = "http";
-})(RPCType || (RPCType = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/AlwaysOffSampler.js
-var AlwaysOffSampler = function() {
-  function AlwaysOffSampler3() {
-  }
-  __name(AlwaysOffSampler3, "AlwaysOffSampler");
-  AlwaysOffSampler3.prototype.shouldSample = function() {
-    return {
-      decision: SamplingDecision.NOT_RECORD
-    };
-  };
-  AlwaysOffSampler3.prototype.toString = function() {
-    return "AlwaysOffSampler";
-  };
-  return AlwaysOffSampler3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/AlwaysOnSampler.js
-var AlwaysOnSampler = function() {
-  function AlwaysOnSampler3() {
-  }
-  __name(AlwaysOnSampler3, "AlwaysOnSampler");
-  AlwaysOnSampler3.prototype.shouldSample = function() {
-    return {
-      decision: SamplingDecision.RECORD_AND_SAMPLED
-    };
-  };
-  AlwaysOnSampler3.prototype.toString = function() {
-    return "AlwaysOnSampler";
-  };
-  return AlwaysOnSampler3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/ParentBasedSampler.js
-var ParentBasedSampler = function() {
-  function ParentBasedSampler3(config2) {
-    var _a3, _b2, _c, _d;
-    this._root = config2.root;
-    if (!this._root) {
-      globalErrorHandler(new Error("ParentBasedSampler must have a root sampler configured"));
-      this._root = new AlwaysOnSampler();
-    }
-    this._remoteParentSampled = (_a3 = config2.remoteParentSampled) !== null && _a3 !== void 0 ? _a3 : new AlwaysOnSampler();
-    this._remoteParentNotSampled = (_b2 = config2.remoteParentNotSampled) !== null && _b2 !== void 0 ? _b2 : new AlwaysOffSampler();
-    this._localParentSampled = (_c = config2.localParentSampled) !== null && _c !== void 0 ? _c : new AlwaysOnSampler();
-    this._localParentNotSampled = (_d = config2.localParentNotSampled) !== null && _d !== void 0 ? _d : new AlwaysOffSampler();
-  }
-  __name(ParentBasedSampler3, "ParentBasedSampler");
-  ParentBasedSampler3.prototype.shouldSample = function(context3, traceId, spanName, spanKind, attributes, links) {
-    var parentContext = trace.getSpanContext(context3);
-    if (!parentContext || !isSpanContextValid(parentContext)) {
-      return this._root.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-    }
-    if (parentContext.isRemote) {
-      if (parentContext.traceFlags & TraceFlags.SAMPLED) {
-        return this._remoteParentSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-      }
-      return this._remoteParentNotSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-    }
-    if (parentContext.traceFlags & TraceFlags.SAMPLED) {
-      return this._localParentSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-    }
-    return this._localParentNotSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-  };
-  ParentBasedSampler3.prototype.toString = function() {
-    return "ParentBased{root=" + this._root.toString() + ", remoteParentSampled=" + this._remoteParentSampled.toString() + ", remoteParentNotSampled=" + this._remoteParentNotSampled.toString() + ", localParentSampled=" + this._localParentSampled.toString() + ", localParentNotSampled=" + this._localParentNotSampled.toString() + "}";
-  };
-  return ParentBasedSampler3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/trace/sampler/TraceIdRatioBasedSampler.js
-var TraceIdRatioBasedSampler = function() {
-  function TraceIdRatioBasedSampler3(_ratio) {
-    if (_ratio === void 0) {
-      _ratio = 0;
-    }
-    this._ratio = _ratio;
-    this._ratio = this._normalize(_ratio);
-    this._upperBound = Math.floor(this._ratio * 4294967295);
-  }
-  __name(TraceIdRatioBasedSampler3, "TraceIdRatioBasedSampler");
-  TraceIdRatioBasedSampler3.prototype.shouldSample = function(context3, traceId) {
-    return {
-      decision: isValidTraceId(traceId) && this._accumulate(traceId) < this._upperBound ? SamplingDecision.RECORD_AND_SAMPLED : SamplingDecision.NOT_RECORD
-    };
-  };
-  TraceIdRatioBasedSampler3.prototype.toString = function() {
-    return "TraceIdRatioBased{" + this._ratio + "}";
-  };
-  TraceIdRatioBasedSampler3.prototype._normalize = function(ratio) {
-    if (typeof ratio !== "number" || isNaN(ratio))
-      return 0;
-    return ratio >= 1 ? 1 : ratio <= 0 ? 0 : ratio;
-  };
-  TraceIdRatioBasedSampler3.prototype._accumulate = function(traceId) {
-    var accumulation = 0;
-    for (var i = 0; i < traceId.length / 8; i++) {
-      var pos = i * 8;
-      var part = parseInt(traceId.slice(pos, pos + 8), 16);
-      accumulation = (accumulation ^ part) >>> 0;
-    }
-    return accumulation;
-  };
-  return TraceIdRatioBasedSampler3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/lodash.merge.js
-var objectTag = "[object Object]";
-var nullTag = "[object Null]";
-var undefinedTag = "[object Undefined]";
-var funcProto = Function.prototype;
-var funcToString = funcProto.toString;
-var objectCtorString = funcToString.call(Object);
-var getPrototype = overArg(Object.getPrototypeOf, Object);
-var objectProto = Object.prototype;
-var hasOwnProperty = objectProto.hasOwnProperty;
-var symToStringTag = Symbol ? Symbol.toStringTag : void 0;
-var nativeObjectToString = objectProto.toString;
-function overArg(func, transform) {
-  return function(arg2) {
-    return func(transform(arg2));
-  };
-}
-__name(overArg, "overArg");
-function isPlainObject(value) {
-  if (!isObjectLike(value) || baseGetTag(value) !== objectTag) {
-    return false;
-  }
-  var proto = getPrototype(value);
-  if (proto === null) {
-    return true;
-  }
-  var Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
-  return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) === objectCtorString;
-}
-__name(isPlainObject, "isPlainObject");
-function isObjectLike(value) {
-  return value != null && typeof value == "object";
-}
-__name(isObjectLike, "isObjectLike");
-function baseGetTag(value) {
-  if (value == null) {
-    return value === void 0 ? undefinedTag : nullTag;
-  }
-  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
-}
-__name(baseGetTag, "baseGetTag");
-function getRawTag(value) {
-  var isOwn = hasOwnProperty.call(value, symToStringTag), tag2 = value[symToStringTag];
-  var unmasked = false;
-  try {
-    value[symToStringTag] = void 0;
-    unmasked = true;
-  } catch (e2) {
-  }
-  var result = nativeObjectToString.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag] = tag2;
-    } else {
-      delete value[symToStringTag];
-    }
-  }
-  return result;
-}
-__name(getRawTag, "getRawTag");
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-__name(objectToString, "objectToString");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/merge.js
-var MAX_LEVEL = 20;
-function merge() {
-  var args = [];
-  for (var _i = 0; _i < arguments.length; _i++) {
-    args[_i] = arguments[_i];
-  }
-  var result = args.shift();
-  var objects = /* @__PURE__ */ new WeakMap();
-  while (args.length > 0) {
-    result = mergeTwoObjects(result, args.shift(), 0, objects);
-  }
-  return result;
-}
-__name(merge, "merge");
-function takeValue(value) {
-  if (isArray(value)) {
-    return value.slice();
-  }
-  return value;
-}
-__name(takeValue, "takeValue");
-function mergeTwoObjects(one, two, level, objects) {
-  if (level === void 0) {
-    level = 0;
-  }
-  var result;
-  if (level > MAX_LEVEL) {
-    return void 0;
-  }
-  level++;
-  if (isPrimitive(one) || isPrimitive(two) || isFunction(two)) {
-    result = takeValue(two);
-  } else if (isArray(one)) {
-    result = one.slice();
-    if (isArray(two)) {
-      for (var i = 0, j = two.length; i < j; i++) {
-        result.push(takeValue(two[i]));
-      }
-    } else if (isObject(two)) {
-      var keys2 = Object.keys(two);
-      for (var i = 0, j = keys2.length; i < j; i++) {
-        var key = keys2[i];
-        result[key] = takeValue(two[key]);
-      }
-    }
-  } else if (isObject(one)) {
-    if (isObject(two)) {
-      if (!shouldMerge(one, two)) {
-        return two;
-      }
-      result = Object.assign({}, one);
-      var keys2 = Object.keys(two);
-      for (var i = 0, j = keys2.length; i < j; i++) {
-        var key = keys2[i];
-        var twoValue = two[key];
-        if (isPrimitive(twoValue)) {
-          if (typeof twoValue === "undefined") {
-            delete result[key];
-          } else {
-            result[key] = twoValue;
-          }
-        } else {
-          var obj1 = result[key];
-          var obj2 = twoValue;
-          if (wasObjectReferenced(one, key, objects) || wasObjectReferenced(two, key, objects)) {
-            delete result[key];
-          } else {
-            if (isObject(obj1) && isObject(obj2)) {
-              var arr1 = objects.get(obj1) || [];
-              var arr2 = objects.get(obj2) || [];
-              arr1.push({ obj: one, key });
-              arr2.push({ obj: two, key });
-              objects.set(obj1, arr1);
-              objects.set(obj2, arr2);
-            }
-            result[key] = mergeTwoObjects(result[key], twoValue, level, objects);
-          }
-        }
-      }
-    } else {
-      result = two;
-    }
-  }
-  return result;
-}
-__name(mergeTwoObjects, "mergeTwoObjects");
-function wasObjectReferenced(obj, key, objects) {
-  var arr = objects.get(obj[key]) || [];
-  for (var i = 0, j = arr.length; i < j; i++) {
-    var info2 = arr[i];
-    if (info2.key === key && info2.obj === obj) {
-      return true;
-    }
-  }
-  return false;
-}
-__name(wasObjectReferenced, "wasObjectReferenced");
-function isArray(value) {
-  return Array.isArray(value);
-}
-__name(isArray, "isArray");
-function isFunction(value) {
-  return typeof value === "function";
-}
-__name(isFunction, "isFunction");
-function isObject(value) {
-  return !isPrimitive(value) && !isArray(value) && !isFunction(value) && typeof value === "object";
-}
-__name(isObject, "isObject");
-function isPrimitive(value) {
-  return typeof value === "string" || typeof value === "number" || typeof value === "boolean" || typeof value === "undefined" || value instanceof Date || value instanceof RegExp || value === null;
-}
-__name(isPrimitive, "isPrimitive");
-function shouldMerge(one, two) {
-  if (!isPlainObject(one) || !isPlainObject(two)) {
-    return false;
-  }
-  return true;
-}
-__name(shouldMerge, "shouldMerge");
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/promise.js
-var Deferred = function() {
-  function Deferred2() {
-    var _this = this;
-    this._promise = new Promise(function(resolve, reject) {
-      _this._resolve = resolve;
-      _this._reject = reject;
-    });
-  }
-  __name(Deferred2, "Deferred");
-  Object.defineProperty(Deferred2.prototype, "promise", {
-    get: function() {
-      return this._promise;
-    },
-    enumerable: false,
-    configurable: true
-  });
-  Deferred2.prototype.resolve = function(val) {
-    this._resolve(val);
-  };
-  Deferred2.prototype.reject = function(err) {
-    this._reject(err);
-  };
-  return Deferred2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+core@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/core/build/esm/utils/callback.js
-var __read3 = function(o2, n2) {
-  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-  if (!m2)
-    return o2;
-  var i = m2.call(o2), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
-      ar.push(r2.value);
-  } catch (error2) {
-    e2 = { error: error2 };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-var __spreadArray3 = function(to, from, pack) {
-  if (pack || arguments.length === 2)
-    for (var i = 0, l = from.length, ar; i < l; i++) {
-      if (ar || !(i in from)) {
-        if (!ar)
-          ar = Array.prototype.slice.call(from, 0, i);
-        ar[i] = from[i];
-      }
-    }
-  return to.concat(ar || Array.prototype.slice.call(from));
-};
-var BindOnceFuture = function() {
-  function BindOnceFuture2(_callback, _that) {
-    this._callback = _callback;
-    this._that = _that;
-    this._isCalled = false;
-    this._deferred = new Deferred();
-  }
-  __name(BindOnceFuture2, "BindOnceFuture");
-  Object.defineProperty(BindOnceFuture2.prototype, "isCalled", {
-    get: function() {
-      return this._isCalled;
-    },
-    enumerable: false,
-    configurable: true
-  });
-  Object.defineProperty(BindOnceFuture2.prototype, "promise", {
-    get: function() {
-      return this._deferred.promise;
-    },
-    enumerable: false,
-    configurable: true
-  });
-  BindOnceFuture2.prototype.call = function() {
-    var _a3;
-    var _this = this;
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      args[_i] = arguments[_i];
-    }
-    if (!this._isCalled) {
-      this._isCalled = true;
-      try {
-        Promise.resolve((_a3 = this._callback).call.apply(_a3, __spreadArray3([this._that], __read3(args), false))).then(function(val) {
-          return _this._deferred.resolve(val);
-        }, function(err) {
-          return _this._deferred.reject(err);
-        });
-      } catch (err) {
-        this._deferred.reject(err);
-      }
-    }
-    return this._deferred.promise;
-  };
-  return BindOnceFuture2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/enums.js
-var ExceptionEventName = "exception";
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Span.js
-var __values3 = function(o2) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
-  if (m2)
-    return m2.call(o2);
-  if (o2 && typeof o2.length === "number")
-    return {
-      next: function() {
-        if (o2 && i >= o2.length)
-          o2 = void 0;
-        return { value: o2 && o2[i++], done: !o2 };
-      }
-    };
-  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-var __read4 = function(o2, n2) {
+var __read6 = function(o2, n2) {
   var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
   if (!m2)
     return o2;
@@ -23518,7 +22278,7 @@ var __read4 = function(o2, n2) {
   return ar;
 };
 var Span = function() {
-  function Span3(parentTracer, context3, spanName, spanContext, kind, parentSpanId, links, startTime, clock) {
+  function Span3(parentTracer, context2, spanName, spanContext, kind, parentSpanId, links, startTime, clock) {
     if (links === void 0) {
       links = [];
     }
@@ -23545,7 +22305,7 @@ var Span = function() {
     this.instrumentationLibrary = parentTracer.instrumentationLibrary;
     this._spanLimits = parentTracer.getSpanLimits();
     this._spanProcessor = parentTracer.getActiveSpanProcessor();
-    this._spanProcessor.onStart(this, context3);
+    this._spanProcessor.onStart(this, context2);
     this._attributeValueLengthLimit = this._spanLimits.attributeValueLengthLimit || 0;
   }
   __name(Span3, "Span");
@@ -23556,11 +22316,11 @@ var Span = function() {
     if (value == null || this._isSpanEnded())
       return this;
     if (key.length === 0) {
-      diag2.warn("Invalid attribute key: " + key);
+      diag.warn("Invalid attribute key: " + key);
       return this;
     }
     if (!isAttributeValue(value)) {
-      diag2.warn("Invalid attribute value set for key: " + key);
+      diag.warn("Invalid attribute value set for key: " + key);
       return this;
     }
     if (Object.keys(this.attributes).length >= this._spanLimits.attributeCountLimit && !Object.prototype.hasOwnProperty.call(this.attributes, key)) {
@@ -23570,18 +22330,18 @@ var Span = function() {
     return this;
   };
   Span3.prototype.setAttributes = function(attributes) {
-    var e_1, _a3;
+    var e_1, _a;
     try {
-      for (var _b2 = __values3(Object.entries(attributes)), _c = _b2.next(); !_c.done; _c = _b2.next()) {
-        var _d = __read4(_c.value, 2), k = _d[0], v = _d[1];
+      for (var _b = __values2(Object.entries(attributes)), _c = _b.next(); !_c.done; _c = _b.next()) {
+        var _d = __read6(_c.value, 2), k = _d[0], v = _d[1];
         this.setAttribute(k, v);
       }
     } catch (e_1_1) {
       e_1 = { error: e_1_1 };
     } finally {
       try {
-        if (_c && !_c.done && (_a3 = _b2.return))
-          _a3.call(_b2);
+        if (_c && !_c.done && (_a = _b.return))
+          _a.call(_b);
       } finally {
         if (e_1)
           throw e_1.error;
@@ -23593,11 +22353,11 @@ var Span = function() {
     if (this._isSpanEnded())
       return this;
     if (this._spanLimits.eventCountLimit === 0) {
-      diag2.warn("No events allowed.");
+      diag.warn("No events allowed.");
       return this;
     }
     if (this.events.length >= this._spanLimits.eventCountLimit) {
-      diag2.warn("Dropping extra events.");
+      diag.warn("Dropping extra events.");
       this.events.shift();
     }
     if (isTimeInput(attributesOrStartTime)) {
@@ -23631,14 +22391,16 @@ var Span = function() {
   };
   Span3.prototype.end = function(endTime) {
     if (this._isSpanEnded()) {
-      diag2.error("You can only call end() on a span once.");
+      diag.error("You can only call end() on a span once.");
       return;
     }
     this._ended = true;
     this.endTime = timeInputToHrTime(endTime !== null && endTime !== void 0 ? endTime : this._clock.now());
     this._duration = hrTimeDuration(this.startTime, this.endTime);
     if (this._duration[0] < 0) {
-      diag2.warn("Inconsistent start and end time, startTime > endTime", this.startTime, this.endTime);
+      diag.warn("Inconsistent start and end time, startTime > endTime. Setting span duration to 0ms.", this.startTime, this.endTime);
+      this.endTime = this.startTime.slice();
+      this._duration = [0, 0];
     }
     this._spanProcessor.onEnd(this);
   };
@@ -23668,7 +22430,7 @@ var Span = function() {
     if (attributes[SemanticAttributes.EXCEPTION_TYPE] || attributes[SemanticAttributes.EXCEPTION_MESSAGE]) {
       this.addEvent(ExceptionEventName, attributes, time);
     } else {
-      diag2.warn("Failed to record an exception " + exception);
+      diag.warn("Failed to record an exception " + exception);
     }
   };
   Object.defineProperty(Span3.prototype, "duration", {
@@ -23687,7 +22449,7 @@ var Span = function() {
   });
   Span3.prototype._isSpanEnded = function() {
     if (this._ended) {
-      diag2.warn("Can not execute the operation on ended Span {traceId: " + this._spanContext.traceId + ", spanId: " + this._spanContext.spanId + "}");
+      diag.warn("Can not execute the operation on ended Span {traceId: " + this._spanContext.traceId + ", spanId: " + this._spanContext.spanId + "}");
     }
     return this._ended;
   };
@@ -23701,7 +22463,7 @@ var Span = function() {
     var _this = this;
     var limit = this._attributeValueLengthLimit;
     if (limit <= 0) {
-      diag2.warn("Attribute value limit must be positive, got " + limit);
+      diag.warn("Attribute value limit must be positive, got " + limit);
       return value;
     }
     if (typeof value === "string") {
@@ -23717,1810 +22479,17 @@ var Span = function() {
   return Span3;
 }();
 
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Sampler.js
-var SamplingDecision2;
-(function(SamplingDecision3) {
-  SamplingDecision3[SamplingDecision3["NOT_RECORD"] = 0] = "NOT_RECORD";
-  SamplingDecision3[SamplingDecision3["RECORD"] = 1] = "RECORD";
-  SamplingDecision3[SamplingDecision3["RECORD_AND_SAMPLED"] = 2] = "RECORD_AND_SAMPLED";
-})(SamplingDecision2 || (SamplingDecision2 = {}));
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/AlwaysOffSampler.js
-var AlwaysOffSampler2 = function() {
-  function AlwaysOffSampler3() {
-  }
-  __name(AlwaysOffSampler3, "AlwaysOffSampler");
-  AlwaysOffSampler3.prototype.shouldSample = function() {
-    return {
-      decision: SamplingDecision2.NOT_RECORD
-    };
-  };
-  AlwaysOffSampler3.prototype.toString = function() {
-    return "AlwaysOffSampler";
-  };
-  return AlwaysOffSampler3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/AlwaysOnSampler.js
-var AlwaysOnSampler2 = function() {
-  function AlwaysOnSampler3() {
-  }
-  __name(AlwaysOnSampler3, "AlwaysOnSampler");
-  AlwaysOnSampler3.prototype.shouldSample = function() {
-    return {
-      decision: SamplingDecision2.RECORD_AND_SAMPLED
-    };
-  };
-  AlwaysOnSampler3.prototype.toString = function() {
-    return "AlwaysOnSampler";
-  };
-  return AlwaysOnSampler3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/ParentBasedSampler.js
-var ParentBasedSampler2 = function() {
-  function ParentBasedSampler3(config2) {
-    var _a3, _b2, _c, _d;
-    this._root = config2.root;
-    if (!this._root) {
-      globalErrorHandler(new Error("ParentBasedSampler must have a root sampler configured"));
-      this._root = new AlwaysOnSampler2();
-    }
-    this._remoteParentSampled = (_a3 = config2.remoteParentSampled) !== null && _a3 !== void 0 ? _a3 : new AlwaysOnSampler2();
-    this._remoteParentNotSampled = (_b2 = config2.remoteParentNotSampled) !== null && _b2 !== void 0 ? _b2 : new AlwaysOffSampler2();
-    this._localParentSampled = (_c = config2.localParentSampled) !== null && _c !== void 0 ? _c : new AlwaysOnSampler2();
-    this._localParentNotSampled = (_d = config2.localParentNotSampled) !== null && _d !== void 0 ? _d : new AlwaysOffSampler2();
-  }
-  __name(ParentBasedSampler3, "ParentBasedSampler");
-  ParentBasedSampler3.prototype.shouldSample = function(context3, traceId, spanName, spanKind, attributes, links) {
-    var parentContext = trace.getSpanContext(context3);
-    if (!parentContext || !isSpanContextValid(parentContext)) {
-      return this._root.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-    }
-    if (parentContext.isRemote) {
-      if (parentContext.traceFlags & TraceFlags.SAMPLED) {
-        return this._remoteParentSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-      }
-      return this._remoteParentNotSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-    }
-    if (parentContext.traceFlags & TraceFlags.SAMPLED) {
-      return this._localParentSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-    }
-    return this._localParentNotSampled.shouldSample(context3, traceId, spanName, spanKind, attributes, links);
-  };
-  ParentBasedSampler3.prototype.toString = function() {
-    return "ParentBased{root=" + this._root.toString() + ", remoteParentSampled=" + this._remoteParentSampled.toString() + ", remoteParentNotSampled=" + this._remoteParentNotSampled.toString() + ", localParentSampled=" + this._localParentSampled.toString() + ", localParentNotSampled=" + this._localParentNotSampled.toString() + "}";
-  };
-  return ParentBasedSampler3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/TraceIdRatioBasedSampler.js
-var TraceIdRatioBasedSampler2 = function() {
-  function TraceIdRatioBasedSampler3(_ratio) {
-    if (_ratio === void 0) {
-      _ratio = 0;
-    }
-    this._ratio = _ratio;
-    this._ratio = this._normalize(_ratio);
-    this._upperBound = Math.floor(this._ratio * 4294967295);
-  }
-  __name(TraceIdRatioBasedSampler3, "TraceIdRatioBasedSampler");
-  TraceIdRatioBasedSampler3.prototype.shouldSample = function(context3, traceId) {
-    return {
-      decision: isValidTraceId(traceId) && this._accumulate(traceId) < this._upperBound ? SamplingDecision2.RECORD_AND_SAMPLED : SamplingDecision2.NOT_RECORD
-    };
-  };
-  TraceIdRatioBasedSampler3.prototype.toString = function() {
-    return "TraceIdRatioBased{" + this._ratio + "}";
-  };
-  TraceIdRatioBasedSampler3.prototype._normalize = function(ratio) {
-    if (typeof ratio !== "number" || isNaN(ratio))
-      return 0;
-    return ratio >= 1 ? 1 : ratio <= 0 ? 0 : ratio;
-  };
-  TraceIdRatioBasedSampler3.prototype._accumulate = function(traceId) {
-    var accumulation = 0;
-    for (var i = 0; i < traceId.length / 8; i++) {
-      var pos = i * 8;
-      var part = parseInt(traceId.slice(pos, pos + 8), 16);
-      accumulation = (accumulation ^ part) >>> 0;
-    }
-    return accumulation;
-  };
-  return TraceIdRatioBasedSampler3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/config.js
-var env = getEnv();
-var FALLBACK_OTEL_TRACES_SAMPLER = TracesSamplerValues.AlwaysOn;
-var DEFAULT_RATIO = 1;
-function loadDefaultConfig() {
-  return {
-    sampler: buildSamplerFromEnv(env),
-    forceFlushTimeoutMillis: 3e4,
-    generalLimits: {
-      attributeValueLengthLimit: getEnv().OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-      attributeCountLimit: getEnv().OTEL_ATTRIBUTE_COUNT_LIMIT
-    },
-    spanLimits: {
-      attributeValueLengthLimit: getEnv().OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-      attributeCountLimit: getEnv().OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT,
-      linkCountLimit: getEnv().OTEL_SPAN_LINK_COUNT_LIMIT,
-      eventCountLimit: getEnv().OTEL_SPAN_EVENT_COUNT_LIMIT
-    }
-  };
-}
-__name(loadDefaultConfig, "loadDefaultConfig");
-function buildSamplerFromEnv(environment) {
-  if (environment === void 0) {
-    environment = getEnv();
-  }
-  switch (environment.OTEL_TRACES_SAMPLER) {
-    case TracesSamplerValues.AlwaysOn:
-      return new AlwaysOnSampler2();
-    case TracesSamplerValues.AlwaysOff:
-      return new AlwaysOffSampler2();
-    case TracesSamplerValues.ParentBasedAlwaysOn:
-      return new ParentBasedSampler2({
-        root: new AlwaysOnSampler2()
-      });
-    case TracesSamplerValues.ParentBasedAlwaysOff:
-      return new ParentBasedSampler2({
-        root: new AlwaysOffSampler2()
-      });
-    case TracesSamplerValues.TraceIdRatio:
-      return new TraceIdRatioBasedSampler2(getSamplerProbabilityFromEnv(environment));
-    case TracesSamplerValues.ParentBasedTraceIdRatio:
-      return new ParentBasedSampler2({
-        root: new TraceIdRatioBasedSampler2(getSamplerProbabilityFromEnv(environment))
-      });
-    default:
-      diag2.error('OTEL_TRACES_SAMPLER value "' + environment.OTEL_TRACES_SAMPLER + " invalid, defaulting to " + FALLBACK_OTEL_TRACES_SAMPLER + '".');
-      return new AlwaysOnSampler2();
-  }
-}
-__name(buildSamplerFromEnv, "buildSamplerFromEnv");
-function getSamplerProbabilityFromEnv(environment) {
-  if (environment.OTEL_TRACES_SAMPLER_ARG === void 0 || environment.OTEL_TRACES_SAMPLER_ARG === "") {
-    diag2.error("OTEL_TRACES_SAMPLER_ARG is blank, defaulting to " + DEFAULT_RATIO + ".");
-    return DEFAULT_RATIO;
-  }
-  var probability = Number(environment.OTEL_TRACES_SAMPLER_ARG);
-  if (isNaN(probability)) {
-    diag2.error("OTEL_TRACES_SAMPLER_ARG=" + environment.OTEL_TRACES_SAMPLER_ARG + " was given, but it is invalid, defaulting to " + DEFAULT_RATIO + ".");
-    return DEFAULT_RATIO;
-  }
-  if (probability < 0 || probability > 1) {
-    diag2.error("OTEL_TRACES_SAMPLER_ARG=" + environment.OTEL_TRACES_SAMPLER_ARG + " was given, but it is out of range ([0..1]), defaulting to " + DEFAULT_RATIO + ".");
-    return DEFAULT_RATIO;
-  }
-  return probability;
-}
-__name(getSamplerProbabilityFromEnv, "getSamplerProbabilityFromEnv");
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/utility.js
-function mergeConfig(userConfig) {
-  var perInstanceDefaults = {
-    sampler: buildSamplerFromEnv()
-  };
-  var DEFAULT_CONFIG = loadDefaultConfig();
-  var target = Object.assign({}, DEFAULT_CONFIG, perInstanceDefaults, userConfig);
-  target.generalLimits = Object.assign({}, DEFAULT_CONFIG.generalLimits, userConfig.generalLimits || {});
-  target.spanLimits = Object.assign({}, DEFAULT_CONFIG.spanLimits, userConfig.spanLimits || {});
-  return target;
-}
-__name(mergeConfig, "mergeConfig");
-function reconfigureLimits(userConfig) {
-  var _a3, _b2, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-  var spanLimits = Object.assign({}, userConfig.spanLimits);
-  var parsedEnvConfig = getEnvWithoutDefaults();
-  spanLimits.attributeCountLimit = (_f = (_e = (_d = (_b2 = (_a3 = userConfig.spanLimits) === null || _a3 === void 0 ? void 0 : _a3.attributeCountLimit) !== null && _b2 !== void 0 ? _b2 : (_c = userConfig.generalLimits) === null || _c === void 0 ? void 0 : _c.attributeCountLimit) !== null && _d !== void 0 ? _d : parsedEnvConfig.OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT) !== null && _e !== void 0 ? _e : parsedEnvConfig.OTEL_ATTRIBUTE_COUNT_LIMIT) !== null && _f !== void 0 ? _f : DEFAULT_ATTRIBUTE_COUNT_LIMIT;
-  spanLimits.attributeValueLengthLimit = (_m = (_l = (_k = (_h = (_g = userConfig.spanLimits) === null || _g === void 0 ? void 0 : _g.attributeValueLengthLimit) !== null && _h !== void 0 ? _h : (_j = userConfig.generalLimits) === null || _j === void 0 ? void 0 : _j.attributeValueLengthLimit) !== null && _k !== void 0 ? _k : parsedEnvConfig.OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT) !== null && _l !== void 0 ? _l : parsedEnvConfig.OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT) !== null && _m !== void 0 ? _m : DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT;
-  return Object.assign({}, userConfig, { spanLimits });
-}
-__name(reconfigureLimits, "reconfigureLimits");
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/BatchSpanProcessorBase.js
-var BatchSpanProcessorBase = function() {
-  function BatchSpanProcessorBase2(_exporter, config2) {
-    this._exporter = _exporter;
-    this._finishedSpans = [];
-    var env2 = getEnv();
-    this._maxExportBatchSize = typeof (config2 === null || config2 === void 0 ? void 0 : config2.maxExportBatchSize) === "number" ? config2.maxExportBatchSize : env2.OTEL_BSP_MAX_EXPORT_BATCH_SIZE;
-    this._maxQueueSize = typeof (config2 === null || config2 === void 0 ? void 0 : config2.maxQueueSize) === "number" ? config2.maxQueueSize : env2.OTEL_BSP_MAX_QUEUE_SIZE;
-    this._scheduledDelayMillis = typeof (config2 === null || config2 === void 0 ? void 0 : config2.scheduledDelayMillis) === "number" ? config2.scheduledDelayMillis : env2.OTEL_BSP_SCHEDULE_DELAY;
-    this._exportTimeoutMillis = typeof (config2 === null || config2 === void 0 ? void 0 : config2.exportTimeoutMillis) === "number" ? config2.exportTimeoutMillis : env2.OTEL_BSP_EXPORT_TIMEOUT;
-    this._shutdownOnce = new BindOnceFuture(this._shutdown, this);
-  }
-  __name(BatchSpanProcessorBase2, "BatchSpanProcessorBase");
-  BatchSpanProcessorBase2.prototype.forceFlush = function() {
-    if (this._shutdownOnce.isCalled) {
-      return this._shutdownOnce.promise;
-    }
-    return this._flushAll();
-  };
-  BatchSpanProcessorBase2.prototype.onStart = function(_span, _parentContext) {
-  };
-  BatchSpanProcessorBase2.prototype.onEnd = function(span) {
-    if (this._shutdownOnce.isCalled) {
-      return;
-    }
-    if ((span.spanContext().traceFlags & TraceFlags.SAMPLED) === 0) {
-      return;
-    }
-    this._addToBuffer(span);
-  };
-  BatchSpanProcessorBase2.prototype.shutdown = function() {
-    return this._shutdownOnce.call();
-  };
-  BatchSpanProcessorBase2.prototype._shutdown = function() {
-    var _this = this;
-    return Promise.resolve().then(function() {
-      return _this.onShutdown();
-    }).then(function() {
-      return _this._flushAll();
-    }).then(function() {
-      return _this._exporter.shutdown();
-    });
-  };
-  BatchSpanProcessorBase2.prototype._addToBuffer = function(span) {
-    if (this._finishedSpans.length >= this._maxQueueSize) {
-      return;
-    }
-    this._finishedSpans.push(span);
-    this._maybeStartTimer();
-  };
-  BatchSpanProcessorBase2.prototype._flushAll = function() {
-    var _this = this;
-    return new Promise(function(resolve, reject) {
-      var promises = [];
-      var count2 = Math.ceil(_this._finishedSpans.length / _this._maxExportBatchSize);
-      for (var i = 0, j = count2; i < j; i++) {
-        promises.push(_this._flushOneBatch());
-      }
-      Promise.all(promises).then(function() {
-        resolve();
-      }).catch(reject);
-    });
-  };
-  BatchSpanProcessorBase2.prototype._flushOneBatch = function() {
-    var _this = this;
-    this._clearTimer();
-    if (this._finishedSpans.length === 0) {
-      return Promise.resolve();
-    }
-    return new Promise(function(resolve, reject) {
-      var timer = setTimeout(function() {
-        reject(new Error("Timeout"));
-      }, _this._exportTimeoutMillis);
-      context2.with(suppressTracing(context2.active()), function() {
-        _this._exporter.export(_this._finishedSpans.splice(0, _this._maxExportBatchSize), function(result) {
-          var _a3;
-          clearTimeout(timer);
-          if (result.code === ExportResultCode.SUCCESS) {
-            resolve();
-          } else {
-            reject((_a3 = result.error) !== null && _a3 !== void 0 ? _a3 : new Error("BatchSpanProcessor: span export failed"));
-          }
-        });
-      });
-    });
-  };
-  BatchSpanProcessorBase2.prototype._maybeStartTimer = function() {
-    var _this = this;
-    if (this._timer !== void 0)
-      return;
-    this._timer = setTimeout(function() {
-      _this._flushOneBatch().then(function() {
-        if (_this._finishedSpans.length > 0) {
-          _this._clearTimer();
-          _this._maybeStartTimer();
-        }
-      }).catch(function(e2) {
-        globalErrorHandler(e2);
-      });
-    }, this._scheduledDelayMillis);
-    unrefTimer(this._timer);
-  };
-  BatchSpanProcessorBase2.prototype._clearTimer = function() {
-    if (this._timer !== void 0) {
-      clearTimeout(this._timer);
-      this._timer = void 0;
-    }
-  };
-  return BatchSpanProcessorBase2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/platform/node/export/BatchSpanProcessor.js
-var __extends = function() {
-  var extendStatics = /* @__PURE__ */ __name(function(d2, b2) {
-    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-      d3.__proto__ = b3;
-    } || function(d3, b3) {
-      for (var p2 in b3)
-        if (Object.prototype.hasOwnProperty.call(b3, p2))
-          d3[p2] = b3[p2];
-    };
-    return extendStatics(d2, b2);
-  }, "extendStatics");
-  return function(d2, b2) {
-    if (typeof b2 !== "function" && b2 !== null)
-      throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-    extendStatics(d2, b2);
-    function __() {
-      this.constructor = d2;
-    }
-    __name(__, "__");
-    d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-  };
-}();
-var BatchSpanProcessor = function(_super) {
-  __extends(BatchSpanProcessor2, _super);
-  function BatchSpanProcessor2() {
-    return _super !== null && _super.apply(this, arguments) || this;
-  }
-  __name(BatchSpanProcessor2, "BatchSpanProcessor");
-  BatchSpanProcessor2.prototype.onShutdown = function() {
-  };
-  return BatchSpanProcessor2;
-}(BatchSpanProcessorBase);
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/platform/node/RandomIdGenerator.js
-var SPAN_ID_BYTES2 = 8;
-var TRACE_ID_BYTES2 = 16;
-var RandomIdGenerator2 = function() {
-  function RandomIdGenerator3() {
-    this.generateTraceId = getIdGenerator2(TRACE_ID_BYTES2);
-    this.generateSpanId = getIdGenerator2(SPAN_ID_BYTES2);
-  }
-  __name(RandomIdGenerator3, "RandomIdGenerator");
-  return RandomIdGenerator3;
-}();
-var SHARED_BUFFER2 = Buffer.allocUnsafe(TRACE_ID_BYTES2);
-function getIdGenerator2(bytes) {
-  return /* @__PURE__ */ __name(function generateId() {
-    for (var i = 0; i < bytes / 4; i++) {
-      SHARED_BUFFER2.writeUInt32BE(Math.random() * Math.pow(2, 32) >>> 0, i * 4);
-    }
-    for (var i = 0; i < bytes; i++) {
-      if (SHARED_BUFFER2[i] > 0) {
-        break;
-      } else if (i === bytes - 1) {
-        SHARED_BUFFER2[bytes - 1] = 1;
-      }
-    }
-    return SHARED_BUFFER2.toString("hex", 0, bytes);
-  }, "generateId");
-}
-__name(getIdGenerator2, "getIdGenerator");
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/Tracer.js
-var Tracer = function() {
-  function Tracer3(instrumentationLibrary, config2, _tracerProvider) {
-    this._tracerProvider = _tracerProvider;
-    var localConfig = mergeConfig(config2);
-    this._sampler = localConfig.sampler;
-    this._generalLimits = localConfig.generalLimits;
-    this._spanLimits = localConfig.spanLimits;
-    this._idGenerator = config2.idGenerator || new RandomIdGenerator2();
-    this.resource = _tracerProvider.resource;
-    this.instrumentationLibrary = instrumentationLibrary;
-  }
-  __name(Tracer3, "Tracer");
-  Tracer3.prototype.startSpan = function(name, options, context3) {
-    var _a3, _b2;
-    if (options === void 0) {
-      options = {};
-    }
-    if (context3 === void 0) {
-      context3 = context2.active();
-    }
-    if (options.root) {
-      context3 = trace.deleteSpan(context3);
-    }
-    var parentSpan = trace.getSpan(context3);
-    var clock;
-    if (parentSpan) {
-      clock = parentSpan["_clock"];
-    }
-    if (!clock) {
-      clock = new AnchoredClock(Date, otperformance);
-      if (parentSpan) {
-        parentSpan["_clock"] = clock;
-      }
-    }
-    if (isTracingSuppressed(context3)) {
-      diag2.debug("Instrumentation suppressed, returning Noop Span");
-      var nonRecordingSpan = trace.wrapSpanContext(INVALID_SPAN_CONTEXT);
-      nonRecordingSpan["_clock"] = clock;
-      return nonRecordingSpan;
-    }
-    var parentSpanContext = parentSpan === null || parentSpan === void 0 ? void 0 : parentSpan.spanContext();
-    var spanId = this._idGenerator.generateSpanId();
-    var traceId;
-    var traceState;
-    var parentSpanId;
-    if (!parentSpanContext || !trace.isSpanContextValid(parentSpanContext)) {
-      traceId = this._idGenerator.generateTraceId();
-    } else {
-      traceId = parentSpanContext.traceId;
-      traceState = parentSpanContext.traceState;
-      parentSpanId = parentSpanContext.spanId;
-    }
-    var spanKind = (_a3 = options.kind) !== null && _a3 !== void 0 ? _a3 : SpanKind.INTERNAL;
-    var links = ((_b2 = options.links) !== null && _b2 !== void 0 ? _b2 : []).map(function(link) {
-      return {
-        context: link.context,
-        attributes: sanitizeAttributes(link.attributes)
-      };
-    });
-    var attributes = sanitizeAttributes(options.attributes);
-    var samplingResult = this._sampler.shouldSample(context3, traceId, name, spanKind, attributes, links);
-    var traceFlags = samplingResult.decision === SamplingDecision.RECORD_AND_SAMPLED ? TraceFlags.SAMPLED : TraceFlags.NONE;
-    var spanContext = { traceId, spanId, traceFlags, traceState };
-    if (samplingResult.decision === SamplingDecision.NOT_RECORD) {
-      diag2.debug("Recording is off, propagating context in a non-recording span");
-      var nonRecordingSpan = trace.wrapSpanContext(spanContext);
-      nonRecordingSpan["_clock"] = clock;
-      return nonRecordingSpan;
-    }
-    var span = new Span(this, context3, name, spanContext, spanKind, parentSpanId, links, options.startTime, clock);
-    var initAttributes = sanitizeAttributes(Object.assign(attributes, samplingResult.attributes));
-    span.setAttributes(initAttributes);
-    return span;
-  };
-  Tracer3.prototype.startActiveSpan = function(name, arg2, arg3, arg4) {
-    var opts;
-    var ctx;
-    var fn;
-    if (arguments.length < 2) {
-      return;
-    } else if (arguments.length === 2) {
-      fn = arg2;
-    } else if (arguments.length === 3) {
-      opts = arg2;
-      fn = arg3;
-    } else {
-      opts = arg2;
-      ctx = arg3;
-      fn = arg4;
-    }
-    var parentContext = ctx !== null && ctx !== void 0 ? ctx : context2.active();
-    var span = this.startSpan(name, opts, parentContext);
-    var contextWithSpanSet = trace.setSpan(parentContext, span);
-    return context2.with(contextWithSpanSet, fn, void 0, span);
-  };
-  Tracer3.prototype.getGeneralLimits = function() {
-    return this._generalLimits;
-  };
-  Tracer3.prototype.getSpanLimits = function() {
-    return this._spanLimits;
-  };
-  Tracer3.prototype.getActiveSpanProcessor = function() {
-    return this._tracerProvider.getActiveSpanProcessor();
-  };
-  return Tracer3;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/platform/node/default-service-name.js
-function defaultServiceName() {
-  return "unknown_service:" + process.argv0;
-}
-__name(defaultServiceName, "defaultServiceName");
-
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/platform/node/HostDetector.js
-var import_os2 = require("os");
-var __awaiter = function(thisArg, _arguments, P3, generator) {
-  function adopt(value) {
-    return value instanceof P3 ? value : new P3(function(resolve) {
-      resolve(value);
-    });
-  }
-  __name(adopt, "adopt");
-  return new (P3 || (P3 = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(fulfilled, "fulfilled");
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(rejected, "rejected");
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    __name(step, "step");
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-var __generator = function(thisArg, body) {
-  var _ = { label: 0, sent: function() {
-    if (t2[0] & 1)
-      throw t2[1];
-    return t2[1];
-  }, trys: [], ops: [] }, f2, y, t2, g2;
-  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-    return this;
-  }), g2;
-  function verb(n2) {
-    return function(v) {
-      return step([n2, v]);
-    };
-  }
-  __name(verb, "verb");
-  function step(op) {
-    if (f2)
-      throw new TypeError("Generator is already executing.");
-    while (_)
-      try {
-        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
-          return t2;
-        if (y = 0, t2)
-          op = [op[0] & 2, t2.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t2 = op;
-            break;
-          case 4:
-            _.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _.ops.pop();
-            _.trys.pop();
-            continue;
-          default:
-            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
-              _.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _.label < t2[1]) {
-              _.label = t2[1];
-              t2 = op;
-              break;
-            }
-            if (t2 && _.label < t2[2]) {
-              _.label = t2[2];
-              _.ops.push(op);
-              break;
-            }
-            if (t2[2])
-              _.ops.pop();
-            _.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _);
-      } catch (e2) {
-        op = [6, e2];
-        y = 0;
-      } finally {
-        f2 = t2 = 0;
-      }
-    if (op[0] & 5)
-      throw op[1];
-    return { value: op[0] ? op[1] : void 0, done: true };
-  }
-  __name(step, "step");
-};
-var HostDetector = function() {
-  function HostDetector2() {
-  }
-  __name(HostDetector2, "HostDetector");
-  HostDetector2.prototype.detect = function(_config) {
-    return __awaiter(this, void 0, void 0, function() {
-      var attributes;
-      var _a3;
-      return __generator(this, function(_b2) {
-        attributes = (_a3 = {}, _a3[SemanticResourceAttributes.HOST_NAME] = (0, import_os2.hostname)(), _a3[SemanticResourceAttributes.HOST_ARCH] = this._normalizeArch((0, import_os2.arch)()), _a3);
-        return [2, new Resource(attributes)];
-      });
-    });
-  };
-  HostDetector2.prototype._normalizeArch = function(nodeArchString) {
-    switch (nodeArchString) {
-      case "arm":
-        return "arm32";
-      case "ppc":
-        return "ppc32";
-      case "x64":
-        return "amd64";
-      default:
-        return nodeArchString;
-    }
-  };
-  return HostDetector2;
-}();
-var hostDetector = new HostDetector();
-
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/platform/node/OSDetector.js
-var import_os3 = require("os");
-var __awaiter2 = function(thisArg, _arguments, P3, generator) {
-  function adopt(value) {
-    return value instanceof P3 ? value : new P3(function(resolve) {
-      resolve(value);
-    });
-  }
-  __name(adopt, "adopt");
-  return new (P3 || (P3 = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(fulfilled, "fulfilled");
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(rejected, "rejected");
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    __name(step, "step");
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-var __generator2 = function(thisArg, body) {
-  var _ = { label: 0, sent: function() {
-    if (t2[0] & 1)
-      throw t2[1];
-    return t2[1];
-  }, trys: [], ops: [] }, f2, y, t2, g2;
-  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-    return this;
-  }), g2;
-  function verb(n2) {
-    return function(v) {
-      return step([n2, v]);
-    };
-  }
-  __name(verb, "verb");
-  function step(op) {
-    if (f2)
-      throw new TypeError("Generator is already executing.");
-    while (_)
-      try {
-        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
-          return t2;
-        if (y = 0, t2)
-          op = [op[0] & 2, t2.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t2 = op;
-            break;
-          case 4:
-            _.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _.ops.pop();
-            _.trys.pop();
-            continue;
-          default:
-            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
-              _.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _.label < t2[1]) {
-              _.label = t2[1];
-              t2 = op;
-              break;
-            }
-            if (t2 && _.label < t2[2]) {
-              _.label = t2[2];
-              _.ops.push(op);
-              break;
-            }
-            if (t2[2])
-              _.ops.pop();
-            _.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _);
-      } catch (e2) {
-        op = [6, e2];
-        y = 0;
-      } finally {
-        f2 = t2 = 0;
-      }
-    if (op[0] & 5)
-      throw op[1];
-    return { value: op[0] ? op[1] : void 0, done: true };
-  }
-  __name(step, "step");
-};
-var OSDetector = function() {
-  function OSDetector2() {
-  }
-  __name(OSDetector2, "OSDetector");
-  OSDetector2.prototype.detect = function(_config) {
-    return __awaiter2(this, void 0, void 0, function() {
-      var attributes;
-      var _a3;
-      return __generator2(this, function(_b2) {
-        attributes = (_a3 = {}, _a3[SemanticResourceAttributes.OS_TYPE] = this._normalizeType((0, import_os3.platform)()), _a3[SemanticResourceAttributes.OS_VERSION] = (0, import_os3.release)(), _a3);
-        return [2, new Resource(attributes)];
-      });
-    });
-  };
-  OSDetector2.prototype._normalizeType = function(nodePlatform) {
-    switch (nodePlatform) {
-      case "sunos":
-        return "solaris";
-      case "win32":
-        return "windows";
-      default:
-        return nodePlatform;
-    }
-  };
-  return OSDetector2;
-}();
-var osDetector = new OSDetector();
-
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/Resource.js
-var Resource = function() {
-  function Resource2(attributes) {
-    this.attributes = attributes;
-  }
-  __name(Resource2, "Resource");
-  Resource2.empty = function() {
-    return Resource2.EMPTY;
-  };
-  Resource2.default = function() {
-    var _a3;
-    return new Resource2((_a3 = {}, _a3[SemanticResourceAttributes.SERVICE_NAME] = defaultServiceName(), _a3[SemanticResourceAttributes.TELEMETRY_SDK_LANGUAGE] = SDK_INFO[SemanticResourceAttributes.TELEMETRY_SDK_LANGUAGE], _a3[SemanticResourceAttributes.TELEMETRY_SDK_NAME] = SDK_INFO[SemanticResourceAttributes.TELEMETRY_SDK_NAME], _a3[SemanticResourceAttributes.TELEMETRY_SDK_VERSION] = SDK_INFO[SemanticResourceAttributes.TELEMETRY_SDK_VERSION], _a3));
-  };
-  Resource2.prototype.merge = function(other) {
-    if (!other || !Object.keys(other.attributes).length)
-      return this;
-    var mergedAttributes = Object.assign({}, this.attributes, other.attributes);
-    return new Resource2(mergedAttributes);
-  };
-  Resource2.EMPTY = new Resource2({});
-  return Resource2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/detectors/BrowserDetector.js
-var __assign = function() {
-  __assign = Object.assign || function(t2) {
-    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
-      s = arguments[i];
-      for (var p2 in s)
-        if (Object.prototype.hasOwnProperty.call(s, p2))
-          t2[p2] = s[p2];
-    }
-    return t2;
-  };
-  return __assign.apply(this, arguments);
-};
-var __awaiter3 = function(thisArg, _arguments, P3, generator) {
-  function adopt(value) {
-    return value instanceof P3 ? value : new P3(function(resolve) {
-      resolve(value);
-    });
-  }
-  __name(adopt, "adopt");
-  return new (P3 || (P3 = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(fulfilled, "fulfilled");
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(rejected, "rejected");
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    __name(step, "step");
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-var __generator3 = function(thisArg, body) {
-  var _ = { label: 0, sent: function() {
-    if (t2[0] & 1)
-      throw t2[1];
-    return t2[1];
-  }, trys: [], ops: [] }, f2, y, t2, g2;
-  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-    return this;
-  }), g2;
-  function verb(n2) {
-    return function(v) {
-      return step([n2, v]);
-    };
-  }
-  __name(verb, "verb");
-  function step(op) {
-    if (f2)
-      throw new TypeError("Generator is already executing.");
-    while (_)
-      try {
-        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
-          return t2;
-        if (y = 0, t2)
-          op = [op[0] & 2, t2.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t2 = op;
-            break;
-          case 4:
-            _.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _.ops.pop();
-            _.trys.pop();
-            continue;
-          default:
-            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
-              _.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _.label < t2[1]) {
-              _.label = t2[1];
-              t2 = op;
-              break;
-            }
-            if (t2 && _.label < t2[2]) {
-              _.label = t2[2];
-              _.ops.push(op);
-              break;
-            }
-            if (t2[2])
-              _.ops.pop();
-            _.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _);
-      } catch (e2) {
-        op = [6, e2];
-        y = 0;
-      } finally {
-        f2 = t2 = 0;
-      }
-    if (op[0] & 5)
-      throw op[1];
-    return { value: op[0] ? op[1] : void 0, done: true };
-  }
-  __name(step, "step");
-};
-var BrowserDetector = function() {
-  function BrowserDetector2() {
-  }
-  __name(BrowserDetector2, "BrowserDetector");
-  BrowserDetector2.prototype.detect = function(config2) {
-    return __awaiter3(this, void 0, void 0, function() {
-      var isBrowser, browserResource;
-      var _a3;
-      return __generator3(this, function(_b2) {
-        isBrowser = typeof navigator !== "undefined";
-        if (!isBrowser) {
-          return [2, Resource.empty()];
-        }
-        browserResource = (_a3 = {}, _a3[SemanticResourceAttributes.PROCESS_RUNTIME_NAME] = "browser", _a3[SemanticResourceAttributes.PROCESS_RUNTIME_DESCRIPTION] = "Web Browser", _a3[SemanticResourceAttributes.PROCESS_RUNTIME_VERSION] = navigator.userAgent, _a3);
-        return [2, this._getResourceAttributes(browserResource, config2)];
-      });
-    });
-  };
-  BrowserDetector2.prototype._getResourceAttributes = function(browserResource, _config) {
-    if (browserResource[SemanticResourceAttributes.PROCESS_RUNTIME_VERSION] === "") {
-      diag2.debug("BrowserDetector failed: Unable to find required browser resources. ");
-      return Resource.empty();
-    } else {
-      return new Resource(__assign({}, browserResource));
-    }
-  };
-  return BrowserDetector2;
-}();
-var browserDetector = new BrowserDetector();
-
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/detectors/EnvDetector.js
-var __awaiter4 = function(thisArg, _arguments, P3, generator) {
-  function adopt(value) {
-    return value instanceof P3 ? value : new P3(function(resolve) {
-      resolve(value);
-    });
-  }
-  __name(adopt, "adopt");
-  return new (P3 || (P3 = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(fulfilled, "fulfilled");
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(rejected, "rejected");
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    __name(step, "step");
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-var __generator4 = function(thisArg, body) {
-  var _ = { label: 0, sent: function() {
-    if (t2[0] & 1)
-      throw t2[1];
-    return t2[1];
-  }, trys: [], ops: [] }, f2, y, t2, g2;
-  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-    return this;
-  }), g2;
-  function verb(n2) {
-    return function(v) {
-      return step([n2, v]);
-    };
-  }
-  __name(verb, "verb");
-  function step(op) {
-    if (f2)
-      throw new TypeError("Generator is already executing.");
-    while (_)
-      try {
-        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
-          return t2;
-        if (y = 0, t2)
-          op = [op[0] & 2, t2.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t2 = op;
-            break;
-          case 4:
-            _.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _.ops.pop();
-            _.trys.pop();
-            continue;
-          default:
-            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
-              _.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _.label < t2[1]) {
-              _.label = t2[1];
-              t2 = op;
-              break;
-            }
-            if (t2 && _.label < t2[2]) {
-              _.label = t2[2];
-              _.ops.push(op);
-              break;
-            }
-            if (t2[2])
-              _.ops.pop();
-            _.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _);
-      } catch (e2) {
-        op = [6, e2];
-        y = 0;
-      } finally {
-        f2 = t2 = 0;
-      }
-    if (op[0] & 5)
-      throw op[1];
-    return { value: op[0] ? op[1] : void 0, done: true };
-  }
-  __name(step, "step");
-};
-var __values4 = function(o2) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
-  if (m2)
-    return m2.call(o2);
-  if (o2 && typeof o2.length === "number")
-    return {
-      next: function() {
-        if (o2 && i >= o2.length)
-          o2 = void 0;
-        return { value: o2 && o2[i++], done: !o2 };
-      }
-    };
-  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-var __read5 = function(o2, n2) {
-  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-  if (!m2)
-    return o2;
-  var i = m2.call(o2), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
-      ar.push(r2.value);
-  } catch (error2) {
-    e2 = { error: error2 };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-var EnvDetector = function() {
-  function EnvDetector2() {
-    this._MAX_LENGTH = 255;
-    this._COMMA_SEPARATOR = ",";
-    this._LABEL_KEY_VALUE_SPLITTER = "=";
-    this._ERROR_MESSAGE_INVALID_CHARS = "should be a ASCII string with a length greater than 0 and not exceed " + this._MAX_LENGTH + " characters.";
-    this._ERROR_MESSAGE_INVALID_VALUE = "should be a ASCII string with a length not exceed " + this._MAX_LENGTH + " characters.";
-  }
-  __name(EnvDetector2, "EnvDetector");
-  EnvDetector2.prototype.detect = function(_config) {
-    return __awaiter4(this, void 0, void 0, function() {
-      var attributes, env2, rawAttributes, serviceName, parsedAttributes;
-      return __generator4(this, function(_a3) {
-        attributes = {};
-        env2 = getEnv();
-        rawAttributes = env2.OTEL_RESOURCE_ATTRIBUTES;
-        serviceName = env2.OTEL_SERVICE_NAME;
-        if (rawAttributes) {
-          try {
-            parsedAttributes = this._parseResourceAttributes(rawAttributes);
-            Object.assign(attributes, parsedAttributes);
-          } catch (e2) {
-            diag2.debug("EnvDetector failed: " + e2.message);
-          }
-        }
-        if (serviceName) {
-          attributes[SemanticResourceAttributes.SERVICE_NAME] = serviceName;
-        }
-        return [2, new Resource(attributes)];
-      });
-    });
-  };
-  EnvDetector2.prototype._parseResourceAttributes = function(rawEnvAttributes) {
-    var e_1, _a3;
-    if (!rawEnvAttributes)
-      return {};
-    var attributes = {};
-    var rawAttributes = rawEnvAttributes.split(this._COMMA_SEPARATOR, -1);
-    try {
-      for (var rawAttributes_1 = __values4(rawAttributes), rawAttributes_1_1 = rawAttributes_1.next(); !rawAttributes_1_1.done; rawAttributes_1_1 = rawAttributes_1.next()) {
-        var rawAttribute = rawAttributes_1_1.value;
-        var keyValuePair = rawAttribute.split(this._LABEL_KEY_VALUE_SPLITTER, -1);
-        if (keyValuePair.length !== 2) {
-          continue;
-        }
-        var _b2 = __read5(keyValuePair, 2), key = _b2[0], value = _b2[1];
-        key = key.trim();
-        value = value.trim().split('^"|"$').join("");
-        if (!this._isValidAndNotEmpty(key)) {
-          throw new Error("Attribute key " + this._ERROR_MESSAGE_INVALID_CHARS);
-        }
-        if (!this._isValid(value)) {
-          throw new Error("Attribute value " + this._ERROR_MESSAGE_INVALID_VALUE);
-        }
-        attributes[key] = value;
-      }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (rawAttributes_1_1 && !rawAttributes_1_1.done && (_a3 = rawAttributes_1.return))
-          _a3.call(rawAttributes_1);
-      } finally {
-        if (e_1)
-          throw e_1.error;
-      }
-    }
-    return attributes;
-  };
-  EnvDetector2.prototype._isValid = function(name) {
-    return name.length <= this._MAX_LENGTH && this._isPrintableString(name);
-  };
-  EnvDetector2.prototype._isPrintableString = function(str) {
-    for (var i = 0; i < str.length; i++) {
-      var ch = str.charAt(i);
-      if (ch <= " " || ch >= "~") {
-        return false;
-      }
-    }
-    return true;
-  };
-  EnvDetector2.prototype._isValidAndNotEmpty = function(str) {
-    return str.length > 0 && this._isValid(str);
-  };
-  return EnvDetector2;
-}();
-var envDetector = new EnvDetector();
-
-// ../../node_modules/.pnpm/@opentelemetry+resources@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/resources/build/esm/detectors/ProcessDetector.js
-var __assign2 = function() {
-  __assign2 = Object.assign || function(t2) {
-    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
-      s = arguments[i];
-      for (var p2 in s)
-        if (Object.prototype.hasOwnProperty.call(s, p2))
-          t2[p2] = s[p2];
-    }
-    return t2;
-  };
-  return __assign2.apply(this, arguments);
-};
-var __awaiter5 = function(thisArg, _arguments, P3, generator) {
-  function adopt(value) {
-    return value instanceof P3 ? value : new P3(function(resolve) {
-      resolve(value);
-    });
-  }
-  __name(adopt, "adopt");
-  return new (P3 || (P3 = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(fulfilled, "fulfilled");
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    __name(rejected, "rejected");
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    __name(step, "step");
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-var __generator5 = function(thisArg, body) {
-  var _ = { label: 0, sent: function() {
-    if (t2[0] & 1)
-      throw t2[1];
-    return t2[1];
-  }, trys: [], ops: [] }, f2, y, t2, g2;
-  return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-    return this;
-  }), g2;
-  function verb(n2) {
-    return function(v) {
-      return step([n2, v]);
-    };
-  }
-  __name(verb, "verb");
-  function step(op) {
-    if (f2)
-      throw new TypeError("Generator is already executing.");
-    while (_)
-      try {
-        if (f2 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done)
-          return t2;
-        if (y = 0, t2)
-          op = [op[0] & 2, t2.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t2 = op;
-            break;
-          case 4:
-            _.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _.ops.pop();
-            _.trys.pop();
-            continue;
-          default:
-            if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
-              _.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _.label < t2[1]) {
-              _.label = t2[1];
-              t2 = op;
-              break;
-            }
-            if (t2 && _.label < t2[2]) {
-              _.label = t2[2];
-              _.ops.push(op);
-              break;
-            }
-            if (t2[2])
-              _.ops.pop();
-            _.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _);
-      } catch (e2) {
-        op = [6, e2];
-        y = 0;
-      } finally {
-        f2 = t2 = 0;
-      }
-    if (op[0] & 5)
-      throw op[1];
-    return { value: op[0] ? op[1] : void 0, done: true };
-  }
-  __name(step, "step");
-};
-var ProcessDetector = function() {
-  function ProcessDetector2() {
-  }
-  __name(ProcessDetector2, "ProcessDetector");
-  ProcessDetector2.prototype.detect = function(config2) {
-    return __awaiter5(this, void 0, void 0, function() {
-      var processResource;
-      var _a3;
-      return __generator5(this, function(_b2) {
-        if (typeof process !== "object") {
-          return [2, Resource.empty()];
-        }
-        processResource = (_a3 = {}, _a3[SemanticResourceAttributes.PROCESS_PID] = process.pid, _a3[SemanticResourceAttributes.PROCESS_EXECUTABLE_NAME] = process.title || "", _a3[SemanticResourceAttributes.PROCESS_COMMAND] = process.argv[1] || "", _a3[SemanticResourceAttributes.PROCESS_COMMAND_LINE] = process.argv.join(" ") || "", _a3[SemanticResourceAttributes.PROCESS_RUNTIME_VERSION] = process.versions.node, _a3[SemanticResourceAttributes.PROCESS_RUNTIME_NAME] = "nodejs", _a3[SemanticResourceAttributes.PROCESS_RUNTIME_DESCRIPTION] = "Node.js", _a3);
-        return [2, this._getResourceAttributes(processResource, config2)];
-      });
-    });
-  };
-  ProcessDetector2.prototype._getResourceAttributes = function(processResource, _config) {
-    if (processResource[SemanticResourceAttributes.PROCESS_EXECUTABLE_NAME] === "" || processResource[SemanticResourceAttributes.PROCESS_EXECUTABLE_PATH] === "" || processResource[SemanticResourceAttributes.PROCESS_COMMAND] === "" || processResource[SemanticResourceAttributes.PROCESS_COMMAND_LINE] === "" || processResource[SemanticResourceAttributes.PROCESS_RUNTIME_VERSION] === "") {
-      diag2.debug("ProcessDetector failed: Unable to find required process resources. ");
-      return Resource.empty();
-    } else {
-      return new Resource(__assign2({}, processResource));
-    }
-  };
-  return ProcessDetector2;
-}();
-var processDetector = new ProcessDetector();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/MultiSpanProcessor.js
-var __values5 = function(o2) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
-  if (m2)
-    return m2.call(o2);
-  if (o2 && typeof o2.length === "number")
-    return {
-      next: function() {
-        if (o2 && i >= o2.length)
-          o2 = void 0;
-        return { value: o2 && o2[i++], done: !o2 };
-      }
-    };
-  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-var MultiSpanProcessor = function() {
-  function MultiSpanProcessor2(_spanProcessors) {
-    this._spanProcessors = _spanProcessors;
-  }
-  __name(MultiSpanProcessor2, "MultiSpanProcessor");
-  MultiSpanProcessor2.prototype.forceFlush = function() {
-    var e_1, _a3;
-    var promises = [];
-    try {
-      for (var _b2 = __values5(this._spanProcessors), _c = _b2.next(); !_c.done; _c = _b2.next()) {
-        var spanProcessor = _c.value;
-        promises.push(spanProcessor.forceFlush());
-      }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a3 = _b2.return))
-          _a3.call(_b2);
-      } finally {
-        if (e_1)
-          throw e_1.error;
-      }
-    }
-    return new Promise(function(resolve) {
-      Promise.all(promises).then(function() {
-        resolve();
-      }).catch(function(error2) {
-        globalErrorHandler(error2 || new Error("MultiSpanProcessor: forceFlush failed"));
-        resolve();
-      });
-    });
-  };
-  MultiSpanProcessor2.prototype.onStart = function(span, context3) {
-    var e_2, _a3;
-    try {
-      for (var _b2 = __values5(this._spanProcessors), _c = _b2.next(); !_c.done; _c = _b2.next()) {
-        var spanProcessor = _c.value;
-        spanProcessor.onStart(span, context3);
-      }
-    } catch (e_2_1) {
-      e_2 = { error: e_2_1 };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a3 = _b2.return))
-          _a3.call(_b2);
-      } finally {
-        if (e_2)
-          throw e_2.error;
-      }
-    }
-  };
-  MultiSpanProcessor2.prototype.onEnd = function(span) {
-    var e_3, _a3;
-    try {
-      for (var _b2 = __values5(this._spanProcessors), _c = _b2.next(); !_c.done; _c = _b2.next()) {
-        var spanProcessor = _c.value;
-        spanProcessor.onEnd(span);
-      }
-    } catch (e_3_1) {
-      e_3 = { error: e_3_1 };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a3 = _b2.return))
-          _a3.call(_b2);
-      } finally {
-        if (e_3)
-          throw e_3.error;
-      }
-    }
-  };
-  MultiSpanProcessor2.prototype.shutdown = function() {
-    var e_4, _a3;
-    var promises = [];
-    try {
-      for (var _b2 = __values5(this._spanProcessors), _c = _b2.next(); !_c.done; _c = _b2.next()) {
-        var spanProcessor = _c.value;
-        promises.push(spanProcessor.shutdown());
-      }
-    } catch (e_4_1) {
-      e_4 = { error: e_4_1 };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a3 = _b2.return))
-          _a3.call(_b2);
-      } finally {
-        if (e_4)
-          throw e_4.error;
-      }
-    }
-    return new Promise(function(resolve, reject) {
-      Promise.all(promises).then(function() {
-        resolve();
-      }, reject);
-    });
-  };
-  return MultiSpanProcessor2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/NoopSpanProcessor.js
-var NoopSpanProcessor = function() {
-  function NoopSpanProcessor2() {
-  }
-  __name(NoopSpanProcessor2, "NoopSpanProcessor");
-  NoopSpanProcessor2.prototype.onStart = function(_span, _context) {
-  };
-  NoopSpanProcessor2.prototype.onEnd = function(_span) {
-  };
-  NoopSpanProcessor2.prototype.shutdown = function() {
-    return Promise.resolve();
-  };
-  NoopSpanProcessor2.prototype.forceFlush = function() {
-    return Promise.resolve();
-  };
-  return NoopSpanProcessor2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/BasicTracerProvider.js
-var ForceFlushState;
-(function(ForceFlushState2) {
-  ForceFlushState2[ForceFlushState2["resolved"] = 0] = "resolved";
-  ForceFlushState2[ForceFlushState2["timeout"] = 1] = "timeout";
-  ForceFlushState2[ForceFlushState2["error"] = 2] = "error";
-  ForceFlushState2[ForceFlushState2["unresolved"] = 3] = "unresolved";
-})(ForceFlushState || (ForceFlushState = {}));
-var BasicTracerProvider = function() {
-  function BasicTracerProvider2(config2) {
-    if (config2 === void 0) {
-      config2 = {};
-    }
-    var _a3;
-    this._registeredSpanProcessors = [];
-    this._tracers = /* @__PURE__ */ new Map();
-    var mergedConfig = merge({}, loadDefaultConfig(), reconfigureLimits(config2));
-    this.resource = (_a3 = mergedConfig.resource) !== null && _a3 !== void 0 ? _a3 : Resource.empty();
-    this.resource = Resource.default().merge(this.resource);
-    this._config = Object.assign({}, mergedConfig, {
-      resource: this.resource
-    });
-    var defaultExporter = this._buildExporterFromEnv();
-    if (defaultExporter !== void 0) {
-      var batchProcessor = new BatchSpanProcessor(defaultExporter);
-      this.activeSpanProcessor = batchProcessor;
-    } else {
-      this.activeSpanProcessor = new NoopSpanProcessor();
-    }
-  }
-  __name(BasicTracerProvider2, "BasicTracerProvider");
-  BasicTracerProvider2.prototype.getTracer = function(name, version, options) {
-    var key = name + "@" + (version || "") + ":" + ((options === null || options === void 0 ? void 0 : options.schemaUrl) || "");
-    if (!this._tracers.has(key)) {
-      this._tracers.set(key, new Tracer({ name, version, schemaUrl: options === null || options === void 0 ? void 0 : options.schemaUrl }, this._config, this));
-    }
-    return this._tracers.get(key);
-  };
-  BasicTracerProvider2.prototype.addSpanProcessor = function(spanProcessor) {
-    if (this._registeredSpanProcessors.length === 0) {
-      this.activeSpanProcessor.shutdown().catch(function(err) {
-        return diag2.error("Error while trying to shutdown current span processor", err);
-      });
-    }
-    this._registeredSpanProcessors.push(spanProcessor);
-    this.activeSpanProcessor = new MultiSpanProcessor(this._registeredSpanProcessors);
-  };
-  BasicTracerProvider2.prototype.getActiveSpanProcessor = function() {
-    return this.activeSpanProcessor;
-  };
-  BasicTracerProvider2.prototype.register = function(config2) {
-    if (config2 === void 0) {
-      config2 = {};
-    }
-    trace.setGlobalTracerProvider(this);
-    if (config2.propagator === void 0) {
-      config2.propagator = this._buildPropagatorFromEnv();
-    }
-    if (config2.contextManager) {
-      context2.setGlobalContextManager(config2.contextManager);
-    }
-    if (config2.propagator) {
-      propagation.setGlobalPropagator(config2.propagator);
-    }
-  };
-  BasicTracerProvider2.prototype.forceFlush = function() {
-    var timeout = this._config.forceFlushTimeoutMillis;
-    var promises = this._registeredSpanProcessors.map(function(spanProcessor) {
-      return new Promise(function(resolve) {
-        var state;
-        var timeoutInterval = setTimeout(function() {
-          resolve(new Error("Span processor did not completed within timeout period of " + timeout + " ms"));
-          state = ForceFlushState.timeout;
-        }, timeout);
-        spanProcessor.forceFlush().then(function() {
-          clearTimeout(timeoutInterval);
-          if (state !== ForceFlushState.timeout) {
-            state = ForceFlushState.resolved;
-            resolve(state);
-          }
-        }).catch(function(error2) {
-          clearTimeout(timeoutInterval);
-          state = ForceFlushState.error;
-          resolve(error2);
-        });
-      });
-    });
-    return new Promise(function(resolve, reject) {
-      Promise.all(promises).then(function(results) {
-        var errors = results.filter(function(result) {
-          return result !== ForceFlushState.resolved;
-        });
-        if (errors.length > 0) {
-          reject(errors);
-        } else {
-          resolve();
-        }
-      }).catch(function(error2) {
-        return reject([error2]);
-      });
-    });
-  };
-  BasicTracerProvider2.prototype.shutdown = function() {
-    return this.activeSpanProcessor.shutdown();
-  };
-  BasicTracerProvider2.prototype._getPropagator = function(name) {
-    var _a3;
-    return (_a3 = this.constructor._registeredPropagators.get(name)) === null || _a3 === void 0 ? void 0 : _a3();
-  };
-  BasicTracerProvider2.prototype._getSpanExporter = function(name) {
-    var _a3;
-    return (_a3 = this.constructor._registeredExporters.get(name)) === null || _a3 === void 0 ? void 0 : _a3();
-  };
-  BasicTracerProvider2.prototype._buildPropagatorFromEnv = function() {
-    var _this = this;
-    var uniquePropagatorNames = Array.from(new Set(getEnv().OTEL_PROPAGATORS));
-    var propagators = uniquePropagatorNames.map(function(name) {
-      var propagator = _this._getPropagator(name);
-      if (!propagator) {
-        diag2.warn('Propagator "' + name + '" requested through environment variable is unavailable.');
-      }
-      return propagator;
-    });
-    var validPropagators = propagators.reduce(function(list, item) {
-      if (item) {
-        list.push(item);
-      }
-      return list;
-    }, []);
-    if (validPropagators.length === 0) {
-      return;
-    } else if (uniquePropagatorNames.length === 1) {
-      return validPropagators[0];
-    } else {
-      return new CompositePropagator({
-        propagators: validPropagators
-      });
-    }
-  };
-  BasicTracerProvider2.prototype._buildExporterFromEnv = function() {
-    var exporterName = getEnv().OTEL_TRACES_EXPORTER;
-    if (exporterName === "none")
-      return;
-    var exporter = this._getSpanExporter(exporterName);
-    if (!exporter) {
-      diag2.error('Exporter "' + exporterName + '" requested through environment variable is unavailable.');
-    }
-    return exporter;
-  };
-  BasicTracerProvider2._registeredPropagators = /* @__PURE__ */ new Map([
-    ["tracecontext", function() {
-      return new W3CTraceContextPropagator();
-    }],
-    ["baggage", function() {
-      return new W3CBaggagePropagator();
-    }]
-  ]);
-  BasicTracerProvider2._registeredExporters = /* @__PURE__ */ new Map();
-  return BasicTracerProvider2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/ConsoleSpanExporter.js
-var __values6 = function(o2) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o2[s], i = 0;
-  if (m2)
-    return m2.call(o2);
-  if (o2 && typeof o2.length === "number")
-    return {
-      next: function() {
-        if (o2 && i >= o2.length)
-          o2 = void 0;
-        return { value: o2 && o2[i++], done: !o2 };
-      }
-    };
-  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-var ConsoleSpanExporter = function() {
-  function ConsoleSpanExporter2() {
-  }
-  __name(ConsoleSpanExporter2, "ConsoleSpanExporter");
-  ConsoleSpanExporter2.prototype.export = function(spans, resultCallback) {
-    return this._sendSpans(spans, resultCallback);
-  };
-  ConsoleSpanExporter2.prototype.shutdown = function() {
-    this._sendSpans([]);
-    return Promise.resolve();
-  };
-  ConsoleSpanExporter2.prototype._exportInfo = function(span) {
-    return {
-      traceId: span.spanContext().traceId,
-      parentId: span.parentSpanId,
-      name: span.name,
-      id: span.spanContext().spanId,
-      kind: span.kind,
-      timestamp: hrTimeToMicroseconds(span.startTime),
-      duration: hrTimeToMicroseconds(span.duration),
-      attributes: span.attributes,
-      status: span.status,
-      events: span.events,
-      links: span.links
-    };
-  };
-  ConsoleSpanExporter2.prototype._sendSpans = function(spans, done) {
-    var e_1, _a3;
-    try {
-      for (var spans_1 = __values6(spans), spans_1_1 = spans_1.next(); !spans_1_1.done; spans_1_1 = spans_1.next()) {
-        var span = spans_1_1.value;
-        console.dir(this._exportInfo(span), { depth: 3 });
-      }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (spans_1_1 && !spans_1_1.done && (_a3 = spans_1.return))
-          _a3.call(spans_1);
-      } finally {
-        if (e_1)
-          throw e_1.error;
-      }
-    }
-    if (done) {
-      return done({ code: ExportResultCode.SUCCESS });
-    }
-  };
-  return ConsoleSpanExporter2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/InMemorySpanExporter.js
-var __read6 = function(o2, n2) {
-  var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-  if (!m2)
-    return o2;
-  var i = m2.call(o2), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
-      ar.push(r2.value);
-  } catch (error2) {
-    e2 = { error: error2 };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-var __spreadArray4 = function(to, from, pack) {
-  if (pack || arguments.length === 2)
-    for (var i = 0, l = from.length, ar; i < l; i++) {
-      if (ar || !(i in from)) {
-        if (!ar)
-          ar = Array.prototype.slice.call(from, 0, i);
-        ar[i] = from[i];
-      }
-    }
-  return to.concat(ar || Array.prototype.slice.call(from));
-};
-var InMemorySpanExporter = function() {
-  function InMemorySpanExporter2() {
-    this._finishedSpans = [];
-    this._stopped = false;
-  }
-  __name(InMemorySpanExporter2, "InMemorySpanExporter");
-  InMemorySpanExporter2.prototype.export = function(spans, resultCallback) {
-    var _a3;
-    if (this._stopped)
-      return resultCallback({
-        code: ExportResultCode.FAILED,
-        error: new Error("Exporter has been stopped")
-      });
-    (_a3 = this._finishedSpans).push.apply(_a3, __spreadArray4([], __read6(spans), false));
-    setTimeout(function() {
-      return resultCallback({ code: ExportResultCode.SUCCESS });
-    }, 0);
-  };
-  InMemorySpanExporter2.prototype.shutdown = function() {
-    this._stopped = true;
-    this._finishedSpans = [];
-    return Promise.resolve();
-  };
-  InMemorySpanExporter2.prototype.reset = function() {
-    this._finishedSpans = [];
-  };
-  InMemorySpanExporter2.prototype.getFinishedSpans = function() {
-    return this._finishedSpans;
-  };
-  return InMemorySpanExporter2;
-}();
-
-// ../../node_modules/.pnpm/@opentelemetry+sdk-trace-base@1.7.0_@opentelemetry+api@1.2.0/node_modules/@opentelemetry/sdk-trace-base/build/esm/export/SimpleSpanProcessor.js
-var SimpleSpanProcessor = function() {
-  function SimpleSpanProcessor2(_exporter) {
-    this._exporter = _exporter;
-    this._shutdownOnce = new BindOnceFuture(this._shutdown, this);
-  }
-  __name(SimpleSpanProcessor2, "SimpleSpanProcessor");
-  SimpleSpanProcessor2.prototype.forceFlush = function() {
-    return Promise.resolve();
-  };
-  SimpleSpanProcessor2.prototype.onStart = function(_span, _parentContext) {
-  };
-  SimpleSpanProcessor2.prototype.onEnd = function(span) {
-    var _this = this;
-    if (this._shutdownOnce.isCalled) {
-      return;
-    }
-    if ((span.spanContext().traceFlags & TraceFlags.SAMPLED) === 0) {
-      return;
-    }
-    context2.with(suppressTracing(context2.active()), function() {
-      _this._exporter.export([span], function(result) {
-        var _a3;
-        if (result.code !== ExportResultCode.SUCCESS) {
-          globalErrorHandler((_a3 = result.error) !== null && _a3 !== void 0 ? _a3 : new Error("SimpleSpanProcessor: span export failed (status " + result + ")"));
-        }
-      });
-    });
-  };
-  SimpleSpanProcessor2.prototype.shutdown = function() {
-    return this._shutdownOnce.call();
-  };
-  SimpleSpanProcessor2.prototype._shutdown = function() {
-    return this._exporter.shutdown();
-  };
-  return SimpleSpanProcessor2;
-}();
-
 // ../engine-core/src/tracing/createSpan.ts
 async function createSpan(engineSpanEvent) {
   await new Promise((res) => setTimeout(res, 0));
   const tracer = trace.getTracer("prisma");
   engineSpanEvent.spans.forEach((engineSpan) => {
-    var _a3;
     const spanContext = {
       traceId: engineSpan.trace_id,
       spanId: engineSpan.span_id,
       traceFlags: TraceFlags.SAMPLED
     };
-    const links = (_a3 = engineSpan.links) == null ? void 0 : _a3.map((link) => {
+    const links = engineSpan.links?.map((link) => {
       return {
         context: {
           traceId: link.trace_id,
@@ -25549,11 +22518,11 @@ __name(createSpan, "createSpan");
 
 // ../engine-core/src/tracing/getTraceParent.ts
 function getTraceParent({
-  context: context3,
+  context: context2,
   tracingConfig
 }) {
-  const span = trace.getSpanContext(context3 != null ? context3 : context2.active());
-  if ((tracingConfig == null ? void 0 : tracingConfig.enabled) && span) {
+  const span = trace.getSpanContext(context2 ?? context.active());
+  if (tracingConfig?.enabled && span) {
     return `00-${span.traceId}-${span.spanId}-0${span.traceFlags}`;
   } else {
     return `00-10-10-00`;
@@ -25577,22 +22546,21 @@ __name(getTracingConfig, "getTracingConfig");
 
 // ../engine-core/src/tracing/runInChildSpan.ts
 async function runInChildSpan(options, cb) {
-  var _a3;
   if (options.enabled === false)
     return cb();
   const tracer = trace.getTracer("prisma");
-  const context3 = (_a3 = options.context) != null ? _a3 : context2.active();
+  const context2 = options.context ?? context.active();
   if (options.active === false) {
-    const span = tracer.startSpan(`prisma:client:${options.name}`, options, context3);
+    const span = tracer.startSpan(`prisma:client:${options.name}`, options, context2);
     try {
-      return await cb(span, context3);
+      return await cb(span, context2);
     } finally {
       span.end();
     }
   }
-  return tracer.startActiveSpan(`prisma:client:${options.name}`, options, context3, async (span) => {
+  return tracer.startActiveSpan(`prisma:client:${options.name}`, options, context2, async (span) => {
     try {
-      return await cb(span, context2.active());
+      return await cb(span, context.active());
     } finally {
       span.end();
     }
@@ -25665,7 +22633,7 @@ var Connection = class {
 __name(Connection, "Connection");
 
 // ../engine-core/src/binary/BinaryEngine.ts
-var debug5 = src_default("prisma:engine");
+var debug6 = src_default("prisma:engine");
 var exists3 = (0, import_util4.promisify)(import_fs5.default.exists);
 var logger = /* @__PURE__ */ __name((...args) => {
 }, "logger");
@@ -25683,7 +22651,7 @@ var BinaryEngine = class extends Engine {
     datasources,
     showColors,
     logQueries,
-    env: env2,
+    env,
     flags,
     clientVersion: clientVersion2,
     previewFeatures,
@@ -25695,14 +22663,12 @@ var BinaryEngine = class extends Engine {
     tracingConfig,
     logEmitter
   }) {
-    var _a3;
     super();
     this.startCount = 0;
     this.previewFeatures = [];
     this.stderrLogs = "";
     this.handleRequestError = /* @__PURE__ */ __name(async (error2) => {
-      var _a3, _b2;
-      debug5({ error: error2 });
+      debug6({ error: error2 });
       if (this.startPromise) {
         await this.startPromise;
       }
@@ -25719,10 +22685,10 @@ var BinaryEngine = class extends Engine {
       }
       try {
         this.throwAsyncErrorIfExists();
-        if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.isCanceled) {
+        if (this.currentRequestPromise?.isCanceled) {
           this.throwAsyncErrorIfExists();
         } else if (isNetworkError) {
-          if (this.globalKillSignalReceived && !((_b2 = this.child) == null ? void 0 : _b2.connected)) {
+          if (this.globalKillSignalReceived && !this.child?.connected) {
             throw new PrismaClientUnknownRequestError(
               `The Node.js process already received a ${this.globalKillSignalReceived} signal, therefore the Prisma query engine exited
   and your request can't be processed.
@@ -25749,21 +22715,21 @@ var BinaryEngine = class extends Engine {
       }
     }, "handleRequestError");
     this.dirname = dirname2;
-    this.env = env2;
+    this.env = env;
     this.cwd = this.resolveCwd(cwd);
-    this.enableDebugLogs = enableDebugLogs != null ? enableDebugLogs : false;
-    this.allowTriggerPanic = allowTriggerPanic != null ? allowTriggerPanic : false;
+    this.enableDebugLogs = enableDebugLogs ?? false;
+    this.allowTriggerPanic = allowTriggerPanic ?? false;
     this.datamodelPath = datamodelPath;
-    this.prismaPath = (_a3 = process.env.PRISMA_QUERY_ENGINE_BINARY) != null ? _a3 : prismaPath;
+    this.prismaPath = process.env.PRISMA_QUERY_ENGINE_BINARY ?? prismaPath;
     this.generator = generator;
     this.datasources = datasources;
     this.tracingConfig = tracingConfig;
     this.logEmitter = logEmitter;
-    this.showColors = showColors != null ? showColors : false;
-    this.logQueries = logQueries != null ? logQueries : false;
+    this.showColors = showColors ?? false;
+    this.logQueries = logQueries ?? false;
     this.clientVersion = clientVersion2;
-    this.flags = flags != null ? flags : [];
-    this.previewFeatures = previewFeatures != null ? previewFeatures : [];
+    this.flags = flags ?? [];
+    this.previewFeatures = previewFeatures ?? [];
     this.activeProvider = activeProvider;
     this.connection = new Connection();
     initHooks();
@@ -25787,7 +22753,7 @@ var BinaryEngine = class extends Engine {
     const removedFlagsUsed = this.previewFeatures.filter((e2) => removedFlags.includes(e2));
     if (removedFlagsUsed.length > 0 && !process.env.PRISMA_HIDE_PREVIEW_FLAG_WARNINGS) {
       console.log(
-        `${import_chalk3.default.blueBright("info")} The preview flags \`${removedFlagsUsed.join(
+        `${import_chalk4.default.blueBright("info")} The preview flags \`${removedFlagsUsed.join(
           "`, `"
         )}\` were removed, you can now safely remove them from your schema.prisma.`
       );
@@ -25801,12 +22767,12 @@ var BinaryEngine = class extends Engine {
     if (this.platform) {
       if (!knownPlatforms.includes(this.platform) && !import_fs5.default.existsSync(this.platform)) {
         throw new PrismaClientInitializationError(
-          `Unknown ${import_chalk3.default.red("PRISMA_QUERY_ENGINE_BINARY")} ${import_chalk3.default.redBright.bold(
+          `Unknown ${import_chalk4.default.red("PRISMA_QUERY_ENGINE_BINARY")} ${import_chalk4.default.redBright.bold(
             this.platform
-          )}. Possible binaryTargets: ${import_chalk3.default.greenBright(
+          )}. Possible binaryTargets: ${import_chalk4.default.greenBright(
             knownPlatforms.join(", ")
           )} or a path to the query engine binary.
-You may have to run ${import_chalk3.default.greenBright("prisma generate")} for your changes to take effect.`,
+You may have to run ${import_chalk4.default.greenBright("prisma generate")} for your changes to take effect.`,
           this.clientVersion
         );
       }
@@ -25820,7 +22786,6 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     this.checkForTooManyEngines();
   }
   setError(err) {
-    var _a3;
     if (isRustErrorLog(err)) {
       this.lastError = new PrismaClientRustError({
         clientVersion: this.clientVersion,
@@ -25830,7 +22795,7 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
         if (this.child) {
           this.stopPromise = killProcessAndWait(this.child);
         }
-        if ((_a3 = this.currentRequestPromise) == null ? void 0 : _a3.cancel) {
+        if (this.currentRequestPromise?.cancel) {
           this.currentRequestPromise.cancel();
         }
       }
@@ -25841,7 +22806,7 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
       const runningEngines = engines.filter((e2) => e2.child);
       if (runningEngines.length === 10) {
         console.warn(
-          `${import_chalk3.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`
+          `${import_chalk4.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`
         );
       }
     }
@@ -25875,15 +22840,14 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     this.platformPromise = getPlatform();
     return this.platformPromise;
   }
-  getQueryEnginePath(platform3, prefix = __dirname) {
-    let queryEnginePath = import_path3.default.join(prefix, `query-engine-${platform3}`);
-    if (platform3 === "windows") {
+  getQueryEnginePath(platform2, prefix = __dirname) {
+    let queryEnginePath = import_path3.default.join(prefix, `query-engine-${platform2}`);
+    if (platform2 === "windows") {
       queryEnginePath = `${queryEnginePath}.exe`;
     }
     return queryEnginePath;
   }
   async resolvePrismaPath() {
-    var _a3, _b2, _c;
     const searchedLocations = [];
     let enginePath;
     if (this.prismaPath) {
@@ -25900,7 +22864,7 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     }
     const searchLocations = [
       eval(`require('path').join(__dirname, '../../../.prisma/client')`),
-      (_c = (_b2 = (_a3 = this.generator) == null ? void 0 : _a3.output) == null ? void 0 : _b2.value) != null ? _c : eval("__dirname"),
+      this.generator?.output?.value ?? eval("__dirname"),
       import_path3.default.join(eval("__dirname"), ".."),
       import_path3.default.dirname(this.datamodelPath),
       this.cwd,
@@ -25911,27 +22875,27 @@ You may have to run ${import_chalk3.default.greenBright("prisma generate")} for 
     }
     for (const location of searchLocations) {
       searchedLocations.push(location);
-      debug5(`Search for Query Engine in ${location}`);
+      debug6(`Search for Query Engine in ${location}`);
       enginePath = this.getQueryEnginePath(this.platform, location);
       if (import_fs5.default.existsSync(enginePath)) {
         return { prismaPath: enginePath, searchedLocations };
       }
     }
     enginePath = this.getQueryEnginePath(this.platform);
-    return { prismaPath: enginePath != null ? enginePath : "", searchedLocations };
+    return { prismaPath: enginePath ?? "", searchedLocations };
   }
   async getPrismaPath() {
     const { prismaPath, searchedLocations: searchedLocations2 } = await this.resolvePrismaPath();
-    const platform3 = await this.getPlatform();
+    const platform2 = await this.getPlatform();
     if (!await exists3(prismaPath)) {
       const pinnedStr = this.incorrectlyPinnedBinaryTarget ? `
-You incorrectly pinned it to ${import_chalk3.default.redBright.bold(`${this.incorrectlyPinnedBinaryTarget}`)}
+You incorrectly pinned it to ${import_chalk4.default.redBright.bold(`${this.incorrectlyPinnedBinaryTarget}`)}
 ` : "";
-      let errorText = `Query engine binary for current platform "${import_chalk3.default.bold(
-        platform3
+      let errorText = `Query engine binary for current platform "${import_chalk4.default.bold(
+        platform2
       )}" could not be found.${pinnedStr}
 This probably happens, because you built Prisma Client on a different platform.
-(Prisma Client looked in "${import_chalk3.default.underline(prismaPath)}")
+(Prisma Client looked in "${import_chalk4.default.underline(prismaPath)}")
 
 Searched Locations:
 
@@ -25947,7 +22911,7 @@ ${searchedLocations2.map((f2) => {
       if (this.generator) {
         if (this.generator.binaryTargets.find((object) => object.value === this.platform) || this.generator.binaryTargets.find((object) => object.value === "native")) {
           errorText += `
-You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t2) => `"${import_chalk3.default.bold(t2.value)}"`).join(", ")} to the "${import_chalk3.default.underline("generator")}" block
+You already added the platform${this.generator.binaryTargets.length > 1 ? "s" : ""} ${this.generator.binaryTargets.map((t2) => `"${import_chalk4.default.bold(t2.value)}"`).join(", ")} to the "${import_chalk4.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -25956,12 +22920,12 @@ Please create an issue at https://github.com/prisma/prisma/issues/new`;
         } else {
           errorText += `
 
-To solve this problem, add the platform "${this.platform}" to the "${import_chalk3.default.underline(
+To solve this problem, add the platform "${this.platform}" to the "${import_chalk4.default.underline(
             "binaryTargets"
-          )}" attribute in the "${import_chalk3.default.underline("generator")}" block in the "schema.prisma" file:
-${import_chalk3.default.greenBright(this.getFixedGenerator())}
+          )}" attribute in the "${import_chalk4.default.underline("generator")}" block in the "schema.prisma" file:
+${import_chalk4.default.greenBright(this.getFixedGenerator())}
 
-Then run "${import_chalk3.default.greenBright("prisma generate")}" for your changes to take effect.
+Then run "${import_chalk4.default.greenBright("prisma generate")}" for your changes to take effect.
 Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
         }
       } else {
@@ -25973,11 +22937,11 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
       throw new PrismaClientInitializationError(errorText, this.clientVersion);
     }
     if (this.incorrectlyPinnedBinaryTarget) {
-      console.error(`${import_chalk3.default.yellow("Warning:")} You pinned the platform ${import_chalk3.default.bold(
+      console.error(`${import_chalk4.default.yellow("Warning:")} You pinned the platform ${import_chalk4.default.bold(
         this.incorrectlyPinnedBinaryTarget
-      )}, but Prisma Client detects ${import_chalk3.default.bold(await this.getPlatform())}.
-This means you should very likely pin the platform ${import_chalk3.default.greenBright(await this.getPlatform())} instead.
-${import_chalk3.default.dim("In case we're mistaken, please report this to us \u{1F64F}.")}`);
+      )}, but Prisma Client detects ${import_chalk4.default.bold(await this.getPlatform())}.
+This means you should very likely pin the platform ${import_chalk4.default.greenBright(await this.getPlatform())} instead.
+${import_chalk4.default.dim("In case we're mistaken, please report this to us \u{1F64F}.")}`);
     }
     if (process.platform !== "win32") {
       plusX(prismaPath);
@@ -26020,30 +22984,28 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
     return runInChildSpan(spanOptions, startFn);
   }
   getEngineEnvVars() {
-    var _a3, _b2;
-    const env2 = {
+    const env = {
       PRISMA_DML_PATH: this.datamodelPath
     };
     if (this.logQueries) {
-      env2.LOG_QUERIES = "true";
+      env.LOG_QUERIES = "true";
     }
     if (this.datasources) {
-      env2.OVERWRITE_DATASOURCES = this.printDatasources();
+      env.OVERWRITE_DATASOURCES = this.printDatasources();
     }
     if (!process.env.NO_COLOR && this.showColors) {
-      env2.CLICOLOR_FORCE = "1";
+      env.CLICOLOR_FORCE = "1";
     }
     return {
       ...this.env,
       ...process.env,
-      ...env2,
-      RUST_BACKTRACE: (_a3 = process.env.RUST_BACKTRACE) != null ? _a3 : "1",
-      RUST_LOG: (_b2 = process.env.RUST_LOG) != null ? _b2 : "info"
+      ...env,
+      RUST_BACKTRACE: process.env.RUST_BACKTRACE ?? "1",
+      RUST_LOG: process.env.RUST_LOG ?? "info"
     };
   }
   internalStart() {
     return new Promise(async (resolve, reject) => {
-      var _a3, _b2, _c;
       await new Promise((r2) => process.nextTick(r2));
       if (this.stopPromise) {
         await this.stopPromise;
@@ -26060,13 +23022,13 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
         return resolve();
       }
       try {
-        if (((_a3 = this.child) == null ? void 0 : _a3.connected) || this.child && !((_b2 = this.child) == null ? void 0 : _b2.killed)) {
-          debug5(`There is a child that still runs and we want to start again`);
+        if (this.child?.connected || this.child && !this.child?.killed) {
+          debug6(`There is a child that still runs and we want to start again`);
         }
         this.lastError = void 0;
         logger("startin & resettin");
         this.globalKillSignalReceived = void 0;
-        debug5({ cwd: this.cwd });
+        debug6({ cwd: this.cwd });
         const prismaPath = await this.getPrismaPath();
         const additionalFlag = this.allowTriggerPanic ? ["--debug"] : [];
         const flags = [
@@ -26078,21 +23040,21 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
         ];
         this.port = await this.getFreePort();
         flags.push("--port", String(this.port));
-        debug5({ flags });
-        const env2 = this.getEngineEnvVars();
+        debug6({ flags });
+        const env = this.getEngineEnvVars();
         this.child = (0, import_child_process2.spawn)(prismaPath, flags, {
-          env: env2,
+          env,
           cwd: this.cwd,
           windowsHide: true,
           stdio: ["ignore", "pipe", "pipe"]
         });
         byline(this.child.stderr).on("data", (msg) => {
           const data = String(msg);
-          debug5("stderr", data);
+          debug6("stderr", data);
           try {
             const json = JSON.parse(data);
             if (typeof json.is_panic !== "undefined") {
-              debug5(json);
+              debug6(json);
               this.setError(json);
               if (this.engineStartDeferred) {
                 const err = new PrismaClientInitializationError(json.message, this.clientVersion, json.error_code);
@@ -26106,12 +23068,11 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
           }
         });
         byline(this.child.stdout).on("data", (msg) => {
-          var _a4, _b3;
           const data = String(msg);
           try {
             const json = JSON.parse(data);
-            debug5("stdout", getMessage(json));
-            if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && ((_b3 = (_a4 = json.fields) == null ? void 0 : _a4.message) == null ? void 0 : _b3.startsWith("Started query engine http server"))) {
+            debug6("stdout", getMessage(json));
+            if (this.engineStartDeferred && json.level === "INFO" && json.target === "query_engine::server" && json.fields?.message?.startsWith("Started query engine http server")) {
               this.connection.open(`http://127.0.0.1:${this.port}`);
               this.engineStartDeferred.resolve();
               this.engineStartDeferred = void 0;
@@ -26134,11 +23095,10 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
               this.setError(json);
             }
           } catch (e2) {
-            debug5(e2, data);
+            debug6(e2, data);
           }
         });
         this.child.on("exit", (code) => {
-          var _a4;
           logger("removing startPromise");
           this.startPromise = void 0;
           if (this.engineStopDeferred) {
@@ -26158,7 +23118,7 @@ ${import_chalk3.default.dim("In case we're mistaken, please report this to us \u
 ` + msg,
                 this.clientVersion
               );
-            } else if ((_a4 = this.child) == null ? void 0 : _a4.signalCode) {
+            } else if (this.child?.signalCode) {
               err = new PrismaClientInitializationError(
                 `Query engine process killed with signal ${this.child.signalCode} for unknown reason.
 Make sure that the engine binary at ${prismaPath} is not corrupt.
@@ -26226,17 +23186,17 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
             this.engineStartDeferred = { resolve: resolve2, reject: reject2 };
           });
         } catch (err) {
-          (_c = this.child) == null ? void 0 : _c.kill();
+          this.child?.kill();
           throw err;
         }
         void (async () => {
           try {
             const engineVersion = await this.version(true);
-            debug5(`Client Version: ${this.clientVersion}`);
-            debug5(`Engine Version: ${engineVersion}`);
-            debug5(`Active provider: ${this.activeProvider}`);
+            debug6(`Client Version: ${this.clientVersion}`);
+            debug6(`Engine Version: ${engineVersion}`);
+            debug6(`Active provider: ${this.activeProvider}`);
           } catch (e2) {
-            debug5(e2);
+            debug6(e2);
           }
         })();
         this.stopPromise = void 0;
@@ -26273,18 +23233,18 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     this.getConfigPromise = void 0;
     let stopChildPromise;
     if (this.child) {
-      debug5(`Stopping Prisma engine`);
+      debug6(`Stopping Prisma engine`);
       if (this.startPromise) {
-        debug5(`Waiting for start promise`);
+        debug6(`Waiting for start promise`);
         await this.startPromise;
       }
-      debug5(`Done waiting for start promise`);
+      debug6(`Done waiting for start promise`);
       if (this.child.exitCode === null) {
         stopChildPromise = new Promise((resolve, reject) => {
           this.engineStopDeferred = { resolve, reject };
         });
       } else {
-        debug5("Child already exited with code", this.child.exitCode);
+        debug6("Child already exited with code", this.child.exitCode);
       }
       this.connection.close();
       this.child.kill();
@@ -26298,10 +23258,9 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     this.engineStopDeferred = void 0;
   }
   kill(signal) {
-    var _a3;
     this.getConfigPromise = void 0;
     this.globalKillSignalReceived = signal;
-    (_a3 = this.child) == null ? void 0 : _a3.kill();
+    this.child?.kill();
     this.connection.close();
   }
   getFreePort() {
@@ -26329,9 +23288,9 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
   }
   async _getConfig() {
     const prismaPath = await this.getPrismaPath();
-    const env2 = await this.getEngineEnvVars();
+    const env = await this.getEngineEnvVars();
     const result = await (0, import_execa.default)(prismaPath, ["cli", "get-config"], {
-      env: omit(env2, ["PORT"]),
+      env: omit(env, ["PORT"]),
       cwd: this.cwd
     });
     return JSON.parse(result.stdout);
@@ -26344,9 +23303,9 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
   }
   async _getDmmf() {
     const prismaPath = await this.getPrismaPath();
-    const env2 = await this.getEngineEnvVars();
+    const env = await this.getEngineEnvVars();
     const result = await (0, import_execa.default)(prismaPath, ["--enable-raw-queries", "cli", "dmmf"], {
-      env: omit(env2, ["PORT"]),
+      env: omit(env, ["PORT"]),
       cwd: this.cwd
     });
     return JSON.parse(result.stdout);
@@ -26409,7 +23368,7 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     const request2 = {
       batch: queries.map((query2) => ({ query: query2, variables: {} })),
       transaction: Boolean(transaction),
-      isolationLevel: transaction == null ? void 0 : transaction.isolationLevel
+      isolationLevel: transaction?.isolationLevel
     };
     this.lastQuery = JSON.stringify(request2);
     this.currentRequestPromise = this.connection.post("/", this.lastQuery, runtimeHeadersToHttpHeaders(headers));
@@ -26446,13 +23405,12 @@ You very likely have the wrong "binaryTarget" defined in the schema.prisma file.
     });
   }
   async transaction(action, headers, arg2) {
-    var _a3, _b2;
     await this.start();
     if (action === "start") {
       const jsonOptions = JSON.stringify({
-        max_wait: (_a3 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a3 : 2e3,
-        timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3,
-        isolation_level: arg2 == null ? void 0 : arg2.isolationLevel
+        max_wait: arg2?.maxWait ?? 2e3,
+        timeout: arg2?.timeout ?? 5e3,
+        isolation_level: arg2?.isolationLevel
       });
       const result = await Connection.onHttpError(
         this.connection.post(
@@ -26600,9 +23558,8 @@ __name(PrismaClientError, "PrismaClientError");
 // ../engine-core/src/data-proxy/errors/DataProxyError.ts
 var DataProxyError = class extends PrismaClientError {
   constructor(message, info2) {
-    var _a3;
     super(message, info2);
-    this.isRetryable = (_a3 = info2.isRetryable) != null ? _a3 : true;
+    this.isRetryable = info2.isRetryable ?? true;
   }
 };
 __name(DataProxyError, "DataProxyError");
@@ -26649,10 +23606,9 @@ __name(NotImplementedYetError, "NotImplementedYetError");
 // ../engine-core/src/data-proxy/errors/DataProxyAPIError.ts
 var DataProxyAPIError = class extends DataProxyError {
   constructor(message, info2) {
-    var _a3;
     super(message, info2);
     this.response = info2.response;
-    const requestId = (_a3 = this.response.headers) == null ? void 0 : _a3["Prisma-Request-Id"];
+    const requestId = this.response.headers?.["Prisma-Request-Id"];
     if (requestId) {
       const messageSuffix = `(The request id was: ${requestId})`;
       this.message = this.message + " " + messageSuffix;
@@ -26799,7 +23755,7 @@ async function getResponseErrorBody(response) {
   let text;
   try {
     text = await response.text();
-  } catch (e2) {
+  } catch {
     return { type: "EmptyError" };
   }
   try {
@@ -26825,7 +23781,7 @@ async function getResponseErrorBody(response) {
       }
     }
     return { type: "UnknownJsonError", body: error2 };
-  } catch (e2) {
+  } catch {
     return text === "" ? { type: "EmptyError" } : { type: "UnknownTextError", body: text };
   }
 }
@@ -26916,13 +23872,13 @@ __name(backOff, "backOff");
 // ../engines/package.json
 var devDependencies = {
   "@prisma/debug": "workspace:*",
-  "@prisma/engines-version": "4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe",
+  "@prisma/engines-version": "4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5",
   "@prisma/fetch-engine": "workspace:*",
   "@prisma/get-platform": "workspace:*",
   "@swc/core": "1.3.14",
-  "@swc/jest": "0.2.23",
+  "@swc/jest": "0.2.24",
   "@types/jest": "29.2.4",
-  "@types/node": "16.18.9",
+  "@types/node": "16.18.11",
   execa: "5.1.1",
   jest: "29.3.1",
   typescript: "4.8.4"
@@ -26950,7 +23906,6 @@ __name(getJSRuntimeName, "getJSRuntimeName");
 
 // ../engine-core/src/data-proxy/utils/request.ts
 async function request(url, options) {
-  var _a3;
   const clientVersion2 = options.clientVersion;
   const jsRuntimeName = getJSRuntimeName();
   try {
@@ -26960,7 +23915,7 @@ async function request(url, options) {
       return await nodeFetch(url, options);
     }
   } catch (e2) {
-    const message = (_a3 = e2.message) != null ? _a3 : "Unknown error";
+    const message = e2.message ?? "Unknown error";
     throw new RequestError(message, { clientVersion: clientVersion2 });
   }
 }
@@ -26996,7 +23951,6 @@ async function nodeFetch(url, options = {}) {
   const incomingData = [];
   const { origin } = new URL(url);
   return new Promise((resolve, reject) => {
-    var _a3;
     const request2 = https.request(url, httpsOptions, (response) => {
       const { statusCode, headers: { location } } = response;
       if (statusCode >= 301 && statusCode <= 399 && location) {
@@ -27011,7 +23965,7 @@ async function nodeFetch(url, options = {}) {
       response.on("error", reject);
     });
     request2.on("error", reject);
-    request2.end((_a3 = options.body) != null ? _a3 : "");
+    request2.end(options.body ?? "");
   });
 }
 __name(nodeFetch, "nodeFetch");
@@ -27020,20 +23974,19 @@ var include = typeof require !== "undefined" ? require : () => {
 
 // ../engine-core/src/data-proxy/utils/getClientVersion.ts
 var semverRegex = /^[1-9][0-9]*\.[0-9]+\.[0-9]+$/;
-var debug6 = src_default("prisma:client:dataproxyEngine");
+var debug7 = src_default("prisma:client:dataproxyEngine");
 async function _getClientVersion(config2) {
-  var _a3, _b2, _c;
   const engineVersion = devDependencies["@prisma/engines-version"];
-  const clientVersion2 = (_a3 = config2.clientVersion) != null ? _a3 : "unknown";
+  const clientVersion2 = config2.clientVersion ?? "unknown";
   if (process.env.PRISMA_CLIENT_DATA_PROXY_CLIENT_VERSION) {
     return process.env.PRISMA_CLIENT_DATA_PROXY_CLIENT_VERSION;
   }
-  const [version, suffix] = (_b2 = clientVersion2 == null ? void 0 : clientVersion2.split("-")) != null ? _b2 : [];
+  const [version, suffix] = clientVersion2?.split("-") ?? [];
   if (suffix === void 0 && semverRegex.test(version)) {
     return version;
   }
   if (suffix !== void 0 || clientVersion2 === "0.0.0") {
-    const [version2] = (_c = engineVersion.split("-")) != null ? _c : [];
+    const [version2] = engineVersion.split("-") ?? [];
     const [major2, minor, patch] = version2.split(".");
     const pkgURL = prismaPkgURL(`<=${major2}.${minor}.${patch}`);
     const res = await request(pkgURL, { clientVersion: clientVersion2 });
@@ -27043,7 +23996,7 @@ async function _getClientVersion(config2) {
       );
     }
     const bodyAsText = await res.text();
-    debug6("length of body fetched from unpkg.com", bodyAsText.length);
+    debug7("length of body fetched from unpkg.com", bodyAsText.length);
     let bodyAsJson;
     try {
       bodyAsJson = JSON.parse(bodyAsText);
@@ -27060,7 +24013,7 @@ async function _getClientVersion(config2) {
 __name(_getClientVersion, "_getClientVersion");
 async function getClientVersion(config2) {
   const version = await _getClientVersion(config2);
-  debug6("version", version);
+  debug7("version", version);
   return version;
 }
 __name(getClientVersion, "getClientVersion");
@@ -27072,23 +24025,22 @@ __name(prismaPkgURL, "prismaPkgURL");
 // ../engine-core/src/data-proxy/DataProxyEngine.ts
 var MAX_RETRIES = 10;
 var P = Promise.resolve();
-var debug7 = src_default("prisma:client:dataproxyEngine");
+var debug8 = src_default("prisma:client:dataproxyEngine");
 var DataProxyEngine = class extends Engine {
   constructor(config2) {
-    var _a3, _b2, _c, _d;
     super();
     this.config = config2;
     this.env = { ...this.config.env, ...process.env };
-    this.inlineSchema = (_a3 = config2.inlineSchema) != null ? _a3 : "";
-    this.inlineDatasources = (_b2 = config2.inlineDatasources) != null ? _b2 : {};
-    this.inlineSchemaHash = (_c = config2.inlineSchemaHash) != null ? _c : "";
-    this.clientVersion = (_d = config2.clientVersion) != null ? _d : "unknown";
+    this.inlineSchema = config2.inlineSchema ?? "";
+    this.inlineDatasources = config2.inlineDatasources ?? {};
+    this.inlineSchemaHash = config2.inlineSchemaHash ?? "";
+    this.clientVersion = config2.clientVersion ?? "unknown";
     this.logEmitter = config2.logEmitter;
     const [host, apiKey] = this.extractHostAndApiKey();
     this.remoteClientVersion = P.then(() => getClientVersion(this.config));
     this.headers = { Authorization: `Bearer ${apiKey}` };
     this.host = host;
-    debug7("host", this.host);
+    debug8("host", this.host);
   }
   version() {
     return "unknown";
@@ -27131,7 +24083,7 @@ var DataProxyEngine = class extends Engine {
       clientVersion: this.clientVersion
     });
     if (!response.ok) {
-      debug7("schema response status", response.status);
+      debug8("schema response status", response.status);
     }
     const err = await responseToError(response, this.clientVersion);
     if (err) {
@@ -27160,7 +24112,7 @@ ${queries.join("\n")}`
     const body = {
       batch: queries.map((query2) => ({ query: query2, variables: {} })),
       transaction: isTransaction,
-      isolationLevel: transaction == null ? void 0 : transaction.isolationLevel
+      isolationLevel: transaction?.isolationLevel
     };
     const { batchResult, elapsed } = await this.requestInternal(body, headers);
     return batchResult.map((result) => {
@@ -27186,7 +24138,7 @@ ${queries.join("\n")}`
           clientVersion: this.clientVersion
         });
         if (!response.ok) {
-          debug7("graphql response status", response.status);
+          debug8("graphql response status", response.status);
         }
         const e2 = await responseToError(response, this.clientVersion);
         await this.handleError(e2);
@@ -27211,12 +24163,11 @@ ${queries.join("\n")}`
     return this.withRetry({
       actionGerund: `${actionToGerund[action]} transaction`,
       callback: async ({ logHttpCall }) => {
-        var _a3, _b2;
         if (action === "start") {
           const body = JSON.stringify({
-            max_wait: (_a3 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a3 : 2e3,
-            timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3,
-            isolation_level: arg2 == null ? void 0 : arg2.isolationLevel
+            max_wait: arg2?.maxWait ?? 2e3,
+            timeout: arg2?.timeout ?? 5e3,
+            isolation_level: arg2?.isolationLevel
           });
           const url = await this.url("transaction/start");
           logHttpCall(url);
@@ -27255,7 +24206,7 @@ ${queries.join("\n")}`
     let url;
     try {
       url = new URL(dataProxyURL);
-    } catch (e2) {
+    } catch {
       throw new InvalidDatasourceError("Could not parse URL of the datasource", {
         clientVersion: this.clientVersion
       });
@@ -27322,7 +24273,6 @@ ${queries.join("\n")}`
     });
   }
   async withRetry(args) {
-    var _a3;
     for (let attempt = 0; ; attempt++) {
       const logHttpCall = /* @__PURE__ */ __name((url) => {
         this.logEmitter.emit("info", {
@@ -27344,7 +24294,7 @@ ${queries.join("\n")}`
           }
         }
         this.logEmitter.emit("warn", {
-          message: `Attempt ${attempt + 1}/${MAX_RETRIES} failed for ${args.actionGerund}: ${(_a3 = e2.message) != null ? _a3 : "(unknown)"}`
+          message: `Attempt ${attempt + 1}/${MAX_RETRIES} failed for ${args.actionGerund}: ${e2.message ?? "(unknown)"}`
         });
         const delay = await backOff(attempt);
         this.logEmitter.emit("warn", { message: `Retrying after ${delay}ms` });
@@ -27375,14 +24325,14 @@ function runtimeHeadersToHttpHeaders2(headers) {
 __name(runtimeHeadersToHttpHeaders2, "runtimeHeadersToHttpHeaders");
 
 // ../engine-core/src/library/LibraryEngine.ts
-var import_chalk5 = __toESM(require_source());
+var import_chalk6 = __toESM(require_source());
 var import_fs7 = __toESM(require("fs"));
 
 // ../engine-core/src/library/DefaultLibraryLoader.ts
-var import_chalk4 = __toESM(require_source());
+var import_chalk5 = __toESM(require_source());
 var import_fs6 = __toESM(require("fs"));
 var import_path4 = __toESM(require("path"));
-var debug8 = src_default("prisma:client:libraryEngine:loader");
+var debug9 = src_default("prisma:client:libraryEngine:loader");
 var DefaultLibraryLoader = class {
   constructor(config2) {
     this.libQueryEnginePath = null;
@@ -27393,47 +24343,46 @@ var DefaultLibraryLoader = class {
     if (!this.libQueryEnginePath) {
       this.libQueryEnginePath = await this.getLibQueryEnginePath();
     }
-    debug8(`loadEngine using ${this.libQueryEnginePath}`);
+    debug9(`loadEngine using ${this.libQueryEnginePath}`);
     try {
       return eval("require")(this.libQueryEnginePath);
     } catch (e2) {
       if (import_fs6.default.existsSync(this.libQueryEnginePath)) {
         if (this.libQueryEnginePath.endsWith(".node")) {
           throw new PrismaClientInitializationError(
-            `Unable to load Node-API Library from ${import_chalk4.default.dim(this.libQueryEnginePath)}, Library may be corrupt: ${e2.message}`,
+            `Unable to load Node-API Library from ${import_chalk5.default.dim(this.libQueryEnginePath)}, Library may be corrupt: ${e2.message}`,
             this.config.clientVersion
           );
         } else {
           throw new PrismaClientInitializationError(
-            `Expected an Node-API Library but received ${import_chalk4.default.dim(this.libQueryEnginePath)}`,
+            `Expected an Node-API Library but received ${import_chalk5.default.dim(this.libQueryEnginePath)}`,
             this.config.clientVersion
           );
         }
       } else {
         throw new PrismaClientInitializationError(
-          `Unable to load Node-API Library from ${import_chalk4.default.dim(this.libQueryEnginePath)}, It does not exist`,
+          `Unable to load Node-API Library from ${import_chalk5.default.dim(this.libQueryEnginePath)}, It does not exist`,
           this.config.clientVersion
         );
       }
     }
   }
   async getLibQueryEnginePath() {
-    var _a3, _b2, _c, _d;
-    const libPath = (_a3 = process.env.PRISMA_QUERY_ENGINE_LIBRARY) != null ? _a3 : this.config.prismaPath;
+    const libPath = process.env.PRISMA_QUERY_ENGINE_LIBRARY ?? this.config.prismaPath;
     if (libPath && import_fs6.default.existsSync(libPath) && libPath.endsWith(".node")) {
       return libPath;
     }
-    this.platform = (_b2 = this.platform) != null ? _b2 : await getPlatform();
+    this.platform = this.platform ?? await getPlatform();
     const { enginePath: enginePath2, searchedLocations: searchedLocations2 } = await this.resolveEnginePath();
     if (!import_fs6.default.existsSync(enginePath2)) {
       const incorrectPinnedPlatformErrorStr = this.platform ? `
-You incorrectly pinned it to ${import_chalk4.default.redBright.bold(`${this.platform}`)}
+You incorrectly pinned it to ${import_chalk5.default.redBright.bold(`${this.platform}`)}
 ` : "";
-      let errorText = `Query engine library for current platform "${import_chalk4.default.bold(
+      let errorText = `Query engine library for current platform "${import_chalk5.default.bold(
         this.platform
       )}" could not be found.${incorrectPinnedPlatformErrorStr}
 This probably happens, because you built Prisma Client on a different platform.
-(Prisma Client looked in "${import_chalk4.default.underline(enginePath2)}")
+(Prisma Client looked in "${import_chalk5.default.underline(enginePath2)}")
 
 Searched Locations:
 
@@ -27447,10 +24396,10 @@ ${searchedLocations2.map((f2) => {
       }).join("\n" + (process.env.DEBUG === "node-engine-search-locations" ? "\n" : ""))}
 `;
       if (this.config.generator) {
-        this.platform = (_c = this.platform) != null ? _c : await getPlatform();
+        this.platform = this.platform ?? await getPlatform();
         if (this.config.generator.binaryTargets.find((object) => object.value === this.platform) || this.config.generator.binaryTargets.find((object) => object.value === "native")) {
           errorText += `
-You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t2) => `"${import_chalk4.default.bold(t2.value)}"`).join(", ")} to the "${import_chalk4.default.underline("generator")}" block
+You already added the platform${this.config.generator.binaryTargets.length > 1 ? "s" : ""} ${this.config.generator.binaryTargets.map((t2) => `"${import_chalk5.default.bold(t2.value)}"`).join(", ")} to the "${import_chalk5.default.underline("generator")}" block
 in the "schema.prisma" file as described in https://pris.ly/d/client-generator,
 but something went wrong. That's suboptimal.
 
@@ -27459,12 +24408,12 @@ Please create an issue at https://github.com/prisma/prisma/issues/new`;
         } else {
           errorText += `
 
-To solve this problem, add the platform "${this.platform}" to the "${import_chalk4.default.underline(
+To solve this problem, add the platform "${this.platform}" to the "${import_chalk5.default.underline(
             "binaryTargets"
-          )}" attribute in the "${import_chalk4.default.underline("generator")}" block in the "schema.prisma" file:
-${import_chalk4.default.greenBright(this.getFixedGenerator())}
+          )}" attribute in the "${import_chalk5.default.underline("generator")}" block in the "schema.prisma" file:
+${import_chalk5.default.greenBright(this.getFixedGenerator())}
 
-Then run "${import_chalk4.default.greenBright("prisma generate")}" for your changes to take effect.
+Then run "${import_chalk5.default.greenBright("prisma generate")}" for your changes to take effect.
 Read more about deploying Prisma Client: https://pris.ly/d/client-generator`;
         }
       } else {
@@ -27475,17 +24424,16 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
       }
       throw new PrismaClientInitializationError(errorText, this.config.clientVersion);
     }
-    this.platform = (_d = this.platform) != null ? _d : await getPlatform();
+    this.platform = this.platform ?? await getPlatform();
     return enginePath2;
   }
   async resolveEnginePath() {
-    var _a3, _b2, _c, _d;
     const searchedLocations = [];
     let enginePath;
     if (this.libQueryEnginePath) {
       return { enginePath: this.libQueryEnginePath, searchedLocations };
     }
-    this.platform = (_a3 = this.platform) != null ? _a3 : await getPlatform();
+    this.platform = this.platform ?? await getPlatform();
     if (__filename.includes("DefaultLibraryLoader")) {
       enginePath = import_path4.default.join(getEnginesPath(), getNodeAPIName(this.platform, "fs"));
       return { enginePath, searchedLocations };
@@ -27493,7 +24441,7 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
     const dirname = eval("__dirname");
     const searchLocations = [
       import_path4.default.resolve(dirname, "../../../.prisma/client"),
-      (_d = (_c = (_b2 = this.config.generator) == null ? void 0 : _b2.output) == null ? void 0 : _c.value) != null ? _d : dirname,
+      this.config.generator?.output?.value ?? dirname,
       import_path4.default.resolve(dirname, ".."),
       import_path4.default.dirname(this.config.datamodelPath),
       this.config.cwd,
@@ -27504,14 +24452,14 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
     }
     for (const location of searchLocations) {
       searchedLocations.push(location);
-      debug8(`Searching for Query Engine Library in ${location}`);
+      debug9(`Searching for Query Engine Library in ${location}`);
       enginePath = import_path4.default.join(location, getNodeAPIName(this.platform, "fs"));
       if (import_fs6.default.existsSync(enginePath)) {
         return { enginePath, searchedLocations };
       }
     }
     enginePath = import_path4.default.join(__dirname, getNodeAPIName(this.platform, "fs"));
-    return { enginePath: enginePath != null ? enginePath : "", searchedLocations };
+    return { enginePath: enginePath ?? "", searchedLocations };
   }
   getFixedGenerator() {
     const fixedGenerator = {
@@ -27524,7 +24472,7 @@ Read more about deploying Prisma Client: https://pris.ly/d/client-generator
 __name(DefaultLibraryLoader, "DefaultLibraryLoader");
 
 // ../engine-core/src/library/ExitHooks.ts
-var debug9 = src_default("prisma:client:libraryEngine:exitHooks");
+var debug10 = src_default("prisma:client:libraryEngine:exitHooks");
 var ExitHooks = class {
   constructor() {
     this.nextOwnerId = 1;
@@ -27568,7 +24516,7 @@ var ExitHooks = class {
   }
   installHook(event, shouldExit = false) {
     process.once(event, async (code) => {
-      debug9(`exit event received: ${event}`);
+      debug10(`exit event received: ${event}`);
       for (const listener of this.idToListenerMap.values()) {
         await listener();
       }
@@ -27582,7 +24530,7 @@ var ExitHooks = class {
 __name(ExitHooks, "ExitHooks");
 
 // ../engine-core/src/library/LibraryEngine.ts
-var debug10 = src_default("prisma:client:libraryEngine");
+var debug11 = src_default("prisma:client:libraryEngine");
 function isQueryEvent(event) {
   return event["item_type"] === "query" && "query" in event;
 }
@@ -27600,13 +24548,12 @@ var engineInstanceCount = 0;
 var exitHooks = new ExitHooks();
 var LibraryEngine = class extends Engine {
   constructor(config2, loader = new DefaultLibraryLoader(config2)) {
-    var _a3, _b2;
     super();
     this.datamodel = import_fs7.default.readFileSync(config2.datamodelPath, "utf-8");
     this.config = config2;
     this.libraryStarted = false;
-    this.logQueries = (_a3 = config2.logQueries) != null ? _a3 : false;
-    this.logLevel = (_b2 = config2.logLevel) != null ? _b2 : "error";
+    this.logQueries = config2.logQueries ?? false;
+    this.logLevel = config2.logLevel ?? "error";
     this.libraryLoader = loader;
     this.logEmitter = config2.logEmitter;
     this.datasourceOverrides = config2.datasources ? this.convertDatasources(config2.datasources) : {};
@@ -27626,26 +24573,25 @@ var LibraryEngine = class extends Engine {
   checkForTooManyEngines() {
     if (engineInstanceCount === 10) {
       console.warn(
-        `${import_chalk5.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`
+        `${import_chalk6.default.yellow("warn(prisma-client)")} There are already 10 instances of Prisma Client actively running.`
       );
     }
   }
   async transaction(action, headers, arg2) {
-    var _a3, _b2, _c, _d, _e;
     await this.start();
     const headerStr = JSON.stringify(headers);
     let result;
     if (action === "start") {
       const jsonOptions = JSON.stringify({
-        max_wait: (_a3 = arg2 == null ? void 0 : arg2.maxWait) != null ? _a3 : 2e3,
-        timeout: (_b2 = arg2 == null ? void 0 : arg2.timeout) != null ? _b2 : 5e3,
-        isolation_level: arg2 == null ? void 0 : arg2.isolationLevel
+        max_wait: arg2?.maxWait ?? 2e3,
+        timeout: arg2?.timeout ?? 5e3,
+        isolation_level: arg2?.isolationLevel
       });
-      result = await ((_c = this.engine) == null ? void 0 : _c.startTransaction(jsonOptions, headerStr));
+      result = await this.engine?.startTransaction(jsonOptions, headerStr);
     } else if (action === "commit") {
-      result = await ((_d = this.engine) == null ? void 0 : _d.commitTransaction(arg2.id, headerStr));
+      result = await this.engine?.commitTransaction(arg2.id, headerStr);
     } else if (action === "rollback") {
-      result = await ((_e = this.engine) == null ? void 0 : _e.rollbackTransaction(arg2.id, headerStr));
+      result = await this.engine?.rollbackTransaction(arg2.id, headerStr);
     }
     const response = this.parseEngineResponse(result);
     if (response.error_code) {
@@ -27658,7 +24604,7 @@ var LibraryEngine = class extends Engine {
     return response;
   }
   async instantiateLibrary() {
-    debug10("internalSetup");
+    debug11("internalSetup");
     if (this.libraryInstantiationPromise) {
       return this.libraryInstantiationPromise;
     }
@@ -27670,19 +24616,19 @@ var LibraryEngine = class extends Engine {
   async getPlatform() {
     if (this.platform)
       return this.platform;
-    const platform3 = await getPlatform();
-    if (!knownPlatforms2.includes(platform3)) {
+    const platform2 = await getPlatform();
+    if (!knownPlatforms2.includes(platform2)) {
       throw new PrismaClientInitializationError(
-        `Unknown ${import_chalk5.default.red("PRISMA_QUERY_ENGINE_LIBRARY")} ${import_chalk5.default.redBright.bold(
-          platform3
-        )}. Possible binaryTargets: ${import_chalk5.default.greenBright(
+        `Unknown ${import_chalk6.default.red("PRISMA_QUERY_ENGINE_LIBRARY")} ${import_chalk6.default.redBright.bold(
+          platform2
+        )}. Possible binaryTargets: ${import_chalk6.default.greenBright(
           knownPlatforms2.join(", ")
         )} or a path to the query engine library.
-You may have to run ${import_chalk5.default.greenBright("prisma generate")} for your changes to take effect.`,
+You may have to run ${import_chalk6.default.greenBright("prisma generate")} for your changes to take effect.`,
         this.config.clientVersion
       );
     }
-    return platform3;
+    return platform2;
   }
   parseEngineResponse(response) {
     if (!response) {
@@ -27707,7 +24653,6 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     return obj;
   }
   async loadEngine() {
-    var _a3;
     if (!this.engine) {
       if (!this.QueryEngineConstructor) {
         this.library = await this.libraryLoader.loadLibrary();
@@ -27719,15 +24664,14 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
           {
             datamodel: this.datamodel,
             env: process.env,
-            logQueries: (_a3 = this.config.logQueries) != null ? _a3 : false,
+            logQueries: this.config.logQueries ?? false,
             ignoreEnvVarErrors: false,
             datasourceOverrides: this.datasourceOverrides,
             logLevel: this.logLevel,
             configDir: this.config.cwd
           },
           (log3) => {
-            var _a4;
-            (_a4 = weakThis.deref()) == null ? void 0 : _a4.logger(log3);
+            weakThis.deref()?.logger(log3);
           }
         );
         engineInstanceCount++;
@@ -27743,7 +24687,6 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     }
   }
   logger(log3) {
-    var _a3;
     const event = this.parseEngineResponse(log3);
     if (!event)
       return;
@@ -27753,7 +24696,7 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
       }
       return;
     }
-    event.level = (_a3 = event == null ? void 0 : event.level.toLowerCase()) != null ? _a3 : "unknown";
+    event.level = event?.level.toLowerCase() ?? "unknown";
     if (isQueryEvent(event)) {
       this.logEmitter.emit("query", {
         timestamp: new Date(),
@@ -27778,12 +24721,11 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     }
   }
   getErrorMessageWithLink(title) {
-    var _a3;
     return getErrorMessageWithLink({
       platform: this.platform,
       title,
       version: this.config.clientVersion,
-      engineVersion: (_a3 = this.versionInfo) == null ? void 0 : _a3.commit,
+      engineVersion: this.versionInfo?.commit,
       database: this.config.activeProvider,
       query: this.lastQuery
     });
@@ -27815,22 +24757,21 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     await this.libraryInstantiationPromise;
     await this.libraryStoppingPromise;
     if (this.libraryStartingPromise) {
-      debug10(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
+      debug11(`library already starting, this.libraryStarted: ${this.libraryStarted}`);
       return this.libraryStartingPromise;
     }
     if (this.libraryStarted) {
       return;
     }
     const startFn = /* @__PURE__ */ __name(async () => {
-      var _a3;
-      debug10("library starting");
+      debug11("library starting");
       try {
         const headers = {
           traceparent: getTraceParent({ tracingConfig: this.config.tracingConfig })
         };
-        await ((_a3 = this.engine) == null ? void 0 : _a3.connect(JSON.stringify(headers)));
+        await this.engine?.connect(JSON.stringify(headers));
         this.libraryStarted = true;
-        debug10("library started");
+        debug11("library started");
       } catch (err) {
         const error2 = this.parseInitError(err.message);
         if (typeof error2 === "string") {
@@ -27853,23 +24794,22 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     await this.libraryStartingPromise;
     await this.executingQueryPromise;
     if (this.libraryStoppingPromise) {
-      debug10("library is already stopping");
+      debug11("library is already stopping");
       return this.libraryStoppingPromise;
     }
     if (!this.libraryStarted) {
       return;
     }
     const stopFn = /* @__PURE__ */ __name(async () => {
-      var _a3;
       await new Promise((r2) => setTimeout(r2, 5));
-      debug10("library stopping");
+      debug11("library stopping");
       const headers = {
         traceparent: getTraceParent({ tracingConfig: this.config.tracingConfig })
       };
-      await ((_a3 = this.engine) == null ? void 0 : _a3.disconnect(JSON.stringify(headers)));
+      await this.engine?.disconnect(JSON.stringify(headers));
       this.libraryStarted = false;
       this.libraryStoppingPromise = void 0;
-      debug10("library stopped");
+      debug11("library stopped");
     }, "stopFn");
     const spanConfig = {
       name: "disconnect",
@@ -27892,23 +24832,20 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
     return JSON.parse(await this.engine.dmmf());
   }
   version() {
-    var _a3, _b2, _c;
-    this.versionInfo = (_a3 = this.library) == null ? void 0 : _a3.version();
-    return (_c = (_b2 = this.versionInfo) == null ? void 0 : _b2.version) != null ? _c : "unknown";
+    this.versionInfo = this.library?.version();
+    return this.versionInfo?.version ?? "unknown";
   }
   debugPanic(message) {
-    var _a3;
-    return (_a3 = this.library) == null ? void 0 : _a3.debugPanic(message);
+    return this.library?.debugPanic(message);
   }
   async request({ query: query2, headers = {} }) {
-    var _a3, _b2;
-    debug10(`sending request, this.libraryStarted: ${this.libraryStarted}`);
+    debug11(`sending request, this.libraryStarted: ${this.libraryStarted}`);
     const request2 = { query: query2, variables: {} };
     const headerStr = JSON.stringify(headers);
     const queryStr = JSON.stringify(request2);
     try {
       await this.start();
-      this.executingQueryPromise = (_a3 = this.engine) == null ? void 0 : _a3.query(queryStr, headerStr, headers.transactionId);
+      this.executingQueryPromise = this.engine?.query(queryStr, headerStr, headers.transactionId);
       this.lastQuery = queryStr;
       const data = this.parseEngineResponse(await this.executingQueryPromise);
       if (data.errors) {
@@ -27926,7 +24863,7 @@ You may have to run ${import_chalk5.default.greenBright("prisma generate")} for 
       if (e2 instanceof PrismaClientInitializationError) {
         throw e2;
       }
-      if (e2.code === "GenericFailure" && ((_b2 = e2.message) == null ? void 0 : _b2.startsWith("PANIC:"))) {
+      if (e2.code === "GenericFailure" && e2.message?.startsWith("PANIC:")) {
         throw new PrismaClientRustPanicError(this.getErrorMessageWithLink(e2.message), this.config.clientVersion);
       }
       const error2 = this.parseRequestError(e2.message);
@@ -27945,11 +24882,11 @@ ${error2.backtrace}`, {
     headers = {},
     transaction
   }) {
-    debug10("requestBatch");
+    debug11("requestBatch");
     const request2 = {
       batch: queries.map((query2) => ({ query: query2, variables: {} })),
       transaction: Boolean(transaction),
-      isolationLevel: transaction == null ? void 0 : transaction.isolationLevel
+      isolationLevel: transaction?.isolationLevel
     };
     await this.start();
     this.lastQuery = JSON.stringify(request2);
@@ -27967,9 +24904,8 @@ ${error2.backtrace}`, {
     const { batchResult, errors } = data;
     if (Array.isArray(batchResult)) {
       return batchResult.map((result2) => {
-        var _a3;
         if (result2.errors && result2.errors.length > 0) {
-          return (_a3 = this.loggerRustPanic) != null ? _a3 : this.buildQueryError(result2.errors[0]);
+          return this.loggerRustPanic ?? this.buildQueryError(result2.errors[0]);
         }
         return {
           data: result2,
@@ -28035,55 +24971,55 @@ __export(logger_exports, {
   info: () => info,
   log: () => log,
   query: () => query,
-  should: () => should,
-  tags: () => tags,
-  warn: () => warn
+  should: () => should2,
+  tags: () => tags2,
+  warn: () => warn2
 });
-var import_chalk6 = __toESM(require_source());
-var tags = {
-  error: import_chalk6.default.red("prisma:error"),
-  warn: import_chalk6.default.yellow("prisma:warn"),
-  info: import_chalk6.default.cyan("prisma:info"),
-  query: import_chalk6.default.blue("prisma:query")
+var import_chalk7 = __toESM(require_source());
+var tags2 = {
+  error: import_chalk7.default.red("prisma:error"),
+  warn: import_chalk7.default.yellow("prisma:warn"),
+  info: import_chalk7.default.cyan("prisma:info"),
+  query: import_chalk7.default.blue("prisma:query")
 };
-var should = {
+var should2 = {
   warn: () => !process.env.PRISMA_DISABLE_WARNINGS
 };
 function log(...data) {
   console.log(...data);
 }
 __name(log, "log");
-function warn(message, ...optionalParams) {
-  if (should.warn()) {
-    console.warn(`${tags.warn} ${message}`, ...optionalParams);
+function warn2(message, ...optionalParams) {
+  if (should2.warn()) {
+    console.warn(`${tags2.warn} ${message}`, ...optionalParams);
   }
 }
-__name(warn, "warn");
+__name(warn2, "warn");
 function info(message, ...optionalParams) {
-  console.info(`${tags.info} ${message}`, ...optionalParams);
+  console.info(`${tags2.info} ${message}`, ...optionalParams);
 }
 __name(info, "info");
 function error(message, ...optionalParams) {
-  console.error(`${tags.error} ${message}`, ...optionalParams);
+  console.error(`${tags2.error} ${message}`, ...optionalParams);
 }
 __name(error, "error");
 function query(message, ...optionalParams) {
-  console.log(`${tags.query} ${message}`, ...optionalParams);
+  console.log(`${tags2.query} ${message}`, ...optionalParams);
 }
 __name(query, "query");
 
 // ../internals/src/utils/callOnce.ts
 function callOnce(fn) {
   let result;
-  return (...args) => result != null ? result : result = fn(...args);
+  return (...args) => result ?? (result = fn(...args));
 }
 __name(callOnce, "callOnce");
 
 // ../internals/src/utils/hasOwnProperty.ts
-function hasOwnProperty2(object, key) {
+function hasOwnProperty(object, key) {
   return Object.prototype.hasOwnProperty.call(object, key);
 }
-__name(hasOwnProperty2, "hasOwnProperty");
+__name(hasOwnProperty, "hasOwnProperty");
 
 // ../internals/src/utils/isPromiseLike.ts
 function isPromiseLike(value) {
@@ -28108,11 +25044,11 @@ function mapObjectValues(object, mapper) {
 __name(mapObjectValues, "mapObjectValues");
 
 // ../internals/src/warnOnce.ts
-var alreadyWarned = /* @__PURE__ */ new Set();
-var warnOnce = /* @__PURE__ */ __name((key, message, ...args) => {
-  if (!alreadyWarned.has(key)) {
-    alreadyWarned.add(key);
-    warn(message, ...args);
+var alreadyWarned2 = /* @__PURE__ */ new Set();
+var warnOnce2 = /* @__PURE__ */ __name((key, message, ...args) => {
+  if (!alreadyWarned2.has(key)) {
+    alreadyWarned2.add(key);
+    warn2(message, ...args);
   }
 }, "warnOnce");
 
@@ -28189,13 +25125,12 @@ __name(MetricsClient, "MetricsClient");
 
 // src/runtime/utils/applyMixins.ts
 function applyMixins(derivedCtor, constructors) {
-  var _a3;
   for (const baseCtor of constructors) {
     for (const name of Object.getOwnPropertyNames(baseCtor.prototype)) {
       Object.defineProperty(
         derivedCtor.prototype,
         name,
-        (_a3 = Object.getOwnPropertyDescriptor(baseCtor.prototype, name)) != null ? _a3 : /* @__PURE__ */ Object.create(null)
+        Object.getOwnPropertyDescriptor(baseCtor.prototype, name) ?? /* @__PURE__ */ Object.create(null)
       );
     }
   }
@@ -28203,7 +25138,7 @@ function applyMixins(derivedCtor, constructors) {
 __name(applyMixins, "applyMixins");
 
 // src/runtime/utils/common.ts
-var import_chalk7 = __toESM(require_source());
+var import_chalk8 = __toESM(require_source());
 
 // ../../node_modules/.pnpm/decimal.js@10.4.2/node_modules/decimal.js/decimal.mjs
 var EXP_LIMIT = 9e15;
@@ -30705,7 +27640,7 @@ __name(wrapWithList, "wrapWithList");
 var RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60))(\.\d{1,})?(([Z])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
 var UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 function getGraphQLType(value, inputType) {
-  const potentialType = inputType == null ? void 0 : inputType.type;
+  const potentialType = inputType?.type;
   if (value === null) {
     return "null";
   }
@@ -30770,13 +27705,12 @@ function getGraphQLType(value, inputType) {
 }
 __name(getGraphQLType, "getGraphQLType");
 function isValidEnumValue(value, inputType) {
-  var _a3;
-  const enumType = inputType == null ? void 0 : inputType.type;
+  const enumType = inputType?.type;
   if (!isSchemaEnum(enumType)) {
     return false;
   }
-  if ((inputType == null ? void 0 : inputType.namespace) === "prisma" && objectEnumNames.includes(enumType.name)) {
-    const name = (_a3 = value == null ? void 0 : value.constructor) == null ? void 0 : _a3.name;
+  if (inputType?.namespace === "prisma" && objectEnumNames.includes(enumType.name)) {
+    const name = value?.constructor?.name;
     return typeof name === "string" && objectEnumValues.instances[name] === value && enumType.values.includes(name);
   }
   return typeof value === "string" && enumType.values.includes(value);
@@ -30814,7 +27748,7 @@ ${(0, import_indent_string2.default)(input.values.join(", "), 2)}
     const body = (0, import_indent_string2.default)(
       input.fields.map((arg2) => {
         const key = `${arg2.name}`;
-        const str = `${greenKeys ? import_chalk7.default.green(key) : key}${arg2.isRequired ? "" : "?"}: ${import_chalk7.default.white(
+        const str = `${greenKeys ? import_chalk8.default.green(key) : key}${arg2.isRequired ? "" : "?"}: ${import_chalk8.default.white(
           arg2.inputTypes.map((argType) => {
             return wrapWithList(
               argIsInputType(argType.type) ? argType.type.name : stringifyGraphQLType(argType.type),
@@ -30823,15 +27757,15 @@ ${(0, import_indent_string2.default)(input.values.join(", "), 2)}
           }).join(" | ")
         )}`;
         if (!arg2.isRequired) {
-          return import_chalk7.default.dim(str);
+          return import_chalk8.default.dim(str);
         }
         return str;
       }).join("\n"),
       2
     );
-    return `${import_chalk7.default.dim("type")} ${import_chalk7.default.bold.dim(input.name)} ${import_chalk7.default.dim("{")}
+    return `${import_chalk8.default.dim("type")} ${import_chalk8.default.bold.dim(input.name)} ${import_chalk8.default.dim("{")}
 ${body}
-${import_chalk7.default.dim("}")}`;
+${import_chalk8.default.dim("}")}`;
   }
 }
 __name(stringifyInputType, "stringifyInputType");
@@ -30871,10 +27805,7 @@ function inputTypeToJson(input, isRequired, nameOnly = false) {
   }
   const inputType = input;
   const showDeepType = isRequired && inputType.fields.every(
-    (arg2) => {
-      var _a3;
-      return arg2.inputTypes[0].location === "inputObjectTypes" || ((_a3 = arg2.inputTypes[1]) == null ? void 0 : _a3.location) === "inputObjectTypes";
-    }
+    (arg2) => arg2.inputTypes[0].location === "inputObjectTypes" || arg2.inputTypes[1]?.location === "inputObjectTypes"
   );
   if (nameOnly) {
     return getInputTypeName(input);
@@ -31057,8 +27988,7 @@ var DMMFSchemaHelper = class {
     };
   }
   hasEnumInNamespace(enumName, namespace) {
-    var _a3;
-    return ((_a3 = this.schema.enumTypes[namespace]) == null ? void 0 : _a3.find((schemaEnum) => schemaEnum.name === enumName)) !== void 0;
+    return this.schema.enumTypes[namespace]?.find((schemaEnum) => schemaEnum.name === enumName) !== void 0;
   }
   getMergedOutputTypeMap() {
     return {
@@ -31217,7 +28147,7 @@ function getPrismaClientDMMF(dmmf) {
 __name(getPrismaClientDMMF, "getPrismaClientDMMF");
 
 // src/runtime/query.ts
-var import_chalk11 = __toESM(require_source());
+var import_chalk12 = __toESM(require_source());
 var import_indent_string4 = __toESM(require_indent_string());
 var import_strip_ansi3 = __toESM(require_strip_ansi());
 
@@ -31227,8 +28157,7 @@ var Cache = class {
     this._map = /* @__PURE__ */ new Map();
   }
   get(key) {
-    var _a3;
-    return (_a3 = this._map.get(key)) == null ? void 0 : _a3.value;
+    return this._map.get(key)?.value;
   }
   set(key, value) {
     this._map.set(key, { value });
@@ -31259,40 +28188,54 @@ function getComputedFields(previousComputedFields, extension, dmmfModelName) {
   }
   return resolveDependencies({
     ...previousComputedFields,
-    ...getComputedFieldsFromModel(extension.name, extension.result.$allModels),
-    ...getComputedFieldsFromModel(extension.name, extension.result[jsName])
+    ...getComputedFieldsFromModel(extension.name, previousComputedFields, extension.result.$allModels),
+    ...getComputedFieldsFromModel(extension.name, previousComputedFields, extension.result[jsName])
   });
 }
 __name(getComputedFields, "getComputedFields");
 function resolveDependencies(computedFields) {
   const cache = new Cache();
-  const resolveNeeds = /* @__PURE__ */ __name((fieldName) => {
+  const resolveNeeds = /* @__PURE__ */ __name((fieldName, visitedFields) => {
     return cache.getOrCreate(fieldName, () => {
-      if (computedFields[fieldName]) {
-        return computedFields[fieldName].needs.flatMap(resolveNeeds);
+      if (visitedFields.has(fieldName)) {
+        return [fieldName];
       }
-      return [fieldName];
+      visitedFields.add(fieldName);
+      if (!computedFields[fieldName]) {
+        return [fieldName];
+      }
+      return computedFields[fieldName].needs.flatMap((fieldDep) => resolveNeeds(fieldDep, visitedFields));
     });
   }, "resolveNeeds");
   return mapObjectValues(computedFields, (field) => {
     return {
       ...field,
-      needs: resolveNeeds(field.name)
+      needs: resolveNeeds(field.name, /* @__PURE__ */ new Set())
     };
   });
 }
 __name(resolveDependencies, "resolveDependencies");
-function getComputedFieldsFromModel(name, modelResult) {
+function getComputedFieldsFromModel(name, previousComputedFields, modelResult) {
   if (!modelResult) {
     return {};
   }
   return mapObjectValues(modelResult, ({ needs, compute }, fieldName) => ({
     name: fieldName,
     needs: needs ? Object.keys(needs).filter((key) => needs[key]) : [],
-    compute: wrapExtensionCallback(name, compute)
+    compute: wrapExtensionCallback(name, composeCompute(previousComputedFields, fieldName, compute))
   }));
 }
 __name(getComputedFieldsFromModel, "getComputedFieldsFromModel");
+function composeCompute(previousComputedFields, fieldName, nextCompute) {
+  const previousCompute = previousComputedFields?.[fieldName]?.compute;
+  if (!previousCompute) {
+    return nextCompute;
+  }
+  return (model) => {
+    return nextCompute({ ...model, [fieldName]: previousCompute(model) });
+  };
+}
+__name(composeCompute, "composeCompute");
 function applyComputedFieldsToSelection(selection, computedFields) {
   if (!computedFields) {
     return selection;
@@ -31311,18 +28254,18 @@ function applyComputedFieldsToSelection(selection, computedFields) {
 __name(applyComputedFieldsToSelection, "applyComputedFieldsToSelection");
 
 // src/runtime/utils/createErrorMessageWithContext.ts
-var import_chalk9 = __toESM(require_source());
+var import_chalk10 = __toESM(require_source());
 var import_indent_string3 = __toESM(require_indent_string());
 
 // src/runtime/utils/SourceFileSlice.ts
 var import_fs8 = __toESM(require("fs"));
 
 // src/runtime/highlight/theme.ts
-var import_chalk8 = __toESM(require_source());
-var orange = import_chalk8.default.rgb(246, 145, 95);
-var darkBrightBlue = import_chalk8.default.rgb(107, 139, 140);
-var blue = import_chalk8.default.cyan;
-var brightBlue = import_chalk8.default.rgb(127, 155, 155);
+var import_chalk9 = __toESM(require_source());
+var orange = import_chalk9.default.rgb(246, 145, 95);
+var darkBrightBlue = import_chalk9.default.rgb(107, 139, 140);
+var blue = import_chalk9.default.cyan;
+var brightBlue = import_chalk9.default.rgb(127, 155, 155);
 var identity = /* @__PURE__ */ __name((str) => str, "identity");
 var theme = {
   keyword: blue,
@@ -31332,10 +28275,10 @@ var theme = {
   directive: blue,
   function: blue,
   variable: brightBlue,
-  string: import_chalk8.default.greenBright,
+  string: import_chalk9.default.greenBright,
   boolean: orange,
-  number: import_chalk8.default.cyan,
-  comment: import_chalk8.default.grey
+  number: import_chalk9.default.cyan,
+  comment: import_chalk9.default.grey
 };
 
 // src/runtime/highlight/prism.ts
@@ -31452,15 +28395,15 @@ var Prism = {
   },
   plugins: {},
   highlight: function(text, grammar, language) {
-    const env2 = {
+    const env = {
       code: text,
       grammar,
       language
     };
-    Prism.hooks.run("before-tokenize", env2);
-    env2.tokens = Prism.tokenize(env2.code, env2.grammar);
-    Prism.hooks.run("after-tokenize", env2);
-    return Token.stringify(Prism.util.encode(env2.tokens), env2.language);
+    Prism.hooks.run("before-tokenize", env);
+    env.tokens = Prism.tokenize(env.code, env.grammar);
+    Prism.hooks.run("after-tokenize", env);
+    return Token.stringify(Prism.util.encode(env.tokens), env.language);
   },
   matchGrammar: function(text, strarr, grammar, index, startPos, oneshot, target) {
     for (const token in grammar) {
@@ -31560,13 +28503,13 @@ var Prism = {
       hooks[name] = hooks[name] || [];
       hooks[name].push(callback);
     },
-    run: function(name, env2) {
+    run: function(name, env) {
       const callbacks = Prism.hooks.all[name];
       if (!callbacks || !callbacks.length) {
         return;
       }
       for (var i = 0, callback; callback = callbacks[i++]; ) {
-        callback(env2);
+        callback(env);
       }
     }
   },
@@ -31773,11 +28716,11 @@ __name(SourceFileSlice, "SourceFileSlice");
 
 // src/runtime/utils/createErrorMessageWithContext.ts
 var colorsEnabled = {
-  red: (str) => import_chalk9.default.red(str),
-  gray: (str) => import_chalk9.default.gray(str),
-  dim: (str) => import_chalk9.default.dim(str),
-  bold: (str) => import_chalk9.default.bold(str),
-  underline: (str) => import_chalk9.default.underline(str),
+  red: (str) => import_chalk10.default.red(str),
+  gray: (str) => import_chalk10.default.gray(str),
+  dim: (str) => import_chalk10.default.dim(str),
+  bold: (str) => import_chalk10.default.bold(str),
+  underline: (str) => import_chalk10.default.underline(str),
   highlightSource: (source) => source.highlight()
 };
 var colorsDisabled = {
@@ -31789,11 +28732,10 @@ var colorsDisabled = {
   highlightSource: (source) => source
 };
 function getTemplateParameters({ callsite, message, originalMethod, isPanic: isPanic2, callArguments }, colors) {
-  var _a3;
   const templateParameters = {
     functionName: `prisma.${originalMethod}()`,
     message,
-    isPanic: isPanic2 != null ? isPanic2 : false,
+    isPanic: isPanic2 ?? false,
     callArguments
   };
   if (!callsite || typeof window !== "undefined") {
@@ -31807,8 +28749,8 @@ function getTemplateParameters({ callsite, message, originalMethod, isPanic: isP
     return templateParameters;
   }
   const contextFirstLine = Math.max(1, callLocation.lineNumber - 3);
-  let source = (_a3 = SourceFileSlice.read(callLocation.fileName)) == null ? void 0 : _a3.slice(contextFirstLine, callLocation.lineNumber);
-  const invocationLine = source == null ? void 0 : source.lineAt(callLocation.lineNumber);
+  let source = SourceFileSlice.read(callLocation.fileName)?.slice(contextFirstLine, callLocation.lineNumber);
+  const invocationLine = source?.lineAt(callLocation.lineNumber);
   if (source && invocationLine) {
     const invocationLineIndent = getIndent(invocationLine);
     const invocationCallCode = findPrismaActionCall(invocationLine);
@@ -32014,13 +28956,13 @@ var notReallyObjects = {
   "[object Uint8Array]": true,
   "[object Decimal]": true
 };
-function isObject2(value) {
+function isObject(value) {
   if (!value) {
     return false;
   }
   return typeof value === "object" && !notReallyObjects[Object.prototype.toString.call(value)];
 }
-__name(isObject2, "isObject");
+__name(isObject, "isObject");
 
 // src/runtime/utils/omit.ts
 function omit2(object, path7) {
@@ -32036,7 +28978,7 @@ function omit2(object, path7) {
 __name(omit2, "omit");
 
 // src/runtime/utils/printJsonErrors.ts
-var import_chalk10 = __toESM(require_source());
+var import_chalk11 = __toESM(require_source());
 var import_strip_ansi2 = __toESM(require_strip_ansi());
 
 // src/runtime/utils/stringifyObject.ts
@@ -32172,10 +29114,10 @@ function printJsonWithErrors({ ast, keyPaths, valuePaths, missingItems }) {
         }
         const isRequiredStr = missingItem.isRequired ? "" : "?";
         const prefix = missingItem.isRequired ? "+" : "?";
-        const color = missingItem.isRequired ? import_chalk10.default.greenBright : import_chalk10.default.green;
+        const color = missingItem.isRequired ? import_chalk11.default.greenBright : import_chalk11.default.green;
         let output = color(prefixLines(key + isRequiredStr + ": " + valueStr + eol, indent4, prefix));
         if (!missingItem.isRequired) {
-          output = import_chalk10.default.dim(output);
+          output = import_chalk11.default.dim(output);
         }
         return output;
       } else {
@@ -32190,22 +29132,22 @@ function printJsonWithErrors({ ast, keyPaths, valuePaths, missingItems }) {
         if (isOnMissingItemPath && typeof value === "string") {
           valueStr = valueStr.slice(1, valueStr.length - 1);
           if (!isOptional) {
-            valueStr = import_chalk10.default.bold(valueStr);
+            valueStr = import_chalk11.default.bold(valueStr);
           }
         }
         if ((typeof value !== "object" || value === null) && !valueError && !isOnMissingItemPath) {
-          valueStr = import_chalk10.default.dim(valueStr);
+          valueStr = import_chalk11.default.dim(valueStr);
         }
-        const keyStr = keyError ? import_chalk10.default.redBright(key) : key;
-        valueStr = valueError ? import_chalk10.default.redBright(valueStr) : valueStr;
-        let output = indent4 + keyStr + ": " + valueStr + (isOnMissingItemPath ? eol : import_chalk10.default.dim(eol));
+        const keyStr = keyError ? import_chalk11.default.redBright(key) : key;
+        valueStr = valueError ? import_chalk11.default.redBright(valueStr) : valueStr;
+        let output = indent4 + keyStr + ": " + valueStr + (isOnMissingItemPath ? eol : import_chalk11.default.dim(eol));
         if (keyError || valueError) {
           const lines = output.split("\n");
           const keyLength = String(key).length;
-          const keyScribbles = keyError ? import_chalk10.default.redBright("~".repeat(keyLength)) : " ".repeat(keyLength);
+          const keyScribbles = keyError ? import_chalk11.default.redBright("~".repeat(keyLength)) : " ".repeat(keyLength);
           const valueLength = valueError ? getValueLength(indent4, key, value, stringifiedValue) : 0;
           const hideValueScribbles = valueError && isRenderedAsObject(value);
-          const valueScribbles = valueError ? "  " + import_chalk10.default.redBright("~".repeat(valueLength)) : "";
+          const valueScribbles = valueError ? "  " + import_chalk11.default.redBright("~".repeat(valueLength)) : "";
           if (keyScribbles && keyScribbles.length > 0 && !hideValueScribbles) {
             lines.splice(1, 0, indent4 + keyScribbles + valueScribbles);
           }
@@ -32245,7 +29187,7 @@ function prefixLines(str, indent4, prefix) {
   return str.split("\n").map(
     (line, index, arr) => index === 0 ? prefix + indent4.slice(1) + line : index < arr.length - 1 ? prefix + line.slice(1) : line
   ).map((line) => {
-    return (0, import_strip_ansi2.default)(line).includes(DIM_TOKEN) ? import_chalk10.default.dim(line.replace(DIM_TOKEN, "")) : line.includes("?") ? import_chalk10.default.dim(line) : line;
+    return (0, import_strip_ansi2.default)(line).includes(DIM_TOKEN) ? import_chalk11.default.dim(line.replace(DIM_TOKEN, "")) : line.includes("?") ? import_chalk11.default.dim(line) : line;
   }).join("\n");
 }
 __name(prefixLines, "prefixLines");
@@ -32258,80 +29200,80 @@ var Document = class {
     this.children = children;
     this.printFieldError = /* @__PURE__ */ __name(({ error: error2 }, missingItems, minimal) => {
       if (error2.type === "emptySelect") {
-        const additional = minimal ? "" : ` Available options are listed in ${import_chalk11.default.greenBright.dim("green")}.`;
-        return `The ${import_chalk11.default.redBright("`select`")} statement for type ${import_chalk11.default.bold(
+        const additional = minimal ? "" : ` Available options are listed in ${import_chalk12.default.greenBright.dim("green")}.`;
+        return `The ${import_chalk12.default.redBright("`select`")} statement for type ${import_chalk12.default.bold(
           getOutputTypeName(error2.field.outputType.type)
         )} must not be empty.${additional}`;
       }
       if (error2.type === "emptyInclude") {
         if (missingItems.length === 0) {
-          return `${import_chalk11.default.bold(
+          return `${import_chalk12.default.bold(
             getOutputTypeName(error2.field.outputType.type)
-          )} does not have any relation and therefore can't have an ${import_chalk11.default.redBright("`include`")} statement.`;
+          )} does not have any relation and therefore can't have an ${import_chalk12.default.redBright("`include`")} statement.`;
         }
-        const additional = minimal ? "" : ` Available options are listed in ${import_chalk11.default.greenBright.dim("green")}.`;
-        return `The ${import_chalk11.default.redBright("`include`")} statement for type ${import_chalk11.default.bold(
+        const additional = minimal ? "" : ` Available options are listed in ${import_chalk12.default.greenBright.dim("green")}.`;
+        return `The ${import_chalk12.default.redBright("`include`")} statement for type ${import_chalk12.default.bold(
           getOutputTypeName(error2.field.outputType.type)
         )} must not be empty.${additional}`;
       }
       if (error2.type === "noTrueSelect") {
-        return `The ${import_chalk11.default.redBright("`select`")} statement for type ${import_chalk11.default.bold(
+        return `The ${import_chalk12.default.redBright("`select`")} statement for type ${import_chalk12.default.bold(
           getOutputTypeName(error2.field.outputType.type)
-        )} needs ${import_chalk11.default.bold("at least one truthy value")}.`;
+        )} needs ${import_chalk12.default.bold("at least one truthy value")}.`;
       }
       if (error2.type === "includeAndSelect") {
-        return `Please ${import_chalk11.default.bold("either")} use ${import_chalk11.default.greenBright("`include`")} or ${import_chalk11.default.greenBright(
+        return `Please ${import_chalk12.default.bold("either")} use ${import_chalk12.default.greenBright("`include`")} or ${import_chalk12.default.greenBright(
           "`select`"
-        )}, but ${import_chalk11.default.redBright("not both")} at the same time.`;
+        )}, but ${import_chalk12.default.redBright("not both")} at the same time.`;
       }
       if (error2.type === "invalidFieldName") {
         const statement = error2.isInclude ? "include" : "select";
         const wording = error2.isIncludeScalar ? "Invalid scalar" : "Unknown";
         const additional = minimal ? "" : error2.isInclude && missingItems.length === 0 ? `
-This model has no relations, so you can't use ${import_chalk11.default.redBright("include")} with it.` : ` Available options are listed in ${import_chalk11.default.greenBright.dim("green")}.`;
-        let str = `${wording} field ${import_chalk11.default.redBright(`\`${error2.providedName}\``)} for ${import_chalk11.default.bold(
+This model has no relations, so you can't use ${import_chalk12.default.redBright("include")} with it.` : ` Available options are listed in ${import_chalk12.default.greenBright.dim("green")}.`;
+        let str = `${wording} field ${import_chalk12.default.redBright(`\`${error2.providedName}\``)} for ${import_chalk12.default.bold(
           statement
-        )} statement on model ${import_chalk11.default.bold.white(error2.modelName)}.${additional}`;
+        )} statement on model ${import_chalk12.default.bold.white(error2.modelName)}.${additional}`;
         if (error2.didYouMean) {
-          str += ` Did you mean ${import_chalk11.default.greenBright(`\`${error2.didYouMean}\``)}?`;
+          str += ` Did you mean ${import_chalk12.default.greenBright(`\`${error2.didYouMean}\``)}?`;
         }
         if (error2.isIncludeScalar) {
           str += `
-Note, that ${import_chalk11.default.bold("include")} statements only accept relation fields.`;
+Note, that ${import_chalk12.default.bold("include")} statements only accept relation fields.`;
         }
         return str;
       }
       if (error2.type === "invalidFieldType") {
-        const str = `Invalid value ${import_chalk11.default.redBright(
+        const str = `Invalid value ${import_chalk12.default.redBright(
           `${stringifyObject_default(error2.providedValue)}`
-        )} of type ${import_chalk11.default.redBright(getGraphQLType(error2.providedValue, void 0))} for field ${import_chalk11.default.bold(
+        )} of type ${import_chalk12.default.redBright(getGraphQLType(error2.providedValue, void 0))} for field ${import_chalk12.default.bold(
           `${error2.fieldName}`
-        )} on model ${import_chalk11.default.bold.white(error2.modelName)}. Expected either ${import_chalk11.default.greenBright(
+        )} on model ${import_chalk12.default.bold.white(error2.modelName)}. Expected either ${import_chalk12.default.greenBright(
           "true"
-        )} or ${import_chalk11.default.greenBright("false")}.`;
+        )} or ${import_chalk12.default.greenBright("false")}.`;
         return str;
       }
       return void 0;
     }, "printFieldError");
     this.printArgError = /* @__PURE__ */ __name(({ error: error2, path: path7, id }, hasMissingItems, minimal) => {
       if (error2.type === "invalidName") {
-        let str = `Unknown arg ${import_chalk11.default.redBright(`\`${error2.providedName}\``)} in ${import_chalk11.default.bold(
+        let str = `Unknown arg ${import_chalk12.default.redBright(`\`${error2.providedName}\``)} in ${import_chalk12.default.bold(
           path7.join(".")
-        )} for type ${import_chalk11.default.bold(error2.outputType ? error2.outputType.name : getInputTypeName(error2.originalType))}.`;
+        )} for type ${import_chalk12.default.bold(error2.outputType ? error2.outputType.name : getInputTypeName(error2.originalType))}.`;
         if (error2.didYouMeanField) {
           str += `
-\u2192 Did you forget to wrap it with \`${import_chalk11.default.greenBright("select")}\`? ${import_chalk11.default.dim(
-            "e.g. " + import_chalk11.default.greenBright(`{ select: { ${error2.providedName}: ${error2.providedValue} } }`)
+\u2192 Did you forget to wrap it with \`${import_chalk12.default.greenBright("select")}\`? ${import_chalk12.default.dim(
+            "e.g. " + import_chalk12.default.greenBright(`{ select: { ${error2.providedName}: ${error2.providedValue} } }`)
           )}`;
         } else if (error2.didYouMeanArg) {
-          str += ` Did you mean \`${import_chalk11.default.greenBright(error2.didYouMeanArg)}\`?`;
+          str += ` Did you mean \`${import_chalk12.default.greenBright(error2.didYouMeanArg)}\`?`;
           if (!hasMissingItems && !minimal) {
-            str += ` ${import_chalk11.default.dim("Available args:")}
+            str += ` ${import_chalk12.default.dim("Available args:")}
 ` + stringifyInputType(error2.originalType, true);
           }
         } else {
           if (error2.originalType.fields.length === 0) {
-            str += ` The field ${import_chalk11.default.bold(error2.originalType.name)} has no arguments.`;
+            str += ` The field ${import_chalk12.default.bold(error2.originalType.name)} has no arguments.`;
           } else if (!hasMissingItems && !minimal) {
             str += ` Available args:
 
@@ -32349,54 +29291,54 @@ ${valueStr}
 `;
         }
         if (error2.requiredType.bestFittingType.location === "enumTypes") {
-          return `Argument ${import_chalk11.default.bold(error2.argName)}: Provided value ${import_chalk11.default.redBright(valueStr)}${multilineValue ? "" : " "}of type ${import_chalk11.default.redBright(getGraphQLType(error2.providedValue))} on ${import_chalk11.default.bold(
+          return `Argument ${import_chalk12.default.bold(error2.argName)}: Provided value ${import_chalk12.default.redBright(valueStr)}${multilineValue ? "" : " "}of type ${import_chalk12.default.redBright(getGraphQLType(error2.providedValue))} on ${import_chalk12.default.bold(
             `prisma.${this.children[0].name}`
-          )} is not a ${import_chalk11.default.greenBright(
+          )} is not a ${import_chalk12.default.greenBright(
             wrapWithList(
               stringifyGraphQLType(error2.requiredType.bestFittingType.type),
               error2.requiredType.bestFittingType.isList
             )
           )}.
-\u2192 Possible values: ${error2.requiredType.bestFittingType.type.values.map((v) => import_chalk11.default.greenBright(`${stringifyGraphQLType(error2.requiredType.bestFittingType.type)}.${v}`)).join(", ")}`;
+\u2192 Possible values: ${error2.requiredType.bestFittingType.type.values.map((v) => import_chalk12.default.greenBright(`${stringifyGraphQLType(error2.requiredType.bestFittingType.type)}.${v}`)).join(", ")}`;
         }
         let typeStr = ".";
         if (isInputArgType(error2.requiredType.bestFittingType.type)) {
           typeStr = ":\n" + stringifyInputType(error2.requiredType.bestFittingType.type);
         }
         let expected = `${error2.requiredType.inputType.map(
-          (t2) => import_chalk11.default.greenBright(wrapWithList(stringifyGraphQLType(t2.type), error2.requiredType.bestFittingType.isList))
+          (t2) => import_chalk12.default.greenBright(wrapWithList(stringifyGraphQLType(t2.type), error2.requiredType.bestFittingType.isList))
         ).join(" or ")}${typeStr}`;
         const inputType = error2.requiredType.inputType.length === 2 && error2.requiredType.inputType.find((t2) => isInputArgType(t2.type)) || null;
         if (inputType) {
           expected += `
 ` + stringifyInputType(inputType.type, true);
         }
-        return `Argument ${import_chalk11.default.bold(error2.argName)}: Got invalid value ${import_chalk11.default.redBright(valueStr)}${multilineValue ? "" : " "}on ${import_chalk11.default.bold(`prisma.${this.children[0].name}`)}. Provided ${import_chalk11.default.redBright(
+        return `Argument ${import_chalk12.default.bold(error2.argName)}: Got invalid value ${import_chalk12.default.redBright(valueStr)}${multilineValue ? "" : " "}on ${import_chalk12.default.bold(`prisma.${this.children[0].name}`)}. Provided ${import_chalk12.default.redBright(
           getGraphQLType(error2.providedValue)
         )}, expected ${expected}`;
       }
       if (error2.type === "invalidNullArg") {
-        const forStr = path7.length === 1 && path7[0] === error2.name ? "" : ` for ${import_chalk11.default.bold(`${path7.join(".")}`)}`;
-        const undefinedTip = ` Please use ${import_chalk11.default.bold.greenBright("undefined")} instead.`;
-        return `Argument ${import_chalk11.default.greenBright(error2.name)}${forStr} must not be ${import_chalk11.default.bold("null")}.${undefinedTip}`;
+        const forStr = path7.length === 1 && path7[0] === error2.name ? "" : ` for ${import_chalk12.default.bold(`${path7.join(".")}`)}`;
+        const undefinedTip = ` Please use ${import_chalk12.default.bold.greenBright("undefined")} instead.`;
+        return `Argument ${import_chalk12.default.greenBright(error2.name)}${forStr} must not be ${import_chalk12.default.bold("null")}.${undefinedTip}`;
       }
       if (error2.type === "missingArg") {
-        const forStr = path7.length === 1 && path7[0] === error2.missingName ? "" : ` for ${import_chalk11.default.bold(`${path7.join(".")}`)}`;
-        return `Argument ${import_chalk11.default.greenBright(error2.missingName)}${forStr} is missing.`;
+        const forStr = path7.length === 1 && path7[0] === error2.missingName ? "" : ` for ${import_chalk12.default.bold(`${path7.join(".")}`)}`;
+        return `Argument ${import_chalk12.default.greenBright(error2.missingName)}${forStr} is missing.`;
       }
       if (error2.type === "atLeastOne") {
-        const additional = minimal ? "" : ` Available args are listed in ${import_chalk11.default.dim.green("green")}.`;
-        const atLeastFieldsError = error2.atLeastFields ? ` and at least one argument for ${error2.atLeastFields.map((field) => import_chalk11.default.bold(field)).join(", or ")}` : "";
-        return `Argument ${import_chalk11.default.bold(path7.join("."))} of type ${import_chalk11.default.bold(
+        const additional = minimal ? "" : ` Available args are listed in ${import_chalk12.default.dim.green("green")}.`;
+        const atLeastFieldsError = error2.atLeastFields ? ` and at least one argument for ${error2.atLeastFields.map((field) => import_chalk12.default.bold(field)).join(", or ")}` : "";
+        return `Argument ${import_chalk12.default.bold(path7.join("."))} of type ${import_chalk12.default.bold(
           error2.inputType.name
-        )} needs ${import_chalk11.default.greenBright("at least one")} argument${import_chalk11.default.bold(atLeastFieldsError)}.${additional}`;
+        )} needs ${import_chalk12.default.greenBright("at least one")} argument${import_chalk12.default.bold(atLeastFieldsError)}.${additional}`;
       }
       if (error2.type === "atMostOne") {
-        const additional = minimal ? "" : ` Please choose one. ${import_chalk11.default.dim("Available args:")} 
+        const additional = minimal ? "" : ` Please choose one. ${import_chalk12.default.dim("Available args:")} 
 ${stringifyInputType(error2.inputType, true)}`;
-        return `Argument ${import_chalk11.default.bold(path7.join("."))} of type ${import_chalk11.default.bold(
+        return `Argument ${import_chalk12.default.bold(path7.join("."))} of type ${import_chalk12.default.bold(
           error2.inputType.name
-        )} needs ${import_chalk11.default.greenBright("exactly one")} argument, but you provided ${error2.providedKeys.map((key) => import_chalk11.default.redBright(key)).join(" and ")}.${additional}`;
+        )} needs ${import_chalk12.default.greenBright("exactly one")} argument, but you provided ${error2.providedKeys.map((key) => import_chalk12.default.redBright(key)).join(" and ")}.${additional}`;
       }
       return void 0;
     }, "printArgError");
@@ -32412,7 +29354,6 @@ ${(0, import_indent_string4.default)(this.children.map(String).join("\n"), tab)}
 }`;
   }
   validate(select, isTopLevelQuery = false, originalMethod, errorFormat, validationCallsite) {
-    var _a3;
     if (!select) {
       select = {};
     }
@@ -32467,7 +29408,7 @@ ${(0, import_indent_string4.default)(this.children.map(String).join("\n"), tab)}
         const selectPathArray = this.normalizePath(fieldError.path, select);
         const selectPath = selectPathArray.slice(0, selectPathArray.length - 1).join(".");
         const fieldType = fieldError.error.field.outputType.type;
-        (_a3 = fieldType.fields) == null ? void 0 : _a3.filter(
+        fieldType.fields?.filter(
           (field) => fieldError.error.type === "emptyInclude" ? field.outputType.location === "outputObjectTypes" : true
         ).forEach((field) => {
           missingItems.push({
@@ -32513,7 +29454,7 @@ ${(0, import_indent_string4.default)(this.children.map(String).join("\n"), tab)}
       let missingArgsLegend = "";
       if (hasRequiredMissingArgsErrors) {
         missingArgsLegend += `
-${import_chalk11.default.dim("Note: Lines with ")}${import_chalk11.default.reset.greenBright("+")} ${import_chalk11.default.dim(
+${import_chalk12.default.dim("Note: Lines with ")}${import_chalk12.default.reset.greenBright("+")} ${import_chalk12.default.dim(
           "are required"
         )}`;
       }
@@ -32522,11 +29463,11 @@ ${import_chalk11.default.dim("Note: Lines with ")}${import_chalk11.default.reset
           missingArgsLegend = "\n";
         }
         if (hasRequiredMissingArgsErrors) {
-          missingArgsLegend += import_chalk11.default.dim(`, lines with ${import_chalk11.default.green("?")} are optional`);
+          missingArgsLegend += import_chalk12.default.dim(`, lines with ${import_chalk12.default.green("?")} are optional`);
         } else {
-          missingArgsLegend += import_chalk11.default.dim(`Note: Lines with ${import_chalk11.default.green("?")} are optional`);
+          missingArgsLegend += import_chalk12.default.dim(`Note: Lines with ${import_chalk12.default.green("?")} are optional`);
         }
-        missingArgsLegend += import_chalk11.default.dim(".");
+        missingArgsLegend += import_chalk12.default.dim(".");
       }
       const relevantArgErrors = argErrors.filter((e2) => e2.error.type !== "missingArg" || e2.error.missingArg.isRequired);
       let errorMessages = relevantArgErrors.map((e2) => this.printArgError(e2, hasMissingArgsErrors, errorFormat === "minimal")).join("\n");
@@ -32541,7 +29482,7 @@ ${fieldErrors.map((e2) => this.printFieldError(e2, missingItems, errorFormat ===
         valuePaths,
         missingItems
       };
-      if (originalMethod == null ? void 0 : originalMethod.endsWith("aggregate")) {
+      if (originalMethod?.endsWith("aggregate")) {
         printJsonArgs = transformAggregatePrintJsonArgs(printJsonArgs);
       }
       const errorStr = createErrorMessageWithContext({
@@ -32708,14 +29649,14 @@ function stringify(value, inputType) {
   if (Object.prototype.toString.call(value) === "[object BigInt]") {
     return value.toString();
   }
-  if (typeof (inputType == null ? void 0 : inputType.type) === "string" && inputType.type === "Json") {
+  if (typeof inputType?.type === "string" && inputType.type === "Json") {
     if (value === null) {
       return "null";
     }
     if (value && value.values && value.__prismaRawParameters__) {
       return JSON.stringify(value.values);
     }
-    if ((inputType == null ? void 0 : inputType.isList) && Array.isArray(value)) {
+    if (inputType?.isList && Array.isArray(value)) {
       return JSON.stringify(value.map((o2) => JSON.stringify(o2)));
     }
     return JSON.stringify(JSON.stringify(value));
@@ -32726,16 +29667,16 @@ function stringify(value, inputType) {
   if (value === null) {
     return "null";
   }
-  if (decimal_default.isDecimal(value) || (inputType == null ? void 0 : inputType.type) === "Decimal" && isDecimalJsLike(value)) {
+  if (decimal_default.isDecimal(value) || inputType?.type === "Decimal" && isDecimalJsLike(value)) {
     return stringifyDecimalJsLike(value);
   }
-  if ((inputType == null ? void 0 : inputType.location) === "enumTypes" && typeof value === "string") {
+  if (inputType?.location === "enumTypes" && typeof value === "string") {
     if (Array.isArray(value)) {
       return `[${value.join(", ")}]`;
     }
     return value;
   }
-  if (typeof value === "number" && (inputType == null ? void 0 : inputType.type) === "Float") {
+  if (typeof value === "number" && inputType?.type === "Float") {
     return value.toExponential();
   }
   return JSON.stringify(value, null, 2);
@@ -32749,14 +29690,13 @@ var Arg2 = class {
     this.isEnum = isEnum;
     this.error = error2;
     this.schemaArg = schemaArg;
-    this.isNullable = (schemaArg == null ? void 0 : schemaArg.inputTypes.reduce((isNullable) => isNullable && schemaArg.isNullable, true)) || false;
+    this.isNullable = schemaArg?.inputTypes.reduce((isNullable) => isNullable && schemaArg.isNullable, true) || false;
     this.hasError = Boolean(error2) || (value instanceof Args ? value.hasInvalidArg : false) || Array.isArray(value) && value.some((v) => v instanceof Args ? v.hasInvalidArg : false);
   }
   get [Symbol.toStringTag]() {
     return "Arg";
   }
   _toString(value, key) {
-    var _a3;
     if (typeof value === "undefined") {
       return void 0;
     }
@@ -32766,7 +29706,7 @@ ${(0, import_indent_string4.default)(value.toString(), 2)}
 }`;
     }
     if (Array.isArray(value)) {
-      if (((_a3 = this.inputType) == null ? void 0 : _a3.type) === "Json") {
+      if (this.inputType?.type === "Json") {
         return `${key}: ${stringify(value, this.inputType)}`;
       }
       const isScalar = !value.some((v) => typeof v === "object");
@@ -32788,13 +29728,12 @@ ${(0, import_indent_string4.default)(nestedValue.toString(), tab)}
     return this._toString(this.value, this.key);
   }
   collectErrors() {
-    var _a3;
     if (!this.hasError) {
       return [];
     }
     const errors = [];
     if (this.error) {
-      const id = typeof ((_a3 = this.inputType) == null ? void 0 : _a3.type) === "object" ? `${this.inputType.type.name}${this.inputType.isList ? "[]" : ""}` : void 0;
+      const id = typeof this.inputType?.type === "object" ? `${this.inputType.type.name}${this.inputType.isList ? "[]" : ""}` : void 0;
       errors.push({
         error: this.error,
         path: [this.key],
@@ -32804,7 +29743,7 @@ ${(0, import_indent_string4.default)(nestedValue.toString(), tab)}
     if (Array.isArray(this.value)) {
       return errors.concat(
         this.value.flatMap((val, index) => {
-          if (!(val == null ? void 0 : val.collectErrors)) {
+          if (!val?.collectErrors) {
             return [];
           }
           return val.collectErrors().map((e2) => {
@@ -32841,7 +29780,7 @@ function makeDocument({
     },
     name: rootTypeName
   };
-  const context3 = {
+  const context2 = {
     modelName
   };
   const children = selectionToFields({
@@ -32849,7 +29788,7 @@ function makeDocument({
     selection: { [rootField]: select },
     schemaField: fakeRootField,
     path: [rootTypeName],
-    context: context3,
+    context: context2,
     extensions
   });
   return new Document(rootTypeName, children);
@@ -32864,18 +29803,18 @@ function selectionToFields({
   selection,
   schemaField,
   path: path7,
-  context: context3,
+  context: context2,
   extensions
 }) {
   const outputType = schemaField.outputType.type;
-  const computedFields = context3.modelName ? extensions.getAllComputedFields(context3.modelName) : {};
+  const computedFields = context2.modelName ? extensions.getAllComputedFields(context2.modelName) : {};
   selection = applyComputedFieldsToSelection(selection, computedFields);
   return Object.entries(selection).reduce((acc, [name, value]) => {
     const field = outputType.fieldMap ? outputType.fieldMap[name] : outputType.fields.find((f2) => f2.name === name);
-    if (computedFields == null ? void 0 : computedFields[name]) {
-      return acc;
-    }
     if (!field) {
+      if (computedFields?.[name]) {
+        return acc;
+      }
       acc.push(
         new Field({
           name,
@@ -32886,7 +29825,7 @@ function selectionToFields({
             providedName: name,
             didYouMean: getSuggestion(
               name,
-              outputType.fields.map((f2) => f2.name).concat(Object.keys(computedFields != null ? computedFields : {}))
+              outputType.fields.map((f2) => f2.name).concat(Object.keys(computedFields ?? {}))
             ),
             outputType
           }
@@ -32924,7 +29863,7 @@ function selectionToFields({
     const args = argsWithoutIncludeAndSelect ? objectToArgs(
       argsWithoutIncludeAndSelect,
       transformedField,
-      context3,
+      context2,
       [],
       typeof field === "string" ? void 0 : field.outputType.type
     ) : void 0;
@@ -33050,7 +29989,7 @@ function selectionToFields({
     }
     let children;
     if (select !== false && isRelation) {
-      let modelName = context3.modelName;
+      let modelName = context2.modelName;
       if (typeof field.outputType.type === "object" && field.outputType.namespace === "model" && field.outputType.location === "outputObjectTypes") {
         modelName = field.outputType.type.name;
       }
@@ -33108,9 +30047,9 @@ function getInvalidTypeArg(key, value, arg2, bestFittingType) {
   return arrg;
 }
 __name(getInvalidTypeArg, "getInvalidTypeArg");
-function hasCorrectScalarType(value, inputType, context3) {
+function hasCorrectScalarType(value, inputType, context2) {
   const { isList } = inputType;
-  const expectedType = getExpectedType(inputType, context3);
+  const expectedType = getExpectedType(inputType, context2);
   const graphQLType = getGraphQLType(value, inputType);
   if (graphQLType === expectedType) {
     return true;
@@ -33149,15 +30088,15 @@ function hasCorrectScalarType(value, inputType, context3) {
     return true;
   }
   if (inputType.isList && Array.isArray(value)) {
-    return value.every((v) => hasCorrectScalarType(v, { ...inputType, isList: false }, context3));
+    return value.every((v) => hasCorrectScalarType(v, { ...inputType, isList: false }, context2));
   }
   return false;
 }
 __name(hasCorrectScalarType, "hasCorrectScalarType");
-function getExpectedType(inputType, context3, isList = inputType.isList) {
+function getExpectedType(inputType, context2, isList = inputType.isList) {
   let type = stringifyGraphQLType(inputType.type);
-  if (inputType.location === "fieldRefTypes" && context3.modelName) {
-    type += `<${context3.modelName}>`;
+  if (inputType.location === "fieldRefTypes" && context2.modelName) {
+    type += `<${context2.modelName}>`;
   }
   return wrapWithList(type, isList);
 }
@@ -33167,22 +30106,22 @@ function isDecimalString(value) {
   return /^\-?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i.test(value);
 }
 __name(isDecimalString, "isDecimalString");
-function valueToArg(key, value, arg2, context3) {
+function valueToArg(key, value, arg2, context2) {
   let maybeArg = null;
   const argsWithErrors = [];
   for (const inputType of arg2.inputTypes) {
-    maybeArg = tryInferArgs(key, value, arg2, inputType, context3);
-    if ((maybeArg == null ? void 0 : maybeArg.collectErrors().length) === 0) {
+    maybeArg = tryInferArgs(key, value, arg2, inputType, context2);
+    if (maybeArg?.collectErrors().length === 0) {
       return maybeArg;
     }
-    if (maybeArg && (maybeArg == null ? void 0 : maybeArg.collectErrors())) {
-      const argErrors = maybeArg == null ? void 0 : maybeArg.collectErrors();
+    if (maybeArg && maybeArg?.collectErrors()) {
+      const argErrors = maybeArg?.collectErrors();
       if (argErrors && argErrors.length > 0) {
         argsWithErrors.push({ arg: maybeArg, errors: argErrors });
       }
     }
   }
-  if ((maybeArg == null ? void 0 : maybeArg.hasError) && argsWithErrors.length > 0) {
+  if (maybeArg?.hasError && argsWithErrors.length > 0) {
     const argsWithScores = argsWithErrors.map(({ arg: arg3, errors }) => {
       const errorScores = errors.map((e2) => {
         let score = 1;
@@ -33237,8 +30176,7 @@ function sum2(n2) {
   return n2.reduce((acc, curr) => acc + curr, 0);
 }
 __name(sum2, "sum");
-function tryInferArgs(key, value, arg2, inputType, context3) {
-  var _a3, _b2, _c, _d, _e;
+function tryInferArgs(key, value, arg2, inputType, context2) {
   if (typeof value === "undefined") {
     if (!arg2.isRequired) {
       return null;
@@ -33278,14 +30216,14 @@ function tryInferArgs(key, value, arg2, inputType, context3) {
   }
   if (!inputType.isList) {
     if (isInputArgType(inputType.type)) {
-      if (typeof value !== "object" || Array.isArray(value) || inputType.location === "inputObjectTypes" && !isObject2(value)) {
+      if (typeof value !== "object" || Array.isArray(value) || inputType.location === "inputObjectTypes" && !isObject(value)) {
         return getInvalidTypeArg(key, value, arg2, inputType);
       } else {
         const val = cleanObject(value);
         let error2;
         const keys2 = Object.keys(val || {});
         const numKeys = keys2.length;
-        if (numKeys === 0 && typeof inputType.type.constraints.minNumFields === "number" && inputType.type.constraints.minNumFields > 0 || ((_a3 = inputType.type.constraints.fields) == null ? void 0 : _a3.some((field) => keys2.includes(field))) === false) {
+        if (numKeys === 0 && typeof inputType.type.constraints.minNumFields === "number" && inputType.type.constraints.minNumFields > 0 || inputType.type.constraints.fields?.some((field) => keys2.includes(field)) === false) {
           error2 = {
             type: "atLeastOne",
             key,
@@ -33302,7 +30240,7 @@ function tryInferArgs(key, value, arg2, inputType, context3) {
         }
         return new Arg2({
           key,
-          value: val === null ? null : objectToArgs(val, inputType.type, context3, arg2.inputTypes),
+          value: val === null ? null : objectToArgs(val, inputType.type, context2, arg2.inputTypes),
           isEnum: inputType.location === "enumTypes",
           error: error2,
           inputType,
@@ -33310,7 +30248,7 @@ function tryInferArgs(key, value, arg2, inputType, context3) {
         });
       }
     } else {
-      return scalarToArg(key, value, arg2, inputType, context3);
+      return scalarToArg(key, value, arg2, inputType, context2);
     }
   }
   if (!Array.isArray(value) && inputType.isList) {
@@ -33319,17 +30257,17 @@ function tryInferArgs(key, value, arg2, inputType, context3) {
     }
   }
   if (inputType.location === "enumTypes" || inputType.location === "scalar") {
-    return scalarToArg(key, value, arg2, inputType, context3);
+    return scalarToArg(key, value, arg2, inputType, context2);
   }
   const argInputType = inputType.type;
-  const hasAtLeastOneError = typeof ((_b2 = argInputType.constraints) == null ? void 0 : _b2.minNumFields) === "number" && ((_c = argInputType.constraints) == null ? void 0 : _c.minNumFields) > 0 ? Array.isArray(value) && value.some((v) => !v || Object.keys(cleanObject(v)).length === 0) : false;
+  const hasAtLeastOneError = typeof argInputType.constraints?.minNumFields === "number" && argInputType.constraints?.minNumFields > 0 ? Array.isArray(value) && value.some((v) => !v || Object.keys(cleanObject(v)).length === 0) : false;
   let err = hasAtLeastOneError ? {
     inputType: argInputType,
     key,
     type: "atLeastOne"
   } : void 0;
   if (!err) {
-    const hasOneOfError = typeof ((_d = argInputType.constraints) == null ? void 0 : _d.maxNumFields) === "number" && ((_e = argInputType.constraints) == null ? void 0 : _e.maxNumFields) < 2 ? Array.isArray(value) && value.find((v) => !v || Object.keys(cleanObject(v)).length !== 1) : false;
+    const hasOneOfError = typeof argInputType.constraints?.maxNumFields === "number" && argInputType.constraints?.maxNumFields < 2 ? Array.isArray(value) && value.find((v) => !v || Object.keys(cleanObject(v)).length !== 1) : false;
     if (hasOneOfError) {
       err = {
         inputType: argInputType,
@@ -33341,7 +30279,7 @@ function tryInferArgs(key, value, arg2, inputType, context3) {
   }
   if (!Array.isArray(value)) {
     for (const nestedArgInputType of arg2.inputTypes) {
-      const args = objectToArgs(value, nestedArgInputType.type, context3);
+      const args = objectToArgs(value, nestedArgInputType.type, context2);
       if (args.collectErrors().length === 0) {
         return new Arg2({
           key,
@@ -33362,7 +30300,7 @@ function tryInferArgs(key, value, arg2, inputType, context3) {
       if (typeof v !== "object" || !value) {
         return getInvalidTypeArg(key, v, arg2, inputType);
       }
-      return objectToArgs(v, argInputType, context3);
+      return objectToArgs(v, argInputType, context2);
     }),
     isEnum: false,
     inputType,
@@ -33381,8 +30319,8 @@ function isInputArgType(argType) {
   return true;
 }
 __name(isInputArgType, "isInputArgType");
-function scalarToArg(key, value, arg2, inputType, context3) {
-  if (hasCorrectScalarType(value, inputType, context3)) {
+function scalarToArg(key, value, arg2, inputType, context2) {
+  if (hasCorrectScalarType(value, inputType, context2)) {
     return new Arg2({
       key,
       value,
@@ -33394,10 +30332,9 @@ function scalarToArg(key, value, arg2, inputType, context3) {
   return getInvalidTypeArg(key, value, arg2, inputType);
 }
 __name(scalarToArg, "scalarToArg");
-function objectToArgs(initialObj, inputType, context3, possibilities, outputType) {
-  var _a3;
-  if ((_a3 = inputType.meta) == null ? void 0 : _a3.source) {
-    context3 = { modelName: inputType.meta.source };
+function objectToArgs(initialObj, inputType, context2, possibilities, outputType) {
+  if (inputType.meta?.source) {
+    context2 = { modelName: inputType.meta.source };
   }
   const obj = cleanObject(initialObj);
   const { fields: args, fieldMap } = inputType;
@@ -33426,16 +30363,13 @@ function objectToArgs(initialObj, inputType, context3, possibilities, outputType
       );
       return acc;
     }
-    const arg2 = valueToArg(argName, value, schemaArg, context3);
+    const arg2 = valueToArg(argName, value, schemaArg, context2);
     if (arg2) {
       acc.push(arg2);
     }
     return acc;
   }, []);
-  if (typeof inputType.constraints.minNumFields === "number" && objEntries.length < inputType.constraints.minNumFields || argsList.find((arg2) => {
-    var _a4, _b2;
-    return ((_a4 = arg2.error) == null ? void 0 : _a4.type) === "missingArg" || ((_b2 = arg2.error) == null ? void 0 : _b2.type) === "atLeastOne";
-  })) {
+  if (typeof inputType.constraints.minNumFields === "number" && objEntries.length < inputType.constraints.minNumFields || argsList.find((arg2) => arg2.error?.type === "missingArg" || arg2.error?.type === "atLeastOne")) {
     const optionalMissingArgs = inputType.fields.filter(
       (field) => !field.isRequired && obj && (typeof obj[field.name] === "undefined" || obj[field.name] === null)
     );
@@ -33474,7 +30408,6 @@ function unpack({ document: document2, path: path7, data }) {
 }
 __name(unpack, "unpack");
 function mapScalars({ field, data }) {
-  var _a3;
   if (!data || typeof data !== "object" || !field.children || !field.schemaField) {
     return data;
   }
@@ -33488,7 +30421,7 @@ function mapScalars({ field, data }) {
     BigInt: (value) => BigInt(value)
   };
   for (const child of field.children) {
-    const outputType = (_a3 = child.schemaField) == null ? void 0 : _a3.outputType.type;
+    const outputType = child.schemaField?.outputType.type;
     if (outputType && typeof outputType === "string") {
       const deserializer = deserializers[outputType];
       if (deserializer) {
@@ -33629,8 +30562,7 @@ function cacheProperties(baseLayer) {
       return cache.getOrCreate(key, () => baseLayer.getPropertyValue(key));
     },
     getPropertyDescriptor(key) {
-      var _a3;
-      return (_a3 = baseLayer.getPropertyDescriptor) == null ? void 0 : _a3.call(baseLayer, key);
+      return baseLayer.getPropertyDescriptor?.(key);
     }
   };
 }
@@ -33675,13 +30607,12 @@ function createCompositeProxy(target, layers) {
       return target2[prop];
     },
     has(target2, prop) {
-      var _a3, _b2;
       if (overwrittenKeys.has(prop)) {
         return true;
       }
       const layer = keysToLayerMap.get(prop);
       if (layer) {
-        return (_b2 = (_a3 = layer.has) == null ? void 0 : _a3.call(layer, prop)) != null ? _b2 : true;
+        return layer.has?.(prop) ?? true;
       }
       return Reflect.has(target2, prop);
     },
@@ -33691,9 +30622,8 @@ function createCompositeProxy(target, layers) {
       return [.../* @__PURE__ */ new Set([...targetKeys, ...layerKeys, ...overwrittenKeys])];
     },
     set(target2, prop, value) {
-      var _a3, _b2;
       const layer = keysToLayerMap.get(prop);
-      if (((_b2 = (_a3 = layer == null ? void 0 : layer.getPropertyDescriptor) == null ? void 0 : _a3.call(layer, prop)) == null ? void 0 : _b2.writable) === false) {
+      if (layer?.getPropertyDescriptor?.(prop)?.writable === false) {
         return false;
       }
       overwrittenKeys.add(prop);
@@ -33735,9 +30665,8 @@ function mapKeysToLayers(layers) {
 __name(mapKeysToLayers, "mapKeysToLayers");
 function getExistingKeys(keys2, keysToLayerMap) {
   return keys2.filter((key) => {
-    var _a3, _b2;
     const layer = keysToLayerMap.get(key);
-    return (_b2 = (_a3 = layer == null ? void 0 : layer.has) == null ? void 0 : _a3.call(layer, key)) != null ? _b2 : true;
+    return layer?.has?.(key) ?? true;
   });
 }
 __name(getExistingKeys, "getExistingKeys");
@@ -33909,7 +30838,7 @@ function createPrismaPromise(callback) {
   const _callback = /* @__PURE__ */ __name((transaction, lock, cached = true) => {
     try {
       if (cached === true) {
-        return promise != null ? promise : promise = valueToPromise(callback(transaction, lock));
+        return promise ?? (promise = valueToPromise(callback(transaction, lock)));
       }
       return valueToPromise(callback(transaction, lock));
     } catch (error2) {
@@ -34047,7 +30976,7 @@ function desugarUserArgs3(args = {}) {
 __name(desugarUserArgs3, "desugarUserArgs");
 function createUnpacker3(args = {}) {
   return (data) => {
-    if (typeof (args == null ? void 0 : args["_count"]) === "boolean") {
+    if (typeof args?.["_count"] === "boolean") {
       data.forEach((row) => {
         row["_count"] = row["_count"]["_all"];
       });
@@ -34109,7 +31038,7 @@ function getNextDataPath(fluentPropName, prevDataPath) {
 __name(getNextDataPath, "getNextDataPath");
 function getNextUserArgs(callArgs, prevArgs, nextDataPath) {
   if (prevArgs === void 0)
-    return callArgs != null ? callArgs : {};
+    return callArgs ?? {};
   return deepSet(prevArgs, nextDataPath, callArgs || true);
 }
 __name(getNextUserArgs, "getNextUserArgs");
@@ -34237,9 +31166,8 @@ var fluentProps = [
 ];
 var aggregateProps = ["aggregate", "count", "groupBy"];
 function applyModel(client, dmmfModelName) {
-  var _a3;
-  const layers = [modelActionsLayer(client, dmmfModelName)];
-  if ((_a3 = client._engineConfig.previewFeatures) == null ? void 0 : _a3.includes("fieldReference")) {
+  const layers = [modelActionsLayer(client, dmmfModelName), modelMetaLayer(dmmfModelName)];
+  if (client._engineConfig.previewFeatures?.includes("fieldReference")) {
     layers.push(fieldsPropertyLayer(client, dmmfModelName));
   }
   const modelExtensions = client._extensions.getAllModelExtensions(dmmfModelName);
@@ -34249,6 +31177,10 @@ function applyModel(client, dmmfModelName) {
   return createCompositeProxy({}, layers);
 }
 __name(applyModel, "applyModel");
+function modelMetaLayer(dmmfModelName) {
+  return addProperty("name", () => dmmfModelName);
+}
+__name(modelMetaLayer, "modelMetaLayer");
 function modelActionsLayer(client, dmmfModelName) {
   const jsModelName = dmmfToJSModelName(dmmfModelName);
   const ownKeys = getOwnKeys2(client, dmmfModelName);
@@ -34456,12 +31388,9 @@ __name(klona, "klona");
 
 // src/runtime/core/extensions/applyQueryExtensions.ts
 function iterateAndCallQueryCallbacks(client, params, queryCbs, i = 0) {
-  if (queryCbs.length === 0)
-    return client._executeRequest(params);
   return createPrismaPromise((transaction, lock) => {
-    var _a3, _b2;
     if (transaction !== void 0) {
-      void ((_a3 = params.lock) == null ? void 0 : _a3.then());
+      void params.lock?.then();
       params.transaction = transaction;
       params.lock = lock;
     }
@@ -34471,10 +31400,11 @@ function iterateAndCallQueryCallbacks(client, params, queryCbs, i = 0) {
     return queryCbs[i]({
       model: params.model,
       operation: params.action,
-      args: klona((_b2 = params.args) != null ? _b2 : {}),
-      query: (args) => {
-        params.args = args;
-        return iterateAndCallQueryCallbacks(client, params, queryCbs, i + 1);
+      args: klona(params.args ?? {}),
+      __internalParams: params,
+      query: (args, __internalParams = params) => {
+        __internalParams.args = args;
+        return iterateAndCallQueryCallbacks(client, __internalParams, queryCbs, i + 1);
       }
     });
   });
@@ -34513,20 +31443,18 @@ var MergedExtensionsListNode = class {
     this.modelExtensionsCache = new Cache();
     this.queryCallbacksCache = new Cache();
     this.clientExtensions = lazyProperty(() => {
-      var _a3, _b2;
       if (!this.extension.client) {
-        return (_a3 = this.previous) == null ? void 0 : _a3.getAllClientExtensions();
+        return this.previous?.getAllClientExtensions();
       }
       return {
-        ...(_b2 = this.previous) == null ? void 0 : _b2.getAllClientExtensions(),
+        ...this.previous?.getAllClientExtensions(),
         ...wrapAllExtensionCallbacks(this.extension.name, this.extension.client)
       };
     });
   }
   getAllComputedFields(dmmfModelName) {
     return this.computedFieldsCache.getOrCreate(dmmfModelName, () => {
-      var _a3;
-      return getComputedFields((_a3 = this.previous) == null ? void 0 : _a3.getAllComputedFields(dmmfModelName), this.extension, dmmfModelName);
+      return getComputedFields(this.previous?.getAllComputedFields(dmmfModelName), this.extension, dmmfModelName);
     });
   }
   getAllClientExtensions() {
@@ -34534,13 +31462,12 @@ var MergedExtensionsListNode = class {
   }
   getAllModelExtensions(dmmfModelName) {
     return this.modelExtensionsCache.getOrCreate(dmmfModelName, () => {
-      var _a3, _b2;
       const jsModelName = dmmfToJSModelName(dmmfModelName);
       if (!this.extension.model || !(this.extension.model[jsModelName] || this.extension.model.$allModels)) {
-        return (_a3 = this.previous) == null ? void 0 : _a3.getAllModelExtensions(dmmfModelName);
+        return this.previous?.getAllModelExtensions(dmmfModelName);
       }
       return {
-        ...(_b2 = this.previous) == null ? void 0 : _b2.getAllModelExtensions(dmmfModelName),
+        ...this.previous?.getAllModelExtensions(dmmfModelName),
         ...wrapAllExtensionCallbacks(this.extension.name, this.extension.model.$allModels),
         ...wrapAllExtensionCallbacks(this.extension.name, this.extension.model[jsModelName])
       };
@@ -34548,8 +31475,7 @@ var MergedExtensionsListNode = class {
   }
   getAllQueryCallbacks(jsModelName, action) {
     return this.queryCallbacksCache.getOrCreate(`${jsModelName}:${action}`, () => {
-      var _a3, _b2;
-      const previous = (_b2 = (_a3 = this.previous) == null ? void 0 : _a3.getAllQueryCallbacks(jsModelName, action)) != null ? _b2 : [];
+      const previous = this.previous?.getAllQueryCallbacks(jsModelName, action) ?? [];
       const query2 = this.extension.query;
       if (!query2 || !(query2[jsModelName] || query2.$allModels)) {
         return previous;
@@ -34593,20 +31519,16 @@ var MergedExtensionsList = class {
     return new MergedExtensionsList(new MergedExtensionsListNode(extension, this.head));
   }
   getAllComputedFields(dmmfModelName) {
-    var _a3;
-    return (_a3 = this.head) == null ? void 0 : _a3.getAllComputedFields(dmmfModelName);
+    return this.head?.getAllComputedFields(dmmfModelName);
   }
   getAllClientExtensions() {
-    var _a3;
-    return (_a3 = this.head) == null ? void 0 : _a3.getAllClientExtensions();
+    return this.head?.getAllClientExtensions();
   }
   getAllModelExtensions(dmmfModelName) {
-    var _a3;
-    return (_a3 = this.head) == null ? void 0 : _a3.getAllModelExtensions(dmmfModelName);
+    return this.head?.getAllModelExtensions(dmmfModelName);
   }
   getAllQueryCallbacks(jsModelName, action) {
-    var _a3, _b2;
-    return (_b2 = (_a3 = this.head) == null ? void 0 : _a3.getAllQueryCallbacks(jsModelName, action)) != null ? _b2 : [];
+    return this.head?.getAllQueryCallbacks(jsModelName, action) ?? [];
   }
 };
 __name(MergedExtensionsList, "MergedExtensionsList");
@@ -34620,7 +31542,7 @@ function getLockCountPromise(knock, cb = () => {
     then(onFulfilled) {
       if (--knock === 0)
         resolve(cb());
-      return onFulfilled == null ? void 0 : onFulfilled(lock);
+      return onFulfilled?.(lock);
     }
   };
 }
@@ -34733,7 +31655,7 @@ function applyResultExtensions({ result, modelName, select, extensions }) {
 }
 __name(applyResultExtensions, "applyResultExtensions");
 function areNeedsMet(result, neededProperties) {
-  return neededProperties.every((property) => hasOwnProperty2(result, property));
+  return neededProperties.every((property) => hasOwnProperty(result, property));
 }
 __name(areNeedsMet, "areNeedsMet");
 function computedPropertyLayer(field, result) {
@@ -34743,7 +31665,6 @@ __name(computedPropertyLayer, "computedPropertyLayer");
 
 // src/runtime/core/extensions/visitQueryResult.ts
 function visitQueryResult({ visitor, result, args, dmmf, model }) {
-  var _a3;
   if (Array.isArray(result)) {
     for (let i = 0; i < result.length; i++) {
       result[i] = visitQueryResult({
@@ -34756,7 +31677,7 @@ function visitQueryResult({ visitor, result, args, dmmf, model }) {
     }
     return result;
   }
-  const visitResult = (_a3 = visitor(result, model, args)) != null ? _a3 : result;
+  const visitResult = visitor(result, model, args) ?? result;
   if (args.include) {
     visitNested({ includeOrSelect: args.include, result: visitResult, parentModel: model, dmmf, visitor });
   }
@@ -34862,13 +31783,12 @@ var DataLoader = class {
 __name(DataLoader, "DataLoader");
 
 // src/runtime/RequestHandler.ts
-var debug11 = src_default("prisma:client:request_handler");
+var debug12 = src_default("prisma:client:request_handler");
 function getRequestInfo(request2) {
-  var _a3;
   const transaction = request2.transaction;
-  const headers = (_a3 = request2.headers) != null ? _a3 : {};
+  const headers = request2.headers ?? {};
   const traceparent = getTraceParent({ tracingConfig: request2.tracingConfig });
-  if ((transaction == null ? void 0 : transaction.kind) === "itx") {
+  if (transaction?.kind === "itx") {
     headers.transactionId = transaction.id;
   }
   if (traceparent !== void 0) {
@@ -34887,14 +31807,13 @@ var RequestHandler = class {
     this.hooks = hooks;
     this.dataloader = new DataLoader({
       batchLoader: (requests) => {
-        var _a3;
         const info2 = getRequestInfo(requests[0]);
         const queries = requests.map((r2) => String(r2.document));
         const traceparent = getTraceParent({ context: requests[0].otelParentCtx, tracingConfig: client._tracingConfig });
         if (traceparent)
           info2.headers.traceparent = traceparent;
         const containsWrite = requests.some((r2) => r2.document.type === "mutation");
-        const batchTransaction = ((_a3 = info2.transaction) == null ? void 0 : _a3.kind) === "batch" ? info2.transaction : void 0;
+        const batchTransaction = info2.transaction?.kind === "batch" ? info2.transaction : void 0;
         return this.client._engine.requestBatch({
           queries,
           headers: info2.headers,
@@ -34903,10 +31822,9 @@ var RequestHandler = class {
         });
       },
       singleLoader: (request2) => {
-        var _a3;
         const info2 = getRequestInfo(request2);
         const query2 = String(request2.document);
-        const interactiveTransaction = ((_a3 = info2.transaction) == null ? void 0 : _a3.kind) === "itx" ? info2.transaction : void 0;
+        const interactiveTransaction = info2.transaction?.kind === "itx" ? info2.transaction : void 0;
         return this.client._engine.request({
           query: query2,
           headers: info2.headers,
@@ -34915,8 +31833,7 @@ var RequestHandler = class {
         });
       },
       batchBy: (request2) => {
-        var _a3;
-        if ((_a3 = request2.transaction) == null ? void 0 : _a3.id) {
+        if (request2.transaction?.id) {
           return `transaction-${request2.transaction.id}`;
         }
         return batchFindUniqueBy(request2);
@@ -34977,8 +31894,8 @@ var RequestHandler = class {
           otelChildCtx,
           tracingConfig: this.client._tracingConfig
         });
-        data = result == null ? void 0 : result.data;
-        elapsed = result == null ? void 0 : result.elapsed;
+        data = result?.data;
+        elapsed = result?.elapsed;
       }
       const unpackResult = this.unpack(document2, data, dataPath, rootField, unpacker);
       throwIfNotFound(unpackResult, clientMethod, typeName, rejectOnNotFound);
@@ -35002,7 +31919,7 @@ var RequestHandler = class {
     }
   }
   handleRequestError({ error: error2, clientMethod, callsite, transaction }) {
-    debug11(error2);
+    debug12(error2);
     if (isMismatchingBatchIndex(error2, transaction)) {
       throw error2;
     }
@@ -35049,7 +31966,7 @@ var RequestHandler = class {
     return message;
   }
   unpack(document2, data, path7, rootField, unpacker) {
-    if (data == null ? void 0 : data.data) {
+    if (data?.data) {
       data = data.data;
     }
     if (unpacker) {
@@ -35072,7 +31989,7 @@ var RequestHandler = class {
     }
     return visitQueryResult({
       result,
-      args: args != null ? args : {},
+      args: args ?? {},
       model,
       dmmf: this.client._baseDmmf,
       visitor(value, model2, args2) {
@@ -35087,15 +32004,14 @@ var RequestHandler = class {
 };
 __name(RequestHandler, "RequestHandler");
 function isMismatchingBatchIndex(error2, transaction) {
-  return hasBatchIndex(error2) && (transaction == null ? void 0 : transaction.kind) === "batch" && error2.batchRequestIdx !== transaction.index;
+  return hasBatchIndex(error2) && transaction?.kind === "batch" && error2.batchRequestIdx !== transaction.index;
 }
 __name(isMismatchingBatchIndex, "isMismatchingBatchIndex");
 function batchFindUniqueBy(request2) {
-  var _a3;
   if (!request2.document.children[0].name.startsWith("findUnique")) {
     return void 0;
   }
-  const args = (_a3 = request2.document.children[0].args) == null ? void 0 : _a3.args.map((a) => {
+  const args = request2.document.children[0].args?.args.map((a) => {
     if (a.value instanceof Args) {
       return `${a.key}-${a.value.args.map((a2) => a2.key).join(",")}`;
     }
@@ -35481,7 +32397,7 @@ function waitForBatch(promises) {
 __name(waitForBatch, "waitForBatch");
 
 // src/runtime/getPrismaClient.ts
-var debug12 = src_default("prisma:client");
+var debug13 = src_default("prisma:client");
 var ALTER_RE = /^(\s*alter\s)/i;
 typeof globalThis === "object" ? globalThis.NODE_CLIENT = true : 0;
 function isReadonlyArray(arg2) {
@@ -35543,16 +32459,15 @@ function getPrismaClient(config2) {
         }
       });
       this.$extends = $extends;
-      var _a3, _b2, _c, _d, _e, _f, _g, _h, _i;
       if (optionsArg) {
         validatePrismaClientOptions(optionsArg, config2.datasourceNames);
       }
       const logEmitter = new import_events.EventEmitter().on("error", (e2) => {
       });
       this._extensions = MergedExtensionsList.empty();
-      this._previewFeatures = (_b2 = (_a3 = config2.generator) == null ? void 0 : _a3.previewFeatures) != null ? _b2 : [];
-      this._rejectOnNotFound = optionsArg == null ? void 0 : optionsArg.rejectOnNotFound;
-      this._clientVersion = (_c = config2.clientVersion) != null ? _c : clientVersion;
+      this._previewFeatures = config2.generator?.previewFeatures ?? [];
+      this._rejectOnNotFound = optionsArg?.rejectOnNotFound;
+      this._clientVersion = config2.clientVersion ?? clientVersion;
       this._activeProvider = config2.activeProvider;
       this._dataProxy = config2.dataProxy;
       this._tracingConfig = getTracingConfig(this._previewFeatures);
@@ -35563,8 +32478,8 @@ function getPrismaClient(config2) {
       };
       const loadedEnv = tryLoadEnvs(envPaths, { conflictCheck: "none" });
       try {
-        const options = optionsArg != null ? optionsArg : {};
-        const internal = (_d = options.__internal) != null ? _d : {};
+        const options = optionsArg ?? {};
+        const internal = options.__internal ?? {};
         const useDebug = internal.debug === true;
         if (useDebug) {
           src_default.enable("prisma:client");
@@ -35576,9 +32491,9 @@ function getPrismaClient(config2) {
         if (!import_fs9.default.existsSync(cwd)) {
           cwd = config2.dirname;
         }
-        debug12("dirname", config2.dirname);
-        debug12("relativePath", config2.relativePath);
-        debug12("cwd", cwd);
+        debug13("dirname", config2.dirname);
+        debug13("relativePath", config2.relativePath);
+        debug13("cwd", cwd);
         const thedatasources = options.datasources || {};
         const inputDatasources = Object.entries(thedatasources).filter(([_, source]) => {
           return source && source.url;
@@ -35607,8 +32522,8 @@ function getPrismaClient(config2) {
           dirname: config2.dirname,
           enableDebugLogs: useDebug,
           allowTriggerPanic: engineConfig.allowTriggerPanic,
-          datamodelPath: import_path5.default.join(config2.dirname, (_e = config2.filename) != null ? _e : "schema.prisma"),
-          prismaPath: (_f = engineConfig.binaryPath) != null ? _f : void 0,
+          datamodelPath: import_path5.default.join(config2.dirname, config2.filename ?? "schema.prisma"),
+          prismaPath: engineConfig.binaryPath ?? void 0,
           engineEndpoint: engineConfig.endpoint,
           datasources,
           generator: config2.generator,
@@ -35617,7 +32532,7 @@ function getPrismaClient(config2) {
           logQueries: options.log && Boolean(
             typeof options.log === "string" ? options.log === "query" : options.log.find((o2) => typeof o2 === "string" ? o2 === "query" : o2.level === "query")
           ),
-          env: (_i = (_h = loadedEnv == null ? void 0 : loadedEnv.parsed) != null ? _h : (_g = config2.injectableEdgeEnv) == null ? void 0 : _g.parsed) != null ? _i : {},
+          env: loadedEnv?.parsed ?? config2.injectableEdgeEnv?.parsed ?? {},
           flags: [],
           clientVersion: config2.clientVersion,
           previewFeatures: this._previewFeatures,
@@ -35628,11 +32543,11 @@ function getPrismaClient(config2) {
           tracingConfig: this._tracingConfig,
           logEmitter
         };
-        debug12("clientVersion", config2.clientVersion);
-        debug12("clientEngineType", this._dataProxy ? "dataproxy" : this._clientEngineType);
+        debug13("clientVersion", config2.clientVersion);
+        debug13("clientEngineType", this._dataProxy ? "dataproxy" : this._clientEngineType);
         if (this._dataProxy) {
           const runtime = true ? "Node.js" : "edge";
-          debug12(`using Data Proxy with ${runtime} runtime`);
+          debug13(`using Data Proxy with ${runtime} runtime`);
         }
         this._engine = this.getEngine();
         void this._getActiveProvider();
@@ -35642,8 +32557,7 @@ function getPrismaClient(config2) {
             const level = typeof log3 === "string" ? log3 : log3.emit === "stdout" ? log3.level : null;
             if (level) {
               this.$on(level, (event) => {
-                var _a4;
-                logger_exports.log(`${(_a4 = logger_exports.tags[level]) != null ? _a4 : ""}`, event.message || event.query);
+                logger_exports.log(`${logger_exports.tags[level] ?? ""}`, event.message || event.query);
               });
             }
           }
@@ -35684,20 +32598,19 @@ function getPrismaClient(config2) {
         this._engine.on("beforeExit", callback);
       } else {
         this._engine.on(eventType, (event) => {
-          var _a3, _b2, _c, _d;
           const fields = event.fields;
           if (eventType === "query") {
             return callback({
               timestamp: event.timestamp,
-              query: (_a3 = fields == null ? void 0 : fields.query) != null ? _a3 : event.query,
-              params: (_b2 = fields == null ? void 0 : fields.params) != null ? _b2 : event.params,
-              duration: (_c = fields == null ? void 0 : fields.duration_ms) != null ? _c : event.duration,
+              query: fields?.query ?? event.query,
+              params: fields?.params ?? event.params,
+              duration: fields?.duration_ms ?? event.duration,
               target: event.target
             });
           } else {
             return callback({
               timestamp: event.timestamp,
-              message: (_d = fields == null ? void 0 : fields.message) != null ? _d : event.message,
+              message: fields?.message ?? event.message,
               target: event.target
             });
           }
@@ -35806,13 +32719,13 @@ function getPrismaClient(config2) {
           __prismaRawParameters__: true
         };
       }
-      if (parameters == null ? void 0 : parameters.values) {
-        debug12(`prisma.$executeRaw(${queryString}, ${parameters.values})`);
+      if (parameters?.values) {
+        debug13(`prisma.$executeRaw(${queryString}, ${parameters.values})`);
       } else {
-        debug12(`prisma.$executeRaw(${queryString})`);
+        debug13(`prisma.$executeRaw(${queryString})`);
       }
       const args = { query: queryString, parameters };
-      debug12(`Prisma Client call:`);
+      debug13(`Prisma Client call:`);
       return this._request({
         args,
         clientMethod: "$executeRaw",
@@ -35926,13 +32839,13 @@ Or read our docs at https://www.prisma.io/docs/concepts/components/prisma-client
           __prismaRawParameters__: true
         };
       }
-      if (parameters == null ? void 0 : parameters.values) {
-        debug12(`prisma.queryRaw(${queryString}, ${parameters.values})`);
+      if (parameters?.values) {
+        debug13(`prisma.queryRaw(${queryString}, ${parameters.values})`);
       } else {
-        debug12(`prisma.queryRaw(${queryString})`);
+        debug13(`prisma.queryRaw(${queryString})`);
       }
       const args = { query: queryString, parameters };
-      debug12(`Prisma Client call:`);
+      debug13(`Prisma Client call:`);
       return this._request({
         args,
         clientMethod: "$queryRaw",
@@ -35993,13 +32906,12 @@ new PrismaClient({
       const id = BatchTxIdCounter.nextId();
       const lock = getLockCountPromise(promises.length);
       const requests = promises.map((request2, index) => {
-        var _a3, _b2;
-        if ((request2 == null ? void 0 : request2[Symbol.toStringTag]) !== "PrismaPromise") {
+        if (request2?.[Symbol.toStringTag] !== "PrismaPromise") {
           throw new Error(
             `All elements of the array need to be Prisma Client promises. Hint: Please make sure you are not awaiting the Prisma client calls you intended to pass in the $transaction function.`
           );
         }
-        return (_b2 = (_a3 = request2.requestTransaction) == null ? void 0 : _a3.call(request2, { id, index, isolationLevel: options == null ? void 0 : options.isolationLevel }, lock)) != null ? _b2 : request2;
+        return request2.requestTransaction?.({ id, index, isolationLevel: options?.isolationLevel }, lock) ?? request2;
       });
       return waitForBatch(requests);
     }
@@ -36035,7 +32947,7 @@ new PrismaClient({
       return runInChildSpan(spanOptions, callback);
     }
     async _request(internalParams) {
-      internalParams.otelParentCtx = context2.active();
+      internalParams.otelParentCtx = context.active();
       try {
         const params = {
           args: internalParams.args,
@@ -36066,7 +32978,7 @@ new PrismaClient({
           const nextMiddleware = this._middlewares.query.get(++index);
           if (nextMiddleware) {
             return runInChildSpan(spanOptions.middleware, async (span) => {
-              return nextMiddleware(changedMiddlewareParams, (p2) => (span == null ? void 0 : span.end(), consumer(p2)));
+              return nextMiddleware(changedMiddlewareParams, (p2) => (span?.end(), consumer(p2)));
             });
           }
           const { runInTransaction, ...changedRequestParams } = changedMiddlewareParams;
@@ -36106,7 +33018,6 @@ new PrismaClient({
       unpacker,
       otelParentCtx
     }) {
-      var _a3, _b2;
       if (this._dmmf === void 0) {
         this._dmmf = await this._getDmmf({ clientMethod, callsite });
       }
@@ -36118,7 +33029,7 @@ new PrismaClient({
       }
       let mapping;
       if (model !== void 0) {
-        mapping = (_a3 = this._dmmf) == null ? void 0 : _a3.mappingsMap[model];
+        mapping = this._dmmf?.mappingsMap[model];
         if (mapping === void 0) {
           throw new Error(`Could not find mapping for model ${model}`);
         }
@@ -36127,7 +33038,7 @@ new PrismaClient({
       if (operation !== "query" && operation !== "mutation") {
         throw new Error(`Invalid operation ${operation} for action ${action}`);
       }
-      const field = (_b2 = this._dmmf) == null ? void 0 : _b2.rootFieldMap[rootField];
+      const field = this._dmmf?.rootFieldMap[rootField];
       if (field === void 0) {
         throw new Error(
           `Could not find rootField ${rootField} for action ${action} for model ${model} on rootType ${operation}`
@@ -36156,8 +33067,8 @@ new PrismaClient({
       const document2 = await runInChildSpan(spanOptions, serializationFn);
       if (src_default.enabled("prisma:client")) {
         const query2 = String(document2);
-        debug12(`Prisma Client call:`);
-        debug12(
+        debug13(`Prisma Client call:`);
+        debug13(
           `prisma.${clientMethod}(${printJsonWithErrors({
             ast: args,
             keyPaths: [],
@@ -36165,8 +33076,8 @@ new PrismaClient({
             missingItems: []
           })})`
         );
-        debug12(`Generated request:`);
-        debug12(query2 + "\n");
+        debug13(`Generated request:`);
+        debug13(query2 + "\n");
       }
       await lock;
       return this._fetcher.request({
@@ -36185,7 +33096,7 @@ new PrismaClient({
         transaction,
         unpacker,
         otelParentCtx,
-        otelChildCtx: context2.active()
+        otelChildCtx: context.active()
       });
     }
     get $metrics() {
@@ -36197,8 +33108,7 @@ new PrismaClient({
       return this._metrics;
     }
     _hasPreviewFlag(feature) {
-      var _a3;
-      return !!((_a3 = this._engineConfig.previewFeatures) == null ? void 0 : _a3.includes(feature));
+      return !!this._engineConfig.previewFeatures?.includes(feature);
     }
   }
   __name(PrismaClient, "PrismaClient");
@@ -36214,7 +33124,7 @@ function transactionProxy(thing, transaction) {
       if (forbidden.includes(prop))
         return void 0;
       if (prop === TX_ID)
-        return transaction == null ? void 0 : transaction.id;
+        return transaction?.id;
       if (typeof target[prop] === "function") {
         return (...args) => {
           if (prop === "then")
@@ -36245,8 +33155,8 @@ function warnAboutRejectOnNotFound(rejectOnNotFound, model, action) {
   if (rejectOnNotFound) {
     const replacementAction = rejectOnNotFoundReplacements[action];
     const replacementCall = model ? `prisma.${model}.${replacementAction}` : `prisma.${replacementAction}`;
-    const key = `rejectOnNotFound.${model != null ? model : ""}.${action}`;
-    warnOnce(
+    const key = `rejectOnNotFound.${model ?? ""}.${action}`;
+    warnOnce2(
       key,
       `\`rejectOnNotFound\` option is deprecated and will be removed in Prisma 5. Please use \`${replacementCall}\` method instead`
     );
@@ -36337,7 +33247,7 @@ function findSync(root, match, types = ["f", "d", "l"], deep = [], limit = Infin
         findSync(itemPath, match, types, deep, limit, handler, found, seen);
       }
     }
-  } catch (e2) {
+  } catch {
   }
   return found;
 }

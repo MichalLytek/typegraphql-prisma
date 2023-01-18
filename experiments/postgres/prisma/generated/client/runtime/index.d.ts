@@ -6,6 +6,8 @@ declare function $extends(this: Client, extension: Args_2 | ((client: Client) =>
 
 declare type Action = keyof typeof DMMF.ModelAction | 'executeRaw' | 'queryRaw' | 'runCommandRaw';
 
+declare type Aggregate = '_count' | '_max' | '_min' | '_avg' | '_sum';
+
 declare class AnyNull extends NullTypesEnumValue {
 }
 
@@ -58,6 +60,18 @@ declare class Args {
 
 declare type Args_2 = OptionalFlat<RequiredArgs>;
 
+declare type Args_3 = InternalArgs;
+
+declare type Args_4<T, F extends Operation> = T extends {
+    [K: symbol]: {
+        types: {
+            [K in F]: {
+                args: any;
+            };
+        };
+    };
+} ? T[symbol]['types'][F]['args'] : never;
+
 declare type ArgValue = string | boolean | number | undefined | Args | string[] | boolean[] | number[] | Args[] | null;
 
 declare interface AtLeastOneError {
@@ -100,20 +114,22 @@ declare interface CallSite {
     getLocation(): LocationInFile | null;
 }
 
+declare type Cast<A, W> = A extends W ? A : W;
+
 declare type Client = ReturnType<typeof getPrismaClient> extends new () => infer T ? T : never;
 
+declare type ClientArg = {
+    [MethodName in string]: Function;
+};
+
 declare type ClientArgs = {
-    client: ClientExtensionDefinition;
+    client: ClientArg;
 };
 
 declare enum ClientEngineType {
     Library = "library",
     Binary = "binary"
 }
-
-declare type ClientExtensionDefinition = {
-    [MethodName in string]: (...args: any[]) => any;
-};
 
 declare type Compute<T> = T extends Function ? T : {
     [K in keyof T]: T[K];
@@ -129,7 +145,7 @@ declare type ComputedFieldsMap = {
     [fieldName: string]: ComputedField;
 };
 
-declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
+declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'postgres' | 'sqlserver' | 'cockroachdb' | 'jdbc:sqlserver';
 
 declare type ConnectorType_2 = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
 
@@ -157,6 +173,22 @@ declare interface Context {
     deleteValue(key: symbol): Context;
 }
 
+declare type Context_2<T> = T extends {
+    [K: symbol]: {
+        ctx: infer C;
+    };
+} ? C & {
+    [K in Exclude<keyof T, keyof C> & string]: T[K];
+} & ContextMeta : T & ContextMeta;
+
+declare type ContextMeta = {
+    name: string;
+};
+
+declare type Count<O> = {
+    [K in keyof O]: Count<number>;
+} & {};
+
 declare class DataLoader<T = unknown> {
     private options;
     batches: {
@@ -177,12 +209,11 @@ declare type DataLoaderOptions<T> = {
 
 declare interface DataSource {
     name: string;
-    activeProvider: ConnectorType;
     provider: ConnectorType;
+    activeProvider: ConnectorType;
     url: EnvValue;
-    config: {
-        [key: string]: string;
-    };
+    directUrl?: EnvValue;
+    schemas: string[] | [];
 }
 
 declare type Datasource = {
@@ -501,12 +532,7 @@ export declare interface DecimalJsLike {
 
 export declare const decompressFromBase64: any;
 
-declare type DefaultArgs = {
-    result: {};
-    model: {};
-    query: {};
-    client: {};
-};
+declare type DefaultArgs = InternalArgs<{}, {}, {}, {}>;
 
 declare function defineExtension(ext: Args_2 | ((client: Client) => Client)): (client: Client) => Client;
 
@@ -929,7 +955,7 @@ declare type EngineMiddlewareParams = {
 
 declare interface EnvValue {
     fromEnvVar: null | string;
-    value: string;
+    value: null | string;
 }
 
 declare interface EnvValue_2 {
@@ -948,6 +974,10 @@ declare interface EventEmitter {
     emit(event: string, args?: any): boolean;
 }
 
+declare type Exact<A, W> = (W extends A ? {
+    [K in keyof W]: K extends keyof A ? Exact<A[K], W[K]> : never;
+} : W) | (A extends Narrowable ? A : never);
+
 declare namespace Extensions {
     export {
         defineExtension,
@@ -958,13 +988,15 @@ export { Extensions }
 
 declare namespace Extensions_2 {
     export {
+        InternalArgs,
+        Args_3 as Args,
         DefaultArgs,
-        GetResultPayload,
-        GetResultSelect,
+        GetResult,
+        GetSelect,
         GetModel,
         GetClient,
         ReadonlySelector,
-        RequiredArgs as Args
+        RequiredArgs as UserArgs
     }
 }
 
@@ -1032,18 +1064,68 @@ declare interface GeneratorConfig {
     previewFeatures: string[];
 }
 
-declare type GetClient<Base extends object, C extends RequiredArgs['client'], CP extends RequiredArgs['client']> = C & Omit_2<CP, keyof C> & Omit_2<Base, '$use' | keyof C | keyof CP>;
+declare type GetAggregateResult<P, A> = {
+    [K in keyof A as K extends Aggregate ? K : never]: K extends '_count' ? A[K] extends true ? number : Count<A[K]> : Count<A[K]>;
+};
+
+declare type GetBatchResult<P, A> = {
+    count: number;
+};
+
+declare type GetClient<Base extends Record<any, any>, C extends Args_3['client']> = Omit<Base, keyof C | '$use'> & {
+    [K in keyof C]: ReturnType<C[K]>;
+};
 
 declare type GetConfigResult = {
     datasources: DataSource[];
     generators: GeneratorConfig[];
 };
 
-declare function getExtensionContext<T>(that: {
-    [K: symbol]: T;
-}): T;
+declare type GetCountResult<P, A> = A extends {
+    select: infer S;
+} ? S extends true ? number : Count<S> : number;
 
-declare type GetModel<Base extends object, M extends RequiredArgs['model'][string]> = M & Omit_2<Base, keyof M>;
+declare function getExtensionContext<T>(that: T): Context_2<T>;
+
+declare type GetFindResult<P extends Payload, A> = A extends {
+    select: infer S;
+} | {
+    include: infer S;
+} ? {
+    [K in keyof S as S[K] extends false | undefined | null ? never : K]: S[K] extends true ? P extends {
+        objects: {
+            [k in K]: (infer O)[];
+        };
+    } ? O extends Payload ? O['scalars'][] : never : P extends {
+        objects: {
+            [k in K]: (infer O) | null;
+        };
+    } ? O extends Payload ? O['scalars'] | P['objects'][K] & null : never : P extends {
+        scalars: {
+            [k in K]: infer O;
+        };
+    } ? O : K extends '_count' ? Count<P['objects']> : never : P extends {
+        objects: {
+            [k in K]: (infer O)[];
+        };
+    } ? O extends Payload ? GetFindResult<O, S[K]>[] : never : P extends {
+        objects: {
+            [k in K]: (infer O) | null;
+        };
+    } ? O extends Payload ? GetFindResult<O, S[K]> | P['objects'][K] & null : never : K extends '_count' ? Count<GetFindResult<P, S[K]>> : never;
+} & (A extends {
+    include: any;
+} ? P['scalars'] : unknown) : P['scalars'];
+
+declare type GetGroupByResult<P, A> = P extends Payload ? A extends {
+    by: string[];
+} ? Array<GetAggregateResult<P, A> & {
+    [K in A['by'][number]]: P['scalars'][K];
+}> : never : never;
+
+declare type GetModel<Base extends Record<any, any>, M extends Args_3['model'][string]> = {
+    [K in keyof M | keyof Base]: K extends keyof M ? ReturnType<M[K]> : Base[K];
+};
 
 export declare function getPrismaClient(config: GetPrismaClientConfig): {
     new (optionsArg?: PrismaClientOptions): {
@@ -1247,15 +1329,31 @@ declare interface GetPrismaClientConfig {
     inlineSchemaHash?: string;
 }
 
-declare type GetResultPayload<Base extends object, R extends RequiredArgs['result'][string]> = {} extends R ? Base : {
-    [K in keyof R]: ReturnType<R[K]['compute']>;
-} & {
-    [K in Exclude<keyof Base, keyof R>]: Base[K];
-};
+declare type GetResult<Base extends Record<any, any>, R extends Args_3['result'][string]> = {
+    [K in keyof R | keyof Base]: K extends keyof R ? ReturnType<ReturnType<R[K]>['compute']> : Base[K];
+} & unknown;
 
-declare type GetResultSelect<Base extends object, R extends RequiredArgs['result'][string]> = R extends unknown ? Base & {
-    [K in keyof R]?: boolean;
-} : never;
+declare type GetResult_2<P extends Payload, A, O extends Operation> = {
+    findUnique: GetFindResult<P, A>;
+    findUniqueOrThrow: GetFindResult<P, A>;
+    findFirst: GetFindResult<P, A>;
+    findFirstOrThrow: GetFindResult<P, A>;
+    findMany: GetFindResult<P, A>[];
+    create: GetFindResult<P, A>;
+    createMany: GetBatchResult<P, A>;
+    update: GetFindResult<P, A>;
+    updateMany: GetBatchResult<P, A>;
+    upsert: GetFindResult<P, A>;
+    delete: GetFindResult<P, A>;
+    deleteMany: GetBatchResult<P, A>;
+    aggregate: GetAggregateResult<P, A>;
+    count: GetCountResult<P, A>;
+    groupBy: GetGroupByResult<P, A>;
+}[O];
+
+declare type GetSelect<Base extends Record<any, any>, R extends Args_3['result'][string]> = {
+    [K in keyof R | keyof Base]?: K extends keyof R ? boolean : Base[K];
+};
 
 declare type HandleErrorParams = {
     error: any;
@@ -1318,6 +1416,27 @@ declare type InstanceRejectOnNotFound = RejectOnNotFound | Record<string, Reject
 declare type InteractiveTransactionOptions<Payload> = Transaction.Info<Payload>;
 
 declare type InteractiveTransactionOptions_2 = Omit<PrismaPromiseInteractiveTransaction, 'kind'>;
+
+declare type InternalArgs<R extends RequiredArgs['result'] = RequiredArgs['result'], M extends RequiredArgs['model'] = RequiredArgs['model'], Q extends RequiredArgs['query'] = RequiredArgs['query'], C extends RequiredArgs['client'] = RequiredArgs['client']> = {
+    result: {
+        [K in keyof R]: {
+            [P in keyof R[K]]: () => R[K][P];
+        };
+    };
+    model: {
+        [K in keyof M]: {
+            [P in keyof M[K]]: () => M[K][P];
+        };
+    };
+    query: {
+        [K in keyof Q]: {
+            [P in keyof Q[K]]: () => Q[K][P];
+        };
+    };
+    client: {
+        [K in keyof C]: () => C[K];
+    };
+};
 
 declare interface InternalDatasource {
     name: string;
@@ -1441,6 +1560,14 @@ declare type KnownErrorParams = {
     batchRequestIdx?: number;
 };
 
+declare type LegacyExact<A, W = unknown> = W extends unknown ? A extends LegacyNarrowable ? Cast<A, W> : Cast<{
+    [K in keyof A]: K extends keyof W ? LegacyExact<A[K], W[K]> : never;
+}, {
+    [K in keyof W]: K extends keyof A ? LegacyExact<A[K], W[K]> : W[K];
+}> : never;
+
+declare type LegacyNarrowable = string | number | boolean | bigint;
+
 declare type LoadedEnv = {
     message?: string;
     parsed: {
@@ -1497,8 +1624,8 @@ declare class MergedExtensionsList {
     isEmpty(): boolean;
     append(extension: Args_2): MergedExtensionsList;
     getAllComputedFields(dmmfModelName: string): ComputedFieldsMap | undefined;
-    getAllClientExtensions(): ClientExtensionDefinition | undefined;
-    getAllModelExtensions(dmmfModelName: string): ModelExtensionDefinition | undefined;
+    getAllClientExtensions(): ClientArg | undefined;
+    getAllModelExtensions(dmmfModelName: string): ModelArg | undefined;
     getAllQueryCallbacks(jsModelName: string, action: string): any;
 }
 
@@ -1593,19 +1720,25 @@ declare interface MissingItem {
     type: string | object;
 }
 
-declare type ModelArgs = {
-    model: {
-        [ModelName in string]: ModelExtensionDefinition;
-    };
+declare type ModelArg = {
+    [MethodName in string]: Function;
 };
 
-declare type ModelExtensionDefinition = {
-    [MethodName in string]: (...args: any[]) => any;
+declare type ModelArgs = {
+    model: {
+        [ModelName in string]: ModelArg;
+    };
 };
 
 declare type NameArgs = {
     name?: string;
 };
+
+declare type Narrow<A> = {
+    [K in keyof A]: A[K] extends Function ? A[K] : Narrow<A[K]>;
+} | (A extends Narrowable ? A : never);
+
+declare type Narrowable = string | number | bigint | boolean | [];
 
 declare type NeverToUnknown<T> = [T] extends [never] ? unknown : T;
 
@@ -1659,6 +1792,8 @@ declare type Omit_2<T, K extends string | number | symbol> = {
     [P in keyof T as P extends K ? never : P]: T[P];
 };
 
+declare type Operation = 'findFirst' | 'findFirstOrThrow' | 'findUnique' | 'findUniqueOrThrow' | 'findMany' | 'create' | 'createMany' | 'update' | 'updateMany' | 'upsert' | 'delete' | 'deleteMany' | 'aggregate' | 'count' | 'groupBy';
+
 declare type OptionalFlat<T> = {
     [K in keyof T]?: T[K];
 };
@@ -1675,7 +1810,7 @@ declare type Options = {
 
 declare type PatchDeep<O1, O2, O = O1 & O2> = {
     [K in keyof O]: K extends keyof O1 ? K extends keyof O2 ? O1[K] extends object ? O2[K] extends object ? O1[K] extends Function ? O1[K] : O2[K] extends Function ? O1[K] : PatchDeep<O1[K], O2[K]> : O1[K] : O1[K] : O1[K] : O2[K & keyof O2];
-} & unknown;
+};
 
 declare type PatchFlat<O1, O2> = O1 & Omit_2<O2, keyof O1>;
 
@@ -1686,6 +1821,25 @@ declare type PatchFlat<O1, O2> = O1 & Omit_2<O2, keyof O1>;
 declare type PatchFlat3<A, B, C> = A & {
     [K in Exclude<keyof B | keyof C, keyof A>]: K extends keyof B ? B[K] : C[K & keyof C];
 };
+
+export declare type Payload = {
+    scalars: {
+        [ScalarName in string]: unknown;
+    };
+    objects: {
+        [ObjectName in string]: unknown;
+    };
+};
+
+declare type Payload_2<T, F extends Operation> = T extends {
+    [K: symbol]: {
+        types: {
+            [K in F]: {
+                payload: any;
+            };
+        };
+    };
+} ? T[symbol]['types'][F]['payload'] : never;
 
 declare type Pick_2<T, K extends string | number | symbol> = {
     [P in keyof T as P extends K ? P : never]: T[P];
@@ -1822,6 +1976,16 @@ declare type PrismaPromiseInteractiveTransaction = {
 
 declare type PrismaPromiseTransaction = PrismaPromiseBatchTransaction | PrismaPromiseInteractiveTransaction;
 
+declare namespace Public {
+    export {
+        Args_4 as Args,
+        Result,
+        Payload_2 as Payload,
+        Operation,
+        Exact
+    }
+}
+
 declare type QueryEngineRequestHeaders = {
     traceparent?: string;
     transactionId?: string;
@@ -1952,9 +2116,23 @@ declare type RequestParams = {
 
 declare type RequiredArgs = NameArgs & ResultArgs & ModelArgs & ClientArgs & QueryOptions;
 
+declare type Result<T, A, F extends Operation> = T extends {
+    [K: symbol]: {
+        types: {
+            [K in F]: {
+                payload: any;
+            };
+        };
+    };
+} ? GetResult_2<T[symbol]['types'][F]['payload'], A, F> : never;
+
+declare type ResultArg = {
+    [FieldName in string]: ResultFieldDefinition;
+};
+
 declare type ResultArgs = {
     result: {
-        [ModelName in string]: ResultModelArgs;
+        [ModelName in string]: ResultArg;
     };
 };
 
@@ -1965,10 +2143,6 @@ declare type ResultFieldDefinition = {
         [FieldName in string]: boolean;
     };
     compute: ResultArgsFieldCompute;
-};
-
-declare type ResultModelArgs = {
-    [FieldName in string]: ResultFieldDefinition;
 };
 
 declare type Selection_2 = Record<string, boolean | IncludeSelect>;
@@ -2017,7 +2191,11 @@ export declare function transformDocument(document: Document_2): Document_2;
 declare namespace Types {
     export {
         Extensions_2 as Extensions,
-        Utils
+        Utils,
+        Public,
+        GetResult_2 as GetResult,
+        GetFindResult,
+        Payload
     }
 }
 export { Types }
@@ -2061,7 +2239,12 @@ declare namespace Utils {
         PatchFlat3,
         Compute,
         OptionalFlat,
-        ReadonlyDeep
+        ReadonlyDeep,
+        Narrow,
+        Exact,
+        Cast,
+        LegacyExact,
+        WrapPropsInFnDeep
     }
 }
 
@@ -2071,5 +2254,9 @@ declare namespace Utils {
 export declare type Value = unknown;
 
 export declare function warnEnvConflicts(envPaths: any): void;
+
+declare type WrapPropsInFnDeep<T> = {
+    [K in keyof T]: T[K] extends Function ? T[K] : T[K] extends object ? WrapPropsInFnDeep<T[K]> : () => T[K];
+} & {};
 
 export { }
