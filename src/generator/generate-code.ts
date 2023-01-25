@@ -91,7 +91,6 @@ export default async function generateCode(
       }),
     },
   });
-  const resolversDirPath = path.resolve(baseDirPath, resolversFolderName);
 
   log("Transforming dmmfDocument...");
   const dmmfDocument = new DmmfDocument(dmmf, options);
@@ -147,6 +146,7 @@ export default async function generateCode(
     );
   }
 
+  const resolversDirPath = path.resolve(baseDirPath, resolversFolderName);
   let outputTypesToGenerate: DMMF.OutputType[] = [];
   if (dmmfDocument.shouldGenerateBlock("outputs")) {
     log("Generating output types...");

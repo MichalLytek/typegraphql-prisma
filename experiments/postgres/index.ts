@@ -209,6 +209,7 @@ class MainUserResolver {
     @Args() args: FindManyMainUserArgs,
     @Ctx() { prismaClient }: Context,
   ): Promise<Prisma.User[]> {
+    // @ts-expect-error fix required at least fields
     return prismaClient.user.findMany(args);
   }
 
@@ -230,6 +231,7 @@ class PostResolver {
     @Ctx() { prismaClient }: Context,
     @Args() args: CreateOnePostArgs,
   ): Promise<Post> {
+    // @ts-expect-error fix required at least fields
     return await prismaClient.post.create(args);
   }
 }
