@@ -23,6 +23,7 @@ generator typegraphql {
   customPrismaImportPath   = "../client"
   contextPrismaKey         = "prismaClient"
   useSimpleInputs          = true
+  emitRedundantTypesInfo   = true
 }
 
 // Role enum comment

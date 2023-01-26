@@ -74,6 +74,7 @@ const sidebars = {
         "advanced/override-plural",
         "advanced/custom-prisma-import",
         "advanced/custom-prisma-context-key",
+        "advanced/emit-redundant-types-info",
       ],
     },
   ],

@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { AggregateMainUserArgs } from "./args/AggregateMainUserArgs";
 import { MainUser } from "../../../models/MainUser";
 import { AggregateMainUser } from "../../outputs/AggregateMainUser";
@@ -10,7 +10,7 @@ export class AggregateMainUserResolver {
   @TypeGraphQL.Query(_returns => AggregateMainUser, {
     nullable: false
   })
-  async aggregateMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateMainUserArgs): Promise<AggregateMainUser> {
+  async aggregateMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => AggregateMainUserArgs) args: AggregateMainUserArgs): Promise<AggregateMainUser> {
     return getPrismaFromContext(ctx).user.aggregate({
       ...args,
       ...transformInfoIntoPrismaArgs(info),

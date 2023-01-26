@@ -572,19 +572,19 @@ describe("crud", () => {
 
   it("should properly generate args classes for sorting by many-to-many relation fields", async () => {
     const schema = /* prisma */ `
-        model FirstModel {
-          idField            Int            @id @default(autoincrement())
-          uniqueStringField  String         @unique
-          floatField         Float
-          secondModelsField  SecondModel[]
-        }
-        model SecondModel {
-          idField            Int           @id @default(autoincrement())
-          uniqueStringField  String        @unique
-          floatField         Float
-          firstModelsField   FirstModel[]
-        }
-      `;
+      model FirstModel {
+        idField            Int            @id @default(autoincrement())
+        uniqueStringField  String         @unique
+        floatField         Float
+        secondModelsField  SecondModel[]
+      }
+      model SecondModel {
+        idField            Int           @id @default(autoincrement())
+        uniqueStringField  String        @unique
+        floatField         Float
+        firstModelsField   FirstModel[]
+      }
+    `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
     const aggregateFirstModelArgsTSFile = await readGeneratedFile(
@@ -614,20 +614,20 @@ describe("crud", () => {
 
   it("should properly generate args classes for sorting by one-to-many relation fields", async () => {
     const schema = /* prisma */ `
-        model FirstModel {
-          idField            Int            @id @default(autoincrement())
-          uniqueStringField  String         @unique
-          floatField         Float
-          secondModelsField  SecondModel[]
-        }
-        model SecondModel {
-          idField            Int          @id @default(autoincrement())
-          uniqueStringField  String       @unique
-          floatField         Float
-          firstModelFieldId  Int
-          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
-        }
-      `;
+      model FirstModel {
+        idField            Int            @id @default(autoincrement())
+        uniqueStringField  String         @unique
+        floatField         Float
+        secondModelsField  SecondModel[]
+      }
+      model SecondModel {
+        idField            Int          @id @default(autoincrement())
+        uniqueStringField  String       @unique
+        floatField         Float
+        firstModelFieldId  Int
+        firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+      }
+    `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
     const aggregateSecondModelArgsTSFile = await readGeneratedFile(
@@ -655,6 +655,27 @@ describe("crud", () => {
     expect(indexTSFile).toMatchSnapshot("index");
   });
 
+  it("should properly generate args classes for group by action using aggregate input", async () => {
+    const schema = /* prisma */ `
+      model Sample {
+        idField       Int     @id @default(autoincrement())
+        stringField   String
+        floatField    Float
+        intField      Int
+        booleanField  Boolean
+        dateField     DateTime
+        jsonField     Json
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const groupBySampleArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/Sample/args/GroupBySampleArgs.ts",
+    );
+
+    expect(groupBySampleArgsTSFile).toMatchSnapshot("GroupBySampleArgs");
+  });
+
   describe("when emitTranspiledCode is set to true", () => {
     it("should properly generate imports in js files for resolver classes", async () => {
       const schema = /* prisma */ `
@@ -678,24 +699,26 @@ describe("crud", () => {
     }, 20000);
   });
 
-  it("should properly generate args classes for group by action using aggregate input", async () => {
-    const schema = /* prisma */ `
-        model Sample {
-          idField       Int     @id @default(autoincrement())
-          stringField   String
-          floatField    Float
-          intField      Int
-          booleanField  Boolean
-          dateField     DateTime
-          jsonField     Json
+  describe("when emitRedundantTypesInfo is set to true", () => {
+    it("should properly generate type info for @Args decorator", async () => {
+      const schema = /* prisma */ `
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
         }
       `;
 
-    await generateCodeFromSchema(schema, { outputDirPath });
-    const groupBySampleArgsTSFile = await readGeneratedFile(
-      "/resolvers/crud/Sample/args/GroupBySampleArgs.ts",
-    );
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        emitRedundantTypesInfo: true,
+      });
+      const userCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UserCrudResolver.ts",
+      );
 
-    expect(groupBySampleArgsTSFile).toMatchSnapshot("GroupBySampleArgs");
+      expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+    });
   });
 });

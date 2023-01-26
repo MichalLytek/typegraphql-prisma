@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByDirectorArgs } from "./args/GroupByDirectorArgs";
 import { Director } from "../../../models/Director";
 import { DirectorGroupBy } from "../../outputs/DirectorGroupBy";
@@ -10,7 +10,7 @@ export class GroupByDirectorResolver {
   @TypeGraphQL.Query(_returns => [DirectorGroupBy], {
     nullable: false
   })
-  async groupByDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByDirectorArgs): Promise<DirectorGroupBy[]> {
+  async groupByDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => GroupByDirectorArgs) args: GroupByDirectorArgs): Promise<DirectorGroupBy[]> {
     const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.groupBy({
       ...args,

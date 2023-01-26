@@ -6,7 +6,7 @@ import { PostCountAggregate } from "../outputs/PostCountAggregate";
 import { PostMaxAggregate } from "../outputs/PostMaxAggregate";
 import { PostMinAggregate } from "../outputs/PostMinAggregate";
 
-@TypeGraphQL.ObjectType({
+@TypeGraphQL.ObjectType("AggregatePost", {
   isAbstract: true
 })
 export class AggregatePost {

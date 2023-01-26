@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { FindUniqueNativeTypeModelOrThrowArgs } from "./args/FindUniqueNativeTypeModelOrThrowArgs";
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
@@ -9,7 +9,7 @@ export class FindUniqueNativeTypeModelOrThrowResolver {
   @TypeGraphQL.Query(_returns => NativeTypeModel, {
     nullable: true
   })
-  async getNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueNativeTypeModelOrThrowArgs): Promise<NativeTypeModel | null> {
+  async getNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindUniqueNativeTypeModelOrThrowArgs) args: FindUniqueNativeTypeModelOrThrowArgs): Promise<NativeTypeModel | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).nativeTypeModel.findUniqueOrThrow({
       ...args,

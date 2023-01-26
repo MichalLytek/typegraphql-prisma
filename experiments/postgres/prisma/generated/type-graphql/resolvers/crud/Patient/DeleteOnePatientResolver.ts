@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { DeleteOnePatientArgs } from "./args/DeleteOnePatientArgs";
 import { Patient } from "../../../models/Patient";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
@@ -9,7 +9,7 @@ export class DeleteOnePatientResolver {
   @TypeGraphQL.Mutation(_returns => Patient, {
     nullable: true
   })
-  async deleteOnePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOnePatientArgs): Promise<Patient | null> {
+  async deleteOnePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteOnePatientArgs) args: DeleteOnePatientArgs): Promise<Patient | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).patient.delete({
       ...args,

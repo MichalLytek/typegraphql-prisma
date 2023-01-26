@@ -3,7 +3,7 @@ import { Comment } from "../../../models/Comment";
 import { Post } from "../../../models/Post";
 import { User } from "../../../models/User";
 import { PostCommentsArgs } from "./args/PostCommentsArgs";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Post)
 export class PostRelationsResolver {

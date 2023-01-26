@@ -1,4 +1,5 @@
 import { ClassType } from "type-graphql";
+import * as tslib from "tslib";
 import * as crudResolvers from "./resolvers/crud/resolvers-crud.index";
 import * as argsTypes from "./resolvers/crud/args.index";
 import * as actionResolvers from "./resolvers/crud/resolvers-actions.index";
@@ -13,70 +14,78 @@ const crudResolversMap = {
 };
 const actionResolversMap = {
   User: {
-    user: actionResolvers.FindUniqueUserResolver,
-    findFirstUser: actionResolvers.FindFirstUserResolver,
-    users: actionResolvers.FindManyUserResolver,
-    createUser: actionResolvers.CreateUserResolver,
-    deleteUser: actionResolvers.DeleteUserResolver,
-    updateUser: actionResolvers.UpdateUserResolver,
-    deleteManyUser: actionResolvers.DeleteManyUserResolver,
-    updateManyUser: actionResolvers.UpdateManyUserResolver,
-    upsertUser: actionResolvers.UpsertUserResolver,
     aggregateUser: actionResolvers.AggregateUserResolver,
-    groupByUser: actionResolvers.GroupByUserResolver
+    createOneUser: actionResolvers.CreateOneUserResolver,
+    deleteManyUser: actionResolvers.DeleteManyUserResolver,
+    deleteOneUser: actionResolvers.DeleteOneUserResolver,
+    findFirstUser: actionResolvers.FindFirstUserResolver,
+    findFirstUserOrThrow: actionResolvers.FindFirstUserOrThrowResolver,
+    users: actionResolvers.FindManyUserResolver,
+    user: actionResolvers.FindUniqueUserResolver,
+    getUser: actionResolvers.FindUniqueUserOrThrowResolver,
+    groupByUser: actionResolvers.GroupByUserResolver,
+    updateManyUser: actionResolvers.UpdateManyUserResolver,
+    updateOneUser: actionResolvers.UpdateOneUserResolver,
+    upsertOneUser: actionResolvers.UpsertOneUserResolver
   },
   Post: {
-    post: actionResolvers.FindUniquePostResolver,
-    findFirstPost: actionResolvers.FindFirstPostResolver,
-    posts: actionResolvers.FindManyPostResolver,
-    createPost: actionResolvers.CreatePostResolver,
-    deletePost: actionResolvers.DeletePostResolver,
-    updatePost: actionResolvers.UpdatePostResolver,
-    deleteManyPost: actionResolvers.DeleteManyPostResolver,
-    updateManyPost: actionResolvers.UpdateManyPostResolver,
-    upsertPost: actionResolvers.UpsertPostResolver,
     aggregatePost: actionResolvers.AggregatePostResolver,
-    groupByPost: actionResolvers.GroupByPostResolver
+    createOnePost: actionResolvers.CreateOnePostResolver,
+    deleteManyPost: actionResolvers.DeleteManyPostResolver,
+    deleteOnePost: actionResolvers.DeleteOnePostResolver,
+    findFirstPost: actionResolvers.FindFirstPostResolver,
+    findFirstPostOrThrow: actionResolvers.FindFirstPostOrThrowResolver,
+    posts: actionResolvers.FindManyPostResolver,
+    post: actionResolvers.FindUniquePostResolver,
+    getPost: actionResolvers.FindUniquePostOrThrowResolver,
+    groupByPost: actionResolvers.GroupByPostResolver,
+    updateManyPost: actionResolvers.UpdateManyPostResolver,
+    updateOnePost: actionResolvers.UpdateOnePostResolver,
+    upsertOnePost: actionResolvers.UpsertOnePostResolver
   }
 };
 const crudResolversInfo = {
-  User: ["user", "findFirstUser", "users", "createUser", "deleteUser", "updateUser", "deleteManyUser", "updateManyUser", "upsertUser", "aggregateUser", "groupByUser"],
-  Post: ["post", "findFirstPost", "posts", "createPost", "deletePost", "updatePost", "deleteManyPost", "updateManyPost", "upsertPost", "aggregatePost", "groupByPost"]
+  User: ["aggregateUser", "createOneUser", "deleteManyUser", "deleteOneUser", "findFirstUser", "findFirstUserOrThrow", "users", "user", "getUser", "groupByUser", "updateManyUser", "updateOneUser", "upsertOneUser"],
+  Post: ["aggregatePost", "createOnePost", "deleteManyPost", "deleteOnePost", "findFirstPost", "findFirstPostOrThrow", "posts", "post", "getPost", "groupByPost", "updateManyPost", "updateOnePost", "upsertOnePost"]
 };
 const argsInfo = {
-  FindUniqueUserArgs: ["where"],
-  FindFirstUserArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyUserArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreateUserArgs: ["data"],
-  DeleteUserArgs: ["where"],
-  UpdateUserArgs: ["data", "where"],
-  DeleteManyUserArgs: ["where"],
-  UpdateManyUserArgs: ["data", "where"],
-  UpsertUserArgs: ["where", "create", "update"],
   AggregateUserArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  CreateOneUserArgs: ["data"],
+  DeleteManyUserArgs: ["where"],
+  DeleteOneUserArgs: ["where"],
+  FindFirstUserArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindFirstUserOrThrowArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyUserArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindUniqueUserArgs: ["where"],
+  FindUniqueUserOrThrowArgs: ["where"],
   GroupByUserArgs: ["where", "orderBy", "by", "having", "take", "skip"],
-  FindUniquePostArgs: ["where"],
-  FindFirstPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  FindManyPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
-  CreatePostArgs: ["data"],
-  DeletePostArgs: ["where"],
-  UpdatePostArgs: ["data", "where"],
-  DeleteManyPostArgs: ["where"],
-  UpdateManyPostArgs: ["data", "where"],
-  UpsertPostArgs: ["where", "create", "update"],
+  UpdateManyUserArgs: ["data", "where"],
+  UpdateOneUserArgs: ["data", "where"],
+  UpsertOneUserArgs: ["where", "create", "update"],
   AggregatePostArgs: ["where", "orderBy", "cursor", "take", "skip"],
-  GroupByPostArgs: ["where", "orderBy", "by", "having", "take", "skip"]
+  CreateOnePostArgs: ["data"],
+  DeleteManyPostArgs: ["where"],
+  DeleteOnePostArgs: ["where"],
+  FindFirstPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindFirstPostOrThrowArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyPostArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindUniquePostArgs: ["where"],
+  FindUniquePostOrThrowArgs: ["where"],
+  GroupByPostArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  UpdateManyPostArgs: ["data", "where"],
+  UpdateOnePostArgs: ["data", "where"],
+  UpsertOnePostArgs: ["where", "create", "update"]
 };
 
 type ResolverModelNames = keyof typeof crudResolversMap;
 
 type ModelResolverActionNames<
   TModel extends ResolverModelNames
-  > = keyof typeof crudResolversMap[TModel]["prototype"];
+> = keyof typeof crudResolversMap[TModel]["prototype"];
 
 export type ResolverActionsConfig<
   TModel extends ResolverModelNames
-  > = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
+> = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
 
 export type ResolversEnhanceMap = {
   [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
@@ -97,18 +106,8 @@ export function applyResolversEnhanceMap(
         const actionTarget = (actionResolversConfig[
           resolverActionName as keyof typeof actionResolversConfig
         ] as Function).prototype;
-        for (const allActionsDecorator of allActionsDecorators) {
-          allActionsDecorator(
-            crudTarget,
-            resolverActionName,
-            Object.getOwnPropertyDescriptor(crudTarget, resolverActionName)!,
-          );
-          allActionsDecorator(
-            actionTarget,
-            resolverActionName,
-            Object.getOwnPropertyDescriptor(actionTarget, resolverActionName)!,
-          );
-        }
+        tslib.__decorate(allActionsDecorators, crudTarget, resolverActionName, null);
+        tslib.__decorate(allActionsDecorators, actionTarget, resolverActionName, null);
       }
     }
     const resolverActionsToApply = Object.keys(resolverActionsConfig).filter(
@@ -121,18 +120,8 @@ export function applyResolversEnhanceMap(
       const actionTarget = (actionResolversConfig[
         resolverActionName as keyof typeof actionResolversConfig
       ] as Function).prototype;
-      for (const decorator of decorators) {
-        decorator(
-          crudTarget,
-          resolverActionName,
-          Object.getOwnPropertyDescriptor(crudTarget, resolverActionName)!,
-        );
-        decorator(
-          actionTarget,
-          resolverActionName,
-          Object.getOwnPropertyDescriptor(actionTarget, resolverActionName)!,
-        );
-      }
+      tslib.__decorate(decorators, crudTarget, resolverActionName, null);
+      tslib.__decorate(decorators, actionTarget, resolverActionName, null);
     }
   }
 }
@@ -146,7 +135,7 @@ type ArgFieldNames<TArgsType extends ArgsTypesNames> = Exclude<
 
 type ArgFieldsConfig<
   TArgsType extends ArgsTypesNames
-  > = FieldsConfig<ArgFieldNames<TArgsType>>;
+> = FieldsConfig<ArgFieldNames<TArgsType>>;
 
 export type ArgConfig<TArgsType extends ArgsTypesNames> = {
   class?: ClassDecorator[];
@@ -187,7 +176,7 @@ type RelationResolverModelNames = keyof typeof relationResolversMap;
 
 type RelationResolverActionNames<
   TModel extends RelationResolverModelNames
-  > = keyof typeof relationResolversMap[TModel]["prototype"];
+> = keyof typeof relationResolversMap[TModel]["prototype"];
 
 export type RelationResolverActionsConfig<TModel extends RelationResolverModelNames>
   = Partial<Record<RelationResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
@@ -207,13 +196,7 @@ export function applyRelationResolversEnhanceMap(
       const allActionsDecorators = relationResolverActionsConfig._all;
       const relationResolverActionNames = relationResolversInfo[modelName as keyof typeof relationResolversInfo];
       for (const relationResolverActionName of relationResolverActionNames) {
-        for (const allActionsDecorator of allActionsDecorators) {
-          allActionsDecorator(
-            relationResolverTarget,
-            relationResolverActionName,
-            Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
-          );
-        }
+        tslib.__decorate(allActionsDecorators, relationResolverTarget, relationResolverActionName, null);
       }
     }
     const relationResolverActionsToApply = Object.keys(relationResolverActionsConfig).filter(
@@ -223,13 +206,7 @@ export function applyRelationResolversEnhanceMap(
       const decorators = relationResolverActionsConfig[
         relationResolverActionName as keyof typeof relationResolverActionsConfig
       ] as MethodDecorator[];
-      for (const decorator of decorators) {
-        decorator(
-          relationResolverTarget,
-          relationResolverActionName,
-          Object.getOwnPropertyDescriptor(relationResolverTarget, relationResolverActionName)!,
-        );
-      }
+      tslib.__decorate(decorators, relationResolverTarget, relationResolverActionName, null);
     }
   }
 }
@@ -253,17 +230,13 @@ function applyTypeClassEnhanceConfig<
   typeFieldNames: string[]
 ) {
   if (enhanceConfig.class) {
-    for (const decorator of enhanceConfig.class) {
-      decorator(typeClass);
-    }
+    tslib.__decorate(enhanceConfig.class, typeClass);
   }
   if (enhanceConfig.fields) {
     if (enhanceConfig.fields._all) {
       const allFieldsDecorators = enhanceConfig.fields._all;
       for (const typeFieldName of typeFieldNames) {
-        for (const allFieldsDecorator of allFieldsDecorators) {
-          allFieldsDecorator(typePrototype, typeFieldName);
-        }
+        tslib.__decorate(allFieldsDecorators, typePrototype, typeFieldName, void 0);
       }
     }
     const configFieldsToApply = Object.keys(enhanceConfig.fields).filter(
@@ -271,9 +244,7 @@ function applyTypeClassEnhanceConfig<
     );
     for (const typeFieldName of configFieldsToApply) {
       const fieldDecorators = enhanceConfig.fields[typeFieldName]!;
-      for (const fieldDecorator of fieldDecorators) {
-        fieldDecorator(typePrototype, typeFieldName);
-      }
+      tslib.__decorate(fieldDecorators, typePrototype, typeFieldName, void 0);
     }
   }
 }
@@ -342,7 +313,7 @@ type OutputTypeFieldNames<TOutput extends OutputTypesNames> = Exclude<
 
 type OutputTypeFieldsConfig<
   TOutput extends OutputTypesNames
-  > = FieldsConfig<OutputTypeFieldNames<TOutput>>;
+> = FieldsConfig<OutputTypeFieldNames<TOutput>>;
 
 export type OutputTypeConfig<TOutput extends OutputTypesNames> = {
   class?: ClassDecorator[];
@@ -407,11 +378,11 @@ const inputsInfo = {
   PostCreateNestedManyWithoutAuthorInput: ["create", "connectOrCreate", "connect"],
   StringFieldUpdateOperationsInput: ["set"],
   NullableStringFieldUpdateOperationsInput: ["set"],
-  PostUpdateManyWithoutAuthorInput: ["create", "connectOrCreate", "upsert", "connect", "set", "disconnect", "delete", "update", "updateMany", "deleteMany"],
+  PostUpdateManyWithoutAuthorNestedInput: ["create", "connectOrCreate", "upsert", "set", "disconnect", "delete", "connect", "update", "updateMany", "deleteMany"],
   UserCreateNestedOneWithoutPostsInput: ["create", "connectOrCreate", "connect"],
   DateTimeFieldUpdateOperationsInput: ["set"],
   BoolFieldUpdateOperationsInput: ["set"],
-  UserUpdateOneWithoutPostsInput: ["create", "connectOrCreate", "upsert", "connect", "disconnect", "delete", "update"],
+  UserUpdateOneWithoutPostsNestedInput: ["create", "connectOrCreate", "upsert", "disconnect", "delete", "connect", "update"],
   NestedStringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
   NestedStringNullableFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
   NestedStringWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not", "_count", "_min", "_max"],
@@ -444,7 +415,7 @@ type InputTypeFieldNames<TInput extends InputTypesNames> = Exclude<
 
 type InputTypeFieldsConfig<
   TInput extends InputTypesNames
-  > = FieldsConfig<InputTypeFieldNames<TInput>>;
+> = FieldsConfig<InputTypeFieldNames<TInput>>;
 
 export type InputTypeConfig<TInput extends InputTypesNames> = {
   class?: ClassDecorator[];

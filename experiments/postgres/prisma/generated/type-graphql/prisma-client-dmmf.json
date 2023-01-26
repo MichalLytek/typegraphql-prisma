@@ -47435,7 +47435,21 @@
             },
             {
               "name": "editor",
-              "args": [],
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "UserWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
               "isNullable": true,
               "outputType": {
                 "type": "User",
@@ -47842,7 +47856,21 @@
             },
             {
               "name": "creator",
-              "args": [],
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CreatorWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
               "isNullable": true,
               "outputType": {
                 "type": "Creator",

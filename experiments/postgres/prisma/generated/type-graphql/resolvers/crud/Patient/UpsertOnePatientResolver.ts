@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { UpsertOnePatientArgs } from "./args/UpsertOnePatientArgs";
 import { Patient } from "../../../models/Patient";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
@@ -9,7 +9,7 @@ export class UpsertOnePatientResolver {
   @TypeGraphQL.Mutation(_returns => Patient, {
     nullable: false
   })
-  async upsertOnePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOnePatientArgs): Promise<Patient> {
+  async upsertOnePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpsertOnePatientArgs) args: UpsertOnePatientArgs): Promise<Patient> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).patient.upsert({
       ...args,

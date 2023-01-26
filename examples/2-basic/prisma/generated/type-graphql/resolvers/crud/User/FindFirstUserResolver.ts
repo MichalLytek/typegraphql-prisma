@@ -1,9 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
-import graphqlFields from "graphql-fields";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { FindFirstUserArgs } from "./args/FindFirstUserArgs";
 import { User } from "../../../models/User";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindFirstUserResolver {
@@ -11,9 +10,7 @@ export class FindFirstUserResolver {
     nullable: true
   })
   async findFirstUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstUserArgs): Promise<User | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),

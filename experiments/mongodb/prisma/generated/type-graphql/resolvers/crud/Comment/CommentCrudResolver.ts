@@ -1,6 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import graphqlFields from "graphql-fields";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { AggregateCommentArgs } from "./args/AggregateCommentArgs";
 import { CreateManyCommentArgs } from "./args/CreateManyCommentArgs";
 import { CreateOneCommentArgs } from "./args/CreateOneCommentArgs";
@@ -15,7 +14,7 @@ import { GroupByCommentArgs } from "./args/GroupByCommentArgs";
 import { UpdateManyCommentArgs } from "./args/UpdateManyCommentArgs";
 import { UpdateOneCommentArgs } from "./args/UpdateOneCommentArgs";
 import { UpsertOneCommentArgs } from "./args/UpsertOneCommentArgs";
-import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 import { Comment } from "../../../models/Comment";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateComment } from "../../outputs/AggregateComment";
@@ -29,7 +28,7 @@ export class CommentCrudResolver {
   async aggregateComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateCommentArgs): Promise<AggregateComment> {
     return getPrismaFromContext(ctx).comment.aggregate({
       ...args,
-      ...transformFields(graphqlFields(info as any)),
+      ...transformInfoIntoPrismaArgs(info),
     });
   }
 
@@ -37,9 +36,7 @@ export class CommentCrudResolver {
     nullable: false
   })
   async createManyComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyCommentArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.createMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -50,9 +47,7 @@ export class CommentCrudResolver {
     nullable: false
   })
   async createOneComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneCommentArgs): Promise<Comment> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.create({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -63,9 +58,7 @@ export class CommentCrudResolver {
     nullable: false
   })
   async deleteManyComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyCommentArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.deleteMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -76,9 +69,7 @@ export class CommentCrudResolver {
     nullable: true
   })
   async deleteOneComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneCommentArgs): Promise<Comment | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.delete({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -89,9 +80,7 @@ export class CommentCrudResolver {
     nullable: true
   })
   async findFirstComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstCommentArgs): Promise<Comment | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.findFirst({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -102,9 +91,7 @@ export class CommentCrudResolver {
     nullable: true
   })
   async findFirstCommentOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstCommentOrThrowArgs): Promise<Comment | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -115,9 +102,7 @@ export class CommentCrudResolver {
     nullable: false
   })
   async comments(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyCommentArgs): Promise<Comment[]> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.findMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -128,9 +113,7 @@ export class CommentCrudResolver {
     nullable: true
   })
   async comment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueCommentArgs): Promise<Comment | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.findUnique({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -141,9 +124,7 @@ export class CommentCrudResolver {
     nullable: true
   })
   async getComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueCommentOrThrowArgs): Promise<Comment | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.findUniqueOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -154,9 +135,7 @@ export class CommentCrudResolver {
     nullable: false
   })
   async groupByComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByCommentArgs): Promise<CommentGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.groupBy({
       ...args,
       ...Object.fromEntries(
@@ -169,9 +148,7 @@ export class CommentCrudResolver {
     nullable: false
   })
   async updateManyComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyCommentArgs): Promise<AffectedRowsOutput> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.updateMany({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -182,9 +159,7 @@ export class CommentCrudResolver {
     nullable: true
   })
   async updateOneComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneCommentArgs): Promise<Comment | null> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.update({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
@@ -195,9 +170,7 @@ export class CommentCrudResolver {
     nullable: false
   })
   async upsertOneComment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneCommentArgs): Promise<Comment> {
-    const { _count } = transformFields(
-      graphqlFields(info as any)
-    );
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).comment.upsert({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),

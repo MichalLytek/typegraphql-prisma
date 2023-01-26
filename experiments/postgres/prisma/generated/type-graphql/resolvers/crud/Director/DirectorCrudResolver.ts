@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { AggregateDirectorArgs } from "./args/AggregateDirectorArgs";
 import { CreateManyDirectorArgs } from "./args/CreateManyDirectorArgs";
 import { CreateOneDirectorArgs } from "./args/CreateOneDirectorArgs";
@@ -25,7 +25,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Query(_returns => AggregateDirector, {
     nullable: false
   })
-  async aggregateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateDirectorArgs): Promise<AggregateDirector> {
+  async aggregateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => AggregateDirectorArgs) args: AggregateDirectorArgs): Promise<AggregateDirector> {
     return getPrismaFromContext(ctx).director.aggregate({
       ...args,
       ...transformInfoIntoPrismaArgs(info),
@@ -35,7 +35,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async createManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyDirectorArgs): Promise<AffectedRowsOutput> {
+  async createManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => CreateManyDirectorArgs) args: CreateManyDirectorArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.createMany({
       ...args,
@@ -46,7 +46,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Mutation(_returns => Director, {
     nullable: false
   })
-  async createOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateOneDirectorArgs): Promise<Director> {
+  async createOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => CreateOneDirectorArgs) args: CreateOneDirectorArgs): Promise<Director> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.create({
       ...args,
@@ -57,7 +57,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async deleteManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteManyDirectorArgs): Promise<AffectedRowsOutput> {
+  async deleteManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteManyDirectorArgs) args: DeleteManyDirectorArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.deleteMany({
       ...args,
@@ -68,7 +68,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Mutation(_returns => Director, {
     nullable: true
   })
-  async deleteOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: DeleteOneDirectorArgs): Promise<Director | null> {
+  async deleteOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteOneDirectorArgs) args: DeleteOneDirectorArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.delete({
       ...args,
@@ -79,7 +79,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Query(_returns => Director, {
     nullable: true
   })
-  async findFirstDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstDirectorArgs): Promise<Director | null> {
+  async findFirstDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindFirstDirectorArgs) args: FindFirstDirectorArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.findFirst({
       ...args,
@@ -90,7 +90,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Query(_returns => Director, {
     nullable: true
   })
-  async findFirstDirectorOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstDirectorOrThrowArgs): Promise<Director | null> {
+  async findFirstDirectorOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindFirstDirectorOrThrowArgs) args: FindFirstDirectorOrThrowArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.findFirstOrThrow({
       ...args,
@@ -101,7 +101,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Query(_returns => [Director], {
     nullable: false
   })
-  async directors(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindManyDirectorArgs): Promise<Director[]> {
+  async directors(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyDirectorArgs) args: FindManyDirectorArgs): Promise<Director[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.findMany({
       ...args,
@@ -112,7 +112,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Query(_returns => Director, {
     nullable: true
   })
-  async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueDirectorArgs): Promise<Director | null> {
+  async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindUniqueDirectorArgs) args: FindUniqueDirectorArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.findUnique({
       ...args,
@@ -123,7 +123,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Query(_returns => Director, {
     nullable: true
   })
-  async getDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindUniqueDirectorOrThrowArgs): Promise<Director | null> {
+  async getDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindUniqueDirectorOrThrowArgs) args: FindUniqueDirectorOrThrowArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.findUniqueOrThrow({
       ...args,
@@ -134,7 +134,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Query(_returns => [DirectorGroupBy], {
     nullable: false
   })
-  async groupByDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByDirectorArgs): Promise<DirectorGroupBy[]> {
+  async groupByDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => GroupByDirectorArgs) args: GroupByDirectorArgs): Promise<DirectorGroupBy[]> {
     const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.groupBy({
       ...args,
@@ -147,7 +147,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Mutation(_returns => AffectedRowsOutput, {
     nullable: false
   })
-  async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<AffectedRowsOutput> {
+  async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpdateManyDirectorArgs) args: UpdateManyDirectorArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.updateMany({
       ...args,
@@ -158,7 +158,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Mutation(_returns => Director, {
     nullable: true
   })
-  async updateOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateOneDirectorArgs): Promise<Director | null> {
+  async updateOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpdateOneDirectorArgs) args: UpdateOneDirectorArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.update({
       ...args,
@@ -169,7 +169,7 @@ export class DirectorCrudResolver {
   @TypeGraphQL.Mutation(_returns => Director, {
     nullable: false
   })
-  async upsertOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpsertOneDirectorArgs): Promise<Director> {
+  async upsertOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpsertOneDirectorArgs) args: UpsertOneDirectorArgs): Promise<Director> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.upsert({
       ...args,

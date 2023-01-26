@@ -1,10 +1,11 @@
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
-import { ApolloServer } from "apollo-server";
 import path from "path";
 
 import { resolvers } from "./prisma/generated/type-graphql";
 import * as Prisma from "./prisma/generated/client";
+import { createYoga } from "graphql-yoga";
+import { createServer } from "http";
 
 interface Context {
   prisma: Prisma.PrismaClient;
@@ -21,12 +22,17 @@ async function main() {
 
   await prisma.$connect();
 
-  const server = new ApolloServer({
+  const yoga = createYoga<{}, Context>({
     schema,
-    context: (): Context => ({ prisma }),
+    context: () => ({ prisma }),
+    graphiql: true,
   });
-  const { port } = await server.listen(4000);
-  console.log(`GraphQL is listening on ${port}!`);
+
+  const server = createServer(yoga);
+
+  server.listen(4000, () => {
+    console.info("GraphQL Server is running on http://localhost:4000/graphql");
+  });
 }
 
 main().catch(console.error);

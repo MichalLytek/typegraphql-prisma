@@ -12,7 +12,6 @@ import {
   Extensions,
   UseMiddleware,
 } from "type-graphql";
-import { ApolloServer } from "apollo-server";
 import path from "path";
 import {
   IsDefined,
@@ -62,6 +61,8 @@ import {
 import * as Prisma from "./prisma/generated/client";
 import { ProblemCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Problem/ProblemCrudResolver";
 import { CreatorCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Creator/CreatorCrudResolver";
+import { createYoga } from "graphql-yoga";
+import { createServer } from "node:http";
 
 const problemTypeFieldsConfig: ModelConfig<"Problem"> = {
   fields: {
@@ -260,7 +261,7 @@ async function main() {
       GroupByPostResolver,
       NativeTypeModelCrudResolver,
     ],
-    validate: true,
+    validate: { forbidUnknownValues: false },
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
     authChecker: ({ info }) => {
       console.log(
@@ -277,12 +278,17 @@ async function main() {
 
   await prisma.$connect();
 
-  const server = new ApolloServer({
+  const yoga = createYoga({
     schema,
     context: (): Context => ({ prismaClient: prisma }),
+    graphiql: true,
   });
-  const { port } = await server.listen(4000);
-  console.log(`GraphQL is listening on ${port}!`);
+
+  const server = createServer(yoga);
+
+  server.listen(4000, () => {
+    console.info("GraphQL Server is running on http://localhost:4000/graphql");
+  });
 }
 
 main().catch(console.error);

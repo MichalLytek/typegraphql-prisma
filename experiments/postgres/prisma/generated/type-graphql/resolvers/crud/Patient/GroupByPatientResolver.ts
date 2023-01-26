@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByPatientArgs } from "./args/GroupByPatientArgs";
 import { Patient } from "../../../models/Patient";
 import { PatientGroupBy } from "../../outputs/PatientGroupBy";
@@ -10,7 +10,7 @@ export class GroupByPatientResolver {
   @TypeGraphQL.Query(_returns => [PatientGroupBy], {
     nullable: false
   })
-  async groupByPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByPatientArgs): Promise<PatientGroupBy[]> {
+  async groupByPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => GroupByPatientArgs) args: GroupByPatientArgs): Promise<PatientGroupBy[]> {
     const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).patient.groupBy({
       ...args,

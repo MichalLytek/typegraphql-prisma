@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { AggregatePostArgs } from "./args/AggregatePostArgs";
 import { Post } from "../../../models/Post";
 import { AggregatePost } from "../../outputs/AggregatePost";
@@ -10,7 +10,7 @@ export class AggregatePostResolver {
   @TypeGraphQL.Query(_returns => AggregatePost, {
     nullable: false
   })
-  async aggregatePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregatePostArgs): Promise<AggregatePost> {
+  async aggregatePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => AggregatePostArgs) args: AggregatePostArgs): Promise<AggregatePost> {
     return getPrismaFromContext(ctx).post.aggregate({
       ...args,
       ...transformInfoIntoPrismaArgs(info),

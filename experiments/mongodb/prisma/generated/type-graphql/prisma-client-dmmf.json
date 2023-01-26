@@ -8,6 +8,7 @@
         "fields": [
           {
             "name": "id",
+            "dbName": "_id",
             "kind": "scalar",
             "isList": false,
             "isRequired": true,
@@ -123,6 +124,7 @@
         "fields": [
           {
             "name": "id",
+            "dbName": "_id",
             "kind": "scalar",
             "isList": false,
             "isRequired": true,
@@ -196,6 +198,7 @@
         "fields": [
           {
             "name": "id",
+            "dbName": "_id",
             "kind": "scalar",
             "isList": false,
             "isRequired": true,

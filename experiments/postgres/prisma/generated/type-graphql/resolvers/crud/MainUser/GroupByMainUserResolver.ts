@@ -1,5 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
-import { GraphQLResolveInfo } from "graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { GroupByMainUserArgs } from "./args/GroupByMainUserArgs";
 import { MainUser } from "../../../models/MainUser";
 import { MainUserGroupBy } from "../../outputs/MainUserGroupBy";
@@ -10,7 +10,7 @@ export class GroupByMainUserResolver {
   @TypeGraphQL.Query(_returns => [MainUserGroupBy], {
     nullable: false
   })
-  async groupByMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: GroupByMainUserArgs): Promise<MainUserGroupBy[]> {
+  async groupByMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => GroupByMainUserArgs) args: GroupByMainUserArgs): Promise<MainUserGroupBy[]> {
     const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
       ...args,
