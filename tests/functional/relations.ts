@@ -185,6 +185,57 @@ describe("relations resolvers execution", () => {
       );
     });
 
+    it("should properly call PrismaClient on fetching count on relations", async () => {
+      const document = /* graphql */ `
+        query {
+          posts {
+            uuid
+            color
+            author {
+              id
+              name
+              _count {
+                posts
+              }
+            }
+          }
+        }
+      `;
+      const findUniquePostMock = jest.fn();
+      const authorRelationMock = jest.fn();
+      const prismaMock = {
+        post: {
+          findUnique: findUniquePostMock,
+        },
+      };
+      findUniquePostMock.mockReturnValue({
+        author: authorRelationMock.mockResolvedValue({
+          id: 123,
+          name: "Test",
+          _count: {
+            posts: 3,
+          },
+        }),
+      });
+
+      const { data, errors } = await graphql({
+        schema: graphQLSchema,
+        source: document,
+        contextValue: { prisma: prismaMock },
+      });
+
+      expect(errors).toBeUndefined();
+      expect(data).toMatchSnapshot(
+        "posts with users with posts count - mocked response",
+      );
+      expect(prismaMock.post.findUnique.mock.calls).toMatchSnapshot(
+        "findUniquePost relations call args",
+      );
+      expect(authorRelationMock.mock.calls).toMatchSnapshot(
+        "post.author relation call args",
+      );
+    });
+
     it("should properly call PrismaClient on fetching single relation", async () => {
       const document = /* graphql */ `
         query {

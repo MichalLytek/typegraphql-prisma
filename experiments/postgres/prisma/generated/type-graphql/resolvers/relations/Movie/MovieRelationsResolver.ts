@@ -1,4 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { Director } from "../../../models/Director";
 import { Movie } from "../../../models/Movie";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
@@ -8,7 +9,8 @@ export class MovieRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => Director, {
     nullable: false
   })
-  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
+  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo): Promise<Director> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).movie.findUnique({
       where: {
         movieCompoundId: {
@@ -17,6 +19,8 @@ export class MovieRelationsResolver {
           title: movie.title,
         },
       },
-    }).director({});
+    }).director({
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
   }
 }

@@ -387,3 +387,17 @@ query UsersWithAdvertKindPostsCount {
     }
   }
 }
+
+query GetPostsWithAuthorAndPostsCount {
+  posts {
+    uuid
+    content
+    author {
+      id
+      email
+      _count {
+        posts
+      }
+    }
+  }
+}

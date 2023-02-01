@@ -1,4 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
+import type { GraphQLResolveInfo } from "graphql";
 import { MainUser } from "../../../models/MainUser";
 import { Post } from "../../../models/Post";
 import { MainUserPostsArgs } from "./args/MainUserPostsArgs";
@@ -9,11 +10,15 @@ export class MainUserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Post], {
     nullable: false
   })
-  async clientPosts(@TypeGraphQL.Root() mainUser: MainUser, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args(_returns => MainUserPostsArgs) args: MainUserPostsArgs): Promise<Post[]> {
+  async clientPosts(@TypeGraphQL.Root() mainUser: MainUser, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => MainUserPostsArgs) args: MainUserPostsArgs): Promise<Post[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
       where: {
         id: mainUser.id,
       },
-    }).posts(args);
+    }).posts({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
   }
 }

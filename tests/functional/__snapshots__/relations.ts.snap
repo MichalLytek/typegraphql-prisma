@@ -109,7 +109,7 @@ Array [
 exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations with args: posts() relations call args 1`] = `
 Array [
   Array [
-    UserPostsArgs {
+    Object {
       "skip": 1,
       "take": 1,
       "where": PostWhereInput {
@@ -184,6 +184,81 @@ Object {
           "uuid": "72c8a188-3d46-45b3-b23f-7d420aa282f1",
         },
       ],
+    },
+  ],
+}
+`;
+
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching count on relations: findUniquePost relations call args 1`] = `
+Array [
+  Array [
+    Object {
+      "where": Object {
+        "uuid": "b0c0d78e-4dff-4cdd-ba23-9b417dc684e2",
+      },
+    },
+  ],
+  Array [
+    Object {
+      "where": Object {
+        "uuid": "72c8a188-3d46-45b3-b23f-7d420aa282f1",
+      },
+    },
+  ],
+]
+`;
+
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching count on relations: post.author relation call args 1`] = `
+Array [
+  Array [
+    Object {
+      "include": Object {
+        "_count": Object {
+          "select": Object {
+            "posts": true,
+          },
+        },
+      },
+    },
+  ],
+  Array [
+    Object {
+      "include": Object {
+        "_count": Object {
+          "select": Object {
+            "posts": true,
+          },
+        },
+      },
+    },
+  ],
+]
+`;
+
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching count on relations: posts with users with posts count - mocked response 1`] = `
+Object {
+  "posts": Array [
+    Object {
+      "author": Object {
+        "_count": Object {
+          "posts": 3,
+        },
+        "id": 123,
+        "name": "Test",
+      },
+      "color": "RED",
+      "uuid": "b0c0d78e-4dff-4cdd-ba23-9b417dc684e2",
+    },
+    Object {
+      "author": Object {
+        "_count": Object {
+          "posts": 3,
+        },
+        "id": 123,
+        "name": "Test",
+      },
+      "color": "BLUE",
+      "uuid": "72c8a188-3d46-45b3-b23f-7d420aa282f1",
     },
   ],
 }
