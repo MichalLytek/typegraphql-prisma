@@ -1,7 +1,6 @@
 ---
 title: Adding fields to model type
 sidebar_label: Adding model fields
-sidebar_position: 4
 ---
 
 If you want to add a field to the generated type like `User`, you have to create a proper `@FieldResolver` for that:

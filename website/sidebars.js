@@ -75,6 +75,7 @@ const sidebars = {
         "advanced/custom-prisma-import",
         "advanced/custom-prisma-context-key",
         "advanced/emit-redundant-types-info",
+        "advanced/overriding-object-decorator",
       ],
     },
   ],

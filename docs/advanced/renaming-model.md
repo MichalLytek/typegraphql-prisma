@@ -1,7 +1,6 @@
 ---
 title: Changing exposed model type name
 sidebar_label: Renaming model
-sidebar_position: 6
 ---
 
 You can also change the name of the model types exposed in GraphQL Schema.

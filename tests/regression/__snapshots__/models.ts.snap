@@ -57,6 +57,56 @@ export class UserAddress {
 "
 `;
 
+exports[`models should properly generate object type class for omitted prisma model: User 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
+
+export class User {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intIdField!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  stringField!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  optionalStringField?: string | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  booleanField!: boolean;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false
+  })
+  dateField!: Date;
+
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
+    nullable: false
+  })
+  jsonField!: Prisma.JsonValue;
+}
+"
+`;
+
 exports[`models should properly generate object type class for prisma model when simpleResolvers option is enabled: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

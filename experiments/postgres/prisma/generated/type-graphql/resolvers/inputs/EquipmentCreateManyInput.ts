@@ -11,4 +11,9 @@ export class EquipmentCreateManyInput {
     nullable: true
   })
   id?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  name?: string | undefined;
 }

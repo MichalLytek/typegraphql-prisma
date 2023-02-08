@@ -1,7 +1,6 @@
 ---
 title: Exposing selected models Prisma CRUD actions
 sidebar_label: Exposing selected models
-sidebar_position: 1
 ---
 
 If you want to expose only CRUD Prisma actions for selected models, you can import crud resolver classes only for that models, instead of the all-in-one `resolvers` object.

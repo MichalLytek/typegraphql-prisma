@@ -20,7 +20,7 @@ export class GroupByEquipmentArgs {
   @TypeGraphQL.Field(_type => [EquipmentScalarFieldEnum], {
     nullable: false
   })
-  by!: "id"[];
+  by!: Array<"id" | "name">;
 
   @TypeGraphQL.Field(_type => EquipmentScalarWhereWithAggregatesInput, {
     nullable: true

@@ -132,11 +132,23 @@ exports.Prisma.DirectorScalarFieldEnum = makeEnum({
 });
 
 exports.Prisma.EquipmentOrderByRelevanceFieldEnum = makeEnum({
-  id: 'id'
+  id: 'id',
+  name: 'name'
 });
 
 exports.Prisma.EquipmentScalarFieldEnum = makeEnum({
-  id: 'id'
+  id: 'id',
+  name: 'name'
+});
+
+exports.Prisma.HiddenOrderByRelevanceFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
+});
+
+exports.Prisma.HiddenScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
 });
 
 exports.Prisma.JsonNullValueFilter = makeEnum({
@@ -270,7 +282,8 @@ exports.Prisma.ModelName = makeEnum({
   Problem: 'Problem',
   Creator: 'Creator',
   NativeTypeModel: 'NativeTypeModel',
-  Equipment: 'Equipment'
+  Equipment: 'Equipment',
+  Hidden: 'Hidden'
 });
 
 /**

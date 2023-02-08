@@ -18,7 +18,8 @@ const crudResolversMap = {
   Problem: crudResolvers.ProblemCrudResolver,
   Creator: crudResolvers.CreatorCrudResolver,
   NativeTypeModel: crudResolvers.NativeTypeModelCrudResolver,
-  Equipment: crudResolvers.EquipmentCrudResolver
+  Equipment: crudResolvers.EquipmentCrudResolver,
+  Hidden: crudResolvers.HiddenCrudResolver
 };
 const actionResolversMap = {
   MainUser: {
@@ -180,6 +181,22 @@ const actionResolversMap = {
     updateManyEquipment: actionResolvers.UpdateManyEquipmentResolver,
     updateOneEquipment: actionResolvers.UpdateOneEquipmentResolver,
     upsertOneEquipment: actionResolvers.UpsertOneEquipmentResolver
+  },
+  Hidden: {
+    aggregateHidden: actionResolvers.AggregateHiddenResolver,
+    createManyHidden: actionResolvers.CreateManyHiddenResolver,
+    createOneHidden: actionResolvers.CreateOneHiddenResolver,
+    deleteManyHidden: actionResolvers.DeleteManyHiddenResolver,
+    deleteOneHidden: actionResolvers.DeleteOneHiddenResolver,
+    findFirstHidden: actionResolvers.FindFirstHiddenResolver,
+    findFirstHiddenOrThrow: actionResolvers.FindFirstHiddenOrThrowResolver,
+    hiddens: actionResolvers.FindManyHiddenResolver,
+    hidden: actionResolvers.FindUniqueHiddenResolver,
+    getHidden: actionResolvers.FindUniqueHiddenOrThrowResolver,
+    groupByHidden: actionResolvers.GroupByHiddenResolver,
+    updateManyHidden: actionResolvers.UpdateManyHiddenResolver,
+    updateOneHidden: actionResolvers.UpdateOneHiddenResolver,
+    upsertOneHidden: actionResolvers.UpsertOneHiddenResolver
   }
 };
 const crudResolversInfo = {
@@ -192,7 +209,8 @@ const crudResolversInfo = {
   Problem: ["aggregateProblem", "createManyProblem", "createOneProblem", "deleteManyProblem", "deleteOneProblem", "findFirstProblem", "findFirstProblemOrThrow", "problems", "problem", "getProblem", "groupByProblem", "updateManyProblem", "updateOneProblem", "upsertOneProblem"],
   Creator: ["aggregateCreator", "createManyCreator", "createOneCreator", "deleteManyCreator", "deleteOneCreator", "findFirstCreator", "findFirstCreatorOrThrow", "creators", "creator", "getCreator", "groupByCreator", "updateManyCreator", "updateOneCreator", "upsertOneCreator"],
   NativeTypeModel: ["aggregateNativeTypeModel", "createManyNativeTypeModel", "createOneNativeTypeModel", "deleteManyNativeTypeModel", "deleteOneNativeTypeModel", "findFirstNativeTypeModel", "findFirstNativeTypeModelOrThrow", "nativeTypeModels", "nativeTypeModel", "getNativeTypeModel", "groupByNativeTypeModel", "updateManyNativeTypeModel", "updateOneNativeTypeModel", "upsertOneNativeTypeModel"],
-  Equipment: ["aggregateEquipment", "createManyEquipment", "createOneEquipment", "deleteManyEquipment", "deleteOneEquipment", "findFirstEquipment", "findFirstEquipmentOrThrow", "equipments", "equipment", "getEquipment", "groupByEquipment", "updateManyEquipment", "updateOneEquipment", "upsertOneEquipment"]
+  Equipment: ["aggregateEquipment", "createManyEquipment", "createOneEquipment", "deleteManyEquipment", "deleteOneEquipment", "findFirstEquipment", "findFirstEquipmentOrThrow", "equipments", "equipment", "getEquipment", "groupByEquipment", "updateManyEquipment", "updateOneEquipment", "upsertOneEquipment"],
+  Hidden: ["aggregateHidden", "createManyHidden", "createOneHidden", "deleteManyHidden", "deleteOneHidden", "findFirstHidden", "findFirstHiddenOrThrow", "hiddens", "hidden", "getHidden", "groupByHidden", "updateManyHidden", "updateOneHidden", "upsertOneHidden"]
 };
 const argsInfo = {
   AggregateMainUserArgs: ["where", "orderBy", "cursor", "take", "skip"],
@@ -334,7 +352,21 @@ const argsInfo = {
   GroupByEquipmentArgs: ["where", "orderBy", "by", "having", "take", "skip"],
   UpdateManyEquipmentArgs: ["data", "where"],
   UpdateOneEquipmentArgs: ["data", "where"],
-  UpsertOneEquipmentArgs: ["where", "create", "update"]
+  UpsertOneEquipmentArgs: ["where", "create", "update"],
+  AggregateHiddenArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  CreateManyHiddenArgs: ["data", "skipDuplicates"],
+  CreateOneHiddenArgs: ["data"],
+  DeleteManyHiddenArgs: ["where"],
+  DeleteOneHiddenArgs: ["where"],
+  FindFirstHiddenArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindFirstHiddenOrThrowArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindManyHiddenArgs: ["where", "orderBy", "cursor", "take", "skip", "distinct"],
+  FindUniqueHiddenArgs: ["where"],
+  FindUniqueHiddenOrThrowArgs: ["where"],
+  GroupByHiddenArgs: ["where", "orderBy", "by", "having", "take", "skip"],
+  UpdateManyHiddenArgs: ["data", "where"],
+  UpdateOneHiddenArgs: ["data", "where"],
+  UpsertOneHiddenArgs: ["where", "create", "update"]
 };
 
 type ResolverModelNames = keyof typeof crudResolversMap;
@@ -527,7 +559,8 @@ const modelsInfo = {
   Problem: ["id", "problemText", "creatorId"],
   Creator: ["id", "name"],
   NativeTypeModel: ["id", "bigInt", "byteA", "decimal"],
-  Equipment: ["id"]
+  Equipment: ["id", "name"],
+  Hidden: ["id", "name"]
 };
 
 type ModelNames = keyof typeof models;
@@ -585,7 +618,9 @@ const outputsInfo = {
   AggregateNativeTypeModel: ["_count", "_avg", "_sum", "_min", "_max"],
   NativeTypeModelGroupBy: ["id", "bigInt", "byteA", "decimal", "_count", "_avg", "_sum", "_min", "_max"],
   AggregateEquipment: ["_count", "_min", "_max"],
-  EquipmentGroupBy: ["id", "_count", "_min", "_max"],
+  EquipmentGroupBy: ["id", "name", "_count", "_min", "_max"],
+  AggregateHidden: ["_count", "_min", "_max"],
+  HiddenGroupBy: ["id", "name", "_count", "_min", "_max"],
   AffectedRowsOutput: ["count"],
   MainUserCount: ["posts", "editorPosts"],
   MainUserCountAggregate: ["id", "email", "name", "age", "balance", "amount", "role", "grades", "aliases", "_all"],
@@ -630,9 +665,12 @@ const outputsInfo = {
   NativeTypeModelSumAggregate: ["id", "bigInt", "decimal"],
   NativeTypeModelMinAggregate: ["id", "bigInt", "byteA", "decimal"],
   NativeTypeModelMaxAggregate: ["id", "bigInt", "byteA", "decimal"],
-  EquipmentCountAggregate: ["id", "_all"],
-  EquipmentMinAggregate: ["id"],
-  EquipmentMaxAggregate: ["id"]
+  EquipmentCountAggregate: ["id", "name", "_all"],
+  EquipmentMinAggregate: ["id", "name"],
+  EquipmentMaxAggregate: ["id", "name"],
+  HiddenCountAggregate: ["id", "name", "_all"],
+  HiddenMinAggregate: ["id", "name"],
+  HiddenMaxAggregate: ["id", "name"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;
@@ -718,11 +756,16 @@ const inputsInfo = {
   NativeTypeModelWhereUniqueInput: ["id", "AND", "OR", "NOT", "bigInt", "byteA", "decimal"],
   NativeTypeModelOrderByWithAggregationInput: ["id", "bigInt", "byteA", "decimal", "_count", "_avg", "_max", "_min", "_sum"],
   NativeTypeModelScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "bigInt", "byteA", "decimal"],
-  EquipmentWhereInput: ["AND", "OR", "NOT", "id"],
-  EquipmentOrderByWithRelationAndSearchRelevanceInput: ["id", "_relevance"],
-  EquipmentWhereUniqueInput: ["id", "AND", "OR", "NOT"],
-  EquipmentOrderByWithAggregationInput: ["id", "_count", "_max", "_min"],
-  EquipmentScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id"],
+  EquipmentWhereInput: ["AND", "OR", "NOT", "id", "name"],
+  EquipmentOrderByWithRelationAndSearchRelevanceInput: ["id", "name", "_relevance"],
+  EquipmentWhereUniqueInput: ["id", "AND", "OR", "NOT", "name"],
+  EquipmentOrderByWithAggregationInput: ["id", "name", "_count", "_max", "_min"],
+  EquipmentScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "name"],
+  HiddenWhereInput: ["AND", "OR", "NOT", "id", "name"],
+  HiddenOrderByWithRelationAndSearchRelevanceInput: ["id", "name", "_relevance"],
+  HiddenWhereUniqueInput: ["id", "AND", "OR", "NOT", "name"],
+  HiddenOrderByWithAggregationInput: ["id", "name", "_count", "_max", "_min"],
+  HiddenScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "name"],
   MainUserCreateInput: ["email", "firstName", "age", "accountBalance", "amount", "clientPosts", "role", "editorPosts", "grades", "aliases"],
   MainUserUpdateInput: ["email", "firstName", "age", "accountBalance", "amount", "clientPosts", "role", "editorPosts", "grades", "aliases"],
   MainUserCreateManyInput: ["id", "email", "firstName", "age", "accountBalance", "amount", "role", "grades", "aliases"],
@@ -759,10 +802,14 @@ const inputsInfo = {
   NativeTypeModelUpdateInput: ["bigInt", "byteA", "decimal"],
   NativeTypeModelCreateManyInput: ["id", "bigInt", "byteA", "decimal"],
   NativeTypeModelUpdateManyMutationInput: ["bigInt", "byteA", "decimal"],
-  EquipmentCreateInput: ["id"],
-  EquipmentUpdateInput: ["id"],
-  EquipmentCreateManyInput: ["id"],
-  EquipmentUpdateManyMutationInput: ["id"],
+  EquipmentCreateInput: ["id", "name"],
+  EquipmentUpdateInput: ["id", "name"],
+  EquipmentCreateManyInput: ["id", "name"],
+  EquipmentUpdateManyMutationInput: ["id", "name"],
+  HiddenCreateInput: ["id", "name"],
+  HiddenUpdateInput: ["id", "name"],
+  HiddenCreateManyInput: ["id", "name"],
+  HiddenUpdateManyMutationInput: ["id", "name"],
   IntFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   StringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "search", "mode", "not"],
   StringNullableFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "search", "mode", "not"],
@@ -855,9 +902,13 @@ const inputsInfo = {
   BytesNullableWithAggregatesFilter: ["equals", "in", "notIn", "not", "_count", "_min", "_max"],
   DecimalNullableWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not", "_count", "_avg", "_sum", "_min", "_max"],
   EquipmentOrderByRelevanceInput: ["fields", "sort", "search"],
-  EquipmentCountOrderByAggregateInput: ["id"],
-  EquipmentMaxOrderByAggregateInput: ["id"],
-  EquipmentMinOrderByAggregateInput: ["id"],
+  EquipmentCountOrderByAggregateInput: ["id", "name"],
+  EquipmentMaxOrderByAggregateInput: ["id", "name"],
+  EquipmentMinOrderByAggregateInput: ["id", "name"],
+  HiddenOrderByRelevanceInput: ["fields", "sort", "search"],
+  HiddenCountOrderByAggregateInput: ["id", "name"],
+  HiddenMaxOrderByAggregateInput: ["id", "name"],
+  HiddenMinOrderByAggregateInput: ["id", "name"],
   PostCreateNestedManyWithoutAuthorInput: ["create", "connectOrCreate", "createMany", "connect"],
   PostCreateNestedManyWithoutEditorInput: ["create", "connectOrCreate", "createMany", "connect"],
   MainUserCreategradesInput: ["set"],

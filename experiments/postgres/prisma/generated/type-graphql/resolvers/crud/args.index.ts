@@ -2,6 +2,7 @@ export * from "./Category/args";
 export * from "./Creator/args";
 export * from "./Director/args";
 export * from "./Equipment/args";
+export * from "./Hidden/args";
 export * from "./MainUser/args";
 export * from "./Movie/args";
 export * from "./NativeTypeModel/args";

@@ -54,12 +54,16 @@ export function transformBareModel(model: PrismaDMMF.Model): DMMF.Model {
     name: string;
     plural: string;
   }>(model.documentation, "type", "model");
+  const { output = false } = parseDocumentationAttributes<{
+    output: boolean;
+  }>(model.documentation, "omit", "model");
   return {
     ...model,
     typeName: attributeArgs.name ?? pascalCase(model.name),
     fields: [],
     docs: cleanDocsString(model.documentation),
     plural: attributeArgs.plural,
+    isOmitted: { output },
   };
 }
 

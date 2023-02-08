@@ -147,7 +147,6 @@ export function generateInputTypeClassFromType(
   project: Project,
   dirPath: string,
   inputType: DMMF.InputType,
-  _dmmfDocument: DmmfDocument,
   options: GeneratorOptions,
 ) {
   const filePath = path.resolve(

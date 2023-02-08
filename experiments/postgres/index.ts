@@ -11,6 +11,7 @@ import {
   Authorized,
   Extensions,
   UseMiddleware,
+  ObjectType,
 } from "type-graphql";
 import path from "path";
 import {
@@ -57,6 +58,7 @@ import {
   NativeTypeModelCrudResolver,
   applyRelationResolversEnhanceMap,
   RelationResolverActionsConfig,
+  HiddenCrudResolver,
 } from "./prisma/generated/type-graphql";
 import * as Prisma from "./prisma/generated/client";
 import { ProblemCrudResolver } from "./prisma/generated/type-graphql/resolvers/crud/Problem/ProblemCrudResolver";
@@ -88,6 +90,13 @@ const modelsEnhanceMap: ModelsEnhanceMap = {
         }),
       ],
     },
+  },
+  Hidden: {
+    class: [
+      ObjectType({
+        description: "Generated omitted type with custom description",
+      }),
+    ],
   },
 };
 applyModelsEnhanceMap(modelsEnhanceMap);
@@ -262,6 +271,7 @@ async function main() {
       GroupByCategoryResolver,
       GroupByPostResolver,
       NativeTypeModelCrudResolver,
+      HiddenCrudResolver,
     ],
     validate: { forbidUnknownValues: false },
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),

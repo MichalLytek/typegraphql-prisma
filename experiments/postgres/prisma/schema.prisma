@@ -143,5 +143,12 @@ model NativeTypeModel {
 
 /// @@TypeGraphQL.type(plural: "equipments")
 model Equipment {
-  id String @id @default(cuid())
+  id   String  @id @default(cuid())
+  name String?
+}
+
+/// @@TypeGraphQL.omit(output: true)
+model Hidden {
+  id   String  @id @default(cuid())
+  name String?
 }

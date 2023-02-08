@@ -15,6 +15,11 @@ export class EquipmentGroupBy {
   })
   id!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  name!: string | null;
+
   @TypeGraphQL.Field(_type => EquipmentCountAggregate, {
     nullable: true
   })

@@ -219,13 +219,7 @@ export default async function generateCode(
   if (dmmfDocument.shouldGenerateBlock("inputs")) {
     log("Generating input types...");
     dmmfDocument.schema.inputTypes.forEach(type =>
-      generateInputTypeClassFromType(
-        project,
-        resolversDirPath,
-        type,
-        dmmfDocument,
-        options,
-      ),
+      generateInputTypeClassFromType(project, resolversDirPath, type, options),
     );
     const inputsBarrelExportSourceFile = project.createSourceFile(
       path.resolve(

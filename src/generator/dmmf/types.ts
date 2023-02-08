@@ -43,6 +43,7 @@ export namespace DMMF {
     typeName: string;
     docs: string | undefined;
     plural: string | undefined;
+    isOmitted: { output: boolean };
   }
   export type FieldKind = "scalar" | "object" | "enum" | "unsupported";
   export type FieldNamespace = "model" | "prisma";

@@ -1,7 +1,6 @@
 ---
 title: Hiding Prisma model field in GraphQL schema
 sidebar_label: Hiding model fields
-sidebar_position: 3
 ---
 
 Sometimes you may want to not expose some fields in GraphQL schema.

@@ -1,7 +1,6 @@
 ---
 title: Emit only selected blocks
 sidebar_label: Emit selected blocks
-sidebar_position: 11
 ---
 
 If you don't want to have generated all the CRUD API with all resolvers, arguments, inputs, outputs, models, etc., you can provide an `emitOnly` generator option, which accepts a string list of values: `enums`, `models`, `crudResolvers`, `relationResolvers`, `inputs` or `outputs`, e.g.:

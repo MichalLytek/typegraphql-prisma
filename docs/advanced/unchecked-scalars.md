@@ -1,6 +1,5 @@
 ---
 title: Unchecked scalars input
-sidebar_position: 8
 ---
 
 GraphQL does not support input unions, hence it's not possible to support both normal inputs and unchecked scalars input at the same time like the Prisma does.

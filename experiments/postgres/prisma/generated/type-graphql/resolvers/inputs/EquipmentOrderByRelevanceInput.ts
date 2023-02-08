@@ -12,7 +12,7 @@ export class EquipmentOrderByRelevanceInput {
   @TypeGraphQL.Field(_type => [EquipmentOrderByRelevanceFieldEnum], {
     nullable: false
   })
-  fields!: "id"[];
+  fields!: Array<"id" | "name">;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: false

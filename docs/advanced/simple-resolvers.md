@@ -1,7 +1,6 @@
 ---
 title: Simple resolvers (performance)
 sidebar_label: Simple resolvers
-sidebar_position: 12
 ---
 
 If you don't have any global middlewares and you want to tune the generated schema performance, you can turn on the `simpleResolvers` generator option:

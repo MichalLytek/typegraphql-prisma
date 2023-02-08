@@ -264,6 +264,27 @@ describe("models", () => {
     expect(userAddressTypeTSFile).toMatchSnapshot("UserAddress");
   });
 
+  it("should properly generate object type class for omitted prisma model", async () => {
+    const schema = /* prisma */ `
+      /// @@TypeGraphQL.omit(output: true)
+      model User {
+        intIdField          Int     @id @default(autoincrement())
+        stringField         String  @unique
+        optionalStringField String?
+        intField            Int
+        floatField          Float
+        booleanField        Boolean
+        dateField           DateTime
+        jsonField           Json
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+
+    expect(userModelTSFile).toMatchSnapshot("User");
+  });
+
   describe("when emitIdAsIDType is set to true", () => {
     it("should properly generate model object type class", async () => {
       const schema = /* prisma */ `

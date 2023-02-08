@@ -11,4 +11,9 @@ export class Equipment {
     nullable: false
   })
   id!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  name?: string | null;
 }

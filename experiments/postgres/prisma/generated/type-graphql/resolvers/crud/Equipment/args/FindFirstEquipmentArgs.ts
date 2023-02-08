@@ -35,5 +35,5 @@ export class FindFirstEquipmentArgs {
   @TypeGraphQL.Field(_type => [EquipmentScalarFieldEnum], {
     nullable: true
   })
-  distinct?: "id"[] | undefined;
+  distinct?: Array<"id" | "name"> | undefined;
 }

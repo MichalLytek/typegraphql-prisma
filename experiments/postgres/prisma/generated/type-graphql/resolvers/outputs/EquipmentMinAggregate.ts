@@ -11,4 +11,9 @@ export class EquipmentMinAggregate {
     nullable: true
   })
   id!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  name!: string | null;
 }

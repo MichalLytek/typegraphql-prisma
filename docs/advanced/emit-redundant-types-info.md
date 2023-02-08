@@ -1,7 +1,6 @@
 ---
 title: Emit redundant types info
 sidebar_label: Redundant types
-sidebar_position: 14
 ---
 
 By default, `typegraphql-prisma` tries to minimize the generated LOC by omitting the redundant types info.

@@ -6,6 +6,8 @@ export { DirectorOrderByRelevanceFieldEnum } from "./DirectorOrderByRelevanceFie
 export { DirectorScalarFieldEnum } from "./DirectorScalarFieldEnum";
 export { EquipmentOrderByRelevanceFieldEnum } from "./EquipmentOrderByRelevanceFieldEnum";
 export { EquipmentScalarFieldEnum } from "./EquipmentScalarFieldEnum";
+export { HiddenOrderByRelevanceFieldEnum } from "./HiddenOrderByRelevanceFieldEnum";
+export { HiddenScalarFieldEnum } from "./HiddenScalarFieldEnum";
 export { JsonNullValueFilter } from "./JsonNullValueFilter";
 export { JsonNullValueInput } from "./JsonNullValueInput";
 export { MainUserOrderByRelevanceFieldEnum } from "./MainUserOrderByRelevanceFieldEnum";

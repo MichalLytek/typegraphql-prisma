@@ -1,7 +1,6 @@
 ---
 title: Emit ID fields with type
 sidebar_label: Emit ID type
-sidebar_position: 12
 ---
 
 By default, TypeGraphQL Prisma generator emits GraphQL types for fields with the underlying data types, like `Int` or `String` scalars.

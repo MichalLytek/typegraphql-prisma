@@ -21,6 +21,12 @@ type AggregateDirector {
   _min: DirectorMinAggregate
 }
 
+type AggregateHidden {
+  _count: HiddenCountAggregate
+  _max: HiddenMaxAggregate
+  _min: HiddenMinAggregate
+}
+
 type AggregateMainUser {
   _avg: MainUserAvgAggregate
   _count: MainUserCountAggregate
@@ -817,6 +823,106 @@ input FloatWithAggregatesFilter {
   notIn: [Float!]
 }
 
+"""Generated omitted type with custom description"""
+type Hidden {
+  id: ID!
+}
+
+type HiddenCountAggregate {
+  _all: Int!
+  id: Int!
+}
+
+input HiddenCountOrderByAggregateInput {
+  id: SortOrder
+}
+
+input HiddenCreateInput {
+  id: String
+}
+
+input HiddenCreateManyInput {
+  id: String
+}
+
+type HiddenGroupBy {
+  _count: HiddenCountAggregate
+  _max: HiddenMaxAggregate
+  _min: HiddenMinAggregate
+  id: String!
+}
+
+type HiddenMaxAggregate {
+  id: String
+}
+
+input HiddenMaxOrderByAggregateInput {
+  id: SortOrder
+}
+
+type HiddenMinAggregate {
+  id: String
+}
+
+input HiddenMinOrderByAggregateInput {
+  id: SortOrder
+}
+
+enum HiddenOrderByRelevanceFieldEnum {
+  id
+}
+
+input HiddenOrderByRelevanceInput {
+  fields: [HiddenOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input HiddenOrderByWithAggregationInput {
+  _count: HiddenCountOrderByAggregateInput
+  _max: HiddenMaxOrderByAggregateInput
+  _min: HiddenMinOrderByAggregateInput
+  id: SortOrder
+}
+
+input HiddenOrderByWithRelationAndSearchRelevanceInput {
+  _relevance: HiddenOrderByRelevanceInput
+  id: SortOrder
+}
+
+enum HiddenScalarFieldEnum {
+  id
+}
+
+input HiddenScalarWhereWithAggregatesInput {
+  AND: [HiddenScalarWhereWithAggregatesInput!]
+  NOT: [HiddenScalarWhereWithAggregatesInput!]
+  OR: [HiddenScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+}
+
+input HiddenUpdateInput {
+  id: String
+}
+
+input HiddenUpdateManyMutationInput {
+  id: String
+}
+
+input HiddenWhereInput {
+  AND: [HiddenWhereInput!]
+  NOT: [HiddenWhereInput!]
+  OR: [HiddenWhereInput!]
+  id: StringFilter
+}
+
+input HiddenWhereUniqueInput {
+  AND: [HiddenWhereInput!]
+  NOT: [HiddenWhereInput!]
+  OR: [HiddenWhereInput!]
+  id: String
+}
+
 input IntFilter {
   equals: Int
   gt: Int
@@ -1552,6 +1658,7 @@ input MovieWhereUniqueInput {
 type Mutation {
   createManyCreator(data: [CreatorCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyDirector(data: [DirectorCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyHidden(data: [HiddenCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyMainUser(data: [MainUserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyMovie(data: [MovieCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyNativeTypeModel(data: [NativeTypeModelCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
@@ -1559,6 +1666,7 @@ type Mutation {
   createManyProblem(data: [ProblemCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createOneCreator(data: CreatorCreateInput!): Creator!
   createOneDirector(data: DirectorCreateInput!): Director!
+  createOneHidden(data: HiddenCreateInput!): Hidden!
   createOneMainUser(data: MainUserCreateInput!): MainUser!
   createOneMovie(data: MovieCreateInput!): Movie!
   createOneNativeTypeModel(data: NativeTypeModelCreateInput!): NativeTypeModel!
@@ -1568,6 +1676,7 @@ type Mutation {
   customCreatePost(data: PostCreateInput!): Post!
   deleteManyCreator(where: CreatorWhereInput): AffectedRowsOutput!
   deleteManyDirector(where: DirectorWhereInput): AffectedRowsOutput!
+  deleteManyHidden(where: HiddenWhereInput): AffectedRowsOutput!
   deleteManyMainUser(where: MainUserWhereInput): AffectedRowsOutput!
   deleteManyMovie(where: MovieWhereInput): AffectedRowsOutput!
   deleteManyNativeTypeModel(where: NativeTypeModelWhereInput): AffectedRowsOutput!
@@ -1575,6 +1684,7 @@ type Mutation {
   deleteManyProblem(where: ProblemWhereInput): AffectedRowsOutput!
   deleteOneCreator(where: CreatorWhereUniqueInput!): Creator
   deleteOneDirector(where: DirectorWhereUniqueInput!): Director
+  deleteOneHidden(where: HiddenWhereUniqueInput!): Hidden
   deleteOneMainUser(where: MainUserWhereUniqueInput!): MainUser
   deleteOneMovie(where: MovieWhereUniqueInput!): Movie
   deleteOneNativeTypeModel(where: NativeTypeModelWhereUniqueInput!): NativeTypeModel
@@ -1582,6 +1692,7 @@ type Mutation {
   deleteOneProblem(where: ProblemWhereUniqueInput!): Problem
   updateManyCreator(data: CreatorUpdateManyMutationInput!, where: CreatorWhereInput): AffectedRowsOutput!
   updateManyDirector(data: DirectorUpdateManyMutationInput!, where: DirectorWhereInput): AffectedRowsOutput!
+  updateManyHidden(data: HiddenUpdateManyMutationInput!, where: HiddenWhereInput): AffectedRowsOutput!
   updateManyMainUser(data: MainUserUpdateManyMutationInput!, where: MainUserWhereInput): AffectedRowsOutput!
   updateManyMovie(data: MovieUpdateManyMutationInput!, where: MovieWhereInput): AffectedRowsOutput!
   updateManyNativeTypeModel(data: NativeTypeModelUpdateManyMutationInput!, where: NativeTypeModelWhereInput): AffectedRowsOutput!
@@ -1590,6 +1701,7 @@ type Mutation {
   updateManyProblem(data: ProblemUpdateManyMutationInput!, where: ProblemWhereInput): AffectedRowsOutput!
   updateOneCreator(data: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator
   updateOneDirector(data: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director
+  updateOneHidden(data: HiddenUpdateInput!, where: HiddenWhereUniqueInput!): Hidden
   updateOneMainUser(data: MainUserUpdateInput!, where: MainUserWhereUniqueInput!): MainUser
   updateOneMovie(data: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie
   updateOneNativeTypeModel(data: NativeTypeModelUpdateInput!, where: NativeTypeModelWhereUniqueInput!): NativeTypeModel
@@ -1597,6 +1709,7 @@ type Mutation {
   updateOneProblem(data: ProblemUpdateInput!, where: ProblemWhereUniqueInput!): Problem
   upsertOneCreator(create: CreatorCreateInput!, update: CreatorUpdateInput!, where: CreatorWhereUniqueInput!): Creator!
   upsertOneDirector(create: DirectorCreateInput!, update: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director!
+  upsertOneHidden(create: HiddenCreateInput!, update: HiddenUpdateInput!, where: HiddenWhereUniqueInput!): Hidden!
   upsertOneMainUser(create: MainUserCreateInput!, update: MainUserUpdateInput!, where: MainUserWhereUniqueInput!): MainUser!
   upsertOneMovie(create: MovieCreateInput!, update: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie!
   upsertOneNativeTypeModel(create: NativeTypeModelCreateInput!, update: NativeTypeModelUpdateInput!, where: NativeTypeModelWhereUniqueInput!): NativeTypeModel!
@@ -2989,6 +3102,7 @@ input ProblemWhereUniqueInput {
 type Query {
   aggregateCreator(cursor: CreatorWhereUniqueInput, orderBy: [CreatorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CreatorWhereInput): AggregateCreator!
   aggregateDirector(cursor: DirectorWhereUniqueInput, orderBy: [DirectorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: DirectorWhereInput): AggregateDirector!
+  aggregateHidden(cursor: HiddenWhereUniqueInput, orderBy: [HiddenOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: HiddenWhereInput): AggregateHidden!
   aggregateMainUser(cursor: MainUserWhereUniqueInput, orderBy: [MainUserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MainUserWhereInput): AggregateMainUser!
   aggregateMovie(cursor: MovieWhereUniqueInput, orderBy: [MovieOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MovieWhereInput): AggregateMovie!
   aggregateNativeTypeModel(cursor: NativeTypeModelWhereUniqueInput, orderBy: [NativeTypeModelOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: NativeTypeModelWhereInput): AggregateNativeTypeModel!
@@ -3006,6 +3120,8 @@ type Query {
   findFirstCreatorOrThrow(cursor: CreatorWhereUniqueInput, distinct: [CreatorScalarFieldEnum!], orderBy: [CreatorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CreatorWhereInput): Creator
   findFirstDirector(cursor: DirectorWhereUniqueInput, distinct: [DirectorScalarFieldEnum!], orderBy: [DirectorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: DirectorWhereInput): Director
   findFirstDirectorOrThrow(cursor: DirectorWhereUniqueInput, distinct: [DirectorScalarFieldEnum!], orderBy: [DirectorOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: DirectorWhereInput): Director
+  findFirstHidden(cursor: HiddenWhereUniqueInput, distinct: [HiddenScalarFieldEnum!], orderBy: [HiddenOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: HiddenWhereInput): Hidden
+  findFirstHiddenOrThrow(cursor: HiddenWhereUniqueInput, distinct: [HiddenScalarFieldEnum!], orderBy: [HiddenOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: HiddenWhereInput): Hidden
   findFirstMainUser(cursor: MainUserWhereUniqueInput, distinct: [MainUserScalarFieldEnum!], orderBy: [MainUserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MainUserWhereInput): MainUser
   findFirstMainUserOrThrow(cursor: MainUserWhereUniqueInput, distinct: [MainUserScalarFieldEnum!], orderBy: [MainUserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MainUserWhereInput): MainUser
   findFirstMovie(cursor: MovieWhereUniqueInput, distinct: [MovieScalarFieldEnum!], orderBy: [MovieOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MovieWhereInput): Movie
@@ -3018,6 +3134,7 @@ type Query {
   findFirstProblemOrThrow(cursor: ProblemWhereUniqueInput, distinct: [ProblemScalarFieldEnum!], orderBy: [ProblemOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ProblemWhereInput): Problem
   getCreator(where: CreatorWhereUniqueInput!): Creator
   getDirector(where: DirectorWhereUniqueInput!): Director
+  getHidden(where: HiddenWhereUniqueInput!): Hidden
   getMainUser(where: MainUserWhereUniqueInput!): MainUser
   getMovie(where: MovieWhereUniqueInput!): Movie
   getNativeTypeModel(where: NativeTypeModelWhereUniqueInput!): NativeTypeModel
@@ -3026,12 +3143,15 @@ type Query {
   groupByCategory(by: [CategoryScalarFieldEnum!]!, having: CategoryScalarWhereWithAggregatesInput, orderBy: [CategoryOrderByWithAggregationInput!], skip: Int, take: Int, where: CategoryWhereInput): [CategoryGroupBy!]!
   groupByCreator(by: [CreatorScalarFieldEnum!]!, having: CreatorScalarWhereWithAggregatesInput, orderBy: [CreatorOrderByWithAggregationInput!], skip: Int, take: Int, where: CreatorWhereInput): [CreatorGroupBy!]!
   groupByDirector(by: [DirectorScalarFieldEnum!]!, having: DirectorScalarWhereWithAggregatesInput, orderBy: [DirectorOrderByWithAggregationInput!], skip: Int, take: Int, where: DirectorWhereInput): [DirectorGroupBy!]!
+  groupByHidden(by: [HiddenScalarFieldEnum!]!, having: HiddenScalarWhereWithAggregatesInput, orderBy: [HiddenOrderByWithAggregationInput!], skip: Int, take: Int, where: HiddenWhereInput): [HiddenGroupBy!]!
   groupByMainUser(by: [MainUserScalarFieldEnum!]!, having: MainUserScalarWhereWithAggregatesInput, orderBy: [MainUserOrderByWithAggregationInput!], skip: Int, take: Int, where: MainUserWhereInput): [MainUserGroupBy!]!
   groupByMovie(by: [MovieScalarFieldEnum!]!, having: MovieScalarWhereWithAggregatesInput, orderBy: [MovieOrderByWithAggregationInput!], skip: Int, take: Int, where: MovieWhereInput): [MovieGroupBy!]!
   groupByNativeTypeModel(by: [NativeTypeModelScalarFieldEnum!]!, having: NativeTypeModelScalarWhereWithAggregatesInput, orderBy: [NativeTypeModelOrderByWithAggregationInput!], skip: Int, take: Int, where: NativeTypeModelWhereInput): [NativeTypeModelGroupBy!]!
   groupByPatient(by: [PatientScalarFieldEnum!]!, having: PatientScalarWhereWithAggregatesInput, orderBy: [PatientOrderByWithAggregationInput!], skip: Int, take: Int, where: PatientWhereInput): [PatientGroupBy!]!
   groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByWithAggregationInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
   groupByProblem(by: [ProblemScalarFieldEnum!]!, having: ProblemScalarWhereWithAggregatesInput, orderBy: [ProblemOrderByWithAggregationInput!], skip: Int, take: Int, where: ProblemWhereInput): [ProblemGroupBy!]!
+  hidden(where: HiddenWhereUniqueInput!): Hidden
+  hiddens(cursor: HiddenWhereUniqueInput, distinct: [HiddenScalarFieldEnum!], orderBy: [HiddenOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: HiddenWhereInput): [Hidden!]!
   mainUser(where: MainUserWhereUniqueInput!): MainUser
   mainUsers(cursor: MainUserWhereUniqueInput, distinct: [MainUserScalarFieldEnum!], orderBy: [MainUserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: MainUserWhereInput): [MainUser!]!
   movie(where: MovieWhereUniqueInput!): Movie
