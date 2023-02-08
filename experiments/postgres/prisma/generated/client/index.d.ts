@@ -3,12 +3,10 @@
  * Client
 **/
 
-import * as runtime from './runtime/index';
-declare const prisma: unique symbol
-export interface PrismaPromise<A> extends Promise<A> {[prisma]: true}
+import * as runtime from './runtime/library';
 type UnwrapPromise<P extends any> = P extends Promise<infer R> ? R : P
 type UnwrapTuple<Tuple extends readonly unknown[]> = {
-  [K in keyof Tuple]: K extends `${number}` ? Tuple[K] extends PrismaPromise<infer X> ? X : UnwrapPromise<Tuple[K]> : UnwrapPromise<Tuple[K]>
+  [K in keyof Tuple]: K extends `${number}` ? Tuple[K] extends Prisma.PrismaPromise<infer X> ? X : UnwrapPromise<Tuple[K]> : UnwrapPromise<Tuple[K]>
 };
 
 
@@ -322,7 +320,7 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<number>;
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Executes a raw query and returns the number of affected rows.
@@ -334,7 +332,7 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<number>;
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Performs a prepared raw query and returns the `SELECT` data.
@@ -345,7 +343,7 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<T>;
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
   /**
    * Performs a raw query and returns the `SELECT` data.
@@ -357,7 +355,7 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<T>;
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -372,9 +370,9 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<UnwrapTuple<P>>
 
-  $transaction<R>(fn: (prisma: Prisma.TransactionClient) => Promise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<R>
+  $transaction<R>(fn: (prisma: Omit<this, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use">) => Promise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<R>
 
 
   $extends: { extArgs: ExtArgs } & (<
@@ -520,6 +518,8 @@ export class PrismaClient<
 export namespace Prisma {
   export import DMMF = runtime.DMMF
 
+  export type PrismaPromise<T> = runtime.Types.Public.PrismaPromise<T>
+
   /**
    * Prisma Errors
    */
@@ -566,8 +566,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.9.0
-   * Query Engine version: ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5
+   * Prisma Client JS version: 4.10.0
+   * Query Engine version: ca7fcef713137fa11029d519a9780db130cca91d
    */
   export type PrismaVersion = {
     client: string
@@ -990,15 +990,6 @@ export namespace Prisma {
 
   type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
 
-  class PrismaClientFetcher {
-    private readonly prisma;
-    private readonly debug;
-    private readonly hooks?;
-    constructor(prisma: PrismaClient<any, any>, debug?: boolean, hooks?: Hooks | undefined);
-    request<T>(document: any, dataPath?: string[], rootField?: string, typeName?: string, isList?: boolean, callsite?: string): Promise<T>;
-    sanitizeMessage(message: string): string;
-    protected unpack(document: any, data: any, path: string[], rootField?: string, isList?: boolean): any;
-  }
 
   export const ModelName: {
     User: 'User',
@@ -1929,60 +1920,60 @@ export namespace Prisma {
       }
     query?: {
         $allModels?: {
-          [K in keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]?: (args: { model: 'User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]?: (args: { model: 'User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment', operation: keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['result']>
+          $allOperations?: (args: { model: 'User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment', operation: keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment'][keyof Prisma.TypeMap['model']['User' | 'post' | 'Category' | 'Patient' | 'Movie' | 'Director' | 'Problem' | 'Creator' | 'NativeTypeModel' | 'Equipment']]['result']>
         }
       } & {
         user?: {
-          [K in keyof Prisma.TypeMap['model']['User']]?: (args: { model: 'User', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['User']]?: (args: { model: 'User', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'User', operation: keyof Prisma.TypeMap['model']['User'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['result']>
+          $allOperations?: (args: { model: 'User', operation: keyof Prisma.TypeMap['model']['User'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['User'][keyof Prisma.TypeMap['model']['User']]['result']>
         }
         post?: {
-          [K in keyof Prisma.TypeMap['model']['post']]?: (args: { model: 'post', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['post'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['post'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['post']]?: (args: { model: 'post', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['post'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['post'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'post', operation: keyof Prisma.TypeMap['model']['post'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['result']>
+          $allOperations?: (args: { model: 'post', operation: keyof Prisma.TypeMap['model']['post'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['post'][keyof Prisma.TypeMap['model']['post']]['result']>
         }
         category?: {
-          [K in keyof Prisma.TypeMap['model']['Category']]?: (args: { model: 'Category', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['Category']]?: (args: { model: 'Category', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Category'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'Category', operation: keyof Prisma.TypeMap['model']['Category'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['result']>
+          $allOperations?: (args: { model: 'Category', operation: keyof Prisma.TypeMap['model']['Category'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Category'][keyof Prisma.TypeMap['model']['Category']]['result']>
         }
         patient?: {
-          [K in keyof Prisma.TypeMap['model']['Patient']]?: (args: { model: 'Patient', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['Patient']]?: (args: { model: 'Patient', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Patient'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'Patient', operation: keyof Prisma.TypeMap['model']['Patient'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['result']>
+          $allOperations?: (args: { model: 'Patient', operation: keyof Prisma.TypeMap['model']['Patient'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Patient'][keyof Prisma.TypeMap['model']['Patient']]['result']>
         }
         movie?: {
-          [K in keyof Prisma.TypeMap['model']['Movie']]?: (args: { model: 'Movie', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['Movie']]?: (args: { model: 'Movie', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Movie'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'Movie', operation: keyof Prisma.TypeMap['model']['Movie'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['result']>
+          $allOperations?: (args: { model: 'Movie', operation: keyof Prisma.TypeMap['model']['Movie'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Movie'][keyof Prisma.TypeMap['model']['Movie']]['result']>
         }
         director?: {
-          [K in keyof Prisma.TypeMap['model']['Director']]?: (args: { model: 'Director', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['Director']]?: (args: { model: 'Director', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Director'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'Director', operation: keyof Prisma.TypeMap['model']['Director'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['result']>
+          $allOperations?: (args: { model: 'Director', operation: keyof Prisma.TypeMap['model']['Director'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Director'][keyof Prisma.TypeMap['model']['Director']]['result']>
         }
         problem?: {
-          [K in keyof Prisma.TypeMap['model']['Problem']]?: (args: { model: 'Problem', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['Problem']]?: (args: { model: 'Problem', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Problem'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'Problem', operation: keyof Prisma.TypeMap['model']['Problem'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['result']>
+          $allOperations?: (args: { model: 'Problem', operation: keyof Prisma.TypeMap['model']['Problem'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Problem'][keyof Prisma.TypeMap['model']['Problem']]['result']>
         }
         creator?: {
-          [K in keyof Prisma.TypeMap['model']['Creator']]?: (args: { model: 'Creator', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['Creator']]?: (args: { model: 'Creator', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Creator'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'Creator', operation: keyof Prisma.TypeMap['model']['Creator'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['result']>
+          $allOperations?: (args: { model: 'Creator', operation: keyof Prisma.TypeMap['model']['Creator'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Creator'][keyof Prisma.TypeMap['model']['Creator']]['result']>
         }
         nativeTypeModel?: {
-          [K in keyof Prisma.TypeMap['model']['NativeTypeModel']]?: (args: { model: 'NativeTypeModel', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['NativeTypeModel']]?: (args: { model: 'NativeTypeModel', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'NativeTypeModel', operation: keyof Prisma.TypeMap['model']['NativeTypeModel'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['result']>
+          $allOperations?: (args: { model: 'NativeTypeModel', operation: keyof Prisma.TypeMap['model']['NativeTypeModel'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['NativeTypeModel'][keyof Prisma.TypeMap['model']['NativeTypeModel']]['result']>
         }
         equipment?: {
-          [K in keyof Prisma.TypeMap['model']['Equipment']]?: (args: { model: 'Equipment', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['result']>
+          [K in keyof Prisma.TypeMap['model']['Equipment']]?: (args: { model: 'Equipment', operation: K, args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][K]['result']>
         } & {
-          $allOperations?: (args: { model: 'Equipment', operation: keyof Prisma.TypeMap['model']['Equipment'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['args']>) => PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['result']>
+          $allOperations?: (args: { model: 'Equipment', operation: keyof Prisma.TypeMap['model']['Equipment'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Equipment'][keyof Prisma.TypeMap['model']['Equipment']]['result']>
         }
       }
     client?: C & { [K: symbol]: { ctx: runtime.Types.Extensions.GetClient<PrismaClient<never, never, false, ExtArgs>, ExtArgs['client']> } }
@@ -2054,10 +2045,6 @@ export namespace Prisma {
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
     log?: Array<LogLevel | LogDefinition>
-  }
-
-  export type Hooks = {
-    beforeRequest?: (options: { query: string, path: string[], rootField?: string, typeName?: string, document: any }) => any
   }
 
   /* Types for Logging */
@@ -2538,7 +2525,7 @@ export namespace Prisma {
     _max: UserMaxAggregateOutputType | null
   }
 
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = PrismaPromise<
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<UserGroupByOutputType, T['by']> &
         {
@@ -2678,7 +2665,7 @@ export namespace Prisma {
     **/
     findMany<T extends UserFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<UserPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<UserPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a User.
@@ -2710,7 +2697,7 @@ export namespace Prisma {
     **/
     createMany<T extends UserCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a User.
@@ -2761,7 +2748,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends UserDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Users.
@@ -2782,7 +2769,7 @@ export namespace Prisma {
     **/
     updateMany<T extends UserUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one User.
@@ -2820,7 +2807,7 @@ export namespace Prisma {
     **/
     count<T extends UserCountArgs>(
       args?: Subset<T, UserCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -2852,7 +2839,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): PrismaPromise<GetUserAggregateType<T>>
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
 
     /**
      * Group by User.
@@ -2929,7 +2916,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -2939,10 +2926,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -2953,12 +2938,12 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): PrismaPromise<runtime.Types.GetResult<postPayload<ExtArgs>, T, 'findMany'>| Null>;
+    posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.GetResult<postPayload<ExtArgs>, T, 'findMany'>| Null>;
 
-    editorPosts<T extends User$editorPostsArgs<ExtArgs> = {}>(args?: Subset<T, User$editorPostsArgs<ExtArgs>>): PrismaPromise<runtime.Types.GetResult<postPayload<ExtArgs>, T, 'findMany'>| Null>;
+    editorPosts<T extends User$editorPostsArgs<ExtArgs> = {}>(args?: Subset<T, User$editorPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.GetResult<postPayload<ExtArgs>, T, 'findMany'>| Null>;
 
     private get _document();
     /**
@@ -3595,7 +3580,7 @@ export namespace Prisma {
     _max: PostMaxAggregateOutputType | null
   }
 
-  type GetPostGroupByPayload<T extends PostGroupByArgs> = PrismaPromise<
+  type GetPostGroupByPayload<T extends PostGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<PostGroupByOutputType, T['by']> &
         {
@@ -3737,7 +3722,7 @@ export namespace Prisma {
     **/
     findMany<T extends postFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, postFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<postPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<postPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a Post.
@@ -3769,7 +3754,7 @@ export namespace Prisma {
     **/
     createMany<T extends postCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, postCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Post.
@@ -3820,7 +3805,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends postDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, postDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Posts.
@@ -3841,7 +3826,7 @@ export namespace Prisma {
     **/
     updateMany<T extends postUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, postUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Post.
@@ -3879,7 +3864,7 @@ export namespace Prisma {
     **/
     count<T extends postCountArgs>(
       args?: Subset<T, postCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -3911,7 +3896,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): PrismaPromise<GetPostAggregateType<T>>
+    aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): Prisma.PrismaPromise<GetPostAggregateType<T>>
 
     /**
      * Group by Post.
@@ -3988,7 +3973,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -3998,10 +3983,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__postClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__postClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -4012,8 +3995,8 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
     author<T extends UserArgs<ExtArgs> = {}>(args?: Subset<T, UserArgs<ExtArgs>>): Prisma__UserClient<runtime.Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique'> | Null, never, ExtArgs>;
 
@@ -4572,7 +4555,7 @@ export namespace Prisma {
     _max: CategoryMaxAggregateOutputType | null
   }
 
-  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = PrismaPromise<
+  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<CategoryGroupByOutputType, T['by']> &
         {
@@ -4691,7 +4674,7 @@ export namespace Prisma {
     **/
     findMany<T extends CategoryFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, CategoryFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<CategoryPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<CategoryPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a Category.
@@ -4723,7 +4706,7 @@ export namespace Prisma {
     **/
     createMany<T extends CategoryCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, CategoryCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Category.
@@ -4774,7 +4757,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends CategoryDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, CategoryDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Categories.
@@ -4795,7 +4778,7 @@ export namespace Prisma {
     **/
     updateMany<T extends CategoryUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, CategoryUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Category.
@@ -4833,7 +4816,7 @@ export namespace Prisma {
     **/
     count<T extends CategoryCountArgs>(
       args?: Subset<T, CategoryCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -4865,7 +4848,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): PrismaPromise<GetCategoryAggregateType<T>>
+    aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): Prisma.PrismaPromise<GetCategoryAggregateType<T>>
 
     /**
      * Group by Category.
@@ -4942,7 +4925,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -4952,10 +4935,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__CategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__CategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -4966,8 +4947,8 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
 
     private get _document();
@@ -5433,7 +5414,7 @@ export namespace Prisma {
     _max: PatientMaxAggregateOutputType | null
   }
 
-  type GetPatientGroupByPayload<T extends PatientGroupByArgs> = PrismaPromise<
+  type GetPatientGroupByPayload<T extends PatientGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<PatientGroupByOutputType, T['by']> &
         {
@@ -5552,7 +5533,7 @@ export namespace Prisma {
     **/
     findMany<T extends PatientFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, PatientFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<PatientPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<PatientPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a Patient.
@@ -5584,7 +5565,7 @@ export namespace Prisma {
     **/
     createMany<T extends PatientCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, PatientCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Patient.
@@ -5635,7 +5616,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends PatientDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, PatientDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Patients.
@@ -5656,7 +5637,7 @@ export namespace Prisma {
     **/
     updateMany<T extends PatientUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, PatientUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Patient.
@@ -5694,7 +5675,7 @@ export namespace Prisma {
     **/
     count<T extends PatientCountArgs>(
       args?: Subset<T, PatientCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -5726,7 +5707,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PatientAggregateArgs>(args: Subset<T, PatientAggregateArgs>): PrismaPromise<GetPatientAggregateType<T>>
+    aggregate<T extends PatientAggregateArgs>(args: Subset<T, PatientAggregateArgs>): Prisma.PrismaPromise<GetPatientAggregateType<T>>
 
     /**
      * Group by Patient.
@@ -5803,7 +5784,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PatientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPatientGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, PatientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPatientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -5813,10 +5794,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__PatientClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__PatientClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -5827,8 +5806,8 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
 
     private get _document();
@@ -6294,7 +6273,7 @@ export namespace Prisma {
     _max: MovieMaxAggregateOutputType | null
   }
 
-  type GetMovieGroupByPayload<T extends MovieGroupByArgs> = PrismaPromise<
+  type GetMovieGroupByPayload<T extends MovieGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<MovieGroupByOutputType, T['by']> &
         {
@@ -6418,7 +6397,7 @@ export namespace Prisma {
     **/
     findMany<T extends MovieFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, MovieFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<MoviePayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<MoviePayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a Movie.
@@ -6450,7 +6429,7 @@ export namespace Prisma {
     **/
     createMany<T extends MovieCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, MovieCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Movie.
@@ -6501,7 +6480,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends MovieDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, MovieDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Movies.
@@ -6522,7 +6501,7 @@ export namespace Prisma {
     **/
     updateMany<T extends MovieUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, MovieUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Movie.
@@ -6560,7 +6539,7 @@ export namespace Prisma {
     **/
     count<T extends MovieCountArgs>(
       args?: Subset<T, MovieCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -6592,7 +6571,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends MovieAggregateArgs>(args: Subset<T, MovieAggregateArgs>): PrismaPromise<GetMovieAggregateType<T>>
+    aggregate<T extends MovieAggregateArgs>(args: Subset<T, MovieAggregateArgs>): Prisma.PrismaPromise<GetMovieAggregateType<T>>
 
     /**
      * Group by Movie.
@@ -6669,7 +6648,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, MovieGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMovieGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, MovieGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMovieGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -6679,10 +6658,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__MovieClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__MovieClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -6693,8 +6670,8 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
     director<T extends DirectorArgs<ExtArgs> = {}>(args?: Subset<T, DirectorArgs<ExtArgs>>): Prisma__DirectorClient<runtime.Types.GetResult<DirectorPayload<ExtArgs>, T, 'findUnique'> | Null, never, ExtArgs>;
 
@@ -7194,7 +7171,7 @@ export namespace Prisma {
     _max: DirectorMaxAggregateOutputType | null
   }
 
-  type GetDirectorGroupByPayload<T extends DirectorGroupByArgs> = PrismaPromise<
+  type GetDirectorGroupByPayload<T extends DirectorGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<DirectorGroupByOutputType, T['by']> &
         {
@@ -7318,7 +7295,7 @@ export namespace Prisma {
     **/
     findMany<T extends DirectorFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, DirectorFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<DirectorPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<DirectorPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a Director.
@@ -7350,7 +7327,7 @@ export namespace Prisma {
     **/
     createMany<T extends DirectorCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, DirectorCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Director.
@@ -7401,7 +7378,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends DirectorDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, DirectorDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Directors.
@@ -7422,7 +7399,7 @@ export namespace Prisma {
     **/
     updateMany<T extends DirectorUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, DirectorUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Director.
@@ -7460,7 +7437,7 @@ export namespace Prisma {
     **/
     count<T extends DirectorCountArgs>(
       args?: Subset<T, DirectorCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -7492,7 +7469,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends DirectorAggregateArgs>(args: Subset<T, DirectorAggregateArgs>): PrismaPromise<GetDirectorAggregateType<T>>
+    aggregate<T extends DirectorAggregateArgs>(args: Subset<T, DirectorAggregateArgs>): Prisma.PrismaPromise<GetDirectorAggregateType<T>>
 
     /**
      * Group by Director.
@@ -7569,7 +7546,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, DirectorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDirectorGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, DirectorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDirectorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -7579,10 +7556,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__DirectorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__DirectorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -7593,10 +7568,10 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    movies<T extends Director$moviesArgs<ExtArgs> = {}>(args?: Subset<T, Director$moviesArgs<ExtArgs>>): PrismaPromise<runtime.Types.GetResult<MoviePayload<ExtArgs>, T, 'findMany'>| Null>;
+    movies<T extends Director$moviesArgs<ExtArgs> = {}>(args?: Subset<T, Director$moviesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.GetResult<MoviePayload<ExtArgs>, T, 'findMany'>| Null>;
 
     private get _document();
     /**
@@ -8160,7 +8135,7 @@ export namespace Prisma {
     _max: ProblemMaxAggregateOutputType | null
   }
 
-  type GetProblemGroupByPayload<T extends ProblemGroupByArgs> = PrismaPromise<
+  type GetProblemGroupByPayload<T extends ProblemGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<ProblemGroupByOutputType, T['by']> &
         {
@@ -8288,7 +8263,7 @@ export namespace Prisma {
     **/
     findMany<T extends ProblemFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ProblemFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<ProblemPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<ProblemPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a Problem.
@@ -8320,7 +8295,7 @@ export namespace Prisma {
     **/
     createMany<T extends ProblemCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ProblemCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Problem.
@@ -8371,7 +8346,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends ProblemDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ProblemDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Problems.
@@ -8392,7 +8367,7 @@ export namespace Prisma {
     **/
     updateMany<T extends ProblemUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, ProblemUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Problem.
@@ -8430,7 +8405,7 @@ export namespace Prisma {
     **/
     count<T extends ProblemCountArgs>(
       args?: Subset<T, ProblemCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -8462,7 +8437,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ProblemAggregateArgs>(args: Subset<T, ProblemAggregateArgs>): PrismaPromise<GetProblemAggregateType<T>>
+    aggregate<T extends ProblemAggregateArgs>(args: Subset<T, ProblemAggregateArgs>): Prisma.PrismaPromise<GetProblemAggregateType<T>>
 
     /**
      * Group by Problem.
@@ -8539,7 +8514,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProblemGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProblemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -8549,10 +8524,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__ProblemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__ProblemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -8563,10 +8536,10 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    likedBy<T extends Problem$likedByArgs<ExtArgs> = {}>(args?: Subset<T, Problem$likedByArgs<ExtArgs>>): PrismaPromise<runtime.Types.GetResult<CreatorPayload<ExtArgs>, T, 'findMany'>| Null>;
+    likedBy<T extends Problem$likedByArgs<ExtArgs> = {}>(args?: Subset<T, Problem$likedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.GetResult<CreatorPayload<ExtArgs>, T, 'findMany'>| Null>;
 
     creator<T extends Problem$creatorArgs<ExtArgs> = {}>(args?: Subset<T, Problem$creatorArgs<ExtArgs>>): Prisma__CreatorClient<runtime.Types.GetResult<CreatorPayload<ExtArgs>, T, 'findUnique'> | Null, never, ExtArgs>;
 
@@ -9137,7 +9110,7 @@ export namespace Prisma {
     _max: CreatorMaxAggregateOutputType | null
   }
 
-  type GetCreatorGroupByPayload<T extends CreatorGroupByArgs> = PrismaPromise<
+  type GetCreatorGroupByPayload<T extends CreatorGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<CreatorGroupByOutputType, T['by']> &
         {
@@ -9263,7 +9236,7 @@ export namespace Prisma {
     **/
     findMany<T extends CreatorFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, CreatorFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<CreatorPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<CreatorPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a Creator.
@@ -9295,7 +9268,7 @@ export namespace Prisma {
     **/
     createMany<T extends CreatorCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, CreatorCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Creator.
@@ -9346,7 +9319,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends CreatorDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, CreatorDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Creators.
@@ -9367,7 +9340,7 @@ export namespace Prisma {
     **/
     updateMany<T extends CreatorUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, CreatorUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Creator.
@@ -9405,7 +9378,7 @@ export namespace Prisma {
     **/
     count<T extends CreatorCountArgs>(
       args?: Subset<T, CreatorCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -9437,7 +9410,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CreatorAggregateArgs>(args: Subset<T, CreatorAggregateArgs>): PrismaPromise<GetCreatorAggregateType<T>>
+    aggregate<T extends CreatorAggregateArgs>(args: Subset<T, CreatorAggregateArgs>): Prisma.PrismaPromise<GetCreatorAggregateType<T>>
 
     /**
      * Group by Creator.
@@ -9514,7 +9487,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CreatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCreatorGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CreatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCreatorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -9524,10 +9497,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__CreatorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__CreatorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -9538,12 +9509,12 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    likes<T extends Creator$likesArgs<ExtArgs> = {}>(args?: Subset<T, Creator$likesArgs<ExtArgs>>): PrismaPromise<runtime.Types.GetResult<ProblemPayload<ExtArgs>, T, 'findMany'>| Null>;
+    likes<T extends Creator$likesArgs<ExtArgs> = {}>(args?: Subset<T, Creator$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.GetResult<ProblemPayload<ExtArgs>, T, 'findMany'>| Null>;
 
-    problems<T extends Creator$problemsArgs<ExtArgs> = {}>(args?: Subset<T, Creator$problemsArgs<ExtArgs>>): PrismaPromise<runtime.Types.GetResult<ProblemPayload<ExtArgs>, T, 'findMany'>| Null>;
+    problems<T extends Creator$problemsArgs<ExtArgs> = {}>(args?: Subset<T, Creator$problemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.GetResult<ProblemPayload<ExtArgs>, T, 'findMany'>| Null>;
 
     private get _document();
     /**
@@ -10139,7 +10110,7 @@ export namespace Prisma {
     _max: NativeTypeModelMaxAggregateOutputType | null
   }
 
-  type GetNativeTypeModelGroupByPayload<T extends NativeTypeModelGroupByArgs> = PrismaPromise<
+  type GetNativeTypeModelGroupByPayload<T extends NativeTypeModelGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<NativeTypeModelGroupByOutputType, T['by']> &
         {
@@ -10260,7 +10231,7 @@ export namespace Prisma {
     **/
     findMany<T extends NativeTypeModelFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, NativeTypeModelFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<NativeTypeModelPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<NativeTypeModelPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a NativeTypeModel.
@@ -10292,7 +10263,7 @@ export namespace Prisma {
     **/
     createMany<T extends NativeTypeModelCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, NativeTypeModelCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a NativeTypeModel.
@@ -10343,7 +10314,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends NativeTypeModelDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, NativeTypeModelDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more NativeTypeModels.
@@ -10364,7 +10335,7 @@ export namespace Prisma {
     **/
     updateMany<T extends NativeTypeModelUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, NativeTypeModelUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one NativeTypeModel.
@@ -10402,7 +10373,7 @@ export namespace Prisma {
     **/
     count<T extends NativeTypeModelCountArgs>(
       args?: Subset<T, NativeTypeModelCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -10434,7 +10405,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends NativeTypeModelAggregateArgs>(args: Subset<T, NativeTypeModelAggregateArgs>): PrismaPromise<GetNativeTypeModelAggregateType<T>>
+    aggregate<T extends NativeTypeModelAggregateArgs>(args: Subset<T, NativeTypeModelAggregateArgs>): Prisma.PrismaPromise<GetNativeTypeModelAggregateType<T>>
 
     /**
      * Group by NativeTypeModel.
@@ -10511,7 +10482,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, NativeTypeModelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNativeTypeModelGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, NativeTypeModelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNativeTypeModelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -10521,10 +10492,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__NativeTypeModelClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__NativeTypeModelClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -10535,8 +10504,8 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
 
     private get _document();
@@ -10988,7 +10957,7 @@ export namespace Prisma {
     _max: EquipmentMaxAggregateOutputType | null
   }
 
-  type GetEquipmentGroupByPayload<T extends EquipmentGroupByArgs> = PrismaPromise<
+  type GetEquipmentGroupByPayload<T extends EquipmentGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickArray<EquipmentGroupByOutputType, T['by']> &
         {
@@ -11103,7 +11072,7 @@ export namespace Prisma {
     **/
     findMany<T extends EquipmentFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, EquipmentFindManyArgs<ExtArgs>>
-    ): PrismaPromise<runtime.Types.GetResult<EquipmentPayload<ExtArgs>, T, 'findMany'>>
+    ): Prisma.PrismaPromise<runtime.Types.GetResult<EquipmentPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a Equipment.
@@ -11135,7 +11104,7 @@ export namespace Prisma {
     **/
     createMany<T extends EquipmentCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, EquipmentCreateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Equipment.
@@ -11186,7 +11155,7 @@ export namespace Prisma {
     **/
     deleteMany<T extends EquipmentDeleteManyArgs<ExtArgs>>(
       args?: SelectSubset<T, EquipmentDeleteManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Equipment.
@@ -11207,7 +11176,7 @@ export namespace Prisma {
     **/
     updateMany<T extends EquipmentUpdateManyArgs<ExtArgs>>(
       args: SelectSubset<T, EquipmentUpdateManyArgs<ExtArgs>>
-    ): PrismaPromise<BatchPayload>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Equipment.
@@ -11245,7 +11214,7 @@ export namespace Prisma {
     **/
     count<T extends EquipmentCountArgs>(
       args?: Subset<T, EquipmentCountArgs>,
-    ): PrismaPromise<
+    ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
@@ -11277,7 +11246,7 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends EquipmentAggregateArgs>(args: Subset<T, EquipmentAggregateArgs>): PrismaPromise<GetEquipmentAggregateType<T>>
+    aggregate<T extends EquipmentAggregateArgs>(args: Subset<T, EquipmentAggregateArgs>): Prisma.PrismaPromise<GetEquipmentAggregateType<T>>
 
     /**
      * Group by Equipment.
@@ -11354,7 +11323,7 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, EquipmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEquipmentGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, EquipmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEquipmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
@@ -11364,10 +11333,8 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__EquipmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements PrismaPromise<T> {
-    [prisma]: true;
+  export class Prisma__EquipmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
-    private readonly _fetcher;
     private readonly _queryType;
     private readonly _rootField;
     private readonly _clientMethod;
@@ -11378,8 +11345,8 @@ export namespace Prisma {
     private _isList;
     private _callsite;
     private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
 
     private get _document();

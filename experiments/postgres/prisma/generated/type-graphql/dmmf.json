@@ -711,9 +711,7 @@
             "type": "Creator",
             "relationName": "CreatorToProblem",
             "relationFromFields": [],
-            "relationToFields": [
-              "id"
-            ],
+            "relationToFields": [],
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -803,9 +801,7 @@
             "type": "Problem",
             "relationName": "CreatorToProblem",
             "relationFromFields": [],
-            "relationToFields": [
-              "id"
-            ],
+            "relationToFields": [],
             "isGenerated": false,
             "isUpdatedAt": false
           },
