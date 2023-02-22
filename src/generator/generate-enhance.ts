@@ -30,6 +30,15 @@ export function generateEnhanceMap(
     namespaceImport: "tslib",
   });
 
+  if (
+    dmmfDocument.shouldGenerateBlock("crudResolvers") ||
+    (hasRelations && dmmfDocument.shouldGenerateBlock("relationResolvers"))
+  ) {
+    sourceFile.addStatements(/* ts */ `
+      export type MethodDecoratorOverrideFn = (decorators: MethodDecorator[]) => MethodDecorator[];
+    `);
+  }
+
   if (dmmfDocument.shouldGenerateBlock("crudResolvers")) {
     sourceFile.addImportDeclaration({
       moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index`,
@@ -135,7 +144,8 @@ export function generateEnhanceMap(
 
       export type ResolverActionsConfig<
         TModel extends ResolverModelNames
-      > = Partial<Record<ModelResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
+      > = Partial<Record<ModelResolverActionNames<TModel>, MethodDecorator[] | MethodDecoratorOverrideFn>>
+        & { _all: MethodDecorator[]  };
 
       export type ResolversEnhanceMap = {
         [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
@@ -149,24 +159,18 @@ export function generateEnhanceMap(
           const crudTarget = crudResolversMap[modelName].prototype;
           const resolverActionsConfig = resolversEnhanceMap[modelName]!;
           const actionResolversConfig = actionResolversMap[modelName];
-          if (resolverActionsConfig._all) {
-            const allActionsDecorators = resolverActionsConfig._all;
-            const resolverActionNames = crudResolversInfo[modelName as keyof typeof crudResolversInfo];
+          const allActionsDecorators = resolverActionsConfig._all ?? [];
+          const resolverActionNames = crudResolversInfo[modelName as keyof typeof crudResolversInfo];
             for (const resolverActionName of resolverActionNames) {
-              const actionTarget = (actionResolversConfig[
-                resolverActionName as keyof typeof actionResolversConfig
-              ] as Function).prototype;
-              tslib.__decorate(allActionsDecorators, crudTarget, resolverActionName, null);
-              tslib.__decorate(allActionsDecorators, actionTarget, resolverActionName, null);
-            }
-          }
-          const resolverActionsToApply = Object.keys(resolverActionsConfig).filter(
-            it => it !== "_all"
-          );
-          for (const resolverActionName of resolverActionsToApply) {
-            const decorators = resolverActionsConfig[
+            const maybeDecoratorsOrFn = resolverActionsConfig[
               resolverActionName as keyof typeof resolverActionsConfig
-            ] as MethodDecorator[];
+            ] as MethodDecorator[] | MethodDecoratorOverrideFn | undefined;
+            let decorators: MethodDecorator[];
+            if (typeof maybeDecoratorsOrFn === "function") {
+              decorators = maybeDecoratorsOrFn(allActionsDecorators);
+            } else {
+              decorators = [...allActionsDecorators, ...maybeDecoratorsOrFn ?? []];
+            }
             const actionTarget = (actionResolversConfig[
               resolverActionName as keyof typeof actionResolversConfig
             ] as Function).prototype;
@@ -266,7 +270,8 @@ export function generateEnhanceMap(
         > = keyof typeof relationResolversMap[TModel]["prototype"];
 
       export type RelationResolverActionsConfig<TModel extends RelationResolverModelNames>
-        = Partial<Record<RelationResolverActionNames<TModel> | "_all", MethodDecorator[]>>;
+        = Partial<Record<RelationResolverActionNames<TModel>, MethodDecorator[] | MethodDecoratorOverrideFn>>
+        & { "_all": MethodDecorator[] };
 
       export type RelationResolversEnhanceMap = {
         [TModel in RelationResolverModelNames]?: RelationResolverActionsConfig<TModel>;
@@ -279,20 +284,18 @@ export function generateEnhanceMap(
           const modelName = relationResolversEnhanceMapKey as keyof typeof relationResolversEnhanceMap;
           const relationResolverTarget = relationResolversMap[modelName].prototype;
           const relationResolverActionsConfig = relationResolversEnhanceMap[modelName]!;
-          if (relationResolverActionsConfig._all) {
-            const allActionsDecorators = relationResolverActionsConfig._all;
-            const relationResolverActionNames = relationResolversInfo[modelName as keyof typeof relationResolversInfo];
-            for (const relationResolverActionName of relationResolverActionNames) {
-              tslib.__decorate(allActionsDecorators, relationResolverTarget, relationResolverActionName, null);
-            }
-          }
-          const relationResolverActionsToApply = Object.keys(relationResolverActionsConfig).filter(
-            it => it !== "_all"
-          );
-          for (const relationResolverActionName of relationResolverActionsToApply) {
-            const decorators = relationResolverActionsConfig[
+          const allActionsDecorators = relationResolverActionsConfig._all ?? [];
+          const relationResolverActionNames = relationResolversInfo[modelName as keyof typeof relationResolversInfo];
+          for (const relationResolverActionName of relationResolverActionNames) {
+            const maybeDecoratorsOrFn = relationResolverActionsConfig[
               relationResolverActionName as keyof typeof relationResolverActionsConfig
-            ] as MethodDecorator[];
+            ] as MethodDecorator[] | MethodDecoratorOverrideFn | undefined;
+            let decorators: MethodDecorator[];
+            if (typeof maybeDecoratorsOrFn === "function") {
+              decorators = maybeDecoratorsOrFn(allActionsDecorators);
+            } else {
+              decorators = [...allActionsDecorators, ...maybeDecoratorsOrFn ?? []];
+            }
             tslib.__decorate(decorators, relationResolverTarget, relationResolverActionName, null);
           }
         }
@@ -311,6 +314,8 @@ export function generateEnhanceMap(
         fields?: FieldsConfig;
       };
 
+      type PropertyDecoratorOverrideFn = (decorators: PropertyDecorator[]) => PropertyDecorator[];
+
       type FieldsConfig<TTypeKeys extends string = string> = Partial<
         Record<TTypeKeys | "_all", PropertyDecorator[]>
       >;
@@ -328,18 +333,18 @@ export function generateEnhanceMap(
           tslib.__decorate(enhanceConfig.class, typeClass);
         }
         if (enhanceConfig.fields) {
-          if (enhanceConfig.fields._all) {
-            const allFieldsDecorators = enhanceConfig.fields._all;
-            for (const typeFieldName of typeFieldNames) {
-              tslib.__decorate(allFieldsDecorators, typePrototype, typeFieldName, void 0);
+          const allFieldsDecorators = enhanceConfig.fields._all ?? [];
+          for (const typeFieldName of typeFieldNames) {
+            const maybeDecoratorsOrFn = enhanceConfig.fields[
+              typeFieldName
+            ] as PropertyDecorator[] | PropertyDecoratorOverrideFn | undefined;
+            let decorators: PropertyDecorator[];
+            if (typeof maybeDecoratorsOrFn === "function") {
+              decorators = maybeDecoratorsOrFn(allFieldsDecorators);
+            } else {
+              decorators = [...allFieldsDecorators, ...maybeDecoratorsOrFn ?? []];
             }
-          }
-          const configFieldsToApply = Object.keys(enhanceConfig.fields).filter(
-            it => it !== "_all"
-          );
-          for (const typeFieldName of configFieldsToApply) {
-            const fieldDecorators = enhanceConfig.fields[typeFieldName]!;
-            tslib.__decorate(fieldDecorators, typePrototype, typeFieldName, void 0);
+            tslib.__decorate(decorators, typePrototype, typeFieldName, void 0);
           }
         }
       }

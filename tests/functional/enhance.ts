@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { promises as fs } from "fs";
-import { buildSchema, Authorized } from "type-graphql";
+import { buildSchema, Authorized, Extensions } from "type-graphql";
 import { graphql } from "graphql";
 
 import generateArtifactsDirPath from "../helpers/artifacts-dir";
@@ -9,7 +9,7 @@ import { generateCodeFromSchema } from "../helpers/generate-code";
 describe("custom resolvers execution", () => {
   let outputDirPath: string;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     outputDirPath = generateArtifactsDirPath("functional-enhance");
     await fs.mkdir(outputDirPath, { recursive: true });
     const prismaSchema = /* prisma */ `
@@ -73,6 +73,160 @@ describe("custom resolvers execution", () => {
         [GraphQLError: Access denied! You need to be authorized to perform this action!],
       ]
     `);
+  }, 10000);
+
+  it("should properly apply decorators for all methods when `_all` is used", async () => {
+    const {
+      applyResolversEnhanceMap,
+      PostCrudResolver,
+    } = require(outputDirPath);
+
+    applyResolversEnhanceMap({
+      Post: {
+        _all: [Authorized()],
+      },
+    });
+
+    const document = /* graphql */ `
+      query {
+        posts(
+          take: 1
+          skip: 1
+          where: {
+            content: { startsWith: "Test" }
+          }
+          orderBy: {
+            color: desc
+          }
+        ) {
+          cuid
+          color
+        }
+      }
+    `;
+    const graphQLSchema = await buildSchema({
+      resolvers: [PostCrudResolver],
+      validate: false,
+      authChecker: () => false,
+    });
+    const { errors } = await graphql({
+      schema: graphQLSchema,
+      source: document,
+      contextValue: { prisma: {} },
+    });
+
+    expect(errors).toMatchInlineSnapshot(`
+      Array [
+        [GraphQLError: Access denied! You need to be authorized to perform this action!],
+      ]
+    `);
+  }, 10000);
+
+  it("should allow overwrite decorators when `_all` is used", async () => {
+    const {
+      applyResolversEnhanceMap,
+      PostCrudResolver,
+    } = require(outputDirPath);
+
+    applyResolversEnhanceMap({
+      Post: {
+        _all: [Authorized("ADMIN")],
+        posts: () => [Authorized("USER")],
+      },
+    });
+
+    const document = /* graphql */ `
+      query {
+        posts(
+          take: 1
+          skip: 1
+          where: {
+            content: { startsWith: "Test" }
+          }
+          orderBy: {
+            color: desc
+          }
+        ) {
+          cuid
+          color
+        }
+      }
+    `;
+    let executedRoles: string[] | undefined;
+    const graphQLSchema = await buildSchema({
+      resolvers: [PostCrudResolver],
+      validate: false,
+      authChecker: ({}, roles) => {
+        executedRoles = roles;
+        return false;
+      },
+    });
+    const { errors } = await graphql({
+      schema: graphQLSchema,
+      source: document,
+      contextValue: { prisma: {} },
+    });
+
+    expect(errors).toMatchInlineSnapshot(`
+      Array [
+        [GraphQLError: Access denied! You don't have permission for this action!],
+      ]
+    `);
+    expect(executedRoles).toEqual(["USER"]);
+  }, 10000);
+
+  it("should inject decorators to decorator fn when `_all` is used", async () => {
+    const {
+      applyResolversEnhanceMap,
+      PostCrudResolver,
+    } = require(outputDirPath);
+
+    let injectedDecorators: Function[] | undefined;
+    applyResolversEnhanceMap({
+      Post: {
+        _all: [function TestDecorator() {}],
+        posts: (decorators: Function[]) => {
+          injectedDecorators = decorators;
+          return decorators;
+        },
+      },
+    });
+
+    await buildSchema({
+      resolvers: [PostCrudResolver],
+      validate: false,
+      authChecker: () => true,
+    });
+
+    expect(injectedDecorators).toHaveLength(1);
+    expect(injectedDecorators![0].name).toEqual("TestDecorator");
+  }, 10000);
+
+  it("should concat decorators when `_all` and method specific are used together", async () => {
+    const {
+      applyResolversEnhanceMap,
+      PostCrudResolver,
+    } = require(outputDirPath);
+
+    applyResolversEnhanceMap({
+      Post: {
+        _all: [Extensions({ all: true })],
+        posts: [Extensions({ posts: true })],
+      },
+    });
+
+    const graphQLSchema = await buildSchema({
+      resolvers: [PostCrudResolver],
+      validate: false,
+      authChecker: () => true,
+    });
+
+    const postsQuery = graphQLSchema.getQueryType()!.getFields().posts;
+
+    expect(postsQuery.extensions).toEqual({
+      all: true,
+      posts: true,
+    });
   }, 10000);
 
   it("should properly apply descriptor decorators in enhance map", async () => {

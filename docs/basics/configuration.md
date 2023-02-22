@@ -41,7 +41,7 @@ By default, when the output path contains `node_modules`, the generated code is 
 
 However, if you explicitly choose some other (non `node_modules`) folder in `output` config, the generated code will be emitted as a raw TS source code files which you can just use and import like your other source code files.
 
-You can overwrite that behavior by explicitly setting `emitTranspiledCode` config option:
+You can override that behavior by explicitly setting `emitTranspiledCode` config option:
 
 ```prisma {4}
 generator typegraphql {
