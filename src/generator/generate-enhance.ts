@@ -145,7 +145,7 @@ export function generateEnhanceMap(
       export type ResolverActionsConfig<
         TModel extends ResolverModelNames
       > = Partial<Record<ModelResolverActionNames<TModel>, MethodDecorator[] | MethodDecoratorOverrideFn>>
-        & { _all: MethodDecorator[]  };
+        & { _all?: MethodDecorator[]  };
 
       export type ResolversEnhanceMap = {
         [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
@@ -271,7 +271,7 @@ export function generateEnhanceMap(
 
       export type RelationResolverActionsConfig<TModel extends RelationResolverModelNames>
         = Partial<Record<RelationResolverActionNames<TModel>, MethodDecorator[] | MethodDecoratorOverrideFn>>
-        & { "_all": MethodDecorator[] };
+        & { _all?: MethodDecorator[] };
 
       export type RelationResolversEnhanceMap = {
         [TModel in RelationResolverModelNames]?: RelationResolverActionsConfig<TModel>;
@@ -314,11 +314,11 @@ export function generateEnhanceMap(
         fields?: FieldsConfig;
       };
 
-      type PropertyDecoratorOverrideFn = (decorators: PropertyDecorator[]) => PropertyDecorator[];
+      export type PropertyDecoratorOverrideFn = (decorators: PropertyDecorator[]) => PropertyDecorator[];
 
       type FieldsConfig<TTypeKeys extends string = string> = Partial<
-        Record<TTypeKeys | "_all", PropertyDecorator[]>
-      >;
+        Record<TTypeKeys, PropertyDecorator[] | PropertyDecoratorOverrideFn>
+      > & { _all?: PropertyDecorator[] };
 
       function applyTypeClassEnhanceConfig<
         TEnhanceConfig extends TypeConfig,

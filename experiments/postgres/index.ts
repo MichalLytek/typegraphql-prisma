@@ -129,6 +129,7 @@ applyArgsTypesEnhanceMap({
   FindManyDirectorArgs: {
     fields: {
       _all: [IsDefined()],
+      cursor: () => [IsDefined()],
     },
   },
 });
