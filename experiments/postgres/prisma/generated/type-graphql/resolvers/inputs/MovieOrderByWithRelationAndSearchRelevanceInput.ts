@@ -20,15 +20,15 @@ export class MovieOrderByWithRelationAndSearchRelevanceInput {
   })
   directorLastName?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorOrderByWithRelationAndSearchRelevanceInput, {
-    nullable: true
-  })
-  director?: DirectorOrderByWithRelationAndSearchRelevanceInput | undefined;
-
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   title?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => DirectorOrderByWithRelationAndSearchRelevanceInput, {
+    nullable: true
+  })
+  director?: DirectorOrderByWithRelationAndSearchRelevanceInput | undefined;
 
   @TypeGraphQL.Field(_type => MovieOrderByRelevanceInput, {
     nullable: true

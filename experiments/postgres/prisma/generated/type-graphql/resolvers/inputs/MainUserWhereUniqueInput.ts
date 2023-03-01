@@ -54,17 +54,10 @@ export class MainUserWhereUniqueInput {
   })
   amount?: FloatFilter | undefined;
 
-  posts?: PostListRelationFilter | undefined;
-
   @TypeGraphQL.Field(_type => EnumRoleFilter, {
     nullable: true
   })
   role?: EnumRoleFilter | undefined;
-
-  @TypeGraphQL.Field(_type => PostListRelationFilter, {
-    nullable: true
-  })
-  editorPosts?: PostListRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntNullableListFilter, {
     nullable: true
@@ -75,6 +68,13 @@ export class MainUserWhereUniqueInput {
     nullable: true
   })
   aliases?: StringNullableListFilter | undefined;
+
+  posts?: PostListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => PostListRelationFilter, {
+    nullable: true
+  })
+  editorPosts?: PostListRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true

@@ -41,13 +41,13 @@ export class MovieWhereUniqueInput {
   })
   directorLastName?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorRelationFilter, {
-    nullable: true
-  })
-  director?: DirectorRelationFilter | undefined;
-
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
   title?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => DirectorRelationFilter, {
+    nullable: true
+  })
+  director?: DirectorRelationFilter | undefined;
 }

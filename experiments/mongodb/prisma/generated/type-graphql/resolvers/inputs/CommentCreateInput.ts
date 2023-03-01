@@ -13,13 +13,13 @@ export class CommentCreateInput {
   })
   id?: string | undefined;
 
-  @TypeGraphQL.Field(_type => PostCreateNestedOneWithoutCommentsInput, {
-    nullable: false
-  })
-  post!: PostCreateNestedOneWithoutCommentsInput;
-
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
   comment!: string;
+
+  @TypeGraphQL.Field(_type => PostCreateNestedOneWithoutCommentsInput, {
+    nullable: false
+  })
+  post!: PostCreateNestedOneWithoutCommentsInput;
 }

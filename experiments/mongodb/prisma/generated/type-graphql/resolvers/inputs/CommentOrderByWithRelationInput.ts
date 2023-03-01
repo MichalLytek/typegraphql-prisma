@@ -14,11 +14,6 @@ export class CommentOrderByWithRelationInput {
   })
   id?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => PostOrderByWithRelationInput, {
-    nullable: true
-  })
-  post?: PostOrderByWithRelationInput | undefined;
-
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -28,4 +23,9 @@ export class CommentOrderByWithRelationInput {
     nullable: true
   })
   comment?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => PostOrderByWithRelationInput, {
+    nullable: true
+  })
+  post?: PostOrderByWithRelationInput | undefined;
 }

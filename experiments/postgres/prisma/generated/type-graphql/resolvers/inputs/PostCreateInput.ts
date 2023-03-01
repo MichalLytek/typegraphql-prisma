@@ -35,16 +35,6 @@ export class PostCreateInput {
   })
   content?: string | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserCreateNestedOneWithoutPostsInput, {
-    nullable: false
-  })
-  author!: MainUserCreateNestedOneWithoutPostsInput;
-
-  @TypeGraphQL.Field(_type => MainUserCreateNestedOneWithoutEditorPostsInput, {
-    nullable: true
-  })
-  editor?: MainUserCreateNestedOneWithoutEditorPostsInput | undefined;
-
   @TypeGraphQL.Field(_type => PostKind, {
     nullable: true
   })
@@ -54,4 +44,14 @@ export class PostCreateInput {
     nullable: false
   })
   metadata!: Prisma.InputJsonValue;
+
+  @TypeGraphQL.Field(_type => MainUserCreateNestedOneWithoutPostsInput, {
+    nullable: false
+  })
+  author!: MainUserCreateNestedOneWithoutPostsInput;
+
+  @TypeGraphQL.Field(_type => MainUserCreateNestedOneWithoutEditorPostsInput, {
+    nullable: true
+  })
+  editor?: MainUserCreateNestedOneWithoutEditorPostsInput | undefined;
 }

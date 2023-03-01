@@ -212,8 +212,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.10.0
-   * Query Engine version: ca7fcef713137fa11029d519a9780db130cca91d
+   * Prisma Client JS version: 4.11.0
+   * Query Engine version: 8fde8fef4033376662cad983758335009d522acb
    */
   export type PrismaVersion = {
     client: string
@@ -1157,9 +1157,9 @@ export namespace Prisma {
     slug?: boolean
     title?: boolean
     body?: boolean
+    authorId?: boolean
     comments?: boolean | Post$commentsArgs
     author?: boolean | UserArgs
-    authorId?: boolean
     _count?: boolean | PostCountOutputTypeArgs
   }
 
@@ -2158,9 +2158,9 @@ export namespace Prisma {
 
   export type CommentSelect = {
     id?: boolean
-    post?: boolean | PostArgs
     postId?: boolean
     comment?: boolean
+    post?: boolean | PostArgs
   }
 
 
@@ -4080,9 +4080,9 @@ export namespace Prisma {
     slug?: StringFilter | string
     title?: StringFilter | string
     body?: StringFilter | string
+    authorId?: StringFilter | string
     comments?: CommentListRelationFilter
     author?: XOR<UserRelationFilter, UserWhereInput>
-    authorId?: StringFilter | string
   }
 
   export type PostOrderByWithRelationInput = {
@@ -4090,9 +4090,9 @@ export namespace Prisma {
     slug?: SortOrder
     title?: SortOrder
     body?: SortOrder
+    authorId?: SortOrder
     comments?: CommentOrderByRelationAggregateInput
     author?: UserOrderByWithRelationInput
-    authorId?: SortOrder
   }
 
   export type PostWhereUniqueInput = {
@@ -4127,16 +4127,16 @@ export namespace Prisma {
     OR?: Enumerable<CommentWhereInput>
     NOT?: Enumerable<CommentWhereInput>
     id?: StringFilter | string
-    post?: XOR<PostRelationFilter, PostWhereInput>
     postId?: StringFilter | string
     comment?: StringFilter | string
+    post?: XOR<PostRelationFilter, PostWhereInput>
   }
 
   export type CommentOrderByWithRelationInput = {
     id?: SortOrder
-    post?: PostOrderByWithRelationInput
     postId?: SortOrder
     comment?: SortOrder
+    post?: PostOrderByWithRelationInput
   }
 
   export type CommentWhereUniqueInput = {
@@ -4219,8 +4219,8 @@ export namespace Prisma {
     slug: string
     title: string
     body: string
-    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     authorId: string
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostUpdateInput = {
@@ -4235,8 +4235,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
-    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     authorId?: StringFieldUpdateOperationsInput | string
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostCreateManyInput = {
@@ -4262,8 +4262,8 @@ export namespace Prisma {
 
   export type CommentCreateInput = {
     id?: string
-    post: PostCreateNestedOneWithoutCommentsInput
     comment: string
+    post: PostCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateInput = {
@@ -4273,8 +4273,8 @@ export namespace Prisma {
   }
 
   export type CommentUpdateInput = {
-    post?: PostUpdateOneRequiredWithoutCommentsNestedInput
     comment?: StringFieldUpdateOperationsInput | string
+    post?: PostUpdateOneRequiredWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {

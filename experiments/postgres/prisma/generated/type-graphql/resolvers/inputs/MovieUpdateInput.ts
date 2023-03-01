@@ -8,13 +8,13 @@ import { DirectorUpdateOneRequiredWithoutMoviesNestedInput } from "../inputs/Dir
   isAbstract: true
 })
 export class MovieUpdateInput {
-  @TypeGraphQL.Field(_type => DirectorUpdateOneRequiredWithoutMoviesNestedInput, {
-    nullable: true
-  })
-  director?: DirectorUpdateOneRequiredWithoutMoviesNestedInput | undefined;
-
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   title?: string | undefined;
+
+  @TypeGraphQL.Field(_type => DirectorUpdateOneRequiredWithoutMoviesNestedInput, {
+    nullable: true
+  })
+  director?: DirectorUpdateOneRequiredWithoutMoviesNestedInput | undefined;
 }

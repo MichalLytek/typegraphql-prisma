@@ -41,20 +41,10 @@ export class PostOrderByWithRelationAndSearchRelevanceInput {
   })
   content?: SortOrderInput | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserOrderByWithRelationAndSearchRelevanceInput, {
-    nullable: true
-  })
-  author?: MainUserOrderByWithRelationAndSearchRelevanceInput | undefined;
-
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   authorId?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => MainUserOrderByWithRelationAndSearchRelevanceInput, {
-    nullable: true
-  })
-  editor?: MainUserOrderByWithRelationAndSearchRelevanceInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
@@ -70,6 +60,16 @@ export class PostOrderByWithRelationAndSearchRelevanceInput {
     nullable: true
   })
   metadata?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => MainUserOrderByWithRelationAndSearchRelevanceInput, {
+    nullable: true
+  })
+  author?: MainUserOrderByWithRelationAndSearchRelevanceInput | undefined;
+
+  @TypeGraphQL.Field(_type => MainUserOrderByWithRelationAndSearchRelevanceInput, {
+    nullable: true
+  })
+  editor?: MainUserOrderByWithRelationAndSearchRelevanceInput | undefined;
 
   @TypeGraphQL.Field(_type => PostOrderByRelevanceInput, {
     nullable: true

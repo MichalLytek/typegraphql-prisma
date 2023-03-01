@@ -295,6 +295,9 @@ export class PrismaClient<
     : false,
   ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs
       > {
+
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
+
     /**
    * ##  Prisma Client ʲˢ
    * 
@@ -595,8 +598,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.10.0
-   * Query Engine version: ca7fcef713137fa11029d519a9780db130cca91d
+   * Prisma Client JS version: 4.11.0
+   * Query Engine version: 8fde8fef4033376662cad983758335009d522acb
    */
   export type PrismaVersion = {
     client: string
@@ -1930,6 +1933,29 @@ export namespace Prisma {
         }
       }
     }
+  } & {
+    other: {
+      $executeRawUnsafe: {
+        args: [query: string, ...values: any[]],
+        result: any
+        payload: any
+      }
+      $executeRaw: {
+        args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+        result: any
+        payload: any
+      }
+      $queryRawUnsafe: {
+        args: [query: string, ...values: any[]],
+        result: any
+        payload: any
+      }
+      $queryRaw: {
+        args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+        result: any
+        payload: any
+      }
+    }
   }
   export type ExtensionArgs<
       ExtArgs extends runtime.Types.Extensions.Args,
@@ -2097,6 +2123,8 @@ export namespace Prisma {
         } & {
           $allOperations?: (args: { model: 'Hidden', operation: keyof Prisma.TypeMap['model']['Hidden'], args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Hidden'][keyof Prisma.TypeMap['model']['Hidden']]['args']>, query: (args: runtime.Types.Extensions.ReadonlySelector<Prisma.TypeMap<ExtArgs>['model']['Hidden'][keyof Prisma.TypeMap['model']['Hidden']]['args']>) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['model']['Hidden'][keyof Prisma.TypeMap['model']['Hidden']]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['model']['Hidden'][keyof Prisma.TypeMap['model']['Hidden']]['result']>
         }
+      } & {
+        [K in keyof Prisma.TypeMap['other']]?: (args: { operation: K, args: Prisma.TypeMap<ExtArgs>['other'][K]['args'], query: (args: Prisma.TypeMap<ExtArgs>['other'][K]['args']) => Prisma.PrismaPromise<Prisma.TypeMap<ExtArgs>['other'][K]['result']> }) => Promise<Prisma.TypeMap<ExtArgs>['other'][K]['result']>
       }
     client?: C & { [K: symbol]: { ctx: runtime.Types.Extensions.GetClient<PrismaClient<never, never, false, ExtArgs>, ExtArgs['client']> } }
   }
@@ -2668,11 +2696,11 @@ export namespace Prisma {
     age?: boolean
     balance?: boolean
     amount?: boolean
-    posts?: boolean | User$postsArgs<ExtArgs>
     role?: boolean
-    editorPosts?: boolean | User$editorPostsArgs<ExtArgs>
     grades?: boolean
     aliases?: boolean
+    posts?: boolean | User$postsArgs<ExtArgs>
+    editorPosts?: boolean | User$editorPostsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3724,12 +3752,12 @@ export namespace Prisma {
     title?: boolean
     subtitle?: boolean
     content?: boolean
-    author?: boolean | UserArgs<ExtArgs>
     authorId?: boolean
-    editor?: boolean | post$editorArgs<ExtArgs>
     editorId?: boolean
     kind?: boolean
     metadata?: boolean
+    author?: boolean | UserArgs<ExtArgs>
+    editor?: boolean | post$editorArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type postSelectScalar = {
@@ -6412,8 +6440,8 @@ export namespace Prisma {
   export type MovieSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     directorFirstName?: boolean
     directorLastName?: boolean
-    director?: boolean | DirectorArgs<ExtArgs>
     title?: boolean
+    director?: boolean | DirectorArgs<ExtArgs>
   }, ExtArgs["result"]["movie"]>
 
   export type MovieSelectScalar = {
@@ -8274,9 +8302,9 @@ export namespace Prisma {
   export type ProblemSelect<ExtArgs extends runtime.Types.Extensions.Args = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean
     problemText?: boolean
+    creatorId?: boolean
     likedBy?: boolean | Problem$likedByArgs<ExtArgs>
     creator?: boolean | Problem$creatorArgs<ExtArgs>
-    creatorId?: boolean
     _count?: boolean | ProblemCountOutputTypeArgs<ExtArgs>
   }, ExtArgs["result"]["problem"]>
 
@@ -12926,11 +12954,11 @@ export namespace Prisma {
     age?: IntFilter | number
     balance?: FloatFilter | number
     amount?: FloatFilter | number
-    posts?: PostListRelationFilter
     role?: EnumRoleFilter | Role
-    editorPosts?: PostListRelationFilter
     grades?: IntNullableListFilter
     aliases?: StringNullableListFilter
+    posts?: PostListRelationFilter
+    editorPosts?: PostListRelationFilter
   }
 
   export type UserOrderByWithRelationAndSearchRelevanceInput = {
@@ -12940,11 +12968,11 @@ export namespace Prisma {
     age?: SortOrder
     balance?: SortOrder
     amount?: SortOrder
-    posts?: postOrderByRelationAggregateInput
     role?: SortOrder
-    editorPosts?: postOrderByRelationAggregateInput
     grades?: SortOrder
     aliases?: SortOrder
+    posts?: postOrderByRelationAggregateInput
+    editorPosts?: postOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -12958,11 +12986,11 @@ export namespace Prisma {
     age?: IntFilter | number
     balance?: FloatFilter | number
     amount?: FloatFilter | number
-    posts?: PostListRelationFilter
     role?: EnumRoleFilter | Role
-    editorPosts?: PostListRelationFilter
     grades?: IntNullableListFilter
     aliases?: StringNullableListFilter
+    posts?: PostListRelationFilter
+    editorPosts?: PostListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -13008,12 +13036,12 @@ export namespace Prisma {
     title?: StringFilter | string
     subtitle?: StringFilter | string
     content?: StringNullableFilter | string | null
-    author?: XOR<UserRelationFilter, UserWhereInput>
     authorId?: IntFilter | number
-    editor?: XOR<UserRelationFilter, UserWhereInput> | null
     editorId?: IntNullableFilter | number | null
     kind?: EnumPostKindNullableFilter | PostKind | null
     metadata?: JsonFilter
+    author?: XOR<UserRelationFilter, UserWhereInput>
+    editor?: XOR<UserRelationFilter, UserWhereInput> | null
   }
 
   export type postOrderByWithRelationAndSearchRelevanceInput = {
@@ -13024,12 +13052,12 @@ export namespace Prisma {
     title?: SortOrder
     subtitle?: SortOrder
     content?: SortOrderInput | SortOrder
-    author?: UserOrderByWithRelationAndSearchRelevanceInput
     authorId?: SortOrder
-    editor?: UserOrderByWithRelationAndSearchRelevanceInput
     editorId?: SortOrderInput | SortOrder
     kind?: SortOrderInput | SortOrder
     metadata?: SortOrder
+    author?: UserOrderByWithRelationAndSearchRelevanceInput
+    editor?: UserOrderByWithRelationAndSearchRelevanceInput
     _relevance?: postOrderByRelevanceInput
   }
 
@@ -13044,12 +13072,12 @@ export namespace Prisma {
     title?: StringFilter | string
     subtitle?: StringFilter | string
     content?: StringNullableFilter | string | null
-    author?: XOR<UserRelationFilter, UserWhereInput>
     authorId?: IntFilter | number
-    editor?: XOR<UserRelationFilter, UserWhereInput> | null
     editorId?: IntNullableFilter | number | null
     kind?: EnumPostKindNullableFilter | PostKind | null
     metadata?: JsonFilter
+    author?: XOR<UserRelationFilter, UserWhereInput>
+    editor?: XOR<UserRelationFilter, UserWhereInput> | null
   }, "uuid">
 
   export type postOrderByWithAggregationInput = {
@@ -13184,15 +13212,15 @@ export namespace Prisma {
     NOT?: Enumerable<MovieWhereInput>
     directorFirstName?: StringFilter | string
     directorLastName?: StringFilter | string
-    director?: XOR<DirectorRelationFilter, DirectorWhereInput>
     title?: StringFilter | string
+    director?: XOR<DirectorRelationFilter, DirectorWhereInput>
   }
 
   export type MovieOrderByWithRelationAndSearchRelevanceInput = {
     directorFirstName?: SortOrder
     directorLastName?: SortOrder
-    director?: DirectorOrderByWithRelationAndSearchRelevanceInput
     title?: SortOrder
+    director?: DirectorOrderByWithRelationAndSearchRelevanceInput
     _relevance?: MovieOrderByRelevanceInput
   }
 
@@ -13203,8 +13231,8 @@ export namespace Prisma {
     NOT?: Enumerable<MovieWhereInput>
     directorFirstName?: StringFilter | string
     directorLastName?: StringFilter | string
-    director?: XOR<DirectorRelationFilter, DirectorWhereInput>
     title?: StringFilter | string
+    director?: XOR<DirectorRelationFilter, DirectorWhereInput>
   }, "movieCompoundId">
 
   export type MovieOrderByWithAggregationInput = {
@@ -13273,17 +13301,17 @@ export namespace Prisma {
     NOT?: Enumerable<ProblemWhereInput>
     id?: IntFilter | number
     problemText?: StringFilter | string
+    creatorId?: IntNullableFilter | number | null
     likedBy?: CreatorListRelationFilter
     creator?: XOR<CreatorRelationFilter, CreatorWhereInput> | null
-    creatorId?: IntNullableFilter | number | null
   }
 
   export type ProblemOrderByWithRelationAndSearchRelevanceInput = {
     id?: SortOrder
     problemText?: SortOrder
+    creatorId?: SortOrderInput | SortOrder
     likedBy?: CreatorOrderByRelationAggregateInput
     creator?: CreatorOrderByWithRelationAndSearchRelevanceInput
-    creatorId?: SortOrderInput | SortOrder
     _relevance?: ProblemOrderByRelevanceInput
   }
 
@@ -13293,9 +13321,9 @@ export namespace Prisma {
     OR?: Enumerable<ProblemWhereInput>
     NOT?: Enumerable<ProblemWhereInput>
     problemText?: StringFilter | string
+    creatorId?: IntNullableFilter | number | null
     likedBy?: CreatorListRelationFilter
     creator?: XOR<CreatorRelationFilter, CreatorWhereInput> | null
-    creatorId?: IntNullableFilter | number | null
   }, "id">
 
   export type ProblemOrderByWithAggregationInput = {
@@ -13495,11 +13523,11 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
-    posts?: postCreateNestedManyWithoutAuthorInput
     role: Role
-    editorPosts?: postCreateNestedManyWithoutEditorInput
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
+    posts?: postCreateNestedManyWithoutAuthorInput
+    editorPosts?: postCreateNestedManyWithoutEditorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -13509,11 +13537,11 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
-    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
     role: Role
-    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
+    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
+    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
 
   export type UserUpdateInput = {
@@ -13522,11 +13550,11 @@ export namespace Prisma {
     age?: IntFieldUpdateOperationsInput | number
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
-    posts?: postUpdateManyWithoutAuthorNestedInput
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    editorPosts?: postUpdateManyWithoutEditorNestedInput
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
+    posts?: postUpdateManyWithoutAuthorNestedInput
+    editorPosts?: postUpdateManyWithoutEditorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -13536,11 +13564,11 @@ export namespace Prisma {
     age?: IntFieldUpdateOperationsInput | number
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
-    posts?: postUncheckedUpdateManyWithoutAuthorNestedInput
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    editorPosts?: postUncheckedUpdateManyWithoutEditorNestedInput
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
+    posts?: postUncheckedUpdateManyWithoutAuthorNestedInput
+    editorPosts?: postUncheckedUpdateManyWithoutEditorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13586,10 +13614,10 @@ export namespace Prisma {
     title: string
     subtitle: string
     content?: string | null
-    author: UserCreateNestedOneWithoutPostsInput
-    editor?: UserCreateNestedOneWithoutEditorPostsInput
     kind?: PostKind | null
     metadata: JsonNullValueInput | InputJsonValue
+    author: UserCreateNestedOneWithoutPostsInput
+    editor?: UserCreateNestedOneWithoutEditorPostsInput
   }
 
   export type postUncheckedCreateInput = {
@@ -13614,10 +13642,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: UserUpdateOneRequiredWithoutPostsNestedInput
-    editor?: UserUpdateOneWithoutEditorPostsNestedInput
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: JsonNullValueInput | InputJsonValue
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
+    editor?: UserUpdateOneWithoutEditorPostsNestedInput
   }
 
   export type postUncheckedUpdateInput = {
@@ -13759,8 +13787,8 @@ export namespace Prisma {
   }
 
   export type MovieCreateInput = {
-    director: DirectorCreateNestedOneWithoutMoviesInput
     title: string
+    director: DirectorCreateNestedOneWithoutMoviesInput
   }
 
   export type MovieUncheckedCreateInput = {
@@ -13770,8 +13798,8 @@ export namespace Prisma {
   }
 
   export type MovieUpdateInput = {
-    director?: DirectorUpdateOneRequiredWithoutMoviesNestedInput
     title?: StringFieldUpdateOperationsInput | string
+    director?: DirectorUpdateOneRequiredWithoutMoviesNestedInput
   }
 
   export type MovieUncheckedUpdateInput = {
@@ -13844,8 +13872,8 @@ export namespace Prisma {
   export type ProblemUncheckedCreateInput = {
     id?: number
     problemText: string
-    likedBy?: CreatorUncheckedCreateNestedManyWithoutLikesInput
     creatorId?: number | null
+    likedBy?: CreatorUncheckedCreateNestedManyWithoutLikesInput
   }
 
   export type ProblemUpdateInput = {
@@ -13857,8 +13885,8 @@ export namespace Prisma {
   export type ProblemUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     problemText?: StringFieldUpdateOperationsInput | string
-    likedBy?: CreatorUncheckedUpdateManyWithoutLikesNestedInput
     creatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    likedBy?: CreatorUncheckedUpdateManyWithoutLikesNestedInput
   }
 
   export type ProblemCreateManyInput = {
@@ -14087,12 +14115,6 @@ export namespace Prisma {
     not?: NestedFloatFilter | number
   }
 
-  export type PostListRelationFilter = {
-    every?: postWhereInput
-    some?: postWhereInput
-    none?: postWhereInput
-  }
-
   export type EnumRoleFilter = {
     equals?: Role
     in?: Enumerable<Role>
@@ -14114,6 +14136,12 @@ export namespace Prisma {
     hasEvery?: Enumerable<string>
     hasSome?: Enumerable<string>
     isEmpty?: boolean
+  }
+
+  export type PostListRelationFilter = {
+    every?: postWhereInput
+    some?: postWhereInput
+    none?: postWhereInput
   }
 
   export type SortOrderInput = {
@@ -14275,11 +14303,6 @@ export namespace Prisma {
     not?: NestedBoolFilter | boolean
   }
 
-  export type UserRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type IntNullableFilter = {
     equals?: number | null
     in?: Enumerable<number> | null
@@ -14318,6 +14341,11 @@ export namespace Prisma {
     gt?: InputJsonValue
     gte?: InputJsonValue
     not?: InputJsonValue | JsonNullValueFilter
+  }
+
+  export type UserRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type postOrderByRelevanceInput = {
@@ -14820,6 +14848,14 @@ export namespace Prisma {
     name?: SortOrder
   }
 
+  export type UserCreategradesInput = {
+    set: Enumerable<number>
+  }
+
+  export type UserCreatealiasesInput = {
+    set: Enumerable<string>
+  }
+
   export type postCreateNestedManyWithoutAuthorInput = {
     create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
@@ -14832,14 +14868,6 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
     createMany?: postCreateManyEditorInputEnvelope
     connect?: Enumerable<postWhereUniqueInput>
-  }
-
-  export type UserCreategradesInput = {
-    set: Enumerable<number>
-  }
-
-  export type UserCreatealiasesInput = {
-    set: Enumerable<string>
   }
 
   export type postUncheckedCreateNestedManyWithoutAuthorInput = {
@@ -14880,6 +14908,20 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: Role
+  }
+
+  export type UserUpdategradesInput = {
+    set?: Enumerable<number>
+    push?: number | Enumerable<number>
+  }
+
+  export type UserUpdatealiasesInput = {
+    set?: Enumerable<string>
+    push?: string | Enumerable<string>
+  }
+
   export type postUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<Enumerable<postCreateWithoutAuthorInput>, Enumerable<postUncheckedCreateWithoutAuthorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutAuthorInput>
@@ -14894,10 +14936,6 @@ export namespace Prisma {
     deleteMany?: Enumerable<postScalarWhereInput>
   }
 
-  export type EnumRoleFieldUpdateOperationsInput = {
-    set?: Role
-  }
-
   export type postUpdateManyWithoutEditorNestedInput = {
     create?: XOR<Enumerable<postCreateWithoutEditorInput>, Enumerable<postUncheckedCreateWithoutEditorInput>>
     connectOrCreate?: Enumerable<postCreateOrConnectWithoutEditorInput>
@@ -14910,16 +14948,6 @@ export namespace Prisma {
     update?: Enumerable<postUpdateWithWhereUniqueWithoutEditorInput>
     updateMany?: Enumerable<postUpdateManyWithWhereWithoutEditorInput>
     deleteMany?: Enumerable<postScalarWhereInput>
-  }
-
-  export type UserUpdategradesInput = {
-    set?: Enumerable<number>
-    push?: number | Enumerable<number>
-  }
-
-  export type UserUpdatealiasesInput = {
-    set?: Enumerable<string>
-    push?: string | Enumerable<string>
   }
 
   export type postUncheckedUpdateManyWithoutAuthorNestedInput = {
@@ -14970,6 +14998,10 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type NullableEnumPostKindFieldUpdateOperationsInput = {
+    set?: PostKind | null
+  }
+
   export type UserUpdateOneRequiredWithoutPostsNestedInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
@@ -14986,10 +15018,6 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEditorPostsInput, UserUpdateWithoutEditorPostsInput>, UserUncheckedUpdateWithoutEditorPostsInput>
-  }
-
-  export type NullableEnumPostKindFieldUpdateOperationsInput = {
-    set?: PostKind | null
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -15541,9 +15569,9 @@ export namespace Prisma {
     title: string
     subtitle: string
     content?: string | null
-    editor?: UserCreateNestedOneWithoutEditorPostsInput
     kind?: PostKind | null
     metadata: JsonNullValueInput | InputJsonValue
+    editor?: UserCreateNestedOneWithoutEditorPostsInput
   }
 
   export type postUncheckedCreateWithoutAuthorInput = {
@@ -15577,9 +15605,9 @@ export namespace Prisma {
     title: string
     subtitle: string
     content?: string | null
-    author: UserCreateNestedOneWithoutPostsInput
     kind?: PostKind | null
     metadata: JsonNullValueInput | InputJsonValue
+    author: UserCreateNestedOneWithoutPostsInput
   }
 
   export type postUncheckedCreateWithoutEditorInput = {
@@ -15661,9 +15689,9 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    editorPosts?: postCreateNestedManyWithoutEditorInput
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
+    editorPosts?: postCreateNestedManyWithoutEditorInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -15674,9 +15702,9 @@ export namespace Prisma {
     balance: number
     amount: number
     role: Role
-    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
+    editorPosts?: postUncheckedCreateNestedManyWithoutEditorInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -15690,10 +15718,10 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
-    posts?: postCreateNestedManyWithoutAuthorInput
     role: Role
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
+    posts?: postCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutEditorPostsInput = {
@@ -15703,10 +15731,10 @@ export namespace Prisma {
     age: number
     balance: number
     amount: number
-    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
     role: Role
     grades?: UserCreategradesInput | Enumerable<number>
     aliases?: UserCreatealiasesInput | Enumerable<string>
+    posts?: postUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutEditorPostsInput = {
@@ -15732,9 +15760,9 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    editorPosts?: postUpdateManyWithoutEditorNestedInput
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
+    editorPosts?: postUpdateManyWithoutEditorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -15745,9 +15773,9 @@ export namespace Prisma {
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    editorPosts?: postUncheckedUpdateManyWithoutEditorNestedInput
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
+    editorPosts?: postUncheckedUpdateManyWithoutEditorNestedInput
   }
 
   export type UserUpsertWithoutEditorPostsInput = {
@@ -15767,10 +15795,10 @@ export namespace Prisma {
     age?: IntFieldUpdateOperationsInput | number
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
-    posts?: postUpdateManyWithoutAuthorNestedInput
     role?: EnumRoleFieldUpdateOperationsInput | Role
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
+    posts?: postUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEditorPostsInput = {
@@ -15780,10 +15808,10 @@ export namespace Prisma {
     age?: IntFieldUpdateOperationsInput | number
     balance?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
-    posts?: postUncheckedUpdateManyWithoutAuthorNestedInput
     role?: EnumRoleFieldUpdateOperationsInput | Role
     grades?: UserUpdategradesInput | Enumerable<number>
     aliases?: UserUpdatealiasesInput | Enumerable<string>
+    posts?: postUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type DirectorCreateWithoutMoviesInput = {
@@ -16055,9 +16083,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    editor?: UserUpdateOneWithoutEditorPostsNestedInput
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: JsonNullValueInput | InputJsonValue
+    editor?: UserUpdateOneWithoutEditorPostsNestedInput
   }
 
   export type postUncheckedUpdateWithoutAuthorInput = {
@@ -16094,9 +16122,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     subtitle?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: UserUpdateOneRequiredWithoutPostsNestedInput
     kind?: NullableEnumPostKindFieldUpdateOperationsInput | PostKind | null
     metadata?: JsonNullValueInput | InputJsonValue
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
   }
 
   export type postUncheckedUpdateWithoutEditorInput = {

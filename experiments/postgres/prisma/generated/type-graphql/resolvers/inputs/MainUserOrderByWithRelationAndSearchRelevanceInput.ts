@@ -35,17 +35,10 @@ export class MainUserOrderByWithRelationAndSearchRelevanceInput {
   })
   amount?: "asc" | "desc" | undefined;
 
-  posts?: PostOrderByRelationAggregateInput | undefined;
-
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   role?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => PostOrderByRelationAggregateInput, {
-    nullable: true
-  })
-  editorPosts?: PostOrderByRelationAggregateInput | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -56,6 +49,13 @@ export class MainUserOrderByWithRelationAndSearchRelevanceInput {
     nullable: true
   })
   aliases?: "asc" | "desc" | undefined;
+
+  posts?: PostOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => PostOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  editorPosts?: PostOrderByRelationAggregateInput | undefined;
 
   @TypeGraphQL.Field(_type => MainUserOrderByRelevanceInput, {
     nullable: true

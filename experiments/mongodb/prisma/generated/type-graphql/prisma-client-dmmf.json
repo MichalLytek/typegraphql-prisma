@@ -458,6 +458,24 @@
               ]
             },
             {
+              "name": "authorId",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "StringFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "comments",
               "isRequired": false,
               "isNullable": false,
@@ -485,24 +503,6 @@
                   "type": "UserWhereInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "authorId",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "StringFilter",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "String",
-                  "location": "scalar",
                   "isList": false
                 }
               ]
@@ -569,6 +569,19 @@
               ]
             },
             {
+              "name": "authorId",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "SortOrder",
+                  "namespace": "prisma",
+                  "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "comments",
               "isRequired": false,
               "isNullable": false,
@@ -590,19 +603,6 @@
                   "type": "UserOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "authorId",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "SortOrder",
-                  "namespace": "prisma",
-                  "location": "enumTypes",
                   "isList": false
                 }
               ]
@@ -988,25 +988,6 @@
               ]
             },
             {
-              "name": "post",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "PostRelationFilter",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                },
-                {
-                  "type": "PostWhereInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "postId",
               "isRequired": false,
               "isNullable": false,
@@ -1038,6 +1019,25 @@
                 {
                   "type": "String",
                   "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "post",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "PostRelationFilter",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "PostWhereInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -1065,19 +1065,6 @@
               ]
             },
             {
-              "name": "post",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "PostOrderByWithRelationInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "postId",
               "isRequired": false,
               "isNullable": false,
@@ -1099,6 +1086,19 @@
                   "type": "SortOrder",
                   "namespace": "prisma",
                   "location": "enumTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "post",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "PostOrderByWithRelationInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": false
                 }
               ]
@@ -1965,6 +1965,18 @@
               ]
             },
             {
+              "name": "authorId",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "comments",
               "isRequired": false,
               "isNullable": false,
@@ -1973,18 +1985,6 @@
                   "type": "CommentUncheckedCreateNestedManyWithoutPostInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "authorId",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
                   "isList": false
                 }
               ]
@@ -2142,19 +2142,6 @@
               ]
             },
             {
-              "name": "comments",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "CommentUncheckedUpdateManyWithoutPostNestedInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "authorId",
               "isRequired": false,
               "isNullable": false,
@@ -2166,6 +2153,19 @@
                 },
                 {
                   "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "comments",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "CommentUncheckedUpdateManyWithoutPostNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -2407,6 +2407,18 @@
               ]
             },
             {
+              "name": "comment",
+              "isRequired": true,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
+                }
+              ]
+            },
+            {
               "name": "post",
               "isRequired": true,
               "isNullable": false,
@@ -2415,18 +2427,6 @@
                   "type": "PostCreateNestedOneWithoutCommentsInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
-              "name": "comment",
-              "isRequired": true,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "String",
-                  "location": "scalar",
                   "isList": false
                 }
               ]
@@ -2486,19 +2486,6 @@
           },
           "fields": [
             {
-              "name": "post",
-              "isRequired": false,
-              "isNullable": false,
-              "inputTypes": [
-                {
-                  "type": "PostUpdateOneRequiredWithoutCommentsNestedInput",
-                  "namespace": "prisma",
-                  "location": "inputObjectTypes",
-                  "isList": false
-                }
-              ]
-            },
-            {
               "name": "comment",
               "isRequired": false,
               "isNullable": false,
@@ -2510,6 +2497,19 @@
                 },
                 {
                   "type": "StringFieldUpdateOperationsInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                }
+              ]
+            },
+            {
+              "name": "post",
+              "isRequired": false,
+              "isNullable": false,
+              "inputTypes": [
+                {
+                  "type": "PostUpdateOneRequiredWithoutCommentsNestedInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -7772,6 +7772,12 @@
                   "type": "CommentCreateManyPostInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
+                  "isList": false
+                },
+                {
+                  "type": "CommentCreateManyPostInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
                   "isList": true
                 }
               ]
@@ -8978,6 +8984,12 @@
               "isRequired": true,
               "isNullable": false,
               "inputTypes": [
+                {
+                  "type": "PostCreateManyAuthorInput",
+                  "namespace": "prisma",
+                  "location": "inputObjectTypes",
+                  "isList": false
+                },
                 {
                   "type": "PostCreateManyAuthorInput",
                   "namespace": "prisma",
@@ -11604,6 +11616,12 @@
                       "type": "PostCreateManyInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "PostCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
                       "isList": true
                     }
                   ]
@@ -11861,6 +11879,12 @@
                       "type": "CommentCreateManyInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "CommentCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
                       "isList": true
                     }
                   ]
@@ -12114,6 +12138,12 @@
                   "isRequired": true,
                   "isNullable": false,
                   "inputTypes": [
+                    {
+                      "type": "UserCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
                     {
                       "type": "UserCreateManyInput",
                       "namespace": "prisma",
@@ -13202,6 +13232,16 @@
               }
             },
             {
+              "name": "authorId",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
               "name": "comments",
               "args": [
                 {
@@ -13307,16 +13347,6 @@
               }
             },
             {
-              "name": "authorId",
-              "args": [],
-              "isNullable": false,
-              "outputType": {
-                "type": "String",
-                "location": "scalar",
-                "isList": false
-              }
-            },
-            {
               "name": "_count",
               "args": [],
               "isNullable": false,
@@ -13343,17 +13373,6 @@
               }
             },
             {
-              "name": "post",
-              "args": [],
-              "isNullable": false,
-              "outputType": {
-                "type": "Post",
-                "namespace": "model",
-                "location": "outputObjectTypes",
-                "isList": false
-              }
-            },
-            {
               "name": "postId",
               "args": [],
               "isNullable": false,
@@ -13370,6 +13389,17 @@
               "outputType": {
                 "type": "String",
                 "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "post",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Post",
+                "namespace": "model",
+                "location": "outputObjectTypes",
                 "isList": false
               }
             }

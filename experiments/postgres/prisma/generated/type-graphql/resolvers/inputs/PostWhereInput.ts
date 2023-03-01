@@ -61,20 +61,10 @@ export class PostWhereInput {
   })
   content?: StringNullableFilter | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserRelationFilter, {
-    nullable: true
-  })
-  author?: MainUserRelationFilter | undefined;
-
   @TypeGraphQL.Field(_type => IntFilter, {
     nullable: true
   })
   authorId?: IntFilter | undefined;
-
-  @TypeGraphQL.Field(_type => MainUserRelationFilter, {
-    nullable: true
-  })
-  editor?: MainUserRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntNullableFilter, {
     nullable: true
@@ -90,4 +80,14 @@ export class PostWhereInput {
     nullable: true
   })
   metadata?: JsonFilter | undefined;
+
+  @TypeGraphQL.Field(_type => MainUserRelationFilter, {
+    nullable: true
+  })
+  author?: MainUserRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => MainUserRelationFilter, {
+    nullable: true
+  })
+  editor?: MainUserRelationFilter | undefined;
 }

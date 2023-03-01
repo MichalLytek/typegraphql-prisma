@@ -34,11 +34,6 @@ export class PostUpdateWithoutAuthorInput {
   })
   content?: string | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserUpdateOneWithoutEditorPostsNestedInput, {
-    nullable: true
-  })
-  editor?: MainUserUpdateOneWithoutEditorPostsNestedInput | undefined;
-
   @TypeGraphQL.Field(_type => PostKind, {
     nullable: true
   })
@@ -48,4 +43,9 @@ export class PostUpdateWithoutAuthorInput {
     nullable: true
   })
   metadata?: Prisma.InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => MainUserUpdateOneWithoutEditorPostsNestedInput, {
+    nullable: true
+  })
+  editor?: MainUserUpdateOneWithoutEditorPostsNestedInput | undefined;
 }

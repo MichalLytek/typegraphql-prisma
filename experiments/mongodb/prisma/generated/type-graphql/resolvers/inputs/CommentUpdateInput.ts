@@ -8,13 +8,13 @@ import { PostUpdateOneRequiredWithoutCommentsNestedInput } from "../inputs/PostU
   isAbstract: true
 })
 export class CommentUpdateInput {
-  @TypeGraphQL.Field(_type => PostUpdateOneRequiredWithoutCommentsNestedInput, {
-    nullable: true
-  })
-  post?: PostUpdateOneRequiredWithoutCommentsNestedInput | undefined;
-
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   comment?: string | undefined;
+
+  @TypeGraphQL.Field(_type => PostUpdateOneRequiredWithoutCommentsNestedInput, {
+    nullable: true
+  })
+  post?: PostUpdateOneRequiredWithoutCommentsNestedInput | undefined;
 }

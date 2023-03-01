@@ -45,6 +45,11 @@ export class PostWhereInput {
   })
   body?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  authorId?: StringFilter | undefined;
+
   @TypeGraphQL.Field(_type => CommentListRelationFilter, {
     nullable: true
   })
@@ -54,9 +59,4 @@ export class PostWhereInput {
     nullable: true
   })
   author?: UserRelationFilter | undefined;
-
-  @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true
-  })
-  authorId?: StringFilter | undefined;
 }

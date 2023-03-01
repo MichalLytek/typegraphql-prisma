@@ -37,6 +37,11 @@ export class ProblemWhereInput {
   })
   problemText?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => IntNullableFilter, {
+    nullable: true
+  })
+  creatorId?: IntNullableFilter | undefined;
+
   @TypeGraphQL.Field(_type => CreatorListRelationFilter, {
     nullable: true
   })
@@ -46,9 +51,4 @@ export class ProblemWhereInput {
     nullable: true
   })
   creator?: CreatorRelationFilter | undefined;
-
-  @TypeGraphQL.Field(_type => IntNullableFilter, {
-    nullable: true
-  })
-  creatorId?: IntNullableFilter | undefined;
 }

@@ -22,6 +22,11 @@ export class ProblemOrderByWithRelationAndSearchRelevanceInput {
   })
   problemText?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => SortOrderInput, {
+    nullable: true
+  })
+  creatorId?: SortOrderInput | undefined;
+
   @TypeGraphQL.Field(_type => CreatorOrderByRelationAggregateInput, {
     nullable: true
   })
@@ -31,11 +36,6 @@ export class ProblemOrderByWithRelationAndSearchRelevanceInput {
     nullable: true
   })
   creator?: CreatorOrderByWithRelationAndSearchRelevanceInput | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrderInput, {
-    nullable: true
-  })
-  creatorId?: SortOrderInput | undefined;
 
   @TypeGraphQL.Field(_type => ProblemOrderByRelevanceInput, {
     nullable: true

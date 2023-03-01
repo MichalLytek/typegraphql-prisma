@@ -3,7 +3,17 @@ import type { Config } from "@jest/types";
 const config: Config.InitialOptions = {
   verbose: false,
   testEnvironment: "node",
-  preset: "ts-jest",
+  transform: {
+    // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
+    // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        // ts-jest configuration goes here
+        tsconfig: "<rootDir>/tests/tsconfig.json",
+      },
+    ],
+  },
   testMatch: ["<rootDir>/tests/**/*.ts"],
   testPathIgnorePatterns: [
     "<rootDir>/tests/helpers",
@@ -11,11 +21,6 @@ const config: Config.InitialOptions = {
     "<rootDir>/tests/.*integration.*",
   ],
   rootDir: "./",
-  globals: {
-    "ts-jest": {
-      tsconfig: "<rootDir>/tests/tsconfig.json",
-    },
-  },
   collectCoverage: false,
   coverageDirectory: "<rootDir>/coverage",
   collectCoverageFrom: ["<rootDir>/src/**/*.ts", "!<rootDir>/src/**/*.d.ts"],
@@ -26,6 +31,10 @@ const config: Config.InitialOptions = {
     "<rootDir>/tests/artifacts",
   ],
   testTimeout: 10000,
+  snapshotFormat: {
+    escapeString: true,
+    printBasicPrototype: true,
+  },
 };
 
 export default config;

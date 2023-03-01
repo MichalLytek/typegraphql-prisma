@@ -826,23 +826,28 @@ input FloatWithAggregatesFilter {
 """Generated omitted type with custom description"""
 type Hidden {
   id: ID!
+  name: String
 }
 
 type HiddenCountAggregate {
   _all: Int!
   id: Int!
+  name: Int!
 }
 
 input HiddenCountOrderByAggregateInput {
   id: SortOrder
+  name: SortOrder
 }
 
 input HiddenCreateInput {
   id: String
+  name: String
 }
 
 input HiddenCreateManyInput {
   id: String
+  name: String
 }
 
 type HiddenGroupBy {
@@ -850,26 +855,32 @@ type HiddenGroupBy {
   _max: HiddenMaxAggregate
   _min: HiddenMinAggregate
   id: String!
+  name: String
 }
 
 type HiddenMaxAggregate {
   id: String
+  name: String
 }
 
 input HiddenMaxOrderByAggregateInput {
   id: SortOrder
+  name: SortOrder
 }
 
 type HiddenMinAggregate {
   id: String
+  name: String
 }
 
 input HiddenMinOrderByAggregateInput {
   id: SortOrder
+  name: SortOrder
 }
 
 enum HiddenOrderByRelevanceFieldEnum {
   id
+  name
 }
 
 input HiddenOrderByRelevanceInput {
@@ -883,15 +894,18 @@ input HiddenOrderByWithAggregationInput {
   _max: HiddenMaxOrderByAggregateInput
   _min: HiddenMinOrderByAggregateInput
   id: SortOrder
+  name: SortOrderInput
 }
 
 input HiddenOrderByWithRelationAndSearchRelevanceInput {
   _relevance: HiddenOrderByRelevanceInput
   id: SortOrder
+  name: SortOrderInput
 }
 
 enum HiddenScalarFieldEnum {
   id
+  name
 }
 
 input HiddenScalarWhereWithAggregatesInput {
@@ -899,14 +913,17 @@ input HiddenScalarWhereWithAggregatesInput {
   NOT: [HiddenScalarWhereWithAggregatesInput!]
   OR: [HiddenScalarWhereWithAggregatesInput!]
   id: StringWithAggregatesFilter
+  name: StringNullableWithAggregatesFilter
 }
 
 input HiddenUpdateInput {
   id: String
+  name: String
 }
 
 input HiddenUpdateManyMutationInput {
   id: String
+  name: String
 }
 
 input HiddenWhereInput {
@@ -914,6 +931,7 @@ input HiddenWhereInput {
   NOT: [HiddenWhereInput!]
   OR: [HiddenWhereInput!]
   id: StringFilter
+  name: StringNullableFilter
 }
 
 input HiddenWhereUniqueInput {
@@ -921,6 +939,7 @@ input HiddenWhereUniqueInput {
   NOT: [HiddenWhereInput!]
   OR: [HiddenWhereInput!]
   id: String
+  name: StringNullableFilter
 }
 
 input IntFilter {

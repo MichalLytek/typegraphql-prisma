@@ -8,13 +8,13 @@ import { DirectorCreateNestedOneWithoutMoviesInput } from "../inputs/DirectorCre
   isAbstract: true
 })
 export class MovieCreateInput {
-  @TypeGraphQL.Field(_type => DirectorCreateNestedOneWithoutMoviesInput, {
-    nullable: false
-  })
-  director!: DirectorCreateNestedOneWithoutMoviesInput;
-
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
   title!: string;
+
+  @TypeGraphQL.Field(_type => DirectorCreateNestedOneWithoutMoviesInput, {
+    nullable: false
+  })
+  director!: DirectorCreateNestedOneWithoutMoviesInput;
 }

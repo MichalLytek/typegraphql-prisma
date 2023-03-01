@@ -29,11 +29,6 @@ export class CommentWhereInput {
   })
   id?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => PostRelationFilter, {
-    nullable: true
-  })
-  post?: PostRelationFilter | undefined;
-
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
@@ -43,4 +38,9 @@ export class CommentWhereInput {
     nullable: true
   })
   comment?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => PostRelationFilter, {
+    nullable: true
+  })
+  post?: PostRelationFilter | undefined;
 }

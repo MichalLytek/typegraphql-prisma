@@ -3494,11 +3494,6 @@ export class MovieOrderByWithRelationInput {
   })
   directorLastName?: \\"asc\\" | \\"desc\\" | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorOrderByWithRelationInput, {
-    nullable: true
-  })
-  director?: DirectorOrderByWithRelationInput | undefined;
-
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -3508,6 +3503,11 @@ export class MovieOrderByWithRelationInput {
     nullable: true
   })
   rating?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => DirectorOrderByWithRelationInput, {
+    nullable: true
+  })
+  director?: DirectorOrderByWithRelationInput | undefined;
 }
 "
 `;
@@ -3600,11 +3600,6 @@ export class MovieWhereInput {
   })
   directorLastName?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorRelationFilter, {
-    nullable: true
-  })
-  director?: DirectorRelationFilter | undefined;
-
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
@@ -3614,6 +3609,11 @@ export class MovieWhereInput {
     nullable: true
   })
   rating?: FloatFilter | undefined;
+
+  @TypeGraphQL.Field(_type => DirectorRelationFilter, {
+    nullable: true
+  })
+  director?: DirectorRelationFilter | undefined;
 }
 "
 `;
@@ -7740,15 +7740,15 @@ export class ExampleOrderByWithRelationInput {
   })
   dateField?: \\"asc\\" | \\"desc\\" | undefined;
 
-  @TypeGraphQL.Field(_type => OtherModelOrderByWithRelationInput, {
-    nullable: true
-  })
-  other?: OtherModelOrderByWithRelationInput | undefined;
-
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
   otherId?: \\"asc\\" | \\"desc\\" | undefined;
+
+  @TypeGraphQL.Field(_type => OtherModelOrderByWithRelationInput, {
+    nullable: true
+  })
+  other?: OtherModelOrderByWithRelationInput | undefined;
 }
 "
 `;
@@ -7809,15 +7809,15 @@ export class ExampleWhereInput {
   })
   dateField?: DateTimeFilter | undefined;
 
-  @TypeGraphQL.Field(_type => OtherModelRelationFilter, {
-    nullable: true
-  })
-  other?: OtherModelRelationFilter | undefined;
-
   @TypeGraphQL.Field(_type => IntFilter, {
     nullable: true
   })
   otherId?: IntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => OtherModelRelationFilter, {
+    nullable: true
+  })
+  other?: OtherModelRelationFilter | undefined;
 }
 "
 `;
