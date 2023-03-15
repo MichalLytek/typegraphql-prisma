@@ -9,7 +9,7 @@ export class FindManyHiddenResolver {
   @TypeGraphQL.Query(_returns => [Hidden], {
     nullable: false
   })
-  async hiddens(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyHiddenArgs) args: FindManyHiddenArgs): Promise<Hidden[]> {
+  async hiddens(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => FindManyHiddenArgs) args: FindManyHiddenArgs): Promise<Hidden[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).hidden.findMany({
       ...args,

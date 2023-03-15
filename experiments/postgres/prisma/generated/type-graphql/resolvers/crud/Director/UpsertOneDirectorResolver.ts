@@ -9,7 +9,7 @@ export class UpsertOneDirectorResolver {
   @TypeGraphQL.Mutation(_returns => Director, {
     nullable: false
   })
-  async upsertOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpsertOneDirectorArgs) args: UpsertOneDirectorArgs): Promise<Director> {
+  async upsertOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => UpsertOneDirectorArgs) args: UpsertOneDirectorArgs): Promise<Director> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.upsert({
       ...args,

@@ -9,7 +9,7 @@ export class FindFirstCreatorResolver {
   @TypeGraphQL.Query(_returns => Creator, {
     nullable: true
   })
-  async findFirstCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindFirstCreatorArgs) args: FindFirstCreatorArgs): Promise<Creator | null> {
+  async findFirstCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => FindFirstCreatorArgs) args: FindFirstCreatorArgs): Promise<Creator | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).creator.findFirst({
       ...args,

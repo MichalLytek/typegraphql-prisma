@@ -9,7 +9,7 @@ export class CreateOnePatientResolver {
   @TypeGraphQL.Mutation(_returns => Patient, {
     nullable: false
   })
-  async createOnePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => CreateOnePatientArgs) args: CreateOnePatientArgs): Promise<Patient> {
+  async createOnePatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateOnePatientArgs) args: CreateOnePatientArgs): Promise<Patient> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).patient.create({
       ...args,

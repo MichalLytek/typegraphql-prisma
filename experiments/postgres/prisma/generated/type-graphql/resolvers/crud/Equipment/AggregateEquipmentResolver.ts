@@ -10,7 +10,7 @@ export class AggregateEquipmentResolver {
   @TypeGraphQL.Query(_returns => AggregateEquipment, {
     nullable: false
   })
-  async aggregateEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => AggregateEquipmentArgs) args: AggregateEquipmentArgs): Promise<AggregateEquipment> {
+  async aggregateEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => AggregateEquipmentArgs) args: AggregateEquipmentArgs): Promise<AggregateEquipment> {
     return getPrismaFromContext(ctx).equipment.aggregate({
       ...args,
       ...transformInfoIntoPrismaArgs(info),

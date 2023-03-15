@@ -9,7 +9,7 @@ export class FindUniqueDirectorResolver {
   @TypeGraphQL.Query(_returns => Director, {
     nullable: true
   })
-  async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindUniqueDirectorArgs) args: FindUniqueDirectorArgs): Promise<Director | null> {
+  async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => FindUniqueDirectorArgs) args: FindUniqueDirectorArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.findUnique({
       ...args,

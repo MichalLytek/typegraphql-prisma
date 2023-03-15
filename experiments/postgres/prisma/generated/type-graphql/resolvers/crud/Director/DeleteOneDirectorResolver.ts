@@ -9,7 +9,7 @@ export class DeleteOneDirectorResolver {
   @TypeGraphQL.Mutation(_returns => Director, {
     nullable: true
   })
-  async deleteOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteOneDirectorArgs) args: DeleteOneDirectorArgs): Promise<Director | null> {
+  async deleteOneDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => DeleteOneDirectorArgs) args: DeleteOneDirectorArgs): Promise<Director | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.delete({
       ...args,

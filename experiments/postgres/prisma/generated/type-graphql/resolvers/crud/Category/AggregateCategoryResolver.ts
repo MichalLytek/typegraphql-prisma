@@ -10,7 +10,7 @@ export class AggregateCategoryResolver {
   @TypeGraphQL.Query(_returns => AggregateCategory, {
     nullable: false
   })
-  async aggregateCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => AggregateCategoryArgs) args: AggregateCategoryArgs): Promise<AggregateCategory> {
+  async aggregateCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => AggregateCategoryArgs) args: AggregateCategoryArgs): Promise<AggregateCategory> {
     return getPrismaFromContext(ctx).category.aggregate({
       ...args,
       ...transformInfoIntoPrismaArgs(info),

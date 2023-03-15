@@ -484,4 +484,33 @@ describe("relations resolvers generation", () => {
       );
     });
   });
+
+  describe("when emitRedundantTypesInfo is set to true", () => {
+    it("should properly generate type info for @Args decorator", async () => {
+      const schema = /* prisma */ `
+        model User {
+          id     Int     @id @default(autoincrement())
+          posts  Post[]
+        }
+        model Post {
+          uuid      String  @id @default(cuid())
+          content   String
+          author    User    @relation(fields: [authorId], references: [id])
+          authorId  Int
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        emitRedundantTypesInfo: true,
+      });
+      const userRelationsResolverTSFile = await readGeneratedFile(
+        "/resolvers/relations/User/UserRelationsResolver.ts",
+      );
+
+      expect(userRelationsResolverTSFile).toMatchSnapshot(
+        "UserRelationsResolver",
+      );
+    });
+  });
 });

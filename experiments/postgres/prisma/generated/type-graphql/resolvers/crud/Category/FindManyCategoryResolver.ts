@@ -9,7 +9,7 @@ export class FindManyCategoryResolver {
   @TypeGraphQL.Query(_returns => [Category], {
     nullable: false
   })
-  async categories(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyCategoryArgs) args: FindManyCategoryArgs): Promise<Category[]> {
+  async categories(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => FindManyCategoryArgs) args: FindManyCategoryArgs): Promise<Category[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).category.findMany({
       ...args,

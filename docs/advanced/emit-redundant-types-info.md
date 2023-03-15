@@ -14,6 +14,6 @@ generator typegraphql {
 }
 ```
 
-By using this option, the generated code will have all the types info emitted in a form of decorator payload (`@Args(_returns => AggregateCategoryArgs)`), even if it's redundant and not necessary.
+By using this option, the generated code will have all the types info emitted in a form of decorator payload (`@Args(_type => AggregateCategoryArgs)`), even if it's redundant and not necessary.
 
 However, thanks to this, you can use any other compiler that does not supports type metadata, like `esbuild`, so you're not limited to using standard Typescript compiler with `emitDecoratorMetadata` option enabled.

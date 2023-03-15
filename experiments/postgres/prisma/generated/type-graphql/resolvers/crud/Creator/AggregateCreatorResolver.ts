@@ -10,7 +10,7 @@ export class AggregateCreatorResolver {
   @TypeGraphQL.Query(_returns => AggregateCreator, {
     nullable: false
   })
-  async aggregateCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => AggregateCreatorArgs) args: AggregateCreatorArgs): Promise<AggregateCreator> {
+  async aggregateCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => AggregateCreatorArgs) args: AggregateCreatorArgs): Promise<AggregateCreator> {
     return getPrismaFromContext(ctx).creator.aggregate({
       ...args,
       ...transformInfoIntoPrismaArgs(info),

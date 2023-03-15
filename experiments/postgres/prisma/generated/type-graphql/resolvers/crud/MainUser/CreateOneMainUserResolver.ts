@@ -9,7 +9,7 @@ export class CreateOneMainUserResolver {
   @TypeGraphQL.Mutation(_returns => MainUser, {
     nullable: false
   })
-  async createOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => CreateOneMainUserArgs) args: CreateOneMainUserArgs): Promise<MainUser> {
+  async createOneMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateOneMainUserArgs) args: CreateOneMainUserArgs): Promise<MainUser> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.create({
       ...args,

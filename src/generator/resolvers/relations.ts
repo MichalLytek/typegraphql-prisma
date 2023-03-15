@@ -146,7 +146,7 @@ export default function generateRelationsResolverClassesFromModel(
                       {
                         name: "TypeGraphQL.Args",
                         arguments: generatorOptions.emitRedundantTypesInfo
-                          ? [`_returns => ${field.argsTypeName}`]
+                          ? [`_type => ${field.argsTypeName}`]
                           : [],
                       },
                     ],

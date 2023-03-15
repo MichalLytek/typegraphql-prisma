@@ -9,7 +9,7 @@ export class FindUniquePostResolver {
   @TypeGraphQL.Query(_returns => Post, {
     nullable: true
   })
-  async post(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindUniquePostArgs) args: FindUniquePostArgs): Promise<Post | null> {
+  async post(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => FindUniquePostArgs) args: FindUniquePostArgs): Promise<Post | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.findUnique({
       ...args,

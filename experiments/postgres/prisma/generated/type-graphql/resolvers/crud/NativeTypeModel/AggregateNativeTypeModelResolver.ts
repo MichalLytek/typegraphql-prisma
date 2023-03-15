@@ -10,7 +10,7 @@ export class AggregateNativeTypeModelResolver {
   @TypeGraphQL.Query(_returns => AggregateNativeTypeModel, {
     nullable: false
   })
-  async aggregateNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => AggregateNativeTypeModelArgs) args: AggregateNativeTypeModelArgs): Promise<AggregateNativeTypeModel> {
+  async aggregateNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => AggregateNativeTypeModelArgs) args: AggregateNativeTypeModelArgs): Promise<AggregateNativeTypeModel> {
     return getPrismaFromContext(ctx).nativeTypeModel.aggregate({
       ...args,
       ...transformInfoIntoPrismaArgs(info),

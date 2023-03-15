@@ -9,7 +9,7 @@ export class DeleteOneHiddenResolver {
   @TypeGraphQL.Mutation(_returns => Hidden, {
     nullable: true
   })
-  async deleteOneHidden(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => DeleteOneHiddenArgs) args: DeleteOneHiddenArgs): Promise<Hidden | null> {
+  async deleteOneHidden(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => DeleteOneHiddenArgs) args: DeleteOneHiddenArgs): Promise<Hidden | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).hidden.delete({
       ...args,

@@ -9,7 +9,7 @@ export class FindManyPatientResolver {
   @TypeGraphQL.Query(_returns => [Patient], {
     nullable: false
   })
-  async patients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindManyPatientArgs) args: FindManyPatientArgs): Promise<Patient[]> {
+  async patients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => FindManyPatientArgs) args: FindManyPatientArgs): Promise<Patient[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).patient.findMany({
       ...args,

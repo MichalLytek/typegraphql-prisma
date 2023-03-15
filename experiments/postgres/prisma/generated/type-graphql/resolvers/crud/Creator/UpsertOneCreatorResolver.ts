@@ -9,7 +9,7 @@ export class UpsertOneCreatorResolver {
   @TypeGraphQL.Mutation(_returns => Creator, {
     nullable: false
   })
-  async upsertOneCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpsertOneCreatorArgs) args: UpsertOneCreatorArgs): Promise<Creator> {
+  async upsertOneCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => UpsertOneCreatorArgs) args: UpsertOneCreatorArgs): Promise<Creator> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).creator.upsert({
       ...args,

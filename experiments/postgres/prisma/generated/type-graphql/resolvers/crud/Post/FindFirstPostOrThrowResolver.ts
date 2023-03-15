@@ -9,7 +9,7 @@ export class FindFirstPostOrThrowResolver {
   @TypeGraphQL.Query(_returns => Post, {
     nullable: true
   })
-  async findFirstPostOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindFirstPostOrThrowArgs) args: FindFirstPostOrThrowArgs): Promise<Post | null> {
+  async findFirstPostOrThrow(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => FindFirstPostOrThrowArgs) args: FindFirstPostOrThrowArgs): Promise<Post | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.findFirstOrThrow({
       ...args,

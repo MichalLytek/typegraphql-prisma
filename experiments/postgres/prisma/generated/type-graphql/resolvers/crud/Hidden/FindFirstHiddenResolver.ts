@@ -9,7 +9,7 @@ export class FindFirstHiddenResolver {
   @TypeGraphQL.Query(_returns => Hidden, {
     nullable: true
   })
-  async findFirstHidden(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => FindFirstHiddenArgs) args: FindFirstHiddenArgs): Promise<Hidden | null> {
+  async findFirstHidden(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => FindFirstHiddenArgs) args: FindFirstHiddenArgs): Promise<Hidden | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).hidden.findFirst({
       ...args,

@@ -9,7 +9,7 @@ export class UpdateOneHiddenResolver {
   @TypeGraphQL.Mutation(_returns => Hidden, {
     nullable: true
   })
-  async updateOneHidden(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => UpdateOneHiddenArgs) args: UpdateOneHiddenArgs): Promise<Hidden | null> {
+  async updateOneHidden(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => UpdateOneHiddenArgs) args: UpdateOneHiddenArgs): Promise<Hidden | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).hidden.update({
       ...args,
