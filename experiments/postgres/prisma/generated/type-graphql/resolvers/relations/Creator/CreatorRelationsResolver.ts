@@ -11,9 +11,9 @@ export class CreatorRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Problem], {
     nullable: false
   })
-  async likes(@TypeGraphQL.Root() creator: Creator, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => CreatorLikesArgs) args: CreatorLikesArgs): Promise<Problem[]> {
+  async likes(@TypeGraphQL.Root() creator: Creator, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreatorLikesArgs) args: CreatorLikesArgs): Promise<Problem[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).creator.findUnique({
+    return getPrismaFromContext(ctx).creator.findUniqueOrThrow({
       where: {
         id: creator.id,
       },
@@ -26,9 +26,9 @@ export class CreatorRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Problem], {
     nullable: false
   })
-  async problems(@TypeGraphQL.Root() creator: Creator, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => CreatorProblemsArgs) args: CreatorProblemsArgs): Promise<Problem[]> {
+  async problems(@TypeGraphQL.Root() creator: Creator, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreatorProblemsArgs) args: CreatorProblemsArgs): Promise<Problem[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).creator.findUnique({
+    return getPrismaFromContext(ctx).creator.findUniqueOrThrow({
       where: {
         id: creator.id,
       },

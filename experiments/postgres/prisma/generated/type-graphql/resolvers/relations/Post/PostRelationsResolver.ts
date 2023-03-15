@@ -11,7 +11,7 @@ export class PostRelationsResolver {
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo): Promise<MainUser> {
     const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).post.findUnique({
+    return getPrismaFromContext(ctx).post.findUniqueOrThrow({
       where: {
         uuid: post.uuid,
       },

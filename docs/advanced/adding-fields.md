@@ -14,7 +14,7 @@ export class CustomUserResolver {
     @Ctx() { prisma }: Context,
   ): Promise<Post | undefined> {
     const [favoritePost] = await prisma.user
-      .findUnique({ where: { id: user.id } })
+      .findUniqueOrThrow({ where: { id: user.id } })
       .posts({ first: 1 });
 
     return favoritePost;

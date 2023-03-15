@@ -13,7 +13,7 @@ export class PostRelationsResolver {
   })
   async comments(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: PostCommentsArgs): Promise<Comment[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).post.findUnique({
+    return getPrismaFromContext(ctx).post.findUniqueOrThrow({
       where: {
         id: post.id,
       },
@@ -28,7 +28,7 @@ export class PostRelationsResolver {
   })
   async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo): Promise<User> {
     const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).post.findUnique({
+    return getPrismaFromContext(ctx).post.findUniqueOrThrow({
       where: {
         id: post.id,
       },

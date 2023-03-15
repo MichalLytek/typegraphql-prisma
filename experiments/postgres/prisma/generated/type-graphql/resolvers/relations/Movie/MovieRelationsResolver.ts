@@ -11,7 +11,7 @@ export class MovieRelationsResolver {
   })
   async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo): Promise<Director> {
     const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).movie.findUnique({
+    return getPrismaFromContext(ctx).movie.findUniqueOrThrow({
       where: {
         movieCompoundId: {
           directorFirstName: movie.directorFirstName,

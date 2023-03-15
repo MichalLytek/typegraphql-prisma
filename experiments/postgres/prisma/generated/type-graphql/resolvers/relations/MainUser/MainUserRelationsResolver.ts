@@ -10,9 +10,9 @@ export class MainUserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Post], {
     nullable: false
   })
-  async clientPosts(@TypeGraphQL.Root() mainUser: MainUser, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_returns => MainUserPostsArgs) args: MainUserPostsArgs): Promise<Post[]> {
+  async clientPosts(@TypeGraphQL.Root() mainUser: MainUser, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => MainUserPostsArgs) args: MainUserPostsArgs): Promise<Post[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).user.findUnique({
+    return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       where: {
         id: mainUser.id,
       },

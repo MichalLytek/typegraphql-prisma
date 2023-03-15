@@ -158,7 +158,7 @@ export default function generateRelationsResolverClassesFromModel(
             /* ts */ ` const { _count } = transformInfoIntoPrismaArgs(info);
             return getPrismaFromContext(ctx).${camelCase(
               model.name,
-            )}.findUnique({
+            )}.findUniqueOrThrow({
               where: {${whereConditionString}},
             }).${field.name}({ ${field.argsTypeName ? "\n...args," : ""}
               ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),

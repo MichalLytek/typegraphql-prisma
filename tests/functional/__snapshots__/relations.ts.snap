@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`relations resolvers execution composite primary key with name should properly call PrismaClient on fetching single relation: findUniquePost relations call args 1`] = `
+exports[`relations resolvers execution composite primary key with name should properly call PrismaClient on fetching single relation: findUniqueOrThrowPost relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -29,7 +29,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution composite unique key should properly call PrismaClient on fetching single relation: findUniquePost relations call args 1`] = `
+exports[`relations resolvers execution composite unique key should properly call PrismaClient on fetching single relation: findUniqueOrThrowPost relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -58,7 +58,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution composite unique key with name should properly call PrismaClient on fetching single relation: findUniquePost relations call args 1`] = `
+exports[`relations resolvers execution composite unique key with name should properly call PrismaClient on fetching single relation: findUniqueOrThrowPost relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -87,7 +87,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations with args: findUniqueUser relations call args 1`] = `
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations with args: findUniqueOrThrowUser relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -146,7 +146,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations: findUniqueUser relations call args 1`] = `
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching array relations: findUniqueOrThrowUser relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -189,7 +189,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching count on relations: findUniquePost relations call args 1`] = `
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching count on relations: findUniqueOrThrowPost relations call args 1`] = `
 Array [
   Array [
     Object {
@@ -264,7 +264,7 @@ Object {
 }
 `;
 
-exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching single relation: findUniquePost relations call args 1`] = `
+exports[`relations resolvers execution single primary key should properly call PrismaClient on fetching single relation: findUniqueOrThrowPost relations call args 1`] = `
 Array [
   Array [
     Object {
