@@ -12,6 +12,8 @@ export interface ExternalGeneratorOptions {
   customPrismaImportPath?: string;
   contextPrismaKey?: string;
   useSimpleInputs?: boolean;
+  omitInputFieldsByDefault?: string[];
+  omitOutputFieldsByDefault?: string[];
 }
 
 export interface InternalGeneratorOptions {

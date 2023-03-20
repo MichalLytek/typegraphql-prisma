@@ -397,4 +397,169 @@ describe("omit-fields", () => {
       );
     });
   });
+
+  describe("when `omitInputFieldsByDefault` generator option is provided", () => {
+    it("should properly generate model type class for prisma model without the omitted field", async () => {
+      const schema = /* prisma */ `
+        model User {
+          id           Int       @id @default(autoincrement())
+          dateOfBirth  DateTime
+          name         String
+          balance      Float?
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        omitOutputFieldsByDefault: ["id"],
+      });
+      const userModelTSFile = await readGeneratedFile("/models/User.ts");
+
+      expect(userModelTSFile).toMatchSnapshot("User");
+    });
+
+    describe("when model field has `omit(output: false)` set", () => {
+      it("should properly generate model type class for prisma model with the field defined", async () => {
+        const schema = /* prisma */ `
+          model User {
+            /// @TypeGraphQL.omit(output: false)
+            id           Int       @id @default(autoincrement())
+            dateOfBirth  DateTime
+            name         String
+            balance      Float?
+          }
+        `;
+
+        await generateCodeFromSchema(schema, {
+          outputDirPath,
+          omitOutputFieldsByDefault: ["id"],
+        });
+        const userModelTSFile = await readGeneratedFile("/models/User.ts");
+
+        expect(userModelTSFile).toMatchSnapshot("User");
+      });
+    });
+  });
+
+  describe("when `omitInputFieldsByDefault` generator option is provided", () => {
+    it("should properly generate input type class for prisma model without the omitted field", async () => {
+      const schema = /* prisma */ `
+          model User {
+            id           Int       @id @default(autoincrement())
+            dateOfBirth  DateTime
+            name         String
+            balance      Float?
+          }
+        `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        omitInputFieldsByDefault: ["id"],
+      });
+      const userCreateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/UserCreateInput.ts",
+      );
+      const userCreateManyInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/UserCreateManyInput.ts",
+      );
+      const userOrderByWithRelationInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/UserOrderByWithRelationInput.ts",
+      );
+      const userScalarWhereWithAggregatesInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/UserScalarWhereWithAggregatesInput.ts",
+      );
+      const userUpdateInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/UserUpdateInput.ts",
+      );
+      const userUpdateManyMutationInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/UserUpdateManyMutationInput.ts",
+      );
+      const userWhereInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/UserWhereInput.ts",
+      );
+      const userWhereUniqueInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/UserWhereUniqueInput.ts",
+      );
+
+      expect(userCreateInputTSFile).toMatchSnapshot("UserCreateInput");
+      expect(userCreateManyInputTSFile).toMatchSnapshot("UserCreateManyInput");
+      expect(userOrderByWithRelationInputTSFile).toMatchSnapshot(
+        "UserOrderByWithRelationInput",
+      );
+      expect(userScalarWhereWithAggregatesInputTSFile).toMatchSnapshot(
+        "UserScalarWhereWithAggregatesInput",
+      );
+      expect(userUpdateInputTSFile).toMatchSnapshot("UserUpdateInput");
+      expect(userUpdateManyMutationInputTSFile).toMatchSnapshot(
+        "UserUpdateManyMutationInput",
+      );
+      expect(userWhereInputTSFile).toMatchSnapshot("UserWhereInput");
+      expect(userWhereUniqueInputTSFile).toMatchSnapshot(
+        "UserWhereUniqueInput",
+      );
+    });
+
+    describe("when model field has `omit(input: false)` set", () => {
+      it("should properly generate input type class for prisma model with the field defined", async () => {
+        const schema = /* prisma */ `
+            model User {
+              /// @TypeGraphQL.omit(input: false)
+              id           Int       @id @default(autoincrement())
+              dateOfBirth  DateTime
+              name         String
+              balance      Float?
+            }
+          `;
+
+        await generateCodeFromSchema(schema, {
+          outputDirPath,
+          omitInputFieldsByDefault: ["id"],
+        });
+        const userCreateInputTSFile = await readGeneratedFile(
+          "/resolvers/inputs/UserCreateInput.ts",
+        );
+        const userCreateManyInputTSFile = await readGeneratedFile(
+          "/resolvers/inputs/UserCreateManyInput.ts",
+        );
+        const userOrderByWithRelationInputTSFile = await readGeneratedFile(
+          "/resolvers/inputs/UserOrderByWithRelationInput.ts",
+        );
+        const userScalarWhereWithAggregatesInputTSFile =
+          await readGeneratedFile(
+            "/resolvers/inputs/UserScalarWhereWithAggregatesInput.ts",
+          );
+        const userUpdateInputTSFile = await readGeneratedFile(
+          "/resolvers/inputs/UserUpdateInput.ts",
+        );
+        const userUpdateManyMutationInputTSFile = await readGeneratedFile(
+          "/resolvers/inputs/UserUpdateManyMutationInput.ts",
+        );
+        const userWhereInputTSFile = await readGeneratedFile(
+          "/resolvers/inputs/UserWhereInput.ts",
+        );
+        const userWhereUniqueInputTSFile = await readGeneratedFile(
+          "/resolvers/inputs/UserWhereUniqueInput.ts",
+        );
+
+        expect(userCreateInputTSFile).toMatchSnapshot("UserCreateInput");
+        expect(userCreateManyInputTSFile).toMatchSnapshot(
+          "UserCreateManyInput",
+        );
+        expect(userOrderByWithRelationInputTSFile).toMatchSnapshot(
+          "UserOrderByWithRelationInput",
+        );
+        expect(userScalarWhereWithAggregatesInputTSFile).toMatchSnapshot(
+          "UserScalarWhereWithAggregatesInput",
+        );
+        expect(userUpdateInputTSFile).toMatchSnapshot("UserUpdateInput");
+        expect(userUpdateManyMutationInputTSFile).toMatchSnapshot(
+          "UserUpdateManyMutationInput",
+        );
+        expect(userWhereInputTSFile).toMatchSnapshot("UserWhereInput");
+        expect(userWhereUniqueInputTSFile).toMatchSnapshot(
+          "UserWhereUniqueInput",
+        );
+      });
+    });
+  });
 });

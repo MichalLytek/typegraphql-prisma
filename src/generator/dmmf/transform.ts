@@ -77,6 +77,8 @@ export function transformModelWithFields(dmmfDocument: DmmfDocument) {
 }
 
 function transformModelField(dmmfDocument: DmmfDocument) {
+  const { omitInputFieldsByDefault, omitOutputFieldsByDefault } =
+    dmmfDocument.options;
   return (field: PrismaDMMF.Field): DMMF.ModelField => {
     const attributeArgs = parseDocumentationAttributes<{ name: string }>(
       field.documentation,
@@ -114,7 +116,7 @@ function transformModelField(dmmfDocument: DmmfDocument) {
       undefined,
       field.isId,
     );
-    const { output = false, input = false } = parseDocumentationAttributes<{
+    const omitFieldAttribute = parseDocumentationAttributes<{
       output: boolean;
       input: boolean | InputOmitSetting[];
     }>(field.documentation, "omit", "field");
@@ -126,7 +128,16 @@ function transformModelField(dmmfDocument: DmmfDocument) {
       fieldTSType,
       typeGraphQLType,
       docs: cleanDocsString(field.documentation),
-      isOmitted: { output, input },
+      isOmitted: {
+        input:
+          omitFieldAttribute.input ??
+          omitInputFieldsByDefault?.includes(field.name) ??
+          false,
+        output:
+          omitFieldAttribute.output ??
+          omitOutputFieldsByDefault?.includes(field.name) ??
+          false,
+      },
     };
   };
 }

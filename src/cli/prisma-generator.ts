@@ -48,6 +48,14 @@ export async function generate(options: GeneratorOptions) {
     ),
     customPrismaImportPath: generatorConfig.customPrismaImportPath,
     contextPrismaKey: generatorConfig.contextPrismaKey,
+    omitInputFieldsByDefault: parseStringArray(
+      generatorConfig.omitInputFieldsByDefault,
+      "omitInputFieldsByDefault",
+    ),
+    omitOutputFieldsByDefault: parseStringArray(
+      generatorConfig.omitOutputFieldsByDefault,
+      "omitOutputFieldsByDefault",
+    ),
   };
   const internalConfig: InternalGeneratorOptions = {
     outputDirPath: outputDir,
