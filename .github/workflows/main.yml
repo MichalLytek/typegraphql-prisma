@@ -7,20 +7,17 @@ on:
 
 jobs:
   check:
-    # disable check workflow
-    if: ${{ github.ref == 'refs/heads/none' }}
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 13.x, 14.x, 15.x, 16.x]
+        node-version: [16.x, 17.x, 18.x, 19.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
 
