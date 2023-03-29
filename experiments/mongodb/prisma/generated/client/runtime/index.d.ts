@@ -1339,6 +1339,7 @@ declare type GraphQLQuery = {
 };
 
 declare type HandleErrorParams = {
+    args: JsArgs;
     error: any;
     clientMethod: string;
     callsite?: CallSite;
@@ -2100,8 +2101,8 @@ declare class RequestHandler {
      * Handles the error and logs it, logging the error is done synchronously waiting for the event
      * handlers to finish.
      */
-    handleAndLogRequestError({ error, clientMethod, callsite, transaction }: HandleErrorParams): never;
-    handleRequestError({ error, clientMethod, callsite, transaction }: HandleErrorParams): never;
+    handleAndLogRequestError(params: HandleErrorParams): never;
+    handleRequestError({ error, clientMethod, callsite, transaction, args }: HandleErrorParams): never;
     sanitizeMessage(message: any): any;
     unpack(message: ProtocolMessage, data: unknown, dataPath: string[], unpacker?: Unpacker): any;
     applyResultExtensions({ result, modelName, args, extensions }: ApplyExtensionsParams): object;
