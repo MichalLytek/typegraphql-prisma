@@ -13,6 +13,16 @@ jobs:
       matrix:
         node-version: [16.x, 17.x, 18.x, 19.x]
 
+    services:
+      db:
+        image: postgres:14.4-alpine
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: typegraphql-prisma
+        ports:
+          - 5432:5432
+
     steps:
       - uses: actions/checkout@v2
 
@@ -35,6 +45,7 @@ jobs:
           npm run test:ci
         env:
           CI: true
+          TEST_DATABASE_URL: postgresql://user:password@localhost:5432/typegraphql-prisma
 
   deploy-website:
     if: ${{ github.ref == 'refs/heads/main' }}
