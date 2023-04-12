@@ -1,6 +1,9 @@
 import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
 import { Project, ScriptTarget, ModuleKind, CompilerOptions } from "ts-morph";
 import path from "path";
+import { exec } from "node:child_process";
+import { promisify } from "node:util";
+const execa = promisify(exec);
 
 import { noop, toUnixPath } from "./helpers";
 import generateEnumFromDef from "./enum";
@@ -76,6 +79,7 @@ export default async function generateCode(
       baseOptions.prismaClientPath.includes("node_modules")
         ? "@prisma/client"
         : undefined,
+    formatGeneratedCode: baseOptions.formatGeneratedCode ?? "tsc", // default for backward compatibility
   };
 
   const baseDirPath = options.outputDirPath;
@@ -527,9 +531,14 @@ export default async function generateCode(
   if (emitTranspiledCode) {
     await project.emit();
   } else {
-    for (const file of project.getSourceFiles()) {
-      file.formatText({ indentSize: 2 });
+    if (options.formatGeneratedCode === "tsc") {
+      for (const file of project.getSourceFiles()) {
+        file.formatText({ indentSize: 2 });
+      }
     }
     await project.save();
+    if (options.formatGeneratedCode === "prettier") {
+      await execa(`npx prettier --write ${baseDirPath}`);
+    }
   }
 }

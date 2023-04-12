@@ -14,6 +14,7 @@ export interface ExternalGeneratorOptions {
   useSimpleInputs?: boolean;
   omitInputFieldsByDefault?: string[];
   omitOutputFieldsByDefault?: string[];
+  formatGeneratedCode?: boolean | "prettier" | "tsc";
 }
 
 export interface InternalGeneratorOptions {

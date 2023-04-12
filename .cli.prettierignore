@@ -5,7 +5,7 @@ lib
 package
 
 coverage
-# tests/artifacts
+tests/artifacts
 
 .docusaurus
 

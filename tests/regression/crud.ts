@@ -699,6 +699,52 @@ describe("crud", () => {
     }, 20000);
   });
 
+  describe("when formatGeneratedCode is set to 'prettier'", () => {
+    it("should properly format generated files for resolver classes", async () => {
+      const schema = /* prisma */ `
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        formatGeneratedCode: "prettier",
+      });
+      const userCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UserCrudResolver.ts",
+      );
+
+      expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+    }, 20000);
+  });
+
+  describe("when formatGeneratedCode is set to false", () => {
+    it("should not format generated files for resolver classes", async () => {
+      const schema = /* prisma */ `
+        model User {
+          intIdField          Int     @id @default(autoincrement())
+          uniqueStringField   String  @unique
+          optionalStringField String?
+          dateField           DateTime
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        formatGeneratedCode: false,
+      });
+      const userCrudResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/User/UserCrudResolver.ts",
+      );
+
+      expect(userCrudResolverTSFile).toMatchSnapshot("UserCrudResolver");
+    }, 20000);
+  });
+
   describe("when emitRedundantTypesInfo is set to true", () => {
     it("should properly generate type info for @Args decorator", async () => {
       const schema = /* prisma */ `

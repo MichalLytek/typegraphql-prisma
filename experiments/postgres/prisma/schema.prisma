@@ -24,6 +24,7 @@ generator typegraphql {
   contextPrismaKey         = "prismaClient"
   useSimpleInputs          = true
   emitRedundantTypesInfo   = true
+  formatGeneratedCode      = "tsc"
 }
 
 // Role enum comment

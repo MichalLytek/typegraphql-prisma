@@ -10,7 +10,11 @@ import {
   InternalGeneratorOptions,
 } from "../generator/options";
 import { ALL_EMIT_BLOCK_KINDS } from "../generator/emit-block";
-import { parseStringBoolean, parseStringArray } from "./helpers";
+import {
+  parseStringBoolean,
+  parseStringArray,
+  parseStringEnum,
+} from "./helpers";
 
 export async function generate(options: GeneratorOptions) {
   const outputDir = parseEnvValue(options.generator.output!);
@@ -56,6 +60,13 @@ export async function generate(options: GeneratorOptions) {
       generatorConfig.omitOutputFieldsByDefault,
       "omitOutputFieldsByDefault",
     ),
+    formatGeneratedCode:
+      parseStringBoolean(generatorConfig.formatGeneratedCode) ??
+      parseStringEnum(
+        generatorConfig.formatGeneratedCode,
+        "formatGeneratedCode",
+        ["prettier", "tsc"] as const,
+      ),
   };
   const internalConfig: InternalGeneratorOptions = {
     outputDirPath: outputDir,
