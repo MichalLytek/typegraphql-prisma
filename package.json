@@ -1,6 +1,6 @@
 {
   "name": "typegraphql-prisma",
-  "version": "0.24.6",
+  "version": "0.24.7",
   "scripts": {
     "prepare": "husky install",
     "build": "tsc",
