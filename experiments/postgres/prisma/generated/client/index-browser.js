@@ -13,12 +13,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.12.0
- * Query Engine version: 659ef412370fa3b41cd7bf6e94587c1dfb7f67e7
+ * Prisma Client JS version: 4.13.0
+ * Query Engine version: 1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a
  */
 Prisma.prismaVersion = {
-  client: "4.12.0",
-  engine: "659ef412370fa3b41cd7bf6e94587c1dfb7f67e7"
+  client: "4.13.0",
+  engine: "1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -97,107 +97,104 @@ Prisma.NullTypes = {
 /**
  * Enums
  */
-// Based on
-// https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
-function makeEnum(x) { return x; }
 
-exports.Prisma.CategoryOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
   name: 'name',
   slug: 'slug'
-});
+};
 
-exports.Prisma.CategoryScalarFieldEnum = makeEnum({
+exports.Prisma.CategoryScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   number: 'number'
-});
+};
 
-exports.Prisma.CreatorOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.CreatorOrderByRelevanceFieldEnum = {
   name: 'name'
-});
+};
 
-exports.Prisma.CreatorScalarFieldEnum = makeEnum({
+exports.Prisma.CreatorScalarFieldEnum = {
   id: 'id',
   name: 'name'
-});
+};
 
-exports.Prisma.DirectorOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.DirectorOrderByRelevanceFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName'
-});
+};
 
-exports.Prisma.DirectorScalarFieldEnum = makeEnum({
+exports.Prisma.DirectorScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName'
-});
+};
 
-exports.Prisma.EquipmentOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.EquipmentOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name'
-});
+};
 
-exports.Prisma.EquipmentScalarFieldEnum = makeEnum({
+exports.Prisma.EquipmentScalarFieldEnum = {
   id: 'id',
   name: 'name'
-});
+};
 
-exports.Prisma.HiddenOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.HiddenOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name'
-});
+};
 
-exports.Prisma.HiddenScalarFieldEnum = makeEnum({
+exports.Prisma.HiddenScalarFieldEnum = {
   id: 'id',
   name: 'name'
-});
+};
 
-exports.Prisma.JsonNullValueFilter = makeEnum({
+exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
-});
+};
 
-exports.Prisma.JsonNullValueInput = makeEnum({
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
-});
+};
 
-exports.Prisma.MovieOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.MovieOrderByRelevanceFieldEnum = {
   directorFirstName: 'directorFirstName',
   directorLastName: 'directorLastName',
   title: 'title'
-});
+};
 
-exports.Prisma.MovieScalarFieldEnum = makeEnum({
+exports.Prisma.MovieScalarFieldEnum = {
   directorFirstName: 'directorFirstName',
   directorLastName: 'directorLastName',
   title: 'title'
-});
+};
 
-exports.Prisma.NativeTypeModelScalarFieldEnum = makeEnum({
+exports.Prisma.NativeTypeModelScalarFieldEnum = {
   id: 'id',
   bigInt: 'bigInt',
   byteA: 'byteA',
   decimal: 'decimal'
-});
+};
 
-exports.Prisma.NullsOrder = makeEnum({
+exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-});
+};
 
-exports.Prisma.PatientOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.PatientOrderByRelevanceFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email'
-});
+};
 
-exports.Prisma.PatientScalarFieldEnum = makeEnum({
+exports.Prisma.PatientScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email'
-});
+};
 
-exports.Prisma.PostScalarFieldEnum = makeEnum({
+exports.Prisma.PostScalarFieldEnum = {
   uuid: 'uuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -209,27 +206,27 @@ exports.Prisma.PostScalarFieldEnum = makeEnum({
   editorId: 'editorId',
   kind: 'kind',
   metadata: 'metadata'
-});
+};
 
-exports.Prisma.ProblemOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.ProblemOrderByRelevanceFieldEnum = {
   problemText: 'problemText'
-});
+};
 
-exports.Prisma.ProblemScalarFieldEnum = makeEnum({
+exports.Prisma.ProblemScalarFieldEnum = {
   id: 'id',
   problemText: 'problemText',
   creatorId: 'creatorId'
-});
+};
 
-exports.Prisma.QueryMode = makeEnum({
+exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
-});
+};
 
-exports.Prisma.SortOrder = makeEnum({
+exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-});
+};
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
@@ -238,13 +235,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.UserOrderByRelevanceFieldEnum = {
   email: 'email',
   name: 'name',
   aliases: 'aliases'
-});
+};
 
-exports.Prisma.UserScalarFieldEnum = makeEnum({
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
@@ -254,25 +251,25 @@ exports.Prisma.UserScalarFieldEnum = makeEnum({
   role: 'role',
   grades: 'grades',
   aliases: 'aliases'
-});
+};
 
-exports.Prisma.postOrderByRelevanceFieldEnum = makeEnum({
+exports.Prisma.postOrderByRelevanceFieldEnum = {
   uuid: 'uuid',
   title: 'title',
   subtitle: 'subtitle',
   content: 'content'
-});
-exports.PostKind = makeEnum({
+};
+exports.PostKind = {
   BLOG: 'BLOG',
   ADVERT: 'ADVERT'
-});
+};
 
-exports.Role = makeEnum({
+exports.Role = {
   USER: 'USER',
   ADMIN: 'ADMIN'
-});
+};
 
-exports.Prisma.ModelName = makeEnum({
+exports.Prisma.ModelName = {
   User: 'User',
   post: 'post',
   Category: 'Category',
@@ -284,7 +281,7 @@ exports.Prisma.ModelName = makeEnum({
   NativeTypeModel: 'NativeTypeModel',
   Equipment: 'Equipment',
   Hidden: 'Hidden'
-});
+};
 
 /**
  * Create the Client

@@ -99,8 +99,17 @@ CREATE TABLE "NativeTypeModel" (
 -- CreateTable
 CREATE TABLE "Equipment" (
     "id" TEXT NOT NULL,
+    "name" TEXT,
 
     CONSTRAINT "Equipment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Hidden" (
+    "id" TEXT NOT NULL,
+    "name" TEXT,
+
+    CONSTRAINT "Hidden_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

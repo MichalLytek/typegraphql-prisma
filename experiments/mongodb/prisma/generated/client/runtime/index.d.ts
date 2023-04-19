@@ -838,7 +838,7 @@ declare class Document_2 {
     toString(): string;
     validate(select?: any, isTopLevelQuery?: boolean, originalMethod?: string, errorFormat?: 'pretty' | 'minimal' | 'colorless', validationCallsite?: any): void;
     protected printFieldError: ({ error }: FieldError, missingItems: MissingItem[], minimal: boolean) => string | undefined;
-    protected printArgError: ({ error, path, id }: ArgError, hasMissingItems: boolean, minimal: boolean) => string | undefined;
+    protected printArgError: ({ error, path }: ArgError, hasMissingItems: boolean, minimal: boolean) => string | undefined;
     /**
      * As we're allowing both single objects and array of objects for list inputs, we need to remove incorrect
      * zero indexes from the path
@@ -1052,11 +1052,11 @@ declare interface GeneratorConfig {
     previewFeatures: string[];
 }
 
-declare type GetAggregateResult<P, A> = {
+declare type GetAggregateResult<A> = {
     [K in keyof A as K extends Aggregate ? K : never]: K extends '_count' ? A[K] extends true ? number : Count<A[K]> : Count<A[K]>;
 };
 
-declare type GetBatchResult<P, A> = {
+declare type GetBatchResult = {
     count: number;
 };
 
@@ -1064,7 +1064,7 @@ declare type GetClient<Base extends Record<any, any>, C extends Args_3['client']
     [K in keyof C]: ReturnType<C[K]>;
 };
 
-declare type GetCountResult<P, A> = A extends {
+declare type GetCountResult<A> = A extends {
     select: infer S;
 } ? S extends true ? number : Count<S> : number;
 
@@ -1102,7 +1102,7 @@ declare type GetFindResult<P extends Payload, A> = A extends {
 
 declare type GetGroupByResult<P, A> = P extends Payload ? A extends {
     by: string[];
-} ? Array<GetAggregateResult<P, A> & {
+} ? Array<GetAggregateResult<A> & {
     [K in A['by'][number]]: P['scalars'][K];
 }> : never : never;
 
@@ -1135,7 +1135,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * Hook a middleware into the client
          * @param middleware to hook
          */
-        $use<T>(middleware: QueryMiddleware): void;
+        $use(middleware: QueryMiddleware): void;
         $on(eventType: EngineEventType, callback: (event: any) => void): void;
         $connect(): Promise<void>;
         /**
@@ -1260,7 +1260,7 @@ declare interface GetPrismaClientConfig {
     relativePath: string;
     dirname: string;
     filename?: string;
-    clientVersion?: string;
+    clientVersion: string;
     engineVersion?: string;
     datasourceNames: string[];
     activeProvider: string;
@@ -1300,6 +1300,20 @@ declare interface GetPrismaClientConfig {
      * @remarks only used for the purpose of data proxy
      */
     inlineSchemaHash?: string;
+    /**
+     * A marker to indicate that the client was not generated via `prisma
+     * generate` but was generated via `generate --postinstall` script instead.
+     * @remarks used to error for Vercel/Netlify for schema caching issues
+     */
+    postinstall?: boolean;
+    /**
+     * Information about the CI where the Prisma Client has been generated. The
+     * name of the CI environment is stored at generation time because CI
+     * information is not always available at runtime. Moreover, the edge client
+     * has no notion of environment variables, so this works around that.
+     * @remarks used to error for Vercel/Netlify for schema caching issues
+     */
+    ciName?: string;
 }
 
 declare type GetResult<Base extends Record<any, any>, R extends Args_3['result'][string]> = {
@@ -1313,14 +1327,14 @@ declare type GetResult_2<P extends Payload, A, O extends Operation> = {
     findFirstOrThrow: GetFindResult<P, A>;
     findMany: GetFindResult<P, A>[];
     create: GetFindResult<P, A>;
-    createMany: GetBatchResult<P, A>;
+    createMany: GetBatchResult;
     update: GetFindResult<P, A>;
-    updateMany: GetBatchResult<P, A>;
+    updateMany: GetBatchResult;
     upsert: GetFindResult<P, A>;
     delete: GetFindResult<P, A>;
-    deleteMany: GetBatchResult<P, A>;
-    aggregate: GetAggregateResult<P, A>;
-    count: GetCountResult<P, A>;
+    deleteMany: GetBatchResult;
+    aggregate: GetAggregateResult<A>;
+    count: GetCountResult<A>;
     groupBy: GetGroupByResult<P, A>;
     $queryRaw: any;
     $executeRaw: any;
