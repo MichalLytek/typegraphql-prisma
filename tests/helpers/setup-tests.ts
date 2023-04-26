@@ -2,7 +2,6 @@ import path from "path";
 import fs from "fs";
 
 import removeDir from "../../src/utils/removeDir";
-import ensurePrismaEngine from "./ensure-engine";
 
 async function setupTests() {
   const artifactsDirPath = path.join(__dirname, "../artifacts");
@@ -12,10 +11,6 @@ async function setupTests() {
     await removeDir(path.join(__dirname, "../artifacts"), true);
     console.log("cleaned!");
   }
-
-  console.log("checking prisma engine...");
-  await ensurePrismaEngine();
-  console.log("checked!");
 }
 
 setupTests()
