@@ -191,7 +191,19 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
   Patient: {
     _all: [
       UseMiddleware(({ info }, next) => {
-        console.log(`Query "${info.fieldName}" accessed`);
+        console.log(`Operation "${info.fieldName}" accessed`);
+        return next();
+      }),
+    ],
+    _query: [
+      UseMiddleware(({ info }, next) => {
+        console.log(`Query "${info.fieldName}" read`);
+        return next();
+      }),
+    ],
+    _mutation: [
+      UseMiddleware(({ info }, next) => {
+        console.log(`Mutation "${info.fieldName}" performed`);
         return next();
       }),
     ],

@@ -111,6 +111,18 @@ applyResolversEnhanceMap({
 });
 ```
 
+You can also use the `_query` and `_mutation` shorthands to apply decorators only to the queries or mutations, e.g.:
+
+```ts
+applyResolversEnhanceMap({
+  Client: {
+    _all: [UseMiddleware(LogMiddleware)],
+    _query: [Authorized()],
+    _mutation: [Authorized(Role.ADMIN)], // only admin can change the data
+  },
+});
+```
+
 #### Additional decorators for Prisma schema classes and fields
 
 If you need to apply some decorators, like `@Authorized` or `@Extensions`, on the model `@ObjectType` and its fields, you can use similar pattern as for the resolver actions described above.

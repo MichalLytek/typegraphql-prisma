@@ -7,17 +7,7 @@ export const baseKeys: BaseKeys[] = ["modelName"];
 
 export type ModelKeys = keyof Exclude<DMMF.ModelMapping, BaseKeys>;
 
-export type SupportedQueries = keyof Pick<
-  typeof DMMF.ModelAction,
-  | "findUnique"
-  | "findUniqueOrThrow"
-  | "findFirst"
-  | "findFirstOrThrow"
-  | "findMany"
-  | "aggregate"
-  | "groupBy"
->;
-export const supportedQueryActions: SupportedQueries[] = [
+export const supportedQueryActions = [
   "findUnique",
   "findUniqueOrThrow",
   "findFirst",
@@ -25,19 +15,10 @@ export const supportedQueryActions: SupportedQueries[] = [
   "findMany",
   "aggregate",
   "groupBy",
-];
+] satisfies (keyof typeof DMMF.ModelAction)[];
+export type SupportedQueries = (typeof supportedQueryActions)[number];
 
-export type SupportedMutations = keyof Pick<
-  typeof DMMF.ModelAction,
-  | "createOne"
-  | "createMany"
-  | "deleteOne"
-  | "updateOne"
-  | "deleteMany"
-  | "updateMany"
-  | "upsertOne"
->;
-export const supportedMutationActions: SupportedMutations[] = [
+export const supportedMutationActions = [
   "createOne",
   "createMany",
   "deleteOne",
@@ -45,7 +26,8 @@ export const supportedMutationActions: SupportedMutations[] = [
   "deleteMany",
   "updateMany",
   "upsertOne",
-];
+] satisfies (keyof typeof DMMF.ModelAction)[];
+export type SupportedMutations = (typeof supportedMutationActions)[number];
 
 export const modelsFolderName = "models";
 export const enumsFolderName = "enums";

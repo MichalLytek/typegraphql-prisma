@@ -6,6 +6,7 @@ import {
   outputsFolderName,
   relationsResolversFolderName,
   resolversFolderName,
+  supportedMutationActions,
 } from "./config";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import { DMMF } from "./dmmf/types";
@@ -145,7 +146,11 @@ export function generateEnhanceMap(
       export type ResolverActionsConfig<
         TModel extends ResolverModelNames
       > = Partial<Record<ModelResolverActionNames<TModel>, MethodDecorator[] | MethodDecoratorOverrideFn>>
-        & { _all?: MethodDecorator[]  };
+        & {
+          _all?: MethodDecorator[];
+          _query?: MethodDecorator[];
+          _mutation?: MethodDecorator[];
+        };
 
       export type ResolversEnhanceMap = {
         [TModel in ResolverModelNames]?: ResolverActionsConfig<TModel>;
@@ -154,22 +159,31 @@ export function generateEnhanceMap(
       export function applyResolversEnhanceMap(
         resolversEnhanceMap: ResolversEnhanceMap,
       ) {
+        const mutationOperationPrefixes = [
+          ${supportedMutationActions.map(it => `"${it}"`).join(", ")}
+        ];
         for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
           const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;
           const crudTarget = crudResolversMap[modelName].prototype;
           const resolverActionsConfig = resolversEnhanceMap[modelName]!;
           const actionResolversConfig = actionResolversMap[modelName];
-          const allActionsDecorators = resolverActionsConfig._all ?? [];
+          const allActionsDecorators = resolverActionsConfig._all;
           const resolverActionNames = crudResolversInfo[modelName as keyof typeof crudResolversInfo];
-            for (const resolverActionName of resolverActionNames) {
+          for (const resolverActionName of resolverActionNames) {
             const maybeDecoratorsOrFn = resolverActionsConfig[
               resolverActionName as keyof typeof resolverActionsConfig
             ] as MethodDecorator[] | MethodDecoratorOverrideFn | undefined;
+            const isWriteOperation = mutationOperationPrefixes.some(prefix => resolverActionName.startsWith(prefix));
+            const operationKindDecorators = isWriteOperation ? resolverActionsConfig._mutation : resolverActionsConfig._query;
+            const mainDecorators = [
+              ...allActionsDecorators ?? [],
+              ...operationKindDecorators ?? [],
+            ]
             let decorators: MethodDecorator[];
             if (typeof maybeDecoratorsOrFn === "function") {
-              decorators = maybeDecoratorsOrFn(allActionsDecorators);
+              decorators = maybeDecoratorsOrFn(mainDecorators);
             } else {
-              decorators = [...allActionsDecorators, ...maybeDecoratorsOrFn ?? []];
+              decorators = [...mainDecorators, ...maybeDecoratorsOrFn ?? []];
             }
             const actionTarget = (actionResolversConfig[
               resolverActionName as keyof typeof actionResolversConfig
