@@ -3243,6 +3243,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -3255,6 +3260,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -3730,6 +3740,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -3742,6 +3757,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -4115,6 +4135,11 @@
                   "isList": true
                 },
                 {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
                   "type": "Null",
                   "location": "scalar",
                   "isList": false
@@ -4130,6 +4155,11 @@
                   "type": "Int",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
                 },
                 {
                   "type": "Null",
@@ -4662,6 +4692,11 @@
                   "isList": true
                 },
                 {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
                   "type": "Null",
                   "location": "scalar",
                   "isList": false
@@ -4677,6 +4712,11 @@
                   "type": "Int",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
                 },
                 {
                   "type": "Null",
@@ -6617,6 +6657,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -6629,6 +6674,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -6764,6 +6814,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -6776,6 +6831,11 @@
                   "type": "String",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "String",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -6950,6 +7010,11 @@
                   "type": "Int",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -6962,6 +7027,11 @@
                   "type": "Int",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
                 }
               ]
             },
@@ -7068,6 +7138,11 @@
                   "isList": true
                 },
                 {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
                   "type": "Null",
                   "location": "scalar",
                   "isList": false
@@ -7083,6 +7158,11 @@
                   "type": "Int",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
                 },
                 {
                   "type": "Null",
@@ -7333,6 +7413,11 @@
                   "isList": true
                 },
                 {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
                   "type": "Null",
                   "location": "scalar",
                   "isList": false
@@ -7348,6 +7433,11 @@
                   "type": "Int",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "Int",
+                  "location": "scalar",
+                  "isList": false
                 },
                 {
                   "type": "Null",
@@ -7541,6 +7631,11 @@
                   "isList": true
                 },
                 {
+                  "type": "Float",
+                  "location": "scalar",
+                  "isList": false
+                },
+                {
                   "type": "Null",
                   "location": "scalar",
                   "isList": false
@@ -7556,6 +7651,11 @@
                   "type": "Float",
                   "location": "scalar",
                   "isList": true
+                },
+                {
+                  "type": "Float",
+                  "location": "scalar",
+                  "isList": false
                 },
                 {
                   "type": "Null",

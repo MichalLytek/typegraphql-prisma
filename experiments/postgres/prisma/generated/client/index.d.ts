@@ -600,8 +600,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.13.0
-   * Query Engine version: 1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a
+   * Prisma Client JS version: 4.14.0
+   * Query Engine version: d9a4c5988f480fa576d43970d5a23641aa77bc9c
    */
   export type PrismaVersion = {
     client: string
@@ -14065,8 +14065,8 @@ export namespace Prisma {
 
   export type IntFilter = {
     equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
     lt?: number
     lte?: number
     gt?: number
@@ -14076,8 +14076,8 @@ export namespace Prisma {
 
   export type StringFilter = {
     equals?: string
-    in?: Enumerable<string>
-    notIn?: Enumerable<string>
+    in?: Enumerable<string> | string
+    notIn?: Enumerable<string> | string
     lt?: string
     lte?: string
     gt?: string
@@ -14092,8 +14092,8 @@ export namespace Prisma {
 
   export type StringNullableFilter = {
     equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
+    in?: Enumerable<string> | string | null
+    notIn?: Enumerable<string> | string | null
     lt?: string
     lte?: string
     gt?: string
@@ -14108,8 +14108,8 @@ export namespace Prisma {
 
   export type FloatFilter = {
     equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
     lt?: number
     lte?: number
     gt?: number
@@ -14211,8 +14211,8 @@ export namespace Prisma {
 
   export type IntWithAggregatesFilter = {
     equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
     lt?: number
     lte?: number
     gt?: number
@@ -14227,8 +14227,8 @@ export namespace Prisma {
 
   export type StringWithAggregatesFilter = {
     equals?: string
-    in?: Enumerable<string>
-    notIn?: Enumerable<string>
+    in?: Enumerable<string> | string
+    notIn?: Enumerable<string> | string
     lt?: string
     lte?: string
     gt?: string
@@ -14246,8 +14246,8 @@ export namespace Prisma {
 
   export type StringNullableWithAggregatesFilter = {
     equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
+    in?: Enumerable<string> | string | null
+    notIn?: Enumerable<string> | string | null
     lt?: string
     lte?: string
     gt?: string
@@ -14265,8 +14265,8 @@ export namespace Prisma {
 
   export type FloatWithAggregatesFilter = {
     equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
     lt?: number
     lte?: number
     gt?: number
@@ -14291,8 +14291,8 @@ export namespace Prisma {
 
   export type DateTimeFilter = {
     equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string>
-    notIn?: Enumerable<Date> | Enumerable<string>
+    in?: Enumerable<Date> | Enumerable<string> | Date | string
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string
     lt?: Date | string
     lte?: Date | string
     gt?: Date | string
@@ -14307,8 +14307,8 @@ export namespace Prisma {
 
   export type IntNullableFilter = {
     equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
     lt?: number
     lte?: number
     gt?: number
@@ -14408,8 +14408,8 @@ export namespace Prisma {
 
   export type DateTimeWithAggregatesFilter = {
     equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string>
-    notIn?: Enumerable<Date> | Enumerable<string>
+    in?: Enumerable<Date> | Enumerable<string> | Date | string
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string
     lt?: Date | string
     lte?: Date | string
     gt?: Date | string
@@ -14430,8 +14430,8 @@ export namespace Prisma {
 
   export type IntNullableWithAggregatesFilter = {
     equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
     lt?: number
     lte?: number
     gt?: number
@@ -14706,8 +14706,8 @@ export namespace Prisma {
 
   export type BigIntNullableFilter = {
     equals?: bigint | number | null
-    in?: Enumerable<bigint> | Enumerable<number> | null
-    notIn?: Enumerable<bigint> | Enumerable<number> | null
+    in?: Enumerable<bigint> | Enumerable<number> | bigint | number | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | bigint | number | null
     lt?: bigint | number
     lte?: bigint | number
     gt?: bigint | number
@@ -14717,15 +14717,15 @@ export namespace Prisma {
 
   export type BytesNullableFilter = {
     equals?: Buffer | null
-    in?: Enumerable<Buffer> | null
-    notIn?: Enumerable<Buffer> | null
+    in?: Enumerable<Buffer> | Buffer | null
+    notIn?: Enumerable<Buffer> | Buffer | null
     not?: NestedBytesNullableFilter | Buffer | null
   }
 
   export type DecimalNullableFilter = {
     equals?: Decimal | DecimalJsLike | number | string | null
-    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
-    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | Decimal | DecimalJsLike | number | string | null
+    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | Decimal | DecimalJsLike | number | string | null
     lt?: Decimal | DecimalJsLike | number | string
     lte?: Decimal | DecimalJsLike | number | string
     gt?: Decimal | DecimalJsLike | number | string
@@ -14768,8 +14768,8 @@ export namespace Prisma {
 
   export type BigIntNullableWithAggregatesFilter = {
     equals?: bigint | number | null
-    in?: Enumerable<bigint> | Enumerable<number> | null
-    notIn?: Enumerable<bigint> | Enumerable<number> | null
+    in?: Enumerable<bigint> | Enumerable<number> | bigint | number | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | bigint | number | null
     lt?: bigint | number
     lte?: bigint | number
     gt?: bigint | number
@@ -14784,8 +14784,8 @@ export namespace Prisma {
 
   export type BytesNullableWithAggregatesFilter = {
     equals?: Buffer | null
-    in?: Enumerable<Buffer> | null
-    notIn?: Enumerable<Buffer> | null
+    in?: Enumerable<Buffer> | Buffer | null
+    notIn?: Enumerable<Buffer> | Buffer | null
     not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
     _count?: NestedIntNullableFilter
     _min?: NestedBytesNullableFilter
@@ -14794,8 +14794,8 @@ export namespace Prisma {
 
   export type DecimalNullableWithAggregatesFilter = {
     equals?: Decimal | DecimalJsLike | number | string | null
-    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
-    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | Decimal | DecimalJsLike | number | string | null
+    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | Decimal | DecimalJsLike | number | string | null
     lt?: Decimal | DecimalJsLike | number | string
     lte?: Decimal | DecimalJsLike | number | string
     gt?: Decimal | DecimalJsLike | number | string
@@ -15242,8 +15242,8 @@ export namespace Prisma {
 
   export type NestedIntFilter = {
     equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
     lt?: number
     lte?: number
     gt?: number
@@ -15253,8 +15253,8 @@ export namespace Prisma {
 
   export type NestedStringFilter = {
     equals?: string
-    in?: Enumerable<string>
-    notIn?: Enumerable<string>
+    in?: Enumerable<string> | string
+    notIn?: Enumerable<string> | string
     lt?: string
     lte?: string
     gt?: string
@@ -15268,8 +15268,8 @@ export namespace Prisma {
 
   export type NestedStringNullableFilter = {
     equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
+    in?: Enumerable<string> | string | null
+    notIn?: Enumerable<string> | string | null
     lt?: string
     lte?: string
     gt?: string
@@ -15283,8 +15283,8 @@ export namespace Prisma {
 
   export type NestedFloatFilter = {
     equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
     lt?: number
     lte?: number
     gt?: number
@@ -15301,8 +15301,8 @@ export namespace Prisma {
 
   export type NestedIntWithAggregatesFilter = {
     equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
     lt?: number
     lte?: number
     gt?: number
@@ -15317,8 +15317,8 @@ export namespace Prisma {
 
   export type NestedStringWithAggregatesFilter = {
     equals?: string
-    in?: Enumerable<string>
-    notIn?: Enumerable<string>
+    in?: Enumerable<string> | string
+    notIn?: Enumerable<string> | string
     lt?: string
     lte?: string
     gt?: string
@@ -15335,8 +15335,8 @@ export namespace Prisma {
 
   export type NestedStringNullableWithAggregatesFilter = {
     equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
+    in?: Enumerable<string> | string | null
+    notIn?: Enumerable<string> | string | null
     lt?: string
     lte?: string
     gt?: string
@@ -15353,8 +15353,8 @@ export namespace Prisma {
 
   export type NestedIntNullableFilter = {
     equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
     lt?: number
     lte?: number
     gt?: number
@@ -15364,8 +15364,8 @@ export namespace Prisma {
 
   export type NestedFloatWithAggregatesFilter = {
     equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
     lt?: number
     lte?: number
     gt?: number
@@ -15390,8 +15390,8 @@ export namespace Prisma {
 
   export type NestedDateTimeFilter = {
     equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string>
-    notIn?: Enumerable<Date> | Enumerable<string>
+    in?: Enumerable<Date> | Enumerable<string> | Date | string
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string
     lt?: Date | string
     lte?: Date | string
     gt?: Date | string
@@ -15413,8 +15413,8 @@ export namespace Prisma {
 
   export type NestedDateTimeWithAggregatesFilter = {
     equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string>
-    notIn?: Enumerable<Date> | Enumerable<string>
+    in?: Enumerable<Date> | Enumerable<string> | Date | string
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string
     lt?: Date | string
     lte?: Date | string
     gt?: Date | string
@@ -15435,8 +15435,8 @@ export namespace Prisma {
 
   export type NestedIntNullableWithAggregatesFilter = {
     equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
     lt?: number
     lte?: number
     gt?: number
@@ -15451,8 +15451,8 @@ export namespace Prisma {
 
   export type NestedFloatNullableFilter = {
     equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
     lt?: number
     lte?: number
     gt?: number
@@ -15494,8 +15494,8 @@ export namespace Prisma {
 
   export type NestedBigIntNullableFilter = {
     equals?: bigint | number | null
-    in?: Enumerable<bigint> | Enumerable<number> | null
-    notIn?: Enumerable<bigint> | Enumerable<number> | null
+    in?: Enumerable<bigint> | Enumerable<number> | bigint | number | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | bigint | number | null
     lt?: bigint | number
     lte?: bigint | number
     gt?: bigint | number
@@ -15505,15 +15505,15 @@ export namespace Prisma {
 
   export type NestedBytesNullableFilter = {
     equals?: Buffer | null
-    in?: Enumerable<Buffer> | null
-    notIn?: Enumerable<Buffer> | null
+    in?: Enumerable<Buffer> | Buffer | null
+    notIn?: Enumerable<Buffer> | Buffer | null
     not?: NestedBytesNullableFilter | Buffer | null
   }
 
   export type NestedDecimalNullableFilter = {
     equals?: Decimal | DecimalJsLike | number | string | null
-    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
-    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | Decimal | DecimalJsLike | number | string | null
+    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | Decimal | DecimalJsLike | number | string | null
     lt?: Decimal | DecimalJsLike | number | string
     lte?: Decimal | DecimalJsLike | number | string
     gt?: Decimal | DecimalJsLike | number | string
@@ -15523,8 +15523,8 @@ export namespace Prisma {
 
   export type NestedBigIntNullableWithAggregatesFilter = {
     equals?: bigint | number | null
-    in?: Enumerable<bigint> | Enumerable<number> | null
-    notIn?: Enumerable<bigint> | Enumerable<number> | null
+    in?: Enumerable<bigint> | Enumerable<number> | bigint | number | null
+    notIn?: Enumerable<bigint> | Enumerable<number> | bigint | number | null
     lt?: bigint | number
     lte?: bigint | number
     gt?: bigint | number
@@ -15539,8 +15539,8 @@ export namespace Prisma {
 
   export type NestedBytesNullableWithAggregatesFilter = {
     equals?: Buffer | null
-    in?: Enumerable<Buffer> | null
-    notIn?: Enumerable<Buffer> | null
+    in?: Enumerable<Buffer> | Buffer | null
+    notIn?: Enumerable<Buffer> | Buffer | null
     not?: NestedBytesNullableWithAggregatesFilter | Buffer | null
     _count?: NestedIntNullableFilter
     _min?: NestedBytesNullableFilter
@@ -15549,8 +15549,8 @@ export namespace Prisma {
 
   export type NestedDecimalNullableWithAggregatesFilter = {
     equals?: Decimal | DecimalJsLike | number | string | null
-    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
-    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | null
+    in?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | Decimal | DecimalJsLike | number | string | null
+    notIn?: Enumerable<Decimal> | Enumerable<DecimalJsLike> | Enumerable<number> | Enumerable<string> | Decimal | DecimalJsLike | number | string | null
     lt?: Decimal | DecimalJsLike | number | string
     lte?: Decimal | DecimalJsLike | number | string
     gt?: Decimal | DecimalJsLike | number | string

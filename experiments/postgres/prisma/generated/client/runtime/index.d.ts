@@ -88,14 +88,23 @@ declare interface AtMostOneError {
     providedKeys: string[];
 }
 
-export declare type BaseDMMF = Pick<DMMF.Document, 'datamodel' | 'mappings'>;
-
-declare interface BaseDMMFHelper extends DMMFDatamodelHelper, DMMFMappingsHelper {
+/**
+ * Attributes is a map from string to attribute values.
+ *
+ * Note: only the own enumerable keys are counted as valid attribute keys.
+ */
+declare interface Attributes {
+    [attributeKey: string]: AttributeValue | undefined;
 }
 
-declare class BaseDMMFHelper {
-    constructor(dmmf: BaseDMMF);
-}
+/**
+ * Attribute values may be any non-nullish primitive value except an object.
+ *
+ * null or undefined attribute values are invalid and will result in undefined behavior.
+ */
+declare type AttributeValue = string | number | boolean | Array<null | undefined | string> | Array<null | undefined | number> | Array<null | undefined | boolean>;
+
+export declare type BaseDMMF = Pick<DMMF.Document, 'datamodel'>;
 
 declare type BatchQueryEngineResult<T> = QueryEngineResult<T> | Error;
 
@@ -526,9 +535,11 @@ export declare interface DecimalJsLike {
     toFixed(): string;
 }
 
-export declare const decompressFromBase64: any;
+export declare const decompressFromBase64: (str: string) => any;
 
 declare type DefaultArgs = InternalArgs<{}, {}, {}, {}>;
+
+export declare function defineDmmfProperty(target: object, runtimeDataModel: RuntimeDataModel): void;
 
 declare function defineExtension(ext: Args | ((client: Client) => Client)): (client: Client) => Client;
 
@@ -592,7 +603,7 @@ export declare namespace DMMF {
         uniqueIndexes: uniqueIndex[];
         documentation?: string;
         primaryKey: PrimaryKey | null;
-        [key: string]: any;
+        isGenerated?: boolean;
     }
     export type FieldKind = 'scalar' | 'object' | 'enum' | 'unsupported';
     export type FieldNamespace = 'model' | 'prisma';
@@ -612,7 +623,7 @@ export declare namespace DMMF {
          * BigInt, Boolean, Bytes, DateTime, Decimal, Float, Int, JSON, String, $ModelName
          */
         type: string;
-        dbNames?: string[] | null;
+        dbName?: string | null;
         hasDefaultValue: boolean;
         default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
         relationFromFields?: string[];
@@ -767,7 +778,7 @@ export declare namespace DMMF {
     }
 }
 
-export declare interface DMMFClass extends BaseDMMFHelper, DMMFSchemaHelper {
+export declare interface DMMFClass extends DMMFDatamodelHelper, DMMFMappingsHelper, DMMFSchemaHelper {
 }
 
 export declare class DMMFClass {
@@ -874,7 +885,7 @@ declare interface EmptySelectError {
 
 declare type EmptyToUnknown<T> = T;
 
-export declare abstract class Engine<InteractiveTransactionPayload = unknown> {
+declare abstract class Engine<InteractiveTransactionPayload = unknown> {
     abstract on(event: EngineEventType, listener: (args?: any) => any): void;
     abstract start(): Promise<void>;
     abstract stop(): Promise<void>;
@@ -927,10 +938,16 @@ declare interface EngineConfig {
      */
     inlineSchemaHash?: string;
     /**
-     * The configuration object for enabling tracing
-     * @remarks enabling is determined by the client
+     * The helper for interaction with OTEL tracing
+     * @remarks enabling is determined by the client and @prisma/instrumentation package
      */
-    tracingConfig: TracingConfig;
+    tracingHelper: TracingHelper;
+    /**
+     * Information about whether we have not found a schema.prisma file in the
+     * default location, and that we fell back to finding the schema.prisma file
+     * in the current working directory. This usually means it has been bundled.
+     */
+    isBundled?: boolean;
 }
 
 declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
@@ -938,6 +955,26 @@ declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit
 declare type EngineProtocol = 'graphql' | 'json';
 
 declare type EngineQuery = GraphQLQuery | JsonQuery;
+
+declare type EngineSpan = {
+    span: boolean;
+    name: string;
+    trace_id: string;
+    span_id: string;
+    parent_span_id: string;
+    start_time: [number, number];
+    end_time: [number, number];
+    attributes?: Record<string, string>;
+    links?: {
+        trace_id: string;
+        span_id: string;
+    }[];
+};
+
+declare type EngineSpanEvent = {
+    span: boolean;
+    spans: EngineSpan[];
+};
 
 declare interface EnvValue {
     fromEnvVar: null | string;
@@ -963,6 +1000,45 @@ declare interface EventEmitter {
 declare type Exact<A, W> = (W extends A ? {
     [K in keyof W]: K extends keyof A ? Exact<A[K], W[K]> : never;
 } : W) | (A extends Narrowable ? A : never);
+
+/**
+ * Defines Exception.
+ *
+ * string or an object with one of (message or name or code) and optional stack
+ */
+declare type Exception = ExceptionWithCode | ExceptionWithMessage | ExceptionWithName | string;
+
+declare interface ExceptionWithCode {
+    code: string | number;
+    name?: string;
+    message?: string;
+    stack?: string;
+}
+
+declare interface ExceptionWithMessage {
+    code?: string | number;
+    message: string;
+    name?: string;
+    stack?: string;
+}
+
+declare interface ExceptionWithName {
+    code?: string | number;
+    message?: string;
+    name: string;
+    stack?: string;
+}
+
+declare type ExtendedSpanOptions = SpanOptions & {
+    /** The name of the span */
+    name: string;
+    internal?: boolean;
+    middleware?: boolean;
+    /** Whether it propagates context (?=true) */
+    active?: boolean;
+    /** The context to append the span to */
+    context?: Context;
+};
 
 declare namespace Extensions {
     export {
@@ -1027,20 +1103,6 @@ export declare interface FieldRef<Model, FieldType> {
     readonly typeName: FieldType;
     readonly isList: boolean;
 }
-
-/**
- * Find paths that match a set of regexes
- * @param root to start from
- * @param match to match against
- * @param types to select files, folders, links
- * @param deep to recurse in the directory tree
- * @param limit to limit the results
- * @param handler to further filter results
- * @param found to add to already found
- * @param seen to add to already seen
- * @returns found paths (symlinks preserved)
- */
-export declare function findSync(root: string, match: (RegExp | string)[], types?: ('f' | 'd' | 'l')[], deep?: ('d' | 'l')[], limit?: number, handler?: Handler, found?: string[], seen?: Record<string, true>): string[];
 
 declare interface GeneratorConfig {
     name: string;
@@ -1112,7 +1174,7 @@ declare type GetModel<Base extends Record<any, any>, M extends Args_3['model'][s
 
 export declare function getPrismaClient(config: GetPrismaClientConfig): {
     new (optionsArg?: PrismaClientOptions): {
-        _baseDmmf: BaseDMMFHelper;
+        _runtimeDataModel: RuntimeDataModel;
         _dmmf?: DMMFClass | undefined;
         _engine: Engine;
         _fetcher: RequestHandler;
@@ -1122,7 +1184,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
         _clientVersion: string;
         _errorFormat: ErrorFormat;
         _clientEngineType: ClientEngineType;
-        _tracingConfig: TracingConfig;
+        _tracingHelper: TracingHelper;
         _metrics: MetricsClient;
         _middlewares: MiddlewareHandler<QueryMiddleware>;
         _previewFeatures: string[];
@@ -1249,8 +1311,13 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
  * loaded, this same config is passed to {@link getPrismaClient} which creates a
  * closure with that config around a non-instantiated [[PrismaClient]].
  */
-declare interface GetPrismaClientConfig {
-    document: Omit<DMMF.Document, 'schema'>;
+declare type GetPrismaClientConfig = ({
+    runtimeDataModel: RuntimeDataModel;
+    document?: undefined;
+} | {
+    runtimeDataModel?: undefined;
+    document: DMMF.Document;
+}) & {
     generator?: GeneratorConfig;
     sqliteDatasourceOverrides?: DatasourceOverwrite[];
     relativeEnvPaths: {
@@ -1314,7 +1381,13 @@ declare interface GetPrismaClientConfig {
      * @remarks used to error for Vercel/Netlify for schema caching issues
      */
     ciName?: string;
-}
+    /**
+     * Information about whether we have not found a schema.prisma file in the
+     * default location, and that we fell back to finding the schema.prisma file
+     * in the current working directory. This usually means it has been bundled.
+     */
+    isBundled?: boolean;
+};
 
 declare type GetResult<Base extends Record<any, any>, R extends Args_3['result'][string]> = {
     [K in keyof R | keyof Base]: K extends keyof R ? ReturnType<ReturnType<R[K]>['compute']> : Base[K];
@@ -1360,9 +1433,21 @@ declare type HandleErrorParams = {
     transaction?: PrismaPromiseTransaction;
 };
 
-declare type Handler = (base: string, item: string, type: ItemType) => boolean | string;
-
 declare type Headers_2 = Record<string, string | string[] | undefined>;
+
+/**
+ * Defines High-Resolution Time.
+ *
+ * The first number, HrTime[0], is UNIX Epoch time in seconds since 00:00:00 UTC on 1 January 1970.
+ * The second number, HrTime[1], represents the partial second elapsed since Unix Epoch time represented by first number in nanoseconds.
+ * For example, 2021-01-01T12:30:10.150Z in UNIX Epoch time in milliseconds is represented as 1609504210150.
+ * The first number is calculated by converting and truncating the Epoch time in milliseconds to seconds:
+ * HrTime[0] = Math.trunc(1609504210150 / 1000) = 1609504210.
+ * The second number is calculated by converting the digits after the decimal point of the subtraction, (1609504210150 / 1000) - HrTime[0], to nanoseconds:
+ * HrTime[1] = Number((1609504210.150 - HrTime[0]).toFixed(9)) * 1e9 = 150000000.
+ * This is represented in HrTime format as [1609504210, 150000000].
+ */
+declare type HrTime = [number, number];
 
 declare interface IncludeAndSelectError {
     type: 'includeAndSelect';
@@ -1515,8 +1600,6 @@ declare enum IsolationLevel {
     Serializable = "Serializable"
 }
 
-declare type ItemType = 'd' | 'f' | 'l';
-
 declare interface Job {
     resolve: (data: any) => void;
     reject: (data: any) => void;
@@ -1584,6 +1667,30 @@ declare type LegacyExact<A, W = unknown> = W extends unknown ? A extends LegacyN
 }> : never;
 
 declare type LegacyNarrowable = string | number | boolean | bigint;
+
+/**
+ * A pointer from the current {@link Span} to another span in the same trace or
+ * in a different trace.
+ * Few examples of Link usage.
+ * 1. Batch Processing: A batch of elements may contain elements associated
+ *    with one or more traces/spans. Since there can only be one parent
+ *    SpanContext, Link is used to keep reference to SpanContext of all
+ *    elements in the batch.
+ * 2. Public Endpoint: A SpanContext in incoming client request on a public
+ *    endpoint is untrusted from service provider perspective. In such case it
+ *    is advisable to start a new trace with appropriate sampling decision.
+ *    However, it is desirable to associate incoming SpanContext to new trace
+ *    initiated on service provider side so two traces (from Client and from
+ *    Service Provider) can be correlated.
+ */
+declare interface Link {
+    /** The {@link SpanContext} of a linked span. */
+    context: SpanContext;
+    /** A set of {@link SpanAttributes} on the link. */
+    attributes?: SpanAttributes;
+    /** Count of attributes of the link that were dropped due to collection limits */
+    droppedAttributesCount?: number;
+}
 
 declare type LoadedEnv = {
     message?: string;
@@ -1870,6 +1977,7 @@ declare type Pick_2<T, K extends string | number | symbol> = {
 export declare class PrismaClientInitializationError extends Error {
     clientVersion: string;
     errorCode?: string;
+    retryable?: boolean;
     constructor(message: string, clientVersion: string, errorCode?: string);
     get [Symbol.toStringTag](): string;
 }
@@ -2093,7 +2201,6 @@ declare type Request_2 = {
     transaction?: PrismaPromiseTransaction;
     otelParentCtx?: Context;
     otelChildCtx?: Context;
-    tracingConfig?: TracingConfig;
     customDataProxyFetch?: (fetch: Fetch) => Fetch;
 };
 
@@ -2196,7 +2303,249 @@ declare type ResultFieldDefinition = {
     compute: ResultArgsFieldCompute;
 };
 
+declare type RuntimeDataModel = {
+    readonly models: Record<string, RuntimeModel>;
+    readonly enums: Record<string, RuntimeEnum>;
+    readonly types: Record<string, RuntimeModel>;
+};
+
+declare type RuntimeEnum = Omit<DMMF.DatamodelEnum, 'name'>;
+
+declare type RuntimeModel = Omit<DMMF.Model, 'name'>;
+
 declare type Selection_2 = Record<string, boolean | JsArgs>;
+
+/**
+ * An interface that represents a span. A span represents a single operation
+ * within a trace. Examples of span might include remote procedure calls or a
+ * in-process function calls to sub-components. A Trace has a single, top-level
+ * "root" Span that in turn may have zero or more child Spans, which in turn
+ * may have children.
+ *
+ * Spans are created by the {@link Tracer.startSpan} method.
+ */
+declare interface Span {
+    /**
+     * Returns the {@link SpanContext} object associated with this Span.
+     *
+     * Get an immutable, serializable identifier for this span that can be used
+     * to create new child spans. Returned SpanContext is usable even after the
+     * span ends.
+     *
+     * @returns the SpanContext object associated with this Span.
+     */
+    spanContext(): SpanContext;
+    /**
+     * Sets an attribute to the span.
+     *
+     * Sets a single Attribute with the key and value passed as arguments.
+     *
+     * @param key the key for this attribute.
+     * @param value the value for this attribute. Setting a value null or
+     *              undefined is invalid and will result in undefined behavior.
+     */
+    setAttribute(key: string, value: SpanAttributeValue): this;
+    /**
+     * Sets attributes to the span.
+     *
+     * @param attributes the attributes that will be added.
+     *                   null or undefined attribute values
+     *                   are invalid and will result in undefined behavior.
+     */
+    setAttributes(attributes: SpanAttributes): this;
+    /**
+     * Adds an event to the Span.
+     *
+     * @param name the name of the event.
+     * @param [attributesOrStartTime] the attributes that will be added; these are
+     *     associated with this event. Can be also a start time
+     *     if type is {@type TimeInput} and 3rd param is undefined
+     * @param [startTime] start time of the event.
+     */
+    addEvent(name: string, attributesOrStartTime?: SpanAttributes | TimeInput, startTime?: TimeInput): this;
+    /**
+     * Sets a status to the span. If used, this will override the default Span
+     * status. Default is {@link SpanStatusCode.UNSET}. SetStatus overrides the value
+     * of previous calls to SetStatus on the Span.
+     *
+     * @param status the SpanStatus to set.
+     */
+    setStatus(status: SpanStatus): this;
+    /**
+     * Updates the Span name.
+     *
+     * This will override the name provided via {@link Tracer.startSpan}.
+     *
+     * Upon this update, any sampling behavior based on Span name will depend on
+     * the implementation.
+     *
+     * @param name the Span name.
+     */
+    updateName(name: string): this;
+    /**
+     * Marks the end of Span execution.
+     *
+     * Call to End of a Span MUST not have any effects on child spans. Those may
+     * still be running and can be ended later.
+     *
+     * Do not return `this`. The Span generally should not be used after it
+     * is ended so chaining is not desired in this context.
+     *
+     * @param [endTime] the time to set as Span's end time. If not provided,
+     *     use the current time as the span's end time.
+     */
+    end(endTime?: TimeInput): void;
+    /**
+     * Returns the flag whether this span will be recorded.
+     *
+     * @returns true if this Span is active and recording information like events
+     *     with the `AddEvent` operation and attributes using `setAttributes`.
+     */
+    isRecording(): boolean;
+    /**
+     * Sets exception as a span event
+     * @param exception the exception the only accepted values are string or Error
+     * @param [time] the time to set as Span's event time. If not provided,
+     *     use the current time.
+     */
+    recordException(exception: Exception, time?: TimeInput): void;
+}
+
+/**
+ * @deprecated please use {@link Attributes}
+ */
+declare type SpanAttributes = Attributes;
+
+/**
+ * @deprecated please use {@link AttributeValue}
+ */
+declare type SpanAttributeValue = AttributeValue;
+
+declare type SpanCallback<R> = (span?: Span, context?: Context) => R;
+
+/**
+ * A SpanContext represents the portion of a {@link Span} which must be
+ * serialized and propagated along side of a {@link Baggage}.
+ */
+declare interface SpanContext {
+    /**
+     * The ID of the trace that this span belongs to. It is worldwide unique
+     * with practically sufficient probability by being made as 16 randomly
+     * generated bytes, encoded as a 32 lowercase hex characters corresponding to
+     * 128 bits.
+     */
+    traceId: string;
+    /**
+     * The ID of the Span. It is globally unique with practically sufficient
+     * probability by being made as 8 randomly generated bytes, encoded as a 16
+     * lowercase hex characters corresponding to 64 bits.
+     */
+    spanId: string;
+    /**
+     * Only true if the SpanContext was propagated from a remote parent.
+     */
+    isRemote?: boolean;
+    /**
+     * Trace flags to propagate.
+     *
+     * It is represented as 1 byte (bitmap). Bit to represent whether trace is
+     * sampled or not. When set, the least significant bit documents that the
+     * caller may have recorded trace data. A caller who does not record trace
+     * data out-of-band leaves this flag unset.
+     *
+     * see {@link TraceFlags} for valid flag values.
+     */
+    traceFlags: number;
+    /**
+     * Tracing-system-specific info to propagate.
+     *
+     * The tracestate field value is a `list` as defined below. The `list` is a
+     * series of `list-members` separated by commas `,`, and a list-member is a
+     * key/value pair separated by an equals sign `=`. Spaces and horizontal tabs
+     * surrounding `list-members` are ignored. There can be a maximum of 32
+     * `list-members` in a `list`.
+     * More Info: https://www.w3.org/TR/trace-context/#tracestate-field
+     *
+     * Examples:
+     *     Single tracing system (generic format):
+     *         tracestate: rojo=00f067aa0ba902b7
+     *     Multiple tracing systems (with different formatting):
+     *         tracestate: rojo=00f067aa0ba902b7,congo=t61rcWkgMzE
+     */
+    traceState?: TraceState;
+}
+
+declare enum SpanKind {
+    /** Default value. Indicates that the span is used internally. */
+    INTERNAL = 0,
+    /**
+     * Indicates that the span covers server-side handling of an RPC or other
+     * remote request.
+     */
+    SERVER = 1,
+    /**
+     * Indicates that the span covers the client-side wrapper around an RPC or
+     * other remote request.
+     */
+    CLIENT = 2,
+    /**
+     * Indicates that the span describes producer sending a message to a
+     * broker. Unlike client and server, there is no direct critical path latency
+     * relationship between producer and consumer spans.
+     */
+    PRODUCER = 3,
+    /**
+     * Indicates that the span describes consumer receiving a message from a
+     * broker. Unlike client and server, there is no direct critical path latency
+     * relationship between producer and consumer spans.
+     */
+    CONSUMER = 4
+}
+
+/**
+ * Options needed for span creation
+ */
+declare interface SpanOptions {
+    /**
+     * The SpanKind of a span
+     * @default {@link SpanKind.INTERNAL}
+     */
+    kind?: SpanKind;
+    /** A span's attributes */
+    attributes?: SpanAttributes;
+    /** {@link Link}s span to other spans */
+    links?: Link[];
+    /** A manually specified start time for the created `Span` object. */
+    startTime?: TimeInput;
+    /** The new span should be a root span. (Ignore parent from context). */
+    root?: boolean;
+}
+
+declare interface SpanStatus {
+    /** The status code of this message. */
+    code: SpanStatusCode;
+    /** A developer-facing error message. */
+    message?: string;
+}
+
+/**
+ * An enumeration of status codes.
+ */
+declare enum SpanStatusCode {
+    /**
+     * The default status.
+     */
+    UNSET = 0,
+    /**
+     * The operation has been validated by an Application developer or
+     * Operator to have completed successfully.
+     */
+    OK = 1,
+    /**
+     * The operation contains an error.
+     */
+    ERROR = 2
+}
 
 /**
  * A SQL instance can be nested within each other to build SQL strings.
@@ -2219,10 +2568,58 @@ export declare class Sql {
  */
 export declare function sqltag(strings: ReadonlyArray<string>, ...values: RawValue[]): Sql;
 
-declare type TracingConfig = {
-    enabled: boolean;
-    middleware: boolean;
-};
+/**
+ * Defines TimeInput.
+ *
+ * hrtime, epoch milliseconds, performance.now() or Date
+ */
+declare type TimeInput = HrTime | number | Date;
+
+declare interface TraceState {
+    /**
+     * Create a new TraceState which inherits from this TraceState and has the
+     * given key set.
+     * The new entry will always be added in the front of the list of states.
+     *
+     * @param key key of the TraceState entry.
+     * @param value value of the TraceState entry.
+     */
+    set(key: string, value: string): TraceState;
+    /**
+     * Return a new TraceState which inherits from this TraceState but does not
+     * contain the given key.
+     *
+     * @param key the key for the TraceState entry to be removed.
+     */
+    unset(key: string): TraceState;
+    /**
+     * Returns the value to which the specified key is mapped, or `undefined` if
+     * this map contains no mapping for the key.
+     *
+     * @param key with which the specified value is to be associated.
+     * @returns the value to which the specified key is mapped, or `undefined` if
+     *     this map contains no mapping for the key.
+     */
+    get(key: string): string | undefined;
+    /**
+     * Serializes the TraceState to a `list` as defined below. The `list` is a
+     * series of `list-members` separated by commas `,`, and a list-member is a
+     * key/value pair separated by an equals sign `=`. Spaces and horizontal tabs
+     * surrounding `list-members` are ignored. There can be a maximum of 32
+     * `list-members` in a `list`.
+     *
+     * @returns the serialized string.
+     */
+    serialize(): string;
+}
+
+declare interface TracingHelper {
+    isEnabled(): boolean;
+    getTraceParent(context?: Context): string;
+    createEngineSpan(engineSpanEvent: EngineSpanEvent): Promise<void>;
+    getActiveContext(): Context | undefined;
+    runInChildSpan<R>(nameOrOptions: string | ExtendedSpanOptions, callback: SpanCallback<R>): R;
+}
 
 declare namespace Transaction {
     export {
@@ -2309,6 +2706,8 @@ declare namespace Utils {
 export declare type Value = unknown;
 
 export declare function warnEnvConflicts(envPaths: any): void;
+
+export declare const warnOnce: (key: string, message: string, ...args: unknown[]) => void;
 
 declare type WrapPropsInFnDeep<T> = {
     [K in keyof T]: T[K] extends Function ? T[K] : T[K] extends object ? WrapPropsInFnDeep<T[K]> : () => T[K];

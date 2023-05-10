@@ -3,7 +3,6 @@ var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
@@ -45,22 +44,20 @@ var ObjectEnumValue = class {
     return representations.get(this);
   }
 };
-__name(ObjectEnumValue, "ObjectEnumValue");
 var NullTypesEnumValue = class extends ObjectEnumValue {
   _getNamespace() {
     return "NullTypes";
   }
 };
-__name(NullTypesEnumValue, "NullTypesEnumValue");
 var DbNull = class extends NullTypesEnumValue {
 };
-__name(DbNull, "DbNull");
+setClassName(DbNull, "DbNull");
 var JsonNull = class extends NullTypesEnumValue {
 };
-__name(JsonNull, "JsonNull");
+setClassName(JsonNull, "JsonNull");
 var AnyNull = class extends NullTypesEnumValue {
 };
-__name(AnyNull, "AnyNull");
+setClassName(AnyNull, "AnyNull");
 var objectEnumValues = {
   classes: {
     DbNull,
@@ -73,6 +70,12 @@ var objectEnumValues = {
     AnyNull: new AnyNull(secret)
   }
 };
+function setClassName(classObject, name) {
+  Object.defineProperty(classObject, "name", {
+    value: name,
+    configurable: true
+  });
+}
 
 // src/runtime/strictEnum.ts
 var allowList = /* @__PURE__ */ new Set([
@@ -96,7 +99,6 @@ function makeStrictEnum(definition) {
     }
   });
 }
-__name(makeStrictEnum, "makeStrictEnum");
 
 // ../../node_modules/.pnpm/decimal.js@10.4.3/node_modules/decimal.js/decimal.mjs
 var EXP_LIMIT = 9e15;
@@ -1123,13 +1125,11 @@ function digitsToString(d) {
     w /= 10;
   return str + w;
 }
-__name(digitsToString, "digitsToString");
 function checkInt32(i, min2, max2) {
   if (i !== ~~i || i < min2 || i > max2) {
     throw Error(invalidArgument + i);
   }
 }
-__name(checkInt32, "checkInt32");
 function checkRoundingDigits(d, i, rm, repeating) {
   var di, k, r, rd;
   for (k = d[0]; k >= 10; k /= 10)
@@ -1168,7 +1168,6 @@ function checkRoundingDigits(d, i, rm, repeating) {
   }
   return r;
 }
-__name(checkRoundingDigits, "checkRoundingDigits");
 function convertBase(str, baseIn, baseOut) {
   var j, arr = [0], arrL, i = 0, strL = str.length;
   for (; i < strL; ) {
@@ -1186,7 +1185,6 @@ function convertBase(str, baseIn, baseOut) {
   }
   return arr.reverse();
 }
-__name(convertBase, "convertBase");
 function cosine(Ctor, x) {
   var k, len, y;
   if (x.isZero())
@@ -1208,7 +1206,6 @@ function cosine(Ctor, x) {
   Ctor.precision -= k;
   return x;
 }
-__name(cosine, "cosine");
 var divide = function() {
   function multiplyInteger(x, k, base) {
     var temp, carry = 0, i = x.length;
@@ -1221,7 +1218,6 @@ var divide = function() {
       x.unshift(carry);
     return x;
   }
-  __name(multiplyInteger, "multiplyInteger");
   function compare(a, b, aL, bL) {
     var i, r;
     if (aL != bL) {
@@ -1236,7 +1232,6 @@ var divide = function() {
     }
     return r;
   }
-  __name(compare, "compare");
   function subtract(a, b, aL, base) {
     var i = 0;
     for (; aL--; ) {
@@ -1247,7 +1242,6 @@ var divide = function() {
     for (; !a[0] && a.length > 1; )
       a.shift();
   }
-  __name(subtract, "subtract");
   return function(x, y, pr, rm, dp, base) {
     var cmp, e, i, k, logBase, more, prod, prodL, q, qd, rem, remL, rem0, sd, t, xi, xL, yd0, yL, yz, Ctor = x.constructor, sign2 = x.s == y.s ? 1 : -1, xd = x.d, yd = y.d;
     if (!xd || !xd[0] || !yd || !yd[0]) {
@@ -1476,7 +1470,6 @@ function finalise(x, sd, rm, isTruncated) {
   }
   return x;
 }
-__name(finalise, "finalise");
 function finiteToString(x, isExp, sd) {
   if (!x.isFinite())
     return nonFiniteToString(x);
@@ -1507,14 +1500,12 @@ function finiteToString(x, isExp, sd) {
   }
   return str;
 }
-__name(finiteToString, "finiteToString");
 function getBase10Exponent(digits, e) {
   var w = digits[0];
   for (e *= LOG_BASE; w >= 10; w /= 10)
     e++;
   return e;
 }
-__name(getBase10Exponent, "getBase10Exponent");
 function getLn10(Ctor, sd, pr) {
   if (sd > LN10_PRECISION) {
     external = true;
@@ -1524,13 +1515,11 @@ function getLn10(Ctor, sd, pr) {
   }
   return finalise(new Ctor(LN10), sd, 1, true);
 }
-__name(getLn10, "getLn10");
 function getPi(Ctor, sd, rm) {
   if (sd > PI_PRECISION)
     throw Error(precisionLimitExceeded);
   return finalise(new Ctor(PI), sd, rm, true);
 }
-__name(getPi, "getPi");
 function getPrecision(digits) {
   var w = digits.length - 1, len = w * LOG_BASE + 1;
   w = digits[w];
@@ -1542,14 +1531,12 @@ function getPrecision(digits) {
   }
   return len;
 }
-__name(getPrecision, "getPrecision");
 function getZeroString(k) {
   var zs = "";
   for (; k--; )
     zs += "0";
   return zs;
 }
-__name(getZeroString, "getZeroString");
 function intPow(Ctor, x, n, pr) {
   var isTruncated, r = new Ctor(1), k = Math.ceil(pr / LOG_BASE + 4);
   external = false;
@@ -1572,11 +1559,9 @@ function intPow(Ctor, x, n, pr) {
   external = true;
   return r;
 }
-__name(intPow, "intPow");
 function isOdd(n) {
   return n.d[n.d.length - 1] & 1;
 }
-__name(isOdd, "isOdd");
 function maxOrMin(Ctor, args, ltgt) {
   var y, x = new Ctor(args[0]), i = 0;
   for (; ++i < args.length; ) {
@@ -1590,7 +1575,6 @@ function maxOrMin(Ctor, args, ltgt) {
   }
   return x;
 }
-__name(maxOrMin, "maxOrMin");
 function naturalExponential(x, sd) {
   var denominator, guard, j, pow2, sum2, t, wpr, rep = 0, i = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
   if (!x.d || !x.d[0] || x.e > 17) {
@@ -1636,7 +1620,6 @@ function naturalExponential(x, sd) {
     sum2 = t;
   }
 }
-__name(naturalExponential, "naturalExponential");
 function naturalLogarithm(y, sd) {
   var c, c0, denominator, e, numerator, rep, sum2, t, wpr, x1, x2, n = 1, guard = 10, x = y, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
   if (x.s < 0 || !xd || !xd[0] || !x.e && xd[0] == 1 && xd.length == 1) {
@@ -1701,11 +1684,9 @@ function naturalLogarithm(y, sd) {
     denominator += 2;
   }
 }
-__name(naturalLogarithm, "naturalLogarithm");
 function nonFiniteToString(x) {
   return String(x.s * x.s / 0);
 }
-__name(nonFiniteToString, "nonFiniteToString");
 function parseDecimal(x, str) {
   var e, i, len;
   if ((e = str.indexOf(".")) > -1)
@@ -1758,7 +1739,6 @@ function parseDecimal(x, str) {
   }
   return x;
 }
-__name(parseDecimal, "parseDecimal");
 function parseOther(x, str) {
   var base, Ctor, divisor, i, isFloat, len, p, xd, xe;
   if (str.indexOf("_") > -1) {
@@ -1814,7 +1794,6 @@ function parseOther(x, str) {
   external = true;
   return x;
 }
-__name(parseOther, "parseOther");
 function sine(Ctor, x) {
   var k, len = x.d.length;
   if (len < 3) {
@@ -1831,7 +1810,6 @@ function sine(Ctor, x) {
   }
   return x;
 }
-__name(sine, "sine");
 function taylorSeries(Ctor, n, x, y, isHyperbolic) {
   var j, t, u, x2, i = 1, pr = Ctor.precision, k = Math.ceil(pr / LOG_BASE);
   external = false;
@@ -1858,14 +1836,12 @@ function taylorSeries(Ctor, n, x, y, isHyperbolic) {
   t.d.length = k + 1;
   return t;
 }
-__name(taylorSeries, "taylorSeries");
 function tinyPow(b, e) {
   var n = b;
   while (--e)
     n *= b;
   return n;
 }
-__name(tinyPow, "tinyPow");
 function toLessThanHalfPi(Ctor, x) {
   var t, isNeg = x.s < 0, pi = getPi(Ctor, Ctor.precision, 1), halfPi = pi.times(0.5);
   x = x.abs();
@@ -1886,7 +1862,6 @@ function toLessThanHalfPi(Ctor, x) {
   }
   return x.minus(pi).abs();
 }
-__name(toLessThanHalfPi, "toLessThanHalfPi");
 function toStringBinary(x, baseOut, sd, rm) {
   var base, e, i, k, len, roundUp, str, xd, y, Ctor = x.constructor, isExp = sd !== void 0;
   if (isExp) {
@@ -1989,46 +1964,36 @@ function toStringBinary(x, baseOut, sd, rm) {
   }
   return x.s < 0 ? "-" + str : str;
 }
-__name(toStringBinary, "toStringBinary");
 function truncate(arr, len) {
   if (arr.length > len) {
     arr.length = len;
     return true;
   }
 }
-__name(truncate, "truncate");
 function abs(x) {
   return new this(x).abs();
 }
-__name(abs, "abs");
 function acos(x) {
   return new this(x).acos();
 }
-__name(acos, "acos");
 function acosh(x) {
   return new this(x).acosh();
 }
-__name(acosh, "acosh");
 function add(x, y) {
   return new this(x).plus(y);
 }
-__name(add, "add");
 function asin(x) {
   return new this(x).asin();
 }
-__name(asin, "asin");
 function asinh(x) {
   return new this(x).asinh();
 }
-__name(asinh, "asinh");
 function atan(x) {
   return new this(x).atan();
 }
-__name(atan, "atan");
 function atanh(x) {
   return new this(x).atanh();
 }
-__name(atanh, "atanh");
 function atan2(y, x) {
   y = new this(y);
   x = new this(x);
@@ -2057,19 +2022,15 @@ function atan2(y, x) {
   }
   return r;
 }
-__name(atan2, "atan2");
 function cbrt(x) {
   return new this(x).cbrt();
 }
-__name(cbrt, "cbrt");
 function ceil(x) {
   return finalise(x = new this(x), x.e + 1, 2);
 }
-__name(ceil, "ceil");
 function clamp(x, min2, max2) {
   return new this(x).clamp(min2, max2);
 }
-__name(clamp, "clamp");
 function config(obj) {
   if (!obj || typeof obj !== "object")
     throw Error(decimalError + "Object expected");
@@ -2125,15 +2086,12 @@ function config(obj) {
   }
   return this;
 }
-__name(config, "config");
 function cos(x) {
   return new this(x).cos();
 }
-__name(cos, "cos");
 function cosh(x) {
   return new this(x).cosh();
 }
-__name(cosh, "cosh");
 function clone(obj) {
   var i, p, ps;
   function Decimal2(v) {
@@ -2214,7 +2172,6 @@ function clone(obj) {
     }
     return isDecimal.test(v) ? parseDecimal(x, v) : parseOther(x, v);
   }
-  __name(Decimal2, "Decimal");
   Decimal2.prototype = P;
   Decimal2.ROUND_UP = 0;
   Decimal2.ROUND_DOWN = 1;
@@ -2280,19 +2237,15 @@ function clone(obj) {
   Decimal2.config(obj);
   return Decimal2;
 }
-__name(clone, "clone");
 function div(x, y) {
   return new this(x).div(y);
 }
-__name(div, "div");
 function exp(x) {
   return new this(x).exp();
 }
-__name(exp, "exp");
 function floor(x) {
   return finalise(x = new this(x), x.e + 1, 3);
 }
-__name(floor, "floor");
 function hypot() {
   var i, n, t = new this(0);
   external = false;
@@ -2311,47 +2264,36 @@ function hypot() {
   external = true;
   return t.sqrt();
 }
-__name(hypot, "hypot");
 function isDecimalInstance(obj) {
   return obj instanceof Decimal || obj && obj.toStringTag === tag || false;
 }
-__name(isDecimalInstance, "isDecimalInstance");
 function ln(x) {
   return new this(x).ln();
 }
-__name(ln, "ln");
 function log(x, y) {
   return new this(x).log(y);
 }
-__name(log, "log");
 function log2(x) {
   return new this(x).log(2);
 }
-__name(log2, "log2");
 function log10(x) {
   return new this(x).log(10);
 }
-__name(log10, "log10");
 function max() {
   return maxOrMin(this, arguments, "lt");
 }
-__name(max, "max");
 function min() {
   return maxOrMin(this, arguments, "gt");
 }
-__name(min, "min");
 function mod(x, y) {
   return new this(x).mod(y);
 }
-__name(mod, "mod");
 function mul(x, y) {
   return new this(x).mul(y);
 }
-__name(mul, "mul");
 function pow(x, y) {
   return new this(x).pow(y);
 }
-__name(pow, "pow");
 function random(sd) {
   var d, e, k, n, i = 0, r = new this(1), rd = [];
   if (sd === void 0)
@@ -2411,32 +2353,25 @@ function random(sd) {
   r.d = rd;
   return r;
 }
-__name(random, "random");
 function round(x) {
   return finalise(x = new this(x), x.e + 1, this.rounding);
 }
-__name(round, "round");
 function sign(x) {
   x = new this(x);
   return x.d ? x.d[0] ? x.s : 0 * x.s : x.s || NaN;
 }
-__name(sign, "sign");
 function sin(x) {
   return new this(x).sin();
 }
-__name(sin, "sin");
 function sinh(x) {
   return new this(x).sinh();
 }
-__name(sinh, "sinh");
 function sqrt(x) {
   return new this(x).sqrt();
 }
-__name(sqrt, "sqrt");
 function sub(x, y) {
   return new this(x).sub(y);
 }
-__name(sub, "sub");
 function sum() {
   var i = 0, args = arguments, x = new this(args[i]);
   external = false;
@@ -2445,19 +2380,15 @@ function sum() {
   external = true;
   return finalise(x, this.precision, this.rounding);
 }
-__name(sum, "sum");
 function tan(x) {
   return new this(x).tan();
 }
-__name(tan, "tan");
 function tanh(x) {
   return new this(x).tanh();
 }
-__name(tanh, "tanh");
 function trunc(x) {
   return finalise(x = new this(x), x.e + 1, 1);
 }
-__name(trunc, "trunc");
 P[Symbol.for("nodejs.util.inspect.custom")] = P.toString;
 P[Symbol.toStringTag] = "Decimal";
 var Decimal = P.constructor = clone(DEFAULTS);
