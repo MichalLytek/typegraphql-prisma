@@ -89,6 +89,9 @@ export default async function generateCode(
   const project = new Project({
     compilerOptions: {
       ...baseCompilerOptions,
+      ...(options.emitESM && {
+        module: ModuleKind.ES2020,
+      }),
       ...(emitTranspiledCode && {
         declaration: true,
         importHelpers: true,
@@ -122,7 +125,11 @@ export default async function generateCode(
       undefined,
       { overwrite: true },
     );
-    generateEnumsBarrelFile(enumsBarrelExportSourceFile, emittedEnumNames);
+    generateEnumsBarrelFile(
+      enumsBarrelExportSourceFile,
+      dmmfDocument.options,
+      emittedEnumNames,
+    );
   }
 
   if (dmmfDocument.shouldGenerateBlock("models")) {
@@ -146,6 +153,7 @@ export default async function generateCode(
     );
     generateModelsBarrelFile(
       modelsBarrelExportSourceFile,
+      dmmfDocument.options,
       dmmfDocument.datamodel.models.map(it => it.typeName),
     );
   }
@@ -186,6 +194,7 @@ export default async function generateCode(
     );
     generateOutputsBarrelFile(
       outputsBarrelExportSourceFile,
+      dmmfDocument.options,
       outputTypesToGenerate.map(it => it.typeName),
       outputTypesFieldsArgsToGenerate.length > 0,
     );
@@ -215,6 +224,7 @@ export default async function generateCode(
       );
       generateArgsBarrelFile(
         outputsArgsBarrelExportSourceFile,
+        dmmfDocument.options,
         outputTypesFieldsArgsToGenerate.map(it => it.argsTypeName!),
       );
     }
@@ -237,6 +247,7 @@ export default async function generateCode(
     );
     generateInputsBarrelFile(
       inputsBarrelExportSourceFile,
+      dmmfDocument.options,
       dmmfDocument.schema.inputTypes.map(it => it.typeName),
     );
   }
@@ -267,6 +278,7 @@ export default async function generateCode(
     );
     generateResolversBarrelFile(
       relationResolversBarrelExportSourceFile,
+      dmmfDocument.options,
       dmmfDocument.relationModels.map<GenerateMappingData>(relationModel => ({
         resolverName: relationModel.resolverName,
         modelName: relationModel.model.typeName,
@@ -302,7 +314,11 @@ export default async function generateCode(
           undefined,
           { overwrite: true },
         );
-        generateArgsBarrelFile(barrelExportSourceFile, argTypeNames);
+        generateArgsBarrelFile(
+          barrelExportSourceFile,
+          dmmfDocument.options,
+          argTypeNames,
+        );
       }
     });
 
@@ -325,6 +341,7 @@ export default async function generateCode(
       );
       generateArgsIndexFile(
         relationResolversArgsIndexSourceFile,
+        dmmfDocument.options,
         relationModelsWithArgs.map(
           relationModelData => relationModelData.model.typeName,
         ),
@@ -342,6 +359,7 @@ export default async function generateCode(
     );
     generateResolversIndexFile(
       relationResolversIndexSourceFile,
+      dmmfDocument.options,
       "relations",
       relationModelsWithArgs.length > 0,
     );
@@ -399,6 +417,7 @@ export default async function generateCode(
     );
     generateResolversBarrelFile(
       crudResolversBarrelExportSourceFile,
+      dmmfDocument.options,
       generateMappingData,
     );
     const crudResolversActionsBarrelExportSourceFile = project.createSourceFile(
@@ -413,6 +432,7 @@ export default async function generateCode(
     );
     generateResolversActionsBarrelFile(
       crudResolversActionsBarrelExportSourceFile,
+      dmmfDocument.options,
       generateMappingData,
     );
     const crudResolversIndexSourceFile = project.createSourceFile(
@@ -425,7 +445,12 @@ export default async function generateCode(
       undefined,
       { overwrite: true },
     );
-    generateResolversIndexFile(crudResolversIndexSourceFile, "crud", true);
+    generateResolversIndexFile(
+      crudResolversIndexSourceFile,
+      dmmfDocument.options,
+      "crud",
+      true,
+    );
 
     log("Generating crud resolvers args...");
     dmmfDocument.modelMappings.forEach(async mapping => {
@@ -459,6 +484,7 @@ export default async function generateCode(
         );
         generateArgsBarrelFile(
           barrelExportSourceFile,
+          dmmfDocument.options,
           actionsWithArgs.map(it => it.argsTypeName!),
         );
       }
@@ -475,6 +501,7 @@ export default async function generateCode(
     );
     generateArgsIndexFile(
       crudResolversArgsIndexSourceFile,
+      dmmfDocument.options,
       dmmfDocument.modelMappings
         .filter(mapping =>
           mapping.actions.some(it => it.argsTypeName !== undefined),
@@ -523,11 +550,26 @@ export default async function generateCode(
   );
   generateIndexFile(
     indexSourceFile,
+    dmmfDocument.options,
     dmmfDocument.relationModels.length > 0,
     dmmfDocument.options.blocksToEmit,
   );
 
   log("Emitting generated code files");
+  if (options.outputDirPath.includes("node_modules")) {
+    await project.getFileSystem().writeFile(
+      baseDirPath + "/package.json",
+      JSON.stringify(
+        {
+          type: dmmfDocument.options.emitESM ? "module" : "commonjs",
+          main: "./index.js",
+          types: "./index.d.ts",
+        },
+        null,
+        2,
+      ),
+    );
+  }
   if (emitTranspiledCode) {
     await project.emit();
   } else {

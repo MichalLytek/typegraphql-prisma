@@ -43,10 +43,11 @@ export function generateOutputTypeClassFromType(
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarsImport(sourceFile);
   generatePrismaNamespaceImport(sourceFile, dmmfDocument.options, 2);
-  generateCustomScalarsImport(sourceFile, 2);
-  generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
+  generateCustomScalarsImport(sourceFile, dmmfDocument.options, 2);
+  generateArgsImports(sourceFile, dmmfDocument.options, fieldArgsTypeNames, 0);
   generateOutputsImports(
     sourceFile,
+    dmmfDocument.options,
     type.fields
       .filter(field => field.outputType.location === "outputObjectTypes")
       .map(field => field.outputType.type),
@@ -54,6 +55,7 @@ export function generateOutputTypeClassFromType(
   );
   generateEnumsImports(
     sourceFile,
+    dmmfDocument.options,
     type.fields
       .map(field => field.outputType)
       .filter(fieldType => fieldType.location === "enumTypes")
@@ -163,9 +165,10 @@ export function generateInputTypeClassFromType(
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarsImport(sourceFile);
   generatePrismaNamespaceImport(sourceFile, options, 2);
-  generateCustomScalarsImport(sourceFile, 2);
+  generateCustomScalarsImport(sourceFile, options, 2);
   generateInputsImports(
     sourceFile,
+    options,
     inputType.fields
       .filter(field => field.selectedInputType.location === "inputObjectTypes")
       .map(field => field.selectedInputType.type)
@@ -173,6 +176,7 @@ export function generateInputTypeClassFromType(
   );
   generateEnumsImports(
     sourceFile,
+    options,
     inputType.fields
       .map(field => field.selectedInputType)
       .filter(fieldType => fieldType.location === "enumTypes")

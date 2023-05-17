@@ -37,9 +37,10 @@ export default function generateObjectTypeClassFromModel(
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarsImport(sourceFile);
   generatePrismaNamespaceImport(sourceFile, dmmfDocument.options, 1);
-  generateCustomScalarsImport(sourceFile, 1);
+  generateCustomScalarsImport(sourceFile, dmmfDocument.options, 1);
   generateModelsImports(
     sourceFile,
+    dmmfDocument.options,
     model.fields
       .filter(field => field.location === "outputObjectTypes")
       .filter(field => field.type !== model.name)
@@ -51,6 +52,7 @@ export default function generateObjectTypeClassFromModel(
   );
   generateEnumsImports(
     sourceFile,
+    dmmfDocument.options,
     model.fields
       .filter(field => field.location === "enumTypes")
       .map(field => field.type),
@@ -61,7 +63,9 @@ export default function generateObjectTypeClassFromModel(
     countField !== undefined &&
     dmmfDocument.shouldGenerateBlock("crudResolvers");
   if (shouldEmitCountField) {
-    generateResolversOutputsImports(sourceFile, [countField.typeGraphQLType]);
+    generateResolversOutputsImports(sourceFile, dmmfDocument.options, [
+      countField.typeGraphQLType,
+    ]);
   }
 
   sourceFile.addClass({
