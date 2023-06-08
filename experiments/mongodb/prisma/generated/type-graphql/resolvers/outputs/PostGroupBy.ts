@@ -6,9 +6,7 @@ import { PostCountAggregate } from "../outputs/PostCountAggregate";
 import { PostMaxAggregate } from "../outputs/PostMaxAggregate";
 import { PostMinAggregate } from "../outputs/PostMinAggregate";
 
-@TypeGraphQL.ObjectType("PostGroupBy", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("PostGroupBy", {})
 export class PostGroupBy {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

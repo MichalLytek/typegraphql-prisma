@@ -8,9 +8,7 @@ import { PostUpdateWithoutCommentsInput } from "../inputs/PostUpdateWithoutComme
 import { PostUpsertWithoutCommentsInput } from "../inputs/PostUpsertWithoutCommentsInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
-@TypeGraphQL.InputType("PostUpdateOneRequiredWithoutCommentsNestedInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostUpdateOneRequiredWithoutCommentsNestedInput")
 export class PostUpdateOneRequiredWithoutCommentsNestedInput {
   @TypeGraphQL.Field(_type => PostCreateWithoutCommentsInput, {
     nullable: true

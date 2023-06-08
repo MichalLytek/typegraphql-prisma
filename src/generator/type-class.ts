@@ -70,7 +70,6 @@ export function generateOutputTypeClassFromType(
         arguments: [
           `"${type.typeName}"`,
           Writers.object({
-            isAbstract: "true",
             ...(dmmfDocument.options.simpleResolvers && {
               simpleResolvers: "true",
             }),
@@ -189,9 +188,6 @@ export function generateInputTypeClassFromType(
         name: "TypeGraphQL.InputType",
         arguments: [
           `"${inputType.typeName}"`,
-          Writers.object({
-            isAbstract: "true",
-          }),
         ],
       },
     ],

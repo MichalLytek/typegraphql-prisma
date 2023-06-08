@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { UserAddressObjectEqualityInput } from "../inputs/UserAddressObjectEqualityInput";
 import { UserAddressWhereInput } from "../inputs/UserAddressWhereInput";
 
-@TypeGraphQL.InputType("UserAddressCompositeFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("UserAddressCompositeFilter")
 export class UserAddressCompositeFilter {
   @TypeGraphQL.Field(_type => UserAddressObjectEqualityInput, {
     nullable: true

@@ -75,7 +75,6 @@ export default function generateObjectTypeClassFromModel(
             arguments: [
               `"${model.typeName}"`,
               Writers.object({
-                isAbstract: "true",
                 ...(model.docs && { description: `"${model.docs}"` }),
                 ...(dmmfDocument.options.simpleResolvers && {
                   simpleResolvers: "true",

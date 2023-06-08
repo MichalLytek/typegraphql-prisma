@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("PostMaxAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("PostMaxAggregate", {})
 export class PostMaxAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

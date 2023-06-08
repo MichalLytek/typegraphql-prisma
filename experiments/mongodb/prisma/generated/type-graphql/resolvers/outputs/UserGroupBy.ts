@@ -8,9 +8,7 @@ import { UserMaxAggregate } from "../outputs/UserMaxAggregate";
 import { UserMinAggregate } from "../outputs/UserMinAggregate";
 import { UserSumAggregate } from "../outputs/UserSumAggregate";
 
-@TypeGraphQL.ObjectType("UserGroupBy", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("UserGroupBy", {})
 export class UserGroupBy {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

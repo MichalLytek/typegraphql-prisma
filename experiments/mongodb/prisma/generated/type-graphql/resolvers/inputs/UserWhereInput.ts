@@ -7,9 +7,7 @@ import { PostListRelationFilter } from "../inputs/PostListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { UserAddressCompositeFilter } from "../inputs/UserAddressCompositeFilter";
 
-@TypeGraphQL.InputType("UserWhereInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("UserWhereInput")
 export class UserWhereInput {
   @TypeGraphQL.Field(_type => [UserWhereInput], {
     nullable: true

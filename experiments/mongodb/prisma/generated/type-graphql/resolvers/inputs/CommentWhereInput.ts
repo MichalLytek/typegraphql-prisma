@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { PostRelationFilter } from "../inputs/PostRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("CommentWhereInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CommentWhereInput")
 export class CommentWhereInput {
   @TypeGraphQL.Field(_type => [CommentWhereInput], {
     nullable: true

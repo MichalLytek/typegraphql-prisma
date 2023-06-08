@@ -7,9 +7,7 @@ import { CommentMaxOrderByAggregateInput } from "../inputs/CommentMaxOrderByAggr
 import { CommentMinOrderByAggregateInput } from "../inputs/CommentMinOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("CommentOrderByWithAggregationInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CommentOrderByWithAggregationInput")
 export class CommentOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

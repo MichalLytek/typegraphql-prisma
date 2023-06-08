@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { PostCreateWithoutCommentsInput } from "../inputs/PostCreateWithoutCommentsInput";
 import { PostUpdateWithoutCommentsInput } from "../inputs/PostUpdateWithoutCommentsInput";
 
-@TypeGraphQL.InputType("PostUpsertWithoutCommentsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostUpsertWithoutCommentsInput")
 export class PostUpsertWithoutCommentsInput {
   @TypeGraphQL.Field(_type => PostUpdateWithoutCommentsInput, {
     nullable: false

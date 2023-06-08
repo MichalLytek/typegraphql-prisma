@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { UserAddressCreateInput } from "../inputs/UserAddressCreateInput";
 
-@TypeGraphQL.InputType("UserUpdateWithoutPostsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("UserUpdateWithoutPostsInput")
 export class UserUpdateWithoutPostsInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

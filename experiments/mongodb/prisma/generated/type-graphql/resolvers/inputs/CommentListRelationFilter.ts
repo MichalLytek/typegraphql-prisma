@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CommentWhereInput } from "../inputs/CommentWhereInput";
 
-@TypeGraphQL.InputType("CommentListRelationFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CommentListRelationFilter")
 export class CommentListRelationFilter {
   @TypeGraphQL.Field(_type => CommentWhereInput, {
     nullable: true

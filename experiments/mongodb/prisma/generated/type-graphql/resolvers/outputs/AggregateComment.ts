@@ -6,9 +6,7 @@ import { CommentCountAggregate } from "../outputs/CommentCountAggregate";
 import { CommentMaxAggregate } from "../outputs/CommentMaxAggregate";
 import { CommentMinAggregate } from "../outputs/CommentMinAggregate";
 
-@TypeGraphQL.ObjectType("AggregateComment", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("AggregateComment", {})
 export class AggregateComment {
   @TypeGraphQL.Field(_type => CommentCountAggregate, {
     nullable: true

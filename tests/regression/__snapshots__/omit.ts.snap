@@ -6,9 +6,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserCreateInput\\")
 export class UserCreateInput {
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
@@ -34,9 +32,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserCreateManyInput\\")
 export class UserCreateManyInput {
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
@@ -63,9 +59,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\")
 export class UserOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -95,9 +89,7 @@ import { FloatNullableWithAggregatesFilter } from \\"../inputs/FloatNullableWith
 import { IntWithAggregatesFilter } from \\"../inputs/IntWithAggregatesFilter\\";
 import { StringWithAggregatesFilter } from \\"../inputs/StringWithAggregatesFilter\\";
 
-@TypeGraphQL.InputType(\\"UserScalarWhereWithAggregatesInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserScalarWhereWithAggregatesInput\\")
 export class UserScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [UserScalarWhereWithAggregatesInput], {
     nullable: true
@@ -141,9 +133,7 @@ import { DateTimeFieldUpdateOperationsInput } from \\"../inputs/DateTimeFieldUpd
 import { NullableFloatFieldUpdateOperationsInput } from \\"../inputs/NullableFloatFieldUpdateOperationsInput\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"UserUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserUpdateInput\\")
 export class UserUpdateInput {
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -172,9 +162,7 @@ import { DateTimeFieldUpdateOperationsInput } from \\"../inputs/DateTimeFieldUpd
 import { NullableFloatFieldUpdateOperationsInput } from \\"../inputs/NullableFloatFieldUpdateOperationsInput\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"UserUpdateManyMutationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserUpdateManyMutationInput\\")
 export class UserUpdateManyMutationInput {
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -204,9 +192,7 @@ import { FloatNullableFilter } from \\"../inputs/FloatNullableFilter\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"UserWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserWhereInput\\")
 export class UserWhereInput {
   @TypeGraphQL.Field(_type => [UserWhereInput], {
     nullable: true
@@ -247,9 +233,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserWhereUniqueInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserWhereUniqueInput\\")
 export class UserWhereUniqueInput {
 }
 "
@@ -261,9 +245,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType(\\"User\\", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType(\\"User\\", {})
 export class User {
   id?: number;
 
@@ -291,9 +273,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserCreateInput\\")
 export class UserCreateInput {
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
@@ -319,9 +299,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserCreateManyInput\\")
 export class UserCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -353,9 +331,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\")
 export class UserOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -390,9 +366,7 @@ import { FloatNullableWithAggregatesFilter } from \\"../inputs/FloatNullableWith
 import { IntWithAggregatesFilter } from \\"../inputs/IntWithAggregatesFilter\\";
 import { StringWithAggregatesFilter } from \\"../inputs/StringWithAggregatesFilter\\";
 
-@TypeGraphQL.InputType(\\"UserScalarWhereWithAggregatesInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserScalarWhereWithAggregatesInput\\")
 export class UserScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [UserScalarWhereWithAggregatesInput], {
     nullable: true
@@ -441,9 +415,7 @@ import { DateTimeFieldUpdateOperationsInput } from \\"../inputs/DateTimeFieldUpd
 import { NullableFloatFieldUpdateOperationsInput } from \\"../inputs/NullableFloatFieldUpdateOperationsInput\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"UserUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserUpdateInput\\")
 export class UserUpdateInput {
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -472,9 +444,7 @@ import { DateTimeFieldUpdateOperationsInput } from \\"../inputs/DateTimeFieldUpd
 import { NullableFloatFieldUpdateOperationsInput } from \\"../inputs/NullableFloatFieldUpdateOperationsInput\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"UserUpdateManyMutationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserUpdateManyMutationInput\\")
 export class UserUpdateManyMutationInput {
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -504,9 +474,7 @@ import { FloatNullableFilter } from \\"../inputs/FloatNullableFilter\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"UserWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserWhereInput\\")
 export class UserWhereInput {
   @TypeGraphQL.Field(_type => [UserWhereInput], {
     nullable: true
@@ -552,9 +520,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserWhereUniqueInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserWhereUniqueInput\\")
 export class UserWhereUniqueInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -570,9 +536,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../scalars\\";
 
-@TypeGraphQL.ObjectType(\\"User\\", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType(\\"User\\", {})
 export class User {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
@@ -603,9 +567,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserCreateInput\\")
 export class UserCreateInput {
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
@@ -626,9 +588,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserCreateManyInput\\")
 export class UserCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -655,9 +615,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\")
 export class UserOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -687,9 +645,7 @@ import { FloatNullableWithAggregatesFilter } from \\"../inputs/FloatNullableWith
 import { IntWithAggregatesFilter } from \\"../inputs/IntWithAggregatesFilter\\";
 import { StringWithAggregatesFilter } from \\"../inputs/StringWithAggregatesFilter\\";
 
-@TypeGraphQL.InputType(\\"UserScalarWhereWithAggregatesInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserScalarWhereWithAggregatesInput\\")
 export class UserScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [UserScalarWhereWithAggregatesInput], {
     nullable: true
@@ -733,9 +689,7 @@ import { DateTimeFieldUpdateOperationsInput } from \\"../inputs/DateTimeFieldUpd
 import { NullableFloatFieldUpdateOperationsInput } from \\"../inputs/NullableFloatFieldUpdateOperationsInput\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"UserUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserUpdateInput\\")
 export class UserUpdateInput {
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -759,9 +713,7 @@ import { DateTimeFieldUpdateOperationsInput } from \\"../inputs/DateTimeFieldUpd
 import { NullableFloatFieldUpdateOperationsInput } from \\"../inputs/NullableFloatFieldUpdateOperationsInput\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"UserUpdateManyMutationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserUpdateManyMutationInput\\")
 export class UserUpdateManyMutationInput {
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -786,9 +738,7 @@ import { FloatNullableFilter } from \\"../inputs/FloatNullableFilter\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"UserWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserWhereInput\\")
 export class UserWhereInput {
   @TypeGraphQL.Field(_type => [UserWhereInput], {
     nullable: true
@@ -829,9 +779,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserWhereUniqueInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserWhereUniqueInput\\")
 export class UserWhereUniqueInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -847,9 +795,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserCreateInput\\")
 export class UserCreateInput {
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
@@ -875,9 +821,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserCreateManyInput\\")
 export class UserCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -909,9 +853,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\")
 export class UserOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -946,9 +888,7 @@ import { FloatNullableWithAggregatesFilter } from \\"../inputs/FloatNullableWith
 import { IntWithAggregatesFilter } from \\"../inputs/IntWithAggregatesFilter\\";
 import { StringWithAggregatesFilter } from \\"../inputs/StringWithAggregatesFilter\\";
 
-@TypeGraphQL.InputType(\\"UserScalarWhereWithAggregatesInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserScalarWhereWithAggregatesInput\\")
 export class UserScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [UserScalarWhereWithAggregatesInput], {
     nullable: true
@@ -997,9 +937,7 @@ import { DateTimeFieldUpdateOperationsInput } from \\"../inputs/DateTimeFieldUpd
 import { NullableFloatFieldUpdateOperationsInput } from \\"../inputs/NullableFloatFieldUpdateOperationsInput\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"UserUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserUpdateInput\\")
 export class UserUpdateInput {
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -1028,9 +966,7 @@ import { DateTimeFieldUpdateOperationsInput } from \\"../inputs/DateTimeFieldUpd
 import { NullableFloatFieldUpdateOperationsInput } from \\"../inputs/NullableFloatFieldUpdateOperationsInput\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"UserUpdateManyMutationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserUpdateManyMutationInput\\")
 export class UserUpdateManyMutationInput {
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -1060,9 +996,7 @@ import { FloatNullableFilter } from \\"../inputs/FloatNullableFilter\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"UserWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserWhereInput\\")
 export class UserWhereInput {
   @TypeGraphQL.Field(_type => [UserWhereInput], {
     nullable: true
@@ -1108,9 +1042,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"UserWhereUniqueInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"UserWhereUniqueInput\\")
 export class UserWhereUniqueInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -1126,9 +1058,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateInput\\")
 export class SampleModelCreateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
@@ -1144,9 +1074,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\")
 export class SampleModelCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -1168,9 +1096,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\")
 export class SampleModelUpdateInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
@@ -1192,9 +1118,7 @@ import { SampleModelMinOrderByAggregateInput } from \\"../inputs/SampleModelMinO
 import { SampleModelSumOrderByAggregateInput } from \\"../inputs/SampleModelSumOrderByAggregateInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\")
 export class SampleModelOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -1247,9 +1171,7 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"SampleModelWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelWhereInput\\")
 export class SampleModelWhereInput {
   @TypeGraphQL.Field(_type => [SampleModelWhereInput], {
     nullable: true
@@ -1290,9 +1212,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateInput\\")
 export class SampleModelCreateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
@@ -1308,9 +1228,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\")
 export class SampleModelCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -1337,9 +1255,7 @@ import { SampleModelMinOrderByAggregateInput } from \\"../inputs/SampleModelMinO
 import { SampleModelSumOrderByAggregateInput } from \\"../inputs/SampleModelSumOrderByAggregateInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\")
 export class SampleModelOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -1391,9 +1307,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\")
 export class SampleModelUpdateInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
@@ -1416,9 +1330,7 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"SampleModelWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelWhereInput\\")
 export class SampleModelWhereInput {
   @TypeGraphQL.Field(_type => [SampleModelWhereInput], {
     nullable: true
@@ -1465,9 +1377,7 @@ import { SampleModelMinOrderByAggregateInput } from \\"../inputs/SampleModelMinO
 import { SampleModelSumOrderByAggregateInput } from \\"../inputs/SampleModelSumOrderByAggregateInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\")
 export class SampleModelOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -1513,9 +1423,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateInput\\")
 export class SampleModelCreateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
@@ -1536,9 +1444,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\")
 export class SampleModelCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -1565,9 +1471,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\")
 export class SampleModelUpdateInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
@@ -1590,9 +1494,7 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"SampleModelWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelWhereInput\\")
 export class SampleModelWhereInput {
   @TypeGraphQL.Field(_type => [SampleModelWhereInput], {
     nullable: true
@@ -1633,9 +1535,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateInput\\")
 export class SampleModelCreateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
@@ -1656,9 +1556,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\")
 export class SampleModelCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -1690,9 +1588,7 @@ import { SampleModelMinOrderByAggregateInput } from \\"../inputs/SampleModelMinO
 import { SampleModelSumOrderByAggregateInput } from \\"../inputs/SampleModelSumOrderByAggregateInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\")
 export class SampleModelOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -1745,9 +1641,7 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"SampleModelWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelWhereInput\\")
 export class SampleModelWhereInput {
   @TypeGraphQL.Field(_type => [SampleModelWhereInput], {
     nullable: true
@@ -1789,9 +1683,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\")
 export class SampleModelUpdateInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
@@ -1808,9 +1700,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"SampleModelUpdateManyMutationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelUpdateManyMutationInput\\")
 export class SampleModelUpdateManyMutationInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
@@ -1826,9 +1716,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateInput\\")
 export class SampleModelCreateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
@@ -1849,9 +1737,7 @@ import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 
-@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelCreateManyInput\\")
 export class SampleModelCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -1883,9 +1769,7 @@ import { SampleModelMinOrderByAggregateInput } from \\"../inputs/SampleModelMinO
 import { SampleModelSumOrderByAggregateInput } from \\"../inputs/SampleModelSumOrderByAggregateInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelOrderByWithAggregationInput\\")
 export class SampleModelOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -1937,9 +1821,7 @@ import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
 import { StringFieldUpdateOperationsInput } from \\"../inputs/StringFieldUpdateOperationsInput\\";
 
-@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelUpdateInput\\")
 export class SampleModelUpdateInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
@@ -1962,9 +1844,7 @@ import { DecimalJSScalar } from \\"../../scalars\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
-@TypeGraphQL.InputType(\\"SampleModelWhereInput\\", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType(\\"SampleModelWhereInput\\")
 export class SampleModelWhereInput {
   @TypeGraphQL.Field(_type => [SampleModelWhereInput], {
     nullable: true

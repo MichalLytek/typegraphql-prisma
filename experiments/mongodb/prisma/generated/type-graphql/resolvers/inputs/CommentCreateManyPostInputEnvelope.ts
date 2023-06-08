@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CommentCreateManyPostInput } from "../inputs/CommentCreateManyPostInput";
 
-@TypeGraphQL.InputType("CommentCreateManyPostInputEnvelope", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CommentCreateManyPostInputEnvelope")
 export class CommentCreateManyPostInputEnvelope {
   @TypeGraphQL.Field(_type => [CommentCreateManyPostInput], {
     nullable: false

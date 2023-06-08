@@ -11,9 +11,7 @@ import { CommentUpdateWithWhereUniqueWithoutPostInput } from "../inputs/CommentU
 import { CommentUpsertWithWhereUniqueWithoutPostInput } from "../inputs/CommentUpsertWithWhereUniqueWithoutPostInput";
 import { CommentWhereUniqueInput } from "../inputs/CommentWhereUniqueInput";
 
-@TypeGraphQL.InputType("CommentUpdateManyWithoutPostNestedInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CommentUpdateManyWithoutPostNestedInput")
 export class CommentUpdateManyWithoutPostNestedInput {
   @TypeGraphQL.Field(_type => [CommentCreateWithoutPostInput], {
     nullable: true

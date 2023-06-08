@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { UserWhereInput } from "../inputs/UserWhereInput";
 
-@TypeGraphQL.InputType("UserRelationFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("UserRelationFilter")
 export class UserRelationFilter {
   @TypeGraphQL.Field(_type => UserWhereInput, {
     nullable: true

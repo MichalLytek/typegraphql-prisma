@@ -4,9 +4,7 @@ import { Prisma } from "../../client";
 import { DecimalJSScalar } from "../scalars";
 import { Post } from "../models/Post";
 
-@TypeGraphQL.ObjectType("Comment", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("Comment", {})
 export class Comment {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { IntNullableFilter } from "../inputs/IntNullableFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("UserAddressWhereInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("UserAddressWhereInput")
 export class UserAddressWhereInput {
   @TypeGraphQL.Field(_type => [UserAddressWhereInput], {
     nullable: true
