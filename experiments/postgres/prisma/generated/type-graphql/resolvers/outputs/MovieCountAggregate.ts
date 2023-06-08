@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("MovieCountAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("MovieCountAggregate", {})
 export class MovieCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false

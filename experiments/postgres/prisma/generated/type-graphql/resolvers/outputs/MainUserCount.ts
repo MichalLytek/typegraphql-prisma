@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { MainUserCountEditorPostsArgs } from "./args/MainUserCountEditorPostsArgs";
 import { MainUserCountPostsArgs } from "./args/MainUserCountPostsArgs";
 
-@TypeGraphQL.ObjectType("MainUserCount", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("MainUserCount", {})
 export class MainUserCount {
   posts!: number;
   editorPosts!: number;

@@ -6,9 +6,7 @@ import { IntFilter } from "../inputs/IntFilter";
 import { IntNullableFilter } from "../inputs/IntNullableFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("ProblemScalarWhereInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemScalarWhereInput")
 export class ProblemScalarWhereInput {
   @TypeGraphQL.Field(_type => [ProblemScalarWhereInput], {
     nullable: true

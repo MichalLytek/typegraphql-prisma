@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { MainUserCreateWithoutEditorPostsInput } from "../inputs/MainUserCreateWithoutEditorPostsInput";
 import { MainUserWhereUniqueInput } from "../inputs/MainUserWhereUniqueInput";
 
-@TypeGraphQL.InputType("MainUserCreateOrConnectWithoutEditorPostsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MainUserCreateOrConnectWithoutEditorPostsInput")
 export class MainUserCreateOrConnectWithoutEditorPostsInput {
   @TypeGraphQL.Field(_type => MainUserWhereUniqueInput, {
     nullable: false

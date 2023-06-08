@@ -7,9 +7,7 @@ import { DirectorWhereInput } from "../inputs/DirectorWhereInput";
 import { MovieListRelationFilter } from "../inputs/MovieListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("DirectorWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("DirectorWhereUniqueInput")
 export class DirectorWhereUniqueInput {
   @TypeGraphQL.Field(_type => DirectorFirstNameLastNameCompoundUniqueInput, {
     nullable: true

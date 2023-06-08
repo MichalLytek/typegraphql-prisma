@@ -6,9 +6,7 @@ import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDir
 import { MovieUpdateWithoutDirectorInput } from "../inputs/MovieUpdateWithoutDirectorInput";
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 
-@TypeGraphQL.InputType("MovieUpsertWithWhereUniqueWithoutDirectorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MovieUpsertWithWhereUniqueWithoutDirectorInput")
 export class MovieUpsertWithWhereUniqueWithoutDirectorInput {
   @TypeGraphQL.Field(_type => MovieWhereUniqueInput, {
     nullable: false

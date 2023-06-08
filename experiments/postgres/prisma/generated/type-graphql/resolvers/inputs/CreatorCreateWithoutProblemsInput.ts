@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProblemCreateNestedManyWithoutLikedByInput } from "../inputs/ProblemCreateNestedManyWithoutLikedByInput";
 
-@TypeGraphQL.InputType("CreatorCreateWithoutProblemsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CreatorCreateWithoutProblemsInput")
 export class CreatorCreateWithoutProblemsInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

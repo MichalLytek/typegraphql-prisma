@@ -6,9 +6,7 @@ import { MainUserCreateWithoutEditorPostsInput } from "../inputs/MainUserCreateW
 import { MainUserUpdateWithoutEditorPostsInput } from "../inputs/MainUserUpdateWithoutEditorPostsInput";
 import { MainUserWhereInput } from "../inputs/MainUserWhereInput";
 
-@TypeGraphQL.InputType("MainUserUpsertWithoutEditorPostsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MainUserUpsertWithoutEditorPostsInput")
 export class MainUserUpsertWithoutEditorPostsInput {
   @TypeGraphQL.Field(_type => MainUserUpdateWithoutEditorPostsInput, {
     nullable: false

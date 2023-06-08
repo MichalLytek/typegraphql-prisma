@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.InputType("NestedBigIntNullableFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("NestedBigIntNullableFilter")
 export class NestedBigIntNullableFilter {
   @TypeGraphQL.Field(_type => GraphQLScalars.BigIntResolver, {
     nullable: true

@@ -6,9 +6,7 @@ import { PatientFirstNameLastNameCompoundUniqueInput } from "../inputs/PatientFi
 import { PatientWhereInput } from "../inputs/PatientWhereInput";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("PatientWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PatientWhereUniqueInput")
 export class PatientWhereUniqueInput {
   @TypeGraphQL.Field(_type => PatientFirstNameLastNameCompoundUniqueInput, {
     nullable: true

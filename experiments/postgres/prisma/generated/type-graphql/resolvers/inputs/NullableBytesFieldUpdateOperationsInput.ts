@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.InputType("NullableBytesFieldUpdateOperationsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("NullableBytesFieldUpdateOperationsInput")
 export class NullableBytesFieldUpdateOperationsInput {
   @TypeGraphQL.Field(_type => GraphQLScalars.ByteResolver, {
     nullable: true

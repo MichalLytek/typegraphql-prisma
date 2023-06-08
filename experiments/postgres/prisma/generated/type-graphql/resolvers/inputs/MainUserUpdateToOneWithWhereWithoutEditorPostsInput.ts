@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { MainUserUpdateWithoutEditorPostsInput } from "../inputs/MainUserUpdateWithoutEditorPostsInput";
 import { MainUserWhereInput } from "../inputs/MainUserWhereInput";
 
-@TypeGraphQL.InputType("MainUserUpdateToOneWithWhereWithoutEditorPostsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MainUserUpdateToOneWithWhereWithoutEditorPostsInput")
 export class MainUserUpdateToOneWithWhereWithoutEditorPostsInput {
   @TypeGraphQL.Field(_type => MainUserWhereInput, {
     nullable: true

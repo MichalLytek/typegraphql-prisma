@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 
-@TypeGraphQL.InputType("MovieCreateOrConnectWithoutDirectorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MovieCreateOrConnectWithoutDirectorInput")
 export class MovieCreateOrConnectWithoutDirectorInput {
   @TypeGraphQL.Field(_type => MovieWhereUniqueInput, {
     nullable: false

@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("MainUserAvgAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("MainUserAvgAggregate", {})
 export class MainUserAvgAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true

@@ -6,9 +6,7 @@ import { NestedEnumRoleFilter } from "../inputs/NestedEnumRoleFilter";
 import { NestedIntFilter } from "../inputs/NestedIntFilter";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType("NestedEnumRoleWithAggregatesFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("NestedEnumRoleWithAggregatesFilter")
 export class NestedEnumRoleWithAggregatesFilter {
   @TypeGraphQL.Field(_type => Role, {
     nullable: true

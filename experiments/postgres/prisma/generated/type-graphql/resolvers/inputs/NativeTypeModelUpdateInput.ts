@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.InputType("NativeTypeModelUpdateInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("NativeTypeModelUpdateInput")
 export class NativeTypeModelUpdateInput {
   @TypeGraphQL.Field(_type => GraphQLScalars.BigIntResolver, {
     nullable: true

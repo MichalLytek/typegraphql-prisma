@@ -11,9 +11,7 @@ import { PostListRelationFilter } from "../inputs/PostListRelationFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 import { StringNullableListFilter } from "../inputs/StringNullableListFilter";
 
-@TypeGraphQL.InputType("MainUserWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MainUserWhereUniqueInput")
 export class MainUserWhereUniqueInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

@@ -13,9 +13,7 @@ import { PostWhereInput } from "../inputs/PostWhereInput";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
-@TypeGraphQL.InputType("PostWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostWhereUniqueInput")
 export class PostWhereUniqueInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

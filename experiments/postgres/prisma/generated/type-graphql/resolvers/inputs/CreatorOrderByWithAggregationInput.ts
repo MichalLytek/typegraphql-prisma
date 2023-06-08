@@ -9,9 +9,7 @@ import { CreatorMinOrderByAggregateInput } from "../inputs/CreatorMinOrderByAggr
 import { CreatorSumOrderByAggregateInput } from "../inputs/CreatorSumOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("CreatorOrderByWithAggregationInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CreatorOrderByWithAggregationInput")
 export class CreatorOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

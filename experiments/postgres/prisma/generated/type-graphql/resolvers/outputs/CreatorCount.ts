@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { CreatorCountLikesArgs } from "./args/CreatorCountLikesArgs";
 import { CreatorCountProblemsArgs } from "./args/CreatorCountProblemsArgs";
 
-@TypeGraphQL.ObjectType("CreatorCount", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("CreatorCount", {})
 export class CreatorCount {
   likes!: number;
   problems!: number;

@@ -6,9 +6,7 @@ import { HiddenOrderByRelevanceInput } from "../inputs/HiddenOrderByRelevanceInp
 import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("HiddenOrderByWithRelationAndSearchRelevanceInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("HiddenOrderByWithRelationAndSearchRelevanceInput")
 export class HiddenOrderByWithRelationAndSearchRelevanceInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

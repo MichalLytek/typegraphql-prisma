@@ -8,9 +8,7 @@ import { IntNullableFilter } from "../inputs/IntNullableFilter";
 import { ProblemWhereInput } from "../inputs/ProblemWhereInput";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("ProblemWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemWhereUniqueInput")
 export class ProblemWhereUniqueInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

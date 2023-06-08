@@ -8,9 +8,7 @@ import { HiddenMinOrderByAggregateInput } from "../inputs/HiddenMinOrderByAggreg
 import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("HiddenOrderByWithAggregationInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("HiddenOrderByWithAggregationInput")
 export class HiddenOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

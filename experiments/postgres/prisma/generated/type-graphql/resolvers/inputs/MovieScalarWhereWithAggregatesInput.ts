@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
-@TypeGraphQL.InputType("MovieScalarWhereWithAggregatesInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MovieScalarWhereWithAggregatesInput")
 export class MovieScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [MovieScalarWhereWithAggregatesInput], {
     nullable: true

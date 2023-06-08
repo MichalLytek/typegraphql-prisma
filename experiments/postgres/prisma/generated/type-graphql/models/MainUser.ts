@@ -10,7 +10,6 @@ import { MainUserCount } from "../resolvers/outputs/MainUserCount";
  * User model doc
  */
 @TypeGraphQL.ObjectType("MainUser", {
-  isAbstract: true,
   description: "User model doc"
 })
 export class MainUser {

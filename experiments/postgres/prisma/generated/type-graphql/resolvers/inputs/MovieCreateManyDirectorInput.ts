@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.InputType("MovieCreateManyDirectorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MovieCreateManyDirectorInput")
 export class MovieCreateManyDirectorInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

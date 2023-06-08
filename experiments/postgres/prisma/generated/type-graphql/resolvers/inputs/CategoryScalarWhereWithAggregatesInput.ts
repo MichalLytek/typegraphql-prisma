@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
-@TypeGraphQL.InputType("CategoryScalarWhereWithAggregatesInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CategoryScalarWhereWithAggregatesInput")
 export class CategoryScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [CategoryScalarWhereWithAggregatesInput], {
     nullable: true

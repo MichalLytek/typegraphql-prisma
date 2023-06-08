@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType("PostUpdateManyMutationInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostUpdateManyMutationInput")
 export class PostUpdateManyMutationInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

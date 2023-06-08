@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { NestedEnumRoleFilter } from "../inputs/NestedEnumRoleFilter";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType("EnumRoleFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("EnumRoleFilter")
 export class EnumRoleFilter {
   @TypeGraphQL.Field(_type => Role, {
     nullable: true

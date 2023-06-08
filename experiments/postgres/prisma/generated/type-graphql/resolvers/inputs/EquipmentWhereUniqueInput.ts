@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { EquipmentWhereInput } from "../inputs/EquipmentWhereInput";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
-@TypeGraphQL.InputType("EquipmentWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("EquipmentWhereUniqueInput")
 export class EquipmentWhereUniqueInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

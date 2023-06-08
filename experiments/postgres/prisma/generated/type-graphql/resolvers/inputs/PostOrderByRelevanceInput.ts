@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { PostOrderByRelevanceFieldEnum } from "../../enums/PostOrderByRelevanceFieldEnum";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("PostOrderByRelevanceInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostOrderByRelevanceInput")
 export class PostOrderByRelevanceInput {
   @TypeGraphQL.Field(_type => [PostOrderByRelevanceFieldEnum], {
     nullable: false

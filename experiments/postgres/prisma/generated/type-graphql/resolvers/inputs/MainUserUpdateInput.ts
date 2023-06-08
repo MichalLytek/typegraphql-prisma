@@ -6,9 +6,7 @@ import { PostUpdateManyWithoutAuthorNestedInput } from "../inputs/PostUpdateMany
 import { PostUpdateManyWithoutEditorNestedInput } from "../inputs/PostUpdateManyWithoutEditorNestedInput";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType("MainUserUpdateInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MainUserUpdateInput")
 export class MainUserUpdateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

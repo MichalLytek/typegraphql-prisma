@@ -6,9 +6,7 @@ import { EquipmentCountAggregate } from "../outputs/EquipmentCountAggregate";
 import { EquipmentMaxAggregate } from "../outputs/EquipmentMaxAggregate";
 import { EquipmentMinAggregate } from "../outputs/EquipmentMinAggregate";
 
-@TypeGraphQL.ObjectType("AggregateEquipment", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("AggregateEquipment", {})
 export class AggregateEquipment {
   @TypeGraphQL.Field(_type => EquipmentCountAggregate, {
     nullable: true

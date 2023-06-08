@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../scalars";
 import { Problem } from "../models/Problem";
 import { CreatorCount } from "../resolvers/outputs/CreatorCount";
 
-@TypeGraphQL.ObjectType("Creator", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("Creator", {})
 export class Creator {
   @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
     nullable: false

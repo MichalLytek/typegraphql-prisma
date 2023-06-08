@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { NullsOrder } from "../../enums/NullsOrder";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("SortOrderInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("SortOrderInput")
 export class SortOrderInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: false

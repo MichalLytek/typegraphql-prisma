@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("NativeTypeModelCountAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("NativeTypeModelCountAggregate", {})
 export class NativeTypeModelCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false

@@ -7,9 +7,7 @@ import { PostCreateOrConnectWithoutEditorInput } from "../inputs/PostCreateOrCon
 import { PostCreateWithoutEditorInput } from "../inputs/PostCreateWithoutEditorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
-@TypeGraphQL.InputType("PostCreateNestedManyWithoutEditorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostCreateNestedManyWithoutEditorInput")
 export class PostCreateNestedManyWithoutEditorInput {
   @TypeGraphQL.Field(_type => [PostCreateWithoutEditorInput], {
     nullable: true

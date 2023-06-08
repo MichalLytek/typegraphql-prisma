@@ -8,9 +8,7 @@ import { CategoryMaxAggregate } from "../outputs/CategoryMaxAggregate";
 import { CategoryMinAggregate } from "../outputs/CategoryMinAggregate";
 import { CategorySumAggregate } from "../outputs/CategorySumAggregate";
 
-@TypeGraphQL.ObjectType("AggregateCategory", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("AggregateCategory", {})
 export class AggregateCategory {
   @TypeGraphQL.Field(_type => CategoryCountAggregate, {
     nullable: true

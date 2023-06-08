@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType("PostCreateManyEditorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostCreateManyEditorInput")
 export class PostCreateManyEditorInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

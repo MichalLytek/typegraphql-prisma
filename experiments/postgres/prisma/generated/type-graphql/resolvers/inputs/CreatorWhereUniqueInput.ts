@@ -6,9 +6,7 @@ import { CreatorWhereInput } from "../inputs/CreatorWhereInput";
 import { ProblemListRelationFilter } from "../inputs/ProblemListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("CreatorWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CreatorWhereUniqueInput")
 export class CreatorWhereUniqueInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { DirectorWhereInput } from "../inputs/DirectorWhereInput";
 
-@TypeGraphQL.InputType("DirectorRelationFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("DirectorRelationFilter")
 export class DirectorRelationFilter {
   @TypeGraphQL.Field(_type => DirectorWhereInput, {
     nullable: true

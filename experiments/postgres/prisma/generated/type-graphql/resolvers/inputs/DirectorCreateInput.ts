@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { MovieCreateNestedManyWithoutDirectorInput } from "../inputs/MovieCreateNestedManyWithoutDirectorInput";
 
-@TypeGraphQL.InputType("DirectorCreateInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("DirectorCreateInput")
 export class DirectorCreateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

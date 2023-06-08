@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { DirectorUpdateWithoutMoviesInput } from "../inputs/DirectorUpdateWithoutMoviesInput";
 import { DirectorWhereInput } from "../inputs/DirectorWhereInput";
 
-@TypeGraphQL.InputType("DirectorUpdateToOneWithWhereWithoutMoviesInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("DirectorUpdateToOneWithWhereWithoutMoviesInput")
 export class DirectorUpdateToOneWithWhereWithoutMoviesInput {
   @TypeGraphQL.Field(_type => DirectorWhereInput, {
     nullable: true

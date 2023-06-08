@@ -6,9 +6,7 @@ import { MainUserUpdateOneRequiredWithoutPostsNestedInput } from "../inputs/Main
 import { MainUserUpdateOneWithoutEditorPostsNestedInput } from "../inputs/MainUserUpdateOneWithoutEditorPostsNestedInput";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType("PostUpdateInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostUpdateInput")
 export class PostUpdateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

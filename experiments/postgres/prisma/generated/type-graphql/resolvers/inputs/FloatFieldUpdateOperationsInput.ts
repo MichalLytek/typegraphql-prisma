@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.InputType("FloatFieldUpdateOperationsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("FloatFieldUpdateOperationsInput")
 export class FloatFieldUpdateOperationsInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true

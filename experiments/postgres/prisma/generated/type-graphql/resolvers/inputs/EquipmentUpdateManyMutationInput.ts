@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.InputType("EquipmentUpdateManyMutationInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("EquipmentUpdateManyMutationInput")
 export class EquipmentUpdateManyMutationInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

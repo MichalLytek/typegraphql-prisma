@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { HiddenWhereInput } from "../inputs/HiddenWhereInput";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
-@TypeGraphQL.InputType("HiddenWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("HiddenWhereUniqueInput")
 export class HiddenWhereUniqueInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

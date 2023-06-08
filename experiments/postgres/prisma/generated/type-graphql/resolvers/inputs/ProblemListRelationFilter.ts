@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProblemWhereInput } from "../inputs/ProblemWhereInput";
 
-@TypeGraphQL.InputType("ProblemListRelationFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemListRelationFilter")
 export class ProblemListRelationFilter {
   @TypeGraphQL.Field(_type => ProblemWhereInput, {
     nullable: true

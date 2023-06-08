@@ -7,9 +7,7 @@ import { CategoryWhereInput } from "../inputs/CategoryWhereInput";
 import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("CategoryWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CategoryWhereUniqueInput")
 export class CategoryWhereUniqueInput {
   @TypeGraphQL.Field(_type => CategoryCategoryCompoundUniqueCompoundUniqueInput, {
     nullable: true
