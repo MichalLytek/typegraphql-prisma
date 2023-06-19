@@ -15,6 +15,7 @@ export interface ExternalGeneratorOptions {
   omitInputFieldsByDefault?: string[];
   omitOutputFieldsByDefault?: string[];
   formatGeneratedCode?: boolean | "prettier" | "tsc";
+  emitIsAbstract?: boolean;
 }
 
 export interface InternalGeneratorOptions {

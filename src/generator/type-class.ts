@@ -70,7 +70,9 @@ export function generateOutputTypeClassFromType(
         arguments: [
           `"${type.typeName}"`,
           Writers.object({
-            isAbstract: "true",
+            ...(dmmfDocument.options.emitIsAbstract && {
+              isAbstract: "true",
+            }),
             ...(dmmfDocument.options.simpleResolvers && {
               simpleResolvers: "true",
             }),
@@ -190,7 +192,9 @@ export function generateInputTypeClassFromType(
         arguments: [
           `"${inputType.typeName}"`,
           Writers.object({
-            isAbstract: "true",
+            ...(options.emitIsAbstract && {
+              isAbstract: "true",
+            }),
           }),
         ],
       },

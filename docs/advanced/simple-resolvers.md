@@ -16,7 +16,6 @@ It will generate then all the output type and model type classes with `simpleRes
 
 ```ts {4}
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
   description: undefined,
   simpleResolvers: true,
 })

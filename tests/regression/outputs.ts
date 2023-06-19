@@ -273,4 +273,34 @@ describe("outputs", () => {
       expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
     });
   });
+
+  describe("when `emitIsAbstract` generator option is enabled", () => {
+    it("should properly generate count object type class decorator options", async () => {
+      const schema = /* prisma */ `
+        model FirstModel {
+          idField            Int            @id @default(autoincrement())
+          uniqueStringField  String         @unique
+          floatField         Float
+          secondModelsField  SecondModel[]
+        }
+        model SecondModel {
+          idField            Int          @id @default(autoincrement())
+          uniqueStringField  String       @unique
+          floatField         Float
+          firstModelFieldId  Int
+          firstModelField    FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        emitIsAbstract: true,
+      });
+      const firstModelCountTSFile = await readGeneratedFile(
+        "/resolvers/outputs/FirstModelCount.ts",
+      );
+
+      expect(firstModelCountTSFile).toMatchSnapshot("FirstModelCount");
+    });
+  });
 });

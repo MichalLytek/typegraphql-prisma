@@ -67,6 +67,7 @@ export async function generate(options: GeneratorOptions) {
         "formatGeneratedCode",
         ["prettier", "tsc"] as const,
       ),
+    emitIsAbstract: parseStringBoolean(generatorConfig.emitIsAbstract) ?? false,
   };
   const internalConfig: InternalGeneratorOptions = {
     outputDirPath: outputDir,

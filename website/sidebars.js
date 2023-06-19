@@ -76,6 +76,7 @@ const sidebars = {
         "advanced/custom-prisma-context-key",
         "advanced/emit-redundant-types-info",
         "advanced/overriding-object-decorator",
+        "advanced/emit-is-abstract",
       ],
     },
   ],

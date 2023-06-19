@@ -1651,4 +1651,28 @@ describe("inputs", () => {
       expect(indexTSFile).toMatchSnapshot("index");
     });
   });
+
+  describe("when `emitIsAbstract` generator option is enabled", () => {
+    it("should properly generate input type class decorator options", async () => {
+      const schema = /* prisma */ `
+        model FirstModel {
+          idField             Int            @id @default(autoincrement())
+          uniqueStringField   String         @unique
+          optionalFloatField  Float?
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        emitIsAbstract: true,
+      });
+      const firstModelWhereUniqueInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelWhereUniqueInput.ts",
+      );
+
+      expect(firstModelWhereUniqueInputTSFile).toMatchSnapshot(
+        "FirstModelWhereUniqueInput",
+      );
+    });
+  });
 });

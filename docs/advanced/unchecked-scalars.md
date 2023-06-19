@@ -17,9 +17,7 @@ generator typegraphql {
 This way there will be generate input classes with relation id fields, instead of the normal "nested" inputs for creating/updating relations, e.g.:
 
 ```ts
-@TypeGraphQL.InputType({
-  isAbstract: true,
-})
+@TypeGraphQL.InputType({})
 export class PostUncheckedCreateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false,

@@ -358,4 +358,26 @@ describe("models", () => {
       expect(firstModelTSFile).toMatchSnapshot("SampleModel");
     });
   });
+
+  describe("when emitIsAbstract is set to true", () => {
+    it("should properly generate model object type class decorator options", async () => {
+      const schema = /* prisma */ `
+        model SampleModel {
+          intIdField Int   @id @default(autoincrement())
+          intField   Int   @unique
+          floatField Float
+        }
+      `;
+
+      await generateCodeFromSchema(schema, {
+        outputDirPath,
+        emitIsAbstract: true,
+      });
+      const firstModelTSFile = await readGeneratedFile(
+        "/models/SampleModel.ts",
+      );
+
+      expect(firstModelTSFile).toMatchSnapshot("SampleModel");
+    });
+  });
 });

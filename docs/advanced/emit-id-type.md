@@ -18,9 +18,7 @@ generator typegraphql {
 It will generate then the id fields using the `TypeGraphQL.ID` GraphQL scalar, e.g.:
 
 ```ts {5}
-@TypeGraphQL.ObjectType("Post", {
-  isAbstract: true,
-})
+@TypeGraphQL.ObjectType("Post", {})
 export class Post {
   @TypeGraphQL.Field(_type => TypeGraphQL.ID, {
     nullable: false,

@@ -25,9 +25,7 @@ By using this option, instead of generating nested inputs with `IntFieldUpdateOp
 <TabItem value="true" label="useSimpleInputs = true">
 
 ```ts
-@TypeGraphQL.InputType("CategoryUpdateInput", {
-  isAbstract: true,
-})
+@TypeGraphQL.InputType("CategoryUpdateInput", {})
 export class CategoryUpdateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
@@ -50,9 +48,7 @@ export class CategoryUpdateInput {
 <TabItem value="false" label="useSimpleInputs = false">
 
 ```ts
-@TypeGraphQL.InputType("CategoryUpdateInput", {
-  isAbstract: true,
-})
+@TypeGraphQL.InputType("CategoryUpdateInput", {})
 export class CategoryUpdateInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true,
@@ -81,9 +77,7 @@ By using this option, instead of generating nested inputs with `XYZEnvelopeInput
 <TabItem value="true" label="useSimpleInputs = true">
 
 ```ts
-@TypeGraphQL.InputType("UserUpdateInput", {
-  isAbstract: true,
-})
+@TypeGraphQL.InputType("UserUpdateInput", {})
 export class UserUpdateInput {
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: true,
@@ -101,9 +95,7 @@ export class UserUpdateInput {
 <TabItem value="false" label="useSimpleInputs = false">
 
 ```ts
-@TypeGraphQL.InputType("UserUpdateInput", {
-  isAbstract: true,
-})
+@TypeGraphQL.InputType("UserUpdateInput", {})
 export class UserUpdateInput {
   @TypeGraphQL.Field(_type => UserCreateluckyNumbersInput, {
     nullable: true,

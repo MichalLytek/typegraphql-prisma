@@ -38,7 +38,6 @@ TypeGraphQL.registerEnumType(UserKind, {
 
 ```ts title=generated/type-graphql/models/User.ts
 @TypeGraphQL.ObjectType({
-  isAbstract: true,
   description: undefined,
 })
 export class User {
