@@ -1401,6 +1401,9 @@
         },
         {
           "name": "UserWhereUniqueInput",
+          "meta": {
+            "source": "User"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -2579,6 +2582,9 @@
         },
         {
           "name": "postWhereUniqueInput",
+          "meta": {
+            "source": "post"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -3573,6 +3579,9 @@
         },
         {
           "name": "CategoryWhereUniqueInput",
+          "meta": {
+            "source": "Category"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -4111,6 +4120,9 @@
         },
         {
           "name": "PatientWhereUniqueInput",
+          "meta": {
+            "source": "Patient"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -4655,6 +4667,9 @@
         },
         {
           "name": "MovieWhereUniqueInput",
+          "meta": {
+            "source": "Movie"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -5181,6 +5196,9 @@
         },
         {
           "name": "DirectorWhereUniqueInput",
+          "meta": {
+            "source": "Director"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -5731,6 +5749,9 @@
         },
         {
           "name": "ProblemWhereUniqueInput",
+          "meta": {
+            "source": "Problem"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -6324,6 +6345,9 @@
         },
         {
           "name": "CreatorWhereUniqueInput",
+          "meta": {
+            "source": "Creator"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -6871,6 +6895,9 @@
         },
         {
           "name": "NativeTypeModelWhereUniqueInput",
+          "meta": {
+            "source": "NativeTypeModel"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -7467,6 +7494,9 @@
         },
         {
           "name": "EquipmentWhereUniqueInput",
+          "meta": {
+            "source": "Equipment"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,
@@ -7907,6 +7937,9 @@
         },
         {
           "name": "HiddenWhereUniqueInput",
+          "meta": {
+            "source": "Hidden"
+          },
           "constraints": {
             "maxNumFields": null,
             "minNumFields": 1,

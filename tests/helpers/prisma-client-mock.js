@@ -14,4 +14,4 @@ var Prisma;
         }
     }
     Prisma.Decimal = Decimal;
-})(Prisma = exports.Prisma || (exports.Prisma = {}));
+})(Prisma || (exports.Prisma = Prisma = {}));

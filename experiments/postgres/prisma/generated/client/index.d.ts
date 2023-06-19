@@ -256,9 +256,6 @@ export type Hidden = HiddenPayload['scalars']
  * Enums
  */
 
-// Based on
-// https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
-
 export const PostKind: {
   BLOG: 'BLOG',
   ADVERT: 'ADVERT'
@@ -600,8 +597,8 @@ export namespace Prisma {
 
 
   /**
-   * Prisma Client JS version: 4.14.0
-   * Query Engine version: d9a4c5988f480fa576d43970d5a23641aa77bc9c
+   * Prisma Client JS version: 4.15.0
+   * Query Engine version: 8fbc245156db7124f997f4cecdd8d1219e360944
    */
   export type PrismaVersion = {
     client: string
@@ -12694,9 +12691,6 @@ export namespace Prisma {
   /**
    * Enums
    */
-
-  // Based on
-  // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
   export const CategoryOrderByRelevanceFieldEnum: {
     name: 'name',

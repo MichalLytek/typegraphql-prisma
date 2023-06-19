@@ -611,6 +611,9 @@
         },
         {
           "name": "PostWhereUniqueInput",
+          "meta": {
+            "source": "Post"
+          },
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 1
@@ -1107,6 +1110,9 @@
         },
         {
           "name": "CommentWhereUniqueInput",
+          "meta": {
+            "source": "Comment"
+          },
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 1
@@ -1560,6 +1566,9 @@
         },
         {
           "name": "UserWhereUniqueInput",
+          "meta": {
+            "source": "User"
+          },
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 1
