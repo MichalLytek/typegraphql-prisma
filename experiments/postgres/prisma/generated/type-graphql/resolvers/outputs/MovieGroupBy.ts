@@ -6,9 +6,7 @@ import { MovieCountAggregate } from "../outputs/MovieCountAggregate";
 import { MovieMaxAggregate } from "../outputs/MovieMaxAggregate";
 import { MovieMinAggregate } from "../outputs/MovieMinAggregate";
 
-@TypeGraphQL.ObjectType("MovieGroupBy", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("MovieGroupBy", {})
 export class MovieGroupBy {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

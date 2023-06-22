@@ -6,9 +6,7 @@ import { NestedBytesNullableFilter } from "../inputs/NestedBytesNullableFilter";
 import { NestedBytesNullableWithAggregatesFilter } from "../inputs/NestedBytesNullableWithAggregatesFilter";
 import { NestedIntNullableFilter } from "../inputs/NestedIntNullableFilter";
 
-@TypeGraphQL.InputType("BytesNullableWithAggregatesFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("BytesNullableWithAggregatesFilter", {})
 export class BytesNullableWithAggregatesFilter {
   @TypeGraphQL.Field(_type => GraphQLScalars.ByteResolver, {
     nullable: true

@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { UserAddressCreateInput } from "../inputs/UserAddressCreateInput";
 
-@TypeGraphQL.InputType("UserUpdateManyMutationInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("UserUpdateManyMutationInput", {})
 export class UserUpdateManyMutationInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

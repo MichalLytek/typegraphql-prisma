@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { ProblemScalarWhereInput } from "../inputs/ProblemScalarWhereInput";
 import { ProblemUpdateManyMutationInput } from "../inputs/ProblemUpdateManyMutationInput";
 
-@TypeGraphQL.InputType("ProblemUpdateManyWithWhereWithoutCreatorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemUpdateManyWithWhereWithoutCreatorInput", {})
 export class ProblemUpdateManyWithWhereWithoutCreatorInput {
   @TypeGraphQL.Field(_type => ProblemScalarWhereInput, {
     nullable: false

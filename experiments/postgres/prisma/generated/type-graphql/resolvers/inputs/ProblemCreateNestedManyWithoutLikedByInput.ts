@@ -6,9 +6,7 @@ import { ProblemCreateOrConnectWithoutLikedByInput } from "../inputs/ProblemCrea
 import { ProblemCreateWithoutLikedByInput } from "../inputs/ProblemCreateWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
-@TypeGraphQL.InputType("ProblemCreateNestedManyWithoutLikedByInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemCreateNestedManyWithoutLikedByInput", {})
 export class ProblemCreateNestedManyWithoutLikedByInput {
   @TypeGraphQL.Field(_type => [ProblemCreateWithoutLikedByInput], {
     nullable: true

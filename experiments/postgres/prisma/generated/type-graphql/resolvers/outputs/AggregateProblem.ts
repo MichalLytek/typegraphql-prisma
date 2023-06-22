@@ -8,9 +8,7 @@ import { ProblemMaxAggregate } from "../outputs/ProblemMaxAggregate";
 import { ProblemMinAggregate } from "../outputs/ProblemMinAggregate";
 import { ProblemSumAggregate } from "../outputs/ProblemSumAggregate";
 
-@TypeGraphQL.ObjectType("AggregateProblem", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("AggregateProblem", {})
 export class AggregateProblem {
   @TypeGraphQL.Field(_type => ProblemCountAggregate, {
     nullable: true

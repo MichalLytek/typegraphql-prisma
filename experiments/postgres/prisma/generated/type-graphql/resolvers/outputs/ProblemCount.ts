@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProblemCountLikedByArgs } from "./args/ProblemCountLikedByArgs";
 
-@TypeGraphQL.ObjectType("ProblemCount", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("ProblemCount", {})
 export class ProblemCount {
   likedBy!: number;
 

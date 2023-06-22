@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.ObjectType("MainUserMinAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("MainUserMinAggregate", {})
 export class MainUserMinAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

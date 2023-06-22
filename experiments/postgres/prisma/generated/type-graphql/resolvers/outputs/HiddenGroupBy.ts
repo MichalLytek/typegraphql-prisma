@@ -6,9 +6,7 @@ import { HiddenCountAggregate } from "../outputs/HiddenCountAggregate";
 import { HiddenMaxAggregate } from "../outputs/HiddenMaxAggregate";
 import { HiddenMinAggregate } from "../outputs/HiddenMinAggregate";
 
-@TypeGraphQL.ObjectType("HiddenGroupBy", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("HiddenGroupBy", {})
 export class HiddenGroupBy {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

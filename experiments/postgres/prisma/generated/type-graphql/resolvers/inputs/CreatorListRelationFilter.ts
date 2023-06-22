@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CreatorWhereInput } from "../inputs/CreatorWhereInput";
 
-@TypeGraphQL.InputType("CreatorListRelationFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CreatorListRelationFilter", {})
 export class CreatorListRelationFilter {
   @TypeGraphQL.Field(_type => CreatorWhereInput, {
     nullable: true

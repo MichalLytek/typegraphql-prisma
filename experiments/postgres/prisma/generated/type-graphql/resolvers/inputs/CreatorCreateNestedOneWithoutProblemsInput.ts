@@ -6,9 +6,7 @@ import { CreatorCreateOrConnectWithoutProblemsInput } from "../inputs/CreatorCre
 import { CreatorCreateWithoutProblemsInput } from "../inputs/CreatorCreateWithoutProblemsInput";
 import { CreatorWhereUniqueInput } from "../inputs/CreatorWhereUniqueInput";
 
-@TypeGraphQL.InputType("CreatorCreateNestedOneWithoutProblemsInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CreatorCreateNestedOneWithoutProblemsInput", {})
 export class CreatorCreateNestedOneWithoutProblemsInput {
   @TypeGraphQL.Field(_type => CreatorCreateWithoutProblemsInput, {
     nullable: true

@@ -7,9 +7,7 @@ import { PatientMaxOrderByAggregateInput } from "../inputs/PatientMaxOrderByAggr
 import { PatientMinOrderByAggregateInput } from "../inputs/PatientMinOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("PatientOrderByWithAggregationInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PatientOrderByWithAggregationInput", {})
 export class PatientOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

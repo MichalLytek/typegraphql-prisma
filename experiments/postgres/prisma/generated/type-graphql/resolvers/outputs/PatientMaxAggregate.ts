@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("PatientMaxAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("PatientMaxAggregate", {})
 export class PatientMaxAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

@@ -7,9 +7,7 @@ import { MovieMaxOrderByAggregateInput } from "../inputs/MovieMaxOrderByAggregat
 import { MovieMinOrderByAggregateInput } from "../inputs/MovieMinOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("MovieOrderByWithAggregationInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MovieOrderByWithAggregationInput", {})
 export class MovieOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

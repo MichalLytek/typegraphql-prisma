@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType("MainUserCreateManyInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MainUserCreateManyInput", {})
 export class MainUserCreateManyInput {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { DirectorCountMoviesArgs } from "./args/DirectorCountMoviesArgs";
 
-@TypeGraphQL.ObjectType("DirectorCount", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("DirectorCount", {})
 export class DirectorCount {
   movies!: number;
 

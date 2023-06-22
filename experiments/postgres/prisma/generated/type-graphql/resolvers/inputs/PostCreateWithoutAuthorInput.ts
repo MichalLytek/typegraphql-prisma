@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { MainUserCreateNestedOneWithoutEditorPostsInput } from "../inputs/MainUserCreateNestedOneWithoutEditorPostsInput";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType("PostCreateWithoutAuthorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostCreateWithoutAuthorInput", {})
 export class PostCreateWithoutAuthorInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

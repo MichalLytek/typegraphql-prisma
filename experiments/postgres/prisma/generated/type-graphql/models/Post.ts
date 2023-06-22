@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../scalars";
 import { MainUser } from "../models/MainUser";
 import { PostKind } from "../enums/PostKind";
 
-@TypeGraphQL.ObjectType("Post", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("Post", {})
 export class Post {
   /**
    * first line of comment

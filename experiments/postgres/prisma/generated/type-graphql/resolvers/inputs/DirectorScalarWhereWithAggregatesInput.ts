@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
-@TypeGraphQL.InputType("DirectorScalarWhereWithAggregatesInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("DirectorScalarWhereWithAggregatesInput", {})
 export class DirectorScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [DirectorScalarWhereWithAggregatesInput], {
     nullable: true

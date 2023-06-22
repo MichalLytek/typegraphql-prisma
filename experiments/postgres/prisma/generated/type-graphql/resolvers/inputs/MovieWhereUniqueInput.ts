@@ -7,9 +7,7 @@ import { MovieMovieCompoundIdCompoundUniqueInput } from "../inputs/MovieMovieCom
 import { MovieWhereInput } from "../inputs/MovieWhereInput";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("MovieWhereUniqueInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("MovieWhereUniqueInput", {})
 export class MovieWhereUniqueInput {
   @TypeGraphQL.Field(_type => MovieMovieCompoundIdCompoundUniqueInput, {
     nullable: true

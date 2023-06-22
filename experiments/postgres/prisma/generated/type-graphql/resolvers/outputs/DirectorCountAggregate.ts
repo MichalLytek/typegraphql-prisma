@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("DirectorCountAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("DirectorCountAggregate", {})
 export class DirectorCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false

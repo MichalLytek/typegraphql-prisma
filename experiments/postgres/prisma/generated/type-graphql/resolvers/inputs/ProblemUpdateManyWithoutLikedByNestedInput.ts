@@ -10,9 +10,7 @@ import { ProblemUpdateWithWhereUniqueWithoutLikedByInput } from "../inputs/Probl
 import { ProblemUpsertWithWhereUniqueWithoutLikedByInput } from "../inputs/ProblemUpsertWithWhereUniqueWithoutLikedByInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
-@TypeGraphQL.InputType("ProblemUpdateManyWithoutLikedByNestedInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemUpdateManyWithoutLikedByNestedInput", {})
 export class ProblemUpdateManyWithoutLikedByNestedInput {
   @TypeGraphQL.Field(_type => [ProblemCreateWithoutLikedByInput], {
     nullable: true

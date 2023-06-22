@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("ProblemSumAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("ProblemSumAggregate", {})
 export class ProblemSumAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

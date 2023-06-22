@@ -6,9 +6,7 @@ import { DirectorCreateOrConnectWithoutMoviesInput } from "../inputs/DirectorCre
 import { DirectorCreateWithoutMoviesInput } from "../inputs/DirectorCreateWithoutMoviesInput";
 import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 
-@TypeGraphQL.InputType("DirectorCreateNestedOneWithoutMoviesInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("DirectorCreateNestedOneWithoutMoviesInput", {})
 export class DirectorCreateNestedOneWithoutMoviesInput {
   @TypeGraphQL.Field(_type => DirectorCreateWithoutMoviesInput, {
     nullable: true

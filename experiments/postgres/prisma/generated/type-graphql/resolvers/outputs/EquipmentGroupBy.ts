@@ -6,9 +6,7 @@ import { EquipmentCountAggregate } from "../outputs/EquipmentCountAggregate";
 import { EquipmentMaxAggregate } from "../outputs/EquipmentMaxAggregate";
 import { EquipmentMinAggregate } from "../outputs/EquipmentMinAggregate";
 
-@TypeGraphQL.ObjectType("EquipmentGroupBy", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("EquipmentGroupBy", {})
 export class EquipmentGroupBy {
   @TypeGraphQL.Field(_type => String, {
     nullable: false

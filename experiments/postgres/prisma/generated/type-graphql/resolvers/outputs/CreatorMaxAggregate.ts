@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("CreatorMaxAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("CreatorMaxAggregate", {})
 export class CreatorMaxAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType("NestedEnumPostKindNullableFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("NestedEnumPostKindNullableFilter", {})
 export class NestedEnumPostKindNullableFilter {
   @TypeGraphQL.Field(_type => PostKind, {
     nullable: true

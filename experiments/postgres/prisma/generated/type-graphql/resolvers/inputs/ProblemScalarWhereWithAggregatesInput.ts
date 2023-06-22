@@ -6,9 +6,7 @@ import { IntNullableWithAggregatesFilter } from "../inputs/IntNullableWithAggreg
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
-@TypeGraphQL.InputType("ProblemScalarWhereWithAggregatesInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemScalarWhereWithAggregatesInput", {})
 export class ProblemScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [ProblemScalarWhereWithAggregatesInput], {
     nullable: true

@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { ProblemUpdateWithoutCreatorInput } from "../inputs/ProblemUpdateWithoutCreatorInput";
 import { ProblemWhereUniqueInput } from "../inputs/ProblemWhereUniqueInput";
 
-@TypeGraphQL.InputType("ProblemUpdateWithWhereUniqueWithoutCreatorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemUpdateWithWhereUniqueWithoutCreatorInput", {})
 export class ProblemUpdateWithWhereUniqueWithoutCreatorInput {
   @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, {
     nullable: false

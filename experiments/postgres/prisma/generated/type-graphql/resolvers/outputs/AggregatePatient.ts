@@ -6,9 +6,7 @@ import { PatientCountAggregate } from "../outputs/PatientCountAggregate";
 import { PatientMaxAggregate } from "../outputs/PatientMaxAggregate";
 import { PatientMinAggregate } from "../outputs/PatientMinAggregate";
 
-@TypeGraphQL.ObjectType("AggregatePatient", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("AggregatePatient", {})
 export class AggregatePatient {
   @TypeGraphQL.Field(_type => PatientCountAggregate, {
     nullable: true

@@ -7,9 +7,7 @@ import { NestedBigIntNullableWithAggregatesFilter } from "../inputs/NestedBigInt
 import { NestedFloatNullableFilter } from "../inputs/NestedFloatNullableFilter";
 import { NestedIntNullableFilter } from "../inputs/NestedIntNullableFilter";
 
-@TypeGraphQL.InputType("BigIntNullableWithAggregatesFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("BigIntNullableWithAggregatesFilter", {})
 export class BigIntNullableWithAggregatesFilter {
   @TypeGraphQL.Field(_type => GraphQLScalars.BigIntResolver, {
     nullable: true

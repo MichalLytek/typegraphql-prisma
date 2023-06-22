@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { CommentCreateNestedManyWithoutPostInput } from "../inputs/CommentCreateNestedManyWithoutPostInput";
 
-@TypeGraphQL.InputType("PostCreateWithoutAuthorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostCreateWithoutAuthorInput", {})
 export class PostCreateWithoutAuthorInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

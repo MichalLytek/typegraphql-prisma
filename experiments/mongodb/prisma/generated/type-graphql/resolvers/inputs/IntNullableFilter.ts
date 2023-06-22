@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { NestedIntNullableFilter } from "../inputs/NestedIntNullableFilter";
 
-@TypeGraphQL.InputType("IntNullableFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("IntNullableFilter", {})
 export class IntNullableFilter {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true

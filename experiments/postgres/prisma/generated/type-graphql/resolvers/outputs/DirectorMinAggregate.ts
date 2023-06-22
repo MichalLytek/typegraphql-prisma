@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("DirectorMinAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("DirectorMinAggregate", {})
 export class DirectorMinAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

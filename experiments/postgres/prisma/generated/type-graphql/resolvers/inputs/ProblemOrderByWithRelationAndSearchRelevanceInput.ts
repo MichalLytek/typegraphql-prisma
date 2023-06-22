@@ -8,9 +8,7 @@ import { ProblemOrderByRelevanceInput } from "../inputs/ProblemOrderByRelevanceI
 import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("ProblemOrderByWithRelationAndSearchRelevanceInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("ProblemOrderByWithRelationAndSearchRelevanceInput", {})
 export class ProblemOrderByWithRelationAndSearchRelevanceInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

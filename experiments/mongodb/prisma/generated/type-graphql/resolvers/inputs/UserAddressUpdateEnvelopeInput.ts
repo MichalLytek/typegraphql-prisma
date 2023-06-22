@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { UserAddressCreateInput } from "../inputs/UserAddressCreateInput";
 import { UserAddressUpdateInput } from "../inputs/UserAddressUpdateInput";
 
-@TypeGraphQL.InputType("UserAddressUpdateEnvelopeInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("UserAddressUpdateEnvelopeInput", {})
 export class UserAddressUpdateEnvelopeInput {
   @TypeGraphQL.Field(_type => UserAddressCreateInput, {
     nullable: true

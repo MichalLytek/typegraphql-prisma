@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { PostUpdateManyWithoutAuthorNestedInput } from "../inputs/PostUpdateManyWithoutAuthorNestedInput";
 import { UserAddressCreateInput } from "../inputs/UserAddressCreateInput";
 
-@TypeGraphQL.InputType("UserUpdateInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("UserUpdateInput", {})
 export class UserUpdateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.ObjectType("PostMaxAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("PostMaxAggregate", {})
 export class PostMaxAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

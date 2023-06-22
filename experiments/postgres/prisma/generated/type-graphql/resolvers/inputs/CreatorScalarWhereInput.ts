@@ -5,9 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType("CreatorScalarWhereInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CreatorScalarWhereInput", {})
 export class CreatorScalarWhereInput {
   @TypeGraphQL.Field(_type => [CreatorScalarWhereInput], {
     nullable: true

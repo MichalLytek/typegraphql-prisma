@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
-@TypeGraphQL.InputType("CommentScalarWhereWithAggregatesInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("CommentScalarWhereWithAggregatesInput", {})
 export class CommentScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => [CommentScalarWhereWithAggregatesInput], {
     nullable: true

@@ -4,9 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType("NestedEnumRoleFilter", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("NestedEnumRoleFilter", {})
 export class NestedEnumRoleFilter {
   @TypeGraphQL.Field(_type => Role, {
     nullable: true

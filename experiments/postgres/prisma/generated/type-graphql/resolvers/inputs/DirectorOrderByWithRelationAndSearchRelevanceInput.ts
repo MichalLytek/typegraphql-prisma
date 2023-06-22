@@ -6,9 +6,7 @@ import { DirectorOrderByRelevanceInput } from "../inputs/DirectorOrderByRelevanc
 import { MovieOrderByRelationAggregateInput } from "../inputs/MovieOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("DirectorOrderByWithRelationAndSearchRelevanceInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("DirectorOrderByWithRelationAndSearchRelevanceInput", {})
 export class DirectorOrderByWithRelationAndSearchRelevanceInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true

@@ -6,9 +6,7 @@ import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorI
 import { PostUpdateWithoutAuthorInput } from "../inputs/PostUpdateWithoutAuthorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
-@TypeGraphQL.InputType("PostUpsertWithWhereUniqueWithoutAuthorInput", {
-  isAbstract: true
-})
+@TypeGraphQL.InputType("PostUpsertWithWhereUniqueWithoutAuthorInput", {})
 export class PostUpsertWithWhereUniqueWithoutAuthorInput {
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, {
     nullable: false

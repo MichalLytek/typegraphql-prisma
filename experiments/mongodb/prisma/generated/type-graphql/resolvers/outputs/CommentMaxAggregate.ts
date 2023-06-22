@@ -3,9 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 
-@TypeGraphQL.ObjectType("CommentMaxAggregate", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("CommentMaxAggregate", {})
 export class CommentMaxAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true

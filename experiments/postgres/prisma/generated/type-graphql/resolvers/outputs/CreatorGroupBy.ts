@@ -8,9 +8,7 @@ import { CreatorMaxAggregate } from "../outputs/CreatorMaxAggregate";
 import { CreatorMinAggregate } from "../outputs/CreatorMinAggregate";
 import { CreatorSumAggregate } from "../outputs/CreatorSumAggregate";
 
-@TypeGraphQL.ObjectType("CreatorGroupBy", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("CreatorGroupBy", {})
 export class CreatorGroupBy {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false

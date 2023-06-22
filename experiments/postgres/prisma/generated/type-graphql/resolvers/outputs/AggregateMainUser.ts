@@ -8,9 +8,7 @@ import { MainUserMaxAggregate } from "../outputs/MainUserMaxAggregate";
 import { MainUserMinAggregate } from "../outputs/MainUserMinAggregate";
 import { MainUserSumAggregate } from "../outputs/MainUserSumAggregate";
 
-@TypeGraphQL.ObjectType("AggregateMainUser", {
-  isAbstract: true
-})
+@TypeGraphQL.ObjectType("AggregateMainUser", {})
 export class AggregateMainUser {
   @TypeGraphQL.Field(_type => MainUserCountAggregate, {
     nullable: true
