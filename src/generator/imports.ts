@@ -71,6 +71,7 @@ export function generateHelpersFileImport(sourceFile: SourceFile, level = 0) {
       (level === 0 ? "./" : "") +
       path.posix.join(...Array(level).fill(".."), "helpers"),
     namedImports: [
+      "transformArgsIntoPrismaArgs",
       "transformInfoIntoPrismaArgs",
       "getPrismaFromContext",
       "transformCountFieldIntoSelectRelationsCount",
