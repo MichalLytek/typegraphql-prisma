@@ -5,7 +5,7 @@ import { HiddenCreateInput } from "../../../inputs/HiddenCreateInput";
 @TypeGraphQL.ArgsType()
 export class CreateOneHiddenArgs {
   @TypeGraphQL.Field(_type => HiddenCreateInput, {
-    nullable: false
+    nullable: true
   })
-  data!: HiddenCreateInput;
+  data?: HiddenCreateInput | undefined;
 }

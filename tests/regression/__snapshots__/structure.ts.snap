@@ -8,6 +8,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
   [enums]
     Color.d.ts
     Color.js
+    NullsOrder.d.ts
+    NullsOrder.js
     PostScalarFieldEnum.d.ts
     PostScalarFieldEnum.js
     QueryMode.d.ts
@@ -254,6 +256,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       PostWhereInput.js
       PostWhereUniqueInput.d.ts
       PostWhereUniqueInput.js
+      SortOrderInput.d.ts
+      SortOrderInput.js
       StringFieldUpdateOperationsInput.d.ts
       StringFieldUpdateOperationsInput.js
       StringFilter.d.ts
@@ -298,6 +302,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       UserUpdateManyMutationInput.js
       UserUpdateOneRequiredWithoutPostsNestedInput.d.ts
       UserUpdateOneRequiredWithoutPostsNestedInput.js
+      UserUpdateToOneWithWhereWithoutPostsInput.d.ts
+      UserUpdateToOneWithWhereWithoutPostsInput.js
       UserUpdateWithoutPostsInput.d.ts
       UserUpdateWithoutPostsInput.js
       UserUpsertWithoutPostsInput.d.ts
@@ -341,6 +347,11 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       UserMinAggregate.js
       UserSumAggregate.d.ts
       UserSumAggregate.js
+      [args]
+        UserCountPostsArgs.d.ts
+        UserCountPostsArgs.js
+        index.d.ts
+        index.js
       index.d.ts
       index.js
     [relations]
@@ -372,6 +383,7 @@ exports[`structure should generate proper folders and file names when model is r
   enhance.ts
   [enums]
     Color.ts
+    NullsOrder.ts
     QueryMode.ts
     RenamedPostScalarFieldEnum.ts
     RenamedUserScalarFieldEnum.ts
@@ -516,10 +528,12 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedUserUpdateInput.ts
       RenamedUserUpdateManyMutationInput.ts
       RenamedUserUpdateOneRequiredWithoutPostsNestedInput.ts
+      RenamedUserUpdateToOneWithWhereWithoutPostsInput.ts
       RenamedUserUpdateWithoutPostsInput.ts
       RenamedUserUpsertWithoutPostsInput.ts
       RenamedUserWhereInput.ts
       RenamedUserWhereUniqueInput.ts
+      SortOrderInput.ts
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
@@ -543,6 +557,9 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedUserMaxAggregate.ts
       RenamedUserMinAggregate.ts
       RenamedUserSumAggregate.ts
+      [args]
+        RenamedUserCountPostsArgs.ts
+        index.ts
       index.ts
     [relations]
       [RenamedPost]
@@ -565,6 +582,7 @@ exports[`structure should generate proper folders structure and file names for c
   enhance.ts
   [enums]
     Color.ts
+    NullsOrder.ts
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
@@ -692,6 +710,7 @@ exports[`structure should generate proper folders structure and file names for c
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
       PostWhereInput.ts
       PostWhereUniqueInput.ts
+      SortOrderInput.ts
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
@@ -714,6 +733,7 @@ exports[`structure should generate proper folders structure and file names for c
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsNestedInput.ts
+      UserUpdateToOneWithWhereWithoutPostsInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts
@@ -736,6 +756,9 @@ exports[`structure should generate proper folders structure and file names for c
       UserMaxAggregate.ts
       UserMinAggregate.ts
       UserSumAggregate.ts
+      [args]
+        UserCountPostsArgs.ts
+        index.ts
       index.ts
     [relations]
       [Post]

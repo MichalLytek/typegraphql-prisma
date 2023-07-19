@@ -318,12 +318,12 @@ export function applyOutputTypesEnhanceMap(
 const inputsInfo = {
   UserWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\", \\"posts\\"],
   UserOrderByWithRelationInput: [\\"id\\", \\"email\\", \\"posts\\"],
-  UserWhereUniqueInput: [\\"id\\", \\"email\\"],
+  UserWhereUniqueInput: [\\"id\\", \\"email\\", \\"AND\\", \\"OR\\", \\"NOT\\", \\"posts\\"],
   UserOrderByWithAggregationInput: [\\"id\\", \\"email\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
   UserScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\"],
   PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
   PostOrderByWithRelationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
-  PostWhereUniqueInput: [\\"uuid\\"],
+  PostWhereUniqueInput: [\\"uuid\\", \\"AND\\", \\"OR\\", \\"NOT\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
   PostOrderByWithAggregationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
   PostScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   UserCreateInput: [\\"email\\", \\"posts\\"],
@@ -350,6 +350,7 @@ const inputsInfo = {
   StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
   JsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   UserRelationFilter: [\\"is\\", \\"isNot\\"],
+  SortOrderInput: [\\"sort\\", \\"nulls\\"],
   PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostAvgOrderByAggregateInput: [\\"authorId\\"],
   PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
@@ -390,7 +391,8 @@ const inputsInfo = {
   PostScalarWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   UserCreateWithoutPostsInput: [\\"email\\"],
   UserCreateOrConnectWithoutPostsInput: [\\"where\\", \\"create\\"],
-  UserUpsertWithoutPostsInput: [\\"update\\", \\"create\\"],
+  UserUpsertWithoutPostsInput: [\\"update\\", \\"create\\", \\"where\\"],
+  UserUpdateToOneWithWhereWithoutPostsInput: [\\"where\\", \\"data\\"],
   UserUpdateWithoutPostsInput: [\\"email\\"],
   PostCreateManyAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
   PostUpdateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
@@ -465,6 +467,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
   [enums]
     JsonNullValueFilter.ts
     JsonNullValueInput.ts
+    NullsOrder.ts
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
@@ -600,6 +603,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
       PostWhereInput.ts
       PostWhereUniqueInput.ts
+      SortOrderInput.ts
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
@@ -622,6 +626,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsNestedInput.ts
+      UserUpdateToOneWithWhereWithoutPostsInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts
@@ -644,6 +649,9 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
       UserMaxAggregate.ts
       UserMinAggregate.ts
       UserSumAggregate.ts
+      [args]
+        UserCountPostsArgs.ts
+        index.ts
       index.ts
   scalars.ts
 "
@@ -967,12 +975,12 @@ export function applyOutputTypesEnhanceMap(
 const inputsInfo = {
   UserWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\", \\"posts\\"],
   UserOrderByWithRelationInput: [\\"id\\", \\"email\\", \\"posts\\"],
-  UserWhereUniqueInput: [\\"id\\", \\"email\\"],
+  UserWhereUniqueInput: [\\"id\\", \\"email\\", \\"AND\\", \\"OR\\", \\"NOT\\", \\"posts\\"],
   UserOrderByWithAggregationInput: [\\"id\\", \\"email\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
   UserScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\"],
   PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
   PostOrderByWithRelationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
-  PostWhereUniqueInput: [\\"uuid\\"],
+  PostWhereUniqueInput: [\\"uuid\\", \\"AND\\", \\"OR\\", \\"NOT\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
   PostOrderByWithAggregationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
   PostScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   UserCreateInput: [\\"email\\", \\"posts\\"],
@@ -999,6 +1007,7 @@ const inputsInfo = {
   StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
   JsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   UserRelationFilter: [\\"is\\", \\"isNot\\"],
+  SortOrderInput: [\\"sort\\", \\"nulls\\"],
   PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostAvgOrderByAggregateInput: [\\"authorId\\"],
   PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
@@ -1039,7 +1048,8 @@ const inputsInfo = {
   PostScalarWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   UserCreateWithoutPostsInput: [\\"email\\"],
   UserCreateOrConnectWithoutPostsInput: [\\"where\\", \\"create\\"],
-  UserUpsertWithoutPostsInput: [\\"update\\", \\"create\\"],
+  UserUpsertWithoutPostsInput: [\\"update\\", \\"create\\", \\"where\\"],
+  UserUpdateToOneWithWhereWithoutPostsInput: [\\"where\\", \\"data\\"],
   UserUpdateWithoutPostsInput: [\\"email\\"],
   PostCreateManyAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
   PostUpdateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
@@ -1114,6 +1124,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
   [enums]
     JsonNullValueFilter.ts
     JsonNullValueInput.ts
+    NullsOrder.ts
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
@@ -1249,6 +1260,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
       PostWhereInput.ts
       PostWhereUniqueInput.ts
+      SortOrderInput.ts
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
@@ -1271,6 +1283,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsNestedInput.ts
+      UserUpdateToOneWithWhereWithoutPostsInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts
@@ -1293,6 +1306,9 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
       UserMaxAggregate.ts
       UserMinAggregate.ts
       UserSumAggregate.ts
+      [args]
+        UserCountPostsArgs.ts
+        index.ts
       index.ts
   scalars.ts
 "
@@ -1320,6 +1336,7 @@ exports[`emitOnly generator option when only 'enums' is set should generate prop
   [enums]
     JsonNullValueFilter.ts
     JsonNullValueInput.ts
+    NullsOrder.ts
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
@@ -1380,12 +1397,12 @@ function applyTypeClassEnhanceConfig<
 const inputsInfo = {
   UserWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\", \\"posts\\"],
   UserOrderByWithRelationInput: [\\"id\\", \\"email\\", \\"posts\\"],
-  UserWhereUniqueInput: [\\"id\\", \\"email\\"],
+  UserWhereUniqueInput: [\\"id\\", \\"email\\", \\"AND\\", \\"OR\\", \\"NOT\\", \\"posts\\"],
   UserOrderByWithAggregationInput: [\\"id\\", \\"email\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
   UserScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\"],
   PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
   PostOrderByWithRelationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
-  PostWhereUniqueInput: [\\"uuid\\"],
+  PostWhereUniqueInput: [\\"uuid\\", \\"AND\\", \\"OR\\", \\"NOT\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
   PostOrderByWithAggregationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
   PostScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   UserCreateInput: [\\"email\\", \\"posts\\"],
@@ -1412,6 +1429,7 @@ const inputsInfo = {
   StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
   JsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   UserRelationFilter: [\\"is\\", \\"isNot\\"],
+  SortOrderInput: [\\"sort\\", \\"nulls\\"],
   PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostAvgOrderByAggregateInput: [\\"authorId\\"],
   PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
@@ -1452,7 +1470,8 @@ const inputsInfo = {
   PostScalarWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   UserCreateWithoutPostsInput: [\\"email\\"],
   UserCreateOrConnectWithoutPostsInput: [\\"where\\", \\"create\\"],
-  UserUpsertWithoutPostsInput: [\\"update\\", \\"create\\"],
+  UserUpsertWithoutPostsInput: [\\"update\\", \\"create\\", \\"where\\"],
+  UserUpdateToOneWithWhereWithoutPostsInput: [\\"where\\", \\"data\\"],
   UserUpdateWithoutPostsInput: [\\"email\\"],
   PostCreateManyAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
   PostUpdateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
@@ -1515,6 +1534,7 @@ exports[`emitOnly generator option when only 'inputs' is set should generate pro
   [enums]
     JsonNullValueFilter.ts
     JsonNullValueInput.ts
+    NullsOrder.ts
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
@@ -1577,6 +1597,7 @@ exports[`emitOnly generator option when only 'inputs' is set should generate pro
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
       PostWhereInput.ts
       PostWhereUniqueInput.ts
+      SortOrderInput.ts
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
@@ -1599,6 +1620,7 @@ exports[`emitOnly generator option when only 'inputs' is set should generate pro
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsNestedInput.ts
+      UserUpdateToOneWithWhereWithoutPostsInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts
@@ -1737,6 +1759,7 @@ exports[`emitOnly generator option when only 'models' is set should generate mod
   [enums]
     JsonNullValueFilter.ts
     JsonNullValueInput.ts
+    NullsOrder.ts
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
@@ -1874,6 +1897,7 @@ exports[`emitOnly generator option when only 'outputs' is set should generate pr
   [enums]
     JsonNullValueFilter.ts
     JsonNullValueInput.ts
+    NullsOrder.ts
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
@@ -1900,6 +1924,9 @@ exports[`emitOnly generator option when only 'outputs' is set should generate pr
       UserMaxAggregate.ts
       UserMinAggregate.ts
       UserSumAggregate.ts
+      [args]
+        UserCountPostsArgs.ts
+        index.ts
       index.ts
   scalars.ts
 "
@@ -2044,12 +2071,12 @@ export function applyModelsEnhanceMap(modelsEnhanceMap: ModelsEnhanceMap) {
 const inputsInfo = {
   UserWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\", \\"posts\\"],
   UserOrderByWithRelationInput: [\\"id\\", \\"email\\", \\"posts\\"],
-  UserWhereUniqueInput: [\\"id\\", \\"email\\"],
+  UserWhereUniqueInput: [\\"id\\", \\"email\\", \\"AND\\", \\"OR\\", \\"NOT\\", \\"posts\\"],
   UserOrderByWithAggregationInput: [\\"id\\", \\"email\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
   UserScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"id\\", \\"email\\"],
   PostWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
   PostOrderByWithRelationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
-  PostWhereUniqueInput: [\\"uuid\\"],
+  PostWhereUniqueInput: [\\"uuid\\", \\"AND\\", \\"OR\\", \\"NOT\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"],
   PostOrderByWithAggregationInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"_count\\", \\"_avg\\", \\"_max\\", \\"_min\\", \\"_sum\\"],
   PostScalarWhereWithAggregatesInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   UserCreateInput: [\\"email\\", \\"posts\\"],
@@ -2076,6 +2103,7 @@ const inputsInfo = {
   StringNullableFilter: [\\"equals\\", \\"in\\", \\"notIn\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"contains\\", \\"startsWith\\", \\"endsWith\\", \\"mode\\", \\"not\\"],
   JsonFilter: [\\"equals\\", \\"path\\", \\"string_contains\\", \\"string_starts_with\\", \\"string_ends_with\\", \\"array_contains\\", \\"array_starts_with\\", \\"array_ends_with\\", \\"lt\\", \\"lte\\", \\"gt\\", \\"gte\\", \\"not\\"],
   UserRelationFilter: [\\"is\\", \\"isNot\\"],
+  SortOrderInput: [\\"sort\\", \\"nulls\\"],
   PostCountOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   PostAvgOrderByAggregateInput: [\\"authorId\\"],
   PostMaxOrderByAggregateInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
@@ -2116,7 +2144,8 @@ const inputsInfo = {
   PostScalarWhereInput: [\\"AND\\", \\"OR\\", \\"NOT\\", \\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\"],
   UserCreateWithoutPostsInput: [\\"email\\"],
   UserCreateOrConnectWithoutPostsInput: [\\"where\\", \\"create\\"],
-  UserUpsertWithoutPostsInput: [\\"update\\", \\"create\\"],
+  UserUpsertWithoutPostsInput: [\\"update\\", \\"create\\", \\"where\\"],
+  UserUpdateToOneWithWhereWithoutPostsInput: [\\"where\\", \\"data\\"],
   UserUpdateWithoutPostsInput: [\\"email\\"],
   PostCreateManyAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"],
   PostUpdateWithoutAuthorInput: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
@@ -2190,6 +2219,7 @@ exports[`emitOnly generator option when only 'relationResolvers' is set should g
   [enums]
     JsonNullValueFilter.ts
     JsonNullValueInput.ts
+    NullsOrder.ts
     PostScalarFieldEnum.ts
     QueryMode.ts
     SortOrder.ts
@@ -2256,6 +2286,7 @@ exports[`emitOnly generator option when only 'relationResolvers' is set should g
       PostUpsertWithWhereUniqueWithoutAuthorInput.ts
       PostWhereInput.ts
       PostWhereUniqueInput.ts
+      SortOrderInput.ts
       StringFieldUpdateOperationsInput.ts
       StringFilter.ts
       StringNullableFilter.ts
@@ -2278,6 +2309,7 @@ exports[`emitOnly generator option when only 'relationResolvers' is set should g
       UserUpdateInput.ts
       UserUpdateManyMutationInput.ts
       UserUpdateOneRequiredWithoutPostsNestedInput.ts
+      UserUpdateToOneWithWhereWithoutPostsInput.ts
       UserUpdateWithoutPostsInput.ts
       UserUpsertWithoutPostsInput.ts
       UserWhereInput.ts

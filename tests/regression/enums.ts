@@ -202,33 +202,28 @@ describe("enums", () => {
     });
   });
 
-  describe("when `orderByNulls` preview feature is enabled", () => {
-    it("should properly generate NullsOrder enum type", async () => {
-      const schema = /* prisma */ `
-        model FirstModel {
-          idField             Int            @id @default(autoincrement())
-          uniqueStringField   String         @unique
-          optionalFloatField  Float?
-          secondModelsField   SecondModel[]
-        }
-        model SecondModel {
-          idField             Int          @id @default(autoincrement())
-          uniqueStringField   String       @unique
-          optionalFloatField  Float?
-          firstModelFieldId   Int
-          firstModelField     FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
-        }
-      `;
+  it("should properly generate NullsOrder enum type", async () => {
+    const schema = /* prisma */ `
+      model FirstModel {
+        idField             Int            @id @default(autoincrement())
+        uniqueStringField   String         @unique
+        optionalFloatField  Float?
+        secondModelsField   SecondModel[]
+      }
+      model SecondModel {
+        idField             Int          @id @default(autoincrement())
+        uniqueStringField   String       @unique
+        optionalFloatField  Float?
+        firstModelFieldId   Int
+        firstModelField     FirstModel   @relation(fields: [firstModelFieldId], references: [idField])
+      }
+    `;
 
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["orderByNulls"],
-      });
-      const nullsOrderTSFile = await readGeneratedFile("/enums/NullsOrder.ts");
-      const enumsIndexTSFile = await readGeneratedFile("/enums/index.ts");
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const nullsOrderTSFile = await readGeneratedFile("/enums/NullsOrder.ts");
+    const enumsIndexTSFile = await readGeneratedFile("/enums/index.ts");
 
-      expect(nullsOrderTSFile).toMatchSnapshot("NullsOrder");
-      expect(enumsIndexTSFile).toMatchSnapshot("enums index");
-    });
+    expect(nullsOrderTSFile).toMatchSnapshot("NullsOrder");
+    expect(enumsIndexTSFile).toMatchSnapshot("enums index");
   });
 });

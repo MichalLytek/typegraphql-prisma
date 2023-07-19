@@ -1,4 +1,4 @@
-import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
+import type { DMMF as PrismaDMMF } from "@prisma/client/runtime/library";
 import { DMMF } from "./types";
 import {
   transformSchema,

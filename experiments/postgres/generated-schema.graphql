@@ -364,6 +364,11 @@ input CreatorMinOrderByAggregateInput {
   name: SortOrder
 }
 
+input CreatorNullableRelationFilter {
+  is: CreatorWhereInput
+  isNot: CreatorWhereInput
+}
+
 input CreatorOrderByRelationAggregateInput {
   _count: SortOrder
 }
@@ -394,11 +399,6 @@ input CreatorOrderByWithRelationAndSearchRelevanceInput {
   likes: ProblemOrderByRelationAggregateInput
   name: SortOrder
   problems: ProblemOrderByRelationAggregateInput
-}
-
-input CreatorRelationFilter {
-  is: CreatorWhereInput
-  isNot: CreatorWhereInput
 }
 
 enum CreatorScalarFieldEnum {
@@ -1685,10 +1685,10 @@ type Mutation {
   createManyProblem(data: [ProblemCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createOneCreator(data: CreatorCreateInput!): Creator!
   createOneDirector(data: DirectorCreateInput!): Director!
-  createOneHidden(data: HiddenCreateInput!): Hidden!
+  createOneHidden(data: HiddenCreateInput): Hidden!
   createOneMainUser(data: MainUserCreateInput!): MainUser!
   createOneMovie(data: MovieCreateInput!): Movie!
-  createOneNativeTypeModel(data: NativeTypeModelCreateInput!): NativeTypeModel!
+  createOneNativeTypeModel(data: NativeTypeModelCreateInput): NativeTypeModel!
   createOnePatient(data: PatientCreateInput!): Patient!
   createOnePost(data: PostCreateInput!): Post!
   createOneProblem(data: ProblemCreateInput!): Problem!
@@ -2789,7 +2789,7 @@ input PostWhereInput {
   authorId: IntFilter
   content: StringNullableFilter
   createdAt: DateTimeFilter
-  editor: MainUserRelationFilter
+  editor: UserNullableRelationFilter
   editorId: IntNullableFilter
   kind: EnumPostKindNullableFilter
   metadata: JsonFilter
@@ -2807,7 +2807,7 @@ input PostWhereUniqueInput {
   authorId: IntFilter
   content: StringNullableFilter
   createdAt: DateTimeFilter
-  editor: MainUserRelationFilter
+  editor: UserNullableRelationFilter
   editorId: IntNullableFilter
   kind: EnumPostKindNullableFilter
   metadata: JsonFilter
@@ -3100,7 +3100,7 @@ input ProblemWhereInput {
   AND: [ProblemWhereInput!]
   NOT: [ProblemWhereInput!]
   OR: [ProblemWhereInput!]
-  creator: CreatorRelationFilter
+  creator: CreatorNullableRelationFilter
   creatorId: IntNullableFilter
   id: IntFilter
   likedBy: CreatorListRelationFilter
@@ -3111,7 +3111,7 @@ input ProblemWhereUniqueInput {
   AND: [ProblemWhereInput!]
   NOT: [ProblemWhereInput!]
   OR: [ProblemWhereInput!]
-  creator: CreatorRelationFilter
+  creator: CreatorNullableRelationFilter
   creatorId: IntNullableFilter
   id: Int
   likedBy: CreatorListRelationFilter
@@ -3282,4 +3282,9 @@ input StringWithAggregatesFilter {
   notIn: [String!]
   search: String
   startsWith: String
+}
+
+input UserNullableRelationFilter {
+  is: MainUserWhereInput
+  isNot: MainUserWhereInput
 }

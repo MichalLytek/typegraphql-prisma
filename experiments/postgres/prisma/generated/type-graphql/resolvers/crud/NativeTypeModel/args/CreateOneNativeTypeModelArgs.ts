@@ -5,7 +5,7 @@ import { NativeTypeModelCreateInput } from "../../../inputs/NativeTypeModelCreat
 @TypeGraphQL.ArgsType()
 export class CreateOneNativeTypeModelArgs {
   @TypeGraphQL.Field(_type => NativeTypeModelCreateInput, {
-    nullable: false
+    nullable: true
   })
-  data!: NativeTypeModelCreateInput;
+  data?: NativeTypeModelCreateInput | undefined;
 }

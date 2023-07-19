@@ -169,6 +169,7 @@ export class UsersOnProjectsRelationsResolver {
 
 exports[`relations resolvers generation should properly generate index files for 1-1 relation resolvers: index 1`] = `
 "export * from \\"./resolvers.index\\";
+export * from \\"./args.index\\";
 "
 `;
 
@@ -375,6 +376,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { PostAuthorArgs } from \\"./args/PostAuthorArgs\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
@@ -382,13 +384,14 @@ export class PostRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => User, {
     nullable: true
   })
-  async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo): Promise<User | null> {
+  async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: PostAuthorArgs): Promise<User | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.findUniqueOrThrow({
       where: {
         uuid: post.uuid,
       },
     }).author({
+      ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }
@@ -429,6 +432,7 @@ exports[`relations resolvers generation should properly generate relation resolv
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { PostAuthorArgs } from \\"./args/PostAuthorArgs\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
@@ -437,13 +441,14 @@ export class PostRelationsResolver {
     nullable: true,
     description: \\"author field doc\\"
   })
-  async postAuthor(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo): Promise<User | null> {
+  async postAuthor(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: PostAuthorArgs): Promise<User | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.findUniqueOrThrow({
       where: {
         uuid: post.uuid,
       },
     }).author({
+      ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }
@@ -555,6 +560,7 @@ exports[`relations resolvers generation should properly generate resolver class 
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { Address } from \\"../../../models/Address\\";
 import { User } from \\"../../../models/User\\";
+import { UserAddressArgs } from \\"./args/UserAddressArgs\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -562,13 +568,14 @@ export class UserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => Address, {
     nullable: true
   })
-  async address(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo): Promise<Address | null> {
+  async address(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UserAddressArgs): Promise<Address | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUniqueOrThrow({
       where: {
         id: user.id,
       },
     }).address({
+      ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }
@@ -581,6 +588,7 @@ exports[`relations resolvers generation should properly generate resolvers class
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { PostAuthorArgs } from \\"./args/PostAuthorArgs\\";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from \\"../../../helpers\\";
 
 @TypeGraphQL.Resolver(_of => Post)
@@ -589,13 +597,14 @@ export class PostRelationsResolver {
     nullable: true,
     description: \\"author field doc\\"
   })
-  async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo): Promise<User | null> {
+  async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: PostAuthorArgs): Promise<User | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.findUniqueOrThrow({
       where: {
         uuid: post.uuid,
       },
     }).author({
+      ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }

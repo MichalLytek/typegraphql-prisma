@@ -12,6 +12,7 @@ import { MainUserRelationFilter } from "../inputs/MainUserRelationFilter";
 import { PostWhereInput } from "../inputs/PostWhereInput";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
+import { UserNullableRelationFilter } from "../inputs/UserNullableRelationFilter";
 
 @TypeGraphQL.InputType("PostWhereUniqueInput", {})
 export class PostWhereUniqueInput {
@@ -85,8 +86,8 @@ export class PostWhereUniqueInput {
   })
   author?: MainUserRelationFilter | undefined;
 
-  @TypeGraphQL.Field(_type => MainUserRelationFilter, {
+  @TypeGraphQL.Field(_type => UserNullableRelationFilter, {
     nullable: true
   })
-  editor?: MainUserRelationFilter | undefined;
+  editor?: UserNullableRelationFilter | undefined;
 }

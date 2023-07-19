@@ -104,6 +104,11 @@ input PostWhereInput {
 }
 
 input PostWhereUniqueInput {
+  AND: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  color: EnumColorFilter
+  content: StringFilter
   uuid: String
 }
 

@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`enums should properly generate NullsOrder enum type: NullsOrder 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+
+export enum NullsOrder {
+  first = \\"first\\",
+  last = \\"last\\"
+}
+TypeGraphQL.registerEnumType(NullsOrder, {
+  name: \\"NullsOrder\\",
+  description: undefined,
+});
+"
+`;
+
+exports[`enums should properly generate NullsOrder enum type: enums index 1`] = `
+"export { FirstModelScalarFieldEnum } from \\"./FirstModelScalarFieldEnum\\";
+export { NullsOrder } from \\"./NullsOrder\\";
+export { QueryMode } from \\"./QueryMode\\";
+export { SecondModelScalarFieldEnum } from \\"./SecondModelScalarFieldEnum\\";
+export { SortOrder } from \\"./SortOrder\\";
+export { TransactionIsolationLevel } from \\"./TransactionIsolationLevel\\";
+"
+`;
+
 exports[`enums should properly generate code for enum with docs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 
@@ -165,6 +189,7 @@ exports[`enums should properly generate standard prisma enums: enums index 1`] =
 "export { JsonNullValueFilter } from \\"./JsonNullValueFilter\\";
 export { JsonNullValueInput } from \\"./JsonNullValueInput\\";
 export { NullableJsonNullValueInput } from \\"./NullableJsonNullValueInput\\";
+export { NullsOrder } from \\"./NullsOrder\\";
 export { QueryMode } from \\"./QueryMode\\";
 export { SampleModelScalarFieldEnum } from \\"./SampleModelScalarFieldEnum\\";
 export { SortOrder } from \\"./SortOrder\\";
@@ -195,29 +220,5 @@ TypeGraphQL.registerEnumType(SampleRenamedModelOrderByRelevanceFieldEnum, {
   name: \\"SampleRenamedModelOrderByRelevanceFieldEnum\\",
   description: undefined,
 });
-"
-`;
-
-exports[`enums when \`orderByNulls\` preview feature is enabled should properly generate NullsOrder enum type: NullsOrder 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-
-export enum NullsOrder {
-  first = \\"first\\",
-  last = \\"last\\"
-}
-TypeGraphQL.registerEnumType(NullsOrder, {
-  name: \\"NullsOrder\\",
-  description: undefined,
-});
-"
-`;
-
-exports[`enums when \`orderByNulls\` preview feature is enabled should properly generate NullsOrder enum type: enums index 1`] = `
-"export { FirstModelScalarFieldEnum } from \\"./FirstModelScalarFieldEnum\\";
-export { NullsOrder } from \\"./NullsOrder\\";
-export { QueryMode } from \\"./QueryMode\\";
-export { SecondModelScalarFieldEnum } from \\"./SecondModelScalarFieldEnum\\";
-export { SortOrder } from \\"./SortOrder\\";
-export { TransactionIsolationLevel } from \\"./TransactionIsolationLevel\\";
 "
 `;

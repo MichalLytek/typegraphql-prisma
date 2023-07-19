@@ -240,9 +240,8 @@ describe("outputs", () => {
     });
   });
 
-  describe("when filteredRelationCount preview feature is enabled", () => {
-    it("should properly generate count classes for relation fields with args", async () => {
-      const schema = /* prisma */ `
+  it("should properly generate count classes for relation fields with args", async () => {
+    const schema = /* prisma */ `
         model FirstModel {
           idField            Int            @id @default(autoincrement())
           uniqueStringField  String         @unique
@@ -258,20 +257,18 @@ describe("outputs", () => {
         }
       `;
 
-      await generateCodeFromSchema(schema, {
-        outputDirPath,
-        previewFeatures: ["filteredRelationCount"],
-      });
-      const firstModelCountTSFile = await readGeneratedFile(
-        "/resolvers/outputs/FirstModelCount.ts",
-      );
-      const outputsIndexTSFile = await readGeneratedFile(
-        "/resolvers/outputs/index.ts",
-      );
-
-      expect(firstModelCountTSFile).toMatchSnapshot("FirstModelCount");
-      expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
+    await generateCodeFromSchema(schema, {
+      outputDirPath,
     });
+    const firstModelCountTSFile = await readGeneratedFile(
+      "/resolvers/outputs/FirstModelCount.ts",
+    );
+    const outputsIndexTSFile = await readGeneratedFile(
+      "/resolvers/outputs/index.ts",
+    );
+
+    expect(firstModelCountTSFile).toMatchSnapshot("FirstModelCount");
+    expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
   });
 
   describe("when `emitIsAbstract` generator option is enabled", () => {

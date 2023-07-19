@@ -21,10 +21,22 @@ var __toCommonJS = (mod2) => __copyProps(__defProp({}, "__esModule", { value: tr
 var index_browser_exports = {};
 __export(index_browser_exports, {
   Decimal: () => decimal_default,
+  Public: () => public_exports,
   makeStrictEnum: () => makeStrictEnum,
   objectEnumValues: () => objectEnumValues
 });
 module.exports = __toCommonJS(index_browser_exports);
+
+// src/runtime/core/public/index.ts
+var public_exports = {};
+__export(public_exports, {
+  validator: () => validator
+});
+
+// src/runtime/core/public/validator.ts
+function validator(..._args) {
+  return (args) => args;
+}
 
 // src/runtime/object-enums.ts
 var secret = Symbol();
@@ -2399,6 +2411,7 @@ var decimal_default = Decimal;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Decimal,
+  Public,
   makeStrictEnum,
   objectEnumValues
 });

@@ -57,6 +57,7 @@ exports[`omit-fields when \`omitInputFieldsByDefault\` generator option is provi
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrderInput } from \\"../inputs/SortOrderInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\", {})
@@ -71,10 +72,10 @@ export class UserOrderByWithRelationInput {
   })
   name?: \\"asc\\" | \\"desc\\" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  balance?: \\"asc\\" | \\"desc\\" | undefined;
+  balance?: SortOrderInput | undefined;
 }
 "
 `;
@@ -232,9 +233,42 @@ exports[`omit-fields when \`omitInputFieldsByDefault\` generator option is provi
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { DateTimeFilter } from \\"../inputs/DateTimeFilter\\";
+import { FloatNullableFilter } from \\"../inputs/FloatNullableFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+import { UserWhereInput } from \\"../inputs/UserWhereInput\\";
 
 @TypeGraphQL.InputType(\\"UserWhereUniqueInput\\", {})
 export class UserWhereUniqueInput {
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  AND?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  OR?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  NOT?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFilter, {
+    nullable: true
+  })
+  dateOfBirth?: DateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  name?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => FloatNullableFilter, {
+    nullable: true
+  })
+  balance?: FloatNullableFilter | undefined;
 }
 "
 `;
@@ -329,6 +363,7 @@ exports[`omit-fields when \`omitInputFieldsByDefault\` generator option is provi
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrderInput } from \\"../inputs/SortOrderInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\", {})
@@ -348,10 +383,10 @@ export class UserOrderByWithRelationInput {
   })
   name?: \\"asc\\" | \\"desc\\" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  balance?: \\"asc\\" | \\"desc\\" | undefined;
+  balance?: SortOrderInput | undefined;
 }
 "
 `;
@@ -519,6 +554,10 @@ exports[`omit-fields when \`omitInputFieldsByDefault\` generator option is provi
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { DateTimeFilter } from \\"../inputs/DateTimeFilter\\";
+import { FloatNullableFilter } from \\"../inputs/FloatNullableFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+import { UserWhereInput } from \\"../inputs/UserWhereInput\\";
 
 @TypeGraphQL.InputType(\\"UserWhereUniqueInput\\", {})
 export class UserWhereUniqueInput {
@@ -526,6 +565,36 @@ export class UserWhereUniqueInput {
     nullable: true
   })
   id?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  AND?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  OR?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  NOT?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFilter, {
+    nullable: true
+  })
+  dateOfBirth?: DateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  name?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => FloatNullableFilter, {
+    nullable: true
+  })
+  balance?: FloatNullableFilter | undefined;
 }
 "
 `;
@@ -613,6 +682,7 @@ exports[`omit-fields when model field has \`omit(input: true)\` set should prope
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrderInput } from \\"../inputs/SortOrderInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\", {})
@@ -778,6 +848,10 @@ exports[`omit-fields when model field has \`omit(input: true)\` set should prope
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { DateTimeFilter } from \\"../inputs/DateTimeFilter\\";
+import { FloatNullableFilter } from \\"../inputs/FloatNullableFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+import { UserWhereInput } from \\"../inputs/UserWhereInput\\";
 
 @TypeGraphQL.InputType(\\"UserWhereUniqueInput\\", {})
 export class UserWhereUniqueInput {
@@ -785,6 +859,31 @@ export class UserWhereUniqueInput {
     nullable: true
   })
   id?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  AND?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  OR?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  NOT?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFilter, {
+    nullable: true
+  })
+  dateOfBirth?: DateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  name?: StringFilter | undefined;
 }
 "
 `;
@@ -851,6 +950,7 @@ exports[`omit-fields when model field has \`omit(output: true)\` set should prop
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { SortOrderInput } from \\"../inputs/SortOrderInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
 @TypeGraphQL.InputType(\\"UserOrderByWithRelationInput\\", {})
@@ -870,10 +970,10 @@ export class UserOrderByWithRelationInput {
   })
   name?: \\"asc\\" | \\"desc\\" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
+  @TypeGraphQL.Field(_type => SortOrderInput, {
     nullable: true
   })
-  balance?: \\"asc\\" | \\"desc\\" | undefined;
+  balance?: SortOrderInput | undefined;
 }
 "
 `;
@@ -1041,6 +1141,10 @@ exports[`omit-fields when model field has \`omit(output: true)\` set should prop
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { DateTimeFilter } from \\"../inputs/DateTimeFilter\\";
+import { FloatNullableFilter } from \\"../inputs/FloatNullableFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+import { UserWhereInput } from \\"../inputs/UserWhereInput\\";
 
 @TypeGraphQL.InputType(\\"UserWhereUniqueInput\\", {})
 export class UserWhereUniqueInput {
@@ -1048,6 +1152,36 @@ export class UserWhereUniqueInput {
     nullable: true
   })
   id?: number | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  AND?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  OR?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereInput], {
+    nullable: true
+  })
+  NOT?: UserWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFilter, {
+    nullable: true
+  })
+  dateOfBirth?: DateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  name?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => FloatNullableFilter, {
+    nullable: true
+  })
+  balance?: FloatNullableFilter | undefined;
 }
 "
 `;

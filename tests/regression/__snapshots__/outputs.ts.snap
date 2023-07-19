@@ -416,18 +416,67 @@ export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
 "
 `;
 
+exports[`outputs should properly generate count classes for relation fields with args: FirstModelCount 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+import { FirstModelCountSecondModelsFieldArgs } from \\"./args/FirstModelCountSecondModelsFieldArgs\\";
+
+@TypeGraphQL.ObjectType(\\"FirstModelCount\\", {})
+export class FirstModelCount {
+  secondModelsField!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    name: \\"secondModelsField\\",
+    nullable: false
+  })
+  getSecondModelsField(@TypeGraphQL.Root() root: FirstModelCount, @TypeGraphQL.Args() args: FirstModelCountSecondModelsFieldArgs): number {
+    return root.secondModelsField;
+  }
+}
+"
+`;
+
+exports[`outputs should properly generate count classes for relation fields with args: outputs index 1`] = `
+"export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
+export { AggregateFirstModel } from \\"./AggregateFirstModel\\";
+export { AggregateSecondModel } from \\"./AggregateSecondModel\\";
+export { FirstModelAvgAggregate } from \\"./FirstModelAvgAggregate\\";
+export { FirstModelCount } from \\"./FirstModelCount\\";
+export { FirstModelCountAggregate } from \\"./FirstModelCountAggregate\\";
+export { FirstModelGroupBy } from \\"./FirstModelGroupBy\\";
+export { FirstModelMaxAggregate } from \\"./FirstModelMaxAggregate\\";
+export { FirstModelMinAggregate } from \\"./FirstModelMinAggregate\\";
+export { FirstModelSumAggregate } from \\"./FirstModelSumAggregate\\";
+export { SecondModelAvgAggregate } from \\"./SecondModelAvgAggregate\\";
+export { SecondModelCountAggregate } from \\"./SecondModelCountAggregate\\";
+export { SecondModelGroupBy } from \\"./SecondModelGroupBy\\";
+export { SecondModelMaxAggregate } from \\"./SecondModelMaxAggregate\\";
+export { SecondModelMinAggregate } from \\"./SecondModelMinAggregate\\";
+export { SecondModelSumAggregate } from \\"./SecondModelSumAggregate\\";
+export * from \\"./args\\";
+"
+`;
+
 exports[`outputs should properly generate count classes for relation fields: FirstModelCount 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { FirstModelCountSecondModelsFieldArgs } from \\"./args/FirstModelCountSecondModelsFieldArgs\\";
 
 @TypeGraphQL.ObjectType(\\"FirstModelCount\\", {})
 export class FirstModelCount {
+  secondModelsField!: number;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    name: \\"secondModelsField\\",
     nullable: false
   })
-  secondModelsField!: number;
+  getSecondModelsField(@TypeGraphQL.Root() root: FirstModelCount, @TypeGraphQL.Args() args: FirstModelCountSecondModelsFieldArgs): number {
+    return root.secondModelsField;
+  }
 }
 "
 `;
@@ -449,6 +498,7 @@ export { SecondModelGroupBy } from \\"./SecondModelGroupBy\\";
 export { SecondModelMaxAggregate } from \\"./SecondModelMaxAggregate\\";
 export { SecondModelMinAggregate } from \\"./SecondModelMinAggregate\\";
 export { SecondModelSumAggregate } from \\"./SecondModelSumAggregate\\";
+export * from \\"./args\\";
 "
 `;
 
@@ -767,15 +817,21 @@ exports[`outputs when \`emitIsAbstract\` generator option is enabled should prop
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
 import { DecimalJSScalar } from \\"../../scalars\\";
+import { FirstModelCountSecondModelsFieldArgs } from \\"./args/FirstModelCountSecondModelsFieldArgs\\";
 
 @TypeGraphQL.ObjectType(\\"FirstModelCount\\", {
   isAbstract: true
 })
 export class FirstModelCount {
+  secondModelsField!: number;
+
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    name: \\"secondModelsField\\",
     nullable: false
   })
-  secondModelsField!: number;
+  getSecondModelsField(@TypeGraphQL.Root() root: FirstModelCount, @TypeGraphQL.Args() args: FirstModelCountSecondModelsFieldArgs): number {
+    return root.secondModelsField;
+  }
 }
 "
 `;
@@ -818,49 +874,6 @@ export class AggregateSample {
   })
   _max!: SampleMaxAggregate | null;
 }
-"
-`;
-
-exports[`outputs when filteredRelationCount preview feature is enabled should properly generate count classes for relation fields with args: FirstModelCount 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import * as GraphQLScalars from \\"graphql-scalars\\";
-import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
-import { DecimalJSScalar } from \\"../../scalars\\";
-import { FirstModelCountSecondModelsFieldArgs } from \\"./args/FirstModelCountSecondModelsFieldArgs\\";
-
-@TypeGraphQL.ObjectType(\\"FirstModelCount\\", {})
-export class FirstModelCount {
-  secondModelsField!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    name: \\"secondModelsField\\",
-    nullable: false
-  })
-  getSecondModelsField(@TypeGraphQL.Root() root: FirstModelCount, @TypeGraphQL.Args() args: FirstModelCountSecondModelsFieldArgs): number {
-    return root.secondModelsField;
-  }
-}
-"
-`;
-
-exports[`outputs when filteredRelationCount preview feature is enabled should properly generate count classes for relation fields with args: outputs index 1`] = `
-"export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
-export { AggregateFirstModel } from \\"./AggregateFirstModel\\";
-export { AggregateSecondModel } from \\"./AggregateSecondModel\\";
-export { FirstModelAvgAggregate } from \\"./FirstModelAvgAggregate\\";
-export { FirstModelCount } from \\"./FirstModelCount\\";
-export { FirstModelCountAggregate } from \\"./FirstModelCountAggregate\\";
-export { FirstModelGroupBy } from \\"./FirstModelGroupBy\\";
-export { FirstModelMaxAggregate } from \\"./FirstModelMaxAggregate\\";
-export { FirstModelMinAggregate } from \\"./FirstModelMinAggregate\\";
-export { FirstModelSumAggregate } from \\"./FirstModelSumAggregate\\";
-export { SecondModelAvgAggregate } from \\"./SecondModelAvgAggregate\\";
-export { SecondModelCountAggregate } from \\"./SecondModelCountAggregate\\";
-export { SecondModelGroupBy } from \\"./SecondModelGroupBy\\";
-export { SecondModelMaxAggregate } from \\"./SecondModelMaxAggregate\\";
-export { SecondModelMinAggregate } from \\"./SecondModelMinAggregate\\";
-export { SecondModelSumAggregate } from \\"./SecondModelSumAggregate\\";
-export * from \\"./args\\";
 "
 `;
 

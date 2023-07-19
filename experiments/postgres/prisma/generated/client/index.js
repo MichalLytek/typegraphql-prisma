@@ -8,7 +8,6 @@ const {
   PrismaClientInitializationError,
   PrismaClientValidationError,
   NotFoundError,
-  decompressFromBase64,
   getPrismaClient,
   sqltag,
   empty,
@@ -21,6 +20,7 @@ const {
   Extensions,
   warnOnce,
   defineDmmfProperty,
+  Public,
 } = require('./runtime/library')
 
 
@@ -29,12 +29,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.15.0
- * Query Engine version: 8fbc245156db7124f997f4cecdd8d1219e360944
+ * Prisma Client JS version: 5.0.0
+ * Query Engine version: 6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
  */
 Prisma.prismaVersion = {
-  client: "4.15.0",
-  engine: "8fbc245156db7124f997f4cecdd8d1219e360944"
+  client: "5.0.0",
+  engine: "6b0aef69b7cdfc787f822ecd7cdc76d5f1991584"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -52,14 +52,13 @@ Prisma.sql = sqltag
 Prisma.empty = empty
 Prisma.join = join
 Prisma.raw = raw
-Prisma.validator = () => (val) => val
+Prisma.validator = Public.validator
 
 /**
 * Extensions
 */
 Prisma.getExtensionContext = Extensions.getExtensionContext
 Prisma.defineExtension = Extensions.defineExtension
-
 
 /**
  * Shorthand utilities for JSON filtering
@@ -81,100 +80,23 @@ Prisma.NullTypes = {
  * Enums
  */
 
-exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
+exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
+  Serializable: 'Serializable'
+});
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
   name: 'name',
-  slug: 'slug'
-};
-
-exports.Prisma.CategoryScalarFieldEnum = {
-  name: 'name',
-  slug: 'slug',
-  number: 'number'
-};
-
-exports.Prisma.CreatorOrderByRelevanceFieldEnum = {
-  name: 'name'
-};
-
-exports.Prisma.CreatorScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.DirectorOrderByRelevanceFieldEnum = {
-  firstName: 'firstName',
-  lastName: 'lastName'
-};
-
-exports.Prisma.DirectorScalarFieldEnum = {
-  firstName: 'firstName',
-  lastName: 'lastName'
-};
-
-exports.Prisma.EquipmentOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.EquipmentScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.HiddenOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.HiddenScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
-};
-
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
-};
-
-exports.Prisma.MovieOrderByRelevanceFieldEnum = {
-  directorFirstName: 'directorFirstName',
-  directorLastName: 'directorLastName',
-  title: 'title'
-};
-
-exports.Prisma.MovieScalarFieldEnum = {
-  directorFirstName: 'directorFirstName',
-  directorLastName: 'directorLastName',
-  title: 'title'
-};
-
-exports.Prisma.NativeTypeModelScalarFieldEnum = {
-  id: 'id',
-  bigInt: 'bigInt',
-  byteA: 'byteA',
-  decimal: 'decimal'
-};
-
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
-exports.Prisma.PatientOrderByRelevanceFieldEnum = {
-  firstName: 'firstName',
-  lastName: 'lastName',
-  email: 'email'
-};
-
-exports.Prisma.PatientScalarFieldEnum = {
-  firstName: 'firstName',
-  lastName: 'lastName',
-  email: 'email'
+  age: 'age',
+  balance: 'balance',
+  amount: 'amount',
+  role: 'role',
+  grades: 'grades',
+  aliases: 'aliases'
 };
 
 exports.Prisma.PostScalarFieldEnum = {
@@ -191,8 +113,27 @@ exports.Prisma.PostScalarFieldEnum = {
   metadata: 'metadata'
 };
 
-exports.Prisma.ProblemOrderByRelevanceFieldEnum = {
-  problemText: 'problemText'
+exports.Prisma.CategoryScalarFieldEnum = {
+  name: 'name',
+  slug: 'slug',
+  number: 'number'
+};
+
+exports.Prisma.PatientScalarFieldEnum = {
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email'
+};
+
+exports.Prisma.MovieScalarFieldEnum = {
+  directorFirstName: 'directorFirstName',
+  directorLastName: 'directorLastName',
+  title: 'title'
+};
+
+exports.Prisma.DirectorScalarFieldEnum = {
+  firstName: 'firstName',
+  lastName: 'lastName'
 };
 
 exports.Prisma.ProblemScalarFieldEnum = {
@@ -201,9 +142,26 @@ exports.Prisma.ProblemScalarFieldEnum = {
   creatorId: 'creatorId'
 };
 
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
+exports.Prisma.CreatorScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.NativeTypeModelScalarFieldEnum = {
+  id: 'id',
+  bigInt: 'bigInt',
+  byteA: 'byteA',
+  decimal: 'decimal'
+};
+
+exports.Prisma.EquipmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.HiddenScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.SortOrder = {
@@ -211,12 +169,19 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
-  Serializable: 'Serializable'
-});
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 
 exports.Prisma.UserOrderByRelevanceFieldEnum = {
   email: 'email',
@@ -224,16 +189,10 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   aliases: 'aliases'
 };
 
-exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
-  name: 'name',
-  age: 'age',
-  balance: 'balance',
-  amount: 'amount',
-  role: 'role',
-  grades: 'grades',
-  aliases: 'aliases'
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 exports.Prisma.postOrderByRelevanceFieldEnum = {
@@ -242,14 +201,54 @@ exports.Prisma.postOrderByRelevanceFieldEnum = {
   subtitle: 'subtitle',
   content: 'content'
 };
-exports.PostKind = {
-  BLOG: 'BLOG',
-  ADVERT: 'ADVERT'
+
+exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  slug: 'slug'
 };
 
+exports.Prisma.PatientOrderByRelevanceFieldEnum = {
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email'
+};
+
+exports.Prisma.MovieOrderByRelevanceFieldEnum = {
+  directorFirstName: 'directorFirstName',
+  directorLastName: 'directorLastName',
+  title: 'title'
+};
+
+exports.Prisma.DirectorOrderByRelevanceFieldEnum = {
+  firstName: 'firstName',
+  lastName: 'lastName'
+};
+
+exports.Prisma.ProblemOrderByRelevanceFieldEnum = {
+  problemText: 'problemText'
+};
+
+exports.Prisma.CreatorOrderByRelevanceFieldEnum = {
+  name: 'name'
+};
+
+exports.Prisma.EquipmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.HiddenOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
 exports.Role = {
   USER: 'USER',
   ADMIN: 'ADMIN'
+};
+
+exports.PostKind = {
+  BLOG: 'BLOG',
+  ADVERT: 'ADVERT'
 };
 
 exports.Prisma.ModelName = {
@@ -290,12 +289,7 @@ const config = {
       }
     ],
     "previewFeatures": [
-      "fullTextSearch",
-      "orderByNulls",
-      "filteredRelationCount",
-      "clientExtensions",
-      "extendedWhereUnique",
-      "jsonProtocol"
+      "fullTextSearch"
     ],
     "isCustomOutput": true
   },
@@ -304,8 +298,8 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "4.15.0",
-  "engineVersion": "8fbc245156db7124f997f4cecdd8d1219e360944",
+  "clientVersion": "5.0.0",
+  "engineVersion": "6b0aef69b7cdfc787f822ecd7cdc76d5f1991584",
   "datasourceNames": [
     "postgres"
   ],
@@ -335,7 +329,6 @@ warnEnvConflicts({
     rootEnvPath: config.relativeEnvPaths.rootEnvPath && path.resolve(config.dirname, config.relativeEnvPaths.rootEnvPath),
     schemaEnvPath: config.relativeEnvPaths.schemaEnvPath && path.resolve(config.dirname, config.relativeEnvPaths.schemaEnvPath)
 })
-
 
 const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient

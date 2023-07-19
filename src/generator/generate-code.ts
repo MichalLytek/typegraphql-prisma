@@ -1,4 +1,4 @@
-import { DMMF as PrismaDMMF } from "@prisma/client/runtime";
+import type { DMMF as PrismaDMMF } from "@prisma/client/runtime/library";
 import { Project, ScriptTarget, ModuleKind, CompilerOptions } from "ts-morph";
 import path from "path";
 import { exec } from "node:child_process";
@@ -538,7 +538,9 @@ export default async function generateCode(
     }
     await project.save();
     if (options.formatGeneratedCode === "prettier") {
-      await execa(`npx prettier --write ${baseDirPath}`);
+      await execa(
+        `npx prettier --write --ignore-path .prettierignore ${baseDirPath}`,
+      );
     }
   }
 }

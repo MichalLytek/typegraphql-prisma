@@ -87,6 +87,11 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+enum NullsOrder {
+  first
+  last
+}
+
 type Query {
   users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
@@ -99,6 +104,11 @@ enum QueryMode {
 enum SortOrder {
   asc
   desc
+}
+
+input SortOrderInput {
+  nulls: NullsOrder
+  sort: SortOrder!
 }
 
 input StringFilter {
@@ -147,7 +157,7 @@ input UserCreateInput {
 input UserOrderByWithRelationInput {
   dateField: SortOrder
   intIdField: SortOrder
-  optionalStringField: SortOrder
+  optionalStringField: SortOrderInput
   uniqueStringField: SortOrder
 }
 
@@ -169,7 +179,12 @@ input UserWhereInput {
 }
 
 input UserWhereUniqueInput {
+  AND: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  dateField: DateTimeFilter
   intIdField: Int
+  optionalStringField: StringNullableFilter
   uniqueStringField: String
 }"
 `;
