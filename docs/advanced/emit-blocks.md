@@ -3,12 +3,12 @@ title: Emit only selected blocks
 sidebar_label: Emit selected blocks
 ---
 
-If you don't want to have generated all the CRUD API with all resolvers, arguments, inputs, outputs, models, etc., you can provide an `emitOnly` generator option, which accepts a string list of values: `enums`, `models`, `crudResolvers`, `relationResolvers`, `inputs` or `outputs`, e.g.:
+If you don't want to have generated all the CRUD API with all resolvers, arguments, inputs, outputs, models, etc., you can provide an `emitOnly` generator option, which accepts an array of values: `enums`, `models`, `crudResolvers`, `relationResolvers`, `inputs` or `outputs`, e.g.:
 
 ```prisma {3}
 generator typegraphql {
   provider = "typegraphql-prisma"
-  emitOnly = "models,inputs"
+  emitOnly = ["models", "inputs"]
 }
 ```
 

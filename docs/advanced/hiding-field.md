@@ -83,19 +83,19 @@ In some cases, it might become repetitive to add `@TypeGraphQL.omit` to every fi
 That's why you can set in generator options to omit selected fields by default.
 
 Basically, there are two options you can set in - `omitInputFieldsByDefault` and `omitOutputFieldsByDefault`.
-They both accept a coma-separated string of field names:
+They both accept an array of field names:
 
 ```prisma {3,4}
 generator typegraphql {
   provider                  = "typegraphql-prisma"
-  omitInputFieldsByDefault  = "createdAt,updatedAt"
-  omitOutputFieldsByDefault = "password"
+  omitInputFieldsByDefault  = ["createdAt", "updatedAt"]
+  omitOutputFieldsByDefault = ["password"]
 }
 ```
 
 The list is then used to compare against each model to find matching fields and apply the default omit settings to hide those fields.
 
-Unfortunatelly, the Prisma parser for generator options is very limited and doesn't support arrays or complex objects, so for now the functionality is limited just to boolean-like behavior, with no options for granular control like `input: ["update", "where", "orderBy"]`.
+Unfortunately, the Prisma parser for generator options is very limited and doesn't support complex objects, so for now the functionality is limited just to boolean-like behavior, with no options for granular control like `input: ["update", "where", "orderBy"]`.
 
 ### Overriding default omit settings
 

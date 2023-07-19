@@ -19,7 +19,7 @@ generator typegraphql {
   // useOriginalMapping       = true
   useUncheckedScalarInputs = false
   emitIdAsIDType           = true
-  // emitOnly                 = "crudResolvers"
+  // emitOnly                 = ["enums", "models"]
   customPrismaImportPath   = "../client"
   contextPrismaKey         = "prismaClient"
   useSimpleInputs          = true

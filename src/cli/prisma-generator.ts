@@ -14,6 +14,7 @@ import {
   parseStringBoolean,
   parseStringArray,
   parseStringEnum,
+  parseString,
 } from "./helpers";
 
 export async function generate(options: GeneratorOptions) {
@@ -50,8 +51,14 @@ export async function generate(options: GeneratorOptions) {
     emitRedundantTypesInfo: parseStringBoolean(
       generatorConfig.emitRedundantTypesInfo,
     ),
-    customPrismaImportPath: generatorConfig.customPrismaImportPath,
-    contextPrismaKey: generatorConfig.contextPrismaKey,
+    customPrismaImportPath: parseString(
+      generatorConfig.customPrismaImportPath,
+      "customPrismaImportPath",
+    ),
+    contextPrismaKey: parseString(
+      generatorConfig.contextPrismaKey,
+      "contextPrismaKey",
+    ),
     omitInputFieldsByDefault: parseStringArray(
       generatorConfig.omitInputFieldsByDefault,
       "omitInputFieldsByDefault",
