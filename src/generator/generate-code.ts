@@ -1,4 +1,4 @@
-import type { DMMF as PrismaDMMF } from "@prisma/client/runtime/library";
+import type { DMMF as PrismaDMMF } from "@prisma/generator-helper";
 import { Project, ScriptTarget, ModuleKind, CompilerOptions } from "ts-morph";
 import path from "path";
 import { exec } from "node:child_process";
