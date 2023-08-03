@@ -17,15 +17,15 @@ https://typegraphql.com/docs/installation.html
 
 After that, you have to install the generator, as a dev dependency:
 
-```sh
-$ npm i -D typegraphql-prisma
+```terminal
+npm i -D typegraphql-prisma
 ```
 
 Furthermore, `typegraphql-prisma` requires Prisma to work properly, so please install Prisma dependencies if you don't have it already installed:
 
-```sh
-$ npm i -D prisma
-$ npm i @prisma/client
+```terminal
+npm i -D prisma
+npm i @prisma/client
 ```
 
 :::caution
@@ -39,20 +39,20 @@ Otherwise, the runtime check will report an error when you run the generator.
 
 You also need to install the GraphQL Scalars library (to support the Prisma `Json`, `BigInt` and `Byte` types):
 
-```sh
-$ npm i graphql-scalars
+```terminal
+npm i graphql-scalars
 ```
 
 In order to properly support the aggregate and group by queries, the `graphql-fields` package is used, so it also has to be installed:
 
-```sh
-$ npm i graphql-fields @types/graphql-fields
+```terminal
+npm i graphql-fields @types/graphql-fields
 ```
 
 Finally, please also install the `tslib` package, which is required for [applying the additional decorators](../advanced/additional-decorators.md) properly:
 
-```sh
-$ npm i tslib
+```terminal
+npm i tslib
 ```
 
 ### TypeScript configuration
