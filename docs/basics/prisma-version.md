@@ -28,7 +28,7 @@ So in order to prevent `typegraphql-prisma` users from creating issues on GitHub
 If you want or need to try other version of Prisma, you can use `SKIP_PRISMA_VERSION_CHECK` env variable to suppress that error:
 
 ```sh
-$ SKIP_PRISMA_VERSION_CHECK=true npx prisma generate
+SKIP_PRISMA_VERSION_CHECK=true npx prisma generate
 ```
 
 This way there will be no Prisma version check performed and no error thrown. However, using this mode means you are not allowed to report any bug issues as only selected Prisma versions are supported by the `typegraphql-prisma` generator.
