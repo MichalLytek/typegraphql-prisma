@@ -58,6 +58,7 @@ const baseCompilerOptions: CompilerOptions = {
   emitDecoratorMetadata: true,
   experimentalDecorators: true,
   esModuleInterop: true,
+  skipLibCheck: true,
 };
 
 export default async function generateCode(
