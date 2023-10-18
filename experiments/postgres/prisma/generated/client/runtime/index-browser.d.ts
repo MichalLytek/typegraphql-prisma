@@ -11,7 +11,7 @@ declare type Args<T, F extends Operation> = T extends {
             };
         };
     };
-} ? T[symbol]['types']['operations'][F]['args'] : never;
+} ? T[symbol]['types']['operations'][F]['args'] : any;
 
 declare class DbNull extends NullTypesEnumValue {
 }
@@ -283,9 +283,30 @@ export declare class Decimal {
     static readonly EUCLID: 9;
 }
 
-declare type Exact<A, W> = (W extends A ? {
-    [K in keyof W]: K extends keyof A ? Exact<A[K], W[K]> : never;
-} : W) | (A extends Narrowable ? A : never);
+/**
+ * Detect the current JavaScript runtime following
+ * the WinterCG Runtime Keys proposal:
+ *
+ * - `edge-routine` Alibaba Cloud Edge Routine
+ * - `workerd` Cloudflare Workers
+ * - `deno` Deno and Deno Deploy
+ * - `lagon` Lagon
+ * - `react-native` React Native
+ * - `netlify` Netlify Edge Functions
+ * - `electron` Electron
+ * - `node` Node.js
+ * - `bun` Bun
+ * - `edge-light` Vercel Edge Functions
+ * - `fastly` Fastly Compute@Edge
+ *
+ * @see https://runtime-keys.proposal.wintercg.org/
+ * @returns {Runtime}
+ */
+export declare function detectRuntime(): Runtime;
+
+declare type Exact<A, W> = (A extends unknown ? (W extends A ? {
+    [K in keyof A]: Exact<A[K], W[K]>;
+} : W) : never) | (A extends Narrowable ? A : never);
 
 declare class JsonNull extends NullTypesEnumValue {
 }
@@ -345,6 +366,8 @@ declare namespace Public {
     }
 }
 export { Public }
+
+declare type Runtime = "edge-routine" | "workerd" | "deno" | "lagon" | "react-native" | "netlify" | "electron" | "node" | "bun" | "edge-light" | "fastly" | "unknown";
 
 declare function validator<V>(): <S>(select: Exact<S, V>) => S;
 

@@ -29,10 +29,14 @@ npm i @prisma/client
 ```
 
 :::caution
-Be aware that `typegraphql-prisma` is designed to work with a selected versions of `prisma`.
+Be aware that `typegraphql-prisma` is designed to work with a selected versions of Prisma.
+This generator is designed to work and tested with the features of the `5.0.0` release.
 
-Please make sure you use `prisma` and `@prisma/client` of version matching `^4.15.0`.
-Otherwise, the runtime check will report an error when you run the generator.
+You can update both `prisma` and `@prisma/client` to a newer version, matching `^5.0.0`, like `5.4.2`, in order to receive important bugfixes.
+However, make sure you don't use the new features from a newer Prisma version, especially the ones behind a preview flag.
+
+If you encounter a new Prisma feature not supported yet, please check on GitHub issues and create a new issue, if that wasn't already reported, and downgrade the Prisma version, if needed.
+
 :::
 
 ### Additional dependencies

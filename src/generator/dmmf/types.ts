@@ -4,6 +4,8 @@ export namespace DMMF {
   export interface Document {
     datamodel: Datamodel;
     schema: Schema;
+    // mappings: Mappings;
+    // additional props:
     modelMappings: ModelMapping[];
   }
   export interface Enum {
@@ -11,7 +13,7 @@ export namespace DMMF {
     // values: EnumValue[];
     dbName?: string | null;
     // documentation?: string;
-    // additional props
+    // additional props:
     typeName: string;
     docs: string | undefined;
     valuesMap: Array<{ name: string; value: string }>;
@@ -33,13 +35,12 @@ export namespace DMMF {
     name: string;
     dbName: string | null;
     fields: ModelField[];
-    // fieldMap?: Record<string, Field>;
     uniqueFields: string[][];
     uniqueIndexes: UniqueIndex[];
     // documentation?: string;
     primaryKey: PrimaryKey | null;
-    // [key: string]: any;
-    // additional props
+    // isGenerated?: boolean;
+    // additional props:
     typeName: string;
     docs: string | undefined;
     plural: string | undefined;
@@ -74,7 +75,7 @@ export namespace DMMF {
     relationName?: string;
     // documentation?: string;
     // [key: string]: any;
-    // additional props
+    // additional props:
     type: string;
     location: FieldLocation;
     typeFieldAlias?: string;
@@ -94,6 +95,9 @@ export namespace DMMF {
     inputTypes: InputType[];
     outputTypes: OutputType[];
     enums: Enum[];
+    // fieldRefTypes: {
+    //   prisma?: FieldRefType[];
+    // };
   }
   export interface Query {
     name: string;
@@ -105,6 +109,15 @@ export namespace DMMF {
     isRequired: boolean;
     isList: boolean;
   }
+  export type TypeRef<AllowedLocations extends FieldLocation> = {
+    isList: boolean;
+    type: string;
+    location: AllowedLocations;
+    namespace?: FieldNamespace;
+  };
+  export type InputTypeRef = TypeRef<
+    "scalar" | "inputObjectTypes" | "enumTypes" | "fieldRefTypes"
+  >;
   export type ArgType = string | InputType | Enum;
   export interface SchemaArgInputType {
     isList: boolean;
@@ -119,9 +132,9 @@ export namespace DMMF {
     comment?: string;
     isNullable: boolean;
     isRequired: boolean;
-    // inputTypes: SchemaArgInputType[];
+    // inputTypes: InputTypeRef[];
     deprecation?: Deprecation;
-    // additional props
+    // additional props:
     selectedInputType: SchemaArgInputType;
     typeName: string;
     typeGraphQLType: string;
@@ -132,30 +145,26 @@ export namespace DMMF {
   export interface OutputType {
     name: string;
     // fields: SchemaField[];
-    // fieldMap?: Record<string, SchemaField>;
-    // additional props
+    // additional props:
     fields: OutputSchemaField[];
-    // modelName: string;
     typeName: string;
   }
   export interface SchemaField {
     name: string;
-    // isNullable?: boolean;
-    // outputType: {
-    //   type: string | OutputType | Enum;
-    //   isList: boolean;
-    //   isRequired: boolean;
-    //   kind: FieldKind;
-    // };
-    outputType: TypeInfo;
+    isNullable?: boolean;
+    // outputType: OutputTypeRef;
     args: SchemaArg[];
     deprecation?: Deprecation;
     documentation?: string;
-    // additional props
+    // additional props:
+    outputType: TypeInfo;
     typeGraphQLType: string;
     fieldTSType: string;
     isRequired: boolean;
   }
+  export type OutputTypeRef = TypeRef<
+    "scalar" | "outputObjectTypes" | "enumTypes"
+  >;
   export interface Deprecation {
     sinceVersion: string;
     reason: string;
@@ -167,7 +176,7 @@ export namespace DMMF {
     isList: boolean;
     location: FieldLocation;
     namespace?: FieldNamespace;
-    // additional props
+    // additional props:
     type: string;
   }
   // additional type
@@ -184,10 +193,15 @@ export namespace DMMF {
       source?: string;
     };
     fields: SchemaArg[];
-    // fieldMap?: Record<string, SchemaArg>;
-    // additional props
+    // additional props:
     typeName: string;
   }
+  export interface FieldRefType {
+    name: string;
+    allowTypes: FieldRefAllowType[];
+    fields: SchemaArg[];
+  }
+  export type FieldRefAllowType = TypeRef<"scalar" | "enumTypes">;
   export interface ModelMapping {
     // model: string;
     // plural: string;

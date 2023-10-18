@@ -395,11 +395,9 @@ function transformMapping(
 }
 
 function selectInputTypeFromTypes(dmmfDocument: DmmfDocument) {
-  return (
-    inputTypes: PrismaDMMF.SchemaArgInputType[],
-  ): DMMF.SchemaArgInputType => {
+  return (inputTypes: PrismaDMMF.InputTypeRef[]): DMMF.SchemaArgInputType => {
     const { useUncheckedScalarInputs, useSimpleInputs } = dmmfDocument.options;
-    let possibleInputTypes: PrismaDMMF.SchemaArgInputType[];
+    let possibleInputTypes: PrismaDMMF.InputTypeRef[];
     possibleInputTypes = inputTypes.filter(
       it =>
         it.location === "inputObjectTypes" &&
