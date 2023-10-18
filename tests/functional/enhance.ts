@@ -70,7 +70,7 @@ describe("custom resolvers execution", () => {
 
     expect(errors).toMatchInlineSnapshot(`
       Array [
-        [GraphQLError: Access denied! You need to be authorized to perform this action!],
+        [GraphQLError: Access denied! You need to be authenticated to perform this action!],
       ]
     `);
   }, 10000);
@@ -117,7 +117,7 @@ describe("custom resolvers execution", () => {
 
     expect(errors).toMatchInlineSnapshot(`
       Array [
-        [GraphQLError: Access denied! You need to be authorized to perform this action!],
+        [GraphQLError: Access denied! You need to be authenticated to perform this action!],
       ]
     `);
   }, 10000);

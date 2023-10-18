@@ -4,7 +4,7 @@ sidebar_position: 1
 ---
 
 :::info
-Be aware that due to usage of some ES2019 and newer Node.js features, you also have to use **Node.js v12.4.0 or newer**.
+Be aware that due to usage of some ES2022 and newer Node.js features, you also have to use **Node.js v16.13.0 or newer**.
 :::
 
 ### TypeGraphQL
@@ -66,9 +66,9 @@ As prisma emits multiple files, make sure you have your tsconfig set properly to
 ```json {4}
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es2022",
     "module": "commonjs",
-    "lib": ["es2018", "esnext.asynciterable"],
+    "lib": ["es2022"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }

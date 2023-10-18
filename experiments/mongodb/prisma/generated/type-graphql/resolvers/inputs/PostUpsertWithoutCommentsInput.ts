@@ -4,6 +4,7 @@ import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { PostCreateWithoutCommentsInput } from "../inputs/PostCreateWithoutCommentsInput";
 import { PostUpdateWithoutCommentsInput } from "../inputs/PostUpdateWithoutCommentsInput";
+import { PostWhereInput } from "../inputs/PostWhereInput";
 
 @TypeGraphQL.InputType("PostUpsertWithoutCommentsInput", {})
 export class PostUpsertWithoutCommentsInput {
@@ -16,4 +17,9 @@ export class PostUpsertWithoutCommentsInput {
     nullable: false
   })
   create!: PostCreateWithoutCommentsInput;
+
+  @TypeGraphQL.Field(_type => PostWhereInput, {
+    nullable: true
+  })
+  where?: PostWhereInput | undefined;
 }

@@ -53,7 +53,7 @@ import { DMMF } from "./dmmf/types";
 import { getBlocksToEmit } from "./emit-block";
 
 const baseCompilerOptions: CompilerOptions = {
-  target: ScriptTarget.ES2019,
+  target: ScriptTarget.ES2022,
   module: ModuleKind.CommonJS,
   emitDecoratorMetadata: true,
   experimentalDecorators: true,

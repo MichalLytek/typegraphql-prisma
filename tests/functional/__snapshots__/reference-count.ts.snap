@@ -4,6 +4,8 @@ exports[`relation counts querying should properly call PrismaClient on getting r
 Array [
   Array [
     Object {
+      "cursor": undefined,
+      "distinct": undefined,
       "include": Object {
         "_count": Object {
           "select": Object {
@@ -17,6 +19,10 @@ Array [
           },
         },
       },
+      "orderBy": undefined,
+      "skip": undefined,
+      "take": undefined,
+      "where": undefined,
     },
   ],
 ]

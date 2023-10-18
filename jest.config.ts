@@ -35,6 +35,7 @@ const config: Config.InitialOptions = {
     escapeString: true,
     printBasicPrototype: true,
   },
+  prettierPath: require.resolve("prettier-2"),
 };
 
 export default config;

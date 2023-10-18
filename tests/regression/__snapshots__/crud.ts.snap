@@ -2099,7 +2099,7 @@ const User_1 = require(\\"../../../models/User\\");
 const AffectedRowsOutput_1 = require(\\"../../outputs/AffectedRowsOutput\\");
 const AggregateUser_1 = require(\\"../../outputs/AggregateUser\\");
 const UserGroupBy_1 = require(\\"../../outputs/UserGroupBy\\");
-let UserCrudResolver = exports.UserCrudResolver = class UserCrudResolver {
+let UserCrudResolver = class UserCrudResolver {
     async aggregateUser(ctx, info, args) {
         return (0, helpers_1.getPrismaFromContext)(ctx).user.aggregate({
             ...args,
@@ -2198,6 +2198,7 @@ let UserCrudResolver = exports.UserCrudResolver = class UserCrudResolver {
         });
     }
 };
+exports.UserCrudResolver = UserCrudResolver;
 tslib_1.__decorate([
     TypeGraphQL.Query(_returns => AggregateUser_1.AggregateUser, {
         nullable: false

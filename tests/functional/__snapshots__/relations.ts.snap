@@ -110,12 +110,33 @@ exports[`relations resolvers execution single primary key should properly call P
 Array [
   Array [
     Object {
+      "cursor": undefined,
+      "distinct": undefined,
+      "orderBy": undefined,
       "skip": 1,
       "take": 1,
       "where": PostWhereInput {
+        "AND": undefined,
+        "NOT": undefined,
+        "OR": undefined,
+        "author": undefined,
+        "authorId": undefined,
+        "color": undefined,
         "content": StringFilter {
+          "contains": undefined,
+          "endsWith": undefined,
+          "equals": undefined,
+          "gt": undefined,
+          "gte": undefined,
+          "in": undefined,
+          "lt": undefined,
+          "lte": undefined,
+          "mode": undefined,
+          "not": undefined,
+          "notIn": undefined,
           "startsWith": "test",
         },
+        "uuid": undefined,
       },
     },
   ],

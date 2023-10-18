@@ -18,3 +18,4 @@ export { UserGroupBy } from "./UserGroupBy";
 export { UserMaxAggregate } from "./UserMaxAggregate";
 export { UserMinAggregate } from "./UserMinAggregate";
 export { UserSumAggregate } from "./UserSumAggregate";
+export * from "./args";

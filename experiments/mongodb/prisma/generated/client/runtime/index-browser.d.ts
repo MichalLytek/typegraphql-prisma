@@ -1,6 +1,18 @@
 declare class AnyNull extends NullTypesEnumValue {
 }
 
+declare type Args<T, F extends Operation> = T extends {
+    [K: symbol]: {
+        types: {
+            operations: {
+                [K in F]: {
+                    args: any;
+                };
+            };
+        };
+    };
+} ? T[symbol]['types']['operations'][F]['args'] : any;
+
 declare class DbNull extends NullTypesEnumValue {
 }
 
@@ -271,6 +283,31 @@ export declare class Decimal {
     static readonly EUCLID: 9;
 }
 
+/**
+ * Detect the current JavaScript runtime following
+ * the WinterCG Runtime Keys proposal:
+ *
+ * - `edge-routine` Alibaba Cloud Edge Routine
+ * - `workerd` Cloudflare Workers
+ * - `deno` Deno and Deno Deploy
+ * - `lagon` Lagon
+ * - `react-native` React Native
+ * - `netlify` Netlify Edge Functions
+ * - `electron` Electron
+ * - `node` Node.js
+ * - `bun` Bun
+ * - `edge-light` Vercel Edge Functions
+ * - `fastly` Fastly Compute@Edge
+ *
+ * @see https://runtime-keys.proposal.wintercg.org/
+ * @returns {Runtime}
+ */
+export declare function detectRuntime(): Runtime;
+
+declare type Exact<A, W> = (A extends unknown ? (W extends A ? {
+    [K in keyof A]: Exact<A[K], W[K]>;
+} : W) : never) | (A extends Narrowable ? A : never);
+
 declare class JsonNull extends NullTypesEnumValue {
 }
 
@@ -291,6 +328,8 @@ declare class JsonNull extends NullTypesEnumValue {
  * @returns
  */
 export declare function makeStrictEnum<T extends Record<PropertyKey, string | number>>(definition: T): T;
+
+declare type Narrowable = string | number | bigint | boolean | [];
 
 declare class NullTypesEnumValue extends ObjectEnumValue {
     _getNamespace(): string;
@@ -318,5 +357,22 @@ export declare const objectEnumValues: {
         AnyNull: AnyNull;
     };
 };
+
+declare type Operation = 'findFirst' | 'findFirstOrThrow' | 'findUnique' | 'findUniqueOrThrow' | 'findMany' | 'create' | 'createMany' | 'update' | 'updateMany' | 'upsert' | 'delete' | 'deleteMany' | 'aggregate' | 'count' | 'groupBy' | '$queryRaw' | '$executeRaw' | '$queryRawUnsafe' | '$executeRawUnsafe' | 'findRaw' | 'aggregateRaw' | '$runCommandRaw';
+
+declare namespace Public {
+    export {
+        validator
+    }
+}
+export { Public }
+
+declare type Runtime = "edge-routine" | "workerd" | "deno" | "lagon" | "react-native" | "netlify" | "electron" | "node" | "bun" | "edge-light" | "fastly" | "unknown";
+
+declare function validator<V>(): <S>(select: Exact<S, V>) => S;
+
+declare function validator<C, M extends Exclude<keyof C, `$${string}`>, O extends keyof C[M] & Operation>(client: C, model: M, operation: O): <S>(select: Exact<S, Args<C[M], O>>) => S;
+
+declare function validator<C, M extends Exclude<keyof C, `$${string}`>, O extends keyof C[M] & Operation, P extends keyof Args<C[M], O>>(client: C, model: M, operation: O, prop: P): <S>(select: Exact<S, Args<C[M], O>[P]>) => S;
 
 export { }
