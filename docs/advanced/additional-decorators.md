@@ -10,8 +10,8 @@ When you need to apply some decorators like `@Authorized`, `@UseMiddleware` or `
 To support this, `typegraphql-prisma` generates two things: `applyResolversEnhanceMap` function and a `ResolversEnhanceMap` type. All you need to do is to create a config object, where you put the decorator functions (without `@`) in an array, and then call that function with that config, eg.:
 
 ```ts
-import { resolvers } from "@generated/type-graphql";
 import {
+  resolvers,
   ResolversEnhanceMap,
   applyResolversEnhanceMap,
 } from "@generated/type-graphql";
