@@ -6,7 +6,7 @@ import { graphql } from "graphql";
 import generateArtifactsDirPath from "../helpers/artifacts-dir";
 import { generateCodeFromSchema } from "../helpers/generate-code";
 
-describe("custom resolvers execution", () => {
+describe("transpiled code", () => {
   let outputDirPath: string;
 
   beforeAll(async () => {
@@ -27,10 +27,11 @@ describe("custom resolvers execution", () => {
     `;
     await generateCodeFromSchema(prismaSchema, {
       outputDirPath,
+      emitTranspiledCode: true,
     });
   });
 
-  it("should be possible to use generated inputs, args and types to build own resolvers", async () => {
+  it("should not set keys in input which are not specified by request variables", async () => {
     const { Post, FindManyPostArgs } = require(outputDirPath);
     @Resolver()
     class CustomResolver {
@@ -45,13 +46,8 @@ describe("custom resolvers execution", () => {
     const document = /* graphql */ `
       query {
         customFindManyPost(
-          take: 1
-          skip: 1
           where: {
             content: { startsWith: "Test" }
-          }
-          orderBy: {
-            color: desc
           }
         ) {
           uuid
@@ -91,10 +87,8 @@ describe("custom resolvers execution", () => {
     });
 
     expect(errors).toBeUndefined();
-    expect(data).toMatchSnapshot("custom posts resolver mocked response");
-    expect(prismaMock.post.findMany.mock.calls).toMatchSnapshot(
-      "findManyPost call args",
-    );
-    expect(graphQLSchemaSDL).toMatchSnapshot("graphQLSchemaSDL");
+    const prismaArgs = prismaMock.post.findMany.mock.calls[0][0] as any;
+    expect(Object.keys(prismaArgs)).toEqual(["where"]);
+    expect(Object.keys(prismaArgs.where)).toEqual(["content"]);
   }, 60000);
 });

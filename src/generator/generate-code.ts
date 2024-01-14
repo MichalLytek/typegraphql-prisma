@@ -59,6 +59,7 @@ const baseCompilerOptions: CompilerOptions = {
   experimentalDecorators: true,
   esModuleInterop: true,
   skipLibCheck: true,
+  useDefineForClassFields: false,
 };
 
 export default async function generateCode(
