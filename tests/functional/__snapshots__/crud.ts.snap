@@ -56,32 +56,17 @@ Array [
         "floatField": true,
         "intField": true,
       },
-      "cursor": undefined,
       "orderBy": Array [
         UserOrderByWithRelationInput {
-          "floatField": undefined,
-          "idField": undefined,
           "intField": "desc",
         },
       ],
       "skip": 1,
       "take": 1,
       "where": UserWhereInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
         "floatField": IntFilter {
-          "equals": undefined,
-          "gt": undefined,
-          "gte": undefined,
-          "in": undefined,
-          "lt": undefined,
           "lte": 50,
-          "not": undefined,
-          "notIn": undefined,
         },
-        "idField": undefined,
-        "intField": undefined,
       },
     },
   ],
@@ -105,32 +90,17 @@ Array [
       "_count": Object {
         "_all": true,
       },
-      "cursor": undefined,
       "orderBy": Array [
         UserOrderByWithRelationInput {
-          "floatField": undefined,
-          "idField": undefined,
           "intField": "desc",
         },
       ],
       "skip": 1,
       "take": 1,
       "where": UserWhereInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
         "floatField": IntFilter {
-          "equals": undefined,
-          "gt": undefined,
-          "gte": undefined,
-          "in": undefined,
-          "lt": undefined,
           "lte": 50,
-          "not": undefined,
-          "notIn": undefined,
         },
-        "idField": undefined,
-        "intField": undefined,
       },
     },
   ],
@@ -171,26 +141,10 @@ Array [
       "by": Array [
         "intField",
       ],
-      "having": undefined,
-      "orderBy": undefined,
-      "skip": undefined,
-      "take": undefined,
       "where": UserWhereInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
         "floatField": IntFilter {
-          "equals": undefined,
-          "gt": undefined,
           "gte": 0,
-          "in": undefined,
-          "lt": undefined,
-          "lte": undefined,
-          "not": undefined,
-          "notIn": undefined,
         },
-        "idField": undefined,
-        "intField": undefined,
       },
     },
   ],
@@ -201,8 +155,6 @@ exports[`crud resolvers execution basic operations _count for relations should p
 Array [
   Array [
     Object {
-      "cursor": undefined,
-      "distinct": undefined,
       "include": Object {
         "_count": Object {
           "select": Object {
@@ -210,10 +162,6 @@ Array [
           },
         },
       },
-      "orderBy": undefined,
-      "skip": undefined,
-      "take": undefined,
-      "where": undefined,
     },
   ],
 ]
@@ -258,12 +206,6 @@ Array [
   Array [
     Object {
       "where": UserWhereUniqueInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
-        "dateField": undefined,
-        "intIdField": undefined,
-        "optionalStringField": undefined,
         "uniqueStringField": "unique",
       },
     },
@@ -285,22 +227,9 @@ Array [
   Array [
     Object {
       "where": UserWhereInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
         "dateField": DateTimeFilter {
-          "equals": undefined,
-          "gt": undefined,
-          "gte": undefined,
-          "in": undefined,
-          "lt": undefined,
           "lte": 2019-12-31T19:16:02.572Z,
-          "not": undefined,
-          "notIn": undefined,
         },
-        "intIdField": undefined,
-        "optionalStringField": undefined,
-        "uniqueStringField": undefined,
       },
     },
   ],
@@ -319,35 +248,17 @@ exports[`crud resolvers execution basic operations should properly call PrismaCl
 Array [
   Array [
     Object {
-      "cursor": undefined,
-      "distinct": undefined,
       "orderBy": Array [
         UserOrderByWithRelationInput {
-          "dateField": undefined,
           "intIdField": "desc",
-          "optionalStringField": undefined,
-          "uniqueStringField": undefined,
         },
       ],
       "skip": 1,
       "take": 1,
       "where": UserWhereInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
         "dateField": DateTimeFilter {
-          "equals": undefined,
-          "gt": undefined,
-          "gte": undefined,
-          "in": undefined,
-          "lt": undefined,
           "lte": 2019-12-31T19:16:02.572Z,
-          "not": undefined,
-          "notIn": undefined,
         },
-        "intIdField": undefined,
-        "optionalStringField": undefined,
-        "uniqueStringField": undefined,
       },
     },
   ],
@@ -370,12 +281,6 @@ Array [
   Array [
     Object {
       "where": UserWhereUniqueInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
-        "dateField": undefined,
-        "intIdField": undefined,
-        "optionalStringField": undefined,
         "uniqueStringField": "uniqueValue",
       },
     },
@@ -400,16 +305,8 @@ Array [
         "dateField": DateTimeFieldUpdateOperationsInput {
           "set": 2019-12-31T14:16:02.572Z,
         },
-        "optionalStringField": undefined,
-        "uniqueStringField": undefined,
       },
       "where": UserWhereUniqueInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
-        "dateField": undefined,
-        "intIdField": undefined,
-        "optionalStringField": undefined,
         "uniqueStringField": "unique",
       },
     },
@@ -431,27 +328,12 @@ Array [
   Array [
     Object {
       "data": UserUpdateManyMutationInput {
-        "dateField": undefined,
         "optionalStringField": null,
-        "uniqueStringField": undefined,
       },
       "where": UserWhereInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
         "dateField": DateTimeFilter {
-          "equals": undefined,
-          "gt": undefined,
-          "gte": undefined,
-          "in": undefined,
-          "lt": undefined,
           "lte": 2019-12-31T19:16:02.572Z,
-          "not": undefined,
-          "notIn": undefined,
         },
-        "intIdField": undefined,
-        "optionalStringField": undefined,
-        "uniqueStringField": undefined,
       },
     },
   ],
@@ -476,17 +358,9 @@ Array [
         "uniqueStringField": "unique",
       },
       "update": UserUpdateInput {
-        "dateField": undefined,
         "optionalStringField": null,
-        "uniqueStringField": undefined,
       },
       "where": UserWhereUniqueInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
-        "dateField": undefined,
-        "intIdField": undefined,
-        "optionalStringField": undefined,
         "uniqueStringField": "unique",
       },
     },
