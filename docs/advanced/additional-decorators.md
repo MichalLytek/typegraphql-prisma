@@ -7,10 +7,11 @@ sidebar_label: Applying decorators
 
 When you need to apply some decorators like `@Authorized`, `@UseMiddleware` or `@Extensions` on the generated resolvers methods, you don't need to modify the generated source files.
 
-To support this, `typegraphql-prisma` generates two things: `applyResolversEnhanceMap` function and a `ResolversEnhanceMap` type. All you need to do is to create a config object, where you put the decorator functions (without `@`) in an array, and then call that function with that config, eg.:
+To support this, `typegraphql-prisma` generates two things: `applyResolversEnhanceMap` function and a `ResolversEnhanceMap` type. All you need to do is to create a config object, where you put the decorator functions (without `@`) in an array, and then call that function with that config. Remember that it has to be done before building the schema, eg.:
 
 ```ts
 import {
+  resolvers,
   ResolversEnhanceMap,
   applyResolversEnhanceMap,
 } from "@generated/type-graphql";
@@ -23,6 +24,11 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
 };
 
 applyResolversEnhanceMap(resolversEnhanceMap);
+
+const schema = await buildSchema({
+  resolvers,
+  validate: false,
+});
 ```
 
 This way, when you call `createCategory` GraphQL mutation, it will trigger the `type-graphql` `authChecker` function, providing a `Role.ADMIN` role, just like you would put the `@Authorized` on top of the resolver method.
