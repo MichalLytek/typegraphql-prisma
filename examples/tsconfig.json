@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2022",
+    "target": "es2021",
     "module": "commonjs",
-    "lib": ["es2022"],
+    "lib": ["es2021"],
     "strict": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,

@@ -4,30 +4,9 @@ exports[`crud resolvers execution should properly map aliased input field values
 Array [
   Array [
     Object {
-      "cursor": undefined,
-      "distinct": undefined,
-      "orderBy": undefined,
-      "skip": undefined,
-      "take": undefined,
       "where": UserWhereInput {
-        "AND": undefined,
-        "NOT": undefined,
-        "OR": undefined,
-        "dateOfBirth": undefined,
-        "id": undefined,
         "name": StringFilter {
-          "contains": undefined,
-          "endsWith": undefined,
           "equals": "John",
-          "gt": undefined,
-          "gte": undefined,
-          "in": undefined,
-          "lt": undefined,
-          "lte": undefined,
-          "mode": undefined,
-          "not": undefined,
-          "notIn": undefined,
-          "startsWith": undefined,
         },
       },
     },
