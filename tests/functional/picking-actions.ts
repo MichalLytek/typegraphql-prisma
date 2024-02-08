@@ -23,10 +23,9 @@ describe("picking prisma actions", () => {
   });
 
   it("should expose in GraphQL schema only actions chosen by single resolvers", async () => {
-    const {
-      CreateOneUserResolver,
-      FindManyUserResolver,
-    } = require(outputDirPath + "/index");
+    const { CreateOneUserResolver, FindManyUserResolver } = require(
+      outputDirPath + "/index",
+    );
     await buildSchema({
       resolvers: [CreateOneUserResolver, FindManyUserResolver],
       validate: false,
