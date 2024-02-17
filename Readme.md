@@ -40,7 +40,7 @@ You can read more about this in the GitHub issue [#385](https://github.com/Micha
 
 Let's keep `typegraphql-prisma` alive together! 💪
 
-## Comunity
+## Community
 
 - Visit the [Official Website](https://prisma.typegraphql.com)
 - Chat on [Discord](https://discord.gg/cWnBAQcbg2)
