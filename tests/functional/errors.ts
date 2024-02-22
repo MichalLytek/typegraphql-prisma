@@ -23,8 +23,9 @@ describe("errors", () => {
         }
       `;
       await generateCodeFromSchema(prismaSchema, { outputDirPath });
-      const { UserCrudResolver } = require(outputDirPath +
-        "/resolvers/crud/User/UserCrudResolver.ts");
+      const { UserCrudResolver } = require(
+        outputDirPath + "/resolvers/crud/User/UserCrudResolver.ts",
+      );
 
       graphQLSchema = await buildSchema({
         resolvers: [UserCrudResolver],

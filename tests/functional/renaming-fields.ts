@@ -24,8 +24,9 @@ describe("crud resolvers execution", () => {
       }
     `;
     await generateCodeFromSchema(prismaSchema, { outputDirPath });
-    const { UserCrudResolver } = require(outputDirPath +
-      "/resolvers/crud/User/UserCrudResolver.ts");
+    const { UserCrudResolver } = require(
+      outputDirPath + "/resolvers/crud/User/UserCrudResolver.ts",
+    );
     const graphQLSchema = await buildSchema({
       resolvers: [UserCrudResolver],
       validate: false,
@@ -69,8 +70,9 @@ describe("crud resolvers execution", () => {
       }
     `;
     await generateCodeFromSchema(prismaSchema, { outputDirPath });
-    const { UserCrudResolver } = require(outputDirPath +
-      "/resolvers/crud/User/UserCrudResolver.ts");
+    const { UserCrudResolver } = require(
+      outputDirPath + "/resolvers/crud/User/UserCrudResolver.ts",
+    );
     const graphQLSchema = await buildSchema({
       resolvers: [UserCrudResolver],
       validate: false,
