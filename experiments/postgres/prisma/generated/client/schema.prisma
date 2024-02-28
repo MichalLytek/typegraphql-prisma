@@ -72,6 +72,7 @@ model post {
   /// @TypeGraphQL.omit(input: ["create", "update"])
   updatedAt DateTime  @updatedAt
   /// @TypeGraphQL.omit(input: true)
+  /// @TypeGraphQL.field(name: "isPublished")
   published Boolean   @default(false)
   title     String
   /// @TypeGraphQL.omit(output: true)

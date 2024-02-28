@@ -261,6 +261,41 @@ export class User {
 "
 `;
 
+exports[`models should properly generate object type class for prisma model with multiple attribute comments: User 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../scalars\\";
+
+@TypeGraphQL.ObjectType(\\"User\\", {})
+export class User {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  id!: number;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false
+  })
+  dateOfBirth!: Date;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  name!: string;
+
+  balance!: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true
+  })
+  get accountBalance(): number | null {
+    return this.balance ?? null;
+  }
+}
+"
+`;
+
 exports[`models should properly generate object type class for prisma model with native types: NativeTypeModel 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";

@@ -267,7 +267,7 @@
             "default": false,
             "isGenerated": false,
             "isUpdatedAt": false,
-            "documentation": "@TypeGraphQL.omit(input: true)"
+            "documentation": "@TypeGraphQL.omit(input: true)\n@TypeGraphQL.field(name: \"isPublished\")"
           },
           {
             "name": "title",

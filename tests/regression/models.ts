@@ -204,6 +204,24 @@ describe("models", () => {
     expect(userModelTSFile).toMatchSnapshot("User");
   });
 
+  it("should properly generate object type class for prisma model with multiple attribute comments", async () => {
+    const schema = /* prisma */ `
+      model User {
+        id           Int       @id @default(autoincrement())
+        dateOfBirth  DateTime
+        name         String
+        /// @TypeGraphQL.omit(input: true)
+        /// @TypeGraphQL.field(name: "accountBalance")
+        balance      Float?
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+
+    expect(userModelTSFile).toMatchSnapshot("User");
+  });
+
   it("should properly generate object type class for prisma model when simpleResolvers option is enabled", async () => {
     const schema = /* prisma */ `
       model User {

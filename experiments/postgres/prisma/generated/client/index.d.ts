@@ -3223,6 +3223,7 @@ export namespace Prisma {
       updatedAt: Date
       /**
        * @TypeGraphQL.omit(input: true)
+       * @TypeGraphQL.field(name: "isPublished")
        */
       published: boolean
       title: string
