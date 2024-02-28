@@ -1,14 +1,17 @@
 ![integration logo](https://raw.githubusercontent.com/MichalLytek/typegraphql-prisma/main/img/integration.png)
 
+[![discord](https://img.shields.io/discord/1195751245386875040?logo=discord&color=%237289da)](https://discord.gg/cWnBAQcbg2)
+[![npm](https://img.shields.io/npm/v/typegraphql-prisma?logo=npm&color=%23CC3534)](https://www.npmjs.com/package/typegraphql-prisma)
+
 # TypeGraphQL & Prisma integration
 
 Prisma generator to emit TypeGraphQL types and CRUD resolvers from your Prisma schema.
 
-[**https://prisma.typegraphql.com/**](https://prisma.typegraphql.com/)
+[**https://prisma.typegraphql.com**](https://prisma.typegraphql.com)
 
 ## Documentation
 
-The documentation, installation guide, detailed description of the API and all of its features is [available on the website](https://prisma.typegraphql.com/).
+The documentation, installation guide, detailed description of the API and all of its features is [available on the website](https://prisma.typegraphql.com).
 
 ## Examples
 
@@ -36,3 +39,8 @@ This project is not sponsored by Prisma anymore, so there will be provided only 
 You can read more about this in the GitHub issue [#385](https://github.com/MichalLytek/typegraphql-prisma/issues/385).
 
 Let's keep `typegraphql-prisma` alive together! 💪
+
+## Community
+
+- Visit the [Official Website](https://prisma.typegraphql.com)
+- Chat on [Discord](https://discord.gg/cWnBAQcbg2)
