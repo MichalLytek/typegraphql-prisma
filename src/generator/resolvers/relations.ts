@@ -57,6 +57,7 @@ export default function generateRelationsResolverClassesFromModel(
   generateGraphQLInfoImport(sourceFile);
   generateModelsImports(
     sourceFile,
+    dmmfDocument.options,
     [...relationFields.map(field => field.type), model.typeName],
     3,
   );
@@ -64,8 +65,8 @@ export default function generateRelationsResolverClassesFromModel(
   const argTypeNames = relationFields
     .filter(it => it.argsTypeName !== undefined)
     .map(it => it.argsTypeName!);
-  generateArgsImports(sourceFile, argTypeNames, 0);
-  generateHelpersFileImport(sourceFile, 3);
+  generateArgsImports(sourceFile, dmmfDocument.options, argTypeNames, 0);
+  generateHelpersFileImport(sourceFile, dmmfDocument.options, 3);
 
   sourceFile.addClass({
     name: resolverName,

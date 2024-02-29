@@ -38,12 +38,13 @@ export default function generateCrudResolverClassFromMapping(
   generateGraphQLInfoImport(sourceFile);
   generateArgsImports(
     sourceFile,
+    dmmfDocument.options,
     mapping.actions
       .filter(it => it.argsTypeName !== undefined)
       .map(it => it.argsTypeName!),
     0,
   );
-  generateHelpersFileImport(sourceFile, 3);
+  generateHelpersFileImport(sourceFile, dmmfDocument.options, 3);
 
   const distinctOutputTypesNames = [
     ...new Set(mapping.actions.map(it => it.outputTypeName)),
@@ -54,8 +55,18 @@ export default function generateCrudResolverClassFromMapping(
   const otherOutputTypeNames = distinctOutputTypesNames.filter(
     typeName => !dmmfDocument.isModelTypeName(typeName),
   );
-  generateModelsImports(sourceFile, modelOutputTypeNames, 3);
-  generateOutputsImports(sourceFile, otherOutputTypeNames, 2);
+  generateModelsImports(
+    sourceFile,
+    dmmfDocument.options,
+    modelOutputTypeNames,
+    3,
+  );
+  generateOutputsImports(
+    sourceFile,
+    dmmfDocument.options,
+    otherOutputTypeNames,
+    2,
+  );
 
   sourceFile.addClass({
     name: mapping.resolverName,

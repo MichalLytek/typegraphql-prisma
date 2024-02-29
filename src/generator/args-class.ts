@@ -34,6 +34,7 @@ export default function generateArgsTypeClassFromArgs(
   generateGraphQLScalarsImport(sourceFile);
   generateInputsImports(
     sourceFile,
+    dmmfDocument.options,
     fields
       .map(arg => arg.selectedInputType)
       .filter(argInputType => argInputType.location === "inputObjectTypes")
@@ -42,6 +43,7 @@ export default function generateArgsTypeClassFromArgs(
   );
   generateEnumsImports(
     sourceFile,
+    dmmfDocument.options,
     fields
       .map(field => field.selectedInputType)
       .filter(argType => argType.location === "enumTypes")

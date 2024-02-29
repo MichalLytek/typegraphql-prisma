@@ -75,6 +75,7 @@ export async function generate(options: GeneratorOptions) {
         ["prettier", "tsc"] as const,
       ),
     emitIsAbstract: parseStringBoolean(generatorConfig.emitIsAbstract) ?? false,
+    emitESM: parseStringBoolean(generatorConfig.emitESM),
   };
   const internalConfig: InternalGeneratorOptions = {
     outputDirPath: outputDir,

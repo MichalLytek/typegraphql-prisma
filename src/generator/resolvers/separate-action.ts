@@ -39,10 +39,16 @@ export default function generateActionResolverClass(
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLInfoImport(sourceFile);
   if (action.argsTypeName) {
-    generateArgsImports(sourceFile, [action.argsTypeName], 0);
+    generateArgsImports(
+      sourceFile,
+      dmmfDocument.options,
+      [action.argsTypeName],
+      0,
+    );
   }
   generateModelsImports(
     sourceFile,
+    dmmfDocument.options,
     [model.typeName, action.outputTypeName].filter(typeName =>
       dmmfDocument.isModelTypeName(typeName),
     ),
@@ -50,12 +56,13 @@ export default function generateActionResolverClass(
   );
   generateOutputsImports(
     sourceFile,
+    dmmfDocument.options,
     [action.outputTypeName].filter(
       typeName => !dmmfDocument.isModelTypeName(typeName),
     ),
     2,
   );
-  generateHelpersFileImport(sourceFile, 3);
+  generateHelpersFileImport(sourceFile, dmmfDocument.options, 3);
 
   sourceFile.addClass({
     name: action.actionResolverName,

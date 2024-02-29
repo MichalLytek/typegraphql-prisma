@@ -56,20 +56,34 @@ export function generateGraphQLScalarTypeImport(sourceFile: SourceFile) {
   });
 }
 
-export function generateCustomScalarsImport(sourceFile: SourceFile, level = 0) {
+export function generateCustomScalarsImport(
+  sourceFile: SourceFile,
+  options: GeneratorOptions,
+  level = 0,
+) {
   sourceFile.addImportDeclaration({
     moduleSpecifier:
       (level === 0 ? "./" : "") +
-      path.posix.join(...Array(level).fill(".."), "scalars"),
+      path.posix.join(
+        ...Array(level).fill(".."),
+        `scalars${options.emitESM ? ".js" : ""}`,
+      ),
     namedImports: ["DecimalJSScalar"],
   });
 }
 
-export function generateHelpersFileImport(sourceFile: SourceFile, level = 0) {
+export function generateHelpersFileImport(
+  sourceFile: SourceFile,
+  options: GeneratorOptions,
+  level = 0,
+) {
   sourceFile.addImportDeclaration({
     moduleSpecifier:
       (level === 0 ? "./" : "") +
-      path.posix.join(...Array(level).fill(".."), "helpers"),
+      path.posix.join(
+        ...Array(level).fill(".."),
+        `helpers${options.emitESM ? ".js" : ""}`,
+      ),
     namedImports: [
       "transformInfoIntoPrismaArgs",
       "getPrismaFromContext",
@@ -97,13 +111,14 @@ export function generatePrismaNamespaceImport(
 
 export function generateArgsBarrelFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   argsTypeNames: string[],
 ) {
   sourceFile.addExportDeclarations(
     argsTypeNames
       .sort()
       .map<OptionalKind<ExportDeclarationStructure>>(argTypeName => ({
-        moduleSpecifier: `./${argTypeName}`,
+        moduleSpecifier: `./${argTypeName}${options.emitESM ? ".js" : ""}`,
         namedExports: [argTypeName],
       })),
   );
@@ -111,26 +126,30 @@ export function generateArgsBarrelFile(
 
 export function generateArgsIndexFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   typeNames: string[],
 ) {
   sourceFile.addExportDeclarations(
     typeNames
       .sort()
       .map<OptionalKind<ExportDeclarationStructure>>(typeName => ({
-        moduleSpecifier: `./${typeName}/args`,
+        moduleSpecifier: `./${typeName}/args${
+          options.emitESM ? "/index.js" : ""
+        }`,
       })),
   );
 }
 
 export function generateModelsBarrelFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   modelNames: string[],
 ) {
   sourceFile.addExportDeclarations(
     modelNames
       .sort()
       .map<OptionalKind<ExportDeclarationStructure>>(modelName => ({
-        moduleSpecifier: `./${modelName}`,
+        moduleSpecifier: `./${modelName}${options.emitESM ? ".js" : ""}`,
         namedExports: [modelName],
       })),
   );
@@ -138,13 +157,14 @@ export function generateModelsBarrelFile(
 
 export function generateEnumsBarrelFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   enumTypeNames: string[],
 ) {
   sourceFile.addExportDeclarations(
     enumTypeNames
       .sort()
       .map<OptionalKind<ExportDeclarationStructure>>(enumTypeName => ({
-        moduleSpecifier: `./${enumTypeName}`,
+        moduleSpecifier: `./${enumTypeName}${options.emitESM ? ".js" : ""}`,
         namedExports: [enumTypeName],
       })),
   );
@@ -152,13 +172,14 @@ export function generateEnumsBarrelFile(
 
 export function generateInputsBarrelFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   inputTypeNames: string[],
 ) {
   sourceFile.addExportDeclarations(
     inputTypeNames
       .sort()
       .map<OptionalKind<ExportDeclarationStructure>>(inputTypeName => ({
-        moduleSpecifier: `./${inputTypeName}`,
+        moduleSpecifier: `./${inputTypeName}${options.emitESM ? ".js" : ""}`,
         namedExports: [inputTypeName],
       })),
   );
@@ -166,6 +187,7 @@ export function generateInputsBarrelFile(
 
 export function generateOutputsBarrelFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   outputTypeNames: string[],
   hasSomeArgs: boolean,
 ) {
@@ -173,7 +195,7 @@ export function generateOutputsBarrelFile(
     outputTypeNames
       .sort()
       .map<OptionalKind<ExportDeclarationStructure>>(outputTypeName => ({
-        moduleSpecifier: `./${outputTypeName}`,
+        moduleSpecifier: `./${outputTypeName}${options.emitESM ? ".js" : ""}`,
         namedExports: [outputTypeName],
       })),
   );
@@ -184,25 +206,34 @@ export function generateOutputsBarrelFile(
 
 export function generateIndexFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   hasSomeRelations: boolean,
   blocksToEmit: EmitBlockKind[],
 ) {
   if (blocksToEmit.includes("enums")) {
     sourceFile.addExportDeclaration({
-      moduleSpecifier: `./${enumsFolderName}`,
+      moduleSpecifier: `./${enumsFolderName}${
+        options.emitESM ? "/index.js" : ""
+      }`,
     });
   }
   if (blocksToEmit.includes("models")) {
     sourceFile.addExportDeclaration({
-      moduleSpecifier: `./${modelsFolderName}`,
+      moduleSpecifier: `./${modelsFolderName}${
+        options.emitESM ? "/index.js" : ""
+      }`,
     });
   }
   if (blocksToEmit.includes("crudResolvers")) {
     sourceFile.addExportDeclaration({
-      moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}`,
+      moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}${
+        options.emitESM ? "/index.js" : ""
+      }`,
     });
     sourceFile.addImportDeclaration({
-      moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index`,
+      moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}/resolvers-crud.index${
+        options.emitESM ? ".js" : ""
+      }`,
       namespaceImport: "crudResolversImport",
     });
     sourceFile.addVariableStatement({
@@ -212,16 +243,21 @@ export function generateIndexFile(
         {
           name: "crudResolvers",
           initializer: `Object.values(crudResolversImport) as unknown as NonEmptyArray<Function>`,
+          type: "NonEmptyArray<Function>",
         },
       ],
     });
   }
   if (hasSomeRelations && blocksToEmit.includes("relationResolvers")) {
     sourceFile.addExportDeclaration({
-      moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}`,
+      moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}${
+        options.emitESM ? "/index.js" : ""
+      }`,
     });
     sourceFile.addImportDeclaration({
-      moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index`,
+      moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}/resolvers.index${
+        options.emitESM ? ".js" : ""
+      }`,
       namespaceImport: "relationResolversImport",
     });
     sourceFile.addVariableStatement({
@@ -231,24 +267,29 @@ export function generateIndexFile(
         {
           name: "relationResolvers",
           initializer: `Object.values(relationResolversImport) as unknown as NonEmptyArray<Function>`,
+          type: "NonEmptyArray<Function>",
         },
       ],
     });
   }
   if (blocksToEmit.includes("inputs")) {
     sourceFile.addExportDeclaration({
-      moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}`,
+      moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}${
+        options.emitESM ? "/index.js" : ""
+      }`,
     });
   }
   if (blocksToEmit.includes("outputs")) {
     sourceFile.addExportDeclaration({
-      moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}`,
+      moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}${
+        options.emitESM ? "/index.js" : ""
+      }`,
     });
   }
 
   sourceFile.addExportDeclarations([
-    { moduleSpecifier: `./enhance` },
-    { moduleSpecifier: `./scalars` },
+    { moduleSpecifier: `./enhance${options.emitESM ? ".js" : ""}` },
+    { moduleSpecifier: `./scalars${options.emitESM ? ".js" : ""}` },
   ]);
   sourceFile.addImportDeclarations([
     {
@@ -282,6 +323,7 @@ export function generateIndexFile(
 
 export function generateResolversBarrelFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   resolversData: GenerateMappingData[],
 ) {
   resolversData
@@ -290,13 +332,16 @@ export function generateResolversBarrelFile(
     )
     .forEach(({ modelName, resolverName }) => {
       sourceFile.addExportDeclaration({
-        moduleSpecifier: `./${modelName}/${resolverName}`,
+        moduleSpecifier: `./${modelName}/${resolverName}${
+          options.emitESM ? ".js" : ""
+        }`,
         namedExports: [resolverName],
       });
     });
 }
 export function generateResolversActionsBarrelFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   resolversData: GenerateMappingData[],
 ) {
   resolversData
@@ -307,7 +352,9 @@ export function generateResolversActionsBarrelFile(
       if (actionResolverNames) {
         actionResolverNames.forEach(actionResolverName => {
           sourceFile.addExportDeclaration({
-            moduleSpecifier: `./${modelName}/${actionResolverName}`,
+            moduleSpecifier: `./${modelName}/${actionResolverName}${
+              options.emitESM ? ".js" : ""
+            }`,
             namedExports: [actionResolverName],
           });
         });
@@ -317,21 +364,32 @@ export function generateResolversActionsBarrelFile(
 
 export function generateResolversIndexFile(
   sourceFile: SourceFile,
+  options: GeneratorOptions,
   type: "crud" | "relations",
   hasSomeArgs: boolean,
 ) {
   if (type === "crud") {
     sourceFile.addExportDeclarations([
-      { moduleSpecifier: `./resolvers-actions.index` },
-      { moduleSpecifier: `./resolvers-crud.index` },
+      {
+        moduleSpecifier: `./resolvers-actions.index${
+          options.emitESM ? ".js" : ""
+        }`,
+      },
+      {
+        moduleSpecifier: `./resolvers-crud.index${
+          options.emitESM ? ".js" : ""
+        }`,
+      },
     ]);
   } else {
     sourceFile.addExportDeclarations([
-      { moduleSpecifier: `./resolvers.index` },
+      { moduleSpecifier: `./resolvers.index${options.emitESM ? ".js" : ""}` },
     ]);
   }
   if (hasSomeArgs) {
-    sourceFile.addExportDeclarations([{ moduleSpecifier: `./args.index` }]);
+    sourceFile.addExportDeclarations([
+      { moduleSpecifier: `./args.index${options.emitESM ? ".js" : ""}` },
+    ]);
   }
 }
 
@@ -345,7 +403,12 @@ export const generateResolversOutputsImports = createImportGenerator(
 );
 export const generateArgsImports = createImportGenerator(argsFolderName);
 function createImportGenerator(elementsDirName: string) {
-  return (sourceFile: SourceFile, elementsNames: string[], level = 1) => {
+  return (
+    sourceFile: SourceFile,
+    options: GeneratorOptions,
+    elementsNames: string[],
+    level = 1,
+  ) => {
     const distinctElementsNames = [...new Set(elementsNames)].sort();
     for (const elementName of distinctElementsNames) {
       sourceFile.addImportDeclaration({
@@ -354,7 +417,7 @@ function createImportGenerator(elementsDirName: string) {
           path.posix.join(
             ...Array(level).fill(".."),
             elementsDirName,
-            elementName,
+            `${elementName}${options.emitESM ? ".js" : ""}`,
           ),
         // TODO: refactor to default exports
         // defaultImport: elementName,
