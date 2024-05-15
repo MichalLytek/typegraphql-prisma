@@ -1,6 +1,6 @@
 {
-  "name": "typegraphql-prisma",
-  "version": "0.27.2",
+  "name": "typegraphql-prisma-fix",
+  "version": "0.27.3",
   "scripts": {
     "prepare": "husky install",
     "build": "tsc",
@@ -97,6 +97,5 @@
     "**/*.{js,json}": [
       "prettier --write"
     ]
-  },
-  "private": true
+  }
 }
