@@ -64,6 +64,11 @@ export default function generateObjectTypeClassFromModel(
     generateResolversOutputsImports(sourceFile, [countField.typeGraphQLType]);
   }
 
+  const shouldUseSimpleResolvers =
+    dmmfDocument.options.simpleResolvers
+      ? model.simpleResolvers.enable !== false
+      : model.simpleResolvers.enable;
+
   sourceFile.addClass({
     name: model.typeName,
     isExported: true,
@@ -79,9 +84,7 @@ export default function generateObjectTypeClassFromModel(
                   isAbstract: "true",
                 }),
                 ...(model.docs && { description: `"${model.docs}"` }),
-                ...(dmmfDocument.options.simpleResolvers && {
-                  simpleResolvers: "true",
-                }),
+                ...(shouldUseSimpleResolvers && { simpleResolvers: "true" }),
               }),
             ],
           },
