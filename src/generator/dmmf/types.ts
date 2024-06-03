@@ -45,6 +45,7 @@ export namespace DMMF {
     docs: string | undefined;
     plural: string | undefined;
     isOmitted: { output: boolean };
+    simpleResolvers: { enable?: boolean };
   }
   export type FieldKind = "scalar" | "object" | "enum" | "unsupported";
   export type FieldNamespace = "model" | "prisma";

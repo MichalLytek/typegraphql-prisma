@@ -54,6 +54,9 @@ export function transformBareModel(model: PrismaDMMF.Model): DMMF.Model {
     name: string;
     plural: string;
   }>(model.documentation, "type", "model");
+  const { enable } = parseDocumentationAttributes<{
+    enable?: boolean;
+  }>(model.documentation, "simpleResolvers", "model");
   const { output = false } = parseDocumentationAttributes<{
     output: boolean;
   }>(model.documentation, "omit", "model");
@@ -64,6 +67,7 @@ export function transformBareModel(model: PrismaDMMF.Model): DMMF.Model {
     docs: cleanDocsString(model.documentation),
     plural: attributeArgs.plural,
     isOmitted: { output },
+    simpleResolvers: { enable },
   };
 }
 
