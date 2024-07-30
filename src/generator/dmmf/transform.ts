@@ -42,7 +42,7 @@ export function transformSchema(
 }
 
 export function transformMappings(
-  mapping: PrismaDMMF.ModelMapping[],
+  mapping: readonly PrismaDMMF.ModelMapping[],
   dmmfDocument: DmmfDocument,
   options: GeneratorOptions,
 ): DMMF.ModelMapping[] {
@@ -395,9 +395,11 @@ function transformMapping(
 }
 
 function selectInputTypeFromTypes(dmmfDocument: DmmfDocument) {
-  return (inputTypes: PrismaDMMF.InputTypeRef[]): DMMF.SchemaArgInputType => {
+  return (
+    inputTypes: readonly PrismaDMMF.InputTypeRef[],
+  ): DMMF.SchemaArgInputType => {
     const { useUncheckedScalarInputs, useSimpleInputs } = dmmfDocument.options;
-    let possibleInputTypes: PrismaDMMF.InputTypeRef[];
+    let possibleInputTypes: readonly PrismaDMMF.InputTypeRef[];
     possibleInputTypes = inputTypes.filter(
       it =>
         it.location === "inputObjectTypes" &&

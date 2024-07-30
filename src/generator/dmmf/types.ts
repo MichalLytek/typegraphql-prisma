@@ -1,5 +1,9 @@
 import { InputOmitSetting } from "../config";
 
+export declare type ReadonlyDeep<T> = {
+  readonly [K in keyof T]: ReadonlyDeep<T[K]>;
+};
+
 export namespace DMMF {
   export interface Document {
     datamodel: Datamodel;
@@ -31,21 +35,21 @@ export namespace DMMF {
     name: string | null;
     fields: string[];
   }
-  export interface Model {
+  export type Model = ReadonlyDeep<{
     name: string;
     dbName: string | null;
     fields: ModelField[];
     uniqueFields: string[][];
     uniqueIndexes: UniqueIndex[];
-    // documentation?: string;
+    docs?: string;
     primaryKey: PrimaryKey | null;
     // isGenerated?: boolean;
     // additional props:
     typeName: string;
-    docs: string | undefined;
-    plural: string | undefined;
-    isOmitted: { output: boolean };
-  }
+    plural?: string;
+    isOmitted: { input?: boolean | InputOmitSetting[]; output: boolean };
+  }>;
+
   export type FieldKind = "scalar" | "object" | "enum" | "unsupported";
   export type FieldNamespace = "model" | "prisma";
   export type FieldLocation =
@@ -55,7 +59,7 @@ export namespace DMMF {
     | "enumTypes"
     | "fieldRefTypes";
   // Field
-  export interface ModelField {
+  export type ModelField = ReadonlyDeep<{
     // kind: FieldKind;
     name: string;
     isRequired: boolean;
@@ -70,7 +74,7 @@ export namespace DMMF {
     hasDefaultValue: boolean;
     default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
     relationFromFields?: string[];
-    relationToFields?: any[];
+    relationToFields?: string[];
     relationOnDelete?: string;
     relationName?: string;
     // documentation?: string;
@@ -83,7 +87,7 @@ export namespace DMMF {
     fieldTSType: string;
     docs: string | undefined;
     isOmitted: { input: boolean | InputOmitSetting[]; output: boolean };
-  }
+  }>;
   export interface FieldDefault {
     name: string;
     args: any[];
@@ -119,15 +123,15 @@ export namespace DMMF {
     "scalar" | "inputObjectTypes" | "enumTypes" | "fieldRefTypes"
   >;
   export type ArgType = string | InputType | Enum;
-  export interface SchemaArgInputType {
+  export type SchemaArgInputType = ReadonlyDeep<{
     isList: boolean;
     // type: ArgType;
     location: FieldLocation;
     namespace?: FieldNamespace;
     // additional props
     type: string;
-  }
-  export interface SchemaArg {
+  }>;
+  export type SchemaArg = ReadonlyDeep<{
     name: string;
     comment?: string;
     isNullable: boolean;
@@ -141,15 +145,15 @@ export namespace DMMF {
     fieldTSType: string;
     hasMappedName: boolean;
     isOmitted: boolean;
-  }
-  export interface OutputType {
+  }>;
+  export type OutputType = ReadonlyDeep<{
     name: string;
     // fields: SchemaField[];
     // additional props:
     fields: OutputSchemaField[];
     typeName: string;
-  }
-  export interface SchemaField {
+  }>;
+  export type SchemaField = ReadonlyDeep<{
     name: string;
     isNullable?: boolean;
     // outputType: OutputTypeRef;
@@ -161,7 +165,7 @@ export namespace DMMF {
     typeGraphQLType: string;
     fieldTSType: string;
     isRequired: boolean;
-  }
+  }>;
   export type OutputTypeRef = TypeRef<
     "scalar" | "outputObjectTypes" | "enumTypes"
   >;
@@ -202,7 +206,7 @@ export namespace DMMF {
     fields: SchemaArg[];
   }
   export type FieldRefAllowType = TypeRef<"scalar" | "enumTypes">;
-  export interface ModelMapping {
+  export type ModelMapping = ReadonlyDeep<{
     // model: string;
     // plural: string;
     // findUnique?: string | null;
@@ -229,7 +233,8 @@ export namespace DMMF {
     collectionName: string;
     resolverName: string;
     modelTypeName: string;
-  }
+  }>;
+
   export enum ModelAction {
     findUnique = "findUnique",
     findUniqueOrThrow = "findUniqueOrThrow",
