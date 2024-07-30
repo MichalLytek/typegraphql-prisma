@@ -199,6 +199,7 @@ export class ExampleSumAggregate {
 exports[`outputs should properly generate aggregate classes for model with lowercase name: outputs index 1`] = `
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateExample } from \\"./AggregateExample\\";
+export { CreateManyexampleAndReturnOutputType } from \\"./CreateManyexampleAndReturnOutputType\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
 export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
 export { ExampleGroupBy } from \\"./ExampleGroupBy\\";
@@ -407,6 +408,7 @@ export class ExampleSumAggregate {
 exports[`outputs should properly generate aggregate classes for renamed model: outputs index 1`] = `
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateExample } from \\"./AggregateExample\\";
+export { CreateManySampleAndReturnOutputType } from \\"./CreateManySampleAndReturnOutputType\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
 export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
 export { ExampleGroupBy } from \\"./ExampleGroupBy\\";
@@ -442,6 +444,8 @@ exports[`outputs should properly generate count classes for relation fields with
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateFirstModel } from \\"./AggregateFirstModel\\";
 export { AggregateSecondModel } from \\"./AggregateSecondModel\\";
+export { CreateManyFirstModelAndReturnOutputType } from \\"./CreateManyFirstModelAndReturnOutputType\\";
+export { CreateManySecondModelAndReturnOutputType } from \\"./CreateManySecondModelAndReturnOutputType\\";
 export { FirstModelAvgAggregate } from \\"./FirstModelAvgAggregate\\";
 export { FirstModelCount } from \\"./FirstModelCount\\";
 export { FirstModelCountAggregate } from \\"./FirstModelCountAggregate\\";
@@ -485,6 +489,8 @@ exports[`outputs should properly generate count classes for relation fields: out
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateFirstModel } from \\"./AggregateFirstModel\\";
 export { AggregateSecondModel } from \\"./AggregateSecondModel\\";
+export { CreateManyFirstModelAndReturnOutputType } from \\"./CreateManyFirstModelAndReturnOutputType\\";
+export { CreateManySecondModelAndReturnOutputType } from \\"./CreateManySecondModelAndReturnOutputType\\";
 export { FirstModelAvgAggregate } from \\"./FirstModelAvgAggregate\\";
 export { FirstModelCount } from \\"./FirstModelCount\\";
 export { FirstModelCountAggregate } from \\"./FirstModelCountAggregate\\";
@@ -803,6 +809,7 @@ export class SampleSumAggregate {
 exports[`outputs should properly generate output type classes: outputs index 1`] = `
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateSample } from \\"./AggregateSample\\";
+export { CreateManySampleAndReturnOutputType } from \\"./CreateManySampleAndReturnOutputType\\";
 export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";
 export { SampleCountAggregate } from \\"./SampleCountAggregate\\";
 export { SampleGroupBy } from \\"./SampleGroupBy\\";

@@ -321,6 +321,10 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       AggregatePost.js
       AggregateUser.d.ts
       AggregateUser.js
+      CreateManyPostAndReturnOutputType.d.ts
+      CreateManyPostAndReturnOutputType.js
+      CreateManyUserAndReturnOutputType.d.ts
+      CreateManyUserAndReturnOutputType.js
       PostAvgAggregate.d.ts
       PostAvgAggregate.js
       PostCountAggregate.d.ts
@@ -544,6 +548,8 @@ exports[`structure should generate proper folders and file names when model is r
       AffectedRowsOutput.ts
       AggregateRenamedPost.ts
       AggregateRenamedUser.ts
+      CreateManyPostAndReturnOutputType.ts
+      CreateManyUserAndReturnOutputType.ts
       RenamedPostAvgAggregate.ts
       RenamedPostCountAggregate.ts
       RenamedPostGroupBy.ts
@@ -743,6 +749,8 @@ exports[`structure should generate proper folders structure and file names for c
       AffectedRowsOutput.ts
       AggregatePost.ts
       AggregateUser.ts
+      CreateManyPostAndReturnOutputType.ts
+      CreateManyUserAndReturnOutputType.ts
       PostAvgAggregate.ts
       PostCountAggregate.ts
       PostGroupBy.ts

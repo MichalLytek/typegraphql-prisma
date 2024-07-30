@@ -323,7 +323,9 @@ const outputsInfo = {
   PostAvgAggregate: [\\"authorId\\"],
   PostSumAggregate: [\\"authorId\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
+  CreateManyUserAndReturnOutputType: [\\"id\\", \\"email\\"],
+  CreateManyPostAndReturnOutputType: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;
@@ -745,7 +747,8 @@ const outputsInfo = {
   AffectedRowsOutput: [\\"count\\"],
   PostCountAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_all\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
+  CreateManyPostAndReturnOutputType: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;

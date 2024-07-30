@@ -275,7 +275,9 @@ const outputsInfo = {
   PostAvgAggregate: [\\"authorId\\"],
   PostSumAggregate: [\\"authorId\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
+  CreateManyUserAndReturnOutputType: [\\"id\\", \\"email\\"],
+  CreateManyPostAndReturnOutputType: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;
@@ -636,6 +638,8 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
       AffectedRowsOutput.ts
       AggregatePost.ts
       AggregateUser.ts
+      CreateManyPostAndReturnOutputType.ts
+      CreateManyUserAndReturnOutputType.ts
       PostAvgAggregate.ts
       PostCountAggregate.ts
       PostGroupBy.ts
@@ -932,7 +936,9 @@ const outputsInfo = {
   PostAvgAggregate: [\\"authorId\\"],
   PostSumAggregate: [\\"authorId\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
+  CreateManyUserAndReturnOutputType: [\\"id\\", \\"email\\"],
+  CreateManyPostAndReturnOutputType: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;
@@ -1293,6 +1299,8 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
       AffectedRowsOutput.ts
       AggregatePost.ts
       AggregateUser.ts
+      CreateManyPostAndReturnOutputType.ts
+      CreateManyUserAndReturnOutputType.ts
       PostAvgAggregate.ts
       PostCountAggregate.ts
       PostGroupBy.ts
@@ -1837,7 +1845,9 @@ const outputsInfo = {
   PostAvgAggregate: [\\"authorId\\"],
   PostSumAggregate: [\\"authorId\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
+  CreateManyUserAndReturnOutputType: [\\"id\\", \\"email\\"],
+  CreateManyPostAndReturnOutputType: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;
@@ -1911,6 +1921,8 @@ exports[`emitOnly generator option when only 'outputs' is set should generate pr
       AffectedRowsOutput.ts
       AggregatePost.ts
       AggregateUser.ts
+      CreateManyPostAndReturnOutputType.ts
+      CreateManyUserAndReturnOutputType.ts
       PostAvgAggregate.ts
       PostCountAggregate.ts
       PostGroupBy.ts
