@@ -243,6 +243,7 @@ export namespace DMMF {
     findMany = "findMany",
     createOne = "createOne",
     createMany = "createMany",
+    createManyAndReturn = "createManyAndReturn",
     updateOne = "updateOne",
     updateMany = "updateMany",
     upsertOne = "upsertOne",
