@@ -315,6 +315,7 @@ export class UpsertOneUserResolver {
 exports[`crud should properly generate actions resolver classes for prisma model: actionsIndex 1`] = `
 "export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
 export { CreateManyUserResolver } from \\"./User/CreateManyUserResolver\\";
+export { CreateManyAndReturnUserResolver } from \\"./User/CreateManyAndReturnUserResolver\\";
 export { CreateOneUserResolver } from \\"./User/CreateOneUserResolver\\";
 export { DeleteManyUserResolver } from \\"./User/DeleteManyUserResolver\\";
 export { DeleteOneUserResolver } from \\"./User/DeleteOneUserResolver\\";
@@ -646,6 +647,7 @@ export class GroupByUserArgs {
 
 exports[`crud should properly generate args classes for every method of crud resolver: Index 1`] = `
 "export { AggregateUserArgs } from \\"./AggregateUserArgs\\";
+export { CreateManyAndReturnUserArgs } from \\"./CreateManyAndReturnUserArgs\\";
 export { CreateManyUserArgs } from \\"./CreateManyUserArgs\\";
 export { CreateOneUserArgs } from \\"./CreateOneUserArgs\\";
 export { DeleteManyUserArgs } from \\"./DeleteManyUserArgs\\";
@@ -899,6 +901,7 @@ export class FindManyFirstModelArgs {
 
 exports[`crud should properly generate args classes for sorting by many-to-many relation fields: index 1`] = `
 "export { AggregateFirstModelArgs } from \\"./AggregateFirstModelArgs\\";
+export { CreateManyAndReturnFirstModelArgs } from \\"./CreateManyAndReturnFirstModelArgs\\";
 export { CreateManyFirstModelArgs } from \\"./CreateManyFirstModelArgs\\";
 export { CreateOneFirstModelArgs } from \\"./CreateOneFirstModelArgs\\";
 export { DeleteManyFirstModelArgs } from \\"./DeleteManyFirstModelArgs\\";
@@ -1040,6 +1043,7 @@ export class FindManySecondModelArgs {
 
 exports[`crud should properly generate args classes for sorting by one-to-many relation fields: index 1`] = `
 "export { AggregateSecondModelArgs } from \\"./AggregateSecondModelArgs\\";
+export { CreateManyAndReturnSecondModelArgs } from \\"./CreateManyAndReturnSecondModelArgs\\";
 export { CreateManySecondModelArgs } from \\"./CreateManySecondModelArgs\\";
 export { CreateOneSecondModelArgs } from \\"./CreateOneSecondModelArgs\\";
 export { DeleteManySecondModelArgs } from \\"./DeleteManySecondModelArgs\\";
@@ -1067,6 +1071,7 @@ exports[`crud should properly generate resolver class for single prisma model: U
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateManyAndReturnUserArgs } from \\"./args/CreateManyAndReturnUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
@@ -1084,6 +1089,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
+import { CreateManyUserAndReturnOutputType } from \\"../../outputs/CreateManyUserAndReturnOutputType\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -1104,6 +1110,17 @@ export class UserCrudResolver {
   async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyUserAndReturnOutputType], {
+    nullable: false
+  })
+  async createManyAndReturnUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyAndReturnUserArgs): Promise<CreateManyUserAndReturnOutputType[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
@@ -1249,6 +1266,7 @@ export class UserCrudResolver {
 exports[`crud should properly generate resolver class for single prisma model: actionsIndex 1`] = `
 "export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
 export { CreateManyUserResolver } from \\"./User/CreateManyUserResolver\\";
+export { CreateManyAndReturnUserResolver } from \\"./User/CreateManyAndReturnUserResolver\\";
 export { CreateOneUserResolver } from \\"./User/CreateOneUserResolver\\";
 export { DeleteManyUserResolver } from \\"./User/DeleteManyUserResolver\\";
 export { DeleteOneUserResolver } from \\"./User/DeleteOneUserResolver\\";
@@ -1300,6 +1318,7 @@ exports[`crud should properly generate resolver class when cannot pluralize mode
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateStaffArgs } from \\"./args/AggregateStaffArgs\\";
+import { CreateManyAndReturnStaffArgs } from \\"./args/CreateManyAndReturnStaffArgs\\";
 import { CreateManyStaffArgs } from \\"./args/CreateManyStaffArgs\\";
 import { CreateOneStaffArgs } from \\"./args/CreateOneStaffArgs\\";
 import { DeleteManyStaffArgs } from \\"./args/DeleteManyStaffArgs\\";
@@ -1317,6 +1336,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Staff } from \\"../../../models/Staff\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
+import { CreateManyStaffAndReturnOutputType } from \\"../../outputs/CreateManyStaffAndReturnOutputType\\";
 import { StaffGroupBy } from \\"../../outputs/StaffGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => Staff)
@@ -1337,6 +1357,17 @@ export class StaffCrudResolver {
   async createManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyStaffArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyStaffAndReturnOutputType], {
+    nullable: false
+  })
+  async createManyAndReturnStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyAndReturnStaffArgs): Promise<CreateManyStaffAndReturnOutputType[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).staff.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
@@ -1483,6 +1514,7 @@ exports[`crud should properly generate resolver class when cannot pluralize mode
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateStaffArgs } from \\"./args/AggregateStaffArgs\\";
+import { CreateManyAndReturnStaffArgs } from \\"./args/CreateManyAndReturnStaffArgs\\";
 import { CreateManyStaffArgs } from \\"./args/CreateManyStaffArgs\\";
 import { CreateOneStaffArgs } from \\"./args/CreateOneStaffArgs\\";
 import { DeleteManyStaffArgs } from \\"./args/DeleteManyStaffArgs\\";
@@ -1500,6 +1532,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Staff } from \\"../../../models/Staff\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
+import { CreateManyStaffAndReturnOutputType } from \\"../../outputs/CreateManyStaffAndReturnOutputType\\";
 import { StaffGroupBy } from \\"../../outputs/StaffGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => Staff)
@@ -1520,6 +1553,17 @@ export class StaffCrudResolver {
   async createManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyStaffArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).staff.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyStaffAndReturnOutputType], {
+    nullable: false
+  })
+  async createManyAndReturnStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyAndReturnStaffArgs): Promise<CreateManyStaffAndReturnOutputType[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).staff.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
@@ -1712,6 +1756,7 @@ exports[`crud should properly generate resolver class when useOriginalMapping is
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateManyAndReturnUserArgs } from \\"./args/CreateManyAndReturnUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
@@ -1729,6 +1774,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
+import { CreateManyUserAndReturnOutputType } from \\"../../outputs/CreateManyUserAndReturnOutputType\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -1749,6 +1795,17 @@ export class UserCrudResolver {
   async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyUserAndReturnOutputType], {
+    nullable: false
+  })
+  async createManyAndReturnUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyAndReturnUserArgs): Promise<CreateManyUserAndReturnOutputType[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
@@ -1895,6 +1952,7 @@ exports[`crud when emitRedundantTypesInfo is set to true should properly generat
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateManyAndReturnUserArgs } from \\"./args/CreateManyAndReturnUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
@@ -1912,6 +1970,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
+import { CreateManyUserAndReturnOutputType } from \\"../../outputs/CreateManyUserAndReturnOutputType\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -1932,6 +1991,17 @@ export class UserCrudResolver {
   async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyUserArgs) args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyUserAndReturnOutputType], {
+    nullable: false
+  })
+  async createManyAndReturnUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnUserArgs) args: CreateManyAndReturnUserArgs): Promise<CreateManyUserAndReturnOutputType[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
@@ -2081,6 +2151,7 @@ exports.UserCrudResolver = void 0;
 const tslib_1 = require(\\"tslib\\");
 const TypeGraphQL = tslib_1.__importStar(require(\\"type-graphql\\"));
 const AggregateUserArgs_1 = require(\\"./args/AggregateUserArgs\\");
+const CreateManyAndReturnUserArgs_1 = require(\\"./args/CreateManyAndReturnUserArgs\\");
 const CreateManyUserArgs_1 = require(\\"./args/CreateManyUserArgs\\");
 const CreateOneUserArgs_1 = require(\\"./args/CreateOneUserArgs\\");
 const DeleteManyUserArgs_1 = require(\\"./args/DeleteManyUserArgs\\");
@@ -2098,6 +2169,7 @@ const helpers_1 = require(\\"../../../helpers\\");
 const User_1 = require(\\"../../../models/User\\");
 const AffectedRowsOutput_1 = require(\\"../../outputs/AffectedRowsOutput\\");
 const AggregateUser_1 = require(\\"../../outputs/AggregateUser\\");
+const CreateManyUserAndReturnOutputType_1 = require(\\"../../outputs/CreateManyUserAndReturnOutputType\\");
 const UserGroupBy_1 = require(\\"../../outputs/UserGroupBy\\");
 let UserCrudResolver = class UserCrudResolver {
     async aggregateUser(ctx, info, args) {
@@ -2109,6 +2181,13 @@ let UserCrudResolver = class UserCrudResolver {
     async createManyUser(ctx, info, args) {
         const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.createMany({
+            ...args,
+            ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
+        });
+    }
+    async createManyAndReturnUser(ctx, info, args) {
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
+        return (0, helpers_1.getPrismaFromContext)(ctx).user.createManyAndReturn({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
@@ -2221,6 +2300,17 @@ tslib_1.__decorate([
     tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, CreateManyUserArgs_1.CreateManyUserArgs]),
     tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"createManyUser\\", null);
+tslib_1.__decorate([
+    TypeGraphQL.Mutation(_returns => [CreateManyUserAndReturnOutputType_1.CreateManyUserAndReturnOutputType], {
+        nullable: false
+    }),
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, CreateManyAndReturnUserArgs_1.CreateManyAndReturnUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
+], UserCrudResolver.prototype, \\"createManyAndReturnUser\\", null);
 tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: false
@@ -2363,6 +2453,7 @@ exports[`crud when formatGeneratedCode is set to 'prettier' should properly form
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateManyAndReturnUserArgs } from \\"./args/CreateManyAndReturnUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
@@ -2384,6 +2475,7 @@ import {
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
+import { CreateManyUserAndReturnOutputType } from \\"../../outputs/CreateManyUserAndReturnOutputType\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -2412,6 +2504,21 @@ export class UserCrudResolver {
   ): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyUserAndReturnOutputType], {
+    nullable: false,
+  })
+  async createManyAndReturnUser(
+    @TypeGraphQL.Ctx() ctx: any,
+    @TypeGraphQL.Info() info: GraphQLResolveInfo,
+    @TypeGraphQL.Args() args: CreateManyAndReturnUserArgs,
+  ): Promise<CreateManyUserAndReturnOutputType[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
@@ -2609,6 +2716,7 @@ exports[`crud when formatGeneratedCode is set to false should not format generat
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateManyAndReturnUserArgs } from \\"./args/CreateManyAndReturnUserArgs\\";
 import { CreateManyUserArgs } from \\"./args/CreateManyUserArgs\\";
 import { CreateOneUserArgs } from \\"./args/CreateOneUserArgs\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
@@ -2626,6 +2734,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
+import { CreateManyUserAndReturnOutputType } from \\"../../outputs/CreateManyUserAndReturnOutputType\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -2646,6 +2755,17 @@ export class UserCrudResolver {
     async createManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
          const { _count } = transformInfoIntoPrismaArgs(info);
                     return getPrismaFromContext(ctx).user.createMany({
+                      ...args,
+                      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+                    });
+    }
+
+    @TypeGraphQL.Mutation(_returns => [CreateManyUserAndReturnOutputType], {
+            nullable: false
+        })
+    async createManyAndReturnUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyAndReturnUserArgs): Promise<CreateManyUserAndReturnOutputType[]> {
+         const { _count } = transformInfoIntoPrismaArgs(info);
+                    return getPrismaFromContext(ctx).user.createManyAndReturn({
                       ...args,
                       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
                     });
@@ -3318,6 +3438,7 @@ export class GroupByClientArgs {
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: Index 1`] = `
 "export { AggregateClientArgs } from \\"./AggregateClientArgs\\";
+export { CreateManyAndReturnClientArgs } from \\"./CreateManyAndReturnClientArgs\\";
 export { CreateManyClientArgs } from \\"./CreateManyClientArgs\\";
 export { CreateOneClientArgs } from \\"./CreateOneClientArgs\\";
 export { DeleteManyClientArgs } from \\"./DeleteManyClientArgs\\";
@@ -3430,6 +3551,7 @@ exports[`crud when model is renamed should properly generate resolver class for 
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateClientArgs } from \\"./args/AggregateClientArgs\\";
+import { CreateManyAndReturnClientArgs } from \\"./args/CreateManyAndReturnClientArgs\\";
 import { CreateManyClientArgs } from \\"./args/CreateManyClientArgs\\";
 import { CreateOneClientArgs } from \\"./args/CreateOneClientArgs\\";
 import { DeleteManyClientArgs } from \\"./args/DeleteManyClientArgs\\";
@@ -3448,6 +3570,7 @@ import { Client } from \\"../../../models/Client\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateClient } from \\"../../outputs/AggregateClient\\";
 import { ClientGroupBy } from \\"../../outputs/ClientGroupBy\\";
+import { CreateManyUserAndReturnOutputType } from \\"../../outputs/CreateManyUserAndReturnOutputType\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class ClientCrudResolver {
@@ -3467,6 +3590,17 @@ export class ClientCrudResolver {
   async createManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyClientArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyUserAndReturnOutputType], {
+    nullable: false
+  })
+  async createManyAndReturnClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyAndReturnClientArgs): Promise<CreateManyUserAndReturnOutputType[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
@@ -3639,6 +3773,7 @@ exports[`crud when model is renamed should properly generate resolver class for 
 "import * as TypeGraphQL from \\"type-graphql\\";
 import type { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateMainUserArgs } from \\"./args/AggregateMainUserArgs\\";
+import { CreateManyAndReturnMainUserArgs } from \\"./args/CreateManyAndReturnMainUserArgs\\";
 import { CreateManyMainUserArgs } from \\"./args/CreateManyMainUserArgs\\";
 import { CreateOneMainUserArgs } from \\"./args/CreateOneMainUserArgs\\";
 import { DeleteManyMainUserArgs } from \\"./args/DeleteManyMainUserArgs\\";
@@ -3656,6 +3791,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { MainUser } from \\"../../../models/MainUser\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateMainUser } from \\"../../outputs/AggregateMainUser\\";
+import { CreateManyUserAndReturnOutputType } from \\"../../outputs/CreateManyUserAndReturnOutputType\\";
 import { MainUserGroupBy } from \\"../../outputs/MainUserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => MainUser)
@@ -3676,6 +3812,17 @@ export class MainUserCrudResolver {
   async createManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyMainUserArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyUserAndReturnOutputType], {
+    nullable: false
+  })
+  async createManyAndReturnMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CreateManyAndReturnMainUserArgs): Promise<CreateManyUserAndReturnOutputType[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

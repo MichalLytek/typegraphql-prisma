@@ -38,6 +38,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       [Post]
         AggregatePostResolver.d.ts
         AggregatePostResolver.js
+        CreateManyAndReturnPostResolver.d.ts
+        CreateManyAndReturnPostResolver.js
         CreateManyPostResolver.d.ts
         CreateManyPostResolver.js
         CreateOnePostResolver.d.ts
@@ -69,6 +71,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         [args]
           AggregatePostArgs.d.ts
           AggregatePostArgs.js
+          CreateManyAndReturnPostArgs.d.ts
+          CreateManyAndReturnPostArgs.js
           CreateManyPostArgs.d.ts
           CreateManyPostArgs.js
           CreateOnePostArgs.d.ts
@@ -100,6 +104,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       [User]
         AggregateUserResolver.d.ts
         AggregateUserResolver.js
+        CreateManyAndReturnUserResolver.d.ts
+        CreateManyAndReturnUserResolver.js
         CreateManyUserResolver.d.ts
         CreateManyUserResolver.js
         CreateOneUserResolver.d.ts
@@ -131,6 +137,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         [args]
           AggregateUserArgs.d.ts
           AggregateUserArgs.js
+          CreateManyAndReturnUserArgs.d.ts
+          CreateManyAndReturnUserArgs.js
           CreateManyUserArgs.d.ts
           CreateManyUserArgs.js
           CreateOneUserArgs.d.ts
@@ -404,6 +412,7 @@ exports[`structure should generate proper folders and file names when model is r
     [crud]
       [RenamedPost]
         AggregateRenamedPostResolver.ts
+        CreateManyAndReturnRenamedPostResolver.ts
         CreateManyRenamedPostResolver.ts
         CreateOneRenamedPostResolver.ts
         DeleteManyRenamedPostResolver.ts
@@ -420,6 +429,7 @@ exports[`structure should generate proper folders and file names when model is r
         UpsertOneRenamedPostResolver.ts
         [args]
           AggregateRenamedPostArgs.ts
+          CreateManyAndReturnRenamedPostArgs.ts
           CreateManyRenamedPostArgs.ts
           CreateOneRenamedPostArgs.ts
           DeleteManyRenamedPostArgs.ts
@@ -436,6 +446,7 @@ exports[`structure should generate proper folders and file names when model is r
           index.ts
       [RenamedUser]
         AggregateRenamedUserResolver.ts
+        CreateManyAndReturnRenamedUserResolver.ts
         CreateManyRenamedUserResolver.ts
         CreateOneRenamedUserResolver.ts
         DeleteManyRenamedUserResolver.ts
@@ -452,6 +463,7 @@ exports[`structure should generate proper folders and file names when model is r
         UpsertOneRenamedUserResolver.ts
         [args]
           AggregateRenamedUserArgs.ts
+          CreateManyAndReturnRenamedUserArgs.ts
           CreateManyRenamedUserArgs.ts
           CreateOneRenamedUserArgs.ts
           DeleteManyRenamedUserArgs.ts
@@ -605,6 +617,7 @@ exports[`structure should generate proper folders structure and file names for c
     [crud]
       [Post]
         AggregatePostResolver.ts
+        CreateManyAndReturnPostResolver.ts
         CreateManyPostResolver.ts
         CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
@@ -621,6 +634,7 @@ exports[`structure should generate proper folders structure and file names for c
         UpsertOnePostResolver.ts
         [args]
           AggregatePostArgs.ts
+          CreateManyAndReturnPostArgs.ts
           CreateManyPostArgs.ts
           CreateOnePostArgs.ts
           DeleteManyPostArgs.ts
@@ -637,6 +651,7 @@ exports[`structure should generate proper folders structure and file names for c
           index.ts
       [User]
         AggregateUserResolver.ts
+        CreateManyAndReturnUserResolver.ts
         CreateManyUserResolver.ts
         CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
@@ -653,6 +668,7 @@ exports[`structure should generate proper folders structure and file names for c
         UserCrudResolver.ts
         [args]
           AggregateUserArgs.ts
+          CreateManyAndReturnUserArgs.ts
           CreateManyUserArgs.ts
           CreateOneUserArgs.ts
           DeleteManyUserArgs.ts

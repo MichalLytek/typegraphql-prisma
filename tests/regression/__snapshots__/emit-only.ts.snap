@@ -20,6 +20,7 @@ const actionResolversMap = {
   User: {
     aggregateUser: actionResolvers.AggregateUserResolver,
     createManyUser: actionResolvers.CreateManyUserResolver,
+    createManyAndReturnUser: actionResolvers.CreateManyAndReturnUserResolver,
     createOneUser: actionResolvers.CreateOneUserResolver,
     deleteManyUser: actionResolvers.DeleteManyUserResolver,
     deleteOneUser: actionResolvers.DeleteOneUserResolver,
@@ -36,6 +37,7 @@ const actionResolversMap = {
   Post: {
     aggregatePost: actionResolvers.AggregatePostResolver,
     createManyPost: actionResolvers.CreateManyPostResolver,
+    createManyAndReturnPost: actionResolvers.CreateManyAndReturnPostResolver,
     createOnePost: actionResolvers.CreateOnePostResolver,
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     deleteOnePost: actionResolvers.DeleteOnePostResolver,
@@ -51,12 +53,13 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"findFirstUserOrThrow\\", \\"users\\", \\"user\\", \\"getUser\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
-  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
+  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createManyAndReturnUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"findFirstUserOrThrow\\", \\"users\\", \\"user\\", \\"getUser\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createManyAndReturnPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
   AggregateUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
   CreateManyUserArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateManyAndReturnUserArgs: [\\"data\\", \\"skipDuplicates\\"],
   CreateOneUserArgs: [\\"data\\"],
   DeleteManyUserArgs: [\\"where\\"],
   DeleteOneUserArgs: [\\"where\\"],
@@ -71,6 +74,7 @@ const argsInfo = {
   UpsertOneUserArgs: [\\"where\\", \\"create\\", \\"update\\"],
   AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
   CreateManyPostArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateManyAndReturnPostArgs: [\\"data\\", \\"skipDuplicates\\"],
   CreateOnePostArgs: [\\"data\\"],
   DeleteManyPostArgs: [\\"where\\"],
   DeleteOnePostArgs: [\\"where\\"],
@@ -108,7 +112,7 @@ export function applyResolversEnhanceMap(
   resolversEnhanceMap: ResolversEnhanceMap,
 ) {
   const mutationOperationPrefixes = [
-    \\"createOne\\", \\"createMany\\", \\"deleteOne\\", \\"updateOne\\", \\"deleteMany\\", \\"updateMany\\", \\"upsertOne\\"
+    \\"createOne\\", \\"createMany\\", \\"createManyAndReturn\\", \\"deleteOne\\", \\"updateOne\\", \\"deleteMany\\", \\"updateMany\\", \\"upsertOne\\"
   ];
   for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
     const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;
@@ -486,6 +490,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
     [crud]
       [Post]
         AggregatePostResolver.ts
+        CreateManyAndReturnPostResolver.ts
         CreateManyPostResolver.ts
         CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
@@ -502,6 +507,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
         UpsertOnePostResolver.ts
         [args]
           AggregatePostArgs.ts
+          CreateManyAndReturnPostArgs.ts
           CreateManyPostArgs.ts
           CreateOnePostArgs.ts
           DeleteManyPostArgs.ts
@@ -518,6 +524,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
           index.ts
       [User]
         AggregateUserResolver.ts
+        CreateManyAndReturnUserResolver.ts
         CreateManyUserResolver.ts
         CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
@@ -534,6 +541,7 @@ exports[`emitOnly generator option when both 'crudResolvers' and \`inputs\` is s
         UserCrudResolver.ts
         [args]
           AggregateUserArgs.ts
+          CreateManyAndReturnUserArgs.ts
           CreateManyUserArgs.ts
           CreateOneUserArgs.ts
           DeleteManyUserArgs.ts
@@ -681,6 +689,7 @@ const actionResolversMap = {
   User: {
     aggregateUser: actionResolvers.AggregateUserResolver,
     createManyUser: actionResolvers.CreateManyUserResolver,
+    createManyAndReturnUser: actionResolvers.CreateManyAndReturnUserResolver,
     createOneUser: actionResolvers.CreateOneUserResolver,
     deleteManyUser: actionResolvers.DeleteManyUserResolver,
     deleteOneUser: actionResolvers.DeleteOneUserResolver,
@@ -697,6 +706,7 @@ const actionResolversMap = {
   Post: {
     aggregatePost: actionResolvers.AggregatePostResolver,
     createManyPost: actionResolvers.CreateManyPostResolver,
+    createManyAndReturnPost: actionResolvers.CreateManyAndReturnPostResolver,
     createOnePost: actionResolvers.CreateOnePostResolver,
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     deleteOnePost: actionResolvers.DeleteOnePostResolver,
@@ -712,12 +722,13 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"findFirstUserOrThrow\\", \\"users\\", \\"user\\", \\"getUser\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
-  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
+  User: [\\"aggregateUser\\", \\"createManyUser\\", \\"createManyAndReturnUser\\", \\"createOneUser\\", \\"deleteManyUser\\", \\"deleteOneUser\\", \\"findFirstUser\\", \\"findFirstUserOrThrow\\", \\"users\\", \\"user\\", \\"getUser\\", \\"groupByUser\\", \\"updateManyUser\\", \\"updateOneUser\\", \\"upsertOneUser\\"],
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createManyAndReturnPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
   AggregateUserArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
   CreateManyUserArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateManyAndReturnUserArgs: [\\"data\\", \\"skipDuplicates\\"],
   CreateOneUserArgs: [\\"data\\"],
   DeleteManyUserArgs: [\\"where\\"],
   DeleteOneUserArgs: [\\"where\\"],
@@ -732,6 +743,7 @@ const argsInfo = {
   UpsertOneUserArgs: [\\"where\\", \\"create\\", \\"update\\"],
   AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
   CreateManyPostArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateManyAndReturnPostArgs: [\\"data\\", \\"skipDuplicates\\"],
   CreateOnePostArgs: [\\"data\\"],
   DeleteManyPostArgs: [\\"where\\"],
   DeleteOnePostArgs: [\\"where\\"],
@@ -769,7 +781,7 @@ export function applyResolversEnhanceMap(
   resolversEnhanceMap: ResolversEnhanceMap,
 ) {
   const mutationOperationPrefixes = [
-    \\"createOne\\", \\"createMany\\", \\"deleteOne\\", \\"updateOne\\", \\"deleteMany\\", \\"updateMany\\", \\"upsertOne\\"
+    \\"createOne\\", \\"createMany\\", \\"createManyAndReturn\\", \\"deleteOne\\", \\"updateOne\\", \\"deleteMany\\", \\"updateMany\\", \\"upsertOne\\"
   ];
   for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
     const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;
@@ -1147,6 +1159,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
     [crud]
       [Post]
         AggregatePostResolver.ts
+        CreateManyAndReturnPostResolver.ts
         CreateManyPostResolver.ts
         CreateOnePostResolver.ts
         DeleteManyPostResolver.ts
@@ -1163,6 +1176,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
         UpsertOnePostResolver.ts
         [args]
           AggregatePostArgs.ts
+          CreateManyAndReturnPostArgs.ts
           CreateManyPostArgs.ts
           CreateOnePostArgs.ts
           DeleteManyPostArgs.ts
@@ -1179,6 +1193,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
           index.ts
       [User]
         AggregateUserResolver.ts
+        CreateManyAndReturnUserResolver.ts
         CreateManyUserResolver.ts
         CreateOneUserResolver.ts
         DeleteManyUserResolver.ts
@@ -1195,6 +1210,7 @@ exports[`emitOnly generator option when only 'crudResolvers' is set should gener
         UserCrudResolver.ts
         [args]
           AggregateUserArgs.ts
+          CreateManyAndReturnUserArgs.ts
           CreateManyUserArgs.ts
           CreateOneUserArgs.ts
           DeleteManyUserArgs.ts
