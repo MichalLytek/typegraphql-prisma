@@ -177,6 +177,9 @@ describe("crud", () => {
     const createManyUserArgsTSFile = await readGeneratedFile(
       "/resolvers/crud/User/args/CreateManyUserArgs.ts",
     );
+    const createManyAndReturnUserArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/args/CreateManyAndReturnUserArgs.ts",
+    );
     const indexTSFile = await readGeneratedFile(
       "/resolvers/crud/User/args/index.ts",
     );
@@ -199,6 +202,9 @@ describe("crud", () => {
     expect(upsertOneUserArgsTSFile).toMatchSnapshot("UpsertOneUserArgs");
     expect(groupByUserArgsTSFile).toMatchSnapshot("GroupByUserArgs");
     expect(createManyUserArgsTSFile).toMatchSnapshot("CreateManyUserArgs");
+    expect(createManyAndReturnUserArgsTSFile).toMatchSnapshot(
+      "CreateManyAndReturnUserArgs",
+    );
     expect(indexTSFile).toMatchSnapshot("Index");
   });
 
@@ -252,6 +258,9 @@ describe("crud", () => {
     const createManyUserResolverTSFile = await readGeneratedFile(
       "/resolvers/crud/User/CreateManyUserResolver.ts",
     );
+    const createManyAndReturnUserResolverTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/CreateManyAndReturnUserResolver.ts",
+    );
     const indexTSFile = await readGeneratedFile("/resolvers/crud/index.ts");
     const argsIndexTSFile = await readGeneratedFile(
       "/resolvers/crud/args.index.ts",
@@ -297,6 +306,9 @@ describe("crud", () => {
     expect(groupByUserResolverTSFile).toMatchSnapshot("GroupByUserResolver");
     expect(createManyUserResolverTSFile).toMatchSnapshot(
       "CreateManyUserResolver",
+    );
+    expect(createManyAndReturnUserResolverTSFile).toMatchSnapshot(
+      "CreateManyAndReturnUserResolver",
     );
     expect(indexTSFile).toMatchSnapshot("Index");
     expect(argsIndexTSFile).toMatchSnapshot("argsIndex");
@@ -381,6 +393,9 @@ describe("crud", () => {
       const createManyClientArgsTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/args/CreateManyClientArgs.ts",
       );
+      const createManyAndReturnClientArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/Client/args/CreateManyAndReturnClientArgs.ts",
+      );
       const indexTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/args/index.ts",
       );
@@ -404,6 +419,9 @@ describe("crud", () => {
       expect(groupByClientArgsTSFile).toMatchSnapshot("GroupByClientArgs");
       expect(createManyClientArgsTSFile).toMatchSnapshot(
         "CreateManyClientArgs",
+      );
+      expect(createManyAndReturnClientArgsTSFile).toMatchSnapshot(
+        "CreateManyAndReturnClientArgs",
       );
       expect(indexTSFile).toMatchSnapshot("Index");
     });
@@ -462,6 +480,9 @@ describe("crud", () => {
       const createManyClientResolverTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/CreateManyClientResolver.ts",
       );
+      const createManyAndReturnClientResolverTSFile = await readGeneratedFile(
+        "/resolvers/crud/Client/CreateManyAndReturnClientResolver.ts",
+      );
 
       expect(createOneClientResolverTSFile).toMatchSnapshot(
         "CreateOneClientResolver",
@@ -498,6 +519,9 @@ describe("crud", () => {
       );
       expect(createManyClientResolverTSFile).toMatchSnapshot(
         "CreateManyClientResolver",
+      );
+      expect(createManyAndReturnClientResolverTSFile).toMatchSnapshot(
+        "CreateManyAndReturnClientResolver",
       );
     });
 

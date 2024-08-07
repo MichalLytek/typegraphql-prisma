@@ -283,30 +283,17 @@ export declare class Decimal {
     static readonly EUCLID: 9;
 }
 
-/**
- * Detect the current JavaScript runtime following
- * the WinterCG Runtime Keys proposal:
- *
- * - `edge-routine` Alibaba Cloud Edge Routine
- * - `workerd` Cloudflare Workers
- * - `deno` Deno and Deno Deploy
- * - `lagon` Lagon
- * - `react-native` React Native
- * - `netlify` Netlify Edge Functions
- * - `electron` Electron
- * - `node` Node.js
- * - `bun` Bun
- * - `edge-light` Vercel Edge Functions
- * - `fastly` Fastly Compute@Edge
- *
- * @see https://runtime-keys.proposal.wintercg.org/
- * @returns {Runtime}
- */
-export declare function detectRuntime(): Runtime;
-
 declare type Exact<A, W> = (A extends unknown ? (W extends A ? {
     [K in keyof A]: Exact<A[K], W[K]>;
 } : W) : never) | (A extends Narrowable ? A : never);
+
+export declare function getRuntime(): GetRuntimeOutput;
+
+declare type GetRuntimeOutput = {
+    id: Runtime;
+    prettyName: string;
+    isEdge: boolean;
+};
 
 declare class JsonNull extends NullTypesEnumValue {
 }
@@ -358,7 +345,7 @@ export declare const objectEnumValues: {
     };
 };
 
-declare type Operation = 'findFirst' | 'findFirstOrThrow' | 'findUnique' | 'findUniqueOrThrow' | 'findMany' | 'create' | 'createMany' | 'update' | 'updateMany' | 'upsert' | 'delete' | 'deleteMany' | 'aggregate' | 'count' | 'groupBy' | '$queryRaw' | '$executeRaw' | '$queryRawUnsafe' | '$executeRawUnsafe' | 'findRaw' | 'aggregateRaw' | '$runCommandRaw';
+declare type Operation = 'findFirst' | 'findFirstOrThrow' | 'findUnique' | 'findUniqueOrThrow' | 'findMany' | 'create' | 'createMany' | 'createManyAndReturn' | 'update' | 'updateMany' | 'upsert' | 'delete' | 'deleteMany' | 'aggregate' | 'count' | 'groupBy' | '$queryRaw' | '$executeRaw' | '$queryRawUnsafe' | '$executeRawUnsafe' | 'findRaw' | 'aggregateRaw' | '$runCommandRaw';
 
 declare namespace Public {
     export {

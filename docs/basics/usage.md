@@ -108,6 +108,7 @@ However, it can also generate some resolvers which might be handy especially on 
 - findMany
 - create
 - createMany
+- createManyAndReturn
 - update
 - updateMany
 - delete

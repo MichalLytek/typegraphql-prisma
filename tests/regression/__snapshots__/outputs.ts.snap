@@ -41,6 +41,42 @@ export class AggregateExample {
 "
 `;
 
+exports[`outputs should properly generate aggregate classes for model with lowercase name: CreateManyAndReturnExample 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.ObjectType(\\"CreateManyAndReturnExample\\", {})
+export class CreateManyAndReturnExample {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intIdField!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  stringField!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  booleanField!: boolean;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false
+  })
+  dateField!: Date;
+}
+"
+`;
+
 exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleAvgAggregate 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
@@ -199,6 +235,7 @@ export class ExampleSumAggregate {
 exports[`outputs should properly generate aggregate classes for model with lowercase name: outputs index 1`] = `
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateExample } from \\"./AggregateExample\\";
+export { CreateManyAndReturnExample } from \\"./CreateManyAndReturnExample\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
 export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
 export { ExampleGroupBy } from \\"./ExampleGroupBy\\";
@@ -245,6 +282,42 @@ export class AggregateExample {
     nullable: true
   })
   _max!: ExampleMaxAggregate | null;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: CreateManyAndReturnExample 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.ObjectType(\\"CreateManyAndReturnExample\\", {})
+export class CreateManyAndReturnExample {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intIdField!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  stringField!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  booleanField!: boolean;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false
+  })
+  dateField!: Date;
 }
 "
 `;
@@ -407,6 +480,7 @@ export class ExampleSumAggregate {
 exports[`outputs should properly generate aggregate classes for renamed model: outputs index 1`] = `
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateExample } from \\"./AggregateExample\\";
+export { CreateManyAndReturnExample } from \\"./CreateManyAndReturnExample\\";
 export { ExampleAvgAggregate } from \\"./ExampleAvgAggregate\\";
 export { ExampleCountAggregate } from \\"./ExampleCountAggregate\\";
 export { ExampleGroupBy } from \\"./ExampleGroupBy\\";
@@ -442,6 +516,8 @@ exports[`outputs should properly generate count classes for relation fields with
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateFirstModel } from \\"./AggregateFirstModel\\";
 export { AggregateSecondModel } from \\"./AggregateSecondModel\\";
+export { CreateManyAndReturnFirstModel } from \\"./CreateManyAndReturnFirstModel\\";
+export { CreateManyAndReturnSecondModel } from \\"./CreateManyAndReturnSecondModel\\";
 export { FirstModelAvgAggregate } from \\"./FirstModelAvgAggregate\\";
 export { FirstModelCount } from \\"./FirstModelCount\\";
 export { FirstModelCountAggregate } from \\"./FirstModelCountAggregate\\";
@@ -485,6 +561,8 @@ exports[`outputs should properly generate count classes for relation fields: out
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateFirstModel } from \\"./AggregateFirstModel\\";
 export { AggregateSecondModel } from \\"./AggregateSecondModel\\";
+export { CreateManyAndReturnFirstModel } from \\"./CreateManyAndReturnFirstModel\\";
+export { CreateManyAndReturnSecondModel } from \\"./CreateManyAndReturnSecondModel\\";
 export { FirstModelAvgAggregate } from \\"./FirstModelAvgAggregate\\";
 export { FirstModelCount } from \\"./FirstModelCount\\";
 export { FirstModelCountAggregate } from \\"./FirstModelCountAggregate\\";
@@ -555,6 +633,47 @@ export class AggregateSample {
     nullable: true
   })
   _max!: SampleMaxAggregate | null;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: CreateManyAndReturnSample 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import * as GraphQLScalars from \\"graphql-scalars\\";
+import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
+import { DecimalJSScalar } from \\"../../scalars\\";
+
+@TypeGraphQL.ObjectType(\\"CreateManyAndReturnSample\\", {})
+export class CreateManyAndReturnSample {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  intIdField!: number;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  stringField!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: false
+  })
+  floatField!: number;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  booleanField!: boolean;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false
+  })
+  dateField!: Date;
+
+  @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
+    nullable: true
+  })
+  intArrayField!: number[] | null;
 }
 "
 `;
@@ -803,6 +922,7 @@ export class SampleSumAggregate {
 exports[`outputs should properly generate output type classes: outputs index 1`] = `
 "export { AffectedRowsOutput } from \\"./AffectedRowsOutput\\";
 export { AggregateSample } from \\"./AggregateSample\\";
+export { CreateManyAndReturnSample } from \\"./CreateManyAndReturnSample\\";
 export { SampleAvgAggregate } from \\"./SampleAvgAggregate\\";
 export { SampleCountAggregate } from \\"./SampleCountAggregate\\";
 export { SampleGroupBy } from \\"./SampleGroupBy\\";

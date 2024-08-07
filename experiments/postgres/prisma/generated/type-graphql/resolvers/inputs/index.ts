@@ -14,7 +14,7 @@ export { CategoryMaxOrderByAggregateInput } from "./CategoryMaxOrderByAggregateI
 export { CategoryMinOrderByAggregateInput } from "./CategoryMinOrderByAggregateInput";
 export { CategoryOrderByRelevanceInput } from "./CategoryOrderByRelevanceInput";
 export { CategoryOrderByWithAggregationInput } from "./CategoryOrderByWithAggregationInput";
-export { CategoryOrderByWithRelationAndSearchRelevanceInput } from "./CategoryOrderByWithRelationAndSearchRelevanceInput";
+export { CategoryOrderByWithRelationInput } from "./CategoryOrderByWithRelationInput";
 export { CategoryScalarWhereWithAggregatesInput } from "./CategoryScalarWhereWithAggregatesInput";
 export { CategorySumOrderByAggregateInput } from "./CategorySumOrderByAggregateInput";
 export { CategoryUpdateInput } from "./CategoryUpdateInput";
@@ -38,7 +38,7 @@ export { CreatorNullableRelationFilter } from "./CreatorNullableRelationFilter";
 export { CreatorOrderByRelationAggregateInput } from "./CreatorOrderByRelationAggregateInput";
 export { CreatorOrderByRelevanceInput } from "./CreatorOrderByRelevanceInput";
 export { CreatorOrderByWithAggregationInput } from "./CreatorOrderByWithAggregationInput";
-export { CreatorOrderByWithRelationAndSearchRelevanceInput } from "./CreatorOrderByWithRelationAndSearchRelevanceInput";
+export { CreatorOrderByWithRelationInput } from "./CreatorOrderByWithRelationInput";
 export { CreatorScalarWhereInput } from "./CreatorScalarWhereInput";
 export { CreatorScalarWhereWithAggregatesInput } from "./CreatorScalarWhereWithAggregatesInput";
 export { CreatorSumOrderByAggregateInput } from "./CreatorSumOrderByAggregateInput";
@@ -71,7 +71,7 @@ export { DirectorMaxOrderByAggregateInput } from "./DirectorMaxOrderByAggregateI
 export { DirectorMinOrderByAggregateInput } from "./DirectorMinOrderByAggregateInput";
 export { DirectorOrderByRelevanceInput } from "./DirectorOrderByRelevanceInput";
 export { DirectorOrderByWithAggregationInput } from "./DirectorOrderByWithAggregationInput";
-export { DirectorOrderByWithRelationAndSearchRelevanceInput } from "./DirectorOrderByWithRelationAndSearchRelevanceInput";
+export { DirectorOrderByWithRelationInput } from "./DirectorOrderByWithRelationInput";
 export { DirectorRelationFilter } from "./DirectorRelationFilter";
 export { DirectorScalarWhereWithAggregatesInput } from "./DirectorScalarWhereWithAggregatesInput";
 export { DirectorUpdateInput } from "./DirectorUpdateInput";
@@ -94,7 +94,7 @@ export { EquipmentMaxOrderByAggregateInput } from "./EquipmentMaxOrderByAggregat
 export { EquipmentMinOrderByAggregateInput } from "./EquipmentMinOrderByAggregateInput";
 export { EquipmentOrderByRelevanceInput } from "./EquipmentOrderByRelevanceInput";
 export { EquipmentOrderByWithAggregationInput } from "./EquipmentOrderByWithAggregationInput";
-export { EquipmentOrderByWithRelationAndSearchRelevanceInput } from "./EquipmentOrderByWithRelationAndSearchRelevanceInput";
+export { EquipmentOrderByWithRelationInput } from "./EquipmentOrderByWithRelationInput";
 export { EquipmentScalarWhereWithAggregatesInput } from "./EquipmentScalarWhereWithAggregatesInput";
 export { EquipmentUpdateInput } from "./EquipmentUpdateInput";
 export { EquipmentUpdateManyMutationInput } from "./EquipmentUpdateManyMutationInput";
@@ -110,7 +110,7 @@ export { HiddenMaxOrderByAggregateInput } from "./HiddenMaxOrderByAggregateInput
 export { HiddenMinOrderByAggregateInput } from "./HiddenMinOrderByAggregateInput";
 export { HiddenOrderByRelevanceInput } from "./HiddenOrderByRelevanceInput";
 export { HiddenOrderByWithAggregationInput } from "./HiddenOrderByWithAggregationInput";
-export { HiddenOrderByWithRelationAndSearchRelevanceInput } from "./HiddenOrderByWithRelationAndSearchRelevanceInput";
+export { HiddenOrderByWithRelationInput } from "./HiddenOrderByWithRelationInput";
 export { HiddenScalarWhereWithAggregatesInput } from "./HiddenScalarWhereWithAggregatesInput";
 export { HiddenUpdateInput } from "./HiddenUpdateInput";
 export { HiddenUpdateManyMutationInput } from "./HiddenUpdateManyMutationInput";
@@ -140,7 +140,7 @@ export { MainUserMaxOrderByAggregateInput } from "./MainUserMaxOrderByAggregateI
 export { MainUserMinOrderByAggregateInput } from "./MainUserMinOrderByAggregateInput";
 export { MainUserOrderByRelevanceInput } from "./MainUserOrderByRelevanceInput";
 export { MainUserOrderByWithAggregationInput } from "./MainUserOrderByWithAggregationInput";
-export { MainUserOrderByWithRelationAndSearchRelevanceInput } from "./MainUserOrderByWithRelationAndSearchRelevanceInput";
+export { MainUserOrderByWithRelationInput } from "./MainUserOrderByWithRelationInput";
 export { MainUserRelationFilter } from "./MainUserRelationFilter";
 export { MainUserScalarWhereWithAggregatesInput } from "./MainUserScalarWhereWithAggregatesInput";
 export { MainUserSumOrderByAggregateInput } from "./MainUserSumOrderByAggregateInput";
@@ -173,7 +173,7 @@ export { MovieMovieCompoundIdCompoundUniqueInput } from "./MovieMovieCompoundIdC
 export { MovieOrderByRelationAggregateInput } from "./MovieOrderByRelationAggregateInput";
 export { MovieOrderByRelevanceInput } from "./MovieOrderByRelevanceInput";
 export { MovieOrderByWithAggregationInput } from "./MovieOrderByWithAggregationInput";
-export { MovieOrderByWithRelationAndSearchRelevanceInput } from "./MovieOrderByWithRelationAndSearchRelevanceInput";
+export { MovieOrderByWithRelationInput } from "./MovieOrderByWithRelationInput";
 export { MovieScalarWhereInput } from "./MovieScalarWhereInput";
 export { MovieScalarWhereWithAggregatesInput } from "./MovieScalarWhereWithAggregatesInput";
 export { MovieUpdateInput } from "./MovieUpdateInput";
@@ -192,7 +192,7 @@ export { NativeTypeModelCreateManyInput } from "./NativeTypeModelCreateManyInput
 export { NativeTypeModelMaxOrderByAggregateInput } from "./NativeTypeModelMaxOrderByAggregateInput";
 export { NativeTypeModelMinOrderByAggregateInput } from "./NativeTypeModelMinOrderByAggregateInput";
 export { NativeTypeModelOrderByWithAggregationInput } from "./NativeTypeModelOrderByWithAggregationInput";
-export { NativeTypeModelOrderByWithRelationAndSearchRelevanceInput } from "./NativeTypeModelOrderByWithRelationAndSearchRelevanceInput";
+export { NativeTypeModelOrderByWithRelationInput } from "./NativeTypeModelOrderByWithRelationInput";
 export { NativeTypeModelScalarWhereWithAggregatesInput } from "./NativeTypeModelScalarWhereWithAggregatesInput";
 export { NativeTypeModelSumOrderByAggregateInput } from "./NativeTypeModelSumOrderByAggregateInput";
 export { NativeTypeModelUpdateInput } from "./NativeTypeModelUpdateInput";
@@ -239,7 +239,7 @@ export { PatientMaxOrderByAggregateInput } from "./PatientMaxOrderByAggregateInp
 export { PatientMinOrderByAggregateInput } from "./PatientMinOrderByAggregateInput";
 export { PatientOrderByRelevanceInput } from "./PatientOrderByRelevanceInput";
 export { PatientOrderByWithAggregationInput } from "./PatientOrderByWithAggregationInput";
-export { PatientOrderByWithRelationAndSearchRelevanceInput } from "./PatientOrderByWithRelationAndSearchRelevanceInput";
+export { PatientOrderByWithRelationInput } from "./PatientOrderByWithRelationInput";
 export { PatientScalarWhereWithAggregatesInput } from "./PatientScalarWhereWithAggregatesInput";
 export { PatientUpdateInput } from "./PatientUpdateInput";
 export { PatientUpdateManyMutationInput } from "./PatientUpdateManyMutationInput";
@@ -265,7 +265,7 @@ export { PostMinOrderByAggregateInput } from "./PostMinOrderByAggregateInput";
 export { PostOrderByRelationAggregateInput } from "./PostOrderByRelationAggregateInput";
 export { PostOrderByRelevanceInput } from "./PostOrderByRelevanceInput";
 export { PostOrderByWithAggregationInput } from "./PostOrderByWithAggregationInput";
-export { PostOrderByWithRelationAndSearchRelevanceInput } from "./PostOrderByWithRelationAndSearchRelevanceInput";
+export { PostOrderByWithRelationInput } from "./PostOrderByWithRelationInput";
 export { PostScalarWhereInput } from "./PostScalarWhereInput";
 export { PostScalarWhereWithAggregatesInput } from "./PostScalarWhereWithAggregatesInput";
 export { PostSumOrderByAggregateInput } from "./PostSumOrderByAggregateInput";
@@ -301,7 +301,7 @@ export { ProblemMinOrderByAggregateInput } from "./ProblemMinOrderByAggregateInp
 export { ProblemOrderByRelationAggregateInput } from "./ProblemOrderByRelationAggregateInput";
 export { ProblemOrderByRelevanceInput } from "./ProblemOrderByRelevanceInput";
 export { ProblemOrderByWithAggregationInput } from "./ProblemOrderByWithAggregationInput";
-export { ProblemOrderByWithRelationAndSearchRelevanceInput } from "./ProblemOrderByWithRelationAndSearchRelevanceInput";
+export { ProblemOrderByWithRelationInput } from "./ProblemOrderByWithRelationInput";
 export { ProblemScalarWhereInput } from "./ProblemScalarWhereInput";
 export { ProblemScalarWhereWithAggregatesInput } from "./ProblemScalarWhereWithAggregatesInput";
 export { ProblemSumOrderByAggregateInput } from "./ProblemSumOrderByAggregateInput";

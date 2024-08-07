@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateCategoryArgs } from "./args/AggregateCategoryArgs";
+import { CreateManyAndReturnCategoryArgs } from "./args/CreateManyAndReturnCategoryArgs";
 import { CreateManyCategoryArgs } from "./args/CreateManyCategoryArgs";
 import { CreateOneCategoryArgs } from "./args/CreateOneCategoryArgs";
 import { DeleteManyCategoryArgs } from "./args/DeleteManyCategoryArgs";
@@ -19,6 +20,7 @@ import { Category } from "../../../models/Category";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
 import { CategoryGroupBy } from "../../outputs/CategoryGroupBy";
+import { CreateManyAndReturnCategory } from "../../outputs/CreateManyAndReturnCategory";
 
 @TypeGraphQL.Resolver(_of => Category)
 export class CategoryCrudResolver {
@@ -38,6 +40,17 @@ export class CategoryCrudResolver {
   async createManyCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyCategoryArgs) args: CreateManyCategoryArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).category.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnCategory], {
+    nullable: false
+  })
+  async createManyAndReturnCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnCategoryArgs) args: CreateManyAndReturnCategoryArgs): Promise<CreateManyAndReturnCategory[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).category.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

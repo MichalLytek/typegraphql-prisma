@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { HiddenOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/HiddenOrderByWithRelationAndSearchRelevanceInput";
+import { HiddenOrderByWithRelationInput } from "../../../inputs/HiddenOrderByWithRelationInput";
 import { HiddenWhereInput } from "../../../inputs/HiddenWhereInput";
 import { HiddenWhereUniqueInput } from "../../../inputs/HiddenWhereUniqueInput";
 import { HiddenScalarFieldEnum } from "../../../../enums/HiddenScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindFirstHiddenArgs {
   })
   where?: HiddenWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [HiddenOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [HiddenOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: HiddenOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: HiddenOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => HiddenWhereUniqueInput, {
     nullable: true

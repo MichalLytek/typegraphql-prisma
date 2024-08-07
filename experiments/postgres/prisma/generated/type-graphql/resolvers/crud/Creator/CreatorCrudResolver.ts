@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateCreatorArgs } from "./args/AggregateCreatorArgs";
+import { CreateManyAndReturnCreatorArgs } from "./args/CreateManyAndReturnCreatorArgs";
 import { CreateManyCreatorArgs } from "./args/CreateManyCreatorArgs";
 import { CreateOneCreatorArgs } from "./args/CreateOneCreatorArgs";
 import { DeleteManyCreatorArgs } from "./args/DeleteManyCreatorArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Creator } from "../../../models/Creator";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateCreator } from "../../outputs/AggregateCreator";
+import { CreateManyAndReturnCreator } from "../../outputs/CreateManyAndReturnCreator";
 import { CreatorGroupBy } from "../../outputs/CreatorGroupBy";
 
 @TypeGraphQL.Resolver(_of => Creator)
@@ -38,6 +40,17 @@ export class CreatorCrudResolver {
   async createManyCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyCreatorArgs) args: CreateManyCreatorArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).creator.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnCreator], {
+    nullable: false
+  })
+  async createManyAndReturnCreator(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnCreatorArgs) args: CreateManyAndReturnCreatorArgs): Promise<CreateManyAndReturnCreator[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).creator.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

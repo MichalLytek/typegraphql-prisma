@@ -59,7 +59,7 @@ query FindMainUsers {
 }
 
 query SortAllMainUsers {
-  mainUsers(orderBy: [{ firstName: asc }, { id: desc }]) {
+  mainUsers(orderBy: [{ firstName: { sort: asc } }, { id: desc }]) {
     ...MainUserData
   }
 }
@@ -96,7 +96,7 @@ fragment PostData on Post {
   uuid
   createdAt
   updatedAt
-  published
+  isPublished
   title
   content
   kind
@@ -192,61 +192,14 @@ query AggregateMainUser {
   }
 }
 
-# # incompatible with useUncheckedScalarInputs
-# mutation ConnectOrCreateExample {
-#   createPost(
-#     data: {
-#       title: "Test"
-#       subtitle: "Test test"
-#       metadata: {}
-#       published: true
-#       author: {
-#         connectOrCreate: {
-#           where: { id: 1 }
-#           create: {
-#             email: "test1@test.test"
-#             accountBalance: 0
-#             role: ADMIN
-#             amount: 0
-#             age: 11
-#           }
-#         }
-#       }
-#     }
+# mutation AtomicNumberOperations {
+#   updateOneMainUser(
+#     data: { accountBalance: { increment: 100 } }
+#     where: { email: "test1@test.test" }
 #   ) {
-#     ...PostData
-#     author {
-#       ...MainUserData
-#     }
+#     ...MainUserData
 #   }
 # }
-
-# # incompatible with useUncheckedScalarInputs
-# mutation UncheckedInputsExample {
-#   createPost(
-#     data: {
-#       title: "Test"
-#       subtitle: "Test test"
-#       metadata: {}
-#       published: true
-#       authorId: 1
-#     }
-#   ) {
-#     ...PostData
-#     author {
-#       ...MainUserData
-#     }
-#   }
-# }
-
-mutation AtomicNumberOperations {
-  updateOneMainUser(
-    data: { accountBalance: { increment: 100 } }
-    where: { email: "test1@test.test" }
-  ) {
-    ...MainUserData
-  }
-}
 
 query ForbiddenCategories {
   categories {
@@ -303,11 +256,11 @@ mutation InsertNativeTypesFields {
   }
 }
 
-mutation AddGrade {
-  updateOneMainUser(where: { id: 1 }, data: { grades: { push: 5 } }) {
-    ...MainUserData
-  }
-}
+# mutation AddGrade {
+#   updateOneMainUser(where: { id: 1 }, data: { grades: { push: 5 } }) {
+#     ...MainUserData
+#   }
+# }
 
 query CountByRelations {
   findFirstMainUser {
@@ -330,7 +283,7 @@ query OrderByRelation {
 }
 
 query OrderByAggregateGroup {
-  groupByPost(by: kind, orderBy: { kind: desc }) {
+  groupByPost(by: kind, orderBy: { kind: { sort: desc } }) {
     kind
     _count {
       kind

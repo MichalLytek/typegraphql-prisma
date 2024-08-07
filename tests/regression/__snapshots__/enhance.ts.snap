@@ -21,6 +21,7 @@ const actionResolversMap = {
   Client: {
     aggregateClient: actionResolvers.AggregateClientResolver,
     createManyClient: actionResolvers.CreateManyClientResolver,
+    createManyAndReturnClient: actionResolvers.CreateManyAndReturnClientResolver,
     createOneClient: actionResolvers.CreateOneClientResolver,
     deleteManyClient: actionResolvers.DeleteManyClientResolver,
     deleteOneClient: actionResolvers.DeleteOneClientResolver,
@@ -37,6 +38,7 @@ const actionResolversMap = {
   Post: {
     aggregatePost: actionResolvers.AggregatePostResolver,
     createManyPost: actionResolvers.CreateManyPostResolver,
+    createManyAndReturnPost: actionResolvers.CreateManyAndReturnPostResolver,
     createOnePost: actionResolvers.CreateOnePostResolver,
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     deleteOnePost: actionResolvers.DeleteOnePostResolver,
@@ -52,12 +54,13 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  Client: [\\"aggregateClient\\", \\"createManyClient\\", \\"createOneClient\\", \\"deleteManyClient\\", \\"deleteOneClient\\", \\"findFirstClient\\", \\"findFirstClientOrThrow\\", \\"clients\\", \\"client\\", \\"getClient\\", \\"groupByClient\\", \\"updateManyClient\\", \\"updateOneClient\\", \\"upsertOneClient\\"],
-  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
+  Client: [\\"aggregateClient\\", \\"createManyClient\\", \\"createManyAndReturnClient\\", \\"createOneClient\\", \\"deleteManyClient\\", \\"deleteOneClient\\", \\"findFirstClient\\", \\"findFirstClientOrThrow\\", \\"clients\\", \\"client\\", \\"getClient\\", \\"groupByClient\\", \\"updateManyClient\\", \\"updateOneClient\\", \\"upsertOneClient\\"],
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createManyAndReturnPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
   AggregateClientArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
   CreateManyClientArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateManyAndReturnClientArgs: [\\"data\\", \\"skipDuplicates\\"],
   CreateOneClientArgs: [\\"data\\"],
   DeleteManyClientArgs: [\\"where\\"],
   DeleteOneClientArgs: [\\"where\\"],
@@ -72,6 +75,7 @@ const argsInfo = {
   UpsertOneClientArgs: [\\"where\\", \\"create\\", \\"update\\"],
   AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
   CreateManyPostArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateManyAndReturnPostArgs: [\\"data\\", \\"skipDuplicates\\"],
   CreateOnePostArgs: [\\"data\\"],
   DeleteManyPostArgs: [\\"where\\"],
   DeleteOnePostArgs: [\\"where\\"],
@@ -109,7 +113,7 @@ export function applyResolversEnhanceMap(
   resolversEnhanceMap: ResolversEnhanceMap,
 ) {
   const mutationOperationPrefixes = [
-    \\"createOne\\", \\"createMany\\", \\"deleteOne\\", \\"updateOne\\", \\"deleteMany\\", \\"updateMany\\", \\"upsertOne\\"
+    \\"createOne\\", \\"createMany\\", \\"createManyAndReturn\\", \\"deleteOne\\", \\"updateOne\\", \\"deleteMany\\", \\"updateMany\\", \\"upsertOne\\"
   ];
   for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
     const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;
@@ -323,7 +327,9 @@ const outputsInfo = {
   PostAvgAggregate: [\\"authorId\\"],
   PostSumAggregate: [\\"authorId\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\"],
+  CreateManyAndReturnClient: [\\"id\\", \\"email\\"],
+  CreateManyAndReturnPost: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"authorId\\", \\"metadata\\", \\"author\\"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;
@@ -532,6 +538,7 @@ const actionResolversMap = {
   Post: {
     aggregatePost: actionResolvers.AggregatePostResolver,
     createManyPost: actionResolvers.CreateManyPostResolver,
+    createManyAndReturnPost: actionResolvers.CreateManyAndReturnPostResolver,
     createOnePost: actionResolvers.CreateOnePostResolver,
     deleteManyPost: actionResolvers.DeleteManyPostResolver,
     deleteOnePost: actionResolvers.DeleteOnePostResolver,
@@ -547,11 +554,12 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
+  Post: [\\"aggregatePost\\", \\"createManyPost\\", \\"createManyAndReturnPost\\", \\"createOnePost\\", \\"deleteManyPost\\", \\"deleteOnePost\\", \\"findFirstPost\\", \\"findFirstPostOrThrow\\", \\"posts\\", \\"post\\", \\"getPost\\", \\"groupByPost\\", \\"updateManyPost\\", \\"updateOnePost\\", \\"upsertOnePost\\"]
 };
 const argsInfo = {
   AggregatePostArgs: [\\"where\\", \\"orderBy\\", \\"cursor\\", \\"take\\", \\"skip\\"],
   CreateManyPostArgs: [\\"data\\", \\"skipDuplicates\\"],
+  CreateManyAndReturnPostArgs: [\\"data\\", \\"skipDuplicates\\"],
   CreateOnePostArgs: [\\"data\\"],
   DeleteManyPostArgs: [\\"where\\"],
   DeleteOnePostArgs: [\\"where\\"],
@@ -589,7 +597,7 @@ export function applyResolversEnhanceMap(
   resolversEnhanceMap: ResolversEnhanceMap,
 ) {
   const mutationOperationPrefixes = [
-    \\"createOne\\", \\"createMany\\", \\"deleteOne\\", \\"updateOne\\", \\"deleteMany\\", \\"updateMany\\", \\"upsertOne\\"
+    \\"createOne\\", \\"createMany\\", \\"createManyAndReturn\\", \\"deleteOne\\", \\"updateOne\\", \\"deleteMany\\", \\"updateMany\\", \\"upsertOne\\"
   ];
   for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
     const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;
@@ -745,7 +753,8 @@ const outputsInfo = {
   AffectedRowsOutput: [\\"count\\"],
   PostCountAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\", \\"_all\\"],
   PostMinAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
-  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"]
+  PostMaxAggregate: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\"],
+  CreateManyAndReturnPost: [\\"uuid\\", \\"createdAt\\", \\"updatedAt\\", \\"published\\", \\"title\\", \\"content\\", \\"metadata\\"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;

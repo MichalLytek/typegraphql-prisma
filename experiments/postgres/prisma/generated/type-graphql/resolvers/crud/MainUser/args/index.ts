@@ -1,4 +1,5 @@
 export { AggregateMainUserArgs } from "./AggregateMainUserArgs";
+export { CreateManyAndReturnMainUserArgs } from "./CreateManyAndReturnMainUserArgs";
 export { CreateManyMainUserArgs } from "./CreateManyMainUserArgs";
 export { CreateOneMainUserArgs } from "./CreateOneMainUserArgs";
 export { DeleteManyMainUserArgs } from "./DeleteManyMainUserArgs";

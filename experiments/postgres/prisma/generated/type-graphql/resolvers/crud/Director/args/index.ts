@@ -1,4 +1,5 @@
 export { AggregateDirectorArgs } from "./AggregateDirectorArgs";
+export { CreateManyAndReturnDirectorArgs } from "./CreateManyAndReturnDirectorArgs";
 export { CreateManyDirectorArgs } from "./CreateManyDirectorArgs";
 export { CreateOneDirectorArgs } from "./CreateOneDirectorArgs";
 export { DeleteManyDirectorArgs } from "./DeleteManyDirectorArgs";

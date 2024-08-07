@@ -1,4 +1,5 @@
 export { AggregateEquipmentArgs } from "./AggregateEquipmentArgs";
+export { CreateManyAndReturnEquipmentArgs } from "./CreateManyAndReturnEquipmentArgs";
 export { CreateManyEquipmentArgs } from "./CreateManyEquipmentArgs";
 export { CreateOneEquipmentArgs } from "./CreateOneEquipmentArgs";
 export { DeleteManyEquipmentArgs } from "./DeleteManyEquipmentArgs";

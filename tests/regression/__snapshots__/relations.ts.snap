@@ -643,7 +643,7 @@ export class UserRelationsResolver {
 exports[`relations resolvers generation when \`fullTextSearch\` preview feature is enabled should properly generate args type classes using SearchRelevanceInput: FirstModelSecondModelsFieldArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
-import { SecondModelOrderByWithRelationAndSearchRelevanceInput } from \\"../../../inputs/SecondModelOrderByWithRelationAndSearchRelevanceInput\\";
+import { SecondModelOrderByWithRelationInput } from \\"../../../inputs/SecondModelOrderByWithRelationInput\\";
 import { SecondModelWhereInput } from \\"../../../inputs/SecondModelWhereInput\\";
 import { SecondModelWhereUniqueInput } from \\"../../../inputs/SecondModelWhereUniqueInput\\";
 import { SecondModelScalarFieldEnum } from \\"../../../../enums/SecondModelScalarFieldEnum\\";
@@ -655,10 +655,10 @@ export class FirstModelSecondModelsFieldArgs {
   })
   where?: SecondModelWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [SecondModelOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [SecondModelOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: SecondModelOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: SecondModelOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => SecondModelWhereUniqueInput, {
     nullable: true

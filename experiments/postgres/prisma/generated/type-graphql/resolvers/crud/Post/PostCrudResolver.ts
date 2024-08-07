@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregatePostArgs } from "./args/AggregatePostArgs";
+import { CreateManyAndReturnPostArgs } from "./args/CreateManyAndReturnPostArgs";
 import { CreateManyPostArgs } from "./args/CreateManyPostArgs";
 import { CreateOnePostArgs } from "./args/CreateOnePostArgs";
 import { DeleteManyPostArgs } from "./args/DeleteManyPostArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Post } from "../../../models/Post";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregatePost } from "../../outputs/AggregatePost";
+import { CreateManyAndReturnPost } from "../../outputs/CreateManyAndReturnPost";
 import { PostGroupBy } from "../../outputs/PostGroupBy";
 
 @TypeGraphQL.Resolver(_of => Post)
@@ -38,6 +40,17 @@ export class PostCrudResolver {
   async createManyPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyPostArgs) args: CreateManyPostArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).post.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnPost], {
+    nullable: false
+  })
+  async createManyAndReturnPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnPostArgs) args: CreateManyAndReturnPostArgs): Promise<CreateManyAndReturnPost[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).post.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

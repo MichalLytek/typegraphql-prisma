@@ -1,4 +1,5 @@
 export { AggregateNativeTypeModelArgs } from "./AggregateNativeTypeModelArgs";
+export { CreateManyAndReturnNativeTypeModelArgs } from "./CreateManyAndReturnNativeTypeModelArgs";
 export { CreateManyNativeTypeModelArgs } from "./CreateManyNativeTypeModelArgs";
 export { CreateOneNativeTypeModelArgs } from "./CreateOneNativeTypeModelArgs";
 export { DeleteManyNativeTypeModelArgs } from "./DeleteManyNativeTypeModelArgs";

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregatePatientArgs } from "./args/AggregatePatientArgs";
+import { CreateManyAndReturnPatientArgs } from "./args/CreateManyAndReturnPatientArgs";
 import { CreateManyPatientArgs } from "./args/CreateManyPatientArgs";
 import { CreateOnePatientArgs } from "./args/CreateOnePatientArgs";
 import { DeleteManyPatientArgs } from "./args/DeleteManyPatientArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Patient } from "../../../models/Patient";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
+import { CreateManyAndReturnPatient } from "../../outputs/CreateManyAndReturnPatient";
 import { PatientGroupBy } from "../../outputs/PatientGroupBy";
 
 @TypeGraphQL.Resolver(_of => Patient)
@@ -38,6 +40,17 @@ export class PatientCrudResolver {
   async createManyPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyPatientArgs) args: CreateManyPatientArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).patient.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnPatient], {
+    nullable: false
+  })
+  async createManyAndReturnPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnPatientArgs) args: CreateManyAndReturnPatientArgs): Promise<CreateManyAndReturnPatient[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).patient.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

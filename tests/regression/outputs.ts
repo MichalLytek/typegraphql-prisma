@@ -53,6 +53,9 @@ describe("outputs", () => {
     const sampleGroupByTSFile = await readGeneratedFile(
       "/resolvers/outputs/SampleGroupBy.ts",
     );
+    const createManyAndReturnSampleTSFile = await readGeneratedFile(
+      "/resolvers/outputs/CreateManyAndReturnSample.ts",
+    );
     const outputsIndexTSFile = await readGeneratedFile(
       "/resolvers/outputs/index.ts",
     );
@@ -65,6 +68,9 @@ describe("outputs", () => {
     expect(maxAggregateTSFile).toMatchSnapshot("SampleMaxAggregate");
     expect(affectedRowsOutputTSFile).toMatchSnapshot("AffectedRowsOutput");
     expect(sampleGroupByTSFile).toMatchSnapshot("SampleGroupBy");
+    expect(createManyAndReturnSampleTSFile).toMatchSnapshot(
+      "CreateManyAndReturnSample",
+    );
     expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
   });
 
@@ -99,6 +105,9 @@ describe("outputs", () => {
     const maxAggregateTSFile = await readGeneratedFile(
       "/resolvers/outputs/ExampleMaxAggregate.ts",
     );
+    const createManyAndReturnExampleTSFile = await readGeneratedFile(
+      "/resolvers/outputs/CreateManyAndReturnExample.ts",
+    );
     const outputsIndexTSFile = await readGeneratedFile(
       "/resolvers/outputs/index.ts",
     );
@@ -109,6 +118,9 @@ describe("outputs", () => {
     expect(sumAggregateTSFile).toMatchSnapshot("ExampleSumAggregate");
     expect(minAggregateTSFile).toMatchSnapshot("ExampleMinAggregate");
     expect(maxAggregateTSFile).toMatchSnapshot("ExampleMaxAggregate");
+    expect(createManyAndReturnExampleTSFile).toMatchSnapshot(
+      "CreateManyAndReturnExample",
+    );
     expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
   });
 
@@ -142,6 +154,9 @@ describe("outputs", () => {
     const maxAggregateTSFile = await readGeneratedFile(
       "/resolvers/outputs/ExampleMaxAggregate.ts",
     );
+    const createManyAndReturnTSFile = await readGeneratedFile(
+      "/resolvers/outputs/CreateManyAndReturnExample.ts",
+    );
     const outputsIndexTSFile = await readGeneratedFile(
       "/resolvers/outputs/index.ts",
     );
@@ -152,6 +167,9 @@ describe("outputs", () => {
     expect(sumAggregateTSFile).toMatchSnapshot("ExampleSumAggregate");
     expect(minAggregateTSFile).toMatchSnapshot("ExampleMinAggregate");
     expect(maxAggregateTSFile).toMatchSnapshot("ExampleMaxAggregate");
+    expect(createManyAndReturnTSFile).toMatchSnapshot(
+      "CreateManyAndReturnExample",
+    );
     expect(outputsIndexTSFile).toMatchSnapshot("outputs index");
   });
 

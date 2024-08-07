@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateMovieArgs } from "./args/AggregateMovieArgs";
+import { CreateManyAndReturnMovieArgs } from "./args/CreateManyAndReturnMovieArgs";
 import { CreateManyMovieArgs } from "./args/CreateManyMovieArgs";
 import { CreateOneMovieArgs } from "./args/CreateOneMovieArgs";
 import { DeleteManyMovieArgs } from "./args/DeleteManyMovieArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Movie } from "../../../models/Movie";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
+import { CreateManyAndReturnMovie } from "../../outputs/CreateManyAndReturnMovie";
 import { MovieGroupBy } from "../../outputs/MovieGroupBy";
 
 @TypeGraphQL.Resolver(_of => Movie)
@@ -38,6 +40,17 @@ export class MovieCrudResolver {
   async createManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyMovieArgs) args: CreateManyMovieArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).movie.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnMovie], {
+    nullable: false
+  })
+  async createManyAndReturnMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnMovieArgs) args: CreateManyAndReturnMovieArgs): Promise<CreateManyAndReturnMovie[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).movie.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

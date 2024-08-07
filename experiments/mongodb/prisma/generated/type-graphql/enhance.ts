@@ -138,7 +138,7 @@ export function applyResolversEnhanceMap(
   resolversEnhanceMap: ResolversEnhanceMap,
 ) {
   const mutationOperationPrefixes = [
-    "createOne", "createMany", "deleteOne", "updateOne", "deleteMany", "updateMany", "upsertOne"
+    "createOne", "createMany", "createManyAndReturn", "deleteOne", "updateOne", "deleteMany", "updateMany", "upsertOne"
   ];
   for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
     const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;

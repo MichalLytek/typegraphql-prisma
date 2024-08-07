@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateDirectorArgs } from "./args/AggregateDirectorArgs";
+import { CreateManyAndReturnDirectorArgs } from "./args/CreateManyAndReturnDirectorArgs";
 import { CreateManyDirectorArgs } from "./args/CreateManyDirectorArgs";
 import { CreateOneDirectorArgs } from "./args/CreateOneDirectorArgs";
 import { DeleteManyDirectorArgs } from "./args/DeleteManyDirectorArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Director } from "../../../models/Director";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
+import { CreateManyAndReturnDirector } from "../../outputs/CreateManyAndReturnDirector";
 import { DirectorGroupBy } from "../../outputs/DirectorGroupBy";
 
 @TypeGraphQL.Resolver(_of => Director)
@@ -38,6 +40,17 @@ export class DirectorCrudResolver {
   async createManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyDirectorArgs) args: CreateManyDirectorArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).director.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnDirector], {
+    nullable: false
+  })
+  async createManyAndReturnDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnDirectorArgs) args: CreateManyAndReturnDirectorArgs): Promise<CreateManyAndReturnDirector[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).director.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

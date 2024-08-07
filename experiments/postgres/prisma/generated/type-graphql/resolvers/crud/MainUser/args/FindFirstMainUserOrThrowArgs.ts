@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { MainUserOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/MainUserOrderByWithRelationAndSearchRelevanceInput";
+import { MainUserOrderByWithRelationInput } from "../../../inputs/MainUserOrderByWithRelationInput";
 import { MainUserWhereInput } from "../../../inputs/MainUserWhereInput";
 import { MainUserWhereUniqueInput } from "../../../inputs/MainUserWhereUniqueInput";
 import { MainUserScalarFieldEnum } from "../../../../enums/MainUserScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindFirstMainUserOrThrowArgs {
   })
   where?: MainUserWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [MainUserOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [MainUserOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: MainUserOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: MainUserOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => MainUserWhereUniqueInput, {
     nullable: true

@@ -2,12 +2,12 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { DirectorOrderByWithRelationAndSearchRelevanceInput } from "../inputs/DirectorOrderByWithRelationAndSearchRelevanceInput";
+import { DirectorOrderByWithRelationInput } from "../inputs/DirectorOrderByWithRelationInput";
 import { MovieOrderByRelevanceInput } from "../inputs/MovieOrderByRelevanceInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("MovieOrderByWithRelationAndSearchRelevanceInput", {})
-export class MovieOrderByWithRelationAndSearchRelevanceInput {
+@TypeGraphQL.InputType("MovieOrderByWithRelationInput", {})
+export class MovieOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -23,10 +23,10 @@ export class MovieOrderByWithRelationAndSearchRelevanceInput {
   })
   title?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorOrderByWithRelationAndSearchRelevanceInput, {
+  @TypeGraphQL.Field(_type => DirectorOrderByWithRelationInput, {
     nullable: true
   })
-  director?: DirectorOrderByWithRelationAndSearchRelevanceInput | undefined;
+  director?: DirectorOrderByWithRelationInput | undefined;
 
   @TypeGraphQL.Field(_type => MovieOrderByRelevanceInput, {
     nullable: true

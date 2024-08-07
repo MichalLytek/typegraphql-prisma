@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { PatientOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/PatientOrderByWithRelationAndSearchRelevanceInput";
+import { PatientOrderByWithRelationInput } from "../../../inputs/PatientOrderByWithRelationInput";
 import { PatientWhereInput } from "../../../inputs/PatientWhereInput";
 import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput";
 
@@ -11,10 +11,10 @@ export class AggregatePatientArgs {
   })
   where?: PatientWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [PatientOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [PatientOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: PatientOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: PatientOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => PatientWhereUniqueInput, {
     nullable: true

@@ -1396,10 +1396,9 @@ describe("inputs", () => {
       const orderByRelevanceInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/FirstModelOrderByRelevanceInput.ts",
       );
-      const orderByWithRelationAndSearchRelevanceInputTSFile =
-        await readGeneratedFile(
-          "/resolvers/inputs/FirstModelOrderByWithRelationAndSearchRelevanceInput.ts",
-        );
+      const orderByWithRelationInputTSFile = await readGeneratedFile(
+        "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
+      );
       const nestedStringFilterTSFile = await readGeneratedFile(
         "/resolvers/inputs/NestedStringFilter.ts",
       );
@@ -1411,8 +1410,8 @@ describe("inputs", () => {
       expect(orderByRelevanceInputTSFile).toMatchSnapshot(
         "FirstModelOrderByRelevanceInput",
       );
-      expect(orderByWithRelationAndSearchRelevanceInputTSFile).toMatchSnapshot(
-        "FirstModelOrderByWithRelationAndSearchRelevanceInput",
+      expect(orderByWithRelationInputTSFile).toMatchSnapshot(
+        "FirstModelOrderByWithRelationInput",
       );
       expect(nestedStringFilterTSFile).toMatchSnapshot("NestedStringFilter");
       expect(stringFilterTSFile).toMatchSnapshot("StringFilter");

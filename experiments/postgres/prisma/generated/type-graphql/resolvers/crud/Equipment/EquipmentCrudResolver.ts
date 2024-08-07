@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateEquipmentArgs } from "./args/AggregateEquipmentArgs";
+import { CreateManyAndReturnEquipmentArgs } from "./args/CreateManyAndReturnEquipmentArgs";
 import { CreateManyEquipmentArgs } from "./args/CreateManyEquipmentArgs";
 import { CreateOneEquipmentArgs } from "./args/CreateOneEquipmentArgs";
 import { DeleteManyEquipmentArgs } from "./args/DeleteManyEquipmentArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Equipment } from "../../../models/Equipment";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateEquipment } from "../../outputs/AggregateEquipment";
+import { CreateManyAndReturnEquipment } from "../../outputs/CreateManyAndReturnEquipment";
 import { EquipmentGroupBy } from "../../outputs/EquipmentGroupBy";
 
 @TypeGraphQL.Resolver(_of => Equipment)
@@ -38,6 +40,17 @@ export class EquipmentCrudResolver {
   async createManyEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyEquipmentArgs) args: CreateManyEquipmentArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).equipment.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnEquipment], {
+    nullable: false
+  })
+  async createManyAndReturnEquipment(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnEquipmentArgs) args: CreateManyAndReturnEquipmentArgs): Promise<CreateManyAndReturnEquipment[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).equipment.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

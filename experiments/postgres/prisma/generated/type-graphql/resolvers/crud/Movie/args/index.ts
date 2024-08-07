@@ -1,4 +1,5 @@
 export { AggregateMovieArgs } from "./AggregateMovieArgs";
+export { CreateManyAndReturnMovieArgs } from "./CreateManyAndReturnMovieArgs";
 export { CreateManyMovieArgs } from "./CreateManyMovieArgs";
 export { CreateOneMovieArgs } from "./CreateOneMovieArgs";
 export { DeleteManyMovieArgs } from "./DeleteManyMovieArgs";

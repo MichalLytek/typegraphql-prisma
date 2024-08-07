@@ -216,7 +216,7 @@
             "hasDefaultValue": true,
             "type": "String",
             "default": {
-              "name": "uuid",
+              "name": "uuid(4)",
               "args": []
             },
             "isGenerated": false,
@@ -976,7 +976,146 @@
         "documentation": "@@TypeGraphQL.omit(output: true)"
       }
     ],
-    "types": []
+    "types": [],
+    "indexes": [
+      {
+        "model": "User",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      },
+      {
+        "model": "User",
+        "type": "unique",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "email"
+          }
+        ]
+      },
+      {
+        "model": "post",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "uuid"
+          }
+        ]
+      },
+      {
+        "model": "Category",
+        "type": "unique",
+        "isDefinedOnField": false,
+        "name": "categoryCompoundUnique",
+        "fields": [
+          {
+            "name": "slug"
+          },
+          {
+            "name": "number"
+          }
+        ]
+      },
+      {
+        "model": "Patient",
+        "type": "id",
+        "isDefinedOnField": false,
+        "fields": [
+          {
+            "name": "firstName"
+          },
+          {
+            "name": "lastName"
+          }
+        ]
+      },
+      {
+        "model": "Movie",
+        "type": "id",
+        "isDefinedOnField": false,
+        "name": "movieCompoundId",
+        "fields": [
+          {
+            "name": "directorFirstName"
+          },
+          {
+            "name": "directorLastName"
+          },
+          {
+            "name": "title"
+          }
+        ]
+      },
+      {
+        "model": "Director",
+        "type": "id",
+        "isDefinedOnField": false,
+        "fields": [
+          {
+            "name": "firstName"
+          },
+          {
+            "name": "lastName"
+          }
+        ]
+      },
+      {
+        "model": "Problem",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      },
+      {
+        "model": "Creator",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      },
+      {
+        "model": "NativeTypeModel",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      },
+      {
+        "model": "Equipment",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      },
+      {
+        "model": "Hidden",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      }
+    ]
   },
   "schema": {
     "inputObjectTypes": {
@@ -1229,7 +1368,7 @@
           ]
         },
         {
-          "name": "UserOrderByWithRelationAndSearchRelevanceInput",
+          "name": "UserOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -2372,7 +2511,7 @@
           ]
         },
         {
-          "name": "postOrderByWithRelationAndSearchRelevanceInput",
+          "name": "postOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -2545,7 +2684,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                  "type": "UserOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -2558,7 +2697,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                  "type": "UserOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -3517,7 +3656,7 @@
           ]
         },
         {
-          "name": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+          "name": "CategoryOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -4058,7 +4197,7 @@
           ]
         },
         {
-          "name": "PatientOrderByWithRelationAndSearchRelevanceInput",
+          "name": "PatientOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -4592,7 +4731,7 @@
           ]
         },
         {
-          "name": "MovieOrderByWithRelationAndSearchRelevanceInput",
+          "name": "MovieOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -4643,7 +4782,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                  "type": "DirectorOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -5134,7 +5273,7 @@
           ]
         },
         {
-          "name": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+          "name": "DirectorOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -5655,7 +5794,7 @@
           ]
         },
         {
-          "name": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+          "name": "ProblemOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -5725,7 +5864,7 @@
               "isNullable": false,
               "inputTypes": [
                 {
-                  "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                  "type": "CreatorOrderByWithRelationInput",
                   "namespace": "prisma",
                   "location": "inputObjectTypes",
                   "isList": false
@@ -6270,7 +6409,7 @@
           ]
         },
         {
-          "name": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+          "name": "CreatorOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -6815,7 +6954,7 @@
           ]
         },
         {
-          "name": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+          "name": "NativeTypeModelOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -7439,7 +7578,7 @@
           ]
         },
         {
-          "name": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+          "name": "EquipmentOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -7882,7 +8021,7 @@
           ]
         },
         {
-          "name": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+          "name": "HiddenOrderByWithRelationInput",
           "constraints": {
             "maxNumFields": 1,
             "minNumFields": 0
@@ -39175,13 +39314,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -39275,13 +39414,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -39375,13 +39514,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -39475,13 +39614,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "UserOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "UserOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -39706,13 +39845,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -39806,13 +39945,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -39906,13 +40045,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -40006,13 +40145,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -40237,13 +40376,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -40337,13 +40476,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -40437,13 +40576,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -40537,13 +40676,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CategoryOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CategoryOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -40768,13 +40907,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "PatientOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -40868,13 +41007,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "PatientOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -40968,13 +41107,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "PatientOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -41068,13 +41207,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "PatientOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "PatientOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "PatientOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -41299,13 +41438,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -41399,13 +41538,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -41499,13 +41638,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -41599,13 +41738,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -41830,13 +41969,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -41930,13 +42069,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -42030,13 +42169,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -42130,13 +42269,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "DirectorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "DirectorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -42361,13 +42500,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -42461,13 +42600,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -42561,13 +42700,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -42661,13 +42800,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -42892,13 +43031,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -42992,13 +43131,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -43092,13 +43231,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -43192,13 +43331,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -43423,13 +43562,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -43523,13 +43662,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -43623,13 +43762,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -43723,13 +43862,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "NativeTypeModelOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "NativeTypeModelOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -43954,13 +44093,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "EquipmentOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "EquipmentOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -44054,13 +44193,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "EquipmentOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "EquipmentOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -44154,13 +44293,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "EquipmentOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "EquipmentOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -44254,13 +44393,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "EquipmentOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "EquipmentOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "EquipmentOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -44485,13 +44624,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "HiddenOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "HiddenOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -44585,13 +44724,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "HiddenOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "HiddenOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -44685,13 +44824,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "HiddenOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "HiddenOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -44785,13 +44924,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "HiddenOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "HiddenOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "HiddenOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -45137,6 +45276,49 @@
               }
             },
             {
+              "name": "createManyUserAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "UserCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "UserCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyUserAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
               "name": "deleteOneUser",
               "args": [
                 {
@@ -45409,6 +45591,49 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              }
+            },
+            {
+              "name": "createManypostAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "postCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "postCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManypostAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
               }
             },
             {
@@ -45687,6 +45912,49 @@
               }
             },
             {
+              "name": "createManyCategoryAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CategoryCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "CategoryCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyCategoryAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
               "name": "deleteOneCategory",
               "args": [
                 {
@@ -45959,6 +46227,49 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              }
+            },
+            {
+              "name": "createManyPatientAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "PatientCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "PatientCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyPatientAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
               }
             },
             {
@@ -46237,6 +46548,49 @@
               }
             },
             {
+              "name": "createManyMovieAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "MovieCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "MovieCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyMovieAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
               "name": "deleteOneMovie",
               "args": [
                 {
@@ -46509,6 +46863,49 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              }
+            },
+            {
+              "name": "createManyDirectorAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "DirectorCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "DirectorCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyDirectorAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
               }
             },
             {
@@ -46787,6 +47184,49 @@
               }
             },
             {
+              "name": "createManyProblemAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "ProblemCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "ProblemCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyProblemAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
               "name": "deleteOneProblem",
               "args": [
                 {
@@ -47059,6 +47499,49 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              }
+            },
+            {
+              "name": "createManyCreatorAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CreatorCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "CreatorCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyCreatorAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
               }
             },
             {
@@ -47337,6 +47820,49 @@
               }
             },
             {
+              "name": "createManyNativeTypeModelAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "NativeTypeModelCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "NativeTypeModelCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyNativeTypeModelAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
               "name": "deleteOneNativeTypeModel",
               "args": [
                 {
@@ -47612,6 +48138,49 @@
               }
             },
             {
+              "name": "createManyEquipmentAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "EquipmentCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "EquipmentCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyEquipmentAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
+              }
+            },
+            {
               "name": "deleteOneEquipment",
               "args": [
                 {
@@ -47884,6 +48453,49 @@
                 "namespace": "prisma",
                 "location": "outputObjectTypes",
                 "isList": false
+              }
+            },
+            {
+              "name": "createManyHiddenAndReturn",
+              "args": [
+                {
+                  "name": "data",
+                  "isRequired": true,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "HiddenCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    },
+                    {
+                      "type": "HiddenCreateManyInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": true
+                    }
+                  ]
+                },
+                {
+                  "name": "skipDuplicates",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "Boolean",
+                      "location": "scalar",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": false,
+              "outputType": {
+                "type": "CreateManyHiddenAndReturnOutputType",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": true
               }
             },
             {
@@ -51814,13 +52426,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -51914,13 +52526,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "postOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "postOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -52318,13 +52930,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "MovieOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "MovieOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -52464,13 +53076,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "CreatorOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "CreatorOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -52625,13 +53237,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -52725,13 +53337,13 @@
                   "isNullable": false,
                   "inputTypes": [
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": true
                     },
                     {
-                      "type": "ProblemOrderByWithRelationAndSearchRelevanceInput",
+                      "type": "ProblemOrderByWithRelationInput",
                       "namespace": "prisma",
                       "location": "inputObjectTypes",
                       "isList": false
@@ -52888,6 +53500,575 @@
         },
         {
           "name": "Hidden",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyUserAndReturnOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "email",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "age",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "balance",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Float",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "amount",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Float",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "role",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Role",
+                "namespace": "model",
+                "location": "enumTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "grades",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": true
+              }
+            },
+            {
+              "name": "aliases",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManypostAndReturnOutputType",
+          "fields": [
+            {
+              "name": "uuid",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "createdAt",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "DateTime",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "updatedAt",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "DateTime",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "published",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Boolean",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "subtitle",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "content",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "authorId",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "editorId",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "kind",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "PostKind",
+                "namespace": "model",
+                "location": "enumTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "metadata",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Json",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "author",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "User",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            },
+            {
+              "name": "editor",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "UserWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": true,
+              "outputType": {
+                "type": "User",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyCategoryAndReturnOutputType",
+          "fields": [
+            {
+              "name": "name",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "slug",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "number",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyPatientAndReturnOutputType",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "email",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyMovieAndReturnOutputType",
+          "fields": [
+            {
+              "name": "directorFirstName",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "directorLastName",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "title",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "director",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Director",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyDirectorAndReturnOutputType",
+          "fields": [
+            {
+              "name": "firstName",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "lastName",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyProblemAndReturnOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "problemText",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "creatorId",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "creator",
+              "args": [
+                {
+                  "name": "where",
+                  "isRequired": false,
+                  "isNullable": false,
+                  "inputTypes": [
+                    {
+                      "type": "CreatorWhereInput",
+                      "namespace": "prisma",
+                      "location": "inputObjectTypes",
+                      "isList": false
+                    }
+                  ]
+                }
+              ],
+              "isNullable": true,
+              "outputType": {
+                "type": "Creator",
+                "namespace": "model",
+                "location": "outputObjectTypes",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyCreatorAndReturnOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyNativeTypeModelAndReturnOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "Int",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "bigInt",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "BigInt",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "byteA",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "Bytes",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "decimal",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "Decimal",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyEquipmentAndReturnOutputType",
+          "fields": [
+            {
+              "name": "id",
+              "args": [],
+              "isNullable": false,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            },
+            {
+              "name": "name",
+              "args": [],
+              "isNullable": true,
+              "outputType": {
+                "type": "String",
+                "location": "scalar",
+                "isList": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "CreateManyHiddenAndReturnOutputType",
           "fields": [
             {
               "name": "id",
@@ -53884,6 +55065,7 @@
         "model": "User",
         "aggregate": "aggregateUser",
         "createMany": "createManyUser",
+        "createManyAndReturn": "createManyUserAndReturn",
         "createOne": "createOneUser",
         "deleteMany": "deleteManyUser",
         "deleteOne": "deleteOneUser",
@@ -53901,6 +55083,7 @@
         "model": "post",
         "aggregate": "aggregatepost",
         "createMany": "createManypost",
+        "createManyAndReturn": "createManypostAndReturn",
         "createOne": "createOnepost",
         "deleteMany": "deleteManypost",
         "deleteOne": "deleteOnepost",
@@ -53918,6 +55101,7 @@
         "model": "Category",
         "aggregate": "aggregateCategory",
         "createMany": "createManyCategory",
+        "createManyAndReturn": "createManyCategoryAndReturn",
         "createOne": "createOneCategory",
         "deleteMany": "deleteManyCategory",
         "deleteOne": "deleteOneCategory",
@@ -53935,6 +55119,7 @@
         "model": "Patient",
         "aggregate": "aggregatePatient",
         "createMany": "createManyPatient",
+        "createManyAndReturn": "createManyPatientAndReturn",
         "createOne": "createOnePatient",
         "deleteMany": "deleteManyPatient",
         "deleteOne": "deleteOnePatient",
@@ -53952,6 +55137,7 @@
         "model": "Movie",
         "aggregate": "aggregateMovie",
         "createMany": "createManyMovie",
+        "createManyAndReturn": "createManyMovieAndReturn",
         "createOne": "createOneMovie",
         "deleteMany": "deleteManyMovie",
         "deleteOne": "deleteOneMovie",
@@ -53969,6 +55155,7 @@
         "model": "Director",
         "aggregate": "aggregateDirector",
         "createMany": "createManyDirector",
+        "createManyAndReturn": "createManyDirectorAndReturn",
         "createOne": "createOneDirector",
         "deleteMany": "deleteManyDirector",
         "deleteOne": "deleteOneDirector",
@@ -53986,6 +55173,7 @@
         "model": "Problem",
         "aggregate": "aggregateProblem",
         "createMany": "createManyProblem",
+        "createManyAndReturn": "createManyProblemAndReturn",
         "createOne": "createOneProblem",
         "deleteMany": "deleteManyProblem",
         "deleteOne": "deleteOneProblem",
@@ -54003,6 +55191,7 @@
         "model": "Creator",
         "aggregate": "aggregateCreator",
         "createMany": "createManyCreator",
+        "createManyAndReturn": "createManyCreatorAndReturn",
         "createOne": "createOneCreator",
         "deleteMany": "deleteManyCreator",
         "deleteOne": "deleteOneCreator",
@@ -54020,6 +55209,7 @@
         "model": "NativeTypeModel",
         "aggregate": "aggregateNativeTypeModel",
         "createMany": "createManyNativeTypeModel",
+        "createManyAndReturn": "createManyNativeTypeModelAndReturn",
         "createOne": "createOneNativeTypeModel",
         "deleteMany": "deleteManyNativeTypeModel",
         "deleteOne": "deleteOneNativeTypeModel",
@@ -54037,6 +55227,7 @@
         "model": "Equipment",
         "aggregate": "aggregateEquipment",
         "createMany": "createManyEquipment",
+        "createManyAndReturn": "createManyEquipmentAndReturn",
         "createOne": "createOneEquipment",
         "deleteMany": "deleteManyEquipment",
         "deleteOne": "deleteOneEquipment",
@@ -54054,6 +55245,7 @@
         "model": "Hidden",
         "aggregate": "aggregateHidden",
         "createMany": "createManyHidden",
+        "createManyAndReturn": "createManyHiddenAndReturn",
         "createOne": "createOneHidden",
         "deleteMany": "deleteManyHidden",
         "deleteOne": "deleteOneHidden",

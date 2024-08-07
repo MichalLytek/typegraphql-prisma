@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { EquipmentOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/EquipmentOrderByWithRelationAndSearchRelevanceInput";
+import { EquipmentOrderByWithRelationInput } from "../../../inputs/EquipmentOrderByWithRelationInput";
 import { EquipmentWhereInput } from "../../../inputs/EquipmentWhereInput";
 import { EquipmentWhereUniqueInput } from "../../../inputs/EquipmentWhereUniqueInput";
 import { EquipmentScalarFieldEnum } from "../../../../enums/EquipmentScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindManyEquipmentArgs {
   })
   where?: EquipmentWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [EquipmentOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [EquipmentOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: EquipmentOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: EquipmentOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => EquipmentWhereUniqueInput, {
     nullable: true

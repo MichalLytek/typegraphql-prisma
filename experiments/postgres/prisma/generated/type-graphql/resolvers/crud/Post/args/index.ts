@@ -1,4 +1,5 @@
 export { AggregatePostArgs } from "./AggregatePostArgs";
+export { CreateManyAndReturnPostArgs } from "./CreateManyAndReturnPostArgs";
 export { CreateManyPostArgs } from "./CreateManyPostArgs";
 export { CreateOnePostArgs } from "./CreateOnePostArgs";
 export { DeleteManyPostArgs } from "./DeleteManyPostArgs";

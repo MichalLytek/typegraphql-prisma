@@ -19,7 +19,7 @@ import { DMMF } from "./dmmf/types";
 export default function generateArgsTypeClassFromArgs(
   project: Project,
   generateDirPath: string,
-  fields: DMMF.SchemaArg[],
+  fields: readonly DMMF.SchemaArg[],
   argsTypeName: string,
   dmmfDocument: DmmfDocument,
   inputImportsLevel = 3,

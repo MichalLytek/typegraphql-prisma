@@ -6795,7 +6795,7 @@ export class FirstModelOrderByRelevanceInput {
 "
 `;
 
-exports[`inputs when \`fullTextSearch\` preview feature is enabled should properly generate input type classes with relevance and string search field: FirstModelOrderByWithRelationAndSearchRelevanceInput 1`] = `
+exports[`inputs when \`fullTextSearch\` preview feature is enabled should properly generate input type classes with relevance and string search field: FirstModelOrderByWithRelationInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import * as GraphQLScalars from \\"graphql-scalars\\";
 import { Prisma } from \\"../../../../helpers/prisma-client-mock\\";
@@ -6804,8 +6804,8 @@ import { FirstModelOrderByRelevanceInput } from \\"../inputs/FirstModelOrderByRe
 import { SecondModelOrderByRelationAggregateInput } from \\"../inputs/SecondModelOrderByRelationAggregateInput\\";
 import { SortOrder } from \\"../../enums/SortOrder\\";
 
-@TypeGraphQL.InputType(\\"FirstModelOrderByWithRelationAndSearchRelevanceInput\\", {})
-export class FirstModelOrderByWithRelationAndSearchRelevanceInput {
+@TypeGraphQL.InputType(\\"FirstModelOrderByWithRelationInput\\", {})
+export class FirstModelOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -6995,7 +6995,7 @@ export { FirstModelMaxOrderByAggregateInput } from \\"./FirstModelMaxOrderByAggr
 export { FirstModelMinOrderByAggregateInput } from \\"./FirstModelMinOrderByAggregateInput\\";
 export { FirstModelOrderByRelevanceInput } from \\"./FirstModelOrderByRelevanceInput\\";
 export { FirstModelOrderByWithAggregationInput } from \\"./FirstModelOrderByWithAggregationInput\\";
-export { FirstModelOrderByWithRelationAndSearchRelevanceInput } from \\"./FirstModelOrderByWithRelationAndSearchRelevanceInput\\";
+export { FirstModelOrderByWithRelationInput } from \\"./FirstModelOrderByWithRelationInput\\";
 export { FirstModelRelationFilter } from \\"./FirstModelRelationFilter\\";
 export { FirstModelScalarWhereWithAggregatesInput } from \\"./FirstModelScalarWhereWithAggregatesInput\\";
 export { FirstModelSumOrderByAggregateInput } from \\"./FirstModelSumOrderByAggregateInput\\";
@@ -7034,7 +7034,7 @@ export { SecondModelMinOrderByAggregateInput } from \\"./SecondModelMinOrderByAg
 export { SecondModelOrderByRelationAggregateInput } from \\"./SecondModelOrderByRelationAggregateInput\\";
 export { SecondModelOrderByRelevanceInput } from \\"./SecondModelOrderByRelevanceInput\\";
 export { SecondModelOrderByWithAggregationInput } from \\"./SecondModelOrderByWithAggregationInput\\";
-export { SecondModelOrderByWithRelationAndSearchRelevanceInput } from \\"./SecondModelOrderByWithRelationAndSearchRelevanceInput\\";
+export { SecondModelOrderByWithRelationInput } from \\"./SecondModelOrderByWithRelationInput\\";
 export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
 export { SecondModelScalarWhereWithAggregatesInput } from \\"./SecondModelScalarWhereWithAggregatesInput\\";
 export { SecondModelSumOrderByAggregateInput } from \\"./SecondModelSumOrderByAggregateInput\\";

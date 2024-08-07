@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateHiddenArgs } from "./args/AggregateHiddenArgs";
+import { CreateManyAndReturnHiddenArgs } from "./args/CreateManyAndReturnHiddenArgs";
 import { CreateManyHiddenArgs } from "./args/CreateManyHiddenArgs";
 import { CreateOneHiddenArgs } from "./args/CreateOneHiddenArgs";
 import { DeleteManyHiddenArgs } from "./args/DeleteManyHiddenArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Hidden } from "../../../models/Hidden";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateHidden } from "../../outputs/AggregateHidden";
+import { CreateManyAndReturnHidden } from "../../outputs/CreateManyAndReturnHidden";
 import { HiddenGroupBy } from "../../outputs/HiddenGroupBy";
 
 @TypeGraphQL.Resolver(_of => Hidden)
@@ -38,6 +40,17 @@ export class HiddenCrudResolver {
   async createManyHidden(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyHiddenArgs) args: CreateManyHiddenArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).hidden.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnHidden], {
+    nullable: false
+  })
+  async createManyAndReturnHidden(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnHiddenArgs) args: CreateManyAndReturnHiddenArgs): Promise<CreateManyAndReturnHidden[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).hidden.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

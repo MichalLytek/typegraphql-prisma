@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateProblemArgs } from "./args/AggregateProblemArgs";
+import { CreateManyAndReturnProblemArgs } from "./args/CreateManyAndReturnProblemArgs";
 import { CreateManyProblemArgs } from "./args/CreateManyProblemArgs";
 import { CreateOneProblemArgs } from "./args/CreateOneProblemArgs";
 import { DeleteManyProblemArgs } from "./args/DeleteManyProblemArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { Problem } from "../../../models/Problem";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateProblem } from "../../outputs/AggregateProblem";
+import { CreateManyAndReturnProblem } from "../../outputs/CreateManyAndReturnProblem";
 import { ProblemGroupBy } from "../../outputs/ProblemGroupBy";
 
 @TypeGraphQL.Resolver(_of => Problem)
@@ -38,6 +40,17 @@ export class ProblemCrudResolver {
   async createManyProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyProblemArgs) args: CreateManyProblemArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).problem.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnProblem], {
+    nullable: false
+  })
+  async createManyAndReturnProblem(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnProblemArgs) args: CreateManyAndReturnProblemArgs): Promise<CreateManyAndReturnProblem[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).problem.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateMainUserArgs } from "./args/AggregateMainUserArgs";
+import { CreateManyAndReturnMainUserArgs } from "./args/CreateManyAndReturnMainUserArgs";
 import { CreateManyMainUserArgs } from "./args/CreateManyMainUserArgs";
 import { CreateOneMainUserArgs } from "./args/CreateOneMainUserArgs";
 import { DeleteManyMainUserArgs } from "./args/DeleteManyMainUserArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { MainUser } from "../../../models/MainUser";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateMainUser } from "../../outputs/AggregateMainUser";
+import { CreateManyAndReturnMainUser } from "../../outputs/CreateManyAndReturnMainUser";
 import { MainUserGroupBy } from "../../outputs/MainUserGroupBy";
 
 @TypeGraphQL.Resolver(_of => MainUser)
@@ -38,6 +40,17 @@ export class MainUserCrudResolver {
   async createManyMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyMainUserArgs) args: CreateManyMainUserArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnMainUser], {
+    nullable: false
+  })
+  async createManyAndReturnMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnMainUserArgs) args: CreateManyAndReturnMainUserArgs): Promise<CreateManyAndReturnMainUser[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { CreatorOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/CreatorOrderByWithRelationAndSearchRelevanceInput";
+import { CreatorOrderByWithRelationInput } from "../../../inputs/CreatorOrderByWithRelationInput";
 import { CreatorWhereInput } from "../../../inputs/CreatorWhereInput";
 import { CreatorWhereUniqueInput } from "../../../inputs/CreatorWhereUniqueInput";
 import { CreatorScalarFieldEnum } from "../../../../enums/CreatorScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindManyCreatorArgs {
   })
   where?: CreatorWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [CreatorOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [CreatorOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: CreatorOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: CreatorOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => CreatorWhereUniqueInput, {
     nullable: true

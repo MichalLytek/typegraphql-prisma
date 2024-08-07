@@ -14,11 +14,11 @@ import { DMMF } from "./dmmf/types";
 export function generateEnhanceMap(
   sourceFile: SourceFile,
   dmmfDocument: DmmfDocument,
-  modelMappings: DMMF.ModelMapping[],
-  relationModels: DMMF.RelationModel[],
-  models: DMMF.Model[],
-  inputs: DMMF.InputType[],
-  outputs: DMMF.OutputType[],
+  modelMappings: readonly DMMF.ModelMapping[],
+  relationModels: readonly DMMF.RelationModel[],
+  models: readonly DMMF.Model[],
+  inputs: readonly DMMF.InputType[],
+  outputs: readonly DMMF.OutputType[],
 ) {
   const hasRelations = relationModels.length > 0;
 

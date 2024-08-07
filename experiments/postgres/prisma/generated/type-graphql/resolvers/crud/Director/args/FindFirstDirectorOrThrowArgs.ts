@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { DirectorOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/DirectorOrderByWithRelationAndSearchRelevanceInput";
+import { DirectorOrderByWithRelationInput } from "../../../inputs/DirectorOrderByWithRelationInput";
 import { DirectorWhereInput } from "../../../inputs/DirectorWhereInput";
 import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInput";
 import { DirectorScalarFieldEnum } from "../../../../enums/DirectorScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindFirstDirectorOrThrowArgs {
   })
   where?: DirectorWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [DirectorOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [DirectorOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: DirectorOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: DirectorOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
     nullable: true

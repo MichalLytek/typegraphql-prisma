@@ -222,7 +222,13 @@ input CommentWhereInput {
 }
 
 input CommentWhereUniqueInput {
+  AND: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  comment: StringFilter
   id: String
+  post: PostRelationFilter
+  postId: StringFilter
 }
 
 input IntNullableFilter {
@@ -373,7 +379,7 @@ type Post {
 }
 
 type PostCount {
-  comments: Int!
+  comments(where: CommentWhereInput): Int!
 }
 
 type PostCountAggregate {
@@ -606,8 +612,13 @@ input PostUpdateOneRequiredWithoutCommentsNestedInput {
   connect: PostWhereUniqueInput
   connectOrCreate: PostCreateOrConnectWithoutCommentsInput
   create: PostCreateWithoutCommentsInput
-  update: PostUpdateWithoutCommentsInput
+  update: PostUpdateToOneWithWhereWithoutCommentsInput
   upsert: PostUpsertWithoutCommentsInput
+}
+
+input PostUpdateToOneWithWhereWithoutCommentsInput {
+  data: PostUpdateWithoutCommentsInput!
+  where: PostWhereInput
 }
 
 input PostUpdateWithWhereUniqueWithoutAuthorInput {
@@ -638,6 +649,7 @@ input PostUpsertWithWhereUniqueWithoutAuthorInput {
 input PostUpsertWithoutCommentsInput {
   create: PostCreateWithoutCommentsInput!
   update: PostUpdateWithoutCommentsInput!
+  where: PostWhereInput
 }
 
 input PostWhereInput {
@@ -654,8 +666,16 @@ input PostWhereInput {
 }
 
 input PostWhereUniqueInput {
+  AND: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  author: UserRelationFilter
+  authorId: StringFilter
+  body: StringFilter
+  comments: CommentListRelationFilter
   id: String
   slug: String
+  title: StringFilter
 }
 
 type Query {
@@ -782,7 +802,7 @@ input UserAvgOrderByAggregateInput {
 }
 
 type UserCount {
-  posts: Int!
+  posts(where: PostWhereInput): Int!
 }
 
 type UserCountAggregate {
@@ -930,8 +950,13 @@ input UserUpdateOneRequiredWithoutPostsNestedInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutPostsInput
   create: UserCreateWithoutPostsInput
-  update: UserUpdateWithoutPostsInput
+  update: UserUpdateToOneWithWhereWithoutPostsInput
   upsert: UserUpsertWithoutPostsInput
+}
+
+input UserUpdateToOneWithWhereWithoutPostsInput {
+  data: UserUpdateWithoutPostsInput!
+  where: UserWhereInput
 }
 
 input UserUpdateWithoutPostsInput {
@@ -943,6 +968,7 @@ input UserUpdateWithoutPostsInput {
 input UserUpsertWithoutPostsInput {
   create: UserCreateWithoutPostsInput!
   update: UserUpdateWithoutPostsInput!
+  where: UserWhereInput
 }
 
 input UserWhereInput {
@@ -957,6 +983,12 @@ input UserWhereInput {
 }
 
 input UserWhereUniqueInput {
+  AND: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  address: UserAddressCompositeFilter
+  age: IntNullableFilter
   email: String
   id: String
+  posts: PostListRelationFilter
 }

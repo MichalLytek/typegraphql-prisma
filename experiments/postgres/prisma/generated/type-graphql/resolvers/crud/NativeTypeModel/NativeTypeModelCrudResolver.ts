@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateNativeTypeModelArgs } from "./args/AggregateNativeTypeModelArgs";
+import { CreateManyAndReturnNativeTypeModelArgs } from "./args/CreateManyAndReturnNativeTypeModelArgs";
 import { CreateManyNativeTypeModelArgs } from "./args/CreateManyNativeTypeModelArgs";
 import { CreateOneNativeTypeModelArgs } from "./args/CreateOneNativeTypeModelArgs";
 import { DeleteManyNativeTypeModelArgs } from "./args/DeleteManyNativeTypeModelArgs";
@@ -18,6 +19,7 @@ import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldI
 import { NativeTypeModel } from "../../../models/NativeTypeModel";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateNativeTypeModel } from "../../outputs/AggregateNativeTypeModel";
+import { CreateManyAndReturnNativeTypeModel } from "../../outputs/CreateManyAndReturnNativeTypeModel";
 import { NativeTypeModelGroupBy } from "../../outputs/NativeTypeModelGroupBy";
 
 @TypeGraphQL.Resolver(_of => NativeTypeModel)
@@ -38,6 +40,17 @@ export class NativeTypeModelCrudResolver {
   async createManyNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyNativeTypeModelArgs) args: CreateManyNativeTypeModelArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).nativeTypeModel.createMany({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
+  @TypeGraphQL.Mutation(_returns => [CreateManyAndReturnNativeTypeModel], {
+    nullable: false
+  })
+  async createManyAndReturnNativeTypeModel(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => CreateManyAndReturnNativeTypeModelArgs) args: CreateManyAndReturnNativeTypeModelArgs): Promise<CreateManyAndReturnNativeTypeModel[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).nativeTypeModel.createManyAndReturn({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

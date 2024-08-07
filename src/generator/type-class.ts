@@ -19,6 +19,7 @@ import {
   generatePrismaNamespaceImport,
   generateOutputsImports,
   generateCustomScalarsImport,
+  generateModelsImports,
 } from "./imports";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import { DMMF } from "./dmmf/types";
@@ -36,9 +37,16 @@ export function generateOutputTypeClassFromType(
   const sourceFile = project.createSourceFile(filePath, undefined, {
     overwrite: true,
   });
+
   const fieldArgsTypeNames = type.fields
     .filter(it => it.argsTypeName)
     .map(it => it.argsTypeName!);
+  const outputObjectTypes = type.fields.filter(
+    field => field.outputType.location === "outputObjectTypes",
+  );
+  const outputObjectModelTypes = outputObjectTypes.filter(field =>
+    dmmfDocument.isModelTypeName(field.outputType.type),
+  );
 
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarsImport(sourceFile);
@@ -47,10 +55,15 @@ export function generateOutputTypeClassFromType(
   generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
   generateOutputsImports(
     sourceFile,
-    type.fields
-      .filter(field => field.outputType.location === "outputObjectTypes")
+    outputObjectTypes
+      .filter(field => !outputObjectModelTypes.includes(field))
       .map(field => field.outputType.type),
     1,
+  );
+  generateModelsImports(
+    sourceFile,
+    outputObjectModelTypes.map(field => field.outputType.type),
+    2,
   );
   generateEnumsImports(
     sourceFile,

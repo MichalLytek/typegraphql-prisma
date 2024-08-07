@@ -21,6 +21,7 @@ export type SupportedQueries = (typeof supportedQueryActions)[number];
 export const supportedMutationActions = [
   "createOne",
   "createMany",
+  "createManyAndReturn",
   "deleteOne",
   "updateOne",
   "deleteMany",

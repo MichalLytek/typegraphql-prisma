@@ -2,12 +2,12 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
-import { HiddenOrderByRelevanceInput } from "../inputs/HiddenOrderByRelevanceInput";
+import { EquipmentOrderByRelevanceInput } from "../inputs/EquipmentOrderByRelevanceInput";
 import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
-@TypeGraphQL.InputType("HiddenOrderByWithRelationAndSearchRelevanceInput", {})
-export class HiddenOrderByWithRelationAndSearchRelevanceInput {
+@TypeGraphQL.InputType("EquipmentOrderByWithRelationInput", {})
+export class EquipmentOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
@@ -18,8 +18,8 @@ export class HiddenOrderByWithRelationAndSearchRelevanceInput {
   })
   name?: SortOrderInput | undefined;
 
-  @TypeGraphQL.Field(_type => HiddenOrderByRelevanceInput, {
+  @TypeGraphQL.Field(_type => EquipmentOrderByRelevanceInput, {
     nullable: true
   })
-  _relevance?: HiddenOrderByRelevanceInput | undefined;
+  _relevance?: EquipmentOrderByRelevanceInput | undefined;
 }

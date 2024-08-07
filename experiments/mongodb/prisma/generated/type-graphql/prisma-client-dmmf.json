@@ -319,6 +319,58 @@
         "uniqueFields": [],
         "uniqueIndexes": []
       }
+    ],
+    "indexes": [
+      {
+        "model": "Post",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      },
+      {
+        "model": "Post",
+        "type": "unique",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "slug"
+          }
+        ]
+      },
+      {
+        "model": "Comment",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      },
+      {
+        "model": "User",
+        "type": "id",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "id"
+          }
+        ]
+      },
+      {
+        "model": "User",
+        "type": "unique",
+        "isDefinedOnField": true,
+        "fields": [
+          {
+            "name": "email"
+          }
+        ]
+      }
     ]
   },
   "schema": {

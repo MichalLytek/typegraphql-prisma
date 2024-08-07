@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { CategoryOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/CategoryOrderByWithRelationAndSearchRelevanceInput";
+import { CategoryOrderByWithRelationInput } from "../../../inputs/CategoryOrderByWithRelationInput";
 import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInput";
 import { CategoryScalarFieldEnum } from "../../../../enums/CategoryScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindFirstCategoryOrThrowArgs {
   })
   where?: CategoryWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [CategoryOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [CategoryOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: CategoryOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: CategoryOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => CategoryWhereUniqueInput, {
     nullable: true

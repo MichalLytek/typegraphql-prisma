@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { ProblemOrderByWithRelationAndSearchRelevanceInput } from "../../../inputs/ProblemOrderByWithRelationAndSearchRelevanceInput";
+import { ProblemOrderByWithRelationInput } from "../../../inputs/ProblemOrderByWithRelationInput";
 import { ProblemWhereInput } from "../../../inputs/ProblemWhereInput";
 import { ProblemWhereUniqueInput } from "../../../inputs/ProblemWhereUniqueInput";
 import { ProblemScalarFieldEnum } from "../../../../enums/ProblemScalarFieldEnum";
@@ -12,10 +12,10 @@ export class FindFirstProblemOrThrowArgs {
   })
   where?: ProblemWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ProblemOrderByWithRelationAndSearchRelevanceInput], {
+  @TypeGraphQL.Field(_type => [ProblemOrderByWithRelationInput], {
     nullable: true
   })
-  orderBy?: ProblemOrderByWithRelationAndSearchRelevanceInput[] | undefined;
+  orderBy?: ProblemOrderByWithRelationInput[] | undefined;
 
   @TypeGraphQL.Field(_type => ProblemWhereUniqueInput, {
     nullable: true

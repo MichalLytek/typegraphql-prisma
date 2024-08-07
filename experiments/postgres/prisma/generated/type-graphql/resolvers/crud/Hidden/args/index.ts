@@ -1,4 +1,5 @@
 export { AggregateHiddenArgs } from "./AggregateHiddenArgs";
+export { CreateManyAndReturnHiddenArgs } from "./CreateManyAndReturnHiddenArgs";
 export { CreateManyHiddenArgs } from "./CreateManyHiddenArgs";
 export { CreateOneHiddenArgs } from "./CreateOneHiddenArgs";
 export { DeleteManyHiddenArgs } from "./DeleteManyHiddenArgs";
