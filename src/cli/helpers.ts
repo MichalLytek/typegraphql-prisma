@@ -4,8 +4,8 @@ export function parseStringBoolean(
   return stringBoolean === "true"
     ? true
     : stringBoolean === "false"
-    ? false
-    : undefined;
+      ? false
+      : undefined;
 }
 
 export function parseString(
