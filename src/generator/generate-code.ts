@@ -3,6 +3,7 @@ import { Project, ScriptTarget, ModuleKind, CompilerOptions } from "ts-morph";
 import path from "path";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
+import { cpus } from "os";
 const execa = promisify(exec);
 
 import { noop, toUnixPath } from "./helpers";
@@ -51,6 +52,7 @@ import { generateCustomScalars } from "./generate-scalars";
 import { generateHelpersFile } from "./generate-helpers";
 import { DMMF } from "./dmmf/types";
 import { getBlocksToEmit } from "./emit-block";
+import { CacheManager } from "./cache-manager";
 
 const baseCompilerOptions: CompilerOptions = {
   target: ScriptTarget.ES2021,
@@ -87,6 +89,7 @@ export default async function generateCode(
   const emitTranspiledCode =
     options.emitTranspiledCode ??
     options.outputDirPath.includes("node_modules");
+  const cacheManager = new CacheManager(baseDirPath);
   const project = new Project({
     compilerOptions: {
       ...baseCompilerOptions,
@@ -105,9 +108,12 @@ export default async function generateCode(
     const datamodelEnumNames = dmmfDocument.datamodel.enums.map(
       enumDef => enumDef.typeName,
     );
-    dmmfDocument.datamodel.enums.forEach(enumDef =>
-      generateEnumFromDef(project, baseDirPath, enumDef),
-    );
+    dmmfDocument.datamodel.enums.forEach(enumDef => {
+      if (cacheManager.shouldRegenerateEnum(enumDef)) {
+        generateEnumFromDef(project, baseDirPath, enumDef);
+        cacheManager.updateEnumCache(enumDef);
+      }
+    });
     dmmfDocument.schema.enums
       // skip enums from datamodel
       .filter(enumDef => !datamodelEnumNames.includes(enumDef.typeName))
@@ -129,16 +135,19 @@ export default async function generateCode(
   if (dmmfDocument.shouldGenerateBlock("models")) {
     log("Generating models...");
     dmmfDocument.datamodel.models.forEach(model => {
-      const modelOutputType = dmmfDocument.schema.outputTypes.find(
-        type => type.name === model.name,
-      )!;
-      return generateObjectTypeClassFromModel(
-        project,
-        baseDirPath,
-        model,
-        modelOutputType,
-        dmmfDocument,
-      );
+      if (cacheManager.shouldRegenerateModel(model)) {
+        const modelOutputType = dmmfDocument.schema.outputTypes.find(
+          type => type.name === model.name,
+        )!;
+        generateObjectTypeClassFromModel(
+          project,
+          baseDirPath,
+          model,
+          modelOutputType,
+          dmmfDocument,
+        );
+        cacheManager.updateModelCache(model);
+      }
     });
     const modelsBarrelExportSourceFile = project.createSourceFile(
       path.resolve(baseDirPath, modelsFolderName, "index.ts"),
@@ -167,14 +176,17 @@ export default async function generateCode(
       .map(it => it.fields)
       .reduce((a, b) => a.concat(b), [])
       .filter(it => it.argsTypeName);
-    outputTypesToGenerate.forEach(type =>
-      generateOutputTypeClassFromType(
-        project,
-        resolversDirPath,
-        type,
-        dmmfDocument,
-      ),
-    );
+    outputTypesToGenerate.forEach(type => {
+      if (cacheManager.shouldRegenerateOutput(type)) {
+        generateOutputTypeClassFromType(
+          project,
+          resolversDirPath,
+          type,
+          dmmfDocument,
+        );
+        cacheManager.updateOutputCache(type);
+      }
+    });
     const outputsBarrelExportSourceFile = project.createSourceFile(
       path.resolve(
         baseDirPath,
@@ -223,9 +235,24 @@ export default async function generateCode(
 
   if (dmmfDocument.shouldGenerateBlock("inputs")) {
     log("Generating input types...");
-    dmmfDocument.schema.inputTypes.forEach(type =>
-      generateInputTypeClassFromType(project, resolversDirPath, type, options),
+    const inputTypes = dmmfDocument.schema.inputTypes;
+    const batchSize = Math.max(5, Math.ceil(inputTypes.length / (cpus().length * 2)));
+    
+    const batches = Array.from(
+      { length: Math.ceil(inputTypes.length / batchSize) },
+      (_, i) => inputTypes.slice(i * batchSize, (i + 1) * batchSize)
     );
+
+    for (const batch of batches) {
+      await Promise.all(
+        batch.map(async type => {
+          if (cacheManager.shouldRegenerateInput(type)) {
+            await generateInputTypeClassFromType(project, resolversDirPath, type, options);
+            cacheManager.updateInputCache(type);
+          }
+        })
+      );
+    }
     const inputsBarrelExportSourceFile = project.createSourceFile(
       path.resolve(
         baseDirPath,
@@ -247,15 +274,40 @@ export default async function generateCode(
     dmmfDocument.shouldGenerateBlock("relationResolvers")
   ) {
     log("Generating relation resolvers...");
-    dmmfDocument.relationModels.forEach(relationModel =>
-      generateRelationsResolverClassesFromModel(
-        project,
-        baseDirPath,
-        dmmfDocument,
-        relationModel,
-        options,
-      ),
-    );
+    dmmfDocument.relationModels.forEach(relationModel => {
+      const mapping: DMMF.ModelMapping = {
+        modelName: relationModel.model.name,
+        modelTypeName: relationModel.model.typeName,
+        resolverName: relationModel.resolverName,
+        collectionName: relationModel.model.name.toLowerCase(),
+        actions: relationModel.relationFields.map(field => {
+          const action: DMMF.Action = {
+            name: field.name,
+            fieldName: field.name,
+            kind: DMMF.ModelAction.findMany,
+            operation: "Query",
+            prismaMethod: field.name,
+            method: field.outputTypeField,
+            argsTypeName: field.argsTypeName,
+            outputTypeName: field.outputTypeField.outputType.type,
+            actionResolverName: `${field.name}Resolver`,
+            returnTSType: field.outputTypeField.outputType.type,
+            typeGraphQLType: field.outputTypeField.outputType.type
+          };
+          return action;
+        })
+      } as const;
+      if (cacheManager.shouldRegenerateResolver(mapping)) {
+        generateRelationsResolverClassesFromModel(
+          project,
+          baseDirPath,
+          dmmfDocument,
+          relationModel,
+          options,
+        );
+        cacheManager.updateResolverCache(mapping);
+      }
+    });
     const relationResolversBarrelExportSourceFile = project.createSourceFile(
       path.resolve(
         baseDirPath,
@@ -351,30 +403,43 @@ export default async function generateCode(
   if (dmmfDocument.shouldGenerateBlock("crudResolvers")) {
     log("Generating crud resolvers...");
     dmmfDocument.modelMappings.forEach(async mapping => {
-      const model = dmmfDocument.datamodel.models.find(
-        model => model.name === mapping.modelName,
-      )!;
-      generateCrudResolverClassFromMapping(
-        project,
-        baseDirPath,
-        mapping,
-        model,
-        dmmfDocument,
-        options,
-      );
-      mapping.actions.forEach(async action => {
+      if (cacheManager.shouldRegenerateResolver(mapping)) {
         const model = dmmfDocument.datamodel.models.find(
           model => model.name === mapping.modelName,
         )!;
-        generateActionResolverClass(
+        generateCrudResolverClassFromMapping(
           project,
           baseDirPath,
-          model,
-          action,
           mapping,
+          model,
           dmmfDocument,
           options,
         );
+        cacheManager.updateResolverCache(mapping);
+      }
+      mapping.actions.forEach(async action => {
+        const actionMapping: DMMF.ModelMapping = {
+          modelName: mapping.modelName,
+          modelTypeName: mapping.modelTypeName,
+          resolverName: `${action.name}Resolver`,
+          collectionName: mapping.collectionName,
+          actions: [action]
+        } as const;
+        if (cacheManager.shouldRegenerateResolver(actionMapping)) {
+          const model = dmmfDocument.datamodel.models.find(
+            model => model.name === mapping.modelName,
+          )!;
+          generateActionResolverClass(
+            project,
+            baseDirPath,
+            model,
+            action,
+            mapping,
+            dmmfDocument,
+            options,
+          );
+          cacheManager.updateResolverCache(actionMapping);
+        }
       });
     });
     const generateMappingData =
