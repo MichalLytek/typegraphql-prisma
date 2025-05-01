@@ -31,6 +31,7 @@ export function generateOutputTypeClassFromType(
   dirPath: string,
   type: DMMF.OutputType,
   dmmfDocument: DmmfDocument,
+  generatorOptions: GeneratorOptions,
 ) {
   const fileDirPath = path.resolve(dirPath, outputsFolderName);
   const filePath = path.resolve(fileDirPath, `${type.typeName}.ts`);
@@ -150,7 +151,14 @@ export function generateOutputTypeClassFromType(
           {
             name: "args",
             type: field.argsTypeName,
-            decorators: [{ name: "TypeGraphQL.Args", arguments: [] }],
+            decorators: [
+              {
+                name: "TypeGraphQL.Args",
+                arguments: generatorOptions.emitRedundantTypesInfo
+                  ? [`_type => ${field.argsTypeName}`]
+                  : [],
+              },
+            ],
           },
         ],
         statements: [Writers.returnStatement(`root.${field.name}`)],

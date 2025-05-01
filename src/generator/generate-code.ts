@@ -173,6 +173,7 @@ export default async function generateCode(
         resolversDirPath,
         type,
         dmmfDocument,
+        options,
       ),
     );
     const outputsBarrelExportSourceFile = project.createSourceFile(
