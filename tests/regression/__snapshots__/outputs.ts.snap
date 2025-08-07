@@ -242,6 +242,7 @@ export { ExampleGroupBy } from \\"./ExampleGroupBy\\";
 export { ExampleMaxAggregate } from \\"./ExampleMaxAggregate\\";
 export { ExampleMinAggregate } from \\"./ExampleMinAggregate\\";
 export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
+export { UpdateManyAndReturnExample } from \\"./UpdateManyAndReturnExample\\";
 "
 `;
 
@@ -487,6 +488,7 @@ export { ExampleGroupBy } from \\"./ExampleGroupBy\\";
 export { ExampleMaxAggregate } from \\"./ExampleMaxAggregate\\";
 export { ExampleMinAggregate } from \\"./ExampleMinAggregate\\";
 export { ExampleSumAggregate } from \\"./ExampleSumAggregate\\";
+export { UpdateManyAndReturnExample } from \\"./UpdateManyAndReturnExample\\";
 "
 `;
 
@@ -531,6 +533,8 @@ export { SecondModelGroupBy } from \\"./SecondModelGroupBy\\";
 export { SecondModelMaxAggregate } from \\"./SecondModelMaxAggregate\\";
 export { SecondModelMinAggregate } from \\"./SecondModelMinAggregate\\";
 export { SecondModelSumAggregate } from \\"./SecondModelSumAggregate\\";
+export { UpdateManyAndReturnFirstModel } from \\"./UpdateManyAndReturnFirstModel\\";
+export { UpdateManyAndReturnSecondModel } from \\"./UpdateManyAndReturnSecondModel\\";
 export * from \\"./args\\";
 "
 `;
@@ -576,6 +580,8 @@ export { SecondModelGroupBy } from \\"./SecondModelGroupBy\\";
 export { SecondModelMaxAggregate } from \\"./SecondModelMaxAggregate\\";
 export { SecondModelMinAggregate } from \\"./SecondModelMinAggregate\\";
 export { SecondModelSumAggregate } from \\"./SecondModelSumAggregate\\";
+export { UpdateManyAndReturnFirstModel } from \\"./UpdateManyAndReturnFirstModel\\";
+export { UpdateManyAndReturnSecondModel } from \\"./UpdateManyAndReturnSecondModel\\";
 export * from \\"./args\\";
 "
 `;
@@ -929,6 +935,7 @@ export { SampleGroupBy } from \\"./SampleGroupBy\\";
 export { SampleMaxAggregate } from \\"./SampleMaxAggregate\\";
 export { SampleMinAggregate } from \\"./SampleMinAggregate\\";
 export { SampleSumAggregate } from \\"./SampleSumAggregate\\";
+export { UpdateManyAndReturnSample } from \\"./UpdateManyAndReturnSample\\";
 "
 `;
 

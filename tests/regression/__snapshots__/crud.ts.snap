@@ -350,6 +350,7 @@ export { FindUniqueUserResolver } from \\"./User/FindUniqueUserResolver\\";
 export { FindUniqueUserOrThrowResolver } from \\"./User/FindUniqueUserOrThrowResolver\\";
 export { GroupByUserResolver } from \\"./User/GroupByUserResolver\\";
 export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
+export { UpdateManyAndReturnUserResolver } from \\"./User/UpdateManyAndReturnUserResolver\\";
 export { UpdateOneUserResolver } from \\"./User/UpdateOneUserResolver\\";
 export { UpsertOneUserResolver } from \\"./User/UpsertOneUserResolver\\";
 "
@@ -468,6 +469,11 @@ export class DeleteManyUserArgs {
     nullable: true
   })
   where?: UserWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  limit?: number | undefined;
 }
 "
 `;
@@ -702,6 +708,7 @@ export { FindManyUserArgs } from \\"./FindManyUserArgs\\";
 export { FindUniqueUserArgs } from \\"./FindUniqueUserArgs\\";
 export { FindUniqueUserOrThrowArgs } from \\"./FindUniqueUserOrThrowArgs\\";
 export { GroupByUserArgs } from \\"./GroupByUserArgs\\";
+export { UpdateManyAndReturnUserArgs } from \\"./UpdateManyAndReturnUserArgs\\";
 export { UpdateManyUserArgs } from \\"./UpdateManyUserArgs\\";
 export { UpdateOneUserArgs } from \\"./UpdateOneUserArgs\\";
 export { UpsertOneUserArgs } from \\"./UpsertOneUserArgs\\";
@@ -725,6 +732,11 @@ export class UpdateManyUserArgs {
     nullable: true
   })
   where?: UserWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  limit?: number | undefined;
 }
 "
 `;
@@ -956,6 +968,7 @@ export { FindManyFirstModelArgs } from \\"./FindManyFirstModelArgs\\";
 export { FindUniqueFirstModelArgs } from \\"./FindUniqueFirstModelArgs\\";
 export { FindUniqueFirstModelOrThrowArgs } from \\"./FindUniqueFirstModelOrThrowArgs\\";
 export { GroupByFirstModelArgs } from \\"./GroupByFirstModelArgs\\";
+export { UpdateManyAndReturnFirstModelArgs } from \\"./UpdateManyAndReturnFirstModelArgs\\";
 export { UpdateManyFirstModelArgs } from \\"./UpdateManyFirstModelArgs\\";
 export { UpdateOneFirstModelArgs } from \\"./UpdateOneFirstModelArgs\\";
 export { UpsertOneFirstModelArgs } from \\"./UpsertOneFirstModelArgs\\";
@@ -1098,6 +1111,7 @@ export { FindManySecondModelArgs } from \\"./FindManySecondModelArgs\\";
 export { FindUniqueSecondModelArgs } from \\"./FindUniqueSecondModelArgs\\";
 export { FindUniqueSecondModelOrThrowArgs } from \\"./FindUniqueSecondModelOrThrowArgs\\";
 export { GroupBySecondModelArgs } from \\"./GroupBySecondModelArgs\\";
+export { UpdateManyAndReturnSecondModelArgs } from \\"./UpdateManyAndReturnSecondModelArgs\\";
 export { UpdateManySecondModelArgs } from \\"./UpdateManySecondModelArgs\\";
 export { UpdateOneSecondModelArgs } from \\"./UpdateOneSecondModelArgs\\";
 export { UpsertOneSecondModelArgs } from \\"./UpsertOneSecondModelArgs\\";
@@ -1126,6 +1140,7 @@ import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
+import { UpdateManyAndReturnUserArgs } from \\"./args/UpdateManyAndReturnUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
@@ -1134,6 +1149,7 @@ import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
 import { CreateManyAndReturnUser } from \\"../../outputs/CreateManyAndReturnUser\\";
+import { UpdateManyAndReturnUser } from \\"../../outputs/UpdateManyAndReturnUser\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -1282,6 +1298,17 @@ export class UserCrudResolver {
     });
   }
 
+  @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnUser], {
+    nullable: false
+  })
+  async updateManyAndReturnUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyAndReturnUserArgs): Promise<UpdateManyAndReturnUser[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.updateManyAndReturn({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Mutation(_returns => User, {
     nullable: true
   })
@@ -1321,6 +1348,7 @@ export { FindUniqueUserResolver } from \\"./User/FindUniqueUserResolver\\";
 export { FindUniqueUserOrThrowResolver } from \\"./User/FindUniqueUserOrThrowResolver\\";
 export { GroupByUserResolver } from \\"./User/GroupByUserResolver\\";
 export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
+export { UpdateManyAndReturnUserResolver } from \\"./User/UpdateManyAndReturnUserResolver\\";
 export { UpdateOneUserResolver } from \\"./User/UpdateOneUserResolver\\";
 export { UpsertOneUserResolver } from \\"./User/UpsertOneUserResolver\\";
 "
@@ -1373,6 +1401,7 @@ import { FindManyStaffArgs } from \\"./args/FindManyStaffArgs\\";
 import { FindUniqueStaffArgs } from \\"./args/FindUniqueStaffArgs\\";
 import { FindUniqueStaffOrThrowArgs } from \\"./args/FindUniqueStaffOrThrowArgs\\";
 import { GroupByStaffArgs } from \\"./args/GroupByStaffArgs\\";
+import { UpdateManyAndReturnStaffArgs } from \\"./args/UpdateManyAndReturnStaffArgs\\";
 import { UpdateManyStaffArgs } from \\"./args/UpdateManyStaffArgs\\";
 import { UpdateOneStaffArgs } from \\"./args/UpdateOneStaffArgs\\";
 import { UpsertOneStaffArgs } from \\"./args/UpsertOneStaffArgs\\";
@@ -1382,6 +1411,7 @@ import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
 import { CreateManyAndReturnStaff } from \\"../../outputs/CreateManyAndReturnStaff\\";
 import { StaffGroupBy } from \\"../../outputs/StaffGroupBy\\";
+import { UpdateManyAndReturnStaff } from \\"../../outputs/UpdateManyAndReturnStaff\\";
 
 @TypeGraphQL.Resolver(_of => Staff)
 export class StaffCrudResolver {
@@ -1529,6 +1559,17 @@ export class StaffCrudResolver {
     });
   }
 
+  @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnStaff], {
+    nullable: false
+  })
+  async updateManyAndReturnStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyAndReturnStaffArgs): Promise<UpdateManyAndReturnStaff[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).staff.updateManyAndReturn({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Mutation(_returns => Staff, {
     nullable: true
   })
@@ -1569,6 +1610,7 @@ import { FindManyStaffArgs } from \\"./args/FindManyStaffArgs\\";
 import { FindUniqueStaffArgs } from \\"./args/FindUniqueStaffArgs\\";
 import { FindUniqueStaffOrThrowArgs } from \\"./args/FindUniqueStaffOrThrowArgs\\";
 import { GroupByStaffArgs } from \\"./args/GroupByStaffArgs\\";
+import { UpdateManyAndReturnStaffArgs } from \\"./args/UpdateManyAndReturnStaffArgs\\";
 import { UpdateManyStaffArgs } from \\"./args/UpdateManyStaffArgs\\";
 import { UpdateOneStaffArgs } from \\"./args/UpdateOneStaffArgs\\";
 import { UpsertOneStaffArgs } from \\"./args/UpsertOneStaffArgs\\";
@@ -1578,6 +1620,7 @@ import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
 import { CreateManyAndReturnStaff } from \\"../../outputs/CreateManyAndReturnStaff\\";
 import { StaffGroupBy } from \\"../../outputs/StaffGroupBy\\";
+import { UpdateManyAndReturnStaff } from \\"../../outputs/UpdateManyAndReturnStaff\\";
 
 @TypeGraphQL.Resolver(_of => Staff)
 export class StaffCrudResolver {
@@ -1725,6 +1768,17 @@ export class StaffCrudResolver {
     });
   }
 
+  @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnStaff], {
+    nullable: false
+  })
+  async updateManyAndReturnStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyAndReturnStaffArgs): Promise<UpdateManyAndReturnStaff[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).staff.updateManyAndReturn({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Mutation(_returns => Staff, {
     nullable: true
   })
@@ -1811,6 +1865,7 @@ import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
+import { UpdateManyAndReturnUserArgs } from \\"./args/UpdateManyAndReturnUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
@@ -1819,6 +1874,7 @@ import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
 import { CreateManyAndReturnUser } from \\"../../outputs/CreateManyAndReturnUser\\";
+import { UpdateManyAndReturnUser } from \\"../../outputs/UpdateManyAndReturnUser\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -1967,6 +2023,17 @@ export class UserCrudResolver {
     });
   }
 
+  @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnUser], {
+    nullable: false
+  })
+  async updateManyAndReturnUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyAndReturnUserArgs): Promise<UpdateManyAndReturnUser[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.updateManyAndReturn({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Mutation(_returns => User, {
     nullable: true
   })
@@ -2007,6 +2074,7 @@ import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
+import { UpdateManyAndReturnUserArgs } from \\"./args/UpdateManyAndReturnUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
@@ -2015,6 +2083,7 @@ import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
 import { CreateManyAndReturnUser } from \\"../../outputs/CreateManyAndReturnUser\\";
+import { UpdateManyAndReturnUser } from \\"../../outputs/UpdateManyAndReturnUser\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -2163,6 +2232,17 @@ export class UserCrudResolver {
     });
   }
 
+  @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnUser], {
+    nullable: false
+  })
+  async updateManyAndReturnUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args(_type => UpdateManyAndReturnUserArgs) args: UpdateManyAndReturnUserArgs): Promise<UpdateManyAndReturnUser[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.updateManyAndReturn({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Mutation(_returns => User, {
     nullable: true
   })
@@ -2206,6 +2286,7 @@ const FindManyUserArgs_1 = require(\\"./args/FindManyUserArgs\\");
 const FindUniqueUserArgs_1 = require(\\"./args/FindUniqueUserArgs\\");
 const FindUniqueUserOrThrowArgs_1 = require(\\"./args/FindUniqueUserOrThrowArgs\\");
 const GroupByUserArgs_1 = require(\\"./args/GroupByUserArgs\\");
+const UpdateManyAndReturnUserArgs_1 = require(\\"./args/UpdateManyAndReturnUserArgs\\");
 const UpdateManyUserArgs_1 = require(\\"./args/UpdateManyUserArgs\\");
 const UpdateOneUserArgs_1 = require(\\"./args/UpdateOneUserArgs\\");
 const UpsertOneUserArgs_1 = require(\\"./args/UpsertOneUserArgs\\");
@@ -2214,6 +2295,7 @@ const User_1 = require(\\"../../../models/User\\");
 const AffectedRowsOutput_1 = require(\\"../../outputs/AffectedRowsOutput\\");
 const AggregateUser_1 = require(\\"../../outputs/AggregateUser\\");
 const CreateManyAndReturnUser_1 = require(\\"../../outputs/CreateManyAndReturnUser\\");
+const UpdateManyAndReturnUser_1 = require(\\"../../outputs/UpdateManyAndReturnUser\\");
 const UserGroupBy_1 = require(\\"../../outputs/UserGroupBy\\");
 let UserCrudResolver = class UserCrudResolver {
     async aggregateUser(ctx, info, args) {
@@ -2302,6 +2384,13 @@ let UserCrudResolver = class UserCrudResolver {
     async updateManyUser(ctx, info, args) {
         const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
         return (0, helpers_1.getPrismaFromContext)(ctx).user.updateMany({
+            ...args,
+            ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
+        });
+    }
+    async updateManyAndReturnUser(ctx, info, args) {
+        const { _count } = (0, helpers_1.transformInfoIntoPrismaArgs)(info);
+        return (0, helpers_1.getPrismaFromContext)(ctx).user.updateManyAndReturn({
             ...args,
             ...(_count && (0, helpers_1.transformCountFieldIntoSelectRelationsCount)(_count)),
         });
@@ -2466,6 +2555,17 @@ tslib_1.__decorate([
     tslib_1.__metadata(\\"design:returntype\\", Promise)
 ], UserCrudResolver.prototype, \\"updateManyUser\\", null);
 tslib_1.__decorate([
+    TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnUser_1.UpdateManyAndReturnUser], {
+        nullable: false
+    }),
+    tslib_1.__param(0, TypeGraphQL.Ctx()),
+    tslib_1.__param(1, TypeGraphQL.Info()),
+    tslib_1.__param(2, TypeGraphQL.Args()),
+    tslib_1.__metadata(\\"design:type\\", Function),
+    tslib_1.__metadata(\\"design:paramtypes\\", [Object, Object, UpdateManyAndReturnUserArgs_1.UpdateManyAndReturnUserArgs]),
+    tslib_1.__metadata(\\"design:returntype\\", Promise)
+], UserCrudResolver.prototype, \\"updateManyAndReturnUser\\", null);
+tslib_1.__decorate([
     TypeGraphQL.Mutation(_returns => User_1.User, {
         nullable: true
     }),
@@ -2508,6 +2608,7 @@ import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
+import { UpdateManyAndReturnUserArgs } from \\"./args/UpdateManyAndReturnUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
@@ -2520,6 +2621,7 @@ import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
 import { CreateManyAndReturnUser } from \\"../../outputs/CreateManyAndReturnUser\\";
+import { UpdateManyAndReturnUser } from \\"../../outputs/UpdateManyAndReturnUser\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -2723,6 +2825,21 @@ export class UserCrudResolver {
     });
   }
 
+  @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnUser], {
+    nullable: false,
+  })
+  async updateManyAndReturnUser(
+    @TypeGraphQL.Ctx() ctx: any,
+    @TypeGraphQL.Info() info: GraphQLResolveInfo,
+    @TypeGraphQL.Args() args: UpdateManyAndReturnUserArgs,
+  ): Promise<UpdateManyAndReturnUser[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.updateManyAndReturn({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Mutation(_returns => User, {
     nullable: true,
   })
@@ -2771,6 +2888,7 @@ import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { FindUniqueUserArgs } from \\"./args/FindUniqueUserArgs\\";
 import { FindUniqueUserOrThrowArgs } from \\"./args/FindUniqueUserOrThrowArgs\\";
 import { GroupByUserArgs } from \\"./args/GroupByUserArgs\\";
+import { UpdateManyAndReturnUserArgs } from \\"./args/UpdateManyAndReturnUserArgs\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { UpdateOneUserArgs } from \\"./args/UpdateOneUserArgs\\";
 import { UpsertOneUserArgs } from \\"./args/UpsertOneUserArgs\\";
@@ -2779,6 +2897,7 @@ import { User } from \\"../../../models/User\\";
 import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
 import { CreateManyAndReturnUser } from \\"../../outputs/CreateManyAndReturnUser\\";
+import { UpdateManyAndReturnUser } from \\"../../outputs/UpdateManyAndReturnUser\\";
 import { UserGroupBy } from \\"../../outputs/UserGroupBy\\";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -2922,6 +3041,17 @@ export class UserCrudResolver {
     async updateManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyUserArgs): Promise<AffectedRowsOutput> {
          const { _count } = transformInfoIntoPrismaArgs(info);
                     return getPrismaFromContext(ctx).user.updateMany({
+                      ...args,
+                      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+                    });
+    }
+
+    @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnUser], {
+            nullable: false
+        })
+    async updateManyAndReturnUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyAndReturnUserArgs): Promise<UpdateManyAndReturnUser[]> {
+         const { _count } = transformInfoIntoPrismaArgs(info);
+                    return getPrismaFromContext(ctx).user.updateManyAndReturn({
                       ...args,
                       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
                     });
@@ -3376,6 +3506,11 @@ export class DeleteManyClientArgs {
     nullable: true
   })
   where?: ClientWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  limit?: number | undefined;
 }
 "
 `;
@@ -3537,6 +3672,7 @@ export { FindManyClientArgs } from \\"./FindManyClientArgs\\";
 export { FindUniqueClientArgs } from \\"./FindUniqueClientArgs\\";
 export { FindUniqueClientOrThrowArgs } from \\"./FindUniqueClientOrThrowArgs\\";
 export { GroupByClientArgs } from \\"./GroupByClientArgs\\";
+export { UpdateManyAndReturnClientArgs } from \\"./UpdateManyAndReturnClientArgs\\";
 export { UpdateManyClientArgs } from \\"./UpdateManyClientArgs\\";
 export { UpdateOneClientArgs } from \\"./UpdateOneClientArgs\\";
 export { UpsertOneClientArgs } from \\"./UpsertOneClientArgs\\";
@@ -3581,6 +3717,11 @@ export class UpdateManyClientArgs {
     nullable: true
   })
   where?: ClientWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  limit?: number | undefined;
 }
 "
 `;
@@ -3650,6 +3791,7 @@ import { FindManyClientArgs } from \\"./args/FindManyClientArgs\\";
 import { FindUniqueClientArgs } from \\"./args/FindUniqueClientArgs\\";
 import { FindUniqueClientOrThrowArgs } from \\"./args/FindUniqueClientOrThrowArgs\\";
 import { GroupByClientArgs } from \\"./args/GroupByClientArgs\\";
+import { UpdateManyAndReturnClientArgs } from \\"./args/UpdateManyAndReturnClientArgs\\";
 import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
 import { UpdateOneClientArgs } from \\"./args/UpdateOneClientArgs\\";
 import { UpsertOneClientArgs } from \\"./args/UpsertOneClientArgs\\";
@@ -3659,6 +3801,7 @@ import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateClient } from \\"../../outputs/AggregateClient\\";
 import { ClientGroupBy } from \\"../../outputs/ClientGroupBy\\";
 import { CreateManyAndReturnClient } from \\"../../outputs/CreateManyAndReturnClient\\";
+import { UpdateManyAndReturnClient } from \\"../../outputs/UpdateManyAndReturnClient\\";
 
 @TypeGraphQL.Resolver(_of => Client)
 export class ClientCrudResolver {
@@ -3806,6 +3949,17 @@ export class ClientCrudResolver {
     });
   }
 
+  @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnClient], {
+    nullable: false
+  })
+  async updateManyAndReturnClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyAndReturnClientArgs): Promise<UpdateManyAndReturnClient[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.updateManyAndReturn({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Mutation(_returns => Client, {
     nullable: true
   })
@@ -3872,6 +4026,7 @@ import { FindManyMainUserArgs } from \\"./args/FindManyMainUserArgs\\";
 import { FindUniqueMainUserArgs } from \\"./args/FindUniqueMainUserArgs\\";
 import { FindUniqueMainUserOrThrowArgs } from \\"./args/FindUniqueMainUserOrThrowArgs\\";
 import { GroupByMainUserArgs } from \\"./args/GroupByMainUserArgs\\";
+import { UpdateManyAndReturnMainUserArgs } from \\"./args/UpdateManyAndReturnMainUserArgs\\";
 import { UpdateManyMainUserArgs } from \\"./args/UpdateManyMainUserArgs\\";
 import { UpdateOneMainUserArgs } from \\"./args/UpdateOneMainUserArgs\\";
 import { UpsertOneMainUserArgs } from \\"./args/UpsertOneMainUserArgs\\";
@@ -3881,6 +4036,7 @@ import { AffectedRowsOutput } from \\"../../outputs/AffectedRowsOutput\\";
 import { AggregateMainUser } from \\"../../outputs/AggregateMainUser\\";
 import { CreateManyAndReturnMainUser } from \\"../../outputs/CreateManyAndReturnMainUser\\";
 import { MainUserGroupBy } from \\"../../outputs/MainUserGroupBy\\";
+import { UpdateManyAndReturnMainUser } from \\"../../outputs/UpdateManyAndReturnMainUser\\";
 
 @TypeGraphQL.Resolver(_of => MainUser)
 export class MainUserCrudResolver {
@@ -4028,6 +4184,17 @@ export class MainUserCrudResolver {
     });
   }
 
+  @TypeGraphQL.Mutation(_returns => [UpdateManyAndReturnMainUser], {
+    nullable: false
+  })
+  async updateManyAndReturnMainUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: UpdateManyAndReturnMainUserArgs): Promise<UpdateManyAndReturnMainUser[]> {
+    const { _count } = transformInfoIntoPrismaArgs(info);
+    return getPrismaFromContext(ctx).user.updateManyAndReturn({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
+  }
+
   @TypeGraphQL.Mutation(_returns => MainUser, {
     nullable: true
   })
@@ -4085,6 +4252,11 @@ export class UpdateManyUserArgs {
     nullable: true
   })
   where?: UserWhereInput | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  limit?: number | undefined;
 }
 "
 `;

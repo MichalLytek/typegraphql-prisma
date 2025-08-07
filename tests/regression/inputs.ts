@@ -369,7 +369,7 @@ describe("inputs", () => {
       "/resolvers/inputs/FirstModelOrderByWithRelationInput.ts",
     );
     const firstModelRelationFilterTSFile = await readGeneratedFile(
-      "/resolvers/inputs/FirstModelRelationFilter.ts",
+      "/resolvers/inputs/FirstModelScalarRelationFilter.ts",
     );
     const secondModelWhereInputTSFile = await readGeneratedFile(
       "/resolvers/inputs/SecondModelWhereInput.ts",
@@ -996,7 +996,7 @@ describe("inputs", () => {
           "/resolvers/inputs/RenamedFirstModelOrderByWithRelationInput.ts",
         );
       const renamedFirstModelRelationFilterTSFile = await readGeneratedFile(
-        "/resolvers/inputs/RenamedFirstModelRelationFilter.ts",
+        "/resolvers/inputs/RenamedFirstModelScalarRelationFilter.ts",
       );
       const renamedSecondModelWhereInputTSFile = await readGeneratedFile(
         "/resolvers/inputs/RenamedSecondModelWhereInput.ts",

@@ -90,7 +90,7 @@ export namespace DMMF {
   }>;
   export type FieldDefault = ReadonlyDeep<{
     name: string;
-    args: any[];
+    args: (string | number)[];
   }>;
   export type FieldDefaultScalar = string | boolean | number;
   export type Schema = ReadonlyDeep<{
@@ -247,6 +247,7 @@ export namespace DMMF {
     createManyAndReturn = "createManyAndReturn",
     updateOne = "updateOne",
     updateMany = "updateMany",
+    updateManyAndReturn = "updateManyAndReturn",
     upsertOne = "upsertOne",
     deleteOne = "deleteOne",
     deleteMany = "deleteMany",

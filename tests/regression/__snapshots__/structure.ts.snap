@@ -62,6 +62,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         GroupByPostResolver.js
         PostCrudResolver.d.ts
         PostCrudResolver.js
+        UpdateManyAndReturnPostResolver.d.ts
+        UpdateManyAndReturnPostResolver.js
         UpdateManyPostResolver.d.ts
         UpdateManyPostResolver.js
         UpdateOnePostResolver.d.ts
@@ -93,6 +95,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           FindUniquePostOrThrowArgs.js
           GroupByPostArgs.d.ts
           GroupByPostArgs.js
+          UpdateManyAndReturnPostArgs.d.ts
+          UpdateManyAndReturnPostArgs.js
           UpdateManyPostArgs.d.ts
           UpdateManyPostArgs.js
           UpdateOnePostArgs.d.ts
@@ -126,6 +130,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
         FindUniqueUserResolver.js
         GroupByUserResolver.d.ts
         GroupByUserResolver.js
+        UpdateManyAndReturnUserResolver.d.ts
+        UpdateManyAndReturnUserResolver.js
         UpdateManyUserResolver.d.ts
         UpdateManyUserResolver.js
         UpdateOneUserResolver.d.ts
@@ -159,6 +165,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
           FindUniqueUserOrThrowArgs.js
           GroupByUserArgs.d.ts
           GroupByUserArgs.js
+          UpdateManyAndReturnUserArgs.d.ts
+          UpdateManyAndReturnUserArgs.js
           UpdateManyUserArgs.d.ts
           UpdateManyUserArgs.js
           UpdateOneUserArgs.d.ts
@@ -298,8 +306,8 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       UserOrderByWithAggregationInput.js
       UserOrderByWithRelationInput.d.ts
       UserOrderByWithRelationInput.js
-      UserRelationFilter.d.ts
-      UserRelationFilter.js
+      UserScalarRelationFilter.d.ts
+      UserScalarRelationFilter.js
       UserScalarWhereWithAggregatesInput.d.ts
       UserScalarWhereWithAggregatesInput.js
       UserSumOrderByAggregateInput.d.ts
@@ -345,6 +353,10 @@ exports[`structure should generate *.js and *.d.ts files when emitTranspiledCode
       PostMinAggregate.js
       PostSumAggregate.d.ts
       PostSumAggregate.js
+      UpdateManyAndReturnPost.d.ts
+      UpdateManyAndReturnPost.js
+      UpdateManyAndReturnUser.d.ts
+      UpdateManyAndReturnUser.js
       UserAvgAggregate.d.ts
       UserAvgAggregate.js
       UserCount.d.ts
@@ -424,6 +436,7 @@ exports[`structure should generate proper folders and file names when model is r
         FindUniqueRenamedPostResolver.ts
         GroupByRenamedPostResolver.ts
         RenamedPostCrudResolver.ts
+        UpdateManyAndReturnRenamedPostResolver.ts
         UpdateManyRenamedPostResolver.ts
         UpdateOneRenamedPostResolver.ts
         UpsertOneRenamedPostResolver.ts
@@ -440,6 +453,7 @@ exports[`structure should generate proper folders and file names when model is r
           FindUniqueRenamedPostArgs.ts
           FindUniqueRenamedPostOrThrowArgs.ts
           GroupByRenamedPostArgs.ts
+          UpdateManyAndReturnRenamedPostArgs.ts
           UpdateManyRenamedPostArgs.ts
           UpdateOneRenamedPostArgs.ts
           UpsertOneRenamedPostArgs.ts
@@ -458,6 +472,7 @@ exports[`structure should generate proper folders and file names when model is r
         FindUniqueRenamedUserResolver.ts
         GroupByRenamedUserResolver.ts
         RenamedUserCrudResolver.ts
+        UpdateManyAndReturnRenamedUserResolver.ts
         UpdateManyRenamedUserResolver.ts
         UpdateOneRenamedUserResolver.ts
         UpsertOneRenamedUserResolver.ts
@@ -474,6 +489,7 @@ exports[`structure should generate proper folders and file names when model is r
           FindUniqueRenamedUserArgs.ts
           FindUniqueRenamedUserOrThrowArgs.ts
           GroupByRenamedUserArgs.ts
+          UpdateManyAndReturnRenamedUserArgs.ts
           UpdateManyRenamedUserArgs.ts
           UpdateOneRenamedUserArgs.ts
           UpsertOneRenamedUserArgs.ts
@@ -538,7 +554,7 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedUserMinOrderByAggregateInput.ts
       RenamedUserOrderByWithAggregationInput.ts
       RenamedUserOrderByWithRelationInput.ts
-      RenamedUserRelationFilter.ts
+      RenamedUserScalarRelationFilter.ts
       RenamedUserScalarWhereWithAggregatesInput.ts
       RenamedUserSumOrderByAggregateInput.ts
       RenamedUserUpdateInput.ts
@@ -575,6 +591,8 @@ exports[`structure should generate proper folders and file names when model is r
       RenamedUserMaxAggregate.ts
       RenamedUserMinAggregate.ts
       RenamedUserSumAggregate.ts
+      UpdateManyAndReturnRenamedPost.ts
+      UpdateManyAndReturnRenamedUser.ts
       [args]
         RenamedUserCountPostsArgs.ts
         index.ts
@@ -629,6 +647,7 @@ exports[`structure should generate proper folders structure and file names for c
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
+        UpdateManyAndReturnPostResolver.ts
         UpdateManyPostResolver.ts
         UpdateOnePostResolver.ts
         UpsertOnePostResolver.ts
@@ -645,6 +664,7 @@ exports[`structure should generate proper folders structure and file names for c
           FindUniquePostArgs.ts
           FindUniquePostOrThrowArgs.ts
           GroupByPostArgs.ts
+          UpdateManyAndReturnPostArgs.ts
           UpdateManyPostArgs.ts
           UpdateOnePostArgs.ts
           UpsertOnePostArgs.ts
@@ -662,6 +682,7 @@ exports[`structure should generate proper folders structure and file names for c
         FindUniqueUserOrThrowResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
+        UpdateManyAndReturnUserResolver.ts
         UpdateManyUserResolver.ts
         UpdateOneUserResolver.ts
         UpsertOneUserResolver.ts
@@ -679,6 +700,7 @@ exports[`structure should generate proper folders structure and file names for c
           FindUniqueUserArgs.ts
           FindUniqueUserOrThrowArgs.ts
           GroupByUserArgs.ts
+          UpdateManyAndReturnUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateOneUserArgs.ts
           UpsertOneUserArgs.ts
@@ -749,7 +771,7 @@ exports[`structure should generate proper folders structure and file names for c
       UserMinOrderByAggregateInput.ts
       UserOrderByWithAggregationInput.ts
       UserOrderByWithRelationInput.ts
-      UserRelationFilter.ts
+      UserScalarRelationFilter.ts
       UserScalarWhereWithAggregatesInput.ts
       UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
@@ -773,6 +795,8 @@ exports[`structure should generate proper folders structure and file names for c
       PostMaxAggregate.ts
       PostMinAggregate.ts
       PostSumAggregate.ts
+      UpdateManyAndReturnPost.ts
+      UpdateManyAndReturnUser.ts
       UserAvgAggregate.ts
       UserCount.ts
       UserCountAggregate.ts

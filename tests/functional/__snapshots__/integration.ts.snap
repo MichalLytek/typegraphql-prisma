@@ -100,12 +100,14 @@ type Mutation {
   createManyUser(data: [UserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createOnePost(data: PostCreateInput!): Post!
   createOneUser(data: UserCreateInput): User!
-  deleteManyPost(where: PostWhereInput): AffectedRowsOutput!
-  deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
+  deleteManyPost(limit: Int, where: PostWhereInput): AffectedRowsOutput!
+  deleteManyUser(limit: Int, where: UserWhereInput): AffectedRowsOutput!
   deleteOnePost(where: PostWhereUniqueInput!): Post
   deleteOneUser(where: UserWhereUniqueInput!): User
-  updateManyPost(data: PostUpdateManyMutationInput!, where: PostWhereInput): AffectedRowsOutput!
-  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
+  updateManyAndReturnPost(data: PostUpdateManyMutationInput!, limit: Int, where: PostWhereInput): [UpdateManyAndReturnPost!]!
+  updateManyAndReturnUser(data: UserUpdateManyMutationInput!, limit: Int, where: UserWhereInput): [UpdateManyAndReturnUser!]!
+  updateManyPost(data: PostUpdateManyMutationInput!, limit: Int, where: PostWhereInput): AffectedRowsOutput!
+  updateManyUser(data: UserUpdateManyMutationInput!, limit: Int, where: UserWhereInput): AffectedRowsOutput!
   updateOnePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   upsertOnePost(create: PostCreateInput!, update: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
@@ -481,7 +483,7 @@ input PostWhereInput {
   AND: [PostWhereInput!]
   NOT: [PostWhereInput!]
   OR: [PostWhereInput!]
-  author: UserRelationFilter
+  author: UserScalarRelationFilter
   authorId: IntFilter
   color: EnumColorFilter
   content: StringFilter
@@ -492,7 +494,7 @@ input PostWhereUniqueInput {
   AND: [PostWhereInput!]
   NOT: [PostWhereInput!]
   OR: [PostWhereInput!]
-  author: UserRelationFilter
+  author: UserScalarRelationFilter
   authorId: IntFilter
   color: EnumColorFilter
   content: StringFilter
@@ -601,6 +603,19 @@ input StringWithAggregatesFilter {
   startsWith: String
 }
 
+type UpdateManyAndReturnPost {
+  author: User!
+  authorId: Int!
+  color: Color!
+  content: String!
+  uuid: String!
+}
+
+type UpdateManyAndReturnUser {
+  id: Int!
+  name: String
+}
+
 type User {
   _count: UserCount
   id: Int!
@@ -702,14 +717,14 @@ input UserOrderByWithRelationInput {
   posts: PostOrderByRelationAggregateInput
 }
 
-input UserRelationFilter {
-  is: UserWhereInput
-  isNot: UserWhereInput
-}
-
 enum UserScalarFieldEnum {
   id
   name
+}
+
+input UserScalarRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
 }
 
 input UserScalarWhereWithAggregatesInput {
@@ -814,6 +829,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
         FindUniquePostResolver.ts
         GroupByPostResolver.ts
         PostCrudResolver.ts
+        UpdateManyAndReturnPostResolver.ts
         UpdateManyPostResolver.ts
         UpdateOnePostResolver.ts
         UpsertOnePostResolver.ts
@@ -830,6 +846,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
           FindUniquePostArgs.ts
           FindUniquePostOrThrowArgs.ts
           GroupByPostArgs.ts
+          UpdateManyAndReturnPostArgs.ts
           UpdateManyPostArgs.ts
           UpdateOnePostArgs.ts
           UpsertOnePostArgs.ts
@@ -847,6 +864,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
         FindUniqueUserOrThrowResolver.ts
         FindUniqueUserResolver.ts
         GroupByUserResolver.ts
+        UpdateManyAndReturnUserResolver.ts
         UpdateManyUserResolver.ts
         UpdateOneUserResolver.ts
         UpsertOneUserResolver.ts
@@ -864,6 +882,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
           FindUniqueUserArgs.ts
           FindUniqueUserOrThrowArgs.ts
           GroupByUserArgs.ts
+          UpdateManyAndReturnUserArgs.ts
           UpdateManyUserArgs.ts
           UpdateOneUserArgs.ts
           UpsertOneUserArgs.ts
@@ -934,7 +953,7 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       UserMinOrderByAggregateInput.ts
       UserOrderByWithAggregationInput.ts
       UserOrderByWithRelationInput.ts
-      UserRelationFilter.ts
+      UserScalarRelationFilter.ts
       UserScalarWhereWithAggregatesInput.ts
       UserSumOrderByAggregateInput.ts
       UserUpdateInput.ts
@@ -958,6 +977,8 @@ exports[`generator integration should generates TypeGraphQL classes files to out
       PostMaxAggregate.ts
       PostMinAggregate.ts
       PostSumAggregate.ts
+      UpdateManyAndReturnPost.ts
+      UpdateManyAndReturnUser.ts
       UserAvgAggregate.ts
       UserCount.ts
       UserCountAggregate.ts

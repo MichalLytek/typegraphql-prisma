@@ -304,6 +304,18 @@ export function getMappedOutputTypeName(
     return `CreateManyAndReturn${modelTypeName}`;
   }
 
+  if (
+    outputTypeName.startsWith("UpdateMany") &&
+    outputTypeName.endsWith("AndReturnOutputType")
+  ) {
+    const modelTypeName = dmmfDocument.getModelTypeName(
+      outputTypeName
+        .replace("UpdateMany", "")
+        .replace("AndReturnOutputType", ""),
+    );
+    return `UpdateManyAndReturn${modelTypeName}`;
+  }
+
   if (dmmfDocument.isModelName(outputTypeName)) {
     return dmmfDocument.getModelTypeName(outputTypeName)!;
   }
