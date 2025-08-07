@@ -19,12 +19,12 @@
     "typegraphql-prisma": "lib/generator.js"
   },
   "peerDependencies": {
-    "@prisma/client": "^5.18.0",
+    "@prisma/client": "^5.18.0 || ^6.0.0",
     "@types/graphql-fields": "^1.3.9",
     "@types/node": "*",
     "graphql-fields": "^2.0.3",
     "graphql-scalars": "^1.23.0",
-    "prisma": "^5.18.0",
+    "prisma": "^5.18.0 || ^6.0.0",
     "tslib": "^2.6.3",
     "type-graphql": "^1.1.1 || >=1.2.0-rc || >=2.0.0-beta || >=2.0.0-rc"
   },
