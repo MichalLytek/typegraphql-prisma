@@ -37,10 +37,16 @@ export function generateHelpersFile(
             }
             if ("__arguments" in value) {
               return [key, Object.fromEntries(
-                value.__arguments.map((argument: object) => {
-                  const [[key, { value }]] = Object.entries(argument);
-                  return [key, value];
-                })
+                value.__arguments
+                  .map((argument: object) => {
+                    const entries = Object.entries(argument);
+                    if (!entries[0]) {
+                      return null;
+                    }
+                    const [[key, { value }]] = entries;
+                    return [key, value];
+                  })
+                  .filter((entry: unknown) => entry != null)
               )];
             }
             return [key, transformFields(value)];
