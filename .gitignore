@@ -1,5 +1,5 @@
+.idea
 node_modules
-lib
 dist
 package
 tests/artifacts
