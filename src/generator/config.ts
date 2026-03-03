@@ -26,6 +26,7 @@ export const supportedMutationActions = [
   "updateOne",
   "deleteMany",
   "updateMany",
+  "updateManyAndReturn",
   "upsertOne",
 ] satisfies (keyof typeof DMMF.ModelAction)[];
 export type SupportedMutations = (typeof supportedMutationActions)[number];

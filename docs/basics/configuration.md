@@ -24,6 +24,16 @@ generator typegraphql {
 
 Then run `npx prisma generate` - this will emit the generated TypeGraphQL classes to the `@generated/type-graphql` folder inside `node_modules`.
 
+## Supported Prisma client providers
+
+`typegraphql-prisma` supports Prisma client generators with these providers:
+
+- `prisma-client-js`
+- `prisma-client`
+- `prisma-client-ts`
+
+When using `prisma-client` or `prisma-client-ts`, remember to configure explicit `output` path for the Prisma client generator.
+
 ## Changing output folder
 
 When you want to emit the generated files into a different folder, you can configure the default output folder via the `output` config option, e.g.:

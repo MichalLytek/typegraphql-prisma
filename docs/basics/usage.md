@@ -111,6 +111,7 @@ However, it can also generate some resolvers which might be handy especially on 
 - createManyAndReturn
 - update
 - updateMany
+- updateManyAndReturn
 - delete
 - deleteMany
 - upsert

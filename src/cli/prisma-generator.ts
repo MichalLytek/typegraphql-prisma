@@ -1,4 +1,4 @@
-import { GeneratorOptions } from "@prisma/generator-helper";
+import type { GeneratorOptions } from "@prisma/generator";
 import { getDMMF, parseEnvValue } from "@prisma/internals";
 import { promises as asyncFs } from "fs";
 import path from "path";
@@ -18,13 +18,31 @@ import {
 } from "./helpers";
 
 export async function generate(options: GeneratorOptions) {
+  const supportedPrismaClientProviders = [
+    "prisma-client-js",
+    "prisma-client",
+    "prisma-client-ts",
+  ] as const;
   const outputDir = parseEnvValue(options.generator.output!);
   await asyncFs.mkdir(outputDir, { recursive: true });
   await removeDir(outputDir, true);
 
   const prismaClientProvider = options.otherGenerators.find(
-    it => parseEnvValue(it.provider) === "prisma-client-js",
-  )!;
+    it =>
+      supportedPrismaClientProviders.includes(
+        parseEnvValue(it.provider) as (typeof supportedPrismaClientProviders)[number],
+      ),
+  );
+  if (!prismaClientProvider) {
+    const detectedProviders = options.otherGenerators.map(it =>
+      parseEnvValue(it.provider),
+    );
+    throw new Error(
+      `Could not find a supported Prisma Client generator. ` +
+        `Expected one of: ${supportedPrismaClientProviders.join(", ")}. ` +
+        `Detected providers: ${detectedProviders.join(", ") || "(none)"}.`,
+    );
+  }
   const prismaClientPath = parseEnvValue(prismaClientProvider.output!);
   const prismaClientDmmf = await getDMMF({
     datamodel: options.datamodel,

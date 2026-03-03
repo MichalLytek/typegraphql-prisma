@@ -1,4 +1,4 @@
-import type { DMMF as PrismaDMMF } from "@prisma/generator-helper";
+import type * as PrismaDMMF from "@prisma/dmmf";
 import { DMMF } from "./types";
 import {
   transformSchema,

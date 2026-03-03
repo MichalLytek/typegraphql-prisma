@@ -1,4 +1,4 @@
-import type { DMMF as PrismaDMMF } from "@prisma/generator-helper";
+import type * as PrismaDMMF from "@prisma/dmmf";
 import { getDMMF } from "@prisma/internals";
 
 export default async function getPrismaClientDmmfFromPrismaSchema(

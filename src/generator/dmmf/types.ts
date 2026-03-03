@@ -38,6 +38,7 @@ export namespace DMMF {
   export type Model = ReadonlyDeep<{
     name: string;
     dbName: string | null;
+    schema: string | null;
     fields: ModelField[];
     uniqueFields: string[][];
     uniqueIndexes: UniqueIndex[];
@@ -70,12 +71,14 @@ export namespace DMMF {
     isGenerated?: boolean;
     isUpdatedAt?: boolean;
     // type: string;
+    nativeType?: [string, string[]] | null;
     dbNames?: string[] | null;
     hasDefaultValue: boolean;
     default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
     relationFromFields?: string[];
     relationToFields?: string[];
     relationOnDelete?: string;
+    relationOnUpdate?: string;
     relationName?: string;
     // documentation?: string;
     // [key: string]: any;
@@ -90,7 +93,7 @@ export namespace DMMF {
   }>;
   export type FieldDefault = ReadonlyDeep<{
     name: string;
-    args: any[];
+    args: Array<string | number>;
   }>;
   export type FieldDefaultScalar = string | boolean | number;
   export type Schema = ReadonlyDeep<{
@@ -137,6 +140,7 @@ export namespace DMMF {
     isNullable: boolean;
     isRequired: boolean;
     // inputTypes: InputTypeRef[];
+    requiresOtherFields?: string[];
     deprecation?: Deprecation;
     // additional props:
     selectedInputType: SchemaArgInputType;
@@ -196,6 +200,7 @@ export namespace DMMF {
     };
     meta?: {
       source?: string;
+      grouping?: string;
     };
     fields: SchemaArg[];
     // additional props:
@@ -247,6 +252,7 @@ export namespace DMMF {
     createManyAndReturn = "createManyAndReturn",
     updateOne = "updateOne",
     updateMany = "updateMany",
+    updateManyAndReturn = "updateManyAndReturn",
     upsertOne = "upsertOne",
     deleteOne = "deleteOne",
     deleteMany = "deleteMany",

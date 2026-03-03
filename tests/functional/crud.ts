@@ -224,6 +224,7 @@ describe("crud resolvers execution", () => {
             where: {
               dateField: { lte: "2019-12-31T19:16:02.572Z" }
             }
+            limit: 2
           ) {
             count
           }
@@ -250,6 +251,51 @@ describe("crud resolvers execution", () => {
       );
     });
 
+    it("should properly call PrismaClient on `updateManyAndReturn` action", async () => {
+      const document = /* graphql */ `
+        mutation {
+          updateManyAndReturnUser(
+            data: {
+              optionalStringField: null,
+            }
+            where: {
+              dateField: { lte: "2019-12-31T19:16:02.572Z" }
+            }
+            limit: 2
+          ) {
+            intIdField
+            uniqueStringField
+            optionalStringField
+            dateField
+          }
+        }
+      `;
+      const prismaMock = {
+        user: {
+          updateManyAndReturn: jest.fn().mockResolvedValue([
+            {
+              intIdField: 1,
+              uniqueStringField: "unique",
+              optionalStringField: null,
+              dateField: new Date("2019-12-31T14:16:02.572Z"),
+            },
+          ]),
+        },
+      };
+
+      const { data, errors } = await graphql({
+        schema: graphQLSchema,
+        source: document,
+        contextValue: { prisma: prismaMock },
+      });
+
+      expect(errors).toBeUndefined();
+      expect(data).toMatchSnapshot("updateManyAndReturnUser mocked response");
+      expect(prismaMock.user.updateManyAndReturn.mock.calls).toMatchSnapshot(
+        "updateManyAndReturnUser call args",
+      );
+    });
+
     it("should properly call PrismaClient on `deleteMany` action", async () => {
       const document = /* graphql */ `
         mutation {
@@ -257,6 +303,7 @@ describe("crud resolvers execution", () => {
             where: {
               dateField: { lte: "2019-12-31T19:16:02.572Z" }
             }
+            limit: 2
           ) {
             count
           }

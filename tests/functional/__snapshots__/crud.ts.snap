@@ -226,6 +226,7 @@ exports[`crud resolvers execution basic operations should properly call PrismaCl
 Array [
   Array [
     Object {
+      "limit": 2,
       "where": UserWhereInput {
         "dateField": DateTimeFilter {
           "lte": 2019-12-31T19:16:02.572Z,
@@ -330,6 +331,7 @@ Array [
       "data": UserUpdateManyMutationInput {
         "optionalStringField": null,
       },
+      "limit": 2,
       "where": UserWhereInput {
         "dateField": DateTimeFilter {
           "lte": 2019-12-31T19:16:02.572Z,
@@ -345,6 +347,37 @@ Object {
   "updateManyUser": Object {
     "count": 3,
   },
+}
+`;
+
+exports[`crud resolvers execution basic operations should properly call PrismaClient on \`updateManyAndReturn\` action: updateManyAndReturnUser call args 1`] = `
+Array [
+  Array [
+    Object {
+      "data": UserUpdateManyMutationInput {
+        "optionalStringField": null,
+      },
+      "limit": 2,
+      "where": UserWhereInput {
+        "dateField": DateTimeFilter {
+          "lte": 2019-12-31T19:16:02.572Z,
+        },
+      },
+    },
+  ],
+]
+`;
+
+exports[`crud resolvers execution basic operations should properly call PrismaClient on \`updateManyAndReturn\` action: updateManyAndReturnUser mocked response 1`] = `
+Object {
+  "updateManyAndReturnUser": Array [
+    Object {
+      "dateField": "2019-12-31T14:16:02.572Z",
+      "intIdField": 1,
+      "optionalStringField": null,
+      "uniqueStringField": "unique",
+    },
+  ],
 }
 `;
 

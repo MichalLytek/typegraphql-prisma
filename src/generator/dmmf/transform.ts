@@ -1,4 +1,4 @@
-import type { DMMF as PrismaDMMF } from "@prisma/generator-helper";
+import type * as PrismaDMMF from "@prisma/dmmf";
 import { DMMF } from "./types";
 import { parseDocumentationAttributes } from "./helpers";
 import {
@@ -302,6 +302,18 @@ export function getMappedOutputTypeName(
         .replace("AndReturnOutputType", ""),
     );
     return `CreateManyAndReturn${modelTypeName}`;
+  }
+
+  if (
+    outputTypeName.startsWith("UpdateMany") &&
+    outputTypeName.endsWith("AndReturnOutputType")
+  ) {
+    const modelTypeName = dmmfDocument.getModelTypeName(
+      outputTypeName
+        .replace("UpdateMany", "")
+        .replace("AndReturnOutputType", ""),
+    );
+    return `UpdateManyAndReturn${modelTypeName}`;
   }
 
   if (dmmfDocument.isModelName(outputTypeName)) {

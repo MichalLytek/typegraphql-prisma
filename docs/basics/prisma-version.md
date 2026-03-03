@@ -11,9 +11,9 @@ By default, it checks if the installed Prisma version matches the required one u
 So when you try to use other version, like a just published, new minor release (or the `dev` one), you will receive an error about wrong package version, e.g:
 
 ```sh
-Error: Looks like an incorrect version "3.1.1" of the Prisma packages has been installed.
+Error: Looks like an incorrect version "6.18.0" of the Prisma packages has been installed.
 'typegraphql-prisma' works only with selected versions, so please ensure
-that you have installed a version of Prisma that meets the requirement: "~3.0.1".
+that you have installed a version of Prisma that meets the requirement: "^6.19.0".
 Find out more about that requirement in docs:
 https://prisma.typegraphql.com/docs/basics/prisma-version
 ```
