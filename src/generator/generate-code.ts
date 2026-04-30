@@ -6,7 +6,7 @@ import { promisify } from "node:util";
 const execa = promisify(exec);
 
 import { noop, toUnixPath } from "./helpers";
-import generateEnumFromDef from "./enum";
+import generateEnumFromDef from "./generate-enum";
 import generateObjectTypeClassFromModel from "./model-type-class";
 import generateRelationsResolverClassesFromModel from "./resolvers/relations";
 import {
@@ -28,7 +28,6 @@ import {
   generateResolversBarrelFile,
   generateInputsBarrelFile,
   generateOutputsBarrelFile,
-  generateIndexFile,
   generateModelsBarrelFile,
   generateEnumsBarrelFile,
   generateArgsBarrelFile,
@@ -49,6 +48,7 @@ import { GenerateMappingData } from "./types";
 import { generateEnhanceMap } from "./generate-enhance";
 import { generateCustomScalars } from "./generate-scalars";
 import { generateHelpersFile } from "./generate-helpers";
+import { generateIndex } from "./generate-index";
 import { DMMF } from "./dmmf/types";
 import { getBlocksToEmit } from "./emit-block";
 
@@ -522,7 +522,7 @@ export default async function generateCode(
     undefined,
     { overwrite: true },
   );
-  generateIndexFile(
+  generateIndex(
     indexSourceFile,
     dmmfDocument.relationModels.length > 0,
     dmmfDocument.options.blocksToEmit,

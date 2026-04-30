@@ -5,8 +5,9 @@ import {
 } from "./imports";
 
 import { GeneratorOptions } from "./options";
+import { renderCustomScalarsWithRust } from "../native/generator";
 
-export function generateCustomScalars(
+export function renderCustomScalarsWithTypeScript(
   sourceFile: SourceFile,
   options: GeneratorOptions,
 ) {
@@ -31,4 +32,17 @@ export function generateCustomScalars(
       },
     });
   `);
+}
+
+export function generateCustomScalars(
+  sourceFile: SourceFile,
+  options: GeneratorOptions,
+) {
+  const nativeGeneratedText = renderCustomScalarsWithRust(options);
+  if (nativeGeneratedText) {
+    sourceFile.replaceWithText(nativeGeneratedText);
+    return;
+  }
+
+  renderCustomScalarsWithTypeScript(sourceFile, options);
 }

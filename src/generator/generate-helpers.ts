@@ -4,8 +4,9 @@ import {
   generateGraphQLInfoImport,
 } from "./imports";
 import { GeneratorOptions } from "./options";
+import { renderHelpersWithRust } from "../native/generator";
 
-export function generateHelpersFile(
+function renderHelpersWithTypeScript(
   sourceFile: SourceFile,
   options: GeneratorOptions,
 ) {
@@ -74,4 +75,17 @@ export function generateHelpersFile(
       }
     }
   `);
+}
+
+export function generateHelpersFile(
+  sourceFile: SourceFile,
+  options: GeneratorOptions,
+) {
+  const nativeGeneratedText = renderHelpersWithRust(options);
+  if (nativeGeneratedText) {
+    sourceFile.replaceWithText(nativeGeneratedText);
+    return;
+  }
+
+  renderHelpersWithTypeScript(sourceFile, options);
 }
